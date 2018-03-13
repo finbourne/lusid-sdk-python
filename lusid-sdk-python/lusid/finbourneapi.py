@@ -231,7 +231,7 @@ class FINBOURNEAPI(object):
         self._client = ServiceClient(self.config.credentials, self.config)
 
         client_models = {k: v for k, v in models.__dict__.items() if isinstance(v, type)}
-        self.api_version = '0.6.13'
+        self.api_version = '0.6.15'
         self._serialize = Serializer(client_models)
         self._deserialize = Deserializer(client_models)
 
@@ -1399,6 +1399,74 @@ class FINBOURNEAPI(object):
 
         return deserialized
     delete_portfolio_group.metadata = {'url': '/v1/api/groups/portfolios/{scope}/{code}'}
+
+    def get_portfolio_group_expansion(
+            self, scope, code, effective_at=None, as_at=None, custom_headers=None, raw=False, **operation_config):
+        """Get a full expansion of an existing group.
+
+        :param scope:
+        :type scope: str
+        :param code:
+        :type code: str
+        :param effective_at:
+        :type effective_at: datetime
+        :param as_at:
+        :type as_at: datetime
+        :param dict custom_headers: headers that will be added to the request
+        :param bool raw: returns the direct response alongside the
+         deserialized response
+        :param operation_config: :ref:`Operation configuration
+         overrides<msrest:optionsforoperations>`.
+        :return: object or ClientRawResponse if raw=true
+        :rtype: object or ~msrest.pipeline.ClientRawResponse
+        :raises:
+         :class:`HttpOperationError<msrest.exceptions.HttpOperationError>`
+        """
+        # Construct URL
+        url = self.get_portfolio_group_expansion.metadata['url']
+        path_format_arguments = {
+            'scope': self._serialize.url("scope", scope, 'str'),
+            'code': self._serialize.url("code", code, 'str')
+        }
+        url = self._client.format_url(url, **path_format_arguments)
+
+        # Construct parameters
+        query_parameters = {}
+        if effective_at is not None:
+            query_parameters['effectiveAt'] = self._serialize.query("effective_at", effective_at, 'iso-8601')
+        if as_at is not None:
+            query_parameters['asAt'] = self._serialize.query("as_at", as_at, 'iso-8601')
+
+        # Construct headers
+        header_parameters = {}
+        header_parameters['Content-Type'] = 'application/json; charset=utf-8'
+        if custom_headers:
+            header_parameters.update(custom_headers)
+
+        # Construct and send request
+        request = self._client.get(url, query_parameters)
+        response = self._client.send(request, header_parameters, stream=False, **operation_config)
+
+        if response.status_code not in [200, 400, 404, 500]:
+            raise HttpOperationError(self._deserialize, response)
+
+        deserialized = None
+
+        if response.status_code == 200:
+            deserialized = self._deserialize('ExpandedGroupDto', response)
+        if response.status_code == 400:
+            deserialized = self._deserialize('ErrorResponse', response)
+        if response.status_code == 404:
+            deserialized = self._deserialize('ErrorResponse', response)
+        if response.status_code == 500:
+            deserialized = self._deserialize('ErrorResponse', response)
+
+        if raw:
+            client_raw_response = ClientRawResponse(deserialized, response)
+            return client_raw_response
+
+        return deserialized
+    get_portfolio_group_expansion.metadata = {'url': '/v1/api/groups/portfolios/{scope}/{code}/expansion'}
 
     def add_portfolio_to_group(
             self, scope, code, identifier=None, custom_headers=None, raw=False, **operation_config):
@@ -5467,7 +5535,7 @@ class FINBOURNEAPI(object):
          'SecurityClassification', 'WebLogMessage', 'UpsertPersonalisation',
          'CreatePortfolioDetails', 'UpsertConstituent', 'CreateResults',
          'Results', 'TryAddClientSecurities', 'TryDeleteClientSecurities',
-         'TryLookupSecuritiesFromCodes'
+         'TryLookupSecuritiesFromCodes', 'ExpandedGroup'
         :type entity: str
         :param dict custom_headers: headers that will be added to the request
         :param bool raw: returns the direct response alongside the

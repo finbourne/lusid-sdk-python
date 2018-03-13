@@ -47,13 +47,14 @@ from .resource_id import ResourceId
 from .create_group_request import CreateGroupRequest
 from .version_dto import VersionDto
 from .group_dto import GroupDto
+from .portfolio_dto import PortfolioDto
+from .expanded_group_dto import ExpandedGroupDto
 from .update_group_request import UpdateGroupRequest
 from .login_response import LoginResponse
 from .web_log_message import WebLogMessage
 from .personalisation_dto import PersonalisationDto
 from .upsert_personalisations_response import UpsertPersonalisationsResponse
 from .create_portfolio_request import CreatePortfolioRequest
-from .portfolio_dto import PortfolioDto
 from .update_portfolio_request import UpdatePortfolioRequest
 from .processed_command_dto import ProcessedCommandDto
 from .portfolio_details_dto import PortfolioDetailsDto
@@ -130,13 +131,14 @@ __all__ = [
     'CreateGroupRequest',
     'VersionDto',
     'GroupDto',
+    'PortfolioDto',
+    'ExpandedGroupDto',
     'UpdateGroupRequest',
     'LoginResponse',
     'WebLogMessage',
     'PersonalisationDto',
     'UpsertPersonalisationsResponse',
     'CreatePortfolioRequest',
-    'PortfolioDto',
     'UpdatePortfolioRequest',
     'ProcessedCommandDto',
     'PortfolioDetailsDto',
