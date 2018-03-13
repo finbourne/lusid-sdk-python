@@ -1,0 +1,10 @@
+version: "3"
+
+services:
+
+  lusid-sdk-python-gen:
+    container_name: lusid-sdk-python-gen
+    build: .
+    image: finbourne/lusid-sdk-python-gen
+    volumes:
+      - .:/usr/src

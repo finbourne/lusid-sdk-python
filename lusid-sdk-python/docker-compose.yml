@@ -1,0 +1,12 @@
+version: "3"
+
+services:
+
+  lusid-sdk-python-test:
+    build: .
+    container_name: lusid-sdk-python-test
+    image: finbourne/lusid-sdk-python-test
+    environment:
+      - FBN_LUSID_API_URL
+    volumes:
+      - .:/usr/src
