@@ -47,6 +47,7 @@ from .resource_id import ResourceId
 from .create_group_request import CreateGroupRequest
 from .version_dto import VersionDto
 from .group_dto import GroupDto
+from .processed_command_dto import ProcessedCommandDto
 from .portfolio_dto import PortfolioDto
 from .expanded_group_dto import ExpandedGroupDto
 from .update_group_request import UpdateGroupRequest
@@ -56,7 +57,6 @@ from .personalisation_dto import PersonalisationDto
 from .upsert_personalisations_response import UpsertPersonalisationsResponse
 from .create_portfolio_request import CreatePortfolioRequest
 from .update_portfolio_request import UpdatePortfolioRequest
-from .processed_command_dto import ProcessedCommandDto
 from .portfolio_details_dto import PortfolioDetailsDto
 from .portfolio_details_request import PortfolioDetailsRequest
 from .holding_dto import HoldingDto
@@ -90,9 +90,9 @@ from .resource_list_security_dto import ResourceListSecurityDto
 from .try_lookup_securities_from_codes_dto import TryLookupSecuritiesFromCodesDto
 from .resource_list_analytic_store_key_dto import ResourceListAnalyticStoreKeyDto
 from .resource_list_group_dto import ResourceListGroupDto
+from .resource_list_processed_command_dto import ResourceListProcessedCommandDto
 from .resource_list_personalisation_dto import ResourceListPersonalisationDto
 from .resource_list_portfolio_dto import ResourceListPortfolioDto
-from .resource_list_processed_command_dto import ResourceListProcessedCommandDto
 from .versioned_resource_list_holding_dto import VersionedResourceListHoldingDto
 from .versioned_resource_list_trade_dto import VersionedResourceListTradeDto
 from .resource_list_portfolio_search_result import ResourceListPortfolioSearchResult
@@ -131,6 +131,7 @@ __all__ = [
     'CreateGroupRequest',
     'VersionDto',
     'GroupDto',
+    'ProcessedCommandDto',
     'PortfolioDto',
     'ExpandedGroupDto',
     'UpdateGroupRequest',
@@ -140,7 +141,6 @@ __all__ = [
     'UpsertPersonalisationsResponse',
     'CreatePortfolioRequest',
     'UpdatePortfolioRequest',
-    'ProcessedCommandDto',
     'PortfolioDetailsDto',
     'PortfolioDetailsRequest',
     'HoldingDto',
@@ -174,9 +174,9 @@ __all__ = [
     'TryLookupSecuritiesFromCodesDto',
     'ResourceListAnalyticStoreKeyDto',
     'ResourceListGroupDto',
+    'ResourceListProcessedCommandDto',
     'ResourceListPersonalisationDto',
     'ResourceListPortfolioDto',
-    'ResourceListProcessedCommandDto',
     'VersionedResourceListHoldingDto',
     'VersionedResourceListTradeDto',
     'ResourceListPortfolioSearchResult',

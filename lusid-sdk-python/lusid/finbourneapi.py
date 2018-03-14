@@ -231,7 +231,7 @@ class FINBOURNEAPI(object):
         self._client = ServiceClient(self.config.credentials, self.config)
 
         client_models = {k: v for k, v in models.__dict__.items() if isinstance(v, type)}
-        self.api_version = '0.6.15'
+        self.api_version = '0.6.17'
         self._serialize = Serializer(client_models)
         self._deserialize = Deserializer(client_models)
 
@@ -1399,6 +1399,77 @@ class FINBOURNEAPI(object):
 
         return deserialized
     delete_portfolio_group.metadata = {'url': '/v1/api/groups/portfolios/{scope}/{code}'}
+
+    def get_portfolio_group_commands(
+            self, scope, code, from_as_at=None, to_as_at=None, custom_headers=None, raw=False, **operation_config):
+        """Gets all commands that modified the portfolio groups(s) with the
+        specified id.
+
+        :param scope: The scope of the portfolio group
+        :type scope: str
+        :param code: The portfolio group id
+        :type code: str
+        :param from_as_at: Filters commands by those that were processed at or
+         after this time. Null means there is no lower limit.
+        :type from_as_at: datetime
+        :param to_as_at: Filters commands by those that were processed at or
+         before this time. Null means there is no upper limit (latest).
+        :type to_as_at: datetime
+        :param dict custom_headers: headers that will be added to the request
+        :param bool raw: returns the direct response alongside the
+         deserialized response
+        :param operation_config: :ref:`Operation configuration
+         overrides<msrest:optionsforoperations>`.
+        :return: object or ClientRawResponse if raw=true
+        :rtype: object or ~msrest.pipeline.ClientRawResponse
+        :raises:
+         :class:`HttpOperationError<msrest.exceptions.HttpOperationError>`
+        """
+        # Construct URL
+        url = self.get_portfolio_group_commands.metadata['url']
+        path_format_arguments = {
+            'scope': self._serialize.url("scope", scope, 'str'),
+            'code': self._serialize.url("code", code, 'str')
+        }
+        url = self._client.format_url(url, **path_format_arguments)
+
+        # Construct parameters
+        query_parameters = {}
+        if from_as_at is not None:
+            query_parameters['fromAsAt'] = self._serialize.query("from_as_at", from_as_at, 'iso-8601')
+        if to_as_at is not None:
+            query_parameters['toAsAt'] = self._serialize.query("to_as_at", to_as_at, 'iso-8601')
+
+        # Construct headers
+        header_parameters = {}
+        header_parameters['Content-Type'] = 'application/json; charset=utf-8'
+        if custom_headers:
+            header_parameters.update(custom_headers)
+
+        # Construct and send request
+        request = self._client.get(url, query_parameters)
+        response = self._client.send(request, header_parameters, stream=False, **operation_config)
+
+        if response.status_code not in [200, 400, 404, 500]:
+            raise HttpOperationError(self._deserialize, response)
+
+        deserialized = None
+
+        if response.status_code == 200:
+            deserialized = self._deserialize('ResourceListProcessedCommandDto', response)
+        if response.status_code == 400:
+            deserialized = self._deserialize('ErrorResponse', response)
+        if response.status_code == 404:
+            deserialized = self._deserialize('ErrorResponse', response)
+        if response.status_code == 500:
+            deserialized = self._deserialize('ErrorResponse', response)
+
+        if raw:
+            client_raw_response = ClientRawResponse(deserialized, response)
+            return client_raw_response
+
+        return deserialized
+    get_portfolio_group_commands.metadata = {'url': '/v1/api/groups/portfolios/{scope}/{code}/commands'}
 
     def get_portfolio_group_expansion(
             self, scope, code, effective_at=None, as_at=None, custom_headers=None, raw=False, **operation_config):
