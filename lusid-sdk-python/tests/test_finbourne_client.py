@@ -52,7 +52,6 @@ class TestFinbourneApi(TestCase):
         #   set the okta api token
         cls.api_token = {"access_token": okta_response.json()["access_token"]}
 
-
     def assert_response_is_not_error(self, expected_type, response):
 
         if isinstance(response, models.ErrorResponse):
@@ -132,7 +131,7 @@ class TestFinbourneApi(TestCase):
         scope = "finbourne"
         guid = str(uuid.uuid4())
         property_name = "traderId-{0}".format(guid)
-        property_key = "Trade/{0}/traderId-{1}".format(scope,guid)
+        property_key = "Trade/{0}/traderId-{1}".format(scope, guid)
 
         #   property definition
         property_definition = models.CreatePropertyDefinitionRequest(
@@ -198,7 +197,7 @@ class TestFinbourneApi(TestCase):
 
         scope = "finbourne"
         guid = str(uuid.uuid4())
-        effective_date = datetime(2018, 1, 1, tzinfo = pytz.utc)
+        effective_date = datetime(2018, 1, 1, tzinfo=pytz.utc)
 
         request = models.CreatePortfolioRequest("portfolio-{0}".format(guid), "id-{0}".format(guid), "GBP", effective_date)
 
@@ -218,21 +217,7 @@ class TestFinbourneApi(TestCase):
         ]
         trade_specs.sort(key=lambda ts: ts.id)
 
-        # utility to build trade from spec
-        def build_trade(trade_spec):
-            return models.TradeDto(
-                trade_id=str(uuid.uuid4()),
-                type="Buy",
-                security_uid=trade_spec.id,
-                settlement_currency="GBP",
-                trade_date=trade_spec.trade_date,
-                settlement_date=trade_spec.trade_date,
-                units=100,
-                trade_price=trade_spec.price,
-                total_consideration=100*trade_spec.price,
-                source="Client")
-
-        new_trades = list(map(build_trade, trade_specs))
+        new_trades = list(map(self.build_trade, trade_specs))
 
         # add initial batch of trades
         add_trades_result = client.upsert_trades(scope, portfolio_id, new_trades)
@@ -242,7 +227,7 @@ class TestFinbourneApi(TestCase):
         sleep(0.5)
 
         # add trade for 2018-1-8
-        trade = build_trade(TradeSpec("FIGI_BBG001S61MW8", 104, datetime(2018, 1, 8, tzinfo = pytz.utc)))
+        trade = self.build_trade(TradeSpec("FIGI_BBG001S61MW8", 104, datetime(2018, 1, 8, tzinfo=pytz.utc)))
         later_result = client.upsert_trades(scope, portfolio_id, [trade])
         later_trade = self.assert_response_is_not_error(models.UpsertPortfolioTradesDto, later_result)
 
@@ -250,7 +235,7 @@ class TestFinbourneApi(TestCase):
         sleep(0.5)
 
         # add back dated trade
-        trade = build_trade(TradeSpec("FIGI_BBG001S6M3Z4", 105, datetime(2018, 1, 5, tzinfo = pytz.utc)))
+        trade = self.build_trade(TradeSpec("FIGI_BBG001S6M3Z4", 105, datetime(2018, 1, 5, tzinfo=pytz.utc)))
         backdated_result = client.upsert_trades(scope, portfolio_id, [trade])
         backdated_trade = self.assert_response_is_not_error(models.UpsertPortfolioTradesDto, backdated_result)
 
@@ -259,7 +244,11 @@ class TestFinbourneApi(TestCase):
 
         def print_trades(trades):
             for trade in trades:
-                print("{0}\t{1}\t{2}\t{3}\t{4}".format(trade.security_uid, trade.trade_date, trade.units, trade.trade_price, trade.total_consideration))
+                print("{0}\t{1}\t{2}\t{3}\t{4}".format(trade.security_uid,
+                                                       trade.trade_date,
+                                                       trade.units,
+                                                       trade.trade_price,
+                                                       trade.total_consideration))
 
         # get the list of trades
         trades_result = client.get_trades(scope, portfolio_id, as_at=as_at_batch1)
@@ -302,6 +291,94 @@ class TestFinbourneApi(TestCase):
 
         self.assertGreater(len(fbn_ids.values), 0)
 
+    def test_portfolio_aggregation(self):
+
+        credentials = BasicTokenAuthentication(TestFinbourneApi.api_token)
+        client = lusid.FINBOURNEAPI(credentials, TestFinbourneApi.api_url)
+
+        scope = "finbourne"
+        guid = str(uuid.uuid4())
+        effective_date = datetime(2018, 1, 1, tzinfo=pytz.utc)
+
+        request = models.CreatePortfolioRequest("portfolio-{0}".format(guid), "id-{0}".format(guid), "GBP", effective_date)
+
+        #   create the portfolio
+        result = client.create_portfolio(scope, request)
+
+        self.assert_response_is_not_error(models.PortfolioDto, result)
+        self.assertEqual(result.id.code, request.code)
+
+        portfolio_id = result.id.code
+
+        TradeSpec = namedtuple('TradeSpec', 'id price trade_date')
+        trade_specs = [
+            TradeSpec("FIGI_BBG001S7Z574", 101, effective_date),
+            TradeSpec("FIGI_BBG001SRKHW2", 102, effective_date),
+            TradeSpec("FIGI_BBG000005547", 103, effective_date)
+        ]
+        trade_specs.sort(key=lambda ts: ts.id)
+
+        new_trades = list(map(self.build_trade, trade_specs))
+
+        #   add initial batch of trades
+        add_trades_result = client.upsert_trades(scope, portfolio_id, new_trades)
+        self.assert_response_is_not_error(models.UpsertPortfolioTradesDto, add_trades_result)
+
+        check_exists_result = client.get_analytic_store(scope,
+                                                        effective_date.year,
+                                                        effective_date.month,
+                                                        effective_date.day)
+
+        #   create an analytic store
+        if isinstance(check_exists_result, models.ErrorResponse) and check_exists_result.code == "AnalyticStoreNotFound":
+            analytic_store_request = models.CreateAnalyticStoreRequest(scope, effective_date)
+            analytic_store_result = client.create_analytic_store(analytic_store_request)
+            self.assert_response_is_not_error(models.AnalyticStoreDto, analytic_store_result)
+
+        prices = [
+            models.SecurityAnalyticDataDto("FIGI_BBG001S7Z574", 100),
+            models.SecurityAnalyticDataDto("FIGI_BBG001SRKHW2", 200),
+            models.SecurityAnalyticDataDto("FIGI_BBG000005547", 300)
+        ]
+
+        #   add prices
+        prices_result = client.insert_analytics(scope, effective_date.year, effective_date.month, effective_date.day, prices)
+        self.assert_response_is_not_error(models.AnalyticStoreDto, prices_result)
+
+        aggregation_request = models.AggregationRequest(
+            recipe_scope=scope,
+            recipe_key=scope,
+            metrics=[
+                models.AggregateSpec("Holding/default/PV", "Proportion"),
+                models.AggregateSpec("Holding/default/PV", "Sum")
+            ],
+            group_by=["Security/default/CommonName"],
+            effective_at=effective_date
+        )
+
+        #   do the aggregation
+        aggregation_result = client.get_nested_data_aggregation_by_portfolio(scope, portfolio_id, aggregation_request)
+        aggregation = self.assert_response_is_not_error(models.NestedDataAggregationResponse, aggregation_result)
+
+        for item in aggregation.data.children:
+            print("{0}".format(item.description))
+            for key, value in item.properties.additional_properties.items():
+                print("\t{0}\t{1}".format(key, value))
+
+    # utility to build trade from spec
+    @staticmethod
+    def build_trade(trade_spec):
+        return models.TradeDto(
+            trade_id=str(uuid.uuid4()),
+            type="StockIn",
+            security_uid=trade_spec.id,
+            settlement_currency="GBP",
+            trade_date=trade_spec.trade_date,
+            settlement_date=trade_spec.trade_date,
+            units=100,
+            trade_price=trade_spec.price,
+            total_consideration=100 * trade_spec.price,
+            source="Client")
 
 
 if __name__ == '__main__':
