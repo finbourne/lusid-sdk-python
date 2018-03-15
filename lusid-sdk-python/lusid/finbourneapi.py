@@ -231,7 +231,7 @@ class FINBOURNEAPI(object):
         self._client = ServiceClient(self.config.credentials, self.config)
 
         client_models = {k: v for k, v in models.__dict__.items() if isinstance(v, type)}
-        self.api_version = '0.6.17'
+        self.api_version = '0.6.23'
         self._serialize = Serializer(client_models)
         self._deserialize = Deserializer(client_models)
 
@@ -4802,13 +4802,15 @@ class FINBOURNEAPI(object):
     create_property_data_format.metadata = {'url': '/v1/api/propertyformats'}
 
     def list(
-            self, scope, include_default=None, sort_by=None, start=None, limit=None, custom_headers=None, raw=False, **operation_config):
+            self, scope, include_default=None, include_system=None, sort_by=None, start=None, limit=None, custom_headers=None, raw=False, **operation_config):
         """Lists all property data formats in the specified scope.
 
         :param scope:
         :type scope: str
         :param include_default:
         :type include_default: bool
+        :param include_system:
+        :type include_system: bool
         :param sort_by:
         :type sort_by: list[str]
         :param start:
@@ -4836,6 +4838,8 @@ class FINBOURNEAPI(object):
         query_parameters = {}
         if include_default is not None:
             query_parameters['includeDefault'] = self._serialize.query("include_default", include_default, 'bool')
+        if include_system is not None:
+            query_parameters['includeSystem'] = self._serialize.query("include_system", include_system, 'bool')
         if sort_by is not None:
             query_parameters['sortBy'] = self._serialize.query("sort_by", sort_by, '[str]', div=',')
         if start is not None:

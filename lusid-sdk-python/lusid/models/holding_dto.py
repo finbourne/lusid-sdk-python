@@ -31,28 +31,42 @@ class HoldingDto(Model):
     :type security_uid: str
     :param properties:
     :type properties: list[~lusid.models.PropertyDto]
+    :param holding_type: Position type indicator of the holding
+    :type holding_type: str
     :param units: Total number of units in the holding
     :type units: float
+    :param settled_units: Total number of settled units in the holding
+    :type settled_units: float
     :param cost: Total cost of the holding
     :type cost: float
+    :param transaction: Transaction behind a commitment-type holding
+    :type transaction: ~lusid.models.TradeDto
     """
 
     _validation = {
         'security_uid': {'required': True},
+        'holding_type': {'required': True},
         'units': {'required': True},
+        'settled_units': {'required': True},
         'cost': {'required': True},
     }
 
     _attribute_map = {
         'security_uid': {'key': 'securityUid', 'type': 'str'},
         'properties': {'key': 'properties', 'type': '[PropertyDto]'},
+        'holding_type': {'key': 'holdingType', 'type': 'str'},
         'units': {'key': 'units', 'type': 'float'},
+        'settled_units': {'key': 'settledUnits', 'type': 'float'},
         'cost': {'key': 'cost', 'type': 'float'},
+        'transaction': {'key': 'transaction', 'type': 'TradeDto'},
     }
 
-    def __init__(self, security_uid, units, cost, properties=None):
+    def __init__(self, security_uid, holding_type, units, settled_units, cost, properties=None, transaction=None):
         super(HoldingDto, self).__init__()
         self.security_uid = security_uid
         self.properties = properties
+        self.holding_type = holding_type
         self.units = units
+        self.settled_units = settled_units
         self.cost = cost
+        self.transaction = transaction

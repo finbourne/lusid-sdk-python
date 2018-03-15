@@ -59,10 +59,10 @@ from .create_portfolio_request import CreatePortfolioRequest
 from .update_portfolio_request import UpdatePortfolioRequest
 from .portfolio_details_dto import PortfolioDetailsDto
 from .portfolio_details_request import PortfolioDetailsRequest
+from .trade_dto import TradeDto
 from .holding_dto import HoldingDto
 from .upsert_portfolio_trades_dto import UpsertPortfolioTradesDto
 from .portfolio_properties_dto import PortfolioPropertiesDto
-from .trade_dto import TradeDto
 from .add_trade_property_dto import AddTradePropertyDto
 from .create_derived_portfolio_request import CreateDerivedPortfolioRequest
 from .portfolio_search_result import PortfolioSearchResult
@@ -143,10 +143,10 @@ __all__ = [
     'UpdatePortfolioRequest',
     'PortfolioDetailsDto',
     'PortfolioDetailsRequest',
+    'TradeDto',
     'HoldingDto',
     'UpsertPortfolioTradesDto',
     'PortfolioPropertiesDto',
-    'TradeDto',
     'AddTradePropertyDto',
     'CreateDerivedPortfolioRequest',
     'PortfolioSearchResult',
