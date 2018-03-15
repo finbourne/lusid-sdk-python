@@ -35,9 +35,9 @@ class TestFinbourneApi(TestCase):
 
         token_url = os.getenv("FBN_TOKEN_URL", config["api"]["tokenUrl"])
         username = os.getenv("FBN_USERNAME", config["api"]["username"])
-        password = os.getenv("FBN_PASSWORD", pathname2url(config["api"]["password"]))
-        client_id = os.getenv("FBN_CLIENT_ID", pathname2url(config["api"]["clientId"]))
-        client_secret = os.getenv("FBN_CLIENT_SECRET", pathname2url(config["api"]["clientSecret"]))
+        password = pathname2url(os.getenv("FBN_PASSWORD", config["api"]["password"]))
+        client_id = pathname2url(os.getenv("FBN_CLIENT_ID", config["api"]["clientId"]))
+        client_secret = pathname2url(os.getenv("FBN_CLIENT_SECRET", config["api"]["clientSecret"]))
         cls.api_url = os.getenv("FBN_LUSID_API_URL", config["api"]["apiUrl"])
 
         token_request_body = ("grant_type=password&username={0}".format(username) +
