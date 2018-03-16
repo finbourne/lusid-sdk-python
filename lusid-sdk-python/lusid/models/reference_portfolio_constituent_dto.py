@@ -27,7 +27,7 @@ from msrest.serialization import Model
 class ReferencePortfolioConstituentDto(Model):
     """ReferencePortfolioConstituentDto.
 
-    :param id: Identifier for this constituent
+    :param id:
     :type id: str
     :param properties:
     :type properties: list[~lusid.models.PropertyDto]

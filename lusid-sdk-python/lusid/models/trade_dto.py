@@ -27,30 +27,31 @@ from msrest.serialization import Model
 class TradeDto(Model):
     """TradeDto.
 
-    :param trade_id:
+    :param trade_id: Unique trade identifier
     :type trade_id: str
-    :param type: Possible values include: 'Buy', 'Sell', 'StockIn', 'StockOut'
+    :param type: LUSID transaction type code - Buy, Sell, StockIn, StockOut,
+     etc. Possible values include: 'Buy', 'Sell', 'StockIn', 'StockOut'
     :type type: str or ~lusid.models.enum
-    :param security_uid:
+    :param security_uid: Unique security identifier
     :type security_uid: str
-    :param trade_date:
+    :param trade_date: Trade date
     :type trade_date: datetime
-    :param settlement_date:
+    :param settlement_date: Settlement date
     :type settlement_date: datetime
-    :param units:
+    :param units: Quantity of trade in units of the security
     :type units: float
-    :param trade_price:
+    :param trade_price: Execution price for the trade
     :type trade_price: float
-    :param total_consideration:
+    :param total_consideration: Total value of the trade
     :type total_consideration: float
-    :param settlement_currency: This is the ISO three letter code representing
-     the currency
+    :param settlement_currency: Settlement currency
     :type settlement_currency: str
     :param properties:
     :type properties: list[~lusid.models.PropertyDto]
-    :param counterparty_id:
+    :param counterparty_id: Counterparty identifier
     :type counterparty_id: str
-    :param source: Possible values include: 'System', 'Client'
+    :param source: Where this trade came from, either Client or System.
+     Possible values include: 'System', 'Client'
     :type source: str or ~lusid.models.enum
     :param dividend_state: Possible values include: 'Default', 'ExDividend',
      'CumDividend'

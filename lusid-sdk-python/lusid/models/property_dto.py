@@ -28,9 +28,7 @@ class PropertyDto(Model):
     """This is intended to be the external facing property specification data
     type.
 
-    :param key: The property key made up of the PropertyDomain, scope and name
-     delimited with a '/'
-     e.g. trade/myscope/myproperty
+    :param key:
     :type key: str
     :param value:
     :type value: object

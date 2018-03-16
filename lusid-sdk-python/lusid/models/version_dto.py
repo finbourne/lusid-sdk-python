@@ -27,13 +27,11 @@ from msrest.serialization import Model
 class VersionDto(Model):
     """Describes the version metadata of an entity.
 
-    :param effective_from: The time at which this version became valid. Only
-     applies when a single entity is being interacted with.
+    :param effective_from:
     :type effective_from: datetime
-    :param as_at_date: The time at which this version was durably persisted.
+    :param as_at_date:
     :type as_at_date: datetime
-    :param updated_by: The name of the person or system which created this
-     version.
+    :param updated_by:
     :type updated_by: str
     :param href:
     :type href: str

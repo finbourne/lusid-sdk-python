@@ -63,25 +63,47 @@ class FINBOURNEAPI(object):
     For example, prices for equities from different vendors may be uploaded into different scopes such as `client/vendor1` and `client/vendor2`.  A portfolio may then be valued using either of the price sources by referencing the appropriate scope.
     It should be noted that scopes are not hierarchical and 2 different scopes which may contain the same path elements do not have any relationship.
     # Data Model
-    Below is a summary of the key data types exposed via the API and their relationships.
+    This section describes the data model that LUSID exposes via the APIs.
     ## Schema
     A detailed description of the entities used by the API and parameters for endpoints which take a JSON document can be retrieved via the `schema` endpoint.
     ## Securities
-    LUSID has its own security master implementation (LUSID CORE) which sources reference data form multiple data vendors.  With the appropriate entitlements, clients are able to upload securities into their portfolios using any OpenFIGI identifier.
-    Cash can be uploaded using the ISO currency code prefixed with "`CCY_`" e.g. `CCY_GBP`
-    For any securities that a client wants to upload but it not supported or recognised by LUSID, LUSID provides the ability to upload a client defined security.  A client defined security is only available within a client's data scope (subject to appropriate entitlements) and also has the ability to have properties and analytics attached to it.  Securitised portfolios and funds can be modelled as client defined securities.
-    ## Trade
-    A trade represents a transaction in a security or cash.
-    ## Holding
-    A holding represents an aggregate position in a security or cash on a given `effectiveDate`.  When uploading a holding for a given `effectiveDate`, LUSID will generate any trades required to construct the holding position from previous holdings.  Any generated trades will be marked with a source of `SYSTEM`.
+    LUSID has its own security master implementation (LUSID CORE) which sources reference data from multiple data vendors.
+    [OpenFIGI](https://openfigi.com/) and [PermID](https://permid.org/) are used as the security identifier when uploading trades, holdings, prices, etc.
+    The API exposes a `securities/lookup` endpoint which can be used to lookup these identifiers given other market identifiers.
+    Cash can be referenced using the ISO currency code prefixed with "`CCY_`" e.g. `CCY_GBP`
+    For any securities that are not recognised by LUSID (eg OTCs) a client can upload a client defined security. Securitised portfolios and funds can be modelled as client defined securities.
+    ## Security Prices (Analytics)
+    Security prices are stored in LUSID's Analytics Store
+    ## Security Data
+    Security data can be uploaded to the system using the [Classifications](#tag/Classification) endpoint.
     ## Portfolio
-    A portfolio is a container for trades.  Meta data and classifications of portfolios can be attached via properties.
-    LUSID also allows for a portfolio to be composed of another portfolio via derived portfolios.  A derived portfolio can contain its own trades and also inherits any trades from a reference portfolio.  Any changes made to the underlying reference portfolio are automatically reflected in derived portfolio.
-    Reference portfolios in conjunction with scopes are a powerful construct.  For example, to do pre-trade what-if analysis, a reference portfolio could be created a new namespace linked to the underlying live portfolio.  Analysis can then be undertaken within the reference portfolio without affecting the live portfolio.
+    A portfolio is a container for trades and/or holdings.  Meta data and classifications of portfolios can be attached via properties.
+    ## Derived Portfolio
+    LUSID also allows for a portfolio to be composed of another portfolio via derived portfolios.  A derived portfolio can contain its own trades and also inherits any trades from its parent portfolio.  Any changes made to the parent portfolio are automatically reflected in derived portfolio.
+    Derived portfolios in conjunction with scopes are a powerful construct.  For example, to do pre-trade what-if analysis, a derived portfolio could be created a new namespace linked to the underlying live (parent) portfolio.  Analysis can then be undertaken on the derived portfolio without affecting the live portfolio.
+    ## Transaction
+    A transaction represents an economic activity against a Portfolio.
+    | Field|Type|Description |
+    | ---|---|--- |
+    | TradeId|String|Unique trade identifier |
+    | Type|TransactionType|LUSID transaction type code - Buy, Sell, StockIn, StockOut, etc |
+    | SecurityUid|SecurityUid|Unique security identifier |
+    | TradeDate|DateTimeOffset|Trade date |
+    | SettlementDate|DateTimeOffset|Settlement date |
+    | Units|Decimal|Quantity of trade in units of the security |
+    | TradePrice|Decimal|Execution price for the trade |
+    | TotalConsideration|Decimal|Total value of the trade |
+    | SettlementCurrency|String|Settlement currency |
+    | CounterpartyId|String|Counterparty identifier |
+    | Source|TradeSource|Where this trade came from, either Client or System |
+    | DividendState|DividendState|  |
+    | TradePriceType|TradePriceType|  |
+    | UnitType|UnitType|  |
+    | NettingSet|String|  |
+    ## Holding
+    A holding represents a position in a security or cash on a given date.
     ## Property
     Properties are key-value pairs that can be applied to any entity within a domain (where a domain is `trade`, `portfolio`, `security` etc).  Properties must be defined before use with a `PropertyDefinition` and can then subsequently be added to entities.
-    # Movements Engine
-    When generating holdings, LUSID passes trades through its Movements Engine which will manage cash flows within the portfolio such as cash balance adjustments, fees, tax etc.
     # Examples
     ## Authentication
     ## Create Portfolio
@@ -231,7 +253,7 @@ class FINBOURNEAPI(object):
         self._client = ServiceClient(self.config.credentials, self.config)
 
         client_models = {k: v for k, v in models.__dict__.items() if isinstance(v, type)}
-        self.api_version = '0.6.23'
+        self.api_version = '0.6.27'
         self._serialize = Serializer(client_models)
         self._deserialize = Deserializer(client_models)
 

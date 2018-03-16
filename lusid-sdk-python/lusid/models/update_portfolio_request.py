@@ -27,10 +27,9 @@ from msrest.serialization import Model
 class UpdatePortfolioRequest(Model):
     """UpdatePortfolioRequest.
 
-    :param name: Portfolio name
+    :param name:
     :type name: str
-    :param created: The original creation date, defaults to today if not
-     specified when creating a portfolio
+    :param created:
     :type created: datetime
     """
 

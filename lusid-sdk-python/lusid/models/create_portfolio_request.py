@@ -27,14 +27,13 @@ from msrest.serialization import Model
 class CreatePortfolioRequest(Model):
     """CreatePortfolioRequest.
 
-    :param name: Portfolio name
+    :param name:
     :type name: str
-    :param code: Unique identifier for the portfolio
+    :param code:
     :type code: str
-    :param created: The original creation date, defaults to today if not
-     specified when creating a portfolio
+    :param created:
     :type created: datetime
-    :param base_currency: Base currency
+    :param base_currency:
     :type base_currency: str
     """
 

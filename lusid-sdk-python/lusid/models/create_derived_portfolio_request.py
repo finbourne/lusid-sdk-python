@@ -27,14 +27,13 @@ from msrest.serialization import Model
 class CreateDerivedPortfolioRequest(Model):
     """CreateDerivedPortfolioRequest.
 
-    :param name: Portfolio name
+    :param name:
     :type name: str
     :param id:
     :type id: str
     :param parent_portfolio:
     :type parent_portfolio: ~lusid.models.ResourceId
-    :param created: The original creation date, defaults to today if not
-     specified when creating a portfolio
+    :param created:
     :type created: datetime
     """
 
