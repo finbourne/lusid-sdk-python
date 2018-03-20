@@ -66,8 +66,8 @@ from .portfolio_properties_dto import PortfolioPropertiesDto
 from .add_trade_property_dto import AddTradePropertyDto
 from .create_derived_portfolio_request import CreateDerivedPortfolioRequest
 from .portfolio_search_result import PortfolioSearchResult
-from .create_property_definition_request import CreatePropertyDefinitionRequest
 from .property_definition_dto import PropertyDefinitionDto
+from .create_property_definition_request import CreatePropertyDefinitionRequest
 from .update_property_definition_request import UpdatePropertyDefinitionRequest
 from .create_property_data_format_request import CreatePropertyDataFormatRequest
 from .property_data_format_dto import PropertyDataFormatDto
@@ -96,8 +96,8 @@ from .resource_list_portfolio_dto import ResourceListPortfolioDto
 from .versioned_resource_list_holding_dto import VersionedResourceListHoldingDto
 from .versioned_resource_list_trade_dto import VersionedResourceListTradeDto
 from .resource_list_portfolio_search_result import ResourceListPortfolioSearchResult
-from .resource_list_property_domain import ResourceListPropertyDomain
 from .resource_list_property_definition_dto import ResourceListPropertyDefinitionDto
+from .resource_list_property_domain import ResourceListPropertyDomain
 from .resource_list_property_key import ResourceListPropertyKey
 from .resource_list_scope import ResourceListScope
 from .resource_list_property_data_format_dto import ResourceListPropertyDataFormatDto
@@ -150,8 +150,8 @@ __all__ = [
     'AddTradePropertyDto',
     'CreateDerivedPortfolioRequest',
     'PortfolioSearchResult',
-    'CreatePropertyDefinitionRequest',
     'PropertyDefinitionDto',
+    'CreatePropertyDefinitionRequest',
     'UpdatePropertyDefinitionRequest',
     'CreatePropertyDataFormatRequest',
     'PropertyDataFormatDto',
@@ -180,8 +180,8 @@ __all__ = [
     'VersionedResourceListHoldingDto',
     'VersionedResourceListTradeDto',
     'ResourceListPortfolioSearchResult',
-    'ResourceListPropertyDomain',
     'ResourceListPropertyDefinitionDto',
+    'ResourceListPropertyDomain',
     'ResourceListPropertyKey',
     'ResourceListScope',
     'ResourceListPropertyDataFormatDto',

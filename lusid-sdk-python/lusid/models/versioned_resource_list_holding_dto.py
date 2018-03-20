@@ -34,6 +34,8 @@ class VersionedResourceListHoldingDto(Model):
     :param href: The Uri that returns the same result as the original request,
      but may include resolved as at time(s).
     :type href: str
+    :param count: The total number of records returned in the set
+    :type count: int
     :param _links:
     :type _links: list[~lusid.models.Link]
     """
@@ -42,12 +44,14 @@ class VersionedResourceListHoldingDto(Model):
         'version': {'key': 'version', 'type': 'VersionDto'},
         'values': {'key': 'values', 'type': '[HoldingDto]'},
         'href': {'key': 'href', 'type': 'str'},
+        'count': {'key': 'count', 'type': 'int'},
         '_links': {'key': '_links', 'type': '[Link]'},
     }
 
-    def __init__(self, version=None, values=None, href=None, _links=None):
+    def __init__(self, version=None, values=None, href=None, count=None, _links=None):
         super(VersionedResourceListHoldingDto, self).__init__()
         self.version = version
         self.values = values
         self.href = href
+        self.count = count
         self._links = _links

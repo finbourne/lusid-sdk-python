@@ -253,7 +253,7 @@ class FINBOURNEAPI(object):
         self._client = ServiceClient(self.config.credentials, self.config)
 
         client_models = {k: v for k, v in models.__dict__.items() if isinstance(v, type)}
-        self.api_version = '0.6.27'
+        self.api_version = '0.6.29'
         self._serialize = Serializer(client_models)
         self._deserialize = Deserializer(client_models)
 
@@ -667,7 +667,7 @@ class FINBOURNEAPI(object):
     get_nested_data_aggregation_by_results.metadata = {'url': '/v1/api/aggregation/results/nested/{scope}/{resultsKey}/{resultsDate}'}
 
     def list_analytic_stores(
-            self, as_at=None, sort_by=None, start=None, limit=None, custom_headers=None, raw=False, **operation_config):
+            self, as_at=None, sort_by=None, start=None, limit=None, filter=None, custom_headers=None, raw=False, **operation_config):
         """List all analytic stores in client.
 
         :param as_at:
@@ -678,6 +678,8 @@ class FINBOURNEAPI(object):
         :type start: int
         :param limit:
         :type limit: int
+        :param filter:
+        :type filter: str
         :param dict custom_headers: headers that will be added to the request
         :param bool raw: returns the direct response alongside the
          deserialized response
@@ -701,6 +703,8 @@ class FINBOURNEAPI(object):
             query_parameters['start'] = self._serialize.query("start", start, 'int')
         if limit is not None:
             query_parameters['limit'] = self._serialize.query("limit", limit, 'int')
+        if filter is not None:
+            query_parameters['filter'] = self._serialize.query("filter", filter, 'str')
 
         # Construct headers
         header_parameters = {}
@@ -1162,7 +1166,7 @@ class FINBOURNEAPI(object):
     get_latest_version.metadata = {'url': '/v1/api/excel/latest-version'}
 
     def list_portfolio_groups(
-            self, scope, as_at=None, sort_by=None, start=None, limit=None, custom_headers=None, raw=False, **operation_config):
+            self, scope, as_at=None, sort_by=None, start=None, limit=None, filter=None, custom_headers=None, raw=False, **operation_config):
         """List all groups in a specified scope.
 
         :param scope:
@@ -1175,6 +1179,8 @@ class FINBOURNEAPI(object):
         :type start: int
         :param limit:
         :type limit: int
+        :param filter: A filter expression to apply to the result set
+        :type filter: str
         :param dict custom_headers: headers that will be added to the request
         :param bool raw: returns the direct response alongside the
          deserialized response
@@ -1202,6 +1208,8 @@ class FINBOURNEAPI(object):
             query_parameters['start'] = self._serialize.query("start", start, 'int')
         if limit is not None:
             query_parameters['limit'] = self._serialize.query("limit", limit, 'int')
+        if filter is not None:
+            query_parameters['filter'] = self._serialize.query("filter", filter, 'str')
 
         # Construct headers
         header_parameters = {}
@@ -1423,7 +1431,7 @@ class FINBOURNEAPI(object):
     delete_portfolio_group.metadata = {'url': '/v1/api/groups/portfolios/{scope}/{code}'}
 
     def get_portfolio_group_commands(
-            self, scope, code, from_as_at=None, to_as_at=None, custom_headers=None, raw=False, **operation_config):
+            self, scope, code, from_as_at=None, to_as_at=None, filter=None, custom_headers=None, raw=False, **operation_config):
         """Gets all commands that modified the portfolio groups(s) with the
         specified id.
 
@@ -1437,6 +1445,8 @@ class FINBOURNEAPI(object):
         :param to_as_at: Filters commands by those that were processed at or
          before this time. Null means there is no upper limit (latest).
         :type to_as_at: datetime
+        :param filter: A filter expression to apply to the result set
+        :type filter: str
         :param dict custom_headers: headers that will be added to the request
         :param bool raw: returns the direct response alongside the
          deserialized response
@@ -1461,6 +1471,8 @@ class FINBOURNEAPI(object):
             query_parameters['fromAsAt'] = self._serialize.query("from_as_at", from_as_at, 'iso-8601')
         if to_as_at is not None:
             query_parameters['toAsAt'] = self._serialize.query("to_as_at", to_as_at, 'iso-8601')
+        if filter is not None:
+            query_parameters['filter'] = self._serialize.query("filter", filter, 'str')
 
         # Construct headers
         header_parameters = {}
@@ -2403,7 +2415,7 @@ class FINBOURNEAPI(object):
     delete_personalisation.metadata = {'url': '/v1/api/personalisations'}
 
     def list_portfolios(
-            self, scope, effective_at=None, as_at=None, sort_by=None, start=None, limit=None, property_filter=None, custom_headers=None, raw=False, **operation_config):
+            self, scope, effective_at=None, as_at=None, sort_by=None, start=None, limit=None, filter=None, custom_headers=None, raw=False, **operation_config):
         """Get all portfolios.
 
         Get all portfolios in a scope.
@@ -2420,8 +2432,8 @@ class FINBOURNEAPI(object):
         :type start: int
         :param limit: How many items to return from the set
         :type limit: int
-        :param property_filter:
-        :type property_filter: list[str]
+        :param filter:
+        :type filter: str
         :param dict custom_headers: headers that will be added to the request
         :param bool raw: returns the direct response alongside the
          deserialized response
@@ -2451,8 +2463,8 @@ class FINBOURNEAPI(object):
             query_parameters['start'] = self._serialize.query("start", start, 'int')
         if limit is not None:
             query_parameters['limit'] = self._serialize.query("limit", limit, 'int')
-        if property_filter is not None:
-            query_parameters['propertyFilter'] = self._serialize.query("property_filter", property_filter, '[str]', div=',')
+        if filter is not None:
+            query_parameters['filter'] = self._serialize.query("filter", filter, 'str')
 
         # Construct headers
         header_parameters = {}
@@ -2767,7 +2779,7 @@ class FINBOURNEAPI(object):
     delete_portfolio.metadata = {'url': '/v1/api/portfolios/{scope}/{code}'}
 
     def get_commands(
-            self, scope, code, from_as_at=None, to_as_at=None, custom_headers=None, raw=False, **operation_config):
+            self, scope, code, from_as_at=None, to_as_at=None, filter=None, custom_headers=None, raw=False, **operation_config):
         """Gets all commands that modified the portfolio(s) with the specified id.
 
         :param scope: The scope of the portfolio
@@ -2780,6 +2792,8 @@ class FINBOURNEAPI(object):
         :param to_as_at: Filters commands by those that were processed at or
          before this time. Null means there is no upper limit (latest).
         :type to_as_at: datetime
+        :param filter: Command filter
+        :type filter: str
         :param dict custom_headers: headers that will be added to the request
         :param bool raw: returns the direct response alongside the
          deserialized response
@@ -2804,6 +2818,8 @@ class FINBOURNEAPI(object):
             query_parameters['fromAsAt'] = self._serialize.query("from_as_at", from_as_at, 'iso-8601')
         if to_as_at is not None:
             query_parameters['toAsAt'] = self._serialize.query("to_as_at", to_as_at, 'iso-8601')
+        if filter is not None:
+            query_parameters['filter'] = self._serialize.query("filter", filter, 'str')
 
         # Construct headers
         header_parameters = {}
@@ -3055,7 +3071,7 @@ class FINBOURNEAPI(object):
     delete_details.metadata = {'url': '/v1/api/portfolios/{scope}/{code}/details'}
 
     def get_aggregate_holdings(
-            self, scope, code, effective_at=None, as_at=None, sort_by=None, start=None, limit=None, custom_headers=None, raw=False, **operation_config):
+            self, scope, code, effective_at=None, as_at=None, sort_by=None, start=None, limit=None, filter=None, custom_headers=None, raw=False, **operation_config):
         """Get holdings.
 
         Get the aggregate holdings of a portfolio.  If no effectiveAt or asAt
@@ -3075,6 +3091,8 @@ class FINBOURNEAPI(object):
         :type start: int
         :param limit: How many items to return from the set
         :type limit: int
+        :param filter: A filter on the results
+        :type filter: str
         :param dict custom_headers: headers that will be added to the request
         :param bool raw: returns the direct response alongside the
          deserialized response
@@ -3105,6 +3123,8 @@ class FINBOURNEAPI(object):
             query_parameters['start'] = self._serialize.query("start", start, 'int')
         if limit is not None:
             query_parameters['limit'] = self._serialize.query("limit", limit, 'int')
+        if filter is not None:
+            query_parameters['filter'] = self._serialize.query("filter", filter, 'str')
 
         # Construct headers
         header_parameters = {}
@@ -3512,7 +3532,7 @@ class FINBOURNEAPI(object):
     delete_properties.metadata = {'url': '/v1/api/portfolios/{scope}/{code}/properties/all'}
 
     def get_trades(
-            self, scope, code, from_trade_date=None, to_trade_date=None, as_at=None, sort_by=None, start=None, limit=None, property_filter=None, custom_headers=None, raw=False, **operation_config):
+            self, scope, code, from_trade_date=None, to_trade_date=None, as_at=None, sort_by=None, start=None, limit=None, property_filter=None, filter=None, custom_headers=None, raw=False, **operation_config):
         """Get trades.
 
         :param scope: The scope of the portfolio
@@ -3535,6 +3555,8 @@ class FINBOURNEAPI(object):
         :type limit: int
         :param property_filter:
         :type property_filter: list[str]
+        :param filter: Trade filter
+        :type filter: str
         :param dict custom_headers: headers that will be added to the request
         :param bool raw: returns the direct response alongside the
          deserialized response
@@ -3569,6 +3591,8 @@ class FINBOURNEAPI(object):
             query_parameters['limit'] = self._serialize.query("limit", limit, 'int')
         if property_filter is not None:
             query_parameters['propertyFilter'] = self._serialize.query("property_filter", property_filter, '[str]', div=',')
+        if filter is not None:
+            query_parameters['filter'] = self._serialize.query("filter", filter, 'str')
 
         # Construct headers
         header_parameters = {}
@@ -4096,12 +4120,20 @@ class FINBOURNEAPI(object):
         return deserialized
     portfolios_search.metadata = {'url': '/v1/api/portfolios/search'}
 
-    def proxy_search(
-            self, request=None, custom_headers=None, raw=False, **operation_config):
-        """Search property definitions.
+    def properties_search(
+            self, request=None, sort_by=None, start=None, limit=None, filter=None, custom_headers=None, raw=False, **operation_config):
+        """Search properties.
 
         :param request:
         :type request: object
+        :param sort_by:
+        :type sort_by: list[str]
+        :param start:
+        :type start: int
+        :param limit:
+        :type limit: int
+        :param filter:
+        :type filter: str
         :param dict custom_headers: headers that will be added to the request
         :param bool raw: returns the direct response alongside the
          deserialized response
@@ -4113,10 +4145,18 @@ class FINBOURNEAPI(object):
          :class:`HttpOperationError<msrest.exceptions.HttpOperationError>`
         """
         # Construct URL
-        url = self.proxy_search.metadata['url']
+        url = self.properties_search.metadata['url']
 
         # Construct parameters
         query_parameters = {}
+        if sort_by is not None:
+            query_parameters['sortBy'] = self._serialize.query("sort_by", sort_by, '[str]', div=',')
+        if start is not None:
+            query_parameters['start'] = self._serialize.query("start", start, 'int')
+        if limit is not None:
+            query_parameters['limit'] = self._serialize.query("limit", limit, 'int')
+        if filter is not None:
+            query_parameters['filter'] = self._serialize.query("filter", filter, 'str')
 
         # Construct headers
         header_parameters = {}
@@ -4141,7 +4181,7 @@ class FINBOURNEAPI(object):
         deserialized = None
 
         if response.status_code == 200:
-            deserialized = self._deserialize('str', response)
+            deserialized = self._deserialize('ResourceListPropertyDefinitionDto', response)
         if response.status_code == 400:
             deserialized = self._deserialize('ErrorResponse', response)
         if response.status_code == 500:
@@ -4152,7 +4192,7 @@ class FINBOURNEAPI(object):
             return client_raw_response
 
         return deserialized
-    proxy_search.metadata = {'url': '/v1/api/properties/search'}
+    properties_search.metadata = {'url': '/v1/api/properties/search'}
 
     def get_property_definition_domains(
             self, sort_by=None, start=None, limit=None, custom_headers=None, raw=False, **operation_config):
@@ -4278,7 +4318,7 @@ class FINBOURNEAPI(object):
     create_property_definition.metadata = {'url': '/v1/api/propertydefinitions'}
 
     def get_multiple_property_definitions(
-            self, keys=None, sort_by=None, start=None, limit=None, custom_headers=None, raw=False, **operation_config):
+            self, keys=None, sort_by=None, start=None, limit=None, filter=None, custom_headers=None, raw=False, **operation_config):
         """Gets multiple property definitions.
 
         :param keys:
@@ -4289,6 +4329,8 @@ class FINBOURNEAPI(object):
         :type start: int
         :param limit:
         :type limit: int
+        :param filter:
+        :type filter: str
         :param dict custom_headers: headers that will be added to the request
         :param bool raw: returns the direct response alongside the
          deserialized response
@@ -4312,6 +4354,8 @@ class FINBOURNEAPI(object):
             query_parameters['start'] = self._serialize.query("start", start, 'int')
         if limit is not None:
             query_parameters['limit'] = self._serialize.query("limit", limit, 'int')
+        if filter is not None:
+            query_parameters['filter'] = self._serialize.query("filter", filter, 'str')
 
         # Construct headers
         header_parameters = {}
@@ -4345,7 +4389,7 @@ class FINBOURNEAPI(object):
     get_multiple_property_definitions.metadata = {'url': '/v1/api/propertydefinitions/_keys'}
 
     def get_all_property_keys_in_domain(
-            self, domain, sort_by=None, start=None, limit=None, custom_headers=None, raw=False, **operation_config):
+            self, domain, sort_by=None, start=None, limit=None, filter=None, custom_headers=None, raw=False, **operation_config):
         """Gets all available property definitions.
 
         :param domain: Possible values include: 'Trade', 'Portfolio',
@@ -4357,6 +4401,8 @@ class FINBOURNEAPI(object):
         :type start: int
         :param limit:
         :type limit: int
+        :param filter:
+        :type filter: str
         :param dict custom_headers: headers that will be added to the request
         :param bool raw: returns the direct response alongside the
          deserialized response
@@ -4382,6 +4428,8 @@ class FINBOURNEAPI(object):
             query_parameters['start'] = self._serialize.query("start", start, 'int')
         if limit is not None:
             query_parameters['limit'] = self._serialize.query("limit", limit, 'int')
+        if filter is not None:
+            query_parameters['filter'] = self._serialize.query("filter", filter, 'str')
 
         # Construct headers
         header_parameters = {}
@@ -4415,7 +4463,7 @@ class FINBOURNEAPI(object):
     get_all_property_keys_in_domain.metadata = {'url': '/v1/api/propertydefinitions/{domain}'}
 
     def get_property_definition_scopes_in_domain(
-            self, domain, sort_by=None, start=None, limit=None, custom_headers=None, raw=False, **operation_config):
+            self, domain, sort_by=None, start=None, limit=None, filter=None, custom_headers=None, raw=False, **operation_config):
         """Gets the available property-definition scopes for the specified domain.
 
         :param domain: Possible values include: 'Trade', 'Portfolio',
@@ -4427,6 +4475,8 @@ class FINBOURNEAPI(object):
         :type start: int
         :param limit:
         :type limit: int
+        :param filter:
+        :type filter: str
         :param dict custom_headers: headers that will be added to the request
         :param bool raw: returns the direct response alongside the
          deserialized response
@@ -4452,6 +4502,8 @@ class FINBOURNEAPI(object):
             query_parameters['start'] = self._serialize.query("start", start, 'int')
         if limit is not None:
             query_parameters['limit'] = self._serialize.query("limit", limit, 'int')
+        if filter is not None:
+            query_parameters['filter'] = self._serialize.query("filter", filter, 'str')
 
         # Construct headers
         header_parameters = {}
@@ -4485,7 +4537,7 @@ class FINBOURNEAPI(object):
     get_property_definition_scopes_in_domain.metadata = {'url': '/v1/api/propertydefinitions/{domain}/_scopes'}
 
     def get_all_from_scope(
-            self, domain, scope, sort_by=None, start=None, limit=None, custom_headers=None, raw=False, **operation_config):
+            self, domain, scope, sort_by=None, start=None, limit=None, filter=None, custom_headers=None, raw=False, **operation_config):
         """Gets all properties in a scope.
 
         :param domain: Possible values include: 'Trade', 'Portfolio',
@@ -4499,6 +4551,8 @@ class FINBOURNEAPI(object):
         :type start: int
         :param limit:
         :type limit: int
+        :param filter:
+        :type filter: str
         :param dict custom_headers: headers that will be added to the request
         :param bool raw: returns the direct response alongside the
          deserialized response
@@ -4525,6 +4579,8 @@ class FINBOURNEAPI(object):
             query_parameters['start'] = self._serialize.query("start", start, 'int')
         if limit is not None:
             query_parameters['limit'] = self._serialize.query("limit", limit, 'int')
+        if filter is not None:
+            query_parameters['filter'] = self._serialize.query("filter", filter, 'str')
 
         # Construct headers
         header_parameters = {}
@@ -4824,7 +4880,7 @@ class FINBOURNEAPI(object):
     create_property_data_format.metadata = {'url': '/v1/api/propertyformats'}
 
     def list(
-            self, scope, include_default=None, include_system=None, sort_by=None, start=None, limit=None, custom_headers=None, raw=False, **operation_config):
+            self, scope, include_default=None, include_system=None, sort_by=None, start=None, limit=None, filter=None, custom_headers=None, raw=False, **operation_config):
         """Lists all property data formats in the specified scope.
 
         :param scope:
@@ -4839,6 +4895,8 @@ class FINBOURNEAPI(object):
         :type start: int
         :param limit:
         :type limit: int
+        :param filter:
+        :type filter: str
         :param dict custom_headers: headers that will be added to the request
         :param bool raw: returns the direct response alongside the
          deserialized response
@@ -4868,6 +4926,8 @@ class FINBOURNEAPI(object):
             query_parameters['start'] = self._serialize.query("start", start, 'int')
         if limit is not None:
             query_parameters['limit'] = self._serialize.query("limit", limit, 'int')
+        if filter is not None:
+            query_parameters['filter'] = self._serialize.query("filter", filter, 'str')
 
         # Construct headers
         header_parameters = {}
@@ -5031,7 +5091,7 @@ class FINBOURNEAPI(object):
     update_property_data_format.metadata = {'url': '/v1/api/propertyformats/{scope}/{name}'}
 
     def list_reference_portfolios(
-            self, scope, effective_at, as_at=None, sort_by=None, start=None, limit=None, custom_headers=None, raw=False, **operation_config):
+            self, scope, effective_at, as_at=None, sort_by=None, start=None, limit=None, filter=None, custom_headers=None, raw=False, **operation_config):
         """Get all reference portfolios in a scope.
 
         :param scope:
@@ -5046,6 +5106,8 @@ class FINBOURNEAPI(object):
         :type start: int
         :param limit:
         :type limit: int
+        :param filter:
+        :type filter: str
         :param dict custom_headers: headers that will be added to the request
         :param bool raw: returns the direct response alongside the
          deserialized response
@@ -5074,6 +5136,8 @@ class FINBOURNEAPI(object):
             query_parameters['start'] = self._serialize.query("start", start, 'int')
         if limit is not None:
             query_parameters['limit'] = self._serialize.query("limit", limit, 'int')
+        if filter is not None:
+            query_parameters['filter'] = self._serialize.query("filter", filter, 'str')
 
         # Construct headers
         header_parameters = {}
