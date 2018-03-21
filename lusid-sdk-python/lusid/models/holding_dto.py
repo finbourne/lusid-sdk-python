@@ -27,19 +27,21 @@ from msrest.serialization import Model
 class HoldingDto(Model):
     """HoldingDto.
 
-    :param security_uid:
+    :param security_uid: Unique security identifier
     :type security_uid: str
     :param properties:
     :type properties: list[~lusid.models.PropertyDto]
-    :param holding_type:
+    :param holding_type: Type of holding, eg Position, Balance,
+     CashCommitment, Receivable, ForwardFX
     :type holding_type: str
-    :param units:
+    :param units: Quantity of holding
     :type units: float
-    :param settled_units:
+    :param settled_units: Settled quantity of holding
     :type settled_units: float
-    :param cost:
+    :param cost: Book cost of holding in trade currency
     :type cost: float
-    :param transaction:
+    :param transaction: If this is commitment-type holding, the transaction
+     behind it
     :type transaction: ~lusid.models.TradeDto
     """
 

@@ -27,9 +27,9 @@ from msrest.serialization import Model
 class SecurityAnalyticDataDto(Model):
     """SecurityAnalyticDataDto.
 
-    :param id:
+    :param id: Unique security identifier
     :type id: str
-    :param value:
+    :param value: Value of the analytic, eg price
     :type value: float
     """
 

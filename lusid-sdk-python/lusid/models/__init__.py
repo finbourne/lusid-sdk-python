@@ -92,6 +92,7 @@ from .resource_list_analytic_store_key_dto import ResourceListAnalyticStoreKeyDt
 from .resource_list_group_dto import ResourceListGroupDto
 from .resource_list_processed_command_dto import ResourceListProcessedCommandDto
 from .resource_list_personalisation_dto import ResourceListPersonalisationDto
+from .resource_list_scope import ResourceListScope
 from .resource_list_portfolio_dto import ResourceListPortfolioDto
 from .versioned_resource_list_holding_dto import VersionedResourceListHoldingDto
 from .versioned_resource_list_trade_dto import VersionedResourceListTradeDto
@@ -99,7 +100,6 @@ from .resource_list_portfolio_search_result import ResourceListPortfolioSearchRe
 from .resource_list_property_definition_dto import ResourceListPropertyDefinitionDto
 from .resource_list_property_domain import ResourceListPropertyDomain
 from .resource_list_property_key import ResourceListPropertyKey
-from .resource_list_scope import ResourceListScope
 from .resource_list_property_data_format_dto import ResourceListPropertyDataFormatDto
 from .resource_list_reference_portfolio_constituent_dto import ResourceListReferencePortfolioConstituentDto
 from .resource_list_ui_data_type import ResourceListUiDataType
@@ -176,6 +176,7 @@ __all__ = [
     'ResourceListGroupDto',
     'ResourceListProcessedCommandDto',
     'ResourceListPersonalisationDto',
+    'ResourceListScope',
     'ResourceListPortfolioDto',
     'VersionedResourceListHoldingDto',
     'VersionedResourceListTradeDto',
@@ -183,7 +184,6 @@ __all__ = [
     'ResourceListPropertyDefinitionDto',
     'ResourceListPropertyDomain',
     'ResourceListPropertyKey',
-    'ResourceListScope',
     'ResourceListPropertyDataFormatDto',
     'ResourceListReferencePortfolioConstituentDto',
     'ResourceListUiDataType',

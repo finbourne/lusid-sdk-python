@@ -74,8 +74,16 @@ class FINBOURNEAPI(object):
     For any securities that are not recognised by LUSID (eg OTCs) a client can upload a client defined security. Securitised portfolios and funds can be modelled as client defined securities.
     ## Security Prices (Analytics)
     Security prices are stored in LUSID's Analytics Store
+    | Field|Type|Description |
+    | ---|---|--- |
+    | Id|SecurityUid|Unique security identifier |
+    | Value|Decimal|Value of the analytic, eg price |
     ## Security Data
     Security data can be uploaded to the system using the [Classifications](#tag/Classification) endpoint.
+    | Field|Type|Description |
+    | ---|---|--- |
+    | Uid|SecurityUid|Unique security identifier |
+    | EffectiveFrom|DateTimeOffset|Date from which this classification is effective |
     ## Portfolio
     A portfolio is a container for trades and/or holdings.  Meta data and classifications of portfolios can be attached via properties.
     ## Derived Portfolio
@@ -102,15 +110,16 @@ class FINBOURNEAPI(object):
     | NettingSet|String|  |
     ## Holding
     A holding represents a position in a security or cash on a given date.
+    | Field|Type|Description |
+    | ---|---|--- |
+    | SecurityUid|SecurityUid|Unique security identifier |
+    | HoldingType|String|Type of holding, eg Position, Balance, CashCommitment, Receivable, ForwardFX |
+    | Units|Decimal|Quantity of holding |
+    | SettledUnits|Decimal|Settled quantity of holding |
+    | Cost|Decimal|Book cost of holding in trade currency |
+    | Transaction|TradeDto|If this is commitment-type holding, the transaction behind it |
     ## Property
     Properties are key-value pairs that can be applied to any entity within a domain (where a domain is `trade`, `portfolio`, `security` etc).  Properties must be defined before use with a `PropertyDefinition` and can then subsequently be added to entities.
-    # Examples
-    ## Authentication
-    ## Create Portfolio
-    ## Add Trades
-    ## Add Holdings
-    ## Update Trade/Holding
-    ## Aggregation
     # Error Codes
     ## 100
     ### Personalisations not found.\n\nThe personalisation(s) identified by the pattern provided could not be found, either because it does not exist or it has been deleted. Please check the pattern your provided.
@@ -253,7 +262,7 @@ class FINBOURNEAPI(object):
         self._client = ServiceClient(self.config.credentials, self.config)
 
         client_models = {k: v for k, v in models.__dict__.items() if isinstance(v, type)}
-        self.api_version = '0.6.29'
+        self.api_version = '0.6.35'
         self._serialize = Serializer(client_models)
         self._deserialize = Deserializer(client_models)
 
@@ -2413,6 +2422,69 @@ class FINBOURNEAPI(object):
 
         return deserialized
     delete_personalisation.metadata = {'url': '/v1/api/personalisations'}
+
+    def list_scopes(
+            self, sort_by=None, start=None, limit=None, custom_headers=None, raw=False, **operation_config):
+        """List scopes that contain portfolios.
+
+        Lists all scopes that have previously been used.
+
+        :param sort_by: How to order the returned scopes
+        :type sort_by: list[str]
+        :param start: The starting index for the returned scopes
+        :type start: int
+        :param limit: The final index for the returned scopes
+        :type limit: int
+        :param dict custom_headers: headers that will be added to the request
+        :param bool raw: returns the direct response alongside the
+         deserialized response
+        :param operation_config: :ref:`Operation configuration
+         overrides<msrest:optionsforoperations>`.
+        :return: object or ClientRawResponse if raw=true
+        :rtype: object or ~msrest.pipeline.ClientRawResponse
+        :raises:
+         :class:`HttpOperationError<msrest.exceptions.HttpOperationError>`
+        """
+        # Construct URL
+        url = self.list_scopes.metadata['url']
+
+        # Construct parameters
+        query_parameters = {}
+        if sort_by is not None:
+            query_parameters['sortBy'] = self._serialize.query("sort_by", sort_by, '[str]', div=',')
+        if start is not None:
+            query_parameters['start'] = self._serialize.query("start", start, 'int')
+        if limit is not None:
+            query_parameters['limit'] = self._serialize.query("limit", limit, 'int')
+
+        # Construct headers
+        header_parameters = {}
+        header_parameters['Content-Type'] = 'application/json; charset=utf-8'
+        if custom_headers:
+            header_parameters.update(custom_headers)
+
+        # Construct and send request
+        request = self._client.get(url, query_parameters)
+        response = self._client.send(request, header_parameters, stream=False, **operation_config)
+
+        if response.status_code not in [200, 400, 500]:
+            raise HttpOperationError(self._deserialize, response)
+
+        deserialized = None
+
+        if response.status_code == 200:
+            deserialized = self._deserialize('ResourceListScope', response)
+        if response.status_code == 400:
+            deserialized = self._deserialize('ErrorResponse', response)
+        if response.status_code == 500:
+            deserialized = self._deserialize('ErrorResponse', response)
+
+        if raw:
+            client_raw_response = ClientRawResponse(deserialized, response)
+            return client_raw_response
+
+        return deserialized
+    list_scopes.metadata = {'url': '/v1/api/portfolios'}
 
     def list_portfolios(
             self, scope, effective_at=None, as_at=None, sort_by=None, start=None, limit=None, filter=None, custom_headers=None, raw=False, **operation_config):

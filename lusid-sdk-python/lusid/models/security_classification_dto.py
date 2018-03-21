@@ -27,9 +27,9 @@ from msrest.serialization import Model
 class SecurityClassificationDto(Model):
     """SecurityClassificationDto.
 
-    :param uid:
+    :param uid: Unique security identifier
     :type uid: str
-    :param effective_from:
+    :param effective_from: Date from which this classification is effective
     :type effective_from: datetime
     :param properties:
     :type properties: list[~lusid.models.PropertyDto]

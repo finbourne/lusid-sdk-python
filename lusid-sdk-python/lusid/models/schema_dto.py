@@ -27,6 +27,24 @@ from msrest.serialization import Model
 class SchemaDto(Model):
     """SchemaDto.
 
+    :param entity: Possible values include: 'PropertyKey', 'FieldSchema',
+     'Personalisation', 'Security', 'Property', 'Login', 'PropertyDefinition',
+     'PropertyDataFormat', 'AggregationResponseNode', 'Portfolio',
+     'PortfolioSearchResult', 'PortfolioDetails', 'PortfolioProperties',
+     'Version', 'AddTradeProperty', 'AnalyticStore', 'AnalyticStoreKey',
+     'UpsertPortfolioTrades', 'Group', 'Constituent', 'Trade',
+     'PortfolioHolding', 'ErrorDetail', 'ErrorResponse',
+     'InstrumentDefinition', 'ProcessedCommand', 'CreatePortfolio',
+     'CreateAnalyticStore', 'CreateClientSecurity', 'CreateDerivedPortfolio',
+     'CreateGroup', 'CreatePropertyDataFormat', 'CreatePropertyDefinition',
+     'UpdatePortfolio', 'UpdateGroup', 'UpdatePropertyDataFormat',
+     'UpdatePropertyDefinition', 'SecurityAnalytic', 'AggregationRequest',
+     'Aggregation', 'NestedAggregation', 'ResultDataSchema', 'Classification',
+     'SecurityClassification', 'WebLogMessage', 'UpsertPersonalisation',
+     'CreatePortfolioDetails', 'UpsertConstituent', 'CreateResults', 'Results',
+     'TryAddClientSecurities', 'TryDeleteClientSecurities',
+     'TryLookupSecuritiesFromCodes', 'ExpandedGroup'
+    :type entity: str or ~lusid.models.enum
     :param href:
     :type href: str
     :param values:
@@ -34,11 +52,13 @@ class SchemaDto(Model):
     """
 
     _attribute_map = {
+        'entity': {'key': 'entity', 'type': 'str'},
         'href': {'key': 'href', 'type': 'str'},
         'values': {'key': 'values', 'type': '[KeyValuePairStringFieldSchema]'},
     }
 
-    def __init__(self, href=None, values=None):
+    def __init__(self, entity=None, href=None, values=None):
         super(SchemaDto, self).__init__()
+        self.entity = entity
         self.href = href
         self.values = values
