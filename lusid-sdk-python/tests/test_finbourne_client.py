@@ -64,7 +64,7 @@ class TestFinbourneApi(TestCase):
     def test_create_portfolio(self):
 
         credentials = BasicTokenAuthentication(TestFinbourneApi.api_token)
-        client = lusid.FINBOURNEAPI(credentials, TestFinbourneApi.api_url)
+        client = lusid.LUSIDAPI(credentials, TestFinbourneApi.api_url)
 
         scope = "finbourne"
         guid = str(uuid.uuid4())
@@ -79,7 +79,7 @@ class TestFinbourneApi(TestCase):
     def test_create_portfolio_with_properties(self):
 
         credentials = BasicTokenAuthentication(TestFinbourneApi.api_token)
-        client = lusid.FINBOURNEAPI(credentials, TestFinbourneApi.api_url)
+        client = lusid.LUSIDAPI(credentials, TestFinbourneApi.api_url)
 
         scope = "finbourne"
         guid = str(uuid.uuid4())
@@ -126,7 +126,7 @@ class TestFinbourneApi(TestCase):
     def test_create_trade_with_property(self):
 
         credentials = BasicTokenAuthentication(TestFinbourneApi.api_token)
-        client = lusid.FINBOURNEAPI(credentials, TestFinbourneApi.api_url)
+        client = lusid.LUSIDAPI(credentials, TestFinbourneApi.api_url)
 
         scope = "finbourne"
         guid = str(uuid.uuid4())
@@ -193,7 +193,7 @@ class TestFinbourneApi(TestCase):
     def test_apply_bitemporal_portfolio_changes(self):
 
         credentials = BasicTokenAuthentication(TestFinbourneApi.api_token)
-        client = lusid.FINBOURNEAPI(credentials, TestFinbourneApi.api_url)
+        client = lusid.LUSIDAPI(credentials, TestFinbourneApi.api_url)
 
         scope = "finbourne"
         guid = str(uuid.uuid4())
@@ -281,7 +281,7 @@ class TestFinbourneApi(TestCase):
     def test_lookup_securities(self):
 
         credentials = BasicTokenAuthentication(TestFinbourneApi.api_token)
-        client = lusid.FINBOURNEAPI(credentials, TestFinbourneApi.api_url)
+        client = lusid.LUSIDAPI(credentials, TestFinbourneApi.api_url)
 
         isins = ["IT0004966401", "FR0010192997"]
 
@@ -294,7 +294,7 @@ class TestFinbourneApi(TestCase):
     def test_portfolio_aggregation(self):
 
         credentials = BasicTokenAuthentication(TestFinbourneApi.api_token)
-        client = lusid.FINBOURNEAPI(credentials, TestFinbourneApi.api_url)
+        client = lusid.LUSIDAPI(credentials, TestFinbourneApi.api_url)
 
         scope = "finbourne"
         guid = str(uuid.uuid4())
