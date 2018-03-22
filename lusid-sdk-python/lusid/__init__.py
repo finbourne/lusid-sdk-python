@@ -21,10 +21,10 @@
 # SOFTWARE.
 # --------------------------------------------------------------------------
 
-from .finbourneapi import FINBOURNEAPI
+from .lusidapi import LUSIDAPI
 from .version import VERSION
 
-__all__ = ['FINBOURNEAPI']
+__all__ = ['LUSIDAPI']
 
 __version__ = VERSION
 

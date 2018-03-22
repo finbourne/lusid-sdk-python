@@ -37,6 +37,8 @@ class SecurityDto(Model):
     :type common_name: str
     :param aliases:
     :type aliases: ~lusid.models.SecurityDtoAliases
+    :param properties:
+    :type properties: dict[str, ~lusid.models.Property]
     :param _links:
     :type _links: list[~lusid.models.Link]
     """
@@ -47,14 +49,16 @@ class SecurityDto(Model):
         'version': {'key': 'version', 'type': 'VersionDto'},
         'common_name': {'key': 'commonName', 'type': 'str'},
         'aliases': {'key': 'aliases', 'type': 'SecurityDtoAliases'},
+        'properties': {'key': 'properties', 'type': '{Property}'},
         '_links': {'key': '_links', 'type': '[Link]'},
     }
 
-    def __init__(self, href=None, uid=None, version=None, common_name=None, aliases=None, _links=None):
+    def __init__(self, href=None, uid=None, version=None, common_name=None, aliases=None, properties=None, _links=None):
         super(SecurityDto, self).__init__()
         self.href = href
         self.uid = uid
         self.version = version
         self.common_name = common_name
         self.aliases = aliases
+        self.properties = properties
         self._links = _links

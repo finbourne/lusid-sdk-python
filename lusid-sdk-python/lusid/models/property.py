@@ -21,5 +21,40 @@
 # SOFTWARE.
 # --------------------------------------------------------------------------
 
-VERSION = "0.6.39"
+from msrest.serialization import Model
 
+
+class Property(Model):
+    """This is intended to be the external facing property specification data
+    type.
+
+    :param key: The property key made up of the PropertyDomain, scope and name
+     delimited with a '/'
+     e.g. trade/myscope/myproperty
+    :type key: str
+    :param value:
+    :type value: object
+    :param effective_date: Date for which the property is effective from
+    :type effective_date: datetime
+    :param version:
+    :type version: int
+    """
+
+    _validation = {
+        'key': {'required': True},
+        'value': {'required': True},
+    }
+
+    _attribute_map = {
+        'key': {'key': 'key', 'type': 'str'},
+        'value': {'key': 'value', 'type': 'object'},
+        'effective_date': {'key': 'effectiveDate', 'type': 'iso-8601'},
+        'version': {'key': 'version', 'type': 'int'},
+    }
+
+    def __init__(self, key, value, effective_date=None, version=None):
+        super(Property, self).__init__()
+        self.key = key
+        self.value = value
+        self.effective_date = effective_date
+        self.version = version

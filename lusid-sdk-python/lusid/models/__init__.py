@@ -83,6 +83,7 @@ from .key_value_pair_code_type_string import KeyValuePairCodeTypeString
 from .instrument_definition_dto import InstrumentDefinitionDto
 from .create_client_security_request import CreateClientSecurityRequest
 from .security_dto_aliases import SecurityDtoAliases
+from .property import Property
 from .security_dto import SecurityDto
 from .try_add_client_securities_dto import TryAddClientSecuritiesDto
 from .try_delete_client_securities_dto import TryDeleteClientSecuritiesDto
@@ -167,6 +168,7 @@ __all__ = [
     'InstrumentDefinitionDto',
     'CreateClientSecurityRequest',
     'SecurityDtoAliases',
+    'Property',
     'SecurityDto',
     'TryAddClientSecuritiesDto',
     'TryDeleteClientSecuritiesDto',
