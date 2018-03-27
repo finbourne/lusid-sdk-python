@@ -361,7 +361,7 @@ class TestFinbourneApi(TestCase):
         aggregation = self.assert_response_is_not_error(models.NestedDataAggregationResponse, aggregation_result)
 
         for item in aggregation.data.children:
-            print("{0}".format(item.description))
+            print("{0}".format(item.group_property_value))
             for key, value in item.properties.additional_properties.items():
                 print("\t{0}\t{1}".format(key, value))
 
