@@ -286,7 +286,7 @@ class TestFinbourneApi(TestCase):
         isins = ["IT0004966401", "FR0010192997"]
 
         #   lookup securities
-        lookup_result = client.lookup_from_codes("Isin", isins)
+        lookup_result = client.lookup_securities_from_codes("Isin", isins)
         fbn_ids = self.assert_response_is_not_error(models.TryLookupSecuritiesFromCodesDto, lookup_result)
 
         self.assertGreater(len(fbn_ids.values), 0)
@@ -357,12 +357,12 @@ class TestFinbourneApi(TestCase):
         )
 
         #   do the aggregation
-        aggregation_result = client.get_nested_data_aggregation_by_portfolio(scope, portfolio_id, aggregation_request)
-        aggregation = self.assert_response_is_not_error(models.NestedDataAggregationResponse, aggregation_result)
+        aggregation_result = client.get_nested_aggregation_by_portfolio(scope, portfolio_id, aggregation_request)
+        aggregation = self.assert_response_is_not_error(models.NestedAggregationResponse, aggregation_result)
 
         for item in aggregation.data.children:
             print("{0}".format(item.group_property_value))
-            for key, value in item.properties.additional_properties.items():
+            for key, value in item.properties.items():
                 print("\t{0}\t{1}".format(key, value))
 
     # utility to build trade from spec
