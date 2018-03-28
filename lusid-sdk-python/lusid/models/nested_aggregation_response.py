@@ -21,5 +21,32 @@
 # SOFTWARE.
 # --------------------------------------------------------------------------
 
-VERSION = "0.6.51"
+from msrest.serialization import Model
 
+
+class NestedAggregationResponse(Model):
+    """NestedAggregationResponse.
+
+    :param href:
+    :type href: str
+    :param data:
+    :type data: ~lusid.models.AggregationResponseNodeDictionaryStringObject
+    :param aggregation_currency:
+    :type aggregation_currency: str
+    :param data_schema:
+    :type data_schema: ~lusid.models.ResultDataSchema
+    """
+
+    _attribute_map = {
+        'href': {'key': 'href', 'type': 'str'},
+        'data': {'key': 'data', 'type': 'AggregationResponseNodeDictionaryStringObject'},
+        'aggregation_currency': {'key': 'aggregationCurrency', 'type': 'str'},
+        'data_schema': {'key': 'dataSchema', 'type': 'ResultDataSchema'},
+    }
+
+    def __init__(self, href=None, data=None, aggregation_currency=None, data_schema=None):
+        super(NestedAggregationResponse, self).__init__()
+        self.href = href
+        self.data = data
+        self.aggregation_currency = aggregation_currency
+        self.data_schema = data_schema

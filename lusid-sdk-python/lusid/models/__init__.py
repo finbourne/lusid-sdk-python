@@ -24,16 +24,14 @@
 from .aggregate_spec import AggregateSpec
 from .property_filter import PropertyFilter
 from .aggregation_request import AggregationRequest
-from .idata_record import IDataRecord
 from .field_schema import FieldSchema
 from .key_value_pair_property_key_field_schema import KeyValuePairPropertyKeyFieldSchema
 from .result_data_schema import ResultDataSchema
-from .get_aggregation_response import GetAggregationResponse
+from .list_aggregation_response import ListAggregationResponse
 from .error_detail import ErrorDetail
 from .error_response import ErrorResponse
-from .qualified_id import QualifiedId
-from .aggregation_response_node_idata_record import AggregationResponseNodeIDataRecord
-from .nested_data_aggregation_response import NestedDataAggregationResponse
+from .aggregation_response_node_dictionary_string_object import AggregationResponseNodeDictionaryStringObject
+from .nested_aggregation_response import NestedAggregationResponse
 from .create_analytic_store_request import CreateAnalyticStoreRequest
 from .analytic_store_key_dto import AnalyticStoreKeyDto
 from .analytic_store_dto import AnalyticStoreDto
@@ -61,6 +59,7 @@ from .portfolio_details_dto import PortfolioDetailsDto
 from .portfolio_details_request import PortfolioDetailsRequest
 from .trade_dto import TradeDto
 from .holding_dto import HoldingDto
+from .holding_adjustment_dto import HoldingAdjustmentDto
 from .upsert_portfolio_trades_dto import UpsertPortfolioTradesDto
 from .portfolio_properties_dto import PortfolioPropertiesDto
 from .add_trade_property_dto import AddTradePropertyDto
@@ -109,16 +108,14 @@ __all__ = [
     'AggregateSpec',
     'PropertyFilter',
     'AggregationRequest',
-    'IDataRecord',
     'FieldSchema',
     'KeyValuePairPropertyKeyFieldSchema',
     'ResultDataSchema',
-    'GetAggregationResponse',
+    'ListAggregationResponse',
     'ErrorDetail',
     'ErrorResponse',
-    'QualifiedId',
-    'AggregationResponseNodeIDataRecord',
-    'NestedDataAggregationResponse',
+    'AggregationResponseNodeDictionaryStringObject',
+    'NestedAggregationResponse',
     'CreateAnalyticStoreRequest',
     'AnalyticStoreKeyDto',
     'AnalyticStoreDto',
@@ -146,6 +143,7 @@ __all__ = [
     'PortfolioDetailsRequest',
     'TradeDto',
     'HoldingDto',
+    'HoldingAdjustmentDto',
     'UpsertPortfolioTradesDto',
     'PortfolioPropertiesDto',
     'AddTradePropertyDto',

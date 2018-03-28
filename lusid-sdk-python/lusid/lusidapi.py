@@ -206,12 +206,12 @@ class LUSIDAPI(object):
         self._client = ServiceClient(self.config.credentials, self.config)
 
         client_models = {k: v for k, v in models.__dict__.items() if isinstance(v, type)}
-        self.api_version = '0.6.43'
+        self.api_version = '0.6.51'
         self._serialize = Serializer(client_models)
         self._deserialize = Deserializer(client_models)
 
 
-    def get_by_group(
+    def get_aggregation_by_group(
             self, scope, group_code, request=None, custom_headers=None, raw=False, **operation_config):
         """Aggregate data in a group hierarchy.
 
@@ -232,7 +232,7 @@ class LUSIDAPI(object):
          :class:`HttpOperationError<msrest.exceptions.HttpOperationError>`
         """
         # Construct URL
-        url = self.get_by_group.metadata['url']
+        url = self.get_aggregation_by_group.metadata['url']
         path_format_arguments = {
             'scope': self._serialize.url("scope", scope, 'str'),
             'groupCode': self._serialize.url("group_code", group_code, 'str')
@@ -265,7 +265,7 @@ class LUSIDAPI(object):
         deserialized = None
 
         if response.status_code == 200:
-            deserialized = self._deserialize('GetAggregationResponse', response)
+            deserialized = self._deserialize('ListAggregationResponse', response)
         if response.status_code == 400:
             deserialized = self._deserialize('ErrorResponse', response)
         if response.status_code == 500:
@@ -276,9 +276,9 @@ class LUSIDAPI(object):
             return client_raw_response
 
         return deserialized
-    get_by_group.metadata = {'url': '/v1/api/aggregation/groups/{scope}/{groupCode}'}
+    get_aggregation_by_group.metadata = {'url': '/v1/api/aggregation/groups/{scope}/{groupCode}'}
 
-    def get_nested_data_aggregation_by_group(
+    def get_nested_aggregation_by_group(
             self, scope, group_code, request=None, custom_headers=None, raw=False, **operation_config):
         """Aggregation request data in a group hierarchy into a data tree.
 
@@ -299,7 +299,7 @@ class LUSIDAPI(object):
          :class:`HttpOperationError<msrest.exceptions.HttpOperationError>`
         """
         # Construct URL
-        url = self.get_nested_data_aggregation_by_group.metadata['url']
+        url = self.get_nested_aggregation_by_group.metadata['url']
         path_format_arguments = {
             'scope': self._serialize.url("scope", scope, 'str'),
             'groupCode': self._serialize.url("group_code", group_code, 'str')
@@ -332,7 +332,7 @@ class LUSIDAPI(object):
         deserialized = None
 
         if response.status_code == 200:
-            deserialized = self._deserialize('NestedDataAggregationResponse', response)
+            deserialized = self._deserialize('NestedAggregationResponse', response)
         if response.status_code == 400:
             deserialized = self._deserialize('ErrorResponse', response)
         if response.status_code == 500:
@@ -343,9 +343,9 @@ class LUSIDAPI(object):
             return client_raw_response
 
         return deserialized
-    get_nested_data_aggregation_by_group.metadata = {'url': '/v1/api/aggregation/groups/nested/{scope}/{groupCode}'}
+    get_nested_aggregation_by_group.metadata = {'url': '/v1/api/aggregation/groups/nested/{scope}/{groupCode}'}
 
-    def get_by_portfolio(
+    def get_aggregation_by_portfolio(
             self, scope, portfolio_code, request=None, custom_headers=None, raw=False, **operation_config):
         """Aggregate data in a portfolio.
 
@@ -366,7 +366,7 @@ class LUSIDAPI(object):
          :class:`HttpOperationError<msrest.exceptions.HttpOperationError>`
         """
         # Construct URL
-        url = self.get_by_portfolio.metadata['url']
+        url = self.get_aggregation_by_portfolio.metadata['url']
         path_format_arguments = {
             'scope': self._serialize.url("scope", scope, 'str'),
             'portfolioCode': self._serialize.url("portfolio_code", portfolio_code, 'str')
@@ -399,7 +399,7 @@ class LUSIDAPI(object):
         deserialized = None
 
         if response.status_code == 200:
-            deserialized = self._deserialize('GetAggregationResponse', response)
+            deserialized = self._deserialize('ListAggregationResponse', response)
         if response.status_code == 400:
             deserialized = self._deserialize('ErrorResponse', response)
         if response.status_code == 500:
@@ -410,9 +410,9 @@ class LUSIDAPI(object):
             return client_raw_response
 
         return deserialized
-    get_by_portfolio.metadata = {'url': '/v1/api/aggregation/portfolios/{scope}/{portfolioCode}'}
+    get_aggregation_by_portfolio.metadata = {'url': '/v1/api/aggregation/portfolios/{scope}/{portfolioCode}'}
 
-    def get_nested_data_aggregation_by_portfolio(
+    def get_nested_aggregation_by_portfolio(
             self, scope, portfolio_code, request=None, custom_headers=None, raw=False, **operation_config):
         """Aggregation request data in a portfolio into a data tree.
 
@@ -433,7 +433,7 @@ class LUSIDAPI(object):
          :class:`HttpOperationError<msrest.exceptions.HttpOperationError>`
         """
         # Construct URL
-        url = self.get_nested_data_aggregation_by_portfolio.metadata['url']
+        url = self.get_nested_aggregation_by_portfolio.metadata['url']
         path_format_arguments = {
             'scope': self._serialize.url("scope", scope, 'str'),
             'portfolioCode': self._serialize.url("portfolio_code", portfolio_code, 'str')
@@ -466,7 +466,7 @@ class LUSIDAPI(object):
         deserialized = None
 
         if response.status_code == 200:
-            deserialized = self._deserialize('NestedDataAggregationResponse', response)
+            deserialized = self._deserialize('NestedAggregationResponse', response)
         if response.status_code == 400:
             deserialized = self._deserialize('ErrorResponse', response)
         if response.status_code == 500:
@@ -477,9 +477,9 @@ class LUSIDAPI(object):
             return client_raw_response
 
         return deserialized
-    get_nested_data_aggregation_by_portfolio.metadata = {'url': '/v1/api/aggregation/portfolios/nested/{scope}/{portfolioCode}'}
+    get_nested_aggregation_by_portfolio.metadata = {'url': '/v1/api/aggregation/portfolios/nested/{scope}/{portfolioCode}'}
 
-    def get_by_results(
+    def get_aggregation_by_result_set(
             self, scope, results_key, results_date, request=None, custom_headers=None, raw=False, **operation_config):
         """Aggregate data from a result set.
 
@@ -502,7 +502,7 @@ class LUSIDAPI(object):
          :class:`HttpOperationError<msrest.exceptions.HttpOperationError>`
         """
         # Construct URL
-        url = self.get_by_results.metadata['url']
+        url = self.get_aggregation_by_result_set.metadata['url']
         path_format_arguments = {
             'scope': self._serialize.url("scope", scope, 'str'),
             'resultsKey': self._serialize.url("results_key", results_key, 'str'),
@@ -536,7 +536,7 @@ class LUSIDAPI(object):
         deserialized = None
 
         if response.status_code == 200:
-            deserialized = self._deserialize('GetAggregationResponse', response)
+            deserialized = self._deserialize('ListAggregationResponse', response)
         if response.status_code == 400:
             deserialized = self._deserialize('ErrorResponse', response)
         if response.status_code == 500:
@@ -547,9 +547,9 @@ class LUSIDAPI(object):
             return client_raw_response
 
         return deserialized
-    get_by_results.metadata = {'url': '/v1/api/aggregation/results/{scope}/{resultsKey}/{resultsDate}'}
+    get_aggregation_by_result_set.metadata = {'url': '/v1/api/aggregation/results/{scope}/{resultsKey}/{resultsDate}'}
 
-    def get_nested_data_aggregation_by_results(
+    def get_nested_aggregation_by_result_set(
             self, scope, results_key, results_date, request=None, custom_headers=None, raw=False, **operation_config):
         """Aggregate data from a result set into a nested structure.
 
@@ -572,7 +572,7 @@ class LUSIDAPI(object):
          :class:`HttpOperationError<msrest.exceptions.HttpOperationError>`
         """
         # Construct URL
-        url = self.get_nested_data_aggregation_by_results.metadata['url']
+        url = self.get_nested_aggregation_by_result_set.metadata['url']
         path_format_arguments = {
             'scope': self._serialize.url("scope", scope, 'str'),
             'resultsKey': self._serialize.url("results_key", results_key, 'str'),
@@ -606,7 +606,7 @@ class LUSIDAPI(object):
         deserialized = None
 
         if response.status_code == 200:
-            deserialized = self._deserialize('NestedDataAggregationResponse', response)
+            deserialized = self._deserialize('NestedAggregationResponse', response)
         if response.status_code == 400:
             deserialized = self._deserialize('ErrorResponse', response)
         if response.status_code == 500:
@@ -617,7 +617,7 @@ class LUSIDAPI(object):
             return client_raw_response
 
         return deserialized
-    get_nested_data_aggregation_by_results.metadata = {'url': '/v1/api/aggregation/results/nested/{scope}/{resultsKey}/{resultsDate}'}
+    get_nested_aggregation_by_result_set.metadata = {'url': '/v1/api/aggregation/results/nested/{scope}/{resultsKey}/{resultsDate}'}
 
     def list_analytic_stores(
             self, as_at=None, sort_by=None, start=None, limit=None, filter=None, custom_headers=None, raw=False, **operation_config):
@@ -1865,6 +1865,80 @@ class LUSIDAPI(object):
         return deserialized
     update_portfolio_group.metadata = {'url': '/v1/api/groups/portfolios/{scope}/{code}/update'}
 
+    def portfolio_groups_search(
+            self, request=None, sort_by=None, start=None, limit=None, filter=None, custom_headers=None, raw=False, **operation_config):
+        """Search portfolio groups.
+
+        :param request:
+        :type request: object
+        :param sort_by:
+        :type sort_by: list[str]
+        :param start:
+        :type start: int
+        :param limit:
+        :type limit: int
+        :param filter:
+        :type filter: str
+        :param dict custom_headers: headers that will be added to the request
+        :param bool raw: returns the direct response alongside the
+         deserialized response
+        :param operation_config: :ref:`Operation configuration
+         overrides<msrest:optionsforoperations>`.
+        :return: object or ClientRawResponse if raw=true
+        :rtype: object or ~msrest.pipeline.ClientRawResponse
+        :raises:
+         :class:`HttpOperationError<msrest.exceptions.HttpOperationError>`
+        """
+        # Construct URL
+        url = self.portfolio_groups_search.metadata['url']
+
+        # Construct parameters
+        query_parameters = {}
+        if sort_by is not None:
+            query_parameters['sortBy'] = self._serialize.query("sort_by", sort_by, '[str]', div=',')
+        if start is not None:
+            query_parameters['start'] = self._serialize.query("start", start, 'int')
+        if limit is not None:
+            query_parameters['limit'] = self._serialize.query("limit", limit, 'int')
+        if filter is not None:
+            query_parameters['filter'] = self._serialize.query("filter", filter, 'str')
+
+        # Construct headers
+        header_parameters = {}
+        header_parameters['Content-Type'] = 'application/json-patch+json; charset=utf-8'
+        if custom_headers:
+            header_parameters.update(custom_headers)
+
+        # Construct body
+        if request is not None:
+            body_content = self._serialize.body(request, 'object')
+        else:
+            body_content = None
+
+        # Construct and send request
+        request = self._client.post(url, query_parameters)
+        response = self._client.send(
+            request, header_parameters, body_content, stream=False, **operation_config)
+
+        if response.status_code not in [200, 400, 500]:
+            raise HttpOperationError(self._deserialize, response)
+
+        deserialized = None
+
+        if response.status_code == 200:
+            deserialized = self._deserialize('ResourceListGroupDto', response)
+        if response.status_code == 400:
+            deserialized = self._deserialize('ErrorResponse', response)
+        if response.status_code == 500:
+            deserialized = self._deserialize('ErrorResponse', response)
+
+        if raw:
+            client_raw_response = ClientRawResponse(deserialized, response)
+            return client_raw_response
+
+        return deserialized
+    portfolio_groups_search.metadata = {'url': '/v1/api/groups/search'}
+
     def get_health(
             self, custom_headers=None, raw=False, **operation_config):
         """Simple heartbeat method for the api.
@@ -2367,7 +2441,7 @@ class LUSIDAPI(object):
         return deserialized
     delete_personalisation.metadata = {'url': '/v1/api/personalisations'}
 
-    def list_scopes(
+    def list_portfolio_scopes(
             self, sort_by=None, start=None, limit=None, custom_headers=None, raw=False, **operation_config):
         """List scopes that contain portfolios.
 
@@ -2390,7 +2464,7 @@ class LUSIDAPI(object):
          :class:`HttpOperationError<msrest.exceptions.HttpOperationError>`
         """
         # Construct URL
-        url = self.list_scopes.metadata['url']
+        url = self.list_portfolio_scopes.metadata['url']
 
         # Construct parameters
         query_parameters = {}
@@ -2428,7 +2502,7 @@ class LUSIDAPI(object):
             return client_raw_response
 
         return deserialized
-    list_scopes.metadata = {'url': '/v1/api/portfolios'}
+    list_portfolio_scopes.metadata = {'url': '/v1/api/portfolios'}
 
     def list_portfolios(
             self, scope, effective_at=None, as_at=None, sort_by=None, start=None, limit=None, filter=None, custom_headers=None, raw=False, **operation_config):
@@ -2943,7 +3017,7 @@ class LUSIDAPI(object):
         return deserialized
     get_details.metadata = {'url': '/v1/api/portfolios/{scope}/{code}/details'}
 
-    def upsert_details(
+    def upsert_portfolio_details(
             self, scope, code, details=None, effective_at=None, custom_headers=None, raw=False, **operation_config):
         """Add/update portfolio details.
 
@@ -2970,7 +3044,7 @@ class LUSIDAPI(object):
          :class:`HttpOperationError<msrest.exceptions.HttpOperationError>`
         """
         # Construct URL
-        url = self.upsert_details.metadata['url']
+        url = self.upsert_portfolio_details.metadata['url']
         path_format_arguments = {
             'scope': self._serialize.url("scope", scope, 'str'),
             'code': self._serialize.url("code", code, 'str')
@@ -3018,9 +3092,9 @@ class LUSIDAPI(object):
             return client_raw_response
 
         return deserialized
-    upsert_details.metadata = {'url': '/v1/api/portfolios/{scope}/{code}/details'}
+    upsert_portfolio_details.metadata = {'url': '/v1/api/portfolios/{scope}/{code}/details'}
 
-    def delete_details(
+    def delete_portfolio_details(
             self, scope, code, effective_at=None, custom_headers=None, raw=False, **operation_config):
         """Delete portfolio details.
 
@@ -3043,7 +3117,7 @@ class LUSIDAPI(object):
          :class:`HttpOperationError<msrest.exceptions.HttpOperationError>`
         """
         # Construct URL
-        url = self.delete_details.metadata['url']
+        url = self.delete_portfolio_details.metadata['url']
         path_format_arguments = {
             'scope': self._serialize.url("scope", scope, 'str'),
             'code': self._serialize.url("code", code, 'str')
@@ -3084,7 +3158,7 @@ class LUSIDAPI(object):
             return client_raw_response
 
         return deserialized
-    delete_details.metadata = {'url': '/v1/api/portfolios/{scope}/{code}/details'}
+    delete_portfolio_details.metadata = {'url': '/v1/api/portfolios/{scope}/{code}/details'}
 
     def get_aggregate_holdings(
             self, scope, code, effective_at=None, as_at=None, sort_by=None, start=None, limit=None, filter=None, custom_headers=None, raw=False, **operation_config):
@@ -3187,7 +3261,7 @@ class LUSIDAPI(object):
         :param effective_at: Effective date
         :type effective_at: datetime
         :param holdings:
-        :type holdings: list[~lusid.models.HoldingDto]
+        :type holdings: list[~lusid.models.HoldingAdjustmentDto]
         :param dict custom_headers: headers that will be added to the request
         :param bool raw: returns the direct response alongside the
          deserialized response
@@ -3218,7 +3292,7 @@ class LUSIDAPI(object):
 
         # Construct body
         if holdings is not None:
-            body_content = self._serialize.body(holdings, '[HoldingDto]')
+            body_content = self._serialize.body(holdings, '[HoldingAdjustmentDto]')
         else:
             body_content = None
 
@@ -3411,7 +3485,7 @@ class LUSIDAPI(object):
         return deserialized
     upsert_portfolio_properties.metadata = {'url': '/v1/api/portfolios/{scope}/{code}/properties'}
 
-    def delete_property(
+    def delete_portfolio_property(
             self, scope, code, property=None, effective_at=None, custom_headers=None, raw=False, **operation_config):
         """Delete property.
 
@@ -3436,7 +3510,7 @@ class LUSIDAPI(object):
          :class:`HttpOperationError<msrest.exceptions.HttpOperationError>`
         """
         # Construct URL
-        url = self.delete_property.metadata['url']
+        url = self.delete_portfolio_property.metadata['url']
         path_format_arguments = {
             'scope': self._serialize.url("scope", scope, 'str'),
             'code': self._serialize.url("code", code, 'str')
@@ -3479,9 +3553,9 @@ class LUSIDAPI(object):
             return client_raw_response
 
         return deserialized
-    delete_property.metadata = {'url': '/v1/api/portfolios/{scope}/{code}/properties'}
+    delete_portfolio_property.metadata = {'url': '/v1/api/portfolios/{scope}/{code}/properties'}
 
-    def delete_properties(
+    def delete_portfolio_properties(
             self, scope, code, effective_at=None, custom_headers=None, raw=False, **operation_config):
         """Delete properties.
 
@@ -3504,7 +3578,7 @@ class LUSIDAPI(object):
          :class:`HttpOperationError<msrest.exceptions.HttpOperationError>`
         """
         # Construct URL
-        url = self.delete_properties.metadata['url']
+        url = self.delete_portfolio_properties.metadata['url']
         path_format_arguments = {
             'scope': self._serialize.url("scope", scope, 'str'),
             'code': self._serialize.url("code", code, 'str')
@@ -3545,7 +3619,7 @@ class LUSIDAPI(object):
             return client_raw_response
 
         return deserialized
-    delete_properties.metadata = {'url': '/v1/api/portfolios/{scope}/{code}/properties/all'}
+    delete_portfolio_properties.metadata = {'url': '/v1/api/portfolios/{scope}/{code}/properties/all'}
 
     def get_trades(
             self, scope, code, from_trade_date=None, to_trade_date=None, as_at=None, sort_by=None, start=None, limit=None, property_filter=None, filter=None, custom_headers=None, raw=False, **operation_config):
@@ -4552,7 +4626,7 @@ class LUSIDAPI(object):
         return deserialized
     get_property_definition_scopes_in_domain.metadata = {'url': '/v1/api/propertydefinitions/{domain}/_scopes'}
 
-    def get_all_from_scope(
+    def get_all_property_keys_in_scope(
             self, domain, scope, sort_by=None, start=None, limit=None, filter=None, custom_headers=None, raw=False, **operation_config):
         """Gets all properties in a scope.
 
@@ -4580,7 +4654,7 @@ class LUSIDAPI(object):
          :class:`HttpOperationError<msrest.exceptions.HttpOperationError>`
         """
         # Construct URL
-        url = self.get_all_from_scope.metadata['url']
+        url = self.get_all_property_keys_in_scope.metadata['url']
         path_format_arguments = {
             'domain': self._serialize.url("domain", domain, 'str'),
             'scope': self._serialize.url("scope", scope, 'str')
@@ -4627,7 +4701,7 @@ class LUSIDAPI(object):
             return client_raw_response
 
         return deserialized
-    get_all_from_scope.metadata = {'url': '/v1/api/propertydefinitions/{domain}/{scope}'}
+    get_all_property_keys_in_scope.metadata = {'url': '/v1/api/propertydefinitions/{domain}/{scope}'}
 
     def get_property_definition(
             self, domain, scope, name, as_at=None, custom_headers=None, raw=False, **operation_config):
@@ -4895,7 +4969,7 @@ class LUSIDAPI(object):
         return deserialized
     create_property_data_format.metadata = {'url': '/v1/api/propertyformats'}
 
-    def list(
+    def list_property_data_formats(
             self, scope, include_default=None, include_system=None, sort_by=None, start=None, limit=None, filter=None, custom_headers=None, raw=False, **operation_config):
         """Lists all property data formats in the specified scope.
 
@@ -4924,7 +4998,7 @@ class LUSIDAPI(object):
          :class:`HttpOperationError<msrest.exceptions.HttpOperationError>`
         """
         # Construct URL
-        url = self.list.metadata['url']
+        url = self.list_property_data_formats.metadata['url']
         path_format_arguments = {
             'scope': self._serialize.url("scope", scope, 'str')
         }
@@ -4974,7 +5048,7 @@ class LUSIDAPI(object):
             return client_raw_response
 
         return deserialized
-    list.metadata = {'url': '/v1/api/propertyformats/{scope}'}
+    list_property_data_formats.metadata = {'url': '/v1/api/propertyformats/{scope}'}
 
     def get_property_data_format(
             self, scope, name, custom_headers=None, raw=False, **operation_config):
@@ -5383,7 +5457,7 @@ class LUSIDAPI(object):
         return deserialized
     delete_reference_portfolio.metadata = {'url': '/v1/api/reference/{scope}/{code}'}
 
-    def get_constituents(
+    def get_reference_portfolio_constituents(
             self, scope, effective_at, code, reference_portfolio_id=None, as_at=None, sort_by=None, start=None, limit=None, custom_headers=None, raw=False, **operation_config):
         """Get all the constituents in a reference portfolio.
 
@@ -5414,7 +5488,7 @@ class LUSIDAPI(object):
          :class:`HttpOperationError<msrest.exceptions.HttpOperationError>`
         """
         # Construct URL
-        url = self.get_constituents.metadata['url']
+        url = self.get_reference_portfolio_constituents.metadata['url']
         path_format_arguments = {
             'scope': self._serialize.url("scope", scope, 'str'),
             'effectiveAt': self._serialize.url("effective_at", effective_at, 'iso-8601'),
@@ -5464,9 +5538,9 @@ class LUSIDAPI(object):
             return client_raw_response
 
         return deserialized
-    get_constituents.metadata = {'url': '/v1/api/reference/{scope}/{code}/{effectiveAt}/constituents'}
+    get_reference_portfolio_constituents.metadata = {'url': '/v1/api/reference/{scope}/{code}/{effectiveAt}/constituents'}
 
-    def upsert_constituents(
+    def upsert_reference_portfolio_constituents(
             self, scope, code, effective_at, constituents=None, custom_headers=None, raw=False, **operation_config):
         """Add constituents to a specific reference portfolio.
 
@@ -5490,7 +5564,7 @@ class LUSIDAPI(object):
          :class:`HttpOperationError<msrest.exceptions.HttpOperationError>`
         """
         # Construct URL
-        url = self.upsert_constituents.metadata['url']
+        url = self.upsert_reference_portfolio_constituents.metadata['url']
         path_format_arguments = {
             'scope': self._serialize.url("scope", scope, 'str'),
             'code': self._serialize.url("code", code, 'str'),
@@ -5537,7 +5611,7 @@ class LUSIDAPI(object):
             return client_raw_response
 
         return deserialized
-    upsert_constituents.metadata = {'url': '/v1/api/reference/{scope}/{code}/{effectiveAt}/constituents'}
+    upsert_reference_portfolio_constituents.metadata = {'url': '/v1/api/reference/{scope}/{code}/{effectiveAt}/constituents'}
 
     def get_results(
             self, scope, key, date_parameter, as_at=None, sort_by=None, start=None, limit=None, custom_headers=None, raw=False, **operation_config):
@@ -5701,9 +5775,9 @@ class LUSIDAPI(object):
          'Portfolio', 'PortfolioSearchResult', 'PortfolioDetails',
          'PortfolioProperties', 'Version', 'AddTradeProperty', 'AnalyticStore',
          'AnalyticStoreKey', 'UpsertPortfolioTrades', 'Group', 'Constituent',
-         'Trade', 'PortfolioHolding', 'ErrorDetail', 'ErrorResponse',
-         'InstrumentDefinition', 'ProcessedCommand', 'CreatePortfolio',
-         'CreateAnalyticStore', 'CreateClientSecurity',
+         'Trade', 'PortfolioHolding', 'AdjustHolding', 'ErrorDetail',
+         'ErrorResponse', 'InstrumentDefinition', 'ProcessedCommand',
+         'CreatePortfolio', 'CreateAnalyticStore', 'CreateClientSecurity',
          'CreateDerivedPortfolio', 'CreateGroup', 'CreatePropertyDataFormat',
          'CreatePropertyDefinition', 'UpdatePortfolio', 'UpdateGroup',
          'UpdatePropertyDataFormat', 'UpdatePropertyDefinition',
@@ -6060,7 +6134,7 @@ class LUSIDAPI(object):
         return deserialized
     get_security.metadata = {'url': '/v1/api/securities/{uid}'}
 
-    def lookup_from_codes(
+    def lookup_securities_from_codes(
             self, code_type, codes=None, as_at=None, property_keys=None, custom_headers=None, raw=False, **operation_config):
         """Lookup more than one security by supplying a collection of
         non-Finbourne codes.  Optionally, decorate each security with specific
@@ -6087,7 +6161,7 @@ class LUSIDAPI(object):
          :class:`HttpOperationError<msrest.exceptions.HttpOperationError>`
         """
         # Construct URL
-        url = self.lookup_from_codes.metadata['url']
+        url = self.lookup_securities_from_codes.metadata['url']
         path_format_arguments = {
             'codeType': self._serialize.url("code_type", code_type, 'str')
         }
@@ -6129,9 +6203,9 @@ class LUSIDAPI(object):
             return client_raw_response
 
         return deserialized
-    lookup_from_codes.metadata = {'url': '/v1/api/securities/lookup/{codeType}'}
+    lookup_securities_from_codes.metadata = {'url': '/v1/api/securities/lookup/{codeType}'}
 
-    def lookup_from_codes_bulk(
+    def lookup_securities_from_codes_bulk(
             self, code_type, codes=None, as_at=None, property_keys=None, custom_headers=None, raw=False, **operation_config):
         """Lookup a large number of securities by supplying a collection of
         non-Finbourne codes.  Optionally, decorate each security with specific
@@ -6158,7 +6232,7 @@ class LUSIDAPI(object):
          :class:`HttpOperationError<msrest.exceptions.HttpOperationError>`
         """
         # Construct URL
-        url = self.lookup_from_codes_bulk.metadata['url']
+        url = self.lookup_securities_from_codes_bulk.metadata['url']
         path_format_arguments = {
             'codeType': self._serialize.url("code_type", code_type, 'str')
         }
@@ -6205,4 +6279,4 @@ class LUSIDAPI(object):
             return client_raw_response
 
         return deserialized
-    lookup_from_codes_bulk.metadata = {'url': '/v1/api/securities/lookup/{codeType}'}
+    lookup_securities_from_codes_bulk.metadata = {'url': '/v1/api/securities/lookup/{codeType}'}

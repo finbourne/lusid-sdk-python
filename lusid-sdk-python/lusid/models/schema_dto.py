@@ -33,7 +33,7 @@ class SchemaDto(Model):
      'PortfolioSearchResult', 'PortfolioDetails', 'PortfolioProperties',
      'Version', 'AddTradeProperty', 'AnalyticStore', 'AnalyticStoreKey',
      'UpsertPortfolioTrades', 'Group', 'Constituent', 'Trade',
-     'PortfolioHolding', 'ErrorDetail', 'ErrorResponse',
+     'PortfolioHolding', 'AdjustHolding', 'ErrorDetail', 'ErrorResponse',
      'InstrumentDefinition', 'ProcessedCommand', 'CreatePortfolio',
      'CreateAnalyticStore', 'CreateClientSecurity', 'CreateDerivedPortfolio',
      'CreateGroup', 'CreatePropertyDataFormat', 'CreatePropertyDefinition',
