@@ -30,8 +30,8 @@ class TradeDto(Model):
     :param trade_id: Unique trade identifier
     :type trade_id: str
     :param type: LUSID transaction type code - Buy, Sell, StockIn, StockOut,
-     etc. Possible values include: 'Buy', 'Sell', 'StockIn', 'StockOut'
-    :type type: str or ~lusid.models.enum
+     etc
+    :type type: str
     :param security_uid: Unique security identifier
     :type security_uid: str
     :param trade_date: Trade date
@@ -44,8 +44,12 @@ class TradeDto(Model):
     :type trade_price: float
     :param total_consideration: Total value of the trade
     :type total_consideration: float
+    :param exchange_rate: Rate between trade and settle currency
+    :type exchange_rate: float
     :param settlement_currency: Settlement currency
     :type settlement_currency: str
+    :param trade_currency: Trade currency
+    :type trade_currency: str
     :param properties:
     :type properties: list[~lusid.models.PropertyDto]
     :param counterparty_id: Counterparty identifier
@@ -88,7 +92,9 @@ class TradeDto(Model):
         'units': {'key': 'units', 'type': 'float'},
         'trade_price': {'key': 'tradePrice', 'type': 'float'},
         'total_consideration': {'key': 'totalConsideration', 'type': 'float'},
+        'exchange_rate': {'key': 'exchangeRate', 'type': 'float'},
         'settlement_currency': {'key': 'settlementCurrency', 'type': 'str'},
+        'trade_currency': {'key': 'tradeCurrency', 'type': 'str'},
         'properties': {'key': 'properties', 'type': '[PropertyDto]'},
         'counterparty_id': {'key': 'counterpartyId', 'type': 'str'},
         'source': {'key': 'source', 'type': 'str'},
@@ -98,7 +104,7 @@ class TradeDto(Model):
         'netting_set': {'key': 'nettingSet', 'type': 'str'},
     }
 
-    def __init__(self, trade_id, type, security_uid, trade_date, settlement_date, units, trade_price, total_consideration, settlement_currency, source, properties=None, counterparty_id=None, dividend_state=None, trade_price_type=None, unit_type=None, netting_set=None):
+    def __init__(self, trade_id, type, security_uid, trade_date, settlement_date, units, trade_price, total_consideration, settlement_currency, source, exchange_rate=None, trade_currency=None, properties=None, counterparty_id=None, dividend_state=None, trade_price_type=None, unit_type=None, netting_set=None):
         super(TradeDto, self).__init__()
         self.trade_id = trade_id
         self.type = type
@@ -108,7 +114,9 @@ class TradeDto(Model):
         self.units = units
         self.trade_price = trade_price
         self.total_consideration = total_consideration
+        self.exchange_rate = exchange_rate
         self.settlement_currency = settlement_currency
+        self.trade_currency = trade_currency
         self.properties = properties
         self.counterparty_id = counterparty_id
         self.source = source

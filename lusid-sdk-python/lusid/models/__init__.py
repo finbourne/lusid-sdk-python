@@ -46,7 +46,7 @@ from .create_group_request import CreateGroupRequest
 from .version_dto import VersionDto
 from .group_dto import GroupDto
 from .processed_command_dto import ProcessedCommandDto
-from .portfolio_dto import PortfolioDto
+from .complete_portfolio_dto import CompletePortfolioDto
 from .expanded_group_dto import ExpandedGroupDto
 from .update_group_request import UpdateGroupRequest
 from .login_response import LoginResponse
@@ -54,6 +54,7 @@ from .web_log_message import WebLogMessage
 from .personalisation_dto import PersonalisationDto
 from .upsert_personalisations_response import UpsertPersonalisationsResponse
 from .create_portfolio_request import CreatePortfolioRequest
+from .portfolio_dto import PortfolioDto
 from .update_portfolio_request import UpdatePortfolioRequest
 from .portfolio_details_dto import PortfolioDetailsDto
 from .portfolio_details_request import PortfolioDetailsRequest
@@ -130,7 +131,7 @@ __all__ = [
     'VersionDto',
     'GroupDto',
     'ProcessedCommandDto',
-    'PortfolioDto',
+    'CompletePortfolioDto',
     'ExpandedGroupDto',
     'UpdateGroupRequest',
     'LoginResponse',
@@ -138,6 +139,7 @@ __all__ = [
     'PersonalisationDto',
     'UpsertPersonalisationsResponse',
     'CreatePortfolioRequest',
+    'PortfolioDto',
     'UpdatePortfolioRequest',
     'PortfolioDetailsDto',
     'PortfolioDetailsRequest',

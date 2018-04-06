@@ -98,14 +98,16 @@ class LUSIDAPI(object):
     | Field|Type|Description |
     | ---|---|--- |
     | TradeId|String|Unique trade identifier |
-    | Type|TransactionType|LUSID transaction type code - Buy, Sell, StockIn, StockOut, etc |
+    | Type|String|LUSID transaction type code - Buy, Sell, StockIn, StockOut, etc |
     | SecurityUid|SecurityUid|Unique security identifier |
     | TradeDate|DateTimeOffset|Trade date |
     | SettlementDate|DateTimeOffset|Settlement date |
     | Units|Decimal|Quantity of trade in units of the security |
     | TradePrice|Decimal|Execution price for the trade |
     | TotalConsideration|Decimal|Total value of the trade |
+    | ExchangeRate|Nullable`1|Rate between trade and settle currency |
     | SettlementCurrency|String|Settlement currency |
+    | TradeCurrency|String|Trade currency |
     | CounterpartyId|String|Counterparty identifier |
     | Source|TradeSource|Where this trade came from, either Client or System |
     | DividendState|DividendState|  |
@@ -121,6 +123,7 @@ class LUSIDAPI(object):
     | Units|Decimal|Quantity of holding |
     | SettledUnits|Decimal|Settled quantity of holding |
     | Cost|Decimal|Book cost of holding in trade currency |
+    | CostPortfolioCcy|Decimal|Book cost of holding in portfolio currency |
     | Transaction|TradeDto|If this is commitment-type holding, the transaction behind it |
     ## Property
     Properties are key-value pairs that can be applied to any entity within a domain (where a domain is `trade`, `portfolio`, `security` etc).  Properties must be defined before use with a `PropertyDefinition` and can then subsequently be added to entities.
@@ -206,7 +209,7 @@ class LUSIDAPI(object):
         self._client = ServiceClient(self.config.credentials, self.config)
 
         client_models = {k: v for k, v in models.__dict__.items() if isinstance(v, type)}
-        self.api_version = '0.6.55'
+        self.api_version = '0.6.68'
         self._serialize = Serializer(client_models)
         self._deserialize = Deserializer(client_models)
 
@@ -1459,7 +1462,7 @@ class LUSIDAPI(object):
     get_portfolio_group_commands.metadata = {'url': '/v1/api/groups/portfolios/{scope}/{code}/commands'}
 
     def get_portfolio_group_expansion(
-            self, scope, code, effective_at=None, as_at=None, custom_headers=None, raw=False, **operation_config):
+            self, scope, code, effective_at=None, as_at=None, property_filter=None, custom_headers=None, raw=False, **operation_config):
         """Get a full expansion of an existing group.
 
         :param scope:
@@ -1470,6 +1473,8 @@ class LUSIDAPI(object):
         :type effective_at: datetime
         :param as_at:
         :type as_at: datetime
+        :param property_filter:
+        :type property_filter: list[str]
         :param dict custom_headers: headers that will be added to the request
         :param bool raw: returns the direct response alongside the
          deserialized response
@@ -1494,6 +1499,8 @@ class LUSIDAPI(object):
             query_parameters['effectiveAt'] = self._serialize.query("effective_at", effective_at, 'iso-8601')
         if as_at is not None:
             query_parameters['asAt'] = self._serialize.query("as_at", as_at, 'iso-8601')
+        if property_filter is not None:
+            query_parameters['propertyFilter'] = self._serialize.query("property_filter", property_filter, '[str]', div=',')
 
         # Construct headers
         header_parameters = {}
@@ -5772,12 +5779,13 @@ class LUSIDAPI(object):
         :param entity: Possible values include: 'PropertyKey', 'FieldSchema',
          'Personalisation', 'Security', 'Property', 'Login',
          'PropertyDefinition', 'PropertyDataFormat', 'AggregationResponseNode',
-         'Portfolio', 'PortfolioSearchResult', 'PortfolioDetails',
-         'PortfolioProperties', 'Version', 'AddTradeProperty', 'AnalyticStore',
-         'AnalyticStoreKey', 'UpsertPortfolioTrades', 'Group', 'Constituent',
-         'Trade', 'PortfolioHolding', 'AdjustHolding', 'ErrorDetail',
-         'ErrorResponse', 'InstrumentDefinition', 'ProcessedCommand',
-         'CreatePortfolio', 'CreateAnalyticStore', 'CreateClientSecurity',
+         'Portfolio', 'CompletePortfolio', 'PortfolioSearchResult',
+         'PortfolioDetails', 'PortfolioProperties', 'Version',
+         'AddTradeProperty', 'AnalyticStore', 'AnalyticStoreKey',
+         'UpsertPortfolioTrades', 'Group', 'Constituent', 'Trade',
+         'PortfolioHolding', 'AdjustHolding', 'ErrorDetail', 'ErrorResponse',
+         'InstrumentDefinition', 'ProcessedCommand', 'CreatePortfolio',
+         'CreateAnalyticStore', 'CreateClientSecurity',
          'CreateDerivedPortfolio', 'CreateGroup', 'CreatePropertyDataFormat',
          'CreatePropertyDefinition', 'UpdatePortfolio', 'UpdateGroup',
          'UpdatePropertyDataFormat', 'UpdatePropertyDefinition',

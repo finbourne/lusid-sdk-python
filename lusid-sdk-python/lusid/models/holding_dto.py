@@ -40,6 +40,8 @@ class HoldingDto(Model):
     :type settled_units: float
     :param cost: Book cost of holding in trade currency
     :type cost: float
+    :param cost_portfolio_ccy: Book cost of holding in portfolio currency
+    :type cost_portfolio_ccy: float
     :param transaction: If this is commitment-type holding, the transaction
      behind it
     :type transaction: ~lusid.models.TradeDto
@@ -51,6 +53,7 @@ class HoldingDto(Model):
         'units': {'required': True},
         'settled_units': {'required': True},
         'cost': {'required': True},
+        'cost_portfolio_ccy': {'required': True},
     }
 
     _attribute_map = {
@@ -60,10 +63,11 @@ class HoldingDto(Model):
         'units': {'key': 'units', 'type': 'float'},
         'settled_units': {'key': 'settledUnits', 'type': 'float'},
         'cost': {'key': 'cost', 'type': 'float'},
+        'cost_portfolio_ccy': {'key': 'costPortfolioCcy', 'type': 'float'},
         'transaction': {'key': 'transaction', 'type': 'TradeDto'},
     }
 
-    def __init__(self, security_uid, holding_type, units, settled_units, cost, properties=None, transaction=None):
+    def __init__(self, security_uid, holding_type, units, settled_units, cost, cost_portfolio_ccy, properties=None, transaction=None):
         super(HoldingDto, self).__init__()
         self.security_uid = security_uid
         self.properties = properties
@@ -71,4 +75,5 @@ class HoldingDto(Model):
         self.units = units
         self.settled_units = settled_units
         self.cost = cost
+        self.cost_portfolio_ccy = cost_portfolio_ccy
         self.transaction = transaction
