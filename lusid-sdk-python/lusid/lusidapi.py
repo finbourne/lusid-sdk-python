@@ -209,7 +209,7 @@ class LUSIDAPI(object):
         self._client = ServiceClient(self.config.credentials, self.config)
 
         client_models = {k: v for k, v in models.__dict__.items() if isinstance(v, type)}
-        self.api_version = '0.6.68'
+        self.api_version = '0.6.70'
         self._serialize = Serializer(client_models)
         self._deserialize = Deserializer(client_models)
 
@@ -5967,7 +5967,7 @@ class LUSIDAPI(object):
         return deserialized
     get_value_types.metadata = {'url': '/v1/api/schema/types'}
 
-    def try_add_client_security(
+    def batch_add_client_securities(
             self, definitions=None, custom_headers=None, raw=False, **operation_config):
         """Attempt to create one or more client securities. Failed securities will
         be identified in the body of the response.
@@ -5985,7 +5985,7 @@ class LUSIDAPI(object):
          :class:`HttpOperationError<msrest.exceptions.HttpOperationError>`
         """
         # Construct URL
-        url = self.try_add_client_security.metadata['url']
+        url = self.batch_add_client_securities.metadata['url']
 
         # Construct parameters
         query_parameters = {}
@@ -6024,9 +6024,9 @@ class LUSIDAPI(object):
             return client_raw_response
 
         return deserialized
-    try_add_client_security.metadata = {'url': '/v1/api/securities'}
+    batch_add_client_securities.metadata = {'url': '/v1/api/securities'}
 
-    def try_delete_client_security(
+    def batch_delete_client_securities(
             self, uids=None, custom_headers=None, raw=False, **operation_config):
         """Attempt to delete one or more client securities. Failed securities will
         be identified in the body of the response.
@@ -6044,7 +6044,7 @@ class LUSIDAPI(object):
          :class:`HttpOperationError<msrest.exceptions.HttpOperationError>`
         """
         # Construct URL
-        url = self.try_delete_client_security.metadata['url']
+        url = self.batch_delete_client_securities.metadata['url']
 
         # Construct parameters
         query_parameters = {}
@@ -6076,7 +6076,7 @@ class LUSIDAPI(object):
             return client_raw_response
 
         return deserialized
-    try_delete_client_security.metadata = {'url': '/v1/api/securities'}
+    batch_delete_client_securities.metadata = {'url': '/v1/api/securities'}
 
     def get_security(
             self, uid, as_at=None, property_keys=None, custom_headers=None, raw=False, **operation_config):
