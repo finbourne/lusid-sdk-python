@@ -291,6 +291,14 @@ class TestFinbourneApi(TestCase):
 
         self.assertGreater(len(fbn_ids.values), 0)
 
+    def test_add_securities(self):
+
+        credentials = BasicTokenAuthentication(TestFinbourneApi.api_token)
+        client = lusid.LUSIDAPI(credentials, TestFinbourneApi.api_url)
+
+        secid="added-sec-{}".format(str(uuid.uuid4()))        
+        client.batch_add_client_securities([models.CreateClientSecurityRequest(secid,secid,[])])
+
     def test_portfolio_aggregation(self):
 
         credentials = BasicTokenAuthentication(TestFinbourneApi.api_token)
