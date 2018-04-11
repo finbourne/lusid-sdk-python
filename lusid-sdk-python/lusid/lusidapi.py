@@ -59,8 +59,10 @@ class LUSIDAPI(object):
     """# Introduction
     This page documents the [LUSID API](https://api.finbourne.com/swagger), which allows authorised clients to query and update their data within the LUSID platform.
     SDKs to interact with the LUSID API are available in the following languages :
-    * [Python](https://github.com/finbourne/lusid-sdk-python)
+    * [C#](https://github.com/finbourne/lusid-sdk-csharp)
     * [Java](https://github.com/finbourne/lusid-sdk-java)
+    * [JavaScript](https://github.com/finbourne/lusid-sdk-js)
+    * [Python](https://github.com/finbourne/lusid-sdk-python)
     # Immutable Events
     A core tenet of the LUSID platform is the concept of an immutable data store.  This gives the ability to consistently reproduce the state of the system for any given point in bi-temporal space.  In order to achieve this LUSID has implemented an append only event store for all data types.  New events, including historical amendments, are added to the end of the event stream and then 'played back' in order to construct the state.  Given that all the events from T0 are required in order to reconstruct the state, there can be significant computational complexity and cost involved.  FINBOURNE have employed a number of techniques and optimisations in order to produce consistent performance characteristics e.g. using snapshots which has resulted in a highly performance and scalable platform.
     # Data Model
@@ -209,10 +211,143 @@ class LUSIDAPI(object):
         self._client = ServiceClient(self.config.credentials, self.config)
 
         client_models = {k: v for k, v in models.__dict__.items() if isinstance(v, type)}
-        self.api_version = '0.6.70'
+        self.api_version = '0.6.72'
         self._serialize = Serializer(client_models)
         self._deserialize = Deserializer(client_models)
 
+
+    def list_corporate_actions(
+            self, scope, source_id, effective_date=None, as_at=None, custom_headers=None, raw=False, **operation_config):
+        """Gets a corporate action based on dates.
+
+        :param scope: Scope
+        :type scope: str
+        :param source_id: Corporate action source id
+        :type source_id: str
+        :param effective_date: Effective Date
+        :type effective_date: datetime
+        :param as_at: AsAt Date filter
+        :type as_at: datetime
+        :param dict custom_headers: headers that will be added to the request
+        :param bool raw: returns the direct response alongside the
+         deserialized response
+        :param operation_config: :ref:`Operation configuration
+         overrides<msrest:optionsforoperations>`.
+        :return: object or ClientRawResponse if raw=true
+        :rtype: object or ~msrest.pipeline.ClientRawResponse
+        :raises:
+         :class:`HttpOperationError<msrest.exceptions.HttpOperationError>`
+        """
+        # Construct URL
+        url = self.list_corporate_actions.metadata['url']
+        path_format_arguments = {
+            'scope': self._serialize.url("scope", scope, 'str'),
+            'sourceId': self._serialize.url("source_id", source_id, 'str')
+        }
+        url = self._client.format_url(url, **path_format_arguments)
+
+        # Construct parameters
+        query_parameters = {}
+        if effective_date is not None:
+            query_parameters['effectiveDate'] = self._serialize.query("effective_date", effective_date, 'iso-8601')
+        if as_at is not None:
+            query_parameters['asAt'] = self._serialize.query("as_at", as_at, 'iso-8601')
+
+        # Construct headers
+        header_parameters = {}
+        header_parameters['Content-Type'] = 'application/json; charset=utf-8'
+        if custom_headers:
+            header_parameters.update(custom_headers)
+
+        # Construct and send request
+        request = self._client.get(url, query_parameters)
+        response = self._client.send(request, header_parameters, stream=False, **operation_config)
+
+        if response.status_code not in [200, 404, 500]:
+            raise HttpOperationError(self._deserialize, response)
+
+        deserialized = None
+
+        if response.status_code == 200:
+            deserialized = self._deserialize('CorporateActionEventDto', response)
+        if response.status_code == 404:
+            deserialized = self._deserialize('ErrorResponse', response)
+        if response.status_code == 500:
+            deserialized = self._deserialize('ErrorResponse', response)
+
+        if raw:
+            client_raw_response = ClientRawResponse(deserialized, response)
+            return client_raw_response
+
+        return deserialized
+    list_corporate_actions.metadata = {'url': '/v1/api/actions/{scope}/{sourceId}'}
+
+    def upsert_corporate_action(
+            self, scope, source_id, create_request=None, custom_headers=None, raw=False, **operation_config):
+        """Creates/updates a corporate action.
+
+        :param scope: The intended scope of the corporate action
+        :type scope: str
+        :param source_id: Source of the corporate action
+        :type source_id: str
+        :param create_request: The corporate action creation request object
+        :type create_request: ~lusid.models.UpsertCorporateActionRequest
+        :param dict custom_headers: headers that will be added to the request
+        :param bool raw: returns the direct response alongside the
+         deserialized response
+        :param operation_config: :ref:`Operation configuration
+         overrides<msrest:optionsforoperations>`.
+        :return: object or ClientRawResponse if raw=true
+        :rtype: object or ~msrest.pipeline.ClientRawResponse
+        :raises:
+         :class:`HttpOperationError<msrest.exceptions.HttpOperationError>`
+        """
+        # Construct URL
+        url = self.upsert_corporate_action.metadata['url']
+        path_format_arguments = {
+            'scope': self._serialize.url("scope", scope, 'str'),
+            'sourceId': self._serialize.url("source_id", source_id, 'str')
+        }
+        url = self._client.format_url(url, **path_format_arguments)
+
+        # Construct parameters
+        query_parameters = {}
+
+        # Construct headers
+        header_parameters = {}
+        header_parameters['Content-Type'] = 'application/json-patch+json; charset=utf-8'
+        if custom_headers:
+            header_parameters.update(custom_headers)
+
+        # Construct body
+        if create_request is not None:
+            body_content = self._serialize.body(create_request, 'UpsertCorporateActionRequest')
+        else:
+            body_content = None
+
+        # Construct and send request
+        request = self._client.post(url, query_parameters)
+        response = self._client.send(
+            request, header_parameters, body_content, stream=False, **operation_config)
+
+        if response.status_code not in [201, 400, 500]:
+            raise HttpOperationError(self._deserialize, response)
+
+        deserialized = None
+
+        if response.status_code == 201:
+            deserialized = self._deserialize('[CorporateActionEventDto]', response)
+        if response.status_code == 400:
+            deserialized = self._deserialize('ErrorResponse', response)
+        if response.status_code == 500:
+            deserialized = self._deserialize('ErrorResponse', response)
+
+        if raw:
+            client_raw_response = ClientRawResponse(deserialized, response)
+            return client_raw_response
+
+        return deserialized
+    upsert_corporate_action.metadata = {'url': '/v1/api/actions/{scope}/{sourceId}'}
 
     def get_aggregation_by_group(
             self, scope, group_code, request=None, custom_headers=None, raw=False, **operation_config):
@@ -5794,7 +5929,8 @@ class LUSIDAPI(object):
          'SecurityClassification', 'WebLogMessage', 'UpsertPersonalisation',
          'CreatePortfolioDetails', 'UpsertConstituent', 'CreateResults',
          'Results', 'TryAddClientSecurities', 'TryDeleteClientSecurities',
-         'TryLookupSecuritiesFromCodes', 'ExpandedGroup'
+         'TryLookupSecuritiesFromCodes', 'ExpandedGroup',
+         'CreateCorporateAction'
         :type entity: str
         :param dict custom_headers: headers that will be added to the request
         :param bool raw: returns the direct response alongside the

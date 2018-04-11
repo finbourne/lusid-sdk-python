@@ -21,5 +21,40 @@
 # SOFTWARE.
 # --------------------------------------------------------------------------
 
-VERSION = "0.6.72"
+from msrest.serialization import Model
 
+
+class CorporateActionTransitionDto(Model):
+    """A 'transition' within a corporate action, representing a single incoming or
+    outgoing component.
+
+    :param direction: Possible values include: 'In', 'Out'
+    :type direction: str or ~lusid.models.enum
+    :param security_uid:
+    :type security_uid: str
+    :param units_factor:
+    :type units_factor: float
+    :param cost_factor:
+    :type cost_factor: float
+    """
+
+    _validation = {
+        'direction': {'required': True},
+        'security_uid': {'required': True},
+        'units_factor': {'required': True},
+        'cost_factor': {'required': True},
+    }
+
+    _attribute_map = {
+        'direction': {'key': 'direction', 'type': 'str'},
+        'security_uid': {'key': 'securityUid', 'type': 'str'},
+        'units_factor': {'key': 'unitsFactor', 'type': 'float'},
+        'cost_factor': {'key': 'costFactor', 'type': 'float'},
+    }
+
+    def __init__(self, direction, security_uid, units_factor, cost_factor):
+        super(CorporateActionTransitionDto, self).__init__()
+        self.direction = direction
+        self.security_uid = security_uid
+        self.units_factor = units_factor
+        self.cost_factor = cost_factor
