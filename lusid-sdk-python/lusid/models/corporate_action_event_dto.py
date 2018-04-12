@@ -27,15 +27,15 @@ from msrest.serialization import Model
 class CorporateActionEventDto(Model):
     """A corporate action.
 
-    :param source_id: Unique identifier for the corporate action source
+    :param source_id:
     :type source_id: ~lusid.models.ResourceId
-    :param corporate_action_id: Unique identifier for the corporate action
+    :param corporate_action_id:
     :type corporate_action_id: str
-    :param announcement_date: The announcement date of the corporate action
+    :param announcement_date:
     :type announcement_date: datetime
-    :param ex_date: The ex date of the corporate action
+    :param ex_date:
     :type ex_date: datetime
-    :param record_date: The record date of the corporate action
+    :param record_date:
     :type record_date: datetime
     :param transitions:
     :type transitions: list[~lusid.models.CorporateActionTransitionDto]

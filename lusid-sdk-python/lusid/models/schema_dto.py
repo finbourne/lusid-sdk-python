@@ -44,7 +44,8 @@ class SchemaDto(Model):
      'SecurityClassification', 'WebLogMessage', 'UpsertPersonalisation',
      'CreatePortfolioDetails', 'UpsertConstituent', 'CreateResults', 'Results',
      'TryAddClientSecurities', 'TryDeleteClientSecurities',
-     'TryLookupSecuritiesFromCodes', 'ExpandedGroup', 'CreateCorporateAction'
+     'TryLookupSecuritiesFromCodes', 'ExpandedGroup', 'CreateCorporateAction',
+     'CorporateAction', 'CorporateActionTransition'
     :type entity: str or ~lusid.models.enum
     :param href:
     :type href: str
