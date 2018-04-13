@@ -35,6 +35,8 @@ class CreatePortfolioRequest(Model):
     :type created: datetime
     :param base_currency:
     :type base_currency: str
+    :param corporate_action_source_id:
+    :type corporate_action_source_id: ~lusid.models.ResourceId
     """
 
     _validation = {
@@ -48,11 +50,13 @@ class CreatePortfolioRequest(Model):
         'code': {'key': 'code', 'type': 'str'},
         'created': {'key': 'created', 'type': 'iso-8601'},
         'base_currency': {'key': 'baseCurrency', 'type': 'str'},
+        'corporate_action_source_id': {'key': 'corporateActionSourceId', 'type': 'ResourceId'},
     }
 
-    def __init__(self, name, code, base_currency, created=None):
+    def __init__(self, name, code, base_currency, created=None, corporate_action_source_id=None):
         super(CreatePortfolioRequest, self).__init__()
         self.name = name
         self.code = code
         self.created = created
         self.base_currency = base_currency
+        self.corporate_action_source_id = corporate_action_source_id
