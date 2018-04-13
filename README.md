@@ -1,20 +1,18 @@
 # LUSID Python SDK
 
-This repository enables the generation of a Python SDK from the FINBOURNE OpenAPI specification using the [autorest](https://github.com/Azure/autorest) tool.
-
-A generated version of the SDK is included in the `lusid-sdk-python` folder based on the OpenAPI specification named `lusid.json` in the root folder.  The most up to date version of the OpenAPI specification can be downloaded from http://api.finbourne.com/swagger/v0/swagger.json
-
-In addtion to the SDK, a set of examples on how to use the SDK can be found in the [tests](https://github.com/finbourne/lusid-sdk-python/tree/master/lusid-sdk-python) folder.  These exist in the form of unit tests and further instructions on running the tests can be found in the [README](https://github.com/finbourne/lusid-sdk-python/blob/master/lusid-sdk-python/readme.md).
-
-The SDK can also be installed using `pip`:
+The LUSID API can be accessed from Python using this SDK which can be installed using `pip`:
 
 ```
 $ pip install lusid-sdk
 ```
 
+A pre-generated version of the latest SDK is included in the `lusid-sdk-python` folder based on the OpenAPI specification named `lusid.json` in the root folder.  The most up to date version of the OpenAPI specification can be downloaded from http://api.finbourne.com/swagger/v0/swagger.json
+
+In addition to the SDK, a set of examples on how to use the SDK can be found in the [tests](https://github.com/finbourne/lusid-sdk-python/tree/master/lusid-sdk-python) folder.  These exist in the form of unit tests.  Further instructions on running them can be found in the [README](https://github.com/finbourne/lusid-sdk-python/blob/master/lusid-sdk-python/readme.md).
+
 # Generating the SDK
 
-The preferred method of generating the SDK is using `docker` and `docker-compose` by running the following command: 
+If you would prefer to generate the Python SDK locally from the FINBOURNE OpenAPI specification, this can be  done using [autorest](https://github.com/Azure/autorest) and `docker`:
 
 ```
 $ docker-compose up && docker-compose rm -f
@@ -33,6 +31,9 @@ For other options on installation see [Installing AutoRest](https://aka.ms/autor
 The resulting SDK will be generated in the `lusid-sdk-python` folder.
 
 # Client Runtimes
+
+Further details for the Python implementation for `autorest` can be found below:
+
 https://github.com/Azure/autorest/blob/master/docs/developer/architecture/Autorest-and-Clientruntimes.md
 
 https://github.com/Azure/msrest-for-python
