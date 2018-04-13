@@ -82,51 +82,68 @@ class LUSIDAPI(object):
     Security prices are stored in LUSID's Analytics Store
     | Field|Type|Description |
     | ---|---|--- |
-    | Id|SecurityUid|Unique security identifier |
-    | Value|Decimal|Value of the analytic, eg price |
+    | Id|string|Unique security identifier |
+    | Value|decimal|Value of the analytic, eg price |
     ## Security Data
     Security data can be uploaded to the system using the [Classifications](#tag/Classification) endpoint.
     | Field|Type|Description |
     | ---|---|--- |
-    | Uid|SecurityUid|Unique security identifier |
-    | EffectiveFrom|DateTimeOffset|Date from which this classification is effective |
-    ## Portfolio
+    | Uid|string|Unique security identifier |
+    | EffectiveFrom|datetime|Date from which this classification is effective |
+    ## Portfolios
     A portfolio is a container for trades and/or holdings.  Meta data and classifications of portfolios can be attached via properties.
-    ## Derived Portfolio
+    ## Derived Portfolios
     LUSID also allows for a portfolio to be composed of another portfolio via derived portfolios.  A derived portfolio can contain its own trades and also inherits any trades from its parent portfolio.  Any changes made to the parent portfolio are automatically reflected in derived portfolio.
     Derived portfolios in conjunction with scopes are a powerful construct.  For example, to do pre-trade what-if analysis, a derived portfolio could be created a new namespace linked to the underlying live (parent) portfolio.  Analysis can then be undertaken on the derived portfolio without affecting the live portfolio.
-    ## Transaction
+    ## Transactions
     A transaction represents an economic activity against a Portfolio.
     | Field|Type|Description |
     | ---|---|--- |
-    | TradeId|String|Unique trade identifier |
-    | Type|String|LUSID transaction type code - Buy, Sell, StockIn, StockOut, etc |
-    | SecurityUid|SecurityUid|Unique security identifier |
-    | TradeDate|DateTimeOffset|Trade date |
-    | SettlementDate|DateTimeOffset|Settlement date |
-    | Units|Decimal|Quantity of trade in units of the security |
-    | TradePrice|Decimal|Execution price for the trade |
-    | TotalConsideration|Decimal|Total value of the trade |
-    | ExchangeRate|Nullable`1|Rate between trade and settle currency |
-    | SettlementCurrency|String|Settlement currency |
-    | TradeCurrency|String|Trade currency |
-    | CounterpartyId|String|Counterparty identifier |
-    | Source|TradeSource|Where this trade came from, either Client or System |
-    | DividendState|DividendState|  |
-    | TradePriceType|TradePriceType|  |
-    | UnitType|UnitType|  |
-    | NettingSet|String|  |
-    ## Holding
+    | TradeId|string|Unique trade identifier |
+    | Type|string|LUSID transaction type code - Buy, Sell, StockIn, StockOut, etc |
+    | SecurityUid|string|Unique security identifier |
+    | TradeDate|datetime|Trade date |
+    | SettlementDate|datetime|Settlement date |
+    | Units|decimal|Quantity of trade in units of the security |
+    | TradePrice|decimal|Execution price for the trade |
+    | TotalConsideration|decimal|Total value of the trade |
+    | ExchangeRate|decimal|Rate between trade and settle currency |
+    | SettlementCurrency|string|Settlement currency |
+    | TradeCurrency|string|Trade currency |
+    | CounterpartyId|string|Counterparty identifier |
+    | Source|string|Where this trade came from, either Client or System |
+    | DividendState|string|  |
+    | TradePriceType|string|  |
+    | UnitType|string|  |
+    | NettingSet|string|  |
+    ## Holdings
     A holding represents a position in a security or cash on a given date.
     | Field|Type|Description |
     | ---|---|--- |
-    | SecurityUid|SecurityUid|Unique security identifier |
-    | HoldingType|String|Type of holding, eg Position, Balance, CashCommitment, Receivable, ForwardFX |
-    | Units|Decimal|Quantity of holding |
-    | SettledUnits|Decimal|Settled quantity of holding |
-    | Cost|Decimal|Book cost of holding in trade currency |
-    | CostPortfolioCcy|Decimal|Book cost of holding in portfolio currency |
+    | SecurityUid|string|Unique security identifier |
+    | HoldingType|string|Type of holding, eg Position, Balance, CashCommitment, Receivable, ForwardFX |
+    | Units|decimal|Quantity of holding |
+    | SettledUnits|decimal|Settled quantity of holding |
+    | Cost|decimal|Book cost of holding in trade currency |
+    | CostPortfolioCcy|decimal|Book cost of holding in portfolio currency |
     | Transaction|TradeDto|If this is commitment-type holding, the transaction behind it |
+    ## Corporate Actions
+    Corporate actions are represented within LUSID in terms of a set of security-specific 'transitions'.  These transitions are used to specify the participants of the corporate action, and the effect that the corporate action will have on holdings in those participants.
+    *Corporate action*
+    | Field|Type|Description |
+    | ---|---|--- |
+    | SourceId|id|  |
+    | CorporateActionId|code|  |
+    | AnnouncementDate|datetime|  |
+    | ExDate|datetime|  |
+    | RecordDate|datetime|  |
+    *Transition*
+    | Field|Type|Description |
+    | ---|---|--- |
+    | Direction|string|  |
+    | SecurityUid|string|  |
+    | UnitsFactor|decimal|  |
+    | CostFactor|decimal|  |
     ## Property
     Properties are key-value pairs that can be applied to any entity within a domain (where a domain is `trade`, `portfolio`, `security` etc).  Properties must be defined before use with a `PropertyDefinition` and can then subsequently be added to entities.
     # Error Codes
@@ -211,7 +228,7 @@ class LUSIDAPI(object):
         self._client = ServiceClient(self.config.credentials, self.config)
 
         client_models = {k: v for k, v in models.__dict__.items() if isinstance(v, type)}
-        self.api_version = '0.6.78'
+        self.api_version = '0.6.80'
         self._serialize = Serializer(client_models)
         self._deserialize = Deserializer(client_models)
 
@@ -2873,7 +2890,7 @@ class LUSIDAPI(object):
 
     def update_portfolio(
             self, scope, code, request=None, effective_at=None, custom_headers=None, raw=False, **operation_config):
-        """
+        """Update portfolio.
 
         :param scope: The scope of the portfolio to be updated
         :type scope: str
@@ -3012,7 +3029,9 @@ class LUSIDAPI(object):
 
     def get_commands(
             self, scope, code, from_as_at=None, to_as_at=None, filter=None, custom_headers=None, raw=False, **operation_config):
-        """Gets all commands that modified the portfolio(s) with the specified id.
+        """Get modifications.
+
+        Gets all commands that modified the portfolio.
 
         :param scope: The scope of the portfolio
         :type scope: str
@@ -3554,7 +3573,7 @@ class LUSIDAPI(object):
 
     def upsert_portfolio_properties(
             self, scope, code, properties=None, effective_at=None, custom_headers=None, raw=False, **operation_config):
-        """Create properties.
+        """Update properties.
 
         Create one or more properties on a portfolio.
 
@@ -3859,7 +3878,7 @@ class LUSIDAPI(object):
 
     def upsert_trades(
             self, scope, code, trades=None, custom_headers=None, raw=False, **operation_config):
-        """Add/updates trades in a portfolio.
+        """Add/update trades.
 
         :param scope: The scope of the portfolio
         :type scope: str
