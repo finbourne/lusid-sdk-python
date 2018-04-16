@@ -228,7 +228,7 @@ class LUSIDAPI(object):
         self._client = ServiceClient(self.config.credentials, self.config)
 
         client_models = {k: v for k, v in models.__dict__.items() if isinstance(v, type)}
-        self.api_version = '0.6.86'
+        self.api_version = '0.6.92'
         self._serialize = Serializer(client_models)
         self._deserialize = Deserializer(client_models)
 
@@ -1174,6 +1174,171 @@ class LUSIDAPI(object):
 
         return deserialized
     upsert_classification.metadata = {'url': '/v1/api/classifications'}
+
+    def add_transaction_code(
+            self, code=None, custom_headers=None, raw=False, **operation_config):
+        """Adds a new transaction code movement to the list of existing codes.
+
+        :param code: transaction code to add
+        :type code: ~lusid.models.TransactionCodeMovementsDto
+        :param dict custom_headers: headers that will be added to the request
+        :param bool raw: returns the direct response alongside the
+         deserialized response
+        :param operation_config: :ref:`Operation configuration
+         overrides<msrest:optionsforoperations>`.
+        :return: object or ClientRawResponse if raw=true
+        :rtype: object or ~msrest.pipeline.ClientRawResponse
+        :raises:
+         :class:`HttpOperationError<msrest.exceptions.HttpOperationError>`
+        """
+        # Construct URL
+        url = self.add_transaction_code.metadata['url']
+
+        # Construct parameters
+        query_parameters = {}
+
+        # Construct headers
+        header_parameters = {}
+        header_parameters['Content-Type'] = 'application/json-patch+json; charset=utf-8'
+        if custom_headers:
+            header_parameters.update(custom_headers)
+
+        # Construct body
+        if code is not None:
+            body_content = self._serialize.body(code, 'TransactionCodeMovementsDto')
+        else:
+            body_content = None
+
+        # Construct and send request
+        request = self._client.post(url, query_parameters)
+        response = self._client.send(
+            request, header_parameters, body_content, stream=False, **operation_config)
+
+        if response.status_code not in [201, 400, 500]:
+            raise HttpOperationError(self._deserialize, response)
+
+        deserialized = None
+
+        if response.status_code == 201:
+            deserialized = self._deserialize('TransactionCodeMovementsDto', response)
+        if response.status_code == 400:
+            deserialized = self._deserialize('ErrorResponse', response)
+        if response.status_code == 500:
+            deserialized = self._deserialize('ErrorResponse', response)
+
+        if raw:
+            client_raw_response = ClientRawResponse(deserialized, response)
+            return client_raw_response
+
+        return deserialized
+    add_transaction_code.metadata = {'url': '/v1/api/configuration/addtransactioncode'}
+
+    def get_transaction_codes(
+            self, custom_headers=None, raw=False, **operation_config):
+        """Gets the list of persisted transaction codes.
+
+        :param dict custom_headers: headers that will be added to the request
+        :param bool raw: returns the direct response alongside the
+         deserialized response
+        :param operation_config: :ref:`Operation configuration
+         overrides<msrest:optionsforoperations>`.
+        :return: object or ClientRawResponse if raw=true
+        :rtype: object or ~msrest.pipeline.ClientRawResponse
+        :raises:
+         :class:`HttpOperationError<msrest.exceptions.HttpOperationError>`
+        """
+        # Construct URL
+        url = self.get_transaction_codes.metadata['url']
+
+        # Construct parameters
+        query_parameters = {}
+
+        # Construct headers
+        header_parameters = {}
+        header_parameters['Content-Type'] = 'application/json; charset=utf-8'
+        if custom_headers:
+            header_parameters.update(custom_headers)
+
+        # Construct and send request
+        request = self._client.get(url, query_parameters)
+        response = self._client.send(request, header_parameters, stream=False, **operation_config)
+
+        if response.status_code not in [200, 400, 500]:
+            raise HttpOperationError(self._deserialize, response)
+
+        deserialized = None
+
+        if response.status_code == 200:
+            deserialized = self._deserialize('[TransactionCodeMovementsDto]', response)
+        if response.status_code == 400:
+            deserialized = self._deserialize('ErrorResponse', response)
+        if response.status_code == 500:
+            deserialized = self._deserialize('ErrorResponse', response)
+
+        if raw:
+            client_raw_response = ClientRawResponse(deserialized, response)
+            return client_raw_response
+
+        return deserialized
+    get_transaction_codes.metadata = {'url': '/v1/api/configuration/gettransactioncodes'}
+
+    def upload_transaction_codes(
+            self, codes=None, custom_headers=None, raw=False, **operation_config):
+        """Uploads a list of transation codes to be used by the movements engine.
+
+        :param codes: Codes to be uploaded
+        :type codes: list[~lusid.models.TransactionCodeMovementsDto]
+        :param dict custom_headers: headers that will be added to the request
+        :param bool raw: returns the direct response alongside the
+         deserialized response
+        :param operation_config: :ref:`Operation configuration
+         overrides<msrest:optionsforoperations>`.
+        :return: object or ClientRawResponse if raw=true
+        :rtype: object or ~msrest.pipeline.ClientRawResponse
+        :raises:
+         :class:`HttpOperationError<msrest.exceptions.HttpOperationError>`
+        """
+        # Construct URL
+        url = self.upload_transaction_codes.metadata['url']
+
+        # Construct parameters
+        query_parameters = {}
+
+        # Construct headers
+        header_parameters = {}
+        header_parameters['Content-Type'] = 'application/json-patch+json; charset=utf-8'
+        if custom_headers:
+            header_parameters.update(custom_headers)
+
+        # Construct body
+        if codes is not None:
+            body_content = self._serialize.body(codes, '[TransactionCodeMovementsDto]')
+        else:
+            body_content = None
+
+        # Construct and send request
+        request = self._client.post(url, query_parameters)
+        response = self._client.send(
+            request, header_parameters, body_content, stream=False, **operation_config)
+
+        if response.status_code not in [201, 400, 500]:
+            raise HttpOperationError(self._deserialize, response)
+
+        deserialized = None
+
+        if response.status_code == 201:
+            deserialized = self._deserialize('[TransactionCodeMovementsDto]', response)
+        if response.status_code == 400:
+            deserialized = self._deserialize('ErrorResponse', response)
+        if response.status_code == 500:
+            deserialized = self._deserialize('ErrorResponse', response)
+
+        if raw:
+            client_raw_response = ClientRawResponse(deserialized, response)
+            return client_raw_response
+
+        return deserialized
+    upload_transaction_codes.metadata = {'url': '/v1/api/configuration/uploadtransactioncodes'}
 
     def get_download_url(
             self, version=None, custom_headers=None, raw=False, **operation_config):
@@ -5950,7 +6115,7 @@ class LUSIDAPI(object):
          'Results', 'TryAddClientSecurities', 'TryDeleteClientSecurities',
          'TryLookupSecuritiesFromCodes', 'ExpandedGroup',
          'CreateCorporateAction', 'CorporateAction',
-         'CorporateActionTransition'
+         'CorporateActionTransition', 'TransactionCodeMovements'
         :type entity: str
         :param dict custom_headers: headers that will be added to the request
         :param bool raw: returns the direct response alongside the

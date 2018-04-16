@@ -45,6 +45,8 @@ from .security_analytic_data_dto import SecurityAnalyticDataDto
 from .property_dto import PropertyDto
 from .security_classification_dto import SecurityClassificationDto
 from .classifications_dto import ClassificationsDto
+from .movement_data_dto import MovementDataDto
+from .transaction_code_movements_dto import TransactionCodeMovementsDto
 from .create_group_request import CreateGroupRequest
 from .version_dto import VersionDto
 from .group_dto import GroupDto
@@ -133,6 +135,8 @@ __all__ = [
     'PropertyDto',
     'SecurityClassificationDto',
     'ClassificationsDto',
+    'MovementDataDto',
+    'TransactionCodeMovementsDto',
     'CreateGroupRequest',
     'VersionDto',
     'GroupDto',

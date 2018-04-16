@@ -21,5 +21,34 @@
 # SOFTWARE.
 # --------------------------------------------------------------------------
 
-VERSION = "0.6.92"
+from msrest.serialization import Model
 
+
+class TransactionCodeMovementsDto(Model):
+    """TransactionCodeMovementsDto.
+
+    :param code: The transaction code
+    :type code: str
+    :param description: The transaction code description
+    :type description: str
+    :param movements: Movement data for the transaction code
+    :type movements: list[~lusid.models.MovementDataDto]
+    """
+
+    _validation = {
+        'code': {'required': True},
+        'description': {'required': True},
+        'movements': {'required': True},
+    }
+
+    _attribute_map = {
+        'code': {'key': 'code', 'type': 'str'},
+        'description': {'key': 'description', 'type': 'str'},
+        'movements': {'key': 'movements', 'type': '[MovementDataDto]'},
+    }
+
+    def __init__(self, code, description, movements):
+        super(TransactionCodeMovementsDto, self).__init__()
+        self.code = code
+        self.description = description
+        self.movements = movements
