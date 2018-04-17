@@ -228,7 +228,7 @@ class LUSIDAPI(object):
         self._client = ServiceClient(self.config.credentials, self.config)
 
         client_models = {k: v for k, v in models.__dict__.items() if isinstance(v, type)}
-        self.api_version = '0.6.98'
+        self.api_version = '0.6.100'
         self._serialize = Serializer(client_models)
         self._deserialize = Deserializer(client_models)
 
@@ -3948,7 +3948,7 @@ class LUSIDAPI(object):
     delete_portfolio_properties.metadata = {'url': '/v1/api/portfolios/{scope}/{code}/properties/all'}
 
     def get_trades(
-            self, scope, code, from_trade_date=None, to_trade_date=None, as_at=None, sort_by=None, start=None, limit=None, property_filter=None, filter=None, custom_headers=None, raw=False, **operation_config):
+            self, scope, code, from_trade_date=None, to_trade_date=None, as_at=None, sort_by=None, start=None, limit=None, security_property_keys=None, filter=None, custom_headers=None, raw=False, **operation_config):
         """Get trades.
 
         :param scope: The scope of the portfolio
@@ -3969,8 +3969,9 @@ class LUSIDAPI(object):
         :type start: int
         :param limit: How many items to return from the set
         :type limit: int
-        :param property_filter:
-        :type property_filter: list[str]
+        :param security_property_keys: Keys for the security properties to be
+         decorated onto the trades
+        :type security_property_keys: list[str]
         :param filter: Trade filter
         :type filter: str
         :param dict custom_headers: headers that will be added to the request
@@ -4005,8 +4006,8 @@ class LUSIDAPI(object):
             query_parameters['start'] = self._serialize.query("start", start, 'int')
         if limit is not None:
             query_parameters['limit'] = self._serialize.query("limit", limit, 'int')
-        if property_filter is not None:
-            query_parameters['propertyFilter'] = self._serialize.query("property_filter", property_filter, '[str]', div=',')
+        if security_property_keys is not None:
+            query_parameters['securityPropertyKeys'] = self._serialize.query("security_property_keys", security_property_keys, '[str]', div=',')
         if filter is not None:
             query_parameters['filter'] = self._serialize.query("filter", filter, 'str')
 
