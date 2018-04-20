@@ -45,7 +45,7 @@ class SchemaDto(Model):
      'CreatePortfolioDetails', 'UpsertConstituent', 'CreateResults', 'Results',
      'TryAddClientSecurities', 'TryDeleteClientSecurities',
      'TryLookupSecuritiesFromCodes', 'ExpandedGroup', 'CreateCorporateAction',
-     'CorporateAction', 'CorporateActionTransition', 'TransactionCodeMovements'
+     'CorporateAction', 'CorporateActionTransition'
     :type entity: str or ~lusid.models.enum
     :param href:
     :type href: str

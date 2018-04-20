@@ -24,31 +24,26 @@
 from msrest.serialization import Model
 
 
-class TransactionCodeMovementsDto(Model):
-    """TransactionCodeMovementsDto.
+class TxnTypeAliasDto(Model):
+    """TxnTypeAliasDto.
 
-    :param code: The transaction code
-    :type code: str
-    :param description: The transaction code description
+    :param type: Transaction Code
+    :type type: str
+    :param description: Transaction Code description
     :type description: str
-    :param movements: Movement data for the transaction code
-    :type movements: list[~lusid.models.MovementDataDto]
     """
 
     _validation = {
-        'code': {'required': True},
+        'type': {'required': True},
         'description': {'required': True},
-        'movements': {'required': True},
     }
 
     _attribute_map = {
-        'code': {'key': 'code', 'type': 'str'},
+        'type': {'key': 'type', 'type': 'str'},
         'description': {'key': 'description', 'type': 'str'},
-        'movements': {'key': 'movements', 'type': '[MovementDataDto]'},
     }
 
-    def __init__(self, code, description, movements):
-        super(TransactionCodeMovementsDto, self).__init__()
-        self.code = code
+    def __init__(self, type, description):
+        super(TxnTypeAliasDto, self).__init__()
+        self.type = type
         self.description = description
-        self.movements = movements

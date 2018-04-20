@@ -45,8 +45,10 @@ from .security_analytic_data_dto import SecurityAnalyticDataDto
 from .property_dto import PropertyDto
 from .security_classification_dto import SecurityClassificationDto
 from .classifications_dto import ClassificationsDto
-from .movement_data_dto import MovementDataDto
-from .transaction_code_movements_dto import TransactionCodeMovementsDto
+from .txn_type_alias_dto import TxnTypeAliasDto
+from .txn_property_mapping_dto import TxnPropertyMappingDto
+from .txn_movement_meta_data_dto import TxnMovementMetaDataDto
+from .txn_meta_data_dto import TxnMetaDataDto
 from .create_group_request import CreateGroupRequest
 from .version_dto import VersionDto
 from .group_dto import GroupDto
@@ -135,8 +137,10 @@ __all__ = [
     'PropertyDto',
     'SecurityClassificationDto',
     'ClassificationsDto',
-    'MovementDataDto',
-    'TransactionCodeMovementsDto',
+    'TxnTypeAliasDto',
+    'TxnPropertyMappingDto',
+    'TxnMovementMetaDataDto',
+    'TxnMetaDataDto',
     'CreateGroupRequest',
     'VersionDto',
     'GroupDto',

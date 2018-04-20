@@ -21,5 +21,33 @@
 # SOFTWARE.
 # --------------------------------------------------------------------------
 
-VERSION = "0.6.106"
+from msrest.serialization import Model
 
+
+class TxnMetaDataDto(Model):
+    """TxnMetaDataDto.
+
+    :param aliases: Representative movements for transaction code
+    :type aliases: list[~lusid.models.TxnTypeAliasDto]
+    :param movements: Representative movements for transaction code
+    :type movements: list[~lusid.models.TxnMovementMetaDataDto]
+    :param properties:
+    :type properties: list[~lusid.models.PropertyDto]
+    """
+
+    _validation = {
+        'aliases': {'required': True},
+        'movements': {'required': True},
+    }
+
+    _attribute_map = {
+        'aliases': {'key': 'aliases', 'type': '[TxnTypeAliasDto]'},
+        'movements': {'key': 'movements', 'type': '[TxnMovementMetaDataDto]'},
+        'properties': {'key': 'properties', 'type': '[PropertyDto]'},
+    }
+
+    def __init__(self, aliases, movements, properties=None):
+        super(TxnMetaDataDto, self).__init__()
+        self.aliases = aliases
+        self.movements = movements
+        self.properties = properties

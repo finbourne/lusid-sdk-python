@@ -228,7 +228,7 @@ class LUSIDAPI(object):
         self._client = ServiceClient(self.config.credentials, self.config)
 
         client_models = {k: v for k, v in models.__dict__.items() if isinstance(v, type)}
-        self.api_version = '0.6.102'
+        self.api_version = '0.6.106'
         self._serialize = Serializer(client_models)
         self._deserialize = Deserializer(client_models)
 
@@ -1180,7 +1180,7 @@ class LUSIDAPI(object):
         """Adds a new transaction code movement to the list of existing codes.
 
         :param code: transaction code to add
-        :type code: ~lusid.models.TransactionCodeMovementsDto
+        :type code: ~lusid.models.TxnMetaDataDto
         :param dict custom_headers: headers that will be added to the request
         :param bool raw: returns the direct response alongside the
          deserialized response
@@ -1205,7 +1205,7 @@ class LUSIDAPI(object):
 
         # Construct body
         if code is not None:
-            body_content = self._serialize.body(code, 'TransactionCodeMovementsDto')
+            body_content = self._serialize.body(code, 'TxnMetaDataDto')
         else:
             body_content = None
 
@@ -1220,7 +1220,7 @@ class LUSIDAPI(object):
         deserialized = None
 
         if response.status_code == 201:
-            deserialized = self._deserialize('TransactionCodeMovementsDto', response)
+            deserialized = self._deserialize('TxnMetaDataDto', response)
         if response.status_code == 400:
             deserialized = self._deserialize('ErrorResponse', response)
         if response.status_code == 500:
@@ -1269,7 +1269,7 @@ class LUSIDAPI(object):
         deserialized = None
 
         if response.status_code == 200:
-            deserialized = self._deserialize('[TransactionCodeMovementsDto]', response)
+            deserialized = self._deserialize('[TxnMetaDataDto]', response)
         if response.status_code == 400:
             deserialized = self._deserialize('ErrorResponse', response)
         if response.status_code == 500:
@@ -1287,7 +1287,7 @@ class LUSIDAPI(object):
         """Uploads a list of transation codes to be used by the movements engine.
 
         :param codes: Codes to be uploaded
-        :type codes: list[~lusid.models.TransactionCodeMovementsDto]
+        :type codes: list[~lusid.models.TxnMetaDataDto]
         :param dict custom_headers: headers that will be added to the request
         :param bool raw: returns the direct response alongside the
          deserialized response
@@ -1312,7 +1312,7 @@ class LUSIDAPI(object):
 
         # Construct body
         if codes is not None:
-            body_content = self._serialize.body(codes, '[TransactionCodeMovementsDto]')
+            body_content = self._serialize.body(codes, '[TxnMetaDataDto]')
         else:
             body_content = None
 
@@ -1327,7 +1327,7 @@ class LUSIDAPI(object):
         deserialized = None
 
         if response.status_code == 201:
-            deserialized = self._deserialize('[TransactionCodeMovementsDto]', response)
+            deserialized = self._deserialize('[TxnMetaDataDto]', response)
         if response.status_code == 400:
             deserialized = self._deserialize('ErrorResponse', response)
         if response.status_code == 500:
@@ -4810,7 +4810,7 @@ class LUSIDAPI(object):
         """Gets all available property definitions.
 
         :param domain: Possible values include: 'Trade', 'Portfolio',
-         'Security', 'Holding', 'ReferenceHolding'
+         'Security', 'Holding', 'ReferenceHolding', 'TxnType'
         :type domain: str
         :param sort_by:
         :type sort_by: list[str]
@@ -4884,7 +4884,7 @@ class LUSIDAPI(object):
         """Gets the available property-definition scopes for the specified domain.
 
         :param domain: Possible values include: 'Trade', 'Portfolio',
-         'Security', 'Holding', 'ReferenceHolding'
+         'Security', 'Holding', 'ReferenceHolding', 'TxnType'
         :type domain: str
         :param sort_by:
         :type sort_by: list[str]
@@ -4958,7 +4958,7 @@ class LUSIDAPI(object):
         """Gets all properties in a scope.
 
         :param domain: Possible values include: 'Trade', 'Portfolio',
-         'Security', 'Holding', 'ReferenceHolding'
+         'Security', 'Holding', 'ReferenceHolding', 'TxnType'
         :type domain: str
         :param scope:
         :type scope: str
@@ -5035,7 +5035,7 @@ class LUSIDAPI(object):
         """Gets a property definition.
 
         :param domain: Possible values include: 'Trade', 'Portfolio',
-         'Security', 'Holding', 'ReferenceHolding'
+         'Security', 'Holding', 'ReferenceHolding', 'TxnType'
         :type domain: str
         :param scope:
         :type scope: str
@@ -5103,7 +5103,7 @@ class LUSIDAPI(object):
         """Updates the specified property definition.
 
         :param domain: Possible values include: 'Trade', 'Portfolio',
-         'Security', 'Holding', 'ReferenceHolding'
+         'Security', 'Holding', 'ReferenceHolding', 'TxnType'
         :type domain: str
         :param scope:
         :type scope: str
@@ -5176,7 +5176,7 @@ class LUSIDAPI(object):
         """Deletes the property definition.
 
         :param domain: Possible values include: 'Trade', 'Portfolio',
-         'Security', 'Holding', 'ReferenceHolding'
+         'Security', 'Holding', 'ReferenceHolding', 'TxnType'
         :type domain: str
         :param scope:
         :type scope: str
@@ -6116,7 +6116,7 @@ class LUSIDAPI(object):
          'Results', 'TryAddClientSecurities', 'TryDeleteClientSecurities',
          'TryLookupSecuritiesFromCodes', 'ExpandedGroup',
          'CreateCorporateAction', 'CorporateAction',
-         'CorporateActionTransition', 'TransactionCodeMovements'
+         'CorporateActionTransition'
         :type entity: str
         :param dict custom_headers: headers that will be added to the request
         :param bool raw: returns the direct response alongside the

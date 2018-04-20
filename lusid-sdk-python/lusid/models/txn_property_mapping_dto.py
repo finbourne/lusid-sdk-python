@@ -24,41 +24,34 @@
 from msrest.serialization import Model
 
 
-class MovementDataDto(Model):
-    """MovementDataDto.
+class TxnPropertyMappingDto(Model):
+    """TxnPropertyMappingDto.
 
     Variables are only populated by the server, and will be ignored when
     sending a request.
 
-    :ivar movement_types: The movement types. Possible values include:
-     'Settlement', 'Traded', 'ForwardFx', 'Commitment', 'Receivable',
-     'CashSettlement', 'Accrual'
-    :vartype movement_types: str or ~lusid.models.enum
-    :ivar side: The Side. Possible values include: 'Side1', 'Side2', 'BondInt'
-    :vartype side: str or ~lusid.models.enum
-    :ivar direction:
-    :vartype direction: int
-    :ivar flags: The Flags
-    :vartype flags: str
+    :ivar property_key: The Side
+    :vartype property_key: str
+    :ivar map_from: The Side
+    :vartype map_from: str
+    :ivar set_to: The Side
+    :vartype set_to: object
     """
 
     _validation = {
-        'movement_types': {'required': True, 'readonly': True},
-        'side': {'required': True, 'readonly': True},
-        'direction': {'required': True, 'readonly': True},
-        'flags': {'required': True, 'readonly': True},
+        'property_key': {'required': True, 'readonly': True},
+        'map_from': {'readonly': True},
+        'set_to': {'readonly': True},
     }
 
     _attribute_map = {
-        'movement_types': {'key': 'movementTypes', 'type': 'str'},
-        'side': {'key': 'side', 'type': 'str'},
-        'direction': {'key': 'direction', 'type': 'int'},
-        'flags': {'key': 'flags', 'type': 'str'},
+        'property_key': {'key': 'propertyKey', 'type': 'str'},
+        'map_from': {'key': 'mapFrom', 'type': 'str'},
+        'set_to': {'key': 'setTo', 'type': 'object'},
     }
 
     def __init__(self):
-        super(MovementDataDto, self).__init__()
-        self.movement_types = None
-        self.side = None
-        self.direction = None
-        self.flags = None
+        super(TxnPropertyMappingDto, self).__init__()
+        self.property_key = None
+        self.map_from = None
+        self.set_to = None
