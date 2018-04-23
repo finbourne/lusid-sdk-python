@@ -27,29 +27,25 @@ from msrest.serialization import Model
 class TxnMovementMetaDataDto(Model):
     """TxnMovementMetaDataDto.
 
-    Variables are only populated by the server, and will be ignored when
-    sending a request.
-
-    :ivar movement_types: The movement types. Possible values include:
+    :param movement_types: The movement types. Possible values include:
      'Settlement', 'Traded', 'ForwardFx', 'Commitment', 'Receivable',
      'CashSettlement', 'Accrual'
-    :vartype movement_types: str or ~lusid.models.enum
-    :ivar side: The Side. Possible values include: 'Side1', 'Side2', 'BondInt'
-    :vartype side: str or ~lusid.models.enum
-    :ivar direction:
-    :vartype direction: int
-    :ivar properties:
-    :vartype properties: list[~lusid.models.PropertyDto]
-    :ivar mappings:
-    :vartype mappings: list[~lusid.models.TxnPropertyMappingDto]
+    :type movement_types: str or ~lusid.models.enum
+    :param side: The Side. Possible values include: 'Side1', 'Side2',
+     'BondInt'
+    :type side: str or ~lusid.models.enum
+    :param direction:
+    :type direction: int
+    :param properties:
+    :type properties: list[~lusid.models.PropertyDto]
+    :param mappings:
+    :type mappings: list[~lusid.models.TxnPropertyMappingDto]
     """
 
     _validation = {
-        'movement_types': {'required': True, 'readonly': True},
-        'side': {'required': True, 'readonly': True},
-        'direction': {'required': True, 'readonly': True},
-        'properties': {'readonly': True},
-        'mappings': {'readonly': True},
+        'movement_types': {'required': True},
+        'side': {'required': True},
+        'direction': {'required': True},
     }
 
     _attribute_map = {
@@ -60,10 +56,10 @@ class TxnMovementMetaDataDto(Model):
         'mappings': {'key': 'mappings', 'type': '[TxnPropertyMappingDto]'},
     }
 
-    def __init__(self):
+    def __init__(self, movement_types, side, direction, properties=None, mappings=None):
         super(TxnMovementMetaDataDto, self).__init__()
-        self.movement_types = None
-        self.side = None
-        self.direction = None
-        self.properties = None
-        self.mappings = None
+        self.movement_types = movement_types
+        self.side = side
+        self.direction = direction
+        self.properties = properties
+        self.mappings = mappings

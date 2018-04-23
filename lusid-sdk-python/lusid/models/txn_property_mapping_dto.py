@@ -27,21 +27,16 @@ from msrest.serialization import Model
 class TxnPropertyMappingDto(Model):
     """TxnPropertyMappingDto.
 
-    Variables are only populated by the server, and will be ignored when
-    sending a request.
-
-    :ivar property_key: The Side
-    :vartype property_key: str
-    :ivar map_from: The Side
-    :vartype map_from: str
-    :ivar set_to: The Side
-    :vartype set_to: object
+    :param property_key: The Side
+    :type property_key: str
+    :param map_from: The Side
+    :type map_from: str
+    :param set_to: The Side
+    :type set_to: object
     """
 
     _validation = {
-        'property_key': {'required': True, 'readonly': True},
-        'map_from': {'readonly': True},
-        'set_to': {'readonly': True},
+        'property_key': {'required': True},
     }
 
     _attribute_map = {
@@ -50,8 +45,8 @@ class TxnPropertyMappingDto(Model):
         'set_to': {'key': 'setTo', 'type': 'object'},
     }
 
-    def __init__(self):
+    def __init__(self, property_key, map_from=None, set_to=None):
         super(TxnPropertyMappingDto, self).__init__()
-        self.property_key = None
-        self.map_from = None
-        self.set_to = None
+        self.property_key = property_key
+        self.map_from = map_from
+        self.set_to = set_to
