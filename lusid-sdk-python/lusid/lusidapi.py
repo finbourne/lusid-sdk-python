@@ -228,7 +228,7 @@ class LUSIDAPI(object):
         self._client = ServiceClient(self.config.credentials, self.config)
 
         client_models = {k: v for k, v in models.__dict__.items() if isinstance(v, type)}
-        self.api_version = '0.6.112'
+        self.api_version = '0.6.118'
         self._serialize = Serializer(client_models)
         self._deserialize = Deserializer(client_models)
 
@@ -286,7 +286,7 @@ class LUSIDAPI(object):
         deserialized = None
 
         if response.status_code == 200:
-            deserialized = self._deserialize('CorporateActionEventDto', response)
+            deserialized = self._deserialize('[CorporateActionEventDto]', response)
         if response.status_code == 404:
             deserialized = self._deserialize('ErrorResponse', response)
         if response.status_code == 500:
@@ -347,12 +347,12 @@ class LUSIDAPI(object):
         response = self._client.send(
             request, header_parameters, body_content, stream=False, **operation_config)
 
-        if response.status_code not in [201, 400, 500]:
+        if response.status_code not in [200, 400, 500]:
             raise HttpOperationError(self._deserialize, response)
 
         deserialized = None
 
-        if response.status_code == 201:
+        if response.status_code == 200:
             deserialized = self._deserialize('[CorporateActionEventDto]', response)
         if response.status_code == 400:
             deserialized = self._deserialize('ErrorResponse', response)
@@ -1175,12 +1175,12 @@ class LUSIDAPI(object):
         return deserialized
     upsert_classification.metadata = {'url': '/v1/api/classifications'}
 
-    def add_transaction_code(
-            self, code=None, custom_headers=None, raw=False, **operation_config):
-        """Adds a new transaction code movement to the list of existing codes.
+    def add_transaction_type(
+            self, type=None, custom_headers=None, raw=False, **operation_config):
+        """Adds a new transaction type movement to the list of existing types.
 
-        :param code: transaction code to add
-        :type code: ~lusid.models.TxnMetaDataDto
+        :param type:
+        :type type: ~lusid.models.TxnMetaDataDto
         :param dict custom_headers: headers that will be added to the request
         :param bool raw: returns the direct response alongside the
          deserialized response
@@ -1192,7 +1192,7 @@ class LUSIDAPI(object):
          :class:`HttpOperationError<msrest.exceptions.HttpOperationError>`
         """
         # Construct URL
-        url = self.add_transaction_code.metadata['url']
+        url = self.add_transaction_type.metadata['url']
 
         # Construct parameters
         query_parameters = {}
@@ -1204,8 +1204,8 @@ class LUSIDAPI(object):
             header_parameters.update(custom_headers)
 
         # Construct body
-        if code is not None:
-            body_content = self._serialize.body(code, 'TxnMetaDataDto')
+        if type is not None:
+            body_content = self._serialize.body(type, 'TxnMetaDataDto')
         else:
             body_content = None
 
@@ -1231,11 +1231,11 @@ class LUSIDAPI(object):
             return client_raw_response
 
         return deserialized
-    add_transaction_code.metadata = {'url': '/v1/api/configuration/addtransactioncode'}
+    add_transaction_type.metadata = {'url': '/v1/api/configuration/addtransactioncode'}
 
-    def get_transaction_codes(
+    def get_transaction_types(
             self, custom_headers=None, raw=False, **operation_config):
-        """Gets the list of persisted transaction codes.
+        """Gets the list of persisted transaction types.
 
         :param dict custom_headers: headers that will be added to the request
         :param bool raw: returns the direct response alongside the
@@ -1248,7 +1248,7 @@ class LUSIDAPI(object):
          :class:`HttpOperationError<msrest.exceptions.HttpOperationError>`
         """
         # Construct URL
-        url = self.get_transaction_codes.metadata['url']
+        url = self.get_transaction_types.metadata['url']
 
         # Construct parameters
         query_parameters = {}
@@ -1280,14 +1280,14 @@ class LUSIDAPI(object):
             return client_raw_response
 
         return deserialized
-    get_transaction_codes.metadata = {'url': '/v1/api/configuration/gettransactioncodes'}
+    get_transaction_types.metadata = {'url': '/v1/api/configuration/gettransactioncodes'}
 
-    def upload_transaction_codes(
-            self, codes=None, custom_headers=None, raw=False, **operation_config):
-        """Uploads a list of transation codes to be used by the movements engine.
+    def upload_transaction_types(
+            self, types=None, custom_headers=None, raw=False, **operation_config):
+        """Uploads a list of transaction types to be used by the movements engine.
 
-        :param codes: Codes to be uploaded
-        :type codes: list[~lusid.models.TxnMetaDataDto]
+        :param types:
+        :type types: list[~lusid.models.TxnMetaDataDto]
         :param dict custom_headers: headers that will be added to the request
         :param bool raw: returns the direct response alongside the
          deserialized response
@@ -1299,7 +1299,7 @@ class LUSIDAPI(object):
          :class:`HttpOperationError<msrest.exceptions.HttpOperationError>`
         """
         # Construct URL
-        url = self.upload_transaction_codes.metadata['url']
+        url = self.upload_transaction_types.metadata['url']
 
         # Construct parameters
         query_parameters = {}
@@ -1311,8 +1311,8 @@ class LUSIDAPI(object):
             header_parameters.update(custom_headers)
 
         # Construct body
-        if codes is not None:
-            body_content = self._serialize.body(codes, '[TxnMetaDataDto]')
+        if types is not None:
+            body_content = self._serialize.body(types, '[TxnMetaDataDto]')
         else:
             body_content = None
 
@@ -1338,7 +1338,7 @@ class LUSIDAPI(object):
             return client_raw_response
 
         return deserialized
-    upload_transaction_codes.metadata = {'url': '/v1/api/configuration/uploadtransactioncodes'}
+    upload_transaction_types.metadata = {'url': '/v1/api/configuration/uploadtransactioncodes'}
 
     def get_download_url(
             self, version=None, custom_headers=None, raw=False, **operation_config):
@@ -3649,7 +3649,7 @@ class LUSIDAPI(object):
     adjust_holdings.metadata = {'url': '/v1/api/portfolios/{scope}/{code}/holdings/{effectiveAt}'}
 
     def get_properties(
-            self, scope, code, effective_at=None, as_at=None, sort_by=None, start=None, limit=None, property_filter=None, custom_headers=None, raw=False, **operation_config):
+            self, scope, code, effective_at=None, as_at=None, sort_by=None, start=None, limit=None, custom_headers=None, raw=False, **operation_config):
         """Get properties.
 
         Get properties attached to the portfolio.  If the asAt is not specified
@@ -3670,8 +3670,6 @@ class LUSIDAPI(object):
         :type start: int
         :param limit:
         :type limit: int
-        :param property_filter: Property to filter the results by
-        :type property_filter: list[str]
         :param dict custom_headers: headers that will be added to the request
         :param bool raw: returns the direct response alongside the
          deserialized response
@@ -3702,8 +3700,6 @@ class LUSIDAPI(object):
             query_parameters['start'] = self._serialize.query("start", start, 'int')
         if limit is not None:
             query_parameters['limit'] = self._serialize.query("limit", limit, 'int')
-        if property_filter is not None:
-            query_parameters['propertyFilter'] = self._serialize.query("property_filter", property_filter, '[str]', div=',')
 
         # Construct headers
         header_parameters = {}
