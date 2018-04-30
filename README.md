@@ -1,6 +1,4 @@
-<img align="right" src="https://content.finbourne.com/LUSIDDocHeader.png" alt="LUSID by FINBOURNE">
-
-# LUSID Python SDK
+# LUSID<sup>®</sup> Python SDK
 
 The LUSID API can be accessed from Python using this SDK which can be installed using `pip`:
 
