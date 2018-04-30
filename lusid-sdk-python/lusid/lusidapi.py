@@ -152,8 +152,8 @@ class LUSIDAPI(object):
     | &lt;a name="100"&gt;100&lt;/a&gt;|Personalisations not found|The personalisation(s) identified by the pattern provided could not be found, either because it does not exist or it has been deleted. Please check the pattern your provided. |
     | &lt;a name="101"&gt;101&lt;/a&gt;|NonRecursivePersonalisation|  |
     | &lt;a name="102"&gt;102&lt;/a&gt;|VersionNotFound|  |
-    | &lt;a name="104"&gt;104&lt;/a&gt;|SecurityByCodeNotFound|  |
-    | &lt;a name="104"&gt;104&lt;/a&gt;|SecurityByCodeNotFound|  |
+    | &lt;a name="104"&gt;104&lt;/a&gt;|SecurityNotFound|  |
+    | &lt;a name="104"&gt;104&lt;/a&gt;|SecurityNotFound|  |
     | &lt;a name="105"&gt;105&lt;/a&gt;|PropertyNotFound|  |
     | &lt;a name="106"&gt;106&lt;/a&gt;|PortfolioRecursionDepth|  |
     | &lt;a name="108"&gt;108&lt;/a&gt;|GroupNotFound|  |
@@ -210,6 +210,7 @@ class LUSIDAPI(object):
     | &lt;a name="180"&gt;180&lt;/a&gt;|CommandRetrievalFailure|  |
     | &lt;a name="181"&gt;181&lt;/a&gt;|DataFilterApplicationFailure|  |
     | &lt;a name="182"&gt;182&lt;/a&gt;|SearchFailed|  |
+    | &lt;a name="183"&gt;183&lt;/a&gt;|MovementsEngineConfigurationKeyFailure|  |
     | &lt;a name="-1"&gt;-1&lt;/a&gt;|Unknown error|  |
 
     :ivar config: Configuration for client.
@@ -228,7 +229,7 @@ class LUSIDAPI(object):
         self._client = ServiceClient(self.config.credentials, self.config)
 
         client_models = {k: v for k, v in models.__dict__.items() if isinstance(v, type)}
-        self.api_version = '0.6.120'
+        self.api_version = '0.6.122'
         self._serialize = Serializer(client_models)
         self._deserialize = Deserializer(client_models)
 
@@ -1231,7 +1232,7 @@ class LUSIDAPI(object):
             return client_raw_response
 
         return deserialized
-    add_transaction_type.metadata = {'url': '/v1/api/configuration/addtransactioncode'}
+    add_transaction_type.metadata = {'url': '/v1/api/configuration/transactiontype'}
 
     def get_transaction_types(
             self, custom_headers=None, raw=False, **operation_config):
@@ -1280,7 +1281,7 @@ class LUSIDAPI(object):
             return client_raw_response
 
         return deserialized
-    get_transaction_types.metadata = {'url': '/v1/api/configuration/gettransactioncodes'}
+    get_transaction_types.metadata = {'url': '/v1/api/configuration/transactiontypes'}
 
     def upload_transaction_types(
             self, types=None, custom_headers=None, raw=False, **operation_config):
@@ -1338,7 +1339,7 @@ class LUSIDAPI(object):
             return client_raw_response
 
         return deserialized
-    upload_transaction_types.metadata = {'url': '/v1/api/configuration/uploadtransactioncodes'}
+    upload_transaction_types.metadata = {'url': '/v1/api/configuration/transactiontypes'}
 
     def get_download_url(
             self, version=None, custom_headers=None, raw=False, **operation_config):

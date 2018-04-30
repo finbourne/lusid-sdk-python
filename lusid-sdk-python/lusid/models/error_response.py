@@ -60,7 +60,7 @@ class ErrorResponse(Model):
      'PortfolioDetailsDoNotExist', 'PortfolioWithNameAlreadyExists',
      'InvalidTrades', 'ReferencePortfolioNotFound', 'DuplicateIdFailure',
      'CommandRetrievalFailure', 'DataFilterApplicationFailure', 'SearchFailed',
-     'Unknown'
+     'MovementsEngineConfigurationKeyFailure', 'Unknown'
     :vartype code: str or ~lusid.models.enum
     :ivar message: The non-technical-user friendly message describing the
      error and how it might be remedied.
