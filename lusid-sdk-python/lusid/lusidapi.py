@@ -229,7 +229,7 @@ class LUSIDAPI(object):
         self._client = ServiceClient(self.config.credentials, self.config)
 
         client_models = {k: v for k, v in models.__dict__.items() if isinstance(v, type)}
-        self.api_version = '0.6.122'
+        self.api_version = '0.6.124'
         self._serialize = Serializer(client_models)
         self._deserialize = Deserializer(client_models)
 
@@ -5504,6 +5504,66 @@ class LUSIDAPI(object):
         return deserialized
     update_property_data_format.metadata = {'url': '/v1/api/propertyformats/{scope}/{name}'}
 
+    def perform_reconciliation(
+            self, request=None, custom_headers=None, raw=False, **operation_config):
+        """Perform a reconciliation between two portfolios.
+
+        :param request:
+        :type request: ~lusid.models.ReconciliationRequest
+        :param dict custom_headers: headers that will be added to the request
+        :param bool raw: returns the direct response alongside the
+         deserialized response
+        :param operation_config: :ref:`Operation configuration
+         overrides<msrest:optionsforoperations>`.
+        :return: object or ClientRawResponse if raw=true
+        :rtype: object or ~msrest.pipeline.ClientRawResponse
+        :raises:
+         :class:`HttpOperationError<msrest.exceptions.HttpOperationError>`
+        """
+        # Construct URL
+        url = self.perform_reconciliation.metadata['url']
+
+        # Construct parameters
+        query_parameters = {}
+
+        # Construct headers
+        header_parameters = {}
+        header_parameters['Content-Type'] = 'application/json-patch+json; charset=utf-8'
+        if custom_headers:
+            header_parameters.update(custom_headers)
+
+        # Construct body
+        if request is not None:
+            body_content = self._serialize.body(request, 'ReconciliationRequest')
+        else:
+            body_content = None
+
+        # Construct and send request
+        request = self._client.post(url, query_parameters)
+        response = self._client.send(
+            request, header_parameters, body_content, stream=False, **operation_config)
+
+        if response.status_code not in [200, 400, 404, 500]:
+            raise HttpOperationError(self._deserialize, response)
+
+        deserialized = None
+
+        if response.status_code == 200:
+            deserialized = self._deserialize('ResourceListReconciliationBreakDto', response)
+        if response.status_code == 400:
+            deserialized = self._deserialize('ErrorResponse', response)
+        if response.status_code == 404:
+            deserialized = self._deserialize('ErrorResponse', response)
+        if response.status_code == 500:
+            deserialized = self._deserialize('ErrorResponse', response)
+
+        if raw:
+            client_raw_response = ClientRawResponse(deserialized, response)
+            return client_raw_response
+
+        return deserialized
+    perform_reconciliation.metadata = {'url': '/v1/api/recon'}
+
     def list_reference_portfolios(
             self, scope, effective_at, as_at=None, sort_by=None, start=None, limit=None, filter=None, custom_headers=None, raw=False, **operation_config):
         """Get all reference portfolios in a scope.
@@ -6113,7 +6173,8 @@ class LUSIDAPI(object):
          'Results', 'TryAddClientSecurities', 'TryDeleteClientSecurities',
          'TryLookupSecuritiesFromCodes', 'ExpandedGroup',
          'CreateCorporateAction', 'CorporateAction',
-         'CorporateActionTransition'
+         'CorporateActionTransition', 'ReconciliationRequest',
+         'ReconciliationBreak'
         :type entity: str
         :param dict custom_headers: headers that will be added to the request
         :param bool raw: returns the direct response alongside the
