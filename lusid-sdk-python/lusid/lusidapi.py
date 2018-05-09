@@ -229,7 +229,7 @@ class LUSIDAPI(object):
         self._client = ServiceClient(self.config.credentials, self.config)
 
         client_models = {k: v for k, v in models.__dict__.items() if isinstance(v, type)}
-        self.api_version = '0.6.124'
+        self.api_version = '0.6.128'
         self._serialize = Serializer(client_models)
         self._deserialize = Deserializer(client_models)
 
@@ -4109,7 +4109,7 @@ class LUSIDAPI(object):
     upsert_trades.metadata = {'url': '/v1/api/portfolios/{scope}/{code}/trades'}
 
     def delete_trades(
-            self, scope, code, cancel_date, id=None, custom_headers=None, raw=False, **operation_config):
+            self, scope, code, id=None, custom_headers=None, raw=False, **operation_config):
         """Delete trades.
 
         Delete one or more trades from a portfolio.
@@ -4118,8 +4118,6 @@ class LUSIDAPI(object):
         :type scope: str
         :param code: Code for the portfolio
         :type code: str
-        :param cancel_date: Date on which trades are deleted
-        :type cancel_date: datetime
         :param id: Ids of trades to delete
         :type id: list[str]
         :param dict custom_headers: headers that will be added to the request
@@ -4142,7 +4140,6 @@ class LUSIDAPI(object):
 
         # Construct parameters
         query_parameters = {}
-        query_parameters['cancelDate'] = self._serialize.query("cancel_date", cancel_date, 'iso-8601')
         if id is not None:
             query_parameters['id'] = self._serialize.query("id", id, '[str]', div=',')
 
