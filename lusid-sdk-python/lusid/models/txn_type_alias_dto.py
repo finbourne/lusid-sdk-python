@@ -27,9 +27,9 @@ from msrest.serialization import Model
 class TxnTypeAliasDto(Model):
     """TxnTypeAliasDto.
 
-    :param type: Transaction Code
+    :param type: The transaction type
     :type type: str
-    :param description: Transaction Code description
+    :param description: Brief description of the transaction
     :type description: str
     """
 

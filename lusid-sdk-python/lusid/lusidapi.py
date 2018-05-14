@@ -229,7 +229,7 @@ class LUSIDAPI(object):
         self._client = ServiceClient(self.config.credentials, self.config)
 
         client_models = {k: v for k, v in models.__dict__.items() if isinstance(v, type)}
-        self.api_version = '0.6.128'
+        self.api_version = '0.6.130'
         self._serialize = Serializer(client_models)
         self._deserialize = Deserializer(client_models)
 
@@ -1176,7 +1176,7 @@ class LUSIDAPI(object):
         return deserialized
     upsert_classification.metadata = {'url': '/v1/api/classifications'}
 
-    def add_transaction_type(
+    def add_configuration_transaction_type(
             self, type=None, custom_headers=None, raw=False, **operation_config):
         """Adds a new transaction type movement to the list of existing types.
 
@@ -1193,7 +1193,7 @@ class LUSIDAPI(object):
          :class:`HttpOperationError<msrest.exceptions.HttpOperationError>`
         """
         # Construct URL
-        url = self.add_transaction_type.metadata['url']
+        url = self.add_configuration_transaction_type.metadata['url']
 
         # Construct parameters
         query_parameters = {}
@@ -1232,9 +1232,9 @@ class LUSIDAPI(object):
             return client_raw_response
 
         return deserialized
-    add_transaction_type.metadata = {'url': '/v1/api/configuration/transactiontype'}
+    add_configuration_transaction_type.metadata = {'url': '/v1/api/configuration/transactiontype'}
 
-    def get_transaction_types(
+    def get_configuration_transaction_types(
             self, custom_headers=None, raw=False, **operation_config):
         """Gets the list of persisted transaction types.
 
@@ -1249,7 +1249,7 @@ class LUSIDAPI(object):
          :class:`HttpOperationError<msrest.exceptions.HttpOperationError>`
         """
         # Construct URL
-        url = self.get_transaction_types.metadata['url']
+        url = self.get_configuration_transaction_types.metadata['url']
 
         # Construct parameters
         query_parameters = {}
@@ -1270,7 +1270,7 @@ class LUSIDAPI(object):
         deserialized = None
 
         if response.status_code == 200:
-            deserialized = self._deserialize('[TxnMetaDataDto]', response)
+            deserialized = self._deserialize('ResourceListTxnMetaDataDto', response)
         if response.status_code == 400:
             deserialized = self._deserialize('ErrorResponse', response)
         if response.status_code == 500:
@@ -1281,9 +1281,9 @@ class LUSIDAPI(object):
             return client_raw_response
 
         return deserialized
-    get_transaction_types.metadata = {'url': '/v1/api/configuration/transactiontypes'}
+    get_configuration_transaction_types.metadata = {'url': '/v1/api/configuration/transactiontypes'}
 
-    def upload_transaction_types(
+    def upload_configuration_transaction_types(
             self, types=None, custom_headers=None, raw=False, **operation_config):
         """Uploads a list of transaction types to be used by the movements engine.
 
@@ -1300,7 +1300,7 @@ class LUSIDAPI(object):
          :class:`HttpOperationError<msrest.exceptions.HttpOperationError>`
         """
         # Construct URL
-        url = self.upload_transaction_types.metadata['url']
+        url = self.upload_configuration_transaction_types.metadata['url']
 
         # Construct parameters
         query_parameters = {}
@@ -1328,7 +1328,7 @@ class LUSIDAPI(object):
         deserialized = None
 
         if response.status_code == 201:
-            deserialized = self._deserialize('[TxnMetaDataDto]', response)
+            deserialized = self._deserialize('ResourceListTxnMetaDataDto', response)
         if response.status_code == 400:
             deserialized = self._deserialize('ErrorResponse', response)
         if response.status_code == 500:
@@ -1339,7 +1339,7 @@ class LUSIDAPI(object):
             return client_raw_response
 
         return deserialized
-    upload_transaction_types.metadata = {'url': '/v1/api/configuration/transactiontypes'}
+    upload_configuration_transaction_types.metadata = {'url': '/v1/api/configuration/transactiontypes'}
 
     def get_download_url(
             self, version=None, custom_headers=None, raw=False, **operation_config):
@@ -6171,7 +6171,9 @@ class LUSIDAPI(object):
          'TryLookupSecuritiesFromCodes', 'ExpandedGroup',
          'CreateCorporateAction', 'CorporateAction',
          'CorporateActionTransition', 'ReconciliationRequest',
-         'ReconciliationBreak'
+         'ReconciliationBreak', 'TransactionConfigurationData',
+         'TransactionConfigurationMovementData',
+         'TransactionConfigurationTypeAlias'
         :type entity: str
         :param dict custom_headers: headers that will be added to the request
         :param bool raw: returns the direct response alongside the

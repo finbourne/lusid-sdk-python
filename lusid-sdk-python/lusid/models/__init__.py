@@ -98,6 +98,7 @@ from .try_delete_client_securities_dto import TryDeleteClientSecuritiesDto
 from .resource_list_security_dto import ResourceListSecurityDto
 from .try_lookup_securities_from_codes_dto import TryLookupSecuritiesFromCodesDto
 from .resource_list_analytic_store_key_dto import ResourceListAnalyticStoreKeyDto
+from .resource_list_txn_meta_data_dto import ResourceListTxnMetaDataDto
 from .resource_list_group_dto import ResourceListGroupDto
 from .resource_list_processed_command_dto import ResourceListProcessedCommandDto
 from .resource_list_personalisation_dto import ResourceListPersonalisationDto
@@ -192,6 +193,7 @@ __all__ = [
     'ResourceListSecurityDto',
     'TryLookupSecuritiesFromCodesDto',
     'ResourceListAnalyticStoreKeyDto',
+    'ResourceListTxnMetaDataDto',
     'ResourceListGroupDto',
     'ResourceListProcessedCommandDto',
     'ResourceListPersonalisationDto',

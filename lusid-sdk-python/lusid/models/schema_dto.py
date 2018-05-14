@@ -46,7 +46,9 @@ class SchemaDto(Model):
      'TryAddClientSecurities', 'TryDeleteClientSecurities',
      'TryLookupSecuritiesFromCodes', 'ExpandedGroup', 'CreateCorporateAction',
      'CorporateAction', 'CorporateActionTransition', 'ReconciliationRequest',
-     'ReconciliationBreak'
+     'ReconciliationBreak', 'TransactionConfigurationData',
+     'TransactionConfigurationMovementData',
+     'TransactionConfigurationTypeAlias'
     :type entity: str or ~lusid.models.enum
     :param href:
     :type href: str

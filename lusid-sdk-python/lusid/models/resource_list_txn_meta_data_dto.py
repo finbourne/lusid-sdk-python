@@ -21,5 +21,33 @@
 # SOFTWARE.
 # --------------------------------------------------------------------------
 
-VERSION = "0.6.130"
+from msrest.serialization import Model
 
+
+class ResourceListTxnMetaDataDto(Model):
+    """ResourceListTxnMetaDataDto.
+
+    :param values:
+    :type values: list[~lusid.models.TxnMetaDataDto]
+    :param href: The Uri that returns the same result as the original request,
+     but may include resolved as at time(s).
+    :type href: str
+    :param count: The total number of records returned in the set
+    :type count: int
+    :param _links:
+    :type _links: list[~lusid.models.Link]
+    """
+
+    _attribute_map = {
+        'values': {'key': 'values', 'type': '[TxnMetaDataDto]'},
+        'href': {'key': 'href', 'type': 'str'},
+        'count': {'key': 'count', 'type': 'int'},
+        '_links': {'key': '_links', 'type': '[Link]'},
+    }
+
+    def __init__(self, values=None, href=None, count=None, _links=None):
+        super(ResourceListTxnMetaDataDto, self).__init__()
+        self.values = values
+        self.href = href
+        self.count = count
+        self._links = _links

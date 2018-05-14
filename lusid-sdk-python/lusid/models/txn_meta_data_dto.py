@@ -27,9 +27,10 @@ from msrest.serialization import Model
 class TxnMetaDataDto(Model):
     """TxnMetaDataDto.
 
-    :param aliases: Representative movements for transaction code
+    :param aliases: List of transaction codes that map to this specific
+     transaction model
     :type aliases: list[~lusid.models.TxnTypeAliasDto]
-    :param movements: Representative movements for transaction code
+    :param movements: Movement data for the transaction code
     :type movements: list[~lusid.models.TxnMovementMetaDataDto]
     :param properties:
     :type properties: list[~lusid.models.PropertyDto]

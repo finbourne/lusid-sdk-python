@@ -27,14 +27,14 @@ from msrest.serialization import Model
 class TxnMovementMetaDataDto(Model):
     """TxnMovementMetaDataDto.
 
-    :param movement_types: The movement types. Possible values include:
+    :param movement_types: The Movement Types. Possible values include:
      'Settlement', 'Traded', 'ForwardFx', 'Commitment', 'Receivable',
      'CashSettlement', 'Accrual'
     :type movement_types: str or ~lusid.models.enum
-    :param side: The Side. Possible values include: 'Side1', 'Side2',
+    :param side: The Movement Side. Possible values include: 'Side1', 'Side2',
      'BondInt'
     :type side: str or ~lusid.models.enum
-    :param direction:
+    :param direction: The Movement direction
     :type direction: int
     :param properties:
     :type properties: list[~lusid.models.PropertyDto]
