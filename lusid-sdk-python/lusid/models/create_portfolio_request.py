@@ -37,6 +37,10 @@ class CreatePortfolioRequest(Model):
     :type base_currency: str
     :param corporate_action_source_id:
     :type corporate_action_source_id: ~lusid.models.ResourceId
+    :param accounting_method: Possible values include: 'Default',
+     'AverageCost', 'FirstInFirstOut', 'LastInFirstOut', 'HighestCostFirst',
+     'LowestCostFirst'
+    :type accounting_method: str or ~lusid.models.enum
     """
 
     _validation = {
@@ -51,12 +55,14 @@ class CreatePortfolioRequest(Model):
         'created': {'key': 'created', 'type': 'iso-8601'},
         'base_currency': {'key': 'baseCurrency', 'type': 'str'},
         'corporate_action_source_id': {'key': 'corporateActionSourceId', 'type': 'ResourceId'},
+        'accounting_method': {'key': 'accountingMethod', 'type': 'str'},
     }
 
-    def __init__(self, name, code, base_currency, created=None, corporate_action_source_id=None):
+    def __init__(self, name, code, base_currency, created=None, corporate_action_source_id=None, accounting_method=None):
         super(CreatePortfolioRequest, self).__init__()
         self.name = name
         self.code = code
         self.created = created
         self.base_currency = base_currency
         self.corporate_action_source_id = corporate_action_source_id
+        self.accounting_method = accounting_method
