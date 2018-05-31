@@ -21,5 +21,25 @@
 # SOFTWARE.
 # --------------------------------------------------------------------------
 
-VERSION = "0.6.144"
+from msrest.serialization import Model
 
+
+class ClearEntityCachesDto(Model):
+    """ClearEntityCachesDto.
+
+    :param number_of_items_cleared: The total number of items cleared from all
+     instances of the caches on this machine instance
+    :type number_of_items_cleared: long
+    """
+
+    _validation = {
+        'number_of_items_cleared': {'required': True},
+    }
+
+    _attribute_map = {
+        'number_of_items_cleared': {'key': 'numberOfItemsCleared', 'type': 'long'},
+    }
+
+    def __init__(self, number_of_items_cleared):
+        super(ClearEntityCachesDto, self).__init__()
+        self.number_of_items_cleared = number_of_items_cleared

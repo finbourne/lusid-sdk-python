@@ -229,10 +229,59 @@ class LUSIDAPI(object):
         self._client = ServiceClient(self.config.credentials, self.config)
 
         client_models = {k: v for k, v in models.__dict__.items() if isinstance(v, type)}
-        self.api_version = '0.6.142'
+        self.api_version = '0.6.144'
         self._serialize = Serializer(client_models)
         self._deserialize = Deserializer(client_models)
 
+
+    def clear_entity_caches(
+            self, custom_headers=None, raw=False, **operation_config):
+        """Clears the entity caches on the instance that serves this request only.
+
+        :param dict custom_headers: headers that will be added to the request
+        :param bool raw: returns the direct response alongside the
+         deserialized response
+        :param operation_config: :ref:`Operation configuration
+         overrides<msrest:optionsforoperations>`.
+        :return: object or ClientRawResponse if raw=true
+        :rtype: object or ~msrest.pipeline.ClientRawResponse
+        :raises:
+         :class:`HttpOperationError<msrest.exceptions.HttpOperationError>`
+        """
+        # Construct URL
+        url = self.clear_entity_caches.metadata['url']
+
+        # Construct parameters
+        query_parameters = {}
+
+        # Construct headers
+        header_parameters = {}
+        header_parameters['Content-Type'] = 'application/json; charset=utf-8'
+        if custom_headers:
+            header_parameters.update(custom_headers)
+
+        # Construct and send request
+        request = self._client.get(url, query_parameters)
+        response = self._client.send(request, header_parameters, stream=False, **operation_config)
+
+        if response.status_code not in [200, 400, 500]:
+            raise HttpOperationError(self._deserialize, response)
+
+        deserialized = None
+
+        if response.status_code == 200:
+            deserialized = self._deserialize('ClearEntityCachesDto', response)
+        if response.status_code == 400:
+            deserialized = self._deserialize('ErrorResponse', response)
+        if response.status_code == 500:
+            deserialized = self._deserialize('ErrorResponse', response)
+
+        if raw:
+            client_raw_response = ClientRawResponse(deserialized, response)
+            return client_raw_response
+
+        return deserialized
+    clear_entity_caches.metadata = {'url': '/v1/api/_internal/clearentitycaches'}
 
     def list_corporate_actions(
             self, scope, source_id, effective_date=None, as_at=None, custom_headers=None, raw=False, **operation_config):
