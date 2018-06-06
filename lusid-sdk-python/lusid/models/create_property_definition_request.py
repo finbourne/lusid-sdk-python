@@ -44,6 +44,8 @@ class CreatePropertyDefinitionRequest(Model):
     :type sort: str
     :param life_time: Possible values include: 'Perpetual', 'TimeVariant'
     :type life_time: str or ~lusid.models.enum
+    :param type: Possible values include: 'Label', 'Metric'
+    :type type: str or ~lusid.models.enum
     """
 
     _attribute_map = {
@@ -55,9 +57,10 @@ class CreatePropertyDefinitionRequest(Model):
         'data_format_id': {'key': 'dataFormatId', 'type': 'ResourceId'},
         'sort': {'key': 'sort', 'type': 'str'},
         'life_time': {'key': 'lifeTime', 'type': 'str'},
+        'type': {'key': 'type', 'type': 'str'},
     }
 
-    def __init__(self, domain=None, scope=None, name=None, value_required=None, display_name=None, data_format_id=None, sort=None, life_time=None):
+    def __init__(self, domain=None, scope=None, name=None, value_required=None, display_name=None, data_format_id=None, sort=None, life_time=None, type=None):
         super(CreatePropertyDefinitionRequest, self).__init__()
         self.domain = domain
         self.scope = scope
@@ -67,3 +70,4 @@ class CreatePropertyDefinitionRequest(Model):
         self.data_format_id = data_format_id
         self.sort = sort
         self.life_time = life_time
+        self.type = type

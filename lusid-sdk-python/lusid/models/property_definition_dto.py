@@ -46,6 +46,8 @@ class PropertyDefinitionDto(Model):
     :type sort: str
     :param life_time: Possible values include: 'Perpetual', 'TimeVariant'
     :type life_time: str or ~lusid.models.enum
+    :param type: Possible values include: 'Label', 'Metric'
+    :type type: str or ~lusid.models.enum
     :param _links:
     :type _links: list[~lusid.models.Link]
     """
@@ -59,10 +61,11 @@ class PropertyDefinitionDto(Model):
         'data_format_id': {'key': 'dataFormatId', 'type': 'ResourceId'},
         'sort': {'key': 'sort', 'type': 'str'},
         'life_time': {'key': 'lifeTime', 'type': 'str'},
+        'type': {'key': 'type', 'type': 'str'},
         '_links': {'key': '_links', 'type': '[Link]'},
     }
 
-    def __init__(self, href=None, key=None, value_type=None, value_required=None, display_name=None, data_format_id=None, sort=None, life_time=None, _links=None):
+    def __init__(self, href=None, key=None, value_type=None, value_required=None, display_name=None, data_format_id=None, sort=None, life_time=None, type=None, _links=None):
         super(PropertyDefinitionDto, self).__init__()
         self.href = href
         self.key = key
@@ -72,4 +75,5 @@ class PropertyDefinitionDto(Model):
         self.data_format_id = data_format_id
         self.sort = sort
         self.life_time = life_time
+        self.type = type
         self._links = _links
