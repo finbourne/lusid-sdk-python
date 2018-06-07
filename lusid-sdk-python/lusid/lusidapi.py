@@ -229,7 +229,7 @@ class LUSIDAPI(object):
         self._client = ServiceClient(self.config.credentials, self.config)
 
         client_models = {k: v for k, v in models.__dict__.items() if isinstance(v, type)}
-        self.api_version = '0.6.148'
+        self.api_version = '0.6.150'
         self._serialize = Serializer(client_models)
         self._deserialize = Deserializer(client_models)
 
@@ -4778,11 +4778,13 @@ class LUSIDAPI(object):
     create_property_definition.metadata = {'url': '/v1/api/propertydefinitions'}
 
     def get_multiple_property_definitions(
-            self, keys=None, sort_by=None, start=None, limit=None, filter=None, custom_headers=None, raw=False, **operation_config):
+            self, keys=None, as_at=None, sort_by=None, start=None, limit=None, filter=None, custom_headers=None, raw=False, **operation_config):
         """Gets multiple property definitions.
 
         :param keys:
         :type keys: list[str]
+        :param as_at:
+        :type as_at: datetime
         :param sort_by:
         :type sort_by: list[str]
         :param start:
@@ -4808,6 +4810,8 @@ class LUSIDAPI(object):
         query_parameters = {}
         if keys is not None:
             query_parameters['keys'] = self._serialize.query("keys", keys, '[str]', div=',')
+        if as_at is not None:
+            query_parameters['asAt'] = self._serialize.query("as_at", as_at, 'iso-8601')
         if sort_by is not None:
             query_parameters['sortBy'] = self._serialize.query("sort_by", sort_by, '[str]', div=',')
         if start is not None:
@@ -4849,12 +4853,14 @@ class LUSIDAPI(object):
     get_multiple_property_definitions.metadata = {'url': '/v1/api/propertydefinitions/_keys'}
 
     def get_all_property_keys_in_domain(
-            self, domain, sort_by=None, start=None, limit=None, filter=None, custom_headers=None, raw=False, **operation_config):
+            self, domain, as_at=None, sort_by=None, start=None, limit=None, filter=None, custom_headers=None, raw=False, **operation_config):
         """Gets all available property definitions.
 
         :param domain: Possible values include: 'Trade', 'Portfolio',
          'Security', 'Holding', 'ReferenceHolding', 'TxnType'
         :type domain: str
+        :param as_at:
+        :type as_at: datetime
         :param sort_by:
         :type sort_by: list[str]
         :param start:
@@ -4882,6 +4888,8 @@ class LUSIDAPI(object):
 
         # Construct parameters
         query_parameters = {}
+        if as_at is not None:
+            query_parameters['asAt'] = self._serialize.query("as_at", as_at, 'iso-8601')
         if sort_by is not None:
             query_parameters['sortBy'] = self._serialize.query("sort_by", sort_by, '[str]', div=',')
         if start is not None:
@@ -4997,7 +5005,7 @@ class LUSIDAPI(object):
     get_property_definition_scopes_in_domain.metadata = {'url': '/v1/api/propertydefinitions/{domain}/_scopes'}
 
     def get_all_property_keys_in_scope(
-            self, domain, scope, sort_by=None, start=None, limit=None, filter=None, custom_headers=None, raw=False, **operation_config):
+            self, domain, scope, as_at=None, sort_by=None, start=None, limit=None, filter=None, custom_headers=None, raw=False, **operation_config):
         """Gets all properties in a scope.
 
         :param domain: Possible values include: 'Trade', 'Portfolio',
@@ -5005,6 +5013,8 @@ class LUSIDAPI(object):
         :type domain: str
         :param scope:
         :type scope: str
+        :param as_at:
+        :type as_at: datetime
         :param sort_by:
         :type sort_by: list[str]
         :param start:
@@ -5033,6 +5043,8 @@ class LUSIDAPI(object):
 
         # Construct parameters
         query_parameters = {}
+        if as_at is not None:
+            query_parameters['asAt'] = self._serialize.query("as_at", as_at, 'iso-8601')
         if sort_by is not None:
             query_parameters['sortBy'] = self._serialize.query("sort_by", sort_by, '[str]', div=',')
         if start is not None:
@@ -6276,13 +6288,15 @@ class LUSIDAPI(object):
     get_entity_schema.metadata = {'url': '/v1/api/schema/entities/{entity}'}
 
     def get_property_schema(
-            self, property_keys=None, custom_headers=None, raw=False, **operation_config):
+            self, property_keys=None, as_at=None, custom_headers=None, raw=False, **operation_config):
         """Get the schemas for the provided list of property keys.
 
         :param property_keys: A comma delimited list of property keys in
          string format. e.g.
          "Portfolio/default/PropertyName,Portfolio/differentScope/MyProperty"
         :type property_keys: list[str]
+        :param as_at:
+        :type as_at: datetime
         :param dict custom_headers: headers that will be added to the request
         :param bool raw: returns the direct response alongside the
          deserialized response
@@ -6300,6 +6314,8 @@ class LUSIDAPI(object):
         query_parameters = {}
         if property_keys is not None:
             query_parameters['propertyKeys'] = self._serialize.query("property_keys", property_keys, '[str]', div=',')
+        if as_at is not None:
+            query_parameters['asAt'] = self._serialize.query("as_at", as_at, 'iso-8601')
 
         # Construct headers
         header_parameters = {}
