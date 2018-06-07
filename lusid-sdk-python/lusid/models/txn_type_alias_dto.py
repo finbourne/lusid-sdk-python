@@ -31,19 +31,37 @@ class TxnTypeAliasDto(Model):
     :type type: str
     :param description: Brief description of the transaction
     :type description: str
+    :param txn_class: Relates types of a similar class. E.g. Buy/Sell,
+     StockIn/StockOut
+    :type txn_class: str
+    :param txn_group: Group is a set of codes related to a source, or sync
+    :type txn_group: str
+    :param txn_roles: Transactions role within a class. E.g. Increase a long
+     position. Possible values include: 'None', 'LongLonger', 'LongShorter',
+     'ShortShorter', 'Shorter', 'ShortLonger', 'Longer', 'AllRoles'
+    :type txn_roles: str or ~lusid.models.enum
     """
 
     _validation = {
         'type': {'required': True},
         'description': {'required': True},
+        'txn_class': {'required': True},
+        'txn_group': {'required': True},
+        'txn_roles': {'required': True},
     }
 
     _attribute_map = {
         'type': {'key': 'type', 'type': 'str'},
         'description': {'key': 'description', 'type': 'str'},
+        'txn_class': {'key': 'txnClass', 'type': 'str'},
+        'txn_group': {'key': 'txnGroup', 'type': 'str'},
+        'txn_roles': {'key': 'txnRoles', 'type': 'str'},
     }
 
-    def __init__(self, type, description):
+    def __init__(self, type, description, txn_class, txn_group, txn_roles):
         super(TxnTypeAliasDto, self).__init__()
         self.type = type
         self.description = description
+        self.txn_class = txn_class
+        self.txn_group = txn_group
+        self.txn_roles = txn_roles
