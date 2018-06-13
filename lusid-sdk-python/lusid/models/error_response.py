@@ -33,16 +33,16 @@ class ErrorResponse(Model):
     :ivar status: The status code that will be returned to the client
     :vartype status: int
     :ivar code: The Finbourne specific error-code that encapsulates the
-     specific issue encountered. Possible values include:
+     specific issue encountered. Possible values include: 'Unknown',
      'PersonalisationNotFound', 'NonRecursivePersonalisation',
-     'VersionNotFound', 'SecurityNotFound', 'SecurityByCodeNotFound',
-     'PropertyNotFound', 'PortfolioRecursionDepth', 'GroupNotFound',
-     'PortfolioNotFound', 'PropertySchemaNotFound',
-     'PortfolioWithIdAlreadyExists', 'OrphanedPortfolio', 'MissingBaseClaims',
-     'PropertyNotDefined', 'CannotDeleteSystemProperty',
-     'CannotModifyImmutablePropertyField', 'PropertyAlreadyExists',
-     'InvalidPropertyLifeTime', 'CannotModifyDefaultPropertyFormat',
-     'GroupAlreadyExists', 'NoSuchPropertyDataFormat', 'ValidationError',
+     'VersionNotFound', 'SecurityNotFound', 'PropertyNotFound',
+     'PortfolioRecursionDepth', 'GroupNotFound', 'PortfolioNotFound',
+     'PropertySchemaNotFound', 'PortfolioWithIdAlreadyExists',
+     'OrphanedPortfolio', 'MissingBaseClaims', 'PropertyNotDefined',
+     'CannotDeleteSystemProperty', 'CannotModifyImmutablePropertyField',
+     'PropertyAlreadyExists', 'InvalidPropertyLifeTime',
+     'CannotModifyDefaultPropertyFormat', 'GroupAlreadyExists',
+     'NoSuchPropertyDataFormat', 'ValidationError',
      'LoopDetectedInGroupHierarchy', 'SubGroupAlreadyExists',
      'PriceSourceNotFound', 'AnalyticStoreNotFound',
      'AnalyticStoreAlreadyExists', 'ClientSecurityAlreadyExists',
@@ -59,8 +59,9 @@ class ErrorResponse(Model):
      'EntityAlreadyExistsInGroup', 'EntityWithIdAlreadyExists',
      'PortfolioDetailsDoNotExist', 'PortfolioWithNameAlreadyExists',
      'InvalidTrades', 'ReferencePortfolioNotFound', 'DuplicateIdFailure',
-     'CommandRetrievalFailure', 'DataFilterApplicationFailure', 'SearchFailed',
-     'MovementsEngineConfigurationKeyFailure', 'Unknown'
+     'SecurityByCodeNotFound', 'CommandRetrievalFailure',
+     'DataFilterApplicationFailure', 'SearchFailed',
+     'MovementsEngineConfigurationKeyFailure'
     :vartype code: str or ~lusid.models.enum
     :ivar message: The non-technical-user friendly message describing the
      error and how it might be remedied.

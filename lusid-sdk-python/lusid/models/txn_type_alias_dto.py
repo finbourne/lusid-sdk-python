@@ -38,7 +38,7 @@ class TxnTypeAliasDto(Model):
     :type txn_group: str
     :param txn_roles: Transactions role within a class. E.g. Increase a long
      position. Possible values include: 'None', 'LongLonger', 'LongShorter',
-     'ShortShorter', 'Shorter', 'ShortLonger', 'Longer', 'AllRoles'
+     'ShortShorter', 'ShortLonger', 'Longer', 'Shorter', 'AllRoles'
     :type txn_roles: str or ~lusid.models.enum
     """
 

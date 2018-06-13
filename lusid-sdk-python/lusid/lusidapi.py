@@ -229,7 +229,7 @@ class LUSIDAPI(object):
         self._client = ServiceClient(self.config.credentials, self.config)
 
         client_models = {k: v for k, v in models.__dict__.items() if isinstance(v, type)}
-        self.api_version = '0.6.154'
+        self.api_version = '0.6.166'
         self._serialize = Serializer(client_models)
         self._deserialize = Deserializer(client_models)
 
@@ -4365,77 +4365,6 @@ class LUSIDAPI(object):
 
         return deserialized
     delete_property_from_trade.metadata = {'url': '/v1/api/portfolios/{scope}/{code}/trades/{tradeId}/properties'}
-
-    def add_trade_property_to_all(
-            self, scope, code, properties=None, custom_headers=None, raw=False, **operation_config):
-        """Add properties to all trades.
-
-        Add one or more properties to all trades in a portfolio.
-
-        :param scope: The scope of the portfolio
-        :type scope: str
-        :param code: Code for the portfolio
-        :type code: str
-        :param properties: Properties to add to all trades
-        :type properties: list[~lusid.models.PropertyDto]
-        :param dict custom_headers: headers that will be added to the request
-        :param bool raw: returns the direct response alongside the
-         deserialized response
-        :param operation_config: :ref:`Operation configuration
-         overrides<msrest:optionsforoperations>`.
-        :return: object or ClientRawResponse if raw=true
-        :rtype: object or ~msrest.pipeline.ClientRawResponse
-        :raises:
-         :class:`HttpOperationError<msrest.exceptions.HttpOperationError>`
-        """
-        # Construct URL
-        url = self.add_trade_property_to_all.metadata['url']
-        path_format_arguments = {
-            'scope': self._serialize.url("scope", scope, 'str'),
-            'code': self._serialize.url("code", code, 'str')
-        }
-        url = self._client.format_url(url, **path_format_arguments)
-
-        # Construct parameters
-        query_parameters = {}
-
-        # Construct headers
-        header_parameters = {}
-        header_parameters['Content-Type'] = 'application/json-patch+json; charset=utf-8'
-        if custom_headers:
-            header_parameters.update(custom_headers)
-
-        # Construct body
-        if properties is not None:
-            body_content = self._serialize.body(properties, '[PropertyDto]')
-        else:
-            body_content = None
-
-        # Construct and send request
-        request = self._client.post(url, query_parameters)
-        response = self._client.send(
-            request, header_parameters, body_content, stream=False, **operation_config)
-
-        if response.status_code not in [201, 400, 404, 500]:
-            raise HttpOperationError(self._deserialize, response)
-
-        deserialized = None
-
-        if response.status_code == 201:
-            deserialized = self._deserialize('AddTradePropertyDto', response)
-        if response.status_code == 400:
-            deserialized = self._deserialize('ErrorResponse', response)
-        if response.status_code == 404:
-            deserialized = self._deserialize('ErrorResponse', response)
-        if response.status_code == 500:
-            deserialized = self._deserialize('ErrorResponse', response)
-
-        if raw:
-            client_raw_response = ClientRawResponse(deserialized, response)
-            return client_raw_response
-
-        return deserialized
-    add_trade_property_to_all.metadata = {'url': '/v1/api/portfolios/{scope}/{code}/trades/properties'}
 
     def create_derived_portfolio(
             self, scope, portfolio=None, custom_headers=None, raw=False, **operation_config):
