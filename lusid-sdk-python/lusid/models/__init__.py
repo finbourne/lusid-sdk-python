@@ -71,6 +71,8 @@ from .holding_dto import HoldingDto
 from .holding_adjustment_dto import HoldingAdjustmentDto
 from .upsert_portfolio_trades_dto import UpsertPortfolioTradesDto
 from .portfolio_properties_dto import PortfolioPropertiesDto
+from .create_property_request import CreatePropertyRequest
+from .upsert_portfolio_trade_request import UpsertPortfolioTradeRequest
 from .add_trade_property_dto import AddTradePropertyDto
 from .create_derived_portfolio_request import CreateDerivedPortfolioRequest
 from .portfolio_search_result import PortfolioSearchResult
@@ -167,6 +169,8 @@ __all__ = [
     'HoldingAdjustmentDto',
     'UpsertPortfolioTradesDto',
     'PortfolioPropertiesDto',
+    'CreatePropertyRequest',
+    'UpsertPortfolioTradeRequest',
     'AddTradePropertyDto',
     'CreateDerivedPortfolioRequest',
     'PortfolioSearchResult',

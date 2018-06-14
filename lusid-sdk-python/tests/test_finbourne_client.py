@@ -114,7 +114,7 @@ class TestFinbourneApi(TestCase):
 
         #  property value
         property_value = "Active"
-        portfolio_property = models.PropertyDto(property_key, property_value)
+        portfolio_property = models.CreatePropertyRequest(property_value, scope, property_name)
 
         #   add the property to the portfolio
         upsert_property_result = client.upsert_portfolio_properties(scope, portfolio_id, [portfolio_property], portfolio.created)
@@ -164,7 +164,7 @@ class TestFinbourneApi(TestCase):
         property_value = "A Trader"
 
         #   create the trade
-        trade = models.TradeDto(
+        trade = models.UpsertPortfolioTradeRequest(
             trade_id=str(uuid.uuid4()),
             type="Buy",
             security_uid="FIGI_BBG001SMDKD5",
@@ -175,7 +175,7 @@ class TestFinbourneApi(TestCase):
             trade_price=12.3,
             total_consideration=1230,
             source="Client",
-            properties=[models.PropertyDto(property_key, property_value)]
+            properties=[models.CreatePropertyRequest(property_value, scope, property_name)]
         )
 
         #   add the trade
@@ -296,7 +296,7 @@ class TestFinbourneApi(TestCase):
         credentials = BasicTokenAuthentication(TestFinbourneApi.api_token)
         client = lusid.LUSIDAPI(credentials, TestFinbourneApi.api_url)
 
-        secid="added-sec-{}".format(str(uuid.uuid4()))        
+        secid="added-sec-{}".format(str(uuid.uuid4()))
         client.batch_add_client_securities([models.CreateClientSecurityRequest(secid,secid,[])])
 
     def test_portfolio_aggregation(self):
@@ -376,7 +376,7 @@ class TestFinbourneApi(TestCase):
     # utility to build trade from spec
     @staticmethod
     def build_trade(trade_spec):
-        return models.TradeDto(
+        return models.UpsertPortfolioTradeRequest(
             trade_id=str(uuid.uuid4()),
             type="StockIn",
             security_uid=trade_spec.id,

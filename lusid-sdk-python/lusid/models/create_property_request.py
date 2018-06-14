@@ -21,5 +21,36 @@
 # SOFTWARE.
 # --------------------------------------------------------------------------
 
-VERSION = "0.6.168"
+from msrest.serialization import Model
 
+
+class CreatePropertyRequest(Model):
+    """CreatePropertyRequest.
+
+    :param scope:
+    :type scope: str
+    :param name:
+    :type name: str
+    :param value:
+    :type value: object
+    :param effective_from: Date for which the property is effective from
+    :type effective_from: datetime
+    """
+
+    _validation = {
+        'value': {'required': True},
+    }
+
+    _attribute_map = {
+        'scope': {'key': 'scope', 'type': 'str'},
+        'name': {'key': 'name', 'type': 'str'},
+        'value': {'key': 'value', 'type': 'object'},
+        'effective_from': {'key': 'effectiveFrom', 'type': 'iso-8601'},
+    }
+
+    def __init__(self, value, scope=None, name=None, effective_from=None):
+        super(CreatePropertyRequest, self).__init__()
+        self.scope = scope
+        self.name = name
+        self.value = value
+        self.effective_from = effective_from

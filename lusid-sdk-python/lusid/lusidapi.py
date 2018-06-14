@@ -229,7 +229,7 @@ class LUSIDAPI(object):
         self._client = ServiceClient(self.config.credentials, self.config)
 
         client_models = {k: v for k, v in models.__dict__.items() if isinstance(v, type)}
-        self.api_version = '0.6.166'
+        self.api_version = '0.6.168'
         self._serialize = Serializer(client_models)
         self._deserialize = Deserializer(client_models)
 
@@ -3793,7 +3793,7 @@ class LUSIDAPI(object):
         :param code: Code for the portfolio
         :type code: str
         :param properties:
-        :type properties: list[~lusid.models.PropertyDto]
+        :type properties: list[~lusid.models.CreatePropertyRequest]
         :param effective_at: The effective date for the change
         :type effective_at: datetime
         :param dict custom_headers: headers that will be added to the request
@@ -3827,7 +3827,7 @@ class LUSIDAPI(object):
 
         # Construct body
         if properties is not None:
-            body_content = self._serialize.body(properties, '[PropertyDto]')
+            body_content = self._serialize.body(properties, '[CreatePropertyRequest]')
         else:
             body_content = None
 
@@ -4097,7 +4097,7 @@ class LUSIDAPI(object):
         :param code: Code for the portfolio
         :type code: str
         :param trades: The trades to be updated
-        :type trades: list[~lusid.models.TradeDto]
+        :type trades: list[~lusid.models.UpsertPortfolioTradeRequest]
         :param dict custom_headers: headers that will be added to the request
         :param bool raw: returns the direct response alongside the
          deserialized response
@@ -4127,7 +4127,7 @@ class LUSIDAPI(object):
 
         # Construct body
         if trades is not None:
-            body_content = self._serialize.body(trades, '[TradeDto]')
+            body_content = self._serialize.body(trades, '[UpsertPortfolioTradeRequest]')
         else:
             body_content = None
 
@@ -4236,7 +4236,7 @@ class LUSIDAPI(object):
         :param trade_id: Id of trade to add properties to
         :type trade_id: str
         :param properties: Trade properties to add
-        :type properties: list[~lusid.models.PropertyDto]
+        :type properties: list[~lusid.models.CreatePropertyRequest]
         :param dict custom_headers: headers that will be added to the request
         :param bool raw: returns the direct response alongside the
          deserialized response
@@ -4267,7 +4267,7 @@ class LUSIDAPI(object):
 
         # Construct body
         if properties is not None:
-            body_content = self._serialize.body(properties, '[PropertyDto]')
+            body_content = self._serialize.body(properties, '[CreatePropertyRequest]')
         else:
             body_content = None
 
@@ -6141,23 +6141,24 @@ class LUSIDAPI(object):
         """Gets the schema for a given entity.
 
         :param entity: Possible values include: 'PropertyKey', 'FieldSchema',
-         'Personalisation', 'Security', 'Property', 'Login',
+         'Personalisation', 'Security', 'Property', 'PropertyRequest', 'Login',
          'PropertyDefinition', 'PropertyDataFormat', 'AggregationResponseNode',
          'Portfolio', 'CompletePortfolio', 'PortfolioSearchResult',
          'PortfolioDetails', 'PortfolioProperties', 'Version',
          'AddTradeProperty', 'AnalyticStore', 'AnalyticStoreKey',
          'UpsertPortfolioTrades', 'Group', 'Constituent', 'Trade',
-         'PortfolioHolding', 'AdjustHolding', 'ErrorDetail', 'ErrorResponse',
-         'InstrumentDefinition', 'ProcessedCommand', 'CreatePortfolio',
-         'CreateAnalyticStore', 'CreateClientSecurity',
-         'CreateDerivedPortfolio', 'CreateGroup', 'CreatePropertyDataFormat',
-         'CreatePropertyDefinition', 'UpdatePortfolio', 'UpdateGroup',
-         'UpdatePropertyDataFormat', 'UpdatePropertyDefinition',
-         'SecurityAnalytic', 'AggregationRequest', 'Aggregation',
-         'NestedAggregation', 'ResultDataSchema', 'Classification',
-         'SecurityClassification', 'WebLogMessage', 'UpsertPersonalisation',
-         'CreatePortfolioDetails', 'UpsertConstituent', 'CreateResults',
-         'Results', 'TryAddClientSecurities', 'TryDeleteClientSecurities',
+         'UpsertPortfolioTradesRequest', 'PortfolioHolding', 'AdjustHolding',
+         'ErrorDetail', 'ErrorResponse', 'InstrumentDefinition',
+         'ProcessedCommand', 'CreatePortfolio', 'CreateAnalyticStore',
+         'CreateClientSecurity', 'CreateDerivedPortfolio', 'CreateGroup',
+         'CreatePropertyDataFormat', 'CreatePropertyDefinition',
+         'UpdatePortfolio', 'UpdateGroup', 'UpdatePropertyDataFormat',
+         'UpdatePropertyDefinition', 'SecurityAnalytic', 'AggregationRequest',
+         'Aggregation', 'NestedAggregation', 'ResultDataSchema',
+         'Classification', 'SecurityClassification', 'WebLogMessage',
+         'UpsertPersonalisation', 'CreatePortfolioDetails',
+         'UpsertConstituent', 'CreateResults', 'Results',
+         'TryAddClientSecurities', 'TryDeleteClientSecurities',
          'TryLookupSecuritiesFromCodes', 'ExpandedGroup',
          'CreateCorporateAction', 'CorporateAction',
          'CorporateActionTransition', 'ReconciliationRequest',

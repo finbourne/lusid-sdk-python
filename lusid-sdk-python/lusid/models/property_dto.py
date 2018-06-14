@@ -25,8 +25,7 @@ from msrest.serialization import Model
 
 
 class PropertyDto(Model):
-    """This is intended to be the external facing property specification data
-    type.
+    """PropertyDto.
 
     :param key:
     :type key: str
