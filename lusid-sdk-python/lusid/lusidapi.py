@@ -84,6 +84,7 @@ class LUSIDAPI(object):
     | ---|---|--- |
     | Id|string|Unique security identifier |
     | Value|decimal|Value of the analytic, eg price |
+    | Denomination|string|Underlying unit of the analytic, eg currency, EPS etc. |
     ## Security Data
     Security data can be uploaded to the system using the [Classifications](#tag/Classification) endpoint.
     | Field|Type|Description |
@@ -211,6 +212,8 @@ class LUSIDAPI(object):
     | &lt;a name="181"&gt;181&lt;/a&gt;|DataFilterApplicationFailure|  |
     | &lt;a name="182"&gt;182&lt;/a&gt;|SearchFailed|  |
     | &lt;a name="183"&gt;183&lt;/a&gt;|MovementsEngineConfigurationKeyFailure|  |
+    | &lt;a name="184"&gt;184&lt;/a&gt;|FxRateSourceNotFound|  |
+    | &lt;a name="185"&gt;185&lt;/a&gt;|AccrualSourceNotFound|  |
     | &lt;a name="-1"&gt;-1&lt;/a&gt;|Unknown error|  |
 
     :ivar config: Configuration for client.
@@ -229,7 +232,7 @@ class LUSIDAPI(object):
         self._client = ServiceClient(self.config.credentials, self.config)
 
         client_models = {k: v for k, v in models.__dict__.items() if isinstance(v, type)}
-        self.api_version = '0.6.168'
+        self.api_version = '0.6.170'
         self._serialize = Serializer(client_models)
         self._deserialize = Deserializer(client_models)
 

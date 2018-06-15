@@ -31,14 +31,19 @@ class SecurityAnalyticDataDto(Model):
     :type id: str
     :param value: Value of the analytic, eg price
     :type value: float
+    :param denomination: Underlying unit of the analytic, eg currency, EPS
+     etc.
+    :type denomination: str
     """
 
     _attribute_map = {
         'id': {'key': 'id', 'type': 'str'},
         'value': {'key': 'value', 'type': 'float'},
+        'denomination': {'key': 'denomination', 'type': 'str'},
     }
 
-    def __init__(self, id=None, value=None):
+    def __init__(self, id=None, value=None, denomination=None):
         super(SecurityAnalyticDataDto, self).__init__()
         self.id = id
         self.value = value
+        self.denomination = denomination

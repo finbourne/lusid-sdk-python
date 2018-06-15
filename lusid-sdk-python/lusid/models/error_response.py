@@ -61,7 +61,8 @@ class ErrorResponse(Model):
      'InvalidTrades', 'ReferencePortfolioNotFound', 'DuplicateIdFailure',
      'SecurityByCodeNotFound', 'CommandRetrievalFailure',
      'DataFilterApplicationFailure', 'SearchFailed',
-     'MovementsEngineConfigurationKeyFailure'
+     'MovementsEngineConfigurationKeyFailure', 'FxRateSourceNotFound',
+     'AccrualSourceNotFound'
     :vartype code: str or ~lusid.models.enum
     :ivar message: The non-technical-user friendly message describing the
      error and how it might be remedied.
