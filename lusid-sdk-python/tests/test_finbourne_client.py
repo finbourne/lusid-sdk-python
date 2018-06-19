@@ -175,7 +175,7 @@ class TestFinbourneApi(TestCase):
             trade_price=12.3,
             total_consideration=1230,
             source="Client",
-            properties=[models.CreatePropertyRequest(property_value, scope, property_name)]
+            properties=[models.CreatePerpetualPropertyRequest(property_value, scope, property_name)]
         )
 
         #   add the trade
