@@ -21,5 +21,32 @@
 # SOFTWARE.
 # --------------------------------------------------------------------------
 
-VERSION = "0.6.182"
+from msrest.serialization import Model
 
+
+class CreatePerpetualPropertyRequest(Model):
+    """CreatePerpetualPropertyRequest.
+
+    :param scope:
+    :type scope: str
+    :param name:
+    :type name: str
+    :param value:
+    :type value: object
+    """
+
+    _validation = {
+        'value': {'required': True},
+    }
+
+    _attribute_map = {
+        'scope': {'key': 'scope', 'type': 'str'},
+        'name': {'key': 'name', 'type': 'str'},
+        'value': {'key': 'value', 'type': 'object'},
+    }
+
+    def __init__(self, value, scope=None, name=None):
+        super(CreatePerpetualPropertyRequest, self).__init__()
+        self.scope = scope
+        self.name = name
+        self.value = value

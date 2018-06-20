@@ -41,6 +41,8 @@ class CreatePortfolioRequest(Model):
      'AverageCost', 'FirstInFirstOut', 'LastInFirstOut', 'HighestCostFirst',
      'LowestCostFirst'
     :type accounting_method: str or ~lusid.models.enum
+    :param properties: Portfolio properties to add to the portfolio
+    :type properties: list[~lusid.models.CreatePropertyRequest]
     """
 
     _validation = {
@@ -56,9 +58,10 @@ class CreatePortfolioRequest(Model):
         'base_currency': {'key': 'baseCurrency', 'type': 'str'},
         'corporate_action_source_id': {'key': 'corporateActionSourceId', 'type': 'ResourceId'},
         'accounting_method': {'key': 'accountingMethod', 'type': 'str'},
+        'properties': {'key': 'properties', 'type': '[CreatePropertyRequest]'},
     }
 
-    def __init__(self, name, code, base_currency, created=None, corporate_action_source_id=None, accounting_method=None):
+    def __init__(self, name, code, base_currency, created=None, corporate_action_source_id=None, accounting_method=None, properties=None):
         super(CreatePortfolioRequest, self).__init__()
         self.name = name
         self.code = code
@@ -66,3 +69,4 @@ class CreatePortfolioRequest(Model):
         self.base_currency = base_currency
         self.corporate_action_source_id = corporate_action_source_id
         self.accounting_method = accounting_method
+        self.properties = properties

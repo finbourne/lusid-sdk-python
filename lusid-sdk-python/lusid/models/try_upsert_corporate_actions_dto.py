@@ -21,5 +21,28 @@
 # SOFTWARE.
 # --------------------------------------------------------------------------
 
-VERSION = "0.6.182"
+from msrest.serialization import Model
 
+
+class TryUpsertCorporateActionsDto(Model):
+    """TryUpsertCorporateActionsDto.
+
+    :param href:
+    :type href: str
+    :param values:
+    :type values: list[~lusid.models.CorporateActionEventDto]
+    :param failed:
+    :type failed: list[~lusid.models.ErrorDetail]
+    """
+
+    _attribute_map = {
+        'href': {'key': 'href', 'type': 'str'},
+        'values': {'key': 'values', 'type': '[CorporateActionEventDto]'},
+        'failed': {'key': 'failed', 'type': '[ErrorDetail]'},
+    }
+
+    def __init__(self, href=None, values=None, failed=None):
+        super(TryUpsertCorporateActionsDto, self).__init__()
+        self.href = href
+        self.values = values
+        self.failed = failed

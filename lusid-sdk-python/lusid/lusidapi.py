@@ -214,6 +214,9 @@ class LUSIDAPI(object):
     | &lt;a name="183"&gt;183&lt;/a&gt;|MovementsEngineConfigurationKeyFailure|  |
     | &lt;a name="184"&gt;184&lt;/a&gt;|FxRateSourceNotFound|  |
     | &lt;a name="185"&gt;185&lt;/a&gt;|AccrualSourceNotFound|  |
+    | &lt;a name="186"&gt;186&lt;/a&gt;|EntitlementsFailure|  |
+    | &lt;a name="187"&gt;187&lt;/a&gt;|InvalidIdentityToken|  |
+    | &lt;a name="188"&gt;188&lt;/a&gt;|InvalidRequestHeaders|  |
     | &lt;a name="-1"&gt;-1&lt;/a&gt;|Unknown error|  |
 
     :ivar config: Configuration for client.
@@ -232,7 +235,7 @@ class LUSIDAPI(object):
         self._client = ServiceClient(self.config.credentials, self.config)
 
         client_models = {k: v for k, v in models.__dict__.items() if isinstance(v, type)}
-        self.api_version = '0.6.170'
+        self.api_version = '0.6.182'
         self._serialize = Serializer(client_models)
         self._deserialize = Deserializer(client_models)
 
@@ -285,139 +288,6 @@ class LUSIDAPI(object):
 
         return deserialized
     clear_entity_caches.metadata = {'url': '/v1/api/_internal/clearentitycaches'}
-
-    def list_corporate_actions(
-            self, scope, source_id, effective_date=None, as_at=None, custom_headers=None, raw=False, **operation_config):
-        """Gets a corporate action based on dates.
-
-        :param scope: Scope
-        :type scope: str
-        :param source_id: Corporate action source id
-        :type source_id: str
-        :param effective_date: Effective Date
-        :type effective_date: datetime
-        :param as_at: AsAt Date filter
-        :type as_at: datetime
-        :param dict custom_headers: headers that will be added to the request
-        :param bool raw: returns the direct response alongside the
-         deserialized response
-        :param operation_config: :ref:`Operation configuration
-         overrides<msrest:optionsforoperations>`.
-        :return: object or ClientRawResponse if raw=true
-        :rtype: object or ~msrest.pipeline.ClientRawResponse
-        :raises:
-         :class:`HttpOperationError<msrest.exceptions.HttpOperationError>`
-        """
-        # Construct URL
-        url = self.list_corporate_actions.metadata['url']
-        path_format_arguments = {
-            'scope': self._serialize.url("scope", scope, 'str'),
-            'sourceId': self._serialize.url("source_id", source_id, 'str')
-        }
-        url = self._client.format_url(url, **path_format_arguments)
-
-        # Construct parameters
-        query_parameters = {}
-        if effective_date is not None:
-            query_parameters['effectiveDate'] = self._serialize.query("effective_date", effective_date, 'iso-8601')
-        if as_at is not None:
-            query_parameters['asAt'] = self._serialize.query("as_at", as_at, 'iso-8601')
-
-        # Construct headers
-        header_parameters = {}
-        header_parameters['Content-Type'] = 'application/json; charset=utf-8'
-        if custom_headers:
-            header_parameters.update(custom_headers)
-
-        # Construct and send request
-        request = self._client.get(url, query_parameters)
-        response = self._client.send(request, header_parameters, stream=False, **operation_config)
-
-        if response.status_code not in [200, 404, 500]:
-            raise HttpOperationError(self._deserialize, response)
-
-        deserialized = None
-
-        if response.status_code == 200:
-            deserialized = self._deserialize('[CorporateActionEventDto]', response)
-        if response.status_code == 404:
-            deserialized = self._deserialize('ErrorResponse', response)
-        if response.status_code == 500:
-            deserialized = self._deserialize('ErrorResponse', response)
-
-        if raw:
-            client_raw_response = ClientRawResponse(deserialized, response)
-            return client_raw_response
-
-        return deserialized
-    list_corporate_actions.metadata = {'url': '/v1/api/actions/{scope}/{sourceId}'}
-
-    def upsert_corporate_action(
-            self, scope, source_id, create_request=None, custom_headers=None, raw=False, **operation_config):
-        """Creates/updates a corporate action.
-
-        :param scope: The intended scope of the corporate action
-        :type scope: str
-        :param source_id: Source of the corporate action
-        :type source_id: str
-        :param create_request: The corporate action creation request object
-        :type create_request: ~lusid.models.UpsertCorporateActionRequest
-        :param dict custom_headers: headers that will be added to the request
-        :param bool raw: returns the direct response alongside the
-         deserialized response
-        :param operation_config: :ref:`Operation configuration
-         overrides<msrest:optionsforoperations>`.
-        :return: object or ClientRawResponse if raw=true
-        :rtype: object or ~msrest.pipeline.ClientRawResponse
-        :raises:
-         :class:`HttpOperationError<msrest.exceptions.HttpOperationError>`
-        """
-        # Construct URL
-        url = self.upsert_corporate_action.metadata['url']
-        path_format_arguments = {
-            'scope': self._serialize.url("scope", scope, 'str'),
-            'sourceId': self._serialize.url("source_id", source_id, 'str')
-        }
-        url = self._client.format_url(url, **path_format_arguments)
-
-        # Construct parameters
-        query_parameters = {}
-
-        # Construct headers
-        header_parameters = {}
-        header_parameters['Content-Type'] = 'application/json-patch+json; charset=utf-8'
-        if custom_headers:
-            header_parameters.update(custom_headers)
-
-        # Construct body
-        if create_request is not None:
-            body_content = self._serialize.body(create_request, 'UpsertCorporateActionRequest')
-        else:
-            body_content = None
-
-        # Construct and send request
-        request = self._client.post(url, query_parameters)
-        response = self._client.send(
-            request, header_parameters, body_content, stream=False, **operation_config)
-
-        if response.status_code not in [200, 400, 500]:
-            raise HttpOperationError(self._deserialize, response)
-
-        deserialized = None
-
-        if response.status_code == 200:
-            deserialized = self._deserialize('[CorporateActionEventDto]', response)
-        if response.status_code == 400:
-            deserialized = self._deserialize('ErrorResponse', response)
-        if response.status_code == 500:
-            deserialized = self._deserialize('ErrorResponse', response)
-
-        if raw:
-            client_raw_response = ClientRawResponse(deserialized, response)
-            return client_raw_response
-
-        return deserialized
-    upsert_corporate_action.metadata = {'url': '/v1/api/actions/{scope}/{sourceId}'}
 
     def get_aggregation_by_group(
             self, scope, group_code, request=None, custom_headers=None, raw=False, **operation_config):
@@ -1392,6 +1262,140 @@ class LUSIDAPI(object):
 
         return deserialized
     upload_configuration_transaction_types.metadata = {'url': '/v1/api/configuration/transactiontypes'}
+
+    def list_corporate_actions(
+            self, scope, source_id, effective_date=None, as_at=None, custom_headers=None, raw=False, **operation_config):
+        """Gets a corporate action based on dates.
+
+        :param scope: Scope
+        :type scope: str
+        :param source_id: Corporate action source id
+        :type source_id: str
+        :param effective_date: Effective Date
+        :type effective_date: datetime
+        :param as_at: AsAt Date filter
+        :type as_at: datetime
+        :param dict custom_headers: headers that will be added to the request
+        :param bool raw: returns the direct response alongside the
+         deserialized response
+        :param operation_config: :ref:`Operation configuration
+         overrides<msrest:optionsforoperations>`.
+        :return: object or ClientRawResponse if raw=true
+        :rtype: object or ~msrest.pipeline.ClientRawResponse
+        :raises:
+         :class:`HttpOperationError<msrest.exceptions.HttpOperationError>`
+        """
+        # Construct URL
+        url = self.list_corporate_actions.metadata['url']
+        path_format_arguments = {
+            'scope': self._serialize.url("scope", scope, 'str'),
+            'sourceId': self._serialize.url("source_id", source_id, 'str')
+        }
+        url = self._client.format_url(url, **path_format_arguments)
+
+        # Construct parameters
+        query_parameters = {}
+        if effective_date is not None:
+            query_parameters['effectiveDate'] = self._serialize.query("effective_date", effective_date, 'iso-8601')
+        if as_at is not None:
+            query_parameters['asAt'] = self._serialize.query("as_at", as_at, 'iso-8601')
+
+        # Construct headers
+        header_parameters = {}
+        header_parameters['Content-Type'] = 'application/json; charset=utf-8'
+        if custom_headers:
+            header_parameters.update(custom_headers)
+
+        # Construct and send request
+        request = self._client.get(url, query_parameters)
+        response = self._client.send(request, header_parameters, stream=False, **operation_config)
+
+        if response.status_code not in [200, 404, 500]:
+            raise HttpOperationError(self._deserialize, response)
+
+        deserialized = None
+
+        if response.status_code == 200:
+            deserialized = self._deserialize('[CorporateActionEventDto]', response)
+        if response.status_code == 404:
+            deserialized = self._deserialize('ErrorResponse', response)
+        if response.status_code == 500:
+            deserialized = self._deserialize('ErrorResponse', response)
+
+        if raw:
+            client_raw_response = ClientRawResponse(deserialized, response)
+            return client_raw_response
+
+        return deserialized
+    list_corporate_actions.metadata = {'url': '/v1/api/corporateactions/{scope}/{sourceId}'}
+
+    def batch_upsert_corporate_actions(
+            self, scope, source_id, actions=None, custom_headers=None, raw=False, **operation_config):
+        """Attempt to create/update one or more corporate action. Failed actions
+        will be identified in the body of the response.
+
+        :param scope: The intended scope of the corporate action
+        :type scope: str
+        :param source_id: Source of the corporate action
+        :type source_id: str
+        :param actions: The corporate action creation request objects
+        :type actions: list[~lusid.models.UpsertCorporateActionRequest]
+        :param dict custom_headers: headers that will be added to the request
+        :param bool raw: returns the direct response alongside the
+         deserialized response
+        :param operation_config: :ref:`Operation configuration
+         overrides<msrest:optionsforoperations>`.
+        :return: object or ClientRawResponse if raw=true
+        :rtype: object or ~msrest.pipeline.ClientRawResponse
+        :raises:
+         :class:`HttpOperationError<msrest.exceptions.HttpOperationError>`
+        """
+        # Construct URL
+        url = self.batch_upsert_corporate_actions.metadata['url']
+        path_format_arguments = {
+            'scope': self._serialize.url("scope", scope, 'str'),
+            'sourceId': self._serialize.url("source_id", source_id, 'str')
+        }
+        url = self._client.format_url(url, **path_format_arguments)
+
+        # Construct parameters
+        query_parameters = {}
+
+        # Construct headers
+        header_parameters = {}
+        header_parameters['Content-Type'] = 'application/json-patch+json; charset=utf-8'
+        if custom_headers:
+            header_parameters.update(custom_headers)
+
+        # Construct body
+        if actions is not None:
+            body_content = self._serialize.body(actions, '[UpsertCorporateActionRequest]')
+        else:
+            body_content = None
+
+        # Construct and send request
+        request = self._client.post(url, query_parameters)
+        response = self._client.send(
+            request, header_parameters, body_content, stream=False, **operation_config)
+
+        if response.status_code not in [201, 400, 500]:
+            raise HttpOperationError(self._deserialize, response)
+
+        deserialized = None
+
+        if response.status_code == 201:
+            deserialized = self._deserialize('TryUpsertCorporateActionsDto', response)
+        if response.status_code == 400:
+            deserialized = self._deserialize('ErrorResponse', response)
+        if response.status_code == 500:
+            deserialized = self._deserialize('ErrorResponse', response)
+
+        if raw:
+            client_raw_response = ClientRawResponse(deserialized, response)
+            return client_raw_response
+
+        return deserialized
+    batch_upsert_corporate_actions.metadata = {'url': '/v1/api/corporateactions/{scope}/{sourceId}'}
 
     def get_download_url(
             self, version=None, custom_headers=None, raw=False, **operation_config):
@@ -4239,7 +4243,7 @@ class LUSIDAPI(object):
         :param trade_id: Id of trade to add properties to
         :type trade_id: str
         :param properties: Trade properties to add
-        :type properties: list[~lusid.models.CreatePropertyRequest]
+        :type properties: list[~lusid.models.CreatePerpetualPropertyRequest]
         :param dict custom_headers: headers that will be added to the request
         :param bool raw: returns the direct response alongside the
          deserialized response
@@ -4270,7 +4274,7 @@ class LUSIDAPI(object):
 
         # Construct body
         if properties is not None:
-            body_content = self._serialize.body(properties, '[CreatePropertyRequest]')
+            body_content = self._serialize.body(properties, '[CreatePerpetualPropertyRequest]')
         else:
             body_content = None
 
@@ -6144,7 +6148,8 @@ class LUSIDAPI(object):
         """Gets the schema for a given entity.
 
         :param entity: Possible values include: 'PropertyKey', 'FieldSchema',
-         'Personalisation', 'Security', 'Property', 'PropertyRequest', 'Login',
+         'Personalisation', 'Security', 'Property', 'CreatePropertyRequest',
+         'CreatePerpetualPropertyRequest', 'PerpetualProperty', 'Login',
          'PropertyDefinition', 'PropertyDataFormat', 'AggregationResponseNode',
          'Portfolio', 'CompletePortfolio', 'PortfolioSearchResult',
          'PortfolioDetails', 'PortfolioProperties', 'Version',
@@ -6167,7 +6172,7 @@ class LUSIDAPI(object):
          'CorporateActionTransition', 'ReconciliationRequest',
          'ReconciliationBreak', 'TransactionConfigurationData',
          'TransactionConfigurationMovementData',
-         'TransactionConfigurationTypeAlias'
+         'TransactionConfigurationTypeAlias', 'TryUpsertCorporateActions'
         :type entity: str
         :param dict custom_headers: headers that will be added to the request
         :param bool raw: returns the direct response alongside the

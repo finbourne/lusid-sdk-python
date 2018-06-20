@@ -24,10 +24,6 @@
 from .clear_entity_caches_dto import ClearEntityCachesDto
 from .error_detail import ErrorDetail
 from .error_response import ErrorResponse
-from .corporate_action_transition_dto import CorporateActionTransitionDto
-from .upsert_corporate_action_request import UpsertCorporateActionRequest
-from .resource_id import ResourceId
-from .corporate_action_event_dto import CorporateActionEventDto
 from .aggregate_spec import AggregateSpec
 from .property_filter import PropertyFilter
 from .aggregation_request import AggregationRequest
@@ -50,6 +46,11 @@ from .txn_type_alias_dto import TxnTypeAliasDto
 from .txn_property_mapping_dto import TxnPropertyMappingDto
 from .txn_movement_meta_data_dto import TxnMovementMetaDataDto
 from .txn_meta_data_dto import TxnMetaDataDto
+from .corporate_action_transition_dto import CorporateActionTransitionDto
+from .upsert_corporate_action_request import UpsertCorporateActionRequest
+from .resource_id import ResourceId
+from .corporate_action_event_dto import CorporateActionEventDto
+from .try_upsert_corporate_actions_dto import TryUpsertCorporateActionsDto
 from .create_group_request import CreateGroupRequest
 from .version_dto import VersionDto
 from .group_dto import GroupDto
@@ -61,17 +62,19 @@ from .login_response import LoginResponse
 from .web_log_message import WebLogMessage
 from .personalisation_dto import PersonalisationDto
 from .upsert_personalisations_response import UpsertPersonalisationsResponse
+from .create_property_request import CreatePropertyRequest
 from .create_portfolio_request import CreatePortfolioRequest
 from .portfolio_dto import PortfolioDto
 from .update_portfolio_request import UpdatePortfolioRequest
 from .portfolio_details_dto import PortfolioDetailsDto
 from .portfolio_details_request import PortfolioDetailsRequest
+from .perpetual_property_dto import PerpetualPropertyDto
 from .trade_dto import TradeDto
 from .holding_dto import HoldingDto
 from .holding_adjustment_dto import HoldingAdjustmentDto
 from .upsert_portfolio_trades_dto import UpsertPortfolioTradesDto
 from .portfolio_properties_dto import PortfolioPropertiesDto
-from .create_property_request import CreatePropertyRequest
+from .create_perpetual_property_request import CreatePerpetualPropertyRequest
 from .upsert_portfolio_trade_request import UpsertPortfolioTradeRequest
 from .add_trade_property_dto import AddTradePropertyDto
 from .create_derived_portfolio_request import CreateDerivedPortfolioRequest
@@ -122,10 +125,6 @@ __all__ = [
     'ClearEntityCachesDto',
     'ErrorDetail',
     'ErrorResponse',
-    'CorporateActionTransitionDto',
-    'UpsertCorporateActionRequest',
-    'ResourceId',
-    'CorporateActionEventDto',
     'AggregateSpec',
     'PropertyFilter',
     'AggregationRequest',
@@ -148,6 +147,11 @@ __all__ = [
     'TxnPropertyMappingDto',
     'TxnMovementMetaDataDto',
     'TxnMetaDataDto',
+    'CorporateActionTransitionDto',
+    'UpsertCorporateActionRequest',
+    'ResourceId',
+    'CorporateActionEventDto',
+    'TryUpsertCorporateActionsDto',
     'CreateGroupRequest',
     'VersionDto',
     'GroupDto',
@@ -159,17 +163,19 @@ __all__ = [
     'WebLogMessage',
     'PersonalisationDto',
     'UpsertPersonalisationsResponse',
+    'CreatePropertyRequest',
     'CreatePortfolioRequest',
     'PortfolioDto',
     'UpdatePortfolioRequest',
     'PortfolioDetailsDto',
     'PortfolioDetailsRequest',
+    'PerpetualPropertyDto',
     'TradeDto',
     'HoldingDto',
     'HoldingAdjustmentDto',
     'UpsertPortfolioTradesDto',
     'PortfolioPropertiesDto',
-    'CreatePropertyRequest',
+    'CreatePerpetualPropertyRequest',
     'UpsertPortfolioTradeRequest',
     'AddTradePropertyDto',
     'CreateDerivedPortfolioRequest',

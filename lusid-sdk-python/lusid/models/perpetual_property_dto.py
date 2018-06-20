@@ -21,5 +21,30 @@
 # SOFTWARE.
 # --------------------------------------------------------------------------
 
-VERSION = "0.6.182"
+from msrest.serialization import Model
 
+
+class PerpetualPropertyDto(Model):
+    """This is intended to be the external facing unitemporal property
+    specification data type.
+
+    :param key:
+    :type key: str
+    :param value:
+    :type value: object
+    """
+
+    _validation = {
+        'key': {'required': True},
+        'value': {'required': True},
+    }
+
+    _attribute_map = {
+        'key': {'key': 'key', 'type': 'str'},
+        'value': {'key': 'value', 'type': 'object'},
+    }
+
+    def __init__(self, key, value):
+        super(PerpetualPropertyDto, self).__init__()
+        self.key = key
+        self.value = value

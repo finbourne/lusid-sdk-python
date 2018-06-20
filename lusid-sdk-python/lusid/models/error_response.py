@@ -62,7 +62,8 @@ class ErrorResponse(Model):
      'SecurityByCodeNotFound', 'CommandRetrievalFailure',
      'DataFilterApplicationFailure', 'SearchFailed',
      'MovementsEngineConfigurationKeyFailure', 'FxRateSourceNotFound',
-     'AccrualSourceNotFound'
+     'AccrualSourceNotFound', 'EntitlementsFailure', 'InvalidIdentityToken',
+     'InvalidRequestHeaders'
     :vartype code: str or ~lusid.models.enum
     :ivar message: The non-technical-user friendly message describing the
      error and how it might be remedied.

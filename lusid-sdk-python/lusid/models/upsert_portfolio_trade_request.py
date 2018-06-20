@@ -51,7 +51,7 @@ class UpsertPortfolioTradeRequest(Model):
     :param trade_currency: Trade currency
     :type trade_currency: str
     :param properties:
-    :type properties: list[~lusid.models.CreatePropertyRequest]
+    :type properties: list[~lusid.models.CreatePerpetualPropertyRequest]
     :param counterparty_id: Counterparty identifier
     :type counterparty_id: str
     :param source: Where this trade came from, either Client or System.
@@ -95,7 +95,7 @@ class UpsertPortfolioTradeRequest(Model):
         'exchange_rate': {'key': 'exchangeRate', 'type': 'float'},
         'settlement_currency': {'key': 'settlementCurrency', 'type': 'str'},
         'trade_currency': {'key': 'tradeCurrency', 'type': 'str'},
-        'properties': {'key': 'properties', 'type': '[CreatePropertyRequest]'},
+        'properties': {'key': 'properties', 'type': '[CreatePerpetualPropertyRequest]'},
         'counterparty_id': {'key': 'counterpartyId', 'type': 'str'},
         'source': {'key': 'source', 'type': 'str'},
         'dividend_state': {'key': 'dividendState', 'type': 'str'},

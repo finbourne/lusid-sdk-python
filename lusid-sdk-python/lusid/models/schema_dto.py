@@ -28,7 +28,8 @@ class SchemaDto(Model):
     """SchemaDto.
 
     :param entity: Possible values include: 'PropertyKey', 'FieldSchema',
-     'Personalisation', 'Security', 'Property', 'PropertyRequest', 'Login',
+     'Personalisation', 'Security', 'Property', 'CreatePropertyRequest',
+     'CreatePerpetualPropertyRequest', 'PerpetualProperty', 'Login',
      'PropertyDefinition', 'PropertyDataFormat', 'AggregationResponseNode',
      'Portfolio', 'CompletePortfolio', 'PortfolioSearchResult',
      'PortfolioDetails', 'PortfolioProperties', 'Version', 'AddTradeProperty',
@@ -48,7 +49,7 @@ class SchemaDto(Model):
      'CorporateAction', 'CorporateActionTransition', 'ReconciliationRequest',
      'ReconciliationBreak', 'TransactionConfigurationData',
      'TransactionConfigurationMovementData',
-     'TransactionConfigurationTypeAlias'
+     'TransactionConfigurationTypeAlias', 'TryUpsertCorporateActions'
     :type entity: str or ~lusid.models.enum
     :param href:
     :type href: str
