@@ -29,20 +29,16 @@ class SecurityClassificationDto(Model):
 
     :param uid: Unique security identifier
     :type uid: str
-    :param effective_from: Date from which this classification is effective
-    :type effective_from: datetime
     :param properties:
-    :type properties: list[~lusid.models.PropertyDto]
+    :type properties: list[~lusid.models.CreatePropertyRequest]
     """
 
     _attribute_map = {
         'uid': {'key': 'uid', 'type': 'str'},
-        'effective_from': {'key': 'effectiveFrom', 'type': 'iso-8601'},
-        'properties': {'key': 'properties', 'type': '[PropertyDto]'},
+        'properties': {'key': 'properties', 'type': '[CreatePropertyRequest]'},
     }
 
-    def __init__(self, uid=None, effective_from=None, properties=None):
+    def __init__(self, uid=None, properties=None):
         super(SecurityClassificationDto, self).__init__()
         self.uid = uid
-        self.effective_from = effective_from
         self.properties = properties

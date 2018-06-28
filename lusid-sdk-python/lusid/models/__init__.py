@@ -39,10 +39,11 @@ from .analytic_store_dto import AnalyticStoreDto
 from .link import Link
 from .deleted_entity_response import DeletedEntityResponse
 from .security_analytic_data_dto import SecurityAnalyticDataDto
-from .property_dto import PropertyDto
+from .create_property_request import CreatePropertyRequest
 from .security_classification_dto import SecurityClassificationDto
 from .classifications_dto import ClassificationsDto
 from .txn_type_alias_dto import TxnTypeAliasDto
+from .property_dto import PropertyDto
 from .txn_property_mapping_dto import TxnPropertyMappingDto
 from .txn_movement_meta_data_dto import TxnMovementMetaDataDto
 from .txn_meta_data_dto import TxnMetaDataDto
@@ -62,7 +63,6 @@ from .login_response import LoginResponse
 from .web_log_message import WebLogMessage
 from .personalisation_dto import PersonalisationDto
 from .upsert_personalisations_response import UpsertPersonalisationsResponse
-from .create_property_request import CreatePropertyRequest
 from .create_portfolio_request import CreatePortfolioRequest
 from .portfolio_dto import PortfolioDto
 from .update_portfolio_request import UpdatePortfolioRequest
@@ -140,10 +140,11 @@ __all__ = [
     'Link',
     'DeletedEntityResponse',
     'SecurityAnalyticDataDto',
-    'PropertyDto',
+    'CreatePropertyRequest',
     'SecurityClassificationDto',
     'ClassificationsDto',
     'TxnTypeAliasDto',
+    'PropertyDto',
     'TxnPropertyMappingDto',
     'TxnMovementMetaDataDto',
     'TxnMetaDataDto',
@@ -163,7 +164,6 @@ __all__ = [
     'WebLogMessage',
     'PersonalisationDto',
     'UpsertPersonalisationsResponse',
-    'CreatePropertyRequest',
     'CreatePortfolioRequest',
     'PortfolioDto',
     'UpdatePortfolioRequest',

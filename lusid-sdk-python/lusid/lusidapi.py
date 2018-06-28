@@ -90,7 +90,6 @@ class LUSIDAPI(object):
     | Field|Type|Description |
     | ---|---|--- |
     | Uid|string|Unique security identifier |
-    | EffectiveFrom|datetime|Date from which this classification is effective |
     ## Portfolios
     A portfolio is a container for trades and/or holdings.  Meta data and classifications of portfolios can be attached via properties.
     ## Derived Portfolios
@@ -235,7 +234,7 @@ class LUSIDAPI(object):
         self._client = ServiceClient(self.config.credentials, self.config)
 
         client_models = {k: v for k, v in models.__dict__.items() if isinstance(v, type)}
-        self.api_version = '0.6.186'
+        self.api_version = '0.6.190'
         self._serialize = Serializer(client_models)
         self._deserialize = Deserializer(client_models)
 
