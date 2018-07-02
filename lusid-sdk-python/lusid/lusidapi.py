@@ -57,19 +57,42 @@ class LUSIDAPIConfiguration(Configuration):
 
 class LUSIDAPI(object):
     """# Introduction
-    This page documents the [LUSID API](https://api.finbourne.com/swagger), which allows authorised clients to query and update their data within the LUSID platform.
-    SDKs to interact with the LUSID API are available in the following languages :
+    This page documents the [LUSID APIs](https://api.finbourne.com/swagger), which allows authorised clients to query and update their data within the LUSID platform.
+    SDKs to interact with the LUSID APIs are available in the following languages :
     * [C#](https://github.com/finbourne/lusid-sdk-csharp)
     * [Java](https://github.com/finbourne/lusid-sdk-java)
     * [JavaScript](https://github.com/finbourne/lusid-sdk-js)
     * [Python](https://github.com/finbourne/lusid-sdk-python)
-    # Immutable Events
-    A core tenet of the LUSID platform is the concept of an immutable data store.  This gives the ability to consistently reproduce the state of the system for any given point in bi-temporal space.  In order to achieve this LUSID has implemented an append only event store for all data types.  New events, including historical amendments, are added to the end of the event stream and then 'played back' in order to construct the state.  Given that all the events from T0 are required in order to reconstruct the state, there can be significant computational complexity and cost involved.  FINBOURNE have employed a number of techniques and optimisations in order to produce consistent performance characteristics e.g. using snapshots which has resulted in a highly performance and scalable platform.
     # Data Model
+    The LUSID API has a relatively lightweight but extremely powerful data model.   One of the goals of LUSID was not to enforce on clients a single rigid data model but rather to provide a flexible foundation onto which clients can streamline their data.   One of the primary tools to extend the data model is through using properties.  Properties can be associated with amongst others: -
+    * Trades
+    * Securities
+    * Portfolios
+    The LUSID data model is exposed through the LUSID APIs.  The APIs provide access to both business objects and the meta data used to configure the systems behaviours.   The key business entities are: -
+    * **Portfolios**
+    A portfolio is the primary container for trades and holdings.
+    * **Derived Portfolios**
+    Derived portfolios allow portfolios to be created based on other portfolios, by overriding or overlaying specific items
+    * **Holdings**
+    A holding is a position account for a security within a portfolio.  Holdings can only be adjusted via transactions.
+    * **Trades**
+    A Trade is a source of transactions used to manipulate holdings.
+    * **Corporate Actions**
+    A corporate action is a market event which occurs to a security, for example a stock split
+    * **Securities**
+    A security represents a currency, tradable instrument or OTC contract that is attached to a transaction and a holding.
+    * **Properties**
+    Several entities allow additional user defined properties to be associated with them.   For example, a Portfolio manager may be associated with a portfolio
+    Meta data includes: -
+    * **Transaction Types**
+    Trades are booked with a specific transaction type.  The types are client defined and are used to map the Trade to a series of movements which update the portfolio holdings.
+    * **Properties Types**
+    Types of user defined properties used within the system.
     This section describes the data model that LUSID exposes via the APIs.
     ## Scope
-    All entities in LUSID live within a logical partitioning of data known as a scope.  The unique code which identifies an entity is namespaced within the scope, allowing two entities with the same code in different scopes to be individually addressable.
+    All data in LUSID is segregated at the client level.  Entities in LUSID are identifiable by a unique code.  Every entity lives within a logical data partition known as a Scope.  Scope is an identity namespace allowing two entities with the same unique code to co-exist within individual address spaces.
     For example, prices for equities from different vendors may be uploaded into different scopes such as `client/vendor1` and `client/vendor2`.  A portfolio may then be valued using either of the price sources by referencing the appropriate scope.
+    LUSID Clients cannot access scopes of other clients.
     ## Schema
     A detailed description of the entities used by the API and parameters for endpoints which take a JSON document can be retrieved via the `schema` endpoint.
     ## Securities
@@ -91,10 +114,19 @@ class LUSIDAPI(object):
     | ---|---|--- |
     | Uid|string|Unique security identifier |
     ## Portfolios
-    A portfolio is a container for trades and/or holdings.  Meta data and classifications of portfolios can be attached via properties.
-    ## Derived Portfolios
+    Portfolios are the top-level entity containers within LUSID, containing trades, corporate actions and holdings.    The transactions build up the portfolio holdings on which valuations, analytics profit &amp; loss and risk can be calculated.
+    Properties can be associated with Portfolios to add in additional model data.  Portfolio properties can be changed over time as well.  For example, to allow a Portfolio Manager to be linked with a Portfolio.
+    Additionally, portfolios can be securitised and held by other portfolios, allowing LUSID to perform "drill-through" into underlying fund holdings
+    ### Derived Portfolios
     LUSID also allows for a portfolio to be composed of another portfolio via derived portfolios.  A derived portfolio can contain its own trades and also inherits any trades from its parent portfolio.  Any changes made to the parent portfolio are automatically reflected in derived portfolio.
     Derived portfolios in conjunction with scopes are a powerful construct.  For example, to do pre-trade what-if analysis, a derived portfolio could be created a new namespace linked to the underlying live (parent) portfolio.  Analysis can then be undertaken on the derived portfolio without affecting the live portfolio.
+    ### Movements Engine
+    The Movements engine sits on top of the immutable event store and is used to manage the relationship between input trading actions and their associated portfolio holdings.
+    The movements engine reads in the following entity types:-
+    * Posting Trades
+    * Applying Corporate Actions
+    * Holding Adjustments
+    These are converted to one or more movements and used by the movements engine to calculate holdings.  At the same time it also calculates running balances, and realised P&amp;L.  The outputs from the movements engine are holdings and transactions.
     ## Transactions
     A transaction represents an economic activity against a Portfolio.
     | Field|Type|Description |
@@ -216,6 +248,7 @@ class LUSIDAPI(object):
     | &lt;a name="186"&gt;186&lt;/a&gt;|EntitlementsFailure|  |
     | &lt;a name="187"&gt;187&lt;/a&gt;|InvalidIdentityToken|  |
     | &lt;a name="188"&gt;188&lt;/a&gt;|InvalidRequestHeaders|  |
+    | &lt;a name="189"&gt;189&lt;/a&gt;|PriceNotFound|  |
     | &lt;a name="-1"&gt;-1&lt;/a&gt;|Unknown error|  |
 
     :ivar config: Configuration for client.
@@ -234,7 +267,7 @@ class LUSIDAPI(object):
         self._client = ServiceClient(self.config.credentials, self.config)
 
         client_models = {k: v for k, v in models.__dict__.items() if isinstance(v, type)}
-        self.api_version = '0.6.190'
+        self.api_version = '0.6.192'
         self._serialize = Serializer(client_models)
         self._deserialize = Deserializer(client_models)
 

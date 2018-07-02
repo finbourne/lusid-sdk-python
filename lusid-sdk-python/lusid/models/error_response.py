@@ -63,7 +63,7 @@ class ErrorResponse(Model):
      'DataFilterApplicationFailure', 'SearchFailed',
      'MovementsEngineConfigurationKeyFailure', 'FxRateSourceNotFound',
      'AccrualSourceNotFound', 'EntitlementsFailure', 'InvalidIdentityToken',
-     'InvalidRequestHeaders'
+     'InvalidRequestHeaders', 'PriceNotFound'
     :vartype code: str or ~lusid.models.enum
     :ivar message: The non-technical-user friendly message describing the
      error and how it might be remedied.
