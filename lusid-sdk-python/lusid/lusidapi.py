@@ -267,7 +267,7 @@ class LUSIDAPI(object):
         self._client = ServiceClient(self.config.credentials, self.config)
 
         client_models = {k: v for k, v in models.__dict__.items() if isinstance(v, type)}
-        self.api_version = '0.6.192'
+        self.api_version = '0.6.204'
         self._serialize = Serializer(client_models)
         self._deserialize = Deserializer(client_models)
 
@@ -590,15 +590,13 @@ class LUSIDAPI(object):
     get_nested_aggregation_by_portfolio.metadata = {'url': '/v1/api/aggregation/portfolios/nested/{scope}/{portfolioCode}'}
 
     def get_aggregation_by_result_set(
-            self, scope, results_key, results_date, request=None, custom_headers=None, raw=False, **operation_config):
+            self, scope, results_key, request=None, custom_headers=None, raw=False, **operation_config):
         """Aggregate data from a result set.
 
         :param scope:
         :type scope: str
         :param results_key:
         :type results_key: str
-        :param results_date:
-        :type results_date: str
         :param request:
         :type request: ~lusid.models.AggregationRequest
         :param dict custom_headers: headers that will be added to the request
@@ -615,8 +613,7 @@ class LUSIDAPI(object):
         url = self.get_aggregation_by_result_set.metadata['url']
         path_format_arguments = {
             'scope': self._serialize.url("scope", scope, 'str'),
-            'resultsKey': self._serialize.url("results_key", results_key, 'str'),
-            'resultsDate': self._serialize.url("results_date", results_date, 'str')
+            'resultsKey': self._serialize.url("results_key", results_key, 'str')
         }
         url = self._client.format_url(url, **path_format_arguments)
 
@@ -657,18 +654,16 @@ class LUSIDAPI(object):
             return client_raw_response
 
         return deserialized
-    get_aggregation_by_result_set.metadata = {'url': '/v1/api/aggregation/results/{scope}/{resultsKey}/{resultsDate}'}
+    get_aggregation_by_result_set.metadata = {'url': '/v1/api/aggregation/results/{scope}/{resultsKey}'}
 
     def get_nested_aggregation_by_result_set(
-            self, scope, results_key, results_date, request=None, custom_headers=None, raw=False, **operation_config):
+            self, scope, results_key, request=None, custom_headers=None, raw=False, **operation_config):
         """Aggregate data from a result set into a nested structure.
 
         :param scope:
         :type scope: str
         :param results_key:
         :type results_key: str
-        :param results_date:
-        :type results_date: datetime
         :param request:
         :type request: ~lusid.models.AggregationRequest
         :param dict custom_headers: headers that will be added to the request
@@ -685,8 +680,7 @@ class LUSIDAPI(object):
         url = self.get_nested_aggregation_by_result_set.metadata['url']
         path_format_arguments = {
             'scope': self._serialize.url("scope", scope, 'str'),
-            'resultsKey': self._serialize.url("results_key", results_key, 'str'),
-            'resultsDate': self._serialize.url("results_date", results_date, 'iso-8601')
+            'resultsKey': self._serialize.url("results_key", results_key, 'str')
         }
         url = self._client.format_url(url, **path_format_arguments)
 
@@ -727,7 +721,7 @@ class LUSIDAPI(object):
             return client_raw_response
 
         return deserialized
-    get_nested_aggregation_by_result_set.metadata = {'url': '/v1/api/aggregation/results/nested/{scope}/{resultsKey}/{resultsDate}'}
+    get_nested_aggregation_by_result_set.metadata = {'url': '/v1/api/aggregation/results/nested/{scope}/{resultsKey}'}
 
     def list_analytic_stores(
             self, as_at=None, sort_by=None, start=None, limit=None, filter=None, custom_headers=None, raw=False, **operation_config):
@@ -1296,13 +1290,13 @@ class LUSIDAPI(object):
     upload_configuration_transaction_types.metadata = {'url': '/v1/api/configuration/transactiontypes'}
 
     def list_corporate_actions(
-            self, scope, source_id, effective_date=None, as_at=None, custom_headers=None, raw=False, **operation_config):
+            self, scope, corporate_action_source_code, effective_date=None, as_at=None, custom_headers=None, raw=False, **operation_config):
         """Gets a corporate action based on dates.
 
         :param scope: Scope
         :type scope: str
-        :param source_id: Corporate action source id
-        :type source_id: str
+        :param corporate_action_source_code: Corporate action source id
+        :type corporate_action_source_code: str
         :param effective_date: Effective Date
         :type effective_date: datetime
         :param as_at: AsAt Date filter
@@ -1321,7 +1315,7 @@ class LUSIDAPI(object):
         url = self.list_corporate_actions.metadata['url']
         path_format_arguments = {
             'scope': self._serialize.url("scope", scope, 'str'),
-            'sourceId': self._serialize.url("source_id", source_id, 'str')
+            'corporateActionSourceCode': self._serialize.url("corporate_action_source_code", corporate_action_source_code, 'str')
         }
         url = self._client.format_url(url, **path_format_arguments)
 
@@ -1359,18 +1353,18 @@ class LUSIDAPI(object):
             return client_raw_response
 
         return deserialized
-    list_corporate_actions.metadata = {'url': '/v1/api/corporateactions/{scope}/{sourceId}'}
+    list_corporate_actions.metadata = {'url': '/v1/api/corporateactions/{scope}/{corporateActionSourceCode}'}
 
     def batch_upsert_corporate_actions(
-            self, scope, source_id, actions=None, custom_headers=None, raw=False, **operation_config):
+            self, scope, corporate_action_source_code, actions=None, custom_headers=None, raw=False, **operation_config):
         """Attempt to create/update one or more corporate action. Failed actions
         will be identified in the body of the response.
 
         :param scope: The intended scope of the corporate action
         :type scope: str
-        :param source_id: Source of the corporate action
-        :type source_id: str
-        :param actions: The corporate action creation request objects
+        :param corporate_action_source_code: Source of the corporate action
+        :type corporate_action_source_code: str
+        :param actions: The corporate actions to create
         :type actions: list[~lusid.models.UpsertCorporateActionRequest]
         :param dict custom_headers: headers that will be added to the request
         :param bool raw: returns the direct response alongside the
@@ -1386,7 +1380,7 @@ class LUSIDAPI(object):
         url = self.batch_upsert_corporate_actions.metadata['url']
         path_format_arguments = {
             'scope': self._serialize.url("scope", scope, 'str'),
-            'sourceId': self._serialize.url("source_id", source_id, 'str')
+            'corporateActionSourceCode': self._serialize.url("corporate_action_source_code", corporate_action_source_code, 'str')
         }
         url = self._client.format_url(url, **path_format_arguments)
 
@@ -1427,7 +1421,7 @@ class LUSIDAPI(object):
             return client_raw_response
 
         return deserialized
-    batch_upsert_corporate_actions.metadata = {'url': '/v1/api/corporateactions/{scope}/{sourceId}'}
+    batch_upsert_corporate_actions.metadata = {'url': '/v1/api/corporateactions/{scope}/{corporateActionSourceCode}'}
 
     def get_download_url(
             self, version=None, custom_headers=None, raw=False, **operation_config):

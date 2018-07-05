@@ -36,7 +36,7 @@ class HoldingAdjustmentDto(Model):
     :param cost:
     :type cost: float
     :param properties:
-    :type properties: list[~lusid.models.PropertyDto]
+    :type properties: list[~lusid.models.CreatePropertyRequest]
     :param _links:
     :type _links: list[~lusid.models.Link]
     """
@@ -46,7 +46,7 @@ class HoldingAdjustmentDto(Model):
         'security_uid': {'key': 'securityUid', 'type': 'str'},
         'units': {'key': 'units', 'type': 'float'},
         'cost': {'key': 'cost', 'type': 'float'},
-        'properties': {'key': 'properties', 'type': '[PropertyDto]'},
+        'properties': {'key': 'properties', 'type': '[CreatePropertyRequest]'},
         '_links': {'key': '_links', 'type': '[Link]'},
     }
 
