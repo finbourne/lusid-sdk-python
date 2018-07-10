@@ -22,6 +22,7 @@
 # --------------------------------------------------------------------------
 
 from msrest.serialization import Model
+from msrest.exceptions import HttpOperationError
 
 
 class ErrorResponse(Model):
@@ -48,10 +49,10 @@ class ErrorResponse(Model):
      'AnalyticStoreAlreadyExists', 'ClientSecurityAlreadyExists',
      'DuplicateInParameterSet', 'ResultsNotFound', 'OrderFieldNotInResultSet',
      'OperationFailed', 'ElasticSearchError', 'InvalidParameterValue',
-     'ServerConfigurationError', 'CommandProcessingFailure',
-     'EntityStateConstructionFailure', 'EntityTimelineDoesNotExist',
-     'EventPublishFailure', 'InvalidRequestFailure', 'EventPublishUnknown',
-     'EventQueryFailure', 'BlobDidNotExistFailure', 'SubSystemRequestFailure',
+     'CommandProcessingFailure', 'EntityStateConstructionFailure',
+     'EntityTimelineDoesNotExist', 'EventPublishFailure',
+     'InvalidRequestFailure', 'EventPublishUnknown', 'EventQueryFailure',
+     'BlobDidNotExistFailure', 'SubSystemRequestFailure',
      'SubSystemConfigurationFailure', 'FailedToDelete',
      'UpsertClientSecurityFailure', 'IllegalAsAtInterval',
      'IllegalBitemporalQuery', 'InvalidAlternateId',
@@ -63,7 +64,7 @@ class ErrorResponse(Model):
      'DataFilterApplicationFailure', 'SearchFailed',
      'MovementsEngineConfigurationKeyFailure', 'FxRateSourceNotFound',
      'AccrualSourceNotFound', 'EntitlementsFailure', 'InvalidIdentityToken',
-     'InvalidRequestHeaders', 'PriceNotFound'
+     'InvalidRequestHeaders', 'PriceNotFound', 'ServerConfigurationError'
     :vartype code: str or ~lusid.models.enum
     :ivar message: The non-technical-user friendly message describing the
      error and how it might be remedied.
@@ -104,3 +105,15 @@ class ErrorResponse(Model):
         self.detailed_message = None
         self.items = items
         self.more_info = None
+
+
+class ErrorResponseException(HttpOperationError):
+    """Server responsed with exception of type: 'ErrorResponse'.
+
+    :param deserialize: A deserializer
+    :param response: Server response to be deserialized.
+    """
+
+    def __init__(self, deserialize, response, *args):
+
+        super(ErrorResponseException, self).__init__(deserialize, response, 'ErrorResponse', *args)

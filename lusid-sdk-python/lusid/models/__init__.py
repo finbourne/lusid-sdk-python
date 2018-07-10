@@ -23,7 +23,7 @@
 
 from .clear_entity_caches_dto import ClearEntityCachesDto
 from .error_detail import ErrorDetail
-from .error_response import ErrorResponse
+from .error_response import ErrorResponse, ErrorResponseException
 from .aggregate_spec import AggregateSpec
 from .property_filter import PropertyFilter
 from .aggregation_request import AggregationRequest
@@ -124,7 +124,7 @@ from .resource_list_ui_data_type import ResourceListUiDataType
 __all__ = [
     'ClearEntityCachesDto',
     'ErrorDetail',
-    'ErrorResponse',
+    'ErrorResponse', 'ErrorResponseException',
     'AggregateSpec',
     'PropertyFilter',
     'AggregationRequest',
