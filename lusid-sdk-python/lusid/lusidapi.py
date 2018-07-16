@@ -275,7 +275,7 @@ class LUSIDAPI(object):
         self._client = ServiceClient(self.config.credentials, self.config)
 
         client_models = {k: v for k, v in models.__dict__.items() if isinstance(v, type)}
-        self.api_version = '0.6.208'
+        self.api_version = '0.6.210'
         self._serialize = Serializer(client_models)
         self._deserialize = Deserializer(client_models)
 
@@ -1245,15 +1245,15 @@ class LUSIDAPI(object):
     upload_configuration_transaction_types.metadata = {'url': '/v1/api/configuration/transactiontypes'}
 
     def list_corporate_actions(
-            self, scope, corporate_action_source_code, effective_date=None, as_at=None, custom_headers=None, raw=False, **operation_config):
+            self, scope, corporate_action_source_code, effective_at=None, as_at=None, custom_headers=None, raw=False, **operation_config):
         """Gets a corporate action based on dates.
 
         :param scope: Scope
         :type scope: str
         :param corporate_action_source_code: Corporate action source id
         :type corporate_action_source_code: str
-        :param effective_date: Effective Date
-        :type effective_date: datetime
+        :param effective_at: Effective Date
+        :type effective_at: datetime
         :param as_at: AsAt Date filter
         :type as_at: datetime
         :param dict custom_headers: headers that will be added to the request
@@ -1277,8 +1277,8 @@ class LUSIDAPI(object):
 
         # Construct parameters
         query_parameters = {}
-        if effective_date is not None:
-            query_parameters['effectiveDate'] = self._serialize.query("effective_date", effective_date, 'iso-8601')
+        if effective_at is not None:
+            query_parameters['effectiveAt'] = self._serialize.query("effective_at", effective_at, 'iso-8601')
         if as_at is not None:
             query_parameters['asAt'] = self._serialize.query("as_at", as_at, 'iso-8601')
 
