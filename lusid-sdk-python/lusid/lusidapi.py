@@ -116,9 +116,23 @@ class LUSIDAPI(object):
     Portfolios are the top-level entity containers within LUSID, containing trades, corporate actions and holdings.    The transactions build up the portfolio holdings on which valuations, analytics profit &amp; loss and risk can be calculated.
     Properties can be associated with Portfolios to add in additional model data.  Portfolio properties can be changed over time as well.  For example, to allow a Portfolio Manager to be linked with a Portfolio.
     Additionally, portfolios can be securitised and held by other portfolios, allowing LUSID to perform "drill-through" into underlying fund holdings
+    ### Reference Portfolios
+    Reference portfolios are portfolios that contain only holdings or weights, as opposed to transactions, and are designed to represent entities such as indices.
     ### Derived Portfolios
     LUSID also allows for a portfolio to be composed of another portfolio via derived portfolios.  A derived portfolio can contain its own trades and also inherits any trades from its parent portfolio.  Any changes made to the parent portfolio are automatically reflected in derived portfolio.
     Derived portfolios in conjunction with scopes are a powerful construct.  For example, to do pre-trade what-if analysis, a derived portfolio could be created a new namespace linked to the underlying live (parent) portfolio.  Analysis can then be undertaken on the derived portfolio without affecting the live portfolio.
+    ### Portfolio Groups
+    Portfolio groups allow the construction of a hierarchy from portfolios and groups.  Portfolio operations on the group are executed on an aggregated set of portfolios in the hierarchy.
+    For example:
+    * Global Portfolios _(group)_
+      * APAC _(group)_
+        * Hong Kong _(portfolio)_
+        * Japan _(portfolio)_
+      * Europe _(group)_
+        * France _(portfolio)_
+        * Germany _(portfolio)_
+      * UK _(portfolio)_
+    In this example **Global Portfolios** is a group that consists of an aggregate of **Hong Kong**, **Japan**, **France**, **Germany** and **UK** portfolios.
     ### Movements Engine
     The Movements engine sits on top of the immutable event store and is used to manage the relationship between input trading actions and their associated portfolio holdings.
     The movements engine reads in the following entity types:-
@@ -275,7 +289,7 @@ class LUSIDAPI(object):
         self._client = ServiceClient(self.config.credentials, self.config)
 
         client_models = {k: v for k, v in models.__dict__.items() if isinstance(v, type)}
-        self.api_version = '0.6.210'
+        self.api_version = '0.6.220'
         self._serialize = Serializer(client_models)
         self._deserialize = Deserializer(client_models)
 
@@ -1032,6 +1046,67 @@ class LUSIDAPI(object):
 
         return deserialized
     insert_analytics.metadata = {'url': '/v1/api/analytics/{scope}/{year}/{month}/{day}/prices'}
+
+    def upsert_analytics(
+            self, scope, request=None, custom_headers=None, raw=False, **operation_config):
+        """Upsert Analytics.
+
+        :param scope: Scope of the analytic
+        :type scope: str
+        :param request: A valid and fully populated analytic store creation
+         request
+        :type request: ~lusid.models.AnalyticsStorageRequest
+        :param dict custom_headers: headers that will be added to the request
+        :param bool raw: returns the direct response alongside the
+         deserialized response
+        :param operation_config: :ref:`Operation configuration
+         overrides<msrest:optionsforoperations>`.
+        :return: object or ClientRawResponse if raw=true
+        :rtype: object or ~msrest.pipeline.ClientRawResponse
+        :raises:
+         :class:`ErrorResponseException<lusid.models.ErrorResponseException>`
+        """
+        # Construct URL
+        url = self.upsert_analytics.metadata['url']
+        path_format_arguments = {
+            'scope': self._serialize.url("scope", scope, 'str')
+        }
+        url = self._client.format_url(url, **path_format_arguments)
+
+        # Construct parameters
+        query_parameters = {}
+
+        # Construct headers
+        header_parameters = {}
+        header_parameters['Content-Type'] = 'application/json-patch+json; charset=utf-8'
+        if custom_headers:
+            header_parameters.update(custom_headers)
+
+        # Construct body
+        if request is not None:
+            body_content = self._serialize.body(request, 'AnalyticsStorageRequest')
+        else:
+            body_content = None
+
+        # Construct and send request
+        request = self._client.post(url, query_parameters)
+        response = self._client.send(
+            request, header_parameters, body_content, stream=False, **operation_config)
+
+        if response.status_code not in [200]:
+            raise models.ErrorResponseException(self._deserialize, response)
+
+        deserialized = None
+
+        if response.status_code == 200:
+            deserialized = self._deserialize('object', response)
+
+        if raw:
+            client_raw_response = ClientRawResponse(deserialized, response)
+            return client_raw_response
+
+        return deserialized
+    upsert_analytics.metadata = {'url': '/v1/api/analytics2/{scope}'}
 
     def upsert_classification(
             self, classifications=None, custom_headers=None, raw=False, **operation_config):

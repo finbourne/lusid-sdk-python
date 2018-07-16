@@ -39,6 +39,8 @@ from .analytic_store_dto import AnalyticStoreDto
 from .link import Link
 from .deleted_entity_response import DeletedEntityResponse
 from .security_analytic_data_dto import SecurityAnalyticDataDto
+from .analytics_item_dto import AnalyticsItemDto
+from .analytics_storage_request import AnalyticsStorageRequest
 from .create_property_request import CreatePropertyRequest
 from .security_classification_dto import SecurityClassificationDto
 from .classifications_dto import ClassificationsDto
@@ -140,6 +142,8 @@ __all__ = [
     'Link',
     'DeletedEntityResponse',
     'SecurityAnalyticDataDto',
+    'AnalyticsItemDto',
+    'AnalyticsStorageRequest',
     'CreatePropertyRequest',
     'SecurityClassificationDto',
     'ClassificationsDto',

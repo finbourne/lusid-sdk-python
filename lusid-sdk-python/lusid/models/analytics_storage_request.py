@@ -21,5 +21,20 @@
 # SOFTWARE.
 # --------------------------------------------------------------------------
 
-VERSION = "0.6.220"
+from msrest.serialization import Model
 
+
+class AnalyticsStorageRequest(Model):
+    """AnalyticsStorageRequest.
+
+    :param items:
+    :type items: list[~lusid.models.AnalyticsItemDto]
+    """
+
+    _attribute_map = {
+        'items': {'key': 'items', 'type': '[AnalyticsItemDto]'},
+    }
+
+    def __init__(self, items=None):
+        super(AnalyticsStorageRequest, self).__init__()
+        self.items = items
