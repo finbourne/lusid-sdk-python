@@ -52,28 +52,18 @@ class TestFinbourneApi(TestCase):
         #   set the okta api token
         cls.api_token = {"access_token": okta_response.json()["access_token"]}
 
-    def assert_response_is_not_error(self, expected_type, response):
-
-        if isinstance(response, models.ErrorResponse):
-            self.fail(response.detailed_message)
-        elif isinstance(response, expected_type):
-            return response
-        else:
-            self.fail("unknown response: {0}".format(type(response)))
-
     def test_create_portfolio(self):
 
         credentials = BasicTokenAuthentication(TestFinbourneApi.api_token)
         client = lusid.LUSIDAPI(credentials, TestFinbourneApi.api_url)
 
-        scope = "finbourne"
+        scope = str(uuid.uuid4())
         guid = str(uuid.uuid4())
         request = models.CreatePortfolioRequest("portfolio-{0}".format(guid), "id-{0}".format(guid), "GBP")
 
         # create the portfolio
         result = client.create_portfolio(scope, request)
 
-        self.assert_response_is_not_error(models.PortfolioDto, result)
         self.assertEqual(result.id.code, request.code)
 
     def test_create_portfolio_with_properties(self):
@@ -81,7 +71,7 @@ class TestFinbourneApi(TestCase):
         credentials = BasicTokenAuthentication(TestFinbourneApi.api_token)
         client = lusid.LUSIDAPI(credentials, TestFinbourneApi.api_url)
 
-        scope = "finbourne"
+        scope = str(uuid.uuid4())
         guid = str(uuid.uuid4())
         property_name = "fund-style-{0}".format(guid)
         property_key = "Portfolio/{0}/{1}".format(scope, property_name)
@@ -99,13 +89,11 @@ class TestFinbourneApi(TestCase):
 
         #   create the property definition
         property_definition_result = client.create_property_definition(property_definition)
-        self.assert_response_is_not_error(models.PropertyDefinitionDto, property_definition_result)
 
         #   create the portfolio
         request = models.CreatePortfolioRequest("portfolio-{}".format(guid), "id-{0}".format(guid), "GBP")
         portfolio = client.create_portfolio(scope, request)
 
-        self.assert_response_is_not_error(models.PortfolioDto, portfolio)
         self.assertEqual(portfolio.id.code, request.code)
 
         portfolio_id = portfolio.id.code
@@ -117,8 +105,7 @@ class TestFinbourneApi(TestCase):
         portfolio_property = models.CreatePropertyRequest(property_value, scope, property_name)
 
         #   add the property to the portfolio
-        upsert_property_result = client.upsert_portfolio_properties(scope, portfolio_id, [portfolio_property], portfolio.created)
-        properties_result = self.assert_response_is_not_error(models.PortfolioPropertiesDto, upsert_property_result)
+        properties_result = client.upsert_portfolio_properties(scope, portfolio_id, [portfolio_property], portfolio.created)
 
         self.assertEqual(properties_result.origin_portfolio_id.code, portfolio_id)
         self.assertEqual(properties_result.properties[0].value, property_value)
@@ -128,7 +115,7 @@ class TestFinbourneApi(TestCase):
         credentials = BasicTokenAuthentication(TestFinbourneApi.api_token)
         client = lusid.LUSIDAPI(credentials, TestFinbourneApi.api_url)
 
-        scope = "finbourne"
+        scope = str(uuid.uuid4())
         guid = str(uuid.uuid4())
         property_name = "traderId-{0}".format(guid)
         property_key = "Trade/{0}/traderId-{1}".format(scope, guid)
@@ -146,7 +133,6 @@ class TestFinbourneApi(TestCase):
 
         #   create the property definition
         property_definition_result = client.create_property_definition(property_definition)
-        self.assert_response_is_not_error(models.PropertyDefinitionDto, property_definition_result)
 
         effective_date = datetime(2018, 1, 1, tzinfo = pytz.utc)
 
@@ -154,7 +140,6 @@ class TestFinbourneApi(TestCase):
         request = models.CreatePortfolioRequest("portfolio-{0}".format(guid), "id-{0}".format(guid), "GBP", effective_date)
         portfolio = client.create_portfolio(scope, request)
 
-        self.assert_response_is_not_error(models.PortfolioDto, portfolio)
         self.assertEqual(portfolio.id.code, request.code)
 
         portfolio_id = portfolio.id.code
@@ -180,11 +165,9 @@ class TestFinbourneApi(TestCase):
 
         #   add the trade
         upsert_result = client.upsert_trades(scope, portfolio_id, [trade])
-        self.assert_response_is_not_error(models.UpsertPortfolioTradesDto, upsert_result)
 
         #   get the trades
-        get_trades_result = client.get_trades(scope, portfolio_id)
-        trades = self.assert_response_is_not_error(models.VersionedResourceListTradeDto, get_trades_result)
+        trades = client.get_trades(scope, portfolio_id)
 
         self.assertEqual(len(trades.values), 1)
         self.assertEqual(trades.values[0].trade_id, trade.trade_id)
@@ -195,7 +178,7 @@ class TestFinbourneApi(TestCase):
         credentials = BasicTokenAuthentication(TestFinbourneApi.api_token)
         client = lusid.LUSIDAPI(credentials, TestFinbourneApi.api_url)
 
-        scope = "finbourne"
+        scope = str(uuid.uuid4())
         guid = str(uuid.uuid4())
         effective_date = datetime(2018, 1, 1, tzinfo=pytz.utc)
 
@@ -204,7 +187,6 @@ class TestFinbourneApi(TestCase):
         # create the portfolio
         result = client.create_portfolio(scope, request)
 
-        self.assert_response_is_not_error(models.PortfolioDto, result)
         self.assertEqual(result.id.code, request.code)
 
         portfolio_id = result.id.code
@@ -220,25 +202,19 @@ class TestFinbourneApi(TestCase):
         new_trades = list(map(self.build_trade, trade_specs))
 
         # add initial batch of trades
-        add_trades_result = client.upsert_trades(scope, portfolio_id, new_trades)
-        initial_result = self.assert_response_is_not_error(models.UpsertPortfolioTradesDto, add_trades_result)
-
+        initial_result = client.upsert_trades(scope, portfolio_id, new_trades)
         as_at_batch1 = initial_result.version.as_at_date
         sleep(0.5)
 
         # add trade for 2018-1-8
         trade = self.build_trade(TradeSpec("FIGI_BBG001S61MW8", 104, datetime(2018, 1, 8, tzinfo=pytz.utc)))
-        later_result = client.upsert_trades(scope, portfolio_id, [trade])
-        later_trade = self.assert_response_is_not_error(models.UpsertPortfolioTradesDto, later_result)
-
+        later_trade = client.upsert_trades(scope, portfolio_id, [trade])
         as_at_batch2 = later_trade.version.as_at_date
         sleep(0.5)
 
         # add back dated trade
         trade = self.build_trade(TradeSpec("FIGI_BBG001S6M3Z4", 105, datetime(2018, 1, 5, tzinfo=pytz.utc)))
-        backdated_result = client.upsert_trades(scope, portfolio_id, [trade])
-        backdated_trade = self.assert_response_is_not_error(models.UpsertPortfolioTradesDto, backdated_result)
-
+        backdated_trade = client.upsert_trades(scope, portfolio_id, [trade]) 
         as_at_batch3 = backdated_trade.version.as_at_date
         sleep(0.5)
 
@@ -250,31 +226,27 @@ class TestFinbourneApi(TestCase):
                                                        trade.trade_price,
                                                        trade.total_consideration))
 
-        # get the list of trades
-        trades_result = client.get_trades(scope, portfolio_id, as_at=as_at_batch1)
-        trades_list = self.assert_response_is_not_error(models.VersionedResourceListTradeDto, trades_result)
-
-        self.assertEqual(len(trades_list.values), 3, "as at {0}.format(as_at_batch1)")
+        # get the list of original trades
+        trades_list = client.get_trades(scope, portfolio_id, as_at=as_at_batch1)
+        
+        self.assertEqual(len(trades_list.values), 3, "Initial trades, as at {0}".format(as_at_batch1))
         print("trades at {0}".format(as_at_batch1))
         print_trades(trades_list.values)
 
-        all_trades = client.get_trades(scope, portfolio_id, as_at=as_at_batch2)
-        trades_list = self.assert_response_is_not_error(models.VersionedResourceListTradeDto, all_trades)
-
-        self.assertEqual(len(trades_list.values), 4, "as at {0}".format(as_at_batch2))
+        # get the list of trades including the later trade
+        trades_list = client.get_trades(scope, portfolio_id, as_at=as_at_batch2)
+        self.assertEqual(len(trades_list.values), 4, "Including later trade, as at {0}".format(as_at_batch2))
         print("trades at {0}".format(as_at_batch2))
-        print_trades(all_trades.values)
+        print_trades(trades_list.values)
 
-        all_trades = client.get_trades(scope, portfolio_id, as_at=as_at_batch3)
-        trades_list = self.assert_response_is_not_error(models.VersionedResourceListTradeDto, all_trades)
-
-        self.assertEqual(len(trades_list.values), 5, "as at {0}".format(as_at_batch2))
+        # get the list of trades including the back-dated trade
+        trades_list = client.get_trades(scope, portfolio_id, as_at=as_at_batch3)
+        self.assertEqual(len(trades_list.values), 5, "Including back-dated trade, as at {0}".format(as_at_batch3))
         print("trades at {0}".format(as_at_batch3))
-        print_trades(all_trades.values)
+        print_trades(trades_list.values)
 
+		# get the list of trades now
         all_trades = client.get_trades(scope, portfolio_id)
-        self.assert_response_is_not_error(models.VersionedResourceListTradeDto, all_trades)
-
         print("trades at {0}".format(datetime.utcnow()))
         print_trades(all_trades.values)
 
@@ -286,8 +258,7 @@ class TestFinbourneApi(TestCase):
         isins = ["IT0004966401", "FR0010192997"]
 
         #   lookup securities
-        lookup_result = client.lookup_securities_from_codes("Isin", isins)
-        fbn_ids = self.assert_response_is_not_error(models.TryLookupSecuritiesFromCodesDto, lookup_result)
+        fbn_ids = client.lookup_securities_from_codes("Isin", isins)
 
         self.assertGreater(len(fbn_ids.values), 0)
 
@@ -304,7 +275,7 @@ class TestFinbourneApi(TestCase):
         credentials = BasicTokenAuthentication(TestFinbourneApi.api_token)
         client = lusid.LUSIDAPI(credentials, TestFinbourneApi.api_url)
 
-        scope = "finbourne"
+        scope = str(uuid.uuid4())
         guid = str(uuid.uuid4())
         effective_date = datetime(2018, 1, 1, tzinfo=pytz.utc)
 
@@ -313,7 +284,6 @@ class TestFinbourneApi(TestCase):
         #   create the portfolio
         result = client.create_portfolio(scope, request)
 
-        self.assert_response_is_not_error(models.PortfolioDto, result)
         self.assertEqual(result.id.code, request.code)
 
         portfolio_id = result.id.code
@@ -330,18 +300,16 @@ class TestFinbourneApi(TestCase):
 
         #   add initial batch of trades
         add_trades_result = client.upsert_trades(scope, portfolio_id, new_trades)
-        self.assert_response_is_not_error(models.UpsertPortfolioTradesDto, add_trades_result)
 
-        check_exists_result = client.get_analytic_store(scope,
-                                                        effective_date.year,
-                                                        effective_date.month,
-                                                        effective_date.day)
-
-        #   create an analytic store
-        if isinstance(check_exists_result, models.ErrorResponse) and check_exists_result.code == "AnalyticStoreNotFound":
+        try:
+            check_exists_result = client.get_analytic_store(scope,
+                                                            effective_date.year,
+                                                            effective_date.month,
+                                                            effective_date.day)
+        except:
+            #   create an analytic store
             analytic_store_request = models.CreateAnalyticStoreRequest(scope, effective_date)
             analytic_store_result = client.create_analytic_store(analytic_store_request)
-            self.assert_response_is_not_error(models.AnalyticStoreDto, analytic_store_result)
 
         prices = [
             models.SecurityAnalyticDataDto("FIGI_BBG001S7Z574", 100),
@@ -351,7 +319,6 @@ class TestFinbourneApi(TestCase):
 
         #   add prices
         prices_result = client.insert_analytics(scope, effective_date.year, effective_date.month, effective_date.day, prices)
-        self.assert_response_is_not_error(models.AnalyticStoreDto, prices_result)
 
         aggregation_request = models.AggregationRequest(
             recipe_scope=scope,
@@ -365,8 +332,7 @@ class TestFinbourneApi(TestCase):
         )
 
         #   do the aggregation
-        aggregation_result = client.get_nested_aggregation_by_portfolio(scope, portfolio_id, aggregation_request)
-        aggregation = self.assert_response_is_not_error(models.NestedAggregationResponse, aggregation_result)
+        aggregation = client.get_nested_aggregation_by_portfolio(scope, portfolio_id, aggregation_request)
 
         for item in aggregation.data.children:
             print("{0}".format(item.group_property_value))
