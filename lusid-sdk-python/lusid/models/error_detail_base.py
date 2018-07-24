@@ -21,5 +21,28 @@
 # SOFTWARE.
 # --------------------------------------------------------------------------
 
-VERSION = "0.6.232"
+from msrest.serialization import Model
 
+
+class ErrorDetailBase(Model):
+    """ErrorDetailBase.
+
+    :param id:
+    :type id: str
+    :param type:
+    :type type: str
+    :param detail:
+    :type detail: str
+    """
+
+    _attribute_map = {
+        'id': {'key': 'id', 'type': 'str'},
+        'type': {'key': 'type', 'type': 'str'},
+        'detail': {'key': 'detail', 'type': 'str'},
+    }
+
+    def __init__(self, id=None, type=None, detail=None):
+        super(ErrorDetailBase, self).__init__()
+        self.id = id
+        self.type = type
+        self.detail = detail

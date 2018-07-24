@@ -36,7 +36,7 @@ class SecurityDto(Model):
     :param common_name:
     :type common_name: str
     :param aliases:
-    :type aliases: ~lusid.models.SecurityDtoAliases
+    :type aliases: dict[str, str]
     :param properties:
     :type properties: list[~lusid.models.PropertyDto]
     :param _links:
@@ -48,7 +48,7 @@ class SecurityDto(Model):
         'uid': {'key': 'uid', 'type': 'str'},
         'version': {'key': 'version', 'type': 'VersionDto'},
         'common_name': {'key': 'commonName', 'type': 'str'},
-        'aliases': {'key': 'aliases', 'type': 'SecurityDtoAliases'},
+        'aliases': {'key': 'aliases', 'type': '{str}'},
         'properties': {'key': 'properties', 'type': '[PropertyDto]'},
         '_links': {'key': '_links', 'type': '[Link]'},
     }

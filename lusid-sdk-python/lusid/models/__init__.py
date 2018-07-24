@@ -22,7 +22,7 @@
 # --------------------------------------------------------------------------
 
 from .clear_entity_caches_dto import ClearEntityCachesDto
-from .error_detail import ErrorDetail
+from .error_detail_base import ErrorDetailBase
 from .error_response import ErrorResponse, ErrorResponseException
 from .aggregate_spec import AggregateSpec
 from .property_filter import PropertyFilter
@@ -53,6 +53,7 @@ from .corporate_action_transition_dto import CorporateActionTransitionDto
 from .upsert_corporate_action_request import UpsertCorporateActionRequest
 from .resource_id import ResourceId
 from .corporate_action_event_dto import CorporateActionEventDto
+from .error_detail import ErrorDetail
 from .try_upsert_corporate_actions_dto import TryUpsertCorporateActionsDto
 from .create_group_request import CreateGroupRequest
 from .version_dto import VersionDto
@@ -99,7 +100,6 @@ from .property_schema_dto import PropertySchemaDto
 from .key_value_pair_code_type_string import KeyValuePairCodeTypeString
 from .instrument_definition_dto import InstrumentDefinitionDto
 from .create_client_security_request import CreateClientSecurityRequest
-from .security_dto_aliases import SecurityDtoAliases
 from .security_dto import SecurityDto
 from .try_add_client_securities_dto import TryAddClientSecuritiesDto
 from .try_delete_client_securities_dto import TryDeleteClientSecuritiesDto
@@ -125,7 +125,7 @@ from .resource_list_ui_data_type import ResourceListUiDataType
 
 __all__ = [
     'ClearEntityCachesDto',
-    'ErrorDetail',
+    'ErrorDetailBase',
     'ErrorResponse', 'ErrorResponseException',
     'AggregateSpec',
     'PropertyFilter',
@@ -156,6 +156,7 @@ __all__ = [
     'UpsertCorporateActionRequest',
     'ResourceId',
     'CorporateActionEventDto',
+    'ErrorDetail',
     'TryUpsertCorporateActionsDto',
     'CreateGroupRequest',
     'VersionDto',
@@ -202,7 +203,6 @@ __all__ = [
     'KeyValuePairCodeTypeString',
     'InstrumentDefinitionDto',
     'CreateClientSecurityRequest',
-    'SecurityDtoAliases',
     'SecurityDto',
     'TryAddClientSecuritiesDto',
     'TryDeleteClientSecuritiesDto',

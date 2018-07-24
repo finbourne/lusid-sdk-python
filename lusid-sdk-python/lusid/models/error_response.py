@@ -31,19 +31,17 @@ class ErrorResponse(Model):
     Variables are only populated by the server, and will be ignored when
     sending a request.
 
-    :ivar status: The status code that will be returned to the client
+    :ivar status:
     :vartype status: int
-    :ivar code: The Finbourne specific error-code that encapsulates the
-     specific issue encountered. Possible values include: 'Unknown',
-     'PersonalisationNotFound', 'NonRecursivePersonalisation',
-     'VersionNotFound', 'SecurityNotFound', 'PropertyNotFound',
-     'PortfolioRecursionDepth', 'GroupNotFound', 'PortfolioNotFound',
-     'PropertySchemaNotFound', 'PortfolioWithIdAlreadyExists',
-     'OrphanedPortfolio', 'MissingBaseClaims', 'PropertyNotDefined',
-     'CannotDeleteSystemProperty', 'CannotModifyImmutablePropertyField',
-     'PropertyAlreadyExists', 'InvalidPropertyLifeTime',
-     'CannotModifyDefaultPropertyFormat', 'GroupAlreadyExists',
-     'NoSuchPropertyDataFormat', 'ValidationError',
+    :ivar code: Possible values include: 'Unknown', 'PersonalisationNotFound',
+     'NonRecursivePersonalisation', 'VersionNotFound', 'SecurityNotFound',
+     'PropertyNotFound', 'PortfolioRecursionDepth', 'GroupNotFound',
+     'PortfolioNotFound', 'PropertySchemaNotFound',
+     'PortfolioWithIdAlreadyExists', 'OrphanedPortfolio', 'MissingBaseClaims',
+     'PropertyNotDefined', 'CannotDeleteSystemProperty',
+     'CannotModifyImmutablePropertyField', 'PropertyAlreadyExists',
+     'InvalidPropertyLifeTime', 'CannotModifyDefaultPropertyFormat',
+     'GroupAlreadyExists', 'NoSuchPropertyDataFormat', 'ValidationError',
      'LoopDetectedInGroupHierarchy', 'SubGroupAlreadyExists',
      'PriceSourceNotFound', 'AnalyticStoreNotFound',
      'AnalyticStoreAlreadyExists', 'ClientSecurityAlreadyExists',
@@ -66,17 +64,13 @@ class ErrorResponse(Model):
      'AccrualSourceNotFound', 'EntitlementsFailure', 'InvalidIdentityToken',
      'InvalidRequestHeaders', 'PriceNotFound', 'ServerConfigurationError'
     :vartype code: str or ~lusid.models.enum
-    :ivar message: The non-technical-user friendly message describing the
-     error and how it might be remedied.
+    :ivar message:
     :vartype message: str
-    :ivar detailed_message: A technical error message that contains the
-     details of the issue and how it might be fixed.
+    :ivar detailed_message:
     :vartype detailed_message: str
-    :param items: Any action specific item specific sub errors (e.g. per-trade
-     validation errors)
-    :type items: list[~lusid.models.ErrorDetail]
-    :ivar more_info: A link to the endpoint that can provide the dev with more
-     information about that class of error.
+    :param items:
+    :type items: list[~lusid.models.ErrorDetailBase]
+    :ivar more_info:
     :vartype more_info: str
     """
 
@@ -93,7 +87,7 @@ class ErrorResponse(Model):
         'code': {'key': 'code', 'type': 'str'},
         'message': {'key': 'message', 'type': 'str'},
         'detailed_message': {'key': 'detailedMessage', 'type': 'str'},
-        'items': {'key': 'items', 'type': '[ErrorDetail]'},
+        'items': {'key': 'items', 'type': '[ErrorDetailBase]'},
         'more_info': {'key': 'moreInfo', 'type': 'str'},
     }
 

@@ -39,9 +39,9 @@ class CreatePropertyDataFormatRequest(Model):
     :param display_name:
     :type display_name: str
     :param value_type: Possible values include: 'String', 'Int', 'Decimal',
-     'DateTime', 'Boolean', 'Map', 'PropertyArray', 'Percentage', 'Currency',
-     'BenchmarkType', 'Code', 'Id', 'Uri', 'ArrayOfIds', 'ArrayOfTxnAliases',
-     'ArrayofTxnMovements'
+     'DateTime', 'Boolean', 'Map', 'List', 'PropertyArray', 'Percentage',
+     'Currency', 'BenchmarkType', 'Code', 'Id', 'Uri', 'ArrayOfIds',
+     'ArrayOfTxnAliases', 'ArrayofTxnMovements'
     :type value_type: str or ~lusid.models.enum
     :param acceptable_values:
     :type acceptable_values: list[object]
