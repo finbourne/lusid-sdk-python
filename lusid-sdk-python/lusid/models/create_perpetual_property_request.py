@@ -27,22 +27,29 @@ from msrest.serialization import Model
 class CreatePerpetualPropertyRequest(Model):
     """CreatePerpetualPropertyRequest.
 
+    Variables are only populated by the server, and will be ignored when
+    sending a request.
+
     :param scope:
     :type scope: str
     :param name:
     :type name: str
     :param value:
     :type value: object
+    :ivar unit:
+    :vartype unit: str
     """
 
     _validation = {
         'value': {'required': True},
+        'unit': {'readonly': True},
     }
 
     _attribute_map = {
         'scope': {'key': 'scope', 'type': 'str'},
         'name': {'key': 'name', 'type': 'str'},
         'value': {'key': 'value', 'type': 'object'},
+        'unit': {'key': 'unit', 'type': 'str'},
     }
 
     def __init__(self, value, scope=None, name=None):
@@ -50,3 +57,4 @@ class CreatePerpetualPropertyRequest(Model):
         self.scope = scope
         self.name = name
         self.value = value
+        self.unit = None

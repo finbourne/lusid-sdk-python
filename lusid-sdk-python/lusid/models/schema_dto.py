@@ -49,7 +49,8 @@ class SchemaDto(Model):
      'CorporateAction', 'CorporateActionTransition', 'ReconciliationRequest',
      'ReconciliationBreak', 'TransactionConfigurationData',
      'TransactionConfigurationMovementData',
-     'TransactionConfigurationTypeAlias', 'TryUpsertCorporateActions'
+     'TransactionConfigurationTypeAlias', 'TryUpsertCorporateActions',
+     'Iso4217CurrencyUnit', 'TimeSpanUnit', 'BasicUnit'
     :type entity: str or ~lusid.models.enum
     :param href:
     :type href: str

@@ -27,24 +27,33 @@ from msrest.serialization import Model
 class CreatePropertyDataFormatRequest(Model):
     """CreatePropertyDataFormatRequest.
 
+    Variables are only populated by the server, and will be ignored when
+    sending a request.
+
     :param scope:
     :type scope: str
     :param code:
     :type code: str
-    :param format_type: Possible values include: 'Basic', 'Limited',
-     'Currency'
+    :param format_type: Possible values include: 'Open', 'Closed'
     :type format_type: str or ~lusid.models.enum
     :param order:
     :type order: int
     :param display_name:
     :type display_name: str
+    :param description:
+    :type description: str
     :param value_type: Possible values include: 'String', 'Int', 'Decimal',
      'DateTime', 'Boolean', 'Map', 'List', 'PropertyArray', 'Percentage',
-     'Currency', 'BenchmarkType', 'Code', 'Id', 'Uri', 'ArrayOfIds',
-     'ArrayOfTxnAliases', 'ArrayofTxnMovements'
+     'BenchmarkType', 'Code', 'Id', 'Uri', 'ArrayOfIds', 'ArrayOfTxnAliases',
+     'ArrayofTxnMovements', 'ArrayofUnits', 'StringArray', 'UnitCreation'
     :type value_type: str or ~lusid.models.enum
     :param acceptable_values:
     :type acceptable_values: list[object]
+    :ivar unit_schema: Possible values include: 'NoUnits', 'Basic',
+     'Iso4217Currency', 'TimeSpan'
+    :vartype unit_schema: str or ~lusid.models.enum
+    :ivar acceptable_units:
+    :vartype acceptable_units: list[~lusid.models.CreateUnitDefinition]
     """
 
     _validation = {
@@ -53,7 +62,10 @@ class CreatePropertyDataFormatRequest(Model):
         'format_type': {'required': True},
         'order': {'required': True},
         'display_name': {'required': True},
+        'description': {'required': True},
         'value_type': {'required': True},
+        'unit_schema': {'readonly': True},
+        'acceptable_units': {'readonly': True},
     }
 
     _attribute_map = {
@@ -62,16 +74,22 @@ class CreatePropertyDataFormatRequest(Model):
         'format_type': {'key': 'formatType', 'type': 'str'},
         'order': {'key': 'order', 'type': 'int'},
         'display_name': {'key': 'displayName', 'type': 'str'},
+        'description': {'key': 'description', 'type': 'str'},
         'value_type': {'key': 'valueType', 'type': 'str'},
         'acceptable_values': {'key': 'acceptableValues', 'type': '[object]'},
+        'unit_schema': {'key': 'unitSchema', 'type': 'str'},
+        'acceptable_units': {'key': 'acceptableUnits', 'type': '[CreateUnitDefinition]'},
     }
 
-    def __init__(self, scope, code, format_type, order, display_name, value_type, acceptable_values=None):
+    def __init__(self, scope, code, format_type, order, display_name, description, value_type, acceptable_values=None):
         super(CreatePropertyDataFormatRequest, self).__init__()
         self.scope = scope
         self.code = code
         self.format_type = format_type
         self.order = order
         self.display_name = display_name
+        self.description = description
         self.value_type = value_type
         self.acceptable_values = acceptable_values
+        self.unit_schema = None
+        self.acceptable_units = None

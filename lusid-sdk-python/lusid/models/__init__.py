@@ -85,7 +85,9 @@ from .portfolio_search_result import PortfolioSearchResult
 from .property_definition_dto import PropertyDefinitionDto
 from .create_property_definition_request import CreatePropertyDefinitionRequest
 from .update_property_definition_request import UpdatePropertyDefinitionRequest
+from .create_unit_definition import CreateUnitDefinition
 from .create_property_data_format_request import CreatePropertyDataFormatRequest
+from .iunit_definition_dto import IUnitDefinitionDto
 from .property_data_format_dto import PropertyDataFormatDto
 from .update_property_data_format_request import UpdatePropertyDataFormatRequest
 from .reconciliation_request import ReconciliationRequest
@@ -188,7 +190,9 @@ __all__ = [
     'PropertyDefinitionDto',
     'CreatePropertyDefinitionRequest',
     'UpdatePropertyDefinitionRequest',
+    'CreateUnitDefinition',
     'CreatePropertyDataFormatRequest',
+    'IUnitDefinitionDto',
     'PropertyDataFormatDto',
     'UpdatePropertyDataFormatRequest',
     'ReconciliationRequest',

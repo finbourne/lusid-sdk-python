@@ -206,8 +206,8 @@ class LUSIDAPI(object):
     | &lt;a name="100"&gt;100&lt;/a&gt;|Personalisations not found|The personalisation(s) identified by the pattern provided could not be found, either because it does not exist or it has been deleted. Please check the pattern your provided. |
     | &lt;a name="101"&gt;101&lt;/a&gt;|NonRecursivePersonalisation|  |
     | &lt;a name="102"&gt;102&lt;/a&gt;|VersionNotFound|  |
-    | &lt;a name="104"&gt;104&lt;/a&gt;|SecurityNotFound|  |
-    | &lt;a name="104"&gt;104&lt;/a&gt;|SecurityNotFound|  |
+    | &lt;a name="104"&gt;104&lt;/a&gt;|SecurityByCodeNotFound|  |
+    | &lt;a name="104"&gt;104&lt;/a&gt;|SecurityByCodeNotFound|  |
     | &lt;a name="105"&gt;105&lt;/a&gt;|PropertyNotFound|  |
     | &lt;a name="106"&gt;106&lt;/a&gt;|PortfolioRecursionDepth|  |
     | &lt;a name="108"&gt;108&lt;/a&gt;|GroupNotFound|  |
@@ -270,6 +270,16 @@ class LUSIDAPI(object):
     | &lt;a name="187"&gt;187&lt;/a&gt;|InvalidIdentityToken|  |
     | &lt;a name="188"&gt;188&lt;/a&gt;|InvalidRequestHeaders|  |
     | &lt;a name="189"&gt;189&lt;/a&gt;|PriceNotFound|  |
+    | &lt;a name="200"&gt;200&lt;/a&gt;|InvalidUnitForDataType|  |
+    | &lt;a name="201"&gt;201&lt;/a&gt;|InvalidTypeForDataType|  |
+    | &lt;a name="202"&gt;202&lt;/a&gt;|InvalidValueForDataType|  |
+    | &lt;a name="203"&gt;203&lt;/a&gt;|UnitNotDefinedForDataType|  |
+    | &lt;a name="204"&gt;204&lt;/a&gt;|UnitsNotSupportedOnDataType|  |
+    | &lt;a name="205"&gt;205&lt;/a&gt;|CannotSpecifyUnitsOnDataType|  |
+    | &lt;a name="206"&gt;206&lt;/a&gt;|UnitSchemaInconsistentWithDataType|  |
+    | &lt;a name="207"&gt;207&lt;/a&gt;|UnitDefinitionNotSpecified|  |
+    | &lt;a name="208"&gt;208&lt;/a&gt;|DuplicateUnitDefinitionsSpecified|  |
+    | &lt;a name="209"&gt;209&lt;/a&gt;|InvalidUnitsDefinition|  |
     | &lt;a name="-10"&gt;-10&lt;/a&gt;|ServerConfigurationError|  |
     | &lt;a name="-1"&gt;-1&lt;/a&gt;|Unknown error|  |
 
@@ -289,7 +299,7 @@ class LUSIDAPI(object):
         self._client = ServiceClient(self.config.credentials, self.config)
 
         client_models = {k: v for k, v in models.__dict__.items() if isinstance(v, type)}
-        self.api_version = '0.6.234'
+        self.api_version = '0.6.236'
         self._serialize = Serializer(client_models)
         self._deserialize = Deserializer(client_models)
 
@@ -3451,7 +3461,7 @@ class LUSIDAPI(object):
     delete_portfolio_details.metadata = {'url': '/v1/api/portfolios/{scope}/{code}/details'}
 
     def get_aggregate_holdings(
-            self, scope, code, effective_at=None, as_at=None, sort_by=None, start=None, limit=None, filter=None, custom_headers=None, raw=False, **operation_config):
+            self, scope, code, effective_at=None, as_at=None, sort_by=None, start=None, limit=None, filter=None, security_property_keys=None, custom_headers=None, raw=False, **operation_config):
         """Get holdings.
 
         Get the aggregate holdings of a portfolio.  If no effectiveAt or asAt
@@ -3473,6 +3483,9 @@ class LUSIDAPI(object):
         :type limit: int
         :param filter: A filter on the results
         :type filter: str
+        :param security_property_keys: Keys for the security properties to be
+         decorated onto the holdings
+        :type security_property_keys: list[str]
         :param dict custom_headers: headers that will be added to the request
         :param bool raw: returns the direct response alongside the
          deserialized response
@@ -3507,6 +3520,8 @@ class LUSIDAPI(object):
             query_parameters['limit'] = self._serialize.query("limit", limit, 'int')
         if filter is not None:
             query_parameters['filter'] = self._serialize.query("filter", filter, 'str')
+        if security_property_keys is not None:
+            query_parameters['securityPropertyKeys'] = self._serialize.query("security_property_keys", security_property_keys, '[str]', div=',')
 
         # Construct headers
         header_parameters = {}
@@ -5280,6 +5295,64 @@ class LUSIDAPI(object):
         return deserialized
     update_property_data_format.metadata = {'url': '/v1/api/propertyformats/{scope}/{name}'}
 
+    def get_units_from_property_data_format(
+            self, scope, name, units, custom_headers=None, raw=False, **operation_config):
+        """Return the definitions for the specified list of units.
+
+        :param scope:
+        :type scope: str
+        :param name:
+        :type name: str
+        :param units:
+        :type units: list[str]
+        :param dict custom_headers: headers that will be added to the request
+        :param bool raw: returns the direct response alongside the
+         deserialized response
+        :param operation_config: :ref:`Operation configuration
+         overrides<msrest:optionsforoperations>`.
+        :return: IUnitDefinitionDto or ClientRawResponse if raw=true
+        :rtype: ~lusid.models.IUnitDefinitionDto or
+         ~msrest.pipeline.ClientRawResponse
+        :raises:
+         :class:`ErrorResponseException<lusid.models.ErrorResponseException>`
+        """
+        # Construct URL
+        url = self.get_units_from_property_data_format.metadata['url']
+        path_format_arguments = {
+            'scope': self._serialize.url("scope", scope, 'str'),
+            'name': self._serialize.url("name", name, 'str')
+        }
+        url = self._client.format_url(url, **path_format_arguments)
+
+        # Construct parameters
+        query_parameters = {}
+        query_parameters['units'] = self._serialize.query("units", units, '[str]', div=',')
+
+        # Construct headers
+        header_parameters = {}
+        header_parameters['Content-Type'] = 'application/json; charset=utf-8'
+        if custom_headers:
+            header_parameters.update(custom_headers)
+
+        # Construct and send request
+        request = self._client.get(url, query_parameters)
+        response = self._client.send(request, header_parameters, stream=False, **operation_config)
+
+        if response.status_code not in [200]:
+            raise models.ErrorResponseException(self._deserialize, response)
+
+        deserialized = None
+
+        if response.status_code == 200:
+            deserialized = self._deserialize('IUnitDefinitionDto', response)
+
+        if raw:
+            client_raw_response = ClientRawResponse(deserialized, response)
+            return client_raw_response
+
+        return deserialized
+    get_units_from_property_data_format.metadata = {'url': '/v1/api/propertyformats/{scope}/{name}/units/{units}'}
+
     def perform_reconciliation(
             self, request=None, custom_headers=None, raw=False, **operation_config):
         """Perform a reconciliation between two portfolios.
@@ -5911,7 +5984,8 @@ class LUSIDAPI(object):
          'CorporateActionTransition', 'ReconciliationRequest',
          'ReconciliationBreak', 'TransactionConfigurationData',
          'TransactionConfigurationMovementData',
-         'TransactionConfigurationTypeAlias', 'TryUpsertCorporateActions'
+         'TransactionConfigurationTypeAlias', 'TryUpsertCorporateActions',
+         'Iso4217CurrencyUnit', 'TimeSpanUnit', 'BasicUnit'
         :type entity: str
         :param dict custom_headers: headers that will be added to the request
         :param bool raw: returns the direct response alongside the

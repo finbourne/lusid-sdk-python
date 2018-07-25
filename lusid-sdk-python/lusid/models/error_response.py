@@ -62,7 +62,12 @@ class ErrorResponse(Model):
      'DataFilterApplicationFailure', 'SearchFailed',
      'MovementsEngineConfigurationKeyFailure', 'FxRateSourceNotFound',
      'AccrualSourceNotFound', 'EntitlementsFailure', 'InvalidIdentityToken',
-     'InvalidRequestHeaders', 'PriceNotFound', 'ServerConfigurationError'
+     'InvalidRequestHeaders', 'PriceNotFound', 'ServerConfigurationError',
+     'InvalidUnitForDataType', 'InvalidTypeForDataType',
+     'InvalidValueForDataType', 'UnitNotDefinedForDataType',
+     'UnitsNotSupportedOnDataType', 'CannotSpecifyUnitsOnDataType',
+     'UnitSchemaInconsistentWithDataType', 'UnitDefinitionNotSpecified',
+     'DuplicateUnitDefinitionsSpecified', 'InvalidUnitsDefinition'
     :vartype code: str or ~lusid.models.enum
     :ivar message:
     :vartype message: str

@@ -24,34 +24,39 @@
 from msrest.serialization import Model
 
 
-class PropertyDto(Model):
-    """PropertyDto.
+class CreateUnitDefinition(Model):
+    """CreateUnitDefinition.
 
-    :param key:
-    :type key: str
-    :param value:
-    :type value: object
-    :param unit:
-    :type unit: str
-    :param effective_from: Date for which the property is effective from
-    :type effective_from: datetime
+    Variables are only populated by the server, and will be ignored when
+    sending a request.
+
+    :param code:
+    :type code: str
+    :param display_name:
+    :type display_name: str
+    :param description:
+    :type description: str
+    :ivar details:
+    :vartype details: dict[str, str]
     """
 
     _validation = {
-        'key': {'required': True},
-        'value': {'required': True},
+        'code': {'required': True},
+        'display_name': {'required': True},
+        'description': {'required': True},
+        'details': {'readonly': True},
     }
 
     _attribute_map = {
-        'key': {'key': 'key', 'type': 'str'},
-        'value': {'key': 'value', 'type': 'object'},
-        'unit': {'key': 'unit', 'type': 'str'},
-        'effective_from': {'key': 'effectiveFrom', 'type': 'iso-8601'},
+        'code': {'key': 'code', 'type': 'str'},
+        'display_name': {'key': 'displayName', 'type': 'str'},
+        'description': {'key': 'description', 'type': 'str'},
+        'details': {'key': 'details', 'type': '{str}'},
     }
 
-    def __init__(self, key, value, unit=None, effective_from=None):
-        super(PropertyDto, self).__init__()
-        self.key = key
-        self.value = value
-        self.unit = unit
-        self.effective_from = effective_from
+    def __init__(self, code, display_name, description):
+        super(CreateUnitDefinition, self).__init__()
+        self.code = code
+        self.display_name = display_name
+        self.description = description
+        self.details = None

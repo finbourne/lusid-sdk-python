@@ -29,8 +29,7 @@ class PropertyDataFormatDto(Model):
 
     :param href:
     :type href: str
-    :param format_type: Possible values include: 'Basic', 'Limited',
-     'Currency'
+    :param format_type: Possible values include: 'Open', 'Closed'
     :type format_type: str or ~lusid.models.enum
     :param id:
     :type id: ~lusid.models.ResourceId
@@ -38,13 +37,20 @@ class PropertyDataFormatDto(Model):
     :type order: int
     :param display_name:
     :type display_name: str
+    :param description:
+    :type description: str
     :param value_type: Possible values include: 'String', 'Int', 'Decimal',
      'DateTime', 'Boolean', 'Map', 'List', 'PropertyArray', 'Percentage',
-     'Currency', 'BenchmarkType', 'Code', 'Id', 'Uri', 'ArrayOfIds',
-     'ArrayOfTxnAliases', 'ArrayofTxnMovements'
+     'BenchmarkType', 'Code', 'Id', 'Uri', 'ArrayOfIds', 'ArrayOfTxnAliases',
+     'ArrayofTxnMovements', 'ArrayofUnits', 'StringArray', 'UnitCreation'
     :type value_type: str or ~lusid.models.enum
     :param acceptable_values:
     :type acceptable_values: list[object]
+    :param unit_schema: Possible values include: 'NoUnits', 'Basic',
+     'Iso4217Currency', 'TimeSpan'
+    :type unit_schema: str or ~lusid.models.enum
+    :param acceptable_units:
+    :type acceptable_units: list[~lusid.models.IUnitDefinitionDto]
     """
 
     _attribute_map = {
@@ -53,16 +59,22 @@ class PropertyDataFormatDto(Model):
         'id': {'key': 'id', 'type': 'ResourceId'},
         'order': {'key': 'order', 'type': 'int'},
         'display_name': {'key': 'displayName', 'type': 'str'},
+        'description': {'key': 'description', 'type': 'str'},
         'value_type': {'key': 'valueType', 'type': 'str'},
         'acceptable_values': {'key': 'acceptableValues', 'type': '[object]'},
+        'unit_schema': {'key': 'unitSchema', 'type': 'str'},
+        'acceptable_units': {'key': 'acceptableUnits', 'type': '[IUnitDefinitionDto]'},
     }
 
-    def __init__(self, href=None, format_type=None, id=None, order=None, display_name=None, value_type=None, acceptable_values=None):
+    def __init__(self, href=None, format_type=None, id=None, order=None, display_name=None, description=None, value_type=None, acceptable_values=None, unit_schema=None, acceptable_units=None):
         super(PropertyDataFormatDto, self).__init__()
         self.href = href
         self.format_type = format_type
         self.id = id
         self.order = order
         self.display_name = display_name
+        self.description = description
         self.value_type = value_type
         self.acceptable_values = acceptable_values
+        self.unit_schema = unit_schema
+        self.acceptable_units = acceptable_units

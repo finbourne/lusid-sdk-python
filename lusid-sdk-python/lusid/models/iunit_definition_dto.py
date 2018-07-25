@@ -24,34 +24,40 @@
 from msrest.serialization import Model
 
 
-class PropertyDto(Model):
-    """PropertyDto.
+class IUnitDefinitionDto(Model):
+    """IUnitDefinitionDto.
 
-    :param key:
-    :type key: str
-    :param value:
-    :type value: object
-    :param unit:
-    :type unit: str
-    :param effective_from: Date for which the property is effective from
-    :type effective_from: datetime
+    Variables are only populated by the server, and will be ignored when
+    sending a request.
+
+    :ivar schema: Possible values include: 'NoUnits', 'Basic',
+     'Iso4217Currency', 'TimeSpan'
+    :vartype schema: str or ~lusid.models.enum
+    :ivar code:
+    :vartype code: str
+    :ivar display_name:
+    :vartype display_name: str
+    :ivar description:
+    :vartype description: str
     """
 
     _validation = {
-        'key': {'required': True},
-        'value': {'required': True},
+        'schema': {'readonly': True},
+        'code': {'readonly': True},
+        'display_name': {'readonly': True},
+        'description': {'readonly': True},
     }
 
     _attribute_map = {
-        'key': {'key': 'key', 'type': 'str'},
-        'value': {'key': 'value', 'type': 'object'},
-        'unit': {'key': 'unit', 'type': 'str'},
-        'effective_from': {'key': 'effectiveFrom', 'type': 'iso-8601'},
+        'schema': {'key': 'schema', 'type': 'str'},
+        'code': {'key': 'code', 'type': 'str'},
+        'display_name': {'key': 'displayName', 'type': 'str'},
+        'description': {'key': 'description', 'type': 'str'},
     }
 
-    def __init__(self, key, value, unit=None, effective_from=None):
-        super(PropertyDto, self).__init__()
-        self.key = key
-        self.value = value
-        self.unit = unit
-        self.effective_from = effective_from
+    def __init__(self):
+        super(IUnitDefinitionDto, self).__init__()
+        self.schema = None
+        self.code = None
+        self.display_name = None
+        self.description = None
