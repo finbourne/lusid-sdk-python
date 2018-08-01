@@ -182,13 +182,10 @@ class LUSIDAPI(object):
     | AnnouncementDate|datetime|  |
     | ExDate|datetime|  |
     | RecordDate|datetime|  |
+    | PaymentDate|datetime|  |
     *Transition*
     | Field|Type|Description |
     | ---|---|--- |
-    | Direction|string|  |
-    | SecurityUid|string|  |
-    | UnitsFactor|decimal|  |
-    | CostFactor|decimal|  |
     ## Property
     Properties are key-value pairs that can be applied to any entity within a domain (where a domain is `trade`, `portfolio`, `security` etc).  Properties must be defined before use with a `PropertyDefinition` and can then subsequently be added to entities.
     # Schemas
@@ -280,6 +277,7 @@ class LUSIDAPI(object):
     | &lt;a name="207"&gt;207&lt;/a&gt;|UnitDefinitionNotSpecified|  |
     | &lt;a name="208"&gt;208&lt;/a&gt;|DuplicateUnitDefinitionsSpecified|  |
     | &lt;a name="209"&gt;209&lt;/a&gt;|InvalidUnitsDefinition|  |
+    | &lt;a name="210"&gt;210&lt;/a&gt;|InvalidSecurityIdentifierUnit|  |
     | &lt;a name="-10"&gt;-10&lt;/a&gt;|ServerConfigurationError|  |
     | &lt;a name="-1"&gt;-1&lt;/a&gt;|Unknown error|  |
 
@@ -299,7 +297,7 @@ class LUSIDAPI(object):
         self._client = ServiceClient(self.config.credentials, self.config)
 
         client_models = {k: v for k, v in models.__dict__.items() if isinstance(v, type)}
-        self.api_version = '0.6.236'
+        self.api_version = '0.6.246'
         self._serialize = Serializer(client_models)
         self._deserialize = Deserializer(client_models)
 
@@ -2404,6 +2402,58 @@ class LUSIDAPI(object):
 
         return deserialized
     get_login_info.metadata = {'url': '/v1/api/login'}
+
+    def get_saml_identity_provider_id(
+            self, domain, custom_headers=None, raw=False, **operation_config):
+        """Get the unique identifier for the SAML Identity Provider to be used by
+        domain.
+
+        :param domain: The domain that the user will be logging in to.
+        :type domain: str
+        :param dict custom_headers: headers that will be added to the request
+        :param bool raw: returns the direct response alongside the
+         deserialized response
+        :param operation_config: :ref:`Operation configuration
+         overrides<msrest:optionsforoperations>`.
+        :return: str or ClientRawResponse if raw=true
+        :rtype: str or ~msrest.pipeline.ClientRawResponse
+        :raises:
+         :class:`ErrorResponseException<lusid.models.ErrorResponseException>`
+        """
+        # Construct URL
+        url = self.get_saml_identity_provider_id.metadata['url']
+        path_format_arguments = {
+            'domain': self._serialize.url("domain", domain, 'str')
+        }
+        url = self._client.format_url(url, **path_format_arguments)
+
+        # Construct parameters
+        query_parameters = {}
+
+        # Construct headers
+        header_parameters = {}
+        header_parameters['Content-Type'] = 'application/json; charset=utf-8'
+        if custom_headers:
+            header_parameters.update(custom_headers)
+
+        # Construct and send request
+        request = self._client.get(url, query_parameters)
+        response = self._client.send(request, header_parameters, stream=False, **operation_config)
+
+        if response.status_code not in [200]:
+            raise models.ErrorResponseException(self._deserialize, response)
+
+        deserialized = None
+
+        if response.status_code == 200:
+            deserialized = self._deserialize('str', response)
+
+        if raw:
+            client_raw_response = ClientRawResponse(deserialized, response)
+            return client_raw_response
+
+        return deserialized
+    get_saml_identity_provider_id.metadata = {'url': '/v1/api/login/saml/{domain}'}
 
     def store_web_logs(
             self, message=None, custom_headers=None, raw=False, **operation_config):
@@ -5985,7 +6035,8 @@ class LUSIDAPI(object):
          'ReconciliationBreak', 'TransactionConfigurationData',
          'TransactionConfigurationMovementData',
          'TransactionConfigurationTypeAlias', 'TryUpsertCorporateActions',
-         'Iso4217CurrencyUnit', 'TimeSpanUnit', 'BasicUnit'
+         'Iso4217CurrencyUnit', 'BasicUnit',
+         'CorporateActionTransitionComponent'
         :type entity: str
         :param dict custom_headers: headers that will be added to the request
         :param bool raw: returns the direct response alongside the

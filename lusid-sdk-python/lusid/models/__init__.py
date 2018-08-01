@@ -49,6 +49,7 @@ from .property_dto import PropertyDto
 from .txn_property_mapping_dto import TxnPropertyMappingDto
 from .txn_movement_meta_data_dto import TxnMovementMetaDataDto
 from .txn_meta_data_dto import TxnMetaDataDto
+from .corporate_action_transition_component_dto import CorporateActionTransitionComponentDto
 from .corporate_action_transition_dto import CorporateActionTransitionDto
 from .upsert_corporate_action_request import UpsertCorporateActionRequest
 from .resource_id import ResourceId
@@ -99,7 +100,6 @@ from .results_dto import ResultsDto
 from .key_value_pair_string_field_schema import KeyValuePairStringFieldSchema
 from .schema_dto import SchemaDto
 from .property_schema_dto import PropertySchemaDto
-from .key_value_pair_code_type_string import KeyValuePairCodeTypeString
 from .instrument_definition_dto import InstrumentDefinitionDto
 from .create_client_security_request import CreateClientSecurityRequest
 from .security_dto import SecurityDto
@@ -154,6 +154,7 @@ __all__ = [
     'TxnPropertyMappingDto',
     'TxnMovementMetaDataDto',
     'TxnMetaDataDto',
+    'CorporateActionTransitionComponentDto',
     'CorporateActionTransitionDto',
     'UpsertCorporateActionRequest',
     'ResourceId',
@@ -204,7 +205,6 @@ __all__ = [
     'KeyValuePairStringFieldSchema',
     'SchemaDto',
     'PropertySchemaDto',
-    'KeyValuePairCodeTypeString',
     'InstrumentDefinitionDto',
     'CreateClientSecurityRequest',
     'SecurityDto',

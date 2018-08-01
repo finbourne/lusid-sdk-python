@@ -67,7 +67,8 @@ class ErrorResponse(Model):
      'InvalidValueForDataType', 'UnitNotDefinedForDataType',
      'UnitsNotSupportedOnDataType', 'CannotSpecifyUnitsOnDataType',
      'UnitSchemaInconsistentWithDataType', 'UnitDefinitionNotSpecified',
-     'DuplicateUnitDefinitionsSpecified', 'InvalidUnitsDefinition'
+     'DuplicateUnitDefinitionsSpecified', 'InvalidUnitsDefinition',
+     'InvalidSecurityIdentifierUnit'
     :vartype code: str or ~lusid.models.enum
     :ivar message:
     :vartype message: str

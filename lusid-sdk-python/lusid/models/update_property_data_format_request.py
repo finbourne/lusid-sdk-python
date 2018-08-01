@@ -46,7 +46,7 @@ class UpdatePropertyDataFormatRequest(Model):
     :param acceptable_values:
     :type acceptable_values: list[object]
     :ivar unit_schema: Possible values include: 'NoUnits', 'Basic',
-     'Iso4217Currency', 'TimeSpan'
+     'Iso4217Currency'
     :vartype unit_schema: str or ~lusid.models.enum
     :ivar acceptable_units:
     :vartype acceptable_units: list[~lusid.models.CreateUnitDefinition]

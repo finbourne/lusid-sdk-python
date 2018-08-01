@@ -33,8 +33,6 @@ class CreateClientSecurityRequest(Model):
     :type name: str
     :param properties:
     :type properties: list[~lusid.models.PropertyDto]
-    :param aliases:
-    :type aliases: list[~lusid.models.KeyValuePairCodeTypeString]
     :param look_through_portfolio_id:
     :type look_through_portfolio_id: ~lusid.models.ResourceId
     :param instrument: There could be multiple underlying instrument
@@ -53,16 +51,14 @@ class CreateClientSecurityRequest(Model):
         'client_security_id': {'key': 'clientSecurityId', 'type': 'str'},
         'name': {'key': 'name', 'type': 'str'},
         'properties': {'key': 'properties', 'type': '[PropertyDto]'},
-        'aliases': {'key': 'aliases', 'type': '[KeyValuePairCodeTypeString]'},
         'look_through_portfolio_id': {'key': 'lookThroughPortfolioId', 'type': 'ResourceId'},
         'instrument': {'key': 'instrument', 'type': 'InstrumentDefinitionDto'},
     }
 
-    def __init__(self, client_security_id, name, properties, aliases=None, look_through_portfolio_id=None, instrument=None):
+    def __init__(self, client_security_id, name, properties, look_through_portfolio_id=None, instrument=None):
         super(CreateClientSecurityRequest, self).__init__()
         self.client_security_id = client_security_id
         self.name = name
         self.properties = properties
-        self.aliases = aliases
         self.look_through_portfolio_id = look_through_portfolio_id
         self.instrument = instrument

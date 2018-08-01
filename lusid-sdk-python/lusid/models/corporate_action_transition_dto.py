@@ -25,36 +25,23 @@ from msrest.serialization import Model
 
 
 class CorporateActionTransitionDto(Model):
-    """A 'transition' within a corporate action, representing a single incoming or
-    outgoing component.
+    """A 'transition' within a corporate action, representing a set of output
+    movements paired to a single input position.
 
-    :param direction: Possible values include: 'In', 'Out'
-    :type direction: str or ~lusid.models.enum
-    :param security_uid:
-    :type security_uid: str
-    :param units_factor:
-    :type units_factor: float
-    :param cost_factor:
-    :type cost_factor: float
+    :param input_transition:
+    :type input_transition:
+     ~lusid.models.CorporateActionTransitionComponentDto
+    :param output_transitions:
+    :type output_transitions:
+     list[~lusid.models.CorporateActionTransitionComponentDto]
     """
 
-    _validation = {
-        'direction': {'required': True},
-        'security_uid': {'required': True},
-        'units_factor': {'required': True},
-        'cost_factor': {'required': True},
-    }
-
     _attribute_map = {
-        'direction': {'key': 'direction', 'type': 'str'},
-        'security_uid': {'key': 'securityUid', 'type': 'str'},
-        'units_factor': {'key': 'unitsFactor', 'type': 'float'},
-        'cost_factor': {'key': 'costFactor', 'type': 'float'},
+        'input_transition': {'key': 'inputTransition', 'type': 'CorporateActionTransitionComponentDto'},
+        'output_transitions': {'key': 'outputTransitions', 'type': '[CorporateActionTransitionComponentDto]'},
     }
 
-    def __init__(self, direction, security_uid, units_factor, cost_factor):
+    def __init__(self, input_transition=None, output_transitions=None):
         super(CorporateActionTransitionDto, self).__init__()
-        self.direction = direction
-        self.security_uid = security_uid
-        self.units_factor = units_factor
-        self.cost_factor = cost_factor
+        self.input_transition = input_transition
+        self.output_transitions = output_transitions

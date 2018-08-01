@@ -24,30 +24,31 @@
 from msrest.serialization import Model
 
 
-class KeyValuePairCodeTypeString(Model):
-    """KeyValuePairCodeTypeString.
+class CorporateActionTransitionComponentDto(Model):
+    """CorporateActionTransitionComponentDto.
 
-    Variables are only populated by the server, and will be ignored when
-    sending a request.
-
-    :ivar key: Possible values include: 'Undefined', 'ReutersAssetId', 'CINS',
-     'Isin', 'Sedol', 'Cusip', 'ClientInternal', 'Figi', 'Wertpapier'
-    :vartype key: str or ~lusid.models.enum
-    :ivar value:
-    :vartype value: str
+    :param security_uid:
+    :type security_uid: str
+    :param units_factor:
+    :type units_factor: float
+    :param cost_factor:
+    :type cost_factor: float
     """
 
     _validation = {
-        'key': {'readonly': True},
-        'value': {'readonly': True},
+        'security_uid': {'required': True},
+        'units_factor': {'required': True},
+        'cost_factor': {'required': True},
     }
 
     _attribute_map = {
-        'key': {'key': 'key', 'type': 'str'},
-        'value': {'key': 'value', 'type': 'str'},
+        'security_uid': {'key': 'securityUid', 'type': 'str'},
+        'units_factor': {'key': 'unitsFactor', 'type': 'float'},
+        'cost_factor': {'key': 'costFactor', 'type': 'float'},
     }
 
-    def __init__(self):
-        super(KeyValuePairCodeTypeString, self).__init__()
-        self.key = None
-        self.value = None
+    def __init__(self, security_uid, units_factor, cost_factor):
+        super(CorporateActionTransitionComponentDto, self).__init__()
+        self.security_uid = security_uid
+        self.units_factor = units_factor
+        self.cost_factor = cost_factor

@@ -35,6 +35,8 @@ class UpsertCorporateActionRequest(Model):
     :type ex_date: datetime
     :param record_date:
     :type record_date: datetime
+    :param payment_date:
+    :type payment_date: datetime
     :param transitions:
     :type transitions: list[~lusid.models.CorporateActionTransitionDto]
     """
@@ -44,6 +46,7 @@ class UpsertCorporateActionRequest(Model):
         'announcement_date': {'required': True},
         'ex_date': {'required': True},
         'record_date': {'required': True},
+        'payment_date': {'required': True},
         'transitions': {'required': True},
     }
 
@@ -52,13 +55,15 @@ class UpsertCorporateActionRequest(Model):
         'announcement_date': {'key': 'announcementDate', 'type': 'iso-8601'},
         'ex_date': {'key': 'exDate', 'type': 'iso-8601'},
         'record_date': {'key': 'recordDate', 'type': 'iso-8601'},
+        'payment_date': {'key': 'paymentDate', 'type': 'iso-8601'},
         'transitions': {'key': 'transitions', 'type': '[CorporateActionTransitionDto]'},
     }
 
-    def __init__(self, corporate_action_id, announcement_date, ex_date, record_date, transitions):
+    def __init__(self, corporate_action_id, announcement_date, ex_date, record_date, payment_date, transitions):
         super(UpsertCorporateActionRequest, self).__init__()
         self.corporate_action_id = corporate_action_id
         self.announcement_date = announcement_date
         self.ex_date = ex_date
         self.record_date = record_date
+        self.payment_date = payment_date
         self.transitions = transitions

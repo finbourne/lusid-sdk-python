@@ -31,7 +31,7 @@ class IUnitDefinitionDto(Model):
     sending a request.
 
     :ivar schema: Possible values include: 'NoUnits', 'Basic',
-     'Iso4217Currency', 'TimeSpan'
+     'Iso4217Currency'
     :vartype schema: str or ~lusid.models.enum
     :ivar code:
     :vartype code: str
