@@ -24,37 +24,25 @@
 from msrest.serialization import Model
 
 
-class HoldingAdjustmentDto(Model):
-    """Used to specify the 'target' holding when calling the AdjustHoldings Api.
+class AdjustHoldingsDto(Model):
+    """The response given from the AdjustHoldings Api call.
 
     :param href:
     :type href: str
-    :param security_uid:
-    :type security_uid: str
-    :param units:
-    :type units: float
-    :param cost:
-    :type cost: float
-    :param properties:
-    :type properties: list[~lusid.models.CreatePropertyRequest]
+    :param version:
+    :type version: ~lusid.models.VersionDto
     :param _links:
     :type _links: list[~lusid.models.Link]
     """
 
     _attribute_map = {
         'href': {'key': 'href', 'type': 'str'},
-        'security_uid': {'key': 'securityUid', 'type': 'str'},
-        'units': {'key': 'units', 'type': 'float'},
-        'cost': {'key': 'cost', 'type': 'float'},
-        'properties': {'key': 'properties', 'type': '[CreatePropertyRequest]'},
+        'version': {'key': 'version', 'type': 'VersionDto'},
         '_links': {'key': '_links', 'type': '[Link]'},
     }
 
-    def __init__(self, href=None, security_uid=None, units=None, cost=None, properties=None, _links=None):
-        super(HoldingAdjustmentDto, self).__init__()
+    def __init__(self, href=None, version=None, _links=None):
+        super(AdjustHoldingsDto, self).__init__()
         self.href = href
-        self.security_uid = security_uid
-        self.units = units
-        self.cost = cost
-        self.properties = properties
+        self.version = version
         self._links = _links

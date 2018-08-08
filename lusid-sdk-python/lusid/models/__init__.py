@@ -75,11 +75,13 @@ from .portfolio_details_request import PortfolioDetailsRequest
 from .perpetual_property_dto import PerpetualPropertyDto
 from .trade_dto import TradeDto
 from .holding_dto import HoldingDto
-from .holding_adjustment_dto import HoldingAdjustmentDto
-from .upsert_portfolio_trades_dto import UpsertPortfolioTradesDto
-from .portfolio_properties_dto import PortfolioPropertiesDto
 from .create_perpetual_property_request import CreatePerpetualPropertyRequest
+from .target_tax_lot_dto import TargetTaxLotDto
+from .adjust_holding_request import AdjustHoldingRequest
+from .adjust_holdings_dto import AdjustHoldingsDto
+from .portfolio_properties_dto import PortfolioPropertiesDto
 from .upsert_portfolio_trade_request import UpsertPortfolioTradeRequest
+from .upsert_portfolio_trades_dto import UpsertPortfolioTradesDto
 from .add_trade_property_dto import AddTradePropertyDto
 from .create_derived_portfolio_request import CreateDerivedPortfolioRequest
 from .portfolio_search_result import PortfolioSearchResult
@@ -180,11 +182,13 @@ __all__ = [
     'PerpetualPropertyDto',
     'TradeDto',
     'HoldingDto',
-    'HoldingAdjustmentDto',
-    'UpsertPortfolioTradesDto',
-    'PortfolioPropertiesDto',
     'CreatePerpetualPropertyRequest',
+    'TargetTaxLotDto',
+    'AdjustHoldingRequest',
+    'AdjustHoldingsDto',
+    'PortfolioPropertiesDto',
     'UpsertPortfolioTradeRequest',
+    'UpsertPortfolioTradesDto',
     'AddTradePropertyDto',
     'CreateDerivedPortfolioRequest',
     'PortfolioSearchResult',

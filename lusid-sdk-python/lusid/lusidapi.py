@@ -267,6 +267,8 @@ class LUSIDAPI(object):
     | &lt;a name="187"&gt;187&lt;/a&gt;|InvalidIdentityToken|  |
     | &lt;a name="188"&gt;188&lt;/a&gt;|InvalidRequestHeaders|  |
     | &lt;a name="189"&gt;189&lt;/a&gt;|PriceNotFound|  |
+    | &lt;a name="190"&gt;190&lt;/a&gt;|InvalidSubHoldingKeysProvided|  |
+    | &lt;a name="191"&gt;191&lt;/a&gt;|DuplicateSubHoldingKeysProvided|  |
     | &lt;a name="200"&gt;200&lt;/a&gt;|InvalidUnitForDataType|  |
     | &lt;a name="201"&gt;201&lt;/a&gt;|InvalidTypeForDataType|  |
     | &lt;a name="202"&gt;202&lt;/a&gt;|InvalidValueForDataType|  |
@@ -297,7 +299,7 @@ class LUSIDAPI(object):
         self._client = ServiceClient(self.config.credentials, self.config)
 
         client_models = {k: v for k, v in models.__dict__.items() if isinstance(v, type)}
-        self.api_version = '0.6.250'
+        self.api_version = '0.6.256'
         self._serialize = Serializer(client_models)
         self._deserialize = Deserializer(client_models)
 
@@ -3598,8 +3600,8 @@ class LUSIDAPI(object):
         return deserialized
     get_aggregate_holdings.metadata = {'url': '/v1/api/portfolios/{scope}/{code}/holdings'}
 
-    def adjust_holdings(
-            self, scope, code, effective_at, holdings=None, custom_headers=None, raw=False, **operation_config):
+    def adjust_all_holdings(
+            self, scope, code, effective_at, holding_adjustments=None, custom_headers=None, raw=False, **operation_config):
         """Adjust holdings.
 
         Create trades in a specific portfolio to bring it to the specified
@@ -3611,15 +3613,85 @@ class LUSIDAPI(object):
         :type code: str
         :param effective_at: Effective date
         :type effective_at: datetime
-        :param holdings:
-        :type holdings: list[~lusid.models.HoldingAdjustmentDto]
+        :param holding_adjustments:
+        :type holding_adjustments: list[~lusid.models.AdjustHoldingRequest]
         :param dict custom_headers: headers that will be added to the request
         :param bool raw: returns the direct response alongside the
          deserialized response
         :param operation_config: :ref:`Operation configuration
          overrides<msrest:optionsforoperations>`.
-        :return: UpsertPortfolioTradesDto or ClientRawResponse if raw=true
-        :rtype: ~lusid.models.UpsertPortfolioTradesDto or
+        :return: AdjustHoldingsDto or ClientRawResponse if raw=true
+        :rtype: ~lusid.models.AdjustHoldingsDto or
+         ~msrest.pipeline.ClientRawResponse
+        :raises:
+         :class:`ErrorResponseException<lusid.models.ErrorResponseException>`
+        """
+        # Construct URL
+        url = self.adjust_all_holdings.metadata['url']
+        path_format_arguments = {
+            'scope': self._serialize.url("scope", scope, 'str'),
+            'code': self._serialize.url("code", code, 'str'),
+            'effectiveAt': self._serialize.url("effective_at", effective_at, 'iso-8601')
+        }
+        url = self._client.format_url(url, **path_format_arguments)
+
+        # Construct parameters
+        query_parameters = {}
+
+        # Construct headers
+        header_parameters = {}
+        header_parameters['Content-Type'] = 'application/json-patch+json; charset=utf-8'
+        if custom_headers:
+            header_parameters.update(custom_headers)
+
+        # Construct body
+        if holding_adjustments is not None:
+            body_content = self._serialize.body(holding_adjustments, '[AdjustHoldingRequest]')
+        else:
+            body_content = None
+
+        # Construct and send request
+        request = self._client.put(url, query_parameters)
+        response = self._client.send(
+            request, header_parameters, body_content, stream=False, **operation_config)
+
+        if response.status_code not in [200]:
+            raise models.ErrorResponseException(self._deserialize, response)
+
+        deserialized = None
+
+        if response.status_code == 200:
+            deserialized = self._deserialize('AdjustHoldingsDto', response)
+
+        if raw:
+            client_raw_response = ClientRawResponse(deserialized, response)
+            return client_raw_response
+
+        return deserialized
+    adjust_all_holdings.metadata = {'url': '/v1/api/portfolios/{scope}/{code}/holdings/{effectiveAt}'}
+
+    def adjust_holdings(
+            self, scope, code, effective_at, holding_adjustments=None, custom_headers=None, raw=False, **operation_config):
+        """Adjust holdings.
+
+        Create trades in a specific portfolio to bring it to the specified
+        holdings.
+
+        :param scope: The scope of the portfolio
+        :type scope: str
+        :param code: Code for the portfolio
+        :type code: str
+        :param effective_at: Effective date
+        :type effective_at: datetime
+        :param holding_adjustments:
+        :type holding_adjustments: list[~lusid.models.AdjustHoldingRequest]
+        :param dict custom_headers: headers that will be added to the request
+        :param bool raw: returns the direct response alongside the
+         deserialized response
+        :param operation_config: :ref:`Operation configuration
+         overrides<msrest:optionsforoperations>`.
+        :return: AdjustHoldingsDto or ClientRawResponse if raw=true
+        :rtype: ~lusid.models.AdjustHoldingsDto or
          ~msrest.pipeline.ClientRawResponse
         :raises:
          :class:`ErrorResponseException<lusid.models.ErrorResponseException>`
@@ -3643,13 +3715,13 @@ class LUSIDAPI(object):
             header_parameters.update(custom_headers)
 
         # Construct body
-        if holdings is not None:
-            body_content = self._serialize.body(holdings, '[HoldingAdjustmentDto]')
+        if holding_adjustments is not None:
+            body_content = self._serialize.body(holding_adjustments, '[AdjustHoldingRequest]')
         else:
             body_content = None
 
         # Construct and send request
-        request = self._client.post(url, query_parameters)
+        request = self._client.patch(url, query_parameters)
         response = self._client.send(
             request, header_parameters, body_content, stream=False, **operation_config)
 
@@ -3659,7 +3731,7 @@ class LUSIDAPI(object):
         deserialized = None
 
         if response.status_code == 200:
-            deserialized = self._deserialize('UpsertPortfolioTradesDto', response)
+            deserialized = self._deserialize('AdjustHoldingsDto', response)
 
         if raw:
             client_raw_response = ClientRawResponse(deserialized, response)
@@ -6036,7 +6108,8 @@ class LUSIDAPI(object):
          'TransactionConfigurationMovementData',
          'TransactionConfigurationTypeAlias', 'TryUpsertCorporateActions',
          'Iso4217CurrencyUnit', 'BasicUnit',
-         'CorporateActionTransitionComponent'
+         'CorporateActionTransitionComponent', 'TargetTaxlot',
+         'AdjustHoldingRequest'
         :type entity: str
         :param dict custom_headers: headers that will be added to the request
         :param bool raw: returns the direct response alongside the

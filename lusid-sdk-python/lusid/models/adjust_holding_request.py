@@ -21,5 +21,36 @@
 # SOFTWARE.
 # --------------------------------------------------------------------------
 
-VERSION = "0.6.256"
+from msrest.serialization import Model
 
+
+class AdjustHoldingRequest(Model):
+    """This 'dto' contains target holdings. i.e. holding data that the
+    system should match. When processed by the movement
+    engine, it will create 'true-up' adjustments on the fly.
+
+    :param security_uid: Unique security identifier
+    :type security_uid: str
+    :param sub_holding_keys: Key fields to uniquely index the sub holdings of
+     a security
+    :type sub_holding_keys: list[~lusid.models.CreatePerpetualPropertyRequest]
+    :param tax_lots: 1 or more quantity amounts
+    :type tax_lots: list[~lusid.models.TargetTaxLotDto]
+    """
+
+    _validation = {
+        'security_uid': {'required': True},
+        'tax_lots': {'required': True},
+    }
+
+    _attribute_map = {
+        'security_uid': {'key': 'securityUid', 'type': 'str'},
+        'sub_holding_keys': {'key': 'subHoldingKeys', 'type': '[CreatePerpetualPropertyRequest]'},
+        'tax_lots': {'key': 'taxLots', 'type': '[TargetTaxLotDto]'},
+    }
+
+    def __init__(self, security_uid, tax_lots, sub_holding_keys=None):
+        super(AdjustHoldingRequest, self).__init__()
+        self.security_uid = security_uid
+        self.sub_holding_keys = sub_holding_keys
+        self.tax_lots = tax_lots
