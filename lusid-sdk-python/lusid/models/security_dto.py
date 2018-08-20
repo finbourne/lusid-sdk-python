@@ -39,6 +39,8 @@ class SecurityDto(Model):
     :type aliases: dict[str, str]
     :param properties:
     :type properties: list[~lusid.models.PropertyDto]
+    :param market_identifier_code:
+    :type market_identifier_code: str
     :param _links:
     :type _links: list[~lusid.models.Link]
     """
@@ -50,10 +52,11 @@ class SecurityDto(Model):
         'common_name': {'key': 'commonName', 'type': 'str'},
         'aliases': {'key': 'aliases', 'type': '{str}'},
         'properties': {'key': 'properties', 'type': '[PropertyDto]'},
+        'market_identifier_code': {'key': 'marketIdentifierCode', 'type': 'str'},
         '_links': {'key': '_links', 'type': '[Link]'},
     }
 
-    def __init__(self, href=None, uid=None, version=None, common_name=None, aliases=None, properties=None, _links=None):
+    def __init__(self, href=None, uid=None, version=None, common_name=None, aliases=None, properties=None, market_identifier_code=None, _links=None):
         super(SecurityDto, self).__init__()
         self.href = href
         self.uid = uid
@@ -61,4 +64,5 @@ class SecurityDto(Model):
         self.common_name = common_name
         self.aliases = aliases
         self.properties = properties
+        self.market_identifier_code = market_identifier_code
         self._links = _links

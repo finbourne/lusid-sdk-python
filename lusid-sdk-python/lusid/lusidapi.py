@@ -299,7 +299,7 @@ class LUSIDAPI(object):
         self._client = ServiceClient(self.config.credentials, self.config)
 
         client_models = {k: v for k, v in models.__dict__.items() if isinstance(v, type)}
-        self.api_version = '0.6.263'
+        self.api_version = '0.6.267'
         self._serialize = Serializer(client_models)
         self._deserialize = Deserializer(client_models)
 
@@ -3670,6 +3670,66 @@ class LUSIDAPI(object):
         return deserialized
     adjust_all_holdings.metadata = {'url': '/v1/api/portfolios/{scope}/{code}/holdings/{effectiveAt}'}
 
+    def cancel_adjust_holdings(
+            self, scope, code, effective_at, custom_headers=None, raw=False, **operation_config):
+        """Cancel adjust-holdings.
+
+        Cancels a previous adjust holdings request.
+
+        :param scope: The scope of the portfolio
+        :type scope: str
+        :param code: Code for the portfolio
+        :type code: str
+        :param effective_at: Effective date
+        :type effective_at: datetime
+        :param dict custom_headers: headers that will be added to the request
+        :param bool raw: returns the direct response alongside the
+         deserialized response
+        :param operation_config: :ref:`Operation configuration
+         overrides<msrest:optionsforoperations>`.
+        :return: DeletedEntityResponse or ClientRawResponse if raw=true
+        :rtype: ~lusid.models.DeletedEntityResponse or
+         ~msrest.pipeline.ClientRawResponse
+        :raises:
+         :class:`ErrorResponseException<lusid.models.ErrorResponseException>`
+        """
+        # Construct URL
+        url = self.cancel_adjust_holdings.metadata['url']
+        path_format_arguments = {
+            'scope': self._serialize.url("scope", scope, 'str'),
+            'code': self._serialize.url("code", code, 'str'),
+            'effectiveAt': self._serialize.url("effective_at", effective_at, 'iso-8601')
+        }
+        url = self._client.format_url(url, **path_format_arguments)
+
+        # Construct parameters
+        query_parameters = {}
+
+        # Construct headers
+        header_parameters = {}
+        header_parameters['Content-Type'] = 'application/json; charset=utf-8'
+        if custom_headers:
+            header_parameters.update(custom_headers)
+
+        # Construct and send request
+        request = self._client.delete(url, query_parameters)
+        response = self._client.send(request, header_parameters, stream=False, **operation_config)
+
+        if response.status_code not in [200]:
+            raise models.ErrorResponseException(self._deserialize, response)
+
+        deserialized = None
+
+        if response.status_code == 200:
+            deserialized = self._deserialize('DeletedEntityResponse', response)
+
+        if raw:
+            client_raw_response = ClientRawResponse(deserialized, response)
+            return client_raw_response
+
+        return deserialized
+    cancel_adjust_holdings.metadata = {'url': '/v1/api/portfolios/{scope}/{code}/holdings/{effectiveAt}'}
+
     def adjust_holdings(
             self, scope, code, effective_at, holding_adjustments=None, custom_headers=None, raw=False, **operation_config):
         """Adjust holdings.
@@ -4023,11 +4083,11 @@ class LUSIDAPI(object):
         :type scope: str
         :param code: Code for the portfolio
         :type code: str
-        :param from_trade_date: Include trades with a trade date equal or
-         later than this date
+        :param from_trade_date: Exclude trades with a trade-date less than
+         this date. If not supplied, no lower filter is applied
         :type from_trade_date: datetime
-        :param to_trade_date: Include trades with a trade date equal or before
-         this date
+        :param to_trade_date: Exclude trades with a trade-date greater than
+         this date. If not supplied, no upper filter is applied
         :type to_trade_date: datetime
         :param as_at:
         :type as_at: datetime
@@ -6446,7 +6506,7 @@ class LUSIDAPI(object):
 
         :param code_type: The type of identifier. Possible values include:
          'Undefined', 'ReutersAssetId', 'CINS', 'Isin', 'Sedol', 'Cusip',
-         'ClientInternal', 'Figi', 'CompositeFigi', 'ShareClassFigi',
+         'Ticker', 'ClientInternal', 'Figi', 'CompositeFigi', 'ShareClassFigi',
          'Wertpapier'
         :type code_type: str
         :param codes: An array of codes
@@ -6516,7 +6576,7 @@ class LUSIDAPI(object):
 
         :param code_type: The type of identifier. Possible values include:
          'Undefined', 'ReutersAssetId', 'CINS', 'Isin', 'Sedol', 'Cusip',
-         'ClientInternal', 'Figi', 'CompositeFigi', 'ShareClassFigi',
+         'Ticker', 'ClientInternal', 'Figi', 'CompositeFigi', 'ShareClassFigi',
          'Wertpapier'
         :type code_type: str
         :param codes: An array of codes
