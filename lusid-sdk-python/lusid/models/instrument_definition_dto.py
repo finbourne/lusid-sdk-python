@@ -28,21 +28,14 @@ class InstrumentDefinitionDto(Model):
     """An opaque instrument definition.
     Understood by some analytics library.
 
-    Variables are only populated by the server, and will be ignored when
-    sending a request.
-
-    :ivar content:
-    :vartype content: str
+    :param content:
+    :type content: str
     """
-
-    _validation = {
-        'content': {'readonly': True},
-    }
 
     _attribute_map = {
         'content': {'key': 'content', 'type': 'str'},
     }
 
-    def __init__(self):
+    def __init__(self, content=None):
         super(InstrumentDefinitionDto, self).__init__()
-        self.content = None
+        self.content = content
