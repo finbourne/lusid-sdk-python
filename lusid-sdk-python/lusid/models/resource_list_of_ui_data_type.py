@@ -24,11 +24,11 @@
 from msrest.serialization import Model
 
 
-class ResourceListPersonalisationDto(Model):
-    """ResourceListPersonalisationDto.
+class ResourceListOfUiDataType(Model):
+    """ResourceListOfUiDataType.
 
     :param values:
-    :type values: list[~lusid.models.PersonalisationDto]
+    :type values: list[str]
     :param href: The Uri that returns the same result as the original request,
      but may include resolved as at time(s).
     :type href: str
@@ -39,14 +39,14 @@ class ResourceListPersonalisationDto(Model):
     """
 
     _attribute_map = {
-        'values': {'key': 'values', 'type': '[PersonalisationDto]'},
+        'values': {'key': 'values', 'type': '[str]'},
         'href': {'key': 'href', 'type': 'str'},
         'count': {'key': 'count', 'type': 'int'},
         '_links': {'key': '_links', 'type': '[Link]'},
     }
 
     def __init__(self, values=None, href=None, count=None, _links=None):
-        super(ResourceListPersonalisationDto, self).__init__()
+        super(ResourceListOfUiDataType, self).__init__()
         self.values = values
         self.href = href
         self.count = count

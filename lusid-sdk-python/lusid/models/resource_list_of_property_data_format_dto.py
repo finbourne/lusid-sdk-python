@@ -24,11 +24,11 @@
 from msrest.serialization import Model
 
 
-class ResourceListPortfolioDto(Model):
-    """ResourceListPortfolioDto.
+class ResourceListOfPropertyDataFormatDto(Model):
+    """ResourceListOfPropertyDataFormatDto.
 
     :param values:
-    :type values: list[~lusid.models.PortfolioDto]
+    :type values: list[~lusid.models.PropertyDataFormatDto]
     :param href: The Uri that returns the same result as the original request,
      but may include resolved as at time(s).
     :type href: str
@@ -39,14 +39,14 @@ class ResourceListPortfolioDto(Model):
     """
 
     _attribute_map = {
-        'values': {'key': 'values', 'type': '[PortfolioDto]'},
+        'values': {'key': 'values', 'type': '[PropertyDataFormatDto]'},
         'href': {'key': 'href', 'type': 'str'},
         'count': {'key': 'count', 'type': 'int'},
         '_links': {'key': '_links', 'type': '[Link]'},
     }
 
     def __init__(self, values=None, href=None, count=None, _links=None):
-        super(ResourceListPortfolioDto, self).__init__()
+        super(ResourceListOfPropertyDataFormatDto, self).__init__()
         self.values = values
         self.href = href
         self.count = count

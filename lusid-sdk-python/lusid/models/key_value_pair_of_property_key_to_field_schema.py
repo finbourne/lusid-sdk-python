@@ -24,30 +24,29 @@
 from msrest.serialization import Model
 
 
-class ResourceListAnalyticStoreKeyDto(Model):
-    """ResourceListAnalyticStoreKeyDto.
+class KeyValuePairOfPropertyKeyToFieldSchema(Model):
+    """KeyValuePairOfPropertyKeyToFieldSchema.
 
-    :param values:
-    :type values: list[~lusid.models.AnalyticStoreKeyDto]
-    :param href: The Uri that returns the same result as the original request,
-     but may include resolved as at time(s).
-    :type href: str
-    :param count: The total number of records returned in the set
-    :type count: int
-    :param _links:
-    :type _links: list[~lusid.models.Link]
+    Variables are only populated by the server, and will be ignored when
+    sending a request.
+
+    :ivar key:
+    :vartype key: str
+    :ivar value:
+    :vartype value: ~lusid.models.FieldSchema
     """
 
-    _attribute_map = {
-        'values': {'key': 'values', 'type': '[AnalyticStoreKeyDto]'},
-        'href': {'key': 'href', 'type': 'str'},
-        'count': {'key': 'count', 'type': 'int'},
-        '_links': {'key': '_links', 'type': '[Link]'},
+    _validation = {
+        'key': {'readonly': True},
+        'value': {'readonly': True},
     }
 
-    def __init__(self, values=None, href=None, count=None, _links=None):
-        super(ResourceListAnalyticStoreKeyDto, self).__init__()
-        self.values = values
-        self.href = href
-        self.count = count
-        self._links = _links
+    _attribute_map = {
+        'key': {'key': 'key', 'type': 'str'},
+        'value': {'key': 'value', 'type': 'FieldSchema'},
+    }
+
+    def __init__(self):
+        super(KeyValuePairOfPropertyKeyToFieldSchema, self).__init__()
+        self.key = None
+        self.value = None

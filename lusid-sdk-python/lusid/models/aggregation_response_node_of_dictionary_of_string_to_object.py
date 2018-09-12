@@ -24,30 +24,34 @@
 from msrest.serialization import Model
 
 
-class ResourceListPropertyKey(Model):
-    """ResourceListPropertyKey.
+class AggregationResponseNodeOfDictionaryOfStringToObject(Model):
+    """AggregationResponseNodeOfDictionaryOfStringToObject.
 
-    :param values:
-    :type values: list[str]
-    :param href: The Uri that returns the same result as the original request,
-     but may include resolved as at time(s).
-    :type href: str
-    :param count: The total number of records returned in the set
-    :type count: int
-    :param _links:
-    :type _links: list[~lusid.models.Link]
+    :param group_property_key:
+    :type group_property_key: str
+    :param group_property_value:
+    :type group_property_value: str
+    :param idx:
+    :type idx: int
+    :param properties:
+    :type properties: dict[str, object]
+    :param children:
+    :type children:
+     list[~lusid.models.AggregationResponseNodeOfDictionaryOfStringToObject]
     """
 
     _attribute_map = {
-        'values': {'key': 'values', 'type': '[str]'},
-        'href': {'key': 'href', 'type': 'str'},
-        'count': {'key': 'count', 'type': 'int'},
-        '_links': {'key': '_links', 'type': '[Link]'},
+        'group_property_key': {'key': 'groupPropertyKey', 'type': 'str'},
+        'group_property_value': {'key': 'groupPropertyValue', 'type': 'str'},
+        'idx': {'key': 'idx', 'type': 'int'},
+        'properties': {'key': 'properties', 'type': '{object}'},
+        'children': {'key': 'children', 'type': '[AggregationResponseNodeOfDictionaryOfStringToObject]'},
     }
 
-    def __init__(self, values=None, href=None, count=None, _links=None):
-        super(ResourceListPropertyKey, self).__init__()
-        self.values = values
-        self.href = href
-        self.count = count
-        self._links = _links
+    def __init__(self, group_property_key=None, group_property_value=None, idx=None, properties=None, children=None):
+        super(AggregationResponseNodeOfDictionaryOfStringToObject, self).__init__()
+        self.group_property_key = group_property_key
+        self.group_property_value = group_property_value
+        self.idx = idx
+        self.properties = properties
+        self.children = children

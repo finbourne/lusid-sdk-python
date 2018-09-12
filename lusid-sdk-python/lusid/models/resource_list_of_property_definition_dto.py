@@ -24,13 +24,11 @@
 from msrest.serialization import Model
 
 
-class VersionedResourceListHoldingDto(Model):
-    """VersionedResourceListHoldingDto.
+class ResourceListOfPropertyDefinitionDto(Model):
+    """ResourceListOfPropertyDefinitionDto.
 
-    :param version:
-    :type version: ~lusid.models.VersionDto
     :param values:
-    :type values: list[~lusid.models.HoldingDto]
+    :type values: list[~lusid.models.PropertyDefinitionDto]
     :param href: The Uri that returns the same result as the original request,
      but may include resolved as at time(s).
     :type href: str
@@ -41,16 +39,14 @@ class VersionedResourceListHoldingDto(Model):
     """
 
     _attribute_map = {
-        'version': {'key': 'version', 'type': 'VersionDto'},
-        'values': {'key': 'values', 'type': '[HoldingDto]'},
+        'values': {'key': 'values', 'type': '[PropertyDefinitionDto]'},
         'href': {'key': 'href', 'type': 'str'},
         'count': {'key': 'count', 'type': 'int'},
         '_links': {'key': '_links', 'type': '[Link]'},
     }
 
-    def __init__(self, version=None, values=None, href=None, count=None, _links=None):
-        super(VersionedResourceListHoldingDto, self).__init__()
-        self.version = version
+    def __init__(self, values=None, href=None, count=None, _links=None):
+        super(ResourceListOfPropertyDefinitionDto, self).__init__()
         self.values = values
         self.href = href
         self.count = count

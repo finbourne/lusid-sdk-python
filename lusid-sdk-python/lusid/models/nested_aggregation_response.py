@@ -30,7 +30,8 @@ class NestedAggregationResponse(Model):
     :param href:
     :type href: str
     :param data:
-    :type data: ~lusid.models.AggregationResponseNodeDictionaryStringObject
+    :type data:
+     ~lusid.models.AggregationResponseNodeOfDictionaryOfStringToObject
     :param aggregation_currency:
     :type aggregation_currency: str
     :param data_schema:
@@ -39,7 +40,7 @@ class NestedAggregationResponse(Model):
 
     _attribute_map = {
         'href': {'key': 'href', 'type': 'str'},
-        'data': {'key': 'data', 'type': 'AggregationResponseNodeDictionaryStringObject'},
+        'data': {'key': 'data', 'type': 'AggregationResponseNodeOfDictionaryOfStringToObject'},
         'aggregation_currency': {'key': 'aggregationCurrency', 'type': 'str'},
         'data_schema': {'key': 'dataSchema', 'type': 'ResultDataSchema'},
     }

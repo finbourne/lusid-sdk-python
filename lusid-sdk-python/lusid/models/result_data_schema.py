@@ -29,13 +29,13 @@ class ResultDataSchema(Model):
 
     :param node_value_schema:
     :type node_value_schema:
-     list[~lusid.models.KeyValuePairPropertyKeyFieldSchema]
+     list[~lusid.models.KeyValuePairOfPropertyKeyToFieldSchema]
     :param property_schema:
     :type property_schema: dict[str, ~lusid.models.FieldSchema]
     """
 
     _attribute_map = {
-        'node_value_schema': {'key': 'nodeValueSchema', 'type': '[KeyValuePairPropertyKeyFieldSchema]'},
+        'node_value_schema': {'key': 'nodeValueSchema', 'type': '[KeyValuePairOfPropertyKeyToFieldSchema]'},
         'property_schema': {'key': 'propertySchema', 'type': '{FieldSchema}'},
     }
 

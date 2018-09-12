@@ -56,13 +56,13 @@ class SchemaDto(Model):
     :param href:
     :type href: str
     :param values:
-    :type values: list[~lusid.models.KeyValuePairStringFieldSchema]
+    :type values: list[~lusid.models.KeyValuePairOfStringToFieldSchema]
     """
 
     _attribute_map = {
         'entity': {'key': 'entity', 'type': 'str'},
         'href': {'key': 'href', 'type': 'str'},
-        'values': {'key': 'values', 'type': '[KeyValuePairStringFieldSchema]'},
+        'values': {'key': 'values', 'type': '[KeyValuePairOfStringToFieldSchema]'},
     }
 
     def __init__(self, entity=None, href=None, values=None):

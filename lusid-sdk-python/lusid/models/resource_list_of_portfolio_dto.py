@@ -24,34 +24,30 @@
 from msrest.serialization import Model
 
 
-class AggregationResponseNodeDictionaryStringObject(Model):
-    """AggregationResponseNodeDictionaryStringObject.
+class ResourceListOfPortfolioDto(Model):
+    """ResourceListOfPortfolioDto.
 
-    :param group_property_key:
-    :type group_property_key: str
-    :param group_property_value:
-    :type group_property_value: str
-    :param idx:
-    :type idx: int
-    :param properties:
-    :type properties: dict[str, object]
-    :param children:
-    :type children:
-     list[~lusid.models.AggregationResponseNodeDictionaryStringObject]
+    :param values:
+    :type values: list[~lusid.models.PortfolioDto]
+    :param href: The Uri that returns the same result as the original request,
+     but may include resolved as at time(s).
+    :type href: str
+    :param count: The total number of records returned in the set
+    :type count: int
+    :param _links:
+    :type _links: list[~lusid.models.Link]
     """
 
     _attribute_map = {
-        'group_property_key': {'key': 'groupPropertyKey', 'type': 'str'},
-        'group_property_value': {'key': 'groupPropertyValue', 'type': 'str'},
-        'idx': {'key': 'idx', 'type': 'int'},
-        'properties': {'key': 'properties', 'type': '{object}'},
-        'children': {'key': 'children', 'type': '[AggregationResponseNodeDictionaryStringObject]'},
+        'values': {'key': 'values', 'type': '[PortfolioDto]'},
+        'href': {'key': 'href', 'type': 'str'},
+        'count': {'key': 'count', 'type': 'int'},
+        '_links': {'key': '_links', 'type': '[Link]'},
     }
 
-    def __init__(self, group_property_key=None, group_property_value=None, idx=None, properties=None, children=None):
-        super(AggregationResponseNodeDictionaryStringObject, self).__init__()
-        self.group_property_key = group_property_key
-        self.group_property_value = group_property_value
-        self.idx = idx
-        self.properties = properties
-        self.children = children
+    def __init__(self, values=None, href=None, count=None, _links=None):
+        super(ResourceListOfPortfolioDto, self).__init__()
+        self.values = values
+        self.href = href
+        self.count = count
+        self._links = _links

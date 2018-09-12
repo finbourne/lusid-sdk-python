@@ -24,11 +24,11 @@
 from msrest.serialization import Model
 
 
-class ResourceListScope(Model):
-    """ResourceListScope.
+class ResourceListOfSecurityDto(Model):
+    """ResourceListOfSecurityDto.
 
     :param values:
-    :type values: list[str]
+    :type values: list[~lusid.models.SecurityDto]
     :param href: The Uri that returns the same result as the original request,
      but may include resolved as at time(s).
     :type href: str
@@ -39,14 +39,14 @@ class ResourceListScope(Model):
     """
 
     _attribute_map = {
-        'values': {'key': 'values', 'type': '[str]'},
+        'values': {'key': 'values', 'type': '[SecurityDto]'},
         'href': {'key': 'href', 'type': 'str'},
         'count': {'key': 'count', 'type': 'int'},
         '_links': {'key': '_links', 'type': '[Link]'},
     }
 
     def __init__(self, values=None, href=None, count=None, _links=None):
-        super(ResourceListScope, self).__init__()
+        super(ResourceListOfSecurityDto, self).__init__()
         self.values = values
         self.href = href
         self.count = count

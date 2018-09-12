@@ -24,11 +24,11 @@
 from msrest.serialization import Model
 
 
-class ResourceListProcessedCommandDto(Model):
-    """ResourceListProcessedCommandDto.
+class ResourceListOfPortfolioSearchResult(Model):
+    """ResourceListOfPortfolioSearchResult.
 
     :param values:
-    :type values: list[~lusid.models.ProcessedCommandDto]
+    :type values: list[~lusid.models.PortfolioSearchResult]
     :param href: The Uri that returns the same result as the original request,
      but may include resolved as at time(s).
     :type href: str
@@ -39,14 +39,14 @@ class ResourceListProcessedCommandDto(Model):
     """
 
     _attribute_map = {
-        'values': {'key': 'values', 'type': '[ProcessedCommandDto]'},
+        'values': {'key': 'values', 'type': '[PortfolioSearchResult]'},
         'href': {'key': 'href', 'type': 'str'},
         'count': {'key': 'count', 'type': 'int'},
         '_links': {'key': '_links', 'type': '[Link]'},
     }
 
     def __init__(self, values=None, href=None, count=None, _links=None):
-        super(ResourceListProcessedCommandDto, self).__init__()
+        super(ResourceListOfPortfolioSearchResult, self).__init__()
         self.values = values
         self.href = href
         self.count = count

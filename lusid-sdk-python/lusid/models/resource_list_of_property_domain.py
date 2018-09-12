@@ -24,13 +24,11 @@
 from msrest.serialization import Model
 
 
-class VersionedResourceListTradeDto(Model):
-    """VersionedResourceListTradeDto.
+class ResourceListOfPropertyDomain(Model):
+    """ResourceListOfPropertyDomain.
 
-    :param version:
-    :type version: ~lusid.models.VersionDto
     :param values:
-    :type values: list[~lusid.models.TradeDto]
+    :type values: list[str]
     :param href: The Uri that returns the same result as the original request,
      but may include resolved as at time(s).
     :type href: str
@@ -41,16 +39,14 @@ class VersionedResourceListTradeDto(Model):
     """
 
     _attribute_map = {
-        'version': {'key': 'version', 'type': 'VersionDto'},
-        'values': {'key': 'values', 'type': '[TradeDto]'},
+        'values': {'key': 'values', 'type': '[str]'},
         'href': {'key': 'href', 'type': 'str'},
         'count': {'key': 'count', 'type': 'int'},
         '_links': {'key': '_links', 'type': '[Link]'},
     }
 
-    def __init__(self, version=None, values=None, href=None, count=None, _links=None):
-        super(VersionedResourceListTradeDto, self).__init__()
-        self.version = version
+    def __init__(self, values=None, href=None, count=None, _links=None):
+        super(ResourceListOfPropertyDomain, self).__init__()
         self.values = values
         self.href = href
         self.count = count

@@ -30,12 +30,12 @@ class PropertySchemaDto(Model):
     :param href:
     :type href: str
     :param values:
-    :type values: list[~lusid.models.KeyValuePairPropertyKeyFieldSchema]
+    :type values: list[~lusid.models.KeyValuePairOfPropertyKeyToFieldSchema]
     """
 
     _attribute_map = {
         'href': {'key': 'href', 'type': 'str'},
-        'values': {'key': 'values', 'type': '[KeyValuePairPropertyKeyFieldSchema]'},
+        'values': {'key': 'values', 'type': '[KeyValuePairOfPropertyKeyToFieldSchema]'},
     }
 
     def __init__(self, href=None, values=None):

@@ -24,29 +24,30 @@
 from msrest.serialization import Model
 
 
-class KeyValuePairPropertyKeyFieldSchema(Model):
-    """KeyValuePairPropertyKeyFieldSchema.
+class ResourceListOfProcessedCommandDto(Model):
+    """ResourceListOfProcessedCommandDto.
 
-    Variables are only populated by the server, and will be ignored when
-    sending a request.
-
-    :ivar key:
-    :vartype key: str
-    :ivar value:
-    :vartype value: ~lusid.models.FieldSchema
+    :param values:
+    :type values: list[~lusid.models.ProcessedCommandDto]
+    :param href: The Uri that returns the same result as the original request,
+     but may include resolved as at time(s).
+    :type href: str
+    :param count: The total number of records returned in the set
+    :type count: int
+    :param _links:
+    :type _links: list[~lusid.models.Link]
     """
 
-    _validation = {
-        'key': {'readonly': True},
-        'value': {'readonly': True},
-    }
-
     _attribute_map = {
-        'key': {'key': 'key', 'type': 'str'},
-        'value': {'key': 'value', 'type': 'FieldSchema'},
+        'values': {'key': 'values', 'type': '[ProcessedCommandDto]'},
+        'href': {'key': 'href', 'type': 'str'},
+        'count': {'key': 'count', 'type': 'int'},
+        '_links': {'key': '_links', 'type': '[Link]'},
     }
 
-    def __init__(self):
-        super(KeyValuePairPropertyKeyFieldSchema, self).__init__()
-        self.key = None
-        self.value = None
+    def __init__(self, values=None, href=None, count=None, _links=None):
+        super(ResourceListOfProcessedCommandDto, self).__init__()
+        self.values = values
+        self.href = href
+        self.count = count
+        self._links = _links

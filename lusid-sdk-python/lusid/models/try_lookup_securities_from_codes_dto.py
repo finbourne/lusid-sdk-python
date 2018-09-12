@@ -30,14 +30,14 @@ class TryLookupSecuritiesFromCodesDto(Model):
     :param href:
     :type href: str
     :param values:
-    :type values: list[~lusid.models.ResourceListSecurityDto]
+    :type values: list[~lusid.models.ResourceListOfSecurityDto]
     :param failed:
     :type failed: list[~lusid.models.ErrorDetail]
     """
 
     _attribute_map = {
         'href': {'key': 'href', 'type': 'str'},
-        'values': {'key': 'values', 'type': '[ResourceListSecurityDto]'},
+        'values': {'key': 'values', 'type': '[ResourceListOfSecurityDto]'},
         'failed': {'key': 'failed', 'type': '[ErrorDetail]'},
     }
 

@@ -24,8 +24,8 @@
 from msrest.serialization import Model
 
 
-class ResourceListTxnMetaDataDto(Model):
-    """ResourceListTxnMetaDataDto.
+class ResourceListOfTxnMetaDataDto(Model):
+    """ResourceListOfTxnMetaDataDto.
 
     :param values:
     :type values: list[~lusid.models.TxnMetaDataDto]
@@ -46,7 +46,7 @@ class ResourceListTxnMetaDataDto(Model):
     }
 
     def __init__(self, values=None, href=None, count=None, _links=None):
-        super(ResourceListTxnMetaDataDto, self).__init__()
+        super(ResourceListOfTxnMetaDataDto, self).__init__()
         self.values = values
         self.href = href
         self.count = count

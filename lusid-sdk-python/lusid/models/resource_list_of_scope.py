@@ -24,8 +24,8 @@
 from msrest.serialization import Model
 
 
-class ResourceListPropertyDomain(Model):
-    """ResourceListPropertyDomain.
+class ResourceListOfScope(Model):
+    """ResourceListOfScope.
 
     :param values:
     :type values: list[str]
@@ -46,7 +46,7 @@ class ResourceListPropertyDomain(Model):
     }
 
     def __init__(self, values=None, href=None, count=None, _links=None):
-        super(ResourceListPropertyDomain, self).__init__()
+        super(ResourceListOfScope, self).__init__()
         self.values = values
         self.href = href
         self.count = count
