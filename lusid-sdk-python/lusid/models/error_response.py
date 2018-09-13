@@ -69,7 +69,7 @@ class ErrorResponse(Model):
      'UnitsNotSupportedOnDataType', 'CannotSpecifyUnitsOnDataType',
      'UnitSchemaInconsistentWithDataType', 'UnitDefinitionNotSpecified',
      'DuplicateUnitDefinitionsSpecified', 'InvalidUnitsDefinition',
-     'InvalidSecurityIdentifierUnit'
+     'InvalidSecurityIdentifierUnit', 'HoldingsAdjustmentDoesNotExist'
     :vartype code: str or ~lusid.models.enum
     :ivar message:
     :vartype message: str

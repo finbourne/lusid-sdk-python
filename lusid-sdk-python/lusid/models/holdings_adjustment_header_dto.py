@@ -24,36 +24,33 @@
 from msrest.serialization import Model
 
 
-class Link(Model):
-    """Link.
+class HoldingsAdjustmentHeaderDto(Model):
+    """Summary information of a holdings adjustment for a single portfolio and
+    effective date.
 
-    :param relation: Possible values include: 'Root', 'Properties', 'Trades',
-     'Details', 'Constituents', 'HoldingsAdjustment'
-    :type relation: str or ~lusid.models.enum
-    :param href:
-    :type href: str
-    :param description:
-    :type description: str
-    :param method: Possible values include: 'POST', 'GET', 'PATCH', 'DELETE'
-    :type method: str or ~lusid.models.enum
+    :param effective_at: There can be at most one holdings adjustment for a
+     portfolio at a
+     specific effective time so this uniquely identifies the adjustment.
+    :type effective_at: datetime
+    :param version:
+    :type version: ~lusid.models.VersionDto
+    :param unmatched_holding_method: Possible values include:
+     'PositionToZero', 'KeepTheSame'
+    :type unmatched_holding_method: str or ~lusid.models.enum
+    :param _links:
+    :type _links: list[~lusid.models.Link]
     """
 
-    _validation = {
-        'relation': {'required': True},
-        'href': {'required': True},
-        'method': {'required': True},
-    }
-
     _attribute_map = {
-        'relation': {'key': 'relation', 'type': 'str'},
-        'href': {'key': 'href', 'type': 'str'},
-        'description': {'key': 'description', 'type': 'str'},
-        'method': {'key': 'method', 'type': 'str'},
+        'effective_at': {'key': 'effectiveAt', 'type': 'iso-8601'},
+        'version': {'key': 'version', 'type': 'VersionDto'},
+        'unmatched_holding_method': {'key': 'unmatchedHoldingMethod', 'type': 'str'},
+        '_links': {'key': '_links', 'type': '[Link]'},
     }
 
-    def __init__(self, relation, href, method, description=None):
-        super(Link, self).__init__()
-        self.relation = relation
-        self.href = href
-        self.description = description
-        self.method = method
+    def __init__(self, effective_at=None, version=None, unmatched_holding_method=None, _links=None):
+        super(HoldingsAdjustmentHeaderDto, self).__init__()
+        self.effective_at = effective_at
+        self.version = version
+        self.unmatched_holding_method = unmatched_holding_method
+        self._links = _links

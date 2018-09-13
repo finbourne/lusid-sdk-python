@@ -51,7 +51,8 @@ class SchemaDto(Model):
      'TransactionConfigurationMovementData',
      'TransactionConfigurationTypeAlias', 'TryUpsertCorporateActions',
      'Iso4217CurrencyUnit', 'BasicUnit', 'CorporateActionTransitionComponent',
-     'TargetTaxlot', 'AdjustHoldingRequest'
+     'TargetTaxlot', 'AdjustHoldingRequest', 'HoldingsAdjustment',
+     'HoldingsAdjustmentHeader'
     :type entity: str or ~lusid.models.enum
     :param href:
     :type href: str
