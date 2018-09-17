@@ -73,14 +73,7 @@ class UpsertPortfolioTradeRequest(Model):
     _validation = {
         'trade_id': {'required': True},
         'type': {'required': True},
-        'security_uid': {'required': True},
-        'trade_date': {'required': True},
-        'settlement_date': {'required': True},
-        'units': {'required': True},
-        'trade_price': {'required': True},
-        'total_consideration': {'required': True},
         'settlement_currency': {'required': True},
-        'source': {'required': True},
     }
 
     _attribute_map = {
@@ -104,7 +97,7 @@ class UpsertPortfolioTradeRequest(Model):
         'netting_set': {'key': 'nettingSet', 'type': 'str'},
     }
 
-    def __init__(self, trade_id, type, security_uid, trade_date, settlement_date, units, trade_price, total_consideration, settlement_currency, source, exchange_rate=None, trade_currency=None, properties=None, counterparty_id=None, dividend_state=None, trade_price_type=None, unit_type=None, netting_set=None):
+    def __init__(self, trade_id, type, settlement_currency, security_uid=None, trade_date=None, settlement_date=None, units=None, trade_price=None, total_consideration=None, exchange_rate=None, trade_currency=None, properties=None, counterparty_id=None, source=None, dividend_state=None, trade_price_type=None, unit_type=None, netting_set=None):
         super(UpsertPortfolioTradeRequest, self).__init__()
         self.trade_id = trade_id
         self.type = type

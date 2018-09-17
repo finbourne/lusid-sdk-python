@@ -45,8 +45,6 @@ class AnalyticsItemDto(Model):
 
     _validation = {
         'label': {'required': True},
-        'security_uid': {'required': True},
-        'analytic_date': {'required': True},
         'recipe_key': {'required': True},
         'metric_key': {'required': True},
         'value': {'required': True},
@@ -62,7 +60,7 @@ class AnalyticsItemDto(Model):
         'value': {'key': 'value', 'type': '{object}'},
     }
 
-    def __init__(self, label, security_uid, analytic_date, recipe_key, metric_key, value, recipe_scope=None):
+    def __init__(self, label, recipe_key, metric_key, value, security_uid=None, analytic_date=None, recipe_scope=None):
         super(AnalyticsItemDto, self).__init__()
         self.label = label
         self.security_uid = security_uid

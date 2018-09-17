@@ -32,14 +32,10 @@ class ClearEntityCachesDto(Model):
     :type number_of_items_cleared: long
     """
 
-    _validation = {
-        'number_of_items_cleared': {'required': True},
-    }
-
     _attribute_map = {
         'number_of_items_cleared': {'key': 'numberOfItemsCleared', 'type': 'long'},
     }
 
-    def __init__(self, number_of_items_cleared):
+    def __init__(self, number_of_items_cleared=None):
         super(ClearEntityCachesDto, self).__init__()
         self.number_of_items_cleared = number_of_items_cleared

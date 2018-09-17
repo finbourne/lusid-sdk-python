@@ -47,7 +47,6 @@ class TxnTypeAliasDto(Model):
         'description': {'required': True},
         'txn_class': {'required': True},
         'txn_group': {'required': True},
-        'txn_roles': {'required': True},
     }
 
     _attribute_map = {
@@ -58,7 +57,7 @@ class TxnTypeAliasDto(Model):
         'txn_roles': {'key': 'txnRoles', 'type': 'str'},
     }
 
-    def __init__(self, type, description, txn_class, txn_group, txn_roles):
+    def __init__(self, type, description, txn_class, txn_group, txn_roles=None):
         super(TxnTypeAliasDto, self).__init__()
         self.type = type
         self.description = description

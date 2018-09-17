@@ -48,12 +48,7 @@ class HoldingDto(Model):
     """
 
     _validation = {
-        'security_uid': {'required': True},
         'holding_type': {'required': True},
-        'units': {'required': True},
-        'settled_units': {'required': True},
-        'cost': {'required': True},
-        'cost_portfolio_ccy': {'required': True},
     }
 
     _attribute_map = {
@@ -67,7 +62,7 @@ class HoldingDto(Model):
         'transaction': {'key': 'transaction', 'type': 'TradeDto'},
     }
 
-    def __init__(self, security_uid, holding_type, units, settled_units, cost, cost_portfolio_ccy, properties=None, transaction=None):
+    def __init__(self, holding_type, security_uid=None, properties=None, units=None, settled_units=None, cost=None, cost_portfolio_ccy=None, transaction=None):
         super(HoldingDto, self).__init__()
         self.security_uid = security_uid
         self.properties = properties

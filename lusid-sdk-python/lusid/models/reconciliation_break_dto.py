@@ -37,10 +37,6 @@ class ReconciliationBreakDto(Model):
     :type cost_difference: float
     """
 
-    _validation = {
-        'security_uid': {'required': True},
-    }
-
     _attribute_map = {
         'security_uid': {'key': 'securityUid', 'type': 'str'},
         'properties': {'key': 'properties', 'type': '[PropertyDto]'},
@@ -48,7 +44,7 @@ class ReconciliationBreakDto(Model):
         'cost_difference': {'key': 'costDifference', 'type': 'float'},
     }
 
-    def __init__(self, security_uid, properties=None, units_difference=None, cost_difference=None):
+    def __init__(self, security_uid=None, properties=None, units_difference=None, cost_difference=None):
         super(ReconciliationBreakDto, self).__init__()
         self.security_uid = security_uid
         self.properties = properties

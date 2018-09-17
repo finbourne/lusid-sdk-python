@@ -300,7 +300,7 @@ class LUSIDAPI(object):
         self._client = ServiceClient(self.config.credentials, self.config)
 
         client_models = {k: v for k, v in models.__dict__.items() if isinstance(v, type)}
-        self.api_version = '0.6.271'
+        self.api_version = '0.6.276'
         self._serialize = Serializer(client_models)
         self._deserialize = Deserializer(client_models)
 
@@ -2648,20 +2648,20 @@ class LUSIDAPI(object):
     get_version.metadata = {'url': '/v1/api/metadata/version'}
 
     def get_personalisations(
-            self, recursive, wildcards, pattern=None, scope=None, sort_by=None, start=None, limit=None, custom_headers=None, raw=False, **operation_config):
+            self, pattern=None, scope=None, recursive=None, wildcards=None, sort_by=None, start=None, limit=None, custom_headers=None, raw=False, **operation_config):
         """Get a personalisation, recursing to get any referenced if required.
 
+        :param pattern: The search pattern or specific key
+        :type pattern: str
+        :param scope: The scope level to request for. Possible values include:
+         'User', 'Group', 'Default', 'All'
+        :type scope: str
         :param recursive: Whether to recurse into dereference recursive
          settings
         :type recursive: bool
         :param wildcards: Whether to apply wildcards to the provided pattern
          and pull back any matching
         :type wildcards: bool
-        :param pattern: The search pattern or specific key
-        :type pattern: str
-        :param scope: The scope level to request for. Possible values include:
-         'User', 'Group', 'Default', 'All'
-        :type scope: str
         :param sort_by:
         :type sort_by: list[str]
         :param start:
@@ -2689,8 +2689,10 @@ class LUSIDAPI(object):
             query_parameters['pattern'] = self._serialize.query("pattern", pattern, 'str')
         if scope is not None:
             query_parameters['scope'] = self._serialize.query("scope", scope, 'str')
-        query_parameters['recursive'] = self._serialize.query("recursive", recursive, 'bool')
-        query_parameters['wildcards'] = self._serialize.query("wildcards", wildcards, 'bool')
+        if recursive is not None:
+            query_parameters['recursive'] = self._serialize.query("recursive", recursive, 'bool')
+        if wildcards is not None:
+            query_parameters['wildcards'] = self._serialize.query("wildcards", wildcards, 'bool')
         if sort_by is not None:
             query_parameters['sortBy'] = self._serialize.query("sort_by", sort_by, '[str]', div=',')
         if start is not None:
@@ -2780,15 +2782,15 @@ class LUSIDAPI(object):
     upsert_personalisations.metadata = {'url': '/v1/api/personalisations'}
 
     def delete_personalisation(
-            self, scope, key=None, group=None, custom_headers=None, raw=False, **operation_config):
+            self, key=None, scope=None, group=None, custom_headers=None, raw=False, **operation_config):
         """Delete a personalisation at a specific scope (or use scope ALL to purge
         the setting entirely).
 
+        :param key: The key of the setting to be deleted
+        :type key: str
         :param scope: The scope to delete at (use ALL to purge the setting
          entirely). Possible values include: 'User', 'Group', 'Default', 'All'
         :type scope: str
-        :param key: The key of the setting to be deleted
-        :type key: str
         :param group: If deleting a setting at group level, specify the group
          here
         :type group: str
@@ -2810,7 +2812,8 @@ class LUSIDAPI(object):
         query_parameters = {}
         if key is not None:
             query_parameters['key'] = self._serialize.query("key", key, 'str')
-        query_parameters['scope'] = self._serialize.query("scope", scope, 'str')
+        if scope is not None:
+            query_parameters['scope'] = self._serialize.query("scope", scope, 'str')
         if group is not None:
             query_parameters['group'] = self._serialize.query("group", group, 'str')
 
@@ -3802,7 +3805,7 @@ class LUSIDAPI(object):
     adjust_holdings.metadata = {'url': '/v1/api/portfolios/{scope}/{code}/holdings/{effectiveAt}'}
 
     def list_holdings_adjustments(
-            self, scope, code, from_effective_at, to_effective_at, as_at_time=None, custom_headers=None, raw=False, **operation_config):
+            self, scope, code, from_effective_at=None, to_effective_at=None, as_at_time=None, custom_headers=None, raw=False, **operation_config):
         """Gets holdings adjustments in an interval of effective time.
 
         :param scope: The scope of the portfolio
@@ -3838,8 +3841,10 @@ class LUSIDAPI(object):
 
         # Construct parameters
         query_parameters = {}
-        query_parameters['fromEffectiveAt'] = self._serialize.query("from_effective_at", from_effective_at, 'iso-8601')
-        query_parameters['toEffectiveAt'] = self._serialize.query("to_effective_at", to_effective_at, 'iso-8601')
+        if from_effective_at is not None:
+            query_parameters['fromEffectiveAt'] = self._serialize.query("from_effective_at", from_effective_at, 'iso-8601')
+        if to_effective_at is not None:
+            query_parameters['toEffectiveAt'] = self._serialize.query("to_effective_at", to_effective_at, 'iso-8601')
         if as_at_time is not None:
             query_parameters['asAtTime'] = self._serialize.query("as_at_time", as_at_time, 'iso-8601')
 
@@ -5724,7 +5729,7 @@ class LUSIDAPI(object):
     perform_reconciliation.metadata = {'url': '/v1/api/recon'}
 
     def list_reference_portfolios(
-            self, scope, effective_at, as_at=None, sort_by=None, start=None, limit=None, filter=None, custom_headers=None, raw=False, **operation_config):
+            self, scope, effective_at=None, as_at=None, sort_by=None, start=None, limit=None, filter=None, custom_headers=None, raw=False, **operation_config):
         """Get all reference portfolios in a scope.
 
         :param scope:
@@ -5761,7 +5766,8 @@ class LUSIDAPI(object):
 
         # Construct parameters
         query_parameters = {}
-        query_parameters['effectiveAt'] = self._serialize.query("effective_at", effective_at, 'iso-8601')
+        if effective_at is not None:
+            query_parameters['effectiveAt'] = self._serialize.query("effective_at", effective_at, 'iso-8601')
         if as_at is not None:
             query_parameters['asAt'] = self._serialize.query("as_at", as_at, 'iso-8601')
         if sort_by is not None:
@@ -5860,7 +5866,7 @@ class LUSIDAPI(object):
     create_reference_portfolio.metadata = {'url': '/v1/api/reference/{scope}'}
 
     def get_reference_portfolio(
-            self, scope, code, effective_at, as_at=None, custom_headers=None, raw=False, **operation_config):
+            self, scope, code, effective_at=None, as_at=None, custom_headers=None, raw=False, **operation_config):
         """Get a reference portfolio by name (as opposed to id).
 
         :param scope:
@@ -5893,7 +5899,8 @@ class LUSIDAPI(object):
 
         # Construct parameters
         query_parameters = {}
-        query_parameters['effectiveAt'] = self._serialize.query("effective_at", effective_at, 'iso-8601')
+        if effective_at is not None:
+            query_parameters['effectiveAt'] = self._serialize.query("effective_at", effective_at, 'iso-8601')
         if as_at is not None:
             query_parameters['asAt'] = self._serialize.query("as_at", as_at, 'iso-8601')
 
@@ -6271,7 +6278,7 @@ class LUSIDAPI(object):
 
     def get_entity_schema(
             self, entity, custom_headers=None, raw=False, **operation_config):
-        """Gets the schema for a given entity.
+        """
 
         :param entity: Possible values include: 'PropertyKey', 'FieldSchema',
          'Personalisation', 'Security', 'Property', 'CreatePropertyRequest',

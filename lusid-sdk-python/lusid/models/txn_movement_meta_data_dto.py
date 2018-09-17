@@ -42,12 +42,6 @@ class TxnMovementMetaDataDto(Model):
     :type mappings: list[~lusid.models.TxnPropertyMappingDto]
     """
 
-    _validation = {
-        'movement_types': {'required': True},
-        'side': {'required': True},
-        'direction': {'required': True},
-    }
-
     _attribute_map = {
         'movement_types': {'key': 'movementTypes', 'type': 'str'},
         'side': {'key': 'side', 'type': 'str'},
@@ -56,7 +50,7 @@ class TxnMovementMetaDataDto(Model):
         'mappings': {'key': 'mappings', 'type': '[TxnPropertyMappingDto]'},
     }
 
-    def __init__(self, movement_types, side, direction, properties=None, mappings=None):
+    def __init__(self, movement_types=None, side=None, direction=None, properties=None, mappings=None):
         super(TxnMovementMetaDataDto, self).__init__()
         self.movement_types = movement_types
         self.side = side

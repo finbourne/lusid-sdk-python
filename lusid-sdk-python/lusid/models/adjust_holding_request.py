@@ -41,7 +41,6 @@ class AdjustHoldingRequest(Model):
     """
 
     _validation = {
-        'security_uid': {'required': True},
         'tax_lots': {'required': True},
     }
 
@@ -52,7 +51,7 @@ class AdjustHoldingRequest(Model):
         'tax_lots': {'key': 'taxLots', 'type': '[TargetTaxLotDto]'},
     }
 
-    def __init__(self, security_uid, tax_lots, sub_holding_keys=None, properties=None):
+    def __init__(self, tax_lots, security_uid=None, sub_holding_keys=None, properties=None):
         super(AdjustHoldingRequest, self).__init__()
         self.security_uid = security_uid
         self.sub_holding_keys = sub_holding_keys

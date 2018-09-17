@@ -44,10 +44,6 @@ class TargetTaxLotDto(Model):
     :type settlement_date: datetime
     """
 
-    _validation = {
-        'units': {'required': True},
-    }
-
     _attribute_map = {
         'units': {'key': 'units', 'type': 'float'},
         'cost': {'key': 'cost', 'type': 'float'},
@@ -57,7 +53,7 @@ class TargetTaxLotDto(Model):
         'settlement_date': {'key': 'settlementDate', 'type': 'iso-8601'},
     }
 
-    def __init__(self, units, cost=None, portfolio_cost=None, price=None, purchase_date=None, settlement_date=None):
+    def __init__(self, units=None, cost=None, portfolio_cost=None, price=None, purchase_date=None, settlement_date=None):
         super(TargetTaxLotDto, self).__init__()
         self.units = units
         self.cost = cost

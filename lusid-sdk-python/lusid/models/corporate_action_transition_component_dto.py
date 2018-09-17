@@ -35,19 +35,13 @@ class CorporateActionTransitionComponentDto(Model):
     :type cost_factor: float
     """
 
-    _validation = {
-        'security_uid': {'required': True},
-        'units_factor': {'required': True},
-        'cost_factor': {'required': True},
-    }
-
     _attribute_map = {
         'security_uid': {'key': 'securityUid', 'type': 'str'},
         'units_factor': {'key': 'unitsFactor', 'type': 'float'},
         'cost_factor': {'key': 'costFactor', 'type': 'float'},
     }
 
-    def __init__(self, security_uid, units_factor, cost_factor):
+    def __init__(self, security_uid=None, units_factor=None, cost_factor=None):
         super(CorporateActionTransitionComponentDto, self).__init__()
         self.security_uid = security_uid
         self.units_factor = units_factor

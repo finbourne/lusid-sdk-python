@@ -43,10 +43,6 @@ class UpsertCorporateActionRequest(Model):
 
     _validation = {
         'corporate_action_id': {'required': True},
-        'announcement_date': {'required': True},
-        'ex_date': {'required': True},
-        'record_date': {'required': True},
-        'payment_date': {'required': True},
         'transitions': {'required': True},
     }
 
@@ -59,7 +55,7 @@ class UpsertCorporateActionRequest(Model):
         'transitions': {'key': 'transitions', 'type': '[CorporateActionTransitionDto]'},
     }
 
-    def __init__(self, corporate_action_id, announcement_date, ex_date, record_date, payment_date, transitions):
+    def __init__(self, corporate_action_id, transitions, announcement_date=None, ex_date=None, record_date=None, payment_date=None):
         super(UpsertCorporateActionRequest, self).__init__()
         self.corporate_action_id = corporate_action_id
         self.announcement_date = announcement_date
