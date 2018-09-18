@@ -210,6 +210,7 @@ class LUSIDAPI(object):
     | &lt;a name="108"&gt;108&lt;/a&gt;|GroupNotFound|  |
     | &lt;a name="109"&gt;109&lt;/a&gt;|PortfolioNotFound|  |
     | &lt;a name="110"&gt;110&lt;/a&gt;|PropertySchemaNotFound|  |
+    | &lt;a name="111"&gt;111&lt;/a&gt;|PortfolioAncestryNotFound|  |
     | &lt;a name="112"&gt;112&lt;/a&gt;|PortfolioWithIdAlreadyExists|  |
     | &lt;a name="113"&gt;113&lt;/a&gt;|OrphanedPortfolio|  |
     | &lt;a name="119"&gt;119&lt;/a&gt;|MissingBaseClaims|  |
@@ -300,7 +301,7 @@ class LUSIDAPI(object):
         self._client = ServiceClient(self.config.credentials, self.config)
 
         client_models = {k: v for k, v in models.__dict__.items() if isinstance(v, type)}
-        self.api_version = '0.6.278'
+        self.api_version = '0.6.279'
         self._serialize = Serializer(client_models)
         self._deserialize = Deserializer(client_models)
 
