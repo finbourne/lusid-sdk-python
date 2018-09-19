@@ -315,7 +315,7 @@ class TestFinbourneApi(TestCase):
 
         aggregation_request = models.AggregationRequest(
             recipe_scope=scope,
-            recipe_key=scope,
+            recipe_key='default',
             metrics=[
                 models.AggregateSpec("Holding/default/PV", "Proportion"),
                 models.AggregateSpec("Holding/default/PV", "Sum")
