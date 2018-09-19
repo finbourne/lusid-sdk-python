@@ -31,22 +31,22 @@ class VersionDto(Model):
     :type effective_from: datetime
     :param as_at_date:
     :type as_at_date: datetime
-    :param updated_by:
-    :type updated_by: str
     :param href:
     :type href: str
+    :param _links:
+    :type _links: list[~lusid.models.Link]
     """
 
     _attribute_map = {
         'effective_from': {'key': 'effectiveFrom', 'type': 'iso-8601'},
         'as_at_date': {'key': 'asAtDate', 'type': 'iso-8601'},
-        'updated_by': {'key': 'updatedBy', 'type': 'str'},
         'href': {'key': 'href', 'type': 'str'},
+        '_links': {'key': '_links', 'type': '[Link]'},
     }
 
-    def __init__(self, effective_from=None, as_at_date=None, updated_by=None, href=None):
+    def __init__(self, effective_from=None, as_at_date=None, href=None, _links=None):
         super(VersionDto, self).__init__()
         self.effective_from = effective_from
         self.as_at_date = as_at_date
-        self.updated_by = updated_by
         self.href = href
+        self._links = _links
