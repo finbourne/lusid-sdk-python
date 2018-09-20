@@ -94,6 +94,12 @@ from .versioned_resource_list_of_trade_dto import VersionedResourceListOfTradeDt
 from .upsert_portfolio_trade_request import UpsertPortfolioTradeRequest
 from .upsert_portfolio_trades_dto import UpsertPortfolioTradesDto
 from .add_trade_property_dto import AddTradePropertyDto
+from .transaction_query_parameters import TransactionQueryParameters
+from .trade_price import TradePrice
+from .currency_and_amount import CurrencyAndAmount
+from .realised_gain_loss_dto import RealisedGainLossDto
+from .output_transaction_dto import OutputTransactionDto
+from .versioned_resource_list_of_output_transaction_dto import VersionedResourceListOfOutputTransactionDto
 from .create_derived_portfolio_request import CreateDerivedPortfolioRequest
 from .portfolio_search_result import PortfolioSearchResult
 from .resource_list_of_portfolio_search_result import ResourceListOfPortfolioSearchResult
@@ -203,6 +209,12 @@ __all__ = [
     'UpsertPortfolioTradeRequest',
     'UpsertPortfolioTradesDto',
     'AddTradePropertyDto',
+    'TransactionQueryParameters',
+    'TradePrice',
+    'CurrencyAndAmount',
+    'RealisedGainLossDto',
+    'OutputTransactionDto',
+    'VersionedResourceListOfOutputTransactionDto',
     'CreateDerivedPortfolioRequest',
     'PortfolioSearchResult',
     'ResourceListOfPortfolioSearchResult',

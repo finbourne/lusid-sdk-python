@@ -301,7 +301,7 @@ class LUSIDAPI(object):
         self._client = ServiceClient(self.config.credentials, self.config)
 
         client_models = {k: v for k, v in models.__dict__.items() if isinstance(v, type)}
-        self.api_version = '0.6.280'
+        self.api_version = '0.6.282'
         self._serialize = Serializer(client_models)
         self._deserialize = Deserializer(client_models)
 
@@ -4562,6 +4562,96 @@ class LUSIDAPI(object):
         return deserialized
     delete_property_from_trade.metadata = {'url': '/v1/api/portfolios/{scope}/{code}/trades/{tradeId}/properties'}
 
+    def build_transactions(
+            self, scope, code, as_at=None, sort_by=None, start=None, limit=None, security_property_keys=None, filter=None, parameters=None, custom_headers=None, raw=False, **operation_config):
+        """Get transactions.
+
+        :param scope: The scope of the portfolio
+        :type scope: str
+        :param code: Code for the portfolio
+        :type code: str
+        :param as_at:
+        :type as_at: datetime
+        :param sort_by: The columns to sort the returned data by
+        :type sort_by: list[str]
+        :param start: How many items to skip from the returned set
+        :type start: int
+        :param limit: How many items to return from the set
+        :type limit: int
+        :param security_property_keys: Keys for the security properties to be
+         decorated onto the trades
+        :type security_property_keys: list[str]
+        :param filter: Trade filter
+        :type filter: str
+        :param parameters: Core query parameters
+        :type parameters: ~lusid.models.TransactionQueryParameters
+        :param dict custom_headers: headers that will be added to the request
+        :param bool raw: returns the direct response alongside the
+         deserialized response
+        :param operation_config: :ref:`Operation configuration
+         overrides<msrest:optionsforoperations>`.
+        :return: VersionedResourceListOfOutputTransactionDto or
+         ClientRawResponse if raw=true
+        :rtype: ~lusid.models.VersionedResourceListOfOutputTransactionDto or
+         ~msrest.pipeline.ClientRawResponse
+        :raises:
+         :class:`ErrorResponseException<lusid.models.ErrorResponseException>`
+        """
+        # Construct URL
+        url = self.build_transactions.metadata['url']
+        path_format_arguments = {
+            'scope': self._serialize.url("scope", scope, 'str'),
+            'code': self._serialize.url("code", code, 'str')
+        }
+        url = self._client.format_url(url, **path_format_arguments)
+
+        # Construct parameters
+        query_parameters = {}
+        if as_at is not None:
+            query_parameters['asAt'] = self._serialize.query("as_at", as_at, 'iso-8601')
+        if sort_by is not None:
+            query_parameters['sortBy'] = self._serialize.query("sort_by", sort_by, '[str]', div=',')
+        if start is not None:
+            query_parameters['start'] = self._serialize.query("start", start, 'int')
+        if limit is not None:
+            query_parameters['limit'] = self._serialize.query("limit", limit, 'int')
+        if security_property_keys is not None:
+            query_parameters['securityPropertyKeys'] = self._serialize.query("security_property_keys", security_property_keys, '[str]', div=',')
+        if filter is not None:
+            query_parameters['filter'] = self._serialize.query("filter", filter, 'str')
+
+        # Construct headers
+        header_parameters = {}
+        header_parameters['Content-Type'] = 'application/json-patch+json; charset=utf-8'
+        if custom_headers:
+            header_parameters.update(custom_headers)
+
+        # Construct body
+        if parameters is not None:
+            body_content = self._serialize.body(parameters, 'TransactionQueryParameters')
+        else:
+            body_content = None
+
+        # Construct and send request
+        request = self._client.post(url, query_parameters)
+        response = self._client.send(
+            request, header_parameters, body_content, stream=False, **operation_config)
+
+        if response.status_code not in [200]:
+            raise models.ErrorResponseException(self._deserialize, response)
+
+        deserialized = None
+
+        if response.status_code == 200:
+            deserialized = self._deserialize('VersionedResourceListOfOutputTransactionDto', response)
+
+        if raw:
+            client_raw_response = ClientRawResponse(deserialized, response)
+            return client_raw_response
+
+        return deserialized
+    build_transactions.metadata = {'url': '/v1/api/portfolios/{scope}/{code}/transactions/$build'}
+
     def create_derived_portfolio(
             self, scope, portfolio=None, custom_headers=None, raw=False, **operation_config):
         """Create derived portfolio.
@@ -6310,7 +6400,7 @@ class LUSIDAPI(object):
          'Iso4217CurrencyUnit', 'BasicUnit',
          'CorporateActionTransitionComponent', 'TargetTaxlot',
          'AdjustHoldingRequest', 'HoldingsAdjustment',
-         'HoldingsAdjustmentHeader'
+         'HoldingsAdjustmentHeader', 'OutputTransaction', 'RealisedGainLoss'
         :type entity: str
         :param dict custom_headers: headers that will be added to the request
         :param bool raw: returns the direct response alongside the

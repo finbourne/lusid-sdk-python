@@ -34,7 +34,8 @@ class PropertyDefinitionDto(Model):
     :param value_type: Possible values include: 'String', 'Int', 'Decimal',
      'DateTime', 'Boolean', 'Map', 'List', 'PropertyArray', 'Percentage',
      'BenchmarkType', 'Code', 'Id', 'Uri', 'ArrayOfIds', 'ArrayOfTxnAliases',
-     'ArrayofTxnMovements', 'ArrayofUnits', 'StringArray', 'UnitCreation'
+     'ArrayofTxnMovements', 'ArrayofUnits', 'StringArray', 'CurrencyAndAmount',
+     'TradePrice'
     :type value_type: str or ~lusid.models.enum
     :param value_required:
     :type value_required: bool
