@@ -301,7 +301,7 @@ class LUSIDAPI(object):
         self._client = ServiceClient(self.config.credentials, self.config)
 
         client_models = {k: v for k, v in models.__dict__.items() if isinstance(v, type)}
-        self.api_version = '0.6.283'
+        self.api_version = '0.6.285'
         self._serialize = Serializer(client_models)
         self._deserialize = Deserializer(client_models)
 
@@ -3826,8 +3826,9 @@ class LUSIDAPI(object):
          deserialized response
         :param operation_config: :ref:`Operation configuration
          overrides<msrest:optionsforoperations>`.
-        :return: HoldingsAdjustmentHeaderDto or ClientRawResponse if raw=true
-        :rtype: ~lusid.models.HoldingsAdjustmentHeaderDto or
+        :return: ResourceListOfHoldingsAdjustmentHeaderDto or
+         ClientRawResponse if raw=true
+        :rtype: ~lusid.models.ResourceListOfHoldingsAdjustmentHeaderDto or
          ~msrest.pipeline.ClientRawResponse
         :raises:
          :class:`ErrorResponseException<lusid.models.ErrorResponseException>`
@@ -3865,7 +3866,7 @@ class LUSIDAPI(object):
         deserialized = None
 
         if response.status_code == 200:
-            deserialized = self._deserialize('HoldingsAdjustmentHeaderDto', response)
+            deserialized = self._deserialize('ResourceListOfHoldingsAdjustmentHeaderDto', response)
 
         if raw:
             client_raw_response = ClientRawResponse(deserialized, response)

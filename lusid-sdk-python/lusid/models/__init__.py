@@ -88,6 +88,7 @@ from .target_tax_lot_dto import TargetTaxLotDto
 from .adjust_holding_request import AdjustHoldingRequest
 from .adjust_holdings_dto import AdjustHoldingsDto
 from .holdings_adjustment_header_dto import HoldingsAdjustmentHeaderDto
+from .resource_list_of_holdings_adjustment_header_dto import ResourceListOfHoldingsAdjustmentHeaderDto
 from .holdings_adjustment_dto import HoldingsAdjustmentDto
 from .portfolio_properties_dto import PortfolioPropertiesDto
 from .versioned_resource_list_of_trade_dto import VersionedResourceListOfTradeDto
@@ -203,6 +204,7 @@ __all__ = [
     'AdjustHoldingRequest',
     'AdjustHoldingsDto',
     'HoldingsAdjustmentHeaderDto',
+    'ResourceListOfHoldingsAdjustmentHeaderDto',
     'HoldingsAdjustmentDto',
     'PortfolioPropertiesDto',
     'VersionedResourceListOfTradeDto',
