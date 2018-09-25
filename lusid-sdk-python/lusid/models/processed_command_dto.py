@@ -32,7 +32,7 @@ class ProcessedCommandDto(Model):
     :param path:
     :type path: str
     :param user_id: The user that issued the command.
-    :type user_id: str
+    :type user_id: ~lusid.models.UserIdDto
     :param processed_time: The as at time of the events published by the
      processing of
      this command.
@@ -42,7 +42,7 @@ class ProcessedCommandDto(Model):
     _attribute_map = {
         'description': {'key': 'description', 'type': 'str'},
         'path': {'key': 'path', 'type': 'str'},
-        'user_id': {'key': 'userId', 'type': 'str'},
+        'user_id': {'key': 'userId', 'type': 'UserIdDto'},
         'processed_time': {'key': 'processedTime', 'type': 'object'},
     }
 

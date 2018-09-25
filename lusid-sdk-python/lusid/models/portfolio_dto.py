@@ -27,39 +27,68 @@ from msrest.serialization import Model
 class PortfolioDto(Model):
     """PortfolioDto.
 
-    :param href: Link to retrieve the current entity
-    :type href: str
-    :param id: Identifier for the portfolio
-    :type id: ~lusid.models.ResourceId
-    :param name: Name of the portfolio
-    :type name: str
-    :param created: Portfolio creation time in UTC
-    :type created: datetime
-    :param parent_portfolio_id: If this is a derived portfolio, the identifier
+    Variables are only populated by the server, and will be ignored when
+    sending a request.
+
+    :ivar href: Link to retrieve the current entity
+    :vartype href: str
+    :ivar id: Identifier for the portfolio
+    :vartype id: ~lusid.models.ResourceId
+    :ivar type: The type of portfolio this is (e.g. Transaction Portfolio,
+     Reference  Portfolio). Possible values include: 'Transaction',
+     'Reference', 'DerivedTransaction'
+    :vartype type: str or ~lusid.models.enum
+    :ivar display_name: Display name of the portfolio
+    :vartype display_name: str
+    :ivar description: Description of the portfolio
+    :vartype description: str
+    :ivar created: Portfolio creation time in UTC
+    :vartype created: datetime
+    :ivar parent_portfolio_id: If this is a derived portfolio, the identifier
      of the portfolio from which it is derived
-    :type parent_portfolio_id: ~lusid.models.ResourceId
-    :param version: The version of the portfolio
-    :type version: ~lusid.models.VersionDto
-    :param _links:
-    :type _links: list[~lusid.models.Link]
+    :vartype parent_portfolio_id: ~lusid.models.ResourceId
+    :ivar version: The version of the portfolio
+    :vartype version: ~lusid.models.VersionDto
+    :ivar is_derived:
+    :vartype is_derived: bool
+    :param links:
+    :type links: list[~lusid.models.Link]
     """
+
+    _validation = {
+        'href': {'readonly': True},
+        'id': {'readonly': True},
+        'type': {'readonly': True},
+        'display_name': {'readonly': True},
+        'description': {'readonly': True},
+        'created': {'readonly': True},
+        'parent_portfolio_id': {'readonly': True},
+        'version': {'readonly': True},
+        'is_derived': {'readonly': True},
+    }
 
     _attribute_map = {
         'href': {'key': 'href', 'type': 'str'},
         'id': {'key': 'id', 'type': 'ResourceId'},
-        'name': {'key': 'name', 'type': 'str'},
+        'type': {'key': 'type', 'type': 'str'},
+        'display_name': {'key': 'displayName', 'type': 'str'},
+        'description': {'key': 'description', 'type': 'str'},
         'created': {'key': 'created', 'type': 'iso-8601'},
         'parent_portfolio_id': {'key': 'parentPortfolioId', 'type': 'ResourceId'},
         'version': {'key': 'version', 'type': 'VersionDto'},
-        '_links': {'key': '_links', 'type': '[Link]'},
+        'is_derived': {'key': 'isDerived', 'type': 'bool'},
+        'links': {'key': 'links', 'type': '[Link]'},
     }
 
-    def __init__(self, href=None, id=None, name=None, created=None, parent_portfolio_id=None, version=None, _links=None):
+    def __init__(self, links=None):
         super(PortfolioDto, self).__init__()
-        self.href = href
-        self.id = id
-        self.name = name
-        self.created = created
-        self.parent_portfolio_id = parent_portfolio_id
-        self.version = version
-        self._links = _links
+        self.href = None
+        self.id = None
+        self.type = None
+        self.display_name = None
+        self.description = None
+        self.created = None
+        self.parent_portfolio_id = None
+        self.version = None
+        self.is_derived = None
+        self.links = links

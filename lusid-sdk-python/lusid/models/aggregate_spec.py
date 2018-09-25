@@ -33,12 +33,16 @@ class AggregateSpec(Model):
     :type op: str or ~lusid.models.enum
     """
 
+    _validation = {
+        'key': {'required': True},
+    }
+
     _attribute_map = {
         'key': {'key': 'key', 'type': 'str'},
         'op': {'key': 'op', 'type': 'str'},
     }
 
-    def __init__(self, key=None, op=None):
+    def __init__(self, key, op=None):
         super(AggregateSpec, self).__init__()
         self.key = key
         self.op = op

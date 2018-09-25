@@ -30,16 +30,16 @@ class RealisedGainLossDto(Model):
     Variables are only populated by the server, and will be ignored when
     sending a request.
 
-    :ivar security_uid: Unique security identifier
-    :vartype security_uid: str
-    :ivar units: Quantity against which gain has ben made in units of the
-     security
+    :ivar instrument_uid: Unique instrument identifier
+    :vartype instrument_uid: str
+    :ivar units: Quantity against which gain has been made in units of the
+     instrument
     :vartype units: float
     :ivar purchase_trade_date: Date the position was originally purchased
     :vartype purchase_trade_date: datetime
     :ivar purchase_settlement_date: Date the position originally settled
     :vartype purchase_settlement_date: datetime
-    :ivar purchase_price: Price the security was purchased at
+    :ivar purchase_price: Price the instrument was purchased at
     :vartype purchase_price: float
     :ivar cost_trade_ccy: Purchase cost in the trade currency
     :vartype cost_trade_ccy: ~lusid.models.CurrencyAndAmount
@@ -57,7 +57,7 @@ class RealisedGainLossDto(Model):
     """
 
     _validation = {
-        'security_uid': {'readonly': True},
+        'instrument_uid': {'readonly': True},
         'units': {'readonly': True},
         'purchase_trade_date': {'readonly': True},
         'purchase_settlement_date': {'readonly': True},
@@ -71,7 +71,7 @@ class RealisedGainLossDto(Model):
     }
 
     _attribute_map = {
-        'security_uid': {'key': 'securityUid', 'type': 'str'},
+        'instrument_uid': {'key': 'instrumentUid', 'type': 'str'},
         'units': {'key': 'units', 'type': 'float'},
         'purchase_trade_date': {'key': 'purchaseTradeDate', 'type': 'iso-8601'},
         'purchase_settlement_date': {'key': 'purchaseSettlementDate', 'type': 'iso-8601'},
@@ -86,7 +86,7 @@ class RealisedGainLossDto(Model):
 
     def __init__(self):
         super(RealisedGainLossDto, self).__init__()
-        self.security_uid = None
+        self.instrument_uid = None
         self.units = None
         self.purchase_trade_date = None
         self.purchase_settlement_date = None

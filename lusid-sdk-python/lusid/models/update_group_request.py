@@ -27,22 +27,22 @@ from msrest.serialization import Model
 class UpdateGroupRequest(Model):
     """UpdateGroupRequest.
 
-    :param name:
-    :type name: str
+    :param display_name:
+    :type display_name: str
     :param description:
     :type description: str
     """
 
     _validation = {
-        'name': {'required': True},
+        'display_name': {'required': True},
     }
 
     _attribute_map = {
-        'name': {'key': 'name', 'type': 'str'},
+        'display_name': {'key': 'displayName', 'type': 'str'},
         'description': {'key': 'description', 'type': 'str'},
     }
 
-    def __init__(self, name, description=None):
+    def __init__(self, display_name, description=None):
         super(UpdateGroupRequest, self).__init__()
-        self.name = name
+        self.display_name = display_name
         self.description = description

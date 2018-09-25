@@ -27,8 +27,8 @@ from msrest.serialization import Model
 class CorporateActionTransitionComponentDto(Model):
     """CorporateActionTransitionComponentDto.
 
-    :param security_uid:
-    :type security_uid: str
+    :param instrument_uid:
+    :type instrument_uid: str
     :param units_factor:
     :type units_factor: float
     :param cost_factor:
@@ -36,13 +36,13 @@ class CorporateActionTransitionComponentDto(Model):
     """
 
     _attribute_map = {
-        'security_uid': {'key': 'securityUid', 'type': 'str'},
+        'instrument_uid': {'key': 'instrumentUid', 'type': 'str'},
         'units_factor': {'key': 'unitsFactor', 'type': 'float'},
         'cost_factor': {'key': 'costFactor', 'type': 'float'},
     }
 
-    def __init__(self, security_uid=None, units_factor=None, cost_factor=None):
+    def __init__(self, instrument_uid=None, units_factor=None, cost_factor=None):
         super(CorporateActionTransitionComponentDto, self).__init__()
-        self.security_uid = security_uid
+        self.instrument_uid = instrument_uid
         self.units_factor = units_factor
         self.cost_factor = cost_factor

@@ -29,16 +29,24 @@ class DeletedEntityResponse(Model):
 
     :param href:
     :type href: str
+    :param effective_from:
+    :type effective_from: datetime
     :param as_at:
     :type as_at: datetime
+    :param links:
+    :type links: list[~lusid.models.Link]
     """
 
     _attribute_map = {
         'href': {'key': 'href', 'type': 'str'},
+        'effective_from': {'key': 'effectiveFrom', 'type': 'iso-8601'},
         'as_at': {'key': 'asAt', 'type': 'iso-8601'},
+        'links': {'key': 'links', 'type': '[Link]'},
     }
 
-    def __init__(self, href=None, as_at=None):
+    def __init__(self, href=None, effective_from=None, as_at=None, links=None):
         super(DeletedEntityResponse, self).__init__()
         self.href = href
+        self.effective_from = effective_from
         self.as_at = as_at
+        self.links = links

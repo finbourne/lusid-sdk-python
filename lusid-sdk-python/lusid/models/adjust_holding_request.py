@@ -29,15 +29,16 @@ class AdjustHoldingRequest(Model):
     system should match. When processed by the movement
     engine, it will create 'true-up' adjustments on the fly.
 
-    :param security_uid: Unique security identifier
-    :type security_uid: str
+    :param instrument_uid: Unique instrument identifier
+    :type instrument_uid: str
     :param sub_holding_keys: Key fields to uniquely index the sub holdings of
-     a security
-    :type sub_holding_keys: list[~lusid.models.CreatePerpetualPropertyRequest]
+     a instrument
+    :type sub_holding_keys: dict[str,
+     ~lusid.models.CreatePerpetualPropertyRequest]
     :param properties: Arbitrary properties to store with the holding
-    :type properties: list[~lusid.models.CreatePerpetualPropertyRequest]
+    :type properties: dict[str, ~lusid.models.CreatePerpetualPropertyRequest]
     :param tax_lots: 1 or more quantity amounts
-    :type tax_lots: list[~lusid.models.TargetTaxLotDto]
+    :type tax_lots: list[~lusid.models.TargetTaxLotRequest]
     """
 
     _validation = {
@@ -45,15 +46,15 @@ class AdjustHoldingRequest(Model):
     }
 
     _attribute_map = {
-        'security_uid': {'key': 'securityUid', 'type': 'str'},
-        'sub_holding_keys': {'key': 'subHoldingKeys', 'type': '[CreatePerpetualPropertyRequest]'},
-        'properties': {'key': 'properties', 'type': '[CreatePerpetualPropertyRequest]'},
-        'tax_lots': {'key': 'taxLots', 'type': '[TargetTaxLotDto]'},
+        'instrument_uid': {'key': 'instrumentUid', 'type': 'str'},
+        'sub_holding_keys': {'key': 'subHoldingKeys', 'type': '{CreatePerpetualPropertyRequest}'},
+        'properties': {'key': 'properties', 'type': '{CreatePerpetualPropertyRequest}'},
+        'tax_lots': {'key': 'taxLots', 'type': '[TargetTaxLotRequest]'},
     }
 
-    def __init__(self, tax_lots, security_uid=None, sub_holding_keys=None, properties=None):
+    def __init__(self, tax_lots, instrument_uid=None, sub_holding_keys=None, properties=None):
         super(AdjustHoldingRequest, self).__init__()
-        self.security_uid = security_uid
+        self.instrument_uid = instrument_uid
         self.sub_holding_keys = sub_holding_keys
         self.properties = properties
         self.tax_lots = tax_lots

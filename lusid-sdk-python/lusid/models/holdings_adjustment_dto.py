@@ -39,6 +39,8 @@ class HoldingsAdjustmentDto(Model):
     :type unmatched_holding_method: str or ~lusid.models.enum
     :param adjustments:
     :type adjustments: list[~lusid.models.AdjustHoldingRequest]
+    :param links:
+    :type links: list[~lusid.models.Link]
     """
 
     _attribute_map = {
@@ -46,11 +48,13 @@ class HoldingsAdjustmentDto(Model):
         'version': {'key': 'version', 'type': 'VersionDto'},
         'unmatched_holding_method': {'key': 'unmatchedHoldingMethod', 'type': 'str'},
         'adjustments': {'key': 'adjustments', 'type': '[AdjustHoldingRequest]'},
+        'links': {'key': 'links', 'type': '[Link]'},
     }
 
-    def __init__(self, effective_at=None, version=None, unmatched_holding_method=None, adjustments=None):
+    def __init__(self, effective_at=None, version=None, unmatched_holding_method=None, adjustments=None, links=None):
         super(HoldingsAdjustmentDto, self).__init__()
         self.effective_at = effective_at
         self.version = version
         self.unmatched_holding_method = unmatched_holding_method
         self.adjustments = adjustments
+        self.links = links

@@ -27,38 +27,26 @@ from msrest.serialization import Model
 class CreatePropertyRequest(Model):
     """CreatePropertyRequest.
 
-    Variables are only populated by the server, and will be ignored when
-    sending a request.
-
-    :param scope:
-    :type scope: str
-    :param name:
-    :type name: str
     :param value:
     :type value: object
     :param effective_from: Date for which the property is effective from
     :type effective_from: datetime
-    :ivar unit:
-    :vartype unit: str
+    :param unit:
+    :type unit: str
     """
 
     _validation = {
         'value': {'required': True},
-        'unit': {'readonly': True},
     }
 
     _attribute_map = {
-        'scope': {'key': 'scope', 'type': 'str'},
-        'name': {'key': 'name', 'type': 'str'},
         'value': {'key': 'value', 'type': 'object'},
         'effective_from': {'key': 'effectiveFrom', 'type': 'iso-8601'},
         'unit': {'key': 'unit', 'type': 'str'},
     }
 
-    def __init__(self, value, scope=None, name=None, effective_from=None):
+    def __init__(self, value, effective_from=None, unit=None):
         super(CreatePropertyRequest, self).__init__()
-        self.scope = scope
-        self.name = name
         self.value = value
         self.effective_from = effective_from
-        self.unit = None
+        self.unit = unit

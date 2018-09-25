@@ -37,20 +37,20 @@ class HoldingsAdjustmentHeaderDto(Model):
     :param unmatched_holding_method: Possible values include:
      'PositionToZero', 'KeepTheSame'
     :type unmatched_holding_method: str or ~lusid.models.enum
-    :param _links:
-    :type _links: list[~lusid.models.Link]
+    :param links:
+    :type links: list[~lusid.models.Link]
     """
 
     _attribute_map = {
         'effective_at': {'key': 'effectiveAt', 'type': 'iso-8601'},
         'version': {'key': 'version', 'type': 'VersionDto'},
         'unmatched_holding_method': {'key': 'unmatchedHoldingMethod', 'type': 'str'},
-        '_links': {'key': '_links', 'type': '[Link]'},
+        'links': {'key': 'links', 'type': '[Link]'},
     }
 
-    def __init__(self, effective_at=None, version=None, unmatched_holding_method=None, _links=None):
+    def __init__(self, effective_at=None, version=None, unmatched_holding_method=None, links=None):
         super(HoldingsAdjustmentHeaderDto, self).__init__()
         self.effective_at = effective_at
         self.version = version
         self.unmatched_holding_method = unmatched_holding_method
-        self._links = _links
+        self.links = links

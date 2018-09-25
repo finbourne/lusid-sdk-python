@@ -27,8 +27,8 @@ from msrest.serialization import Model
 class HoldingDto(Model):
     """HoldingDto.
 
-    :param security_uid: Unique security identifier
-    :type security_uid: str
+    :param instrument_uid: Unique instrument identifier
+    :type instrument_uid: str
     :param properties:
     :type properties: list[~lusid.models.PropertyDto]
     :param holding_type: Type of holding, eg Position, Balance,
@@ -38,13 +38,13 @@ class HoldingDto(Model):
     :type units: float
     :param settled_units: Settled quantity of holding
     :type settled_units: float
-    :param cost: Book cost of holding in trade currency
+    :param cost: Book cost of holding in transaction currency
     :type cost: float
     :param cost_portfolio_ccy: Book cost of holding in portfolio currency
     :type cost_portfolio_ccy: float
     :param transaction: If this is commitment-type holding, the transaction
      behind it
-    :type transaction: ~lusid.models.TradeDto
+    :type transaction: ~lusid.models.TransactionDto
     """
 
     _validation = {
@@ -52,19 +52,19 @@ class HoldingDto(Model):
     }
 
     _attribute_map = {
-        'security_uid': {'key': 'securityUid', 'type': 'str'},
+        'instrument_uid': {'key': 'instrumentUid', 'type': 'str'},
         'properties': {'key': 'properties', 'type': '[PropertyDto]'},
         'holding_type': {'key': 'holdingType', 'type': 'str'},
         'units': {'key': 'units', 'type': 'float'},
         'settled_units': {'key': 'settledUnits', 'type': 'float'},
         'cost': {'key': 'cost', 'type': 'float'},
         'cost_portfolio_ccy': {'key': 'costPortfolioCcy', 'type': 'float'},
-        'transaction': {'key': 'transaction', 'type': 'TradeDto'},
+        'transaction': {'key': 'transaction', 'type': 'TransactionDto'},
     }
 
-    def __init__(self, holding_type, security_uid=None, properties=None, units=None, settled_units=None, cost=None, cost_portfolio_ccy=None, transaction=None):
+    def __init__(self, holding_type, instrument_uid=None, properties=None, units=None, settled_units=None, cost=None, cost_portfolio_ccy=None, transaction=None):
         super(HoldingDto, self).__init__()
-        self.security_uid = security_uid
+        self.instrument_uid = instrument_uid
         self.properties = properties
         self.holding_type = holding_type
         self.units = units

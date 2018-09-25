@@ -41,8 +41,8 @@ class ExpandedGroupDto(Model):
     :type sub_groups: list[~lusid.models.ExpandedGroupDto]
     :param version:
     :type version: ~lusid.models.VersionDto
-    :param _links:
-    :type _links: list[~lusid.models.Link]
+    :param links:
+    :type links: list[~lusid.models.Link]
     """
 
     _attribute_map = {
@@ -53,10 +53,10 @@ class ExpandedGroupDto(Model):
         'values': {'key': 'values', 'type': '[CompletePortfolioDto]'},
         'sub_groups': {'key': 'subGroups', 'type': '[ExpandedGroupDto]'},
         'version': {'key': 'version', 'type': 'VersionDto'},
-        '_links': {'key': '_links', 'type': '[Link]'},
+        'links': {'key': 'links', 'type': '[Link]'},
     }
 
-    def __init__(self, href=None, id=None, name=None, description=None, values=None, sub_groups=None, version=None, _links=None):
+    def __init__(self, href=None, id=None, name=None, description=None, values=None, sub_groups=None, version=None, links=None):
         super(ExpandedGroupDto, self).__init__()
         self.href = href
         self.id = id
@@ -65,4 +65,4 @@ class ExpandedGroupDto(Model):
         self.values = values
         self.sub_groups = sub_groups
         self.version = version
-        self._links = _links
+        self.links = links

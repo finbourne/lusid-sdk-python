@@ -30,19 +30,23 @@ class TryUpsertCorporateActionsDto(Model):
     :param href:
     :type href: str
     :param values:
-    :type values: list[~lusid.models.CorporateActionEventDto]
+    :type values: dict[str, ~lusid.models.CorporateActionEventDto]
     :param failed:
-    :type failed: list[~lusid.models.ErrorDetail]
+    :type failed: dict[str, ~lusid.models.ErrorDetail]
+    :param links:
+    :type links: list[~lusid.models.Link]
     """
 
     _attribute_map = {
         'href': {'key': 'href', 'type': 'str'},
-        'values': {'key': 'values', 'type': '[CorporateActionEventDto]'},
-        'failed': {'key': 'failed', 'type': '[ErrorDetail]'},
+        'values': {'key': 'values', 'type': '{CorporateActionEventDto}'},
+        'failed': {'key': 'failed', 'type': '{ErrorDetail}'},
+        'links': {'key': 'links', 'type': '[Link]'},
     }
 
-    def __init__(self, href=None, values=None, failed=None):
+    def __init__(self, href=None, values=None, failed=None, links=None):
         super(TryUpsertCorporateActionsDto, self).__init__()
         self.href = href
         self.values = values
         self.failed = failed
+        self.links = links

@@ -33,29 +33,29 @@ class CreateGroupRequest(Model):
     :type values: list[~lusid.models.ResourceId]
     :param sub_groups:
     :type sub_groups: list[~lusid.models.ResourceId]
-    :param name:
-    :type name: str
+    :param display_name:
+    :type display_name: str
     :param description:
     :type description: str
     """
 
     _validation = {
         'id': {'required': True},
-        'name': {'required': True},
+        'display_name': {'required': True},
     }
 
     _attribute_map = {
         'id': {'key': 'id', 'type': 'str'},
         'values': {'key': 'values', 'type': '[ResourceId]'},
         'sub_groups': {'key': 'subGroups', 'type': '[ResourceId]'},
-        'name': {'key': 'name', 'type': 'str'},
+        'display_name': {'key': 'displayName', 'type': 'str'},
         'description': {'key': 'description', 'type': 'str'},
     }
 
-    def __init__(self, id, name, values=None, sub_groups=None, description=None):
+    def __init__(self, id, display_name, values=None, sub_groups=None, description=None):
         super(CreateGroupRequest, self).__init__()
         self.id = id
         self.values = values
         self.sub_groups = sub_groups
-        self.name = name
+        self.display_name = display_name
         self.description = description

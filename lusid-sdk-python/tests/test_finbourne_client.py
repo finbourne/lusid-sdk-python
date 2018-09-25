@@ -22,7 +22,7 @@ except ImportError:
 
 class TestFinbourneApi(TestCase):
     client = None
-    securityIds = []
+    instrumentIds = []
 
     @classmethod
     def setUpClass(cls):
@@ -55,17 +55,19 @@ class TestFinbourneApi(TestCase):
         cls.client = lusid.LUSIDAPI(credentials, TestFinbourneApi.api_url)
 
         figis = ["BBG000C6K6G9", "BBG000C04D57", "BBG000FV67Q4", "BBG000BF0KW3", "BBG000BF4KL1"]
-        ids = cls.client.lookup_securities_from_codes_bulk("Figi", figis)
+        ids = cls.client.lookup_instruments_from_codes("Figi", figis)
 
-        cls.securityIds = [security.uid
-                           for resource in ids.values
-                           for security in resource.values]
+        for v in ids.values.values():
+            for s in v:
+                cls.instrumentIds.append(s.uid)
 
     def test_create_portfolio(self):
 
         scope = str(uuid.uuid4())
         guid = str(uuid.uuid4())
-        request = models.CreatePortfolioRequest("portfolio-{0}".format(guid), "id-{0}".format(guid), "GBP")
+        request = models.CreateTransactionPortfolioRequest(display_name="portfolio-{0}".format(guid),
+                                                           code="id-{0}".format(guid),
+                                                           base_currency="GBP")
 
         # create the portfolio
         result = self.client.create_portfolio(scope, request)
@@ -77,24 +79,27 @@ class TestFinbourneApi(TestCase):
         scope = str(uuid.uuid4())
         guid = str(uuid.uuid4())
         property_name = "fund-style-{0}".format(guid)
-        property_key = "Portfolio/{0}/{1}".format(scope, property_name)
+        data_type_id = models.ResourceId("default", "string")
 
         #   property definition
         property_definition = models.CreatePropertyDefinitionRequest(
             domain="Portfolio",
             scope=scope,
-            name=property_name,
+            code=property_name,
             value_required=False,
             display_name="Fund Style",
             life_time="Perpetual",
-            sort="sort",
-            data_format_id=models.ResourceId("default", "string"))
+            data_type_id=data_type_id
+        )
 
         #   create the property definition
         property_definition_result = self.client.create_property_definition(property_definition)
 
         #   create the portfolio
-        request = models.CreatePortfolioRequest("portfolio-{}".format(guid), "id-{0}".format(guid), "GBP")
+        request = models.CreateTransactionPortfolioRequest(display_name="portfolio-{0}".format(guid),
+                                                           code="id-{0}".format(guid),
+                                                           base_currency="GBP")
+
         portfolio = self.client.create_portfolio(scope, request)
 
         self.assertEqual(portfolio.id.code, request.code)
@@ -105,10 +110,11 @@ class TestFinbourneApi(TestCase):
 
         #  property value
         property_value = "Active"
-        portfolio_property = models.CreatePropertyRequest(property_value, scope, property_name)
+        portfolio_property = models.CreatePropertyRequest(property_value)
 
         #   add the property to the portfolio
-        properties_result = self.client.upsert_portfolio_properties(scope, portfolio_id, [portfolio_property],
+        properties_result = self.client.upsert_portfolio_properties(scope, portfolio_id,
+                                                                    {property_definition_result.key: portfolio_property},
                                                                     portfolio.created)
 
         self.assertEqual(properties_result.origin_portfolio_id.code, portfolio_id)
@@ -119,18 +125,17 @@ class TestFinbourneApi(TestCase):
         scope = str(uuid.uuid4())
         guid = str(uuid.uuid4())
         property_name = "traderId-{0}".format(guid)
-        property_key = "Trade/{0}/traderId-{1}".format(scope, guid)
 
         #   property definition
         property_definition = models.CreatePropertyDefinitionRequest(
             domain="Trade",
             scope=scope,
-            name=property_name,
+            code=property_name,
             value_required=False,
             display_name="Trader Id",
             life_time="Perpetual",
-            sort="sort",
-            data_format_id=models.ResourceId("default", "string"))
+            data_type_id=models.ResourceId("default", "string")
+        )
 
         #   create the property definition
         property_definition_result = self.client.create_property_definition(property_definition)
@@ -138,8 +143,13 @@ class TestFinbourneApi(TestCase):
         effective_date = datetime(2018, 1, 1, tzinfo=pytz.utc)
 
         #   create the portfolio
-        request = models.CreatePortfolioRequest("portfolio-{0}".format(guid), "id-{0}".format(guid), "GBP",
-                                                effective_date)
+        request = models.CreateTransactionPortfolioRequest(
+            "portfolio-{0}".format(guid),
+            "id-{0}".format(guid),
+            base_currency="GBP",
+            created=effective_date
+        )
+
         portfolio = self.client.create_portfolio(scope, request)
 
         self.assertEqual(portfolio.id.code, request.code)
@@ -151,28 +161,28 @@ class TestFinbourneApi(TestCase):
         property_value = "A Trader"
 
         #   create the trade
-        trade = models.UpsertPortfolioTradeRequest(
-            trade_id=str(uuid.uuid4()),
+        trade = models.TransactionRequest(
+            transaction_id=str(uuid.uuid4()),
             type="Buy",
-            security_uid=self.securityIds[0],
+            instrument_uid=self.instrumentIds[0],
             settlement_currency="GBP",
-            trade_date=effective_date,
+            transaction_date=effective_date,
             settlement_date=effective_date,
             units=100,
-            trade_price=12.3,
+            transaction_price=12.3,
             total_consideration=1230,
             source="Client",
-            properties=[models.CreatePerpetualPropertyRequest(property_value, scope, property_name)]
+            properties={property_definition_result.key: models.CreatePerpetualPropertyRequest(property_value)}
         )
 
         #   add the trade
-        upsert_result = self.client.upsert_trades(scope, portfolio_id, [trade])
+        self.client.upsert_transactions(scope, portfolio_id, [trade])
 
         #   get the trades
-        trades = self.client.get_trades(scope, portfolio_id)
+        trades = self.client.get_transactions(scope, portfolio_id)
 
         self.assertEqual(len(trades.values), 1)
-        self.assertEqual(trades.values[0].trade_id, trade.trade_id)
+        self.assertEqual(trades.values[0].transaction_id, trade.transaction_id)
         self.assertEqual(trades.values[0].properties[0].value, property_value)
 
     def test_apply_bitemporal_portfolio_changes(self):
@@ -181,8 +191,12 @@ class TestFinbourneApi(TestCase):
         guid = str(uuid.uuid4())
         effective_date = datetime(2018, 1, 1, tzinfo=pytz.utc)
 
-        request = models.CreatePortfolioRequest("portfolio-{0}".format(guid), "id-{0}".format(guid), "GBP",
-                                                effective_date)
+        request = models.CreateTransactionPortfolioRequest(
+            "portfolio-{0}".format(guid),
+            "id-{0}".format(guid),
+            base_currency="GBP",
+            created=effective_date
+        )
 
         # create the portfolio
         result = self.client.create_portfolio(scope, request)
@@ -191,78 +205,78 @@ class TestFinbourneApi(TestCase):
 
         portfolio_id = result.id.code
 
-        TradeSpec = namedtuple('TradeSpec', 'id price trade_date')
+        TransactionSpec = namedtuple('TradeSpec', 'id price trade_date')
         trade_specs = [
-            TradeSpec(self.securityIds[0], 101, datetime(2018, 1, 1, tzinfo=pytz.utc)),
-            TradeSpec(self.securityIds[1], 102, datetime(2018, 1, 2, tzinfo=pytz.utc)),
-            TradeSpec(self.securityIds[2], 103, datetime(2018, 1, 3, tzinfo=pytz.utc))
+            TransactionSpec(self.instrumentIds[0], 101, datetime(2018, 1, 1, tzinfo=pytz.utc)),
+            TransactionSpec(self.instrumentIds[1], 102, datetime(2018, 1, 2, tzinfo=pytz.utc)),
+            TransactionSpec(self.instrumentIds[2], 103, datetime(2018, 1, 3, tzinfo=pytz.utc))
         ]
         trade_specs.sort(key=lambda ts: ts.id)
 
-        new_trades = list(map(self.build_trade, trade_specs))
+        new_trades = list(map(self.build_transaction, trade_specs))
 
         # add initial batch of trades
-        initial_result = self.client.upsert_trades(scope, portfolio_id, new_trades)
+        initial_result = self.client.upsert_transactions(scope, portfolio_id, new_trades)
         as_at_batch1 = initial_result.version.as_at_date
         sleep(0.5)
 
         # add trade for 2018-1-8
-        trade = self.build_trade(TradeSpec(self.securityIds[3], 104, datetime(2018, 1, 8, tzinfo=pytz.utc)))
-        later_trade = self.client.upsert_trades(scope, portfolio_id, [trade])
+        trade = self.build_transaction(TransactionSpec(self.instrumentIds[3], 104, datetime(2018, 1, 8, tzinfo=pytz.utc)))
+        later_trade = self.client.upsert_transactions(scope, portfolio_id, [trade])
         as_at_batch2 = later_trade.version.as_at_date
         sleep(0.5)
 
         # add back dated trade
-        trade = self.build_trade(TradeSpec(self.securityIds[4], 105, datetime(2018, 1, 5, tzinfo=pytz.utc)))
-        backdated_trade = self.client.upsert_trades(scope, portfolio_id, [trade])
+        trade = self.build_transaction(TransactionSpec(self.instrumentIds[4], 105, datetime(2018, 1, 5, tzinfo=pytz.utc)))
+        backdated_trade = self.client.upsert_transactions(scope, portfolio_id, [trade])
         as_at_batch3 = backdated_trade.version.as_at_date
         sleep(0.5)
 
-        def print_trades(trades):
-            for trade in trades:
-                print("{0}\t{1}\t{2}\t{3}\t{4}".format(trade.security_uid,
-                                                       trade.trade_date,
-                                                       trade.units,
-                                                       trade.trade_price,
-                                                       trade.total_consideration))
+        def print_transactions(transactions):
+            for transaction in transactions:
+                print("{0}\t{1}\t{2}\t{3}\t{4}".format(transaction.instrument_uid,
+                                                       transaction.transaction_date,
+                                                       transaction.units,
+                                                       transaction.transaction_price,
+                                                       transaction.total_consideration))
 
         # get the list of original trades
-        trades_list = self.client.get_trades(scope, portfolio_id, as_at=as_at_batch1)
+        trades_list = self.client.get_transactions(scope, portfolio_id, as_at=as_at_batch1)
 
         self.assertEqual(len(trades_list.values), 3, "Initial trades, as at {0}".format(as_at_batch1))
         print("trades at {0}".format(as_at_batch1))
-        print_trades(trades_list.values)
+        print_transactions(trades_list.values)
 
         # get the list of trades including the later trade
-        trades_list = self.client.get_trades(scope, portfolio_id, as_at=as_at_batch2)
+        trades_list = self.client.get_transactions(scope, portfolio_id, as_at=as_at_batch2)
         self.assertEqual(len(trades_list.values), 4, "Including later trade, as at {0}".format(as_at_batch2))
         print("trades at {0}".format(as_at_batch2))
-        print_trades(trades_list.values)
+        print_transactions(trades_list.values)
 
         # get the list of trades including the back-dated trade
-        trades_list = self.client.get_trades(scope, portfolio_id, as_at=as_at_batch3)
+        trades_list = self.client.get_transactions(scope, portfolio_id, as_at=as_at_batch3)
         self.assertEqual(len(trades_list.values), 5, "Including back-dated trade, as at {0}".format(as_at_batch3))
         print("trades at {0}".format(as_at_batch3))
-        print_trades(trades_list.values)
+        print_transactions(trades_list.values)
 
         # get the list of trades now
-        all_trades = self.client.get_trades(scope, portfolio_id)
+        all_trades = self.client.get_transactions(scope, portfolio_id)
         print("trades at {0}".format(datetime.utcnow()))
-        print_trades(all_trades.values)
+        print_transactions(all_trades.values)
 
-    def test_lookup_securities(self):
+    def test_lookup_instruments(self):
 
         isins = ["IT0004966401", "FR0010192997"]
 
-        #   lookup securities
-        fbn_ids = self.client.lookup_securities_from_codes("Isin", isins)
+        #   lookup instruments
+        fbn_ids = self.client.lookup_instruments_from_codes("Isin", isins)
 
         self.assertGreater(len(fbn_ids.values), 0)
 
     def test_add_securities(self):
 
         secid = "added-sec-{}".format(str(uuid.uuid4()))
-        self.client.batch_add_client_securities([models.CreateClientSecurityRequest(secid, secid, [])])
+        self.client.batch_add_client_instruments([models.CreateClientInstrumentRequest(secid, secid, [])])
 
     def test_portfolio_aggregation(self):
 
@@ -270,8 +284,12 @@ class TestFinbourneApi(TestCase):
         guid = str(uuid.uuid4())
         effective_date = datetime(2018, 1, 1, tzinfo=pytz.utc)
 
-        request = models.CreatePortfolioRequest("portfolio-{0}".format(guid), "id-{0}".format(guid), "GBP",
-                                                effective_date)
+        request = models.CreateTransactionPortfolioRequest(
+            "portfolio-{0}".format(guid),
+            "id-{0}".format(guid),
+            base_currency="GBP",
+            created=effective_date
+        )
 
         #   create the portfolio
         result = self.client.create_portfolio(scope, request)
@@ -280,33 +298,35 @@ class TestFinbourneApi(TestCase):
 
         portfolio_id = result.id.code
 
-        TradeSpec = namedtuple('TradeSpec', 'id price trade_date')
-        trade_specs = [
-            TradeSpec(self.securityIds[0], 101, effective_date),
-            TradeSpec(self.securityIds[1], 102, effective_date),
-            TradeSpec(self.securityIds[2], 103, effective_date)
+        TransactionSpec = namedtuple('TransactionSpec', 'id price trade_date')
+        transaction_specs = [
+            TransactionSpec(self.instrumentIds[0], 101, effective_date),
+            TransactionSpec(self.instrumentIds[1], 102, effective_date),
+            TransactionSpec(self.instrumentIds[2], 103, effective_date)
         ]
-        trade_specs.sort(key=lambda ts: ts.id)
+        transaction_specs.sort(key=lambda ts: ts.id)
 
-        new_trades = list(map(self.build_trade, trade_specs))
+        new_trades = list(map(self.build_transaction, transaction_specs))
 
         #   add initial batch of trades
-        add_trades_result = self.client.upsert_trades(scope, portfolio_id, new_trades)
+        self.client.upsert_transactions(scope, portfolio_id, new_trades)
 
         try:
-            check_exists_result = self.client.get_analytic_store(scope,
-                                                            effective_date.year,
-                                                            effective_date.month,
-                                                            effective_date.day)
+            self.client.get_analytic_store(
+                scope,
+                effective_date.year,
+                effective_date.month,
+                effective_date.day
+            )
         except:
             #   create an analytic store
             analytic_store_request = models.CreateAnalyticStoreRequest(scope, effective_date)
-            analytic_store_result = self.client.create_analytic_store(analytic_store_request)
+            self.client.create_analytic_store(analytic_store_request)
 
         prices = [
-            models.SecurityAnalyticDataDto(self.securityIds[0], 100),
-            models.SecurityAnalyticDataDto(self.securityIds[1], 200),
-            models.SecurityAnalyticDataDto(self.securityIds[2], 300)
+            models.InstrumentAnalyticDataDto(self.instrumentIds[0], 100),
+            models.InstrumentAnalyticDataDto(self.instrumentIds[1], 200),
+            models.InstrumentAnalyticDataDto(self.instrumentIds[2], 300)
         ]
 
         #   add prices
@@ -314,8 +334,7 @@ class TestFinbourneApi(TestCase):
                                                 prices)
 
         aggregation_request = models.AggregationRequest(
-            recipe_scope=scope,
-            recipe_key='default',
+            recipe_id=models.ResourceId(scope, "default"),
             metrics=[
                 models.AggregateSpec("Holding/default/PV", "Proportion"),
                 models.AggregateSpec("Holding/default/PV", "Sum")
@@ -325,25 +344,23 @@ class TestFinbourneApi(TestCase):
         )
 
         #   do the aggregation
-        aggregation = self.client.get_nested_aggregation_by_portfolio(scope, portfolio_id, aggregation_request)
+        aggregation = self.client.get_aggregation_by_portfolio(scope, portfolio_id, aggregation_request)
 
-        for item in aggregation.data.children:
-            print("{0}".format(item.group_property_value))
-            for key, value in item.properties.items():
-                print("\t{0}\t{1}".format(key, value))
+        for item in aggregation.data:
+            print("\t{}\t{}\t{}".format(item["Security/default/CommonName"], item["Holding/default/PV%"], item["Holding/default/PV"]))
 
     # utility to build trade from spec
     @staticmethod
-    def build_trade(trade_spec):
-        return models.UpsertPortfolioTradeRequest(
-            trade_id=str(uuid.uuid4()),
+    def build_transaction(trade_spec):
+        return models.TransactionRequest(
+            transaction_id=str(uuid.uuid4()),
             type="StockIn",
-            security_uid=trade_spec.id,
+            instrument_uid=trade_spec.id,
             settlement_currency="GBP",
-            trade_date=trade_spec.trade_date,
+            transaction_date=trade_spec.trade_date,
             settlement_date=trade_spec.trade_date,
             units=100,
-            trade_price=trade_spec.price,
+            transaction_price=trade_spec.price,
             total_consideration=100 * trade_spec.price,
             source="Client")
 

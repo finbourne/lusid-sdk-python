@@ -31,18 +31,18 @@ class AdjustHoldingsDto(Model):
     :type href: str
     :param version:
     :type version: ~lusid.models.VersionDto
-    :param _links:
-    :type _links: list[~lusid.models.Link]
+    :param links:
+    :type links: list[~lusid.models.Link]
     """
 
     _attribute_map = {
         'href': {'key': 'href', 'type': 'str'},
         'version': {'key': 'version', 'type': 'VersionDto'},
-        '_links': {'key': '_links', 'type': '[Link]'},
+        'links': {'key': 'links', 'type': '[Link]'},
     }
 
-    def __init__(self, href=None, version=None, _links=None):
+    def __init__(self, href=None, version=None, links=None):
         super(AdjustHoldingsDto, self).__init__()
         self.href = href
         self.version = version
-        self._links = _links
+        self.links = links

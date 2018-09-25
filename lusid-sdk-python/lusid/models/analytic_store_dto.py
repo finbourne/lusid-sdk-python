@@ -31,14 +31,18 @@ class AnalyticStoreDto(Model):
     :type key: ~lusid.models.AnalyticStoreKeyDto
     :param href:
     :type href: str
+    :param links:
+    :type links: list[~lusid.models.Link]
     """
 
     _attribute_map = {
         'key': {'key': 'key', 'type': 'AnalyticStoreKeyDto'},
         'href': {'key': 'href', 'type': 'str'},
+        'links': {'key': 'links', 'type': '[Link]'},
     }
 
-    def __init__(self, key=None, href=None):
+    def __init__(self, key=None, href=None, links=None):
         super(AnalyticStoreDto, self).__init__()
         self.key = key
         self.href = href
+        self.links = links

@@ -27,8 +27,9 @@ from msrest.serialization import Model
 class Link(Model):
     """Link.
 
-    :param relation: Possible values include: 'Root', 'Properties', 'Trades',
-     'Details', 'Constituents', 'HoldingsAdjustment', 'Commands'
+    :param relation: Possible values include: 'Root', 'Properties',
+     'Transactions', 'Details', 'Constituents', 'Holdings', 'Commands',
+     'HoldingsAdjustments', 'Parent', 'PropertySchema', 'EntitySchema'
     :type relation: str or ~lusid.models.enum
     :param href:
     :type href: str

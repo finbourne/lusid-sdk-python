@@ -27,22 +27,26 @@ from msrest.serialization import Model
 class UpdatePortfolioRequest(Model):
     """UpdatePortfolioRequest.
 
-    :param name:
-    :type name: str
+    :param display_name:
+    :type display_name: str
+    :param description:
+    :type description: str
     :param created:
     :type created: datetime
     """
 
     _validation = {
-        'name': {'required': True},
+        'display_name': {'required': True},
     }
 
     _attribute_map = {
-        'name': {'key': 'name', 'type': 'str'},
+        'display_name': {'key': 'displayName', 'type': 'str'},
+        'description': {'key': 'description', 'type': 'str'},
         'created': {'key': 'created', 'type': 'iso-8601'},
     }
 
-    def __init__(self, name, created=None):
+    def __init__(self, display_name, description=None, created=None):
         super(UpdatePortfolioRequest, self).__init__()
-        self.name = name
+        self.display_name = display_name
+        self.description = description
         self.created = created

@@ -35,8 +35,8 @@ class PortfolioDetailsDto(Model):
     :type version: ~lusid.models.VersionDto
     :param base_currency:
     :type base_currency: str
-    :param _links:
-    :type _links: list[~lusid.models.Link]
+    :param links:
+    :type links: list[~lusid.models.Link]
     """
 
     _attribute_map = {
@@ -44,13 +44,13 @@ class PortfolioDetailsDto(Model):
         'origin_portfolio_id': {'key': 'originPortfolioId', 'type': 'ResourceId'},
         'version': {'key': 'version', 'type': 'VersionDto'},
         'base_currency': {'key': 'baseCurrency', 'type': 'str'},
-        '_links': {'key': '_links', 'type': '[Link]'},
+        'links': {'key': 'links', 'type': '[Link]'},
     }
 
-    def __init__(self, href=None, origin_portfolio_id=None, version=None, base_currency=None, _links=None):
+    def __init__(self, href=None, origin_portfolio_id=None, version=None, base_currency=None, links=None):
         super(PortfolioDetailsDto, self).__init__()
         self.href = href
         self.origin_portfolio_id = origin_portfolio_id
         self.version = version
         self.base_currency = base_currency
-        self._links = _links
+        self.links = links

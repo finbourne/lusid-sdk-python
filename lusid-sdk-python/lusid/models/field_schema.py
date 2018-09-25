@@ -35,9 +35,10 @@ class FieldSchema(Model):
     :type display_name: str
     :param type: Possible values include: 'String', 'Int', 'Decimal',
      'DateTime', 'Boolean', 'Map', 'List', 'PropertyArray', 'Percentage',
-     'BenchmarkType', 'Code', 'Id', 'Uri', 'ArrayOfIds', 'ArrayOfTxnAliases',
-     'ArrayofTxnMovements', 'ArrayofUnits', 'StringArray', 'CurrencyAndAmount',
-     'TradePrice'
+     'BenchmarkType', 'Code', 'Id', 'Uri', 'ArrayOfIds',
+     'ArrayOfTransactionAliases', 'ArrayofTransactionMovements',
+     'ArrayofUnits', 'StringArray', 'CurrencyAndAmount', 'TradePrice',
+     'UnitCreation', 'Currency', 'UserId'
     :type type: str or ~lusid.models.enum
     :param is_metric:
     :type is_metric: bool

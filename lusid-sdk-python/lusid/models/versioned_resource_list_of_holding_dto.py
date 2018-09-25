@@ -36,8 +36,8 @@ class VersionedResourceListOfHoldingDto(Model):
     :type href: str
     :param count: The total number of records returned in the set
     :type count: int
-    :param _links:
-    :type _links: list[~lusid.models.Link]
+    :param links:
+    :type links: list[~lusid.models.Link]
     """
 
     _attribute_map = {
@@ -45,13 +45,13 @@ class VersionedResourceListOfHoldingDto(Model):
         'values': {'key': 'values', 'type': '[HoldingDto]'},
         'href': {'key': 'href', 'type': 'str'},
         'count': {'key': 'count', 'type': 'int'},
-        '_links': {'key': '_links', 'type': '[Link]'},
+        'links': {'key': 'links', 'type': '[Link]'},
     }
 
-    def __init__(self, version=None, values=None, href=None, count=None, _links=None):
+    def __init__(self, version=None, values=None, href=None, count=None, links=None):
         super(VersionedResourceListOfHoldingDto, self).__init__()
         self.version = version
         self.values = values
         self.href = href
         self.count = count
-        self._links = _links
+        self.links = links

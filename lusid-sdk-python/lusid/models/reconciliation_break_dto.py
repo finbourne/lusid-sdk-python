@@ -27,8 +27,8 @@ from msrest.serialization import Model
 class ReconciliationBreakDto(Model):
     """A reconciliation break.
 
-    :param security_uid: Unique security identifier
-    :type security_uid: str
+    :param instrument_uid: Unique instrument identifier
+    :type instrument_uid: str
     :param properties:
     :type properties: list[~lusid.models.PropertyDto]
     :param units_difference: Difference in units
@@ -38,15 +38,15 @@ class ReconciliationBreakDto(Model):
     """
 
     _attribute_map = {
-        'security_uid': {'key': 'securityUid', 'type': 'str'},
+        'instrument_uid': {'key': 'instrumentUid', 'type': 'str'},
         'properties': {'key': 'properties', 'type': '[PropertyDto]'},
         'units_difference': {'key': 'unitsDifference', 'type': 'float'},
         'cost_difference': {'key': 'costDifference', 'type': 'float'},
     }
 
-    def __init__(self, security_uid=None, properties=None, units_difference=None, cost_difference=None):
+    def __init__(self, instrument_uid=None, properties=None, units_difference=None, cost_difference=None):
         super(ReconciliationBreakDto, self).__init__()
-        self.security_uid = security_uid
+        self.instrument_uid = instrument_uid
         self.properties = properties
         self.units_difference = units_difference
         self.cost_difference = cost_difference

@@ -27,8 +27,8 @@ from msrest.serialization import Model
 class UpsertCorporateActionRequest(Model):
     """UpsertCorporateActionRequest.
 
-    :param corporate_action_id:
-    :type corporate_action_id: str
+    :param corporate_action_code:
+    :type corporate_action_code: str
     :param announcement_date:
     :type announcement_date: datetime
     :param ex_date:
@@ -42,12 +42,12 @@ class UpsertCorporateActionRequest(Model):
     """
 
     _validation = {
-        'corporate_action_id': {'required': True},
+        'corporate_action_code': {'required': True},
         'transitions': {'required': True},
     }
 
     _attribute_map = {
-        'corporate_action_id': {'key': 'corporateActionId', 'type': 'str'},
+        'corporate_action_code': {'key': 'corporateActionCode', 'type': 'str'},
         'announcement_date': {'key': 'announcementDate', 'type': 'iso-8601'},
         'ex_date': {'key': 'exDate', 'type': 'iso-8601'},
         'record_date': {'key': 'recordDate', 'type': 'iso-8601'},
@@ -55,9 +55,9 @@ class UpsertCorporateActionRequest(Model):
         'transitions': {'key': 'transitions', 'type': '[CorporateActionTransitionDto]'},
     }
 
-    def __init__(self, corporate_action_id, transitions, announcement_date=None, ex_date=None, record_date=None, payment_date=None):
+    def __init__(self, corporate_action_code, transitions, announcement_date=None, ex_date=None, record_date=None, payment_date=None):
         super(UpsertCorporateActionRequest, self).__init__()
-        self.corporate_action_id = corporate_action_id
+        self.corporate_action_code = corporate_action_code
         self.announcement_date = announcement_date
         self.ex_date = ex_date
         self.record_date = record_date

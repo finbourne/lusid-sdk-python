@@ -29,12 +29,20 @@ class UpsertReferencePortfolioConstituentsDto(Model):
 
     :param href:
     :type href: str
+    :param version:
+    :type version: ~lusid.models.VersionDto
+    :param links:
+    :type links: list[~lusid.models.Link]
     """
 
     _attribute_map = {
         'href': {'key': 'href', 'type': 'str'},
+        'version': {'key': 'version', 'type': 'VersionDto'},
+        'links': {'key': 'links', 'type': '[Link]'},
     }
 
-    def __init__(self, href=None):
+    def __init__(self, href=None, version=None, links=None):
         super(UpsertReferencePortfolioConstituentsDto, self).__init__()
         self.href = href
+        self.version = version
+        self.links = links

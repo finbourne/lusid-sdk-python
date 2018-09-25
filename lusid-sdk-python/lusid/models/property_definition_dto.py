@@ -33,18 +33,17 @@ class PropertyDefinitionDto(Model):
     :type key: str
     :param value_type: Possible values include: 'String', 'Int', 'Decimal',
      'DateTime', 'Boolean', 'Map', 'List', 'PropertyArray', 'Percentage',
-     'BenchmarkType', 'Code', 'Id', 'Uri', 'ArrayOfIds', 'ArrayOfTxnAliases',
-     'ArrayofTxnMovements', 'ArrayofUnits', 'StringArray', 'CurrencyAndAmount',
-     'TradePrice'
+     'BenchmarkType', 'Code', 'Id', 'Uri', 'ArrayOfIds',
+     'ArrayOfTransactionAliases', 'ArrayofTransactionMovements',
+     'ArrayofUnits', 'StringArray', 'CurrencyAndAmount', 'TradePrice',
+     'UnitCreation', 'Currency', 'UserId'
     :type value_type: str or ~lusid.models.enum
     :param value_required:
     :type value_required: bool
     :param display_name:
     :type display_name: str
-    :param data_format_id:
-    :type data_format_id: ~lusid.models.ResourceId
-    :param sort:
-    :type sort: str
+    :param data_type_id:
+    :type data_type_id: ~lusid.models.ResourceId
     :param life_time: Possible values include: 'Perpetual', 'TimeVariant'
     :type life_time: str or ~lusid.models.enum
     :param type: Possible values include: 'Label', 'Metric'
@@ -52,8 +51,8 @@ class PropertyDefinitionDto(Model):
     :param unit_schema: Possible values include: 'NoUnits', 'Basic',
      'Iso4217Currency'
     :type unit_schema: str or ~lusid.models.enum
-    :param _links:
-    :type _links: list[~lusid.models.Link]
+    :param links:
+    :type links: list[~lusid.models.Link]
     """
 
     _attribute_map = {
@@ -62,24 +61,22 @@ class PropertyDefinitionDto(Model):
         'value_type': {'key': 'valueType', 'type': 'str'},
         'value_required': {'key': 'valueRequired', 'type': 'bool'},
         'display_name': {'key': 'displayName', 'type': 'str'},
-        'data_format_id': {'key': 'dataFormatId', 'type': 'ResourceId'},
-        'sort': {'key': 'sort', 'type': 'str'},
+        'data_type_id': {'key': 'dataTypeId', 'type': 'ResourceId'},
         'life_time': {'key': 'lifeTime', 'type': 'str'},
         'type': {'key': 'type', 'type': 'str'},
         'unit_schema': {'key': 'unitSchema', 'type': 'str'},
-        '_links': {'key': '_links', 'type': '[Link]'},
+        'links': {'key': 'links', 'type': '[Link]'},
     }
 
-    def __init__(self, href=None, key=None, value_type=None, value_required=None, display_name=None, data_format_id=None, sort=None, life_time=None, type=None, unit_schema=None, _links=None):
+    def __init__(self, href=None, key=None, value_type=None, value_required=None, display_name=None, data_type_id=None, life_time=None, type=None, unit_schema=None, links=None):
         super(PropertyDefinitionDto, self).__init__()
         self.href = href
         self.key = key
         self.value_type = value_type
         self.value_required = value_required
         self.display_name = display_name
-        self.data_format_id = data_format_id
-        self.sort = sort
+        self.data_type_id = data_type_id
         self.life_time = life_time
         self.type = type
         self.unit_schema = unit_schema
-        self._links = _links
+        self.links = links

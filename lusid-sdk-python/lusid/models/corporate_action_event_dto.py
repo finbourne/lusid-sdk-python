@@ -29,8 +29,8 @@ class CorporateActionEventDto(Model):
 
     :param source_id:
     :type source_id: ~lusid.models.ResourceId
-    :param corporate_action_id:
-    :type corporate_action_id: str
+    :param corporate_action_code:
+    :type corporate_action_code: str
     :param announcement_date:
     :type announcement_date: datetime
     :param ex_date:
@@ -45,12 +45,12 @@ class CorporateActionEventDto(Model):
 
     _validation = {
         'source_id': {'required': True},
-        'corporate_action_id': {'required': True},
+        'corporate_action_code': {'required': True},
     }
 
     _attribute_map = {
         'source_id': {'key': 'sourceId', 'type': 'ResourceId'},
-        'corporate_action_id': {'key': 'corporateActionId', 'type': 'str'},
+        'corporate_action_code': {'key': 'corporateActionCode', 'type': 'str'},
         'announcement_date': {'key': 'announcementDate', 'type': 'iso-8601'},
         'ex_date': {'key': 'exDate', 'type': 'iso-8601'},
         'record_date': {'key': 'recordDate', 'type': 'iso-8601'},
@@ -58,10 +58,10 @@ class CorporateActionEventDto(Model):
         'transitions': {'key': 'transitions', 'type': '[CorporateActionTransitionDto]'},
     }
 
-    def __init__(self, source_id, corporate_action_id, announcement_date=None, ex_date=None, record_date=None, payment_date=None, transitions=None):
+    def __init__(self, source_id, corporate_action_code, announcement_date=None, ex_date=None, record_date=None, payment_date=None, transitions=None):
         super(CorporateActionEventDto, self).__init__()
         self.source_id = source_id
-        self.corporate_action_id = corporate_action_id
+        self.corporate_action_code = corporate_action_code
         self.announcement_date = announcement_date
         self.ex_date = ex_date
         self.record_date = record_date

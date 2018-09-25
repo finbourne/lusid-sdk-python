@@ -27,10 +27,8 @@ from msrest.serialization import Model
 class AggregationRequest(Model):
     """Specification object for the parameters of an aggregation.
 
-    :param recipe_scope:
-    :type recipe_scope: str
-    :param recipe_key:
-    :type recipe_key: str
+    :param recipe_id:
+    :type recipe_id: ~lusid.models.ResourceId
     :param load_reference_portfolio:
     :type load_reference_portfolio: bool
     :param as_at: The asAt date to use
@@ -49,9 +47,13 @@ class AggregationRequest(Model):
     :type sort: str
     """
 
+    _validation = {
+        'recipe_id': {'required': True},
+        'metrics': {'required': True},
+    }
+
     _attribute_map = {
-        'recipe_scope': {'key': 'recipeScope', 'type': 'str'},
-        'recipe_key': {'key': 'recipeKey', 'type': 'str'},
+        'recipe_id': {'key': 'recipeId', 'type': 'ResourceId'},
         'load_reference_portfolio': {'key': 'loadReferencePortfolio', 'type': 'bool'},
         'as_at': {'key': 'asAt', 'type': 'iso-8601'},
         'effective_at': {'key': 'effectiveAt', 'type': 'iso-8601'},
@@ -62,10 +64,9 @@ class AggregationRequest(Model):
         'sort': {'key': 'sort', 'type': 'str'},
     }
 
-    def __init__(self, recipe_scope=None, recipe_key=None, load_reference_portfolio=None, as_at=None, effective_at=None, metrics=None, group_by=None, filters=None, limit=None, sort=None):
+    def __init__(self, recipe_id, metrics, load_reference_portfolio=None, as_at=None, effective_at=None, group_by=None, filters=None, limit=None, sort=None):
         super(AggregationRequest, self).__init__()
-        self.recipe_scope = recipe_scope
-        self.recipe_key = recipe_key
+        self.recipe_id = recipe_id
         self.load_reference_portfolio = load_reference_portfolio
         self.as_at = as_at
         self.effective_at = effective_at

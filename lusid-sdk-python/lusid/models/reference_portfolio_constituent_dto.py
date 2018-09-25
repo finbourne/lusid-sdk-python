@@ -27,26 +27,26 @@ from msrest.serialization import Model
 class ReferencePortfolioConstituentDto(Model):
     """ReferencePortfolioConstituentDto.
 
-    :param id:
-    :type id: str
+    :param instrument_uid:
+    :type instrument_uid: str
     :param properties:
     :type properties: list[~lusid.models.PropertyDto]
-    :param quantity:
-    :type quantity: float
+    :param weight:
+    :type weight: float
     :param type: Possible values include: 'Shares', 'Weight', 'Nominal'
     :type type: str or ~lusid.models.enum
     """
 
     _attribute_map = {
-        'id': {'key': 'id', 'type': 'str'},
+        'instrument_uid': {'key': 'instrumentUid', 'type': 'str'},
         'properties': {'key': 'properties', 'type': '[PropertyDto]'},
-        'quantity': {'key': 'quantity', 'type': 'float'},
+        'weight': {'key': 'weight', 'type': 'float'},
         'type': {'key': 'type', 'type': 'str'},
     }
 
-    def __init__(self, id=None, properties=None, quantity=None, type=None):
+    def __init__(self, instrument_uid=None, properties=None, weight=None, type=None):
         super(ReferencePortfolioConstituentDto, self).__init__()
-        self.id = id
+        self.instrument_uid = instrument_uid
         self.properties = properties
-        self.quantity = quantity
+        self.weight = weight
         self.type = type

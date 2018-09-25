@@ -27,24 +27,20 @@ from msrest.serialization import Model
 class CreateUnitDefinition(Model):
     """CreateUnitDefinition.
 
-    Variables are only populated by the server, and will be ignored when
-    sending a request.
-
     :param code:
     :type code: str
     :param display_name:
     :type display_name: str
     :param description:
     :type description: str
-    :ivar details:
-    :vartype details: dict[str, str]
+    :param details:
+    :type details: dict[str, str]
     """
 
     _validation = {
         'code': {'required': True},
         'display_name': {'required': True},
         'description': {'required': True},
-        'details': {'readonly': True},
     }
 
     _attribute_map = {
@@ -54,9 +50,9 @@ class CreateUnitDefinition(Model):
         'details': {'key': 'details', 'type': '{str}'},
     }
 
-    def __init__(self, code, display_name, description):
+    def __init__(self, code, display_name, description, details=None):
         super(CreateUnitDefinition, self).__init__()
         self.code = code
         self.display_name = display_name
         self.description = description
-        self.details = None
+        self.details = details

@@ -34,18 +34,17 @@ class ErrorResponse(Model):
     :ivar status:
     :vartype status: int
     :ivar code: Possible values include: 'Unknown', 'PersonalisationNotFound',
-     'NonRecursivePersonalisation', 'VersionNotFound', 'SecurityNotFound',
+     'NonRecursivePersonalisation', 'VersionNotFound', 'InstrumentNotFound',
      'PropertyNotFound', 'PortfolioRecursionDepth', 'GroupNotFound',
      'PortfolioNotFound', 'PropertySchemaNotFound',
      'PortfolioAncestryNotFound', 'PortfolioWithIdAlreadyExists',
      'OrphanedPortfolio', 'MissingBaseClaims', 'PropertyNotDefined',
      'CannotDeleteSystemProperty', 'CannotModifyImmutablePropertyField',
      'PropertyAlreadyExists', 'InvalidPropertyLifeTime',
-     'CannotModifyDefaultPropertyFormat', 'GroupAlreadyExists',
-     'NoSuchPropertyDataFormat', 'ValidationError',
-     'LoopDetectedInGroupHierarchy', 'SubGroupAlreadyExists',
-     'PriceSourceNotFound', 'AnalyticStoreNotFound',
-     'AnalyticStoreAlreadyExists', 'ClientSecurityAlreadyExists',
+     'CannotModifyDefaultDataType', 'GroupAlreadyExists', 'NoSuchDataType',
+     'ValidationError', 'LoopDetectedInGroupHierarchy',
+     'SubGroupAlreadyExists', 'PriceSourceNotFound', 'AnalyticStoreNotFound',
+     'AnalyticStoreAlreadyExists', 'ClientInstrumentAlreadyExists',
      'DuplicateInParameterSet', 'ResultsNotFound', 'OrderFieldNotInResultSet',
      'OperationFailed', 'ElasticSearchError', 'InvalidParameterValue',
      'CommandProcessingFailure', 'EntityStateConstructionFailure',
@@ -53,14 +52,13 @@ class ErrorResponse(Model):
      'InvalidRequestFailure', 'EventPublishUnknown', 'EventQueryFailure',
      'BlobDidNotExistFailure', 'SubSystemRequestFailure',
      'SubSystemConfigurationFailure', 'FailedToDelete',
-     'UpsertClientSecurityFailure', 'IllegalAsAtInterval',
+     'UpsertClientInstrumentFailure', 'IllegalAsAtInterval',
      'IllegalBitemporalQuery', 'InvalidAlternateId',
      'CannotAddSourcePortfolioPropertyExplicitly',
      'EntityAlreadyExistsInGroup', 'EntityWithIdAlreadyExists',
      'PortfolioDetailsDoNotExist', 'PortfolioWithNameAlreadyExists',
-     'InvalidTrades', 'ReferencePortfolioNotFound', 'DuplicateIdFailure',
-     'SecurityByCodeNotFound', 'CommandRetrievalFailure',
-     'DataFilterApplicationFailure', 'SearchFailed',
+     'InvalidTransactions', 'ReferencePortfolioNotFound', 'DuplicateIdFailure',
+     'CommandRetrievalFailure', 'DataFilterApplicationFailure', 'SearchFailed',
      'MovementsEngineConfigurationKeyFailure', 'FxRateSourceNotFound',
      'AccrualSourceNotFound', 'EntitlementsFailure', 'InvalidIdentityToken',
      'InvalidRequestHeaders', 'PriceNotFound', 'InvalidSubHoldingKeysProvided',
@@ -70,7 +68,10 @@ class ErrorResponse(Model):
      'UnitsNotSupportedOnDataType', 'CannotSpecifyUnitsOnDataType',
      'UnitSchemaInconsistentWithDataType', 'UnitDefinitionNotSpecified',
      'DuplicateUnitDefinitionsSpecified', 'InvalidUnitsDefinition',
-     'InvalidSecurityIdentifierUnit', 'HoldingsAdjustmentDoesNotExist'
+     'InvalidInstrumentIdentifierUnit', 'HoldingsAdjustmentDoesNotExist',
+     'CouldNotBuildExcelUrl', 'CouldNotGetExcelVersion',
+     'InstrumentByCodeNotFound', 'EntitySchemaDoesNotExist',
+     'FeatureNotSupportedOnPortfolioType'
     :vartype code: str or ~lusid.models.enum
     :ivar message:
     :vartype message: str

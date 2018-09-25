@@ -35,8 +35,8 @@ class PortfolioPropertiesDto(Model):
     :type properties: list[~lusid.models.PropertyDto]
     :param version: The version of the portfolio
     :type version: ~lusid.models.VersionDto
-    :param _links:
-    :type _links: list[~lusid.models.Link]
+    :param links:
+    :type links: list[~lusid.models.Link]
     """
 
     _attribute_map = {
@@ -44,13 +44,13 @@ class PortfolioPropertiesDto(Model):
         'origin_portfolio_id': {'key': 'originPortfolioId', 'type': 'ResourceId'},
         'properties': {'key': 'properties', 'type': '[PropertyDto]'},
         'version': {'key': 'version', 'type': 'VersionDto'},
-        '_links': {'key': '_links', 'type': '[Link]'},
+        'links': {'key': 'links', 'type': '[Link]'},
     }
 
-    def __init__(self, href=None, origin_portfolio_id=None, properties=None, version=None, _links=None):
+    def __init__(self, href=None, origin_portfolio_id=None, properties=None, version=None, links=None):
         super(PortfolioPropertiesDto, self).__init__()
         self.href = href
         self.origin_portfolio_id = origin_portfolio_id
         self.properties = properties
         self.version = version
-        self._links = _links
+        self.links = links

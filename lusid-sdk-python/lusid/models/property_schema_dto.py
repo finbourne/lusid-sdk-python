@@ -31,14 +31,18 @@ class PropertySchemaDto(Model):
     :type href: str
     :param values:
     :type values: list[~lusid.models.KeyValuePairOfPropertyKeyToFieldSchema]
+    :param links:
+    :type links: list[~lusid.models.Link]
     """
 
     _attribute_map = {
         'href': {'key': 'href', 'type': 'str'},
         'values': {'key': 'values', 'type': '[KeyValuePairOfPropertyKeyToFieldSchema]'},
+        'links': {'key': 'links', 'type': '[Link]'},
     }
 
-    def __init__(self, href=None, values=None):
+    def __init__(self, href=None, values=None, links=None):
         super(PropertySchemaDto, self).__init__()
         self.href = href
         self.values = values
+        self.links = links

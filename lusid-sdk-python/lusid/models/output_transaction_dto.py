@@ -37,16 +37,16 @@ class OutputTransactionDto(Model):
     :vartype type: str
     :ivar description: LUSID transaction description
     :vartype description: str
-    :ivar security_uid: Unique security identifier
-    :vartype security_uid: str
+    :ivar instrument_uid: Unique instrument identifier
+    :vartype instrument_uid: str
     :ivar trade_date: Trade date
     :vartype trade_date: datetime
     :ivar settlement_date: Settlement date
     :vartype settlement_date: datetime
-    :ivar units: Quantity of trade in units of the security
+    :ivar units: Quantity of trade in units of the instrument
     :vartype units: float
     :ivar trade_price: Execution price for the trade
-    :vartype trade_price: ~lusid.models.TradePrice
+    :vartype trade_price: ~lusid.models.TransactionPrice
     :ivar total_consideration: Total value of the trade
     :vartype total_consideration: ~lusid.models.CurrencyAndAmount
     :ivar exchange_rate: Rate between trade and settlement currency
@@ -59,7 +59,7 @@ class OutputTransactionDto(Model):
     :vartype properties: list[~lusid.models.PerpetualPropertyDto]
     :ivar counterparty_id: Counterparty identifier
     :vartype counterparty_id: str
-    :ivar source: Where this trade came from, either Client or System.
+    :ivar source: Where this transaction came from, either Client or System.
      Possible values include: 'System', 'Client'
     :vartype source: str or ~lusid.models.enum
     :ivar netting_set:
@@ -79,7 +79,7 @@ class OutputTransactionDto(Model):
         'trade_id': {'required': True, 'readonly': True},
         'type': {'required': True, 'readonly': True},
         'description': {'required': True, 'readonly': True},
-        'security_uid': {'readonly': True},
+        'instrument_uid': {'readonly': True},
         'trade_date': {'readonly': True},
         'settlement_date': {'readonly': True},
         'units': {'readonly': True},
@@ -102,11 +102,11 @@ class OutputTransactionDto(Model):
         'trade_id': {'key': 'tradeId', 'type': 'str'},
         'type': {'key': 'type', 'type': 'str'},
         'description': {'key': 'description', 'type': 'str'},
-        'security_uid': {'key': 'securityUid', 'type': 'str'},
+        'instrument_uid': {'key': 'instrumentUid', 'type': 'str'},
         'trade_date': {'key': 'tradeDate', 'type': 'iso-8601'},
         'settlement_date': {'key': 'settlementDate', 'type': 'iso-8601'},
         'units': {'key': 'units', 'type': 'float'},
-        'trade_price': {'key': 'tradePrice', 'type': 'TradePrice'},
+        'trade_price': {'key': 'tradePrice', 'type': 'TransactionPrice'},
         'total_consideration': {'key': 'totalConsideration', 'type': 'CurrencyAndAmount'},
         'exchange_rate': {'key': 'exchangeRate', 'type': 'float'},
         'trade_to_portfolio_rate': {'key': 'tradeToPortfolioRate', 'type': 'float'},
@@ -126,7 +126,7 @@ class OutputTransactionDto(Model):
         self.trade_id = None
         self.type = None
         self.description = None
-        self.security_uid = None
+        self.instrument_uid = None
         self.trade_date = None
         self.settlement_date = None
         self.units = None

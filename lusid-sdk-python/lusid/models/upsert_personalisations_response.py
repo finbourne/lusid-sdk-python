@@ -29,12 +29,16 @@ class UpsertPersonalisationsResponse(Model):
 
     :param href:
     :type href: str
+    :param links:
+    :type links: list[~lusid.models.Link]
     """
 
     _attribute_map = {
         'href': {'key': 'href', 'type': 'str'},
+        'links': {'key': 'links', 'type': '[Link]'},
     }
 
-    def __init__(self, href=None):
+    def __init__(self, href=None, links=None):
         super(UpsertPersonalisationsResponse, self).__init__()
         self.href = href
+        self.links = links
