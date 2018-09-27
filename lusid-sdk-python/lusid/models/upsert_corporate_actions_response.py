@@ -21,5 +21,32 @@
 # SOFTWARE.
 # --------------------------------------------------------------------------
 
-VERSION = "0.5.1516"
+from msrest.serialization import Model
 
+
+class UpsertCorporateActionsResponse(Model):
+    """UpsertCorporateActionsResponse.
+
+    :param href:
+    :type href: str
+    :param values:
+    :type values: dict[str, ~lusid.models.CorporateAction]
+    :param failed:
+    :type failed: dict[str, ~lusid.models.ErrorDetail]
+    :param links:
+    :type links: list[~lusid.models.Link]
+    """
+
+    _attribute_map = {
+        'href': {'key': 'href', 'type': 'str'},
+        'values': {'key': 'values', 'type': '{CorporateAction}'},
+        'failed': {'key': 'failed', 'type': '{ErrorDetail}'},
+        'links': {'key': 'links', 'type': '[Link]'},
+    }
+
+    def __init__(self, href=None, values=None, failed=None, links=None):
+        super(UpsertCorporateActionsResponse, self).__init__()
+        self.href = href
+        self.values = values
+        self.failed = failed
+        self.links = links

@@ -21,5 +21,24 @@
 # SOFTWARE.
 # --------------------------------------------------------------------------
 
-VERSION = "0.5.1516"
+from msrest.serialization import Model
 
+
+class UpsertInstrumentPropertiesResponse(Model):
+    """UpsertInstrumentPropertiesResponse.
+
+    :param href:
+    :type href: str
+    :param links:
+    :type links: list[~lusid.models.Link]
+    """
+
+    _attribute_map = {
+        'href': {'key': 'href', 'type': 'str'},
+        'links': {'key': 'links', 'type': '[Link]'},
+    }
+
+    def __init__(self, href=None, links=None):
+        super(UpsertInstrumentPropertiesResponse, self).__init__()
+        self.href = href
+        self.links = links

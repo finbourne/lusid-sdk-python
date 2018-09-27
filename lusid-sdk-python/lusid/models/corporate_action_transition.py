@@ -21,5 +21,26 @@
 # SOFTWARE.
 # --------------------------------------------------------------------------
 
-VERSION = "0.5.1516"
+from msrest.serialization import Model
 
+
+class CorporateActionTransition(Model):
+    """A 'transition' within a corporate action, representing a set of output
+    movements paired to a single input position.
+
+    :param input_transition:
+    :type input_transition: ~lusid.models.CorporateActionTransitionComponent
+    :param output_transitions:
+    :type output_transitions:
+     list[~lusid.models.CorporateActionTransitionComponent]
+    """
+
+    _attribute_map = {
+        'input_transition': {'key': 'inputTransition', 'type': 'CorporateActionTransitionComponent'},
+        'output_transitions': {'key': 'outputTransitions', 'type': '[CorporateActionTransitionComponent]'},
+    }
+
+    def __init__(self, input_transition=None, output_transitions=None):
+        super(CorporateActionTransition, self).__init__()
+        self.input_transition = input_transition
+        self.output_transitions = output_transitions

@@ -21,5 +21,32 @@
 # SOFTWARE.
 # --------------------------------------------------------------------------
 
-VERSION = "0.5.1516"
+from msrest.serialization import Model
 
+
+class Schema(Model):
+    """Schema.
+
+    :param entity:
+    :type entity: str
+    :param href:
+    :type href: str
+    :param values:
+    :type values: list[~lusid.models.KeyValuePairOfStringToFieldSchema]
+    :param links:
+    :type links: list[~lusid.models.Link]
+    """
+
+    _attribute_map = {
+        'entity': {'key': 'entity', 'type': 'str'},
+        'href': {'key': 'href', 'type': 'str'},
+        'values': {'key': 'values', 'type': '[KeyValuePairOfStringToFieldSchema]'},
+        'links': {'key': 'links', 'type': '[Link]'},
+    }
+
+    def __init__(self, entity=None, href=None, values=None, links=None):
+        super(Schema, self).__init__()
+        self.entity = entity
+        self.href = href
+        self.values = values
+        self.links = links

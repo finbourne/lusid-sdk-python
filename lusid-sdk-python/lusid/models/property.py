@@ -21,5 +21,37 @@
 # SOFTWARE.
 # --------------------------------------------------------------------------
 
-VERSION = "0.5.1516"
+from msrest.serialization import Model
 
+
+class Property(Model):
+    """Property.
+
+    :param key:
+    :type key: str
+    :param value:
+    :type value: object
+    :param unit:
+    :type unit: str
+    :param effective_from: Date for which the property is effective from
+    :type effective_from: datetime
+    """
+
+    _validation = {
+        'key': {'required': True},
+        'value': {'required': True},
+    }
+
+    _attribute_map = {
+        'key': {'key': 'key', 'type': 'str'},
+        'value': {'key': 'value', 'type': 'object'},
+        'unit': {'key': 'unit', 'type': 'str'},
+        'effective_from': {'key': 'effectiveFrom', 'type': 'iso-8601'},
+    }
+
+    def __init__(self, key, value, unit=None, effective_from=None):
+        super(Property, self).__init__()
+        self.key = key
+        self.value = value
+        self.unit = unit
+        self.effective_from = effective_from

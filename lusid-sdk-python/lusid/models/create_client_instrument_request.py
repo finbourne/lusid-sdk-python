@@ -39,7 +39,7 @@ class CreateClientInstrumentRequest(Model):
     :param instrument: There could be multiple underlying instrument
      definitions (same
      instrument but different format), but for now store one.
-    :type instrument: ~lusid.models.InstrumentDefinitionDto
+    :type instrument: ~lusid.models.InstrumentDefinition
     """
 
     _validation = {
@@ -53,7 +53,7 @@ class CreateClientInstrumentRequest(Model):
         'name': {'key': 'name', 'type': 'str'},
         'instrument_properties': {'key': 'instrumentProperties', 'type': '{CreatePropertyRequest}'},
         'look_through_portfolio_id': {'key': 'lookThroughPortfolioId', 'type': 'ResourceId'},
-        'instrument': {'key': 'instrument', 'type': 'InstrumentDefinitionDto'},
+        'instrument': {'key': 'instrument', 'type': 'InstrumentDefinition'},
     }
 
     def __init__(self, client_instrument_id, name, instrument_properties, look_through_portfolio_id=None, instrument=None):

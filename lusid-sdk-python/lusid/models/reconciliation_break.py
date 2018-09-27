@@ -21,5 +21,32 @@
 # SOFTWARE.
 # --------------------------------------------------------------------------
 
-VERSION = "0.5.1516"
+from msrest.serialization import Model
 
+
+class ReconciliationBreak(Model):
+    """A reconciliation break.
+
+    :param instrument_uid: Unique instrument identifier
+    :type instrument_uid: str
+    :param properties:
+    :type properties: list[~lusid.models.Property]
+    :param units_difference: Difference in units
+    :type units_difference: float
+    :param cost_difference: Difference in cost
+    :type cost_difference: float
+    """
+
+    _attribute_map = {
+        'instrument_uid': {'key': 'instrumentUid', 'type': 'str'},
+        'properties': {'key': 'properties', 'type': '[Property]'},
+        'units_difference': {'key': 'unitsDifference', 'type': 'float'},
+        'cost_difference': {'key': 'costDifference', 'type': 'float'},
+    }
+
+    def __init__(self, instrument_uid=None, properties=None, units_difference=None, cost_difference=None):
+        super(ReconciliationBreak, self).__init__()
+        self.instrument_uid = instrument_uid
+        self.properties = properties
+        self.units_difference = units_difference
+        self.cost_difference = cost_difference

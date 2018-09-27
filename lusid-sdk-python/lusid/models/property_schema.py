@@ -21,5 +21,28 @@
 # SOFTWARE.
 # --------------------------------------------------------------------------
 
-VERSION = "0.5.1516"
+from msrest.serialization import Model
 
+
+class PropertySchema(Model):
+    """PropertySchema.
+
+    :param href:
+    :type href: str
+    :param values:
+    :type values: list[~lusid.models.KeyValuePairOfPropertyKeyToFieldSchema]
+    :param links:
+    :type links: list[~lusid.models.Link]
+    """
+
+    _attribute_map = {
+        'href': {'key': 'href', 'type': 'str'},
+        'values': {'key': 'values', 'type': '[KeyValuePairOfPropertyKeyToFieldSchema]'},
+        'links': {'key': 'links', 'type': '[Link]'},
+    }
+
+    def __init__(self, href=None, values=None, links=None):
+        super(PropertySchema, self).__init__()
+        self.href = href
+        self.values = values
+        self.links = links

@@ -21,5 +21,32 @@
 # SOFTWARE.
 # --------------------------------------------------------------------------
 
-VERSION = "0.5.1516"
+from msrest.serialization import Model
 
+
+class Results(Model):
+    """Results.
+
+    :param version:
+    :type version: ~lusid.models.Version
+    :param href:
+    :type href: str
+    :param values:
+    :type values: object
+    :param links:
+    :type links: list[~lusid.models.Link]
+    """
+
+    _attribute_map = {
+        'version': {'key': 'version', 'type': 'Version'},
+        'href': {'key': 'href', 'type': 'str'},
+        'values': {'key': 'values', 'type': 'object'},
+        'links': {'key': 'links', 'type': '[Link]'},
+    }
+
+    def __init__(self, version=None, href=None, values=None, links=None):
+        super(Results, self).__init__()
+        self.version = version
+        self.href = href
+        self.values = values
+        self.links = links

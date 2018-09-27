@@ -24,34 +24,33 @@
 from msrest.serialization import Model
 
 
-class CreateReferencePortfolioRequest(Model):
-    """CreateReferencePortfolioRequest.
+class HoldingsAdjustmentHeader(Model):
+    """Summary information of a holdings adjustment for a single portfolio and
+    effective date.
 
-    :param display_name:
-    :type display_name: str
-    :param description:
-    :type description: str
-    :param code:
-    :type code: str
-    :param created:
-    :type created: datetime
+    :param effective_at: There can be at most one holdings adjustment for a
+     portfolio at a
+     specific effective time so this uniquely identifies the adjustment.
+    :type effective_at: datetime
+    :param version:
+    :type version: ~lusid.models.Version
+    :param unmatched_holding_method: Possible values include:
+     'PositionToZero', 'KeepTheSame'
+    :type unmatched_holding_method: str or ~lusid.models.enum
+    :param links:
+    :type links: list[~lusid.models.Link]
     """
 
-    _validation = {
-        'display_name': {'required': True},
-        'code': {'required': True},
-    }
-
     _attribute_map = {
-        'display_name': {'key': 'displayName', 'type': 'str'},
-        'description': {'key': 'description', 'type': 'str'},
-        'code': {'key': 'code', 'type': 'str'},
-        'created': {'key': 'created', 'type': 'iso-8601'},
+        'effective_at': {'key': 'effectiveAt', 'type': 'iso-8601'},
+        'version': {'key': 'version', 'type': 'Version'},
+        'unmatched_holding_method': {'key': 'unmatchedHoldingMethod', 'type': 'str'},
+        'links': {'key': 'links', 'type': '[Link]'},
     }
 
-    def __init__(self, display_name, code, description=None, created=None):
-        super(CreateReferencePortfolioRequest, self).__init__()
-        self.display_name = display_name
-        self.description = description
-        self.code = code
-        self.created = created
+    def __init__(self, effective_at=None, version=None, unmatched_holding_method=None, links=None):
+        super(HoldingsAdjustmentHeader, self).__init__()
+        self.effective_at = effective_at
+        self.version = version
+        self.unmatched_holding_method = unmatched_holding_method
+        self.links = links

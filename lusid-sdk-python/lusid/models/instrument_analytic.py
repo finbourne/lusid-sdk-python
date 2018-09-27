@@ -21,5 +21,29 @@
 # SOFTWARE.
 # --------------------------------------------------------------------------
 
-VERSION = "0.5.1516"
+from msrest.serialization import Model
 
+
+class InstrumentAnalytic(Model):
+    """InstrumentAnalytic.
+
+    :param instrument_uid: Unique instrument identifier
+    :type instrument_uid: str
+    :param value: Value of the analytic, eg price
+    :type value: float
+    :param denomination: Underlying unit of the analytic, eg currency, EPS
+     etc.
+    :type denomination: str
+    """
+
+    _attribute_map = {
+        'instrument_uid': {'key': 'instrumentUid', 'type': 'str'},
+        'value': {'key': 'value', 'type': 'float'},
+        'denomination': {'key': 'denomination', 'type': 'str'},
+    }
+
+    def __init__(self, instrument_uid=None, value=None, denomination=None):
+        super(InstrumentAnalytic, self).__init__()
+        self.instrument_uid = instrument_uid
+        self.value = value
+        self.denomination = denomination

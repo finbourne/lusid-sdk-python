@@ -21,5 +21,36 @@
 # SOFTWARE.
 # --------------------------------------------------------------------------
 
-VERSION = "0.5.1516"
+from msrest.serialization import Model
 
+
+class AggregationResponseNode(Model):
+    """AggregationResponseNode.
+
+    :param key:
+    :type key: str
+    :param value:
+    :type value: str
+    :param depth:
+    :type depth: int
+    :param properties:
+    :type properties: dict[str, object]
+    :param children:
+    :type children: list[~lusid.models.AggregationResponseNode]
+    """
+
+    _attribute_map = {
+        'key': {'key': 'key', 'type': 'str'},
+        'value': {'key': 'value', 'type': 'str'},
+        'depth': {'key': 'depth', 'type': 'int'},
+        'properties': {'key': 'properties', 'type': '{object}'},
+        'children': {'key': 'children', 'type': '[AggregationResponseNode]'},
+    }
+
+    def __init__(self, key=None, value=None, depth=None, properties=None, children=None):
+        super(AggregationResponseNode, self).__init__()
+        self.key = key
+        self.value = value
+        self.depth = depth
+        self.properties = properties
+        self.children = children

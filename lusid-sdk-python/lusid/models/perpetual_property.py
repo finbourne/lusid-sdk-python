@@ -21,5 +21,38 @@
 # SOFTWARE.
 # --------------------------------------------------------------------------
 
-VERSION = "0.5.1516"
+from msrest.serialization import Model
 
+
+class PerpetualProperty(Model):
+    """This is intended to be the external facing unitemporal property
+    specification data type.
+
+    Variables are only populated by the server, and will be ignored when
+    sending a request.
+
+    :param key:
+    :type key: str
+    :param value:
+    :type value: object
+    :ivar unit:
+    :vartype unit: str
+    """
+
+    _validation = {
+        'key': {'required': True},
+        'value': {'required': True},
+        'unit': {'readonly': True},
+    }
+
+    _attribute_map = {
+        'key': {'key': 'key', 'type': 'str'},
+        'value': {'key': 'value', 'type': 'object'},
+        'unit': {'key': 'unit', 'type': 'str'},
+    }
+
+    def __init__(self, key, value):
+        super(PerpetualProperty, self).__init__()
+        self.key = key
+        self.value = value
+        self.unit = None

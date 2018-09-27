@@ -21,5 +21,32 @@
 # SOFTWARE.
 # --------------------------------------------------------------------------
 
-VERSION = "0.5.1516"
+from msrest.serialization import Model
 
+
+class TransactionPropertyMapping(Model):
+    """TransactionPropertyMapping.
+
+    :param property_key: The Side
+    :type property_key: str
+    :param map_from: The Side
+    :type map_from: str
+    :param set_to: The Side
+    :type set_to: object
+    """
+
+    _validation = {
+        'property_key': {'required': True},
+    }
+
+    _attribute_map = {
+        'property_key': {'key': 'propertyKey', 'type': 'str'},
+        'map_from': {'key': 'mapFrom', 'type': 'str'},
+        'set_to': {'key': 'setTo', 'type': 'object'},
+    }
+
+    def __init__(self, property_key, map_from=None, set_to=None):
+        super(TransactionPropertyMapping, self).__init__()
+        self.property_key = property_key
+        self.map_from = map_from
+        self.set_to = set_to

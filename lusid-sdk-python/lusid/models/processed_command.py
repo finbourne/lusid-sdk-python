@@ -21,5 +21,34 @@
 # SOFTWARE.
 # --------------------------------------------------------------------------
 
-VERSION = "0.5.1516"
+from msrest.serialization import Model
 
+
+class ProcessedCommand(Model):
+    """ProcessedCommand.
+
+    :param description:
+    :type description: str
+    :param path:
+    :type path: str
+    :param user_id: The user that issued the command.
+    :type user_id: ~lusid.models.UserId
+    :param processed_time: The as at time of the events published by the
+     processing of
+     this command.
+    :type processed_time: object
+    """
+
+    _attribute_map = {
+        'description': {'key': 'description', 'type': 'str'},
+        'path': {'key': 'path', 'type': 'str'},
+        'user_id': {'key': 'userId', 'type': 'UserId'},
+        'processed_time': {'key': 'processedTime', 'type': 'object'},
+    }
+
+    def __init__(self, description=None, path=None, user_id=None, processed_time=None):
+        super(ProcessedCommand, self).__init__()
+        self.description = description
+        self.path = path
+        self.user_id = user_id
+        self.processed_time = processed_time

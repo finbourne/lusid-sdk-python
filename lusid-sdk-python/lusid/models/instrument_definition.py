@@ -21,5 +21,21 @@
 # SOFTWARE.
 # --------------------------------------------------------------------------
 
-VERSION = "0.5.1516"
+from msrest.serialization import Model
 
+
+class InstrumentDefinition(Model):
+    """An opaque instrument definition.
+    Understood by some analytics library.
+
+    :param content:
+    :type content: str
+    """
+
+    _attribute_map = {
+        'content': {'key': 'content', 'type': 'str'},
+    }
+
+    def __init__(self, content=None):
+        super(InstrumentDefinition, self).__init__()
+        self.content = content

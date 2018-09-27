@@ -21,5 +21,24 @@
 # SOFTWARE.
 # --------------------------------------------------------------------------
 
-VERSION = "0.5.1516"
+from msrest.serialization import Model
 
+
+class AnalyticStoreKey(Model):
+    """AnalyticStoreKey.
+
+    :param scope:
+    :type scope: str
+    :param date_property:
+    :type date_property: datetime
+    """
+
+    _attribute_map = {
+        'scope': {'key': 'scope', 'type': 'str'},
+        'date_property': {'key': 'date', 'type': 'iso-8601'},
+    }
+
+    def __init__(self, scope=None, date_property=None):
+        super(AnalyticStoreKey, self).__init__()
+        self.scope = scope
+        self.date_property = date_property

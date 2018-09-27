@@ -21,5 +21,28 @@
 # SOFTWARE.
 # --------------------------------------------------------------------------
 
-VERSION = "0.5.1516"
+from msrest.serialization import Model
 
+
+class AddTransactionPropertyResponse(Model):
+    """AddTransactionPropertyResponse.
+
+    :param href:
+    :type href: str
+    :param version:
+    :type version: ~lusid.models.Version
+    :param links:
+    :type links: list[~lusid.models.Link]
+    """
+
+    _attribute_map = {
+        'href': {'key': 'href', 'type': 'str'},
+        'version': {'key': 'version', 'type': 'Version'},
+        'links': {'key': 'links', 'type': '[Link]'},
+    }
+
+    def __init__(self, href=None, version=None, links=None):
+        super(AddTransactionPropertyResponse, self).__init__()
+        self.href = href
+        self.version = version
+        self.links = links

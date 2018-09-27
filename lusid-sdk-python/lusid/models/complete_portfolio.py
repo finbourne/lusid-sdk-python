@@ -24,69 +24,76 @@
 from msrest.serialization import Model
 
 
-class PortfolioSearchResult(Model):
-    """PortfolioSearchResult.
+class CompletePortfolio(Model):
+    """CompletePortfolio.
 
     Variables are only populated by the server, and will be ignored when
     sending a request.
 
     :ivar id:
     :vartype id: ~lusid.models.ResourceId
-    :ivar type: Possible values include: 'Transaction', 'Reference',
-     'DerivedTransaction'
-    :vartype type: str or ~lusid.models.enum
     :ivar href:
     :vartype href: str
     :ivar description:
     :vartype description: str
     :ivar display_name:
     :vartype display_name: str
-    :ivar is_derived:
-    :vartype is_derived: bool
     :ivar created:
     :vartype created: datetime
     :ivar parent_portfolio_id:
     :vartype parent_portfolio_id: ~lusid.models.ResourceId
-    :ivar properties:
-    :vartype properties: list[~lusid.models.Property]
+    :ivar is_derived:
+    :vartype is_derived: bool
+    :ivar type: Possible values include: 'Transaction', 'Reference',
+     'DerivedTransaction'
+    :vartype type: str or ~lusid.models.enum
+    :param version:
+    :type version: ~lusid.models.Version
+    :param properties:
+    :type properties: list[~lusid.models.Property]
+    :param base_currency:
+    :type base_currency: str
     :param links:
     :type links: list[~lusid.models.Link]
     """
 
     _validation = {
         'id': {'readonly': True},
-        'type': {'readonly': True},
         'href': {'readonly': True},
         'description': {'readonly': True},
         'display_name': {'readonly': True},
-        'is_derived': {'readonly': True},
         'created': {'readonly': True},
         'parent_portfolio_id': {'readonly': True},
-        'properties': {'readonly': True},
+        'is_derived': {'readonly': True},
+        'type': {'readonly': True},
     }
 
     _attribute_map = {
         'id': {'key': 'id', 'type': 'ResourceId'},
-        'type': {'key': 'type', 'type': 'str'},
         'href': {'key': 'href', 'type': 'str'},
         'description': {'key': 'description', 'type': 'str'},
         'display_name': {'key': 'displayName', 'type': 'str'},
-        'is_derived': {'key': 'isDerived', 'type': 'bool'},
         'created': {'key': 'created', 'type': 'iso-8601'},
         'parent_portfolio_id': {'key': 'parentPortfolioId', 'type': 'ResourceId'},
+        'is_derived': {'key': 'isDerived', 'type': 'bool'},
+        'type': {'key': 'type', 'type': 'str'},
+        'version': {'key': 'version', 'type': 'Version'},
         'properties': {'key': 'properties', 'type': '[Property]'},
+        'base_currency': {'key': 'baseCurrency', 'type': 'str'},
         'links': {'key': 'links', 'type': '[Link]'},
     }
 
-    def __init__(self, links=None):
-        super(PortfolioSearchResult, self).__init__()
+    def __init__(self, version=None, properties=None, base_currency=None, links=None):
+        super(CompletePortfolio, self).__init__()
         self.id = None
-        self.type = None
         self.href = None
         self.description = None
         self.display_name = None
-        self.is_derived = None
         self.created = None
         self.parent_portfolio_id = None
-        self.properties = None
+        self.is_derived = None
+        self.type = None
+        self.version = version
+        self.properties = properties
+        self.base_currency = base_currency
         self.links = links

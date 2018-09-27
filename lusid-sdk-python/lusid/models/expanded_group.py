@@ -24,34 +24,45 @@
 from msrest.serialization import Model
 
 
-class CreateReferencePortfolioRequest(Model):
-    """CreateReferencePortfolioRequest.
+class ExpandedGroup(Model):
+    """ExpandedGroup.
 
-    :param display_name:
-    :type display_name: str
+    :param href:
+    :type href: str
+    :param id:
+    :type id: ~lusid.models.ResourceId
+    :param name:
+    :type name: str
     :param description:
     :type description: str
-    :param code:
-    :type code: str
-    :param created:
-    :type created: datetime
+    :param values:
+    :type values: list[~lusid.models.CompletePortfolio]
+    :param sub_groups:
+    :type sub_groups: list[~lusid.models.ExpandedGroup]
+    :param version:
+    :type version: ~lusid.models.Version
+    :param links:
+    :type links: list[~lusid.models.Link]
     """
 
-    _validation = {
-        'display_name': {'required': True},
-        'code': {'required': True},
-    }
-
     _attribute_map = {
-        'display_name': {'key': 'displayName', 'type': 'str'},
+        'href': {'key': 'href', 'type': 'str'},
+        'id': {'key': 'id', 'type': 'ResourceId'},
+        'name': {'key': 'name', 'type': 'str'},
         'description': {'key': 'description', 'type': 'str'},
-        'code': {'key': 'code', 'type': 'str'},
-        'created': {'key': 'created', 'type': 'iso-8601'},
+        'values': {'key': 'values', 'type': '[CompletePortfolio]'},
+        'sub_groups': {'key': 'subGroups', 'type': '[ExpandedGroup]'},
+        'version': {'key': 'version', 'type': 'Version'},
+        'links': {'key': 'links', 'type': '[Link]'},
     }
 
-    def __init__(self, display_name, code, description=None, created=None):
-        super(CreateReferencePortfolioRequest, self).__init__()
-        self.display_name = display_name
+    def __init__(self, href=None, id=None, name=None, description=None, values=None, sub_groups=None, version=None, links=None):
+        super(ExpandedGroup, self).__init__()
+        self.href = href
+        self.id = id
+        self.name = name
         self.description = description
-        self.code = code
-        self.created = created
+        self.values = values
+        self.sub_groups = sub_groups
+        self.version = version
+        self.links = links

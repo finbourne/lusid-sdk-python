@@ -21,5 +21,20 @@
 # SOFTWARE.
 # --------------------------------------------------------------------------
 
-VERSION = "0.5.1516"
+from msrest.serialization import Model
 
+
+class CreatePortfolioDetails(Model):
+    """CreatePortfolioDetails.
+
+    :param base_currency:
+    :type base_currency: str
+    """
+
+    _attribute_map = {
+        'base_currency': {'key': 'baseCurrency', 'type': 'str'},
+    }
+
+    def __init__(self, base_currency=None):
+        super(CreatePortfolioDetails, self).__init__()
+        self.base_currency = base_currency

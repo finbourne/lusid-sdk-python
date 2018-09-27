@@ -21,5 +21,32 @@
 # SOFTWARE.
 # --------------------------------------------------------------------------
 
-VERSION = "0.5.1516"
+from msrest.serialization import Model
 
+
+class LookupInstrumentsFromCodesResponse(Model):
+    """LookupInstrumentsFromCodesResponse.
+
+    :param href:
+    :type href: str
+    :param values:
+    :type values: dict[str, list[~lusid.models.Instrument]]
+    :param failed:
+    :type failed: dict[str, ~lusid.models.ErrorDetail]
+    :param links:
+    :type links: list[~lusid.models.Link]
+    """
+
+    _attribute_map = {
+        'href': {'key': 'href', 'type': 'str'},
+        'values': {'key': 'values', 'type': '{[Instrument]}'},
+        'failed': {'key': 'failed', 'type': '{ErrorDetail}'},
+        'links': {'key': 'links', 'type': '[Link]'},
+    }
+
+    def __init__(self, href=None, values=None, failed=None, links=None):
+        super(LookupInstrumentsFromCodesResponse, self).__init__()
+        self.href = href
+        self.values = values
+        self.failed = failed
+        self.links = links

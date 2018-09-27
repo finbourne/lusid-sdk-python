@@ -21,5 +21,28 @@
 # SOFTWARE.
 # --------------------------------------------------------------------------
 
-VERSION = "0.5.1516"
+from msrest.serialization import Model
 
+
+class CorporateActionTransitionComponent(Model):
+    """CorporateActionTransitionComponent.
+
+    :param instrument_uid:
+    :type instrument_uid: str
+    :param units_factor:
+    :type units_factor: float
+    :param cost_factor:
+    :type cost_factor: float
+    """
+
+    _attribute_map = {
+        'instrument_uid': {'key': 'instrumentUid', 'type': 'str'},
+        'units_factor': {'key': 'unitsFactor', 'type': 'float'},
+        'cost_factor': {'key': 'costFactor', 'type': 'float'},
+    }
+
+    def __init__(self, instrument_uid=None, units_factor=None, cost_factor=None):
+        super(CorporateActionTransitionComponent, self).__init__()
+        self.instrument_uid = instrument_uid
+        self.units_factor = units_factor
+        self.cost_factor = cost_factor

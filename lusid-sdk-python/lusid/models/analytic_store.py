@@ -21,5 +21,28 @@
 # SOFTWARE.
 # --------------------------------------------------------------------------
 
-VERSION = "0.5.1516"
+from msrest.serialization import Model
 
+
+class AnalyticStore(Model):
+    """AnalyticStore.
+
+    :param key:
+    :type key: ~lusid.models.AnalyticStoreKey
+    :param href:
+    :type href: str
+    :param links:
+    :type links: list[~lusid.models.Link]
+    """
+
+    _attribute_map = {
+        'key': {'key': 'key', 'type': 'AnalyticStoreKey'},
+        'href': {'key': 'href', 'type': 'str'},
+        'links': {'key': 'links', 'type': '[Link]'},
+    }
+
+    def __init__(self, key=None, href=None, links=None):
+        super(AnalyticStore, self).__init__()
+        self.key = key
+        self.href = href
+        self.links = links

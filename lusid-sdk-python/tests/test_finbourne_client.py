@@ -324,9 +324,9 @@ class TestFinbourneApi(TestCase):
             self.client.create_analytic_store(analytic_store_request)
 
         prices = [
-            models.InstrumentAnalyticDataDto(self.instrumentIds[0], 100),
-            models.InstrumentAnalyticDataDto(self.instrumentIds[1], 200),
-            models.InstrumentAnalyticDataDto(self.instrumentIds[2], 300)
+            models.InstrumentAnalytic(self.instrumentIds[0], 100),
+            models.InstrumentAnalytic(self.instrumentIds[1], 200),
+            models.InstrumentAnalytic(self.instrumentIds[2], 300)
         ]
 
         #   add prices

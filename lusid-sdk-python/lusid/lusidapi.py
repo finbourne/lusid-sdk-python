@@ -305,7 +305,7 @@ class LUSIDAPI(object):
         self._client = ServiceClient(self.config.credentials, self.config)
 
         client_models = {k: v for k, v in models.__dict__.items() if isinstance(v, type)}
-        self.api_version = '0.6.288'
+        self.api_version = '0.5.1516'
         self._serialize = Serializer(client_models)
         self._deserialize = Deserializer(client_models)
 
@@ -329,9 +329,9 @@ class LUSIDAPI(object):
          deserialized response
         :param operation_config: :ref:`Operation configuration
          overrides<msrest:optionsforoperations>`.
-        :return: ResourceListOfAnalyticStoreKeyDto or ClientRawResponse if
+        :return: ResourceListOfAnalyticStoreKey or ClientRawResponse if
          raw=true
-        :rtype: ~lusid.models.ResourceListOfAnalyticStoreKeyDto or
+        :rtype: ~lusid.models.ResourceListOfAnalyticStoreKey or
          ~msrest.pipeline.ClientRawResponse
         :raises:
          :class:`ErrorResponseException<lusid.models.ErrorResponseException>`
@@ -368,7 +368,7 @@ class LUSIDAPI(object):
         deserialized = None
 
         if response.status_code == 200:
-            deserialized = self._deserialize('ResourceListOfAnalyticStoreKeyDto', response)
+            deserialized = self._deserialize('ResourceListOfAnalyticStoreKey', response)
 
         if raw:
             client_raw_response = ClientRawResponse(deserialized, response)
@@ -389,8 +389,8 @@ class LUSIDAPI(object):
          deserialized response
         :param operation_config: :ref:`Operation configuration
          overrides<msrest:optionsforoperations>`.
-        :return: AnalyticStoreDto or ClientRawResponse if raw=true
-        :rtype: ~lusid.models.AnalyticStoreDto or
+        :return: AnalyticStore or ClientRawResponse if raw=true
+        :rtype: ~lusid.models.AnalyticStore or
          ~msrest.pipeline.ClientRawResponse
         :raises:
          :class:`ErrorResponseException<lusid.models.ErrorResponseException>`
@@ -424,7 +424,7 @@ class LUSIDAPI(object):
         deserialized = None
 
         if response.status_code == 201:
-            deserialized = self._deserialize('AnalyticStoreDto', response)
+            deserialized = self._deserialize('AnalyticStore', response)
 
         if raw:
             client_raw_response = ClientRawResponse(deserialized, response)
@@ -453,8 +453,8 @@ class LUSIDAPI(object):
          deserialized response
         :param operation_config: :ref:`Operation configuration
          overrides<msrest:optionsforoperations>`.
-        :return: AnalyticStoreDto or ClientRawResponse if raw=true
-        :rtype: ~lusid.models.AnalyticStoreDto or
+        :return: AnalyticStore or ClientRawResponse if raw=true
+        :rtype: ~lusid.models.AnalyticStore or
          ~msrest.pipeline.ClientRawResponse
         :raises:
          :class:`ErrorResponseException<lusid.models.ErrorResponseException>`
@@ -490,7 +490,7 @@ class LUSIDAPI(object):
         deserialized = None
 
         if response.status_code == 200:
-            deserialized = self._deserialize('AnalyticStoreDto', response)
+            deserialized = self._deserialize('AnalyticStore', response)
 
         if raw:
             client_raw_response = ClientRawResponse(deserialized, response)
@@ -576,14 +576,14 @@ class LUSIDAPI(object):
         :param day: The day component of the date for the data in the scope
         :type day: int
         :param data:
-        :type data: list[~lusid.models.InstrumentAnalyticDataDto]
+        :type data: list[~lusid.models.InstrumentAnalytic]
         :param dict custom_headers: headers that will be added to the request
         :param bool raw: returns the direct response alongside the
          deserialized response
         :param operation_config: :ref:`Operation configuration
          overrides<msrest:optionsforoperations>`.
-        :return: AnalyticStoreDto or ClientRawResponse if raw=true
-        :rtype: ~lusid.models.AnalyticStoreDto or
+        :return: AnalyticStore or ClientRawResponse if raw=true
+        :rtype: ~lusid.models.AnalyticStore or
          ~msrest.pipeline.ClientRawResponse
         :raises:
          :class:`ErrorResponseException<lusid.models.ErrorResponseException>`
@@ -609,7 +609,7 @@ class LUSIDAPI(object):
 
         # Construct body
         if data is not None:
-            body_content = self._serialize.body(data, '[InstrumentAnalyticDataDto]')
+            body_content = self._serialize.body(data, '[InstrumentAnalytic]')
         else:
             body_content = None
 
@@ -624,7 +624,7 @@ class LUSIDAPI(object):
         deserialized = None
 
         if response.status_code == 200:
-            deserialized = self._deserialize('AnalyticStoreDto', response)
+            deserialized = self._deserialize('AnalyticStore', response)
 
         if raw:
             client_raw_response = ClientRawResponse(deserialized, response)
@@ -659,7 +659,7 @@ class LUSIDAPI(object):
         :param operation_config: :ref:`Operation configuration
          overrides<msrest:optionsforoperations>`.
         :return: list or ClientRawResponse if raw=true
-        :rtype: list[~lusid.models.CorporateActionEventDto] or
+        :rtype: list[~lusid.models.CorporateAction] or
          ~msrest.pipeline.ClientRawResponse
         :raises:
          :class:`ErrorResponseException<lusid.models.ErrorResponseException>`
@@ -703,7 +703,7 @@ class LUSIDAPI(object):
         deserialized = None
 
         if response.status_code == 200:
-            deserialized = self._deserialize('[CorporateActionEventDto]', response)
+            deserialized = self._deserialize('[CorporateAction]', response)
 
         if raw:
             client_raw_response = ClientRawResponse(deserialized, response)
@@ -722,14 +722,15 @@ class LUSIDAPI(object):
         :param code: Source of the corporate action
         :type code: str
         :param actions: The corporate actions to create
-        :type actions: list[~lusid.models.UpsertCorporateActionRequest]
+        :type actions: list[~lusid.models.CreateCorporateAction]
         :param dict custom_headers: headers that will be added to the request
         :param bool raw: returns the direct response alongside the
          deserialized response
         :param operation_config: :ref:`Operation configuration
          overrides<msrest:optionsforoperations>`.
-        :return: TryUpsertCorporateActionsDto or ClientRawResponse if raw=true
-        :rtype: ~lusid.models.TryUpsertCorporateActionsDto or
+        :return: UpsertCorporateActionsResponse or ClientRawResponse if
+         raw=true
+        :rtype: ~lusid.models.UpsertCorporateActionsResponse or
          ~msrest.pipeline.ClientRawResponse
         :raises:
          :class:`ErrorResponseException<lusid.models.ErrorResponseException>`
@@ -753,7 +754,7 @@ class LUSIDAPI(object):
 
         # Construct body
         if actions is not None:
-            body_content = self._serialize.body(actions, '[UpsertCorporateActionRequest]')
+            body_content = self._serialize.body(actions, '[CreateCorporateAction]')
         else:
             body_content = None
 
@@ -768,7 +769,7 @@ class LUSIDAPI(object):
         deserialized = None
 
         if response.status_code == 201:
-            deserialized = self._deserialize('TryUpsertCorporateActionsDto', response)
+            deserialized = self._deserialize('UpsertCorporateActionsResponse', response)
 
         if raw:
             client_raw_response = ClientRawResponse(deserialized, response)
@@ -789,9 +790,8 @@ class LUSIDAPI(object):
          deserialized response
         :param operation_config: :ref:`Operation configuration
          overrides<msrest:optionsforoperations>`.
-        :return: DataTypeDto or ClientRawResponse if raw=true
-        :rtype: ~lusid.models.DataTypeDto or
-         ~msrest.pipeline.ClientRawResponse
+        :return: DataType or ClientRawResponse if raw=true
+        :rtype: ~lusid.models.DataType or ~msrest.pipeline.ClientRawResponse
         :raises:
          :class:`ErrorResponseException<lusid.models.ErrorResponseException>`
         """
@@ -824,7 +824,7 @@ class LUSIDAPI(object):
         deserialized = None
 
         if response.status_code == 201:
-            deserialized = self._deserialize('DataTypeDto', response)
+            deserialized = self._deserialize('DataType', response)
 
         if raw:
             client_raw_response = ClientRawResponse(deserialized, response)
@@ -856,8 +856,8 @@ class LUSIDAPI(object):
          deserialized response
         :param operation_config: :ref:`Operation configuration
          overrides<msrest:optionsforoperations>`.
-        :return: ResourceListOfDataTypeDto or ClientRawResponse if raw=true
-        :rtype: ~lusid.models.ResourceListOfDataTypeDto or
+        :return: ResourceListOfDataType or ClientRawResponse if raw=true
+        :rtype: ~lusid.models.ResourceListOfDataType or
          ~msrest.pipeline.ClientRawResponse
         :raises:
          :class:`ErrorResponseException<lusid.models.ErrorResponseException>`
@@ -900,7 +900,7 @@ class LUSIDAPI(object):
         deserialized = None
 
         if response.status_code == 200:
-            deserialized = self._deserialize('ResourceListOfDataTypeDto', response)
+            deserialized = self._deserialize('ResourceListOfDataType', response)
 
         if raw:
             client_raw_response = ClientRawResponse(deserialized, response)
@@ -922,9 +922,8 @@ class LUSIDAPI(object):
          deserialized response
         :param operation_config: :ref:`Operation configuration
          overrides<msrest:optionsforoperations>`.
-        :return: DataTypeDto or ClientRawResponse if raw=true
-        :rtype: ~lusid.models.DataTypeDto or
-         ~msrest.pipeline.ClientRawResponse
+        :return: DataType or ClientRawResponse if raw=true
+        :rtype: ~lusid.models.DataType or ~msrest.pipeline.ClientRawResponse
         :raises:
          :class:`ErrorResponseException<lusid.models.ErrorResponseException>`
         """
@@ -955,7 +954,7 @@ class LUSIDAPI(object):
         deserialized = None
 
         if response.status_code == 200:
-            deserialized = self._deserialize('DataTypeDto', response)
+            deserialized = self._deserialize('DataType', response)
 
         if raw:
             client_raw_response = ClientRawResponse(deserialized, response)
@@ -980,9 +979,8 @@ class LUSIDAPI(object):
          deserialized response
         :param operation_config: :ref:`Operation configuration
          overrides<msrest:optionsforoperations>`.
-        :return: DataTypeDto or ClientRawResponse if raw=true
-        :rtype: ~lusid.models.DataTypeDto or
-         ~msrest.pipeline.ClientRawResponse
+        :return: DataType or ClientRawResponse if raw=true
+        :rtype: ~lusid.models.DataType or ~msrest.pipeline.ClientRawResponse
         :raises:
          :class:`ErrorResponseException<lusid.models.ErrorResponseException>`
         """
@@ -1020,7 +1018,7 @@ class LUSIDAPI(object):
         deserialized = None
 
         if response.status_code == 200:
-            deserialized = self._deserialize('DataTypeDto', response)
+            deserialized = self._deserialize('DataType', response)
 
         if raw:
             client_raw_response = ClientRawResponse(deserialized, response)
@@ -1046,8 +1044,8 @@ class LUSIDAPI(object):
          deserialized response
         :param operation_config: :ref:`Operation configuration
          overrides<msrest:optionsforoperations>`.
-        :return: IUnitDefinitionDto or ClientRawResponse if raw=true
-        :rtype: ~lusid.models.IUnitDefinitionDto or
+        :return: IUnitDefinition or ClientRawResponse if raw=true
+        :rtype: ~lusid.models.IUnitDefinition or
          ~msrest.pipeline.ClientRawResponse
         :raises:
          :class:`ErrorResponseException<lusid.models.ErrorResponseException>`
@@ -1083,7 +1081,7 @@ class LUSIDAPI(object):
         deserialized = None
 
         if response.status_code == 200:
-            deserialized = self._deserialize('IUnitDefinitionDto', response)
+            deserialized = self._deserialize('IUnitDefinition', response)
 
         if raw:
             client_raw_response = ClientRawResponse(deserialized, response)
@@ -1109,9 +1107,8 @@ class LUSIDAPI(object):
          deserialized response
         :param operation_config: :ref:`Operation configuration
          overrides<msrest:optionsforoperations>`.
-        :return: PortfolioDto or ClientRawResponse if raw=true
-        :rtype: ~lusid.models.PortfolioDto or
-         ~msrest.pipeline.ClientRawResponse
+        :return: Portfolio or ClientRawResponse if raw=true
+        :rtype: ~lusid.models.Portfolio or ~msrest.pipeline.ClientRawResponse
         :raises:
          :class:`ErrorResponseException<lusid.models.ErrorResponseException>`
         """
@@ -1148,7 +1145,7 @@ class LUSIDAPI(object):
         deserialized = None
 
         if response.status_code == 201:
-            deserialized = self._deserialize('PortfolioDto', response)
+            deserialized = self._deserialize('Portfolio', response)
 
         if raw:
             client_raw_response = ClientRawResponse(deserialized, response)
@@ -1237,9 +1234,8 @@ class LUSIDAPI(object):
          deserialized response
         :param operation_config: :ref:`Operation configuration
          overrides<msrest:optionsforoperations>`.
-        :return: ResourceListOfPortfolioGroupDto or ClientRawResponse if
-         raw=true
-        :rtype: ~lusid.models.ResourceListOfPortfolioGroupDto or
+        :return: ResourceListOfPortfolioGroup or ClientRawResponse if raw=true
+        :rtype: ~lusid.models.ResourceListOfPortfolioGroup or
          ~msrest.pipeline.ClientRawResponse
         :raises:
          :class:`ErrorResponseException<lusid.models.ErrorResponseException>`
@@ -1281,7 +1277,7 @@ class LUSIDAPI(object):
         deserialized = None
 
         if response.status_code == 200:
-            deserialized = self._deserialize('ResourceListOfPortfolioGroupDto', response)
+            deserialized = self._deserialize('ResourceListOfPortfolioGroup', response)
 
         if raw:
             client_raw_response = ClientRawResponse(deserialized, response)
@@ -1302,8 +1298,8 @@ class LUSIDAPI(object):
          deserialized response
         :param operation_config: :ref:`Operation configuration
          overrides<msrest:optionsforoperations>`.
-        :return: TryAddClientInstrumentsDto or ClientRawResponse if raw=true
-        :rtype: ~lusid.models.TryAddClientInstrumentsDto or
+        :return: TryAddClientInstruments or ClientRawResponse if raw=true
+        :rtype: ~lusid.models.TryAddClientInstruments or
          ~msrest.pipeline.ClientRawResponse
         :raises:
          :class:`ErrorResponseException<lusid.models.ErrorResponseException>`
@@ -1337,7 +1333,7 @@ class LUSIDAPI(object):
         deserialized = None
 
         if response.status_code == 201:
-            deserialized = self._deserialize('TryAddClientInstrumentsDto', response)
+            deserialized = self._deserialize('TryAddClientInstruments', response)
 
         if raw:
             client_raw_response = ClientRawResponse(deserialized, response)
@@ -1358,9 +1354,9 @@ class LUSIDAPI(object):
          deserialized response
         :param operation_config: :ref:`Operation configuration
          overrides<msrest:optionsforoperations>`.
-        :return: TryDeleteClientInstrumentsDto or ClientRawResponse if
+        :return: DeleteClientInstrumentsResponse or ClientRawResponse if
          raw=true
-        :rtype: ~lusid.models.TryDeleteClientInstrumentsDto or
+        :rtype: ~lusid.models.DeleteClientInstrumentsResponse or
          ~msrest.pipeline.ClientRawResponse
         :raises:
          :class:`ErrorResponseException<lusid.models.ErrorResponseException>`
@@ -1389,7 +1385,7 @@ class LUSIDAPI(object):
         deserialized = None
 
         if response.status_code == 200:
-            deserialized = self._deserialize('TryDeleteClientInstrumentsDto', response)
+            deserialized = self._deserialize('DeleteClientInstrumentsResponse', response)
 
         if raw:
             client_raw_response = ClientRawResponse(deserialized, response)
@@ -1415,9 +1411,8 @@ class LUSIDAPI(object):
          deserialized response
         :param operation_config: :ref:`Operation configuration
          overrides<msrest:optionsforoperations>`.
-        :return: InstrumentDto or ClientRawResponse if raw=true
-        :rtype: ~lusid.models.InstrumentDto or
-         ~msrest.pipeline.ClientRawResponse
+        :return: Instrument or ClientRawResponse if raw=true
+        :rtype: ~lusid.models.Instrument or ~msrest.pipeline.ClientRawResponse
         :raises:
          :class:`ErrorResponseException<lusid.models.ErrorResponseException>`
         """
@@ -1451,7 +1446,7 @@ class LUSIDAPI(object):
         deserialized = None
 
         if response.status_code == 200:
-            deserialized = self._deserialize('InstrumentDto', response)
+            deserialized = self._deserialize('Instrument', response)
 
         if raw:
             client_raw_response = ClientRawResponse(deserialized, response)
@@ -1483,9 +1478,9 @@ class LUSIDAPI(object):
          deserialized response
         :param operation_config: :ref:`Operation configuration
          overrides<msrest:optionsforoperations>`.
-        :return: TryLookupInstrumentsFromCodesDto or ClientRawResponse if
+        :return: LookupInstrumentsFromCodesResponse or ClientRawResponse if
          raw=true
-        :rtype: ~lusid.models.TryLookupInstrumentsFromCodesDto or
+        :rtype: ~lusid.models.LookupInstrumentsFromCodesResponse or
          ~msrest.pipeline.ClientRawResponse
         :raises:
          :class:`ErrorResponseException<lusid.models.ErrorResponseException>`
@@ -1525,7 +1520,7 @@ class LUSIDAPI(object):
         deserialized = None
 
         if response.status_code == 200:
-            deserialized = self._deserialize('TryLookupInstrumentsFromCodesDto', response)
+            deserialized = self._deserialize('LookupInstrumentsFromCodesResponse', response)
 
         if raw:
             client_raw_response = ClientRawResponse(deserialized, response)
@@ -1534,26 +1529,26 @@ class LUSIDAPI(object):
         return deserialized
     lookup_instruments_from_codes.metadata = {'url': '/api/instruments/$lookup'}
 
-    def batch_upsert_classifications(
+    def batch_upsert_instrument_properties(
             self, classifications=None, custom_headers=None, raw=False, **operation_config):
         """Upsert instrument properties.
 
         :param classifications:
-        :type classifications: list[~lusid.models.InstrumentPropertyDto]
+        :type classifications: list[~lusid.models.InstrumentProperty]
         :param dict custom_headers: headers that will be added to the request
         :param bool raw: returns the direct response alongside the
          deserialized response
         :param operation_config: :ref:`Operation configuration
          overrides<msrest:optionsforoperations>`.
-        :return: UpsertInstrumentPropertiesDto or ClientRawResponse if
+        :return: UpsertInstrumentPropertiesResponse or ClientRawResponse if
          raw=true
-        :rtype: ~lusid.models.UpsertInstrumentPropertiesDto or
+        :rtype: ~lusid.models.UpsertInstrumentPropertiesResponse or
          ~msrest.pipeline.ClientRawResponse
         :raises:
          :class:`ErrorResponseException<lusid.models.ErrorResponseException>`
         """
         # Construct URL
-        url = self.batch_upsert_classifications.metadata['url']
+        url = self.batch_upsert_instrument_properties.metadata['url']
 
         # Construct parameters
         query_parameters = {}
@@ -1566,7 +1561,7 @@ class LUSIDAPI(object):
 
         # Construct body
         if classifications is not None:
-            body_content = self._serialize.body(classifications, '[InstrumentPropertyDto]')
+            body_content = self._serialize.body(classifications, '[InstrumentProperty]')
         else:
             body_content = None
 
@@ -1581,14 +1576,14 @@ class LUSIDAPI(object):
         deserialized = None
 
         if response.status_code == 201:
-            deserialized = self._deserialize('UpsertInstrumentPropertiesDto', response)
+            deserialized = self._deserialize('UpsertInstrumentPropertiesResponse', response)
 
         if raw:
             client_raw_response = ClientRawResponse(deserialized, response)
             return client_raw_response
 
         return deserialized
-    batch_upsert_classifications.metadata = {'url': '/api/instruments/$upsertproperties'}
+    batch_upsert_instrument_properties.metadata = {'url': '/api/instruments/$upsertproperties'}
 
     def get_saml_identity_provider_id(
             self, domain, custom_headers=None, raw=False, **operation_config):
@@ -1700,8 +1695,8 @@ class LUSIDAPI(object):
          deserialized response
         :param operation_config: :ref:`Operation configuration
          overrides<msrest:optionsforoperations>`.
-        :return: VersionSummaryDto or ClientRawResponse if raw=true
-        :rtype: ~lusid.models.VersionSummaryDto or
+        :return: VersionSummary or ClientRawResponse if raw=true
+        :rtype: ~lusid.models.VersionSummary or
          ~msrest.pipeline.ClientRawResponse
         :raises:
          :class:`ErrorResponseException<lusid.models.ErrorResponseException>`
@@ -1728,7 +1723,7 @@ class LUSIDAPI(object):
         deserialized = None
 
         if response.status_code == 200:
-            deserialized = self._deserialize('VersionSummaryDto', response)
+            deserialized = self._deserialize('VersionSummary', response)
 
         if raw:
             client_raw_response = ClientRawResponse(deserialized, response)
@@ -1763,9 +1758,9 @@ class LUSIDAPI(object):
          deserialized response
         :param operation_config: :ref:`Operation configuration
          overrides<msrest:optionsforoperations>`.
-        :return: ResourceListOfPersonalisationDto or ClientRawResponse if
+        :return: ResourceListOfPersonalisation or ClientRawResponse if
          raw=true
-        :rtype: ~lusid.models.ResourceListOfPersonalisationDto or
+        :rtype: ~lusid.models.ResourceListOfPersonalisation or
          ~msrest.pipeline.ClientRawResponse
         :raises:
          :class:`ErrorResponseException<lusid.models.ErrorResponseException>`
@@ -1806,7 +1801,7 @@ class LUSIDAPI(object):
         deserialized = None
 
         if response.status_code == 200:
-            deserialized = self._deserialize('ResourceListOfPersonalisationDto', response)
+            deserialized = self._deserialize('ResourceListOfPersonalisation', response)
 
         if raw:
             client_raw_response = ClientRawResponse(deserialized, response)
@@ -1820,15 +1815,15 @@ class LUSIDAPI(object):
         """Upsert one or more personalisations.
 
         :param personalisations:
-        :type personalisations: list[~lusid.models.PersonalisationDto]
+        :type personalisations: list[~lusid.models.Personalisation]
         :param dict custom_headers: headers that will be added to the request
         :param bool raw: returns the direct response alongside the
          deserialized response
         :param operation_config: :ref:`Operation configuration
          overrides<msrest:optionsforoperations>`.
-        :return: UpsertPersonalisationsResponse or ClientRawResponse if
+        :return: UpsertPersonalisationResponse or ClientRawResponse if
          raw=true
-        :rtype: ~lusid.models.UpsertPersonalisationsResponse or
+        :rtype: ~lusid.models.UpsertPersonalisationResponse or
          ~msrest.pipeline.ClientRawResponse
         :raises:
          :class:`ErrorResponseException<lusid.models.ErrorResponseException>`
@@ -1847,7 +1842,7 @@ class LUSIDAPI(object):
 
         # Construct body
         if personalisations is not None:
-            body_content = self._serialize.body(personalisations, '[PersonalisationDto]')
+            body_content = self._serialize.body(personalisations, '[Personalisation]')
         else:
             body_content = None
 
@@ -1862,7 +1857,7 @@ class LUSIDAPI(object):
         deserialized = None
 
         if response.status_code == 201:
-            deserialized = self._deserialize('UpsertPersonalisationsResponse', response)
+            deserialized = self._deserialize('UpsertPersonalisationResponse', response)
 
         if raw:
             client_raw_response = ClientRawResponse(deserialized, response)
@@ -1953,9 +1948,8 @@ class LUSIDAPI(object):
          deserialized response
         :param operation_config: :ref:`Operation configuration
          overrides<msrest:optionsforoperations>`.
-        :return: ResourceListOfPortfolioGroupDto or ClientRawResponse if
-         raw=true
-        :rtype: ~lusid.models.ResourceListOfPortfolioGroupDto or
+        :return: ResourceListOfPortfolioGroup or ClientRawResponse if raw=true
+        :rtype: ~lusid.models.ResourceListOfPortfolioGroup or
          ~msrest.pipeline.ClientRawResponse
         :raises:
          :class:`ErrorResponseException<lusid.models.ErrorResponseException>`
@@ -1996,7 +1990,7 @@ class LUSIDAPI(object):
         deserialized = None
 
         if response.status_code == 200:
-            deserialized = self._deserialize('ResourceListOfPortfolioGroupDto', response)
+            deserialized = self._deserialize('ResourceListOfPortfolioGroup', response)
 
         if raw:
             client_raw_response = ClientRawResponse(deserialized, response)
@@ -2012,14 +2006,14 @@ class LUSIDAPI(object):
         :param scope:
         :type scope: str
         :param request:
-        :type request: ~lusid.models.CreateGroupRequest
+        :type request: ~lusid.models.CreatePortfolioGroupRequest
         :param dict custom_headers: headers that will be added to the request
         :param bool raw: returns the direct response alongside the
          deserialized response
         :param operation_config: :ref:`Operation configuration
          overrides<msrest:optionsforoperations>`.
-        :return: PortfolioGroupDto or ClientRawResponse if raw=true
-        :rtype: ~lusid.models.PortfolioGroupDto or
+        :return: PortfolioGroup or ClientRawResponse if raw=true
+        :rtype: ~lusid.models.PortfolioGroup or
          ~msrest.pipeline.ClientRawResponse
         :raises:
          :class:`ErrorResponseException<lusid.models.ErrorResponseException>`
@@ -2042,7 +2036,7 @@ class LUSIDAPI(object):
 
         # Construct body
         if request is not None:
-            body_content = self._serialize.body(request, 'CreateGroupRequest')
+            body_content = self._serialize.body(request, 'CreatePortfolioGroupRequest')
         else:
             body_content = None
 
@@ -2057,7 +2051,7 @@ class LUSIDAPI(object):
         deserialized = None
 
         if response.status_code == 201:
-            deserialized = self._deserialize('PortfolioGroupDto', response)
+            deserialized = self._deserialize('PortfolioGroup', response)
 
         if raw:
             client_raw_response = ClientRawResponse(deserialized, response)
@@ -2081,8 +2075,8 @@ class LUSIDAPI(object):
          deserialized response
         :param operation_config: :ref:`Operation configuration
          overrides<msrest:optionsforoperations>`.
-        :return: PortfolioGroupDto or ClientRawResponse if raw=true
-        :rtype: ~lusid.models.PortfolioGroupDto or
+        :return: PortfolioGroup or ClientRawResponse if raw=true
+        :rtype: ~lusid.models.PortfolioGroup or
          ~msrest.pipeline.ClientRawResponse
         :raises:
          :class:`ErrorResponseException<lusid.models.ErrorResponseException>`
@@ -2116,7 +2110,7 @@ class LUSIDAPI(object):
         deserialized = None
 
         if response.status_code == 200:
-            deserialized = self._deserialize('PortfolioGroupDto', response)
+            deserialized = self._deserialize('PortfolioGroup', response)
 
         if raw:
             client_raw_response = ClientRawResponse(deserialized, response)
@@ -2134,14 +2128,14 @@ class LUSIDAPI(object):
         :param code:
         :type code: str
         :param request:
-        :type request: ~lusid.models.UpdateGroupRequest
+        :type request: ~lusid.models.UpdatePortfolioGroupRequest
         :param dict custom_headers: headers that will be added to the request
         :param bool raw: returns the direct response alongside the
          deserialized response
         :param operation_config: :ref:`Operation configuration
          overrides<msrest:optionsforoperations>`.
-        :return: PortfolioGroupDto or ClientRawResponse if raw=true
-        :rtype: ~lusid.models.PortfolioGroupDto or
+        :return: PortfolioGroup or ClientRawResponse if raw=true
+        :rtype: ~lusid.models.PortfolioGroup or
          ~msrest.pipeline.ClientRawResponse
         :raises:
          :class:`ErrorResponseException<lusid.models.ErrorResponseException>`
@@ -2165,7 +2159,7 @@ class LUSIDAPI(object):
 
         # Construct body
         if request is not None:
-            body_content = self._serialize.body(request, 'UpdateGroupRequest')
+            body_content = self._serialize.body(request, 'UpdatePortfolioGroupRequest')
         else:
             body_content = None
 
@@ -2180,7 +2174,7 @@ class LUSIDAPI(object):
         deserialized = None
 
         if response.status_code == 201:
-            deserialized = self._deserialize('PortfolioGroupDto', response)
+            deserialized = self._deserialize('PortfolioGroup', response)
 
         if raw:
             client_raw_response = ClientRawResponse(deserialized, response)
@@ -2320,6 +2314,71 @@ class LUSIDAPI(object):
         return deserialized
     get_aggregation_by_group.metadata = {'url': '/api/portfoliogroups/{scope}/{code}/$aggregate'}
 
+    def get_nested_aggregation_by_group(
+            self, scope, code, request=None, custom_headers=None, raw=False, **operation_config):
+        """Obsolete - Aggregation request data in a group hierarchy into a data
+        tree.
+
+        :param scope:
+        :type scope: str
+        :param code:
+        :type code: str
+        :param request:
+        :type request: ~lusid.models.AggregationRequest
+        :param dict custom_headers: headers that will be added to the request
+        :param bool raw: returns the direct response alongside the
+         deserialized response
+        :param operation_config: :ref:`Operation configuration
+         overrides<msrest:optionsforoperations>`.
+        :return: NestedAggregationResponse or ClientRawResponse if raw=true
+        :rtype: ~lusid.models.NestedAggregationResponse or
+         ~msrest.pipeline.ClientRawResponse
+        :raises:
+         :class:`ErrorResponseException<lusid.models.ErrorResponseException>`
+        """
+        # Construct URL
+        url = self.get_nested_aggregation_by_group.metadata['url']
+        path_format_arguments = {
+            'scope': self._serialize.url("scope", scope, 'str'),
+            'code': self._serialize.url("code", code, 'str')
+        }
+        url = self._client.format_url(url, **path_format_arguments)
+
+        # Construct parameters
+        query_parameters = {}
+
+        # Construct headers
+        header_parameters = {}
+        header_parameters['Content-Type'] = 'application/json-patch+json; charset=utf-8'
+        if custom_headers:
+            header_parameters.update(custom_headers)
+
+        # Construct body
+        if request is not None:
+            body_content = self._serialize.body(request, 'AggregationRequest')
+        else:
+            body_content = None
+
+        # Construct and send request
+        request = self._client.post(url, query_parameters)
+        response = self._client.send(
+            request, header_parameters, body_content, stream=False, **operation_config)
+
+        if response.status_code not in [200]:
+            raise models.ErrorResponseException(self._deserialize, response)
+
+        deserialized = None
+
+        if response.status_code == 200:
+            deserialized = self._deserialize('NestedAggregationResponse', response)
+
+        if raw:
+            client_raw_response = ClientRawResponse(deserialized, response)
+            return client_raw_response
+
+        return deserialized
+    get_nested_aggregation_by_group.metadata = {'url': '/api/portfoliogroups/{scope}/{code}/$aggregatenested'}
+
     def get_portfolio_group_commands(
             self, scope, code, from_as_at=None, to_as_at=None, sort_by=None, start=None, limit=None, filter=None, custom_headers=None, raw=False, **operation_config):
         """Gets all commands that modified the portfolio groups(s) with the
@@ -2348,9 +2407,9 @@ class LUSIDAPI(object):
          deserialized response
         :param operation_config: :ref:`Operation configuration
          overrides<msrest:optionsforoperations>`.
-        :return: ResourceListOfProcessedCommandDto or ClientRawResponse if
+        :return: ResourceListOfProcessedCommand or ClientRawResponse if
          raw=true
-        :rtype: ~lusid.models.ResourceListOfProcessedCommandDto or
+        :rtype: ~lusid.models.ResourceListOfProcessedCommand or
          ~msrest.pipeline.ClientRawResponse
         :raises:
          :class:`ErrorResponseException<lusid.models.ErrorResponseException>`
@@ -2394,7 +2453,7 @@ class LUSIDAPI(object):
         deserialized = None
 
         if response.status_code == 200:
-            deserialized = self._deserialize('ResourceListOfProcessedCommandDto', response)
+            deserialized = self._deserialize('ResourceListOfProcessedCommand', response)
 
         if raw:
             client_raw_response = ClientRawResponse(deserialized, response)
@@ -2422,8 +2481,8 @@ class LUSIDAPI(object):
          deserialized response
         :param operation_config: :ref:`Operation configuration
          overrides<msrest:optionsforoperations>`.
-        :return: ExpandedGroupDto or ClientRawResponse if raw=true
-        :rtype: ~lusid.models.ExpandedGroupDto or
+        :return: ExpandedGroup or ClientRawResponse if raw=true
+        :rtype: ~lusid.models.ExpandedGroup or
          ~msrest.pipeline.ClientRawResponse
         :raises:
          :class:`ErrorResponseException<lusid.models.ErrorResponseException>`
@@ -2461,7 +2520,7 @@ class LUSIDAPI(object):
         deserialized = None
 
         if response.status_code == 200:
-            deserialized = self._deserialize('ExpandedGroupDto', response)
+            deserialized = self._deserialize('ExpandedGroup', response)
 
         if raw:
             client_raw_response = ClientRawResponse(deserialized, response)
@@ -2485,8 +2544,8 @@ class LUSIDAPI(object):
          deserialized response
         :param operation_config: :ref:`Operation configuration
          overrides<msrest:optionsforoperations>`.
-        :return: PortfolioGroupDto or ClientRawResponse if raw=true
-        :rtype: ~lusid.models.PortfolioGroupDto or
+        :return: PortfolioGroup or ClientRawResponse if raw=true
+        :rtype: ~lusid.models.PortfolioGroup or
          ~msrest.pipeline.ClientRawResponse
         :raises:
          :class:`ErrorResponseException<lusid.models.ErrorResponseException>`
@@ -2525,7 +2584,7 @@ class LUSIDAPI(object):
         deserialized = None
 
         if response.status_code == 201:
-            deserialized = self._deserialize('PortfolioGroupDto', response)
+            deserialized = self._deserialize('PortfolioGroup', response)
 
         if raw:
             client_raw_response = ClientRawResponse(deserialized, response)
@@ -2551,8 +2610,8 @@ class LUSIDAPI(object):
          deserialized response
         :param operation_config: :ref:`Operation configuration
          overrides<msrest:optionsforoperations>`.
-        :return: PortfolioGroupDto or ClientRawResponse if raw=true
-        :rtype: ~lusid.models.PortfolioGroupDto or
+        :return: PortfolioGroup or ClientRawResponse if raw=true
+        :rtype: ~lusid.models.PortfolioGroup or
          ~msrest.pipeline.ClientRawResponse
         :raises:
          :class:`ErrorResponseException<lusid.models.ErrorResponseException>`
@@ -2586,7 +2645,7 @@ class LUSIDAPI(object):
         deserialized = None
 
         if response.status_code == 200:
-            deserialized = self._deserialize('PortfolioGroupDto', response)
+            deserialized = self._deserialize('PortfolioGroup', response)
 
         if raw:
             client_raw_response = ClientRawResponse(deserialized, response)
@@ -2610,8 +2669,8 @@ class LUSIDAPI(object):
          deserialized response
         :param operation_config: :ref:`Operation configuration
          overrides<msrest:optionsforoperations>`.
-        :return: PortfolioGroupDto or ClientRawResponse if raw=true
-        :rtype: ~lusid.models.PortfolioGroupDto or
+        :return: PortfolioGroup or ClientRawResponse if raw=true
+        :rtype: ~lusid.models.PortfolioGroup or
          ~msrest.pipeline.ClientRawResponse
         :raises:
          :class:`ErrorResponseException<lusid.models.ErrorResponseException>`
@@ -2650,7 +2709,7 @@ class LUSIDAPI(object):
         deserialized = None
 
         if response.status_code == 201:
-            deserialized = self._deserialize('PortfolioGroupDto', response)
+            deserialized = self._deserialize('PortfolioGroup', response)
 
         if raw:
             client_raw_response = ClientRawResponse(deserialized, response)
@@ -2676,8 +2735,8 @@ class LUSIDAPI(object):
          deserialized response
         :param operation_config: :ref:`Operation configuration
          overrides<msrest:optionsforoperations>`.
-        :return: PortfolioGroupDto or ClientRawResponse if raw=true
-        :rtype: ~lusid.models.PortfolioGroupDto or
+        :return: PortfolioGroup or ClientRawResponse if raw=true
+        :rtype: ~lusid.models.PortfolioGroup or
          ~msrest.pipeline.ClientRawResponse
         :raises:
          :class:`ErrorResponseException<lusid.models.ErrorResponseException>`
@@ -2711,7 +2770,7 @@ class LUSIDAPI(object):
         deserialized = None
 
         if response.status_code == 200:
-            deserialized = self._deserialize('PortfolioGroupDto', response)
+            deserialized = self._deserialize('PortfolioGroup', response)
 
         if raw:
             client_raw_response = ClientRawResponse(deserialized, response)
@@ -2809,8 +2868,8 @@ class LUSIDAPI(object):
          deserialized response
         :param operation_config: :ref:`Operation configuration
          overrides<msrest:optionsforoperations>`.
-        :return: ResourceListOfPortfolioDto or ClientRawResponse if raw=true
-        :rtype: ~lusid.models.ResourceListOfPortfolioDto or
+        :return: ResourceListOfPortfolio or ClientRawResponse if raw=true
+        :rtype: ~lusid.models.ResourceListOfPortfolio or
          ~msrest.pipeline.ClientRawResponse
         :raises:
          :class:`ErrorResponseException<lusid.models.ErrorResponseException>`
@@ -2853,7 +2912,7 @@ class LUSIDAPI(object):
         deserialized = None
 
         if response.status_code == 200:
-            deserialized = self._deserialize('ResourceListOfPortfolioDto', response)
+            deserialized = self._deserialize('ResourceListOfPortfolio', response)
 
         if raw:
             client_raw_response = ClientRawResponse(deserialized, response)
@@ -2881,9 +2940,8 @@ class LUSIDAPI(object):
          deserialized response
         :param operation_config: :ref:`Operation configuration
          overrides<msrest:optionsforoperations>`.
-        :return: PortfolioDto or ClientRawResponse if raw=true
-        :rtype: ~lusid.models.PortfolioDto or
-         ~msrest.pipeline.ClientRawResponse
+        :return: Portfolio or ClientRawResponse if raw=true
+        :rtype: ~lusid.models.Portfolio or ~msrest.pipeline.ClientRawResponse
         :raises:
          :class:`ErrorResponseException<lusid.models.ErrorResponseException>`
         """
@@ -2918,7 +2976,7 @@ class LUSIDAPI(object):
         deserialized = None
 
         if response.status_code == 200:
-            deserialized = self._deserialize('PortfolioDto', response)
+            deserialized = self._deserialize('Portfolio', response)
 
         if raw:
             client_raw_response = ClientRawResponse(deserialized, response)
@@ -2944,9 +3002,8 @@ class LUSIDAPI(object):
          deserialized response
         :param operation_config: :ref:`Operation configuration
          overrides<msrest:optionsforoperations>`.
-        :return: PortfolioDto or ClientRawResponse if raw=true
-        :rtype: ~lusid.models.PortfolioDto or
-         ~msrest.pipeline.ClientRawResponse
+        :return: Portfolio or ClientRawResponse if raw=true
+        :rtype: ~lusid.models.Portfolio or ~msrest.pipeline.ClientRawResponse
         :raises:
          :class:`ErrorResponseException<lusid.models.ErrorResponseException>`
         """
@@ -2986,7 +3043,7 @@ class LUSIDAPI(object):
         deserialized = None
 
         if response.status_code == 200:
-            deserialized = self._deserialize('PortfolioDto', response)
+            deserialized = self._deserialize('Portfolio', response)
 
         if raw:
             client_raw_response = ClientRawResponse(deserialized, response)
@@ -3155,9 +3212,9 @@ class LUSIDAPI(object):
          deserialized response
         :param operation_config: :ref:`Operation configuration
          overrides<msrest:optionsforoperations>`.
-        :return: ResourceListOfProcessedCommandDto or ClientRawResponse if
+        :return: ResourceListOfProcessedCommand or ClientRawResponse if
          raw=true
-        :rtype: ~lusid.models.ResourceListOfProcessedCommandDto or
+        :rtype: ~lusid.models.ResourceListOfProcessedCommand or
          ~msrest.pipeline.ClientRawResponse
         :raises:
          :class:`ErrorResponseException<lusid.models.ErrorResponseException>`
@@ -3195,7 +3252,7 @@ class LUSIDAPI(object):
         deserialized = None
 
         if response.status_code == 200:
-            deserialized = self._deserialize('ResourceListOfProcessedCommandDto', response)
+            deserialized = self._deserialize('ResourceListOfProcessedCommand', response)
 
         if raw:
             client_raw_response = ClientRawResponse(deserialized, response)
@@ -3231,8 +3288,8 @@ class LUSIDAPI(object):
          deserialized response
         :param operation_config: :ref:`Operation configuration
          overrides<msrest:optionsforoperations>`.
-        :return: PortfolioPropertiesDto or ClientRawResponse if raw=true
-        :rtype: ~lusid.models.PortfolioPropertiesDto or
+        :return: PortfolioProperties or ClientRawResponse if raw=true
+        :rtype: ~lusid.models.PortfolioProperties or
          ~msrest.pipeline.ClientRawResponse
         :raises:
          :class:`ErrorResponseException<lusid.models.ErrorResponseException>`
@@ -3274,7 +3331,7 @@ class LUSIDAPI(object):
         deserialized = None
 
         if response.status_code == 200:
-            deserialized = self._deserialize('PortfolioPropertiesDto', response)
+            deserialized = self._deserialize('PortfolioProperties', response)
 
         if raw:
             client_raw_response = ClientRawResponse(deserialized, response)
@@ -3303,8 +3360,8 @@ class LUSIDAPI(object):
          deserialized response
         :param operation_config: :ref:`Operation configuration
          overrides<msrest:optionsforoperations>`.
-        :return: PortfolioPropertiesDto or ClientRawResponse if raw=true
-        :rtype: ~lusid.models.PortfolioPropertiesDto or
+        :return: PortfolioProperties or ClientRawResponse if raw=true
+        :rtype: ~lusid.models.PortfolioProperties or
          ~msrest.pipeline.ClientRawResponse
         :raises:
          :class:`ErrorResponseException<lusid.models.ErrorResponseException>`
@@ -3345,7 +3402,7 @@ class LUSIDAPI(object):
         deserialized = None
 
         if response.status_code == 200:
-            deserialized = self._deserialize('PortfolioPropertiesDto', response)
+            deserialized = self._deserialize('PortfolioProperties', response)
 
         if raw:
             client_raw_response = ClientRawResponse(deserialized, response)
@@ -3512,9 +3569,9 @@ class LUSIDAPI(object):
          deserialized response
         :param operation_config: :ref:`Operation configuration
          overrides<msrest:optionsforoperations>`.
-        :return: ResourceListOfPropertyDefinitionDto or ClientRawResponse if
+        :return: ResourceListOfPropertyDefinition or ClientRawResponse if
          raw=true
-        :rtype: ~lusid.models.ResourceListOfPropertyDefinitionDto or
+        :rtype: ~lusid.models.ResourceListOfPropertyDefinition or
          ~msrest.pipeline.ClientRawResponse
         :raises:
          :class:`ErrorResponseException<lusid.models.ErrorResponseException>`
@@ -3556,7 +3613,7 @@ class LUSIDAPI(object):
         deserialized = None
 
         if response.status_code == 200:
-            deserialized = self._deserialize('ResourceListOfPropertyDefinitionDto', response)
+            deserialized = self._deserialize('ResourceListOfPropertyDefinition', response)
 
         if raw:
             client_raw_response = ClientRawResponse(deserialized, response)
@@ -3586,9 +3643,9 @@ class LUSIDAPI(object):
          deserialized response
         :param operation_config: :ref:`Operation configuration
          overrides<msrest:optionsforoperations>`.
-        :return: ResourceListOfPropertyDefinitionDto or ClientRawResponse if
+        :return: ResourceListOfPropertyDefinition or ClientRawResponse if
          raw=true
-        :rtype: ~lusid.models.ResourceListOfPropertyDefinitionDto or
+        :rtype: ~lusid.models.ResourceListOfPropertyDefinition or
          ~msrest.pipeline.ClientRawResponse
         :raises:
          :class:`ErrorResponseException<lusid.models.ErrorResponseException>`
@@ -3627,7 +3684,7 @@ class LUSIDAPI(object):
         deserialized = None
 
         if response.status_code == 200:
-            deserialized = self._deserialize('ResourceListOfPropertyDefinitionDto', response)
+            deserialized = self._deserialize('ResourceListOfPropertyDefinition', response)
 
         if raw:
             client_raw_response = ClientRawResponse(deserialized, response)
@@ -3647,8 +3704,8 @@ class LUSIDAPI(object):
          deserialized response
         :param operation_config: :ref:`Operation configuration
          overrides<msrest:optionsforoperations>`.
-        :return: PropertyDefinitionDto or ClientRawResponse if raw=true
-        :rtype: ~lusid.models.PropertyDefinitionDto or
+        :return: PropertyDefinition or ClientRawResponse if raw=true
+        :rtype: ~lusid.models.PropertyDefinition or
          ~msrest.pipeline.ClientRawResponse
         :raises:
          :class:`ErrorResponseException<lusid.models.ErrorResponseException>`
@@ -3682,7 +3739,7 @@ class LUSIDAPI(object):
         deserialized = None
 
         if response.status_code == 201:
-            deserialized = self._deserialize('PropertyDefinitionDto', response)
+            deserialized = self._deserialize('PropertyDefinition', response)
 
         if raw:
             client_raw_response = ClientRawResponse(deserialized, response)
@@ -3709,8 +3766,8 @@ class LUSIDAPI(object):
          deserialized response
         :param operation_config: :ref:`Operation configuration
          overrides<msrest:optionsforoperations>`.
-        :return: PropertyDefinitionDto or ClientRawResponse if raw=true
-        :rtype: ~lusid.models.PropertyDefinitionDto or
+        :return: PropertyDefinition or ClientRawResponse if raw=true
+        :rtype: ~lusid.models.PropertyDefinition or
          ~msrest.pipeline.ClientRawResponse
         :raises:
          :class:`ErrorResponseException<lusid.models.ErrorResponseException>`
@@ -3745,7 +3802,7 @@ class LUSIDAPI(object):
         deserialized = None
 
         if response.status_code == 200:
-            deserialized = self._deserialize('PropertyDefinitionDto', response)
+            deserialized = self._deserialize('PropertyDefinition', response)
 
         if raw:
             client_raw_response = ClientRawResponse(deserialized, response)
@@ -3772,8 +3829,8 @@ class LUSIDAPI(object):
          deserialized response
         :param operation_config: :ref:`Operation configuration
          overrides<msrest:optionsforoperations>`.
-        :return: PropertyDefinitionDto or ClientRawResponse if raw=true
-        :rtype: ~lusid.models.PropertyDefinitionDto or
+        :return: PropertyDefinition or ClientRawResponse if raw=true
+        :rtype: ~lusid.models.PropertyDefinition or
          ~msrest.pipeline.ClientRawResponse
         :raises:
          :class:`ErrorResponseException<lusid.models.ErrorResponseException>`
@@ -3813,7 +3870,7 @@ class LUSIDAPI(object):
         deserialized = None
 
         if response.status_code == 200:
-            deserialized = self._deserialize('PropertyDefinitionDto', response)
+            deserialized = self._deserialize('PropertyDefinition', response)
 
         if raw:
             client_raw_response = ClientRawResponse(deserialized, response)
@@ -3892,9 +3949,9 @@ class LUSIDAPI(object):
          deserialized response
         :param operation_config: :ref:`Operation configuration
          overrides<msrest:optionsforoperations>`.
-        :return: ResourceListOfReconciliationBreakDto or ClientRawResponse if
+        :return: ResourceListOfReconciliationBreak or ClientRawResponse if
          raw=true
-        :rtype: ~lusid.models.ResourceListOfReconciliationBreakDto or
+        :rtype: ~lusid.models.ResourceListOfReconciliationBreak or
          ~msrest.pipeline.ClientRawResponse
         :raises:
          :class:`ErrorResponseException<lusid.models.ErrorResponseException>`
@@ -3928,7 +3985,7 @@ class LUSIDAPI(object):
         deserialized = None
 
         if response.status_code == 200:
-            deserialized = self._deserialize('ResourceListOfReconciliationBreakDto', response)
+            deserialized = self._deserialize('ResourceListOfReconciliationBreak', response)
 
         if raw:
             client_raw_response = ClientRawResponse(deserialized, response)
@@ -3951,9 +4008,8 @@ class LUSIDAPI(object):
          deserialized response
         :param operation_config: :ref:`Operation configuration
          overrides<msrest:optionsforoperations>`.
-        :return: PortfolioDto or ClientRawResponse if raw=true
-        :rtype: ~lusid.models.PortfolioDto or
-         ~msrest.pipeline.ClientRawResponse
+        :return: Portfolio or ClientRawResponse if raw=true
+        :rtype: ~lusid.models.Portfolio or ~msrest.pipeline.ClientRawResponse
         :raises:
          :class:`ErrorResponseException<lusid.models.ErrorResponseException>`
         """
@@ -3990,7 +4046,7 @@ class LUSIDAPI(object):
         deserialized = None
 
         if response.status_code == 201:
-            deserialized = self._deserialize('PortfolioDto', response)
+            deserialized = self._deserialize('Portfolio', response)
 
         if raw:
             client_raw_response = ClientRawResponse(deserialized, response)
@@ -4022,10 +4078,10 @@ class LUSIDAPI(object):
          deserialized response
         :param operation_config: :ref:`Operation configuration
          overrides<msrest:optionsforoperations>`.
-        :return: ResourceListOfReferencePortfolioConstituentDto or
+        :return: ResourceListOfReferencePortfolioConstituent or
          ClientRawResponse if raw=true
-        :rtype: ~lusid.models.ResourceListOfReferencePortfolioConstituentDto
-         or ~msrest.pipeline.ClientRawResponse
+        :rtype: ~lusid.models.ResourceListOfReferencePortfolioConstituent or
+         ~msrest.pipeline.ClientRawResponse
         :raises:
          :class:`ErrorResponseException<lusid.models.ErrorResponseException>`
         """
@@ -4065,7 +4121,7 @@ class LUSIDAPI(object):
         deserialized = None
 
         if response.status_code == 200:
-            deserialized = self._deserialize('ResourceListOfReferencePortfolioConstituentDto', response)
+            deserialized = self._deserialize('ResourceListOfReferencePortfolioConstituent', response)
 
         if raw:
             client_raw_response = ClientRawResponse(deserialized, response)
@@ -4092,9 +4148,9 @@ class LUSIDAPI(object):
          deserialized response
         :param operation_config: :ref:`Operation configuration
          overrides<msrest:optionsforoperations>`.
-        :return: UpsertReferencePortfolioConstituentsDto or ClientRawResponse
-         if raw=true
-        :rtype: ~lusid.models.UpsertReferencePortfolioConstituentsDto or
+        :return: UpsertReferencePortfolioConstituentsResponse or
+         ClientRawResponse if raw=true
+        :rtype: ~lusid.models.UpsertReferencePortfolioConstituentsResponse or
          ~msrest.pipeline.ClientRawResponse
         :raises:
          :class:`ErrorResponseException<lusid.models.ErrorResponseException>`
@@ -4134,7 +4190,7 @@ class LUSIDAPI(object):
         deserialized = None
 
         if response.status_code == 200:
-            deserialized = self._deserialize('UpsertReferencePortfolioConstituentsDto', response)
+            deserialized = self._deserialize('UpsertReferencePortfolioConstituentsResponse', response)
 
         if raw:
             client_raw_response = ClientRawResponse(deserialized, response)
@@ -4166,8 +4222,8 @@ class LUSIDAPI(object):
          deserialized response
         :param operation_config: :ref:`Operation configuration
          overrides<msrest:optionsforoperations>`.
-        :return: ResultsDto or ClientRawResponse if raw=true
-        :rtype: ~lusid.models.ResultsDto or ~msrest.pipeline.ClientRawResponse
+        :return: Results or ClientRawResponse if raw=true
+        :rtype: ~lusid.models.Results or ~msrest.pipeline.ClientRawResponse
         :raises:
          :class:`ErrorResponseException<lusid.models.ErrorResponseException>`
         """
@@ -4207,7 +4263,7 @@ class LUSIDAPI(object):
         deserialized = None
 
         if response.status_code == 200:
-            deserialized = self._deserialize('ResultsDto', response)
+            deserialized = self._deserialize('Results', response)
 
         if raw:
             client_raw_response = ClientRawResponse(deserialized, response)
@@ -4228,14 +4284,14 @@ class LUSIDAPI(object):
         :param date_parameter: The date for which the data is relevant
         :type date_parameter: datetime
         :param request: The results to upload
-        :type request: ~lusid.models.CreateResultsRequest
+        :type request: ~lusid.models.CreateResults
         :param dict custom_headers: headers that will be added to the request
         :param bool raw: returns the direct response alongside the
          deserialized response
         :param operation_config: :ref:`Operation configuration
          overrides<msrest:optionsforoperations>`.
-        :return: ResultsDto or ClientRawResponse if raw=true
-        :rtype: ~lusid.models.ResultsDto or ~msrest.pipeline.ClientRawResponse
+        :return: Results or ClientRawResponse if raw=true
+        :rtype: ~lusid.models.Results or ~msrest.pipeline.ClientRawResponse
         :raises:
          :class:`ErrorResponseException<lusid.models.ErrorResponseException>`
         """
@@ -4259,7 +4315,7 @@ class LUSIDAPI(object):
 
         # Construct body
         if request is not None:
-            body_content = self._serialize.body(request, 'CreateResultsRequest')
+            body_content = self._serialize.body(request, 'CreateResults')
         else:
             body_content = None
 
@@ -4274,7 +4330,7 @@ class LUSIDAPI(object):
         deserialized = None
 
         if response.status_code == 200:
-            deserialized = self._deserialize('ResultsDto', response)
+            deserialized = self._deserialize('Results', response)
 
         if raw:
             client_raw_response = ClientRawResponse(deserialized, response)
@@ -4416,8 +4472,8 @@ class LUSIDAPI(object):
          deserialized response
         :param operation_config: :ref:`Operation configuration
          overrides<msrest:optionsforoperations>`.
-        :return: SchemaDto or ClientRawResponse if raw=true
-        :rtype: ~lusid.models.SchemaDto or ~msrest.pipeline.ClientRawResponse
+        :return: Schema or ClientRawResponse if raw=true
+        :rtype: ~lusid.models.Schema or ~msrest.pipeline.ClientRawResponse
         :raises:
          :class:`ErrorResponseException<lusid.models.ErrorResponseException>`
         """
@@ -4447,7 +4503,7 @@ class LUSIDAPI(object):
         deserialized = None
 
         if response.status_code == 200:
-            deserialized = self._deserialize('SchemaDto', response)
+            deserialized = self._deserialize('Schema', response)
 
         if raw:
             client_raw_response = ClientRawResponse(deserialized, response)
@@ -4471,8 +4527,8 @@ class LUSIDAPI(object):
          deserialized response
         :param operation_config: :ref:`Operation configuration
          overrides<msrest:optionsforoperations>`.
-        :return: PropertySchemaDto or ClientRawResponse if raw=true
-        :rtype: ~lusid.models.PropertySchemaDto or
+        :return: PropertySchema or ClientRawResponse if raw=true
+        :rtype: ~lusid.models.PropertySchema or
          ~msrest.pipeline.ClientRawResponse
         :raises:
          :class:`ErrorResponseException<lusid.models.ErrorResponseException>`
@@ -4503,7 +4559,7 @@ class LUSIDAPI(object):
         deserialized = None
 
         if response.status_code == 200:
-            deserialized = self._deserialize('PropertySchemaDto', response)
+            deserialized = self._deserialize('PropertySchema', response)
 
         if raw:
             client_raw_response = ClientRawResponse(deserialized, response)
@@ -4579,9 +4635,9 @@ class LUSIDAPI(object):
          deserialized response
         :param operation_config: :ref:`Operation configuration
          overrides<msrest:optionsforoperations>`.
-        :return: ResourceListOfTransactionMetaDataDto or ClientRawResponse if
+        :return: ResourceListOfTransactionMetaData or ClientRawResponse if
          raw=true
-        :rtype: ~lusid.models.ResourceListOfTransactionMetaDataDto or
+        :rtype: ~lusid.models.ResourceListOfTransactionMetaData or
          ~msrest.pipeline.ClientRawResponse
         :raises:
          :class:`ErrorResponseException<lusid.models.ErrorResponseException>`
@@ -4608,7 +4664,7 @@ class LUSIDAPI(object):
         deserialized = None
 
         if response.status_code == 200:
-            deserialized = self._deserialize('ResourceListOfTransactionMetaDataDto', response)
+            deserialized = self._deserialize('ResourceListOfTransactionMetaData', response)
 
         if raw:
             client_raw_response = ClientRawResponse(deserialized, response)
@@ -4622,15 +4678,15 @@ class LUSIDAPI(object):
         """Uploads a list of transaction types to be used by the movements engine.
 
         :param types:
-        :type types: list[~lusid.models.TransactionMetaDataRequest]
+        :type types: list[~lusid.models.TransactionConfigurationDataRequest]
         :param dict custom_headers: headers that will be added to the request
         :param bool raw: returns the direct response alongside the
          deserialized response
         :param operation_config: :ref:`Operation configuration
          overrides<msrest:optionsforoperations>`.
-        :return: ResourceListOfTransactionMetaDataDto or ClientRawResponse if
+        :return: ResourceListOfTransactionMetaData or ClientRawResponse if
          raw=true
-        :rtype: ~lusid.models.ResourceListOfTransactionMetaDataDto or
+        :rtype: ~lusid.models.ResourceListOfTransactionMetaData or
          ~msrest.pipeline.ClientRawResponse
         :raises:
          :class:`ErrorResponseException<lusid.models.ErrorResponseException>`
@@ -4649,7 +4705,7 @@ class LUSIDAPI(object):
 
         # Construct body
         if types is not None:
-            body_content = self._serialize.body(types, '[TransactionMetaDataRequest]')
+            body_content = self._serialize.body(types, '[TransactionConfigurationDataRequest]')
         else:
             body_content = None
 
@@ -4664,7 +4720,7 @@ class LUSIDAPI(object):
         deserialized = None
 
         if response.status_code == 200:
-            deserialized = self._deserialize('ResourceListOfTransactionMetaDataDto', response)
+            deserialized = self._deserialize('ResourceListOfTransactionMetaData', response)
 
         if raw:
             client_raw_response = ClientRawResponse(deserialized, response)
@@ -4678,14 +4734,14 @@ class LUSIDAPI(object):
         """Adds a new transaction type movement to the list of existing types.
 
         :param type:
-        :type type: ~lusid.models.TransactionMetaDataRequest
+        :type type: ~lusid.models.TransactionConfigurationDataRequest
         :param dict custom_headers: headers that will be added to the request
         :param bool raw: returns the direct response alongside the
          deserialized response
         :param operation_config: :ref:`Operation configuration
          overrides<msrest:optionsforoperations>`.
-        :return: TransactionMetaDataDto or ClientRawResponse if raw=true
-        :rtype: ~lusid.models.TransactionMetaDataDto or
+        :return: TransactionConfigurationData or ClientRawResponse if raw=true
+        :rtype: ~lusid.models.TransactionConfigurationData or
          ~msrest.pipeline.ClientRawResponse
         :raises:
          :class:`ErrorResponseException<lusid.models.ErrorResponseException>`
@@ -4704,7 +4760,7 @@ class LUSIDAPI(object):
 
         # Construct body
         if type is not None:
-            body_content = self._serialize.body(type, 'TransactionMetaDataRequest')
+            body_content = self._serialize.body(type, 'TransactionConfigurationDataRequest')
         else:
             body_content = None
 
@@ -4719,7 +4775,7 @@ class LUSIDAPI(object):
         deserialized = None
 
         if response.status_code == 201:
-            deserialized = self._deserialize('TransactionMetaDataDto', response)
+            deserialized = self._deserialize('TransactionConfigurationData', response)
 
         if raw:
             client_raw_response = ClientRawResponse(deserialized, response)
@@ -4743,9 +4799,8 @@ class LUSIDAPI(object):
          deserialized response
         :param operation_config: :ref:`Operation configuration
          overrides<msrest:optionsforoperations>`.
-        :return: PortfolioDto or ClientRawResponse if raw=true
-        :rtype: ~lusid.models.PortfolioDto or
-         ~msrest.pipeline.ClientRawResponse
+        :return: Portfolio or ClientRawResponse if raw=true
+        :rtype: ~lusid.models.Portfolio or ~msrest.pipeline.ClientRawResponse
         :raises:
          :class:`ErrorResponseException<lusid.models.ErrorResponseException>`
         """
@@ -4782,7 +4837,7 @@ class LUSIDAPI(object):
         deserialized = None
 
         if response.status_code == 201:
-            deserialized = self._deserialize('PortfolioDto', response)
+            deserialized = self._deserialize('Portfolio', response)
 
         if raw:
             client_raw_response = ClientRawResponse(deserialized, response)
@@ -4811,8 +4866,8 @@ class LUSIDAPI(object):
          deserialized response
         :param operation_config: :ref:`Operation configuration
          overrides<msrest:optionsforoperations>`.
-        :return: PortfolioDetailsDto or ClientRawResponse if raw=true
-        :rtype: ~lusid.models.PortfolioDetailsDto or
+        :return: PortfolioDetails or ClientRawResponse if raw=true
+        :rtype: ~lusid.models.PortfolioDetails or
          ~msrest.pipeline.ClientRawResponse
         :raises:
          :class:`ErrorResponseException<lusid.models.ErrorResponseException>`
@@ -4848,7 +4903,7 @@ class LUSIDAPI(object):
         deserialized = None
 
         if response.status_code == 200:
-            deserialized = self._deserialize('PortfolioDetailsDto', response)
+            deserialized = self._deserialize('PortfolioDetails', response)
 
         if raw:
             client_raw_response = ClientRawResponse(deserialized, response)
@@ -4870,7 +4925,7 @@ class LUSIDAPI(object):
         :param code: Code for the portfolio
         :type code: str
         :param details:
-        :type details: ~lusid.models.PortfolioDetailsRequest
+        :type details: ~lusid.models.CreatePortfolioDetails
         :param effective_at: The effective date of the change
         :type effective_at: datetime
         :param dict custom_headers: headers that will be added to the request
@@ -4878,8 +4933,8 @@ class LUSIDAPI(object):
          deserialized response
         :param operation_config: :ref:`Operation configuration
          overrides<msrest:optionsforoperations>`.
-        :return: PortfolioDetailsDto or ClientRawResponse if raw=true
-        :rtype: ~lusid.models.PortfolioDetailsDto or
+        :return: PortfolioDetails or ClientRawResponse if raw=true
+        :rtype: ~lusid.models.PortfolioDetails or
          ~msrest.pipeline.ClientRawResponse
         :raises:
          :class:`ErrorResponseException<lusid.models.ErrorResponseException>`
@@ -4905,7 +4960,7 @@ class LUSIDAPI(object):
 
         # Construct body
         if details is not None:
-            body_content = self._serialize.body(details, 'PortfolioDetailsRequest')
+            body_content = self._serialize.body(details, 'CreatePortfolioDetails')
         else:
             body_content = None
 
@@ -4920,7 +4975,7 @@ class LUSIDAPI(object):
         deserialized = None
 
         if response.status_code == 200:
-            deserialized = self._deserialize('PortfolioDetailsDto', response)
+            deserialized = self._deserialize('PortfolioDetails', response)
 
         if raw:
             client_raw_response = ClientRawResponse(deserialized, response)
@@ -4960,9 +5015,9 @@ class LUSIDAPI(object):
          deserialized response
         :param operation_config: :ref:`Operation configuration
          overrides<msrest:optionsforoperations>`.
-        :return: VersionedResourceListOfHoldingDto or ClientRawResponse if
+        :return: VersionedResourceListOfHolding or ClientRawResponse if
          raw=true
-        :rtype: ~lusid.models.VersionedResourceListOfHoldingDto or
+        :rtype: ~lusid.models.VersionedResourceListOfHolding or
          ~msrest.pipeline.ClientRawResponse
         :raises:
          :class:`ErrorResponseException<lusid.models.ErrorResponseException>`
@@ -5008,7 +5063,7 @@ class LUSIDAPI(object):
         deserialized = None
 
         if response.status_code == 200:
-            deserialized = self._deserialize('VersionedResourceListOfHoldingDto', response)
+            deserialized = self._deserialize('VersionedResourceListOfHolding', response)
 
         if raw:
             client_raw_response = ClientRawResponse(deserialized, response)
@@ -5037,8 +5092,8 @@ class LUSIDAPI(object):
          deserialized response
         :param operation_config: :ref:`Operation configuration
          overrides<msrest:optionsforoperations>`.
-        :return: AdjustHoldingsDto or ClientRawResponse if raw=true
-        :rtype: ~lusid.models.AdjustHoldingsDto or
+        :return: AdjustHolding or ClientRawResponse if raw=true
+        :rtype: ~lusid.models.AdjustHolding or
          ~msrest.pipeline.ClientRawResponse
         :raises:
          :class:`ErrorResponseException<lusid.models.ErrorResponseException>`
@@ -5078,7 +5133,7 @@ class LUSIDAPI(object):
         deserialized = None
 
         if response.status_code == 200:
-            deserialized = self._deserialize('AdjustHoldingsDto', response)
+            deserialized = self._deserialize('AdjustHolding', response)
 
         if raw:
             client_raw_response = ClientRawResponse(deserialized, response)
@@ -5107,8 +5162,8 @@ class LUSIDAPI(object):
          deserialized response
         :param operation_config: :ref:`Operation configuration
          overrides<msrest:optionsforoperations>`.
-        :return: AdjustHoldingsDto or ClientRawResponse if raw=true
-        :rtype: ~lusid.models.AdjustHoldingsDto or
+        :return: AdjustHolding or ClientRawResponse if raw=true
+        :rtype: ~lusid.models.AdjustHolding or
          ~msrest.pipeline.ClientRawResponse
         :raises:
          :class:`ErrorResponseException<lusid.models.ErrorResponseException>`
@@ -5148,7 +5203,7 @@ class LUSIDAPI(object):
         deserialized = None
 
         if response.status_code == 200:
-            deserialized = self._deserialize('AdjustHoldingsDto', response)
+            deserialized = self._deserialize('AdjustHolding', response)
 
         if raw:
             client_raw_response = ClientRawResponse(deserialized, response)
@@ -5238,8 +5293,9 @@ class LUSIDAPI(object):
          deserialized response
         :param operation_config: :ref:`Operation configuration
          overrides<msrest:optionsforoperations>`.
-        :return: HoldingsAdjustmentHeaderDto or ClientRawResponse if raw=true
-        :rtype: ~lusid.models.HoldingsAdjustmentHeaderDto or
+        :return: ResourceListOfHoldingsAdjustmentHeader or ClientRawResponse
+         if raw=true
+        :rtype: ~lusid.models.ResourceListOfHoldingsAdjustmentHeader or
          ~msrest.pipeline.ClientRawResponse
         :raises:
          :class:`ErrorResponseException<lusid.models.ErrorResponseException>`
@@ -5277,7 +5333,7 @@ class LUSIDAPI(object):
         deserialized = None
 
         if response.status_code == 200:
-            deserialized = self._deserialize('HoldingsAdjustmentHeaderDto', response)
+            deserialized = self._deserialize('ResourceListOfHoldingsAdjustmentHeader', response)
 
         if raw:
             client_raw_response = ClientRawResponse(deserialized, response)
@@ -5305,8 +5361,8 @@ class LUSIDAPI(object):
          deserialized response
         :param operation_config: :ref:`Operation configuration
          overrides<msrest:optionsforoperations>`.
-        :return: HoldingsAdjustmentDto or ClientRawResponse if raw=true
-        :rtype: ~lusid.models.HoldingsAdjustmentDto or
+        :return: HoldingsAdjustment or ClientRawResponse if raw=true
+        :rtype: ~lusid.models.HoldingsAdjustment or
          ~msrest.pipeline.ClientRawResponse
         :raises:
          :class:`ErrorResponseException<lusid.models.ErrorResponseException>`
@@ -5341,7 +5397,7 @@ class LUSIDAPI(object):
         deserialized = None
 
         if response.status_code == 200:
-            deserialized = self._deserialize('HoldingsAdjustmentDto', response)
+            deserialized = self._deserialize('HoldingsAdjustment', response)
 
         if raw:
             client_raw_response = ClientRawResponse(deserialized, response)
@@ -5384,9 +5440,9 @@ class LUSIDAPI(object):
          deserialized response
         :param operation_config: :ref:`Operation configuration
          overrides<msrest:optionsforoperations>`.
-        :return: VersionedResourceListOfTransactionDto or ClientRawResponse if
+        :return: VersionedResourceListOfTransaction or ClientRawResponse if
          raw=true
-        :rtype: ~lusid.models.VersionedResourceListOfTransactionDto or
+        :rtype: ~lusid.models.VersionedResourceListOfTransaction or
          ~msrest.pipeline.ClientRawResponse
         :raises:
          :class:`ErrorResponseException<lusid.models.ErrorResponseException>`
@@ -5434,7 +5490,7 @@ class LUSIDAPI(object):
         deserialized = None
 
         if response.status_code == 200:
-            deserialized = self._deserialize('VersionedResourceListOfTransactionDto', response)
+            deserialized = self._deserialize('VersionedResourceListOfTransaction', response)
 
         if raw:
             client_raw_response = ClientRawResponse(deserialized, response)
@@ -5458,9 +5514,8 @@ class LUSIDAPI(object):
          deserialized response
         :param operation_config: :ref:`Operation configuration
          overrides<msrest:optionsforoperations>`.
-        :return: UpsertPortfolioTransactionsDto or ClientRawResponse if
-         raw=true
-        :rtype: ~lusid.models.UpsertPortfolioTransactionsDto or
+        :return: UpsertPortfolioTransactions or ClientRawResponse if raw=true
+        :rtype: ~lusid.models.UpsertPortfolioTransactions or
          ~msrest.pipeline.ClientRawResponse
         :raises:
          :class:`ErrorResponseException<lusid.models.ErrorResponseException>`
@@ -5499,7 +5554,7 @@ class LUSIDAPI(object):
         deserialized = None
 
         if response.status_code == 200:
-            deserialized = self._deserialize('UpsertPortfolioTransactionsDto', response)
+            deserialized = self._deserialize('UpsertPortfolioTransactions', response)
 
         if raw:
             client_raw_response = ClientRawResponse(deserialized, response)
@@ -5589,8 +5644,9 @@ class LUSIDAPI(object):
          deserialized response
         :param operation_config: :ref:`Operation configuration
          overrides<msrest:optionsforoperations>`.
-        :return: AddTransactionPropertyDto or ClientRawResponse if raw=true
-        :rtype: ~lusid.models.AddTransactionPropertyDto or
+        :return: AddTransactionPropertyResponse or ClientRawResponse if
+         raw=true
+        :rtype: ~lusid.models.AddTransactionPropertyResponse or
          ~msrest.pipeline.ClientRawResponse
         :raises:
          :class:`ErrorResponseException<lusid.models.ErrorResponseException>`
@@ -5630,7 +5686,7 @@ class LUSIDAPI(object):
         deserialized = None
 
         if response.status_code == 201:
-            deserialized = self._deserialize('AddTransactionPropertyDto', response)
+            deserialized = self._deserialize('AddTransactionPropertyResponse', response)
 
         if raw:
             client_raw_response = ClientRawResponse(deserialized, response)
@@ -5732,9 +5788,9 @@ class LUSIDAPI(object):
          deserialized response
         :param operation_config: :ref:`Operation configuration
          overrides<msrest:optionsforoperations>`.
-        :return: VersionedResourceListOfOutputTransactionDto or
-         ClientRawResponse if raw=true
-        :rtype: ~lusid.models.VersionedResourceListOfOutputTransactionDto or
+        :return: VersionedResourceListOfOutputTransaction or ClientRawResponse
+         if raw=true
+        :rtype: ~lusid.models.VersionedResourceListOfOutputTransaction or
          ~msrest.pipeline.ClientRawResponse
         :raises:
          :class:`ErrorResponseException<lusid.models.ErrorResponseException>`
@@ -5785,7 +5841,7 @@ class LUSIDAPI(object):
         deserialized = None
 
         if response.status_code == 200:
-            deserialized = self._deserialize('VersionedResourceListOfOutputTransactionDto', response)
+            deserialized = self._deserialize('VersionedResourceListOfOutputTransaction', response)
 
         if raw:
             client_raw_response = ClientRawResponse(deserialized, response)

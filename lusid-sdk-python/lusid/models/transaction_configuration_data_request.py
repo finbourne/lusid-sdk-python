@@ -24,34 +24,36 @@
 from msrest.serialization import Model
 
 
-class CreateReferencePortfolioRequest(Model):
-    """CreateReferencePortfolioRequest.
+class TransactionConfigurationDataRequest(Model):
+    """TransactionConfigurationDataRequest.
 
-    :param display_name:
-    :type display_name: str
-    :param description:
-    :type description: str
-    :param code:
-    :type code: str
-    :param created:
-    :type created: datetime
+    Variables are only populated by the server, and will be ignored when
+    sending a request.
+
+    :param aliases: List of transaction codes that map to this specific
+     transaction model
+    :type aliases: list[~lusid.models.TransactionConfigurationTypeAlias]
+    :param movements: Movement data for the transaction code
+    :type movements:
+     list[~lusid.models.TransactionConfigurationMovementDataRequest]
+    :ivar properties:
+    :vartype properties: dict[str, ~lusid.models.CreatePropertyRequest]
     """
 
     _validation = {
-        'display_name': {'required': True},
-        'code': {'required': True},
+        'aliases': {'required': True},
+        'movements': {'required': True},
+        'properties': {'readonly': True},
     }
 
     _attribute_map = {
-        'display_name': {'key': 'displayName', 'type': 'str'},
-        'description': {'key': 'description', 'type': 'str'},
-        'code': {'key': 'code', 'type': 'str'},
-        'created': {'key': 'created', 'type': 'iso-8601'},
+        'aliases': {'key': 'aliases', 'type': '[TransactionConfigurationTypeAlias]'},
+        'movements': {'key': 'movements', 'type': '[TransactionConfigurationMovementDataRequest]'},
+        'properties': {'key': 'properties', 'type': '{CreatePropertyRequest}'},
     }
 
-    def __init__(self, display_name, code, description=None, created=None):
-        super(CreateReferencePortfolioRequest, self).__init__()
-        self.display_name = display_name
-        self.description = description
-        self.code = code
-        self.created = created
+    def __init__(self, aliases, movements):
+        super(TransactionConfigurationDataRequest, self).__init__()
+        self.aliases = aliases
+        self.movements = movements
+        self.properties = None

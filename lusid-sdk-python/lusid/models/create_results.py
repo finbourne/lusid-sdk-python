@@ -21,5 +21,32 @@
 # SOFTWARE.
 # --------------------------------------------------------------------------
 
-VERSION = "0.5.1516"
+from msrest.serialization import Model
 
+
+class CreateResults(Model):
+    """CreateResults.
+
+    :param data:
+    :type data: object
+    :param scope:
+    :type scope: str
+    :param key:
+    :type key: str
+    :param date_property:
+    :type date_property: datetime
+    """
+
+    _attribute_map = {
+        'data': {'key': 'data', 'type': 'object'},
+        'scope': {'key': 'scope', 'type': 'str'},
+        'key': {'key': 'key', 'type': 'str'},
+        'date_property': {'key': 'date', 'type': 'iso-8601'},
+    }
+
+    def __init__(self, data=None, scope=None, key=None, date_property=None):
+        super(CreateResults, self).__init__()
+        self.data = data
+        self.scope = scope
+        self.key = key
+        self.date_property = date_property

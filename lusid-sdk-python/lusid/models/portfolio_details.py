@@ -21,5 +21,36 @@
 # SOFTWARE.
 # --------------------------------------------------------------------------
 
-VERSION = "0.5.1516"
+from msrest.serialization import Model
 
+
+class PortfolioDetails(Model):
+    """PortfolioDetails.
+
+    :param href:
+    :type href: str
+    :param origin_portfolio_id:
+    :type origin_portfolio_id: ~lusid.models.ResourceId
+    :param version: The version of the portfolio
+    :type version: ~lusid.models.Version
+    :param base_currency:
+    :type base_currency: str
+    :param links:
+    :type links: list[~lusid.models.Link]
+    """
+
+    _attribute_map = {
+        'href': {'key': 'href', 'type': 'str'},
+        'origin_portfolio_id': {'key': 'originPortfolioId', 'type': 'ResourceId'},
+        'version': {'key': 'version', 'type': 'Version'},
+        'base_currency': {'key': 'baseCurrency', 'type': 'str'},
+        'links': {'key': 'links', 'type': '[Link]'},
+    }
+
+    def __init__(self, href=None, origin_portfolio_id=None, version=None, base_currency=None, links=None):
+        super(PortfolioDetails, self).__init__()
+        self.href = href
+        self.origin_portfolio_id = origin_portfolio_id
+        self.version = version
+        self.base_currency = base_currency
+        self.links = links

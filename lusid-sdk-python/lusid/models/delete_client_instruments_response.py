@@ -21,5 +21,28 @@
 # SOFTWARE.
 # --------------------------------------------------------------------------
 
-VERSION = "0.5.1516"
+from msrest.serialization import Model
 
+
+class DeleteClientInstrumentsResponse(Model):
+    """DeleteClientInstrumentsResponse.
+
+    :param href:
+    :type href: str
+    :param failed:
+    :type failed: dict[str, ~lusid.models.ErrorDetail]
+    :param links:
+    :type links: list[~lusid.models.Link]
+    """
+
+    _attribute_map = {
+        'href': {'key': 'href', 'type': 'str'},
+        'failed': {'key': 'failed', 'type': '{ErrorDetail}'},
+        'links': {'key': 'links', 'type': '[Link]'},
+    }
+
+    def __init__(self, href=None, failed=None, links=None):
+        super(DeleteClientInstrumentsResponse, self).__init__()
+        self.href = href
+        self.failed = failed
+        self.links = links

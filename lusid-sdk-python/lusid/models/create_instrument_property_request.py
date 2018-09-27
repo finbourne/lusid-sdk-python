@@ -21,5 +21,24 @@
 # SOFTWARE.
 # --------------------------------------------------------------------------
 
-VERSION = "0.5.1516"
+from msrest.serialization import Model
 
+
+class CreateInstrumentPropertyRequest(Model):
+    """CreateInstrumentPropertyRequest.
+
+    :param instrument_property_key:
+    :type instrument_property_key: str
+    :param property:
+    :type property: ~lusid.models.CreatePropertyRequest
+    """
+
+    _attribute_map = {
+        'instrument_property_key': {'key': 'instrumentPropertyKey', 'type': 'str'},
+        'property': {'key': 'property', 'type': 'CreatePropertyRequest'},
+    }
+
+    def __init__(self, instrument_property_key=None, property=None):
+        super(CreateInstrumentPropertyRequest, self).__init__()
+        self.instrument_property_key = instrument_property_key
+        self.property = property

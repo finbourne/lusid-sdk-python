@@ -33,7 +33,7 @@ class ErrorResponse(Model):
 
     :ivar status:
     :vartype status: int
-    :ivar code: Possible values include: 'Unknown', 'PersonalisationNotFound',
+    :ivar code: Possible values include: 'PersonalisationNotFound',
      'NonRecursivePersonalisation', 'VersionNotFound', 'InstrumentNotFound',
      'PropertyNotFound', 'PortfolioRecursionDepth', 'GroupNotFound',
      'PortfolioNotFound', 'PropertySchemaNotFound',
@@ -62,16 +62,16 @@ class ErrorResponse(Model):
      'MovementsEngineConfigurationKeyFailure', 'FxRateSourceNotFound',
      'AccrualSourceNotFound', 'EntitlementsFailure', 'InvalidIdentityToken',
      'InvalidRequestHeaders', 'PriceNotFound', 'InvalidSubHoldingKeysProvided',
-     'DuplicateSubHoldingKeysProvided', 'ServerConfigurationError',
-     'InvalidUnitForDataType', 'InvalidTypeForDataType',
-     'InvalidValueForDataType', 'UnitNotDefinedForDataType',
-     'UnitsNotSupportedOnDataType', 'CannotSpecifyUnitsOnDataType',
-     'UnitSchemaInconsistentWithDataType', 'UnitDefinitionNotSpecified',
-     'DuplicateUnitDefinitionsSpecified', 'InvalidUnitsDefinition',
-     'InvalidInstrumentIdentifierUnit', 'HoldingsAdjustmentDoesNotExist',
-     'CouldNotBuildExcelUrl', 'CouldNotGetExcelVersion',
-     'InstrumentByCodeNotFound', 'EntitySchemaDoesNotExist',
-     'FeatureNotSupportedOnPortfolioType'
+     'DuplicateSubHoldingKeysProvided', 'InvalidUnitForDataType',
+     'InvalidTypeForDataType', 'InvalidValueForDataType',
+     'UnitNotDefinedForDataType', 'UnitsNotSupportedOnDataType',
+     'CannotSpecifyUnitsOnDataType', 'UnitSchemaInconsistentWithDataType',
+     'UnitDefinitionNotSpecified', 'DuplicateUnitDefinitionsSpecified',
+     'InvalidUnitsDefinition', 'InvalidInstrumentIdentifierUnit',
+     'HoldingsAdjustmentDoesNotExist', 'CouldNotBuildExcelUrl',
+     'CouldNotGetExcelVersion', 'InstrumentByCodeNotFound',
+     'EntitySchemaDoesNotExist', 'FeatureNotSupportedOnPortfolioType',
+     'ServerConfigurationError', 'Unknown'
     :vartype code: str or ~lusid.models.enum
     :ivar message:
     :vartype message: str

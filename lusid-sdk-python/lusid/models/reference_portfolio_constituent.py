@@ -21,5 +21,32 @@
 # SOFTWARE.
 # --------------------------------------------------------------------------
 
-VERSION = "0.5.1516"
+from msrest.serialization import Model
 
+
+class ReferencePortfolioConstituent(Model):
+    """ReferencePortfolioConstituent.
+
+    :param instrument_uid:
+    :type instrument_uid: str
+    :param properties:
+    :type properties: list[~lusid.models.Property]
+    :param weight:
+    :type weight: float
+    :param type: Possible values include: 'Shares', 'Weight', 'Nominal'
+    :type type: str or ~lusid.models.enum
+    """
+
+    _attribute_map = {
+        'instrument_uid': {'key': 'instrumentUid', 'type': 'str'},
+        'properties': {'key': 'properties', 'type': '[Property]'},
+        'weight': {'key': 'weight', 'type': 'float'},
+        'type': {'key': 'type', 'type': 'str'},
+    }
+
+    def __init__(self, instrument_uid=None, properties=None, weight=None, type=None):
+        super(ReferencePortfolioConstituent, self).__init__()
+        self.instrument_uid = instrument_uid
+        self.properties = properties
+        self.weight = weight
+        self.type = type

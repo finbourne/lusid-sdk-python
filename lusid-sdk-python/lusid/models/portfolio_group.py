@@ -24,34 +24,45 @@
 from msrest.serialization import Model
 
 
-class CreateReferencePortfolioRequest(Model):
-    """CreateReferencePortfolioRequest.
+class PortfolioGroup(Model):
+    """PortfolioGroup.
 
+    :param href:
+    :type href: str
+    :param id:
+    :type id: ~lusid.models.ResourceId
     :param display_name:
     :type display_name: str
     :param description:
     :type description: str
-    :param code:
-    :type code: str
-    :param created:
-    :type created: datetime
+    :param portfolios:
+    :type portfolios: list[~lusid.models.ResourceId]
+    :param sub_groups:
+    :type sub_groups: list[~lusid.models.ResourceId]
+    :param version:
+    :type version: ~lusid.models.Version
+    :param links:
+    :type links: list[~lusid.models.Link]
     """
 
-    _validation = {
-        'display_name': {'required': True},
-        'code': {'required': True},
-    }
-
     _attribute_map = {
+        'href': {'key': 'href', 'type': 'str'},
+        'id': {'key': 'id', 'type': 'ResourceId'},
         'display_name': {'key': 'displayName', 'type': 'str'},
         'description': {'key': 'description', 'type': 'str'},
-        'code': {'key': 'code', 'type': 'str'},
-        'created': {'key': 'created', 'type': 'iso-8601'},
+        'portfolios': {'key': 'portfolios', 'type': '[ResourceId]'},
+        'sub_groups': {'key': 'subGroups', 'type': '[ResourceId]'},
+        'version': {'key': 'version', 'type': 'Version'},
+        'links': {'key': 'links', 'type': '[Link]'},
     }
 
-    def __init__(self, display_name, code, description=None, created=None):
-        super(CreateReferencePortfolioRequest, self).__init__()
+    def __init__(self, href=None, id=None, display_name=None, description=None, portfolios=None, sub_groups=None, version=None, links=None):
+        super(PortfolioGroup, self).__init__()
+        self.href = href
+        self.id = id
         self.display_name = display_name
         self.description = description
-        self.code = code
-        self.created = created
+        self.portfolios = portfolios
+        self.sub_groups = sub_groups
+        self.version = version
+        self.links = links

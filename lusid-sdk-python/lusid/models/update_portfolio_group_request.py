@@ -21,5 +21,28 @@
 # SOFTWARE.
 # --------------------------------------------------------------------------
 
-VERSION = "0.5.1516"
+from msrest.serialization import Model
 
+
+class UpdatePortfolioGroupRequest(Model):
+    """UpdatePortfolioGroupRequest.
+
+    :param display_name:
+    :type display_name: str
+    :param description:
+    :type description: str
+    """
+
+    _validation = {
+        'display_name': {'required': True},
+    }
+
+    _attribute_map = {
+        'display_name': {'key': 'displayName', 'type': 'str'},
+        'description': {'key': 'description', 'type': 'str'},
+    }
+
+    def __init__(self, display_name, description=None):
+        super(UpdatePortfolioGroupRequest, self).__init__()
+        self.display_name = display_name
+        self.description = description

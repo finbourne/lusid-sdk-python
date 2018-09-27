@@ -21,5 +21,34 @@
 # SOFTWARE.
 # --------------------------------------------------------------------------
 
-VERSION = "0.5.1516"
+from msrest.serialization import Model
 
+
+class TransactionConfigurationData(Model):
+    """TransactionConfigurationData.
+
+    :param aliases: List of transaction codes that map to this specific
+     transaction model
+    :type aliases: list[~lusid.models.TransactionConfigurationTypeAlias]
+    :param movements: Movement data for the transaction code
+    :type movements: list[~lusid.models.TransactionConfigurationMovementData]
+    :param properties:
+    :type properties: list[~lusid.models.Property]
+    """
+
+    _validation = {
+        'aliases': {'required': True},
+        'movements': {'required': True},
+    }
+
+    _attribute_map = {
+        'aliases': {'key': 'aliases', 'type': '[TransactionConfigurationTypeAlias]'},
+        'movements': {'key': 'movements', 'type': '[TransactionConfigurationMovementData]'},
+        'properties': {'key': 'properties', 'type': '[Property]'},
+    }
+
+    def __init__(self, aliases, movements, properties=None):
+        super(TransactionConfigurationData, self).__init__()
+        self.aliases = aliases
+        self.movements = movements
+        self.properties = properties

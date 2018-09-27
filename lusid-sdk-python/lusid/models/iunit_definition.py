@@ -21,5 +21,43 @@
 # SOFTWARE.
 # --------------------------------------------------------------------------
 
-VERSION = "0.5.1516"
+from msrest.serialization import Model
 
+
+class IUnitDefinition(Model):
+    """IUnitDefinition.
+
+    Variables are only populated by the server, and will be ignored when
+    sending a request.
+
+    :ivar schema: Possible values include: 'NoUnits', 'Basic',
+     'Iso4217Currency'
+    :vartype schema: str or ~lusid.models.enum
+    :ivar code:
+    :vartype code: str
+    :ivar display_name:
+    :vartype display_name: str
+    :ivar description:
+    :vartype description: str
+    """
+
+    _validation = {
+        'schema': {'readonly': True},
+        'code': {'readonly': True},
+        'display_name': {'readonly': True},
+        'description': {'readonly': True},
+    }
+
+    _attribute_map = {
+        'schema': {'key': 'schema', 'type': 'str'},
+        'code': {'key': 'code', 'type': 'str'},
+        'display_name': {'key': 'displayName', 'type': 'str'},
+        'description': {'key': 'description', 'type': 'str'},
+    }
+
+    def __init__(self):
+        super(IUnitDefinition, self).__init__()
+        self.schema = None
+        self.code = None
+        self.display_name = None
+        self.description = None
