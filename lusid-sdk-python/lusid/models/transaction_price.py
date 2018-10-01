@@ -27,26 +27,18 @@ from msrest.serialization import Model
 class TransactionPrice(Model):
     """A price with its associated type.
 
-    Variables are only populated by the server, and will be ignored when
-    sending a request.
-
-    :ivar value:
-    :vartype value: float
-    :ivar type: Possible values include: 'Price', 'Yield', 'Spread'
-    :vartype type: str or ~lusid.models.enum
+    :param price:
+    :type price: float
+    :param type: Possible values include: 'Price', 'Yield', 'Spread'
+    :type type: str or ~lusid.models.enum
     """
 
-    _validation = {
-        'value': {'readonly': True},
-        'type': {'readonly': True},
-    }
-
     _attribute_map = {
-        'value': {'key': 'value', 'type': 'float'},
+        'price': {'key': 'price', 'type': 'float'},
         'type': {'key': 'type', 'type': 'str'},
     }
 
-    def __init__(self):
+    def __init__(self, price=None, type=None):
         super(TransactionPrice, self).__init__()
-        self.value = None
-        self.type = None
+        self.price = price
+        self.type = type

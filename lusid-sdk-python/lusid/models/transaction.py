@@ -41,13 +41,11 @@ class Transaction(Model):
     :param units: Quantity of transaction in units of the instrument
     :type units: float
     :param transaction_price: Execution price for the transaction
-    :type transaction_price: float
+    :type transaction_price: ~lusid.models.TransactionPrice
     :param total_consideration: Total value of the transaction
-    :type total_consideration: float
+    :type total_consideration: ~lusid.models.CurrencyAndAmount
     :param exchange_rate: Rate between transaction and settle currency
     :type exchange_rate: float
-    :param settlement_currency: Settlement currency
-    :type settlement_currency: str
     :param transaction_currency: Transaction currency
     :type transaction_currency: ~lusid.models.NullableOfCurrency
     :param properties:
@@ -57,15 +55,6 @@ class Transaction(Model):
     :param source: Where this transaction came from. Possible values include:
      'System', 'Client'
     :type source: str or ~lusid.models.enum
-    :param dividend_state: Possible values include: 'Default', 'ExDividend',
-     'CumDividend'
-    :type dividend_state: str or ~lusid.models.enum
-    :param transaction_price_type: Possible values include: 'Price', 'Yield',
-     'Spread'
-    :type transaction_price_type: str or ~lusid.models.enum
-    :param unit_type: Possible values include: 'Nominal', 'Shares',
-     'FaceValue', 'Contracts'
-    :type unit_type: str or ~lusid.models.enum
     :param netting_set:
     :type netting_set: str
     """
@@ -73,6 +62,8 @@ class Transaction(Model):
     _validation = {
         'transaction_id': {'required': True},
         'type': {'required': True},
+        'transaction_price': {'required': True},
+        'total_consideration': {'required': True},
     }
 
     _attribute_map = {
@@ -82,21 +73,17 @@ class Transaction(Model):
         'transaction_date': {'key': 'transactionDate', 'type': 'iso-8601'},
         'settlement_date': {'key': 'settlementDate', 'type': 'iso-8601'},
         'units': {'key': 'units', 'type': 'float'},
-        'transaction_price': {'key': 'transactionPrice', 'type': 'float'},
-        'total_consideration': {'key': 'totalConsideration', 'type': 'float'},
+        'transaction_price': {'key': 'transactionPrice', 'type': 'TransactionPrice'},
+        'total_consideration': {'key': 'totalConsideration', 'type': 'CurrencyAndAmount'},
         'exchange_rate': {'key': 'exchangeRate', 'type': 'float'},
-        'settlement_currency': {'key': 'settlementCurrency', 'type': 'str'},
         'transaction_currency': {'key': 'transactionCurrency', 'type': 'NullableOfCurrency'},
         'properties': {'key': 'properties', 'type': '[PerpetualProperty]'},
         'counterparty_id': {'key': 'counterpartyId', 'type': 'str'},
         'source': {'key': 'source', 'type': 'str'},
-        'dividend_state': {'key': 'dividendState', 'type': 'str'},
-        'transaction_price_type': {'key': 'transactionPriceType', 'type': 'str'},
-        'unit_type': {'key': 'unitType', 'type': 'str'},
         'netting_set': {'key': 'nettingSet', 'type': 'str'},
     }
 
-    def __init__(self, transaction_id, type, instrument_uid=None, transaction_date=None, settlement_date=None, units=None, transaction_price=None, total_consideration=None, exchange_rate=None, settlement_currency=None, transaction_currency=None, properties=None, counterparty_id=None, source=None, dividend_state=None, transaction_price_type=None, unit_type=None, netting_set=None):
+    def __init__(self, transaction_id, type, transaction_price, total_consideration, instrument_uid=None, transaction_date=None, settlement_date=None, units=None, exchange_rate=None, transaction_currency=None, properties=None, counterparty_id=None, source=None, netting_set=None):
         super(Transaction, self).__init__()
         self.transaction_id = transaction_id
         self.type = type
@@ -107,12 +94,8 @@ class Transaction(Model):
         self.transaction_price = transaction_price
         self.total_consideration = total_consideration
         self.exchange_rate = exchange_rate
-        self.settlement_currency = settlement_currency
         self.transaction_currency = transaction_currency
         self.properties = properties
         self.counterparty_id = counterparty_id
         self.source = source
-        self.dividend_state = dividend_state
-        self.transaction_price_type = transaction_price_type
-        self.unit_type = unit_type
         self.netting_set = netting_set

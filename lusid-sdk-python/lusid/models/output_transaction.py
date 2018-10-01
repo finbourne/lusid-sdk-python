@@ -30,8 +30,8 @@ class OutputTransaction(Model):
     Variables are only populated by the server, and will be ignored when
     sending a request.
 
-    :ivar trade_id: Unique trade identifier
-    :vartype trade_id: str
+    :ivar transaction_id: Unique transaction identifier
+    :vartype transaction_id: str
     :ivar type: LUSID transaction type code - Buy, Sell, StockIn, StockOut,
      etc
     :vartype type: str
@@ -39,22 +39,24 @@ class OutputTransaction(Model):
     :vartype description: str
     :ivar instrument_uid: Unique instrument identifier
     :vartype instrument_uid: str
-    :ivar trade_date: Trade date
-    :vartype trade_date: datetime
+    :ivar transaction_date: Transaction date
+    :vartype transaction_date: datetime
     :ivar settlement_date: Settlement date
     :vartype settlement_date: datetime
     :ivar units: Quantity of trade in units of the instrument
     :vartype units: float
-    :ivar trade_price: Execution price for the trade
-    :vartype trade_price: ~lusid.models.TransactionPrice
-    :ivar total_consideration: Total value of the trade
+    :ivar transaction_price: Execution price for the transaction
+    :vartype transaction_price: ~lusid.models.TransactionPrice
+    :ivar total_consideration: Total value of the transaction in settlement
+     currency
     :vartype total_consideration: ~lusid.models.CurrencyAndAmount
-    :ivar exchange_rate: Rate between trade and settlement currency
+    :ivar exchange_rate: Rate between transaction and settlement currency
     :vartype exchange_rate: float
-    :ivar trade_to_portfolio_rate: Rate between trade and portfolio currency
-    :vartype trade_to_portfolio_rate: float
-    :ivar trade_currency: Trade currency
-    :vartype trade_currency: str
+    :ivar transaction_to_portfolio_rate: Rate between transaction and
+     portfolio currency
+    :vartype transaction_to_portfolio_rate: float
+    :ivar transaction_currency: Transaction currency
+    :vartype transaction_currency: str
     :ivar properties:
     :vartype properties: list[~lusid.models.PerpetualProperty]
     :ivar counterparty_id: Counterparty identifier
@@ -76,18 +78,18 @@ class OutputTransaction(Model):
     """
 
     _validation = {
-        'trade_id': {'required': True, 'readonly': True},
+        'transaction_id': {'required': True, 'readonly': True},
         'type': {'required': True, 'readonly': True},
         'description': {'required': True, 'readonly': True},
         'instrument_uid': {'readonly': True},
-        'trade_date': {'readonly': True},
+        'transaction_date': {'readonly': True},
         'settlement_date': {'readonly': True},
         'units': {'readonly': True},
-        'trade_price': {'readonly': True},
-        'total_consideration': {'readonly': True},
+        'transaction_price': {'required': True, 'readonly': True},
+        'total_consideration': {'required': True, 'readonly': True},
         'exchange_rate': {'readonly': True},
-        'trade_to_portfolio_rate': {'readonly': True},
-        'trade_currency': {'readonly': True},
+        'transaction_to_portfolio_rate': {'readonly': True},
+        'transaction_currency': {'readonly': True},
         'properties': {'readonly': True},
         'counterparty_id': {'readonly': True},
         'source': {'readonly': True},
@@ -99,18 +101,18 @@ class OutputTransaction(Model):
     }
 
     _attribute_map = {
-        'trade_id': {'key': 'tradeId', 'type': 'str'},
+        'transaction_id': {'key': 'transactionId', 'type': 'str'},
         'type': {'key': 'type', 'type': 'str'},
         'description': {'key': 'description', 'type': 'str'},
         'instrument_uid': {'key': 'instrumentUid', 'type': 'str'},
-        'trade_date': {'key': 'tradeDate', 'type': 'iso-8601'},
+        'transaction_date': {'key': 'transactionDate', 'type': 'iso-8601'},
         'settlement_date': {'key': 'settlementDate', 'type': 'iso-8601'},
         'units': {'key': 'units', 'type': 'float'},
-        'trade_price': {'key': 'tradePrice', 'type': 'TransactionPrice'},
+        'transaction_price': {'key': 'transactionPrice', 'type': 'TransactionPrice'},
         'total_consideration': {'key': 'totalConsideration', 'type': 'CurrencyAndAmount'},
         'exchange_rate': {'key': 'exchangeRate', 'type': 'float'},
-        'trade_to_portfolio_rate': {'key': 'tradeToPortfolioRate', 'type': 'float'},
-        'trade_currency': {'key': 'tradeCurrency', 'type': 'str'},
+        'transaction_to_portfolio_rate': {'key': 'transactionToPortfolioRate', 'type': 'float'},
+        'transaction_currency': {'key': 'transactionCurrency', 'type': 'str'},
         'properties': {'key': 'properties', 'type': '[PerpetualProperty]'},
         'counterparty_id': {'key': 'counterpartyId', 'type': 'str'},
         'source': {'key': 'source', 'type': 'str'},
@@ -123,18 +125,18 @@ class OutputTransaction(Model):
 
     def __init__(self):
         super(OutputTransaction, self).__init__()
-        self.trade_id = None
+        self.transaction_id = None
         self.type = None
         self.description = None
         self.instrument_uid = None
-        self.trade_date = None
+        self.transaction_date = None
         self.settlement_date = None
         self.units = None
-        self.trade_price = None
+        self.transaction_price = None
         self.total_consideration = None
         self.exchange_rate = None
-        self.trade_to_portfolio_rate = None
-        self.trade_currency = None
+        self.transaction_to_portfolio_rate = None
+        self.transaction_currency = None
         self.properties = None
         self.counterparty_id = None
         self.source = None

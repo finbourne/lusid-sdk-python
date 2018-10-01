@@ -27,26 +27,18 @@ from msrest.serialization import Model
 class CurrencyAndAmount(Model):
     """CurrencyAndAmount.
 
-    Variables are only populated by the server, and will be ignored when
-    sending a request.
-
-    :ivar value:
-    :vartype value: float
-    :ivar unit:
-    :vartype unit: str
+    :param amount:
+    :type amount: float
+    :param currency:
+    :type currency: str
     """
 
-    _validation = {
-        'value': {'readonly': True},
-        'unit': {'readonly': True},
-    }
-
     _attribute_map = {
-        'value': {'key': 'value', 'type': 'float'},
-        'unit': {'key': 'unit', 'type': 'str'},
+        'amount': {'key': 'amount', 'type': 'float'},
+        'currency': {'key': 'currency', 'type': 'str'},
     }
 
-    def __init__(self):
+    def __init__(self, amount=None, currency=None):
         super(CurrencyAndAmount, self).__init__()
-        self.value = None
-        self.unit = None
+        self.amount = amount
+        self.currency = currency

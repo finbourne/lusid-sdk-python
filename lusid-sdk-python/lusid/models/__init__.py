@@ -46,8 +46,6 @@ from .resource_list_of_data_type import ResourceListOfDataType
 from .create_derived_transaction_portfolio_request import CreateDerivedTransactionPortfolioRequest
 from .version import Version
 from .portfolio import Portfolio
-from .portfolio_group import PortfolioGroup
-from .resource_list_of_portfolio_group import ResourceListOfPortfolioGroup
 from .create_property_request import CreatePropertyRequest
 from .instrument_definition import InstrumentDefinition
 from .create_client_instrument_request import CreateClientInstrumentRequest
@@ -64,6 +62,8 @@ from .personalisation import Personalisation
 from .resource_list_of_personalisation import ResourceListOfPersonalisation
 from .upsert_personalisation_response import UpsertPersonalisationResponse
 from .create_portfolio_group_request import CreatePortfolioGroupRequest
+from .portfolio_group import PortfolioGroup
+from .resource_list_of_portfolio_group import ResourceListOfPortfolioGroup
 from .update_portfolio_group_request import UpdatePortfolioGroupRequest
 from .aggregate_spec import AggregateSpec
 from .property_filter import PropertyFilter
@@ -83,11 +83,9 @@ from .resource_list_of_scope import ResourceListOfScope
 from .resource_list_of_portfolio import ResourceListOfPortfolio
 from .update_portfolio_request import UpdatePortfolioRequest
 from .portfolio_properties import PortfolioProperties
-from .portfolio_search_result import PortfolioSearchResult
-from .resource_list_of_portfolio_search_result import ResourceListOfPortfolioSearchResult
+from .create_property_definition_request import CreatePropertyDefinitionRequest
 from .property_definition import PropertyDefinition
 from .resource_list_of_property_definition import ResourceListOfPropertyDefinition
-from .create_property_definition_request import CreatePropertyDefinitionRequest
 from .update_property_definition_request import UpdatePropertyDefinitionRequest
 from .reconciliation_request import ReconciliationRequest
 from .reconciliation_break import ReconciliationBreak
@@ -105,6 +103,8 @@ from .key_value_pair_of_string_to_field_schema import KeyValuePairOfStringToFiel
 from .schema import Schema
 from .property_schema import PropertySchema
 from .resource_list_of_value_type import ResourceListOfValueType
+from .portfolio_search_result import PortfolioSearchResult
+from .resource_list_of_portfolio_search_result import ResourceListOfPortfolioSearchResult
 from .transaction_configuration_type_alias import TransactionConfigurationTypeAlias
 from .transaction_property_mapping_request import TransactionPropertyMappingRequest
 from .transaction_configuration_movement_data_request import TransactionConfigurationMovementDataRequest
@@ -116,6 +116,8 @@ from .resource_list_of_transaction_meta_data import ResourceListOfTransactionMet
 from .create_transaction_portfolio_request import CreateTransactionPortfolioRequest
 from .portfolio_details import PortfolioDetails
 from .create_portfolio_details import CreatePortfolioDetails
+from .transaction_price import TransactionPrice
+from .currency_and_amount import CurrencyAndAmount
 from .nullable_of_currency import NullableOfCurrency
 from .perpetual_property import PerpetualProperty
 from .transaction import Transaction
@@ -129,11 +131,9 @@ from .resource_list_of_holdings_adjustment_header import ResourceListOfHoldingsA
 from .holdings_adjustment import HoldingsAdjustment
 from .versioned_resource_list_of_transaction import VersionedResourceListOfTransaction
 from .transaction_request import TransactionRequest
-from .upsert_portfolio_transactions import UpsertPortfolioTransactions
+from .upsert_portfolio_transactions_response import UpsertPortfolioTransactionsResponse
 from .add_transaction_property_response import AddTransactionPropertyResponse
 from .transaction_query_parameters import TransactionQueryParameters
-from .transaction_price import TransactionPrice
-from .currency_and_amount import CurrencyAndAmount
 from .realised_gain_loss import RealisedGainLoss
 from .output_transaction import OutputTransaction
 from .versioned_resource_list_of_output_transaction import VersionedResourceListOfOutputTransaction
@@ -164,8 +164,6 @@ __all__ = [
     'CreateDerivedTransactionPortfolioRequest',
     'Version',
     'Portfolio',
-    'PortfolioGroup',
-    'ResourceListOfPortfolioGroup',
     'CreatePropertyRequest',
     'InstrumentDefinition',
     'CreateClientInstrumentRequest',
@@ -182,6 +180,8 @@ __all__ = [
     'ResourceListOfPersonalisation',
     'UpsertPersonalisationResponse',
     'CreatePortfolioGroupRequest',
+    'PortfolioGroup',
+    'ResourceListOfPortfolioGroup',
     'UpdatePortfolioGroupRequest',
     'AggregateSpec',
     'PropertyFilter',
@@ -201,11 +201,9 @@ __all__ = [
     'ResourceListOfPortfolio',
     'UpdatePortfolioRequest',
     'PortfolioProperties',
-    'PortfolioSearchResult',
-    'ResourceListOfPortfolioSearchResult',
+    'CreatePropertyDefinitionRequest',
     'PropertyDefinition',
     'ResourceListOfPropertyDefinition',
-    'CreatePropertyDefinitionRequest',
     'UpdatePropertyDefinitionRequest',
     'ReconciliationRequest',
     'ReconciliationBreak',
@@ -223,6 +221,8 @@ __all__ = [
     'Schema',
     'PropertySchema',
     'ResourceListOfValueType',
+    'PortfolioSearchResult',
+    'ResourceListOfPortfolioSearchResult',
     'TransactionConfigurationTypeAlias',
     'TransactionPropertyMappingRequest',
     'TransactionConfigurationMovementDataRequest',
@@ -234,6 +234,8 @@ __all__ = [
     'CreateTransactionPortfolioRequest',
     'PortfolioDetails',
     'CreatePortfolioDetails',
+    'TransactionPrice',
+    'CurrencyAndAmount',
     'NullableOfCurrency',
     'PerpetualProperty',
     'Transaction',
@@ -247,11 +249,9 @@ __all__ = [
     'HoldingsAdjustment',
     'VersionedResourceListOfTransaction',
     'TransactionRequest',
-    'UpsertPortfolioTransactions',
+    'UpsertPortfolioTransactionsResponse',
     'AddTransactionPropertyResponse',
     'TransactionQueryParameters',
-    'TransactionPrice',
-    'CurrencyAndAmount',
     'RealisedGainLoss',
     'OutputTransaction',
     'VersionedResourceListOfOutputTransaction',

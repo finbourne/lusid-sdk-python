@@ -24,8 +24,8 @@
 from msrest.serialization import Model
 
 
-class UpsertPortfolioTransactions(Model):
-    """UpsertPortfolioTransactions.
+class UpsertPortfolioTransactionsResponse(Model):
+    """UpsertPortfolioTransactionsResponse.
 
     :param version:
     :type version: ~lusid.models.Version
@@ -42,7 +42,7 @@ class UpsertPortfolioTransactions(Model):
     }
 
     def __init__(self, version=None, href=None, links=None):
-        super(UpsertPortfolioTransactions, self).__init__()
+        super(UpsertPortfolioTransactionsResponse, self).__init__()
         self.version = version
         self.href = href
         self.links = links

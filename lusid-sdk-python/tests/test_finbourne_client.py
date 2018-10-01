@@ -165,12 +165,11 @@ class TestFinbourneApi(TestCase):
             transaction_id=str(uuid.uuid4()),
             type="Buy",
             instrument_uid=self.instrumentIds[0],
-            settlement_currency="GBP",
             transaction_date=effective_date,
             settlement_date=effective_date,
             units=100,
-            transaction_price=12.3,
-            total_consideration=1230,
+            transaction_price=models.TransactionPrice(12.3),
+            total_consideration=models.CurrencyAndAmount(1230, "GBP"),
             source="Client",
             properties={property_definition_result.key: models.CreatePerpetualPropertyRequest(property_value)}
         )
@@ -356,12 +355,11 @@ class TestFinbourneApi(TestCase):
             transaction_id=str(uuid.uuid4()),
             type="StockIn",
             instrument_uid=trade_spec.id,
-            settlement_currency="GBP",
             transaction_date=trade_spec.trade_date,
             settlement_date=trade_spec.trade_date,
             units=100,
-            transaction_price=trade_spec.price,
-            total_consideration=100 * trade_spec.price,
+            transaction_price=models.TransactionPrice(trade_spec.price),
+            total_consideration=models.CurrencyAndAmount(100 * trade_spec.price, "GBP"),
             source="Client")
 
 

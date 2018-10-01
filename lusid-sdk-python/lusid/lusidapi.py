@@ -150,16 +150,12 @@ class LUSIDAPI(object):
     | TransactionDate|datetime|Transaction date |
     | SettlementDate|datetime|Settlement date |
     | Units|decimal|Quantity of transaction in units of the instrument |
-    | TransactionPrice|decimal|Execution price for the transaction |
-    | TotalConsideration|decimal|Total value of the transaction |
+    | TransactionPrice|tradeprice|Execution price for the transaction |
+    | TotalConsideration|currencyandamount|Total value of the transaction |
     | ExchangeRate|decimal|Rate between transaction and settle currency |
-    | SettlementCurrency|currency|Settlement currency |
     | TransactionCurrency|currency|Transaction currency |
     | CounterpartyId|string|Counterparty identifier |
     | Source|string|Where this transaction came from |
-    | DividendState|string|  |
-    | TransactionPriceType|string|  |
-    | UnitType|string|  |
     | NettingSet|string|  |
     ## Holdings
     A holding represents a position in a instrument or cash on a given date.
@@ -305,7 +301,7 @@ class LUSIDAPI(object):
         self._client = ServiceClient(self.config.credentials, self.config)
 
         client_models = {k: v for k, v in models.__dict__.items() if isinstance(v, type)}
-        self.api_version = '0.5.1516'
+        self.api_version = '0.0.1'
         self._serialize = Serializer(client_models)
         self._deserialize = Deserializer(client_models)
 
@@ -1214,77 +1210,6 @@ class LUSIDAPI(object):
 
         return deserialized
     delete_derived_portfolio_details.metadata = {'url': '/api/derivedtransactionportfolios/{scope}/{code}/details'}
-
-    def portfolio_groups_search(
-            self, request=None, sort_by=None, start=None, limit=None, filter=None, custom_headers=None, raw=False, **operation_config):
-        """Search portfolio groups.
-
-        :param request:
-        :type request: object
-        :param sort_by:
-        :type sort_by: list[str]
-        :param start:
-        :type start: int
-        :param limit:
-        :type limit: int
-        :param filter:
-        :type filter: str
-        :param dict custom_headers: headers that will be added to the request
-        :param bool raw: returns the direct response alongside the
-         deserialized response
-        :param operation_config: :ref:`Operation configuration
-         overrides<msrest:optionsforoperations>`.
-        :return: ResourceListOfPortfolioGroup or ClientRawResponse if raw=true
-        :rtype: ~lusid.models.ResourceListOfPortfolioGroup or
-         ~msrest.pipeline.ClientRawResponse
-        :raises:
-         :class:`ErrorResponseException<lusid.models.ErrorResponseException>`
-        """
-        # Construct URL
-        url = self.portfolio_groups_search.metadata['url']
-
-        # Construct parameters
-        query_parameters = {}
-        if sort_by is not None:
-            query_parameters['sortBy'] = self._serialize.query("sort_by", sort_by, '[str]', div=',')
-        if start is not None:
-            query_parameters['start'] = self._serialize.query("start", start, 'int')
-        if limit is not None:
-            query_parameters['limit'] = self._serialize.query("limit", limit, 'int')
-        if filter is not None:
-            query_parameters['filter'] = self._serialize.query("filter", filter, 'str')
-
-        # Construct headers
-        header_parameters = {}
-        header_parameters['Content-Type'] = 'application/json-patch+json; charset=utf-8'
-        if custom_headers:
-            header_parameters.update(custom_headers)
-
-        # Construct body
-        if request is not None:
-            body_content = self._serialize.body(request, 'object')
-        else:
-            body_content = None
-
-        # Construct and send request
-        request = self._client.post(url, query_parameters)
-        response = self._client.send(
-            request, header_parameters, body_content, stream=False, **operation_config)
-
-        if response.status_code not in [200]:
-            raise models.ErrorResponseException(self._deserialize, response)
-
-        deserialized = None
-
-        if response.status_code == 200:
-            deserialized = self._deserialize('ResourceListOfPortfolioGroup', response)
-
-        if raw:
-            client_raw_response = ClientRawResponse(deserialized, response)
-            return client_raw_response
-
-        return deserialized
-    portfolio_groups_search.metadata = {'url': '/api/groups/search'}
 
     def batch_add_client_instruments(
             self, definitions=None, custom_headers=None, raw=False, **operation_config):
@@ -3478,150 +3403,6 @@ class LUSIDAPI(object):
         return deserialized
     delete_portfolio_properties.metadata = {'url': '/api/portfolios/{scope}/{code}/properties'}
 
-    def portfolios_search(
-            self, request=None, sort_by=None, start=None, limit=None, filter=None, custom_headers=None, raw=False, **operation_config):
-        """Search portfolios.
-
-        :param request:
-        :type request: object
-        :param sort_by:
-        :type sort_by: list[str]
-        :param start:
-        :type start: int
-        :param limit:
-        :type limit: int
-        :param filter:
-        :type filter: str
-        :param dict custom_headers: headers that will be added to the request
-        :param bool raw: returns the direct response alongside the
-         deserialized response
-        :param operation_config: :ref:`Operation configuration
-         overrides<msrest:optionsforoperations>`.
-        :return: ResourceListOfPortfolioSearchResult or ClientRawResponse if
-         raw=true
-        :rtype: ~lusid.models.ResourceListOfPortfolioSearchResult or
-         ~msrest.pipeline.ClientRawResponse
-        :raises:
-         :class:`ErrorResponseException<lusid.models.ErrorResponseException>`
-        """
-        # Construct URL
-        url = self.portfolios_search.metadata['url']
-
-        # Construct parameters
-        query_parameters = {}
-        if sort_by is not None:
-            query_parameters['sortBy'] = self._serialize.query("sort_by", sort_by, '[str]', div=',')
-        if start is not None:
-            query_parameters['start'] = self._serialize.query("start", start, 'int')
-        if limit is not None:
-            query_parameters['limit'] = self._serialize.query("limit", limit, 'int')
-        if filter is not None:
-            query_parameters['filter'] = self._serialize.query("filter", filter, 'str')
-
-        # Construct headers
-        header_parameters = {}
-        header_parameters['Content-Type'] = 'application/json-patch+json; charset=utf-8'
-        if custom_headers:
-            header_parameters.update(custom_headers)
-
-        # Construct body
-        if request is not None:
-            body_content = self._serialize.body(request, 'object')
-        else:
-            body_content = None
-
-        # Construct and send request
-        request = self._client.post(url, query_parameters)
-        response = self._client.send(
-            request, header_parameters, body_content, stream=False, **operation_config)
-
-        if response.status_code not in [200]:
-            raise models.ErrorResponseException(self._deserialize, response)
-
-        deserialized = None
-
-        if response.status_code == 200:
-            deserialized = self._deserialize('ResourceListOfPortfolioSearchResult', response)
-
-        if raw:
-            client_raw_response = ClientRawResponse(deserialized, response)
-            return client_raw_response
-
-        return deserialized
-    portfolios_search.metadata = {'url': '/api/portfolios/search'}
-
-    def properties_search(
-            self, request=None, sort_by=None, start=None, limit=None, filter=None, custom_headers=None, raw=False, **operation_config):
-        """Search properties.
-
-        :param request:
-        :type request: object
-        :param sort_by:
-        :type sort_by: list[str]
-        :param start:
-        :type start: int
-        :param limit:
-        :type limit: int
-        :param filter:
-        :type filter: str
-        :param dict custom_headers: headers that will be added to the request
-        :param bool raw: returns the direct response alongside the
-         deserialized response
-        :param operation_config: :ref:`Operation configuration
-         overrides<msrest:optionsforoperations>`.
-        :return: ResourceListOfPropertyDefinition or ClientRawResponse if
-         raw=true
-        :rtype: ~lusid.models.ResourceListOfPropertyDefinition or
-         ~msrest.pipeline.ClientRawResponse
-        :raises:
-         :class:`ErrorResponseException<lusid.models.ErrorResponseException>`
-        """
-        # Construct URL
-        url = self.properties_search.metadata['url']
-
-        # Construct parameters
-        query_parameters = {}
-        if sort_by is not None:
-            query_parameters['sortBy'] = self._serialize.query("sort_by", sort_by, '[str]', div=',')
-        if start is not None:
-            query_parameters['start'] = self._serialize.query("start", start, 'int')
-        if limit is not None:
-            query_parameters['limit'] = self._serialize.query("limit", limit, 'int')
-        if filter is not None:
-            query_parameters['filter'] = self._serialize.query("filter", filter, 'str')
-
-        # Construct headers
-        header_parameters = {}
-        header_parameters['Content-Type'] = 'application/json-patch+json; charset=utf-8'
-        if custom_headers:
-            header_parameters.update(custom_headers)
-
-        # Construct body
-        if request is not None:
-            body_content = self._serialize.body(request, 'object')
-        else:
-            body_content = None
-
-        # Construct and send request
-        request = self._client.post(url, query_parameters)
-        response = self._client.send(
-            request, header_parameters, body_content, stream=False, **operation_config)
-
-        if response.status_code not in [200]:
-            raise models.ErrorResponseException(self._deserialize, response)
-
-        deserialized = None
-
-        if response.status_code == 200:
-            deserialized = self._deserialize('ResourceListOfPropertyDefinition', response)
-
-        if raw:
-            client_raw_response = ClientRawResponse(deserialized, response)
-            return client_raw_response
-
-        return deserialized
-    properties_search.metadata = {'url': '/api/properties/search'}
-
     def get_multiple_property_definitions(
             self, keys=None, as_at=None, sort_by=None, start=None, limit=None, filter=None, custom_headers=None, raw=False, **operation_config):
         """Gets multiple property definitions.
@@ -4626,6 +4407,221 @@ class LUSIDAPI(object):
         return deserialized
     get_value_types.metadata = {'url': '/api/schemas/types'}
 
+    def portfolio_groups_search(
+            self, request=None, sort_by=None, start=None, limit=None, filter=None, custom_headers=None, raw=False, **operation_config):
+        """Search portfolio groups.
+
+        :param request:
+        :type request: object
+        :param sort_by:
+        :type sort_by: list[str]
+        :param start:
+        :type start: int
+        :param limit:
+        :type limit: int
+        :param filter:
+        :type filter: str
+        :param dict custom_headers: headers that will be added to the request
+        :param bool raw: returns the direct response alongside the
+         deserialized response
+        :param operation_config: :ref:`Operation configuration
+         overrides<msrest:optionsforoperations>`.
+        :return: ResourceListOfPortfolioGroup or ClientRawResponse if raw=true
+        :rtype: ~lusid.models.ResourceListOfPortfolioGroup or
+         ~msrest.pipeline.ClientRawResponse
+        :raises:
+         :class:`ErrorResponseException<lusid.models.ErrorResponseException>`
+        """
+        # Construct URL
+        url = self.portfolio_groups_search.metadata['url']
+
+        # Construct parameters
+        query_parameters = {}
+        if sort_by is not None:
+            query_parameters['sortBy'] = self._serialize.query("sort_by", sort_by, '[str]', div=',')
+        if start is not None:
+            query_parameters['start'] = self._serialize.query("start", start, 'int')
+        if limit is not None:
+            query_parameters['limit'] = self._serialize.query("limit", limit, 'int')
+        if filter is not None:
+            query_parameters['filter'] = self._serialize.query("filter", filter, 'str')
+
+        # Construct headers
+        header_parameters = {}
+        header_parameters['Content-Type'] = 'application/json-patch+json; charset=utf-8'
+        if custom_headers:
+            header_parameters.update(custom_headers)
+
+        # Construct body
+        if request is not None:
+            body_content = self._serialize.body(request, 'object')
+        else:
+            body_content = None
+
+        # Construct and send request
+        request = self._client.post(url, query_parameters)
+        response = self._client.send(
+            request, header_parameters, body_content, stream=False, **operation_config)
+
+        if response.status_code not in [200]:
+            raise models.ErrorResponseException(self._deserialize, response)
+
+        deserialized = None
+
+        if response.status_code == 200:
+            deserialized = self._deserialize('ResourceListOfPortfolioGroup', response)
+
+        if raw:
+            client_raw_response = ClientRawResponse(deserialized, response)
+            return client_raw_response
+
+        return deserialized
+    portfolio_groups_search.metadata = {'url': '/api/search/portfoliogroups'}
+
+    def portfolios_search(
+            self, request=None, sort_by=None, start=None, limit=None, filter=None, custom_headers=None, raw=False, **operation_config):
+        """Search portfolios.
+
+        :param request:
+        :type request: object
+        :param sort_by:
+        :type sort_by: list[str]
+        :param start:
+        :type start: int
+        :param limit:
+        :type limit: int
+        :param filter:
+        :type filter: str
+        :param dict custom_headers: headers that will be added to the request
+        :param bool raw: returns the direct response alongside the
+         deserialized response
+        :param operation_config: :ref:`Operation configuration
+         overrides<msrest:optionsforoperations>`.
+        :return: ResourceListOfPortfolioSearchResult or ClientRawResponse if
+         raw=true
+        :rtype: ~lusid.models.ResourceListOfPortfolioSearchResult or
+         ~msrest.pipeline.ClientRawResponse
+        :raises:
+         :class:`ErrorResponseException<lusid.models.ErrorResponseException>`
+        """
+        # Construct URL
+        url = self.portfolios_search.metadata['url']
+
+        # Construct parameters
+        query_parameters = {}
+        if sort_by is not None:
+            query_parameters['sortBy'] = self._serialize.query("sort_by", sort_by, '[str]', div=',')
+        if start is not None:
+            query_parameters['start'] = self._serialize.query("start", start, 'int')
+        if limit is not None:
+            query_parameters['limit'] = self._serialize.query("limit", limit, 'int')
+        if filter is not None:
+            query_parameters['filter'] = self._serialize.query("filter", filter, 'str')
+
+        # Construct headers
+        header_parameters = {}
+        header_parameters['Content-Type'] = 'application/json-patch+json; charset=utf-8'
+        if custom_headers:
+            header_parameters.update(custom_headers)
+
+        # Construct body
+        if request is not None:
+            body_content = self._serialize.body(request, 'object')
+        else:
+            body_content = None
+
+        # Construct and send request
+        request = self._client.post(url, query_parameters)
+        response = self._client.send(
+            request, header_parameters, body_content, stream=False, **operation_config)
+
+        if response.status_code not in [200]:
+            raise models.ErrorResponseException(self._deserialize, response)
+
+        deserialized = None
+
+        if response.status_code == 200:
+            deserialized = self._deserialize('ResourceListOfPortfolioSearchResult', response)
+
+        if raw:
+            client_raw_response = ClientRawResponse(deserialized, response)
+            return client_raw_response
+
+        return deserialized
+    portfolios_search.metadata = {'url': '/api/search/portfolios'}
+
+    def properties_search(
+            self, request=None, sort_by=None, start=None, limit=None, filter=None, custom_headers=None, raw=False, **operation_config):
+        """Search properties.
+
+        :param request:
+        :type request: object
+        :param sort_by:
+        :type sort_by: list[str]
+        :param start:
+        :type start: int
+        :param limit:
+        :type limit: int
+        :param filter:
+        :type filter: str
+        :param dict custom_headers: headers that will be added to the request
+        :param bool raw: returns the direct response alongside the
+         deserialized response
+        :param operation_config: :ref:`Operation configuration
+         overrides<msrest:optionsforoperations>`.
+        :return: ResourceListOfPropertyDefinition or ClientRawResponse if
+         raw=true
+        :rtype: ~lusid.models.ResourceListOfPropertyDefinition or
+         ~msrest.pipeline.ClientRawResponse
+        :raises:
+         :class:`ErrorResponseException<lusid.models.ErrorResponseException>`
+        """
+        # Construct URL
+        url = self.properties_search.metadata['url']
+
+        # Construct parameters
+        query_parameters = {}
+        if sort_by is not None:
+            query_parameters['sortBy'] = self._serialize.query("sort_by", sort_by, '[str]', div=',')
+        if start is not None:
+            query_parameters['start'] = self._serialize.query("start", start, 'int')
+        if limit is not None:
+            query_parameters['limit'] = self._serialize.query("limit", limit, 'int')
+        if filter is not None:
+            query_parameters['filter'] = self._serialize.query("filter", filter, 'str')
+
+        # Construct headers
+        header_parameters = {}
+        header_parameters['Content-Type'] = 'application/json-patch+json; charset=utf-8'
+        if custom_headers:
+            header_parameters.update(custom_headers)
+
+        # Construct body
+        if request is not None:
+            body_content = self._serialize.body(request, 'object')
+        else:
+            body_content = None
+
+        # Construct and send request
+        request = self._client.post(url, query_parameters)
+        response = self._client.send(
+            request, header_parameters, body_content, stream=False, **operation_config)
+
+        if response.status_code not in [200]:
+            raise models.ErrorResponseException(self._deserialize, response)
+
+        deserialized = None
+
+        if response.status_code == 200:
+            deserialized = self._deserialize('ResourceListOfPropertyDefinition', response)
+
+        if raw:
+            client_raw_response = ClientRawResponse(deserialized, response)
+            return client_raw_response
+
+        return deserialized
+    properties_search.metadata = {'url': '/api/search/propertydefinitions'}
+
     def list_configuration_transaction_types(
             self, custom_headers=None, raw=False, **operation_config):
         """Gets the list of persisted transaction types.
@@ -5514,8 +5510,9 @@ class LUSIDAPI(object):
          deserialized response
         :param operation_config: :ref:`Operation configuration
          overrides<msrest:optionsforoperations>`.
-        :return: UpsertPortfolioTransactions or ClientRawResponse if raw=true
-        :rtype: ~lusid.models.UpsertPortfolioTransactions or
+        :return: UpsertPortfolioTransactionsResponse or ClientRawResponse if
+         raw=true
+        :rtype: ~lusid.models.UpsertPortfolioTransactionsResponse or
          ~msrest.pipeline.ClientRawResponse
         :raises:
          :class:`ErrorResponseException<lusid.models.ErrorResponseException>`
@@ -5554,7 +5551,7 @@ class LUSIDAPI(object):
         deserialized = None
 
         if response.status_code == 200:
-            deserialized = self._deserialize('UpsertPortfolioTransactions', response)
+            deserialized = self._deserialize('UpsertPortfolioTransactionsResponse', response)
 
         if raw:
             client_raw_response = ClientRawResponse(deserialized, response)
