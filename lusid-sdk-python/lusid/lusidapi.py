@@ -301,7 +301,7 @@ class LUSIDAPI(object):
         self._client = ServiceClient(self.config.credentials, self.config)
 
         client_models = {k: v for k, v in models.__dict__.items() if isinstance(v, type)}
-        self.api_version = '0.7.13'
+        self.api_version = '0.7.15'
         self._serialize = Serializer(client_models)
         self._deserialize = Deserializer(client_models)
 
@@ -654,8 +654,9 @@ class LUSIDAPI(object):
          deserialized response
         :param operation_config: :ref:`Operation configuration
          overrides<msrest:optionsforoperations>`.
-        :return: list or ClientRawResponse if raw=true
-        :rtype: list[~lusid.models.CorporateAction] or
+        :return: ResourceListOfCorporateActionEvent or ClientRawResponse if
+         raw=true
+        :rtype: ~lusid.models.ResourceListOfCorporateActionEvent or
          ~msrest.pipeline.ClientRawResponse
         :raises:
          :class:`ErrorResponseException<lusid.models.ErrorResponseException>`
@@ -699,7 +700,7 @@ class LUSIDAPI(object):
         deserialized = None
 
         if response.status_code == 200:
-            deserialized = self._deserialize('[CorporateAction]', response)
+            deserialized = self._deserialize('ResourceListOfCorporateActionEvent', response)
 
         if raw:
             client_raw_response = ClientRawResponse(deserialized, response)

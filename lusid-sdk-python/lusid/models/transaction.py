@@ -47,7 +47,7 @@ class Transaction(Model):
     :param exchange_rate: Rate between transaction and settle currency
     :type exchange_rate: float
     :param transaction_currency: Transaction currency
-    :type transaction_currency: ~lusid.models.NullableOfCurrency
+    :type transaction_currency: str
     :param properties:
     :type properties: list[~lusid.models.PerpetualProperty]
     :param counterparty_id: Counterparty identifier
@@ -76,7 +76,7 @@ class Transaction(Model):
         'transaction_price': {'key': 'transactionPrice', 'type': 'TransactionPrice'},
         'total_consideration': {'key': 'totalConsideration', 'type': 'CurrencyAndAmount'},
         'exchange_rate': {'key': 'exchangeRate', 'type': 'float'},
-        'transaction_currency': {'key': 'transactionCurrency', 'type': 'NullableOfCurrency'},
+        'transaction_currency': {'key': 'transactionCurrency', 'type': 'str'},
         'properties': {'key': 'properties', 'type': '[PerpetualProperty]'},
         'counterparty_id': {'key': 'counterpartyId', 'type': 'str'},
         'source': {'key': 'source', 'type': 'str'},

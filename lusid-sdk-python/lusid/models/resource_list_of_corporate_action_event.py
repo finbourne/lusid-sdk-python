@@ -24,24 +24,30 @@
 from msrest.serialization import Model
 
 
-class UserId(Model):
-    """UserId.
+class ResourceListOfCorporateActionEvent(Model):
+    """ResourceListOfCorporateActionEvent.
 
-    Variables are only populated by the server, and will be ignored when
-    sending a request.
-
-    :ivar id:
-    :vartype id: str
+    :param values:
+    :type values: list[~lusid.models.CorporateAction]
+    :param href: The Uri that returns the same result as the original request,
+     but may include resolved as at time(s).
+    :type href: str
+    :param count: The total number of records returned in the set
+    :type count: int
+    :param links:
+    :type links: list[~lusid.models.Link]
     """
 
-    _validation = {
-        'id': {'readonly': True},
-    }
-
     _attribute_map = {
-        'id': {'key': 'id', 'type': 'str'},
+        'values': {'key': 'values', 'type': '[CorporateAction]'},
+        'href': {'key': 'href', 'type': 'str'},
+        'count': {'key': 'count', 'type': 'int'},
+        'links': {'key': 'links', 'type': '[Link]'},
     }
 
-    def __init__(self):
-        super(UserId, self).__init__()
-        self.id = None
+    def __init__(self, values=None, href=None, count=None, links=None):
+        super(ResourceListOfCorporateActionEvent, self).__init__()
+        self.values = values
+        self.href = href
+        self.count = count
+        self.links = links

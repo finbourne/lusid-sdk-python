@@ -24,24 +24,24 @@
 from msrest.serialization import Model
 
 
-class NullableOfCurrency(Model):
-    """NullableOfCurrency.
+class User(Model):
+    """User.
 
     Variables are only populated by the server, and will be ignored when
     sending a request.
 
-    :ivar value:
-    :vartype value: str
+    :ivar id:
+    :vartype id: str
     """
 
     _validation = {
-        'value': {'readonly': True},
+        'id': {'readonly': True},
     }
 
     _attribute_map = {
-        'value': {'key': 'value', 'type': 'str'},
+        'id': {'key': 'id', 'type': 'str'},
     }
 
     def __init__(self):
-        super(NullableOfCurrency, self).__init__()
-        self.value = None
+        super(User, self).__init__()
+        self.id = None

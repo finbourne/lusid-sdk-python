@@ -31,35 +31,32 @@ class CreateClientInstrumentRequest(Model):
     :type client_instrument_id: str
     :param name:
     :type name: str
-    :param instrument_properties:
-    :type instrument_properties: dict[str,
-     ~lusid.models.CreatePropertyRequest]
     :param look_through_portfolio_id:
     :type look_through_portfolio_id: ~lusid.models.ResourceId
-    :param instrument: There could be multiple underlying instrument
-     definitions (same
-     instrument but different format), but for now store one.
+    :param instrument: Expanded instrument definition - in the case of OTC
+     instruments
+     this contains the definition of the non-exchange traded instrument.
+     The format for this can be client-defined, but in order to transparently
+     use
+     vendor libraries it must conform to a format that LUSID understands.
     :type instrument: ~lusid.models.InstrumentDefinition
     """
 
     _validation = {
         'client_instrument_id': {'required': True},
         'name': {'required': True},
-        'instrument_properties': {'required': True},
     }
 
     _attribute_map = {
         'client_instrument_id': {'key': 'clientInstrumentId', 'type': 'str'},
         'name': {'key': 'name', 'type': 'str'},
-        'instrument_properties': {'key': 'instrumentProperties', 'type': '{CreatePropertyRequest}'},
         'look_through_portfolio_id': {'key': 'lookThroughPortfolioId', 'type': 'ResourceId'},
         'instrument': {'key': 'instrument', 'type': 'InstrumentDefinition'},
     }
 
-    def __init__(self, client_instrument_id, name, instrument_properties, look_through_portfolio_id=None, instrument=None):
+    def __init__(self, client_instrument_id, name, look_through_portfolio_id=None, instrument=None):
         super(CreateClientInstrumentRequest, self).__init__()
         self.client_instrument_id = client_instrument_id
         self.name = name
-        self.instrument_properties = instrument_properties
         self.look_through_portfolio_id = look_through_portfolio_id
         self.instrument = instrument

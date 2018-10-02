@@ -52,6 +52,7 @@ class CreateTransactionPortfolioRequest(Model):
     _validation = {
         'display_name': {'required': True},
         'code': {'required': True},
+        'base_currency': {'required': True},
     }
 
     _attribute_map = {
@@ -66,7 +67,7 @@ class CreateTransactionPortfolioRequest(Model):
         'properties': {'key': 'properties', 'type': '{CreatePropertyRequest}'},
     }
 
-    def __init__(self, display_name, code, description=None, created=None, base_currency=None, corporate_action_source_id=None, accounting_method=None, sub_holding_keys=None, properties=None):
+    def __init__(self, display_name, code, base_currency, description=None, created=None, corporate_action_source_id=None, accounting_method=None, sub_holding_keys=None, properties=None):
         super(CreateTransactionPortfolioRequest, self).__init__()
         self.display_name = display_name
         self.description = description

@@ -37,6 +37,7 @@ from .resource_id import ResourceId
 from .corporate_action import CorporateAction
 from .error_detail import ErrorDetail
 from .upsert_corporate_actions_response import UpsertCorporateActionsResponse
+from .resource_list_of_corporate_action_event import ResourceListOfCorporateActionEvent
 from .create_unit_definition import CreateUnitDefinition
 from .create_data_type_request import CreateDataTypeRequest
 from .iunit_definition import IUnitDefinition
@@ -46,7 +47,6 @@ from .resource_list_of_data_type import ResourceListOfDataType
 from .create_derived_transaction_portfolio_request import CreateDerivedTransactionPortfolioRequest
 from .version import Version
 from .portfolio import Portfolio
-from .create_property_request import CreatePropertyRequest
 from .instrument_definition import InstrumentDefinition
 from .create_client_instrument_request import CreateClientInstrumentRequest
 from .property import Property
@@ -54,6 +54,7 @@ from .instrument import Instrument
 from .try_add_client_instruments import TryAddClientInstruments
 from .delete_client_instruments_response import DeleteClientInstrumentsResponse
 from .lookup_instruments_from_codes_response import LookupInstrumentsFromCodesResponse
+from .create_property_request import CreatePropertyRequest
 from .create_instrument_property_request import CreateInstrumentPropertyRequest
 from .instrument_property import InstrumentProperty
 from .upsert_instrument_properties_response import UpsertInstrumentPropertiesResponse
@@ -74,7 +75,7 @@ from .result_data_schema import ResultDataSchema
 from .list_aggregation_response import ListAggregationResponse
 from .aggregation_response_node import AggregationResponseNode
 from .nested_aggregation_response import NestedAggregationResponse
-from .user_id import UserId
+from .user import User
 from .processed_command import ProcessedCommand
 from .resource_list_of_processed_command import ResourceListOfProcessedCommand
 from .complete_portfolio import CompletePortfolio
@@ -118,7 +119,6 @@ from .portfolio_details import PortfolioDetails
 from .create_portfolio_details import CreatePortfolioDetails
 from .transaction_price import TransactionPrice
 from .currency_and_amount import CurrencyAndAmount
-from .nullable_of_currency import NullableOfCurrency
 from .perpetual_property import PerpetualProperty
 from .transaction import Transaction
 from .portfolio_holding import PortfolioHolding
@@ -155,6 +155,7 @@ __all__ = [
     'CorporateAction',
     'ErrorDetail',
     'UpsertCorporateActionsResponse',
+    'ResourceListOfCorporateActionEvent',
     'CreateUnitDefinition',
     'CreateDataTypeRequest',
     'IUnitDefinition',
@@ -164,7 +165,6 @@ __all__ = [
     'CreateDerivedTransactionPortfolioRequest',
     'Version',
     'Portfolio',
-    'CreatePropertyRequest',
     'InstrumentDefinition',
     'CreateClientInstrumentRequest',
     'Property',
@@ -172,6 +172,7 @@ __all__ = [
     'TryAddClientInstruments',
     'DeleteClientInstrumentsResponse',
     'LookupInstrumentsFromCodesResponse',
+    'CreatePropertyRequest',
     'CreateInstrumentPropertyRequest',
     'InstrumentProperty',
     'UpsertInstrumentPropertiesResponse',
@@ -192,7 +193,7 @@ __all__ = [
     'ListAggregationResponse',
     'AggregationResponseNode',
     'NestedAggregationResponse',
-    'UserId',
+    'User',
     'ProcessedCommand',
     'ResourceListOfProcessedCommand',
     'CompletePortfolio',
@@ -236,7 +237,6 @@ __all__ = [
     'CreatePortfolioDetails',
     'TransactionPrice',
     'CurrencyAndAmount',
-    'NullableOfCurrency',
     'PerpetualProperty',
     'Transaction',
     'PortfolioHolding',
