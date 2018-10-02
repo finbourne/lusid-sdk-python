@@ -275,7 +275,8 @@ class TestFinbourneApi(TestCase):
     def test_add_securities(self):
 
         secid = "added-sec-{}".format(str(uuid.uuid4()))
-        self.client.batch_add_client_instruments([models.CreateClientInstrumentRequest(secid, secid, [])])
+        self.client.batch_add_client_instruments([models.CreateClientInstrumentRequest(secid, secid
+                                                                                       )])
 
     def test_portfolio_aggregation(self):
 
