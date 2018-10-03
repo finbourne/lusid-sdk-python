@@ -25,17 +25,29 @@ from msrest.serialization import Model
 
 
 class InstrumentDefinition(Model):
-    """An opaque instrument definition.
-    Understood by some analytics library.
+    """Expanded instrument definition - in the case of OTC instruments
+    this contains the definition of the non-exchange traded instrument.
+    The format for this can be client-defined, but in order to transparently
+    use
+    vendor libraries it must conform to a format that LUSID understands.
 
+    :param instrument_format:
+    :type instrument_format: str
     :param content:
     :type content: str
     """
 
+    _validation = {
+        'instrument_format': {'required': True},
+        'content': {'required': True},
+    }
+
     _attribute_map = {
+        'instrument_format': {'key': 'instrumentFormat', 'type': 'str'},
         'content': {'key': 'content', 'type': 'str'},
     }
 
-    def __init__(self, content=None):
+    def __init__(self, instrument_format, content):
         super(InstrumentDefinition, self).__init__()
+        self.instrument_format = instrument_format
         self.content = content

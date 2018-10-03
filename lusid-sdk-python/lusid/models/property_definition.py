@@ -27,6 +27,9 @@ from msrest.serialization import Model
 class PropertyDefinition(Model):
     """PropertyDefinition.
 
+    Variables are only populated by the server, and will be ignored when
+    sending a request.
+
     :param href:
     :type href: str
     :param key:
@@ -51,9 +54,22 @@ class PropertyDefinition(Model):
     :param unit_schema: Possible values include: 'NoUnits', 'Basic',
      'Iso4217Currency'
     :type unit_schema: str or ~lusid.models.enum
+    :ivar domain: Possible values include: 'Trade', 'Portfolio', 'Security',
+     'Holding', 'ReferenceHolding', 'TxnType'
+    :vartype domain: str or ~lusid.models.enum
+    :ivar scope:
+    :vartype scope: str
+    :ivar code:
+    :vartype code: str
     :param links:
     :type links: list[~lusid.models.Link]
     """
+
+    _validation = {
+        'domain': {'readonly': True},
+        'scope': {'readonly': True},
+        'code': {'readonly': True},
+    }
 
     _attribute_map = {
         'href': {'key': 'href', 'type': 'str'},
@@ -65,6 +81,9 @@ class PropertyDefinition(Model):
         'life_time': {'key': 'lifeTime', 'type': 'str'},
         'type': {'key': 'type', 'type': 'str'},
         'unit_schema': {'key': 'unitSchema', 'type': 'str'},
+        'domain': {'key': 'domain', 'type': 'str'},
+        'scope': {'key': 'scope', 'type': 'str'},
+        'code': {'key': 'code', 'type': 'str'},
         'links': {'key': 'links', 'type': '[Link]'},
     }
 
@@ -79,4 +98,7 @@ class PropertyDefinition(Model):
         self.life_time = life_time
         self.type = type
         self.unit_schema = unit_schema
+        self.domain = None
+        self.scope = None
+        self.code = None
         self.links = links

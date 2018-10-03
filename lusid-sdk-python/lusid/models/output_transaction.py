@@ -78,15 +78,15 @@ class OutputTransaction(Model):
     """
 
     _validation = {
-        'transaction_id': {'required': True, 'readonly': True},
-        'type': {'required': True, 'readonly': True},
-        'description': {'required': True, 'readonly': True},
+        'transaction_id': {'readonly': True},
+        'type': {'readonly': True},
+        'description': {'readonly': True},
         'instrument_uid': {'readonly': True},
         'transaction_date': {'readonly': True},
         'settlement_date': {'readonly': True},
         'units': {'readonly': True},
-        'transaction_price': {'required': True, 'readonly': True},
-        'total_consideration': {'required': True, 'readonly': True},
+        'transaction_price': {'readonly': True},
+        'total_consideration': {'readonly': True},
         'exchange_rate': {'readonly': True},
         'transaction_to_portfolio_rate': {'readonly': True},
         'transaction_currency': {'readonly': True},
