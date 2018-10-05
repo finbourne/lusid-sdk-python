@@ -49,6 +49,7 @@ class TransactionConfigurationTypeAlias(Model):
         'description': {'required': True},
         'transaction_class': {'required': True},
         'transaction_group': {'required': True},
+        'transaction_roles': {'required': True},
     }
 
     _attribute_map = {
@@ -59,7 +60,7 @@ class TransactionConfigurationTypeAlias(Model):
         'transaction_roles': {'key': 'transactionRoles', 'type': 'str'},
     }
 
-    def __init__(self, type, description, transaction_class, transaction_group, transaction_roles=None):
+    def __init__(self, type, description, transaction_class, transaction_group, transaction_roles):
         super(TransactionConfigurationTypeAlias, self).__init__()
         self.type = type
         self.description = description

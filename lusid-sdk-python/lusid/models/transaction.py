@@ -62,8 +62,13 @@ class Transaction(Model):
     _validation = {
         'transaction_id': {'required': True},
         'type': {'required': True},
+        'instrument_uid': {'required': True},
+        'transaction_date': {'required': True},
+        'settlement_date': {'required': True},
+        'units': {'required': True},
         'transaction_price': {'required': True},
         'total_consideration': {'required': True},
+        'source': {'required': True},
     }
 
     _attribute_map = {
@@ -83,7 +88,7 @@ class Transaction(Model):
         'netting_set': {'key': 'nettingSet', 'type': 'str'},
     }
 
-    def __init__(self, transaction_id, type, transaction_price, total_consideration, instrument_uid=None, transaction_date=None, settlement_date=None, units=None, exchange_rate=None, transaction_currency=None, properties=None, counterparty_id=None, source=None, netting_set=None):
+    def __init__(self, transaction_id, type, instrument_uid, transaction_date, settlement_date, units, transaction_price, total_consideration, source, exchange_rate=None, transaction_currency=None, properties=None, counterparty_id=None, netting_set=None):
         super(Transaction, self).__init__()
         self.transaction_id = transaction_id
         self.type = type

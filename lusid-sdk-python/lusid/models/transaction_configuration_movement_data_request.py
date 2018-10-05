@@ -42,6 +42,12 @@ class TransactionConfigurationMovementDataRequest(Model):
     :type mappings: list[~lusid.models.TransactionPropertyMappingRequest]
     """
 
+    _validation = {
+        'movement_types': {'required': True},
+        'side': {'required': True},
+        'direction': {'required': True},
+    }
+
     _attribute_map = {
         'movement_types': {'key': 'movementTypes', 'type': 'str'},
         'side': {'key': 'side', 'type': 'str'},
@@ -50,7 +56,7 @@ class TransactionConfigurationMovementDataRequest(Model):
         'mappings': {'key': 'mappings', 'type': '[TransactionPropertyMappingRequest]'},
     }
 
-    def __init__(self, movement_types=None, side=None, direction=None, properties=None, mappings=None):
+    def __init__(self, movement_types, side, direction, properties=None, mappings=None):
         super(TransactionConfigurationMovementDataRequest, self).__init__()
         self.movement_types = movement_types
         self.side = side

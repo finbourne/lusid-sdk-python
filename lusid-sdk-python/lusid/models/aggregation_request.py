@@ -49,6 +49,7 @@ class AggregationRequest(Model):
 
     _validation = {
         'recipe_id': {'required': True},
+        'effective_at': {'required': True},
         'metrics': {'required': True},
     }
 
@@ -64,7 +65,7 @@ class AggregationRequest(Model):
         'sort': {'key': 'sort', 'type': 'str'},
     }
 
-    def __init__(self, recipe_id, metrics, load_reference_portfolio=None, as_at=None, effective_at=None, group_by=None, filters=None, limit=None, sort=None):
+    def __init__(self, recipe_id, effective_at, metrics, load_reference_portfolio=None, as_at=None, group_by=None, filters=None, limit=None, sort=None):
         super(AggregationRequest, self).__init__()
         self.recipe_id = recipe_id
         self.load_reference_portfolio = load_reference_portfolio

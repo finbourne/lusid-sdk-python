@@ -35,6 +35,7 @@ class AggregateSpec(Model):
 
     _validation = {
         'key': {'required': True},
+        'op': {'required': True},
     }
 
     _attribute_map = {
@@ -42,7 +43,7 @@ class AggregateSpec(Model):
         'op': {'key': 'op', 'type': 'str'},
     }
 
-    def __init__(self, key, op=None):
+    def __init__(self, key, op):
         super(AggregateSpec, self).__init__()
         self.key = key
         self.op = op

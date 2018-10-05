@@ -48,7 +48,12 @@ class PortfolioHolding(Model):
     """
 
     _validation = {
+        'instrument_uid': {'required': True},
         'holding_type': {'required': True},
+        'units': {'required': True},
+        'settled_units': {'required': True},
+        'cost': {'required': True},
+        'cost_portfolio_ccy': {'required': True},
     }
 
     _attribute_map = {
@@ -62,7 +67,7 @@ class PortfolioHolding(Model):
         'transaction': {'key': 'transaction', 'type': 'Transaction'},
     }
 
-    def __init__(self, holding_type, instrument_uid=None, properties=None, units=None, settled_units=None, cost=None, cost_portfolio_ccy=None, transaction=None):
+    def __init__(self, instrument_uid, holding_type, units, settled_units, cost, cost_portfolio_ccy, properties=None, transaction=None):
         super(PortfolioHolding, self).__init__()
         self.instrument_uid = instrument_uid
         self.properties = properties

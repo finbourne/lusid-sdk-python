@@ -37,6 +37,14 @@ class CreateDerivedTransactionPortfolioRequest(Model):
     :type parent_portfolio_id: ~lusid.models.ResourceId
     :param created:
     :type created: datetime
+    :param corporate_action_source_id:
+    :type corporate_action_source_id: ~lusid.models.ResourceId
+    :param accounting_method: Possible values include: 'Default',
+     'AverageCost', 'FirstInFirstOut', 'LastInFirstOut', 'HighestCostFirst',
+     'LowestCostFirst'
+    :type accounting_method: str or ~lusid.models.enum
+    :param sub_holding_keys:
+    :type sub_holding_keys: list[str]
     """
 
     _validation = {
@@ -49,12 +57,18 @@ class CreateDerivedTransactionPortfolioRequest(Model):
         'code': {'key': 'code', 'type': 'str'},
         'parent_portfolio_id': {'key': 'parentPortfolioId', 'type': 'ResourceId'},
         'created': {'key': 'created', 'type': 'iso-8601'},
+        'corporate_action_source_id': {'key': 'corporateActionSourceId', 'type': 'ResourceId'},
+        'accounting_method': {'key': 'accountingMethod', 'type': 'str'},
+        'sub_holding_keys': {'key': 'subHoldingKeys', 'type': '[str]'},
     }
 
-    def __init__(self, display_name, description=None, code=None, parent_portfolio_id=None, created=None):
+    def __init__(self, display_name, description=None, code=None, parent_portfolio_id=None, created=None, corporate_action_source_id=None, accounting_method=None, sub_holding_keys=None):
         super(CreateDerivedTransactionPortfolioRequest, self).__init__()
         self.display_name = display_name
         self.description = description
         self.code = code
         self.parent_portfolio_id = parent_portfolio_id
         self.created = created
+        self.corporate_action_source_id = corporate_action_source_id
+        self.accounting_method = accounting_method
+        self.sub_holding_keys = sub_holding_keys

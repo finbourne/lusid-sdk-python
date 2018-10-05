@@ -35,13 +35,19 @@ class CorporateActionTransitionComponent(Model):
     :type cost_factor: float
     """
 
+    _validation = {
+        'instrument_uid': {'required': True},
+        'units_factor': {'required': True},
+        'cost_factor': {'required': True},
+    }
+
     _attribute_map = {
         'instrument_uid': {'key': 'instrumentUid', 'type': 'str'},
         'units_factor': {'key': 'unitsFactor', 'type': 'float'},
         'cost_factor': {'key': 'costFactor', 'type': 'float'},
     }
 
-    def __init__(self, instrument_uid=None, units_factor=None, cost_factor=None):
+    def __init__(self, instrument_uid, units_factor, cost_factor):
         super(CorporateActionTransitionComponent, self).__init__()
         self.instrument_uid = instrument_uid
         self.units_factor = units_factor

@@ -37,6 +37,10 @@ class ReconciliationBreak(Model):
     :type cost_difference: float
     """
 
+    _validation = {
+        'instrument_uid': {'required': True},
+    }
+
     _attribute_map = {
         'instrument_uid': {'key': 'instrumentUid', 'type': 'str'},
         'properties': {'key': 'properties', 'type': '[Property]'},
@@ -44,7 +48,7 @@ class ReconciliationBreak(Model):
         'cost_difference': {'key': 'costDifference', 'type': 'float'},
     }
 
-    def __init__(self, instrument_uid=None, properties=None, units_difference=None, cost_difference=None):
+    def __init__(self, instrument_uid, properties=None, units_difference=None, cost_difference=None):
         super(ReconciliationBreak, self).__init__()
         self.instrument_uid = instrument_uid
         self.properties = properties

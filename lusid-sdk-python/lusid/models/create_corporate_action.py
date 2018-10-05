@@ -43,6 +43,10 @@ class CreateCorporateAction(Model):
 
     _validation = {
         'corporate_action_code': {'required': True},
+        'announcement_date': {'required': True},
+        'ex_date': {'required': True},
+        'record_date': {'required': True},
+        'payment_date': {'required': True},
         'transitions': {'required': True},
     }
 
@@ -55,7 +59,7 @@ class CreateCorporateAction(Model):
         'transitions': {'key': 'transitions', 'type': '[CorporateActionTransition]'},
     }
 
-    def __init__(self, corporate_action_code, transitions, announcement_date=None, ex_date=None, record_date=None, payment_date=None):
+    def __init__(self, corporate_action_code, announcement_date, ex_date, record_date, payment_date, transitions):
         super(CreateCorporateAction, self).__init__()
         self.corporate_action_code = corporate_action_code
         self.announcement_date = announcement_date
