@@ -24,25 +24,25 @@
 from msrest.serialization import Model
 
 
-class CreatePerpetualPropertyRequest(Model):
-    """CreatePerpetualPropertyRequest.
+class PropertyValue(Model):
+    """PropertyValue.
 
-    :param value:
-    :type value: object
-    :param unit:
-    :type unit: str
+    :param label_value:
+    :type label_value: str
+    :param metric_value:
+    :type metric_value: ~lusid.models.MetricValue
+    :param effective_from: Date for which the property is effective from
+    :type effective_from: datetime
     """
 
-    _validation = {
-        'value': {'required': True},
-    }
-
     _attribute_map = {
-        'value': {'key': 'value', 'type': 'object'},
-        'unit': {'key': 'unit', 'type': 'str'},
+        'label_value': {'key': 'labelValue', 'type': 'str'},
+        'metric_value': {'key': 'metricValue', 'type': 'MetricValue'},
+        'effective_from': {'key': 'effectiveFrom', 'type': 'iso-8601'},
     }
 
-    def __init__(self, value, unit=None):
-        super(CreatePerpetualPropertyRequest, self).__init__()
-        self.value = value
-        self.unit = unit
+    def __init__(self, label_value=None, metric_value=None, effective_from=None):
+        super(PropertyValue, self).__init__()
+        self.label_value = label_value
+        self.metric_value = metric_value
+        self.effective_from = effective_from

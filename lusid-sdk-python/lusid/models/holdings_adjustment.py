@@ -38,7 +38,7 @@ class HoldingsAdjustment(Model):
      'PositionToZero', 'KeepTheSame'
     :type unmatched_holding_method: str or ~lusid.models.enum
     :param adjustments:
-    :type adjustments: list[~lusid.models.AdjustHoldingRequest]
+    :type adjustments: list[~lusid.models.HoldingAdjustment]
     :param links:
     :type links: list[~lusid.models.Link]
     """
@@ -47,7 +47,7 @@ class HoldingsAdjustment(Model):
         'effective_at': {'key': 'effectiveAt', 'type': 'iso-8601'},
         'version': {'key': 'version', 'type': 'Version'},
         'unmatched_holding_method': {'key': 'unmatchedHoldingMethod', 'type': 'str'},
-        'adjustments': {'key': 'adjustments', 'type': '[AdjustHoldingRequest]'},
+        'adjustments': {'key': 'adjustments', 'type': '[HoldingAdjustment]'},
         'links': {'key': 'links', 'type': '[Link]'},
     }
 

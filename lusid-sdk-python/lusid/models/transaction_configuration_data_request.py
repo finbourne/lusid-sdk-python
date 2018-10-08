@@ -37,7 +37,7 @@ class TransactionConfigurationDataRequest(Model):
     :type movements:
      list[~lusid.models.TransactionConfigurationMovementDataRequest]
     :ivar properties:
-    :vartype properties: dict[str, ~lusid.models.CreatePropertyRequest]
+    :vartype properties: dict[str, ~lusid.models.PropertyValue]
     """
 
     _validation = {
@@ -49,7 +49,7 @@ class TransactionConfigurationDataRequest(Model):
     _attribute_map = {
         'aliases': {'key': 'aliases', 'type': '[TransactionConfigurationTypeAlias]'},
         'movements': {'key': 'movements', 'type': '[TransactionConfigurationMovementDataRequest]'},
-        'properties': {'key': 'properties', 'type': '{CreatePropertyRequest}'},
+        'properties': {'key': 'properties', 'type': '{PropertyValue}'},
     }
 
     def __init__(self, aliases, movements):

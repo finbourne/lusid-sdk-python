@@ -25,7 +25,7 @@ from msrest.serialization import Model
 
 
 class AdjustHoldingRequest(Model):
-    """This 'dto' contains target holdings. i.e. holding data that the
+    """This request specifies target holdings. i.e. holding data that the
     system should match. When processed by the movement
     engine, it will create 'true-up' adjustments on the fly.
 
@@ -33,10 +33,9 @@ class AdjustHoldingRequest(Model):
     :type instrument_uid: str
     :param sub_holding_keys: Key fields to uniquely index the sub holdings of
      a instrument
-    :type sub_holding_keys: dict[str,
-     ~lusid.models.CreatePerpetualPropertyRequest]
+    :type sub_holding_keys: dict[str, ~lusid.models.PerpetualPropertyValue]
     :param properties: Arbitrary properties to store with the holding
-    :type properties: dict[str, ~lusid.models.CreatePerpetualPropertyRequest]
+    :type properties: dict[str, ~lusid.models.PerpetualPropertyValue]
     :param tax_lots: 1 or more quantity amounts
     :type tax_lots: list[~lusid.models.TargetTaxLotRequest]
     """
@@ -48,8 +47,8 @@ class AdjustHoldingRequest(Model):
 
     _attribute_map = {
         'instrument_uid': {'key': 'instrumentUid', 'type': 'str'},
-        'sub_holding_keys': {'key': 'subHoldingKeys', 'type': '{CreatePerpetualPropertyRequest}'},
-        'properties': {'key': 'properties', 'type': '{CreatePerpetualPropertyRequest}'},
+        'sub_holding_keys': {'key': 'subHoldingKeys', 'type': '{PerpetualPropertyValue}'},
+        'properties': {'key': 'properties', 'type': '{PerpetualPropertyValue}'},
         'tax_lots': {'key': 'taxLots', 'type': '[TargetTaxLotRequest]'},
     }
 

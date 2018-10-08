@@ -24,29 +24,21 @@
 from msrest.serialization import Model
 
 
-class CreatePropertyRequest(Model):
-    """CreatePropertyRequest.
+class MetricValue(Model):
+    """MetricValue.
 
     :param value:
-    :type value: object
-    :param effective_from: Date for which the property is effective from
-    :type effective_from: datetime
+    :type value: float
     :param unit:
     :type unit: str
     """
 
-    _validation = {
-        'value': {'required': True},
-    }
-
     _attribute_map = {
-        'value': {'key': 'value', 'type': 'object'},
-        'effective_from': {'key': 'effectiveFrom', 'type': 'iso-8601'},
+        'value': {'key': 'value', 'type': 'float'},
         'unit': {'key': 'unit', 'type': 'str'},
     }
 
-    def __init__(self, value, effective_from=None, unit=None):
-        super(CreatePropertyRequest, self).__init__()
+    def __init__(self, value=None, unit=None):
+        super(MetricValue, self).__init__()
         self.value = value
-        self.effective_from = effective_from
         self.unit = unit

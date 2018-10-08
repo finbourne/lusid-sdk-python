@@ -24,29 +24,37 @@
 from msrest.serialization import Model
 
 
-class ReferencePortfolioConstituentRequest(Model):
-    """ReferencePortfolioConstituentRequest.
+class HoldingAdjustment(Model):
+    """This 'dto' contains target holdings. i.e. holding data that the
+    system should match. When processed by the movement
+    engine, it will create 'true-up' adjustments on the fly.
 
-    :param instrument_uid:
+    :param instrument_uid: Unique instrument identifier
     :type instrument_uid: str
-    :param properties:
-    :type properties: dict[str, ~lusid.models.PerpetualPropertyValue]
-    :param weight:
-    :type weight: float
-    :param type: Possible values include: 'Shares', 'Weight', 'Nominal'
-    :type type: str or ~lusid.models.enum
+    :param sub_holding_keys: Key fields to uniquely index the sub holdings of
+     a instrument
+    :type sub_holding_keys: list[~lusid.models.PerpetualProperty]
+    :param properties: Arbitrary properties to store with the holding
+    :type properties: list[~lusid.models.PerpetualProperty]
+    :param tax_lots: 1 or more quantity amounts
+    :type tax_lots: list[~lusid.models.TargetTaxLot]
     """
+
+    _validation = {
+        'instrument_uid': {'required': True},
+        'tax_lots': {'required': True},
+    }
 
     _attribute_map = {
         'instrument_uid': {'key': 'instrumentUid', 'type': 'str'},
-        'properties': {'key': 'properties', 'type': '{PerpetualPropertyValue}'},
-        'weight': {'key': 'weight', 'type': 'float'},
-        'type': {'key': 'type', 'type': 'str'},
+        'sub_holding_keys': {'key': 'subHoldingKeys', 'type': '[PerpetualProperty]'},
+        'properties': {'key': 'properties', 'type': '[PerpetualProperty]'},
+        'tax_lots': {'key': 'taxLots', 'type': '[TargetTaxLot]'},
     }
 
-    def __init__(self, instrument_uid=None, properties=None, weight=None, type=None):
-        super(ReferencePortfolioConstituentRequest, self).__init__()
+    def __init__(self, instrument_uid, tax_lots, sub_holding_keys=None, properties=None):
+        super(HoldingAdjustment, self).__init__()
         self.instrument_uid = instrument_uid
+        self.sub_holding_keys = sub_holding_keys
         self.properties = properties
-        self.weight = weight
-        self.type = type
+        self.tax_lots = tax_lots

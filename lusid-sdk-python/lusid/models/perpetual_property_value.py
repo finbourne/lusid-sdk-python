@@ -24,21 +24,21 @@
 from msrest.serialization import Model
 
 
-class CreateInstrumentPropertyRequest(Model):
-    """CreateInstrumentPropertyRequest.
+class PerpetualPropertyValue(Model):
+    """PerpetualPropertyValue.
 
-    :param instrument_property_key:
-    :type instrument_property_key: str
-    :param property:
-    :type property: ~lusid.models.PropertyValue
+    :param label_value:
+    :type label_value: str
+    :param metric_value:
+    :type metric_value: ~lusid.models.MetricValue
     """
 
     _attribute_map = {
-        'instrument_property_key': {'key': 'instrumentPropertyKey', 'type': 'str'},
-        'property': {'key': 'property', 'type': 'PropertyValue'},
+        'label_value': {'key': 'labelValue', 'type': 'str'},
+        'metric_value': {'key': 'metricValue', 'type': 'MetricValue'},
     }
 
-    def __init__(self, instrument_property_key=None, property=None):
-        super(CreateInstrumentPropertyRequest, self).__init__()
-        self.instrument_property_key = instrument_property_key
-        self.property = property
+    def __init__(self, label_value=None, metric_value=None):
+        super(PerpetualPropertyValue, self).__init__()
+        self.label_value = label_value
+        self.metric_value = metric_value

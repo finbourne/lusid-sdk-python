@@ -39,7 +39,7 @@ class PropertyDefinition(Model):
      'BenchmarkType', 'Code', 'Id', 'Uri', 'ArrayOfIds',
      'ArrayOfTransactionAliases', 'ArrayofTransactionMovements',
      'ArrayofUnits', 'StringArray', 'CurrencyAndAmount', 'TradePrice',
-     'UnitCreation', 'Currency', 'UserId'
+     'UnitCreation', 'Currency', 'UserId', 'MetricValue'
     :type value_type: str or ~lusid.models.enum
     :param value_required:
     :type value_required: bool

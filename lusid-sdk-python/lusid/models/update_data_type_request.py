@@ -38,7 +38,7 @@ class UpdateDataTypeRequest(Model):
      'BenchmarkType', 'Code', 'Id', 'Uri', 'ArrayOfIds',
      'ArrayOfTransactionAliases', 'ArrayofTransactionMovements',
      'ArrayofUnits', 'StringArray', 'CurrencyAndAmount', 'TradePrice',
-     'UnitCreation', 'Currency', 'UserId'
+     'UnitCreation', 'Currency', 'UserId', 'MetricValue'
     :type value_type: str or ~lusid.models.enum
     :param acceptable_values:
     :type acceptable_values: list[object]

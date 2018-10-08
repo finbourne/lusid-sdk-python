@@ -42,8 +42,8 @@ from .create_unit_definition import CreateUnitDefinition
 from .create_data_type_request import CreateDataTypeRequest
 from .iunit_definition import IUnitDefinition
 from .data_type import DataType
-from .update_data_type_request import UpdateDataTypeRequest
 from .resource_list_of_data_type import ResourceListOfDataType
+from .update_data_type_request import UpdateDataTypeRequest
 from .create_derived_transaction_portfolio_request import CreateDerivedTransactionPortfolioRequest
 from .version import Version
 from .portfolio import Portfolio
@@ -54,7 +54,8 @@ from .instrument import Instrument
 from .try_add_client_instruments import TryAddClientInstruments
 from .delete_client_instruments_response import DeleteClientInstrumentsResponse
 from .lookup_instruments_from_codes_response import LookupInstrumentsFromCodesResponse
-from .create_property_request import CreatePropertyRequest
+from .metric_value import MetricValue
+from .property_value import PropertyValue
 from .create_instrument_property_request import CreateInstrumentPropertyRequest
 from .instrument_property import InstrumentProperty
 from .upsert_instrument_properties_response import UpsertInstrumentPropertiesResponse
@@ -92,7 +93,7 @@ from .reconciliation_request import ReconciliationRequest
 from .reconciliation_break import ReconciliationBreak
 from .resource_list_of_reconciliation_break import ResourceListOfReconciliationBreak
 from .create_reference_portfolio_request import CreateReferencePortfolioRequest
-from .create_perpetual_property_request import CreatePerpetualPropertyRequest
+from .perpetual_property_value import PerpetualPropertyValue
 from .reference_portfolio_constituent_request import ReferencePortfolioConstituentRequest
 from .upsert_reference_portfolio_constituents_response import UpsertReferencePortfolioConstituentsResponse
 from .reference_portfolio_constituent import ReferencePortfolioConstituent
@@ -128,6 +129,8 @@ from .adjust_holding_request import AdjustHoldingRequest
 from .adjust_holding import AdjustHolding
 from .holdings_adjustment_header import HoldingsAdjustmentHeader
 from .resource_list_of_holdings_adjustment_header import ResourceListOfHoldingsAdjustmentHeader
+from .target_tax_lot import TargetTaxLot
+from .holding_adjustment import HoldingAdjustment
 from .holdings_adjustment import HoldingsAdjustment
 from .versioned_resource_list_of_transaction import VersionedResourceListOfTransaction
 from .transaction_request import TransactionRequest
@@ -160,8 +163,8 @@ __all__ = [
     'CreateDataTypeRequest',
     'IUnitDefinition',
     'DataType',
-    'UpdateDataTypeRequest',
     'ResourceListOfDataType',
+    'UpdateDataTypeRequest',
     'CreateDerivedTransactionPortfolioRequest',
     'Version',
     'Portfolio',
@@ -172,7 +175,8 @@ __all__ = [
     'TryAddClientInstruments',
     'DeleteClientInstrumentsResponse',
     'LookupInstrumentsFromCodesResponse',
-    'CreatePropertyRequest',
+    'MetricValue',
+    'PropertyValue',
     'CreateInstrumentPropertyRequest',
     'InstrumentProperty',
     'UpsertInstrumentPropertiesResponse',
@@ -210,7 +214,7 @@ __all__ = [
     'ReconciliationBreak',
     'ResourceListOfReconciliationBreak',
     'CreateReferencePortfolioRequest',
-    'CreatePerpetualPropertyRequest',
+    'PerpetualPropertyValue',
     'ReferencePortfolioConstituentRequest',
     'UpsertReferencePortfolioConstituentsResponse',
     'ReferencePortfolioConstituent',
@@ -246,6 +250,8 @@ __all__ = [
     'AdjustHolding',
     'HoldingsAdjustmentHeader',
     'ResourceListOfHoldingsAdjustmentHeader',
+    'TargetTaxLot',
+    'HoldingAdjustment',
     'HoldingsAdjustment',
     'VersionedResourceListOfTransaction',
     'TransactionRequest',

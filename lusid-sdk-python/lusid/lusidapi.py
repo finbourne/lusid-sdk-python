@@ -345,7 +345,7 @@ class LUSIDAPI(object):
         self._client = ServiceClient(self.config.credentials, self.config)
 
         client_models = {k: v for k, v in models.__dict__.items() if isinstance(v, type)}
-        self.api_version = '0.7.26'
+        self.api_version = '0.7.35'
         self._serialize = Serializer(client_models)
         self._deserialize = Deserializer(client_models)
 
@@ -3321,8 +3321,7 @@ class LUSIDAPI(object):
         :param code: Code for the portfolio
         :type code: str
         :param portfolio_properties:
-        :type portfolio_properties: dict[str,
-         ~lusid.models.CreatePropertyRequest]
+        :type portfolio_properties: dict[str, ~lusid.models.PropertyValue]
         :param effective_at: The effective date for the change
         :type effective_at: datetime
         :param dict custom_headers: headers that will be added to the request
@@ -3357,7 +3356,7 @@ class LUSIDAPI(object):
 
         # Construct body
         if portfolio_properties is not None:
-            body_content = self._serialize.body(portfolio_properties, '{CreatePropertyRequest}')
+            body_content = self._serialize.body(portfolio_properties, '{PropertyValue}')
         else:
             body_content = None
 
@@ -3575,7 +3574,7 @@ class LUSIDAPI(object):
     create_property_definition.metadata = {'url': '/api/propertydefinitions'}
 
     def get_property_definition(
-            self, domain, scope, name, as_at=None, custom_headers=None, raw=False, **operation_config):
+            self, domain, scope, code, as_at=None, custom_headers=None, raw=False, **operation_config):
         """Gets a property definition.
 
         :param domain: Possible values include: 'Trade', 'Portfolio',
@@ -3583,8 +3582,8 @@ class LUSIDAPI(object):
         :type domain: str
         :param scope:
         :type scope: str
-        :param name:
-        :type name: str
+        :param code:
+        :type code: str
         :param as_at:
         :type as_at: datetime
         :param dict custom_headers: headers that will be added to the request
@@ -3603,7 +3602,7 @@ class LUSIDAPI(object):
         path_format_arguments = {
             'domain': self._serialize.url("domain", domain, 'str'),
             'scope': self._serialize.url("scope", scope, 'str'),
-            'name': self._serialize.url("name", name, 'str')
+            'code': self._serialize.url("code", code, 'str')
         }
         url = self._client.format_url(url, **path_format_arguments)
 
@@ -3635,10 +3634,10 @@ class LUSIDAPI(object):
             return client_raw_response
 
         return deserialized
-    get_property_definition.metadata = {'url': '/api/propertydefinitions/{domain}/{scope}/{name}'}
+    get_property_definition.metadata = {'url': '/api/propertydefinitions/{domain}/{scope}/{code}'}
 
     def update_property_definition(
-            self, domain, scope, name, definition=None, custom_headers=None, raw=False, **operation_config):
+            self, domain, scope, code, definition=None, custom_headers=None, raw=False, **operation_config):
         """Updates the specified property definition.
 
         :param domain: Possible values include: 'Trade', 'Portfolio',
@@ -3646,8 +3645,8 @@ class LUSIDAPI(object):
         :type domain: str
         :param scope:
         :type scope: str
-        :param name:
-        :type name: str
+        :param code:
+        :type code: str
         :param definition:
         :type definition: ~lusid.models.UpdatePropertyDefinitionRequest
         :param dict custom_headers: headers that will be added to the request
@@ -3666,7 +3665,7 @@ class LUSIDAPI(object):
         path_format_arguments = {
             'domain': self._serialize.url("domain", domain, 'str'),
             'scope': self._serialize.url("scope", scope, 'str'),
-            'name': self._serialize.url("name", name, 'str')
+            'code': self._serialize.url("code", code, 'str')
         }
         url = self._client.format_url(url, **path_format_arguments)
 
@@ -3703,10 +3702,10 @@ class LUSIDAPI(object):
             return client_raw_response
 
         return deserialized
-    update_property_definition.metadata = {'url': '/api/propertydefinitions/{domain}/{scope}/{name}'}
+    update_property_definition.metadata = {'url': '/api/propertydefinitions/{domain}/{scope}/{code}'}
 
     def delete_property_definition(
-            self, domain, scope, name, custom_headers=None, raw=False, **operation_config):
+            self, domain, scope, code, custom_headers=None, raw=False, **operation_config):
         """Deletes the property definition.
 
         :param domain: Possible values include: 'Trade', 'Portfolio',
@@ -3714,8 +3713,8 @@ class LUSIDAPI(object):
         :type domain: str
         :param scope:
         :type scope: str
-        :param name:
-        :type name: str
+        :param code:
+        :type code: str
         :param dict custom_headers: headers that will be added to the request
         :param bool raw: returns the direct response alongside the
          deserialized response
@@ -3732,7 +3731,7 @@ class LUSIDAPI(object):
         path_format_arguments = {
             'domain': self._serialize.url("domain", domain, 'str'),
             'scope': self._serialize.url("scope", scope, 'str'),
-            'name': self._serialize.url("name", name, 'str')
+            'code': self._serialize.url("code", code, 'str')
         }
         url = self._client.format_url(url, **path_format_arguments)
 
@@ -3762,7 +3761,7 @@ class LUSIDAPI(object):
             return client_raw_response
 
         return deserialized
-    delete_property_definition.metadata = {'url': '/api/propertydefinitions/{domain}/{scope}/{name}'}
+    delete_property_definition.metadata = {'url': '/api/propertydefinitions/{domain}/{scope}/{code}'}
 
     def perform_reconciliation(
             self, request=None, custom_headers=None, raw=False, **operation_config):
@@ -5680,7 +5679,7 @@ class LUSIDAPI(object):
         :type transaction_id: str
         :param transaction_properties: Transaction properties to add
         :type transaction_properties: dict[str,
-         ~lusid.models.CreatePerpetualPropertyRequest]
+         ~lusid.models.PerpetualPropertyValue]
         :param dict custom_headers: headers that will be added to the request
         :param bool raw: returns the direct response alongside the
          deserialized response
@@ -5713,7 +5712,7 @@ class LUSIDAPI(object):
 
         # Construct body
         if transaction_properties is not None:
-            body_content = self._serialize.body(transaction_properties, '{CreatePerpetualPropertyRequest}')
+            body_content = self._serialize.body(transaction_properties, '{PerpetualPropertyValue}')
         else:
             body_content = None
 

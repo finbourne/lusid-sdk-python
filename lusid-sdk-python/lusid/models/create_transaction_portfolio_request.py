@@ -46,7 +46,7 @@ class CreateTransactionPortfolioRequest(Model):
     :param sub_holding_keys:
     :type sub_holding_keys: list[str]
     :param properties: Portfolio properties to add to the portfolio
-    :type properties: dict[str, ~lusid.models.CreatePropertyRequest]
+    :type properties: dict[str, ~lusid.models.PropertyValue]
     """
 
     _validation = {
@@ -64,7 +64,7 @@ class CreateTransactionPortfolioRequest(Model):
         'corporate_action_source_id': {'key': 'corporateActionSourceId', 'type': 'ResourceId'},
         'accounting_method': {'key': 'accountingMethod', 'type': 'str'},
         'sub_holding_keys': {'key': 'subHoldingKeys', 'type': '[str]'},
-        'properties': {'key': 'properties', 'type': '{CreatePropertyRequest}'},
+        'properties': {'key': 'properties', 'type': '{PropertyValue}'},
     }
 
     def __init__(self, display_name, code, base_currency, description=None, created=None, corporate_action_source_id=None, accounting_method=None, sub_holding_keys=None, properties=None):

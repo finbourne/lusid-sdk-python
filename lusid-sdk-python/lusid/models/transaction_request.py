@@ -50,7 +50,7 @@ class TransactionRequest(Model):
     :param transaction_currency: Transaction currency
     :type transaction_currency: str
     :param properties:
-    :type properties: dict[str, ~lusid.models.CreatePerpetualPropertyRequest]
+    :type properties: dict[str, ~lusid.models.PerpetualPropertyValue]
     :param counterparty_id: Counterparty identifier
     :type counterparty_id: str
     :param source: Where this transaction came from, either Client or System.
@@ -83,7 +83,7 @@ class TransactionRequest(Model):
         'total_consideration': {'key': 'totalConsideration', 'type': 'CurrencyAndAmount'},
         'exchange_rate': {'key': 'exchangeRate', 'type': 'float'},
         'transaction_currency': {'key': 'transactionCurrency', 'type': 'str'},
-        'properties': {'key': 'properties', 'type': '{CreatePerpetualPropertyRequest}'},
+        'properties': {'key': 'properties', 'type': '{PerpetualPropertyValue}'},
         'counterparty_id': {'key': 'counterpartyId', 'type': 'str'},
         'source': {'key': 'source', 'type': 'str'},
         'netting_set': {'key': 'nettingSet', 'type': 'str'},
