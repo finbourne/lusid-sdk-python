@@ -110,7 +110,7 @@ class TestFinbourneApi(TestCase):
 
         #  property value
         property_value = "Active"
-        portfolio_property = models.CreatePropertyRequest(property_value)
+        portfolio_property = models.PropertyValue(property_value)
 
         #   add the property to the portfolio
         properties_result = self.client.upsert_portfolio_properties(scope, portfolio_id,
@@ -171,7 +171,7 @@ class TestFinbourneApi(TestCase):
             transaction_price=models.TransactionPrice(12.3),
             total_consideration=models.CurrencyAndAmount(1230, "GBP"),
             source="Client",
-            properties={property_definition_result.key: models.CreatePerpetualPropertyRequest(property_value)}
+            properties={property_definition_result.key: models.PerpetualPropertyValue(property_value)}
         )
 
         #   add the trade
