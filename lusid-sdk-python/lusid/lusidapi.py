@@ -345,7 +345,7 @@ class LUSIDAPI(object):
         self._client = ServiceClient(self.config.credentials, self.config)
 
         client_models = {k: v for k, v in models.__dict__.items() if isinstance(v, type)}
-        self.api_version = '0.7.39'
+        self.api_version = '0.7.40'
         self._serialize = Serializer(client_models)
         self._deserialize = Deserializer(client_models)
 
@@ -5114,10 +5114,10 @@ class LUSIDAPI(object):
 
     def set_holdings(
             self, scope, code, effective_at, holding_adjustments=None, custom_headers=None, raw=False, **operation_config):
-        """Adjust holdings.
+        """Set All Holdings.
 
-        Create transactions in a specific portfolio to bring it to the
-        specified holdings.
+        Create transactions in a specific portfolio to bring all holdings to
+        the specified targets.
 
         :param scope: The scope of the portfolio
         :type scope: str
@@ -5184,10 +5184,10 @@ class LUSIDAPI(object):
 
     def adjust_holdings(
             self, scope, code, effective_at, holding_adjustments=None, custom_headers=None, raw=False, **operation_config):
-        """Adjust holdings.
+        """Adjust Selected Holdings.
 
-        Create transactions in a specific portfolio to bring it to the
-        specified holdings.
+        Create transactions in a specific portfolio to bring the selected
+        holdings up to the specified targets.
 
         :param scope: The scope of the portfolio
         :type scope: str
