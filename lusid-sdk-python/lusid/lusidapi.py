@@ -345,7 +345,7 @@ class LUSIDAPI(object):
         self._client = ServiceClient(self.config.credentials, self.config)
 
         client_models = {k: v for k, v in models.__dict__.items() if isinstance(v, type)}
-        self.api_version = '0.7.36'
+        self.api_version = '0.7.37'
         self._serialize = Serializer(client_models)
         self._deserialize = Deserializer(client_models)
 
