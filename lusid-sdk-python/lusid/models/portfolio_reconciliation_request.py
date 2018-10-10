@@ -21,5 +21,33 @@
 # SOFTWARE.
 # --------------------------------------------------------------------------
 
-VERSION = "0.7.48"
+from msrest.serialization import Model
 
+
+class PortfolioReconciliationRequest(Model):
+    """PortfolioReconciliationRequest.
+
+    :param portfolio_id:
+    :type portfolio_id: ~lusid.models.ResourceId
+    :param effective_at:
+    :type effective_at: datetime
+    :param as_at:
+    :type as_at: datetime
+    """
+
+    _validation = {
+        'portfolio_id': {'required': True},
+        'effective_at': {'required': True},
+    }
+
+    _attribute_map = {
+        'portfolio_id': {'key': 'portfolioId', 'type': 'ResourceId'},
+        'effective_at': {'key': 'effectiveAt', 'type': 'iso-8601'},
+        'as_at': {'key': 'asAt', 'type': 'iso-8601'},
+    }
+
+    def __init__(self, portfolio_id, effective_at, as_at=None):
+        super(PortfolioReconciliationRequest, self).__init__()
+        self.portfolio_id = portfolio_id
+        self.effective_at = effective_at
+        self.as_at = as_at

@@ -21,5 +21,34 @@
 # SOFTWARE.
 # --------------------------------------------------------------------------
 
-VERSION = "0.7.48"
+from msrest.serialization import Model
 
+
+class PortfoliosReconciliationRequest(Model):
+    """PortfoliosReconciliationRequest.
+
+    :param left:
+    :type left: ~lusid.models.PortfolioReconciliationRequest
+    :param right:
+    :type right: ~lusid.models.PortfolioReconciliationRequest
+    :param instrument_property_keys:
+    :type instrument_property_keys: list[str]
+    """
+
+    _validation = {
+        'left': {'required': True},
+        'right': {'required': True},
+        'instrument_property_keys': {'required': True},
+    }
+
+    _attribute_map = {
+        'left': {'key': 'left', 'type': 'PortfolioReconciliationRequest'},
+        'right': {'key': 'right', 'type': 'PortfolioReconciliationRequest'},
+        'instrument_property_keys': {'key': 'instrumentPropertyKeys', 'type': '[str]'},
+    }
+
+    def __init__(self, left, right, instrument_property_keys):
+        super(PortfoliosReconciliationRequest, self).__init__()
+        self.left = left
+        self.right = right
+        self.instrument_property_keys = instrument_property_keys

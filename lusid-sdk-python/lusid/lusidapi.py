@@ -345,7 +345,7 @@ class LUSIDAPI(object):
         self._client = ServiceClient(self.config.credentials, self.config)
 
         client_models = {k: v for k, v in models.__dict__.items() if isinstance(v, type)}
-        self.api_version = '0.7.40'
+        self.api_version = '0.7.48'
         self._serialize = Serializer(client_models)
         self._deserialize = Deserializer(client_models)
 
@@ -3447,6 +3447,78 @@ class LUSIDAPI(object):
         return deserialized
     delete_portfolio_properties.metadata = {'url': '/api/portfolios/{scope}/{code}/properties'}
 
+    def reconcile_holdings(
+            self, request=None, sort_by=None, start=None, limit=None, filter=None, custom_headers=None, raw=False, **operation_config):
+        """Perform a reconciliation between two portfolios.
+
+        :param request:
+        :type request: ~lusid.models.PortfoliosReconciliationRequest
+        :param sort_by:
+        :type sort_by: list[str]
+        :param start:
+        :type start: int
+        :param limit:
+        :type limit: int
+        :param filter:
+        :type filter: str
+        :param dict custom_headers: headers that will be added to the request
+        :param bool raw: returns the direct response alongside the
+         deserialized response
+        :param operation_config: :ref:`Operation configuration
+         overrides<msrest:optionsforoperations>`.
+        :return: ResourceListOfReconciliationBreak or ClientRawResponse if
+         raw=true
+        :rtype: ~lusid.models.ResourceListOfReconciliationBreak or
+         ~msrest.pipeline.ClientRawResponse
+        :raises:
+         :class:`ErrorResponseException<lusid.models.ErrorResponseException>`
+        """
+        # Construct URL
+        url = self.reconcile_holdings.metadata['url']
+
+        # Construct parameters
+        query_parameters = {}
+        if sort_by is not None:
+            query_parameters['sortBy'] = self._serialize.query("sort_by", sort_by, '[str]', div=',')
+        if start is not None:
+            query_parameters['start'] = self._serialize.query("start", start, 'int')
+        if limit is not None:
+            query_parameters['limit'] = self._serialize.query("limit", limit, 'int')
+        if filter is not None:
+            query_parameters['filter'] = self._serialize.query("filter", filter, 'str')
+
+        # Construct headers
+        header_parameters = {}
+        header_parameters['Content-Type'] = 'application/json-patch+json; charset=utf-8'
+        if custom_headers:
+            header_parameters.update(custom_headers)
+
+        # Construct body
+        if request is not None:
+            body_content = self._serialize.body(request, 'PortfoliosReconciliationRequest')
+        else:
+            body_content = None
+
+        # Construct and send request
+        request = self._client.post(url, query_parameters)
+        response = self._client.send(
+            request, header_parameters, body_content, stream=False, **operation_config)
+
+        if response.status_code not in [200]:
+            raise models.ErrorResponseException(self._deserialize, response)
+
+        deserialized = None
+
+        if response.status_code == 200:
+            deserialized = self._deserialize('ResourceListOfReconciliationBreak', response)
+
+        if raw:
+            client_raw_response = ClientRawResponse(deserialized, response)
+            return client_raw_response
+
+        return deserialized
+    reconcile_holdings.metadata = {'url': '/api/portfolios/$reconcileholdings'}
+
     def get_multiple_property_definitions(
             self, keys=None, as_at=None, sort_by=None, start=None, limit=None, filter=None, custom_headers=None, raw=False, **operation_config):
         """Gets multiple property definitions.
@@ -3762,62 +3834,6 @@ class LUSIDAPI(object):
 
         return deserialized
     delete_property_definition.metadata = {'url': '/api/propertydefinitions/{domain}/{scope}/{code}'}
-
-    def perform_reconciliation(
-            self, request=None, custom_headers=None, raw=False, **operation_config):
-        """Perform a reconciliation between two portfolios.
-
-        :param request:
-        :type request: ~lusid.models.ReconciliationRequest
-        :param dict custom_headers: headers that will be added to the request
-        :param bool raw: returns the direct response alongside the
-         deserialized response
-        :param operation_config: :ref:`Operation configuration
-         overrides<msrest:optionsforoperations>`.
-        :return: ResourceListOfReconciliationBreak or ClientRawResponse if
-         raw=true
-        :rtype: ~lusid.models.ResourceListOfReconciliationBreak or
-         ~msrest.pipeline.ClientRawResponse
-        :raises:
-         :class:`ErrorResponseException<lusid.models.ErrorResponseException>`
-        """
-        # Construct URL
-        url = self.perform_reconciliation.metadata['url']
-
-        # Construct parameters
-        query_parameters = {}
-
-        # Construct headers
-        header_parameters = {}
-        header_parameters['Content-Type'] = 'application/json-patch+json; charset=utf-8'
-        if custom_headers:
-            header_parameters.update(custom_headers)
-
-        # Construct body
-        if request is not None:
-            body_content = self._serialize.body(request, 'ReconciliationRequest')
-        else:
-            body_content = None
-
-        # Construct and send request
-        request = self._client.post(url, query_parameters)
-        response = self._client.send(
-            request, header_parameters, body_content, stream=False, **operation_config)
-
-        if response.status_code not in [200]:
-            raise models.ErrorResponseException(self._deserialize, response)
-
-        deserialized = None
-
-        if response.status_code == 200:
-            deserialized = self._deserialize('ResourceListOfReconciliationBreak', response)
-
-        if raw:
-            client_raw_response = ClientRawResponse(deserialized, response)
-            return client_raw_response
-
-        return deserialized
-    perform_reconciliation.metadata = {'url': '/api/recon'}
 
     def create_reference_portfolio(
             self, scope, reference_portfolio=None, custom_headers=None, raw=False, **operation_config):

@@ -85,13 +85,15 @@ from .resource_list_of_scope import ResourceListOfScope
 from .resource_list_of_portfolio import ResourceListOfPortfolio
 from .update_portfolio_request import UpdatePortfolioRequest
 from .portfolio_properties import PortfolioProperties
+from .portfolio_reconciliation_request import PortfolioReconciliationRequest
+from .portfolios_reconciliation_request import PortfoliosReconciliationRequest
+from .currency_and_amount import CurrencyAndAmount
+from .reconciliation_break import ReconciliationBreak
+from .resource_list_of_reconciliation_break import ResourceListOfReconciliationBreak
 from .create_property_definition_request import CreatePropertyDefinitionRequest
 from .property_definition import PropertyDefinition
 from .resource_list_of_property_definition import ResourceListOfPropertyDefinition
 from .update_property_definition_request import UpdatePropertyDefinitionRequest
-from .reconciliation_request import ReconciliationRequest
-from .reconciliation_break import ReconciliationBreak
-from .resource_list_of_reconciliation_break import ResourceListOfReconciliationBreak
 from .create_reference_portfolio_request import CreateReferencePortfolioRequest
 from .perpetual_property_value import PerpetualPropertyValue
 from .reference_portfolio_constituent_request import ReferencePortfolioConstituentRequest
@@ -119,7 +121,6 @@ from .create_transaction_portfolio_request import CreateTransactionPortfolioRequ
 from .portfolio_details import PortfolioDetails
 from .create_portfolio_details import CreatePortfolioDetails
 from .transaction_price import TransactionPrice
-from .currency_and_amount import CurrencyAndAmount
 from .perpetual_property import PerpetualProperty
 from .transaction import Transaction
 from .portfolio_holding import PortfolioHolding
@@ -206,13 +207,15 @@ __all__ = [
     'ResourceListOfPortfolio',
     'UpdatePortfolioRequest',
     'PortfolioProperties',
+    'PortfolioReconciliationRequest',
+    'PortfoliosReconciliationRequest',
+    'CurrencyAndAmount',
+    'ReconciliationBreak',
+    'ResourceListOfReconciliationBreak',
     'CreatePropertyDefinitionRequest',
     'PropertyDefinition',
     'ResourceListOfPropertyDefinition',
     'UpdatePropertyDefinitionRequest',
-    'ReconciliationRequest',
-    'ReconciliationBreak',
-    'ResourceListOfReconciliationBreak',
     'CreateReferencePortfolioRequest',
     'PerpetualPropertyValue',
     'ReferencePortfolioConstituentRequest',
@@ -240,7 +243,6 @@ __all__ = [
     'PortfolioDetails',
     'CreatePortfolioDetails',
     'TransactionPrice',
-    'CurrencyAndAmount',
     'PerpetualProperty',
     'Transaction',
     'PortfolioHolding',

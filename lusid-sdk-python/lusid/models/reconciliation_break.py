@@ -29,28 +29,56 @@ class ReconciliationBreak(Model):
 
     :param instrument_uid: Unique instrument identifier
     :type instrument_uid: str
-    :param properties:
-    :type properties: list[~lusid.models.Property]
-    :param units_difference: Difference in units
-    :type units_difference: float
-    :param cost_difference: Difference in cost
-    :type cost_difference: float
+    :param sub_holding_keys:
+    :type sub_holding_keys: list[~lusid.models.Property]
+    :param left_units: Units from the left hand side
+    :type left_units: float
+    :param right_units: Units from the right hand side
+    :type right_units: float
+    :param difference_units: Difference in units
+    :type difference_units: float
+    :param left_cost: Cost from the left hand side
+    :type left_cost: ~lusid.models.CurrencyAndAmount
+    :param right_cost: Cost from the right hand side
+    :type right_cost: ~lusid.models.CurrencyAndAmount
+    :param difference_cost: Difference in cost
+    :type difference_cost: ~lusid.models.CurrencyAndAmount
+    :param instrument_properties: Additional features relating to the security
+    :type instrument_properties: list[~lusid.models.Property]
     """
 
     _validation = {
         'instrument_uid': {'required': True},
+        'sub_holding_keys': {'required': True},
+        'left_units': {'required': True},
+        'right_units': {'required': True},
+        'difference_units': {'required': True},
+        'left_cost': {'required': True},
+        'right_cost': {'required': True},
+        'difference_cost': {'required': True},
+        'instrument_properties': {'required': True},
     }
 
     _attribute_map = {
         'instrument_uid': {'key': 'instrumentUid', 'type': 'str'},
-        'properties': {'key': 'properties', 'type': '[Property]'},
-        'units_difference': {'key': 'unitsDifference', 'type': 'float'},
-        'cost_difference': {'key': 'costDifference', 'type': 'float'},
+        'sub_holding_keys': {'key': 'subHoldingKeys', 'type': '[Property]'},
+        'left_units': {'key': 'leftUnits', 'type': 'float'},
+        'right_units': {'key': 'rightUnits', 'type': 'float'},
+        'difference_units': {'key': 'differenceUnits', 'type': 'float'},
+        'left_cost': {'key': 'leftCost', 'type': 'CurrencyAndAmount'},
+        'right_cost': {'key': 'rightCost', 'type': 'CurrencyAndAmount'},
+        'difference_cost': {'key': 'differenceCost', 'type': 'CurrencyAndAmount'},
+        'instrument_properties': {'key': 'instrumentProperties', 'type': '[Property]'},
     }
 
-    def __init__(self, instrument_uid, properties=None, units_difference=None, cost_difference=None):
+    def __init__(self, instrument_uid, sub_holding_keys, left_units, right_units, difference_units, left_cost, right_cost, difference_cost, instrument_properties):
         super(ReconciliationBreak, self).__init__()
         self.instrument_uid = instrument_uid
-        self.properties = properties
-        self.units_difference = units_difference
-        self.cost_difference = cost_difference
+        self.sub_holding_keys = sub_holding_keys
+        self.left_units = left_units
+        self.right_units = right_units
+        self.difference_units = difference_units
+        self.left_cost = left_cost
+        self.right_cost = right_cost
+        self.difference_cost = difference_cost
+        self.instrument_properties = instrument_properties
