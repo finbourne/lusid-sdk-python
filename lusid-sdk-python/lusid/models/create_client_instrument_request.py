@@ -27,8 +27,10 @@ from msrest.serialization import Model
 class CreateClientInstrumentRequest(Model):
     """CreateClientInstrumentRequest.
 
-    :param client_instrument_id:
-    :type client_instrument_id: str
+    :param instrument_identifiers: A mapping of InstrumentId type (e.g, RIC,
+     FIGI, etc.) to Id Value (e.g BBG009CQDVC3). A list of supported
+     identifier types is available datatypes/system/InstrumentIdType.
+    :type instrument_identifiers: dict[str, str]
     :param name:
     :type name: str
     :param look_through_portfolio_id:
@@ -43,20 +45,20 @@ class CreateClientInstrumentRequest(Model):
     """
 
     _validation = {
-        'client_instrument_id': {'required': True},
+        'instrument_identifiers': {'required': True},
         'name': {'required': True},
     }
 
     _attribute_map = {
-        'client_instrument_id': {'key': 'clientInstrumentId', 'type': 'str'},
+        'instrument_identifiers': {'key': 'instrumentIdentifiers', 'type': '{str}'},
         'name': {'key': 'name', 'type': 'str'},
         'look_through_portfolio_id': {'key': 'lookThroughPortfolioId', 'type': 'ResourceId'},
         'instrument': {'key': 'instrument', 'type': 'InstrumentDefinition'},
     }
 
-    def __init__(self, client_instrument_id, name, look_through_portfolio_id=None, instrument=None):
+    def __init__(self, instrument_identifiers, name, look_through_portfolio_id=None, instrument=None):
         super(CreateClientInstrumentRequest, self).__init__()
-        self.client_instrument_id = client_instrument_id
+        self.instrument_identifiers = instrument_identifiers
         self.name = name
         self.look_through_portfolio_id = look_through_portfolio_id
         self.instrument = instrument
