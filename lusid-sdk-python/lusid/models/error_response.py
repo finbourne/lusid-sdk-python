@@ -71,9 +71,7 @@ class ErrorResponse(Model):
      'InvalidInstrumentIdentifierUnit', 'HoldingsAdjustmentDoesNotExist',
      'CouldNotBuildExcelUrl', 'CouldNotGetExcelVersion',
      'InstrumentByCodeNotFound', 'EntitySchemaDoesNotExist',
-     'FeatureNotSupportedOnPortfolioType', 'QuotePublishFailure',
-     'QuoteQueryFailure', 'InvalidInstrumentDefinition',
-     'InstrumentUpsertFailure'
+     'FeatureNotSupportedOnPortfolioType'
     :vartype code: str or ~lusid.models.enum
     :ivar message:
     :vartype message: str

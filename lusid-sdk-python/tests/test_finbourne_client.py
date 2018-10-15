@@ -272,17 +272,11 @@ class TestFinbourneApi(TestCase):
 
         self.assertGreater(len(fbn_ids.values), 0)
 
-    def test_add_instruments(self):
+    def test_add_securities(self):
 
         secid = "added-sec-{}".format(str(uuid.uuid4()))
-        identifiers = {"ClientDefinedId" : secid}
-        result = self.client.batch_add_client_instruments([models.CreateClientInstrumentRequest(identifiers, name=secid)])
-
-        print(result.values)
-
-        key = 'clientdefinedid: {}'.format(secid)
-
-        self.assertEqual(result.values[key].common_name, secid)
+        self.client.batch_add_client_instruments([models.CreateClientInstrumentRequest(secid, secid
+                                                                                       )])
 
     def test_portfolio_aggregation(self):
 
