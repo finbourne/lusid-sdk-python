@@ -326,6 +326,8 @@ class LUSIDAPI(object):
     | &lt;a name="214"&gt;214&lt;/a&gt;|InstrumentByCodeNotFound|  |
     | &lt;a name="215"&gt;215&lt;/a&gt;|EntitySchemaDoesNotExist|  |
     | &lt;a name="216"&gt;216&lt;/a&gt;|FeatureNotSupportedOnPortfolioType|  |
+    | &lt;a name="217"&gt;217&lt;/a&gt;|QuotePublishFailure|  |
+    | &lt;a name="218"&gt;218&lt;/a&gt;|QuoteQueryFailure|  |
     | &lt;a name="-10"&gt;-10&lt;/a&gt;|ServerConfigurationError|  |
     | &lt;a name="-1"&gt;-1&lt;/a&gt;|Unknown error|  |
 
@@ -345,14 +347,14 @@ class LUSIDAPI(object):
         self._client = ServiceClient(self.config.credentials, self.config)
 
         client_models = {k: v for k, v in models.__dict__.items() if isinstance(v, type)}
-        self.api_version = '0.7.48'
+        self.api_version = '0.7.62'
         self._serialize = Serializer(client_models)
         self._deserialize = Deserializer(client_models)
 
 
     def list_analytic_stores(
             self, as_at=None, sort_by=None, start=None, limit=None, filter=None, custom_headers=None, raw=False, **operation_config):
-        """List all analytic stores in client.
+        """
 
         :param as_at:
         :type as_at: datetime
@@ -419,10 +421,9 @@ class LUSIDAPI(object):
 
     def create_analytic_store(
             self, request=None, custom_headers=None, raw=False, **operation_config):
-        """Create a new analytic store for the given scope for the given date.
+        """
 
-        :param request: A valid and fully populated analytic store creation
-         request
+        :param request:
         :type request: ~lusid.models.CreateAnalyticStoreRequest
         :param dict custom_headers: headers that will be added to the request
         :param bool raw: returns the direct response alongside the
@@ -475,18 +476,17 @@ class LUSIDAPI(object):
 
     def get_analytic_store(
             self, scope, year, month, day, as_at=None, custom_headers=None, raw=False, **operation_config):
-        """Get an analytic store.
+        """
 
-        :param scope: The analytics data scope
+        :param scope:
         :type scope: str
-        :param year: The year component of the date for the data in the scope
+        :param year:
         :type year: int
-        :param month: The month component of the date for the data in the
-         scope
+        :param month:
         :type month: int
-        :param day: The day component of the date for the data in the scope
+        :param day:
         :type day: int
-        :param as_at: AsAt date
+        :param as_at:
         :type as_at: datetime
         :param dict custom_headers: headers that will be added to the request
         :param bool raw: returns the direct response alongside the
@@ -541,16 +541,15 @@ class LUSIDAPI(object):
 
     def delete_analytic_store(
             self, scope, year, month, day, custom_headers=None, raw=False, **operation_config):
-        """Create a new analytic store for the given scope for the given date.
+        """
 
-        :param scope: The analytics data scope
+        :param scope:
         :type scope: str
-        :param year: The year component of the date for the data in the scope
+        :param year:
         :type year: int
-        :param month: The month component of the date for the data in the
-         scope
+        :param month:
         :type month: int
-        :param day: The day component of the date for the data in the scope
+        :param day:
         :type day: int
         :param dict custom_headers: headers that will be added to the request
         :param bool raw: returns the direct response alongside the
@@ -603,17 +602,15 @@ class LUSIDAPI(object):
 
     def insert_analytics(
             self, scope, year, month, day, data=None, custom_headers=None, raw=False, **operation_config):
-        """Insert analytics into an existing analytic store for the given scope
-        and date.
+        """
 
-        :param scope: The analytics data scope
+        :param scope:
         :type scope: str
-        :param year: The year component of the date for the data in the scope
+        :param year:
         :type year: int
-        :param month: The month component of the date for the data in the
-         scope
+        :param month:
         :type month: int
-        :param day: The day component of the date for the data in the scope
+        :param day:
         :type day: int
         :param data:
         :type data: list[~lusid.models.InstrumentAnalytic]
@@ -675,15 +672,15 @@ class LUSIDAPI(object):
 
     def get_corporate_actions(
             self, scope, code, effective_at=None, as_at=None, sort_by=None, start=None, limit=None, filter=None, custom_headers=None, raw=False, **operation_config):
-        """Gets a corporate action based on dates.
+        """
 
-        :param scope: Scope
+        :param scope:
         :type scope: str
-        :param code: Corporate action source id
+        :param code:
         :type code: str
-        :param effective_at: Effective Date
+        :param effective_at:
         :type effective_at: datetime
-        :param as_at: AsAt Date filter
+        :param as_at:
         :type as_at: datetime
         :param sort_by:
         :type sort_by: list[str]
@@ -755,14 +752,13 @@ class LUSIDAPI(object):
 
     def batch_upsert_corporate_actions(
             self, scope, code, actions=None, custom_headers=None, raw=False, **operation_config):
-        """Attempt to create/update one or more corporate action. Failed actions
-        will be identified in the body of the response.
+        """
 
-        :param scope: The intended scope of the corporate action
+        :param scope:
         :type scope: str
-        :param code: Source of the corporate action
+        :param code:
         :type code: str
-        :param actions: The corporate actions to create
+        :param actions:
         :type actions: list[~lusid.models.CreateCorporateAction]
         :param dict custom_headers: headers that will be added to the request
         :param bool raw: returns the direct response alongside the
@@ -821,10 +817,9 @@ class LUSIDAPI(object):
 
     def create_data_type(
             self, request=None, custom_headers=None, raw=False, **operation_config):
-        """Create a new PropertyDataFormat. Note: Only non-default formats can be
-        created.
+        """
 
-        :param request: The definition of the new format
+        :param request:
         :type request: ~lusid.models.CreateDataTypeRequest
         :param dict custom_headers: headers that will be added to the request
         :param bool raw: returns the direct response alongside the
@@ -876,7 +871,7 @@ class LUSIDAPI(object):
 
     def list_data_types(
             self, scope, include_default=None, include_system=None, sort_by=None, start=None, limit=None, filter=None, custom_headers=None, raw=False, **operation_config):
-        """Lists all property data formats in the specified scope.
+        """
 
         :param scope:
         :type scope: str
@@ -952,7 +947,7 @@ class LUSIDAPI(object):
 
     def get_data_type(
             self, scope, name, custom_headers=None, raw=False, **operation_config):
-        """Gets a property data format.
+        """
 
         :param scope:
         :type scope: str
@@ -1006,14 +1001,13 @@ class LUSIDAPI(object):
 
     def update_data_type(
             self, scope, name, request=None, custom_headers=None, raw=False, **operation_config):
-        """Update a PropertyDataFormat. Note: Only non-default formats can be
-        updated.
+        """
 
-        :param scope: The scope of the format being updated
+        :param scope:
         :type scope: str
-        :param name: The name of the format to update
+        :param name:
         :type name: str
-        :param request: The new definition of the format
+        :param request:
         :type request: ~lusid.models.UpdateDataTypeRequest
         :param dict custom_headers: headers that will be added to the request
         :param bool raw: returns the direct response alongside the
@@ -1070,7 +1064,7 @@ class LUSIDAPI(object):
 
     def get_units_from_data_type(
             self, scope, name, units=None, filter=None, custom_headers=None, raw=False, **operation_config):
-        """Return the definitions for the specified list of units.
+        """
 
         :param scope:
         :type scope: str
@@ -1133,14 +1127,11 @@ class LUSIDAPI(object):
 
     def create_derived_portfolio(
             self, scope, portfolio=None, custom_headers=None, raw=False, **operation_config):
-        """Create derived portfolio.
+        """
 
-        Creates a portfolio that derives from an existing portfolio.
-
-        :param scope: The scope into which to create the new derived portfolio
+        :param scope:
         :type scope: str
-        :param portfolio: The root object of the new derived portfolio,
-         containing a populated reference portfolio id and reference scope
+        :param portfolio:
         :type portfolio:
          ~lusid.models.CreateDerivedTransactionPortfolioRequest
         :param dict custom_headers: headers that will be added to the request
@@ -1197,15 +1188,13 @@ class LUSIDAPI(object):
 
     def delete_derived_portfolio_details(
             self, scope, code, effective_at=None, custom_headers=None, raw=False, **operation_config):
-        """Delete portfolio details.
+        """
 
-        Deletes the portfolio details for the given code.
-
-        :param scope: The scope of the portfolio
+        :param scope:
         :type scope: str
-        :param code: Code for the portfolio
+        :param code:
         :type code: str
-        :param effective_at: The effective date of the change
+        :param effective_at:
         :type effective_at: datetime
         :param dict custom_headers: headers that will be added to the request
         :param bool raw: returns the direct response alongside the
@@ -1258,8 +1247,7 @@ class LUSIDAPI(object):
 
     def batch_add_client_instruments(
             self, definitions=None, custom_headers=None, raw=False, **operation_config):
-        """Attempt to create one or more client instruments. Failed instruments
-        will be identified in the body of the response.
+        """
 
         :param definitions:
         :type definitions: list[~lusid.models.CreateClientInstrumentRequest]
@@ -1314,8 +1302,7 @@ class LUSIDAPI(object):
 
     def batch_delete_client_instruments(
             self, uids=None, custom_headers=None, raw=False, **operation_config):
-        """Attempt to delete one or more client instruments. Failed instruments
-        will be identified in the body of the response.
+        """
 
         :param uids:
         :type uids: list[str]
@@ -1366,15 +1353,13 @@ class LUSIDAPI(object):
 
     def get_instrument(
             self, uid, as_at=None, instrument_property_keys=None, custom_headers=None, raw=False, **operation_config):
-        """Get an individual instrument by the unique instrument uid.  Optionally,
-        decorate each instrument with specific properties.
+        """
 
-        :param uid: The uid of the requested instrument
+        :param uid:
         :type uid: str
-        :param as_at: As at date
+        :param as_at:
         :type as_at: datetime
-        :param instrument_property_keys: Keys of the properties to be
-         retrieved
+        :param instrument_property_keys:
         :type instrument_property_keys: list[str]
         :param dict custom_headers: headers that will be added to the request
         :param bool raw: returns the direct response alongside the
@@ -1427,21 +1412,18 @@ class LUSIDAPI(object):
 
     def lookup_instruments_from_codes(
             self, code_type=None, codes=None, as_at=None, instrument_property_keys=None, custom_headers=None, raw=False, **operation_config):
-        """Lookup a large number of instruments by supplying a collection of
-        non-Finbourne codes.  Optionally, decorate each instrument with
-        specific properties.
+        """
 
-        :param code_type: The type of identifier. Possible values include:
-         'Undefined', 'ReutersAssetId', 'CINS', 'Isin', 'Sedol', 'Cusip',
-         'Ticker', 'ClientInternal', 'Figi', 'CompositeFigi', 'ShareClassFigi',
+        :param code_type: Possible values include: 'Undefined',
+         'ReutersAssetId', 'CINS', 'Isin', 'Sedol', 'Cusip', 'Ticker',
+         'ClientInternal', 'Figi', 'CompositeFigi', 'ShareClassFigi',
          'Wertpapier'
         :type code_type: str
-        :param codes: An array of codes
+        :param codes:
         :type codes: list[str]
-        :param as_at: As at date
+        :param as_at:
         :type as_at: datetime
-        :param instrument_property_keys: Keys of the properties to be
-         retrieved
+        :param instrument_property_keys:
         :type instrument_property_keys: list[str]
         :param dict custom_headers: headers that will be added to the request
         :param bool raw: returns the direct response alongside the
@@ -1501,7 +1483,7 @@ class LUSIDAPI(object):
 
     def batch_upsert_instrument_properties(
             self, classifications=None, custom_headers=None, raw=False, **operation_config):
-        """Upsert instrument properties.
+        """
 
         :param classifications:
         :type classifications: list[~lusid.models.InstrumentProperty]
@@ -1557,10 +1539,9 @@ class LUSIDAPI(object):
 
     def get_saml_identity_provider_id(
             self, domain, custom_headers=None, raw=False, **operation_config):
-        """Get the unique identifier for the SAML Identity Provider to be used by
-        domain.
+        """
 
-        :param domain: The domain that the user will be logging in to.
+        :param domain:
         :type domain: str
         :param dict custom_headers: headers that will be added to the request
         :param bool raw: returns the direct response alongside the
@@ -1609,7 +1590,7 @@ class LUSIDAPI(object):
 
     def get_excel_download_url(
             self, version=None, custom_headers=None, raw=False, **operation_config):
-        """Request an authorised url for an Excel client version.
+        """
 
         :param version:
         :type version: str
@@ -1658,7 +1639,7 @@ class LUSIDAPI(object):
 
     def get_lusid_versions(
             self, custom_headers=None, raw=False, **operation_config):
-        """Returns the current major application version.
+        """
 
         :param dict custom_headers: headers that will be added to the request
         :param bool raw: returns the direct response alongside the
@@ -1704,18 +1685,16 @@ class LUSIDAPI(object):
 
     def get_personalisations(
             self, pattern=None, scope=None, recursive=False, wildcards=False, sort_by=None, start=None, limit=None, custom_headers=None, raw=False, **operation_config):
-        """Get a personalisation, recursing to get any referenced if required.
+        """
 
-        :param pattern: The search pattern or specific key
+        :param pattern:
         :type pattern: str
-        :param scope: The scope level to request for. Possible values include:
-         'User', 'Group', 'Default', 'All'
+        :param scope: Possible values include: 'User', 'Group', 'Default',
+         'All'
         :type scope: str
-        :param recursive: Whether to recurse into dereference recursive
-         settings
+        :param recursive:
         :type recursive: bool
-        :param wildcards: Whether to apply wildcards to the provided pattern
-         and pull back any matching
+        :param wildcards:
         :type wildcards: bool
         :param sort_by:
         :type sort_by: list[str]
@@ -1782,7 +1761,7 @@ class LUSIDAPI(object):
 
     def upsert_personalisations(
             self, personalisations=None, custom_headers=None, raw=False, **operation_config):
-        """Upsert one or more personalisations.
+        """
 
         :param personalisations:
         :type personalisations: list[~lusid.models.Personalisation]
@@ -1838,16 +1817,14 @@ class LUSIDAPI(object):
 
     def delete_personalisation(
             self, key=None, scope=None, group=None, custom_headers=None, raw=False, **operation_config):
-        """Delete a personalisation at a specific scope (or use scope ALL to purge
-        the setting entirely).
+        """
 
-        :param key: The key of the setting to be deleted
+        :param key:
         :type key: str
-        :param scope: The scope to delete at (use ALL to purge the setting
-         entirely). Possible values include: 'User', 'Group', 'Default', 'All'
+        :param scope: Possible values include: 'User', 'Group', 'Default',
+         'All'
         :type scope: str
-        :param group: If deleting a setting at group level, specify the group
-         here
+        :param group:
         :type group: str
         :param dict custom_headers: headers that will be added to the request
         :param bool raw: returns the direct response alongside the
@@ -1899,7 +1876,7 @@ class LUSIDAPI(object):
 
     def list_portfolio_groups(
             self, scope, as_at=None, sort_by=None, start=None, limit=None, filter=None, custom_headers=None, raw=False, **operation_config):
-        """List all groups in a specified scope.
+        """
 
         :param scope:
         :type scope: str
@@ -1911,7 +1888,7 @@ class LUSIDAPI(object):
         :type start: int
         :param limit:
         :type limit: int
-        :param filter: A filter expression to apply to the result set
+        :param filter:
         :type filter: str
         :param dict custom_headers: headers that will be added to the request
         :param bool raw: returns the direct response alongside the
@@ -1971,7 +1948,7 @@ class LUSIDAPI(object):
 
     def create_portfolio_group(
             self, scope, request=None, custom_headers=None, raw=False, **operation_config):
-        """Create a new group.
+        """
 
         :param scope:
         :type scope: str
@@ -2032,7 +2009,7 @@ class LUSIDAPI(object):
 
     def get_portfolio_group(
             self, scope, code, as_at=None, custom_headers=None, raw=False, **operation_config):
-        """Get an existing group.
+        """
 
         :param scope:
         :type scope: str
@@ -2091,7 +2068,7 @@ class LUSIDAPI(object):
 
     def update_portfolio_group(
             self, scope, code, request=None, custom_headers=None, raw=False, **operation_config):
-        """Update an existing group.
+        """
 
         :param scope:
         :type scope: str
@@ -2155,7 +2132,7 @@ class LUSIDAPI(object):
 
     def delete_portfolio_group(
             self, scope, code, custom_headers=None, raw=False, **operation_config):
-        """Delete a group.
+        """
 
         :param scope:
         :type scope: str
@@ -2210,7 +2187,7 @@ class LUSIDAPI(object):
 
     def get_aggregation_by_group(
             self, scope, code, request=None, sort_by=None, start=None, limit=None, custom_headers=None, raw=False, **operation_config):
-        """Aggregate data in a group hierarchy.
+        """
 
         :param scope:
         :type scope: str
@@ -2286,8 +2263,7 @@ class LUSIDAPI(object):
 
     def get_nested_aggregation_by_group(
             self, scope, code, request=None, custom_headers=None, raw=False, **operation_config):
-        """Obsolete - Aggregation request data in a group hierarchy into a data
-        tree.
+        """
 
         :param scope:
         :type scope: str
@@ -2351,18 +2327,15 @@ class LUSIDAPI(object):
 
     def get_portfolio_group_commands(
             self, scope, code, from_as_at=None, to_as_at=None, sort_by=None, start=None, limit=None, filter=None, custom_headers=None, raw=False, **operation_config):
-        """Gets all commands that modified the portfolio groups(s) with the
-        specified id.
+        """
 
-        :param scope: The scope of the portfolio group
+        :param scope:
         :type scope: str
-        :param code: The portfolio group id
+        :param code:
         :type code: str
-        :param from_as_at: Filters commands by those that were processed at or
-         after this time. Null means there is no lower limit.
+        :param from_as_at:
         :type from_as_at: datetime
-        :param to_as_at: Filters commands by those that were processed at or
-         before this time. Null means there is no upper limit (latest).
+        :param to_as_at:
         :type to_as_at: datetime
         :param sort_by:
         :type sort_by: list[str]
@@ -2370,7 +2343,7 @@ class LUSIDAPI(object):
         :type start: int
         :param limit:
         :type limit: int
-        :param filter: A filter expression to apply to the result set
+        :param filter:
         :type filter: str
         :param dict custom_headers: headers that will be added to the request
         :param bool raw: returns the direct response alongside the
@@ -2434,7 +2407,7 @@ class LUSIDAPI(object):
 
     def get_portfolio_group_expansion(
             self, scope, code, effective_at=None, as_at=None, property_filter=None, custom_headers=None, raw=False, **operation_config):
-        """Get a full expansion of an existing group.
+        """
 
         :param scope:
         :type scope: str
@@ -2501,7 +2474,7 @@ class LUSIDAPI(object):
 
     def add_portfolio_to_group(
             self, scope, code, identifier=None, custom_headers=None, raw=False, **operation_config):
-        """Add a portfolio to an existing group.
+        """
 
         :param scope:
         :type scope: str
@@ -2565,7 +2538,7 @@ class LUSIDAPI(object):
 
     def delete_portfolio_from_group(
             self, scope, code, portfolio_scope, portfolio_code, custom_headers=None, raw=False, **operation_config):
-        """Remove a portfolio that is currently present within an existing group.
+        """
 
         :param scope:
         :type scope: str
@@ -2626,7 +2599,7 @@ class LUSIDAPI(object):
 
     def add_sub_group_to_group(
             self, scope, code, identifier=None, custom_headers=None, raw=False, **operation_config):
-        """Add a sub group to an existing group.
+        """
 
         :param scope:
         :type scope: str
@@ -2690,7 +2663,7 @@ class LUSIDAPI(object):
 
     def delete_sub_group_from_group(
             self, scope, code, subgroup_scope, subgroup_code, custom_headers=None, raw=False, **operation_config):
-        """Remove a subgroup that is currently present within an existing group.
+        """
 
         :param scope:
         :type scope: str
@@ -2751,17 +2724,15 @@ class LUSIDAPI(object):
 
     def list_portfolio_scopes(
             self, sort_by=None, start=None, limit=None, filter=None, custom_headers=None, raw=False, **operation_config):
-        """List scopes that contain portfolios.
+        """
 
-        Lists all scopes that have previously been used.
-
-        :param sort_by: How to order the returned scopes
+        :param sort_by:
         :type sort_by: list[str]
-        :param start: The starting index for the returned scopes
+        :param start:
         :type start: int
-        :param limit: The final index for the returned scopes
+        :param limit:
         :type limit: int
-        :param filter: Filter to be applied to the list of scopes
+        :param filter:
         :type filter: str
         :param dict custom_headers: headers that will be added to the request
         :param bool raw: returns the direct response alongside the
@@ -2815,21 +2786,19 @@ class LUSIDAPI(object):
 
     def list_portfolios(
             self, scope, effective_at=None, as_at=None, sort_by=None, start=None, limit=None, filter=None, custom_headers=None, raw=False, **operation_config):
-        """Get all portfolios.
+        """
 
-        Get all portfolios in a scope.
-
-        :param scope: The scope to get portfolios from
+        :param scope:
         :type scope: str
-        :param effective_at: Effective date
+        :param effective_at:
         :type effective_at: datetime
-        :param as_at: The asAt date to use
+        :param as_at:
         :type as_at: datetime
-        :param sort_by: The columns to sort the returned data by
+        :param sort_by:
         :type sort_by: list[str]
-        :param start: How many items to skip from the returned set
+        :param start:
         :type start: int
-        :param limit: How many items to return from the set
+        :param limit:
         :type limit: int
         :param filter:
         :type filter: str
@@ -2893,17 +2862,15 @@ class LUSIDAPI(object):
 
     def get_portfolio(
             self, scope, code, effective_at=None, as_at=None, custom_headers=None, raw=False, **operation_config):
-        """Get portfolio.
+        """
 
-        Gets a single portfolio by code.
-
-        :param scope: The scope of the portfolio
+        :param scope:
         :type scope: str
-        :param code: Code for the portfolio
+        :param code:
         :type code: str
-        :param effective_at: Effective date
+        :param effective_at:
         :type effective_at: datetime
-        :param as_at: The asAt date to use
+        :param as_at:
         :type as_at: datetime
         :param dict custom_headers: headers that will be added to the request
         :param bool raw: returns the direct response alongside the
@@ -2957,15 +2924,15 @@ class LUSIDAPI(object):
 
     def update_portfolio(
             self, scope, code, request=None, effective_at=None, custom_headers=None, raw=False, **operation_config):
-        """Update portfolio.
+        """
 
-        :param scope: The scope of the portfolio to be updated
+        :param scope:
         :type scope: str
-        :param code: Code for the portfolio
+        :param code:
         :type code: str
-        :param request: The update request
+        :param request:
         :type request: ~lusid.models.UpdatePortfolioRequest
-        :param effective_at: The effective date for the change
+        :param effective_at:
         :type effective_at: datetime
         :param dict custom_headers: headers that will be added to the request
         :param bool raw: returns the direct response alongside the
@@ -3024,15 +2991,13 @@ class LUSIDAPI(object):
 
     def delete_portfolio(
             self, scope, code, effective_at=None, custom_headers=None, raw=False, **operation_config):
-        """Delete portfolio.
+        """
 
-        Deletes a portfolio from the given effectiveAt.
-
-        :param scope: The scope of the portfolio
+        :param scope:
         :type scope: str
-        :param code: Code for the portfolio
+        :param code:
         :type code: str
-        :param effective_at: Effective date
+        :param effective_at:
         :type effective_at: datetime
         :param dict custom_headers: headers that will be added to the request
         :param bool raw: returns the direct response alongside the
@@ -3085,7 +3050,7 @@ class LUSIDAPI(object):
 
     def get_aggregation_by_portfolio(
             self, scope, code, request=None, sort_by=None, start=None, limit=None, custom_headers=None, raw=False, **operation_config):
-        """Aggregate data in a portfolio.
+        """
 
         :param scope:
         :type scope: str
@@ -3161,21 +3126,17 @@ class LUSIDAPI(object):
 
     def get_portfolio_commands(
             self, scope, code, from_as_at=None, to_as_at=None, filter=None, custom_headers=None, raw=False, **operation_config):
-        """Get modifications.
+        """
 
-        Gets all commands that modified the portfolio.
-
-        :param scope: The scope of the portfolio
+        :param scope:
         :type scope: str
-        :param code: The portfolio id
+        :param code:
         :type code: str
-        :param from_as_at: Filters commands by those that were processed at or
-         after this time. Null means there is no lower limit.
+        :param from_as_at:
         :type from_as_at: datetime
-        :param to_as_at: Filters commands by those that were processed at or
-         before this time. Null means there is no upper limit (latest).
+        :param to_as_at:
         :type to_as_at: datetime
-        :param filter: Command filter
+        :param filter:
         :type filter: str
         :param dict custom_headers: headers that will be added to the request
         :param bool raw: returns the direct response alongside the
@@ -3233,21 +3194,17 @@ class LUSIDAPI(object):
 
     def get_portfolio_properties(
             self, scope, code, effective_at=None, as_at=None, sort_by=None, start=None, limit=None, custom_headers=None, raw=False, **operation_config):
-        """Get properties.
+        """
 
-        Get properties attached to the portfolio.  If the asAt is not specified
-        then
-        the latest system time is used.
-
-        :param scope: The scope of the portfolio
+        :param scope:
         :type scope: str
-        :param code: Code for the portfolio
+        :param code:
         :type code: str
-        :param effective_at: Effective date
+        :param effective_at:
         :type effective_at: datetime
-        :param as_at: The asAt date to use
+        :param as_at:
         :type as_at: datetime
-        :param sort_by: Property to sort the results by
+        :param sort_by:
         :type sort_by: list[str]
         :param start:
         :type start: int
@@ -3312,17 +3269,15 @@ class LUSIDAPI(object):
 
     def upsert_portfolio_properties(
             self, scope, code, portfolio_properties=None, effective_at=None, custom_headers=None, raw=False, **operation_config):
-        """Update properties.
+        """
 
-        Create one or more properties on a portfolio.
-
-        :param scope: The scope of the portfolio
+        :param scope:
         :type scope: str
-        :param code: Code for the portfolio
+        :param code:
         :type code: str
         :param portfolio_properties:
         :type portfolio_properties: dict[str, ~lusid.models.PropertyValue]
-        :param effective_at: The effective date for the change
+        :param effective_at:
         :type effective_at: datetime
         :param dict custom_headers: headers that will be added to the request
         :param bool raw: returns the direct response alongside the
@@ -3382,19 +3337,15 @@ class LUSIDAPI(object):
 
     def delete_portfolio_properties(
             self, scope, code, effective_at=None, portfolio_property_keys=None, custom_headers=None, raw=False, **operation_config):
-        """Delete one, many or all properties from a portfolio for a specified
-        effective date.
+        """
 
-        Specifying no properties will delete all properties.
-
-        :param scope: The scope of the portfolio
+        :param scope:
         :type scope: str
-        :param code: Code for the portfolio
+        :param code:
         :type code: str
-        :param effective_at: Effective date
+        :param effective_at:
         :type effective_at: datetime
-        :param portfolio_property_keys: The keys of the property to be
-         deleted. None specified indicates the intent to delete all properties
+        :param portfolio_property_keys:
         :type portfolio_property_keys: list[str]
         :param dict custom_headers: headers that will be added to the request
         :param bool raw: returns the direct response alongside the
@@ -3449,7 +3400,7 @@ class LUSIDAPI(object):
 
     def reconcile_holdings(
             self, request=None, sort_by=None, start=None, limit=None, filter=None, custom_headers=None, raw=False, **operation_config):
-        """Perform a reconciliation between two portfolios.
+        """
 
         :param request:
         :type request: ~lusid.models.PortfoliosReconciliationRequest
@@ -3521,7 +3472,7 @@ class LUSIDAPI(object):
 
     def get_multiple_property_definitions(
             self, keys=None, as_at=None, sort_by=None, start=None, limit=None, filter=None, custom_headers=None, raw=False, **operation_config):
-        """Gets multiple property definitions.
+        """
 
         :param keys:
         :type keys: list[str]
@@ -3592,7 +3543,7 @@ class LUSIDAPI(object):
 
     def create_property_definition(
             self, definition=None, custom_headers=None, raw=False, **operation_config):
-        """Creates a new property definition.
+        """
 
         :param definition:
         :type definition: ~lusid.models.CreatePropertyDefinitionRequest
@@ -3647,7 +3598,7 @@ class LUSIDAPI(object):
 
     def get_property_definition(
             self, domain, scope, code, as_at=None, custom_headers=None, raw=False, **operation_config):
-        """Gets a property definition.
+        """
 
         :param domain: Possible values include: 'Trade', 'Portfolio',
          'Security', 'Holding', 'ReferenceHolding', 'TxnType'
@@ -3710,7 +3661,7 @@ class LUSIDAPI(object):
 
     def update_property_definition(
             self, domain, scope, code, definition=None, custom_headers=None, raw=False, **operation_config):
-        """Updates the specified property definition.
+        """
 
         :param domain: Possible values include: 'Trade', 'Portfolio',
          'Security', 'Holding', 'ReferenceHolding', 'TxnType'
@@ -3778,7 +3729,7 @@ class LUSIDAPI(object):
 
     def delete_property_definition(
             self, domain, scope, code, custom_headers=None, raw=False, **operation_config):
-        """Deletes the property definition.
+        """
 
         :param domain: Possible values include: 'Trade', 'Portfolio',
          'Security', 'Holding', 'ReferenceHolding', 'TxnType'
@@ -3837,11 +3788,11 @@ class LUSIDAPI(object):
 
     def create_reference_portfolio(
             self, scope, reference_portfolio=None, custom_headers=None, raw=False, **operation_config):
-        """Create a new reference portfolio.
+        """
 
-        :param scope: The intended scope of the portfolio
+        :param scope:
         :type scope: str
-        :param reference_portfolio: The portfolio creation request object
+        :param reference_portfolio:
         :type reference_portfolio:
          ~lusid.models.CreateReferencePortfolioRequest
         :param dict custom_headers: headers that will be added to the request
@@ -3898,7 +3849,7 @@ class LUSIDAPI(object):
 
     def get_reference_portfolio_constituents(
             self, scope, code, effective_at, as_at=None, sort_by=None, start=None, limit=None, custom_headers=None, raw=False, **operation_config):
-        """Get all the constituents in a reference portfolio.
+        """
 
         :param scope:
         :type scope: str
@@ -3973,7 +3924,7 @@ class LUSIDAPI(object):
 
     def upsert_reference_portfolio_constituents(
             self, scope, code, effective_at, constituents=None, custom_headers=None, raw=False, **operation_config):
-        """Add constituents to a specific reference portfolio.
+        """
 
         :param scope:
         :type scope: str
@@ -4042,13 +3993,13 @@ class LUSIDAPI(object):
 
     def get_results(
             self, scope, key, date_parameter, as_at=None, sort_by=None, start=None, limit=None, custom_headers=None, raw=False, **operation_config):
-        """Retrieve some previously stored results.
+        """
 
-        :param scope: The scope of the data
+        :param scope:
         :type scope: str
-        :param key: The key that identifies the data
+        :param key:
         :type key: str
-        :param date_parameter: The date for which the data was loaded
+        :param date_parameter:
         :type date_parameter: datetime
         :param as_at:
         :type as_at: datetime
@@ -4115,16 +4066,15 @@ class LUSIDAPI(object):
 
     def upsert_results(
             self, scope, key, date_parameter, request=None, custom_headers=None, raw=False, **operation_config):
-        """Upsert precalculated results against a specified scope/key/date
-        combination.
+        """
 
-        :param scope: The scope of the data
+        :param scope:
         :type scope: str
-        :param key: The key that identifies the data
+        :param key:
         :type key: str
-        :param date_parameter: The date for which the data is relevant
+        :param date_parameter:
         :type date_parameter: datetime
-        :param request: The results to upload
+        :param request:
         :type request: ~lusid.models.CreateResults
         :param dict custom_headers: headers that will be added to the request
         :param bool raw: returns the direct response alongside the
@@ -4182,7 +4132,7 @@ class LUSIDAPI(object):
 
     def get_aggregation_by_result_set(
             self, scope, results_key, request=None, sort_by=None, start=None, limit=None, custom_headers=None, raw=False, **operation_config):
-        """Aggregate data from a result set.
+        """
 
         :param scope:
         :type scope: str
@@ -4258,7 +4208,7 @@ class LUSIDAPI(object):
 
     def list_entities(
             self, custom_headers=None, raw=False, **operation_config):
-        """List all available entities.
+        """
 
         :param dict custom_headers: headers that will be added to the request
         :param bool raw: returns the direct response alongside the
@@ -4304,7 +4254,7 @@ class LUSIDAPI(object):
 
     def get_entity_schema(
             self, entity, custom_headers=None, raw=False, **operation_config):
-        """Gets the schema for a given entity.
+        """
 
         :param entity:
         :type entity: str
@@ -4355,11 +4305,9 @@ class LUSIDAPI(object):
 
     def get_property_schema(
             self, property_keys=None, as_at=None, custom_headers=None, raw=False, **operation_config):
-        """Get the schemas for the provided list of property keys.
+        """
 
-        :param property_keys: A comma delimited list of property keys in
-         string format. e.g.
-         "Portfolio/default/PropertyName,Portfolio/differentScope/MyProperty"
+        :param property_keys:
         :type property_keys: list[str]
         :param as_at:
         :type as_at: datetime
@@ -4411,7 +4359,7 @@ class LUSIDAPI(object):
 
     def get_value_types(
             self, sort_by=None, start=None, limit=None, custom_headers=None, raw=False, **operation_config):
-        """Gets the available value types that could be returned in a schema.
+        """
 
         :param sort_by:
         :type sort_by: list[str]
@@ -4469,7 +4417,7 @@ class LUSIDAPI(object):
 
     def portfolio_groups_search(
             self, request=None, sort_by=None, start=None, limit=None, filter=None, custom_headers=None, raw=False, **operation_config):
-        """Search portfolio groups.
+        """
 
         :param request:
         :type request: object
@@ -4540,7 +4488,7 @@ class LUSIDAPI(object):
 
     def portfolios_search(
             self, request=None, sort_by=None, start=None, limit=None, filter=None, custom_headers=None, raw=False, **operation_config):
-        """Search portfolios.
+        """
 
         :param request:
         :type request: object
@@ -4612,7 +4560,7 @@ class LUSIDAPI(object):
 
     def properties_search(
             self, request=None, sort_by=None, start=None, limit=None, filter=None, custom_headers=None, raw=False, **operation_config):
-        """Search properties.
+        """
 
         :param request:
         :type request: object
@@ -4684,7 +4632,7 @@ class LUSIDAPI(object):
 
     def list_configuration_transaction_types(
             self, custom_headers=None, raw=False, **operation_config):
-        """Gets the list of persisted transaction types.
+        """
 
         :param dict custom_headers: headers that will be added to the request
         :param bool raw: returns the direct response alongside the
@@ -4731,7 +4679,7 @@ class LUSIDAPI(object):
 
     def set_configuration_transaction_types(
             self, types=None, custom_headers=None, raw=False, **operation_config):
-        """Uploads a list of transaction types to be used by the movements engine.
+        """
 
         :param types:
         :type types: list[~lusid.models.TransactionConfigurationDataRequest]
@@ -4787,7 +4735,7 @@ class LUSIDAPI(object):
 
     def create_configuration_transaction_type(
             self, type=None, custom_headers=None, raw=False, **operation_config):
-        """Adds a new transaction type movement to the list of existing types.
+        """
 
         :param type:
         :type type: ~lusid.models.TransactionConfigurationDataRequest
@@ -4842,13 +4790,11 @@ class LUSIDAPI(object):
 
     def create_portfolio(
             self, scope, create_request=None, custom_headers=None, raw=False, **operation_config):
-        """Create portfolio.
+        """
 
-        Creates a new portfolio.
-
-        :param scope: The intended scope of the portfolio
+        :param scope:
         :type scope: str
-        :param create_request: The portfolio creation request object
+        :param create_request:
         :type create_request: ~lusid.models.CreateTransactionPortfolioRequest
         :param dict custom_headers: headers that will be added to the request
         :param bool raw: returns the direct response alongside the
@@ -4904,18 +4850,15 @@ class LUSIDAPI(object):
 
     def get_details(
             self, scope, code, effective_at=None, as_at=None, custom_headers=None, raw=False, **operation_config):
-        """Get portfolio details.
+        """
 
-        Gets the details for a portfolio.  For a derived portfolio this can be
-        the details of another reference portfolio.
-
-        :param scope: The scope of the portfolio
+        :param scope:
         :type scope: str
-        :param code: Code for the portfolio
+        :param code:
         :type code: str
-        :param effective_at: Effective date
+        :param effective_at:
         :type effective_at: datetime
-        :param as_at: The asAt date to use
+        :param as_at:
         :type as_at: datetime
         :param dict custom_headers: headers that will be added to the request
         :param bool raw: returns the direct response alongside the
@@ -4970,19 +4913,15 @@ class LUSIDAPI(object):
 
     def upsert_portfolio_details(
             self, scope, code, details=None, effective_at=None, custom_headers=None, raw=False, **operation_config):
-        """Add/update portfolio details.
+        """
 
-        Update the portfolio details for the given code or add if it doesn't
-        already exist. Updates with
-        null values will remove any existing values.
-
-        :param scope: The scope of the portfolio
+        :param scope:
         :type scope: str
-        :param code: Code for the portfolio
+        :param code:
         :type code: str
         :param details:
         :type details: ~lusid.models.CreatePortfolioDetails
-        :param effective_at: The effective date of the change
+        :param effective_at:
         :type effective_at: datetime
         :param dict custom_headers: headers that will be added to the request
         :param bool raw: returns the direct response alongside the
@@ -5041,30 +4980,28 @@ class LUSIDAPI(object):
     upsert_portfolio_details.metadata = {'url': '/api/transactionportfolios/{scope}/{code}/details'}
 
     def get_holdings(
-            self, scope, code, effective_at=None, as_at=None, sort_by=None, start=None, limit=None, filter=None, instrument_property_keys=None, custom_headers=None, raw=False, **operation_config):
-        """Get holdings.
+            self, scope, code, by_taxlots=None, effective_at=None, as_at=None, sort_by=None, start=None, limit=None, filter=None, instrument_property_keys=None, custom_headers=None, raw=False, **operation_config):
+        """
 
-        Get the aggregate holdings of a portfolio.  If no effectiveAt or asAt
-        are supplied then values will be defaulted to the latest system time.
-
-        :param scope: The scope of the portfolio
+        :param scope:
         :type scope: str
-        :param code: Code for the portfolio
+        :param code:
         :type code: str
-        :param effective_at: Effective date
+        :param by_taxlots:
+        :type by_taxlots: bool
+        :param effective_at:
         :type effective_at: datetime
-        :param as_at: As at date
+        :param as_at:
         :type as_at: datetime
-        :param sort_by: The columns to sort the returned data by
+        :param sort_by:
         :type sort_by: list[str]
-        :param start: How many items to skip from the returned set
+        :param start:
         :type start: int
-        :param limit: How many items to return from the set
+        :param limit:
         :type limit: int
-        :param filter: A filter on the results
+        :param filter:
         :type filter: str
-        :param instrument_property_keys: Keys for the instrument properties to
-         be decorated onto the holdings
+        :param instrument_property_keys:
         :type instrument_property_keys: list[str]
         :param dict custom_headers: headers that will be added to the request
         :param bool raw: returns the direct response alongside the
@@ -5088,6 +5025,8 @@ class LUSIDAPI(object):
 
         # Construct parameters
         query_parameters = {}
+        if by_taxlots is not None:
+            query_parameters['byTaxlots'] = self._serialize.query("by_taxlots", by_taxlots, 'bool')
         if effective_at is not None:
             query_parameters['effectiveAt'] = self._serialize.query("effective_at", effective_at, 'iso-8601')
         if as_at is not None:
@@ -5130,16 +5069,13 @@ class LUSIDAPI(object):
 
     def set_holdings(
             self, scope, code, effective_at, holding_adjustments=None, custom_headers=None, raw=False, **operation_config):
-        """Set All Holdings.
+        """
 
-        Create transactions in a specific portfolio to bring all holdings to
-        the specified targets.
-
-        :param scope: The scope of the portfolio
+        :param scope:
         :type scope: str
-        :param code: Code for the portfolio
+        :param code:
         :type code: str
-        :param effective_at: Effective date
+        :param effective_at:
         :type effective_at: datetime
         :param holding_adjustments:
         :type holding_adjustments: list[~lusid.models.AdjustHoldingRequest]
@@ -5200,16 +5136,13 @@ class LUSIDAPI(object):
 
     def adjust_holdings(
             self, scope, code, effective_at, holding_adjustments=None, custom_headers=None, raw=False, **operation_config):
-        """Adjust Selected Holdings.
+        """
 
-        Create transactions in a specific portfolio to bring the selected
-        holdings up to the specified targets.
-
-        :param scope: The scope of the portfolio
+        :param scope:
         :type scope: str
-        :param code: Code for the portfolio
+        :param code:
         :type code: str
-        :param effective_at: Effective date
+        :param effective_at:
         :type effective_at: datetime
         :param holding_adjustments:
         :type holding_adjustments: list[~lusid.models.AdjustHoldingRequest]
@@ -5270,15 +5203,13 @@ class LUSIDAPI(object):
 
     def cancel_adjust_holdings(
             self, scope, code, effective_at, custom_headers=None, raw=False, **operation_config):
-        """Cancel adjust-holdings.
+        """
 
-        Cancels a previous adjust holdings request.
-
-        :param scope: The scope of the portfolio
+        :param scope:
         :type scope: str
-        :param code: Code for the portfolio
+        :param code:
         :type code: str
-        :param effective_at: Effective date
+        :param effective_at:
         :type effective_at: datetime
         :param dict custom_headers: headers that will be added to the request
         :param bool raw: returns the direct response alongside the
@@ -5330,19 +5261,17 @@ class LUSIDAPI(object):
 
     def list_holdings_adjustments(
             self, scope, code, from_effective_at=None, to_effective_at=None, as_at_time=None, custom_headers=None, raw=False, **operation_config):
-        """Gets holdings adjustments in an interval of effective time.
+        """
 
-        :param scope: The scope of the portfolio
+        :param scope:
         :type scope: str
-        :param code: Code for the portfolio
+        :param code:
         :type code: str
-        :param from_effective_at: Events between this time (inclusive) and the
-         toEffectiveAt are returned.
+        :param from_effective_at:
         :type from_effective_at: datetime
-        :param to_effective_at: Events between this time (inclusive) and the
-         fromEffectiveAt are returned.
+        :param to_effective_at:
         :type to_effective_at: datetime
-        :param as_at_time: The as-at time for which the result is valid.
+        :param as_at_time:
         :type as_at_time: datetime
         :param dict custom_headers: headers that will be added to the request
         :param bool raw: returns the direct response alongside the
@@ -5400,17 +5329,15 @@ class LUSIDAPI(object):
 
     def get_holdings_adjustment(
             self, scope, code, effective_at, as_at_time=None, custom_headers=None, raw=False, **operation_config):
-        """Get a holdings adjustment for a single portfolio at a specific
-        effective time.
-        If no adjustment exists at this effective time, not found is returned.
+        """
 
-        :param scope: The scope of the portfolio
+        :param scope:
         :type scope: str
-        :param code: Code for the portfolio
+        :param code:
         :type code: str
-        :param effective_at: The effective time of the holdings adjustment.
+        :param effective_at:
         :type effective_at: datetime
-        :param as_at_time: The as-at time for which the result is valid.
+        :param as_at_time:
         :type as_at_time: datetime
         :param dict custom_headers: headers that will be added to the request
         :param bool raw: returns the direct response alongside the
@@ -5464,32 +5391,27 @@ class LUSIDAPI(object):
 
     def get_transactions(
             self, scope, code, from_transaction_date=None, to_transaction_date=None, as_at=None, sort_by=None, start=None, limit=None, instrument_property_keys=None, filter=None, custom_headers=None, raw=False, **operation_config):
-        """Get transactions.
+        """
 
-        :param scope: The scope of the portfolio
+        :param scope:
         :type scope: str
-        :param code: Code for the portfolio
+        :param code:
         :type code: str
-        :param from_transaction_date: Include transactions with a transaction
-         date equal or later than this date. If not supplied, no lower filter
-         is applied
+        :param from_transaction_date:
         :type from_transaction_date: datetime
-        :param to_transaction_date: Include transactions with a transaction
-         date equal or before this date. If not supplied, no upper filter is
-         applied
+        :param to_transaction_date:
         :type to_transaction_date: datetime
         :param as_at:
         :type as_at: datetime
-        :param sort_by: The columns to sort the returned data by
+        :param sort_by:
         :type sort_by: list[str]
-        :param start: How many items to skip from the returned set
+        :param start:
         :type start: int
-        :param limit: How many items to return from the set
+        :param limit:
         :type limit: int
-        :param instrument_property_keys: Keys for the instrument properties to
-         be decorated onto the transactions
+        :param instrument_property_keys:
         :type instrument_property_keys: list[str]
-        :param filter: Transaction filter
+        :param filter:
         :type filter: str
         :param dict custom_headers: headers that will be added to the request
         :param bool raw: returns the direct response alongside the
@@ -5557,13 +5479,13 @@ class LUSIDAPI(object):
 
     def upsert_transactions(
             self, scope, code, transactions=None, custom_headers=None, raw=False, **operation_config):
-        """Upsert transactions.
+        """
 
-        :param scope: The scope of the portfolio
+        :param scope:
         :type scope: str
-        :param code: Code for the portfolio
+        :param code:
         :type code: str
-        :param transactions: The transactions to be updated
+        :param transactions:
         :type transactions: list[~lusid.models.TransactionRequest]
         :param dict custom_headers: headers that will be added to the request
         :param bool raw: returns the direct response alongside the
@@ -5622,15 +5544,13 @@ class LUSIDAPI(object):
 
     def delete_transactions(
             self, scope, code, id=None, custom_headers=None, raw=False, **operation_config):
-        """Delete transactions.
+        """
 
-        Delete one or more transactions from a portfolio.
-
-        :param scope: The scope of the portfolio
+        :param scope:
         :type scope: str
-        :param code: Code for the portfolio
+        :param code:
         :type code: str
-        :param id: Ids of transactions to delete
+        :param id:
         :type id: list[str]
         :param dict custom_headers: headers that will be added to the request
         :param bool raw: returns the direct response alongside the
@@ -5683,17 +5603,15 @@ class LUSIDAPI(object):
 
     def add_transaction_property(
             self, scope, code, transaction_id, transaction_properties=None, custom_headers=None, raw=False, **operation_config):
-        """Add/update transaction properties.
+        """
 
-        Add one or more properties to a specific transaction in a portfolio.
-
-        :param scope: The scope of the portfolio
+        :param scope:
         :type scope: str
-        :param code: Code for the portfolio
+        :param code:
         :type code: str
-        :param transaction_id: Id of transaction to add properties to
+        :param transaction_id:
         :type transaction_id: str
-        :param transaction_properties: Transaction properties to add
+        :param transaction_properties:
         :type transaction_properties: dict[str,
          ~lusid.models.PerpetualPropertyValue]
         :param dict custom_headers: headers that will be added to the request
@@ -5754,18 +5672,15 @@ class LUSIDAPI(object):
 
     def delete_property_from_transaction(
             self, scope, code, transaction_id, transaction_property_key=None, custom_headers=None, raw=False, **operation_config):
-        """Delete transaction property.
+        """
 
-        Delete a property from a specific transaction.
-
-        :param scope: The scope of the portfolio
+        :param scope:
         :type scope: str
-        :param code: Code for the portfolio
+        :param code:
         :type code: str
-        :param transaction_id: Id of the transaction to delete the property
-         from
+        :param transaction_id:
         :type transaction_id: str
-        :param transaction_property_key: The key of the property to be deleted
+        :param transaction_property_key:
         :type transaction_property_key: str
         :param dict custom_headers: headers that will be added to the request
         :param bool raw: returns the direct response alongside the
@@ -5819,26 +5734,25 @@ class LUSIDAPI(object):
 
     def build_transactions(
             self, scope, code, as_at=None, sort_by=None, start=None, limit=None, instrument_property_keys=None, filter=None, parameters=None, custom_headers=None, raw=False, **operation_config):
-        """Get transactions.
+        """
 
-        :param scope: The scope of the portfolio
+        :param scope:
         :type scope: str
-        :param code: Code for the portfolio
+        :param code:
         :type code: str
         :param as_at:
         :type as_at: datetime
-        :param sort_by: The columns to sort the returned data by
+        :param sort_by:
         :type sort_by: list[str]
-        :param start: How many items to skip from the returned set
+        :param start:
         :type start: int
-        :param limit: How many items to return from the set
+        :param limit:
         :type limit: int
-        :param instrument_property_keys: Keys for the instrument properties to
-         be decorated onto the trades
+        :param instrument_property_keys:
         :type instrument_property_keys: list[str]
-        :param filter: Trade filter
+        :param filter:
         :type filter: str
-        :param parameters: Core query parameters
+        :param parameters:
         :type parameters: ~lusid.models.TransactionQueryParameters
         :param dict custom_headers: headers that will be added to the request
         :param bool raw: returns the direct response alongside the
