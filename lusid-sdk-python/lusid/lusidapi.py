@@ -328,6 +328,8 @@ class LUSIDAPI(object):
     | &lt;a name="216"&gt;216&lt;/a&gt;|FeatureNotSupportedOnPortfolioType|  |
     | &lt;a name="217"&gt;217&lt;/a&gt;|QuotePublishFailure|  |
     | &lt;a name="218"&gt;218&lt;/a&gt;|QuoteQueryFailure|  |
+    | &lt;a name="222"&gt;222&lt;/a&gt;|ReferencePortfolioRequestNotSupported|  |
+    | &lt;a name="223"&gt;223&lt;/a&gt;|TransactionPortfolioRequestNotSupported|  |
     | &lt;a name="-10"&gt;-10&lt;/a&gt;|ServerConfigurationError|  |
     | &lt;a name="-1"&gt;-1&lt;/a&gt;|Unknown error|  |
 
@@ -347,7 +349,7 @@ class LUSIDAPI(object):
         self._client = ServiceClient(self.config.credentials, self.config)
 
         client_models = {k: v for k, v in models.__dict__.items() if isinstance(v, type)}
-        self.api_version = '0.7.62'
+        self.api_version = '0.7.63'
         self._serialize = Serializer(client_models)
         self._deserialize = Deserializer(client_models)
 

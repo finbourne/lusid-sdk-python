@@ -72,7 +72,8 @@ class ErrorResponse(Model):
      'CouldNotBuildExcelUrl', 'CouldNotGetExcelVersion',
      'InstrumentByCodeNotFound', 'EntitySchemaDoesNotExist',
      'FeatureNotSupportedOnPortfolioType', 'QuotePublishFailure',
-     'QuoteQueryFailure'
+     'QuoteQueryFailure', 'ReferencePortfolioRequestNotSupported',
+     'TransactionPortfolioRequestNotSupported'
     :vartype code: str or ~lusid.models.enum
     :ivar message:
     :vartype message: str
