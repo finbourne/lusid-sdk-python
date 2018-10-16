@@ -41,6 +41,8 @@ class Instrument(Model):
     :type properties: list[~lusid.models.Property]
     :param market_identifier_code:
     :type market_identifier_code: str
+    :param lookthrough_portfolio:
+    :type lookthrough_portfolio: ~lusid.models.ResourceId
     :param links:
     :type links: list[~lusid.models.Link]
     """
@@ -53,10 +55,11 @@ class Instrument(Model):
         'aliases': {'key': 'aliases', 'type': '{str}'},
         'properties': {'key': 'properties', 'type': '[Property]'},
         'market_identifier_code': {'key': 'marketIdentifierCode', 'type': 'str'},
+        'lookthrough_portfolio': {'key': 'lookthroughPortfolio', 'type': 'ResourceId'},
         'links': {'key': 'links', 'type': '[Link]'},
     }
 
-    def __init__(self, href=None, uid=None, version=None, common_name=None, aliases=None, properties=None, market_identifier_code=None, links=None):
+    def __init__(self, href=None, uid=None, version=None, common_name=None, aliases=None, properties=None, market_identifier_code=None, lookthrough_portfolio=None, links=None):
         super(Instrument, self).__init__()
         self.href = href
         self.uid = uid
@@ -65,4 +68,5 @@ class Instrument(Model):
         self.aliases = aliases
         self.properties = properties
         self.market_identifier_code = market_identifier_code
+        self.lookthrough_portfolio = lookthrough_portfolio
         self.links = links
