@@ -73,7 +73,8 @@ class ErrorResponse(Model):
      'InstrumentByCodeNotFound', 'EntitySchemaDoesNotExist',
      'FeatureNotSupportedOnPortfolioType', 'QuotePublishFailure',
      'QuoteQueryFailure', 'ReferencePortfolioRequestNotSupported',
-     'TransactionPortfolioRequestNotSupported'
+     'TransactionPortfolioRequestNotSupported', 'InvalidInstrumentDefinition',
+     'InstrumentUpsertFailure'
     :vartype code: str or ~lusid.models.enum
     :ivar message:
     :vartype message: str

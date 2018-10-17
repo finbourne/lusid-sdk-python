@@ -27,11 +27,15 @@ from msrest.serialization import Model
 class PortfoliosReconciliationRequest(Model):
     """PortfoliosReconciliationRequest.
 
-    :param left:
+    :param left: The specification of the left hand side of the portfolio
+     reconciliation
     :type left: ~lusid.models.PortfolioReconciliationRequest
-    :param right:
+    :param right: The specification of the right hand side of the portfolio
+     reconciliation
     :type right: ~lusid.models.PortfolioReconciliationRequest
-    :param instrument_property_keys:
+    :param instrument_property_keys: Instrument properties to be included with
+     any identified breaks. These properties will be in the effective and AsAt
+     dates of the left portfolio
     :type instrument_property_keys: list[str]
     """
 

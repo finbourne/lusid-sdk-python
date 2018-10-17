@@ -120,8 +120,8 @@ from .resource_list_of_transaction_meta_data import ResourceListOfTransactionMet
 from .create_transaction_portfolio_request import CreateTransactionPortfolioRequest
 from .portfolio_details import PortfolioDetails
 from .create_portfolio_details import CreatePortfolioDetails
-from .transaction_price import TransactionPrice
 from .perpetual_property import PerpetualProperty
+from .transaction_price import TransactionPrice
 from .transaction import Transaction
 from .portfolio_holding import PortfolioHolding
 from .versioned_resource_list_of_holding import VersionedResourceListOfHolding
@@ -242,8 +242,8 @@ __all__ = [
     'CreateTransactionPortfolioRequest',
     'PortfolioDetails',
     'CreatePortfolioDetails',
-    'TransactionPrice',
     'PerpetualProperty',
+    'TransactionPrice',
     'Transaction',
     'PortfolioHolding',
     'VersionedResourceListOfHolding',

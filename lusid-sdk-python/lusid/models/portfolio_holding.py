@@ -29,6 +29,8 @@ class PortfolioHolding(Model):
 
     :param instrument_uid: Unique instrument identifier
     :type instrument_uid: str
+    :param sub_holding_keys:
+    :type sub_holding_keys: list[~lusid.models.PerpetualProperty]
     :param properties:
     :type properties: list[~lusid.models.Property]
     :param holding_type: Type of holding, eg Position, Balance,
@@ -39,9 +41,9 @@ class PortfolioHolding(Model):
     :param settled_units: Settled quantity of holding
     :type settled_units: float
     :param cost: Book cost of holding in transaction currency
-    :type cost: float
+    :type cost: ~lusid.models.CurrencyAndAmount
     :param cost_portfolio_ccy: Book cost of holding in portfolio currency
-    :type cost_portfolio_ccy: float
+    :type cost_portfolio_ccy: ~lusid.models.CurrencyAndAmount
     :param transaction: If this is commitment-type holding, the transaction
      behind it
     :type transaction: ~lusid.models.Transaction
@@ -58,18 +60,20 @@ class PortfolioHolding(Model):
 
     _attribute_map = {
         'instrument_uid': {'key': 'instrumentUid', 'type': 'str'},
+        'sub_holding_keys': {'key': 'subHoldingKeys', 'type': '[PerpetualProperty]'},
         'properties': {'key': 'properties', 'type': '[Property]'},
         'holding_type': {'key': 'holdingType', 'type': 'str'},
         'units': {'key': 'units', 'type': 'float'},
         'settled_units': {'key': 'settledUnits', 'type': 'float'},
-        'cost': {'key': 'cost', 'type': 'float'},
-        'cost_portfolio_ccy': {'key': 'costPortfolioCcy', 'type': 'float'},
+        'cost': {'key': 'cost', 'type': 'CurrencyAndAmount'},
+        'cost_portfolio_ccy': {'key': 'costPortfolioCcy', 'type': 'CurrencyAndAmount'},
         'transaction': {'key': 'transaction', 'type': 'Transaction'},
     }
 
-    def __init__(self, instrument_uid, holding_type, units, settled_units, cost, cost_portfolio_ccy, properties=None, transaction=None):
+    def __init__(self, instrument_uid, holding_type, units, settled_units, cost, cost_portfolio_ccy, sub_holding_keys=None, properties=None, transaction=None):
         super(PortfolioHolding, self).__init__()
         self.instrument_uid = instrument_uid
+        self.sub_holding_keys = sub_holding_keys
         self.properties = properties
         self.holding_type = holding_type
         self.units = units

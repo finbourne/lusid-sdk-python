@@ -27,11 +27,11 @@ from msrest.serialization import Model
 class PortfolioReconciliationRequest(Model):
     """PortfolioReconciliationRequest.
 
-    :param portfolio_id:
+    :param portfolio_id: The id of the portfolio to be reconciled
     :type portfolio_id: ~lusid.models.ResourceId
-    :param effective_at:
+    :param effective_at: The effective date of the portfolio
     :type effective_at: datetime
-    :param as_at:
+    :param as_at: Optional. The AsAt date of the portfolio
     :type as_at: datetime
     """
 

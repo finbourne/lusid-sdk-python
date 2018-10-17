@@ -330,8 +330,7 @@ class TestFinbourneApi(TestCase):
         ]
 
         #   add prices
-        prices_result = self.client.insert_analytics(scope, effective_date.year, effective_date.month, effective_date.day,
-                                                prices)
+        self.client.set_analytics(scope, effective_date.year, effective_date.month, effective_date.day, prices)
 
         aggregation_request = models.AggregationRequest(
             recipe_id=models.ResourceId(scope, "default"),

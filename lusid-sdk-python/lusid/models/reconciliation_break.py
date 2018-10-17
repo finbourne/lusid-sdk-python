@@ -29,7 +29,8 @@ class ReconciliationBreak(Model):
 
     :param instrument_uid: Unique instrument identifier
     :type instrument_uid: str
-    :param sub_holding_keys:
+    :param sub_holding_keys: Any other properties that comprise the
+     Sub-Holding Key
     :type sub_holding_keys: list[~lusid.models.Property]
     :param left_units: Units from the left hand side
     :type left_units: float
