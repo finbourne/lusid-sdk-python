@@ -351,7 +351,7 @@ class LUSIDAPI(object):
         self._client = ServiceClient(self.config.credentials, self.config)
 
         client_models = {k: v for k, v in models.__dict__.items() if isinstance(v, type)}
-        self.api_version = '0.7.79'
+        self.api_version = '0.7.84'
         self._serialize = Serializer(client_models)
         self._deserialize = Deserializer(client_models)
 
@@ -1314,15 +1314,19 @@ class LUSIDAPI(object):
             self, definitions=None, custom_headers=None, raw=False, **operation_config):
         """Create instrument.
 
-        Attempt to create one or more "client" instruments.
+        Attempt to create one or more "client" instruments. Each instrument is
+        keyed by some unique key. This key is unimportant, and serves only as a
+        method to identify created instruments in the response.
         The response will return both the collection of successfully created
         instruments, as well as those that were rejected and why their creation
-        failed.
+        failed. They will be keyed against the key supplied in the
+        request.
         It is important to always check the 'Failed' set for any unsuccessful
         results.
 
         :param definitions: The client instrument definitions
-        :type definitions: list[~lusid.models.CreateClientInstrumentRequest]
+        :type definitions: dict[str,
+         ~lusid.models.CreateClientInstrumentRequest]
         :param dict custom_headers: headers that will be added to the request
         :param bool raw: returns the direct response alongside the
          deserialized response
@@ -1348,7 +1352,7 @@ class LUSIDAPI(object):
 
         # Construct body
         if definitions is not None:
-            body_content = self._serialize.body(definitions, '[CreateClientInstrumentRequest]')
+            body_content = self._serialize.body(definitions, '{CreateClientInstrumentRequest}')
         else:
             body_content = None
 
