@@ -87,6 +87,7 @@ from .update_portfolio_request import UpdatePortfolioRequest
 from .portfolio_properties import PortfolioProperties
 from .portfolio_reconciliation_request import PortfolioReconciliationRequest
 from .portfolios_reconciliation_request import PortfoliosReconciliationRequest
+from .perpetual_property import PerpetualProperty
 from .currency_and_amount import CurrencyAndAmount
 from .reconciliation_break import ReconciliationBreak
 from .resource_list_of_reconciliation_break import ResourceListOfReconciliationBreak
@@ -125,7 +126,6 @@ from .resource_list_of_transaction_meta_data import ResourceListOfTransactionMet
 from .create_transaction_portfolio_request import CreateTransactionPortfolioRequest
 from .portfolio_details import PortfolioDetails
 from .create_portfolio_details import CreatePortfolioDetails
-from .perpetual_property import PerpetualProperty
 from .transaction_price import TransactionPrice
 from .transaction import Transaction
 from .portfolio_holding import PortfolioHolding
@@ -214,6 +214,7 @@ __all__ = [
     'PortfolioProperties',
     'PortfolioReconciliationRequest',
     'PortfoliosReconciliationRequest',
+    'PerpetualProperty',
     'CurrencyAndAmount',
     'ReconciliationBreak',
     'ResourceListOfReconciliationBreak',
@@ -252,7 +253,6 @@ __all__ = [
     'CreateTransactionPortfolioRequest',
     'PortfolioDetails',
     'CreatePortfolioDetails',
-    'PerpetualProperty',
     'TransactionPrice',
     'Transaction',
     'PortfolioHolding',

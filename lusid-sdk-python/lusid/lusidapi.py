@@ -331,6 +331,8 @@ class LUSIDAPI(object):
     | &lt;a name="221"&gt;221&lt;/a&gt;|InstrumentUpsertFailure|  |
     | &lt;a name="222"&gt;222&lt;/a&gt;|ReferencePortfolioRequestNotSupported|  |
     | &lt;a name="223"&gt;223&lt;/a&gt;|TransactionPortfolioRequestNotSupported|  |
+    | &lt;a name="230"&gt;230&lt;/a&gt;|TransactionTypeNotFound|  |
+    | &lt;a name="231"&gt;231&lt;/a&gt;|TransactionTypeDuplication|  |
     | &lt;a name="-10"&gt;-10&lt;/a&gt;|ServerConfigurationError|  |
     | &lt;a name="-1"&gt;-1&lt;/a&gt;|Unknown error|  |
 
@@ -350,7 +352,7 @@ class LUSIDAPI(object):
         self._client = ServiceClient(self.config.credentials, self.config)
 
         client_models = {k: v for k, v in models.__dict__.items() if isinstance(v, type)}
-        self.api_version = '0.7.90'
+        self.api_version = '0.7.93'
         self._serialize = Serializer(client_models)
         self._deserialize = Deserializer(client_models)
 

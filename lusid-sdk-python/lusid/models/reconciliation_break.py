@@ -31,7 +31,7 @@ class ReconciliationBreak(Model):
     :type instrument_uid: str
     :param sub_holding_keys: Any other properties that comprise the
      Sub-Holding Key
-    :type sub_holding_keys: list[~lusid.models.Property]
+    :type sub_holding_keys: list[~lusid.models.PerpetualProperty]
     :param left_units: Units from the left hand side
     :type left_units: float
     :param right_units: Units from the right hand side
@@ -62,7 +62,7 @@ class ReconciliationBreak(Model):
 
     _attribute_map = {
         'instrument_uid': {'key': 'instrumentUid', 'type': 'str'},
-        'sub_holding_keys': {'key': 'subHoldingKeys', 'type': '[Property]'},
+        'sub_holding_keys': {'key': 'subHoldingKeys', 'type': '[PerpetualProperty]'},
         'left_units': {'key': 'leftUnits', 'type': 'float'},
         'right_units': {'key': 'rightUnits', 'type': 'float'},
         'difference_units': {'key': 'differenceUnits', 'type': 'float'},
