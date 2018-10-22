@@ -24,37 +24,21 @@
 from msrest.serialization import Model
 
 
-class Link(Model):
-    """Link.
+class DeleteQuotesResponse(Model):
+    """The response given from the DeleteQuotes Api call.
 
-    :param relation: Possible values include: 'Root', 'Properties',
-     'Transactions', 'Details', 'Constituents', 'Holdings', 'Commands',
-     'HoldingsAdjustments', 'Parent', 'PropertySchema', 'EntitySchema', 'Quote'
-    :type relation: str or ~lusid.models.enum
-    :param href:
-    :type href: str
-    :param description:
-    :type description: str
-    :param method: Possible values include: 'POST', 'GET', 'PATCH', 'DELETE'
-    :type method: str or ~lusid.models.enum
+    :param version:
+    :type version: ~lusid.models.Version
+    :param links:
+    :type links: list[~lusid.models.Link]
     """
 
-    _validation = {
-        'relation': {'required': True},
-        'href': {'required': True},
-        'method': {'required': True},
-    }
-
     _attribute_map = {
-        'relation': {'key': 'relation', 'type': 'str'},
-        'href': {'key': 'href', 'type': 'str'},
-        'description': {'key': 'description', 'type': 'str'},
-        'method': {'key': 'method', 'type': 'str'},
+        'version': {'key': 'version', 'type': 'Version'},
+        'links': {'key': 'links', 'type': '[Link]'},
     }
 
-    def __init__(self, relation, href, method, description=None):
-        super(Link, self).__init__()
-        self.relation = relation
-        self.href = href
-        self.description = description
-        self.method = method
+    def __init__(self, version=None, links=None):
+        super(DeleteQuotesResponse, self).__init__()
+        self.version = version
+        self.links = links

@@ -42,7 +42,7 @@ class CreateDataTypeRequest(Model):
      'BenchmarkType', 'Code', 'Id', 'Uri', 'ArrayOfIds',
      'ArrayOfTransactionAliases', 'ArrayofTransactionMovements',
      'ArrayofUnits', 'StringArray', 'CurrencyAndAmount', 'TradePrice',
-     'UnitCreation', 'Currency', 'UserId', 'MetricValue'
+     'UnitCreation', 'Currency', 'UserId', 'MetricValue', 'ArrayOfQuotes'
     :type value_type: str or ~lusid.models.enum
     :param acceptable_values:
     :type acceptable_values: list[object]

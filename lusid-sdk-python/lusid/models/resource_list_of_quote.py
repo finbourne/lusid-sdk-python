@@ -24,37 +24,30 @@
 from msrest.serialization import Model
 
 
-class Link(Model):
-    """Link.
+class ResourceListOfQuote(Model):
+    """ResourceListOfQuote.
 
-    :param relation: Possible values include: 'Root', 'Properties',
-     'Transactions', 'Details', 'Constituents', 'Holdings', 'Commands',
-     'HoldingsAdjustments', 'Parent', 'PropertySchema', 'EntitySchema', 'Quote'
-    :type relation: str or ~lusid.models.enum
-    :param href:
+    :param values:
+    :type values: list[~lusid.models.Quote]
+    :param href: The Uri that returns the same result as the original request,
+     but may include resolved as at time(s).
     :type href: str
-    :param description:
-    :type description: str
-    :param method: Possible values include: 'POST', 'GET', 'PATCH', 'DELETE'
-    :type method: str or ~lusid.models.enum
+    :param count: The total number of records returned in the set
+    :type count: int
+    :param links:
+    :type links: list[~lusid.models.Link]
     """
 
-    _validation = {
-        'relation': {'required': True},
-        'href': {'required': True},
-        'method': {'required': True},
-    }
-
     _attribute_map = {
-        'relation': {'key': 'relation', 'type': 'str'},
+        'values': {'key': 'values', 'type': '[Quote]'},
         'href': {'key': 'href', 'type': 'str'},
-        'description': {'key': 'description', 'type': 'str'},
-        'method': {'key': 'method', 'type': 'str'},
+        'count': {'key': 'count', 'type': 'int'},
+        'links': {'key': 'links', 'type': '[Link]'},
     }
 
-    def __init__(self, relation, href, method, description=None):
-        super(Link, self).__init__()
-        self.relation = relation
+    def __init__(self, values=None, href=None, count=None, links=None):
+        super(ResourceListOfQuote, self).__init__()
+        self.values = values
         self.href = href
-        self.description = description
-        self.method = method
+        self.count = count
+        self.links = links

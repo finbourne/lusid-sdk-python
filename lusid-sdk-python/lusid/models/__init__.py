@@ -94,6 +94,11 @@ from .create_property_definition_request import CreatePropertyDefinitionRequest
 from .property_definition import PropertyDefinition
 from .resource_list_of_property_definition import ResourceListOfPropertyDefinition
 from .update_property_definition_request import UpdatePropertyDefinitionRequest
+from .quote import Quote
+from .resource_list_of_quote import ResourceListOfQuote
+from .upsert_quote_request import UpsertQuoteRequest
+from .upsert_quotes_response import UpsertQuotesResponse
+from .delete_quotes_response import DeleteQuotesResponse
 from .create_reference_portfolio_request import CreateReferencePortfolioRequest
 from .perpetual_property_value import PerpetualPropertyValue
 from .reference_portfolio_constituent_request import ReferencePortfolioConstituentRequest
@@ -216,6 +221,11 @@ __all__ = [
     'PropertyDefinition',
     'ResourceListOfPropertyDefinition',
     'UpdatePropertyDefinitionRequest',
+    'Quote',
+    'ResourceListOfQuote',
+    'UpsertQuoteRequest',
+    'UpsertQuotesResponse',
+    'DeleteQuotesResponse',
     'CreateReferencePortfolioRequest',
     'PerpetualPropertyValue',
     'ReferencePortfolioConstituentRequest',

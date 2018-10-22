@@ -71,8 +71,8 @@ class ErrorResponse(Model):
      'InvalidInstrumentIdentifierUnit', 'HoldingsAdjustmentDoesNotExist',
      'CouldNotBuildExcelUrl', 'CouldNotGetExcelVersion',
      'InstrumentByCodeNotFound', 'EntitySchemaDoesNotExist',
-     'FeatureNotSupportedOnPortfolioType', 'QuotePublishFailure',
-     'QuoteQueryFailure', 'ReferencePortfolioRequestNotSupported',
+     'FeatureNotSupportedOnPortfolioType', 'QuoteNotFoundFailure',
+     'ReferencePortfolioRequestNotSupported',
      'TransactionPortfolioRequestNotSupported', 'InvalidInstrumentDefinition',
      'InstrumentUpsertFailure'
     :vartype code: str or ~lusid.models.enum

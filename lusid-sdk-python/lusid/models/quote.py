@@ -24,37 +24,30 @@
 from msrest.serialization import Model
 
 
-class Link(Model):
-    """Link.
+class Quote(Model):
+    """Quote.
 
-    :param relation: Possible values include: 'Root', 'Properties',
-     'Transactions', 'Details', 'Constituents', 'Holdings', 'Commands',
-     'HoldingsAdjustments', 'Parent', 'PropertySchema', 'EntitySchema', 'Quote'
-    :type relation: str or ~lusid.models.enum
-    :param href:
-    :type href: str
-    :param description:
-    :type description: str
-    :param method: Possible values include: 'POST', 'GET', 'PATCH', 'DELETE'
-    :type method: str or ~lusid.models.enum
+    :param id:
+    :type id: str
+    :param metric_value:
+    :type metric_value: ~lusid.models.MetricValue
+    :param version:
+    :type version: ~lusid.models.Version
     """
 
     _validation = {
-        'relation': {'required': True},
-        'href': {'required': True},
-        'method': {'required': True},
+        'id': {'required': True},
+        'metric_value': {'required': True},
     }
 
     _attribute_map = {
-        'relation': {'key': 'relation', 'type': 'str'},
-        'href': {'key': 'href', 'type': 'str'},
-        'description': {'key': 'description', 'type': 'str'},
-        'method': {'key': 'method', 'type': 'str'},
+        'id': {'key': 'id', 'type': 'str'},
+        'metric_value': {'key': 'metricValue', 'type': 'MetricValue'},
+        'version': {'key': 'version', 'type': 'Version'},
     }
 
-    def __init__(self, relation, href, method, description=None):
-        super(Link, self).__init__()
-        self.relation = relation
-        self.href = href
-        self.description = description
-        self.method = method
+    def __init__(self, id, metric_value, version=None):
+        super(Quote, self).__init__()
+        self.id = id
+        self.metric_value = metric_value
+        self.version = version
