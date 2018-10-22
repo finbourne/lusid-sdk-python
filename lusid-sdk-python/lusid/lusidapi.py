@@ -351,7 +351,7 @@ class LUSIDAPI(object):
         self._client = ServiceClient(self.config.credentials, self.config)
 
         client_models = {k: v for k, v in models.__dict__.items() if isinstance(v, type)}
-        self.api_version = '0.7.86'
+        self.api_version = '0.7.87'
         self._serialize = Serializer(client_models)
         self._deserialize = Deserializer(client_models)
 
@@ -1746,6 +1746,55 @@ class LUSIDAPI(object):
 
         return deserialized
     get_excel_download_url.metadata = {'url': '/api/metadata/downloads/excel'}
+
+    def get_excel_addin(
+            self, version=None, custom_headers=None, raw=False, **operation_config):
+        """Download the LUSID Excel Addin.
+
+        :param version:
+        :type version: str
+        :param dict custom_headers: headers that will be added to the request
+        :param bool raw: returns the direct response alongside the
+         deserialized response
+        :param operation_config: :ref:`Operation configuration
+         overrides<msrest:optionsforoperations>`.
+        :return: str or ClientRawResponse if raw=true
+        :rtype: str or ~msrest.pipeline.ClientRawResponse
+        :raises:
+         :class:`ErrorResponseException<lusid.models.ErrorResponseException>`
+        """
+        # Construct URL
+        url = self.get_excel_addin.metadata['url']
+
+        # Construct parameters
+        query_parameters = {}
+        if version is not None:
+            query_parameters['version'] = self._serialize.query("version", version, 'str')
+
+        # Construct headers
+        header_parameters = {}
+        header_parameters['Content-Type'] = 'application/json; charset=utf-8'
+        if custom_headers:
+            header_parameters.update(custom_headers)
+
+        # Construct and send request
+        request = self._client.get(url, query_parameters)
+        response = self._client.send(request, header_parameters, stream=False, **operation_config)
+
+        if response.status_code not in [200]:
+            raise models.ErrorResponseException(self._deserialize, response)
+
+        deserialized = None
+
+        if response.status_code == 200:
+            deserialized = self._deserialize('str', response)
+
+        if raw:
+            client_raw_response = ClientRawResponse(deserialized, response)
+            return client_raw_response
+
+        return deserialized
+    get_excel_addin.metadata = {'url': '/api/metadata/downloads/exceladdin'}
 
     def get_lusid_versions(
             self, custom_headers=None, raw=False, **operation_config):
