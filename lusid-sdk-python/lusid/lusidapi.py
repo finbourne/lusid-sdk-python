@@ -95,11 +95,10 @@ class LUSIDAPI(object):
     ## Schema
     A detailed description of the entities used by the API and parameters for endpoints which take a JSON document can be retrieved via the `schema` endpoint.
     ## Instruments
-    LUSID has its own instrument master implementation (LUSID CORE) which sources reference data from multiple data vendors.
-    [OpenFIGI](https://openfigi.com/) and [PermID](https://permid.org/) are used as the instrument identifier when uploading transactions, holdings, prices, etc.
-    The API exposes a `instrument/lookup` endpoint which can be used to lookup these identifiers given other market identifiers.
+    LUSID has its own built-in instrument master which you can use to master your own instrument universe.
+    Every instrument must be created with one or more unique market identifiers, such as [FIGI](https://openfigi.com/) or RIC code. For any non-listed instruments (eg OTCs), you can upload an instrument against a custom ID of your choosing.
+    In addition, LUSID will allocate each instrument a unique 'LUSID instrument identifier'. The LUSID instrument identifier is what is used when uploading transactions, holdings, prices, etc. The API exposes an `instrument/lookup` endpoint which can be used to lookup these LUSID identifiers using their market identifiers.
     Cash can be referenced using the ISO currency code prefixed with "`CCY_`" e.g. `CCY_GBP`
-    For any instrument that are not recognised by LUSID (eg OTCs) a client can upload a client defined instrument. Securitised portfolios and funds can be modelled as client defined instruments.
     ## Instrument Prices (Analytics)
     Instrument prices are stored in LUSID's Analytics Store
     | Field|Type|Description |
@@ -352,7 +351,7 @@ class LUSIDAPI(object):
         self._client = ServiceClient(self.config.credentials, self.config)
 
         client_models = {k: v for k, v in models.__dict__.items() if isinstance(v, type)}
-        self.api_version = '0.7.96'
+        self.api_version = '0.7.97'
         self._serialize = Serializer(client_models)
         self._deserialize = Deserializer(client_models)
 
