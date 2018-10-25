@@ -116,7 +116,7 @@ class LUSIDAPI(object):
     Properties can be associated with Portfolios to add in additional model data.  Portfolio properties can be changed over time as well.  For example, to allow a Portfolio Manager to be linked with a Portfolio.
     Additionally, portfolios can be securitised and held by other portfolios, allowing LUSID to perform "drill-through" into underlying fund holdings
     ### Reference Portfolios
-    Reference portfolios are portfolios that contain only holdings or weights, as opposed to transactions, and are designed to represent entities such as indices.
+    Reference portfolios are portfolios that contain only weights, as opposed to transactions, and are designed to represent entities such as indices.
     ### Derived Portfolios
     LUSID also allows for a portfolio to be composed of another portfolio via derived portfolios.  A derived portfolio can contain its own transactions and also inherits any transactions from its parent portfolio.  Any changes made to the parent portfolio are automatically reflected in derived portfolio.
     Derived portfolios in conjunction with scopes are a powerful construct.  For example, to do pre-trade what-if analysis, a derived portfolio could be created a new namespace linked to the underlying live (parent) portfolio.  Analysis can then be undertaken on the derived portfolio without affecting the live portfolio.
@@ -351,7 +351,7 @@ class LUSIDAPI(object):
         self._client = ServiceClient(self.config.credentials, self.config)
 
         client_models = {k: v for k, v in models.__dict__.items() if isinstance(v, type)}
-        self.api_version = '0.7.100'
+        self.api_version = '0.7.110'
         self._serialize = Serializer(client_models)
         self._deserialize = Deserializer(client_models)
 
@@ -1511,9 +1511,9 @@ class LUSIDAPI(object):
         results.
 
         :param code_type: The type of identifiers. Possible values include:
-         'Undefined', 'ReutersAssetId', 'CINS', 'Isin', 'Sedol', 'Cusip',
-         'Ticker', 'ClientInternal', 'Figi', 'CompositeFigi', 'ShareClassFigi',
-         'Wertpapier'
+         'Undefined', 'LusidInstrumentId', 'ReutersAssetId', 'CINS', 'Isin',
+         'Sedol', 'Cusip', 'Ticker', 'ClientInternal', 'Figi', 'CompositeFigi',
+         'ShareClassFigi', 'Wertpapier'
         :type code_type: str
         :param codes: One or more identifiers of the type specified in the
          codeType
