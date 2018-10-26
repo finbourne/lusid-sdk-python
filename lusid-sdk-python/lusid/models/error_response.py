@@ -62,7 +62,8 @@ class ErrorResponse(Model):
      'MovementsEngineConfigurationKeyFailure', 'FxRateSourceNotFound',
      'AccrualSourceNotFound', 'EntitlementsFailure', 'InvalidIdentityToken',
      'InvalidRequestHeaders', 'PriceNotFound', 'InvalidSubHoldingKeysProvided',
-     'DuplicateSubHoldingKeysProvided', 'ServerConfigurationError',
+     'DuplicateSubHoldingKeysProvided', 'CutDefinitionNotFound',
+     'CutDefinitionInvalid', 'ServerConfigurationError',
      'InvalidUnitForDataType', 'InvalidTypeForDataType',
      'InvalidValueForDataType', 'UnitNotDefinedForDataType',
      'UnitsNotSupportedOnDataType', 'CannotSpecifyUnitsOnDataType',
@@ -75,7 +76,7 @@ class ErrorResponse(Model):
      'ReferencePortfolioRequestNotSupported',
      'TransactionPortfolioRequestNotSupported', 'InvalidInstrumentDefinition',
      'InstrumentUpsertFailure', 'TransactionTypeNotFound',
-     'TransactionTypeDuplication'
+     'TransactionTypeDuplication', 'InvalidPropertyValueAssignment'
     :vartype code: str or ~lusid.models.enum
     :ivar message:
     :vartype message: str

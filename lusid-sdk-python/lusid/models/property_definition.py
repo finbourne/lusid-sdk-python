@@ -55,7 +55,7 @@ class PropertyDefinition(Model):
      'Iso4217Currency'
     :type unit_schema: str or ~lusid.models.enum
     :ivar domain: Possible values include: 'Trade', 'Portfolio', 'Security',
-     'Holding', 'ReferenceHolding', 'TxnType'
+     'Holding', 'ReferenceHolding', 'TxnType', 'Instrument'
     :vartype domain: str or ~lusid.models.enum
     :ivar scope:
     :vartype scope: str

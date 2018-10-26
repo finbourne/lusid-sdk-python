@@ -28,7 +28,7 @@ class CreatePropertyDefinitionRequest(Model):
     """CreatePropertyDefinitionRequest.
 
     :param domain: Possible values include: 'Trade', 'Portfolio', 'Security',
-     'Holding', 'ReferenceHolding', 'TxnType'
+     'Holding', 'ReferenceHolding', 'TxnType', 'Instrument'
     :type domain: str or ~lusid.models.enum
     :param scope:
     :type scope: str

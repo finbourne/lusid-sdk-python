@@ -308,6 +308,8 @@ class LUSIDAPI(object):
     | &lt;a name="189"&gt;189&lt;/a&gt;|PriceNotFound|  |
     | &lt;a name="190"&gt;190&lt;/a&gt;|InvalidSubHoldingKeysProvided|  |
     | &lt;a name="191"&gt;191&lt;/a&gt;|DuplicateSubHoldingKeysProvided|  |
+    | &lt;a name="192"&gt;192&lt;/a&gt;|CutDefinitionNotFound|  |
+    | &lt;a name="193"&gt;193&lt;/a&gt;|CutDefinitionInvalid|  |
     | &lt;a name="200"&gt;200&lt;/a&gt;|InvalidUnitForDataType|  |
     | &lt;a name="201"&gt;201&lt;/a&gt;|InvalidTypeForDataType|  |
     | &lt;a name="202"&gt;202&lt;/a&gt;|InvalidValueForDataType|  |
@@ -330,6 +332,7 @@ class LUSIDAPI(object):
     | &lt;a name="221"&gt;221&lt;/a&gt;|InstrumentUpsertFailure|  |
     | &lt;a name="222"&gt;222&lt;/a&gt;|ReferencePortfolioRequestNotSupported|  |
     | &lt;a name="223"&gt;223&lt;/a&gt;|TransactionPortfolioRequestNotSupported|  |
+    | &lt;a name="224"&gt;224&lt;/a&gt;|InvalidPropertyValueAssignment|  |
     | &lt;a name="230"&gt;230&lt;/a&gt;|TransactionTypeNotFound|  |
     | &lt;a name="231"&gt;231&lt;/a&gt;|TransactionTypeDuplication|  |
     | &lt;a name="-10"&gt;-10&lt;/a&gt;|ServerConfigurationError|  |
@@ -351,7 +354,7 @@ class LUSIDAPI(object):
         self._client = ServiceClient(self.config.credentials, self.config)
 
         client_models = {k: v for k, v in models.__dict__.items() if isinstance(v, type)}
-        self.api_version = '0.7.110'
+        self.api_version = '0.7.117'
         self._serialize = Serializer(client_models)
         self._deserialize = Deserializer(client_models)
 
@@ -3884,7 +3887,7 @@ class LUSIDAPI(object):
 
         :param domain: The Property Domain of the requested property. Possible
          values include: 'Trade', 'Portfolio', 'Security', 'Holding',
-         'ReferenceHolding', 'TxnType'
+         'ReferenceHolding', 'TxnType', 'Instrument'
         :type domain: str
         :param scope: The scope of the requested property
         :type scope: str
@@ -3952,7 +3955,7 @@ class LUSIDAPI(object):
 
         :param domain: The Property Domain of the property being updated.
          Possible values include: 'Trade', 'Portfolio', 'Security', 'Holding',
-         'ReferenceHolding', 'TxnType'
+         'ReferenceHolding', 'TxnType', 'Instrument'
         :type domain: str
         :param scope: The scope of the property to be updated
         :type scope: str
@@ -4021,7 +4024,7 @@ class LUSIDAPI(object):
 
         :param domain: The Property Domain of the property to be deleted.
          Possible values include: 'Trade', 'Portfolio', 'Security', 'Holding',
-         'ReferenceHolding', 'TxnType'
+         'ReferenceHolding', 'TxnType', 'Instrument'
         :type domain: str
         :param scope: The scope of the property to be deleted
         :type scope: str
