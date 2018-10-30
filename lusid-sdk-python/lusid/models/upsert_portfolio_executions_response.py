@@ -21,5 +21,28 @@
 # SOFTWARE.
 # --------------------------------------------------------------------------
 
-VERSION = "0.7.119"
+from msrest.serialization import Model
 
+
+class UpsertPortfolioExecutionsResponse(Model):
+    """UpsertPortfolioExecutionsResponse.
+
+    :param version:
+    :type version: ~lusid.models.Version
+    :param href:
+    :type href: str
+    :param links:
+    :type links: list[~lusid.models.Link]
+    """
+
+    _attribute_map = {
+        'version': {'key': 'version', 'type': 'Version'},
+        'href': {'key': 'href', 'type': 'str'},
+        'links': {'key': 'links', 'type': '[Link]'},
+    }
+
+    def __init__(self, version=None, href=None, links=None):
+        super(UpsertPortfolioExecutionsResponse, self).__init__()
+        self.version = version
+        self.href = href
+        self.links = links

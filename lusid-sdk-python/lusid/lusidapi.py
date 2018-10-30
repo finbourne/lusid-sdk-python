@@ -354,7 +354,7 @@ class LUSIDAPI(object):
         self._client = ServiceClient(self.config.credentials, self.config)
 
         client_models = {k: v for k, v in models.__dict__.items() if isinstance(v, type)}
-        self.api_version = '0.7.118'
+        self.api_version = '0.7.119'
         self._serialize = Serializer(client_models)
         self._deserialize = Deserializer(client_models)
 
@@ -5547,6 +5547,71 @@ class LUSIDAPI(object):
 
         return deserialized
     upsert_portfolio_details.metadata = {'url': '/api/transactionportfolios/{scope}/{code}/details'}
+
+    def upsert_executions(
+            self, scope, code, executions=None, custom_headers=None, raw=False, **operation_config):
+        """Upsert executions.
+
+        :param scope: The scope of the portfolio
+        :type scope: str
+        :param code: Code for the portfolio
+        :type code: str
+        :param executions: The executions to be updated
+        :type executions: list[~lusid.models.ExecutionRequest]
+        :param dict custom_headers: headers that will be added to the request
+        :param bool raw: returns the direct response alongside the
+         deserialized response
+        :param operation_config: :ref:`Operation configuration
+         overrides<msrest:optionsforoperations>`.
+        :return: UpsertPortfolioExecutionsResponse or ClientRawResponse if
+         raw=true
+        :rtype: ~lusid.models.UpsertPortfolioExecutionsResponse or
+         ~msrest.pipeline.ClientRawResponse
+        :raises:
+         :class:`ErrorResponseException<lusid.models.ErrorResponseException>`
+        """
+        # Construct URL
+        url = self.upsert_executions.metadata['url']
+        path_format_arguments = {
+            'scope': self._serialize.url("scope", scope, 'str'),
+            'code': self._serialize.url("code", code, 'str')
+        }
+        url = self._client.format_url(url, **path_format_arguments)
+
+        # Construct parameters
+        query_parameters = {}
+
+        # Construct headers
+        header_parameters = {}
+        header_parameters['Content-Type'] = 'application/json-patch+json; charset=utf-8'
+        if custom_headers:
+            header_parameters.update(custom_headers)
+
+        # Construct body
+        if executions is not None:
+            body_content = self._serialize.body(executions, '[ExecutionRequest]')
+        else:
+            body_content = None
+
+        # Construct and send request
+        request = self._client.post(url, query_parameters)
+        response = self._client.send(
+            request, header_parameters, body_content, stream=False, **operation_config)
+
+        if response.status_code not in [200]:
+            raise models.ErrorResponseException(self._deserialize, response)
+
+        deserialized = None
+
+        if response.status_code == 200:
+            deserialized = self._deserialize('UpsertPortfolioExecutionsResponse', response)
+
+        if raw:
+            client_raw_response = ClientRawResponse(deserialized, response)
+            return client_raw_response
+
+        return deserialized
+    upsert_executions.metadata = {'url': '/api/transactionportfolios/{scope}/{code}/executions'}
 
     def get_holdings(
             self, scope, code, by_taxlots=None, effective_at=None, as_at=None, sort_by=None, start=None, limit=None, filter=None, instrument_property_keys=None, custom_headers=None, raw=False, **operation_config):

@@ -126,6 +126,8 @@ from .resource_list_of_transaction_meta_data import ResourceListOfTransactionMet
 from .create_transaction_portfolio_request import CreateTransactionPortfolioRequest
 from .portfolio_details import PortfolioDetails
 from .create_portfolio_details import CreatePortfolioDetails
+from .execution_request import ExecutionRequest
+from .upsert_portfolio_executions_response import UpsertPortfolioExecutionsResponse
 from .transaction_price import TransactionPrice
 from .transaction import Transaction
 from .portfolio_holding import PortfolioHolding
@@ -253,6 +255,8 @@ __all__ = [
     'CreateTransactionPortfolioRequest',
     'PortfolioDetails',
     'CreatePortfolioDetails',
+    'ExecutionRequest',
+    'UpsertPortfolioExecutionsResponse',
     'TransactionPrice',
     'Transaction',
     'PortfolioHolding',
