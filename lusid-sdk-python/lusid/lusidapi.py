@@ -354,7 +354,7 @@ class LUSIDAPI(object):
         self._client = ServiceClient(self.config.credentials, self.config)
 
         client_models = {k: v for k, v in models.__dict__.items() if isinstance(v, type)}
-        self.api_version = '0.7.119'
+        self.api_version = '0.7.121'
         self._serialize = Serializer(client_models)
         self._deserialize = Deserializer(client_models)
 
@@ -1752,9 +1752,12 @@ class LUSIDAPI(object):
 
     def get_excel_addin(
             self, version=None, custom_headers=None, raw=False, **operation_config):
-        """Download the LUSID Excel Addin.
+        """Download Excel Addin.
 
-        :param version:
+        Download the LUSID Excel Addin for Microsoft Excel. Not providing a
+        specific value will return the latest version being returned.
+
+        :param version: The requested version of the Excel plugin
         :type version: str
         :param dict custom_headers: headers that will be added to the request
         :param bool raw: returns the direct response alongside the
@@ -1935,7 +1938,7 @@ class LUSIDAPI(object):
 
         Upsert one or more personalisations.
 
-        :param personalisations:
+        :param personalisations: The set of personalisations to persist
         :type personalisations: list[~lusid.models.Personalisation]
         :param dict custom_headers: headers that will be added to the request
         :param bool raw: returns the direct response alongside the
@@ -3754,7 +3757,9 @@ class LUSIDAPI(object):
 
     def get_multiple_property_definitions(
             self, property_keys=None, as_at=None, sort_by=None, start=None, limit=None, filter=None, custom_headers=None, raw=False, **operation_config):
-        """Get one or more property definitions.
+        """Get multiple property definitions.
+
+        Get one or more property definitions.
 
         :param property_keys: One or more keys for properties for which the
          schema should be returned
@@ -3830,6 +3835,8 @@ class LUSIDAPI(object):
             self, definition=None, custom_headers=None, raw=False, **operation_config):
         """Define a new property.
 
+        Create a new property definition.
+
         :param definition: The definition of the new property
         :type definition: ~lusid.models.CreatePropertyDefinitionRequest
         :param dict custom_headers: headers that will be added to the request
@@ -3883,7 +3890,9 @@ class LUSIDAPI(object):
 
     def get_property_definition(
             self, domain, scope, code, as_at=None, custom_headers=None, raw=False, **operation_config):
-        """Retrieve the definition for the identified property.
+        """Get property definition.
+
+        Retrieve the definition for the identified property.
 
         :param domain: The Property Domain of the requested property. Possible
          values include: 'Trade', 'Portfolio', 'Security', 'Holding',
@@ -4020,7 +4029,9 @@ class LUSIDAPI(object):
 
     def delete_property_definition(
             self, domain, scope, code, custom_headers=None, raw=False, **operation_config):
-        """Delete the definition of the specified property.
+        """Delete property definition.
+
+        Delete the definition of the specified property.
 
         :param domain: The Property Domain of the property to be deleted.
          Possible values include: 'Trade', 'Portfolio', 'Security', 'Holding',
@@ -4364,19 +4375,23 @@ class LUSIDAPI(object):
             self, scope, code, effective_at, as_at=None, sort_by=None, start=None, limit=None, custom_headers=None, raw=False, **operation_config):
         """Get constituents.
 
-        :param scope:
+        Get all the constituents in the specified reference portfolio.
+
+        :param scope: The scope of the portfolio
         :type scope: str
-        :param code:
+        :param code: The scope of the portfolio
         :type code: str
-        :param effective_at:
+        :param effective_at: Optional. The effective date of the data
         :type effective_at: datetime
-        :param as_at:
+        :param as_at: Optional. The AsAt date of the data
         :type as_at: datetime
-        :param sort_by:
+        :param sort_by: Optional. Order the results by these fields. Use use
+         the '-' sign to denote descending order e.g. -MyFieldName
         :type sort_by: list[str]
-        :param start:
+        :param start: Optional. When paginating, skip this number of results
         :type start: int
-        :param limit:
+        :param limit: Optional. When paginating, limit the number of returned
+         results to this many
         :type limit: int
         :param dict custom_headers: headers that will be added to the request
         :param bool raw: returns the direct response alongside the
@@ -4441,13 +4456,13 @@ class LUSIDAPI(object):
 
         Add constituents to the specified reference portfolio.
 
-        :param scope:
+        :param scope: The scope of the portfolio
         :type scope: str
-        :param code:
+        :param code: The code of the portfolio
         :type code: str
-        :param effective_at:
+        :param effective_at: Optional. The effective date of the data
         :type effective_at: datetime
-        :param constituents:
+        :param constituents: The constituents to upload to the portfolio
         :type constituents:
          list[~lusid.models.ReferencePortfolioConstituentRequest]
         :param dict custom_headers: headers that will be added to the request
@@ -4958,6 +4973,8 @@ class LUSIDAPI(object):
             self, request=None, sort_by=None, start=None, limit=None, filter=None, custom_headers=None, raw=False, **operation_config):
         """Search portfolio groups.
 
+        Search through all portfolio groups.
+
         :param request: A valid Elasticsearch 5.x request
         :type request: object
         :param sort_by: Optional. Order the results by these fields. Use use
@@ -5030,6 +5047,8 @@ class LUSIDAPI(object):
     def portfolios_search(
             self, request=None, sort_by=None, start=None, limit=None, filter=None, custom_headers=None, raw=False, **operation_config):
         """Search portfolios.
+
+        Search through all portfolios.
 
         :param request: A valid Elasticsearch 5.x request
         :type request: object
@@ -5104,6 +5123,8 @@ class LUSIDAPI(object):
     def properties_search(
             self, request=None, sort_by=None, start=None, limit=None, filter=None, custom_headers=None, raw=False, **operation_config):
         """Search property definitions.
+
+        Search through all property definitions.
 
         :param request: A valid Elasticsearch 5.x request
         :type request: object
@@ -5552,9 +5573,11 @@ class LUSIDAPI(object):
             self, scope, code, executions=None, custom_headers=None, raw=False, **operation_config):
         """Upsert executions.
 
+        Inserts new executions, or updates those already present.
+
         :param scope: The scope of the portfolio
         :type scope: str
-        :param code: Code for the portfolio
+        :param code: The code of the portfolio
         :type code: str
         :param executions: The executions to be updated
         :type executions: list[~lusid.models.ExecutionRequest]
