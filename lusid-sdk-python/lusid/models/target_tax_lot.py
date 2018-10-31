@@ -30,7 +30,7 @@ class TargetTaxLot(Model):
     :param units: Quantity of holding
     :type units: float
     :param cost: Book cost of holding in transaction currency
-    :type cost: float
+    :type cost: ~lusid.models.CurrencyAndAmount
     :param portfolio_cost: Book cost of holding in portfolio currency
     :type portfolio_cost: float
     :param price: Purchase price. Part of the unique key required for multiple
@@ -50,7 +50,7 @@ class TargetTaxLot(Model):
 
     _attribute_map = {
         'units': {'key': 'units', 'type': 'float'},
-        'cost': {'key': 'cost', 'type': 'float'},
+        'cost': {'key': 'cost', 'type': 'CurrencyAndAmount'},
         'portfolio_cost': {'key': 'portfolioCost', 'type': 'float'},
         'price': {'key': 'price', 'type': 'float'},
         'purchase_date': {'key': 'purchaseDate', 'type': 'iso-8601'},
