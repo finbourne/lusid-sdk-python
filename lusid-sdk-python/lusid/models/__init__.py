@@ -100,8 +100,8 @@ from .resource_list_of_quote import ResourceListOfQuote
 from .upsert_quote_request import UpsertQuoteRequest
 from .upsert_quotes_response import UpsertQuotesResponse
 from .delete_quotes_response import DeleteQuotesResponse
-from .create_reference_portfolio_request import CreateReferencePortfolioRequest
 from .perpetual_property_value import PerpetualPropertyValue
+from .create_reference_portfolio_request import CreateReferencePortfolioRequest
 from .reference_portfolio_constituent_request import ReferencePortfolioConstituentRequest
 from .upsert_reference_portfolio_constituents_response import UpsertReferencePortfolioConstituentsResponse
 from .reference_portfolio_constituent import ReferencePortfolioConstituent
@@ -229,8 +229,8 @@ __all__ = [
     'UpsertQuoteRequest',
     'UpsertQuotesResponse',
     'DeleteQuotesResponse',
-    'CreateReferencePortfolioRequest',
     'PerpetualPropertyValue',
+    'CreateReferencePortfolioRequest',
     'ReferencePortfolioConstituentRequest',
     'UpsertReferencePortfolioConstituentsResponse',
     'ReferencePortfolioConstituent',

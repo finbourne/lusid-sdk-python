@@ -33,16 +33,20 @@ class ReferencePortfolioConstituent(Model):
     :type properties: list[~lusid.models.Property]
     :param weight:
     :type weight: float
+    :param currency:
+    :type currency: str
     """
 
     _attribute_map = {
         'instrument_uid': {'key': 'instrumentUid', 'type': 'str'},
         'properties': {'key': 'properties', 'type': '[Property]'},
         'weight': {'key': 'weight', 'type': 'float'},
+        'currency': {'key': 'currency', 'type': 'str'},
     }
 
-    def __init__(self, instrument_uid=None, properties=None, weight=None):
+    def __init__(self, instrument_uid=None, properties=None, weight=None, currency=None):
         super(ReferencePortfolioConstituent, self).__init__()
         self.instrument_uid = instrument_uid
         self.properties = properties
         self.weight = weight
+        self.currency = currency

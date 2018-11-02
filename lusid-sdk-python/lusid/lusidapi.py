@@ -354,7 +354,7 @@ class LUSIDAPI(object):
         self._client = ServiceClient(self.config.credentials, self.config)
 
         client_models = {k: v for k, v in models.__dict__.items() if isinstance(v, type)}
-        self.api_version = '0.7.124'
+        self.api_version = '0.7.131'
         self._serialize = Serializer(client_models)
         self._deserialize = Deserializer(client_models)
 
@@ -3612,7 +3612,7 @@ class LUSIDAPI(object):
 
     def delete_portfolio_properties(
             self, scope, code, effective_at=None, portfolio_property_keys=None, custom_headers=None, raw=False, **operation_config):
-        """Delete portfolios.
+        """Delete portfolio properties.
 
         Delete one, many or all property values from a portfolio for the
         specified effectiveAt

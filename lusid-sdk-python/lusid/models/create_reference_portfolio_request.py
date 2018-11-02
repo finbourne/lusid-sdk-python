@@ -35,6 +35,8 @@ class CreateReferencePortfolioRequest(Model):
     :type code: str
     :param created:
     :type created: datetime
+    :param properties: Portfolio properties to add to the portfolio
+    :type properties: dict[str, ~lusid.models.PerpetualPropertyValue]
     """
 
     _validation = {
@@ -47,11 +49,13 @@ class CreateReferencePortfolioRequest(Model):
         'description': {'key': 'description', 'type': 'str'},
         'code': {'key': 'code', 'type': 'str'},
         'created': {'key': 'created', 'type': 'iso-8601'},
+        'properties': {'key': 'properties', 'type': '{PerpetualPropertyValue}'},
     }
 
-    def __init__(self, display_name, code, description=None, created=None):
+    def __init__(self, display_name, code, description=None, created=None, properties=None):
         super(CreateReferencePortfolioRequest, self).__init__()
         self.display_name = display_name
         self.description = description
         self.code = code
         self.created = created
+        self.properties = properties

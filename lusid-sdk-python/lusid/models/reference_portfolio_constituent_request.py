@@ -33,16 +33,20 @@ class ReferencePortfolioConstituentRequest(Model):
     :type properties: dict[str, ~lusid.models.PerpetualPropertyValue]
     :param weight:
     :type weight: float
+    :param currency:
+    :type currency: str
     """
 
     _attribute_map = {
         'instrument_uid': {'key': 'instrumentUid', 'type': 'str'},
         'properties': {'key': 'properties', 'type': '{PerpetualPropertyValue}'},
         'weight': {'key': 'weight', 'type': 'float'},
+        'currency': {'key': 'currency', 'type': 'str'},
     }
 
-    def __init__(self, instrument_uid=None, properties=None, weight=None):
+    def __init__(self, instrument_uid=None, properties=None, weight=None, currency=None):
         super(ReferencePortfolioConstituentRequest, self).__init__()
         self.instrument_uid = instrument_uid
         self.properties = properties
         self.weight = weight
+        self.currency = currency
