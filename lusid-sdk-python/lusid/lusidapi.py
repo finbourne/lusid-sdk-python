@@ -335,6 +335,7 @@ class LUSIDAPI(object):
     | &lt;a name="224"&gt;224&lt;/a&gt;|InvalidPropertyValueAssignment|  |
     | &lt;a name="230"&gt;230&lt;/a&gt;|TransactionTypeNotFound|  |
     | &lt;a name="231"&gt;231&lt;/a&gt;|TransactionTypeDuplication|  |
+    | &lt;a name="232"&gt;232&lt;/a&gt;|PortfolioDoesNotExistAtGivenDate|  |
     | &lt;a name="-10"&gt;-10&lt;/a&gt;|ServerConfigurationError|  |
     | &lt;a name="-1"&gt;-1&lt;/a&gt;|Unknown error|  |
 
@@ -354,7 +355,7 @@ class LUSIDAPI(object):
         self._client = ServiceClient(self.config.credentials, self.config)
 
         client_models = {k: v for k, v in models.__dict__.items() if isinstance(v, type)}
-        self.api_version = '0.7.135'
+        self.api_version = '0.7.141'
         self._serialize = Serializer(client_models)
         self._deserialize = Deserializer(client_models)
 
@@ -722,9 +723,9 @@ class LUSIDAPI(object):
          deserialized response
         :param operation_config: :ref:`Operation configuration
          overrides<msrest:optionsforoperations>`.
-        :return: ResourceListOfCorporateActionEvent or ClientRawResponse if
+        :return: ResourceListOfCorporateAction or ClientRawResponse if
          raw=true
-        :rtype: ~lusid.models.ResourceListOfCorporateActionEvent or
+        :rtype: ~lusid.models.ResourceListOfCorporateAction or
          ~msrest.pipeline.ClientRawResponse
         :raises:
          :class:`ErrorResponseException<lusid.models.ErrorResponseException>`
@@ -768,7 +769,7 @@ class LUSIDAPI(object):
         deserialized = None
 
         if response.status_code == 200:
-            deserialized = self._deserialize('ResourceListOfCorporateActionEvent', response)
+            deserialized = self._deserialize('ResourceListOfCorporateAction', response)
 
         if raw:
             client_raw_response = ClientRawResponse(deserialized, response)
@@ -5207,9 +5208,9 @@ class LUSIDAPI(object):
          deserialized response
         :param operation_config: :ref:`Operation configuration
          overrides<msrest:optionsforoperations>`.
-        :return: ResourceListOfTransactionMetaData or ClientRawResponse if
-         raw=true
-        :rtype: ~lusid.models.ResourceListOfTransactionMetaData or
+        :return: ResourceListOfTransactionConfigurationData or
+         ClientRawResponse if raw=true
+        :rtype: ~lusid.models.ResourceListOfTransactionConfigurationData or
          ~msrest.pipeline.ClientRawResponse
         :raises:
          :class:`ErrorResponseException<lusid.models.ErrorResponseException>`
@@ -5236,7 +5237,7 @@ class LUSIDAPI(object):
         deserialized = None
 
         if response.status_code == 200:
-            deserialized = self._deserialize('ResourceListOfTransactionMetaData', response)
+            deserialized = self._deserialize('ResourceListOfTransactionConfigurationData', response)
 
         if raw:
             client_raw_response = ClientRawResponse(deserialized, response)
@@ -5263,9 +5264,9 @@ class LUSIDAPI(object):
          deserialized response
         :param operation_config: :ref:`Operation configuration
          overrides<msrest:optionsforoperations>`.
-        :return: ResourceListOfTransactionMetaData or ClientRawResponse if
-         raw=true
-        :rtype: ~lusid.models.ResourceListOfTransactionMetaData or
+        :return: ResourceListOfTransactionConfigurationData or
+         ClientRawResponse if raw=true
+        :rtype: ~lusid.models.ResourceListOfTransactionConfigurationData or
          ~msrest.pipeline.ClientRawResponse
         :raises:
          :class:`ErrorResponseException<lusid.models.ErrorResponseException>`
@@ -5299,7 +5300,7 @@ class LUSIDAPI(object):
         deserialized = None
 
         if response.status_code == 200:
-            deserialized = self._deserialize('ResourceListOfTransactionMetaData', response)
+            deserialized = self._deserialize('ResourceListOfTransactionConfigurationData', response)
 
         if raw:
             client_raw_response = ClientRawResponse(deserialized, response)

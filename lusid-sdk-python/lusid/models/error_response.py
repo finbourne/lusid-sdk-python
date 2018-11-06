@@ -76,7 +76,8 @@ class ErrorResponse(Model):
      'ReferencePortfolioRequestNotSupported',
      'TransactionPortfolioRequestNotSupported', 'InvalidInstrumentDefinition',
      'InstrumentUpsertFailure', 'TransactionTypeNotFound',
-     'TransactionTypeDuplication', 'InvalidPropertyValueAssignment'
+     'TransactionTypeDuplication', 'InvalidPropertyValueAssignment',
+     'PortfolioDoesNotExistAtGivenDate'
     :vartype code: str or ~lusid.models.enum
     :ivar message:
     :vartype message: str

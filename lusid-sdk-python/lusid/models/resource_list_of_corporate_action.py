@@ -24,8 +24,8 @@
 from msrest.serialization import Model
 
 
-class ResourceListOfCorporateActionEvent(Model):
-    """ResourceListOfCorporateActionEvent.
+class ResourceListOfCorporateAction(Model):
+    """ResourceListOfCorporateAction.
 
     :param values:
     :type values: list[~lusid.models.CorporateAction]
@@ -46,7 +46,7 @@ class ResourceListOfCorporateActionEvent(Model):
     }
 
     def __init__(self, values=None, href=None, count=None, links=None):
-        super(ResourceListOfCorporateActionEvent, self).__init__()
+        super(ResourceListOfCorporateAction, self).__init__()
         self.values = values
         self.href = href
         self.count = count

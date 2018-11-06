@@ -37,7 +37,7 @@ from .resource_id import ResourceId
 from .corporate_action import CorporateAction
 from .error_detail import ErrorDetail
 from .upsert_corporate_actions_response import UpsertCorporateActionsResponse
-from .resource_list_of_corporate_action_event import ResourceListOfCorporateActionEvent
+from .resource_list_of_corporate_action import ResourceListOfCorporateAction
 from .create_unit_definition import CreateUnitDefinition
 from .create_data_type_request import CreateDataTypeRequest
 from .iunit_definition import IUnitDefinition
@@ -122,7 +122,7 @@ from .transaction_configuration_data_request import TransactionConfigurationData
 from .transaction_property_mapping import TransactionPropertyMapping
 from .transaction_configuration_movement_data import TransactionConfigurationMovementData
 from .transaction_configuration_data import TransactionConfigurationData
-from .resource_list_of_transaction_meta_data import ResourceListOfTransactionMetaData
+from .resource_list_of_transaction_configuration_data import ResourceListOfTransactionConfigurationData
 from .create_transaction_portfolio_request import CreateTransactionPortfolioRequest
 from .portfolio_details import PortfolioDetails
 from .create_portfolio_details import CreatePortfolioDetails
@@ -166,7 +166,7 @@ __all__ = [
     'CorporateAction',
     'ErrorDetail',
     'UpsertCorporateActionsResponse',
-    'ResourceListOfCorporateActionEvent',
+    'ResourceListOfCorporateAction',
     'CreateUnitDefinition',
     'CreateDataTypeRequest',
     'IUnitDefinition',
@@ -251,7 +251,7 @@ __all__ = [
     'TransactionPropertyMapping',
     'TransactionConfigurationMovementData',
     'TransactionConfigurationData',
-    'ResourceListOfTransactionMetaData',
+    'ResourceListOfTransactionConfigurationData',
     'CreateTransactionPortfolioRequest',
     'PortfolioDetails',
     'CreatePortfolioDetails',

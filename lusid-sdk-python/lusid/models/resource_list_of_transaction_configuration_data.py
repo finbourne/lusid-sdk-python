@@ -24,8 +24,8 @@
 from msrest.serialization import Model
 
 
-class ResourceListOfTransactionMetaData(Model):
-    """ResourceListOfTransactionMetaData.
+class ResourceListOfTransactionConfigurationData(Model):
+    """ResourceListOfTransactionConfigurationData.
 
     :param values:
     :type values: list[~lusid.models.TransactionConfigurationData]
@@ -46,7 +46,7 @@ class ResourceListOfTransactionMetaData(Model):
     }
 
     def __init__(self, values=None, href=None, count=None, links=None):
-        super(ResourceListOfTransactionMetaData, self).__init__()
+        super(ResourceListOfTransactionConfigurationData, self).__init__()
         self.values = values
         self.href = href
         self.count = count
