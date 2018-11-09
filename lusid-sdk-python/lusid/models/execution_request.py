@@ -33,9 +33,9 @@ class ExecutionRequest(Model):
     :type side: str
     :param instrument_uid: Unique instrument identifier.
     :type instrument_uid: str
-    :param transact_time: FIX field 60.  Time the transaction represented by
-     this ExecutionReport occurred.
-    :type transact_time: datetime
+    :param transaction_time: FIX field 60.  Time the transaction represented
+     by this ExecutionReport occurred.
+    :type transaction_time: datetime
     :param order_qty: FIX field 38.  Order quantity.
     :type order_qty: float
     :param price: FIX field 44.
@@ -48,7 +48,7 @@ class ExecutionRequest(Model):
         'execution_id': {'required': True},
         'side': {'required': True},
         'instrument_uid': {'required': True},
-        'transact_time': {'required': True},
+        'transaction_time': {'required': True},
         'order_qty': {'required': True},
         'price': {'required': True},
         'currency': {'required': True},
@@ -58,18 +58,18 @@ class ExecutionRequest(Model):
         'execution_id': {'key': 'executionId', 'type': 'str'},
         'side': {'key': 'side', 'type': 'str'},
         'instrument_uid': {'key': 'instrumentUid', 'type': 'str'},
-        'transact_time': {'key': 'transactTime', 'type': 'iso-8601'},
+        'transaction_time': {'key': 'transactionTime', 'type': 'iso-8601'},
         'order_qty': {'key': 'orderQty', 'type': 'float'},
         'price': {'key': 'price', 'type': 'float'},
         'currency': {'key': 'currency', 'type': 'str'},
     }
 
-    def __init__(self, execution_id, side, instrument_uid, transact_time, order_qty, price, currency):
+    def __init__(self, execution_id, side, instrument_uid, transaction_time, order_qty, price, currency):
         super(ExecutionRequest, self).__init__()
         self.execution_id = execution_id
         self.side = side
         self.instrument_uid = instrument_uid
-        self.transact_time = transact_time
+        self.transaction_time = transaction_time
         self.order_qty = order_qty
         self.price = price
         self.currency = currency
