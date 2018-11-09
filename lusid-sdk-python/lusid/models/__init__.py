@@ -40,7 +40,7 @@ from .upsert_corporate_actions_response import UpsertCorporateActionsResponse
 from .resource_list_of_corporate_action import ResourceListOfCorporateAction
 from .create_unit_definition import CreateUnitDefinition
 from .create_data_type_request import CreateDataTypeRequest
-from .iunit_definition import IUnitDefinition
+from .iunit_definition_dto import IUnitDefinitionDto
 from .data_type import DataType
 from .resource_list_of_data_type import ResourceListOfDataType
 from .update_data_type_request import UpdateDataTypeRequest
@@ -59,7 +59,7 @@ from .property_value import PropertyValue
 from .create_instrument_property_request import CreateInstrumentPropertyRequest
 from .instrument_property import InstrumentProperty
 from .upsert_instrument_properties_response import UpsertInstrumentPropertiesResponse
-from .version_summary import VersionSummary
+from .version_summary_dto import VersionSummaryDto
 from .personalisation import Personalisation
 from .resource_list_of_personalisation import ResourceListOfPersonalisation
 from .upsert_personalisation_response import UpsertPersonalisationResponse
@@ -131,7 +131,7 @@ from .upsert_portfolio_executions_response import UpsertPortfolioExecutionsRespo
 from .transaction_price import TransactionPrice
 from .transaction import Transaction
 from .portfolio_holding import PortfolioHolding
-from .versioned_resource_list_of_holding import VersionedResourceListOfHolding
+from .versioned_resource_list_of_portfolio_holding import VersionedResourceListOfPortfolioHolding
 from .target_tax_lot_request import TargetTaxLotRequest
 from .adjust_holding_request import AdjustHoldingRequest
 from .adjust_holding import AdjustHolding
@@ -169,7 +169,7 @@ __all__ = [
     'ResourceListOfCorporateAction',
     'CreateUnitDefinition',
     'CreateDataTypeRequest',
-    'IUnitDefinition',
+    'IUnitDefinitionDto',
     'DataType',
     'ResourceListOfDataType',
     'UpdateDataTypeRequest',
@@ -188,7 +188,7 @@ __all__ = [
     'CreateInstrumentPropertyRequest',
     'InstrumentProperty',
     'UpsertInstrumentPropertiesResponse',
-    'VersionSummary',
+    'VersionSummaryDto',
     'Personalisation',
     'ResourceListOfPersonalisation',
     'UpsertPersonalisationResponse',
@@ -260,7 +260,7 @@ __all__ = [
     'TransactionPrice',
     'Transaction',
     'PortfolioHolding',
-    'VersionedResourceListOfHolding',
+    'VersionedResourceListOfPortfolioHolding',
     'TargetTaxLotRequest',
     'AdjustHoldingRequest',
     'AdjustHolding',

@@ -50,7 +50,7 @@ class DataType(Model):
      'Iso4217Currency'
     :type unit_schema: str or ~lusid.models.enum
     :param acceptable_units:
-    :type acceptable_units: list[~lusid.models.IUnitDefinition]
+    :type acceptable_units: list[~lusid.models.IUnitDefinitionDto]
     :param links:
     :type links: list[~lusid.models.Link]
     """
@@ -64,7 +64,7 @@ class DataType(Model):
         'value_type': {'key': 'valueType', 'type': 'str'},
         'acceptable_values': {'key': 'acceptableValues', 'type': '[object]'},
         'unit_schema': {'key': 'unitSchema', 'type': 'str'},
-        'acceptable_units': {'key': 'acceptableUnits', 'type': '[IUnitDefinition]'},
+        'acceptable_units': {'key': 'acceptableUnits', 'type': '[IUnitDefinitionDto]'},
         'links': {'key': 'links', 'type': '[Link]'},
     }
 

@@ -210,7 +210,7 @@ class LUSIDAPI(object):
     | SettledUnits|decimal|Settled quantity of holding |
     | Cost|currencyandamount|Book cost of holding in transaction currency |
     | CostPortfolioCcy|currencyandamount|Book cost of holding in portfolio currency |
-    | Transaction|TransactionDto|If this is commitment-type holding, the transaction behind it |
+    | Transaction|Transaction|If this is commitment-type holding, the transaction behind it |
     ## Corporate Actions
     Corporate actions are represented within LUSID in terms of a set of instrument-specific 'transitions'.  These transitions are used to specify the participants of the corporate action, and the effect that the corporate action will have on holdings in those participants.
     *Corporate action*
@@ -355,7 +355,7 @@ class LUSIDAPI(object):
         self._client = ServiceClient(self.config.credentials, self.config)
 
         client_models = {k: v for k, v in models.__dict__.items() if isinstance(v, type)}
-        self.api_version = '0.7.141'
+        self.api_version = '0.7.151'
         self._serialize = Serializer(client_models)
         self._deserialize = Deserializer(client_models)
 
@@ -1132,8 +1132,8 @@ class LUSIDAPI(object):
          deserialized response
         :param operation_config: :ref:`Operation configuration
          overrides<msrest:optionsforoperations>`.
-        :return: IUnitDefinition or ClientRawResponse if raw=true
-        :rtype: ~lusid.models.IUnitDefinition or
+        :return: IUnitDefinitionDto or ClientRawResponse if raw=true
+        :rtype: ~lusid.models.IUnitDefinitionDto or
          ~msrest.pipeline.ClientRawResponse
         :raises:
          :class:`ErrorResponseException<lusid.models.ErrorResponseException>`
@@ -1169,7 +1169,7 @@ class LUSIDAPI(object):
         deserialized = None
 
         if response.status_code == 200:
-            deserialized = self._deserialize('IUnitDefinition', response)
+            deserialized = self._deserialize('IUnitDefinitionDto', response)
 
         if raw:
             client_raw_response = ClientRawResponse(deserialized, response)
@@ -1814,8 +1814,8 @@ class LUSIDAPI(object):
          deserialized response
         :param operation_config: :ref:`Operation configuration
          overrides<msrest:optionsforoperations>`.
-        :return: VersionSummary or ClientRawResponse if raw=true
-        :rtype: ~lusid.models.VersionSummary or
+        :return: VersionSummaryDto or ClientRawResponse if raw=true
+        :rtype: ~lusid.models.VersionSummaryDto or
          ~msrest.pipeline.ClientRawResponse
         :raises:
          :class:`ErrorResponseException<lusid.models.ErrorResponseException>`
@@ -1842,7 +1842,7 @@ class LUSIDAPI(object):
         deserialized = None
 
         if response.status_code == 200:
-            deserialized = self._deserialize('VersionSummary', response)
+            deserialized = self._deserialize('VersionSummaryDto', response)
 
         if raw:
             client_raw_response = ClientRawResponse(deserialized, response)
@@ -5674,9 +5674,9 @@ class LUSIDAPI(object):
          deserialized response
         :param operation_config: :ref:`Operation configuration
          overrides<msrest:optionsforoperations>`.
-        :return: VersionedResourceListOfHolding or ClientRawResponse if
-         raw=true
-        :rtype: ~lusid.models.VersionedResourceListOfHolding or
+        :return: VersionedResourceListOfPortfolioHolding or ClientRawResponse
+         if raw=true
+        :rtype: ~lusid.models.VersionedResourceListOfPortfolioHolding or
          ~msrest.pipeline.ClientRawResponse
         :raises:
          :class:`ErrorResponseException<lusid.models.ErrorResponseException>`
@@ -5724,7 +5724,7 @@ class LUSIDAPI(object):
         deserialized = None
 
         if response.status_code == 200:
-            deserialized = self._deserialize('VersionedResourceListOfHolding', response)
+            deserialized = self._deserialize('VersionedResourceListOfPortfolioHolding', response)
 
         if raw:
             client_raw_response = ClientRawResponse(deserialized, response)

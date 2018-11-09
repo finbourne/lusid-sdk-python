@@ -24,38 +24,34 @@
 from msrest.serialization import Model
 
 
-class VersionSummary(Model):
-    """VersionSummary.
+class VersionedResourceListOfPortfolioHolding(Model):
+    """VersionedResourceListOfPortfolioHolding.
 
-    Variables are only populated by the server, and will be ignored when
-    sending a request.
-
-    :ivar api_version:
-    :vartype api_version: str
-    :ivar build_version:
-    :vartype build_version: str
-    :ivar excel_version:
-    :vartype excel_version: str
+    :param version:
+    :type version: ~lusid.models.Version
+    :param values:
+    :type values: list[~lusid.models.PortfolioHolding]
+    :param href: The Uri that returns the same result as the original request,
+     but may include resolved as at time(s).
+    :type href: str
+    :param count: The total number of records returned in the set
+    :type count: int
     :param links:
     :type links: list[~lusid.models.Link]
     """
 
-    _validation = {
-        'api_version': {'readonly': True},
-        'build_version': {'readonly': True},
-        'excel_version': {'readonly': True},
-    }
-
     _attribute_map = {
-        'api_version': {'key': 'apiVersion', 'type': 'str'},
-        'build_version': {'key': 'buildVersion', 'type': 'str'},
-        'excel_version': {'key': 'excelVersion', 'type': 'str'},
+        'version': {'key': 'version', 'type': 'Version'},
+        'values': {'key': 'values', 'type': '[PortfolioHolding]'},
+        'href': {'key': 'href', 'type': 'str'},
+        'count': {'key': 'count', 'type': 'int'},
         'links': {'key': 'links', 'type': '[Link]'},
     }
 
-    def __init__(self, links=None):
-        super(VersionSummary, self).__init__()
-        self.api_version = None
-        self.build_version = None
-        self.excel_version = None
+    def __init__(self, version=None, values=None, href=None, count=None, links=None):
+        super(VersionedResourceListOfPortfolioHolding, self).__init__()
+        self.version = version
+        self.values = values
+        self.href = href
+        self.count = count
         self.links = links
