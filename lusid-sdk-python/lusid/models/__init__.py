@@ -44,6 +44,7 @@ from .iunit_definition_dto import IUnitDefinitionDto
 from .data_type import DataType
 from .resource_list_of_data_type import ResourceListOfDataType
 from .update_data_type_request import UpdateDataTypeRequest
+from .resource_list_of_iunit_definition_dto import ResourceListOfIUnitDefinitionDto
 from .create_derived_transaction_portfolio_request import CreateDerivedTransactionPortfolioRequest
 from .version import Version
 from .portfolio import Portfolio
@@ -59,6 +60,8 @@ from .property_value import PropertyValue
 from .create_instrument_property_request import CreateInstrumentPropertyRequest
 from .instrument_property import InstrumentProperty
 from .upsert_instrument_properties_response import UpsertInstrumentPropertiesResponse
+from .stream import Stream
+from .file_response import FileResponse
 from .version_summary_dto import VersionSummaryDto
 from .personalisation import Personalisation
 from .resource_list_of_personalisation import ResourceListOfPersonalisation
@@ -173,6 +176,7 @@ __all__ = [
     'DataType',
     'ResourceListOfDataType',
     'UpdateDataTypeRequest',
+    'ResourceListOfIUnitDefinitionDto',
     'CreateDerivedTransactionPortfolioRequest',
     'Version',
     'Portfolio',
@@ -188,6 +192,8 @@ __all__ = [
     'CreateInstrumentPropertyRequest',
     'InstrumentProperty',
     'UpsertInstrumentPropertiesResponse',
+    'Stream',
+    'FileResponse',
     'VersionSummaryDto',
     'Personalisation',
     'ResourceListOfPersonalisation',

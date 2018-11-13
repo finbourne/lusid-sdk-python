@@ -21,5 +21,37 @@
 # SOFTWARE.
 # --------------------------------------------------------------------------
 
-VERSION = "0.7.162"
+from msrest.serialization import Model
 
+
+class FileResponse(Model):
+    """Allows a file (represented as a stream) to be returned from an Api call.
+
+    Variables are only populated by the server, and will be ignored when
+    sending a request.
+
+    :ivar file_stream:
+    :vartype file_stream: ~lusid.models.Stream
+    :ivar content_type:
+    :vartype content_type: str
+    :ivar downloaded_filename:
+    :vartype downloaded_filename: str
+    """
+
+    _validation = {
+        'file_stream': {'readonly': True},
+        'content_type': {'readonly': True},
+        'downloaded_filename': {'readonly': True},
+    }
+
+    _attribute_map = {
+        'file_stream': {'key': 'fileStream', 'type': 'Stream'},
+        'content_type': {'key': 'contentType', 'type': 'str'},
+        'downloaded_filename': {'key': 'downloadedFilename', 'type': 'str'},
+    }
+
+    def __init__(self):
+        super(FileResponse, self).__init__()
+        self.file_stream = None
+        self.content_type = None
+        self.downloaded_filename = None
