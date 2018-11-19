@@ -54,12 +54,24 @@ class TestFinbourneApi(TestCase):
         credentials = BasicTokenAuthentication(TestFinbourneApi.api_token)
         cls.client = lusid.LUSIDAPI(credentials, TestFinbourneApi.api_url)
 
-        figis = ["BBG000C6K6G9", "BBG000C04D57", "BBG000FV67Q4", "BBG000BF0KW3", "BBG000BF4KL1"]
-        ids = cls.client.lookup_instruments_from_codes("Figi", figis)
+        instruments = [
+            {"Figi": "BBG000C6K6G9", "Name": "VODAFONE GROUP PLC"},
+            {"Figi": "BBG000C04D57", "Name": "BARCLAYS PLC"},
+            {"Figi": "BBG000FV67Q4", "Name": "NATIONAL GRID PLC"},
+            {"Figi": "BBG000BF0KW3", "Name": "SAINSBURY (J) PLC"},
+            {"Figi": "BBG000BF4KL1", "Name": "TAYLOR WIMPEY PLC"}
+        ]
 
-        for v in ids.values.values():
-            for s in v:
-                cls.instrumentIds.append(s.uid)
+        figis_to_create = { i["Figi"]:models.UpsertInstrumentRequest(i["Name"], {"Figi": i["Figi"]}) for i in instruments }
+
+        upsert_response = cls.client.upsert_instruments(figis_to_create)
+
+        if len(upsert_response.failed) != 0:
+            raise Exception(upsert_response.failed)
+
+        ids = cls.client.get_instruments("Figi", [i["Figi"] for i in instruments])
+
+        cls.instrumentIds = [i.lusid_instrument_id for i in ids.values.values()]
 
     def test_create_portfolio(self):
 
@@ -263,6 +275,7 @@ class TestFinbourneApi(TestCase):
         print("trades at {0}".format(datetime.utcnow()))
         print_transactions(all_trades.values)
 
+    @unittest.skip("ISIN not yet supported")
     def test_lookup_instruments(self):
 
         isins = ["IT0004966401", "FR0010192997"]
@@ -272,11 +285,13 @@ class TestFinbourneApi(TestCase):
 
         self.assertGreater(len(fbn_ids.values), 0)
 
-    def test_add_securities(self):
+    def test_add_instruments(self):
 
-        secid = "added-sec-{}".format(str(uuid.uuid4()))
+        sec_id = "added-sec-{}".format(str(uuid.uuid4()))
+
+        request = models.UpsertInstrumentRequest("MyInstrument", {"ClientInternal": "MyIdValue"})
         
-        self.client.batch_add_client_instruments({'quack':models.CreateClientInstrumentRequest(secid, secid)})
+        self.client.upsert_instruments({sec_id: request})
 
     def test_portfolio_aggregation(self):
 

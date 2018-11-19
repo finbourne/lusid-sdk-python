@@ -24,30 +24,29 @@
 from msrest.serialization import Model
 
 
-class InstrumentDefinition(Model):
-    """Expanded instrument definition - in the case of OTC instruments
-    this contains the definition of the non-exchange traded instrument.
-    The format for this can be client-defined, but in order to transparently
-    use
-    vendor libraries it must conform to a format that LUSID understands.
+class UpsertInstrumentsResponse(Model):
+    """UpsertInstrumentsResponse.
 
-    :param instrument_format:
-    :type instrument_format: str
-    :param content:
-    :type content: str
+    :param href:
+    :type href: str
+    :param values:
+    :type values: dict[str, ~lusid.models.Instrument]
+    :param failed:
+    :type failed: dict[str, ~lusid.models.ErrorDetail]
+    :param links:
+    :type links: list[~lusid.models.Link]
     """
 
-    _validation = {
-        'instrument_format': {'required': True},
-        'content': {'required': True},
-    }
-
     _attribute_map = {
-        'instrument_format': {'key': 'instrumentFormat', 'type': 'str'},
-        'content': {'key': 'content', 'type': 'str'},
+        'href': {'key': 'href', 'type': 'str'},
+        'values': {'key': 'values', 'type': '{Instrument}'},
+        'failed': {'key': 'failed', 'type': '{ErrorDetail}'},
+        'links': {'key': 'links', 'type': '[Link]'},
     }
 
-    def __init__(self, instrument_format, content):
-        super(InstrumentDefinition, self).__init__()
-        self.instrument_format = instrument_format
-        self.content = content
+    def __init__(self, href=None, values=None, failed=None, links=None):
+        super(UpsertInstrumentsResponse, self).__init__()
+        self.href = href
+        self.values = values
+        self.failed = failed
+        self.links = links

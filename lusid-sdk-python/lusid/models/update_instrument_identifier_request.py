@@ -24,26 +24,36 @@
 from msrest.serialization import Model
 
 
-class InstrumentProperty(Model):
-    """InstrumentProperty.
+class UpdateInstrumentIdentifierRequest(Model):
+    """UpdateInstrumentIdentifierRequest.
 
-    :param lusid_instrument_id: Unique instrument identifier
-    :type lusid_instrument_id: str
-    :param properties:
-    :type properties: list[~lusid.models.CreateInstrumentPropertyRequest]
-    :param deleted_properties:
-    :type deleted_properties:
-     list[~lusid.models.DeleteInstrumentPropertyRequest]
+    Variables are only populated by the server, and will be ignored when
+    sending a request.
+
+    :ivar type: Possible values include: 'Undefined', 'LusidInstrumentId',
+     'ReutersAssetId', 'CINS', 'Isin', 'Sedol', 'Cusip', 'Ticker',
+     'ClientInternal', 'Figi', 'CompositeFigi', 'ShareClassFigi', 'Wertpapier'
+    :vartype type: str or ~lusid.models.enum
+    :ivar value:
+    :vartype value: str
+    :ivar effective_from:
+    :vartype effective_from: datetime
     """
 
-    _attribute_map = {
-        'lusid_instrument_id': {'key': 'lusidInstrumentId', 'type': 'str'},
-        'properties': {'key': 'properties', 'type': '[CreateInstrumentPropertyRequest]'},
-        'deleted_properties': {'key': 'deletedProperties', 'type': '[DeleteInstrumentPropertyRequest]'},
+    _validation = {
+        'type': {'readonly': True},
+        'value': {'readonly': True},
+        'effective_from': {'readonly': True},
     }
 
-    def __init__(self, lusid_instrument_id=None, properties=None, deleted_properties=None):
-        super(InstrumentProperty, self).__init__()
-        self.lusid_instrument_id = lusid_instrument_id
-        self.properties = properties
-        self.deleted_properties = deleted_properties
+    _attribute_map = {
+        'type': {'key': 'type', 'type': 'str'},
+        'value': {'key': 'value', 'type': 'str'},
+        'effective_from': {'key': 'effectiveFrom', 'type': 'iso-8601'},
+    }
+
+    def __init__(self):
+        super(UpdateInstrumentIdentifierRequest, self).__init__()
+        self.type = None
+        self.value = None
+        self.effective_from = None

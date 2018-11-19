@@ -24,49 +24,25 @@
 from msrest.serialization import Model
 
 
-class Instrument(Model):
-    """Instrument.
+class DeleteInstrumentResponse(Model):
+    """DeleteInstrumentResponse.
 
     :param href:
     :type href: str
-    :param lusid_instrument_id:
-    :type lusid_instrument_id: str
-    :param version:
-    :type version: ~lusid.models.Version
-    :param name:
-    :type name: str
-    :param identifiers:
-    :type identifiers: dict[str, str]
-    :param properties:
-    :type properties: list[~lusid.models.Property]
-    :param market_identifier_code:
-    :type market_identifier_code: str
-    :param lookthrough_portfolio:
-    :type lookthrough_portfolio: ~lusid.models.ResourceId
+    :param as_at:
+    :type as_at: datetime
     :param links:
     :type links: list[~lusid.models.Link]
     """
 
     _attribute_map = {
         'href': {'key': 'href', 'type': 'str'},
-        'lusid_instrument_id': {'key': 'lusidInstrumentId', 'type': 'str'},
-        'version': {'key': 'version', 'type': 'Version'},
-        'name': {'key': 'name', 'type': 'str'},
-        'identifiers': {'key': 'identifiers', 'type': '{str}'},
-        'properties': {'key': 'properties', 'type': '[Property]'},
-        'market_identifier_code': {'key': 'marketIdentifierCode', 'type': 'str'},
-        'lookthrough_portfolio': {'key': 'lookthroughPortfolio', 'type': 'ResourceId'},
+        'as_at': {'key': 'asAt', 'type': 'iso-8601'},
         'links': {'key': 'links', 'type': '[Link]'},
     }
 
-    def __init__(self, href=None, lusid_instrument_id=None, version=None, name=None, identifiers=None, properties=None, market_identifier_code=None, lookthrough_portfolio=None, links=None):
-        super(Instrument, self).__init__()
+    def __init__(self, href=None, as_at=None, links=None):
+        super(DeleteInstrumentResponse, self).__init__()
         self.href = href
-        self.lusid_instrument_id = lusid_instrument_id
-        self.version = version
-        self.name = name
-        self.identifiers = identifiers
-        self.properties = properties
-        self.market_identifier_code = market_identifier_code
-        self.lookthrough_portfolio = lookthrough_portfolio
+        self.as_at = as_at
         self.links = links

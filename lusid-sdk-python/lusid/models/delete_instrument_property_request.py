@@ -24,25 +24,21 @@
 from msrest.serialization import Model
 
 
-class DeleteClientInstrumentsResponse(Model):
-    """DeleteClientInstrumentsResponse.
+class DeleteInstrumentPropertyRequest(Model):
+    """DeleteInstrumentPropertyRequest.
 
-    :param href:
-    :type href: str
-    :param failed:
-    :type failed: dict[str, ~lusid.models.ErrorDetail]
-    :param links:
-    :type links: list[~lusid.models.Link]
+    :param instrument_property_key:
+    :type instrument_property_key: str
+    :param effective_from:
+    :type effective_from: datetime
     """
 
     _attribute_map = {
-        'href': {'key': 'href', 'type': 'str'},
-        'failed': {'key': 'failed', 'type': '{ErrorDetail}'},
-        'links': {'key': 'links', 'type': '[Link]'},
+        'instrument_property_key': {'key': 'instrumentPropertyKey', 'type': 'str'},
+        'effective_from': {'key': 'effectiveFrom', 'type': 'iso-8601'},
     }
 
-    def __init__(self, href=None, failed=None, links=None):
-        super(DeleteClientInstrumentsResponse, self).__init__()
-        self.href = href
-        self.failed = failed
-        self.links = links
+    def __init__(self, instrument_property_key=None, effective_from=None):
+        super(DeleteInstrumentPropertyRequest, self).__init__()
+        self.instrument_property_key = instrument_property_key
+        self.effective_from = effective_from

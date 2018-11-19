@@ -24,29 +24,30 @@
 from msrest.serialization import Model
 
 
-class TryAddClientInstruments(Model):
-    """TryAddClientInstruments.
+class ResourceListOfInstrumentMatch(Model):
+    """ResourceListOfInstrumentMatch.
 
-    :param href:
-    :type href: str
     :param values:
-    :type values: dict[str, ~lusid.models.Instrument]
-    :param failed:
-    :type failed: dict[str, ~lusid.models.ErrorDetail]
+    :type values: list[~lusid.models.InstrumentMatch]
+    :param href: The Uri that returns the same result as the original request,
+     but may include resolved as at time(s).
+    :type href: str
+    :param count: The total number of records returned in the set
+    :type count: int
     :param links:
     :type links: list[~lusid.models.Link]
     """
 
     _attribute_map = {
+        'values': {'key': 'values', 'type': '[InstrumentMatch]'},
         'href': {'key': 'href', 'type': 'str'},
-        'values': {'key': 'values', 'type': '{Instrument}'},
-        'failed': {'key': 'failed', 'type': '{ErrorDetail}'},
+        'count': {'key': 'count', 'type': 'int'},
         'links': {'key': 'links', 'type': '[Link]'},
     }
 
-    def __init__(self, href=None, values=None, failed=None, links=None):
-        super(TryAddClientInstruments, self).__init__()
-        self.href = href
+    def __init__(self, values=None, href=None, count=None, links=None):
+        super(ResourceListOfInstrumentMatch, self).__init__()
         self.values = values
-        self.failed = failed
+        self.href = href
+        self.count = count
         self.links = links

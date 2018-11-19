@@ -24,49 +24,41 @@
 from msrest.serialization import Model
 
 
-class Instrument(Model):
-    """Instrument.
+class UpsertInstrumentRequest(Model):
+    """UpsertInstrumentRequest.
 
-    :param href:
-    :type href: str
-    :param lusid_instrument_id:
-    :type lusid_instrument_id: str
-    :param version:
-    :type version: ~lusid.models.Version
-    :param name:
+    :param name: Required. The name of the instrument
     :type name: str
-    :param identifiers:
+    :param identifiers: Required. A set of identifiers that uniquely identify
+     this instrument (e.g FIGI, RIC)
     :type identifiers: dict[str, str]
-    :param properties:
-    :type properties: list[~lusid.models.Property]
-    :param market_identifier_code:
-    :type market_identifier_code: str
-    :param lookthrough_portfolio:
-    :type lookthrough_portfolio: ~lusid.models.ResourceId
-    :param links:
-    :type links: list[~lusid.models.Link]
+    :param look_through_portfolio_id: Optional. The identifier of the
+     portfolio that represents this instrument
+    :type look_through_portfolio_id: ~lusid.models.ResourceId
+    :param definition: Expanded instrument definition - in the case of OTC
+     instruments
+     this contains the definition of the non-exchange traded instrument.
+     The format for this can be client-defined, but in order to transparently
+     use
+     vendor libraries it must conform to a format that LUSID understands.
+    :type definition: ~lusid.models.InstrumentEconomicDefinition
     """
 
-    _attribute_map = {
-        'href': {'key': 'href', 'type': 'str'},
-        'lusid_instrument_id': {'key': 'lusidInstrumentId', 'type': 'str'},
-        'version': {'key': 'version', 'type': 'Version'},
-        'name': {'key': 'name', 'type': 'str'},
-        'identifiers': {'key': 'identifiers', 'type': '{str}'},
-        'properties': {'key': 'properties', 'type': '[Property]'},
-        'market_identifier_code': {'key': 'marketIdentifierCode', 'type': 'str'},
-        'lookthrough_portfolio': {'key': 'lookthroughPortfolio', 'type': 'ResourceId'},
-        'links': {'key': 'links', 'type': '[Link]'},
+    _validation = {
+        'name': {'required': True},
+        'identifiers': {'required': True},
     }
 
-    def __init__(self, href=None, lusid_instrument_id=None, version=None, name=None, identifiers=None, properties=None, market_identifier_code=None, lookthrough_portfolio=None, links=None):
-        super(Instrument, self).__init__()
-        self.href = href
-        self.lusid_instrument_id = lusid_instrument_id
-        self.version = version
+    _attribute_map = {
+        'name': {'key': 'name', 'type': 'str'},
+        'identifiers': {'key': 'identifiers', 'type': '{str}'},
+        'look_through_portfolio_id': {'key': 'lookThroughPortfolioId', 'type': 'ResourceId'},
+        'definition': {'key': 'definition', 'type': 'InstrumentEconomicDefinition'},
+    }
+
+    def __init__(self, name, identifiers, look_through_portfolio_id=None, definition=None):
+        super(UpsertInstrumentRequest, self).__init__()
         self.name = name
         self.identifiers = identifiers
-        self.properties = properties
-        self.market_identifier_code = market_identifier_code
-        self.lookthrough_portfolio = lookthrough_portfolio
-        self.links = links
+        self.look_through_portfolio_id = look_through_portfolio_id
+        self.definition = definition

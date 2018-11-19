@@ -48,16 +48,24 @@ from .resource_list_of_iunit_definition_dto import ResourceListOfIUnitDefinition
 from .create_derived_transaction_portfolio_request import CreateDerivedTransactionPortfolioRequest
 from .version import Version
 from .portfolio import Portfolio
-from .instrument_definition import InstrumentDefinition
-from .create_client_instrument_request import CreateClientInstrumentRequest
+from .resource_list_of_code_type import ResourceListOfCodeType
+from .instrument_economic_definition import InstrumentEconomicDefinition
+from .upsert_instrument_request import UpsertInstrumentRequest
 from .property import Property
 from .instrument import Instrument
-from .try_add_client_instruments import TryAddClientInstruments
-from .delete_client_instruments_response import DeleteClientInstrumentsResponse
-from .lookup_instruments_from_codes_response import LookupInstrumentsFromCodesResponse
+from .upsert_instruments_response import UpsertInstrumentsResponse
+from .update_instrument_identifier_request import UpdateInstrumentIdentifierRequest
+from .delete_instrument_response import DeleteInstrumentResponse
+from .instrument_match_aliases import InstrumentMatchAliases
+from .instrument_match import InstrumentMatch
+from .resource_list_of_instrument_match import ResourceListOfInstrumentMatch
+from .instrument_id_dto import InstrumentIdDto
+from .get_instruments_response import GetInstrumentsResponse
+from .resource_list_of_instrument import ResourceListOfInstrument
 from .metric_value import MetricValue
 from .property_value import PropertyValue
 from .create_instrument_property_request import CreateInstrumentPropertyRequest
+from .delete_instrument_property_request import DeleteInstrumentPropertyRequest
 from .instrument_property import InstrumentProperty
 from .upsert_instrument_properties_response import UpsertInstrumentPropertiesResponse
 from .stream import Stream
@@ -180,16 +188,24 @@ __all__ = [
     'CreateDerivedTransactionPortfolioRequest',
     'Version',
     'Portfolio',
-    'InstrumentDefinition',
-    'CreateClientInstrumentRequest',
+    'ResourceListOfCodeType',
+    'InstrumentEconomicDefinition',
+    'UpsertInstrumentRequest',
     'Property',
     'Instrument',
-    'TryAddClientInstruments',
-    'DeleteClientInstrumentsResponse',
-    'LookupInstrumentsFromCodesResponse',
+    'UpsertInstrumentsResponse',
+    'UpdateInstrumentIdentifierRequest',
+    'DeleteInstrumentResponse',
+    'InstrumentMatchAliases',
+    'InstrumentMatch',
+    'ResourceListOfInstrumentMatch',
+    'InstrumentIdDto',
+    'GetInstrumentsResponse',
+    'ResourceListOfInstrument',
     'MetricValue',
     'PropertyValue',
     'CreateInstrumentPropertyRequest',
+    'DeleteInstrumentPropertyRequest',
     'InstrumentProperty',
     'UpsertInstrumentPropertiesResponse',
     'Stream',

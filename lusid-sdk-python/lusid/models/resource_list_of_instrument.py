@@ -24,49 +24,30 @@
 from msrest.serialization import Model
 
 
-class Instrument(Model):
-    """Instrument.
+class ResourceListOfInstrument(Model):
+    """ResourceListOfInstrument.
 
-    :param href:
+    :param values:
+    :type values: list[~lusid.models.Instrument]
+    :param href: The Uri that returns the same result as the original request,
+     but may include resolved as at time(s).
     :type href: str
-    :param lusid_instrument_id:
-    :type lusid_instrument_id: str
-    :param version:
-    :type version: ~lusid.models.Version
-    :param name:
-    :type name: str
-    :param identifiers:
-    :type identifiers: dict[str, str]
-    :param properties:
-    :type properties: list[~lusid.models.Property]
-    :param market_identifier_code:
-    :type market_identifier_code: str
-    :param lookthrough_portfolio:
-    :type lookthrough_portfolio: ~lusid.models.ResourceId
+    :param count: The total number of records returned in the set
+    :type count: int
     :param links:
     :type links: list[~lusid.models.Link]
     """
 
     _attribute_map = {
+        'values': {'key': 'values', 'type': '[Instrument]'},
         'href': {'key': 'href', 'type': 'str'},
-        'lusid_instrument_id': {'key': 'lusidInstrumentId', 'type': 'str'},
-        'version': {'key': 'version', 'type': 'Version'},
-        'name': {'key': 'name', 'type': 'str'},
-        'identifiers': {'key': 'identifiers', 'type': '{str}'},
-        'properties': {'key': 'properties', 'type': '[Property]'},
-        'market_identifier_code': {'key': 'marketIdentifierCode', 'type': 'str'},
-        'lookthrough_portfolio': {'key': 'lookthroughPortfolio', 'type': 'ResourceId'},
+        'count': {'key': 'count', 'type': 'int'},
         'links': {'key': 'links', 'type': '[Link]'},
     }
 
-    def __init__(self, href=None, lusid_instrument_id=None, version=None, name=None, identifiers=None, properties=None, market_identifier_code=None, lookthrough_portfolio=None, links=None):
-        super(Instrument, self).__init__()
+    def __init__(self, values=None, href=None, count=None, links=None):
+        super(ResourceListOfInstrument, self).__init__()
+        self.values = values
         self.href = href
-        self.lusid_instrument_id = lusid_instrument_id
-        self.version = version
-        self.name = name
-        self.identifiers = identifiers
-        self.properties = properties
-        self.market_identifier_code = market_identifier_code
-        self.lookthrough_portfolio = lookthrough_portfolio
+        self.count = count
         self.links = links

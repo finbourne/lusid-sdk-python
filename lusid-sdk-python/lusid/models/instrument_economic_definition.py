@@ -24,26 +24,30 @@
 from msrest.serialization import Model
 
 
-class InstrumentProperty(Model):
-    """InstrumentProperty.
+class InstrumentEconomicDefinition(Model):
+    """Expanded instrument definition - in the case of OTC instruments
+    this contains the definition of the non-exchange traded instrument.
+    The format for this can be client-defined, but in order to transparently
+    use
+    vendor libraries it must conform to a format that LUSID understands.
 
-    :param lusid_instrument_id: Unique instrument identifier
-    :type lusid_instrument_id: str
-    :param properties:
-    :type properties: list[~lusid.models.CreateInstrumentPropertyRequest]
-    :param deleted_properties:
-    :type deleted_properties:
-     list[~lusid.models.DeleteInstrumentPropertyRequest]
+    :param instrument_format:
+    :type instrument_format: str
+    :param content:
+    :type content: str
     """
 
-    _attribute_map = {
-        'lusid_instrument_id': {'key': 'lusidInstrumentId', 'type': 'str'},
-        'properties': {'key': 'properties', 'type': '[CreateInstrumentPropertyRequest]'},
-        'deleted_properties': {'key': 'deletedProperties', 'type': '[DeleteInstrumentPropertyRequest]'},
+    _validation = {
+        'instrument_format': {'required': True},
+        'content': {'required': True},
     }
 
-    def __init__(self, lusid_instrument_id=None, properties=None, deleted_properties=None):
-        super(InstrumentProperty, self).__init__()
-        self.lusid_instrument_id = lusid_instrument_id
-        self.properties = properties
-        self.deleted_properties = deleted_properties
+    _attribute_map = {
+        'instrument_format': {'key': 'instrumentFormat', 'type': 'str'},
+        'content': {'key': 'content', 'type': 'str'},
+    }
+
+    def __init__(self, instrument_format, content):
+        super(InstrumentEconomicDefinition, self).__init__()
+        self.instrument_format = instrument_format
+        self.content = content

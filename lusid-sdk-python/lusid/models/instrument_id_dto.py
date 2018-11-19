@@ -24,26 +24,23 @@
 from msrest.serialization import Model
 
 
-class InstrumentProperty(Model):
-    """InstrumentProperty.
+class InstrumentIdDto(Model):
+    """InstrumentIdDto.
 
-    :param lusid_instrument_id: Unique instrument identifier
-    :type lusid_instrument_id: str
-    :param properties:
-    :type properties: list[~lusid.models.CreateInstrumentPropertyRequest]
-    :param deleted_properties:
-    :type deleted_properties:
-     list[~lusid.models.DeleteInstrumentPropertyRequest]
+    :param type: Possible values include: 'Undefined', 'LusidInstrumentId',
+     'ReutersAssetId', 'CINS', 'Isin', 'Sedol', 'Cusip', 'Ticker',
+     'ClientInternal', 'Figi', 'CompositeFigi', 'ShareClassFigi', 'Wertpapier'
+    :type type: str or ~lusid.models.enum
+    :param id:
+    :type id: str
     """
 
     _attribute_map = {
-        'lusid_instrument_id': {'key': 'lusidInstrumentId', 'type': 'str'},
-        'properties': {'key': 'properties', 'type': '[CreateInstrumentPropertyRequest]'},
-        'deleted_properties': {'key': 'deletedProperties', 'type': '[DeleteInstrumentPropertyRequest]'},
+        'type': {'key': 'type', 'type': 'str'},
+        'id': {'key': 'id', 'type': 'str'},
     }
 
-    def __init__(self, lusid_instrument_id=None, properties=None, deleted_properties=None):
-        super(InstrumentProperty, self).__init__()
-        self.lusid_instrument_id = lusid_instrument_id
-        self.properties = properties
-        self.deleted_properties = deleted_properties
+    def __init__(self, type=None, id=None):
+        super(InstrumentIdDto, self).__init__()
+        self.type = type
+        self.id = id

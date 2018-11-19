@@ -24,39 +24,39 @@
 from msrest.serialization import Model
 
 
-class CreateClientInstrumentRequest(Model):
-    """CreateClientInstrumentRequest.
+class InstrumentMatch(Model):
+    """InstrumentMatch.
 
-    :param client_instrument_id:
-    :type client_instrument_id: str
-    :param name:
-    :type name: str
-    :param look_through_portfolio_id:
-    :type look_through_portfolio_id: ~lusid.models.ResourceId
-    :param instrument: Expanded instrument definition - in the case of OTC
-     instruments
-     this contains the definition of the non-exchange traded instrument.
-     The format for this can be client-defined, but in order to transparently
-     use
-     vendor libraries it must conform to a format that LUSID understands.
-    :type instrument: ~lusid.models.InstrumentDefinition
+    Variables are only populated by the server, and will be ignored when
+    sending a request.
+
+    :ivar name:
+    :vartype name: str
+    :ivar aliases:
+    :vartype aliases: ~lusid.models.InstrumentMatchAliases
+    :ivar bloomberg_exchange_code:
+    :vartype bloomberg_exchange_code: str
+    :ivar market_identifier_code:
+    :vartype market_identifier_code: str
     """
 
     _validation = {
-        'client_instrument_id': {'required': True},
-        'name': {'required': True},
+        'name': {'readonly': True},
+        'aliases': {'readonly': True},
+        'bloomberg_exchange_code': {'readonly': True},
+        'market_identifier_code': {'readonly': True},
     }
 
     _attribute_map = {
-        'client_instrument_id': {'key': 'clientInstrumentId', 'type': 'str'},
         'name': {'key': 'name', 'type': 'str'},
-        'look_through_portfolio_id': {'key': 'lookThroughPortfolioId', 'type': 'ResourceId'},
-        'instrument': {'key': 'instrument', 'type': 'InstrumentDefinition'},
+        'aliases': {'key': 'aliases', 'type': 'InstrumentMatchAliases'},
+        'bloomberg_exchange_code': {'key': 'bloombergExchangeCode', 'type': 'str'},
+        'market_identifier_code': {'key': 'marketIdentifierCode', 'type': 'str'},
     }
 
-    def __init__(self, client_instrument_id, name, look_through_portfolio_id=None, instrument=None):
-        super(CreateClientInstrumentRequest, self).__init__()
-        self.client_instrument_id = client_instrument_id
-        self.name = name
-        self.look_through_portfolio_id = look_through_portfolio_id
-        self.instrument = instrument
+    def __init__(self):
+        super(InstrumentMatch, self).__init__()
+        self.name = None
+        self.aliases = None
+        self.bloomberg_exchange_code = None
+        self.market_identifier_code = None
