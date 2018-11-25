@@ -56,10 +56,8 @@ from .instrument import Instrument
 from .upsert_instruments_response import UpsertInstrumentsResponse
 from .update_instrument_identifier_request import UpdateInstrumentIdentifierRequest
 from .delete_instrument_response import DeleteInstrumentResponse
-from .instrument_match_aliases import InstrumentMatchAliases
 from .instrument_match import InstrumentMatch
-from .resource_list_of_instrument_match import ResourceListOfInstrumentMatch
-from .instrument_id_dto import InstrumentIdDto
+from .find_instruments_response import FindInstrumentsResponse
 from .get_instruments_response import GetInstrumentsResponse
 from .resource_list_of_instrument import ResourceListOfInstrument
 from .metric_value import MetricValue
@@ -196,10 +194,8 @@ __all__ = [
     'UpsertInstrumentsResponse',
     'UpdateInstrumentIdentifierRequest',
     'DeleteInstrumentResponse',
-    'InstrumentMatchAliases',
     'InstrumentMatch',
-    'ResourceListOfInstrumentMatch',
-    'InstrumentIdDto',
+    'FindInstrumentsResponse',
     'GetInstrumentsResponse',
     'ResourceListOfInstrument',
     'MetricValue',

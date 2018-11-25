@@ -24,30 +24,29 @@
 from msrest.serialization import Model
 
 
-class ResourceListOfInstrumentMatch(Model):
-    """ResourceListOfInstrumentMatch.
+class FindInstrumentsResponse(Model):
+    """FindInstrumentsResponse.
 
-    :param values:
-    :type values: list[~lusid.models.InstrumentMatch]
-    :param href: The Uri that returns the same result as the original request,
-     but may include resolved as at time(s).
+    :param href:
     :type href: str
-    :param count: The total number of records returned in the set
-    :type count: int
+    :param values: A dictionary of instruments that are keyed by the search
+     criteria supplied in the
+     matching request. If no match was found, then there will be no values in
+     the collection
+     for that key.
+    :type values: dict[str, list[~lusid.models.InstrumentMatch]]
     :param links:
     :type links: list[~lusid.models.Link]
     """
 
     _attribute_map = {
-        'values': {'key': 'values', 'type': '[InstrumentMatch]'},
         'href': {'key': 'href', 'type': 'str'},
-        'count': {'key': 'count', 'type': 'int'},
+        'values': {'key': 'values', 'type': '{[InstrumentMatch]}'},
         'links': {'key': 'links', 'type': '[Link]'},
     }
 
-    def __init__(self, values=None, href=None, count=None, links=None):
-        super(ResourceListOfInstrumentMatch, self).__init__()
-        self.values = values
+    def __init__(self, href=None, values=None, links=None):
+        super(FindInstrumentsResponse, self).__init__()
         self.href = href
-        self.count = count
+        self.values = values
         self.links = links

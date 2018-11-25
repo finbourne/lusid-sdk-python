@@ -27,36 +27,25 @@ from msrest.serialization import Model
 class InstrumentMatch(Model):
     """InstrumentMatch.
 
-    Variables are only populated by the server, and will be ignored when
-    sending a request.
-
-    :ivar name:
-    :vartype name: str
-    :ivar aliases:
-    :vartype aliases: ~lusid.models.InstrumentMatchAliases
-    :ivar bloomberg_exchange_code:
-    :vartype bloomberg_exchange_code: str
-    :ivar market_identifier_code:
-    :vartype market_identifier_code: str
+    :param name: The name of the instrument
+    :type name: str
+    :param identifiers: The set of identifiers that uniquely identify this
+     instrument
+    :type identifiers: dict[str, str]
+    :param properties: Any requested properties are decorated on the
+     instrument, and will have a value of
+     'Unknown', if no value was found for this instrument.
+    :type properties: list[~lusid.models.Property]
     """
-
-    _validation = {
-        'name': {'readonly': True},
-        'aliases': {'readonly': True},
-        'bloomberg_exchange_code': {'readonly': True},
-        'market_identifier_code': {'readonly': True},
-    }
 
     _attribute_map = {
         'name': {'key': 'name', 'type': 'str'},
-        'aliases': {'key': 'aliases', 'type': 'InstrumentMatchAliases'},
-        'bloomberg_exchange_code': {'key': 'bloombergExchangeCode', 'type': 'str'},
-        'market_identifier_code': {'key': 'marketIdentifierCode', 'type': 'str'},
+        'identifiers': {'key': 'identifiers', 'type': '{str}'},
+        'properties': {'key': 'properties', 'type': '[Property]'},
     }
 
-    def __init__(self):
+    def __init__(self, name=None, identifiers=None, properties=None):
         super(InstrumentMatch, self).__init__()
-        self.name = None
-        self.aliases = None
-        self.bloomberg_exchange_code = None
-        self.market_identifier_code = None
+        self.name = name
+        self.identifiers = identifiers
+        self.properties = properties

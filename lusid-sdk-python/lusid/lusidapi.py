@@ -56,7 +56,7 @@ class LUSIDAPIConfiguration(Configuration):
 
 class LUSIDAPI(object):
     """# Introduction
-    This page documents the [LUSID APIs](https://api.finbourne.com/swagger), which allows authorised clients to query and update their data within the LUSID platform.
+    This page documents the [LUSID APIs](https://api.lusid.com/swagger), which allows authorised clients to query and update their data within the LUSID platform.
     SDKs to interact with the LUSID APIs are available in the following languages :
     * [C#](https://github.com/finbourne/lusid-sdk-csharp)
     * [Java](https://github.com/finbourne/lusid-sdk-java)
@@ -152,12 +152,15 @@ class LUSIDAPI(object):
     | SettlementDate|datetime|Settlement date |
     | Units|decimal|Quantity of transaction in units of the instrument |
     | TransactionPrice|tradeprice|Execution price for the transaction |
-    | TotalConsideration|currencyandamount|Total value of the transaction |
+    | TotalConsideration|currencyandamount|Total value of the transaction in settlement currency |
     | ExchangeRate|decimal|Rate between transaction and settle currency |
     | TransactionCurrency|currency|Transaction currency |
     | CounterpartyId|string|Counterparty identifier |
     | Source|string|Where this transaction came from |
     | NettingSet|string|  |
+    From these fields, the following values can be calculated
+     * **Transaction value in Transaction currency**: TotalConsideration / ExchangeRate
+     * **Transaction value in Portfolio currency**: Transaction value in Transaction currency * TradeToPortfolioRate
     ### Example Transactions
     #### A Common Purchase Example
     Three example transactions are shown in the table below.
@@ -355,7 +358,7 @@ class LUSIDAPI(object):
         self._client = ServiceClient(self.config.credentials, self.config)
 
         client_models = {k: v for k, v in models.__dict__.items() if isinstance(v, type)}
-        self.api_version = '0.7.192'
+        self.api_version = '0.8.19'
         self._serialize = Serializer(client_models)
         self._deserialize = Deserializer(client_models)
 
@@ -1507,7 +1510,7 @@ class LUSIDAPI(object):
     get_instrument.metadata = {'url': '/api/instruments/{type}/{id}'}
 
     def update_instrument_identifier(
-            self, type, id, custom_headers=None, raw=False, **operation_config):
+            self, type, id, request=None, custom_headers=None, raw=False, **operation_config):
         """Update instrument identifier.
 
         Adds, updates, or removes an identifier on an instrument.
@@ -1519,6 +1522,8 @@ class LUSIDAPI(object):
         :type type: str
         :param id: The instrument identifier
         :type id: str
+        :param request: The identifier to add, update, or remove
+        :type request: ~lusid.models.UpdateInstrumentIdentifierRequest
         :param dict custom_headers: headers that will be added to the request
         :param bool raw: returns the direct response alongside the
          deserialized response
@@ -1529,8 +1534,6 @@ class LUSIDAPI(object):
         :raises:
          :class:`ErrorResponseException<lusid.models.ErrorResponseException>`
         """
-        request = None
-
         # Construct URL
         url = self.update_instrument_identifier.metadata['url']
         path_format_arguments = {
@@ -1657,9 +1660,8 @@ class LUSIDAPI(object):
          deserialized response
         :param operation_config: :ref:`Operation configuration
          overrides<msrest:optionsforoperations>`.
-        :return: ResourceListOfInstrumentMatch or ClientRawResponse if
-         raw=true
-        :rtype: ~lusid.models.ResourceListOfInstrumentMatch or
+        :return: FindInstrumentsResponse or ClientRawResponse if raw=true
+        :rtype: ~lusid.models.FindInstrumentsResponse or
          ~msrest.pipeline.ClientRawResponse
         :raises:
          :class:`ErrorResponseException<lusid.models.ErrorResponseException>`
@@ -1695,7 +1697,7 @@ class LUSIDAPI(object):
         deserialized = None
 
         if response.status_code == 200:
-            deserialized = self._deserialize('ResourceListOfInstrumentMatch', response)
+            deserialized = self._deserialize('FindInstrumentsResponse', response)
 
         if raw:
             client_raw_response = ClientRawResponse(deserialized, response)
@@ -4652,9 +4654,10 @@ class LUSIDAPI(object):
 
         :param scope: The scope of the portfolio
         :type scope: str
-        :param code: The scope of the portfolio
+        :param code: The code of the portfolio
         :type code: str
-        :param effective_at: Optional. The effective date of the data
+        :param effective_at: The effective date of the constituents to
+         retrieve
         :type effective_at: datetime
         :param as_at: Optional. The AsAt date of the data
         :type as_at: datetime
@@ -4733,7 +4736,7 @@ class LUSIDAPI(object):
         :type scope: str
         :param code: The code of the portfolio
         :type code: str
-        :param effective_at: Optional. The effective date of the data
+        :param effective_at: The effective date of the constituents
         :type effective_at: datetime
         :param constituents: The constituents to upload to the portfolio
         :type constituents:

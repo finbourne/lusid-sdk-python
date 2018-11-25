@@ -29,19 +29,25 @@ class Instrument(Model):
 
     :param href:
     :type href: str
-    :param lusid_instrument_id:
+    :param lusid_instrument_id: The lusid instrument id (LUID) of the
+     instrument
     :type lusid_instrument_id: str
-    :param version:
+    :param version: The version of the instrument
     :type version: ~lusid.models.Version
-    :param name:
+    :param name: The name of the instrument
     :type name: str
-    :param identifiers:
+    :param identifiers: The set of identifiers that can be used to uniquely
+     identify the instrument
     :type identifiers: dict[str, str]
-    :param properties:
+    :param properties: Any requested instrument properties. If no property can
+     be found for the instrument, then
+     a value of 'Unknown' will be returned
     :type properties: list[~lusid.models.Property]
-    :param market_identifier_code:
+    :param market_identifier_code: The market identifier of the instrument (if
+     any).
     :type market_identifier_code: str
-    :param lookthrough_portfolio:
+    :param lookthrough_portfolio: The lookthrough portfolio of the instrument
+     (if any).
     :type lookthrough_portfolio: ~lusid.models.ResourceId
     :param links:
     :type links: list[~lusid.models.Link]

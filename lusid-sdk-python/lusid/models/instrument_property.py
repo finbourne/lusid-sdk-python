@@ -29,9 +29,10 @@ class InstrumentProperty(Model):
 
     :param lusid_instrument_id: Unique instrument identifier
     :type lusid_instrument_id: str
-    :param properties:
+    :param properties: A collection of properties to create or update
     :type properties: list[~lusid.models.CreateInstrumentPropertyRequest]
-    :param deleted_properties:
+    :param deleted_properties: A collection of property keys to remove
+     property values from, if any are set for the instrument
     :type deleted_properties:
      list[~lusid.models.DeleteInstrumentPropertyRequest]
     """

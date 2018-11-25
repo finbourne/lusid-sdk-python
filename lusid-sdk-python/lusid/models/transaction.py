@@ -42,7 +42,8 @@ class Transaction(Model):
     :type units: float
     :param transaction_price: Execution price for the transaction
     :type transaction_price: ~lusid.models.TransactionPrice
-    :param total_consideration: Total value of the transaction
+    :param total_consideration: Total value of the transaction in settlement
+     currency
     :type total_consideration: ~lusid.models.CurrencyAndAmount
     :param exchange_rate: Rate between transaction and settle currency
     :type exchange_rate: float

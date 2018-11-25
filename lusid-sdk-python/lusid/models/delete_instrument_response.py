@@ -29,7 +29,9 @@ class DeleteInstrumentResponse(Model):
 
     :param href:
     :type href: str
-    :param as_at:
+    :param as_at: The 'as at' time that the instrument was deleted at. As at
+     times preceding this can
+     still be used to query the instrument.
     :type as_at: datetime
     :param links:
     :type links: list[~lusid.models.Link]

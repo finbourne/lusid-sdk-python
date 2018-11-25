@@ -29,9 +29,13 @@ class GetInstrumentsResponse(Model):
 
     :param href:
     :type href: str
-    :param values:
+    :param values: The instruments, keyed by their requested identifier. Only
+     instruments that were found
+     will be contained in this collection.
     :type values: dict[str, ~lusid.models.Instrument]
-    :param failed:
+    :param failed: If any instruments were not found, then they will be listed
+     in as 'Failed', along with the nature
+     of their failure.
     :type failed: dict[str, ~lusid.models.ErrorDetail]
     :param links:
     :type links: list[~lusid.models.Link]

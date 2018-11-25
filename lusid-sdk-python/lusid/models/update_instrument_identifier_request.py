@@ -27,24 +27,23 @@ from msrest.serialization import Model
 class UpdateInstrumentIdentifierRequest(Model):
     """UpdateInstrumentIdentifierRequest.
 
-    Variables are only populated by the server, and will be ignored when
-    sending a request.
-
-    :ivar type: Possible values include: 'Undefined', 'LusidInstrumentId',
-     'ReutersAssetId', 'CINS', 'Isin', 'Sedol', 'Cusip', 'Ticker',
-     'ClientInternal', 'Figi', 'CompositeFigi', 'ShareClassFigi', 'Wertpapier'
-    :vartype type: str or ~lusid.models.enum
-    :ivar value:
-    :vartype value: str
-    :ivar effective_from:
-    :vartype effective_from: datetime
+    :param type: The type of the identifier to upsert. This must be one of the
+     code types marked as
+     allowable for instrument identifiers. Possible values include:
+     'Undefined', 'LusidInstrumentId', 'ReutersAssetId', 'CINS', 'Isin',
+     'Sedol', 'Cusip', 'Ticker', 'ClientInternal', 'Figi', 'CompositeFigi',
+     'ShareClassFigi', 'Wertpapier'
+    :type type: str or ~lusid.models.enum
+    :param value: The value of the identifier. If set to `null`, this will
+     remove the identifier completely.
+     Note that, if an instrument only has one identifier, it is an error to
+     remove this.
+    :type value: str
+    :param effective_from: The date at which the identifier modification is to
+     be effective from. If unset, will
+     default to `now`.
+    :type effective_from: datetime
     """
-
-    _validation = {
-        'type': {'readonly': True},
-        'value': {'readonly': True},
-        'effective_from': {'readonly': True},
-    }
 
     _attribute_map = {
         'type': {'key': 'type', 'type': 'str'},
@@ -52,8 +51,8 @@ class UpdateInstrumentIdentifierRequest(Model):
         'effective_from': {'key': 'effectiveFrom', 'type': 'iso-8601'},
     }
 
-    def __init__(self):
+    def __init__(self, type=None, value=None, effective_from=None):
         super(UpdateInstrumentIdentifierRequest, self).__init__()
-        self.type = None
-        self.value = None
-        self.effective_from = None
+        self.type = type
+        self.value = value
+        self.effective_from = effective_from

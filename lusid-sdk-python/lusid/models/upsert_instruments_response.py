@@ -29,9 +29,12 @@ class UpsertInstrumentsResponse(Model):
 
     :param href:
     :type href: str
-    :param values:
+    :param values: The collection of upserted instruments with their latest
+     parameters.
     :type values: dict[str, ~lusid.models.Instrument]
-    :param failed:
+    :param failed: If any instruments failed to be upserted, they will be
+     listed in 'Failed', along
+     with a reason why.
     :type failed: dict[str, ~lusid.models.ErrorDetail]
     :param links:
     :type links: list[~lusid.models.Link]

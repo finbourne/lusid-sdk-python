@@ -27,9 +27,11 @@ from msrest.serialization import Model
 class CreateInstrumentPropertyRequest(Model):
     """CreateInstrumentPropertyRequest.
 
-    :param instrument_property_key:
+    :param instrument_property_key: The property key of the property, e.g,
+     'Instrument/default/Isin'
     :type instrument_property_key: str
-    :param property:
+    :param property: The value of the property, which must not be empty or
+     null. e.g, 'US0378331005'
     :type property: ~lusid.models.PropertyValue
     """
 

@@ -27,9 +27,11 @@ from msrest.serialization import Model
 class DeleteInstrumentPropertyRequest(Model):
     """DeleteInstrumentPropertyRequest.
 
-    :param instrument_property_key:
+    :param instrument_property_key: The property key of the property to be
+     removed from the instrument, e.g 'Instrument/default/Cusip`
     :type instrument_property_key: str
-    :param effective_from:
+    :param effective_from: The date at which the property removal should be
+     effective from. If no value is set, then 'now' is used.
     :type effective_from: datetime
     """
 
