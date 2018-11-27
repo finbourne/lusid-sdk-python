@@ -358,7 +358,7 @@ class LUSIDAPI(object):
         self._client = ServiceClient(self.config.credentials, self.config)
 
         client_models = {k: v for k, v in models.__dict__.items() if isinstance(v, type)}
-        self.api_version = '0.8.19'
+        self.api_version = '0.8.27'
         self._serialize = Serializer(client_models)
         self._deserialize = Deserializer(client_models)
 
@@ -4661,8 +4661,8 @@ class LUSIDAPI(object):
         :type effective_at: datetime
         :param as_at: Optional. The AsAt date of the data
         :type as_at: datetime
-        :param sort_by: Optional. Order the results by these fields. Use use
-         the '-' sign to denote descending order e.g. -MyFieldName
+        :param sort_by: Optional. Order the results by these fields. Use the
+         '-' sign to denote descending order e.g. -MyFieldName
         :type sort_by: list[str]
         :param start: Optional. When paginating, skip this number of results
         :type start: int
@@ -4674,9 +4674,9 @@ class LUSIDAPI(object):
          deserialized response
         :param operation_config: :ref:`Operation configuration
          overrides<msrest:optionsforoperations>`.
-        :return: ResourceListOfReferencePortfolioConstituent or
+        :return: GetReferencePortfolioConstituentsResponse or
          ClientRawResponse if raw=true
-        :rtype: ~lusid.models.ResourceListOfReferencePortfolioConstituent or
+        :rtype: ~lusid.models.GetReferencePortfolioConstituentsResponse or
          ~msrest.pipeline.ClientRawResponse
         :raises:
          :class:`ErrorResponseException<lusid.models.ErrorResponseException>`
@@ -4717,7 +4717,7 @@ class LUSIDAPI(object):
         deserialized = None
 
         if response.status_code == 200:
-            deserialized = self._deserialize('ResourceListOfReferencePortfolioConstituent', response)
+            deserialized = self._deserialize('GetReferencePortfolioConstituentsResponse', response)
 
         if raw:
             client_raw_response = ClientRawResponse(deserialized, response)
@@ -4727,7 +4727,7 @@ class LUSIDAPI(object):
     get_reference_portfolio_constituents.metadata = {'url': '/api/referenceportfolios/{scope}/{code}/{effectiveAt}/constituents'}
 
     def upsert_reference_portfolio_constituents(
-            self, scope, code, effective_at, constituents=None, custom_headers=None, raw=False, **operation_config):
+            self, scope, code, constituents=None, custom_headers=None, raw=False, **operation_config):
         """Add constituents.
 
         Add constituents to the specified reference portfolio.
@@ -4736,11 +4736,9 @@ class LUSIDAPI(object):
         :type scope: str
         :param code: The code of the portfolio
         :type code: str
-        :param effective_at: The effective date of the constituents
-        :type effective_at: datetime
         :param constituents: The constituents to upload to the portfolio
         :type constituents:
-         list[~lusid.models.ReferencePortfolioConstituentRequest]
+         ~lusid.models.UpsertReferencePortfolioConstituentsRequest
         :param dict custom_headers: headers that will be added to the request
         :param bool raw: returns the direct response alongside the
          deserialized response
@@ -4757,8 +4755,7 @@ class LUSIDAPI(object):
         url = self.upsert_reference_portfolio_constituents.metadata['url']
         path_format_arguments = {
             'scope': self._serialize.url("scope", scope, 'str'),
-            'code': self._serialize.url("code", code, 'str'),
-            'effectiveAt': self._serialize.url("effective_at", effective_at, 'iso-8601')
+            'code': self._serialize.url("code", code, 'str')
         }
         url = self._client.format_url(url, **path_format_arguments)
 
@@ -4773,7 +4770,7 @@ class LUSIDAPI(object):
 
         # Construct body
         if constituents is not None:
-            body_content = self._serialize.body(constituents, '[ReferencePortfolioConstituentRequest]')
+            body_content = self._serialize.body(constituents, 'UpsertReferencePortfolioConstituentsRequest')
         else:
             body_content = None
 
@@ -4795,7 +4792,7 @@ class LUSIDAPI(object):
             return client_raw_response
 
         return deserialized
-    upsert_reference_portfolio_constituents.metadata = {'url': '/api/referenceportfolios/{scope}/{code}/{effectiveAt}/constituents'}
+    upsert_reference_portfolio_constituents.metadata = {'url': '/api/referenceportfolios/{scope}/{code}/constituents'}
 
     def get_results(
             self, scope, key, date_parameter, as_at=None, sort_by=None, start=None, limit=None, custom_headers=None, raw=False, **operation_config):

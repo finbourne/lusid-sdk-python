@@ -111,10 +111,11 @@ from .upsert_quotes_response import UpsertQuotesResponse
 from .delete_quotes_response import DeleteQuotesResponse
 from .perpetual_property_value import PerpetualPropertyValue
 from .create_reference_portfolio_request import CreateReferencePortfolioRequest
-from .reference_portfolio_constituent_request import ReferencePortfolioConstituentRequest
-from .upsert_reference_portfolio_constituents_response import UpsertReferencePortfolioConstituentsResponse
 from .reference_portfolio_constituent import ReferencePortfolioConstituent
-from .resource_list_of_reference_portfolio_constituent import ResourceListOfReferencePortfolioConstituent
+from .get_reference_portfolio_constituents_response import GetReferencePortfolioConstituentsResponse
+from .reference_portfolio_constituent_request import ReferencePortfolioConstituentRequest
+from .upsert_reference_portfolio_constituents_request import UpsertReferencePortfolioConstituentsRequest
+from .upsert_reference_portfolio_constituents_response import UpsertReferencePortfolioConstituentsResponse
 from .create_results import CreateResults
 from .results import Results
 from .resource_list_of_string import ResourceListOfString
@@ -249,10 +250,11 @@ __all__ = [
     'DeleteQuotesResponse',
     'PerpetualPropertyValue',
     'CreateReferencePortfolioRequest',
-    'ReferencePortfolioConstituentRequest',
-    'UpsertReferencePortfolioConstituentsResponse',
     'ReferencePortfolioConstituent',
-    'ResourceListOfReferencePortfolioConstituent',
+    'GetReferencePortfolioConstituentsResponse',
+    'ReferencePortfolioConstituentRequest',
+    'UpsertReferencePortfolioConstituentsRequest',
+    'UpsertReferencePortfolioConstituentsResponse',
     'CreateResults',
     'Results',
     'ResourceListOfString',

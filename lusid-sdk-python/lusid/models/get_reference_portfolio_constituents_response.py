@@ -24,30 +24,50 @@
 from msrest.serialization import Model
 
 
-class ResourceListOfReferencePortfolioConstituent(Model):
-    """ResourceListOfReferencePortfolioConstituent.
+class GetReferencePortfolioConstituentsResponse(Model):
+    """GetReferencePortfolioConstituentsResponse.
 
-    :param values:
-    :type values: list[~lusid.models.ReferencePortfolioConstituent]
+    :param effective_from:
+    :type effective_from: datetime
+    :param weight_type: Possible values include: 'Static', 'Floating',
+     'Periodical'
+    :type weight_type: str or ~lusid.models.enum
+    :param period_type: Possible values include: 'Daily', 'Weekly', 'Monthly',
+     'Quarterly', 'Annually'
+    :type period_type: str or ~lusid.models.enum
+    :param period_count:
+    :type period_count: int
+    :param constituents: Set of constituents (instrument/weight pairings)
+    :type constituents: list[~lusid.models.ReferencePortfolioConstituent]
     :param href: The Uri that returns the same result as the original request,
      but may include resolved as at time(s).
     :type href: str
-    :param count: The total number of records returned in the set
-    :type count: int
     :param links:
     :type links: list[~lusid.models.Link]
     """
 
+    _validation = {
+        'effective_from': {'required': True},
+        'weight_type': {'required': True},
+        'constituents': {'required': True},
+    }
+
     _attribute_map = {
-        'values': {'key': 'values', 'type': '[ReferencePortfolioConstituent]'},
+        'effective_from': {'key': 'effectiveFrom', 'type': 'iso-8601'},
+        'weight_type': {'key': 'weightType', 'type': 'str'},
+        'period_type': {'key': 'periodType', 'type': 'str'},
+        'period_count': {'key': 'periodCount', 'type': 'int'},
+        'constituents': {'key': 'constituents', 'type': '[ReferencePortfolioConstituent]'},
         'href': {'key': 'href', 'type': 'str'},
-        'count': {'key': 'count', 'type': 'int'},
         'links': {'key': 'links', 'type': '[Link]'},
     }
 
-    def __init__(self, values=None, href=None, count=None, links=None):
-        super(ResourceListOfReferencePortfolioConstituent, self).__init__()
-        self.values = values
+    def __init__(self, effective_from, weight_type, constituents, period_type=None, period_count=None, href=None, links=None):
+        super(GetReferencePortfolioConstituentsResponse, self).__init__()
+        self.effective_from = effective_from
+        self.weight_type = weight_type
+        self.period_type = period_type
+        self.period_count = period_count
+        self.constituents = constituents
         self.href = href
-        self.count = count
         self.links = links

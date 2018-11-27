@@ -29,24 +29,34 @@ class ReferencePortfolioConstituent(Model):
 
     :param instrument_uid:
     :type instrument_uid: str
-    :param properties:
+    :param currency:
+    :type currency: str
+    :param properties: Properties associated with the constituent
     :type properties: list[~lusid.models.Property]
     :param weight:
     :type weight: float
-    :param currency:
-    :type currency: str
+    :param floating_weight:
+    :type floating_weight: float
     """
+
+    _validation = {
+        'instrument_uid': {'required': True},
+        'currency': {'required': True},
+        'weight': {'required': True},
+    }
 
     _attribute_map = {
         'instrument_uid': {'key': 'instrumentUid', 'type': 'str'},
+        'currency': {'key': 'currency', 'type': 'str'},
         'properties': {'key': 'properties', 'type': '[Property]'},
         'weight': {'key': 'weight', 'type': 'float'},
-        'currency': {'key': 'currency', 'type': 'str'},
+        'floating_weight': {'key': 'floatingWeight', 'type': 'float'},
     }
 
-    def __init__(self, instrument_uid=None, properties=None, weight=None, currency=None):
+    def __init__(self, instrument_uid, currency, weight, properties=None, floating_weight=None):
         super(ReferencePortfolioConstituent, self).__init__()
         self.instrument_uid = instrument_uid
+        self.currency = currency
         self.properties = properties
         self.weight = weight
-        self.currency = currency
+        self.floating_weight = floating_weight
