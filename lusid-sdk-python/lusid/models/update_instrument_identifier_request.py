@@ -32,7 +32,7 @@ class UpdateInstrumentIdentifierRequest(Model):
      allowable for instrument identifiers. Possible values include:
      'Undefined', 'LusidInstrumentId', 'ReutersAssetId', 'CINS', 'Isin',
      'Sedol', 'Cusip', 'Ticker', 'ClientInternal', 'Figi', 'CompositeFigi',
-     'ShareClassFigi', 'Wertpapier'
+     'ShareClassFigi', 'Wertpapier', 'RIC', 'QuotePermId'
     :type type: str or ~lusid.models.enum
     :param value: The value of the identifier. If set to `null`, this will
      remove the identifier completely.

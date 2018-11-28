@@ -358,7 +358,7 @@ class LUSIDAPI(object):
         self._client = ServiceClient(self.config.credentials, self.config)
 
         client_models = {k: v for k, v in models.__dict__.items() if isinstance(v, type)}
-        self.api_version = '0.8.27'
+        self.api_version = '0.8.32'
         self._serialize = Serializer(client_models)
         self._deserialize = Deserializer(client_models)
 
@@ -1446,7 +1446,7 @@ class LUSIDAPI(object):
         :param type: The type of identifier being supplied. Possible values
          include: 'Undefined', 'LusidInstrumentId', 'ReutersAssetId', 'CINS',
          'Isin', 'Sedol', 'Cusip', 'Ticker', 'ClientInternal', 'Figi',
-         'CompositeFigi', 'ShareClassFigi', 'Wertpapier'
+         'CompositeFigi', 'ShareClassFigi', 'Wertpapier', 'RIC', 'QuotePermId'
         :type type: str
         :param id: The identifier of the requested instrument
         :type id: str
@@ -1518,7 +1518,7 @@ class LUSIDAPI(object):
         :param type: The type of identifier being supplied. Possible values
          include: 'Undefined', 'LusidInstrumentId', 'ReutersAssetId', 'CINS',
          'Isin', 'Sedol', 'Cusip', 'Ticker', 'ClientInternal', 'Figi',
-         'CompositeFigi', 'ShareClassFigi', 'Wertpapier'
+         'CompositeFigi', 'ShareClassFigi', 'Wertpapier', 'RIC', 'QuotePermId'
         :type type: str
         :param id: The instrument identifier
         :type id: str
@@ -1590,7 +1590,7 @@ class LUSIDAPI(object):
         :param type: The type of identifier being supplied. Possible values
          include: 'Undefined', 'LusidInstrumentId', 'ReutersAssetId', 'CINS',
          'Isin', 'Sedol', 'Cusip', 'Ticker', 'ClientInternal', 'Figi',
-         'CompositeFigi', 'ShareClassFigi', 'Wertpapier'
+         'CompositeFigi', 'ShareClassFigi', 'Wertpapier', 'RIC', 'QuotePermId'
         :type type: str
         :param id: The instrument identifier
         :type id: str
@@ -1651,7 +1651,7 @@ class LUSIDAPI(object):
         :param code_type: The type of codes to search for. Possible values
          include: 'Undefined', 'LusidInstrumentId', 'ReutersAssetId', 'CINS',
          'Isin', 'Sedol', 'Cusip', 'Ticker', 'ClientInternal', 'Figi',
-         'CompositeFigi', 'ShareClassFigi', 'Wertpapier'
+         'CompositeFigi', 'ShareClassFigi', 'Wertpapier', 'RIC', 'QuotePermId'
         :type code_type: str
         :param codes: The collection of instruments to search for
         :type codes: list[str]
@@ -1716,7 +1716,7 @@ class LUSIDAPI(object):
         :param code_type: the type of codes being specified. Possible values
          include: 'Undefined', 'LusidInstrumentId', 'ReutersAssetId', 'CINS',
          'Isin', 'Sedol', 'Cusip', 'Ticker', 'ClientInternal', 'Figi',
-         'CompositeFigi', 'ShareClassFigi', 'Wertpapier'
+         'CompositeFigi', 'ShareClassFigi', 'Wertpapier', 'RIC', 'QuotePermId'
         :type code_type: str
         :param codes: The identifiers of the instruments to get
         :type codes: list[str]
