@@ -86,6 +86,15 @@ class TestFinbourneApi(TestCase):
 
         self.assertEqual(result.id.code, request.code)
 
+    def test_create_reference_portfolio_benchmark(self):
+
+        '''
+        We will create a reference portfolio add some constituents to it and ensure they sum to 1 and then
+        add a property to our reference portfolio which will be a benchmark
+        '''
+
+
+
     def test_create_portfolio_with_properties(self):
 
         scope = str(uuid.uuid4())
