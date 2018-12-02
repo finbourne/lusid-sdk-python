@@ -24,30 +24,40 @@
 from msrest.serialization import Model
 
 
-class ResourceListOfQuote(Model):
-    """ResourceListOfQuote.
+class QuoteId(Model):
+    """QuoteId.
 
-    :param values:
-    :type values: list[~lusid.models.Quote]
-    :param href: The Uri that returns the same result as the original request,
-     but may include resolved as at time(s).
-    :type href: str
-    :param count: The total number of records returned in the set
-    :type count: int
-    :param links:
-    :type links: list[~lusid.models.Link]
+    :param instrument_id:
+    :type instrument_id: str
+    :param instrument_id_type:
+    :type instrument_id_type: str
+    :param quote_convention:
+    :type quote_convention: str
+    :param quote_type:
+    :type quote_type: str
+    :param price_source:
+    :type price_source: str
     """
 
-    _attribute_map = {
-        'values': {'key': 'values', 'type': '[Quote]'},
-        'href': {'key': 'href', 'type': 'str'},
-        'count': {'key': 'count', 'type': 'int'},
-        'links': {'key': 'links', 'type': '[Link]'},
+    _validation = {
+        'instrument_id': {'required': True},
+        'instrument_id_type': {'required': True},
+        'quote_convention': {'required': True},
+        'quote_type': {'required': True},
     }
 
-    def __init__(self, values=None, href=None, count=None, links=None):
-        super(ResourceListOfQuote, self).__init__()
-        self.values = values
-        self.href = href
-        self.count = count
-        self.links = links
+    _attribute_map = {
+        'instrument_id': {'key': 'instrumentId', 'type': 'str'},
+        'instrument_id_type': {'key': 'instrumentIdType', 'type': 'str'},
+        'quote_convention': {'key': 'quoteConvention', 'type': 'str'},
+        'quote_type': {'key': 'quoteType', 'type': 'str'},
+        'price_source': {'key': 'priceSource', 'type': 'str'},
+    }
+
+    def __init__(self, instrument_id, instrument_id_type, quote_convention, quote_type, price_source=None):
+        super(QuoteId, self).__init__()
+        self.instrument_id = instrument_id
+        self.instrument_id_type = instrument_id_type
+        self.quote_convention = quote_convention
+        self.quote_type = quote_type
+        self.price_source = price_source

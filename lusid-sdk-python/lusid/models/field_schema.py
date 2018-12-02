@@ -38,7 +38,8 @@ class FieldSchema(Model):
      'BenchmarkType', 'Code', 'Id', 'Uri', 'ArrayOfIds',
      'ArrayOfTransactionAliases', 'ArrayofTransactionMovements',
      'ArrayofUnits', 'StringArray', 'CurrencyAndAmount', 'TradePrice',
-     'UnitCreation', 'Currency', 'UserId', 'MetricValue', 'ArrayOfQuotes'
+     'UnitCreation', 'Currency', 'UserId', 'MetricValue', 'QuoteId',
+     'ArrayOfQuoteIds'
     :type type: str or ~lusid.models.enum
     :param is_metric:
     :type is_metric: bool

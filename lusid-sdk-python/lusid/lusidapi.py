@@ -358,7 +358,7 @@ class LUSIDAPI(object):
         self._client = ServiceClient(self.config.credentials, self.config)
 
         client_models = {k: v for k, v in models.__dict__.items() if isinstance(v, type)}
-        self.api_version = '0.8.34'
+        self.api_version = '0.8.43'
         self._serialize = Serializer(client_models)
         self._deserialize = Deserializer(client_models)
 
@@ -1318,31 +1318,50 @@ class LUSIDAPI(object):
         return deserialized
     delete_derived_portfolio_details.metadata = {'url': '/api/derivedtransactionportfolios/{scope}/{code}/details'}
 
-    def get_instrument_identifiers(
-            self, custom_headers=None, raw=False, **operation_config):
-        """Get allowable instrument identifiers.
+    def list_instruments(
+            self, as_at=None, sort_by=None, start=None, limit=None, filter=None, custom_headers=None, raw=False, **operation_config):
+        """Get all of the currently mastered instruments in LUSID.
 
-        Gets the set of identifiers that have been configured as unique
-        identifiers for instruments.
-        Only CodeTypes returned from this end point can be used as identifiers
-        for instruments.
+        Lists all instruments that have been mastered within LUSID.
 
+        :param as_at: The AsAt time
+        :type as_at: datetime
+        :param sort_by: Optional. Order the results by these fields. Use use
+         the '-' sign to denote descending order e.g. -MyFieldName
+        :type sort_by: list[str]
+        :param start: Optional. When paginating, skip this number of results
+        :type start: int
+        :param limit: Optional. When paginating, limit the number of returned
+         results to this many.
+        :type limit: int
+        :param filter: Optional. Expression to filter the result set
+        :type filter: str
         :param dict custom_headers: headers that will be added to the request
         :param bool raw: returns the direct response alongside the
          deserialized response
         :param operation_config: :ref:`Operation configuration
          overrides<msrest:optionsforoperations>`.
-        :return: ResourceListOfCodeType or ClientRawResponse if raw=true
-        :rtype: ~lusid.models.ResourceListOfCodeType or
+        :return: ResourceListOfInstrument or ClientRawResponse if raw=true
+        :rtype: ~lusid.models.ResourceListOfInstrument or
          ~msrest.pipeline.ClientRawResponse
         :raises:
          :class:`ErrorResponseException<lusid.models.ErrorResponseException>`
         """
         # Construct URL
-        url = self.get_instrument_identifiers.metadata['url']
+        url = self.list_instruments.metadata['url']
 
         # Construct parameters
         query_parameters = {}
+        if as_at is not None:
+            query_parameters['asAt'] = self._serialize.query("as_at", as_at, 'iso-8601')
+        if sort_by is not None:
+            query_parameters['sortBy'] = self._serialize.query("sort_by", sort_by, '[str]', div=',')
+        if start is not None:
+            query_parameters['start'] = self._serialize.query("start", start, 'int')
+        if limit is not None:
+            query_parameters['limit'] = self._serialize.query("limit", limit, 'int')
+        if filter is not None:
+            query_parameters['filter'] = self._serialize.query("filter", filter, 'str')
 
         # Construct headers
         header_parameters = {}
@@ -1360,14 +1379,14 @@ class LUSIDAPI(object):
         deserialized = None
 
         if response.status_code == 200:
-            deserialized = self._deserialize('ResourceListOfCodeType', response)
+            deserialized = self._deserialize('ResourceListOfInstrument', response)
 
         if raw:
             client_raw_response = ClientRawResponse(deserialized, response)
             return client_raw_response
 
         return deserialized
-    get_instrument_identifiers.metadata = {'url': '/api/instruments'}
+    list_instruments.metadata = {'url': '/api/instruments'}
 
     def upsert_instruments(
             self, requests=None, custom_headers=None, raw=False, **operation_config):
@@ -1918,6 +1937,57 @@ class LUSIDAPI(object):
 
         return deserialized
     upsert_instruments_properties.metadata = {'url': '/api/instruments/$upsertproperties'}
+
+    def get_instrument_identifiers(
+            self, custom_headers=None, raw=False, **operation_config):
+        """Get allowable instrument identifiers.
+
+        Gets the set of identifiers that have been configured as unique
+        identifiers for instruments.
+        Only CodeTypes returned from this end point can be used as identifiers
+        for instruments.
+
+        :param dict custom_headers: headers that will be added to the request
+        :param bool raw: returns the direct response alongside the
+         deserialized response
+        :param operation_config: :ref:`Operation configuration
+         overrides<msrest:optionsforoperations>`.
+        :return: ResourceListOfCodeType or ClientRawResponse if raw=true
+        :rtype: ~lusid.models.ResourceListOfCodeType or
+         ~msrest.pipeline.ClientRawResponse
+        :raises:
+         :class:`ErrorResponseException<lusid.models.ErrorResponseException>`
+        """
+        # Construct URL
+        url = self.get_instrument_identifiers.metadata['url']
+
+        # Construct parameters
+        query_parameters = {}
+
+        # Construct headers
+        header_parameters = {}
+        header_parameters['Content-Type'] = 'application/json; charset=utf-8'
+        if custom_headers:
+            header_parameters.update(custom_headers)
+
+        # Construct and send request
+        request = self._client.get(url, query_parameters)
+        response = self._client.send(request, header_parameters, stream=False, **operation_config)
+
+        if response.status_code not in [200]:
+            raise models.ErrorResponseException(self._deserialize, response)
+
+        deserialized = None
+
+        if response.status_code == 200:
+            deserialized = self._deserialize('ResourceListOfCodeType', response)
+
+        if raw:
+            client_raw_response = ClientRawResponse(deserialized, response)
+            return client_raw_response
+
+        return deserialized
+    get_instrument_identifiers.metadata = {'url': '/api/instruments/identifiers'}
 
     def get_saml_identity_provider_id(
             self, domain, custom_headers=None, raw=False, **operation_config):
@@ -3652,7 +3722,8 @@ class LUSIDAPI(object):
             self, scope, code, from_as_at=None, to_as_at=None, sort_by=None, start=None, limit=None, filter=None, custom_headers=None, raw=False, **operation_config):
         """Get commands.
 
-        Gets all commands that modified a specific portfolio.
+        Gets all commands that modified a specific portfolio, including any
+        input transactions.
 
         :param scope: The scope of the portfolio
         :type scope: str
@@ -4364,94 +4435,8 @@ class LUSIDAPI(object):
         return deserialized
     delete_property_definition.metadata = {'url': '/api/propertydefinitions/{domain}/{scope}/{code}'}
 
-    def get_quotes(
-            self, scope, quote_ids=None, effective_at=None, as_at=None, max_age=None, page=None, limit=None, custom_headers=None, raw=False, **operation_config):
-        """Get quotes.
-
-        Get quotes effective at the specified date/time (if any). An optional
-        maximum age of quotes can be specified, and is infinite by default.
-        Quotes which are older than this at the time of the effective date/time
-        will not be returned.
-        MaxAge is a duration of time represented in an ISO8601 format, eg.
-        P1Y2M3DT4H30M (1 year, 2 months, 3 days, 4 hours and 30 minutes).
-        The results are paged, and by default the 1st page of results is
-        returned with a limit of 100 results per page.
-
-        :param scope: The scope of the quotes
-        :type scope: str
-        :param quote_ids: The ids of the quotes
-        :type quote_ids: list[str]
-        :param effective_at: Optional. The date/time from which the quotes are
-         effective
-        :type effective_at: datetime
-        :param as_at: Optional. The 'AsAt' date/time
-        :type as_at: datetime
-        :param max_age: Optional. The quote staleness tolerance
-        :type max_age: str
-        :param page: Optional. The page of results to return
-        :type page: int
-        :param limit: Optional. The number of results per page
-        :type limit: int
-        :param dict custom_headers: headers that will be added to the request
-        :param bool raw: returns the direct response alongside the
-         deserialized response
-        :param operation_config: :ref:`Operation configuration
-         overrides<msrest:optionsforoperations>`.
-        :return: ResourceListOfQuote or ClientRawResponse if raw=true
-        :rtype: ~lusid.models.ResourceListOfQuote or
-         ~msrest.pipeline.ClientRawResponse
-        :raises:
-         :class:`ErrorResponseException<lusid.models.ErrorResponseException>`
-        """
-        # Construct URL
-        url = self.get_quotes.metadata['url']
-        path_format_arguments = {
-            'scope': self._serialize.url("scope", scope, 'str')
-        }
-        url = self._client.format_url(url, **path_format_arguments)
-
-        # Construct parameters
-        query_parameters = {}
-        if quote_ids is not None:
-            query_parameters['quoteIds'] = self._serialize.query("quote_ids", quote_ids, '[str]', div=',')
-        if effective_at is not None:
-            query_parameters['effectiveAt'] = self._serialize.query("effective_at", effective_at, 'iso-8601')
-        if as_at is not None:
-            query_parameters['asAt'] = self._serialize.query("as_at", as_at, 'iso-8601')
-        if max_age is not None:
-            query_parameters['maxAge'] = self._serialize.query("max_age", max_age, 'str')
-        if page is not None:
-            query_parameters['page'] = self._serialize.query("page", page, 'int')
-        if limit is not None:
-            query_parameters['limit'] = self._serialize.query("limit", limit, 'int')
-
-        # Construct headers
-        header_parameters = {}
-        header_parameters['Content-Type'] = 'application/json; charset=utf-8'
-        if custom_headers:
-            header_parameters.update(custom_headers)
-
-        # Construct and send request
-        request = self._client.get(url, query_parameters)
-        response = self._client.send(request, header_parameters, stream=False, **operation_config)
-
-        if response.status_code not in [200]:
-            raise models.ErrorResponseException(self._deserialize, response)
-
-        deserialized = None
-
-        if response.status_code == 200:
-            deserialized = self._deserialize('ResourceListOfQuote', response)
-
-        if raw:
-            client_raw_response = ClientRawResponse(deserialized, response)
-            return client_raw_response
-
-        return deserialized
-    get_quotes.metadata = {'url': '/api/quotes/{scope}'}
-
     def upsert_quotes(
-            self, scope, quotes=None, effective_at=None, custom_headers=None, raw=False, **operation_config):
+            self, scope, quotes=None, custom_headers=None, raw=False, **operation_config):
         """Add quotes.
 
         Add quotes effective at the specified time. If a quote is added with
@@ -4462,9 +4447,6 @@ class LUSIDAPI(object):
         :type scope: str
         :param quotes: The quotes to add
         :type quotes: list[~lusid.models.UpsertQuoteRequest]
-        :param effective_at: Optional. The date/time from which the quotes are
-         effective
-        :type effective_at: datetime
         :param dict custom_headers: headers that will be added to the request
         :param bool raw: returns the direct response alongside the
          deserialized response
@@ -4485,8 +4467,6 @@ class LUSIDAPI(object):
 
         # Construct parameters
         query_parameters = {}
-        if effective_at is not None:
-            query_parameters['effectiveAt'] = self._serialize.query("effective_at", effective_at, 'iso-8601')
 
         # Construct headers
         header_parameters = {}
@@ -4521,18 +4501,16 @@ class LUSIDAPI(object):
     upsert_quotes.metadata = {'url': '/api/quotes/{scope}'}
 
     def delete_quote(
-            self, scope, id=None, effective_from=None, custom_headers=None, raw=False, **operation_config):
+            self, scope, quotes=None, custom_headers=None, raw=False, **operation_config):
         """Delete a quote.
 
-        Delete the specified quote. In order for a quote to be deleted the id
+        Delete the specified quotes. In order for a quote to be deleted the id
         and effectiveFrom date must exactly match.
 
         :param scope: The scope of the quote
         :type scope: str
-        :param id: The quote id
-        :type id: str
-        :param effective_from: The date/time from which the quote is effective
-        :type effective_from: datetime
+        :param quotes: The quotes to delete
+        :type quotes: list[~lusid.models.DeleteQuoteRequest]
         :param dict custom_headers: headers that will be added to the request
         :param bool raw: returns the direct response alongside the
          deserialized response
@@ -4553,20 +4531,23 @@ class LUSIDAPI(object):
 
         # Construct parameters
         query_parameters = {}
-        if id is not None:
-            query_parameters['id'] = self._serialize.query("id", id, 'str')
-        if effective_from is not None:
-            query_parameters['effectiveFrom'] = self._serialize.query("effective_from", effective_from, 'iso-8601')
 
         # Construct headers
         header_parameters = {}
-        header_parameters['Content-Type'] = 'application/json; charset=utf-8'
+        header_parameters['Content-Type'] = 'application/json-patch+json; charset=utf-8'
         if custom_headers:
             header_parameters.update(custom_headers)
 
+        # Construct body
+        if quotes is not None:
+            body_content = self._serialize.body(quotes, '[DeleteQuoteRequest]')
+        else:
+            body_content = None
+
         # Construct and send request
-        request = self._client.delete(url, query_parameters)
-        response = self._client.send(request, header_parameters, stream=False, **operation_config)
+        request = self._client.post(url, query_parameters)
+        response = self._client.send(
+            request, header_parameters, body_content, stream=False, **operation_config)
 
         if response.status_code not in [200]:
             raise models.ErrorResponseException(self._deserialize, response)
@@ -4581,7 +4562,98 @@ class LUSIDAPI(object):
             return client_raw_response
 
         return deserialized
-    delete_quote.metadata = {'url': '/api/quotes/{scope}'}
+    delete_quote.metadata = {'url': '/api/quotes/{scope}/$delete'}
+
+    def get_quotes(
+            self, scope, quote_ids=None, effective_at=None, as_at=None, max_age=None, page=None, limit=None, custom_headers=None, raw=False, **operation_config):
+        """Get quotes.
+
+        Get quotes effective at the specified date/time (if any). An optional
+        maximum age of quotes can be specified, and is infinite by default.
+        Quotes which are older than this at the time of the effective date/time
+        will not be returned.
+        MaxAge is a duration of time represented in an ISO8601 format, eg.
+        P1Y2M3DT4H30M (1 year, 2 months, 3 days, 4 hours and 30 minutes).
+        The results are paged, and by default the 1st page of results is
+        returned with a limit of 100 results per page.
+
+        :param scope: The scope of the quotes
+        :type scope: str
+        :param quote_ids: The ids of the quotes
+        :type quote_ids: list[~lusid.models.QuoteId]
+        :param effective_at: Optional. The date/time from which the quotes are
+         effective
+        :type effective_at: datetime
+        :param as_at: Optional. The 'AsAt' date/time
+        :type as_at: datetime
+        :param max_age: Optional. The quote staleness tolerance
+        :type max_age: str
+        :param page: Optional. The page of results to return
+        :type page: int
+        :param limit: Optional. The number of results per page
+        :type limit: int
+        :param dict custom_headers: headers that will be added to the request
+        :param bool raw: returns the direct response alongside the
+         deserialized response
+        :param operation_config: :ref:`Operation configuration
+         overrides<msrest:optionsforoperations>`.
+        :return: GetQuotesResponse or ClientRawResponse if raw=true
+        :rtype: ~lusid.models.GetQuotesResponse or
+         ~msrest.pipeline.ClientRawResponse
+        :raises:
+         :class:`ErrorResponseException<lusid.models.ErrorResponseException>`
+        """
+        # Construct URL
+        url = self.get_quotes.metadata['url']
+        path_format_arguments = {
+            'scope': self._serialize.url("scope", scope, 'str')
+        }
+        url = self._client.format_url(url, **path_format_arguments)
+
+        # Construct parameters
+        query_parameters = {}
+        if effective_at is not None:
+            query_parameters['effectiveAt'] = self._serialize.query("effective_at", effective_at, 'iso-8601')
+        if as_at is not None:
+            query_parameters['asAt'] = self._serialize.query("as_at", as_at, 'iso-8601')
+        if max_age is not None:
+            query_parameters['maxAge'] = self._serialize.query("max_age", max_age, 'str')
+        if page is not None:
+            query_parameters['page'] = self._serialize.query("page", page, 'int')
+        if limit is not None:
+            query_parameters['limit'] = self._serialize.query("limit", limit, 'int')
+
+        # Construct headers
+        header_parameters = {}
+        header_parameters['Content-Type'] = 'application/json-patch+json; charset=utf-8'
+        if custom_headers:
+            header_parameters.update(custom_headers)
+
+        # Construct body
+        if quote_ids is not None:
+            body_content = self._serialize.body(quote_ids, '[QuoteId]')
+        else:
+            body_content = None
+
+        # Construct and send request
+        request = self._client.post(url, query_parameters)
+        response = self._client.send(
+            request, header_parameters, body_content, stream=False, **operation_config)
+
+        if response.status_code not in [200]:
+            raise models.ErrorResponseException(self._deserialize, response)
+
+        deserialized = None
+
+        if response.status_code == 200:
+            deserialized = self._deserialize('GetQuotesResponse', response)
+
+        if raw:
+            client_raw_response = ClientRawResponse(deserialized, response)
+            return client_raw_response
+
+        return deserialized
+    get_quotes.metadata = {'url': '/api/quotes/{scope}/$get'}
 
     def create_reference_portfolio(
             self, scope, reference_portfolio=None, custom_headers=None, raw=False, **operation_config):

@@ -21,5 +21,24 @@
 # SOFTWARE.
 # --------------------------------------------------------------------------
 
-VERSION = "0.8.43"
+from msrest.serialization import Model
 
+
+class GetQuotesResponse(Model):
+    """GetQuotesResponse.
+
+    :param found:
+    :type found: list[~lusid.models.Quote]
+    :param not_found:
+    :type not_found: list[~lusid.models.QuoteId]
+    """
+
+    _attribute_map = {
+        'found': {'key': 'found', 'type': '[Quote]'},
+        'not_found': {'key': 'notFound', 'type': '[QuoteId]'},
+    }
+
+    def __init__(self, found=None, not_found=None):
+        super(GetQuotesResponse, self).__init__()
+        self.found = found
+        self.not_found = not_found

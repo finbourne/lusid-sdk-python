@@ -27,23 +27,27 @@ from msrest.serialization import Model
 class UpsertQuoteRequest(Model):
     """UpsertQuoteRequest.
 
-    :param id:
-    :type id: str
+    :param quote_id:
+    :type quote_id: ~lusid.models.QuoteId
     :param metric_value:
     :type metric_value: ~lusid.models.MetricValue
+    :param effective_at:
+    :type effective_at: datetime
     """
 
     _validation = {
-        'id': {'required': True},
+        'quote_id': {'required': True},
         'metric_value': {'required': True},
     }
 
     _attribute_map = {
-        'id': {'key': 'id', 'type': 'str'},
+        'quote_id': {'key': 'quoteId', 'type': 'QuoteId'},
         'metric_value': {'key': 'metricValue', 'type': 'MetricValue'},
+        'effective_at': {'key': 'effectiveAt', 'type': 'iso-8601'},
     }
 
-    def __init__(self, id, metric_value):
+    def __init__(self, quote_id, metric_value, effective_at=None):
         super(UpsertQuoteRequest, self).__init__()
-        self.id = id
+        self.quote_id = quote_id
         self.metric_value = metric_value
+        self.effective_at = effective_at

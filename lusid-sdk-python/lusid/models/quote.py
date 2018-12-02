@@ -27,27 +27,31 @@ from msrest.serialization import Model
 class Quote(Model):
     """Quote.
 
-    :param id:
-    :type id: str
+    :param quote_id:
+    :type quote_id: ~lusid.models.QuoteId
     :param metric_value:
     :type metric_value: ~lusid.models.MetricValue
-    :param version:
-    :type version: ~lusid.models.Version
+    :param effective_at_date:
+    :type effective_at_date: datetime
+    :param as_at_date:
+    :type as_at_date: datetime
     """
 
     _validation = {
-        'id': {'required': True},
+        'quote_id': {'required': True},
         'metric_value': {'required': True},
     }
 
     _attribute_map = {
-        'id': {'key': 'id', 'type': 'str'},
+        'quote_id': {'key': 'quoteId', 'type': 'QuoteId'},
         'metric_value': {'key': 'metricValue', 'type': 'MetricValue'},
-        'version': {'key': 'version', 'type': 'Version'},
+        'effective_at_date': {'key': 'effectiveAtDate', 'type': 'iso-8601'},
+        'as_at_date': {'key': 'asAtDate', 'type': 'iso-8601'},
     }
 
-    def __init__(self, id, metric_value, version=None):
+    def __init__(self, quote_id, metric_value, effective_at_date=None, as_at_date=None):
         super(Quote, self).__init__()
-        self.id = id
+        self.quote_id = quote_id
         self.metric_value = metric_value
-        self.version = version
+        self.effective_at_date = effective_at_date
+        self.as_at_date = as_at_date

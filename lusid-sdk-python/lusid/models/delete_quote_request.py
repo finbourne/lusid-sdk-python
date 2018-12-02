@@ -21,5 +21,29 @@
 # SOFTWARE.
 # --------------------------------------------------------------------------
 
-VERSION = "0.8.43"
+from msrest.serialization import Model
 
+
+class DeleteQuoteRequest(Model):
+    """DeleteQuoteRequest.
+
+    :param quote_id:
+    :type quote_id: ~lusid.models.QuoteId
+    :param effective_at:
+    :type effective_at: datetime
+    """
+
+    _validation = {
+        'quote_id': {'required': True},
+        'effective_at': {'required': True},
+    }
+
+    _attribute_map = {
+        'quote_id': {'key': 'quoteId', 'type': 'QuoteId'},
+        'effective_at': {'key': 'effectiveAt', 'type': 'iso-8601'},
+    }
+
+    def __init__(self, quote_id, effective_at):
+        super(DeleteQuoteRequest, self).__init__()
+        self.quote_id = quote_id
+        self.effective_at = effective_at
