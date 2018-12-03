@@ -358,7 +358,7 @@ class LUSIDAPI(object):
         self._client = ServiceClient(self.config.credentials, self.config)
 
         client_models = {k: v for k, v in models.__dict__.items() if isinstance(v, type)}
-        self.api_version = '0.8.43'
+        self.api_version = '0.8.46'
         self._serialize = Serializer(client_models)
         self._deserialize = Deserializer(client_models)
 
@@ -698,7 +698,7 @@ class LUSIDAPI(object):
     set_analytics.metadata = {'url': '/api/analytics/{scope}/{year}/{month}/{day}/prices'}
 
     def get_corporate_actions(
-            self, scope, code, effective_at=None, as_at=None, sort_by=None, start=None, limit=None, filter=None, custom_headers=None, raw=False, **operation_config):
+            self, scope, code, from_effective_at=None, to_effective_at=None, as_at=None, sort_by=None, start=None, limit=None, filter=None, custom_headers=None, raw=False, **operation_config):
         """Get corporate actions.
 
         Gets corporate actions from a specific corporate action source.
@@ -707,8 +707,12 @@ class LUSIDAPI(object):
         :type scope: str
         :param code: The code of the corporate action source
         :type code: str
-        :param effective_at: Optional. The effective date of the data
-        :type effective_at: datetime
+        :param from_effective_at: Optional. The start effective date of the
+         data range
+        :type from_effective_at: datetime
+        :param to_effective_at: Optional. The end effective date of the data
+         range
+        :type to_effective_at: datetime
         :param as_at: Optional. The AsAt date of the data
         :type as_at: datetime
         :param sort_by: Optional. Order the results by these fields. Use use
@@ -743,8 +747,10 @@ class LUSIDAPI(object):
 
         # Construct parameters
         query_parameters = {}
-        if effective_at is not None:
-            query_parameters['effectiveAt'] = self._serialize.query("effective_at", effective_at, 'iso-8601')
+        if from_effective_at is not None:
+            query_parameters['fromEffectiveAt'] = self._serialize.query("from_effective_at", from_effective_at, 'iso-8601')
+        if to_effective_at is not None:
+            query_parameters['toEffectiveAt'] = self._serialize.query("to_effective_at", to_effective_at, 'iso-8601')
         if as_at is not None:
             query_parameters['asAt'] = self._serialize.query("as_at", as_at, 'iso-8601')
         if sort_by is not None:
