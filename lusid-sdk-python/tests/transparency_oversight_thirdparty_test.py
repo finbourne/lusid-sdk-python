@@ -22,11 +22,11 @@ class transparencyOversightThirdParty(TestFinbourneApi):
 
     def import_data(self):
         '''
-        We are an asset manager who has outsourced our fund accounting. We have multiple clients each with multiple
+        We are an asset manager who has outsourced our fund accounting. We have multiple clients, each with multiple
         portfolios containing different investment strategies and priorities.
 
         Unfortunately we have recently been seeing significant outflows from our fund into passive asset management.
-        To halt these flows we are feeling the pressure to drive superior performance and reduce our costs.
+        To halt these flows we are feeling the pressure to drive superior performance and reduce costs.
 
         Outsourcing our fund accounting was a big part of this plan, however there have been a large number of
         significant discrepancies between our records and those of the fund accountant. Thus we have had to set up an
@@ -86,27 +86,125 @@ class transparencyOversightThirdParty(TestFinbourneApi):
         }
 
     def create_portfolios(self):
+        '''
+        Let us create our portfolios and portfolio groups in both our internal and fund accountant scopes.
 
+        Note that we can only create one portfolio at a time. We will create our portfolios for each client and then
+        we will create the portfolio group that holds them
         '''
-        Let us create our portfolios
-        '''
-        pass
+
+        # Iterate over our portfolio groups selecting the name of the group and the list of portfolios
+        for portfolio_group_code, portfolio_group in self.client_portfolios.items():
+            # Loop over our list of portfolios selecting the portfolio code
+            for portfolio_code in portfolio_group:
+                # Create the request to add our portfolio
+                portfolio_request = models.CreateTransactionPortfolioRequest(display_name=portfolio_code,
+                                                                             code=portfolio_code,
+                                                                             base_currency='GBP',
+                                                                             description=portfolio_code)
+                # Create our portfolio in the internal scope
+                portfolio_internal = self.client.create_portfolio(scope=self.internal_scope_code,
+                                                                  create_request=portfolio_request)
+                # Create our portfolio in the fund accountant scope
+                portfolio_fund_accountant = self.client.create_portfolio(scope=self.fund_accountant_scope_code,
+                                                                         create_request=portfolio_request)
+
+                # Tests - Ensure that the portfolios were created successfully with the correct details
+                self.portfolio_creation_tests(portfolio_internal, portfolio_request, self.internal_scope_code)
+                self.portfolio_creation_tests(portfolio_fund_accountant, portfolio_request, self.fund_accountant_scope_code)
+
+            '''
+            To create our groups we need the scope and code of each of our portfolios. In LUSID these are contained
+            inside a ResourceId object. We use ResourceId objects anytime we need to specify the scope and code of
+            an object such as a portfolio. 
+            
+            This means that unlike when we created the portfolios we need two separate requests to create our groups. 
+            One for each scope. 
+            '''
+            # Create the lists of resourceids for each scope, these are the portfolios to add to the group
+            portfolio_resourceids_internal = [models.ResourceId(scope=self.internal_scope_code, code=portfolio_code) for portfolio_code in portfolio_group]
+            portfolio_resourceids_fund_accountant = [models.ResourceId(scope=self.fund_accountant_scope_code, code=portfolio_code) for portfolio_code in portfolio_group]
+
+            # Create our portfolio group requests, note the only difference is in which portfolios we use
+            portfolio_group_request_internal = models.CreatePortfolioGroupRequest(id=portfolio_group_code,
+                                                                                  display_name=portfolio_group_code,
+                                                                                  values=portfolio_resourceids_internal,
+                                                                                  description=portfolio_group_code)
+
+            portfolio_group_request_fund_accountant = models.CreatePortfolioGroupRequest(id=portfolio_group_code,
+                                                                                         display_name=portfolio_group_code,
+                                                                                         values=portfolio_resourceids_fund_accountant,
+                                                                                         description=portfolio_group_code)
+
+            # Create our portfolio groups, note the different scope for each request
+            portfolio_group_internal = self.client.create_portfolio_group(scope=self.internal_scope_code,
+                                                                          request=portfolio_group_request_internal)
+
+            portfolio_group_fund_accountant = self.client.create_portfolio_group(scope=self.fund_accountant_scope_code,
+                                                                                 request=portfolio_group_request_fund_accountant)
+
+            # Tests - Ensure that we have successfully created the portfolio groups
+            self.portfolio_group_creation_tests(portfolio_group_internal, portfolio_group_request_internal, self.internal_scope_code)
+            self.portfolio_group_creation_tests(portfolio_group_fund_accountant, portfolio_group_request_fund_accountant, self.fund_accountant_scope_code)
 
     def create_entitlements(self):
         pass
+
     def set_holdings(self):
-        pass
+        '''
+        Now that we have our portfolios and groups set up for our clients we can add in their current holdings. We will
+        being by having the internal scope and the fund account scope to be completely in sync with exactly the same
+        holdings. This will be our initial state.
+        '''
+
     def add_daily_transactions(self):
+        '''
+        Now that we have our portfolios populated with their holdings we are going to simulate a day of trading.
+
+        We have some exciting new strategies to implement that involve
+
+        1)
+        2)
+        3)
+        4)
+        5)
+        6)
+        7)
+
+        These trades are added to our internal scope as soon as they are executed. They are also sent to our fund
+        manager's systems in real time via API through our execution management system. Note that the fund accountant
+        scope is not updated in real time. Instead we receive a daily report from our fund accountant which we update
+        this scope with each morning before trading begins.
+        '''
+
         # Make a late trade (don't tell them yet)
-        pass
+
     def update_fund_accountant_record(self):
+        '''
+        Early in the morning before trading begins our fund accountant sends us a report with details on yesterday's
+        activity and our current position according to their records.
+
+        We will update our fund accountant scope with their records.
+        '''
         # Use BY instead of Buy
         pass
     def reconcile_records(self):
+        '''
+        Now that we have the fund accountant scope updated with this morning's report, we need to see how different the
+        fund accountant's view of our position is with our own internal records.
+
+        We can do this by reconciling across all the portfolios inside the two scopes.
+        '''
         pass
     def identify_discrepencies(self):
+        '''
+        So we have identified a number of discrepancies between our internal records and the fund accountant's records.
+
+        Let us try and understand the root cause of these discrepancies
+        '''
         # Understand that it was a late trade (where on the timeline do things start to diverge)
         pass
+    
     def adjust_portfolio_holdings(self):
         pass
     def change_fund_accountants(self):

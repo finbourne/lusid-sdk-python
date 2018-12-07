@@ -52,7 +52,7 @@ class TestFinbourneApi(TestCase):
         credentials = BasicTokenAuthentication(TestFinbourneApi.api_token)
         cls.client = lusid.LUSIDAPI(credentials, TestFinbourneApi.api_url)
 
-    def portfolio_creation_tests(self, portfolio, portfolio_request):
+    def portfolio_creation_tests(self, portfolio, portfolio_request, scope):
         '''
         This method contains a set of tests used to test the successful creation of a portfolio
         '''
@@ -61,9 +61,9 @@ class TestFinbourneApi(TestCase):
         self.assertEqual(portfolio_request.code, portfolio.id.code,
                          'Portfolio created with code {} instead of code {}'.format(portfolio.id.code,
                                                                                     portfolio_request.code))
-        self.assertEqual(self.production_scope_code, portfolio.id.scope,
+        self.assertEqual(scope, portfolio.id.scope,
                          'Portfolio created in scope {} instead of scope {}'.format(portfolio.id.scope,
-                                                                                    self.production_scope_code))
+                                                                                    scope))
         self.assertEqual(portfolio_request.display_name, portfolio.display_name,
                          'Portfolio created with name {} instead of {}'.format(portfolio.display_name,
                                                                                portfolio_request.display_name))
@@ -73,6 +73,48 @@ class TestFinbourneApi(TestCase):
                              portfolio_request.description))
 
         # tk - Need to test for base currency, how do I find it? What does it mean? Can it be wrong? Is it validated?
+
+    def portfolio_group_creation_tests(self, portfolio_group, portfolio_group_request, group_scope):
+        '''
+        This method contains a set of tests used to test the successful creation of a portfolio group
+        '''
+        self.assertNotIsInstance(portfolio_group, models.ErrorResponse,
+                                 'Portfolio group not created, error returned')
+
+        self.assertEqual(portfolio_group.id.code, portfolio_group_request.id,
+                         'Portfolio group code is {} instead of {}'.format(portfolio_group.id.code,
+                                                                           portfolio_group_request.id))
+
+        self.assertEqual(portfolio_group.description, portfolio_group_request.description,
+                         'Portfolio group description is {} instead of {}'.format(portfolio_group.description,
+                                                                           portfolio_group_request.description))
+
+        self.assertEqual(portfolio_group.display_name, portfolio_group_request.display_name,
+                         'Portfolio group display name is {} instead of {}'.format(portfolio_group.display_name,
+                                                                                   portfolio_group_request.display_name))
+
+        # tk - need test for sub_groups
+
+        self.assertEqual(len(portfolio_group.portfolios), len(portfolio_group_request.values),
+                         'Portfolio group has {} portfolios instead of {}'.format(portfolio_group.description,
+                                                                                  portfolio_group_request.description))
+
+        '''
+        Iterate over the portfolios checking that the scope and code is correct. Note that this currently does not
+        support the case where none or less than all of the portfolios match. All it handles is if the code matches
+        so does the scope. 
+        '''
+        # Iterate over the portfolios in our group
+        for portfolio in portfolio_group.portfolios:
+            # Iterate over the portfolios in our request
+            for portfolio_request in portfolio_group_request.values:
+                if portfolio.code == portfolio_request.code:
+                    self.assertEqual(portfolio.scope, portfolio_request.scope,
+                                     'Portfolio {} has scope {} instead of {}'.format(portfolio.code,
+                                                                                      portfolio.scope,
+                                                                                      portfolio_request.scope))
+
+
 
     def derived_portfolio_creation_tests(self, derived_portfolio, derived_portfolio_request):
         '''
