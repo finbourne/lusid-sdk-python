@@ -85,6 +85,10 @@ class TestFinbourneApi(TestCase):
                          'Portfolio group code is {} instead of {}'.format(portfolio_group.id.code,
                                                                            portfolio_group_request.id))
 
+        self.assertEqual(portfolio_group.id.scope, group_scope,
+                         'Portfolio group scope is {} instead of {}'.format(portfolio_group.id.scope,
+                                                                           group_scope))
+
         self.assertEqual(portfolio_group.description, portfolio_group_request.description,
                          'Portfolio group description is {} instead of {}'.format(portfolio_group.description,
                                                                            portfolio_group_request.description))
@@ -116,7 +120,7 @@ class TestFinbourneApi(TestCase):
 
 
 
-    def derived_portfolio_creation_tests(self, derived_portfolio, derived_portfolio_request):
+    def derived_portfolio_creation_tests(self, derived_portfolio, derived_portfolio_request, scope):
         '''
         This method contains a set of tests used to test the successful creation of a derived portfolio
         '''
@@ -128,9 +132,9 @@ class TestFinbourneApi(TestCase):
                          'Portfolio created with code {} instead of code {}'.format(derived_portfolio.id.code,
                                                                                     derived_portfolio_request.code))
 
-        self.assertEqual(self.test_scope_code, derived_portfolio.id.scope,
+        self.assertEqual(scope, derived_portfolio.id.scope,
                          'Portfolio created in scope {} instead of scope {}'.format(derived_portfolio.id.scope,
-                                                                                    self.production_scope_code))
+                                                                                    scope))
 
         self.assertEqual(derived_portfolio_request.display_name, derived_portfolio.display_name,
                          'Portfolio created with name {} instead of {}'.format(derived_portfolio.display_name,
@@ -298,11 +302,10 @@ class TestFinbourneApi(TestCase):
                     # tk - nettingSet
 
     # tk - should I check that the holdings have been updated? With the tests above if the transactions didn't update the holdings it would still pass
+
+    # This emplty test function is required to set up the class
     def test(self):
         pass
-
-if __name__ == '__main__':
-    unittest.main()
 
 if __name__ == '__main__':
     unittest.main()

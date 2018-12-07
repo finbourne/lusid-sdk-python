@@ -62,26 +62,26 @@ class transparencyOversightThirdParty(TestFinbourneApi):
         group of portfolios and then we can build our portfolio codes using this id. 
         '''
         # Also create a code for our portfolio, we will re-use the same code in each scope
-        client_1_portfolio_group_id = uuid.uuid4()
-        client_2_portfolio_group_id = uuid.uuid4()
-        client_3_portfolio_group_id = uuid.uuid4()
+        self.client_1_portfolio_group_id = uuid.uuid4()
+        self.client_2_portfolio_group_id = uuid.uuid4()
+        self.client_3_portfolio_group_id = uuid.uuid4()
 
         self.client_portfolios = {
-            'client-{}-portfolios'.format(client_1_portfolio_group_id): [
-                'client-{}-strategy-balanced'.format(client_1_portfolio_group_id),
-                'client-{}-strategy-tech'.format(client_1_portfolio_group_id),
-                'client-{}-strategy-growth'.format(client_1_portfolio_group_id)
+            'client-{}-portfolios'.format(self.client_1_portfolio_group_id): [
+                'client-{}-strategy-balanced'.format(self.client_1_portfolio_group_id),
+                'client-{}-strategy-tech'.format(self.client_1_portfolio_group_id),
+                'client-{}-strategy-growth'.format(self.client_1_portfolio_group_id)
             ],
-            'client-{}-portfolios'.format(client_2_portfolio_group_id): [
-                'client-{}-strategy-balanced'.format(client_2_portfolio_group_id),
-                'client-{}-strategy-energy'.format(client_2_portfolio_group_id),
-                'client-{}-strategy-fixedincome'.format(client_2_portfolio_group_id),
-                'client-{}-strategy-international'.format(client_2_portfolio_group_id),
-                'client-{}-strategy-usgovt'.format(client_2_portfolio_group_id)
+            'client-{}-portfolios'.format(self.client_2_portfolio_group_id): [
+                'client-{}-strategy-balanced'.format(self.client_2_portfolio_group_id),
+                'client-{}-strategy-energy'.format(self.client_2_portfolio_group_id),
+                'client-{}-strategy-fixedincome'.format(self.client_2_portfolio_group_id),
+                'client-{}-strategy-international'.format(self.client_2_portfolio_group_id),
+                'client-{}-strategy-usgovt'.format(self.client_2_portfolio_group_id)
             ],
-            'client-{}-portfolios'.format(client_3_portfolio_group_id): [
-                'client-{}-strategy-balanced'.format(client_3_portfolio_group_id),
-                'client-{}-strategy-fixedincome'.format(client_3_portfolio_group_id)
+            'client-{}-portfolios'.format(self.client_3_portfolio_group_id): [
+                'client-{}-strategy-balanced'.format(self.client_3_portfolio_group_id),
+                'client-{}-strategy-fixedincome'.format(self.client_3_portfolio_group_id)
             ]
         }
 
@@ -153,9 +153,273 @@ class transparencyOversightThirdParty(TestFinbourneApi):
     def set_holdings(self):
         '''
         Now that we have our portfolios and groups set up for our clients we can add in their current holdings. We will
-        being by having the internal scope and the fund account scope to be completely in sync with exactly the same
+        with having the internal scope and the fund account scope completely in sync with exactly the same
         holdings. This will be our initial state.
         '''
+
+        '''
+        Before we can set our holdings we first need to upsert our instrument into LUSID. We use the upsert method which
+        will insert a new record if it does not exist and update the existing record if it does exist. This allows us
+        to add instruments more simply than checking if an instrument exists before we insert it. 
+        
+        Below we have our universe of instruments which all our holdings are made up of. Using LUSID this universe
+        can be pre-populated in advance so that we don't have to keep adding new instruments when we make a trade or
+        update a holding. 
+        
+        Here we can upsert our instruments individually or in a batch. Either way the request should be in the form of a
+        dictionary with an arbitrary reference name for the instrument as the key and an UpsertInstrumentRequest object
+        as the value.
+        
+        The UpsertInstrumentRequest requires a name for the instrument which is a string. In this case we will use the 
+        same name as the arbitrary reference key.
+        
+        It also requires a dictionary containing at least one unique identifier for the asset. The key for this 
+        dictionary is the name of the identifier, in this case we will use 'ClientInternal'. The value is a string which
+        is the identifier. The allowed identifiers currently supported are:
+        
+            - ClientInternal
+            - Figi
+             
+        '''
+
+        self.instrument_universe = {
+            'WPP_LondonStockEx_WPP': {
+                'identifiers': {'ClientInternal': 'Isin-JE00B8KF9B49'},
+                'currency': 'GBP'},
+
+            'UKGiltTreasury_3.5_2045': {
+                'identifiers': {'ClientInternal': 'Isin-GB00BN65R313'},
+                'currency': 'GBP'},
+
+            'UKGiltTreasury_2.0_2025': {
+                'identifiers': {'ClientInternal': 'Isin-GB00BTHH2R79'},
+                'currency': 'GBP'},
+
+            'UKGiltTreasury_4.5_2034': {
+                'identifiers': {'ClientInternal': 'Isin-GB00B52WS153'},
+                'currency': 'GBP'},
+
+            'UKGiltTreasury_3.75_2021': {
+                'identifiers': {'ClientInternal': 'Isin-GB00B4RMG977'},
+                'currency': 'GBP'},
+
+            'Kingfisher_LondonStockEx_KGF': {
+                'identifiers': {'ClientInternal': 'Isin-GB0033195214'},
+                'currency': 'GBP'},
+
+            'JustEat_LondonStockEx_JE': {
+                'identifiers': {'ClientInternal': 'Isin-GB00BKX5CN86'},
+                'currency': 'GBP'},
+
+            'RELXGroup_LondonStockEx_REL': {
+                'identifiers': {'ClientInternal': 'Isin-GB00B2B0DG97'},
+                'currency': 'GBP'},
+
+            'TESCO_LondonStockEx_TSCO': {
+                'identifiers': {'ClientInternal': 'Isin-GB0008847096'},
+                'currency': 'GBP'},
+
+            'Whitebread_LondonStockEx_WTB': {
+                'identifiers': {'ClientInternal': 'Isin-GB00B1KJJ408'},
+                'currency': 'GBP'},
+
+            'USTreasury_2.00_2021': {
+                'identifiers': {'ClientInternal': 'Isin-US912828U816'},
+                'currency': 'USD'},
+
+            'USTreasury_6.875_2025': {
+                'identifiers': {'ClientInternal': 'Isin-US912810EV62'},
+                'currency': 'USD'},
+
+            'BP_LondonStockEx_BP': {
+                'identifiers': {'ClientInternal': 'Isin-GB0007980591'},
+                'currency': 'GBP'},
+
+            'MicroFocus_LondonStockEx_MCRO': {
+                'identifiers': {'ClientInternal': 'Isin-GB00BD8YWM01'},
+                'currency': 'GBP'},
+
+            'Sage_LondonStockEx_SGE': {
+                'identifiers': {'ClientInternal': 'Isin-GB00B8C3BL03'},
+                'currency': 'GBP'},
+
+            'BurfordCapital_LondonStockEx_BURF': {
+                'identifiers': {'ClientInternal': 'Isin-GG00B4L84979'},
+                'currency': 'GBP'},
+
+            'EKFDiagnostics_LondonStockEx_EKF': {
+                'identifiers': {'ClientInternal': 'Isin-GB0031509804'},
+                'currency': 'GBP'},
+
+            'Apple_Nasdaq_AAPL': {
+                'identifiers': {'ClientInternal': 'Isin-US0378331005'},
+                'currency': 'USD'},
+
+            'Amazon_Nasdaq_AMZN': {
+                'identifiers': {'ClientInternal': 'Isin-US0231351067'},
+                'currency': 'USD'},
+
+            'Glencore_LondonStockEx_GLEN': {
+                'identifiers': {'ClientInternal': 'Isin-JE00B4T3BW64'},
+                'currency': 'GBP'}
+        }
+
+        # Initialise our batch upsert request
+        batch_upsert_request = {}
+        # Using our instrument universe create our batch request
+        for instrument_name, instrument in self.instrument_universe.items():
+            batch_upsert_request[instrument_name] = models.UpsertInstrumentRequest(name=instrument_name,
+                                                                                   identifiers=instrument['identifiers'])
+        # Upsert our batch
+        batch_upsert_response = self.client.upsert_instruments(requests=batch_upsert_request)
+
+        # Tests - Confirm that the response is as expected
+        self.instrument_upsert_tests(batch_upsert_response, batch_upsert_request)
+
+        '''
+        Every instrument that is created is in LUSID given a unique LUSID Instrument Id or LUID for short. This ID is 
+        used for many methods and is how the API identifies an instrument. 
+
+        Note that there is also a match feature that allows you to search for instruments using the identifiers that we 
+        defined for each instrument, however it is preferred to use the LUID as this is guaranteed to be unique and 
+        there is absolutely no chance of a collision. 
+
+        We there want to add our newly created LUIDs to our initial holdings for future use
+        '''
+
+        # Loop over our recently upserted instruments
+        for result, instrument in batch_upsert_response.values.items():
+            # Loop over our instrument universe looking for the right match
+            for instrument_name, new_instrument in self.instrument_universe.items():
+                # If the identifiers match
+                if new_instrument['identifiers']['ClientInternal'] == instrument.identifiers['ClientInternal']:
+                    # Add our LUID as a new identifier so that we can use it in our calls later
+                    new_instrument['identifiers']['LUID'] = instrument.lusid_instrument_id
+
+        '''
+        Now that we have our instruments added we can fill our initial holdings to model our live portfolio. 
+        
+        We will create the holdings data using a nested dictionary. Note that in reality this data would likely come
+        from a historical report in a format such as CSV. In this case, a library such as Pandas can be used to 
+        handle the data. 
+        '''
+
+        self.client_holdings = {
+
+            'client-{}-portfolios'.format(self.client_1_portfolio_group_id) : {
+
+                'client-{}-strategy-balanced'.format(self.client_1_portfolio_group_id) : {
+                    'WPP_LondonStockEx_WPP': {'quantity': 2956000, 'price': 8.7100},
+                    'UKGiltTreasury_2.0_2025': {'quantity': 375856, 'price': 8.7100},
+                    'JustEat_LondonStockEx_JE': {'quantity': 0, 'price': 0},
+                    'UKGiltTreasury_3.75_2021': {'quantity': 0, 'price': 0}
+                },
+
+                'client-{}-strategy-tech'.format(self.client_1_portfolio_group_id) : {
+                    'MicroFocus_LondonStockEx_MCRO': {'quantity': 0, 'price': 0},
+                    'Sage_LondonStockEx_SGE': {'quantity': 0, 'price': 0}
+                },
+
+                'client-{}-strategy-growth'.format(self.client_1_portfolio_group_id) : {
+                    'BurfordCapital_LondonStockEx_BURF': {'quantity': 0, 'price': 0},
+                    'EKFDiagnostics_LondonStockEx_EKF': {'quantity': 0, 'price': 0}
+                },
+
+            },
+
+            'client-{}-portfolios'.format(self.client_2_portfolio_group_id) : {
+
+                'client-{}-strategy-balanced'.format(self.client_2_portfolio_group_id) : {
+                    'Kingfisher_LondonStockEx_KGF': {'quantity': 0, 'price': 0},
+                    'JustEat_LondonStockEx_JE': {'quantity': 0, 'price': 0},
+                    'RELXGroup_LondonStockEx_REL': {'quantity': 0, 'price': 0},
+                    'UKGiltTreasury_4.5_2034': {'quantity': 0, 'price': 0}
+                },
+
+                'client-{}-strategy-energy'.format(self.client_2_portfolio_group_id) : {
+                    'Glencore_LondonStockEx_GLEN': {'quantity': 0, 'price': 0},
+                    'BP_LondonStockEx_BP': {'quantity': 0, 'price': 0}
+                },
+
+                'client-{}-strategy-fixedincome'.format(self.client_2_portfolio_group_id) : {
+                    'UKGiltTreasury_3.5_2045': {'quantity': 0, 'price': 0},
+                    'UKGiltTreasury_2.0_2025': {'quantity': 0, 'price': 0},
+                    'UKGiltTreasury_3.75_2021': {'quantity': 0, 'price': 0},
+                    'USTreasury_2.00_2021': {'quantity': 0, 'price': 0}
+                },
+
+                'client-{}-strategy-international'.format(self.client_2_portfolio_group_id) : {
+                    'USTreasury_2.00_2021': {'quantity': 0, 'price': 0},
+                    'Apple_Nasdaq_AAPL': {'quantity': 0, 'price': 0},
+                    'Amazon_Nasdaq_AMZN': {'quantity': 0, 'price': 0}
+                },
+
+                'client-{}-strategy-usgovt'.format(self.client_2_portfolio_group_id) : {
+                    'USTreasury_2.00_2021': {'quantity': 0, 'price': 0},
+                    'USTreasury_6.875_2025': {'quantity': 0, 'price': 0}
+                }
+
+            },
+
+            'client-{}-portfolios'.format(self.client_3_portfolio_group_id) : {
+
+                'client-{}-strategy-balanced'.format(self.client_3_portfolio_group_id) : {
+                    'Whitebread_LondonStockEx_WTB': {'quantity': 0, 'price': 0},
+                    'TESCO_LondonStockEx_TSCO': {'quantity': 0, 'price': 0},
+                    'Kingfisher_LondonStockEx_KGF': {'quantity': 0, 'price': 0},
+                    'UKGiltTreasury_3.75_2021': {'quantity': 0, 'price': 0}
+                },
+
+                'client-{}-strategy-fixedincome'.format(self.client_3_portfolio_group_id) : {
+                    'UKGiltTreasury_3.5_2045': {'quantity': 0, 'price': 0},
+                    'UKGiltTreasury_2.0_2025': {'quantity': 0, 'price': 0},
+                    'USTreasury_2.00_2021': {'quantity': 0, 'price': 0},
+                    'USTreasury_6.875_2025': {'quantity': 0, 'price': 0}
+                }
+            }
+        }
+
+
+        '''
+        To set our holdings we use a list of AdjustHoldingRequest objects. We can create these from our holdings data
+        above.
+        
+        The AdjustHoldingRequest object has a number of fields these are:
+            - instrument_uid: This is the LUID of the instrument we want to adjust the holdings for
+            - tax_lots: This is a list of tax lots. A tax lot being instruments purchased at different times and thus needing
+                        different treatment for tax purposes. In this case we will use a single tax lot
+                - units: This is the quantity of the instrument that we are holding
+                - cost: This is the total cost of the instrument and the currency it is in
+                    - amount: The total cost/value of the instrument, here we multiply the instrument's price by its
+                              quantity to get the total amount
+                    - currency: The currency that the instrument is in as a string, must be tk - what currencies are allowed??
+                - portfolio_cost: This is the total cost of the instrument in the portfolio's currency
+                - price: This is the price if the instrument tk - in what currency???? Is this in the portfolio currency?
+        '''
+
+        # Initialise our holding adjustments dictionary which will contain a list of adjustments for each portfolio
+        holding_adjustments = {}
+
+        # Create our holding adjustment
+        for instrument_name, instrument in self.transferred_instruments.items():
+            holding_adjustments.append(
+                models.AdjustHoldingRequest(instrument_uid=instrument['identifiers']['LUID'],
+                                            tax_lots=[
+                                                models.TargetTaxLotRequest(units=instrument['quantity'],
+                                                                           cost=models.CurrencyAndAmount(
+                                                                               amount=instrument['quantity'] *
+                                                                                      instrument['price'],
+                                                                               currency=instrument['currency']),
+                                                                           portfolio_cost=instrument['quantity'] *
+                                                                                          instrument['price'],
+                                                                           price=instrument['price'])
+                                            ]
+                                            )
+            )
+
+
+
+
 
     def add_daily_transactions(self):
         '''
@@ -210,7 +474,7 @@ class transparencyOversightThirdParty(TestFinbourneApi):
     def change_fund_accountants(self):
         pass
 
-    def test(self):
+    def test_transparency_oversight(self):
         self.import_data()
         self.create_portfolios()
         self.create_entitlements()
