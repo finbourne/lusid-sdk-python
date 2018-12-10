@@ -184,9 +184,11 @@ class TestFinbourneApi(TestCase):
                                                    code=code,
                                                    effective_at=effective_at)
 
+
         self.assertEqual(verify_holdings.count, len(holding_adjustments),
                          'Got {} holdings when we expected {} holdings'.format(verify_holdings.count,
-                                                                               holding_adjustments))
+                                                                               len(holding_adjustments)))
+
 
         for holding in verify_holdings.values:
             for adjustment in holding_adjustments:

@@ -109,6 +109,7 @@ class transparencyOversightThirdParty(TestFinbourneApi):
                 # Create our portfolio in the internal scope
                 portfolio_internal = self.client.create_portfolio(scope=self.internal_scope_code,
                                                                   create_request=portfolio_request)
+
                 # Create our portfolio in the fund accountant scope
                 portfolio_fund_accountant = self.client.create_portfolio(scope=self.fund_accountant_scope_code,
                                                                          create_request=portfolio_request)
@@ -306,7 +307,18 @@ class transparencyOversightThirdParty(TestFinbourneApi):
         We will create the holdings data using a nested dictionary. Note that in reality this data would likely come
         from a historical report in a format such as CSV. In this case, a library such as Pandas can be used to 
         handle the data. 
+        
+        In LUSID the LUID for cash is the prefix CCY_ followed by the currency. For example British Pounds have a LUID
+        of CCY_GBP. We will add these to our instrument universe. 
         '''
+
+        self.instrument_universe['GBP_Cash'] = {
+                'identifiers': {'LUID': 'CCY_GBP'},
+                'currency': 'GBP'}
+
+        self.instrument_universe['USD_Cash'] = {
+                'identifiers': {'LUID': 'CCY_USD'},
+                'currency': 'USD'}
 
         self.client_holdings = {
 
@@ -316,17 +328,20 @@ class transparencyOversightThirdParty(TestFinbourneApi):
                     'WPP_LondonStockEx_WPP': {'quantity': 2956000, 'price': 8.7100},
                     'UKGiltTreasury_2.0_2025': {'quantity': 375856, 'price': 8.7100},
                     'JustEat_LondonStockEx_JE': {'quantity': 4026354, 'price': 5.4640},
-                    'UKGiltTreasury_3.75_2021': {'quantity': 486913, 'price': 108.126}
+                    'UKGiltTreasury_3.75_2021': {'quantity': 486913, 'price': 108.126},
+                    'GBP_Cash': {'quantity': 3000000, 'price': 1}
                 },
 
                 'client-{}-strategy-tech'.format(self.client_1_portfolio_group_id) : {
                     'MicroFocus_LondonStockEx_MCRO': {'quantity': 687994, 'price': 14.5350},
-                    'Sage_LondonStockEx_SGE': {'quantity': 2599653, 'price': 5.7700}
+                    'Sage_LondonStockEx_SGE': {'quantity': 2599653, 'price': 5.7700},
+                    'GBP_Cash': {'quantity': 784000, 'price': 1}
                 },
 
                 'client-{}-strategy-growth'.format(self.client_1_portfolio_group_id) : {
                     'BurfordCapital_LondonStockEx_BUR': {'quantity': 853486, 'price': 14.06},
-                    'EKFDiagnostics_LondonStockEx_EKF': {'quantity': 925925, 'price': 0.2700}
+                    'EKFDiagnostics_LondonStockEx_EKF': {'quantity': 925925, 'price': 0.2700},
+                    'GBP_Cash': {'quantity': 150000, 'price': 1}
                 },
 
             },
@@ -337,30 +352,36 @@ class transparencyOversightThirdParty(TestFinbourneApi):
                     'Kingfisher_LondonStockEx_KGF': {'quantity': 1362038, 'price': 2.2760},
                     'JustEat_LondonStockEx_JE': {'quantity': 834553, 'price': 5.4640},
                     'RELXGroup_LondonStockEx_REL': {'quantity': 494343, 'price': 15.98},
-                    'UKGiltTreasury_4.5_2034': {'quantity': 77481, 'price': 140.572}
+                    'UKGiltTreasury_4.5_2034': {'quantity': 77481, 'price': 140.572},
+                    'GBP_Cash': {'quantity': 952000, 'price': 1}
                 },
 
                 'client-{}-strategy-energy'.format(self.client_2_portfolio_group_id) : {
                     'Glencore_LondonStockEx_GLEN': {'quantity': 905141, 'price': 2.7620},
-                    'BP_LondonStockEx_BP': {'quantity': 1713922, 'price': 5.1140}
+                    'BP_LondonStockEx_BP': {'quantity': 1713922, 'price': 5.1140},
+                    'GBP_Cash': {'quantity': 2200000, 'price': 1}
                 },
 
                 'client-{}-strategy-fixedincome'.format(self.client_2_portfolio_group_id) : {
                     'UKGiltTreasury_3.5_2045': {'quantity': 266169, 'price': 134.433},
                     'UKGiltTreasury_2.0_2025': {'quantity': 405589, 'price': 106.637},
                     'UKGiltTreasury_3.75_2021': {'quantity': 174800, 'price': 108.126},
-                    'USTreasury_2.00_2021': {'quantity': 357507, 'price': 97.90}
+                    'USTreasury_2.00_2021': {'quantity': 357507, 'price': 97.90},
+                    'GBP_Cash': {'quantity': 3450000, 'price': 1},
+                    'USD_Cash': {'quantity': 1200000, 'price': 1}
                 },
 
                 'client-{}-strategy-international'.format(self.client_2_portfolio_group_id) : {
                     'USTreasury_2.00_2021': {'quantity': 357507, 'price': 97.90},
                     'Apple_Nasdaq_AAPL': {'quantity': 504481, 'price': 168.49},
-                    'Amazon_Nasdaq_AMZN': {'quantity': 38671, 'price': 1629.13}
+                    'Amazon_Nasdaq_AMZN': {'quantity': 38671, 'price': 1629.13},
+                    'USD_Cash': {'quantity': 1400000, 'price': 1}
                 },
 
                 'client-{}-strategy-usgovt'.format(self.client_2_portfolio_group_id) : {
                     'USTreasury_2.00_2021': {'quantity': 286006, 'price': 97.90},
-                    'USTreasury_6.875_2025': {'quantity': 256986, 'price': 124.52}
+                    'USTreasury_6.875_2025': {'quantity': 256986, 'price': 124.52},
+                    'USD_Cash': {'quantity': 23000000, 'price': 1}
                 }
 
             },
@@ -371,14 +392,17 @@ class transparencyOversightThirdParty(TestFinbourneApi):
                     'Whitebread_LondonStockEx_WTB': {'quantity': 355318, 'price': 45.03},
                     'TESCO_LondonStockEx_TSCO': {'quantity': 2206441, 'price': 1.9715},
                     'Kingfisher_LondonStockEx_KGF': {'quantity': 3312829, 'price': 2.276},
-                    'UKGiltTreasury_3.75_2021': {'quantity': 128969, 'price': 108.126}
+                    'UKGiltTreasury_3.75_2021': {'quantity': 128969, 'price': 108.126},
+                    'GBP_Cash': {'quantity': 14000000, 'price': 1}
                 },
 
                 'client-{}-strategy-fixedincome'.format(self.client_3_portfolio_group_id) : {
                     'UKGiltTreasury_3.5_2045': {'quantity': 286388, 'price': 134.433},
                     'UKGiltTreasury_2.0_2025': {'quantity': 581411, 'price': 106.637},
                     'USTreasury_2.00_2021': {'quantity': 796731, 'price': 97.9},
-                    'USTreasury_6.875_2025': {'quantity': 277063, 'price': 124.52}
+                    'USTreasury_6.875_2025': {'quantity': 277063, 'price': 124.52},
+                    'GBP_Cash': {'quantity': 1256000, 'price': 1},
+                    'USD_Cash': {'quantity': 1570000, 'price': 1}
                 }
             }
         }
@@ -435,8 +459,8 @@ class transparencyOversightThirdParty(TestFinbourneApi):
         we can only set holdings on one portfolio at a time. So we will have to iterate over our portfolios and create
         our holdings
         
-        Note that we have specified an effective at date of today's date minus one day to set the holdings so they
-        are up to date as of yesterday.
+        Note that we have specified an effective at date of today's date minus two days to set the holdings so they
+        are up to date as of the day before yesterday.
         '''
         # Iterate over our portfolio groups
         for portfolio_group_name, portfolio_group in holding_adjustments.items():
@@ -445,12 +469,12 @@ class transparencyOversightThirdParty(TestFinbourneApi):
 
                 holdings_internal = self.client.set_holdings(scope=self.internal_scope_code,
                                                              code=portfolio_name,
-                                                             effective_at=(datetime.today() - timedelta(days=1)).isoformat(),
+                                                             effective_at=(datetime.today() - timedelta(days=2)).isoformat(),
                                                              holding_adjustments=portfolio_adjustments)
 
                 holdings_fund_accountant = self.client.set_holdings(scope=self.fund_accountant_scope_code,
                                                                     code=portfolio_name,
-                                                                    effective_at=(datetime.today() - timedelta(days=1)).isoformat(),
+                                                                    effective_at=(datetime.today() - timedelta(days=2)).isoformat(),
                                                                     holding_adjustments=portfolio_adjustments)
 
                 # Tests to verify that the holdings are correct
@@ -458,19 +482,20 @@ class transparencyOversightThirdParty(TestFinbourneApi):
                                            holdings=holdings_internal,
                                            scope=self.internal_scope_code,
                                            code=portfolio_name,
-                                           effective_at=(datetime.today() - timedelta(days=1)).isoformat())
+                                           effective_at=(datetime.today() - timedelta(days=2)).isoformat())
 
                 self.verify_holdings_tests(holding_adjustments=portfolio_adjustments,
                                            holdings=holdings_fund_accountant,
                                            scope=self.fund_accountant_scope_code,
                                            code=portfolio_name,
-                                           effective_at=(datetime.today() - timedelta(days=1)).isoformat())
+                                           effective_at=(datetime.today() - timedelta(days=2)).isoformat())
 
     def add_daily_transactions(self):
         '''
-        Now that we have our portfolios populated with their holdings we are going to simulate a day of trading.
+        Now that we have our portfolios populated with their holdings we are going to simulate a day of trading. We
+        are going to add all of yesterdays transactions to our internal portfolio.
 
-        We have some exciting new strategies to implement across our portfolios that involve
+        We had some exciting new strategies to implement across our portfolios that involved
 
         1) Selling stock in WPP
         2) Buying more stock in MicroFocus
@@ -478,16 +503,17 @@ class transparencyOversightThirdParty(TestFinbourneApi):
         4) Buying more of the UK Treasury Gilt maturing in 2034 with coupon rate of 4.5%
         5) Buying some more UK Treasury Gilts and selling US Treasury Bonds
         6) Selling stock in Whitebread
+        7) Selling some stock in TESCO
 
-        These trades are added to our internal scope as soon as they are executed. They are also sent to our fund
-        manager's systems in real time via API through our execution management system. Note that the fund accountant
-        scope is not updated in real time. Instead we will receive a daily report from our fund accountant, the next
-        one being available tomorrow morning. We will then update the fund accountant scope using this report.
+        In reality these trades would be added to our internal scope as soon as they are executed. They are also sent to
+        our fund manager's systems in real time via API through our execution management system. Note that the fund
+        accountant scope is not updated in real time. Instead we receive a daily report from our fund accountant.
+        We then update the fund accountant scope using this report.
 
         Let us define the trades below. Keeping in mind that these would be generated from our order management or
         execution management system in reality. Each trade has a unique identifier prefixed with tid_. It also has a
-        transaction date and settlement date. We can consider datetime.today() to be the start of the trading
-        day and the number of hours/days after this to indicate when the trade was executed/settled.
+        transaction date and settlement date. We can consider datetime.today()-timedelta(days=1) to be the start of the
+        trading day and the number of hours/days after this to indicate when the trade was executed/settled.
         '''
 
         self.client_transactions = {
@@ -498,8 +524,8 @@ class transparencyOversightThirdParty(TestFinbourneApi):
                     'tid_{}'.format(uuid.uuid4()) : {
                         'type': 'Sell',
                         'instrument_uid': self.instrument_universe['WPP_LondonStockEx_WPP']['identifiers']['LUID'],
-                        'transaction_date': (datetime.today() + timedelta(hours=2)).isoformat(),
-                        'settlement_date': (datetime.today() + timedelta(days=2)).isoformat(),
+                        'transaction_date': (datetime.today() - timedelta(days=1) + timedelta(hours=2)).isoformat(),
+                        'settlement_date': (datetime.today() - timedelta(days=1) + timedelta(days=2)).isoformat(),
                         'units': 265600,
                         'transaction_price': 8.9100,
                         'transaction_currency': 'GBP',
@@ -509,8 +535,8 @@ class transparencyOversightThirdParty(TestFinbourneApi):
                     'tid_{}'.format(uuid.uuid4()): {
                         'type': 'Buy',
                         'instrument_uid': self.instrument_universe['MicroFocus_LondonStockEx_MCRO']['identifiers']['LUID'],
-                        'transaction_date': (datetime.today() + timedelta(hours=5)).isoformat(),
-                        'settlement_date': (datetime.today() + timedelta(days=2)).isoformat(),
+                        'transaction_date': (datetime.today() - timedelta(days=1) + timedelta(hours=5)).isoformat(),
+                        'settlement_date': (datetime.today() - timedelta(days=1) + timedelta(days=2)).isoformat(),
                         'units': 15074,
                         'transaction_price': 13.2867,
                         'transaction_currency': 'GBP',
@@ -525,8 +551,8 @@ class transparencyOversightThirdParty(TestFinbourneApi):
                         'type': 'Sell',
                         'instrument_uid': self.instrument_universe['Kingfisher_LondonStockEx_KGF']['identifiers'][
                             'LUID'],
-                        'transaction_date': (datetime.today() + timedelta(hours=6)).isoformat(),
-                        'settlement_date': (datetime.today() + timedelta(days=2)).isoformat(),
+                        'transaction_date': (datetime.today() - timedelta(days=1) + timedelta(hours=6)).isoformat(),
+                        'settlement_date': (datetime.today() - timedelta(days=1) + timedelta(days=2)).isoformat(),
                         'units': 325000,
                         'transaction_price': 2.3450,
                         'transaction_currency': 'GBP',
@@ -534,8 +560,8 @@ class transparencyOversightThirdParty(TestFinbourneApi):
                     'tid_{}'.format(uuid.uuid4()): {
                         'type': 'Buy',
                         'instrument_uid': self.instrument_universe['UKGiltTreasury_4.5_2034']['identifiers']['LUID'],
-                        'transaction_date': (datetime.today() + timedelta(hours=9)).isoformat(),
-                        'settlement_date': (datetime.today() + timedelta(days=2)).isoformat(),
+                        'transaction_date': (datetime.today() - timedelta(days=1) + timedelta(hours=9)).isoformat(),
+                        'settlement_date': (datetime.today() - timedelta(days=1) + timedelta(days=2)).isoformat(),
                         'units': 10501,
                         'transaction_price': 140.572,
                         'transaction_currency': 'GBP',
@@ -547,8 +573,8 @@ class transparencyOversightThirdParty(TestFinbourneApi):
                         'type': 'Buy',
                         'instrument_uid': self.instrument_universe['UKGiltTreasury_3.75_2021']['identifiers'][
                             'LUID'],
-                        'transaction_date': (datetime.today() + timedelta(hours=3)).isoformat(),
-                        'settlement_date': (datetime.today() + timedelta(days=2)).isoformat(),
+                        'transaction_date': (datetime.today() - timedelta(days=1) + timedelta(hours=3)).isoformat(),
+                        'settlement_date': (datetime.today() - timedelta(days=1) + timedelta(days=2)).isoformat(),
                         'units': 24000,
                         'transaction_price': 109.126,
                         'transaction_currency': 'GBP',
@@ -556,8 +582,8 @@ class transparencyOversightThirdParty(TestFinbourneApi):
                     'tid_{}'.format(uuid.uuid4()): {
                         'type': 'Sell',
                         'instrument_uid': self.instrument_universe['USTreasury_2.00_2021']['identifiers']['LUID'],
-                        'transaction_date': (datetime.today() + timedelta(hours=2)).isoformat(),
-                        'settlement_date': (datetime.today() + timedelta(days=2)).isoformat(),
+                        'transaction_date': (datetime.today() - timedelta(days=1) + timedelta(hours=2)).isoformat(),
+                        'settlement_date': (datetime.today() - timedelta(days=1) + timedelta(days=2)).isoformat(),
                         'units': 57000,
                         'transaction_price': 97.80,
                         'transaction_currency': 'USD',
@@ -572,19 +598,19 @@ class transparencyOversightThirdParty(TestFinbourneApi):
                         'type': 'Sell',
                         'instrument_uid': self.instrument_universe['Whitebread_LondonStockEx_WTB']['identifiers'][
                             'LUID'],
-                        'transaction_date': (datetime.today() + timedelta(hours=5)).isoformat(),
-                        'settlement_date': (datetime.today() + timedelta(days=2)).isoformat(),
+                        'transaction_date': (datetime.today() - timedelta(days=1) + timedelta(hours=5)).isoformat(),
+                        'settlement_date': (datetime.today() - timedelta(days=1) + timedelta(days=2)).isoformat(),
                         'units': 70000,
                         'transaction_price': 47.03,
                         'transaction_currency': 'GBP',
                     },
                     'tid_{}'.format(uuid.uuid4()): {
                         'type': 'Sell',
-                        'instrument_uid': self.instrument_universe['Kingfisher_LondonStockEx_KGF']['identifiers']['LUID'],
-                        'transaction_date': (datetime.today() + timedelta(hours=9)).isoformat(),
-                        'settlement_date': (datetime.today() + timedelta(days=2)).isoformat(),
+                        'instrument_uid': self.instrument_universe['TESCO_LondonStockEx_TSCO']['identifiers']['LUID'],
+                        'transaction_date': (datetime.today() - timedelta(days=1) + timedelta(hours=9)).isoformat(),
+                        'settlement_date': (datetime.today() - timedelta(days=1) + timedelta(days=2)).isoformat(),
                         'units': 342000,
-                        'transaction_price': 2.478,
+                        'transaction_price': 1.8865,
                         'transaction_currency': 'GBP',
                     }
                 },
@@ -674,28 +700,169 @@ class transparencyOversightThirdParty(TestFinbourneApi):
                 # Test that the transactions have been added correctly
                 self.transactions_added_tests(portfolio_scope=self.internal_scope_code,
                                               portfolio_code=portfolio_name,
-                                              start_date=datetime.today().isoformat(),
-                                              end_date=(datetime.today() + timedelta(days=1)).isoformat(),
+                                              start_date=(datetime.today() - timedelta(days=1)).isoformat(),
+                                              end_date=(datetime.today()).isoformat(),
                                               as_at_date=datetime.today().isoformat(),
                                               batch_transactions_request=portfolio_transactions)
 
+        holdingstest = self.client.get_holdings(scope=self.internal_scope_code,
+                                                code='client-{}-strategy-balanced'.format(self.client_1_portfolio_group_id),
+                                                effective_at=(datetime.today()+timedelta(days=5)).isoformat())
 
     def update_fund_accountant_record(self):
         '''
-        Early in the morning before trading begins our fund accountant sends us a report with details on yesterday's
-        activity and our current position according to their records.
+        It is early in the morning before trading begins and our fund accountant has just sent us the daily report
+        with details on yesterday's activity and our current position according to their records.
 
         We will update our fund accountant scope with their records.
         '''
 
         self.fund_accountant_daily_holdings_report = {
-            
+
+            'client-{}-portfolios'.format(self.client_1_portfolio_group_id): {
+
+                'client-{}-strategy-balanced'.format(self.client_1_portfolio_group_id): {
+                    'WPP_LondonStockEx_WPP': {'quantity': 2690400, 'price': 8.7100},
+                    'UKGiltTreasury_2.0_2025': {'quantity': 375856, 'price': 8.7100},
+                    'JustEat_LondonStockEx_JE': {'quantity': 4026354, 'price': 5.4640},
+                    'UKGiltTreasury_3.75_2021': {'quantity': 486913, 'price': 108.126},
+                    'GBP_Cash': {'quantity': 5366496, 'price':1}
+                },
+
+                'client-{}-strategy-tech'.format(self.client_1_portfolio_group_id): {
+                    'MicroFocus_LondonStockEx_MCRO': {'quantity': 703068, 'price': 14.5082},
+                    'Sage_LondonStockEx_SGE': {'quantity': 2599653, 'price': 5.7700},
+                    'GBP_Cash': {'quantity': 583716.284, 'price':1}
+                },
+
+                'client-{}-strategy-growth'.format(self.client_1_portfolio_group_id): {
+                    'BurfordCapital_LondonStockEx_BUR': {'quantity': 853486, 'price': 14.06},
+                    'EKFDiagnostics_LondonStockEx_EKF': {'quantity': 925925, 'price': 0.2700},
+                    'GBP_Cash': {'quantity': 150000, 'price':1}
+                },
+
+            },
+
+            'client-{}-portfolios'.format(self.client_2_portfolio_group_id): {
+
+                'client-{}-strategy-balanced'.format(self.client_2_portfolio_group_id): {
+                    'Kingfisher_LondonStockEx_KGF': {'quantity': 1037038, 'price': 2.2760},
+                    'JustEat_LondonStockEx_JE': {'quantity': 834553, 'price': 5.4640},
+                    'RELXGroup_LondonStockEx_REL': {'quantity': 494343, 'price': 15.98},
+                    'UKGiltTreasury_4.5_2034': {'quantity': 77481, 'price': 140.572},
+                    'GBP_Cash': {'quantity': 1714125, 'price':1}
+                },
+
+                'client-{}-strategy-energy'.format(self.client_2_portfolio_group_id): {
+                    'Glencore_LondonStockEx_GLEN': {'quantity': 905141, 'price': 2.7620},
+                    'BP_LondonStockEx_BP': {'quantity': 1713922, 'price': 5.1140},
+                    'GBP_Cash': {'quantity': 2200000, 'price':1}
+                },
+
+                'client-{}-strategy-fixedincome'.format(self.client_2_portfolio_group_id): {
+                    'UKGiltTreasury_3.5_2045': {'quantity': 266169, 'price': 134.433},
+                    'UKGiltTreasury_2.0_2025': {'quantity': 405589, 'price': 106.637},
+                    'UKGiltTreasury_3.75_2021': {'quantity': 198800, 'price': 108.247},
+                    'USTreasury_2.00_2021': {'quantity': 300507, 'price': 97.90},
+                    'USD_Cash': {'quantity': 6784860, 'price': 1},
+                    'GBP_Cash': {'quantity': 830976, 'price': 1}
+                },
+
+                'client-{}-strategy-international'.format(self.client_2_portfolio_group_id): {
+                    'USTreasury_2.00_2021': {'quantity': 357507, 'price': 97.90},
+                    'Apple_Nasdaq_AAPL': {'quantity': 504481, 'price': 168.49},
+                    'Amazon_Nasdaq_AMZN': {'quantity': 38671, 'price': 1629.13},
+                    'USD_Cash': {'quantity': 1400000, 'price': 1}
+                },
+
+                'client-{}-strategy-usgovt'.format(self.client_2_portfolio_group_id): {
+                    'USTreasury_2.00_2021': {'quantity': 286006, 'price': 97.90},
+                    'USTreasury_6.875_2025': {'quantity': 256986, 'price': 124.52},
+                    'USD_Cash': {'quantity': 23000000, 'price': 1}
+                }
+
+            },
+
+            'client-{}-portfolios'.format(self.client_3_portfolio_group_id): {
+
+                'client-{}-strategy-balanced'.format(self.client_3_portfolio_group_id): {
+                    'Whitebread_LondonStockEx_WTB': {'quantity': 285318, 'price': 45.03},
+                    'TESCO_LondonStockEx_TSCO': {'quantity': 2206441, 'price': 1.9715},
+                    'Kingfisher_LondonStockEx_KGF': {'quantity': 3312829, 'price': 2.276},
+                    'UKGiltTreasury_3.75_2021': {'quantity': 128969, 'price': 108.126},
+                    'GBP_Cash': {'quantity': 17292100, 'price': 1}
+                },
+
+                'client-{}-strategy-fixedincome'.format(self.client_3_portfolio_group_id): {
+                    'UKGiltTreasury_3.5_2045': {'quantity': 286388, 'price': 134.433},
+                    'UKGiltTreasury_2.0_2025': {'quantity': 581411, 'price': 106.637},
+                    'USTreasury_2.00_2021': {'quantity': 796731, 'price': 97.9},
+                    'USTreasury_6.875_2025': {'quantity': 277063, 'price': 124.52},
+                    'GBP_Cash': {'quantity': 1256000, 'price': 1},
+                    'USD_Cash': {'quantity': 1570000, 'price': 1}
+                }
+            }
         }
 
+        '''
+        Now that we have defined our report we can create our holding adjustments. Note that in reality we would
+        likely import this report from a csv file or fetch it from an API.
+        '''
 
+        # Initialise our holding adjustments dictionary which will contain a list of adjustments for each portfolio in each portfolio group
+        holding_adjustments = {}
 
-        # Use BY instead of Buy
-        pass
+        # Iterate over our portfolio groups
+        for portfolio_group_name, portfolio_group in self.fund_accountant_daily_holdings_report.items():
+            # Create a key for our group to hold the portfolios
+            holding_adjustments[portfolio_group_name] = {}
+            # Iterate over our portfolios
+            for portfolio_name, portfolio in portfolio_group.items():
+                # Create a key and initialise a list to hold our adjustments for each portfolio
+                holding_adjustments[portfolio_group_name][portfolio_name] = []
+                # Iterate over the holdings in each portfolio
+                for instrument_name, holding in portfolio.items():
+                    # Create our adjust holdings request using our instrument universe to get the LUID identifier for the instrument
+                    holding_adjustments[portfolio_group_name][portfolio_name].append(
+                        models.AdjustHoldingRequest(
+                            instrument_uid=self.instrument_universe[instrument_name]['identifiers']['LUID'],
+                            tax_lots=[
+                                models.TargetTaxLotRequest(units=holding['quantity'],
+                                                           cost=models.CurrencyAndAmount(
+                                                               amount=holding['quantity'] *
+                                                                      holding['price'],
+                                                               currency=self.instrument_universe[instrument_name][
+                                                                   'currency']),
+                                                           portfolio_cost=holding['quantity'] *
+                                                                          holding['price'],
+                                                           price=holding['price'])
+                            ]
+                        )
+                    )
+
+        '''
+        Now that we have our holding adjustments we can set them on our portfolios. Using the set_holdings method
+        we can only set holdings on one portfolio at a time. So we will have to iterate over our portfolios and create
+        our holdings
+        
+        This time we use set holdings rather than adjust holdings tk - why?
+        '''
+        # Iterate over our portfolio groups
+        for portfolio_group_name, portfolio_group in holding_adjustments.items():
+            # Iterate over our portfolios
+            for portfolio_name, portfolio_adjustments in portfolio_group.items():
+                holdings = self.client.adjust_holdings(scope=self.fund_accountant_scope_code,
+                                                       code=portfolio_name,
+                                                       effective_at=datetime.today().isoformat(),
+                                                       holding_adjustments=portfolio_adjustments)
+
+                # Tests to verify that the holdings are correct
+                self.verify_holdings_tests(holding_adjustments=portfolio_adjustments,
+                                           holdings=holdings,
+                                           scope=self.fund_accountant_scope_code,
+                                           code=portfolio_name,
+                                           effective_at=(datetime.today()).isoformat())
+
     def reconcile_records(self):
         '''
         Now that we have the fund accountant scope updated with this morning's report, we need to see how different the
@@ -704,6 +871,7 @@ class transparencyOversightThirdParty(TestFinbourneApi):
         We can do this by reconciling across all the portfolios inside the two scopes.
         '''
         pass
+
     def identify_discrepencies(self):
         '''
         So we have identified a number of discrepancies between our internal records and the fund accountant's records.
@@ -711,10 +879,12 @@ class transparencyOversightThirdParty(TestFinbourneApi):
         Let us try and understand the root cause of these discrepancies
         '''
         # Understand that it was a late trade (where on the timeline do things start to diverge)
+        # Use BY instead of Buy
         pass
     
     def adjust_portfolio_holdings(self):
         pass
+
     def change_fund_accountants(self):
         pass
 
