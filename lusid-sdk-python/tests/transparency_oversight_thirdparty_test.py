@@ -150,7 +150,7 @@ class transparencyOversightThirdParty(TestFinbourneApi):
     def create_entitlements(self):
         pass
 
-    def set_holdings(self):
+    def create_holdings(self):
         '''
         Now that we have our portfolios and groups set up for our clients we can add in their current holdings. We will
         with having the internal scope and the fund account scope completely in sync with exactly the same
@@ -243,7 +243,7 @@ class transparencyOversightThirdParty(TestFinbourneApi):
                 'identifiers': {'ClientInternal': 'Isin-GB00B8C3BL03'},
                 'currency': 'GBP'},
 
-            'BurfordCapital_LondonStockEx_BURF': {
+            'BurfordCapital_LondonStockEx_BUR': {
                 'identifiers': {'ClientInternal': 'Isin-GG00B4L84979'},
                 'currency': 'GBP'},
 
@@ -311,18 +311,18 @@ class transparencyOversightThirdParty(TestFinbourneApi):
                 'client-{}-strategy-balanced'.format(self.client_1_portfolio_group_id) : {
                     'WPP_LondonStockEx_WPP': {'quantity': 2956000, 'price': 8.7100},
                     'UKGiltTreasury_2.0_2025': {'quantity': 375856, 'price': 8.7100},
-                    'JustEat_LondonStockEx_JE': {'quantity': 0, 'price': 0},
-                    'UKGiltTreasury_3.75_2021': {'quantity': 0, 'price': 0}
+                    'JustEat_LondonStockEx_JE': {'quantity': 4026354, 'price': 5.4640},
+                    'UKGiltTreasury_3.75_2021': {'quantity': 486913, 'price': 108.126}
                 },
 
                 'client-{}-strategy-tech'.format(self.client_1_portfolio_group_id) : {
-                    'MicroFocus_LondonStockEx_MCRO': {'quantity': 0, 'price': 0},
-                    'Sage_LondonStockEx_SGE': {'quantity': 0, 'price': 0}
+                    'MicroFocus_LondonStockEx_MCRO': {'quantity': 687994, 'price': 14.5350},
+                    'Sage_LondonStockEx_SGE': {'quantity': 2599653, 'price': 5.7700}
                 },
 
                 'client-{}-strategy-growth'.format(self.client_1_portfolio_group_id) : {
-                    'BurfordCapital_LondonStockEx_BURF': {'quantity': 0, 'price': 0},
-                    'EKFDiagnostics_LondonStockEx_EKF': {'quantity': 0, 'price': 0}
+                    'BurfordCapital_LondonStockEx_BUR': {'quantity': 853486, 'price': 14.06},
+                    'EKFDiagnostics_LondonStockEx_EKF': {'quantity': 925925, 'price': 0.2700}
                 },
 
             },
@@ -330,33 +330,33 @@ class transparencyOversightThirdParty(TestFinbourneApi):
             'client-{}-portfolios'.format(self.client_2_portfolio_group_id) : {
 
                 'client-{}-strategy-balanced'.format(self.client_2_portfolio_group_id) : {
-                    'Kingfisher_LondonStockEx_KGF': {'quantity': 0, 'price': 0},
-                    'JustEat_LondonStockEx_JE': {'quantity': 0, 'price': 0},
-                    'RELXGroup_LondonStockEx_REL': {'quantity': 0, 'price': 0},
-                    'UKGiltTreasury_4.5_2034': {'quantity': 0, 'price': 0}
+                    'Kingfisher_LondonStockEx_KGF': {'quantity': 1362038, 'price': 2.2760},
+                    'JustEat_LondonStockEx_JE': {'quantity': 834553, 'price': 5.4640},
+                    'RELXGroup_LondonStockEx_REL': {'quantity': 494343, 'price': 15.98},
+                    'UKGiltTreasury_4.5_2034': {'quantity': 77481, 'price': 140.572}
                 },
 
                 'client-{}-strategy-energy'.format(self.client_2_portfolio_group_id) : {
-                    'Glencore_LondonStockEx_GLEN': {'quantity': 0, 'price': 0},
-                    'BP_LondonStockEx_BP': {'quantity': 0, 'price': 0}
+                    'Glencore_LondonStockEx_GLEN': {'quantity': 905141, 'price': 2.7620},
+                    'BP_LondonStockEx_BP': {'quantity': 1713922, 'price': 5.1140}
                 },
 
                 'client-{}-strategy-fixedincome'.format(self.client_2_portfolio_group_id) : {
-                    'UKGiltTreasury_3.5_2045': {'quantity': 0, 'price': 0},
-                    'UKGiltTreasury_2.0_2025': {'quantity': 0, 'price': 0},
-                    'UKGiltTreasury_3.75_2021': {'quantity': 0, 'price': 0},
-                    'USTreasury_2.00_2021': {'quantity': 0, 'price': 0}
+                    'UKGiltTreasury_3.5_2045': {'quantity': 266169, 'price': 134.433},
+                    'UKGiltTreasury_2.0_2025': {'quantity': 405589, 'price': 106.637},
+                    'UKGiltTreasury_3.75_2021': {'quantity': 174800, 'price': 108.126},
+                    'USTreasury_2.00_2021': {'quantity': 357507, 'price': 97.90}
                 },
 
                 'client-{}-strategy-international'.format(self.client_2_portfolio_group_id) : {
-                    'USTreasury_2.00_2021': {'quantity': 0, 'price': 0},
-                    'Apple_Nasdaq_AAPL': {'quantity': 0, 'price': 0},
-                    'Amazon_Nasdaq_AMZN': {'quantity': 0, 'price': 0}
+                    'USTreasury_2.00_2021': {'quantity': 357507, 'price': 97.90},
+                    'Apple_Nasdaq_AAPL': {'quantity': 504481, 'price': 168.49},
+                    'Amazon_Nasdaq_AMZN': {'quantity': 38671, 'price': 1629.13}
                 },
 
                 'client-{}-strategy-usgovt'.format(self.client_2_portfolio_group_id) : {
-                    'USTreasury_2.00_2021': {'quantity': 0, 'price': 0},
-                    'USTreasury_6.875_2025': {'quantity': 0, 'price': 0}
+                    'USTreasury_2.00_2021': {'quantity': 286006, 'price': 97.90},
+                    'USTreasury_6.875_2025': {'quantity': 256986, 'price': 124.52}
                 }
 
             },
@@ -364,17 +364,17 @@ class transparencyOversightThirdParty(TestFinbourneApi):
             'client-{}-portfolios'.format(self.client_3_portfolio_group_id) : {
 
                 'client-{}-strategy-balanced'.format(self.client_3_portfolio_group_id) : {
-                    'Whitebread_LondonStockEx_WTB': {'quantity': 0, 'price': 0},
-                    'TESCO_LondonStockEx_TSCO': {'quantity': 0, 'price': 0},
-                    'Kingfisher_LondonStockEx_KGF': {'quantity': 0, 'price': 0},
-                    'UKGiltTreasury_3.75_2021': {'quantity': 0, 'price': 0}
+                    'Whitebread_LondonStockEx_WTB': {'quantity': 355318, 'price': 45.03},
+                    'TESCO_LondonStockEx_TSCO': {'quantity': 2206441, 'price': 1.9715},
+                    'Kingfisher_LondonStockEx_KGF': {'quantity': 3312829, 'price': 2.276},
+                    'UKGiltTreasury_3.75_2021': {'quantity': 128969, 'price': 108.126}
                 },
 
                 'client-{}-strategy-fixedincome'.format(self.client_3_portfolio_group_id) : {
-                    'UKGiltTreasury_3.5_2045': {'quantity': 0, 'price': 0},
-                    'UKGiltTreasury_2.0_2025': {'quantity': 0, 'price': 0},
-                    'USTreasury_2.00_2021': {'quantity': 0, 'price': 0},
-                    'USTreasury_6.875_2025': {'quantity': 0, 'price': 0}
+                    'UKGiltTreasury_3.5_2045': {'quantity': 286388, 'price': 134.433},
+                    'UKGiltTreasury_2.0_2025': {'quantity': 581411, 'price': 106.637},
+                    'USTreasury_2.00_2021': {'quantity': 796731, 'price': 97.9},
+                    'USTreasury_6.875_2025': {'quantity': 277063, 'price': 124.52}
                 }
             }
         }
@@ -397,29 +397,67 @@ class transparencyOversightThirdParty(TestFinbourneApi):
                 - price: This is the price if the instrument tk - in what currency???? Is this in the portfolio currency?
         '''
 
-        # Initialise our holding adjustments dictionary which will contain a list of adjustments for each portfolio
+        # Initialise our holding adjustments dictionary which will contain a list of adjustments for each portfolio in each portfolio group
         holding_adjustments = {}
 
-        # Create our holding adjustment
-        for instrument_name, instrument in self.transferred_instruments.items():
-            holding_adjustments.append(
-                models.AdjustHoldingRequest(instrument_uid=instrument['identifiers']['LUID'],
-                                            tax_lots=[
-                                                models.TargetTaxLotRequest(units=instrument['quantity'],
-                                                                           cost=models.CurrencyAndAmount(
-                                                                               amount=instrument['quantity'] *
-                                                                                      instrument['price'],
-                                                                               currency=instrument['currency']),
-                                                                           portfolio_cost=instrument['quantity'] *
-                                                                                          instrument['price'],
-                                                                           price=instrument['price'])
-                                            ]
-                                            )
-            )
+        # Iterate over our portfolio groups
+        for portfolio_group_name, portfolio_group in self.client_holdings.items():
+            # Create a key for our group to hold the portfolios
+            holding_adjustments[portfolio_group_name] = {}
+            # Iterate over our portfolios
+            for portfolio_name, portfolio in portfolio_group.items():
+                # Create a key and initialise a list to hold our adjustments for each portfolio
+                holding_adjustments[portfolio_group_name][portfolio_name] = []
+                # Iterate over the holdings in each portfolio
+                for instrument_name, holding in portfolio.items():
+                    # Create our adjust holdings request using our instrument universe to get the LUID identifier for the instrument
+                    holding_adjustments[portfolio_group_name][portfolio_name].append(
+                        models.AdjustHoldingRequest(instrument_uid=self.instrument_universe[instrument_name]['identifiers']['LUID'],
+                                                    tax_lots=[
+                                                        models.TargetTaxLotRequest(units=holding['quantity'],
+                                                                                   cost=models.CurrencyAndAmount(
+                                                                                       amount=holding['quantity'] *
+                                                                                              holding['price'],
+                                                                                       currency=self.instrument_universe[instrument_name]['currency']),
+                                                                                   portfolio_cost=holding['quantity'] *
+                                                                                                  holding['price'],
+                                                                                   price=holding['price'])
+                                                    ]
+                                                    )
+                    )
 
+        '''
+        Now that we have our holding adjustments we can set them on our portfolios. Using the set_holdings method
+        we can only set holdings on one portfolio at a time. So we will have to iterate over our portfolios and create
+        our holdings
+        '''
+        # Iterate over our portfolio groups
+        for portfolio_group_name, portfolio_group in holding_adjustments.items():
+            # Iterate over our portfolios
+            for portfolio_name, portfolio_adjustments in portfolio_group.items():
 
+                holdings_internal = self.client.set_holdings(scope=self.internal_scope_code,
+                                                             code=portfolio_name,
+                                                             effective_at=datetime.today().isoformat(),
+                                                             holding_adjustments=portfolio_adjustments)
 
+                holdings_fund_accountant = self.client.set_holdings(scope=self.fund_accountant_scope_code,
+                                                                    code=portfolio_name,
+                                                                    effective_at=datetime.today().isoformat(),
+                                                                    holding_adjustments=portfolio_adjustments)
 
+                # Tests to verify that the holdings are correct
+                self.verify_holdings_tests(holding_adjustments=portfolio_adjustments,
+                                           holdings=holdings_internal,
+                                           scope=self.internal_scope_code,
+                                           code=portfolio_name,
+                                           effective_at=datetime.today().isoformat())
+
+                self.verify_holdings_tests(holding_adjustments=portfolio_adjustments,
+                                           holdings=holdings_fund_accountant,
+                                           scope=self.fund_accountant_scope_code,
+                                           code=portfolio_name,
+                                           effective_at=datetime.today().isoformat())
 
     def add_daily_transactions(self):
         '''
@@ -478,7 +516,7 @@ class transparencyOversightThirdParty(TestFinbourneApi):
         self.import_data()
         self.create_portfolios()
         self.create_entitlements()
-        self.set_holdings()
+        self.create_holdings()
         self.add_daily_transactions()
         self.update_fund_accountant_record()
         self.reconcile_records()
