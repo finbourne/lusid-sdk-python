@@ -732,7 +732,7 @@ class transparencyOversightThirdParty(TestFinbourneApi):
                 'client-{}-strategy-tech'.format(self.client_1_portfolio_group_id): {
                     'MicroFocus_LondonStockEx_MCRO': {'quantity': 703068, 'price': 14.5082},
                     'Sage_LondonStockEx_SGE': {'quantity': 2599653, 'price': 5.7700},
-                    'GBP_Cash': {'quantity': 583716.284, 'price':1}
+                    'GBP_Cash': {'quantity': 583716.2842, 'price':1}
                 },
 
                 'client-{}-strategy-growth'.format(self.client_1_portfolio_group_id): {
@@ -764,7 +764,7 @@ class transparencyOversightThirdParty(TestFinbourneApi):
                     'UKGiltTreasury_2.0_2025': {'quantity': 405589, 'price': 106.637},
                     'UKGiltTreasury_3.75_2021': {'quantity': 198800, 'price': 108.247},
                     'USTreasury_2.00_2021': {'quantity': 300507, 'price': 97.90},
-                    'USD_Cash': {'quantity': 6784860, 'price': 1},
+                    'USD_Cash': {'quantity': 6774600, 'price': 1},
                     'GBP_Cash': {'quantity': 830976, 'price': 1}
                 },
 
@@ -868,19 +868,123 @@ class transparencyOversightThirdParty(TestFinbourneApi):
         Now that we have the fund accountant scope updated with this morning's report, we need to see how different the
         fund accountant's view of our position is with our own internal records.
 
-        We can do this by reconciling across all the portfolios inside the two scopes.
+        We can do this by reconciling across all the portfolios inside the two scopes. We can only reconcile one
+        portfolio at a time.
+
+        We can complete a reconciliation by defining the two portfolios to compare as well as the effective date and
+        the as at date to use to view the holdings of each portfolio.
+
+        LUSID uses a bi-temporal data store. This means that not only can you reconcile two portfolios as they
+        look today, you can also compare how one looks today, compared with how the other looked last week.
+
+        This makes reconciliation much easier and we will take advantage of this if we come across any discrepancies
+        between our internal accounts and fund accountant's records.
         '''
-        pass
+
+        reconciled_portfolios = {}
+        for portfolio_group_name, portfolio_group in self.client_portfolios.items():
+            reconciled_portfolios[portfolio_group_name] = {}
+            for portfolio_name in portfolio_group:
+
+                internal_portfolio = models.PortfolioReconciliationRequest(portfolio_id=models.ResourceId(
+                                                                                    scope=self.internal_scope_code,
+                                                                                    code=portfolio_name),
+                                                                                effective_at=datetime.today().isoformat(),
+                                                                                as_at=datetime.today().isoformat())
+
+                fund_accountant_portfolio = models.PortfolioReconciliationRequest(portfolio_id=models.ResourceId(
+                                                                                    scope=self.fund_accountant_scope_code,
+                                                                                    code=portfolio_name),
+                                                                                 effective_at=datetime.today().isoformat(),
+                                                                                 as_at=datetime.today().isoformat())
+
+                reconcile_holdings_request = models.PortfoliosReconciliationRequest(left=internal_portfolio,
+                                                                                    right=fund_accountant_portfolio,
+                                                                                    instrument_property_keys=[])
+
+                reconciliation = self.client.reconcile_holdings(request=reconcile_holdings_request)
+
+                if reconciliation.count > 0:
+                    reconciled_portfolios[portfolio_group_name][portfolio_name] = reconciliation
+                else:
+                    reconciled_portfolios[portfolio_group_name][portfolio_name] = 'InSync'
+
+        '''
+        Okay so looking over our reconciliations we can see that 2 of our portfolios do not reconcile. The rest match
+        up which is great. Let's take a look at the difference between these two portfolios in more detail
+        '''
+
+        # tk - Print detail here for portfolio 1
+
+        '''
+        We can see that in the first portfolio that the discrepancy is due to our fund accountant portfolio having
+        10501 fewer units of the instrument with LUID_4TMKXHQ7 than our own records. We have 87982 units of this
+        instrument according to our records, however the fund accountant only has 77481 units. 
+        
+        We can also see that the fund accountant has more cash than we have on our records. This seems to indicate
+        that perhaps a Buy transaction has not gone through.
+        '''
+
+        # tk - Print detail here for portfolio 2
+
+        '''
+        We can see that in the second portfolio that the discrepancy is due to our fund accountant portfolio having
+        342000 more units of the instrument with LUID_6NGAW9RS than our own records. We have 1,864,441 units of this
+        instrument according to our records, and the fund accountant has 2,206,441 units.
+
+        We can also see that the fund accountant has less cash than we have on our records.  This seems to indicate
+        that perhaps a Sell transaction has not gone through.
+        '''
 
     def identify_discrepencies(self):
         '''
         So we have identified a number of discrepancies between our internal records and the fund accountant's records.
+        It seems as though perhaps a buy and a sell transaction have not gone through.
 
-        Let us try and understand the root cause of these discrepancies
+        We do know that the fund accountant finalise their accounts 8 hours after trading opens each day. Any
+        transactions posted after that won't appear in the next morning's report. Perhaps we had some late trades
+        yesterday which caused the issue.
+
+        Because LUSID uses a bi-temporal data store, we can wind back the clock to 8 hours after trading yesterday and
+        run the reconciliationon again.
         '''
+        reconciled_portfolios = {}
+        for portfolio_group_name, portfolio_group in self.client_portfolios.items():
+            reconciled_portfolios[portfolio_group_name] = {}
+            for portfolio_name in portfolio_group:
+
+                internal_portfolio = models.PortfolioReconciliationRequest(portfolio_id=models.ResourceId(
+                                                                           scope=self.internal_scope_code,
+                                                                           code=portfolio_name),
+                                                                           effective_at=(datetime.today() - timedelta(days=1) + timedelta(hours=8)).isoformat(),
+                                                                           as_at=datetime.today().isoformat())
+
+                fund_accountant_portfolio = models.PortfolioReconciliationRequest(portfolio_id=models.ResourceId(
+                                                                                  scope=self.fund_accountant_scope_code,
+                                                                                  code=portfolio_name),
+                                                                                  effective_at=datetime.today().isoformat(),
+                                                                                  as_at=datetime.today().isoformat())
+
+                reconcile_holdings_request = models.PortfoliosReconciliationRequest(left=internal_portfolio,
+                                                                                    right=fund_accountant_portfolio,
+                                                                                    instrument_property_keys=[])
+
+                reconciliation = self.client.reconcile_holdings(request=reconcile_holdings_request)
+
+                if reconciliation.count > 0:
+                    reconciled_portfolios[portfolio_group_name][portfolio_name] = reconciliation
+                else:
+                    reconciled_portfolios[portfolio_group_name][portfolio_name] = 'InSync'
+
         # Understand that it was a late trade (where on the timeline do things start to diverge)
         # Use BY instead of Buy
-        pass
+
+        '''
+        Here we can see that the two portfolios reconcile perfectly. Let's find out what happened after trading....
+        
+        tk - complete
+        '''
+        print ('wait')
     
     def adjust_portfolio_holdings(self):
         pass
