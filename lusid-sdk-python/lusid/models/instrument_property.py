@@ -30,7 +30,7 @@ class InstrumentProperty(Model):
     :param lusid_instrument_id: Unique instrument identifier
     :type lusid_instrument_id: str
     :param properties: A collection of properties to create or update
-    :type properties: list[~lusid.models.CreateInstrumentPropertyRequest]
+    :type properties: list[~lusid.models.UpsertInstrumentPropertyRequest]
     :param deleted_properties: A collection of property keys to remove
      property values from, if any are set for the instrument
     :type deleted_properties:
@@ -39,7 +39,7 @@ class InstrumentProperty(Model):
 
     _attribute_map = {
         'lusid_instrument_id': {'key': 'lusidInstrumentId', 'type': 'str'},
-        'properties': {'key': 'properties', 'type': '[CreateInstrumentPropertyRequest]'},
+        'properties': {'key': 'properties', 'type': '[UpsertInstrumentPropertyRequest]'},
         'deleted_properties': {'key': 'deletedProperties', 'type': '[DeleteInstrumentPropertyRequest]'},
     }
 

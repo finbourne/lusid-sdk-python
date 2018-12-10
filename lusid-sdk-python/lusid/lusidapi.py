@@ -358,7 +358,7 @@ class LUSIDAPI(object):
         self._client = ServiceClient(self.config.credentials, self.config)
 
         client_models = {k: v for k, v in models.__dict__.items() if isinstance(v, type)}
-        self.api_version = '0.8.56'
+        self.api_version = '0.9.3'
         self._serialize = Serializer(client_models)
         self._deserialize = Deserializer(client_models)
 
@@ -1410,7 +1410,7 @@ class LUSIDAPI(object):
         results.
 
         :param requests: The instrument definitions
-        :type requests: dict[str, ~lusid.models.UpsertInstrumentRequest]
+        :type requests: dict[str, ~lusid.models.InstrumentDefinition]
         :param dict custom_headers: headers that will be added to the request
         :param bool raw: returns the direct response alongside the
          deserialized response
@@ -1436,7 +1436,7 @@ class LUSIDAPI(object):
 
         # Construct body
         if requests is not None:
-            body_content = self._serialize.body(requests, '{UpsertInstrumentRequest}')
+            body_content = self._serialize.body(requests, '{InstrumentDefinition}')
         else:
             body_content = None
 
@@ -1587,12 +1587,12 @@ class LUSIDAPI(object):
         response = self._client.send(
             request, header_parameters, body_content, stream=False, **operation_config)
 
-        if response.status_code not in [201]:
+        if response.status_code not in [200]:
             raise models.ErrorResponseException(self._deserialize, response)
 
         deserialized = None
 
-        if response.status_code == 201:
+        if response.status_code == 200:
             deserialized = self._deserialize('Instrument', response)
 
         if raw:
@@ -1666,38 +1666,45 @@ class LUSIDAPI(object):
         return deserialized
     delete_instrument.metadata = {'url': '/api/instruments/{type}/{id}'}
 
-    def find_external_instruments(
-            self, code_type=None, codes=None, custom_headers=None, raw=False, **operation_config):
-        """Find externally mastered instruments.
+    def find_instruments(
+            self, aliases=None, effective_at=None, as_at=None, instrument_property_keys=None, custom_headers=None, raw=False, **operation_config):
+        """Search instrument definition.
 
-        Search for a set of instruments from an external instrument mastering
-        service.
+        Get a collection of instruments by a set of identifiers. Optionally, it
+        is possible to decorate each instrument with specified property data.
 
-        :param code_type: The type of codes to search for. Possible values
-         include: 'Undefined', 'LusidInstrumentId', 'ReutersAssetId', 'CINS',
-         'Isin', 'Sedol', 'Cusip', 'Ticker', 'ClientInternal', 'Figi',
-         'CompositeFigi', 'ShareClassFigi', 'Wertpapier', 'RIC', 'QuotePermId'
-        :type code_type: str
-        :param codes: The collection of instruments to search for
-        :type codes: list[str]
+        :param aliases: The list of market aliases (e.g ISIN, Ticker) to find
+         instruments by.
+        :type aliases: list[~lusid.models.Property]
+        :param effective_at: Optional. The effective date of the query
+        :type effective_at: datetime
+        :param as_at: Optional. The AsAt date of the query
+        :type as_at: datetime
+        :param instrument_property_keys: Optional. Keys of the properties to
+         be decorated on to the instrument
+        :type instrument_property_keys: list[str]
         :param dict custom_headers: headers that will be added to the request
         :param bool raw: returns the direct response alongside the
          deserialized response
         :param operation_config: :ref:`Operation configuration
          overrides<msrest:optionsforoperations>`.
-        :return: FindInstrumentsResponse or ClientRawResponse if raw=true
-        :rtype: ~lusid.models.FindInstrumentsResponse or
+        :return: ResourceListOfInstrument or ClientRawResponse if raw=true
+        :rtype: ~lusid.models.ResourceListOfInstrument or
          ~msrest.pipeline.ClientRawResponse
         :raises:
          :class:`ErrorResponseException<lusid.models.ErrorResponseException>`
         """
         # Construct URL
-        url = self.find_external_instruments.metadata['url']
+        url = self.find_instruments.metadata['url']
 
         # Construct parameters
         query_parameters = {}
-        if code_type is not None:
-            query_parameters['codeType'] = self._serialize.query("code_type", code_type, 'str')
+        if effective_at is not None:
+            query_parameters['effectiveAt'] = self._serialize.query("effective_at", effective_at, 'iso-8601')
+        if as_at is not None:
+            query_parameters['asAt'] = self._serialize.query("as_at", as_at, 'iso-8601')
+        if instrument_property_keys is not None:
+            query_parameters['instrumentPropertyKeys'] = self._serialize.query("instrument_property_keys", instrument_property_keys, '[str]', div=',')
 
         # Construct headers
         header_parameters = {}
@@ -1706,8 +1713,8 @@ class LUSIDAPI(object):
             header_parameters.update(custom_headers)
 
         # Construct body
-        if codes is not None:
-            body_content = self._serialize.body(codes, '[str]')
+        if aliases is not None:
+            body_content = self._serialize.body(aliases, '[Property]')
         else:
             body_content = None
 
@@ -1722,14 +1729,14 @@ class LUSIDAPI(object):
         deserialized = None
 
         if response.status_code == 200:
-            deserialized = self._deserialize('FindInstrumentsResponse', response)
+            deserialized = self._deserialize('ResourceListOfInstrument', response)
 
         if raw:
             client_raw_response = ClientRawResponse(deserialized, response)
             return client_raw_response
 
         return deserialized
-    find_external_instruments.metadata = {'url': '/api/instruments/$find'}
+    find_instruments.metadata = {'url': '/api/instruments/$find'}
 
     def get_instruments(
             self, code_type=None, codes=None, effective_at=None, as_at=None, instrument_property_keys=None, custom_headers=None, raw=False, **operation_config):
@@ -1809,45 +1816,38 @@ class LUSIDAPI(object):
         return deserialized
     get_instruments.metadata = {'url': '/api/instruments/$get'}
 
-    def find_instruments(
-            self, aliases=None, effective_at=None, as_at=None, instrument_property_keys=None, custom_headers=None, raw=False, **operation_config):
-        """Search instrument definition.
+    def match_instruments(
+            self, code_type=None, codes=None, custom_headers=None, raw=False, **operation_config):
+        """Find externally mastered instruments.
 
-        Get a collection of instruments by a set of identifiers. Optionally, it
-        is possible to decorate each instrument with specified property data.
+        Search for a set of instruments from an external instrument mastering
+        service.
 
-        :param aliases: The list of market aliases (e.g ISIN, Ticker) to find
-         instruments by.
-        :type aliases: list[~lusid.models.Property]
-        :param effective_at: Optional. The effective date of the query
-        :type effective_at: datetime
-        :param as_at: Optional. The AsAt date of the query
-        :type as_at: datetime
-        :param instrument_property_keys: Optional. Keys of the properties to
-         be decorated on to the instrument
-        :type instrument_property_keys: list[str]
+        :param code_type: The type of codes to search for. Possible values
+         include: 'Undefined', 'LusidInstrumentId', 'ReutersAssetId', 'CINS',
+         'Isin', 'Sedol', 'Cusip', 'Ticker', 'ClientInternal', 'Figi',
+         'CompositeFigi', 'ShareClassFigi', 'Wertpapier', 'RIC', 'QuotePermId'
+        :type code_type: str
+        :param codes: The collection of instruments to search for
+        :type codes: list[str]
         :param dict custom_headers: headers that will be added to the request
         :param bool raw: returns the direct response alongside the
          deserialized response
         :param operation_config: :ref:`Operation configuration
          overrides<msrest:optionsforoperations>`.
-        :return: ResourceListOfInstrument or ClientRawResponse if raw=true
-        :rtype: ~lusid.models.ResourceListOfInstrument or
+        :return: MatchInstrumentsResponse or ClientRawResponse if raw=true
+        :rtype: ~lusid.models.MatchInstrumentsResponse or
          ~msrest.pipeline.ClientRawResponse
         :raises:
          :class:`ErrorResponseException<lusid.models.ErrorResponseException>`
         """
         # Construct URL
-        url = self.find_instruments.metadata['url']
+        url = self.match_instruments.metadata['url']
 
         # Construct parameters
         query_parameters = {}
-        if effective_at is not None:
-            query_parameters['effectiveAt'] = self._serialize.query("effective_at", effective_at, 'iso-8601')
-        if as_at is not None:
-            query_parameters['asAt'] = self._serialize.query("as_at", as_at, 'iso-8601')
-        if instrument_property_keys is not None:
-            query_parameters['instrumentPropertyKeys'] = self._serialize.query("instrument_property_keys", instrument_property_keys, '[str]', div=',')
+        if code_type is not None:
+            query_parameters['codeType'] = self._serialize.query("code_type", code_type, 'str')
 
         # Construct headers
         header_parameters = {}
@@ -1856,8 +1856,8 @@ class LUSIDAPI(object):
             header_parameters.update(custom_headers)
 
         # Construct body
-        if aliases is not None:
-            body_content = self._serialize.body(aliases, '[Property]')
+        if codes is not None:
+            body_content = self._serialize.body(codes, '[str]')
         else:
             body_content = None
 
@@ -1872,14 +1872,14 @@ class LUSIDAPI(object):
         deserialized = None
 
         if response.status_code == 200:
-            deserialized = self._deserialize('ResourceListOfInstrument', response)
+            deserialized = self._deserialize('MatchInstrumentsResponse', response)
 
         if raw:
             client_raw_response = ClientRawResponse(deserialized, response)
             return client_raw_response
 
         return deserialized
-    find_instruments.metadata = {'url': '/api/instruments/$query'}
+    match_instruments.metadata = {'url': '/api/instruments/$match'}
 
     def upsert_instruments_properties(
             self, instrument_properties=None, custom_headers=None, raw=False, **operation_config):
@@ -4248,7 +4248,7 @@ class LUSIDAPI(object):
 
         :param domain: The Property Domain of the requested property. Possible
          values include: 'Trade', 'Portfolio', 'Security', 'Holding',
-         'ReferenceHolding', 'TxnType', 'Instrument'
+         'ReferenceHolding', 'TxnType', 'Instrument', 'CutDefinition'
         :type domain: str
         :param scope: The scope of the requested property
         :type scope: str
@@ -4316,7 +4316,7 @@ class LUSIDAPI(object):
 
         :param domain: The Property Domain of the property being updated.
          Possible values include: 'Trade', 'Portfolio', 'Security', 'Holding',
-         'ReferenceHolding', 'TxnType', 'Instrument'
+         'ReferenceHolding', 'TxnType', 'Instrument', 'CutDefinition'
         :type domain: str
         :param scope: The scope of the property to be updated
         :type scope: str
@@ -4387,7 +4387,7 @@ class LUSIDAPI(object):
 
         :param domain: The Property Domain of the property to be deleted.
          Possible values include: 'Trade', 'Portfolio', 'Security', 'Holding',
-         'ReferenceHolding', 'TxnType', 'Instrument'
+         'ReferenceHolding', 'TxnType', 'Instrument', 'CutDefinition'
         :type domain: str
         :param scope: The scope of the property to be deleted
         :type scope: str

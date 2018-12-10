@@ -24,14 +24,20 @@
 from msrest.serialization import Model
 
 
-class UpsertInstrumentRequest(Model):
-    """UpsertInstrumentRequest.
+class InstrumentDefinition(Model):
+    """InstrumentDefinition.
+
+    Variables are only populated by the server, and will be ignored when
+    sending a request.
 
     :param name: Required. The name of the instrument
     :type name: str
     :param identifiers: Required. A set of identifiers that uniquely identify
      this instrument (e.g FIGI, RIC)
     :type identifiers: dict[str, str]
+    :ivar properties: Optional. A collection of properties to upsert on the
+     instrument.
+    :vartype properties: list[~lusid.models.UpsertInstrumentPropertyRequest]
     :param look_through_portfolio_id: Optional. The identifier of the
      portfolio that represents this instrument
     :type look_through_portfolio_id: ~lusid.models.ResourceId
@@ -47,18 +53,21 @@ class UpsertInstrumentRequest(Model):
     _validation = {
         'name': {'required': True},
         'identifiers': {'required': True},
+        'properties': {'readonly': True},
     }
 
     _attribute_map = {
         'name': {'key': 'name', 'type': 'str'},
         'identifiers': {'key': 'identifiers', 'type': '{str}'},
+        'properties': {'key': 'properties', 'type': '[UpsertInstrumentPropertyRequest]'},
         'look_through_portfolio_id': {'key': 'lookThroughPortfolioId', 'type': 'ResourceId'},
         'definition': {'key': 'definition', 'type': 'InstrumentEconomicDefinition'},
     }
 
     def __init__(self, name, identifiers, look_through_portfolio_id=None, definition=None):
-        super(UpsertInstrumentRequest, self).__init__()
+        super(InstrumentDefinition, self).__init__()
         self.name = name
         self.identifiers = identifiers
+        self.properties = None
         self.look_through_portfolio_id = look_through_portfolio_id
         self.definition = definition

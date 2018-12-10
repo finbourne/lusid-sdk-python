@@ -39,20 +39,20 @@ class UpdateInstrumentIdentifierRequest(Model):
      Note that, if an instrument only has one identifier, it is an error to
      remove this.
     :type value: str
-    :param effective_from: The date at which the identifier modification is to
+    :param effective_at: The date at which the identifier modification is to
      be effective from. If unset, will
      default to `now`.
-    :type effective_from: datetime
+    :type effective_at: datetime
     """
 
     _attribute_map = {
         'type': {'key': 'type', 'type': 'str'},
         'value': {'key': 'value', 'type': 'str'},
-        'effective_from': {'key': 'effectiveFrom', 'type': 'iso-8601'},
+        'effective_at': {'key': 'effectiveAt', 'type': 'iso-8601'},
     }
 
-    def __init__(self, type=None, value=None, effective_from=None):
+    def __init__(self, type=None, value=None, effective_at=None):
         super(UpdateInstrumentIdentifierRequest, self).__init__()
         self.type = type
         self.value = value
-        self.effective_from = effective_from
+        self.effective_at = effective_at

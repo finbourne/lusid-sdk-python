@@ -24,8 +24,8 @@
 from msrest.serialization import Model
 
 
-class FindInstrumentsResponse(Model):
-    """FindInstrumentsResponse.
+class MatchInstrumentsResponse(Model):
+    """MatchInstrumentsResponse.
 
     :param href:
     :type href: str
@@ -34,19 +34,19 @@ class FindInstrumentsResponse(Model):
      matching request. If no match was found, then there will be no values in
      the collection
      for that key.
-    :type values: dict[str, list[~lusid.models.InstrumentMatch]]
+    :type values: dict[str, list[~lusid.models.InstrumentDefinition]]
     :param links:
     :type links: list[~lusid.models.Link]
     """
 
     _attribute_map = {
         'href': {'key': 'href', 'type': 'str'},
-        'values': {'key': 'values', 'type': '{[InstrumentMatch]}'},
+        'values': {'key': 'values', 'type': '{[InstrumentDefinition]}'},
         'links': {'key': 'links', 'type': '[Link]'},
     }
 
     def __init__(self, href=None, values=None, links=None):
-        super(FindInstrumentsResponse, self).__init__()
+        super(MatchInstrumentsResponse, self).__init__()
         self.href = href
         self.values = values
         self.links = links

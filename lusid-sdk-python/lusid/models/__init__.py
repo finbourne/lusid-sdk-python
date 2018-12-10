@@ -48,20 +48,19 @@ from .resource_list_of_iunit_definition_dto import ResourceListOfIUnitDefinition
 from .create_derived_transaction_portfolio_request import CreateDerivedTransactionPortfolioRequest
 from .version import Version
 from .portfolio import Portfolio
+from .metric_value import MetricValue
+from .property_value import PropertyValue
+from .upsert_instrument_property_request import UpsertInstrumentPropertyRequest
 from .instrument_economic_definition import InstrumentEconomicDefinition
-from .upsert_instrument_request import UpsertInstrumentRequest
+from .instrument_definition import InstrumentDefinition
 from .property import Property
 from .instrument import Instrument
 from .upsert_instruments_response import UpsertInstrumentsResponse
 from .resource_list_of_instrument import ResourceListOfInstrument
 from .update_instrument_identifier_request import UpdateInstrumentIdentifierRequest
 from .delete_instrument_response import DeleteInstrumentResponse
-from .instrument_match import InstrumentMatch
-from .find_instruments_response import FindInstrumentsResponse
 from .get_instruments_response import GetInstrumentsResponse
-from .metric_value import MetricValue
-from .property_value import PropertyValue
-from .create_instrument_property_request import CreateInstrumentPropertyRequest
+from .match_instruments_response import MatchInstrumentsResponse
 from .delete_instrument_property_request import DeleteInstrumentPropertyRequest
 from .instrument_property import InstrumentProperty
 from .upsert_instrument_properties_response import UpsertInstrumentPropertiesResponse
@@ -189,20 +188,19 @@ __all__ = [
     'CreateDerivedTransactionPortfolioRequest',
     'Version',
     'Portfolio',
+    'MetricValue',
+    'PropertyValue',
+    'UpsertInstrumentPropertyRequest',
     'InstrumentEconomicDefinition',
-    'UpsertInstrumentRequest',
+    'InstrumentDefinition',
     'Property',
     'Instrument',
     'UpsertInstrumentsResponse',
     'ResourceListOfInstrument',
     'UpdateInstrumentIdentifierRequest',
     'DeleteInstrumentResponse',
-    'InstrumentMatch',
-    'FindInstrumentsResponse',
     'GetInstrumentsResponse',
-    'MetricValue',
-    'PropertyValue',
-    'CreateInstrumentPropertyRequest',
+    'MatchInstrumentsResponse',
     'DeleteInstrumentPropertyRequest',
     'InstrumentProperty',
     'UpsertInstrumentPropertiesResponse',

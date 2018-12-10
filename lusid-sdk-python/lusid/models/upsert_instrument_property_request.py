@@ -24,28 +24,23 @@
 from msrest.serialization import Model
 
 
-class InstrumentMatch(Model):
-    """InstrumentMatch.
+class UpsertInstrumentPropertyRequest(Model):
+    """UpsertInstrumentPropertyRequest.
 
-    :param name: The name of the instrument
-    :type name: str
-    :param identifiers: The set of identifiers that uniquely identify this
-     instrument
-    :type identifiers: dict[str, str]
-    :param properties: Any requested properties are decorated on the
-     instrument, and will have a value of
-     'Unknown', if no value was found for this instrument.
-    :type properties: list[~lusid.models.Property]
+    :param instrument_property_key: The property key of the property, e.g,
+     'Instrument/default/Isin'
+    :type instrument_property_key: str
+    :param property: The value of the property, which must not be empty or
+     null. e.g, 'US0378331005'
+    :type property: ~lusid.models.PropertyValue
     """
 
     _attribute_map = {
-        'name': {'key': 'name', 'type': 'str'},
-        'identifiers': {'key': 'identifiers', 'type': '{str}'},
-        'properties': {'key': 'properties', 'type': '[Property]'},
+        'instrument_property_key': {'key': 'instrumentPropertyKey', 'type': 'str'},
+        'property': {'key': 'property', 'type': 'PropertyValue'},
     }
 
-    def __init__(self, name=None, identifiers=None, properties=None):
-        super(InstrumentMatch, self).__init__()
-        self.name = name
-        self.identifiers = identifiers
-        self.properties = properties
+    def __init__(self, instrument_property_key=None, property=None):
+        super(UpsertInstrumentPropertyRequest, self).__init__()
+        self.instrument_property_key = instrument_property_key
+        self.property = property
