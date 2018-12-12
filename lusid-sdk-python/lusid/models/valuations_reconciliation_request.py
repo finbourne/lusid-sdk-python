@@ -24,33 +24,35 @@
 from msrest.serialization import Model
 
 
-class Results(Model):
-    """Results.
+class ValuationsReconciliationRequest(Model):
+    """ValuationsReconciliationRequest.
 
-    :param version:
-    :type version: ~lusid.models.Version
-    :param href:
-    :type href: str
-    :param values:
-    :type values: str
-    :param format: Possible values include: 'DataReader', 'Portfolio'
-    :type format: str or ~lusid.models.enum
-    :param links:
-    :type links: list[~lusid.models.Link]
+    :param left: The specification of the left hand side of the valuation
+     (risk) reconciliation
+    :type left: ~lusid.models.ValuationReconciliationRequest
+    :param right: The specification of the right hand side of the valuation
+     (risk) reconciliation
+    :type right: ~lusid.models.ValuationReconciliationRequest
+    :param instrument_property_keys: Instrument properties to be included with
+     any identified breaks. These properties will be in the effective and AsAt
+     dates of the left portfolio
+    :type instrument_property_keys: list[str]
     """
 
-    _attribute_map = {
-        'version': {'key': 'version', 'type': 'Version'},
-        'href': {'key': 'href', 'type': 'str'},
-        'values': {'key': 'values', 'type': 'str'},
-        'format': {'key': 'format', 'type': 'str'},
-        'links': {'key': 'links', 'type': '[Link]'},
+    _validation = {
+        'left': {'required': True},
+        'right': {'required': True},
+        'instrument_property_keys': {'required': True},
     }
 
-    def __init__(self, version=None, href=None, values=None, format=None, links=None):
-        super(Results, self).__init__()
-        self.version = version
-        self.href = href
-        self.values = values
-        self.format = format
-        self.links = links
+    _attribute_map = {
+        'left': {'key': 'left', 'type': 'ValuationReconciliationRequest'},
+        'right': {'key': 'right', 'type': 'ValuationReconciliationRequest'},
+        'instrument_property_keys': {'key': 'instrumentPropertyKeys', 'type': '[str]'},
+    }
+
+    def __init__(self, left, right, instrument_property_keys):
+        super(ValuationsReconciliationRequest, self).__init__()
+        self.left = left
+        self.right = right
+        self.instrument_property_keys = instrument_property_keys

@@ -99,6 +99,8 @@ from .perpetual_property import PerpetualProperty
 from .currency_and_amount import CurrencyAndAmount
 from .reconciliation_break import ReconciliationBreak
 from .resource_list_of_reconciliation_break import ResourceListOfReconciliationBreak
+from .valuation_reconciliation_request import ValuationReconciliationRequest
+from .valuations_reconciliation_request import ValuationsReconciliationRequest
 from .create_property_definition_request import CreatePropertyDefinitionRequest
 from .property_definition import PropertyDefinition
 from .resource_list_of_property_definition import ResourceListOfPropertyDefinition
@@ -239,6 +241,8 @@ __all__ = [
     'CurrencyAndAmount',
     'ReconciliationBreak',
     'ResourceListOfReconciliationBreak',
+    'ValuationReconciliationRequest',
+    'ValuationsReconciliationRequest',
     'CreatePropertyDefinitionRequest',
     'PropertyDefinition',
     'ResourceListOfPropertyDefinition',

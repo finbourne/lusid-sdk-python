@@ -24,33 +24,28 @@
 from msrest.serialization import Model
 
 
-class Results(Model):
-    """Results.
+class ValuationReconciliationRequest(Model):
+    """ValuationReconciliationRequest.
 
-    :param version:
-    :type version: ~lusid.models.Version
-    :param href:
-    :type href: str
-    :param values:
-    :type values: str
-    :param format: Possible values include: 'DataReader', 'Portfolio'
-    :type format: str or ~lusid.models.enum
-    :param links:
-    :type links: list[~lusid.models.Link]
+    :param portfolio_id: The id of the portfolio on which to run the
+     aggregation request
+    :type portfolio_id: ~lusid.models.ResourceId
+    :param aggregation: The specification of the aggregation request to be
+     used to obtain the risk
+    :type aggregation: ~lusid.models.AggregationRequest
     """
 
-    _attribute_map = {
-        'version': {'key': 'version', 'type': 'Version'},
-        'href': {'key': 'href', 'type': 'str'},
-        'values': {'key': 'values', 'type': 'str'},
-        'format': {'key': 'format', 'type': 'str'},
-        'links': {'key': 'links', 'type': '[Link]'},
+    _validation = {
+        'portfolio_id': {'required': True},
+        'aggregation': {'required': True},
     }
 
-    def __init__(self, version=None, href=None, values=None, format=None, links=None):
-        super(Results, self).__init__()
-        self.version = version
-        self.href = href
-        self.values = values
-        self.format = format
-        self.links = links
+    _attribute_map = {
+        'portfolio_id': {'key': 'portfolioId', 'type': 'ResourceId'},
+        'aggregation': {'key': 'aggregation', 'type': 'AggregationRequest'},
+    }
+
+    def __init__(self, portfolio_id, aggregation):
+        super(ValuationReconciliationRequest, self).__init__()
+        self.portfolio_id = portfolio_id
+        self.aggregation = aggregation

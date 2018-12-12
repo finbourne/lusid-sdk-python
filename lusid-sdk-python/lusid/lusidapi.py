@@ -339,6 +339,16 @@ class LUSIDAPI(object):
     | &lt;a name="230"&gt;230&lt;/a&gt;|TransactionTypeNotFound|  |
     | &lt;a name="231"&gt;231&lt;/a&gt;|TransactionTypeDuplication|  |
     | &lt;a name="232"&gt;232&lt;/a&gt;|PortfolioDoesNotExistAtGivenDate|  |
+    | &lt;a name="301"&gt;301&lt;/a&gt;|DependenciesFailure|  |
+    | &lt;a name="304"&gt;304&lt;/a&gt;|PortfolioPreprocessFailure|  |
+    | &lt;a name="310"&gt;310&lt;/a&gt;|ValuationEngineFailure|  |
+    | &lt;a name="311"&gt;311&lt;/a&gt;|TaskFactoryFailure|  |
+    | &lt;a name="312"&gt;312&lt;/a&gt;|TaskEvaluationFailure|  |
+    | &lt;a name="350"&gt;350&lt;/a&gt;|InstrumentFailure|  |
+    | &lt;a name="351"&gt;351&lt;/a&gt;|CashFlowsFailure|  |
+    | &lt;a name="370"&gt;370&lt;/a&gt;|ResultRetrievalFailure|  |
+    | &lt;a name="371"&gt;371&lt;/a&gt;|ResultProcessingFailure|  |
+    | &lt;a name="372"&gt;372&lt;/a&gt;|VendorResultProcessingFailure|  |
     | &lt;a name="-10"&gt;-10&lt;/a&gt;|ServerConfigurationError|  |
     | &lt;a name="-1"&gt;-1&lt;/a&gt;|Unknown error|  |
 
@@ -358,7 +368,7 @@ class LUSIDAPI(object):
         self._client = ServiceClient(self.config.credentials, self.config)
 
         client_models = {k: v for k, v in models.__dict__.items() if isinstance(v, type)}
-        self.api_version = '0.9.3'
+        self.api_version = '0.9.6'
         self._serialize = Serializer(client_models)
         self._deserialize = Deserializer(client_models)
 
@@ -4106,6 +4116,85 @@ class LUSIDAPI(object):
 
         return deserialized
     reconcile_holdings.metadata = {'url': '/api/portfolios/$reconcileholdings'}
+
+    def reconcile_valuation(
+            self, request=None, sort_by=None, start=None, limit=None, filter=None, custom_headers=None, raw=False, **operation_config):
+        """Reconcile valuations performed on one or two sets of holdings using one
+        or two configuration recipes.
+
+        Perform valuation of one or two set of holdings using different one or
+        two configuration recipes. Produce a breakdown of the resulting
+        differences in valuation.
+
+        :param request: The specifications of the inputs to the reconciliation
+        :type request: ~lusid.models.ValuationsReconciliationRequest
+        :param sort_by: Optional. Order the results by these fields. Use use
+         the '-' sign to denote descending order e.g. -MyFieldName
+        :type sort_by: list[str]
+        :param start: Optional. When paginating, skip this number of results
+        :type start: int
+        :param limit: Optional. When paginating, limit the number of returned
+         results to this many.
+        :type limit: int
+        :param filter: Optional. Expression to filter the result set
+        :type filter: str
+        :param dict custom_headers: headers that will be added to the request
+        :param bool raw: returns the direct response alongside the
+         deserialized response
+        :param operation_config: :ref:`Operation configuration
+         overrides<msrest:optionsforoperations>`.
+        :return: ResourceListOfReconciliationBreak or ClientRawResponse if
+         raw=true
+        :rtype: ~lusid.models.ResourceListOfReconciliationBreak or
+         ~msrest.pipeline.ClientRawResponse
+        :raises:
+         :class:`ErrorResponseException<lusid.models.ErrorResponseException>`
+        """
+        # Construct URL
+        url = self.reconcile_valuation.metadata['url']
+
+        # Construct parameters
+        query_parameters = {}
+        if sort_by is not None:
+            query_parameters['sortBy'] = self._serialize.query("sort_by", sort_by, '[str]', div=',')
+        if start is not None:
+            query_parameters['start'] = self._serialize.query("start", start, 'int')
+        if limit is not None:
+            query_parameters['limit'] = self._serialize.query("limit", limit, 'int')
+        if filter is not None:
+            query_parameters['filter'] = self._serialize.query("filter", filter, 'str')
+
+        # Construct headers
+        header_parameters = {}
+        header_parameters['Content-Type'] = 'application/json-patch+json; charset=utf-8'
+        if custom_headers:
+            header_parameters.update(custom_headers)
+
+        # Construct body
+        if request is not None:
+            body_content = self._serialize.body(request, 'ValuationsReconciliationRequest')
+        else:
+            body_content = None
+
+        # Construct and send request
+        request = self._client.post(url, query_parameters)
+        response = self._client.send(
+            request, header_parameters, body_content, stream=False, **operation_config)
+
+        if response.status_code not in [200]:
+            raise models.ErrorResponseException(self._deserialize, response)
+
+        deserialized = None
+
+        if response.status_code == 200:
+            deserialized = self._deserialize('ResourceListOfReconciliationBreak', response)
+
+        if raw:
+            client_raw_response = ClientRawResponse(deserialized, response)
+            return client_raw_response
+
+        return deserialized
+    reconcile_valuation.metadata = {'url': '/api/portfolios/$reconcileValuation'}
 
     def get_multiple_property_definitions(
             self, property_keys=None, as_at=None, sort_by=None, start=None, limit=None, filter=None, custom_headers=None, raw=False, **operation_config):

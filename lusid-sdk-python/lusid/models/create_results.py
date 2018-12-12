@@ -28,25 +28,38 @@ class CreateResults(Model):
     """CreateResults.
 
     :param data:
-    :type data: object
+    :type data: str
     :param scope:
     :type scope: str
-    :param key:
+    :param key: The key is a unique point in 'run' space. For a given scope
+     and time point, one would wish to
+     identify a unique result set for a given recipe. In essence, this key is
+     the unique identifier for the tuple (recipe,portfolios)
+     However, that only matters when one is trying to use it automatically to
+     retrieve them.
+     A question becomes whether we would wish to store groups of protfolio
+     results together, or only single ones.
+     Also, whether we would accept uploading of groups and then split them
+     apart.
     :type key: str
     :param date_property:
     :type date_property: datetime
+    :param format: Possible values include: 'DataReader', 'Portfolio'
+    :type format: str or ~lusid.models.enum
     """
 
     _attribute_map = {
-        'data': {'key': 'data', 'type': 'object'},
+        'data': {'key': 'data', 'type': 'str'},
         'scope': {'key': 'scope', 'type': 'str'},
         'key': {'key': 'key', 'type': 'str'},
         'date_property': {'key': 'date', 'type': 'iso-8601'},
+        'format': {'key': 'format', 'type': 'str'},
     }
 
-    def __init__(self, data=None, scope=None, key=None, date_property=None):
+    def __init__(self, data=None, scope=None, key=None, date_property=None, format=None):
         super(CreateResults, self).__init__()
         self.data = data
         self.scope = scope
         self.key = key
         self.date_property = date_property
+        self.format = format
