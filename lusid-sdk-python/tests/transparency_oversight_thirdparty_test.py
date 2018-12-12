@@ -9,7 +9,7 @@ import lusid
 import lusid.models as models
 from unittest import TestCase
 from datetime import datetime, timedelta
-from finbournetest import TestFinbourneApi, timeitgit 
+from finbournetest import TestFinbourneApi, timeit
 
 try:
     # Python 3.x
@@ -1076,6 +1076,8 @@ class transparencyOversightThirdParty(TestFinbourneApi):
                                                          transaction_properties={'Trade/{}/late_trade'.format(
                                                              self.internal_scope_code): models.PropertyValue(
                                                              label_value='True')})
+
+                    # tk - test to check that this property has been added successfully
 
     @timeit
     def change_fund_accountants(self):
