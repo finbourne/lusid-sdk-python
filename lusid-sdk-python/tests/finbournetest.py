@@ -7,6 +7,7 @@ import lusid.models as models
 from unittest import TestCase
 from msrest.authentication import BasicTokenAuthentication
 from datetime import datetime, timedelta
+from timeit import default_timer as timer
 
 try:
     # Python 3.x
@@ -14,6 +15,24 @@ try:
 except ImportError:
     # Python 2.7
     from urllib import pathname2url
+
+
+def timeit(func):
+    '''
+    This function is used as a decarator i.e. @timeit for a function to time how
+    long it takes to run
+    '''
+    def timed(*args, **kwargs):
+        #start timer
+        start = timer()
+        #run function
+        result = func(*args, **kwargs)
+        #end timer
+        end = timer()
+        #print the time taken to run the function
+        print (func.__name__, ' took ', end-start, ' seconds to execute')
+        return result
+    return timed
 
 
 class TestFinbourneApi(TestCase):

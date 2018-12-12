@@ -9,7 +9,7 @@ import lusid
 import lusid.models as models
 from unittest import TestCase
 from datetime import datetime, timedelta
-from finbournetest import TestFinbourneApi
+from finbournetest import TestFinbourneApi, timeitgit 
 
 try:
     # Python 3.x
@@ -18,8 +18,9 @@ except ImportError:
     # Python 2.7
     from urllib import pathname2url
 
-class transparencyOversightThirdParty(TestFinbourneApi):
 
+class transparencyOversightThirdParty(TestFinbourneApi):
+    @timeit
     def import_data(self):
         '''
         We are an asset manager who has outsourced our fund accounting. We have multiple clients, each with multiple
@@ -85,6 +86,7 @@ class transparencyOversightThirdParty(TestFinbourneApi):
             ]
         }
 
+    @timeit
     def create_portfolios(self):
         '''
         Let us create our portfolios and portfolio groups in both our internal and fund accountant scopes.
@@ -95,7 +97,7 @@ class transparencyOversightThirdParty(TestFinbourneApi):
         These portfolios have been live for 2 years, we just haven't added them to the system yet, so when we
         create them we will specify the date they went live using the 'created' parameter
         '''
-
+        portfolio_creation_date = (datetime.today() - timedelta(days=895)).isoformat()
         # Iterate over our portfolio groups selecting the name of the group and the list of portfolios
         for portfolio_group_code, portfolio_group in self.client_portfolios.items():
             # Loop over our list of portfolios selecting the portfolio code
@@ -105,12 +107,12 @@ class transparencyOversightThirdParty(TestFinbourneApi):
                                                                              code=portfolio_code,
                                                                              base_currency='GBP',
                                                                              description=portfolio_code,
-                                                                             created=(datetime.today() - timedelta(days=895)).isoformat())
-                # Create our portfolio in the internal scope
+                                                                             created=portfolio_creation_date)
+                # Create our portfolios in the internal scope
                 portfolio_internal = self.client.create_portfolio(scope=self.internal_scope_code,
                                                                   create_request=portfolio_request)
 
-                # Create our portfolio in the fund accountant scope
+                # Create our portfolios in the fund accountant scope
                 portfolio_fund_accountant = self.client.create_portfolio(scope=self.fund_accountant_scope_code,
                                                                          create_request=portfolio_request)
 
@@ -119,14 +121,15 @@ class transparencyOversightThirdParty(TestFinbourneApi):
                 self.portfolio_creation_tests(portfolio_fund_accountant, portfolio_request, self.fund_accountant_scope_code)
 
             '''
-            To create our groups we need the scope and code of each of our portfolios. In LUSID these are contained
-            inside a ResourceId object. We use ResourceId objects anytime we need to specify the scope and code of
-            an object such as a portfolio. 
+            To create our groups we need the scope and code of each of our portfolios that we want to include in the 
+            group. In LUSID these are contained inside a ResourceId object. We use ResourceId objects anytime we need 
+            to specify the scope and code of an object.
             
             This means that unlike when we created the portfolios we need two separate requests to create our groups. 
             One for each scope. 
             '''
-            # Create the lists of resourceids for each scope, these are the portfolios to add to the group
+
+            # Create the lists of ResourceIds for each scope, these are the portfolios to add to the group
             portfolio_resourceids_internal = [models.ResourceId(scope=self.internal_scope_code, code=portfolio_code) for portfolio_code in portfolio_group]
             portfolio_resourceids_fund_accountant = [models.ResourceId(scope=self.fund_accountant_scope_code, code=portfolio_code) for portfolio_code in portfolio_group]
 
@@ -152,9 +155,11 @@ class transparencyOversightThirdParty(TestFinbourneApi):
             self.portfolio_group_creation_tests(portfolio_group_internal, portfolio_group_request_internal, self.internal_scope_code)
             self.portfolio_group_creation_tests(portfolio_group_fund_accountant, portfolio_group_request_fund_accountant, self.fund_accountant_scope_code)
 
+    @timeit
     def create_entitlements(self):
         pass
 
+    @timeit
     def create_holdings(self):
         '''
         Now that we have our portfolios and groups set up for our clients we can add in their current holdings. We will
@@ -490,6 +495,7 @@ class transparencyOversightThirdParty(TestFinbourneApi):
                                            code=portfolio_name,
                                            effective_at=(datetime.today() - timedelta(days=2)).isoformat())
 
+    @timeit
     def add_daily_transactions(self):
         '''
         Now that we have our portfolios populated with their holdings we are going to simulate a day of trading. We
@@ -705,10 +711,7 @@ class transparencyOversightThirdParty(TestFinbourneApi):
                                               as_at_date=datetime.today().isoformat(),
                                               batch_transactions_request=portfolio_transactions)
 
-        holdingstest = self.client.get_holdings(scope=self.internal_scope_code,
-                                                code='client-{}-strategy-balanced'.format(self.client_1_portfolio_group_id),
-                                                effective_at=(datetime.today()+timedelta(days=5)).isoformat())
-
+    @timeit
     def update_fund_accountant_record(self):
         '''
         It is early in the morning before trading begins and our fund accountant has just sent us the daily report
@@ -847,6 +850,7 @@ class transparencyOversightThirdParty(TestFinbourneApi):
         
         This time we use set holdings rather than adjust holdings tk - why?
         '''
+
         # Iterate over our portfolio groups
         for portfolio_group_name, portfolio_group in holding_adjustments.items():
             # Iterate over our portfolios
@@ -863,6 +867,7 @@ class transparencyOversightThirdParty(TestFinbourneApi):
                                            code=portfolio_name,
                                            effective_at=(datetime.today()).isoformat())
 
+    @timeit
     def reconcile_records(self):
         '''
         Now that we have the fund accountant scope updated with this morning's report, we need to see how different the
@@ -881,9 +886,9 @@ class transparencyOversightThirdParty(TestFinbourneApi):
         between our internal accounts and fund accountant's records.
         '''
 
-        reconciled_portfolios = {}
+        self.reconciled_portfolios = {}
         for portfolio_group_name, portfolio_group in self.client_portfolios.items():
-            reconciled_portfolios[portfolio_group_name] = {}
+            self.reconciled_portfolios[portfolio_group_name] = {}
             for portfolio_name in portfolio_group:
 
                 internal_portfolio = models.PortfolioReconciliationRequest(portfolio_id=models.ResourceId(
@@ -905,9 +910,7 @@ class transparencyOversightThirdParty(TestFinbourneApi):
                 reconciliation = self.client.reconcile_holdings(request=reconcile_holdings_request)
 
                 if reconciliation.count > 0:
-                    reconciled_portfolios[portfolio_group_name][portfolio_name] = reconciliation
-                else:
-                    reconciled_portfolios[portfolio_group_name][portfolio_name] = 'InSync'
+                    self.reconciled_portfolios[portfolio_group_name][portfolio_name] = reconciliation
 
         '''
         Okay so looking over our reconciliations we can see that 2 of our portfolios do not reconcile. The rest match
@@ -936,27 +939,28 @@ class transparencyOversightThirdParty(TestFinbourneApi):
         that perhaps a Sell transaction has not gone through.
         '''
 
-    def identify_discrepencies(self):
+    @timeit
+    def identify_discrepancies(self):
         '''
         So we have identified a number of discrepancies between our internal records and the fund accountant's records.
         It seems as though perhaps a buy and a sell transaction have not gone through.
 
-        We do know that the fund accountant finalise their accounts 8 hours after trading opens each day. Any
-        transactions posted after that won't appear in the next morning's report. Perhaps we had some late trades
-        yesterday which caused the issue.
+        We do know that the fund accountant finalise their accounts at the close of trade which is 8 hours after trading
+        opens each day. Any transactions posted after that won't appear in the next morning's report. Perhaps we had
+        some late trades yesterday which caused the issue.
 
-        Because LUSID uses a bi-temporal data store, we can wind back the clock to 8 hours after trading yesterday and
-        run the reconciliationon again.
+        We can wind back the clock to the close of trade yesterday and see how our two records compare.
         '''
-        reconciled_portfolios = {}
+        reconciled_portfolios_trade_close = {}
+        trade_close_time = (datetime.today() - timedelta(days=1) + timedelta(hours=8)).isoformat()
         for portfolio_group_name, portfolio_group in self.client_portfolios.items():
-            reconciled_portfolios[portfolio_group_name] = {}
+            reconciled_portfolios_trade_close[portfolio_group_name] = {}
             for portfolio_name in portfolio_group:
 
                 internal_portfolio = models.PortfolioReconciliationRequest(portfolio_id=models.ResourceId(
                                                                            scope=self.internal_scope_code,
                                                                            code=portfolio_name),
-                                                                           effective_at=(datetime.today() - timedelta(days=1) + timedelta(hours=8)).isoformat(),
+                                                                           effective_at=trade_close_time,
                                                                            as_at=datetime.today().isoformat())
 
                 fund_accountant_portfolio = models.PortfolioReconciliationRequest(portfolio_id=models.ResourceId(
@@ -972,26 +976,126 @@ class transparencyOversightThirdParty(TestFinbourneApi):
                 reconciliation = self.client.reconcile_holdings(request=reconcile_holdings_request)
 
                 if reconciliation.count > 0:
-                    reconciled_portfolios[portfolio_group_name][portfolio_name] = reconciliation
-                else:
-                    reconciled_portfolios[portfolio_group_name][portfolio_name] = 'InSync'
-
-        # Understand that it was a late trade (where on the timeline do things start to diverge)
-        # Use BY instead of Buy
+                    reconciled_portfolios_trade_close[portfolio_group_name][portfolio_name] = reconciliation
 
         '''
-        Here we can see that the two portfolios reconcile perfectly. Let's find out what happened after trading....
+        Here we can see that the two portfolios reconcile perfectly. Let's find out what happened after trading. So
+        any divergence between our records and those of the fund accountant happened after the close of trading. Let's
+        take a look at what transactions happened after this time.
+        '''
+
+        late_trades = {}
+        for portfolio_group_name, portfolio_group in self.client_portfolios.items():
+            late_trades[portfolio_group_name] = {}
+            for portfolio_name in portfolio_group:
+
+                late_trade = self.client.get_transactions(scope=self.internal_scope_code,
+                                                          code=portfolio_name,
+                                                          from_transaction_date=trade_close_time,
+                                                          to_transaction_date=datetime.today().isoformat())
+                if late_trade.count > 0:
+                    late_trades[portfolio_group_name][portfolio_name] = late_trade
+
+        #tk - print late trades here
+
+        '''
+        Here we can see that there are two trades that happened after this time. We can see one is a buy for 10501
+        instruments of LUID_4TMKXHQ7 and one is a sell of 342,000 instruments of LUID_6NGAW9RS. This corresponds
+        with our reconciliation breaks and thus these must be the missing transactions.
         
-        tk - complete
+        In practice we want to be able to make these checks automatically. This will prevent our investment team
+        from having to spend time each morning manually identifying these discrepancies. 
+        
+        We can do this by comparing our late trades with our reconciliation breaks to identify matched exceptions.
         '''
-        print ('wait')
-    
-    def adjust_portfolio_holdings(self):
-        pass
+        # Initialise our dictionary to hold our exceptions
+        matched_exceptions = {}
+        # Iterate over our portfolio groups
+        for portfolio_group_name, portfolio_group in self.reconciled_portfolios.items():
+            # Create a dictionary to hold our portfolios
+            matched_exceptions[portfolio_group_name] = {}
+            # Iterate over our portfolios and the reconciliation breaks we have identified for them
+            for portfolio_name, reconciliation_breaks in portfolio_group.items():
+                # Initialise our list to capture exceptions
+                matched_exceptions[portfolio_group_name][portfolio_name] = []
+                # Iterate over each reconciliation break
+                for reconciliation_break in reconciliation_breaks.values:
+                    '''
+                    Here we use the absolute difference in units to reduce the complexity in identifying if a
+                    transaction is a buy or a sell and whether we need to match a positive or negative difference in
+                    units. In practice we can add in the ability to check the direction as well
+                    '''
+                    units = abs(reconciliation_break.difference_units)
+                    instrument_uid = reconciliation_break.instrument_uid
+                    # Check if there are any late trades for our current portfolio group
+                    if len(late_trades[portfolio_group_name]) > 0:
+                        # Check if there are any late trades for our current portfolio
+                        if portfolio_name in late_trades[portfolio_group_name].keys():
+                            # Retrieve our late trade transactions
+                            transactions = late_trades[portfolio_group_name][portfolio_name]
+                            # Iterate over the transactions
+                            for transaction in transactions.values:
+                                # If the instrument id and units match, we have identified the cause of the reconciliation break
+                                if (transaction.instrument_uid == instrument_uid) and (transaction.units == transaction.units):
+                                    matched_exceptions[portfolio_group_name][portfolio_name].append(transaction.transaction_id)
 
+        '''
+        Now that we have identified the reason for the reconciliation breaks, we want to flag the transactions in
+        question so that we can confirm using tomorrow's report whether or not they have finally been included in the 
+        fund accountant's reporting. 
+        
+        To do this we can use LUSID properties. We can create properties for any object inside LUSID. 
+        These properties are defined by us in advance.
+        
+        In this case we will create a property called 'late_trade' which will be a boolean property that is True if the
+        trade has been flagged as a late trade. We will make it so that if we add this property to a trade it is
+        required to have the value.
+        
+        When we set up a property we are required to give it a data type. We do this by specifying a pre-configured
+        data type using its ResourceId. Once again this is the scope and code of the object. There are a number of 
+        pre-configured types in the default scope which we can draw from. In this case we will use the boolean type.
+        This means that when we set the 'late_trade' property we have to specify a value of 'True' or 'False'. 
+        '''
+
+        property = models.CreatePropertyDefinitionRequest(domain='Trade',
+                                                          scope=self.internal_scope_code,
+                                                          code='late_trade',
+                                                          value_required=True,
+                                                          display_name='late_trade',
+                                                          data_type_id=models.ResourceId(scope='default',
+                                                                                         code='boolean'))
+
+        self.client.create_property_definition(definition=property)
+
+        for portfolio_group_name, portfolio_group in matched_exceptions.items():
+            for portfolio_name, exceptions in portfolio_group.items():
+                for transaction_id in exceptions:
+                    self.client.add_transaction_property(scope=self.internal_scope_code,
+                                                         code=portfolio_name,
+                                                         transaction_id=transaction_id,
+                                                         transaction_properties={'Trade/{}/late_trade'.format(
+                                                             self.internal_scope_code): models.PropertyValue(
+                                                             label_value='True')})
+
+    @timeit
     def change_fund_accountants(self):
-        pass
+        '''
+        After a few months of reconciling our records with the fund accountant and building algorithms to automatically
+        identify exceptions, we have a pretty good idea of the main causes of the discrepancies between our records
+        and those of the fund accountant. We have prepared a report with some recommendations for them in order to
+        address these causes.
 
+        Unfortunately they don't have much interest in working with us. We have been in talks with another provider
+        who can address most of our concerns and have decied to switch fund accountants.
+
+        Fortunately, we have a built up a good cache of historical data inside LUSID and so can easily change providers
+        without relying on our incumbent fund accountant to work with the new one.
+
+        To change providers, we can switch our entitlements to give the new accountant access to our records and
+        ensure that our old provider no longer has access.
+        '''
+
+    @timeit
     def test_transparency_oversight(self):
         self.import_data()
         self.create_portfolios()
@@ -1000,8 +1104,7 @@ class transparencyOversightThirdParty(TestFinbourneApi):
         self.add_daily_transactions()
         self.update_fund_accountant_record()
         self.reconcile_records()
-        self.identify_discrepencies()
-        self.adjust_portfolio_holdings()
+        self.identify_discrepancies()
         self.change_fund_accountants()
 
 if __name__ == '__main__':
