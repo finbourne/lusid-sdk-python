@@ -163,7 +163,7 @@ class transparencyOversightThirdParty(TestFinbourneApi):
     def create_holdings(self):
         '''
         Now that we have our portfolios and groups set up for our clients we can add in their current holdings. We will
-        with having the internal scope and the fund account scope completely in sync with exactly the same
+        start with having the internal scope and the fund account scope completely in sync with exactly the same
         holdings. This will be our initial state.
         '''
 
@@ -294,7 +294,7 @@ class transparencyOversightThirdParty(TestFinbourneApi):
         defined for each instrument, however it is preferred to use the LUID as this is guaranteed to be unique and 
         there is absolutely no chance of a collision. 
 
-        We there want to add our newly created LUIDs to our initial holdings for future use
+        We therefore want to add our newly created LUIDs to our initial holdings for future use
         '''
 
         # Loop over our recently upserted instruments
