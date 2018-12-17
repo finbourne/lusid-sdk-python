@@ -87,7 +87,7 @@ class transparencyStrategies(TestFinbourneApi):
         We onboarded these clients 5 days ago. When we create the portfolios we can set the creation date using the
         'created' argument. This will allow us to backdate holdings and transactions.
         '''
-        self.created_date = (datetime.today() - timedelta(days=5)).isoformat()
+        self.created_date = (datetime.now(pytz.UTC) - timedelta(days=5)).isoformat()
         # Iterate over our portfolio groups selecting the name of the group and the list of portfolios
         for portfolio_group_code, portfolio_group in self.client_portfolios.items():
             # Loop over our list of portfolios selecting the portfolio code
@@ -504,7 +504,7 @@ class transparencyStrategies(TestFinbourneApi):
         
         Let us define the trades below. Keeping in mind that these would be generated from our order management or
         execution management system in reality. Each trade has a unique identifier prefixed with tid_. It also has a
-        transaction date and settlement date. We can consider datetime.today()-timedelta(days=1) to be the start of the
+        transaction date and settlement date. We can consider datetime.now(pytz.UTC)-timedelta(days=1) to be the start of the
         trading day and the number of hours/days after this to indicate when the trade was executed/settled.
         '''
 
@@ -516,8 +516,8 @@ class transparencyStrategies(TestFinbourneApi):
                     'tid_{}'.format(uuid.uuid4()): {
                         'type': 'Sell',
                         'instrument_uid': self.instrument_universe['WPP_LondonStockEx_WPP']['identifiers']['LUID'],
-                        'transaction_date': (datetime.today() - timedelta(days=1) + timedelta(hours=2)).isoformat(),
-                        'settlement_date': (datetime.today() - timedelta(days=1) + timedelta(days=2)).isoformat(),
+                        'transaction_date': (datetime.now(pytz.UTC) - timedelta(days=1) + timedelta(hours=2)).isoformat(),
+                        'settlement_date': (datetime.now(pytz.UTC) - timedelta(days=1) + timedelta(days=2)).isoformat(),
                         'units': 265600,
                         'transaction_price': 8.9100,
                         'transaction_currency': 'GBP',
@@ -529,8 +529,8 @@ class transparencyStrategies(TestFinbourneApi):
                         'type': 'Buy',
                         'instrument_uid': self.instrument_universe['MicroFocus_LondonStockEx_MCRO']['identifiers'][
                             'LUID'],
-                        'transaction_date': (datetime.today() - timedelta(days=1) + timedelta(hours=5)).isoformat(),
-                        'settlement_date': (datetime.today() - timedelta(days=1) + timedelta(days=2)).isoformat(),
+                        'transaction_date': (datetime.now(pytz.UTC) - timedelta(days=1) + timedelta(hours=5)).isoformat(),
+                        'settlement_date': (datetime.now(pytz.UTC) - timedelta(days=1) + timedelta(days=2)).isoformat(),
                         'units': 15074,
                         'transaction_price': 13.2867,
                         'transaction_currency': 'GBP',
@@ -546,8 +546,8 @@ class transparencyStrategies(TestFinbourneApi):
                         'type': 'Sell',
                         'instrument_uid': self.instrument_universe['Kingfisher_LondonStockEx_KGF']['identifiers'][
                             'LUID'],
-                        'transaction_date': (datetime.today() - timedelta(days=1) + timedelta(hours=6)).isoformat(),
-                        'settlement_date': (datetime.today() - timedelta(days=1) + timedelta(days=2)).isoformat(),
+                        'transaction_date': (datetime.now(pytz.UTC) - timedelta(days=1) + timedelta(hours=6)).isoformat(),
+                        'settlement_date': (datetime.now(pytz.UTC) - timedelta(days=1) + timedelta(days=2)).isoformat(),
                         'units': 325000,
                         'transaction_price': 2.3450,
                         'transaction_currency': 'GBP',
@@ -556,8 +556,8 @@ class transparencyStrategies(TestFinbourneApi):
                     'tid_{}'.format(uuid.uuid4()): {
                         'type': 'Buy',
                         'instrument_uid': self.instrument_universe['UKGiltTreasury_4.5_2034']['identifiers']['LUID'],
-                        'transaction_date': (datetime.today() - timedelta(days=1) + timedelta(hours=9)).isoformat(),
-                        'settlement_date': (datetime.today() - timedelta(days=1) + timedelta(days=2)).isoformat(),
+                        'transaction_date': (datetime.now(pytz.UTC) - timedelta(days=1) + timedelta(hours=9)).isoformat(),
+                        'settlement_date': (datetime.now(pytz.UTC) - timedelta(days=1) + timedelta(days=2)).isoformat(),
                         'units': 10501,
                         'transaction_price': 140.572,
                         'transaction_currency': 'GBP',
@@ -570,8 +570,8 @@ class transparencyStrategies(TestFinbourneApi):
                         'type': 'Buy',
                         'instrument_uid': self.instrument_universe['UKGiltTreasury_3.75_2021']['identifiers'][
                             'LUID'],
-                        'transaction_date': (datetime.today() - timedelta(days=1) + timedelta(hours=3)).isoformat(),
-                        'settlement_date': (datetime.today() - timedelta(days=1) + timedelta(days=2)).isoformat(),
+                        'transaction_date': (datetime.now(pytz.UTC) - timedelta(days=1) + timedelta(hours=3)).isoformat(),
+                        'settlement_date': (datetime.now(pytz.UTC) - timedelta(days=1) + timedelta(days=2)).isoformat(),
                         'units': 24000,
                         'transaction_price': 109.126,
                         'transaction_currency': 'GBP',
@@ -580,8 +580,8 @@ class transparencyStrategies(TestFinbourneApi):
                     'tid_{}'.format(uuid.uuid4()): {
                         'type': 'Sell',
                         'instrument_uid': self.instrument_universe['USTreasury_2.00_2021']['identifiers']['LUID'],
-                        'transaction_date': (datetime.today() - timedelta(days=1) + timedelta(hours=2)).isoformat(),
-                        'settlement_date': (datetime.today() - timedelta(days=1) + timedelta(days=2)).isoformat(),
+                        'transaction_date': (datetime.now(pytz.UTC) - timedelta(days=1) + timedelta(hours=2)).isoformat(),
+                        'settlement_date': (datetime.now(pytz.UTC) - timedelta(days=1) + timedelta(days=2)).isoformat(),
                         'units': 57000,
                         'transaction_price': 97.80,
                         'transaction_currency': 'USD',
@@ -597,8 +597,8 @@ class transparencyStrategies(TestFinbourneApi):
                         'type': 'Sell',
                         'instrument_uid': self.instrument_universe['Whitebread_LondonStockEx_WTB']['identifiers'][
                             'LUID'],
-                        'transaction_date': (datetime.today() - timedelta(days=1) + timedelta(hours=5)).isoformat(),
-                        'settlement_date': (datetime.today() - timedelta(days=1) + timedelta(days=2)).isoformat(),
+                        'transaction_date': (datetime.now(pytz.UTC) - timedelta(days=1) + timedelta(hours=5)).isoformat(),
+                        'settlement_date': (datetime.now(pytz.UTC) - timedelta(days=1) + timedelta(days=2)).isoformat(),
                         'units': 70000,
                         'transaction_price': 47.03,
                         'transaction_currency': 'GBP',
@@ -607,8 +607,8 @@ class transparencyStrategies(TestFinbourneApi):
                     'tid_{}'.format(uuid.uuid4()): {
                         'type': 'Sell',
                         'instrument_uid': self.instrument_universe['TESCO_LondonStockEx_TSCO']['identifiers']['LUID'],
-                        'transaction_date': (datetime.today() - timedelta(days=1) + timedelta(hours=9)).isoformat(),
-                        'settlement_date': (datetime.today() - timedelta(days=1) + timedelta(days=2)).isoformat(),
+                        'transaction_date': (datetime.now(pytz.UTC) - timedelta(days=1) + timedelta(hours=9)).isoformat(),
+                        'settlement_date': (datetime.now(pytz.UTC) - timedelta(days=1) + timedelta(days=2)).isoformat(),
                         'units': 342000,
                         'transaction_price': 1.8865,
                         'transaction_currency': 'GBP',
@@ -704,9 +704,9 @@ class transparencyStrategies(TestFinbourneApi):
                 # Test that the transactions have been added correctly
                 self.transactions_added_tests(portfolio_scope=self.internal_scope_code,
                                               portfolio_code=portfolio_name,
-                                              start_date=(datetime.today() - timedelta(days=1)).isoformat(),
-                                              end_date=(datetime.today()).isoformat(),
-                                              as_at_date=datetime.today().isoformat(),
+                                              start_date=(datetime.now(pytz.UTC) - timedelta(days=1)).isoformat(),
+                                              end_date=(datetime.now(pytz.UTC)).isoformat(),
+                                              as_at_date=datetime.now(pytz.UTC).isoformat(),
                                               batch_transactions_request=portfolio_transactions)
 
                 # tk - add test for properties
@@ -719,7 +719,7 @@ class transparencyStrategies(TestFinbourneApi):
 
         for portfolio_group_code, portfolio_group in self.client_portfolios.items():
             aggregation_request = models.AggregationRequest(recipe_id=,
-                                                            effective_at=datetime.today().isoformat(),
+                                                            effective_at=datetime.now(pytz.UTC).isoformat(),
                                                             metrics=[models.AggregateSpec(key=,
                                                                                           op='sum')],)
 
