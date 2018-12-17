@@ -23,7 +23,7 @@ class transparencyStrategies(TestFinbourneApi):
         and we will use a different portfolio to track how we are tracking against each objective.
 
         Even though there are a number of different objectives, some of the strategies that we are using are common
-        across objectives. We really need to be able to see how each strategy is performing across all of our client's
+        across objectives. We really need to be able to see how each strategy is performing across all of each client's
         holdings, rather than just looking at a single portfolio in isolation.
 
         Using LUSID we have the ability to add a strategy label to each transaction that we make. We can then aggregate
@@ -755,25 +755,45 @@ class transparencyStrategies(TestFinbourneApi):
                                                                                           op='sum'),
                                                                      models.AggregateSpec(key='Holding/default/Cost',
                                                                                           op='sum')
-                                                                      ],
-                                                            filters=[models.PropertyFilter(left=self.strategy_property_key,
-                                                                                           operator='Equals',
-                                                                                           right=models.Property(key=self.strategy_property_key,
-                                                                                                                 value=models.PropertyValue(label_value='quantitativeSignal')),
-                                                                                           right_operand_type='Property')])
+                                                                      ])
 
             aggregated_group = self.client.get_aggregation_by_group(scope=self.internal_scope_code,
                                                                     code=portfolio_group_code,
                                                                     request=aggregation_request)
 
 
-        print ('wait')
+            # tk - Tests to confirm correct, how?
 
     def aggregate_strategy(self):
         '''
-        We can also look at our strategies across all clients using our strategy tags. We can do this by creating
-        a derived portfolio from ..... with sub-holding keys.
+        We can also look at how a given strategy is performing across our client's entire holdings. To do this we can
+        apply a filter to our aggregated result.
         '''
+
+        strategy = 'quantitativeSignal'
+
+        for portfolio_group_code, portfolio_group in self.client_portfolios.items():
+            aggregation_request = models.AggregationRequest(recipe_id=models.ResourceId(scope=self.internal_scope_code,
+                                                                                        code='default'),
+                                                            effective_at=datetime.now(pytz.UTC).isoformat(),
+                                                            metrics=[models.AggregateSpec(key='Holding/default/Units',
+                                                                                          op='sum'),
+                                                                     models.AggregateSpec(key='Holding/default/Cost',
+                                                                                          op='sum')
+                                                                      ],
+                                                            filters=[
+                                                                models.PropertyFilter(left=self.strategy_property_key,
+                                                                                      operator='Equals',
+                                                                                      right=models.PropertyValue(
+                                                                                          label_value=strategy),
+                                                                                      right_operand_type='Property')])
+
+
+
+
+            aggregated_group = self.client.get_aggregation_by_group(scope=self.internal_scope_code,
+                                                                    code=portfolio_group_code,
+                                                                    request=aggregation_request)
 
 
 
