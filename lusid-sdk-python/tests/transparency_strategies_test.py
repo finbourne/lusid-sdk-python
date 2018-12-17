@@ -1,11 +1,7 @@
-import unittest
-import requests
-import json
 import uuid
 import os
-from datetime import datetime
 import pytz
-import lusid
+import unittest
 import lusid.models as models
 from unittest import TestCase
 from datetime import datetime, timedelta
@@ -468,17 +464,21 @@ class transparencyStrategies(TestFinbourneApi):
         This means that when we set the 'strategy' property we can use any string we like as the label.
         '''
 
-        property = models.CreatePropertyDefinitionRequest(domain='Trade',
-                                                          scope=self.internal_scope_code,
-                                                          code='strategy',
-                                                          value_required=True,
-                                                          display_name='strategy',
-                                                          data_type_id=models.ResourceId(scope='default',
-                                                                                         code='string'))
+        property_request = models.CreatePropertyDefinitionRequest(domain='Trade',
+                                                                  scope=self.internal_scope_code,
+                                                                  code='strategy',
+                                                                  value_required=True,
+                                                                  display_name='strategy',
+                                                                  data_type_id=models.ResourceId(scope='default',
+                                                                                                 code='string'))
 
-        self.client.create_property_definition(definition=property)
+        property = self.client.create_property_definition(definition=property_request)
 
-        # tk - Test that it has been created
+        # Grab the key off the response to use when using this property
+        self.strategy_property_key = property.key
+
+        # Tests to check that the property has been created successfully
+        self.create_property_definition_test(property_request, property)
 
     def add_first_transactions(self):
         '''
@@ -686,7 +686,8 @@ class transparencyStrategies(TestFinbourneApi):
                                                       currency=transaction['transaction_currency']),
                                                   source='Client',
                                                   transaction_currency=transaction['transaction_currency'],
-                                                  properties={'Trade/{}/strategy'.format(self.internal_scope_code):transaction['strategy']})
+                                                  properties={self.strategy_property_key: models.PropertyValue(
+                                                      label_value=transaction['strategy'])})
                     )
 
         # Iterate over our portfolio groups
@@ -705,11 +706,40 @@ class transparencyStrategies(TestFinbourneApi):
                 self.transactions_added_tests(portfolio_scope=self.internal_scope_code,
                                               portfolio_code=portfolio_name,
                                               start_date=(datetime.now(pytz.UTC) - timedelta(days=1)).isoformat(),
-                                              end_date=(datetime.now(pytz.UTC)).isoformat(),
+                                              end_date=datetime.now(pytz.UTC).isoformat(),
                                               as_at_date=datetime.now(pytz.UTC).isoformat(),
                                               batch_transactions_request=portfolio_transactions)
 
                 # tk - add test for properties
+
+    def create_analytics(self):
+        '''
+        To run aggregation over our portfolio groups we first need to define an analytic store
+        '''
+
+        analytics_effective_date = datetime.now(pytz.UTC)
+
+        # Create analytics store
+        analytics_store_request = models.CreateAnalyticStoreRequest(scope=self.internal_scope_code,
+                                                                    date_property=analytics_effective_date.isoformat())
+
+        self.client.create_analytic_store(request=analytics_store_request)
+
+        # Create prices via instrument, analytic
+        instrument_analytics = []
+
+        for instrument_name, instrument in self.instrument_universe.items():
+            if 'Cash' in instrument_name:
+                continue
+            instrument_analytics.append(models.InstrumentAnalytic(instrument_uid=instrument['identifiers']['LUID'],
+                                                                  value=1))
+
+        # Set my analytics
+        self.client.set_analytics(scope=self.internal_scope_code,
+                                  year=analytics_effective_date.year,
+                                  month=analytics_effective_date.month,
+                                  day=analytics_effective_date.day,
+                                  data=instrument_analytics)
 
     def aggregate_portfolio_group(self):
         '''
@@ -718,19 +748,46 @@ class transparencyStrategies(TestFinbourneApi):
         '''
 
         for portfolio_group_code, portfolio_group in self.client_portfolios.items():
-            aggregation_request = models.AggregationRequest(recipe_id=,
+            aggregation_request = models.AggregationRequest(recipe_id=models.ResourceId(scope=self.internal_scope_code,
+                                                                                        code='default'),
                                                             effective_at=datetime.now(pytz.UTC).isoformat(),
-                                                            metrics=[models.AggregateSpec(key=,
-                                                                                          op='sum')],)
+                                                            metrics=[models.AggregateSpec(key='Holding/default/Units',
+                                                                                          op='sum'),
+                                                                     models.AggregateSpec(key='Holding/default/Cost',
+                                                                                          op='sum')
+                                                                      ],
+                                                            filters=[models.PropertyFilter(left=self.strategy_property_key,
+                                                                                           operator='Equals',
+                                                                                           right=models.Property(key=self.strategy_property_key,
+                                                                                                                 value=models.PropertyValue(label_value='quantitativeSignal')),
+                                                                                           right_operand_type='Property')])
 
             aggregated_group = self.client.get_aggregation_by_group(scope=self.internal_scope_code,
                                                                     code=portfolio_group_code,
                                                                     request=aggregation_request)
 
 
+        print ('wait')
+
     def aggregate_strategy(self):
         '''
-        We can also look at our strategies across all clients using our strategy tags.
+        We can also look at our strategies across all clients using our strategy tags. We can do this by creating
+        a derived portfolio from ..... with sub-holding keys.
         '''
 
+
+
+
+
     def test_transparency_strategies(self):
+        self.import_data()
+        self.create_portfolios()
+        self.add_holdings()
+        self.create_strategy_tags()
+        self.add_first_transactions()
+        self.create_analytics()
+        self.aggregate_portfolio_group()
+        self.aggregate_strategy()
+
+if __name__ == '__main__':
+    unittest.main()

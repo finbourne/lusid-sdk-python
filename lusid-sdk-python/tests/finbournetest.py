@@ -324,7 +324,16 @@ class TestFinbourneApi(TestCase):
 
     # tk - should I check that the holdings have been updated? With the tests above if the transactions didn't update the holdings it would still pass
 
-    # This emplty test function is required to set up the class
+    def create_property_definition_test(self, property_request, property):
+        self.assertEqual(property.domain, property_request.domain)
+        self.assertEqual(property.scope, property_request.scope)
+        self.assertEqual(property.code, property_request.code)
+        self.assertEqual(property.value_required, property_request.value_required)
+        self.assertEqual(property.display_name, property_request.display_name)
+        self.assertEqual(property.data_type_id.scope, property.data_type_id.scope)
+        self.assertEqual(property.data_type_id.code, property.data_type_id.code)
+
+        # This emplty test function is required to set up the class
     def test(self):
         pass
 
