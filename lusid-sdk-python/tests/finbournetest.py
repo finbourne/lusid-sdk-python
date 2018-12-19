@@ -42,41 +42,55 @@ class TestFinbourneApi(TestCase):
     def setUpClass(cls):
         '''
         Here we handle authentication. We use a username, password, client ID and client secret to authenticate
-        our account. Once authenticated we retrieve an API token which we can use for future requests using
+        our account.
         '''
-        # Load our configuration details
+        # Load our configuration details from a secrets file
         dir_path = os.path.dirname(os.path.realpath(__file__))
         with open(os.path.join(dir_path, "secrets.json"), "r") as secrets:
             config = json.load(secrets)
-        # Set our authentication details
+
+        # Get our URL for authentication
         token_url = os.getenv("FBN_TOKEN_URL", config["api"]["tokenUrl"])
+
+        # Get our credentials
         username = os.getenv("FBN_USERNAME", config["api"]["username"])
         password = pathname2url(os.getenv("FBN_PASSWORD", config["api"]["password"]))
         client_id = pathname2url(os.getenv("FBN_CLIENT_ID", config["api"]["clientId"]))
         client_secret = pathname2url(os.getenv("FBN_CLIENT_SECRET", config["api"]["clientSecret"]))
+
+        # Get our URL for the API
         cls.api_url = os.getenv("FBN_LUSID_API_URL", config["api"]["apiUrl"])
+
         # Prepare our authentication request
         token_request_body = ("grant_type=password&username={0}".format(username) +
                               "&password={0}&scope=openid client groups".format(password) +
                               "&client_id={0}&client_secret={1}".format(client_id, client_secret))
         headers = {"Accept": "application/json", "Content-Type": "application/x-www-form-urlencoded"}
+
         # Make our authentication request
         okta_response = requests.post(token_url, data=token_request_body, headers=headers)
+
         # Ensure that we have a 200 response code
         assert okta_response.status_code == 200
 
         # Retrieve our api token from the authentication response
         cls.api_token = {"access_token": okta_response.json()["access_token"]}
+
         # Initialise our API client using our token so that we can include it in all future requests
         credentials = BasicTokenAuthentication(TestFinbourneApi.api_token)
         cls.client = lusid.LUSIDAPI(credentials, TestFinbourneApi.api_url)
 
     def portfolio_creation_tests(self, portfolio, portfolio_request, scope):
-        '''
-        This method contains a set of tests used to test the successful creation of a portfolio
-        '''
-        self.assertNotIsInstance(portfolio, models.ErrorResponse,
-                                 'No portfolio created, error returned')
+        """
+        This method contains a set of tests used to test the successful creation of a portfolio, we test that:
+        - No error is returned
+        - The portfolio is created with the correct code
+        - The portfolio is created within the correct scope
+        - The portfolio is created with the correct display name
+        - The portfolio is created with the correct description
+        """
+
+        self.assertNotIsInstance(portfolio, models.ErrorResponse, 'No portfolio created, error returned')
         self.assertEqual(portfolio_request.code, portfolio.id.code,
                          'Portfolio created with code {} instead of code {}'.format(portfolio.id.code,
                                                                                     portfolio_request.code))
@@ -94,9 +108,16 @@ class TestFinbourneApi(TestCase):
         # tk - Need to test for base currency, how do I find it? What does it mean? Can it be wrong? Is it validated?
 
     def portfolio_group_creation_tests(self, portfolio_group, portfolio_group_request, group_scope):
-        '''
-        This method contains a set of tests used to test the successful creation of a portfolio group
-        '''
+        """
+        This method contains a set of tests used to test the successful creation of a portfolio group, we test that:
+        - No error is returned
+        - The portfolio group is created with the correct code
+        - The portfolio group is created within the correct scope
+        - The portfolio group is created with the correct display name
+        - The portfolio group is created with the correct description
+        - The portfolio group is created with the right number of portfolios
+        """
+
         self.assertNotIsInstance(portfolio_group, models.ErrorResponse,
                                  'Portfolio group not created, error returned')
 
@@ -106,15 +127,15 @@ class TestFinbourneApi(TestCase):
 
         self.assertEqual(portfolio_group.id.scope, group_scope,
                          'Portfolio group scope is {} instead of {}'.format(portfolio_group.id.scope,
-                                                                           group_scope))
-
-        self.assertEqual(portfolio_group.description, portfolio_group_request.description,
-                         'Portfolio group description is {} instead of {}'.format(portfolio_group.description,
-                                                                           portfolio_group_request.description))
+                                                                            group_scope))
 
         self.assertEqual(portfolio_group.display_name, portfolio_group_request.display_name,
                          'Portfolio group display name is {} instead of {}'.format(portfolio_group.display_name,
                                                                                    portfolio_group_request.display_name))
+
+        self.assertEqual(portfolio_group.description, portfolio_group_request.description,
+                         'Portfolio group description is {} instead of {}'.format(portfolio_group.description,
+                                                                                  portfolio_group_request.description))
 
         # tk - need test for sub_groups
 
@@ -126,23 +147,31 @@ class TestFinbourneApi(TestCase):
         Iterate over the portfolios checking that the scope and code is correct. Note that this currently does not
         support the case where none or less than all of the portfolios match. All it handles is if the code matches
         so does the scope. 
+        
+        tk - Make this more robust to check that all codes are correct, there are no duplicates and none missing
         '''
         # Iterate over the portfolios in our group
         for portfolio in portfolio_group.portfolios:
             # Iterate over the portfolios in our request
             for portfolio_request in portfolio_group_request.values:
+                # Ensure that the portfolio is created in the correct scope
                 if portfolio.code == portfolio_request.code:
                     self.assertEqual(portfolio.scope, portfolio_request.scope,
                                      'Portfolio {} has scope {} instead of {}'.format(portfolio.code,
                                                                                       portfolio.scope,
                                                                                       portfolio_request.scope))
 
-
-
-    def derived_portfolio_creation_tests(self, derived_portfolio, derived_portfolio_request, scope):
-        '''
-        This method contains a set of tests used to test the successful creation of a derived portfolio
-        '''
+    def derived_portfolio_creation_tests(self, derived_portfolio, derived_portfolio_request, derived_portfolio_scope):
+        """
+        This method contains a set of tests used to test the successful creation of a derived portfolio, we test that:
+        - The derived portfolio has its derived property set to True
+        - The derived portfolio has the correct code
+        - The derived portfolio has been created in the correct scope
+        - The derived portfolio has been created with the correct display name
+        - The derived portfolio has been created with the correct description
+        - The derived portfolio has been created from the portfolio located in correct scope
+        - The derived portfolio has been created from the portfolio with the correct code
+        """
 
         self.assertEqual(derived_portfolio.is_derived, True,
                          'Expected derived portfolio to be True instead it is {}'.format(derived_portfolio.is_derived))
@@ -151,64 +180,89 @@ class TestFinbourneApi(TestCase):
                          'Portfolio created with code {} instead of code {}'.format(derived_portfolio.id.code,
                                                                                     derived_portfolio_request.code))
 
-        self.assertEqual(scope, derived_portfolio.id.scope,
+        self.assertEqual(derived_portfolio_scope, derived_portfolio.id.scope,
                          'Portfolio created in scope {} instead of scope {}'.format(derived_portfolio.id.scope,
-                                                                                    scope))
+                                                                                    derived_portfolio_scope))
 
         self.assertEqual(derived_portfolio_request.display_name, derived_portfolio.display_name,
                          'Portfolio created with name {} instead of {}'.format(derived_portfolio.display_name,
                                                                                derived_portfolio_request.display_name))
 
         self.assertEqual(derived_portfolio_request.description, derived_portfolio.description,
-                         'Portfolio created with description {} instead of {}'.format(derived_portfolio.description,
-                                                                                      derived_portfolio_request.description))
-
-        self.assertEqual(derived_portfolio_request.parent_portfolio_id,
-                         derived_portfolio.parent_portfolio_id,
                          'Portfolio created with description {} instead of {}'.format(
-                             derived_portfolio.parent_portfolio_id,
-                             derived_portfolio_request.parent_portfolio_id))
+                             derived_portfolio.description,
+                             derived_portfolio_request.description))
+
+        self.assertEqual(derived_portfolio_request.parent_portfolio_id.scope,
+                         derived_portfolio.parent_portfolio_id.scope,
+                         'Portfolio created from portfolio in scope {} instead of {}'.format(
+                             derived_portfolio.parent_portfolio_id.scope,
+                             derived_portfolio_request.parent_portfolio_id.scope))
+
+        self.assertEqual(derived_portfolio_request.parent_portfolio_id.code,
+                         derived_portfolio.parent_portfolio_id.code,
+                         'Portfolio created from portfolio with code {} instead of {}'.format(
+                             derived_portfolio.parent_portfolio_id.code,
+                             derived_portfolio_request.parent_portfolio_id.code))
 
     def instrument_upsert_tests(self, batch_upsert_response, batch_upsert_request):
-        '''
-        This method contains a set of tests used to test the successful upsertion of instruments
-        '''
+        """
+        This method contains a set of tests used to test the successful upsert of instruments, we test that:
+        - No instrument upserts failed
+        - All instruments were successfully upserted
+        - The instrument has a Lusid Instrument ID or LUID for short
+        - The instrument name is in the request
+        - The instrument identifiers match those in the request
+        """
+
         # Confirm that the response is as expected
         self.assertLess(len(batch_upsert_response.failed), 1,
                         '{} upsert requests of {} failed'.format(len(batch_upsert_response.failed),
                                                                  len(batch_upsert_request)))
+
         self.assertEqual(len(batch_upsert_response.values), len(batch_upsert_request),
-                         'Only {} upsert requests of {} successfully upserted'.format(len(batch_upsert_request),
-                                                                                      len(
-                                                                                          batch_upsert_response.values)))
-        for result in batch_upsert_response.values:
-            instrument = batch_upsert_response.values[result]
+                         'Only {} upsert requests of {} successfully upserted'.format(
+                             len(batch_upsert_request),
+                             len(batch_upsert_response.values)))
+
+        for result, instrument in batch_upsert_response.values.items():
+
             self.assertIsNotNone(instrument.lusid_instrument_id,
-                                 'Instrument does not have a lusitd instrument id')
+                                 'Instrument does not have a LUSID Instrument ID')
+
             self.assertIn(instrument.name, list(batch_upsert_request.keys()),
-                          'The instrument name {} is not in those in the request {}'.format(instrument.name,
-                                                                                            batch_upsert_request.keys()))
+                          'The instrument name {} is not in those in the request {}'.format(
+                              instrument.name,
+                              batch_upsert_request.keys()))
+
             self.assertEqual(instrument.identifiers, batch_upsert_request[instrument.name].identifiers,
                              'The instrument has mismatched identifiers to the request')
 
     def verify_holdings_tests(self, holding_adjustments, holdings, scope, code, effective_at):
-        '''
-        This method contains a set of tests used to test that set holdings has worked correctly
-        '''
-        # Check that we got a link back on our response to setting holdings
+        """
+        This method contains a set of tests used to test that set holdings has worked correctly, we test that:
+        - The holdings response contains links to the created resources (tk - is this just holdings?)
+        - The number holdings matches the number of adjustments that we have made
+        - The number of units in an upserted holding matches the request for a given instrument
+        - The cost of an upserted holding matches the cost in the request for a given instrument
+        - The currency of an upserted holding matches the currency in the request for a given instrument
+
+        Note that for this test we are making the following assumptions:
+        - We have only upsert a single tax lot for each holding
+        - We have only upsert one holding adjustment for each instrument
+        """
+
         self.assertIsNotNone(holdings.href, 'No hyperlink to holdings returned')
-        # As we only get links back from our set holdings method, we need to retrieve the holdings we have just
-        # set to compare them to the request
+
+        # As we only get links back from our set holdings method, we need to retrieve the holdings we have just set
         verify_holdings = self.client.get_holdings(scope=scope,
                                                    code=code,
                                                    effective_at=effective_at)
 
-
         self.assertEqual(verify_holdings.count, len(holding_adjustments),
                          'Got {} holdings when we expected {} holdings'.format(verify_holdings.count,
                                                                                len(holding_adjustments)))
-
-
+        # tk - Need to make this way more robust
         for holding in verify_holdings.values:
             for adjustment in holding_adjustments:
                 if holding.instrument_uid == adjustment.instrument_uid:
@@ -225,11 +279,12 @@ class TestFinbourneApi(TestCase):
                                      'Currency is {} when it should be {}'.format(holding.cost.currency,
                                                                                   adjustment.tax_lots[0].cost.currency))
 
-                    # self.assertEqual(adjustment.tax_lots[0].portfolio_cost, holding.cost_portfolio_ccy.amount,
-                    #                'Portfolio cost is {} when it should be {}'.format(holding.cost_portfolio_ccy.amount,
-                    #                                                                  adjustment.tax_lots[0].portfolio_cost))
+                    self.assertEqual(adjustment.tax_lots[0].portfolio_cost, holding.cost_portfolio_ccy.amount,
+                                     'Portfolio cost is {} when it should be {}'.format(
+                                         holding.cost_portfolio_ccy.amount,
+                                         adjustment.tax_lots[0].portfolio_cost))
 
-                    # tk - Where is price?
+                    # tk - Where is price, can't find it?
 
     def reconcile_portfolios_tests(self,
                                    portfolio_left_scope,
@@ -242,6 +297,21 @@ class TestFinbourneApi(TestCase):
                                    portfolio_right_as_at,
                                    transactions=None,
                                    check_same=True):
+        """
+        This method contains a set of tests used to test that two portfolios reconcile, we test for one of two things:
+
+        A) If check_same is True we check that both portfolios are identical, in this case we test that:
+        - The count of reconciliation breaks on the reconciliation is 0
+        - The number of reconciliation breaks returned is 0
+
+        B) If check_same is False we check that given a set of transactions on the left portfolio the right has remained
+        unchanged, in this case we test that:
+        -
+
+        Note that for this test we are making the following assumptions:
+        - The reconciliation method is working perfectly without any errors
+        - For the
+        """
 
         reconcile_holdings_left = models.PortfolioReconciliationRequest(
             portfolio_id=models.ResourceId(scope=portfolio_left_scope,
