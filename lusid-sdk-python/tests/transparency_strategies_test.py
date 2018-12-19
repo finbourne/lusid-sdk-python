@@ -761,7 +761,6 @@ class transparencyStrategies(TestFinbourneApi):
                                                                     code=portfolio_group_code,
                                                                     request=aggregation_request)
 
-
             # tk - Tests to confirm correct, how?
 
     def aggregate_strategy(self):
@@ -771,32 +770,72 @@ class transparencyStrategies(TestFinbourneApi):
         '''
 
         strategy = 'quantitativeSignal'
+        scope_id = uuid.uuid4()
+        self.strategy_scope = 'strategy-scope-{}'.format(scope_id)
+
+        self.created_date = (datetime.now(pytz.UTC) - timedelta(days=5)).isoformat()
+        # Iterate over our portfolio groups selecting the name of the group and the list of portfolios
+        for portfolio_group_code, portfolio_group in self.client_portfolios.items():
+            # Loop over our list of portfolios selecting the portfolio code
+            for portfolio_code in portfolio_group:
+                # Create the request to add our portfolio
+                portfolio_request = models.CreateDerivedTransactionPortfolioRequest(display_name=portfolio_code,
+                                                                                    code=portfolio_code,
+                                                                                    parent_portfolio_id=models.ResourceId(scope=self.internal_scope_code,
+                                                                                                                          code=portfolio_code),
+                                                                                    description=portfolio_code,
+                                                                                    created=self.created_date,
+                                                                                    sub_holding_keys=[self.strategy_property_key])
+                # Create our portfolios in the internal scope
+                portfolio = self.client.create_derived_portfolio(scope=self.strategy_scope,
+                                                                 portfolio=portfolio_request)
+
+                # Tests - Ensure that the portfolios were created successfully with the correct details
+                self.derived_portfolio_creation_tests(portfolio, portfolio_request, self.strategy_scope)
+
+            '''
+            To create our groups we need the scope and code of each of our portfolios that we want to include in the 
+            group. In LUSID these are contained inside a ResourceId object. We use ResourceId objects anytime we need 
+            to specify the scope and code of an object.
+            '''
+
+            # Create the lists of ResourceIds for each scope, these are the portfolios to add to the group
+            portfolio_resourceids = [models.ResourceId(scope=self.strategy_scope, code=portfolio_code) for
+                                     portfolio_code in portfolio_group]
+
+            # Create our portfolio group request
+            portfolio_group_request = models.CreatePortfolioGroupRequest(id=portfolio_group_code,
+                                                                         display_name=portfolio_group_code,
+                                                                         values=portfolio_resourceids,
+                                                                         description=portfolio_group_code)
+
+            # Create our portfolio group
+            portfolio_group = self.client.create_portfolio_group(scope=self.strategy_scope,
+                                                                 request=portfolio_group_request)
+
+            # Tests - Ensure that we have successfully created the portfolio group
+            self.portfolio_group_creation_tests(portfolio_group, portfolio_group_request, self.strategy_scope)
+
+        holdings = self.client.get_holdings(scope=self.strategy_scope,
+                                            code='client-{}-strategy-balanced'.format(self.client_2_portfolio_group_id))
+
 
         for portfolio_group_code, portfolio_group in self.client_portfolios.items():
+
             aggregation_request = models.AggregationRequest(recipe_id=models.ResourceId(scope=self.internal_scope_code,
                                                                                         code='default'),
                                                             effective_at=datetime.now(pytz.UTC).isoformat(),
                                                             metrics=[models.AggregateSpec(key='Holding/default/Units',
                                                                                           op='sum'),
                                                                      models.AggregateSpec(key='Holding/default/Cost',
-                                                                                          op='sum')
-                                                                      ],
-                                                            filters=[
-                                                                models.PropertyFilter(left=self.strategy_property_key,
-                                                                                      operator='Equals',
-                                                                                      right=models.PropertyValue(
-                                                                                          label_value=strategy),
-                                                                                      right_operand_type='Property')])
+                                                                                          op='sum')])
 
-
-
-
-            aggregated_group = self.client.get_aggregation_by_group(scope=self.internal_scope_code,
-                                                                    code=portfolio_group_code,
+            aggregated_group = self.client.get_aggregation_by_portfolio(scope=self.strategy_scope,
+                                                                    code= 'client-{}-strategy-balanced'.format(self.client_2_portfolio_group_id),
                                                                     request=aggregation_request)
 
 
-
+            print ('wait')
 
 
     def test_transparency_strategies(self):
