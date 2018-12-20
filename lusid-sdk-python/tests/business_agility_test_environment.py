@@ -3,7 +3,7 @@ import uuid
 import lusid.models as models
 import pytz
 from datetime import datetime, timedelta
-from finbournetest import TestFinbourneApi
+from finbournetest import TestFinbourneApi, timeit
 
 try:
     # Python 3.x
@@ -15,8 +15,9 @@ except ImportError:
 
 class businessAgilityTestEnvironment(TestFinbourneApi):
 
+    @timeit
     def import_data(self):
-        '''
+        """
         We are an asset manager who has recently secured a contract to work with a new small pension fund. The pension
         fund has decided to switch from their incumbent asset manager on the advice of consultants. The transition
         is being handled by a transition manager and we have just received the transition accounts with the final
@@ -33,7 +34,7 @@ class businessAgilityTestEnvironment(TestFinbourneApi):
         the fund managers for the new client can access the live portfolio and only the development team working on
         building the modified reporting and adding support for the exotic instruments can access the development
         portfolio.
-        '''
+        """
 
         '''
         In LUSID we can create separate environments using Scopes. A Scope is a container which acts as a separate
@@ -125,12 +126,13 @@ class businessAgilityTestEnvironment(TestFinbourneApi):
                 'currency': 'GBP'}
         }
 
+    @timeit
     def create_portfolio_production_environment(self):
-        '''
+        """
         The first thing that we need to do is create a production environment with an empty transaction portfolio which
         we can use to hold the assets of the pension fund.
         We will test that the production environment and pension fund portfolio are created successfully
-        '''
+        """
 
         # Create our pension fund portfolio in the production scope
         pension_fund_request = models.CreateTransactionPortfolioRequest(display_name='pension-fund',
@@ -144,14 +146,15 @@ class businessAgilityTestEnvironment(TestFinbourneApi):
         # Test that our portfolio was created successfully
         self.portfolio_creation_tests(pension_fund_portfolio, pension_fund_request, self.production_scope_code)
 
+    @timeit
     def add_holdings_portfolio_production_environment(self):
-        '''
+        """
         Now that we have created our portfolio in the production environemnt, we need to take the final holdings report
         that we received from the transition manager and populate our portfolio.
         Before we do this, we first need to do add the instruments to LUSID. Once we have added the instruments we can
         then populate our initial holdings on these instruments.
         We will test that we have correctly created the instruments and added the holdings to our portfolio
-        '''
+        """
 
         '''
         Rather than using separate update and insert methods, LUSID uses an upsert method for may of its operations.
@@ -289,8 +292,9 @@ class businessAgilityTestEnvironment(TestFinbourneApi):
                                    code=self.portfolio_code,
                                    effective_at=self.official_transfer_time)
 
+    @timeit
     def create_derived_portfolio_test_environment(self):
-        '''
+        """
         Now that we have loaded the holdings into our production environment we need to create a test environment to
         model the changes that the pension fund has requested without affecting our day to day operations.
         This is especially important as they are a new client and we don't want to cause any problems so early into the
@@ -304,7 +308,7 @@ class businessAgilityTestEnvironment(TestFinbourneApi):
         changes to the production portfolio will be replicated to the test portfolio.
         We will test that we have succesfully created a test environment and derived portfolio which is a mirror image
         of our production pension portfolio
-        '''
+        """
 
         '''
         Create our derived pension fund portfolio in the test scope, we use the same code for the portfolio as in the
@@ -336,8 +340,9 @@ class businessAgilityTestEnvironment(TestFinbourneApi):
                                         portfolio_right_as_at=datetime.now(pytz.UTC).isoformat(),
                                         check_same=True)
 
+    @timeit
     def add_more_transactions_portfolio_production_environment(self):
-        '''
+        """
         Now that we have the client's funds we are on the clock and need to ensure we are driving superior performance
         compared with their last manager. To do this we have made some transactions to optimise performance. We now need
         to update our production pension portfolio with these transactions.
@@ -346,7 +351,7 @@ class businessAgilityTestEnvironment(TestFinbourneApi):
         This test will ensure that we have successfully added our transactions to the production pension portfolio and
         the holdings have been update appropriately. We will also test that these changes have been replicated to our
         derived portfolio in the test environment
-        '''
+        """
 
         '''
         We can add transactions individually or in batches using a list of TransactionRequest objects.
@@ -545,8 +550,9 @@ class businessAgilityTestEnvironment(TestFinbourneApi):
                                         portfolio_right_as_at=datetime.now(pytz.UTC).isoformat(),
                                         check_same=True)
 
+    @timeit
     def add_transactions_derived_portfolio_test_environment(self):
-        '''
+        """
         We also want to add some synthetic transactions to our test pension portfolio to test some edge cases that may
         arise from our changes. Let us add these in.
         We will just make two transactions in existing instruments.
@@ -555,7 +561,7 @@ class businessAgilityTestEnvironment(TestFinbourneApi):
         This test will ensure that we have successfully added our transactions to the test pension portfolio which is
         derived from the production environment. We will also ensure that none of these changes have been replicated
         back to production and that they are isolated to our test environment.
-        '''
+        """
 
         transactions = {
             'tid_{}'.format(uuid.uuid4()): {
@@ -629,16 +635,18 @@ class businessAgilityTestEnvironment(TestFinbourneApi):
                                         transactions=batch_transactions_request,
                                         check_same=False)
 
+    @timeit
     def create_entitlements(self):
-        '''
+        """
         We are undergoing an audit and need to ensure that the right people have access to the right portfolios. We
         currently use a number of protections but want to ensure we are covered at every level. We will set up
         entitlements on the production pension portfolio to ensure that only the investment managers have access. We will
         also set up entitlements on the test pension portfolio to ensure that only the development team working on the
         project have access.
         This test will ensure that we have correctly provisioned entitlements and that they are working correctly.
-        '''
+        """
 
+    @timeit
     def test_business_agility(self):
         self.import_data()
         self.create_portfolio_production_environment()

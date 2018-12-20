@@ -1,13 +1,7 @@
 import unittest
-import requests
-import json
 import uuid
-import os
-from datetime import datetime
-import pytz
-import lusid
 import lusid.models as models
-from unittest import TestCase
+import pytz
 from datetime import datetime, timedelta
 from finbournetest import TestFinbourneApi, timeit
 
@@ -22,7 +16,7 @@ except ImportError:
 class transparencyOversightThirdParty(TestFinbourneApi):
     @timeit
     def import_data(self):
-        '''
+        """
         We are an asset manager who has outsourced our fund accounting. We have multiple clients, each with multiple
         portfolios containing different investment strategies and priorities.
 
@@ -42,7 +36,7 @@ class transparencyOversightThirdParty(TestFinbourneApi):
 
         We desperately need a solution that allows us to easily & automatically identify & reconcile the discrepancies
         between our records and the fund accountant.
-        '''
+        """
 
         '''
         In LUSID we can create separate environments for our records and those of the fund accountant using Scopes. 
@@ -88,7 +82,7 @@ class transparencyOversightThirdParty(TestFinbourneApi):
 
     @timeit
     def create_portfolios(self):
-        '''
+        """
         Let us create our portfolios and portfolio groups in both our internal and fund accountant scopes.
 
         Note that we can only create one portfolio at a time. We will create our portfolios for each client and then
@@ -96,8 +90,8 @@ class transparencyOversightThirdParty(TestFinbourneApi):
 
         These portfolios have been live for 2 years, we just haven't added them to the system yet, so when we
         create them we will specify the date they went live using the 'created' parameter
-        '''
-        portfolio_creation_date = (datetime.today() - timedelta(days=895)).isoformat()
+        """
+        portfolio_creation_date = (datetime.now(pytz.UTC) - timedelta(days=895)).isoformat()
         # Iterate over our portfolio groups selecting the name of the group and the list of portfolios
         for portfolio_group_code, portfolio_group in self.client_portfolios.items():
             # Loop over our list of portfolios selecting the portfolio code
@@ -161,11 +155,11 @@ class transparencyOversightThirdParty(TestFinbourneApi):
 
     @timeit
     def create_holdings(self):
-        '''
+        """
         Now that we have our portfolios and groups set up for our clients we can add in their current holdings. We will
         start with having the internal scope and the fund account scope completely in sync with exactly the same
         holdings. This will be our initial state.
-        '''
+        """
 
         '''
         Before we can set our holdings we first need to upsert our instrument into LUSID. We use the upsert method which
@@ -474,12 +468,12 @@ class transparencyOversightThirdParty(TestFinbourneApi):
 
                 holdings_internal = self.client.set_holdings(scope=self.internal_scope_code,
                                                              code=portfolio_name,
-                                                             effective_at=(datetime.today() - timedelta(days=2)).isoformat(),
+                                                             effective_at=(datetime.now(pytz.UTC) - timedelta(days=2)).isoformat(),
                                                              holding_adjustments=portfolio_adjustments)
 
                 holdings_fund_accountant = self.client.set_holdings(scope=self.fund_accountant_scope_code,
                                                                     code=portfolio_name,
-                                                                    effective_at=(datetime.today() - timedelta(days=2)).isoformat(),
+                                                                    effective_at=(datetime.now(pytz.UTC) - timedelta(days=2)).isoformat(),
                                                                     holding_adjustments=portfolio_adjustments)
 
                 # Tests to verify that the holdings are correct
@@ -487,17 +481,17 @@ class transparencyOversightThirdParty(TestFinbourneApi):
                                            holdings=holdings_internal,
                                            scope=self.internal_scope_code,
                                            code=portfolio_name,
-                                           effective_at=(datetime.today() - timedelta(days=2)).isoformat())
+                                           effective_at=(datetime.now(pytz.UTC) - timedelta(days=2)).isoformat())
 
                 self.verify_holdings_tests(holding_adjustments=portfolio_adjustments,
                                            holdings=holdings_fund_accountant,
                                            scope=self.fund_accountant_scope_code,
                                            code=portfolio_name,
-                                           effective_at=(datetime.today() - timedelta(days=2)).isoformat())
+                                           effective_at=(datetime.now(pytz.UTC) - timedelta(days=2)).isoformat())
 
     @timeit
     def add_daily_transactions(self):
-        '''
+        """
         Now that we have our portfolios populated with their holdings we are going to simulate a day of trading. We
         are going to add all of yesterdays transactions to our internal portfolio.
 
@@ -518,9 +512,9 @@ class transparencyOversightThirdParty(TestFinbourneApi):
 
         Let us define the trades below. Keeping in mind that these would be generated from our order management or
         execution management system in reality. Each trade has a unique identifier prefixed with tid_. It also has a
-        transaction date and settlement date. We can consider datetime.today()-timedelta(days=1) to be the start of the
+        transaction date and settlement date. We can consider datetime.now(pytz.UTC)-timedelta(days=1) to be the start of the
         trading day and the number of hours/days after this to indicate when the trade was executed/settled.
-        '''
+        """
 
         self.client_transactions = {
 
@@ -530,8 +524,8 @@ class transparencyOversightThirdParty(TestFinbourneApi):
                     'tid_{}'.format(uuid.uuid4()) : {
                         'type': 'Sell',
                         'instrument_uid': self.instrument_universe['WPP_LondonStockEx_WPP']['identifiers']['LUID'],
-                        'transaction_date': (datetime.today() - timedelta(days=1) + timedelta(hours=2)).isoformat(),
-                        'settlement_date': (datetime.today() - timedelta(days=1) + timedelta(days=2)).isoformat(),
+                        'transaction_date': (datetime.now(pytz.UTC) - timedelta(days=1) + timedelta(hours=2)).isoformat(),
+                        'settlement_date': (datetime.now(pytz.UTC) - timedelta(days=1) + timedelta(days=2)).isoformat(),
                         'units': 265600,
                         'transaction_price': 8.9100,
                         'transaction_currency': 'GBP',
@@ -541,8 +535,8 @@ class transparencyOversightThirdParty(TestFinbourneApi):
                     'tid_{}'.format(uuid.uuid4()): {
                         'type': 'Buy',
                         'instrument_uid': self.instrument_universe['MicroFocus_LondonStockEx_MCRO']['identifiers']['LUID'],
-                        'transaction_date': (datetime.today() - timedelta(days=1) + timedelta(hours=5)).isoformat(),
-                        'settlement_date': (datetime.today() - timedelta(days=1) + timedelta(days=2)).isoformat(),
+                        'transaction_date': (datetime.now(pytz.UTC) - timedelta(days=1) + timedelta(hours=5)).isoformat(),
+                        'settlement_date': (datetime.now(pytz.UTC) - timedelta(days=1) + timedelta(days=2)).isoformat(),
                         'units': 15074,
                         'transaction_price': 13.2867,
                         'transaction_currency': 'GBP',
@@ -557,8 +551,8 @@ class transparencyOversightThirdParty(TestFinbourneApi):
                         'type': 'Sell',
                         'instrument_uid': self.instrument_universe['Kingfisher_LondonStockEx_KGF']['identifiers'][
                             'LUID'],
-                        'transaction_date': (datetime.today() - timedelta(days=1) + timedelta(hours=6)).isoformat(),
-                        'settlement_date': (datetime.today() - timedelta(days=1) + timedelta(days=2)).isoformat(),
+                        'transaction_date': (datetime.now(pytz.UTC) - timedelta(days=1) + timedelta(hours=6)).isoformat(),
+                        'settlement_date': (datetime.now(pytz.UTC) - timedelta(days=1) + timedelta(days=2)).isoformat(),
                         'units': 325000,
                         'transaction_price': 2.3450,
                         'transaction_currency': 'GBP',
@@ -566,8 +560,8 @@ class transparencyOversightThirdParty(TestFinbourneApi):
                     'tid_{}'.format(uuid.uuid4()): {
                         'type': 'Buy',
                         'instrument_uid': self.instrument_universe['UKGiltTreasury_4.5_2034']['identifiers']['LUID'],
-                        'transaction_date': (datetime.today() - timedelta(days=1) + timedelta(hours=9)).isoformat(),
-                        'settlement_date': (datetime.today() - timedelta(days=1) + timedelta(days=2)).isoformat(),
+                        'transaction_date': (datetime.now(pytz.UTC) - timedelta(days=1) + timedelta(hours=9)).isoformat(),
+                        'settlement_date': (datetime.now(pytz.UTC) - timedelta(days=1) + timedelta(days=2)).isoformat(),
                         'units': 10501,
                         'transaction_price': 140.572,
                         'transaction_currency': 'GBP',
@@ -579,8 +573,8 @@ class transparencyOversightThirdParty(TestFinbourneApi):
                         'type': 'Buy',
                         'instrument_uid': self.instrument_universe['UKGiltTreasury_3.75_2021']['identifiers'][
                             'LUID'],
-                        'transaction_date': (datetime.today() - timedelta(days=1) + timedelta(hours=3)).isoformat(),
-                        'settlement_date': (datetime.today() - timedelta(days=1) + timedelta(days=2)).isoformat(),
+                        'transaction_date': (datetime.now(pytz.UTC) - timedelta(days=1) + timedelta(hours=3)).isoformat(),
+                        'settlement_date': (datetime.now(pytz.UTC) - timedelta(days=1) + timedelta(days=2)).isoformat(),
                         'units': 24000,
                         'transaction_price': 109.126,
                         'transaction_currency': 'GBP',
@@ -588,8 +582,8 @@ class transparencyOversightThirdParty(TestFinbourneApi):
                     'tid_{}'.format(uuid.uuid4()): {
                         'type': 'Sell',
                         'instrument_uid': self.instrument_universe['USTreasury_2.00_2021']['identifiers']['LUID'],
-                        'transaction_date': (datetime.today() - timedelta(days=1) + timedelta(hours=2)).isoformat(),
-                        'settlement_date': (datetime.today() - timedelta(days=1) + timedelta(days=2)).isoformat(),
+                        'transaction_date': (datetime.now(pytz.UTC) - timedelta(days=1) + timedelta(hours=2)).isoformat(),
+                        'settlement_date': (datetime.now(pytz.UTC) - timedelta(days=1) + timedelta(days=2)).isoformat(),
                         'units': 57000,
                         'transaction_price': 97.80,
                         'transaction_currency': 'USD',
@@ -604,8 +598,8 @@ class transparencyOversightThirdParty(TestFinbourneApi):
                         'type': 'Sell',
                         'instrument_uid': self.instrument_universe['Whitebread_LondonStockEx_WTB']['identifiers'][
                             'LUID'],
-                        'transaction_date': (datetime.today() - timedelta(days=1) + timedelta(hours=5)).isoformat(),
-                        'settlement_date': (datetime.today() - timedelta(days=1) + timedelta(days=2)).isoformat(),
+                        'transaction_date': (datetime.now(pytz.UTC) - timedelta(days=1) + timedelta(hours=5)).isoformat(),
+                        'settlement_date': (datetime.now(pytz.UTC) - timedelta(days=1) + timedelta(days=2)).isoformat(),
                         'units': 70000,
                         'transaction_price': 47.03,
                         'transaction_currency': 'GBP',
@@ -613,8 +607,8 @@ class transparencyOversightThirdParty(TestFinbourneApi):
                     'tid_{}'.format(uuid.uuid4()): {
                         'type': 'Sell',
                         'instrument_uid': self.instrument_universe['TESCO_LondonStockEx_TSCO']['identifiers']['LUID'],
-                        'transaction_date': (datetime.today() - timedelta(days=1) + timedelta(hours=9)).isoformat(),
-                        'settlement_date': (datetime.today() - timedelta(days=1) + timedelta(days=2)).isoformat(),
+                        'transaction_date': (datetime.now(pytz.UTC) - timedelta(days=1) + timedelta(hours=9)).isoformat(),
+                        'settlement_date': (datetime.now(pytz.UTC) - timedelta(days=1) + timedelta(days=2)).isoformat(),
                         'units': 342000,
                         'transaction_price': 1.8865,
                         'transaction_currency': 'GBP',
@@ -706,19 +700,19 @@ class transparencyOversightThirdParty(TestFinbourneApi):
                 # Test that the transactions have been added correctly
                 self.transactions_added_tests(portfolio_scope=self.internal_scope_code,
                                               portfolio_code=portfolio_name,
-                                              start_date=(datetime.today() - timedelta(days=1)).isoformat(),
-                                              end_date=(datetime.today()).isoformat(),
-                                              as_at_date=datetime.today().isoformat(),
+                                              start_date=(datetime.now(pytz.UTC) - timedelta(days=1)).isoformat(),
+                                              end_date=(datetime.now(pytz.UTC)).isoformat(),
+                                              as_at_date=datetime.now(pytz.UTC).isoformat(),
                                               batch_transactions_request=portfolio_transactions)
 
     @timeit
     def update_fund_accountant_record(self):
-        '''
+        """
         It is early in the morning before trading begins and our fund accountant has just sent us the daily report
         with details on yesterday's activity and our current position according to their records.
 
         We will update our fund accountant scope with their records.
-        '''
+        """
 
         self.fund_accountant_daily_holdings_report = {
 
@@ -857,7 +851,7 @@ class transparencyOversightThirdParty(TestFinbourneApi):
             for portfolio_name, portfolio_adjustments in portfolio_group.items():
                 holdings = self.client.adjust_holdings(scope=self.fund_accountant_scope_code,
                                                        code=portfolio_name,
-                                                       effective_at=datetime.today().isoformat(),
+                                                       effective_at=datetime.now(pytz.UTC).isoformat(),
                                                        holding_adjustments=portfolio_adjustments)
 
                 # Tests to verify that the holdings are correct
@@ -865,11 +859,11 @@ class transparencyOversightThirdParty(TestFinbourneApi):
                                            holdings=holdings,
                                            scope=self.fund_accountant_scope_code,
                                            code=portfolio_name,
-                                           effective_at=(datetime.today()).isoformat())
+                                           effective_at=(datetime.now(pytz.UTC)).isoformat())
 
     @timeit
     def reconcile_records(self):
-        '''
+        """
         Now that we have the fund accountant scope updated with this morning's report, we need to see how different the
         fund accountant's view of our position is with our own internal records.
 
@@ -884,7 +878,7 @@ class transparencyOversightThirdParty(TestFinbourneApi):
 
         This makes reconciliation much easier and we will take advantage of this if we come across any discrepancies
         between our internal accounts and fund accountant's records.
-        '''
+        """
 
         self.reconciled_portfolios = {}
         for portfolio_group_name, portfolio_group in self.client_portfolios.items():
@@ -894,14 +888,14 @@ class transparencyOversightThirdParty(TestFinbourneApi):
                 internal_portfolio = models.PortfolioReconciliationRequest(portfolio_id=models.ResourceId(
                                                                                     scope=self.internal_scope_code,
                                                                                     code=portfolio_name),
-                                                                                effective_at=datetime.today().isoformat(),
-                                                                                as_at=datetime.today().isoformat())
+                                                                                effective_at=datetime.now(pytz.UTC).isoformat(),
+                                                                                as_at=datetime.now(pytz.UTC).isoformat())
 
                 fund_accountant_portfolio = models.PortfolioReconciliationRequest(portfolio_id=models.ResourceId(
                                                                                     scope=self.fund_accountant_scope_code,
                                                                                     code=portfolio_name),
-                                                                                 effective_at=datetime.today().isoformat(),
-                                                                                 as_at=datetime.today().isoformat())
+                                                                                 effective_at=datetime.now(pytz.UTC).isoformat(),
+                                                                                 as_at=datetime.now(pytz.UTC).isoformat())
 
                 reconcile_holdings_request = models.PortfoliosReconciliationRequest(left=internal_portfolio,
                                                                                     right=fund_accountant_portfolio,
@@ -941,7 +935,7 @@ class transparencyOversightThirdParty(TestFinbourneApi):
 
     @timeit
     def identify_discrepancies(self):
-        '''
+        """
         So we have identified a number of discrepancies between our internal records and the fund accountant's records.
         It seems as though perhaps a buy and a sell transaction have not gone through.
 
@@ -950,9 +944,9 @@ class transparencyOversightThirdParty(TestFinbourneApi):
         some late trades yesterday which caused the issue.
 
         We can wind back the clock to the close of trade yesterday and see how our two records compare.
-        '''
+        """
         reconciled_portfolios_trade_close = {}
-        trade_close_time = (datetime.today() - timedelta(days=1) + timedelta(hours=8)).isoformat()
+        trade_close_time = (datetime.now(pytz.UTC) - timedelta(days=1) + timedelta(hours=8)).isoformat()
         for portfolio_group_name, portfolio_group in self.client_portfolios.items():
             reconciled_portfolios_trade_close[portfolio_group_name] = {}
             for portfolio_name in portfolio_group:
@@ -961,13 +955,13 @@ class transparencyOversightThirdParty(TestFinbourneApi):
                                                                            scope=self.internal_scope_code,
                                                                            code=portfolio_name),
                                                                            effective_at=trade_close_time,
-                                                                           as_at=datetime.today().isoformat())
+                                                                           as_at=datetime.now(pytz.UTC).isoformat())
 
                 fund_accountant_portfolio = models.PortfolioReconciliationRequest(portfolio_id=models.ResourceId(
                                                                                   scope=self.fund_accountant_scope_code,
                                                                                   code=portfolio_name),
-                                                                                  effective_at=datetime.today().isoformat(),
-                                                                                  as_at=datetime.today().isoformat())
+                                                                                  effective_at=datetime.now(pytz.UTC).isoformat(),
+                                                                                  as_at=datetime.now(pytz.UTC).isoformat())
 
                 reconcile_holdings_request = models.PortfoliosReconciliationRequest(left=internal_portfolio,
                                                                                     right=fund_accountant_portfolio,
@@ -992,7 +986,7 @@ class transparencyOversightThirdParty(TestFinbourneApi):
                 late_trade = self.client.get_transactions(scope=self.internal_scope_code,
                                                           code=portfolio_name,
                                                           from_transaction_date=trade_close_time,
-                                                          to_transaction_date=datetime.today().isoformat())
+                                                          to_transaction_date=datetime.now(pytz.UTC).isoformat())
                 if late_trade.count > 0:
                     late_trades[portfolio_group_name][portfolio_name] = late_trade
 
@@ -1081,7 +1075,7 @@ class transparencyOversightThirdParty(TestFinbourneApi):
 
     @timeit
     def change_fund_accountants(self):
-        '''
+        """
         After a few months of reconciling our records with the fund accountant and building algorithms to automatically
         identify exceptions, we have a pretty good idea of the main causes of the discrepancies between our records
         and those of the fund accountant. We have prepared a report with some recommendations for them in order to
@@ -1095,7 +1089,7 @@ class transparencyOversightThirdParty(TestFinbourneApi):
 
         To change providers, we can switch our entitlements to give the new accountant access to our records and
         ensure that our old provider no longer has access.
-        '''
+        """
 
     @timeit
     def test_transparency_oversight(self):

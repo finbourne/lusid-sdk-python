@@ -1,9 +1,7 @@
 import uuid
-import os
 import pytz
 import unittest
 import lusid.models as models
-from unittest import TestCase
 from datetime import datetime, timedelta
 from finbournetest import TestFinbourneApi, timeit
 
@@ -17,8 +15,9 @@ except ImportError:
 
 class transparencyStrategies(TestFinbourneApi):
 
+    @timeit
     def import_data(self):
-        '''
+        """
         We are an asset manager who has just taken on three new clients. Each client has a number of different objectives
         and we will use a different portfolio to track how we are tracking against each objective.
 
@@ -28,7 +27,7 @@ class transparencyStrategies(TestFinbourneApi):
 
         Using LUSID we have the ability to add a strategy label to each transaction that we make. We can then aggregate
         across these labels to get a holistic view into how a strategy is performing.
-        '''
+        """
 
         '''
         In LUSID every object is contained inside a Scope. A Scope is a container which acts as a separate namespace. 
@@ -68,11 +67,12 @@ class transparencyStrategies(TestFinbourneApi):
             ]
         }
 
+    @timeit
     def create_portfolios(self):
-        '''
+        """
         Let us create the portfolios for our new clients. We will group each client's portfolio's together using a
         portfolio group. A portfolio group is simply a container that can be used to group multiple portfolios
-        '''
+        """
 
         '''
         Let us create our portfolios and portfolio groups.
@@ -124,10 +124,11 @@ class transparencyStrategies(TestFinbourneApi):
             # Tests - Ensure that we have successfully created the portfolio group
             self.portfolio_group_creation_tests(portfolio_group, portfolio_group_request, self.internal_scope_code)
 
+    @timeit
     def add_holdings(self):
-        '''
+        """
         Let us populate our portfolios with their initial holdings
-        '''
+        """
 
         '''
         Before we can set our holdings we first need to upsert our instrument into LUSID. We use the upsert method which
@@ -445,8 +446,9 @@ class transparencyStrategies(TestFinbourneApi):
                                            code=portfolio_name,
                                            effective_at=self.created_date)
 
+    @timeit
     def create_strategy_tags(self):
-        '''
+        """
         Now that we have our portfolios we can create our strategy label. In LUSID we do this using what is known as
         a property. A property is user defined in advance and can be set on any LUSID object. We are going to create
         a property called 'strategy' which will take the value of a string. We will attach this property to each
@@ -462,7 +464,7 @@ class transparencyStrategies(TestFinbourneApi):
         default string type.
 
         This means that when we set the 'strategy' property we can use any string we like as the label.
-        '''
+        """
 
         property_request = models.CreatePropertyDefinitionRequest(domain='Trade',
                                                                   scope=self.internal_scope_code,
@@ -480,11 +482,12 @@ class transparencyStrategies(TestFinbourneApi):
         # Tests to check that the property has been created successfully
         self.create_property_definition_test(property_request, property)
 
+    @timeit
     def add_first_transactions(self):
-        '''
+        """
         Now that we have defined our strategy tag property for use on our transactions, we can make some trades
         for our new clients attaching the appropriate tag to each trade.
-        '''
+        """
 
         '''
         Now that we have our portfolios populated with their holdings we are going to simulate a day of trading. We
@@ -712,10 +715,11 @@ class transparencyStrategies(TestFinbourneApi):
 
                 # tk - add test for properties
 
+    @timeit
     def create_analytics(self):
-        '''
+        """
         To run aggregation over our portfolio groups we first need to define an analytic store
-        '''
+        """
 
         analytics_effective_date = datetime.now(pytz.UTC)
 
@@ -741,11 +745,12 @@ class transparencyStrategies(TestFinbourneApi):
                                   day=analytics_effective_date.day,
                                   data=instrument_analytics)
 
+    @timeit
     def aggregate_portfolio_group(self):
-        '''
+        """
         On the back of our trades we can look at the holdings for each of our clients using the portfolio groups we
         created earlier.
-        '''
+        """
 
         for portfolio_group_code, portfolio_group in self.client_portfolios.items():
             aggregation_request = models.AggregationRequest(recipe_id=models.ResourceId(scope=self.internal_scope_code,
@@ -763,11 +768,12 @@ class transparencyStrategies(TestFinbourneApi):
 
             # tk - Tests to confirm correct, how?
 
+    @timeit
     def aggregate_strategy(self):
-        '''
+        """
         We can also look at how a given strategy is performing across our client's entire holdings. To do this we can
         apply a filter to our aggregated result.
-        '''
+        """
 
         strategy = 'quantitativeSignal'
         scope_id = uuid.uuid4()
@@ -834,10 +840,7 @@ class transparencyStrategies(TestFinbourneApi):
                                                                     code= 'client-{}-strategy-balanced'.format(self.client_2_portfolio_group_id),
                                                                     request=aggregation_request)
 
-
-            print ('wait')
-
-
+    @timeit
     def test_transparency_strategies(self):
         self.import_data()
         self.create_portfolios()
