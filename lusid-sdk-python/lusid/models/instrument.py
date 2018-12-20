@@ -43,9 +43,6 @@ class Instrument(Model):
      be found for the instrument, then
      a value of 'Unknown' will be returned
     :type properties: list[~lusid.models.Property]
-    :param market_identifier_code: The market identifier of the instrument (if
-     any).
-    :type market_identifier_code: str
     :param lookthrough_portfolio: The lookthrough portfolio of the instrument
      (if any).
     :type lookthrough_portfolio: ~lusid.models.ResourceId
@@ -60,12 +57,11 @@ class Instrument(Model):
         'name': {'key': 'name', 'type': 'str'},
         'identifiers': {'key': 'identifiers', 'type': '{str}'},
         'properties': {'key': 'properties', 'type': '[Property]'},
-        'market_identifier_code': {'key': 'marketIdentifierCode', 'type': 'str'},
         'lookthrough_portfolio': {'key': 'lookthroughPortfolio', 'type': 'ResourceId'},
         'links': {'key': 'links', 'type': '[Link]'},
     }
 
-    def __init__(self, href=None, lusid_instrument_id=None, version=None, name=None, identifiers=None, properties=None, market_identifier_code=None, lookthrough_portfolio=None, links=None):
+    def __init__(self, href=None, lusid_instrument_id=None, version=None, name=None, identifiers=None, properties=None, lookthrough_portfolio=None, links=None):
         super(Instrument, self).__init__()
         self.href = href
         self.lusid_instrument_id = lusid_instrument_id
@@ -73,6 +69,5 @@ class Instrument(Model):
         self.name = name
         self.identifiers = identifiers
         self.properties = properties
-        self.market_identifier_code = market_identifier_code
         self.lookthrough_portfolio = lookthrough_portfolio
         self.links = links
