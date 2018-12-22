@@ -27,20 +27,24 @@ from msrest.serialization import Model
 class UpsertInstrumentPropertyRequest(Model):
     """UpsertInstrumentPropertyRequest.
 
-    :param instrument_property_key: The property key of the property, e.g,
-     'Instrument/default/Isin'
-    :type instrument_property_key: str
-    :param property: The value of the property, which must not be empty or
-     null. e.g, 'US0378331005'
-    :type property: ~lusid.models.PropertyValue
+    :param lusid_instrument_id: Unique instrument identifier
+    :type lusid_instrument_id: str
+    :param properties: A collection of properties to create or update
+    :type properties: list[~lusid.models.InstrumentProperty]
+    :param deleted_properties: A collection of property keys to remove
+     property values from, if any are set for the instrument
+    :type deleted_properties:
+     list[~lusid.models.DeleteInstrumentPropertyRequest]
     """
 
     _attribute_map = {
-        'instrument_property_key': {'key': 'instrumentPropertyKey', 'type': 'str'},
-        'property': {'key': 'property', 'type': 'PropertyValue'},
+        'lusid_instrument_id': {'key': 'lusidInstrumentId', 'type': 'str'},
+        'properties': {'key': 'properties', 'type': '[InstrumentProperty]'},
+        'deleted_properties': {'key': 'deletedProperties', 'type': '[DeleteInstrumentPropertyRequest]'},
     }
 
-    def __init__(self, instrument_property_key=None, property=None):
+    def __init__(self, lusid_instrument_id=None, properties=None, deleted_properties=None):
         super(UpsertInstrumentPropertyRequest, self).__init__()
-        self.instrument_property_key = instrument_property_key
-        self.property = property
+        self.lusid_instrument_id = lusid_instrument_id
+        self.properties = properties
+        self.deleted_properties = deleted_properties

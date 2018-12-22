@@ -110,7 +110,6 @@ class LUSIDAPI(object):
     Instrument data can be uploaded to the system using the [Instrument Properties](#tag/InstrumentProperties) endpoint.
     | Field|Type|Description |
     | ---|---|--- |
-    | LusidInstrumentId|string|Unique instrument identifier |
     ## Portfolios
     Portfolios are the top-level entity containers within LUSID, containing transactions, corporate actions and holdings.    The transactions build up the portfolio holdings on which valuations, analytics profit &amp; loss and risk can be calculated.
     Properties can be associated with Portfolios to add in additional model data.  Portfolio properties can be changed over time as well.  For example, to allow a Portfolio Manager to be linked with a Portfolio.
@@ -368,7 +367,7 @@ class LUSIDAPI(object):
         self._client = ServiceClient(self.config.credentials, self.config)
 
         client_models = {k: v for k, v in models.__dict__.items() if isinstance(v, type)}
-        self.api_version = '0.9.25'
+        self.api_version = '0.9.28'
         self._serialize = Serializer(client_models)
         self._deserialize = Deserializer(client_models)
 
@@ -1903,7 +1902,8 @@ class LUSIDAPI(object):
         unsuccessful results.
 
         :param instrument_properties: The instrument property data
-        :type instrument_properties: list[~lusid.models.InstrumentProperty]
+        :type instrument_properties:
+         list[~lusid.models.UpsertInstrumentPropertyRequest]
         :param dict custom_headers: headers that will be added to the request
         :param bool raw: returns the direct response alongside the
          deserialized response
@@ -1930,7 +1930,7 @@ class LUSIDAPI(object):
 
         # Construct body
         if instrument_properties is not None:
-            body_content = self._serialize.body(instrument_properties, '[InstrumentProperty]')
+            body_content = self._serialize.body(instrument_properties, '[UpsertInstrumentPropertyRequest]')
         else:
             body_content = None
 
@@ -5408,6 +5408,77 @@ class LUSIDAPI(object):
 
         return deserialized
     get_value_types.metadata = {'url': '/api/schemas/types'}
+
+    def instruments_search(
+            self, symbols=None, mastered_effective_at=None, mastered_only=False, custom_headers=None, raw=False, **operation_config):
+        """Search instruments.
+
+        Search through instruments that have been mastered in LUSID, and
+        optionally augment results with instruments from a symbology service.
+
+        :param symbols: A collection of instrument symbols to search for
+        :type symbols: list[~lusid.models.InstrumentSearchProperty]
+        :param mastered_effective_at: Optional. The effective date for
+         searching mastered instruments. If this is not set, then the current
+         date is taken.
+         This parameter has no effect on instruments that have not been
+         mastered within LUSID.
+        :type mastered_effective_at: datetime
+        :param mastered_only: Optional. If set to true, only search over
+         instruments that have been mastered within LUSID. Default to false
+        :type mastered_only: bool
+        :param dict custom_headers: headers that will be added to the request
+        :param bool raw: returns the direct response alongside the
+         deserialized response
+        :param operation_config: :ref:`Operation configuration
+         overrides<msrest:optionsforoperations>`.
+        :return: list or ClientRawResponse if raw=true
+        :rtype: list[~lusid.models.InstrumentMatch] or
+         ~msrest.pipeline.ClientRawResponse
+        :raises:
+         :class:`ErrorResponseException<lusid.models.ErrorResponseException>`
+        """
+        # Construct URL
+        url = self.instruments_search.metadata['url']
+
+        # Construct parameters
+        query_parameters = {}
+        if mastered_effective_at is not None:
+            query_parameters['masteredEffectiveAt'] = self._serialize.query("mastered_effective_at", mastered_effective_at, 'iso-8601')
+        if mastered_only is not None:
+            query_parameters['masteredOnly'] = self._serialize.query("mastered_only", mastered_only, 'bool')
+
+        # Construct headers
+        header_parameters = {}
+        header_parameters['Content-Type'] = 'application/json-patch+json; charset=utf-8'
+        if custom_headers:
+            header_parameters.update(custom_headers)
+
+        # Construct body
+        if symbols is not None:
+            body_content = self._serialize.body(symbols, '[InstrumentSearchProperty]')
+        else:
+            body_content = None
+
+        # Construct and send request
+        request = self._client.post(url, query_parameters)
+        response = self._client.send(
+            request, header_parameters, body_content, stream=False, **operation_config)
+
+        if response.status_code not in [200]:
+            raise models.ErrorResponseException(self._deserialize, response)
+
+        deserialized = None
+
+        if response.status_code == 200:
+            deserialized = self._deserialize('[InstrumentMatch]', response)
+
+        if raw:
+            client_raw_response = ClientRawResponse(deserialized, response)
+            return client_raw_response
+
+        return deserialized
+    instruments_search.metadata = {'url': '/api/search/instruments'}
 
     def portfolio_groups_search(
             self, request=None, sort_by=None, start=None, limit=None, filter=None, custom_headers=None, raw=False, **operation_config):

@@ -24,23 +24,23 @@
 from msrest.serialization import Model
 
 
-class InstrumentProperty(Model):
-    """InstrumentProperty.
+class InstrumentSearchProperty(Model):
+    """InstrumentSearchProperty.
 
     :param key: The property key of the property, e.g,
      'Instrument/default/Isin'
     :type key: str
     :param value: The value of the property, which must not be empty or null.
      e.g, 'US0378331005'
-    :type value: ~lusid.models.PropertyValue
+    :type value: str
     """
 
     _attribute_map = {
         'key': {'key': 'key', 'type': 'str'},
-        'value': {'key': 'value', 'type': 'PropertyValue'},
+        'value': {'key': 'value', 'type': 'str'},
     }
 
     def __init__(self, key=None, value=None):
-        super(InstrumentProperty, self).__init__()
+        super(InstrumentSearchProperty, self).__init__()
         self.key = key
         self.value = value

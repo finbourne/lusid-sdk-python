@@ -24,23 +24,25 @@
 from msrest.serialization import Model
 
 
-class InstrumentProperty(Model):
-    """InstrumentProperty.
+class InstrumentMatch(Model):
+    """A collection of instrument search results.
 
-    :param key: The property key of the property, e.g,
-     'Instrument/default/Isin'
-    :type key: str
-    :param value: The value of the property, which must not be empty or null.
-     e.g, 'US0378331005'
-    :type value: ~lusid.models.PropertyValue
+    :param mastered_instruments: A collection of instruments that have met
+     some criteria that have been previously
+     mastered within LUSID
+    :type mastered_instruments: list[~lusid.models.InstrumentDefinition]
+    :param external_instruments: A collection of instruments that have met
+     some criteria, but that have not been
+     mastered within LUSID.
+    :type external_instruments: list[~lusid.models.InstrumentDefinition]
     """
 
     _attribute_map = {
-        'key': {'key': 'key', 'type': 'str'},
-        'value': {'key': 'value', 'type': 'PropertyValue'},
+        'mastered_instruments': {'key': 'masteredInstruments', 'type': '[InstrumentDefinition]'},
+        'external_instruments': {'key': 'externalInstruments', 'type': '[InstrumentDefinition]'},
     }
 
-    def __init__(self, key=None, value=None):
-        super(InstrumentProperty, self).__init__()
-        self.key = key
-        self.value = value
+    def __init__(self, mastered_instruments=None, external_instruments=None):
+        super(InstrumentMatch, self).__init__()
+        self.mastered_instruments = mastered_instruments
+        self.external_instruments = external_instruments

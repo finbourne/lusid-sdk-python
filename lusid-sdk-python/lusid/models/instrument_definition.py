@@ -37,7 +37,7 @@ class InstrumentDefinition(Model):
     :type identifiers: dict[str, str]
     :ivar properties: Optional. A collection of properties to upsert on the
      instrument.
-    :vartype properties: list[~lusid.models.UpsertInstrumentPropertyRequest]
+    :vartype properties: list[~lusid.models.InstrumentProperty]
     :param look_through_portfolio_id: Optional. The identifier of the
      portfolio that represents this instrument
     :type look_through_portfolio_id: ~lusid.models.ResourceId
@@ -59,7 +59,7 @@ class InstrumentDefinition(Model):
     _attribute_map = {
         'name': {'key': 'name', 'type': 'str'},
         'identifiers': {'key': 'identifiers', 'type': '{str}'},
-        'properties': {'key': 'properties', 'type': '[UpsertInstrumentPropertyRequest]'},
+        'properties': {'key': 'properties', 'type': '[InstrumentProperty]'},
         'look_through_portfolio_id': {'key': 'lookThroughPortfolioId', 'type': 'ResourceId'},
         'definition': {'key': 'definition', 'type': 'InstrumentEconomicDefinition'},
     }

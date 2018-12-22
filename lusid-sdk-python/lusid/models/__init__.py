@@ -50,7 +50,7 @@ from .version import Version
 from .portfolio import Portfolio
 from .metric_value import MetricValue
 from .property_value import PropertyValue
-from .upsert_instrument_property_request import UpsertInstrumentPropertyRequest
+from .instrument_property import InstrumentProperty
 from .instrument_economic_definition import InstrumentEconomicDefinition
 from .instrument_definition import InstrumentDefinition
 from .property import Property
@@ -62,7 +62,7 @@ from .delete_instrument_response import DeleteInstrumentResponse
 from .get_instruments_response import GetInstrumentsResponse
 from .match_instruments_response import MatchInstrumentsResponse
 from .delete_instrument_property_request import DeleteInstrumentPropertyRequest
-from .instrument_property import InstrumentProperty
+from .upsert_instrument_property_request import UpsertInstrumentPropertyRequest
 from .upsert_instrument_properties_response import UpsertInstrumentPropertiesResponse
 from .resource_list_of_code_type import ResourceListOfCodeType
 from .stream import Stream
@@ -126,6 +126,8 @@ from .key_value_pair_of_string_to_field_schema import KeyValuePairOfStringToFiel
 from .schema import Schema
 from .property_schema import PropertySchema
 from .resource_list_of_value_type import ResourceListOfValueType
+from .instrument_search_property import InstrumentSearchProperty
+from .instrument_match import InstrumentMatch
 from .portfolio_search_result import PortfolioSearchResult
 from .resource_list_of_portfolio_search_result import ResourceListOfPortfolioSearchResult
 from .transaction_configuration_type_alias import TransactionConfigurationTypeAlias
@@ -192,7 +194,7 @@ __all__ = [
     'Portfolio',
     'MetricValue',
     'PropertyValue',
-    'UpsertInstrumentPropertyRequest',
+    'InstrumentProperty',
     'InstrumentEconomicDefinition',
     'InstrumentDefinition',
     'Property',
@@ -204,7 +206,7 @@ __all__ = [
     'GetInstrumentsResponse',
     'MatchInstrumentsResponse',
     'DeleteInstrumentPropertyRequest',
-    'InstrumentProperty',
+    'UpsertInstrumentPropertyRequest',
     'UpsertInstrumentPropertiesResponse',
     'ResourceListOfCodeType',
     'Stream',
@@ -268,6 +270,8 @@ __all__ = [
     'Schema',
     'PropertySchema',
     'ResourceListOfValueType',
+    'InstrumentSearchProperty',
+    'InstrumentMatch',
     'PortfolioSearchResult',
     'ResourceListOfPortfolioSearchResult',
     'TransactionConfigurationTypeAlias',
