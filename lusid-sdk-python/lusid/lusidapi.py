@@ -367,7 +367,7 @@ class LUSIDAPI(object):
         self._client = ServiceClient(self.config.credentials, self.config)
 
         client_models = {k: v for k, v in models.__dict__.items() if isinstance(v, type)}
-        self.api_version = '0.9.29'
+        self.api_version = '0.9.41'
         self._serialize = Serializer(client_models)
         self._deserialize = Deserializer(client_models)
 
@@ -706,6 +706,200 @@ class LUSIDAPI(object):
         return deserialized
     set_analytics.metadata = {'url': '/api/analytics/{scope}/{year}/{month}/{day}/prices'}
 
+    def list_corporate_action_sources(
+            self, effective_at=None, as_at=None, sort_by=None, start=None, limit=None, filter=None, custom_headers=None, raw=False, **operation_config):
+        """Get corporate action sources.
+
+        Gets a list of all corporate action sources.
+
+        :param effective_at: Optional. The start effective date of the data
+         range
+        :type effective_at: datetime
+        :param as_at: Optional. The AsAt date of the data
+        :type as_at: datetime
+        :param sort_by: Optional. Order the results by these fields. Use use
+         the '-' sign to denote descending order e.g. -MyFieldName
+        :type sort_by: list[str]
+        :param start: Optional. When paginating, skip this number of results
+        :type start: int
+        :param limit: Optional. When paginating, limit the number of returned
+         results to this many
+        :type limit: int
+        :param filter: Optional. Expression to filter the result set
+        :type filter: str
+        :param dict custom_headers: headers that will be added to the request
+        :param bool raw: returns the direct response alongside the
+         deserialized response
+        :param operation_config: :ref:`Operation configuration
+         overrides<msrest:optionsforoperations>`.
+        :return: ResourceListOfCorporateActionSource or ClientRawResponse if
+         raw=true
+        :rtype: ~lusid.models.ResourceListOfCorporateActionSource or
+         ~msrest.pipeline.ClientRawResponse
+        :raises:
+         :class:`ErrorResponseException<lusid.models.ErrorResponseException>`
+        """
+        # Construct URL
+        url = self.list_corporate_action_sources.metadata['url']
+
+        # Construct parameters
+        query_parameters = {}
+        if effective_at is not None:
+            query_parameters['effectiveAt'] = self._serialize.query("effective_at", effective_at, 'iso-8601')
+        if as_at is not None:
+            query_parameters['asAt'] = self._serialize.query("as_at", as_at, 'iso-8601')
+        if sort_by is not None:
+            query_parameters['sortBy'] = self._serialize.query("sort_by", sort_by, '[str]', div=',')
+        if start is not None:
+            query_parameters['start'] = self._serialize.query("start", start, 'int')
+        if limit is not None:
+            query_parameters['limit'] = self._serialize.query("limit", limit, 'int')
+        if filter is not None:
+            query_parameters['filter'] = self._serialize.query("filter", filter, 'str')
+
+        # Construct headers
+        header_parameters = {}
+        header_parameters['Content-Type'] = 'application/json; charset=utf-8'
+        if custom_headers:
+            header_parameters.update(custom_headers)
+
+        # Construct and send request
+        request = self._client.get(url, query_parameters)
+        response = self._client.send(request, header_parameters, stream=False, **operation_config)
+
+        if response.status_code not in [200]:
+            raise models.ErrorResponseException(self._deserialize, response)
+
+        deserialized = None
+
+        if response.status_code == 200:
+            deserialized = self._deserialize('ResourceListOfCorporateActionSource', response)
+
+        if raw:
+            client_raw_response = ClientRawResponse(deserialized, response)
+            return client_raw_response
+
+        return deserialized
+    list_corporate_action_sources.metadata = {'url': '/api/corporateactionsources'}
+
+    def create_corporate_action_source(
+            self, custom_headers=None, raw=False, **operation_config):
+        """Create Corporate Action Source.
+
+        Attempt to create a corporate action source.
+
+        :param dict custom_headers: headers that will be added to the request
+        :param bool raw: returns the direct response alongside the
+         deserialized response
+        :param operation_config: :ref:`Operation configuration
+         overrides<msrest:optionsforoperations>`.
+        :return: CorporateActionSource or ClientRawResponse if raw=true
+        :rtype: ~lusid.models.CorporateActionSource or
+         ~msrest.pipeline.ClientRawResponse
+        :raises:
+         :class:`ErrorResponseException<lusid.models.ErrorResponseException>`
+        """
+        request = None
+
+        # Construct URL
+        url = self.create_corporate_action_source.metadata['url']
+
+        # Construct parameters
+        query_parameters = {}
+
+        # Construct headers
+        header_parameters = {}
+        header_parameters['Content-Type'] = 'application/json-patch+json; charset=utf-8'
+        if custom_headers:
+            header_parameters.update(custom_headers)
+
+        # Construct body
+        if request is not None:
+            body_content = self._serialize.body(request, 'CreateCorporateActionSourceRequest')
+        else:
+            body_content = None
+
+        # Construct and send request
+        request = self._client.post(url, query_parameters)
+        response = self._client.send(
+            request, header_parameters, body_content, stream=False, **operation_config)
+
+        if response.status_code not in [201]:
+            raise models.ErrorResponseException(self._deserialize, response)
+
+        deserialized = None
+
+        if response.status_code == 201:
+            deserialized = self._deserialize('CorporateActionSource', response)
+
+        if raw:
+            client_raw_response = ClientRawResponse(deserialized, response)
+            return client_raw_response
+
+        return deserialized
+    create_corporate_action_source.metadata = {'url': '/api/corporateactionsources'}
+
+    def delete_corporate_action_source(
+            self, scope, code, effective_at=None, custom_headers=None, raw=False, **operation_config):
+        """Delete a corporate action source.
+
+        Deletes a single corporate action source.
+
+        :param scope: The Scope of the Corporate Action Source to be deleted
+        :type scope: str
+        :param code: The Code of the Corporate Action Source to be deleted
+        :type code: str
+        :param effective_at: Optional. The start effective date of the data
+        :type effective_at: datetime
+        :param dict custom_headers: headers that will be added to the request
+        :param bool raw: returns the direct response alongside the
+         deserialized response
+        :param operation_config: :ref:`Operation configuration
+         overrides<msrest:optionsforoperations>`.
+        :return: DeletedEntityResponse or ClientRawResponse if raw=true
+        :rtype: ~lusid.models.DeletedEntityResponse or
+         ~msrest.pipeline.ClientRawResponse
+        :raises:
+         :class:`ErrorResponseException<lusid.models.ErrorResponseException>`
+        """
+        # Construct URL
+        url = self.delete_corporate_action_source.metadata['url']
+        path_format_arguments = {
+            'scope': self._serialize.url("scope", scope, 'str'),
+            'code': self._serialize.url("code", code, 'str')
+        }
+        url = self._client.format_url(url, **path_format_arguments)
+
+        # Construct parameters
+        query_parameters = {}
+        if effective_at is not None:
+            query_parameters['effectiveAt'] = self._serialize.query("effective_at", effective_at, 'iso-8601')
+
+        # Construct headers
+        header_parameters = {}
+        header_parameters['Content-Type'] = 'application/json; charset=utf-8'
+        if custom_headers:
+            header_parameters.update(custom_headers)
+
+        # Construct and send request
+        request = self._client.delete(url, query_parameters)
+        response = self._client.send(request, header_parameters, stream=False, **operation_config)
+
+        if response.status_code not in [200]:
+            raise models.ErrorResponseException(self._deserialize, response)
+
+        deserialized = None
+
+        if response.status_code == 200:
+            deserialized = self._deserialize('DeletedEntityResponse', response)
+
+        if raw:
+            client_raw_response = ClientRawResponse(deserialized, response)
+            return client_raw_response
+
+        return deserialized
+    delete_corporate_action_source.metadata = {'url': '/api/corporateactionsources/{scope}/{code}'}
+
     def get_corporate_actions(
             self, scope, code, from_effective_at=None, to_effective_at=None, as_at=None, sort_by=None, start=None, limit=None, filter=None, custom_headers=None, raw=False, **operation_config):
         """Get corporate actions.
@@ -794,7 +988,7 @@ class LUSIDAPI(object):
             return client_raw_response
 
         return deserialized
-    get_corporate_actions.metadata = {'url': '/api/corporateactions/{scope}/{code}'}
+    get_corporate_actions.metadata = {'url': '/api/corporateactionsources/{scope}/{code}/corporateactions'}
 
     def batch_upsert_corporate_actions(
             self, scope, code, actions=None, custom_headers=None, raw=False, **operation_config):
@@ -863,7 +1057,7 @@ class LUSIDAPI(object):
             return client_raw_response
 
         return deserialized
-    batch_upsert_corporate_actions.metadata = {'url': '/api/corporateactions/{scope}/{code}'}
+    batch_upsert_corporate_actions.metadata = {'url': '/api/corporateactionsources/{scope}/{code}/corporateactions'}
 
     def create_data_type(
             self, request=None, custom_headers=None, raw=False, **operation_config):

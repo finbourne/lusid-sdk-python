@@ -21,5 +21,32 @@
 # SOFTWARE.
 # --------------------------------------------------------------------------
 
-VERSION = "0.9.41"
+from msrest.serialization import Model
 
+
+class CorporateActionSource(Model):
+    """CorporateActionSource.
+
+    :param href:
+    :type href: str
+    :param id:
+    :type id: ~lusid.models.ResourceId
+    :param version:
+    :type version: ~lusid.models.Version
+    :param links:
+    :type links: list[~lusid.models.Link]
+    """
+
+    _attribute_map = {
+        'href': {'key': 'href', 'type': 'str'},
+        'id': {'key': 'id', 'type': 'ResourceId'},
+        'version': {'key': 'version', 'type': 'Version'},
+        'links': {'key': 'links', 'type': '[Link]'},
+    }
+
+    def __init__(self, href=None, id=None, version=None, links=None):
+        super(CorporateActionSource, self).__init__()
+        self.href = href
+        self.id = id
+        self.version = version
+        self.links = links

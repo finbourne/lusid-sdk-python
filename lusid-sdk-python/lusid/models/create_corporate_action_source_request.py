@@ -21,5 +21,32 @@
 # SOFTWARE.
 # --------------------------------------------------------------------------
 
-VERSION = "0.9.41"
+from msrest.serialization import Model
 
+
+class CreateCorporateActionSourceRequest(Model):
+    """CreateCorporateActionSourceRequest.
+
+    Variables are only populated by the server, and will be ignored when
+    sending a request.
+
+    :ivar scope: Scope of Corporate Action Source
+    :vartype scope: str
+    :ivar code: Code of Corporate Action Source
+    :vartype code: str
+    """
+
+    _validation = {
+        'scope': {'readonly': True},
+        'code': {'readonly': True},
+    }
+
+    _attribute_map = {
+        'scope': {'key': 'scope', 'type': 'str'},
+        'code': {'key': 'code', 'type': 'str'},
+    }
+
+    def __init__(self):
+        super(CreateCorporateActionSourceRequest, self).__init__()
+        self.scope = None
+        self.code = None
