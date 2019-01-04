@@ -162,10 +162,10 @@ class businessAgilityTestEnvironment(TestFinbourneApi):
         This inserts a record if it does not already exist and modifies an existing record if it does already exist.
 
         We can upsert our instruments individually or in a batch. Either way the request should be in the form of a
-        dictionary with an arbitrary reference name for the instrument as the key and an UpsertInstrumentRequest object
+        dictionary with an arbitrary reference name for the instrument as the key and an InstrumentDefinition object
         as the value.
 
-        The UpsertInstrumentRequest requires a name for the instrument which is a string. In this case we will use the 
+        The InstrumentDefinition requires a name for the instrument which is a string. In this case we will use the 
         same name as the arbitrary reference key.
 
         It also requires a dictionary containing at least one unique identifier for the asset. The key for this 
@@ -179,8 +179,8 @@ class businessAgilityTestEnvironment(TestFinbourneApi):
         batch_upsert_request = {}
         # Using then initial holdings information, create our batch
         for instrument_name in self.transferred_instruments:
-            batch_upsert_request[instrument_name] = models.UpsertInstrumentRequest(name=instrument_name,
-                                                                                   identifiers=
+            batch_upsert_request[instrument_name] = models.InstrumentDefinition(name=instrument_name,
+                                                                                identifiers=
                                                                                    self.transferred_instruments[
                                                                                        instrument_name]['identifiers'])
         # Upsert our batch
@@ -422,8 +422,8 @@ class businessAgilityTestEnvironment(TestFinbourneApi):
         batch_upsert_request = {}
         # Create our batch which has the instrument name as the key for each instrument
         for instrument_name in self.new_instruments:
-            batch_upsert_request[instrument_name] = models.UpsertInstrumentRequest(name=instrument_name,
-                                                                                   identifiers=
+            batch_upsert_request[instrument_name] = models.InstrumentDefinition(name=instrument_name,
+                                                                                identifiers=
                                                                                    self.new_instruments[
                                                                                        instrument_name]['identifiers'])
         # Upsert our batch

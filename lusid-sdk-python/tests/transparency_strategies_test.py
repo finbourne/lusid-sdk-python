@@ -140,10 +140,10 @@ class transparencyStrategies(TestFinbourneApi):
         update a holding. 
 
         Here we can upsert our instruments individually or in a batch. Either way the request should be in the form of a
-        dictionary with an arbitrary reference name for the instrument as the key and an UpsertInstrumentRequest object
+        dictionary with an arbitrary reference name for the instrument as the key and an InstrumentDefinition object
         as the value.
 
-        The UpsertInstrumentRequest requires a name for the instrument which is a string. In this case we will use the 
+        The InstrumentDefinition requires a name for the instrument which is a string. In this case we will use the 
         same name as the arbitrary reference key.
 
         It also requires a dictionary containing at least one unique identifier for the asset. The key for this 
@@ -240,8 +240,8 @@ class transparencyStrategies(TestFinbourneApi):
         batch_upsert_request = {}
         # Using our instrument universe create our batch request
         for instrument_name, instrument in self.instrument_universe.items():
-            batch_upsert_request[instrument_name] = models.UpsertInstrumentRequest(name=instrument_name,
-                                                                                   identifiers=instrument[
+            batch_upsert_request[instrument_name] = models.InstrumentDefinition(name=instrument_name,
+                                                                                identifiers=instrument[
                                                                                        'identifiers'])
         # Upsert our batch
         batch_upsert_response = self.client.upsert_instruments(requests=batch_upsert_request)
@@ -462,10 +462,10 @@ class transparencyStrategies(TestFinbourneApi):
         update a holding. 
 
         Here we can upsert our instruments individually or in a batch. Either way the request should be in the form of a
-        dictionary with an arbitrary reference name for the instrument as the key and an UpsertInstrumentRequest object
+        dictionary with an arbitrary reference name for the instrument as the key and an InstrumentDefinition object
         as the value.
 
-        The UpsertInstrumentRequest requires a name for the instrument which is a string. In this case we will use the 
+        The InstrumentDefinition requires a name for the instrument which is a string. In this case we will use the 
         same name as the arbitrary reference key.
 
         It also requires a dictionary containing at least one unique identifier for the asset. The key for this 
@@ -562,8 +562,8 @@ class transparencyStrategies(TestFinbourneApi):
         batch_upsert_request = {}
         # Using our instrument universe create our batch request
         for instrument_name, instrument in self.instrument_universe.items():
-            batch_upsert_request[instrument_name] = models.UpsertInstrumentRequest(name=instrument_name,
-                                                                                   identifiers=instrument[
+            batch_upsert_request[instrument_name] = models.InstrumentDefinition(name=instrument_name,
+                                                                                identifiers=instrument[
                                                                                        'identifiers'])
         # Upsert our batch
         batch_upsert_response = self.client.upsert_instruments(requests=batch_upsert_request)
@@ -1157,7 +1157,6 @@ class transparencyStrategies(TestFinbourneApi):
                                                                     code=portfolio_group_code,
                                                                     request=aggregation_request)
 
-            print ('test')
             # tk - add test to ensure correct
 
     @timeit

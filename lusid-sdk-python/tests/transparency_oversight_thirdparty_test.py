@@ -272,8 +272,8 @@ class transparencyOversightThirdParty(TestFinbourneApi):
         batch_upsert_request = {}
         # Using our instrument universe create our batch request
         for instrument_name, instrument in self.instrument_universe.items():
-            batch_upsert_request[instrument_name] = models.UpsertInstrumentRequest(name=instrument_name,
-                                                                                   identifiers=instrument['identifiers'])
+            batch_upsert_request[instrument_name] = models.InstrumentDefinition(name=instrument_name,
+                                                                                identifiers=instrument['identifiers'])
         # Upsert our batch
         batch_upsert_response = self.client.upsert_instruments(requests=batch_upsert_request)
 
