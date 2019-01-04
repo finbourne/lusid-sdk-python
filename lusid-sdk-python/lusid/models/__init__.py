@@ -92,7 +92,6 @@ from .processed_command import ProcessedCommand
 from .resource_list_of_processed_command import ResourceListOfProcessedCommand
 from .complete_portfolio import CompletePortfolio
 from .expanded_group import ExpandedGroup
-from .resource_list_of_scope import ResourceListOfScope
 from .resource_list_of_portfolio import ResourceListOfPortfolio
 from .update_portfolio_request import UpdatePortfolioRequest
 from .portfolio_properties import PortfolioProperties
@@ -239,7 +238,6 @@ __all__ = [
     'ResourceListOfProcessedCommand',
     'CompletePortfolio',
     'ExpandedGroup',
-    'ResourceListOfScope',
     'ResourceListOfPortfolio',
     'UpdatePortfolioRequest',
     'PortfolioProperties',

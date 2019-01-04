@@ -338,6 +338,7 @@ class LUSIDAPI(object):
     | &lt;a name="230"&gt;230&lt;/a&gt;|TransactionTypeNotFound|  |
     | &lt;a name="231"&gt;231&lt;/a&gt;|TransactionTypeDuplication|  |
     | &lt;a name="232"&gt;232&lt;/a&gt;|PortfolioDoesNotExistAtGivenDate|  |
+    | &lt;a name="233"&gt;233&lt;/a&gt;|QueryParserFailure|  |
     | &lt;a name="301"&gt;301&lt;/a&gt;|DependenciesFailure|  |
     | &lt;a name="304"&gt;304&lt;/a&gt;|PortfolioPreprocessFailure|  |
     | &lt;a name="310"&gt;310&lt;/a&gt;|ValuationEngineFailure|  |
@@ -348,6 +349,7 @@ class LUSIDAPI(object):
     | &lt;a name="370"&gt;370&lt;/a&gt;|ResultRetrievalFailure|  |
     | &lt;a name="371"&gt;371&lt;/a&gt;|ResultProcessingFailure|  |
     | &lt;a name="372"&gt;372&lt;/a&gt;|VendorResultProcessingFailure|  |
+    | &lt;a name="373"&gt;373&lt;/a&gt;|CannotSupplyTimesWithPortfoliosQuery|  |
     | &lt;a name="-10"&gt;-10&lt;/a&gt;|ServerConfigurationError|  |
     | &lt;a name="-1"&gt;-1&lt;/a&gt;|Unknown error|  |
 
@@ -367,7 +369,7 @@ class LUSIDAPI(object):
         self._client = ServiceClient(self.config.credentials, self.config)
 
         client_models = {k: v for k, v in models.__dict__.items() if isinstance(v, type)}
-        self.api_version = '0.9.50'
+        self.api_version = '0.9.58'
         self._serialize = Serializer(client_models)
         self._deserialize = Deserializer(client_models)
 
@@ -3503,13 +3505,26 @@ class LUSIDAPI(object):
         return deserialized
     delete_sub_group_from_group.metadata = {'url': '/api/portfoliogroups/{scope}/{code}/subgroups/{subgroupScope}/{subgroupCode}'}
 
-    def list_portfolio_scopes(
-            self, sort_by=None, start=None, limit=None, filter=None, custom_headers=None, raw=False, **operation_config):
-        """List portfolio scopes.
+    def list_portfolios(
+            self, effective_at=None, as_at=None, sort_by=None, start=None, limit=None, filter=None, query=None, custom_headers=None, raw=False, **operation_config):
+        """List portfolios.
 
-        Lists all scopes that are either currently or have previously had
-        portfolios in them.
+        List all portfolios matching the specified criteria.
+        Example query syntax for the query parameter:
+        - To see which portfolios have holdings in the specified instruments:
+        instrument.identifiers in (('LusidInstrumentId', 'LUID_PPA8HI6M'),
+        ('Figi', 'BBG000BLNNH6'))
+        * Note that if a query is specified then it is executed for the current
+        EffectiveAt and AsAt
+        Specifying EffectiveAt or AsAt in addition to the query is not
+        supported
+        Also note that copy/pasting above examples results in incorrect single
+        quote character.
 
+        :param effective_at: Optional. The effective date of the data
+        :type effective_at: datetime
+        :param as_at: Optional. The AsAt date of the data
+        :type as_at: datetime
         :param sort_by: Optional. Order the results by these fields. Use use
          the '-' sign to denote descending order e.g. -MyFieldName
         :type sort_by: list[str]
@@ -3518,24 +3533,31 @@ class LUSIDAPI(object):
         :param limit: Optional. When paginating, limit the number of returned
          results to this many.
         :type limit: int
-        :param filter: Filter to be applied to the list of scopes
+        :param filter: Optional. Expression to filter the result set
         :type filter: str
+        :param query: Optional. Expression specifying the criteria that the
+         returned portfolios must meet
+        :type query: str
         :param dict custom_headers: headers that will be added to the request
         :param bool raw: returns the direct response alongside the
          deserialized response
         :param operation_config: :ref:`Operation configuration
          overrides<msrest:optionsforoperations>`.
-        :return: ResourceListOfScope or ClientRawResponse if raw=true
-        :rtype: ~lusid.models.ResourceListOfScope or
+        :return: ResourceListOfPortfolio or ClientRawResponse if raw=true
+        :rtype: ~lusid.models.ResourceListOfPortfolio or
          ~msrest.pipeline.ClientRawResponse
         :raises:
          :class:`ErrorResponseException<lusid.models.ErrorResponseException>`
         """
         # Construct URL
-        url = self.list_portfolio_scopes.metadata['url']
+        url = self.list_portfolios.metadata['url']
 
         # Construct parameters
         query_parameters = {}
+        if effective_at is not None:
+            query_parameters['effectiveAt'] = self._serialize.query("effective_at", effective_at, 'iso-8601')
+        if as_at is not None:
+            query_parameters['asAt'] = self._serialize.query("as_at", as_at, 'iso-8601')
         if sort_by is not None:
             query_parameters['sortBy'] = self._serialize.query("sort_by", sort_by, '[str]', div=',')
         if start is not None:
@@ -3544,6 +3566,8 @@ class LUSIDAPI(object):
             query_parameters['limit'] = self._serialize.query("limit", limit, 'int')
         if filter is not None:
             query_parameters['filter'] = self._serialize.query("filter", filter, 'str')
+        if query is not None:
+            query_parameters['query'] = self._serialize.query("query", query, 'str')
 
         # Construct headers
         header_parameters = {}
@@ -3561,18 +3585,18 @@ class LUSIDAPI(object):
         deserialized = None
 
         if response.status_code == 200:
-            deserialized = self._deserialize('ResourceListOfScope', response)
+            deserialized = self._deserialize('ResourceListOfPortfolio', response)
 
         if raw:
             client_raw_response = ClientRawResponse(deserialized, response)
             return client_raw_response
 
         return deserialized
-    list_portfolio_scopes.metadata = {'url': '/api/portfolios'}
+    list_portfolios.metadata = {'url': '/api/portfolios'}
 
-    def list_portfolios(
+    def list_portfolios_for_scope(
             self, scope, effective_at=None, as_at=None, sort_by=None, start=None, limit=None, filter=None, custom_headers=None, raw=False, **operation_config):
-        """List portfolios.
+        """List portfolios for scope.
 
         List all the portfolios in the specified scope.
 
@@ -3604,7 +3628,7 @@ class LUSIDAPI(object):
          :class:`ErrorResponseException<lusid.models.ErrorResponseException>`
         """
         # Construct URL
-        url = self.list_portfolios.metadata['url']
+        url = self.list_portfolios_for_scope.metadata['url']
         path_format_arguments = {
             'scope': self._serialize.url("scope", scope, 'str')
         }
@@ -3648,7 +3672,7 @@ class LUSIDAPI(object):
             return client_raw_response
 
         return deserialized
-    list_portfolios.metadata = {'url': '/api/portfolios/{scope}'}
+    list_portfolios_for_scope.metadata = {'url': '/api/portfolios/{scope}'}
 
     def get_portfolio(
             self, scope, code, effective_at=None, as_at=None, custom_headers=None, raw=False, **operation_config):

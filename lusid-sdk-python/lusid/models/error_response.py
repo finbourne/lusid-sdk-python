@@ -77,11 +77,12 @@ class ErrorResponse(Model):
      'TransactionPortfolioRequestNotSupported', 'InvalidInstrumentDefinition',
      'InstrumentUpsertFailure', 'TransactionTypeNotFound',
      'TransactionTypeDuplication', 'InvalidPropertyValueAssignment',
-     'PortfolioDoesNotExistAtGivenDate', 'DependenciesFailure',
-     'PortfolioPreprocessFailure', 'ValuationEngineFailure',
-     'TaskFactoryFailure', 'TaskEvaluationFailure', 'InstrumentFailure',
-     'CashFlowsFailure', 'ResultRetrievalFailure', 'ResultProcessingFailure',
-     'VendorResultProcessingFailure'
+     'PortfolioDoesNotExistAtGivenDate', 'QueryParserFailure',
+     'DependenciesFailure', 'PortfolioPreprocessFailure',
+     'ValuationEngineFailure', 'TaskFactoryFailure', 'TaskEvaluationFailure',
+     'InstrumentFailure', 'CashFlowsFailure', 'ResultRetrievalFailure',
+     'ResultProcessingFailure', 'VendorResultProcessingFailure',
+     'CannotSupplyTimesWithPortfoliosQuery'
     :vartype code: str or ~lusid.models.enum
     :ivar message:
     :vartype message: str
