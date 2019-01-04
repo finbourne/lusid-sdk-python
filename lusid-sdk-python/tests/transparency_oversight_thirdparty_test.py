@@ -849,7 +849,7 @@ class transparencyOversightThirdParty(TestFinbourneApi):
         for portfolio_group_name, portfolio_group in holding_adjustments.items():
             # Iterate over our portfolios
             for portfolio_name, portfolio_adjustments in portfolio_group.items():
-                holdings = self.client.adjust_holdings(scope=self.fund_accountant_scope_code,
+                holdings = self.client.set_holdings(scope=self.fund_accountant_scope_code,
                                                        code=portfolio_name,
                                                        effective_at=datetime.now(pytz.UTC).isoformat(),
                                                        holding_adjustments=portfolio_adjustments)
