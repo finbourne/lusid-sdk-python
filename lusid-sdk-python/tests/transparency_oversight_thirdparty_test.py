@@ -906,6 +906,8 @@ class transparencyOversightThirdParty(TestFinbourneApi):
                 if reconciliation.count > 0:
                     self.reconciled_portfolios[portfolio_group_name][portfolio_name] = reconciliation
 
+                # tk - reconciliation test
+
         '''
         Okay so looking over our reconciliations we can see that 2 of our portfolios do not reconcile. The rest match
         up which is great. Let's take a look at the difference between these two portfolios in more detail

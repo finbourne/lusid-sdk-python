@@ -540,6 +540,7 @@ class businessAgilityTestEnvironment(TestFinbourneApi):
 
         # Test to check that the derived portfolio inherited the transactions
         last_settlement_date = (datetime.now(pytz.UTC) + timedelta(days=5)).isoformat()
+
         self.reconcile_portfolios_tests(portfolio_left_scope=self.production_scope_code,
                                         portfolio_left_code=self.portfolio_code,
                                         portfolio_left_effective_date=last_settlement_date,

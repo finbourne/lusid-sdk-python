@@ -1151,12 +1151,20 @@ class transparencyStrategies(TestFinbourneApi):
                                                                                            operator='NotEquals',
                                                                                            right='<Not Classified>',
                                                                                            right_operand_type='Absolute'
-                                                                                           )])
+                                                                                           ),
+                                                                     models.PropertyFilter(
+                                                                         left='Instrument/default/Name',
+                                                                         operator='NotEquals',
+                                                                         right='<Unknown>',
+                                                                         right_operand_type='Absolute'
+                                                                         )
+                                                                     ])
 
             aggregated_group = self.client.get_aggregation_by_group(scope=self.strategy_scope,
                                                                     code=portfolio_group_code,
                                                                     request=aggregation_request)
 
+            print ('test')
             # tk - add test to ensure correct
 
     @timeit
