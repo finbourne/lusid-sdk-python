@@ -369,7 +369,7 @@ class LUSIDAPI(object):
         self._client = ServiceClient(self.config.credentials, self.config)
 
         client_models = {k: v for k, v in models.__dict__.items() if isinstance(v, type)}
-        self.api_version = '0.9.65'
+        self.api_version = '0.9.66'
         self._serialize = Serializer(client_models)
         self._deserialize = Deserializer(client_models)
 
@@ -4555,7 +4555,8 @@ class LUSIDAPI(object):
 
         :param domain: The Property Domain of the requested property. Possible
          values include: 'Trade', 'Portfolio', 'Security', 'Holding',
-         'ReferenceHolding', 'TxnType', 'Instrument', 'CutDefinition'
+         'ReferenceHolding', 'TransactionConfiguration', 'Instrument',
+         'CutDefinition'
         :type domain: str
         :param scope: The scope of the requested property
         :type scope: str
@@ -4623,7 +4624,8 @@ class LUSIDAPI(object):
 
         :param domain: The Property Domain of the property being updated.
          Possible values include: 'Trade', 'Portfolio', 'Security', 'Holding',
-         'ReferenceHolding', 'TxnType', 'Instrument', 'CutDefinition'
+         'ReferenceHolding', 'TransactionConfiguration', 'Instrument',
+         'CutDefinition'
         :type domain: str
         :param scope: The scope of the property to be updated
         :type scope: str
@@ -4694,7 +4696,8 @@ class LUSIDAPI(object):
 
         :param domain: The Property Domain of the property to be deleted.
          Possible values include: 'Trade', 'Portfolio', 'Security', 'Holding',
-         'ReferenceHolding', 'TxnType', 'Instrument', 'CutDefinition'
+         'ReferenceHolding', 'TransactionConfiguration', 'Instrument',
+         'CutDefinition'
         :type domain: str
         :param scope: The scope of the property to be deleted
         :type scope: str

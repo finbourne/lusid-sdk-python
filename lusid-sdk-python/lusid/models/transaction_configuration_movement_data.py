@@ -37,7 +37,7 @@ class TransactionConfigurationMovementData(Model):
     :param direction: The Movement direction
     :type direction: int
     :param properties:
-    :type properties: list[~lusid.models.Property]
+    :type properties: list[~lusid.models.PerpetualProperty]
     :param mappings:
     :type mappings: list[~lusid.models.TransactionPropertyMapping]
     """
@@ -52,7 +52,7 @@ class TransactionConfigurationMovementData(Model):
         'movement_types': {'key': 'movementTypes', 'type': 'str'},
         'side': {'key': 'side', 'type': 'str'},
         'direction': {'key': 'direction', 'type': 'int'},
-        'properties': {'key': 'properties', 'type': '[Property]'},
+        'properties': {'key': 'properties', 'type': '[PerpetualProperty]'},
         'mappings': {'key': 'mappings', 'type': '[TransactionPropertyMapping]'},
     }
 
