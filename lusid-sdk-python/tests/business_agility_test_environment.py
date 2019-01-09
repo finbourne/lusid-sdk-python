@@ -13,27 +13,24 @@ except ImportError:
     from urllib import pathname2url
 
 
-class businessAgilityTestEnvironment(TestFinbourneApi):
+class BusinessAgilityTestEnvironment(TestFinbourneApi):
+    """
+    We are an asset manager who has recently secured a contract to work with a new small pension fund. The pension
+    fund has decided to switch from their incumbent asset manager on the advice of consultants. The transition
+    is being handled by a transition manager and we have just received the transition accounts with the final
+    confirmed holdings that we will make up the initial portfolio for the fund.
+
+    As part of the investment agreement with the pension fund they would like to make some changes to the way
+    that they receive their reporting. They would also like to start investing in some exotic over the counter
+    instruments which our internal systems do not support. Therefore in addition to setting up a production
+    portfolio with the initial holdings, we will also need to create a test environment to model these changes
+    without affecting the live environment.
+    """
 
     @timeit
     def import_data(self):
         """
-        We are an asset manager who has recently secured a contract to work with a new small pension fund. The pension
-        fund has decided to switch from their incumbent asset manager on the advice of consultants. The transition
-        is being handled by a transition manager and we have just received the transition accounts with the final
-        confirmed holdings that we will make up the initial portfolio for the fund.
-
-        As part of the investment agreement with the pension fund they would like to make some changes to the way
-        that they receive their reporting. They would also like to start investing in some exotic over the counter
-        instruments which our internal systems do not support. Therefore in addition to setting up a production
-        portfolio with the initial holdings, we will also need to create a test environment to model these changes
-        without affecting the live environment.
-
-        Furthermore, we are also about to go through a larger audit process. As part of this process we need to ensure
-        that the correct entitlements are set up on the production and test environments and portfolios so that only
-        the fund managers for the new client can access the live portfolio and only the development team working on
-        building the modified reporting and adding support for the exotic instruments can access the development
-        portfolio.
+        This function is used to import our data for the tests
         """
 
         '''
@@ -144,7 +141,7 @@ class businessAgilityTestEnvironment(TestFinbourneApi):
                                                               create_request=pension_fund_request)
 
         # Test that our portfolio was created successfully
-        self.portfolio_creation_tests(pension_fund_portfolio, pension_fund_request, self.production_scope_code)
+        self.portfolio_creation_asserts(pension_fund_portfolio, pension_fund_request, self.production_scope_code)
 
     @timeit
     def add_holdings_portfolio_production_environment(self):
@@ -170,11 +167,10 @@ class businessAgilityTestEnvironment(TestFinbourneApi):
 
         It also requires a dictionary containing at least one unique identifier for the asset. The key for this 
         dictionary is the name of the identifier, in this case we will use 'ClientInternal'. The value is a string which
-        is the identifier. The allowed identifiers currently supported are:
-
-            - ClientInternal
-            - Figi
+        is the identifier. The allowed identifiers currently supported can be found in the LUSID docs
+        https://docs.lusid.com/#operation/GetInstrumentIdentifiers
         '''
+
         # Initialise our batch upsert request
         batch_upsert_request = {}
         # Using then initial holdings information, create our batch
@@ -186,28 +182,20 @@ class businessAgilityTestEnvironment(TestFinbourneApi):
         # Upsert our batch
         batch_upsert_response = self.client.upsert_instruments(requests=batch_upsert_request)
 
-        # Tests - Confirm that the response is as expected
-        self.instrument_upsert_tests(batch_upsert_response, batch_upsert_request)
+        # Asserts - Confirm that the response is as expected
+        self.instrument_upsert_asserts(batch_upsert_response, batch_upsert_request)
 
         '''
         Every instrument that is created is in LUSID given a unique LUSID Instrument Id or LUID for short. This ID is 
         used for many methods and is how the API identifies an instrument. 
 
-        Note that there is also a match feature that allows you to search for instruments using the identifiers that we 
-        defined for each instrument, however it is preferred to use the LUID as this is guaranteed to be unique and 
-        there is absolutely no chance of a collision. 
-
-        We there want to add our newly created LUIDs to our initial holdings for future use
+        We therefore want to add our newly created LUIDs to our initial holdings for future use
         '''
 
         # Loop over our recently upserted instruments
-        for result, instrument in batch_upsert_response.values.items():
-            # Loop over our transferred instruments looking for the right match
-            for instrument_name, transferred_instrument in self.transferred_instruments.items():
-                # If the identifiers match
-                if transferred_instrument['identifiers']['ClientInternal'] == instrument.identifiers['ClientInternal']:
-                    # Add our LUID as a new identifier so that we can use it in our calls later
-                    transferred_instrument['identifiers']['LUID'] = instrument.lusid_instrument_id
+        for instrument_name, instrument in batch_upsert_response.values.items():
+            # Add our LUID as a new identifier so that we can use it in our calls later
+            transferred_instrument[instrument_name]['identifiers']['LUID'] = instrument.lusid_instrument_id
 
         '''
         Now that we have our instruments added we can create transactions to fill our initial holdings.
@@ -227,9 +215,9 @@ class businessAgilityTestEnvironment(TestFinbourneApi):
                 - cost: This is the total cost of the instrument and the currency it is in
                     - amount: The total cost/value of the instrument, here we multiply the instrument's price by its
                               quantity to get the total amount
-                    - currency: The currency that the instrument is in as a string, must be tk - what currencies are allowed??
+                    - currency: The currency that the instrument is in as an ISO4217 currency code
                 - portfolio_cost: This is the total cost of the instrument in the portfolio's currency
-                - price: This is the price if the instrument tk - in what currency???? Is this in the portfolio currency?
+                - price: This is the price of the instrument and the currency that it is in
         '''
 
         # Initialise our holding adjustments list
@@ -263,18 +251,18 @@ class businessAgilityTestEnvironment(TestFinbourneApi):
         we created our portfolio. The effecitve date of our holdings must be after the effective date of the portfolio. 
 
         The reason for this is that LUSID is built upon a bi-temporal data store. The implications of this are that 
-        every object has two dates attached to it. These are the effective at date and the as at date. 
+        every object has two dates attached to it. These are the effectiveAt date and the asAt date. 
 
-        The as at date defines the date at which an object was added to the system. For example in the portfolio we 
-        just created the as at date is today.
+        The asAt date defines the date at which an object was added to the system. For example in the portfolio we 
+        just created the asAt date is today.
 
-        The effective at date defines the date from which an object should be valid. For example if we set our 
+        The effectiveAt date defines the date from which an object should be valid. For example if we set our 
         portfolio's effective date to be the 1st of January 2018, it will be valid from that date and we can add
         any transactions to it from that date onwards. We cannot add holdings or transactions to this portfolio before 
         this date as the portfolio did not exist and as such there is nothing for the holdings to be attached to. 
 
         This bi-temporal store gives us the ability to look re-create how our system looks at any point in time. For
-        example if we look at the state of our system using an as at date of 2 days before today and thus 2 days before
+        example if we look at the state of our system using an asAt date of 2 days before today and thus 2 days before
         our portfolio was created, we will not be able to find our portfolio as it had not been created in the system at
         that point in time. 
         '''
@@ -286,11 +274,11 @@ class businessAgilityTestEnvironment(TestFinbourneApi):
                                             holding_adjustments=holding_adjustments)
 
         # Test to verify that the holdings have been set
-        self.verify_holdings_tests(holding_adjustments=holding_adjustments,
-                                   holdings=holdings,
-                                   scope=self.production_scope_code,
-                                   code=self.portfolio_code,
-                                   effective_at=self.official_transfer_time)
+        self.verify_holdings_asserts(holding_adjustments=holding_adjustments,
+                                     holdings=holdings,
+                                     scope=self.production_scope_code,
+                                     code=self.portfolio_code,
+                                     effective_at=self.official_transfer_time)
 
     @timeit
     def create_derived_portfolio_test_environment(self):
@@ -327,18 +315,18 @@ class businessAgilityTestEnvironment(TestFinbourneApi):
                                                                               portfolio=derived_pension_fund_request)
 
         # Test that our derived portfolio has been created successfully
-        self.derived_portfolio_creation_tests(derived_pension_fund_portfolio, derived_pension_fund_request,
+        self.derived_portfolio_creation_asserts(derived_pension_fund_portfolio, derived_pension_fund_request,
                                               self.test_scope_code)
         # Test that it has the same holdings as the parent
-        self.reconcile_portfolios_tests(portfolio_left_scope=self.production_scope_code,
-                                        portfolio_left_code=self.portfolio_code,
-                                        portfolio_left_effective_date=self.official_transfer_time,
-                                        portfolio_left_as_at=datetime.now(pytz.UTC).isoformat(),
-                                        portfolio_right_scope=self.test_scope_code,
-                                        portfolio_right_code=self.portfolio_code,
-                                        portfolio_right_effective_date=self.official_transfer_time,
-                                        portfolio_right_as_at=datetime.now(pytz.UTC).isoformat(),
-                                        check_same=True)
+        self.reconcile_portfolios_asserts(portfolio_left_scope=self.production_scope_code,
+                                          portfolio_left_code=self.portfolio_code,
+                                          portfolio_left_effective_date=self.official_transfer_time,
+                                          portfolio_left_as_at=datetime.now(pytz.UTC).isoformat(),
+                                          portfolio_right_scope=self.test_scope_code,
+                                          portfolio_right_code=self.portfolio_code,
+                                          portfolio_right_effective_date=self.official_transfer_time,
+                                          portfolio_right_as_at=datetime.now(pytz.UTC).isoformat(),
+                                          check_same=True)
 
     @timeit
     def add_more_transactions_portfolio_production_environment(self):
@@ -354,11 +342,13 @@ class businessAgilityTestEnvironment(TestFinbourneApi):
         """
 
         '''
-        We can add transactions individually or in batches using a list of TransactionRequest objects.
+        We can add transactions individually or in batches using a list of TransactionRequest objects. More information
+        can be found about the format of TransactionRequests can be found in the LUSID docs
+        https://docs.lusid.com/#operation/UpsertTransactions
 
         Each TransactionRequest object has the following properties:
 
-            - transaction_id: A unique transaction identifier tk - unique to what?
+            - transaction_id: A transaction identifier unique to a scope
             - type: The transaction type, by default the following are already available 
                 - 'Buy'
                 - 'Sell'
@@ -385,7 +375,7 @@ class businessAgilityTestEnvironment(TestFinbourneApi):
                 - type: The type of the price, available options are 'Price', 'Yield' or 'Spread'
             - totalConsideration: The total value of the transaction in settlement currency as a CurrencyAndAmount object
                 - amount: The amount of the currency
-                - currency: The currency e.g. 'GBP' tk - how do we validate this?
+                - currency: The currency e.g. 'GBP' as an ISO4217 currency code
             - exchangeRate: Rate between transaction and settlement currency
             - transactionCurrency: The currency of the transaction
             - source: Where this transaction came from options are 'System' and 'Client'
@@ -429,17 +419,13 @@ class businessAgilityTestEnvironment(TestFinbourneApi):
         # Upsert our batch
         batch_upsert_response = self.client.upsert_instruments(requests=batch_upsert_request)
 
-        # Tests - Confirm that the response is as expected
-        self.instrument_upsert_tests(batch_upsert_response, batch_upsert_request)
+        # Asserts - Confirm that the response is as expected
+        self.instrument_upsert_asserts(batch_upsert_response, batch_upsert_request)
 
-        # Add our newly created lusid_instrument_id or LUID for short to our new instruments dictionary
-        for result, instrument in batch_upsert_response.values.items():
-            # Loop over our instruments looking for the correct one
-            for instrument_name, new_instrument in self.new_instruments.items():
-                # If the identifiers match
-                if new_instrument['identifiers']['ClientInternal'] == instrument.identifiers['ClientInternal']:
-                    # Add our LUID as a new identifier so that we can use it in our calls later
-                    new_instrument['identifiers']['LUID'] = instrument.lusid_instrument_id
+        # Loop over our recently upserted instruments
+        for instrument_name, instrument in batch_upsert_response.values.items():
+            # Add our LUID as a new identifier so that we can use it in our calls later
+            transferred_instrument[instrument_name]['identifiers']['LUID'] = instrument.lusid_instrument_id
 
         '''
         Now that we've added our new instruments, let's define our transactions. For each transaction we will
@@ -501,7 +487,7 @@ class businessAgilityTestEnvironment(TestFinbourneApi):
         }
 
         '''
-        Now that we have the data for our transactions we can great our batch transactions request. In this case
+        Now that we have the data for our transactions we can create our batch transactions request. In this case
         we use a list to hold our transactions rather than a dictionary
         '''
         # Initialise our batch
@@ -531,25 +517,25 @@ class businessAgilityTestEnvironment(TestFinbourneApi):
                                                                  transactions=batch_transactions_request)
 
         # Test that transactions were all added
-        self.transactions_added_tests(portfolio_scope=self.production_scope_code,
-                                      portfolio_code=self.portfolio_code,
-                                      start_date=(datetime.now(pytz.UTC) + timedelta(days=1)).isoformat(),
-                                      end_date=(datetime.now(pytz.UTC) + timedelta(days=5)).isoformat(),
-                                      as_at_date=datetime.now(pytz.UTC).isoformat(),
-                                      batch_transactions_request=batch_transactions_request)
+        self.transactions_added_asserts(portfolio_scope=self.production_scope_code,
+                                        portfolio_code=self.portfolio_code,
+                                        start_date=(datetime.now(pytz.UTC) + timedelta(days=1)).isoformat(),
+                                        end_date=(datetime.now(pytz.UTC) + timedelta(days=5)).isoformat(),
+                                        as_at_date=datetime.now(pytz.UTC).isoformat(),
+                                        batch_transactions_request=batch_transactions_request)
 
         # Test to check that the derived portfolio inherited the transactions
         last_settlement_date = (datetime.now(pytz.UTC) + timedelta(days=5)).isoformat()
 
-        self.reconcile_portfolios_tests(portfolio_left_scope=self.production_scope_code,
-                                        portfolio_left_code=self.portfolio_code,
-                                        portfolio_left_effective_date=last_settlement_date,
-                                        portfolio_left_as_at=datetime.now(pytz.UTC).isoformat(),
-                                        portfolio_right_scope=self.test_scope_code,
-                                        portfolio_right_code=self.portfolio_code,
-                                        portfolio_right_effective_date=last_settlement_date,
-                                        portfolio_right_as_at=datetime.now(pytz.UTC).isoformat(),
-                                        check_same=True)
+        self.reconcile_portfolios_asserts(portfolio_left_scope=self.production_scope_code,
+                                          portfolio_left_code=self.portfolio_code,
+                                          portfolio_left_effective_date=last_settlement_date,
+                                          portfolio_left_as_at=datetime.now(pytz.UTC).isoformat(),
+                                          portfolio_right_scope=self.test_scope_code,
+                                          portfolio_right_code=self.portfolio_code,
+                                          portfolio_right_effective_date=last_settlement_date,
+                                          portfolio_right_as_at=datetime.now(pytz.UTC).isoformat(),
+                                          check_same=True)
 
     @timeit
     def add_transactions_derived_portfolio_test_environment(self):
@@ -587,7 +573,7 @@ class businessAgilityTestEnvironment(TestFinbourneApi):
         }
 
         '''
-        Now that we have the data for our transactions we can great our batch transactions request
+        Now that we have the data for our transactions we can create our batch transactions request
         '''
         # Initialise batch transactions request
         batch_transactions_request = []
@@ -616,36 +602,25 @@ class businessAgilityTestEnvironment(TestFinbourneApi):
                                                                  transactions=batch_transactions_request)
 
         # Test that transactions were all added
-        self.transactions_added_tests(portfolio_scope=self.test_scope_code,
-                                      portfolio_code=self.portfolio_code,
-                                      start_date=(datetime.now(pytz.UTC) + timedelta(days=5)).isoformat(),
-                                      end_date=(datetime.now(pytz.UTC) + timedelta(days=8)).isoformat(),
-                                      as_at_date=datetime.now(pytz.UTC).isoformat(),
-                                      batch_transactions_request=batch_transactions_request)
+        self.transactions_added_asserts(portfolio_scope=self.test_scope_code,
+                                        portfolio_code=self.portfolio_code,
+                                        start_date=(datetime.now(pytz.UTC) + timedelta(days=5)).isoformat(),
+                                        end_date=(datetime.now(pytz.UTC) + timedelta(days=8)).isoformat(),
+                                        as_at_date=datetime.now(pytz.UTC).isoformat(),
+                                        batch_transactions_request=batch_transactions_request)
 
         # Test to check that the production portfolio was not affected
         last_settlement_date = (datetime.now(pytz.UTC) + timedelta(days=8)).isoformat()
-        self.reconcile_portfolios_tests(portfolio_left_scope=self.production_scope_code,
-                                        portfolio_left_code=self.portfolio_code,
-                                        portfolio_left_effective_date=last_settlement_date,
-                                        portfolio_left_as_at=datetime.now(pytz.UTC).isoformat(),
-                                        portfolio_right_scope=self.test_scope_code,
-                                        portfolio_right_code=self.portfolio_code,
-                                        portfolio_right_effective_date=last_settlement_date,
-                                        portfolio_right_as_at=datetime.now(pytz.UTC).isoformat(),
-                                        transactions=batch_transactions_request,
-                                        check_same=False)
-
-    @timeit
-    def create_entitlements(self):
-        """
-        We are undergoing an audit and need to ensure that the right people have access to the right portfolios. We
-        currently use a number of protections but want to ensure we are covered at every level. We will set up
-        entitlements on the production pension portfolio to ensure that only the investment managers have access. We will
-        also set up entitlements on the test pension portfolio to ensure that only the development team working on the
-        project have access.
-        This test will ensure that we have correctly provisioned entitlements and that they are working correctly.
-        """
+        self.reconcile_portfolios_asserts(portfolio_left_scope=self.production_scope_code,
+                                          portfolio_left_code=self.portfolio_code,
+                                          portfolio_left_effective_date=last_settlement_date,
+                                          portfolio_left_as_at=datetime.now(pytz.UTC).isoformat(),
+                                          portfolio_right_scope=self.test_scope_code,
+                                          portfolio_right_code=self.portfolio_code,
+                                          portfolio_right_effective_date=last_settlement_date,
+                                          portfolio_right_as_at=datetime.now(pytz.UTC).isoformat(),
+                                          transactions=batch_transactions_request,
+                                          check_same=False)
 
     @timeit
     def test_business_agility(self):
@@ -655,8 +630,6 @@ class businessAgilityTestEnvironment(TestFinbourneApi):
         self.create_derived_portfolio_test_environment()
         self.add_more_transactions_portfolio_production_environment()
         self.add_transactions_derived_portfolio_test_environment()
-        self.create_entitlements()
-
 
 if __name__ == '__main__':
     unittest.main()

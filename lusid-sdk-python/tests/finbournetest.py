@@ -80,12 +80,12 @@ class TestFinbourneApi(TestCase):
         cls.api_token = {"access_token": okta_response.json()["access_token"]}
 
         # Initialise our API client using our token so that we can include it in all future requests
-        credentials = BasicTokenAuthentication(TestFinbourneApi.api_token)
-        cls.client = lusid.LUSIDAPI(credentials, TestFinbourneApi.api_url)
+        credentials = BasicTokenAuthentication(cls.api_token)
+        cls.client = lusid.LUSIDAPI(credentials, cls.api_url)
 
-    def portfolio_creation_tests(self, portfolio, portfolio_request, scope):
+    def portfolio_creation_asserts(self, portfolio, portfolio_request, scope):
         """
-        This method contains a set of tests used to test the successful creation of a portfolio, we test that:
+        This method contains a set of assertions used to test the successful creation of a portfolio, we test that:
         - No error is returned
         - The portfolio is created with the correct code
         - The portfolio is created within the correct scope
@@ -108,9 +108,7 @@ class TestFinbourneApi(TestCase):
                              portfolio.description,
                              portfolio_request.description))
 
-        # tk - Need to test for base currency, how do I find it? What does it mean? Can it be wrong? Is it validated?
-
-    def portfolio_group_creation_tests(self, portfolio_group, portfolio_group_request, group_scope):
+    def portfolio_group_creation_asserts(self, portfolio_group, portfolio_group_request, group_scope):
         """
         This method contains a set of tests used to test the successful creation of a portfolio group, we test that:
         - No error is returned
@@ -140,8 +138,6 @@ class TestFinbourneApi(TestCase):
                          'Portfolio group description is {} instead of {}'.format(portfolio_group.description,
                                                                                   portfolio_group_request.description))
 
-        # tk - need test for sub_groups
-
         self.assertEqual(len(portfolio_group.portfolios), len(portfolio_group_request.values),
                          'Portfolio group has {} portfolios instead of {}'.format(portfolio_group.description,
                                                                                   portfolio_group_request.description))
@@ -150,8 +146,6 @@ class TestFinbourneApi(TestCase):
         Iterate over the portfolios checking that the scope and code is correct. Note that this currently does not
         support the case where none or less than all of the portfolios match. All it handles is if the code matches
         so does the scope. 
-        
-        tk - Make this more robust to check that all codes are correct, there are no duplicates and none missing
         '''
         # Iterate over the portfolios in our group
         for portfolio in portfolio_group.portfolios:
@@ -164,7 +158,7 @@ class TestFinbourneApi(TestCase):
                                                                                       portfolio.scope,
                                                                                       portfolio_request.scope))
 
-    def derived_portfolio_creation_tests(self, derived_portfolio, derived_portfolio_request, derived_portfolio_scope):
+    def derived_portfolio_creation_asserts(self, derived_portfolio, derived_portfolio_request, derived_portfolio_scope):
         """
         This method contains a set of tests used to test the successful creation of a derived portfolio, we test that:
         - The derived portfolio has its derived property set to True
@@ -208,7 +202,7 @@ class TestFinbourneApi(TestCase):
                              derived_portfolio.parent_portfolio_id.code,
                              derived_portfolio_request.parent_portfolio_id.code))
 
-    def instrument_upsert_tests(self, batch_upsert_response, batch_upsert_request):
+    def instrument_upsert_asserts(self, batch_upsert_response, batch_upsert_request):
         """
         This method contains a set of tests used to test the successful upsert of instruments, we test that:
         - No instrument upserts failed
@@ -241,7 +235,7 @@ class TestFinbourneApi(TestCase):
             self.assertEqual(instrument.identifiers, batch_upsert_request[instrument.name].identifiers,
                              'The instrument has mismatched identifiers to the request')
 
-    def verify_holdings_tests(self, holding_adjustments, holdings, scope, code, effective_at):
+    def verify_holdings_asserts(self, holding_adjustments, holdings, scope, code, effective_at):
         """
         This method contains a set of tests used to test that set holdings has worked correctly, we test that:
         - The holdings response contains links to the created resources (tk - is this just holdings?)
@@ -295,17 +289,17 @@ class TestFinbourneApi(TestCase):
 
                     # tk - Where is price, can't find it?
 
-    def reconcile_portfolios_tests(self,
-                                   portfolio_left_scope,
-                                   portfolio_left_code,
-                                   portfolio_left_effective_date,
-                                   portfolio_left_as_at,
-                                   portfolio_right_scope,
-                                   portfolio_right_code,
-                                   portfolio_right_effective_date,
-                                   portfolio_right_as_at,
-                                   transactions=None,
-                                   check_same=True):
+    def reconcile_portfolios_asserts(self,
+                                     portfolio_left_scope,
+                                     portfolio_left_code,
+                                     portfolio_left_effective_date,
+                                     portfolio_left_as_at,
+                                     portfolio_right_scope,
+                                     portfolio_right_code,
+                                     portfolio_right_effective_date,
+                                     portfolio_right_as_at,
+                                     transactions=None,
+                                     check_same=True):
         """
         This method contains a set of tests used to test that two portfolios reconcile, we test for one of two things:
 
