@@ -27,59 +27,39 @@ class TestFinbourneApi(TestCase):
     @classmethod
     def setUpClass(cls):
 
-        # Load our configuration details from the environment variables
-        token_url = os.getenv("FBN_TOKEN_URL", None)
-        cls.api_url = os.getenv("FBN_LUSID_API_URL", None)
-        username = os.getenv("FBN_USERNAME", None)
-        password_raw = os.getenv("FBN_PASSWORD", None)
-        client_id_raw = os.getenv("FBN_CLIENT_ID", None)
-        client_secret_raw = os.getenv("FBN_CLIENT_SECRET", None)
+        #   load configuration
+        dir_path = os.path.dirname(os.path.realpath(__file__))
+        with open(os.path.join(dir_path, "secrets.json"), "r") as secrets:
+            config = json.load(secrets)
 
-        # If any of the environmental variables are missing use a local secrets file
-        if token_url is None or username is None or password_raw is None or client_id_raw is None \
-                or client_secret_raw is None or cls.api_url is None:
+        token_url = os.getenv("FBN_TOKEN_URL", config["api"]["tokenUrl"])
+        username = os.getenv("FBN_USERNAME", config["api"]["username"])
+        password = pathname2url(os.getenv("FBN_PASSWORD", config["api"]["password"]))
+        client_id = pathname2url(os.getenv("FBN_CLIENT_ID", config["api"]["clientId"]))
+        client_secret = pathname2url(os.getenv("FBN_CLIENT_SECRET", config["api"]["clientSecret"]))
+        cls.api_url = os.getenv("FBN_LUSID_API_URL", config["api"]["apiUrl"])
 
-            dir_path = os.path.dirname(os.path.realpath(__file__))
-            with open(os.path.join(dir_path, "secrets.json"), "r") as secrets:
-                config = json.load(secrets)
-
-            token_url = os.getenv("FBN_TOKEN_URL", config["api"]["tokenUrl"])
-            username = os.getenv("FBN_USERNAME", config["api"]["username"])
-            password = pathname2url(os.getenv("FBN_PASSWORD", config["api"]["password"]))
-            client_id = pathname2url(os.getenv("FBN_CLIENT_ID", config["api"]["clientId"]))
-            client_secret = pathname2url(os.getenv("FBN_CLIENT_SECRET", config["api"]["clientSecret"]))
-            cls.api_url = os.getenv("FBN_LUSID_API_URL", config["api"]["apiUrl"])
-
-        else:
-            password = pathname2url(password_raw)
-            client_id = pathname2url(client_id_raw)
-            client_secret = pathname2url(client_secret_raw)
-
-        # Prepare our authentication request
         token_request_body = ("grant_type=password&username={0}".format(username) +
                               "&password={0}&scope=openid client groups".format(password) +
                               "&client_id={0}&client_secret={1}".format(client_id, client_secret))
-        headers = {"Accept": "application/json", "Content-Type": "application/x-www-form-urlencoded"}
 
-        # Make our authentication request
+        headers = {"Accept": "application/json", "Content-Type": "application/x-www-form-urlencoded"}
         okta_response = requests.post(token_url, data=token_request_body, headers=headers)
 
-        # Ensure that we have a 200 response code
         assert okta_response.status_code == 200
 
-        # Retrieve our api token from the authentication response
+        #   set the okta api token
         cls.api_token = {"access_token": okta_response.json()["access_token"]}
 
-        # Initialise our API client using our token so that we can include it in all future requests
-        credentials = BasicTokenAuthentication(cls.api_token)
-        cls.client = lusid.LUSIDAPI(credentials, cls.api_url)
+        credentials = BasicTokenAuthentication(TestFinbourneApi.api_token)
+        cls.client = lusid.LUSIDAPI(credentials, TestFinbourneApi.api_url)
 
         instruments = [
-            {"Figi": "BBG000C6K6G9", "Name": "VODAFONE GROUP PLC"},
-            {"Figi": "BBG000C04D57", "Name": "BARCLAYS PLC"},
-            {"Figi": "BBG000FV67Q4", "Name": "NATIONAL GRID PLC"},
-            {"Figi": "BBG000BF0KW3", "Name": "SAINSBURY (J) PLC"},
-            {"Figi": "BBG000BF4KL1", "Name": "TAYLOR WIMPEY PLC"}
+            {"Figi": "BBG000C6K6G9", "Name": "VODAFONE GROUP PLC", "ISIN": "GB00BH4HKS39", "SEDOL": "BH4HKS3"},
+            {"Figi": "BBG000C04D57", "Name": "BARCLAYS PLC", "ISIN": "GB0031348658", "SEDOL": "3134865"},
+            {"Figi": "BBG000FV67Q4", "Name": "NATIONAL GRID PLC", "ISIN": "GB00BDR05C01", "SEDOL": "BDR05C0" },
+            {"Figi": "BBG000BF0KW3", "Name": "SAINSBURY (J) PLC", "ISIN": "GB00B019KW72", "SEDOL": "B019KW7"},
+            {"Figi": "BBG000BF4KL1", "Name": "TAYLOR WIMPEY PLC", "ISIN": "GB0008782301", "SEDOL": "0878230"}
         ]
 
         figis_to_create = { i["Figi"]:models.InstrumentDefinition(i["Name"], {"Figi": i["Figi"]}) for i in instruments }
@@ -295,15 +275,57 @@ class TestFinbourneApi(TestCase):
         print("trades at {0}".format(datetime.utcnow()))
         print_transactions(all_trades.values)
 
-    @unittest.skip("ISIN not yet supported")
+
     def test_lookup_instruments(self):
 
-        isins = ["IT0004966401", "FR0010192997"]
+        instrument_definition = models.InstrumentDefinition(name="VODAFONE GROUP PLC",
+                                                            identifiers={"Figi": "BBG000C6K6G9",
+                                                                         "ClientInternal": "INTERNAL_ID_1"})
 
-        #   lookup instruments
-        fbn_ids = self.client.lookup_instruments_from_codes("Isin", isins)
+        upsert_response = self.client.upsert_instruments({"correlationId1": instrument_definition})
 
-        self.assertGreater(len(fbn_ids.values), 0)
+        if len(upsert_response.failed) != 0:
+            raise Exception(upsert_response.failed)
+        else:
+            print("upsert successful")
+
+    def test_lookup_instrument_by_unique_id(self):
+        # Look up an instrument that already exists in the instrument master
+        # by the FIGI
+
+        # First, fetch two instruments by FIGI
+        figis = ["BBG000BF0KW3", "BBG000BF4KL1"]
+        fbn_ids = self.client.get_instruments("Figi", figis)
+        self.assertGreater(len(fbn_ids.values), 1)
+
+        # Second, show "Undefined" is not a valid search type anymore (API doc for getInstDef out of date)
+        try:
+            udf_ids = self.client.get_instruments("Undefined", figis)  # try with an undefined type
+        except:
+            print("can't use undefined")
+
+        # Third, check the FIGIs are attached properly
+        print(fbn_ids.values)
+        self.assertEqual(fbn_ids.values["BBG000BF0KW3"].name, "SAINSBURY (J) PLC")
+        self.assertEqual(fbn_ids.values["BBG000BF4KL1"].name, "TAYLOR WIMPEY PLC")
+
+        # Forth, repeat with SEDOL and ISIN. These are also not unique identifiers
+        sedols = ["B019KW7", "0878230"]
+        isins = ["GB00B019KW72", "GB0008782301"]
+
+        #self.assertEqual(fbn_ids.values["B019KW7"].name, "SAINSBURY (J) PLC")
+        #self.assertEqual(fbn_ids.values["0878230"].name, "TAYLOR WIMPEY PLC")
+
+        # for key, value in fbn_ids.values.items():
+        #    print(key, value.name, value.lusid_instrument_id)
+        try:
+            fbn_sedols = self.client.get_instruments("Sedol", sedols)
+        except:
+            print("can't use Sedols for unique key")
+        try:
+            fbn_isins = self.client.get_instruments("Isin", isins)
+        except:
+            print("can't use ISINs for unique key")
 
     def test_add_instruments(self):
 
@@ -398,6 +420,16 @@ class TestFinbourneApi(TestCase):
             total_consideration=models.CurrencyAndAmount(100 * trade_spec.price, "GBP"),
             source="Client")
 
+    def seed_instruments(self):
+
+        instrument_definition = models.InstrumentDefinition(name="VODAFONE GROUP PLC", identifiers={"Figi": "BBG000C6K6G9", "ClientInternal": "INTERNAL_ID_1"})
+
+        upsert_response = self.client.upsert_instruments({"correlationId1": instrument_definition})
+
+        if len(upsert_response.failed) != 0:
+            raise Exception(upsert_response.failed)
+        else:
+            print("upsert success")
 
 if __name__ == '__main__':
     unittest.main()
