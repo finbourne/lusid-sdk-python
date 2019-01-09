@@ -33,10 +33,9 @@ class ErrorResponse(Model):
 
     :ivar status:
     :vartype status: int
-    :ivar code: Possible values include: 'Unknown', 'PersonalisationNotFound',
-     'NonRecursivePersonalisation', 'VersionNotFound', 'InstrumentNotFound',
-     'PropertyNotFound', 'PortfolioRecursionDepth', 'GroupNotFound',
-     'PortfolioNotFound', 'PropertySchemaNotFound',
+    :ivar code: Possible values include: 'Unknown', 'VersionNotFound',
+     'InstrumentNotFound', 'PropertyNotFound', 'PortfolioRecursionDepth',
+     'GroupNotFound', 'PortfolioNotFound', 'PropertySchemaNotFound',
      'PortfolioAncestryNotFound', 'PortfolioWithIdAlreadyExists',
      'OrphanedPortfolio', 'MissingBaseClaims', 'PropertyNotDefined',
      'CannotDeleteSystemProperty', 'CannotModifyImmutablePropertyField',

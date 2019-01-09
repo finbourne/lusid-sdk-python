@@ -71,9 +71,6 @@ from .resource_list_of_code_type import ResourceListOfCodeType
 from .stream import Stream
 from .file_response import FileResponse
 from .version_summary_dto import VersionSummaryDto
-from .personalisation import Personalisation
-from .resource_list_of_personalisation import ResourceListOfPersonalisation
-from .upsert_personalisation_response import UpsertPersonalisationResponse
 from .create_portfolio_group_request import CreatePortfolioGroupRequest
 from .portfolio_group import PortfolioGroup
 from .resource_list_of_portfolio_group import ResourceListOfPortfolioGroup
@@ -217,9 +214,6 @@ __all__ = [
     'Stream',
     'FileResponse',
     'VersionSummaryDto',
-    'Personalisation',
-    'ResourceListOfPersonalisation',
-    'UpsertPersonalisationResponse',
     'CreatePortfolioGroupRequest',
     'PortfolioGroup',
     'ResourceListOfPortfolioGroup',
