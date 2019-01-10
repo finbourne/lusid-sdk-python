@@ -137,21 +137,23 @@ class TestFinbourneApi(TestCase):
                          'Portfolio group has {} portfolios instead of {}'.format(portfolio_group.description,
                                                                                   portfolio_group_request.description))
 
+
         '''
         Iterate over the portfolios checking that the scope and code is correct. Note that this currently does not
         support the case where none or less than all of the portfolios match. All it handles is if the code matches
         so does the scope. 
         '''
+
+        portfolio_requests = {request.code:request for request in portfolio_group_request.values}
+
         # Iterate over the portfolios in our group
         for portfolio in portfolio_group.portfolios:
-            # Iterate over the portfolios in our request
-            for portfolio_request in portfolio_group_request.values:
-                # Ensure that the portfolio is created in the correct scope
-                if portfolio.code == portfolio_request.code:
-                    self.assertEqual(portfolio.scope, portfolio_request.scope,
-                                     'Portfolio {} has scope {} instead of {}'.format(portfolio.code,
-                                                                                      portfolio.scope,
-                                                                                      portfolio_request.scope))
+
+            portfolio_request = portfolio_requests[portfolio.code]
+            self.assertEqual(portfolio.scope, portfolio_request.scope,
+                             'Portfolio {} has scope {} instead of {}'.format(portfolio.code,
+                                                                              portfolio.scope,
+                                                                              portfolio_request.scope))
 
     def derived_portfolio_creation_asserts(self, derived_portfolio, derived_portfolio_request, derived_portfolio_scope):
         """
@@ -340,15 +342,13 @@ class TestFinbourneApi(TestCase):
                              'Only {} of {} transactions have been applied'.format(reconciliation.count,
                                                                                    len(transactions)))
 
+            transaction_requests = {transaction.instrument_uid:transaction for transaction in transactions}
+
             # Check that for breaks and transactions with the same instrument that the breaks match
             for reconciliation_break in reconciliation.values:
-                for transaction in transactions:
-                    if reconciliation_break.instrument_uid == transaction.instrument_uid:
-
-                        # tk - Need better testing here to handle the direction as well as absolute amount
-                        self.assertEqual(abs(reconciliation_break.difference_units), transaction.units)
-                        # tk - Also need to think about pricing and making sure the holding value is update correctly
-            # tk - Need to also check that cash balance is accurate
+                if 'CCY' not in reconciliation_break.instrument_uid:
+                    transaction = transaction_requests[reconciliation_break.instrument_uid]
+                    self.assertEqual(abs(reconciliation_break.difference_units), transaction.units)
 
     def transactions_added_asserts(self,
                                    portfolio_scope,
