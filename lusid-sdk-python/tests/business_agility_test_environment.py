@@ -195,7 +195,7 @@ class BusinessAgilityTestEnvironment(TestFinbourneApi):
         # Loop over our recently upserted instruments
         for instrument_name, instrument in batch_upsert_response.values.items():
             # Add our LUID as a new identifier so that we can use it in our calls later
-            transferred_instrument[instrument_name]['identifiers']['LUID'] = instrument.lusid_instrument_id
+            self.transferred_instruments[instrument_name]['identifiers']['LUID'] = instrument.lusid_instrument_id
 
         '''
         Now that we have our instruments added we can create transactions to fill our initial holdings.
@@ -425,7 +425,8 @@ class BusinessAgilityTestEnvironment(TestFinbourneApi):
         # Loop over our recently upserted instruments
         for instrument_name, instrument in batch_upsert_response.values.items():
             # Add our LUID as a new identifier so that we can use it in our calls later
-            transferred_instrument[instrument_name]['identifiers']['LUID'] = instrument.lusid_instrument_id
+
+            self.new_instruments[instrument_name]['identifiers']['LUID'] = instrument.lusid_instrument_id
 
         '''
         Now that we've added our new instruments, let's define our transactions. For each transaction we will
