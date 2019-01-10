@@ -15,7 +15,6 @@ except ImportError:
     # Python 2.7
     from urllib import pathname2url
 
-
 def timeit(func):
     """
     This function is used as a decarator i.e. @timeit for a function to time how
@@ -32,10 +31,6 @@ def timeit(func):
         print (func.__name__, ' took ', end-start, ' seconds to execute')
         return result
     return timed
-
-
-
-
 
 class TestFinbourneApi(TestCase):
     client = None
@@ -80,12 +75,12 @@ class TestFinbourneApi(TestCase):
         cls.api_token = {"access_token": okta_response.json()["access_token"]}
 
         # Initialise our API client using our token so that we can include it in all future requests
-        credentials = BasicTokenAuthentication(TestFinbourneApi.api_token)
-        cls.client = lusid.LUSIDAPI(credentials, TestFinbourneApi.api_url)
+        credentials = BasicTokenAuthentication(cls.api_token)
+        cls.client = lusid.LUSIDAPI(credentials, cls.api_url)
 
-    def portfolio_creation_tests(self, portfolio, portfolio_request, scope):
+    def portfolio_creation_asserts(self, portfolio, portfolio_request, scope):
         """
-        This method contains a set of tests used to test the successful creation of a portfolio, we test that:
+        This method contains a set of assertions used to test the successful creation of a portfolio, we test that:
         - No error is returned
         - The portfolio is created with the correct code
         - The portfolio is created within the correct scope
@@ -108,9 +103,7 @@ class TestFinbourneApi(TestCase):
                              portfolio.description,
                              portfolio_request.description))
 
-        # tk - Need to test for base currency, how do I find it? What does it mean? Can it be wrong? Is it validated?
-
-    def portfolio_group_creation_tests(self, portfolio_group, portfolio_group_request, group_scope):
+    def portfolio_group_creation_asserts(self, portfolio_group, portfolio_group_request, group_scope):
         """
         This method contains a set of tests used to test the successful creation of a portfolio group, we test that:
         - No error is returned
@@ -140,31 +133,29 @@ class TestFinbourneApi(TestCase):
                          'Portfolio group description is {} instead of {}'.format(portfolio_group.description,
                                                                                   portfolio_group_request.description))
 
-        # tk - need test for sub_groups
-
         self.assertEqual(len(portfolio_group.portfolios), len(portfolio_group_request.values),
                          'Portfolio group has {} portfolios instead of {}'.format(portfolio_group.description,
                                                                                   portfolio_group_request.description))
+
 
         '''
         Iterate over the portfolios checking that the scope and code is correct. Note that this currently does not
         support the case where none or less than all of the portfolios match. All it handles is if the code matches
         so does the scope. 
-        
-        tk - Make this more robust to check that all codes are correct, there are no duplicates and none missing
         '''
+
+        portfolio_requests = {request.code:request for request in portfolio_group_request.values}
+
         # Iterate over the portfolios in our group
         for portfolio in portfolio_group.portfolios:
-            # Iterate over the portfolios in our request
-            for portfolio_request in portfolio_group_request.values:
-                # Ensure that the portfolio is created in the correct scope
-                if portfolio.code == portfolio_request.code:
-                    self.assertEqual(portfolio.scope, portfolio_request.scope,
-                                     'Portfolio {} has scope {} instead of {}'.format(portfolio.code,
-                                                                                      portfolio.scope,
-                                                                                      portfolio_request.scope))
 
-    def derived_portfolio_creation_tests(self, derived_portfolio, derived_portfolio_request, derived_portfolio_scope):
+            portfolio_request = portfolio_requests[portfolio.code]
+            self.assertEqual(portfolio.scope, portfolio_request.scope,
+                             'Portfolio {} has scope {} instead of {}'.format(portfolio.code,
+                                                                              portfolio.scope,
+                                                                              portfolio_request.scope))
+
+    def derived_portfolio_creation_asserts(self, derived_portfolio, derived_portfolio_request, derived_portfolio_scope):
         """
         This method contains a set of tests used to test the successful creation of a derived portfolio, we test that:
         - The derived portfolio has its derived property set to True
@@ -208,7 +199,7 @@ class TestFinbourneApi(TestCase):
                              derived_portfolio.parent_portfolio_id.code,
                              derived_portfolio_request.parent_portfolio_id.code))
 
-    def instrument_upsert_tests(self, batch_upsert_response, batch_upsert_request):
+    def instrument_upsert_asserts(self, batch_upsert_response, batch_upsert_request):
         """
         This method contains a set of tests used to test the successful upsert of instruments, we test that:
         - No instrument upserts failed
@@ -241,10 +232,10 @@ class TestFinbourneApi(TestCase):
             self.assertEqual(instrument.identifiers, batch_upsert_request[instrument.name].identifiers,
                              'The instrument has mismatched identifiers to the request')
 
-    def verify_holdings_tests(self, holding_adjustments, holdings, scope, code, effective_at):
+    def verify_holdings_asserts(self, holding_adjustments, holdings, scope, code, effective_at):
         """
         This method contains a set of tests used to test that set holdings has worked correctly, we test that:
-        - The holdings response contains links to the created resources (tk - is this just holdings?)
+        - The holdings response contains links to the created resources
         - The number holdings matches the number of adjustments that we have made
         - The number of units in an upserted holding matches the request for a given instrument
         - The cost of an upserted holding matches the cost in the request for a given instrument
@@ -262,50 +253,48 @@ class TestFinbourneApi(TestCase):
                                                    code=code,
                                                    effective_at=effective_at)
 
+        # Check that the correct number of holdings have been set
         self.assertEqual(verify_holdings.count, len(holding_adjustments),
                          'Got {} holdings when we expected {} holdings'.format(verify_holdings.count,
                                                                                len(holding_adjustments)))
-        # tk - Need to make this way more robust
+
+        # Create a dictionary of our adjust holding requests using the instrument uid as the key
+        adjustment_requests = {adjustment.instrument_uid:adjustment.tax_lots[0] for adjustment in holding_adjustments}
+
+        # Iterate over our holdings we just retrieved
         for holding in verify_holdings.values:
-            for adjustment in holding_adjustments:
-                if holding.instrument_uid == adjustment.instrument_uid:
+            # Select the matching adjustment request using the instrument uid as the lookup
+            adjustment = adjustment_requests[holding.instrument_uid]
 
-                    self.assertEqual(adjustment.tax_lots[0].units, holding.units,
-                                     'Holding total units is {} when it should be {}'.format(holding.units,
-                                                                                             adjustment.tax_lots[
-                                                                                                 0].units))
+            self.assertEqual(adjustment.units, holding.units,
+                             'Holding total units is {} when it should be {}'.format(holding.units,
+                                                                                     adjustment.units))
 
-                    self.assertEqual(adjustment.tax_lots[0].cost.amount, holding.cost.amount,
-                                     'Total amount is {} when it should be {}'.format(holding.cost.amount,
-                                                                                      adjustment.tax_lots[
-                                                                                          0].cost.amount))
+            self.assertEqual(adjustment.cost.amount, holding.cost.amount,
+                             'Total amount is {} when it should be {}'.format(holding.cost.amount,
+                                                                              adjustment.cost.amount))
 
-                    self.assertEqual(adjustment.tax_lots[0].cost.currency, holding.cost.currency,
-                                     'Currency is {} when it should be {}'.format(holding.cost.currency,
-                                                                                  adjustment.tax_lots[0].cost.currency))
+            self.assertEqual(adjustment.cost.currency, holding.cost.currency,
+                             'Currency is {} when it should be {}'.format(holding.cost.currency,
+                                                                          adjustment.cost.currency))
 
-                    # This test is currently failing as the system rounds portfolio cost to 2 decimal places
-                    # Ticket - DEV-2171
-                    '''
-                    self.assertEqual(adjustment.tax_lots[0].portfolio_cost, holding.cost_portfolio_ccy.amount,
-                                     'Portfolio cost is {} when it should be {}'.format(
-                                         holding.cost_portfolio_ccy.amount,
-                                         adjustment.tax_lots[0].portfolio_cost))
-                    '''
+            self.assertEqual(round(adjustment.portfolio_cost, 2), holding.cost_portfolio_ccy.amount,
+                             'Portfolio cost is {} when it should be {}'.format(
+                                 holding.cost_portfolio_ccy.amount,
+                                 round(adjustment.portfolio_cost, 2)))
 
-                    # tk - Where is price, can't find it?
 
-    def reconcile_portfolios_tests(self,
-                                   portfolio_left_scope,
-                                   portfolio_left_code,
-                                   portfolio_left_effective_date,
-                                   portfolio_left_as_at,
-                                   portfolio_right_scope,
-                                   portfolio_right_code,
-                                   portfolio_right_effective_date,
-                                   portfolio_right_as_at,
-                                   transactions=None,
-                                   check_same=True):
+    def reconcile_portfolios_asserts(self,
+                                     portfolio_left_scope,
+                                     portfolio_left_code,
+                                     portfolio_left_effective_date,
+                                     portfolio_left_as_at,
+                                     portfolio_right_scope,
+                                     portfolio_right_code,
+                                     portfolio_right_effective_date,
+                                     portfolio_right_as_at,
+                                     transactions=None,
+                                     check_same=True):
         """
         This method contains a set of tests used to test that two portfolios reconcile, we test for one of two things:
 
@@ -353,26 +342,24 @@ class TestFinbourneApi(TestCase):
                              'Only {} of {} transactions have been applied'.format(reconciliation.count,
                                                                                    len(transactions)))
 
+            transaction_requests = {transaction.instrument_uid:transaction for transaction in transactions}
+
             # Check that for breaks and transactions with the same instrument that the breaks match
             for reconciliation_break in reconciliation.values:
-                for transaction in transactions:
-                    if reconciliation_break.instrument_uid == transaction.instrument_uid:
+                if 'CCY' not in reconciliation_break.instrument_uid:
+                    transaction = transaction_requests[reconciliation_break.instrument_uid]
+                    self.assertEqual(abs(reconciliation_break.difference_units), transaction.units)
 
-                        # tk - Need better testing here to handle the direction as well as absolute amount
-                        self.assertEqual(abs(reconciliation_break.difference_units), transaction.units)
-                        # tk - Also need to think about pricing and making sure the holding value is update correctly
-            # tk - Need to also check that cash balance is accurate
-
-    def transactions_added_tests(self,
-                                 portfolio_scope,
-                                 portfolio_code,
-                                 start_date,
-                                 end_date,
-                                 as_at_date,
-                                 batch_transactions_request):
+    def transactions_added_asserts(self,
+                                   portfolio_scope,
+                                   portfolio_code,
+                                   start_date,
+                                   end_date,
+                                   as_at_date,
+                                   batch_transactions_request):
 
         """
-        This method contains a set of tests used to test that transactions have been correctly upserted, we test that:
+        This method contains a set of asserts used to test that transactions have been correctly upserted, we test that:
         - The number of transactions added is correct
         - The transaction type is correct
         - The transaction instrument id is correct
@@ -399,36 +386,29 @@ class TestFinbourneApi(TestCase):
                          'Returned {} transactions when expecting {}'.format(transactions.count,
                                                                              len(batch_transactions_request)))
 
+        transaction_requests = {transaction.transaction_id: transaction for transaction in batch_transactions_request}
+
         for transaction in transactions.values:
-            for transaction_request in batch_transactions_request:
-                if transaction.transaction_id == transaction_request.transaction_id:
 
-                    self.assertEqual(transaction.type, transaction_request.type)
-                    self.assertEqual(transaction.instrument_uid, transaction_request.instrument_uid)
-                    # These two tests are currently failing as the datetime object returned does not match ISO8601
-                    # Ticket - DEV-2177
-                    '''
-                    self.assertEqual(transaction.transaction_date, transaction_request.transaction_date)
-                    self.assertEqual(transaction.settlement_date, transaction_request.settlement_date)
-                    '''
-                    self.assertEqual(transaction.units, transaction_request.units)
-                    self.assertEqual(transaction.transaction_price.price, transaction_request.transaction_price.price)
-                    self.assertEqual(transaction.transaction_price.type, transaction_request.transaction_price.type)
-                    self.assertEqual(transaction.total_consideration.amount,
-                                     transaction_request.total_consideration.amount)
-                    self.assertEqual(transaction.total_consideration.currency,
-                                     transaction_request.total_consideration.currency)
-                    # tk - exchange_rate
-                    self.assertEqual(transaction.transaction_currency, transaction_request.transaction_currency)
-                    # tk - properties
-                    # tk - counterpartyId
-                    self.assertEqual(transaction.source, transaction_request.source)
-                    # tk - nettingSet
+            transaction_request = transaction_requests[transaction.transaction_id]
 
-        '''
-        tk - should I check that the holdings have been updated? With the tests above if the transactions didn't 
-        update the holdings it would still pass
-        '''
+            self.assertEqual(transaction.type, transaction_request.type)
+            self.assertEqual(transaction.instrument_uid, transaction_request.instrument_uid)
+
+            # Note that the output date
+
+            self.assertEqual(transaction.transaction_date.isoformat(), transaction_request.transaction_date)
+            self.assertEqual(transaction.settlement_date.isoformat(), transaction_request.settlement_date)
+
+            self.assertEqual(transaction.units, transaction_request.units)
+            self.assertEqual(transaction.transaction_price.price, transaction_request.transaction_price.price)
+            self.assertEqual(transaction.transaction_price.type, transaction_request.transaction_price.type)
+            self.assertEqual(transaction.total_consideration.amount,
+                             transaction_request.total_consideration.amount)
+            self.assertEqual(transaction.total_consideration.currency,
+                             transaction_request.total_consideration.currency)
+            self.assertEqual(transaction.transaction_currency, transaction_request.transaction_currency)
+            self.assertEqual(transaction.source, transaction_request.source)
 
     def create_property_definition_test(self, property_request, property):
         """
