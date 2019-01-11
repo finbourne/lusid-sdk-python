@@ -21,5 +21,24 @@
 # SOFTWARE.
 # --------------------------------------------------------------------------
 
-VERSION = "0.9.72"
+from msrest.serialization import Model
 
+
+class ScopeDefinition(Model):
+    """Defines a scope.
+
+    :param scope:
+    :type scope: str
+    """
+
+    _validation = {
+        'scope': {'required': True},
+    }
+
+    _attribute_map = {
+        'scope': {'key': 'scope', 'type': 'str'},
+    }
+
+    def __init__(self, scope):
+        super(ScopeDefinition, self).__init__()
+        self.scope = scope

@@ -125,6 +125,8 @@ from .key_value_pair_of_string_to_field_schema import KeyValuePairOfStringToFiel
 from .schema import Schema
 from .property_schema import PropertySchema
 from .resource_list_of_value_type import ResourceListOfValueType
+from .scope_definition import ScopeDefinition
+from .resource_list_of_scope_definition import ResourceListOfScopeDefinition
 from .instrument_search_property import InstrumentSearchProperty
 from .instrument_match import InstrumentMatch
 from .portfolio_search_result import PortfolioSearchResult
@@ -268,6 +270,8 @@ __all__ = [
     'Schema',
     'PropertySchema',
     'ResourceListOfValueType',
+    'ScopeDefinition',
+    'ResourceListOfScopeDefinition',
     'InstrumentSearchProperty',
     'InstrumentMatch',
     'PortfolioSearchResult',

@@ -367,7 +367,7 @@ class LUSIDAPI(object):
         self._client = ServiceClient(self.config.credentials, self.config)
 
         client_models = {k: v for k, v in models.__dict__.items() if isinstance(v, type)}
-        self.api_version = '0.9.69'
+        self.api_version = '0.9.72'
         self._serialize = Serializer(client_models)
         self._deserialize = Deserializer(client_models)
 
@@ -5424,6 +5424,78 @@ class LUSIDAPI(object):
 
         return deserialized
     get_value_types.metadata = {'url': '/api/schemas/types'}
+
+    def list_scopes(
+            self, sort_by=None, start=None, limit=None, filter=None, query=None, custom_headers=None, raw=False, **operation_config):
+        """List scopes.
+
+        List all the scopes.
+
+        :param sort_by: Optional. Order the results by these fields. Use use
+         the '-' sign to denote descending order e.g. -MyFieldName
+        :type sort_by: list[str]
+        :param start: Optional. When paginating, skip this number of results
+        :type start: int
+        :param limit: Optional. When paginating, limit the number of returned
+         results to this many.
+        :type limit: int
+        :param filter: Optional. Expression to filter the result set
+        :type filter: str
+        :param query: Optional. Expression specifying the criteria that the
+         returned portfolios must meet
+        :type query: str
+        :param dict custom_headers: headers that will be added to the request
+        :param bool raw: returns the direct response alongside the
+         deserialized response
+        :param operation_config: :ref:`Operation configuration
+         overrides<msrest:optionsforoperations>`.
+        :return: ResourceListOfScopeDefinition or ClientRawResponse if
+         raw=true
+        :rtype: ~lusid.models.ResourceListOfScopeDefinition or
+         ~msrest.pipeline.ClientRawResponse
+        :raises:
+         :class:`ErrorResponseException<lusid.models.ErrorResponseException>`
+        """
+        # Construct URL
+        url = self.list_scopes.metadata['url']
+
+        # Construct parameters
+        query_parameters = {}
+        if sort_by is not None:
+            query_parameters['sortBy'] = self._serialize.query("sort_by", sort_by, '[str]', div=',')
+        if start is not None:
+            query_parameters['start'] = self._serialize.query("start", start, 'int')
+        if limit is not None:
+            query_parameters['limit'] = self._serialize.query("limit", limit, 'int')
+        if filter is not None:
+            query_parameters['filter'] = self._serialize.query("filter", filter, 'str')
+        if query is not None:
+            query_parameters['query'] = self._serialize.query("query", query, 'str')
+
+        # Construct headers
+        header_parameters = {}
+        header_parameters['Content-Type'] = 'application/json; charset=utf-8'
+        if custom_headers:
+            header_parameters.update(custom_headers)
+
+        # Construct and send request
+        request = self._client.get(url, query_parameters)
+        response = self._client.send(request, header_parameters, stream=False, **operation_config)
+
+        if response.status_code not in [200]:
+            raise models.ErrorResponseException(self._deserialize, response)
+
+        deserialized = None
+
+        if response.status_code == 200:
+            deserialized = self._deserialize('ResourceListOfScopeDefinition', response)
+
+        if raw:
+            client_raw_response = ClientRawResponse(deserialized, response)
+            return client_raw_response
+
+        return deserialized
+    list_scopes.metadata = {'url': '/api/scopes'}
 
     def instruments_search(
             self, symbols=None, mastered_effective_at=None, mastered_only=False, custom_headers=None, raw=False, **operation_config):
