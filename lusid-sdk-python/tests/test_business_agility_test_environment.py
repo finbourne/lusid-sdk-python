@@ -3,7 +3,7 @@ import uuid
 import lusid.models as models
 import pytz
 from datetime import datetime, timedelta
-from finbournetest import TestFinbourneApi, timeit
+from .finbournetest import TestFinbourneApi, timeit
 
 try:
     # Python 3.x
