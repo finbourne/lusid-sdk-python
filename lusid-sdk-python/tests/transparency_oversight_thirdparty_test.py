@@ -2,7 +2,7 @@ import unittest
 import uuid
 import lusid.models as models
 import pytz
-from datetime import datetime, timedelta
+from datetime import datetime, timedelta, time
 from finbournetest import TestFinbourneApi, timeit
 
 try:
@@ -151,10 +151,6 @@ class transparencyOversightThirdParty(TestFinbourneApi):
             # Tests - Ensure that we have successfully created the portfolio groups
             self.portfolio_group_creation_asserts(portfolio_group_internal, portfolio_group_request_internal, self.internal_scope_code)
             self.portfolio_group_creation_asserts(portfolio_group_fund_accountant, portfolio_group_request_fund_accountant, self.fund_accountant_scope_code)
-
-    @timeit
-    def create_entitlements(self):
-        pass
 
     @timeit
     def create_holdings(self):
@@ -755,62 +751,55 @@ class transparencyOversightThirdParty(TestFinbourneApi):
         '''
         Now that we have defined our report we can create our holding adjustments. Note that in reality we would
         likely import this report from a csv file or fetch it from an API.
-        '''
+        
 
-        # Initialise our holding adjustments dictionary which will contain a list of adjustments for each portfolio in each portfolio group
-        holding_adjustments = {}
-
-        # Iterate over our portfolio groups
-        for portfolio_group_name, portfolio_group in self.fund_accountant_daily_holdings_report.items():
-            # Create a key for our group to hold the portfolios
-            holding_adjustments[portfolio_group_name] = {}
-            # Iterate over our portfolios
-            for portfolio_name, portfolio in portfolio_group.items():
-                # Create a key and initialise a list to hold our adjustments for each portfolio
-                holding_adjustments[portfolio_group_name][portfolio_name] = []
-                # Iterate over the holdings in each portfolio
-                for instrument_name, holding in portfolio.items():
-                    # Create our adjust holdings request using our instrument universe to get the LUID identifier for the instrument
-                    holding_adjustments[portfolio_group_name][portfolio_name].append(
-                        models.AdjustHoldingRequest(
-                            instrument_uid=self.instrument_universe[instrument_name]['identifiers']['LUID'],
-                            tax_lots=[
-                                models.TargetTaxLotRequest(units=holding['quantity'],
-                                                           cost=models.CurrencyAndAmount(
-                                                               amount=holding['quantity'] *
-                                                                      holding['price'],
-                                                               currency=self.instrument_universe[instrument_name][
-                                                                   'currency']),
-                                                           portfolio_cost=holding['quantity'] *
-                                                                          holding['price'],
-                                                           price=holding['price'])
-                            ]
-                        )
-                    )
-
-        '''
         Now that we have our holding adjustments we can set them on our portfolios. Using the set_holdings method
         we can only set holdings on one portfolio at a time. So we will have to iterate over our portfolios and create
         our holdings
         
-        This time we use set holdings rather than adjust holdings tk - why?
+        This time we use set holdings rather than adjust holdings as we are going to overwrite our existing fund
+        accountant scope with the fund accountants report.
         '''
 
-        # Iterate over our portfolio groups
-        for portfolio_group_name, portfolio_group in holding_adjustments.items():
-            # Iterate over our portfolios
-            for portfolio_name, portfolio_adjustments in portfolio_group.items():
-                holdings = self.client.set_holdings(scope=self.fund_accountant_scope_code,
-                                                       code=portfolio_name,
-                                                       effective_at=datetime.now(pytz.UTC).isoformat(),
-                                                       holding_adjustments=portfolio_adjustments)
+        today = datetime.now(pytz.UTC)
+        t = time(hour=6, minute=30)
+        this_morning = pytz.utc.localize(datetime.combine(today, t)).isoformat()
 
-                # Tests to verify that the holdings are correct
-                self.verify_holdings_asserts(holding_adjustments=portfolio_adjustments,
-                                             holdings=holdings,
-                                             scope=self.fund_accountant_scope_code,
-                                             code=portfolio_name,
-                                             effective_at=(datetime.now(pytz.UTC)).isoformat())
+        for portfolio_name, portfolio in self.fund_accountant_daily_holdings_report.items():
+
+            # Create a key and initialise a list to hold our adjustments for each portfolio
+            holding_adjustments = []
+
+            # Iterate over the holdings in each portfolio
+            for instrument_name, holding in portfolio.items():
+                # Create our adjust holdings request using our instrument universe to get the LUID identifier for the instrument
+                holding_adjustments.append(
+                    models.AdjustHoldingRequest(
+                        instrument_uid=self.instrument_universe[instrument_name]['identifiers']['LUID'],
+                        tax_lots=[
+                            models.TargetTaxLotRequest(units=holding['quantity'],
+                                                       cost=models.CurrencyAndAmount(
+                                                           amount=holding['quantity'] *
+                                                                  holding['price'],
+                                                           currency=self.instrument_universe[instrument_name][
+                                                               'currency']),
+                                                       portfolio_cost=holding['quantity'] *
+                                                                      holding['price'],
+                                                       price=holding['price'])
+                        ])
+                )
+
+            adjust_holdings_response = self.client.adjust_holdings(scope=self.fund_accountant_scope_code,
+                                                              code=portfolio_name,
+                                                              effective_at=this_morning,
+                                                              holding_adjustments=holding_adjustments)
+
+            # Tests to verify that the holdings are correct
+            self.verify_holdings_asserts(holding_adjustments=holding_adjustments,
+                                         holdings=adjust_holdings_response,
+                                         scope=self.fund_accountant_scope_code,
+                                         code=portfolio_name,
+                                         effective_at=this_morning)
 
     @timeit
     def reconcile_records(self):
@@ -1048,7 +1037,6 @@ class transparencyOversightThirdParty(TestFinbourneApi):
     def test_transparency_oversight(self):
         self.import_data()
         self.create_portfolios()
-        self.create_entitlements()
         self.create_holdings()
         self.add_daily_transactions()
         self.update_fund_accountant_record()
