@@ -31,8 +31,8 @@ class ExecutionRequest(Model):
     :type execution_id: str
     :param side: FIX Field 54.
     :type side: str
-    :param instrument_uid: Unique instrument identifier.
-    :type instrument_uid: str
+    :param instrument_identifiers: Unique instrument identifiers.
+    :type instrument_identifiers: dict[str, str]
     :param transaction_time: FIX field 60.  Time the transaction represented
      by this ExecutionReport occurred.
     :type transaction_time: datetime
@@ -47,7 +47,7 @@ class ExecutionRequest(Model):
     _validation = {
         'execution_id': {'required': True},
         'side': {'required': True},
-        'instrument_uid': {'required': True},
+        'instrument_identifiers': {'required': True},
         'transaction_time': {'required': True},
         'order_qty': {'required': True},
         'price': {'required': True},
@@ -57,18 +57,18 @@ class ExecutionRequest(Model):
     _attribute_map = {
         'execution_id': {'key': 'executionId', 'type': 'str'},
         'side': {'key': 'side', 'type': 'str'},
-        'instrument_uid': {'key': 'instrumentUid', 'type': 'str'},
+        'instrument_identifiers': {'key': 'instrumentIdentifiers', 'type': '{str}'},
         'transaction_time': {'key': 'transactionTime', 'type': 'iso-8601'},
         'order_qty': {'key': 'orderQty', 'type': 'float'},
         'price': {'key': 'price', 'type': 'float'},
         'currency': {'key': 'currency', 'type': 'str'},
     }
 
-    def __init__(self, execution_id, side, instrument_uid, transaction_time, order_qty, price, currency):
+    def __init__(self, execution_id, side, instrument_identifiers, transaction_time, order_qty, price, currency):
         super(ExecutionRequest, self).__init__()
         self.execution_id = execution_id
         self.side = side
-        self.instrument_uid = instrument_uid
+        self.instrument_identifiers = instrument_identifiers
         self.transaction_time = transaction_time
         self.order_qty = order_qty
         self.price = price
