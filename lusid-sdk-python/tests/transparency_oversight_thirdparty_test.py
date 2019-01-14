@@ -160,20 +160,9 @@ class transparencyOversightThirdParty(TestFinbourneApi):
         can be pre-populated in advance so that we don't have to keep adding new instruments when we make a trade or
         update a holding. 
         
-        Here we can upsert our instruments individually or in a batch. Either way the request should be in the form of a
-        dictionary with an arbitrary reference name for the instrument as the key and an UpsertInstrumentRequest object
-        as the value.
+        Here we can upsert our instruments individually or in a batch. 
         
-        The UpsertInstrumentRequest requires a name for the instrument which is a string. In this case we will use the 
-        same name as the arbitrary reference key.
-        
-        It also requires a dictionary containing at least one unique identifier for the asset. The key for this 
-        dictionary is the name of the identifier, in this case we will use 'ClientInternal'. The value is a string which
-        is the identifier. The allowed identifiers currently supported are:
-        
-            - ClientInternal
-            - Figi
-             
+        You can read more about upserting instruments here: https://docs.lusid.com/#operation/UpsertInstruments
         '''
 
         self.instrument_universe = {
@@ -280,6 +269,7 @@ class transparencyOversightThirdParty(TestFinbourneApi):
 
         We therefore want to add our newly created LUIDs to our initial holdings for future use
         '''
+
         # Loop over our recently upserted instruments
         for instrument_name, instrument in batch_upsert_response.values.items():
             # Add our LUID as a new identifier so that we can use it in our calls later
@@ -384,26 +374,18 @@ class transparencyOversightThirdParty(TestFinbourneApi):
 
         '''
         To set our holdings we use a list of AdjustHoldingRequest objects. We can create these from our holdings data
-        above.
-        
-        The AdjustHoldingRequest object has a number of fields these are:
-            - instrument_uid: This is the LUID of the instrument we want to adjust the holdings for
-            - tax_lots: This is a list of tax lots. A tax lot being instruments purchased at different times and thus needing
-                        different treatment for tax purposes. In this case we will use a single tax lot
-                - units: This is the quantity of the instrument that we are holding
-                - cost: This is the total cost of the instrument and the currency it is in
-                    - amount: The total cost/value of the instrument, here we multiply the instrument's price by its
-                              quantity to get the total amount
-                    - currency: The currency that the instrument is in as a string, must be tk - what currencies are allowed??
-                - portfolio_cost: This is the total cost of the instrument in the portfolio's currency
-                - price: This is the price if the instrument tk - in what currency???? Is this in the portfolio currency?
+        above.            
                 
         Now that we have our holding adjustments we can set them on our portfolios. Using the set_holdings method
         we can only set holdings on one portfolio at a time. So we will have to iterate over our portfolios and create
-        our holdings
+        our holdings.
+        
+        You can read more about creating and setting holding adjustments here: 
+        https://docs.lusid.com/#operation/SetHoldings
         
         Note that we have specified an effective at date of today's date minus two days to set the holdings so they
         are up to date as of the day before yesterday.
+    
         '''
 
         holdings_effective_date = (datetime.now(pytz.UTC) - timedelta(days=2)).isoformat()
@@ -574,41 +556,9 @@ class transparencyOversightThirdParty(TestFinbourneApi):
 
         '''
         Now that we have defined our trades we can create a batch transaction request for each portfolio. This comes
-        in the form of a list of transaction requests
+        in the form of a list of transaction requests.
         
-        Each TransactionRequest object has the following properties:
-    
-            - transaction_id: A unique transaction identifier tk - unique to what?
-            - type: The transaction type, by default the following are already available 
-                - 'Buy'
-                - 'Sell'
-                - 'StockIn'
-                - 'StockOut'
-                - 'CoverShort'
-                - 'SellShort'
-                - 'FxBuy'
-                - 'FxSell'
-                - 'FwdFxBuy'
-                - 'FwdFxSell'
-                - 'FundsIn'
-                - 'FundsOut'
-                - 'OLFC' (Open Long Futures Contract)
-                - 'CLFC' (Close Long Futures Contract)
-                - 'OSFC' (Open Short Futures contract)
-                - 'CSFC' (Close Short Futures Contract)
-            - instrument_uid: The Lusid Instrument Id also known as LUID
-            - transaction_date: The date of the transaction as an ISO8601 datetime, that is "YYYY-MM-DDTHH:MM:SSZ"
-            - settlement_date: The date of the settlement as an ISO8601 datetime, that is "YYYY-MM-DDTHH:MM:SSZ"
-            - units: The quantity of units of the instrument involved in the transaction
-            - transactionPrice: A TransactionPrice object with a price and type
-                - price: The price of the transaction
-                - type: The type of the price, available options are 'Price', 'Yield' or 'Spread'
-            - totalConsideration: The total value of the transaction in settlement currency as a CurrencyAndAmount object
-                - amount: The amount of the currency
-                - currency: The currency e.g. 'GBP' tk - how do we validate this?
-            - exchangeRate: Rate between transaction and settlement currency
-            - transactionCurrency: The currency of the transaction
-            - source: Where this transaction came from options are 'System' and 'Client'
+        You can read more about upserting transactions here: https://docs.lusid.com/#operation/UpsertTransactions
         '''
 
         # Iterate over our portfolios
@@ -806,7 +756,7 @@ class transparencyOversightThirdParty(TestFinbourneApi):
         """
 
         # Initialise our reconiled portfolios to dictionary to hold any reconciliation breaks
-        reconciled_portfolios = {}
+        self.reconciled_portfolios = {}
 
         # Iterate over our portfolios
         for portfolio_name in self.fund_accountant_daily_holdings_report:
@@ -835,9 +785,15 @@ class transparencyOversightThirdParty(TestFinbourneApi):
 
             # If there are any breaks, add them all to our dictionary
             if reconciliation.count > 0:
-                reconciled_portfolios[portfolio_name] = reconciliation
+                self.reconciled_portfolios[portfolio_name] = reconciliation
 
-                # tk - reconciliation test
+                self.reconciliation_asserts(reconciliation,
+                                            self.internal_scope_code,
+                                            portfolio_name,
+                                            self.this_morning,
+                                            self.fund_accountant_scope_code,
+                                            portfolio_name,
+                                            self.this_morning)
 
         '''
         Okay so looking over our reconciliations we can see that 2 of our portfolios do not reconcile. The rest match
@@ -969,6 +925,8 @@ class transparencyOversightThirdParty(TestFinbourneApi):
         data type using its ResourceId. Once again this is the scope and code of the object. There are a number of 
         pre-configured types in the default scope which we can draw from. In this case we will use the boolean type.
         This means that when we set the 'late_trade' property we have to specify a value of 'True' or 'False'. 
+        
+        You can read more about creating properties here: https://docs.lusid.com/#operation/CreatePropertyDefinition
         '''
 
         property = models.CreatePropertyDefinitionRequest(domain='Trade',
@@ -1003,7 +961,6 @@ class transparencyOversightThirdParty(TestFinbourneApi):
         self.update_fund_accountant_record()
         self.reconcile_records()
         self.identify_discrepancies()
-        self.change_fund_accountants()
 
 if __name__ == '__main__':
     unittest.main()

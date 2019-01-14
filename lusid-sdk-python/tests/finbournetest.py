@@ -42,22 +42,33 @@ class TestFinbourneApi(TestCase):
         our account.
         """
 
-        # Load our configuration details from a secrets file
-        dir_path = os.path.dirname(os.path.realpath(__file__))
-        with open(os.path.join(dir_path, "secrets.json"), "r") as secrets:
-            config = json.load(secrets)
+        # Load our configuration details from the environment variables
+        token_url = os.getenv("FBN_TOKEN_URL", None)
+        cls.api_url = os.getenv("FBN_LUSID_API_URL", None)
+        username = os.getenv("FBN_USERNAME", None)
+        password_raw = os.getenv("FBN_PASSWORD", None)
+        client_id_raw = os.getenv("FBN_CLIENT_ID", None)
+        client_secret_raw = os.getenv("FBN_CLIENT_SECRET", None)
 
-        # Get our URL for authentication
-        token_url = os.getenv("FBN_TOKEN_URL", config["api"]["tokenUrl"])
+        # If any of the environmental variables are missing use a local secrets file
+        if token_url is None or username is None or password_raw is None or client_id_raw is None \
+                or client_secret_raw is None or cls.api_url is None:
 
-        # Get our credentials
-        username = os.getenv("FBN_USERNAME", config["api"]["username"])
-        password = pathname2url(os.getenv("FBN_PASSWORD", config["api"]["password"]))
-        client_id = pathname2url(os.getenv("FBN_CLIENT_ID", config["api"]["clientId"]))
-        client_secret = pathname2url(os.getenv("FBN_CLIENT_SECRET", config["api"]["clientSecret"]))
+            dir_path = os.path.dirname(os.path.realpath(__file__))
+            with open(os.path.join(dir_path, "secrets.json"), "r") as secrets:
+                config = json.load(secrets)
 
-        # Get our URL for the API
-        cls.api_url = os.getenv("FBN_LUSID_API_URL", config["api"]["apiUrl"])
+            token_url = os.getenv("FBN_TOKEN_URL", config["api"]["tokenUrl"])
+            username = os.getenv("FBN_USERNAME", config["api"]["username"])
+            password = pathname2url(os.getenv("FBN_PASSWORD", config["api"]["password"]))
+            client_id = pathname2url(os.getenv("FBN_CLIENT_ID", config["api"]["clientId"]))
+            client_secret = pathname2url(os.getenv("FBN_CLIENT_SECRET", config["api"]["clientSecret"]))
+            cls.api_url = os.getenv("FBN_LUSID_API_URL", config["api"]["apiUrl"])
+
+        else:
+            password = pathname2url(password_raw)
+            client_id = pathname2url(client_id_raw)
+            client_secret = pathname2url(client_secret_raw)
 
         # Prepare our authentication request
         token_request_body = ("grant_type=password&username={0}".format(username) +
@@ -411,7 +422,7 @@ class TestFinbourneApi(TestCase):
             self.assertEqual(transaction.transaction_currency, transaction_request.transaction_currency)
             self.assertEqual(transaction.source, transaction_request.source)
 
-    def create_property_definition_test(self, property_request, property):
+    def create_property_definition_asserts(self, property_request, property):
         """
         This method contains a set of tests used to test that a property definition has been created successfully, we
         test that:
@@ -431,6 +442,63 @@ class TestFinbourneApi(TestCase):
         self.assertEqual(property.display_name, property_request.display_name)
         self.assertEqual(property.data_type_id.scope, property.data_type_id.scope)
         self.assertEqual(property.data_type_id.code, property.data_type_id.code)
+
+    def reconciliation_asserts(self,
+                               reconciliation_break_response,
+                               left_scope,
+                               left_code,
+                               left_effective_at,
+                               right_scope,
+                               right_code,
+                               right_effective_at):
+
+        # Get our left holdings and convert to dictionary with instrument combined with holding type as key
+        left_holdings = self.client.get_holdings(scope=left_scope,
+                                                 code=left_code,
+                                                 effective_at=left_effective_at)
+
+        left_holdings = {holding.instrument_uid: holding for holding in left_holdings.values}
+
+        # Get our right holdings and convert to dictionary with instrument combined with holding type as key
+        right_holdings = self.client.get_holdings(scope=right_scope,
+                                                  code=right_code,
+                                                  effective_at=right_effective_at)
+
+        right_holdings = {holding.instrument_uid: holding for holding in right_holdings.values}
+
+        # Convert our reconciliation breaks to a dictionary
+        rec_breaks = {rec_break.instrument_uid: rec_break for rec_break in reconciliation_break_response.values}
+
+        # tk - Need to combine cash with different holding types in my holdings before running this.
+        for key, left_holding in left_holdings.items():
+            try:
+                right_holding = right_holdings[key]
+                difference_units = round(right_holding.units - left_holding.units, 0)
+                difference_cost_amount = round(right_holding.cost.amount - left_holding.cost.amount, 2)
+                if abs(difference_units) > 0 or abs(difference_cost_amount) > 0:
+                    rec_break = rec_breaks[key]
+                    self.assertEqual(difference_units, rec_break.difference_units)
+                    self.assertEqual(difference_cost_amount, rec_break.difference_cost.amount)
+                    self.assertEqual(left_holding.units, rec_break.left_units)
+                    self.assertEqual(left_holding.cost.amount, rec_break.left_cost.amount)
+                    self.assertEqual(left_holding.cost.currency, rec_break.left_cost.currency)
+                    self.assertEqual(right_holding.units, rec_break.right_units)
+                    self.assertEqual(right_holding.cost.amount, rec_break.right_cost.amount)
+                    self.assertEqual(right_holding.cost.currency, rec_break.right_cost.currency)
+
+            # If there is no matching holding on the right side
+            except KeyError:
+                rec_break = rec_breaks[key]
+                self.assertEqual(left_holding.units, rec_break.difference_units)
+                self.assertEqual(left_holding.cost.amount, rec_break.difference_cost.amount)
+                self.assertEqual(left_holding.cost.currency, rec_break.difference_cost.currency)
+                self.assertEqual(left_holding.units, rec_break.left_units)
+                self.assertEqual(left_holding.cost.amount, rec_break.left_cost.amount)
+                self.assertEqual(left_holding.cost.currency, rec_break.left_cost.currency)
+
+    # tk - check that property has been added
+    def add_transaction_property_asserts(self, transaction_id, property_key, property_value):
+        pass
 
     def test(self):
         """
