@@ -1,0 +1,4 @@
+language: python
+script: 
+  - cd lusid-sdk-python
+  - python -m unittest discover -v
