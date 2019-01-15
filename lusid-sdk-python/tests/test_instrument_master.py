@@ -147,7 +147,6 @@ class TestFinbourneApi(TestCase):
                                               instrument_property_keys=[self.ISIN_PROPERTY_KEY,
                                                                         self.SEDOL_PROPERTY_KEY])
 
-
         self.assertEqual(fbn_ids.values["BBG000C6K6G9"].name, "VODAFONE GROUP PLC")
 
         # get instrument from the master
@@ -173,7 +172,7 @@ class TestFinbourneApi(TestCase):
         fbn_inst = self.client.find_instruments([models.Property(self.ISIN_PROPERTY_KEY,
                                                                            "GB00BH4HKS39"),
                                                  models.Property(self.ISIN_PROPERTY_KEY,
-                                                                           "BBG000C04D57"),
+                                                                           "GB0031348658"),
                                                  models.Property(self.ISIN_PROPERTY_KEY,
                                                                            "GB00BDR05C01"),
                                                  models.Property(self.SEDOL_PROPERTY_KEY,
@@ -181,9 +180,11 @@ class TestFinbourneApi(TestCase):
                                                  models.Property(self.SEDOL_PROPERTY_KEY,
                                                                            "0878230")])
 
-        self.assertGreaterEqual(len(fbn_inst.values), 5)
-        # we expect 5 or more results, but each FIGI should be present in the return list
+        # self.assertGreaterEqual(len(fbn_inst.values), 5)
+        # we expect 5 or more results (if other instruments are present, but each FIGI should be present in
+        # the return list, and should match the 5 original instruments
 
+        # Compare returned list to seed instruments Figis
 
         inst_list = ["BBG000C6K6G9",
                      "BBG000C04D57",
@@ -191,8 +192,10 @@ class TestFinbourneApi(TestCase):
                      "BBG000BF0KW3",
                      "BBG000BF4KL1"]
 
+        # get returned Figi list
         found_figis = [item.identifiers['Figi'] for item in fbn_inst.values if 'Figi' in item.identifiers]
-
+        assert len(found_figis) ==5
+        # returned instrument list (found_figis) should not contain instruments that are missing from inst_list
         not_found = [item for item in inst_list if item not in found_figis]
 
         assert len(not_found) == 0
@@ -204,7 +207,7 @@ class TestFinbourneApi(TestCase):
 
         matched_ids = self.client.match_instruments(self.FIGI_SCHEME, ["BBG000BF6B57"])
 
-        self.assertEqual(matched_ids.values["BBG000BF6B57"][0].name, "WPP PLC")
+        self.assertEqual(len(matched_ids.values["BBG000BF6B57"]), 1)
 
         instrument_definition = matched_ids.values["BBG000BF6B57"][0]
 
@@ -217,7 +220,7 @@ class TestFinbourneApi(TestCase):
         # get instrument from the master
         fbn_inst = self.client.get_instrument(self.FIGI_SCHEME, "BBG000BF6B57")
 
-        assert fbn_inst.identifiers[self.FIGI_SCHEME] == "BBG000BF6B57"  # whats the difference between this and self.assert?
+        assert fbn_inst.identifiers[self.FIGI_SCHEME] == "BBG000BF6B57"
         assert fbn_inst.name == "WPP PLC"
 
 
