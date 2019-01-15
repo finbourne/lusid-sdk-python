@@ -19,13 +19,18 @@ except ImportError:
     # Python 2.7
     from urllib import pathname2url
 
-
 class TestFinbourneApi(TestCase):
     client = None
     instrumentIds = []
 
+
     @classmethod
     def setUpClass(cls):
+
+        cls.ISIN_PROPERTY_KEY = "Instrument/default/Isin"
+        cls.SEDOL_PROPERTY_KEY = "Instrument/default/Sedol"
+        cls.FIGI_SCHEME = "Figi"
+        cls.CUSTOM_INTERNAL_SCHEME = "ClientInternal"
 
         #   load configuration
         dir_path = os.path.dirname(os.path.realpath(__file__))
@@ -54,75 +59,169 @@ class TestFinbourneApi(TestCase):
         credentials = BasicTokenAuthentication(TestFinbourneApi.api_token)
         cls.client = lusid.LUSIDAPI(credentials, TestFinbourneApi.api_url)
 
-    def test_seed_instruments(self):
+        response = cls.seed_instruments()
 
-        instrument_definition = models.InstrumentDefinition(name="VODAFONE GROUP PLC",
-                                                            identifiers={"Figi": "BBG000C6K6G9",
-                                                                         "ClientInternal": "INTERNAL_ID_1"})
+    @classmethod
+    def tearDownClass(cls):
+        inst_list = ["BBG000C6K6G9",
+                     "BBG000C04D57",
+                     "BBG000FV67Q4",
+                     "BBG000BF0KW3",
+                     "BBG000BF4KL1",
+                     "BBG000BF6B57"]
 
-        upsert_response = self.client.upsert_instruments({"correlationId1": instrument_definition})
+        for i in inst_list:
+            response = cls.client.delete_instrument(cls.FIGI_SCHEME, i)
+        # fbn_figi = cls.client.get_instrument("Figi", "BBG000C6K6G9")
+        print("JKH")
+    @classmethod
+    def seed_instruments(cls):
 
-        instrument_definition = models.InstrumentDefinition(name="BARCLAYS PLC",
-                                                            identifiers={"Figi": "BBG000C04D57",
-                                                                         "ClientInternal": "INTERNAL_ID_2"})
+        inst_isin = models.InstrumentProperty(cls.ISIN_PROPERTY_KEY, models.PropertyValue("GB00BH4HKS39"))
+        inst_sedol = models.InstrumentProperty(cls.SEDOL_PROPERTY_KEY, models.PropertyValue("BH4HKS3"))
 
-        upsert_response = self.client.upsert_instruments({"correlationId2": instrument_definition})
+        instrument_definition1 = models.InstrumentDefinition(name="VODAFONE GROUP PLC",
+                                                            identifiers={cls.FIGI_SCHEME: "BBG000C6K6G9",
+                                                                         cls.CUSTOM_INTERNAL_SCHEME: "INTERNAL_ID_1"},
+                                                            properties=[inst_isin, inst_sedol])
+        # upsert_response = cls.client.upsert_instruments({"correlationId1": instrument_definition})
 
-        instrument_definition = models.InstrumentDefinition(name="NATIONAL GRID PLC",
-                                                            identifiers={"Figi": "BBG000FV67Q4",
-                                                                         "ClientInternal": "INTERNAL_ID_3"})
 
-        upsert_response = self.client.upsert_instruments({"correlationId3": instrument_definition})
+        inst_isin = models.InstrumentProperty(cls.ISIN_PROPERTY_KEY, models.PropertyValue("GB0031348658"))
+        inst_sedol = models.InstrumentProperty(cls.SEDOL_PROPERTY_KEY, models.PropertyValue("3134865"))
 
-        instrument_definition = models.InstrumentDefinition(name="SAINSBURY (J) PLC",
-                                                            identifiers={"Figi": "BBG000BF0KW3",
-                                                                         "ClientInternal": "INTERNAL_ID_4"})
+        instrument_definition2 = models.InstrumentDefinition(name="BARCLAYS PLC",
+                                                            identifiers={cls.FIGI_SCHEME: "BBG000C04D57",
+                                                                         cls.CUSTOM_INTERNAL_SCHEME: "INTERNAL_ID_2"},
+                                                            properties=[inst_isin, inst_sedol])
 
-        upsert_response = self.client.upsert_instruments({"correlationId4": instrument_definition})
+        # upsert_response = cls.client.upsert_instruments({"correlationId2": instrument_definition})
 
-        instrument_definition = models.InstrumentDefinition(name="TAYLOR WIMPEY PLC",
-                                                            identifiers={"Figi": "BBG000BF4KL1",
-                                                                         "ClientInternal": "INTERNAL_ID_5"})
+        inst_isin = models.InstrumentProperty(cls.ISIN_PROPERTY_KEY, models.PropertyValue("GB00BDR05C01"))
+        inst_sedol = models.InstrumentProperty(cls.SEDOL_PROPERTY_KEY, models.PropertyValue("BDR05C0"))
 
-        upsert_response = self.client.upsert_instruments({"correlationId5": instrument_definition})
+        instrument_definition3 = models.InstrumentDefinition(name="NATIONAL GRID PLC",
+                                                            identifiers={cls.FIGI_SCHEME: "BBG000FV67Q4",
+                                                                         cls.CUSTOM_INTERNAL_SCHEME: "INTERNAL_ID_3"},
+                                                            properties=[inst_isin, inst_sedol])
 
-        assert len(upsert_response.values) == 1
+        # upsert_response = cls.client.upsert_instruments({"correlationId3": instrument_definition})
+
+        inst_isin = models.InstrumentProperty(cls.ISIN_PROPERTY_KEY, models.PropertyValue("GB00B019KW72"))
+        inst_sedol = models.InstrumentProperty(cls.SEDOL_PROPERTY_KEY, models.PropertyValue("B019KW7"))
+
+        instrument_definition4 = models.InstrumentDefinition(name="SAINSBURY (J) PLC",
+                                                            identifiers={cls.FIGI_SCHEME: "BBG000BF0KW3",
+                                                                         cls.CUSTOM_INTERNAL_SCHEME: "INTERNAL_ID_4"},
+                                                            properties=[inst_isin, inst_sedol])
+
+        # upsert_response = cls.client.upsert_instruments({"correlationId4": instrument_definition})
+
+        inst_isin = models.InstrumentProperty(cls.ISIN_PROPERTY_KEY, models.PropertyValue("GB0008782301"))
+        inst_sedol = models.InstrumentProperty(cls.SEDOL_PROPERTY_KEY, models.PropertyValue("0878230"))
+
+        instrument_definition5 = models.InstrumentDefinition(name="TAYLOR WIMPEY PLC",
+                                                            identifiers={cls.FIGI_SCHEME: "BBG000BF4KL1",
+                                                                         cls.CUSTOM_INTERNAL_SCHEME: "INTERNAL_ID_5"},
+                                                            properties=[inst_isin, inst_sedol])
+
+        upsert_response = cls.client.upsert_instruments(
+            {
+                "correlationId1": instrument_definition1,
+                "correlationId2": instrument_definition2,
+                "correlationId3": instrument_definition3,
+                "correlationId4": instrument_definition4,
+                "correlationId5": instrument_definition5
+            }
+        )
+
+        assert len(upsert_response.values) == 5
+
 
     def test_lookup_instrument_by_unique_id(self):
+
         # Look up an instrument that already exists in the instrument master by a
         # unique id, in this case an OpenFigi, and also return a list of aliases
-        fbn_ids = self.client.get_instruments("Figi", ["BBG000BF0KW3"])
 
-        # assertThat(lookedUpInstruments.getValues(), hasKey("BBG000BF0KW3"));
-        self.assertEquals(fbn_ids.values["BBG000BF0KW3"].name, "SAINSBURY (J) PLC")
+        fbn_ids = self.client.get_instruments(self.FIGI_SCHEME, ["BBG000C6K6G9", "BBG000BF4KL1"],
+                                              instrument_property_keys=[self.ISIN_PROPERTY_KEY,
+                                                                        self.SEDOL_PROPERTY_KEY])
 
-        fbn_inst = self.client.get_instrument("Figi", "BBG000BF0KW3")
-        # now check the key is as expected???
-        # next check the properties have gone in as expected...Sedol and Isin
 
-        #assert fbn_inst("BBG000BF0KW3")=="SAINSBURY (J) PLC"
+        self.assertEqual(fbn_ids.values["BBG000C6K6G9"].name, "VODAFONE GROUP PLC")
+
+        # get instrument from the master
+        fbn_inst = fbn_ids.values["BBG000C6K6G9"]
+        #fbn_inst = self.client.get_instrument(self.FIGI_SCHEME, "BBG000C6K6G9")
+        assert fbn_inst.name == "VODAFONE GROUP PLC"
+
+        # get isin
+        assert fbn_ids.values["BBG000C6K6G9"].properties[0].key == self.ISIN_PROPERTY_KEY
+        assert fbn_ids.values["BBG000C6K6G9"].properties[0].value == "GB00BH4HKS39"
+
+        assert fbn_ids.values["BBG000C6K6G9"].properties[1].key == self.SEDOL_PROPERTY_KEY
+        assert fbn_ids.values["BBG000C6K6G9"].properties[1].value == "BH4HKS3"
+
+
 
     def test_lookup_instrument_by_market_identifier(self):
 
         # Look up instruments that already exists in the instrument master by a
         # list of market identifiers...Sedol and Isin.
-        print("placeholder")
+        # inst_isin = models.InstrumentProperty(self.ISIN_PROPERTY_KEY, models.PropertyValue("GB00BH4HKS39"))
+        # inst_sedol = models.InstrumentProperty(self.SEDOL_PROPERTY_KEY, models.PropertyValue("B019KW7"))
+        fbn_inst = self.client.find_instruments([models.Property(self.ISIN_PROPERTY_KEY,
+                                                                           "GB00BH4HKS39"),
+                                                 models.Property(self.ISIN_PROPERTY_KEY,
+                                                                           "BBG000C04D57"),
+                                                 models.Property(self.ISIN_PROPERTY_KEY,
+                                                                           "GB00BDR05C01"),
+                                                 models.Property(self.SEDOL_PROPERTY_KEY,
+                                                                           "B019KW7"),
+                                                 models.Property(self.SEDOL_PROPERTY_KEY,
+                                                                           "0878230")])
+
+        self.assertGreaterEqual(len(fbn_inst.values), 5)
+        # we expect 5 or more results, but each FIGI should be present in the return list
+
+
+        inst_list = ["BBG000C6K6G9",
+                     "BBG000C04D57",
+                     "BBG000FV67Q4",
+                     "BBG000BF0KW3",
+                     "BBG000BF4KL1"]
+
+        found_figis = [item.identifiers['Figi'] for item in fbn_inst.values if 'Figi' in item.identifiers]
+
+        not_found = [item for item in inst_list if item not in found_figis]
+
+        assert len(not_found) == 0
+
 
     def test_find_non_mastered_instrument_from_external_source(self):
 
         # Look up an instrument not currently in the instrument master (WPP LN)
 
-        matched_ids = self.client.match_instruments("Figi", ["BBG000BF6B57"])
+        matched_ids = self.client.match_instruments(self.FIGI_SCHEME, ["BBG000BF6B57"])
+
         self.assertEqual(matched_ids.values["BBG000BF6B57"][0].name, "WPP PLC")
-        # Add the instrument to the instrument master. Can we do this from FIGI, ShareclassFigi, Ticker?
 
+        instrument_definition = matched_ids.values["BBG000BF6B57"][0]
 
+        # Add the instrument to the instrument master.  The result of the match contains
+        # the required information to master the instrument e.g. name, identifier, market
+        # identifier alias etc.
 
-    @classmethod
-    def seed_instruments(self):
+        upsert_response = self.client.upsert_instruments({"correlationId6": instrument_definition})
 
-        print("this doesnt run?")
+        # get instrument from the master
+        fbn_inst = self.client.get_instrument(self.FIGI_SCHEME, "BBG000BF6B57")
+
+        assert fbn_inst.identifiers[self.FIGI_SCHEME] == "BBG000BF6B57"  # whats the difference between this and self.assert?
+        assert fbn_inst.name == "WPP PLC"
+
 
 
 if __name__ == '__main__':
     unittest.main()
+
