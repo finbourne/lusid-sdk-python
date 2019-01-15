@@ -1,0 +1,15 @@
+language: python
+
+services:
+  - docker
+
+script:
+  - cd lusid-sdk-python
+  - docker-compose build
+  - docker-compose run lusid-sdk-python-test \
+     -e FBN_TOKEN_URL=$FBN_TOKEN_URL
+     -e FBN_USERNAME=$FBN_USERNAME -e \
+     -e FBN_PASSWORD=$FBN_PASSWORD \
+     -e FBN_CLIENT_ID=$FBN_CLIENT_ID \
+     -e FBN_CLIENT_SECRET=$FBN_CLIENT_SECRET \
+     -e FBN_LUSID_API_URL=$FBN_LUSID_API_URL
