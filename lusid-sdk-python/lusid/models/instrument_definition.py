@@ -27,17 +27,14 @@ from msrest.serialization import Model
 class InstrumentDefinition(Model):
     """InstrumentDefinition.
 
-    Variables are only populated by the server, and will be ignored when
-    sending a request.
-
     :param name: Required. The name of the instrument
     :type name: str
     :param identifiers: Required. A set of identifiers that uniquely identify
      this instrument (e.g FIGI, RIC)
     :type identifiers: dict[str, str]
-    :ivar properties: Optional. A collection of properties to upsert on the
+    :param properties: Optional. A collection of properties to upsert on the
      instrument.
-    :vartype properties: list[~lusid.models.InstrumentProperty]
+    :type properties: list[~lusid.models.InstrumentProperty]
     :param look_through_portfolio_id: Optional. The identifier of the
      portfolio that represents this instrument
     :type look_through_portfolio_id: ~lusid.models.ResourceId
@@ -53,7 +50,6 @@ class InstrumentDefinition(Model):
     _validation = {
         'name': {'required': True},
         'identifiers': {'required': True},
-        'properties': {'readonly': True},
     }
 
     _attribute_map = {
@@ -64,10 +60,10 @@ class InstrumentDefinition(Model):
         'definition': {'key': 'definition', 'type': 'InstrumentEconomicDefinition'},
     }
 
-    def __init__(self, name, identifiers, look_through_portfolio_id=None, definition=None):
+    def __init__(self, name, identifiers, properties=None, look_through_portfolio_id=None, definition=None):
         super(InstrumentDefinition, self).__init__()
         self.name = name
         self.identifiers = identifiers
-        self.properties = None
+        self.properties = properties
         self.look_through_portfolio_id = look_through_portfolio_id
         self.definition = definition
