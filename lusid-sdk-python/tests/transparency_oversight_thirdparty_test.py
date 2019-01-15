@@ -13,7 +13,7 @@ except ImportError:
     from urllib import pathname2url
 
 
-class transparencyOversightThirdParty(TestFinbourneApi):
+class TransparencyOversightThirdParty(TestFinbourneApi):
     """
     We are an asset manager who has outsourced our fund accounting. We have multiple clients, each with multiple
     portfolios containing different investment strategies and priorities.
