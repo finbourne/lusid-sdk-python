@@ -1,15 +1,15 @@
 language: python
-
 services:
-  - docker
-
+- docker
 script:
-  - cd lusid-sdk-python
-  - docker-compose build
-  - docker-compose run lusid-sdk-python-test \
-     -e FBN_TOKEN_URL=$FBN_TOKEN_URL
-     -e FBN_USERNAME=$FBN_USERNAME -e \
-     -e FBN_PASSWORD=$FBN_PASSWORD \
-     -e FBN_CLIENT_ID=$FBN_CLIENT_ID \
-     -e FBN_CLIENT_SECRET=$FBN_CLIENT_SECRET \
-     -e FBN_LUSID_API_URL=$FBN_LUSID_API_URL
+- cd lusid-sdk-python
+- docker-compose build
+- docker-compose run lusid-sdk-python-test \ -e FBN_TOKEN_URL=$FBN_TOKEN_URL -e FBN_USERNAME=$FBN_USERNAME
+  -e \ -e FBN_PASSWORD=$FBN_PASSWORD \ -e FBN_CLIENT_ID=$FBN_CLIENT_ID \ -e FBN_CLIENT_SECRET=$FBN_CLIENT_SECRET
+  \ -e FBN_LUSID_API_URL=$FBN_LUSID_API_URL
+notifications:
+  slack:
+    rooms:
+      secure: iqajC22M8f1hMUHfLgqaUa+ArlpkBFfW3DgjDHJHBSVu6xsv5YSI4GE0wwD2gf3vpL14RDNutJW6CKfnilmMbsXSonulczkCJtGOj73ebErZP35R8vT9ArhDd8plE2itFSDUVJAkSsNBhLPv9DvdylaoArcZNXWY0hNux/K4XZNxVunQYouzVnurVNBKQZnXvdr4hcQQpBHEVEWBu6B13FRoxZ+diDXWFBynJNfdo4RutcgfX79tr/oMsRruEwBrUNtX8T7Hd4hdGMIVYBRI9Jy+h1NTxd6Wvn8CNIvR+lQM1Z3l95QrroUyxBYe+irVkrqnPd5o7jMTo0Sqs4Gvv+/vkftcHX/UqZNNvvPDyvXSoTytyo0Yshvj17WYuLT9lkd7uXA0NGuHbMaahkJ6ABYl+/odabqYlVsfr+gJsoUwr3doM/bMNkBHl9GXWhrF/jPcaCp6bGICNb3hAQ0BydD6k3BfKMtz8qlZTYRu690huQB9zpC6z7BVSSDYde4mIzbwYekUWXi5Jwd0IY9GNR2KZpis7Ka2Z0tm/4IBXxsi2CPuLQAL0dXjs8haxdNGDsyxAn1QAWaxUXuYLbqssg+HbRMPamKvQtlmMjiB95e2ceUs3CZav7CZgZgCFx9AX5W8ITu7ryQvMgChuAFycbc1EzXoYVv4e019eX+7hXY=
+    on_failure: always	
+	
