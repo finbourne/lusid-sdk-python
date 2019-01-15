@@ -950,7 +950,11 @@ class transparencyOversightThirdParty(TestFinbourneApi):
                                                          'Trade/{}/late_trade'.format(self.internal_scope_code):
                                                              models.PropertyValue(label_value='True')})
 
-            # tk - test to check that this property has been added successfully
+            self.add_transaction_property_asserts(self.internal_scope_code,
+                                                  portfolio_name,
+                                                  transaction_id,
+                                                  'Trade/{}/late_trade'.format(self.internal_scope_code),
+                                                  'True')
 
     @timeit
     def test_transparency_oversight(self):

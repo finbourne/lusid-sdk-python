@@ -7,6 +7,7 @@ import lusid.models as models
 from unittest import TestCase
 from msrest.authentication import BasicTokenAuthentication
 from timeit import default_timer as timer
+from functools import reduce
 
 try:
     # Python 3.x
@@ -451,54 +452,145 @@ class TestFinbourneApi(TestCase):
                                right_scope,
                                right_code,
                                right_effective_at):
+        """
+        This function contains a set of assertions which ensure that a reconciliation has been conducted correctly.
 
-        # Get our left holdings and convert to dictionary with instrument combined with holding type as key
-        left_holdings = self.client.get_holdings(scope=left_scope,
-                                                 code=left_code,
-                                                 effective_at=left_effective_at)
+        :param reconciliation_break_response: The response from our reconciliation request to LUSID
+        :param left_scope: The scope of our left portfolio
+        :param left_code: The code of our left portfolio
+        :param left_effective_at: The effectiveAt date in ISO8601 format for our left portfolio
+        :param right_scope: The scope of our right portfolio
+        :param right_code: The code of our right portfolio
+        :param right_effective_at: The effectiveAt date in ISO8601 format for our right portfolio
+        :return:
+        """
 
-        left_holdings = {holding.instrument_uid: holding for holding in left_holdings.values}
+        def get_holdings(scope, code, effective_at):
+            """
+            This function gets a set of holdings from LUSID for a given portfolio. It then takes those holdings
+            and puts them into a dictionary containing a list of holdings for each unique instrument. This is
+            required as there may be multiple holdings for each instrument. For example for a cash instrument such
+            as the Pound Sterling (represented by the instrument identifier 'CCY_GBP') LUSID has a number of different
+            holdings types under which it may be held. For cash sitting at the bank this may be represented as a cash
+            balance, for cash that is to be paid for a recent transaction this may be represented as committed cash.
 
-        # Get our right holdings and convert to dictionary with instrument combined with holding type as key
-        right_holdings = self.client.get_holdings(scope=right_scope,
-                                                  code=right_code,
-                                                  effective_at=right_effective_at)
+            When we do a reconciliation all of these holding types are aggregated. Thus in order for us to check that
+            our reconciliation is correct we must also perform this aggregation. By creating a dictionary with a list
+            of the holdings for each unique instrument we will be able to do this later.
 
-        right_holdings = {holding.instrument_uid: holding for holding in right_holdings.values}
+            :param scope: The scope of the portfolio to get the holdings from
+            :param code: The code of the portfolio to get the holdings from
+            :param effective_at: The effectiveAt date in ISO8601 format for which we want to get the holdings
 
-        # Convert our reconciliation breaks to a dictionary
+            :return:
+            holdings: A dictionary containing a list of holdings for each unique instrument
+            """
+            # Get our holdings from LUSID
+            holdings_ = self.client.get_holdings(scope=scope,
+                                                 code=code,
+                                                 effective_at=effective_at)
+            # Convert to a dictionary with the instrument uid as the key and a list of holdings as values
+            holdings = {}
+            for holding in holdings_.values:
+                holdings.setdefault(holding.instrument_uid, []).append(holding)
+            return holdings
+
+        def aggregate_holdings(holdings):
+            """
+            This function takes a list of holdings for a given instrument and if there is more than one aggregates the
+            number of units and the cost of the holdings.
+
+            :param holdings: A list of holdings for a given instrument
+
+            :return:
+            holding_units: The total number of units held in this instrument
+            holding_cost_amount: The total cost of units held in this instrument
+            holding_cost_currency: The currency of units held in this instrument
+            """
+
+            # If we have more than one holding, use our aggregation logic
+            if len(holdings) > 1:
+                # Extract our units from each of our holdings objects
+                holding_units_ = [holding.units for holding in holdings]
+                # Extract our cost amount from each of our holdings objects
+                holding_cost_amount_ = [holding.cost.amount for holding in holdings]
+                # Sum the units and cost amount, rounding to the appropriate level of decimal places
+                holding_units = round(reduce((lambda x, y: x + y), holding_units_), 0)
+                holding_cost_amount = round(reduce((lambda x, y: x + y), holding_cost_amount_), 2)
+
+            # Otherwise just use the first and only holding
+            else:
+                holding_units = round(holdings[0].units, 0)
+                holding_cost_amount = round(holdings[0].cost.amount, 2)
+
+            # Currency is assumed to be the same across all holdings for each instrument
+            holding_cost_currency = holdings[0].cost.currency
+
+            return holding_units, holding_cost_amount, holding_cost_currency
+
+        # Get our left and right holdings
+        left_holdings = get_holdings(left_scope, left_code, left_effective_at)
+        right_holdings = get_holdings(right_scope, right_code, right_effective_at)
+
+        # Convert our reconciliation breaks to a dictionary with the instrument uid as the key
         rec_breaks = {rec_break.instrument_uid: rec_break for rec_break in reconciliation_break_response.values}
 
-        # tk - Need to combine cash with different holding types in my holdings before running this.
+        # Iterate over our left holdings and check that any breaks are correct
         for key, left_holding in left_holdings.items():
+            # If there is more than one holding for an instrument, aggregate the holdings
+            left_holding_units, left_holding_cost_amount, left_holding_cost_currency = aggregate_holdings(left_holding)
+            # Try and find a holding on the right side for the same instrument
             try:
                 right_holding = right_holdings[key]
-                difference_units = round(right_holding.units - left_holding.units, 0)
-                difference_cost_amount = round(right_holding.cost.amount - left_holding.cost.amount, 2)
+                # If there is more than one holding for an instrument, aggregate the holdings
+                right_holding_units, right_holding_cost_amount, right_holding_cost_currency = aggregate_holdings(
+                    right_holding)
+                # Calculate the differences between the two holdings
+                difference_units = round(right_holding_units - left_holding_units, 0)
+                difference_cost_amount = round(right_holding_cost_amount - left_holding_cost_amount, 2)
+                # If there are any differences check that they match our reconciliation break
                 if abs(difference_units) > 0 or abs(difference_cost_amount) > 0:
                     rec_break = rec_breaks[key]
-                    self.assertEqual(difference_units, rec_break.difference_units)
-                    self.assertEqual(difference_cost_amount, rec_break.difference_cost.amount)
-                    self.assertEqual(left_holding.units, rec_break.left_units)
-                    self.assertEqual(left_holding.cost.amount, rec_break.left_cost.amount)
-                    self.assertEqual(left_holding.cost.currency, rec_break.left_cost.currency)
-                    self.assertEqual(right_holding.units, rec_break.right_units)
-                    self.assertEqual(right_holding.cost.amount, rec_break.right_cost.amount)
-                    self.assertEqual(right_holding.cost.currency, rec_break.right_cost.currency)
+                    self.assertEqual(difference_units, round(rec_break.difference_units, 0))
+                    self.assertEqual(difference_cost_amount, round(rec_break.difference_cost.amount, 2))
+                    self.assertEqual(left_holding_units, round(rec_break.left_units, 0))
+                    self.assertEqual(left_holding_cost_amount, round(rec_break.left_cost.amount, 2))
+                    self.assertEqual(left_holding_cost_currency, rec_break.left_cost.currency)
+                    self.assertEqual(right_holding_units, round(rec_break.right_units,0))
+                    self.assertEqual(right_holding_cost_amount, round(rec_break.right_cost.amount,2))
+                    self.assertEqual(right_holding_cost_currency, rec_break.right_cost.currency)
 
-            # If there is no matching holding on the right side
+            # If there is no matching holding on the right, check that the reconciliation break matches the left side
             except KeyError:
                 rec_break = rec_breaks[key]
-                self.assertEqual(left_holding.units, rec_break.difference_units)
-                self.assertEqual(left_holding.cost.amount, rec_break.difference_cost.amount)
-                self.assertEqual(left_holding.cost.currency, rec_break.difference_cost.currency)
-                self.assertEqual(left_holding.units, rec_break.left_units)
-                self.assertEqual(left_holding.cost.amount, rec_break.left_cost.amount)
-                self.assertEqual(left_holding.cost.currency, rec_break.left_cost.currency)
+                self.assertEqual(left_holding_units, round(rec_break.difference_units, 0))
+                self.assertEqual(left_holding_cost_amount, round(rec_break.difference_cost.amount,2))
+                self.assertEqual(left_holding_cost_currency, rec_break.difference_cost.currency)
+                self.assertEqual(left_holding_units, round(rec_break.left_units,0))
+                self.assertEqual(left_holding_cost_amount, round(rec_break.left_cost.amount,2))
+                self.assertEqual(left_holding_cost_currency, rec_break.left_cost.currency)
 
-    # tk - check that property has been added
-    def add_transaction_property_asserts(self, transaction_id, property_key, property_value):
-        pass
+    def add_transaction_property_asserts(self, scope, code, transaction_id, property_key, property_value):
+        """
+        This method contains a set of assertions which test that a property has been successfully added to a transaction
+
+        :param scope: The scope of the portfolio that contains the transaction
+        :param code: The code of the portfolio that contains the transaction
+        :param transaction_id: The transaction id of the transaction
+        :param property_key: The property key of the property that we want to check
+        :param property_value: The property value of the property that we want to check
+        """
+        # Get our transaction by filtering on the transaction id across all transactions inside our portfolio
+        transaction = self.client.get_transactions(scope,
+                                                   code,
+                                                   filter="transactionId eq '{}'".format(transaction_id)).values[0]
+
+        # Create a dictionary with the key, value pairs for each of our properties on the transaction
+        transaction_properties = {trans_property.key:trans_property.value for trans_property in transaction.properties}
+
+        # Check that the property exists and that the value is correct
+        self.assertTrue(property_key in transaction_properties)
+        self.assertEqual(property_value, transaction_properties[property_key])
 
     def test(self):
         """
