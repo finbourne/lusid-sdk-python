@@ -1,14 +1,14 @@
 language: python
 services:
-  - docker
+- docker
 script:
-  - cd lusid-sdk-python
-  - docker-compose build
-  - docker-compose run lusid-sdk-python-test \ -e FBN_TOKEN_URL=$FBN_TOKEN_URL -e FBN_USERNAME=$FBN_USERNAME
-    -e \ -e FBN_PASSWORD=$FBN_PASSWORD \ -e FBN_CLIENT_ID=$FBN_CLIENT_ID \ -e FBN_CLIENT_SECRET=$FBN_CLIENT_SECRET
-    \ -e FBN_LUSID_API_URL=$FBN_LUSID_API_URL
+- cd lusid-sdk-python
+- docker-compose build
+- docker-compose run lusid-sdk-python-test \ -e FBN_TOKEN_URL=$FBN_TOKEN_URL -e FBN_USERNAME=$FBN_USERNAME
+  -e \ -e FBN_PASSWORD=$FBN_PASSWORD \ -e FBN_CLIENT_ID=$FBN_CLIENT_ID \ -e FBN_CLIENT_SECRET=$FBN_CLIENT_SECRET
+  \ -e FBN_LUSID_API_URL=$FBN_LUSID_API_URL
 notifications:
   slack:
     rooms:
-      - secure: "iqajC22M8f1hMUHfLgqaUa+ArlpkBFfW3DgjDHJHBSVu6xsv5YSI4GE0wwD2gf3vpL14RDNutJW6CKfnilmMbsXSonulczkCJtGOj73ebErZP35R8vT9ArhDd8plE2itFSDUVJAkSsNBhLPv9DvdylaoArcZNXWY0hNux/K4XZNxVunQYouzVnurVNBKQZnXvdr4hcQQpBHEVEWBu6B13FRoxZ+diDXWFBynJNfdo4RutcgfX79tr/oMsRruEwBrUNtX8T7Hd4hdGMIVYBRI9Jy+h1NTxd6Wvn8CNIvR+lQM1Z3l95QrroUyxBYe+irVkrqnPd5o7jMTo0Sqs4Gvv+/vkftcHX/UqZNNvvPDyvXSoTytyo0Yshvj17WYuLT9lkd7uXA0NGuHbMaahkJ6ABYl+/odabqYlVsfr+gJsoUwr3doM/bMNkBHl9GXWhrF/jPcaCp6bGICNb3hAQ0BydD6k3BfKMtz8qlZTYRu690huQB9zpC6z7BVSSDYde4mIzbwYekUWXi5Jwd0IY9GNR2KZpis7Ka2Z0tm/4IBXxsi2CPuLQAL0dXjs8haxdNGDsyxAn1QAWaxUXuYLbqssg+HbRMPamKvQtlmMjiB95e2ceUs3CZav7CZgZgCFx9AX5W8ITu7ryQvMgChuAFycbc1EzXoYVv4e019eX+7hXY="
-    on_failure: always    
+      secure: ZXR4W8Zvz7TFEMH0VVVhelqDlJWyPysI3bco7z1lIuDmHZuBoE5jwF9V8UCd16lhPxgUwhXCYI9lZvNzaQ5rN/PEJ1FQp4+y3rIUEso13pML3Bbe6X1edtCpQx6wPpcLnoad27mj8LpzAZwxYA6iqZuP5DsqDgJMyPsHTNkHwDpJJAzQFe52K+0UJedVKy+PmeHLhwd2Pu8NI+jh4oCWmxhT+J7isaFjFjRSbZVLE/CKtSPfpuX2qL2SJvSzpCoQYcR3hhxYkR4GhQYEAYXmA0eXDnulGtEue5bUJ/5nOYRwmR6fgTEyaOg5gjYD+T8ECdPItGiID0OU4PpHv2Ce2cIJX7A5EuL1/6jquG/Kuv+P5WNpTV6xBhBomd99qW34OWR1aXF9XJx0uUwhdc+STPm0P69M8l3N3549vzEK6B43mjk5hV6R3YRomRTLmKf68r+Fs9014tEzABowgoLpHGqOo8MFNlkrBXJoLu/WW6cfQ6fmc+cFlfCRmoZBxNbM6vofRnq5Lq7JvyulcOtuf2i7R+plyJ/WO5j1JTrPiO9b/F0o4BEQEkFV/7+4WxVDVnh9sJLn7aAygxdOBM6kgdnW3QFLD2sSy+4ejejrym92EVaxREyKivs69Eyy/08gooOtB2agTChbxgk2I7dpTkOzfs48CFas3CBg1Y/aqxc=
+    on_failure: always
