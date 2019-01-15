@@ -3,8 +3,13 @@ services:
   - docker
 script:
   - cd lusid-sdk-python
+<<<<<<< HEAD
   - docker build -t lusid-sdk-python-test .
   - docker run lusid-sdk-python-test \ -e FBN_TOKEN_URL=$FBN_TOKEN_URL -e FBN_USERNAME=$FBN_USERNAME
+=======
+  - docker-compose build
+  - docker-compose run lusid-sdk-python-test \ -e FBN_TOKEN_URL=$FBN_TOKEN_URL -e FBN_USERNAME=$FBN_USERNAME
+>>>>>>> e7fb726a5ef9408e5def2c6911e3e07899f345da
     -e \ -e FBN_PASSWORD=$FBN_PASSWORD \ -e FBN_CLIENT_ID=$FBN_CLIENT_ID \ -e FBN_CLIENT_SECRET=$FBN_CLIENT_SECRET
     \ -e FBN_LUSID_API_URL=$FBN_LUSID_API_URL
 notifications:
