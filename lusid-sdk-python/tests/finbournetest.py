@@ -290,7 +290,7 @@ class TestFinbourneApi(TestCase):
                              'Currency is {} when it should be {}'.format(holding.cost.currency,
                                                                           adjustment.cost.currency))
 
-            self.assertEqual(round(adjustment.portfolio_cost, 2), round(holding.cost_portfolio_ccy.amount, 2),
+            self.assertEqual(round(adjustment.portfolio_cost, 2), round(holding.cost_portfolio_ccy.amount,2),
                              'Portfolio cost is {} when it should be {}'.format(
                                  holding.cost_portfolio_ccy.amount,
                                  round(adjustment.portfolio_cost, 2)))

@@ -628,6 +628,9 @@ class transparencyStrategies(TestFinbourneApi):
         # Tests - Ensure that we have successfully created the portfolio group
         self.portfolio_group_creation_asserts(portfolio_group, portfolio_group_request, self.strategy_scope)
 
+        test = self.client.get_holdings(scope=self.strategy_scope,
+                                        code='client-{}-mandate-fixedincome'.format(self.client_2_portfolio_group_id))
+
         aggregation_request = models.AggregationRequest(recipe_id=models.ResourceId(scope=self.internal_scope_code,
                                                                                     code='default'),
                                                         effective_at=datetime.now(pytz.UTC).isoformat(),
@@ -652,8 +655,8 @@ class transparencyStrategies(TestFinbourneApi):
 
         aggregated_group = self.client.get_aggregation_by_group(scope=self.strategy_scope,
                                                                 code=self.client_2_portfolio_group_code,
-                                                                request=aggregation_request)
-
+                                                                request=aggregation_request,
+                                                                raw=True)
 
         # tk - add test to ensure correct
 
