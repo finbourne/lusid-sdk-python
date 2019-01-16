@@ -311,44 +311,44 @@ class transparencyStrategies(TestFinbourneApi):
         You can read more about setting holdings here: https://docs.lusid.com/#operation/SetHoldings
         '''
 
-        holdings_effective_date = (datetime.now(pytz.UTC) - timedelta(days=5)).isoformat()
+        # Initialise our list to hold the holding adjustments
+        for portfolio_name, transactions in self.client_holdings.items():
 
-        # Iterate over our portfolios
-        for portfolio_name, portfolio in self.client_holdings.items():
-
-            # Initialise our list to hold the holding adjustments
-            holding_adjustments = []
+            stock_in_transactions = []
 
             # Iterate over the holdings in each portfolio
-            for instrument_name, holding in portfolio.items():
+            for instrument_name, transaction in transactions.items():
                 # Create our adjust holdings request using our instrument universe to get the LUID identifier for the instrument
-                holding_adjustments.append(
-                    models.AdjustHoldingRequest(
-                        instrument_uid=self.instrument_universe[instrument_name]['identifiers']['LUID'],
-                        tax_lots=[
-                            models.TargetTaxLotRequest(units=holding['quantity'],
-                                                       cost=models.CurrencyAndAmount(
-                                                           amount=holding['quantity'] *
-                                                                  holding['price'],
-                                                           currency=self.instrument_universe[instrument_name][
-                                                               'currency']),
-                                                       portfolio_cost=holding['quantity'] *
-                                                                      holding['price'],
-                                                       price=holding['price'])
-                        ])
+                stock_in_transactions.append(
+                    models.TransactionRequest(transaction_id='tid_{}'.format(uuid.uuid4()),
+                                              type='StockIn',
+                                              instrument_uid=self.instrument_universe[instrument_name]['identifiers'][
+                                                  'LUID'],
+                                              transaction_date=self.created_date,
+                                              settlement_date=self.created_date,
+                                              units=transaction['quantity'],
+                                              transaction_price=models.TransactionPrice(
+                                                  price=transaction['price'],
+                                                  type='Price'),
+                                              total_consideration=models.CurrencyAndAmount(
+                                                  amount=transaction['quantity'] * transaction['price'],
+                                                  currency=self.instrument_universe[instrument_name]['currency']),
+                                              source='Client',
+                                              transaction_currency=self.instrument_universe[instrument_name][
+                                                  'currency'])
                 )
 
-            set_holdings_response = self.client.set_holdings(scope=self.internal_scope_code,
-                                                             code=portfolio_name,
-                                                             effective_at=holdings_effective_date,
-                                                             holding_adjustments=holding_adjustments)
+            upsert_transactions_response = self.client.upsert_transactions(scope=self.internal_scope_code,
+                                                                           code=portfolio_name,
+                                                                           transactions=stock_in_transactions)
 
             # Test to verify that the holdings are correct
-            self.verify_holdings_asserts(holding_adjustments=holding_adjustments,
-                                         holdings=set_holdings_response,
-                                         scope=self.internal_scope_code,
-                                         code=portfolio_name,
-                                         effective_at=holdings_effective_date)
+            self.transactions_added_asserts(portfolio_scope=self.internal_scope_code,
+                                            portfolio_code=portfolio_name,
+                                            start_date=self.created_date,
+                                            end_date=self.created_date,
+                                            as_at_date=datetime.now(pytz.UTC).isoformat(),
+                                            batch_transactions_request=stock_in_transactions)
 
     @timeit
     def create_strategy_tags(self):
@@ -375,7 +375,7 @@ class transparencyStrategies(TestFinbourneApi):
         property_request = models.CreatePropertyDefinitionRequest(domain='Trade',
                                                                   scope=self.internal_scope_code,
                                                                   code='strategy',
-                                                                  value_required=True,
+                                                                  value_required=False,
                                                                   display_name='strategy',
                                                                   data_type_id=models.ResourceId(scope='default',
                                                                                                  code='string'))
@@ -522,7 +522,12 @@ class transparencyStrategies(TestFinbourneApi):
                                             as_at_date=datetime.now(pytz.UTC).isoformat(),
                                             batch_transactions_request=batch_transaction_requests)
 
-            # tk - add test for properties
+            for transaction in batch_transaction_requests:
+                self.add_transaction_property_asserts(self.internal_scope_code,
+                                                      portfolio_name,
+                                                      transaction.transaction_id,
+                                                      self.strategy_property_key,
+                                                      transaction.properties[self.strategy_property_key].label_value)
 
     @timeit
     def create_analytics(self):
@@ -597,6 +602,7 @@ class transparencyStrategies(TestFinbourneApi):
                                                                                     scope=self.internal_scope_code,
                                                                                     code=portfolio_code),
                                                                                 description=portfolio_code,
+                                                                                created=self.created_date,
                                                                                 sub_holding_keys=[
                                                                                     self.strategy_property_key])
             # Create our portfolios in the internal scope
@@ -628,9 +634,6 @@ class transparencyStrategies(TestFinbourneApi):
         # Tests - Ensure that we have successfully created the portfolio group
         self.portfolio_group_creation_asserts(portfolio_group, portfolio_group_request, self.strategy_scope)
 
-        test = self.client.get_holdings(scope=self.strategy_scope,
-                                        code='client-{}-mandate-fixedincome'.format(self.client_2_portfolio_group_id))
-
         aggregation_request = models.AggregationRequest(recipe_id=models.ResourceId(scope=self.internal_scope_code,
                                                                                     code='default'),
                                                         effective_at=datetime.now(pytz.UTC).isoformat(),
@@ -655,9 +658,9 @@ class transparencyStrategies(TestFinbourneApi):
 
         aggregated_group = self.client.get_aggregation_by_group(scope=self.strategy_scope,
                                                                 code=self.client_2_portfolio_group_code,
-                                                                request=aggregation_request,
-                                                                raw=True)
+                                                                request=aggregation_request)
 
+        print ('wait')
         # tk - add test to ensure correct
 
     @timeit
