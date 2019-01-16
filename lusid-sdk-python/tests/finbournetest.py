@@ -538,7 +538,7 @@ class TestFinbourneApi(TestCase):
             # If there is more than one holding for an instrument, aggregate the holdings
             left_holding_units, left_holding_cost_amount, left_holding_cost_currency = aggregate_holdings(left_holding)
             # Try and find a holding on the right side for the same instrument
-            try:
+            if key in right_holdings:
                 right_holding = right_holdings[key]
                 # If there is more than one holding for an instrument, aggregate the holdings
                 right_holding_units, right_holding_cost_amount, right_holding_cost_currency = aggregate_holdings(
@@ -559,7 +559,7 @@ class TestFinbourneApi(TestCase):
                     self.assertEqual(right_holding_cost_currency, rec_break.right_cost.currency)
 
             # If there is no matching holding on the right, check that the reconciliation break matches the left side
-            except KeyError:
+            else:
                 rec_break = rec_breaks[key]
                 self.assertEqual(left_holding_units, round(rec_break.difference_units, 0))
                 self.assertEqual(left_holding_cost_amount, round(rec_break.difference_cost.amount,2))
@@ -589,12 +589,6 @@ class TestFinbourneApi(TestCase):
         # Check that the property exists and that the value is correct
         self.assertTrue(property_key in transaction_properties)
         self.assertEqual(property_value, transaction_properties[property_key])
-
-    def test(self):
-        """
-        This method is required to set up the class.
-        """
-        pass
 
 if __name__ == '__main__':
     unittest.main()
