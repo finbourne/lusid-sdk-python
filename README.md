@@ -1,3 +1,5 @@
+[![Build Status](https://travis-ci.org/finbourne/lusid-sdk-python.svg?branch=master)](https://travis-ci.org/finbourne/lusid-sdk-python)
+
 # LUSID<sup>®</sup> Python SDK
 
 The LUSID API can be accessed from Python using this SDK which can be installed using `pip`:

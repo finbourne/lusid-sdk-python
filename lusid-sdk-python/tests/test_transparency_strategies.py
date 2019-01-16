@@ -50,20 +50,20 @@ class transparencyStrategies(TestFinbourneApi):
 
         self.client_portfolios = {
             'client-{}-portfolios'.format(self.client_1_portfolio_group_id): [
-                'client-{}-strategy-balanced'.format(self.client_1_portfolio_group_id),
-                'client-{}-strategy-tech'.format(self.client_1_portfolio_group_id),
-                'client-{}-strategy-growth'.format(self.client_1_portfolio_group_id)
+                'client-{}-mandate-balanced'.format(self.client_1_portfolio_group_id),
+                'client-{}-mandate-tech'.format(self.client_1_portfolio_group_id),
+                'client-{}-mandate-growth'.format(self.client_1_portfolio_group_id)
             ],
             'client-{}-portfolios'.format(self.client_2_portfolio_group_id): [
-                'client-{}-strategy-balanced'.format(self.client_2_portfolio_group_id),
-                'client-{}-strategy-energy'.format(self.client_2_portfolio_group_id),
-                'client-{}-strategy-fixedincome'.format(self.client_2_portfolio_group_id),
-                'client-{}-strategy-international'.format(self.client_2_portfolio_group_id),
-                'client-{}-strategy-usgovt'.format(self.client_2_portfolio_group_id)
+                'client-{}-mandate-balanced'.format(self.client_2_portfolio_group_id),
+                'client-{}-mandate-energy'.format(self.client_2_portfolio_group_id),
+                'client-{}-mandate-fixedincome'.format(self.client_2_portfolio_group_id),
+                'client-{}-mandate-international'.format(self.client_2_portfolio_group_id),
+                'client-{}-mandate-usgovt'.format(self.client_2_portfolio_group_id)
             ],
             'client-{}-portfolios'.format(self.client_3_portfolio_group_id): [
-                'client-{}-strategy-balanced'.format(self.client_3_portfolio_group_id),
-                'client-{}-strategy-fixedincome'.format(self.client_3_portfolio_group_id)
+                'client-{}-mandate-balanced'.format(self.client_3_portfolio_group_id),
+                'client-{}-mandate-fixedincome'.format(self.client_3_portfolio_group_id)
             ]
         }
 
