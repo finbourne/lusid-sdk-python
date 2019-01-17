@@ -11,6 +11,7 @@ from unittest import TestCase
 from collections import namedtuple
 from msrest.authentication import BasicTokenAuthentication
 from time import sleep
+from InstrumentLoader import InstrumentLoader
 
 try:
     # Python 3.x
@@ -64,23 +65,14 @@ class TestFinbourneApi(TestCase):
 
     @classmethod
     def tearDownClass(cls):
-        inst_list = ["BBG000C6K6G9",
-                     "BBG000C04D57",
-                     "BBG000FV67Q4",
-                     "BBG000BF0KW3",
-                     "BBG000BF4KL1",
-                     "BBG000BF6B57"]
-
-        for i in inst_list:
-            response = cls.client.delete_instrument(cls.FIGI_SCHEME, i)
-        # fbn_figi = cls.client.get_instrument("Figi", "BBG000C6K6G9")
+        response = inst_load.teardownclass()
 
 
     @classmethod
     def load_instruments(cls):
         # ensure instruments are created and exist in LUSID
-        from InstrumentLoader import InstrumentLoader
-        inst_load = InstrumentLoader
+
+        cls.inst_load = InstrumentLoader
         response = inst_load.LoadInstruments(cls)
         print ("SDS")
 

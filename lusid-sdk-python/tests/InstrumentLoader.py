@@ -95,4 +95,4 @@ class InstrumentLoader(object):
                      "BBG000BF6B57"]
 
         for i in inst_list:
-            response = cls.client.delete_instrument(cls.FIGI_SCHEME, i)
+            response = self.client.delete_instrument(self.FIGI_SCHEME, i)
