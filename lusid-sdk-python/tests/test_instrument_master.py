@@ -19,10 +19,10 @@ except ImportError:
     # Python 2.7
     from urllib import pathname2url
 
+
 class TestFinbourneApi(TestCase):
     client = None
     instrumentIds = []
-
 
     @classmethod
     def setUpClass(cls):
@@ -32,34 +32,54 @@ class TestFinbourneApi(TestCase):
         cls.FIGI_SCHEME = "Figi"
         cls.CUSTOM_INTERNAL_SCHEME = "ClientInternal"
 
-        #   load configuration
-        dir_path = os.path.dirname(os.path.realpath(__file__))
-        with open(os.path.join(dir_path, "secrets.json"), "r") as secrets:
-            config = json.load(secrets)
+        # Load our configuration details from the environment variables
+        token_url = os.getenv("FBN_TOKEN_URL", None)
+        cls.api_url = os.getenv("FBN_LUSID_API_URL", None)
+        username = os.getenv("FBN_USERNAME", None)
+        password_raw = os.getenv("FBN_PASSWORD", None)
+        client_id_raw = os.getenv("FBN_CLIENT_ID", None)
+        client_secret_raw = os.getenv("FBN_CLIENT_SECRET", None)
 
-        token_url = os.getenv("FBN_TOKEN_URL", config["api"]["tokenUrl"])
-        username = os.getenv("FBN_USERNAME", config["api"]["username"])
-        password = pathname2url(os.getenv("FBN_PASSWORD", config["api"]["password"]))
-        client_id = pathname2url(os.getenv("FBN_CLIENT_ID", config["api"]["clientId"]))
-        client_secret = pathname2url(os.getenv("FBN_CLIENT_SECRET", config["api"]["clientSecret"]))
-        cls.api_url = os.getenv("FBN_LUSID_API_URL", config["api"]["apiUrl"])
+        # If any of the environmental variables are missing use a local secrets file
+        if token_url is None or username is None or password_raw is None or client_id_raw is None \
+                or client_secret_raw is None or cls.api_url is None:
 
+            dir_path = os.path.dirname(os.path.realpath(__file__))
+            with open(os.path.join(dir_path, "secrets.json"), "r") as secrets:
+                config = json.load(secrets)
+
+            token_url = os.getenv("FBN_TOKEN_URL", config["api"]["tokenUrl"])
+            username = os.getenv("FBN_USERNAME", config["api"]["username"])
+            password = pathname2url(os.getenv("FBN_PASSWORD", config["api"]["password"]))
+            client_id = pathname2url(os.getenv("FBN_CLIENT_ID", config["api"]["clientId"]))
+            client_secret = pathname2url(os.getenv("FBN_CLIENT_SECRET", config["api"]["clientSecret"]))
+            cls.api_url = os.getenv("FBN_LUSID_API_URL", config["api"]["apiUrl"])
+
+        else:
+            password = pathname2url(password_raw)
+            client_id = pathname2url(client_id_raw)
+            client_secret = pathname2url(client_secret_raw)
+
+        # Prepare our authentication request
         token_request_body = ("grant_type=password&username={0}".format(username) +
                               "&password={0}&scope=openid client groups".format(password) +
                               "&client_id={0}&client_secret={1}".format(client_id, client_secret))
-
         headers = {"Accept": "application/json", "Content-Type": "application/x-www-form-urlencoded"}
+
+        # Make our authentication request
         okta_response = requests.post(token_url, data=token_request_body, headers=headers)
 
         assert okta_response.status_code == 200
 
-        #   set the okta api token
+        # Retrieve our api token from the authentication response
         cls.api_token = {"access_token": okta_response.json()["access_token"]}
 
-        credentials = BasicTokenAuthentication(TestFinbourneApi.api_token)
-        cls.client = lusid.LUSIDAPI(credentials, TestFinbourneApi.api_url)
+        # Initialise our API client using our token so that we can include it in all future requests
+        credentials = BasicTokenAuthentication(cls.api_token)
+        cls.client = lusid.LUSIDAPI(credentials, cls.api_url)
 
         response = cls.seed_instruments()
+        assert len(response.values) == 5
 
     @classmethod
     def tearDownClass(cls):
@@ -72,58 +92,49 @@ class TestFinbourneApi(TestCase):
 
         for i in inst_list:
             response = cls.client.delete_instrument(cls.FIGI_SCHEME, i)
-        # fbn_figi = cls.client.get_instrument("Figi", "BBG000C6K6G9")
-        print("JKH")
+
     @classmethod
     def seed_instruments(cls):
 
-        inst_isin = models.InstrumentProperty(cls.ISIN_PROPERTY_KEY, models.PropertyValue("GB00BH4HKS39"))
-        inst_sedol = models.InstrumentProperty(cls.SEDOL_PROPERTY_KEY, models.PropertyValue("BH4HKS3"))
+        isin_vod = models.InstrumentProperty(cls.ISIN_PROPERTY_KEY, models.PropertyValue("GB00BH4HKS39"))
+        sedol_vod = models.InstrumentProperty(cls.SEDOL_PROPERTY_KEY, models.PropertyValue("BH4HKS3"))
 
         instrument_definition1 = models.InstrumentDefinition(name="VODAFONE GROUP PLC",
-                                                            identifiers={cls.FIGI_SCHEME: "BBG000C6K6G9",
-                                                                         cls.CUSTOM_INTERNAL_SCHEME: "INTERNAL_ID_1"},
-                                                            properties=[inst_isin, inst_sedol])
-        # upsert_response = cls.client.upsert_instruments({"correlationId1": instrument_definition})
+                                                             identifiers={cls.FIGI_SCHEME: "BBG000C6K6G9",
+                                                                          cls.CUSTOM_INTERNAL_SCHEME: "INTERNAL_ID_1"},
+                                                             properties=[isin_vod, sedol_vod])
 
-
-        inst_isin = models.InstrumentProperty(cls.ISIN_PROPERTY_KEY, models.PropertyValue("GB0031348658"))
-        inst_sedol = models.InstrumentProperty(cls.SEDOL_PROPERTY_KEY, models.PropertyValue("3134865"))
+        isin_barc = models.InstrumentProperty(cls.ISIN_PROPERTY_KEY, models.PropertyValue("GB0031348658"))
+        sedol_barc = models.InstrumentProperty(cls.SEDOL_PROPERTY_KEY, models.PropertyValue("3134865"))
 
         instrument_definition2 = models.InstrumentDefinition(name="BARCLAYS PLC",
-                                                            identifiers={cls.FIGI_SCHEME: "BBG000C04D57",
-                                                                         cls.CUSTOM_INTERNAL_SCHEME: "INTERNAL_ID_2"},
-                                                            properties=[inst_isin, inst_sedol])
+                                                             identifiers={cls.FIGI_SCHEME: "BBG000C04D57",
+                                                                          cls.CUSTOM_INTERNAL_SCHEME: "INTERNAL_ID_2"},
+                                                             properties=[isin_barc, sedol_barc])
 
-        # upsert_response = cls.client.upsert_instruments({"correlationId2": instrument_definition})
-
-        inst_isin = models.InstrumentProperty(cls.ISIN_PROPERTY_KEY, models.PropertyValue("GB00BDR05C01"))
-        inst_sedol = models.InstrumentProperty(cls.SEDOL_PROPERTY_KEY, models.PropertyValue("BDR05C0"))
+        isin_grid = models.InstrumentProperty(cls.ISIN_PROPERTY_KEY, models.PropertyValue("GB00BDR05C01"))
+        sedol_grid = models.InstrumentProperty(cls.SEDOL_PROPERTY_KEY, models.PropertyValue("BDR05C0"))
 
         instrument_definition3 = models.InstrumentDefinition(name="NATIONAL GRID PLC",
-                                                            identifiers={cls.FIGI_SCHEME: "BBG000FV67Q4",
-                                                                         cls.CUSTOM_INTERNAL_SCHEME: "INTERNAL_ID_3"},
-                                                            properties=[inst_isin, inst_sedol])
+                                                             identifiers={cls.FIGI_SCHEME: "BBG000FV67Q4",
+                                                                          cls.CUSTOM_INTERNAL_SCHEME: "INTERNAL_ID_3"},
+                                                             properties=[isin_grid, sedol_grid])
 
-        # upsert_response = cls.client.upsert_instruments({"correlationId3": instrument_definition})
-
-        inst_isin = models.InstrumentProperty(cls.ISIN_PROPERTY_KEY, models.PropertyValue("GB00B019KW72"))
-        inst_sedol = models.InstrumentProperty(cls.SEDOL_PROPERTY_KEY, models.PropertyValue("B019KW7"))
+        isin_sains = models.InstrumentProperty(cls.ISIN_PROPERTY_KEY, models.PropertyValue("GB00B019KW72"))
+        sedol_sains = models.InstrumentProperty(cls.SEDOL_PROPERTY_KEY, models.PropertyValue("B019KW7"))
 
         instrument_definition4 = models.InstrumentDefinition(name="SAINSBURY (J) PLC",
-                                                            identifiers={cls.FIGI_SCHEME: "BBG000BF0KW3",
-                                                                         cls.CUSTOM_INTERNAL_SCHEME: "INTERNAL_ID_4"},
-                                                            properties=[inst_isin, inst_sedol])
+                                                             identifiers={cls.FIGI_SCHEME: "BBG000BF0KW3",
+                                                                          cls.CUSTOM_INTERNAL_SCHEME: "INTERNAL_ID_4"},
+                                                             properties=[isin_sains, sedol_sains])
 
-        # upsert_response = cls.client.upsert_instruments({"correlationId4": instrument_definition})
-
-        inst_isin = models.InstrumentProperty(cls.ISIN_PROPERTY_KEY, models.PropertyValue("GB0008782301"))
-        inst_sedol = models.InstrumentProperty(cls.SEDOL_PROPERTY_KEY, models.PropertyValue("0878230"))
+        isin_tayl = models.InstrumentProperty(cls.ISIN_PROPERTY_KEY, models.PropertyValue("GB0008782301"))
+        sedol_tayl = models.InstrumentProperty(cls.SEDOL_PROPERTY_KEY, models.PropertyValue("0878230"))
 
         instrument_definition5 = models.InstrumentDefinition(name="TAYLOR WIMPEY PLC",
-                                                            identifiers={cls.FIGI_SCHEME: "BBG000BF4KL1",
-                                                                         cls.CUSTOM_INTERNAL_SCHEME: "INTERNAL_ID_5"},
-                                                            properties=[inst_isin, inst_sedol])
+                                                             identifiers={cls.FIGI_SCHEME: "BBG000BF4KL1",
+                                                                          cls.CUSTOM_INTERNAL_SCHEME: "INTERNAL_ID_5"},
+                                                             properties=[isin_tayl, sedol_tayl])
 
         upsert_response = cls.client.upsert_instruments(
             {
@@ -136,7 +147,7 @@ class TestFinbourneApi(TestCase):
         )
 
         assert len(upsert_response.values) == 5
-
+        return upsert_response
 
     def test_lookup_instrument_by_unique_id(self):
 
@@ -144,43 +155,37 @@ class TestFinbourneApi(TestCase):
         # unique id, in this case an OpenFigi, and also return a list of aliases
 
         fbn_ids = self.client.get_instruments(self.FIGI_SCHEME, ["BBG000C6K6G9", "BBG000BF4KL1"],
-                                              instrument_property_keys=[self.ISIN_PROPERTY_KEY,
-                                                                        self.SEDOL_PROPERTY_KEY])
+                                              instrument_property_keys=[self.SEDOL_PROPERTY_KEY,
+                                                                        self.ISIN_PROPERTY_KEY])
 
         self.assertEqual(fbn_ids.values["BBG000C6K6G9"].name, "VODAFONE GROUP PLC")
 
         # get instrument from the master
         fbn_inst = fbn_ids.values["BBG000C6K6G9"]
-        #fbn_inst = self.client.get_instrument(self.FIGI_SCHEME, "BBG000C6K6G9")
+
         assert fbn_inst.name == "VODAFONE GROUP PLC"
 
-        # get isin
-        assert fbn_ids.values["BBG000C6K6G9"].properties[0].key == self.ISIN_PROPERTY_KEY
-        assert fbn_ids.values["BBG000C6K6G9"].properties[0].value == "GB00BH4HKS39"
+        result_dict = {}
+        for item in fbn_ids.values:
+            result_dict[item] = {}
+            for keypair in fbn_ids.values[item].properties:
+                result_dict[item][keypair.key] = keypair.value
+        # print(result_dict)
 
-        assert fbn_ids.values["BBG000C6K6G9"].properties[1].key == self.SEDOL_PROPERTY_KEY
-        assert fbn_ids.values["BBG000C6K6G9"].properties[1].value == "BH4HKS3"
-
-
+        assert result_dict["BBG000C6K6G9"][self.ISIN_PROPERTY_KEY] == "GB00BH4HKS39"
+        assert result_dict["BBG000C6K6G9"][self.SEDOL_PROPERTY_KEY] == "BH4HKS3"
 
     def test_lookup_instrument_by_market_identifier(self):
 
         # Look up instruments that already exists in the instrument master by a
         # list of market identifiers...Sedol and Isin.
-        # inst_isin = models.InstrumentProperty(self.ISIN_PROPERTY_KEY, models.PropertyValue("GB00BH4HKS39"))
-        # inst_sedol = models.InstrumentProperty(self.SEDOL_PROPERTY_KEY, models.PropertyValue("B019KW7"))
-        fbn_inst = self.client.find_instruments([models.Property(self.ISIN_PROPERTY_KEY,
-                                                                           "GB00BH4HKS39"),
-                                                 models.Property(self.ISIN_PROPERTY_KEY,
-                                                                           "GB0031348658"),
-                                                 models.Property(self.ISIN_PROPERTY_KEY,
-                                                                           "GB00BDR05C01"),
-                                                 models.Property(self.SEDOL_PROPERTY_KEY,
-                                                                           "B019KW7"),
-                                                 models.Property(self.SEDOL_PROPERTY_KEY,
-                                                                           "0878230")])
 
-        # self.assertGreaterEqual(len(fbn_inst.values), 5)
+        fbn_inst = self.client.find_instruments([models.Property(self.ISIN_PROPERTY_KEY, "GB00BH4HKS39"),
+                                                 models.Property(self.ISIN_PROPERTY_KEY, "GB0031348658"),
+                                                 models.Property(self.ISIN_PROPERTY_KEY, "GB00BDR05C01"),
+                                                 models.Property(self.SEDOL_PROPERTY_KEY, "B019KW7"),
+                                                 models.Property(self.SEDOL_PROPERTY_KEY, "0878230")])
+
         # we expect 5 or more results (if other instruments are present, but each FIGI should be present in
         # the return list, and should match the 5 original instruments
 
@@ -194,12 +199,11 @@ class TestFinbourneApi(TestCase):
 
         # get returned Figi list
         found_figis = [item.identifiers['Figi'] for item in fbn_inst.values if 'Figi' in item.identifiers]
-        assert len(found_figis) ==5
+        assert len(found_figis) == 5
         # returned instrument list (found_figis) should not contain instruments that are missing from inst_list
         not_found = [item for item in inst_list if item not in found_figis]
 
         assert len(not_found) == 0
-
 
     def test_find_non_mastered_instrument_from_external_source(self):
 
@@ -216,13 +220,12 @@ class TestFinbourneApi(TestCase):
         # identifier alias etc.
 
         upsert_response = self.client.upsert_instruments({"correlationId6": instrument_definition})
-
+        assert len(upsert_response.values) == 1
         # get instrument from the master
         fbn_inst = self.client.get_instrument(self.FIGI_SCHEME, "BBG000BF6B57")
 
         assert fbn_inst.identifiers[self.FIGI_SCHEME] == "BBG000BF6B57"
         assert fbn_inst.name == "WPP PLC"
-
 
 
 if __name__ == '__main__':
