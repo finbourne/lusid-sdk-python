@@ -590,5 +590,15 @@ class TestFinbourneApi(TestCase):
         self.assertTrue(property_key in transaction_properties)
         self.assertEqual(property_value, transaction_properties[property_key])
 
+    def verify_portfolio_group_aggregation_asserts(self,
+                                                   aggregated_response,
+                                                   portfolio_group_scope,
+                                                   portfolio_group_ud,
+                                                   effective_at,
+                                                   aggregate_specs):
+
+
+
+
 if __name__ == '__main__':
     unittest.main()

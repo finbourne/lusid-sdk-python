@@ -1,0 +1,14 @@
+language: python
+services:
+- docker
+script:
+- cd lusid-sdk-python
+- docker build -t lusid-sdk-python-test .
+- docker run -e FBN_TOKEN_URL=$FBN_TOKEN_URL -e FBN_USERNAME=$FBN_USERNAME -e FBN_PASSWORD=$FBN_PASSWORD
+  -e FBN_CLIENT_ID=$FBN_CLIENT_ID -e FBN_CLIENT_SECRET=$FBN_CLIENT_SECRET -e FBN_LUSID_API_URL=$FBN_LUSID_API_URL
+  -v $(pwd):/usr/src/ lusid-sdk-python-test
+notifications:
+  slack:
+    rooms:
+      secure: "Ckp62/6xWfxHCW8yIltP50pyhyBz0VPMPZdmc3DLEGUOULscuPI1ukGqhS78pxfyCiXrrHhVsgypMskYEAiFeC53ZVzLcykgv2xpIgS3CEDSARGpjPNJIAb3HoVfog/++fLAAUVAsCSw+ROr74kah28FipXSa76qAYlbbHMgEMH/QWeJN3Ou3yTF0+KPFuImW2fmzCHELLknn3xPpHdw0G5hff6PFG9LKz+wM01d94QIDyw1j0XE6jzJkJAN1IrkI6JW80k8fM11vbydPvMvVztwXs2OTThQy7o2Rnxk0Splb2ofTUZhiKQz3e1utQb7or4VpHiUdXJhuZe2q1CitojyjmzLfPsmnG8QGdIBjwqAlmo63ugmtH6h0qby9Zlf3dBBKV7Vq0+76Ba2XGUqAfntr8DabQZXvK/MmUOtZ18KULOaTRluYNTFA3Djk/XOgpiKb2VVEES+Zd/y3K1gWp+91Ucqoy4MoB6T2gG/OC/+A8G6SejhP9i2NSdYRSR/C+bxKqpsdNAuEAXb1sui/8A/D2j3W7SBF6IlwSD99f+cd/9cnfgkJwWDkILMUEql1qXI/PgUhYs9de0nzYU85ySIs8pcEYreCXrNkrDFWI0eXcyTvc0J3fRjuG6Q0eyVYTF+surIw3sCQaXmrnZfISrQ2aF/uwtH84eSs9hUQH8="
+    on_failure: always

@@ -555,7 +555,7 @@ class TransparencyStrategies(TestFinbourneApi):
                                                                                       op='sum'),
                                                                  models.AggregateSpec(key='Holding/default/Cost',
                                                                                       op='sum')
-                                                                  ])
+                                                                 ])
 
         # Call LUSID to aggregate across all of our portfolios
         aggregated_group = self.client.get_aggregation_by_group(scope=self.internal_scope_code,
