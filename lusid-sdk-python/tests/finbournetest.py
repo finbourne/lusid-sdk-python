@@ -7,6 +7,7 @@ import lusid.models as models
 from unittest import TestCase
 from msrest.authentication import BasicTokenAuthentication
 from timeit import default_timer as timer
+from functools import reduce
 
 try:
     # Python 3.x
@@ -42,22 +43,33 @@ class TestFinbourneApi(TestCase):
         our account.
         """
 
-        # Load our configuration details from a secrets file
-        dir_path = os.path.dirname(os.path.realpath(__file__))
-        with open(os.path.join(dir_path, "secrets.json"), "r") as secrets:
-            config = json.load(secrets)
+        # Load our configuration details from the environment variables
+        token_url = os.getenv("FBN_TOKEN_URL", None)
+        cls.api_url = os.getenv("FBN_LUSID_API_URL", None)
+        username = os.getenv("FBN_USERNAME", None)
+        password_raw = os.getenv("FBN_PASSWORD", None)
+        client_id_raw = os.getenv("FBN_CLIENT_ID", None)
+        client_secret_raw = os.getenv("FBN_CLIENT_SECRET", None)
 
-        # Get our URL for authentication
-        token_url = os.getenv("FBN_TOKEN_URL", config["api"]["tokenUrl"])
+        # If any of the environmental variables are missing use a local secrets file
+        if token_url is None or username is None or password_raw is None or client_id_raw is None \
+                or client_secret_raw is None or cls.api_url is None:
 
-        # Get our credentials
-        username = os.getenv("FBN_USERNAME", config["api"]["username"])
-        password = pathname2url(os.getenv("FBN_PASSWORD", config["api"]["password"]))
-        client_id = pathname2url(os.getenv("FBN_CLIENT_ID", config["api"]["clientId"]))
-        client_secret = pathname2url(os.getenv("FBN_CLIENT_SECRET", config["api"]["clientSecret"]))
+            dir_path = os.path.dirname(os.path.realpath(__file__))
+            with open(os.path.join(dir_path, "secrets.json"), "r") as secrets:
+                config = json.load(secrets)
 
-        # Get our URL for the API
-        cls.api_url = os.getenv("FBN_LUSID_API_URL", config["api"]["apiUrl"])
+            token_url = os.getenv("FBN_TOKEN_URL", config["api"]["tokenUrl"])
+            username = os.getenv("FBN_USERNAME", config["api"]["username"])
+            password = pathname2url(os.getenv("FBN_PASSWORD", config["api"]["password"]))
+            client_id = pathname2url(os.getenv("FBN_CLIENT_ID", config["api"]["clientId"]))
+            client_secret = pathname2url(os.getenv("FBN_CLIENT_SECRET", config["api"]["clientSecret"]))
+            cls.api_url = os.getenv("FBN_LUSID_API_URL", config["api"]["apiUrl"])
+
+        else:
+            password = pathname2url(password_raw)
+            client_id = pathname2url(client_id_raw)
+            client_secret = pathname2url(client_secret_raw)
 
         # Prepare our authentication request
         token_request_body = ("grant_type=password&username={0}".format(username) +
@@ -278,11 +290,10 @@ class TestFinbourneApi(TestCase):
                              'Currency is {} when it should be {}'.format(holding.cost.currency,
                                                                           adjustment.cost.currency))
 
-            self.assertEqual(round(adjustment.portfolio_cost, 2), holding.cost_portfolio_ccy.amount,
+            self.assertEqual(round(adjustment.portfolio_cost, 2), round(holding.cost_portfolio_ccy.amount, 2),
                              'Portfolio cost is {} when it should be {}'.format(
                                  holding.cost_portfolio_ccy.amount,
                                  round(adjustment.portfolio_cost, 2)))
-
 
     def reconcile_portfolios_asserts(self,
                                      portfolio_left_scope,
@@ -410,7 +421,7 @@ class TestFinbourneApi(TestCase):
             self.assertEqual(transaction.transaction_currency, transaction_request.transaction_currency)
             self.assertEqual(transaction.source, transaction_request.source)
 
-    def create_property_definition_test(self, property_request, property):
+    def create_property_definition_asserts(self, property_request, property):
         """
         This method contains a set of tests used to test that a property definition has been created successfully, we
         test that:
@@ -430,6 +441,154 @@ class TestFinbourneApi(TestCase):
         self.assertEqual(property.display_name, property_request.display_name)
         self.assertEqual(property.data_type_id.scope, property.data_type_id.scope)
         self.assertEqual(property.data_type_id.code, property.data_type_id.code)
+
+    def reconciliation_asserts(self,
+                               reconciliation_break_response,
+                               left_scope,
+                               left_code,
+                               left_effective_at,
+                               right_scope,
+                               right_code,
+                               right_effective_at):
+        """
+        This function contains a set of assertions which ensure that a reconciliation has been conducted correctly.
+
+        :param reconciliation_break_response: The response from our reconciliation request to LUSID
+        :param left_scope: The scope of our left portfolio
+        :param left_code: The code of our left portfolio
+        :param left_effective_at: The effectiveAt date in ISO8601 format for our left portfolio
+        :param right_scope: The scope of our right portfolio
+        :param right_code: The code of our right portfolio
+        :param right_effective_at: The effectiveAt date in ISO8601 format for our right portfolio
+        :return:
+        """
+
+        def get_holdings(scope, code, effective_at):
+            """
+            This function gets a set of holdings from LUSID for a given portfolio. It then takes those holdings
+            and puts them into a dictionary containing a list of holdings for each unique instrument. This is
+            required as there may be multiple holdings for each instrument. For example for a cash instrument such
+            as the Pound Sterling (represented by the instrument identifier 'CCY_GBP') LUSID has a number of different
+            holdings types under which it may be held. For cash sitting at the bank this may be represented as a cash
+            balance, for cash that is to be paid for a recent transaction this may be represented as committed cash.
+
+            When we do a reconciliation all of these holding types are aggregated. Thus in order for us to check that
+            our reconciliation is correct we must also perform this aggregation. By creating a dictionary with a list
+            of the holdings for each unique instrument we will be able to do this later.
+
+            :param scope: The scope of the portfolio to get the holdings from
+            :param code: The code of the portfolio to get the holdings from
+            :param effective_at: The effectiveAt date in ISO8601 format for which we want to get the holdings
+
+            :return:
+            holdings: A dictionary containing a list of holdings for each unique instrument
+            """
+            # Get our holdings from LUSID
+            holdings_ = self.client.get_holdings(scope=scope,
+                                                 code=code,
+                                                 effective_at=effective_at)
+            # Convert to a dictionary with the instrument uid as the key and a list of holdings as values
+            holdings = {}
+            for holding in holdings_.values:
+                holdings.setdefault(holding.instrument_uid, []).append(holding)
+            return holdings
+
+        def aggregate_holdings(holdings):
+            """
+            This function takes a list of holdings for a given instrument and if there is more than one aggregates the
+            number of units and the cost of the holdings.
+
+            :param holdings: A list of holdings for a given instrument
+
+            :return:
+            holding_units: The total number of units held in this instrument
+            holding_cost_amount: The total cost of units held in this instrument
+            holding_cost_currency: The currency of units held in this instrument
+            """
+
+            # If we have more than one holding, use our aggregation logic
+            if len(holdings) > 1:
+                # Extract our units from each of our holdings objects
+                holding_units_ = [holding.units for holding in holdings]
+                # Extract our cost amount from each of our holdings objects
+                holding_cost_amount_ = [holding.cost.amount for holding in holdings]
+                # Sum the units and cost amount, rounding to the appropriate level of decimal places
+                holding_units = round(reduce((lambda x, y: x + y), holding_units_), 0)
+                holding_cost_amount = round(reduce((lambda x, y: x + y), holding_cost_amount_), 2)
+
+            # Otherwise just use the first and only holding
+            else:
+                holding_units = round(holdings[0].units, 0)
+                holding_cost_amount = round(holdings[0].cost.amount, 2)
+
+            # Currency is assumed to be the same across all holdings for each instrument
+            holding_cost_currency = holdings[0].cost.currency
+
+            return holding_units, holding_cost_amount, holding_cost_currency
+
+        # Get our left and right holdings
+        left_holdings = get_holdings(left_scope, left_code, left_effective_at)
+        right_holdings = get_holdings(right_scope, right_code, right_effective_at)
+
+        # Convert our reconciliation breaks to a dictionary with the instrument uid as the key
+        rec_breaks = {rec_break.instrument_uid: rec_break for rec_break in reconciliation_break_response.values}
+
+        # Iterate over our left holdings and check that any breaks are correct
+        for key, left_holding in left_holdings.items():
+            # If there is more than one holding for an instrument, aggregate the holdings
+            left_holding_units, left_holding_cost_amount, left_holding_cost_currency = aggregate_holdings(left_holding)
+            # Try and find a holding on the right side for the same instrument
+            try:
+                right_holding = right_holdings[key]
+                # If there is more than one holding for an instrument, aggregate the holdings
+                right_holding_units, right_holding_cost_amount, right_holding_cost_currency = aggregate_holdings(
+                    right_holding)
+                # Calculate the differences between the two holdings
+                difference_units = round(right_holding_units - left_holding_units, 0)
+                difference_cost_amount = round(right_holding_cost_amount - left_holding_cost_amount, 2)
+                # If there are any differences check that they match our reconciliation break
+                if abs(difference_units) > 0 or abs(difference_cost_amount) > 0:
+                    rec_break = rec_breaks[key]
+                    self.assertEqual(difference_units, round(rec_break.difference_units, 0))
+                    self.assertEqual(difference_cost_amount, round(rec_break.difference_cost.amount, 2))
+                    self.assertEqual(left_holding_units, round(rec_break.left_units, 0))
+                    self.assertEqual(left_holding_cost_amount, round(rec_break.left_cost.amount, 2))
+                    self.assertEqual(left_holding_cost_currency, rec_break.left_cost.currency)
+                    self.assertEqual(right_holding_units, round(rec_break.right_units,0))
+                    self.assertEqual(right_holding_cost_amount, round(rec_break.right_cost.amount,2))
+                    self.assertEqual(right_holding_cost_currency, rec_break.right_cost.currency)
+
+            # If there is no matching holding on the right, check that the reconciliation break matches the left side
+            except KeyError:
+                rec_break = rec_breaks[key]
+                self.assertEqual(left_holding_units, round(rec_break.difference_units, 0))
+                self.assertEqual(left_holding_cost_amount, round(rec_break.difference_cost.amount,2))
+                self.assertEqual(left_holding_cost_currency, rec_break.difference_cost.currency)
+                self.assertEqual(left_holding_units, round(rec_break.left_units,0))
+                self.assertEqual(left_holding_cost_amount, round(rec_break.left_cost.amount,2))
+                self.assertEqual(left_holding_cost_currency, rec_break.left_cost.currency)
+
+    def add_transaction_property_asserts(self, scope, code, transaction_id, property_key, property_value):
+        """
+        This method contains a set of assertions which test that a property has been successfully added to a transaction
+
+        :param scope: The scope of the portfolio that contains the transaction
+        :param code: The code of the portfolio that contains the transaction
+        :param transaction_id: The transaction id of the transaction
+        :param property_key: The property key of the property that we want to check
+        :param property_value: The property value of the property that we want to check
+        """
+        # Get our transaction by filtering on the transaction id across all transactions inside our portfolio
+        transaction = self.client.get_transactions(scope,
+                                                   code,
+                                                   filter="transactionId eq '{}'".format(transaction_id)).values[0]
+
+        # Create a dictionary with the key, value pairs for each of our properties on the transaction
+        transaction_properties = {trans_property.key:trans_property.value for trans_property in transaction.properties}
+
+        # Check that the property exists and that the value is correct
+        self.assertTrue(property_key in transaction_properties)
+        self.assertEqual(property_value, transaction_properties[property_key])
 
     def test(self):
         """
