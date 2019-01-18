@@ -241,8 +241,6 @@ class LUSIDAPI(object):
     # Error Codes
     | Code|Name|Description |
     | ---|---|--- |
-    | &lt;a name="100"&gt;100&lt;/a&gt;|Personalisations not found|The personalisation(s) identified by the pattern provided could not be found, either because it does not exist or it has been deleted. Please check the pattern your provided. |
-    | &lt;a name="101"&gt;101&lt;/a&gt;|NonRecursivePersonalisation|  |
     | &lt;a name="102"&gt;102&lt;/a&gt;|VersionNotFound|  |
     | &lt;a name="104"&gt;104&lt;/a&gt;|InstrumentNotFound|  |
     | &lt;a name="105"&gt;105&lt;/a&gt;|PropertyNotFound|  |
@@ -338,6 +336,7 @@ class LUSIDAPI(object):
     | &lt;a name="230"&gt;230&lt;/a&gt;|TransactionTypeNotFound|  |
     | &lt;a name="231"&gt;231&lt;/a&gt;|TransactionTypeDuplication|  |
     | &lt;a name="232"&gt;232&lt;/a&gt;|PortfolioDoesNotExistAtGivenDate|  |
+    | &lt;a name="233"&gt;233&lt;/a&gt;|QueryParserFailure|  |
     | &lt;a name="301"&gt;301&lt;/a&gt;|DependenciesFailure|  |
     | &lt;a name="304"&gt;304&lt;/a&gt;|PortfolioPreprocessFailure|  |
     | &lt;a name="310"&gt;310&lt;/a&gt;|ValuationEngineFailure|  |
@@ -348,6 +347,7 @@ class LUSIDAPI(object):
     | &lt;a name="370"&gt;370&lt;/a&gt;|ResultRetrievalFailure|  |
     | &lt;a name="371"&gt;371&lt;/a&gt;|ResultProcessingFailure|  |
     | &lt;a name="372"&gt;372&lt;/a&gt;|VendorResultProcessingFailure|  |
+    | &lt;a name="373"&gt;373&lt;/a&gt;|CannotSupplyTimesWithPortfoliosQuery|  |
     | &lt;a name="-10"&gt;-10&lt;/a&gt;|ServerConfigurationError|  |
     | &lt;a name="-1"&gt;-1&lt;/a&gt;|Unknown error|  |
 
@@ -367,7 +367,7 @@ class LUSIDAPI(object):
         self._client = ServiceClient(self.config.credentials, self.config)
 
         client_models = {k: v for k, v in models.__dict__.items() if isinstance(v, type)}
-        self.api_version = '0.9.50'
+        self.api_version = '0.9.87'
         self._serialize = Serializer(client_models)
         self._deserialize = Deserializer(client_models)
 
@@ -2405,209 +2405,6 @@ class LUSIDAPI(object):
         return deserialized
     get_lusid_versions.metadata = {'url': '/api/metadata/versions'}
 
-    def get_personalisations(
-            self, pattern=None, scope=None, recursive=False, wildcards=False, sort_by=None, start=None, limit=None, custom_headers=None, raw=False, **operation_config):
-        """Get personalisation.
-
-        Get a personalisation, recursing to get any referenced if required.
-
-        :param pattern: The search pattern or specific key
-        :type pattern: str
-        :param scope: Optional. The scope level to request for. Possible
-         values include: 'User', 'Group', 'Default', 'All'
-        :type scope: str
-        :param recursive: Optional. Whether to recurse into dereference
-         recursive settings
-        :type recursive: bool
-        :param wildcards: Optional. Whether to apply wildcards to the provided
-         pattern and pull back any matching
-        :type wildcards: bool
-        :param sort_by: Optional. Order the results by these fields. Use use
-         the '-' sign to denote descending order e.g. -MyFieldName
-        :type sort_by: list[str]
-        :param start: Optional. When paginating, skip this number of results
-        :type start: int
-        :param limit: Optional. When paginating, limit the number of returned
-         results to this many.
-        :type limit: int
-        :param dict custom_headers: headers that will be added to the request
-        :param bool raw: returns the direct response alongside the
-         deserialized response
-        :param operation_config: :ref:`Operation configuration
-         overrides<msrest:optionsforoperations>`.
-        :return: ResourceListOfPersonalisation or ClientRawResponse if
-         raw=true
-        :rtype: ~lusid.models.ResourceListOfPersonalisation or
-         ~msrest.pipeline.ClientRawResponse
-        :raises:
-         :class:`ErrorResponseException<lusid.models.ErrorResponseException>`
-        """
-        # Construct URL
-        url = self.get_personalisations.metadata['url']
-
-        # Construct parameters
-        query_parameters = {}
-        if pattern is not None:
-            query_parameters['pattern'] = self._serialize.query("pattern", pattern, 'str')
-        if scope is not None:
-            query_parameters['scope'] = self._serialize.query("scope", scope, 'str')
-        if recursive is not None:
-            query_parameters['recursive'] = self._serialize.query("recursive", recursive, 'bool')
-        if wildcards is not None:
-            query_parameters['wildcards'] = self._serialize.query("wildcards", wildcards, 'bool')
-        if sort_by is not None:
-            query_parameters['sortBy'] = self._serialize.query("sort_by", sort_by, '[str]', div=',')
-        if start is not None:
-            query_parameters['start'] = self._serialize.query("start", start, 'int')
-        if limit is not None:
-            query_parameters['limit'] = self._serialize.query("limit", limit, 'int')
-
-        # Construct headers
-        header_parameters = {}
-        header_parameters['Content-Type'] = 'application/json; charset=utf-8'
-        if custom_headers:
-            header_parameters.update(custom_headers)
-
-        # Construct and send request
-        request = self._client.get(url, query_parameters)
-        response = self._client.send(request, header_parameters, stream=False, **operation_config)
-
-        if response.status_code not in [200]:
-            raise models.ErrorResponseException(self._deserialize, response)
-
-        deserialized = None
-
-        if response.status_code == 200:
-            deserialized = self._deserialize('ResourceListOfPersonalisation', response)
-
-        if raw:
-            client_raw_response = ClientRawResponse(deserialized, response)
-            return client_raw_response
-
-        return deserialized
-    get_personalisations.metadata = {'url': '/api/personalisations'}
-
-    def upsert_personalisations(
-            self, personalisations=None, custom_headers=None, raw=False, **operation_config):
-        """Upsert personalisations.
-
-        Upsert one or more personalisations.
-
-        :param personalisations: The set of personalisations to persist
-        :type personalisations: list[~lusid.models.Personalisation]
-        :param dict custom_headers: headers that will be added to the request
-        :param bool raw: returns the direct response alongside the
-         deserialized response
-        :param operation_config: :ref:`Operation configuration
-         overrides<msrest:optionsforoperations>`.
-        :return: UpsertPersonalisationResponse or ClientRawResponse if
-         raw=true
-        :rtype: ~lusid.models.UpsertPersonalisationResponse or
-         ~msrest.pipeline.ClientRawResponse
-        :raises:
-         :class:`ErrorResponseException<lusid.models.ErrorResponseException>`
-        """
-        # Construct URL
-        url = self.upsert_personalisations.metadata['url']
-
-        # Construct parameters
-        query_parameters = {}
-
-        # Construct headers
-        header_parameters = {}
-        header_parameters['Content-Type'] = 'application/json-patch+json; charset=utf-8'
-        if custom_headers:
-            header_parameters.update(custom_headers)
-
-        # Construct body
-        if personalisations is not None:
-            body_content = self._serialize.body(personalisations, '[Personalisation]')
-        else:
-            body_content = None
-
-        # Construct and send request
-        request = self._client.post(url, query_parameters)
-        response = self._client.send(
-            request, header_parameters, body_content, stream=False, **operation_config)
-
-        if response.status_code not in [201]:
-            raise models.ErrorResponseException(self._deserialize, response)
-
-        deserialized = None
-
-        if response.status_code == 201:
-            deserialized = self._deserialize('UpsertPersonalisationResponse', response)
-
-        if raw:
-            client_raw_response = ClientRawResponse(deserialized, response)
-            return client_raw_response
-
-        return deserialized
-    upsert_personalisations.metadata = {'url': '/api/personalisations'}
-
-    def delete_personalisation(
-            self, key=None, scope=None, group=None, custom_headers=None, raw=False, **operation_config):
-        """Delete a personalisation.
-
-        Delete a personalisation at a specific scope (or use scope ALL to purge
-        the setting entirely).
-
-        :param key: The key of the setting to be deleted
-        :type key: str
-        :param scope: The scope to delete at (use ALL to purge the setting
-         entirely). Possible values include: 'User', 'Group', 'Default', 'All'
-        :type scope: str
-        :param group: Optional. If deleting a setting at group level, specify
-         the group here
-        :type group: str
-        :param dict custom_headers: headers that will be added to the request
-        :param bool raw: returns the direct response alongside the
-         deserialized response
-        :param operation_config: :ref:`Operation configuration
-         overrides<msrest:optionsforoperations>`.
-        :return: DeletedEntityResponse or ClientRawResponse if raw=true
-        :rtype: ~lusid.models.DeletedEntityResponse or
-         ~msrest.pipeline.ClientRawResponse
-        :raises:
-         :class:`ErrorResponseException<lusid.models.ErrorResponseException>`
-        """
-        # Construct URL
-        url = self.delete_personalisation.metadata['url']
-
-        # Construct parameters
-        query_parameters = {}
-        if key is not None:
-            query_parameters['key'] = self._serialize.query("key", key, 'str')
-        if scope is not None:
-            query_parameters['scope'] = self._serialize.query("scope", scope, 'str')
-        if group is not None:
-            query_parameters['group'] = self._serialize.query("group", group, 'str')
-
-        # Construct headers
-        header_parameters = {}
-        header_parameters['Content-Type'] = 'application/json; charset=utf-8'
-        if custom_headers:
-            header_parameters.update(custom_headers)
-
-        # Construct and send request
-        request = self._client.delete(url, query_parameters)
-        response = self._client.send(request, header_parameters, stream=False, **operation_config)
-
-        if response.status_code not in [200]:
-            raise models.ErrorResponseException(self._deserialize, response)
-
-        deserialized = None
-
-        if response.status_code == 200:
-            deserialized = self._deserialize('DeletedEntityResponse', response)
-
-        if raw:
-            client_raw_response = ClientRawResponse(deserialized, response)
-            return client_raw_response
-
-        return deserialized
-    delete_personalisation.metadata = {'url': '/api/personalisations'}
-
     def list_portfolio_groups(
             self, scope, as_at=None, sort_by=None, start=None, limit=None, filter=None, custom_headers=None, raw=False, **operation_config):
         """List groups in scope.
@@ -3503,13 +3300,26 @@ class LUSIDAPI(object):
         return deserialized
     delete_sub_group_from_group.metadata = {'url': '/api/portfoliogroups/{scope}/{code}/subgroups/{subgroupScope}/{subgroupCode}'}
 
-    def list_portfolio_scopes(
-            self, sort_by=None, start=None, limit=None, filter=None, custom_headers=None, raw=False, **operation_config):
-        """List portfolio scopes.
+    def list_portfolios(
+            self, effective_at=None, as_at=None, sort_by=None, start=None, limit=None, filter=None, query=None, custom_headers=None, raw=False, **operation_config):
+        """List portfolios.
 
-        Lists all scopes that are either currently or have previously had
-        portfolios in them.
+        List all portfolios matching the specified criteria.
+        Example query syntax for the query parameter:
+        - To see which portfolios have holdings in the specified instruments:
+        instrument.identifiers in (('LusidInstrumentId', 'LUID_PPA8HI6M'),
+        ('Figi', 'BBG000BLNNH6'))
+        * Note that if a query is specified then it is executed for the current
+        EffectiveAt and AsAt
+        Specifying EffectiveAt or AsAt in addition to the query is not
+        supported
+        Also note that copy/pasting above examples results in incorrect single
+        quote character.
 
+        :param effective_at: Optional. The effective date of the data
+        :type effective_at: datetime
+        :param as_at: Optional. The AsAt date of the data
+        :type as_at: datetime
         :param sort_by: Optional. Order the results by these fields. Use use
          the '-' sign to denote descending order e.g. -MyFieldName
         :type sort_by: list[str]
@@ -3518,24 +3328,31 @@ class LUSIDAPI(object):
         :param limit: Optional. When paginating, limit the number of returned
          results to this many.
         :type limit: int
-        :param filter: Filter to be applied to the list of scopes
+        :param filter: Optional. Expression to filter the result set
         :type filter: str
+        :param query: Optional. Expression specifying the criteria that the
+         returned portfolios must meet
+        :type query: str
         :param dict custom_headers: headers that will be added to the request
         :param bool raw: returns the direct response alongside the
          deserialized response
         :param operation_config: :ref:`Operation configuration
          overrides<msrest:optionsforoperations>`.
-        :return: ResourceListOfScope or ClientRawResponse if raw=true
-        :rtype: ~lusid.models.ResourceListOfScope or
+        :return: ResourceListOfPortfolio or ClientRawResponse if raw=true
+        :rtype: ~lusid.models.ResourceListOfPortfolio or
          ~msrest.pipeline.ClientRawResponse
         :raises:
          :class:`ErrorResponseException<lusid.models.ErrorResponseException>`
         """
         # Construct URL
-        url = self.list_portfolio_scopes.metadata['url']
+        url = self.list_portfolios.metadata['url']
 
         # Construct parameters
         query_parameters = {}
+        if effective_at is not None:
+            query_parameters['effectiveAt'] = self._serialize.query("effective_at", effective_at, 'iso-8601')
+        if as_at is not None:
+            query_parameters['asAt'] = self._serialize.query("as_at", as_at, 'iso-8601')
         if sort_by is not None:
             query_parameters['sortBy'] = self._serialize.query("sort_by", sort_by, '[str]', div=',')
         if start is not None:
@@ -3544,6 +3361,8 @@ class LUSIDAPI(object):
             query_parameters['limit'] = self._serialize.query("limit", limit, 'int')
         if filter is not None:
             query_parameters['filter'] = self._serialize.query("filter", filter, 'str')
+        if query is not None:
+            query_parameters['query'] = self._serialize.query("query", query, 'str')
 
         # Construct headers
         header_parameters = {}
@@ -3561,18 +3380,18 @@ class LUSIDAPI(object):
         deserialized = None
 
         if response.status_code == 200:
-            deserialized = self._deserialize('ResourceListOfScope', response)
+            deserialized = self._deserialize('ResourceListOfPortfolio', response)
 
         if raw:
             client_raw_response = ClientRawResponse(deserialized, response)
             return client_raw_response
 
         return deserialized
-    list_portfolio_scopes.metadata = {'url': '/api/portfolios'}
+    list_portfolios.metadata = {'url': '/api/portfolios'}
 
-    def list_portfolios(
+    def list_portfolios_for_scope(
             self, scope, effective_at=None, as_at=None, sort_by=None, start=None, limit=None, filter=None, custom_headers=None, raw=False, **operation_config):
-        """List portfolios.
+        """List portfolios for scope.
 
         List all the portfolios in the specified scope.
 
@@ -3604,7 +3423,7 @@ class LUSIDAPI(object):
          :class:`ErrorResponseException<lusid.models.ErrorResponseException>`
         """
         # Construct URL
-        url = self.list_portfolios.metadata['url']
+        url = self.list_portfolios_for_scope.metadata['url']
         path_format_arguments = {
             'scope': self._serialize.url("scope", scope, 'str')
         }
@@ -3648,7 +3467,7 @@ class LUSIDAPI(object):
             return client_raw_response
 
         return deserialized
-    list_portfolios.metadata = {'url': '/api/portfolios/{scope}'}
+    list_portfolios_for_scope.metadata = {'url': '/api/portfolios/{scope}'}
 
     def get_portfolio(
             self, scope, code, effective_at=None, as_at=None, custom_headers=None, raw=False, **operation_config):
@@ -4531,7 +4350,8 @@ class LUSIDAPI(object):
 
         :param domain: The Property Domain of the requested property. Possible
          values include: 'Trade', 'Portfolio', 'Security', 'Holding',
-         'ReferenceHolding', 'TxnType', 'Instrument', 'CutDefinition'
+         'ReferenceHolding', 'TransactionConfiguration', 'Instrument',
+         'CutDefinition'
         :type domain: str
         :param scope: The scope of the requested property
         :type scope: str
@@ -4599,7 +4419,8 @@ class LUSIDAPI(object):
 
         :param domain: The Property Domain of the property being updated.
          Possible values include: 'Trade', 'Portfolio', 'Security', 'Holding',
-         'ReferenceHolding', 'TxnType', 'Instrument', 'CutDefinition'
+         'ReferenceHolding', 'TransactionConfiguration', 'Instrument',
+         'CutDefinition'
         :type domain: str
         :param scope: The scope of the property to be updated
         :type scope: str
@@ -4670,7 +4491,8 @@ class LUSIDAPI(object):
 
         :param domain: The Property Domain of the property to be deleted.
          Possible values include: 'Trade', 'Portfolio', 'Security', 'Holding',
-         'ReferenceHolding', 'TxnType', 'Instrument', 'CutDefinition'
+         'ReferenceHolding', 'TransactionConfiguration', 'Instrument',
+         'CutDefinition'
         :type domain: str
         :param scope: The scope of the property to be deleted
         :type scope: str
@@ -5602,6 +5424,78 @@ class LUSIDAPI(object):
 
         return deserialized
     get_value_types.metadata = {'url': '/api/schemas/types'}
+
+    def list_scopes(
+            self, sort_by=None, start=None, limit=None, filter=None, query=None, custom_headers=None, raw=False, **operation_config):
+        """List scopes.
+
+        List all the scopes.
+
+        :param sort_by: Optional. Order the results by these fields. Use use
+         the '-' sign to denote descending order e.g. -MyFieldName
+        :type sort_by: list[str]
+        :param start: Optional. When paginating, skip this number of results
+        :type start: int
+        :param limit: Optional. When paginating, limit the number of returned
+         results to this many.
+        :type limit: int
+        :param filter: Optional. Expression to filter the result set
+        :type filter: str
+        :param query: Optional. Expression specifying the criteria that the
+         returned portfolios must meet
+        :type query: str
+        :param dict custom_headers: headers that will be added to the request
+        :param bool raw: returns the direct response alongside the
+         deserialized response
+        :param operation_config: :ref:`Operation configuration
+         overrides<msrest:optionsforoperations>`.
+        :return: ResourceListOfScopeDefinition or ClientRawResponse if
+         raw=true
+        :rtype: ~lusid.models.ResourceListOfScopeDefinition or
+         ~msrest.pipeline.ClientRawResponse
+        :raises:
+         :class:`ErrorResponseException<lusid.models.ErrorResponseException>`
+        """
+        # Construct URL
+        url = self.list_scopes.metadata['url']
+
+        # Construct parameters
+        query_parameters = {}
+        if sort_by is not None:
+            query_parameters['sortBy'] = self._serialize.query("sort_by", sort_by, '[str]', div=',')
+        if start is not None:
+            query_parameters['start'] = self._serialize.query("start", start, 'int')
+        if limit is not None:
+            query_parameters['limit'] = self._serialize.query("limit", limit, 'int')
+        if filter is not None:
+            query_parameters['filter'] = self._serialize.query("filter", filter, 'str')
+        if query is not None:
+            query_parameters['query'] = self._serialize.query("query", query, 'str')
+
+        # Construct headers
+        header_parameters = {}
+        header_parameters['Content-Type'] = 'application/json; charset=utf-8'
+        if custom_headers:
+            header_parameters.update(custom_headers)
+
+        # Construct and send request
+        request = self._client.get(url, query_parameters)
+        response = self._client.send(request, header_parameters, stream=False, **operation_config)
+
+        if response.status_code not in [200]:
+            raise models.ErrorResponseException(self._deserialize, response)
+
+        deserialized = None
+
+        if response.status_code == 200:
+            deserialized = self._deserialize('ResourceListOfScopeDefinition', response)
+
+        if raw:
+            client_raw_response = ClientRawResponse(deserialized, response)
+            return client_raw_response
+
+        return deserialized
+    list_scopes.metadata = {'url': '/api/scopes'}
 
     def instruments_search(
             self, symbols=None, mastered_effective_at=None, mastered_only=False, custom_headers=None, raw=False, **operation_config):

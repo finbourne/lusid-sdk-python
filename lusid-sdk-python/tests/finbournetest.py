@@ -290,7 +290,7 @@ class TestFinbourneApi(TestCase):
                              'Currency is {} when it should be {}'.format(holding.cost.currency,
                                                                           adjustment.cost.currency))
 
-            self.assertEqual(round(adjustment.portfolio_cost, 2), round(holding.cost_portfolio_ccy.amount,2),
+            self.assertEqual(round(adjustment.portfolio_cost, 2), round(holding.cost_portfolio_ccy.amount, 2),
                              'Portfolio cost is {} when it should be {}'.format(
                                  holding.cost_portfolio_ccy.amount,
                                  round(adjustment.portfolio_cost, 2)))
@@ -537,7 +537,7 @@ class TestFinbourneApi(TestCase):
         for key, left_holding in left_holdings.items():
             # If there is more than one holding for an instrument, aggregate the holdings
             left_holding_units, left_holding_cost_amount, left_holding_cost_currency = aggregate_holdings(left_holding)
-            # Try and find a holding on the right side for the same instrument
+            # Try and find a holding on the right side for the same instruments  
             if key in right_holdings:
                 right_holding = right_holdings[key]
                 # If there is more than one holding for an instrument, aggregate the holdings

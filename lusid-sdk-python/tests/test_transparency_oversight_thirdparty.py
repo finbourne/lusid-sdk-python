@@ -430,6 +430,7 @@ class TransparencyOversightThirdParty(TestFinbourneApi):
                                              effective_at=holdings_effective_date)
 
 
+
     @timeit
     def add_daily_transactions(self):
         """

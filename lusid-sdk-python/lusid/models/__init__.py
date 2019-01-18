@@ -71,9 +71,6 @@ from .resource_list_of_code_type import ResourceListOfCodeType
 from .stream import Stream
 from .file_response import FileResponse
 from .version_summary_dto import VersionSummaryDto
-from .personalisation import Personalisation
-from .resource_list_of_personalisation import ResourceListOfPersonalisation
-from .upsert_personalisation_response import UpsertPersonalisationResponse
 from .create_portfolio_group_request import CreatePortfolioGroupRequest
 from .portfolio_group import PortfolioGroup
 from .resource_list_of_portfolio_group import ResourceListOfPortfolioGroup
@@ -92,7 +89,6 @@ from .processed_command import ProcessedCommand
 from .resource_list_of_processed_command import ResourceListOfProcessedCommand
 from .complete_portfolio import CompletePortfolio
 from .expanded_group import ExpandedGroup
-from .resource_list_of_scope import ResourceListOfScope
 from .resource_list_of_portfolio import ResourceListOfPortfolio
 from .update_portfolio_request import UpdatePortfolioRequest
 from .portfolio_properties import PortfolioProperties
@@ -129,6 +125,8 @@ from .key_value_pair_of_string_to_field_schema import KeyValuePairOfStringToFiel
 from .schema import Schema
 from .property_schema import PropertySchema
 from .resource_list_of_value_type import ResourceListOfValueType
+from .scope_definition import ScopeDefinition
+from .resource_list_of_scope_definition import ResourceListOfScopeDefinition
 from .instrument_search_property import InstrumentSearchProperty
 from .instrument_match import InstrumentMatch
 from .portfolio_search_result import PortfolioSearchResult
@@ -218,9 +216,6 @@ __all__ = [
     'Stream',
     'FileResponse',
     'VersionSummaryDto',
-    'Personalisation',
-    'ResourceListOfPersonalisation',
-    'UpsertPersonalisationResponse',
     'CreatePortfolioGroupRequest',
     'PortfolioGroup',
     'ResourceListOfPortfolioGroup',
@@ -239,7 +234,6 @@ __all__ = [
     'ResourceListOfProcessedCommand',
     'CompletePortfolio',
     'ExpandedGroup',
-    'ResourceListOfScope',
     'ResourceListOfPortfolio',
     'UpdatePortfolioRequest',
     'PortfolioProperties',
@@ -276,6 +270,8 @@ __all__ = [
     'Schema',
     'PropertySchema',
     'ResourceListOfValueType',
+    'ScopeDefinition',
+    'ResourceListOfScopeDefinition',
     'InstrumentSearchProperty',
     'InstrumentMatch',
     'PortfolioSearchResult',

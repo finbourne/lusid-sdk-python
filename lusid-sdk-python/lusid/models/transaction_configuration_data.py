@@ -33,7 +33,7 @@ class TransactionConfigurationData(Model):
     :param movements: Movement data for the transaction code
     :type movements: list[~lusid.models.TransactionConfigurationMovementData]
     :param properties:
-    :type properties: list[~lusid.models.Property]
+    :type properties: list[~lusid.models.PerpetualProperty]
     """
 
     _validation = {
@@ -44,7 +44,7 @@ class TransactionConfigurationData(Model):
     _attribute_map = {
         'aliases': {'key': 'aliases', 'type': '[TransactionConfigurationTypeAlias]'},
         'movements': {'key': 'movements', 'type': '[TransactionConfigurationMovementData]'},
-        'properties': {'key': 'properties', 'type': '[Property]'},
+        'properties': {'key': 'properties', 'type': '[PerpetualProperty]'},
     }
 
     def __init__(self, aliases, movements, properties=None):

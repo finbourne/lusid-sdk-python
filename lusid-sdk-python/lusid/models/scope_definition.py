@@ -24,33 +24,21 @@
 from msrest.serialization import Model
 
 
-class ResourceListOfPersonalisation(Model):
-    """ResourceListOfPersonalisation.
+class ScopeDefinition(Model):
+    """Defines a scope.
 
-    :param values:
-    :type values: list[~lusid.models.Personalisation]
-    :param href: The Uri that returns the same result as the original request,
-     but may include resolved as at time(s).
-    :type href: str
-    :param count: The total number of records returned in the set.
-     Note: If count is set by the func 'AddDynamicCounter', Count will be zero
-     until the values
-     are evaluated. This is due to lazy evaluation.
-    :type count: int
-    :param links:
-    :type links: list[~lusid.models.Link]
+    :param scope:
+    :type scope: str
     """
 
-    _attribute_map = {
-        'values': {'key': 'values', 'type': '[Personalisation]'},
-        'href': {'key': 'href', 'type': 'str'},
-        'count': {'key': 'count', 'type': 'int'},
-        'links': {'key': 'links', 'type': '[Link]'},
+    _validation = {
+        'scope': {'required': True},
     }
 
-    def __init__(self, values=None, href=None, count=None, links=None):
-        super(ResourceListOfPersonalisation, self).__init__()
-        self.values = values
-        self.href = href
-        self.count = count
-        self.links = links
+    _attribute_map = {
+        'scope': {'key': 'scope', 'type': 'str'},
+    }
+
+    def __init__(self, scope):
+        super(ScopeDefinition, self).__init__()
+        self.scope = scope
