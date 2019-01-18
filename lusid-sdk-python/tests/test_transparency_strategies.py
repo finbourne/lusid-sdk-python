@@ -562,7 +562,11 @@ class TransparencyStrategies(TestFinbourneApi):
                                                                 code=self.client_portfolio_group_code,
                                                                 request=aggregation_request)
 
-        # tk - Tests to confirm correct, how?
+        # Test - Confirm the aggregation result is correct
+        self.verify_portfolio_group_aggregation_asserts(aggregated_response=aggregated_group,
+                                                        portfolio_group_scope=self.internal_scope_code,
+                                                        portfolio_group_code=self.client_portfolio_group_code,
+                                                        effective_at=datetime.now(pytz.UTC).isoformat())
 
     @timeit
     def aggregate_strategy(self):
@@ -668,8 +672,6 @@ class TransparencyStrategies(TestFinbourneApi):
         aggregated_group = self.client.get_aggregation_by_group(scope=self.strategy_scope,
                                                                 code=self.client_portfolio_group_code,
                                                                 request=aggregation_request)
-
-        # tk - add test to ensure correct
 
     @timeit
     def test_transparency_strategies(self):

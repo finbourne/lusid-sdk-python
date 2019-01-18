@@ -593,12 +593,57 @@ class TestFinbourneApi(TestCase):
     def verify_portfolio_group_aggregation_asserts(self,
                                                    aggregated_response,
                                                    portfolio_group_scope,
-                                                   portfolio_group_ud,
-                                                   effective_at,
-                                                   aggregate_specs):
+                                                   portfolio_group_code,
+                                                   effective_at):
 
+        """
+        This methods contains a set of assertions which test that a portfolio group aggregation was successful. It
+        assumes that the metrics you want are the units and cost of the holdings and that we sum across these units.
 
+        :param aggregated_response: The response from the aggregation request
+        :param portfolio_group_scope: The scope of the portfolio group
+        :param portfolio_group_code: The code of the portfolio group
+        :param effective_at: The effecitveAt date of the aggregation request
+        """
 
+        # Get the details of our portfolio group including all the portfolios in the group
+        portfolio_group = self.client.get_portfolio_group(scope=portfolio_group_scope,
+                                                          code=portfolio_group_code)
+        # Initialise our aggregate holdings
+        agg_holdings = {}
+        # Iterate over each portfolio grouping holdings by instrument and currency
+        for portfolio in portfolio_group.portfolios:
+            # Get the holdings for the current portfolio
+            portfolio_holdings = self.client.get_holdings(scope=portfolio.scope,
+                                                          code=portfolio.code,
+                                                          effective_at=effective_at)
+            # Iterate over our holdings for the current portfolio
+            for holding in portfolio_holdings.values:
+                # If the holding is a cash instrument, set the key using the cash format
+                if 'CCY' in holding.instrument_uid:
+                    key = 'Currency={}'.format(holding.cost.currency)
+                # Else, set the key using the instrument format
+                else:
+                    key = 'LusidInstrumentId={}/{}'.format(holding.instrument_uid, holding.cost.currency)
+                # Create the key in our agg holdings dictionary, if it already exists append the holding
+                agg_holdings.setdefault(key, []).append((holding.units, holding.cost.amount))
+
+        # Iterate over our holdings grouped by instrument and currency
+        for key, holdings in agg_holdings.items():
+            # If there is more than one holding, sum all the units and all the cost
+            if len(holdings) > 1:
+                # Sum our cost and holdings by unzipping our (unit, cost) pairs into (unit, unit....) (cost, cost..)
+                agg_holdings[key] = [sum(tup) for tup in list(zip(*holdings))]
+                # Change format to a list containing a tuple to match our records with only one holding
+                agg_holdings[key] = [(agg_holdings[key][0], agg_holdings[key][1])]
+
+        # Iterate over our aggregated results
+        for agg_record in aggregated_response.data:
+            # Select our aggregated holding
+            agg_holding = agg_holdings[agg_record['Holding/default/SubHoldingKey']]
+            # Ensure that the units and cost match
+            self.assertEqual(agg_record['Holding/default/Units'], agg_holding[0][0])
+            self.assertEqual(agg_record['Holding/default/Cost'], agg_holding[0][1])
 
 if __name__ == '__main__':
     unittest.main()
