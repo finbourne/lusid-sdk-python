@@ -21,58 +21,58 @@ except ImportError:
 
 
 class InstrumentLoader(object):
+    # any class attributes?
+    inst_list = ["BBG000C6K6G9",
+                 "BBG000C04D57",
+                 "BBG000FV67Q4",
+                 "BBG000BF0KW3",
+                 "BBG000BF4KL1"]
 
+    instrument_response = ""
 
-    def LoadInstruments(self):
+    def load_instruments(self, test_cls):
 
-        inst_isin = models.InstrumentProperty(self.ISIN_PROPERTY_KEY, models.PropertyValue("GB00BH4HKS39"))
-        inst_sedol = models.InstrumentProperty(self.SEDOL_PROPERTY_KEY, models.PropertyValue("BH4HKS3"))
+        isin_vod = models.InstrumentProperty(test_cls.ISIN_PROPERTY_KEY, models.PropertyValue("GB00BH4HKS39"))
+        sedol_vod = models.InstrumentProperty(test_cls.SEDOL_PROPERTY_KEY, models.PropertyValue("BH4HKS3"))
 
         instrument_definition1 = models.InstrumentDefinition(name="VODAFONE GROUP PLC",
-                                                             identifiers={self.FIGI_SCHEME: "BBG000C6K6G9",
-                                                                          self.CUSTOM_INTERNAL_SCHEME: "INTERNAL_ID_1"},
-                                                             properties=[inst_isin, inst_sedol])
-        # upsert_response = self.client.upsert_instruments({"correlationId1": instrument_definition})
+                                                             identifiers={test_cls.FIGI_SCHEME: "BBG000C6K6G9",
+                                                                          test_cls.CUSTOM_INTERNAL_SCHEME: "INTERNAL_ID_1"},
+                                                             properties=[isin_vod, sedol_vod])
 
-        inst_isin = models.InstrumentProperty(self.ISIN_PROPERTY_KEY, models.PropertyValue("GB0031348658"))
-        inst_sedol = models.InstrumentProperty(self.SEDOL_PROPERTY_KEY, models.PropertyValue("3134865"))
+        isin_barc = models.InstrumentProperty(test_cls.ISIN_PROPERTY_KEY, models.PropertyValue("GB0031348658"))
+        sedol_barc = models.InstrumentProperty(test_cls.SEDOL_PROPERTY_KEY, models.PropertyValue("3134865"))
 
         instrument_definition2 = models.InstrumentDefinition(name="BARCLAYS PLC",
-                                                             identifiers={self.FIGI_SCHEME: "BBG000C04D57",
-                                                                          self.CUSTOM_INTERNAL_SCHEME: "INTERNAL_ID_2"},
-                                                             properties=[inst_isin, inst_sedol])
+                                                             identifiers={test_cls.FIGI_SCHEME: "BBG000C04D57",
+                                                                          test_cls.CUSTOM_INTERNAL_SCHEME: "INTERNAL_ID_2"},
+                                                             properties=[isin_barc, sedol_barc])
 
-        # upsert_response = self.client.upsert_instruments({"correlationId2": instrument_definition})
-
-        inst_isin = models.InstrumentProperty(self.ISIN_PROPERTY_KEY, models.PropertyValue("GB00BDR05C01"))
-        inst_sedol = models.InstrumentProperty(self.SEDOL_PROPERTY_KEY, models.PropertyValue("BDR05C0"))
+        isin_grid = models.InstrumentProperty(test_cls.ISIN_PROPERTY_KEY, models.PropertyValue("GB00BDR05C01"))
+        sedol_grid = models.InstrumentProperty(test_cls.SEDOL_PROPERTY_KEY, models.PropertyValue("BDR05C0"))
 
         instrument_definition3 = models.InstrumentDefinition(name="NATIONAL GRID PLC",
-                                                             identifiers={self.FIGI_SCHEME: "BBG000FV67Q4",
-                                                                          self.CUSTOM_INTERNAL_SCHEME: "INTERNAL_ID_3"},
-                                                             properties=[inst_isin, inst_sedol])
+                                                             identifiers={test_cls.FIGI_SCHEME: "BBG000FV67Q4",
+                                                                          test_cls.CUSTOM_INTERNAL_SCHEME: "INTERNAL_ID_3"},
+                                                             properties=[isin_grid, sedol_grid])
 
-        # upsert_response = self.client.upsert_instruments({"correlationId3": instrument_definition})
-
-        inst_isin = models.InstrumentProperty(self.ISIN_PROPERTY_KEY, models.PropertyValue("GB00B019KW72"))
-        inst_sedol = models.InstrumentProperty(self.SEDOL_PROPERTY_KEY, models.PropertyValue("B019KW7"))
+        isin_sains = models.InstrumentProperty(test_cls.ISIN_PROPERTY_KEY, models.PropertyValue("GB00B019KW72"))
+        sedol_sains = models.InstrumentProperty(test_cls.SEDOL_PROPERTY_KEY, models.PropertyValue("B019KW7"))
 
         instrument_definition4 = models.InstrumentDefinition(name="SAINSBURY (J) PLC",
-                                                             identifiers={self.FIGI_SCHEME: "BBG000BF0KW3",
-                                                                          self.CUSTOM_INTERNAL_SCHEME: "INTERNAL_ID_4"},
-                                                             properties=[inst_isin, inst_sedol])
+                                                             identifiers={test_cls.FIGI_SCHEME: "BBG000BF0KW3",
+                                                                          test_cls.CUSTOM_INTERNAL_SCHEME: "INTERNAL_ID_4"},
+                                                             properties=[isin_sains, sedol_sains])
 
-        # upsert_response = self.client.upsert_instruments({"correlationId4": instrument_definition})
-
-        inst_isin = models.InstrumentProperty(self.ISIN_PROPERTY_KEY, models.PropertyValue("GB0008782301"))
-        inst_sedol = models.InstrumentProperty(self.SEDOL_PROPERTY_KEY, models.PropertyValue("0878230"))
+        isin_tayl = models.InstrumentProperty(test_cls.ISIN_PROPERTY_KEY, models.PropertyValue("GB0008782301"))
+        sedol_tayl = models.InstrumentProperty(test_cls.SEDOL_PROPERTY_KEY, models.PropertyValue("0878230"))
 
         instrument_definition5 = models.InstrumentDefinition(name="TAYLOR WIMPEY PLC",
-                                                             identifiers={self.FIGI_SCHEME: "BBG000BF4KL1",
-                                                                          self.CUSTOM_INTERNAL_SCHEME: "INTERNAL_ID_5"},
-                                                             properties=[inst_isin, inst_sedol])
+                                                             identifiers={test_cls.FIGI_SCHEME: "BBG000BF4KL1",
+                                                                          test_cls.CUSTOM_INTERNAL_SCHEME: "INTERNAL_ID_5"},
+                                                             properties=[isin_tayl, sedol_tayl])
 
-        upsert_response = self.client.upsert_instruments(
+        upsert_response = test_cls.client.upsert_instruments(
             {
                 "correlationId1": instrument_definition1,
                 "correlationId2": instrument_definition2,
@@ -83,16 +83,11 @@ class InstrumentLoader(object):
         )
 
         assert len(upsert_response.values) == 5
-
+        self.instrument_response = upsert_response
         return upsert_response
 
-    def tearDownClass(self):
-        inst_list = ["BBG000C6K6G9",
-                     "BBG000C04D57",
-                     "BBG000FV67Q4",
-                     "BBG000BF0KW3",
-                     "BBG000BF4KL1",
-                     "BBG000BF6B57"]
+    @classmethod
+    def tearDownClass(self, test_cls):
 
-        for i in inst_list:
-            response = self.client.delete_instrument(self.FIGI_SCHEME, i)
+        for i in self.inst_list:
+            response = test_cls.client.delete_instrument(test_cls.FIGI_SCHEME, i)
