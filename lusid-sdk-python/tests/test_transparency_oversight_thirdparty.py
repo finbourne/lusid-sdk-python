@@ -427,7 +427,8 @@ class TransparencyOversightThirdParty(TestFinbourneApi):
                                              holdings=set_holdings_response,
                                              scope=scope,
                                              code=portfolio_name,
-                                             effective_at=holdings_effective_date )
+                                             effective_at=holdings_effective_date)
+
 
 
     @timeit
@@ -859,6 +860,14 @@ class TransparencyOversightThirdParty(TestFinbourneApi):
             # If there are any breaks, add them all to our dictionary
             if reconciliation.count > 0:
                 reconciled_portfolios_trade_close[portfolio_name] = reconciliation
+
+                self.reconciliation_asserts(reconciliation,
+                                            self.internal_scope_code,
+                                            portfolio_name,
+                                            self.trade_close_time,
+                                            self.fund_accountant_scope_code,
+                                            portfolio_name,
+                                            self.this_morning)
 
         '''
         Here we can see that the two portfolios reconcile perfectly. Let's find out what happened after trading. So
