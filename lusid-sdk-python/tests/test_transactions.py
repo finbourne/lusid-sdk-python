@@ -82,11 +82,11 @@ class TestTransactionsAPI(TestCase):
         credentials = BasicTokenAuthentication(cls.api_token)
         cls.client = lusid.LUSIDAPI(credentials, cls.api_url)
 
+        # load the instruments using InstrumentLoader
         cls.inst_loader = InstrumentLoader()
         loader_response = cls.inst_loader.load_instruments(cls)
 
         assert len(loader_response.values) == 5
-        print(cls.salute)
 
     def test_load_listed_instrument_transaction(self):
 
