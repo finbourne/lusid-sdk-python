@@ -21,5 +21,30 @@
 # SOFTWARE.
 # --------------------------------------------------------------------------
 
-VERSION = "0.9.92"
+from msrest.serialization import Model
 
+
+class ConstituentsAdjustmentHeader(Model):
+    """ConstituentsAdjustmentHeader.
+
+    :param effective_at: There can be at most one holdings adjustment for a
+     portfolio at a
+     specific effective time so this uniquely identifies the adjustment.
+    :type effective_at: datetime
+    :param version:
+    :type version: ~lusid.models.Version
+    :param links:
+    :type links: list[~lusid.models.Link]
+    """
+
+    _attribute_map = {
+        'effective_at': {'key': 'effectiveAt', 'type': 'iso-8601'},
+        'version': {'key': 'version', 'type': 'Version'},
+        'links': {'key': 'links', 'type': '[Link]'},
+    }
+
+    def __init__(self, effective_at=None, version=None, links=None):
+        super(ConstituentsAdjustmentHeader, self).__init__()
+        self.effective_at = effective_at
+        self.version = version
+        self.links = links

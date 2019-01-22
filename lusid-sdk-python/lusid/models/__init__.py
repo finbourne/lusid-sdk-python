@@ -118,6 +118,8 @@ from .get_reference_portfolio_constituents_response import GetReferencePortfolio
 from .reference_portfolio_constituent_request import ReferencePortfolioConstituentRequest
 from .upsert_reference_portfolio_constituents_request import UpsertReferencePortfolioConstituentsRequest
 from .upsert_reference_portfolio_constituents_response import UpsertReferencePortfolioConstituentsResponse
+from .constituents_adjustment_header import ConstituentsAdjustmentHeader
+from .resource_list_of_constituents_adjustment_header import ResourceListOfConstituentsAdjustmentHeader
 from .create_results import CreateResults
 from .results import Results
 from .resource_list_of_string import ResourceListOfString
@@ -263,6 +265,8 @@ __all__ = [
     'ReferencePortfolioConstituentRequest',
     'UpsertReferencePortfolioConstituentsRequest',
     'UpsertReferencePortfolioConstituentsResponse',
+    'ConstituentsAdjustmentHeader',
+    'ResourceListOfConstituentsAdjustmentHeader',
     'CreateResults',
     'Results',
     'ResourceListOfString',

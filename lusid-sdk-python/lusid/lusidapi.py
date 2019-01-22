@@ -367,7 +367,7 @@ class LUSIDAPI(object):
         self._client = ServiceClient(self.config.credentials, self.config)
 
         client_models = {k: v for k, v in models.__dict__.items() if isinstance(v, type)}
-        self.api_version = '0.9.91'
+        self.api_version = '0.9.92'
         self._serialize = Serializer(client_models)
         self._deserialize = Deserializer(client_models)
 
@@ -4976,6 +4976,79 @@ class LUSIDAPI(object):
 
         return deserialized
     upsert_reference_portfolio_constituents.metadata = {'url': '/api/referenceportfolios/{scope}/{code}/constituents'}
+
+    def list_constituents_adjustments(
+            self, scope, code, from_effective_at=None, to_effective_at=None, as_at_time=None, custom_headers=None, raw=False, **operation_config):
+        """Gets constituents adjustments in an interval of effective time.
+
+        Specify a time period in which you'd like to see the list of times that
+        adjustments where made to this portfolio.
+
+        :param scope: The scope of the portfolio
+        :type scope: str
+        :param code: Code for the portfolio
+        :type code: str
+        :param from_effective_at: Events between this time (inclusive) and the
+         toEffectiveAt are returned.
+        :type from_effective_at: datetime
+        :param to_effective_at: Events between this time (inclusive) and the
+         fromEffectiveAt are returned.
+        :type to_effective_at: datetime
+        :param as_at_time: The as-at time for which the result is valid.
+        :type as_at_time: datetime
+        :param dict custom_headers: headers that will be added to the request
+        :param bool raw: returns the direct response alongside the
+         deserialized response
+        :param operation_config: :ref:`Operation configuration
+         overrides<msrest:optionsforoperations>`.
+        :return: ResourceListOfConstituentsAdjustmentHeader or
+         ClientRawResponse if raw=true
+        :rtype: ~lusid.models.ResourceListOfConstituentsAdjustmentHeader or
+         ~msrest.pipeline.ClientRawResponse
+        :raises:
+         :class:`ErrorResponseException<lusid.models.ErrorResponseException>`
+        """
+        # Construct URL
+        url = self.list_constituents_adjustments.metadata['url']
+        path_format_arguments = {
+            'scope': self._serialize.url("scope", scope, 'str'),
+            'code': self._serialize.url("code", code, 'str')
+        }
+        url = self._client.format_url(url, **path_format_arguments)
+
+        # Construct parameters
+        query_parameters = {}
+        if from_effective_at is not None:
+            query_parameters['fromEffectiveAt'] = self._serialize.query("from_effective_at", from_effective_at, 'iso-8601')
+        if to_effective_at is not None:
+            query_parameters['toEffectiveAt'] = self._serialize.query("to_effective_at", to_effective_at, 'iso-8601')
+        if as_at_time is not None:
+            query_parameters['asAtTime'] = self._serialize.query("as_at_time", as_at_time, 'iso-8601')
+
+        # Construct headers
+        header_parameters = {}
+        header_parameters['Content-Type'] = 'application/json; charset=utf-8'
+        if custom_headers:
+            header_parameters.update(custom_headers)
+
+        # Construct and send request
+        request = self._client.get(url, query_parameters)
+        response = self._client.send(request, header_parameters, stream=False, **operation_config)
+
+        if response.status_code not in [200]:
+            raise models.ErrorResponseException(self._deserialize, response)
+
+        deserialized = None
+
+        if response.status_code == 200:
+            deserialized = self._deserialize('ResourceListOfConstituentsAdjustmentHeader', response)
+
+        if raw:
+            client_raw_response = ClientRawResponse(deserialized, response)
+            return client_raw_response
+
+        return deserialized
+    list_constituents_adjustments.metadata = {'url': '/api/referenceportfolios/{scope}/{code}/constituentsadjustments'}
 
     def get_results(
             self, scope, key, date_parameter, as_at=None, sort_by=None, start=None, limit=None, custom_headers=None, raw=False, **operation_config):

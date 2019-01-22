@@ -29,7 +29,8 @@ class Link(Model):
 
     :param relation: Possible values include: 'Root', 'Properties',
      'Transactions', 'Details', 'Constituents', 'Holdings', 'Commands',
-     'HoldingsAdjustments', 'Parent', 'PropertySchema', 'EntitySchema', 'Quote'
+     'HoldingsAdjustments', 'Parent', 'PropertySchema', 'EntitySchema',
+     'Quote', 'ConstituentsAdjustments'
     :type relation: str or ~lusid.models.enum
     :param href:
     :type href: str
