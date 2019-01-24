@@ -27,11 +27,6 @@ class InstrumentLoader(object):
                  "BBG000FV67Q4",
                  "BBG000BF0KW3",
                  "BBG000BF4KL1"]
-    luid_list = ["LUID_397J2WMO",
-                 "LUID_K7VAQBC6",
-                 "LUID_1WOWP8XZ",
-                 "LUID_EY6YUQ3R",
-                 "LUID_W3L1PFNO"]
 
     instrument_response = ""
 

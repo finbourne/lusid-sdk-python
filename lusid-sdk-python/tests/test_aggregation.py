@@ -119,7 +119,7 @@ class TestFinbourneApi(TestCase):
 
         response = self.run_aggregation(create_transaction_requests=tran_requests)
         # add in some error checks here?
-        assert len(response) > 0 #should be 5? what about the cash?
+        assert len(response) > 0    # should be 5? what about the cash?
         assert response[0][self.AGGREGATION_KEY] == 10000.0
         assert response[1][self.AGGREGATION_KEY] == 20000.0
         assert response[2][self.AGGREGATION_KEY] == 30000.0
