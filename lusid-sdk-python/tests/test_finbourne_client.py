@@ -370,6 +370,7 @@ class TestFinbourneApi(TestCase):
         aggregation_request = models.AggregationRequest(
             recipe_id=models.ResourceId(scope, "default"),
             metrics=[
+                models.AggregateSpec("Security/default/CommonName", "Value"),
                 models.AggregateSpec("Holding/default/PV", "Proportion"),
                 models.AggregateSpec("Holding/default/PV", "Sum")
             ],
@@ -381,7 +382,7 @@ class TestFinbourneApi(TestCase):
         aggregation = self.client.get_aggregation_by_portfolio(scope, portfolio_id, aggregation_request)
 
         for item in aggregation.data:
-            print("\t{}\t{}\t{}".format(item["Security/default/CommonName"], item["Holding/default/PV%"], item["Holding/default/PV"]))
+            print("\t{}\t{}\t{}".format(item["Security/default/CommonName"], item["Proportion(Holding/default/PV)"], item["Sum(Holding/default/PV)"]))
 
     # utility to build trade from spec
     @staticmethod
