@@ -48,11 +48,11 @@ class TransparencyStrategies(TestFinbourneApi):
         self.client_id = uuid.uuid4()
         # Create the codes for our portfolios, each of which have a different mandate
         self.client_portfolios = [
-                'client-{}-mandate-balanced'.format(self.client_id),
-                'client-{}-mandate-energy'.format(self.client_id),
-                'client-{}-mandate-fixedincome'.format(self.client_id),
-                'client-{}-mandate-international'.format(self.client_id),
-                'client-{}-mandate-usgovt'.format(self.client_id)
+            'client-{}-mandate-balanced'.format(self.client_id),
+            'client-{}-mandate-energy'.format(self.client_id),
+            'client-{}-mandate-fixedincome'.format(self.client_id),
+            'client-{}-mandate-international'.format(self.client_id),
+            'client-{}-mandate-usgovt'.format(self.client_id)
         ]
         # Create a unique code for our portfolio group.
         self.client_portfolio_group_code = 'client-{}-portfolios'.format(self.client_id)
@@ -265,43 +265,43 @@ class TransparencyStrategies(TestFinbourneApi):
 
         self.client_holdings = {
 
-                'client-{}-mandate-balanced'.format(self.client_id): {
-                    'Kingfisher_LondonStockEx_KGF': {'quantity': 1362038, 'price': 2.2760},
-                    'JustEat_LondonStockEx_JE': {'quantity': 834553, 'price': 5.4640},
-                    'RELXGroup_LondonStockEx_REL': {'quantity': 494343, 'price': 15.98},
-                    'UKGiltTreasury_4.5_2034': {'quantity': 77481, 'price': 140.572},
-                    'GBP_Cash': {'quantity': 952000, 'price': 1}
-                },
+            'client-{}-mandate-balanced'.format(self.client_id): {
+                'Kingfisher_LondonStockEx_KGF': {'quantity': 1362038, 'price': 2.2760},
+                'JustEat_LondonStockEx_JE': {'quantity': 834553, 'price': 5.4640},
+                'RELXGroup_LondonStockEx_REL': {'quantity': 494343, 'price': 15.98},
+                'UKGiltTreasury_4.5_2034': {'quantity': 77481, 'price': 140.572},
+                'GBP_Cash': {'quantity': 952000, 'price': 1}
+            },
 
-                'client-{}-mandate-energy'.format(self.client_id): {
-                    'Glencore_LondonStockEx_GLEN': {'quantity': 905141, 'price': 2.7620},
-                    'BP_LondonStockEx_BP': {'quantity': 1713922, 'price': 5.1140},
-                    'GBP_Cash': {'quantity': 2200000, 'price': 1}
-                },
+            'client-{}-mandate-energy'.format(self.client_id): {
+                'Glencore_LondonStockEx_GLEN': {'quantity': 905141, 'price': 2.7620},
+                'BP_LondonStockEx_BP': {'quantity': 1713922, 'price': 5.1140},
+                'GBP_Cash': {'quantity': 2200000, 'price': 1}
+            },
 
-                'client-{}-mandate-fixedincome'.format(self.client_id): {
-                    'UKGiltTreasury_3.5_2045': {'quantity': 266169, 'price': 134.433},
-                    'UKGiltTreasury_2.0_2025': {'quantity': 405589, 'price': 106.637},
-                    'UKGiltTreasury_3.75_2021': {'quantity': 174800, 'price': 108.126},
-                    'USTreasury_2.00_2021': {'quantity': 357507, 'price': 97.90},
-                    'GBP_Cash': {'quantity': 3450000, 'price': 1},
-                    'USD_Cash': {'quantity': 1200000, 'price': 1}
-                },
+            'client-{}-mandate-fixedincome'.format(self.client_id): {
+                'UKGiltTreasury_3.5_2045': {'quantity': 266169, 'price': 134.433},
+                'UKGiltTreasury_2.0_2025': {'quantity': 405589, 'price': 106.637},
+                'UKGiltTreasury_3.75_2021': {'quantity': 174800, 'price': 108.126},
+                'USTreasury_2.00_2021': {'quantity': 357507, 'price': 97.90},
+                'GBP_Cash': {'quantity': 3450000, 'price': 1},
+                'USD_Cash': {'quantity': 1200000, 'price': 1}
+            },
 
-                'client-{}-mandate-international'.format(self.client_id): {
-                    'USTreasury_2.00_2021': {'quantity': 357507, 'price': 97.90},
-                    'Apple_Nasdaq_AAPL': {'quantity': 504481, 'price': 168.49},
-                    'Amazon_Nasdaq_AMZN': {'quantity': 38671, 'price': 1629.13},
-                    'USD_Cash': {'quantity': 1400000, 'price': 1}
-                },
+            'client-{}-mandate-international'.format(self.client_id): {
+                'USTreasury_2.00_2021': {'quantity': 357507, 'price': 97.90},
+                'Apple_Nasdaq_AAPL': {'quantity': 504481, 'price': 168.49},
+                'Amazon_Nasdaq_AMZN': {'quantity': 38671, 'price': 1629.13},
+                'USD_Cash': {'quantity': 1400000, 'price': 1}
+            },
 
-                'client-{}-mandate-usgovt'.format(self.client_id): {
-                    'USTreasury_2.00_2021': {'quantity': 286006, 'price': 97.90},
-                    'USTreasury_6.875_2025': {'quantity': 256986, 'price': 124.52},
-                    'USD_Cash': {'quantity': 23000000, 'price': 1}
-                }
-
+            'client-{}-mandate-usgovt'.format(self.client_id): {
+                'USTreasury_2.00_2021': {'quantity': 286006, 'price': 97.90},
+                'USTreasury_6.875_2025': {'quantity': 256986, 'price': 124.52},
+                'USD_Cash': {'quantity': 23000000, 'price': 1}
             }
+
+        }
         # Set the date from which the take on balances should be effective, in this case one day after on-boarding
         self.effective_date = self.created_date + timedelta(days=1)
         # Iterate over our portfolios
@@ -551,11 +551,14 @@ class TransparencyStrategies(TestFinbourneApi):
         aggregation_request = models.AggregationRequest(recipe_id=models.ResourceId(scope=self.internal_scope_code,
                                                                                     code='default'),
                                                         effective_at=datetime.now(pytz.UTC).isoformat(),
-                                                        metrics=[models.AggregateSpec(key='Holding/default/Units',
-                                                                                      op='sum'),
-                                                                 models.AggregateSpec(key='Holding/default/Cost',
-                                                                                      op='sum')
-                                                                 ])
+                                                        metrics=[
+                                                            models.AggregateSpec(key='Holding/default/SubHoldingKey',
+                                                                                 op='Value'),
+                                                            models.AggregateSpec(key='Holding/default/Units',
+                                                                                 op='sum'),
+                                                            models.AggregateSpec(key='Holding/default/Cost',
+                                                                                 op='sum')
+                                                            ])
 
         # Call LUSID to aggregate across all of our portfolios
         aggregated_group = self.client.get_aggregation_by_group(scope=self.internal_scope_code,
@@ -653,7 +656,8 @@ class TransparencyStrategies(TestFinbourneApi):
                                                                                       op='sum'),
                                                                  models.AggregateSpec(key='Holding/default/Cost',
                                                                                       op='sum')],
-                                                        group_by=[self.strategy_property_key, 'Instrument/default/Name'],
+                                                        group_by=[self.strategy_property_key,
+                                                                  'Instrument/default/Name'],
                                                         filters=[
                                                             models.PropertyFilter(
                                                                 left=self.strategy_property_key,
@@ -665,7 +669,7 @@ class TransparencyStrategies(TestFinbourneApi):
                                                                 operator='NotEquals',
                                                                 right='<Unknown>',
                                                                 right_operand_type='Absolute')
-                                                               ]
+                                                        ]
                                                         )
 
         # Call LUSID to get our aggregated group
@@ -683,6 +687,7 @@ class TransparencyStrategies(TestFinbourneApi):
         self.create_analytics()
         self.aggregate_portfolio_group()
         self.aggregate_strategy()
+
 
 if __name__ == '__main__':
     unittest.main()
