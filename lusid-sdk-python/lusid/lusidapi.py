@@ -348,6 +348,7 @@ class LUSIDAPI(object):
     | &lt;a name="371"&gt;371&lt;/a&gt;|ResultProcessingFailure|  |
     | &lt;a name="372"&gt;372&lt;/a&gt;|VendorResultProcessingFailure|  |
     | &lt;a name="373"&gt;373&lt;/a&gt;|CannotSupplyTimesWithPortfoliosQuery|  |
+    | &lt;a name="374"&gt;374&lt;/a&gt;|AttemptToUpsertDuplicateQuotes|  |
     | &lt;a name="-10"&gt;-10&lt;/a&gt;|ServerConfigurationError|  |
     | &lt;a name="-1"&gt;-1&lt;/a&gt;|Unknown error|  |
 
@@ -367,7 +368,7 @@ class LUSIDAPI(object):
         self._client = ServiceClient(self.config.credentials, self.config)
 
         client_models = {k: v for k, v in models.__dict__.items() if isinstance(v, type)}
-        self.api_version = '0.9.97'
+        self.api_version = '0.9.98'
         self._serialize = Serializer(client_models)
         self._deserialize = Deserializer(client_models)
 
@@ -4548,15 +4549,15 @@ class LUSIDAPI(object):
 
     def upsert_quotes(
             self, scope, quotes=None, custom_headers=None, raw=False, **operation_config):
-        """Add quotes.
+        """Upsert quotes.
 
-        Add quotes effective at the specified time. If a quote is added with
+        Upsert quotes effective at the specified time. If a quote is added with
         the same id (and is effective at the same time) as an existing quote,
         then the more recently added quote will be returned when queried.
 
         :param scope: The scope of the quotes
         :type scope: str
-        :param quotes: The quotes to add
+        :param quotes: The quotes to upsert
         :type quotes: list[~lusid.models.UpsertQuoteRequest]
         :param dict custom_headers: headers that will be added to the request
         :param bool raw: returns the direct response alongside the

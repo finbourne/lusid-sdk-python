@@ -81,7 +81,7 @@ class ErrorResponse(Model):
      'ValuationEngineFailure', 'TaskFactoryFailure', 'TaskEvaluationFailure',
      'InstrumentFailure', 'CashFlowsFailure', 'ResultRetrievalFailure',
      'ResultProcessingFailure', 'VendorResultProcessingFailure',
-     'CannotSupplyTimesWithPortfoliosQuery'
+     'CannotSupplyTimesWithPortfoliosQuery', 'AttemptToUpsertDuplicateQuotes'
     :vartype code: str or ~lusid.models.enum
     :ivar message:
     :vartype message: str

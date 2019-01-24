@@ -29,8 +29,6 @@ class AggregationRequest(Model):
 
     :param recipe_id:
     :type recipe_id: ~lusid.models.ResourceId
-    :param load_reference_portfolio:
-    :type load_reference_portfolio: bool
     :param as_at: The asAt date to use
     :type as_at: datetime
     :param effective_at:
@@ -55,7 +53,6 @@ class AggregationRequest(Model):
 
     _attribute_map = {
         'recipe_id': {'key': 'recipeId', 'type': 'ResourceId'},
-        'load_reference_portfolio': {'key': 'loadReferencePortfolio', 'type': 'bool'},
         'as_at': {'key': 'asAt', 'type': 'iso-8601'},
         'effective_at': {'key': 'effectiveAt', 'type': 'iso-8601'},
         'metrics': {'key': 'metrics', 'type': '[AggregateSpec]'},
@@ -65,10 +62,9 @@ class AggregationRequest(Model):
         'sort': {'key': 'sort', 'type': 'str'},
     }
 
-    def __init__(self, recipe_id, effective_at, metrics, load_reference_portfolio=None, as_at=None, group_by=None, filters=None, limit=None, sort=None):
+    def __init__(self, recipe_id, effective_at, metrics, as_at=None, group_by=None, filters=None, limit=None, sort=None):
         super(AggregationRequest, self).__init__()
         self.recipe_id = recipe_id
-        self.load_reference_portfolio = load_reference_portfolio
         self.as_at = as_at
         self.effective_at = effective_at
         self.metrics = metrics

@@ -29,7 +29,8 @@ class AggregateSpec(Model):
 
     :param key:
     :type key: str
-    :param op: Possible values include: 'Sum', 'Proportion'
+    :param op: Possible values include: 'Sum', 'Proportion', 'Average',
+     'Count', 'Min', 'Max', 'Value'
     :type op: str or ~lusid.models.enum
     """
 
