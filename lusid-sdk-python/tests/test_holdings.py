@@ -26,7 +26,6 @@ class TestFinbourneApi(TestCase):
     client = None
     instrumentIds = []
     effective_date = datetime(2018, 1, 1, tzinfo=pytz.utc)
-
     @classmethod
     def setUpClass(cls):
 
@@ -88,6 +87,8 @@ class TestFinbourneApi(TestCase):
         # Create and load in instruments
         cls.inst_loader = InstrumentLoader()
         cls.instrument_ids = cls.inst_loader.load_instruments(cls)
+        # sort the instruments
+        # validate_results = sorted(cls.instrument_ids, key=lambda k: k[self.GROUPBY_KEY])
 
         assert len(cls.instrument_ids.values) == 5
 
@@ -98,15 +99,23 @@ class TestFinbourneApi(TestCase):
     def test_run_aggregation_with_buy(self):
 
         currency = "GBP"
-        # create the transactions
-        tran_requests = []
 
-        test_utility = TestDataUtilities(self.client)
+        day1 = datetime(2018, 1, 1, tzinfo=pytz.utc)
+        dayTPlus5 = datetime(2018, 1, 5, tzinfo=pytz.utc)
+        datTPlus10 = datetime(2018, 1, 10, tzinfo=pytz.utc)
+
+
+
+        # create the transactions
+        # tran_requests = []
+
+        # test_utility = TestDataUtilities(self.client)
+
         # add the starting cash
-        tran_requests.append(test_utility.build_cash_funds_in_transaction_request(units=51500.0,
+        tran_requests.append(test_utility.build_cash_funds_in_transaction_request(units=100000.0,
                                                                                   currency=currency,
-                                                                                  trade_date=self.effective_date))
-        # create the transaction requests
+                                                                                  trade_date=day1))
+        # create initial transactions
         idx = 0
         for instrument in self.instrument_ids.values:
             idx = idx + 1
@@ -114,15 +123,18 @@ class TestFinbourneApi(TestCase):
                                                                         units=100.0,
                                                                         price=100.0 + idx,
                                                                         currency=currency,
-                                                                        trade_date=self.effective_date,
+                                                                        trade_date=day1,
                                                                         transaction_type="Buy"))
+        # on day 5, add a transaction in instrument 3, and increase the amount of 1
+
+
 
         response = self.run_aggregation(create_transaction_requests=tran_requests)
         # add in some error checks here?
-        assert len(response) > 0    # should be 5? what about the cash?
-        assert response[0][self.AGGREGATION_KEY] == 10000.0
-        assert response[1][self.AGGREGATION_KEY] == 20000.0
-        assert response[2][self.AGGREGATION_KEY] == 30000.0
+        assert len(response) > 0
+        assert response[0][self.AGGREGATION_KEY] == 30000.0             # Barclays
+        assert response[1][self.AGGREGATION_KEY] == 20000.0             # National Grid
+        assert response[2][self.AGGREGATION_KEY] == 10000.0             # Sainsburys
 
     def run_aggregation(self, create_transaction_requests):
 
@@ -177,23 +189,29 @@ class TestFinbourneApi(TestCase):
                                              self.effective_date.month,
                                              self.effective_date.day,
                                              instrument_analytic_list)
-        # assert response is empty???
 
+        # Create the aggregation request. Note we are filtering out the start cash.
+        # If not, there will be an extra instrument, with end value £1
         aggregation_request = models.AggregationRequest(recipe_id=models.ResourceId(scope, "default"),
                                                         metrics=[models.AggregateSpec(self.AGGREGATION_KEY, "Proportion"),
                                                                  models.AggregateSpec(self.AGGREGATION_KEY, "Sum")],
                                                         group_by=[self.GROUPBY_KEY],
-                                                        effective_at=self.effective_date)
+                                                        effective_at=self.effective_date,
+                                                        filters=[models.PropertyFilter(
+                                                            left=self.GROUPBY_KEY,
+                                                            operator='NotEquals',
+                                                            right='<Unknown>',
+                                                            right_operand_type='Absolute')])
+
         # do the aggregation
         aggregation_response = self.client.get_aggregation_by_portfolio(scope, portfolio_id, aggregation_request)
-
-        validate_results = aggregation_response.data
+        validate_results = sorted(aggregation_response.data, key=lambda k: k[self.GROUPBY_KEY])
 
         # The aggregation response contains a schema property which describes the data returned.
         # This includes the aggregated values and description of the types.
         result_schema = aggregation_response.data_schema
 
-        for aggregation in aggregation_response.data:
+        for aggregation in validate_results:
             for column in result_schema.property_schema:
                 print(column + ": " + str(aggregation[column]))
             print("\n")
