@@ -32,7 +32,7 @@ class Schema(Model):
     :param href:
     :type href: str
     :param values:
-    :type values: list[~lusid.models.KeyValuePairOfStringToFieldSchema]
+    :type values: dict[str, ~lusid.models.FieldSchema]
     :param links:
     :type links: list[~lusid.models.Link]
     """
@@ -40,7 +40,7 @@ class Schema(Model):
     _attribute_map = {
         'entity': {'key': 'entity', 'type': 'str'},
         'href': {'key': 'href', 'type': 'str'},
-        'values': {'key': 'values', 'type': '[KeyValuePairOfStringToFieldSchema]'},
+        'values': {'key': 'values', 'type': '{FieldSchema}'},
         'links': {'key': 'links', 'type': '[Link]'},
     }
 

@@ -28,14 +28,13 @@ class ResultDataSchema(Model):
     """ResultDataSchema.
 
     :param node_value_schema:
-    :type node_value_schema:
-     list[~lusid.models.KeyValuePairOfPropertyKeyToFieldSchema]
+    :type node_value_schema: dict[str, ~lusid.models.FieldSchema]
     :param property_schema:
     :type property_schema: dict[str, ~lusid.models.FieldSchema]
     """
 
     _attribute_map = {
-        'node_value_schema': {'key': 'nodeValueSchema', 'type': '[KeyValuePairOfPropertyKeyToFieldSchema]'},
+        'node_value_schema': {'key': 'nodeValueSchema', 'type': '{FieldSchema}'},
         'property_schema': {'key': 'propertySchema', 'type': '{FieldSchema}'},
     }
 

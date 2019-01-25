@@ -30,14 +30,14 @@ class PropertySchema(Model):
     :param href:
     :type href: str
     :param values:
-    :type values: list[~lusid.models.KeyValuePairOfPropertyKeyToFieldSchema]
+    :type values: dict[str, ~lusid.models.FieldSchema]
     :param links:
     :type links: list[~lusid.models.Link]
     """
 
     _attribute_map = {
         'href': {'key': 'href', 'type': 'str'},
-        'values': {'key': 'values', 'type': '[KeyValuePairOfPropertyKeyToFieldSchema]'},
+        'values': {'key': 'values', 'type': '{FieldSchema}'},
         'links': {'key': 'links', 'type': '[Link]'},
     }
 

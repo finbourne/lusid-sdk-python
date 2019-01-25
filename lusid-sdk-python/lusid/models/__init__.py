@@ -79,7 +79,6 @@ from .aggregate_spec import AggregateSpec
 from .property_filter import PropertyFilter
 from .aggregation_request import AggregationRequest
 from .field_schema import FieldSchema
-from .key_value_pair_of_property_key_to_field_schema import KeyValuePairOfPropertyKeyToFieldSchema
 from .result_data_schema import ResultDataSchema
 from .list_aggregation_response import ListAggregationResponse
 from .aggregation_response_node import AggregationResponseNode
@@ -123,7 +122,6 @@ from .resource_list_of_constituents_adjustment_header import ResourceListOfConst
 from .create_results import CreateResults
 from .results import Results
 from .resource_list_of_string import ResourceListOfString
-from .key_value_pair_of_string_to_field_schema import KeyValuePairOfStringToFieldSchema
 from .schema import Schema
 from .property_schema import PropertySchema
 from .resource_list_of_value_type import ResourceListOfValueType
@@ -226,7 +224,6 @@ __all__ = [
     'PropertyFilter',
     'AggregationRequest',
     'FieldSchema',
-    'KeyValuePairOfPropertyKeyToFieldSchema',
     'ResultDataSchema',
     'ListAggregationResponse',
     'AggregationResponseNode',
@@ -270,7 +267,6 @@ __all__ = [
     'CreateResults',
     'Results',
     'ResourceListOfString',
-    'KeyValuePairOfStringToFieldSchema',
     'Schema',
     'PropertySchema',
     'ResourceListOfValueType',
