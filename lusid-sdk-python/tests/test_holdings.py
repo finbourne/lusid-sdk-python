@@ -26,6 +26,7 @@ class TestFinbourneApi(TestCase):
     client = None
     instrumentIds = []
     effective_date = datetime(2018, 1, 1, tzinfo=pytz.utc)
+
     @classmethod
     def setUpClass(cls):
 
@@ -38,6 +39,7 @@ class TestFinbourneApi(TestCase):
         cls.inst_loader = ""
         cls.instrument_ids = ""
         cls.sorted_instrument_ids = ""
+        cls.SCOPE = "Finbourne"
 
         # Load our configuration details from the environment variables
         token_url = os.getenv("FBN_TOKEN_URL", None)
@@ -90,7 +92,7 @@ class TestFinbourneApi(TestCase):
         cls.inst_loader = InstrumentLoader()
         cls.instrument_ids = cls.inst_loader.load_instruments(cls)
         # sort the instruments
-        cls.sorted_instrument_ids = sorted(cls.instrument_ids, key=lambda k: k[self.GROUPBY_KEY])
+        # cls.sorted_instrument_ids = sorted(cls.instrument_ids.values, key=lambda k: k['lusid_instrument_id'])
 
         assert len(cls.instrument_ids.values) == 5
 
@@ -98,38 +100,40 @@ class TestFinbourneApi(TestCase):
     def tearDownClass(cls):
         response = cls.inst_loader.tearDownClass(cls)
 
-    def test_get_holdings(self):
+    def test_zget_holdings(self):
 
         currency = "GBP"
 
-        day1 = datetime(2018, 1, 1, tzinfo=pytz.utc)
-        dayTPlus5 = datetime(2018, 1, 5, tzinfo=pytz.utc)
-        datTPlus10 = datetime(2018, 1, 10, tzinfo=pytz.utc)
-
-
+        day0 = datetime(2018, 1, 1, tzinfo=pytz.utc)                # today
+        day_tplus5 = datetime(2018, 1, 6, tzinfo=pytz.utc)           # t+5
+        day_tplus10 = datetime(2018, 1, 11, tzinfo=pytz.utc)         # t+10
 
         # create the transactions
         tran_requests = []
         inst_list = []
 
         test_utility = TestDataUtilities(self.client)
-
+        # create the portfolio and get the id code
+        portfolio_code = test_utility.create_transaction_portfolio(self.SCOPE)
         # add the starting cash
         tran_requests.append(test_utility.build_cash_funds_in_transaction_request(units=100000.0,
                                                                                   currency=currency,
-                                                                                  trade_date=day1))
+                                                                                  trade_date=day0))
         # create initial transactions
         idx = 0
+        # we want to create transactions based on the first 3 instruments
         for instrument in self.instrument_ids.values:
             if idx <= 2:
-                # we want to load the first 3 intruments
-                tran_requests.append(test_utility.build_transaction_request(instrument_id=self.instrument_ids.values[instrument].lusid_instrument_id,
-                                                                            units=100.0,
-                                                                            price=100.0 + idx,
-                                                                            currency=currency,
-                                                                            trade_date=day1,
-                                                                            transaction_type="Buy"))
-            inst_list.append(self.instrument_ids.values[instrument].lusid_instrument_id)         # get the instrument list anyway
+
+                tran_requests.append(test_utility.build_transaction_request
+                                     (instrument_id=self.instrument_ids.values[instrument].lusid_instrument_id,
+                                      units=100.0,
+                                      price=101.0 + idx,
+                                      currency=currency,
+                                      trade_date=day0,
+                                      transaction_type="Buy"))
+
+            inst_list.append(self.instrument_ids.values[instrument].lusid_instrument_id)     # create an instrument list
             idx = idx + 1
 
         # on day 5, add a transaction using the 4th instrument [3], and increase the amount of the second [1]
@@ -137,103 +141,141 @@ class TestFinbourneApi(TestCase):
                                                                     units=100.0,
                                                                     price=104.0,
                                                                     currency=currency,
-                                                                    trade_date=dayTPlus5,
+                                                                    trade_date=day_tplus5,
                                                                     transaction_type="Buy"))
         tran_requests.append(test_utility.build_transaction_request(instrument_id=inst_list[3],
                                                                     units=100.0,
                                                                     price=105.0,
                                                                     currency=currency,
-                                                                    trade_date=dayTPlus5,
+                                                                    trade_date=day_tplus5,
                                                                     transaction_type="Buy"))
 
+        # add the trade
+        upsert_response = self.client.upsert_transactions(self.SCOPE, portfolio_code, tran_requests)
 
-        response = self.run_aggregation(create_transaction_requests=tran_requests)
-        # add in some error checks here?
-        assert len(response) > 0
-        assert response[0][self.AGGREGATION_KEY] == 30000.0             # Barclays
-        assert response[1][self.AGGREGATION_KEY] == 20000.0             # National Grid
-        assert response[2][self.AGGREGATION_KEY] == 10000.0             # Sainsburys
+        # get the t+10 holdings
+        t10_holdings = self.client.get_holdings(self.SCOPE, portfolio_code, False, day_tplus10)
 
-    def run_aggregation(self, create_transaction_requests):
+        # cls.sorted_instrument_ids = sorted(cls.instrument_ids.values, key=lambda k: k['lusid_instrument_id'])
+        # test_sort = sorted(T10_holdings.values, key=lambda k: k['instrument_uid'])
+        assert t10_holdings.count == 5
 
-        uuid_gen = uuid.uuid4()
-        scope = "finbourne"
+        # cash balance
+        assert t10_holdings.values[0].instrument_uid == "CCY_" + currency
+        assert t10_holdings.values[0].holding_type == "B"
+        assert t10_holdings.values[0].units == 48500.0
 
-        # build the create portfolio request
-        original_portfolio_id = "Id-" + str(uuid_gen)
-        request = models.CreateTransactionPortfolioRequest("Portfolio-" + str(uuid_gen),
-                                                           original_portfolio_id,
-                                                           base_currency="GBP",
-                                                           created=self.effective_date)
-        # create the portfolio
-        portfolio_response = self.client.create_portfolio(scope, request)
+        # instrument holdings. Holding type "P" represents a position
+        assert t10_holdings.values[1].instrument_uid == inst_list[0]
+        assert t10_holdings.values[1].holding_type == "P"
+        assert t10_holdings.values[1].units == 100.0
+        assert t10_holdings.values[1].cost.amount == 10100.0
 
-        self.assertEqual(portfolio_response.id.code, request.code)
+        assert t10_holdings.values[2].instrument_uid == inst_list[1]
+        assert t10_holdings.values[2].holding_type == "P"
+        assert t10_holdings.values[2].units == 200.0
+        assert t10_holdings.values[2].cost.amount == 20600.0
 
-        portfolio_id = portfolio_response.id.code
+        assert t10_holdings.values[3].instrument_uid == inst_list[2]
+        assert t10_holdings.values[3].holding_type == "P"
+        assert t10_holdings.values[3].units == 100.0
+        assert t10_holdings.values[3].cost.amount == 10300.0
 
-        # build the transaction requests
-        # transaction_requests = models.transaction_request(create_transaction_requests)
-        tran_req = []
-        for i in create_transaction_requests:
-            tran_req.append(i)
+        assert t10_holdings.values[4].instrument_uid == inst_list[3]
+        assert t10_holdings.values[4].holding_type == "P"
+        assert t10_holdings.values[4].units == 100.0
+        assert t10_holdings.values[4].cost.amount == 10500.0
 
-        # upload the transactions to LUSID
-        upsert_response = self.client.upsert_transactions(scope, portfolio_id, tran_req)
-        assert len(upsert_response.links) > 0
-        # set up the prices used for the aggregation in the analytic stores
-        # is there a store in the list on the effective date?
-        analytic_stores = self.client.list_analytic_stores().values
-        count = 0
-        for store in analytic_stores:
-            if store.date_property == self.effective_date:
-                count = count + 1
+    def test_set_target_holdings(self):
 
-        if count == 0:
-            # create the analytic store
-            response = self.client.create_analytic_store({"scope": scope, "date": self.effective_date})
+        currency = "GBP"
 
-        # create prices dictionary, add to an instrument analytic
-        idx = 0
-        instrument_analytic_list = []
+        day0 = datetime(2018, 1, 1, tzinfo=pytz.utc)                # today
+        day_tplus5 = datetime(2018, 1, 6, tzinfo=pytz.utc)           # t+5
+
+        # create the transactions
+        tran_requests = []
+        inst_list = []
+
+        test_utility = TestDataUtilities(self.client)
+        # create the portfolio and get the id code
+
+        portfolio_code = test_utility.create_transaction_portfolio(self.SCOPE)
+
+        cash_inst = "CCY_" + currency
+        inst_list = []
         for instrument in self.instrument_ids.values:
-            idx = idx + 1
-            instrument_analytic_list.append(models.InstrumentAnalytic(
-                self.instrument_ids.values[instrument].lusid_instrument_id, idx * 100.0))
+            inst_list.append(self.instrument_ids.values[instrument].lusid_instrument_id)
+        holding_adj = []
 
-        # add prices from the aggregation
-        response = self.client.set_analytics(scope,
-                                             self.effective_date.year,
-                                             self.effective_date.month,
-                                             self.effective_date.day,
-                                             instrument_analytic_list)
+        # add the cash
+        holding_adj.append(models.AdjustHoldingRequest(cash_inst, [models.TargetTaxLotRequest(100000.0)]))
+        # instrument 1
+        holding_adj.append(models.AdjustHoldingRequest(inst_list[0],
+                                                       [models.TargetTaxLotRequest(units=100.0,
+                                                                                   cost=models.CurrencyAndAmount(10100.0, currency),
+                                                                                   portfolio_cost=10100.0,
+                                                                                   price=101.0,
+                                                                                   purchase_date=day0,
+                                                                                   settlement_date=day0)]))
 
-        # Create the aggregation request. Note we are filtering out the start cash.
-        # If not, there will be an extra instrument, with end value £1
-        aggregation_request = models.AggregationRequest(recipe_id=models.ResourceId(scope, "default"),
-                                                        metrics=[models.AggregateSpec(self.AGGREGATION_KEY, "Proportion"),
-                                                                 models.AggregateSpec(self.AGGREGATION_KEY, "Sum")],
-                                                        group_by=[self.GROUPBY_KEY],
-                                                        effective_at=self.effective_date,
-                                                        filters=[models.PropertyFilter(
-                                                            left=self.GROUPBY_KEY,
-                                                            operator='NotEquals',
-                                                            right='<Unknown>',
-                                                            right_operand_type='Absolute')])
+        holding_adj.append(models.AdjustHoldingRequest(inst_list[1],
+                                                       [models.TargetTaxLotRequest(units=100.0,
+                                                                                   cost=models.CurrencyAndAmount(
+                                                                                       10200.0, currency),
+                                                                                   portfolio_cost=10200.0,
+                                                                                   price=102.0,
+                                                                                   purchase_date=day0,
+                                                                                   settlement_date=day0)]))
 
-        # do the aggregation
-        aggregation_response = self.client.get_aggregation_by_portfolio(scope, portfolio_id, aggregation_request)
-        validate_results = sorted(aggregation_response.data, key=lambda k: k[self.GROUPBY_KEY])
+        # set the initial holdings on day0
+        upsert_response = self.client.set_holdings(self.SCOPE, portfolio_code, day0, holding_adj)
 
-        # The aggregation response contains a schema property which describes the data returned.
-        # This includes the aggregated values and description of the types.
-        result_schema = aggregation_response.data_schema
+        # add subsequent transactions on t+5
+        tran_requests.append(test_utility.build_transaction_request(inst_list[0],
+                                                                    units=100.0,
+                                                                    price=104.0,
+                                                                    currency=currency,
+                                                                    trade_date=day_tplus5,
+                                                                    transaction_type="Buy"))
 
-        for aggregation in validate_results:
-            for column in result_schema.property_schema:
-                print(column + ": " + str(aggregation[column]))
-            print("\n")
-        return validate_results
+        tran_requests.append(test_utility.build_transaction_request(inst_list[2],
+                                                                    units=100.0,
+                                                                    price=103.0,
+                                                                    currency=currency,
+                                                                    trade_date=day_tplus5,
+                                                                    transaction_type="Buy"))
+        # add these transactions
+        upsert_response = self.client.upsert_transactions(self.SCOPE, portfolio_code, tran_requests)
+
+        # get the holdings for t+5
+
+        t5_holdings = self.client.get_holdings(self.SCOPE, portfolio_code, False, day_tplus5)
+
+        # sort
+
+        # cash balance + 3 holdings
+        assert t5_holdings.count == 4
+
+        # remaining cash balance which takes into account the purchase transactions on day 2
+
+        assert t5_holdings.values[0].instrument_uid == cash_inst
+        assert t5_holdings.values[0].units == 79300.0
+
+        # instrument1 initial holding + transaction on day t+5
+        assert t5_holdings.values[1].instrument_uid == inst_list[0]
+        assert t5_holdings.values[1].units == 200.0
+        assert t5_holdings.values[1].cost.amount == 20500.0
+
+        # instrument2 initial holding
+        assert t5_holdings.values[2].instrument_uid == inst_list[1]
+        assert t5_holdings.values[2].units == 100.0
+        assert t5_holdings.values[2].cost.amount == 10200.0
+
+        # instrument3 transactions on  t+5
+        assert t5_holdings.values[3].instrument_uid == inst_list[2]
+        assert t5_holdings.values[3].units == 100.0
+        assert t5_holdings.values[3].cost.amount == 10300.0
 
 
 if __name__ == '__main__':
