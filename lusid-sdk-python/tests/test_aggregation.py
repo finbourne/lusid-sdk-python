@@ -181,7 +181,8 @@ class TestFinbourneApi(TestCase):
         # Create the aggregation request. Note we are filtering out the start cash.
         # If not, there will be an extra instrument, with end value £1
         aggregation_request = models.AggregationRequest(recipe_id=models.ResourceId(scope, "default"),
-                                                        metrics=[models.AggregateSpec(self.AGGREGATION_KEY, "Proportion"),
+                                                        metrics=[models.AggregateSpec(self.GROUPBY_KEY, "nothing"),
+                                                                 models.AggregateSpec(self.AGGREGATION_KEY, "Proportion"),
                                                                  models.AggregateSpec(self.AGGREGATION_KEY, "Sum")],
                                                         group_by=[self.GROUPBY_KEY],
                                                         effective_at=self.effective_date,
