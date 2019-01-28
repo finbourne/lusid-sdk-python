@@ -40,7 +40,7 @@ class TestDataUtilities(object):
         # create the portfolio
         portfolio_response = self.client.create_portfolio(scope, request)
 
-        self.assertEqual(portfolio_response.id.code, request.code)
+        assert portfolio_response.id.code == request.code
 
         return portfolio_response.id.code
 
