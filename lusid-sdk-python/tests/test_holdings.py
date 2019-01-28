@@ -1,16 +1,13 @@
 import unittest
 import requests
 import json
-import uuid
 import os
 from datetime import datetime
 import pytz
 import lusid
 import lusid.models as models
 from unittest import TestCase
-from collections import namedtuple
 from msrest.authentication import BasicTokenAuthentication
-from time import sleep
 from TestDataUtilities import TestDataUtilities
 from InstrumentLoader import InstrumentLoader
 
@@ -24,7 +21,6 @@ except ImportError:
 
 class TestFinbourneApi(TestCase):
     client = None
-    instrumentIds = []
     effective_date = datetime(2018, 1, 1, tzinfo=pytz.utc)
 
     @classmethod
@@ -38,7 +34,7 @@ class TestFinbourneApi(TestCase):
         cls.AGGREGATION_KEY = "Holding/default/PV"
         cls.inst_loader = ""
         cls.instrument_ids = ""
-        cls.sorted_instrument_ids = ""
+        cls.sorted_instrument_ids = []
         cls.SCOPE = "Finbourne"
 
         # Load our configuration details from the environment variables
@@ -91,8 +87,11 @@ class TestFinbourneApi(TestCase):
         # Create and load in instruments
         cls.inst_loader = InstrumentLoader()
         cls.instrument_ids = cls.inst_loader.load_instruments(cls)
-        # sort the instruments
-        # cls.sorted_instrument_ids = sorted(cls.instrument_ids.values, key=lambda k: k['lusid_instrument_id'])
+
+        # sort the instruments..ordered list of luids...
+        for instrument in cls.instrument_ids.values:
+            cls.sorted_instrument_ids.append(cls.instrument_ids.values[instrument].lusid_instrument_id)
+        cls.sorted_instrument_ids.sort()
 
         assert len(cls.instrument_ids.values) == 5
 
@@ -100,7 +99,7 @@ class TestFinbourneApi(TestCase):
     def tearDownClass(cls):
         response = cls.inst_loader.tearDownClass(cls)
 
-    def test_zget_holdings(self):
+    def test_get_holdings(self):
 
         currency = "GBP"
 
@@ -110,7 +109,6 @@ class TestFinbourneApi(TestCase):
 
         # create the transactions
         tran_requests = []
-        inst_list = []
 
         test_utility = TestDataUtilities(self.client)
         # create the portfolio and get the id code
@@ -122,28 +120,26 @@ class TestFinbourneApi(TestCase):
         # create initial transactions
         idx = 0
         # we want to create transactions based on the first 3 instruments
-        for instrument in self.instrument_ids.values:
+        for instrument in self.sorted_instrument_ids:
             if idx <= 2:
 
                 tran_requests.append(test_utility.build_transaction_request
-                                     (instrument_id=self.instrument_ids.values[instrument].lusid_instrument_id,
+                                     (instrument_id=instrument,
                                       units=100.0,
                                       price=101.0 + idx,
                                       currency=currency,
                                       trade_date=day0,
                                       transaction_type="Buy"))
-
-            inst_list.append(self.instrument_ids.values[instrument].lusid_instrument_id)     # create an instrument list
             idx = idx + 1
 
         # on day 5, add a transaction using the 4th instrument [3], and increase the amount of the second [1]
-        tran_requests.append(test_utility.build_transaction_request(instrument_id=inst_list[1],
+        tran_requests.append(test_utility.build_transaction_request(instrument_id=self.sorted_instrument_ids[1],
                                                                     units=100.0,
                                                                     price=104.0,
                                                                     currency=currency,
                                                                     trade_date=day_tplus5,
                                                                     transaction_type="Buy"))
-        tran_requests.append(test_utility.build_transaction_request(instrument_id=inst_list[3],
+        tran_requests.append(test_utility.build_transaction_request(instrument_id=self.sorted_instrument_ids[3],
                                                                     units=100.0,
                                                                     price=105.0,
                                                                     currency=currency,
@@ -156,8 +152,8 @@ class TestFinbourneApi(TestCase):
         # get the t+10 holdings
         t10_holdings = self.client.get_holdings(self.SCOPE, portfolio_code, False, day_tplus10)
 
-        # cls.sorted_instrument_ids = sorted(cls.instrument_ids.values, key=lambda k: k['lusid_instrument_id'])
-        # test_sort = sorted(T10_holdings.values, key=lambda k: k['instrument_uid'])
+        t10_holdings.values = sorted(t10_holdings.values, key=lambda k: k.instrument_uid)
+
         assert t10_holdings.count == 5
 
         # cash balance
@@ -166,22 +162,22 @@ class TestFinbourneApi(TestCase):
         assert t10_holdings.values[0].units == 48500.0
 
         # instrument holdings. Holding type "P" represents a position
-        assert t10_holdings.values[1].instrument_uid == inst_list[0]
+        assert t10_holdings.values[1].instrument_uid == self.sorted_instrument_ids[0]
         assert t10_holdings.values[1].holding_type == "P"
         assert t10_holdings.values[1].units == 100.0
         assert t10_holdings.values[1].cost.amount == 10100.0
 
-        assert t10_holdings.values[2].instrument_uid == inst_list[1]
+        assert t10_holdings.values[2].instrument_uid == self.sorted_instrument_ids[1]
         assert t10_holdings.values[2].holding_type == "P"
         assert t10_holdings.values[2].units == 200.0
         assert t10_holdings.values[2].cost.amount == 20600.0
 
-        assert t10_holdings.values[3].instrument_uid == inst_list[2]
+        assert t10_holdings.values[3].instrument_uid == self.sorted_instrument_ids[2]
         assert t10_holdings.values[3].holding_type == "P"
         assert t10_holdings.values[3].units == 100.0
         assert t10_holdings.values[3].cost.amount == 10300.0
 
-        assert t10_holdings.values[4].instrument_uid == inst_list[3]
+        assert t10_holdings.values[4].instrument_uid == self.sorted_instrument_ids[3]
         assert t10_holdings.values[4].holding_type == "P"
         assert t10_holdings.values[4].units == 100.0
         assert t10_holdings.values[4].cost.amount == 10500.0
@@ -195,23 +191,18 @@ class TestFinbourneApi(TestCase):
 
         # create the transactions
         tran_requests = []
-        inst_list = []
-
         test_utility = TestDataUtilities(self.client)
-        # create the portfolio and get the id code
 
+        # create the portfolio and get the id code
         portfolio_code = test_utility.create_transaction_portfolio(self.SCOPE)
 
         cash_inst = "CCY_" + currency
-        inst_list = []
-        for instrument in self.instrument_ids.values:
-            inst_list.append(self.instrument_ids.values[instrument].lusid_instrument_id)
         holding_adj = []
 
         # add the cash
         holding_adj.append(models.AdjustHoldingRequest(cash_inst, [models.TargetTaxLotRequest(100000.0)]))
         # instrument 1
-        holding_adj.append(models.AdjustHoldingRequest(inst_list[0],
+        holding_adj.append(models.AdjustHoldingRequest(self.sorted_instrument_ids[0],
                                                        [models.TargetTaxLotRequest(units=100.0,
                                                                                    cost=models.CurrencyAndAmount(10100.0, currency),
                                                                                    portfolio_cost=10100.0,
@@ -219,7 +210,7 @@ class TestFinbourneApi(TestCase):
                                                                                    purchase_date=day0,
                                                                                    settlement_date=day0)]))
 
-        holding_adj.append(models.AdjustHoldingRequest(inst_list[1],
+        holding_adj.append(models.AdjustHoldingRequest(self.sorted_instrument_ids[1],
                                                        [models.TargetTaxLotRequest(units=100.0,
                                                                                    cost=models.CurrencyAndAmount(
                                                                                        10200.0, currency),
@@ -232,14 +223,14 @@ class TestFinbourneApi(TestCase):
         upsert_response = self.client.set_holdings(self.SCOPE, portfolio_code, day0, holding_adj)
 
         # add subsequent transactions on t+5
-        tran_requests.append(test_utility.build_transaction_request(inst_list[0],
+        tran_requests.append(test_utility.build_transaction_request(self.sorted_instrument_ids[0],
                                                                     units=100.0,
                                                                     price=104.0,
                                                                     currency=currency,
                                                                     trade_date=day_tplus5,
                                                                     transaction_type="Buy"))
 
-        tran_requests.append(test_utility.build_transaction_request(inst_list[2],
+        tran_requests.append(test_utility.build_transaction_request(self.sorted_instrument_ids[2],
                                                                     units=100.0,
                                                                     price=103.0,
                                                                     currency=currency,
@@ -253,6 +244,7 @@ class TestFinbourneApi(TestCase):
         t5_holdings = self.client.get_holdings(self.SCOPE, portfolio_code, False, day_tplus5)
 
         # sort
+        t5_holdings.values = sorted(t5_holdings.values, key=lambda k: k.instrument_uid)
 
         # cash balance + 3 holdings
         assert t5_holdings.count == 4
@@ -263,17 +255,17 @@ class TestFinbourneApi(TestCase):
         assert t5_holdings.values[0].units == 79300.0
 
         # instrument1 initial holding + transaction on day t+5
-        assert t5_holdings.values[1].instrument_uid == inst_list[0]
+        assert t5_holdings.values[1].instrument_uid == self.sorted_instrument_ids[0]
         assert t5_holdings.values[1].units == 200.0
         assert t5_holdings.values[1].cost.amount == 20500.0
 
         # instrument2 initial holding
-        assert t5_holdings.values[2].instrument_uid == inst_list[1]
+        assert t5_holdings.values[2].instrument_uid == self.sorted_instrument_ids[1]
         assert t5_holdings.values[2].units == 100.0
         assert t5_holdings.values[2].cost.amount == 10200.0
 
         # instrument3 transactions on  t+5
-        assert t5_holdings.values[3].instrument_uid == inst_list[2]
+        assert t5_holdings.values[3].instrument_uid == self.sorted_instrument_ids[2]
         assert t5_holdings.values[3].units == 100.0
         assert t5_holdings.values[3].cost.amount == 10300.0
 
