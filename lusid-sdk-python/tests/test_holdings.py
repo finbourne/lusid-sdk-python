@@ -37,6 +37,8 @@ class TestFinbourneApi(TestCase):
         cls.AGGREGATION_KEY = "Holding/default/PV"
         cls.inst_loader = ""
         cls.instrument_ids = ""
+        cls.sorted_instrument_ids = ""
+
         # Load our configuration details from the environment variables
         token_url = os.getenv("FBN_TOKEN_URL", None)
         cls.api_url = os.getenv("FBN_LUSID_API_URL", None)
@@ -88,7 +90,7 @@ class TestFinbourneApi(TestCase):
         cls.inst_loader = InstrumentLoader()
         cls.instrument_ids = cls.inst_loader.load_instruments(cls)
         # sort the instruments
-        # validate_results = sorted(cls.instrument_ids, key=lambda k: k[self.GROUPBY_KEY])
+        cls.sorted_instrument_ids = sorted(cls.instrument_ids, key=lambda k: k[self.GROUPBY_KEY])
 
         assert len(cls.instrument_ids.values) == 5
 
@@ -96,7 +98,7 @@ class TestFinbourneApi(TestCase):
     def tearDownClass(cls):
         response = cls.inst_loader.tearDownClass(cls)
 
-    def test_run_aggregation_with_buy(self):
+    def test_get_holdings(self):
 
         currency = "GBP"
 
@@ -107,9 +109,10 @@ class TestFinbourneApi(TestCase):
 
 
         # create the transactions
-        # tran_requests = []
+        tran_requests = []
+        inst_list = []
 
-        # test_utility = TestDataUtilities(self.client)
+        test_utility = TestDataUtilities(self.client)
 
         # add the starting cash
         tran_requests.append(test_utility.build_cash_funds_in_transaction_request(units=100000.0,
@@ -118,15 +121,30 @@ class TestFinbourneApi(TestCase):
         # create initial transactions
         idx = 0
         for instrument in self.instrument_ids.values:
+            if idx <= 2:
+                # we want to load the first 3 intruments
+                tran_requests.append(test_utility.build_transaction_request(instrument_id=self.instrument_ids.values[instrument].lusid_instrument_id,
+                                                                            units=100.0,
+                                                                            price=100.0 + idx,
+                                                                            currency=currency,
+                                                                            trade_date=day1,
+                                                                            transaction_type="Buy"))
+            inst_list.append(self.instrument_ids.values[instrument].lusid_instrument_id)         # get the instrument list anyway
             idx = idx + 1
-            tran_requests.append(test_utility.build_transaction_request(instrument_id=self.instrument_ids.values[instrument].lusid_instrument_id,
-                                                                        units=100.0,
-                                                                        price=100.0 + idx,
-                                                                        currency=currency,
-                                                                        trade_date=day1,
-                                                                        transaction_type="Buy"))
-        # on day 5, add a transaction in instrument 3, and increase the amount of 1
 
+        # on day 5, add a transaction using the 4th instrument [3], and increase the amount of the second [1]
+        tran_requests.append(test_utility.build_transaction_request(instrument_id=inst_list[1],
+                                                                    units=100.0,
+                                                                    price=104.0,
+                                                                    currency=currency,
+                                                                    trade_date=dayTPlus5,
+                                                                    transaction_type="Buy"))
+        tran_requests.append(test_utility.build_transaction_request(instrument_id=inst_list[3],
+                                                                    units=100.0,
+                                                                    price=105.0,
+                                                                    currency=currency,
+                                                                    trade_date=dayTPlus5,
+                                                                    transaction_type="Buy"))
 
 
         response = self.run_aggregation(create_transaction_requests=tran_requests)
