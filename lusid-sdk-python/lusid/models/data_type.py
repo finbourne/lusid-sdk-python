@@ -43,7 +43,7 @@ class DataType(Model):
      'ArrayOfTransactionAliases', 'ArrayofTransactionMovements',
      'ArrayofUnits', 'StringArray', 'CurrencyAndAmount', 'TradePrice',
      'UnitCreation', 'Currency', 'UserId', 'MetricValue', 'QuoteId',
-     'ArrayOfQuoteIds', 'ResourceId'
+     'QuoteLineage', 'ArrayOfQuoteIds', 'ResourceId'
     :type value_type: str or ~lusid.models.enum
     :param acceptable_values:
     :type acceptable_values: list[object]

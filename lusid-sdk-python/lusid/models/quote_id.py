@@ -29,35 +29,32 @@ class QuoteId(Model):
 
     :param instrument_id:
     :type instrument_id: str
-    :param instrument_id_type:
-    :type instrument_id_type: str
-    :param quote_convention:
-    :type quote_convention: str
-    :param quote_type:
-    :type quote_type: str
-    :param price_source:
-    :type price_source: str
+    :param instrument_id_type: Possible values include: 'LusidInstrumentId',
+     'Figi', 'RIC', 'QuotePermId', 'Isin', 'CurrencyPair'
+    :type instrument_id_type: str or ~lusid.models.enum
+    :param quote_type: Possible values include: 'Price', 'Spread', 'Rate'
+    :type quote_type: str or ~lusid.models.enum
+    :param price_side: Possible values include: 'Bid', 'Mid', 'Ask'
+    :type price_side: str or ~lusid.models.enum
     """
 
     _validation = {
         'instrument_id': {'required': True},
         'instrument_id_type': {'required': True},
-        'quote_convention': {'required': True},
         'quote_type': {'required': True},
+        'price_side': {'required': True},
     }
 
     _attribute_map = {
         'instrument_id': {'key': 'instrumentId', 'type': 'str'},
         'instrument_id_type': {'key': 'instrumentIdType', 'type': 'str'},
-        'quote_convention': {'key': 'quoteConvention', 'type': 'str'},
         'quote_type': {'key': 'quoteType', 'type': 'str'},
-        'price_source': {'key': 'priceSource', 'type': 'str'},
+        'price_side': {'key': 'priceSide', 'type': 'str'},
     }
 
-    def __init__(self, instrument_id, instrument_id_type, quote_convention, quote_type, price_source=None):
+    def __init__(self, instrument_id, instrument_id_type, quote_type, price_side):
         super(QuoteId, self).__init__()
         self.instrument_id = instrument_id
         self.instrument_id_type = instrument_id_type
-        self.quote_convention = quote_convention
         self.quote_type = quote_type
-        self.price_source = price_source
+        self.price_side = price_side

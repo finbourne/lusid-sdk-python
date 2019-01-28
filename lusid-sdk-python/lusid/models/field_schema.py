@@ -39,7 +39,7 @@ class FieldSchema(Model):
      'ArrayOfTransactionAliases', 'ArrayofTransactionMovements',
      'ArrayofUnits', 'StringArray', 'CurrencyAndAmount', 'TradePrice',
      'UnitCreation', 'Currency', 'UserId', 'MetricValue', 'QuoteId',
-     'ArrayOfQuoteIds', 'ResourceId'
+     'QuoteLineage', 'ArrayOfQuoteIds', 'ResourceId'
     :type type: str or ~lusid.models.enum
     :param is_metric:
     :type is_metric: bool

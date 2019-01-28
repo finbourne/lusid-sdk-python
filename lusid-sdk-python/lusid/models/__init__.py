@@ -104,6 +104,7 @@ from .property_definition import PropertyDefinition
 from .resource_list_of_property_definition import ResourceListOfPropertyDefinition
 from .update_property_definition_request import UpdatePropertyDefinitionRequest
 from .quote_id import QuoteId
+from .quote_lineage import QuoteLineage
 from .upsert_quote_request import UpsertQuoteRequest
 from .upsert_quotes_response import UpsertQuotesResponse
 from .delete_quote_request import DeleteQuoteRequest
@@ -249,6 +250,7 @@ __all__ = [
     'ResourceListOfPropertyDefinition',
     'UpdatePropertyDefinitionRequest',
     'QuoteId',
+    'QuoteLineage',
     'UpsertQuoteRequest',
     'UpsertQuotesResponse',
     'DeleteQuoteRequest',

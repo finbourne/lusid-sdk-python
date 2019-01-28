@@ -31,6 +31,8 @@ class UpsertQuoteRequest(Model):
     :type quote_id: ~lusid.models.QuoteId
     :param metric_value:
     :type metric_value: ~lusid.models.MetricValue
+    :param quote_lineage:
+    :type quote_lineage: ~lusid.models.QuoteLineage
     :param effective_at:
     :type effective_at: datetime
     """
@@ -38,16 +40,19 @@ class UpsertQuoteRequest(Model):
     _validation = {
         'quote_id': {'required': True},
         'metric_value': {'required': True},
+        'quote_lineage': {'required': True},
     }
 
     _attribute_map = {
         'quote_id': {'key': 'quoteId', 'type': 'QuoteId'},
         'metric_value': {'key': 'metricValue', 'type': 'MetricValue'},
+        'quote_lineage': {'key': 'quoteLineage', 'type': 'QuoteLineage'},
         'effective_at': {'key': 'effectiveAt', 'type': 'iso-8601'},
     }
 
-    def __init__(self, quote_id, metric_value, effective_at=None):
+    def __init__(self, quote_id, metric_value, quote_lineage, effective_at=None):
         super(UpsertQuoteRequest, self).__init__()
         self.quote_id = quote_id
         self.metric_value = metric_value
+        self.quote_lineage = quote_lineage
         self.effective_at = effective_at

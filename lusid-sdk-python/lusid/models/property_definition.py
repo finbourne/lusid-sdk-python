@@ -40,7 +40,7 @@ class PropertyDefinition(Model):
      'ArrayOfTransactionAliases', 'ArrayofTransactionMovements',
      'ArrayofUnits', 'StringArray', 'CurrencyAndAmount', 'TradePrice',
      'UnitCreation', 'Currency', 'UserId', 'MetricValue', 'QuoteId',
-     'ArrayOfQuoteIds', 'ResourceId'
+     'QuoteLineage', 'ArrayOfQuoteIds', 'ResourceId'
     :type value_type: str or ~lusid.models.enum
     :param value_required:
     :type value_required: bool

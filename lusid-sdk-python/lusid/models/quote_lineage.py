@@ -24,39 +24,26 @@
 from msrest.serialization import Model
 
 
-class Quote(Model):
-    """Quote.
+class QuoteLineage(Model):
+    """QuoteLineage.
 
-    :param quote_id:
-    :type quote_id: ~lusid.models.QuoteId
-    :param metric_value:
-    :type metric_value: ~lusid.models.MetricValue
-    :param quote_lineage:
-    :type quote_lineage: ~lusid.models.QuoteLineage
-    :param effective_at_date:
-    :type effective_at_date: datetime
-    :param as_at_date:
-    :type as_at_date: datetime
+    :param data_vendor:
+    :type data_vendor: str
+    :param contributor:
+    :type contributor: str
     """
 
     _validation = {
-        'quote_id': {'required': True},
-        'metric_value': {'required': True},
-        'quote_lineage': {'required': True},
+        'data_vendor': {'required': True},
+        'contributor': {'required': True},
     }
 
     _attribute_map = {
-        'quote_id': {'key': 'quoteId', 'type': 'QuoteId'},
-        'metric_value': {'key': 'metricValue', 'type': 'MetricValue'},
-        'quote_lineage': {'key': 'quoteLineage', 'type': 'QuoteLineage'},
-        'effective_at_date': {'key': 'effectiveAtDate', 'type': 'iso-8601'},
-        'as_at_date': {'key': 'asAtDate', 'type': 'iso-8601'},
+        'data_vendor': {'key': 'dataVendor', 'type': 'str'},
+        'contributor': {'key': 'contributor', 'type': 'str'},
     }
 
-    def __init__(self, quote_id, metric_value, quote_lineage, effective_at_date=None, as_at_date=None):
-        super(Quote, self).__init__()
-        self.quote_id = quote_id
-        self.metric_value = metric_value
-        self.quote_lineage = quote_lineage
-        self.effective_at_date = effective_at_date
-        self.as_at_date = as_at_date
+    def __init__(self, data_vendor, contributor):
+        super(QuoteLineage, self).__init__()
+        self.data_vendor = data_vendor
+        self.contributor = contributor
