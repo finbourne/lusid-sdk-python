@@ -368,7 +368,7 @@ class LUSIDAPI(object):
         self._client = ServiceClient(self.config.credentials, self.config)
 
         client_models = {k: v for k, v in models.__dict__.items() if isinstance(v, type)}
-        self.api_version = '0.9.102'
+        self.api_version = '0.9.106'
         self._serialize = Serializer(client_models)
         self._deserialize = Deserializer(client_models)
 
@@ -784,11 +784,13 @@ class LUSIDAPI(object):
     list_corporate_action_sources.metadata = {'url': '/api/corporateactionsources'}
 
     def create_corporate_action_source(
-            self, custom_headers=None, raw=False, **operation_config):
+            self, request, custom_headers=None, raw=False, **operation_config):
         """Create Corporate Action Source.
 
         Attempt to create a corporate action source.
 
+        :param request: The corporate action source definition
+        :type request: ~lusid.models.CreateCorporateActionSourceRequest
         :param dict custom_headers: headers that will be added to the request
         :param bool raw: returns the direct response alongside the
          deserialized response
@@ -800,8 +802,6 @@ class LUSIDAPI(object):
         :raises:
          :class:`ErrorResponseException<lusid.models.ErrorResponseException>`
         """
-        request = None
-
         # Construct URL
         url = self.create_corporate_action_source.metadata['url']
 
@@ -815,10 +815,7 @@ class LUSIDAPI(object):
             header_parameters.update(custom_headers)
 
         # Construct body
-        if request is not None:
-            body_content = self._serialize.body(request, 'CreateCorporateActionSourceRequest')
-        else:
-            body_content = None
+        body_content = self._serialize.body(request, 'CreateCorporateActionSourceRequest')
 
         # Construct and send request
         request = self._client.post(url, query_parameters)
@@ -1665,20 +1662,17 @@ class LUSIDAPI(object):
     upsert_instruments.metadata = {'url': '/api/instruments'}
 
     def get_instrument(
-            self, type, id, effective_at=None, as_at=None, instrument_property_keys=None, custom_headers=None, raw=False, **operation_config):
+            self, identifier_type, identifier, effective_at=None, as_at=None, instrument_property_keys=None, custom_headers=None, raw=False, **operation_config):
         """Get instrument definition.
 
         Get an individual instrument by the one of its unique instrument
         identifiers. Optionally, it is possible to decorate each instrument
         with specified property data.
 
-        :param type: The type of identifier being supplied. Possible values
-         include: 'Undefined', 'LusidInstrumentId', 'ReutersAssetId', 'CINS',
-         'Isin', 'Sedol', 'Cusip', 'Ticker', 'ClientInternal', 'Figi',
-         'CompositeFigi', 'ShareClassFigi', 'Wertpapier', 'RIC', 'QuotePermId'
-        :type type: str
-        :param id: The identifier of the requested instrument
-        :type id: str
+        :param identifier_type: The type of identifier being supplied
+        :type identifier_type: str
+        :param identifier: The identifier of the requested instrument
+        :type identifier: str
         :param effective_at: Optional. The effective date of the query
         :type effective_at: datetime
         :param as_at: Optional. The AsAt date of the query
@@ -1699,8 +1693,8 @@ class LUSIDAPI(object):
         # Construct URL
         url = self.get_instrument.metadata['url']
         path_format_arguments = {
-            'type': self._serialize.url("type", type, 'str'),
-            'id': self._serialize.url("id", id, 'str')
+            'identifierType': self._serialize.url("identifier_type", identifier_type, 'str'),
+            'identifier': self._serialize.url("identifier", identifier, 'str')
         }
         url = self._client.format_url(url, **path_format_arguments)
 
@@ -1736,21 +1730,18 @@ class LUSIDAPI(object):
             return client_raw_response
 
         return deserialized
-    get_instrument.metadata = {'url': '/api/instruments/{type}/{id}'}
+    get_instrument.metadata = {'url': '/api/instruments/{identifierType}/{identifier}'}
 
     def update_instrument_identifier(
-            self, type, id, request=None, custom_headers=None, raw=False, **operation_config):
+            self, identifier_type, identifier, request=None, custom_headers=None, raw=False, **operation_config):
         """Update instrument identifier.
 
         Adds, updates, or removes an identifier on an instrument.
 
-        :param type: The type of identifier being supplied. Possible values
-         include: 'Undefined', 'LusidInstrumentId', 'ReutersAssetId', 'CINS',
-         'Isin', 'Sedol', 'Cusip', 'Ticker', 'ClientInternal', 'Figi',
-         'CompositeFigi', 'ShareClassFigi', 'Wertpapier', 'RIC', 'QuotePermId'
-        :type type: str
-        :param id: The instrument identifier
-        :type id: str
+        :param identifier_type: The type of identifier being supplied
+        :type identifier_type: str
+        :param identifier: The instrument identifier
+        :type identifier: str
         :param request: The identifier to add, update, or remove
         :type request: ~lusid.models.UpdateInstrumentIdentifierRequest
         :param dict custom_headers: headers that will be added to the request
@@ -1766,8 +1757,8 @@ class LUSIDAPI(object):
         # Construct URL
         url = self.update_instrument_identifier.metadata['url']
         path_format_arguments = {
-            'type': self._serialize.url("type", type, 'str'),
-            'id': self._serialize.url("id", id, 'str')
+            'identifierType': self._serialize.url("identifier_type", identifier_type, 'str'),
+            'identifier': self._serialize.url("identifier", identifier, 'str')
         }
         url = self._client.format_url(url, **path_format_arguments)
 
@@ -1804,10 +1795,10 @@ class LUSIDAPI(object):
             return client_raw_response
 
         return deserialized
-    update_instrument_identifier.metadata = {'url': '/api/instruments/{type}/{id}'}
+    update_instrument_identifier.metadata = {'url': '/api/instruments/{identifierType}/{identifier}'}
 
     def delete_instrument(
-            self, type, id, custom_headers=None, raw=False, **operation_config):
+            self, identifier_type, identifier, custom_headers=None, raw=False, **operation_config):
         """Delete instrument.
 
         Attempt to delete one or more "client" instruments.
@@ -1816,13 +1807,10 @@ class LUSIDAPI(object):
         It is important to always check the 'Failed' set for any unsuccessful
         results.
 
-        :param type: The type of identifier being supplied. Possible values
-         include: 'Undefined', 'LusidInstrumentId', 'ReutersAssetId', 'CINS',
-         'Isin', 'Sedol', 'Cusip', 'Ticker', 'ClientInternal', 'Figi',
-         'CompositeFigi', 'ShareClassFigi', 'Wertpapier', 'RIC', 'QuotePermId'
-        :type type: str
-        :param id: The instrument identifier
-        :type id: str
+        :param identifier_type: The type of identifier being supplied
+        :type identifier_type: str
+        :param identifier: The instrument identifier
+        :type identifier: str
         :param dict custom_headers: headers that will be added to the request
         :param bool raw: returns the direct response alongside the
          deserialized response
@@ -1837,8 +1825,8 @@ class LUSIDAPI(object):
         # Construct URL
         url = self.delete_instrument.metadata['url']
         path_format_arguments = {
-            'type': self._serialize.url("type", type, 'str'),
-            'id': self._serialize.url("id", id, 'str')
+            'identifierType': self._serialize.url("identifier_type", identifier_type, 'str'),
+            'identifier': self._serialize.url("identifier", identifier, 'str')
         }
         url = self._client.format_url(url, **path_format_arguments)
 
@@ -1868,7 +1856,7 @@ class LUSIDAPI(object):
             return client_raw_response
 
         return deserialized
-    delete_instrument.metadata = {'url': '/api/instruments/{type}/{id}'}
+    delete_instrument.metadata = {'url': '/api/instruments/{identifierType}/{identifier}'}
 
     def find_instruments(
             self, aliases=None, effective_at=None, as_at=None, instrument_property_keys=None, custom_headers=None, raw=False, **operation_config):
@@ -1943,19 +1931,16 @@ class LUSIDAPI(object):
     find_instruments.metadata = {'url': '/api/instruments/$find'}
 
     def get_instruments(
-            self, code_type=None, codes=None, effective_at=None, as_at=None, instrument_property_keys=None, custom_headers=None, raw=False, **operation_config):
+            self, identifier_type=None, identifiers=None, effective_at=None, as_at=None, instrument_property_keys=None, custom_headers=None, raw=False, **operation_config):
         """Get instrument definition.
 
         Get a collection of instruments by a set of identifiers. Optionally, it
         is possible to decorate each instrument with specified property data.
 
-        :param code_type: the type of codes being specified. Possible values
-         include: 'Undefined', 'LusidInstrumentId', 'ReutersAssetId', 'CINS',
-         'Isin', 'Sedol', 'Cusip', 'Ticker', 'ClientInternal', 'Figi',
-         'CompositeFigi', 'ShareClassFigi', 'Wertpapier', 'RIC', 'QuotePermId'
-        :type code_type: str
-        :param codes: The identifiers of the instruments to get
-        :type codes: list[str]
+        :param identifier_type: The type of identifiers being supplied
+        :type identifier_type: str
+        :param identifiers: The identifiers of the instruments to get
+        :type identifiers: list[str]
         :param effective_at: Optional. The effective date of the request
         :type effective_at: datetime
         :param as_at: Optional. The as at date of the request
@@ -1979,8 +1964,8 @@ class LUSIDAPI(object):
 
         # Construct parameters
         query_parameters = {}
-        if code_type is not None:
-            query_parameters['codeType'] = self._serialize.query("code_type", code_type, 'str')
+        if identifier_type is not None:
+            query_parameters['identifierType'] = self._serialize.query("identifier_type", identifier_type, 'str')
         if effective_at is not None:
             query_parameters['effectiveAt'] = self._serialize.query("effective_at", effective_at, 'iso-8601')
         if as_at is not None:
@@ -1995,8 +1980,8 @@ class LUSIDAPI(object):
             header_parameters.update(custom_headers)
 
         # Construct body
-        if codes is not None:
-            body_content = self._serialize.body(codes, '[str]')
+        if identifiers is not None:
+            body_content = self._serialize.body(identifiers, '[str]')
         else:
             body_content = None
 
@@ -2021,19 +2006,16 @@ class LUSIDAPI(object):
     get_instruments.metadata = {'url': '/api/instruments/$get'}
 
     def match_instruments(
-            self, code_type=None, codes=None, custom_headers=None, raw=False, **operation_config):
+            self, identifier_type=None, identifiers=None, custom_headers=None, raw=False, **operation_config):
         """Find externally mastered instruments.
 
         Search for a set of instruments from an external instrument mastering
         service.
 
-        :param code_type: The type of codes to search for. Possible values
-         include: 'Undefined', 'LusidInstrumentId', 'ReutersAssetId', 'CINS',
-         'Isin', 'Sedol', 'Cusip', 'Ticker', 'ClientInternal', 'Figi',
-         'CompositeFigi', 'ShareClassFigi', 'Wertpapier', 'RIC', 'QuotePermId'
-        :type code_type: str
-        :param codes: The collection of instruments to search for
-        :type codes: list[str]
+        :param identifier_type: The type of identifiers being supplied
+        :type identifier_type: str
+        :param identifiers: The identifiers of the instruments to get
+        :type identifiers: list[str]
         :param dict custom_headers: headers that will be added to the request
         :param bool raw: returns the direct response alongside the
          deserialized response
@@ -2050,8 +2032,8 @@ class LUSIDAPI(object):
 
         # Construct parameters
         query_parameters = {}
-        if code_type is not None:
-            query_parameters['codeType'] = self._serialize.query("code_type", code_type, 'str')
+        if identifier_type is not None:
+            query_parameters['identifierType'] = self._serialize.query("identifier_type", identifier_type, 'str')
 
         # Construct headers
         header_parameters = {}
@@ -2060,8 +2042,8 @@ class LUSIDAPI(object):
             header_parameters.update(custom_headers)
 
         # Construct body
-        if codes is not None:
-            body_content = self._serialize.body(codes, '[str]')
+        if identifiers is not None:
+            body_content = self._serialize.body(identifiers, '[str]')
         else:
             body_content = None
 
@@ -2163,8 +2145,8 @@ class LUSIDAPI(object):
          deserialized response
         :param operation_config: :ref:`Operation configuration
          overrides<msrest:optionsforoperations>`.
-        :return: ResourceListOfCodeType or ClientRawResponse if raw=true
-        :rtype: ~lusid.models.ResourceListOfCodeType or
+        :return: ResourceListOfString or ClientRawResponse if raw=true
+        :rtype: ~lusid.models.ResourceListOfString or
          ~msrest.pipeline.ClientRawResponse
         :raises:
          :class:`ErrorResponseException<lusid.models.ErrorResponseException>`
@@ -2191,7 +2173,7 @@ class LUSIDAPI(object):
         deserialized = None
 
         if response.status_code == 200:
-            deserialized = self._deserialize('ResourceListOfCodeType', response)
+            deserialized = self._deserialize('ResourceListOfString', response)
 
         if raw:
             client_raw_response = ClientRawResponse(deserialized, response)
@@ -4350,9 +4332,8 @@ class LUSIDAPI(object):
         Retrieve the definition for the identified property.
 
         :param domain: The Property Domain of the requested property. Possible
-         values include: 'Trade', 'Portfolio', 'Security', 'Holding',
-         'ReferenceHolding', 'TransactionConfiguration', 'Instrument',
-         'CutDefinition'
+         values include: 'Trade', 'Portfolio', 'Holding', 'ReferenceHolding',
+         'TransactionConfiguration', 'Instrument', 'CutDefinition'
         :type domain: str
         :param scope: The scope of the requested property
         :type scope: str
@@ -4419,7 +4400,7 @@ class LUSIDAPI(object):
         already stored against these properties.
 
         :param domain: The Property Domain of the property being updated.
-         Possible values include: 'Trade', 'Portfolio', 'Security', 'Holding',
+         Possible values include: 'Trade', 'Portfolio', 'Holding',
          'ReferenceHolding', 'TransactionConfiguration', 'Instrument',
          'CutDefinition'
         :type domain: str
@@ -4491,7 +4472,7 @@ class LUSIDAPI(object):
         Delete the definition of the specified property.
 
         :param domain: The Property Domain of the property to be deleted.
-         Possible values include: 'Trade', 'Portfolio', 'Security', 'Holding',
+         Possible values include: 'Trade', 'Portfolio', 'Holding',
          'ReferenceHolding', 'TransactionConfiguration', 'Instrument',
          'CutDefinition'
         :type domain: str

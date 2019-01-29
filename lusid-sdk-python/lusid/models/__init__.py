@@ -67,7 +67,7 @@ from .match_instruments_response import MatchInstrumentsResponse
 from .delete_instrument_property_request import DeleteInstrumentPropertyRequest
 from .upsert_instrument_property_request import UpsertInstrumentPropertyRequest
 from .upsert_instrument_properties_response import UpsertInstrumentPropertiesResponse
-from .resource_list_of_code_type import ResourceListOfCodeType
+from .resource_list_of_string import ResourceListOfString
 from .stream import Stream
 from .file_response import FileResponse
 from .version_summary_dto import VersionSummaryDto
@@ -122,7 +122,6 @@ from .constituents_adjustment_header import ConstituentsAdjustmentHeader
 from .resource_list_of_constituents_adjustment_header import ResourceListOfConstituentsAdjustmentHeader
 from .create_results import CreateResults
 from .results import Results
-from .resource_list_of_string import ResourceListOfString
 from .schema import Schema
 from .property_schema import PropertySchema
 from .resource_list_of_value_type import ResourceListOfValueType
@@ -213,7 +212,7 @@ __all__ = [
     'DeleteInstrumentPropertyRequest',
     'UpsertInstrumentPropertyRequest',
     'UpsertInstrumentPropertiesResponse',
-    'ResourceListOfCodeType',
+    'ResourceListOfString',
     'Stream',
     'FileResponse',
     'VersionSummaryDto',
@@ -268,7 +267,6 @@ __all__ = [
     'ResourceListOfConstituentsAdjustmentHeader',
     'CreateResults',
     'Results',
-    'ResourceListOfString',
     'Schema',
     'PropertySchema',
     'ResourceListOfValueType',

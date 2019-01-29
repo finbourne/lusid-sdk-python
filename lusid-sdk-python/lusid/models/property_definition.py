@@ -55,8 +55,8 @@ class PropertyDefinition(Model):
     :param unit_schema: Possible values include: 'NoUnits', 'Basic',
      'Iso4217Currency'
     :type unit_schema: str or ~lusid.models.enum
-    :ivar domain: Possible values include: 'Trade', 'Portfolio', 'Security',
-     'Holding', 'ReferenceHolding', 'TransactionConfiguration', 'Instrument',
+    :ivar domain: Possible values include: 'Trade', 'Portfolio', 'Holding',
+     'ReferenceHolding', 'TransactionConfiguration', 'Instrument',
      'CutDefinition'
     :vartype domain: str or ~lusid.models.enum
     :ivar scope:

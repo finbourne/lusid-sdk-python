@@ -27,8 +27,8 @@ from msrest.serialization import Model
 class CreatePropertyDefinitionRequest(Model):
     """CreatePropertyDefinitionRequest.
 
-    :param domain: Possible values include: 'Trade', 'Portfolio', 'Security',
-     'Holding', 'ReferenceHolding', 'TransactionConfiguration', 'Instrument',
+    :param domain: Possible values include: 'Trade', 'Portfolio', 'Holding',
+     'ReferenceHolding', 'TransactionConfiguration', 'Instrument',
      'CutDefinition'
     :type domain: str or ~lusid.models.enum
     :param scope:

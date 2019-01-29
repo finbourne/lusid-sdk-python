@@ -29,11 +29,8 @@ class UpdateInstrumentIdentifierRequest(Model):
 
     :param type: The type of the identifier to upsert. This must be one of the
      code types marked as
-     allowable for instrument identifiers. Possible values include:
-     'Undefined', 'LusidInstrumentId', 'ReutersAssetId', 'CINS', 'Isin',
-     'Sedol', 'Cusip', 'Ticker', 'ClientInternal', 'Figi', 'CompositeFigi',
-     'ShareClassFigi', 'Wertpapier', 'RIC', 'QuotePermId'
-    :type type: str or ~lusid.models.enum
+     allowable for instrument identifiers.
+    :type type: str
     :param value: The value of the identifier. If set to `null`, this will
      remove the identifier completely.
      Note that, if an instrument only has one identifier, it is an error to

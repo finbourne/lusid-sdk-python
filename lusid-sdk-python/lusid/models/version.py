@@ -34,24 +34,19 @@ class Version(Model):
     :vartype effective_from: datetime
     :ivar as_at_date:
     :vartype as_at_date: datetime
-    :ivar href:
-    :vartype href: str
     """
 
     _validation = {
         'effective_from': {'readonly': True},
         'as_at_date': {'readonly': True},
-        'href': {'readonly': True},
     }
 
     _attribute_map = {
         'effective_from': {'key': 'effectiveFrom', 'type': 'iso-8601'},
         'as_at_date': {'key': 'asAtDate', 'type': 'iso-8601'},
-        'href': {'key': 'href', 'type': 'str'},
     }
 
     def __init__(self):
         super(Version, self).__init__()
         self.effective_from = None
         self.as_at_date = None
-        self.href = None
