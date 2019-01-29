@@ -87,7 +87,7 @@ class TestFinbourneApi(TestCase):
         # Create and load in instruments
         cls.inst_loader = InstrumentLoader()
         cls.instrument_ids = cls.inst_loader.load_instruments(cls.client)
-        # sort the instruments by instrument name to match the aggregation ordering later
+        # sort the instruments by name to match the aggregation ordering later. create LUID/name pairs dict
         luids_to_sort = {}
         for instrument in cls.instrument_ids.values:
             luids_to_sort[cls.instrument_ids.values[instrument].lusid_instrument_id] = cls.instrument_ids.values[instrument].name
@@ -96,7 +96,7 @@ class TestFinbourneApi(TestCase):
 
     @classmethod
     def tearDownClass(cls):
-        response = cls.inst_loader.tearDownClass(cls)
+        response = cls.inst_loader.tearDownClass(cls.client)
 
     def test_run_aggregation_with_buy(self):
 

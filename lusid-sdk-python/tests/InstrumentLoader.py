@@ -23,7 +23,6 @@ class InstrumentLoader(object):
     FIGI_SCHEME = "Figi"
     CUSTOM_INTERNAL_SCHEME = "ClientInternal"
 
-
     def load_instruments(self, client):
 
         isin_vod = models.InstrumentProperty(self.ISIN_PROPERTY_KEY, models.PropertyValue("GB00BH4HKS39"))
@@ -80,7 +79,7 @@ class InstrumentLoader(object):
         return upsert_response
 
     @classmethod
-    def tearDownClass(self, test_cls):
+    def tearDownClass(self, client):
 
         for i in self.inst_list:
-            response = test_cls.client.delete_instrument(test_cls.FIGI_SCHEME, i)
+            response = client.delete_instrument(self.FIGI_SCHEME, i)

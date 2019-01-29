@@ -32,8 +32,6 @@ class TestFinbourneApi(TestCase):
         cls.CUSTOM_INTERNAL_SCHEME = "ClientInternal"
         cls.GROUPBY_KEY = "Instrument/default/Name"
         cls.AGGREGATION_KEY = "Holding/default/PV"
-        cls.inst_loader = ""
-        cls.instrument_ids = ""
         cls.sorted_instrument_ids = []
         cls.SCOPE = "Finbourne"
 
@@ -86,7 +84,7 @@ class TestFinbourneApi(TestCase):
 
         # Create and load in instruments
         cls.inst_loader = InstrumentLoader()
-        cls.instrument_ids = cls.inst_loader.load_instruments(cls)
+        cls.instrument_ids = cls.inst_loader.load_instruments(cls.client)
 
         # sort the instruments..ordered list of luids...
         for instrument in cls.instrument_ids.values:
@@ -97,7 +95,7 @@ class TestFinbourneApi(TestCase):
 
     @classmethod
     def tearDownClass(cls):
-        response = cls.inst_loader.tearDownClass(cls)
+        response = cls.inst_loader.tearDownClass(cls.client)
 
     def test_get_holdings(self):
 

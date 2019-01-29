@@ -34,7 +34,7 @@ class TestTransactionsAPI(TestCase):
         cls.SEDOL_PROPERTY_KEY = "Instrument/default/Sedol"
         cls.FIGI_SCHEME = "Figi"
         cls.CUSTOM_INTERNAL_SCHEME = "ClientInternal"
-        cls.inst_loader = ""
+        cls.luid_list = []
 
         # Load our configuration details from the environment variables
         token_url = os.getenv("FBN_TOKEN_URL", None)
@@ -84,8 +84,9 @@ class TestTransactionsAPI(TestCase):
 
         # load the instruments using InstrumentLoader
         cls.inst_loader = InstrumentLoader()
-        loader_response = cls.inst_loader.load_instruments(cls)
-
+        loader_response = cls.inst_loader.load_instruments(cls.client)
+        for instrument in loader_response.values:
+            cls.luid_list.append(loader_response.values[instrument].lusid_instrument_id)
         assert len(loader_response.values) == 5
 
     def test_load_listed_instrument_transaction(self):
@@ -105,14 +106,11 @@ class TestTransactionsAPI(TestCase):
 
         self.assertEqual(portfolio_response.id.code, request.code)
 
-        portfolio_id = portfolio_response.id.code
-
         # create the transaction
         transaction_request = models.TransactionRequest(
                                     transaction_id=str(uuid.uuid4()),
                                     type="Buy",
-                                    instrument_uid=
-                                    self.inst_loader.instrument_response.values['correlationId1'].lusid_instrument_id,
+                                    instrument_uid=self.luid_list[0],
                                     transaction_date=effective_date,
                                     settlement_date=effective_date,
                                     units=100.0,
@@ -120,10 +118,10 @@ class TestTransactionsAPI(TestCase):
                                     total_consideration=models.CurrencyAndAmount(100 * 12.3, "GBP"),
                                     source="Client")
         # add the trade
-        upsert_response = self.client.upsert_transactions(scope, portfolio_id, [transaction_request])
+        upsert_response = self.client.upsert_transactions(scope, portfolio_response.id.code, [transaction_request])
 
         # get the trade again
-        returned_transaction = self.client.get_transactions(scope, portfolio_id )
+        returned_transaction = self.client.get_transactions(scope, portfolio_response.id.code)
         assert returned_transaction.count == 1
         assert transaction_request.transaction_id == returned_transaction.values[0].transaction_id
 
@@ -144,8 +142,6 @@ class TestTransactionsAPI(TestCase):
 
         self.assertEqual(portfolio_response.id.code, request.code)
 
-        portfolio_id = portfolio_response.id.code
-
         # create the transaction
         # Cash instruments are identified using CCY_ followed by the ISO currency codes.
         # Cash instruments do not need to be created before use
@@ -156,15 +152,15 @@ class TestTransactionsAPI(TestCase):
                                     transaction_date=effective_date,
                                     settlement_date=effective_date,
                                     units=100.0,
-                                    transaction_price=models.TransactionPrice(0.0),    # this is not included in java version
+                                    transaction_price=models.TransactionPrice(0.0),
                                     total_consideration=models.CurrencyAndAmount(0.0, "GBP"),
                                     source="Client")
 
         # add the trade
-        upsert_response = self.client.upsert_transactions(scope, portfolio_id, [transaction_request])
+        upsert_response = self.client.upsert_transactions(scope, portfolio_response.id.code, [transaction_request])
 
         # get the trade again
-        returned_transaction = self.client.get_transactions(scope, portfolio_id)
+        returned_transaction = self.client.get_transactions(scope, portfolio_response.id.code)
         assert returned_transaction.count == 1
         assert transaction_request.transaction_id == returned_transaction.values[0].transaction_id
 
@@ -183,8 +179,6 @@ class TestTransactionsAPI(TestCase):
         portfolio_response = self.client.create_portfolio(scope, request)
 
         self.assertEqual(portfolio_response.id.code, request.code)
-
-        portfolio_id = portfolio_response.id.code
 
         # create a swap otc transaction
         swap_definition = models.InstrumentDefinition(name="10mm 5Y Fixed",
@@ -212,10 +206,10 @@ class TestTransactionsAPI(TestCase):
                                                         source="Client")
 
         # add the trade
-        upsert_response = self.client.upsert_transactions(scope, portfolio_id, [transaction_request])
+        upsert_response = self.client.upsert_transactions(scope, portfolio_response.id.code, [transaction_request])
 
         # get the trade again
-        returned_transaction = self.client.get_transactions(scope, portfolio_id)
+        returned_transaction = self.client.get_transactions(scope, portfolio_response.id.code)
 
         assert returned_transaction.count == 1
 
@@ -226,7 +220,7 @@ class TestTransactionsAPI(TestCase):
 
     @classmethod
     def tearDownClass(cls):
-        response = cls.inst_loader.tearDownClass(cls)
+        response = cls.inst_loader.tearDownClass(cls.client)
 
 if __name__ == '__main__':
     unittest.main()
