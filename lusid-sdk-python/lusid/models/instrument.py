@@ -46,6 +46,9 @@ class Instrument(Model):
     :param lookthrough_portfolio: The lookthrough portfolio of the instrument
      (if any).
     :type lookthrough_portfolio: ~lusid.models.ResourceId
+    :param instrument_definition: The economic definition of the instrument
+     for an OTC or instrument where an expanded definition exists.
+    :type instrument_definition: ~lusid.models.InstrumentEconomicDefinition
     :param links:
     :type links: list[~lusid.models.Link]
     """
@@ -58,10 +61,11 @@ class Instrument(Model):
         'identifiers': {'key': 'identifiers', 'type': '{str}'},
         'properties': {'key': 'properties', 'type': '[Property]'},
         'lookthrough_portfolio': {'key': 'lookthroughPortfolio', 'type': 'ResourceId'},
+        'instrument_definition': {'key': 'instrumentDefinition', 'type': 'InstrumentEconomicDefinition'},
         'links': {'key': 'links', 'type': '[Link]'},
     }
 
-    def __init__(self, href=None, lusid_instrument_id=None, version=None, name=None, identifiers=None, properties=None, lookthrough_portfolio=None, links=None):
+    def __init__(self, href=None, lusid_instrument_id=None, version=None, name=None, identifiers=None, properties=None, lookthrough_portfolio=None, instrument_definition=None, links=None):
         super(Instrument, self).__init__()
         self.href = href
         self.lusid_instrument_id = lusid_instrument_id
@@ -70,4 +74,5 @@ class Instrument(Model):
         self.identifiers = identifiers
         self.properties = properties
         self.lookthrough_portfolio = lookthrough_portfolio
+        self.instrument_definition = instrument_definition
         self.links = links
