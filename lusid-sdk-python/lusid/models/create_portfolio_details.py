@@ -29,12 +29,16 @@ class CreatePortfolioDetails(Model):
 
     :param base_currency:
     :type base_currency: str
+    :param corporate_action_source_id:
+    :type corporate_action_source_id: ~lusid.models.ResourceId
     """
 
     _attribute_map = {
         'base_currency': {'key': 'baseCurrency', 'type': 'str'},
+        'corporate_action_source_id': {'key': 'corporateActionSourceId', 'type': 'ResourceId'},
     }
 
-    def __init__(self, base_currency=None):
+    def __init__(self, base_currency=None, corporate_action_source_id=None):
         super(CreatePortfolioDetails, self).__init__()
         self.base_currency = base_currency
+        self.corporate_action_source_id = corporate_action_source_id

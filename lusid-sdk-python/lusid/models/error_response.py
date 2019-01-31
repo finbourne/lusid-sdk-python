@@ -28,12 +28,9 @@ from msrest.exceptions import HttpOperationError
 class ErrorResponse(Model):
     """ErrorResponse.
 
-    Variables are only populated by the server, and will be ignored when
-    sending a request.
-
-    :ivar status:
-    :vartype status: int
-    :ivar code: Possible values include: 'Unknown', 'VersionNotFound',
+    :param status:
+    :type status: int
+    :param code: Possible values include: 'Unknown', 'VersionNotFound',
      'InstrumentNotFound', 'PropertyNotFound', 'PortfolioRecursionDepth',
      'GroupNotFound', 'PortfolioNotFound', 'PropertySchemaNotFound',
      'PortfolioAncestryNotFound', 'PortfolioWithIdAlreadyExists',
@@ -82,24 +79,16 @@ class ErrorResponse(Model):
      'InstrumentFailure', 'CashFlowsFailure', 'ResultRetrievalFailure',
      'ResultProcessingFailure', 'VendorResultProcessingFailure',
      'CannotSupplyTimesWithPortfoliosQuery', 'AttemptToUpsertDuplicateQuotes'
-    :vartype code: str or ~lusid.models.enum
-    :ivar message:
-    :vartype message: str
-    :ivar detailed_message:
-    :vartype detailed_message: str
+    :type code: str or ~lusid.models.enum
+    :param message:
+    :type message: str
+    :param detailed_message:
+    :type detailed_message: str
     :param items:
     :type items: list[~lusid.models.ErrorDetailBase]
-    :ivar more_info:
-    :vartype more_info: str
+    :param more_info:
+    :type more_info: str
     """
-
-    _validation = {
-        'status': {'readonly': True},
-        'code': {'readonly': True},
-        'message': {'readonly': True},
-        'detailed_message': {'readonly': True},
-        'more_info': {'readonly': True},
-    }
 
     _attribute_map = {
         'status': {'key': 'status', 'type': 'int'},
@@ -110,14 +99,14 @@ class ErrorResponse(Model):
         'more_info': {'key': 'moreInfo', 'type': 'str'},
     }
 
-    def __init__(self, items=None):
+    def __init__(self, status=None, code=None, message=None, detailed_message=None, items=None, more_info=None):
         super(ErrorResponse, self).__init__()
-        self.status = None
-        self.code = None
-        self.message = None
-        self.detailed_message = None
+        self.status = status
+        self.code = code
+        self.message = message
+        self.detailed_message = detailed_message
         self.items = items
-        self.more_info = None
+        self.more_info = more_info
 
 
 class ErrorResponseException(HttpOperationError):
