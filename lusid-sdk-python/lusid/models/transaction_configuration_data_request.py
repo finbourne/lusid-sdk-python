@@ -27,23 +27,19 @@ from msrest.serialization import Model
 class TransactionConfigurationDataRequest(Model):
     """TransactionConfigurationDataRequest.
 
-    Variables are only populated by the server, and will be ignored when
-    sending a request.
-
     :param aliases: List of transaction codes that map to this specific
      transaction model
     :type aliases: list[~lusid.models.TransactionConfigurationTypeAlias]
     :param movements: Movement data for the transaction code
     :type movements:
      list[~lusid.models.TransactionConfigurationMovementDataRequest]
-    :ivar properties:
-    :vartype properties: dict[str, ~lusid.models.PerpetualPropertyValue]
+    :param properties:
+    :type properties: dict[str, ~lusid.models.PerpetualPropertyValue]
     """
 
     _validation = {
         'aliases': {'required': True},
         'movements': {'required': True},
-        'properties': {'readonly': True},
     }
 
     _attribute_map = {
@@ -52,8 +48,8 @@ class TransactionConfigurationDataRequest(Model):
         'properties': {'key': 'properties', 'type': '{PerpetualPropertyValue}'},
     }
 
-    def __init__(self, aliases, movements):
+    def __init__(self, aliases, movements, properties=None):
         super(TransactionConfigurationDataRequest, self).__init__()
         self.aliases = aliases
         self.movements = movements
-        self.properties = None
+        self.properties = properties

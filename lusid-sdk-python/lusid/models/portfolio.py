@@ -27,45 +27,30 @@ from msrest.serialization import Model
 class Portfolio(Model):
     """Portfolio.
 
-    Variables are only populated by the server, and will be ignored when
-    sending a request.
-
-    :ivar href: Link to retrieve the current entity
-    :vartype href: str
-    :ivar id: Identifier for the portfolio
-    :vartype id: ~lusid.models.ResourceId
-    :ivar type: The type of portfolio this is (e.g. Transaction Portfolio,
+    :param href: Link to retrieve the current entity
+    :type href: str
+    :param id: Identifier for the portfolio
+    :type id: ~lusid.models.ResourceId
+    :param type: The type of portfolio this is (e.g. Transaction Portfolio,
      Reference  Portfolio). Possible values include: 'Transaction',
      'Reference', 'DerivedTransaction'
-    :vartype type: str or ~lusid.models.enum
-    :ivar display_name: Display name of the portfolio
-    :vartype display_name: str
-    :ivar description: Description of the portfolio
-    :vartype description: str
-    :ivar created: Portfolio creation time in UTC
-    :vartype created: datetime
-    :ivar parent_portfolio_id: If this is a derived portfolio, the identifier
+    :type type: str or ~lusid.models.enum
+    :param display_name: Display name of the portfolio
+    :type display_name: str
+    :param description: Description of the portfolio
+    :type description: str
+    :param created: Portfolio creation time in UTC
+    :type created: datetime
+    :param parent_portfolio_id: If this is a derived portfolio, the identifier
      of the portfolio from which it is derived
-    :vartype parent_portfolio_id: ~lusid.models.ResourceId
-    :ivar version: The version of the portfolio
-    :vartype version: ~lusid.models.Version
-    :ivar is_derived:
-    :vartype is_derived: bool
+    :type parent_portfolio_id: ~lusid.models.ResourceId
+    :param version: The version of the portfolio
+    :type version: ~lusid.models.Version
+    :param is_derived:
+    :type is_derived: bool
     :param links:
     :type links: list[~lusid.models.Link]
     """
-
-    _validation = {
-        'href': {'readonly': True},
-        'id': {'readonly': True},
-        'type': {'readonly': True},
-        'display_name': {'readonly': True},
-        'description': {'readonly': True},
-        'created': {'readonly': True},
-        'parent_portfolio_id': {'readonly': True},
-        'version': {'readonly': True},
-        'is_derived': {'readonly': True},
-    }
 
     _attribute_map = {
         'href': {'key': 'href', 'type': 'str'},
@@ -80,15 +65,15 @@ class Portfolio(Model):
         'links': {'key': 'links', 'type': '[Link]'},
     }
 
-    def __init__(self, links=None):
+    def __init__(self, href=None, id=None, type=None, display_name=None, description=None, created=None, parent_portfolio_id=None, version=None, is_derived=None, links=None):
         super(Portfolio, self).__init__()
-        self.href = None
-        self.id = None
-        self.type = None
-        self.display_name = None
-        self.description = None
-        self.created = None
-        self.parent_portfolio_id = None
-        self.version = None
-        self.is_derived = None
+        self.href = href
+        self.id = id
+        self.type = type
+        self.display_name = display_name
+        self.description = description
+        self.created = created
+        self.parent_portfolio_id = parent_portfolio_id
+        self.version = version
+        self.is_derived = is_derived
         self.links = links
