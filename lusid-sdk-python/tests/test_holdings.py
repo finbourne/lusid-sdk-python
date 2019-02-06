@@ -83,8 +83,8 @@ class TestFinbourneApi(TestCase):
         cls.client = lusid.LUSIDAPI(credentials, cls.api_url)
 
         # Create and load in instruments
-        cls.inst_loader = InstrumentLoader()
-        cls.instrument_ids = cls.inst_loader.load_instruments(cls.client)
+
+        cls.instrument_ids = InstrumentLoader.load_instruments(cls.client)
 
         # sort the instruments..ordered list of luids...
         for instrument in cls.instrument_ids.values:
@@ -95,7 +95,7 @@ class TestFinbourneApi(TestCase):
 
     @classmethod
     def tearDownClass(cls):
-        response = cls.inst_loader.tearDownClass(cls.client)
+        response = InstrumentLoader.delete_instruments(cls.client)
 
     def test_get_holdings(self):
 
@@ -108,11 +108,10 @@ class TestFinbourneApi(TestCase):
         # create the transactions
         tran_requests = []
 
-        test_utility = TestDataUtilities(self.client)
         # create the portfolio and get the id code
-        portfolio_code = test_utility.create_transaction_portfolio(self.SCOPE)
+        portfolio_code = TestDataUtilities.create_transaction_portfolio(self.client, self.SCOPE)
         # add the starting cash
-        tran_requests.append(test_utility.build_cash_funds_in_transaction_request(units=100000.0,
+        tran_requests.append(TestDataUtilities.build_cash_funds_in_transaction_request(units=100000.0,
                                                                                   currency=currency,
                                                                                   trade_date=day0))
         # create initial transactions
@@ -121,7 +120,7 @@ class TestFinbourneApi(TestCase):
         for instrument in self.sorted_instrument_ids:
             if idx <= 2:
 
-                tran_requests.append(test_utility.build_transaction_request
+                tran_requests.append(TestDataUtilities.build_transaction_request
                                      (instrument_id=instrument,
                                       units=100.0,
                                       price=101.0 + idx,
@@ -131,18 +130,20 @@ class TestFinbourneApi(TestCase):
             idx = idx + 1
 
         # on day 5, add a transaction using the 4th instrument [3], and increase the amount of the second [1]
-        tran_requests.append(test_utility.build_transaction_request(instrument_id=self.sorted_instrument_ids[1],
-                                                                    units=100.0,
-                                                                    price=104.0,
-                                                                    currency=currency,
-                                                                    trade_date=day_tplus5,
-                                                                    transaction_type="Buy"))
-        tran_requests.append(test_utility.build_transaction_request(instrument_id=self.sorted_instrument_ids[3],
-                                                                    units=100.0,
-                                                                    price=105.0,
-                                                                    currency=currency,
-                                                                    trade_date=day_tplus5,
-                                                                    transaction_type="Buy"))
+        tran_requests.append(TestDataUtilities.build_transaction_request(
+            instrument_id=self.sorted_instrument_ids[1],
+            units=100.0,
+            price=104.0,
+            currency=currency,
+            trade_date=day_tplus5,
+            transaction_type="Buy"))
+        tran_requests.append(TestDataUtilities.build_transaction_request(
+            instrument_id=self.sorted_instrument_ids[3],
+            units=100.0,
+            price=105.0,
+            currency=currency,
+            trade_date=day_tplus5,
+            transaction_type="Buy"))
 
         # add the trade
         upsert_response = self.client.upsert_transactions(self.SCOPE, portfolio_code, tran_requests)
@@ -189,10 +190,9 @@ class TestFinbourneApi(TestCase):
 
         # create the transactions
         tran_requests = []
-        test_utility = TestDataUtilities(self.client)
 
         # create the portfolio and get the id code
-        portfolio_code = test_utility.create_transaction_portfolio(self.SCOPE)
+        portfolio_code = TestDataUtilities.create_transaction_portfolio(self.client, self.SCOPE)
 
         cash_inst = "CCY_" + currency
         holding_adj = []
@@ -221,19 +221,21 @@ class TestFinbourneApi(TestCase):
         upsert_response = self.client.set_holdings(self.SCOPE, portfolio_code, day0, holding_adj)
 
         # add subsequent transactions on t+5
-        tran_requests.append(test_utility.build_transaction_request(self.sorted_instrument_ids[0],
-                                                                    units=100.0,
-                                                                    price=104.0,
-                                                                    currency=currency,
-                                                                    trade_date=day_tplus5,
-                                                                    transaction_type="Buy"))
+        tran_requests.append(TestDataUtilities.build_transaction_request(
+            self.sorted_instrument_ids[0],
+            units=100.0,
+            price=104.0,
+            currency=currency,
+            trade_date=day_tplus5,
+            transaction_type="Buy"))
 
-        tran_requests.append(test_utility.build_transaction_request(self.sorted_instrument_ids[2],
-                                                                    units=100.0,
-                                                                    price=103.0,
-                                                                    currency=currency,
-                                                                    trade_date=day_tplus5,
-                                                                    transaction_type="Buy"))
+        tran_requests.append(TestDataUtilities.build_transaction_request(
+            self.sorted_instrument_ids[2],
+            units=100.0,
+            price=103.0,
+            currency=currency,
+            trade_date=day_tplus5,
+            transaction_type="Buy"))
         # add these transactions
         upsert_response = self.client.upsert_transactions(self.SCOPE, portfolio_code, tran_requests)
 

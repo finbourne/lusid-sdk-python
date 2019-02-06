@@ -8,9 +8,7 @@ import pytz
 import lusid
 import lusid.models as models
 from unittest import TestCase
-from collections import namedtuple
 from msrest.authentication import BasicTokenAuthentication
-from time import sleep
 from InstrumentLoader import InstrumentLoader
 
 
@@ -83,8 +81,7 @@ class TestTransactionsAPI(TestCase):
         cls.client = lusid.LUSIDAPI(credentials, cls.api_url)
 
         # load the instruments using InstrumentLoader
-        cls.inst_loader = InstrumentLoader()
-        loader_response = cls.inst_loader.load_instruments(cls.client)
+        loader_response = InstrumentLoader.load_instruments(cls.client)
         for instrument in loader_response.values:
             cls.luid_list.append(loader_response.values[instrument].lusid_instrument_id)
         assert len(loader_response.values) == 5
@@ -220,7 +217,7 @@ class TestTransactionsAPI(TestCase):
 
     @classmethod
     def tearDownClass(cls):
-        response = cls.inst_loader.tearDownClass(cls.client)
+        response = InstrumentLoader.delete_instruments(cls.client)
 
 if __name__ == '__main__':
     unittest.main()

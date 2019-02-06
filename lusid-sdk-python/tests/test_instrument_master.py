@@ -1,16 +1,12 @@
 import unittest
 import requests
 import json
-import uuid
 import os
-from datetime import datetime
-import pytz
 import lusid
 import lusid.models as models
 from unittest import TestCase
-from collections import namedtuple
 from msrest.authentication import BasicTokenAuthentication
-from time import sleep
+
 
 try:
     # Python 3.x
@@ -170,7 +166,6 @@ class TestFinbourneApi(TestCase):
             result_dict[item] = {}
             for keypair in fbn_ids.values[item].properties:
                 result_dict[item][keypair.key] = keypair.value
-        # print(result_dict)
 
         assert result_dict["BBG000C6K6G9"][self.ISIN_PROPERTY_KEY] == "GB00BH4HKS39"
         assert result_dict["BBG000C6K6G9"][self.SEDOL_PROPERTY_KEY] == "BH4HKS3"

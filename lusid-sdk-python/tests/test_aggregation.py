@@ -8,9 +8,7 @@ import pytz
 import lusid
 import lusid.models as models
 from unittest import TestCase
-from collections import namedtuple
 from msrest.authentication import BasicTokenAuthentication
-from time import sleep
 from TestDataUtilities import TestDataUtilities
 from InstrumentLoader import InstrumentLoader
 
@@ -85,49 +83,49 @@ class TestFinbourneApi(TestCase):
         cls.client = lusid.LUSIDAPI(credentials, cls.api_url)
 
         # Create and load in instruments
-        cls.inst_loader = InstrumentLoader()
-        cls.instrument_ids = cls.inst_loader.load_instruments(cls.client)
+        cls.instrument_ids = InstrumentLoader.load_instruments(cls.client)
         # sort the instruments by name to match the aggregation ordering later. create LUID/name pairs dict
         luids_to_sort = {}
-        for instrument in cls.instrument_ids.values:
-            luids_to_sort[cls.instrument_ids.values[instrument].lusid_instrument_id] = cls.instrument_ids.values[instrument].name
+        for instrument_name, instrument in cls.instrument_ids.values.items():
+            luids_to_sort[instrument.lusid_instrument_id] = instrument.name
+
         cls.sorted_instrument_ids = sorted(luids_to_sort, key=luids_to_sort.__getitem__)
         assert len(cls.instrument_ids.values) == 5
 
     @classmethod
     def tearDownClass(cls):
-        response = cls.inst_loader.tearDownClass(cls.client)
+        response = InstrumentLoader.delete_instruments(cls.client)
 
     def test_run_aggregation_with_buy(self):
 
         currency = "GBP"
         # create the transactions
         tran_requests = []
-
-        test_utility = TestDataUtilities(self.client)
         # add the starting cash
-        tran_requests.append(test_utility.build_cash_funds_in_transaction_request(units=51501.0,
-                                                                                  currency=currency,
-                                                                                  trade_date=self.effective_date))
+        tran_requests.append(TestDataUtilities.build_cash_funds_in_transaction_request(
+            units=51501.0,
+            currency=currency,
+            trade_date=self.effective_date))
         # create the transaction requests
         idx = 0
         for instrument in self.sorted_instrument_ids:
-            idx = idx + 1
-            tran_requests.append(test_utility.build_transaction_request(instrument_id=instrument,
-                                                                        units=100.0,
-                                                                        price=100.0 + idx,
-                                                                        currency=currency,
-                                                                        trade_date=self.effective_date,
-                                                                        transaction_type="Buy"))
+            idx += 1
+            tran_requests.append(TestDataUtilities.build_transaction_request(
+                instrument_id=instrument,
+                units=100.0,
+                price=100.0 + idx,
+                currency=currency,
+                trade_date=self.effective_date,
+                transaction_type="Buy"))
 
-        response = self.run_aggregation(create_transaction_requests=tran_requests)
+        response = self.run_aggregation(tran_requests)
         # add in some error checks here?
         assert len(response) > 0
         assert response[0]["Sum(" + self.AGGREGATION_KEY + ")"] == 10000.0             # Barclays
         assert response[1]["Sum(" + self.AGGREGATION_KEY + ")"] == 20000.0             # National Grid
         assert response[2]["Sum(" + self.AGGREGATION_KEY + ")"] == 30000.0             # Sainsburys
 
-    def run_aggregation(self, create_transaction_requests):
+    def run_aggregation(self, tran_requests):
 
         uuid_gen = uuid.uuid4()
         scope = "finbourne"
@@ -145,23 +143,17 @@ class TestFinbourneApi(TestCase):
 
         portfolio_id = portfolio_response.id.code
 
-        # build the transaction requests
-        tran_req = []
-        for i in create_transaction_requests:
-            tran_req.append(i)
-
         # upload the transactions to LUSID
-        upsert_response = self.client.upsert_transactions(scope, portfolio_id, tran_req)
+        upsert_response = self.client.upsert_transactions(scope, portfolio_id, tran_requests)
         assert len(upsert_response.links) > 0
         # set up the prices used for the aggregation in the analytic stores
         # is there a store in the list on the effective date?
-        analytic_stores = self.client.list_analytic_stores().values
-        count = 0
+        analytic_stores = self.client.list_analytic_stores(filter="scope eq" + "'" + scope + "'").values
+        already_exists = False
         for store in analytic_stores:
             if store.date_property == self.effective_date:
-                count = count + 1
-
-        if count == 0:
+                already_exists = True
+        if not already_exists:
             # create the analytic store
             response = self.client.create_analytic_store({"scope": scope, "date": self.effective_date})
 
@@ -169,7 +161,7 @@ class TestFinbourneApi(TestCase):
         idx = 0
         instrument_analytic_list = []
         for instrument in self.sorted_instrument_ids:
-            idx = idx + 1
+            idx += 1
             instrument_analytic_list.append(models.InstrumentAnalytic(
                 instrument, idx * 100.0))
 
