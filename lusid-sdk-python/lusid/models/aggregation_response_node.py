@@ -28,7 +28,7 @@ class AggregationResponseNode(Model):
     """AggregationResponseNode.
 
     :param key:
-    :type key: str
+    :type key: ~lusid.models.AggregateSpec
     :param value:
     :type value: str
     :param depth:
@@ -40,7 +40,7 @@ class AggregationResponseNode(Model):
     """
 
     _attribute_map = {
-        'key': {'key': 'key', 'type': 'str'},
+        'key': {'key': 'key', 'type': 'AggregateSpec'},
         'value': {'key': 'value', 'type': 'str'},
         'depth': {'key': 'depth', 'type': 'int'},
         'properties': {'key': 'properties', 'type': '{object}'},
