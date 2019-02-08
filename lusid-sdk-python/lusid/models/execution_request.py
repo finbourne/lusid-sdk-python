@@ -36,10 +36,10 @@ class ExecutionRequest(Model):
     :param transaction_time: FIX field 60.  Time the transaction represented
      by this ExecutionReport occurred.
     :type transaction_time: datetime
-    :param order_qty: FIX field 38.  Order quantity.
-    :type order_qty: float
-    :param price: FIX field 44.
-    :type price: float
+    :param last_shares: FIX field 32.
+    :type last_shares: float
+    :param last_px: FIX field 31.
+    :type last_px: float
     :param currency: FIX field 15.
     :type currency: str
     """
@@ -49,8 +49,8 @@ class ExecutionRequest(Model):
         'side': {'required': True},
         'instrument_identifiers': {'required': True},
         'transaction_time': {'required': True},
-        'order_qty': {'required': True},
-        'price': {'required': True},
+        'last_shares': {'required': True},
+        'last_px': {'required': True},
         'currency': {'required': True},
     }
 
@@ -59,17 +59,17 @@ class ExecutionRequest(Model):
         'side': {'key': 'side', 'type': 'str'},
         'instrument_identifiers': {'key': 'instrumentIdentifiers', 'type': '{str}'},
         'transaction_time': {'key': 'transactionTime', 'type': 'iso-8601'},
-        'order_qty': {'key': 'orderQty', 'type': 'float'},
-        'price': {'key': 'price', 'type': 'float'},
+        'last_shares': {'key': 'lastShares', 'type': 'float'},
+        'last_px': {'key': 'lastPx', 'type': 'float'},
         'currency': {'key': 'currency', 'type': 'str'},
     }
 
-    def __init__(self, execution_id, side, instrument_identifiers, transaction_time, order_qty, price, currency):
+    def __init__(self, execution_id, side, instrument_identifiers, transaction_time, last_shares, last_px, currency):
         super(ExecutionRequest, self).__init__()
         self.execution_id = execution_id
         self.side = side
         self.instrument_identifiers = instrument_identifiers
         self.transaction_time = transaction_time
-        self.order_qty = order_qty
-        self.price = price
+        self.last_shares = last_shares
+        self.last_px = last_px
         self.currency = currency

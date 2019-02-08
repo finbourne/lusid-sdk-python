@@ -368,7 +368,7 @@ class LUSIDAPI(object):
         self._client = ServiceClient(self.config.credentials, self.config)
 
         client_models = {k: v for k, v in models.__dict__.items() if isinstance(v, type)}
-        self.api_version = '0.9.123'
+        self.api_version = '0.9.127'
         self._serialize = Serializer(client_models)
         self._deserialize = Deserializer(client_models)
 
@@ -6290,6 +6290,67 @@ class LUSIDAPI(object):
 
         return deserialized
     upsert_executions.metadata = {'url': '/api/transactionportfolios/{scope}/{code}/executions'}
+
+    def delete_executions(
+            self, scope, code, execution_ids=None, custom_headers=None, raw=False, **operation_config):
+        """Delete executions.
+
+        Delete one or more executions from a transaction portfolio.
+
+        :param scope: The scope of the portfolio
+        :type scope: str
+        :param code: The code of the portfolio
+        :type code: str
+        :param execution_ids: Ids of executions to delete
+        :type execution_ids: list[str]
+        :param dict custom_headers: headers that will be added to the request
+        :param bool raw: returns the direct response alongside the
+         deserialized response
+        :param operation_config: :ref:`Operation configuration
+         overrides<msrest:optionsforoperations>`.
+        :return: DeletedEntityResponse or ClientRawResponse if raw=true
+        :rtype: ~lusid.models.DeletedEntityResponse or
+         ~msrest.pipeline.ClientRawResponse
+        :raises:
+         :class:`ErrorResponseException<lusid.models.ErrorResponseException>`
+        """
+        # Construct URL
+        url = self.delete_executions.metadata['url']
+        path_format_arguments = {
+            'scope': self._serialize.url("scope", scope, 'str'),
+            'code': self._serialize.url("code", code, 'str')
+        }
+        url = self._client.format_url(url, **path_format_arguments)
+
+        # Construct parameters
+        query_parameters = {}
+        if execution_ids is not None:
+            query_parameters['executionIds'] = self._serialize.query("execution_ids", execution_ids, '[str]', div=',')
+
+        # Construct headers
+        header_parameters = {}
+        header_parameters['Content-Type'] = 'application/json; charset=utf-8'
+        if custom_headers:
+            header_parameters.update(custom_headers)
+
+        # Construct and send request
+        request = self._client.delete(url, query_parameters)
+        response = self._client.send(request, header_parameters, stream=False, **operation_config)
+
+        if response.status_code not in [200]:
+            raise models.ErrorResponseException(self._deserialize, response)
+
+        deserialized = None
+
+        if response.status_code == 200:
+            deserialized = self._deserialize('DeletedEntityResponse', response)
+
+        if raw:
+            client_raw_response = ClientRawResponse(deserialized, response)
+            return client_raw_response
+
+        return deserialized
+    delete_executions.metadata = {'url': '/api/transactionportfolios/{scope}/{code}/executions'}
 
     def get_holdings(
             self, scope, code, by_taxlots=None, effective_at=None, as_at=None, sort_by=None, start=None, limit=None, filter=None, instrument_property_keys=None, custom_headers=None, raw=False, **operation_config):
