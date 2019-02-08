@@ -558,7 +558,11 @@ class TransparencyStrategies(TestFinbourneApi):
                                                                                  op='sum'),
                                                             models.AggregateSpec(key='Holding/default/Cost',
                                                                                  op='sum')
-                                                            ])
+                                                            ],
+                                                        group_by=[
+														    'Holding/default/SubHoldingKey'
+														],														
+															)
 
         # Call LUSID to aggregate across all of our portfolios
         aggregated_group = self.client.get_aggregation_by_group(scope=self.internal_scope_code,
@@ -652,12 +656,17 @@ class TransparencyStrategies(TestFinbourneApi):
         aggregation_request = models.AggregationRequest(recipe_id=models.ResourceId(scope=self.internal_scope_code,
                                                                                     code='default'),
                                                         effective_at=datetime.now(pytz.UTC).isoformat(),
-                                                        metrics=[models.AggregateSpec(key='Holding/default/Units',
-                                                                                      op='sum'),
-                                                                 models.AggregateSpec(key='Holding/default/Cost',
-                                                                                      op='sum')],
-                                                        group_by=[self.strategy_property_key,
-                                                                  'Instrument/default/Name'],
+                                                        metrics=[
+                                                            models.AggregateSpec(key='Instrument/default/Name', op='value'),
+                                                            models.AggregateSpec(self.strategy_property_key, op='value'),
+                                                            models.AggregateSpec(key='Holding/default/SubHoldingKey', op='value'),
+															models.AggregateSpec(key='Holding/default/Units', op='sum'),
+                                                            models.AggregateSpec(key='Holding/default/Cost', op='sum')
+														],
+                                                        group_by=[
+														    self.strategy_property_key,
+                                                            'Instrument/default/Name'
+														],
                                                         filters=[
                                                             models.PropertyFilter(
                                                                 left=self.strategy_property_key,

@@ -636,14 +636,14 @@ class TestFinbourneApi(TestCase):
                 agg_holdings[key] = [sum(tup) for tup in list(zip(*holdings))]
                 # Change format to a list containing a tuple to match our records with only one holding
                 agg_holdings[key] = [(agg_holdings[key][0], agg_holdings[key][1])]
-
+						
         # Iterate over our aggregated results
         for agg_record in aggregated_response.data:
             # Select our aggregated holding
             agg_holding = agg_holdings[agg_record['Holding/default/SubHoldingKey']]
             # Ensure that the units and cost match
-            self.assertEqual(agg_record['Holding/default/Units'], agg_holding[0][0])
-            self.assertEqual(agg_record['Holding/default/Cost'], agg_holding[0][1])
+            self.assertEqual(agg_record['Sum(Holding/default/Units)'], agg_holding[0][0])
+            self.assertEqual(agg_record['Sum(Holding/default/Cost)'], agg_holding[0][1])
 
 if __name__ == '__main__':
     unittest.main()
