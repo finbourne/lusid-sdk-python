@@ -50,7 +50,7 @@ class PropertyDefinition(Model):
     :type data_type_id: ~lusid.models.ResourceId
     :param life_time: Possible values include: 'Perpetual', 'TimeVariant'
     :type life_time: str or ~lusid.models.enum
-    :param type: Possible values include: 'Label', 'Metric'
+    :param type: Possible values include: 'Label', 'Metric', 'Information'
     :type type: str or ~lusid.models.enum
     :param unit_schema: Possible values include: 'NoUnits', 'Basic',
      'Iso4217Currency'

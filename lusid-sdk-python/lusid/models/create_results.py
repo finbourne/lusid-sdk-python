@@ -27,9 +27,9 @@ from msrest.serialization import Model
 class CreateResults(Model):
     """CreateResults.
 
-    :param data:
+    :param data: The data that should be stored in the results cube.
     :type data: str
-    :param scope:
+    :param scope: The scope of the data to be stored.
     :type scope: str
     :param key: The key is a unique point in 'run' space. For a given scope
      and time point, one would wish to
@@ -42,9 +42,10 @@ class CreateResults(Model):
      Also, whether we would accept uploading of groups and then split them
      apart.
     :type key: str
-    :param date_property:
+    :param date_property: The date for which the results should be stored.
     :type date_property: datetime
-    :param format: Possible values include: 'DataReader', 'Portfolio'
+    :param format: The format in which the results are stored/structured.
+     Possible values include: 'DataReader', 'Portfolio'
     :type format: str or ~lusid.models.enum
     """
 

@@ -25,7 +25,10 @@ from msrest.serialization import Model
 
 
 class ValuationReconciliationRequest(Model):
-    """ValuationReconciliationRequest.
+    """Specification for the parameters that define how to perform a
+    reconciliation between two portfolios. This defines
+    the specification for one half of that request, namely how to find and
+    perform an aggregation request on one of the portfolios.
 
     :param portfolio_id: The id of the portfolio on which to run the
      aggregation request

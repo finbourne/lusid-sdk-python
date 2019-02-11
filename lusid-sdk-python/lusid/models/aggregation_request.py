@@ -27,21 +27,33 @@ from msrest.serialization import Model
 class AggregationRequest(Model):
     """Specification object for the parameters of an aggregation.
 
-    :param recipe_id:
+    :param recipe_id: The configuration recipe, consisting of user scope and
+     recipe name, to use in performing the aggregation.
     :type recipe_id: ~lusid.models.ResourceId
     :param as_at: The asAt date to use
     :type as_at: datetime
-    :param effective_at:
+    :param effective_at: The market data time, i.e. the time to run the
+     aggregation request effective of.
     :type effective_at: datetime
-    :param metrics:
+    :param metrics: The set of specifications for items to calculate or
+     retrieve during the aggregation and present in the results.
+     This is logically equivalent to the set of operations in a Sql select
+     statement
+     select [operation1(field1), operation2(field2), ... ] from results
     :type metrics: list[~lusid.models.AggregateSpec]
-    :param group_by:
+    :param group_by: The set of items by which to perform grouping. This
+     primarily matters when one or more of the metric operators is a mapping
+     that reduces set size, e.g. sum or proportion. The group-by statement
+     determines the set of keys by which to break the results out.
     :type group_by: list[str]
-    :param filters:
+    :param filters: A set of filters to use to reduce the data found in a
+     request. Equivalent to the 'where ...' part of a Sql select statement.
+     For example, filter a set of values within a given range or matching a
+     particular value.
     :type filters: list[~lusid.models.PropertyFilter]
-    :param limit:
+    :param limit: limit the results to a particular number of values.
     :type limit: int
-    :param sort:
+    :param sort: Sort the results or not.
     :type sort: str
     """
 
