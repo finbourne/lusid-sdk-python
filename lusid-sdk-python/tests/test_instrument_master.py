@@ -91,56 +91,53 @@ class TestInstrumentMasterFinbourneApi(TestCase):
 
     @classmethod
     def seed_instruments(cls):
-
+        batch_upsert_request = {}
         isin_vod = models.InstrumentProperty(cls.ISIN_PROPERTY_KEY, models.PropertyValue("GB00BH4HKS39"))
         sedol_vod = models.InstrumentProperty(cls.SEDOL_PROPERTY_KEY, models.PropertyValue("BH4HKS3"))
 
-        instrument_definition1 = models.InstrumentDefinition(name="VODAFONE GROUP PLC",
-                                                             identifiers={cls.FIGI_SCHEME: "BBG000C6K6G9",
-                                                                          cls.CUSTOM_INTERNAL_SCHEME: "INTERNAL_ID_1"},
-                                                             properties=[isin_vod, sedol_vod])
+        batch_upsert_request["correlationId1"] = models.InstrumentDefinition(
+            name="VODAFONE GROUP PLC",
+            identifiers={cls.FIGI_SCHEME: "BBG000C6K6G9",
+                         cls.CUSTOM_INTERNAL_SCHEME: "INTERNAL_ID_1"},
+            properties=[isin_vod, sedol_vod])
 
         isin_barc = models.InstrumentProperty(cls.ISIN_PROPERTY_KEY, models.PropertyValue("GB0031348658"))
         sedol_barc = models.InstrumentProperty(cls.SEDOL_PROPERTY_KEY, models.PropertyValue("3134865"))
 
-        instrument_definition2 = models.InstrumentDefinition(name="BARCLAYS PLC",
-                                                             identifiers={cls.FIGI_SCHEME: "BBG000C04D57",
-                                                                          cls.CUSTOM_INTERNAL_SCHEME: "INTERNAL_ID_2"},
-                                                             properties=[isin_barc, sedol_barc])
+        batch_upsert_request["correlationId2"] = models.InstrumentDefinition(
+            name="BARCLAYS PLC",
+            identifiers={cls.FIGI_SCHEME: "BBG000C04D57",
+                         cls.CUSTOM_INTERNAL_SCHEME: "INTERNAL_ID_2"},
+            properties=[isin_barc, sedol_barc])
 
         isin_grid = models.InstrumentProperty(cls.ISIN_PROPERTY_KEY, models.PropertyValue("GB00BDR05C01"))
         sedol_grid = models.InstrumentProperty(cls.SEDOL_PROPERTY_KEY, models.PropertyValue("BDR05C0"))
 
-        instrument_definition3 = models.InstrumentDefinition(name="NATIONAL GRID PLC",
-                                                             identifiers={cls.FIGI_SCHEME: "BBG000FV67Q4",
-                                                                          cls.CUSTOM_INTERNAL_SCHEME: "INTERNAL_ID_3"},
-                                                             properties=[isin_grid, sedol_grid])
+        batch_upsert_request["correlationId3"] = models.InstrumentDefinition(
+            name="NATIONAL GRID PLC",
+            identifiers={cls.FIGI_SCHEME: "BBG000FV67Q4",
+                         cls.CUSTOM_INTERNAL_SCHEME: "INTERNAL_ID_3"},
+            properties=[isin_grid, sedol_grid])
 
         isin_sains = models.InstrumentProperty(cls.ISIN_PROPERTY_KEY, models.PropertyValue("GB00B019KW72"))
         sedol_sains = models.InstrumentProperty(cls.SEDOL_PROPERTY_KEY, models.PropertyValue("B019KW7"))
 
-        instrument_definition4 = models.InstrumentDefinition(name="SAINSBURY (J) PLC",
-                                                             identifiers={cls.FIGI_SCHEME: "BBG000BF0KW3",
-                                                                          cls.CUSTOM_INTERNAL_SCHEME: "INTERNAL_ID_4"},
-                                                             properties=[isin_sains, sedol_sains])
+        batch_upsert_request["correlationId4"] = models.InstrumentDefinition(
+            name="SAINSBURY (J) PLC",
+            identifiers={cls.FIGI_SCHEME: "BBG000BF0KW3",
+                         cls.CUSTOM_INTERNAL_SCHEME: "INTERNAL_ID_4"},
+            properties=[isin_sains, sedol_sains])
 
         isin_tayl = models.InstrumentProperty(cls.ISIN_PROPERTY_KEY, models.PropertyValue("GB0008782301"))
         sedol_tayl = models.InstrumentProperty(cls.SEDOL_PROPERTY_KEY, models.PropertyValue("0878230"))
 
-        instrument_definition5 = models.InstrumentDefinition(name="TAYLOR WIMPEY PLC",
-                                                             identifiers={cls.FIGI_SCHEME: "BBG000BF4KL1",
-                                                                          cls.CUSTOM_INTERNAL_SCHEME: "INTERNAL_ID_5"},
-                                                             properties=[isin_tayl, sedol_tayl])
+        batch_upsert_request["correlationId5"] = models.InstrumentDefinition(
+            name="TAYLOR WIMPEY PLC",
+            identifiers={cls.FIGI_SCHEME: "BBG000BF4KL1",
+                         cls.CUSTOM_INTERNAL_SCHEME: "INTERNAL_ID_5"},
+            properties=[isin_tayl, sedol_tayl])
 
-        upsert_response = cls.client.upsert_instruments(
-            {
-                "correlationId1": instrument_definition1,
-                "correlationId2": instrument_definition2,
-                "correlationId3": instrument_definition3,
-                "correlationId4": instrument_definition4,
-                "correlationId5": instrument_definition5
-            }
-        )
+        upsert_response = cls.client.upsert_instruments(requests=batch_upsert_request)
 
         assert len(upsert_response.values) == 5
         return upsert_response
