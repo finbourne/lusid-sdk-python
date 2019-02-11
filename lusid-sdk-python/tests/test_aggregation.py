@@ -20,7 +20,7 @@ except ImportError:
     from urllib import pathname2url
 
 
-class TestFinbourneApi(TestCase):
+class TestAggregationFinbourneApi(TestCase):
     client = None
     effective_date = datetime(2018, 1, 1, tzinfo=pytz.utc)
 

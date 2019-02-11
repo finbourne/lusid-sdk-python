@@ -19,7 +19,7 @@ except ImportError:
     from urllib import pathname2url
 
 
-class TestFinbourneApi(TestCase):
+class TestHoldingsFinbourneApi(TestCase):
     client = None
     effective_date = datetime(2018, 1, 1, tzinfo=pytz.utc)
 
@@ -112,22 +112,21 @@ class TestFinbourneApi(TestCase):
         portfolio_code = TestDataUtilities.create_transaction_portfolio(self.client, self.SCOPE)
         # add the starting cash
         tran_requests.append(TestDataUtilities.build_cash_funds_in_transaction_request(units=100000.0,
-                                                                                  currency=currency,
-                                                                                  trade_date=day0))
+                                                                                       currency=currency,
+                                                                                       trade_date=day0))
         # create initial transactions
         idx = 0
         # we want to create transactions based on the first 3 instruments
-        for instrument in self.sorted_instrument_ids:
-            if idx <= 2:
+        for idx in range(3):
+            instrument = self.sorted_instrument_ids[idx]
 
-                tran_requests.append(TestDataUtilities.build_transaction_request
-                                     (instrument_id=instrument,
-                                      units=100.0,
-                                      price=101.0 + idx,
-                                      currency=currency,
-                                      trade_date=day0,
-                                      transaction_type="Buy"))
-            idx = idx + 1
+            tran_requests.append(TestDataUtilities.build_transaction_request
+                                 (instrument_id=instrument,
+                                  units=100.0,
+                                  price=101.0 + idx,
+                                  currency=currency,
+                                  trade_date=day0,
+                                  transaction_type="Buy"))
 
         # on day 5, add a transaction using the 4th instrument [3], and increase the amount of the second [1]
         tran_requests.append(TestDataUtilities.build_transaction_request(
@@ -200,25 +199,26 @@ class TestFinbourneApi(TestCase):
         # add the cash
         holding_adj.append(models.AdjustHoldingRequest(cash_inst, [models.TargetTaxLotRequest(100000.0)]))
         # instrument 1
-        holding_adj.append(models.AdjustHoldingRequest(self.sorted_instrument_ids[0],
-                                                       [models.TargetTaxLotRequest(units=100.0,
-                                                                                   cost=models.CurrencyAndAmount(10100.0, currency),
-                                                                                   portfolio_cost=10100.0,
-                                                                                   price=101.0,
-                                                                                   purchase_date=day0,
-                                                                                   settlement_date=day0)]))
+        holding_adj.append(models.AdjustHoldingRequest(
+            self.sorted_instrument_ids[0], [models.TargetTaxLotRequest(
+                                                units=100.0,
+                                                cost=models.CurrencyAndAmount(10100.0, currency),
+                                                portfolio_cost=10100.0,
+                                                price=101.0,
+                                                purchase_date=day0,
+                                                settlement_date=day0)]))
 
-        holding_adj.append(models.AdjustHoldingRequest(self.sorted_instrument_ids[1],
-                                                       [models.TargetTaxLotRequest(units=100.0,
-                                                                                   cost=models.CurrencyAndAmount(
-                                                                                       10200.0, currency),
-                                                                                   portfolio_cost=10200.0,
-                                                                                   price=102.0,
-                                                                                   purchase_date=day0,
-                                                                                   settlement_date=day0)]))
+        holding_adj.append(models.AdjustHoldingRequest(
+            self.sorted_instrument_ids[1], [models.TargetTaxLotRequest(
+                                                units=100.0,
+                                                cost=models.CurrencyAndAmount(10200.0, currency),
+                                                portfolio_cost=10200.0,
+                                                price=102.0,
+                                                purchase_date=day0,
+                                                settlement_date=day0)]))
 
         # set the initial holdings on day0
-        upsert_response = self.client.set_holdings(self.SCOPE, portfolio_code, day0, holding_adj)
+        set_holdings_response = self.client.set_holdings(self.SCOPE, portfolio_code, day0, holding_adj)
 
         # add subsequent transactions on t+5
         tran_requests.append(TestDataUtilities.build_transaction_request(

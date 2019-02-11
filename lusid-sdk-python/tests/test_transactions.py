@@ -20,7 +20,7 @@ except ImportError:
     from urllib import pathname2url
 
 
-class TestTransactionsAPI(TestCase):
+class TestTransactionsFinbourneAPI(TestCase):
     client = None
     instrumentIds = []
 
