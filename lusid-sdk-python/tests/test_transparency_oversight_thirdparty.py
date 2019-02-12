@@ -399,9 +399,11 @@ class TransparencyOversightThirdParty(TestFinbourneApi):
             # Iterate over the holdings in each portfolio
             for instrument_name, holding in portfolio.items():
                 # Create our adjust holdings request using our instrument universe to get the LUID identifier for the instrument
+                Luid = self.instrument_universe[instrument_name]['identifiers']['LUID']
                 holding_adjustments.append(
                     models.AdjustHoldingRequest(
-                        instrument_uid=self.instrument_universe[instrument_name]['identifiers']['LUID'],
+                        instrument_identifiers={
+                            'Instrument/default/LusidInstrumentId': Luid},
                         tax_lots=[
                             models.TargetTaxLotRequest(units=holding['quantity'],
                                                        cost=models.CurrencyAndAmount(
@@ -573,7 +575,8 @@ class TransparencyOversightThirdParty(TestFinbourneApi):
                 batch_transaction_requests.append(
                     models.TransactionRequest(transaction_id=transaction_id,
                                               type=transaction['type'],
-                                              instrument_uid=transaction['instrument_uid'],
+                                              instrument_identifiers={
+                                                  'Instrument/default/LusidInstrumentId': transaction['instrument_uid']},
                                               transaction_date=transaction['transaction_date'],
                                               settlement_date=transaction['settlement_date'],
                                               units=transaction['units'],
@@ -709,9 +712,11 @@ class TransparencyOversightThirdParty(TestFinbourneApi):
             # Iterate over the holdings in each portfolio
             for instrument_name, holding in portfolio.items():
                 # Create our adjust holdings request using our instrument universe to get the LUID identifier for the instrument
+                Luid = self.instrument_universe[instrument_name]['identifiers']['LUID']
                 holding_adjustments.append(
                     models.AdjustHoldingRequest(
-                        instrument_uid=self.instrument_universe[instrument_name]['identifiers']['LUID'],
+                        instrument_identifers={
+                            'Instrument/default/LusidInstrumentId': Luid},
                         tax_lots=[
                             models.TargetTaxLotRequest(units=holding['quantity'],
                                                        cost=models.CurrencyAndAmount(

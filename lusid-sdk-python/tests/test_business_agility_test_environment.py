@@ -226,18 +226,20 @@ class BusinessAgilityTestEnvironment(TestFinbourneApi):
         # Create a holding adjustment for each instrument using the information given to use by the transition manager
         for instrument_name, instrument in self.transferred_instruments.items():
             holding_adjustments.append(
-                models.AdjustHoldingRequest(instrument_uid=instrument['identifiers']['LUID'],
-                                            tax_lots=[
-                                                models.TargetTaxLotRequest(units=instrument['quantity'],
-                                                                           cost=models.CurrencyAndAmount(
-                                                                               amount=instrument['quantity'] *
-                                                                                      instrument['price'],
-                                                                               currency=instrument['currency']),
-                                                                           portfolio_cost=instrument['quantity'] *
-                                                                                          instrument['price'],
-                                                                           price=instrument['price'])
-                                            ]
-                                            )
+                models.AdjustHoldingRequest(
+                    instrument_identifiers={
+                        'Instrument/default/LusidInstrumentId':instrument['identifiers']['LUID']},
+                    tax_lots=[
+                        models.TargetTaxLotRequest(units=instrument['quantity'],
+                                                   cost=models.CurrencyAndAmount(
+                                                       amount=instrument['quantity'] *
+                                                              instrument['price'],
+                                                       currency=instrument['currency']),
+                                                   portfolio_cost=instrument['quantity'] *
+                                                                  instrument['price'],
+                                                   price=instrument['price'])
+                    ]
+                    )
             )
 
         '''
@@ -498,7 +500,8 @@ class BusinessAgilityTestEnvironment(TestFinbourneApi):
             batch_transactions_request.append(
                 models.TransactionRequest(transaction_id=transaction_id,
                                           type=transaction['type'],
-                                          instrument_uid=transaction['instrument_uid'],
+                                          instrument_identifiers={
+                                              'Instrument/default/LusidInstrumentId':transaction['instrument_uid']},
                                           transaction_date=transaction['transaction_date'],
                                           settlement_date=transaction['settlement_date'],
                                           units=transaction['units'],
@@ -583,7 +586,8 @@ class BusinessAgilityTestEnvironment(TestFinbourneApi):
             batch_transactions_request.append(
                 models.TransactionRequest(transaction_id=transaction_id,
                                           type=transaction['type'],
-                                          instrument_uid=transaction['instrument_uid'],
+                                          instrument_identifiers={
+                                              'Instrument/default/LusidInstrumentId':transaction['instrument_uid']},
                                           transaction_date=transaction['transaction_date'],
                                           settlement_date=transaction['settlement_date'],
                                           units=transaction['units'],

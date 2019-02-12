@@ -311,11 +311,13 @@ class TransparencyStrategies(TestFinbourneApi):
             # Iterate over the transactions in each portfolio
             for instrument_name, transaction in transactions.items():
                 # Create our request using our instrument universe to get the LUID identifier for the instrument
+                Luid = self.instrument_universe[instrument_name]['identifiers']['LUID']
                 stock_in_transactions.append(
                     models.TransactionRequest(transaction_id='tid_{}'.format(uuid.uuid4()),
                                               type='StockIn',
-                                              instrument_uid=self.instrument_universe[instrument_name]['identifiers'][
-                                                  'LUID'],
+                                              instrument_identifiers={
+                                                  'Instrument/default/LusidInstrumentId': Luid
+                                              },
                                               transaction_date=self.effective_date.isoformat(),
                                               settlement_date=self.effective_date.isoformat(),
                                               units=transaction['quantity'],
@@ -469,7 +471,8 @@ class TransparencyStrategies(TestFinbourneApi):
                 batch_transaction_requests.append(
                     models.TransactionRequest(transaction_id=transaction_id,
                                               type=transaction['type'],
-                                              instrument_uid=transaction['instrument_uid'],
+                                              instrument_identifiers={
+                                                  'Instrument/default/LusidInstrumentId': transaction['instrument_uid']},
                                               transaction_date=transaction['transaction_date'],
                                               settlement_date=transaction['settlement_date'],
                                               units=transaction['units'],
