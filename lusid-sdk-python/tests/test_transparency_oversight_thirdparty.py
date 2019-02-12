@@ -260,39 +260,22 @@ class TransparencyOversightThirdParty(TestFinbourneApi):
         self.instrument_upsert_asserts(batch_upsert_response, batch_upsert_request)
 
         '''
-        Every instrument that is created is in LUSID given a unique LUSID Instrument Id or LUID for short. This ID is 
-        used for many methods and is how the API identifies an instrument. 
-
-        Note that there is also a match feature that allows you to search for instruments using the identifiers that we 
-        defined for each instrument, however it is preferred to use the LUID as this is guaranteed to be unique and 
-        there is absolutely no chance of a collision. 
-
-        We therefore want to add our newly created LUIDs to our initial holdings for future use
-        '''
-
-        # Loop over our recently upserted instruments
-        for instrument_name, instrument in batch_upsert_response.values.items():
-            # Add our LUID as a new identifier so that we can use it in our calls later
-            self.instrument_universe[instrument_name]['identifiers']['LUID'] = instrument.lusid_instrument_id
-
-
-        '''
         Now that we have our instruments added we can fill our initial holdings to model our live portfolio. 
         
         We will create the holdings data using a nested dictionary. Note that in reality this data would likely come
         from a historical report in a format such as CSV. In this case, a library such as Pandas can be used to 
         handle the data. 
         
-        In LUSID the LUID for cash is the prefix CCY_ followed by the currency. For example British Pounds have a LUID
-        of CCY_GBP. We will add these to our instrument universe. 
+        In LUSID the cash is identified by its currency. For example British Pounds is GBP. This is attached to the
+        default currency property Instrument/default/Currency
         '''
 
         self.instrument_universe['GBP_Cash'] = {
-                'identifiers': {'LUID': 'CCY_GBP'},
+                'identifiers': {'ClientInternal': 'GBP'},
                 'currency': 'GBP'}
 
         self.instrument_universe['USD_Cash'] = {
-                'identifiers': {'LUID': 'CCY_USD'},
+                'identifiers': {'ClientInternal': 'USD'},
                 'currency': 'USD'}
 
         self.client_holdings = {
@@ -399,11 +382,18 @@ class TransparencyOversightThirdParty(TestFinbourneApi):
             # Iterate over the holdings in each portfolio
             for instrument_name, holding in portfolio.items():
                 # Create our adjust holdings request using our instrument universe to get the LUID identifier for the instrument
-                Luid = self.instrument_universe[instrument_name]['identifiers']['LUID']
+
+                if 'Cash' in instrument_name:
+                    identifier_key = 'Instrument/default/Currency'
+                else:
+                    identifier_key = 'Instrument/default/ClientInternal'
+
+                identifier = self.instrument_universe[instrument_name]['identifiers']['ClientInternal']
+
                 holding_adjustments.append(
                     models.AdjustHoldingRequest(
                         instrument_identifiers={
-                            'Instrument/default/LusidInstrumentId': Luid},
+                            identifier_key : identifier},
                         tax_lots=[
                             models.TargetTaxLotRequest(units=holding['quantity'],
                                                        cost=models.CurrencyAndAmount(
@@ -470,7 +460,8 @@ class TransparencyOversightThirdParty(TestFinbourneApi):
                 'client-{}-strategy-balanced'.format(self.client_1_portfolio_group_id): {
                     'tid_{}'.format(uuid.uuid4()) : {
                         'type': 'Sell',
-                        'instrument_uid': self.instrument_universe['WPP_LondonStockEx_WPP']['identifiers']['LUID'],
+                        'instrument_uid': self.instrument_universe['WPP_LondonStockEx_WPP']['identifiers'][
+                            'ClientInternal'],
                         'transaction_date': (self.yesterday_trade_open + timedelta(hours=hours[0])).isoformat(),
                         'settlement_date': (self.yesterday_trade_open + timedelta(days=2)).isoformat(),
                         'units': 265600,
@@ -481,7 +472,8 @@ class TransparencyOversightThirdParty(TestFinbourneApi):
                 'client-{}-strategy-tech'.format(self.client_1_portfolio_group_id): {
                     'tid_{}'.format(uuid.uuid4()): {
                         'type': 'Buy',
-                        'instrument_uid': self.instrument_universe['MicroFocus_LondonStockEx_MCRO']['identifiers']['LUID'],
+                        'instrument_uid': self.instrument_universe['MicroFocus_LondonStockEx_MCRO']['identifiers'][
+                            'ClientInternal'],
                         'transaction_date': (self.yesterday_trade_open + timedelta(hours=hours[1])).isoformat(),
                         'settlement_date': (self.yesterday_trade_open + timedelta(days=2)).isoformat(),
                         'units': 15074,
@@ -494,7 +486,7 @@ class TransparencyOversightThirdParty(TestFinbourneApi):
                     'tid_{}'.format(uuid.uuid4()): {
                         'type': 'Sell',
                         'instrument_uid': self.instrument_universe['Kingfisher_LondonStockEx_KGF']['identifiers'][
-                            'LUID'],
+                            'ClientInternal'],
                         'transaction_date': (self.yesterday_trade_open + timedelta(hours=hours[2])).isoformat(),
                         'settlement_date': (self.yesterday_trade_open + timedelta(days=2)).isoformat(),
                         'units': 325000,
@@ -503,7 +495,8 @@ class TransparencyOversightThirdParty(TestFinbourneApi):
                     },
                     'tid_{}'.format(uuid.uuid4()): {
                         'type': 'Buy',
-                        'instrument_uid': self.instrument_universe['UKGiltTreasury_4.5_2034']['identifiers']['LUID'],
+                        'instrument_uid': self.instrument_universe['UKGiltTreasury_4.5_2034']['identifiers'][
+                            'ClientInternal'],
                         'transaction_date': (self.yesterday_trade_open + timedelta(hours=hours[3])).isoformat(),
                         'settlement_date': (self.yesterday_trade_open + timedelta(days=2)).isoformat(),
                         'units': 10501,
@@ -516,7 +509,7 @@ class TransparencyOversightThirdParty(TestFinbourneApi):
                     'tid_{}'.format(uuid.uuid4()): {
                         'type': 'Buy',
                         'instrument_uid': self.instrument_universe['UKGiltTreasury_3.75_2021']['identifiers'][
-                            'LUID'],
+                            'ClientInternal'],
                         'transaction_date': (self.yesterday_trade_open + timedelta(hours=hours[4])).isoformat(),
                         'settlement_date': (self.yesterday_trade_open + timedelta(days=2)).isoformat(),
                         'units': 24000,
@@ -525,7 +518,8 @@ class TransparencyOversightThirdParty(TestFinbourneApi):
                     },
                     'tid_{}'.format(uuid.uuid4()): {
                         'type': 'Sell',
-                        'instrument_uid': self.instrument_universe['USTreasury_2.00_2021']['identifiers']['LUID'],
+                        'instrument_uid': self.instrument_universe['USTreasury_2.00_2021']['identifiers'][
+                            'ClientInternal'],
                         'transaction_date': (self.yesterday_trade_open + timedelta(hours=hours[5])).isoformat(),
                         'settlement_date': (self.yesterday_trade_open + timedelta(days=2)).isoformat(),
                         'units': 57000,
@@ -538,7 +532,7 @@ class TransparencyOversightThirdParty(TestFinbourneApi):
                     'tid_{}'.format(uuid.uuid4()): {
                         'type': 'Sell',
                         'instrument_uid': self.instrument_universe['Whitebread_LondonStockEx_WTB']['identifiers'][
-                            'LUID'],
+                            'ClientInternal'],
                         'transaction_date': (self.yesterday_trade_open + timedelta(hours=hours[6])).isoformat(),
                         'settlement_date': (self.yesterday_trade_open + timedelta(days=2)).isoformat(),
                         'units': 70000,
@@ -547,7 +541,8 @@ class TransparencyOversightThirdParty(TestFinbourneApi):
                     },
                     'tid_{}'.format(uuid.uuid4()): {
                         'type': 'Sell',
-                        'instrument_uid': self.instrument_universe['TESCO_LondonStockEx_TSCO']['identifiers']['LUID'],
+                        'instrument_uid': self.instrument_universe['TESCO_LondonStockEx_TSCO']['identifiers'][
+                            'ClientInternal'],
                         'transaction_date': (self.yesterday_trade_open + timedelta(hours=hours[7])).isoformat(),
                         'settlement_date': (self.yesterday_trade_open + timedelta(days=2)).isoformat(),
                         'units': 342000,
@@ -576,7 +571,7 @@ class TransparencyOversightThirdParty(TestFinbourneApi):
                     models.TransactionRequest(transaction_id=transaction_id,
                                               type=transaction['type'],
                                               instrument_identifiers={
-                                                  'Instrument/default/LusidInstrumentId': transaction['instrument_uid']},
+                                                  'Instrument/default/ClientInternal': transaction['instrument_uid']},
                                               transaction_date=transaction['transaction_date'],
                                               settlement_date=transaction['settlement_date'],
                                               units=transaction['units'],
@@ -712,11 +707,17 @@ class TransparencyOversightThirdParty(TestFinbourneApi):
             # Iterate over the holdings in each portfolio
             for instrument_name, holding in portfolio.items():
                 # Create our adjust holdings request using our instrument universe to get the LUID identifier for the instrument
-                Luid = self.instrument_universe[instrument_name]['identifiers']['LUID']
+                if 'Cash' in instrument_name:
+                    identifier_key = 'Instrument/default/Currency'
+                else:
+                    identifier_key = 'Instrument/default/ClientInternal'
+
+                identifier = self.instrument_universe[instrument_name]['identifiers']['ClientInternal']
+
                 holding_adjustments.append(
                     models.AdjustHoldingRequest(
-                        instrument_identifers={
-                            'Instrument/default/LusidInstrumentId': Luid},
+                        instrument_identifiers={
+                            identifier_key: identifier},
                         tax_lots=[
                             models.TargetTaxLotRequest(units=holding['quantity'],
                                                        cost=models.CurrencyAndAmount(
@@ -731,9 +732,9 @@ class TransparencyOversightThirdParty(TestFinbourneApi):
                 )
 
             adjust_holdings_response = self.client.adjust_holdings(scope=self.fund_accountant_scope_code,
-                                                              code=portfolio_name,
-                                                              effective_at=self.this_morning,
-                                                              holding_adjustments=holding_adjustments)
+                                                                   code=portfolio_name,
+                                                                   effective_at=self.this_morning,
+                                                                   holding_adjustments=holding_adjustments)
 
             # Tests to verify that the holdings are correct
             self.verify_holdings_asserts(holding_adjustments=holding_adjustments,

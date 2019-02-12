@@ -186,18 +186,6 @@ class BusinessAgilityTestEnvironment(TestFinbourneApi):
         self.instrument_upsert_asserts(batch_upsert_response, batch_upsert_request)
 
         '''
-        Every instrument that is created is in LUSID given a unique LUSID Instrument Id or LUID for short. This ID is 
-        used for many methods and is how the API identifies an instrument. 
-
-        We therefore want to add our newly created LUIDs to our initial holdings for future use
-        '''
-
-        # Loop over our recently upserted instruments
-        for instrument_name, instrument in batch_upsert_response.values.items():
-            # Add our LUID as a new identifier so that we can use it in our calls later
-            self.transferred_instruments[instrument_name]['identifiers']['LUID'] = instrument.lusid_instrument_id
-
-        '''
         Now that we have our instruments added we can create transactions to fill our initial holdings.
 
         As we have just received the assets from the transition manager we are unsure of the purchase dates of each
@@ -225,10 +213,18 @@ class BusinessAgilityTestEnvironment(TestFinbourneApi):
 
         # Create a holding adjustment for each instrument using the information given to use by the transition manager
         for instrument_name, instrument in self.transferred_instruments.items():
+
+            if 'Cash' in instrument_name:
+                identifier_key = 'Instrument/default/Currency'
+            else:
+                identifier_key = 'Instrument/default/ClientInternal'
+
+            identifier = self.transferred_instruments[instrument_name]['identifiers']['ClientInternal']
+
             holding_adjustments.append(
                 models.AdjustHoldingRequest(
                     instrument_identifiers={
-                        'Instrument/default/LusidInstrumentId':instrument['identifiers']['LUID']},
+                        identifier_key: identifier},
                     tax_lots=[
                         models.TargetTaxLotRequest(units=instrument['quantity'],
                                                    cost=models.CurrencyAndAmount(
@@ -424,12 +420,6 @@ class BusinessAgilityTestEnvironment(TestFinbourneApi):
         # Asserts - Confirm that the response is as expected
         self.instrument_upsert_asserts(batch_upsert_response, batch_upsert_request)
 
-        # Loop over our recently upserted instruments
-        for instrument_name, instrument in batch_upsert_response.values.items():
-            # Add our LUID as a new identifier so that we can use it in our calls later
-
-            self.new_instruments[instrument_name]['identifiers']['LUID'] = instrument.lusid_instrument_id
-
         '''
         Now that we've added our new instruments, let's define our transactions. For each transaction we will
         generate a unique id and prefix it with 'tid_'. These will be our convention for naming transactions. 
@@ -440,7 +430,8 @@ class BusinessAgilityTestEnvironment(TestFinbourneApi):
         transactions = {
             'tid_{}'.format(uuid.uuid4()): {
                 'type': 'Sell',
-                'instrument_uid': self.transferred_instruments['WPP_LondonStockEx_WPP']['identifiers']['LUID'],
+                'instrument_uid': self.transferred_instruments['WPP_LondonStockEx_WPP']['identifiers'][
+                    'ClientInternal'],
                 'transaction_date': (datetime.now(pytz.UTC) + timedelta(days=2)).isoformat(),
                 'settlement_date': (datetime.now(pytz.UTC) + timedelta(days=3)).isoformat(),
                 'units': 410000,
@@ -450,7 +441,8 @@ class BusinessAgilityTestEnvironment(TestFinbourneApi):
 
             'tid_{}'.format(uuid.uuid4()): {
                 'type': 'Buy',
-                'instrument_uid': self.new_instruments['Unilever_LondonStockEx_ULVR']['identifiers']['LUID'],
+                'instrument_uid': self.new_instruments['Unilever_LondonStockEx_ULVR']['identifiers'][
+                    'ClientInternal'],
                 'transaction_date': (datetime.now(pytz.UTC) + timedelta(days=2)).isoformat(),
                 'settlement_date': (datetime.now(pytz.UTC) + timedelta(days=3)).isoformat(),
                 'units': 70000,
@@ -460,7 +452,8 @@ class BusinessAgilityTestEnvironment(TestFinbourneApi):
 
             'tid_{}'.format(uuid.uuid4()): {
                 'type': 'Sell',
-                'instrument_uid': self.transferred_instruments['Kingfisher_LondonStockEx_KGF']['identifiers']['LUID'],
+                'instrument_uid': self.transferred_instruments['Kingfisher_LondonStockEx_KGF']['identifiers'][
+                    'ClientInternal'],
                 'transaction_date': (datetime.now(pytz.UTC) + timedelta(days=2)).isoformat(),
                 'settlement_date': (datetime.now(pytz.UTC) + timedelta(days=3)).isoformat(),
                 'units': 2879200,
@@ -470,7 +463,8 @@ class BusinessAgilityTestEnvironment(TestFinbourneApi):
 
             'tid_{}'.format(uuid.uuid4()): {
                 'type': 'Buy',
-                'instrument_uid': self.new_instruments['ABFood_LondonStockEx_ABF']['identifiers']['LUID'],
+                'instrument_uid': self.new_instruments['ABFood_LondonStockEx_ABF']['identifiers'][
+                    'ClientInternal'],
                 'transaction_date': (datetime.now(pytz.UTC) + timedelta(days=2)).isoformat(),
                 'settlement_date': (datetime.now(pytz.UTC) + timedelta(days=4)).isoformat(),
                 'units': 180000,
@@ -480,7 +474,8 @@ class BusinessAgilityTestEnvironment(TestFinbourneApi):
 
             'tid_{}'.format(uuid.uuid4()): {
                 'type': 'Buy',
-                'instrument_uid': self.new_instruments['Glencore_LondonStockEx_GLEN']['identifiers']['LUID'],
+                'instrument_uid': self.new_instruments['Glencore_LondonStockEx_GLEN']['identifiers'][
+                    'ClientInternal'],
                 'transaction_date': (datetime.now(pytz.UTC) + timedelta(days=3)).isoformat(),
                 'settlement_date': (datetime.now(pytz.UTC) + timedelta(days=5)).isoformat(),
                 'units': 669180,
@@ -497,11 +492,12 @@ class BusinessAgilityTestEnvironment(TestFinbourneApi):
         batch_transactions_request = []
         # Create our batch
         for transaction_id, transaction in transactions.items():
+
             batch_transactions_request.append(
                 models.TransactionRequest(transaction_id=transaction_id,
                                           type=transaction['type'],
                                           instrument_identifiers={
-                                              'Instrument/default/LusidInstrumentId':transaction['instrument_uid']},
+                                              'Instrument/default/ClientInternal':transaction['instrument_uid']},
                                           transaction_date=transaction['transaction_date'],
                                           settlement_date=transaction['settlement_date'],
                                           units=transaction['units'],
@@ -557,7 +553,7 @@ class BusinessAgilityTestEnvironment(TestFinbourneApi):
         transactions = {
             'tid_{}'.format(uuid.uuid4()): {
                 'type': 'Sell',
-                'instrument_uid': self.new_instruments['ABFood_LondonStockEx_ABF']['identifiers']['LUID'],
+                'instrument_uid': self.new_instruments['ABFood_LondonStockEx_ABF']['identifiers']['ClientInternal'],
                 'transaction_date': (datetime.now(pytz.UTC) + timedelta(days=6)).isoformat(),
                 'settlement_date': (datetime.now(pytz.UTC) + timedelta(days=8)).isoformat(),
                 'units': 50000,
@@ -567,7 +563,7 @@ class BusinessAgilityTestEnvironment(TestFinbourneApi):
 
             'tid_{}'.format(uuid.uuid4()): {
                 'type': 'Buy',
-                'instrument_uid': self.new_instruments['Glencore_LondonStockEx_GLEN']['identifiers']['LUID'],
+                'instrument_uid': self.new_instruments['Glencore_LondonStockEx_GLEN']['identifiers']['ClientInternal'],
                 'transaction_date': (datetime.now(pytz.UTC) + timedelta(days=6)).isoformat(),
                 'settlement_date': (datetime.now(pytz.UTC) + timedelta(days=8)).isoformat(),
                 'units': 100000,
@@ -587,7 +583,7 @@ class BusinessAgilityTestEnvironment(TestFinbourneApi):
                 models.TransactionRequest(transaction_id=transaction_id,
                                           type=transaction['type'],
                                           instrument_identifiers={
-                                              'Instrument/default/LusidInstrumentId':transaction['instrument_uid']},
+                                              'Instrument/default/ClientInternal':transaction['instrument_uid']},
                                           transaction_date=transaction['transaction_date'],
                                           settlement_date=transaction['settlement_date'],
                                           units=transaction['units'],
