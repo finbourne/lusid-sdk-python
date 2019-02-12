@@ -233,27 +233,15 @@ class TransparencyStrategies(TestFinbourneApi):
         self.instrument_upsert_asserts(batch_upsert_response, batch_upsert_request)
 
         '''
-        Every instrument that is created is in LUSID given a unique LUSID Instrument Id or LUID for short. This ID is 
-        used for many methods and is how LUSID uniquely identifies an instrument.
-
-        We therefore want to add our newly created LUIDs to our local instrument universe for later use.
-        
-        In addition in LUSID there are default cash securities available to us. The LUID for cash is the prefix CCY_ 
-        followed by the currency. For example British Pounds have a LUID of CCY_GBP. We will aslo add these to our local
-        instrument universe. 
+        In addition to or instruments we also have some cash. LUSID identifies cash by its ISO currency code.
         '''
-        # Loop over our recently upserted instruments
-        for instrument_name, instrument in batch_upsert_response.values.items():
-            # Add our LUID as a new identifier so that we can use it in our calls later
-            self.instrument_universe[instrument_name]['identifiers']['LUID'] = instrument.lusid_instrument_id
-
         self.instrument_universe['GBP_Cash'] = {
-            'identifiers': {'LUID': 'CCY_GBP'},
-            'currency': 'GBP'}
+                'identifiers': {'ClientInternal': 'GBP'},
+                'currency': 'GBP'}
 
         self.instrument_universe['USD_Cash'] = {
-            'identifiers': {'LUID': 'CCY_USD'},
-            'currency': 'USD'}
+                'identifiers': {'ClientInternal': 'USD'},
+                'currency': 'USD'}
 
         '''
         Now that we have our securities added to our instrument master we can load our take on balances.
@@ -311,12 +299,18 @@ class TransparencyStrategies(TestFinbourneApi):
             # Iterate over the transactions in each portfolio
             for instrument_name, transaction in transactions.items():
                 # Create our request using our instrument universe to get the LUID identifier for the instrument
-                Luid = self.instrument_universe[instrument_name]['identifiers']['LUID']
+                if 'Cash' in instrument_name:
+                    identifier_key = 'Instrument/default/Currency'
+                else:
+                    identifier_key = 'Instrument/default/ClientInternal'
+
+                identifier = self.instrument_universe[instrument_name]['identifiers']['ClientInternal']
+
                 stock_in_transactions.append(
                     models.TransactionRequest(transaction_id='tid_{}'.format(uuid.uuid4()),
                                               type='StockIn',
                                               instrument_identifiers={
-                                                  'Instrument/default/LusidInstrumentId': Luid
+                                                  identifier_key: identifier
                                               },
                                               transaction_date=self.effective_date.isoformat(),
                                               settlement_date=self.effective_date.isoformat(),
@@ -416,7 +410,7 @@ class TransparencyStrategies(TestFinbourneApi):
                 'tid_{}'.format(uuid.uuid4()): {
                     'type': 'Sell',
                     'instrument_uid': self.instrument_universe['Kingfisher_LondonStockEx_KGF']['identifiers'][
-                        'LUID'],
+                        'ClientInternal'],
                     'transaction_date': (self.yesterday_trade_open + timedelta(hours=hours[0])).isoformat(),
                     'settlement_date': (self.yesterday_trade_open + timedelta(days=2)).isoformat(),
                     'units': 325000,
@@ -426,7 +420,8 @@ class TransparencyStrategies(TestFinbourneApi):
                 },
                 'tid_{}'.format(uuid.uuid4()): {
                     'type': 'Buy',
-                    'instrument_uid': self.instrument_universe['UKGiltTreasury_4.5_2034']['identifiers']['LUID'],
+                    'instrument_uid': self.instrument_universe['UKGiltTreasury_4.5_2034']['identifiers'][
+                        'ClientInternal'],
                     'transaction_date': (self.yesterday_trade_open + timedelta(hours=hours[1])).isoformat(),
                     'settlement_date': (self.yesterday_trade_open + timedelta(days=2)).isoformat(),
                     'units': 10501,
@@ -440,7 +435,7 @@ class TransparencyStrategies(TestFinbourneApi):
                 'tid_{}'.format(uuid.uuid4()): {
                     'type': 'Buy',
                     'instrument_uid': self.instrument_universe['UKGiltTreasury_3.75_2021']['identifiers'][
-                        'LUID'],
+                        'ClientInternal'],
                     'transaction_date': (self.yesterday_trade_open + timedelta(hours=hours[2])).isoformat(),
                     'settlement_date': (self.yesterday_trade_open + timedelta(days=2)).isoformat(),
                     'units': 24000,
@@ -450,7 +445,8 @@ class TransparencyStrategies(TestFinbourneApi):
                 },
                 'tid_{}'.format(uuid.uuid4()): {
                     'type': 'Sell',
-                    'instrument_uid': self.instrument_universe['USTreasury_2.00_2021']['identifiers']['LUID'],
+                    'instrument_uid': self.instrument_universe['USTreasury_2.00_2021']['identifiers'][
+                        'ClientInternal'],
                     'transaction_date': (self.yesterday_trade_open + timedelta(hours=hours[3])).isoformat(),
                     'settlement_date': (self.yesterday_trade_open + timedelta(days=2)).isoformat(),
                     'units': 57000,
@@ -472,7 +468,7 @@ class TransparencyStrategies(TestFinbourneApi):
                     models.TransactionRequest(transaction_id=transaction_id,
                                               type=transaction['type'],
                                               instrument_identifiers={
-                                                  'Instrument/default/LusidInstrumentId': transaction['instrument_uid']},
+                                                  'Instrument/default/ClientInternal': transaction['instrument_uid']},
                                               transaction_date=transaction['transaction_date'],
                                               settlement_date=transaction['settlement_date'],
                                               units=transaction['units'],
@@ -532,7 +528,11 @@ class TransparencyStrategies(TestFinbourneApi):
         for instrument_name, instrument in self.instrument_universe.items():
             if 'Cash' in instrument_name:
                 continue
-            instrument_analytics.append(models.InstrumentAnalytic(instrument_uid=instrument['identifiers']['LUID'],
+
+            Luid = self.client.get_instrument(identifier_type='ClientInternal',
+                                              identifier=instrument['identifiers']['ClientInternal']).lusid_instrument_id
+
+            instrument_analytics.append(models.InstrumentAnalytic(instrument_uid=Luid,
                                                                   value=1))
 
         # Call LUSID to set up our newly created analytics store

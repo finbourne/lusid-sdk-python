@@ -24,6 +24,8 @@ class TestFinbourneApi(TestCase):
     client = None
     instrumentIds = []
 
+    LUSID_INSTRUMENT_IDENTIFIER = "Instrument/default/LusidInstrumentId"
+
     @classmethod
     def setUpClass(cls):
 
@@ -82,7 +84,7 @@ class TestFinbourneApi(TestCase):
             {"Figi": "BBG000BF4KL1", "Name": "TAYLOR WIMPEY PLC"}
         ]
 
-        figis_to_create = { i["Figi"]:models.InstrumentDefinition(i["Name"], {"Figi": i["Figi"]}) for i in instruments }
+        figis_to_create = {i["Figi"]: models.InstrumentDefinition(i["Name"], {"Figi": i["Figi"]}) for i in instruments}
 
         upsert_response = cls.client.upsert_instruments(figis_to_create)
 
@@ -146,7 +148,8 @@ class TestFinbourneApi(TestCase):
 
         #   add the property to the portfolio
         properties_result = self.client.upsert_portfolio_properties(scope, portfolio_id,
-                                                                    {property_definition_result.key: portfolio_property},
+                                                                    {
+                                                                        property_definition_result.key: portfolio_property},
                                                                     portfolio.created)
 
         self.assertEqual(properties_result.origin_portfolio_id.code, portfolio_id)
@@ -196,7 +199,7 @@ class TestFinbourneApi(TestCase):
         trade = models.TransactionRequest(
             transaction_id=str(uuid.uuid4()),
             type="Buy",
-            instrument_uid=self.instrumentIds[0],
+            instrument_identifiers={self.LUSID_INSTRUMENT_IDENTIFIER: self.instrumentIds[0]},
             transaction_date=effective_date,
             settlement_date=effective_date,
             units=100,
@@ -252,13 +255,15 @@ class TestFinbourneApi(TestCase):
         sleep(0.5)
 
         # add trade for 2018-1-8
-        trade = self.build_transaction(TransactionSpec(self.instrumentIds[3], 104, datetime(2018, 1, 8, tzinfo=pytz.utc)))
+        trade = self.build_transaction(
+            TransactionSpec(self.instrumentIds[3], 104, datetime(2018, 1, 8, tzinfo=pytz.utc)))
         later_trade = self.client.upsert_transactions(scope, portfolio_id, [trade])
         as_at_batch2 = later_trade.version.as_at_date
         sleep(0.5)
 
         # add back dated trade
-        trade = self.build_transaction(TransactionSpec(self.instrumentIds[4], 105, datetime(2018, 1, 5, tzinfo=pytz.utc)))
+        trade = self.build_transaction(
+            TransactionSpec(self.instrumentIds[4], 105, datetime(2018, 1, 5, tzinfo=pytz.utc)))
         backdated_trade = self.client.upsert_transactions(scope, portfolio_id, [trade])
         as_at_batch3 = backdated_trade.version.as_at_date
         sleep(0.5)
@@ -310,7 +315,7 @@ class TestFinbourneApi(TestCase):
         sec_id = "added-sec-{}".format(str(uuid.uuid4()))
 
         request = models.InstrumentDefinition("MyInstrument", {"ClientInternal": "MyIdValue"})
-        
+
         self.client.upsert_instruments({sec_id: request})
 
     def test_portfolio_aggregation(self):
@@ -382,15 +387,16 @@ class TestFinbourneApi(TestCase):
         aggregation = self.client.get_aggregation_by_portfolio(scope, portfolio_id, aggregation_request)
 
         for item in aggregation.data:
-            print("\t{}\t{}\t{}".format(item["Instrument/default/Name"], item["Proportion(Holding/default/PV)"], item["Sum(Holding/default/PV)"]))
+            print("\t{}\t{}\t{}".format(item["Instrument/default/Name"], item["Proportion(Holding/default/PV)"],
+                                        item["Sum(Holding/default/PV)"]))
 
     # utility to build trade from spec
-    @staticmethod
-    def build_transaction(trade_spec):
+    @classmethod
+    def build_transaction(cls, trade_spec):
         return models.TransactionRequest(
             transaction_id=str(uuid.uuid4()),
             type="StockIn",
-            instrument_uid=trade_spec.id,
+            instrument_identifiers={cls.LUSID_INSTRUMENT_IDENTIFIER: trade_spec.id},
             transaction_date=trade_spec.trade_date,
             settlement_date=trade_spec.trade_date,
             units=100,

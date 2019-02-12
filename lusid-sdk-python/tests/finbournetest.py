@@ -263,7 +263,8 @@ class TestFinbourneApi(TestCase):
         # As we only get links back from our set holdings method, we need to retrieve the holdings we have just set
         verify_holdings = self.client.get_holdings(scope=scope,
                                                    code=code,
-                                                   effective_at=effective_at)
+                                                   effective_at=effective_at,
+                                                   instrument_property_keys=['Instrument/default/ClientInternal'])
 
         # Check that the correct number of holdings have been set
         self.assertEqual(verify_holdings.count, len(holding_adjustments),
@@ -271,12 +272,27 @@ class TestFinbourneApi(TestCase):
                                                                                len(holding_adjustments)))
 
         # Create a dictionary of our adjust holding requests using the instrument uid as the key
-        adjustment_requests = {adjustment.instrument_uid:adjustment.tax_lots[0] for adjustment in holding_adjustments}
+        adjustment_requests = {}
+
+        # Here we handle that currencies and instruments use different identifier schemes
+        for adjustment in holding_adjustments:
+            if 'Instrument/default/ClientInternal' in adjustment.instrument_identifiers.keys():
+                key = adjustment.instrument_identifiers['Instrument/default/ClientInternal']
+            else:
+                key = 'CCY_' + adjustment.instrument_identifiers['Instrument/default/Currency']
+
+            adjustment_requests[key] = adjustment.tax_lots[0]
 
         # Iterate over our holdings we just retrieved
         for holding in verify_holdings.values:
-            # Select the matching adjustment request using the instrument uid as the lookup
-            adjustment = adjustment_requests[holding.instrument_uid]
+            # Use the ClientIdentifier if it is an instrument
+            if 'LUID' in holding.instrument_uid:
+                identifier = holding.properties[0].value
+            # Otherwise use the currency code
+            else:
+                identifier = holding.instrument_uid
+
+            adjustment = adjustment_requests[identifier]
 
             self.assertEqual(adjustment.units, holding.units,
                              'Holding total units is {} when it should be {}'.format(holding.units,
@@ -337,7 +353,9 @@ class TestFinbourneApi(TestCase):
 
         reconcile_holdings_request = models.PortfoliosReconciliationRequest(left=reconcile_holdings_left,
                                                                             right=reconcile_holdings_right,
-                                                                            instrument_property_keys=[])
+                                                                            instrument_property_keys=[
+                                                                                'Instrument/default/ClientInternal'
+                                                                            ])
 
         reconciliation = self.client.reconcile_holdings(request=reconcile_holdings_request)
 
@@ -352,13 +370,20 @@ class TestFinbourneApi(TestCase):
             self.assertEqual(reconciliation.count, len(transactions) + 1,
                              'Only {} of {} transactions have been applied'.format(reconciliation.count,
                                                                                    len(transactions)))
+            transaction_requests = {}
+            for transaction in transactions:
 
-            transaction_requests = {transaction.instrument_uid:transaction for transaction in transactions}
+                if 'Instrument/default/ClientInternal' in transaction.instrument_identifiers.keys():
+                    key = 'Instrument/default/ClientInternal'
+                else:
+                    key = 'Instrument/default/Currency'
+
+                transaction_requests[transaction.instrument_identifiers[key]] = transaction
 
             # Check that for breaks and transactions with the same instrument that the breaks match
             for reconciliation_break in reconciliation.values:
                 if 'CCY' not in reconciliation_break.instrument_uid:
-                    transaction = transaction_requests[reconciliation_break.instrument_uid]
+                    transaction = transaction_requests[reconciliation_break.instrument_properties[0].value]
                     self.assertEqual(abs(reconciliation_break.difference_units), transaction.units)
 
     def transactions_added_asserts(self,
@@ -404,7 +429,13 @@ class TestFinbourneApi(TestCase):
             transaction_request = transaction_requests[transaction.transaction_id]
 
             self.assertEqual(transaction.type, transaction_request.type)
-            self.assertEqual(transaction.instrument_uid, transaction_request.instrument_uid)
+
+            if 'Instrument/default/ClientInternal' in transaction_request.instrument_identifiers.keys():
+                key = 'Instrument/default/ClientInternal'
+            else:
+                key = 'Instrument/default/Currency'
+
+            self.assertEqual(transaction.instrument_identifiers[key], transaction_request.instrument_identifiers[key])
 
             # Note that the output date
 
