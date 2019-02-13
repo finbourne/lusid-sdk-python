@@ -37,6 +37,8 @@ class OutputTransaction(Model):
     :vartype type: str
     :ivar description: LUSID transaction description
     :vartype description: str
+    :param instrument_identifiers: Unique instrument identifiers.
+    :type instrument_identifiers: dict[str, str]
     :ivar instrument_uid: Unique instrument identifier
     :vartype instrument_uid: str
     :ivar transaction_date: Transaction date
@@ -104,6 +106,7 @@ class OutputTransaction(Model):
         'transaction_id': {'key': 'transactionId', 'type': 'str'},
         'type': {'key': 'type', 'type': 'str'},
         'description': {'key': 'description', 'type': 'str'},
+        'instrument_identifiers': {'key': 'instrumentIdentifiers', 'type': '{str}'},
         'instrument_uid': {'key': 'instrumentUid', 'type': 'str'},
         'transaction_date': {'key': 'transactionDate', 'type': 'iso-8601'},
         'settlement_date': {'key': 'settlementDate', 'type': 'iso-8601'},
@@ -123,11 +126,12 @@ class OutputTransaction(Model):
         'realised_gain_loss': {'key': 'realisedGainLoss', 'type': '[RealisedGainLoss]'},
     }
 
-    def __init__(self):
+    def __init__(self, instrument_identifiers=None):
         super(OutputTransaction, self).__init__()
         self.transaction_id = None
         self.type = None
         self.description = None
+        self.instrument_identifiers = instrument_identifiers
         self.instrument_uid = None
         self.transaction_date = None
         self.settlement_date = None

@@ -27,6 +27,8 @@ from msrest.serialization import Model
 class ReferencePortfolioConstituent(Model):
     """ReferencePortfolioConstituent.
 
+    :param instrument_identifiers: Unique instrument identifiers.
+    :type instrument_identifiers: dict[str, str]
     :param instrument_uid:
     :type instrument_uid: str
     :param currency:
@@ -46,6 +48,7 @@ class ReferencePortfolioConstituent(Model):
     }
 
     _attribute_map = {
+        'instrument_identifiers': {'key': 'instrumentIdentifiers', 'type': '{str}'},
         'instrument_uid': {'key': 'instrumentUid', 'type': 'str'},
         'currency': {'key': 'currency', 'type': 'str'},
         'properties': {'key': 'properties', 'type': '[Property]'},
@@ -53,8 +56,9 @@ class ReferencePortfolioConstituent(Model):
         'floating_weight': {'key': 'floatingWeight', 'type': 'float'},
     }
 
-    def __init__(self, instrument_uid, currency, weight, properties=None, floating_weight=None):
+    def __init__(self, instrument_uid, currency, weight, instrument_identifiers=None, properties=None, floating_weight=None):
         super(ReferencePortfolioConstituent, self).__init__()
+        self.instrument_identifiers = instrument_identifiers
         self.instrument_uid = instrument_uid
         self.currency = currency
         self.properties = properties

@@ -32,8 +32,8 @@ class TransactionRequest(Model):
     :param type: LUSID transaction type code - Buy, Sell, StockIn, StockOut,
      etc
     :type type: str
-    :param instrument_uid: Unique instrument identifier
-    :type instrument_uid: str
+    :param instrument_identifiers: Unique instrument identifiers.
+    :type instrument_identifiers: dict[str, str]
     :param transaction_date: Transaction date
     :type transaction_date: datetime
     :param settlement_date: Settlement date
@@ -63,7 +63,6 @@ class TransactionRequest(Model):
     _validation = {
         'transaction_id': {'required': True},
         'type': {'required': True},
-        'instrument_uid': {'required': True},
         'transaction_date': {'required': True},
         'settlement_date': {'required': True},
         'units': {'required': True},
@@ -75,7 +74,7 @@ class TransactionRequest(Model):
     _attribute_map = {
         'transaction_id': {'key': 'transactionId', 'type': 'str'},
         'type': {'key': 'type', 'type': 'str'},
-        'instrument_uid': {'key': 'instrumentUid', 'type': 'str'},
+        'instrument_identifiers': {'key': 'instrumentIdentifiers', 'type': '{str}'},
         'transaction_date': {'key': 'transactionDate', 'type': 'iso-8601'},
         'settlement_date': {'key': 'settlementDate', 'type': 'iso-8601'},
         'units': {'key': 'units', 'type': 'float'},
@@ -89,11 +88,11 @@ class TransactionRequest(Model):
         'netting_set': {'key': 'nettingSet', 'type': 'str'},
     }
 
-    def __init__(self, transaction_id, type, instrument_uid, transaction_date, settlement_date, units, transaction_price, total_consideration, source, exchange_rate=None, transaction_currency=None, properties=None, counterparty_id=None, netting_set=None):
+    def __init__(self, transaction_id, type, transaction_date, settlement_date, units, transaction_price, total_consideration, source, instrument_identifiers=None, exchange_rate=None, transaction_currency=None, properties=None, counterparty_id=None, netting_set=None):
         super(TransactionRequest, self).__init__()
         self.transaction_id = transaction_id
         self.type = type
-        self.instrument_uid = instrument_uid
+        self.instrument_identifiers = instrument_identifiers
         self.transaction_date = transaction_date
         self.settlement_date = settlement_date
         self.units = units

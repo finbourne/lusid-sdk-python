@@ -32,6 +32,8 @@ class Transaction(Model):
     :param type: LUSID transaction type code - Buy, Sell, StockIn, StockOut,
      etc
     :type type: str
+    :param instrument_identifiers: Unique instrument identifiers.
+    :type instrument_identifiers: dict[str, str]
     :param instrument_uid: Unique instrument identifier
     :type instrument_uid: str
     :param transaction_date: Transaction date
@@ -75,6 +77,7 @@ class Transaction(Model):
     _attribute_map = {
         'transaction_id': {'key': 'transactionId', 'type': 'str'},
         'type': {'key': 'type', 'type': 'str'},
+        'instrument_identifiers': {'key': 'instrumentIdentifiers', 'type': '{str}'},
         'instrument_uid': {'key': 'instrumentUid', 'type': 'str'},
         'transaction_date': {'key': 'transactionDate', 'type': 'iso-8601'},
         'settlement_date': {'key': 'settlementDate', 'type': 'iso-8601'},
@@ -89,10 +92,11 @@ class Transaction(Model):
         'netting_set': {'key': 'nettingSet', 'type': 'str'},
     }
 
-    def __init__(self, transaction_id, type, instrument_uid, transaction_date, settlement_date, units, transaction_price, total_consideration, source, exchange_rate=None, transaction_currency=None, properties=None, counterparty_id=None, netting_set=None):
+    def __init__(self, transaction_id, type, instrument_uid, transaction_date, settlement_date, units, transaction_price, total_consideration, source, instrument_identifiers=None, exchange_rate=None, transaction_currency=None, properties=None, counterparty_id=None, netting_set=None):
         super(Transaction, self).__init__()
         self.transaction_id = transaction_id
         self.type = type
+        self.instrument_identifiers = instrument_identifiers
         self.instrument_uid = instrument_uid
         self.transaction_date = transaction_date
         self.settlement_date = settlement_date

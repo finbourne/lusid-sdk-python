@@ -27,8 +27,8 @@ from msrest.serialization import Model
 class ReferencePortfolioConstituentRequest(Model):
     """ReferencePortfolioConstituentRequest.
 
-    :param instrument_uid:
-    :type instrument_uid: str
+    :param instrument_identifiers: Unique instrument identifiers.
+    :type instrument_identifiers: dict[str, str]
     :param properties:
     :type properties: dict[str, ~lusid.models.PerpetualPropertyValue]
     :param weight:
@@ -38,15 +38,15 @@ class ReferencePortfolioConstituentRequest(Model):
     """
 
     _attribute_map = {
-        'instrument_uid': {'key': 'instrumentUid', 'type': 'str'},
+        'instrument_identifiers': {'key': 'instrumentIdentifiers', 'type': '{str}'},
         'properties': {'key': 'properties', 'type': '{PerpetualPropertyValue}'},
         'weight': {'key': 'weight', 'type': 'float'},
         'currency': {'key': 'currency', 'type': 'str'},
     }
 
-    def __init__(self, instrument_uid=None, properties=None, weight=None, currency=None):
+    def __init__(self, instrument_identifiers=None, properties=None, weight=None, currency=None):
         super(ReferencePortfolioConstituentRequest, self).__init__()
-        self.instrument_uid = instrument_uid
+        self.instrument_identifiers = instrument_identifiers
         self.properties = properties
         self.weight = weight
         self.currency = currency

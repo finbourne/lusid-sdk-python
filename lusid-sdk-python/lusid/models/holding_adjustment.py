@@ -29,6 +29,8 @@ class HoldingAdjustment(Model):
     system should match. When processed by the movement
     engine, it will create 'true-up' adjustments on the fly.
 
+    :param instrument_identifiers: Unique instrument identifiers.
+    :type instrument_identifiers: dict[str, str]
     :param instrument_uid: Unique instrument identifier
     :type instrument_uid: str
     :param sub_holding_keys: Key fields to uniquely index the sub holdings of
@@ -46,14 +48,16 @@ class HoldingAdjustment(Model):
     }
 
     _attribute_map = {
+        'instrument_identifiers': {'key': 'instrumentIdentifiers', 'type': '{str}'},
         'instrument_uid': {'key': 'instrumentUid', 'type': 'str'},
         'sub_holding_keys': {'key': 'subHoldingKeys', 'type': '[PerpetualProperty]'},
         'properties': {'key': 'properties', 'type': '[PerpetualProperty]'},
         'tax_lots': {'key': 'taxLots', 'type': '[TargetTaxLot]'},
     }
 
-    def __init__(self, instrument_uid, tax_lots, sub_holding_keys=None, properties=None):
+    def __init__(self, instrument_uid, tax_lots, instrument_identifiers=None, sub_holding_keys=None, properties=None):
         super(HoldingAdjustment, self).__init__()
+        self.instrument_identifiers = instrument_identifiers
         self.instrument_uid = instrument_uid
         self.sub_holding_keys = sub_holding_keys
         self.properties = properties

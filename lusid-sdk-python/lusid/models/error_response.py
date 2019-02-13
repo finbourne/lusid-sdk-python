@@ -74,6 +74,7 @@ class ErrorResponse(Model):
      'InstrumentUpsertFailure', 'TransactionTypeNotFound',
      'TransactionTypeDuplication', 'InvalidPropertyValueAssignment',
      'PortfolioDoesNotExistAtGivenDate', 'QueryParserFailure',
+     'DuplicateConstituentFailure', 'UnresolvedConstituentFailure',
      'DependenciesFailure', 'PortfolioPreprocessFailure',
      'ValuationEngineFailure', 'TaskFactoryFailure', 'TaskEvaluationFailure',
      'InstrumentFailure', 'CashFlowsFailure', 'ResultRetrievalFailure',
