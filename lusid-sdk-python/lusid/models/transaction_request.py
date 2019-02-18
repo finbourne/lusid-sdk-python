@@ -63,6 +63,7 @@ class TransactionRequest(Model):
     _validation = {
         'transaction_id': {'required': True},
         'type': {'required': True},
+        'instrument_identifiers': {'required': True},
         'transaction_date': {'required': True},
         'settlement_date': {'required': True},
         'units': {'required': True},
@@ -88,7 +89,7 @@ class TransactionRequest(Model):
         'netting_set': {'key': 'nettingSet', 'type': 'str'},
     }
 
-    def __init__(self, transaction_id, type, transaction_date, settlement_date, units, transaction_price, total_consideration, source, instrument_identifiers=None, exchange_rate=None, transaction_currency=None, properties=None, counterparty_id=None, netting_set=None):
+    def __init__(self, transaction_id, type, instrument_identifiers, transaction_date, settlement_date, units, transaction_price, total_consideration, source, exchange_rate=None, transaction_currency=None, properties=None, counterparty_id=None, netting_set=None):
         super(TransactionRequest, self).__init__()
         self.transaction_id = transaction_id
         self.type = type

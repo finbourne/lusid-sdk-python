@@ -113,11 +113,11 @@ from .quote import Quote
 from .get_quotes_response import GetQuotesResponse
 from .perpetual_property_value import PerpetualPropertyValue
 from .create_reference_portfolio_request import CreateReferencePortfolioRequest
-from .reference_portfolio_constituent import ReferencePortfolioConstituent
-from .get_reference_portfolio_constituents_response import GetReferencePortfolioConstituentsResponse
 from .reference_portfolio_constituent_request import ReferencePortfolioConstituentRequest
 from .upsert_reference_portfolio_constituents_request import UpsertReferencePortfolioConstituentsRequest
 from .upsert_reference_portfolio_constituents_response import UpsertReferencePortfolioConstituentsResponse
+from .reference_portfolio_constituent import ReferencePortfolioConstituent
+from .get_reference_portfolio_constituents_response import GetReferencePortfolioConstituentsResponse
 from .constituents_adjustment_header import ConstituentsAdjustmentHeader
 from .resource_list_of_constituents_adjustment_header import ResourceListOfConstituentsAdjustmentHeader
 from .create_results import CreateResults
@@ -258,11 +258,11 @@ __all__ = [
     'GetQuotesResponse',
     'PerpetualPropertyValue',
     'CreateReferencePortfolioRequest',
-    'ReferencePortfolioConstituent',
-    'GetReferencePortfolioConstituentsResponse',
     'ReferencePortfolioConstituentRequest',
     'UpsertReferencePortfolioConstituentsRequest',
     'UpsertReferencePortfolioConstituentsResponse',
+    'ReferencePortfolioConstituent',
+    'GetReferencePortfolioConstituentsResponse',
     'ConstituentsAdjustmentHeader',
     'ResourceListOfConstituentsAdjustmentHeader',
     'CreateResults',

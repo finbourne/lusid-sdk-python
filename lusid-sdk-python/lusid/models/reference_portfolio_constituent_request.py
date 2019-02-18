@@ -37,6 +37,11 @@ class ReferencePortfolioConstituentRequest(Model):
     :type currency: str
     """
 
+    _validation = {
+        'instrument_identifiers': {'required': True},
+        'weight': {'required': True},
+    }
+
     _attribute_map = {
         'instrument_identifiers': {'key': 'instrumentIdentifiers', 'type': '{str}'},
         'properties': {'key': 'properties', 'type': '{PerpetualPropertyValue}'},
@@ -44,7 +49,7 @@ class ReferencePortfolioConstituentRequest(Model):
         'currency': {'key': 'currency', 'type': 'str'},
     }
 
-    def __init__(self, instrument_identifiers=None, properties=None, weight=None, currency=None):
+    def __init__(self, instrument_identifiers, weight, properties=None, currency=None):
         super(ReferencePortfolioConstituentRequest, self).__init__()
         self.instrument_identifiers = instrument_identifiers
         self.properties = properties

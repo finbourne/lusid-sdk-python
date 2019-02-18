@@ -371,7 +371,7 @@ class LUSIDAPI(object):
         self._client = ServiceClient(self.config.credentials, self.config)
 
         client_models = {k: v for k, v in models.__dict__.items() if isinstance(v, type)}
-        self.api_version = '0.9.134'
+        self.api_version = '0.9.138'
         self._serialize = Serializer(client_models)
         self._deserialize = Deserializer(client_models)
 
@@ -4815,7 +4815,7 @@ class LUSIDAPI(object):
     create_reference_portfolio.metadata = {'url': '/api/referenceportfolios/{scope}'}
 
     def get_reference_portfolio_constituents(
-            self, scope, code, effective_at, as_at=None, sort_by=None, start=None, limit=None, custom_headers=None, raw=False, **operation_config):
+            self, scope, code, effective_at=None, as_at=None, sort_by=None, start=None, limit=None, custom_headers=None, raw=False, **operation_config):
         """Get constituents.
 
         Get all the constituents in the specified reference portfolio.
@@ -4824,8 +4824,8 @@ class LUSIDAPI(object):
         :type scope: str
         :param code: The code of the portfolio
         :type code: str
-        :param effective_at: The effective date of the constituents to
-         retrieve
+        :param effective_at: Optional. The effective date of the constituents
+         to retrieve
         :type effective_at: datetime
         :param as_at: Optional. The AsAt date of the data
         :type as_at: datetime
@@ -4853,13 +4853,14 @@ class LUSIDAPI(object):
         url = self.get_reference_portfolio_constituents.metadata['url']
         path_format_arguments = {
             'scope': self._serialize.url("scope", scope, 'str'),
-            'code': self._serialize.url("code", code, 'str'),
-            'effectiveAt': self._serialize.url("effective_at", effective_at, 'iso-8601')
+            'code': self._serialize.url("code", code, 'str')
         }
         url = self._client.format_url(url, **path_format_arguments)
 
         # Construct parameters
         query_parameters = {}
+        if effective_at is not None:
+            query_parameters['effectiveAt'] = self._serialize.query("effective_at", effective_at, 'iso-8601')
         if as_at is not None:
             query_parameters['asAt'] = self._serialize.query("as_at", as_at, 'iso-8601')
         if sort_by is not None:
@@ -4892,7 +4893,7 @@ class LUSIDAPI(object):
             return client_raw_response
 
         return deserialized
-    get_reference_portfolio_constituents.metadata = {'url': '/api/referenceportfolios/{scope}/{code}/{effectiveAt}/constituents'}
+    get_reference_portfolio_constituents.metadata = {'url': '/api/referenceportfolios/{scope}/{code}/constituents'}
 
     def upsert_reference_portfolio_constituents(
             self, scope, code, constituents=None, custom_headers=None, raw=False, **operation_config):
