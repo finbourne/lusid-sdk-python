@@ -371,7 +371,7 @@ class LUSIDAPI(object):
         self._client = ServiceClient(self.config.credentials, self.config)
 
         client_models = {k: v for k, v in models.__dict__.items() if isinstance(v, type)}
-        self.api_version = '0.9.141'
+        self.api_version = '0.9.144'
         self._serialize = Serializer(client_models)
         self._deserialize = Deserializer(client_models)
 
@@ -1529,12 +1529,12 @@ class LUSIDAPI(object):
     delete_derived_portfolio_details.metadata = {'url': '/api/derivedtransactionportfolios/{scope}/{code}/details'}
 
     def list_instruments(
-            self, as_at=None, sort_by=None, start=None, limit=None, filter=None, custom_headers=None, raw=False, **operation_config):
+            self, as_at=None, sort_by=None, start=None, limit=None, filter="State eq 'Active'", custom_headers=None, raw=False, **operation_config):
         """Get all of the currently mastered instruments in LUSID.
 
         Lists all instruments that have been mastered within LUSID.
 
-        :param as_at: The AsAt time
+        :param as_at: Optional. The AsAt time
         :type as_at: datetime
         :param sort_by: Optional. Order the results by these fields. Use use
          the '-' sign to denote descending order e.g. -MyFieldName
@@ -1542,9 +1542,10 @@ class LUSIDAPI(object):
         :param start: Optional. When paginating, skip this number of results
         :type start: int
         :param limit: Optional. When paginating, limit the number of returned
-         results to this many.
+         results to this many
         :type limit: int
-        :param filter: Optional. Expression to filter the result set
+        :param filter: Optional. Expression to filter the result set - the
+         default filter returns only instruments in the Active state
         :type filter: str
         :param dict custom_headers: headers that will be added to the request
         :param bool raw: returns the direct response alongside the
