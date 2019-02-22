@@ -37,7 +37,7 @@ class TransparencyStrategies(TestFinbourneApi):
         namespace. We will create an internal Scope to hold our client's portfolio. 
         '''
         # Let us create an internal scope with a unique identifier
-        self.internal_scope_code = 'internal-{}'.format(uuid.uuid4())
+        self.internal_scope_code = 'internal-{}'.format(str(uuid.uuid4())[:8])
 
         '''
         Inside each scope an object can be identified via its unique Code. For our client we will create a unique 
@@ -45,7 +45,7 @@ class TransparencyStrategies(TestFinbourneApi):
         portfolio group to group all of our client's portfolios together.
         '''
         # Create a unique identifier for our client
-        self.client_id = uuid.uuid4()
+        self.client_id = str(uuid.uuid4())[:8]
         # Create the codes for our portfolios, each of which have a different mandate
         self.client_portfolios = [
             'client-{}-mandate-balanced'.format(self.client_id),

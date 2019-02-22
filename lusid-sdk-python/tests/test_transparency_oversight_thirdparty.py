@@ -45,8 +45,8 @@ class TransparencyOversightThirdParty(TestFinbourneApi):
         """
 
         # Create a unique id for our scopes
-        internal_scope_id = uuid.uuid4()
-        fund_accountant_scope_id = uuid.uuid4()
+        internal_scope_id = str(uuid.uuid4())[:8]
+        fund_accountant_scope_id = str(uuid.uuid4())[:8]
         # Using the ids create a unique code for each scope, this is what identifies the scope
         self.internal_scope_code = 'internal-{}'.format(internal_scope_id)
         self.fund_accountant_scope_code = 'fund-accountant-{}'.format(fund_accountant_scope_id)
@@ -58,9 +58,9 @@ class TransparencyOversightThirdParty(TestFinbourneApi):
         group of portfolios and then we can build our portfolio codes using this id. 
         '''
         # Also create a code for our portfolio, we will re-use the same code in each scope
-        self.client_1_portfolio_group_id = uuid.uuid4()
-        self.client_2_portfolio_group_id = uuid.uuid4()
-        self.client_3_portfolio_group_id = uuid.uuid4()
+        self.client_1_portfolio_group_id = str(uuid.uuid4())[:8]
+        self.client_2_portfolio_group_id = str(uuid.uuid4())[:8]
+        self.client_3_portfolio_group_id = str(uuid.uuid4())[:8]
 
         self.client_portfolios = {
             'client-{}-portfolios'.format(self.client_1_portfolio_group_id): [
