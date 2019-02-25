@@ -41,6 +41,7 @@ class UpsertQuoteRequest(Model):
         'quote_id': {'required': True},
         'metric_value': {'required': True},
         'quote_lineage': {'required': True},
+        'effective_at': {'required': True},
     }
 
     _attribute_map = {
@@ -50,7 +51,7 @@ class UpsertQuoteRequest(Model):
         'effective_at': {'key': 'effectiveAt', 'type': 'iso-8601'},
     }
 
-    def __init__(self, quote_id, metric_value, quote_lineage, effective_at=None):
+    def __init__(self, quote_id, metric_value, quote_lineage, effective_at):
         super(UpsertQuoteRequest, self).__init__()
         self.quote_id = quote_id
         self.metric_value = metric_value

@@ -371,7 +371,7 @@ class LUSIDAPI(object):
         self._client = ServiceClient(self.config.credentials, self.config)
 
         client_models = {k: v for k, v in models.__dict__.items() if isinstance(v, type)}
-        self.api_version = '0.9.144'
+        self.api_version = '0.9.155'
         self._serialize = Serializer(client_models)
         self._deserialize = Deserializer(client_models)
 
@@ -1529,13 +1529,15 @@ class LUSIDAPI(object):
     delete_derived_portfolio_details.metadata = {'url': '/api/derivedtransactionportfolios/{scope}/{code}/details'}
 
     def list_instruments(
-            self, as_at=None, sort_by=None, start=None, limit=None, filter="State eq 'Active'", custom_headers=None, raw=False, **operation_config):
+            self, as_at=None, effective_at=None, sort_by=None, start=None, limit=None, filter="State eq 'Active'", instrument_property_keys=None, custom_headers=None, raw=False, **operation_config):
         """Get all of the currently mastered instruments in LUSID.
 
         Lists all instruments that have been mastered within LUSID.
 
         :param as_at: Optional. The AsAt time
         :type as_at: datetime
+        :param effective_at: Optional. The effective date of the query
+        :type effective_at: datetime
         :param sort_by: Optional. Order the results by these fields. Use use
          the '-' sign to denote descending order e.g. -MyFieldName
         :type sort_by: list[str]
@@ -1547,6 +1549,9 @@ class LUSIDAPI(object):
         :param filter: Optional. Expression to filter the result set - the
          default filter returns only instruments in the Active state
         :type filter: str
+        :param instrument_property_keys: Optional. Keys of the properties to
+         be decorated on to the instrument
+        :type instrument_property_keys: list[str]
         :param dict custom_headers: headers that will be added to the request
         :param bool raw: returns the direct response alongside the
          deserialized response
@@ -1565,6 +1570,8 @@ class LUSIDAPI(object):
         query_parameters = {}
         if as_at is not None:
             query_parameters['asAt'] = self._serialize.query("as_at", as_at, 'iso-8601')
+        if effective_at is not None:
+            query_parameters['effectiveAt'] = self._serialize.query("effective_at", effective_at, 'iso-8601')
         if sort_by is not None:
             query_parameters['sortBy'] = self._serialize.query("sort_by", sort_by, '[str]', div=',')
         if start is not None:
@@ -1573,6 +1580,8 @@ class LUSIDAPI(object):
             query_parameters['limit'] = self._serialize.query("limit", limit, 'int')
         if filter is not None:
             query_parameters['filter'] = self._serialize.query("filter", filter, 'str')
+        if instrument_property_keys is not None:
+            query_parameters['instrumentPropertyKeys'] = self._serialize.query("instrument_property_keys", instrument_property_keys, '[str]', div=',')
 
         # Construct headers
         header_parameters = {}
