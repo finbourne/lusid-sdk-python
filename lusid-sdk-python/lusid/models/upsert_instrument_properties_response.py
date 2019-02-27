@@ -27,29 +27,22 @@ from msrest.serialization import Model
 class UpsertInstrumentPropertiesResponse(Model):
     """UpsertInstrumentPropertiesResponse.
 
-    Variables are only populated by the server, and will be ignored when
-    sending a request.
-
-    :param href:
-    :type href: str
-    :ivar failed: A list of any values that failed to be upserted.
-    :vartype failed: list[~lusid.models.ErrorDetail]
+    :param as_at_date:
+    :type as_at_date: datetime
     :param links:
     :type links: list[~lusid.models.Link]
     """
 
     _validation = {
-        'failed': {'readonly': True},
+        'as_at_date': {'required': True},
     }
 
     _attribute_map = {
-        'href': {'key': 'href', 'type': 'str'},
-        'failed': {'key': 'failed', 'type': '[ErrorDetail]'},
+        'as_at_date': {'key': 'asAtDate', 'type': 'iso-8601'},
         'links': {'key': 'links', 'type': '[Link]'},
     }
 
-    def __init__(self, href=None, links=None):
+    def __init__(self, as_at_date, links=None):
         super(UpsertInstrumentPropertiesResponse, self).__init__()
-        self.href = href
-        self.failed = None
+        self.as_at_date = as_at_date
         self.links = links
