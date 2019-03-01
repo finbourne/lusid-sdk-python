@@ -371,7 +371,7 @@ class LUSIDAPI(object):
         self._client = ServiceClient(self.config.credentials, self.config)
 
         client_models = {k: v for k, v in models.__dict__.items() if isinstance(v, type)}
-        self.api_version = '0.9.157'
+        self.api_version = '0.9.159'
         self._serialize = Serializer(client_models)
         self._deserialize = Deserializer(client_models)
 
@@ -5644,7 +5644,7 @@ class LUSIDAPI(object):
         Search through all portfolio groups.
 
         :param request: A valid Elasticsearch 5.x request
-        :type request: object
+        :type request: str
         :param sort_by: Optional. Order the results by these fields. Use use
          the '-' sign to denote descending order e.g. -MyFieldName
         :type sort_by: list[str]
@@ -5682,13 +5682,13 @@ class LUSIDAPI(object):
 
         # Construct headers
         header_parameters = {}
-        header_parameters['Content-Type'] = 'application/json-patch+json; charset=utf-8'
+        header_parameters['Content-Type'] = 'text/plain'
         if custom_headers:
             header_parameters.update(custom_headers)
 
         # Construct body
         if request is not None:
-            body_content = self._serialize.body(request, 'object')
+            body_content = self._serialize.body(request, 'str')
         else:
             body_content = None
 
@@ -5719,7 +5719,7 @@ class LUSIDAPI(object):
         Search through all portfolios.
 
         :param request: A valid Elasticsearch 5.x request
-        :type request: object
+        :type request: str
         :param sort_by: Optional. Order the results by these fields. Use use
          the '-' sign to denote descending order e.g. -MyFieldName
         :type sort_by: list[str]
@@ -5758,13 +5758,13 @@ class LUSIDAPI(object):
 
         # Construct headers
         header_parameters = {}
-        header_parameters['Content-Type'] = 'application/json-patch+json; charset=utf-8'
+        header_parameters['Content-Type'] = 'text/plain'
         if custom_headers:
             header_parameters.update(custom_headers)
 
         # Construct body
         if request is not None:
-            body_content = self._serialize.body(request, 'object')
+            body_content = self._serialize.body(request, 'str')
         else:
             body_content = None
 
@@ -5795,7 +5795,7 @@ class LUSIDAPI(object):
         Search through all property definitions.
 
         :param request: A valid Elasticsearch 5.x request
-        :type request: object
+        :type request: str
         :param sort_by: Optional. Order the results by these fields. Use use
          the '-' sign to denote descending order e.g. -MyFieldName
         :type sort_by: list[str]
@@ -5834,13 +5834,13 @@ class LUSIDAPI(object):
 
         # Construct headers
         header_parameters = {}
-        header_parameters['Content-Type'] = 'application/json-patch+json; charset=utf-8'
+        header_parameters['Content-Type'] = 'text/plain'
         if custom_headers:
             header_parameters.update(custom_headers)
 
         # Construct body
         if request is not None:
-            body_content = self._serialize.body(request, 'object')
+            body_content = self._serialize.body(request, 'str')
         else:
             body_content = None
 
