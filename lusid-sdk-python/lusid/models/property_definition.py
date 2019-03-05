@@ -40,7 +40,7 @@ class PropertyDefinition(Model):
      'ArrayOfTransactionAliases', 'ArrayofTransactionMovements',
      'ArrayofUnits', 'StringArray', 'CurrencyAndAmount', 'TradePrice',
      'UnitCreation', 'Currency', 'UserId', 'MetricValue', 'QuoteId',
-     'QuoteLineage', 'ArrayOfQuoteIds', 'ResourceId'
+     'QuoteLineage', 'ArrayOfQuoteIds', 'ResourceId', 'ResultValue'
     :type value_type: str or ~lusid.models.enum
     :param value_required:
     :type value_required: bool
@@ -57,7 +57,7 @@ class PropertyDefinition(Model):
     :type unit_schema: str or ~lusid.models.enum
     :ivar domain: Possible values include: 'Trade', 'Portfolio', 'Holding',
      'ReferenceHolding', 'TransactionConfiguration', 'Instrument',
-     'CutDefinition'
+     'CutDefinition', 'Analytic'
     :vartype domain: str or ~lusid.models.enum
     :ivar scope:
     :vartype scope: str
