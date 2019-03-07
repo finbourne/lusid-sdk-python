@@ -340,6 +340,7 @@ class LUSIDAPI(object):
     | &lt;a name="233"&gt;233&lt;/a&gt;|QueryParserFailure|  |
     | &lt;a name="234"&gt;234&lt;/a&gt;|DuplicateConstituentFailure|  |
     | &lt;a name="235"&gt;235&lt;/a&gt;|UnresolvedConstituentFailure|  |
+    | &lt;a name="300"&gt;300&lt;/a&gt;|MissingRecipeFailure|  |
     | &lt;a name="301"&gt;301&lt;/a&gt;|DependenciesFailure|  |
     | &lt;a name="304"&gt;304&lt;/a&gt;|PortfolioPreprocessFailure|  |
     | &lt;a name="310"&gt;310&lt;/a&gt;|ValuationEngineFailure|  |
@@ -371,7 +372,7 @@ class LUSIDAPI(object):
         self._client = ServiceClient(self.config.credentials, self.config)
 
         client_models = {k: v for k, v in models.__dict__.items() if isinstance(v, type)}
-        self.api_version = '0.9.163'
+        self.api_version = '0.9.165'
         self._serialize = Serializer(client_models)
         self._deserialize = Deserializer(client_models)
 

@@ -27,9 +27,17 @@ from msrest.serialization import Model
 class AggregationRequest(Model):
     """Specification object for the parameters of an aggregation.
 
-    :param recipe_id: The configuration recipe, consisting of user scope and
+    :param recipe_id: The configuration recipe, consisting of recipe scope and
      recipe name, to use in performing the aggregation.
     :type recipe_id: ~lusid.models.ResourceId
+    :param inline_recipe: Target Method for providing a non-named recipe.
+     If given, this replaces the 'RecipeId' used with the bespoke recipe. This
+     is intended to allow use of non-named
+     recipes to iterate quickly for design purposes. Ultimately it is
+     recommended that production recipes would be stored
+     in Lusid.
+     USE OF ANY (INLINE) RECIPE IS AT PRESENT LIABLE TO CHANGE.
+    :type inline_recipe: ~lusid.models.ConfigurationRecipe
     :param as_at: The asAt date to use
     :type as_at: datetime
     :param effective_at: The market data time, i.e. the time to run the
@@ -58,13 +66,13 @@ class AggregationRequest(Model):
     """
 
     _validation = {
-        'recipe_id': {'required': True},
         'effective_at': {'required': True},
         'metrics': {'required': True},
     }
 
     _attribute_map = {
         'recipe_id': {'key': 'recipeId', 'type': 'ResourceId'},
+        'inline_recipe': {'key': 'inlineRecipe', 'type': 'ConfigurationRecipe'},
         'as_at': {'key': 'asAt', 'type': 'iso-8601'},
         'effective_at': {'key': 'effectiveAt', 'type': 'iso-8601'},
         'metrics': {'key': 'metrics', 'type': '[AggregateSpec]'},
@@ -74,9 +82,10 @@ class AggregationRequest(Model):
         'sort': {'key': 'sort', 'type': 'str'},
     }
 
-    def __init__(self, recipe_id, effective_at, metrics, as_at=None, group_by=None, filters=None, limit=None, sort=None):
+    def __init__(self, effective_at, metrics, recipe_id=None, inline_recipe=None, as_at=None, group_by=None, filters=None, limit=None, sort=None):
         super(AggregationRequest, self).__init__()
         self.recipe_id = recipe_id
+        self.inline_recipe = inline_recipe
         self.as_at = as_at
         self.effective_at = effective_at
         self.metrics = metrics

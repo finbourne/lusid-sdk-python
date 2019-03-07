@@ -21,5 +21,34 @@
 # SOFTWARE.
 # --------------------------------------------------------------------------
 
-VERSION = "0.9.165"
+from msrest.serialization import Model
 
+
+class ConfigurationRecipe(Model):
+    """The Configuration or Calculation Recipe controls how LUSID processes a
+    given request.
+    This can be used to change where market data used in pricing is loaded from
+    and in what order, or which model is used to
+    price a given instrument as well as how aggregation will process the
+    produced results.
+
+    :param code: User given string name (code) to identify the recipe.
+    :type code: str
+    :param market: The market configuration node that defines where market
+     data used in processing a request is loaded from and how it is resolved.
+    :type market: ~lusid.models.MarketContext
+    """
+
+    _validation = {
+        'code': {'required': True},
+    }
+
+    _attribute_map = {
+        'code': {'key': 'code', 'type': 'str'},
+        'market': {'key': 'market', 'type': 'MarketContext'},
+    }
+
+    def __init__(self, code, market=None):
+        super(ConfigurationRecipe, self).__init__()
+        self.code = code
+        self.market = market

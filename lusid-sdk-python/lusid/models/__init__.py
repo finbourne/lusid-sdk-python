@@ -75,6 +75,11 @@ from .create_portfolio_group_request import CreatePortfolioGroupRequest
 from .portfolio_group import PortfolioGroup
 from .resource_list_of_portfolio_group import ResourceListOfPortfolioGroup
 from .update_portfolio_group_request import UpdatePortfolioGroupRequest
+from .market_data_key_rule import MarketDataKeyRule
+from .market_context_suppliers import MarketContextSuppliers
+from .market_options import MarketOptions
+from .market_context import MarketContext
+from .configuration_recipe import ConfigurationRecipe
 from .aggregate_spec import AggregateSpec
 from .property_filter import PropertyFilter
 from .aggregation_request import AggregationRequest
@@ -220,6 +225,11 @@ __all__ = [
     'PortfolioGroup',
     'ResourceListOfPortfolioGroup',
     'UpdatePortfolioGroupRequest',
+    'MarketDataKeyRule',
+    'MarketContextSuppliers',
+    'MarketOptions',
+    'MarketContext',
+    'ConfigurationRecipe',
     'AggregateSpec',
     'PropertyFilter',
     'AggregationRequest',
