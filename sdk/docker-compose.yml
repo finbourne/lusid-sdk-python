@@ -1,0 +1,17 @@
+version: "3"
+
+services:
+
+  lusid-sdk-python-test:
+    build: .
+    container_name: lusid-sdk-python-test
+    image: finbourne/lusid-sdk-python-test
+    environment:
+      - FBN_CLIENT_ID
+      - FBN_CLIENT_SECRET
+      - FBN_LUSID_API_URL
+      - FBN_PASSWORD
+      - FBN_TOKEN_URL
+      - FBN_USERNAME
+    volumes:
+      - .:/usr/src
