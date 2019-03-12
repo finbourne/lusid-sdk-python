@@ -7,4 +7,5 @@ services:
     build: .
     image: finbourne/lusid-sdk-python-gen
     volumes:
-      - .:/usr/src
+      - .:/usr/swagger
+    command: lusid.json

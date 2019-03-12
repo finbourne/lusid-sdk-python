@@ -1,13 +1,11 @@
-FROM microsoft/dotnet:2.0-sdk
+FROM maven:3.5-jdk-10
 
-RUN mkdir -p /usr/src
-WORKDIR /usr/src
+RUN mkdir -p /usr/src/
+WORKDIR /usr/src/
 
-RUN apt-get update && apt-get install -y --no-install-recommends apt-utils && \
-    curl -sL https://deb.nodesource.com/setup_8.x | bash - && \
-    apt-get install -y nodejs && \
-    apt-get install npm
+RUN wget http://central.maven.org/maven2/org/openapitools/openapi-generator-cli/3.3.4/openapi-generator-cli-3.3.4.jar -O openapi-generator-cli.jar
 
-RUN npm install -g autorest@2.0.4283
+ADD generate.sh /usr/src/
+ADD .openapi-generator-ignore /usr/src/
 
-CMD autorest --python
+ENTRYPOINT [ "/bin/bash", "generate.sh" ]
