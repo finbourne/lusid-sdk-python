@@ -24,13 +24,11 @@
 from msrest.serialization import Model
 
 
-class CorporateActionTransitionComponent(Model):
-    """CorporateActionTransitionComponent.
+class CorporateActionTransitionComponentRequest(Model):
+    """CorporateActionTransitionComponentRequest.
 
     :param instrument_identifiers: unique instrument identifiers.
     :type instrument_identifiers: dict[str, str]
-    :param instrument_uid: Unique instrument identifier
-    :type instrument_uid: str
     :param units_factor:
     :type units_factor: float
     :param cost_factor:
@@ -39,21 +37,18 @@ class CorporateActionTransitionComponent(Model):
 
     _validation = {
         'instrument_identifiers': {'required': True},
-        'instrument_uid': {'required': True},
         'units_factor': {'required': True},
         'cost_factor': {'required': True},
     }
 
     _attribute_map = {
         'instrument_identifiers': {'key': 'instrumentIdentifiers', 'type': '{str}'},
-        'instrument_uid': {'key': 'instrumentUid', 'type': 'str'},
         'units_factor': {'key': 'unitsFactor', 'type': 'float'},
         'cost_factor': {'key': 'costFactor', 'type': 'float'},
     }
 
-    def __init__(self, instrument_identifiers, instrument_uid, units_factor, cost_factor):
-        super(CorporateActionTransitionComponent, self).__init__()
+    def __init__(self, instrument_identifiers, units_factor, cost_factor):
+        super(CorporateActionTransitionComponentRequest, self).__init__()
         self.instrument_identifiers = instrument_identifiers
-        self.instrument_uid = instrument_uid
         self.units_factor = units_factor
         self.cost_factor = cost_factor

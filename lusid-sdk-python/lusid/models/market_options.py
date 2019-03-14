@@ -37,28 +37,19 @@ class MarketOptions(Model):
     per source. Be aware that where no specified rule matches the final
     fallback is on to the logic implied here.
 
-    Variables are only populated by the server, and will be ignored when
-    sending a request.
-
-    :ivar default_supplier: The default supplier of data. This controls which
+    :param default_supplier: The default supplier of data. This controls which
      'dialect' is used to find particular market data. e.g. one supplier might
      address data by RIC, another by PermId. Possible values include:
      'DataScope', 'Lusid'
-    :vartype default_supplier: str or ~lusid.models.enum
-    :ivar default_instrument_code_type: when instrument quotes are searched
+    :type default_supplier: str or ~lusid.models.enum
+    :param default_instrument_code_type: when instrument quotes are searched
      for, what identifier should be used by default. Possible values include:
      'LusidInstrumentId', 'Figi', 'RIC', 'QuotePermId', 'Isin', 'CurrencyPair'
-    :vartype default_instrument_code_type: str or ~lusid.models.enum
-    :ivar default_scope: for default rules, which scope should data be
+    :type default_instrument_code_type: str or ~lusid.models.enum
+    :param default_scope: for default rules, which scope should data be
      searched for in
-    :vartype default_scope: str
+    :type default_scope: str
     """
-
-    _validation = {
-        'default_supplier': {'readonly': True},
-        'default_instrument_code_type': {'readonly': True},
-        'default_scope': {'readonly': True},
-    }
 
     _attribute_map = {
         'default_supplier': {'key': 'defaultSupplier', 'type': 'str'},
@@ -66,8 +57,8 @@ class MarketOptions(Model):
         'default_scope': {'key': 'defaultScope', 'type': 'str'},
     }
 
-    def __init__(self):
+    def __init__(self, default_supplier=None, default_instrument_code_type=None, default_scope=None):
         super(MarketOptions, self).__init__()
-        self.default_supplier = None
-        self.default_instrument_code_type = None
-        self.default_scope = None
+        self.default_supplier = default_supplier
+        self.default_instrument_code_type = default_instrument_code_type
+        self.default_scope = default_scope

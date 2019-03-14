@@ -24,36 +24,24 @@
 from msrest.serialization import Model
 
 
-class CorporateActionTransitionComponent(Model):
-    """CorporateActionTransitionComponent.
+class CorporateActionTransitionRequest(Model):
+    """A 'transition' within a corporate action, representing a set of output
+    movements paired to a single input position.
 
-    :param instrument_identifiers: unique instrument identifiers.
-    :type instrument_identifiers: dict[str, str]
-    :param instrument_uid: Unique instrument identifier
-    :type instrument_uid: str
-    :param units_factor:
-    :type units_factor: float
-    :param cost_factor:
-    :type cost_factor: float
+    :param input_transition:
+    :type input_transition:
+     ~lusid.models.CorporateActionTransitionComponentRequest
+    :param output_transitions:
+    :type output_transitions:
+     list[~lusid.models.CorporateActionTransitionComponentRequest]
     """
 
-    _validation = {
-        'instrument_identifiers': {'required': True},
-        'instrument_uid': {'required': True},
-        'units_factor': {'required': True},
-        'cost_factor': {'required': True},
-    }
-
     _attribute_map = {
-        'instrument_identifiers': {'key': 'instrumentIdentifiers', 'type': '{str}'},
-        'instrument_uid': {'key': 'instrumentUid', 'type': 'str'},
-        'units_factor': {'key': 'unitsFactor', 'type': 'float'},
-        'cost_factor': {'key': 'costFactor', 'type': 'float'},
+        'input_transition': {'key': 'inputTransition', 'type': 'CorporateActionTransitionComponentRequest'},
+        'output_transitions': {'key': 'outputTransitions', 'type': '[CorporateActionTransitionComponentRequest]'},
     }
 
-    def __init__(self, instrument_identifiers, instrument_uid, units_factor, cost_factor):
-        super(CorporateActionTransitionComponent, self).__init__()
-        self.instrument_identifiers = instrument_identifiers
-        self.instrument_uid = instrument_uid
-        self.units_factor = units_factor
-        self.cost_factor = cost_factor
+    def __init__(self, input_transition=None, output_transitions=None):
+        super(CorporateActionTransitionRequest, self).__init__()
+        self.input_transition = input_transition
+        self.output_transitions = output_transitions

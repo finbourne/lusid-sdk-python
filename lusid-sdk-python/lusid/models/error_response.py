@@ -74,13 +74,13 @@ class ErrorResponse(Model):
      'InstrumentUpsertFailure', 'TransactionTypeNotFound',
      'TransactionTypeDuplication', 'InvalidPropertyValueAssignment',
      'PortfolioDoesNotExistAtGivenDate', 'QueryParserFailure',
-     'DuplicateConstituentFailure', 'UnresolvedConstituentFailure',
-     'MissingRecipeFailure', 'DependenciesFailure',
-     'PortfolioPreprocessFailure', 'ValuationEngineFailure',
-     'TaskFactoryFailure', 'TaskEvaluationFailure', 'InstrumentFailure',
-     'CashFlowsFailure', 'ResultRetrievalFailure', 'ResultProcessingFailure',
-     'VendorResultProcessingFailure', 'CannotSupplyTimesWithPortfoliosQuery',
-     'AttemptToUpsertDuplicateQuotes'
+     'DuplicateConstituentFailure', 'UnresolvedInstrumentConstituentFailure',
+     'UnresolvedInstrumentInTransitionFailure', 'MissingRecipeFailure',
+     'DependenciesFailure', 'PortfolioPreprocessFailure',
+     'ValuationEngineFailure', 'TaskFactoryFailure', 'TaskEvaluationFailure',
+     'InstrumentFailure', 'CashFlowsFailure', 'ResultRetrievalFailure',
+     'ResultProcessingFailure', 'VendorResultProcessingFailure',
+     'CannotSupplyTimesWithPortfoliosQuery', 'AttemptToUpsertDuplicateQuotes'
     :type code: str or ~lusid.models.enum
     :param message:
     :type message: str

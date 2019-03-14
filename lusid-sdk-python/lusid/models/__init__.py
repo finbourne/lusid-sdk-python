@@ -35,9 +35,11 @@ from .resource_id import ResourceId
 from .version import Version
 from .corporate_action_source import CorporateActionSource
 from .resource_list_of_corporate_action_source import ResourceListOfCorporateActionSource
+from .corporate_action_transition_component_request import CorporateActionTransitionComponentRequest
+from .corporate_action_transition_request import CorporateActionTransitionRequest
+from .create_corporate_action import CreateCorporateAction
 from .corporate_action_transition_component import CorporateActionTransitionComponent
 from .corporate_action_transition import CorporateActionTransition
-from .create_corporate_action import CreateCorporateAction
 from .corporate_action import CorporateAction
 from .error_detail import ErrorDetail
 from .upsert_corporate_actions_response import UpsertCorporateActionsResponse
@@ -185,9 +187,11 @@ __all__ = [
     'Version',
     'CorporateActionSource',
     'ResourceListOfCorporateActionSource',
+    'CorporateActionTransitionComponentRequest',
+    'CorporateActionTransitionRequest',
+    'CreateCorporateAction',
     'CorporateActionTransitionComponent',
     'CorporateActionTransition',
-    'CreateCorporateAction',
     'CorporateAction',
     'ErrorDetail',
     'UpsertCorporateActionsResponse',

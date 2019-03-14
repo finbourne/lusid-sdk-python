@@ -27,15 +27,15 @@ from msrest.serialization import Model
 class MarketDataKeyRule(Model):
     """MarketDataKeyRule.
 
-    :param data_scope: the scope in which the data should be found when using
-     this rule.
-    :type data_scope: str
     :param key: The market data key pattern which this is a rule for. A dot
      separated string (A.B.C.D.*)
     :type key: str
     :param supplier: the market data supplier (where the data comes from).
      Possible values include: 'DataScope', 'Lusid'
     :type supplier: str or ~lusid.models.enum
+    :param data_scope: the scope in which the data should be found when using
+     this rule.
+    :type data_scope: str
     :param quote_type: is the quote to be looked for a price, yield etc.
      Possible values include: 'Price', 'Spread', 'Rate'
     :type quote_type: str or ~lusid.models.enum
@@ -47,20 +47,21 @@ class MarketDataKeyRule(Model):
     _validation = {
         'key': {'required': True},
         'supplier': {'required': True},
+        'data_scope': {'required': True},
     }
 
     _attribute_map = {
-        'data_scope': {'key': 'dataScope', 'type': 'str'},
         'key': {'key': 'key', 'type': 'str'},
         'supplier': {'key': 'supplier', 'type': 'str'},
+        'data_scope': {'key': 'dataScope', 'type': 'str'},
         'quote_type': {'key': 'quoteType', 'type': 'str'},
         'price_side': {'key': 'priceSide', 'type': 'str'},
     }
 
-    def __init__(self, key, supplier, data_scope=None, quote_type=None, price_side=None):
+    def __init__(self, key, supplier, data_scope, quote_type=None, price_side=None):
         super(MarketDataKeyRule, self).__init__()
-        self.data_scope = data_scope
         self.key = key
         self.supplier = supplier
+        self.data_scope = data_scope
         self.quote_type = quote_type
         self.price_side = price_side

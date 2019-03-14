@@ -38,7 +38,7 @@ class CreateCorporateAction(Model):
     :param payment_date:
     :type payment_date: datetime
     :param transitions:
-    :type transitions: list[~lusid.models.CorporateActionTransition]
+    :type transitions: list[~lusid.models.CorporateActionTransitionRequest]
     """
 
     _validation = {
@@ -56,7 +56,7 @@ class CreateCorporateAction(Model):
         'ex_date': {'key': 'exDate', 'type': 'iso-8601'},
         'record_date': {'key': 'recordDate', 'type': 'iso-8601'},
         'payment_date': {'key': 'paymentDate', 'type': 'iso-8601'},
-        'transitions': {'key': 'transitions', 'type': '[CorporateActionTransition]'},
+        'transitions': {'key': 'transitions', 'type': '[CorporateActionTransitionRequest]'},
     }
 
     def __init__(self, corporate_action_code, announcement_date, ex_date, record_date, payment_date, transitions):
