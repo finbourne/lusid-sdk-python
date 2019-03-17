@@ -63,9 +63,8 @@ class OutputTransaction(Model):
     :vartype properties: list[~lusid.models.PerpetualProperty]
     :ivar counterparty_id: Counterparty identifier
     :vartype counterparty_id: str
-    :ivar source: Where this transaction came from, either Client or System.
-     Possible values include: 'System', 'Client'
-    :vartype source: str or ~lusid.models.enum
+    :ivar source: Where this transaction came from
+    :vartype source: str
     :ivar netting_set:
     :vartype netting_set: str
     :ivar transaction_status: Transaction status (active, amended or

@@ -55,9 +55,8 @@ class Transaction(Model):
     :type properties: list[~lusid.models.PerpetualProperty]
     :param counterparty_id: Counterparty identifier
     :type counterparty_id: str
-    :param source: Where this transaction came from. Possible values include:
-     'System', 'Client'
-    :type source: str or ~lusid.models.enum
+    :param source: Where this transaction came from
+    :type source: str
     :param netting_set:
     :type netting_set: str
     """

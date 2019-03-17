@@ -53,9 +53,8 @@ class TransactionRequest(Model):
     :type properties: dict[str, ~lusid.models.PerpetualPropertyValue]
     :param counterparty_id: Counterparty identifier
     :type counterparty_id: str
-    :param source: Where this transaction came from, either Client or System.
-     Possible values include: 'System', 'Client'
-    :type source: str or ~lusid.models.enum
+    :param source: Where this transaction came from
+    :type source: str
     :param netting_set:
     :type netting_set: str
     """
@@ -69,7 +68,6 @@ class TransactionRequest(Model):
         'units': {'required': True},
         'transaction_price': {'required': True},
         'total_consideration': {'required': True},
-        'source': {'required': True},
     }
 
     _attribute_map = {
@@ -89,7 +87,7 @@ class TransactionRequest(Model):
         'netting_set': {'key': 'nettingSet', 'type': 'str'},
     }
 
-    def __init__(self, transaction_id, type, instrument_identifiers, transaction_date, settlement_date, units, transaction_price, total_consideration, source, exchange_rate=None, transaction_currency=None, properties=None, counterparty_id=None, netting_set=None):
+    def __init__(self, transaction_id, type, instrument_identifiers, transaction_date, settlement_date, units, transaction_price, total_consideration, exchange_rate=None, transaction_currency=None, properties=None, counterparty_id=None, source=None, netting_set=None):
         super(TransactionRequest, self).__init__()
         self.transaction_id = transaction_id
         self.type = type
