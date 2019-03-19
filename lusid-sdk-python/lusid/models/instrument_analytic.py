@@ -36,13 +36,17 @@ class InstrumentAnalytic(Model):
     :type denomination: str
     """
 
+    _validation = {
+        'instrument_uid': {'required': True},
+    }
+
     _attribute_map = {
         'instrument_uid': {'key': 'instrumentUid', 'type': 'str'},
         'value': {'key': 'value', 'type': 'float'},
         'denomination': {'key': 'denomination', 'type': 'str'},
     }
 
-    def __init__(self, instrument_uid=None, value=None, denomination=None):
+    def __init__(self, instrument_uid, value=None, denomination=None):
         super(InstrumentAnalytic, self).__init__()
         self.instrument_uid = instrument_uid
         self.value = value
