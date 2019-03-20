@@ -35,6 +35,8 @@ class PortfolioDetails(Model):
     :type version: ~lusid.models.Version
     :param base_currency:
     :type base_currency: str
+    :param corporate_action_source_id:
+    :type corporate_action_source_id: ~lusid.models.ResourceId
     :param links:
     :type links: list[~lusid.models.Link]
     """
@@ -44,13 +46,15 @@ class PortfolioDetails(Model):
         'origin_portfolio_id': {'key': 'originPortfolioId', 'type': 'ResourceId'},
         'version': {'key': 'version', 'type': 'Version'},
         'base_currency': {'key': 'baseCurrency', 'type': 'str'},
+        'corporate_action_source_id': {'key': 'corporateActionSourceId', 'type': 'ResourceId'},
         'links': {'key': 'links', 'type': '[Link]'},
     }
 
-    def __init__(self, href=None, origin_portfolio_id=None, version=None, base_currency=None, links=None):
+    def __init__(self, href=None, origin_portfolio_id=None, version=None, base_currency=None, corporate_action_source_id=None, links=None):
         super(PortfolioDetails, self).__init__()
         self.href = href
         self.origin_portfolio_id = origin_portfolio_id
         self.version = version
         self.base_currency = base_currency
+        self.corporate_action_source_id = corporate_action_source_id
         self.links = links
