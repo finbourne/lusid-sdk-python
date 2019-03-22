@@ -50,7 +50,7 @@ setup(
     ],
     keywords='finbourne lusid',
     packages=find_packages(exclude=['tests*']),
-    install_requires=['urllib3==1.24.1','requests==2.21.0','msrest==0.4.26']
+    install_requires=['urllib3==1.24.1','requests==2.21.0','msrest==0.6.4']
 
 
 )
