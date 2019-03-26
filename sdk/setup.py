@@ -24,8 +24,6 @@
 
 from setuptools import setup, find_packages  # noqa: H301
 
-NAME = "lusid-sdk"
-VERSION = "1.0.0"
 # To install the library, run the following
 #
 # python setup.py install
@@ -35,10 +33,14 @@ VERSION = "1.0.0"
 
 REQUIRES = ["urllib3 >= 1.15", "six >= 1.10", "certifi", "python-dateutil"]
 
+version = {}
+with open("./lusid/__version__.py") as fp:
+    exec(fp.read(), version)
+
 setup(
 
     name='lusid-sdk',
-    version=version['VERSION'],
+    version=version['__version__'],
     description='Python SDK for LUSID API',
     url='https://github.com/finbourne/lusid-sdk-python',
     author='FINBOURNE Technology',
