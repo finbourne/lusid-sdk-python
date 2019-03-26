@@ -263,7 +263,7 @@ class TestFinbourneApi(TestCase):
                              'Holding total units is {} when it should be {}'.format(holding.units,
                                                                                      adjustment.units))
 
-            self.assertEqual(adjustment.cost.amount, holding.cost.amount,
+            self.assertEqual(round(adjustment.cost.amount, 2), round(holding.cost.amount, 2),
                              'Total amount is {} when it should be {}'.format(holding.cost.amount,
                                                                               adjustment.cost.amount))
 

@@ -15,7 +15,7 @@ Name | Type | Description | Notes
 **transaction_currency** | **str** | Transaction currency | [optional] 
 **properties** | [**dict(str, PerpetualPropertyValue)**](PerpetualPropertyValue.md) |  | [optional] 
 **counterparty_id** | **str** | Counterparty identifier | [optional] 
-**source** | **str** | Where this transaction came from, either Client or System | 
+**source** | **str** | Where this transaction came from | [optional] 
 **netting_set** | **str** |  | [optional] 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
