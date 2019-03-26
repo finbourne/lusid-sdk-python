@@ -30,10 +30,4 @@ java -jar openapi-generator-cli.jar generate \
     -c $gen_root/config.json
     
 rm -rf $sdk_output_folder/.openapi-generator
-rm $sdk_output_folder/.gitignore
 rm $sdk_output_folder/.openapi-generator-ignore
-rm $sdk_output_folder/git_push.sh
-rm $sdk_output_folder/README.md
-rm $sdk_output_folder/.travis.yml
-rm $sdk_output_folder/test-requirements.txt
-rm $sdk_output_folder/tox.ini

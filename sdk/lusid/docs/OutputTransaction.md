@@ -18,7 +18,7 @@ Name | Type | Description | Notes
 **transaction_currency** | **str** | Transaction currency | [optional] 
 **properties** | [**list[PerpetualProperty]**](PerpetualProperty.md) |  | [optional] 
 **counterparty_id** | **str** | Counterparty identifier | [optional] 
-**source** | **str** | Where this transaction came from, either Client or System | [optional] 
+**source** | **str** | Where this transaction came from | [optional] 
 **netting_set** | **str** |  | [optional] 
 **transaction_status** | **str** | Transaction status (active, amended or cancelled) | [optional] 
 **entry_date_time** | **datetime** | Date/Time the transaction was booked into LUSID | [optional] 
