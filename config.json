@@ -1,5 +1,6 @@
 {
-    "packageName": "lusid",
-    "projectName": "lusid-sdk",
-    "generateSourceCodeOnly": "generateSourceCodeOnly"
+  "packageName": "lusid",
+  "projectName": "lusid-sdk",
+  "generateSourceCodeOnly": "generateSourceCodeOnly",
+  "packageVersion": "0.9.189"
 }

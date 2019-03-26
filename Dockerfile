@@ -1,5 +1,7 @@
 FROM maven:3.5-jdk-10
 
+RUN apt-get update && apt-get -y install jq
+
 RUN mkdir -p /usr/src/
 WORKDIR /usr/src/
 

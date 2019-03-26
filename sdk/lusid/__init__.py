@@ -15,7 +15,7 @@
 
 from __future__ import absolute_import
 
-__version__ = "1.0.0"
+__version__ = "0.9.189"
 
 # import apis into sdk package
 from lusid.api.aggregation_api import AggregationApi
