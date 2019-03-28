@@ -13,9 +13,8 @@ config_file=$gen_root/config.json
 
 #   remove all previously generated files
 shopt -s extglob 
-echo "removing previous sdk:"
+echo "removing previous sdk: $sdk_output_folder"
 rm -rf $sdk_output_folder/lusid
-rm !(*.jar|Dockerfile|docker-compose.yml)
 shopt -u extglob 
 
 # ignore files
