@@ -373,7 +373,7 @@ class LUSIDAPI(object):
         self._client = ServiceClient(self.config.credentials, self.config)
 
         client_models = {k: v for k, v in models.__dict__.items() if isinstance(v, type)}
-        self.api_version = '0.9.189'
+        self.api_version = '0.9.190'
         self._serialize = Serializer(client_models)
         self._deserialize = Deserializer(client_models)
 
@@ -4827,7 +4827,7 @@ class LUSIDAPI(object):
     create_reference_portfolio.metadata = {'url': '/api/referenceportfolios/{scope}'}
 
     def get_reference_portfolio_constituents(
-            self, scope, code, effective_at=None, as_at=None, sort_by=None, start=None, limit=None, custom_headers=None, raw=False, **operation_config):
+            self, scope, code, effective_at=None, as_at=None, sort_by=None, start=None, limit=None, instrument_property_keys=None, custom_headers=None, raw=False, **operation_config):
         """Get constituents.
 
         Get all the constituents in the specified reference portfolio.
@@ -4849,6 +4849,9 @@ class LUSIDAPI(object):
         :param limit: Optional. When paginating, limit the number of returned
          results to this many
         :type limit: int
+        :param instrument_property_keys: Optional. The Properties of the
+         constituents
+        :type instrument_property_keys: list[str]
         :param dict custom_headers: headers that will be added to the request
         :param bool raw: returns the direct response alongside the
          deserialized response
@@ -4881,6 +4884,8 @@ class LUSIDAPI(object):
             query_parameters['start'] = self._serialize.query("start", start, 'int')
         if limit is not None:
             query_parameters['limit'] = self._serialize.query("limit", limit, 'int')
+        if instrument_property_keys is not None:
+            query_parameters['instrumentPropertyKeys'] = self._serialize.query("instrument_property_keys", instrument_property_keys, '[str]', div=',')
 
         # Construct headers
         header_parameters = {}
