@@ -52,7 +52,7 @@ class ErrorResponse(Model):
      'IllegalBitemporalQuery', 'InvalidAlternateId',
      'CannotAddSourcePortfolioPropertyExplicitly',
      'EntityAlreadyExistsInGroup', 'EntityWithIdAlreadyExists',
-     'PortfolioDetailsDoNotExist', 'PortfolioWithNameAlreadyExists',
+     'DerivedPortfolioDetailsDoNotExist', 'PortfolioWithNameAlreadyExists',
      'InvalidTransactions', 'ReferencePortfolioNotFound', 'DuplicateIdFailure',
      'CommandRetrievalFailure', 'DataFilterApplicationFailure', 'SearchFailed',
      'MovementsEngineConfigurationKeyFailure', 'FxRateSourceNotFound',

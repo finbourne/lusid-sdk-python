@@ -24,38 +24,31 @@
 from msrest.serialization import Model
 
 
-class Link(Model):
-    """Link.
+class ModelSelection(Model):
+    """The combination of a library to use and a model in that library that
+    defines which pricing code will evaluate instruments
+    having a particular type/class. This allows us to control the model type
+    and library for a given instrument.
 
-    :param relation: Possible values include: 'Root', 'Properties',
-     'Transactions', 'Details', 'Constituents', 'Holdings', 'Commands',
-     'HoldingsAdjustments', 'Parent', 'PropertySchema', 'EntitySchema',
-     'NextPage', 'PreviousPage', 'Quote', 'ConstituentsAdjustments'
-    :type relation: str or ~lusid.models.enum
-    :param href:
-    :type href: str
-    :param description:
-    :type description: str
-    :param method: Possible values include: 'POST', 'GET', 'PATCH', 'DELETE'
-    :type method: str or ~lusid.models.enum
+    :param library: Which library is used for pricing requests. Possible
+     values include: 'Lusid', 'ReutersEikon', 'ReutersTracsWeb'
+    :type library: str or ~lusid.models.enum
+    :param model: Which model should be used for pricing requests. Possible
+     values include: 'SimpleStatic', 'Discounting', 'VendorDefault'
+    :type model: str or ~lusid.models.enum
     """
 
     _validation = {
-        'relation': {'required': True},
-        'href': {'required': True},
-        'method': {'required': True},
+        'library': {'required': True},
+        'model': {'required': True},
     }
 
     _attribute_map = {
-        'relation': {'key': 'relation', 'type': 'str'},
-        'href': {'key': 'href', 'type': 'str'},
-        'description': {'key': 'description', 'type': 'str'},
-        'method': {'key': 'method', 'type': 'str'},
+        'library': {'key': 'library', 'type': 'str'},
+        'model': {'key': 'model', 'type': 'str'},
     }
 
-    def __init__(self, relation, href, method, description=None):
-        super(Link, self).__init__()
-        self.relation = relation
-        self.href = href
-        self.description = description
-        self.method = method
+    def __init__(self, library, model):
+        super(ModelSelection, self).__init__()
+        self.library = library
+        self.model = model

@@ -24,38 +24,25 @@
 from msrest.serialization import Model
 
 
-class Link(Model):
-    """Link.
+class PricingOptions(Model):
+    """Options for controlling the default aspects and behaviour of the pricing
+    engine.
 
-    :param relation: Possible values include: 'Root', 'Properties',
-     'Transactions', 'Details', 'Constituents', 'Holdings', 'Commands',
-     'HoldingsAdjustments', 'Parent', 'PropertySchema', 'EntitySchema',
-     'NextPage', 'PreviousPage', 'Quote', 'ConstituentsAdjustments'
-    :type relation: str or ~lusid.models.enum
-    :param href:
-    :type href: str
-    :param description:
-    :type description: str
-    :param method: Possible values include: 'POST', 'GET', 'PATCH', 'DELETE'
-    :type method: str or ~lusid.models.enum
+    :param model_selection: The default model and pricing library to use if no
+     others specified
+    :type model_selection: ~lusid.models.ModelSelection
+    :param allow_partially_successful_evaluation: If true then a failure in
+     task evaluation doesn't cause overall failure.
+     results will be returned where they succeeded and annotation elsewhere
+    :type allow_partially_successful_evaluation: bool
     """
 
-    _validation = {
-        'relation': {'required': True},
-        'href': {'required': True},
-        'method': {'required': True},
-    }
-
     _attribute_map = {
-        'relation': {'key': 'relation', 'type': 'str'},
-        'href': {'key': 'href', 'type': 'str'},
-        'description': {'key': 'description', 'type': 'str'},
-        'method': {'key': 'method', 'type': 'str'},
+        'model_selection': {'key': 'modelSelection', 'type': 'ModelSelection'},
+        'allow_partially_successful_evaluation': {'key': 'allowPartiallySuccessfulEvaluation', 'type': 'bool'},
     }
 
-    def __init__(self, relation, href, method, description=None):
-        super(Link, self).__init__()
-        self.relation = relation
-        self.href = href
-        self.description = description
-        self.method = method
+    def __init__(self, model_selection=None, allow_partially_successful_evaluation=None):
+        super(PricingOptions, self).__init__()
+        self.model_selection = model_selection
+        self.allow_partially_successful_evaluation = allow_partially_successful_evaluation

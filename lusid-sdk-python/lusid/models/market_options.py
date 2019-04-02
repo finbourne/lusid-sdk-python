@@ -42,11 +42,11 @@ class MarketOptions(Model):
      address data by RIC, another by PermId. Possible values include:
      'DataScope', 'Lusid'
     :type default_supplier: str or ~lusid.models.enum
-    :param default_instrument_code_type: when instrument quotes are searched
+    :param default_instrument_code_type: When instrument quotes are searched
      for, what identifier should be used by default. Possible values include:
      'LusidInstrumentId', 'Figi', 'RIC', 'QuotePermId', 'Isin', 'CurrencyPair'
     :type default_instrument_code_type: str or ~lusid.models.enum
-    :param default_scope: for default rules, which scope should data be
+    :param default_scope: For default rules, which scope should data be
      searched for in
     :type default_scope: str
     """

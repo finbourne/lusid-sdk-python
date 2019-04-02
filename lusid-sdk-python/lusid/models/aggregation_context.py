@@ -24,38 +24,24 @@
 from msrest.serialization import Model
 
 
-class Link(Model):
-    """Link.
+class AggregationContext(Model):
+    """Aggregation context node. Whilst the market and pricing nodes concern
+    themselves with which models are used and where the market data comes from,
+    the aggregation
+    context determines how data is aggregated together. This controls the
+    behaviour of the grouping and sql-like engine at the back of the valuation.
+    For instance,
+    it controls conversion of currencies and whether the sql-like engine
+    behaves more like ANSI or MySql SQL.
 
-    :param relation: Possible values include: 'Root', 'Properties',
-     'Transactions', 'Details', 'Constituents', 'Holdings', 'Commands',
-     'HoldingsAdjustments', 'Parent', 'PropertySchema', 'EntitySchema',
-     'NextPage', 'PreviousPage', 'Quote', 'ConstituentsAdjustments'
-    :type relation: str or ~lusid.models.enum
-    :param href:
-    :type href: str
-    :param description:
-    :type description: str
-    :param method: Possible values include: 'POST', 'GET', 'PATCH', 'DELETE'
-    :type method: str or ~lusid.models.enum
+    :param options: Miscellaneous options for controlling aggregation.
+    :type options: ~lusid.models.AggregationOptions
     """
 
-    _validation = {
-        'relation': {'required': True},
-        'href': {'required': True},
-        'method': {'required': True},
-    }
-
     _attribute_map = {
-        'relation': {'key': 'relation', 'type': 'str'},
-        'href': {'key': 'href', 'type': 'str'},
-        'description': {'key': 'description', 'type': 'str'},
-        'method': {'key': 'method', 'type': 'str'},
+        'options': {'key': 'options', 'type': 'AggregationOptions'},
     }
 
-    def __init__(self, relation, href, method, description=None):
-        super(Link, self).__init__()
-        self.relation = relation
-        self.href = href
-        self.description = description
-        self.method = method
+    def __init__(self, options=None):
+        super(AggregationContext, self).__init__()
+        self.options = options

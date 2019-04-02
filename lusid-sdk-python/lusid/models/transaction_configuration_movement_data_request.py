@@ -29,7 +29,8 @@ class TransactionConfigurationMovementDataRequest(Model):
 
     :param movement_types: The Movement Types. Possible values include:
      'Settlement', 'Traded', 'ForwardFx', 'Commitment', 'Receivable',
-     'CashSettlement', 'Accrual', 'UnsettledCashTypes'
+     'CashSettlement', 'Accrual', 'UnsettledCashTypes', 'StockMovement',
+     'CashCommitment', 'CashReceivable', 'CashForward', 'CashAccrual'
     :type movement_types: str or ~lusid.models.enum
     :param side: The Movement Side. Possible values include: 'Side1', 'Side2',
      'BondInt'

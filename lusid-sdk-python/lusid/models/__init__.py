@@ -81,6 +81,12 @@ from .market_data_key_rule import MarketDataKeyRule
 from .market_context_suppliers import MarketContextSuppliers
 from .market_options import MarketOptions
 from .market_context import MarketContext
+from .vendor_model_rule import VendorModelRule
+from .model_selection import ModelSelection
+from .pricing_options import PricingOptions
+from .pricing_context import PricingContext
+from .aggregation_options import AggregationOptions
+from .aggregation_context import AggregationContext
 from .configuration_recipe import ConfigurationRecipe
 from .aggregate_spec import AggregateSpec
 from .property_filter import PropertyFilter
@@ -233,6 +239,12 @@ __all__ = [
     'MarketContextSuppliers',
     'MarketOptions',
     'MarketContext',
+    'VendorModelRule',
+    'ModelSelection',
+    'PricingOptions',
+    'PricingContext',
+    'AggregationOptions',
+    'AggregationContext',
     'ConfigurationRecipe',
     'AggregateSpec',
     'PropertyFilter',

@@ -24,38 +24,22 @@
 from msrest.serialization import Model
 
 
-class Link(Model):
-    """Link.
+class AggregationOptions(Model):
+    """Options for controlling the default aspects and behaviour of the
+    aggregation.
 
-    :param relation: Possible values include: 'Root', 'Properties',
-     'Transactions', 'Details', 'Constituents', 'Holdings', 'Commands',
-     'HoldingsAdjustments', 'Parent', 'PropertySchema', 'EntitySchema',
-     'NextPage', 'PreviousPage', 'Quote', 'ConstituentsAdjustments'
-    :type relation: str or ~lusid.models.enum
-    :param href:
-    :type href: str
-    :param description:
-    :type description: str
-    :param method: Possible values include: 'POST', 'GET', 'PATCH', 'DELETE'
-    :type method: str or ~lusid.models.enum
+    :param use_ansi_like_syntax: Should the aggregation behave like ANSI Sql
+     or MySql with respect to a conceptual request which is equivalent to
+     "select a,sum(a) from results";
+     ANSI Sql would report an error if a was not unique where MySql would
+     simply view a,suma(a) as equivalent to firstof(a),sum(a).
+    :type use_ansi_like_syntax: bool
     """
 
-    _validation = {
-        'relation': {'required': True},
-        'href': {'required': True},
-        'method': {'required': True},
-    }
-
     _attribute_map = {
-        'relation': {'key': 'relation', 'type': 'str'},
-        'href': {'key': 'href', 'type': 'str'},
-        'description': {'key': 'description', 'type': 'str'},
-        'method': {'key': 'method', 'type': 'str'},
+        'use_ansi_like_syntax': {'key': 'useAnsiLikeSyntax', 'type': 'bool'},
     }
 
-    def __init__(self, relation, href, method, description=None):
-        super(Link, self).__init__()
-        self.relation = relation
-        self.href = href
-        self.description = description
-        self.method = method
+    def __init__(self, use_ansi_like_syntax=None):
+        super(AggregationOptions, self).__init__()
+        self.use_ansi_like_syntax = use_ansi_like_syntax

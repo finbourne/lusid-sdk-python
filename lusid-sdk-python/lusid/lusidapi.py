@@ -292,7 +292,7 @@ class LUSIDAPI(object):
     | &lt;a name="170"&gt;170&lt;/a&gt;|CannotAddSourcePortfolioPropertyExplicitly|  |
     | &lt;a name="171"&gt;171&lt;/a&gt;|EntityAlreadyExistsInGroup|  |
     | &lt;a name="173"&gt;173&lt;/a&gt;|EntityWithIdAlreadyExists|  |
-    | &lt;a name="174"&gt;174&lt;/a&gt;|PortfolioDetailsDoNotExist|  |
+    | &lt;a name="174"&gt;174&lt;/a&gt;|DerivedPortfolioDetailsDoNotExist|  |
     | &lt;a name="176"&gt;176&lt;/a&gt;|PortfolioWithNameAlreadyExists|  |
     | &lt;a name="177"&gt;177&lt;/a&gt;|InvalidTransactions|  |
     | &lt;a name="178"&gt;178&lt;/a&gt;|ReferencePortfolioNotFound|  |
@@ -373,7 +373,7 @@ class LUSIDAPI(object):
         self._client = ServiceClient(self.config.credentials, self.config)
 
         client_models = {k: v for k, v in models.__dict__.items() if isinstance(v, type)}
-        self.api_version = '0.9.190'
+        self.api_version = '0.9.204'
         self._serialize = Serializer(client_models)
         self._deserialize = Deserializer(client_models)
 
@@ -1531,7 +1531,7 @@ class LUSIDAPI(object):
     delete_derived_portfolio_details.metadata = {'url': '/api/derivedtransactionportfolios/{scope}/{code}/details'}
 
     def list_instruments(
-            self, as_at=None, effective_at=None, sort_by=None, start=None, limit=None, filter="State eq 'Active'", instrument_property_keys=None, custom_headers=None, raw=False, **operation_config):
+            self, as_at=None, effective_at=None, page=None, sort_by=None, start=None, limit=None, filter="State eq 'Active'", instrument_property_keys=None, custom_headers=None, raw=False, **operation_config):
         """Get all of the currently mastered instruments in LUSID.
 
         Lists all instruments that have been mastered within LUSID.
@@ -1540,6 +1540,12 @@ class LUSIDAPI(object):
         :type as_at: datetime
         :param effective_at: Optional. The effective date of the query
         :type effective_at: datetime
+        :param page: Optional. The pagination token to continue listing
+         instruments. This value is returned from a previous call to
+         ListInstruments.
+         If this is set, then the sortBy, filter, effectiveAt, and asAt fields
+         must not have changed. Also, if set, a start value cannot be set.
+        :type page: str
         :param sort_by: Optional. Order the results by these fields. Use use
          the '-' sign to denote descending order e.g. -MyFieldName
         :type sort_by: list[str]
@@ -1574,6 +1580,8 @@ class LUSIDAPI(object):
             query_parameters['asAt'] = self._serialize.query("as_at", as_at, 'iso-8601')
         if effective_at is not None:
             query_parameters['effectiveAt'] = self._serialize.query("effective_at", effective_at, 'iso-8601')
+        if page is not None:
+            query_parameters['page'] = self._serialize.query("page", page, 'str')
         if sort_by is not None:
             query_parameters['sortBy'] = self._serialize.query("sort_by", sort_by, '[str]', div=',')
         if start is not None:
@@ -5651,7 +5659,7 @@ class LUSIDAPI(object):
         Search through all portfolio groups.
 
         :param request: A valid Elasticsearch 5.x request
-        :type request: str
+        :type request: object
         :param sort_by: Optional. Order the results by these fields. Use use
          the '-' sign to denote descending order e.g. -MyFieldName
         :type sort_by: list[str]
@@ -5689,13 +5697,13 @@ class LUSIDAPI(object):
 
         # Construct headers
         header_parameters = {}
-        header_parameters['Content-Type'] = 'text/plain'
+        header_parameters['Content-Type'] = 'application/json-patch+json; charset=utf-8'
         if custom_headers:
             header_parameters.update(custom_headers)
 
         # Construct body
         if request is not None:
-            body_content = self._serialize.body(request, 'str')
+            body_content = self._serialize.body(request, 'object')
         else:
             body_content = None
 
@@ -5726,7 +5734,7 @@ class LUSIDAPI(object):
         Search through all portfolios.
 
         :param request: A valid Elasticsearch 5.x request
-        :type request: str
+        :type request: object
         :param sort_by: Optional. Order the results by these fields. Use use
          the '-' sign to denote descending order e.g. -MyFieldName
         :type sort_by: list[str]
@@ -5765,13 +5773,13 @@ class LUSIDAPI(object):
 
         # Construct headers
         header_parameters = {}
-        header_parameters['Content-Type'] = 'text/plain'
+        header_parameters['Content-Type'] = 'application/json-patch+json; charset=utf-8'
         if custom_headers:
             header_parameters.update(custom_headers)
 
         # Construct body
         if request is not None:
-            body_content = self._serialize.body(request, 'str')
+            body_content = self._serialize.body(request, 'object')
         else:
             body_content = None
 
@@ -5802,7 +5810,7 @@ class LUSIDAPI(object):
         Search through all property definitions.
 
         :param request: A valid Elasticsearch 5.x request
-        :type request: str
+        :type request: object
         :param sort_by: Optional. Order the results by these fields. Use use
          the '-' sign to denote descending order e.g. -MyFieldName
         :type sort_by: list[str]
@@ -5841,13 +5849,13 @@ class LUSIDAPI(object):
 
         # Construct headers
         header_parameters = {}
-        header_parameters['Content-Type'] = 'text/plain'
+        header_parameters['Content-Type'] = 'application/json-patch+json; charset=utf-8'
         if custom_headers:
             header_parameters.update(custom_headers)
 
         # Construct body
         if request is not None:
-            body_content = self._serialize.body(request, 'str')
+            body_content = self._serialize.body(request, 'object')
         else:
             body_content = None
 

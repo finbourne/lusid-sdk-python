@@ -34,9 +34,16 @@ class ConfigurationRecipe(Model):
 
     :param code: User given string name (code) to identify the recipe.
     :type code: str
-    :param market: The market configuration node that defines where market
-     data used in processing a request is loaded from and how it is resolved.
+    :param market: The market configuration that defines where market data
+     used in processing a request is loaded from and how it is resolved.
     :type market: ~lusid.models.MarketContext
+    :param pricing: The pricing configuration that defines which pricing
+     library is used to price a given instrument and what models and
+     preferences are used with those.
+    :type pricing: ~lusid.models.PricingContext
+    :param aggregation: The aggregation configuration that defines how results
+     are amalgamated and what logic to follow when applying sql-like rules.
+    :type aggregation: ~lusid.models.AggregationContext
     """
 
     _validation = {
@@ -46,9 +53,13 @@ class ConfigurationRecipe(Model):
     _attribute_map = {
         'code': {'key': 'code', 'type': 'str'},
         'market': {'key': 'market', 'type': 'MarketContext'},
+        'pricing': {'key': 'pricing', 'type': 'PricingContext'},
+        'aggregation': {'key': 'aggregation', 'type': 'AggregationContext'},
     }
 
-    def __init__(self, code, market=None):
+    def __init__(self, code, market=None, pricing=None, aggregation=None):
         super(ConfigurationRecipe, self).__init__()
         self.code = code
         self.market = market
+        self.pricing = pricing
+        self.aggregation = aggregation
