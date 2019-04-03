@@ -307,7 +307,7 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **list_instruments**
-> ResourceListOfInstrument list_instruments(as_at=as_at, effective_at=effective_at, sort_by=sort_by, start=start, limit=limit, filter=filter, instrument_property_keys=instrument_property_keys)
+> ResourceListOfInstrument list_instruments(as_at=as_at, effective_at=effective_at, page=page, sort_by=sort_by, start=start, limit=limit, filter=filter, instrument_property_keys=instrument_property_keys)
 
 Get all of the currently mastered instruments in LUSID
 
@@ -331,6 +331,7 @@ configuration.access_token = 'YOUR_ACCESS_TOKEN'
 api_instance = lusid.InstrumentsApi(lusid.ApiClient(configuration))
 as_at = '2013-10-20T19:20:30+01:00' # datetime | Optional. The AsAt time (optional)
 effective_at = '2013-10-20T19:20:30+01:00' # datetime | Optional. The effective date of the query (optional)
+page = 'page_example' # str | Optional. The pagination token to continue listing instruments. This value is returned from a previous call to ListInstruments.  If this is set, then the sortBy, filter, effectiveAt, and asAt fields must not have changed. Also, if set, a start value cannot be set. (optional)
 sort_by = ['sort_by_example'] # list[str] | Optional. Order the results by these fields. Use use the '-' sign to denote descending order e.g. -MyFieldName (optional)
 start = 56 # int | Optional. When paginating, skip this number of results (optional)
 limit = 56 # int | Optional. When paginating, limit the number of returned results to this many (optional)
@@ -339,7 +340,7 @@ instrument_property_keys = ['instrument_property_keys_example'] # list[str] | Op
 
 try:
     # Get all of the currently mastered instruments in LUSID
-    api_response = api_instance.list_instruments(as_at=as_at, effective_at=effective_at, sort_by=sort_by, start=start, limit=limit, filter=filter, instrument_property_keys=instrument_property_keys)
+    api_response = api_instance.list_instruments(as_at=as_at, effective_at=effective_at, page=page, sort_by=sort_by, start=start, limit=limit, filter=filter, instrument_property_keys=instrument_property_keys)
     pprint(api_response)
 except ApiException as e:
     print("Exception when calling InstrumentsApi->list_instruments: %s\n" % e)
@@ -351,6 +352,7 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **as_at** | **datetime**| Optional. The AsAt time | [optional] 
  **effective_at** | **datetime**| Optional. The effective date of the query | [optional] 
+ **page** | **str**| Optional. The pagination token to continue listing instruments. This value is returned from a previous call to ListInstruments.  If this is set, then the sortBy, filter, effectiveAt, and asAt fields must not have changed. Also, if set, a start value cannot be set. | [optional] 
  **sort_by** | [**list[str]**](str.md)| Optional. Order the results by these fields. Use use the &#39;-&#39; sign to denote descending order e.g. -MyFieldName | [optional] 
  **start** | **int**| Optional. When paginating, skip this number of results | [optional] 
  **limit** | **int**| Optional. When paginating, limit the number of returned results to this many | [optional] 

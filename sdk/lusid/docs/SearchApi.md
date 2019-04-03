@@ -69,7 +69,7 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **portfolio_groups_search**
-> ResourceListOfPortfolioGroup portfolio_groups_search(sort_by=sort_by, start=start, limit=limit, filter=filter, body=body)
+> ResourceListOfPortfolioGroup portfolio_groups_search(sort_by=sort_by, start=start, limit=limit, filter=filter, unknown_base_type=unknown_base_type)
 
 Search portfolio groups
 
@@ -95,11 +95,11 @@ sort_by = ['sort_by_example'] # list[str] | Optional. Order the results by these
 start = 56 # int | Optional. When paginating, skip this number of results (optional)
 limit = 56 # int | Optional. When paginating, limit the number of returned results to this many. (optional)
 filter = 'filter_example' # str | Optional. Expression to filter the result set (optional)
-body = 'body_example' # str | A valid Elasticsearch 5.x request (optional)
+unknown_base_type = lusid.UNKNOWN_BASE_TYPE() # UNKNOWN_BASE_TYPE | A valid Elasticsearch 5.x request (optional)
 
 try:
     # Search portfolio groups
-    api_response = api_instance.portfolio_groups_search(sort_by=sort_by, start=start, limit=limit, filter=filter, body=body)
+    api_response = api_instance.portfolio_groups_search(sort_by=sort_by, start=start, limit=limit, filter=filter, unknown_base_type=unknown_base_type)
     pprint(api_response)
 except ApiException as e:
     print("Exception when calling SearchApi->portfolio_groups_search: %s\n" % e)
@@ -113,7 +113,7 @@ Name | Type | Description  | Notes
  **start** | **int**| Optional. When paginating, skip this number of results | [optional] 
  **limit** | **int**| Optional. When paginating, limit the number of returned results to this many. | [optional] 
  **filter** | **str**| Optional. Expression to filter the result set | [optional] 
- **body** | **str**| A valid Elasticsearch 5.x request | [optional] 
+ **unknown_base_type** | [**UNKNOWN_BASE_TYPE**](UNKNOWN_BASE_TYPE.md)| A valid Elasticsearch 5.x request | [optional] 
 
 ### Return type
 
@@ -125,13 +125,13 @@ Name | Type | Description  | Notes
 
 ### HTTP request headers
 
- - **Content-Type**: text/plain
+ - **Content-Type**: application/json-patch+json, application/json, text/json, application/*+json
  - **Accept**: text/plain, application/json, text/json
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **portfolios_search**
-> ResourceListOfPortfolioSearchResult portfolios_search(sort_by=sort_by, start=start, limit=limit, filter=filter, body=body)
+> ResourceListOfPortfolioSearchResult portfolios_search(sort_by=sort_by, start=start, limit=limit, filter=filter, unknown_base_type=unknown_base_type)
 
 Search portfolios
 
@@ -157,11 +157,11 @@ sort_by = ['sort_by_example'] # list[str] | Optional. Order the results by these
 start = 56 # int | Optional. When paginating, skip this number of results (optional)
 limit = 56 # int | Optional. When paginating, limit the number of returned results to this many. (optional)
 filter = 'filter_example' # str | Optional. Expression to filter the result set (optional)
-body = 'body_example' # str | A valid Elasticsearch 5.x request (optional)
+unknown_base_type = lusid.UNKNOWN_BASE_TYPE() # UNKNOWN_BASE_TYPE | A valid Elasticsearch 5.x request (optional)
 
 try:
     # Search portfolios
-    api_response = api_instance.portfolios_search(sort_by=sort_by, start=start, limit=limit, filter=filter, body=body)
+    api_response = api_instance.portfolios_search(sort_by=sort_by, start=start, limit=limit, filter=filter, unknown_base_type=unknown_base_type)
     pprint(api_response)
 except ApiException as e:
     print("Exception when calling SearchApi->portfolios_search: %s\n" % e)
@@ -175,7 +175,7 @@ Name | Type | Description  | Notes
  **start** | **int**| Optional. When paginating, skip this number of results | [optional] 
  **limit** | **int**| Optional. When paginating, limit the number of returned results to this many. | [optional] 
  **filter** | **str**| Optional. Expression to filter the result set | [optional] 
- **body** | **str**| A valid Elasticsearch 5.x request | [optional] 
+ **unknown_base_type** | [**UNKNOWN_BASE_TYPE**](UNKNOWN_BASE_TYPE.md)| A valid Elasticsearch 5.x request | [optional] 
 
 ### Return type
 
@@ -187,13 +187,13 @@ Name | Type | Description  | Notes
 
 ### HTTP request headers
 
- - **Content-Type**: text/plain
+ - **Content-Type**: application/json-patch+json, application/json, text/json, application/*+json
  - **Accept**: text/plain, application/json, text/json
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **properties_search**
-> ResourceListOfPropertyDefinition properties_search(sort_by=sort_by, start=start, limit=limit, filter=filter, body=body)
+> ResourceListOfPropertyDefinition properties_search(sort_by=sort_by, start=start, limit=limit, filter=filter, unknown_base_type=unknown_base_type)
 
 Search property definitions
 
@@ -219,11 +219,11 @@ sort_by = ['sort_by_example'] # list[str] | Optional. Order the results by these
 start = 56 # int | Optional. When paginating, skip this number of results (optional)
 limit = 56 # int | Optional. When paginating, limit the number of returned results to this many. (optional)
 filter = 'filter_example' # str | Optional. Expression to filter the result set (optional)
-body = 'body_example' # str | A valid Elasticsearch 5.x request (optional)
+unknown_base_type = lusid.UNKNOWN_BASE_TYPE() # UNKNOWN_BASE_TYPE | A valid Elasticsearch 5.x request (optional)
 
 try:
     # Search property definitions
-    api_response = api_instance.properties_search(sort_by=sort_by, start=start, limit=limit, filter=filter, body=body)
+    api_response = api_instance.properties_search(sort_by=sort_by, start=start, limit=limit, filter=filter, unknown_base_type=unknown_base_type)
     pprint(api_response)
 except ApiException as e:
     print("Exception when calling SearchApi->properties_search: %s\n" % e)
@@ -237,7 +237,7 @@ Name | Type | Description  | Notes
  **start** | **int**| Optional. When paginating, skip this number of results | [optional] 
  **limit** | **int**| Optional. When paginating, limit the number of returned results to this many. | [optional] 
  **filter** | **str**| Optional. Expression to filter the result set | [optional] 
- **body** | **str**| A valid Elasticsearch 5.x request | [optional] 
+ **unknown_base_type** | [**UNKNOWN_BASE_TYPE**](UNKNOWN_BASE_TYPE.md)| A valid Elasticsearch 5.x request | [optional] 
 
 ### Return type
 
@@ -249,7 +249,7 @@ Name | Type | Description  | Notes
 
 ### HTTP request headers
 
- - **Content-Type**: text/plain
+ - **Content-Type**: application/json-patch+json, application/json, text/json, application/*+json
  - **Accept**: text/plain, application/json, text/json
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
