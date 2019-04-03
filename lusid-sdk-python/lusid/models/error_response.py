@@ -80,7 +80,8 @@ class ErrorResponse(Model):
      'ValuationEngineFailure', 'TaskFactoryFailure', 'TaskEvaluationFailure',
      'InstrumentFailure', 'CashFlowsFailure', 'ResultRetrievalFailure',
      'ResultProcessingFailure', 'VendorResultProcessingFailure',
-     'CannotSupplyTimesWithPortfoliosQuery', 'AttemptToUpsertDuplicateQuotes'
+     'CannotSupplyTimesWithPortfoliosQuery', 'AttemptToUpsertDuplicateQuotes',
+     'CorporateActionSourceDoesNotExist'
     :type code: str or ~lusid.models.enum
     :param message:
     :type message: str

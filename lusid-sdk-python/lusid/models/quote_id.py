@@ -27,6 +27,10 @@ from msrest.serialization import Model
 class QuoteId(Model):
     """QuoteId.
 
+    :param provider:
+    :type provider: str
+    :param price_source:
+    :type price_source: str
     :param instrument_id:
     :type instrument_id: str
     :param instrument_id_type: Possible values include: 'LusidInstrumentId',
@@ -39,6 +43,8 @@ class QuoteId(Model):
     """
 
     _validation = {
+        'provider': {'required': True},
+        'price_source': {'required': True},
         'instrument_id': {'required': True},
         'instrument_id_type': {'required': True},
         'quote_type': {'required': True},
@@ -46,14 +52,18 @@ class QuoteId(Model):
     }
 
     _attribute_map = {
+        'provider': {'key': 'provider', 'type': 'str'},
+        'price_source': {'key': 'priceSource', 'type': 'str'},
         'instrument_id': {'key': 'instrumentId', 'type': 'str'},
         'instrument_id_type': {'key': 'instrumentIdType', 'type': 'str'},
         'quote_type': {'key': 'quoteType', 'type': 'str'},
         'price_side': {'key': 'priceSide', 'type': 'str'},
     }
 
-    def __init__(self, instrument_id, instrument_id_type, quote_type, price_side):
+    def __init__(self, provider, price_source, instrument_id, instrument_id_type, quote_type, price_side):
         super(QuoteId, self).__init__()
+        self.provider = provider
+        self.price_source = price_source
         self.instrument_id = instrument_id
         self.instrument_id_type = instrument_id_type
         self.quote_type = quote_type

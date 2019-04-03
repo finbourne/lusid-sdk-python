@@ -27,22 +27,22 @@ from msrest.serialization import Model
 class DeleteQuotesResponse(Model):
     """The response given from the DeleteQuotes Api call.
 
-    :param as_at_date:
-    :type as_at_date: datetime
+    :param as_at:
+    :type as_at: datetime
     :param links:
     :type links: list[~lusid.models.Link]
     """
 
     _validation = {
-        'as_at_date': {'required': True},
+        'as_at': {'required': True},
     }
 
     _attribute_map = {
-        'as_at_date': {'key': 'asAtDate', 'type': 'iso-8601'},
+        'as_at': {'key': 'asAt', 'type': 'iso-8601'},
         'links': {'key': 'links', 'type': '[Link]'},
     }
 
-    def __init__(self, as_at_date, links=None):
+    def __init__(self, as_at, links=None):
         super(DeleteQuotesResponse, self).__init__()
-        self.as_at_date = as_at_date
+        self.as_at = as_at
         self.links = links

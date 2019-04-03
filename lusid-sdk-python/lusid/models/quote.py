@@ -31,32 +31,38 @@ class Quote(Model):
     :type quote_id: ~lusid.models.QuoteId
     :param metric_value:
     :type metric_value: ~lusid.models.MetricValue
-    :param quote_lineage:
-    :type quote_lineage: ~lusid.models.QuoteLineage
-    :param effective_at_date:
-    :type effective_at_date: datetime
-    :param as_at_date:
-    :type as_at_date: datetime
+    :param effective_at:
+    :type effective_at: datetime
+    :param as_at:
+    :type as_at: datetime
+    :param uploaded_by:
+    :type uploaded_by: str
+    :param lineage:
+    :type lineage: str
     """
 
     _validation = {
         'quote_id': {'required': True},
         'metric_value': {'required': True},
-        'quote_lineage': {'required': True},
+        'effective_at': {'required': True},
+        'as_at': {'required': True},
+        'uploaded_by': {'required': True},
     }
 
     _attribute_map = {
         'quote_id': {'key': 'quoteId', 'type': 'QuoteId'},
         'metric_value': {'key': 'metricValue', 'type': 'MetricValue'},
-        'quote_lineage': {'key': 'quoteLineage', 'type': 'QuoteLineage'},
-        'effective_at_date': {'key': 'effectiveAtDate', 'type': 'iso-8601'},
-        'as_at_date': {'key': 'asAtDate', 'type': 'iso-8601'},
+        'effective_at': {'key': 'effectiveAt', 'type': 'iso-8601'},
+        'as_at': {'key': 'asAt', 'type': 'iso-8601'},
+        'uploaded_by': {'key': 'uploadedBy', 'type': 'str'},
+        'lineage': {'key': 'lineage', 'type': 'str'},
     }
 
-    def __init__(self, quote_id, metric_value, quote_lineage, effective_at_date=None, as_at_date=None):
+    def __init__(self, quote_id, metric_value, effective_at, as_at, uploaded_by, lineage=None):
         super(Quote, self).__init__()
         self.quote_id = quote_id
         self.metric_value = metric_value
-        self.quote_lineage = quote_lineage
-        self.effective_at_date = effective_at_date
-        self.as_at_date = as_at_date
+        self.effective_at = effective_at
+        self.as_at = as_at
+        self.uploaded_by = uploaded_by
+        self.lineage = lineage

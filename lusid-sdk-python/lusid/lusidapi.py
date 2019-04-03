@@ -354,6 +354,7 @@ class LUSIDAPI(object):
     | &lt;a name="372"&gt;372&lt;/a&gt;|VendorResultProcessingFailure|  |
     | &lt;a name="373"&gt;373&lt;/a&gt;|CannotSupplyTimesWithPortfoliosQuery|  |
     | &lt;a name="374"&gt;374&lt;/a&gt;|AttemptToUpsertDuplicateQuotes|  |
+    | &lt;a name="375"&gt;375&lt;/a&gt;|CorporateActionSourceDoesNotExist|  |
     | &lt;a name="-10"&gt;-10&lt;/a&gt;|ServerConfigurationError|  |
     | &lt;a name="-1"&gt;-1&lt;/a&gt;|Unknown error|  |
 
@@ -373,7 +374,7 @@ class LUSIDAPI(object):
         self._client = ServiceClient(self.config.credentials, self.config)
 
         client_models = {k: v for k, v in models.__dict__.items() if isinstance(v, type)}
-        self.api_version = '0.9.204'
+        self.api_version = '0.9.209'
         self._serialize = Serializer(client_models)
         self._deserialize = Deserializer(client_models)
 
