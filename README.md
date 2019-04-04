@@ -1,4 +1,4 @@
-# LUSID<sup>®</sup> C# SDK
+# LUSID<sup>®</sup> Python SDK
 
 The PyPi package for the LUSID SDK can installed using the following:
 
