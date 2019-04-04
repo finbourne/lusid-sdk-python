@@ -322,11 +322,9 @@ class BusinessAgilityTestEnvironment(TestFinbourneApi):
         self.reconcile_portfolios_asserts(portfolio_left_scope=self.production_scope_code,
                                           portfolio_left_code=self.portfolio_code,
                                           portfolio_left_effective_date=self.official_transfer_time,
-                                          portfolio_left_as_at=datetime.now(pytz.UTC).isoformat(),
                                           portfolio_right_scope=self.test_scope_code,
                                           portfolio_right_code=self.portfolio_code,
                                           portfolio_right_effective_date=self.official_transfer_time,
-                                          portfolio_right_as_at=datetime.now(pytz.UTC).isoformat(),
                                           check_same=True)
 
     @timeit
@@ -523,7 +521,6 @@ class BusinessAgilityTestEnvironment(TestFinbourneApi):
                                         portfolio_code=self.portfolio_code,
                                         start_date=(datetime.now(pytz.UTC) + timedelta(days=1)).isoformat(),
                                         end_date=(datetime.now(pytz.UTC) + timedelta(days=5)).isoformat(),
-                                        as_at_date=datetime.now(pytz.UTC).isoformat(),
                                         batch_transactions_request=batch_transactions_request)
 
         # Test to check that the derived portfolio inherited the transactions
@@ -532,11 +529,9 @@ class BusinessAgilityTestEnvironment(TestFinbourneApi):
         self.reconcile_portfolios_asserts(portfolio_left_scope=self.production_scope_code,
                                           portfolio_left_code=self.portfolio_code,
                                           portfolio_left_effective_date=last_settlement_date,
-                                          portfolio_left_as_at=datetime.now(pytz.UTC).isoformat(),
                                           portfolio_right_scope=self.test_scope_code,
                                           portfolio_right_code=self.portfolio_code,
                                           portfolio_right_effective_date=last_settlement_date,
-                                          portfolio_right_as_at=datetime.now(pytz.UTC).isoformat(),
                                           check_same=True)
 
     @timeit
@@ -609,7 +604,6 @@ class BusinessAgilityTestEnvironment(TestFinbourneApi):
                                         portfolio_code=self.portfolio_code,
                                         start_date=(datetime.now(pytz.UTC) + timedelta(days=5)).isoformat(),
                                         end_date=(datetime.now(pytz.UTC) + timedelta(days=8)).isoformat(),
-                                        as_at_date=datetime.now(pytz.UTC).isoformat(),
                                         batch_transactions_request=batch_transactions_request)
 
         # Test to check that the production portfolio was not affected
@@ -617,11 +611,9 @@ class BusinessAgilityTestEnvironment(TestFinbourneApi):
         self.reconcile_portfolios_asserts(portfolio_left_scope=self.production_scope_code,
                                           portfolio_left_code=self.portfolio_code,
                                           portfolio_left_effective_date=last_settlement_date,
-                                          portfolio_left_as_at=datetime.now(pytz.UTC).isoformat(),
                                           portfolio_right_scope=self.test_scope_code,
                                           portfolio_right_code=self.portfolio_code,
                                           portfolio_right_effective_date=last_settlement_date,
-                                          portfolio_right_as_at=datetime.now(pytz.UTC).isoformat(),
                                           transactions=batch_transactions_request,
                                           check_same=False)
 
