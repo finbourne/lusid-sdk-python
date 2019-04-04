@@ -593,7 +593,6 @@ class TransparencyOversightThirdParty(TestFinbourneApi):
                                             start_date=self.yesterday_trade_open,
                                             end_date=(self.yesterday_trade_open + timedelta(
                                                 days=max(hours))).isoformat(),
-                                            as_at_date=datetime.now(pytz.UTC).isoformat(),
                                             batch_transactions_request=batch_transaction_requests)
 
     @timeit

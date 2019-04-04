@@ -280,11 +280,9 @@ class TestFinbourneApi(TestCase):
                                      portfolio_left_scope,
                                      portfolio_left_code,
                                      portfolio_left_effective_date,
-                                     portfolio_left_as_at,
                                      portfolio_right_scope,
                                      portfolio_right_code,
                                      portfolio_right_effective_date,
-                                     portfolio_right_as_at,
                                      transactions=None,
                                      check_same=True):
         """
@@ -305,22 +303,23 @@ class TestFinbourneApi(TestCase):
         """
 
         reconcile_holdings_left = models.PortfolioReconciliationRequest(
-            portfolio_id=models.ResourceId(scope=portfolio_left_scope,
-                                           code=portfolio_left_code),
-            effective_at=portfolio_left_effective_date,
-            as_at=portfolio_left_as_at)
+            portfolio_id=models.ResourceId(
+                scope=portfolio_left_scope,
+                code=portfolio_left_code),
+            effective_at=portfolio_left_effective_date)
 
         reconcile_holdings_right = models.PortfolioReconciliationRequest(
-            portfolio_id=models.ResourceId(scope=portfolio_right_scope,
-                                           code=portfolio_right_code),
-            effective_at=portfolio_right_effective_date,
-            as_at=portfolio_right_as_at)
+            portfolio_id=models.ResourceId(
+                scope=portfolio_right_scope,
+                code=portfolio_right_code),
+            effective_at=portfolio_right_effective_date)
 
-        reconcile_holdings_request = models.PortfoliosReconciliationRequest(left=reconcile_holdings_left,
-                                                                            right=reconcile_holdings_right,
-                                                                            instrument_property_keys=[
-                                                                                'Instrument/default/ClientInternal'
-                                                                            ])
+        reconcile_holdings_request = models.PortfoliosReconciliationRequest(
+            left=reconcile_holdings_left,
+            right=reconcile_holdings_right,
+            instrument_property_keys=[
+            'Instrument/default/ClientInternal'
+            ])
 
         reconciliation = self.reconciliations_api.reconcile_holdings(
             portfolios_reconciliation_request=reconcile_holdings_request)
@@ -357,7 +356,6 @@ class TestFinbourneApi(TestCase):
                                    portfolio_code,
                                    start_date,
                                    end_date,
-                                   as_at_date,
                                    batch_transactions_request):
 
         """
@@ -378,11 +376,11 @@ class TestFinbourneApi(TestCase):
         - There are no transactions outside this request added to the portfolio between the start and end dates 
         """
 
-        transactions = self.transaction_portfolios_api.get_transactions(scope=portfolio_scope,
-                                                                        code=portfolio_code,
-                                                                        from_transaction_date=start_date,
-                                                                        to_transaction_date=end_date,
-                                                                        as_at=as_at_date)
+        transactions = self.transaction_portfolios_api.get_transactions(
+            scope=portfolio_scope,
+            code=portfolio_code,
+            from_transaction_date=start_date,
+            to_transaction_date=end_date)
 
         self.assertEqual(transactions.count, len(batch_transactions_request),
                          'Returned {} transactions when expecting {}'.format(transactions.count,

@@ -336,7 +336,6 @@ class TransparencyStrategies(TestFinbourneApi):
                                             portfolio_code=portfolio_name,
                                             start_date=self.effective_date,
                                             end_date=self.effective_date,
-                                            as_at_date=datetime.now(pytz.UTC).isoformat(),
                                             batch_transactions_request=stock_in_transactions)
 
     @timeit
@@ -497,7 +496,6 @@ class TransparencyStrategies(TestFinbourneApi):
                                             start_date=self.yesterday_trade_open.isoformat(),
                                             end_date=(self.yesterday_trade_open + timedelta(
                                                 days=max(hours))).isoformat(),
-                                            as_at_date=datetime.now(pytz.UTC).isoformat(),
                                             batch_transactions_request=batch_transaction_requests)
 
             # Tests - Ensure that the transactions have the new strategy property attached to them
