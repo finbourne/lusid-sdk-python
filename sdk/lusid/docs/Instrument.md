@@ -11,7 +11,7 @@ Name | Type | Description | Notes
 **properties** | [**list[ModelProperty]**](ModelProperty.md) | Any requested instrument properties. If no property can be found for the instrument, then  a value of &#39;Unknown&#39; will be returned | [optional] 
 **lookthrough_portfolio** | [**ResourceId**](ResourceId.md) |  | [optional] 
 **instrument_definition** | [**InstrumentEconomicDefinition**](InstrumentEconomicDefinition.md) |  | [optional] 
-**state** | **str** |  | [optional] 
+**state** | **str** |  | 
 **links** | [**list[Link]**](Link.md) |  | [optional] 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)

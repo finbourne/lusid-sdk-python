@@ -245,7 +245,7 @@ This endpoint does not need any parameter.
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **get_instruments**
-> GetInstrumentsResponse get_instruments(identifier_type=identifier_type, effective_at=effective_at, as_at=as_at, instrument_property_keys=instrument_property_keys, request_body=request_body)
+> GetInstrumentsResponse get_instruments(identifier_type, request_body, effective_at=effective_at, as_at=as_at, instrument_property_keys=instrument_property_keys)
 
 Get instrument definition
 
@@ -267,15 +267,15 @@ configuration.access_token = 'YOUR_ACCESS_TOKEN'
 
 # create an instance of the API class
 api_instance = lusid.InstrumentsApi(lusid.ApiClient(configuration))
-identifier_type = 'identifier_type_example' # str | The type of identifiers being supplied (optional)
+identifier_type = 'identifier_type_example' # str | The type of identifiers being supplied
+request_body = NULL # list[str] | The identifiers of the instruments to get
 effective_at = '2013-10-20T19:20:30+01:00' # datetime | Optional. The effective date of the request (optional)
 as_at = '2013-10-20T19:20:30+01:00' # datetime | Optional. The as at date of the request (optional)
 instrument_property_keys = ['instrument_property_keys_example'] # list[str] | Optional. Keys of the properties to be decorated on to the instrument (optional)
-request_body = NULL # list[str] | The identifiers of the instruments to get (optional)
 
 try:
     # Get instrument definition
-    api_response = api_instance.get_instruments(identifier_type=identifier_type, effective_at=effective_at, as_at=as_at, instrument_property_keys=instrument_property_keys, request_body=request_body)
+    api_response = api_instance.get_instruments(identifier_type, request_body, effective_at=effective_at, as_at=as_at, instrument_property_keys=instrument_property_keys)
     pprint(api_response)
 except ApiException as e:
     print("Exception when calling InstrumentsApi->get_instruments: %s\n" % e)
@@ -285,11 +285,11 @@ except ApiException as e:
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **identifier_type** | **str**| The type of identifiers being supplied | [optional] 
+ **identifier_type** | **str**| The type of identifiers being supplied | 
+ **request_body** | [**list[str]**](list.md)| The identifiers of the instruments to get | 
  **effective_at** | **datetime**| Optional. The effective date of the request | [optional] 
  **as_at** | **datetime**| Optional. The as at date of the request | [optional] 
  **instrument_property_keys** | [**list[str]**](str.md)| Optional. Keys of the properties to be decorated on to the instrument | [optional] 
- **request_body** | [**list[str]**](list.md)| The identifiers of the instruments to get | [optional] 
 
 ### Return type
 
