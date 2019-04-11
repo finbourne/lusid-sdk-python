@@ -205,8 +205,12 @@ class TestFinbourneApi(TestCase):
                               instrument.name,
                               batch_upsert_request.keys()))
 
-            self.assertEqual(instrument.identifiers, batch_upsert_request[instrument.name].identifiers,
+            self.assertListEqual(list(instrument.identifiers.keys()), list(batch_upsert_request[result].identifiers.keys()),
                              'The instrument has mismatched identifiers to the request')
+
+            for key in instrument.identifiers.keys():
+                self.assertEqual(instrument.identifiers[key], batch_upsert_request[result].identifiers[key].value,
+                                     'The instrument has a mismatched identifier value to the request')
 
     def verify_holdings_asserts(self, holding_adjustments, holdings, scope, code, effective_at):
         """
