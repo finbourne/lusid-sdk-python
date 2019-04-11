@@ -45,7 +45,15 @@ class TestFinbourneApi(TestCase):
             {"Figi": "BBG000BF4KL1", "Name": "TAYLOR WIMPEY PLC"}
         ]
 
-        figis_to_create = {i["Figi"]: models.InstrumentDefinition(i["Name"], {"Figi": i["Figi"]}) for i in instruments}
+        figis_to_create = {
+            i["Figi"]: models.InstrumentDefinition(
+                name=i["Name"],
+                identifiers={
+                    "Figi": models.InstrumentIdValue(
+                        value=i["Figi"])
+                }
+            ) for i in instruments
+        }
 
         upsert_response = cls.instruments_api.upsert_instruments(request_body=figis_to_create)
 
@@ -264,7 +272,12 @@ class TestFinbourneApi(TestCase):
 
         sec_id = "added-sec-{}".format(str(uuid.uuid4()))
 
-        request = models.InstrumentDefinition("MyInstrument", {"ClientInternal": "MyIdValue"})
+        request = models.InstrumentDefinition(
+            name="MyInstrument",
+            identifiers={
+                "ClientInternal": models.InstrumentIdValue(value="MyIdValue")
+            }
+        )
 
         self.instruments_api.upsert_instruments(request_body={sec_id: request})
 
