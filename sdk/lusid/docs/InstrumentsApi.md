@@ -5,12 +5,10 @@ All URIs are relative to *http://localhost*
 Method | HTTP request | Description
 ------------- | ------------- | -------------
 [**delete_instrument**](InstrumentsApi.md#delete_instrument) | **DELETE** /api/instruments/{identifierType}/{identifier} | Delete instrument
-[**find_instruments**](InstrumentsApi.md#find_instruments) | **POST** /api/instruments/$find | Search instrument definition
 [**get_instrument**](InstrumentsApi.md#get_instrument) | **GET** /api/instruments/{identifierType}/{identifier} | Get instrument definition
 [**get_instrument_identifiers**](InstrumentsApi.md#get_instrument_identifiers) | **GET** /api/instruments/identifiers | Get allowable instrument identifiers
 [**get_instruments**](InstrumentsApi.md#get_instruments) | **POST** /api/instruments/$get | Get instrument definition
 [**list_instruments**](InstrumentsApi.md#list_instruments) | **GET** /api/instruments | Get all of the currently mastered instruments in LUSID
-[**match_instruments**](InstrumentsApi.md#match_instruments) | **POST** /api/instruments/$match | Find externally mastered instruments
 [**update_instrument_identifier**](InstrumentsApi.md#update_instrument_identifier) | **POST** /api/instruments/{identifierType}/{identifier} | Update instrument identifier
 [**upsert_instruments**](InstrumentsApi.md#upsert_instruments) | **POST** /api/instruments | Upsert instruments
 [**upsert_instruments_properties**](InstrumentsApi.md#upsert_instruments_properties) | **POST** /api/instruments/$upsertproperties | Upsert instrument properties
@@ -68,66 +66,6 @@ Name | Type | Description  | Notes
 ### HTTP request headers
 
  - **Content-Type**: Not defined
- - **Accept**: text/plain, application/json, text/json
-
-[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
-
-# **find_instruments**
-> ResourceListOfInstrument find_instruments(effective_at=effective_at, as_at=as_at, instrument_property_keys=instrument_property_keys, model_property=model_property)
-
-Search instrument definition
-
-Get a collection of instruments by a set of identifiers. Optionally, it is possible to decorate each instrument with specified property data.
-
-### Example
-
-* OAuth Authentication (oauth2): 
-```python
-from __future__ import print_function
-import time
-import lusid
-from lusid.rest import ApiException
-from pprint import pprint
-
-# Configure OAuth2 access token for authorization: oauth2
-configuration = lusid.Configuration()
-configuration.access_token = 'YOUR_ACCESS_TOKEN'
-
-# create an instance of the API class
-api_instance = lusid.InstrumentsApi(lusid.ApiClient(configuration))
-effective_at = '2013-10-20T19:20:30+01:00' # datetime | Optional. The effective date of the query (optional)
-as_at = '2013-10-20T19:20:30+01:00' # datetime | Optional. The AsAt date of the query (optional)
-instrument_property_keys = ['instrument_property_keys_example'] # list[str] | Optional. Keys of the properties to be decorated on to the instrument (optional)
-model_property = NULL # list[ModelProperty] | The list of market aliases (e.g ISIN, Ticker) to find instruments by. (optional)
-
-try:
-    # Search instrument definition
-    api_response = api_instance.find_instruments(effective_at=effective_at, as_at=as_at, instrument_property_keys=instrument_property_keys, model_property=model_property)
-    pprint(api_response)
-except ApiException as e:
-    print("Exception when calling InstrumentsApi->find_instruments: %s\n" % e)
-```
-
-### Parameters
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
- **effective_at** | **datetime**| Optional. The effective date of the query | [optional] 
- **as_at** | **datetime**| Optional. The AsAt date of the query | [optional] 
- **instrument_property_keys** | [**list[str]**](str.md)| Optional. Keys of the properties to be decorated on to the instrument | [optional] 
- **model_property** | [**list[ModelProperty]**](list.md)| The list of market aliases (e.g ISIN, Ticker) to find instruments by. | [optional] 
-
-### Return type
-
-[**ResourceListOfInstrument**](ResourceListOfInstrument.md)
-
-### Authorization
-
-[oauth2](../README.md#oauth2)
-
-### HTTP request headers
-
- - **Content-Type**: application/json-patch+json, application/json, text/json, application/*+json
  - **Accept**: text/plain, application/json, text/json
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
@@ -370,62 +308,6 @@ Name | Type | Description  | Notes
 ### HTTP request headers
 
  - **Content-Type**: Not defined
- - **Accept**: text/plain, application/json, text/json
-
-[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
-
-# **match_instruments**
-> MatchInstrumentsResponse match_instruments(identifier_type=identifier_type, request_body=request_body)
-
-Find externally mastered instruments
-
-Search for a set of instruments from an external instrument mastering service
-
-### Example
-
-* OAuth Authentication (oauth2): 
-```python
-from __future__ import print_function
-import time
-import lusid
-from lusid.rest import ApiException
-from pprint import pprint
-
-# Configure OAuth2 access token for authorization: oauth2
-configuration = lusid.Configuration()
-configuration.access_token = 'YOUR_ACCESS_TOKEN'
-
-# create an instance of the API class
-api_instance = lusid.InstrumentsApi(lusid.ApiClient(configuration))
-identifier_type = 'identifier_type_example' # str | The type of identifiers being supplied (optional)
-request_body = NULL # list[str] | The identifiers of the instruments to get (optional)
-
-try:
-    # Find externally mastered instruments
-    api_response = api_instance.match_instruments(identifier_type=identifier_type, request_body=request_body)
-    pprint(api_response)
-except ApiException as e:
-    print("Exception when calling InstrumentsApi->match_instruments: %s\n" % e)
-```
-
-### Parameters
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
- **identifier_type** | **str**| The type of identifiers being supplied | [optional] 
- **request_body** | [**list[str]**](list.md)| The identifiers of the instruments to get | [optional] 
-
-### Return type
-
-[**MatchInstrumentsResponse**](MatchInstrumentsResponse.md)
-
-### Authorization
-
-[oauth2](../README.md#oauth2)
-
-### HTTP request headers
-
- - **Content-Type**: application/json-patch+json, application/json, text/json, application/*+json
  - **Accept**: text/plain, application/json, text/json
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
