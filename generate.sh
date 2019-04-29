@@ -39,4 +39,11 @@ __version__ = "$sdk_version"
 EOF
 
 rm -rf $sdk_output_folder/.openapi-generator
-rm $sdk_output_folder/.openapi-generator-ignore
+rm -rf $sdk_output_folder/test
+rm -f $sdk_output_folder/.travis.yml
+rm -f $sdk_output_folder/.gitignore
+rm -f $sdk_output_folder/git_push.sh
+rm -f $sdk_output_folder/lusid_README.md
+rm -f $sdk_output_folder/test-requirements.txt
+rm -f $sdk_output_folder/tox.ini
+rm -f $sdk_output_folder/README.md
