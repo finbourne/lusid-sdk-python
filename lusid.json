@@ -3335,14 +3335,14 @@
                     "value": 12345.5672,
                     "unit": "Unit"
                   },
-                  "effectiveFrom": "2019-04-29T16:51:53.4220985+00:00"
+                  "effectiveFrom": "2019-04-29T17:06:10.2817595+00:00"
                 },
                 "Portfolio/MyScope/MyPropertyName2": {
                   "metricValue": {
                     "value": 925.3,
                     "unit": "Unit"
                   },
-                  "effectiveFrom": "2019-04-29T16:51:53.4220992+00:00"
+                  "effectiveFrom": "2019-04-29T17:06:10.2817603+00:00"
                 }
               }
             }
@@ -3988,7 +3988,7 @@
                     "value": 1460,
                     "unit": "CNY"
                   },
-                  "effectiveAt": "2019-04-29T16:51:53.4540728+00:00"
+                  "effectiveAt": "2019-04-29T17:06:10.3138865+00:00"
                 },
                 {
                   "quoteId": {
@@ -4002,7 +4002,7 @@
                     "value": 1.367,
                     "unit": "EUR/USD"
                   },
-                  "effectiveAt": "2019-04-29T16:51:53.4540734+00:00",
+                  "effectiveAt": "2019-04-29T17:06:10.3138871+00:00",
                   "lineage": "PriceSource:Citi"
                 }
               ]
@@ -4072,7 +4072,7 @@
                   "quoteType": "Price",
                   "priceSide": "Mid"
                 },
-                "effectiveAt": "2019-04-29T16:51:53.4567772+00:00"
+                "effectiveAt": "2019-04-29T17:06:10.3165631+00:00"
               }
             }
           }
@@ -6660,8 +6660,8 @@
             "examples": {
               "application/json": {
                 "version": {
-                  "effectiveFrom": "2019-04-29T16:51:53.6042797+00:00",
-                  "asAtDate": "2019-04-29T16:41:53.60428+00:00"
+                  "effectiveFrom": "2019-04-29T17:06:10.4609963+00:00",
+                  "asAtDate": "2019-04-29T16:56:10.4609965+00:00"
                 },
                 "values": [
                   {
@@ -6898,7 +6898,7 @@
       },
       "example": {
         "scope": "MyScope",
-        "date": "2019-04-29T16:51:53.1973344+00:00"
+        "date": "2019-04-29T17:06:10.0568715+00:00"
       }
     },
     "AnalyticStore": {
@@ -8089,7 +8089,7 @@
           "scope": "MyParentPortfolioScope",
           "code": "MyParentPortfolioCode"
         },
-        "created": "2019-04-29T16:51:53.2582207+00:00",
+        "created": "2019-04-29T17:06:10.117447+00:00",
         "corporateActionSourceId": {
           "scope": "MyScope",
           "code": "MyCorporateActionSourceId"
@@ -8515,7 +8515,7 @@
             "key": "Instrument/MyScope/MyPropertyName",
             "value": {
               "labelValue": "MyValue",
-              "effectiveFrom": "2019-04-29T16:51:53.2849336+00:00"
+              "effectiveFrom": "2019-04-29T17:06:10.1444093+00:00"
             }
           }
         ],
@@ -8897,8 +8897,8 @@
           "scope": "MyScope",
           "code": "default"
         },
-        "asAt": "2019-04-29T16:51:53.4865309+00:00",
-        "effectiveAt": "2019-04-29T16:51:53.4865305+00:00",
+        "asAt": "2019-04-29T17:06:10.3468787+00:00",
+        "effectiveAt": "2019-04-29T17:06:10.3468782+00:00",
         "metrics": [
           {
             "key": "Holding/default/PV",
@@ -9628,7 +9628,7 @@
       "example": {
         "displayName": "MyPortfolioName",
         "description": "Long form description of portfolio",
-        "created": "2019-04-29T16:51:53.4146424+00:00"
+        "created": "2019-04-29T17:06:10.274336+00:00"
       }
     },
     "PortfolioProperties": {
@@ -9691,16 +9691,16 @@
             "scope": "MySourceScope",
             "code": "MySourcePortfolioCode"
           },
-          "effectiveAt": "2019-04-29T16:51:53.4320951+00:00",
-          "asAt": "2019-04-29T16:51:53.4320955+00:00"
+          "effectiveAt": "2019-04-29T17:06:10.2917781+00:00",
+          "asAt": "2019-04-29T17:06:10.2917784+00:00"
         },
         "right": {
           "portfolioId": {
             "scope": "MyTargetScope",
             "code": "MyTargetPortfolioCode"
           },
-          "effectiveAt": "2019-04-29T16:51:53.4320958+00:00",
-          "asAt": "2019-04-29T16:51:53.4320959+00:00"
+          "effectiveAt": "2019-04-29T17:06:10.2917787+00:00",
+          "asAt": "2019-04-29T17:06:10.2917788+00:00"
         },
         "instrumentPropertyKeys": [
           "Instrument/default/Name"
@@ -10378,7 +10378,7 @@
         "displayName": "MyPortfolioName",
         "description": "Description of my portfolio",
         "code": "MyPortfolioCode",
-        "created": "2019-04-29T16:51:53.4644821+00:00",
+        "created": "2019-04-29T17:06:10.3244293+00:00",
         "properties": {}
       }
     },
@@ -10443,7 +10443,7 @@
         }
       },
       "example": {
-        "effectiveFrom": "2019-04-29T16:51:53.4700671+00:00",
+        "effectiveFrom": "2019-04-29T17:06:10.3300855+00:00",
         "weightType": "Periodical",
         "periodType": "Quarterly",
         "periodCount": 2,
@@ -10724,7 +10724,7 @@
         }
       },
       "example": {
-        "effectiveAt": "2019-04-29T16:51:53.4844542+00:00",
+        "effectiveAt": "2019-04-29T17:06:10.3447139+00:00",
         "entityScope": "MyEntityScope",
         "entityCode": "MyEntityCode",
         "calculationScope": "MyCalculationScope",
@@ -11461,7 +11461,7 @@
         "displayName": "MyPortfolioName",
         "description": "Example long form description of transaction portfolio",
         "code": "MyPortfolioCode",
-        "created": "2019-04-29T16:51:53.5236515+00:00",
+        "created": "2019-04-29T17:06:10.3840128+00:00",
         "baseCurrency": "GBP",
         "corporateActionSourceId": {
           "scope": "MyScope",
@@ -11574,7 +11574,7 @@
         "instrumentIdentifiers": {
           "ClientInternal": "some-ric-code"
         },
-        "transactionTime": "2019-04-29T16:51:53.5329226+00:00",
+        "transactionTime": "2019-04-29T17:06:10.3932491+00:00",
         "lastShares": 1000,
         "lastPx": 1.23,
         "currency": "USD"
@@ -12214,8 +12214,8 @@
           "Instrument/default/Figi": "BBG000C6K6G9",
           "Instrument/default/Isin": "GB00BH4HKS39"
         },
-        "transactionDate": "2019-04-29T16:51:53.5860586+00:00",
-        "settlementDate": "2019-05-02T16:51:53.5860591+00:00",
+        "transactionDate": "2019-04-29T17:06:10.4421998+00:00",
+        "settlementDate": "2019-05-02T17:06:10.4422003+00:00",
         "units": 1000,
         "transactionPrice": {
           "price": 123,
