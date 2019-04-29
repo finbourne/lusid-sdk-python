@@ -48,3 +48,4 @@ rm -f $sdk_output_folder/lusid_README.md
 rm -f $sdk_output_folder/test-requirements.txt
 rm -f $sdk_output_folder/tox.ini
 rm -f $sdk_output_folder/README.md
+rm -f $sdk_output_folder/requirements.txt
