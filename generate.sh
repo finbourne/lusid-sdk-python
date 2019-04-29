@@ -40,6 +40,7 @@ EOF
 
 rm -rf $sdk_output_folder/.openapi-generator
 rm -rf $sdk_output_folder/test
+rm -rf $sdk_output_folder/lusid/test
 rm -f $sdk_output_folder/.travis.yml
 rm -f $sdk_output_folder/.gitignore
 rm -f $sdk_output_folder/git_push.sh
