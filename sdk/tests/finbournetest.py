@@ -326,7 +326,7 @@ class TestFinbourneApi(TestCase):
             ])
 
         reconciliation = self.reconciliations_api.reconcile_holdings(
-            portfolios_reconciliation_request=reconcile_holdings_request)
+            request=reconcile_holdings_request)
 
         if check_same:
             self.assertEqual(reconciliation.count, 0,

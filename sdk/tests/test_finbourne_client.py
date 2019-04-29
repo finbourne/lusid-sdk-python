@@ -55,12 +55,15 @@ class TestFinbourneApi(TestCase):
             ) for i in instruments
         }
 
-        upsert_response = cls.instruments_api.upsert_instruments(request_body=figis_to_create)
+        upsert_response = cls.instruments_api.upsert_instruments(
+            requests=figis_to_create)
 
         if len(upsert_response.failed) != 0:
             raise Exception(upsert_response.failed)
 
-        ids = cls.instruments_api.get_instruments(identifier_type="Figi", request_body=[i["Figi"] for i in instruments])
+        ids = cls.instruments_api.get_instruments(
+            identifier_type="Figi",
+            identifiers=[i["Figi"] for i in instruments])
 
         cls.instrumentIds = [i.lusid_instrument_id for i in ids.values.values()]
 
@@ -73,7 +76,9 @@ class TestFinbourneApi(TestCase):
                                                            base_currency="GBP")
 
         # create the portfolio
-        result = self.transaction_portfolios_api.create_portfolio(scope, create_transaction_portfolio_request=request)
+        result = self.transaction_portfolios_api.create_portfolio(
+            scope=scope,
+            create_request=request)
 
         self.assertEqual(result.id.code, request.code)
 
@@ -96,14 +101,17 @@ class TestFinbourneApi(TestCase):
         )
 
         #   create the property definition
-        property_definition_result = self.property_definition_api.create_property_definition(create_property_definition_request=property_definition)
+        property_definition_result = self.property_definition_api.create_property_definition(
+            definition=property_definition)
 
         #   create the portfolio
         request = models.CreateTransactionPortfolioRequest(display_name="portfolio-{0}".format(guid),
                                                            code="id-{0}".format(guid),
                                                            base_currency="GBP")
 
-        portfolio = self.transaction_portfolios_api.create_portfolio(scope, create_transaction_portfolio_request=request)
+        portfolio = self.transaction_portfolios_api.create_portfolio(
+            scope=scope,
+            create_request=request)
 
         self.assertEqual(portfolio.id.code, request.code)
 
@@ -116,9 +124,10 @@ class TestFinbourneApi(TestCase):
         portfolio_property = models.PropertyValue(property_value)
 
         #   add the property to the portfolio
-        properties_result = self.portfolios_api.upsert_portfolio_properties(scope, portfolio_id,
-                                                                            effective_at=portfolio.created,
-                                                                            request_body={property_definition_result.key: portfolio_property})
+        properties_result = self.portfolios_api.upsert_portfolio_properties(
+            scope, portfolio_id,
+            effective_at=portfolio.created,
+            portfolio_properties={property_definition_result.key: portfolio_property})
 
         self.assertEqual(properties_result.origin_portfolio_id.code, portfolio_id)
         self.assertEqual(properties_result.properties[0].value, property_value)
@@ -141,7 +150,8 @@ class TestFinbourneApi(TestCase):
         )
 
         #   create the property definition
-        property_definition_result = self.property_definition_api.create_property_definition(create_property_definition_request=property_definition)
+        property_definition_result = self.property_definition_api.create_property_definition(
+            definition=property_definition)
 
         effective_date = datetime(2018, 1, 1, tzinfo=pytz.utc)
 
@@ -153,7 +163,9 @@ class TestFinbourneApi(TestCase):
             created=effective_date
         )
 
-        portfolio = self.transaction_portfolios_api.create_portfolio(scope, create_transaction_portfolio_request=request)
+        portfolio = self.transaction_portfolios_api.create_portfolio(
+            scope=scope,
+            create_request=request)
 
         self.assertEqual(portfolio.id.code, request.code)
 
@@ -178,7 +190,10 @@ class TestFinbourneApi(TestCase):
         )
 
         #   add the trade
-        self.transaction_portfolios_api.upsert_transactions(scope, portfolio_id, transaction_request=[trade])
+        self.transaction_portfolios_api.upsert_transactions(
+            scope,
+            portfolio_id,
+            transactions=[trade])
 
         #   get the trades
         trades = self.transaction_portfolios_api.get_transactions(scope, portfolio_id)
@@ -201,7 +216,9 @@ class TestFinbourneApi(TestCase):
         )
 
         # create the portfolio
-        result = self.transaction_portfolios_api.create_portfolio(scope, create_transaction_portfolio_request=request)
+        result = self.transaction_portfolios_api.create_portfolio(
+            scope=scope,
+            create_request=request)
 
         self.assertEqual(result.id.code, request.code)
 
@@ -218,21 +235,30 @@ class TestFinbourneApi(TestCase):
         new_trades = list(map(self.build_transaction, trade_specs))
 
         # add initial batch of trades
-        initial_result = self.transaction_portfolios_api.upsert_transactions(scope, portfolio_id, transaction_request=new_trades)
+        initial_result = self.transaction_portfolios_api.upsert_transactions(
+            scope,
+            portfolio_id,
+            transactions=new_trades)
         as_at_batch1 = initial_result.version.as_at_date
         sleep(0.5)
 
         # add trade for 2018-1-8
         trade = self.build_transaction(
             TransactionSpec(self.instrumentIds[3], 104, datetime(2018, 1, 8, tzinfo=pytz.utc)))
-        later_trade = self.transaction_portfolios_api.upsert_transactions(scope, portfolio_id, transaction_request=[trade])
+        later_trade = self.transaction_portfolios_api.upsert_transactions(
+            scope,
+            portfolio_id,
+            transactions=[trade])
         as_at_batch2 = later_trade.version.as_at_date
         sleep(0.5)
 
         # add back dated trade
         trade = self.build_transaction(
             TransactionSpec(self.instrumentIds[4], 105, datetime(2018, 1, 5, tzinfo=pytz.utc)))
-        backdated_trade = self.transaction_portfolios_api.upsert_transactions(scope, portfolio_id, transaction_request=[trade])
+        backdated_trade = self.transaction_portfolios_api.upsert_transactions(
+            scope,
+            portfolio_id,
+            transactions=[trade])
         as_at_batch3 = backdated_trade.version.as_at_date
         sleep(0.5)
 
@@ -279,7 +305,8 @@ class TestFinbourneApi(TestCase):
             }
         )
 
-        self.instruments_api.upsert_instruments(request_body={sec_id: request})
+        self.instruments_api.upsert_instruments(
+            requests={sec_id: request})
 
     def test_portfolio_aggregation(self):
 
@@ -295,7 +322,9 @@ class TestFinbourneApi(TestCase):
         )
 
         #   create the portfolio
-        result = self.transaction_portfolios_api.create_portfolio(scope, create_transaction_portfolio_request=request)
+        result = self.transaction_portfolios_api.create_portfolio(
+            scope=scope,
+            create_request=request)
 
         self.assertEqual(result.id.code, request.code)
 
@@ -312,7 +341,10 @@ class TestFinbourneApi(TestCase):
         new_trades = list(map(self.build_transaction, transaction_specs))
 
         #   add initial batch of trades
-        self.transaction_portfolios_api.upsert_transactions(scope, portfolio_id, transaction_request=new_trades)
+        self.transaction_portfolios_api.upsert_transactions(
+            scope,
+            portfolio_id,
+            transactions=new_trades)
 
         try:
             self.analytic_stores_api.get_analytic_store(
@@ -324,7 +356,8 @@ class TestFinbourneApi(TestCase):
         except:
             #   create an analytic store
             analytic_store_request = models.CreateAnalyticStoreRequest(scope, effective_date)
-            self.analytic_stores_api.create_analytic_store(create_analytic_store_request=analytic_store_request)
+            self.analytic_stores_api.create_analytic_store(
+                request=analytic_store_request)
 
         prices = [
             models.InstrumentAnalytic(self.instrumentIds[0], 100),
@@ -333,7 +366,7 @@ class TestFinbourneApi(TestCase):
         ]
 
         #   add prices
-        self.analytic_stores_api.set_analytics(scope, effective_date.year, effective_date.month, effective_date.day, instrument_analytic=prices)
+        self.analytic_stores_api.set_analytics(scope, effective_date.year, effective_date.month, effective_date.day, data=prices)
 
         aggregation_request = models.AggregationRequest(
             recipe_id=models.ResourceId(scope, "default"),
@@ -347,7 +380,7 @@ class TestFinbourneApi(TestCase):
         )
 
         #   do the aggregation
-        aggregation = self.aggregation_api.get_aggregation_by_portfolio(scope, portfolio_id, aggregation_request=aggregation_request)
+        aggregation = self.aggregation_api.get_aggregation_by_portfolio(scope, portfolio_id, request=aggregation_request)
 
         for item in aggregation.data:
             print("\t{}\t{}\t{}".format(item["Instrument/default/Name"], item["Proportion(Holding/default/PV)"],

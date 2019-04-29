@@ -90,8 +90,9 @@ class TransparencyStrategies(TestFinbourneApi):
                                                                          description=portfolio_code,
                                                                          created=self.created_date.isoformat())
             # Call LUSID to create our portfolio
-            portfolio = self.transaction_portfolios_api.create_portfolio(scope=self.internal_scope_code,
-                                                                         create_transaction_portfolio_request=portfolio_request)
+            portfolio = self.transaction_portfolios_api.create_portfolio(
+                scope=self.internal_scope_code,
+                create_request=portfolio_request)
 
             # Test - Ensure that the portfolio was created successfully with the correct details
             self.portfolio_creation_asserts(portfolio, portfolio_request, self.internal_scope_code)
@@ -107,8 +108,9 @@ class TransparencyStrategies(TestFinbourneApi):
                                                                      .format(self.client_id))
 
         # Call LUSID to create our portfolio group
-        portfolio_group = self.portfolio_groups_api.create_portfolio_group(scope=self.internal_scope_code,
-                                                                           create_portfolio_group_request=portfolio_group_request)
+        portfolio_group = self.portfolio_groups_api.create_portfolio_group(
+            scope=self.internal_scope_code,
+            request=portfolio_group_request)
 
         # Test - Ensure that we have successfully created the portfolio group
         self.portfolio_group_creation_asserts(portfolio_group, portfolio_group_request, self.internal_scope_code)
@@ -235,7 +237,8 @@ class TransparencyStrategies(TestFinbourneApi):
                 identifiers=identifiers)
 
         # Call LUSID to upsert our batch
-        batch_upsert_response = self.instruments_api.upsert_instruments(request_body=batch_upsert_request)
+        batch_upsert_response = self.instruments_api.upsert_instruments(
+            requests=batch_upsert_request)
 
         # Tests - Confirm that all instruments have been successfully upserted
         self.instrument_upsert_asserts(batch_upsert_response, batch_upsert_request)
@@ -337,7 +340,7 @@ class TransparencyStrategies(TestFinbourneApi):
             upsert_transactions_response = self.transaction_portfolios_api.upsert_transactions(
                 scope=self.internal_scope_code,
                 code=portfolio_name,
-                transaction_request=stock_in_transactions)
+                transactions=stock_in_transactions)
 
             # Tests - Verify that the transactions were added succesfully
             self.transactions_added_asserts(portfolio_scope=self.internal_scope_code,
@@ -378,7 +381,7 @@ class TransparencyStrategies(TestFinbourneApi):
                                                                                                  code='string'))
         # Call LUSID to create our new property
         property_response = self.property_definition_api.create_property_definition(
-            create_property_definition_request=property_request)
+            definition=property_request)
 
         # Grab the key off the response to use when referencing this property in other LUSID calls
         self.strategy_property_key = property_response.key
@@ -494,9 +497,10 @@ class TransparencyStrategies(TestFinbourneApi):
                                               )
                 )
             # Call LUSID to upsert our transactions
-            transaction_response = self.transaction_portfolios_api.upsert_transactions(scope=self.internal_scope_code,
-                                                                                       code=portfolio_name,
-                                                                                       transaction_request=batch_transaction_requests)
+            transaction_response = self.transaction_portfolios_api.upsert_transactions(
+                scope=self.internal_scope_code,
+                code=portfolio_name,
+                transactions=batch_transaction_requests)
 
             # Test - Ensure that the transactions have been added correctly
             self.transactions_added_asserts(portfolio_scope=self.internal_scope_code,
@@ -527,7 +531,8 @@ class TransparencyStrategies(TestFinbourneApi):
         analytics_store_request = models.CreateAnalyticStoreRequest(scope=self.internal_scope_code,
                                                                     date=analytics_effective_date.isoformat())
         # Call LUSID to create our analytics store
-        self.analytic_stores_api.create_analytic_store(create_analytic_store_request=analytics_store_request)
+        self.analytic_stores_api.create_analytic_store(
+            request=analytics_store_request)
 
         # Create prices via instrument, analytic
         instrument_analytics = []
@@ -548,7 +553,7 @@ class TransparencyStrategies(TestFinbourneApi):
                                                year=analytics_effective_date.year,
                                                month=analytics_effective_date.month,
                                                day=analytics_effective_date.day,
-                                               instrument_analytic=instrument_analytics)
+                                               data=instrument_analytics)
 
     @timeit
     def aggregate_portfolio_group(self):
@@ -578,7 +583,7 @@ class TransparencyStrategies(TestFinbourneApi):
         # Call LUSID to aggregate across all of our portfolios
         aggregated_group = self.aggregation_api.get_aggregation_by_group(scope=self.internal_scope_code,
                                                                          code=self.client_portfolio_group_code,
-                                                                         aggregation_request=aggregation_request)
+                                                                         request=aggregation_request)
 
         # Test - Confirm the aggregation result is correct
         self.verify_portfolio_group_aggregation_asserts(aggregated_response=aggregated_group,
@@ -635,8 +640,9 @@ class TransparencyStrategies(TestFinbourneApi):
                                                                                 sub_holding_keys=[
                                                                                     self.strategy_property_key])
             # Call LUSID to create our derived portfolio
-            portfolio = self.derived_transaction_portfolio_api.create_derived_portfolio(scope=self.strategy_scope,
-                                                                                        create_derived_transaction_portfolio_request=portfolio_request)
+            portfolio = self.derived_transaction_portfolio_api.create_derived_portfolio(
+                scope=self.strategy_scope,
+                portfolio=portfolio_request)
 
             # Tests - Ensure that the portfolios were created successfully with the correct details
             self.derived_portfolio_creation_asserts(portfolio, portfolio_request, self.strategy_scope)
@@ -657,8 +663,9 @@ class TransparencyStrategies(TestFinbourneApi):
                                                                      description='Grouping all of client {} portfolios'
                                                                      .format(self.client_id))
         # Call LUSID to create our portfolio group
-        portfolio_group = self.portfolio_groups_api.create_portfolio_group(scope=self.strategy_scope,
-                                                                           create_portfolio_group_request=portfolio_group_request)
+        portfolio_group = self.portfolio_groups_api.create_portfolio_group(
+            scope=self.strategy_scope,
+            request=portfolio_group_request)
 
         # Tests - Ensure that we have successfully created the portfolio group
         self.portfolio_group_creation_asserts(portfolio_group, portfolio_group_request, self.strategy_scope)
@@ -698,7 +705,7 @@ class TransparencyStrategies(TestFinbourneApi):
         # Call LUSID to get our aggregated group
         aggregated_group = self.aggregation_api.get_aggregation_by_group(scope=self.strategy_scope,
                                                                          code=self.client_portfolio_group_code,
-                                                                         aggregation_request=aggregation_request)
+                                                                         request=aggregation_request)
 
     @timeit
     def test_transparency_strategies(self):
