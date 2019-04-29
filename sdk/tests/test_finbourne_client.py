@@ -356,8 +356,7 @@ class TestFinbourneApi(TestCase):
         except:
             #   create an analytic store
             analytic_store_request = models.CreateAnalyticStoreRequest(scope, effective_date)
-            self.analytic_stores_api.create_analytic_store(
-                request=analytic_store_request)
+            self.analytic_stores_api.create_analytic_store(request=analytic_store_request)
 
         prices = [
             models.InstrumentAnalytic(self.instrumentIds[0], 100),
