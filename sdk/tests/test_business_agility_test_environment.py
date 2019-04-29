@@ -139,7 +139,7 @@ class BusinessAgilityTestEnvironment(TestFinbourneApi):
 
         pension_fund_portfolio = self.transaction_portfolios_api.create_portfolio(
             scope=self.production_scope_code,
-            create_transaction_portfolio_request=pension_fund_request
+            create_request=pension_fund_request
         )
 
         # Test that our portfolio was created successfully
@@ -187,7 +187,8 @@ class BusinessAgilityTestEnvironment(TestFinbourneApi):
                 name=instrument_name,
                 identifiers=identifiers)
         # Upsert our batch
-        batch_upsert_response = self.instruments_api.upsert_instruments(request_body=batch_upsert_request)
+        batch_upsert_response = self.instruments_api.upsert_instruments(
+            requests=batch_upsert_request)
 
         # Asserts - Confirm that the response is as expected
         self.instrument_upsert_asserts(batch_upsert_response, batch_upsert_request)
@@ -276,7 +277,7 @@ class BusinessAgilityTestEnvironment(TestFinbourneApi):
         holdings = self.transaction_portfolios_api.set_holdings(scope=self.production_scope_code,
                                                                 code=self.portfolio_code,
                                                                 effective_at=self.official_transfer_time,
-                                                                adjust_holding_request=holding_adjustments)
+                                                                holding_adjustments=holding_adjustments)
 
         # Test to verify that the holdings have been set
         self.verify_holdings_asserts(holding_adjustments=holding_adjustments,
@@ -318,7 +319,7 @@ class BusinessAgilityTestEnvironment(TestFinbourneApi):
 
         derived_pension_fund_portfolio = self.derived_transaction_portfolio_api.create_derived_portfolio(
             scope=self.test_scope_code,
-            create_derived_transaction_portfolio_request=derived_pension_fund_request)
+            portfolio=derived_pension_fund_request)
 
         # Test that our derived portfolio has been created successfully
         self.derived_portfolio_creation_asserts(derived_pension_fund_portfolio, derived_pension_fund_request,
@@ -427,7 +428,8 @@ class BusinessAgilityTestEnvironment(TestFinbourneApi):
                 identifiers=identifiers)
 
         # Upsert our batch
-        batch_upsert_response = self.instruments_api.upsert_instruments(request_body=batch_upsert_request)
+        batch_upsert_response = self.instruments_api.upsert_instruments(
+            requests=batch_upsert_request)
 
         # Asserts - Confirm that the response is as expected
         self.instrument_upsert_asserts(batch_upsert_response, batch_upsert_request)
@@ -523,9 +525,10 @@ class BusinessAgilityTestEnvironment(TestFinbourneApi):
             )
 
         # Upsert our batch of transactions
-        portfolio_transactions = self.transaction_portfolios_api.upsert_transactions(scope=self.production_scope_code,
-                                                                                     code=self.portfolio_code,
-                                                                                     transaction_request=batch_transactions_request)
+        portfolio_transactions = self.transaction_portfolios_api.upsert_transactions(
+            scope=self.production_scope_code,
+            code=self.portfolio_code,
+            transactions=batch_transactions_request)
 
         # Test that transactions were all added
         self.transactions_added_asserts(portfolio_scope=self.production_scope_code,
@@ -606,9 +609,10 @@ class BusinessAgilityTestEnvironment(TestFinbourneApi):
             )
 
         # Upsert our transactions, note that we have changed the scope here to our test scope
-        portfolio_transactions = self.transaction_portfolios_api.upsert_transactions(scope=self.test_scope_code,
-                                                                                     code=self.portfolio_code,
-                                                                                     transaction_request=batch_transactions_request)
+        portfolio_transactions = self.transaction_portfolios_api.upsert_transactions(
+            scope=self.test_scope_code,
+            code=self.portfolio_code,
+            transactions=batch_transactions_request)
 
         # Test that transactions were all added
         self.transactions_added_asserts(portfolio_scope=self.test_scope_code,
