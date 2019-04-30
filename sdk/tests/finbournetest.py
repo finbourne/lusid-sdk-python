@@ -96,9 +96,9 @@ class TestFinbourneApi(TestCase):
         self.assertNotIsInstance(portfolio_group, models.ErrorResponse,
                                  'Portfolio group not created, error returned')
 
-        self.assertEqual(portfolio_group.id.code, portfolio_group_request.id,
+        self.assertEqual(portfolio_group.id.code, portfolio_group_request.code,
                          'Portfolio group code is {} instead of {}'.format(portfolio_group.id.code,
-                                                                           portfolio_group_request.id))
+                                                                           portfolio_group_request.code))
 
         self.assertEqual(portfolio_group.id.scope, group_scope,
                          'Portfolio group scope is {} instead of {}'.format(portfolio_group.id.scope,

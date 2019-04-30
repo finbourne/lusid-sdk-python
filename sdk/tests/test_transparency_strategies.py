@@ -101,7 +101,7 @@ class TransparencyStrategies(TestFinbourneApi):
             portfolio_resourceids.append(models.ResourceId(scope=self.internal_scope_code, code=portfolio_code))
 
         # Create our portfolio group request
-        portfolio_group_request = models.CreatePortfolioGroupRequest(id=self.client_portfolio_group_code,
+        portfolio_group_request = models.CreatePortfolioGroupRequest(code=self.client_portfolio_group_code,
                                                                      display_name=self.client_portfolio_group_code,
                                                                      values=portfolio_resourceids,
                                                                      description='Grouping all of client {} portfolios'
@@ -657,7 +657,7 @@ class TransparencyStrategies(TestFinbourneApi):
             derived_portfolio_resourceids.append(models.ResourceId(scope=self.strategy_scope, code=portfolio_code))
 
         # Create our portfolio group request
-        portfolio_group_request = models.CreatePortfolioGroupRequest(id=self.client_portfolio_group_code,
+        portfolio_group_request = models.CreatePortfolioGroupRequest(code=self.client_portfolio_group_code,
                                                                      display_name=self.client_portfolio_group_code,
                                                                      values=derived_portfolio_resourceids,
                                                                      description='Grouping all of client {} portfolios'
