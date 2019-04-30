@@ -133,7 +133,7 @@ class TransparencyOversightThirdParty(TestFinbourneApi):
                                          portfolio_code in portfolio_group]
 
             # Create our portfolio group requests, note the only difference is in which portfolios we use
-            portfolio_group_request = models.CreatePortfolioGroupRequest(id=portfolio_group_code,
+            portfolio_group_request = models.CreatePortfolioGroupRequest(code=portfolio_group_code,
                                                                          display_name=portfolio_group_code,
                                                                          values=portfolio_resourceids,
                                                                          description=portfolio_group_code)
