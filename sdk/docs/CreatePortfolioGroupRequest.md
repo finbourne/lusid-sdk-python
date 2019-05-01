@@ -3,7 +3,7 @@
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**id** | **str** |  | 
+**code** | **str** |  | 
 **values** | [**list[ResourceId]**](ResourceId.md) |  | [optional] 
 **sub_groups** | [**list[ResourceId]**](ResourceId.md) |  | [optional] 
 **display_name** | **str** |  | 
