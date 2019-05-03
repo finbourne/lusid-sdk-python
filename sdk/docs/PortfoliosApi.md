@@ -323,7 +323,7 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **list_portfolios**
-> ResourceListOfPortfolio list_portfolios(effective_at=effective_at, as_at=as_at, page=page, sort_by=sort_by, start=start, limit=limit, filter=filter, query=query)
+> ResourceListOfPortfolio list_portfolios(effective_at=effective_at, as_at=as_at, sort_by=sort_by, start=start, limit=limit, filter=filter, query=query)
 
 List portfolios
 
@@ -346,7 +346,6 @@ configuration.access_token = 'YOUR_ACCESS_TOKEN'
 api_instance = lusid.PortfoliosApi(lusid.ApiClient(configuration))
 effective_at = '2013-10-20T19:20:30+01:00' # datetime | Optional. The effective date of the data (optional)
 as_at = '2013-10-20T19:20:30+01:00' # datetime | Optional. The AsAt date of the data (optional)
-page = 'page_example' # str | Optional. The pagination token to continue listing portfolios. This value is returned from a previous call to ListPortfolios.  If this is set, then the sortBy, filter, query, effectiveAt, and asAt fields must not have changed. Also, if set, a start  value cannot be set. (optional)
 sort_by = ['sort_by_example'] # list[str] | Optional. Order the results by these fields. Use use the '-' sign to denote descending order e.g. -MyFieldName (optional)
 start = 56 # int | Optional. When paginating, skip this number of results (optional)
 limit = 56 # int | Optional. When paginating, limit the number of returned results to this many. (optional)
@@ -355,7 +354,7 @@ query = 'query_example' # str | Optional. Expression specifying the criteria tha
 
 try:
     # List portfolios
-    api_response = api_instance.list_portfolios(effective_at=effective_at, as_at=as_at, page=page, sort_by=sort_by, start=start, limit=limit, filter=filter, query=query)
+    api_response = api_instance.list_portfolios(effective_at=effective_at, as_at=as_at, sort_by=sort_by, start=start, limit=limit, filter=filter, query=query)
     pprint(api_response)
 except ApiException as e:
     print("Exception when calling PortfoliosApi->list_portfolios: %s\n" % e)
@@ -367,7 +366,6 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **effective_at** | **datetime**| Optional. The effective date of the data | [optional] 
  **as_at** | **datetime**| Optional. The AsAt date of the data | [optional] 
- **page** | **str**| Optional. The pagination token to continue listing portfolios. This value is returned from a previous call to ListPortfolios.  If this is set, then the sortBy, filter, query, effectiveAt, and asAt fields must not have changed. Also, if set, a start  value cannot be set. | [optional] 
  **sort_by** | [**list[str]**](str.md)| Optional. Order the results by these fields. Use use the &#39;-&#39; sign to denote descending order e.g. -MyFieldName | [optional] 
  **start** | **int**| Optional. When paginating, skip this number of results | [optional] 
  **limit** | **int**| Optional. When paginating, limit the number of returned results to this many. | [optional] 
