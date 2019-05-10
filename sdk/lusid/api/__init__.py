@@ -10,6 +10,7 @@ from lusid.api.corporate_action_sources_api import CorporateActionSourcesApi
 from lusid.api.cut_label_definitions_api import CutLabelDefinitionsApi
 from lusid.api.data_types_api import DataTypesApi
 from lusid.api.derived_transaction_portfolios_api import DerivedTransactionPortfoliosApi
+from lusid.api.entities_api import EntitiesApi
 from lusid.api.instruments_api import InstrumentsApi
 from lusid.api.login_api import LoginApi
 from lusid.api.portfolio_groups_api import PortfolioGroupsApi
