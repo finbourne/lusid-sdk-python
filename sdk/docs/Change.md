@@ -4,11 +4,11 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **href** | **str** |  | [optional] 
-**entity_id** | [**ResourceId**](ResourceId.md) |  | [optional] 
-**corrected** | **bool** |  | [optional] 
+**entity_id** | [**ResourceId**](ResourceId.md) |  | 
+**corrected** | **bool** |  | 
 **correction_effective_at** | **datetime** |  | [optional] 
 **correction_as_at** | [**object**](.md) |  | [optional] 
-**amended** | **bool** |  | [optional] 
+**amended** | **bool** |  | 
 **amendment_effective_at** | **datetime** |  | [optional] 
 **amendment_as_at** | [**object**](.md) |  | [optional] 
 **links** | [**list[Link]**](Link.md) |  | [optional] 

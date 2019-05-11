@@ -8,7 +8,7 @@ Method | HTTP request | Description
 
 
 # **get_portfolio_changes**
-> ResourceListOfChange get_portfolio_changes(scope=scope, effective_at=effective_at, as_at=as_at)
+> ResourceListOfChange get_portfolio_changes(scope, effective_at, as_at=as_at)
 
 Get the next change to each portfolio in a scope.
 
@@ -29,13 +29,13 @@ configuration.access_token = 'YOUR_ACCESS_TOKEN'
 
 # create an instance of the API class
 api_instance = lusid.EntitiesApi(lusid.ApiClient(configuration))
-scope = 'scope_example' # str | The scope (optional)
-effective_at = '2013-10-20T19:20:30+01:00' # datetime | The effective date of the origin. (optional)
+scope = 'scope_example' # str | The scope
+effective_at = '2013-10-20T19:20:30+01:00' # datetime | The effective date of the origin.
 as_at = '2013-10-20T19:20:30+01:00' # datetime | The as-at date of the origin. (optional)
 
 try:
     # Get the next change to each portfolio in a scope.
-    api_response = api_instance.get_portfolio_changes(scope=scope, effective_at=effective_at, as_at=as_at)
+    api_response = api_instance.get_portfolio_changes(scope, effective_at, as_at=as_at)
     pprint(api_response)
 except ApiException as e:
     print("Exception when calling EntitiesApi->get_portfolio_changes: %s\n" % e)
@@ -45,8 +45,8 @@ except ApiException as e:
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **scope** | **str**| The scope | [optional] 
- **effective_at** | **datetime**| The effective date of the origin. | [optional] 
+ **scope** | **str**| The scope | 
+ **effective_at** | **datetime**| The effective date of the origin. | 
  **as_at** | **datetime**| The as-at date of the origin. | [optional] 
 
 ### Return type
