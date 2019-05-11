@@ -67,7 +67,7 @@ class TestFinbourneApi(TestCase):
         - The portfolio is created with the correct description
         """
 
-        self.assertNotIsInstance(portfolio, models.ErrorResponse, 'No portfolio created, error returned')
+        self.assertNotIsInstance(portfolio, models.LusidProblemDetails, 'No portfolio created, error returned')
         self.assertEqual(portfolio_request.code, portfolio.id.code,
                          'Portfolio created with code {} instead of code {}'.format(portfolio.id.code,
                                                                                     portfolio_request.code))
@@ -93,7 +93,7 @@ class TestFinbourneApi(TestCase):
         - The portfolio group is created with the right number of portfolios
         """
 
-        self.assertNotIsInstance(portfolio_group, models.ErrorResponse,
+        self.assertNotIsInstance(portfolio_group, models.LusidProblemDetails,
                                  'Portfolio group not created, error returned')
 
         self.assertEqual(portfolio_group.id.code, portfolio_group_request.code,
