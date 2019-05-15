@@ -8,7 +8,7 @@ Method | HTTP request | Description
 
 
 # **get_saml_identity_provider_id**
-> LusidProblemDetails get_saml_identity_provider_id(domain)
+> str get_saml_identity_provider_id(domain)
 
 Get SAML Identity Provider
 
@@ -47,7 +47,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**LusidProblemDetails**](LusidProblemDetails.md)
+**str**
 
 ### Authorization
 
