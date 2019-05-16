@@ -232,7 +232,7 @@ class TestFinbourneApi(TestCase):
         verify_holdings = self.transaction_portfolios_api.get_holdings(scope=scope,
                                                                        code=code,
                                                                        effective_at=effective_at,
-                                                                       instrument_property_keys=[
+                                                                       property_keys=[
                                                                            'Instrument/default/ClientInternal'])
 
         # Check that the correct number of holdings have been set
