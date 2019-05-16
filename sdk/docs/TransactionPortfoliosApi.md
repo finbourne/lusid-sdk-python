@@ -142,7 +142,7 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **build_transactions**
-> VersionedResourceListOfOutputTransaction build_transactions(scope, code, as_at=as_at, sort_by=sort_by, start=start, limit=limit, instrument_property_keys=instrument_property_keys, filter=filter, parameters=parameters)
+> VersionedResourceListOfOutputTransaction build_transactions(scope, code, as_at=as_at, sort_by=sort_by, start=start, limit=limit, property_keys=property_keys, filter=filter, parameters=parameters)
 
 Build output transactions
 
@@ -169,13 +169,13 @@ as_at = '2013-10-20T19:20:30+01:00' # datetime | Optional. The AsAt date of the 
 sort_by = ['sort_by_example'] # list[str] | Optional. Order the results by these fields. Use use the '-' sign to denote descending order e.g. -MyFieldName (optional)
 start = 56 # int | Optional. When paginating, skip this number of results (optional)
 limit = 56 # int | Optional. When paginating, limit the number of returned results to this many. (optional)
-instrument_property_keys = ['instrument_property_keys_example'] # list[str] | Optional. Keys for the instrument property values to be decorated onto the transactions (optional)
+property_keys = ['property_keys_example'] # list[str] | Optional. Keys for the transaction or instrument property values that will be decorated onto the transactions. No properties will be decorated if none are specified. (optional)
 filter = 'filter_example' # str | Optional. Expression to filter the result set (optional)
 parameters = lusid.TransactionQueryParameters() # TransactionQueryParameters | Optional. Transaction query parameters (optional)
 
 try:
     # Build output transactions
-    api_response = api_instance.build_transactions(scope, code, as_at=as_at, sort_by=sort_by, start=start, limit=limit, instrument_property_keys=instrument_property_keys, filter=filter, parameters=parameters)
+    api_response = api_instance.build_transactions(scope, code, as_at=as_at, sort_by=sort_by, start=start, limit=limit, property_keys=property_keys, filter=filter, parameters=parameters)
     pprint(api_response)
 except ApiException as e:
     print("Exception when calling TransactionPortfoliosApi->build_transactions: %s\n" % e)
@@ -191,7 +191,7 @@ Name | Type | Description  | Notes
  **sort_by** | [**list[str]**](str.md)| Optional. Order the results by these fields. Use use the &#39;-&#39; sign to denote descending order e.g. -MyFieldName | [optional] 
  **start** | **int**| Optional. When paginating, skip this number of results | [optional] 
  **limit** | **int**| Optional. When paginating, limit the number of returned results to this many. | [optional] 
- **instrument_property_keys** | [**list[str]**](str.md)| Optional. Keys for the instrument property values to be decorated onto the transactions | [optional] 
+ **property_keys** | [**list[str]**](str.md)| Optional. Keys for the transaction or instrument property values that will be decorated onto the transactions. No properties will be decorated if none are specified. | [optional] 
  **filter** | **str**| Optional. Expression to filter the result set | [optional] 
  **parameters** | [**TransactionQueryParameters**](TransactionQueryParameters.md)| Optional. Transaction query parameters | [optional] 
 
@@ -685,7 +685,7 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **get_transactions**
-> VersionedResourceListOfTransaction get_transactions(scope, code, from_transaction_date=from_transaction_date, to_transaction_date=to_transaction_date, as_at=as_at, sort_by=sort_by, start=start, limit=limit, instrument_property_keys=instrument_property_keys, filter=filter)
+> VersionedResourceListOfTransaction get_transactions(scope, code, from_transaction_date=from_transaction_date, to_transaction_date=to_transaction_date, as_at=as_at, sort_by=sort_by, start=start, limit=limit, property_keys=property_keys, filter=filter)
 
 Get transactions
 
@@ -714,12 +714,12 @@ as_at = '2013-10-20T19:20:30+01:00' # datetime | Optional. The AsAt date of the 
 sort_by = ['sort_by_example'] # list[str] | Optional. Order the results by these fields. Use use the '-' sign to denote descending order e.g. -MyFieldName (optional)
 start = 56 # int | Optional. When paginating, skip this number of results (optional)
 limit = 56 # int | Optional. When paginating, limit the number of returned results to this many. (optional)
-instrument_property_keys = ['instrument_property_keys_example'] # list[str] | Optional. Keys for the instrument property values that will be decorated onto the transactions (optional)
+property_keys = ['property_keys_example'] # list[str] | Optional. Keys for the transaction or instrument property values that will be decorated onto the transactions. No properties will be decorated if none are specified. (optional)
 filter = 'filter_example' # str | Optional. Expression to filter the result set (optional)
 
 try:
     # Get transactions
-    api_response = api_instance.get_transactions(scope, code, from_transaction_date=from_transaction_date, to_transaction_date=to_transaction_date, as_at=as_at, sort_by=sort_by, start=start, limit=limit, instrument_property_keys=instrument_property_keys, filter=filter)
+    api_response = api_instance.get_transactions(scope, code, from_transaction_date=from_transaction_date, to_transaction_date=to_transaction_date, as_at=as_at, sort_by=sort_by, start=start, limit=limit, property_keys=property_keys, filter=filter)
     pprint(api_response)
 except ApiException as e:
     print("Exception when calling TransactionPortfoliosApi->get_transactions: %s\n" % e)
@@ -737,7 +737,7 @@ Name | Type | Description  | Notes
  **sort_by** | [**list[str]**](str.md)| Optional. Order the results by these fields. Use use the &#39;-&#39; sign to denote descending order e.g. -MyFieldName | [optional] 
  **start** | **int**| Optional. When paginating, skip this number of results | [optional] 
  **limit** | **int**| Optional. When paginating, limit the number of returned results to this many. | [optional] 
- **instrument_property_keys** | [**list[str]**](str.md)| Optional. Keys for the instrument property values that will be decorated onto the transactions | [optional] 
+ **property_keys** | [**list[str]**](str.md)| Optional. Keys for the transaction or instrument property values that will be decorated onto the transactions. No properties will be decorated if none are specified. | [optional] 
  **filter** | **str**| Optional. Expression to filter the result set | [optional] 
 
 ### Return type
