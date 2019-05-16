@@ -555,7 +555,7 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **get_holdings**
-> VersionedResourceListOfPortfolioHolding get_holdings(scope, code, by_taxlots=by_taxlots, effective_at=effective_at, as_at=as_at, sort_by=sort_by, start=start, limit=limit, filter=filter, instrument_property_keys=instrument_property_keys)
+> VersionedResourceListOfPortfolioHolding get_holdings(scope, code, by_taxlots=by_taxlots, effective_at=effective_at, as_at=as_at, sort_by=sort_by, start=start, limit=limit, filter=filter, property_keys=property_keys)
 
 Get holdings
 
@@ -585,11 +585,11 @@ sort_by = ['sort_by_example'] # list[str] | Optional. Order the results by these
 start = 56 # int | Optional. When paginating, skip this number of results (optional)
 limit = 56 # int | Optional. When paginating, limit the number of returned results to this many. (optional)
 filter = 'filter_example' # str | Optional. Expression to filter the result set (optional)
-instrument_property_keys = ['instrument_property_keys_example'] # list[str] | Optional. Keys for the instrument property values to be decorated onto the holdings (optional)
+property_keys = ['property_keys_example'] # list[str] | Optional. Keys for the Holding or instrument property values that will be decorated onto the transactions. No properties will be decorated if none are specified. (optional)
 
 try:
     # Get holdings
-    api_response = api_instance.get_holdings(scope, code, by_taxlots=by_taxlots, effective_at=effective_at, as_at=as_at, sort_by=sort_by, start=start, limit=limit, filter=filter, instrument_property_keys=instrument_property_keys)
+    api_response = api_instance.get_holdings(scope, code, by_taxlots=by_taxlots, effective_at=effective_at, as_at=as_at, sort_by=sort_by, start=start, limit=limit, filter=filter, property_keys=property_keys)
     pprint(api_response)
 except ApiException as e:
     print("Exception when calling TransactionPortfoliosApi->get_holdings: %s\n" % e)
@@ -608,7 +608,7 @@ Name | Type | Description  | Notes
  **start** | **int**| Optional. When paginating, skip this number of results | [optional] 
  **limit** | **int**| Optional. When paginating, limit the number of returned results to this many. | [optional] 
  **filter** | **str**| Optional. Expression to filter the result set | [optional] 
- **instrument_property_keys** | [**list[str]**](str.md)| Optional. Keys for the instrument property values to be decorated onto the holdings | [optional] 
+ **property_keys** | [**list[str]**](str.md)| Optional. Keys for the Holding or instrument property values that will be decorated onto the transactions. No properties will be decorated if none are specified. | [optional] 
 
 ### Return type
 
