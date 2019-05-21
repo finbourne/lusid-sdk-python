@@ -1,7 +1,13 @@
 #!/bin/bash
 
-# get the specificed swagger file
-curl -L https://api-am-ci.lusid.com/swagger/v0/swagger.json -o lusid.json
+if [[ ${#1} -eq 0 ]]; then
+    echo
+    echo "[ERROR] url for swagger file not specified"
+    exit 1
+fi
 
-# build the sdk
-docker-compose up --build && docker-compose rm -f
+# get the specificed swagger file
+curl -L $1 -o lusid.json
+
+#   build the sdk
+docker-compose build && docker-compose up && docker-compose rm -f

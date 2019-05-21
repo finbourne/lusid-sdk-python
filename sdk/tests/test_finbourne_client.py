@@ -125,8 +125,8 @@ class TestFinbourneApi(TestCase):
 
         #   add the property to the portfolio
         properties_result = self.portfolios_api.upsert_portfolio_properties(
-            scope, portfolio_id,
-            effective_at=portfolio.created,
+            scope=scope,
+            code=portfolio_id,
             portfolio_properties={property_definition_result.key: portfolio_property})
 
         self.assertEqual(properties_result.origin_portfolio_id.code, portfolio_id)
