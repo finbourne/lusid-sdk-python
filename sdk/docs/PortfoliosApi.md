@@ -12,7 +12,7 @@ Method | HTTP request | Description
 [**list_portfolios**](PortfoliosApi.md#list_portfolios) | **GET** /api/portfolios | List portfolios
 [**list_portfolios_for_scope**](PortfoliosApi.md#list_portfolios_for_scope) | **GET** /api/portfolios/{scope} | List portfolios for scope
 [**update_portfolio**](PortfoliosApi.md#update_portfolio) | **PUT** /api/portfolios/{scope}/{code} | Update portfolio definition
-[**upsert_portfolio_properties**](PortfoliosApi.md#upsert_portfolio_properties) | **POST** /api/portfolios/{scope}/{code}/properties | Upsert properties
+[**upsert_portfolio_properties**](PortfoliosApi.md#upsert_portfolio_properties) | **POST** /api/portfolios/{scope}/{code}/properties | Upsert portfolio properties
 
 
 # **delete_portfolio**
@@ -514,11 +514,11 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **upsert_portfolio_properties**
-> PortfolioProperties upsert_portfolio_properties(scope, code, effective_at=effective_at, portfolio_properties=portfolio_properties)
+> PortfolioProperties upsert_portfolio_properties(scope, code, portfolio_properties=portfolio_properties)
 
-Upsert properties
+Upsert portfolio properties
 
-Upsert one or more property values to a portfolio for the specified effectiveAt. All properties must be of the domain Portfolio.
+Upsert one or more property values to a portfolio. All properties must be of the domain Portfolio.
 
 ### Example
 
@@ -537,12 +537,11 @@ configuration.access_token = 'YOUR_ACCESS_TOKEN'
 api_instance = lusid.PortfoliosApi(lusid.ApiClient(configuration))
 scope = 'scope_example' # str | The scope of the portfolio
 code = 'code_example' # str | The code of the portfolio
-effective_at = '2013-10-20T19:20:30+01:00' # datetime | Optional. The effective date of the change (optional)
-portfolio_properties = {'key': lusid.PropertyValue()} # dict(str, PropertyValue) | The property values to be upserted to the portfolio (optional)
+portfolio_properties = {'key': lusid.PropertyValue()} # dict(str, PropertyValue) | The property values to be upserted to the portfolio. Time variant properties must have an EffectiveFrom date. (optional)
 
 try:
-    # Upsert properties
-    api_response = api_instance.upsert_portfolio_properties(scope, code, effective_at=effective_at, portfolio_properties=portfolio_properties)
+    # Upsert portfolio properties
+    api_response = api_instance.upsert_portfolio_properties(scope, code, portfolio_properties=portfolio_properties)
     pprint(api_response)
 except ApiException as e:
     print("Exception when calling PortfoliosApi->upsert_portfolio_properties: %s\n" % e)
@@ -554,8 +553,7 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **scope** | **str**| The scope of the portfolio | 
  **code** | **str**| The code of the portfolio | 
- **effective_at** | **datetime**| Optional. The effective date of the change | [optional] 
- **portfolio_properties** | [**dict(str, PropertyValue)**](PropertyValue.md)| The property values to be upserted to the portfolio | [optional] 
+ **portfolio_properties** | [**dict(str, PropertyValue)**](PropertyValue.md)| The property values to be upserted to the portfolio. Time variant properties must have an EffectiveFrom date. | [optional] 
 
 ### Return type
 
