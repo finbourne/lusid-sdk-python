@@ -35,7 +35,7 @@ configuration.access_token = 'YOUR_ACCESS_TOKEN'
 api_instance = lusid.CorporateActionSourcesApi(lusid.ApiClient(configuration))
 scope = 'scope_example' # str | The scope of corporate action source
 code = 'code_example' # str | The code of the corporate action source
-actions = NULL # list[CreateCorporateAction] | The corporate action definitions (optional)
+actions = NULL # list[UpsertCorporateActionRequest] | The corporate action definitions (optional)
 
 try:
     # Upsert corporate actions
@@ -51,7 +51,7 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **scope** | **str**| The scope of corporate action source | 
  **code** | **str**| The code of the corporate action source | 
- **actions** | [**list[CreateCorporateAction]**](list.md)| The corporate action definitions | [optional] 
+ **actions** | [**list[UpsertCorporateActionRequest]**](list.md)| The corporate action definitions | [optional] 
 
 ### Return type
 
@@ -122,7 +122,7 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **delete_corporate_action_source**
-> DeletedEntityResponse delete_corporate_action_source(scope, code, effective_at=effective_at)
+> DeletedEntityResponse delete_corporate_action_source(scope, code)
 
 Delete a corporate action source
 
@@ -145,11 +145,10 @@ configuration.access_token = 'YOUR_ACCESS_TOKEN'
 api_instance = lusid.CorporateActionSourcesApi(lusid.ApiClient(configuration))
 scope = 'scope_example' # str | The Scope of the Corporate Action Source to be deleted
 code = 'code_example' # str | The Code of the Corporate Action Source to be deleted
-effective_at = '2013-10-20T19:20:30+01:00' # datetime | Optional. The start effective date of the data (optional)
 
 try:
     # Delete a corporate action source
-    api_response = api_instance.delete_corporate_action_source(scope, code, effective_at=effective_at)
+    api_response = api_instance.delete_corporate_action_source(scope, code)
     pprint(api_response)
 except ApiException as e:
     print("Exception when calling CorporateActionSourcesApi->delete_corporate_action_source: %s\n" % e)
@@ -161,7 +160,6 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **scope** | **str**| The Scope of the Corporate Action Source to be deleted | 
  **code** | **str**| The Code of the Corporate Action Source to be deleted | 
- **effective_at** | **datetime**| Optional. The start effective date of the data | [optional] 
 
 ### Return type
 
@@ -248,7 +246,7 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **list_corporate_action_sources**
-> ResourceListOfCorporateActionSource list_corporate_action_sources(effective_at=effective_at, as_at=as_at, sort_by=sort_by, start=start, limit=limit, filter=filter)
+> ResourceListOfCorporateActionSource list_corporate_action_sources(as_at=as_at, sort_by=sort_by, start=start, limit=limit, filter=filter)
 
 Get corporate action sources
 
@@ -269,7 +267,6 @@ configuration.access_token = 'YOUR_ACCESS_TOKEN'
 
 # create an instance of the API class
 api_instance = lusid.CorporateActionSourcesApi(lusid.ApiClient(configuration))
-effective_at = '2013-10-20T19:20:30+01:00' # datetime | Optional. The start effective date of the data range (optional)
 as_at = '2013-10-20T19:20:30+01:00' # datetime | Optional. The AsAt date of the data (optional)
 sort_by = ['sort_by_example'] # list[str] | Optional. Order the results by these fields. Use use the '-' sign to denote descending order e.g. -MyFieldName (optional)
 start = 56 # int | Optional. When paginating, skip this number of results (optional)
@@ -278,7 +275,7 @@ filter = 'filter_example' # str | Optional. Expression to filter the result set 
 
 try:
     # Get corporate action sources
-    api_response = api_instance.list_corporate_action_sources(effective_at=effective_at, as_at=as_at, sort_by=sort_by, start=start, limit=limit, filter=filter)
+    api_response = api_instance.list_corporate_action_sources(as_at=as_at, sort_by=sort_by, start=start, limit=limit, filter=filter)
     pprint(api_response)
 except ApiException as e:
     print("Exception when calling CorporateActionSourcesApi->list_corporate_action_sources: %s\n" % e)
@@ -288,7 +285,6 @@ except ApiException as e:
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **effective_at** | **datetime**| Optional. The start effective date of the data range | [optional] 
  **as_at** | **datetime**| Optional. The AsAt date of the data | [optional] 
  **sort_by** | [**list[str]**](str.md)| Optional. Order the results by these fields. Use use the &#39;-&#39; sign to denote descending order e.g. -MyFieldName | [optional] 
  **start** | **int**| Optional. When paginating, skip this number of results | [optional] 

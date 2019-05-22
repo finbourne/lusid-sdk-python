@@ -1,14 +1,14 @@
-# CorporateAction
+# UpsertCorporateActionRequest
 
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **corporate_action_code** | **str** |  | 
-**announcement_date** | **datetime** |  | [optional] 
-**ex_date** | **datetime** |  | [optional] 
-**record_date** | **datetime** |  | [optional] 
-**payment_date** | **datetime** |  | [optional] 
-**transitions** | [**list[CorporateActionTransition]**](CorporateActionTransition.md) |  | [optional] 
+**announcement_date** | **datetime** |  | 
+**ex_date** | **datetime** |  | 
+**record_date** | **datetime** |  | 
+**payment_date** | **datetime** |  | 
+**transitions** | [**list[CorporateActionTransitionRequest]**](CorporateActionTransitionRequest.md) |  | 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 
