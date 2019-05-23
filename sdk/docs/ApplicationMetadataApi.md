@@ -7,7 +7,7 @@ Method | HTTP request | Description
 [**get_excel_addin**](ApplicationMetadataApi.md#get_excel_addin) | **GET** /api/metadata/downloads/exceladdin | Download Excel Addin
 [**get_excel_download_url**](ApplicationMetadataApi.md#get_excel_download_url) | **GET** /api/metadata/downloads/excel | Get Excel download url
 [**get_lusid_versions**](ApplicationMetadataApi.md#get_lusid_versions) | **GET** /api/metadata/versions | Get LUSID versions
-[**list_access_controlled_resources**](ApplicationMetadataApi.md#list_access_controlled_resources) | **GET** /api/metadata/access/resources | Get resources available for access control
+[**list_access_controlled_actions**](ApplicationMetadataApi.md#list_access_controlled_actions) | **GET** /api/metadata/access/actions | Get resources available for access control
 
 
 # **get_excel_addin**
@@ -165,8 +165,8 @@ This endpoint does not need any parameter.
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
-# **list_access_controlled_resources**
-> ResourceListOfAccessControlledResource list_access_controlled_resources(filter=filter)
+# **list_access_controlled_actions**
+> list[AccessControlledAction] list_access_controlled_actions()
 
 Get resources available for access control
 
@@ -187,25 +187,21 @@ configuration.access_token = 'YOUR_ACCESS_TOKEN'
 
 # create an instance of the API class
 api_instance = lusid.ApplicationMetadataApi(lusid.ApiClient(configuration))
-filter = 'filter_example' # str | Optional. Expression to filter the result set (optional)
 
 try:
     # Get resources available for access control
-    api_response = api_instance.list_access_controlled_resources(filter=filter)
+    api_response = api_instance.list_access_controlled_actions()
     pprint(api_response)
 except ApiException as e:
-    print("Exception when calling ApplicationMetadataApi->list_access_controlled_resources: %s\n" % e)
+    print("Exception when calling ApplicationMetadataApi->list_access_controlled_actions: %s\n" % e)
 ```
 
 ### Parameters
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
- **filter** | **str**| Optional. Expression to filter the result set | [optional] 
+This endpoint does not need any parameter.
 
 ### Return type
 
-[**ResourceListOfAccessControlledResource**](ResourceListOfAccessControlledResource.md)
+[**list[AccessControlledAction]**](AccessControlledAction.md)
 
 ### Authorization
 
