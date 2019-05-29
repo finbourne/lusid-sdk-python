@@ -3,8 +3,8 @@
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**instrument_identifiers** | **dict(str, str)** | Unique instrument identifiers | [optional] 
-**instrument_uid** | **str** | LUSID&#39;s internal unique instrument identifier, resolved from the instrument identifiers | 
+**instrument_identifiers** | **dict(str, str)** | Unique instrument identifiers. | [optional] 
+**instrument_uid** | **str** |  | 
 **currency** | **str** |  | 
 **properties** | [**list[ModelProperty]**](ModelProperty.md) | Properties associated with the constituent | [optional] 
 **weight** | **float** |  | 
