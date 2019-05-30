@@ -8,7 +8,6 @@ Name | Type | Description | Notes
 **description** | **str** |  | [optional] 
 **cut_local_time** | [**CutLocalTime**](CutLocalTime.md) |  | [optional] 
 **time_zone** | **str** |  | [optional] 
-**effective_at** | **datetime** |  | [optional] 
 **href** | **str** |  | [optional] 
 **links** | [**list[Link]**](Link.md) |  | [optional] 
 
