@@ -478,7 +478,7 @@ configuration.access_token = 'YOUR_ACCESS_TOKEN'
 api_instance = lusid.PortfoliosApi(lusid.ApiClient(configuration))
 scope = 'scope_example' # str | The scope of the portfolio
 code = 'code_example' # str | The code of the portfolio
-effective_at = '2013-10-20T19:20:30+01:00' # datetime | Optional. The effective date for the change (optional)
+effective_at = 'effective_at_example' # str | Optional. The effective date for the change (optional)
 request = lusid.UpdatePortfolioRequest() # UpdatePortfolioRequest | The updated portfolio definition (optional)
 
 try:
@@ -495,7 +495,7 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **scope** | **str**| The scope of the portfolio | 
  **code** | **str**| The code of the portfolio | 
- **effective_at** | **datetime**| Optional. The effective date for the change | [optional] 
+ **effective_at** | **str**| Optional. The effective date for the change | [optional] 
  **request** | [**UpdatePortfolioRequest**](UpdatePortfolioRequest.md)| The updated portfolio definition | [optional] 
 
 ### Return type
