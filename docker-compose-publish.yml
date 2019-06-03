@@ -1,0 +1,15 @@
+version: "3"
+
+services:
+
+  lusid-sdk-python-publish:
+    container_name: lusid-sdk-python-publish
+    build:
+      context: .
+      dockerfile: publish.Dockerfile
+    image: finbourne/lusid-sdk-python-publish
+    volumes:
+      - .:/usr/src
+    command: 
+      - ${PYPI_PASSWORD}
+      - ${PYPI_REPO}

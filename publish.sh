@@ -9,7 +9,16 @@ if [[ (${#1} -eq 0) ]] ; then
     exit 1
 fi
 
-PYPI_PASSWORD=$1
+if [[ (${#2} -eq 0) ]] ; then
+    echo 
+    echo "[ERROR] missing PyPi repo"
+    echo
+    exit 1
+fi
+
+pypi_password=$1
+pypi_repo=$2
+
 api_version=$(cat lusid/__init__.py | grep __version__ |  awk '{split($0, a, "="); print a[2]}' | tr -d ' "')
 
 # package
@@ -17,4 +26,4 @@ python setup.py sdist
 python setup.py bdist_wheel
 
 # upload
-twine upload --repository-url https://nexus.finbourne.com/repository/pypi/ -u pypi -p $PYPI_PASSWORD dist/* 
+twine upload --repository-url $pypi_repo -u pypi -p $pypi_password dist/* 
