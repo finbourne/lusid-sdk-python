@@ -34,8 +34,6 @@ class TestFinbourneApi(TestCase):
         cls.transaction_portfolios_api = lusid.TransactionPortfoliosApi(api_client)
         cls.property_definition_api = lusid.PropertyDefinitionsApi(api_client)
         cls.portfolios_api = lusid.PortfoliosApi(api_client)
-        cls.analytic_stores_api = lusid.AnalyticsStoresApi(api_client)
-        cls.aggregation_api = lusid.AggregationApi(api_client)
 
         instruments = [
             {"Figi": "BBG000C6K6G9", "Name": "VODAFONE GROUP PLC"},
@@ -308,82 +306,6 @@ class TestFinbourneApi(TestCase):
         self.instruments_api.upsert_instruments(
             requests={sec_id: request})
 
-    def test_portfolio_aggregation(self):
-
-        scope = str(uuid.uuid4())
-        guid = str(uuid.uuid4())
-        effective_date = datetime(2018, 1, 1, tzinfo=pytz.utc)
-
-        request = models.CreateTransactionPortfolioRequest(
-            display_name="portfolio-{0}".format(guid),
-            code="id-{0}".format(guid),
-            base_currency="GBP",
-            created=effective_date
-        )
-
-        #   create the portfolio
-        result = self.transaction_portfolios_api.create_portfolio(
-            scope=scope,
-            create_request=request)
-
-        self.assertEqual(result.id.code, request.code)
-
-        portfolio_id = result.id.code
-
-        TransactionSpec = namedtuple('TransactionSpec', 'id price trade_date')
-        transaction_specs = [
-            TransactionSpec(self.instrumentIds[0], 101, effective_date),
-            TransactionSpec(self.instrumentIds[1], 102, effective_date),
-            TransactionSpec(self.instrumentIds[2], 103, effective_date)
-        ]
-        transaction_specs.sort(key=lambda ts: ts.id)
-
-        new_trades = list(map(self.build_transaction, transaction_specs))
-
-        #   add initial batch of trades
-        self.transaction_portfolios_api.upsert_transactions(
-            scope,
-            portfolio_id,
-            transactions=new_trades)
-
-        try:
-            self.analytic_stores_api.get_analytic_store(
-                scope,
-                effective_date.year,
-                effective_date.month,
-                effective_date.day
-            )
-        except:
-            #   create an analytic store
-            analytic_store_request = models.CreateAnalyticStoreRequest(scope, effective_date)
-            self.analytic_stores_api.create_analytic_store(request=analytic_store_request)
-
-        prices = [
-            models.InstrumentAnalytic(self.instrumentIds[0], 100),
-            models.InstrumentAnalytic(self.instrumentIds[1], 200),
-            models.InstrumentAnalytic(self.instrumentIds[2], 300)
-        ]
-
-        #   add prices
-        self.analytic_stores_api.set_analytics(scope, effective_date.year, effective_date.month, effective_date.day, data=prices)
-
-        aggregation_request = models.AggregationRequest(
-            recipe_id=models.ResourceId(scope, "default"),
-            metrics=[
-                models.AggregateSpec("Instrument/default/Name", "Value"),
-                models.AggregateSpec("Holding/default/PV", "Proportion"),
-                models.AggregateSpec("Holding/default/PV", "Sum")
-            ],
-            group_by=["Instrument/default/Name"],
-            effective_at=effective_date
-        )
-
-        #   do the aggregation
-        aggregation = self.aggregation_api.get_aggregation_by_portfolio(scope, portfolio_id, request=aggregation_request)
-
-        for item in aggregation.data:
-            print("\t{}\t{}\t{}".format(item["Instrument/default/Name"], item["Proportion(Holding/default/PV)"],
-                                        item["Sum(Holding/default/PV)"]))
 
     # utility to build trade from spec
     @classmethod

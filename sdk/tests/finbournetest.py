@@ -51,8 +51,6 @@ class TestFinbourneApi(TestCase):
         cls.transaction_portfolios_api = lusid.TransactionPortfoliosApi(api_client)
         cls.property_definition_api = lusid.PropertyDefinitionsApi(api_client)
         cls.portfolios_api = lusid.PortfoliosApi(api_client)
-        cls.analytic_stores_api = lusid.AnalyticsStoresApi(api_client)
-        cls.aggregation_api = lusid.AggregationApi(api_client)
         cls.derived_transaction_portfolio_api = lusid.DerivedTransactionPortfoliosApi(api_client)
         cls.reconciliations_api = lusid.ReconciliationsApi(api_client)
         cls.portfolio_groups_api = lusid.PortfolioGroupsApi(api_client)
