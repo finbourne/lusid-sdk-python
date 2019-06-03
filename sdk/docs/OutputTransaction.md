@@ -11,6 +11,7 @@ Name | Type | Description | Notes
 **transaction_date** | **datetime** | Transaction date | [optional] 
 **settlement_date** | **datetime** | Settlement date | [optional] 
 **units** | **float** | Quantity of trade in units of the instrument | [optional] 
+**transaction_amount** | **float** | Total value of the transaction in trade currency | [optional] 
 **transaction_price** | [**TransactionPrice**](TransactionPrice.md) |  | [optional] 
 **total_consideration** | [**CurrencyAndAmount**](CurrencyAndAmount.md) |  | [optional] 
 **exchange_rate** | **float** | Rate between transaction and settlement currency | [optional] 
