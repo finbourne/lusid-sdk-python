@@ -106,7 +106,7 @@ configuration.access_token = 'YOUR_ACCESS_TOKEN'
 api_instance = lusid.TransactionPortfoliosApi(lusid.ApiClient(configuration))
 scope = 'scope_example' # str | The scope of the portfolio
 code = 'code_example' # str | The code of the portfolio
-effective_at = 'effective_at_example' # str | The effective date of the change
+effective_at = '2013-10-20T19:20:30+01:00' # datetime | The effective date of the change
 holding_adjustments = NULL # list[AdjustHoldingRequest] | The selected set of holdings adjustments (optional)
 
 try:
@@ -123,7 +123,7 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **scope** | **str**| The scope of the portfolio | 
  **code** | **str**| The code of the portfolio | 
- **effective_at** | **str**| The effective date of the change | 
+ **effective_at** | **datetime**| The effective date of the change | 
  **holding_adjustments** | [**list[AdjustHoldingRequest]**](list.md)| The selected set of holdings adjustments | [optional] 
 
 ### Return type
@@ -234,7 +234,7 @@ configuration.access_token = 'YOUR_ACCESS_TOKEN'
 api_instance = lusid.TransactionPortfoliosApi(lusid.ApiClient(configuration))
 scope = 'scope_example' # str | The scope of the portfolio
 code = 'code_example' # str | The code of the portfolio
-effective_at = 'effective_at_example' # str | The effective date of the change
+effective_at = '2013-10-20T19:20:30+01:00' # datetime | The effective date of the change
 
 try:
     # Cancel holdings adjustments
@@ -250,7 +250,7 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **scope** | **str**| The scope of the portfolio | 
  **code** | **str**| The code of the portfolio | 
- **effective_at** | **str**| The effective date of the change | 
+ **effective_at** | **datetime**| The effective date of the change | 
 
 ### Return type
 
@@ -519,7 +519,7 @@ configuration.access_token = 'YOUR_ACCESS_TOKEN'
 api_instance = lusid.TransactionPortfoliosApi(lusid.ApiClient(configuration))
 scope = 'scope_example' # str | The scope of the portfolio
 code = 'code_example' # str | The code of the portfolio
-effective_at = 'effective_at_example' # str | Optional. The effective date of the data (optional)
+effective_at = '2013-10-20T19:20:30+01:00' # datetime | Optional. The effective date of the data (optional)
 as_at = '2013-10-20T19:20:30+01:00' # datetime | Optional. The AsAt date of the data (optional)
 
 try:
@@ -536,7 +536,7 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **scope** | **str**| The scope of the portfolio | 
  **code** | **str**| The code of the portfolio | 
- **effective_at** | **str**| Optional. The effective date of the data | [optional] 
+ **effective_at** | **datetime**| Optional. The effective date of the data | [optional] 
  **as_at** | **datetime**| Optional. The AsAt date of the data | [optional] 
 
 ### Return type
@@ -579,7 +579,7 @@ api_instance = lusid.TransactionPortfoliosApi(lusid.ApiClient(configuration))
 scope = 'scope_example' # str | The scope of the portfolio
 code = 'code_example' # str | The code of the portfolio
 by_taxlots = True # bool | Option to expand holdings to return the underlying tax-lots (optional)
-effective_at = 'effective_at_example' # str | Optional. The effective date of the portfolio (optional)
+effective_at = '2013-10-20T19:20:30+01:00' # datetime | Optional. The effective date of the portfolio (optional)
 as_at = '2013-10-20T19:20:30+01:00' # datetime | Optional. The AsAt date of the data (optional)
 sort_by = ['sort_by_example'] # list[str] | Optional. Order the results by these fields. Use use the '-' sign to denote descending order e.g. -MyFieldName (optional)
 start = 56 # int | Optional. When paginating, skip this number of results (optional)
@@ -602,7 +602,7 @@ Name | Type | Description  | Notes
  **scope** | **str**| The scope of the portfolio | 
  **code** | **str**| The code of the portfolio | 
  **by_taxlots** | **bool**| Option to expand holdings to return the underlying tax-lots | [optional] 
- **effective_at** | **str**| Optional. The effective date of the portfolio | [optional] 
+ **effective_at** | **datetime**| Optional. The effective date of the portfolio | [optional] 
  **as_at** | **datetime**| Optional. The AsAt date of the data | [optional] 
  **sort_by** | [**list[str]**](str.md)| Optional. Order the results by these fields. Use use the &#39;-&#39; sign to denote descending order e.g. -MyFieldName | [optional] 
  **start** | **int**| Optional. When paginating, skip this number of results | [optional] 
@@ -649,7 +649,7 @@ configuration.access_token = 'YOUR_ACCESS_TOKEN'
 api_instance = lusid.TransactionPortfoliosApi(lusid.ApiClient(configuration))
 scope = 'scope_example' # str | The scope of the portfolio
 code = 'code_example' # str | The code of the portfolio
-effective_at = 'effective_at_example' # str | The effective time of the holdings adjustment
+effective_at = '2013-10-20T19:20:30+01:00' # datetime | The effective time of the holdings adjustment
 as_at = '2013-10-20T19:20:30+01:00' # datetime | Optional. The AsAt date of the data (optional)
 
 try:
@@ -666,7 +666,7 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **scope** | **str**| The scope of the portfolio | 
  **code** | **str**| The code of the portfolio | 
- **effective_at** | **str**| The effective time of the holdings adjustment | 
+ **effective_at** | **datetime**| The effective time of the holdings adjustment | 
  **as_at** | **datetime**| Optional. The AsAt date of the data | [optional] 
 
 ### Return type
@@ -708,8 +708,8 @@ configuration.access_token = 'YOUR_ACCESS_TOKEN'
 api_instance = lusid.TransactionPortfoliosApi(lusid.ApiClient(configuration))
 scope = 'scope_example' # str | The scope of the portfolio
 code = 'code_example' # str | The code of the portfolio
-from_transaction_date = 'from_transaction_date_example' # str | Optional. Limit the returned transactions to those with a transaction date equal or later than this date (optional)
-to_transaction_date = 'to_transaction_date_example' # str | Optional. Limit the returned transactions to those with a transaction date equal or before this date (optional)
+from_transaction_date = '2013-10-20T19:20:30+01:00' # datetime | Optional. Limit the returned transactions to those with a transaction date equal or later than this date (optional)
+to_transaction_date = '2013-10-20T19:20:30+01:00' # datetime | Optional. Limit the returned transactions to those with a transaction date equal or before this date (optional)
 as_at = '2013-10-20T19:20:30+01:00' # datetime | Optional. The AsAt date of the data (optional)
 sort_by = ['sort_by_example'] # list[str] | Optional. Order the results by these fields. Use use the '-' sign to denote descending order e.g. -MyFieldName (optional)
 start = 56 # int | Optional. When paginating, skip this number of results (optional)
@@ -731,8 +731,8 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **scope** | **str**| The scope of the portfolio | 
  **code** | **str**| The code of the portfolio | 
- **from_transaction_date** | **str**| Optional. Limit the returned transactions to those with a transaction date equal or later than this date | [optional] 
- **to_transaction_date** | **str**| Optional. Limit the returned transactions to those with a transaction date equal or before this date | [optional] 
+ **from_transaction_date** | **datetime**| Optional. Limit the returned transactions to those with a transaction date equal or later than this date | [optional] 
+ **to_transaction_date** | **datetime**| Optional. Limit the returned transactions to those with a transaction date equal or before this date | [optional] 
  **as_at** | **datetime**| Optional. The AsAt date of the data | [optional] 
  **sort_by** | [**list[str]**](str.md)| Optional. Order the results by these fields. Use use the &#39;-&#39; sign to denote descending order e.g. -MyFieldName | [optional] 
  **start** | **int**| Optional. When paginating, skip this number of results | [optional] 
@@ -779,8 +779,8 @@ configuration.access_token = 'YOUR_ACCESS_TOKEN'
 api_instance = lusid.TransactionPortfoliosApi(lusid.ApiClient(configuration))
 scope = 'scope_example' # str | The scope of the portfolio
 code = 'code_example' # str | Code for the portfolio
-from_effective_at = 'from_effective_at_example' # str | Holdings adjustments between this time (inclusive) and the toEffectiveAt are returned. (optional)
-to_effective_at = 'to_effective_at_example' # str | Holdings adjustments between this time (inclusive) and the fromEffectiveAt are returned. (optional)
+from_effective_at = '2013-10-20T19:20:30+01:00' # datetime | Holdings adjustments between this time (inclusive) and the toEffectiveAt are returned. (optional)
+to_effective_at = '2013-10-20T19:20:30+01:00' # datetime | Holdings adjustments between this time (inclusive) and the fromEffectiveAt are returned. (optional)
 as_at = '2013-10-20T19:20:30+01:00' # datetime | Optional. The AsAt date of the data (optional)
 
 try:
@@ -797,8 +797,8 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **scope** | **str**| The scope of the portfolio | 
  **code** | **str**| Code for the portfolio | 
- **from_effective_at** | **str**| Holdings adjustments between this time (inclusive) and the toEffectiveAt are returned. | [optional] 
- **to_effective_at** | **str**| Holdings adjustments between this time (inclusive) and the fromEffectiveAt are returned. | [optional] 
+ **from_effective_at** | **datetime**| Holdings adjustments between this time (inclusive) and the toEffectiveAt are returned. | [optional] 
+ **to_effective_at** | **datetime**| Holdings adjustments between this time (inclusive) and the fromEffectiveAt are returned. | [optional] 
  **as_at** | **datetime**| Optional. The AsAt date of the data | [optional] 
 
 ### Return type
@@ -840,7 +840,7 @@ configuration.access_token = 'YOUR_ACCESS_TOKEN'
 api_instance = lusid.TransactionPortfoliosApi(lusid.ApiClient(configuration))
 scope = 'scope_example' # str | The scope of the transaction portfolio
 code = 'code_example' # str | The code of the transaction portfolio
-effective_at = 'effective_at_example' # str | The effective date of the change
+effective_at = '2013-10-20T19:20:30+01:00' # datetime | The effective date of the change
 holding_adjustments = NULL # list[AdjustHoldingRequest] | The complete set of holdings adjustments for the portfolio (optional)
 
 try:
@@ -857,7 +857,7 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **scope** | **str**| The scope of the transaction portfolio | 
  **code** | **str**| The code of the transaction portfolio | 
- **effective_at** | **str**| The effective date of the change | 
+ **effective_at** | **datetime**| The effective date of the change | 
  **holding_adjustments** | [**list[AdjustHoldingRequest]**](list.md)| The complete set of holdings adjustments for the portfolio | [optional] 
 
 ### Return type
@@ -956,7 +956,7 @@ configuration.access_token = 'YOUR_ACCESS_TOKEN'
 api_instance = lusid.TransactionPortfoliosApi(lusid.ApiClient(configuration))
 scope = 'scope_example' # str | The scope of the portfolio
 code = 'code_example' # str | The code of the portfolio
-effective_at = 'effective_at_example' # str | Optional. The effective date of the change (optional)
+effective_at = '2013-10-20T19:20:30+01:00' # datetime | Optional. The effective date of the change (optional)
 details = lusid.CreatePortfolioDetails() # CreatePortfolioDetails | The set of details for the portfolio (optional)
 
 try:
@@ -973,7 +973,7 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **scope** | **str**| The scope of the portfolio | 
  **code** | **str**| The code of the portfolio | 
- **effective_at** | **str**| Optional. The effective date of the change | [optional] 
+ **effective_at** | **datetime**| Optional. The effective date of the change | [optional] 
  **details** | [**CreatePortfolioDetails**](CreatePortfolioDetails.md)| The set of details for the portfolio | [optional] 
 
 ### Return type
