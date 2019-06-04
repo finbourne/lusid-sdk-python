@@ -89,7 +89,7 @@ configuration.access_token = 'YOUR_ACCESS_TOKEN'
 api_instance = lusid.ReferencePortfolioApi(lusid.ApiClient(configuration))
 scope = 'scope_example' # str | The scope of the portfolio
 code = 'code_example' # str | The code of the portfolio
-effective_at = '2013-10-20T19:20:30+01:00' # datetime | Optional. The effective date of the constituents to retrieve (optional)
+effective_at = 'effective_at_example' # str | Optional. The effective date of the constituents to retrieve (optional)
 as_at = '2013-10-20T19:20:30+01:00' # datetime | Optional. The AsAt date of the data (optional)
 sort_by = ['sort_by_example'] # list[str] | Optional. Order the results by these fields. Use the '-' sign to denote descending order e.g. -MyFieldName (optional)
 start = 56 # int | Optional. When paginating, skip this number of results (optional)
@@ -110,7 +110,7 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **scope** | **str**| The scope of the portfolio | 
  **code** | **str**| The code of the portfolio | 
- **effective_at** | **datetime**| Optional. The effective date of the constituents to retrieve | [optional] 
+ **effective_at** | **str**| Optional. The effective date of the constituents to retrieve | [optional] 
  **as_at** | **datetime**| Optional. The AsAt date of the data | [optional] 
  **sort_by** | [**list[str]**](str.md)| Optional. Order the results by these fields. Use the &#39;-&#39; sign to denote descending order e.g. -MyFieldName | [optional] 
  **start** | **int**| Optional. When paginating, skip this number of results | [optional] 
@@ -156,8 +156,8 @@ configuration.access_token = 'YOUR_ACCESS_TOKEN'
 api_instance = lusid.ReferencePortfolioApi(lusid.ApiClient(configuration))
 scope = 'scope_example' # str | The scope of the portfolio
 code = 'code_example' # str | Code for the portfolio
-from_effective_at = '2013-10-20T19:20:30+01:00' # datetime | Events between this time (inclusive) and the toEffectiveAt are returned. (optional)
-to_effective_at = '2013-10-20T19:20:30+01:00' # datetime | Events between this time (inclusive) and the fromEffectiveAt are returned. (optional)
+from_effective_at = 'from_effective_at_example' # str | Events between this time (inclusive) and the toEffectiveAt are returned. (optional)
+to_effective_at = 'to_effective_at_example' # str | Events between this time (inclusive) and the fromEffectiveAt are returned. (optional)
 as_at_time = '2013-10-20T19:20:30+01:00' # datetime | The as-at time for which the result is valid. (optional)
 
 try:
@@ -174,8 +174,8 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **scope** | **str**| The scope of the portfolio | 
  **code** | **str**| Code for the portfolio | 
- **from_effective_at** | **datetime**| Events between this time (inclusive) and the toEffectiveAt are returned. | [optional] 
- **to_effective_at** | **datetime**| Events between this time (inclusive) and the fromEffectiveAt are returned. | [optional] 
+ **from_effective_at** | **str**| Events between this time (inclusive) and the toEffectiveAt are returned. | [optional] 
+ **to_effective_at** | **str**| Events between this time (inclusive) and the fromEffectiveAt are returned. | [optional] 
  **as_at_time** | **datetime**| The as-at time for which the result is valid. | [optional] 
 
 ### Return type
