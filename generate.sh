@@ -31,6 +31,7 @@ java -jar openapi-generator-cli.jar generate \
     -i $gen_root/$1 \
     -g python \
     -o $sdk_output_folder \
+    -t $gen_root/templates \
     -c $config_file   
 
 # create a version file
