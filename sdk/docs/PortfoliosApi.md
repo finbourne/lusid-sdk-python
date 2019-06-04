@@ -39,7 +39,7 @@ configuration.access_token = 'YOUR_ACCESS_TOKEN'
 api_instance = lusid.PortfoliosApi(lusid.ApiClient(configuration))
 scope = 'scope_example' # str | The scope of the portfolio
 code = 'code_example' # str | The code of the portfolio
-effective_at = '2013-10-20T19:20:30+01:00' # datetime | Optional. The effective date of the deletion (optional)
+effective_at = 'effective_at_example' # str | Optional. The effective date of the deletion (optional)
 
 try:
     # Delete portfolio
@@ -55,7 +55,7 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **scope** | **str**| The scope of the portfolio | 
  **code** | **str**| The code of the portfolio | 
- **effective_at** | **datetime**| Optional. The effective date of the deletion | [optional] 
+ **effective_at** | **str**| Optional. The effective date of the deletion | [optional] 
 
 ### Return type
 
@@ -96,7 +96,7 @@ configuration.access_token = 'YOUR_ACCESS_TOKEN'
 api_instance = lusid.PortfoliosApi(lusid.ApiClient(configuration))
 scope = 'scope_example' # str | The scope of the portfolio
 code = 'code_example' # str | Code for the portfolio
-effective_at = '2013-10-20T19:20:30+01:00' # datetime | Optional. The effective date of the deletion (optional)
+effective_at = 'effective_at_example' # str | Optional. The effective date of the deletion (optional)
 portfolio_property_keys = ['portfolio_property_keys_example'] # list[str] | Optional. The keys of the properties to be deleted. None specified indicates the intention to delete all properties from the portfolio (optional)
 
 try:
@@ -113,7 +113,7 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **scope** | **str**| The scope of the portfolio | 
  **code** | **str**| Code for the portfolio | 
- **effective_at** | **datetime**| Optional. The effective date of the deletion | [optional] 
+ **effective_at** | **str**| Optional. The effective date of the deletion | [optional] 
  **portfolio_property_keys** | [**list[str]**](str.md)| Optional. The keys of the properties to be deleted. None specified indicates the intention to delete all properties from the portfolio | [optional] 
 
 ### Return type
@@ -281,7 +281,7 @@ configuration.access_token = 'YOUR_ACCESS_TOKEN'
 api_instance = lusid.PortfoliosApi(lusid.ApiClient(configuration))
 scope = 'scope_example' # str | The scope of the portfolio
 code = 'code_example' # str | The code of the portfolio
-effective_at = '2013-10-20T19:20:30+01:00' # datetime | Optional. The effective date of the data (optional)
+effective_at = 'effective_at_example' # str | Optional. The effective date of the data (optional)
 as_at = '2013-10-20T19:20:30+01:00' # datetime | Optional. The AsAt date of the data (optional)
 sort_by = ['sort_by_example'] # list[str] | Optional. Order the results by these fields. Use use the '-' sign to denote descending order e.g. -MyFieldName (optional)
 start = 56 # int | Optional. When paginating, skip this number of results (optional)
@@ -301,7 +301,7 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **scope** | **str**| The scope of the portfolio | 
  **code** | **str**| The code of the portfolio | 
- **effective_at** | **datetime**| Optional. The effective date of the data | [optional] 
+ **effective_at** | **str**| Optional. The effective date of the data | [optional] 
  **as_at** | **datetime**| Optional. The AsAt date of the data | [optional] 
  **sort_by** | [**list[str]**](str.md)| Optional. Order the results by these fields. Use use the &#39;-&#39; sign to denote descending order e.g. -MyFieldName | [optional] 
  **start** | **int**| Optional. When paginating, skip this number of results | [optional] 
@@ -344,7 +344,7 @@ configuration.access_token = 'YOUR_ACCESS_TOKEN'
 
 # create an instance of the API class
 api_instance = lusid.PortfoliosApi(lusid.ApiClient(configuration))
-effective_at = '2013-10-20T19:20:30+01:00' # datetime | Optional. The effective date of the data (optional)
+effective_at = 'effective_at_example' # str | Optional. The effective date of the data (optional)
 as_at = '2013-10-20T19:20:30+01:00' # datetime | Optional. The AsAt date of the data (optional)
 page = 'page_example' # str | Optional. The pagination token to continue listing portfolios. This value is returned from a previous call to ListPortfolios.  If this is set, then the sortBy, filter, query, effectiveAt, and asAt fields must not have changed. Also, if set, a start  value cannot be set. (optional)
 sort_by = ['sort_by_example'] # list[str] | Optional. Order the results by these fields. Use use the '-' sign to denote descending order e.g. -MyFieldName (optional)
@@ -365,7 +365,7 @@ except ApiException as e:
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **effective_at** | **datetime**| Optional. The effective date of the data | [optional] 
+ **effective_at** | **str**| Optional. The effective date of the data | [optional] 
  **as_at** | **datetime**| Optional. The AsAt date of the data | [optional] 
  **page** | **str**| Optional. The pagination token to continue listing portfolios. This value is returned from a previous call to ListPortfolios.  If this is set, then the sortBy, filter, query, effectiveAt, and asAt fields must not have changed. Also, if set, a start  value cannot be set. | [optional] 
  **sort_by** | [**list[str]**](str.md)| Optional. Order the results by these fields. Use use the &#39;-&#39; sign to denote descending order e.g. -MyFieldName | [optional] 
@@ -412,7 +412,7 @@ configuration.access_token = 'YOUR_ACCESS_TOKEN'
 # create an instance of the API class
 api_instance = lusid.PortfoliosApi(lusid.ApiClient(configuration))
 scope = 'scope_example' # str | The scope
-effective_at = '2013-10-20T19:20:30+01:00' # datetime | Optional. The effective date of the data (optional)
+effective_at = 'effective_at_example' # str | Optional. The effective date of the data (optional)
 as_at = '2013-10-20T19:20:30+01:00' # datetime | Optional. The AsAt date of the data (optional)
 sort_by = ['sort_by_example'] # list[str] | Optional. Order the results by these fields. Use use the '-' sign to denote descending order e.g. -MyFieldName (optional)
 start = 56 # int | Optional. When paginating, skip this number of results (optional)
@@ -432,7 +432,7 @@ except ApiException as e:
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **scope** | **str**| The scope | 
- **effective_at** | **datetime**| Optional. The effective date of the data | [optional] 
+ **effective_at** | **str**| Optional. The effective date of the data | [optional] 
  **as_at** | **datetime**| Optional. The AsAt date of the data | [optional] 
  **sort_by** | [**list[str]**](str.md)| Optional. Order the results by these fields. Use use the &#39;-&#39; sign to denote descending order e.g. -MyFieldName | [optional] 
  **start** | **int**| Optional. When paginating, skip this number of results | [optional] 
