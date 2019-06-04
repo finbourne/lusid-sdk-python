@@ -202,7 +202,7 @@ configuration.access_token = 'YOUR_ACCESS_TOKEN'
 # create an instance of the API class
 api_instance = lusid.InstrumentsApi(lusid.ApiClient(configuration))
 identifier_type = 'identifier_type_example' # str | The type of identifiers being supplied
-identifiers = NULL # list[str] | The identifiers of the instruments to get
+identifiers = None # list[str] | The identifiers of the instruments to get
 effective_at = '2013-10-20T19:20:30+01:00' # datetime | Optional. The effective date of the request (optional)
 as_at = '2013-10-20T19:20:30+01:00' # datetime | Optional. The as at date of the request (optional)
 instrument_property_keys = ['instrument_property_keys_example'] # list[str] | Optional. Keys of the properties to be decorated on to the instrument (optional)
@@ -439,7 +439,7 @@ configuration.access_token = 'YOUR_ACCESS_TOKEN'
 
 # create an instance of the API class
 api_instance = lusid.InstrumentsApi(lusid.ApiClient(configuration))
-instrument_properties = NULL # list[UpsertInstrumentPropertyRequest] | The instrument property data (optional)
+instrument_properties = None # list[UpsertInstrumentPropertyRequest] | The instrument property data (optional)
 
 try:
     # Upsert instrument properties

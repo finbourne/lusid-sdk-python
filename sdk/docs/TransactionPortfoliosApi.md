@@ -107,7 +107,7 @@ api_instance = lusid.TransactionPortfoliosApi(lusid.ApiClient(configuration))
 scope = 'scope_example' # str | The scope of the portfolio
 code = 'code_example' # str | The code of the portfolio
 effective_at = 'effective_at_example' # str | The effective date of the change
-holding_adjustments = NULL # list[AdjustHoldingRequest] | The selected set of holdings adjustments (optional)
+holding_adjustments = None # list[AdjustHoldingRequest] | The selected set of holdings adjustments (optional)
 
 try:
     # Adjust holdings
@@ -841,7 +841,7 @@ api_instance = lusid.TransactionPortfoliosApi(lusid.ApiClient(configuration))
 scope = 'scope_example' # str | The scope of the transaction portfolio
 code = 'code_example' # str | The code of the transaction portfolio
 effective_at = 'effective_at_example' # str | The effective date of the change
-holding_adjustments = NULL # list[AdjustHoldingRequest] | The complete set of holdings adjustments for the portfolio (optional)
+holding_adjustments = None # list[AdjustHoldingRequest] | The complete set of holdings adjustments for the portfolio (optional)
 
 try:
     # Set all holdings on a transaction portfolio
@@ -899,7 +899,7 @@ configuration.access_token = 'YOUR_ACCESS_TOKEN'
 api_instance = lusid.TransactionPortfoliosApi(lusid.ApiClient(configuration))
 scope = 'scope_example' # str | The scope of the portfolio
 code = 'code_example' # str | The code of the portfolio
-executions = NULL # list[ExecutionRequest] | The executions to be updated (optional)
+executions = None # list[ExecutionRequest] | The executions to be updated (optional)
 
 try:
     # Upsert executions
@@ -1015,7 +1015,7 @@ configuration.access_token = 'YOUR_ACCESS_TOKEN'
 api_instance = lusid.TransactionPortfoliosApi(lusid.ApiClient(configuration))
 scope = 'scope_example' # str | The scope of the portfolio
 code = 'code_example' # str | The code for the portfolio
-transactions = NULL # list[TransactionRequest] | The transactions to be upserted (optional)
+transactions = None # list[TransactionRequest] | The transactions to be upserted (optional)
 
 try:
     # Upsert transactions into the specified transaction portfolio
