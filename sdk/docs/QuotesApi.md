@@ -32,7 +32,7 @@ configuration.access_token = 'YOUR_ACCESS_TOKEN'
 # create an instance of the API class
 api_instance = lusid.QuotesApi(lusid.ApiClient(configuration))
 scope = 'scope_example' # str | The scope of the quote
-quotes = NULL # list[DeleteQuoteRequest] | The quotes to delete (optional)
+quotes = None # list[DeleteQuoteRequest] | The quotes to delete (optional)
 
 try:
     # Delete a quote
@@ -92,7 +92,7 @@ as_at = '2013-10-20T19:20:30+01:00' # datetime | Optional. The 'AsAt' date/time 
 max_age = 'max_age_example' # str | Optional. The quote staleness tolerance (optional)
 page = 56 # int | Optional. The page of results to return (optional)
 limit = 56 # int | Optional. The number of results per page (optional)
-quote_ids = NULL # list[QuoteId] | The ids of the quotes (optional)
+quote_ids = None # list[QuoteId] | The ids of the quotes (optional)
 
 try:
     # Get quotes
@@ -152,7 +152,7 @@ configuration.access_token = 'YOUR_ACCESS_TOKEN'
 # create an instance of the API class
 api_instance = lusid.QuotesApi(lusid.ApiClient(configuration))
 scope = 'scope_example' # str | The scope of the quotes
-quotes = NULL # list[UpsertQuoteRequest] | The quotes to upsert (optional)
+quotes = None # list[UpsertQuoteRequest] | The quotes to upsert (optional)
 
 try:
     # Upsert quotes

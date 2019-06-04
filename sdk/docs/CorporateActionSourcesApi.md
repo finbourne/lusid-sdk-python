@@ -35,7 +35,7 @@ configuration.access_token = 'YOUR_ACCESS_TOKEN'
 api_instance = lusid.CorporateActionSourcesApi(lusid.ApiClient(configuration))
 scope = 'scope_example' # str | The scope of corporate action source
 code = 'code_example' # str | The code of the corporate action source
-actions = NULL # list[UpsertCorporateActionRequest] | The corporate action definitions (optional)
+actions = None # list[UpsertCorporateActionRequest] | The corporate action definitions (optional)
 
 try:
     # Upsert corporate actions

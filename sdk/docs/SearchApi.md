@@ -34,7 +34,7 @@ configuration.access_token = 'YOUR_ACCESS_TOKEN'
 api_instance = lusid.SearchApi(lusid.ApiClient(configuration))
 mastered_effective_at = '2013-10-20T19:20:30+01:00' # datetime | Optional. The effective date for searching mastered instruments. If this is not set, then the current date is taken.  This parameter has no effect on instruments that have not been mastered within LUSID. (optional)
 mastered_only = False # bool | Optional. If set to true, only search over instruments that have been mastered within LUSID. Default to false (optional) (default to False)
-symbols = NULL # list[InstrumentSearchProperty] | A collection of instrument symbols to search for (optional)
+symbols = None # list[InstrumentSearchProperty] | A collection of instrument symbols to search for (optional)
 
 try:
     # Search instruments
@@ -93,7 +93,7 @@ sort_by = ['sort_by_example'] # list[str] | Optional. Order the results by these
 start = 56 # int | Optional. When paginating, skip this number of results (optional)
 limit = 56 # int | Optional. When paginating, limit the number of returned results to this many. (optional)
 filter = 'filter_example' # str | Optional. Expression to filter the result set (optional)
-request = NULL # object | A valid Elasticsearch 5.x request (optional)
+request = None # object | A valid Elasticsearch 5.x request (optional)
 
 try:
     # Search portfolio groups
@@ -154,7 +154,7 @@ sort_by = ['sort_by_example'] # list[str] | Optional. Order the results by these
 start = 56 # int | Optional. When paginating, skip this number of results (optional)
 limit = 56 # int | Optional. When paginating, limit the number of returned results to this many. (optional)
 filter = 'filter_example' # str | Optional. Expression to filter the result set (optional)
-request = NULL # object | A valid Elasticsearch 5.x request (optional)
+request = None # object | A valid Elasticsearch 5.x request (optional)
 
 try:
     # Search portfolios
@@ -215,7 +215,7 @@ sort_by = ['sort_by_example'] # list[str] | Optional. Order the results by these
 start = 56 # int | Optional. When paginating, skip this number of results (optional)
 limit = 56 # int | Optional. When paginating, limit the number of returned results to this many. (optional)
 filter = 'filter_example' # str | Optional. Expression to filter the result set (optional)
-request = NULL # object | A valid Elasticsearch 5.x request (optional)
+request = None # object | A valid Elasticsearch 5.x request (optional)
 
 try:
     # Search property definitions

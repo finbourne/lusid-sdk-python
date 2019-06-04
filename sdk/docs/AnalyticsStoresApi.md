@@ -271,7 +271,7 @@ scope = 'scope_example' # str | The scope of the data being stored
 year = 56 # int | The year component of the date for the data
 month = 56 # int | The month component of the date for the data
 day = 56 # int | The day component of the date for the data
-data = NULL # list[InstrumentAnalytic] | The analytic data being inserted (optional)
+data = None # list[InstrumentAnalytic] | The analytic data being inserted (optional)
 
 try:
     # Set analytic data
