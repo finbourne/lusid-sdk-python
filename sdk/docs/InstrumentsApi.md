@@ -93,7 +93,7 @@ configuration.access_token = 'YOUR_ACCESS_TOKEN'
 api_instance = lusid.InstrumentsApi(lusid.ApiClient(configuration))
 identifier_type = 'identifier_type_example' # str | The type of identifier being supplied
 identifier = 'identifier_example' # str | The identifier of the requested instrument
-effective_at = '2013-10-20T19:20:30+01:00' # datetime | Optional. The effective date of the query (optional)
+effective_at = 'effective_at_example' # str | Optional. The effective date of the query (optional)
 as_at = '2013-10-20T19:20:30+01:00' # datetime | Optional. The AsAt date of the query (optional)
 instrument_property_keys = ['instrument_property_keys_example'] # list[str] | Optional. Keys of the properties to be decorated on to the instrument (optional)
 
@@ -111,7 +111,7 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **identifier_type** | **str**| The type of identifier being supplied | 
  **identifier** | **str**| The identifier of the requested instrument | 
- **effective_at** | **datetime**| Optional. The effective date of the query | [optional] 
+ **effective_at** | **str**| Optional. The effective date of the query | [optional] 
  **as_at** | **datetime**| Optional. The AsAt date of the query | [optional] 
  **instrument_property_keys** | [**list[str]**](str.md)| Optional. Keys of the properties to be decorated on to the instrument | [optional] 
 
@@ -203,7 +203,7 @@ configuration.access_token = 'YOUR_ACCESS_TOKEN'
 api_instance = lusid.InstrumentsApi(lusid.ApiClient(configuration))
 identifier_type = 'identifier_type_example' # str | The type of identifiers being supplied
 identifiers = None # list[str] | The identifiers of the instruments to get
-effective_at = '2013-10-20T19:20:30+01:00' # datetime | Optional. The effective date of the request (optional)
+effective_at = 'effective_at_example' # str | Optional. The effective date of the request (optional)
 as_at = '2013-10-20T19:20:30+01:00' # datetime | Optional. The as at date of the request (optional)
 instrument_property_keys = ['instrument_property_keys_example'] # list[str] | Optional. Keys of the properties to be decorated on to the instrument (optional)
 
@@ -221,7 +221,7 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **identifier_type** | **str**| The type of identifiers being supplied | 
  **identifiers** | [**list[str]**](list.md)| The identifiers of the instruments to get | 
- **effective_at** | **datetime**| Optional. The effective date of the request | [optional] 
+ **effective_at** | **str**| Optional. The effective date of the request | [optional] 
  **as_at** | **datetime**| Optional. The as at date of the request | [optional] 
  **instrument_property_keys** | [**list[str]**](str.md)| Optional. Keys of the properties to be decorated on to the instrument | [optional] 
 
