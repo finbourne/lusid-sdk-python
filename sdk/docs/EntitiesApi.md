@@ -30,7 +30,7 @@ configuration.access_token = 'YOUR_ACCESS_TOKEN'
 # create an instance of the API class
 api_instance = lusid.EntitiesApi(lusid.ApiClient(configuration))
 scope = 'scope_example' # str | The scope
-effective_at = '2013-10-20T19:20:30+01:00' # datetime | The effective date of the origin.
+effective_at = 'effective_at_example' # str | The effective date of the origin.
 as_at = '2013-10-20T19:20:30+01:00' # datetime | The as-at date of the origin. (optional)
 
 try:
@@ -46,7 +46,7 @@ except ApiException as e:
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **scope** | **str**| The scope | 
- **effective_at** | **datetime**| The effective date of the origin. | 
+ **effective_at** | **str**| The effective date of the origin. | 
  **as_at** | **datetime**| The as-at date of the origin. | [optional] 
 
 ### Return type

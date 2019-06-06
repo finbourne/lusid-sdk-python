@@ -200,8 +200,8 @@ configuration.access_token = 'YOUR_ACCESS_TOKEN'
 api_instance = lusid.CorporateActionSourcesApi(lusid.ApiClient(configuration))
 scope = 'scope_example' # str | The scope of the corporate action source
 code = 'code_example' # str | The code of the corporate action source
-from_effective_at = '2013-10-20T19:20:30+01:00' # datetime | Optional. The start effective date of the data range (optional)
-to_effective_at = '2013-10-20T19:20:30+01:00' # datetime | Optional. The end effective date of the data range (optional)
+from_effective_at = 'from_effective_at_example' # str | Optional. The start effective date of the data range (optional)
+to_effective_at = 'to_effective_at_example' # str | Optional. The end effective date of the data range (optional)
 as_at = '2013-10-20T19:20:30+01:00' # datetime | Optional. The AsAt date of the data (optional)
 sort_by = ['sort_by_example'] # list[str] | Optional. Order the results by these fields. Use use the '-' sign to denote descending order e.g. -MyFieldName (optional)
 start = 56 # int | Optional. When paginating, skip this number of results (optional)
@@ -222,8 +222,8 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **scope** | **str**| The scope of the corporate action source | 
  **code** | **str**| The code of the corporate action source | 
- **from_effective_at** | **datetime**| Optional. The start effective date of the data range | [optional] 
- **to_effective_at** | **datetime**| Optional. The end effective date of the data range | [optional] 
+ **from_effective_at** | **str**| Optional. The start effective date of the data range | [optional] 
+ **to_effective_at** | **str**| Optional. The end effective date of the data range | [optional] 
  **as_at** | **datetime**| Optional. The AsAt date of the data | [optional] 
  **sort_by** | [**list[str]**](str.md)| Optional. Order the results by these fields. Use use the &#39;-&#39; sign to denote descending order e.g. -MyFieldName | [optional] 
  **start** | **int**| Optional. When paginating, skip this number of results | [optional] 
