@@ -223,8 +223,8 @@ class {{classname}}(object):
         auth_settings = [{{#authMethods}}'{{name}}'{{#hasMore}}, {{/hasMore}}{{/authMethods}}]  # noqa: E501
 
         # set the LUSID header
-        header_params['X-LUSID-Sdk-Language'] = 'Python'
-        header_params['X-LUSID-Sdk-Version'] = '{{packageVersion}}'
+        header_params['X-LUSID-SDK-Language'] = 'Python'
+        header_params['X-LUSID-SDK-Version'] = '{{packageVersion}}'
 
         return self.api_client.call_api(
             '{{{path}}}', '{{httpMethod}}',
