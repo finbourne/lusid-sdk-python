@@ -964,7 +964,7 @@ class TransparencyOversightThirdParty(TestFinbourneApi):
                                                           code='late_trade',
                                                           value_required=True,
                                                           display_name='late_trade',
-                                                          data_type_id=models.ResourceId(scope='default',
+                                                          data_type_id=models.ResourceId(scope='system',
                                                                                          code='boolean'))
 
         self.property_definition_api.create_property_definition(
