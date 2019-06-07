@@ -85,7 +85,7 @@ class TestFinbourneApi(TestCase):
         scope = str(uuid.uuid4())
         guid = str(uuid.uuid4())
         property_name = "fund-style-{0}".format(guid)
-        data_type_id = models.ResourceId("default", "string")
+        data_type_id = models.ResourceId("system", "string")
 
         #   property definition
         property_definition = models.CreatePropertyDefinitionRequest(
@@ -144,7 +144,7 @@ class TestFinbourneApi(TestCase):
             value_required=False,
             display_name="Trader Id",
             life_time="Perpetual",
-            data_type_id=models.ResourceId("default", "string")
+            data_type_id=models.ResourceId("system", "string")
         )
 
         #   create the property definition
