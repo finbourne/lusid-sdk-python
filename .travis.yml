@@ -2,33 +2,11 @@ language: python
 services:
 - docker
 script:
-- |
-
-  if [ "$TRAVIS_BRANCH" = "develop" ]; then
-    branch_prefix="DEVELOP_"
-  elif [ "$TRAVIS_BRANCH" = "master" ]; then
-    branch_prefix="MASTER_"
-  fi
-
-  fbn_token_url="$branch_prefix"FBN_TOKEN_URL
-  fbn_username="$branch_prefix"FBN_USERNAME
-  fbn_password="$branch_prefix"FBN_PASSWORD
-  fbn_clientid="$branch_prefix"FBN_CLIENT_ID
-  fbn_client_secret="$branch_prefix"FBN_CLIENT_SECRET
-  fbn_lusid_api_url="$branch_prefix"FBN_LUSID_API_URL
-
-  cd sdk
-  docker build -t finbourne/lusid-sdk-python-test .
-  docker run \
-    -e FBN_TOKEN_URL=$fbn_token_url \
-    -e FBN_USERNAME=$fbn_username \
-    -e FBN_PASSWORD=$fbn_password \
-    -e FBN_CLIENT_ID=$fbn_clientid \
-    -e FBN_CLIENT_SECRET=$fbn_client_secret \
-    -e FBN_LUSID_API_URL=$fbn_lusid_api_url \
-    -v $(pwd):/usr/src/ \
-    finbourne/lusid-sdk-python-test
-
+- cd sdk
+- docker build -t finbourne/lusid-sdk-python-test .
+- docker run -e FBN_TOKEN_URL=$FBN_TOKEN_URL -e FBN_USERNAME=$FBN_USERNAME -e FBN_PASSWORD=$FBN_PASSWORD
+  -e FBN_CLIENT_ID=$FBN_CLIENT_ID -e FBN_CLIENT_SECRET=$FBN_CLIENT_SECRET -e FBN_LUSID_API_URL=$FBN_LUSID_API_URL
+  -v $(pwd):/usr/src/ finbourne/lusid-sdk-python-test
 notifications:
   slack:
     rooms:
