@@ -20,12 +20,12 @@ script:
   cd sdk
   docker build -t finbourne/lusid-sdk-python-test .
   docker run \
-    -e FBN_TOKEN_URL={!fbn_token_url} \
-    -e FBN_USERNAME={!fbn_username} \
-    -e FBN_PASSWORD={!fbn_password} \
-    -e FBN_CLIENT_ID={!fbn_clientid} \
-    -e FBN_CLIENT_SECRET={!fbn_client_secret} \
-    -e FBN_LUSID_API_URL={!fbn_lusid_api_url} \
+    -e FBN_TOKEN_URL=$fbn_token_url \
+    -e FBN_USERNAME=$fbn_username \
+    -e FBN_PASSWORD=$fbn_password \
+    -e FBN_CLIENT_ID=$fbn_clientid \
+    -e FBN_CLIENT_SECRET=$fbn_client_secret \
+    -e FBN_LUSID_API_URL=$fbn_lusid_api_url \
     -v $(pwd):/usr/src/ \
     finbourne/lusid-sdk-python-test
 
