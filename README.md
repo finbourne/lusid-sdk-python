@@ -1,4 +1,7 @@
-[![Build Status](https://travis-ci.org/finbourne/lusid-sdk-python.svg?branch=master)](https://travis-ci.org/finbourne/lusid-sdk-python)
+| branch | status |
+| --- | --- |
+| `master` |  [![Build Status](https://travis-ci.org/finbourne/lusid-sdk-python.svg?branch=master)](https://travis-ci.org/finbourne/lusid-sdk-python) |
+| `develop` | [![Build Status](https://travis-ci.org/finbourne/lusid-sdk-python.svg?branch=develop)](https://travis-ci.org/finbourne/lusid-sdk-python) |
 
 # LUSID<sup>®</sup> Python SDK
 
