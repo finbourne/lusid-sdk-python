@@ -1,6 +1,5 @@
 # coding: utf-8
 
-# flake8: noqa
 """
     LUSID API
 
@@ -14,174 +13,151 @@
 
 from __future__ import absolute_import
 
-# import models into model package
-from lusid.models.access_controlled_action import AccessControlledAction
-from lusid.models.access_controlled_resource import AccessControlledResource
-from lusid.models.action_id import ActionId
-from lusid.models.add_transaction_property_response import AddTransactionPropertyResponse
-from lusid.models.adjust_holding import AdjustHolding
-from lusid.models.adjust_holding_request import AdjustHoldingRequest
-from lusid.models.aggregate_spec import AggregateSpec
-from lusid.models.aggregation_context import AggregationContext
-from lusid.models.aggregation_options import AggregationOptions
-from lusid.models.aggregation_request import AggregationRequest
-from lusid.models.aggregation_response_node import AggregationResponseNode
-from lusid.models.analytic_store import AnalyticStore
-from lusid.models.analytic_store_key import AnalyticStoreKey
-from lusid.models.change import Change
-from lusid.models.complete_portfolio import CompletePortfolio
-from lusid.models.configuration_recipe import ConfigurationRecipe
-from lusid.models.constituents_adjustment_header import ConstituentsAdjustmentHeader
-from lusid.models.corporate_action import CorporateAction
-from lusid.models.corporate_action_source import CorporateActionSource
-from lusid.models.corporate_action_transition import CorporateActionTransition
-from lusid.models.corporate_action_transition_component import CorporateActionTransitionComponent
-from lusid.models.corporate_action_transition_component_request import CorporateActionTransitionComponentRequest
-from lusid.models.corporate_action_transition_request import CorporateActionTransitionRequest
-from lusid.models.create_analytic_store_request import CreateAnalyticStoreRequest
-from lusid.models.create_corporate_action_source_request import CreateCorporateActionSourceRequest
-from lusid.models.create_cut_label_definition_request import CreateCutLabelDefinitionRequest
-from lusid.models.create_data_type_request import CreateDataTypeRequest
-from lusid.models.create_derived_transaction_portfolio_request import CreateDerivedTransactionPortfolioRequest
-from lusid.models.create_portfolio_details import CreatePortfolioDetails
-from lusid.models.create_portfolio_group_request import CreatePortfolioGroupRequest
-from lusid.models.create_property_definition_request import CreatePropertyDefinitionRequest
-from lusid.models.create_reference_portfolio_request import CreateReferencePortfolioRequest
-from lusid.models.create_results import CreateResults
-from lusid.models.create_transaction_portfolio_request import CreateTransactionPortfolioRequest
-from lusid.models.create_unit_definition import CreateUnitDefinition
-from lusid.models.currency_and_amount import CurrencyAndAmount
-from lusid.models.cut_label_definition import CutLabelDefinition
-from lusid.models.cut_local_time import CutLocalTime
-from lusid.models.data_type import DataType
-from lusid.models.delete_instrument_property_request import DeleteInstrumentPropertyRequest
-from lusid.models.delete_instrument_response import DeleteInstrumentResponse
-from lusid.models.delete_quote_request import DeleteQuoteRequest
-from lusid.models.delete_quotes_response import DeleteQuotesResponse
-from lusid.models.deleted_entity_response import DeletedEntityResponse
-from lusid.models.error_detail import ErrorDetail
-from lusid.models.execution_request import ExecutionRequest
-from lusid.models.expanded_group import ExpandedGroup
-from lusid.models.field_schema import FieldSchema
-from lusid.models.file_response import FileResponse
-from lusid.models.get_instruments_response import GetInstrumentsResponse
-from lusid.models.get_quotes_response import GetQuotesResponse
-from lusid.models.get_reference_portfolio_constituents_response import GetReferencePortfolioConstituentsResponse
-from lusid.models.holding_adjustment import HoldingAdjustment
-from lusid.models.holdings_adjustment import HoldingsAdjustment
-from lusid.models.holdings_adjustment_header import HoldingsAdjustmentHeader
-from lusid.models.i_unit_definition_dto import IUnitDefinitionDto
-from lusid.models.id_selector_definition import IdSelectorDefinition
-from lusid.models.identifier_part_schema import IdentifierPartSchema
-from lusid.models.instrument import Instrument
-from lusid.models.instrument_analytic import InstrumentAnalytic
-from lusid.models.instrument_definition import InstrumentDefinition
-from lusid.models.instrument_economic_definition import InstrumentEconomicDefinition
-from lusid.models.instrument_id_type_descriptor import InstrumentIdTypeDescriptor
-from lusid.models.instrument_id_value import InstrumentIdValue
-from lusid.models.instrument_match import InstrumentMatch
-from lusid.models.instrument_property import InstrumentProperty
-from lusid.models.instrument_search_property import InstrumentSearchProperty
-from lusid.models.link import Link
-from lusid.models.list_aggregation_response import ListAggregationResponse
-from lusid.models.lusid_problem_details import LusidProblemDetails
-from lusid.models.lusid_validation_problem_details import LusidValidationProblemDetails
-from lusid.models.market_context import MarketContext
-from lusid.models.market_context_suppliers import MarketContextSuppliers
-from lusid.models.market_data_key_rule import MarketDataKeyRule
-from lusid.models.market_options import MarketOptions
-from lusid.models.metric_value import MetricValue
-from lusid.models.model_property import ModelProperty
-from lusid.models.model_selection import ModelSelection
-from lusid.models.nested_aggregation_response import NestedAggregationResponse
-from lusid.models.output_transaction import OutputTransaction
-from lusid.models.perpetual_property import PerpetualProperty
-from lusid.models.perpetual_property_value import PerpetualPropertyValue
-from lusid.models.portfolio import Portfolio
-from lusid.models.portfolio_details import PortfolioDetails
-from lusid.models.portfolio_group import PortfolioGroup
-from lusid.models.portfolio_holding import PortfolioHolding
-from lusid.models.portfolio_properties import PortfolioProperties
-from lusid.models.portfolio_reconciliation_request import PortfolioReconciliationRequest
-from lusid.models.portfolio_search_result import PortfolioSearchResult
-from lusid.models.portfolios_reconciliation_request import PortfoliosReconciliationRequest
-from lusid.models.pricing_context import PricingContext
-from lusid.models.pricing_options import PricingOptions
-from lusid.models.processed_command import ProcessedCommand
-from lusid.models.property_definition import PropertyDefinition
-from lusid.models.property_filter import PropertyFilter
-from lusid.models.property_schema import PropertySchema
-from lusid.models.property_value import PropertyValue
-from lusid.models.quote import Quote
-from lusid.models.quote_id import QuoteId
-from lusid.models.realised_gain_loss import RealisedGainLoss
-from lusid.models.reconciliation_break import ReconciliationBreak
-from lusid.models.reference_portfolio_constituent import ReferencePortfolioConstituent
-from lusid.models.reference_portfolio_constituent_request import ReferencePortfolioConstituentRequest
-from lusid.models.resource_id import ResourceId
-from lusid.models.resource_list_of_access_controlled_resource import ResourceListOfAccessControlledResource
-from lusid.models.resource_list_of_analytic_store_key import ResourceListOfAnalyticStoreKey
-from lusid.models.resource_list_of_change import ResourceListOfChange
-from lusid.models.resource_list_of_constituents_adjustment_header import ResourceListOfConstituentsAdjustmentHeader
-from lusid.models.resource_list_of_corporate_action import ResourceListOfCorporateAction
-from lusid.models.resource_list_of_corporate_action_source import ResourceListOfCorporateActionSource
-from lusid.models.resource_list_of_cut_label_definition import ResourceListOfCutLabelDefinition
-from lusid.models.resource_list_of_data_type import ResourceListOfDataType
-from lusid.models.resource_list_of_holdings_adjustment_header import ResourceListOfHoldingsAdjustmentHeader
-from lusid.models.resource_list_of_i_unit_definition_dto import ResourceListOfIUnitDefinitionDto
-from lusid.models.resource_list_of_instrument import ResourceListOfInstrument
-from lusid.models.resource_list_of_instrument_id_type_descriptor import ResourceListOfInstrumentIdTypeDescriptor
-from lusid.models.resource_list_of_portfolio import ResourceListOfPortfolio
-from lusid.models.resource_list_of_portfolio_group import ResourceListOfPortfolioGroup
-from lusid.models.resource_list_of_portfolio_search_result import ResourceListOfPortfolioSearchResult
-from lusid.models.resource_list_of_processed_command import ResourceListOfProcessedCommand
-from lusid.models.resource_list_of_property_definition import ResourceListOfPropertyDefinition
-from lusid.models.resource_list_of_reconciliation_break import ResourceListOfReconciliationBreak
-from lusid.models.resource_list_of_scope_definition import ResourceListOfScopeDefinition
-from lusid.models.resource_list_of_string import ResourceListOfString
-from lusid.models.resource_list_of_transaction_configuration_data import ResourceListOfTransactionConfigurationData
-from lusid.models.resource_list_of_value_type import ResourceListOfValueType
-from lusid.models.result_data_schema import ResultDataSchema
-from lusid.models.results import Results
-from lusid.models.schema import Schema
-from lusid.models.scope_definition import ScopeDefinition
-from lusid.models.stream import Stream
-from lusid.models.target_tax_lot import TargetTaxLot
-from lusid.models.target_tax_lot_request import TargetTaxLotRequest
-from lusid.models.transaction import Transaction
-from lusid.models.transaction_configuration_data import TransactionConfigurationData
-from lusid.models.transaction_configuration_data_request import TransactionConfigurationDataRequest
-from lusid.models.transaction_configuration_movement_data import TransactionConfigurationMovementData
-from lusid.models.transaction_configuration_movement_data_request import TransactionConfigurationMovementDataRequest
-from lusid.models.transaction_configuration_type_alias import TransactionConfigurationTypeAlias
-from lusid.models.transaction_price import TransactionPrice
-from lusid.models.transaction_property_mapping import TransactionPropertyMapping
-from lusid.models.transaction_property_mapping_request import TransactionPropertyMappingRequest
-from lusid.models.transaction_query_parameters import TransactionQueryParameters
-from lusid.models.transaction_request import TransactionRequest
-from lusid.models.update_cut_label_definition_request import UpdateCutLabelDefinitionRequest
-from lusid.models.update_data_type_request import UpdateDataTypeRequest
-from lusid.models.update_instrument_identifier_request import UpdateInstrumentIdentifierRequest
-from lusid.models.update_portfolio_group_request import UpdatePortfolioGroupRequest
-from lusid.models.update_portfolio_request import UpdatePortfolioRequest
-from lusid.models.update_property_definition_request import UpdatePropertyDefinitionRequest
-from lusid.models.upsert_corporate_action_request import UpsertCorporateActionRequest
-from lusid.models.upsert_corporate_actions_response import UpsertCorporateActionsResponse
-from lusid.models.upsert_instrument_properties_response import UpsertInstrumentPropertiesResponse
-from lusid.models.upsert_instrument_property_request import UpsertInstrumentPropertyRequest
-from lusid.models.upsert_instruments_response import UpsertInstrumentsResponse
-from lusid.models.upsert_portfolio_executions_response import UpsertPortfolioExecutionsResponse
-from lusid.models.upsert_portfolio_transactions_response import UpsertPortfolioTransactionsResponse
-from lusid.models.upsert_quote_request import UpsertQuoteRequest
-from lusid.models.upsert_quotes_response import UpsertQuotesResponse
-from lusid.models.upsert_reference_portfolio_constituents_request import UpsertReferencePortfolioConstituentsRequest
-from lusid.models.upsert_reference_portfolio_constituents_response import UpsertReferencePortfolioConstituentsResponse
-from lusid.models.user import User
-from lusid.models.valuation_reconciliation_request import ValuationReconciliationRequest
-from lusid.models.valuations_reconciliation_request import ValuationsReconciliationRequest
-from lusid.models.vendor_model_rule import VendorModelRule
-from lusid.models.version import Version
-from lusid.models.version_summary_dto import VersionSummaryDto
-from lusid.models.versioned_resource_list_of_output_transaction import VersionedResourceListOfOutputTransaction
-from lusid.models.versioned_resource_list_of_portfolio_holding import VersionedResourceListOfPortfolioHolding
-from lusid.models.versioned_resource_list_of_transaction import VersionedResourceListOfTransaction
+import re  # noqa: F401
+
+# python 2 and python 3 compatibility library
+import six
+
+from lusid.api_client import ApiClient
+from lusid.exceptions import (
+    ApiTypeError,
+    ApiValueError
+)
+
+
+class EntitiesApi(object):
+    """NOTE: This class is auto generated by OpenAPI Generator
+    Ref: https://openapi-generator.tech
+
+    Do not edit the class manually.
+    """
+
+    def __init__(self, api_client=None):
+        if api_client is None:
+            api_client = ApiClient()
+        self.api_client = api_client
+
+    def get_portfolio_changes(self, scope, effective_at, **kwargs):  # noqa: E501
+        """Get the next change to each portfolio in a scope.  # noqa: E501
+
+        Gets the time of the next (earliest effective at) modification (correction and/or amendment) to each portfolio in a scope relative to a point in bitemporal time.  Includes changes from parent portfolios in different scopes.  Excludes changes from subcriptions (e.g corporate actions).  # noqa: E501
+        This method makes a synchronous HTTP request by default. To make an
+        asynchronous HTTP request, please pass async_req=True
+        >>> thread = api.get_portfolio_changes(scope, effective_at, async_req=True)
+        >>> result = thread.get()
+
+        :param async_req bool: execute request asynchronously
+        :param str scope: The scope (required)
+        :param str effective_at: The effective date of the origin. (required)
+        :param datetime as_at: The as-at date of the origin.
+        :param _preload_content: if False, the urllib3.HTTPResponse object will
+                                 be returned without reading/decoding response
+                                 data. Default is True.
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :return: ResourceListOfChange
+                 If the method is called asynchronously,
+                 returns the request thread.
+        """
+        kwargs['_return_http_data_only'] = True
+        return self.get_portfolio_changes_with_http_info(scope, effective_at, **kwargs)  # noqa: E501
+
+    def get_portfolio_changes_with_http_info(self, scope, effective_at, **kwargs):  # noqa: E501
+        """Get the next change to each portfolio in a scope.  # noqa: E501
+
+        Gets the time of the next (earliest effective at) modification (correction and/or amendment) to each portfolio in a scope relative to a point in bitemporal time.  Includes changes from parent portfolios in different scopes.  Excludes changes from subcriptions (e.g corporate actions).  # noqa: E501
+        This method makes a synchronous HTTP request by default. To make an
+        asynchronous HTTP request, please pass async_req=True
+        >>> thread = api.get_portfolio_changes_with_http_info(scope, effective_at, async_req=True)
+        >>> result = thread.get()
+
+        :param async_req bool: execute request asynchronously
+        :param str scope: The scope (required)
+        :param str effective_at: The effective date of the origin. (required)
+        :param datetime as_at: The as-at date of the origin.
+        :param _return_http_data_only: response data without head status code
+                                       and headers
+        :param _preload_content: if False, the urllib3.HTTPResponse object will
+                                 be returned without reading/decoding response
+                                 data. Default is True.
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :return: tuple(ResourceListOfChange, status_code(int), headers(HTTPHeaderDict))
+                 If the method is called asynchronously,
+                 returns the request thread.
+        """
+
+        local_var_params = locals()
+
+        all_params = ['scope', 'effective_at', 'as_at']  # noqa: E501
+        all_params.append('async_req')
+        all_params.append('_return_http_data_only')
+        all_params.append('_preload_content')
+        all_params.append('_request_timeout')
+
+        for key, val in six.iteritems(local_var_params['kwargs']):
+            if key not in all_params:
+                raise ApiTypeError(
+                    "Got an unexpected keyword argument '%s'"
+                    " to method get_portfolio_changes" % key
+                )
+            local_var_params[key] = val
+        del local_var_params['kwargs']
+        # verify the required parameter 'scope' is set
+        if ('scope' not in local_var_params or
+                local_var_params['scope'] is None):
+            raise ApiValueError("Missing the required parameter `scope` when calling `get_portfolio_changes`")  # noqa: E501
+        # verify the required parameter 'effective_at' is set
+        if ('effective_at' not in local_var_params or
+                local_var_params['effective_at'] is None):
+            raise ApiValueError("Missing the required parameter `effective_at` when calling `get_portfolio_changes`")  # noqa: E501
+
+        collection_formats = {}
+
+        path_params = {}
+
+        query_params = []
+        if 'scope' in local_var_params:
+            query_params.append(('scope', local_var_params['scope']))  # noqa: E501
+        if 'effective_at' in local_var_params:
+            query_params.append(('effectiveAt', local_var_params['effective_at']))  # noqa: E501
+        if 'as_at' in local_var_params:
+            query_params.append(('asAt', local_var_params['as_at']))  # noqa: E501
+
+        header_params = {}
+
+        form_params = []
+        local_var_files = {}
+
+        body_params = None
+        # HTTP header `Accept`
+        header_params['Accept'] = self.api_client.select_header_accept(
+            ['text/plain', 'application/json', 'text/json'])  # noqa: E501
+
+
+        # Authentication setting
+        auth_settings = ['oauth2']  # noqa: E501
+
+        # set the LUSID header
+        header_params['X-LUSID-SDK-Language'] = 'Python'
+        header_params['X-LUSID-SDK-Version'] = '0.10.227'
+
+        return self.api_client.call_api(
+            '/api/entities/changes/portfolios', 'GET',
+            path_params,
+            query_params,
+            header_params,
+            body=body_params,
+            post_params=form_params,
+            files=local_var_files,
+            response_type='ResourceListOfChange',  # noqa: E501
+            auth_settings=auth_settings,
+            async_req=local_var_params.get('async_req'),
+            _return_http_data_only=local_var_params.get('_return_http_data_only'),  # noqa: E501
+            _preload_content=local_var_params.get('_preload_content', True),
+            _request_timeout=local_var_params.get('_request_timeout'),
+            collection_formats=collection_formats)
