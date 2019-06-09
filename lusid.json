@@ -2493,14 +2493,14 @@
                                         "value": 12345.5672,
                                         "unit": "Unit"
                                     },
-                                    "effectiveFrom": "2019-06-09T09:47:43.7660859+00:00"
+                                    "effectiveFrom": "2019-06-09T06:05:53.4505823+00:00"
                                 },
                                 "Portfolio/MyScope/MyPropertyName2": {
                                     "metricValue": {
                                         "value": 925.3,
                                         "unit": "Unit"
                                     },
-                                    "effectiveFrom": "2019-06-09T09:47:43.7660869+00:00"
+                                    "effectiveFrom": "2019-06-09T06:05:53.4505849+00:00"
                                 }
                             }
                         }
@@ -4241,7 +4241,7 @@
                                 },
                                 "values": [
                                     {
-                                        "instrumentUid": "LUID_SJWPAMNL",
+                                        "instrumentUid": "LUID_8DHONP25",
                                         "holdingType": "P",
                                         "units": 10.0,
                                         "settledUnits": 10.0,
@@ -4622,7 +4622,7 @@
                                             "instrumentIdentifiers": {
                                                 "Instrument/default/ClientInternal": "CLI-192836"
                                             },
-                                            "instrumentUid": "LUID_LRH72VV9",
+                                            "instrumentUid": "LUID_GN37I6Z0",
                                             "subHoldingKeys": [],
                                             "taxLots": [
                                                 {
@@ -4638,7 +4638,7 @@
                                             "instrumentIdentifiers": {
                                                 "Instrument/default/ClientInternal": "CLI-462810"
                                             },
-                                            "instrumentUid": "LUID_QANSL47J",
+                                            "instrumentUid": "LUID_S2H9Y8M1",
                                             "subHoldingKeys": [],
                                             "taxLots": [
                                                 {
@@ -4781,8 +4781,8 @@
                         "examples": {
                             "application/json": {
                                 "version": {
-                                    "effectiveFrom": "2019-06-09T09:47:43.9501706+00:00",
-                                    "asAtDate": "2019-06-09T09:37:43.9501709+00:00"
+                                    "effectiveFrom": "2019-06-09T06:05:53.8818154+00:00",
+                                    "asAtDate": "2019-06-09T05:55:53.8818157+00:00"
                                 },
                                 "values": [
                                     {
@@ -4791,7 +4791,7 @@
                                         "instrumentIdentifiers": {
                                             "Instrument/default/RIC": "RIC.L"
                                         },
-                                        "instrumentUid": "LUID_UIKCZHSB",
+                                        "instrumentUid": "LUID_NRK8EYS4",
                                         "transactionDate": "2018-08-04T00:00:00+00:00",
                                         "settlementDate": "2018-08-06T00:00:00+00:00",
                                         "units": 1000.0,
@@ -5222,8 +5222,8 @@
                         "examples": {
                             "application/json": {
                                 "version": {
-                                    "effectiveFrom": "2019-06-09T09:47:43.9760857+00:00",
-                                    "asAtDate": "2019-06-09T09:37:43.9760859+00:00"
+                                    "effectiveFrom": "2019-06-09T06:05:53.9501872+00:00",
+                                    "asAtDate": "2019-06-09T05:55:53.9501874+00:00"
                                 },
                                 "values": [
                                     {
@@ -5887,7 +5887,7 @@
                     "scope": "MyParentPortfolioScope",
                     "code": "MyParentPortfolioCode"
                 },
-                "created": "2019-06-09T09:47:43.5811766+00:00",
+                "created": "2019-06-09T06:05:52.8737683+00:00",
                 "corporateActionSourceId": {
                     "scope": "MyScope",
                     "code": "MyCorporateActionSourceId"
@@ -6313,7 +6313,7 @@
                         "key": "Instrument/MyScope/MyPropertyName",
                         "value": {
                             "labelValue": "MyValue",
-                            "effectiveFrom": "2019-06-09T09:47:43.6146101+00:00"
+                            "effectiveFrom": "2019-06-09T06:05:52.9784646+00:00"
                         }
                     }
                 ],
@@ -7051,7 +7051,7 @@
             "example": {
                 "displayName": "MyPortfolioName",
                 "description": "Long form description of portfolio",
-                "created": "2019-06-09T09:47:43.7582423+00:00"
+                "created": "2019-06-09T06:05:53.4195103+00:00"
             }
         },
         "PortfolioProperties": {
@@ -7114,16 +7114,16 @@
                         "scope": "MySourceScope",
                         "code": "MySourcePortfolioCode"
                     },
-                    "effectiveAt": "2019-06-09T09:47:43.7763069+00:00",
-                    "asAt": "2019-06-09T09:47:43.7763083+00:00"
+                    "effectiveAt": "2019-06-09T06:05:53.4824981+00:00",
+                    "asAt": "2019-06-09T06:05:53.4825005+00:00"
                 },
                 "right": {
                     "portfolioId": {
                         "scope": "MyTargetScope",
                         "code": "MyTargetPortfolioCode"
                     },
-                    "effectiveAt": "2019-06-09T09:47:43.7763085+00:00",
-                    "asAt": "2019-06-09T09:47:43.7763089+00:00"
+                    "effectiveAt": "2019-06-09T06:05:53.4825017+00:00",
+                    "asAt": "2019-06-09T06:05:53.482502+00:00"
                 },
                 "instrumentPropertyKeys": [
                     "Instrument/default/Name"
@@ -7546,7 +7546,7 @@
                 "displayName": "MyPortfolioName",
                 "description": "Description of my portfolio",
                 "code": "MyPortfolioCode",
-                "created": "2019-06-09T09:47:43.8108479+00:00",
+                "created": "2019-06-09T06:05:53.5657083+00:00",
                 "properties": {}
             }
         },
@@ -7611,7 +7611,7 @@
                 }
             },
             "example": {
-                "effectiveFrom": "2019-06-09T09:47:43.8169463+00:00",
+                "effectiveFrom": "2019-06-09T06:05:53.5925903+00:00",
                 "weightType": "Periodical",
                 "periodType": "Quarterly",
                 "periodCount": 2,
@@ -9189,8 +9189,8 @@
                     "Instrument/default/Figi": "BBG000C6K6G9",
                     "Instrument/default/Isin": "GB00BH4HKS39"
                 },
-                "transactionDate": "2019-06-09T09:47:43.9573051+00:00",
-                "settlementDate": "2019-06-12T09:47:43.9573065+00:00",
+                "transactionDate": "2019-06-09T06:05:53.9091771+00:00",
+                "settlementDate": "2019-06-12T06:05:53.9091792+00:00",
                 "units": 1000.0,
                 "transactionPrice": {
                     "price": 123.0,
@@ -9520,7 +9520,7 @@
     "securityDefinitions": {
         "oauth2": {
             "flow": "implicit",
-            "authorizationUrl": "https://lusid.okta.com/oauth2/aus5al5yopbHW2wJn2p6/v1/authorize",
+            "authorizationUrl": "Dummy/v1/authorize",
             "type": "oauth2",
             "description": "OAuth2 Implicit Grant"
         }
