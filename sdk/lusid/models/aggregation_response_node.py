@@ -1,6 +1,5 @@
 # coding: utf-8
 
-# flake8: noqa
 """
     LUSID API
 
@@ -12,176 +11,207 @@
 """
 
 
-from __future__ import absolute_import
+import pprint
+import re  # noqa: F401
 
-# import models into model package
-from lusid.models.access_controlled_action import AccessControlledAction
-from lusid.models.access_controlled_resource import AccessControlledResource
-from lusid.models.action_id import ActionId
-from lusid.models.add_transaction_property_response import AddTransactionPropertyResponse
-from lusid.models.adjust_holding import AdjustHolding
-from lusid.models.adjust_holding_request import AdjustHoldingRequest
-from lusid.models.aggregate_spec import AggregateSpec
-from lusid.models.aggregation_context import AggregationContext
-from lusid.models.aggregation_options import AggregationOptions
-from lusid.models.aggregation_request import AggregationRequest
-from lusid.models.aggregation_response_node import AggregationResponseNode
-from lusid.models.analytic_store import AnalyticStore
-from lusid.models.analytic_store_key import AnalyticStoreKey
-from lusid.models.change import Change
-from lusid.models.complete_portfolio import CompletePortfolio
-from lusid.models.configuration_recipe import ConfigurationRecipe
-from lusid.models.constituents_adjustment_header import ConstituentsAdjustmentHeader
-from lusid.models.corporate_action import CorporateAction
-from lusid.models.corporate_action_source import CorporateActionSource
-from lusid.models.corporate_action_transition import CorporateActionTransition
-from lusid.models.corporate_action_transition_component import CorporateActionTransitionComponent
-from lusid.models.corporate_action_transition_component_request import CorporateActionTransitionComponentRequest
-from lusid.models.corporate_action_transition_request import CorporateActionTransitionRequest
-from lusid.models.create_analytic_store_request import CreateAnalyticStoreRequest
-from lusid.models.create_corporate_action_source_request import CreateCorporateActionSourceRequest
-from lusid.models.create_cut_label_definition_request import CreateCutLabelDefinitionRequest
-from lusid.models.create_data_type_request import CreateDataTypeRequest
-from lusid.models.create_derived_transaction_portfolio_request import CreateDerivedTransactionPortfolioRequest
-from lusid.models.create_portfolio_details import CreatePortfolioDetails
-from lusid.models.create_portfolio_group_request import CreatePortfolioGroupRequest
-from lusid.models.create_property_definition_request import CreatePropertyDefinitionRequest
-from lusid.models.create_reference_portfolio_request import CreateReferencePortfolioRequest
-from lusid.models.create_results import CreateResults
-from lusid.models.create_transaction_portfolio_request import CreateTransactionPortfolioRequest
-from lusid.models.create_unit_definition import CreateUnitDefinition
-from lusid.models.currency_and_amount import CurrencyAndAmount
-from lusid.models.cut_label_definition import CutLabelDefinition
-from lusid.models.cut_local_time import CutLocalTime
-from lusid.models.data_type import DataType
-from lusid.models.delete_instrument_property_request import DeleteInstrumentPropertyRequest
-from lusid.models.delete_instrument_response import DeleteInstrumentResponse
-from lusid.models.delete_quote_request import DeleteQuoteRequest
-from lusid.models.delete_quotes_response import DeleteQuotesResponse
-from lusid.models.deleted_entity_response import DeletedEntityResponse
-from lusid.models.error_detail import ErrorDetail
-from lusid.models.execution_request import ExecutionRequest
-from lusid.models.expanded_group import ExpandedGroup
-from lusid.models.field_schema import FieldSchema
-from lusid.models.file_response import FileResponse
-from lusid.models.get_instruments_response import GetInstrumentsResponse
-from lusid.models.get_quotes_response import GetQuotesResponse
-from lusid.models.get_reference_portfolio_constituents_response import GetReferencePortfolioConstituentsResponse
-from lusid.models.holding_adjustment import HoldingAdjustment
-from lusid.models.holdings_adjustment import HoldingsAdjustment
-from lusid.models.holdings_adjustment_header import HoldingsAdjustmentHeader
-from lusid.models.i_unit_definition_dto import IUnitDefinitionDto
-from lusid.models.id_selector_definition import IdSelectorDefinition
-from lusid.models.identifier_part_schema import IdentifierPartSchema
-from lusid.models.instrument import Instrument
-from lusid.models.instrument_analytic import InstrumentAnalytic
-from lusid.models.instrument_definition import InstrumentDefinition
-from lusid.models.instrument_economic_definition import InstrumentEconomicDefinition
-from lusid.models.instrument_id_type_descriptor import InstrumentIdTypeDescriptor
-from lusid.models.instrument_id_value import InstrumentIdValue
-from lusid.models.instrument_match import InstrumentMatch
-from lusid.models.instrument_property import InstrumentProperty
-from lusid.models.instrument_search_property import InstrumentSearchProperty
-from lusid.models.link import Link
-from lusid.models.list_aggregation_response import ListAggregationResponse
-from lusid.models.lusid_problem_details import LusidProblemDetails
-from lusid.models.lusid_validation_problem_details import LusidValidationProblemDetails
-from lusid.models.market_context import MarketContext
-from lusid.models.market_context_suppliers import MarketContextSuppliers
-from lusid.models.market_data_key_rule import MarketDataKeyRule
-from lusid.models.market_options import MarketOptions
-from lusid.models.metric_value import MetricValue
-from lusid.models.model_property import ModelProperty
-from lusid.models.model_selection import ModelSelection
-from lusid.models.nested_aggregation_response import NestedAggregationResponse
-from lusid.models.output_transaction import OutputTransaction
-from lusid.models.perpetual_property import PerpetualProperty
-from lusid.models.perpetual_property_value import PerpetualPropertyValue
-from lusid.models.portfolio import Portfolio
-from lusid.models.portfolio_details import PortfolioDetails
-from lusid.models.portfolio_group import PortfolioGroup
-from lusid.models.portfolio_holding import PortfolioHolding
-from lusid.models.portfolio_properties import PortfolioProperties
-from lusid.models.portfolio_reconciliation_request import PortfolioReconciliationRequest
-from lusid.models.portfolio_search_result import PortfolioSearchResult
-from lusid.models.portfolios_reconciliation_request import PortfoliosReconciliationRequest
-from lusid.models.pricing_context import PricingContext
-from lusid.models.pricing_options import PricingOptions
-from lusid.models.processed_command import ProcessedCommand
-from lusid.models.property_definition import PropertyDefinition
-from lusid.models.property_filter import PropertyFilter
-from lusid.models.property_schema import PropertySchema
-from lusid.models.property_value import PropertyValue
-from lusid.models.quote import Quote
-from lusid.models.quote_id import QuoteId
-from lusid.models.realised_gain_loss import RealisedGainLoss
-from lusid.models.reconciliation_break import ReconciliationBreak
-from lusid.models.reference_portfolio_constituent import ReferencePortfolioConstituent
-from lusid.models.reference_portfolio_constituent_request import ReferencePortfolioConstituentRequest
-from lusid.models.resource_id import ResourceId
-from lusid.models.resource_list_of_access_controlled_resource import ResourceListOfAccessControlledResource
-from lusid.models.resource_list_of_analytic_store_key import ResourceListOfAnalyticStoreKey
-from lusid.models.resource_list_of_change import ResourceListOfChange
-from lusid.models.resource_list_of_constituents_adjustment_header import ResourceListOfConstituentsAdjustmentHeader
-from lusid.models.resource_list_of_corporate_action import ResourceListOfCorporateAction
-from lusid.models.resource_list_of_corporate_action_source import ResourceListOfCorporateActionSource
-from lusid.models.resource_list_of_cut_label_definition import ResourceListOfCutLabelDefinition
-from lusid.models.resource_list_of_data_type import ResourceListOfDataType
-from lusid.models.resource_list_of_holdings_adjustment_header import ResourceListOfHoldingsAdjustmentHeader
-from lusid.models.resource_list_of_i_unit_definition_dto import ResourceListOfIUnitDefinitionDto
-from lusid.models.resource_list_of_instrument import ResourceListOfInstrument
-from lusid.models.resource_list_of_instrument_id_type_descriptor import ResourceListOfInstrumentIdTypeDescriptor
-from lusid.models.resource_list_of_portfolio import ResourceListOfPortfolio
-from lusid.models.resource_list_of_portfolio_group import ResourceListOfPortfolioGroup
-from lusid.models.resource_list_of_portfolio_search_result import ResourceListOfPortfolioSearchResult
-from lusid.models.resource_list_of_processed_command import ResourceListOfProcessedCommand
-from lusid.models.resource_list_of_property_definition import ResourceListOfPropertyDefinition
-from lusid.models.resource_list_of_reconciliation_break import ResourceListOfReconciliationBreak
-from lusid.models.resource_list_of_scope_definition import ResourceListOfScopeDefinition
-from lusid.models.resource_list_of_string import ResourceListOfString
-from lusid.models.resource_list_of_transaction_configuration_data import ResourceListOfTransactionConfigurationData
-from lusid.models.resource_list_of_value_type import ResourceListOfValueType
-from lusid.models.result_data_schema import ResultDataSchema
-from lusid.models.results import Results
-from lusid.models.schema import Schema
-from lusid.models.scope_definition import ScopeDefinition
-from lusid.models.stream import Stream
-from lusid.models.target_tax_lot import TargetTaxLot
-from lusid.models.target_tax_lot_request import TargetTaxLotRequest
-from lusid.models.transaction import Transaction
-from lusid.models.transaction_configuration_data import TransactionConfigurationData
-from lusid.models.transaction_configuration_data_request import TransactionConfigurationDataRequest
-from lusid.models.transaction_configuration_movement_data import TransactionConfigurationMovementData
-from lusid.models.transaction_configuration_movement_data_request import TransactionConfigurationMovementDataRequest
-from lusid.models.transaction_configuration_type_alias import TransactionConfigurationTypeAlias
-from lusid.models.transaction_price import TransactionPrice
-from lusid.models.transaction_property_mapping import TransactionPropertyMapping
-from lusid.models.transaction_property_mapping_request import TransactionPropertyMappingRequest
-from lusid.models.transaction_query_parameters import TransactionQueryParameters
-from lusid.models.transaction_request import TransactionRequest
-from lusid.models.update_cut_label_definition_request import UpdateCutLabelDefinitionRequest
-from lusid.models.update_data_type_request import UpdateDataTypeRequest
-from lusid.models.update_instrument_identifier_request import UpdateInstrumentIdentifierRequest
-from lusid.models.update_portfolio_group_request import UpdatePortfolioGroupRequest
-from lusid.models.update_portfolio_request import UpdatePortfolioRequest
-from lusid.models.update_property_definition_request import UpdatePropertyDefinitionRequest
-from lusid.models.upsert_corporate_action_request import UpsertCorporateActionRequest
-from lusid.models.upsert_corporate_actions_response import UpsertCorporateActionsResponse
-from lusid.models.upsert_instrument_properties_response import UpsertInstrumentPropertiesResponse
-from lusid.models.upsert_instrument_property_request import UpsertInstrumentPropertyRequest
-from lusid.models.upsert_instruments_response import UpsertInstrumentsResponse
-from lusid.models.upsert_portfolio_executions_response import UpsertPortfolioExecutionsResponse
-from lusid.models.upsert_portfolio_transactions_response import UpsertPortfolioTransactionsResponse
-from lusid.models.upsert_quote_request import UpsertQuoteRequest
-from lusid.models.upsert_quotes_response import UpsertQuotesResponse
-from lusid.models.upsert_reference_portfolio_constituents_request import UpsertReferencePortfolioConstituentsRequest
-from lusid.models.upsert_reference_portfolio_constituents_response import UpsertReferencePortfolioConstituentsResponse
-from lusid.models.user import User
-from lusid.models.valuation_reconciliation_request import ValuationReconciliationRequest
-from lusid.models.valuations_reconciliation_request import ValuationsReconciliationRequest
-from lusid.models.vendor_model_rule import VendorModelRule
-from lusid.models.version import Version
-from lusid.models.version_summary_dto import VersionSummaryDto
-from lusid.models.versioned_resource_list_of_output_transaction import VersionedResourceListOfOutputTransaction
-from lusid.models.versioned_resource_list_of_portfolio_holding import VersionedResourceListOfPortfolioHolding
-from lusid.models.versioned_resource_list_of_transaction import VersionedResourceListOfTransaction
+import six
+
+
+class AggregationResponseNode(object):
+    """NOTE: This class is auto generated by OpenAPI Generator.
+    Ref: https://openapi-generator.tech
+
+    Do not edit the class manually.
+    """
+
+    """
+    Attributes:
+      openapi_types (dict): The key is attribute name
+                            and the value is attribute type.
+      attribute_map (dict): The key is attribute name
+                            and the value is json key in definition.
+    """
+    openapi_types = {
+        'key': 'AggregateSpec',
+        'value': 'str',
+        'depth': 'int',
+        'properties': 'dict(str, object)',
+        'children': 'list[AggregationResponseNode]'
+    }
+
+    attribute_map = {
+        'key': 'key',
+        'value': 'value',
+        'depth': 'depth',
+        'properties': 'properties',
+        'children': 'children'
+    }
+
+    def __init__(self, key=None, value=None, depth=None, properties=None, children=None):  # noqa: E501
+        """AggregationResponseNode - a model defined in OpenAPI"""  # noqa: E501
+
+        self._key = None
+        self._value = None
+        self._depth = None
+        self._properties = None
+        self._children = None
+        self.discriminator = None
+
+        if key is not None:
+            self.key = key
+        if value is not None:
+            self.value = value
+        if depth is not None:
+            self.depth = depth
+        if properties is not None:
+            self.properties = properties
+        if children is not None:
+            self.children = children
+
+    @property
+    def key(self):
+        """Gets the key of this AggregationResponseNode.  # noqa: E501
+
+
+        :return: The key of this AggregationResponseNode.  # noqa: E501
+        :rtype: AggregateSpec
+        """
+        return self._key
+
+    @key.setter
+    def key(self, key):
+        """Sets the key of this AggregationResponseNode.
+
+
+        :param key: The key of this AggregationResponseNode.  # noqa: E501
+        :type: AggregateSpec
+        """
+
+        self._key = key
+
+    @property
+    def value(self):
+        """Gets the value of this AggregationResponseNode.  # noqa: E501
+
+
+        :return: The value of this AggregationResponseNode.  # noqa: E501
+        :rtype: str
+        """
+        return self._value
+
+    @value.setter
+    def value(self, value):
+        """Sets the value of this AggregationResponseNode.
+
+
+        :param value: The value of this AggregationResponseNode.  # noqa: E501
+        :type: str
+        """
+
+        self._value = value
+
+    @property
+    def depth(self):
+        """Gets the depth of this AggregationResponseNode.  # noqa: E501
+
+
+        :return: The depth of this AggregationResponseNode.  # noqa: E501
+        :rtype: int
+        """
+        return self._depth
+
+    @depth.setter
+    def depth(self, depth):
+        """Sets the depth of this AggregationResponseNode.
+
+
+        :param depth: The depth of this AggregationResponseNode.  # noqa: E501
+        :type: int
+        """
+
+        self._depth = depth
+
+    @property
+    def properties(self):
+        """Gets the properties of this AggregationResponseNode.  # noqa: E501
+
+
+        :return: The properties of this AggregationResponseNode.  # noqa: E501
+        :rtype: dict(str, object)
+        """
+        return self._properties
+
+    @properties.setter
+    def properties(self, properties):
+        """Sets the properties of this AggregationResponseNode.
+
+
+        :param properties: The properties of this AggregationResponseNode.  # noqa: E501
+        :type: dict(str, object)
+        """
+
+        self._properties = properties
+
+    @property
+    def children(self):
+        """Gets the children of this AggregationResponseNode.  # noqa: E501
+
+
+        :return: The children of this AggregationResponseNode.  # noqa: E501
+        :rtype: list[AggregationResponseNode]
+        """
+        return self._children
+
+    @children.setter
+    def children(self, children):
+        """Sets the children of this AggregationResponseNode.
+
+
+        :param children: The children of this AggregationResponseNode.  # noqa: E501
+        :type: list[AggregationResponseNode]
+        """
+
+        self._children = children
+
+    def to_dict(self):
+        """Returns the model properties as a dict"""
+        result = {}
+
+        for attr, _ in six.iteritems(self.openapi_types):
+            value = getattr(self, attr)
+            if isinstance(value, list):
+                result[attr] = list(map(
+                    lambda x: x.to_dict() if hasattr(x, "to_dict") else x,
+                    value
+                ))
+            elif hasattr(value, "to_dict"):
+                result[attr] = value.to_dict()
+            elif isinstance(value, dict):
+                result[attr] = dict(map(
+                    lambda item: (item[0], item[1].to_dict())
+                    if hasattr(item[1], "to_dict") else item,
+                    value.items()
+                ))
+            else:
+                result[attr] = value
+
+        return result
+
+    def to_str(self):
+        """Returns the string representation of the model"""
+        return pprint.pformat(self.to_dict())
+
+    def __repr__(self):
+        """For `print` and `pprint`"""
+        return self.to_str()
+
+    def __eq__(self, other):
+        """Returns true if both objects are equal"""
+        if not isinstance(other, AggregationResponseNode):
+            return False
+
+        return self.__dict__ == other.__dict__
+
+    def __ne__(self, other):
+        """Returns true if both objects are not equal"""
+        return not self == other

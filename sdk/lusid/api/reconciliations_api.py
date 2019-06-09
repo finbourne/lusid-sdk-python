@@ -162,3 +162,129 @@ class ReconciliationsApi(object):
             _preload_content=local_var_params.get('_preload_content', True),
             _request_timeout=local_var_params.get('_request_timeout'),
             collection_formats=collection_formats)
+
+    def reconcile_valuation(self, **kwargs):  # noqa: E501
+        """Reconcile valuations performed on one or two sets of holdings using one or two configuration recipes.  # noqa: E501
+
+        Perform valuation of one or two set of holdings using different one or two configuration recipes. Produce a breakdown of the resulting differences in valuation.  # noqa: E501
+        This method makes a synchronous HTTP request by default. To make an
+        asynchronous HTTP request, please pass async_req=True
+        >>> thread = api.reconcile_valuation(async_req=True)
+        >>> result = thread.get()
+
+        :param async_req bool: execute request asynchronously
+        :param list[str] sort_by: Optional. Order the results by these fields. Use use the '-' sign to denote descending order e.g. -MyFieldName
+        :param int start: Optional. When paginating, skip this number of results
+        :param int limit: Optional. When paginating, limit the number of returned results to this many.
+        :param str filter: Optional. Expression to filter the result set
+        :param ValuationsReconciliationRequest request: The specifications of the inputs to the reconciliation
+        :param _preload_content: if False, the urllib3.HTTPResponse object will
+                                 be returned without reading/decoding response
+                                 data. Default is True.
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :return: ResourceListOfReconciliationBreak
+                 If the method is called asynchronously,
+                 returns the request thread.
+        """
+        kwargs['_return_http_data_only'] = True
+        return self.reconcile_valuation_with_http_info(**kwargs)  # noqa: E501
+
+    def reconcile_valuation_with_http_info(self, **kwargs):  # noqa: E501
+        """Reconcile valuations performed on one or two sets of holdings using one or two configuration recipes.  # noqa: E501
+
+        Perform valuation of one or two set of holdings using different one or two configuration recipes. Produce a breakdown of the resulting differences in valuation.  # noqa: E501
+        This method makes a synchronous HTTP request by default. To make an
+        asynchronous HTTP request, please pass async_req=True
+        >>> thread = api.reconcile_valuation_with_http_info(async_req=True)
+        >>> result = thread.get()
+
+        :param async_req bool: execute request asynchronously
+        :param list[str] sort_by: Optional. Order the results by these fields. Use use the '-' sign to denote descending order e.g. -MyFieldName
+        :param int start: Optional. When paginating, skip this number of results
+        :param int limit: Optional. When paginating, limit the number of returned results to this many.
+        :param str filter: Optional. Expression to filter the result set
+        :param ValuationsReconciliationRequest request: The specifications of the inputs to the reconciliation
+        :param _return_http_data_only: response data without head status code
+                                       and headers
+        :param _preload_content: if False, the urllib3.HTTPResponse object will
+                                 be returned without reading/decoding response
+                                 data. Default is True.
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :return: tuple(ResourceListOfReconciliationBreak, status_code(int), headers(HTTPHeaderDict))
+                 If the method is called asynchronously,
+                 returns the request thread.
+        """
+
+        local_var_params = locals()
+
+        all_params = ['sort_by', 'start', 'limit', 'filter', 'request']  # noqa: E501
+        all_params.append('async_req')
+        all_params.append('_return_http_data_only')
+        all_params.append('_preload_content')
+        all_params.append('_request_timeout')
+
+        for key, val in six.iteritems(local_var_params['kwargs']):
+            if key not in all_params:
+                raise ApiTypeError(
+                    "Got an unexpected keyword argument '%s'"
+                    " to method reconcile_valuation" % key
+                )
+            local_var_params[key] = val
+        del local_var_params['kwargs']
+
+        collection_formats = {}
+
+        path_params = {}
+
+        query_params = []
+        if 'sort_by' in local_var_params:
+            query_params.append(('sortBy', local_var_params['sort_by']))  # noqa: E501
+            collection_formats['sortBy'] = 'multi'  # noqa: E501
+        if 'start' in local_var_params:
+            query_params.append(('start', local_var_params['start']))  # noqa: E501
+        if 'limit' in local_var_params:
+            query_params.append(('limit', local_var_params['limit']))  # noqa: E501
+        if 'filter' in local_var_params:
+            query_params.append(('filter', local_var_params['filter']))  # noqa: E501
+
+        header_params = {}
+
+        form_params = []
+        local_var_files = {}
+
+        body_params = None
+        if 'request' in local_var_params:
+            body_params = local_var_params['request']
+        # HTTP header `Accept`
+        header_params['Accept'] = self.api_client.select_header_accept(
+            ['text/plain', 'application/json', 'text/json'])  # noqa: E501
+
+
+        # Authentication setting
+        auth_settings = ['oauth2']  # noqa: E501
+
+        # set the LUSID header
+        header_params['X-LUSID-SDK-Language'] = 'Python'
+        header_params['X-LUSID-SDK-Version'] = '0.10.226'
+
+        return self.api_client.call_api(
+            '/api/portfolios/$reconcileValuation', 'POST',
+            path_params,
+            query_params,
+            header_params,
+            body=body_params,
+            post_params=form_params,
+            files=local_var_files,
+            response_type='ResourceListOfReconciliationBreak',  # noqa: E501
+            auth_settings=auth_settings,
+            async_req=local_var_params.get('async_req'),
+            _return_http_data_only=local_var_params.get('_return_http_data_only'),  # noqa: E501
+            _preload_content=local_var_params.get('_preload_content', True),
+            _request_timeout=local_var_params.get('_request_timeout'),
+            collection_formats=collection_formats)

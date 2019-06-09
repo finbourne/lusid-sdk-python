@@ -32,7 +32,7 @@ configuration.access_token = 'YOUR_ACCESS_TOKEN'
 
 # create an instance of the API class
 api_instance = lusid.SearchApi(lusid.ApiClient(configuration))
-mastered_effective_at = '2013-10-20T19:20:30+01:00' # datetime | Optional. The effective date for searching mastered instruments. If this is not set, then the current date is taken.  This parameter has no effect on instruments that have not been mastered within LUSID. (optional)
+mastered_effective_at = 'mastered_effective_at_example' # str | Optional. The effective date for searching mastered instruments. If this is not set, then the current date is taken.  This parameter has no effect on instruments that have not been mastered within LUSID. (optional)
 mastered_only = False # bool | Optional. If set to true, only search over instruments that have been mastered within LUSID. Default to false (optional) (default to False)
 symbols = None # list[InstrumentSearchProperty] | A collection of instrument symbols to search for (optional)
 
@@ -48,7 +48,7 @@ except ApiException as e:
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **mastered_effective_at** | **datetime**| Optional. The effective date for searching mastered instruments. If this is not set, then the current date is taken.  This parameter has no effect on instruments that have not been mastered within LUSID. | [optional] 
+ **mastered_effective_at** | **str**| Optional. The effective date for searching mastered instruments. If this is not set, then the current date is taken.  This parameter has no effect on instruments that have not been mastered within LUSID. | [optional] 
  **mastered_only** | **bool**| Optional. If set to true, only search over instruments that have been mastered within LUSID. Default to false | [optional] [default to False]
  **symbols** | [**list[InstrumentSearchProperty]**](list.md)| A collection of instrument symbols to search for | [optional] 
 
