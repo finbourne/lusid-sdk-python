@@ -199,7 +199,7 @@ sort_by = ['sort_by_example'] # list[str] | Optional. Order the results by these
 start = 56 # int | Optional. When paginating, skip this number of results (optional)
 limit = 56 # int | Optional. When paginating, limit the number of returned results to this many. (optional)
 filter = 'filter_example' # str | Optional. Expression to filter the result set (optional)
-query = 'query_example' # str | Optional. Expression specifying the criteria that the returned portfolios must meet (optional)
+query = 'query_example' # str | Optional. Expression specifying the criteria that the returned cut labels must meet (optional)
 
 try:
     # List Existing Cut Labels
@@ -218,7 +218,7 @@ Name | Type | Description  | Notes
  **start** | **int**| Optional. When paginating, skip this number of results | [optional] 
  **limit** | **int**| Optional. When paginating, limit the number of returned results to this many. | [optional] 
  **filter** | **str**| Optional. Expression to filter the result set | [optional] 
- **query** | **str**| Optional. Expression specifying the criteria that the returned portfolios must meet | [optional] 
+ **query** | **str**| Optional. Expression specifying the criteria that the returned cut labels must meet | [optional] 
 
 ### Return type
 
