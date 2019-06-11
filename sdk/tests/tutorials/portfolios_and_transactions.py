@@ -27,11 +27,7 @@ class PortfoliosAndTransactions(unittest.TestCase):
 
         cls.instrument_loader = InstrumentLoader(cls.instruments_api)
         cls.instrument_ids = cls.instrument_loader.load_instruments()
-
-    @classmethod
-    def tearDownClass(cls) -> None:
-        cls.instrument_loader.delete_instruments()
-
+        
     def test_list_scopes(self):
         # Get the list of scopes across all entities
         scopes = self.scopes_api.list_scopes()
