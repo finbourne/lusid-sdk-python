@@ -5,6 +5,7 @@ import pytz
 import uuid
 
 import lusid
+import lusid.models as models
 from api_client_builder import ApiClientBuilder
 from instrument_loader import InstrumentLoader
 from test_data_utilities import TestDataUtilities
@@ -49,6 +50,42 @@ class PortfoliosAndTransactions(unittest.TestCase):
 
         self.assertEqual(portfolios.count, 10)
 
+    def test_add_transactions_to_portfolio(self):
+        # Effective date of the portfolio, this is the date the portfolio was created and became live.  All dates/times
+        # must be supplied in UTC
+        effective_date = datetime(2018, 1, 1, tzinfo=pytz.utc)
+
+        portfolio_id = self.test_data_utilities.create_transaction_portfolio(self.tutorial_scope)
+        transaction_id = str(uuid.uuid4())
+
+        transaction = models.TransactionRequest(
+            # unique transaction id
+            transaction_id=transaction_id,
+
+            # transaction type, configured during system setup
+            type="Buy",
+
+            # instrument identifier for the transaction
+            instrument_identifiers={TestDataUtilities.lusid_luid_identifier: self.instrument_ids[0]},
+
+            transaction_date=effective_date,
+            settlement_date=effective_date,
+            units=100.0,
+            transaction_price=models.TransactionPrice(price=12.3),
+            total_consideration=models.CurrencyAndAmount(amount=1230.0, currency="GBP"),
+            source="Broker")
+
+        # add the transaction to the portfolio
+        self.transaction_portfolios_api.upsert_transactions(self.tutorial_scope,
+                                                            code=portfolio_id,
+                                                            transactions=[transaction])
+
+        # get the transaction
+        transactions = self.transaction_portfolios_api.get_transactions(self.tutorial_scope, code=portfolio_id)
+
+        self.assertEqual(len(transactions.values), 1)
+        self.assertEqual(transaction_id, transactions.values[0].transaction_id)
+
     def test_get_holdings(self):
         # The currency of the cash and transactions
         currency = "GBP"
@@ -66,20 +103,27 @@ class PortfoliosAndTransactions(unittest.TestCase):
             self.test_data_utilities.build_cash_fundsin_transaction_request(100000, currency, dayT1),
 
             # Initial transaction on dayT1
-            self.test_data_utilities.build_transaction_request(self.instrument_ids[0], 100.0, 101.0, currency, dayT1, "Buy"),
-            self.test_data_utilities.build_transaction_request(self.instrument_ids[1], 100.0, 102.0, currency, dayT1, "Buy"),
-            self.test_data_utilities.build_transaction_request(self.instrument_ids[2], 100.0, 103.0, currency, dayT1, "Buy"),
+            self.test_data_utilities.build_transaction_request(self.instrument_ids[0], 100.0, 101.0, currency, dayT1,
+                                                               "Buy"),
+            self.test_data_utilities.build_transaction_request(self.instrument_ids[1], 100.0, 102.0, currency, dayT1,
+                                                               "Buy"),
+            self.test_data_utilities.build_transaction_request(self.instrument_ids[2], 100.0, 103.0, currency, dayT1,
+                                                               "Buy"),
 
             # On T+5, add a transaction in another instrument and another to increase the amount of instrument 1
-            self.test_data_utilities.build_transaction_request(self.instrument_ids[1], 100.0, 104.0, currency, dayTPlus5,"Buy"),
-            self.test_data_utilities.build_transaction_request(self.instrument_ids[3], 100.0, 105.0, currency, dayTPlus5, "Buy"),
+            self.test_data_utilities.build_transaction_request(self.instrument_ids[1], 100.0, 104.0, currency,
+                                                               dayTPlus5, "Buy"),
+            self.test_data_utilities.build_transaction_request(self.instrument_ids[3], 100.0, 105.0, currency,
+                                                               dayTPlus5, "Buy"),
         ]
 
         # Upload the transactions to LUSID
-        self.transaction_portfolios_api.upsert_transactions(self.tutorial_scope, code=portfolio_id, transactions=transactions)
+        self.transaction_portfolios_api.upsert_transactions(self.tutorial_scope, code=portfolio_id,
+                                                            transactions=transactions)
 
         # Get the portfolio holdings on T+10
-        holdings = self.transaction_portfolios_api.get_holdings(self.tutorial_scope, portfolio_id, effective_at=dayTPlus10)
+        holdings = self.transaction_portfolios_api.get_holdings(self.tutorial_scope, portfolio_id,
+                                                                effective_at=dayTPlus10)
 
         # Ensure we have 5 holdings: 1 cash position and a position in 4 instruments that aggregates the 5 transactions
         self.assertEqual(holdings.count, 5, msg="Unexpected number of holdings")
