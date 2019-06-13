@@ -14,7 +14,7 @@ config_file=$gen_root/config.json
 #   remove all previously generated files
 shopt -s extglob 
 echo "removing previous sdk: $sdk_output_folder"
-rm -rf $sdk_output_folder/lusid
+rm -rf $sdk_output_folder/lusid/!(utilities)
 shopt -u extglob 
 
 # ignore files
@@ -40,6 +40,5 @@ __version__ = "$sdk_version"
 EOF
 
 rm -rf $sdk_output_folder/.openapi-generator/
-rm -rf $sdk_output_folder/test/
 rm -rf $sdk_output_folder/test/
 rm -f $sdk_output_folder/.openapi-generator-ignore
