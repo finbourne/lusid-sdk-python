@@ -8,6 +8,8 @@ import lusid.models as models
 
 class TestDataUtilities:
 
+    tutorials_scope = "Testdemo"
+
     lusid_cash_identifier = "Instrument/default/Currency"
     lusid_luid_identifier = "Instrument/default/LusidInstrumentId"
 
