@@ -11,7 +11,7 @@ Name | Type | Description | Notes
 **left_cost** | [**CurrencyAndAmount**](CurrencyAndAmount.md) |  | 
 **right_cost** | [**CurrencyAndAmount**](CurrencyAndAmount.md) |  | 
 **difference_cost** | [**CurrencyAndAmount**](CurrencyAndAmount.md) |  | 
-**instrument_properties** | [**list[ModelProperty]**](ModelProperty.md) | Additional features relating to the security | 
+**instrument_properties** | [**list[ModelProperty]**](ModelProperty.md) | Additional features relating to the instrument | 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 
