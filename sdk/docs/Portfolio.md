@@ -12,6 +12,7 @@ Name | Type | Description | Notes
 **parent_portfolio_id** | [**ResourceId**](ResourceId.md) |  | [optional] 
 **version** | [**Version**](Version.md) |  | [optional] 
 **is_derived** | **bool** |  | [optional] 
+**properties** | [**list[ModelProperty]**](ModelProperty.md) | Any requested portfolio properties | [optional] 
 **links** | [**list[Link]**](Link.md) |  | [optional] 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)

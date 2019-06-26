@@ -323,7 +323,7 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **list_portfolios**
-> ResourceListOfPortfolio list_portfolios(effective_at=effective_at, as_at=as_at, page=page, sort_by=sort_by, start=start, limit=limit, filter=filter, query=query)
+> ResourceListOfPortfolio list_portfolios(effective_at=effective_at, as_at=as_at, page=page, sort_by=sort_by, start=start, limit=limit, filter=filter, query=query, portfolio_property_keys=portfolio_property_keys)
 
 List portfolios
 
@@ -352,10 +352,11 @@ start = 56 # int | Optional. When paginating, skip this number of results (optio
 limit = 56 # int | Optional. When paginating, limit the number of returned results to this many. (optional)
 filter = 'filter_example' # str | Optional. Expression to filter the result set (optional)
 query = 'query_example' # str | Optional. Expression specifying the criteria that the returned portfolios must meet (optional)
+portfolio_property_keys = ['portfolio_property_keys_example'] # list[str] | Optional. Keys of the properties to be decorated on to the portfolio (optional)
 
 try:
     # List portfolios
-    api_response = api_instance.list_portfolios(effective_at=effective_at, as_at=as_at, page=page, sort_by=sort_by, start=start, limit=limit, filter=filter, query=query)
+    api_response = api_instance.list_portfolios(effective_at=effective_at, as_at=as_at, page=page, sort_by=sort_by, start=start, limit=limit, filter=filter, query=query, portfolio_property_keys=portfolio_property_keys)
     pprint(api_response)
 except ApiException as e:
     print("Exception when calling PortfoliosApi->list_portfolios: %s\n" % e)
@@ -373,6 +374,7 @@ Name | Type | Description  | Notes
  **limit** | **int**| Optional. When paginating, limit the number of returned results to this many. | [optional] 
  **filter** | **str**| Optional. Expression to filter the result set | [optional] 
  **query** | **str**| Optional. Expression specifying the criteria that the returned portfolios must meet | [optional] 
+ **portfolio_property_keys** | [**list[str]**](str.md)| Optional. Keys of the properties to be decorated on to the portfolio | [optional] 
 
 ### Return type
 
@@ -390,7 +392,7 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **list_portfolios_for_scope**
-> ResourceListOfPortfolio list_portfolios_for_scope(scope, effective_at=effective_at, as_at=as_at, sort_by=sort_by, start=start, limit=limit, filter=filter)
+> ResourceListOfPortfolio list_portfolios_for_scope(scope, effective_at=effective_at, as_at=as_at, sort_by=sort_by, start=start, limit=limit, filter=filter, portfolio_property_keys=portfolio_property_keys)
 
 List portfolios for scope
 
@@ -418,10 +420,11 @@ sort_by = ['sort_by_example'] # list[str] | Optional. Order the results by these
 start = 56 # int | Optional. When paginating, skip this number of results (optional)
 limit = 56 # int | Optional. When paginating, limit the number of returned results to this many. (optional)
 filter = 'filter_example' # str | Optional. Expression to filter the result set (optional)
+portfolio_property_keys = ['portfolio_property_keys_example'] # list[str] | Optional. Keys of the properties to be decorated on to the portfolio (optional)
 
 try:
     # List portfolios for scope
-    api_response = api_instance.list_portfolios_for_scope(scope, effective_at=effective_at, as_at=as_at, sort_by=sort_by, start=start, limit=limit, filter=filter)
+    api_response = api_instance.list_portfolios_for_scope(scope, effective_at=effective_at, as_at=as_at, sort_by=sort_by, start=start, limit=limit, filter=filter, portfolio_property_keys=portfolio_property_keys)
     pprint(api_response)
 except ApiException as e:
     print("Exception when calling PortfoliosApi->list_portfolios_for_scope: %s\n" % e)
@@ -438,6 +441,7 @@ Name | Type | Description  | Notes
  **start** | **int**| Optional. When paginating, skip this number of results | [optional] 
  **limit** | **int**| Optional. When paginating, limit the number of returned results to this many. | [optional] 
  **filter** | **str**| Optional. Expression to filter the result set | [optional] 
+ **portfolio_property_keys** | [**list[str]**](str.md)| Optional. Keys of the properties to be decorated on to the portfolio | [optional] 
 
 ### Return type
 
