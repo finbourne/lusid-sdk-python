@@ -68,7 +68,7 @@ class Holdings(unittest.TestCase):
                                                                 effective_at=day_tplus10)
 
         # Ensure we have 5 holdings: 1 cash position and a position in 4 instruments that aggregates the 5 transactions
-        self.assertEqual(holdings.count, 5, msg="Unexpected number of holdings")
+        self.assertEqual(len(holdings.values), 5, msg="Unexpected number of holdings")
 
         holdings.values.sort(key=lambda x: x.instrument_uid)
 
