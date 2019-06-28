@@ -204,7 +204,7 @@ class Portfolios(unittest.TestCase):
         # Get the list of scopes across all entities
         scopes = self.scopes_api.list_scopes()
 
-        self.assertGreater(scopes.count, 0)
+        self.assertGreater(len(scopes.values), 0)
 
     def test_list_portfolios(self):
         # This defines the scope that the portfolios will be retrieved from
@@ -216,4 +216,4 @@ class Portfolios(unittest.TestCase):
         # Retrieve the list of portfolios
         portfolios = self.portfolios_api.list_portfolios_for_scope(scope)
 
-        self.assertEqual(portfolios.count, 10)
+        self.assertEqual(len(portfolios.values), 10)
