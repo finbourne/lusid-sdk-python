@@ -97,7 +97,7 @@ class Portfolios(unittest.TestCase):
                                                                             portfolio_code)
 
         self.assertEqual(len(portfolio_properties.properties), 1)
-        self.assertEqual(portfolio_properties.properties[property_definition.key].value, property_value)
+        self.assertEqual(portfolio_properties.properties[property_definition_result.key].value, property_value)
 
     def test_add_transaction_to_portfolio(self):
         # effective date of the portfolio, this is the date the portfolio was created and became live.  All dates/times
