@@ -3,7 +3,7 @@
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**label_value** | **str** | The value of a property defined as having the \&quot;Label\&quot; type. | [optional] 
+**label_value** | **str** |  | [optional] 
 **metric_value** | [**MetricValue**](MetricValue.md) |  | [optional] 
 **effective_from** | **datetime** | Date for which the property is effective from | [optional] 
 
