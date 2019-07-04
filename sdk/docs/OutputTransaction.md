@@ -20,7 +20,6 @@ Name | Type | Description | Notes
 **properties** | [**list[PerpetualProperty]**](PerpetualProperty.md) |  | [optional] 
 **counterparty_id** | **str** | Counterparty identifier | [optional] 
 **source** | **str** | Where this transaction came from | [optional] 
-**netting_set** | **str** |  | [optional] 
 **transaction_status** | **str** | Transaction status (active, amended or cancelled) | [optional] 
 **entry_date_time** | **datetime** | Date / time the transaction was booked into LUSID | [optional] 
 **cancel_date_time** | **datetime** | Date / time the cancellation was booked into LUSID | [optional] 
