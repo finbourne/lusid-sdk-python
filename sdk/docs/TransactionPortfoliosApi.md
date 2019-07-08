@@ -1,6 +1,6 @@
 # lusid.TransactionPortfoliosApi
 
-All URIs are relative to *http://http:/api*
+All URIs are relative to *http://localhost*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
@@ -8,10 +8,10 @@ Method | HTTP request | Description
 [**adjust_holdings**](TransactionPortfoliosApi.md#adjust_holdings) | **POST** /api/transactionportfolios/{scope}/{code}/holdings/{effectiveAt} | Adjust holdings
 [**build_transactions**](TransactionPortfoliosApi.md#build_transactions) | **POST** /api/transactionportfolios/{scope}/{code}/transactions/$build | Build transactions
 [**cancel_adjust_holdings**](TransactionPortfoliosApi.md#cancel_adjust_holdings) | **DELETE** /api/transactionportfolios/{scope}/{code}/holdings/{effectiveAt} | Cancel adjust holdings
+[**cancel_executions**](TransactionPortfoliosApi.md#cancel_executions) | **DELETE** /api/transactionportfolios/{scope}/{code}/executions | Cancel executions
+[**cancel_transactions**](TransactionPortfoliosApi.md#cancel_transactions) | **DELETE** /api/transactionportfolios/{scope}/{code}/transactions | Cancel transactions
 [**create_portfolio**](TransactionPortfoliosApi.md#create_portfolio) | **POST** /api/transactionportfolios/{scope} | Create portfolio
-[**delete_executions**](TransactionPortfoliosApi.md#delete_executions) | **DELETE** /api/transactionportfolios/{scope}/{code}/executions | Delete executions
 [**delete_property_from_transaction**](TransactionPortfoliosApi.md#delete_property_from_transaction) | **DELETE** /api/transactionportfolios/{scope}/{code}/transactions/{transactionId}/properties | Delete property from transaction
-[**delete_transactions**](TransactionPortfoliosApi.md#delete_transactions) | **DELETE** /api/transactionportfolios/{scope}/{code}/transactions | Delete transactions
 [**get_details**](TransactionPortfoliosApi.md#get_details) | **GET** /api/transactionportfolios/{scope}/{code}/details | Get details
 [**get_holdings**](TransactionPortfoliosApi.md#get_holdings) | **GET** /api/transactionportfolios/{scope}/{code}/holdings | Get holdings
 [**get_holdings_adjustment**](TransactionPortfoliosApi.md#get_holdings_adjustment) | **GET** /api/transactionportfolios/{scope}/{code}/holdingsadjustments/{effectiveAt} | Get holdings adjustment
@@ -261,6 +261,120 @@ Name | Type | Description  | Notes
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
+# **cancel_executions**
+> DeletedEntityResponse cancel_executions(scope, code, execution_ids)
+
+Cancel executions
+
+Cancel one or more executions from a transaction portfolio.
+
+### Example
+
+* OAuth Authentication (oauth2):
+```python
+from __future__ import print_function
+import time
+import lusid
+from lusid.rest import ApiException
+from pprint import pprint
+configuration = lusid.Configuration()
+# Configure OAuth2 access token for authorization: oauth2
+configuration.access_token = 'YOUR_ACCESS_TOKEN'
+
+# create an instance of the API class
+api_instance = lusid.TransactionPortfoliosApi(lusid.ApiClient(configuration))
+scope = 'scope_example' # str | The scope of the transaction portfolio.
+code = 'code_example' # str | The code of the transaction portfolio. Together with the scope this uniquely identifies              the transaction portfolio.
+execution_ids = ['execution_ids_example'] # list[str] | The ids of the executions to cancel.
+
+try:
+    # Cancel executions
+    api_response = api_instance.cancel_executions(scope, code, execution_ids)
+    pprint(api_response)
+except ApiException as e:
+    print("Exception when calling TransactionPortfoliosApi->cancel_executions: %s\n" % e)
+```
+
+### Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **scope** | **str**| The scope of the transaction portfolio. | 
+ **code** | **str**| The code of the transaction portfolio. Together with the scope this uniquely identifies              the transaction portfolio. | 
+ **execution_ids** | [**list[str]**](str.md)| The ids of the executions to cancel. | 
+
+### Return type
+
+[**DeletedEntityResponse**](DeletedEntityResponse.md)
+
+### Authorization
+
+[oauth2](../README.md#oauth2)
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: text/plain, application/json, text/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **cancel_transactions**
+> DeletedEntityResponse cancel_transactions(scope, code, transaction_ids)
+
+Cancel transactions
+
+Cancel one or more transactions from the specified transaction portfolio.
+
+### Example
+
+* OAuth Authentication (oauth2):
+```python
+from __future__ import print_function
+import time
+import lusid
+from lusid.rest import ApiException
+from pprint import pprint
+configuration = lusid.Configuration()
+# Configure OAuth2 access token for authorization: oauth2
+configuration.access_token = 'YOUR_ACCESS_TOKEN'
+
+# create an instance of the API class
+api_instance = lusid.TransactionPortfoliosApi(lusid.ApiClient(configuration))
+scope = 'scope_example' # str | The scope of the transaction portfolio.
+code = 'code_example' # str | The code of the transaction portfolio. Together with the scope this uniquely identifies              the transaction portfolio.
+transaction_ids = ['transaction_ids_example'] # list[str] | The ids of the transactions to cancel.
+
+try:
+    # Cancel transactions
+    api_response = api_instance.cancel_transactions(scope, code, transaction_ids)
+    pprint(api_response)
+except ApiException as e:
+    print("Exception when calling TransactionPortfoliosApi->cancel_transactions: %s\n" % e)
+```
+
+### Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **scope** | **str**| The scope of the transaction portfolio. | 
+ **code** | **str**| The code of the transaction portfolio. Together with the scope this uniquely identifies              the transaction portfolio. | 
+ **transaction_ids** | [**list[str]**](str.md)| The ids of the transactions to cancel. | 
+
+### Return type
+
+[**DeletedEntityResponse**](DeletedEntityResponse.md)
+
+### Authorization
+
+[oauth2](../README.md#oauth2)
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: text/plain, application/json, text/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
 # **create_portfolio**
 > Portfolio create_portfolio(scope, create_request=create_request)
 
@@ -316,63 +430,6 @@ Name | Type | Description  | Notes
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
-# **delete_executions**
-> DeletedEntityResponse delete_executions(scope, code, execution_ids)
-
-Delete executions
-
-Delete one or more executions from a transaction portfolio.
-
-### Example
-
-* OAuth Authentication (oauth2):
-```python
-from __future__ import print_function
-import time
-import lusid
-from lusid.rest import ApiException
-from pprint import pprint
-configuration = lusid.Configuration()
-# Configure OAuth2 access token for authorization: oauth2
-configuration.access_token = 'YOUR_ACCESS_TOKEN'
-
-# create an instance of the API class
-api_instance = lusid.TransactionPortfoliosApi(lusid.ApiClient(configuration))
-scope = 'scope_example' # str | The scope of the transaction portfolio.
-code = 'code_example' # str | The code of the transaction portfolio. Together with the scope this uniquely identifies              the transaction portfolio.
-execution_ids = ['execution_ids_example'] # list[str] | The ids of the executions to delete.
-
-try:
-    # Delete executions
-    api_response = api_instance.delete_executions(scope, code, execution_ids)
-    pprint(api_response)
-except ApiException as e:
-    print("Exception when calling TransactionPortfoliosApi->delete_executions: %s\n" % e)
-```
-
-### Parameters
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
- **scope** | **str**| The scope of the transaction portfolio. | 
- **code** | **str**| The code of the transaction portfolio. Together with the scope this uniquely identifies              the transaction portfolio. | 
- **execution_ids** | [**list[str]**](str.md)| The ids of the executions to delete. | 
-
-### Return type
-
-[**DeletedEntityResponse**](DeletedEntityResponse.md)
-
-### Authorization
-
-[oauth2](../README.md#oauth2)
-
-### HTTP request headers
-
- - **Content-Type**: Not defined
- - **Accept**: text/plain, application/json, text/json
-
-[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
-
 # **delete_property_from_transaction**
 > DeletedEntityResponse delete_property_from_transaction(scope, code, transaction_id, transaction_property_key)
 
@@ -416,63 +473,6 @@ Name | Type | Description  | Notes
  **code** | **str**| The code of the transaction portfolio. Together with the scope this uniquely identifies              the transaction portfolio. | 
  **transaction_id** | **str**| The unique id of the transaction to delete the property value from. | 
  **transaction_property_key** | **str**| The property key of the property value to delete from the transaction.              This must be from the \&quot;Trade\&quot; domain and will have the format {domain}/{scope}/{code} e.g.              \&quot;Trade/strategy/quantsignal\&quot;. | 
-
-### Return type
-
-[**DeletedEntityResponse**](DeletedEntityResponse.md)
-
-### Authorization
-
-[oauth2](../README.md#oauth2)
-
-### HTTP request headers
-
- - **Content-Type**: Not defined
- - **Accept**: text/plain, application/json, text/json
-
-[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
-
-# **delete_transactions**
-> DeletedEntityResponse delete_transactions(scope, code, transaction_ids)
-
-Delete transactions
-
-Delete one or more transactions from the specified transaction portfolio.
-
-### Example
-
-* OAuth Authentication (oauth2):
-```python
-from __future__ import print_function
-import time
-import lusid
-from lusid.rest import ApiException
-from pprint import pprint
-configuration = lusid.Configuration()
-# Configure OAuth2 access token for authorization: oauth2
-configuration.access_token = 'YOUR_ACCESS_TOKEN'
-
-# create an instance of the API class
-api_instance = lusid.TransactionPortfoliosApi(lusid.ApiClient(configuration))
-scope = 'scope_example' # str | The scope of the transaction portfolio.
-code = 'code_example' # str | The code of the transaction portfolio. Together with the scope this uniquely identifies              the transaction portfolio.
-transaction_ids = ['transaction_ids_example'] # list[str] | The ids of the transactions to delete.
-
-try:
-    # Delete transactions
-    api_response = api_instance.delete_transactions(scope, code, transaction_ids)
-    pprint(api_response)
-except ApiException as e:
-    print("Exception when calling TransactionPortfoliosApi->delete_transactions: %s\n" % e)
-```
-
-### Parameters
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
- **scope** | **str**| The scope of the transaction portfolio. | 
- **code** | **str**| The code of the transaction portfolio. Together with the scope this uniquely identifies              the transaction portfolio. | 
- **transaction_ids** | [**list[str]**](str.md)| The ids of the transactions to delete. | 
 
 ### Return type
 
