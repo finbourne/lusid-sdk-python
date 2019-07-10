@@ -1,17 +1,17 @@
 # lusid.DerivedTransactionPortfoliosApi
 
-All URIs are relative to *http://http:/api*
+All URIs are relative to *http://localhost*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
-[**create_derived_portfolio**](DerivedTransactionPortfoliosApi.md#create_derived_portfolio) | **POST** /api/derivedtransactionportfolios/{scope} | Create derived transaction portfolio
-[**delete_derived_portfolio_details**](DerivedTransactionPortfoliosApi.md#delete_derived_portfolio_details) | **DELETE** /api/derivedtransactionportfolios/{scope}/{code}/details | Delete portfolio details
+[**create_derived_portfolio**](DerivedTransactionPortfoliosApi.md#create_derived_portfolio) | **POST** /api/derivedtransactionportfolios/{scope} | [EARLY ACCESS] Create derived transaction portfolio
+[**delete_derived_portfolio_details**](DerivedTransactionPortfoliosApi.md#delete_derived_portfolio_details) | **DELETE** /api/derivedtransactionportfolios/{scope}/{code}/details | [EARLY ACCESS] Delete portfolio details
 
 
 # **create_derived_portfolio**
 > Portfolio create_derived_portfolio(scope, portfolio=portfolio)
 
-Create derived transaction portfolio
+[EARLY ACCESS] Create derived transaction portfolio
 
 Creates a transaction portfolio that derives from an existing transaction portfolio. In a derived portfolio, parts of the portfolio can either be specific to this portfolio, or can be inherited from a \"parent\". Different parts of the portfolio (e.g. transactions or properties) are combined in different ways. The portfolio details are either overridden in entirety, or not at all. The same is true for properties. Transactions on a derived portfolio are merged with its parent portfolio's transactions. If the parent portfolio is itself a derived portfolio, transactions from that parent are also merged (and that parent's portfolio's, if it is also a derived portfolio, and so on).
 
@@ -34,7 +34,7 @@ scope = 'scope_example' # str | The scope into which to create the new derived p
 portfolio = lusid.CreateDerivedTransactionPortfolioRequest() # CreateDerivedTransactionPortfolioRequest | The root object of the new derived portfolio, containing a populated reference portfolio id and reference scope (optional)
 
 try:
-    # Create derived transaction portfolio
+    # [EARLY ACCESS] Create derived transaction portfolio
     api_response = api_instance.create_derived_portfolio(scope, portfolio=portfolio)
     pprint(api_response)
 except ApiException as e:
@@ -66,7 +66,7 @@ Name | Type | Description  | Notes
 # **delete_derived_portfolio_details**
 > DeletedEntityResponse delete_derived_portfolio_details(scope, code, effective_at=effective_at)
 
-Delete portfolio details
+[EARLY ACCESS] Delete portfolio details
 
 Deletes the portfolio details for the specified derived transaction portfolio
 
@@ -90,7 +90,7 @@ code = 'code_example' # str | The code of the portfolio
 effective_at = 'effective_at_example' # str | The effective date of the change (optional)
 
 try:
-    # Delete portfolio details
+    # [EARLY ACCESS] Delete portfolio details
     api_response = api_instance.delete_derived_portfolio_details(scope, code, effective_at=effective_at)
     pprint(api_response)
 except ApiException as e:

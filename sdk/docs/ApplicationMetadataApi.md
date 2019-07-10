@@ -1,18 +1,18 @@
 # lusid.ApplicationMetadataApi
 
-All URIs are relative to *http://http:/api*
+All URIs are relative to *http://localhost*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
-[**get_excel_addin**](ApplicationMetadataApi.md#get_excel_addin) | **GET** /api/metadata/downloads/exceladdin | Download Excel Addin
-[**get_lusid_versions**](ApplicationMetadataApi.md#get_lusid_versions) | **GET** /api/metadata/versions | Get LUSID versions
-[**list_access_controlled_resources**](ApplicationMetadataApi.md#list_access_controlled_resources) | **GET** /api/metadata/access/resources | Get resources available for access control
+[**get_excel_addin**](ApplicationMetadataApi.md#get_excel_addin) | **GET** /api/metadata/downloads/exceladdin | [EARLY ACCESS] Download Excel Addin
+[**get_lusid_versions**](ApplicationMetadataApi.md#get_lusid_versions) | **GET** /api/metadata/versions | [EARLY ACCESS] Get LUSID versions
+[**list_access_controlled_resources**](ApplicationMetadataApi.md#list_access_controlled_resources) | **GET** /api/metadata/access/resources | [EARLY ACCESS] Get resources available for access control
 
 
 # **get_excel_addin**
 > FileResponse get_excel_addin(version=version)
 
-Download Excel Addin
+[EARLY ACCESS] Download Excel Addin
 
 Download the LUSID Excel Addin for Microsoft Excel. Not providing a specific value will return the latest version being returned
 
@@ -34,7 +34,7 @@ api_instance = lusid.ApplicationMetadataApi(lusid.ApiClient(configuration))
 version = 'version_example' # str | The requested version of the Excel plugin (optional)
 
 try:
-    # Download Excel Addin
+    # [EARLY ACCESS] Download Excel Addin
     api_response = api_instance.get_excel_addin(version=version)
     pprint(api_response)
 except ApiException as e:
@@ -65,7 +65,7 @@ Name | Type | Description  | Notes
 # **get_lusid_versions**
 > VersionSummaryDto get_lusid_versions()
 
-Get LUSID versions
+[EARLY ACCESS] Get LUSID versions
 
 Get the semantic versions associated with LUSID and its ecosystem
 
@@ -86,7 +86,7 @@ configuration.access_token = 'YOUR_ACCESS_TOKEN'
 api_instance = lusid.ApplicationMetadataApi(lusid.ApiClient(configuration))
 
 try:
-    # Get LUSID versions
+    # [EARLY ACCESS] Get LUSID versions
     api_response = api_instance.get_lusid_versions()
     pprint(api_response)
 except ApiException as e:
@@ -114,7 +114,7 @@ This endpoint does not need any parameter.
 # **list_access_controlled_resources**
 > ResourceListOfAccessControlledResource list_access_controlled_resources(filter=filter)
 
-Get resources available for access control
+[EARLY ACCESS] Get resources available for access control
 
 Get the comprehensive set of resources that are available for access control
 
@@ -136,7 +136,7 @@ api_instance = lusid.ApplicationMetadataApi(lusid.ApiClient(configuration))
 filter = 'filter_example' # str | Optional. Expression to filter the result set (optional)
 
 try:
-    # Get resources available for access control
+    # [EARLY ACCESS] Get resources available for access control
     api_response = api_instance.list_access_controlled_resources(filter=filter)
     pprint(api_response)
 except ApiException as e:

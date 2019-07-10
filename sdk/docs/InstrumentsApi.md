@@ -1,23 +1,23 @@
 # lusid.InstrumentsApi
 
-All URIs are relative to *http://http:/api*
+All URIs are relative to *http://localhost*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
-[**delete_instrument**](InstrumentsApi.md#delete_instrument) | **DELETE** /api/instruments/{identifierType}/{identifier} | Delete instrument
-[**get_instrument**](InstrumentsApi.md#get_instrument) | **GET** /api/instruments/{identifierType}/{identifier} | Get instrument definition
-[**get_instrument_identifiers**](InstrumentsApi.md#get_instrument_identifiers) | **GET** /api/instruments/identifiers | Get allowable instrument identifiers
-[**get_instruments**](InstrumentsApi.md#get_instruments) | **POST** /api/instruments/$get | Get instrument definition
-[**list_instruments**](InstrumentsApi.md#list_instruments) | **GET** /api/instruments | Get all of the currently mastered instruments in LUSID
-[**update_instrument_identifier**](InstrumentsApi.md#update_instrument_identifier) | **POST** /api/instruments/{identifierType}/{identifier} | Update instrument identifier
-[**upsert_instruments**](InstrumentsApi.md#upsert_instruments) | **POST** /api/instruments | Upsert instruments
-[**upsert_instruments_properties**](InstrumentsApi.md#upsert_instruments_properties) | **POST** /api/instruments/$upsertproperties | Upsert instrument properties
+[**delete_instrument**](InstrumentsApi.md#delete_instrument) | **DELETE** /api/instruments/{identifierType}/{identifier} | [EARLY ACCESS] Delete instrument
+[**get_instrument**](InstrumentsApi.md#get_instrument) | **GET** /api/instruments/{identifierType}/{identifier} | [EARLY ACCESS] Get instrument definition
+[**get_instrument_identifiers**](InstrumentsApi.md#get_instrument_identifiers) | **GET** /api/instruments/identifiers | [EARLY ACCESS] Get allowable instrument identifiers
+[**get_instruments**](InstrumentsApi.md#get_instruments) | **POST** /api/instruments/$get | [EARLY ACCESS] Get instrument definition
+[**list_instruments**](InstrumentsApi.md#list_instruments) | **GET** /api/instruments | [EARLY ACCESS] Get all of the currently mastered instruments in LUSID
+[**update_instrument_identifier**](InstrumentsApi.md#update_instrument_identifier) | **POST** /api/instruments/{identifierType}/{identifier} | [EARLY ACCESS] Update instrument identifier
+[**upsert_instruments**](InstrumentsApi.md#upsert_instruments) | **POST** /api/instruments | [EARLY ACCESS] Upsert instruments
+[**upsert_instruments_properties**](InstrumentsApi.md#upsert_instruments_properties) | **POST** /api/instruments/$upsertproperties | [EARLY ACCESS] Upsert instrument properties
 
 
 # **delete_instrument**
 > DeleteInstrumentResponse delete_instrument(identifier_type, identifier)
 
-Delete instrument
+[EARLY ACCESS] Delete instrument
 
 Attempt to delete one or more \"client\" instruments.    The response will include those instruments that could not be deleted (as well as any available details).                It is important to always check the 'Failed' set for any unsuccessful results.
 
@@ -40,7 +40,7 @@ identifier_type = 'identifier_type_example' # str | The type of identifier being
 identifier = 'identifier_example' # str | The instrument identifier
 
 try:
-    # Delete instrument
+    # [EARLY ACCESS] Delete instrument
     api_response = api_instance.delete_instrument(identifier_type, identifier)
     pprint(api_response)
 except ApiException as e:
@@ -72,7 +72,7 @@ Name | Type | Description  | Notes
 # **get_instrument**
 > Instrument get_instrument(identifier_type, identifier, effective_at=effective_at, as_at=as_at, instrument_property_keys=instrument_property_keys)
 
-Get instrument definition
+[EARLY ACCESS] Get instrument definition
 
 Get an individual instrument by the one of its unique instrument identifiers. Optionally, it is possible to decorate each instrument with specified property data.
 
@@ -98,7 +98,7 @@ as_at = '2013-10-20T19:20:30+01:00' # datetime | Optional. The AsAt date of the 
 instrument_property_keys = ['instrument_property_keys_example'] # list[str] | Optional. Keys of the properties to be decorated on to the instrument (optional)
 
 try:
-    # Get instrument definition
+    # [EARLY ACCESS] Get instrument definition
     api_response = api_instance.get_instrument(identifier_type, identifier, effective_at=effective_at, as_at=as_at, instrument_property_keys=instrument_property_keys)
     pprint(api_response)
 except ApiException as e:
@@ -133,7 +133,7 @@ Name | Type | Description  | Notes
 # **get_instrument_identifiers**
 > ResourceListOfInstrumentIdTypeDescriptor get_instrument_identifiers()
 
-Get allowable instrument identifiers
+[EARLY ACCESS] Get allowable instrument identifiers
 
 Returns a collection of instrument identifier type descriptors. Each descriptor specifies the properties  of a particular instrument identifier - its name, its cardinality (whether or not multiple instruments can  share the same identifier value), and its corresponding PropertyKey.
 
@@ -154,7 +154,7 @@ configuration.access_token = 'YOUR_ACCESS_TOKEN'
 api_instance = lusid.InstrumentsApi(lusid.ApiClient(configuration))
 
 try:
-    # Get allowable instrument identifiers
+    # [EARLY ACCESS] Get allowable instrument identifiers
     api_response = api_instance.get_instrument_identifiers()
     pprint(api_response)
 except ApiException as e:
@@ -182,7 +182,7 @@ This endpoint does not need any parameter.
 # **get_instruments**
 > GetInstrumentsResponse get_instruments(identifier_type, identifiers, effective_at=effective_at, as_at=as_at, instrument_property_keys=instrument_property_keys)
 
-Get instrument definition
+[EARLY ACCESS] Get instrument definition
 
 Get a collection of instruments by a set of identifiers. Optionally, it is possible to decorate each instrument with specified property data.
 
@@ -208,7 +208,7 @@ as_at = '2013-10-20T19:20:30+01:00' # datetime | Optional. The as at date of the
 instrument_property_keys = ['instrument_property_keys_example'] # list[str] | Optional. Keys of the properties to be decorated on to the instrument (optional)
 
 try:
-    # Get instrument definition
+    # [EARLY ACCESS] Get instrument definition
     api_response = api_instance.get_instruments(identifier_type, identifiers, effective_at=effective_at, as_at=as_at, instrument_property_keys=instrument_property_keys)
     pprint(api_response)
 except ApiException as e:
@@ -243,7 +243,7 @@ Name | Type | Description  | Notes
 # **list_instruments**
 > ResourceListOfInstrument list_instruments(as_at=as_at, effective_at=effective_at, page=page, sort_by=sort_by, start=start, limit=limit, filter=filter, instrument_property_keys=instrument_property_keys)
 
-Get all of the currently mastered instruments in LUSID
+[EARLY ACCESS] Get all of the currently mastered instruments in LUSID
 
 Lists all instruments that have been mastered within LUSID.
 
@@ -272,7 +272,7 @@ filter = 'State eq 'Active'' # str | Optional. Expression to filter the result s
 instrument_property_keys = ['instrument_property_keys_example'] # list[str] | Optional. Keys of the properties to be decorated on to the instrument (optional)
 
 try:
-    # Get all of the currently mastered instruments in LUSID
+    # [EARLY ACCESS] Get all of the currently mastered instruments in LUSID
     api_response = api_instance.list_instruments(as_at=as_at, effective_at=effective_at, page=page, sort_by=sort_by, start=start, limit=limit, filter=filter, instrument_property_keys=instrument_property_keys)
     pprint(api_response)
 except ApiException as e:
@@ -310,7 +310,7 @@ Name | Type | Description  | Notes
 # **update_instrument_identifier**
 > Instrument update_instrument_identifier(identifier_type, identifier, request=request)
 
-Update instrument identifier
+[EARLY ACCESS] Update instrument identifier
 
 Adds, updates, or removes an identifier on an instrument
 
@@ -334,7 +334,7 @@ identifier = 'identifier_example' # str | The instrument identifier
 request = lusid.UpdateInstrumentIdentifierRequest() # UpdateInstrumentIdentifierRequest | The identifier to add, update, or remove (optional)
 
 try:
-    # Update instrument identifier
+    # [EARLY ACCESS] Update instrument identifier
     api_response = api_instance.update_instrument_identifier(identifier_type, identifier, request=request)
     pprint(api_response)
 except ApiException as e:
@@ -367,7 +367,7 @@ Name | Type | Description  | Notes
 # **upsert_instruments**
 > UpsertInstrumentsResponse upsert_instruments(requests=requests)
 
-Upsert instruments
+[EARLY ACCESS] Upsert instruments
 
 Attempt to master one or more instruments in LUSID's instrument master. Each instrument is keyed by some unique key. This key is unimportant, and serves only as a method to identify created instruments in the response.    The response will return both the collection of successfully created instruments, as well as those that were rejected and why their creation failed. They will be keyed against the key supplied in the  request.                It is important to always check the 'Failed' set for any unsuccessful results.
 
@@ -389,7 +389,7 @@ api_instance = lusid.InstrumentsApi(lusid.ApiClient(configuration))
 requests = {'key': lusid.InstrumentDefinition()} # dict(str, InstrumentDefinition) | The instrument definitions (optional)
 
 try:
-    # Upsert instruments
+    # [EARLY ACCESS] Upsert instruments
     api_response = api_instance.upsert_instruments(requests=requests)
     pprint(api_response)
 except ApiException as e:
@@ -420,7 +420,7 @@ Name | Type | Description  | Notes
 # **upsert_instruments_properties**
 > UpsertInstrumentPropertiesResponse upsert_instruments_properties(instrument_properties=instrument_properties)
 
-Upsert instrument properties
+[EARLY ACCESS] Upsert instrument properties
 
 Attempt to upsert property data for one or more instruments, properties, and effective dates.    The response will include the details of any failures that occurred during data storage.                It is important to always check the 'Failed' collection for any unsuccessful results.
 
@@ -442,7 +442,7 @@ api_instance = lusid.InstrumentsApi(lusid.ApiClient(configuration))
 instrument_properties = None # list[UpsertInstrumentPropertyRequest] | The instrument property data (optional)
 
 try:
-    # Upsert instrument properties
+    # [EARLY ACCESS] Upsert instrument properties
     api_response = api_instance.upsert_instruments_properties(instrument_properties=instrument_properties)
     pprint(api_response)
 except ApiException as e:

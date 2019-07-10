@@ -1,20 +1,20 @@
 # lusid.CutLabelDefinitionsApi
 
-All URIs are relative to *http://http:/api*
+All URIs are relative to *http://localhost*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
-[**create_cut_label_definition**](CutLabelDefinitionsApi.md#create_cut_label_definition) | **POST** /api/systemconfiguration/cutlabels | Create a Cut Label
-[**delete_cut_label_definition**](CutLabelDefinitionsApi.md#delete_cut_label_definition) | **DELETE** /api/systemconfiguration/cutlabels/{code} | Delete a Cut Label
-[**get_cut_label_definition**](CutLabelDefinitionsApi.md#get_cut_label_definition) | **GET** /api/systemconfiguration/cutlabels/{code} | Get a Cut Label
-[**list_cut_label_definitions**](CutLabelDefinitionsApi.md#list_cut_label_definitions) | **GET** /api/systemconfiguration/cutlabels | List Existing Cut Labels
-[**update_cut_label_definition**](CutLabelDefinitionsApi.md#update_cut_label_definition) | **PUT** /api/systemconfiguration/cutlabels/{code} | Update a Cut Label
+[**create_cut_label_definition**](CutLabelDefinitionsApi.md#create_cut_label_definition) | **POST** /api/systemconfiguration/cutlabels | [EARLY ACCESS] Create a Cut Label
+[**delete_cut_label_definition**](CutLabelDefinitionsApi.md#delete_cut_label_definition) | **DELETE** /api/systemconfiguration/cutlabels/{code} | [EARLY ACCESS] Delete a Cut Label
+[**get_cut_label_definition**](CutLabelDefinitionsApi.md#get_cut_label_definition) | **GET** /api/systemconfiguration/cutlabels/{code} | [EARLY ACCESS] Get a Cut Label
+[**list_cut_label_definitions**](CutLabelDefinitionsApi.md#list_cut_label_definitions) | **GET** /api/systemconfiguration/cutlabels | [EARLY ACCESS] List Existing Cut Labels
+[**update_cut_label_definition**](CutLabelDefinitionsApi.md#update_cut_label_definition) | **PUT** /api/systemconfiguration/cutlabels/{code} | [EARLY ACCESS] Update a Cut Label
 
 
 # **create_cut_label_definition**
 > CutLabelDefinition create_cut_label_definition(create_request=create_request)
 
-Create a Cut Label
+[EARLY ACCESS] Create a Cut Label
 
 Create a Cut Label valid in all scopes
 
@@ -36,7 +36,7 @@ api_instance = lusid.CutLabelDefinitionsApi(lusid.ApiClient(configuration))
 create_request = lusid.CreateCutLabelDefinitionRequest() # CreateCutLabelDefinitionRequest | The cut label definition (optional)
 
 try:
-    # Create a Cut Label
+    # [EARLY ACCESS] Create a Cut Label
     api_response = api_instance.create_cut_label_definition(create_request=create_request)
     pprint(api_response)
 except ApiException as e:
@@ -67,7 +67,7 @@ Name | Type | Description  | Notes
 # **delete_cut_label_definition**
 > datetime delete_cut_label_definition(code)
 
-Delete a Cut Label
+[EARLY ACCESS] Delete a Cut Label
 
 Delete a specified cut label
 
@@ -89,7 +89,7 @@ api_instance = lusid.CutLabelDefinitionsApi(lusid.ApiClient(configuration))
 code = 'code_example' # str | The Code of the Cut Label that is being Deleted
 
 try:
-    # Delete a Cut Label
+    # [EARLY ACCESS] Delete a Cut Label
     api_response = api_instance.delete_cut_label_definition(code)
     pprint(api_response)
 except ApiException as e:
@@ -120,7 +120,7 @@ Name | Type | Description  | Notes
 # **get_cut_label_definition**
 > CutLabelDefinition get_cut_label_definition(code, as_at=as_at)
 
-Get a Cut Label
+[EARLY ACCESS] Get a Cut Label
 
 Get a specified cut label at a given time
 
@@ -143,7 +143,7 @@ code = 'code_example' # str | The Code of the Cut Label that is being queried
 as_at = '2013-10-20T19:20:30+01:00' # datetime | The time at which to get the Cut Label (optional)
 
 try:
-    # Get a Cut Label
+    # [EARLY ACCESS] Get a Cut Label
     api_response = api_instance.get_cut_label_definition(code, as_at=as_at)
     pprint(api_response)
 except ApiException as e:
@@ -175,7 +175,7 @@ Name | Type | Description  | Notes
 # **list_cut_label_definitions**
 > ResourceListOfCutLabelDefinition list_cut_label_definitions(as_at=as_at, sort_by=sort_by, start=start, limit=limit, filter=filter, query=query)
 
-List Existing Cut Labels
+[EARLY ACCESS] List Existing Cut Labels
 
 List all the Cut Label Definitions that are valid at the given AsAt time
 
@@ -202,7 +202,7 @@ filter = 'filter_example' # str | Optional. Expression to filter the result set 
 query = 'query_example' # str | Optional. Expression specifying the criteria that the returned cut labels must meet (optional)
 
 try:
-    # List Existing Cut Labels
+    # [EARLY ACCESS] List Existing Cut Labels
     api_response = api_instance.list_cut_label_definitions(as_at=as_at, sort_by=sort_by, start=start, limit=limit, filter=filter, query=query)
     pprint(api_response)
 except ApiException as e:
@@ -238,7 +238,7 @@ Name | Type | Description  | Notes
 # **update_cut_label_definition**
 > CutLabelDefinition update_cut_label_definition(code, update_request=update_request)
 
-Update a Cut Label
+[EARLY ACCESS] Update a Cut Label
 
 Update a specified cut label
 
@@ -261,7 +261,7 @@ code = 'code_example' # str | The Code of the Cut Label that is being updated
 update_request = lusid.UpdateCutLabelDefinitionRequest() # UpdateCutLabelDefinitionRequest | The cut label update definition (optional)
 
 try:
-    # Update a Cut Label
+    # [EARLY ACCESS] Update a Cut Label
     api_response = api_instance.update_cut_label_definition(code, update_request=update_request)
     pprint(api_response)
 except ApiException as e:

@@ -1,19 +1,19 @@
 # lusid.ReferencePortfolioApi
 
-All URIs are relative to *http://http:/api*
+All URIs are relative to *http://localhost*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
-[**create_reference_portfolio**](ReferencePortfolioApi.md#create_reference_portfolio) | **POST** /api/referenceportfolios/{scope} | Create reference portfolio
-[**get_reference_portfolio_constituents**](ReferencePortfolioApi.md#get_reference_portfolio_constituents) | **GET** /api/referenceportfolios/{scope}/{code}/constituents | Get constituents
-[**list_constituents_adjustments**](ReferencePortfolioApi.md#list_constituents_adjustments) | **GET** /api/referenceportfolios/{scope}/{code}/constituentsadjustments | Gets constituents adjustments in an interval of effective time.
-[**upsert_reference_portfolio_constituents**](ReferencePortfolioApi.md#upsert_reference_portfolio_constituents) | **POST** /api/referenceportfolios/{scope}/{code}/constituents | Add constituents
+[**create_reference_portfolio**](ReferencePortfolioApi.md#create_reference_portfolio) | **POST** /api/referenceportfolios/{scope} | [EARLY ACCESS] Create reference portfolio
+[**get_reference_portfolio_constituents**](ReferencePortfolioApi.md#get_reference_portfolio_constituents) | **GET** /api/referenceportfolios/{scope}/{code}/constituents | [EARLY ACCESS] Get constituents
+[**list_constituents_adjustments**](ReferencePortfolioApi.md#list_constituents_adjustments) | **GET** /api/referenceportfolios/{scope}/{code}/constituentsadjustments | [EARLY ACCESS] Gets constituents adjustments in an interval of effective time.
+[**upsert_reference_portfolio_constituents**](ReferencePortfolioApi.md#upsert_reference_portfolio_constituents) | **POST** /api/referenceportfolios/{scope}/{code}/constituents | [EARLY ACCESS] Add constituents
 
 
 # **create_reference_portfolio**
 > Portfolio create_reference_portfolio(scope, reference_portfolio=reference_portfolio)
 
-Create reference portfolio
+[EARLY ACCESS] Create reference portfolio
 
 Create a new reference portfolio.
 
@@ -36,7 +36,7 @@ scope = 'scope_example' # str | The intended scope of the portfolio
 reference_portfolio = lusid.CreateReferencePortfolioRequest() # CreateReferencePortfolioRequest | The portfolio creation request object (optional)
 
 try:
-    # Create reference portfolio
+    # [EARLY ACCESS] Create reference portfolio
     api_response = api_instance.create_reference_portfolio(scope, reference_portfolio=reference_portfolio)
     pprint(api_response)
 except ApiException as e:
@@ -68,7 +68,7 @@ Name | Type | Description  | Notes
 # **get_reference_portfolio_constituents**
 > GetReferencePortfolioConstituentsResponse get_reference_portfolio_constituents(scope, code, effective_at=effective_at, as_at=as_at, sort_by=sort_by, start=start, limit=limit, instrument_property_keys=instrument_property_keys)
 
-Get constituents
+[EARLY ACCESS] Get constituents
 
 Get all the constituents in the specified reference portfolio
 
@@ -97,7 +97,7 @@ limit = 56 # int | Optional. When paginating, limit the number of returned resul
 instrument_property_keys = ['instrument_property_keys_example'] # list[str] | Optional. The Properties of the constituents (optional)
 
 try:
-    # Get constituents
+    # [EARLY ACCESS] Get constituents
     api_response = api_instance.get_reference_portfolio_constituents(scope, code, effective_at=effective_at, as_at=as_at, sort_by=sort_by, start=start, limit=limit, instrument_property_keys=instrument_property_keys)
     pprint(api_response)
 except ApiException as e:
@@ -135,7 +135,7 @@ Name | Type | Description  | Notes
 # **list_constituents_adjustments**
 > ResourceListOfConstituentsAdjustmentHeader list_constituents_adjustments(scope, code, from_effective_at=from_effective_at, to_effective_at=to_effective_at, as_at_time=as_at_time)
 
-Gets constituents adjustments in an interval of effective time.
+[EARLY ACCESS] Gets constituents adjustments in an interval of effective time.
 
 Specify a time period in which you'd like to see the list of times that adjustments where made to this portfolio
 
@@ -161,7 +161,7 @@ to_effective_at = 'to_effective_at_example' # str | Events between this time (in
 as_at_time = '2013-10-20T19:20:30+01:00' # datetime | The as-at time for which the result is valid. (optional)
 
 try:
-    # Gets constituents adjustments in an interval of effective time.
+    # [EARLY ACCESS] Gets constituents adjustments in an interval of effective time.
     api_response = api_instance.list_constituents_adjustments(scope, code, from_effective_at=from_effective_at, to_effective_at=to_effective_at, as_at_time=as_at_time)
     pprint(api_response)
 except ApiException as e:
@@ -196,7 +196,7 @@ Name | Type | Description  | Notes
 # **upsert_reference_portfolio_constituents**
 > UpsertReferencePortfolioConstituentsResponse upsert_reference_portfolio_constituents(scope, code, constituents=constituents)
 
-Add constituents
+[EARLY ACCESS] Add constituents
 
 Add constituents to the specified reference portfolio.
 
@@ -220,7 +220,7 @@ code = 'code_example' # str | The code of the portfolio
 constituents = lusid.UpsertReferencePortfolioConstituentsRequest() # UpsertReferencePortfolioConstituentsRequest | The constituents to upload to the portfolio (optional)
 
 try:
-    # Add constituents
+    # [EARLY ACCESS] Add constituents
     api_response = api_instance.upsert_reference_portfolio_constituents(scope, code, constituents=constituents)
     pprint(api_response)
 except ApiException as e:

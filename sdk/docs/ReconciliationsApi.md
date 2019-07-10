@@ -1,16 +1,16 @@
 # lusid.ReconciliationsApi
 
-All URIs are relative to *http://http:/api*
+All URIs are relative to *http://localhost*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
-[**reconcile_holdings**](ReconciliationsApi.md#reconcile_holdings) | **POST** /api/portfolios/$reconcileholdings | Reconcile portfolio holdings
+[**reconcile_holdings**](ReconciliationsApi.md#reconcile_holdings) | **POST** /api/portfolios/$reconcileholdings | [EARLY ACCESS] Reconcile portfolio holdings
 
 
 # **reconcile_holdings**
 > ResourceListOfReconciliationBreak reconcile_holdings(sort_by=sort_by, start=start, limit=limit, filter=filter, request=request)
 
-Reconcile portfolio holdings
+[EARLY ACCESS] Reconcile portfolio holdings
 
 Reconcile the holdings of two portfolios.
 
@@ -36,7 +36,7 @@ filter = 'filter_example' # str | Optional. Expression to filter the result set 
 request = lusid.PortfoliosReconciliationRequest() # PortfoliosReconciliationRequest | The specifications of the inputs to the reconciliation (optional)
 
 try:
-    # Reconcile portfolio holdings
+    # [EARLY ACCESS] Reconcile portfolio holdings
     api_response = api_instance.reconcile_holdings(sort_by=sort_by, start=start, limit=limit, filter=filter, request=request)
     pprint(api_response)
 except ApiException as e:

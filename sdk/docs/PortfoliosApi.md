@@ -1,24 +1,24 @@
 # lusid.PortfoliosApi
 
-All URIs are relative to *http://http:/api*
+All URIs are relative to *http://localhost*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
-[**delete_portfolio**](PortfoliosApi.md#delete_portfolio) | **DELETE** /api/portfolios/{scope}/{code} | Delete portfolio
-[**delete_portfolio_properties**](PortfoliosApi.md#delete_portfolio_properties) | **DELETE** /api/portfolios/{scope}/{code}/properties | Delete portfolio properties
-[**get_portfolio**](PortfoliosApi.md#get_portfolio) | **GET** /api/portfolios/{scope}/{code} | Get portfolio definition
-[**get_portfolio_commands**](PortfoliosApi.md#get_portfolio_commands) | **GET** /api/portfolios/{scope}/{code}/commands | Get commands
-[**get_portfolio_properties**](PortfoliosApi.md#get_portfolio_properties) | **GET** /api/portfolios/{scope}/{code}/properties | Get portfolio properties
-[**list_portfolios**](PortfoliosApi.md#list_portfolios) | **GET** /api/portfolios | List portfolios
-[**list_portfolios_for_scope**](PortfoliosApi.md#list_portfolios_for_scope) | **GET** /api/portfolios/{scope} | List portfolios for scope
-[**update_portfolio**](PortfoliosApi.md#update_portfolio) | **PUT** /api/portfolios/{scope}/{code} | Update portfolio definition
-[**upsert_portfolio_properties**](PortfoliosApi.md#upsert_portfolio_properties) | **POST** /api/portfolios/{scope}/{code}/properties | Upsert portfolio properties
+[**delete_portfolio**](PortfoliosApi.md#delete_portfolio) | **DELETE** /api/portfolios/{scope}/{code} | [EARLY ACCESS] Delete portfolio
+[**delete_portfolio_properties**](PortfoliosApi.md#delete_portfolio_properties) | **DELETE** /api/portfolios/{scope}/{code}/properties | [EARLY ACCESS] Delete portfolio properties
+[**get_portfolio**](PortfoliosApi.md#get_portfolio) | **GET** /api/portfolios/{scope}/{code} | [EARLY ACCESS] Get portfolio definition
+[**get_portfolio_commands**](PortfoliosApi.md#get_portfolio_commands) | **GET** /api/portfolios/{scope}/{code}/commands | [EARLY ACCESS] Get commands
+[**get_portfolio_properties**](PortfoliosApi.md#get_portfolio_properties) | **GET** /api/portfolios/{scope}/{code}/properties | [EARLY ACCESS] Get portfolio properties
+[**list_portfolios**](PortfoliosApi.md#list_portfolios) | **GET** /api/portfolios | [EARLY ACCESS] List portfolios
+[**list_portfolios_for_scope**](PortfoliosApi.md#list_portfolios_for_scope) | **GET** /api/portfolios/{scope} | [EARLY ACCESS] List portfolios for scope
+[**update_portfolio**](PortfoliosApi.md#update_portfolio) | **PUT** /api/portfolios/{scope}/{code} | [EARLY ACCESS] Update portfolio definition
+[**upsert_portfolio_properties**](PortfoliosApi.md#upsert_portfolio_properties) | **POST** /api/portfolios/{scope}/{code}/properties | [EARLY ACCESS] Upsert portfolio properties
 
 
 # **delete_portfolio**
 > DeletedEntityResponse delete_portfolio(scope, code, effective_at=effective_at)
 
-Delete portfolio
+[EARLY ACCESS] Delete portfolio
 
 Delete a portfolio at the specified effectiveAt
 
@@ -42,7 +42,7 @@ code = 'code_example' # str | The code of the portfolio
 effective_at = 'effective_at_example' # str | Optional. The effective date of the deletion (optional)
 
 try:
-    # Delete portfolio
+    # [EARLY ACCESS] Delete portfolio
     api_response = api_instance.delete_portfolio(scope, code, effective_at=effective_at)
     pprint(api_response)
 except ApiException as e:
@@ -75,7 +75,7 @@ Name | Type | Description  | Notes
 # **delete_portfolio_properties**
 > DeletedEntityResponse delete_portfolio_properties(scope, code, effective_at=effective_at, portfolio_property_keys=portfolio_property_keys)
 
-Delete portfolio properties
+[EARLY ACCESS] Delete portfolio properties
 
 Delete one, many or all property values from a portfolio for the specified effectiveAt                Specifying no effectiveAt will delete all properties
 
@@ -100,7 +100,7 @@ effective_at = 'effective_at_example' # str | Optional. The effective date of th
 portfolio_property_keys = ['portfolio_property_keys_example'] # list[str] | Optional. The keys of the properties to be deleted. None specified indicates the intention to delete all properties from the portfolio (optional)
 
 try:
-    # Delete portfolio properties
+    # [EARLY ACCESS] Delete portfolio properties
     api_response = api_instance.delete_portfolio_properties(scope, code, effective_at=effective_at, portfolio_property_keys=portfolio_property_keys)
     pprint(api_response)
 except ApiException as e:
@@ -134,7 +134,7 @@ Name | Type | Description  | Notes
 # **get_portfolio**
 > Portfolio get_portfolio(scope, code, effective_at=effective_at, as_at=as_at)
 
-Get portfolio definition
+[EARLY ACCESS] Get portfolio definition
 
 Retrieves the basic set of information about a portfolio using the specified scope and code.
 
@@ -159,7 +159,7 @@ effective_at = 'effective_at_example' # str | Optional. The effective date of th
 as_at = '2013-10-20T19:20:30+01:00' # datetime | Optional. The AsAt date of the data (optional)
 
 try:
-    # Get portfolio definition
+    # [EARLY ACCESS] Get portfolio definition
     api_response = api_instance.get_portfolio(scope, code, effective_at=effective_at, as_at=as_at)
     pprint(api_response)
 except ApiException as e:
@@ -193,7 +193,7 @@ Name | Type | Description  | Notes
 # **get_portfolio_commands**
 > ResourceListOfProcessedCommand get_portfolio_commands(scope, code, from_as_at=from_as_at, to_as_at=to_as_at, sort_by=sort_by, start=start, limit=limit, filter=filter)
 
-Get commands
+[EARLY ACCESS] Get commands
 
 Gets all commands that modified a specific portfolio, including any input transactions.
 
@@ -222,7 +222,7 @@ limit = 56 # int | Optional. When paginating, limit the number of returned resul
 filter = 'filter_example' # str | Optional. Expression to filter the result set (optional)
 
 try:
-    # Get commands
+    # [EARLY ACCESS] Get commands
     api_response = api_instance.get_portfolio_commands(scope, code, from_as_at=from_as_at, to_as_at=to_as_at, sort_by=sort_by, start=start, limit=limit, filter=filter)
     pprint(api_response)
 except ApiException as e:
@@ -260,7 +260,7 @@ Name | Type | Description  | Notes
 # **get_portfolio_properties**
 > PortfolioProperties get_portfolio_properties(scope, code, effective_at=effective_at, as_at=as_at, sort_by=sort_by, start=start, limit=limit)
 
-Get portfolio properties
+[EARLY ACCESS] Get portfolio properties
 
 Get the properties of a portfolio
 
@@ -288,7 +288,7 @@ start = 56 # int | Optional. When paginating, skip this number of results (optio
 limit = 56 # int | Optional. When paginating, limit the number of returned results to this many. (optional)
 
 try:
-    # Get portfolio properties
+    # [EARLY ACCESS] Get portfolio properties
     api_response = api_instance.get_portfolio_properties(scope, code, effective_at=effective_at, as_at=as_at, sort_by=sort_by, start=start, limit=limit)
     pprint(api_response)
 except ApiException as e:
@@ -325,7 +325,7 @@ Name | Type | Description  | Notes
 # **list_portfolios**
 > ResourceListOfPortfolio list_portfolios(effective_at=effective_at, as_at=as_at, page=page, sort_by=sort_by, start=start, limit=limit, filter=filter, query=query, portfolio_property_keys=portfolio_property_keys)
 
-List portfolios
+[EARLY ACCESS] List portfolios
 
 List all portfolios matching the specified criteria.                Example query syntax for the query parameter:                - To see which portfolios have holdings in the specified instruments:                    instrument.identifiers in (('LusidInstrumentId', 'LUID_PPA8HI6M'), ('Figi', 'BBG000BLNNH6'))                * Note that copy/pasting above examples results in incorrect single quote character
 
@@ -355,7 +355,7 @@ query = 'query_example' # str | Optional. Expression specifying the criteria tha
 portfolio_property_keys = ['portfolio_property_keys_example'] # list[str] | Optional. Keys of the properties to be decorated on to the portfolio (optional)
 
 try:
-    # List portfolios
+    # [EARLY ACCESS] List portfolios
     api_response = api_instance.list_portfolios(effective_at=effective_at, as_at=as_at, page=page, sort_by=sort_by, start=start, limit=limit, filter=filter, query=query, portfolio_property_keys=portfolio_property_keys)
     pprint(api_response)
 except ApiException as e:
@@ -394,7 +394,7 @@ Name | Type | Description  | Notes
 # **list_portfolios_for_scope**
 > ResourceListOfPortfolio list_portfolios_for_scope(scope, effective_at=effective_at, as_at=as_at, sort_by=sort_by, start=start, limit=limit, filter=filter, portfolio_property_keys=portfolio_property_keys)
 
-List portfolios for scope
+[EARLY ACCESS] List portfolios for scope
 
 List all the portfolios in the specified scope
 
@@ -423,7 +423,7 @@ filter = 'filter_example' # str | Optional. Expression to filter the result set 
 portfolio_property_keys = ['portfolio_property_keys_example'] # list[str] | Optional. Keys of the properties to be decorated on to the portfolio (optional)
 
 try:
-    # List portfolios for scope
+    # [EARLY ACCESS] List portfolios for scope
     api_response = api_instance.list_portfolios_for_scope(scope, effective_at=effective_at, as_at=as_at, sort_by=sort_by, start=start, limit=limit, filter=filter, portfolio_property_keys=portfolio_property_keys)
     pprint(api_response)
 except ApiException as e:
@@ -461,7 +461,7 @@ Name | Type | Description  | Notes
 # **update_portfolio**
 > Portfolio update_portfolio(scope, code, effective_at=effective_at, request=request)
 
-Update portfolio definition
+[EARLY ACCESS] Update portfolio definition
 
 Update the definition of a specific portfolio. Note, some parts of a portfolio definition are not available for modification after the initial creation.
 
@@ -486,7 +486,7 @@ effective_at = 'effective_at_example' # str | Optional. The effective date for t
 request = lusid.UpdatePortfolioRequest() # UpdatePortfolioRequest | The updated portfolio definition (optional)
 
 try:
-    # Update portfolio definition
+    # [EARLY ACCESS] Update portfolio definition
     api_response = api_instance.update_portfolio(scope, code, effective_at=effective_at, request=request)
     pprint(api_response)
 except ApiException as e:
@@ -520,7 +520,7 @@ Name | Type | Description  | Notes
 # **upsert_portfolio_properties**
 > PortfolioProperties upsert_portfolio_properties(scope, code, portfolio_properties=portfolio_properties)
 
-Upsert portfolio properties
+[EARLY ACCESS] Upsert portfolio properties
 
 Upsert one or more property values to a portfolio. All properties must be of the domain Portfolio.
 
@@ -544,7 +544,7 @@ code = 'code_example' # str | The code of the portfolio
 portfolio_properties = {'key': lusid.PropertyValue()} # dict(str, PropertyValue) | The property values to be upserted to the portfolio. Time variant properties must have an EffectiveFrom date. (optional)
 
 try:
-    # Upsert portfolio properties
+    # [EARLY ACCESS] Upsert portfolio properties
     api_response = api_instance.upsert_portfolio_properties(scope, code, portfolio_properties=portfolio_properties)
     pprint(api_response)
 except ApiException as e:

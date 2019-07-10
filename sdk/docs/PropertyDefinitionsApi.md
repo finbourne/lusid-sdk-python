@@ -1,20 +1,20 @@
 # lusid.PropertyDefinitionsApi
 
-All URIs are relative to *http://http:/api*
+All URIs are relative to *http://localhost*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
-[**create_property_definition**](PropertyDefinitionsApi.md#create_property_definition) | **POST** /api/propertydefinitions | Create property definition
-[**delete_property_definition**](PropertyDefinitionsApi.md#delete_property_definition) | **DELETE** /api/propertydefinitions/{domain}/{scope}/{code} | Delete property definition
-[**get_multiple_property_definitions**](PropertyDefinitionsApi.md#get_multiple_property_definitions) | **GET** /api/propertydefinitions | Get multiple property definitions
-[**get_property_definition**](PropertyDefinitionsApi.md#get_property_definition) | **GET** /api/propertydefinitions/{domain}/{scope}/{code} | Get property definition
-[**update_property_definition**](PropertyDefinitionsApi.md#update_property_definition) | **PUT** /api/propertydefinitions/{domain}/{scope}/{code} | Update property definition
+[**create_property_definition**](PropertyDefinitionsApi.md#create_property_definition) | **POST** /api/propertydefinitions | [EARLY ACCESS] Create property definition
+[**delete_property_definition**](PropertyDefinitionsApi.md#delete_property_definition) | **DELETE** /api/propertydefinitions/{domain}/{scope}/{code} | [EARLY ACCESS] Delete property definition
+[**get_multiple_property_definitions**](PropertyDefinitionsApi.md#get_multiple_property_definitions) | **GET** /api/propertydefinitions | [EARLY ACCESS] Get multiple property definitions
+[**get_property_definition**](PropertyDefinitionsApi.md#get_property_definition) | **GET** /api/propertydefinitions/{domain}/{scope}/{code} | [EARLY ACCESS] Get property definition
+[**update_property_definition**](PropertyDefinitionsApi.md#update_property_definition) | **PUT** /api/propertydefinitions/{domain}/{scope}/{code} | [EARLY ACCESS] Update property definition
 
 
 # **create_property_definition**
 > PropertyDefinition create_property_definition(definition)
 
-Create property definition
+[EARLY ACCESS] Create property definition
 
 Define a new property.
 
@@ -36,7 +36,7 @@ api_instance = lusid.PropertyDefinitionsApi(lusid.ApiClient(configuration))
 definition = lusid.CreatePropertyDefinitionRequest() # CreatePropertyDefinitionRequest | The definition of the new property.
 
 try:
-    # Create property definition
+    # [EARLY ACCESS] Create property definition
     api_response = api_instance.create_property_definition(definition)
     pprint(api_response)
 except ApiException as e:
@@ -67,7 +67,7 @@ Name | Type | Description  | Notes
 # **delete_property_definition**
 > DeletedEntityResponse delete_property_definition(domain, scope, code)
 
-Delete property definition
+[EARLY ACCESS] Delete property definition
 
 Delete the definition of the specified property.
 
@@ -91,7 +91,7 @@ scope = 'scope_example' # str | The scope of the property to be deleted.
 code = 'code_example' # str | The code of the property to be deleted. Together with the domain and scope this uniquely              identifies the property.
 
 try:
-    # Delete property definition
+    # [EARLY ACCESS] Delete property definition
     api_response = api_instance.delete_property_definition(domain, scope, code)
     pprint(api_response)
 except ApiException as e:
@@ -124,7 +124,7 @@ Name | Type | Description  | Notes
 # **get_multiple_property_definitions**
 > ResourceListOfPropertyDefinition get_multiple_property_definitions(property_keys, as_at=as_at, filter=filter)
 
-Get multiple property definitions
+[EARLY ACCESS] Get multiple property definitions
 
 Retrieve the definition of one or more specified properties.
 
@@ -148,7 +148,7 @@ as_at = '2013-10-20T19:20:30+01:00' # datetime | The asAt datetime at which to r
 filter = 'filter_example' # str | Expression to filter the result set. (optional)
 
 try:
-    # Get multiple property definitions
+    # [EARLY ACCESS] Get multiple property definitions
     api_response = api_instance.get_multiple_property_definitions(property_keys, as_at=as_at, filter=filter)
     pprint(api_response)
 except ApiException as e:
@@ -181,7 +181,7 @@ Name | Type | Description  | Notes
 # **get_property_definition**
 > PropertyDefinition get_property_definition(domain, scope, code, as_at=as_at)
 
-Get property definition
+[EARLY ACCESS] Get property definition
 
 Retrieve the definition of the specified property.
 
@@ -206,7 +206,7 @@ code = 'code_example' # str | The code of the specified property. Together with 
 as_at = '2013-10-20T19:20:30+01:00' # datetime | The asAt datetime at which to retrieve the property definition. (optional)
 
 try:
-    # Get property definition
+    # [EARLY ACCESS] Get property definition
     api_response = api_instance.get_property_definition(domain, scope, code, as_at=as_at)
     pprint(api_response)
 except ApiException as e:
@@ -240,7 +240,7 @@ Name | Type | Description  | Notes
 # **update_property_definition**
 > PropertyDefinition update_property_definition(domain, scope, code, definition=definition)
 
-Update property definition
+[EARLY ACCESS] Update property definition
 
 Update display name of specified existing property.
 
@@ -265,7 +265,7 @@ code = 'code_example' # str | The code of the property being updated. Together w
 definition = lusid.UpdatePropertyDefinitionRequest() # UpdatePropertyDefinitionRequest | The updated definition of the property. (optional)
 
 try:
-    # Update property definition
+    # [EARLY ACCESS] Update property definition
     api_response = api_instance.update_property_definition(domain, scope, code, definition=definition)
     pprint(api_response)
 except ApiException as e:
