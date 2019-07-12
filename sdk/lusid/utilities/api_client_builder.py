@@ -26,6 +26,7 @@ class ApiClientBuilder:
         password_raw = os.getenv("FBN_PASSWORD", None)
         client_id_raw = os.getenv("FBN_CLIENT_ID", None)
         client_secret_raw = os.getenv("FBN_CLIENT_SECRET", None)
+        app_name = os.getenv("FBN_APP_NAME", "")
 
         # If any of the environmental variables are missing use a local secrets file
         if token_url is None or username is None or password_raw is None or client_id_raw is None \
@@ -41,6 +42,7 @@ class ApiClientBuilder:
             client_id = pathname2url(os.getenv("FBN_CLIENT_ID", config["api"]["clientId"]))
             client_secret = pathname2url(os.getenv("FBN_CLIENT_SECRET", config["api"]["clientSecret"]))
             api_url = os.getenv("FBN_LUSID_API_URL", config["api"]["apiUrl"])
+            app_name = os.getenv("FBN_APP_NAME", config["api"].get("applicationName", ""))
 
         else:
             password = pathname2url(password_raw)
@@ -67,6 +69,6 @@ class ApiClientBuilder:
         config.access_token = api_token
         config.host = api_url
 
-        return lusid.ApiClient(config)
+        return lusid.ApiClient(config, header_name="X-LUSID-Application", header_value=app_name)
 
 
