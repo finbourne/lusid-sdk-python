@@ -10,7 +10,8 @@ script:
     fbn_password="MASTER_FBN_PASSWORD"
     fbn_clientid="MASTER_FBN_CLIENT_ID"
     fbn_client_secret="MASTER_FBN_CLIENT_SECRET"
-    fbn_lusid_api_url="MASTER_FBN_LUSID_API_URL"    
+    fbn_lusid_api_url="MASTER_FBN_LUSID_API_URL"  
+    fbn_app_name="MASTER_FBN_APP_NAME"  
   else
     fbn_token_url="DEVELOP_FBN_TOKEN_URL"
     fbn_username="DEVELOP_FBN_USERNAME"
@@ -18,6 +19,7 @@ script:
     fbn_clientid="DEVELOP_FBN_CLIENT_ID"
     fbn_client_secret="DEVELOP_FBN_CLIENT_SECRET"
     fbn_lusid_api_url="DEVELOP_FBN_LUSID_API_URL"
+    fbn_app_name="DEVELOP_FBN_APP_NAME"
   fi
 
   cd sdk
@@ -29,6 +31,7 @@ script:
     -e FBN_CLIENT_ID=${!fbn_clientid} \
     -e FBN_CLIENT_SECRET=${!fbn_client_secret} \
     -e FBN_LUSID_API_URL=${!fbn_lusid_api_url} \
+    -e FBN_APP_NAME=${!fbn_app_name} \
     -v $(pwd):/usr/src/ \
     finbourne/lusid-sdk-python-test
 
