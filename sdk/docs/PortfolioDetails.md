@@ -3,10 +3,10 @@
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**href** | **str** |  | [optional] 
-**origin_portfolio_id** | [**ResourceId**](ResourceId.md) |  | [optional] 
-**version** | [**Version**](Version.md) |  | [optional] 
-**base_currency** | **str** |  | [optional] 
+**href** | **str** | The specifc Uniform Resource Identifier (URI) for this resource at the requested effective and asAt datetime. | [optional] 
+**origin_portfolio_id** | [**ResourceId**](ResourceId.md) |  | 
+**version** | [**Version**](Version.md) |  | 
+**base_currency** | **str** | The base currency of the transaction portfolio. | 
 **corporate_action_source_id** | [**ResourceId**](ResourceId.md) |  | [optional] 
 **sub_holding_keys** | **list[str]** |  | [optional] 
 **links** | [**list[Link]**](Link.md) |  | [optional] 

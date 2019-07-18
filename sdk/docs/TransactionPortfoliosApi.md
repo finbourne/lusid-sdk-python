@@ -28,7 +28,7 @@ Method | HTTP request | Description
 
 [EARLY ACCESS] Add transaction property
 
-Upsert one or more transaction properties to a single transaction in a transaction portfolio.
+Update or insert one or more transaction properties to a single transaction in a transaction portfolio.  Each property will be updated if it already exists and inserted if it does not.
 
 ### Example
 
@@ -47,8 +47,8 @@ configuration.access_token = 'YOUR_ACCESS_TOKEN'
 api_instance = lusid.TransactionPortfoliosApi(lusid.ApiClient(configuration))
 scope = 'scope_example' # str | The scope of the transaction portfolio.
 code = 'code_example' # str | The code of the transaction portfolio. Together with the scope this uniquely identifies              the transaction portfolio.
-transaction_id = 'transaction_id_example' # str | The unique id of the transaction to upsert properties against.
-transaction_properties = {'key': lusid.PerpetualPropertyValue()} # dict(str, PerpetualPropertyValue) | The properties with their associated values to upsert onto the              transaction.
+transaction_id = 'transaction_id_example' # str | The unique id of the transaction to update or insert properties against.
+transaction_properties = {'key': lusid.PerpetualPropertyValue()} # dict(str, PerpetualPropertyValue) | The properties with their associated values to update or insert onto the              transaction.
 
 try:
     # [EARLY ACCESS] Add transaction property
@@ -64,8 +64,8 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **scope** | **str**| The scope of the transaction portfolio. | 
  **code** | **str**| The code of the transaction portfolio. Together with the scope this uniquely identifies              the transaction portfolio. | 
- **transaction_id** | **str**| The unique id of the transaction to upsert properties against. | 
- **transaction_properties** | [**dict(str, PerpetualPropertyValue)**](PerpetualPropertyValue.md)| The properties with their associated values to upsert onto the              transaction. | 
+ **transaction_id** | **str**| The unique id of the transaction to update or insert properties against. | 
+ **transaction_properties** | [**dict(str, PerpetualPropertyValue)**](PerpetualPropertyValue.md)| The properties with their associated values to update or insert onto the              transaction. | 
 
 ### Return type
 
@@ -87,7 +87,7 @@ Name | Type | Description  | Notes
 
 [EARLY ACCESS] Adjust holdings
 
-Adjust one or more holdings of the specified transaction portfolio to the provided targets. LUSID will  automatically construct adjustment transactions to ensure that the holdings which have been adjusted are  always set to the provided targets for the given effectiveAt datetime. Read more about the difference between  adjusting and setting holdings here https://support.lusid.com/how-do-i-adjust-my-holdings.
+Adjust one or more holdings of the specified transaction portfolio to the provided targets. LUSID will  automatically construct adjustment transactions to ensure that the holdings which have been adjusted are  always set to the provided targets for the specified effective datetime. Read more about the difference between  adjusting and setting holdings here https://support.lusid.com/how-do-i-adjust-my-holdings.
 
 ### Example
 
@@ -104,9 +104,9 @@ configuration.access_token = 'YOUR_ACCESS_TOKEN'
 
 # create an instance of the API class
 api_instance = lusid.TransactionPortfoliosApi(lusid.ApiClient(configuration))
-scope = 'scope_example' # str | The scope of the portfolio
+scope = 'scope_example' # str | The scope of the transaction portfolio.
 code = 'code_example' # str | The code of the transaction portfolio. Together with the scope this uniquely identifies              the transaction portfolio.
-effective_at = 'effective_at_example' # str | The effectiveAt datetime at which the holdings should be set to the provided targets.
+effective_at = 'effective_at_example' # str | The effective datetime at which the holdings should be set to the provided targets.
 holding_adjustments = None # list[AdjustHoldingRequest] | The selected set of holdings to adjust to the provided targets for the              transaction portfolio. (optional)
 
 try:
@@ -121,9 +121,9 @@ except ApiException as e:
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **scope** | **str**| The scope of the portfolio | 
+ **scope** | **str**| The scope of the transaction portfolio. | 
  **code** | **str**| The code of the transaction portfolio. Together with the scope this uniquely identifies              the transaction portfolio. | 
- **effective_at** | **str**| The effectiveAt datetime at which the holdings should be set to the provided targets. | 
+ **effective_at** | **str**| The effective datetime at which the holdings should be set to the provided targets. | 
  **holding_adjustments** | [**list[AdjustHoldingRequest]**](list.md)| The selected set of holdings to adjust to the provided targets for the              transaction portfolio. | [optional] 
 
 ### Return type
@@ -146,7 +146,7 @@ Name | Type | Description  | Notes
 
 [EARLY ACCESS] Build transactions
 
-Builds and returns all transactions that affect the holdings of a portfolio over a given interval of  effectiveAt time into a set of output transactions. This includes transactions automatically generated by  LUSID such as holding adjustments.
+Builds and returns all transactions that affect the holdings of a portfolio over a given interval of  effective time into a set of output transactions. This includes transactions automatically generated by  LUSID such as holding adjustments.
 
 ### Example
 
@@ -166,7 +166,7 @@ api_instance = lusid.TransactionPortfoliosApi(lusid.ApiClient(configuration))
 scope = 'scope_example' # str | The scope of the transaction portfolio.
 code = 'code_example' # str | The code of the transaction portfolio. Together with the scope this uniquely identifies              the transaction portfolio.
 parameters = lusid.TransactionQueryParameters() # TransactionQueryParameters | The query parameters which control how the output transactions are built.
-as_at = '2013-10-20T19:20:30+01:00' # datetime | The asAt datetime at which to build the transactions. Defaults to the current              datetime if not specified. (optional)
+as_at = '2013-10-20T19:20:30+01:00' # datetime | The asAt datetime at which to build the transactions. Defaults to return the latest              version of each transaction if not specified. (optional)
 property_keys = ['property_keys_example'] # list[str] | A list of property keys from the \"Instrument\" or \"Trade\" domain to decorate onto              the transactions. These take the format {domain}/{scope}/{code} e.g. \"Instrument/system/Name\" or              \"Trade/strategy/quantsignal\". (optional)
 filter = 'filter_example' # str | Expression to filter the result set. Read more about filtering results from LUSID here https://support.lusid.com/filtering-results-from-lusid. (optional)
 
@@ -185,7 +185,7 @@ Name | Type | Description  | Notes
  **scope** | **str**| The scope of the transaction portfolio. | 
  **code** | **str**| The code of the transaction portfolio. Together with the scope this uniquely identifies              the transaction portfolio. | 
  **parameters** | [**TransactionQueryParameters**](TransactionQueryParameters.md)| The query parameters which control how the output transactions are built. | 
- **as_at** | **datetime**| The asAt datetime at which to build the transactions. Defaults to the current              datetime if not specified. | [optional] 
+ **as_at** | **datetime**| The asAt datetime at which to build the transactions. Defaults to return the latest              version of each transaction if not specified. | [optional] 
  **property_keys** | [**list[str]**](str.md)| A list of property keys from the \&quot;Instrument\&quot; or \&quot;Trade\&quot; domain to decorate onto              the transactions. These take the format {domain}/{scope}/{code} e.g. \&quot;Instrument/system/Name\&quot; or              \&quot;Trade/strategy/quantsignal\&quot;. | [optional] 
  **filter** | **str**| Expression to filter the result set. Read more about filtering results from LUSID here https://support.lusid.com/filtering-results-from-lusid. | [optional] 
 
@@ -209,7 +209,7 @@ Name | Type | Description  | Notes
 
 [EARLY ACCESS] Cancel adjust holdings
 
-Cancel all previous holding adjustments made on the specified transaction portfolio for a given effectiveAt  datetime. This should be used to undo holding adjustments made via set holdings or adjust holdings.
+Cancel all previous holding adjustments made on the specified transaction portfolio for a specified effective  datetime. This should be used to undo holding adjustments made via set holdings or adjust holdings.
 
 ### Example
 
@@ -228,7 +228,7 @@ configuration.access_token = 'YOUR_ACCESS_TOKEN'
 api_instance = lusid.TransactionPortfoliosApi(lusid.ApiClient(configuration))
 scope = 'scope_example' # str | The scope of the transaction portfolio.
 code = 'code_example' # str | The code of the transaction portfolio. Together with the scope this uniquely identifies              the transaction portfolio.
-effective_at = 'effective_at_example' # str | The effectiveAt datetime at which the holding adjustments should be undone.
+effective_at = 'effective_at_example' # str | The effective datetime at which the holding adjustments should be undone.
 
 try:
     # [EARLY ACCESS] Cancel adjust holdings
@@ -244,7 +244,7 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **scope** | **str**| The scope of the transaction portfolio. | 
  **code** | **str**| The code of the transaction portfolio. Together with the scope this uniquely identifies              the transaction portfolio. | 
- **effective_at** | **str**| The effectiveAt datetime at which the holding adjustments should be undone. | 
+ **effective_at** | **str**| The effective datetime at which the holding adjustments should be undone. | 
 
 ### Return type
 
@@ -266,7 +266,7 @@ Name | Type | Description  | Notes
 
 [EARLY ACCESS] Cancel executions
 
-Cancel one or more executions from a transaction portfolio.
+Cancel one or more executions which exist in a specified transaction portfolio.
 
 ### Example
 
@@ -513,8 +513,8 @@ configuration.access_token = 'YOUR_ACCESS_TOKEN'
 api_instance = lusid.TransactionPortfoliosApi(lusid.ApiClient(configuration))
 scope = 'scope_example' # str | The scope of the transaction portfolio to retrieve the details for.
 code = 'code_example' # str | The code of the transaction portfolio to retrieve the details for. Together with the              scope this uniquely identifies the transaction portfolio.
-effective_at = 'effective_at_example' # str | The effectiveAt datetime at which to retrieve the details of the transaction              portfolio. Defaults to the current datetime if not specified. (optional)
-as_at = '2013-10-20T19:20:30+01:00' # datetime | The asAt datetime at which to retrieve the details of the transaction portfolio. Defaults              to the current datetime if not specified. (optional)
+effective_at = 'effective_at_example' # str | The effective datetime at which to retrieve the details of the transaction              portfolio. Defaults to the current LUSID system datetime if not specified. (optional)
+as_at = '2013-10-20T19:20:30+01:00' # datetime | The asAt datetime at which to retrieve the details of the transaction portfolio. Defaults              to return the latest version of the details if not specified. (optional)
 
 try:
     # [EARLY ACCESS] Get details
@@ -530,8 +530,8 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **scope** | **str**| The scope of the transaction portfolio to retrieve the details for. | 
  **code** | **str**| The code of the transaction portfolio to retrieve the details for. Together with the              scope this uniquely identifies the transaction portfolio. | 
- **effective_at** | **str**| The effectiveAt datetime at which to retrieve the details of the transaction              portfolio. Defaults to the current datetime if not specified. | [optional] 
- **as_at** | **datetime**| The asAt datetime at which to retrieve the details of the transaction portfolio. Defaults              to the current datetime if not specified. | [optional] 
+ **effective_at** | **str**| The effective datetime at which to retrieve the details of the transaction              portfolio. Defaults to the current LUSID system datetime if not specified. | [optional] 
+ **as_at** | **datetime**| The asAt datetime at which to retrieve the details of the transaction portfolio. Defaults              to return the latest version of the details if not specified. | [optional] 
 
 ### Return type
 
@@ -573,8 +573,8 @@ api_instance = lusid.TransactionPortfoliosApi(lusid.ApiClient(configuration))
 scope = 'scope_example' # str | The scope of the transaction portfolio.
 code = 'code_example' # str | The code of the transaction portfolio. Together with the scope this uniquely identifies              the transaction portfolio.
 by_taxlots = True # bool | Whether or not to expand the holdings to return the underlying tax-lots. Defaults to              False. (optional)
-effective_at = 'effective_at_example' # str | The effectiveAt datetime at which to retrieve the holdings of the transaction              portfolio. Defaults to the current datetime if not specified. (optional)
-as_at = '2013-10-20T19:20:30+01:00' # datetime | The asAt datetime at which to retrieve the holdings of the transaction portfolio. Defaults              to the current datetime if not specified. (optional)
+effective_at = 'effective_at_example' # str | The effective datetime at which to retrieve the holdings of the transaction              portfolio. Defaults to the current LUSID system datetime if not specified. (optional)
+as_at = '2013-10-20T19:20:30+01:00' # datetime | The asAt datetime at which to retrieve the holdings of the transaction portfolio. Defaults              to return the latest version of the holdings if not specified. (optional)
 filter = 'filter_example' # str | Expression to filter the result set. Read more about filtering results from LUSID here https://support.lusid.com/filtering-results-from-lusid. (optional)
 property_keys = ['property_keys_example'] # list[str] | A list of property keys from the \"Instrument\" or \"Holding\" domain to decorate onto              the holdings. These take the format {domain}/{scope}/{code} e.g. \"Instrument/system/Name\" or \"Holding/system/Cost\". (optional)
 
@@ -593,8 +593,8 @@ Name | Type | Description  | Notes
  **scope** | **str**| The scope of the transaction portfolio. | 
  **code** | **str**| The code of the transaction portfolio. Together with the scope this uniquely identifies              the transaction portfolio. | 
  **by_taxlots** | **bool**| Whether or not to expand the holdings to return the underlying tax-lots. Defaults to              False. | [optional] 
- **effective_at** | **str**| The effectiveAt datetime at which to retrieve the holdings of the transaction              portfolio. Defaults to the current datetime if not specified. | [optional] 
- **as_at** | **datetime**| The asAt datetime at which to retrieve the holdings of the transaction portfolio. Defaults              to the current datetime if not specified. | [optional] 
+ **effective_at** | **str**| The effective datetime at which to retrieve the holdings of the transaction              portfolio. Defaults to the current LUSID system datetime if not specified. | [optional] 
+ **as_at** | **datetime**| The asAt datetime at which to retrieve the holdings of the transaction portfolio. Defaults              to return the latest version of the holdings if not specified. | [optional] 
  **filter** | **str**| Expression to filter the result set. Read more about filtering results from LUSID here https://support.lusid.com/filtering-results-from-lusid. | [optional] 
  **property_keys** | [**list[str]**](str.md)| A list of property keys from the \&quot;Instrument\&quot; or \&quot;Holding\&quot; domain to decorate onto              the holdings. These take the format {domain}/{scope}/{code} e.g. \&quot;Instrument/system/Name\&quot; or \&quot;Holding/system/Cost\&quot;. | [optional] 
 
@@ -618,7 +618,7 @@ Name | Type | Description  | Notes
 
 [EARLY ACCESS] Get holdings adjustment
 
-Get a holdings adjustment made to a transaction portfolio at a specific effectiveAt datetime. Note that a  holdings adjustment will only be returned if one exists for the specified effectiveAt datetime.
+Get a holdings adjustment made to a transaction portfolio at a specific effective datetime. Note that a  holdings adjustment will only be returned if one exists for the specified effective datetime.
 
 ### Example
 
@@ -637,8 +637,8 @@ configuration.access_token = 'YOUR_ACCESS_TOKEN'
 api_instance = lusid.TransactionPortfoliosApi(lusid.ApiClient(configuration))
 scope = 'scope_example' # str | The scope of the transaction portfolio.
 code = 'code_example' # str | The code of the transaction portfolio. Together with the scope this uniquely identifies              the transaction portfolio.
-effective_at = 'effective_at_example' # str | The effectiveAt datetime of the holdings adjustment.
-as_at = '2013-10-20T19:20:30+01:00' # datetime | The asAt datetime at which to retrieve the holdings adjustment. Defaults to the current              datetime if not specified. (optional)
+effective_at = 'effective_at_example' # str | The effective datetime of the holdings adjustment.
+as_at = '2013-10-20T19:20:30+01:00' # datetime | The asAt datetime at which to retrieve the holdings adjustment. Defaults to the return the latest              version of the holdings adjustment if not specified. (optional)
 
 try:
     # [EARLY ACCESS] Get holdings adjustment
@@ -654,8 +654,8 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **scope** | **str**| The scope of the transaction portfolio. | 
  **code** | **str**| The code of the transaction portfolio. Together with the scope this uniquely identifies              the transaction portfolio. | 
- **effective_at** | **str**| The effectiveAt datetime of the holdings adjustment. | 
- **as_at** | **datetime**| The asAt datetime at which to retrieve the holdings adjustment. Defaults to the current              datetime if not specified. | [optional] 
+ **effective_at** | **str**| The effective datetime of the holdings adjustment. | 
+ **as_at** | **datetime**| The asAt datetime at which to retrieve the holdings adjustment. Defaults to the return the latest              version of the holdings adjustment if not specified. | [optional] 
 
 ### Return type
 
@@ -677,7 +677,7 @@ Name | Type | Description  | Notes
 
 [EARLY ACCESS] Get transactions
 
-Get the transactions from the specified transaction portfolio over a given interval of effectiveAt time.     When the specified portfolio is a derived transaction portfolio, the returned set of transactions is the  union set of all transactions of the parent (and ancestors) and the specified derived transaction portfolio.
+Get transactions from the specified transaction portfolio over a given interval of effective time.     When the specified portfolio is a derived transaction portfolio, the returned set of transactions is the  union set of all transactions of the parent (and any grandparents etc.) and the specified derived transaction portfolio itself.
 
 ### Example
 
@@ -696,9 +696,9 @@ configuration.access_token = 'YOUR_ACCESS_TOKEN'
 api_instance = lusid.TransactionPortfoliosApi(lusid.ApiClient(configuration))
 scope = 'scope_example' # str | The scope of the transaction portfolio.
 code = 'code_example' # str | The code of the transaction portfolio. Together with the scope this uniquely identifies              the transaction portfolio.
-from_transaction_date = 'from_transaction_date_example' # str | The lower bound effectiveAt datetime (inclusive) from which to retrieve the transactions.              There is no lower bound if this is not specified. (optional)
-to_transaction_date = 'to_transaction_date_example' # str | The upper bound effectiveAt datetime (inclusive) from which to retrieve transactions.              There is no upper bound if this is not specified. (optional)
-as_at = '2013-10-20T19:20:30+01:00' # datetime | The asAt datetime at which to retrieve the transactions. Defaults to the current              datetime if not specified. (optional)
+from_transaction_date = 'from_transaction_date_example' # str | The lower bound effective datetime (inclusive) from which to retrieve the transactions.              There is no lower bound if this is not specified. (optional)
+to_transaction_date = 'to_transaction_date_example' # str | The upper bound effective datetime (inclusive) from which to retrieve transactions.              There is no upper bound if this is not specified. (optional)
+as_at = '2013-10-20T19:20:30+01:00' # datetime | The asAt datetime at which to retrieve the transactions. Defaults to return the latest version              of each transaction if not specified. (optional)
 property_keys = ['property_keys_example'] # list[str] | A list of property keys from the \"Instrument\" or \"Trade\" domain to decorate onto              the transactions. These take the format {domain}/{scope}/{code} e.g. \"Instrument/system/Name\" or              \"Trade/strategy/quantsignal\". (optional)
 filter = 'filter_example' # str | Expression to filter the result set. Read more about filtering results from LUSID here https://support.lusid.com/filtering-results-from-lusid. (optional)
 
@@ -716,9 +716,9 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **scope** | **str**| The scope of the transaction portfolio. | 
  **code** | **str**| The code of the transaction portfolio. Together with the scope this uniquely identifies              the transaction portfolio. | 
- **from_transaction_date** | **str**| The lower bound effectiveAt datetime (inclusive) from which to retrieve the transactions.              There is no lower bound if this is not specified. | [optional] 
- **to_transaction_date** | **str**| The upper bound effectiveAt datetime (inclusive) from which to retrieve transactions.              There is no upper bound if this is not specified. | [optional] 
- **as_at** | **datetime**| The asAt datetime at which to retrieve the transactions. Defaults to the current              datetime if not specified. | [optional] 
+ **from_transaction_date** | **str**| The lower bound effective datetime (inclusive) from which to retrieve the transactions.              There is no lower bound if this is not specified. | [optional] 
+ **to_transaction_date** | **str**| The upper bound effective datetime (inclusive) from which to retrieve transactions.              There is no upper bound if this is not specified. | [optional] 
+ **as_at** | **datetime**| The asAt datetime at which to retrieve the transactions. Defaults to return the latest version              of each transaction if not specified. | [optional] 
  **property_keys** | [**list[str]**](str.md)| A list of property keys from the \&quot;Instrument\&quot; or \&quot;Trade\&quot; domain to decorate onto              the transactions. These take the format {domain}/{scope}/{code} e.g. \&quot;Instrument/system/Name\&quot; or              \&quot;Trade/strategy/quantsignal\&quot;. | [optional] 
  **filter** | **str**| Expression to filter the result set. Read more about filtering results from LUSID here https://support.lusid.com/filtering-results-from-lusid. | [optional] 
 
@@ -742,7 +742,7 @@ Name | Type | Description  | Notes
 
 [EARLY ACCESS] List holdings adjustments
 
-List the holdings adjustments made to a transaction portfolio over a given interval of effectiveAt time.
+List the holdings adjustments made to the specified transaction portfolio over a specified interval of effective time.
 
 ### Example
 
@@ -761,9 +761,9 @@ configuration.access_token = 'YOUR_ACCESS_TOKEN'
 api_instance = lusid.TransactionPortfoliosApi(lusid.ApiClient(configuration))
 scope = 'scope_example' # str | The scope of the transaction portfolio.
 code = 'code_example' # str | The code of the transaction portfolio. Together with the scope this uniquely identifies              the transaction portfolio.
-from_effective_at = 'from_effective_at_example' # str | The lower bound effectiveAt datetime (inclusive) from which to retrieve the holdings              adjustments. There is no lower bound if this is not specified. (optional)
-to_effective_at = 'to_effective_at_example' # str | The upper bound effectiveAt datetime (inclusive) from which to retrieve the holdings              adjustments. There is no upper bound if this is not specified. (optional)
-as_at = '2013-10-20T19:20:30+01:00' # datetime | The asAt datetime at which to retrieve the holdings adjustments. Defaults to the              current datetime if not specified. (optional)
+from_effective_at = 'from_effective_at_example' # str | The lower bound effective datetime (inclusive) from which to retrieve the holdings              adjustments. There is no lower bound if this is not specified. (optional)
+to_effective_at = 'to_effective_at_example' # str | The upper bound effective datetime (inclusive) from which to retrieve the holdings              adjustments. There is no upper bound if this is not specified. (optional)
+as_at = '2013-10-20T19:20:30+01:00' # datetime | The asAt datetime at which to retrieve the holdings adjustments. Defaults to return the              latest version of each holding adjustment if not specified. (optional)
 
 try:
     # [EARLY ACCESS] List holdings adjustments
@@ -779,9 +779,9 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **scope** | **str**| The scope of the transaction portfolio. | 
  **code** | **str**| The code of the transaction portfolio. Together with the scope this uniquely identifies              the transaction portfolio. | 
- **from_effective_at** | **str**| The lower bound effectiveAt datetime (inclusive) from which to retrieve the holdings              adjustments. There is no lower bound if this is not specified. | [optional] 
- **to_effective_at** | **str**| The upper bound effectiveAt datetime (inclusive) from which to retrieve the holdings              adjustments. There is no upper bound if this is not specified. | [optional] 
- **as_at** | **datetime**| The asAt datetime at which to retrieve the holdings adjustments. Defaults to the              current datetime if not specified. | [optional] 
+ **from_effective_at** | **str**| The lower bound effective datetime (inclusive) from which to retrieve the holdings              adjustments. There is no lower bound if this is not specified. | [optional] 
+ **to_effective_at** | **str**| The upper bound effective datetime (inclusive) from which to retrieve the holdings              adjustments. There is no upper bound if this is not specified. | [optional] 
+ **as_at** | **datetime**| The asAt datetime at which to retrieve the holdings adjustments. Defaults to return the              latest version of each holding adjustment if not specified. | [optional] 
 
 ### Return type
 
@@ -803,7 +803,7 @@ Name | Type | Description  | Notes
 
 [EARLY ACCESS] Set holdings
 
-Set the holdings of the specified transaction portfolio to the provided targets. LUSID will automatically  construct adjustment transactions to ensure that the entire set of holdings for the transaction portfolio  are always set to the provided targets for the given effectiveAt datetime. Read more about the difference between  adjusting and setting holdings here https://support.lusid.com/how-do-i-adjust-my-holdings.
+Set the holdings of the specified transaction portfolio to the provided targets. LUSID will automatically  construct adjustment transactions to ensure that the entire set of holdings for the transaction portfolio  are always set to the provided targets for the specified effective datetime. Read more about the difference between  adjusting and setting holdings here https://support.lusid.com/how-do-i-adjust-my-holdings.
 
 ### Example
 
@@ -822,7 +822,7 @@ configuration.access_token = 'YOUR_ACCESS_TOKEN'
 api_instance = lusid.TransactionPortfoliosApi(lusid.ApiClient(configuration))
 scope = 'scope_example' # str | The scope of the transaction portfolio.
 code = 'code_example' # str | The code of the transaction portfolio. Together with the scope this uniquely identifies              the transaction portfolio.
-effective_at = 'effective_at_example' # str | The effectiveAt datetime at which the holdings should be set to the provided targets.
+effective_at = 'effective_at_example' # str | The effective datetime at which the holdings should be set to the provided targets.
 holding_adjustments = None # list[AdjustHoldingRequest] | The complete set of target holdings for the transaction portfolio. (optional)
 
 try:
@@ -839,7 +839,7 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **scope** | **str**| The scope of the transaction portfolio. | 
  **code** | **str**| The code of the transaction portfolio. Together with the scope this uniquely identifies              the transaction portfolio. | 
- **effective_at** | **str**| The effectiveAt datetime at which the holdings should be set to the provided targets. | 
+ **effective_at** | **str**| The effective datetime at which the holdings should be set to the provided targets. | 
  **holding_adjustments** | [**list[AdjustHoldingRequest]**](list.md)| The complete set of target holdings for the transaction portfolio. | [optional] 
 
 ### Return type
@@ -862,7 +862,7 @@ Name | Type | Description  | Notes
 
 [EARLY ACCESS] Upsert executions
 
-Upsert executions into the specified transaction portfolio.
+Update or insert executions into the specified transaction portfolio. An execution will be updated  if it already exists and inserted if it does not.
 
 ### Example
 
@@ -881,7 +881,7 @@ configuration.access_token = 'YOUR_ACCESS_TOKEN'
 api_instance = lusid.TransactionPortfoliosApi(lusid.ApiClient(configuration))
 scope = 'scope_example' # str | The scope of the transaction portfolio.
 code = 'code_example' # str | The code of the transaction portfolio. Together with the scope this uniquely identifies              the transaction portfolio.
-executions = None # list[ExecutionRequest] | The executions to be upserted. (optional)
+executions = None # list[ExecutionRequest] | The executions to update or insert. (optional)
 
 try:
     # [EARLY ACCESS] Upsert executions
@@ -897,7 +897,7 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **scope** | **str**| The scope of the transaction portfolio. | 
  **code** | **str**| The code of the transaction portfolio. Together with the scope this uniquely identifies              the transaction portfolio. | 
- **executions** | [**list[ExecutionRequest]**](list.md)| The executions to be upserted. | [optional] 
+ **executions** | [**list[ExecutionRequest]**](list.md)| The executions to update or insert. | [optional] 
 
 ### Return type
 
@@ -919,7 +919,7 @@ Name | Type | Description  | Notes
 
 [EARLY ACCESS] Upsert portfolio details
 
-Upsert details for the specified transaction portfolio.
+Update or insert details for the specified transaction portfolio. The details will be updated  if they already exist and inserted if they do not.
 
 ### Example
 
@@ -936,10 +936,10 @@ configuration.access_token = 'YOUR_ACCESS_TOKEN'
 
 # create an instance of the API class
 api_instance = lusid.TransactionPortfoliosApi(lusid.ApiClient(configuration))
-scope = 'scope_example' # str | The scope of the transaction portfolio to upsert details for.
-code = 'code_example' # str | The code of the transaction portfolio to upsert details for. Together with the              scope this uniquely identifies the transaction portfolio.
-effective_at = 'effective_at_example' # str | The effectiveAt datetime at which the upserted details should take effect. Defaults              to the current datetime if not specified. (optional)
-details = lusid.CreatePortfolioDetails() # CreatePortfolioDetails | The details to upsert to the specified transaction portfolio. (optional)
+scope = 'scope_example' # str | The scope of the transaction portfolio to update or insert details for.
+code = 'code_example' # str | The code of the transaction portfolio to update or insert details for. Together with the              scope this uniquely identifies the transaction portfolio.
+effective_at = 'effective_at_example' # str | The effective datetime at which the updated or inserted details should become valid.              Defaults to the current LUSID system datetime if not specified. (optional)
+details = lusid.CreatePortfolioDetails() # CreatePortfolioDetails | The details to update or insert for the specified transaction portfolio. (optional)
 
 try:
     # [EARLY ACCESS] Upsert portfolio details
@@ -953,10 +953,10 @@ except ApiException as e:
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **scope** | **str**| The scope of the transaction portfolio to upsert details for. | 
- **code** | **str**| The code of the transaction portfolio to upsert details for. Together with the              scope this uniquely identifies the transaction portfolio. | 
- **effective_at** | **str**| The effectiveAt datetime at which the upserted details should take effect. Defaults              to the current datetime if not specified. | [optional] 
- **details** | [**CreatePortfolioDetails**](CreatePortfolioDetails.md)| The details to upsert to the specified transaction portfolio. | [optional] 
+ **scope** | **str**| The scope of the transaction portfolio to update or insert details for. | 
+ **code** | **str**| The code of the transaction portfolio to update or insert details for. Together with the              scope this uniquely identifies the transaction portfolio. | 
+ **effective_at** | **str**| The effective datetime at which the updated or inserted details should become valid.              Defaults to the current LUSID system datetime if not specified. | [optional] 
+ **details** | [**CreatePortfolioDetails**](CreatePortfolioDetails.md)| The details to update or insert for the specified transaction portfolio. | [optional] 
 
 ### Return type
 
@@ -978,7 +978,7 @@ Name | Type | Description  | Notes
 
 [EARLY ACCESS] Upsert transactions
 
-Upsert transactions into the specified transaction portfolio.
+Update or insert transactions into the specified transaction portfolio. A transaction will be updated  if it already exists and inserted if it does not.
 
 ### Example
 
@@ -997,7 +997,7 @@ configuration.access_token = 'YOUR_ACCESS_TOKEN'
 api_instance = lusid.TransactionPortfoliosApi(lusid.ApiClient(configuration))
 scope = 'scope_example' # str | The scope of the transaction portfolio.
 code = 'code_example' # str | The code of the transaction portfolio. Together with the scope this uniquely identifies              the transaction portfolio.
-transactions = None # list[TransactionRequest] | The transactions to be upserted. (optional)
+transactions = None # list[TransactionRequest] | The transactions to be updated or inserted. (optional)
 
 try:
     # [EARLY ACCESS] Upsert transactions
@@ -1013,7 +1013,7 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **scope** | **str**| The scope of the transaction portfolio. | 
  **code** | **str**| The code of the transaction portfolio. Together with the scope this uniquely identifies              the transaction portfolio. | 
- **transactions** | [**list[TransactionRequest]**](list.md)| The transactions to be upserted. | [optional] 
+ **transactions** | [**list[TransactionRequest]**](list.md)| The transactions to be updated or inserted. | [optional] 
 
 ### Return type
 

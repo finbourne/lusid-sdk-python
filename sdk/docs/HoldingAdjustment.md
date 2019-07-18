@@ -3,11 +3,11 @@
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**instrument_identifiers** | **dict(str, str)** | Unique instrument identifiers | [optional] 
-**instrument_uid** | **str** | LUSID&#39;s internal unique instrument identifier, resolved from the instrument identifiers | 
-**sub_holding_keys** | [**list[PerpetualProperty]**](PerpetualProperty.md) | Key fields to uniquely index the sub holdings of a instrument | [optional] 
-**properties** | [**list[PerpetualProperty]**](PerpetualProperty.md) | Arbitrary properties to store with the holding | [optional] 
-**tax_lots** | [**list[TargetTaxLot]**](TargetTaxLot.md) | 1 or more quantity amounts | 
+**instrument_identifiers** | **dict(str, str)** | The set of instrument identifiers that can be used to resolve the holding adjustment to a unique instrument. | [optional] 
+**instrument_uid** | **str** | The unqiue Lusid Instrument Id (LUID) of the instrument that the holding adjustment is in. | 
+**sub_holding_keys** | [**list[PerpetualProperty]**](PerpetualProperty.md) | The set of unique transaction properties and associated values stored with the holding adjustment transactions automatically created by LUSID. Each property will be from the &#39;Trade&#39; domain. | [optional] 
+**properties** | [**list[PerpetualProperty]**](PerpetualProperty.md) | The set of unique holding properties and associated values stored with the target holding. Each property will be from the &#39;Holding&#39; domain. | [optional] 
+**tax_lots** | [**list[TargetTaxLot]**](TargetTaxLot.md) | The tax-lots that together make up the target holding. | 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

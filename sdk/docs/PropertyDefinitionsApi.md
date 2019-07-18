@@ -143,9 +143,9 @@ configuration.access_token = 'YOUR_ACCESS_TOKEN'
 
 # create an instance of the API class
 api_instance = lusid.PropertyDefinitionsApi(lusid.ApiClient(configuration))
-property_keys = ['property_keys_example'] # list[str] | One or more property keys which identify each property that a definition should              be retrieved for. The format for each property key is {domain}/{scope}/{code}, e.g. \"Instrument/system/Name\".
-as_at = '2013-10-20T19:20:30+01:00' # datetime | The asAt datetime at which to retrieve the property definition/s. (optional)
-filter = 'filter_example' # str | Expression to filter the result set. (optional)
+property_keys = ['property_keys_example'] # list[str] | One or more property keys which identify each property that a definition should              be retrieved for. The format for each property key is {domain}/{scope}/{code}, e.g. 'Portfolio/Manager/Id'.
+as_at = '2013-10-20T19:20:30+01:00' # datetime | The asAt datetime at which to retrieve the property definitions. Defaults to return              the latest version of each definition if not specified. (optional)
+filter = 'filter_example' # str | Expression to filter the result set. Read more about filtering results from LUSID here https://support.lusid.com/filtering-results-from-lusid. (optional)
 
 try:
     # [EARLY ACCESS] Get multiple property definitions
@@ -159,9 +159,9 @@ except ApiException as e:
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **property_keys** | [**list[str]**](str.md)| One or more property keys which identify each property that a definition should              be retrieved for. The format for each property key is {domain}/{scope}/{code}, e.g. \&quot;Instrument/system/Name\&quot;. | 
- **as_at** | **datetime**| The asAt datetime at which to retrieve the property definition/s. | [optional] 
- **filter** | **str**| Expression to filter the result set. | [optional] 
+ **property_keys** | [**list[str]**](str.md)| One or more property keys which identify each property that a definition should              be retrieved for. The format for each property key is {domain}/{scope}/{code}, e.g. &#39;Portfolio/Manager/Id&#39;. | 
+ **as_at** | **datetime**| The asAt datetime at which to retrieve the property definitions. Defaults to return              the latest version of each definition if not specified. | [optional] 
+ **filter** | **str**| Expression to filter the result set. Read more about filtering results from LUSID here https://support.lusid.com/filtering-results-from-lusid. | [optional] 
 
 ### Return type
 
@@ -183,7 +183,7 @@ Name | Type | Description  | Notes
 
 [EARLY ACCESS] Get property definition
 
-Retrieve the definition of the specified property.
+Retrieve the definition of a specified property.
 
 ### Example
 
@@ -203,7 +203,7 @@ api_instance = lusid.PropertyDefinitionsApi(lusid.ApiClient(configuration))
 domain = 'domain_example' # str | The domain of the specified property.
 scope = 'scope_example' # str | The scope of the specified property.
 code = 'code_example' # str | The code of the specified property. Together with the domain and scope this uniquely              identifies the property.
-as_at = '2013-10-20T19:20:30+01:00' # datetime | The asAt datetime at which to retrieve the property definition. (optional)
+as_at = '2013-10-20T19:20:30+01:00' # datetime | The asAt datetime at which to retrieve the property definition. Defaults to return              the latest version of the definition if not specified. (optional)
 
 try:
     # [EARLY ACCESS] Get property definition
@@ -220,7 +220,7 @@ Name | Type | Description  | Notes
  **domain** | **str**| The domain of the specified property. | 
  **scope** | **str**| The scope of the specified property. | 
  **code** | **str**| The code of the specified property. Together with the domain and scope this uniquely              identifies the property. | 
- **as_at** | **datetime**| The asAt datetime at which to retrieve the property definition. | [optional] 
+ **as_at** | **datetime**| The asAt datetime at which to retrieve the property definition. Defaults to return              the latest version of the definition if not specified. | [optional] 
 
 ### Return type
 
@@ -242,7 +242,7 @@ Name | Type | Description  | Notes
 
 [EARLY ACCESS] Update property definition
 
-Update display name of specified existing property.
+Update the definition of a specified existing property. Not all elements within a property definition  are modifiable due to the potential implications for values already stored against the property.
 
 ### Example
 

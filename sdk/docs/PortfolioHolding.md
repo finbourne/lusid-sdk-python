@@ -3,12 +3,12 @@
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**instrument_uid** | **str** | Unique instrument identifier | 
-**sub_holding_keys** | [**list[PerpetualProperty]**](PerpetualProperty.md) |  | [optional] 
-**properties** | [**list[ModelProperty]**](ModelProperty.md) |  | [optional] 
-**holding_type** | **str** | Type of holding, eg Position, Balance, CashCommitment, Receivable, ForwardFX | 
-**units** | **float** | Quantity of holding | 
-**settled_units** | **float** | Settled quantity of holding | 
+**instrument_uid** | **str** | The unqiue Lusid Instrument Id (LUID) of the instrument that the holding is in. | 
+**sub_holding_keys** | [**list[PerpetualProperty]**](PerpetualProperty.md) | The sub-holding properties which identify the holding. Each property will be from the &#39;Trade&#39; domain. These are configured when a transaction portfolio is created. | [optional] 
+**properties** | [**list[ModelProperty]**](ModelProperty.md) | The properties which have been requested to be decorated onto the holding. These will be from the &#39;Instrument&#39; or &#39;Holding&#39; domain. | [optional] 
+**holding_type** | **str** | The type of the holding e.g. Position, Balance, CashCommitment, Receivable, ForwardFX etc. | 
+**units** | **float** | The total number of units of the holding. | 
+**settled_units** | **float** | The total number of settled units of the holding. | 
 **cost** | [**CurrencyAndAmount**](CurrencyAndAmount.md) |  | 
 **cost_portfolio_ccy** | [**CurrencyAndAmount**](CurrencyAndAmount.md) |  | 
 **transaction** | [**Transaction**](Transaction.md) |  | [optional] 

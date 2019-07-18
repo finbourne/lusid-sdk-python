@@ -3,9 +3,9 @@
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**href** | **str** |  | [optional] 
-**values** | [**dict(str, Instrument)**](Instrument.md) | The collection of upserted instruments with their latest parameters. | [optional] 
-**failed** | [**dict(str, ErrorDetail)**](ErrorDetail.md) | If any instruments failed to be upserted, they will be listed in &#39;Failed&#39;, along  with a reason why. | [optional] 
+**href** | **str** | The specifc Uniform Resource Identifier (URI) for this resource at the requested effective and asAt datetime. | [optional] 
+**values** | [**dict(str, Instrument)**](Instrument.md) | The instruments which have been successfully updated or inserted. | [optional] 
+**failed** | [**dict(str, ErrorDetail)**](ErrorDetail.md) | The instruments that could not be updated or inserted along with a reason for their failure. | [optional] 
 **links** | [**list[Link]**](Link.md) |  | [optional] 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
