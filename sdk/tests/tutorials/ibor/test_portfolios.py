@@ -144,7 +144,7 @@ class Portfolios(unittest.TestCase):
         property_definition = models.CreatePropertyDefinitionRequest(
 
             # The domain the property is to be applied to
-            domain="Trade",
+            domain="Transaction",
 
             # the scope the property will be created in
             scope=TestDataUtilities.tutorials_scope,
