@@ -541,7 +541,7 @@ configuration.access_token = 'YOUR_ACCESS_TOKEN'
 api_instance = lusid.PortfoliosApi(lusid.ApiClient(configuration))
 scope = 'scope_example' # str | The scope of the portfolio
 code = 'code_example' # str | The code of the portfolio
-portfolio_properties = {'key': lusid.PropertyValue()} # dict(str, PropertyValue) | The property values to be upserted to the portfolio. Time variant properties must have an EffectiveFrom date. (optional)
+portfolio_properties = {'key': lusid.ModelProperty()} # dict(str, ModelProperty) | The property values to be upserted to the portfolio. Time variant properties must have an EffectiveFrom date. (optional)
 
 try:
     # [EARLY ACCESS] Upsert portfolio properties
@@ -557,7 +557,7 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **scope** | **str**| The scope of the portfolio | 
  **code** | **str**| The code of the portfolio | 
- **portfolio_properties** | [**dict(str, PropertyValue)**](PropertyValue.md)| The property values to be upserted to the portfolio. Time variant properties must have an EffectiveFrom date. | [optional] 
+ **portfolio_properties** | [**dict(str, ModelProperty)**](ModelProperty.md)| The property values to be upserted to the portfolio. Time variant properties must have an EffectiveFrom date. | [optional] 
 
 ### Return type
 

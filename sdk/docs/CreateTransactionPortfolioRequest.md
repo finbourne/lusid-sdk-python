@@ -11,7 +11,7 @@ Name | Type | Description | Notes
 **corporate_action_source_id** | [**ResourceId**](ResourceId.md) |  | [optional] 
 **accounting_method** | **str** | Determines the accounting treatment given to the transaction portfolio&#39;s tax lots. | [optional] 
 **sub_holding_keys** | **list[str]** | A set of unique transaction properties to group the transaction portfolio&#39;s holdings by. Each property must be from the &#39;Transaction&#39; domain and should be identified by its key which has the format {domain}/{scope}/{code}, e.g. &#39;Transaction/strategies/quantsignal&#39;. | [optional] 
-**properties** | [**dict(str, PropertyValue)**](PropertyValue.md) | A set of unique portfolio properties to add to the transaction portfolio. Each property must be from the &#39;Portfolio&#39; domain and should be identified by its key which has the format {domain}/{scope}/{code}, e.g. &#39;Portfolio/Manager/Id&#39;. These properties must be pre-defined. | [optional] 
+**properties** | [**dict(str, ModelProperty)**](ModelProperty.md) | A set of unique portfolio properties to add to the transaction portfolio. Each property must be from the &#39;Portfolio&#39; domain and should be identified by its key which has the format {domain}/{scope}/{code}, e.g. &#39;Portfolio/Manager/Id&#39;. These properties must be pre-defined. | [optional] 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 
