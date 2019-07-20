@@ -73,7 +73,7 @@ class Portfolios(unittest.TestCase):
 
         #  property value
         property_value = "Active"
-        portfolio_property = models.PropertyValue(property_value)
+        portfolio_property = models.ModelProperty(key=property_definition_result.key, value=models.PropertyValue(label_value=property_value))
 
         #  details of the portfolio to be created
         request = models.CreateTransactionPortfolioRequest(display_name="portfolio-{0}".format(guid),
@@ -97,7 +97,7 @@ class Portfolios(unittest.TestCase):
                                                                             portfolio_code)
 
         self.assertEqual(len(portfolio_properties.properties), 1)
-        self.assertEqual(portfolio_properties.properties[property_definition_result.key].value, property_value)
+        self.assertEqual(portfolio_properties.properties[property_definition_result.key].value.label_value, property_value)
 
     def test_add_transaction_to_portfolio(self):
         # effective date of the portfolio, this is the date the portfolio was created and became live.  All dates/times
