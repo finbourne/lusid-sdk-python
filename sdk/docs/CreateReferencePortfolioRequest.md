@@ -7,7 +7,7 @@ Name | Type | Description | Notes
 **description** | **str** |  | [optional] 
 **code** | **str** |  | 
 **created** | **datetime** |  | [optional] 
-**properties** | [**dict(str, PerpetualPropertyValue)**](PerpetualPropertyValue.md) | Portfolio properties to add to the portfolio | [optional] 
+**properties** | [**dict(str, ModelProperty)**](ModelProperty.md) | Portfolio properties to add to the portfolio | [optional] 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 
