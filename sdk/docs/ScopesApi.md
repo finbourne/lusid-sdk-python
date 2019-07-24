@@ -8,11 +8,11 @@ Method | HTTP request | Description
 
 
 # **list_scopes**
-> ResourceListOfScopeDefinition list_scopes(sort_by=sort_by, start=start, limit=limit, filter=filter, query=query)
+> ResourceListOfScopeDefinition list_scopes(filter=filter)
 
 [EARLY ACCESS] List scopes
 
-List all the scopes
+List all the scopes that contain data.
 
 ### Example
 
@@ -29,15 +29,11 @@ configuration.access_token = 'YOUR_ACCESS_TOKEN'
 
 # create an instance of the API class
 api_instance = lusid.ScopesApi(lusid.ApiClient(configuration))
-sort_by = ['sort_by_example'] # list[str] | Optional. Order the results by these fields. Use use the '-' sign to denote descending order e.g. -MyFieldName (optional)
-start = 56 # int | Optional. When paginating, skip this number of results (optional)
-limit = 56 # int | Optional. When paginating, limit the number of returned results to this many. (optional)
-filter = 'filter_example' # str | Optional. Expression to filter the result set (optional)
-query = 'query_example' # str | Optional. Expression specifying the criteria that the returned portfolios must meet (optional)
+filter = 'filter_example' # str | Expression to filter the result set. Read more about filtering results from LUSID here https://support.lusid.com/filtering-results-from-lusid. (optional)
 
 try:
     # [EARLY ACCESS] List scopes
-    api_response = api_instance.list_scopes(sort_by=sort_by, start=start, limit=limit, filter=filter, query=query)
+    api_response = api_instance.list_scopes(filter=filter)
     pprint(api_response)
 except ApiException as e:
     print("Exception when calling ScopesApi->list_scopes: %s\n" % e)
@@ -47,11 +43,7 @@ except ApiException as e:
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **sort_by** | [**list[str]**](str.md)| Optional. Order the results by these fields. Use use the &#39;-&#39; sign to denote descending order e.g. -MyFieldName | [optional] 
- **start** | **int**| Optional. When paginating, skip this number of results | [optional] 
- **limit** | **int**| Optional. When paginating, limit the number of returned results to this many. | [optional] 
- **filter** | **str**| Optional. Expression to filter the result set | [optional] 
- **query** | **str**| Optional. Expression specifying the criteria that the returned portfolios must meet | [optional] 
+ **filter** | **str**| Expression to filter the result set. Read more about filtering results from LUSID here https://support.lusid.com/filtering-results-from-lusid. | [optional] 
 
 ### Return type
 
