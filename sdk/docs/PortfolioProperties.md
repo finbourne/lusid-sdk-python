@@ -4,7 +4,6 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **href** | **str** |  | [optional] 
-**origin_portfolio_id** | [**ResourceId**](ResourceId.md) |  | [optional] 
 **properties** | [**dict(str, ModelProperty)**](ModelProperty.md) |  | [optional] 
 **version** | [**Version**](Version.md) |  | [optional] 
 **links** | [**list[Link]**](Link.md) |  | [optional] 
