@@ -19,7 +19,7 @@ Name | Type | Description | Notes
 **transaction_currency** | **str** | The transaction currency. | [optional] 
 **properties** | [**list[PerpetualProperty]**](PerpetualProperty.md) | Set of unique transaction properties and associated values to stored with the transaction. Each property will be from the &#39;Transaction&#39; domain. | [optional] 
 **counterparty_id** | **str** | The identifier for the counterparty of the transaction. | [optional] 
-**source** | **str** | The source of the transaction. This is used to look up the appropriate transaction group set in the transaction type configuration. | 
+**source** | **str** | The source of the transaction. This is used to look up the appropriate transaction group set in the transaction type configuration. | [optional] 
 **transaction_status** | **str** | The status of the transaction. | 
 **entry_date_time** | **datetime** | The asAt datetime that the transaction was added to LUSID. | [optional] 
 **cancel_date_time** | **datetime** | If the transaction has been cancelled, the asAt datetime that the transaction was cancelled. | [optional] 
