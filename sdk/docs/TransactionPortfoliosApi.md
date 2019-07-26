@@ -618,7 +618,7 @@ Name | Type | Description  | Notes
 
 [EARLY ACCESS] Get transactions
 
-Get transactions from the specified transaction portfolio over a given interval of effective time.     When the specified portfolio is a derived transaction portfolio, the returned set of transactions is the  union set of all transactions of the parent (and any grandparents etc.) and the specified derived transaction portfolio itself.
+Get transactions from the specified transaction portfolio over a given interval of effective time.     When the specified portfolio is a derived transaction portfolio, the returned set of transactions is the  union set of all transactions of the parent (and any grandparents etc.) and the specified derived transaction portfolio itself.  The maximum number of transactions that this method can get per request is 2,000.
 
 ### Example
 
@@ -978,7 +978,7 @@ Name | Type | Description  | Notes
 
 [EARLY ACCESS] Upsert transactions
 
-Update or insert transactions into the specified transaction portfolio. A transaction will be updated  if it already exists and inserted if it does not.
+Update or insert transactions into the specified transaction portfolio. A transaction will be updated  if it already exists and inserted if it does not.  The maximum number of transactions that this method can upsert per request is 10,000.
 
 ### Example
 
