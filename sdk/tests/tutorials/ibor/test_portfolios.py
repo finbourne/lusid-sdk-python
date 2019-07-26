@@ -169,7 +169,8 @@ class Portfolios(unittest.TestCase):
         # create the portfolio
         portfolio_id = self.test_data_utilities.create_transaction_portfolio(TestDataUtilities.tutorials_scope)
 
-        property_value = "A Trader"
+        property_value_as_string = "A Trader"
+        property_value = models.PropertyValue(property_value_as_string)
 
         #   details of the transaction to be added
         transaction = models.TransactionRequest(
@@ -184,7 +185,7 @@ class Portfolios(unittest.TestCase):
             source="Client",
 
             # add the property to the transaction
-            properties={property_definition_result.key: models.PerpetualPropertyValue(property_value)}
+            properties={property_definition_result.key: models.PerpetualProperty(property_definition_result.key, property_value)}
         )
 
         #   add the transaction
