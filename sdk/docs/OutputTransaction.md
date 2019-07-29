@@ -17,7 +17,7 @@ Name | Type | Description | Notes
 **exchange_rate** | **float** | The exchange rate between the transaction and settlement currency. For example if the transaction currency is in USD and the settlement currency is in GBP this this the USD/GBP rate. | [optional] 
 **transaction_to_portfolio_rate** | **float** | The exchange rate between the transaction and portfolio currency. For example if the transaction currency is in USD and the portfolio currency is in GBP this this the USD/GBP rate. | [optional] 
 **transaction_currency** | **str** | The transaction currency. | [optional] 
-**properties** | [**list[PerpetualProperty]**](PerpetualProperty.md) | Set of unique transaction properties and associated values to stored with the transaction. Each property will be from the &#39;Transaction&#39; domain. | [optional] 
+**properties** | [**dict(str, PerpetualProperty)**](PerpetualProperty.md) | Set of unique transaction properties and associated values to stored with the transaction. Each property will be from the &#39;Transaction&#39; domain. | [optional] 
 **counterparty_id** | **str** | The identifier for the counterparty of the transaction. | [optional] 
 **source** | **str** | The source of the transaction. This is used to look up the appropriate transaction group set in the transaction type configuration. | [optional] 
 **transaction_status** | **str** | The status of the transaction. | [optional] 

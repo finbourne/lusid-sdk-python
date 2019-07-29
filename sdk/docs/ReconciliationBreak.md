@@ -4,7 +4,7 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **instrument_uid** | **str** | Unique instrument identifier | 
-**sub_holding_keys** | [**list[PerpetualProperty]**](PerpetualProperty.md) | Any other properties that comprise the Sub-Holding Key | 
+**sub_holding_keys** | [**dict(str, PerpetualProperty)**](PerpetualProperty.md) | Any other properties that comprise the Sub-Holding Key | 
 **left_units** | **float** | Units from the left hand side | 
 **right_units** | **float** | Units from the right hand side | 
 **difference_units** | **float** | Difference in units | 

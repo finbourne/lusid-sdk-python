@@ -939,7 +939,7 @@ api_instance = lusid.TransactionPortfoliosApi(lusid.ApiClient(configuration))
 scope = 'scope_example' # str | The scope of the transaction portfolio.
 code = 'code_example' # str | The code of the transaction portfolio. Together with the scope this uniquely identifies              the transaction portfolio.
 transaction_id = 'transaction_id_example' # str | The unique id of the transaction to update or insert properties against.
-transaction_properties = {'key': lusid.PerpetualPropertyValue()} # dict(str, PerpetualPropertyValue) | The properties with their associated values to update or insert onto the              transaction.
+transaction_properties = {'key': lusid.PerpetualProperty()} # dict(str, PerpetualProperty) | The properties with their associated values to update or insert onto the              transaction.
 
 try:
     # [EARLY ACCESS] Update or insert transaction properties
@@ -956,7 +956,7 @@ Name | Type | Description  | Notes
  **scope** | **str**| The scope of the transaction portfolio. | 
  **code** | **str**| The code of the transaction portfolio. Together with the scope this uniquely identifies              the transaction portfolio. | 
  **transaction_id** | **str**| The unique id of the transaction to update or insert properties against. | 
- **transaction_properties** | [**dict(str, PerpetualPropertyValue)**](PerpetualPropertyValue.md)| The properties with their associated values to update or insert onto the              transaction. | 
+ **transaction_properties** | [**dict(str, PerpetualProperty)**](PerpetualProperty.md)| The properties with their associated values to update or insert onto the              transaction. | 
 
 ### Return type
 
