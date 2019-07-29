@@ -199,7 +199,7 @@ class Portfolios(unittest.TestCase):
 
         self.assertEqual(len(trades.values), 1)
         self.assertEqual(trades.values[0].transaction_id, transaction.transaction_id)
-        self.assertEqual(trades.values[0].properties[0].value, property_value)
+        self.assertEqual(trades.values[0].properties[property_definition_result.key].value.label_value, property_value_as_string)
 
     def test_list_scopes(self):
         # Get the list of scopes across all entities
