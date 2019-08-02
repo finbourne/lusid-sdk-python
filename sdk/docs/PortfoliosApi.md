@@ -71,7 +71,7 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **delete_portfolio_properties**
-> DeletedEntityResponse delete_portfolio_properties(scope, code, effective_at=effective_at, portfolio_property_keys=portfolio_property_keys)
+> DeletedEntityResponse delete_portfolio_properties(scope, code, portfolio_property_keys=portfolio_property_keys, effective_at=effective_at)
 
 [EARLY ACCESS] Delete portfolio properties
 
@@ -94,12 +94,12 @@ configuration.access_token = 'YOUR_ACCESS_TOKEN'
 api_instance = lusid.PortfoliosApi(lusid.ApiClient(configuration))
 scope = 'scope_example' # str | The scope of the portfolio
 code = 'code_example' # str | Code for the portfolio
+portfolio_property_keys = ['portfolio_property_keys_example'] # list[str] | The keys of the properties to be deleted. (optional)
 effective_at = 'effective_at_example' # str | Optional. The effective date of the deletion (optional)
-portfolio_property_keys = ['portfolio_property_keys_example'] # list[str] | Optional. The keys of the properties to be deleted. None specified indicates the intention to delete all properties from the portfolio (optional)
 
 try:
     # [EARLY ACCESS] Delete portfolio properties
-    api_response = api_instance.delete_portfolio_properties(scope, code, effective_at=effective_at, portfolio_property_keys=portfolio_property_keys)
+    api_response = api_instance.delete_portfolio_properties(scope, code, portfolio_property_keys=portfolio_property_keys, effective_at=effective_at)
     pprint(api_response)
 except ApiException as e:
     print("Exception when calling PortfoliosApi->delete_portfolio_properties: %s\n" % e)
@@ -111,8 +111,8 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **scope** | **str**| The scope of the portfolio | 
  **code** | **str**| Code for the portfolio | 
+ **portfolio_property_keys** | [**list[str]**](str.md)| The keys of the properties to be deleted. | [optional] 
  **effective_at** | **str**| Optional. The effective date of the deletion | [optional] 
- **portfolio_property_keys** | [**list[str]**](str.md)| Optional. The keys of the properties to be deleted. None specified indicates the intention to delete all properties from the portfolio | [optional] 
 
 ### Return type
 
