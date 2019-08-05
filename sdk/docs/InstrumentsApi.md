@@ -269,7 +269,7 @@ sort_by = ['sort_by_example'] # list[str] | Order the results by these fields. U
 start = 56 # int | When paginating, skip this number of results. (optional)
 limit = 56 # int | When paginating, limit the number of returned results to this many. (optional)
 filter = 'State eq 'Active'' # str | Expression to filter the result set. Defaults to filter down to active instruments only, i.e. those              that have not been deleted. Read more about filtering results from LUSID here https://support.lusid.com/filtering-results-from-lusid. (optional) (default to 'State eq 'Active'')
-instrument_property_keys = ['instrument_property_keys_example'] # list[str] | A list of property keys from the \"Instrument\" domain to decorate onto the instrument. These take the format {domain}/{scope}/{code} e.g. \"Instrument/system/Name\". (optional)
+instrument_property_keys = ['instrument_property_keys_example'] # list[str] | A list of property keys from the \"Instrument\" domain to decorate onto each instrument. These take the format {domain}/{scope}/{code} e.g. \"Instrument/system/Name\". (optional)
 
 try:
     # [EARLY ACCESS] List instruments
@@ -290,7 +290,7 @@ Name | Type | Description  | Notes
  **start** | **int**| When paginating, skip this number of results. | [optional] 
  **limit** | **int**| When paginating, limit the number of returned results to this many. | [optional] 
  **filter** | **str**| Expression to filter the result set. Defaults to filter down to active instruments only, i.e. those              that have not been deleted. Read more about filtering results from LUSID here https://support.lusid.com/filtering-results-from-lusid. | [optional] [default to &#39;State eq &#39;Active&#39;&#39;]
- **instrument_property_keys** | [**list[str]**](str.md)| A list of property keys from the \&quot;Instrument\&quot; domain to decorate onto the instrument. These take the format {domain}/{scope}/{code} e.g. \&quot;Instrument/system/Name\&quot;. | [optional] 
+ **instrument_property_keys** | [**list[str]**](str.md)| A list of property keys from the \&quot;Instrument\&quot; domain to decorate onto each instrument. These take the format {domain}/{scope}/{code} e.g. \&quot;Instrument/system/Name\&quot;. | [optional] 
 
 ### Return type
 

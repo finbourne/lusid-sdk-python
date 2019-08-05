@@ -3,8 +3,8 @@
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**href** | **str** |  | [optional] 
-**properties** | [**dict(str, ModelProperty)**](ModelProperty.md) |  | [optional] 
+**href** | **str** | The specifc Uniform Resource Identifier (URI) for this resource at the requested effective and asAt datetime. | [optional] 
+**properties** | [**dict(str, ModelProperty)**](ModelProperty.md) | The portfolio properties. These will be from the &#39;Portfolio&#39; domain. | [optional] 
 **version** | [**Version**](Version.md) |  | [optional] 
 **links** | [**list[Link]**](Link.md) |  | [optional] 
 

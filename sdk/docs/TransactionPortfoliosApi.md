@@ -19,7 +19,7 @@ Method | HTTP request | Description
 [**set_holdings**](TransactionPortfoliosApi.md#set_holdings) | **PUT** /api/transactionportfolios/{scope}/{code}/holdings/{effectiveAt} | [EARLY ACCESS] Set holdings
 [**upsert_executions**](TransactionPortfoliosApi.md#upsert_executions) | **POST** /api/transactionportfolios/{scope}/{code}/executions | [EARLY ACCESS] Upsert executions
 [**upsert_portfolio_details**](TransactionPortfoliosApi.md#upsert_portfolio_details) | **POST** /api/transactionportfolios/{scope}/{code}/details | [EARLY ACCESS] Upsert portfolio details
-[**upsert_transaction_properties**](TransactionPortfoliosApi.md#upsert_transaction_properties) | **POST** /api/transactionportfolios/{scope}/{code}/transactions/{transactionId}/properties | [EARLY ACCESS] Update or insert transaction properties
+[**upsert_transaction_properties**](TransactionPortfoliosApi.md#upsert_transaction_properties) | **POST** /api/transactionportfolios/{scope}/{code}/transactions/{transactionId}/properties | [EARLY ACCESS] Upsert transaction properties
 [**upsert_transactions**](TransactionPortfoliosApi.md#upsert_transactions) | **POST** /api/transactionportfolios/{scope}/{code}/transactions | [EARLY ACCESS] Upsert transactions
 
 
@@ -917,7 +917,7 @@ Name | Type | Description  | Notes
 # **upsert_transaction_properties**
 > UpsertTransactionPropertiesResponse upsert_transaction_properties(scope, code, transaction_id, transaction_properties)
 
-[EARLY ACCESS] Update or insert transaction properties
+[EARLY ACCESS] Upsert transaction properties
 
 Update or insert one or more transaction properties to a single transaction in a transaction portfolio.  Each property will be updated if it already exists and inserted if it does not.  Both transaction and portfolio must exist at the time when properties are updated or inserted.
 
@@ -942,7 +942,7 @@ transaction_id = 'transaction_id_example' # str | The unique id of the transacti
 transaction_properties = {'key': lusid.PerpetualProperty()} # dict(str, PerpetualProperty) | The properties with their associated values to update or insert onto the              transaction.
 
 try:
-    # [EARLY ACCESS] Update or insert transaction properties
+    # [EARLY ACCESS] Upsert transaction properties
     api_response = api_instance.upsert_transaction_properties(scope, code, transaction_id, transaction_properties)
     pprint(api_response)
 except ApiException as e:
