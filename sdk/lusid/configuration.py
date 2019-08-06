@@ -47,7 +47,7 @@ class Configuration(six.with_metaclass(TypeWithDefault, object)):
     def __init__(self):
         """Constructor"""
         # Default Base url
-        self.host = "http://localhost"
+        self.host = "http://http:/api"
         # Temp file folder for downloading files
         self.temp_folder_path = None
 
@@ -246,7 +246,7 @@ class Configuration(six.with_metaclass(TypeWithDefault, object)):
         """
         return [
             {
-                'url': "/",
+                'url': "///api",
                 'description': "No description provided",
             }
         ]
