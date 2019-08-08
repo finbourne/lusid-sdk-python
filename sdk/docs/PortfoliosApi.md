@@ -95,7 +95,7 @@ api_instance = lusid.PortfoliosApi(lusid.ApiClient(configuration))
 scope = 'scope_example' # str | The scope of the portfolio to delete properties from.
 code = 'code_example' # str | The code of the portfolio to delete properties from. Together with the scope this uniquely              identifies the portfolio.
 portfolio_property_keys = ['portfolio_property_keys_example'] # list[str] | The property keys of the properties to delete. These take the format              {domain}/{scope}/{code} e.g. \"Portfolio/Manager/Id\". Each property must be from the \"Portfolio\" domain.
-effective_at = 'effective_at_example' # str | The effective datetime at which to delete the properties. Defaults to the current LUSID system datetime if not specified. (optional)
+effective_at = 'effective_at_example' # str | The effective datetime or cut label at which to delete the properties. Defaults to the current LUSID system datetime if not specified. (optional)
 
 try:
     # [EARLY ACCESS] Delete portfolio properties
@@ -112,7 +112,7 @@ Name | Type | Description  | Notes
  **scope** | **str**| The scope of the portfolio to delete properties from. | 
  **code** | **str**| The code of the portfolio to delete properties from. Together with the scope this uniquely              identifies the portfolio. | 
  **portfolio_property_keys** | [**list[str]**](str.md)| The property keys of the properties to delete. These take the format              {domain}/{scope}/{code} e.g. \&quot;Portfolio/Manager/Id\&quot;. Each property must be from the \&quot;Portfolio\&quot; domain. | 
- **effective_at** | **str**| The effective datetime at which to delete the properties. Defaults to the current LUSID system datetime if not specified. | [optional] 
+ **effective_at** | **str**| The effective datetime or cut label at which to delete the properties. Defaults to the current LUSID system datetime if not specified. | [optional] 
 
 ### Return type
 
@@ -153,7 +153,7 @@ configuration.access_token = 'YOUR_ACCESS_TOKEN'
 api_instance = lusid.PortfoliosApi(lusid.ApiClient(configuration))
 scope = 'scope_example' # str | The scope of the portfolio to retrieve the definition for.
 code = 'code_example' # str | The code of the portfolio to retrieve the definition for. Together with the scope this              uniquely identifies the portfolio.
-effective_at = 'effective_at_example' # str | The effective datetime at which to retrieve the portfolio definition. Defaults to the current LUSID system datetime if not specified. (optional)
+effective_at = 'effective_at_example' # str | The effective datetime or cut label at which to retrieve the portfolio definition. Defaults to the current LUSID system datetime if not specified. (optional)
 as_at = '2013-10-20T19:20:30+01:00' # datetime | The asAt datetime at which to retrieve the portfolio definition. Defaults to return the latest version of the portfolio definition if not specified. (optional)
 
 try:
@@ -170,7 +170,7 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **scope** | **str**| The scope of the portfolio to retrieve the definition for. | 
  **code** | **str**| The code of the portfolio to retrieve the definition for. Together with the scope this              uniquely identifies the portfolio. | 
- **effective_at** | **str**| The effective datetime at which to retrieve the portfolio definition. Defaults to the current LUSID system datetime if not specified. | [optional] 
+ **effective_at** | **str**| The effective datetime or cut label at which to retrieve the portfolio definition. Defaults to the current LUSID system datetime if not specified. | [optional] 
  **as_at** | **datetime**| The asAt datetime at which to retrieve the portfolio definition. Defaults to return the latest version of the portfolio definition if not specified. | [optional] 
 
 ### Return type
@@ -273,7 +273,7 @@ configuration.access_token = 'YOUR_ACCESS_TOKEN'
 api_instance = lusid.PortfoliosApi(lusid.ApiClient(configuration))
 scope = 'scope_example' # str | The scope of the portfolio to list the properties for.
 code = 'code_example' # str | The code of the portfolio to list the properties for. Together with the scope this uniquely              identifies the portfolio.
-effective_at = 'effective_at_example' # str | The effective datetime at which to list the portfolio's properties. Defaults to the current LUSID system datetime if not specified. (optional)
+effective_at = 'effective_at_example' # str | The effective datetime or cut label at which to list the portfolio's properties. Defaults to the current LUSID system datetime if not specified. (optional)
 as_at = '2013-10-20T19:20:30+01:00' # datetime | The asAt datetime at which to list the portfolio's properties. Defaults to return the latest version of each property if not specified. (optional)
 
 try:
@@ -290,7 +290,7 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **scope** | **str**| The scope of the portfolio to list the properties for. | 
  **code** | **str**| The code of the portfolio to list the properties for. Together with the scope this uniquely              identifies the portfolio. | 
- **effective_at** | **str**| The effective datetime at which to list the portfolio&#39;s properties. Defaults to the current LUSID system datetime if not specified. | [optional] 
+ **effective_at** | **str**| The effective datetime or cut label at which to list the portfolio&#39;s properties. Defaults to the current LUSID system datetime if not specified. | [optional] 
  **as_at** | **datetime**| The asAt datetime at which to list the portfolio&#39;s properties. Defaults to return the latest version of each property if not specified. | [optional] 
 
 ### Return type
@@ -330,7 +330,7 @@ configuration.access_token = 'YOUR_ACCESS_TOKEN'
 
 # create an instance of the API class
 api_instance = lusid.PortfoliosApi(lusid.ApiClient(configuration))
-effective_at = 'effective_at_example' # str | The effective datetime at which to list the portfolios. Defaults to the current LUSID              system datetime if not specified. (optional)
+effective_at = 'effective_at_example' # str | The effective datetime or cut label at which to list the portfolios. Defaults to the current LUSID              system datetime if not specified. (optional)
 as_at = '2013-10-20T19:20:30+01:00' # datetime | The asAt datetime at which to list the portfolios. Defaults to return the latest version              of each portfolio if not specified. (optional)
 page = 'page_example' # str | The pagination token to use to continue listing portfolios from a previous call to list portfolios. This  value is returned from the previous call. If a pagination token is provided the filter, effectiveAt  and asAt fields must not have changed since the original request. Also, if set, a start value cannot be provided. (optional)
 start = 56 # int | When paginating, skip this number of results. (optional)
@@ -351,7 +351,7 @@ except ApiException as e:
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **effective_at** | **str**| The effective datetime at which to list the portfolios. Defaults to the current LUSID              system datetime if not specified. | [optional] 
+ **effective_at** | **str**| The effective datetime or cut label at which to list the portfolios. Defaults to the current LUSID              system datetime if not specified. | [optional] 
  **as_at** | **datetime**| The asAt datetime at which to list the portfolios. Defaults to return the latest version              of each portfolio if not specified. | [optional] 
  **page** | **str**| The pagination token to use to continue listing portfolios from a previous call to list portfolios. This  value is returned from the previous call. If a pagination token is provided the filter, effectiveAt  and asAt fields must not have changed since the original request. Also, if set, a start value cannot be provided. | [optional] 
  **start** | **int**| When paginating, skip this number of results. | [optional] 
@@ -398,7 +398,7 @@ configuration.access_token = 'YOUR_ACCESS_TOKEN'
 # create an instance of the API class
 api_instance = lusid.PortfoliosApi(lusid.ApiClient(configuration))
 scope = 'scope_example' # str | The scope of the portfolios.
-effective_at = 'effective_at_example' # str | The effective datetime at which to list the portfolios. Defaults to the current LUSID              system datetime if not specified. (optional)
+effective_at = 'effective_at_example' # str | The effective datetime or cut label at which to list the portfolios. Defaults to the current LUSID              system datetime if not specified. (optional)
 as_at = '2013-10-20T19:20:30+01:00' # datetime | The asAt datetime at which to list the portfolios. Defaults to return the latest version              of each portfolio if not specified. (optional)
 filter = 'filter_example' # str | Expression to filter the result set. Read more about filtering results from LUSID here https://support.lusid.com/filtering-results-from-lusid. (optional)
 portfolio_property_keys = ['portfolio_property_keys_example'] # list[str] | A list of property keys from the \"Portfolio\" domain to decorate onto each portfolio.              These take the format {domain}/{scope}/{code} e.g. \"Portfolio/Manager/Id\". (optional)
@@ -416,7 +416,7 @@ except ApiException as e:
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **scope** | **str**| The scope of the portfolios. | 
- **effective_at** | **str**| The effective datetime at which to list the portfolios. Defaults to the current LUSID              system datetime if not specified. | [optional] 
+ **effective_at** | **str**| The effective datetime or cut label at which to list the portfolios. Defaults to the current LUSID              system datetime if not specified. | [optional] 
  **as_at** | **datetime**| The asAt datetime at which to list the portfolios. Defaults to return the latest version              of each portfolio if not specified. | [optional] 
  **filter** | **str**| Expression to filter the result set. Read more about filtering results from LUSID here https://support.lusid.com/filtering-results-from-lusid. | [optional] 
  **portfolio_property_keys** | [**list[str]**](str.md)| A list of property keys from the \&quot;Portfolio\&quot; domain to decorate onto each portfolio.              These take the format {domain}/{scope}/{code} e.g. \&quot;Portfolio/Manager/Id\&quot;. | [optional] 
@@ -460,7 +460,7 @@ configuration.access_token = 'YOUR_ACCESS_TOKEN'
 api_instance = lusid.PortfoliosApi(lusid.ApiClient(configuration))
 scope = 'scope_example' # str | The scope of the portfolio to update the definition for.
 code = 'code_example' # str | The code of the portfolio to update the definition for. Together with the scope this uniquely              identifies the portfolio.
-effective_at = 'effective_at_example' # str | The effective datetime at which to update the definition. Defaults to the current              LUSID system datetime if not specified. (optional)
+effective_at = 'effective_at_example' # str | The effective datetime or cut label at which to update the definition. Defaults to the current              LUSID system datetime if not specified. (optional)
 request = lusid.UpdatePortfolioRequest() # UpdatePortfolioRequest | The updated portfolio definition. (optional)
 
 try:
@@ -477,7 +477,7 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **scope** | **str**| The scope of the portfolio to update the definition for. | 
  **code** | **str**| The code of the portfolio to update the definition for. Together with the scope this uniquely              identifies the portfolio. | 
- **effective_at** | **str**| The effective datetime at which to update the definition. Defaults to the current              LUSID system datetime if not specified. | [optional] 
+ **effective_at** | **str**| The effective datetime or cut label at which to update the definition. Defaults to the current              LUSID system datetime if not specified. | [optional] 
  **request** | [**UpdatePortfolioRequest**](UpdatePortfolioRequest.md)| The updated portfolio definition. | [optional] 
 
 ### Return type

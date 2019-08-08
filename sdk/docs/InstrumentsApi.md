@@ -93,7 +93,7 @@ configuration.access_token = 'YOUR_ACCESS_TOKEN'
 api_instance = lusid.InstrumentsApi(lusid.ApiClient(configuration))
 identifier_type = 'identifier_type_example' # str | The identifier being supplied e.g. \"Figi\".
 identifier = 'identifier_example' # str | The value of the identifier for the requested instrument.
-effective_at = 'effective_at_example' # str | The effective datetime at which to retrieve the instrument definition.              Defaults to the current LUSID system datetime if not specified. (optional)
+effective_at = 'effective_at_example' # str | The effective datetime or cut label at which to retrieve the instrument definition.              Defaults to the current LUSID system datetime if not specified. (optional)
 as_at = '2013-10-20T19:20:30+01:00' # datetime | The asAt datetime at which to retrieve the instrument definition. Defaults to              return the latest version of the instrument definition if not specified. (optional)
 instrument_property_keys = ['instrument_property_keys_example'] # list[str] | A list of property keys from the \"Instrument\" domain to decorate onto the instrument.              These take the format {domain}/{scope}/{code} e.g. \"Instrument/system/Name\". (optional)
 
@@ -111,7 +111,7 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **identifier_type** | **str**| The identifier being supplied e.g. \&quot;Figi\&quot;. | 
  **identifier** | **str**| The value of the identifier for the requested instrument. | 
- **effective_at** | **str**| The effective datetime at which to retrieve the instrument definition.              Defaults to the current LUSID system datetime if not specified. | [optional] 
+ **effective_at** | **str**| The effective datetime or cut label at which to retrieve the instrument definition.              Defaults to the current LUSID system datetime if not specified. | [optional] 
  **as_at** | **datetime**| The asAt datetime at which to retrieve the instrument definition. Defaults to              return the latest version of the instrument definition if not specified. | [optional] 
  **instrument_property_keys** | [**list[str]**](str.md)| A list of property keys from the \&quot;Instrument\&quot; domain to decorate onto the instrument.              These take the format {domain}/{scope}/{code} e.g. \&quot;Instrument/system/Name\&quot;. | [optional] 
 
@@ -203,7 +203,7 @@ configuration.access_token = 'YOUR_ACCESS_TOKEN'
 api_instance = lusid.InstrumentsApi(lusid.ApiClient(configuration))
 identifier_type = 'identifier_type_example' # str | The identifier being supplied e.g. \"Figi\".
 identifiers = None # list[str] | The values of the identifier for the requested instruments.
-effective_at = 'effective_at_example' # str | The effective datetime at which to retrieve the instrument definitions.              Defaults to the current LUSID system datetime if not specified. (optional)
+effective_at = 'effective_at_example' # str | The effective datetime or cut label at which to retrieve the instrument definitions.              Defaults to the current LUSID system datetime if not specified. (optional)
 as_at = '2013-10-20T19:20:30+01:00' # datetime | The asAt datetime at which to retrieve the instrument definitions.              Defaults to return the latest version of each instrument definition if not specified. (optional)
 instrument_property_keys = ['instrument_property_keys_example'] # list[str] | A list of property keys from the \"Instrument\" domain to decorate onto the instrument.              These take the format {domain}/{scope}/{code} e.g. \"Instrument/system/Name\". (optional)
 
@@ -221,7 +221,7 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **identifier_type** | **str**| The identifier being supplied e.g. \&quot;Figi\&quot;. | 
  **identifiers** | [**list[str]**](list.md)| The values of the identifier for the requested instruments. | 
- **effective_at** | **str**| The effective datetime at which to retrieve the instrument definitions.              Defaults to the current LUSID system datetime if not specified. | [optional] 
+ **effective_at** | **str**| The effective datetime or cut label at which to retrieve the instrument definitions.              Defaults to the current LUSID system datetime if not specified. | [optional] 
  **as_at** | **datetime**| The asAt datetime at which to retrieve the instrument definitions.              Defaults to return the latest version of each instrument definition if not specified. | [optional] 
  **instrument_property_keys** | [**list[str]**](str.md)| A list of property keys from the \&quot;Instrument\&quot; domain to decorate onto the instrument.              These take the format {domain}/{scope}/{code} e.g. \&quot;Instrument/system/Name\&quot;. | [optional] 
 
@@ -263,7 +263,7 @@ configuration.access_token = 'YOUR_ACCESS_TOKEN'
 # create an instance of the API class
 api_instance = lusid.InstrumentsApi(lusid.ApiClient(configuration))
 as_at = '2013-10-20T19:20:30+01:00' # datetime | The asAt datetime at which to list the instruments. Defaults to return the latest              version of each instruments if not specified. (optional)
-effective_at = 'effective_at_example' # str | The effective datetime at which to list the instruments.              Defaults to the current LUSID system datetime if not specified. (optional)
+effective_at = 'effective_at_example' # str | The effective datetime or cut label at which to list the instruments.              Defaults to the current LUSID system datetime if not specified. (optional)
 page = 'page_example' # str | The pagination token to use to continue listing instruments from a previous call to list instruments.              This value is returned from the previous call. If a pagination token is provided the sortBy, filter, effectiveAt, and asAt fields              must not have changed since the original request. Also, if set, a start value cannot be provided. (optional)
 sort_by = ['sort_by_example'] # list[str] | Order the results by these fields. Use use the '-' sign to denote descending order e.g. -MyFieldName. (optional)
 start = 56 # int | When paginating, skip this number of results. (optional)
@@ -284,7 +284,7 @@ except ApiException as e:
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **as_at** | **datetime**| The asAt datetime at which to list the instruments. Defaults to return the latest              version of each instruments if not specified. | [optional] 
- **effective_at** | **str**| The effective datetime at which to list the instruments.              Defaults to the current LUSID system datetime if not specified. | [optional] 
+ **effective_at** | **str**| The effective datetime or cut label at which to list the instruments.              Defaults to the current LUSID system datetime if not specified. | [optional] 
  **page** | **str**| The pagination token to use to continue listing instruments from a previous call to list instruments.              This value is returned from the previous call. If a pagination token is provided the sortBy, filter, effectiveAt, and asAt fields              must not have changed since the original request. Also, if set, a start value cannot be provided. | [optional] 
  **sort_by** | [**list[str]**](str.md)| Order the results by these fields. Use use the &#39;-&#39; sign to denote descending order e.g. -MyFieldName. | [optional] 
  **start** | **int**| When paginating, skip this number of results. | [optional] 
