@@ -17,19 +17,15 @@ Creates a transaction portfolio that derives from an existing transaction portfo
 
 ### Example
 
-* OAuth Authentication (oauth2):
 ```python
 from __future__ import print_function
 import time
 import lusid
 from lusid.rest import ApiException
 from pprint import pprint
-configuration = lusid.Configuration()
-# Configure OAuth2 access token for authorization: oauth2
-configuration.access_token = 'YOUR_ACCESS_TOKEN'
 
 # create an instance of the API class
-api_instance = lusid.DerivedTransactionPortfoliosApi(lusid.ApiClient(configuration))
+api_instance = lusid.DerivedTransactionPortfoliosApi()
 scope = 'scope_example' # str | The scope into which to create the new derived portfolio
 portfolio = lusid.CreateDerivedTransactionPortfolioRequest() # CreateDerivedTransactionPortfolioRequest | The root object of the new derived portfolio, containing a populated reference portfolio id and reference scope (optional)
 
@@ -54,7 +50,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[oauth2](../README.md#oauth2)
+No authorization required
 
 ### HTTP request headers
 
@@ -72,19 +68,15 @@ Deletes the portfolio details for the specified derived transaction portfolio
 
 ### Example
 
-* OAuth Authentication (oauth2):
 ```python
 from __future__ import print_function
 import time
 import lusid
 from lusid.rest import ApiException
 from pprint import pprint
-configuration = lusid.Configuration()
-# Configure OAuth2 access token for authorization: oauth2
-configuration.access_token = 'YOUR_ACCESS_TOKEN'
 
 # create an instance of the API class
-api_instance = lusid.DerivedTransactionPortfoliosApi(lusid.ApiClient(configuration))
+api_instance = lusid.DerivedTransactionPortfoliosApi()
 scope = 'scope_example' # str | The scope of the portfolio
 code = 'code_example' # str | The code of the portfolio
 effective_at = 'effective_at_example' # str | The effective date of the change (optional)
@@ -111,7 +103,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[oauth2](../README.md#oauth2)
+No authorization required
 
 ### HTTP request headers
 
