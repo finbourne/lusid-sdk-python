@@ -1,6 +1,6 @@
 # lusid.ApplicationMetadataApi
 
-All URIs are relative to *http://localhost*
+All URIs are relative to *http://http:/api*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
@@ -18,15 +18,19 @@ Download the LUSID Excel Addin for Microsoft Excel. Not providing a specific val
 
 ### Example
 
+* OAuth Authentication (oauth2):
 ```python
 from __future__ import print_function
 import time
 import lusid
 from lusid.rest import ApiException
 from pprint import pprint
+configuration = lusid.Configuration()
+# Configure OAuth2 access token for authorization: oauth2
+configuration.access_token = 'YOUR_ACCESS_TOKEN'
 
 # create an instance of the API class
-api_instance = lusid.ApplicationMetadataApi()
+api_instance = lusid.ApplicationMetadataApi(lusid.ApiClient(configuration))
 version = 'version_example' # str | The requested version of the Excel plugin (optional)
 
 try:
@@ -49,7 +53,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-No authorization required
+[oauth2](../README.md#oauth2)
 
 ### HTTP request headers
 
@@ -67,15 +71,19 @@ Get the semantic versions associated with LUSID and its ecosystem
 
 ### Example
 
+* OAuth Authentication (oauth2):
 ```python
 from __future__ import print_function
 import time
 import lusid
 from lusid.rest import ApiException
 from pprint import pprint
+configuration = lusid.Configuration()
+# Configure OAuth2 access token for authorization: oauth2
+configuration.access_token = 'YOUR_ACCESS_TOKEN'
 
 # create an instance of the API class
-api_instance = lusid.ApplicationMetadataApi()
+api_instance = lusid.ApplicationMetadataApi(lusid.ApiClient(configuration))
 
 try:
     # [EARLY ACCESS] Get LUSID versions
@@ -94,7 +102,7 @@ This endpoint does not need any parameter.
 
 ### Authorization
 
-No authorization required
+[oauth2](../README.md#oauth2)
 
 ### HTTP request headers
 
@@ -112,15 +120,19 @@ Get the comprehensive set of resources that are available for access control
 
 ### Example
 
+* OAuth Authentication (oauth2):
 ```python
 from __future__ import print_function
 import time
 import lusid
 from lusid.rest import ApiException
 from pprint import pprint
+configuration = lusid.Configuration()
+# Configure OAuth2 access token for authorization: oauth2
+configuration.access_token = 'YOUR_ACCESS_TOKEN'
 
 # create an instance of the API class
-api_instance = lusid.ApplicationMetadataApi()
+api_instance = lusid.ApplicationMetadataApi(lusid.ApiClient(configuration))
 filter = 'filter_example' # str | Optional. Expression to filter the result set (optional)
 
 try:
@@ -143,7 +155,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-No authorization required
+[oauth2](../README.md#oauth2)
 
 ### HTTP request headers
 
