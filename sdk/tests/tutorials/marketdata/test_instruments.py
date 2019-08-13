@@ -2,13 +2,14 @@ import unittest
 
 import lusid
 import lusid.models as models
-from lusid import ApiException
 from lusid.utilities.api_client_builder import ApiClientBuilder
+from lusid.exceptions import ApiException
 from utilities.credentials_source import CredentialsSource
 from utilities.test_data_utilities import TestDataUtilities
 
 
 class Instruments(unittest.TestCase):
+    property_definitions_api = None
 
     @classmethod
     def setUpClass(cls):
@@ -16,6 +17,7 @@ class Instruments(unittest.TestCase):
         api_client = ApiClientBuilder().build(CredentialsSource.secrets_path())
 
         cls.instruments_api = lusid.InstrumentsApi(api_client)
+        cls.property_definitions_api = lusid.PropertyDefinitionsApi(api_client)
 
     @classmethod
     def ensure_property_definition(cls, code):
