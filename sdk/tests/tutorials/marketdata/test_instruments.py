@@ -139,7 +139,7 @@ class Instruments(unittest.TestCase):
 
     def test_list_instruments_by_identifier_type(self):
 
-        figis = ["BBG00M1BQWX0", "BBG00D1PBRL9", "BBG00BW1V2M4"]
+        figis = ["BBG000FD8G46", "BBG000DW76R4", "BBG000PQKVN8"]
 
         # get a set of instruments querying by FIGIs
         instruments = self.instruments_api.get_instruments(identifier_type="Figi", identifiers=figis)
@@ -149,11 +149,11 @@ class Instruments(unittest.TestCase):
 
     def test_edit_instrument_property(self):
 
-        property_value = models.PropertyValue(label_value="Telecoms")
+        property_value = models.PropertyValue(label_value="Insurance")
         property_key = f"Instrument/{TestDataUtilities.tutorials_scope}/CustomSector"
 
         # get the instrument
-        instrument = self.instruments_api.get_instrument(identifier_type="Figi", identifier="BBG00M1BQWX0")
+        instrument = self.instruments_api.get_instrument(identifier_type="Figi", identifier="BBG000FD8G46")
 
         # get the LusidInstrumentId (LUID)
         self.instruments_api.upsert_instruments_properties(instrument_properties=[
