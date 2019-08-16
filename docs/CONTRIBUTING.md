@@ -1,12 +1,12 @@
 # Introduction
 
-Welcome and thank you for considering contributing to the LUSID SDK, we're delighted to have you as part of our community.
+Welcome and thank you for considering contributing to the LUSID SDK.  We're delighted to have you as part of our community.
 
-Following these guidelines will help us effectively manage the contribution process for eveyone involved in the contribution process. It communicates that you respect the time of the developers managing and developing this open source project. In return, we will reciprocate that respect in addressing your issue, assessing changes, and helping you finalize your pull requests.
+Following these guidelines will help us effectively manage the contribution process for eveyone involved in the contribution process. It communicates that you respect the time of the developers managing and developing this open source project. In return, we will reciprocate that respect by addressing your issue, assessing changes, and helping you finalize your pull requests.
 
 # Contributing
 
-We have open sourced our SDKs to help make it easy for you to use LUSID and welcome conntributions from our community. There are many ways to contribute, from writing code samples, improving the documentation, submitting bug reports and feature requests or writing code which can be incorporated into the SDK itself. This section guides you through submitting a contribution to the LUSID SDK.
+We have open sourced our SDKs to help make it easy for you to use LUSID and welcome contributions from our community. There are many ways to contribute, from writing code samples, improving the documentation, submitting bug reports and feature requests to writing code which can be incorporated into the SDK itself. This section guides you through submitting a contribution to the LUSID SDK.
 
 ## Reporting bugs
 
@@ -18,7 +18,7 @@ If you are unable to find your issue then please raise an issue using the provid
 
 ## Submitting changes
 
- If you have a change that you would like to contribute, please find or open an issue about it first as there may be somebody already working on it, or there may be particular issues that you should know about before implementing the change.
+If you have a change that you would like to contribute, please find or open an issue about it first as there may be somebody already working on it, or there may be particular issues that you should know about before implementing the change.
 
 1. Fork the repository to your own GitHub account, this [GitHub guide](https://help.github.com/en/articles/fork-a-repo) describes how to do this.
 1. Clone the project to your local machine
