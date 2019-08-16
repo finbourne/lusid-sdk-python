@@ -12,7 +12,7 @@ We have open sourced our SDKs to help make it easy for you to use LUSID and welc
 
 **If you find a security vulnerability, please do NOT open an issue. Any security issues should be submitted directly to soc@finbourne.com.**
 
-If you think you have found a bug, first make sure you are testing against the latest version of the SDK as your issue may have already been fixed. Also search all open and closed [issues](https://github.com/finbourne/lusid-sdk-python-preview/issues) to see if your issue has already been answered.
+If you think you have found a bug, first make sure you are testing against the latest version of the SDK as your issue may have already been fixed. Also search all open and closed issues to see if your issue has already been answered.
 
 If you are unable to find your issue then please raise an issue using the provided template. Try to provide as much information as possible that will help us reproduce the problem, provide the ticket that _you_ would like to receive if you had to fix the issue.
 
