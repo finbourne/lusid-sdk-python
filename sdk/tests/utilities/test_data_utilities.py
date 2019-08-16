@@ -5,6 +5,7 @@ import uuid
 import lusid
 import lusid.models as models
 
+import unittest
 
 class TestDataUtilities:
 
@@ -15,6 +16,7 @@ class TestDataUtilities:
 
     def __init__(self, transaction_portfolio_api: lusid.TransactionPortfoliosApi):
         self.transaction_portfolio_api = transaction_portfolio_api
+        self.test = self.TestDataUtilitiesTests()
 
     def create_transaction_portfolio(self, scope):
         guid = str(uuid.uuid4())
@@ -58,3 +60,41 @@ class TestDataUtilities:
                                          transaction_price=models.TransactionPrice(price=0.0),
                                          source="Client")
 
+    def build_adjust_holdings_request(self, instrument_id, units, price, currency, trade_date):
+        return models.AdjustHoldingRequest(
+                instrument_identifiers={
+                    TestDataUtilities.lusid_luid_identifier: instrument_id
+                },
+                tax_lots=[
+                    models.TargetTaxLotRequest(units=units,
+                                               price=price,
+                                               cost=models.CurrencyAndAmount(amount=price*units, currency=currency),
+                                               portfolio_cost=price*units,
+                                               purchase_date=trade_date,  
+                                               settlement_date=trade_date)
+                ])
+
+    def build_cash_funds_in_adjust_holdings_request(self, currency, units):
+        return models.AdjustHoldingRequest(
+                instrument_identifiers={
+                    TestDataUtilities.lusid_cash_identifier: currency
+                },
+                tax_lots=[
+                    models.TargetTaxLotRequest(units=units,
+                    price=None,
+                                               cost=None,
+                                               portfolio_cost=None,
+                                               purchase_date=None,  
+                                               settlement_date=None)
+                ])
+
+    class TestDataUtilitiesTests(unittest.TestCase):
+        
+        def assert_holdings(self, holdings, index, instrument_id, units, cost_amount):
+            self.assertEqual(holdings.values[index].instrument_uid, instrument_id)
+            self.assertEqual(holdings.values[index].units, units)
+            self.assertEqual(holdings.values[index].cost.amount, cost_amount)
+
+        def assert_cash_holdings(self, holdings, index, instrument_id, units):
+            self.assertEqual(holdings.values[index].instrument_uid, instrument_id)
+            self.assertEqual(holdings.values[index].units, units)
