@@ -6,4 +6,4 @@
 
 # Description of the PR
 
-Describe the code changes for the reviewers, explain the solution you have provided and how it fixes the issue case
+Describe the code changes for the reviewers, explain the solution you have provided and how it fixes the issue
