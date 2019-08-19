@@ -5,16 +5,16 @@ All URIs are relative to *http://localhost*
 Method | HTTP request | Description
 ------------- | ------------- | -------------
 [**add_portfolio_to_group**](PortfolioGroupsApi.md#add_portfolio_to_group) | **POST** /api/portfoliogroups/{scope}/{code}/portfolios | [EARLY ACCESS] Add portfolio to group
-[**add_sub_group_to_group**](PortfolioGroupsApi.md#add_sub_group_to_group) | **POST** /api/portfoliogroups/{scope}/{code}/subgroups | [EARLY ACCESS] Add group to group
-[**create_portfolio_group**](PortfolioGroupsApi.md#create_portfolio_group) | **POST** /api/portfoliogroups/{scope} | [EARLY ACCESS] Create group
-[**delete_portfolio_from_group**](PortfolioGroupsApi.md#delete_portfolio_from_group) | **DELETE** /api/portfoliogroups/{scope}/{code}/portfolios/{portfolioScope}/{portfolioCode} | [EARLY ACCESS] Remove portfolio from group
-[**delete_portfolio_group**](PortfolioGroupsApi.md#delete_portfolio_group) | **DELETE** /api/portfoliogroups/{scope}/{code} | [EARLY ACCESS] Delete group
-[**delete_sub_group_from_group**](PortfolioGroupsApi.md#delete_sub_group_from_group) | **DELETE** /api/portfoliogroups/{scope}/{code}/subgroups/{subgroupScope}/{subgroupCode} | [EARLY ACCESS] Remove group from group
+[**add_sub_group_to_group**](PortfolioGroupsApi.md#add_sub_group_to_group) | **POST** /api/portfoliogroups/{scope}/{code}/subgroups | [EARLY ACCESS] Add sub group to group
+[**create_portfolio_group**](PortfolioGroupsApi.md#create_portfolio_group) | **POST** /api/portfoliogroups/{scope} | [EARLY ACCESS] Create portfolio group
+[**delete_portfolio_from_group**](PortfolioGroupsApi.md#delete_portfolio_from_group) | **DELETE** /api/portfoliogroups/{scope}/{code}/portfolios/{portfolioScope}/{portfolioCode} | [EARLY ACCESS] Delete portfolio from group
+[**delete_portfolio_group**](PortfolioGroupsApi.md#delete_portfolio_group) | **DELETE** /api/portfoliogroups/{scope}/{code} | [EARLY ACCESS] Delete portfolio group
+[**delete_sub_group_from_group**](PortfolioGroupsApi.md#delete_sub_group_from_group) | **DELETE** /api/portfoliogroups/{scope}/{code}/subgroups/{subgroupScope}/{subgroupCode} | [EARLY ACCESS] Delete sub group from group
 [**get_portfolio_group**](PortfolioGroupsApi.md#get_portfolio_group) | **GET** /api/portfoliogroups/{scope}/{code} | [EARLY ACCESS] Get portfolio group
-[**get_portfolio_group_commands**](PortfolioGroupsApi.md#get_portfolio_group_commands) | **GET** /api/portfoliogroups/{scope}/{code}/commands | [EARLY ACCESS] Get commands
-[**get_portfolio_group_expansion**](PortfolioGroupsApi.md#get_portfolio_group_expansion) | **GET** /api/portfoliogroups/{scope}/{code}/expansion | [EARLY ACCESS] Get a full expansion of a portfolio group
-[**list_portfolio_groups**](PortfolioGroupsApi.md#list_portfolio_groups) | **GET** /api/portfoliogroups/{scope} | [EARLY ACCESS] List groups in scope
-[**update_portfolio_group**](PortfolioGroupsApi.md#update_portfolio_group) | **PUT** /api/portfoliogroups/{scope}/{code} | [EARLY ACCESS] Update group
+[**get_portfolio_group_commands**](PortfolioGroupsApi.md#get_portfolio_group_commands) | **GET** /api/portfoliogroups/{scope}/{code}/commands | [EARLY ACCESS] Get portfolio group commands
+[**get_portfolio_group_expansion**](PortfolioGroupsApi.md#get_portfolio_group_expansion) | **GET** /api/portfoliogroups/{scope}/{code}/expansion | [EARLY ACCESS] Get portfolio group expansion
+[**list_portfolio_groups**](PortfolioGroupsApi.md#list_portfolio_groups) | **GET** /api/portfoliogroups/{scope} | [EARLY ACCESS] List portfolio groups
+[**update_portfolio_group**](PortfolioGroupsApi.md#update_portfolio_group) | **PUT** /api/portfoliogroups/{scope}/{code} | [EARLY ACCESS] Update portfolio group
 
 
 # **add_portfolio_to_group**
@@ -22,7 +22,7 @@ Method | HTTP request | Description
 
 [EARLY ACCESS] Add portfolio to group
 
-Adds a portfolio to a previously defined portfolio group
+Add a single portfolio to a portfolio group.
 
 ### Example
 
@@ -39,9 +39,9 @@ configuration.access_token = 'YOUR_ACCESS_TOKEN'
 
 # create an instance of the API class
 api_instance = lusid.PortfolioGroupsApi(lusid.ApiClient(configuration))
-scope = 'scope_example' # str | The scope of the portfolio group to which a portfolio is being added
-code = 'code_example' # str | The code of the portfolio group to which a portfolio is being added
-portfolio_id = lusid.ResourceId() # ResourceId | The id of the portfolio (optional)
+scope = 'scope_example' # str | The scope of the portfolio group to add a portfolio to.
+code = 'code_example' # str | The code of the portfolio group to add a portfolio to. Together with the scope this uniquely identifies the portfolio group.
+portfolio_id = lusid.ResourceId() # ResourceId | The resource identifier of the portfolio to add to the portfolio group. (optional)
 
 try:
     # [EARLY ACCESS] Add portfolio to group
@@ -55,9 +55,9 @@ except ApiException as e:
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **scope** | **str**| The scope of the portfolio group to which a portfolio is being added | 
- **code** | **str**| The code of the portfolio group to which a portfolio is being added | 
- **portfolio_id** | [**ResourceId**](ResourceId.md)| The id of the portfolio | [optional] 
+ **scope** | **str**| The scope of the portfolio group to add a portfolio to. | 
+ **code** | **str**| The code of the portfolio group to add a portfolio to. Together with the scope this uniquely identifies the portfolio group. | 
+ **portfolio_id** | [**ResourceId**](ResourceId.md)| The resource identifier of the portfolio to add to the portfolio group. | [optional] 
 
 ### Return type
 
@@ -77,9 +77,9 @@ Name | Type | Description  | Notes
 # **add_sub_group_to_group**
 > PortfolioGroup add_sub_group_to_group(scope, code, portfolio_group_id=portfolio_group_id)
 
-[EARLY ACCESS] Add group to group
+[EARLY ACCESS] Add sub group to group
 
-Adds a portfolio group, as a sub-group, to an existing portfolio group
+Add a portfolio group to a portfolio group as a sub group.
 
 ### Example
 
@@ -96,12 +96,12 @@ configuration.access_token = 'YOUR_ACCESS_TOKEN'
 
 # create an instance of the API class
 api_instance = lusid.PortfolioGroupsApi(lusid.ApiClient(configuration))
-scope = 'scope_example' # str | The scope of the portfolio group to which a sub-group is being added
-code = 'code_example' # str | The code of the portfolio group to which a sub-group is being added
-portfolio_group_id = lusid.ResourceId() # ResourceId | The id of the portfolio group being added as a sub-group (optional)
+scope = 'scope_example' # str | The scope of the portfolio group to add a portfolio group to.
+code = 'code_example' # str | The code of the portfolio group to add a portfolio group to. Together with the scope this uniquely identifies the portfolio group.
+portfolio_group_id = lusid.ResourceId() # ResourceId | The resource identifier of the portfolio group to add to the portfolio group as a sub group. (optional)
 
 try:
-    # [EARLY ACCESS] Add group to group
+    # [EARLY ACCESS] Add sub group to group
     api_response = api_instance.add_sub_group_to_group(scope, code, portfolio_group_id=portfolio_group_id)
     pprint(api_response)
 except ApiException as e:
@@ -112,9 +112,9 @@ except ApiException as e:
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **scope** | **str**| The scope of the portfolio group to which a sub-group is being added | 
- **code** | **str**| The code of the portfolio group to which a sub-group is being added | 
- **portfolio_group_id** | [**ResourceId**](ResourceId.md)| The id of the portfolio group being added as a sub-group | [optional] 
+ **scope** | **str**| The scope of the portfolio group to add a portfolio group to. | 
+ **code** | **str**| The code of the portfolio group to add a portfolio group to. Together with the scope this uniquely identifies the portfolio group. | 
+ **portfolio_group_id** | [**ResourceId**](ResourceId.md)| The resource identifier of the portfolio group to add to the portfolio group as a sub group. | [optional] 
 
 ### Return type
 
@@ -134,9 +134,9 @@ Name | Type | Description  | Notes
 # **create_portfolio_group**
 > PortfolioGroup create_portfolio_group(scope, request=request)
 
-[EARLY ACCESS] Create group
+[EARLY ACCESS] Create portfolio group
 
-Create a new portfolio group.
+Create a portfolio group in a specific scope.
 
 ### Example
 
@@ -153,11 +153,11 @@ configuration.access_token = 'YOUR_ACCESS_TOKEN'
 
 # create an instance of the API class
 api_instance = lusid.PortfolioGroupsApi(lusid.ApiClient(configuration))
-scope = 'scope_example' # str | The scope into which the portfolio group will be created
-request = lusid.CreatePortfolioGroupRequest() # CreatePortfolioGroupRequest | The definition of the new portfolio group (optional)
+scope = 'scope_example' # str | The scope that the portfolio group will be created in.
+request = lusid.CreatePortfolioGroupRequest() # CreatePortfolioGroupRequest | The definition and details of the portfolio group. (optional)
 
 try:
-    # [EARLY ACCESS] Create group
+    # [EARLY ACCESS] Create portfolio group
     api_response = api_instance.create_portfolio_group(scope, request=request)
     pprint(api_response)
 except ApiException as e:
@@ -168,8 +168,8 @@ except ApiException as e:
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **scope** | **str**| The scope into which the portfolio group will be created | 
- **request** | [**CreatePortfolioGroupRequest**](CreatePortfolioGroupRequest.md)| The definition of the new portfolio group | [optional] 
+ **scope** | **str**| The scope that the portfolio group will be created in. | 
+ **request** | [**CreatePortfolioGroupRequest**](CreatePortfolioGroupRequest.md)| The definition and details of the portfolio group. | [optional] 
 
 ### Return type
 
@@ -189,9 +189,9 @@ Name | Type | Description  | Notes
 # **delete_portfolio_from_group**
 > PortfolioGroup delete_portfolio_from_group(scope, code, portfolio_scope, portfolio_code)
 
-[EARLY ACCESS] Remove portfolio from group
+[EARLY ACCESS] Delete portfolio from group
 
-Removes a portfolio from a portfolio group
+Remove a single portfolio from a portfolio group.
 
 ### Example
 
@@ -208,13 +208,13 @@ configuration.access_token = 'YOUR_ACCESS_TOKEN'
 
 # create an instance of the API class
 api_instance = lusid.PortfolioGroupsApi(lusid.ApiClient(configuration))
-scope = 'scope_example' # str | The scope of the portfolio group
-code = 'code_example' # str | The code of the portfolio group
-portfolio_scope = 'portfolio_scope_example' # str | The scope of the portfolio being removed
-portfolio_code = 'portfolio_code_example' # str | The code of the portfolio being removed
+scope = 'scope_example' # str | The scope of the portfolio group to remove the portfolio from.
+code = 'code_example' # str | The code of the portfolio group to remove the portfolio from. Together with the scope this uniquely identifies the portfolio group.
+portfolio_scope = 'portfolio_scope_example' # str | The scope of the portfolio being removed from the portfolio group.
+portfolio_code = 'portfolio_code_example' # str | The code of the portfolio being removed from the portfolio group. Together with the scope this uniquely identifies the portfolio to remove.
 
 try:
-    # [EARLY ACCESS] Remove portfolio from group
+    # [EARLY ACCESS] Delete portfolio from group
     api_response = api_instance.delete_portfolio_from_group(scope, code, portfolio_scope, portfolio_code)
     pprint(api_response)
 except ApiException as e:
@@ -225,10 +225,10 @@ except ApiException as e:
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **scope** | **str**| The scope of the portfolio group | 
- **code** | **str**| The code of the portfolio group | 
- **portfolio_scope** | **str**| The scope of the portfolio being removed | 
- **portfolio_code** | **str**| The code of the portfolio being removed | 
+ **scope** | **str**| The scope of the portfolio group to remove the portfolio from. | 
+ **code** | **str**| The code of the portfolio group to remove the portfolio from. Together with the scope this uniquely identifies the portfolio group. | 
+ **portfolio_scope** | **str**| The scope of the portfolio being removed from the portfolio group. | 
+ **portfolio_code** | **str**| The code of the portfolio being removed from the portfolio group. Together with the scope this uniquely identifies the portfolio to remove. | 
 
 ### Return type
 
@@ -248,9 +248,9 @@ Name | Type | Description  | Notes
 # **delete_portfolio_group**
 > DeletedEntityResponse delete_portfolio_group(scope, code)
 
-[EARLY ACCESS] Delete group
+[EARLY ACCESS] Delete portfolio group
 
-Deletes the definition of the specified portfolio group
+Delete a single portfolio group. A portfolio group can be deleted while it still contains portfolios or sub groups.  In this case any portfolios or sub groups contained in this group will not be deleted however they will no longer be grouped together by this portfolio group.
 
 ### Example
 
@@ -267,11 +267,11 @@ configuration.access_token = 'YOUR_ACCESS_TOKEN'
 
 # create an instance of the API class
 api_instance = lusid.PortfolioGroupsApi(lusid.ApiClient(configuration))
-scope = 'scope_example' # str | The scope of the portfolio group
-code = 'code_example' # str | The code of the portfolio group
+scope = 'scope_example' # str | The scope of the portfolio group to delete.
+code = 'code_example' # str | The code of the portfolio group to delete. Together with the scope this uniquely identifies the portfolio group to delete.
 
 try:
-    # [EARLY ACCESS] Delete group
+    # [EARLY ACCESS] Delete portfolio group
     api_response = api_instance.delete_portfolio_group(scope, code)
     pprint(api_response)
 except ApiException as e:
@@ -282,8 +282,8 @@ except ApiException as e:
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **scope** | **str**| The scope of the portfolio group | 
- **code** | **str**| The code of the portfolio group | 
+ **scope** | **str**| The scope of the portfolio group to delete. | 
+ **code** | **str**| The code of the portfolio group to delete. Together with the scope this uniquely identifies the portfolio group to delete. | 
 
 ### Return type
 
@@ -303,9 +303,9 @@ Name | Type | Description  | Notes
 # **delete_sub_group_from_group**
 > PortfolioGroup delete_sub_group_from_group(scope, code, subgroup_scope, subgroup_code)
 
-[EARLY ACCESS] Remove group from group
+[EARLY ACCESS] Delete sub group from group
 
-Remove a portfolio group (sub-group) from a parent portfolio group
+Remove a single portfolio group (sub group) from a portfolio group.
 
 ### Example
 
@@ -322,13 +322,13 @@ configuration.access_token = 'YOUR_ACCESS_TOKEN'
 
 # create an instance of the API class
 api_instance = lusid.PortfolioGroupsApi(lusid.ApiClient(configuration))
-scope = 'scope_example' # str | The scope of the portfolio group
-code = 'code_example' # str | The code of the portfolio group
-subgroup_scope = 'subgroup_scope_example' # str | The scope of the sub-group being removed
-subgroup_code = 'subgroup_code_example' # str | The code of the sub-group being removed
+scope = 'scope_example' # str | The scope of the portfolio group to remove the sub group from.
+code = 'code_example' # str | The code of the portfolio group to remove the sub group from. Together with the scope this uniquely identifies the portfolio group.
+subgroup_scope = 'subgroup_scope_example' # str | The scope of the sub group to remove from the portfolio group.
+subgroup_code = 'subgroup_code_example' # str | The code of the sub group to remove from the portfolio group. Together with the scope this uniquely identifies the sub group.
 
 try:
-    # [EARLY ACCESS] Remove group from group
+    # [EARLY ACCESS] Delete sub group from group
     api_response = api_instance.delete_sub_group_from_group(scope, code, subgroup_scope, subgroup_code)
     pprint(api_response)
 except ApiException as e:
@@ -339,10 +339,10 @@ except ApiException as e:
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **scope** | **str**| The scope of the portfolio group | 
- **code** | **str**| The code of the portfolio group | 
- **subgroup_scope** | **str**| The scope of the sub-group being removed | 
- **subgroup_code** | **str**| The code of the sub-group being removed | 
+ **scope** | **str**| The scope of the portfolio group to remove the sub group from. | 
+ **code** | **str**| The code of the portfolio group to remove the sub group from. Together with the scope this uniquely identifies the portfolio group. | 
+ **subgroup_scope** | **str**| The scope of the sub group to remove from the portfolio group. | 
+ **subgroup_code** | **str**| The code of the sub group to remove from the portfolio group. Together with the scope this uniquely identifies the sub group. | 
 
 ### Return type
 
@@ -364,7 +364,7 @@ Name | Type | Description  | Notes
 
 [EARLY ACCESS] Get portfolio group
 
-Get the definition of the specified portfolio group
+Retrieve the definition of a single portfolio group.
 
 ### Example
 
@@ -381,9 +381,9 @@ configuration.access_token = 'YOUR_ACCESS_TOKEN'
 
 # create an instance of the API class
 api_instance = lusid.PortfolioGroupsApi(lusid.ApiClient(configuration))
-scope = 'scope_example' # str | The scope of the portfolio group
-code = 'code_example' # str | The code of the portfolio group
-as_at = '2013-10-20T19:20:30+01:00' # datetime | Optional. The AsAt date of the data (optional)
+scope = 'scope_example' # str | The scope of the portfolio group to retrieve the definition for.
+code = 'code_example' # str | The code of the portfolio group to retrieve the definition for. Together with the scope              this uniquely identifies the portfolio group.
+as_at = '2013-10-20T19:20:30+01:00' # datetime | The asAt datetime at which to retrieve the portfolio group definition. Defaults to return              the latest version of the portfolio group definition if not specified. (optional)
 
 try:
     # [EARLY ACCESS] Get portfolio group
@@ -397,9 +397,9 @@ except ApiException as e:
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **scope** | **str**| The scope of the portfolio group | 
- **code** | **str**| The code of the portfolio group | 
- **as_at** | **datetime**| Optional. The AsAt date of the data | [optional] 
+ **scope** | **str**| The scope of the portfolio group to retrieve the definition for. | 
+ **code** | **str**| The code of the portfolio group to retrieve the definition for. Together with the scope              this uniquely identifies the portfolio group. | 
+ **as_at** | **datetime**| The asAt datetime at which to retrieve the portfolio group definition. Defaults to return              the latest version of the portfolio group definition if not specified. | [optional] 
 
 ### Return type
 
@@ -417,11 +417,11 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **get_portfolio_group_commands**
-> ResourceListOfProcessedCommand get_portfolio_group_commands(scope, code, from_as_at=from_as_at, to_as_at=to_as_at, sort_by=sort_by, start=start, limit=limit, filter=filter)
+> ResourceListOfProcessedCommand get_portfolio_group_commands(scope, code, from_as_at=from_as_at, to_as_at=to_as_at, filter=filter)
 
-[EARLY ACCESS] Get commands
+[EARLY ACCESS] Get portfolio group commands
 
-Gets all commands that modified a specific portfolio group
+Gets all the commands that modified a single portfolio group.
 
 ### Example
 
@@ -438,18 +438,15 @@ configuration.access_token = 'YOUR_ACCESS_TOKEN'
 
 # create an instance of the API class
 api_instance = lusid.PortfolioGroupsApi(lusid.ApiClient(configuration))
-scope = 'scope_example' # str | The scope of the portfolio group
-code = 'code_example' # str | The code of the portfolio group
-from_as_at = '2013-10-20T19:20:30+01:00' # datetime | Optional. Filters commands by those that were processed at or after this date and time (optional)
-to_as_at = '2013-10-20T19:20:30+01:00' # datetime | Optional. Filters commands by those that were processed at or before this date and time (optional)
-sort_by = ['sort_by_example'] # list[str] | Optional. Order the results by these fields. Use use the '-' sign to denote descending order e.g. -MyFieldName (optional)
-start = 56 # int | Optional. When paginating, skip this number of results (optional)
-limit = 56 # int | Optional. When paginating, limit the number of returned results to this many. (optional)
-filter = 'filter_example' # str | Optional. Expression to filter the result set (optional)
+scope = 'scope_example' # str | The scope of the portfolio group to retrieve the commands for.
+code = 'code_example' # str | The code of the portfolio group to retrieve the commands for. Together with the scope this uniquely identifies the portfolio group.
+from_as_at = '2013-10-20T19:20:30+01:00' # datetime | The lower bound asAt datetime (inclusive) from which to retrieve commands. There is no lower bound if this is not specified. (optional)
+to_as_at = '2013-10-20T19:20:30+01:00' # datetime | The upper bound asAt datetime (inclusive) from which to retrieve commands. There is no upper bound if this is not specified. (optional)
+filter = 'filter_example' # str | Expression to filter the result set. Read more about filtering results from LUSID here https://support.lusid.com/filtering-results-from-lusid. (optional)
 
 try:
-    # [EARLY ACCESS] Get commands
-    api_response = api_instance.get_portfolio_group_commands(scope, code, from_as_at=from_as_at, to_as_at=to_as_at, sort_by=sort_by, start=start, limit=limit, filter=filter)
+    # [EARLY ACCESS] Get portfolio group commands
+    api_response = api_instance.get_portfolio_group_commands(scope, code, from_as_at=from_as_at, to_as_at=to_as_at, filter=filter)
     pprint(api_response)
 except ApiException as e:
     print("Exception when calling PortfolioGroupsApi->get_portfolio_group_commands: %s\n" % e)
@@ -459,14 +456,11 @@ except ApiException as e:
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **scope** | **str**| The scope of the portfolio group | 
- **code** | **str**| The code of the portfolio group | 
- **from_as_at** | **datetime**| Optional. Filters commands by those that were processed at or after this date and time | [optional] 
- **to_as_at** | **datetime**| Optional. Filters commands by those that were processed at or before this date and time | [optional] 
- **sort_by** | [**list[str]**](str.md)| Optional. Order the results by these fields. Use use the &#39;-&#39; sign to denote descending order e.g. -MyFieldName | [optional] 
- **start** | **int**| Optional. When paginating, skip this number of results | [optional] 
- **limit** | **int**| Optional. When paginating, limit the number of returned results to this many. | [optional] 
- **filter** | **str**| Optional. Expression to filter the result set | [optional] 
+ **scope** | **str**| The scope of the portfolio group to retrieve the commands for. | 
+ **code** | **str**| The code of the portfolio group to retrieve the commands for. Together with the scope this uniquely identifies the portfolio group. | 
+ **from_as_at** | **datetime**| The lower bound asAt datetime (inclusive) from which to retrieve commands. There is no lower bound if this is not specified. | [optional] 
+ **to_as_at** | **datetime**| The upper bound asAt datetime (inclusive) from which to retrieve commands. There is no upper bound if this is not specified. | [optional] 
+ **filter** | **str**| Expression to filter the result set. Read more about filtering results from LUSID here https://support.lusid.com/filtering-results-from-lusid. | [optional] 
 
 ### Return type
 
@@ -486,9 +480,9 @@ Name | Type | Description  | Notes
 # **get_portfolio_group_expansion**
 > ExpandedGroup get_portfolio_group_expansion(scope, code, effective_at=effective_at, as_at=as_at, property_filter=property_filter)
 
-[EARLY ACCESS] Get a full expansion of a portfolio group
+[EARLY ACCESS] Get portfolio group expansion
 
-Lists all portfolios in a group, and all sub groups. Portfolios are decorated with their properties.
+List all the portfolios in a group, including all portfolios within sub groups in the group. Each portfolio will be decorated with all of its properties unless a property filter is specified.
 
 ### Example
 
@@ -505,14 +499,14 @@ configuration.access_token = 'YOUR_ACCESS_TOKEN'
 
 # create an instance of the API class
 api_instance = lusid.PortfolioGroupsApi(lusid.ApiClient(configuration))
-scope = 'scope_example' # str | The scope of the portfolio
-code = 'code_example' # str | The code of the portfolio
-effective_at = '2013-10-20T19:20:30+01:00' # datetime | Optional. The effective date of the data (optional)
-as_at = '2013-10-20T19:20:30+01:00' # datetime | Optional. The AsAt date of the data (optional)
-property_filter = ['property_filter_example'] # list[str] | Optional. The restricted set of properties that should be returned (optional)
+scope = 'scope_example' # str | The scope of the portfolio group to expand.
+code = 'code_example' # str | The code of the portfolio group to expand. Together with the scope this uniquely identifies the portfolio              group to expand.
+effective_at = '2013-10-20T19:20:30+01:00' # datetime | The effective datetime at which to expand the portfolio group. Defaults to the current LUSID system datetime if not specified. (optional)
+as_at = '2013-10-20T19:20:30+01:00' # datetime | The asAt datetime at which to expand the portfolio group. Defaults to return the latest version of each portfolio in the group if not specified. (optional)
+property_filter = ['property_filter_example'] # list[str] | The restricted list of property keys from the \"Portfolio\" domain which will be decorated onto each portfolio. These take the format {domain}/{scope}/{code} e.g. \"Portfolio/Manager/Id\". (optional)
 
 try:
-    # [EARLY ACCESS] Get a full expansion of a portfolio group
+    # [EARLY ACCESS] Get portfolio group expansion
     api_response = api_instance.get_portfolio_group_expansion(scope, code, effective_at=effective_at, as_at=as_at, property_filter=property_filter)
     pprint(api_response)
 except ApiException as e:
@@ -523,11 +517,11 @@ except ApiException as e:
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **scope** | **str**| The scope of the portfolio | 
- **code** | **str**| The code of the portfolio | 
- **effective_at** | **datetime**| Optional. The effective date of the data | [optional] 
- **as_at** | **datetime**| Optional. The AsAt date of the data | [optional] 
- **property_filter** | [**list[str]**](str.md)| Optional. The restricted set of properties that should be returned | [optional] 
+ **scope** | **str**| The scope of the portfolio group to expand. | 
+ **code** | **str**| The code of the portfolio group to expand. Together with the scope this uniquely identifies the portfolio              group to expand. | 
+ **effective_at** | **datetime**| The effective datetime at which to expand the portfolio group. Defaults to the current LUSID system datetime if not specified. | [optional] 
+ **as_at** | **datetime**| The asAt datetime at which to expand the portfolio group. Defaults to return the latest version of each portfolio in the group if not specified. | [optional] 
+ **property_filter** | [**list[str]**](str.md)| The restricted list of property keys from the \&quot;Portfolio\&quot; domain which will be decorated onto each portfolio. These take the format {domain}/{scope}/{code} e.g. \&quot;Portfolio/Manager/Id\&quot;. | [optional] 
 
 ### Return type
 
@@ -545,11 +539,11 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **list_portfolio_groups**
-> ResourceListOfPortfolioGroup list_portfolio_groups(scope, as_at=as_at, sort_by=sort_by, start=start, limit=limit, filter=filter)
+> ResourceListOfPortfolioGroup list_portfolio_groups(scope, as_at=as_at, filter=filter)
 
-[EARLY ACCESS] List groups in scope
+[EARLY ACCESS] List portfolio groups
 
-Lists all portfolio groups in a specified scope
+List all the portfolio groups in a single scope.
 
 ### Example
 
@@ -566,16 +560,13 @@ configuration.access_token = 'YOUR_ACCESS_TOKEN'
 
 # create an instance of the API class
 api_instance = lusid.PortfolioGroupsApi(lusid.ApiClient(configuration))
-scope = 'scope_example' # str | The scope
-as_at = '2013-10-20T19:20:30+01:00' # datetime | Optional. The AsAt date of the data (optional)
-sort_by = ['sort_by_example'] # list[str] | Optional. Order the results by these fields. Use use the '-' sign to denote descending order e.g. -MyFieldName (optional)
-start = 56 # int | Optional. When paginating, skip this number of results (optional)
-limit = 56 # int | Optional. When paginating, limit the number of returned results to this many. (optional)
-filter = 'filter_example' # str | Optional. Expression to filter the result set (optional)
+scope = 'scope_example' # str | The scope to list the portfolio groups in.
+as_at = '2013-10-20T19:20:30+01:00' # datetime | The asAt datetime at which to list the portfolio groups. Defaults to return the latest version of each portfolio group if not specified. (optional)
+filter = 'filter_example' # str | Expression to filter the result set. Read more about filtering results from LUSID here https://support.lusid.com/filtering-results-from-lusid. (optional)
 
 try:
-    # [EARLY ACCESS] List groups in scope
-    api_response = api_instance.list_portfolio_groups(scope, as_at=as_at, sort_by=sort_by, start=start, limit=limit, filter=filter)
+    # [EARLY ACCESS] List portfolio groups
+    api_response = api_instance.list_portfolio_groups(scope, as_at=as_at, filter=filter)
     pprint(api_response)
 except ApiException as e:
     print("Exception when calling PortfolioGroupsApi->list_portfolio_groups: %s\n" % e)
@@ -585,12 +576,9 @@ except ApiException as e:
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **scope** | **str**| The scope | 
- **as_at** | **datetime**| Optional. The AsAt date of the data | [optional] 
- **sort_by** | [**list[str]**](str.md)| Optional. Order the results by these fields. Use use the &#39;-&#39; sign to denote descending order e.g. -MyFieldName | [optional] 
- **start** | **int**| Optional. When paginating, skip this number of results | [optional] 
- **limit** | **int**| Optional. When paginating, limit the number of returned results to this many. | [optional] 
- **filter** | **str**| Optional. Expression to filter the result set | [optional] 
+ **scope** | **str**| The scope to list the portfolio groups in. | 
+ **as_at** | **datetime**| The asAt datetime at which to list the portfolio groups. Defaults to return the latest version of each portfolio group if not specified. | [optional] 
+ **filter** | **str**| Expression to filter the result set. Read more about filtering results from LUSID here https://support.lusid.com/filtering-results-from-lusid. | [optional] 
 
 ### Return type
 
@@ -610,9 +598,9 @@ Name | Type | Description  | Notes
 # **update_portfolio_group**
 > PortfolioGroup update_portfolio_group(scope, code, request=request)
 
-[EARLY ACCESS] Update group
+[EARLY ACCESS] Update portfolio group
 
-Update the definition of the specified existing portfolio group.    Not all elements within a portfolio group definition are modifiable after creation.
+Update the definition of a single portfolio group. Not all elements within a portfolio group definition are modifiable  due to the potential implications for data already stored against the portfolio group.
 
 ### Example
 
@@ -629,12 +617,12 @@ configuration.access_token = 'YOUR_ACCESS_TOKEN'
 
 # create an instance of the API class
 api_instance = lusid.PortfolioGroupsApi(lusid.ApiClient(configuration))
-scope = 'scope_example' # str | The scope of the portfolio group
-code = 'code_example' # str | The code of the portfolio group
-request = lusid.UpdatePortfolioGroupRequest() # UpdatePortfolioGroupRequest | The updated definition of the portfolio group (optional)
+scope = 'scope_example' # str | The scope of the portfolio group to update the definition for.
+code = 'code_example' # str | The code of the portfolio group to update the definition for. Together with the scope this uniquely identifies the portfolio group.
+request = lusid.UpdatePortfolioGroupRequest() # UpdatePortfolioGroupRequest | The updated portfolio group definition. (optional)
 
 try:
-    # [EARLY ACCESS] Update group
+    # [EARLY ACCESS] Update portfolio group
     api_response = api_instance.update_portfolio_group(scope, code, request=request)
     pprint(api_response)
 except ApiException as e:
@@ -645,9 +633,9 @@ except ApiException as e:
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **scope** | **str**| The scope of the portfolio group | 
- **code** | **str**| The code of the portfolio group | 
- **request** | [**UpdatePortfolioGroupRequest**](UpdatePortfolioGroupRequest.md)| The updated definition of the portfolio group | [optional] 
+ **scope** | **str**| The scope of the portfolio group to update the definition for. | 
+ **code** | **str**| The code of the portfolio group to update the definition for. Together with the scope this uniquely identifies the portfolio group. | 
+ **request** | [**UpdatePortfolioGroupRequest**](UpdatePortfolioGroupRequest.md)| The updated portfolio group definition. | [optional] 
 
 ### Return type
 
