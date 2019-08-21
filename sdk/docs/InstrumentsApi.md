@@ -1,12 +1,12 @@
 # lusid.InstrumentsApi
 
-All URIs are relative to *http://localhost*
+All URIs are relative to *http://http:/api*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
 [**delete_instrument**](InstrumentsApi.md#delete_instrument) | **DELETE** /api/instruments/{identifierType}/{identifier} | [EARLY ACCESS] Delete instrument
 [**get_instrument**](InstrumentsApi.md#get_instrument) | **GET** /api/instruments/{identifierType}/{identifier} | [EARLY ACCESS] Get instrument
-[**get_instrument_identifier_types**](InstrumentsApi.md#get_instrument_identifier_types) | **GET** /api/instruments/identifierTypes | [EARLY ACCESS] Get instrument identifier types
+[**get_instrument_identifiers**](InstrumentsApi.md#get_instrument_identifiers) | **GET** /api/instruments/identifiers | [EARLY ACCESS] Get instrument identifiers
 [**get_instruments**](InstrumentsApi.md#get_instruments) | **POST** /api/instruments/$get | [EARLY ACCESS] Get instruments
 [**list_instruments**](InstrumentsApi.md#list_instruments) | **GET** /api/instruments | [EARLY ACCESS] List instruments
 [**update_instrument_identifier**](InstrumentsApi.md#update_instrument_identifier) | **POST** /api/instruments/{identifierType}/{identifier} | [EARLY ACCESS] Update instrument identifier
@@ -130,12 +130,12 @@ Name | Type | Description  | Notes
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
-# **get_instrument_identifier_types**
-> ResourceListOfInstrumentIdTypeDescriptor get_instrument_identifier_types()
+# **get_instrument_identifiers**
+> ResourceListOfInstrumentIdTypeDescriptor get_instrument_identifiers()
 
-[EARLY ACCESS] Get instrument identifier types
+[EARLY ACCESS] Get instrument identifiers
 
-Get the allowable instrument identifier types and their descriptions.
+Get the allowable instrument identifiers and their descriptions.
 
 ### Example
 
@@ -154,11 +154,11 @@ configuration.access_token = 'YOUR_ACCESS_TOKEN'
 api_instance = lusid.InstrumentsApi(lusid.ApiClient(configuration))
 
 try:
-    # [EARLY ACCESS] Get instrument identifier types
-    api_response = api_instance.get_instrument_identifier_types()
+    # [EARLY ACCESS] Get instrument identifiers
+    api_response = api_instance.get_instrument_identifiers()
     pprint(api_response)
 except ApiException as e:
-    print("Exception when calling InstrumentsApi->get_instrument_identifier_types: %s\n" % e)
+    print("Exception when calling InstrumentsApi->get_instrument_identifiers: %s\n" % e)
 ```
 
 ### Parameters
