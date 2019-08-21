@@ -28,9 +28,9 @@ class TypeWithDefault(type):
         super(TypeWithDefault, cls).__init__(name, bases, dct)
         cls._default = None
 
-    def __call__(cls, **kwargs):
+    def __call__(cls):
         if cls._default is None:
-            cls._default = type.__call__(cls, **kwargs)
+            cls._default = type.__call__(cls)
         return copy.copy(cls._default)
 
     def set_default(cls, default):
@@ -42,100 +42,69 @@ class Configuration(six.with_metaclass(TypeWithDefault, object)):
 
     Ref: https://openapi-generator.tech
     Do not edit the class manually.
-
-    :param host: Base url
-    :param api_key: Dict to store API key(s)
-    :param api_key_prefix: Dict to store API prefix (e.g. Bearer)
-    :param username: Username for HTTP basic authentication
-    :param password: Password for HTTP basic authentication
     """
 
-    def __init__(self, host="http://localhost",
-                 api_key={}, api_key_prefix={},
-                 username="", password=""):
-        """Constructor
-        """
-        self.host = host
-        """Default Base url
-        """
+    def __init__(self):
+        """Constructor"""
+        # Default Base url
+        self.host = "http://localhost"
+        # Temp file folder for downloading files
         self.temp_folder_path = None
-        """Temp file folder for downloading files
-        """
+
         # Authentication Settings
-        self.api_key = api_key
-        """dict to store API key(s)
-        """
-        self.api_key_prefix = api_key_prefix
-        """dict to store API prefix (e.g. Bearer)
-        """
-        self.username = username
-        """Username for HTTP basic authentication
-        """
-        self.password = password
-        """Password for HTTP basic authentication
-        """
+        # dict to store API key(s)
+        self.api_key = {}
+        # dict to store API prefix (e.g. Bearer)
+        self.api_key_prefix = {}
+        # Username for HTTP basic authentication
+        self.username = ""
+        # Password for HTTP basic authentication
+        self.password = ""
+        # access token for OAuth/Bearer
         self.access_token = ""
-        """access token for OAuth/Bearer
-        """
+        # Logging Settings
         self.logger = {}
-        """Logging Settings
-        """
         self.logger["package_logger"] = logging.getLogger("lusid")
         self.logger["urllib3_logger"] = logging.getLogger("urllib3")
+        # Log format
         self.logger_format = '%(asctime)s %(levelname)s %(message)s'
-        """Log format
-        """
+        # Log stream handler
         self.logger_stream_handler = None
-        """Log stream handler
-        """
+        # Log file handler
         self.logger_file_handler = None
-        """Log file handler
-        """
+        # Debug file location
         self.logger_file = None
-        """Debug file location
-        """
+        # Debug switch
         self.debug = False
-        """Debug switch
-        """
 
+        # SSL/TLS verification
+        # Set this to false to skip verifying SSL certificate when calling API
+        # from https server.
         self.verify_ssl = True
-        """SSL/TLS verification
-           Set this to false to skip verifying SSL certificate when calling API
-           from https server.
-        """
+        # Set this to customize the certificate file to verify the peer.
         self.ssl_ca_cert = None
-        """Set this to customize the certificate file to verify the peer.
-        """
+        # client certificate file
         self.cert_file = None
-        """client certificate file
-        """
+        # client key file
         self.key_file = None
-        """client key file
-        """
+        # Set this to True/False to enable/disable SSL hostname verification.
         self.assert_hostname = None
-        """Set this to True/False to enable/disable SSL hostname verification.
-        """
 
+        # urllib3 connection pool's maximum number of connections saved
+        # per pool. urllib3 uses 1 connection as default value, but this is
+        # not the best value when you are making a lot of possibly parallel
+        # requests to the same host, which is often the case here.
+        # cpu_count * 5 is used as default value to increase performance.
         self.connection_pool_maxsize = multiprocessing.cpu_count() * 5
-        """urllib3 connection pool's maximum number of connections saved
-           per pool. urllib3 uses 1 connection as default value, but this is
-           not the best value when you are making a lot of possibly parallel
-           requests to the same host, which is often the case here.
-           cpu_count * 5 is used as default value to increase performance.
-        """
 
+        # Proxy URL
         self.proxy = None
-        """Proxy URL
-        """
+        # Proxy headers
         self.proxy_headers = None
-        """Proxy headers
-        """
+        # Safe chars for path_param
         self.safe_chars_for_path_param = ''
-        """Safe chars for path_param
-        """
+        # Adding retries to override urllib3 default value 3
         self.retries = None
-        """Adding retries to override urllib3 default value 3
-        """
 
     @property
     def logger_file(self):
