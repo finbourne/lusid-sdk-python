@@ -43,12 +43,14 @@ configuration = lusid.Configuration()
 # Configure OAuth2 access token for authorization: oauth2
 configuration.access_token = 'YOUR_ACCESS_TOKEN'
 
-# create an instance of the API class
+# Defining host is optional and default to http://localhost
+configuration.host = "http://localhost"
+# Create an instance of the API class
 api_instance = lusid.TransactionPortfoliosApi(lusid.ApiClient(configuration))
 scope = 'scope_example' # str | The scope of the transaction portfolio.
 code = 'code_example' # str | The code of the transaction portfolio. Together with the scope this uniquely identifies              the transaction portfolio.
 effective_at = 'effective_at_example' # str | The effective datetime or cut label at which the holdings should be set to the provided targets.
-holding_adjustments = None # list[AdjustHoldingRequest] | The selected set of holdings to adjust to the provided targets for the              transaction portfolio. (optional)
+holding_adjustments = [lusid.AdjustHoldingRequest()] # list[AdjustHoldingRequest] | The selected set of holdings to adjust to the provided targets for the              transaction portfolio. (optional)
 
 try:
     # [EARLY ACCESS] Adjust holdings
@@ -65,7 +67,7 @@ Name | Type | Description  | Notes
  **scope** | **str**| The scope of the transaction portfolio. | 
  **code** | **str**| The code of the transaction portfolio. Together with the scope this uniquely identifies              the transaction portfolio. | 
  **effective_at** | **str**| The effective datetime or cut label at which the holdings should be set to the provided targets. | 
- **holding_adjustments** | [**list[AdjustHoldingRequest]**](list.md)| The selected set of holdings to adjust to the provided targets for the              transaction portfolio. | [optional] 
+ **holding_adjustments** | [**list[AdjustHoldingRequest]**](AdjustHoldingRequest.md)| The selected set of holdings to adjust to the provided targets for the              transaction portfolio. | [optional] 
 
 ### Return type
 
@@ -79,6 +81,13 @@ Name | Type | Description  | Notes
 
  - **Content-Type**: Not defined
  - **Accept**: text/plain, application/json, text/json
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | The version of the transaction portfolio that contains the newly adjusted holdings |  -  |
+**400** | The details of the input related failure |  -  |
+**0** | Error response |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
@@ -102,7 +111,9 @@ configuration = lusid.Configuration()
 # Configure OAuth2 access token for authorization: oauth2
 configuration.access_token = 'YOUR_ACCESS_TOKEN'
 
-# create an instance of the API class
+# Defining host is optional and default to http://localhost
+configuration.host = "http://localhost"
+# Create an instance of the API class
 api_instance = lusid.TransactionPortfoliosApi(lusid.ApiClient(configuration))
 scope = 'scope_example' # str | The scope of the transaction portfolio.
 code = 'code_example' # str | The code of the transaction portfolio. Together with the scope this uniquely identifies              the transaction portfolio.
@@ -143,6 +154,13 @@ Name | Type | Description  | Notes
  - **Content-Type**: Not defined
  - **Accept**: text/plain, application/json, text/json
 
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | The requested transactions from the specified transaction portfolio |  -  |
+**400** | The details of the input related failure |  -  |
+**0** | Error response |  -  |
+
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **cancel_adjust_holdings**
@@ -165,7 +183,9 @@ configuration = lusid.Configuration()
 # Configure OAuth2 access token for authorization: oauth2
 configuration.access_token = 'YOUR_ACCESS_TOKEN'
 
-# create an instance of the API class
+# Defining host is optional and default to http://localhost
+configuration.host = "http://localhost"
+# Create an instance of the API class
 api_instance = lusid.TransactionPortfoliosApi(lusid.ApiClient(configuration))
 scope = 'scope_example' # str | The scope of the transaction portfolio.
 code = 'code_example' # str | The code of the transaction portfolio. Together with the scope this uniquely identifies              the transaction portfolio.
@@ -200,6 +220,13 @@ Name | Type | Description  | Notes
  - **Content-Type**: Not defined
  - **Accept**: text/plain, application/json, text/json
 
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | The datetime that the holding adjustments were cancelled |  -  |
+**400** | The details of the input related failure |  -  |
+**0** | Error response |  -  |
+
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **cancel_executions**
@@ -222,7 +249,9 @@ configuration = lusid.Configuration()
 # Configure OAuth2 access token for authorization: oauth2
 configuration.access_token = 'YOUR_ACCESS_TOKEN'
 
-# create an instance of the API class
+# Defining host is optional and default to http://localhost
+configuration.host = "http://localhost"
+# Create an instance of the API class
 api_instance = lusid.TransactionPortfoliosApi(lusid.ApiClient(configuration))
 scope = 'scope_example' # str | The scope of the transaction portfolio.
 code = 'code_example' # str | The code of the transaction portfolio. Together with the scope this uniquely identifies              the transaction portfolio.
@@ -257,6 +286,13 @@ Name | Type | Description  | Notes
  - **Content-Type**: Not defined
  - **Accept**: text/plain, application/json, text/json
 
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | The datetime that the executions were cancelled |  -  |
+**400** | The details of the input related failure |  -  |
+**0** | Error response |  -  |
+
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **cancel_transactions**
@@ -279,7 +315,9 @@ configuration = lusid.Configuration()
 # Configure OAuth2 access token for authorization: oauth2
 configuration.access_token = 'YOUR_ACCESS_TOKEN'
 
-# create an instance of the API class
+# Defining host is optional and default to http://localhost
+configuration.host = "http://localhost"
+# Create an instance of the API class
 api_instance = lusid.TransactionPortfoliosApi(lusid.ApiClient(configuration))
 scope = 'scope_example' # str | The scope of the transaction portfolio.
 code = 'code_example' # str | The code of the transaction portfolio. Together with the scope this uniquely identifies              the transaction portfolio.
@@ -314,6 +352,13 @@ Name | Type | Description  | Notes
  - **Content-Type**: Not defined
  - **Accept**: text/plain, application/json, text/json
 
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | The datetime that the transactions were cancelled |  -  |
+**400** | The details of the input related failure |  -  |
+**0** | Error response |  -  |
+
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **create_portfolio**
@@ -336,7 +381,9 @@ configuration = lusid.Configuration()
 # Configure OAuth2 access token for authorization: oauth2
 configuration.access_token = 'YOUR_ACCESS_TOKEN'
 
-# create an instance of the API class
+# Defining host is optional and default to http://localhost
+configuration.host = "http://localhost"
+# Create an instance of the API class
 api_instance = lusid.TransactionPortfoliosApi(lusid.ApiClient(configuration))
 scope = 'scope_example' # str | The scope that the transaction portfolio will be created in.
 create_request = lusid.CreateTransactionPortfolioRequest() # CreateTransactionPortfolioRequest | The definition and details of the transaction portfolio. (optional)
@@ -369,6 +416,13 @@ Name | Type | Description  | Notes
  - **Content-Type**: Not defined
  - **Accept**: text/plain, application/json, text/json
 
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**201** | The newly created transaction portfolio |  -  |
+**400** | The details of the input related failure |  -  |
+**0** | Error response |  -  |
+
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **delete_property_from_transaction**
@@ -391,7 +445,9 @@ configuration = lusid.Configuration()
 # Configure OAuth2 access token for authorization: oauth2
 configuration.access_token = 'YOUR_ACCESS_TOKEN'
 
-# create an instance of the API class
+# Defining host is optional and default to http://localhost
+configuration.host = "http://localhost"
+# Create an instance of the API class
 api_instance = lusid.TransactionPortfoliosApi(lusid.ApiClient(configuration))
 scope = 'scope_example' # str | The scope of the transaction portfolio.
 code = 'code_example' # str | The code of the transaction portfolio. Together with the scope this uniquely identifies              the transaction portfolio.
@@ -428,6 +484,13 @@ Name | Type | Description  | Notes
  - **Content-Type**: Not defined
  - **Accept**: text/plain, application/json, text/json
 
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | The datetime that the property was deleted |  -  |
+**400** | The details of the input related failure |  -  |
+**0** | Error response |  -  |
+
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **get_details**
@@ -450,7 +513,9 @@ configuration = lusid.Configuration()
 # Configure OAuth2 access token for authorization: oauth2
 configuration.access_token = 'YOUR_ACCESS_TOKEN'
 
-# create an instance of the API class
+# Defining host is optional and default to http://localhost
+configuration.host = "http://localhost"
+# Create an instance of the API class
 api_instance = lusid.TransactionPortfoliosApi(lusid.ApiClient(configuration))
 scope = 'scope_example' # str | The scope of the transaction portfolio to retrieve the details for.
 code = 'code_example' # str | The code of the transaction portfolio to retrieve the details for. Together with the              scope this uniquely identifies the transaction portfolio.
@@ -487,6 +552,13 @@ Name | Type | Description  | Notes
  - **Content-Type**: Not defined
  - **Accept**: text/plain, application/json, text/json
 
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | The details of the specified transaction portfolio |  -  |
+**400** | The details of the input related failure |  -  |
+**0** | Error response |  -  |
+
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **get_holdings**
@@ -509,7 +581,9 @@ configuration = lusid.Configuration()
 # Configure OAuth2 access token for authorization: oauth2
 configuration.access_token = 'YOUR_ACCESS_TOKEN'
 
-# create an instance of the API class
+# Defining host is optional and default to http://localhost
+configuration.host = "http://localhost"
+# Create an instance of the API class
 api_instance = lusid.TransactionPortfoliosApi(lusid.ApiClient(configuration))
 scope = 'scope_example' # str | The scope of the transaction portfolio.
 code = 'code_example' # str | The code of the transaction portfolio. Together with the scope this uniquely identifies              the transaction portfolio.
@@ -552,6 +626,13 @@ Name | Type | Description  | Notes
  - **Content-Type**: Not defined
  - **Accept**: text/plain, application/json, text/json
 
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | The holdings and version of the specified transaction portfolio |  -  |
+**400** | The details of the input related failure |  -  |
+**0** | Error response |  -  |
+
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **get_holdings_adjustment**
@@ -574,7 +655,9 @@ configuration = lusid.Configuration()
 # Configure OAuth2 access token for authorization: oauth2
 configuration.access_token = 'YOUR_ACCESS_TOKEN'
 
-# create an instance of the API class
+# Defining host is optional and default to http://localhost
+configuration.host = "http://localhost"
+# Create an instance of the API class
 api_instance = lusid.TransactionPortfoliosApi(lusid.ApiClient(configuration))
 scope = 'scope_example' # str | The scope of the transaction portfolio.
 code = 'code_example' # str | The code of the transaction portfolio. Together with the scope this uniquely identifies              the transaction portfolio.
@@ -611,6 +694,13 @@ Name | Type | Description  | Notes
  - **Content-Type**: Not defined
  - **Accept**: text/plain, application/json, text/json
 
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | The details of the requested holdings adjustment |  -  |
+**400** | The details of the input related failure |  -  |
+**0** | Error response |  -  |
+
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **get_transactions**
@@ -633,7 +723,9 @@ configuration = lusid.Configuration()
 # Configure OAuth2 access token for authorization: oauth2
 configuration.access_token = 'YOUR_ACCESS_TOKEN'
 
-# create an instance of the API class
+# Defining host is optional and default to http://localhost
+configuration.host = "http://localhost"
+# Create an instance of the API class
 api_instance = lusid.TransactionPortfoliosApi(lusid.ApiClient(configuration))
 scope = 'scope_example' # str | The scope of the transaction portfolio.
 code = 'code_example' # str | The code of the transaction portfolio. Together with the scope this uniquely identifies              the transaction portfolio.
@@ -676,6 +768,13 @@ Name | Type | Description  | Notes
  - **Content-Type**: Not defined
  - **Accept**: text/plain, application/json, text/json
 
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | The requested transactions from the specified transaction portfolio |  -  |
+**400** | The details of the input related failure |  -  |
+**0** | Error response |  -  |
+
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **list_holdings_adjustments**
@@ -698,7 +797,9 @@ configuration = lusid.Configuration()
 # Configure OAuth2 access token for authorization: oauth2
 configuration.access_token = 'YOUR_ACCESS_TOKEN'
 
-# create an instance of the API class
+# Defining host is optional and default to http://localhost
+configuration.host = "http://localhost"
+# Create an instance of the API class
 api_instance = lusid.TransactionPortfoliosApi(lusid.ApiClient(configuration))
 scope = 'scope_example' # str | The scope of the transaction portfolio.
 code = 'code_example' # str | The code of the transaction portfolio. Together with the scope this uniquely identifies              the transaction portfolio.
@@ -737,6 +838,13 @@ Name | Type | Description  | Notes
  - **Content-Type**: Not defined
  - **Accept**: text/plain, application/json, text/json
 
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | The record of holdings adjustments made to the specified transaction portfolio |  -  |
+**400** | The details of the input related failure |  -  |
+**0** | Error response |  -  |
+
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **set_holdings**
@@ -759,12 +867,14 @@ configuration = lusid.Configuration()
 # Configure OAuth2 access token for authorization: oauth2
 configuration.access_token = 'YOUR_ACCESS_TOKEN'
 
-# create an instance of the API class
+# Defining host is optional and default to http://localhost
+configuration.host = "http://localhost"
+# Create an instance of the API class
 api_instance = lusid.TransactionPortfoliosApi(lusid.ApiClient(configuration))
 scope = 'scope_example' # str | The scope of the transaction portfolio.
 code = 'code_example' # str | The code of the transaction portfolio. Together with the scope this uniquely identifies              the transaction portfolio.
 effective_at = 'effective_at_example' # str | The effective datetime or cut label at which the holdings should be set to the provided targets.
-holding_adjustments = None # list[AdjustHoldingRequest] | The complete set of target holdings for the transaction portfolio. (optional)
+holding_adjustments = [lusid.AdjustHoldingRequest()] # list[AdjustHoldingRequest] | The complete set of target holdings for the transaction portfolio. (optional)
 
 try:
     # [EARLY ACCESS] Set holdings
@@ -781,7 +891,7 @@ Name | Type | Description  | Notes
  **scope** | **str**| The scope of the transaction portfolio. | 
  **code** | **str**| The code of the transaction portfolio. Together with the scope this uniquely identifies              the transaction portfolio. | 
  **effective_at** | **str**| The effective datetime or cut label at which the holdings should be set to the provided targets. | 
- **holding_adjustments** | [**list[AdjustHoldingRequest]**](list.md)| The complete set of target holdings for the transaction portfolio. | [optional] 
+ **holding_adjustments** | [**list[AdjustHoldingRequest]**](AdjustHoldingRequest.md)| The complete set of target holdings for the transaction portfolio. | [optional] 
 
 ### Return type
 
@@ -795,6 +905,13 @@ Name | Type | Description  | Notes
 
  - **Content-Type**: Not defined
  - **Accept**: text/plain, application/json, text/json
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | The version of the transaction portfolio that contains the newly set holdings |  -  |
+**400** | The details of the input related failure |  -  |
+**0** | Error response |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
@@ -818,11 +935,13 @@ configuration = lusid.Configuration()
 # Configure OAuth2 access token for authorization: oauth2
 configuration.access_token = 'YOUR_ACCESS_TOKEN'
 
-# create an instance of the API class
+# Defining host is optional and default to http://localhost
+configuration.host = "http://localhost"
+# Create an instance of the API class
 api_instance = lusid.TransactionPortfoliosApi(lusid.ApiClient(configuration))
 scope = 'scope_example' # str | The scope of the transaction portfolio.
 code = 'code_example' # str | The code of the transaction portfolio. Together with the scope this uniquely identifies              the transaction portfolio.
-executions = None # list[ExecutionRequest] | The executions to update or insert. (optional)
+executions = [lusid.ExecutionRequest()] # list[ExecutionRequest] | The executions to update or insert. (optional)
 
 try:
     # [EARLY ACCESS] Upsert executions
@@ -838,7 +957,7 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **scope** | **str**| The scope of the transaction portfolio. | 
  **code** | **str**| The code of the transaction portfolio. Together with the scope this uniquely identifies              the transaction portfolio. | 
- **executions** | [**list[ExecutionRequest]**](list.md)| The executions to update or insert. | [optional] 
+ **executions** | [**list[ExecutionRequest]**](ExecutionRequest.md)| The executions to update or insert. | [optional] 
 
 ### Return type
 
@@ -852,6 +971,13 @@ Name | Type | Description  | Notes
 
  - **Content-Type**: Not defined
  - **Accept**: text/plain, application/json, text/json
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | The version of the transaction portfolio that contains the newly updated or inserted executions |  -  |
+**400** | The details of the input related failure |  -  |
+**0** | Error response |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
@@ -875,7 +1001,9 @@ configuration = lusid.Configuration()
 # Configure OAuth2 access token for authorization: oauth2
 configuration.access_token = 'YOUR_ACCESS_TOKEN'
 
-# create an instance of the API class
+# Defining host is optional and default to http://localhost
+configuration.host = "http://localhost"
+# Create an instance of the API class
 api_instance = lusid.TransactionPortfoliosApi(lusid.ApiClient(configuration))
 scope = 'scope_example' # str | The scope of the transaction portfolio to update or insert details for.
 code = 'code_example' # str | The code of the transaction portfolio to update or insert details for. Together with the              scope this uniquely identifies the transaction portfolio.
@@ -912,6 +1040,13 @@ Name | Type | Description  | Notes
  - **Content-Type**: Not defined
  - **Accept**: text/plain, application/json, text/json
 
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | The newly updated or inserted details |  -  |
+**400** | The details of the input related failure |  -  |
+**0** | Error response |  -  |
+
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **upsert_transaction_properties**
@@ -934,7 +1069,9 @@ configuration = lusid.Configuration()
 # Configure OAuth2 access token for authorization: oauth2
 configuration.access_token = 'YOUR_ACCESS_TOKEN'
 
-# create an instance of the API class
+# Defining host is optional and default to http://localhost
+configuration.host = "http://localhost"
+# Create an instance of the API class
 api_instance = lusid.TransactionPortfoliosApi(lusid.ApiClient(configuration))
 scope = 'scope_example' # str | The scope of the transaction portfolio.
 code = 'code_example' # str | The code of the transaction portfolio. Together with the scope this uniquely identifies              the transaction portfolio.
@@ -971,6 +1108,13 @@ Name | Type | Description  | Notes
  - **Content-Type**: Not defined
  - **Accept**: text/plain, application/json, text/json
 
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | The version of the transaction portfolio that contains the newly updated or inserted transaction property |  -  |
+**400** | The details of the input related failure |  -  |
+**0** | Error response |  -  |
+
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **upsert_transactions**
@@ -993,11 +1137,13 @@ configuration = lusid.Configuration()
 # Configure OAuth2 access token for authorization: oauth2
 configuration.access_token = 'YOUR_ACCESS_TOKEN'
 
-# create an instance of the API class
+# Defining host is optional and default to http://localhost
+configuration.host = "http://localhost"
+# Create an instance of the API class
 api_instance = lusid.TransactionPortfoliosApi(lusid.ApiClient(configuration))
 scope = 'scope_example' # str | The scope of the transaction portfolio.
 code = 'code_example' # str | The code of the transaction portfolio. Together with the scope this uniquely identifies              the transaction portfolio.
-transactions = None # list[TransactionRequest] | The transactions to be updated or inserted. (optional)
+transactions = [lusid.TransactionRequest()] # list[TransactionRequest] | The transactions to be updated or inserted. (optional)
 
 try:
     # [EARLY ACCESS] Upsert transactions
@@ -1013,7 +1159,7 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **scope** | **str**| The scope of the transaction portfolio. | 
  **code** | **str**| The code of the transaction portfolio. Together with the scope this uniquely identifies              the transaction portfolio. | 
- **transactions** | [**list[TransactionRequest]**](list.md)| The transactions to be updated or inserted. | [optional] 
+ **transactions** | [**list[TransactionRequest]**](TransactionRequest.md)| The transactions to be updated or inserted. | [optional] 
 
 ### Return type
 
@@ -1027,6 +1173,13 @@ Name | Type | Description  | Notes
 
  - **Content-Type**: Not defined
  - **Accept**: text/plain, application/json, text/json
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | The version of the transaction portfolio that contains the newly updated or inserted transactions |  -  |
+**400** | The details of the input related failure |  -  |
+**0** | Error response |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
