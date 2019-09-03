@@ -151,22 +151,22 @@ class Instruments(unittest.TestCase):
 
         property_value = models.PropertyValue(label_value="Insurance")
         property_key = f"Instrument/{TestDataUtilities.tutorials_scope}/CustomSector"
+        identifier_type = "Figi"
+        identifier = "BBG000FD8G46"
 
-        # get the instrument
-        instrument = self.instruments_api.get_instrument(identifier_type="Figi", identifier="BBG000FD8G46")
-
-        # get the LusidInstrumentId (LUID)
+        # update the property
         self.instruments_api.upsert_instruments_properties(instrument_properties=[
             models.UpsertInstrumentPropertyRequest(
-                lusid_instrument_id=instrument.lusid_instrument_id,
+                identifier_type=identifier_type,
+                identifier=identifier,
                 properties=[models.ModelProperty(key=property_key, value=property_value)]
             )
         ])
 
         # get the instrument with value
         instrument = self.instruments_api.get_instrument(
-            identifier_type="LusidInstrumentId",
-            identifier=instrument.lusid_instrument_id,
+            identifier_type=identifier_type,
+            identifier=identifier,
             instrument_property_keys=[property_key]
         )
 
