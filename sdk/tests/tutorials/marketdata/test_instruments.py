@@ -148,25 +148,24 @@ class Instruments(unittest.TestCase):
             self.assertTrue(figi in instruments.values, msg=f"{figi} not returned")
 
     def test_edit_instrument_property(self):
-
+        identifier_type = "Figi"
+        identifier = "BBG000FD8G46"
         property_value = models.PropertyValue(label_value="Insurance")
         property_key = f"Instrument/{TestDataUtilities.tutorials_scope}/CustomSector"
-
-        # get the instrument
-        instrument = self.instruments_api.get_instrument(identifier_type="Figi", identifier="BBG000FD8G46")
 
         # get the LusidInstrumentId (LUID)
         self.instruments_api.upsert_instruments_properties(instrument_properties=[
             models.UpsertInstrumentPropertyRequest(
-                lusid_instrument_id=instrument.lusid_instrument_id,
+                identifier_type=identifier_type,
+                identifier=identifier,
                 properties=[models.ModelProperty(key=property_key, value=property_value)]
             )
         ])
 
         # get the instrument with value
         instrument = self.instruments_api.get_instrument(
-            identifier_type="LusidInstrumentId",
-            identifier=instrument.lusid_instrument_id,
+            identifier_type=identifier_type,
+            identifier=identifier,
             instrument_property_keys=[property_key]
         )
 
