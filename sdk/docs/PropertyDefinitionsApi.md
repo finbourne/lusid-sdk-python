@@ -1,6 +1,6 @@
 # lusid.PropertyDefinitionsApi
 
-All URIs are relative to *http://localhost*
+All URIs are relative to *http://http:/api*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
@@ -31,9 +31,7 @@ configuration = lusid.Configuration()
 # Configure OAuth2 access token for authorization: oauth2
 configuration.access_token = 'YOUR_ACCESS_TOKEN'
 
-# Defining host is optional and default to http://localhost
-configuration.host = "http://localhost"
-# Create an instance of the API class
+# create an instance of the API class
 api_instance = lusid.PropertyDefinitionsApi(lusid.ApiClient(configuration))
 definition = lusid.CreatePropertyDefinitionRequest() # CreatePropertyDefinitionRequest | The definition of the new property.
 
@@ -64,13 +62,6 @@ Name | Type | Description  | Notes
  - **Content-Type**: Not defined
  - **Accept**: text/plain, application/json, text/json
 
-### HTTP response details
-| Status code | Description | Response headers |
-|-------------|-------------|------------------|
-**201** | The newly created property definition |  -  |
-**400** | The details of the input related failure |  -  |
-**0** | Error response |  -  |
-
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **delete_property_definition**
@@ -93,9 +84,7 @@ configuration = lusid.Configuration()
 # Configure OAuth2 access token for authorization: oauth2
 configuration.access_token = 'YOUR_ACCESS_TOKEN'
 
-# Defining host is optional and default to http://localhost
-configuration.host = "http://localhost"
-# Create an instance of the API class
+# create an instance of the API class
 api_instance = lusid.PropertyDefinitionsApi(lusid.ApiClient(configuration))
 domain = 'domain_example' # str | The domain of the property to be deleted.
 scope = 'scope_example' # str | The scope of the property to be deleted.
@@ -130,13 +119,6 @@ Name | Type | Description  | Notes
  - **Content-Type**: Not defined
  - **Accept**: text/plain, application/json, text/json
 
-### HTTP response details
-| Status code | Description | Response headers |
-|-------------|-------------|------------------|
-**200** | The time that the property definition was deleted |  -  |
-**400** | The details of the input related failure |  -  |
-**0** | Error response |  -  |
-
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **get_multiple_property_definitions**
@@ -159,9 +141,7 @@ configuration = lusid.Configuration()
 # Configure OAuth2 access token for authorization: oauth2
 configuration.access_token = 'YOUR_ACCESS_TOKEN'
 
-# Defining host is optional and default to http://localhost
-configuration.host = "http://localhost"
-# Create an instance of the API class
+# create an instance of the API class
 api_instance = lusid.PropertyDefinitionsApi(lusid.ApiClient(configuration))
 property_keys = ['property_keys_example'] # list[str] | One or more property keys which identify each property that a definition should              be retrieved for. The format for each property key is {domain}/{scope}/{code}, e.g. 'Portfolio/Manager/Id'.
 as_at = '2013-10-20T19:20:30+01:00' # datetime | The asAt datetime at which to retrieve the property definitions. Defaults to return              the latest version of each definition if not specified. (optional)
@@ -196,13 +176,6 @@ Name | Type | Description  | Notes
  - **Content-Type**: Not defined
  - **Accept**: text/plain, application/json, text/json
 
-### HTTP response details
-| Status code | Description | Response headers |
-|-------------|-------------|------------------|
-**200** | The requested property definitions |  -  |
-**400** | The details of the input related failure |  -  |
-**0** | Error response |  -  |
-
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **get_property_definition**
@@ -225,9 +198,7 @@ configuration = lusid.Configuration()
 # Configure OAuth2 access token for authorization: oauth2
 configuration.access_token = 'YOUR_ACCESS_TOKEN'
 
-# Defining host is optional and default to http://localhost
-configuration.host = "http://localhost"
-# Create an instance of the API class
+# create an instance of the API class
 api_instance = lusid.PropertyDefinitionsApi(lusid.ApiClient(configuration))
 domain = 'domain_example' # str | The domain of the specified property.
 scope = 'scope_example' # str | The scope of the specified property.
@@ -264,13 +235,6 @@ Name | Type | Description  | Notes
  - **Content-Type**: Not defined
  - **Accept**: text/plain, application/json, text/json
 
-### HTTP response details
-| Status code | Description | Response headers |
-|-------------|-------------|------------------|
-**200** | The requested property definition |  -  |
-**400** | The details of the input related failure |  -  |
-**0** | Error response |  -  |
-
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **update_property_definition**
@@ -293,9 +257,7 @@ configuration = lusid.Configuration()
 # Configure OAuth2 access token for authorization: oauth2
 configuration.access_token = 'YOUR_ACCESS_TOKEN'
 
-# Defining host is optional and default to http://localhost
-configuration.host = "http://localhost"
-# Create an instance of the API class
+# create an instance of the API class
 api_instance = lusid.PropertyDefinitionsApi(lusid.ApiClient(configuration))
 domain = 'domain_example' # str | The domain of the property being updated.
 scope = 'scope_example' # str | The scope of the property being updated.
@@ -331,13 +293,6 @@ Name | Type | Description  | Notes
 
  - **Content-Type**: Not defined
  - **Accept**: text/plain, application/json, text/json
-
-### HTTP response details
-| Status code | Description | Response headers |
-|-------------|-------------|------------------|
-**200** | The updated property definition |  -  |
-**400** | The details of the input related failure |  -  |
-**0** | Error response |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
