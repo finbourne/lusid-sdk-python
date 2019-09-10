@@ -4,7 +4,7 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **href** | **str** | The specifc Uniform Resource Identifier (URI) for this resource at the requested effective and asAt datetime. | [optional] 
-**effective_from** | **datetime** | The effective datetime at which the deletion became valid. May be null in the case where multiple date times are applicable. | [optional] 
+**effective_from** | **datetime** | The effective datetime at which the deletion became valid. Only applies when a single entity is being interacted with. | [optional] 
 **as_at** | **datetime** | The asAt datetime at which the deletion was committed to LUSID. | 
 **links** | [**list[Link]**](Link.md) |  | [optional] 
 

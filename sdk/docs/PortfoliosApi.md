@@ -1,6 +1,6 @@
 # lusid.PortfoliosApi
 
-All URIs are relative to *http://localhost*
+All URIs are relative to *http://http:/api*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
@@ -75,7 +75,7 @@ Name | Type | Description  | Notes
 
 [EARLY ACCESS] Delete portfolio properties
 
-Delete one or more properties from a single portfolio. If the properties are time variant then an effective date time from which the properties  will be deleted must be specified. If the properties are perpetual then it is invalid to specify an effective date time for deletion.
+Delete one or more properties from a single portfolio.
 
 ### Example
 
@@ -95,7 +95,7 @@ api_instance = lusid.PortfoliosApi(lusid.ApiClient(configuration))
 scope = 'scope_example' # str | The scope of the portfolio to delete properties from.
 code = 'code_example' # str | The code of the portfolio to delete properties from. Together with the scope this uniquely              identifies the portfolio.
 portfolio_property_keys = ['portfolio_property_keys_example'] # list[str] | The property keys of the properties to delete. These take the format              {domain}/{scope}/{code} e.g. \"Portfolio/Manager/Id\". Each property must be from the \"Portfolio\" domain.
-effective_at = 'effective_at_example' # str | The effective datetime or cut label at which to delete the properties. (optional)
+effective_at = 'effective_at_example' # str | The effective datetime or cut label at which to delete the properties. Defaults to the current LUSID system datetime if not specified. (optional)
 
 try:
     # [EARLY ACCESS] Delete portfolio properties
@@ -112,7 +112,7 @@ Name | Type | Description  | Notes
  **scope** | **str**| The scope of the portfolio to delete properties from. | 
  **code** | **str**| The code of the portfolio to delete properties from. Together with the scope this uniquely              identifies the portfolio. | 
  **portfolio_property_keys** | [**list[str]**](str.md)| The property keys of the properties to delete. These take the format              {domain}/{scope}/{code} e.g. \&quot;Portfolio/Manager/Id\&quot;. Each property must be from the \&quot;Portfolio\&quot; domain. | 
- **effective_at** | **str**| The effective datetime or cut label at which to delete the properties. | [optional] 
+ **effective_at** | **str**| The effective datetime or cut label at which to delete the properties. Defaults to the current LUSID system datetime if not specified. | [optional] 
 
 ### Return type
 
