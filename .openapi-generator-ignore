@@ -1,9 +1,0 @@
-setup.py
-.travis.yml
-.gitignore
-git_push.sh
-lusid_README.md
-test-requirements.txt
-tox.ini
-README.md
-requirements.txt
