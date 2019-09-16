@@ -1,19 +1,19 @@
 # lusid.AggregationApi
 
-All URIs are relative to *http://localhost*
+All URIs are relative to *http://localhost/api*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
-[**get_aggregation_by_group**](AggregationApi.md#get_aggregation_by_group) | **POST** /api/portfoliogroups/{scope}/{code}/$aggregate | Aggregate data in a portfolio group
-[**get_aggregation_by_portfolio**](AggregationApi.md#get_aggregation_by_portfolio) | **POST** /api/portfolios/{scope}/{code}/$aggregate | Aggregate data in a portfolio
-[**get_aggregation_by_result_set**](AggregationApi.md#get_aggregation_by_result_set) | **POST** /api/results/{scope}/{resultsKey}/$aggregate | Aggregate using result data
-[**get_nested_aggregation_by_group**](AggregationApi.md#get_nested_aggregation_by_group) | **POST** /api/portfoliogroups/{scope}/{code}/$aggregatenested | Aggregate data in a portfolio group, as nested
+[**get_aggregation_by_group**](AggregationApi.md#get_aggregation_by_group) | **POST** /api/portfoliogroups/{scope}/{code}/$aggregate | [EXPERIMENTAL] Aggregate data in a portfolio group
+[**get_aggregation_by_portfolio**](AggregationApi.md#get_aggregation_by_portfolio) | **POST** /api/portfolios/{scope}/{code}/$aggregate | [EXPERIMENTAL] Aggregate data in a portfolio
+[**get_aggregation_by_result_set**](AggregationApi.md#get_aggregation_by_result_set) | **POST** /api/results/{scope}/{resultsKey}/$aggregate | [EXPERIMENTAL] Aggregate using result data
+[**get_nested_aggregation_by_group**](AggregationApi.md#get_nested_aggregation_by_group) | **POST** /api/portfoliogroups/{scope}/{code}/$aggregatenested | [EXPERIMENTAL] Aggregate data in a portfolio group, as nested
 
 
 # **get_aggregation_by_group**
 > ListAggregationResponse get_aggregation_by_group(scope, code, sort_by=sort_by, start=start, limit=limit, request=request)
 
-Aggregate data in a portfolio group
+[EXPERIMENTAL] Aggregate data in a portfolio group
 
 Aggregate data sourced from the specified portfolio group
 
@@ -30,7 +30,9 @@ configuration = lusid.Configuration()
 # Configure OAuth2 access token for authorization: oauth2
 configuration.access_token = 'YOUR_ACCESS_TOKEN'
 
-# create an instance of the API class
+# Defining host is optional and default to http://localhost/api
+configuration.host = "http://localhost/api"
+# Create an instance of the API class
 api_instance = lusid.AggregationApi(lusid.ApiClient(configuration))
 scope = 'scope_example' # str | The scope of the portfolio group
 code = 'code_example' # str | The code of the portfolio group
@@ -40,7 +42,7 @@ limit = 56 # int | Optional. When paginating, limit the number of returned resul
 request = lusid.AggregationRequest() # AggregationRequest | The request specifying the parameters of the aggregation (optional)
 
 try:
-    # Aggregate data in a portfolio group
+    # [EXPERIMENTAL] Aggregate data in a portfolio group
     api_response = api_instance.get_aggregation_by_group(scope, code, sort_by=sort_by, start=start, limit=limit, request=request)
     pprint(api_response)
 except ApiException as e:
@@ -71,12 +73,19 @@ Name | Type | Description  | Notes
  - **Content-Type**: Not defined
  - **Accept**: text/plain, application/json, text/json
 
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | Success |  -  |
+**400** | The details of the input related failure |  -  |
+**0** | Error response |  -  |
+
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **get_aggregation_by_portfolio**
 > ListAggregationResponse get_aggregation_by_portfolio(scope, code, sort_by=sort_by, start=start, limit=limit, request=request)
 
-Aggregate data in a portfolio
+[EXPERIMENTAL] Aggregate data in a portfolio
 
 Aggregate data sourced from the specified portfolio
 
@@ -93,7 +102,9 @@ configuration = lusid.Configuration()
 # Configure OAuth2 access token for authorization: oauth2
 configuration.access_token = 'YOUR_ACCESS_TOKEN'
 
-# create an instance of the API class
+# Defining host is optional and default to http://localhost/api
+configuration.host = "http://localhost/api"
+# Create an instance of the API class
 api_instance = lusid.AggregationApi(lusid.ApiClient(configuration))
 scope = 'scope_example' # str | The scope of the portfolio
 code = 'code_example' # str | The code of the portfolio
@@ -103,7 +114,7 @@ limit = 56 # int | Optional. When paginating, limit the number of returned resul
 request = lusid.AggregationRequest() # AggregationRequest | The request specifying the parameters of the aggregation (optional)
 
 try:
-    # Aggregate data in a portfolio
+    # [EXPERIMENTAL] Aggregate data in a portfolio
     api_response = api_instance.get_aggregation_by_portfolio(scope, code, sort_by=sort_by, start=start, limit=limit, request=request)
     pprint(api_response)
 except ApiException as e:
@@ -134,12 +145,19 @@ Name | Type | Description  | Notes
  - **Content-Type**: Not defined
  - **Accept**: text/plain, application/json, text/json
 
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | Success |  -  |
+**400** | The details of the input related failure |  -  |
+**0** | Error response |  -  |
+
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **get_aggregation_by_result_set**
 > ListAggregationResponse get_aggregation_by_result_set(scope, results_key, sort_by=sort_by, start=start, limit=limit, request=request)
 
-Aggregate using result data
+[EXPERIMENTAL] Aggregate using result data
 
 Aggregate data from a previously-run Result data set into a flat row of results
 
@@ -156,7 +174,9 @@ configuration = lusid.Configuration()
 # Configure OAuth2 access token for authorization: oauth2
 configuration.access_token = 'YOUR_ACCESS_TOKEN'
 
-# create an instance of the API class
+# Defining host is optional and default to http://localhost/api
+configuration.host = "http://localhost/api"
+# Create an instance of the API class
 api_instance = lusid.AggregationApi(lusid.ApiClient(configuration))
 scope = 'scope_example' # str | The scope of the Result data set
 results_key = 'results_key_example' # str | The key of the Result data set
@@ -166,7 +186,7 @@ limit = 56 # int | Optional. When paginating, limit the number of returned resul
 request = lusid.AggregationRequest() # AggregationRequest | The request specifying the parameters of the aggregation (optional)
 
 try:
-    # Aggregate using result data
+    # [EXPERIMENTAL] Aggregate using result data
     api_response = api_instance.get_aggregation_by_result_set(scope, results_key, sort_by=sort_by, start=start, limit=limit, request=request)
     pprint(api_response)
 except ApiException as e:
@@ -197,12 +217,19 @@ Name | Type | Description  | Notes
  - **Content-Type**: Not defined
  - **Accept**: text/plain, application/json, text/json
 
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | Success |  -  |
+**400** | The details of the input related failure |  -  |
+**0** | Error response |  -  |
+
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **get_nested_aggregation_by_group**
 > NestedAggregationResponse get_nested_aggregation_by_group(scope, code, request=request)
 
-Aggregate data in a portfolio group, as nested
+[EXPERIMENTAL] Aggregate data in a portfolio group, as nested
 
 Obsolete - Aggregate data sourced from the specified portfolio group into a nested structure. Data is nested following the group-by specifications.
 
@@ -219,14 +246,16 @@ configuration = lusid.Configuration()
 # Configure OAuth2 access token for authorization: oauth2
 configuration.access_token = 'YOUR_ACCESS_TOKEN'
 
-# create an instance of the API class
+# Defining host is optional and default to http://localhost/api
+configuration.host = "http://localhost/api"
+# Create an instance of the API class
 api_instance = lusid.AggregationApi(lusid.ApiClient(configuration))
 scope = 'scope_example' # str | The scope of the portfolio group
 code = 'code_example' # str | The code of the portfolio group
 request = lusid.AggregationRequest() # AggregationRequest | The request specifying the parameters of the aggregation (optional)
 
 try:
-    # Aggregate data in a portfolio group, as nested
+    # [EXPERIMENTAL] Aggregate data in a portfolio group, as nested
     api_response = api_instance.get_nested_aggregation_by_group(scope, code, request=request)
     pprint(api_response)
 except ApiException as e:
@@ -253,6 +282,13 @@ Name | Type | Description  | Notes
 
  - **Content-Type**: Not defined
  - **Accept**: text/plain, application/json, text/json
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | Success |  -  |
+**400** | The details of the input related failure |  -  |
+**0** | Error response |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 

@@ -3998,7 +3998,7 @@
                                 },
                                 "values": [
                                     {
-                                        "instrumentUid": "LUID_MYEC99ZE",
+                                        "instrumentUid": "LUID_NG4VE9XM",
                                         "holdingType": "P",
                                         "units": 10.0,
                                         "settledUnits": 10.0,
@@ -4379,7 +4379,7 @@
                                             "instrumentIdentifiers": {
                                                 "Instrument/default/ClientInternal": "CLI-192836"
                                             },
-                                            "instrumentUid": "LUID_ET5KFONC",
+                                            "instrumentUid": "LUID_NTCG81CK",
                                             "subHoldingKeys": {},
                                             "properties": {},
                                             "taxLots": [
@@ -4396,7 +4396,7 @@
                                             "instrumentIdentifiers": {
                                                 "Instrument/default/ClientInternal": "CLI-462810"
                                             },
-                                            "instrumentUid": "LUID_NXPUGOBO",
+                                            "instrumentUid": "LUID_5M66CYIV",
                                             "subHoldingKeys": {},
                                             "properties": {},
                                             "taxLots": [
@@ -4522,7 +4522,7 @@
                                         "instrumentIdentifiers": {
                                             "Instrument/default/RIC": "RIC.L"
                                         },
-                                        "instrumentUid": "LUID_51RSG4Z3",
+                                        "instrumentUid": "LUID_SQTKNPF3",
                                         "transactionDate": "2018-08-04T00:00:00+00:00",
                                         "settlementDate": "2018-08-06T00:00:00+00:00",
                                         "units": 1000.0,
