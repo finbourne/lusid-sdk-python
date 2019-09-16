@@ -3,6 +3,8 @@
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
+**aggregation_effective_at** | **datetime** |  | [optional] 
+**aggregation_as_at** | **datetime** |  | [optional] 
 **href** | **str** |  | [optional] 
 **data** | **list[dict(str, object)]** |  | [optional] 
 **aggregation_currency** | **str** |  | [optional] 

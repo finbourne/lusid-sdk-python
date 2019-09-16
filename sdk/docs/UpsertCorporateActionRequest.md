@@ -4,6 +4,7 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **corporate_action_code** | **str** |  | 
+**description** | **str** |  | [optional] 
 **announcement_date** | **datetime** |  | 
 **ex_date** | **datetime** |  | 
 **record_date** | **datetime** |  | 

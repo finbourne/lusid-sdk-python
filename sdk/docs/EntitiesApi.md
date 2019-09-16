@@ -1,16 +1,16 @@
 # lusid.EntitiesApi
 
-All URIs are relative to *http://localhost*
+All URIs are relative to *http://localhost/api*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
-[**get_portfolio_changes**](EntitiesApi.md#get_portfolio_changes) | **GET** /api/entities/changes/portfolios | Get the next change to each portfolio in a scope.
+[**get_portfolio_changes**](EntitiesApi.md#get_portfolio_changes) | **GET** /api/entities/changes/portfolios | [BETA] Get the next change to each portfolio in a scope.
 
 
 # **get_portfolio_changes**
 > ResourceListOfChange get_portfolio_changes(scope, effective_at, as_at=as_at)
 
-Get the next change to each portfolio in a scope.
+[BETA] Get the next change to each portfolio in a scope.
 
 Gets the time of the next (earliest effective at) modification (correction and/or amendment) to each portfolio in a scope relative to a point in bitemporal time.  Includes changes from parent portfolios in different scopes.  Excludes changes from subcriptions (e.g corporate actions).
 
@@ -27,14 +27,16 @@ configuration = lusid.Configuration()
 # Configure OAuth2 access token for authorization: oauth2
 configuration.access_token = 'YOUR_ACCESS_TOKEN'
 
-# create an instance of the API class
+# Defining host is optional and default to http://localhost/api
+configuration.host = "http://localhost/api"
+# Create an instance of the API class
 api_instance = lusid.EntitiesApi(lusid.ApiClient(configuration))
 scope = 'scope_example' # str | The scope
 effective_at = 'effective_at_example' # str | The effective date of the origin.
 as_at = '2013-10-20T19:20:30+01:00' # datetime | The as-at date of the origin. (optional)
 
 try:
-    # Get the next change to each portfolio in a scope.
+    # [BETA] Get the next change to each portfolio in a scope.
     api_response = api_instance.get_portfolio_changes(scope, effective_at, as_at=as_at)
     pprint(api_response)
 except ApiException as e:
@@ -61,6 +63,13 @@ Name | Type | Description  | Notes
 
  - **Content-Type**: Not defined
  - **Accept**: text/plain, application/json, text/json
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | A list of portfolio changes in the requested scope relative to the specified time. |  -  |
+**400** | The details of the input related failure |  -  |
+**0** | Error response |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
