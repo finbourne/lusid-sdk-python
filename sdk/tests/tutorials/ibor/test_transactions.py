@@ -149,3 +149,55 @@ class Transactions(unittest.TestCase):
 
         self.assertEqual(len(transactions.values), 1)
         self.assertEqual(transactions.values[0].transaction_id, transaction.transaction_id)
+
+    def test_cancel_transactions(self):
+        # set effective date
+        effective_date = datetime(2018, 1, 1, tzinfo=pytz.utc)
+
+        # create portfolio code
+        portfolio_code = self.test_data_utilities.create_transaction_portfolio(TestDataUtilities.tutorials_scope)
+
+        # Upsert transactions
+        transactions = [
+            self.test_data_utilities.build_transaction_request(instrument_id=self.instrument_ids[0],
+                                                               units=100,
+                                                               price=101,
+                                                               currency="GBP",
+                                                               trade_date=effective_date,
+                                                               transaction_type="StockIn"),
+            self.test_data_utilities.build_transaction_request(instrument_id=self.instrument_ids[1],
+                                                               units=100,
+                                                               price=102,
+                                                               currency="GBP",
+                                                               trade_date=effective_date,
+                                                               transaction_type="StockIn"),
+            self.test_data_utilities.build_transaction_request(instrument_id=self.instrument_ids[2],
+                                                               units=100,
+                                                               price=103,
+                                                               currency="GBP",
+                                                               trade_date=effective_date,
+                                                               transaction_type="StockIn")
+        ]
+
+        self.transaction_portfolios_api.upsert_transactions(scope=TestDataUtilities.tutorials_scope,
+                                                            code=portfolio_code,
+                                                            transactions=transactions)
+
+        # get transactions
+        transaction_ids = []
+        existing_transactions = self.transaction_portfolios_api.get_transactions(
+            scope=TestDataUtilities.tutorials_scope,
+            code=portfolio_code)
+
+        for i in range(len(existing_transactions.values)):
+            transaction_ids.append(existing_transactions.values[i].transaction_id)
+
+        # cancel transactions
+        self.transaction_portfolios_api.cancel_transactions(scope=TestDataUtilities.tutorials_scope,
+                                                            code=portfolio_code,
+                                                            transaction_ids=transaction_ids)
+
+        # verify portfolio is now empty
+        new_transactions = self.transaction_portfolios_api.get_transactions(scope=TestDataUtilities.tutorials_scope,
+                                                                            code=portfolio_code)
+        self.assertEqual(len(new_transactions.values), 0)
