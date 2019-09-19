@@ -14,6 +14,7 @@
       "backgroundColor": "#415464"
     }
   },
+  "basePath": "/api",
   "paths": {
     "/api/datatypes/{scope}": {
       "get": {
@@ -4162,7 +4163,7 @@
                 },
                 "values": [
                   {
-                    "instrumentUid": "LUID_EVNQYMFE",
+                    "instrumentUid": "LUID_56Y3690S",
                     "holdingType": "P",
                     "units": 10,
                     "settledUnits": 10,
@@ -4543,7 +4544,7 @@
                       "instrumentIdentifiers": {
                         "Instrument/default/ClientInternal": "CLI-192836"
                       },
-                      "instrumentUid": "LUID_GISXGFPP",
+                      "instrumentUid": "LUID_4ZZ5LEBS",
                       "subHoldingKeys": {},
                       "properties": {},
                       "taxLots": [
@@ -4560,7 +4561,7 @@
                       "instrumentIdentifiers": {
                         "Instrument/default/ClientInternal": "CLI-462810"
                       },
-                      "instrumentUid": "LUID_UVL9HQJO",
+                      "instrumentUid": "LUID_NRU9E2DX",
                       "subHoldingKeys": {},
                       "properties": {},
                       "taxLots": [
@@ -4686,7 +4687,7 @@
                     "instrumentIdentifiers": {
                       "Instrument/default/RIC": "RIC.L"
                     },
-                    "instrumentUid": "LUID_9ALHJEKY",
+                    "instrumentUid": "LUID_JD90XQ11",
                     "transactionDate": "2018-08-04T00:00:00+00:00",
                     "settlementDate": "2018-08-06T00:00:00+00:00",
                     "units": 1000,
@@ -9571,7 +9572,7 @@
   "securityDefinitions": {
     "oauth2": {
       "flow": "implicit",
-      "authorizationUrl": "http://dummy.451.okta.com/v1/authorize",
+      "authorizationUrl": "https://lusid.okta.com/oauth2/aus5al5yopbHW2wJn2p6/v1/authorize",
       "type": "oauth2",
       "description": "OAuth2 Implicit Grant"
     }
