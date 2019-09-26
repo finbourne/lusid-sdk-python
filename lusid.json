@@ -14,6 +14,7 @@
       "backgroundColor": "#415464"
     }
   },
+  "basePath": "/api",
   "paths": {
     "/api/datatypes/{scope}": {
       "get": {
@@ -4218,7 +4219,7 @@
                 },
                 "values": [
                   {
-                    "instrumentUid": "LUID_TY32L8TO",
+                    "instrumentUid": "LUID_RXKQP9GD",
                     "holdingType": "P",
                     "units": 10,
                     "settledUnits": 10,
@@ -4599,7 +4600,7 @@
                       "instrumentIdentifiers": {
                         "Instrument/default/ClientInternal": "CLI-192836"
                       },
-                      "instrumentUid": "LUID_D46BGLHU",
+                      "instrumentUid": "LUID_KPP6GSB2",
                       "subHoldingKeys": {},
                       "properties": {},
                       "taxLots": [
@@ -4616,7 +4617,7 @@
                       "instrumentIdentifiers": {
                         "Instrument/default/ClientInternal": "CLI-462810"
                       },
-                      "instrumentUid": "LUID_151TTEAN",
+                      "instrumentUid": "LUID_GOX5NR0S",
                       "subHoldingKeys": {},
                       "properties": {},
                       "taxLots": [
@@ -4742,7 +4743,7 @@
                     "instrumentIdentifiers": {
                       "Instrument/default/RIC": "RIC.L"
                     },
-                    "instrumentUid": "LUID_0T9DRTTD",
+                    "instrumentUid": "LUID_PWGVR52S",
                     "transactionDate": "2018-08-04T00:00:00+00:00",
                     "settlementDate": "2018-08-06T00:00:00+00:00",
                     "units": 1000,
@@ -6684,7 +6685,7 @@
       },
       "example": {
         "code": "MyGroupCode",
-        "created": "2019-09-26T16:34:57.7874768+00:00",
+        "created": "2019-09-26T17:48:29.5499078+00:00",
         "values": [
           {
             "scope": "MyScope",
@@ -9638,7 +9639,7 @@
   "securityDefinitions": {
     "oauth2": {
       "flow": "implicit",
-      "authorizationUrl": "http://dummy.451.okta.com/v1/authorize",
+      "authorizationUrl": "https://lusid.okta.com/oauth2/aus5al5yopbHW2wJn2p6/v1/authorize",
       "type": "oauth2",
       "description": "OAuth2 Implicit Grant"
     }
