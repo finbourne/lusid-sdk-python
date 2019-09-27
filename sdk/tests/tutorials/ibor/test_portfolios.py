@@ -6,11 +6,8 @@ import uuid
 
 import lusid
 import lusid.models as models
-
-from lusid.utilities.api_client_builder import ApiClientBuilder
-from utilities.instrument_loader import InstrumentLoader
-from utilities.test_data_utilities import TestDataUtilities
-from utilities.credentials_source import CredentialsSource
+from utilities import InstrumentLoader
+from utilities import TestDataUtilities
 
 
 class Portfolios(unittest.TestCase):
@@ -18,7 +15,7 @@ class Portfolios(unittest.TestCase):
     @classmethod
     def setUpClass(cls):
         # create a configured API client
-        api_client = ApiClientBuilder().build(CredentialsSource.secrets_path())
+        api_client = TestDataUtilities.api_client()
 
         cls.scopes_api = lusid.ScopesApi(api_client)
         cls.portfolios_api = lusid.PortfoliosApi(api_client)

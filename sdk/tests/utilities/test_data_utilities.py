@@ -2,9 +2,11 @@ from datetime import datetime
 
 import pytz
 import uuid
+import threading
 import lusid
 import lusid.models as models
-
+from lusid.utilities import ApiClientBuilder
+from utilities import CredentialsSource
 import unittest
 
 class TestDataUtilities:
@@ -17,6 +19,17 @@ class TestDataUtilities:
     def __init__(self, transaction_portfolio_api: lusid.TransactionPortfoliosApi):
         self.transaction_portfolio_api = transaction_portfolio_api
         self.test = self.TestDataUtilitiesTests()
+
+    _api_client = None
+    _lock = threading.Lock()
+
+    @classmethod
+    def api_client(cls):
+        if not cls._api_client:
+            with cls._lock:
+                if not cls._api_client:
+                    cls._api_client = ApiClientBuilder().build(CredentialsSource.secrets_path())
+        return cls._api_client
 
     def create_transaction_portfolio(self, scope):
         guid = str(uuid.uuid4())
@@ -34,31 +47,38 @@ class TestDataUtilities:
         # Create the portfolio in LUSID
         portfolio = self.transaction_portfolio_api.create_portfolio(scope, create_request=request)
 
-        assert(portfolio.id.code == request.code)
+        assert (portfolio.id.code == request.code)
 
         return portfolio.id.code
 
     def build_transaction_request(self, instrument_id, units, price, currency, trade_date, transaction_type):
-        return models.TransactionRequest(transaction_id=str(uuid.uuid4()),
-                                         type=transaction_type,
-                                         instrument_identifiers={self.lusid_luid_identifier: instrument_id},
-                                         transaction_date=trade_date,
-                                         settlement_date=trade_date,
-                                         units=units,
-                                         transaction_price=models.TransactionPrice(price=price),
-                                         total_consideration=models.CurrencyAndAmount(amount=price*units, currency=currency),
-                                         source="Broker")
+        return models.TransactionRequest(
+            transaction_id=str(uuid.uuid4()),
+            type=transaction_type,
+            instrument_identifiers={self.lusid_luid_identifier: instrument_id},
+            transaction_date=trade_date,
+            settlement_date=trade_date,
+            units=units,
+            transaction_price=models.TransactionPrice(
+                price=price),
+            total_consideration=models.CurrencyAndAmount(
+                amount=price * units,
+                currency=currency),
+            source="Broker")
 
     def build_cash_fundsin_transaction_request(self, units, currency, trade_date):
-        return models.TransactionRequest(transaction_id=str(uuid.uuid4()),
-                                         type="FundsIn",
-                                         instrument_identifiers={self.lusid_cash_identifier: currency},
-                                         transaction_date=trade_date,
-                                         settlement_date=trade_date,
-                                         units=units,
-                                         total_consideration=models.CurrencyAndAmount(currency=currency),
-                                         transaction_price=models.TransactionPrice(price=0.0),
-                                         source="Client")
+        return models.TransactionRequest(
+            transaction_id=str(uuid.uuid4()),
+            type="FundsIn",
+            instrument_identifiers={self.lusid_cash_identifier: currency},
+            transaction_date=trade_date,
+            settlement_date=trade_date,
+            units=units,
+            total_consideration=models.CurrencyAndAmount(
+                currency=currency),
+            transaction_price=models.TransactionPrice(
+                price=0.0),
+            source="Client")
 
     def build_adjust_holdings_request(self, instrument_id, units, price, currency, trade_date):
         return models.AdjustHoldingRequest(
@@ -66,12 +86,15 @@ class TestDataUtilities:
                     TestDataUtilities.lusid_luid_identifier: instrument_id
                 },
                 tax_lots=[
-                    models.TargetTaxLotRequest(units=units,
-                                               price=price,
-                                               cost=models.CurrencyAndAmount(amount=price*units, currency=currency),
-                                               portfolio_cost=price*units,
-                                               purchase_date=trade_date,  
-                                               settlement_date=trade_date)
+                    models.TargetTaxLotRequest(
+                        units=units,
+                        price=price,
+                        cost=models.CurrencyAndAmount(
+                            amount=price*units,
+                            currency=currency),
+                        portfolio_cost=price*units,
+                        purchase_date=trade_date,
+                        settlement_date=trade_date)
                 ])
 
     def build_cash_funds_in_adjust_holdings_request(self, currency, units):
@@ -80,12 +103,13 @@ class TestDataUtilities:
                     TestDataUtilities.lusid_cash_identifier: currency
                 },
                 tax_lots=[
-                    models.TargetTaxLotRequest(units=units,
-                    price=None,
-                                               cost=None,
-                                               portfolio_cost=None,
-                                               purchase_date=None,  
-                                               settlement_date=None)
+                    models.TargetTaxLotRequest(
+                        units=units,
+                        price=None,
+                        cost=None,
+                        portfolio_cost=None,
+                        purchase_date=None,
+                        settlement_date=None)
                 ])
 
     class TestDataUtilitiesTests(unittest.TestCase):

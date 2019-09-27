@@ -5,18 +5,17 @@ from time import sleep
 import pytz
 
 import lusid
-from lusid.utilities.api_client_builder import ApiClientBuilder
-from utilities.credentials_source import CredentialsSource
-from utilities.instrument_loader import InstrumentLoader
-from utilities.test_data_utilities import TestDataUtilities
+from utilities import InstrumentLoader
+from utilities import TestDataUtilities
 
 
 class Bitemporal(unittest.TestCase):
 
     @classmethod
     def setUpClass(cls):
+
         # create a configured API client
-        api_client = ApiClientBuilder().build(CredentialsSource.secrets_path())
+        api_client = TestDataUtilities.api_client()
 
         cls.transaction_portfolios_api = lusid.TransactionPortfoliosApi(api_client)
 

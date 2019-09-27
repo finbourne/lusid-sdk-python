@@ -154,3 +154,8 @@ from lusid.models.versioned_resource_list_of_output_transaction import Versioned
 from lusid.models.versioned_resource_list_of_portfolio_holding import VersionedResourceListOfPortfolioHolding
 from lusid.models.versioned_resource_list_of_transaction import VersionedResourceListOfTransaction
 
+# import utilities into sdk package
+from lusid.utilities.api_client_builder import ApiClientBuilder
+from lusid.utilities.api_configuration import ApiConfiguration
+from lusid.utilities.api_configuration_loader import ApiConfigurationLoader
+from lusid.utilities.refreshing_token import RefreshingToken
