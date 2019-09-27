@@ -1,16 +1,11 @@
 import unittest
-from datetime import datetime, date, timedelta
-
-import pytz
+from datetime import date, timedelta
 import uuid
 
 import lusid
 import lusid.models as models
-
-from lusid.utilities.api_client_builder import ApiClientBuilder
-from utilities.instrument_loader import InstrumentLoader
-from utilities.test_data_utilities import TestDataUtilities
-from utilities.credentials_source import CredentialsSource
+from utilities import InstrumentLoader
+from utilities import TestDataUtilities
 
 
 class CutLabels(unittest.TestCase):
@@ -18,7 +13,7 @@ class CutLabels(unittest.TestCase):
     @classmethod
     def setUpClass(cls):
         # create a configured API client
-        api_client = ApiClientBuilder().build(CredentialsSource.secrets_path())
+        api_client = TestDataUtilities.api_client()
 
         cls.transaction_portfolios_api = lusid.TransactionPortfoliosApi(api_client)
         cls.instruments_api = lusid.InstrumentsApi(api_client)
@@ -40,8 +35,7 @@ class CutLabels(unittest.TestCase):
             return str(date) + "N" + cut_label_code
         
         
-        ## Create cut labels
-        # create a dictionary to keep track of cut labels
+        # Create cut labels
         code = {}
 
         def create_cut_label(hours, minutes, display_name, description, time_zone, code_dict):
@@ -50,7 +44,7 @@ class CutLabels(unittest.TestCase):
             
             # Define the parameters of the cut label in a request
             request = models.CutLabelDefinition(
-                code=display_name+"-"+get_guid(), 
+                code=display_name + "-" + get_guid(),
                 description=description, 
                 display_name=display_name,
                 cut_local_time=time,
@@ -70,12 +64,47 @@ class CutLabels(unittest.TestCase):
             self.assertEqual(result.time_zone, time_zone)
 
         # Create cut labels for different time zones
-        create_cut_label(hours=9, minutes=0, display_name="LondonOpen", description="London Opening Time, 9am in UK", time_zone="GB", code_dict=code)
-        create_cut_label(hours=17, minutes=0, display_name="LondonClose", description="London Closing Time, 5pm in UK", time_zone="GB", code_dict=code)
-        create_cut_label(hours=9, minutes=0, display_name="SingaporeOpen", description="", time_zone="Singapore", code_dict=code)
-        create_cut_label(hours=17, minutes=0, display_name="SingaporeClose", description="", time_zone="Singapore", code_dict=code)
-        create_cut_label(hours=9, minutes=0, display_name="NYOpen", description="", time_zone="America/New_York", code_dict=code)
-        create_cut_label(hours=17, minutes=0, display_name="NYClose", description="", time_zone="America/New_York", code_dict=code)
+        create_cut_label(
+            hours=9, minutes=0,
+            display_name="LondonOpen",
+            description="London Opening Time, 9am in UK",
+            time_zone="GB",
+            code_dict=code)
+
+        create_cut_label(
+            hours=17, minutes=0,
+            display_name="LondonClose",
+            description="London Closing Time, 5pm in UK",
+            time_zone="GB",
+            code_dict=code)
+
+        create_cut_label(
+            hours=9, minutes=0,
+            display_name="SingaporeOpen",
+            description="",
+            time_zone="Singapore",
+            code_dict=code)
+
+        create_cut_label(
+            hours=17, minutes=0,
+            display_name="SingaporeClose",
+            description="",
+            time_zone="Singapore",
+            code_dict=code)
+
+        create_cut_label(
+            hours=9, minutes=0,
+            display_name="NYOpen",
+            description="",
+            time_zone="America/New_York",
+            code_dict=code)
+
+        create_cut_label(
+            hours=17, minutes=0,
+            display_name="NYClose",
+            description="",
+            time_zone="America/New_York",
+            code_dict=code)
 
 
         ## Create portfolio

@@ -1,74 +1,52 @@
-import os
 import requests
-import lusid
-import json
 
-try:
-    # Python 3.x
-    from urllib.request import pathname2url
-except ImportError:
-    # Python 2.7
-    from urllib import pathname2url
+import lusid
+from .api_configuration_loader import ApiConfigurationLoader
+from .refreshing_token import RefreshingToken
 
 
 class ApiClientBuilder:
 
-    def build(self, api_configuration):
+    @staticmethod
+    def build(api_secrets_filename, okta_response_handler=None):
         """
-        :param api_configuration: name api configuration file
+        :param api_secrets_filename: name api configuration file
+        :param okta_response_handler: optional function to handle Okta response
         :return: ApiClient correctly configured with credentials and host
         """
 
-        # Load our configuration details from the environment variables
-        token_url = os.getenv("FBN_TOKEN_URL", None)
-        api_url = os.getenv("FBN_LUSID_API_URL", None)
-        username = os.getenv("FBN_USERNAME", None)
-        password_raw = os.getenv("FBN_PASSWORD", None)
-        client_id_raw = os.getenv("FBN_CLIENT_ID", None)
-        client_secret_raw = os.getenv("FBN_CLIENT_SECRET", None)
-        app_name = os.getenv("FBN_APP_NAME", "")
-
-        # If any of the environmental variables are missing use a local secrets file
-        if token_url is None or username is None or password_raw is None or client_id_raw is None \
-                or client_secret_raw is None or api_url is None:
-
-            dir_path = os.path.dirname(os.path.realpath(__file__))
-            with open(os.path.join(dir_path, api_configuration), "r") as secrets:
-                config = json.load(secrets)
-
-            token_url = os.getenv("FBN_TOKEN_URL", config["api"]["tokenUrl"])
-            username = os.getenv("FBN_USERNAME", config["api"]["username"])
-            password = pathname2url(os.getenv("FBN_PASSWORD", config["api"]["password"]))
-            client_id = pathname2url(os.getenv("FBN_CLIENT_ID", config["api"]["clientId"]))
-            client_secret = pathname2url(os.getenv("FBN_CLIENT_SECRET", config["api"]["clientSecret"]))
-            api_url = os.getenv("FBN_LUSID_API_URL", config["api"]["apiUrl"])
-            app_name = os.getenv("FBN_APP_NAME", config["api"].get("applicationName", ""))
-
-        else:
-            password = pathname2url(password_raw)
-            client_id = pathname2url(client_id_raw)
-            client_secret = pathname2url(client_secret_raw)
+        # Load the configuration
+        configuration = ApiConfigurationLoader().load(api_secrets_filename)
 
         # Prepare our authentication request
-        token_request_body = ("grant_type=password&username={0}".format(username) +
-                              "&password={0}&scope=openid client groups".format(password) +
-                              "&client_id={0}&client_secret={1}".format(client_id, client_secret))
+        token_request_body = f"grant_type=password&username={configuration.username}" \
+            f"&password={configuration.password}&scope=openid client groups offline_access" \
+            f"&client_id={configuration.client_id}&client_secret={configuration.client_secret}"
         headers = {"Accept": "application/json", "Content-Type": "application/x-www-form-urlencoded"}
 
         # Make our authentication request
-        okta_response = requests.post(token_url, data=token_request_body, headers=headers)
+        okta_response = requests.post(configuration.token_url, data=token_request_body, headers=headers)
+
+        if okta_response_handler is not None:
+            okta_response_handler(okta_response)
 
         # Ensure that we have a 200 response code
         assert okta_response.status_code == 200
 
+        # convert the json encoded response to be able to extract the token values
+        okta_json = okta_response.json()
+
         # Retrieve our api token from the authentication response
-        api_token = okta_response.json()["access_token"]
+        api_token = RefreshingToken(token_url=configuration.token_url,
+                                    client_id=configuration.client_id,
+                                    client_secret=configuration.client_secret,
+                                    initial_access_token=okta_json["access_token"],
+                                    initial_token_expiry=okta_json["expires_in"],
+                                    refresh_token=okta_json["refresh_token"])
 
         # Initialise our API client using our token so that we can include it in all future requests
         config = lusid.Configuration()
         config.access_token = api_token
-        config.host = api_url
+        config.host = configuration.api_url
 
-        return lusid.ApiClient(config, header_name="X-LUSID-Application", header_value=app_name)
-
-
+        return lusid.ApiClient(config, header_name="X-LUSID-Application", header_value=configuration.app_name)

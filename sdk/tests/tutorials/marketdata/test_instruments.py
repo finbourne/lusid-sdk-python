@@ -4,8 +4,7 @@ import lusid
 import lusid.models as models
 from lusid.utilities.api_client_builder import ApiClientBuilder
 from lusid.exceptions import ApiException
-from utilities.credentials_source import CredentialsSource
-from utilities.test_data_utilities import TestDataUtilities
+from utilities import TestDataUtilities
 
 
 class Instruments(unittest.TestCase):
@@ -14,7 +13,7 @@ class Instruments(unittest.TestCase):
     @classmethod
     def setUpClass(cls):
         # create a configured API client
-        api_client = ApiClientBuilder().build(CredentialsSource.secrets_path())
+        api_client = TestDataUtilities.api_client()
 
         cls.instruments_api = lusid.InstrumentsApi(api_client)
         cls.property_definitions_api = lusid.PropertyDefinitionsApi(api_client)

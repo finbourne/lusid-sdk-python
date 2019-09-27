@@ -7,10 +7,8 @@ import uuid
 import lusid
 import lusid.models as models
 
-from lusid.utilities.api_client_builder import ApiClientBuilder
-from utilities.instrument_loader import InstrumentLoader
-from utilities.test_data_utilities import TestDataUtilities
-from utilities.credentials_source import CredentialsSource
+from utilities import InstrumentLoader
+from utilities import TestDataUtilities
 
 
 class Properties(unittest.TestCase):
@@ -18,7 +16,7 @@ class Properties(unittest.TestCase):
     @classmethod
     def setUpClass(cls):
         # create a configured API client
-        api_client = ApiClientBuilder().build(CredentialsSource.secrets_path())
+        api_client = TestDataUtilities.api_client()
 
         cls.property_definitions_api = lusid.PropertyDefinitionsApi(api_client)
         cls.transaction_portfolios_api = lusid.TransactionPortfoliosApi(api_client)
