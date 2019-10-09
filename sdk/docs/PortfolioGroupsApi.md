@@ -18,7 +18,7 @@ Method | HTTP request | Description
 
 
 # **add_portfolio_to_group**
-> PortfolioGroup add_portfolio_to_group(scope, code, effective_at=effective_at, portfolio_id=portfolio_id)
+> PortfolioGroup add_portfolio_to_group(scope, code, effective_at, portfolio_id=portfolio_id)
 
 [EARLY ACCESS] Add portfolio to group
 
@@ -43,12 +43,12 @@ configuration.host = "http://localhost"
 api_instance = lusid.PortfolioGroupsApi(lusid.ApiClient(configuration))
 scope = 'scope_example' # str | The scope of the portfolio group to add a portfolio to.
 code = 'code_example' # str | The code of the portfolio group to add a portfolio to. Together with the scope this uniquely identifies the portfolio group.
-effective_at = '2013-10-20T19:20:30+01:00' # datetime | The effective datetime from which the portfolio will be added to the group. (optional)
+effective_at = '2013-10-20T19:20:30+01:00' # datetime | The effective datetime from which the portfolio will be added to the group.
 portfolio_id = lusid.ResourceId() # ResourceId | The resource identifier of the portfolio to add to the portfolio group. (optional)
 
 try:
     # [EARLY ACCESS] Add portfolio to group
-    api_response = api_instance.add_portfolio_to_group(scope, code, effective_at=effective_at, portfolio_id=portfolio_id)
+    api_response = api_instance.add_portfolio_to_group(scope, code, effective_at, portfolio_id=portfolio_id)
     pprint(api_response)
 except ApiException as e:
     print("Exception when calling PortfolioGroupsApi->add_portfolio_to_group: %s\n" % e)
@@ -60,7 +60,7 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **scope** | **str**| The scope of the portfolio group to add a portfolio to. | 
  **code** | **str**| The code of the portfolio group to add a portfolio to. Together with the scope this uniquely identifies the portfolio group. | 
- **effective_at** | **datetime**| The effective datetime from which the portfolio will be added to the group. | [optional] 
+ **effective_at** | **datetime**| The effective datetime from which the portfolio will be added to the group. | 
  **portfolio_id** | [**ResourceId**](ResourceId.md)| The resource identifier of the portfolio to add to the portfolio group. | [optional] 
 
 ### Return type
@@ -86,7 +86,7 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **add_sub_group_to_group**
-> PortfolioGroup add_sub_group_to_group(scope, code, effective_at=effective_at, portfolio_group_id=portfolio_group_id)
+> PortfolioGroup add_sub_group_to_group(scope, code, effective_at, portfolio_group_id=portfolio_group_id)
 
 [EARLY ACCESS] Add sub group to group
 
@@ -111,12 +111,12 @@ configuration.host = "http://localhost"
 api_instance = lusid.PortfolioGroupsApi(lusid.ApiClient(configuration))
 scope = 'scope_example' # str | The scope of the portfolio group to add a portfolio group to.
 code = 'code_example' # str | The code of the portfolio group to add a portfolio group to. Together with the scope this uniquely identifies the portfolio group.
-effective_at = '2013-10-20T19:20:30+01:00' # datetime | The effective datetime from which the sub group will be added to the group. (optional)
+effective_at = '2013-10-20T19:20:30+01:00' # datetime | The effective datetime from which the sub group will be added to the group.
 portfolio_group_id = lusid.ResourceId() # ResourceId | The resource identifier of the portfolio group to add to the portfolio group as a sub group. (optional)
 
 try:
     # [EARLY ACCESS] Add sub group to group
-    api_response = api_instance.add_sub_group_to_group(scope, code, effective_at=effective_at, portfolio_group_id=portfolio_group_id)
+    api_response = api_instance.add_sub_group_to_group(scope, code, effective_at, portfolio_group_id=portfolio_group_id)
     pprint(api_response)
 except ApiException as e:
     print("Exception when calling PortfolioGroupsApi->add_sub_group_to_group: %s\n" % e)
@@ -128,7 +128,7 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **scope** | **str**| The scope of the portfolio group to add a portfolio group to. | 
  **code** | **str**| The code of the portfolio group to add a portfolio group to. Together with the scope this uniquely identifies the portfolio group. | 
- **effective_at** | **datetime**| The effective datetime from which the sub group will be added to the group. | [optional] 
+ **effective_at** | **datetime**| The effective datetime from which the sub group will be added to the group. | 
  **portfolio_group_id** | [**ResourceId**](ResourceId.md)| The resource identifier of the portfolio group to add to the portfolio group as a sub group. | [optional] 
 
 ### Return type
@@ -218,7 +218,7 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **delete_portfolio_from_group**
-> PortfolioGroup delete_portfolio_from_group(scope, code, portfolio_scope, portfolio_code, effective_at=effective_at)
+> PortfolioGroup delete_portfolio_from_group(scope, code, portfolio_scope, portfolio_code, effective_at)
 
 [EARLY ACCESS] Delete portfolio from group
 
@@ -245,11 +245,11 @@ scope = 'scope_example' # str | The scope of the portfolio group to remove the p
 code = 'code_example' # str | The code of the portfolio group to remove the portfolio from. Together with the scope this uniquely identifies the portfolio group.
 portfolio_scope = 'portfolio_scope_example' # str | The scope of the portfolio being removed from the portfolio group.
 portfolio_code = 'portfolio_code_example' # str | The code of the portfolio being removed from the portfolio group. Together with the scope this uniquely identifies the portfolio to remove.
-effective_at = '2013-10-20T19:20:30+01:00' # datetime | The effective datetime from which the portfolio will be removed from the portfolio group. (optional)
+effective_at = '2013-10-20T19:20:30+01:00' # datetime | The effective datetime from which the portfolio will be removed from the portfolio group.
 
 try:
     # [EARLY ACCESS] Delete portfolio from group
-    api_response = api_instance.delete_portfolio_from_group(scope, code, portfolio_scope, portfolio_code, effective_at=effective_at)
+    api_response = api_instance.delete_portfolio_from_group(scope, code, portfolio_scope, portfolio_code, effective_at)
     pprint(api_response)
 except ApiException as e:
     print("Exception when calling PortfolioGroupsApi->delete_portfolio_from_group: %s\n" % e)
@@ -263,7 +263,7 @@ Name | Type | Description  | Notes
  **code** | **str**| The code of the portfolio group to remove the portfolio from. Together with the scope this uniquely identifies the portfolio group. | 
  **portfolio_scope** | **str**| The scope of the portfolio being removed from the portfolio group. | 
  **portfolio_code** | **str**| The code of the portfolio being removed from the portfolio group. Together with the scope this uniquely identifies the portfolio to remove. | 
- **effective_at** | **datetime**| The effective datetime from which the portfolio will be removed from the portfolio group. | [optional] 
+ **effective_at** | **datetime**| The effective datetime from which the portfolio will be removed from the portfolio group. | 
 
 ### Return type
 
@@ -352,7 +352,7 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **delete_sub_group_from_group**
-> PortfolioGroup delete_sub_group_from_group(scope, code, subgroup_scope, subgroup_code, effective_at=effective_at)
+> PortfolioGroup delete_sub_group_from_group(scope, code, subgroup_scope, subgroup_code, effective_at)
 
 [EARLY ACCESS] Delete sub group from group
 
@@ -379,11 +379,11 @@ scope = 'scope_example' # str | The scope of the portfolio group to remove the s
 code = 'code_example' # str | The code of the portfolio group to remove the sub group from. Together with the scope this uniquely identifies the portfolio group.
 subgroup_scope = 'subgroup_scope_example' # str | The scope of the sub group to remove from the portfolio group.
 subgroup_code = 'subgroup_code_example' # str | The code of the sub group to remove from the portfolio group. Together with the scope this uniquely identifies the sub group.
-effective_at = '2013-10-20T19:20:30+01:00' # datetime | The effective datetime from which the sub group will be removed from the portfolio group. (optional)
+effective_at = '2013-10-20T19:20:30+01:00' # datetime | The effective datetime from which the sub group will be removed from the portfolio group.
 
 try:
     # [EARLY ACCESS] Delete sub group from group
-    api_response = api_instance.delete_sub_group_from_group(scope, code, subgroup_scope, subgroup_code, effective_at=effective_at)
+    api_response = api_instance.delete_sub_group_from_group(scope, code, subgroup_scope, subgroup_code, effective_at)
     pprint(api_response)
 except ApiException as e:
     print("Exception when calling PortfolioGroupsApi->delete_sub_group_from_group: %s\n" % e)
@@ -397,7 +397,7 @@ Name | Type | Description  | Notes
  **code** | **str**| The code of the portfolio group to remove the sub group from. Together with the scope this uniquely identifies the portfolio group. | 
  **subgroup_scope** | **str**| The scope of the sub group to remove from the portfolio group. | 
  **subgroup_code** | **str**| The code of the sub group to remove from the portfolio group. Together with the scope this uniquely identifies the sub group. | 
- **effective_at** | **datetime**| The effective datetime from which the sub group will be removed from the portfolio group. | [optional] 
+ **effective_at** | **datetime**| The effective datetime from which the sub group will be removed from the portfolio group. | 
 
 ### Return type
 
@@ -698,7 +698,7 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **update_portfolio_group**
-> PortfolioGroup update_portfolio_group(scope, code, effective_at=effective_at, request=request)
+> PortfolioGroup update_portfolio_group(scope, code, effective_at, request=request)
 
 [EARLY ACCESS] Update portfolio group
 
@@ -723,12 +723,12 @@ configuration.host = "http://localhost"
 api_instance = lusid.PortfolioGroupsApi(lusid.ApiClient(configuration))
 scope = 'scope_example' # str | The scope of the portfolio group to update the definition for.
 code = 'code_example' # str | The code of the portfolio group to update the definition for. Together with the scope this uniquely identifies the portfolio group.
-effective_at = '2013-10-20T19:20:30+01:00' # datetime | The effective datetime at which to update the definition. (optional)
+effective_at = '2013-10-20T19:20:30+01:00' # datetime | The effective datetime at which to update the definition.
 request = lusid.UpdatePortfolioGroupRequest() # UpdatePortfolioGroupRequest | The updated portfolio group definition. (optional)
 
 try:
     # [EARLY ACCESS] Update portfolio group
-    api_response = api_instance.update_portfolio_group(scope, code, effective_at=effective_at, request=request)
+    api_response = api_instance.update_portfolio_group(scope, code, effective_at, request=request)
     pprint(api_response)
 except ApiException as e:
     print("Exception when calling PortfolioGroupsApi->update_portfolio_group: %s\n" % e)
@@ -740,7 +740,7 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **scope** | **str**| The scope of the portfolio group to update the definition for. | 
  **code** | **str**| The code of the portfolio group to update the definition for. Together with the scope this uniquely identifies the portfolio group. | 
- **effective_at** | **datetime**| The effective datetime at which to update the definition. | [optional] 
+ **effective_at** | **datetime**| The effective datetime at which to update the definition. | 
  **request** | [**UpdatePortfolioGroupRequest**](UpdatePortfolioGroupRequest.md)| The updated portfolio group definition. | [optional] 
 
 ### Return type
