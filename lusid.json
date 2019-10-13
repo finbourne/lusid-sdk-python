@@ -4224,7 +4224,7 @@
                 },
                 "values": [
                   {
-                    "instrumentUid": "LUID_12YAQL67",
+                    "instrumentUid": "LUID_O33POER4",
                     "holdingType": "P",
                     "units": 10,
                     "settledUnits": 10,
@@ -4605,7 +4605,7 @@
                       "instrumentIdentifiers": {
                         "Instrument/default/ClientInternal": "CLI-192836"
                       },
-                      "instrumentUid": "LUID_83X5J4OU",
+                      "instrumentUid": "LUID_OO08Y0AZ",
                       "subHoldingKeys": {},
                       "properties": {},
                       "taxLots": [
@@ -4622,7 +4622,7 @@
                       "instrumentIdentifiers": {
                         "Instrument/default/ClientInternal": "CLI-462810"
                       },
-                      "instrumentUid": "LUID_VNFFH2O7",
+                      "instrumentUid": "LUID_X07SEH6R",
                       "subHoldingKeys": {},
                       "properties": {},
                       "taxLots": [
@@ -4748,7 +4748,7 @@
                     "instrumentIdentifiers": {
                       "Instrument/default/RIC": "RIC.L"
                     },
-                    "instrumentUid": "LUID_I1F27OX4",
+                    "instrumentUid": "LUID_AMRQT2YH",
                     "transactionDate": "2018-08-04T00:00:00+00:00",
                     "settlementDate": "2018-08-06T00:00:00+00:00",
                     "units": 1000,
@@ -6690,7 +6690,7 @@
       },
       "example": {
         "code": "MyGroupCode",
-        "created": "2019-10-13T08:29:12.6978986+00:00",
+        "created": "2019-10-13T14:02:18.7299069+00:00",
         "values": [
           {
             "scope": "MyScope",
@@ -9631,7 +9631,7 @@
   "securityDefinitions": {
     "oauth2": {
       "flow": "implicit",
-      "authorizationUrl": "http://dummy.451.okta.com/v1/authorize",
+      "authorizationUrl": "https://lusid.okta.com/oauth2/aus5al5yopbHW2wJn2p6/v1/authorize",
       "type": "oauth2",
       "description": "OAuth2 Implicit Grant"
     }
