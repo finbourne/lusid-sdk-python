@@ -10,7 +10,7 @@ Method | HTTP request | Description
 
 
 # **get_data_type**
-> DataType get_data_type(scope, code)
+> DataType get_data_type(scope, code, as_at=as_at)
 
 [EARLY ACCESS] Get data type definition
 
@@ -35,10 +35,11 @@ configuration.host = "http://localhost/api"
 api_instance = lusid.DataTypesApi(lusid.ApiClient(configuration))
 scope = 'scope_example' # str | The scope of the data type
 code = 'code_example' # str | The code of the data type
+as_at = '2013-10-20T19:20:30+01:00' # datetime | The asAt datetime at which to retrieve the data type definition. Defaults to              return the latest version of the instrument definition if not specified. (optional)
 
 try:
     # [EARLY ACCESS] Get data type definition
-    api_response = api_instance.get_data_type(scope, code)
+    api_response = api_instance.get_data_type(scope, code, as_at=as_at)
     pprint(api_response)
 except ApiException as e:
     print("Exception when calling DataTypesApi->get_data_type: %s\n" % e)
@@ -50,6 +51,7 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **scope** | **str**| The scope of the data type | 
  **code** | **str**| The code of the data type | 
+ **as_at** | **datetime**| The asAt datetime at which to retrieve the data type definition. Defaults to              return the latest version of the instrument definition if not specified. | [optional] 
 
 ### Return type
 
@@ -74,7 +76,7 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **get_units_from_data_type**
-> ResourceListOfIUnitDefinitionDto get_units_from_data_type(scope, code, units=units, filter=filter)
+> ResourceListOfIUnitDefinitionDto get_units_from_data_type(scope, code, units=units, filter=filter, as_at=as_at)
 
 [EARLY ACCESS] Get units from data type
 
@@ -101,10 +103,11 @@ scope = 'scope_example' # str | The scope of the data type
 code = 'code_example' # str | The code of the data type
 units = ['units_example'] # list[str] | One or more unit identifiers for which the definition is being requested (optional)
 filter = 'filter_example' # str | Optional. Expression to filter the result set (optional)
+as_at = '2013-10-20T19:20:30+01:00' # datetime | Optional. The as at of the requested data type (optional)
 
 try:
     # [EARLY ACCESS] Get units from data type
-    api_response = api_instance.get_units_from_data_type(scope, code, units=units, filter=filter)
+    api_response = api_instance.get_units_from_data_type(scope, code, units=units, filter=filter, as_at=as_at)
     pprint(api_response)
 except ApiException as e:
     print("Exception when calling DataTypesApi->get_units_from_data_type: %s\n" % e)
@@ -118,6 +121,7 @@ Name | Type | Description  | Notes
  **code** | **str**| The code of the data type | 
  **units** | [**list[str]**](str.md)| One or more unit identifiers for which the definition is being requested | [optional] 
  **filter** | **str**| Optional. Expression to filter the result set | [optional] 
+ **as_at** | **datetime**| Optional. The as at of the requested data type | [optional] 
 
 ### Return type
 
@@ -142,7 +146,7 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **list_data_types**
-> ResourceListOfDataType list_data_types(scope, include_system=include_system, sort_by=sort_by, start=start, limit=limit, filter=filter)
+> ResourceListOfDataType list_data_types(scope, as_at=as_at, include_system=include_system, sort_by=sort_by, start=start, limit=limit, filter=filter)
 
 [EARLY ACCESS] List data types
 
@@ -166,6 +170,7 @@ configuration.host = "http://localhost/api"
 # Create an instance of the API class
 api_instance = lusid.DataTypesApi(lusid.ApiClient(configuration))
 scope = 'scope_example' # str | The requested scope of the data types
+as_at = '2013-10-20T19:20:30+01:00' # datetime | The as at of the requested data types (optional)
 include_system = True # bool | Whether to additionally include those data types in the \"system\" scope (optional)
 sort_by = ['sort_by_example'] # list[str] | Optional. Order the results by these fields. Use use the '-' sign to denote descending order e.g. -MyFieldName (optional)
 start = 56 # int | Optional. When paginating, skip this number of results (optional)
@@ -174,7 +179,7 @@ filter = 'filter_example' # str | Optional. Expression to filter the result set 
 
 try:
     # [EARLY ACCESS] List data types
-    api_response = api_instance.list_data_types(scope, include_system=include_system, sort_by=sort_by, start=start, limit=limit, filter=filter)
+    api_response = api_instance.list_data_types(scope, as_at=as_at, include_system=include_system, sort_by=sort_by, start=start, limit=limit, filter=filter)
     pprint(api_response)
 except ApiException as e:
     print("Exception when calling DataTypesApi->list_data_types: %s\n" % e)
@@ -185,6 +190,7 @@ except ApiException as e:
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **scope** | **str**| The requested scope of the data types | 
+ **as_at** | **datetime**| The as at of the requested data types | [optional] 
  **include_system** | **bool**| Whether to additionally include those data types in the \&quot;system\&quot; scope | [optional] 
  **sort_by** | [**list[str]**](str.md)| Optional. Order the results by these fields. Use use the &#39;-&#39; sign to denote descending order e.g. -MyFieldName | [optional] 
  **start** | **int**| Optional. When paginating, skip this number of results | [optional] 
