@@ -32,7 +32,7 @@ class TestDataUtilities:
                                                            created=effective_date)
 
         # Create the portfolio in LUSID
-        portfolio = self.transaction_portfolio_api.create_portfolio(scope, create_request=request)
+        portfolio = self.transaction_portfolio_api.create_portfolio(scope, transaction_portfolio=request)
 
         assert(portfolio.id.code == request.code)
 
