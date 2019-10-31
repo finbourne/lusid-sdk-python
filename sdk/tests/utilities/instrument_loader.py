@@ -28,7 +28,7 @@ class InstrumentLoader:
             ) for i in self.__instruments
         }
 
-        response = self.instruments_api.upsert_instruments(requests=instruments_to_create)
+        response = self.instruments_api.upsert_instruments(instruments=instruments_to_create)
 
         assert (len(response.failed) == 0)
 
