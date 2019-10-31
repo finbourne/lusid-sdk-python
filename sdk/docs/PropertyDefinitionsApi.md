@@ -1,6 +1,6 @@
 # lusid.PropertyDefinitionsApi
 
-All URIs are relative to *http://localhost/api*
+All URIs are relative to *http://localhost*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
@@ -31,8 +31,8 @@ configuration = lusid.Configuration()
 # Configure OAuth2 access token for authorization: oauth2
 configuration.access_token = 'YOUR_ACCESS_TOKEN'
 
-# Defining host is optional and default to http://localhost/api
-configuration.host = "http://localhost/api"
+# Defining host is optional and default to http://localhost
+configuration.host = "http://localhost"
 # Create an instance of the API class
 api_instance = lusid.PropertyDefinitionsApi(lusid.ApiClient(configuration))
 definition = lusid.CreatePropertyDefinitionRequest() # CreatePropertyDefinitionRequest | The definition of the new property.
@@ -93,8 +93,8 @@ configuration = lusid.Configuration()
 # Configure OAuth2 access token for authorization: oauth2
 configuration.access_token = 'YOUR_ACCESS_TOKEN'
 
-# Defining host is optional and default to http://localhost/api
-configuration.host = "http://localhost/api"
+# Defining host is optional and default to http://localhost
+configuration.host = "http://localhost"
 # Create an instance of the API class
 api_instance = lusid.PropertyDefinitionsApi(lusid.ApiClient(configuration))
 domain = 'domain_example' # str | The domain of the property to be deleted.
@@ -159,8 +159,8 @@ configuration = lusid.Configuration()
 # Configure OAuth2 access token for authorization: oauth2
 configuration.access_token = 'YOUR_ACCESS_TOKEN'
 
-# Defining host is optional and default to http://localhost/api
-configuration.host = "http://localhost/api"
+# Defining host is optional and default to http://localhost
+configuration.host = "http://localhost"
 # Create an instance of the API class
 api_instance = lusid.PropertyDefinitionsApi(lusid.ApiClient(configuration))
 property_keys = ['property_keys_example'] # list[str] | One or more property keys which identify each property that a definition should              be retrieved for. The format for each property key is {domain}/{scope}/{code}, e.g. 'Portfolio/Manager/Id'.
@@ -225,8 +225,8 @@ configuration = lusid.Configuration()
 # Configure OAuth2 access token for authorization: oauth2
 configuration.access_token = 'YOUR_ACCESS_TOKEN'
 
-# Defining host is optional and default to http://localhost/api
-configuration.host = "http://localhost/api"
+# Defining host is optional and default to http://localhost
+configuration.host = "http://localhost"
 # Create an instance of the API class
 api_instance = lusid.PropertyDefinitionsApi(lusid.ApiClient(configuration))
 domain = 'domain_example' # str | The domain of the specified property.
@@ -274,7 +274,7 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **update_property_definition**
-> PropertyDefinition update_property_definition(domain, scope, code, definition=definition)
+> PropertyDefinition update_property_definition(domain, scope, code, definition)
 
 [EARLY ACCESS] Update property definition
 
@@ -293,18 +293,18 @@ configuration = lusid.Configuration()
 # Configure OAuth2 access token for authorization: oauth2
 configuration.access_token = 'YOUR_ACCESS_TOKEN'
 
-# Defining host is optional and default to http://localhost/api
-configuration.host = "http://localhost/api"
+# Defining host is optional and default to http://localhost
+configuration.host = "http://localhost"
 # Create an instance of the API class
 api_instance = lusid.PropertyDefinitionsApi(lusid.ApiClient(configuration))
 domain = 'domain_example' # str | The domain of the property being updated.
 scope = 'scope_example' # str | The scope of the property being updated.
 code = 'code_example' # str | The code of the property being updated. Together with the domain and scope this uniquely              identifies the property.
-definition = lusid.UpdatePropertyDefinitionRequest() # UpdatePropertyDefinitionRequest | The updated definition of the property. (optional)
+definition = lusid.UpdatePropertyDefinitionRequest() # UpdatePropertyDefinitionRequest | The updated definition of the property.
 
 try:
     # [EARLY ACCESS] Update property definition
-    api_response = api_instance.update_property_definition(domain, scope, code, definition=definition)
+    api_response = api_instance.update_property_definition(domain, scope, code, definition)
     pprint(api_response)
 except ApiException as e:
     print("Exception when calling PropertyDefinitionsApi->update_property_definition: %s\n" % e)
@@ -317,7 +317,7 @@ Name | Type | Description  | Notes
  **domain** | **str**| The domain of the property being updated. | 
  **scope** | **str**| The scope of the property being updated. | 
  **code** | **str**| The code of the property being updated. Together with the domain and scope this uniquely              identifies the property. | 
- **definition** | [**UpdatePropertyDefinitionRequest**](UpdatePropertyDefinitionRequest.md)| The updated definition of the property. | [optional] 
+ **definition** | [**UpdatePropertyDefinitionRequest**](UpdatePropertyDefinitionRequest.md)| The updated definition of the property. | 
 
 ### Return type
 

@@ -1,17 +1,17 @@
 # lusid.ReferencePortfolioApi
 
-All URIs are relative to *http://localhost/api*
+All URIs are relative to *http://localhost*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
 [**create_reference_portfolio**](ReferencePortfolioApi.md#create_reference_portfolio) | **POST** /api/referenceportfolios/{scope} | [EARLY ACCESS] Create reference portfolio
 [**get_reference_portfolio_constituents**](ReferencePortfolioApi.md#get_reference_portfolio_constituents) | **GET** /api/referenceportfolios/{scope}/{code}/constituents | [EARLY ACCESS] Get constituents
-[**list_constituents_adjustments**](ReferencePortfolioApi.md#list_constituents_adjustments) | **GET** /api/referenceportfolios/{scope}/{code}/constituentsadjustments | [EARLY ACCESS] Gets constituents adjustments in an interval of effective time.
+[**list_constituents_adjustments**](ReferencePortfolioApi.md#list_constituents_adjustments) | **GET** /api/referenceportfolios/{scope}/{code}/constituentsadjustments | [EARLY ACCESS] List constituents adjustments
 [**upsert_reference_portfolio_constituents**](ReferencePortfolioApi.md#upsert_reference_portfolio_constituents) | **POST** /api/referenceportfolios/{scope}/{code}/constituents | [EARLY ACCESS] Add constituents
 
 
 # **create_reference_portfolio**
-> Portfolio create_reference_portfolio(scope, reference_portfolio=reference_portfolio)
+> Portfolio create_reference_portfolio(scope, reference_portfolio)
 
 [EARLY ACCESS] Create reference portfolio
 
@@ -30,16 +30,16 @@ configuration = lusid.Configuration()
 # Configure OAuth2 access token for authorization: oauth2
 configuration.access_token = 'YOUR_ACCESS_TOKEN'
 
-# Defining host is optional and default to http://localhost/api
-configuration.host = "http://localhost/api"
+# Defining host is optional and default to http://localhost
+configuration.host = "http://localhost"
 # Create an instance of the API class
 api_instance = lusid.ReferencePortfolioApi(lusid.ApiClient(configuration))
 scope = 'scope_example' # str | The intended scope of the portfolio
-reference_portfolio = lusid.CreateReferencePortfolioRequest() # CreateReferencePortfolioRequest | The portfolio creation request object (optional)
+reference_portfolio = lusid.CreateReferencePortfolioRequest() # CreateReferencePortfolioRequest | The portfolio creation request object
 
 try:
     # [EARLY ACCESS] Create reference portfolio
-    api_response = api_instance.create_reference_portfolio(scope, reference_portfolio=reference_portfolio)
+    api_response = api_instance.create_reference_portfolio(scope, reference_portfolio)
     pprint(api_response)
 except ApiException as e:
     print("Exception when calling ReferencePortfolioApi->create_reference_portfolio: %s\n" % e)
@@ -50,7 +50,7 @@ except ApiException as e:
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **scope** | **str**| The intended scope of the portfolio | 
- **reference_portfolio** | [**CreateReferencePortfolioRequest**](CreateReferencePortfolioRequest.md)| The portfolio creation request object | [optional] 
+ **reference_portfolio** | [**CreateReferencePortfolioRequest**](CreateReferencePortfolioRequest.md)| The portfolio creation request object | 
 
 ### Return type
 
@@ -94,8 +94,8 @@ configuration = lusid.Configuration()
 # Configure OAuth2 access token for authorization: oauth2
 configuration.access_token = 'YOUR_ACCESS_TOKEN'
 
-# Defining host is optional and default to http://localhost/api
-configuration.host = "http://localhost/api"
+# Defining host is optional and default to http://localhost
+configuration.host = "http://localhost"
 # Create an instance of the API class
 api_instance = lusid.ReferencePortfolioApi(lusid.ApiClient(configuration))
 scope = 'scope_example' # str | The scope of the reference portfolio.
@@ -145,11 +145,11 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **list_constituents_adjustments**
-> ResourceListOfConstituentsAdjustmentHeader list_constituents_adjustments(scope, code, from_effective_at=from_effective_at, to_effective_at=to_effective_at, as_at_time=as_at_time)
+> ResourceListOfConstituentsAdjustmentHeader list_constituents_adjustments(scope, code, from_effective_at, to_effective_at, as_at_time=as_at_time)
 
-[EARLY ACCESS] Gets constituents adjustments in an interval of effective time.
+[EARLY ACCESS] List constituents adjustments
 
-Specify a time period in which you'd like to see the list of times that adjustments where made to this portfolio
+List the constituent adjustments made to the specified reference portfolio over a specified interval of effective time.
 
 ### Example
 
@@ -164,19 +164,19 @@ configuration = lusid.Configuration()
 # Configure OAuth2 access token for authorization: oauth2
 configuration.access_token = 'YOUR_ACCESS_TOKEN'
 
-# Defining host is optional and default to http://localhost/api
-configuration.host = "http://localhost/api"
+# Defining host is optional and default to http://localhost
+configuration.host = "http://localhost"
 # Create an instance of the API class
 api_instance = lusid.ReferencePortfolioApi(lusid.ApiClient(configuration))
 scope = 'scope_example' # str | The scope of the portfolio
 code = 'code_example' # str | Code for the portfolio
-from_effective_at = 'from_effective_at_example' # str | Events between this time (inclusive) and the toEffectiveAt are returned. (optional)
-to_effective_at = 'to_effective_at_example' # str | Events between this time (inclusive) and the fromEffectiveAt are returned. (optional)
+from_effective_at = 'from_effective_at_example' # str | Events between this time (inclusive) and the toEffectiveAt are returned.
+to_effective_at = 'to_effective_at_example' # str | Events between this time (inclusive) and the fromEffectiveAt are returned.
 as_at_time = '2013-10-20T19:20:30+01:00' # datetime | The as-at time for which the result is valid. (optional)
 
 try:
-    # [EARLY ACCESS] Gets constituents adjustments in an interval of effective time.
-    api_response = api_instance.list_constituents_adjustments(scope, code, from_effective_at=from_effective_at, to_effective_at=to_effective_at, as_at_time=as_at_time)
+    # [EARLY ACCESS] List constituents adjustments
+    api_response = api_instance.list_constituents_adjustments(scope, code, from_effective_at, to_effective_at, as_at_time=as_at_time)
     pprint(api_response)
 except ApiException as e:
     print("Exception when calling ReferencePortfolioApi->list_constituents_adjustments: %s\n" % e)
@@ -188,8 +188,8 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **scope** | **str**| The scope of the portfolio | 
  **code** | **str**| Code for the portfolio | 
- **from_effective_at** | **str**| Events between this time (inclusive) and the toEffectiveAt are returned. | [optional] 
- **to_effective_at** | **str**| Events between this time (inclusive) and the fromEffectiveAt are returned. | [optional] 
+ **from_effective_at** | **str**| Events between this time (inclusive) and the toEffectiveAt are returned. | 
+ **to_effective_at** | **str**| Events between this time (inclusive) and the fromEffectiveAt are returned. | 
  **as_at_time** | **datetime**| The as-at time for which the result is valid. | [optional] 
 
 ### Return type
@@ -215,7 +215,7 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **upsert_reference_portfolio_constituents**
-> UpsertReferencePortfolioConstituentsResponse upsert_reference_portfolio_constituents(scope, code, constituents=constituents)
+> UpsertReferencePortfolioConstituentsResponse upsert_reference_portfolio_constituents(scope, code, constituents)
 
 [EARLY ACCESS] Add constituents
 
@@ -234,17 +234,17 @@ configuration = lusid.Configuration()
 # Configure OAuth2 access token for authorization: oauth2
 configuration.access_token = 'YOUR_ACCESS_TOKEN'
 
-# Defining host is optional and default to http://localhost/api
-configuration.host = "http://localhost/api"
+# Defining host is optional and default to http://localhost
+configuration.host = "http://localhost"
 # Create an instance of the API class
 api_instance = lusid.ReferencePortfolioApi(lusid.ApiClient(configuration))
 scope = 'scope_example' # str | The scope of the portfolio
 code = 'code_example' # str | The code of the portfolio
-constituents = lusid.UpsertReferencePortfolioConstituentsRequest() # UpsertReferencePortfolioConstituentsRequest | The constituents to upload to the portfolio (optional)
+constituents = lusid.UpsertReferencePortfolioConstituentsRequest() # UpsertReferencePortfolioConstituentsRequest | The constituents to upload to the portfolio
 
 try:
     # [EARLY ACCESS] Add constituents
-    api_response = api_instance.upsert_reference_portfolio_constituents(scope, code, constituents=constituents)
+    api_response = api_instance.upsert_reference_portfolio_constituents(scope, code, constituents)
     pprint(api_response)
 except ApiException as e:
     print("Exception when calling ReferencePortfolioApi->upsert_reference_portfolio_constituents: %s\n" % e)
@@ -256,7 +256,7 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **scope** | **str**| The scope of the portfolio | 
  **code** | **str**| The code of the portfolio | 
- **constituents** | [**UpsertReferencePortfolioConstituentsRequest**](UpsertReferencePortfolioConstituentsRequest.md)| The constituents to upload to the portfolio | [optional] 
+ **constituents** | [**UpsertReferencePortfolioConstituentsRequest**](UpsertReferencePortfolioConstituentsRequest.md)| The constituents to upload to the portfolio | 
 
 ### Return type
 

@@ -1,22 +1,22 @@
 # lusid.TransactionPortfoliosApi
 
-All URIs are relative to *http://localhost/api*
+All URIs are relative to *http://localhost*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
-[**adjust_holdings**](TransactionPortfoliosApi.md#adjust_holdings) | **POST** /api/transactionportfolios/{scope}/{code}/holdings/{effectiveAt} | [EARLY ACCESS] Adjust holdings
+[**adjust_holdings**](TransactionPortfoliosApi.md#adjust_holdings) | **POST** /api/transactionportfolios/{scope}/{code}/holdings | [EARLY ACCESS] Adjust holdings
 [**build_transactions**](TransactionPortfoliosApi.md#build_transactions) | **POST** /api/transactionportfolios/{scope}/{code}/transactions/$build | [EARLY ACCESS] Build transactions
-[**cancel_adjust_holdings**](TransactionPortfoliosApi.md#cancel_adjust_holdings) | **DELETE** /api/transactionportfolios/{scope}/{code}/holdings/{effectiveAt} | [EARLY ACCESS] Cancel adjust holdings
+[**cancel_adjust_holdings**](TransactionPortfoliosApi.md#cancel_adjust_holdings) | **DELETE** /api/transactionportfolios/{scope}/{code}/holdings | [EARLY ACCESS] Cancel adjust holdings
 [**cancel_executions**](TransactionPortfoliosApi.md#cancel_executions) | **DELETE** /api/transactionportfolios/{scope}/{code}/executions | [EARLY ACCESS] Cancel executions
 [**cancel_transactions**](TransactionPortfoliosApi.md#cancel_transactions) | **DELETE** /api/transactionportfolios/{scope}/{code}/transactions | [EARLY ACCESS] Cancel transactions
 [**create_portfolio**](TransactionPortfoliosApi.md#create_portfolio) | **POST** /api/transactionportfolios/{scope} | [EARLY ACCESS] Create portfolio
-[**delete_property_from_transaction**](TransactionPortfoliosApi.md#delete_property_from_transaction) | **DELETE** /api/transactionportfolios/{scope}/{code}/transactions/{transactionId}/properties | [EARLY ACCESS] Delete property from transaction
+[**delete_properties_from_transaction**](TransactionPortfoliosApi.md#delete_properties_from_transaction) | **DELETE** /api/transactionportfolios/{scope}/{code}/transactions/{transactionId}/properties | [EARLY ACCESS] Delete properties from transaction
 [**get_details**](TransactionPortfoliosApi.md#get_details) | **GET** /api/transactionportfolios/{scope}/{code}/details | [EARLY ACCESS] Get details
 [**get_holdings**](TransactionPortfoliosApi.md#get_holdings) | **GET** /api/transactionportfolios/{scope}/{code}/holdings | [EARLY ACCESS] Get holdings
 [**get_holdings_adjustment**](TransactionPortfoliosApi.md#get_holdings_adjustment) | **GET** /api/transactionportfolios/{scope}/{code}/holdingsadjustments/{effectiveAt} | [EARLY ACCESS] Get holdings adjustment
 [**get_transactions**](TransactionPortfoliosApi.md#get_transactions) | **GET** /api/transactionportfolios/{scope}/{code}/transactions | [EARLY ACCESS] Get transactions
 [**list_holdings_adjustments**](TransactionPortfoliosApi.md#list_holdings_adjustments) | **GET** /api/transactionportfolios/{scope}/{code}/holdingsadjustments | [EARLY ACCESS] List holdings adjustments
-[**set_holdings**](TransactionPortfoliosApi.md#set_holdings) | **PUT** /api/transactionportfolios/{scope}/{code}/holdings/{effectiveAt} | [EARLY ACCESS] Set holdings
+[**set_holdings**](TransactionPortfoliosApi.md#set_holdings) | **PUT** /api/transactionportfolios/{scope}/{code}/holdings | [EARLY ACCESS] Set holdings
 [**upsert_executions**](TransactionPortfoliosApi.md#upsert_executions) | **POST** /api/transactionportfolios/{scope}/{code}/executions | [EARLY ACCESS] Upsert executions
 [**upsert_portfolio_details**](TransactionPortfoliosApi.md#upsert_portfolio_details) | **POST** /api/transactionportfolios/{scope}/{code}/details | [EARLY ACCESS] Upsert portfolio details
 [**upsert_transaction_properties**](TransactionPortfoliosApi.md#upsert_transaction_properties) | **POST** /api/transactionportfolios/{scope}/{code}/transactions/{transactionId}/properties | [EARLY ACCESS] Upsert transaction properties
@@ -24,7 +24,7 @@ Method | HTTP request | Description
 
 
 # **adjust_holdings**
-> AdjustHolding adjust_holdings(scope, code, effective_at, holding_adjustments=holding_adjustments)
+> AdjustHolding adjust_holdings(scope, code, effective_at, holding_adjustments)
 
 [EARLY ACCESS] Adjust holdings
 
@@ -43,18 +43,18 @@ configuration = lusid.Configuration()
 # Configure OAuth2 access token for authorization: oauth2
 configuration.access_token = 'YOUR_ACCESS_TOKEN'
 
-# Defining host is optional and default to http://localhost/api
-configuration.host = "http://localhost/api"
+# Defining host is optional and default to http://localhost
+configuration.host = "http://localhost"
 # Create an instance of the API class
 api_instance = lusid.TransactionPortfoliosApi(lusid.ApiClient(configuration))
 scope = 'scope_example' # str | The scope of the transaction portfolio.
 code = 'code_example' # str | The code of the transaction portfolio. Together with the scope this uniquely identifies              the transaction portfolio.
 effective_at = 'effective_at_example' # str | The effective datetime or cut label at which the holdings should be set to the provided targets.
-holding_adjustments = [lusid.AdjustHoldingRequest()] # list[AdjustHoldingRequest] | The selected set of holdings to adjust to the provided targets for the              transaction portfolio. (optional)
+holding_adjustments = [lusid.AdjustHoldingRequest()] # list[AdjustHoldingRequest] | The selected set of holdings to adjust to the provided targets for the              transaction portfolio.
 
 try:
     # [EARLY ACCESS] Adjust holdings
-    api_response = api_instance.adjust_holdings(scope, code, effective_at, holding_adjustments=holding_adjustments)
+    api_response = api_instance.adjust_holdings(scope, code, effective_at, holding_adjustments)
     pprint(api_response)
 except ApiException as e:
     print("Exception when calling TransactionPortfoliosApi->adjust_holdings: %s\n" % e)
@@ -67,7 +67,7 @@ Name | Type | Description  | Notes
  **scope** | **str**| The scope of the transaction portfolio. | 
  **code** | **str**| The code of the transaction portfolio. Together with the scope this uniquely identifies              the transaction portfolio. | 
  **effective_at** | **str**| The effective datetime or cut label at which the holdings should be set to the provided targets. | 
- **holding_adjustments** | [**list[AdjustHoldingRequest]**](AdjustHoldingRequest.md)| The selected set of holdings to adjust to the provided targets for the              transaction portfolio. | [optional] 
+ **holding_adjustments** | [**list[AdjustHoldingRequest]**](AdjustHoldingRequest.md)| The selected set of holdings to adjust to the provided targets for the              transaction portfolio. | 
 
 ### Return type
 
@@ -92,7 +92,7 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **build_transactions**
-> VersionedResourceListOfOutputTransaction build_transactions(scope, code, parameters, as_at=as_at, property_keys=property_keys, filter=filter)
+> VersionedResourceListOfOutputTransaction build_transactions(scope, code, query_parameters, as_at=as_at, filter=filter, property_keys=property_keys)
 
 [EARLY ACCESS] Build transactions
 
@@ -111,20 +111,20 @@ configuration = lusid.Configuration()
 # Configure OAuth2 access token for authorization: oauth2
 configuration.access_token = 'YOUR_ACCESS_TOKEN'
 
-# Defining host is optional and default to http://localhost/api
-configuration.host = "http://localhost/api"
+# Defining host is optional and default to http://localhost
+configuration.host = "http://localhost"
 # Create an instance of the API class
 api_instance = lusid.TransactionPortfoliosApi(lusid.ApiClient(configuration))
 scope = 'scope_example' # str | The scope of the transaction portfolio.
 code = 'code_example' # str | The code of the transaction portfolio. Together with the scope this uniquely identifies              the transaction portfolio.
-parameters = lusid.TransactionQueryParameters() # TransactionQueryParameters | The query parameters which control how the output transactions are built.
+query_parameters = lusid.TransactionQueryParameters() # TransactionQueryParameters | The query queryParameters which control how the output transactions are built.
 as_at = '2013-10-20T19:20:30+01:00' # datetime | The asAt datetime at which to build the transactions. Defaults to return the latest              version of each transaction if not specified. (optional)
-property_keys = ['property_keys_example'] # list[str] | A list of property keys from the \"Instrument\" or \"Transaction\" domain to decorate onto              the transactions. These take the format {domain}/{scope}/{code} e.g. \"Instrument/system/Name\" or              \"Transaction/strategy/quantsignal\". (optional)
 filter = 'filter_example' # str | Expression to filter the result set. Read more about filtering results from LUSID here https://support.lusid.com/filtering-results-from-lusid. (optional)
+property_keys = ['property_keys_example'] # list[str] | A list of property keys from the \"Instrument\" or \"Transaction\" domain to decorate onto              the transactions. These take the format {domain}/{scope}/{code} e.g. \"Instrument/system/Name\" or              \"Transaction/strategy/quantsignal\". (optional)
 
 try:
     # [EARLY ACCESS] Build transactions
-    api_response = api_instance.build_transactions(scope, code, parameters, as_at=as_at, property_keys=property_keys, filter=filter)
+    api_response = api_instance.build_transactions(scope, code, query_parameters, as_at=as_at, filter=filter, property_keys=property_keys)
     pprint(api_response)
 except ApiException as e:
     print("Exception when calling TransactionPortfoliosApi->build_transactions: %s\n" % e)
@@ -136,10 +136,10 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **scope** | **str**| The scope of the transaction portfolio. | 
  **code** | **str**| The code of the transaction portfolio. Together with the scope this uniquely identifies              the transaction portfolio. | 
- **parameters** | [**TransactionQueryParameters**](TransactionQueryParameters.md)| The query parameters which control how the output transactions are built. | 
+ **query_parameters** | [**TransactionQueryParameters**](TransactionQueryParameters.md)| The query queryParameters which control how the output transactions are built. | 
  **as_at** | **datetime**| The asAt datetime at which to build the transactions. Defaults to return the latest              version of each transaction if not specified. | [optional] 
- **property_keys** | [**list[str]**](str.md)| A list of property keys from the \&quot;Instrument\&quot; or \&quot;Transaction\&quot; domain to decorate onto              the transactions. These take the format {domain}/{scope}/{code} e.g. \&quot;Instrument/system/Name\&quot; or              \&quot;Transaction/strategy/quantsignal\&quot;. | [optional] 
  **filter** | **str**| Expression to filter the result set. Read more about filtering results from LUSID here https://support.lusid.com/filtering-results-from-lusid. | [optional] 
+ **property_keys** | [**list[str]**](str.md)| A list of property keys from the \&quot;Instrument\&quot; or \&quot;Transaction\&quot; domain to decorate onto              the transactions. These take the format {domain}/{scope}/{code} e.g. \&quot;Instrument/system/Name\&quot; or              \&quot;Transaction/strategy/quantsignal\&quot;. | [optional] 
 
 ### Return type
 
@@ -183,8 +183,8 @@ configuration = lusid.Configuration()
 # Configure OAuth2 access token for authorization: oauth2
 configuration.access_token = 'YOUR_ACCESS_TOKEN'
 
-# Defining host is optional and default to http://localhost/api
-configuration.host = "http://localhost/api"
+# Defining host is optional and default to http://localhost
+configuration.host = "http://localhost"
 # Create an instance of the API class
 api_instance = lusid.TransactionPortfoliosApi(lusid.ApiClient(configuration))
 scope = 'scope_example' # str | The scope of the transaction portfolio.
@@ -249,8 +249,8 @@ configuration = lusid.Configuration()
 # Configure OAuth2 access token for authorization: oauth2
 configuration.access_token = 'YOUR_ACCESS_TOKEN'
 
-# Defining host is optional and default to http://localhost/api
-configuration.host = "http://localhost/api"
+# Defining host is optional and default to http://localhost
+configuration.host = "http://localhost"
 # Create an instance of the API class
 api_instance = lusid.TransactionPortfoliosApi(lusid.ApiClient(configuration))
 scope = 'scope_example' # str | The scope of the transaction portfolio.
@@ -315,8 +315,8 @@ configuration = lusid.Configuration()
 # Configure OAuth2 access token for authorization: oauth2
 configuration.access_token = 'YOUR_ACCESS_TOKEN'
 
-# Defining host is optional and default to http://localhost/api
-configuration.host = "http://localhost/api"
+# Defining host is optional and default to http://localhost
+configuration.host = "http://localhost"
 # Create an instance of the API class
 api_instance = lusid.TransactionPortfoliosApi(lusid.ApiClient(configuration))
 scope = 'scope_example' # str | The scope of the transaction portfolio.
@@ -362,7 +362,7 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **create_portfolio**
-> Portfolio create_portfolio(scope, create_request=create_request)
+> Portfolio create_portfolio(scope, transaction_portfolio)
 
 [EARLY ACCESS] Create portfolio
 
@@ -381,16 +381,16 @@ configuration = lusid.Configuration()
 # Configure OAuth2 access token for authorization: oauth2
 configuration.access_token = 'YOUR_ACCESS_TOKEN'
 
-# Defining host is optional and default to http://localhost/api
-configuration.host = "http://localhost/api"
+# Defining host is optional and default to http://localhost
+configuration.host = "http://localhost"
 # Create an instance of the API class
 api_instance = lusid.TransactionPortfoliosApi(lusid.ApiClient(configuration))
 scope = 'scope_example' # str | The scope that the transaction portfolio will be created in.
-create_request = lusid.CreateTransactionPortfolioRequest() # CreateTransactionPortfolioRequest | The definition and details of the transaction portfolio. (optional)
+transaction_portfolio = lusid.CreateTransactionPortfolioRequest() # CreateTransactionPortfolioRequest | The definition and details of the transaction portfolio.
 
 try:
     # [EARLY ACCESS] Create portfolio
-    api_response = api_instance.create_portfolio(scope, create_request=create_request)
+    api_response = api_instance.create_portfolio(scope, transaction_portfolio)
     pprint(api_response)
 except ApiException as e:
     print("Exception when calling TransactionPortfoliosApi->create_portfolio: %s\n" % e)
@@ -401,7 +401,7 @@ except ApiException as e:
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **scope** | **str**| The scope that the transaction portfolio will be created in. | 
- **create_request** | [**CreateTransactionPortfolioRequest**](CreateTransactionPortfolioRequest.md)| The definition and details of the transaction portfolio. | [optional] 
+ **transaction_portfolio** | [**CreateTransactionPortfolioRequest**](CreateTransactionPortfolioRequest.md)| The definition and details of the transaction portfolio. | 
 
 ### Return type
 
@@ -425,12 +425,12 @@ Name | Type | Description  | Notes
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
-# **delete_property_from_transaction**
-> DeletedEntityResponse delete_property_from_transaction(scope, code, transaction_id, transaction_property_key)
+# **delete_properties_from_transaction**
+> DeletedEntityResponse delete_properties_from_transaction(scope, code, transaction_id, property_keys)
 
-[EARLY ACCESS] Delete property from transaction
+[EARLY ACCESS] Delete properties from transaction
 
-Delete a single property value from a single transaction in a transaction portfolio.
+Delete one or more property values from a single transaction in a transaction portfolio.
 
 ### Example
 
@@ -445,21 +445,21 @@ configuration = lusid.Configuration()
 # Configure OAuth2 access token for authorization: oauth2
 configuration.access_token = 'YOUR_ACCESS_TOKEN'
 
-# Defining host is optional and default to http://localhost/api
-configuration.host = "http://localhost/api"
+# Defining host is optional and default to http://localhost
+configuration.host = "http://localhost"
 # Create an instance of the API class
 api_instance = lusid.TransactionPortfoliosApi(lusid.ApiClient(configuration))
 scope = 'scope_example' # str | The scope of the transaction portfolio.
 code = 'code_example' # str | The code of the transaction portfolio. Together with the scope this uniquely identifies              the transaction portfolio.
 transaction_id = 'transaction_id_example' # str | The unique id of the transaction to delete the property value from.
-transaction_property_key = 'transaction_property_key_example' # str | The property key of the property value to delete from the transaction.              This must be from the \"Transaction\" domain and will have the format {domain}/{scope}/{code} e.g.              \"Transaction/strategy/quantsignal\".
+property_keys = ['property_keys_example'] # list[str] | The property keys of the properties to delete from the transaction.              This must be from the \"Transaction\" domain and will have the format {domain}/{scope}/{code} e.g.              \"Transaction/strategy/quantsignal\".
 
 try:
-    # [EARLY ACCESS] Delete property from transaction
-    api_response = api_instance.delete_property_from_transaction(scope, code, transaction_id, transaction_property_key)
+    # [EARLY ACCESS] Delete properties from transaction
+    api_response = api_instance.delete_properties_from_transaction(scope, code, transaction_id, property_keys)
     pprint(api_response)
 except ApiException as e:
-    print("Exception when calling TransactionPortfoliosApi->delete_property_from_transaction: %s\n" % e)
+    print("Exception when calling TransactionPortfoliosApi->delete_properties_from_transaction: %s\n" % e)
 ```
 
 ### Parameters
@@ -469,7 +469,7 @@ Name | Type | Description  | Notes
  **scope** | **str**| The scope of the transaction portfolio. | 
  **code** | **str**| The code of the transaction portfolio. Together with the scope this uniquely identifies              the transaction portfolio. | 
  **transaction_id** | **str**| The unique id of the transaction to delete the property value from. | 
- **transaction_property_key** | **str**| The property key of the property value to delete from the transaction.              This must be from the \&quot;Transaction\&quot; domain and will have the format {domain}/{scope}/{code} e.g.              \&quot;Transaction/strategy/quantsignal\&quot;. | 
+ **property_keys** | [**list[str]**](str.md)| The property keys of the properties to delete from the transaction.              This must be from the \&quot;Transaction\&quot; domain and will have the format {domain}/{scope}/{code} e.g.              \&quot;Transaction/strategy/quantsignal\&quot;. | 
 
 ### Return type
 
@@ -513,8 +513,8 @@ configuration = lusid.Configuration()
 # Configure OAuth2 access token for authorization: oauth2
 configuration.access_token = 'YOUR_ACCESS_TOKEN'
 
-# Defining host is optional and default to http://localhost/api
-configuration.host = "http://localhost/api"
+# Defining host is optional and default to http://localhost
+configuration.host = "http://localhost"
 # Create an instance of the API class
 api_instance = lusid.TransactionPortfoliosApi(lusid.ApiClient(configuration))
 scope = 'scope_example' # str | The scope of the transaction portfolio to retrieve the details for.
@@ -562,7 +562,7 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **get_holdings**
-> VersionedResourceListOfPortfolioHolding get_holdings(scope, code, by_taxlots=by_taxlots, effective_at=effective_at, as_at=as_at, filter=filter, property_keys=property_keys)
+> VersionedResourceListOfPortfolioHolding get_holdings(scope, code, effective_at=effective_at, as_at=as_at, filter=filter, property_keys=property_keys, by_taxlots=by_taxlots)
 
 [EARLY ACCESS] Get holdings
 
@@ -581,21 +581,21 @@ configuration = lusid.Configuration()
 # Configure OAuth2 access token for authorization: oauth2
 configuration.access_token = 'YOUR_ACCESS_TOKEN'
 
-# Defining host is optional and default to http://localhost/api
-configuration.host = "http://localhost/api"
+# Defining host is optional and default to http://localhost
+configuration.host = "http://localhost"
 # Create an instance of the API class
 api_instance = lusid.TransactionPortfoliosApi(lusid.ApiClient(configuration))
 scope = 'scope_example' # str | The scope of the transaction portfolio.
 code = 'code_example' # str | The code of the transaction portfolio. Together with the scope this uniquely identifies              the transaction portfolio.
-by_taxlots = True # bool | Whether or not to expand the holdings to return the underlying tax-lots. Defaults to              False. (optional)
 effective_at = 'effective_at_example' # str | The effective datetime or cut label at which to retrieve the holdings of the transaction              portfolio. Defaults to the current LUSID system datetime if not specified. (optional)
 as_at = '2013-10-20T19:20:30+01:00' # datetime | The asAt datetime at which to retrieve the holdings of the transaction portfolio. Defaults              to return the latest version of the holdings if not specified. (optional)
 filter = 'filter_example' # str | Expression to filter the result set. Read more about filtering results from LUSID here https://support.lusid.com/filtering-results-from-lusid. (optional)
 property_keys = ['property_keys_example'] # list[str] | A list of property keys from the \"Instrument\" or \"Holding\" domain to decorate onto              the holdings. These take the format {domain}/{scope}/{code} e.g. \"Instrument/system/Name\" or \"Holding/system/Cost\". (optional)
+by_taxlots = True # bool | Whether or not to expand the holdings to return the underlying tax-lots. Defaults to              False. (optional)
 
 try:
     # [EARLY ACCESS] Get holdings
-    api_response = api_instance.get_holdings(scope, code, by_taxlots=by_taxlots, effective_at=effective_at, as_at=as_at, filter=filter, property_keys=property_keys)
+    api_response = api_instance.get_holdings(scope, code, effective_at=effective_at, as_at=as_at, filter=filter, property_keys=property_keys, by_taxlots=by_taxlots)
     pprint(api_response)
 except ApiException as e:
     print("Exception when calling TransactionPortfoliosApi->get_holdings: %s\n" % e)
@@ -607,11 +607,11 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **scope** | **str**| The scope of the transaction portfolio. | 
  **code** | **str**| The code of the transaction portfolio. Together with the scope this uniquely identifies              the transaction portfolio. | 
- **by_taxlots** | **bool**| Whether or not to expand the holdings to return the underlying tax-lots. Defaults to              False. | [optional] 
  **effective_at** | **str**| The effective datetime or cut label at which to retrieve the holdings of the transaction              portfolio. Defaults to the current LUSID system datetime if not specified. | [optional] 
  **as_at** | **datetime**| The asAt datetime at which to retrieve the holdings of the transaction portfolio. Defaults              to return the latest version of the holdings if not specified. | [optional] 
  **filter** | **str**| Expression to filter the result set. Read more about filtering results from LUSID here https://support.lusid.com/filtering-results-from-lusid. | [optional] 
  **property_keys** | [**list[str]**](str.md)| A list of property keys from the \&quot;Instrument\&quot; or \&quot;Holding\&quot; domain to decorate onto              the holdings. These take the format {domain}/{scope}/{code} e.g. \&quot;Instrument/system/Name\&quot; or \&quot;Holding/system/Cost\&quot;. | [optional] 
+ **by_taxlots** | **bool**| Whether or not to expand the holdings to return the underlying tax-lots. Defaults to              False. | [optional] 
 
 ### Return type
 
@@ -655,8 +655,8 @@ configuration = lusid.Configuration()
 # Configure OAuth2 access token for authorization: oauth2
 configuration.access_token = 'YOUR_ACCESS_TOKEN'
 
-# Defining host is optional and default to http://localhost/api
-configuration.host = "http://localhost/api"
+# Defining host is optional and default to http://localhost
+configuration.host = "http://localhost"
 # Create an instance of the API class
 api_instance = lusid.TransactionPortfoliosApi(lusid.ApiClient(configuration))
 scope = 'scope_example' # str | The scope of the transaction portfolio.
@@ -704,7 +704,7 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **get_transactions**
-> VersionedResourceListOfTransaction get_transactions(scope, code, from_transaction_date=from_transaction_date, to_transaction_date=to_transaction_date, as_at=as_at, property_keys=property_keys, filter=filter)
+> VersionedResourceListOfTransaction get_transactions(scope, code, from_transaction_date=from_transaction_date, to_transaction_date=to_transaction_date, as_at=as_at, filter=filter, property_keys=property_keys)
 
 [EARLY ACCESS] Get transactions
 
@@ -723,8 +723,8 @@ configuration = lusid.Configuration()
 # Configure OAuth2 access token for authorization: oauth2
 configuration.access_token = 'YOUR_ACCESS_TOKEN'
 
-# Defining host is optional and default to http://localhost/api
-configuration.host = "http://localhost/api"
+# Defining host is optional and default to http://localhost
+configuration.host = "http://localhost"
 # Create an instance of the API class
 api_instance = lusid.TransactionPortfoliosApi(lusid.ApiClient(configuration))
 scope = 'scope_example' # str | The scope of the transaction portfolio.
@@ -732,12 +732,12 @@ code = 'code_example' # str | The code of the transaction portfolio. Together wi
 from_transaction_date = 'from_transaction_date_example' # str | The lower bound effective datetime or cut label (inclusive) from which to retrieve the transactions.              There is no lower bound if this is not specified. (optional)
 to_transaction_date = 'to_transaction_date_example' # str | The upper bound effective datetime or cut label (inclusive) from which to retrieve transactions.              There is no upper bound if this is not specified. (optional)
 as_at = '2013-10-20T19:20:30+01:00' # datetime | The asAt datetime at which to retrieve the transactions. Defaults to return the latest version              of each transaction if not specified. (optional)
-property_keys = ['property_keys_example'] # list[str] | A list of property keys from the \"Instrument\" or \"Transaction\" domain to decorate onto              the transactions. These take the format {domain}/{scope}/{code} e.g. \"Instrument/system/Name\" or              \"Transaction/strategy/quantsignal\". (optional)
 filter = 'filter_example' # str | Expression to filter the result set. Read more about filtering results from LUSID here https://support.lusid.com/filtering-results-from-lusid. (optional)
+property_keys = ['property_keys_example'] # list[str] | A list of property keys from the \"Instrument\" or \"Transaction\" domain to decorate onto              the transactions. These take the format {domain}/{scope}/{code} e.g. \"Instrument/system/Name\" or              \"Transaction/strategy/quantsignal\". (optional)
 
 try:
     # [EARLY ACCESS] Get transactions
-    api_response = api_instance.get_transactions(scope, code, from_transaction_date=from_transaction_date, to_transaction_date=to_transaction_date, as_at=as_at, property_keys=property_keys, filter=filter)
+    api_response = api_instance.get_transactions(scope, code, from_transaction_date=from_transaction_date, to_transaction_date=to_transaction_date, as_at=as_at, filter=filter, property_keys=property_keys)
     pprint(api_response)
 except ApiException as e:
     print("Exception when calling TransactionPortfoliosApi->get_transactions: %s\n" % e)
@@ -752,8 +752,8 @@ Name | Type | Description  | Notes
  **from_transaction_date** | **str**| The lower bound effective datetime or cut label (inclusive) from which to retrieve the transactions.              There is no lower bound if this is not specified. | [optional] 
  **to_transaction_date** | **str**| The upper bound effective datetime or cut label (inclusive) from which to retrieve transactions.              There is no upper bound if this is not specified. | [optional] 
  **as_at** | **datetime**| The asAt datetime at which to retrieve the transactions. Defaults to return the latest version              of each transaction if not specified. | [optional] 
- **property_keys** | [**list[str]**](str.md)| A list of property keys from the \&quot;Instrument\&quot; or \&quot;Transaction\&quot; domain to decorate onto              the transactions. These take the format {domain}/{scope}/{code} e.g. \&quot;Instrument/system/Name\&quot; or              \&quot;Transaction/strategy/quantsignal\&quot;. | [optional] 
  **filter** | **str**| Expression to filter the result set. Read more about filtering results from LUSID here https://support.lusid.com/filtering-results-from-lusid. | [optional] 
+ **property_keys** | [**list[str]**](str.md)| A list of property keys from the \&quot;Instrument\&quot; or \&quot;Transaction\&quot; domain to decorate onto              the transactions. These take the format {domain}/{scope}/{code} e.g. \&quot;Instrument/system/Name\&quot; or              \&quot;Transaction/strategy/quantsignal\&quot;. | [optional] 
 
 ### Return type
 
@@ -797,8 +797,8 @@ configuration = lusid.Configuration()
 # Configure OAuth2 access token for authorization: oauth2
 configuration.access_token = 'YOUR_ACCESS_TOKEN'
 
-# Defining host is optional and default to http://localhost/api
-configuration.host = "http://localhost/api"
+# Defining host is optional and default to http://localhost
+configuration.host = "http://localhost"
 # Create an instance of the API class
 api_instance = lusid.TransactionPortfoliosApi(lusid.ApiClient(configuration))
 scope = 'scope_example' # str | The scope of the transaction portfolio.
@@ -848,7 +848,7 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **set_holdings**
-> AdjustHolding set_holdings(scope, code, effective_at, holding_adjustments=holding_adjustments)
+> AdjustHolding set_holdings(scope, code, effective_at, holding_adjustments)
 
 [EARLY ACCESS] Set holdings
 
@@ -867,18 +867,18 @@ configuration = lusid.Configuration()
 # Configure OAuth2 access token for authorization: oauth2
 configuration.access_token = 'YOUR_ACCESS_TOKEN'
 
-# Defining host is optional and default to http://localhost/api
-configuration.host = "http://localhost/api"
+# Defining host is optional and default to http://localhost
+configuration.host = "http://localhost"
 # Create an instance of the API class
 api_instance = lusid.TransactionPortfoliosApi(lusid.ApiClient(configuration))
 scope = 'scope_example' # str | The scope of the transaction portfolio.
 code = 'code_example' # str | The code of the transaction portfolio. Together with the scope this uniquely identifies              the transaction portfolio.
 effective_at = 'effective_at_example' # str | The effective datetime or cut label at which the holdings should be set to the provided targets.
-holding_adjustments = [lusid.AdjustHoldingRequest()] # list[AdjustHoldingRequest] | The complete set of target holdings for the transaction portfolio. (optional)
+holding_adjustments = [lusid.AdjustHoldingRequest()] # list[AdjustHoldingRequest] | The complete set of target holdings for the transaction portfolio.
 
 try:
     # [EARLY ACCESS] Set holdings
-    api_response = api_instance.set_holdings(scope, code, effective_at, holding_adjustments=holding_adjustments)
+    api_response = api_instance.set_holdings(scope, code, effective_at, holding_adjustments)
     pprint(api_response)
 except ApiException as e:
     print("Exception when calling TransactionPortfoliosApi->set_holdings: %s\n" % e)
@@ -891,7 +891,7 @@ Name | Type | Description  | Notes
  **scope** | **str**| The scope of the transaction portfolio. | 
  **code** | **str**| The code of the transaction portfolio. Together with the scope this uniquely identifies              the transaction portfolio. | 
  **effective_at** | **str**| The effective datetime or cut label at which the holdings should be set to the provided targets. | 
- **holding_adjustments** | [**list[AdjustHoldingRequest]**](AdjustHoldingRequest.md)| The complete set of target holdings for the transaction portfolio. | [optional] 
+ **holding_adjustments** | [**list[AdjustHoldingRequest]**](AdjustHoldingRequest.md)| The complete set of target holdings for the transaction portfolio. | 
 
 ### Return type
 
@@ -935,8 +935,8 @@ configuration = lusid.Configuration()
 # Configure OAuth2 access token for authorization: oauth2
 configuration.access_token = 'YOUR_ACCESS_TOKEN'
 
-# Defining host is optional and default to http://localhost/api
-configuration.host = "http://localhost/api"
+# Defining host is optional and default to http://localhost
+configuration.host = "http://localhost"
 # Create an instance of the API class
 api_instance = lusid.TransactionPortfoliosApi(lusid.ApiClient(configuration))
 scope = 'scope_example' # str | The scope of the transaction portfolio.
@@ -982,7 +982,7 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **upsert_portfolio_details**
-> PortfolioDetails upsert_portfolio_details(scope, code, effective_at=effective_at, details=details)
+> PortfolioDetails upsert_portfolio_details(scope, code, portfolio_details, effective_at=effective_at)
 
 [EARLY ACCESS] Upsert portfolio details
 
@@ -1001,18 +1001,18 @@ configuration = lusid.Configuration()
 # Configure OAuth2 access token for authorization: oauth2
 configuration.access_token = 'YOUR_ACCESS_TOKEN'
 
-# Defining host is optional and default to http://localhost/api
-configuration.host = "http://localhost/api"
+# Defining host is optional and default to http://localhost
+configuration.host = "http://localhost"
 # Create an instance of the API class
 api_instance = lusid.TransactionPortfoliosApi(lusid.ApiClient(configuration))
 scope = 'scope_example' # str | The scope of the transaction portfolio to update or insert details for.
 code = 'code_example' # str | The code of the transaction portfolio to update or insert details for. Together with the              scope this uniquely identifies the transaction portfolio.
+portfolio_details = lusid.CreatePortfolioDetails() # CreatePortfolioDetails | The details to update or insert for the specified transaction portfolio.
 effective_at = 'effective_at_example' # str | The effective datetime or cut label at which the updated or inserted details should become valid.              Defaults to the current LUSID system datetime if not specified. (optional)
-details = lusid.CreatePortfolioDetails() # CreatePortfolioDetails | The details to update or insert for the specified transaction portfolio. (optional)
 
 try:
     # [EARLY ACCESS] Upsert portfolio details
-    api_response = api_instance.upsert_portfolio_details(scope, code, effective_at=effective_at, details=details)
+    api_response = api_instance.upsert_portfolio_details(scope, code, portfolio_details, effective_at=effective_at)
     pprint(api_response)
 except ApiException as e:
     print("Exception when calling TransactionPortfoliosApi->upsert_portfolio_details: %s\n" % e)
@@ -1024,8 +1024,8 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **scope** | **str**| The scope of the transaction portfolio to update or insert details for. | 
  **code** | **str**| The code of the transaction portfolio to update or insert details for. Together with the              scope this uniquely identifies the transaction portfolio. | 
+ **portfolio_details** | [**CreatePortfolioDetails**](CreatePortfolioDetails.md)| The details to update or insert for the specified transaction portfolio. | 
  **effective_at** | **str**| The effective datetime or cut label at which the updated or inserted details should become valid.              Defaults to the current LUSID system datetime if not specified. | [optional] 
- **details** | [**CreatePortfolioDetails**](CreatePortfolioDetails.md)| The details to update or insert for the specified transaction portfolio. | [optional] 
 
 ### Return type
 
@@ -1069,8 +1069,8 @@ configuration = lusid.Configuration()
 # Configure OAuth2 access token for authorization: oauth2
 configuration.access_token = 'YOUR_ACCESS_TOKEN'
 
-# Defining host is optional and default to http://localhost/api
-configuration.host = "http://localhost/api"
+# Defining host is optional and default to http://localhost
+configuration.host = "http://localhost"
 # Create an instance of the API class
 api_instance = lusid.TransactionPortfoliosApi(lusid.ApiClient(configuration))
 scope = 'scope_example' # str | The scope of the transaction portfolio.
@@ -1118,7 +1118,7 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **upsert_transactions**
-> UpsertPortfolioTransactionsResponse upsert_transactions(scope, code, transactions=transactions)
+> UpsertPortfolioTransactionsResponse upsert_transactions(scope, code, transactions)
 
 [EARLY ACCESS] Upsert transactions
 
@@ -1137,17 +1137,17 @@ configuration = lusid.Configuration()
 # Configure OAuth2 access token for authorization: oauth2
 configuration.access_token = 'YOUR_ACCESS_TOKEN'
 
-# Defining host is optional and default to http://localhost/api
-configuration.host = "http://localhost/api"
+# Defining host is optional and default to http://localhost
+configuration.host = "http://localhost"
 # Create an instance of the API class
 api_instance = lusid.TransactionPortfoliosApi(lusid.ApiClient(configuration))
 scope = 'scope_example' # str | The scope of the transaction portfolio.
 code = 'code_example' # str | The code of the transaction portfolio. Together with the scope this uniquely identifies              the transaction portfolio.
-transactions = [lusid.TransactionRequest()] # list[TransactionRequest] | The transactions to be updated or inserted. (optional)
+transactions = [lusid.TransactionRequest()] # list[TransactionRequest] | The transactions to be updated or inserted.
 
 try:
     # [EARLY ACCESS] Upsert transactions
-    api_response = api_instance.upsert_transactions(scope, code, transactions=transactions)
+    api_response = api_instance.upsert_transactions(scope, code, transactions)
     pprint(api_response)
 except ApiException as e:
     print("Exception when calling TransactionPortfoliosApi->upsert_transactions: %s\n" % e)
@@ -1159,7 +1159,7 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **scope** | **str**| The scope of the transaction portfolio. | 
  **code** | **str**| The code of the transaction portfolio. Together with the scope this uniquely identifies              the transaction portfolio. | 
- **transactions** | [**list[TransactionRequest]**](TransactionRequest.md)| The transactions to be updated or inserted. | [optional] 
+ **transactions** | [**list[TransactionRequest]**](TransactionRequest.md)| The transactions to be updated or inserted. | 
 
 ### Return type
 
