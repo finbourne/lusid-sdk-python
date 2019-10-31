@@ -44,7 +44,7 @@ class Portfolios(unittest.TestCase):
         # create the portfolio in LUSID in the specified scope
         result = self.transaction_portfolios_api.create_portfolio(
             scope=TestDataUtilities.tutorials_scope,
-            create_request=request)
+            transaction_portfolio=request)
 
         self.assertEqual(result.id.code, request.code)
 
@@ -85,7 +85,7 @@ class Portfolios(unittest.TestCase):
         # create the portfolio
         portfolio = self.transaction_portfolios_api.create_portfolio(
             scope=TestDataUtilities.tutorials_scope,
-            create_request=request)
+            transaction_portfolio=request)
 
         portfolio_code = portfolio.id.code
         self.assertEqual(portfolio_code, request.code)

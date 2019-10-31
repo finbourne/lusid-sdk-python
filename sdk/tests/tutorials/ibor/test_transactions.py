@@ -116,7 +116,7 @@ class Transactions(unittest.TestCase):
                 content="<customFormat>upload in custom xml or JSON format</customFormat>"))
 
         # create the swap
-        swap_response = self.instruments_api.upsert_instruments(requests={
+        swap_response = self.instruments_api.upsert_instruments(instruments={
             "request": swap_definition
         })
 
