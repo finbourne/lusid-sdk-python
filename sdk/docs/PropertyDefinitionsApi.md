@@ -1,20 +1,20 @@
 # lusid.PropertyDefinitionsApi
 
-All URIs are relative to *http://localhost/api*
+All URIs are relative to *http://localhost*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
-[**create_property_definition**](PropertyDefinitionsApi.md#create_property_definition) | **POST** /api/propertydefinitions | [EARLY ACCESS] Create property definition
-[**delete_property_definition**](PropertyDefinitionsApi.md#delete_property_definition) | **DELETE** /api/propertydefinitions/{domain}/{scope}/{code} | [EARLY ACCESS] Delete property definition
-[**get_multiple_property_definitions**](PropertyDefinitionsApi.md#get_multiple_property_definitions) | **GET** /api/propertydefinitions | [EARLY ACCESS] Get multiple property definitions
-[**get_property_definition**](PropertyDefinitionsApi.md#get_property_definition) | **GET** /api/propertydefinitions/{domain}/{scope}/{code} | [EARLY ACCESS] Get property definition
-[**update_property_definition**](PropertyDefinitionsApi.md#update_property_definition) | **PUT** /api/propertydefinitions/{domain}/{scope}/{code} | [EARLY ACCESS] Update property definition
+[**create_property_definition**](PropertyDefinitionsApi.md#create_property_definition) | **POST** /api/propertydefinitions | Create property definition
+[**delete_property_definition**](PropertyDefinitionsApi.md#delete_property_definition) | **DELETE** /api/propertydefinitions/{domain}/{scope}/{code} | Delete property definition
+[**get_multiple_property_definitions**](PropertyDefinitionsApi.md#get_multiple_property_definitions) | **GET** /api/propertydefinitions | Get multiple property definitions
+[**get_property_definition**](PropertyDefinitionsApi.md#get_property_definition) | **GET** /api/propertydefinitions/{domain}/{scope}/{code} | Get property definition
+[**update_property_definition**](PropertyDefinitionsApi.md#update_property_definition) | **PUT** /api/propertydefinitions/{domain}/{scope}/{code} | Update property definition
 
 
 # **create_property_definition**
 > PropertyDefinition create_property_definition(definition)
 
-[EARLY ACCESS] Create property definition
+Create property definition
 
 Define a new property.
 
@@ -31,14 +31,14 @@ configuration = lusid.Configuration()
 # Configure OAuth2 access token for authorization: oauth2
 configuration.access_token = 'YOUR_ACCESS_TOKEN'
 
-# Defining host is optional and default to http://localhost/api
-configuration.host = "http://localhost/api"
+# Defining host is optional and default to http://localhost
+configuration.host = "http://localhost"
 # Create an instance of the API class
 api_instance = lusid.PropertyDefinitionsApi(lusid.ApiClient(configuration))
 definition = lusid.CreatePropertyDefinitionRequest() # CreatePropertyDefinitionRequest | The definition of the new property.
 
 try:
-    # [EARLY ACCESS] Create property definition
+    # Create property definition
     api_response = api_instance.create_property_definition(definition)
     pprint(api_response)
 except ApiException as e:
@@ -76,7 +76,7 @@ Name | Type | Description  | Notes
 # **delete_property_definition**
 > DeletedEntityResponse delete_property_definition(domain, scope, code)
 
-[EARLY ACCESS] Delete property definition
+Delete property definition
 
 Delete the definition of the specified property.
 
@@ -93,8 +93,8 @@ configuration = lusid.Configuration()
 # Configure OAuth2 access token for authorization: oauth2
 configuration.access_token = 'YOUR_ACCESS_TOKEN'
 
-# Defining host is optional and default to http://localhost/api
-configuration.host = "http://localhost/api"
+# Defining host is optional and default to http://localhost
+configuration.host = "http://localhost"
 # Create an instance of the API class
 api_instance = lusid.PropertyDefinitionsApi(lusid.ApiClient(configuration))
 domain = 'domain_example' # str | The domain of the property to be deleted.
@@ -102,7 +102,7 @@ scope = 'scope_example' # str | The scope of the property to be deleted.
 code = 'code_example' # str | The code of the property to be deleted. Together with the domain and scope this uniquely              identifies the property.
 
 try:
-    # [EARLY ACCESS] Delete property definition
+    # Delete property definition
     api_response = api_instance.delete_property_definition(domain, scope, code)
     pprint(api_response)
 except ApiException as e:
@@ -142,7 +142,7 @@ Name | Type | Description  | Notes
 # **get_multiple_property_definitions**
 > ResourceListOfPropertyDefinition get_multiple_property_definitions(property_keys, as_at=as_at, filter=filter)
 
-[EARLY ACCESS] Get multiple property definitions
+Get multiple property definitions
 
 Retrieve the definition of one or more specified properties.
 
@@ -159,8 +159,8 @@ configuration = lusid.Configuration()
 # Configure OAuth2 access token for authorization: oauth2
 configuration.access_token = 'YOUR_ACCESS_TOKEN'
 
-# Defining host is optional and default to http://localhost/api
-configuration.host = "http://localhost/api"
+# Defining host is optional and default to http://localhost
+configuration.host = "http://localhost"
 # Create an instance of the API class
 api_instance = lusid.PropertyDefinitionsApi(lusid.ApiClient(configuration))
 property_keys = ['property_keys_example'] # list[str] | One or more property keys which identify each property that a definition should              be retrieved for. The format for each property key is {domain}/{scope}/{code}, e.g. 'Portfolio/Manager/Id'.
@@ -168,7 +168,7 @@ as_at = '2013-10-20T19:20:30+01:00' # datetime | The asAt datetime at which to r
 filter = 'filter_example' # str | Expression to filter the result set. Read more about filtering results from LUSID here https://support.lusid.com/filtering-results-from-lusid. (optional)
 
 try:
-    # [EARLY ACCESS] Get multiple property definitions
+    # Get multiple property definitions
     api_response = api_instance.get_multiple_property_definitions(property_keys, as_at=as_at, filter=filter)
     pprint(api_response)
 except ApiException as e:
@@ -208,7 +208,7 @@ Name | Type | Description  | Notes
 # **get_property_definition**
 > PropertyDefinition get_property_definition(domain, scope, code, as_at=as_at)
 
-[EARLY ACCESS] Get property definition
+Get property definition
 
 Retrieve the definition of a specified property.
 
@@ -225,8 +225,8 @@ configuration = lusid.Configuration()
 # Configure OAuth2 access token for authorization: oauth2
 configuration.access_token = 'YOUR_ACCESS_TOKEN'
 
-# Defining host is optional and default to http://localhost/api
-configuration.host = "http://localhost/api"
+# Defining host is optional and default to http://localhost
+configuration.host = "http://localhost"
 # Create an instance of the API class
 api_instance = lusid.PropertyDefinitionsApi(lusid.ApiClient(configuration))
 domain = 'domain_example' # str | The domain of the specified property.
@@ -235,7 +235,7 @@ code = 'code_example' # str | The code of the specified property. Together with 
 as_at = '2013-10-20T19:20:30+01:00' # datetime | The asAt datetime at which to retrieve the property definition. Defaults to return              the latest version of the definition if not specified. (optional)
 
 try:
-    # [EARLY ACCESS] Get property definition
+    # Get property definition
     api_response = api_instance.get_property_definition(domain, scope, code, as_at=as_at)
     pprint(api_response)
 except ApiException as e:
@@ -276,7 +276,7 @@ Name | Type | Description  | Notes
 # **update_property_definition**
 > PropertyDefinition update_property_definition(domain, scope, code, definition)
 
-[EARLY ACCESS] Update property definition
+Update property definition
 
 Update the definition of a specified existing property. Not all elements within a property definition  are modifiable due to the potential implications for values already stored against the property.
 
@@ -293,8 +293,8 @@ configuration = lusid.Configuration()
 # Configure OAuth2 access token for authorization: oauth2
 configuration.access_token = 'YOUR_ACCESS_TOKEN'
 
-# Defining host is optional and default to http://localhost/api
-configuration.host = "http://localhost/api"
+# Defining host is optional and default to http://localhost
+configuration.host = "http://localhost"
 # Create an instance of the API class
 api_instance = lusid.PropertyDefinitionsApi(lusid.ApiClient(configuration))
 domain = 'domain_example' # str | The domain of the property being updated.
@@ -303,7 +303,7 @@ code = 'code_example' # str | The code of the property being updated. Together w
 definition = lusid.UpdatePropertyDefinitionRequest() # UpdatePropertyDefinitionRequest | The updated definition of the property.
 
 try:
-    # [EARLY ACCESS] Update property definition
+    # Update property definition
     api_response = api_instance.update_property_definition(domain, scope, code, definition)
     pprint(api_response)
 except ApiException as e:

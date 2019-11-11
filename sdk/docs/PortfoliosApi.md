@@ -1,24 +1,24 @@
 # lusid.PortfoliosApi
 
-All URIs are relative to *http://localhost/api*
+All URIs are relative to *http://localhost*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
-[**delete_portfolio**](PortfoliosApi.md#delete_portfolio) | **DELETE** /api/portfolios/{scope}/{code} | [EARLY ACCESS] Delete portfolio
-[**delete_portfolio_properties**](PortfoliosApi.md#delete_portfolio_properties) | **DELETE** /api/portfolios/{scope}/{code}/properties | [EARLY ACCESS] Delete portfolio properties
-[**get_portfolio**](PortfoliosApi.md#get_portfolio) | **GET** /api/portfolios/{scope}/{code} | [EARLY ACCESS] Get portfolio
+[**delete_portfolio**](PortfoliosApi.md#delete_portfolio) | **DELETE** /api/portfolios/{scope}/{code} | Delete portfolio
+[**delete_portfolio_properties**](PortfoliosApi.md#delete_portfolio_properties) | **DELETE** /api/portfolios/{scope}/{code}/properties | Delete portfolio properties
+[**get_portfolio**](PortfoliosApi.md#get_portfolio) | **GET** /api/portfolios/{scope}/{code} | Get portfolio
 [**get_portfolio_commands**](PortfoliosApi.md#get_portfolio_commands) | **GET** /api/portfolios/{scope}/{code}/commands | [EARLY ACCESS] Get portfolio commands
-[**get_portfolio_properties**](PortfoliosApi.md#get_portfolio_properties) | **GET** /api/portfolios/{scope}/{code}/properties | [EARLY ACCESS] Get portfolio properties
-[**list_portfolios**](PortfoliosApi.md#list_portfolios) | **GET** /api/portfolios | [EARLY ACCESS] List portfolios
-[**list_portfolios_for_scope**](PortfoliosApi.md#list_portfolios_for_scope) | **GET** /api/portfolios/{scope} | [EARLY ACCESS] List portfolios for scope
-[**update_portfolio**](PortfoliosApi.md#update_portfolio) | **PUT** /api/portfolios/{scope}/{code} | [EARLY ACCESS] Update portfolio
-[**upsert_portfolio_properties**](PortfoliosApi.md#upsert_portfolio_properties) | **POST** /api/portfolios/{scope}/{code}/properties | [EARLY ACCESS] Upsert portfolio properties
+[**get_portfolio_properties**](PortfoliosApi.md#get_portfolio_properties) | **GET** /api/portfolios/{scope}/{code}/properties | Get portfolio properties
+[**list_portfolios**](PortfoliosApi.md#list_portfolios) | **GET** /api/portfolios | List portfolios
+[**list_portfolios_for_scope**](PortfoliosApi.md#list_portfolios_for_scope) | **GET** /api/portfolios/{scope} | List portfolios for scope
+[**update_portfolio**](PortfoliosApi.md#update_portfolio) | **PUT** /api/portfolios/{scope}/{code} | Update portfolio
+[**upsert_portfolio_properties**](PortfoliosApi.md#upsert_portfolio_properties) | **POST** /api/portfolios/{scope}/{code}/properties | Upsert portfolio properties
 
 
 # **delete_portfolio**
 > DeletedEntityResponse delete_portfolio(scope, code)
 
-[EARLY ACCESS] Delete portfolio
+Delete portfolio
 
 Delete a single portfolio. The deletion of the portfolio will be valid from the portfolio's creation datetime. This means that the portfolio will no longer exist at any effective datetime from the asAt datetime of deletion.
 
@@ -35,15 +35,15 @@ configuration = lusid.Configuration()
 # Configure OAuth2 access token for authorization: oauth2
 configuration.access_token = 'YOUR_ACCESS_TOKEN'
 
-# Defining host is optional and default to http://localhost/api
-configuration.host = "http://localhost/api"
+# Defining host is optional and default to http://localhost
+configuration.host = "http://localhost"
 # Create an instance of the API class
 api_instance = lusid.PortfoliosApi(lusid.ApiClient(configuration))
 scope = 'scope_example' # str | The scope of the portfolio.
 code = 'code_example' # str | The code of the portfolio.
 
 try:
-    # [EARLY ACCESS] Delete portfolio
+    # Delete portfolio
     api_response = api_instance.delete_portfolio(scope, code)
     pprint(api_response)
 except ApiException as e:
@@ -82,7 +82,7 @@ Name | Type | Description  | Notes
 # **delete_portfolio_properties**
 > DeletedEntityResponse delete_portfolio_properties(scope, code, property_keys, effective_at=effective_at)
 
-[EARLY ACCESS] Delete portfolio properties
+Delete portfolio properties
 
 Delete one or more properties from a single portfolio. If the properties are time variant then an effective date time from which the properties  will be deleted must be specified. If the properties are perpetual then it is invalid to specify an effective date time for deletion.
 
@@ -99,8 +99,8 @@ configuration = lusid.Configuration()
 # Configure OAuth2 access token for authorization: oauth2
 configuration.access_token = 'YOUR_ACCESS_TOKEN'
 
-# Defining host is optional and default to http://localhost/api
-configuration.host = "http://localhost/api"
+# Defining host is optional and default to http://localhost
+configuration.host = "http://localhost"
 # Create an instance of the API class
 api_instance = lusid.PortfoliosApi(lusid.ApiClient(configuration))
 scope = 'scope_example' # str | The scope of the portfolio to delete properties from.
@@ -109,7 +109,7 @@ property_keys = ['property_keys_example'] # list[str] | The property keys of the
 effective_at = 'effective_at_example' # str | The effective datetime or cut label at which to delete the properties. (optional)
 
 try:
-    # [EARLY ACCESS] Delete portfolio properties
+    # Delete portfolio properties
     api_response = api_instance.delete_portfolio_properties(scope, code, property_keys, effective_at=effective_at)
     pprint(api_response)
 except ApiException as e:
@@ -150,7 +150,7 @@ Name | Type | Description  | Notes
 # **get_portfolio**
 > Portfolio get_portfolio(scope, code, effective_at=effective_at, as_at=as_at, property_keys=property_keys)
 
-[EARLY ACCESS] Get portfolio
+Get portfolio
 
 Retrieve the definition of a single portfolio.
 
@@ -167,8 +167,8 @@ configuration = lusid.Configuration()
 # Configure OAuth2 access token for authorization: oauth2
 configuration.access_token = 'YOUR_ACCESS_TOKEN'
 
-# Defining host is optional and default to http://localhost/api
-configuration.host = "http://localhost/api"
+# Defining host is optional and default to http://localhost
+configuration.host = "http://localhost"
 # Create an instance of the API class
 api_instance = lusid.PortfoliosApi(lusid.ApiClient(configuration))
 scope = 'scope_example' # str | The scope of the portfolio to retrieve the definition for.
@@ -178,7 +178,7 @@ as_at = '2013-10-20T19:20:30+01:00' # datetime | The asAt datetime at which to r
 property_keys = ['property_keys_example'] # list[str] | A list of property keys from the \"Portfolio\" domain to decorate onto the portfolio.              These take the format {domain}/{scope}/{code} e.g. \"Portfolio/Manager/Id\". (optional)
 
 try:
-    # [EARLY ACCESS] Get portfolio
+    # Get portfolio
     api_response = api_instance.get_portfolio(scope, code, effective_at=effective_at, as_at=as_at, property_keys=property_keys)
     pprint(api_response)
 except ApiException as e:
@@ -237,8 +237,8 @@ configuration = lusid.Configuration()
 # Configure OAuth2 access token for authorization: oauth2
 configuration.access_token = 'YOUR_ACCESS_TOKEN'
 
-# Defining host is optional and default to http://localhost/api
-configuration.host = "http://localhost/api"
+# Defining host is optional and default to http://localhost
+configuration.host = "http://localhost"
 # Create an instance of the API class
 api_instance = lusid.PortfoliosApi(lusid.ApiClient(configuration))
 scope = 'scope_example' # str | The scope of the portfolio to retrieve the commands for.
@@ -290,7 +290,7 @@ Name | Type | Description  | Notes
 # **get_portfolio_properties**
 > PortfolioProperties get_portfolio_properties(scope, code, effective_at=effective_at, as_at=as_at)
 
-[EARLY ACCESS] Get portfolio properties
+Get portfolio properties
 
 List all the properties of a single portfolio.
 
@@ -307,8 +307,8 @@ configuration = lusid.Configuration()
 # Configure OAuth2 access token for authorization: oauth2
 configuration.access_token = 'YOUR_ACCESS_TOKEN'
 
-# Defining host is optional and default to http://localhost/api
-configuration.host = "http://localhost/api"
+# Defining host is optional and default to http://localhost
+configuration.host = "http://localhost"
 # Create an instance of the API class
 api_instance = lusid.PortfoliosApi(lusid.ApiClient(configuration))
 scope = 'scope_example' # str | The scope of the portfolio to list the properties for.
@@ -317,7 +317,7 @@ effective_at = 'effective_at_example' # str | The effective datetime or cut labe
 as_at = '2013-10-20T19:20:30+01:00' # datetime | The asAt datetime at which to list the portfolio's properties. Defaults to return the latest version of each property if not specified. (optional)
 
 try:
-    # [EARLY ACCESS] Get portfolio properties
+    # Get portfolio properties
     api_response = api_instance.get_portfolio_properties(scope, code, effective_at=effective_at, as_at=as_at)
     pprint(api_response)
 except ApiException as e:
@@ -358,7 +358,7 @@ Name | Type | Description  | Notes
 # **list_portfolios**
 > ResourceListOfPortfolio list_portfolios(effective_at=effective_at, as_at=as_at, page=page, start=start, limit=limit, filter=filter, query=query, property_keys=property_keys)
 
-[EARLY ACCESS] List portfolios
+List portfolios
 
 List all the portfolios matching the specified criteria.
 
@@ -375,8 +375,8 @@ configuration = lusid.Configuration()
 # Configure OAuth2 access token for authorization: oauth2
 configuration.access_token = 'YOUR_ACCESS_TOKEN'
 
-# Defining host is optional and default to http://localhost/api
-configuration.host = "http://localhost/api"
+# Defining host is optional and default to http://localhost
+configuration.host = "http://localhost"
 # Create an instance of the API class
 api_instance = lusid.PortfoliosApi(lusid.ApiClient(configuration))
 effective_at = 'effective_at_example' # str | The effective datetime or cut label at which to list the portfolios. Defaults to the current LUSID              system datetime if not specified. (optional)
@@ -389,7 +389,7 @@ query = 'query_example' # str | Expression specifying the criteria that the retu
 property_keys = ['property_keys_example'] # list[str] | A list of property keys from the \"Portfolio\" domain to decorate onto each portfolio.              These take the format {domain}/{scope}/{code} e.g. \"Portfolio/Manager/Id\". (optional)
 
 try:
-    # [EARLY ACCESS] List portfolios
+    # List portfolios
     api_response = api_instance.list_portfolios(effective_at=effective_at, as_at=as_at, page=page, start=start, limit=limit, filter=filter, query=query, property_keys=property_keys)
     pprint(api_response)
 except ApiException as e:
@@ -434,7 +434,7 @@ Name | Type | Description  | Notes
 # **list_portfolios_for_scope**
 > ResourceListOfPortfolio list_portfolios_for_scope(scope, effective_at=effective_at, as_at=as_at, filter=filter, property_keys=property_keys)
 
-[EARLY ACCESS] List portfolios for scope
+List portfolios for scope
 
 List all the portfolios in a single scope.
 
@@ -451,8 +451,8 @@ configuration = lusid.Configuration()
 # Configure OAuth2 access token for authorization: oauth2
 configuration.access_token = 'YOUR_ACCESS_TOKEN'
 
-# Defining host is optional and default to http://localhost/api
-configuration.host = "http://localhost/api"
+# Defining host is optional and default to http://localhost
+configuration.host = "http://localhost"
 # Create an instance of the API class
 api_instance = lusid.PortfoliosApi(lusid.ApiClient(configuration))
 scope = 'scope_example' # str | The scope of the portfolios.
@@ -462,7 +462,7 @@ filter = 'filter_example' # str | Expression to filter the result set. Read more
 property_keys = ['property_keys_example'] # list[str] | A list of property keys from the \"Portfolio\" domain to decorate onto each portfolio.              These take the format {domain}/{scope}/{code} e.g. \"Portfolio/Manager/Id\". (optional)
 
 try:
-    # [EARLY ACCESS] List portfolios for scope
+    # List portfolios for scope
     api_response = api_instance.list_portfolios_for_scope(scope, effective_at=effective_at, as_at=as_at, filter=filter, property_keys=property_keys)
     pprint(api_response)
 except ApiException as e:
@@ -504,7 +504,7 @@ Name | Type | Description  | Notes
 # **update_portfolio**
 > Portfolio update_portfolio(scope, code, portfolio_definition, effective_at=effective_at)
 
-[EARLY ACCESS] Update portfolio
+Update portfolio
 
 Update the definition of a single portfolio. Not all elements within a portfolio definition are  modifiable due to the potential implications for data already stored against the portfolio.
 
@@ -521,8 +521,8 @@ configuration = lusid.Configuration()
 # Configure OAuth2 access token for authorization: oauth2
 configuration.access_token = 'YOUR_ACCESS_TOKEN'
 
-# Defining host is optional and default to http://localhost/api
-configuration.host = "http://localhost/api"
+# Defining host is optional and default to http://localhost
+configuration.host = "http://localhost"
 # Create an instance of the API class
 api_instance = lusid.PortfoliosApi(lusid.ApiClient(configuration))
 scope = 'scope_example' # str | The scope of the portfolio to update the definition for.
@@ -531,7 +531,7 @@ portfolio_definition = lusid.UpdatePortfolioRequest() # UpdatePortfolioRequest |
 effective_at = 'effective_at_example' # str | The effective datetime or cut label at which to update the definition. Defaults to the current              LUSID system datetime if not specified. (optional)
 
 try:
-    # [EARLY ACCESS] Update portfolio
+    # Update portfolio
     api_response = api_instance.update_portfolio(scope, code, portfolio_definition, effective_at=effective_at)
     pprint(api_response)
 except ApiException as e:
@@ -572,7 +572,7 @@ Name | Type | Description  | Notes
 # **upsert_portfolio_properties**
 > PortfolioProperties upsert_portfolio_properties(scope, code, portfolio_properties)
 
-[EARLY ACCESS] Upsert portfolio properties
+Upsert portfolio properties
 
 Update or insert one or more properties onto a single portfolio. A property will be updated if it  already exists and inserted if it does not. All properties must be of the domain 'Portfolio'.
 
@@ -589,8 +589,8 @@ configuration = lusid.Configuration()
 # Configure OAuth2 access token for authorization: oauth2
 configuration.access_token = 'YOUR_ACCESS_TOKEN'
 
-# Defining host is optional and default to http://localhost/api
-configuration.host = "http://localhost/api"
+# Defining host is optional and default to http://localhost
+configuration.host = "http://localhost"
 # Create an instance of the API class
 api_instance = lusid.PortfoliosApi(lusid.ApiClient(configuration))
 scope = 'scope_example' # str | The scope of the portfolio to update or insert the properties onto.
@@ -598,7 +598,7 @@ code = 'code_example' # str | The code of the portfolio to update or insert the 
 portfolio_properties = {'key': lusid.ModelProperty()} # dict(str, ModelProperty) | The properties to be updated or inserted onto the portfolio. Each property in              the request must be keyed by its unique property key. This has the format {domain}/{scope}/{code} e.g. \"Portfolio/Manager/Id\".
 
 try:
-    # [EARLY ACCESS] Upsert portfolio properties
+    # Upsert portfolio properties
     api_response = api_instance.upsert_portfolio_properties(scope, code, portfolio_properties)
     pprint(api_response)
 except ApiException as e:
