@@ -185,7 +185,7 @@ class TransactionConfigurationTypeAlias(object):
         """
         if transaction_roles is None:
             raise ValueError("Invalid value for `transaction_roles`, must not be `None`")  # noqa: E501
-        allowed_values = ["None", "LongLonger", "LongShorter", "ShortShorter", "ShortLonger", "Longer", "Shorter", "AllRoles"]  # noqa: E501
+        allowed_values = ["None", "LongLonger", "LongShorter", "ShortShorter", "Shorter", "ShortLonger", "Longer", "AllRoles"]  # noqa: E501
         if transaction_roles not in allowed_values:
             raise ValueError(
                 "Invalid value for `transaction_roles` ({0}), must be one of {1}"  # noqa: E501

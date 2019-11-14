@@ -87,7 +87,7 @@ class TransactionConfigurationMovementDataRequest(object):
         """
         if movement_types is None:
             raise ValueError("Invalid value for `movement_types`, must not be `None`")  # noqa: E501
-        allowed_values = ["Settlement", "Traded", "FutureCash", "Commitment", "Receivable", "CashSettlement", "Accrual", "ForwardFx", "UnsettledCashTypes", "StockMovement", "CashCommitment", "CashReceivable", "CashForward", "CashFxForward", "CashAccrual"]  # noqa: E501
+        allowed_values = ["Settlement", "Traded", "StockMovement", "FutureCash", "Commitment", "Receivable", "CashSettlement", "CashForward", "CashCommitment", "CashReceivable", "Accrual", "CashAccrual", "ForwardFx", "CashFxForward", "UnsettledCashTypes"]  # noqa: E501
         if movement_types not in allowed_values:
             raise ValueError(
                 "Invalid value for `movement_types` ({0}), must be one of {1}"  # noqa: E501

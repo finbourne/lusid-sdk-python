@@ -14,7 +14,7 @@
       "backgroundColor": "#415464"
     }
   },
-  "basePath": "",
+  "basePath": "/api",
   "paths": {
     "/api/datatypes/{scope}": {
       "get": {
@@ -8483,9 +8483,9 @@
             "LongLonger",
             "LongShorter",
             "ShortShorter",
+            "Shorter",
             "ShortLonger",
             "Longer",
-            "Shorter",
             "AllRoles"
           ],
           "type": "string"
@@ -8505,19 +8505,19 @@
           "enum": [
             "Settlement",
             "Traded",
+            "StockMovement",
             "FutureCash",
             "Commitment",
             "Receivable",
             "CashSettlement",
-            "Accrual",
-            "ForwardFx",
-            "UnsettledCashTypes",
-            "StockMovement",
+            "CashForward",
             "CashCommitment",
             "CashReceivable",
-            "CashForward",
+            "Accrual",
+            "CashAccrual",
+            "ForwardFx",
             "CashFxForward",
-            "CashAccrual"
+            "UnsettledCashTypes"
           ],
           "type": "string"
         },
@@ -8639,19 +8639,19 @@
           "enum": [
             "Settlement",
             "Traded",
+            "StockMovement",
             "FutureCash",
             "Commitment",
             "Receivable",
             "CashSettlement",
-            "Accrual",
-            "ForwardFx",
-            "UnsettledCashTypes",
-            "StockMovement",
+            "CashForward",
             "CashCommitment",
             "CashReceivable",
-            "CashForward",
+            "Accrual",
+            "CashAccrual",
+            "ForwardFx",
             "CashFxForward",
-            "CashAccrual"
+            "UnsettledCashTypes"
           ],
           "type": "string"
         },
@@ -9911,7 +9911,7 @@
   "securityDefinitions": {
     "oauth2": {
       "flow": "implicit",
-      "authorizationUrl": "http://dummy.451.okta.com/v1/authorize",
+      "authorizationUrl": "https://lusid.okta.com/oauth2/aus5al5yopbHW2wJn2p6/v1/authorize",
       "type": "oauth2",
       "description": "OAuth2 Implicit Grant"
     }
