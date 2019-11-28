@@ -3,7 +3,7 @@
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**effective_from** | **datetime** |  | 
+**effective_from** | **str** | The first date from which the weights will apply | 
 **weight_type** | **str** |  | 
 **period_type** | **str** |  | [optional] 
 **period_count** | **int** |  | [optional] 
