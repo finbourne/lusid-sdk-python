@@ -12,7 +12,6 @@ Name | Type | Description | Notes
 **parent_portfolio_id** | [**ResourceId**](ResourceId.md) |  | [optional] 
 **version** | [**Version**](Version.md) |  | [optional] 
 **is_derived** | **bool** | Whether or not this is a derived portfolio. | [optional] 
-**base_currency** | **str** | The base currency of the portfolio. This will be an empty string for reference portfolios. | [optional] 
 **properties** | [**dict(str, ModelProperty)**](ModelProperty.md) | The requested portfolio properties. These will be from the &#39;Portfolio&#39; domain. | [optional] 
 **links** | [**list[Link]**](Link.md) |  | [optional] 
 
