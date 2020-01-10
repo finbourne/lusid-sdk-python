@@ -15,7 +15,6 @@ Name | Type | Description | Notes
 **domain** | **str** | The domain that the property exists in. | [optional] 
 **scope** | **str** | The scope that the property exists in. | [optional] 
 **code** | **str** | The code of the property. Together with the domain and scope this uniquely identifies the property. | [optional] 
-**constraint_style** | **str** | Describes the uniqueness and cardinality of the property for entity objects under the property domain specified in Key. | [optional] 
 **links** | [**list[Link]**](Link.md) |  | [optional] 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
