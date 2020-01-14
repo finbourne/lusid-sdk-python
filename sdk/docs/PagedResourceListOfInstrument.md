@@ -1,9 +1,11 @@
-# ResourceListOfConstituentsAdjustmentHeader
+# PagedResourceListOfInstrument
 
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**values** | [**list[ConstituentsAdjustmentHeader]**](ConstituentsAdjustmentHeader.md) |  | [optional] 
+**next_page** | **str** |  | [optional] 
+**previous_page** | **str** |  | [optional] 
+**values** | [**list[Instrument]**](Instrument.md) |  | [optional] 
 **href** | **str** |  | [optional] 
 **links** | [**list[Link]**](Link.md) |  | [optional] 
 

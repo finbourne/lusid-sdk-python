@@ -3,7 +3,7 @@
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**values** | [**list[PropertyDefinition]**](PropertyDefinition.md) |  | 
+**values** | [**list[PropertyDefinition]**](PropertyDefinition.md) |  | [optional] 
 **href** | **str** |  | [optional] 
 **links** | [**list[Link]**](Link.md) |  | [optional] 
 

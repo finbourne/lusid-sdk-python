@@ -3,7 +3,7 @@
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**values** | [**list[ScopeDefinition]**](ScopeDefinition.md) |  | 
+**values** | [**list[ScopeDefinition]**](ScopeDefinition.md) |  | [optional] 
 **href** | **str** |  | [optional] 
 **links** | [**list[Link]**](Link.md) |  | [optional] 
 

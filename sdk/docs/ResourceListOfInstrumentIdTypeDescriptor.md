@@ -3,7 +3,7 @@
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**values** | [**list[InstrumentIdTypeDescriptor]**](InstrumentIdTypeDescriptor.md) |  | 
+**values** | [**list[InstrumentIdTypeDescriptor]**](InstrumentIdTypeDescriptor.md) |  | [optional] 
 **href** | **str** |  | [optional] 
 **links** | [**list[Link]**](Link.md) |  | [optional] 
 

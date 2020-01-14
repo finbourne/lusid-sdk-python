@@ -3,7 +3,7 @@
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**values** | [**list[CutLabelDefinition]**](CutLabelDefinition.md) |  | 
+**values** | [**list[CutLabelDefinition]**](CutLabelDefinition.md) |  | [optional] 
 **href** | **str** |  | [optional] 
 **links** | [**list[Link]**](Link.md) |  | [optional] 
 

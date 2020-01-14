@@ -3,7 +3,7 @@
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**values** | [**list[AccessControlledResource]**](AccessControlledResource.md) |  | 
+**values** | [**list[AccessControlledResource]**](AccessControlledResource.md) |  | [optional] 
 **href** | **str** |  | [optional] 
 **links** | [**list[Link]**](Link.md) |  | [optional] 
 

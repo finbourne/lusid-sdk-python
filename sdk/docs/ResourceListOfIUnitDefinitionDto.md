@@ -3,7 +3,7 @@
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**values** | [**list[IUnitDefinitionDto]**](IUnitDefinitionDto.md) |  | 
+**values** | [**list[IUnitDefinitionDto]**](IUnitDefinitionDto.md) |  | [optional] 
 **href** | **str** |  | [optional] 
 **links** | [**list[Link]**](Link.md) |  | [optional] 
 

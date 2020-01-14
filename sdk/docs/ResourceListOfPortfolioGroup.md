@@ -3,7 +3,7 @@
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**values** | [**list[PortfolioGroup]**](PortfolioGroup.md) |  | 
+**values** | [**list[PortfolioGroup]**](PortfolioGroup.md) |  | [optional] 
 **href** | **str** |  | [optional] 
 **links** | [**list[Link]**](Link.md) |  | [optional] 
 

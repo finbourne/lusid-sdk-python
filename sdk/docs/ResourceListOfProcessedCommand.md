@@ -3,7 +3,7 @@
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**values** | [**list[ProcessedCommand]**](ProcessedCommand.md) |  | 
+**values** | [**list[ProcessedCommand]**](ProcessedCommand.md) |  | [optional] 
 **href** | **str** |  | [optional] 
 **links** | [**list[Link]**](Link.md) |  | [optional] 
 
