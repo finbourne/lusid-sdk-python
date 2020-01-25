@@ -14,7 +14,7 @@
       "backgroundColor": "#415464"
     }
   },
-  "basePath": "",
+  "basePath": "/api",
   "paths": {
     "/api/datatypes/{scope}": {
       "get": {
@@ -508,11 +508,11 @@
                   "identifiers": {
                     "ClientInternal": {
                       "value": "some-identifier",
-                      "effectiveAt": "0001-01-01T00:00:00+00:00"
+                      "effectiveAt": "0001-01-01T00:00:00.0000000+00:00"
                     },
                     "Figi": {
                       "value": "some-figi-code",
-                      "effectiveAt": "0001-01-01T00:00:00+00:00"
+                      "effectiveAt": "0001-01-01T00:00:00.0000000+00:00"
                     }
                   },
                   "properties": [
@@ -521,7 +521,7 @@
                       "value": {
                         "labelValue": "US0378331005"
                       },
-                      "effectiveFrom": "2018-06-18T09:00:00+00:00"
+                      "effectiveFrom": "2018-06-18T09:00:00.0000000+00:00"
                     }
                   ],
                   "lookThroughPortfolioId": {
@@ -538,11 +538,11 @@
                   "identifiers": {
                     "ClientInternal": {
                       "value": "some-identifier-2",
-                      "effectiveAt": "0001-01-01T00:00:00+00:00"
+                      "effectiveAt": "0001-01-01T00:00:00.0000000+00:00"
                     },
                     "Figi": {
                       "value": "some-figi-code-2",
-                      "effectiveAt": "0001-01-01T00:00:00+00:00"
+                      "effectiveAt": "0001-01-01T00:00:00.0000000+00:00"
                     }
                   },
                   "properties": [],
@@ -1919,14 +1919,14 @@
               },
               "example": {
                 "PortfolioGroup/MyScope/FundManagerName": {
-                  "effectiveDate": "2018-03-05T00:00:00+00:00",
+                  "effectiveDate": "2018-03-05T00:00:00.0000000+00:00",
                   "key": "PortfolioGroup/MyScope/FundManagerName",
                   "value": {
                     "labelValue": "Smith"
                   }
                 },
                 "PortfolioGroup/MyScope/ReBalanceInterval": {
-                  "effectiveDate": "0001-01-01T00:00:00+00:00",
+                  "effectiveDate": "0001-01-01T00:00:00.0000000+00:00",
                   "key": "PortfolioGroup/MyScope/ReBalanceInterval",
                   "value": {
                     "metricValue": {
@@ -2699,14 +2699,14 @@
               },
               "example": {
                 "Portfolio/MyScope/FundManagerName": {
-                  "effectiveDate": "2018-03-05T00:00:00+00:00",
+                  "effectiveDate": "2018-03-05T00:00:00.0000000+00:00",
                   "key": "Portfolio/MyScope/FundManagerName",
                   "value": {
                     "labelValue": "Smith"
                   }
                 },
                 "Portfolio/MyScope/ReBalanceInterval": {
-                  "effectiveDate": "0001-01-01T00:00:00+00:00",
+                  "effectiveDate": "0001-01-01T00:00:00.0000000+00:00",
                   "key": "Portfolio/MyScope/ReBalanceInterval",
                   "value": {
                     "metricValue": {
@@ -4524,8 +4524,8 @@
             "examples": {
               "application/json": {
                 "version": {
-                  "effectiveFrom": "2019-03-05T12:00:00+00:00",
-                  "asAtDate": "2019-03-05T12:00:00+00:00"
+                  "effectiveFrom": "2019-03-05T12:00:00.0000000+00:00",
+                  "asAtDate": "2019-03-05T12:00:00.0000000+00:00"
                 },
                 "values": [
                   {
@@ -4897,10 +4897,10 @@
             "examples": {
               "application/json": {
                 "value": {
-                  "effectiveAt": "0001-01-01T00:00:00+00:00",
+                  "effectiveAt": "0001-01-01T00:00:00.0000000+00:00",
                   "version": {
-                    "effectiveFrom": "2019-03-05T00:00:00+00:00",
-                    "asAtDate": "2019-03-08T00:00:00+00:00"
+                    "effectiveFrom": "2019-03-05T00:00:00.0000000+00:00",
+                    "asAtDate": "2019-03-08T00:00:00.0000000+00:00"
                   },
                   "unmatchedHoldingMethod": "KeepTheSame",
                   "adjustments": [
@@ -5041,8 +5041,8 @@
             "examples": {
               "application/json": {
                 "version": {
-                  "effectiveFrom": "2018-03-05T00:00:00+00:00",
-                  "asAtDate": "2018-03-04T23:50:00+00:00"
+                  "effectiveFrom": "2018-03-05T00:00:00.0000000+00:00",
+                  "asAtDate": "2018-03-04T23:50:00.0000000+00:00"
                 },
                 "values": [
                   {
@@ -5052,8 +5052,8 @@
                       "Instrument/default/RIC": "RIC.L"
                     },
                     "instrumentUid": "LUID_1C7YTL5M",
-                    "transactionDate": "2018-08-04T00:00:00+00:00",
-                    "settlementDate": "2018-08-06T00:00:00+00:00",
+                    "transactionDate": "2018-08-04T00:00:00.0000000+00:00",
+                    "settlementDate": "2018-08-06T00:00:00.0000000+00:00",
                     "units": 1000,
                     "transactionPrice": {
                       "price": 88.8,
@@ -5472,8 +5472,8 @@
             "examples": {
               "application/json": {
                 "version": {
-                  "effectiveFrom": "2018-03-05T00:00:00+00:00",
-                  "asAtDate": "2018-03-04T23:50:00+00:00"
+                  "effectiveFrom": "2018-03-05T00:00:00.0000000+00:00",
+                  "asAtDate": "2018-03-04T23:50:00.0000000+00:00"
                 },
                 "values": [
                   {
@@ -5484,8 +5484,8 @@
                       "Instrument/default/RIC": "RIC.L"
                     },
                     "instrumentUid": "LUID_JLH24106",
-                    "transactionDate": "2018-08-04T00:00:00+00:00",
-                    "settlementDate": "2018-08-06T00:00:00+00:00",
+                    "transactionDate": "2018-08-04T00:00:00.0000000+00:00",
+                    "settlementDate": "2018-08-06T00:00:00.0000000+00:00",
                     "units": 1000,
                     "transactionAmount": 88800,
                     "transactionPrice": {
@@ -5523,8 +5523,8 @@
                     },
                     "source": "",
                     "transactionStatus": "Cancelled",
-                    "entryDateTime": "2018-08-04T12:22:06+00:00",
-                    "cancelDateTime": "2018-08-04T12:25:14+00:00"
+                    "entryDateTime": "2018-08-04T12:22:06.0000000+00:00",
+                    "cancelDateTime": "2018-08-04T12:25:14.0000000+00:00"
                   },
                   {
                     "transactionId": "TXN-00002",
@@ -5534,8 +5534,8 @@
                       "Instrument/default/ClientInternal": "INT:00024106"
                     },
                     "instrumentUid": "LUID_OI5JX1V7",
-                    "transactionDate": "2018-08-07T00:00:00+00:00",
-                    "settlementDate": "2018-08-10T00:00:00+00:00",
+                    "transactionDate": "2018-08-07T00:00:00.0000000+00:00",
+                    "settlementDate": "2018-08-10T00:00:00.0000000+00:00",
                     "units": 10000,
                     "transactionAmount": 1470100,
                     "transactionPrice": {
@@ -5581,13 +5581,13 @@
                     },
                     "source": "",
                     "transactionStatus": "Active",
-                    "entryDateTime": "2018-08-07T10:30:12+00:00",
+                    "entryDateTime": "2018-08-07T10:30:12.0000000+00:00",
                     "realisedGainLoss": [
                       {
                         "instrumentUid": "LUID_OI5JX1V7",
                         "units": 4500,
-                        "purchaseTradeDate": "2018-08-02T00:00:00+00:00",
-                        "purchaseSettlementDate": "2018-08-05T00:00:00+00:00",
+                        "purchaseTradeDate": "2018-08-02T00:00:00.0000000+00:00",
+                        "purchaseSettlementDate": "2018-08-05T00:00:00.0000000+00:00",
                         "purchasePrice": 142.96,
                         "costTradeCcy": {
                           "amount": 643320,
@@ -5617,8 +5617,8 @@
                       {
                         "instrumentUid": "LUID_OI5JX1V7",
                         "units": 4500,
-                        "purchaseTradeDate": "2018-08-03T00:00:00+00:00",
-                        "purchaseSettlementDate": "2018-08-06T00:00:00+00:00",
+                        "purchaseTradeDate": "2018-08-03T00:00:00.0000000+00:00",
+                        "purchaseSettlementDate": "2018-08-06T00:00:00.0000000+00:00",
                         "purchasePrice": 147.7,
                         "costTradeCcy": {
                           "amount": 664650,
@@ -5648,8 +5648,8 @@
                       {
                         "instrumentUid": "LUID_OI5JX1V7",
                         "units": 1000,
-                        "purchaseTradeDate": "2018-08-06T00:00:00+00:00",
-                        "purchaseSettlementDate": "2018-08-08T00:00:00+00:00",
+                        "purchaseTradeDate": "2018-08-06T00:00:00.0000000+00:00",
+                        "purchaseSettlementDate": "2018-08-08T00:00:00.0000000+00:00",
                         "purchasePrice": 146.03,
                         "costTradeCcy": {
                           "amount": 146030,
@@ -6139,7 +6139,7 @@
           "scope": "MyParentPortfolioScope",
           "code": "MyParentPortfolioCode"
         },
-        "created": "2018-03-05T00:00:00+00:00",
+        "created": "2018-03-05T00:00:00.0000000+00:00",
         "corporateActionSourceId": {
           "scope": "MyScope",
           "code": "MyCorporateActionSourceId"
@@ -6493,7 +6493,7 @@
       "example": {
         "type": "Figi",
         "value": "updated-figi",
-        "effectiveAt": "2018-02-01T10:00:00+00:00"
+        "effectiveAt": "2018-02-01T10:00:00.0000000+00:00"
       }
     },
     "DeleteInstrumentResponse": {
@@ -6584,7 +6584,7 @@
               "value": {
                 "labelValue": "MyValue"
               },
-              "effectiveFrom": "2018-03-05T12:00:00+00:00"
+              "effectiveFrom": "2018-03-05T12:00:00.0000000+00:00"
             }
           ]
         }
@@ -6997,7 +6997,7 @@
       },
       "example": {
         "code": "MyGroupCode",
-        "created": "2019-10-04T00:00:00+00:00",
+        "created": "2019-10-04T00:00:00.0000000+00:00",
         "values": [
           {
             "scope": "MyScope",
@@ -7437,16 +7437,16 @@
             "scope": "MySourceScope",
             "code": "MySourcePortfolioCode"
           },
-          "effectiveAt": "2018-03-05T00:00:00+00:00",
-          "asAt": "2018-03-05T00:00:00+00:00"
+          "effectiveAt": "2018-03-05T00:00:00.0000000+00:00",
+          "asAt": "2018-03-05T00:00:00.0000000+00:00"
         },
         "right": {
           "portfolioId": {
             "scope": "MyTargetScope",
             "code": "MyTargetPortfolioCode"
           },
-          "effectiveAt": "2018-03-05T00:00:00+00:00",
-          "asAt": "2018-03-05T00:00:00+00:00"
+          "effectiveAt": "2018-03-05T00:00:00.0000000+00:00",
+          "asAt": "2018-03-05T00:00:00.0000000+00:00"
         },
         "instrumentPropertyKeys": [
           "Instrument/default/Name"
@@ -7868,7 +7868,7 @@
         "displayName": "MyPortfolioName",
         "description": "Description of my portfolio",
         "code": "MyPortfolioCode",
-        "created": "2018-03-05T00:00:00+00:00",
+        "created": "2018-03-05T00:00:00.0000000+00:00",
         "properties": {}
       }
     },
@@ -7920,7 +7920,7 @@
         }
       },
       "example": {
-        "effectiveFrom": "2018-03-05T00:00:00+00:00",
+        "effectiveFrom": "2018-03-05T00:00:00.0000000+00:00",
         "weightType": "Periodical",
         "periodType": "Quarterly",
         "periodCount": 2,
@@ -8843,7 +8843,7 @@
         "displayName": "Portfolio UK",
         "description": "Portfolio for UK market",
         "code": "PortfolioUk",
-        "created": "2018-03-05T12:00:00+00:00",
+        "created": "2018-03-05T12:00:00.0000000+00:00",
         "baseCurrency": "GBP",
         "corporateActionSourceId": {
           "scope": "Sources",
@@ -8857,7 +8857,7 @@
             "value": {
               "labelValue": "Matt Smith"
             },
-            "effectiveFrom": "2018-03-05T12:00:00+00:00"
+            "effectiveFrom": "2018-03-05T12:00:00.0000000+00:00"
           },
           "Portfolio/Manager/Id": {
             "key": "Portfolio/Manager/Id",
@@ -8867,7 +8867,7 @@
                 "unit": "NoUnits"
               }
             },
-            "effectiveFrom": "2018-03-05T12:00:00+00:00"
+            "effectiveFrom": "2018-03-05T12:00:00.0000000+00:00"
           }
         }
       }
@@ -8984,7 +8984,7 @@
         "instrumentIdentifiers": {
           "ClientInternal": "CLI-183461"
         },
-        "transactionTime": "2018-03-05T12:00:00+00:00",
+        "transactionTime": "2018-03-05T12:00:00.0000000+00:00",
         "lastShares": 1000,
         "lastPx": 1.23,
         "currency": "USD"
@@ -9080,8 +9080,8 @@
             },
             "portfolioCost": 10000,
             "price": 100,
-            "purchaseDate": "2018-03-05T00:00:00+00:00",
-            "settlementDate": "2018-03-08T00:00:00+00:00"
+            "purchaseDate": "2018-03-05T00:00:00.0000000+00:00",
+            "settlementDate": "2018-03-08T00:00:00.0000000+00:00"
           }
         ]
       }
@@ -9624,8 +9624,8 @@
           "Instrument/default/Figi": "BBG000C6K6G9",
           "Instrument/default/Isin": "GB00BH4HKS39"
         },
-        "transactionDate": "2018-03-05T00:00:00+00:00",
-        "settlementDate": "2018-03-08T00:00:00+00:00",
+        "transactionDate": "2018-03-05T00:00:00.0000000+00:00",
+        "settlementDate": "2018-03-08T00:00:00.0000000+00:00",
         "units": 1000,
         "transactionPrice": {
           "price": 123,
@@ -9727,8 +9727,8 @@
         }
       },
       "example": {
-        "startDate": "2018-03-05T00:00:00+00:00",
-        "endDate": "2018-03-19T00:00:00+00:00",
+        "startDate": "2018-03-05T00:00:00.0000000+00:00",
+        "endDate": "2018-03-19T00:00:00.0000000+00:00",
         "queryMode": "TradeDate",
         "showCancelledTransactions": false
       }
@@ -9978,7 +9978,7 @@
   "securityDefinitions": {
     "oauth2": {
       "flow": "implicit",
-      "authorizationUrl": "http://dummy.451.okta.com/v1/authorize",
+      "authorizationUrl": "https://lusid.okta.com/oauth2/aus5al5yopbHW2wJn2p6/v1/authorize",
       "type": "oauth2",
       "description": "OAuth2 Implicit Grant"
     }
