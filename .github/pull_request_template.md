@@ -1,6 +1,6 @@
 # Pull Request Checklist
 
-- [ ] Read the [contributing guidelines](https://github.com/finbourne/lusid-sdk-python-preview/blob/master/CONTRIBUTING.md)
+- [ ] Read the [contributing guidelines](https://github.com/finbourne/lusid-sdk-python/blob/master/docs/CONTRIBUTING.md)
 - [ ] Tests pass
 - [ ] Raised the PR against the `develop` branch
 
