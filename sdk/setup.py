@@ -31,7 +31,14 @@ from setuptools import setup, find_packages  # noqa: H301
 # prerequisite: setuptools
 # http://pypi.python.org/pypi/setuptools
 
-REQUIRES = ["urllib3 >= 1.15", "six >= 1.10", "certifi", "python-dateutil"]
+REQUIRES = [
+    "urllib3 >= 1.15",
+    "six >= 1.10",
+    "certifi >= 14.05.14",
+    "python-dateutil >= 2.5.3",
+    "urllib3 >= 1.15.1",
+    "requests >= 2.21.0"
+]
 
 version = {}
 with open("./lusid/__version__.py") as fp:
