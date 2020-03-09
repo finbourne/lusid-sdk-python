@@ -9,10 +9,10 @@ assignees: ''
 
 ## Bug Report Checklist
 
-- [ ] I have checked the existing [documentation](https://github.com/finbourne/lusid-sdk-python-preview/wiki) for this SDK
+- [ ] I have checked the existing [documentation](../../../../wiki) for this SDK
 - [ ] I have searched for any related issues/PRs
-- [ ] I have read the [LUISD contribution guidelines](https://github.com/finbourne/lusid-sdk-python-preview/blob/master/docs/CONTRIBUTING.md)
-- [ ] I have read the [LUSID Code of Conduct](https://github.com/finbourne/lusid-sdk-python-preview/blob/master/docs/CODE_OF_CONDUCT.md)
+- [ ] I have read the [LUISD contribution guidelines](../../docs/CONTRIBUTING.md)
+- [ ] I have read the [LUSID Code of Conduct](../../docs/CODE_OF_CONDUCT.md)
 
 **SDK version**
 The version of the SDK that has the bug. 
