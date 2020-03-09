@@ -1,6 +1,6 @@
 # lusid.CutLabelDefinitionsApi
 
-All URIs are relative to *http://localhost/api*
+All URIs are relative to *http://localhost*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
@@ -31,8 +31,8 @@ configuration = lusid.Configuration()
 # Configure OAuth2 access token for authorization: oauth2
 configuration.access_token = 'YOUR_ACCESS_TOKEN'
 
-# Defining host is optional and default to http://localhost/api
-configuration.host = "http://localhost/api"
+# Defining host is optional and default to http://localhost
+configuration.host = "http://localhost"
 # Create an instance of the API class
 api_instance = lusid.CutLabelDefinitionsApi(lusid.ApiClient(configuration))
 create_request = lusid.CreateCutLabelDefinitionRequest() # CreateCutLabelDefinitionRequest | The cut label definition (optional)
@@ -93,8 +93,8 @@ configuration = lusid.Configuration()
 # Configure OAuth2 access token for authorization: oauth2
 configuration.access_token = 'YOUR_ACCESS_TOKEN'
 
-# Defining host is optional and default to http://localhost/api
-configuration.host = "http://localhost/api"
+# Defining host is optional and default to http://localhost
+configuration.host = "http://localhost"
 # Create an instance of the API class
 api_instance = lusid.CutLabelDefinitionsApi(lusid.ApiClient(configuration))
 code = 'code_example' # str | The Code of the Cut Label that is being Deleted
@@ -155,8 +155,8 @@ configuration = lusid.Configuration()
 # Configure OAuth2 access token for authorization: oauth2
 configuration.access_token = 'YOUR_ACCESS_TOKEN'
 
-# Defining host is optional and default to http://localhost/api
-configuration.host = "http://localhost/api"
+# Defining host is optional and default to http://localhost
+configuration.host = "http://localhost"
 # Create an instance of the API class
 api_instance = lusid.CutLabelDefinitionsApi(lusid.ApiClient(configuration))
 code = 'code_example' # str | The Code of the Cut Label that is being queried
@@ -219,15 +219,15 @@ configuration = lusid.Configuration()
 # Configure OAuth2 access token for authorization: oauth2
 configuration.access_token = 'YOUR_ACCESS_TOKEN'
 
-# Defining host is optional and default to http://localhost/api
-configuration.host = "http://localhost/api"
+# Defining host is optional and default to http://localhost
+configuration.host = "http://localhost"
 # Create an instance of the API class
 api_instance = lusid.CutLabelDefinitionsApi(lusid.ApiClient(configuration))
 as_at = '2013-10-20T19:20:30+01:00' # datetime | Optional. The As At time at which listed Cut Labels are valid (optional)
 sort_by = ['sort_by_example'] # list[str] | Optional. Order the results by these fields. Use use the '-' sign to denote descending order e.g. -MyFieldName (optional)
 start = 56 # int | Optional. When paginating, skip this number of results (optional)
 limit = 56 # int | Optional. When paginating, limit the number of returned results to this many. (optional)
-filter = 'filter_example' # str | Optional. Expression to filter the result set (optional)
+filter = 'filter_example' # str | Optional. Expression to filter the result set.              For example, to filter on code, use \"code eq 'string'\"              Read more about filtering results from LUSID here https://support.lusid.com/filtering-results-from-lusid. (optional)
 query = 'query_example' # str | Optional. Expression specifying the criteria that the returned cut labels must meet (optional)
 
 try:
@@ -246,7 +246,7 @@ Name | Type | Description  | Notes
  **sort_by** | [**list[str]**](str.md)| Optional. Order the results by these fields. Use use the &#39;-&#39; sign to denote descending order e.g. -MyFieldName | [optional] 
  **start** | **int**| Optional. When paginating, skip this number of results | [optional] 
  **limit** | **int**| Optional. When paginating, limit the number of returned results to this many. | [optional] 
- **filter** | **str**| Optional. Expression to filter the result set | [optional] 
+ **filter** | **str**| Optional. Expression to filter the result set.              For example, to filter on code, use \&quot;code eq &#39;string&#39;\&quot;              Read more about filtering results from LUSID here https://support.lusid.com/filtering-results-from-lusid. | [optional] 
  **query** | **str**| Optional. Expression specifying the criteria that the returned cut labels must meet | [optional] 
 
 ### Return type
@@ -291,8 +291,8 @@ configuration = lusid.Configuration()
 # Configure OAuth2 access token for authorization: oauth2
 configuration.access_token = 'YOUR_ACCESS_TOKEN'
 
-# Defining host is optional and default to http://localhost/api
-configuration.host = "http://localhost/api"
+# Defining host is optional and default to http://localhost
+configuration.host = "http://localhost"
 # Create an instance of the API class
 api_instance = lusid.CutLabelDefinitionsApi(lusid.ApiClient(configuration))
 code = 'code_example' # str | The Code of the Cut Label that is being updated
