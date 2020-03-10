@@ -4,8 +4,9 @@ WORKDIR /usr/src/
 
 RUN apt-get update && apt-get -y install jq
 
-COPY requirements.txt /usr/src/
-RUN pip install --no-cache-dir -r requirements.txt
+COPY requirements.txt requirements.dev.txt /usr/src/
+
+RUN pip install --no-cache-dir -r requirements.txt -r requirements.dev.txt
 
 RUN pip --no-cache-dir install --upgrade awscli
 

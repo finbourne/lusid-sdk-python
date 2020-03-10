@@ -8,17 +8,20 @@ from collections import UserString
 
 class RefreshingToken(UserString):
 
-    def __init__(self, token_url, client_id, client_secret, initial_access_token, initial_token_expiry, refresh_token, expiry_offset=60):
+    def __init__(self, token_url, client_id, client_secret, initial_access_token, initial_token_expiry, refresh_token,
+                 expiry_offset=60, proxies=None, certificate_filename=None):
         """
         Implementation of UserString that will automatically refresh the token value upon expiry
 
-        :param token_url: token refresh url
-        :param client_id: OpenID Connect Client ID
-        :param client_secret: OpenID Connect Client Secret
-        :param initial_access_token: initial access token
-        :param initial_token_expiry: number of seconds the initial token is valid for before expiring
-        :param refresh_token: initial refresh token        
-        :param expiry_offset: number of seconds before token expiry to refresh the token
+        :param str token_url: token refresh url
+        :param str client_id: OpenID Connect Client ID
+        :param str client_secret: OpenID Connect Client Secret
+        :param str initial_access_token: initial access token
+        :param int initial_token_expiry: number of seconds the initial token is valid for before expiring
+        :param str refresh_token: initial refresh token
+        :param int expiry_offset: number of seconds before token expiry to refresh the token
+        :param dict proxies: dictionary containing proxy schemas
+        :param str certifiate_filename: The path to the client side certificate to use
         """
 
         token_data = {
@@ -39,7 +42,13 @@ class RefreshingToken(UserString):
                 }
 
                 request_body = f"grant_type=refresh_token&scope=openid client groups offline_access&refresh_token={refresh_token}"
-                okta_response = requests.post(token_url, data=request_body, headers=headers)
+
+                # request parameters
+                kwargs = {"headers": headers}
+                kwargs["proxies"] = proxies
+                kwargs["verify"] = certificate_filename
+
+                okta_response = requests.post(token_url, data=request_body, **kwargs)
 
                 if okta_response.status_code != 200:
                     raise Exception(okta_response.json())
