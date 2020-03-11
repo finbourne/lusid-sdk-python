@@ -10,8 +10,8 @@ script:
     fbn_password="MASTER_FBN_PASSWORD"
     fbn_clientid="MASTER_FBN_CLIENT_ID"
     fbn_client_secret="MASTER_FBN_CLIENT_SECRET"
-    fbn_lusid_api_url="MASTER_FBN_LUSID_API_URL"  
-    fbn_app_name="MASTER_FBN_APP_NAME"  
+    fbn_lusid_api_url="MASTER_FBN_LUSID_API_URL"    
+    fbn_app_name="MASTER_FBN_APP_NAME"
   else
     fbn_token_url="DEVELOP_FBN_TOKEN_URL"
     fbn_username="DEVELOP_FBN_USERNAME"
@@ -23,20 +23,20 @@ script:
   fi
 
   cd sdk
-  docker build -t finbourne/lusid-sdk-python-test .
-  docker run \
-    -e FBN_TOKEN_URL=${!fbn_token_url} \
-    -e FBN_USERNAME=${!fbn_username} \
-    -e FBN_PASSWORD=${!fbn_password} \
-    -e FBN_CLIENT_ID=${!fbn_clientid} \
-    -e FBN_CLIENT_SECRET=${!fbn_client_secret} \
-    -e FBN_LUSID_API_URL=${!fbn_lusid_api_url} \
-    -e FBN_APP_NAME=${!fbn_app_name} \
-    -v $(pwd):/usr/src/ \
-    finbourne/lusid-sdk-python-test
+
+  export FBN_TOKEN_URL=${!fbn_token_url} \
+  export FBN_USERNAME=${!fbn_username} \
+  export FBN_PASSWORD=${!fbn_password} \
+  export FBN_CLIENT_ID=${!fbn_clientid} \
+  export FBN_CLIENT_SECRET=${!fbn_client_secret} \
+  export FBN_LUSID_API_URL=${!fbn_lusid_api_url} \
+  export FBN_APP_NAME=${!fbn_app_name}
+
+  # The --abort-on-container-exit flag exits tinyproxy when the tests are finished and carries over the exit code
+  docker-compose up --abort-on-container-exit
 
 notifications:
   slack:
     rooms:
-      secure: "EnIltTm4RPP316t6VGPwTavzbuGmyNovwGia7ZmRx3XM/CK+2kqUuKyn+4rTzVTihj3z4swoudjVDzh4QPek7KeOUPg6z4qLwRwafksS023GkaVK8gIPLc6ILGYxTh7ZXtLsQK8TfDVmvGi/undHArxMXpPeIZQRj/TcqQvDnaZ7fToD8KM8MVE3084pzYr0apWGC9IR247JP5A/XS2axuxUlFSMTZJDPz1ARkKJJOE/672zeOpriEjmGYEaS0bOI2TugINO7a9swzLdvaSusYevpjP5VtecAeq2WpVXHUqpUGFzVumgXSn6A+wQcdypw/JyCyTh79Koq+bNVzEjb8P8QEgSx89ie3JG9HaeNuf28e+0Wl7BzLiMsV2khw6sfwjvsPDFLWJ/jdqaDlOz1mcWgnGTNY4mdPd/CtZAILZi1/C/pm1HctQVhyBWv0aQ8vziN3ebxSio/gR8VM1bkasS0xdX/rjr6nZmeL88kdhQs9b8pDfmklCPDzZydNYMXbLhRTW5hE+4g8O3/OTwYKNGqlRowLNL6D/dOM6aQ7Qq7MFHrwYyMdLlPbVvMgSQUftANhqWJSWVmDls+EBgY4nHKrVLUIrSp3DCllZZl9sNzgr54ChelddmPUryl/1+cBOwOqrO4IJ0f1TuJNDPpJD1i+BoiQvSMbnyvKe8yIA="
+      secure: "MnBdYWpr9kBTSaB/Gof6GEyknx23ReSYAQxbZiuRvnzV4tdjJBmkAgJPcisFqJkdlZKaBEm4l750el5s3di6wV8fiDPpkc6nTjYZfTg+FbUEiZIvB9Xh+gAgZdmE9TEU41Rm0rB1XjsWJfokKjv0bJz1WgevfQuavcPwdNgEdt8YuB2CebphddFBp5m/B5EjC6fZwj3bTJZ2a2eFHJZzenF2Aui2QA80IHyeBwRJAiuDo/lpK7cWp5kQHN2DVx+IQgkoU3RKmFR3DsMN8UkPDXXLWVmRTU8amQWz3utvaUAKd7Vww06WWH6M2FVjoJ+at3a7/aq8iNz2mmuamlyd/lD7hMvmjux+q5dHpBtYSVQ8KteSLvhn7LpI18nMv4ZZmCI66PpxzhsdfCnMOrlMGlKAzygadYc7hezv3oHVqOP3bkzQzIcaftmc5vimu2j1x/LLSW7WYo4wf8yi2kLbLJd3YrAldYkRqU0CiJBYtnZE8doNKBgX2vczQD3n9bBwmX4V18lT5BQocLL+fg7Jii4YSad8nokl9HAgfNi3IP21Hu8V2Sizru0LHcF2Nej7PVOxHn4epqC75Wqt8bEDXs6UofmWv+anTutJyjB2OtKmlpiwBkeMRM1Qm0PNi7g2dh7UT3yhVvbjJxPHMq/oL9V+WHEx+vL4XkXEVstLnGg="
     on_failure: always
