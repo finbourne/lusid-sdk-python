@@ -32,17 +32,20 @@ configuration.access_token = 'YOUR_ACCESS_TOKEN'
 
 # Defining host is optional and default to http://localhost/api
 configuration.host = "http://localhost/api"
-# Create an instance of the API class
-api_instance = lusid.ReferencePortfolioApi(lusid.ApiClient(configuration))
-scope = 'scope_example' # str | The intended scope of the portfolio
+
+# Enter a context with an instance of the API client
+with lusid.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = lusid.ReferencePortfolioApi(api_client)
+    scope = 'scope_example' # str | The intended scope of the portfolio
 reference_portfolio = lusid.CreateReferencePortfolioRequest() # CreateReferencePortfolioRequest | The portfolio creation request object
 
-try:
-    # Create reference portfolio
-    api_response = api_instance.create_reference_portfolio(scope, reference_portfolio)
-    pprint(api_response)
-except ApiException as e:
-    print("Exception when calling ReferencePortfolioApi->create_reference_portfolio: %s\n" % e)
+    try:
+        # Create reference portfolio
+        api_response = api_instance.create_reference_portfolio(scope, reference_portfolio)
+        pprint(api_response)
+    except ApiException as e:
+        print("Exception when calling ReferencePortfolioApi->create_reference_portfolio: %s\n" % e)
 ```
 
 ### Parameters
@@ -96,20 +99,23 @@ configuration.access_token = 'YOUR_ACCESS_TOKEN'
 
 # Defining host is optional and default to http://localhost/api
 configuration.host = "http://localhost/api"
-# Create an instance of the API class
-api_instance = lusid.ReferencePortfolioApi(lusid.ApiClient(configuration))
-scope = 'scope_example' # str | The scope of the reference portfolio.
+
+# Enter a context with an instance of the API client
+with lusid.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = lusid.ReferencePortfolioApi(api_client)
+    scope = 'scope_example' # str | The scope of the reference portfolio.
 code = 'code_example' # str | The code of the reference portfolio. Together with the scope this uniquely identifies              the reference portfolio.
 effective_at = 'effective_at_example' # str | The effective date of the constituents to retrieve. Defaults to the current LUSID system datetime if not specified. (optional)
 as_at = '2013-10-20T19:20:30+01:00' # datetime | The asAt datetime at which to retrieve constituents. Defaults to return the latest version              of each constituent if not specified. (optional)
 property_keys = ['property_keys_example'] # list[str] | A list of property keys from the \"Instrument\" or \"ReferenceHolding\" domain to decorate onto              the constituents. These take the format {domain}/{scope}/{code} e.g. \"Instrument/system/Name\" or              \"ReferenceHolding/strategy/quantsignal\". Defaults to return all available instrument and reference holding properties if not specified. (optional)
 
-try:
-    # Get constituents
-    api_response = api_instance.get_reference_portfolio_constituents(scope, code, effective_at=effective_at, as_at=as_at, property_keys=property_keys)
-    pprint(api_response)
-except ApiException as e:
-    print("Exception when calling ReferencePortfolioApi->get_reference_portfolio_constituents: %s\n" % e)
+    try:
+        # Get constituents
+        api_response = api_instance.get_reference_portfolio_constituents(scope, code, effective_at=effective_at, as_at=as_at, property_keys=property_keys)
+        pprint(api_response)
+    except ApiException as e:
+        print("Exception when calling ReferencePortfolioApi->get_reference_portfolio_constituents: %s\n" % e)
 ```
 
 ### Parameters
@@ -166,20 +172,23 @@ configuration.access_token = 'YOUR_ACCESS_TOKEN'
 
 # Defining host is optional and default to http://localhost/api
 configuration.host = "http://localhost/api"
-# Create an instance of the API class
-api_instance = lusid.ReferencePortfolioApi(lusid.ApiClient(configuration))
-scope = 'scope_example' # str | The scope of the portfolio
+
+# Enter a context with an instance of the API client
+with lusid.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = lusid.ReferencePortfolioApi(api_client)
+    scope = 'scope_example' # str | The scope of the portfolio
 code = 'code_example' # str | Code for the portfolio
 from_effective_at = 'from_effective_at_example' # str | Events between this time (inclusive) and the toEffectiveAt are returned.
 to_effective_at = 'to_effective_at_example' # str | Events between this time (inclusive) and the fromEffectiveAt are returned.
 as_at_time = '2013-10-20T19:20:30+01:00' # datetime | The as-at time for which the result is valid. (optional)
 
-try:
-    # List constituents adjustments
-    api_response = api_instance.list_constituents_adjustments(scope, code, from_effective_at, to_effective_at, as_at_time=as_at_time)
-    pprint(api_response)
-except ApiException as e:
-    print("Exception when calling ReferencePortfolioApi->list_constituents_adjustments: %s\n" % e)
+    try:
+        # List constituents adjustments
+        api_response = api_instance.list_constituents_adjustments(scope, code, from_effective_at, to_effective_at, as_at_time=as_at_time)
+        pprint(api_response)
+    except ApiException as e:
+        print("Exception when calling ReferencePortfolioApi->list_constituents_adjustments: %s\n" % e)
 ```
 
 ### Parameters
@@ -236,18 +245,21 @@ configuration.access_token = 'YOUR_ACCESS_TOKEN'
 
 # Defining host is optional and default to http://localhost/api
 configuration.host = "http://localhost/api"
-# Create an instance of the API class
-api_instance = lusid.ReferencePortfolioApi(lusid.ApiClient(configuration))
-scope = 'scope_example' # str | The scope of the portfolio
+
+# Enter a context with an instance of the API client
+with lusid.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = lusid.ReferencePortfolioApi(api_client)
+    scope = 'scope_example' # str | The scope of the portfolio
 code = 'code_example' # str | The code of the portfolio
 constituents = lusid.UpsertReferencePortfolioConstituentsRequest() # UpsertReferencePortfolioConstituentsRequest | The constituents to upload to the portfolio
 
-try:
-    # Add constituents
-    api_response = api_instance.upsert_reference_portfolio_constituents(scope, code, constituents)
-    pprint(api_response)
-except ApiException as e:
-    print("Exception when calling ReferencePortfolioApi->upsert_reference_portfolio_constituents: %s\n" % e)
+    try:
+        # Add constituents
+        api_response = api_instance.upsert_reference_portfolio_constituents(scope, code, constituents)
+        pprint(api_response)
+    except ApiException as e:
+        print("Exception when calling ReferencePortfolioApi->upsert_reference_portfolio_constituents: %s\n" % e)
 ```
 
 ### Parameters

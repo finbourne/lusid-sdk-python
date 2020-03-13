@@ -3,7 +3,7 @@
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**values** | [**list[CorporateActionSource]**](CorporateActionSource.md) |  | 
+**values** | [**list[CorporateActionSource]**](CorporateActionSource.md) |  | [optional] 
 **href** | **str** |  | [optional] 
 **links** | [**list[Link]**](Link.md) |  | [optional] 
 

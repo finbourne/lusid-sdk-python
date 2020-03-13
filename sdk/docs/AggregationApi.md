@@ -7,6 +7,7 @@ Method | HTTP request | Description
 [**get_aggregation_by_group**](AggregationApi.md#get_aggregation_by_group) | **POST** /api/portfoliogroups/{scope}/{code}/$aggregate | [EXPERIMENTAL] Aggregate data in a portfolio group
 [**get_aggregation_by_portfolio**](AggregationApi.md#get_aggregation_by_portfolio) | **POST** /api/portfolios/{scope}/{code}/$aggregate | [EXPERIMENTAL] Aggregate data in a portfolio
 [**get_aggregation_by_result_set**](AggregationApi.md#get_aggregation_by_result_set) | **POST** /api/results/{scope}/{resultsKey}/$aggregate | [EXPERIMENTAL] Aggregate using result data
+[**get_aggregation_of_weighted_instruments**](AggregationApi.md#get_aggregation_of_weighted_instruments) | **POST** /api/portfolios/{scope}/$aggregateinlined | [EXPERIMENTAL] Aggregate data in an inlined portfolio
 [**get_nested_aggregation_by_group**](AggregationApi.md#get_nested_aggregation_by_group) | **POST** /api/portfoliogroups/{scope}/{code}/$aggregatenested | [EXPERIMENTAL] Aggregate data in a portfolio group, as nested
 
 
@@ -32,21 +33,24 @@ configuration.access_token = 'YOUR_ACCESS_TOKEN'
 
 # Defining host is optional and default to http://localhost/api
 configuration.host = "http://localhost/api"
-# Create an instance of the API class
-api_instance = lusid.AggregationApi(lusid.ApiClient(configuration))
-scope = 'scope_example' # str | The scope of the portfolio group
+
+# Enter a context with an instance of the API client
+with lusid.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = lusid.AggregationApi(api_client)
+    scope = 'scope_example' # str | The scope of the portfolio group
 code = 'code_example' # str | The code of the portfolio group
 sort_by = ['sort_by_example'] # list[str] | Optional. Order the results by these fields. Use use the '-' sign to denote descending order e.g. -MyFieldName (optional)
 start = 56 # int | Optional. When paginating, skip this number of results (optional)
 limit = 56 # int | Optional. When paginating, limit the number of returned results to this many. (optional)
 request = lusid.AggregationRequest() # AggregationRequest | The request specifying the parameters of the aggregation (optional)
 
-try:
-    # [EXPERIMENTAL] Aggregate data in a portfolio group
-    api_response = api_instance.get_aggregation_by_group(scope, code, sort_by=sort_by, start=start, limit=limit, request=request)
-    pprint(api_response)
-except ApiException as e:
-    print("Exception when calling AggregationApi->get_aggregation_by_group: %s\n" % e)
+    try:
+        # [EXPERIMENTAL] Aggregate data in a portfolio group
+        api_response = api_instance.get_aggregation_by_group(scope, code, sort_by=sort_by, start=start, limit=limit, request=request)
+        pprint(api_response)
+    except ApiException as e:
+        print("Exception when calling AggregationApi->get_aggregation_by_group: %s\n" % e)
 ```
 
 ### Parameters
@@ -104,21 +108,24 @@ configuration.access_token = 'YOUR_ACCESS_TOKEN'
 
 # Defining host is optional and default to http://localhost/api
 configuration.host = "http://localhost/api"
-# Create an instance of the API class
-api_instance = lusid.AggregationApi(lusid.ApiClient(configuration))
-scope = 'scope_example' # str | The scope of the portfolio
+
+# Enter a context with an instance of the API client
+with lusid.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = lusid.AggregationApi(api_client)
+    scope = 'scope_example' # str | The scope of the portfolio
 code = 'code_example' # str | The code of the portfolio
 sort_by = ['sort_by_example'] # list[str] | Optional. Order the results by these fields. Use use the '-' sign to denote descending order e.g. -MyFieldName (optional)
 start = 56 # int | Optional. When paginating, skip this number of results (optional)
 limit = 56 # int | Optional. When paginating, limit the number of returned results to this many. (optional)
 request = lusid.AggregationRequest() # AggregationRequest | The request specifying the parameters of the aggregation (optional)
 
-try:
-    # [EXPERIMENTAL] Aggregate data in a portfolio
-    api_response = api_instance.get_aggregation_by_portfolio(scope, code, sort_by=sort_by, start=start, limit=limit, request=request)
-    pprint(api_response)
-except ApiException as e:
-    print("Exception when calling AggregationApi->get_aggregation_by_portfolio: %s\n" % e)
+    try:
+        # [EXPERIMENTAL] Aggregate data in a portfolio
+        api_response = api_instance.get_aggregation_by_portfolio(scope, code, sort_by=sort_by, start=start, limit=limit, request=request)
+        pprint(api_response)
+    except ApiException as e:
+        print("Exception when calling AggregationApi->get_aggregation_by_portfolio: %s\n" % e)
 ```
 
 ### Parameters
@@ -176,21 +183,24 @@ configuration.access_token = 'YOUR_ACCESS_TOKEN'
 
 # Defining host is optional and default to http://localhost/api
 configuration.host = "http://localhost/api"
-# Create an instance of the API class
-api_instance = lusid.AggregationApi(lusid.ApiClient(configuration))
-scope = 'scope_example' # str | The scope of the Result data set
+
+# Enter a context with an instance of the API client
+with lusid.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = lusid.AggregationApi(api_client)
+    scope = 'scope_example' # str | The scope of the Result data set
 results_key = 'results_key_example' # str | The key of the Result data set
 sort_by = ['sort_by_example'] # list[str] | Optional. Order the results by these fields. Use use the '-' sign to denote descending order e.g. -MyFieldName (optional)
 start = 56 # int | Optional. When paginating, skip this number of results (optional)
 limit = 56 # int | Optional. When paginating, limit the number of returned results to this many. (optional)
 request = lusid.AggregationRequest() # AggregationRequest | The request specifying the parameters of the aggregation (optional)
 
-try:
-    # [EXPERIMENTAL] Aggregate using result data
-    api_response = api_instance.get_aggregation_by_result_set(scope, results_key, sort_by=sort_by, start=start, limit=limit, request=request)
-    pprint(api_response)
-except ApiException as e:
-    print("Exception when calling AggregationApi->get_aggregation_by_result_set: %s\n" % e)
+    try:
+        # [EXPERIMENTAL] Aggregate using result data
+        api_response = api_instance.get_aggregation_by_result_set(scope, results_key, sort_by=sort_by, start=start, limit=limit, request=request)
+        pprint(api_response)
+    except ApiException as e:
+        print("Exception when calling AggregationApi->get_aggregation_by_result_set: %s\n" % e)
 ```
 
 ### Parameters
@@ -203,6 +213,79 @@ Name | Type | Description  | Notes
  **start** | **int**| Optional. When paginating, skip this number of results | [optional] 
  **limit** | **int**| Optional. When paginating, limit the number of returned results to this many. | [optional] 
  **request** | [**AggregationRequest**](AggregationRequest.md)| The request specifying the parameters of the aggregation | [optional] 
+
+### Return type
+
+[**ListAggregationResponse**](ListAggregationResponse.md)
+
+### Authorization
+
+[oauth2](../README.md#oauth2)
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: text/plain, application/json, text/json
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | Success |  -  |
+**400** | The details of the input related failure |  -  |
+**0** | Error response |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **get_aggregation_of_weighted_instruments**
+> ListAggregationResponse get_aggregation_of_weighted_instruments(scope, sort_by=sort_by, start=start, limit=limit, inline_request=inline_request)
+
+[EXPERIMENTAL] Aggregate data in an inlined portfolio
+
+Aggregate data sourced from the portfolio that is defined by the weighted set of instruments passed to the request.
+
+### Example
+
+* OAuth Authentication (oauth2):
+```python
+from __future__ import print_function
+import time
+import lusid
+from lusid.rest import ApiException
+from pprint import pprint
+configuration = lusid.Configuration()
+# Configure OAuth2 access token for authorization: oauth2
+configuration.access_token = 'YOUR_ACCESS_TOKEN'
+
+# Defining host is optional and default to http://localhost/api
+configuration.host = "http://localhost/api"
+
+# Enter a context with an instance of the API client
+with lusid.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = lusid.AggregationApi(api_client)
+    scope = 'scope_example' # str | The scope of the instruments should that be required
+sort_by = ['sort_by_example'] # list[str] | Optional. Order the results by these fields. Use use the '-' sign to denote descending order e.g. -MyFieldName (optional)
+start = 56 # int | Optional. When paginating, skip this number of results (optional)
+limit = 56 # int | Optional. When paginating, limit the number of returned results to this many. (optional)
+inline_request = lusid.InlineAggregationRequest() # InlineAggregationRequest | The request specifying the parameters of the aggregation and the inlined set of instruments to aggregate over. (optional)
+
+    try:
+        # [EXPERIMENTAL] Aggregate data in an inlined portfolio
+        api_response = api_instance.get_aggregation_of_weighted_instruments(scope, sort_by=sort_by, start=start, limit=limit, inline_request=inline_request)
+        pprint(api_response)
+    except ApiException as e:
+        print("Exception when calling AggregationApi->get_aggregation_of_weighted_instruments: %s\n" % e)
+```
+
+### Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **scope** | **str**| The scope of the instruments should that be required | 
+ **sort_by** | [**list[str]**](str.md)| Optional. Order the results by these fields. Use use the &#39;-&#39; sign to denote descending order e.g. -MyFieldName | [optional] 
+ **start** | **int**| Optional. When paginating, skip this number of results | [optional] 
+ **limit** | **int**| Optional. When paginating, limit the number of returned results to this many. | [optional] 
+ **inline_request** | [**InlineAggregationRequest**](InlineAggregationRequest.md)| The request specifying the parameters of the aggregation and the inlined set of instruments to aggregate over. | [optional] 
 
 ### Return type
 
@@ -248,18 +331,21 @@ configuration.access_token = 'YOUR_ACCESS_TOKEN'
 
 # Defining host is optional and default to http://localhost/api
 configuration.host = "http://localhost/api"
-# Create an instance of the API class
-api_instance = lusid.AggregationApi(lusid.ApiClient(configuration))
-scope = 'scope_example' # str | The scope of the portfolio group
+
+# Enter a context with an instance of the API client
+with lusid.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = lusid.AggregationApi(api_client)
+    scope = 'scope_example' # str | The scope of the portfolio group
 code = 'code_example' # str | The code of the portfolio group
 request = lusid.AggregationRequest() # AggregationRequest | The request specifying the parameters of the aggregation (optional)
 
-try:
-    # [EXPERIMENTAL] Aggregate data in a portfolio group, as nested
-    api_response = api_instance.get_nested_aggregation_by_group(scope, code, request=request)
-    pprint(api_response)
-except ApiException as e:
-    print("Exception when calling AggregationApi->get_nested_aggregation_by_group: %s\n" % e)
+    try:
+        # [EXPERIMENTAL] Aggregate data in a portfolio group, as nested
+        api_response = api_instance.get_nested_aggregation_by_group(scope, code, request=request)
+        pprint(api_response)
+    except ApiException as e:
+        print("Exception when calling AggregationApi->get_nested_aggregation_by_group: %s\n" % e)
 ```
 
 ### Parameters

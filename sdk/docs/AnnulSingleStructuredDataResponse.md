@@ -1,5 +1,6 @@
 # AnnulSingleStructuredDataResponse
 
+The response to a request to annul (delete) a set of structured data from Lusid. This might have been for market data or some other structured entity.
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------

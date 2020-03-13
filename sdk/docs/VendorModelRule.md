@@ -1,5 +1,6 @@
 # VendorModelRule
 
+A rule that identifies the set of preferences to be used for a given library, model and instrument type.  There can be many such rules, though only the first found for a given combination would be used.
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------

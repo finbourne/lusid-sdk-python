@@ -9,7 +9,7 @@ Name | Type | Description | Notes
 **display_name** | **str** |  | 
 **description** | **str** |  | 
 **value_type** | **str** |  | 
-**acceptable_values** | **list[object]** |  | [optional] 
+**acceptable_values** | **list[str]** |  | [optional] 
 **unit_schema** | **str** |  | [optional] 
 **acceptable_units** | [**list[CreateUnitDefinition]**](CreateUnitDefinition.md) |  | [optional] 
 
