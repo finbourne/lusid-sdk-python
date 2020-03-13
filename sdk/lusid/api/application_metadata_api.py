@@ -109,7 +109,7 @@ class ApplicationMetadataApi(object):
         path_params = {}
 
         query_params = []
-        if 'version' in local_var_params:
+        if 'version' in local_var_params and local_var_params['version'] is not None:  # noqa: E501
             query_params.append(('version', local_var_params['version']))  # noqa: E501
 
         header_params = {}
@@ -121,7 +121,6 @@ class ApplicationMetadataApi(object):
         # HTTP header `Accept`
         header_params['Accept'] = self.api_client.select_header_accept(
             ['text/plain', 'application/json', 'text/json'])  # noqa: E501
-
 
         # Authentication setting
         auth_settings = ['oauth2']  # noqa: E501
@@ -227,7 +226,6 @@ class ApplicationMetadataApi(object):
         header_params['Accept'] = self.api_client.select_header_accept(
             ['text/plain', 'application/json', 'text/json'])  # noqa: E501
 
-
         # Authentication setting
         auth_settings = ['oauth2']  # noqa: E501
 
@@ -323,7 +321,7 @@ class ApplicationMetadataApi(object):
         path_params = {}
 
         query_params = []
-        if 'filter' in local_var_params:
+        if 'filter' in local_var_params and local_var_params['filter'] is not None:  # noqa: E501
             query_params.append(('filter', local_var_params['filter']))  # noqa: E501
 
         header_params = {}
@@ -335,7 +333,6 @@ class ApplicationMetadataApi(object):
         # HTTP header `Accept`
         header_params['Accept'] = self.api_client.select_header_accept(
             ['text/plain', 'application/json', 'text/json'])  # noqa: E501
-
 
         # Authentication setting
         auth_settings = ['oauth2']  # noqa: E501

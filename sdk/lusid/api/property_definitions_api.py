@@ -104,8 +104,8 @@ class PropertyDefinitionsApi(object):
             local_var_params[key] = val
         del local_var_params['kwargs']
         # verify the required parameter 'definition' is set
-        if ('definition' not in local_var_params or
-                local_var_params['definition'] is None):
+        if self.api_client.client_side_validation and ('definition' not in local_var_params or  # noqa: E501
+                                                        local_var_params['definition'] is None):  # noqa: E501
             raise ApiValueError("Missing the required parameter `definition` when calling `create_property_definition`")  # noqa: E501
 
         collection_formats = {}
@@ -125,7 +125,6 @@ class PropertyDefinitionsApi(object):
         # HTTP header `Accept`
         header_params['Accept'] = self.api_client.select_header_accept(
             ['text/plain', 'application/json', 'text/json'])  # noqa: E501
-
 
         # Authentication setting
         auth_settings = ['oauth2']  # noqa: E501
@@ -221,16 +220,16 @@ class PropertyDefinitionsApi(object):
             local_var_params[key] = val
         del local_var_params['kwargs']
         # verify the required parameter 'domain' is set
-        if ('domain' not in local_var_params or
-                local_var_params['domain'] is None):
+        if self.api_client.client_side_validation and ('domain' not in local_var_params or  # noqa: E501
+                                                        local_var_params['domain'] is None):  # noqa: E501
             raise ApiValueError("Missing the required parameter `domain` when calling `delete_property_definition`")  # noqa: E501
         # verify the required parameter 'scope' is set
-        if ('scope' not in local_var_params or
-                local_var_params['scope'] is None):
+        if self.api_client.client_side_validation and ('scope' not in local_var_params or  # noqa: E501
+                                                        local_var_params['scope'] is None):  # noqa: E501
             raise ApiValueError("Missing the required parameter `scope` when calling `delete_property_definition`")  # noqa: E501
         # verify the required parameter 'code' is set
-        if ('code' not in local_var_params or
-                local_var_params['code'] is None):
+        if self.api_client.client_side_validation and ('code' not in local_var_params or  # noqa: E501
+                                                        local_var_params['code'] is None):  # noqa: E501
             raise ApiValueError("Missing the required parameter `code` when calling `delete_property_definition`")  # noqa: E501
 
         collection_formats = {}
@@ -254,7 +253,6 @@ class PropertyDefinitionsApi(object):
         # HTTP header `Accept`
         header_params['Accept'] = self.api_client.select_header_accept(
             ['text/plain', 'application/json', 'text/json'])  # noqa: E501
-
 
         # Authentication setting
         auth_settings = ['oauth2']  # noqa: E501
@@ -350,8 +348,8 @@ class PropertyDefinitionsApi(object):
             local_var_params[key] = val
         del local_var_params['kwargs']
         # verify the required parameter 'property_keys' is set
-        if ('property_keys' not in local_var_params or
-                local_var_params['property_keys'] is None):
+        if self.api_client.client_side_validation and ('property_keys' not in local_var_params or  # noqa: E501
+                                                        local_var_params['property_keys'] is None):  # noqa: E501
             raise ApiValueError("Missing the required parameter `property_keys` when calling `get_multiple_property_definitions`")  # noqa: E501
 
         collection_formats = {}
@@ -359,11 +357,11 @@ class PropertyDefinitionsApi(object):
         path_params = {}
 
         query_params = []
-        if 'as_at' in local_var_params:
+        if 'as_at' in local_var_params and local_var_params['as_at'] is not None:  # noqa: E501
             query_params.append(('asAt', local_var_params['as_at']))  # noqa: E501
-        if 'filter' in local_var_params:
+        if 'filter' in local_var_params and local_var_params['filter'] is not None:  # noqa: E501
             query_params.append(('filter', local_var_params['filter']))  # noqa: E501
-        if 'property_keys' in local_var_params:
+        if 'property_keys' in local_var_params and local_var_params['property_keys'] is not None:  # noqa: E501
             query_params.append(('propertyKeys', local_var_params['property_keys']))  # noqa: E501
             collection_formats['propertyKeys'] = 'multi'  # noqa: E501
 
@@ -376,7 +374,6 @@ class PropertyDefinitionsApi(object):
         # HTTP header `Accept`
         header_params['Accept'] = self.api_client.select_header_accept(
             ['text/plain', 'application/json', 'text/json'])  # noqa: E501
-
 
         # Authentication setting
         auth_settings = ['oauth2']  # noqa: E501
@@ -474,16 +471,16 @@ class PropertyDefinitionsApi(object):
             local_var_params[key] = val
         del local_var_params['kwargs']
         # verify the required parameter 'domain' is set
-        if ('domain' not in local_var_params or
-                local_var_params['domain'] is None):
+        if self.api_client.client_side_validation and ('domain' not in local_var_params or  # noqa: E501
+                                                        local_var_params['domain'] is None):  # noqa: E501
             raise ApiValueError("Missing the required parameter `domain` when calling `get_property_definition`")  # noqa: E501
         # verify the required parameter 'scope' is set
-        if ('scope' not in local_var_params or
-                local_var_params['scope'] is None):
+        if self.api_client.client_side_validation and ('scope' not in local_var_params or  # noqa: E501
+                                                        local_var_params['scope'] is None):  # noqa: E501
             raise ApiValueError("Missing the required parameter `scope` when calling `get_property_definition`")  # noqa: E501
         # verify the required parameter 'code' is set
-        if ('code' not in local_var_params or
-                local_var_params['code'] is None):
+        if self.api_client.client_side_validation and ('code' not in local_var_params or  # noqa: E501
+                                                        local_var_params['code'] is None):  # noqa: E501
             raise ApiValueError("Missing the required parameter `code` when calling `get_property_definition`")  # noqa: E501
 
         collection_formats = {}
@@ -497,7 +494,7 @@ class PropertyDefinitionsApi(object):
             path_params['code'] = local_var_params['code']  # noqa: E501
 
         query_params = []
-        if 'as_at' in local_var_params:
+        if 'as_at' in local_var_params and local_var_params['as_at'] is not None:  # noqa: E501
             query_params.append(('asAt', local_var_params['as_at']))  # noqa: E501
 
         header_params = {}
@@ -509,7 +506,6 @@ class PropertyDefinitionsApi(object):
         # HTTP header `Accept`
         header_params['Accept'] = self.api_client.select_header_accept(
             ['text/plain', 'application/json', 'text/json'])  # noqa: E501
-
 
         # Authentication setting
         auth_settings = ['oauth2']  # noqa: E501
@@ -607,20 +603,20 @@ class PropertyDefinitionsApi(object):
             local_var_params[key] = val
         del local_var_params['kwargs']
         # verify the required parameter 'domain' is set
-        if ('domain' not in local_var_params or
-                local_var_params['domain'] is None):
+        if self.api_client.client_side_validation and ('domain' not in local_var_params or  # noqa: E501
+                                                        local_var_params['domain'] is None):  # noqa: E501
             raise ApiValueError("Missing the required parameter `domain` when calling `update_property_definition`")  # noqa: E501
         # verify the required parameter 'scope' is set
-        if ('scope' not in local_var_params or
-                local_var_params['scope'] is None):
+        if self.api_client.client_side_validation and ('scope' not in local_var_params or  # noqa: E501
+                                                        local_var_params['scope'] is None):  # noqa: E501
             raise ApiValueError("Missing the required parameter `scope` when calling `update_property_definition`")  # noqa: E501
         # verify the required parameter 'code' is set
-        if ('code' not in local_var_params or
-                local_var_params['code'] is None):
+        if self.api_client.client_side_validation and ('code' not in local_var_params or  # noqa: E501
+                                                        local_var_params['code'] is None):  # noqa: E501
             raise ApiValueError("Missing the required parameter `code` when calling `update_property_definition`")  # noqa: E501
         # verify the required parameter 'definition' is set
-        if ('definition' not in local_var_params or
-                local_var_params['definition'] is None):
+        if self.api_client.client_side_validation and ('definition' not in local_var_params or  # noqa: E501
+                                                        local_var_params['definition'] is None):  # noqa: E501
             raise ApiValueError("Missing the required parameter `definition` when calling `update_property_definition`")  # noqa: E501
 
         collection_formats = {}
@@ -646,7 +642,6 @@ class PropertyDefinitionsApi(object):
         # HTTP header `Accept`
         header_params['Accept'] = self.api_client.select_header_accept(
             ['text/plain', 'application/json', 'text/json'])  # noqa: E501
-
 
         # Authentication setting
         auth_settings = ['oauth2']  # noqa: E501

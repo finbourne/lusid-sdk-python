@@ -1,5 +1,6 @@
 # InstrumentMatch
 
+A collection of instrument search results
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------

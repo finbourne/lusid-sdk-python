@@ -106,12 +106,12 @@ class ReferencePortfolioApi(object):
             local_var_params[key] = val
         del local_var_params['kwargs']
         # verify the required parameter 'scope' is set
-        if ('scope' not in local_var_params or
-                local_var_params['scope'] is None):
+        if self.api_client.client_side_validation and ('scope' not in local_var_params or  # noqa: E501
+                                                        local_var_params['scope'] is None):  # noqa: E501
             raise ApiValueError("Missing the required parameter `scope` when calling `create_reference_portfolio`")  # noqa: E501
         # verify the required parameter 'reference_portfolio' is set
-        if ('reference_portfolio' not in local_var_params or
-                local_var_params['reference_portfolio'] is None):
+        if self.api_client.client_side_validation and ('reference_portfolio' not in local_var_params or  # noqa: E501
+                                                        local_var_params['reference_portfolio'] is None):  # noqa: E501
             raise ApiValueError("Missing the required parameter `reference_portfolio` when calling `create_reference_portfolio`")  # noqa: E501
 
         collection_formats = {}
@@ -133,7 +133,6 @@ class ReferencePortfolioApi(object):
         # HTTP header `Accept`
         header_params['Accept'] = self.api_client.select_header_accept(
             ['text/plain', 'application/json', 'text/json'])  # noqa: E501
-
 
         # Authentication setting
         auth_settings = ['oauth2']  # noqa: E501
@@ -233,12 +232,12 @@ class ReferencePortfolioApi(object):
             local_var_params[key] = val
         del local_var_params['kwargs']
         # verify the required parameter 'scope' is set
-        if ('scope' not in local_var_params or
-                local_var_params['scope'] is None):
+        if self.api_client.client_side_validation and ('scope' not in local_var_params or  # noqa: E501
+                                                        local_var_params['scope'] is None):  # noqa: E501
             raise ApiValueError("Missing the required parameter `scope` when calling `get_reference_portfolio_constituents`")  # noqa: E501
         # verify the required parameter 'code' is set
-        if ('code' not in local_var_params or
-                local_var_params['code'] is None):
+        if self.api_client.client_side_validation and ('code' not in local_var_params or  # noqa: E501
+                                                        local_var_params['code'] is None):  # noqa: E501
             raise ApiValueError("Missing the required parameter `code` when calling `get_reference_portfolio_constituents`")  # noqa: E501
 
         collection_formats = {}
@@ -250,11 +249,11 @@ class ReferencePortfolioApi(object):
             path_params['code'] = local_var_params['code']  # noqa: E501
 
         query_params = []
-        if 'effective_at' in local_var_params:
+        if 'effective_at' in local_var_params and local_var_params['effective_at'] is not None:  # noqa: E501
             query_params.append(('effectiveAt', local_var_params['effective_at']))  # noqa: E501
-        if 'as_at' in local_var_params:
+        if 'as_at' in local_var_params and local_var_params['as_at'] is not None:  # noqa: E501
             query_params.append(('asAt', local_var_params['as_at']))  # noqa: E501
-        if 'property_keys' in local_var_params:
+        if 'property_keys' in local_var_params and local_var_params['property_keys'] is not None:  # noqa: E501
             query_params.append(('propertyKeys', local_var_params['property_keys']))  # noqa: E501
             collection_formats['propertyKeys'] = 'multi'  # noqa: E501
 
@@ -267,7 +266,6 @@ class ReferencePortfolioApi(object):
         # HTTP header `Accept`
         header_params['Accept'] = self.api_client.select_header_accept(
             ['text/plain', 'application/json', 'text/json'])  # noqa: E501
-
 
         # Authentication setting
         auth_settings = ['oauth2']  # noqa: E501
@@ -367,20 +365,20 @@ class ReferencePortfolioApi(object):
             local_var_params[key] = val
         del local_var_params['kwargs']
         # verify the required parameter 'scope' is set
-        if ('scope' not in local_var_params or
-                local_var_params['scope'] is None):
+        if self.api_client.client_side_validation and ('scope' not in local_var_params or  # noqa: E501
+                                                        local_var_params['scope'] is None):  # noqa: E501
             raise ApiValueError("Missing the required parameter `scope` when calling `list_constituents_adjustments`")  # noqa: E501
         # verify the required parameter 'code' is set
-        if ('code' not in local_var_params or
-                local_var_params['code'] is None):
+        if self.api_client.client_side_validation and ('code' not in local_var_params or  # noqa: E501
+                                                        local_var_params['code'] is None):  # noqa: E501
             raise ApiValueError("Missing the required parameter `code` when calling `list_constituents_adjustments`")  # noqa: E501
         # verify the required parameter 'from_effective_at' is set
-        if ('from_effective_at' not in local_var_params or
-                local_var_params['from_effective_at'] is None):
+        if self.api_client.client_side_validation and ('from_effective_at' not in local_var_params or  # noqa: E501
+                                                        local_var_params['from_effective_at'] is None):  # noqa: E501
             raise ApiValueError("Missing the required parameter `from_effective_at` when calling `list_constituents_adjustments`")  # noqa: E501
         # verify the required parameter 'to_effective_at' is set
-        if ('to_effective_at' not in local_var_params or
-                local_var_params['to_effective_at'] is None):
+        if self.api_client.client_side_validation and ('to_effective_at' not in local_var_params or  # noqa: E501
+                                                        local_var_params['to_effective_at'] is None):  # noqa: E501
             raise ApiValueError("Missing the required parameter `to_effective_at` when calling `list_constituents_adjustments`")  # noqa: E501
 
         collection_formats = {}
@@ -392,11 +390,11 @@ class ReferencePortfolioApi(object):
             path_params['code'] = local_var_params['code']  # noqa: E501
 
         query_params = []
-        if 'from_effective_at' in local_var_params:
+        if 'from_effective_at' in local_var_params and local_var_params['from_effective_at'] is not None:  # noqa: E501
             query_params.append(('fromEffectiveAt', local_var_params['from_effective_at']))  # noqa: E501
-        if 'to_effective_at' in local_var_params:
+        if 'to_effective_at' in local_var_params and local_var_params['to_effective_at'] is not None:  # noqa: E501
             query_params.append(('toEffectiveAt', local_var_params['to_effective_at']))  # noqa: E501
-        if 'as_at_time' in local_var_params:
+        if 'as_at_time' in local_var_params and local_var_params['as_at_time'] is not None:  # noqa: E501
             query_params.append(('asAtTime', local_var_params['as_at_time']))  # noqa: E501
 
         header_params = {}
@@ -408,7 +406,6 @@ class ReferencePortfolioApi(object):
         # HTTP header `Accept`
         header_params['Accept'] = self.api_client.select_header_accept(
             ['text/plain', 'application/json', 'text/json'])  # noqa: E501
-
 
         # Authentication setting
         auth_settings = ['oauth2']  # noqa: E501
@@ -504,16 +501,16 @@ class ReferencePortfolioApi(object):
             local_var_params[key] = val
         del local_var_params['kwargs']
         # verify the required parameter 'scope' is set
-        if ('scope' not in local_var_params or
-                local_var_params['scope'] is None):
+        if self.api_client.client_side_validation and ('scope' not in local_var_params or  # noqa: E501
+                                                        local_var_params['scope'] is None):  # noqa: E501
             raise ApiValueError("Missing the required parameter `scope` when calling `upsert_reference_portfolio_constituents`")  # noqa: E501
         # verify the required parameter 'code' is set
-        if ('code' not in local_var_params or
-                local_var_params['code'] is None):
+        if self.api_client.client_side_validation and ('code' not in local_var_params or  # noqa: E501
+                                                        local_var_params['code'] is None):  # noqa: E501
             raise ApiValueError("Missing the required parameter `code` when calling `upsert_reference_portfolio_constituents`")  # noqa: E501
         # verify the required parameter 'constituents' is set
-        if ('constituents' not in local_var_params or
-                local_var_params['constituents'] is None):
+        if self.api_client.client_side_validation and ('constituents' not in local_var_params or  # noqa: E501
+                                                        local_var_params['constituents'] is None):  # noqa: E501
             raise ApiValueError("Missing the required parameter `constituents` when calling `upsert_reference_portfolio_constituents`")  # noqa: E501
 
         collection_formats = {}
@@ -537,7 +534,6 @@ class ReferencePortfolioApi(object):
         # HTTP header `Accept`
         header_params['Accept'] = self.api_client.select_header_accept(
             ['text/plain', 'application/json', 'text/json'])  # noqa: E501
-
 
         # Authentication setting
         auth_settings = ['oauth2']  # noqa: E501

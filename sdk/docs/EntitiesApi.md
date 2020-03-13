@@ -29,18 +29,21 @@ configuration.access_token = 'YOUR_ACCESS_TOKEN'
 
 # Defining host is optional and default to http://localhost/api
 configuration.host = "http://localhost/api"
-# Create an instance of the API class
-api_instance = lusid.EntitiesApi(lusid.ApiClient(configuration))
-scope = 'scope_example' # str | The scope
+
+# Enter a context with an instance of the API client
+with lusid.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = lusid.EntitiesApi(api_client)
+    scope = 'scope_example' # str | The scope
 effective_at = 'effective_at_example' # str | The effective date of the origin.
 as_at = '2013-10-20T19:20:30+01:00' # datetime | The as-at date of the origin. (optional)
 
-try:
-    # [BETA] Get the next change to each portfolio in a scope.
-    api_response = api_instance.get_portfolio_changes(scope, effective_at, as_at=as_at)
-    pprint(api_response)
-except ApiException as e:
-    print("Exception when calling EntitiesApi->get_portfolio_changes: %s\n" % e)
+    try:
+        # [BETA] Get the next change to each portfolio in a scope.
+        api_response = api_instance.get_portfolio_changes(scope, effective_at, as_at=as_at)
+        pprint(api_response)
+    except ApiException as e:
+        print("Exception when calling EntitiesApi->get_portfolio_changes: %s\n" % e)
 ```
 
 ### Parameters

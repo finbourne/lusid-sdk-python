@@ -30,20 +30,23 @@ configuration.access_token = 'YOUR_ACCESS_TOKEN'
 
 # Defining host is optional and default to http://localhost/api
 configuration.host = "http://localhost/api"
-# Create an instance of the API class
-api_instance = lusid.ResultsApi(lusid.ApiClient(configuration))
-entity_scope = 'entity_scope_example' # str | The scope of the data or entity being stored
+
+# Enter a context with an instance of the API client
+with lusid.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = lusid.ResultsApi(api_client)
+    entity_scope = 'entity_scope_example' # str | The scope of the data or entity being stored
 entity_code = 'entity_code_example' # str | The identifier for the data or results entity being stored
 calculation_scope = 'calculation_scope_example' # str | The identifying scope for the calculation that produced the result
 calculation_code = 'calculation_code_example' # str | The identifying calculation name for the results
 effective_at = '2013-10-20T19:20:30+01:00' # datetime | The market date for which the data is stored
 
-try:
-    # [EXPERIMENTAL] Retrieve a page of results all keyed by the provided parameters. The result store is not bi-temporal; a single date  addressed the market effectiveAt.
-    api_response = api_instance.get_results(entity_scope, entity_code, calculation_scope, calculation_code, effective_at)
-    pprint(api_response)
-except ApiException as e:
-    print("Exception when calling ResultsApi->get_results: %s\n" % e)
+    try:
+        # [EXPERIMENTAL] Retrieve a page of results all keyed by the provided parameters. The result store is not bi-temporal; a single date  addressed the market effectiveAt.
+        api_response = api_instance.get_results(entity_scope, entity_code, calculation_scope, calculation_code, effective_at)
+        pprint(api_response)
+    except ApiException as e:
+        print("Exception when calling ResultsApi->get_results: %s\n" % e)
 ```
 
 ### Parameters
@@ -100,16 +103,19 @@ configuration.access_token = 'YOUR_ACCESS_TOKEN'
 
 # Defining host is optional and default to http://localhost/api
 configuration.host = "http://localhost/api"
-# Create an instance of the API class
-api_instance = lusid.ResultsApi(lusid.ApiClient(configuration))
-request = lusid.CreateResults() # CreateResults | The details of what to upsert (optional)
 
-try:
-    # [EXPERIMENTAL] Upsert results
-    api_response = api_instance.upsert_results(request=request)
-    pprint(api_response)
-except ApiException as e:
-    print("Exception when calling ResultsApi->upsert_results: %s\n" % e)
+# Enter a context with an instance of the API client
+with lusid.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = lusid.ResultsApi(api_client)
+    request = lusid.CreateResults() # CreateResults | The details of what to upsert (optional)
+
+    try:
+        # [EXPERIMENTAL] Upsert results
+        api_response = api_instance.upsert_results(request=request)
+        pprint(api_response)
+    except ApiException as e:
+        print("Exception when calling ResultsApi->upsert_results: %s\n" % e)
 ```
 
 ### Parameters

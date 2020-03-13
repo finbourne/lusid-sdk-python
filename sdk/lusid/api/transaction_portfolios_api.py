@@ -110,20 +110,20 @@ class TransactionPortfoliosApi(object):
             local_var_params[key] = val
         del local_var_params['kwargs']
         # verify the required parameter 'scope' is set
-        if ('scope' not in local_var_params or
-                local_var_params['scope'] is None):
+        if self.api_client.client_side_validation and ('scope' not in local_var_params or  # noqa: E501
+                                                        local_var_params['scope'] is None):  # noqa: E501
             raise ApiValueError("Missing the required parameter `scope` when calling `adjust_holdings`")  # noqa: E501
         # verify the required parameter 'code' is set
-        if ('code' not in local_var_params or
-                local_var_params['code'] is None):
+        if self.api_client.client_side_validation and ('code' not in local_var_params or  # noqa: E501
+                                                        local_var_params['code'] is None):  # noqa: E501
             raise ApiValueError("Missing the required parameter `code` when calling `adjust_holdings`")  # noqa: E501
         # verify the required parameter 'effective_at' is set
-        if ('effective_at' not in local_var_params or
-                local_var_params['effective_at'] is None):
+        if self.api_client.client_side_validation and ('effective_at' not in local_var_params or  # noqa: E501
+                                                        local_var_params['effective_at'] is None):  # noqa: E501
             raise ApiValueError("Missing the required parameter `effective_at` when calling `adjust_holdings`")  # noqa: E501
         # verify the required parameter 'holding_adjustments' is set
-        if ('holding_adjustments' not in local_var_params or
-                local_var_params['holding_adjustments'] is None):
+        if self.api_client.client_side_validation and ('holding_adjustments' not in local_var_params or  # noqa: E501
+                                                        local_var_params['holding_adjustments'] is None):  # noqa: E501
             raise ApiValueError("Missing the required parameter `holding_adjustments` when calling `adjust_holdings`")  # noqa: E501
 
         collection_formats = {}
@@ -135,7 +135,7 @@ class TransactionPortfoliosApi(object):
             path_params['code'] = local_var_params['code']  # noqa: E501
 
         query_params = []
-        if 'effective_at' in local_var_params:
+        if 'effective_at' in local_var_params and local_var_params['effective_at'] is not None:  # noqa: E501
             query_params.append(('effectiveAt', local_var_params['effective_at']))  # noqa: E501
 
         header_params = {}
@@ -149,7 +149,6 @@ class TransactionPortfoliosApi(object):
         # HTTP header `Accept`
         header_params['Accept'] = self.api_client.select_header_accept(
             ['text/plain', 'application/json', 'text/json'])  # noqa: E501
-
 
         # Authentication setting
         auth_settings = ['oauth2']  # noqa: E501
@@ -251,16 +250,16 @@ class TransactionPortfoliosApi(object):
             local_var_params[key] = val
         del local_var_params['kwargs']
         # verify the required parameter 'scope' is set
-        if ('scope' not in local_var_params or
-                local_var_params['scope'] is None):
+        if self.api_client.client_side_validation and ('scope' not in local_var_params or  # noqa: E501
+                                                        local_var_params['scope'] is None):  # noqa: E501
             raise ApiValueError("Missing the required parameter `scope` when calling `build_transactions`")  # noqa: E501
         # verify the required parameter 'code' is set
-        if ('code' not in local_var_params or
-                local_var_params['code'] is None):
+        if self.api_client.client_side_validation and ('code' not in local_var_params or  # noqa: E501
+                                                        local_var_params['code'] is None):  # noqa: E501
             raise ApiValueError("Missing the required parameter `code` when calling `build_transactions`")  # noqa: E501
         # verify the required parameter 'query_parameters' is set
-        if ('query_parameters' not in local_var_params or
-                local_var_params['query_parameters'] is None):
+        if self.api_client.client_side_validation and ('query_parameters' not in local_var_params or  # noqa: E501
+                                                        local_var_params['query_parameters'] is None):  # noqa: E501
             raise ApiValueError("Missing the required parameter `query_parameters` when calling `build_transactions`")  # noqa: E501
 
         collection_formats = {}
@@ -272,11 +271,11 @@ class TransactionPortfoliosApi(object):
             path_params['code'] = local_var_params['code']  # noqa: E501
 
         query_params = []
-        if 'as_at' in local_var_params:
+        if 'as_at' in local_var_params and local_var_params['as_at'] is not None:  # noqa: E501
             query_params.append(('asAt', local_var_params['as_at']))  # noqa: E501
-        if 'filter' in local_var_params:
+        if 'filter' in local_var_params and local_var_params['filter'] is not None:  # noqa: E501
             query_params.append(('filter', local_var_params['filter']))  # noqa: E501
-        if 'property_keys' in local_var_params:
+        if 'property_keys' in local_var_params and local_var_params['property_keys'] is not None:  # noqa: E501
             query_params.append(('propertyKeys', local_var_params['property_keys']))  # noqa: E501
             collection_formats['propertyKeys'] = 'multi'  # noqa: E501
 
@@ -291,7 +290,6 @@ class TransactionPortfoliosApi(object):
         # HTTP header `Accept`
         header_params['Accept'] = self.api_client.select_header_accept(
             ['text/plain', 'application/json', 'text/json'])  # noqa: E501
-
 
         # Authentication setting
         auth_settings = ['oauth2']  # noqa: E501
@@ -387,16 +385,16 @@ class TransactionPortfoliosApi(object):
             local_var_params[key] = val
         del local_var_params['kwargs']
         # verify the required parameter 'scope' is set
-        if ('scope' not in local_var_params or
-                local_var_params['scope'] is None):
+        if self.api_client.client_side_validation and ('scope' not in local_var_params or  # noqa: E501
+                                                        local_var_params['scope'] is None):  # noqa: E501
             raise ApiValueError("Missing the required parameter `scope` when calling `cancel_adjust_holdings`")  # noqa: E501
         # verify the required parameter 'code' is set
-        if ('code' not in local_var_params or
-                local_var_params['code'] is None):
+        if self.api_client.client_side_validation and ('code' not in local_var_params or  # noqa: E501
+                                                        local_var_params['code'] is None):  # noqa: E501
             raise ApiValueError("Missing the required parameter `code` when calling `cancel_adjust_holdings`")  # noqa: E501
         # verify the required parameter 'effective_at' is set
-        if ('effective_at' not in local_var_params or
-                local_var_params['effective_at'] is None):
+        if self.api_client.client_side_validation and ('effective_at' not in local_var_params or  # noqa: E501
+                                                        local_var_params['effective_at'] is None):  # noqa: E501
             raise ApiValueError("Missing the required parameter `effective_at` when calling `cancel_adjust_holdings`")  # noqa: E501
 
         collection_formats = {}
@@ -408,7 +406,7 @@ class TransactionPortfoliosApi(object):
             path_params['code'] = local_var_params['code']  # noqa: E501
 
         query_params = []
-        if 'effective_at' in local_var_params:
+        if 'effective_at' in local_var_params and local_var_params['effective_at'] is not None:  # noqa: E501
             query_params.append(('effectiveAt', local_var_params['effective_at']))  # noqa: E501
 
         header_params = {}
@@ -420,7 +418,6 @@ class TransactionPortfoliosApi(object):
         # HTTP header `Accept`
         header_params['Accept'] = self.api_client.select_header_accept(
             ['text/plain', 'application/json', 'text/json'])  # noqa: E501
-
 
         # Authentication setting
         auth_settings = ['oauth2']  # noqa: E501
@@ -516,16 +513,16 @@ class TransactionPortfoliosApi(object):
             local_var_params[key] = val
         del local_var_params['kwargs']
         # verify the required parameter 'scope' is set
-        if ('scope' not in local_var_params or
-                local_var_params['scope'] is None):
+        if self.api_client.client_side_validation and ('scope' not in local_var_params or  # noqa: E501
+                                                        local_var_params['scope'] is None):  # noqa: E501
             raise ApiValueError("Missing the required parameter `scope` when calling `cancel_executions`")  # noqa: E501
         # verify the required parameter 'code' is set
-        if ('code' not in local_var_params or
-                local_var_params['code'] is None):
+        if self.api_client.client_side_validation and ('code' not in local_var_params or  # noqa: E501
+                                                        local_var_params['code'] is None):  # noqa: E501
             raise ApiValueError("Missing the required parameter `code` when calling `cancel_executions`")  # noqa: E501
         # verify the required parameter 'execution_ids' is set
-        if ('execution_ids' not in local_var_params or
-                local_var_params['execution_ids'] is None):
+        if self.api_client.client_side_validation and ('execution_ids' not in local_var_params or  # noqa: E501
+                                                        local_var_params['execution_ids'] is None):  # noqa: E501
             raise ApiValueError("Missing the required parameter `execution_ids` when calling `cancel_executions`")  # noqa: E501
 
         collection_formats = {}
@@ -537,7 +534,7 @@ class TransactionPortfoliosApi(object):
             path_params['code'] = local_var_params['code']  # noqa: E501
 
         query_params = []
-        if 'execution_ids' in local_var_params:
+        if 'execution_ids' in local_var_params and local_var_params['execution_ids'] is not None:  # noqa: E501
             query_params.append(('executionIds', local_var_params['execution_ids']))  # noqa: E501
             collection_formats['executionIds'] = 'multi'  # noqa: E501
 
@@ -550,7 +547,6 @@ class TransactionPortfoliosApi(object):
         # HTTP header `Accept`
         header_params['Accept'] = self.api_client.select_header_accept(
             ['text/plain', 'application/json', 'text/json'])  # noqa: E501
-
 
         # Authentication setting
         auth_settings = ['oauth2']  # noqa: E501
@@ -646,16 +642,16 @@ class TransactionPortfoliosApi(object):
             local_var_params[key] = val
         del local_var_params['kwargs']
         # verify the required parameter 'scope' is set
-        if ('scope' not in local_var_params or
-                local_var_params['scope'] is None):
+        if self.api_client.client_side_validation and ('scope' not in local_var_params or  # noqa: E501
+                                                        local_var_params['scope'] is None):  # noqa: E501
             raise ApiValueError("Missing the required parameter `scope` when calling `cancel_transactions`")  # noqa: E501
         # verify the required parameter 'code' is set
-        if ('code' not in local_var_params or
-                local_var_params['code'] is None):
+        if self.api_client.client_side_validation and ('code' not in local_var_params or  # noqa: E501
+                                                        local_var_params['code'] is None):  # noqa: E501
             raise ApiValueError("Missing the required parameter `code` when calling `cancel_transactions`")  # noqa: E501
         # verify the required parameter 'transaction_ids' is set
-        if ('transaction_ids' not in local_var_params or
-                local_var_params['transaction_ids'] is None):
+        if self.api_client.client_side_validation and ('transaction_ids' not in local_var_params or  # noqa: E501
+                                                        local_var_params['transaction_ids'] is None):  # noqa: E501
             raise ApiValueError("Missing the required parameter `transaction_ids` when calling `cancel_transactions`")  # noqa: E501
 
         collection_formats = {}
@@ -667,7 +663,7 @@ class TransactionPortfoliosApi(object):
             path_params['code'] = local_var_params['code']  # noqa: E501
 
         query_params = []
-        if 'transaction_ids' in local_var_params:
+        if 'transaction_ids' in local_var_params and local_var_params['transaction_ids'] is not None:  # noqa: E501
             query_params.append(('transactionIds', local_var_params['transaction_ids']))  # noqa: E501
             collection_formats['transactionIds'] = 'multi'  # noqa: E501
 
@@ -680,7 +676,6 @@ class TransactionPortfoliosApi(object):
         # HTTP header `Accept`
         header_params['Accept'] = self.api_client.select_header_accept(
             ['text/plain', 'application/json', 'text/json'])  # noqa: E501
-
 
         # Authentication setting
         auth_settings = ['oauth2']  # noqa: E501
@@ -774,12 +769,12 @@ class TransactionPortfoliosApi(object):
             local_var_params[key] = val
         del local_var_params['kwargs']
         # verify the required parameter 'scope' is set
-        if ('scope' not in local_var_params or
-                local_var_params['scope'] is None):
+        if self.api_client.client_side_validation and ('scope' not in local_var_params or  # noqa: E501
+                                                        local_var_params['scope'] is None):  # noqa: E501
             raise ApiValueError("Missing the required parameter `scope` when calling `create_portfolio`")  # noqa: E501
         # verify the required parameter 'transaction_portfolio' is set
-        if ('transaction_portfolio' not in local_var_params or
-                local_var_params['transaction_portfolio'] is None):
+        if self.api_client.client_side_validation and ('transaction_portfolio' not in local_var_params or  # noqa: E501
+                                                        local_var_params['transaction_portfolio'] is None):  # noqa: E501
             raise ApiValueError("Missing the required parameter `transaction_portfolio` when calling `create_portfolio`")  # noqa: E501
 
         collection_formats = {}
@@ -801,7 +796,6 @@ class TransactionPortfoliosApi(object):
         # HTTP header `Accept`
         header_params['Accept'] = self.api_client.select_header_accept(
             ['text/plain', 'application/json', 'text/json'])  # noqa: E501
-
 
         # Authentication setting
         auth_settings = ['oauth2']  # noqa: E501
@@ -899,20 +893,20 @@ class TransactionPortfoliosApi(object):
             local_var_params[key] = val
         del local_var_params['kwargs']
         # verify the required parameter 'scope' is set
-        if ('scope' not in local_var_params or
-                local_var_params['scope'] is None):
+        if self.api_client.client_side_validation and ('scope' not in local_var_params or  # noqa: E501
+                                                        local_var_params['scope'] is None):  # noqa: E501
             raise ApiValueError("Missing the required parameter `scope` when calling `delete_properties_from_transaction`")  # noqa: E501
         # verify the required parameter 'code' is set
-        if ('code' not in local_var_params or
-                local_var_params['code'] is None):
+        if self.api_client.client_side_validation and ('code' not in local_var_params or  # noqa: E501
+                                                        local_var_params['code'] is None):  # noqa: E501
             raise ApiValueError("Missing the required parameter `code` when calling `delete_properties_from_transaction`")  # noqa: E501
         # verify the required parameter 'transaction_id' is set
-        if ('transaction_id' not in local_var_params or
-                local_var_params['transaction_id'] is None):
+        if self.api_client.client_side_validation and ('transaction_id' not in local_var_params or  # noqa: E501
+                                                        local_var_params['transaction_id'] is None):  # noqa: E501
             raise ApiValueError("Missing the required parameter `transaction_id` when calling `delete_properties_from_transaction`")  # noqa: E501
         # verify the required parameter 'property_keys' is set
-        if ('property_keys' not in local_var_params or
-                local_var_params['property_keys'] is None):
+        if self.api_client.client_side_validation and ('property_keys' not in local_var_params or  # noqa: E501
+                                                        local_var_params['property_keys'] is None):  # noqa: E501
             raise ApiValueError("Missing the required parameter `property_keys` when calling `delete_properties_from_transaction`")  # noqa: E501
 
         collection_formats = {}
@@ -926,7 +920,7 @@ class TransactionPortfoliosApi(object):
             path_params['transactionId'] = local_var_params['transaction_id']  # noqa: E501
 
         query_params = []
-        if 'property_keys' in local_var_params:
+        if 'property_keys' in local_var_params and local_var_params['property_keys'] is not None:  # noqa: E501
             query_params.append(('propertyKeys', local_var_params['property_keys']))  # noqa: E501
             collection_formats['propertyKeys'] = 'multi'  # noqa: E501
 
@@ -939,7 +933,6 @@ class TransactionPortfoliosApi(object):
         # HTTP header `Accept`
         header_params['Accept'] = self.api_client.select_header_accept(
             ['text/plain', 'application/json', 'text/json'])  # noqa: E501
-
 
         # Authentication setting
         auth_settings = ['oauth2']  # noqa: E501
@@ -1037,12 +1030,12 @@ class TransactionPortfoliosApi(object):
             local_var_params[key] = val
         del local_var_params['kwargs']
         # verify the required parameter 'scope' is set
-        if ('scope' not in local_var_params or
-                local_var_params['scope'] is None):
+        if self.api_client.client_side_validation and ('scope' not in local_var_params or  # noqa: E501
+                                                        local_var_params['scope'] is None):  # noqa: E501
             raise ApiValueError("Missing the required parameter `scope` when calling `get_details`")  # noqa: E501
         # verify the required parameter 'code' is set
-        if ('code' not in local_var_params or
-                local_var_params['code'] is None):
+        if self.api_client.client_side_validation and ('code' not in local_var_params or  # noqa: E501
+                                                        local_var_params['code'] is None):  # noqa: E501
             raise ApiValueError("Missing the required parameter `code` when calling `get_details`")  # noqa: E501
 
         collection_formats = {}
@@ -1054,9 +1047,9 @@ class TransactionPortfoliosApi(object):
             path_params['code'] = local_var_params['code']  # noqa: E501
 
         query_params = []
-        if 'effective_at' in local_var_params:
+        if 'effective_at' in local_var_params and local_var_params['effective_at'] is not None:  # noqa: E501
             query_params.append(('effectiveAt', local_var_params['effective_at']))  # noqa: E501
-        if 'as_at' in local_var_params:
+        if 'as_at' in local_var_params and local_var_params['as_at'] is not None:  # noqa: E501
             query_params.append(('asAt', local_var_params['as_at']))  # noqa: E501
 
         header_params = {}
@@ -1068,7 +1061,6 @@ class TransactionPortfoliosApi(object):
         # HTTP header `Accept`
         header_params['Accept'] = self.api_client.select_header_accept(
             ['text/plain', 'application/json', 'text/json'])  # noqa: E501
-
 
         # Authentication setting
         auth_settings = ['oauth2']  # noqa: E501
@@ -1172,12 +1164,12 @@ class TransactionPortfoliosApi(object):
             local_var_params[key] = val
         del local_var_params['kwargs']
         # verify the required parameter 'scope' is set
-        if ('scope' not in local_var_params or
-                local_var_params['scope'] is None):
+        if self.api_client.client_side_validation and ('scope' not in local_var_params or  # noqa: E501
+                                                        local_var_params['scope'] is None):  # noqa: E501
             raise ApiValueError("Missing the required parameter `scope` when calling `get_holdings`")  # noqa: E501
         # verify the required parameter 'code' is set
-        if ('code' not in local_var_params or
-                local_var_params['code'] is None):
+        if self.api_client.client_side_validation and ('code' not in local_var_params or  # noqa: E501
+                                                        local_var_params['code'] is None):  # noqa: E501
             raise ApiValueError("Missing the required parameter `code` when calling `get_holdings`")  # noqa: E501
 
         collection_formats = {}
@@ -1189,16 +1181,16 @@ class TransactionPortfoliosApi(object):
             path_params['code'] = local_var_params['code']  # noqa: E501
 
         query_params = []
-        if 'effective_at' in local_var_params:
+        if 'effective_at' in local_var_params and local_var_params['effective_at'] is not None:  # noqa: E501
             query_params.append(('effectiveAt', local_var_params['effective_at']))  # noqa: E501
-        if 'as_at' in local_var_params:
+        if 'as_at' in local_var_params and local_var_params['as_at'] is not None:  # noqa: E501
             query_params.append(('asAt', local_var_params['as_at']))  # noqa: E501
-        if 'filter' in local_var_params:
+        if 'filter' in local_var_params and local_var_params['filter'] is not None:  # noqa: E501
             query_params.append(('filter', local_var_params['filter']))  # noqa: E501
-        if 'property_keys' in local_var_params:
+        if 'property_keys' in local_var_params and local_var_params['property_keys'] is not None:  # noqa: E501
             query_params.append(('propertyKeys', local_var_params['property_keys']))  # noqa: E501
             collection_formats['propertyKeys'] = 'multi'  # noqa: E501
-        if 'by_taxlots' in local_var_params:
+        if 'by_taxlots' in local_var_params and local_var_params['by_taxlots'] is not None:  # noqa: E501
             query_params.append(('byTaxlots', local_var_params['by_taxlots']))  # noqa: E501
 
         header_params = {}
@@ -1210,7 +1202,6 @@ class TransactionPortfoliosApi(object):
         # HTTP header `Accept`
         header_params['Accept'] = self.api_client.select_header_accept(
             ['text/plain', 'application/json', 'text/json'])  # noqa: E501
-
 
         # Authentication setting
         auth_settings = ['oauth2']  # noqa: E501
@@ -1308,16 +1299,16 @@ class TransactionPortfoliosApi(object):
             local_var_params[key] = val
         del local_var_params['kwargs']
         # verify the required parameter 'scope' is set
-        if ('scope' not in local_var_params or
-                local_var_params['scope'] is None):
+        if self.api_client.client_side_validation and ('scope' not in local_var_params or  # noqa: E501
+                                                        local_var_params['scope'] is None):  # noqa: E501
             raise ApiValueError("Missing the required parameter `scope` when calling `get_holdings_adjustment`")  # noqa: E501
         # verify the required parameter 'code' is set
-        if ('code' not in local_var_params or
-                local_var_params['code'] is None):
+        if self.api_client.client_side_validation and ('code' not in local_var_params or  # noqa: E501
+                                                        local_var_params['code'] is None):  # noqa: E501
             raise ApiValueError("Missing the required parameter `code` when calling `get_holdings_adjustment`")  # noqa: E501
         # verify the required parameter 'effective_at' is set
-        if ('effective_at' not in local_var_params or
-                local_var_params['effective_at'] is None):
+        if self.api_client.client_side_validation and ('effective_at' not in local_var_params or  # noqa: E501
+                                                        local_var_params['effective_at'] is None):  # noqa: E501
             raise ApiValueError("Missing the required parameter `effective_at` when calling `get_holdings_adjustment`")  # noqa: E501
 
         collection_formats = {}
@@ -1331,7 +1322,7 @@ class TransactionPortfoliosApi(object):
             path_params['effectiveAt'] = local_var_params['effective_at']  # noqa: E501
 
         query_params = []
-        if 'as_at' in local_var_params:
+        if 'as_at' in local_var_params and local_var_params['as_at'] is not None:  # noqa: E501
             query_params.append(('asAt', local_var_params['as_at']))  # noqa: E501
 
         header_params = {}
@@ -1343,7 +1334,6 @@ class TransactionPortfoliosApi(object):
         # HTTP header `Accept`
         header_params['Accept'] = self.api_client.select_header_accept(
             ['text/plain', 'application/json', 'text/json'])  # noqa: E501
-
 
         # Authentication setting
         auth_settings = ['oauth2']  # noqa: E501
@@ -1447,12 +1437,12 @@ class TransactionPortfoliosApi(object):
             local_var_params[key] = val
         del local_var_params['kwargs']
         # verify the required parameter 'scope' is set
-        if ('scope' not in local_var_params or
-                local_var_params['scope'] is None):
+        if self.api_client.client_side_validation and ('scope' not in local_var_params or  # noqa: E501
+                                                        local_var_params['scope'] is None):  # noqa: E501
             raise ApiValueError("Missing the required parameter `scope` when calling `get_transactions`")  # noqa: E501
         # verify the required parameter 'code' is set
-        if ('code' not in local_var_params or
-                local_var_params['code'] is None):
+        if self.api_client.client_side_validation and ('code' not in local_var_params or  # noqa: E501
+                                                        local_var_params['code'] is None):  # noqa: E501
             raise ApiValueError("Missing the required parameter `code` when calling `get_transactions`")  # noqa: E501
 
         collection_formats = {}
@@ -1464,15 +1454,15 @@ class TransactionPortfoliosApi(object):
             path_params['code'] = local_var_params['code']  # noqa: E501
 
         query_params = []
-        if 'from_transaction_date' in local_var_params:
+        if 'from_transaction_date' in local_var_params and local_var_params['from_transaction_date'] is not None:  # noqa: E501
             query_params.append(('fromTransactionDate', local_var_params['from_transaction_date']))  # noqa: E501
-        if 'to_transaction_date' in local_var_params:
+        if 'to_transaction_date' in local_var_params and local_var_params['to_transaction_date'] is not None:  # noqa: E501
             query_params.append(('toTransactionDate', local_var_params['to_transaction_date']))  # noqa: E501
-        if 'as_at' in local_var_params:
+        if 'as_at' in local_var_params and local_var_params['as_at'] is not None:  # noqa: E501
             query_params.append(('asAt', local_var_params['as_at']))  # noqa: E501
-        if 'filter' in local_var_params:
+        if 'filter' in local_var_params and local_var_params['filter'] is not None:  # noqa: E501
             query_params.append(('filter', local_var_params['filter']))  # noqa: E501
-        if 'property_keys' in local_var_params:
+        if 'property_keys' in local_var_params and local_var_params['property_keys'] is not None:  # noqa: E501
             query_params.append(('propertyKeys', local_var_params['property_keys']))  # noqa: E501
             collection_formats['propertyKeys'] = 'multi'  # noqa: E501
 
@@ -1485,7 +1475,6 @@ class TransactionPortfoliosApi(object):
         # HTTP header `Accept`
         header_params['Accept'] = self.api_client.select_header_accept(
             ['text/plain', 'application/json', 'text/json'])  # noqa: E501
-
 
         # Authentication setting
         auth_settings = ['oauth2']  # noqa: E501
@@ -1585,12 +1574,12 @@ class TransactionPortfoliosApi(object):
             local_var_params[key] = val
         del local_var_params['kwargs']
         # verify the required parameter 'scope' is set
-        if ('scope' not in local_var_params or
-                local_var_params['scope'] is None):
+        if self.api_client.client_side_validation and ('scope' not in local_var_params or  # noqa: E501
+                                                        local_var_params['scope'] is None):  # noqa: E501
             raise ApiValueError("Missing the required parameter `scope` when calling `list_holdings_adjustments`")  # noqa: E501
         # verify the required parameter 'code' is set
-        if ('code' not in local_var_params or
-                local_var_params['code'] is None):
+        if self.api_client.client_side_validation and ('code' not in local_var_params or  # noqa: E501
+                                                        local_var_params['code'] is None):  # noqa: E501
             raise ApiValueError("Missing the required parameter `code` when calling `list_holdings_adjustments`")  # noqa: E501
 
         collection_formats = {}
@@ -1602,11 +1591,11 @@ class TransactionPortfoliosApi(object):
             path_params['code'] = local_var_params['code']  # noqa: E501
 
         query_params = []
-        if 'from_effective_at' in local_var_params:
+        if 'from_effective_at' in local_var_params and local_var_params['from_effective_at'] is not None:  # noqa: E501
             query_params.append(('fromEffectiveAt', local_var_params['from_effective_at']))  # noqa: E501
-        if 'to_effective_at' in local_var_params:
+        if 'to_effective_at' in local_var_params and local_var_params['to_effective_at'] is not None:  # noqa: E501
             query_params.append(('toEffectiveAt', local_var_params['to_effective_at']))  # noqa: E501
-        if 'as_at' in local_var_params:
+        if 'as_at' in local_var_params and local_var_params['as_at'] is not None:  # noqa: E501
             query_params.append(('asAt', local_var_params['as_at']))  # noqa: E501
 
         header_params = {}
@@ -1618,7 +1607,6 @@ class TransactionPortfoliosApi(object):
         # HTTP header `Accept`
         header_params['Accept'] = self.api_client.select_header_accept(
             ['text/plain', 'application/json', 'text/json'])  # noqa: E501
-
 
         # Authentication setting
         auth_settings = ['oauth2']  # noqa: E501
@@ -1716,20 +1704,20 @@ class TransactionPortfoliosApi(object):
             local_var_params[key] = val
         del local_var_params['kwargs']
         # verify the required parameter 'scope' is set
-        if ('scope' not in local_var_params or
-                local_var_params['scope'] is None):
+        if self.api_client.client_side_validation and ('scope' not in local_var_params or  # noqa: E501
+                                                        local_var_params['scope'] is None):  # noqa: E501
             raise ApiValueError("Missing the required parameter `scope` when calling `set_holdings`")  # noqa: E501
         # verify the required parameter 'code' is set
-        if ('code' not in local_var_params or
-                local_var_params['code'] is None):
+        if self.api_client.client_side_validation and ('code' not in local_var_params or  # noqa: E501
+                                                        local_var_params['code'] is None):  # noqa: E501
             raise ApiValueError("Missing the required parameter `code` when calling `set_holdings`")  # noqa: E501
         # verify the required parameter 'effective_at' is set
-        if ('effective_at' not in local_var_params or
-                local_var_params['effective_at'] is None):
+        if self.api_client.client_side_validation and ('effective_at' not in local_var_params or  # noqa: E501
+                                                        local_var_params['effective_at'] is None):  # noqa: E501
             raise ApiValueError("Missing the required parameter `effective_at` when calling `set_holdings`")  # noqa: E501
         # verify the required parameter 'holding_adjustments' is set
-        if ('holding_adjustments' not in local_var_params or
-                local_var_params['holding_adjustments'] is None):
+        if self.api_client.client_side_validation and ('holding_adjustments' not in local_var_params or  # noqa: E501
+                                                        local_var_params['holding_adjustments'] is None):  # noqa: E501
             raise ApiValueError("Missing the required parameter `holding_adjustments` when calling `set_holdings`")  # noqa: E501
 
         collection_formats = {}
@@ -1741,7 +1729,7 @@ class TransactionPortfoliosApi(object):
             path_params['code'] = local_var_params['code']  # noqa: E501
 
         query_params = []
-        if 'effective_at' in local_var_params:
+        if 'effective_at' in local_var_params and local_var_params['effective_at'] is not None:  # noqa: E501
             query_params.append(('effectiveAt', local_var_params['effective_at']))  # noqa: E501
 
         header_params = {}
@@ -1755,7 +1743,6 @@ class TransactionPortfoliosApi(object):
         # HTTP header `Accept`
         header_params['Accept'] = self.api_client.select_header_accept(
             ['text/plain', 'application/json', 'text/json'])  # noqa: E501
-
 
         # Authentication setting
         auth_settings = ['oauth2']  # noqa: E501
@@ -1851,12 +1838,12 @@ class TransactionPortfoliosApi(object):
             local_var_params[key] = val
         del local_var_params['kwargs']
         # verify the required parameter 'scope' is set
-        if ('scope' not in local_var_params or
-                local_var_params['scope'] is None):
+        if self.api_client.client_side_validation and ('scope' not in local_var_params or  # noqa: E501
+                                                        local_var_params['scope'] is None):  # noqa: E501
             raise ApiValueError("Missing the required parameter `scope` when calling `upsert_executions`")  # noqa: E501
         # verify the required parameter 'code' is set
-        if ('code' not in local_var_params or
-                local_var_params['code'] is None):
+        if self.api_client.client_side_validation and ('code' not in local_var_params or  # noqa: E501
+                                                        local_var_params['code'] is None):  # noqa: E501
             raise ApiValueError("Missing the required parameter `code` when calling `upsert_executions`")  # noqa: E501
 
         collection_formats = {}
@@ -1880,7 +1867,6 @@ class TransactionPortfoliosApi(object):
         # HTTP header `Accept`
         header_params['Accept'] = self.api_client.select_header_accept(
             ['text/plain', 'application/json', 'text/json'])  # noqa: E501
-
 
         # Authentication setting
         auth_settings = ['oauth2']  # noqa: E501
@@ -1978,16 +1964,16 @@ class TransactionPortfoliosApi(object):
             local_var_params[key] = val
         del local_var_params['kwargs']
         # verify the required parameter 'scope' is set
-        if ('scope' not in local_var_params or
-                local_var_params['scope'] is None):
+        if self.api_client.client_side_validation and ('scope' not in local_var_params or  # noqa: E501
+                                                        local_var_params['scope'] is None):  # noqa: E501
             raise ApiValueError("Missing the required parameter `scope` when calling `upsert_portfolio_details`")  # noqa: E501
         # verify the required parameter 'code' is set
-        if ('code' not in local_var_params or
-                local_var_params['code'] is None):
+        if self.api_client.client_side_validation and ('code' not in local_var_params or  # noqa: E501
+                                                        local_var_params['code'] is None):  # noqa: E501
             raise ApiValueError("Missing the required parameter `code` when calling `upsert_portfolio_details`")  # noqa: E501
         # verify the required parameter 'portfolio_details' is set
-        if ('portfolio_details' not in local_var_params or
-                local_var_params['portfolio_details'] is None):
+        if self.api_client.client_side_validation and ('portfolio_details' not in local_var_params or  # noqa: E501
+                                                        local_var_params['portfolio_details'] is None):  # noqa: E501
             raise ApiValueError("Missing the required parameter `portfolio_details` when calling `upsert_portfolio_details`")  # noqa: E501
 
         collection_formats = {}
@@ -1999,7 +1985,7 @@ class TransactionPortfoliosApi(object):
             path_params['code'] = local_var_params['code']  # noqa: E501
 
         query_params = []
-        if 'effective_at' in local_var_params:
+        if 'effective_at' in local_var_params and local_var_params['effective_at'] is not None:  # noqa: E501
             query_params.append(('effectiveAt', local_var_params['effective_at']))  # noqa: E501
 
         header_params = {}
@@ -2013,7 +1999,6 @@ class TransactionPortfoliosApi(object):
         # HTTP header `Accept`
         header_params['Accept'] = self.api_client.select_header_accept(
             ['text/plain', 'application/json', 'text/json'])  # noqa: E501
-
 
         # Authentication setting
         auth_settings = ['oauth2']  # noqa: E501
@@ -2111,20 +2096,20 @@ class TransactionPortfoliosApi(object):
             local_var_params[key] = val
         del local_var_params['kwargs']
         # verify the required parameter 'scope' is set
-        if ('scope' not in local_var_params or
-                local_var_params['scope'] is None):
+        if self.api_client.client_side_validation and ('scope' not in local_var_params or  # noqa: E501
+                                                        local_var_params['scope'] is None):  # noqa: E501
             raise ApiValueError("Missing the required parameter `scope` when calling `upsert_transaction_properties`")  # noqa: E501
         # verify the required parameter 'code' is set
-        if ('code' not in local_var_params or
-                local_var_params['code'] is None):
+        if self.api_client.client_side_validation and ('code' not in local_var_params or  # noqa: E501
+                                                        local_var_params['code'] is None):  # noqa: E501
             raise ApiValueError("Missing the required parameter `code` when calling `upsert_transaction_properties`")  # noqa: E501
         # verify the required parameter 'transaction_id' is set
-        if ('transaction_id' not in local_var_params or
-                local_var_params['transaction_id'] is None):
+        if self.api_client.client_side_validation and ('transaction_id' not in local_var_params or  # noqa: E501
+                                                        local_var_params['transaction_id'] is None):  # noqa: E501
             raise ApiValueError("Missing the required parameter `transaction_id` when calling `upsert_transaction_properties`")  # noqa: E501
         # verify the required parameter 'transaction_properties' is set
-        if ('transaction_properties' not in local_var_params or
-                local_var_params['transaction_properties'] is None):
+        if self.api_client.client_side_validation and ('transaction_properties' not in local_var_params or  # noqa: E501
+                                                        local_var_params['transaction_properties'] is None):  # noqa: E501
             raise ApiValueError("Missing the required parameter `transaction_properties` when calling `upsert_transaction_properties`")  # noqa: E501
 
         collection_formats = {}
@@ -2150,7 +2135,6 @@ class TransactionPortfoliosApi(object):
         # HTTP header `Accept`
         header_params['Accept'] = self.api_client.select_header_accept(
             ['text/plain', 'application/json', 'text/json'])  # noqa: E501
-
 
         # Authentication setting
         auth_settings = ['oauth2']  # noqa: E501
@@ -2246,16 +2230,16 @@ class TransactionPortfoliosApi(object):
             local_var_params[key] = val
         del local_var_params['kwargs']
         # verify the required parameter 'scope' is set
-        if ('scope' not in local_var_params or
-                local_var_params['scope'] is None):
+        if self.api_client.client_side_validation and ('scope' not in local_var_params or  # noqa: E501
+                                                        local_var_params['scope'] is None):  # noqa: E501
             raise ApiValueError("Missing the required parameter `scope` when calling `upsert_transactions`")  # noqa: E501
         # verify the required parameter 'code' is set
-        if ('code' not in local_var_params or
-                local_var_params['code'] is None):
+        if self.api_client.client_side_validation and ('code' not in local_var_params or  # noqa: E501
+                                                        local_var_params['code'] is None):  # noqa: E501
             raise ApiValueError("Missing the required parameter `code` when calling `upsert_transactions`")  # noqa: E501
         # verify the required parameter 'transactions' is set
-        if ('transactions' not in local_var_params or
-                local_var_params['transactions'] is None):
+        if self.api_client.client_side_validation and ('transactions' not in local_var_params or  # noqa: E501
+                                                        local_var_params['transactions'] is None):  # noqa: E501
             raise ApiValueError("Missing the required parameter `transactions` when calling `upsert_transactions`")  # noqa: E501
 
         collection_formats = {}
@@ -2279,7 +2263,6 @@ class TransactionPortfoliosApi(object):
         # HTTP header `Accept`
         header_params['Accept'] = self.api_client.select_header_accept(
             ['text/plain', 'application/json', 'text/json'])  # noqa: E501
-
 
         # Authentication setting
         auth_settings = ['oauth2']  # noqa: E501

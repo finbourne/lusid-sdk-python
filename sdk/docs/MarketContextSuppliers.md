@@ -1,5 +1,6 @@
 # MarketContextSuppliers
 
+It is possible to control which supplier is used for a given asset class.
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------

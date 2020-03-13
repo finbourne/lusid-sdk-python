@@ -30,17 +30,20 @@ configuration.access_token = 'YOUR_ACCESS_TOKEN'
 
 # Defining host is optional and default to http://localhost/api
 configuration.host = "http://localhost/api"
-# Create an instance of the API class
-api_instance = lusid.DerivedTransactionPortfoliosApi(lusid.ApiClient(configuration))
-scope = 'scope_example' # str | The scope into which to create the new derived portfolio
+
+# Enter a context with an instance of the API client
+with lusid.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = lusid.DerivedTransactionPortfoliosApi(api_client)
+    scope = 'scope_example' # str | The scope into which to create the new derived portfolio
 portfolio = lusid.CreateDerivedTransactionPortfolioRequest() # CreateDerivedTransactionPortfolioRequest | The root object of the new derived portfolio, containing a populated reference portfolio id and reference scope (optional)
 
-try:
-    # [EARLY ACCESS] Create derived transaction portfolio
-    api_response = api_instance.create_derived_portfolio(scope, portfolio=portfolio)
-    pprint(api_response)
-except ApiException as e:
-    print("Exception when calling DerivedTransactionPortfoliosApi->create_derived_portfolio: %s\n" % e)
+    try:
+        # [EARLY ACCESS] Create derived transaction portfolio
+        api_response = api_instance.create_derived_portfolio(scope, portfolio=portfolio)
+        pprint(api_response)
+    except ApiException as e:
+        print("Exception when calling DerivedTransactionPortfoliosApi->create_derived_portfolio: %s\n" % e)
 ```
 
 ### Parameters
@@ -94,18 +97,21 @@ configuration.access_token = 'YOUR_ACCESS_TOKEN'
 
 # Defining host is optional and default to http://localhost/api
 configuration.host = "http://localhost/api"
-# Create an instance of the API class
-api_instance = lusid.DerivedTransactionPortfoliosApi(lusid.ApiClient(configuration))
-scope = 'scope_example' # str | The scope of the portfolio
+
+# Enter a context with an instance of the API client
+with lusid.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = lusid.DerivedTransactionPortfoliosApi(api_client)
+    scope = 'scope_example' # str | The scope of the portfolio
 code = 'code_example' # str | The code of the portfolio
 effective_at = 'effective_at_example' # str | The effective date of the change (optional)
 
-try:
-    # [EARLY ACCESS] Delete portfolio details
-    api_response = api_instance.delete_derived_portfolio_details(scope, code, effective_at=effective_at)
-    pprint(api_response)
-except ApiException as e:
-    print("Exception when calling DerivedTransactionPortfoliosApi->delete_derived_portfolio_details: %s\n" % e)
+    try:
+        # [EARLY ACCESS] Delete portfolio details
+        api_response = api_instance.delete_derived_portfolio_details(scope, code, effective_at=effective_at)
+        pprint(api_response)
+    except ApiException as e:
+        print("Exception when calling DerivedTransactionPortfoliosApi->delete_derived_portfolio_details: %s\n" % e)
 ```
 
 ### Parameters
