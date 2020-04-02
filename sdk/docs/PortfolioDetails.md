@@ -3,7 +3,7 @@
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**href** | **str** | The specifc Uniform Resource Identifier (URI) for this resource at the requested effective and asAt datetime. | [optional] 
+**href** | **str** | The specific Uniform Resource Identifier (URI) for this resource at the requested effective and asAt datetime. | [optional] 
 **origin_portfolio_id** | [**ResourceId**](ResourceId.md) |  | 
 **version** | [**Version**](Version.md) |  | 
 **base_currency** | **str** | The base currency of the transaction portfolio. | 

@@ -4,7 +4,7 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **version** | [**Version**](Version.md) |  | 
-**values** | [**list[OutputTransaction]**](OutputTransaction.md) |  | [optional] 
+**values** | [**list[OutputTransaction]**](OutputTransaction.md) |  | 
 **href** | **str** |  | [optional] 
 **links** | [**list[Link]**](Link.md) |  | [optional] 
 

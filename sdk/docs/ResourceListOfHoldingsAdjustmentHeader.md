@@ -3,7 +3,7 @@
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**values** | [**list[HoldingsAdjustmentHeader]**](HoldingsAdjustmentHeader.md) |  | [optional] 
+**values** | [**list[HoldingsAdjustmentHeader]**](HoldingsAdjustmentHeader.md) |  | 
 **href** | **str** |  | [optional] 
 **links** | [**list[Link]**](Link.md) |  | [optional] 
 

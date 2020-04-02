@@ -4,7 +4,7 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **version** | [**Version**](Version.md) |  | 
-**values** | [**list[PortfolioHolding]**](PortfolioHolding.md) |  | [optional] 
+**values** | [**list[PortfolioHolding]**](PortfolioHolding.md) |  | 
 **href** | **str** |  | [optional] 
 **links** | [**list[Link]**](Link.md) |  | [optional] 
 

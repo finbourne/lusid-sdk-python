@@ -3,7 +3,7 @@
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**values** | [**list[ConstituentsAdjustmentHeader]**](ConstituentsAdjustmentHeader.md) |  | [optional] 
+**values** | [**list[ConstituentsAdjustmentHeader]**](ConstituentsAdjustmentHeader.md) |  | 
 **href** | **str** |  | [optional] 
 **links** | [**list[Link]**](Link.md) |  | [optional] 
 

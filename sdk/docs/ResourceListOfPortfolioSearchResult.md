@@ -3,7 +3,7 @@
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**values** | [**list[PortfolioSearchResult]**](PortfolioSearchResult.md) |  | [optional] 
+**values** | [**list[PortfolioSearchResult]**](PortfolioSearchResult.md) |  | 
 **href** | **str** |  | [optional] 
 **links** | [**list[Link]**](Link.md) |  | [optional] 
 

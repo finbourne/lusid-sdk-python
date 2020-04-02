@@ -3,7 +3,7 @@
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**href** | **str** | The specifc Uniform Resource Identifier (URI) for this resource at the requested effective and asAt datetime. | [optional] 
+**href** | **str** | The specific Uniform Resource Identifier (URI) for this resource at the requested effective and asAt datetime. | [optional] 
 **id** | [**ResourceId**](ResourceId.md) |  | 
 **display_name** | **str** | The name of the portfolio group. | 
 **description** | **str** | The long form description of the portfolio group. | [optional] 

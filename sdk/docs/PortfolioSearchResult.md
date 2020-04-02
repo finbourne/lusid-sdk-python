@@ -5,7 +5,7 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **id** | [**ResourceId**](ResourceId.md) |  | 
 **type** | **str** | The type of the portfolio. | 
-**href** | **str** | The specifc Uniform Resource Identifier (URI) for this resource at the requested effective and asAt datetime. | [optional] 
+**href** | **str** | The specific Uniform Resource Identifier (URI) for this resource at the requested effective and asAt datetime. | [optional] 
 **description** | **str** | The long form description of the portfolio. | [optional] 
 **display_name** | **str** | The name of the portfolio. | 
 **is_derived** | **bool** | Whether or not this is a derived portfolio. | [optional] 

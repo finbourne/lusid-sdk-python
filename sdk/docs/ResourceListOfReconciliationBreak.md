@@ -3,7 +3,7 @@
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**values** | [**list[ReconciliationBreak]**](ReconciliationBreak.md) |  | [optional] 
+**values** | [**list[ReconciliationBreak]**](ReconciliationBreak.md) |  | 
 **href** | **str** |  | [optional] 
 **links** | [**list[Link]**](Link.md) |  | [optional] 
 
