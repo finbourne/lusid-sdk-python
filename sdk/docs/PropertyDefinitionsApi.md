@@ -33,19 +33,16 @@ configuration.access_token = 'YOUR_ACCESS_TOKEN'
 
 # Defining host is optional and default to http://localhost
 configuration.host = "http://localhost"
+# Create an instance of the API class
+api_instance = lusid.PropertyDefinitionsApi(lusid.ApiClient(configuration))
+definition = lusid.CreatePropertyDefinitionRequest() # CreatePropertyDefinitionRequest | The definition of the new property.
 
-# Enter a context with an instance of the API client
-with lusid.ApiClient(configuration) as api_client:
-    # Create an instance of the API class
-    api_instance = lusid.PropertyDefinitionsApi(api_client)
-    definition = lusid.CreatePropertyDefinitionRequest() # CreatePropertyDefinitionRequest | The definition of the new property.
-
-    try:
-        # Create property definition
-        api_response = api_instance.create_property_definition(definition)
-        pprint(api_response)
-    except ApiException as e:
-        print("Exception when calling PropertyDefinitionsApi->create_property_definition: %s\n" % e)
+try:
+    # Create property definition
+    api_response = api_instance.create_property_definition(definition)
+    pprint(api_response)
+except ApiException as e:
+    print("Exception when calling PropertyDefinitionsApi->create_property_definition: %s\n" % e)
 ```
 
 ### Parameters
@@ -98,21 +95,18 @@ configuration.access_token = 'YOUR_ACCESS_TOKEN'
 
 # Defining host is optional and default to http://localhost
 configuration.host = "http://localhost"
-
-# Enter a context with an instance of the API client
-with lusid.ApiClient(configuration) as api_client:
-    # Create an instance of the API class
-    api_instance = lusid.PropertyDefinitionsApi(api_client)
-    domain = 'domain_example' # str | The domain of the property to be deleted.
+# Create an instance of the API class
+api_instance = lusid.PropertyDefinitionsApi(lusid.ApiClient(configuration))
+domain = 'domain_example' # str | The domain of the property to be deleted.
 scope = 'scope_example' # str | The scope of the property to be deleted.
 code = 'code_example' # str | The code of the property to be deleted. Together with the domain and scope this uniquely              identifies the property.
 
-    try:
-        # Delete property definition
-        api_response = api_instance.delete_property_definition(domain, scope, code)
-        pprint(api_response)
-    except ApiException as e:
-        print("Exception when calling PropertyDefinitionsApi->delete_property_definition: %s\n" % e)
+try:
+    # Delete property definition
+    api_response = api_instance.delete_property_definition(domain, scope, code)
+    pprint(api_response)
+except ApiException as e:
+    print("Exception when calling PropertyDefinitionsApi->delete_property_definition: %s\n" % e)
 ```
 
 ### Parameters
@@ -167,21 +161,18 @@ configuration.access_token = 'YOUR_ACCESS_TOKEN'
 
 # Defining host is optional and default to http://localhost
 configuration.host = "http://localhost"
-
-# Enter a context with an instance of the API client
-with lusid.ApiClient(configuration) as api_client:
-    # Create an instance of the API class
-    api_instance = lusid.PropertyDefinitionsApi(api_client)
-    property_keys = ['property_keys_example'] # list[str] | One or more property keys which identify each property that a definition should              be retrieved for. The format for each property key is {domain}/{scope}/{code}, e.g. 'Portfolio/Manager/Id'.
+# Create an instance of the API class
+api_instance = lusid.PropertyDefinitionsApi(lusid.ApiClient(configuration))
+property_keys = ['property_keys_example'] # list[str] | One or more property keys which identify each property that a definition should              be retrieved for. The format for each property key is {domain}/{scope}/{code}, e.g. 'Portfolio/Manager/Id'.
 as_at = '2013-10-20T19:20:30+01:00' # datetime | The asAt datetime at which to retrieve the property definitions. Defaults to return              the latest version of each definition if not specified. (optional)
 filter = 'filter_example' # str | Expression to filter the result set.               For example, to filter on the Lifetime, use \"lifeTime eq 'Perpetual'\"              Read more about filtering results from LUSID here https://support.lusid.com/filtering-results-from-lusid. (optional)
 
-    try:
-        # Get multiple property definitions
-        api_response = api_instance.get_multiple_property_definitions(property_keys, as_at=as_at, filter=filter)
-        pprint(api_response)
-    except ApiException as e:
-        print("Exception when calling PropertyDefinitionsApi->get_multiple_property_definitions: %s\n" % e)
+try:
+    # Get multiple property definitions
+    api_response = api_instance.get_multiple_property_definitions(property_keys, as_at=as_at, filter=filter)
+    pprint(api_response)
+except ApiException as e:
+    print("Exception when calling PropertyDefinitionsApi->get_multiple_property_definitions: %s\n" % e)
 ```
 
 ### Parameters
@@ -236,22 +227,19 @@ configuration.access_token = 'YOUR_ACCESS_TOKEN'
 
 # Defining host is optional and default to http://localhost
 configuration.host = "http://localhost"
-
-# Enter a context with an instance of the API client
-with lusid.ApiClient(configuration) as api_client:
-    # Create an instance of the API class
-    api_instance = lusid.PropertyDefinitionsApi(api_client)
-    domain = 'domain_example' # str | The domain of the specified property.
+# Create an instance of the API class
+api_instance = lusid.PropertyDefinitionsApi(lusid.ApiClient(configuration))
+domain = 'domain_example' # str | The domain of the specified property.
 scope = 'scope_example' # str | The scope of the specified property.
 code = 'code_example' # str | The code of the specified property. Together with the domain and scope this uniquely              identifies the property.
 as_at = '2013-10-20T19:20:30+01:00' # datetime | The asAt datetime at which to retrieve the property definition. Defaults to return              the latest version of the definition if not specified. (optional)
 
-    try:
-        # Get property definition
-        api_response = api_instance.get_property_definition(domain, scope, code, as_at=as_at)
-        pprint(api_response)
-    except ApiException as e:
-        print("Exception when calling PropertyDefinitionsApi->get_property_definition: %s\n" % e)
+try:
+    # Get property definition
+    api_response = api_instance.get_property_definition(domain, scope, code, as_at=as_at)
+    pprint(api_response)
+except ApiException as e:
+    print("Exception when calling PropertyDefinitionsApi->get_property_definition: %s\n" % e)
 ```
 
 ### Parameters
@@ -307,22 +295,19 @@ configuration.access_token = 'YOUR_ACCESS_TOKEN'
 
 # Defining host is optional and default to http://localhost
 configuration.host = "http://localhost"
-
-# Enter a context with an instance of the API client
-with lusid.ApiClient(configuration) as api_client:
-    # Create an instance of the API class
-    api_instance = lusid.PropertyDefinitionsApi(api_client)
-    domain = 'domain_example' # str | The domain of the property being updated.
+# Create an instance of the API class
+api_instance = lusid.PropertyDefinitionsApi(lusid.ApiClient(configuration))
+domain = 'domain_example' # str | The domain of the property being updated.
 scope = 'scope_example' # str | The scope of the property being updated.
 code = 'code_example' # str | The code of the property being updated. Together with the domain and scope this uniquely              identifies the property.
 definition = lusid.UpdatePropertyDefinitionRequest() # UpdatePropertyDefinitionRequest | The updated definition of the property.
 
-    try:
-        # Update property definition
-        api_response = api_instance.update_property_definition(domain, scope, code, definition)
-        pprint(api_response)
-    except ApiException as e:
-        print("Exception when calling PropertyDefinitionsApi->update_property_definition: %s\n" % e)
+try:
+    # Update property definition
+    api_response = api_instance.update_property_definition(domain, scope, code, definition)
+    pprint(api_response)
+except ApiException as e:
+    print("Exception when calling PropertyDefinitionsApi->update_property_definition: %s\n" % e)
 ```
 
 ### Parameters

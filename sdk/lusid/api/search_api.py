@@ -106,8 +106,8 @@ class SearchApi(object):
             local_var_params[key] = val
         del local_var_params['kwargs']
         # verify the required parameter 'request' is set
-        if self.api_client.client_side_validation and ('request' not in local_var_params or  # noqa: E501
-                                                        local_var_params['request'] is None):  # noqa: E501
+        if ('request' not in local_var_params or
+                local_var_params['request'] is None):
             raise ApiValueError("Missing the required parameter `request` when calling `portfolio_groups_search`")  # noqa: E501
 
         collection_formats = {}
@@ -115,7 +115,7 @@ class SearchApi(object):
         path_params = {}
 
         query_params = []
-        if 'filter' in local_var_params and local_var_params['filter'] is not None:  # noqa: E501
+        if 'filter' in local_var_params:
             query_params.append(('filter', local_var_params['filter']))  # noqa: E501
 
         header_params = {}
@@ -129,6 +129,7 @@ class SearchApi(object):
         # HTTP header `Accept`
         header_params['Accept'] = self.api_client.select_header_accept(
             ['text/plain', 'application/json', 'text/json'])  # noqa: E501
+
 
         # Authentication setting
         auth_settings = ['oauth2']  # noqa: E501
@@ -222,8 +223,8 @@ class SearchApi(object):
             local_var_params[key] = val
         del local_var_params['kwargs']
         # verify the required parameter 'request' is set
-        if self.api_client.client_side_validation and ('request' not in local_var_params or  # noqa: E501
-                                                        local_var_params['request'] is None):  # noqa: E501
+        if ('request' not in local_var_params or
+                local_var_params['request'] is None):
             raise ApiValueError("Missing the required parameter `request` when calling `portfolios_search`")  # noqa: E501
 
         collection_formats = {}
@@ -231,7 +232,7 @@ class SearchApi(object):
         path_params = {}
 
         query_params = []
-        if 'filter' in local_var_params and local_var_params['filter'] is not None:  # noqa: E501
+        if 'filter' in local_var_params:
             query_params.append(('filter', local_var_params['filter']))  # noqa: E501
 
         header_params = {}
@@ -245,6 +246,7 @@ class SearchApi(object):
         # HTTP header `Accept`
         header_params['Accept'] = self.api_client.select_header_accept(
             ['text/plain', 'application/json', 'text/json'])  # noqa: E501
+
 
         # Authentication setting
         auth_settings = ['oauth2']  # noqa: E501
@@ -338,8 +340,8 @@ class SearchApi(object):
             local_var_params[key] = val
         del local_var_params['kwargs']
         # verify the required parameter 'request' is set
-        if self.api_client.client_side_validation and ('request' not in local_var_params or  # noqa: E501
-                                                        local_var_params['request'] is None):  # noqa: E501
+        if ('request' not in local_var_params or
+                local_var_params['request'] is None):
             raise ApiValueError("Missing the required parameter `request` when calling `properties_search`")  # noqa: E501
 
         collection_formats = {}
@@ -347,7 +349,7 @@ class SearchApi(object):
         path_params = {}
 
         query_params = []
-        if 'filter' in local_var_params and local_var_params['filter'] is not None:  # noqa: E501
+        if 'filter' in local_var_params:
             query_params.append(('filter', local_var_params['filter']))  # noqa: E501
 
         header_params = {}
@@ -361,6 +363,7 @@ class SearchApi(object):
         # HTTP header `Accept`
         header_params['Accept'] = self.api_client.select_header_accept(
             ['text/plain', 'application/json', 'text/json'])  # noqa: E501
+
 
         # Authentication setting
         auth_settings = ['oauth2']  # noqa: E501

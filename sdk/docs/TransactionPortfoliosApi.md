@@ -45,22 +45,19 @@ configuration.access_token = 'YOUR_ACCESS_TOKEN'
 
 # Defining host is optional and default to http://localhost
 configuration.host = "http://localhost"
-
-# Enter a context with an instance of the API client
-with lusid.ApiClient(configuration) as api_client:
-    # Create an instance of the API class
-    api_instance = lusid.TransactionPortfoliosApi(api_client)
-    scope = 'scope_example' # str | The scope of the transaction portfolio.
+# Create an instance of the API class
+api_instance = lusid.TransactionPortfoliosApi(lusid.ApiClient(configuration))
+scope = 'scope_example' # str | The scope of the transaction portfolio.
 code = 'code_example' # str | The code of the transaction portfolio. Together with the scope this uniquely identifies              the transaction portfolio.
 effective_at = 'effective_at_example' # str | The effective datetime or cut label at which the holdings should be set to the provided targets.
 holding_adjustments = [lusid.AdjustHoldingRequest()] # list[AdjustHoldingRequest] | The selected set of holdings to adjust to the provided targets for the              transaction portfolio.
 
-    try:
-        # Adjust holdings
-        api_response = api_instance.adjust_holdings(scope, code, effective_at, holding_adjustments)
-        pprint(api_response)
-    except ApiException as e:
-        print("Exception when calling TransactionPortfoliosApi->adjust_holdings: %s\n" % e)
+try:
+    # Adjust holdings
+    api_response = api_instance.adjust_holdings(scope, code, effective_at, holding_adjustments)
+    pprint(api_response)
+except ApiException as e:
+    print("Exception when calling TransactionPortfoliosApi->adjust_holdings: %s\n" % e)
 ```
 
 ### Parameters
@@ -116,24 +113,21 @@ configuration.access_token = 'YOUR_ACCESS_TOKEN'
 
 # Defining host is optional and default to http://localhost
 configuration.host = "http://localhost"
-
-# Enter a context with an instance of the API client
-with lusid.ApiClient(configuration) as api_client:
-    # Create an instance of the API class
-    api_instance = lusid.TransactionPortfoliosApi(api_client)
-    scope = 'scope_example' # str | The scope of the transaction portfolio.
+# Create an instance of the API class
+api_instance = lusid.TransactionPortfoliosApi(lusid.ApiClient(configuration))
+scope = 'scope_example' # str | The scope of the transaction portfolio.
 code = 'code_example' # str | The code of the transaction portfolio. Together with the scope this uniquely identifies              the transaction portfolio.
 query_parameters = lusid.TransactionQueryParameters() # TransactionQueryParameters | The query queryParameters which control how the output transactions are built.
 as_at = '2013-10-20T19:20:30+01:00' # datetime | The asAt datetime at which to build the transactions. Defaults to return the latest              version of each transaction if not specified. (optional)
 filter = 'filter_example' # str | Expression to filter the result set.              For example, to filter on the Transaction Type, use \"type eq 'Buy'\"              Read more about filtering results from LUSID here https://support.lusid.com/filtering-results-from-lusid. (optional)
 property_keys = ['property_keys_example'] # list[str] | A list of property keys from the \"Instrument\" or \"Transaction\" domain to decorate onto              the transactions. These take the format {domain}/{scope}/{code} e.g. \"Instrument/system/Name\" or              \"Transaction/strategy/quantsignal\". (optional)
 
-    try:
-        # Build transactions
-        api_response = api_instance.build_transactions(scope, code, query_parameters, as_at=as_at, filter=filter, property_keys=property_keys)
-        pprint(api_response)
-    except ApiException as e:
-        print("Exception when calling TransactionPortfoliosApi->build_transactions: %s\n" % e)
+try:
+    # Build transactions
+    api_response = api_instance.build_transactions(scope, code, query_parameters, as_at=as_at, filter=filter, property_keys=property_keys)
+    pprint(api_response)
+except ApiException as e:
+    print("Exception when calling TransactionPortfoliosApi->build_transactions: %s\n" % e)
 ```
 
 ### Parameters
@@ -191,21 +185,18 @@ configuration.access_token = 'YOUR_ACCESS_TOKEN'
 
 # Defining host is optional and default to http://localhost
 configuration.host = "http://localhost"
-
-# Enter a context with an instance of the API client
-with lusid.ApiClient(configuration) as api_client:
-    # Create an instance of the API class
-    api_instance = lusid.TransactionPortfoliosApi(api_client)
-    scope = 'scope_example' # str | The scope of the transaction portfolio.
+# Create an instance of the API class
+api_instance = lusid.TransactionPortfoliosApi(lusid.ApiClient(configuration))
+scope = 'scope_example' # str | The scope of the transaction portfolio.
 code = 'code_example' # str | The code of the transaction portfolio. Together with the scope this uniquely identifies              the transaction portfolio.
 effective_at = 'effective_at_example' # str | The effective datetime or cut label at which the holding adjustments should be undone.
 
-    try:
-        # Cancel adjust holdings
-        api_response = api_instance.cancel_adjust_holdings(scope, code, effective_at)
-        pprint(api_response)
-    except ApiException as e:
-        print("Exception when calling TransactionPortfoliosApi->cancel_adjust_holdings: %s\n" % e)
+try:
+    # Cancel adjust holdings
+    api_response = api_instance.cancel_adjust_holdings(scope, code, effective_at)
+    pprint(api_response)
+except ApiException as e:
+    print("Exception when calling TransactionPortfoliosApi->cancel_adjust_holdings: %s\n" % e)
 ```
 
 ### Parameters
@@ -260,21 +251,18 @@ configuration.access_token = 'YOUR_ACCESS_TOKEN'
 
 # Defining host is optional and default to http://localhost
 configuration.host = "http://localhost"
-
-# Enter a context with an instance of the API client
-with lusid.ApiClient(configuration) as api_client:
-    # Create an instance of the API class
-    api_instance = lusid.TransactionPortfoliosApi(api_client)
-    scope = 'scope_example' # str | The scope of the transaction portfolio.
+# Create an instance of the API class
+api_instance = lusid.TransactionPortfoliosApi(lusid.ApiClient(configuration))
+scope = 'scope_example' # str | The scope of the transaction portfolio.
 code = 'code_example' # str | The code of the transaction portfolio. Together with the scope this uniquely identifies              the transaction portfolio.
 execution_ids = ['execution_ids_example'] # list[str] | The ids of the executions to cancel.
 
-    try:
-        # [EARLY ACCESS] Cancel executions
-        api_response = api_instance.cancel_executions(scope, code, execution_ids)
-        pprint(api_response)
-    except ApiException as e:
-        print("Exception when calling TransactionPortfoliosApi->cancel_executions: %s\n" % e)
+try:
+    # [EARLY ACCESS] Cancel executions
+    api_response = api_instance.cancel_executions(scope, code, execution_ids)
+    pprint(api_response)
+except ApiException as e:
+    print("Exception when calling TransactionPortfoliosApi->cancel_executions: %s\n" % e)
 ```
 
 ### Parameters
@@ -329,21 +317,18 @@ configuration.access_token = 'YOUR_ACCESS_TOKEN'
 
 # Defining host is optional and default to http://localhost
 configuration.host = "http://localhost"
-
-# Enter a context with an instance of the API client
-with lusid.ApiClient(configuration) as api_client:
-    # Create an instance of the API class
-    api_instance = lusid.TransactionPortfoliosApi(api_client)
-    scope = 'scope_example' # str | The scope of the transaction portfolio.
+# Create an instance of the API class
+api_instance = lusid.TransactionPortfoliosApi(lusid.ApiClient(configuration))
+scope = 'scope_example' # str | The scope of the transaction portfolio.
 code = 'code_example' # str | The code of the transaction portfolio. Together with the scope this uniquely identifies              the transaction portfolio.
 transaction_ids = ['transaction_ids_example'] # list[str] | The ids of the transactions to cancel.
 
-    try:
-        # Cancel transactions
-        api_response = api_instance.cancel_transactions(scope, code, transaction_ids)
-        pprint(api_response)
-    except ApiException as e:
-        print("Exception when calling TransactionPortfoliosApi->cancel_transactions: %s\n" % e)
+try:
+    # Cancel transactions
+    api_response = api_instance.cancel_transactions(scope, code, transaction_ids)
+    pprint(api_response)
+except ApiException as e:
+    print("Exception when calling TransactionPortfoliosApi->cancel_transactions: %s\n" % e)
 ```
 
 ### Parameters
@@ -398,20 +383,17 @@ configuration.access_token = 'YOUR_ACCESS_TOKEN'
 
 # Defining host is optional and default to http://localhost
 configuration.host = "http://localhost"
-
-# Enter a context with an instance of the API client
-with lusid.ApiClient(configuration) as api_client:
-    # Create an instance of the API class
-    api_instance = lusid.TransactionPortfoliosApi(api_client)
-    scope = 'scope_example' # str | The scope that the transaction portfolio will be created in.
+# Create an instance of the API class
+api_instance = lusid.TransactionPortfoliosApi(lusid.ApiClient(configuration))
+scope = 'scope_example' # str | The scope that the transaction portfolio will be created in.
 transaction_portfolio = lusid.CreateTransactionPortfolioRequest() # CreateTransactionPortfolioRequest | The definition and details of the transaction portfolio.
 
-    try:
-        # Create portfolio
-        api_response = api_instance.create_portfolio(scope, transaction_portfolio)
-        pprint(api_response)
-    except ApiException as e:
-        print("Exception when calling TransactionPortfoliosApi->create_portfolio: %s\n" % e)
+try:
+    # Create portfolio
+    api_response = api_instance.create_portfolio(scope, transaction_portfolio)
+    pprint(api_response)
+except ApiException as e:
+    print("Exception when calling TransactionPortfoliosApi->create_portfolio: %s\n" % e)
 ```
 
 ### Parameters
@@ -465,22 +447,19 @@ configuration.access_token = 'YOUR_ACCESS_TOKEN'
 
 # Defining host is optional and default to http://localhost
 configuration.host = "http://localhost"
-
-# Enter a context with an instance of the API client
-with lusid.ApiClient(configuration) as api_client:
-    # Create an instance of the API class
-    api_instance = lusid.TransactionPortfoliosApi(api_client)
-    scope = 'scope_example' # str | The scope of the transaction portfolio.
+# Create an instance of the API class
+api_instance = lusid.TransactionPortfoliosApi(lusid.ApiClient(configuration))
+scope = 'scope_example' # str | The scope of the transaction portfolio.
 code = 'code_example' # str | The code of the transaction portfolio. Together with the scope this uniquely identifies              the transaction portfolio.
 transaction_id = 'transaction_id_example' # str | The unique id of the transaction to delete the property value from.
 property_keys = ['property_keys_example'] # list[str] | The property keys of the properties to delete from the transaction.              This must be from the \"Transaction\" domain and will have the format {domain}/{scope}/{code} e.g.              \"Transaction/strategy/quantsignal\".
 
-    try:
-        # Delete properties from transaction
-        api_response = api_instance.delete_properties_from_transaction(scope, code, transaction_id, property_keys)
-        pprint(api_response)
-    except ApiException as e:
-        print("Exception when calling TransactionPortfoliosApi->delete_properties_from_transaction: %s\n" % e)
+try:
+    # Delete properties from transaction
+    api_response = api_instance.delete_properties_from_transaction(scope, code, transaction_id, property_keys)
+    pprint(api_response)
+except ApiException as e:
+    print("Exception when calling TransactionPortfoliosApi->delete_properties_from_transaction: %s\n" % e)
 ```
 
 ### Parameters
@@ -536,22 +515,19 @@ configuration.access_token = 'YOUR_ACCESS_TOKEN'
 
 # Defining host is optional and default to http://localhost
 configuration.host = "http://localhost"
-
-# Enter a context with an instance of the API client
-with lusid.ApiClient(configuration) as api_client:
-    # Create an instance of the API class
-    api_instance = lusid.TransactionPortfoliosApi(api_client)
-    scope = 'scope_example' # str | The scope of the transaction portfolio to retrieve the details for.
+# Create an instance of the API class
+api_instance = lusid.TransactionPortfoliosApi(lusid.ApiClient(configuration))
+scope = 'scope_example' # str | The scope of the transaction portfolio to retrieve the details for.
 code = 'code_example' # str | The code of the transaction portfolio to retrieve the details for. Together with the              scope this uniquely identifies the transaction portfolio.
 effective_at = 'effective_at_example' # str | The effective datetime or cut label at which to retrieve the details of the transaction              portfolio. Defaults to the current LUSID system datetime if not specified. (optional)
 as_at = '2013-10-20T19:20:30+01:00' # datetime | The asAt datetime at which to retrieve the details of the transaction portfolio. Defaults              to return the latest version of the details if not specified. (optional)
 
-    try:
-        # Get details
-        api_response = api_instance.get_details(scope, code, effective_at=effective_at, as_at=as_at)
-        pprint(api_response)
-    except ApiException as e:
-        print("Exception when calling TransactionPortfoliosApi->get_details: %s\n" % e)
+try:
+    # Get details
+    api_response = api_instance.get_details(scope, code, effective_at=effective_at, as_at=as_at)
+    pprint(api_response)
+except ApiException as e:
+    print("Exception when calling TransactionPortfoliosApi->get_details: %s\n" % e)
 ```
 
 ### Parameters
@@ -607,12 +583,9 @@ configuration.access_token = 'YOUR_ACCESS_TOKEN'
 
 # Defining host is optional and default to http://localhost
 configuration.host = "http://localhost"
-
-# Enter a context with an instance of the API client
-with lusid.ApiClient(configuration) as api_client:
-    # Create an instance of the API class
-    api_instance = lusid.TransactionPortfoliosApi(api_client)
-    scope = 'scope_example' # str | The scope of the transaction portfolio.
+# Create an instance of the API class
+api_instance = lusid.TransactionPortfoliosApi(lusid.ApiClient(configuration))
+scope = 'scope_example' # str | The scope of the transaction portfolio.
 code = 'code_example' # str | The code of the transaction portfolio. Together with the scope this uniquely identifies              the transaction portfolio.
 effective_at = 'effective_at_example' # str | The effective datetime or cut label at which to retrieve the holdings of the transaction              portfolio. Defaults to the current LUSID system datetime if not specified. (optional)
 as_at = '2013-10-20T19:20:30+01:00' # datetime | The asAt datetime at which to retrieve the holdings of the transaction portfolio. Defaults              to return the latest version of the holdings if not specified. (optional)
@@ -620,12 +593,12 @@ filter = 'filter_example' # str | Expression to filter the result set.          
 property_keys = ['property_keys_example'] # list[str] | A list of property keys from the \"Instrument\" or \"Holding\" domain to decorate onto              the holdings. These take the format {domain}/{scope}/{code} e.g. \"Instrument/system/Name\" or \"Holding/system/Cost\". (optional)
 by_taxlots = True # bool | Whether or not to expand the holdings to return the underlying tax-lots. Defaults to              False. (optional)
 
-    try:
-        # Get holdings
-        api_response = api_instance.get_holdings(scope, code, effective_at=effective_at, as_at=as_at, filter=filter, property_keys=property_keys, by_taxlots=by_taxlots)
-        pprint(api_response)
-    except ApiException as e:
-        print("Exception when calling TransactionPortfoliosApi->get_holdings: %s\n" % e)
+try:
+    # Get holdings
+    api_response = api_instance.get_holdings(scope, code, effective_at=effective_at, as_at=as_at, filter=filter, property_keys=property_keys, by_taxlots=by_taxlots)
+    pprint(api_response)
+except ApiException as e:
+    print("Exception when calling TransactionPortfoliosApi->get_holdings: %s\n" % e)
 ```
 
 ### Parameters
@@ -684,22 +657,19 @@ configuration.access_token = 'YOUR_ACCESS_TOKEN'
 
 # Defining host is optional and default to http://localhost
 configuration.host = "http://localhost"
-
-# Enter a context with an instance of the API client
-with lusid.ApiClient(configuration) as api_client:
-    # Create an instance of the API class
-    api_instance = lusid.TransactionPortfoliosApi(api_client)
-    scope = 'scope_example' # str | The scope of the transaction portfolio.
+# Create an instance of the API class
+api_instance = lusid.TransactionPortfoliosApi(lusid.ApiClient(configuration))
+scope = 'scope_example' # str | The scope of the transaction portfolio.
 code = 'code_example' # str | The code of the transaction portfolio. Together with the scope this uniquely identifies              the transaction portfolio.
 effective_at = 'effective_at_example' # str | The effective datetime or cut label of the holdings adjustment.
 as_at = '2013-10-20T19:20:30+01:00' # datetime | The asAt datetime at which to retrieve the holdings adjustment. Defaults to the return the latest              version of the holdings adjustment if not specified. (optional)
 
-    try:
-        # Get holdings adjustment
-        api_response = api_instance.get_holdings_adjustment(scope, code, effective_at, as_at=as_at)
-        pprint(api_response)
-    except ApiException as e:
-        print("Exception when calling TransactionPortfoliosApi->get_holdings_adjustment: %s\n" % e)
+try:
+    # Get holdings adjustment
+    api_response = api_instance.get_holdings_adjustment(scope, code, effective_at, as_at=as_at)
+    pprint(api_response)
+except ApiException as e:
+    print("Exception when calling TransactionPortfoliosApi->get_holdings_adjustment: %s\n" % e)
 ```
 
 ### Parameters
@@ -755,12 +725,9 @@ configuration.access_token = 'YOUR_ACCESS_TOKEN'
 
 # Defining host is optional and default to http://localhost
 configuration.host = "http://localhost"
-
-# Enter a context with an instance of the API client
-with lusid.ApiClient(configuration) as api_client:
-    # Create an instance of the API class
-    api_instance = lusid.TransactionPortfoliosApi(api_client)
-    scope = 'scope_example' # str | The scope of the transaction portfolio.
+# Create an instance of the API class
+api_instance = lusid.TransactionPortfoliosApi(lusid.ApiClient(configuration))
+scope = 'scope_example' # str | The scope of the transaction portfolio.
 code = 'code_example' # str | The code of the transaction portfolio. Together with the scope this uniquely identifies              the transaction portfolio.
 from_transaction_date = 'from_transaction_date_example' # str | The lower bound effective datetime or cut label (inclusive) from which to retrieve the transactions.              There is no lower bound if this is not specified. (optional)
 to_transaction_date = 'to_transaction_date_example' # str | The upper bound effective datetime or cut label (inclusive) from which to retrieve transactions.              There is no upper bound if this is not specified. (optional)
@@ -768,12 +735,12 @@ as_at = '2013-10-20T19:20:30+01:00' # datetime | The asAt datetime at which to r
 filter = 'filter_example' # str | Expression to filter the result set.               For example, to filter on the Transaction Type, use \"type eq 'Buy'\"              Read more about filtering results from LUSID here https://support.lusid.com/filtering-results-from-lusid. (optional)
 property_keys = ['property_keys_example'] # list[str] | A list of property keys from the \"Instrument\" or \"Transaction\" domain to decorate onto              the transactions. These take the format {domain}/{scope}/{code} e.g. \"Instrument/system/Name\" or              \"Transaction/strategy/quantsignal\". (optional)
 
-    try:
-        # Get transactions
-        api_response = api_instance.get_transactions(scope, code, from_transaction_date=from_transaction_date, to_transaction_date=to_transaction_date, as_at=as_at, filter=filter, property_keys=property_keys)
-        pprint(api_response)
-    except ApiException as e:
-        print("Exception when calling TransactionPortfoliosApi->get_transactions: %s\n" % e)
+try:
+    # Get transactions
+    api_response = api_instance.get_transactions(scope, code, from_transaction_date=from_transaction_date, to_transaction_date=to_transaction_date, as_at=as_at, filter=filter, property_keys=property_keys)
+    pprint(api_response)
+except ApiException as e:
+    print("Exception when calling TransactionPortfoliosApi->get_transactions: %s\n" % e)
 ```
 
 ### Parameters
@@ -832,23 +799,20 @@ configuration.access_token = 'YOUR_ACCESS_TOKEN'
 
 # Defining host is optional and default to http://localhost
 configuration.host = "http://localhost"
-
-# Enter a context with an instance of the API client
-with lusid.ApiClient(configuration) as api_client:
-    # Create an instance of the API class
-    api_instance = lusid.TransactionPortfoliosApi(api_client)
-    scope = 'scope_example' # str | The scope of the transaction portfolio.
+# Create an instance of the API class
+api_instance = lusid.TransactionPortfoliosApi(lusid.ApiClient(configuration))
+scope = 'scope_example' # str | The scope of the transaction portfolio.
 code = 'code_example' # str | The code of the transaction portfolio. Together with the scope this uniquely identifies              the transaction portfolio.
 from_effective_at = 'from_effective_at_example' # str | The lower bound effective datetime or cut label (inclusive) from which to retrieve the holdings              adjustments. There is no lower bound if this is not specified. (optional)
 to_effective_at = 'to_effective_at_example' # str | The upper bound effective datetime or cut label (inclusive) from which to retrieve the holdings              adjustments. There is no upper bound if this is not specified. (optional)
 as_at = '2013-10-20T19:20:30+01:00' # datetime | The asAt datetime at which to retrieve the holdings adjustments. Defaults to return the              latest version of each holding adjustment if not specified. (optional)
 
-    try:
-        # List holdings adjustments
-        api_response = api_instance.list_holdings_adjustments(scope, code, from_effective_at=from_effective_at, to_effective_at=to_effective_at, as_at=as_at)
-        pprint(api_response)
-    except ApiException as e:
-        print("Exception when calling TransactionPortfoliosApi->list_holdings_adjustments: %s\n" % e)
+try:
+    # List holdings adjustments
+    api_response = api_instance.list_holdings_adjustments(scope, code, from_effective_at=from_effective_at, to_effective_at=to_effective_at, as_at=as_at)
+    pprint(api_response)
+except ApiException as e:
+    print("Exception when calling TransactionPortfoliosApi->list_holdings_adjustments: %s\n" % e)
 ```
 
 ### Parameters
@@ -905,22 +869,19 @@ configuration.access_token = 'YOUR_ACCESS_TOKEN'
 
 # Defining host is optional and default to http://localhost
 configuration.host = "http://localhost"
-
-# Enter a context with an instance of the API client
-with lusid.ApiClient(configuration) as api_client:
-    # Create an instance of the API class
-    api_instance = lusid.TransactionPortfoliosApi(api_client)
-    scope = 'scope_example' # str | The scope of the transaction portfolio.
+# Create an instance of the API class
+api_instance = lusid.TransactionPortfoliosApi(lusid.ApiClient(configuration))
+scope = 'scope_example' # str | The scope of the transaction portfolio.
 code = 'code_example' # str | The code of the transaction portfolio. Together with the scope this uniquely identifies              the transaction portfolio.
 effective_at = 'effective_at_example' # str | The effective datetime or cut label at which the holdings should be set to the provided targets.
 holding_adjustments = [lusid.AdjustHoldingRequest()] # list[AdjustHoldingRequest] | The complete set of target holdings for the transaction portfolio.
 
-    try:
-        # Set holdings
-        api_response = api_instance.set_holdings(scope, code, effective_at, holding_adjustments)
-        pprint(api_response)
-    except ApiException as e:
-        print("Exception when calling TransactionPortfoliosApi->set_holdings: %s\n" % e)
+try:
+    # Set holdings
+    api_response = api_instance.set_holdings(scope, code, effective_at, holding_adjustments)
+    pprint(api_response)
+except ApiException as e:
+    print("Exception when calling TransactionPortfoliosApi->set_holdings: %s\n" % e)
 ```
 
 ### Parameters
@@ -976,21 +937,18 @@ configuration.access_token = 'YOUR_ACCESS_TOKEN'
 
 # Defining host is optional and default to http://localhost
 configuration.host = "http://localhost"
-
-# Enter a context with an instance of the API client
-with lusid.ApiClient(configuration) as api_client:
-    # Create an instance of the API class
-    api_instance = lusid.TransactionPortfoliosApi(api_client)
-    scope = 'scope_example' # str | The scope of the transaction portfolio.
+# Create an instance of the API class
+api_instance = lusid.TransactionPortfoliosApi(lusid.ApiClient(configuration))
+scope = 'scope_example' # str | The scope of the transaction portfolio.
 code = 'code_example' # str | The code of the transaction portfolio. Together with the scope this uniquely identifies              the transaction portfolio.
 executions = [lusid.ExecutionRequest()] # list[ExecutionRequest] | The executions to update or insert. (optional)
 
-    try:
-        # [EARLY ACCESS] Upsert executions
-        api_response = api_instance.upsert_executions(scope, code, executions=executions)
-        pprint(api_response)
-    except ApiException as e:
-        print("Exception when calling TransactionPortfoliosApi->upsert_executions: %s\n" % e)
+try:
+    # [EARLY ACCESS] Upsert executions
+    api_response = api_instance.upsert_executions(scope, code, executions=executions)
+    pprint(api_response)
+except ApiException as e:
+    print("Exception when calling TransactionPortfoliosApi->upsert_executions: %s\n" % e)
 ```
 
 ### Parameters
@@ -1045,22 +1003,19 @@ configuration.access_token = 'YOUR_ACCESS_TOKEN'
 
 # Defining host is optional and default to http://localhost
 configuration.host = "http://localhost"
-
-# Enter a context with an instance of the API client
-with lusid.ApiClient(configuration) as api_client:
-    # Create an instance of the API class
-    api_instance = lusid.TransactionPortfoliosApi(api_client)
-    scope = 'scope_example' # str | The scope of the transaction portfolio to update or insert details for.
+# Create an instance of the API class
+api_instance = lusid.TransactionPortfoliosApi(lusid.ApiClient(configuration))
+scope = 'scope_example' # str | The scope of the transaction portfolio to update or insert details for.
 code = 'code_example' # str | The code of the transaction portfolio to update or insert details for. Together with the              scope this uniquely identifies the transaction portfolio.
 portfolio_details = lusid.CreatePortfolioDetails() # CreatePortfolioDetails | The details to update or insert for the specified transaction portfolio.
 effective_at = 'effective_at_example' # str | The effective datetime or cut label at which the updated or inserted details should become valid.              Defaults to the current LUSID system datetime if not specified. (optional)
 
-    try:
-        # Upsert portfolio details
-        api_response = api_instance.upsert_portfolio_details(scope, code, portfolio_details, effective_at=effective_at)
-        pprint(api_response)
-    except ApiException as e:
-        print("Exception when calling TransactionPortfoliosApi->upsert_portfolio_details: %s\n" % e)
+try:
+    # Upsert portfolio details
+    api_response = api_instance.upsert_portfolio_details(scope, code, portfolio_details, effective_at=effective_at)
+    pprint(api_response)
+except ApiException as e:
+    print("Exception when calling TransactionPortfoliosApi->upsert_portfolio_details: %s\n" % e)
 ```
 
 ### Parameters
@@ -1116,22 +1071,19 @@ configuration.access_token = 'YOUR_ACCESS_TOKEN'
 
 # Defining host is optional and default to http://localhost
 configuration.host = "http://localhost"
-
-# Enter a context with an instance of the API client
-with lusid.ApiClient(configuration) as api_client:
-    # Create an instance of the API class
-    api_instance = lusid.TransactionPortfoliosApi(api_client)
-    scope = 'scope_example' # str | The scope of the transaction portfolio.
+# Create an instance of the API class
+api_instance = lusid.TransactionPortfoliosApi(lusid.ApiClient(configuration))
+scope = 'scope_example' # str | The scope of the transaction portfolio.
 code = 'code_example' # str | The code of the transaction portfolio. Together with the scope this uniquely identifies              the transaction portfolio.
 transaction_id = 'transaction_id_example' # str | The unique id of the transaction to update or insert properties against.
 transaction_properties = {'key': lusid.PerpetualProperty()} # dict(str, PerpetualProperty) | The properties with their associated values to update or insert onto the              transaction.
 
-    try:
-        # Upsert transaction properties
-        api_response = api_instance.upsert_transaction_properties(scope, code, transaction_id, transaction_properties)
-        pprint(api_response)
-    except ApiException as e:
-        print("Exception when calling TransactionPortfoliosApi->upsert_transaction_properties: %s\n" % e)
+try:
+    # Upsert transaction properties
+    api_response = api_instance.upsert_transaction_properties(scope, code, transaction_id, transaction_properties)
+    pprint(api_response)
+except ApiException as e:
+    print("Exception when calling TransactionPortfoliosApi->upsert_transaction_properties: %s\n" % e)
 ```
 
 ### Parameters
@@ -1187,21 +1139,18 @@ configuration.access_token = 'YOUR_ACCESS_TOKEN'
 
 # Defining host is optional and default to http://localhost
 configuration.host = "http://localhost"
-
-# Enter a context with an instance of the API client
-with lusid.ApiClient(configuration) as api_client:
-    # Create an instance of the API class
-    api_instance = lusid.TransactionPortfoliosApi(api_client)
-    scope = 'scope_example' # str | The scope of the transaction portfolio.
+# Create an instance of the API class
+api_instance = lusid.TransactionPortfoliosApi(lusid.ApiClient(configuration))
+scope = 'scope_example' # str | The scope of the transaction portfolio.
 code = 'code_example' # str | The code of the transaction portfolio. Together with the scope this uniquely identifies              the transaction portfolio.
 transactions = [lusid.TransactionRequest()] # list[TransactionRequest] | The transactions to be updated or inserted.
 
-    try:
-        # Upsert transactions
-        api_response = api_instance.upsert_transactions(scope, code, transactions)
-        pprint(api_response)
-    except ApiException as e:
-        print("Exception when calling TransactionPortfoliosApi->upsert_transactions: %s\n" % e)
+try:
+    # Upsert transactions
+    api_response = api_instance.upsert_transactions(scope, code, transactions)
+    pprint(api_response)
+except ApiException as e:
+    print("Exception when calling TransactionPortfoliosApi->upsert_transactions: %s\n" % e)
 ```
 
 ### Parameters

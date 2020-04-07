@@ -1,6 +1,5 @@
 # Version
 
-The version metadata.
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------

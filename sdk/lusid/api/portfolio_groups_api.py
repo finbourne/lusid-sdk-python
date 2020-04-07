@@ -110,12 +110,12 @@ class PortfolioGroupsApi(object):
             local_var_params[key] = val
         del local_var_params['kwargs']
         # verify the required parameter 'scope' is set
-        if self.api_client.client_side_validation and ('scope' not in local_var_params or  # noqa: E501
-                                                        local_var_params['scope'] is None):  # noqa: E501
+        if ('scope' not in local_var_params or
+                local_var_params['scope'] is None):
             raise ApiValueError("Missing the required parameter `scope` when calling `add_portfolio_to_group`")  # noqa: E501
         # verify the required parameter 'code' is set
-        if self.api_client.client_side_validation and ('code' not in local_var_params or  # noqa: E501
-                                                        local_var_params['code'] is None):  # noqa: E501
+        if ('code' not in local_var_params or
+                local_var_params['code'] is None):
             raise ApiValueError("Missing the required parameter `code` when calling `add_portfolio_to_group`")  # noqa: E501
 
         collection_formats = {}
@@ -127,7 +127,7 @@ class PortfolioGroupsApi(object):
             path_params['code'] = local_var_params['code']  # noqa: E501
 
         query_params = []
-        if 'effective_at' in local_var_params and local_var_params['effective_at'] is not None:  # noqa: E501
+        if 'effective_at' in local_var_params:
             query_params.append(('effectiveAt', local_var_params['effective_at']))  # noqa: E501
 
         header_params = {}
@@ -141,6 +141,7 @@ class PortfolioGroupsApi(object):
         # HTTP header `Accept`
         header_params['Accept'] = self.api_client.select_header_accept(
             ['text/plain', 'application/json', 'text/json'])  # noqa: E501
+
 
         # Authentication setting
         auth_settings = ['oauth2']  # noqa: E501
@@ -238,12 +239,12 @@ class PortfolioGroupsApi(object):
             local_var_params[key] = val
         del local_var_params['kwargs']
         # verify the required parameter 'scope' is set
-        if self.api_client.client_side_validation and ('scope' not in local_var_params or  # noqa: E501
-                                                        local_var_params['scope'] is None):  # noqa: E501
+        if ('scope' not in local_var_params or
+                local_var_params['scope'] is None):
             raise ApiValueError("Missing the required parameter `scope` when calling `add_sub_group_to_group`")  # noqa: E501
         # verify the required parameter 'code' is set
-        if self.api_client.client_side_validation and ('code' not in local_var_params or  # noqa: E501
-                                                        local_var_params['code'] is None):  # noqa: E501
+        if ('code' not in local_var_params or
+                local_var_params['code'] is None):
             raise ApiValueError("Missing the required parameter `code` when calling `add_sub_group_to_group`")  # noqa: E501
 
         collection_formats = {}
@@ -255,7 +256,7 @@ class PortfolioGroupsApi(object):
             path_params['code'] = local_var_params['code']  # noqa: E501
 
         query_params = []
-        if 'effective_at' in local_var_params and local_var_params['effective_at'] is not None:  # noqa: E501
+        if 'effective_at' in local_var_params:
             query_params.append(('effectiveAt', local_var_params['effective_at']))  # noqa: E501
 
         header_params = {}
@@ -269,6 +270,7 @@ class PortfolioGroupsApi(object):
         # HTTP header `Accept`
         header_params['Accept'] = self.api_client.select_header_accept(
             ['text/plain', 'application/json', 'text/json'])  # noqa: E501
+
 
         # Authentication setting
         auth_settings = ['oauth2']  # noqa: E501
@@ -362,8 +364,8 @@ class PortfolioGroupsApi(object):
             local_var_params[key] = val
         del local_var_params['kwargs']
         # verify the required parameter 'scope' is set
-        if self.api_client.client_side_validation and ('scope' not in local_var_params or  # noqa: E501
-                                                        local_var_params['scope'] is None):  # noqa: E501
+        if ('scope' not in local_var_params or
+                local_var_params['scope'] is None):
             raise ApiValueError("Missing the required parameter `scope` when calling `create_portfolio_group`")  # noqa: E501
 
         collection_formats = {}
@@ -385,6 +387,7 @@ class PortfolioGroupsApi(object):
         # HTTP header `Accept`
         header_params['Accept'] = self.api_client.select_header_accept(
             ['text/plain', 'application/json', 'text/json'])  # noqa: E501
+
 
         # Authentication setting
         auth_settings = ['oauth2']  # noqa: E501
@@ -482,16 +485,16 @@ class PortfolioGroupsApi(object):
             local_var_params[key] = val
         del local_var_params['kwargs']
         # verify the required parameter 'scope' is set
-        if self.api_client.client_side_validation and ('scope' not in local_var_params or  # noqa: E501
-                                                        local_var_params['scope'] is None):  # noqa: E501
+        if ('scope' not in local_var_params or
+                local_var_params['scope'] is None):
             raise ApiValueError("Missing the required parameter `scope` when calling `delete_group_properties`")  # noqa: E501
         # verify the required parameter 'code' is set
-        if self.api_client.client_side_validation and ('code' not in local_var_params or  # noqa: E501
-                                                        local_var_params['code'] is None):  # noqa: E501
+        if ('code' not in local_var_params or
+                local_var_params['code'] is None):
             raise ApiValueError("Missing the required parameter `code` when calling `delete_group_properties`")  # noqa: E501
         # verify the required parameter 'property_keys' is set
-        if self.api_client.client_side_validation and ('property_keys' not in local_var_params or  # noqa: E501
-                                                        local_var_params['property_keys'] is None):  # noqa: E501
+        if ('property_keys' not in local_var_params or
+                local_var_params['property_keys'] is None):
             raise ApiValueError("Missing the required parameter `property_keys` when calling `delete_group_properties`")  # noqa: E501
 
         collection_formats = {}
@@ -503,7 +506,7 @@ class PortfolioGroupsApi(object):
             path_params['code'] = local_var_params['code']  # noqa: E501
 
         query_params = []
-        if 'effective_at' in local_var_params and local_var_params['effective_at'] is not None:  # noqa: E501
+        if 'effective_at' in local_var_params:
             query_params.append(('effectiveAt', local_var_params['effective_at']))  # noqa: E501
 
         header_params = {}
@@ -517,6 +520,7 @@ class PortfolioGroupsApi(object):
         # HTTP header `Accept`
         header_params['Accept'] = self.api_client.select_header_accept(
             ['text/plain', 'application/json', 'text/json'])  # noqa: E501
+
 
         # Authentication setting
         auth_settings = ['oauth2']  # noqa: E501
@@ -616,20 +620,20 @@ class PortfolioGroupsApi(object):
             local_var_params[key] = val
         del local_var_params['kwargs']
         # verify the required parameter 'scope' is set
-        if self.api_client.client_side_validation and ('scope' not in local_var_params or  # noqa: E501
-                                                        local_var_params['scope'] is None):  # noqa: E501
+        if ('scope' not in local_var_params or
+                local_var_params['scope'] is None):
             raise ApiValueError("Missing the required parameter `scope` when calling `delete_portfolio_from_group`")  # noqa: E501
         # verify the required parameter 'code' is set
-        if self.api_client.client_side_validation and ('code' not in local_var_params or  # noqa: E501
-                                                        local_var_params['code'] is None):  # noqa: E501
+        if ('code' not in local_var_params or
+                local_var_params['code'] is None):
             raise ApiValueError("Missing the required parameter `code` when calling `delete_portfolio_from_group`")  # noqa: E501
         # verify the required parameter 'portfolio_scope' is set
-        if self.api_client.client_side_validation and ('portfolio_scope' not in local_var_params or  # noqa: E501
-                                                        local_var_params['portfolio_scope'] is None):  # noqa: E501
+        if ('portfolio_scope' not in local_var_params or
+                local_var_params['portfolio_scope'] is None):
             raise ApiValueError("Missing the required parameter `portfolio_scope` when calling `delete_portfolio_from_group`")  # noqa: E501
         # verify the required parameter 'portfolio_code' is set
-        if self.api_client.client_side_validation and ('portfolio_code' not in local_var_params or  # noqa: E501
-                                                        local_var_params['portfolio_code'] is None):  # noqa: E501
+        if ('portfolio_code' not in local_var_params or
+                local_var_params['portfolio_code'] is None):
             raise ApiValueError("Missing the required parameter `portfolio_code` when calling `delete_portfolio_from_group`")  # noqa: E501
 
         collection_formats = {}
@@ -645,7 +649,7 @@ class PortfolioGroupsApi(object):
             path_params['portfolioCode'] = local_var_params['portfolio_code']  # noqa: E501
 
         query_params = []
-        if 'effective_at' in local_var_params and local_var_params['effective_at'] is not None:  # noqa: E501
+        if 'effective_at' in local_var_params:
             query_params.append(('effectiveAt', local_var_params['effective_at']))  # noqa: E501
 
         header_params = {}
@@ -657,6 +661,7 @@ class PortfolioGroupsApi(object):
         # HTTP header `Accept`
         header_params['Accept'] = self.api_client.select_header_accept(
             ['text/plain', 'application/json', 'text/json'])  # noqa: E501
+
 
         # Authentication setting
         auth_settings = ['oauth2']  # noqa: E501
@@ -750,12 +755,12 @@ class PortfolioGroupsApi(object):
             local_var_params[key] = val
         del local_var_params['kwargs']
         # verify the required parameter 'scope' is set
-        if self.api_client.client_side_validation and ('scope' not in local_var_params or  # noqa: E501
-                                                        local_var_params['scope'] is None):  # noqa: E501
+        if ('scope' not in local_var_params or
+                local_var_params['scope'] is None):
             raise ApiValueError("Missing the required parameter `scope` when calling `delete_portfolio_group`")  # noqa: E501
         # verify the required parameter 'code' is set
-        if self.api_client.client_side_validation and ('code' not in local_var_params or  # noqa: E501
-                                                        local_var_params['code'] is None):  # noqa: E501
+        if ('code' not in local_var_params or
+                local_var_params['code'] is None):
             raise ApiValueError("Missing the required parameter `code` when calling `delete_portfolio_group`")  # noqa: E501
 
         collection_formats = {}
@@ -777,6 +782,7 @@ class PortfolioGroupsApi(object):
         # HTTP header `Accept`
         header_params['Accept'] = self.api_client.select_header_accept(
             ['text/plain', 'application/json', 'text/json'])  # noqa: E501
+
 
         # Authentication setting
         auth_settings = ['oauth2']  # noqa: E501
@@ -876,20 +882,20 @@ class PortfolioGroupsApi(object):
             local_var_params[key] = val
         del local_var_params['kwargs']
         # verify the required parameter 'scope' is set
-        if self.api_client.client_side_validation and ('scope' not in local_var_params or  # noqa: E501
-                                                        local_var_params['scope'] is None):  # noqa: E501
+        if ('scope' not in local_var_params or
+                local_var_params['scope'] is None):
             raise ApiValueError("Missing the required parameter `scope` when calling `delete_sub_group_from_group`")  # noqa: E501
         # verify the required parameter 'code' is set
-        if self.api_client.client_side_validation and ('code' not in local_var_params or  # noqa: E501
-                                                        local_var_params['code'] is None):  # noqa: E501
+        if ('code' not in local_var_params or
+                local_var_params['code'] is None):
             raise ApiValueError("Missing the required parameter `code` when calling `delete_sub_group_from_group`")  # noqa: E501
         # verify the required parameter 'subgroup_scope' is set
-        if self.api_client.client_side_validation and ('subgroup_scope' not in local_var_params or  # noqa: E501
-                                                        local_var_params['subgroup_scope'] is None):  # noqa: E501
+        if ('subgroup_scope' not in local_var_params or
+                local_var_params['subgroup_scope'] is None):
             raise ApiValueError("Missing the required parameter `subgroup_scope` when calling `delete_sub_group_from_group`")  # noqa: E501
         # verify the required parameter 'subgroup_code' is set
-        if self.api_client.client_side_validation and ('subgroup_code' not in local_var_params or  # noqa: E501
-                                                        local_var_params['subgroup_code'] is None):  # noqa: E501
+        if ('subgroup_code' not in local_var_params or
+                local_var_params['subgroup_code'] is None):
             raise ApiValueError("Missing the required parameter `subgroup_code` when calling `delete_sub_group_from_group`")  # noqa: E501
 
         collection_formats = {}
@@ -905,7 +911,7 @@ class PortfolioGroupsApi(object):
             path_params['subgroupCode'] = local_var_params['subgroup_code']  # noqa: E501
 
         query_params = []
-        if 'effective_at' in local_var_params and local_var_params['effective_at'] is not None:  # noqa: E501
+        if 'effective_at' in local_var_params:
             query_params.append(('effectiveAt', local_var_params['effective_at']))  # noqa: E501
 
         header_params = {}
@@ -917,6 +923,7 @@ class PortfolioGroupsApi(object):
         # HTTP header `Accept`
         header_params['Accept'] = self.api_client.select_header_accept(
             ['text/plain', 'application/json', 'text/json'])  # noqa: E501
+
 
         # Authentication setting
         auth_settings = ['oauth2']  # noqa: E501
@@ -1014,12 +1021,12 @@ class PortfolioGroupsApi(object):
             local_var_params[key] = val
         del local_var_params['kwargs']
         # verify the required parameter 'scope' is set
-        if self.api_client.client_side_validation and ('scope' not in local_var_params or  # noqa: E501
-                                                        local_var_params['scope'] is None):  # noqa: E501
+        if ('scope' not in local_var_params or
+                local_var_params['scope'] is None):
             raise ApiValueError("Missing the required parameter `scope` when calling `get_group_properties`")  # noqa: E501
         # verify the required parameter 'code' is set
-        if self.api_client.client_side_validation and ('code' not in local_var_params or  # noqa: E501
-                                                        local_var_params['code'] is None):  # noqa: E501
+        if ('code' not in local_var_params or
+                local_var_params['code'] is None):
             raise ApiValueError("Missing the required parameter `code` when calling `get_group_properties`")  # noqa: E501
 
         collection_formats = {}
@@ -1031,9 +1038,9 @@ class PortfolioGroupsApi(object):
             path_params['code'] = local_var_params['code']  # noqa: E501
 
         query_params = []
-        if 'effective_at' in local_var_params and local_var_params['effective_at'] is not None:  # noqa: E501
+        if 'effective_at' in local_var_params:
             query_params.append(('effectiveAt', local_var_params['effective_at']))  # noqa: E501
-        if 'as_at' in local_var_params and local_var_params['as_at'] is not None:  # noqa: E501
+        if 'as_at' in local_var_params:
             query_params.append(('asAt', local_var_params['as_at']))  # noqa: E501
 
         header_params = {}
@@ -1045,6 +1052,7 @@ class PortfolioGroupsApi(object):
         # HTTP header `Accept`
         header_params['Accept'] = self.api_client.select_header_accept(
             ['text/plain', 'application/json', 'text/json'])  # noqa: E501
+
 
         # Authentication setting
         auth_settings = ['oauth2']  # noqa: E501
@@ -1142,12 +1150,12 @@ class PortfolioGroupsApi(object):
             local_var_params[key] = val
         del local_var_params['kwargs']
         # verify the required parameter 'scope' is set
-        if self.api_client.client_side_validation and ('scope' not in local_var_params or  # noqa: E501
-                                                        local_var_params['scope'] is None):  # noqa: E501
+        if ('scope' not in local_var_params or
+                local_var_params['scope'] is None):
             raise ApiValueError("Missing the required parameter `scope` when calling `get_portfolio_group`")  # noqa: E501
         # verify the required parameter 'code' is set
-        if self.api_client.client_side_validation and ('code' not in local_var_params or  # noqa: E501
-                                                        local_var_params['code'] is None):  # noqa: E501
+        if ('code' not in local_var_params or
+                local_var_params['code'] is None):
             raise ApiValueError("Missing the required parameter `code` when calling `get_portfolio_group`")  # noqa: E501
 
         collection_formats = {}
@@ -1159,9 +1167,9 @@ class PortfolioGroupsApi(object):
             path_params['code'] = local_var_params['code']  # noqa: E501
 
         query_params = []
-        if 'effective_at' in local_var_params and local_var_params['effective_at'] is not None:  # noqa: E501
+        if 'effective_at' in local_var_params:
             query_params.append(('effectiveAt', local_var_params['effective_at']))  # noqa: E501
-        if 'as_at' in local_var_params and local_var_params['as_at'] is not None:  # noqa: E501
+        if 'as_at' in local_var_params:
             query_params.append(('asAt', local_var_params['as_at']))  # noqa: E501
 
         header_params = {}
@@ -1173,6 +1181,7 @@ class PortfolioGroupsApi(object):
         # HTTP header `Accept`
         header_params['Accept'] = self.api_client.select_header_accept(
             ['text/plain', 'application/json', 'text/json'])  # noqa: E501
+
 
         # Authentication setting
         auth_settings = ['oauth2']  # noqa: E501
@@ -1272,12 +1281,12 @@ class PortfolioGroupsApi(object):
             local_var_params[key] = val
         del local_var_params['kwargs']
         # verify the required parameter 'scope' is set
-        if self.api_client.client_side_validation and ('scope' not in local_var_params or  # noqa: E501
-                                                        local_var_params['scope'] is None):  # noqa: E501
+        if ('scope' not in local_var_params or
+                local_var_params['scope'] is None):
             raise ApiValueError("Missing the required parameter `scope` when calling `get_portfolio_group_commands`")  # noqa: E501
         # verify the required parameter 'code' is set
-        if self.api_client.client_side_validation and ('code' not in local_var_params or  # noqa: E501
-                                                        local_var_params['code'] is None):  # noqa: E501
+        if ('code' not in local_var_params or
+                local_var_params['code'] is None):
             raise ApiValueError("Missing the required parameter `code` when calling `get_portfolio_group_commands`")  # noqa: E501
 
         collection_formats = {}
@@ -1289,11 +1298,11 @@ class PortfolioGroupsApi(object):
             path_params['code'] = local_var_params['code']  # noqa: E501
 
         query_params = []
-        if 'from_as_at' in local_var_params and local_var_params['from_as_at'] is not None:  # noqa: E501
+        if 'from_as_at' in local_var_params:
             query_params.append(('fromAsAt', local_var_params['from_as_at']))  # noqa: E501
-        if 'to_as_at' in local_var_params and local_var_params['to_as_at'] is not None:  # noqa: E501
+        if 'to_as_at' in local_var_params:
             query_params.append(('toAsAt', local_var_params['to_as_at']))  # noqa: E501
-        if 'filter' in local_var_params and local_var_params['filter'] is not None:  # noqa: E501
+        if 'filter' in local_var_params:
             query_params.append(('filter', local_var_params['filter']))  # noqa: E501
 
         header_params = {}
@@ -1305,6 +1314,7 @@ class PortfolioGroupsApi(object):
         # HTTP header `Accept`
         header_params['Accept'] = self.api_client.select_header_accept(
             ['text/plain', 'application/json', 'text/json'])  # noqa: E501
+
 
         # Authentication setting
         auth_settings = ['oauth2']  # noqa: E501
@@ -1404,12 +1414,12 @@ class PortfolioGroupsApi(object):
             local_var_params[key] = val
         del local_var_params['kwargs']
         # verify the required parameter 'scope' is set
-        if self.api_client.client_side_validation and ('scope' not in local_var_params or  # noqa: E501
-                                                        local_var_params['scope'] is None):  # noqa: E501
+        if ('scope' not in local_var_params or
+                local_var_params['scope'] is None):
             raise ApiValueError("Missing the required parameter `scope` when calling `get_portfolio_group_expansion`")  # noqa: E501
         # verify the required parameter 'code' is set
-        if self.api_client.client_side_validation and ('code' not in local_var_params or  # noqa: E501
-                                                        local_var_params['code'] is None):  # noqa: E501
+        if ('code' not in local_var_params or
+                local_var_params['code'] is None):
             raise ApiValueError("Missing the required parameter `code` when calling `get_portfolio_group_expansion`")  # noqa: E501
 
         collection_formats = {}
@@ -1421,11 +1431,11 @@ class PortfolioGroupsApi(object):
             path_params['code'] = local_var_params['code']  # noqa: E501
 
         query_params = []
-        if 'effective_at' in local_var_params and local_var_params['effective_at'] is not None:  # noqa: E501
+        if 'effective_at' in local_var_params:
             query_params.append(('effectiveAt', local_var_params['effective_at']))  # noqa: E501
-        if 'as_at' in local_var_params and local_var_params['as_at'] is not None:  # noqa: E501
+        if 'as_at' in local_var_params:
             query_params.append(('asAt', local_var_params['as_at']))  # noqa: E501
-        if 'property_filter' in local_var_params and local_var_params['property_filter'] is not None:  # noqa: E501
+        if 'property_filter' in local_var_params:
             query_params.append(('propertyFilter', local_var_params['property_filter']))  # noqa: E501
             collection_formats['propertyFilter'] = 'multi'  # noqa: E501
 
@@ -1438,6 +1448,7 @@ class PortfolioGroupsApi(object):
         # HTTP header `Accept`
         header_params['Accept'] = self.api_client.select_header_accept(
             ['text/plain', 'application/json', 'text/json'])  # noqa: E501
+
 
         # Authentication setting
         auth_settings = ['oauth2']  # noqa: E501
@@ -1535,8 +1546,8 @@ class PortfolioGroupsApi(object):
             local_var_params[key] = val
         del local_var_params['kwargs']
         # verify the required parameter 'scope' is set
-        if self.api_client.client_side_validation and ('scope' not in local_var_params or  # noqa: E501
-                                                        local_var_params['scope'] is None):  # noqa: E501
+        if ('scope' not in local_var_params or
+                local_var_params['scope'] is None):
             raise ApiValueError("Missing the required parameter `scope` when calling `list_portfolio_groups`")  # noqa: E501
 
         collection_formats = {}
@@ -1546,11 +1557,11 @@ class PortfolioGroupsApi(object):
             path_params['scope'] = local_var_params['scope']  # noqa: E501
 
         query_params = []
-        if 'effective_at' in local_var_params and local_var_params['effective_at'] is not None:  # noqa: E501
+        if 'effective_at' in local_var_params:
             query_params.append(('effectiveAt', local_var_params['effective_at']))  # noqa: E501
-        if 'as_at' in local_var_params and local_var_params['as_at'] is not None:  # noqa: E501
+        if 'as_at' in local_var_params:
             query_params.append(('asAt', local_var_params['as_at']))  # noqa: E501
-        if 'filter' in local_var_params and local_var_params['filter'] is not None:  # noqa: E501
+        if 'filter' in local_var_params:
             query_params.append(('filter', local_var_params['filter']))  # noqa: E501
 
         header_params = {}
@@ -1562,6 +1573,7 @@ class PortfolioGroupsApi(object):
         # HTTP header `Accept`
         header_params['Accept'] = self.api_client.select_header_accept(
             ['text/plain', 'application/json', 'text/json'])  # noqa: E501
+
 
         # Authentication setting
         auth_settings = ['oauth2']  # noqa: E501
@@ -1659,12 +1671,12 @@ class PortfolioGroupsApi(object):
             local_var_params[key] = val
         del local_var_params['kwargs']
         # verify the required parameter 'scope' is set
-        if self.api_client.client_side_validation and ('scope' not in local_var_params or  # noqa: E501
-                                                        local_var_params['scope'] is None):  # noqa: E501
+        if ('scope' not in local_var_params or
+                local_var_params['scope'] is None):
             raise ApiValueError("Missing the required parameter `scope` when calling `update_portfolio_group`")  # noqa: E501
         # verify the required parameter 'code' is set
-        if self.api_client.client_side_validation and ('code' not in local_var_params or  # noqa: E501
-                                                        local_var_params['code'] is None):  # noqa: E501
+        if ('code' not in local_var_params or
+                local_var_params['code'] is None):
             raise ApiValueError("Missing the required parameter `code` when calling `update_portfolio_group`")  # noqa: E501
 
         collection_formats = {}
@@ -1676,7 +1688,7 @@ class PortfolioGroupsApi(object):
             path_params['code'] = local_var_params['code']  # noqa: E501
 
         query_params = []
-        if 'effective_at' in local_var_params and local_var_params['effective_at'] is not None:  # noqa: E501
+        if 'effective_at' in local_var_params:
             query_params.append(('effectiveAt', local_var_params['effective_at']))  # noqa: E501
 
         header_params = {}
@@ -1690,6 +1702,7 @@ class PortfolioGroupsApi(object):
         # HTTP header `Accept`
         header_params['Accept'] = self.api_client.select_header_accept(
             ['text/plain', 'application/json', 'text/json'])  # noqa: E501
+
 
         # Authentication setting
         auth_settings = ['oauth2']  # noqa: E501
@@ -1785,12 +1798,12 @@ class PortfolioGroupsApi(object):
             local_var_params[key] = val
         del local_var_params['kwargs']
         # verify the required parameter 'scope' is set
-        if self.api_client.client_side_validation and ('scope' not in local_var_params or  # noqa: E501
-                                                        local_var_params['scope'] is None):  # noqa: E501
+        if ('scope' not in local_var_params or
+                local_var_params['scope'] is None):
             raise ApiValueError("Missing the required parameter `scope` when calling `upsert_group_properties`")  # noqa: E501
         # verify the required parameter 'code' is set
-        if self.api_client.client_side_validation and ('code' not in local_var_params or  # noqa: E501
-                                                        local_var_params['code'] is None):  # noqa: E501
+        if ('code' not in local_var_params or
+                local_var_params['code'] is None):
             raise ApiValueError("Missing the required parameter `code` when calling `upsert_group_properties`")  # noqa: E501
 
         collection_formats = {}
@@ -1814,6 +1827,7 @@ class PortfolioGroupsApi(object):
         # HTTP header `Accept`
         header_params['Accept'] = self.api_client.select_header_accept(
             ['text/plain', 'application/json', 'text/json'])  # noqa: E501
+
 
         # Authentication setting
         auth_settings = ['oauth2']  # noqa: E501

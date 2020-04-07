@@ -104,8 +104,8 @@ class LoginApi(object):
             local_var_params[key] = val
         del local_var_params['kwargs']
         # verify the required parameter 'domain' is set
-        if self.api_client.client_side_validation and ('domain' not in local_var_params or  # noqa: E501
-                                                        local_var_params['domain'] is None):  # noqa: E501
+        if ('domain' not in local_var_params or
+                local_var_params['domain'] is None):
             raise ApiValueError("Missing the required parameter `domain` when calling `get_saml_identity_provider_id`")  # noqa: E501
 
         collection_formats = {}
@@ -125,6 +125,7 @@ class LoginApi(object):
         # HTTP header `Accept`
         header_params['Accept'] = self.api_client.select_header_accept(
             ['text/plain', 'application/json', 'text/json'])  # noqa: E501
+
 
         # Authentication setting
         auth_settings = ['oauth2']  # noqa: E501

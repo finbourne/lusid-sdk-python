@@ -29,19 +29,16 @@ configuration.access_token = 'YOUR_ACCESS_TOKEN'
 
 # Defining host is optional and default to http://localhost
 configuration.host = "http://localhost"
+# Create an instance of the API class
+api_instance = lusid.LoginApi(lusid.ApiClient(configuration))
+domain = 'domain_example' # str | The domain that the user will be logging in to
 
-# Enter a context with an instance of the API client
-with lusid.ApiClient(configuration) as api_client:
-    # Create an instance of the API class
-    api_instance = lusid.LoginApi(api_client)
-    domain = 'domain_example' # str | The domain that the user will be logging in to
-
-    try:
-        # Get SAML Identity Provider
-        api_response = api_instance.get_saml_identity_provider_id(domain)
-        pprint(api_response)
-    except ApiException as e:
-        print("Exception when calling LoginApi->get_saml_identity_provider_id: %s\n" % e)
+try:
+    # Get SAML Identity Provider
+    api_response = api_instance.get_saml_identity_provider_id(domain)
+    pprint(api_response)
+except ApiException as e:
+    print("Exception when calling LoginApi->get_saml_identity_provider_id: %s\n" % e)
 ```
 
 ### Parameters
