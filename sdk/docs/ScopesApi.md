@@ -1,6 +1,6 @@
 # lusid.ScopesApi
 
-All URIs are relative to *http://localhost/api*
+All URIs are relative to *http://localhost*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
@@ -27,18 +27,21 @@ configuration = lusid.Configuration()
 # Configure OAuth2 access token for authorization: oauth2
 configuration.access_token = 'YOUR_ACCESS_TOKEN'
 
-# Defining host is optional and default to http://localhost/api
-configuration.host = "http://localhost/api"
-# Create an instance of the API class
-api_instance = lusid.ScopesApi(lusid.ApiClient(configuration))
-filter = 'filter_example' # str | Expression to filter the result set.              For example, to filter on the Scope, use \"scope eq 'string'\"              Read more about filtering results from LUSID here https://support.lusid.com/filtering-results-from-lusid. (optional)
+# Defining host is optional and default to http://localhost
+configuration.host = "http://localhost"
 
-try:
-    # [EARLY ACCESS] List Scopes
-    api_response = api_instance.list_scopes(filter=filter)
-    pprint(api_response)
-except ApiException as e:
-    print("Exception when calling ScopesApi->list_scopes: %s\n" % e)
+# Enter a context with an instance of the API client
+with lusid.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = lusid.ScopesApi(api_client)
+    filter = 'filter_example' # str | Expression to filter the result set.              For example, to filter on the Scope, use \"scope eq 'string'\"              Read more about filtering results from LUSID here https://support.lusid.com/filtering-results-from-lusid. (optional)
+
+    try:
+        # [EARLY ACCESS] List Scopes
+        api_response = api_instance.list_scopes(filter=filter)
+        pprint(api_response)
+    except ApiException as e:
+        print("Exception when calling ScopesApi->list_scopes: %s\n" % e)
 ```
 
 ### Parameters

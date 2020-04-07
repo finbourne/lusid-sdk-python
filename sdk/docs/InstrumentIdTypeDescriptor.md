@@ -1,5 +1,6 @@
 # InstrumentIdTypeDescriptor
 
+The description of an allowable instrument identifier.
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------

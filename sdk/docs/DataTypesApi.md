@@ -1,6 +1,6 @@
 # lusid.DataTypesApi
 
-All URIs are relative to *http://localhost/api*
+All URIs are relative to *http://localhost*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
@@ -29,20 +29,23 @@ configuration = lusid.Configuration()
 # Configure OAuth2 access token for authorization: oauth2
 configuration.access_token = 'YOUR_ACCESS_TOKEN'
 
-# Defining host is optional and default to http://localhost/api
-configuration.host = "http://localhost/api"
-# Create an instance of the API class
-api_instance = lusid.DataTypesApi(lusid.ApiClient(configuration))
-scope = 'scope_example' # str | The scope of the data type
+# Defining host is optional and default to http://localhost
+configuration.host = "http://localhost"
+
+# Enter a context with an instance of the API client
+with lusid.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = lusid.DataTypesApi(api_client)
+    scope = 'scope_example' # str | The scope of the data type
 code = 'code_example' # str | The code of the data type
 as_at = '2013-10-20T19:20:30+01:00' # datetime | The asAt datetime at which to retrieve the data type definition. Defaults to              return the latest version of the instrument definition if not specified. (optional)
 
-try:
-    # [EARLY ACCESS] Get data type definition
-    api_response = api_instance.get_data_type(scope, code, as_at=as_at)
-    pprint(api_response)
-except ApiException as e:
-    print("Exception when calling DataTypesApi->get_data_type: %s\n" % e)
+    try:
+        # [EARLY ACCESS] Get data type definition
+        api_response = api_instance.get_data_type(scope, code, as_at=as_at)
+        pprint(api_response)
+    except ApiException as e:
+        print("Exception when calling DataTypesApi->get_data_type: %s\n" % e)
 ```
 
 ### Parameters
@@ -95,22 +98,25 @@ configuration = lusid.Configuration()
 # Configure OAuth2 access token for authorization: oauth2
 configuration.access_token = 'YOUR_ACCESS_TOKEN'
 
-# Defining host is optional and default to http://localhost/api
-configuration.host = "http://localhost/api"
-# Create an instance of the API class
-api_instance = lusid.DataTypesApi(lusid.ApiClient(configuration))
-scope = 'scope_example' # str | The scope of the data type
+# Defining host is optional and default to http://localhost
+configuration.host = "http://localhost"
+
+# Enter a context with an instance of the API client
+with lusid.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = lusid.DataTypesApi(api_client)
+    scope = 'scope_example' # str | The scope of the data type
 code = 'code_example' # str | The code of the data type
 units = ['units_example'] # list[str] | One or more unit identifiers for which the definition is being requested (optional)
 filter = 'filter_example' # str | Optional. Expression to filter the result set.               For example, to filter on the Schema, use \"schema eq 'string'\"              Read more about filtering results from LUSID here https://support.lusid.com/filtering-results-from-lusid. (optional)
 as_at = '2013-10-20T19:20:30+01:00' # datetime | Optional. The as at of the requested data type (optional)
 
-try:
-    # [EARLY ACCESS] Get units from data type
-    api_response = api_instance.get_units_from_data_type(scope, code, units=units, filter=filter, as_at=as_at)
-    pprint(api_response)
-except ApiException as e:
-    print("Exception when calling DataTypesApi->get_units_from_data_type: %s\n" % e)
+    try:
+        # [EARLY ACCESS] Get units from data type
+        api_response = api_instance.get_units_from_data_type(scope, code, units=units, filter=filter, as_at=as_at)
+        pprint(api_response)
+    except ApiException as e:
+        print("Exception when calling DataTypesApi->get_units_from_data_type: %s\n" % e)
 ```
 
 ### Parameters
@@ -165,11 +171,14 @@ configuration = lusid.Configuration()
 # Configure OAuth2 access token for authorization: oauth2
 configuration.access_token = 'YOUR_ACCESS_TOKEN'
 
-# Defining host is optional and default to http://localhost/api
-configuration.host = "http://localhost/api"
-# Create an instance of the API class
-api_instance = lusid.DataTypesApi(lusid.ApiClient(configuration))
-scope = 'scope_example' # str | The requested scope of the data types
+# Defining host is optional and default to http://localhost
+configuration.host = "http://localhost"
+
+# Enter a context with an instance of the API client
+with lusid.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = lusid.DataTypesApi(api_client)
+    scope = 'scope_example' # str | The requested scope of the data types
 as_at = '2013-10-20T19:20:30+01:00' # datetime | The as at of the requested data types (optional)
 include_system = True # bool | Whether to additionally include those data types in the \"system\" scope (optional)
 sort_by = ['sort_by_example'] # list[str] | Optional. Order the results by these fields. Use use the '-' sign to denote descending order e.g. -MyFieldName (optional)
@@ -177,12 +186,12 @@ start = 56 # int | Optional. When paginating, skip this number of results (optio
 limit = 56 # int | Optional. When paginating, limit the number of returned results to this many. (optional)
 filter = 'filter_example' # str | Optional. Expression to filter the result set.              For example, to filter on the Display Name, use \"displayName eq 'string'\"              Read more about filtering results from LUSID here https://support.lusid.com/filtering-results-from-lusid. (optional)
 
-try:
-    # [EARLY ACCESS] List data types
-    api_response = api_instance.list_data_types(scope, as_at=as_at, include_system=include_system, sort_by=sort_by, start=start, limit=limit, filter=filter)
-    pprint(api_response)
-except ApiException as e:
-    print("Exception when calling DataTypesApi->list_data_types: %s\n" % e)
+    try:
+        # [EARLY ACCESS] List data types
+        api_response = api_instance.list_data_types(scope, as_at=as_at, include_system=include_system, sort_by=sort_by, start=start, limit=limit, filter=filter)
+        pprint(api_response)
+    except ApiException as e:
+        print("Exception when calling DataTypesApi->list_data_types: %s\n" % e)
 ```
 
 ### Parameters

@@ -1,6 +1,6 @@
 # lusid.SearchApi
 
-All URIs are relative to *http://localhost/api*
+All URIs are relative to *http://localhost*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
@@ -29,19 +29,22 @@ configuration = lusid.Configuration()
 # Configure OAuth2 access token for authorization: oauth2
 configuration.access_token = 'YOUR_ACCESS_TOKEN'
 
-# Defining host is optional and default to http://localhost/api
-configuration.host = "http://localhost/api"
-# Create an instance of the API class
-api_instance = lusid.SearchApi(lusid.ApiClient(configuration))
-request = None # object | The search query to use. Read more about search queries in LUSID here https://support.lusid.com/constructing-a-search-request.
+# Defining host is optional and default to http://localhost
+configuration.host = "http://localhost"
+
+# Enter a context with an instance of the API client
+with lusid.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = lusid.SearchApi(api_client)
+    request = None # object | The search query to use. Read more about search queries in LUSID here https://support.lusid.com/constructing-a-search-request.
 filter = 'filter_example' # str | Expression to filter the result set. Read more about filtering results from LUSID here https://support.lusid.com/filtering-results-from-lusid. (optional)
 
-try:
-    # [DEPRECATED] Portfolio groups search
-    api_response = api_instance.portfolio_groups_search(request, filter=filter)
-    pprint(api_response)
-except ApiException as e:
-    print("Exception when calling SearchApi->portfolio_groups_search: %s\n" % e)
+    try:
+        # [DEPRECATED] Portfolio groups search
+        api_response = api_instance.portfolio_groups_search(request, filter=filter)
+        pprint(api_response)
+    except ApiException as e:
+        print("Exception when calling SearchApi->portfolio_groups_search: %s\n" % e)
 ```
 
 ### Parameters
@@ -93,19 +96,22 @@ configuration = lusid.Configuration()
 # Configure OAuth2 access token for authorization: oauth2
 configuration.access_token = 'YOUR_ACCESS_TOKEN'
 
-# Defining host is optional and default to http://localhost/api
-configuration.host = "http://localhost/api"
-# Create an instance of the API class
-api_instance = lusid.SearchApi(lusid.ApiClient(configuration))
-request = None # object | The search query to use. Read more about search queries in LUSID here https://support.lusid.com/constructing-a-search-request.
+# Defining host is optional and default to http://localhost
+configuration.host = "http://localhost"
+
+# Enter a context with an instance of the API client
+with lusid.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = lusid.SearchApi(api_client)
+    request = None # object | The search query to use. Read more about search queries in LUSID here https://support.lusid.com/constructing-a-search-request.
 filter = 'filter_example' # str | Expression to filter the result set. Read more about filtering results from LUSID here https://support.lusid.com/filtering-results-from-lusid. (optional)
 
-try:
-    # [DEPRECATED] Portfolios search
-    api_response = api_instance.portfolios_search(request, filter=filter)
-    pprint(api_response)
-except ApiException as e:
-    print("Exception when calling SearchApi->portfolios_search: %s\n" % e)
+    try:
+        # [DEPRECATED] Portfolios search
+        api_response = api_instance.portfolios_search(request, filter=filter)
+        pprint(api_response)
+    except ApiException as e:
+        print("Exception when calling SearchApi->portfolios_search: %s\n" % e)
 ```
 
 ### Parameters
@@ -157,19 +163,22 @@ configuration = lusid.Configuration()
 # Configure OAuth2 access token for authorization: oauth2
 configuration.access_token = 'YOUR_ACCESS_TOKEN'
 
-# Defining host is optional and default to http://localhost/api
-configuration.host = "http://localhost/api"
-# Create an instance of the API class
-api_instance = lusid.SearchApi(lusid.ApiClient(configuration))
-request = None # object | The search query to use. Read more about search queries in LUSID here https://support.lusid.com/constructing-a-search-request.
+# Defining host is optional and default to http://localhost
+configuration.host = "http://localhost"
+
+# Enter a context with an instance of the API client
+with lusid.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = lusid.SearchApi(api_client)
+    request = None # object | The search query to use. Read more about search queries in LUSID here https://support.lusid.com/constructing-a-search-request.
 filter = 'filter_example' # str | Expression to filter the result set. Read more about filtering results from LUSID here https://support.lusid.com/filtering-results-from-lusid. (optional)
 
-try:
-    # [DEPRECATED] Search property definitions
-    api_response = api_instance.properties_search(request, filter=filter)
-    pprint(api_response)
-except ApiException as e:
-    print("Exception when calling SearchApi->properties_search: %s\n" % e)
+    try:
+        # [DEPRECATED] Search property definitions
+        api_response = api_instance.properties_search(request, filter=filter)
+        pprint(api_response)
+    except ApiException as e:
+        print("Exception when calling SearchApi->properties_search: %s\n" % e)
 ```
 
 ### Parameters

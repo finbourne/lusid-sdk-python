@@ -1,6 +1,6 @@
 # lusid.InstrumentsApi
 
-All URIs are relative to *http://localhost/api*
+All URIs are relative to *http://localhost*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
@@ -34,19 +34,22 @@ configuration = lusid.Configuration()
 # Configure OAuth2 access token for authorization: oauth2
 configuration.access_token = 'YOUR_ACCESS_TOKEN'
 
-# Defining host is optional and default to http://localhost/api
-configuration.host = "http://localhost/api"
-# Create an instance of the API class
-api_instance = lusid.InstrumentsApi(lusid.ApiClient(configuration))
-identifier_type = 'identifier_type_example' # str | The identifier being supplied e.g. \"Figi\".
+# Defining host is optional and default to http://localhost
+configuration.host = "http://localhost"
+
+# Enter a context with an instance of the API client
+with lusid.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = lusid.InstrumentsApi(api_client)
+    identifier_type = 'identifier_type_example' # str | The identifier being supplied e.g. \"Figi\".
 identifier = 'identifier_example' # str | The value of the identifier that resolves to the instrument to delete.
 
-try:
-    # [EARLY ACCESS] Delete instrument
-    api_response = api_instance.delete_instrument(identifier_type, identifier)
-    pprint(api_response)
-except ApiException as e:
-    print("Exception when calling InstrumentsApi->delete_instrument: %s\n" % e)
+    try:
+        # [EARLY ACCESS] Delete instrument
+        api_response = api_instance.delete_instrument(identifier_type, identifier)
+        pprint(api_response)
+    except ApiException as e:
+        print("Exception when calling InstrumentsApi->delete_instrument: %s\n" % e)
 ```
 
 ### Parameters
@@ -98,22 +101,25 @@ configuration = lusid.Configuration()
 # Configure OAuth2 access token for authorization: oauth2
 configuration.access_token = 'YOUR_ACCESS_TOKEN'
 
-# Defining host is optional and default to http://localhost/api
-configuration.host = "http://localhost/api"
-# Create an instance of the API class
-api_instance = lusid.InstrumentsApi(lusid.ApiClient(configuration))
-identifier_type = 'identifier_type_example' # str | The identifier being supplied e.g. \"Figi\".
+# Defining host is optional and default to http://localhost
+configuration.host = "http://localhost"
+
+# Enter a context with an instance of the API client
+with lusid.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = lusid.InstrumentsApi(api_client)
+    identifier_type = 'identifier_type_example' # str | The identifier being supplied e.g. \"Figi\".
 identifier = 'identifier_example' # str | The value of the identifier for the requested instrument.
 effective_at = 'effective_at_example' # str | The effective datetime or cut label at which to retrieve the instrument definition.              Defaults to the current LUSID system datetime if not specified. (optional)
 as_at = '2013-10-20T19:20:30+01:00' # datetime | The asAt datetime at which to retrieve the instrument definition. Defaults to              return the latest version of the instrument definition if not specified. (optional)
 property_keys = ['property_keys_example'] # list[str] | A list of property keys from the \"Instrument\" domain to decorate onto the instrument.              These take the format {domain}/{scope}/{code} e.g. \"Instrument/system/Name\". (optional)
 
-try:
-    # Get instrument
-    api_response = api_instance.get_instrument(identifier_type, identifier, effective_at=effective_at, as_at=as_at, property_keys=property_keys)
-    pprint(api_response)
-except ApiException as e:
-    print("Exception when calling InstrumentsApi->get_instrument: %s\n" % e)
+    try:
+        # Get instrument
+        api_response = api_instance.get_instrument(identifier_type, identifier, effective_at=effective_at, as_at=as_at, property_keys=property_keys)
+        pprint(api_response)
+    except ApiException as e:
+        print("Exception when calling InstrumentsApi->get_instrument: %s\n" % e)
 ```
 
 ### Parameters
@@ -168,17 +174,20 @@ configuration = lusid.Configuration()
 # Configure OAuth2 access token for authorization: oauth2
 configuration.access_token = 'YOUR_ACCESS_TOKEN'
 
-# Defining host is optional and default to http://localhost/api
-configuration.host = "http://localhost/api"
-# Create an instance of the API class
-api_instance = lusid.InstrumentsApi(lusid.ApiClient(configuration))
+# Defining host is optional and default to http://localhost
+configuration.host = "http://localhost"
 
-try:
-    # [EARLY ACCESS] Get instrument identifier types
-    api_response = api_instance.get_instrument_identifier_types()
-    pprint(api_response)
-except ApiException as e:
-    print("Exception when calling InstrumentsApi->get_instrument_identifier_types: %s\n" % e)
+# Enter a context with an instance of the API client
+with lusid.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = lusid.InstrumentsApi(api_client)
+    
+    try:
+        # [EARLY ACCESS] Get instrument identifier types
+        api_response = api_instance.get_instrument_identifier_types()
+        pprint(api_response)
+    except ApiException as e:
+        print("Exception when calling InstrumentsApi->get_instrument_identifier_types: %s\n" % e)
 ```
 
 ### Parameters
@@ -225,22 +234,25 @@ configuration = lusid.Configuration()
 # Configure OAuth2 access token for authorization: oauth2
 configuration.access_token = 'YOUR_ACCESS_TOKEN'
 
-# Defining host is optional and default to http://localhost/api
-configuration.host = "http://localhost/api"
-# Create an instance of the API class
-api_instance = lusid.InstrumentsApi(lusid.ApiClient(configuration))
-identifier_type = 'identifier_type_example' # str | The identifier being supplied e.g. \"Figi\".
+# Defining host is optional and default to http://localhost
+configuration.host = "http://localhost"
+
+# Enter a context with an instance of the API client
+with lusid.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = lusid.InstrumentsApi(api_client)
+    identifier_type = 'identifier_type_example' # str | The identifier being supplied e.g. \"Figi\".
 identifiers = ['identifiers_example'] # list[str] | The values of the identifier for the requested instruments.
 effective_at = 'effective_at_example' # str | The effective datetime or cut label at which to retrieve the instrument definitions.              Defaults to the current LUSID system datetime if not specified. (optional)
 as_at = '2013-10-20T19:20:30+01:00' # datetime | The asAt datetime at which to retrieve the instrument definitions.              Defaults to return the latest version of each instrument definition if not specified. (optional)
 property_keys = ['property_keys_example'] # list[str] | A list of property keys from the \"Instrument\" domain to decorate onto the instrument.              These take the format {domain}/{scope}/{code} e.g. \"Instrument/system/Name\". (optional)
 
-try:
-    # Get instruments
-    api_response = api_instance.get_instruments(identifier_type, identifiers, effective_at=effective_at, as_at=as_at, property_keys=property_keys)
-    pprint(api_response)
-except ApiException as e:
-    print("Exception when calling InstrumentsApi->get_instruments: %s\n" % e)
+    try:
+        # Get instruments
+        api_response = api_instance.get_instruments(identifier_type, identifiers, effective_at=effective_at, as_at=as_at, property_keys=property_keys)
+        pprint(api_response)
+    except ApiException as e:
+        print("Exception when calling InstrumentsApi->get_instruments: %s\n" % e)
 ```
 
 ### Parameters
@@ -295,11 +307,14 @@ configuration = lusid.Configuration()
 # Configure OAuth2 access token for authorization: oauth2
 configuration.access_token = 'YOUR_ACCESS_TOKEN'
 
-# Defining host is optional and default to http://localhost/api
-configuration.host = "http://localhost/api"
-# Create an instance of the API class
-api_instance = lusid.InstrumentsApi(lusid.ApiClient(configuration))
-as_at = '2013-10-20T19:20:30+01:00' # datetime | The asAt datetime at which to list the instruments. Defaults to return the latest              version of each instruments if not specified. (optional)
+# Defining host is optional and default to http://localhost
+configuration.host = "http://localhost"
+
+# Enter a context with an instance of the API client
+with lusid.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = lusid.InstrumentsApi(api_client)
+    as_at = '2013-10-20T19:20:30+01:00' # datetime | The asAt datetime at which to list the instruments. Defaults to return the latest              version of each instruments if not specified. (optional)
 effective_at = 'effective_at_example' # str | The effective datetime or cut label at which to list the instruments.              Defaults to the current LUSID system datetime if not specified. (optional)
 page = 'page_example' # str | The pagination token to use to continue listing instruments from a previous call to list instruments.              This value is returned from the previous call. If a pagination token is provided the sortBy, filter, effectiveAt, and asAt fields              must not have changed since the original request. Also, if set, a start value cannot be provided. (optional)
 sort_by = ['sort_by_example'] # list[str] | Order the results by these fields. Use use the '-' sign to denote descending order e.g. -MyFieldName. (optional)
@@ -308,12 +323,12 @@ limit = 56 # int | When paginating, limit the number of returned results to this
 filter = 'State eq 'Active'' # str | Expression to filter the result set. Defaults to filter down to active instruments only, i.e. those              that have not been deleted. Read more about filtering results from LUSID here https://support.lusid.com/filtering-results-from-lusid. (optional) (default to 'State eq 'Active'')
 instrument_property_keys = ['instrument_property_keys_example'] # list[str] | A list of property keys from the \"Instrument\" domain to decorate onto each instrument. These take the format {domain}/{scope}/{code} e.g. \"Instrument/system/Name\". (optional)
 
-try:
-    # [EARLY ACCESS] List instruments
-    api_response = api_instance.list_instruments(as_at=as_at, effective_at=effective_at, page=page, sort_by=sort_by, start=start, limit=limit, filter=filter, instrument_property_keys=instrument_property_keys)
-    pprint(api_response)
-except ApiException as e:
-    print("Exception when calling InstrumentsApi->list_instruments: %s\n" % e)
+    try:
+        # [EARLY ACCESS] List instruments
+        api_response = api_instance.list_instruments(as_at=as_at, effective_at=effective_at, page=page, sort_by=sort_by, start=start, limit=limit, filter=filter, instrument_property_keys=instrument_property_keys)
+        pprint(api_response)
+    except ApiException as e:
+        print("Exception when calling InstrumentsApi->list_instruments: %s\n" % e)
 ```
 
 ### Parameters
@@ -371,20 +386,23 @@ configuration = lusid.Configuration()
 # Configure OAuth2 access token for authorization: oauth2
 configuration.access_token = 'YOUR_ACCESS_TOKEN'
 
-# Defining host is optional and default to http://localhost/api
-configuration.host = "http://localhost/api"
-# Create an instance of the API class
-api_instance = lusid.InstrumentsApi(lusid.ApiClient(configuration))
-identifier_type = 'identifier_type_example' # str | The identifier to use to resolve the instrument e.g. \"Figi\".
+# Defining host is optional and default to http://localhost
+configuration.host = "http://localhost"
+
+# Enter a context with an instance of the API client
+with lusid.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = lusid.InstrumentsApi(api_client)
+    identifier_type = 'identifier_type_example' # str | The identifier to use to resolve the instrument e.g. \"Figi\".
 identifier = 'identifier_example' # str | The original value of the identifier for the requested instrument.
 request = lusid.UpdateInstrumentIdentifierRequest() # UpdateInstrumentIdentifierRequest | The identifier to update or remove. This may or may not be the same identifier used              to resolve the instrument.
 
-try:
-    # [EARLY ACCESS] Update instrument identifier
-    api_response = api_instance.update_instrument_identifier(identifier_type, identifier, request)
-    pprint(api_response)
-except ApiException as e:
-    print("Exception when calling InstrumentsApi->update_instrument_identifier: %s\n" % e)
+    try:
+        # [EARLY ACCESS] Update instrument identifier
+        api_response = api_instance.update_instrument_identifier(identifier_type, identifier, request)
+        pprint(api_response)
+    except ApiException as e:
+        print("Exception when calling InstrumentsApi->update_instrument_identifier: %s\n" % e)
 ```
 
 ### Parameters
@@ -437,18 +455,21 @@ configuration = lusid.Configuration()
 # Configure OAuth2 access token for authorization: oauth2
 configuration.access_token = 'YOUR_ACCESS_TOKEN'
 
-# Defining host is optional and default to http://localhost/api
-configuration.host = "http://localhost/api"
-# Create an instance of the API class
-api_instance = lusid.InstrumentsApi(lusid.ApiClient(configuration))
-instruments = {'key': lusid.InstrumentDefinition()} # dict(str, InstrumentDefinition) | The definitions of the instruments to update or insert.
+# Defining host is optional and default to http://localhost
+configuration.host = "http://localhost"
 
-try:
-    # Upsert instruments
-    api_response = api_instance.upsert_instruments(instruments)
-    pprint(api_response)
-except ApiException as e:
-    print("Exception when calling InstrumentsApi->upsert_instruments: %s\n" % e)
+# Enter a context with an instance of the API client
+with lusid.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = lusid.InstrumentsApi(api_client)
+    instruments = {'key': lusid.InstrumentDefinition()} # dict(str, InstrumentDefinition) | The definitions of the instruments to update or insert.
+
+    try:
+        # Upsert instruments
+        api_response = api_instance.upsert_instruments(instruments)
+        pprint(api_response)
+    except ApiException as e:
+        print("Exception when calling InstrumentsApi->upsert_instruments: %s\n" % e)
 ```
 
 ### Parameters
@@ -499,18 +520,21 @@ configuration = lusid.Configuration()
 # Configure OAuth2 access token for authorization: oauth2
 configuration.access_token = 'YOUR_ACCESS_TOKEN'
 
-# Defining host is optional and default to http://localhost/api
-configuration.host = "http://localhost/api"
-# Create an instance of the API class
-api_instance = lusid.InstrumentsApi(lusid.ApiClient(configuration))
-instrument_properties = [lusid.UpsertInstrumentPropertyRequest()] # list[UpsertInstrumentPropertyRequest] | A collection of instruments and associated instrument properties to update or insert.
+# Defining host is optional and default to http://localhost
+configuration.host = "http://localhost"
 
-try:
-    # Upsert instruments properties
-    api_response = api_instance.upsert_instruments_properties(instrument_properties)
-    pprint(api_response)
-except ApiException as e:
-    print("Exception when calling InstrumentsApi->upsert_instruments_properties: %s\n" % e)
+# Enter a context with an instance of the API client
+with lusid.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = lusid.InstrumentsApi(api_client)
+    instrument_properties = [lusid.UpsertInstrumentPropertyRequest()] # list[UpsertInstrumentPropertyRequest] | A collection of instruments and associated instrument properties to update or insert.
+
+    try:
+        # Upsert instruments properties
+        api_response = api_instance.upsert_instruments_properties(instrument_properties)
+        pprint(api_response)
+    except ApiException as e:
+        print("Exception when calling InstrumentsApi->upsert_instruments_properties: %s\n" % e)
 ```
 
 ### Parameters
