@@ -7,8 +7,10 @@ import uuid
 import lusid
 import lusid.models as models
 
-from utilities import InstrumentLoader
-from utilities import TestDataUtilities
+from lusid.utilities.api_client_builder import ApiClientBuilder
+from utilities.instrument_loader import InstrumentLoader
+from utilities.test_data_utilities import TestDataUtilities
+from utilities.credentials_source import CredentialsSource
 
 
 class Properties(unittest.TestCase):
@@ -16,7 +18,7 @@ class Properties(unittest.TestCase):
     @classmethod
     def setUpClass(cls):
         # create a configured API client
-        api_client = TestDataUtilities.api_client()
+        api_client = ApiClientBuilder().build(CredentialsSource.secrets_path())
 
         cls.property_definitions_api = lusid.PropertyDefinitionsApi(api_client)
         cls.transaction_portfolios_api = lusid.TransactionPortfoliosApi(api_client)
@@ -71,7 +73,7 @@ class Properties(unittest.TestCase):
 
         # create portfolio
         portfolio_request = self.transaction_portfolios_api.create_portfolio(scope=TestDataUtilities.tutorials_scope,
-                                                                             transaction_portfolio=create_portfolio_request)
+                                                                             create_transaction_portfolio_request=create_portfolio_request)
 
         # get properties for assertions
         portfolio_properties = self.portfolios_api.get_portfolio_properties(scope=TestDataUtilities.tutorials_scope,
@@ -122,7 +124,7 @@ class Properties(unittest.TestCase):
 
         # Create portfolio
         portfolio_result = self.transaction_portfolios_api.create_portfolio(scope=TestDataUtilities.tutorials_scope,
-                                                                            transaction_portfolio=create_portfolio_request)
+                                                                            create_transaction_portfolio_request=create_portfolio_request)
         portfolio_properties = self.portfolios_api.get_portfolio_properties(scope=TestDataUtilities.tutorials_scope,
                                                                             code=portfolio_result.id.code).properties
         metric_property = portfolio_properties[metric_property_definition_result.key]

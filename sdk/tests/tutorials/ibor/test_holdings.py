@@ -59,7 +59,7 @@ class Holdings(unittest.TestCase):
 
         # Upload the transactions to LUSID
         self.transaction_portfolios_api.upsert_transactions(TestDataUtilities.tutorials_scope, code=portfolio_id,
-                                                            transactions=transactions)
+                                                            transaction_request=transactions)
 
         # Get the portfolio holdings on T+10
         holdings = self.transaction_portfolios_api.get_holdings(TestDataUtilities.tutorials_scope, portfolio_id,
@@ -152,7 +152,7 @@ class Holdings(unittest.TestCase):
         # set the initial holdings on day 1
         self.transaction_portfolios_api.set_holdings(scope=TestDataUtilities.tutorials_scope,
                                                      code=portfolio_code,
-                                                     holding_adjustments=holdings_adjustments,
+                                                     adjust_holding_request=holdings_adjustments,
                                                      effective_at=day1)
 
         # add subsequent transactions on day 2
@@ -173,7 +173,7 @@ class Holdings(unittest.TestCase):
 
         self.transaction_portfolios_api.upsert_transactions(scope=TestDataUtilities.tutorials_scope,
                                                             code=portfolio_code,
-                                                            transactions=transactions)
+                                                            transaction_request=transactions)
 
         # get the holdings for day 2
         holdings = self.transaction_portfolios_api.get_holdings(scope=TestDataUtilities.tutorials_scope,

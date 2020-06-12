@@ -62,7 +62,7 @@ class Bitemporal(unittest.TestCase):
         # add the initial batch of transactions
         inital_result = self.transaction_portfolios_api.upsert_transactions(scope=TestDataUtilities.tutorials_scope,
                                                                             code=portfolio_code,
-                                                                            transactions=initial_transactions)
+                                                                            transaction_request=initial_transactions)
 
         as_at_1 = inital_result.version.as_at_date
         sleep(0.5)
@@ -76,7 +76,7 @@ class Bitemporal(unittest.TestCase):
                                                                        transaction_type="StockIn")
         added_result = self.transaction_portfolios_api.upsert_transactions(scope=TestDataUtilities.tutorials_scope,
                                                                            code=portfolio_code,
-                                                                           transactions=[new_trade])
+                                                                           transaction_request=[new_trade])
         as_at_2 = added_result.version.as_at_date
         sleep(0.5)
 
@@ -91,7 +91,7 @@ class Bitemporal(unittest.TestCase):
 
         added_result = self.transaction_portfolios_api.upsert_transactions(scope=TestDataUtilities.tutorials_scope,
                                                                            code=portfolio_code,
-                                                                           transactions=[backdated_trade])
+                                                                           transaction_request=[backdated_trade])
 
         as_at_3 = added_result.version.as_at_date
         sleep(0.5)

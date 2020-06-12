@@ -1,8 +1,8 @@
 import unittest
+import uuid
 from datetime import datetime
 
 import pytz
-import uuid
 
 import lusid
 import lusid.models as models
@@ -44,7 +44,7 @@ class Portfolios(unittest.TestCase):
         # create the portfolio in LUSID in the specified scope
         result = self.transaction_portfolios_api.create_portfolio(
             scope=TestDataUtilities.tutorials_scope,
-            transaction_portfolio=request)
+            create_transaction_portfolio_request=request)
 
         self.assertEqual(result.id.code, request.code)
 
@@ -66,11 +66,12 @@ class Portfolios(unittest.TestCase):
 
         #   create the property definition
         property_definition_result = self.property_definitions_api.create_property_definition(
-            definition=property_definition)
+            create_property_definition_request=property_definition)
 
         #  property value
         property_value = "Active"
-        portfolio_property = models.ModelProperty(key=property_definition_result.key, value=models.PropertyValue(label_value=property_value))
+        portfolio_property = models.ModelProperty(key=property_definition_result.key,
+                                                  value=models.PropertyValue(label_value=property_value))
 
         #  details of the portfolio to be created
         request = models.CreateTransactionPortfolioRequest(display_name="portfolio-{0}".format(guid),
@@ -85,7 +86,7 @@ class Portfolios(unittest.TestCase):
         # create the portfolio
         portfolio = self.transaction_portfolios_api.create_portfolio(
             scope=TestDataUtilities.tutorials_scope,
-            transaction_portfolio=request)
+            create_transaction_portfolio_request=request)
 
         portfolio_code = portfolio.id.code
         self.assertEqual(portfolio_code, request.code)
@@ -125,7 +126,7 @@ class Portfolios(unittest.TestCase):
         self.transaction_portfolios_api.upsert_transactions(
             TestDataUtilities.tutorials_scope,
             portfolio_id,
-            transactions=[transaction])
+            transaction_request=[transaction])
 
         #   get the trades
         trades = self.transaction_portfolios_api.get_transactions(TestDataUtilities.tutorials_scope, portfolio_id)
@@ -158,7 +159,7 @@ class Portfolios(unittest.TestCase):
 
         #   create the property definition
         property_definition_result = self.property_definitions_api.create_property_definition(
-            definition=property_definition)
+            create_property_definition_request=property_definition)
 
         # effective date for which portfolio is created
         effective_date = datetime(2018, 1, 1, tzinfo=pytz.utc)
@@ -189,7 +190,7 @@ class Portfolios(unittest.TestCase):
         self.transaction_portfolios_api.upsert_transactions(
             TestDataUtilities.tutorials_scope,
             portfolio_id,
-            transactions=[transaction])
+            transaction_request=[transaction])
 
         #   get the trades
         trades = self.transaction_portfolios_api.get_transactions(TestDataUtilities.tutorials_scope, portfolio_id)

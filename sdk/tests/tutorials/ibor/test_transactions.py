@@ -1,12 +1,11 @@
 import unittest
+import uuid
 from datetime import datetime
 
 import pytz
-import uuid
 
 import lusid
 import lusid.models as models
-
 from utilities import InstrumentLoader
 from utilities import TestDataUtilities
 
@@ -52,7 +51,7 @@ class Transactions(unittest.TestCase):
         # add the transaction
         self.transaction_portfolios_api.upsert_transactions(scope=TestDataUtilities.tutorials_scope,
                                                             code=portfolio_code,
-                                                            transactions=[transaction])
+                                                            transaction_request=[transaction])
 
         # get the transaction
         transactions = self.transaction_portfolios_api.get_transactions(scope=TestDataUtilities.tutorials_scope,
@@ -91,7 +90,7 @@ class Transactions(unittest.TestCase):
         # add the transaction
         self.transaction_portfolios_api.upsert_transactions(scope=TestDataUtilities.tutorials_scope,
                                                             code=portfolio_code,
-                                                            transactions=[transaction])
+                                                            transaction_request=[transaction])
 
         # get the transaction
         transactions = self.transaction_portfolios_api.get_transactions(scope=TestDataUtilities.tutorials_scope,
@@ -116,7 +115,7 @@ class Transactions(unittest.TestCase):
                 content="<customFormat>upload in custom xml or JSON format</customFormat>"))
 
         # create the swap
-        swap_response = self.instruments_api.upsert_instruments(instruments={
+        swap_response = self.instruments_api.upsert_instruments(request_body={
             "request": swap_definition
         })
 
@@ -139,7 +138,7 @@ class Transactions(unittest.TestCase):
         # add the transaction
         self.transaction_portfolios_api.upsert_transactions(scope=TestDataUtilities.tutorials_scope,
                                                             code=portfolio_code,
-                                                            transactions=[transaction])
+                                                            transaction_request=[transaction])
 
         # get the transaction
         transactions = self.transaction_portfolios_api.get_transactions(scope=TestDataUtilities.tutorials_scope,
@@ -179,7 +178,7 @@ class Transactions(unittest.TestCase):
 
         self.transaction_portfolios_api.upsert_transactions(scope=TestDataUtilities.tutorials_scope,
                                                             code=portfolio_code,
-                                                            transactions=transactions)
+                                                            transaction_request=transactions)
 
         # get transactions
         transaction_ids = []

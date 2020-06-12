@@ -5,7 +5,6 @@ import pytz
 
 import lusid
 import lusid.models as models
-
 from utilities import InstrumentLoader
 from utilities import TestDataUtilities
 
@@ -70,7 +69,7 @@ class Reconciliation(unittest.TestCase):
         # add the transactions to LUSID
         self.transaction_portfolios_api.upsert_transactions(scope=TestDataUtilities.tutorials_scope,
                                                             code=portfolio_code,
-                                                            transactions=yesterdays_transactions)
+                                                            transaction_request=yesterdays_transactions)
 
         # transactions for today
         todays_transactions = [
@@ -128,7 +127,7 @@ class Reconciliation(unittest.TestCase):
         transactions_response = self.transaction_portfolios_api.upsert_transactions(
             scope=TestDataUtilities.tutorials_scope,
             code=portfolio_code,
-            transactions=todays_transactions)
+            transaction_request=todays_transactions)
 
         # get the time of the last update
         last_as_at = transactions_response.version.as_at_date
@@ -149,7 +148,7 @@ class Reconciliation(unittest.TestCase):
             instrument_property_keys=[TestDataUtilities.lusid_luid_identifier]
         )
 
-        breaks = self.reconciliations_api.reconcile_holdings(request=reconciliation_request)
+        breaks = self.reconciliations_api.reconcile_holdings(portfolios_reconciliation_request=reconciliation_request)
 
         for rec_break in breaks.values:
             print("{}\t{}\t{}".format(rec_break.instrument_uid, rec_break.difference_units,
