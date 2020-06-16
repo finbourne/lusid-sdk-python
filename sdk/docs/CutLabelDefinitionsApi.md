@@ -1,6 +1,6 @@
 # lusid.CutLabelDefinitionsApi
 
-All URIs are relative to *http://localhost/api*
+All URIs are relative to *http://localhost:46312*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
@@ -12,7 +12,7 @@ Method | HTTP request | Description
 
 
 # **create_cut_label_definition**
-> CutLabelDefinition create_cut_label_definition(create_request=create_request)
+> CutLabelDefinition create_cut_label_definition(create_cut_label_definition_request=create_cut_label_definition_request)
 
 [EARLY ACCESS] Create a Cut Label
 
@@ -31,15 +31,15 @@ configuration = lusid.Configuration()
 # Configure OAuth2 access token for authorization: oauth2
 configuration.access_token = 'YOUR_ACCESS_TOKEN'
 
-# Defining host is optional and default to http://localhost/api
-configuration.host = "http://localhost/api"
+# Defining host is optional and default to http://localhost:46312
+configuration.host = "http://localhost:46312"
 # Create an instance of the API class
 api_instance = lusid.CutLabelDefinitionsApi(lusid.ApiClient(configuration))
-create_request = lusid.CreateCutLabelDefinitionRequest() # CreateCutLabelDefinitionRequest | The cut label definition (optional)
+create_cut_label_definition_request = {"code":"CutLabelCode","displayName":"CutLabelDisplayName","description":"description of cut label","cutLocalTime":{"hours":17,"minutes":0},"timeZone":"GB"} # CreateCutLabelDefinitionRequest | The cut label definition (optional)
 
 try:
     # [EARLY ACCESS] Create a Cut Label
-    api_response = api_instance.create_cut_label_definition(create_request=create_request)
+    api_response = api_instance.create_cut_label_definition(create_cut_label_definition_request=create_cut_label_definition_request)
     pprint(api_response)
 except ApiException as e:
     print("Exception when calling CutLabelDefinitionsApi->create_cut_label_definition: %s\n" % e)
@@ -49,7 +49,7 @@ except ApiException as e:
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **create_request** | [**CreateCutLabelDefinitionRequest**](CreateCutLabelDefinitionRequest.md)| The cut label definition | [optional] 
+ **create_cut_label_definition_request** | [**CreateCutLabelDefinitionRequest**](CreateCutLabelDefinitionRequest.md)| The cut label definition | [optional] 
 
 ### Return type
 
@@ -61,7 +61,7 @@ Name | Type | Description  | Notes
 
 ### HTTP request headers
 
- - **Content-Type**: Not defined
+ - **Content-Type**: application/json-patch+json, application/json, text/json, application/*+json
  - **Accept**: text/plain, application/json, text/json
 
 ### HTTP response details
@@ -93,8 +93,8 @@ configuration = lusid.Configuration()
 # Configure OAuth2 access token for authorization: oauth2
 configuration.access_token = 'YOUR_ACCESS_TOKEN'
 
-# Defining host is optional and default to http://localhost/api
-configuration.host = "http://localhost/api"
+# Defining host is optional and default to http://localhost:46312
+configuration.host = "http://localhost:46312"
 # Create an instance of the API class
 api_instance = lusid.CutLabelDefinitionsApi(lusid.ApiClient(configuration))
 code = 'code_example' # str | The Code of the Cut Label that is being Deleted
@@ -155,8 +155,8 @@ configuration = lusid.Configuration()
 # Configure OAuth2 access token for authorization: oauth2
 configuration.access_token = 'YOUR_ACCESS_TOKEN'
 
-# Defining host is optional and default to http://localhost/api
-configuration.host = "http://localhost/api"
+# Defining host is optional and default to http://localhost:46312
+configuration.host = "http://localhost:46312"
 # Create an instance of the API class
 api_instance = lusid.CutLabelDefinitionsApi(lusid.ApiClient(configuration))
 code = 'code_example' # str | The Code of the Cut Label that is being queried
@@ -219,8 +219,8 @@ configuration = lusid.Configuration()
 # Configure OAuth2 access token for authorization: oauth2
 configuration.access_token = 'YOUR_ACCESS_TOKEN'
 
-# Defining host is optional and default to http://localhost/api
-configuration.host = "http://localhost/api"
+# Defining host is optional and default to http://localhost:46312
+configuration.host = "http://localhost:46312"
 # Create an instance of the API class
 api_instance = lusid.CutLabelDefinitionsApi(lusid.ApiClient(configuration))
 as_at = '2013-10-20T19:20:30+01:00' # datetime | Optional. The As At time at which listed Cut Labels are valid (optional)
@@ -272,7 +272,7 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **update_cut_label_definition**
-> CutLabelDefinition update_cut_label_definition(code, update_request=update_request)
+> CutLabelDefinition update_cut_label_definition(code, update_cut_label_definition_request=update_cut_label_definition_request)
 
 [EARLY ACCESS] Update a Cut Label
 
@@ -291,16 +291,16 @@ configuration = lusid.Configuration()
 # Configure OAuth2 access token for authorization: oauth2
 configuration.access_token = 'YOUR_ACCESS_TOKEN'
 
-# Defining host is optional and default to http://localhost/api
-configuration.host = "http://localhost/api"
+# Defining host is optional and default to http://localhost:46312
+configuration.host = "http://localhost:46312"
 # Create an instance of the API class
 api_instance = lusid.CutLabelDefinitionsApi(lusid.ApiClient(configuration))
 code = 'code_example' # str | The Code of the Cut Label that is being updated
-update_request = lusid.UpdateCutLabelDefinitionRequest() # UpdateCutLabelDefinitionRequest | The cut label update definition (optional)
+update_cut_label_definition_request = {"displayName":"CutLabelDisplayName","description":"description of cut label","cutLocalTime":{"hours":17,"minutes":0},"timeZone":"GB"} # UpdateCutLabelDefinitionRequest | The cut label update definition (optional)
 
 try:
     # [EARLY ACCESS] Update a Cut Label
-    api_response = api_instance.update_cut_label_definition(code, update_request=update_request)
+    api_response = api_instance.update_cut_label_definition(code, update_cut_label_definition_request=update_cut_label_definition_request)
     pprint(api_response)
 except ApiException as e:
     print("Exception when calling CutLabelDefinitionsApi->update_cut_label_definition: %s\n" % e)
@@ -311,7 +311,7 @@ except ApiException as e:
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **code** | **str**| The Code of the Cut Label that is being updated | 
- **update_request** | [**UpdateCutLabelDefinitionRequest**](UpdateCutLabelDefinitionRequest.md)| The cut label update definition | [optional] 
+ **update_cut_label_definition_request** | [**UpdateCutLabelDefinitionRequest**](UpdateCutLabelDefinitionRequest.md)| The cut label update definition | [optional] 
 
 ### Return type
 
@@ -323,7 +323,7 @@ Name | Type | Description  | Notes
 
 ### HTTP request headers
 
- - **Content-Type**: Not defined
+ - **Content-Type**: application/json-patch+json, application/json, text/json, application/*+json
  - **Accept**: text/plain, application/json, text/json
 
 ### HTTP response details

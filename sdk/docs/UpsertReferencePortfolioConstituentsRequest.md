@@ -4,8 +4,8 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **effective_from** | **str** | The first date from which the weights will apply | 
-**weight_type** | **str** |  | 
-**period_type** | **str** |  | [optional] 
+**weight_type** | **str** | The available values are: Static, Floating, Periodical | 
+**period_type** | **str** | The available values are: Daily, Weekly, Monthly, Quarterly, Annually | [optional] 
 **period_count** | **int** |  | [optional] 
 **constituents** | [**list[ReferencePortfolioConstituentRequest]**](ReferencePortfolioConstituentRequest.md) | Set of constituents (instrument/weight pairings) | 
 

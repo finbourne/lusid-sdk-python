@@ -3,7 +3,7 @@
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**movement_types** | **str** | The Movement Types | 
+**movement_types** | **str** | . The available values are: Settlement, Traded, StockMovement, FutureCash, Commitment, Receivable, CashSettlement, CashForward, CashCommitment, CashReceivable, Accrual, CashAccrual, ForwardFx, CashFxForward, UnsettledCashTypes | 
 **side** | **str** | The Movement Side | 
 **direction** | **int** | The Movement direction | 
 **properties** | [**dict(str, PerpetualProperty)**](PerpetualProperty.md) |  | [optional] 

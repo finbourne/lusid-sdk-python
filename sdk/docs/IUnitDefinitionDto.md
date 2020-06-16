@@ -3,7 +3,7 @@
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**schema** | **str** |  | [optional] 
+**schema** | **str** | The available values are: NoUnits, Basic, Iso4217Currency | [optional] 
 **code** | **str** |  | [optional] 
 **display_name** | **str** |  | [optional] 
 **description** | **str** |  | [optional] 
