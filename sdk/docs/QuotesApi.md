@@ -1,6 +1,6 @@
 # lusid.QuotesApi
 
-All URIs are relative to *http://localhost:61971*
+All URIs are relative to *http://localhost:36794*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
@@ -27,8 +27,8 @@ configuration = lusid.Configuration()
 # Configure OAuth2 access token for authorization: oauth2
 configuration.access_token = 'YOUR_ACCESS_TOKEN'
 
-# Defining host is optional and default to http://localhost:61971
-configuration.host = "http://localhost:61971"
+# Defining host is optional and default to http://localhost:36794
+configuration.host = "http://localhost:36794"
 # Create an instance of the API class
 api_instance = lusid.QuotesApi(lusid.ApiClient(configuration))
 scope = 'scope_example' # str | The scope of the quotes to list.
