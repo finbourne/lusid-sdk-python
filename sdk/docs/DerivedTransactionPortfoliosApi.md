@@ -1,6 +1,6 @@
 # lusid.DerivedTransactionPortfoliosApi
 
-All URIs are relative to *https://fbn-prd.lusid.com/api*
+All URIs are relative to *http://localhost:45252*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
@@ -28,12 +28,12 @@ configuration = lusid.Configuration()
 # Configure OAuth2 access token for authorization: oauth2
 configuration.access_token = 'YOUR_ACCESS_TOKEN'
 
-# Defining host is optional and default to https://fbn-prd.lusid.com/api
-configuration.host = "https://fbn-prd.lusid.com/api"
+# Defining host is optional and default to http://localhost:45252
+configuration.host = "http://localhost:45252"
 # Create an instance of the API class
 api_instance = lusid.DerivedTransactionPortfoliosApi(lusid.ApiClient(configuration))
 scope = 'scope_example' # str | The scope into which to create the new derived portfolio
-create_derived_transaction_portfolio_request = {"displayName":"MyDerivedPortfolioName","description":"Example long form portfolio description","code":"MyDerivedPortfolioCode","parentPortfolioId":{"scope":"MyParentPortfolioScope","code":"MyParentPortfolioCode"},"created":"2018-03-05T00:00:00.0000000+00:00","corporateActionSourceId":{"scope":"MyScope","code":"MyCorporateActionSourceId"},"accountingMethod":"FirstInFirstOut","subHoldingKeys":["Transaction/MyScope/Strategy","Transaction/MyScope/SubAccount"]} # CreateDerivedTransactionPortfolioRequest | The root object of the new derived portfolio, containing a populated reference portfolio id and reference scope (optional)
+create_derived_transaction_portfolio_request = {"displayName":"MyDerivedPortfolioName","description":"Example long form portfolio description","code":"MyDerivedPortfolioCode","parentPortfolioId":{"scope":"MyParentPortfolioScope","code":"MyParentPortfolioCode"},"created":"2018-03-05T00:00:00+00:00","corporateActionSourceId":{"scope":"MyScope","code":"MyCorporateActionSourceId"},"accountingMethod":"FirstInFirstOut","subHoldingKeys":["Transaction/MyScope/Strategy","Transaction/MyScope/SubAccount"]} # CreateDerivedTransactionPortfolioRequest | The root object of the new derived portfolio, containing a populated reference portfolio id and reference scope (optional)
 
 try:
     # [EARLY ACCESS] Create derived transaction portfolio
@@ -92,8 +92,8 @@ configuration = lusid.Configuration()
 # Configure OAuth2 access token for authorization: oauth2
 configuration.access_token = 'YOUR_ACCESS_TOKEN'
 
-# Defining host is optional and default to https://fbn-prd.lusid.com/api
-configuration.host = "https://fbn-prd.lusid.com/api"
+# Defining host is optional and default to http://localhost:45252
+configuration.host = "http://localhost:45252"
 # Create an instance of the API class
 api_instance = lusid.DerivedTransactionPortfoliosApi(lusid.ApiClient(configuration))
 scope = 'scope_example' # str | The scope of the portfolio
