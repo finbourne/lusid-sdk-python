@@ -9,7 +9,7 @@
       "url": "https://www.finbourne.com",
       "email": "info@finbourne.com"
     },
-    "version": "0.11.1579",
+    "version": "0.11.1580",
     "x-logo": {
       "url": "https://content.finbourne.com/LUSID-header.png",
       "backgroundColor": "#415464"
@@ -17,7 +17,7 @@
   },
   "servers": [
     {
-      "url": "http://localhost:47381"
+      "url": "http://localhost:63679"
     }
   ],
   "paths": {
@@ -17175,6 +17175,14 @@
       "description": "Methods for interacting with Reference Portfolios"
     },
     {
+      "name": "Relation Definitions",
+      "description": "Methods for interacting with Relations Definitions. Read more about Relations in the LUSID Knowledge Base here https://support.lusid.com/relations."
+    },
+    {
+      "name": "Relations",
+      "description": "Methods for interacting with Relations. Read more about Relations in the LUSID Knowledge Base here https://support.lusid.com/relations."
+    },
+    {
       "name": "Schemas",
       "description": "Methods for retrieval of Schemas"
     },
@@ -17225,6 +17233,8 @@
       "Quotes",
       "Reconciliations",
       "Reference Portfolio",
+      "Relation Definitions",
+      "Relations",
       "Schemas",
       "Scopes",
       "Search",
