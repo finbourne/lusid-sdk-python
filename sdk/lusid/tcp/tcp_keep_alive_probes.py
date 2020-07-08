@@ -19,21 +19,38 @@ class TCPKeepAliveValidationMethods:
     Balancer which kills a connection if it is idle for more then 350 seconds.
     """
     @staticmethod
-    def adjust_connection_socket(conn):
+    def adjust_connection_socket(conn, protocol: str = "https"):
+        """
+        Adjusts the socket settings so that the client sends a TCP keep alive probe over the connection. This is only
+        applied where possible, if the ability to set the socket options is not available, for example using Anaconda,
+        then the settings will be left as is.
+
+        :param conn: The connection to update the socket settings for
+        :param str protocol: The protocol of the connection
+
+        :return: None
+        """
+
+        if protocol == "http":
+            # It isn't clear how to set this up over HTTP, it seems to differ from HTTPs
+            return
+
         # TCP Keep Alive Probes for different platforms
         platform = sys.platform
         # TCP Keep Alive Probes for Linux
         if platform == 'linux' and hasattr(socket, "TCP_KEEPIDLE") and hasattr(socket, "TCP_KEEPINTVL") and hasattr(socket, "TCP_KEEPCNT"):
-            conn.sock.setsockopt(socket.IPPROTO_TCP, socket.TCP_KEEPIDLE, TCP_KEEP_IDLE)
-            conn.sock.setsockopt(socket.IPPROTO_TCP, socket.TCP_KEEPINTVL, TCP_KEEPALIVE_INTERVAL)
-            conn.sock.setsockopt(socket.IPPROTO_TCP, socket.TCP_KEEPCNT, TCP_KEEP_CNT)
+            # Temporarily commented out due to issues running on JupyterHub
+            # conn.sock.setsockopt(socket.IPPROTO_TCP, socket.TCP_KEEPIDLE, TCP_KEEP_IDLE)
+            # conn.sock.setsockopt(socket.IPPROTO_TCP, socket.TCP_KEEPINTVL, TCP_KEEPALIVE_INTERVAL)
+            # conn.sock.setsockopt(socket.IPPROTO_TCP, socket.TCP_KEEPCNT, TCP_KEEP_CNT)
+            pass
 
         # TCP Keep Alive Probes for Windows OS
-        elif platform == 'win32' and hasattr(socket, "SIO_KEEPALIVE_VALS"):
+        elif platform == 'win32' and hasattr(socket, "SIO_KEEPALIVE_VALS") and getattr(conn.sock, "ioctl", None) is not None:
             conn.sock.ioctl(socket.SIO_KEEPALIVE_VALS, (1, TCP_KEEP_IDLE * 1000, TCP_KEEPALIVE_INTERVAL * 1000))
 
         # TCP Keep Alive Probes for Mac OS
-        elif platform == 'darwin':
+        elif platform == 'darwin' and getattr(conn.sock, "setsockopt", None) is not None:
             conn.sock.setsockopt(socket.SOL_SOCKET, socket.SO_KEEPALIVE, 1)
             conn.sock.setsockopt(socket.IPPROTO_TCP, TCP_KEEPALIVE, TCP_KEEPALIVE_INTERVAL)
 
@@ -51,7 +68,7 @@ class TCPKeepAliveHTTPSConnectionPool(HTTPSConnectionPool):
         super()._validate_conn(conn)
 
         # Set up TCP Keep Alive probes, this is the only line added to this function
-        TCPKeepAliveValidationMethods.adjust_connection_socket(conn)
+        TCPKeepAliveValidationMethods.adjust_connection_socket(conn, "https")
 
 
 class TCPKeepAliveHTTPConnectionPool(HTTPConnectionPool):
@@ -70,7 +87,7 @@ class TCPKeepAliveHTTPConnectionPool(HTTPConnectionPool):
         super()._validate_conn(conn)
 
         # Set up TCP Keep Alive probes, this is the only line added to this function
-        TCPKeepAliveValidationMethods.adjust_connection_socket(conn)
+        TCPKeepAliveValidationMethods.adjust_connection_socket(conn, "http")
 
 
 class TCPKeepAlivePoolManager(PoolManager):
