@@ -50,7 +50,7 @@ class Configuration(six.with_metaclass(TypeWithDefault, object)):
     :param password: Password for HTTP basic authentication
     """
 
-    def __init__(self, host="http://localhost:37007",
+    def __init__(self, host="https://fbn-prd.lusid.com/api",
                  api_key={}, api_key_prefix={},
                  username="", password=""):
         """Constructor
@@ -277,7 +277,7 @@ class Configuration(six.with_metaclass(TypeWithDefault, object)):
         """
         return [
             {
-                'url': "http://localhost:37007",
+                'url': "https://fbn-prd.lusid.com/api",
                 'description': "No description provided",
             }
         ]
