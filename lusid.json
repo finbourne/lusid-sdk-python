@@ -9,7 +9,7 @@
       "url": "https://www.finbourne.com",
       "email": "info@finbourne.com"
     },
-    "version": "0.11.1660",
+    "version": "0.11.1661",
     "x-logo": {
       "url": "https://content.finbourne.com/LUSID-header.png",
       "backgroundColor": "#415464"
@@ -17,7 +17,7 @@
   },
   "servers": [
     {
-      "url": "http://localhost:37639"
+      "url": "http://localhost:31731"
     }
   ],
   "paths": {
@@ -13071,6 +13071,38 @@
         },
         "additionalProperties": false
       },
+      "ErrorDetail": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "description": "The id of the failed item that this error relates to.",
+            "nullable": true
+          },
+          "type": {
+            "type": "string",
+            "description": "The type of failure that occurred.",
+            "nullable": true
+          },
+          "detail": {
+            "type": "string",
+            "description": "Description of the failure that occurred.",
+            "nullable": true
+          },
+          "errorDetails": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "additionalProperties": {
+                "type": "string"
+              }
+            },
+            "description": "Information about the particular instance of the failure (supplied information depends on the type of failure).",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
       "DeletedEntityResponse": {
         "required": [
           "asAt"
@@ -13099,38 +13131,6 @@
             "items": {
               "$ref": "#/components/schemas/Link"
             },
-            "nullable": true
-          }
-        },
-        "additionalProperties": false
-      },
-      "ErrorDetail": {
-        "type": "object",
-        "properties": {
-          "id": {
-            "type": "string",
-            "description": "The id of the failed item that this error relates to.",
-            "nullable": true
-          },
-          "type": {
-            "type": "string",
-            "description": "The type of failure that occurred.",
-            "nullable": true
-          },
-          "detail": {
-            "type": "string",
-            "description": "Description of the failure that occurred.",
-            "nullable": true
-          },
-          "errorDetails": {
-            "type": "array",
-            "items": {
-              "type": "object",
-              "additionalProperties": {
-                "type": "string"
-              }
-            },
-            "description": "Information about the particular instance of the failure (supplied information depends on the type of failure).",
             "nullable": true
           }
         },
@@ -17117,6 +17117,10 @@
       "description": "Methods for the storage and retrieval of Configuration Recipe documents. Read more about these in the LUSID Knowledge Base here https://support.lusid.com/recipes."
     },
     {
+      "name": "Conventions",
+      "description": "Methods for the storage and retrieval of flow conventions."
+    },
+    {
       "name": "Corporate Action Sources",
       "description": "Methods for storage and retrieval of Corporate Action Sources"
     },
@@ -17220,6 +17224,7 @@
       "Allocations",
       "Application Metadata",
       "Configuration Recipe",
+      "Conventions",
       "Corporate Action Sources",
       "Cut Label Definitions",
       "Data Types",
