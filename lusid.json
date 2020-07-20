@@ -9,7 +9,7 @@
       "url": "https://www.finbourne.com",
       "email": "info@finbourne.com"
     },
-    "version": "0.11.1679",
+    "version": "0.11.1680",
     "x-logo": {
       "url": "https://content.finbourne.com/LUSID-header.png",
       "backgroundColor": "#415464"
@@ -13039,6 +13039,21 @@
         "additionalProperties": false,
         "description": "The version metadata."
       },
+      "LabelValueSet": {
+        "type": "object",
+        "properties": {
+          "values": {
+            "uniqueItems": true,
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "nullable": true
+          }
+        },
+        "additionalProperties": false,
+        "description": "The set of string labels in a multi-value property."
+      },
       "PropertyValue": {
         "type": "object",
         "properties": {
@@ -13049,6 +13064,9 @@
           },
           "metricValue": {
             "$ref": "#/components/schemas/MetricValue"
+          },
+          "labelValueSet": {
+            "$ref": "#/components/schemas/LabelValueSet"
           }
         },
         "additionalProperties": false,
