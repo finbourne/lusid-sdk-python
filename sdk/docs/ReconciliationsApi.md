@@ -1,6 +1,6 @@
 # lusid.ReconciliationsApi
 
-All URIs are relative to *http://localhost:36042*
+All URIs are relative to *http://localhost:47721*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
@@ -27,8 +27,8 @@ configuration = lusid.Configuration()
 # Configure OAuth2 access token for authorization: oauth2
 configuration.access_token = 'YOUR_ACCESS_TOKEN'
 
-# Defining host is optional and default to http://localhost:36042
-configuration.host = "http://localhost:36042"
+# Defining host is optional and default to http://localhost:47721
+configuration.host = "http://localhost:47721"
 # Create an instance of the API class
 api_instance = lusid.ReconciliationsApi(lusid.ApiClient(configuration))
 sort_by = ['sort_by_example'] # list[str] | Optional. Order the results by these fields. Use use the '-' sign to denote descending order e.g. -MyFieldName (optional)
