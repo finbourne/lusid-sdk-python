@@ -2,6 +2,7 @@ import unittest
 
 import lusid
 import lusid.models as models
+from features.lusid_feature import lusid_feature
 from lusid.utilities.api_client_builder import ApiClientBuilder
 from lusid.exceptions import ApiException
 from utilities import TestDataUtilities
@@ -41,6 +42,7 @@ class Instruments(unittest.TestCase):
             # create the property
             cls.property_definitions_api.create_property_definition(definition=property_definition)
 
+    @lusid_feature("F41")
     def test_seed_instrument_master(self):
         response = self.instruments_api.upsert_instruments(requests={
 
@@ -87,6 +89,7 @@ class Instruments(unittest.TestCase):
 
         self.assertEqual(len(response.values), 5, response.failed)
 
+    @lusid_feature("F22")
     def test_lookup_instrument_by_unique_id(self):
 
         figi = "BBG000FD8G46"
@@ -119,6 +122,7 @@ class Instruments(unittest.TestCase):
         property = next(filter(lambda i: i.key == "Instrument/default/ClientInternal", instrument.properties), None)
         self.assertTrue(property.value, "internal_id_1")
 
+    @lusid_feature("F23")
     def test_list_available_identifiers(self):
 
         identifiers = self.instruments_api.get_instrument_identifiers()
@@ -127,6 +131,7 @@ class Instruments(unittest.TestCase):
             print(
                 f"name: {scheme.id_name}\nproperty key: {scheme.property_key_value}\nis unique: {scheme.is_unique_identifier}\n")
 
+    @lusid_feature("F24")
     def test_list_all_instruments(self):
 
         page_size = 5
@@ -136,6 +141,7 @@ class Instruments(unittest.TestCase):
 
         self.assertLessEqual(len(instruments.values), page_size)
 
+    @lusid_feature("F25")
     def test_list_instruments_by_identifier_type(self):
 
         figis = ["BBG000FD8G46", "BBG000DW76R4", "BBG000PQKVN8"]
@@ -146,6 +152,7 @@ class Instruments(unittest.TestCase):
         for figi in figis:
             self.assertTrue(figi in instruments.values, msg=f"{figi} not returned")
 
+    @lusid_feature("F26")
     def test_edit_instrument_property(self):
 
         property_value = models.PropertyValue(label_value="Insurance")
@@ -175,6 +182,3 @@ class Instruments(unittest.TestCase):
             filter(lambda p: p.key == property_key and p.value.label_value == property_value.label_value, instrument.properties))
 
         self.assertEqual(len(prop), 1, f"cannot find property key=${property_key} value={property_value}")
-
- 
- 

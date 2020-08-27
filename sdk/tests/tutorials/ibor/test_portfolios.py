@@ -6,6 +6,7 @@ import pytz
 
 import lusid
 import lusid.models as models
+from features.lusid_feature import lusid_feature
 from utilities import InstrumentLoader
 from utilities import TestDataUtilities
 
@@ -28,6 +29,7 @@ class Portfolios(unittest.TestCase):
 
         cls.test_data_utilities = TestDataUtilities(cls.transaction_portfolios_api)
 
+    @lusid_feature("F8")
     def test_create_portfolio(self):
         guid = str(uuid.uuid4())
 
@@ -48,6 +50,7 @@ class Portfolios(unittest.TestCase):
 
         self.assertEqual(result.id.code, request.code)
 
+    @lusid_feature("F9")
     def test_create_portfolio_with_properties(self):
         guid = str(uuid.uuid4())
         property_name = "fund-style-{0}".format(guid)
@@ -97,6 +100,7 @@ class Portfolios(unittest.TestCase):
         self.assertEqual(len(portfolio_properties.properties), 1)
         self.assertEqual(portfolio_properties.properties[property_definition_result.key].value.label_value, property_value)
 
+    @lusid_feature("F10")
     def test_add_transaction_to_portfolio(self):
         # effective date of the portfolio, this is the date the portfolio was created and became live.  All dates/times
         # must be supplied in UTC
@@ -134,6 +138,7 @@ class Portfolios(unittest.TestCase):
         self.assertEqual(len(trades.values), 1)
         self.assertEqual(trades.values[0].transaction_id, transaction.transaction_id)
 
+    @lusid_feature("F11")
     def test_add_transaction_to_portfolio_with_property(self):
         guid = str(uuid.uuid4())
         property_name = "traderId-{0}".format(guid)
@@ -199,12 +204,14 @@ class Portfolios(unittest.TestCase):
         self.assertEqual(trades.values[0].transaction_id, transaction.transaction_id)
         self.assertEqual(trades.values[0].properties[property_definition_result.key].value.label_value, property_value_as_string)
 
+    @lusid_feature("F12")
     def test_list_scopes(self):
         # Get the list of scopes across all entities
         scopes = self.scopes_api.list_scopes()
 
         self.assertGreater(len(scopes.values), 0)
 
+    @lusid_feature("F13")
     def test_list_portfolios(self):
         # This defines the scope that the portfolios will be retrieved from
         scope = TestDataUtilities.tutorials_scope + str(uuid.uuid4())

@@ -5,6 +5,7 @@ import pytz
 
 import lusid
 import lusid.models as models
+from features.lusid_feature import lusid_feature
 from utilities import InstrumentLoader
 from utilities import TestDataUtilities
 
@@ -25,6 +26,7 @@ class Reconciliation(unittest.TestCase):
 
         cls.test_data_utilities = TestDataUtilities(cls.transaction_portfolios_api)
 
+    @lusid_feature("F16")
     def test_reconcile_portfolio(self):
         # create the portfolio
         portfolio_code = self.test_data_utilities.create_transaction_portfolio(TestDataUtilities.tutorials_scope)

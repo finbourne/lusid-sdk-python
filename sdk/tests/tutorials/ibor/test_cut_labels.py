@@ -4,6 +4,7 @@ from datetime import date, timedelta
 
 import lusid
 import lusid.models as models
+from features.lusid_feature import lusid_feature
 from utilities import InstrumentLoader
 from utilities import TestDataUtilities
 
@@ -25,6 +26,7 @@ class CutLabels(unittest.TestCase):
 
         cls.cut_labels = lusid.CutLabelDefinitionsApi(api_client)
 
+    @lusid_feature("F32")
     def test_cut_labels(self):
         def get_guid():
             return str(uuid.uuid4())[:4]

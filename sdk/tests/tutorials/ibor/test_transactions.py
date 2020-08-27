@@ -6,6 +6,7 @@ import pytz
 
 import lusid
 import lusid.models as models
+from features.lusid_feature import lusid_feature
 from utilities import InstrumentLoader
 from utilities import TestDataUtilities
 
@@ -25,6 +26,7 @@ class Transactions(unittest.TestCase):
 
         cls.test_data_utilities = TestDataUtilities(cls.transaction_portfolios_api)
 
+    @lusid_feature("F17")
     def test_load_listed_instrument_transaction(self):
         # create the portfolio
         portfolio_code = self.test_data_utilities.create_transaction_portfolio(TestDataUtilities.tutorials_scope)
@@ -60,6 +62,7 @@ class Transactions(unittest.TestCase):
         self.assertEqual(len(transactions.values), 1)
         self.assertEqual(transactions.values[0].transaction_id, transaction.transaction_id)
 
+    @lusid_feature("F18")
     def test_load_cash_transaction(self):
         # create the portfolio
         portfolio_code = self.test_data_utilities.create_transaction_portfolio(TestDataUtilities.tutorials_scope)
@@ -99,6 +102,7 @@ class Transactions(unittest.TestCase):
         self.assertEqual(len(transactions.values), 1)
         self.assertEqual(transactions.values[0].transaction_id, transaction.transaction_id)
 
+    @lusid_feature("F31")
     def test_cancel_transactions(self):
         # set effective date
         effective_date = datetime(2018, 1, 1, tzinfo=pytz.utc)
