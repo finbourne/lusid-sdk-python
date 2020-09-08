@@ -176,28 +176,5 @@ class Instruments(unittest.TestCase):
 
         self.assertEqual(len(prop), 1, f"cannot find property key=${property_key} value={property_value}")
 
-    def test_create_custom_instrument(self):
-
-        # create a definition for the instrument
-        swap_definition = models.InstrumentDefinition(
-            name="10mm 5Y Fixed",
-
-            # The set of identifiers used for identifying the instrument
-            # e.g. for uploading transactions
-            identifiers={
-                "ClientInternal": models.InstrumentIdValue(value="SW-1")
-            },
-
-            # The details for valuing the instrument
-            definition=models.InstrumentEconomicDefinition(
-
-                # Identifies which valuation engine to use
-                instrument_format="CustomFormat",
-                content="<customFormat>upload in custom xml or JSON format</customFormat>"))
-
-        # create the swap
-        swap_response = self.instruments_api.upsert_instruments(requests={
-            "request": swap_definition
-        })
-
-        self.assertEqual(len(swap_response.failed), 0, swap_response.failed.values())
+ 
+ 

@@ -99,54 +99,6 @@ class Transactions(unittest.TestCase):
         self.assertEqual(len(transactions.values), 1)
         self.assertEqual(transactions.values[0].transaction_id, transaction.transaction_id)
 
-    def test_load_otc_instrument_transaction(self):
-        # create the portfolio
-        portfolio_code = self.test_data_utilities.create_transaction_portfolio(TestDataUtilities.tutorials_scope)
-
-        trade_date = datetime(2018, 1, 1, tzinfo=pytz.utc)
-
-        swap_definition = models.InstrumentDefinition(
-            name="10mm 5Y Fixed",
-            identifiers={
-                "ClientInternal": models.InstrumentIdValue(value="SW-1")
-            },
-            definition=models.InstrumentEconomicDefinition(
-                instrument_format="CustomFormat",
-                content="<customFormat>upload in custom xml or JSON format</customFormat>"))
-
-        # create the swap
-        swap_response = self.instruments_api.upsert_instruments(request_body={
-            "request": swap_definition
-        })
-
-        # get the LUID for the created instrument
-        swap_id = list(swap_response.values.values())[0].lusid_instrument_id
-
-        #   details of the transaction to be added
-        transaction = models.TransactionRequest(
-            transaction_id=str(uuid.uuid4()),
-            type="Buy",
-            instrument_identifiers={TestDataUtilities.lusid_luid_identifier: swap_id},
-            transaction_date=trade_date,
-            settlement_date=trade_date,
-            units=1,
-            transaction_price=models.TransactionPrice(0.0),
-            total_consideration=models.CurrencyAndAmount(0.0, "GBP"),
-            source="Client"
-        )
-
-        # add the transaction
-        self.transaction_portfolios_api.upsert_transactions(scope=TestDataUtilities.tutorials_scope,
-                                                            code=portfolio_code,
-                                                            transaction_request=[transaction])
-
-        # get the transaction
-        transactions = self.transaction_portfolios_api.get_transactions(scope=TestDataUtilities.tutorials_scope,
-                                                                        code=portfolio_code)
-
-        self.assertEqual(len(transactions.values), 1)
-        self.assertEqual(transactions.values[0].transaction_id, transaction.transaction_id)
-
     def test_cancel_transactions(self):
         # set effective date
         effective_date = datetime(2018, 1, 1, tzinfo=pytz.utc)
