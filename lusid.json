@@ -9,7 +9,7 @@
       "url": "https://www.finbourne.com",
       "email": "info@finbourne.com"
     },
-    "version": "0.11.1898",
+    "version": "0.11.1899",
     "x-logo": {
       "url": "https://content.finbourne.com/LUSID-header.png",
       "backgroundColor": "#415464"
@@ -17,7 +17,7 @@
   },
   "servers": [
     {
-      "url": "http://localhost:50248"
+      "url": "http://localhost:58310"
     }
   ],
   "paths": {
