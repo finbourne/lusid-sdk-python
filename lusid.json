@@ -9,7 +9,7 @@
       "url": "https://www.finbourne.com",
       "email": "info@finbourne.com"
     },
-    "version": "0.11.1932",
+    "version": "0.11.1933",
     "x-logo": {
       "url": "https://content.finbourne.com/LUSID-header.png",
       "backgroundColor": "#415464"
@@ -17,7 +17,7 @@
   },
   "servers": [
     {
-      "url": "http://localhost:55930"
+      "url": "http://localhost:41479"
     }
   ],
   "paths": {
@@ -13581,13 +13581,13 @@
               "InterestRateSwaption",
               "Bond",
               "EquityOption",
-              "FixedRateLeg",
-              "FloatingRateLeg",
+              "FixedLeg",
+              "FloatingLeg",
               "BespokeCashflowLeg",
               "Unknown"
             ],
             "type": "string",
-            "description": "The available values are: QuotedSecurity, InterestRateSwap, FxForward, Future, ExoticInstrument, FxOption, CreditDefaultSwap, InterestRateSwaption, Bond, EquityOption, FixedRateLeg, FloatingRateLeg, BespokeCashflowLeg, Unknown"
+            "description": "The available values are: QuotedSecurity, InterestRateSwap, FxForward, Future, ExoticInstrument, FxOption, CreditDefaultSwap, InterestRateSwaption, Bond, EquityOption, FixedLeg, FloatingLeg, BespokeCashflowLeg, Unknown"
           }
         },
         "additionalProperties": false,
