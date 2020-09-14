@@ -5,7 +5,7 @@ from time import sleep
 import pytz
 
 import lusid
-from features.lusid_feature import lusid_feature
+from lusidfeature import lusid_feature
 from utilities import InstrumentLoader
 from utilities import TestDataUtilities
 
