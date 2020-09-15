@@ -1,2 +1,2 @@
+-r requirements.txt
 parameterized==0.7.*
-lusidfeature>=0.1.3
