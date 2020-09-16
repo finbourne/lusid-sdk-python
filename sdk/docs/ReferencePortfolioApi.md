@@ -1,6 +1,6 @@
 # lusid.ReferencePortfolioApi
 
-All URIs are relative to *http://localhost:43638*
+All URIs are relative to *http://localhost:60289*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
@@ -30,8 +30,8 @@ configuration = lusid.Configuration()
 # Configure OAuth2 access token for authorization: oauth2
 configuration.access_token = 'YOUR_ACCESS_TOKEN'
 
-# Defining host is optional and default to http://localhost:43638
-configuration.host = "http://localhost:43638"
+# Defining host is optional and default to http://localhost:60289
+configuration.host = "http://localhost:60289"
 # Create an instance of the API class
 api_instance = lusid.ReferencePortfolioApi(lusid.ApiClient(configuration))
 scope = 'scope_example' # str | The intended scope of the portfolio
@@ -94,8 +94,8 @@ configuration = lusid.Configuration()
 # Configure OAuth2 access token for authorization: oauth2
 configuration.access_token = 'YOUR_ACCESS_TOKEN'
 
-# Defining host is optional and default to http://localhost:43638
-configuration.host = "http://localhost:43638"
+# Defining host is optional and default to http://localhost:60289
+configuration.host = "http://localhost:60289"
 # Create an instance of the API class
 api_instance = lusid.ReferencePortfolioApi(lusid.ApiClient(configuration))
 scope = 'scope_example' # str | The scope of the reference portfolio.
@@ -164,8 +164,8 @@ configuration = lusid.Configuration()
 # Configure OAuth2 access token for authorization: oauth2
 configuration.access_token = 'YOUR_ACCESS_TOKEN'
 
-# Defining host is optional and default to http://localhost:43638
-configuration.host = "http://localhost:43638"
+# Defining host is optional and default to http://localhost:60289
+configuration.host = "http://localhost:60289"
 # Create an instance of the API class
 api_instance = lusid.ReferencePortfolioApi(lusid.ApiClient(configuration))
 scope = 'scope_example' # str | The scope of the portfolio
@@ -234,8 +234,8 @@ configuration = lusid.Configuration()
 # Configure OAuth2 access token for authorization: oauth2
 configuration.access_token = 'YOUR_ACCESS_TOKEN'
 
-# Defining host is optional and default to http://localhost:43638
-configuration.host = "http://localhost:43638"
+# Defining host is optional and default to http://localhost:60289
+configuration.host = "http://localhost:60289"
 # Create an instance of the API class
 api_instance = lusid.ReferencePortfolioApi(lusid.ApiClient(configuration))
 scope = 'scope_example' # str | The scope of the portfolio
