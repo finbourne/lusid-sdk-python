@@ -1,1 +1,2 @@
+-r requirements.txt
 parameterized==0.7.*

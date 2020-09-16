@@ -6,6 +6,7 @@ import uuid
 
 import lusid
 import lusid.models as models
+from lusidfeature import lusid_feature
 
 from lusid.utilities.api_client_builder import ApiClientBuilder
 from utilities.instrument_loader import InstrumentLoader
@@ -34,6 +35,7 @@ class Properties(unittest.TestCase):
         # creates random alphanumeric code
         return str(uuid.uuid4())[:12]
 
+    @lusid_feature("F14")
     def test_create_portfolio_with_label_property(self):
         # Details of property to be created
         uuid = self.get_guid()
@@ -86,6 +88,7 @@ class Properties(unittest.TestCase):
         self.assertEqual(portfolio_request.id.code, create_portfolio_request.code)
         self.assertEqual(label_property.value.label_value, property_value.label_value)
 
+    @lusid_feature("F15")
     def test_create_portfolio_with_metric_property(self):
         uuid = self.get_guid()
         effective_date = datetime(year=2018, month=1, day=1, tzinfo=pytz.utc)
