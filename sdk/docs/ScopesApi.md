@@ -1,6 +1,6 @@
 # lusid.ScopesApi
 
-All URIs are relative to *http://localhost:45409*
+All URIs are relative to *http://localhost:39106*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
@@ -27,8 +27,8 @@ configuration = lusid.Configuration()
 # Configure OAuth2 access token for authorization: oauth2
 configuration.access_token = 'YOUR_ACCESS_TOKEN'
 
-# Defining host is optional and default to http://localhost:45409
-configuration.host = "http://localhost:45409"
+# Defining host is optional and default to http://localhost:39106
+configuration.host = "http://localhost:39106"
 # Create an instance of the API class
 api_instance = lusid.ScopesApi(lusid.ApiClient(configuration))
 filter = 'filter_example' # str | Expression to filter the result set.              For example, to filter on the Scope, use \"scope eq 'string'\"              Read more about filtering results from LUSID here https://support.lusid.com/filtering-results-from-lusid. (optional)
