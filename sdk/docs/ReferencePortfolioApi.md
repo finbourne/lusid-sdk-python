@@ -1,6 +1,6 @@
 # lusid.ReferencePortfolioApi
 
-All URIs are relative to *http://localhost:43383*
+All URIs are relative to *https://fbn-prd.lusid.com/api*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
@@ -30,12 +30,12 @@ configuration = lusid.Configuration()
 # Configure OAuth2 access token for authorization: oauth2
 configuration.access_token = 'YOUR_ACCESS_TOKEN'
 
-# Defining host is optional and default to http://localhost:43383
-configuration.host = "http://localhost:43383"
+# Defining host is optional and default to https://fbn-prd.lusid.com/api
+configuration.host = "https://fbn-prd.lusid.com/api"
 # Create an instance of the API class
 api_instance = lusid.ReferencePortfolioApi(lusid.ApiClient(configuration))
 scope = 'scope_example' # str | The intended scope of the portfolio
-create_reference_portfolio_request = {"displayName":"MyPortfolioName","description":"Description of my portfolio","code":"MyPortfolioCode","created":"2018-03-05T00:00:00+00:00","properties":{}} # CreateReferencePortfolioRequest | The portfolio creation request object
+create_reference_portfolio_request = {"displayName":"MyPortfolioName","description":"Description of my portfolio","code":"MyPortfolioCode","created":"2018-03-05T00:00:00.0000000+00:00","properties":{}} # CreateReferencePortfolioRequest | The portfolio creation request object
 
 try:
     # Create reference portfolio
@@ -94,8 +94,8 @@ configuration = lusid.Configuration()
 # Configure OAuth2 access token for authorization: oauth2
 configuration.access_token = 'YOUR_ACCESS_TOKEN'
 
-# Defining host is optional and default to http://localhost:43383
-configuration.host = "http://localhost:43383"
+# Defining host is optional and default to https://fbn-prd.lusid.com/api
+configuration.host = "https://fbn-prd.lusid.com/api"
 # Create an instance of the API class
 api_instance = lusid.ReferencePortfolioApi(lusid.ApiClient(configuration))
 scope = 'scope_example' # str | The scope of the reference portfolio.
@@ -164,8 +164,8 @@ configuration = lusid.Configuration()
 # Configure OAuth2 access token for authorization: oauth2
 configuration.access_token = 'YOUR_ACCESS_TOKEN'
 
-# Defining host is optional and default to http://localhost:43383
-configuration.host = "http://localhost:43383"
+# Defining host is optional and default to https://fbn-prd.lusid.com/api
+configuration.host = "https://fbn-prd.lusid.com/api"
 # Create an instance of the API class
 api_instance = lusid.ReferencePortfolioApi(lusid.ApiClient(configuration))
 scope = 'scope_example' # str | The scope of the portfolio
@@ -234,13 +234,13 @@ configuration = lusid.Configuration()
 # Configure OAuth2 access token for authorization: oauth2
 configuration.access_token = 'YOUR_ACCESS_TOKEN'
 
-# Defining host is optional and default to http://localhost:43383
-configuration.host = "http://localhost:43383"
+# Defining host is optional and default to https://fbn-prd.lusid.com/api
+configuration.host = "https://fbn-prd.lusid.com/api"
 # Create an instance of the API class
 api_instance = lusid.ReferencePortfolioApi(lusid.ApiClient(configuration))
 scope = 'scope_example' # str | The scope of the portfolio
 code = 'code_example' # str | The code of the portfolio
-upsert_reference_portfolio_constituents_request = {"effectiveFrom":"2018-03-05T00:00:00+00:00","weightType":"Periodical","periodType":"Quarterly","periodCount":2,"constituents":[{"instrumentIdentifiers":{"instrument/default/Figi":"BBG0077GZM13","instrument/default/Isin":"GB00BH4HKS39"},"properties":{"portfolio/MyScope/MyPropertyKey":{"key":"Portfolio/MyScope/MyPropertyKey","value":{"metricValue":{"value":12345.5672,"unit":"Unit"}}}},"weight":100,"currency":"GBP"},{"instrumentIdentifiers":{"instrument/default/Figi":"BBG0077H2WN1","instrument/default/Isin":"US0378331005"},"properties":{},"weight":50,"currency":"USD"}]} # UpsertReferencePortfolioConstituentsRequest | The constituents to upload to the portfolio
+upsert_reference_portfolio_constituents_request = {"effectiveFrom":"2018-03-05T00:00:00.0000000+00:00","weightType":"Periodical","periodType":"Quarterly","periodCount":2,"constituents":[{"instrumentIdentifiers":{"instrument/default/Figi":"BBG0077GZM13","instrument/default/Isin":"GB00BH4HKS39"},"properties":{"portfolio/MyScope/MyPropertyKey":{"key":"Portfolio/MyScope/MyPropertyKey","value":{"metricValue":{"value":12345.5672,"unit":"Unit"}}}},"weight":100,"currency":"GBP"},{"instrumentIdentifiers":{"instrument/default/Figi":"BBG0077H2WN1","instrument/default/Isin":"US0378331005"},"properties":{},"weight":50,"currency":"USD"}]} # UpsertReferencePortfolioConstituentsRequest | The constituents to upload to the portfolio
 
 try:
     # Add constituents
