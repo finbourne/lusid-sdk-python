@@ -9,7 +9,7 @@
       "url": "https://www.finbourne.com",
       "email": "info@finbourne.com"
     },
-    "version": "0.11.2175",
+    "version": "0.11.2176",
     "x-logo": {
       "url": "https://content.finbourne.com/LUSID-header.png",
       "backgroundColor": "#415464"
@@ -17,7 +17,7 @@
   },
   "servers": [
     {
-      "url": "http://localhost:47859"
+      "url": "http://localhost:32468"
     }
   ],
   "paths": {
@@ -4362,10 +4362,10 @@
           {
             "name": "filter",
             "in": "query",
-            "description": "Expression to filter the result set. \r\n            For example, to filter on the Type, use \"type eq 'Transaction'\"\r\n            Read more about filtering results from LUSID here https://support.lusid.com/filtering-results-from-lusid.",
+            "description": "Expression to filter the result set.\r\n            For example, to filter on the Type, use \"type eq 'Transaction'\"\r\n            Read more about filtering results from LUSID here https://support.lusid.com/filtering-results-from-lusid.",
             "schema": {
               "type": "string",
-              "description": "Expression to filter the result set. \r\n            For example, to filter on the Type, use \"type eq 'Transaction'\"\r\n            Read more about filtering results from LUSID here https://support.lusid.com/filtering-results-from-lusid.",
+              "description": "Expression to filter the result set.\r\n            For example, to filter on the Type, use \"type eq 'Transaction'\"\r\n            Read more about filtering results from LUSID here https://support.lusid.com/filtering-results-from-lusid.",
               "nullable": true
             }
           },
