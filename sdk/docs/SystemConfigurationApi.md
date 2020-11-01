@@ -1,6 +1,6 @@
 # lusid.SystemConfigurationApi
 
-All URIs are relative to *http://localhost:31772*
+All URIs are relative to *http://localhost:36021*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
@@ -28,8 +28,8 @@ configuration = lusid.Configuration()
 # Configure OAuth2 access token for authorization: oauth2
 configuration.access_token = 'YOUR_ACCESS_TOKEN'
 
-# Defining host is optional and default to http://localhost:31772
-configuration.host = "http://localhost:31772"
+# Defining host is optional and default to http://localhost:36021
+configuration.host = "http://localhost:36021"
 # Create an instance of the API class
 api_instance = lusid.SystemConfigurationApi(lusid.ApiClient(configuration))
 transaction_configuration_data_request = {"aliases":[{"type":"Another-Sell","description":"Sale","transactionClass":"MyDefault","transactionGroup":"MyGroup","transactionRoles":"LongShorter"}],"movements":[{"movementTypes":"StockMovement","side":"Side1","direction":-1,"properties":{},"mappings":[]},{"movementTypes":"CashCommitment","side":"Side2","direction":1,"properties":{},"mappings":[]}],"properties":{}} # TransactionConfigurationDataRequest | A transaction type definition (optional)
@@ -90,8 +90,8 @@ configuration = lusid.Configuration()
 # Configure OAuth2 access token for authorization: oauth2
 configuration.access_token = 'YOUR_ACCESS_TOKEN'
 
-# Defining host is optional and default to http://localhost:31772
-configuration.host = "http://localhost:31772"
+# Defining host is optional and default to http://localhost:36021
+configuration.host = "http://localhost:36021"
 # Create an instance of the API class
 api_instance = lusid.SystemConfigurationApi(lusid.ApiClient(configuration))
 
