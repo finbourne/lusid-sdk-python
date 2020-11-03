@@ -3,8 +3,8 @@
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**identifier** | **dict(str, str)** |  | [optional] 
-**actions** | [**list[ActionId]**](ActionId.md) |  | [optional] 
+**identifier** | **dict(str, str)** |  | 
+**actions** | [**list[ActionId]**](ActionId.md) |  | 
 **name** | **str** |  | [optional] 
 **description** | **str** |  | [optional] 
 
