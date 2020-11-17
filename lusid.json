@@ -9,7 +9,7 @@
       "url": "https://www.finbourne.com",
       "email": "info@finbourne.com"
     },
-    "version": "0.11.2295",
+    "version": "0.11.2296",
     "x-logo": {
       "url": "https://content.finbourne.com/LUSID-header.png",
       "backgroundColor": "#415464"
@@ -17,7 +17,7 @@
   },
   "servers": [
     {
-      "url": "https://fbn-prd.lusid.com/api"
+      "url": "http://localhost:61697"
     }
   ],
   "paths": {
@@ -2538,97 +2538,16 @@
               "text/plain": {
                 "schema": {
                   "$ref": "#/components/schemas/ResourceListOfPortfolioGroup"
-                },
-                "example": {
-                  "values": [
-                    {
-                      "href": "https://example.lusid.com/api/portfoliogroups/demo-scope/demo-code",
-                      "id": {
-                        "scope": "demo-scope",
-                        "code": "demo-group-code"
-                      },
-                      "displayName": "Test portfolio group",
-                      "description": "UK Portfolio",
-                      "created": "2020-03-28T00:00:00.0000000+00:00",
-                      "portfolios": [
-                        {
-                          "scope": "demo-scope",
-                          "code": "demo-portfolio"
-                        }
-                      ],
-                      "subGroups": [
-                        {
-                          "scope": "demo-scope",
-                          "code": "demo-sub-group"
-                        }
-                      ]
-                    }
-                  ],
-                  "href": "https://example.lusid.com/api/portfoliogroups"
                 }
               },
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/ResourceListOfPortfolioGroup"
-                },
-                "example": {
-                  "values": [
-                    {
-                      "href": "https://example.lusid.com/api/portfoliogroups/demo-scope/demo-code",
-                      "id": {
-                        "scope": "demo-scope",
-                        "code": "demo-group-code"
-                      },
-                      "displayName": "Test portfolio group",
-                      "description": "UK Portfolio",
-                      "created": "2020-03-28T00:00:00.0000000+00:00",
-                      "portfolios": [
-                        {
-                          "scope": "demo-scope",
-                          "code": "demo-portfolio"
-                        }
-                      ],
-                      "subGroups": [
-                        {
-                          "scope": "demo-scope",
-                          "code": "demo-sub-group"
-                        }
-                      ]
-                    }
-                  ],
-                  "href": "https://example.lusid.com/api/portfoliogroups"
                 }
               },
               "text/json": {
                 "schema": {
                   "$ref": "#/components/schemas/ResourceListOfPortfolioGroup"
-                },
-                "example": {
-                  "values": [
-                    {
-                      "href": "https://example.lusid.com/api/portfoliogroups/demo-scope/demo-code",
-                      "id": {
-                        "scope": "demo-scope",
-                        "code": "demo-group-code"
-                      },
-                      "displayName": "Test portfolio group",
-                      "description": "UK Portfolio",
-                      "created": "2020-03-28T00:00:00.0000000+00:00",
-                      "portfolios": [
-                        {
-                          "scope": "demo-scope",
-                          "code": "demo-portfolio"
-                        }
-                      ],
-                      "subGroups": [
-                        {
-                          "scope": "demo-scope",
-                          "code": "demo-sub-group"
-                        }
-                      ]
-                    }
-                  ],
-                  "href": "https://example.lusid.com/api/portfoliogroups"
                 }
               }
             }
@@ -6100,91 +6019,16 @@
               "text/plain": {
                 "schema": {
                   "$ref": "#/components/schemas/ResourceListOfPropertyDefinition"
-                },
-                "example": {
-                  "values": [
-                    {
-                      "href": "https://example.lusid.com/api/properties/demo-scope/demo-code",
-                      "key": "Portfolio/default/Country",
-                      "valueType": "String",
-                      "displayName": "Country",
-                      "dataTypeId": {
-                        "scope": "demo-scope",
-                        "code": "demo-code"
-                      },
-                      "type": "Information",
-                      "unitSchema": "Basic",
-                      "domain": "Portfolio",
-                      "scope": "default",
-                      "code": "Country",
-                      "valueRequired": false,
-                      "lifeTime": "Perpetual",
-                      "constraintStyle": "Property",
-                      "propertyDefinitionType": "ValueProperty",
-                      "propertyDescription": "A demonstration property definition"
-                    }
-                  ],
-                  "href": "https://example.lusid.com/api/properties"
                 }
               },
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/ResourceListOfPropertyDefinition"
-                },
-                "example": {
-                  "values": [
-                    {
-                      "href": "https://example.lusid.com/api/properties/demo-scope/demo-code",
-                      "key": "Portfolio/default/Country",
-                      "valueType": "String",
-                      "displayName": "Country",
-                      "dataTypeId": {
-                        "scope": "demo-scope",
-                        "code": "demo-code"
-                      },
-                      "type": "Information",
-                      "unitSchema": "Basic",
-                      "domain": "Portfolio",
-                      "scope": "default",
-                      "code": "Country",
-                      "valueRequired": false,
-                      "lifeTime": "Perpetual",
-                      "constraintStyle": "Property",
-                      "propertyDefinitionType": "ValueProperty",
-                      "propertyDescription": "A demonstration property definition"
-                    }
-                  ],
-                  "href": "https://example.lusid.com/api/properties"
                 }
               },
               "text/json": {
                 "schema": {
                   "$ref": "#/components/schemas/ResourceListOfPropertyDefinition"
-                },
-                "example": {
-                  "values": [
-                    {
-                      "href": "https://example.lusid.com/api/properties/demo-scope/demo-code",
-                      "key": "Portfolio/default/Country",
-                      "valueType": "String",
-                      "displayName": "Country",
-                      "dataTypeId": {
-                        "scope": "demo-scope",
-                        "code": "demo-code"
-                      },
-                      "type": "Information",
-                      "unitSchema": "Basic",
-                      "domain": "Portfolio",
-                      "scope": "default",
-                      "code": "Country",
-                      "valueRequired": false,
-                      "lifeTime": "Perpetual",
-                      "constraintStyle": "Property",
-                      "propertyDefinitionType": "ValueProperty",
-                      "propertyDescription": "A demonstration property definition"
-                    }
-                  ],
-                  "href": "https://example.lusid.com/api/properties"
                 }
               }
             }
@@ -7612,97 +7456,16 @@
               "text/plain": {
                 "schema": {
                   "$ref": "#/components/schemas/ResourceListOfPortfolioGroup"
-                },
-                "example": {
-                  "values": [
-                    {
-                      "href": "https://example.lusid.com/api/portfoliogroups/demo-scope/demo-code",
-                      "id": {
-                        "scope": "demo-scope",
-                        "code": "demo-group-code"
-                      },
-                      "displayName": "Test portfolio group",
-                      "description": "UK Portfolio",
-                      "created": "2020-03-28T00:00:00.0000000+00:00",
-                      "portfolios": [
-                        {
-                          "scope": "demo-scope",
-                          "code": "demo-portfolio"
-                        }
-                      ],
-                      "subGroups": [
-                        {
-                          "scope": "demo-scope",
-                          "code": "demo-sub-group"
-                        }
-                      ]
-                    }
-                  ],
-                  "href": "https://example.lusid.com/api/portfoliogroups"
                 }
               },
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/ResourceListOfPortfolioGroup"
-                },
-                "example": {
-                  "values": [
-                    {
-                      "href": "https://example.lusid.com/api/portfoliogroups/demo-scope/demo-code",
-                      "id": {
-                        "scope": "demo-scope",
-                        "code": "demo-group-code"
-                      },
-                      "displayName": "Test portfolio group",
-                      "description": "UK Portfolio",
-                      "created": "2020-03-28T00:00:00.0000000+00:00",
-                      "portfolios": [
-                        {
-                          "scope": "demo-scope",
-                          "code": "demo-portfolio"
-                        }
-                      ],
-                      "subGroups": [
-                        {
-                          "scope": "demo-scope",
-                          "code": "demo-sub-group"
-                        }
-                      ]
-                    }
-                  ],
-                  "href": "https://example.lusid.com/api/portfoliogroups"
                 }
               },
               "text/json": {
                 "schema": {
                   "$ref": "#/components/schemas/ResourceListOfPortfolioGroup"
-                },
-                "example": {
-                  "values": [
-                    {
-                      "href": "https://example.lusid.com/api/portfoliogroups/demo-scope/demo-code",
-                      "id": {
-                        "scope": "demo-scope",
-                        "code": "demo-group-code"
-                      },
-                      "displayName": "Test portfolio group",
-                      "description": "UK Portfolio",
-                      "created": "2020-03-28T00:00:00.0000000+00:00",
-                      "portfolios": [
-                        {
-                          "scope": "demo-scope",
-                          "code": "demo-portfolio"
-                        }
-                      ],
-                      "subGroups": [
-                        {
-                          "scope": "demo-scope",
-                          "code": "demo-sub-group"
-                        }
-                      ]
-                    }
-                  ],
-                  "href": "https://example.lusid.com/api/portfoliogroups"
                 }
               }
             }
@@ -7807,109 +7570,16 @@
               "text/plain": {
                 "schema": {
                   "$ref": "#/components/schemas/ResourceListOfPortfolioSearchResult"
-                },
-                "example": {
-                  "values": [
-                    {
-                      "id": {
-                        "scope": "demo-scope",
-                        "code": "demo-code"
-                      },
-                      "type": "Transaction",
-                      "href": "https://example.lusid.com/api/portfolios/demo-scope/demo-code",
-                      "description": "UK Holidings",
-                      "displayName": "UK Portfolio",
-                      "isDerived": true,
-                      "created": "2019-04-06T12:00:05.0000000+00:00",
-                      "parentPortfolioId": {
-                        "scope": "demo-parent",
-                        "code": "demo-parent"
-                      },
-                      "baseCurrency": "GBP",
-                      "properties": [
-                        {
-                          "key": "Portfolio/default/Country",
-                          "value": {
-                            "labelValue": "UK"
-                          },
-                          "effectiveFrom": "2019-04-06T12:00:05.0000000+00:00"
-                        }
-                      ]
-                    }
-                  ],
-                  "href": "https://example.lusid.com/api/portfolios"
                 }
               },
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/ResourceListOfPortfolioSearchResult"
-                },
-                "example": {
-                  "values": [
-                    {
-                      "id": {
-                        "scope": "demo-scope",
-                        "code": "demo-code"
-                      },
-                      "type": "Transaction",
-                      "href": "https://example.lusid.com/api/portfolios/demo-scope/demo-code",
-                      "description": "UK Holidings",
-                      "displayName": "UK Portfolio",
-                      "isDerived": true,
-                      "created": "2019-04-06T12:00:05.0000000+00:00",
-                      "parentPortfolioId": {
-                        "scope": "demo-parent",
-                        "code": "demo-parent"
-                      },
-                      "baseCurrency": "GBP",
-                      "properties": [
-                        {
-                          "key": "Portfolio/default/Country",
-                          "value": {
-                            "labelValue": "UK"
-                          },
-                          "effectiveFrom": "2019-04-06T12:00:05.0000000+00:00"
-                        }
-                      ]
-                    }
-                  ],
-                  "href": "https://example.lusid.com/api/portfolios"
                 }
               },
               "text/json": {
                 "schema": {
                   "$ref": "#/components/schemas/ResourceListOfPortfolioSearchResult"
-                },
-                "example": {
-                  "values": [
-                    {
-                      "id": {
-                        "scope": "demo-scope",
-                        "code": "demo-code"
-                      },
-                      "type": "Transaction",
-                      "href": "https://example.lusid.com/api/portfolios/demo-scope/demo-code",
-                      "description": "UK Holidings",
-                      "displayName": "UK Portfolio",
-                      "isDerived": true,
-                      "created": "2019-04-06T12:00:05.0000000+00:00",
-                      "parentPortfolioId": {
-                        "scope": "demo-parent",
-                        "code": "demo-parent"
-                      },
-                      "baseCurrency": "GBP",
-                      "properties": [
-                        {
-                          "key": "Portfolio/default/Country",
-                          "value": {
-                            "labelValue": "UK"
-                          },
-                          "effectiveFrom": "2019-04-06T12:00:05.0000000+00:00"
-                        }
-                      ]
-                    }
-                  ],
-                  "href": "https://example.lusid.com/api/portfolios"
                 }
               }
             }
@@ -8014,91 +7684,16 @@
               "text/plain": {
                 "schema": {
                   "$ref": "#/components/schemas/ResourceListOfPropertyDefinition"
-                },
-                "example": {
-                  "values": [
-                    {
-                      "href": "https://example.lusid.com/api/properties/demo-scope/demo-code",
-                      "key": "Portfolio/default/Country",
-                      "valueType": "String",
-                      "displayName": "Country",
-                      "dataTypeId": {
-                        "scope": "demo-scope",
-                        "code": "demo-code"
-                      },
-                      "type": "Information",
-                      "unitSchema": "Basic",
-                      "domain": "Portfolio",
-                      "scope": "default",
-                      "code": "Country",
-                      "valueRequired": false,
-                      "lifeTime": "Perpetual",
-                      "constraintStyle": "Property",
-                      "propertyDefinitionType": "ValueProperty",
-                      "propertyDescription": "A demonstration property definition"
-                    }
-                  ],
-                  "href": "https://example.lusid.com/api/properties"
                 }
               },
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/ResourceListOfPropertyDefinition"
-                },
-                "example": {
-                  "values": [
-                    {
-                      "href": "https://example.lusid.com/api/properties/demo-scope/demo-code",
-                      "key": "Portfolio/default/Country",
-                      "valueType": "String",
-                      "displayName": "Country",
-                      "dataTypeId": {
-                        "scope": "demo-scope",
-                        "code": "demo-code"
-                      },
-                      "type": "Information",
-                      "unitSchema": "Basic",
-                      "domain": "Portfolio",
-                      "scope": "default",
-                      "code": "Country",
-                      "valueRequired": false,
-                      "lifeTime": "Perpetual",
-                      "constraintStyle": "Property",
-                      "propertyDefinitionType": "ValueProperty",
-                      "propertyDescription": "A demonstration property definition"
-                    }
-                  ],
-                  "href": "https://example.lusid.com/api/properties"
                 }
               },
               "text/json": {
                 "schema": {
                   "$ref": "#/components/schemas/ResourceListOfPropertyDefinition"
-                },
-                "example": {
-                  "values": [
-                    {
-                      "href": "https://example.lusid.com/api/properties/demo-scope/demo-code",
-                      "key": "Portfolio/default/Country",
-                      "valueType": "String",
-                      "displayName": "Country",
-                      "dataTypeId": {
-                        "scope": "demo-scope",
-                        "code": "demo-code"
-                      },
-                      "type": "Information",
-                      "unitSchema": "Basic",
-                      "domain": "Portfolio",
-                      "scope": "default",
-                      "code": "Country",
-                      "valueRequired": false,
-                      "lifeTime": "Perpetual",
-                      "constraintStyle": "Property",
-                      "propertyDefinitionType": "ValueProperty",
-                      "propertyDescription": "A demonstration property definition"
-                    }
-                  ],
-                  "href": "https://example.lusid.com/api/properties"
                 }
               }
             }
@@ -9637,17 +9232,19 @@
                 "description": "The executions to update or insert.",
                 "nullable": true
               },
-              "example": {
-                "executionId": "ExecutionId-11111",
-                "side": "SellShort",
-                "instrumentIdentifiers": {
-                  "clientInternal": "CLI-183461"
-                },
-                "transactionTime": "2018-03-05T12:00:00.0000000+00:00",
-                "lastShares": 1000,
-                "lastPx": 1.23,
-                "currency": "USD"
-              }
+              "example": [
+                {
+                  "executionId": "ExecutionId-11111",
+                  "side": "SellShort",
+                  "instrumentIdentifiers": {
+                    "clientInternal": "CLI-183461"
+                  },
+                  "transactionTime": "2018-03-05T12:00:00.0000000+00:00",
+                  "lastShares": 1000,
+                  "lastPx": 1.23,
+                  "currency": "USD"
+                }
+              ]
             },
             "application/json": {
               "schema": {
@@ -9658,17 +9255,19 @@
                 "description": "The executions to update or insert.",
                 "nullable": true
               },
-              "example": {
-                "executionId": "ExecutionId-11111",
-                "side": "SellShort",
-                "instrumentIdentifiers": {
-                  "clientInternal": "CLI-183461"
-                },
-                "transactionTime": "2018-03-05T12:00:00.0000000+00:00",
-                "lastShares": 1000,
-                "lastPx": 1.23,
-                "currency": "USD"
-              }
+              "example": [
+                {
+                  "executionId": "ExecutionId-11111",
+                  "side": "SellShort",
+                  "instrumentIdentifiers": {
+                    "clientInternal": "CLI-183461"
+                  },
+                  "transactionTime": "2018-03-05T12:00:00.0000000+00:00",
+                  "lastShares": 1000,
+                  "lastPx": 1.23,
+                  "currency": "USD"
+                }
+              ]
             },
             "text/json": {
               "schema": {
@@ -9679,17 +9278,19 @@
                 "description": "The executions to update or insert.",
                 "nullable": true
               },
-              "example": {
-                "executionId": "ExecutionId-11111",
-                "side": "SellShort",
-                "instrumentIdentifiers": {
-                  "clientInternal": "CLI-183461"
-                },
-                "transactionTime": "2018-03-05T12:00:00.0000000+00:00",
-                "lastShares": 1000,
-                "lastPx": 1.23,
-                "currency": "USD"
-              }
+              "example": [
+                {
+                  "executionId": "ExecutionId-11111",
+                  "side": "SellShort",
+                  "instrumentIdentifiers": {
+                    "clientInternal": "CLI-183461"
+                  },
+                  "transactionTime": "2018-03-05T12:00:00.0000000+00:00",
+                  "lastShares": 1000,
+                  "lastPx": 1.23,
+                  "currency": "USD"
+                }
+              ]
             },
             "application/*+json": {
               "schema": {
@@ -9700,17 +9301,19 @@
                 "description": "The executions to update or insert.",
                 "nullable": true
               },
-              "example": {
-                "executionId": "ExecutionId-11111",
-                "side": "SellShort",
-                "instrumentIdentifiers": {
-                  "clientInternal": "CLI-183461"
-                },
-                "transactionTime": "2018-03-05T12:00:00.0000000+00:00",
-                "lastShares": 1000,
-                "lastPx": 1.23,
-                "currency": "USD"
-              }
+              "example": [
+                {
+                  "executionId": "ExecutionId-11111",
+                  "side": "SellShort",
+                  "instrumentIdentifiers": {
+                    "clientInternal": "CLI-183461"
+                  },
+                  "transactionTime": "2018-03-05T12:00:00.0000000+00:00",
+                  "lastShares": 1000,
+                  "lastPx": 1.23,
+                  "currency": "USD"
+                }
+              ]
             }
           }
         },
@@ -9957,41 +9560,43 @@
                 },
                 "description": "The complete set of target holdings for the transaction portfolio."
               },
-              "example": {
-                "instrumentIdentifiers": {
-                  "instrument/default/Figi": "BBG000C6K6G9",
-                  "instrument/default/Isin": "GB00BH4HKS39"
-                },
-                "subHoldingKeys": {
-                  "transaction/Algo/Name": {
-                    "key": "Transaction/Algo/Name",
-                    "value": {
-                      "labelValue": "Algo1"
+              "example": [
+                {
+                  "instrumentIdentifiers": {
+                    "instrument/default/Figi": "BBG000C6K6G9",
+                    "instrument/default/Isin": "GB00BH4HKS39"
+                  },
+                  "subHoldingKeys": {
+                    "transaction/Algo/Name": {
+                      "key": "Transaction/Algo/Name",
+                      "value": {
+                        "labelValue": "Algo1"
+                      }
                     }
-                  }
-                },
-                "properties": {
-                  "holding/Entity/Name": {
-                    "key": "Holding/Entity/Name",
-                    "value": {
-                      "labelValue": "Financial Entity"
+                  },
+                  "properties": {
+                    "holding/Entity/Name": {
+                      "key": "Holding/Entity/Name",
+                      "value": {
+                        "labelValue": "Financial Entity"
+                      }
                     }
-                  }
-                },
-                "taxLots": [
-                  {
-                    "units": 100,
-                    "cost": {
-                      "amount": 10000,
-                      "currency": "GBP"
-                    },
-                    "portfolioCost": 10000,
-                    "price": 100,
-                    "purchaseDate": "2018-03-05T00:00:00.0000000+00:00",
-                    "settlementDate": "2018-03-08T00:00:00.0000000+00:00"
-                  }
-                ]
-              }
+                  },
+                  "taxLots": [
+                    {
+                      "units": 100,
+                      "cost": {
+                        "amount": 10000,
+                        "currency": "GBP"
+                      },
+                      "portfolioCost": 10000,
+                      "price": 100,
+                      "purchaseDate": "2018-03-05T00:00:00.0000000+00:00",
+                      "settlementDate": "2018-03-08T00:00:00.0000000+00:00"
+                    }
+                  ]
+                }
+              ]
             },
             "application/json": {
               "schema": {
@@ -10001,41 +9606,43 @@
                 },
                 "description": "The complete set of target holdings for the transaction portfolio."
               },
-              "example": {
-                "instrumentIdentifiers": {
-                  "instrument/default/Figi": "BBG000C6K6G9",
-                  "instrument/default/Isin": "GB00BH4HKS39"
-                },
-                "subHoldingKeys": {
-                  "transaction/Algo/Name": {
-                    "key": "Transaction/Algo/Name",
-                    "value": {
-                      "labelValue": "Algo1"
+              "example": [
+                {
+                  "instrumentIdentifiers": {
+                    "instrument/default/Figi": "BBG000C6K6G9",
+                    "instrument/default/Isin": "GB00BH4HKS39"
+                  },
+                  "subHoldingKeys": {
+                    "transaction/Algo/Name": {
+                      "key": "Transaction/Algo/Name",
+                      "value": {
+                        "labelValue": "Algo1"
+                      }
                     }
-                  }
-                },
-                "properties": {
-                  "holding/Entity/Name": {
-                    "key": "Holding/Entity/Name",
-                    "value": {
-                      "labelValue": "Financial Entity"
+                  },
+                  "properties": {
+                    "holding/Entity/Name": {
+                      "key": "Holding/Entity/Name",
+                      "value": {
+                        "labelValue": "Financial Entity"
+                      }
                     }
-                  }
-                },
-                "taxLots": [
-                  {
-                    "units": 100,
-                    "cost": {
-                      "amount": 10000,
-                      "currency": "GBP"
-                    },
-                    "portfolioCost": 10000,
-                    "price": 100,
-                    "purchaseDate": "2018-03-05T00:00:00.0000000+00:00",
-                    "settlementDate": "2018-03-08T00:00:00.0000000+00:00"
-                  }
-                ]
-              }
+                  },
+                  "taxLots": [
+                    {
+                      "units": 100,
+                      "cost": {
+                        "amount": 10000,
+                        "currency": "GBP"
+                      },
+                      "portfolioCost": 10000,
+                      "price": 100,
+                      "purchaseDate": "2018-03-05T00:00:00.0000000+00:00",
+                      "settlementDate": "2018-03-08T00:00:00.0000000+00:00"
+                    }
+                  ]
+                }
+              ]
             },
             "text/json": {
               "schema": {
@@ -10045,41 +9652,43 @@
                 },
                 "description": "The complete set of target holdings for the transaction portfolio."
               },
-              "example": {
-                "instrumentIdentifiers": {
-                  "instrument/default/Figi": "BBG000C6K6G9",
-                  "instrument/default/Isin": "GB00BH4HKS39"
-                },
-                "subHoldingKeys": {
-                  "transaction/Algo/Name": {
-                    "key": "Transaction/Algo/Name",
-                    "value": {
-                      "labelValue": "Algo1"
+              "example": [
+                {
+                  "instrumentIdentifiers": {
+                    "instrument/default/Figi": "BBG000C6K6G9",
+                    "instrument/default/Isin": "GB00BH4HKS39"
+                  },
+                  "subHoldingKeys": {
+                    "transaction/Algo/Name": {
+                      "key": "Transaction/Algo/Name",
+                      "value": {
+                        "labelValue": "Algo1"
+                      }
                     }
-                  }
-                },
-                "properties": {
-                  "holding/Entity/Name": {
-                    "key": "Holding/Entity/Name",
-                    "value": {
-                      "labelValue": "Financial Entity"
+                  },
+                  "properties": {
+                    "holding/Entity/Name": {
+                      "key": "Holding/Entity/Name",
+                      "value": {
+                        "labelValue": "Financial Entity"
+                      }
                     }
-                  }
-                },
-                "taxLots": [
-                  {
-                    "units": 100,
-                    "cost": {
-                      "amount": 10000,
-                      "currency": "GBP"
-                    },
-                    "portfolioCost": 10000,
-                    "price": 100,
-                    "purchaseDate": "2018-03-05T00:00:00.0000000+00:00",
-                    "settlementDate": "2018-03-08T00:00:00.0000000+00:00"
-                  }
-                ]
-              }
+                  },
+                  "taxLots": [
+                    {
+                      "units": 100,
+                      "cost": {
+                        "amount": 10000,
+                        "currency": "GBP"
+                      },
+                      "portfolioCost": 10000,
+                      "price": 100,
+                      "purchaseDate": "2018-03-05T00:00:00.0000000+00:00",
+                      "settlementDate": "2018-03-08T00:00:00.0000000+00:00"
+                    }
+                  ]
+                }
+              ]
             },
             "application/*+json": {
               "schema": {
@@ -10089,41 +9698,43 @@
                 },
                 "description": "The complete set of target holdings for the transaction portfolio."
               },
-              "example": {
-                "instrumentIdentifiers": {
-                  "instrument/default/Figi": "BBG000C6K6G9",
-                  "instrument/default/Isin": "GB00BH4HKS39"
-                },
-                "subHoldingKeys": {
-                  "transaction/Algo/Name": {
-                    "key": "Transaction/Algo/Name",
-                    "value": {
-                      "labelValue": "Algo1"
+              "example": [
+                {
+                  "instrumentIdentifiers": {
+                    "instrument/default/Figi": "BBG000C6K6G9",
+                    "instrument/default/Isin": "GB00BH4HKS39"
+                  },
+                  "subHoldingKeys": {
+                    "transaction/Algo/Name": {
+                      "key": "Transaction/Algo/Name",
+                      "value": {
+                        "labelValue": "Algo1"
+                      }
                     }
-                  }
-                },
-                "properties": {
-                  "holding/Entity/Name": {
-                    "key": "Holding/Entity/Name",
-                    "value": {
-                      "labelValue": "Financial Entity"
+                  },
+                  "properties": {
+                    "holding/Entity/Name": {
+                      "key": "Holding/Entity/Name",
+                      "value": {
+                        "labelValue": "Financial Entity"
+                      }
                     }
-                  }
-                },
-                "taxLots": [
-                  {
-                    "units": 100,
-                    "cost": {
-                      "amount": 10000,
-                      "currency": "GBP"
-                    },
-                    "portfolioCost": 10000,
-                    "price": 100,
-                    "purchaseDate": "2018-03-05T00:00:00.0000000+00:00",
-                    "settlementDate": "2018-03-08T00:00:00.0000000+00:00"
-                  }
-                ]
-              }
+                  },
+                  "taxLots": [
+                    {
+                      "units": 100,
+                      "cost": {
+                        "amount": 10000,
+                        "currency": "GBP"
+                      },
+                      "portfolioCost": 10000,
+                      "price": 100,
+                      "purchaseDate": "2018-03-05T00:00:00.0000000+00:00",
+                      "settlementDate": "2018-03-08T00:00:00.0000000+00:00"
+                    }
+                  ]
+                }
+              ]
             }
           },
           "required": true
@@ -10260,41 +9871,43 @@
                 },
                 "description": "The selected set of holdings to adjust to the provided targets for the\r\n            transaction portfolio."
               },
-              "example": {
-                "instrumentIdentifiers": {
-                  "instrument/default/Figi": "BBG000C6K6G9",
-                  "instrument/default/Isin": "GB00BH4HKS39"
-                },
-                "subHoldingKeys": {
-                  "transaction/Algo/Name": {
-                    "key": "Transaction/Algo/Name",
-                    "value": {
-                      "labelValue": "Algo1"
+              "example": [
+                {
+                  "instrumentIdentifiers": {
+                    "instrument/default/Figi": "BBG000C6K6G9",
+                    "instrument/default/Isin": "GB00BH4HKS39"
+                  },
+                  "subHoldingKeys": {
+                    "transaction/Algo/Name": {
+                      "key": "Transaction/Algo/Name",
+                      "value": {
+                        "labelValue": "Algo1"
+                      }
                     }
-                  }
-                },
-                "properties": {
-                  "holding/Entity/Name": {
-                    "key": "Holding/Entity/Name",
-                    "value": {
-                      "labelValue": "Financial Entity"
+                  },
+                  "properties": {
+                    "holding/Entity/Name": {
+                      "key": "Holding/Entity/Name",
+                      "value": {
+                        "labelValue": "Financial Entity"
+                      }
                     }
-                  }
-                },
-                "taxLots": [
-                  {
-                    "units": 100,
-                    "cost": {
-                      "amount": 10000,
-                      "currency": "GBP"
-                    },
-                    "portfolioCost": 10000,
-                    "price": 100,
-                    "purchaseDate": "2018-03-05T00:00:00.0000000+00:00",
-                    "settlementDate": "2018-03-08T00:00:00.0000000+00:00"
-                  }
-                ]
-              }
+                  },
+                  "taxLots": [
+                    {
+                      "units": 100,
+                      "cost": {
+                        "amount": 10000,
+                        "currency": "GBP"
+                      },
+                      "portfolioCost": 10000,
+                      "price": 100,
+                      "purchaseDate": "2018-03-05T00:00:00.0000000+00:00",
+                      "settlementDate": "2018-03-08T00:00:00.0000000+00:00"
+                    }
+                  ]
+                }
+              ]
             },
             "application/json": {
               "schema": {
@@ -10304,41 +9917,43 @@
                 },
                 "description": "The selected set of holdings to adjust to the provided targets for the\r\n            transaction portfolio."
               },
-              "example": {
-                "instrumentIdentifiers": {
-                  "instrument/default/Figi": "BBG000C6K6G9",
-                  "instrument/default/Isin": "GB00BH4HKS39"
-                },
-                "subHoldingKeys": {
-                  "transaction/Algo/Name": {
-                    "key": "Transaction/Algo/Name",
-                    "value": {
-                      "labelValue": "Algo1"
+              "example": [
+                {
+                  "instrumentIdentifiers": {
+                    "instrument/default/Figi": "BBG000C6K6G9",
+                    "instrument/default/Isin": "GB00BH4HKS39"
+                  },
+                  "subHoldingKeys": {
+                    "transaction/Algo/Name": {
+                      "key": "Transaction/Algo/Name",
+                      "value": {
+                        "labelValue": "Algo1"
+                      }
                     }
-                  }
-                },
-                "properties": {
-                  "holding/Entity/Name": {
-                    "key": "Holding/Entity/Name",
-                    "value": {
-                      "labelValue": "Financial Entity"
+                  },
+                  "properties": {
+                    "holding/Entity/Name": {
+                      "key": "Holding/Entity/Name",
+                      "value": {
+                        "labelValue": "Financial Entity"
+                      }
                     }
-                  }
-                },
-                "taxLots": [
-                  {
-                    "units": 100,
-                    "cost": {
-                      "amount": 10000,
-                      "currency": "GBP"
-                    },
-                    "portfolioCost": 10000,
-                    "price": 100,
-                    "purchaseDate": "2018-03-05T00:00:00.0000000+00:00",
-                    "settlementDate": "2018-03-08T00:00:00.0000000+00:00"
-                  }
-                ]
-              }
+                  },
+                  "taxLots": [
+                    {
+                      "units": 100,
+                      "cost": {
+                        "amount": 10000,
+                        "currency": "GBP"
+                      },
+                      "portfolioCost": 10000,
+                      "price": 100,
+                      "purchaseDate": "2018-03-05T00:00:00.0000000+00:00",
+                      "settlementDate": "2018-03-08T00:00:00.0000000+00:00"
+                    }
+                  ]
+                }
+              ]
             },
             "text/json": {
               "schema": {
@@ -10348,41 +9963,43 @@
                 },
                 "description": "The selected set of holdings to adjust to the provided targets for the\r\n            transaction portfolio."
               },
-              "example": {
-                "instrumentIdentifiers": {
-                  "instrument/default/Figi": "BBG000C6K6G9",
-                  "instrument/default/Isin": "GB00BH4HKS39"
-                },
-                "subHoldingKeys": {
-                  "transaction/Algo/Name": {
-                    "key": "Transaction/Algo/Name",
-                    "value": {
-                      "labelValue": "Algo1"
+              "example": [
+                {
+                  "instrumentIdentifiers": {
+                    "instrument/default/Figi": "BBG000C6K6G9",
+                    "instrument/default/Isin": "GB00BH4HKS39"
+                  },
+                  "subHoldingKeys": {
+                    "transaction/Algo/Name": {
+                      "key": "Transaction/Algo/Name",
+                      "value": {
+                        "labelValue": "Algo1"
+                      }
                     }
-                  }
-                },
-                "properties": {
-                  "holding/Entity/Name": {
-                    "key": "Holding/Entity/Name",
-                    "value": {
-                      "labelValue": "Financial Entity"
+                  },
+                  "properties": {
+                    "holding/Entity/Name": {
+                      "key": "Holding/Entity/Name",
+                      "value": {
+                        "labelValue": "Financial Entity"
+                      }
                     }
-                  }
-                },
-                "taxLots": [
-                  {
-                    "units": 100,
-                    "cost": {
-                      "amount": 10000,
-                      "currency": "GBP"
-                    },
-                    "portfolioCost": 10000,
-                    "price": 100,
-                    "purchaseDate": "2018-03-05T00:00:00.0000000+00:00",
-                    "settlementDate": "2018-03-08T00:00:00.0000000+00:00"
-                  }
-                ]
-              }
+                  },
+                  "taxLots": [
+                    {
+                      "units": 100,
+                      "cost": {
+                        "amount": 10000,
+                        "currency": "GBP"
+                      },
+                      "portfolioCost": 10000,
+                      "price": 100,
+                      "purchaseDate": "2018-03-05T00:00:00.0000000+00:00",
+                      "settlementDate": "2018-03-08T00:00:00.0000000+00:00"
+                    }
+                  ]
+                }
+              ]
             },
             "application/*+json": {
               "schema": {
@@ -10392,41 +10009,43 @@
                 },
                 "description": "The selected set of holdings to adjust to the provided targets for the\r\n            transaction portfolio."
               },
-              "example": {
-                "instrumentIdentifiers": {
-                  "instrument/default/Figi": "BBG000C6K6G9",
-                  "instrument/default/Isin": "GB00BH4HKS39"
-                },
-                "subHoldingKeys": {
-                  "transaction/Algo/Name": {
-                    "key": "Transaction/Algo/Name",
-                    "value": {
-                      "labelValue": "Algo1"
+              "example": [
+                {
+                  "instrumentIdentifiers": {
+                    "instrument/default/Figi": "BBG000C6K6G9",
+                    "instrument/default/Isin": "GB00BH4HKS39"
+                  },
+                  "subHoldingKeys": {
+                    "transaction/Algo/Name": {
+                      "key": "Transaction/Algo/Name",
+                      "value": {
+                        "labelValue": "Algo1"
+                      }
                     }
-                  }
-                },
-                "properties": {
-                  "holding/Entity/Name": {
-                    "key": "Holding/Entity/Name",
-                    "value": {
-                      "labelValue": "Financial Entity"
+                  },
+                  "properties": {
+                    "holding/Entity/Name": {
+                      "key": "Holding/Entity/Name",
+                      "value": {
+                        "labelValue": "Financial Entity"
+                      }
                     }
-                  }
-                },
-                "taxLots": [
-                  {
-                    "units": 100,
-                    "cost": {
-                      "amount": 10000,
-                      "currency": "GBP"
-                    },
-                    "portfolioCost": 10000,
-                    "price": 100,
-                    "purchaseDate": "2018-03-05T00:00:00.0000000+00:00",
-                    "settlementDate": "2018-03-08T00:00:00.0000000+00:00"
-                  }
-                ]
-              }
+                  },
+                  "taxLots": [
+                    {
+                      "units": 100,
+                      "cost": {
+                        "amount": 10000,
+                        "currency": "GBP"
+                      },
+                      "portfolioCost": 10000,
+                      "price": 100,
+                      "purchaseDate": "2018-03-05T00:00:00.0000000+00:00",
+                      "settlementDate": "2018-03-08T00:00:00.0000000+00:00"
+                    }
+                  ]
+                }
+              ]
             }
           },
           "required": true
@@ -11565,36 +11184,38 @@
                 },
                 "description": "The transactions to be updated or inserted."
               },
-              "example": {
-                "transactionId": "TransactionId-111111",
-                "type": "StockIn",
-                "instrumentIdentifiers": {
-                  "instrument/default/Figi": "BBG000C6K6G9",
-                  "instrument/default/Isin": "GB00BH4HKS39"
-                },
-                "transactionDate": "2018-03-05T00:00:00.0000000+00:00",
-                "settlementDate": "2018-03-08T00:00:00.0000000+00:00",
-                "units": 1000,
-                "transactionPrice": {
-                  "price": 123,
-                  "type": "Price"
-                },
-                "totalConsideration": {
-                  "amount": 123000,
-                  "currency": "GBP"
-                },
-                "transactionCurrency": "GBP",
-                "properties": {
-                  "transaction/Algo/Name": {
-                    "key": "Transaction/Algo/Name",
-                    "value": {
-                      "labelValue": "Algo1"
+              "example": [
+                {
+                  "transactionId": "TransactionId-111111",
+                  "type": "StockIn",
+                  "instrumentIdentifiers": {
+                    "instrument/default/Figi": "BBG000C6K6G9",
+                    "instrument/default/Isin": "GB00BH4HKS39"
+                  },
+                  "transactionDate": "2018-03-05T00:00:00.0000000+00:00",
+                  "settlementDate": "2018-03-08T00:00:00.0000000+00:00",
+                  "units": 1000,
+                  "transactionPrice": {
+                    "price": 123,
+                    "type": "Price"
+                  },
+                  "totalConsideration": {
+                    "amount": 123000,
+                    "currency": "GBP"
+                  },
+                  "transactionCurrency": "GBP",
+                  "properties": {
+                    "transaction/Algo/Name": {
+                      "key": "Transaction/Algo/Name",
+                      "value": {
+                        "labelValue": "Algo1"
+                      }
                     }
-                  }
-                },
-                "counterpartyId": "CounterpartyId-118263",
-                "source": ""
-              }
+                  },
+                  "counterpartyId": "CounterpartyId-118263",
+                  "source": ""
+                }
+              ]
             },
             "application/json": {
               "schema": {
@@ -11604,36 +11225,38 @@
                 },
                 "description": "The transactions to be updated or inserted."
               },
-              "example": {
-                "transactionId": "TransactionId-111111",
-                "type": "StockIn",
-                "instrumentIdentifiers": {
-                  "instrument/default/Figi": "BBG000C6K6G9",
-                  "instrument/default/Isin": "GB00BH4HKS39"
-                },
-                "transactionDate": "2018-03-05T00:00:00.0000000+00:00",
-                "settlementDate": "2018-03-08T00:00:00.0000000+00:00",
-                "units": 1000,
-                "transactionPrice": {
-                  "price": 123,
-                  "type": "Price"
-                },
-                "totalConsideration": {
-                  "amount": 123000,
-                  "currency": "GBP"
-                },
-                "transactionCurrency": "GBP",
-                "properties": {
-                  "transaction/Algo/Name": {
-                    "key": "Transaction/Algo/Name",
-                    "value": {
-                      "labelValue": "Algo1"
+              "example": [
+                {
+                  "transactionId": "TransactionId-111111",
+                  "type": "StockIn",
+                  "instrumentIdentifiers": {
+                    "instrument/default/Figi": "BBG000C6K6G9",
+                    "instrument/default/Isin": "GB00BH4HKS39"
+                  },
+                  "transactionDate": "2018-03-05T00:00:00.0000000+00:00",
+                  "settlementDate": "2018-03-08T00:00:00.0000000+00:00",
+                  "units": 1000,
+                  "transactionPrice": {
+                    "price": 123,
+                    "type": "Price"
+                  },
+                  "totalConsideration": {
+                    "amount": 123000,
+                    "currency": "GBP"
+                  },
+                  "transactionCurrency": "GBP",
+                  "properties": {
+                    "transaction/Algo/Name": {
+                      "key": "Transaction/Algo/Name",
+                      "value": {
+                        "labelValue": "Algo1"
+                      }
                     }
-                  }
-                },
-                "counterpartyId": "CounterpartyId-118263",
-                "source": ""
-              }
+                  },
+                  "counterpartyId": "CounterpartyId-118263",
+                  "source": ""
+                }
+              ]
             },
             "text/json": {
               "schema": {
@@ -11643,36 +11266,38 @@
                 },
                 "description": "The transactions to be updated or inserted."
               },
-              "example": {
-                "transactionId": "TransactionId-111111",
-                "type": "StockIn",
-                "instrumentIdentifiers": {
-                  "instrument/default/Figi": "BBG000C6K6G9",
-                  "instrument/default/Isin": "GB00BH4HKS39"
-                },
-                "transactionDate": "2018-03-05T00:00:00.0000000+00:00",
-                "settlementDate": "2018-03-08T00:00:00.0000000+00:00",
-                "units": 1000,
-                "transactionPrice": {
-                  "price": 123,
-                  "type": "Price"
-                },
-                "totalConsideration": {
-                  "amount": 123000,
-                  "currency": "GBP"
-                },
-                "transactionCurrency": "GBP",
-                "properties": {
-                  "transaction/Algo/Name": {
-                    "key": "Transaction/Algo/Name",
-                    "value": {
-                      "labelValue": "Algo1"
+              "example": [
+                {
+                  "transactionId": "TransactionId-111111",
+                  "type": "StockIn",
+                  "instrumentIdentifiers": {
+                    "instrument/default/Figi": "BBG000C6K6G9",
+                    "instrument/default/Isin": "GB00BH4HKS39"
+                  },
+                  "transactionDate": "2018-03-05T00:00:00.0000000+00:00",
+                  "settlementDate": "2018-03-08T00:00:00.0000000+00:00",
+                  "units": 1000,
+                  "transactionPrice": {
+                    "price": 123,
+                    "type": "Price"
+                  },
+                  "totalConsideration": {
+                    "amount": 123000,
+                    "currency": "GBP"
+                  },
+                  "transactionCurrency": "GBP",
+                  "properties": {
+                    "transaction/Algo/Name": {
+                      "key": "Transaction/Algo/Name",
+                      "value": {
+                        "labelValue": "Algo1"
+                      }
                     }
-                  }
-                },
-                "counterpartyId": "CounterpartyId-118263",
-                "source": ""
-              }
+                  },
+                  "counterpartyId": "CounterpartyId-118263",
+                  "source": ""
+                }
+              ]
             },
             "application/*+json": {
               "schema": {
@@ -11682,36 +11307,38 @@
                 },
                 "description": "The transactions to be updated or inserted."
               },
-              "example": {
-                "transactionId": "TransactionId-111111",
-                "type": "StockIn",
-                "instrumentIdentifiers": {
-                  "instrument/default/Figi": "BBG000C6K6G9",
-                  "instrument/default/Isin": "GB00BH4HKS39"
-                },
-                "transactionDate": "2018-03-05T00:00:00.0000000+00:00",
-                "settlementDate": "2018-03-08T00:00:00.0000000+00:00",
-                "units": 1000,
-                "transactionPrice": {
-                  "price": 123,
-                  "type": "Price"
-                },
-                "totalConsideration": {
-                  "amount": 123000,
-                  "currency": "GBP"
-                },
-                "transactionCurrency": "GBP",
-                "properties": {
-                  "transaction/Algo/Name": {
-                    "key": "Transaction/Algo/Name",
-                    "value": {
-                      "labelValue": "Algo1"
+              "example": [
+                {
+                  "transactionId": "TransactionId-111111",
+                  "type": "StockIn",
+                  "instrumentIdentifiers": {
+                    "instrument/default/Figi": "BBG000C6K6G9",
+                    "instrument/default/Isin": "GB00BH4HKS39"
+                  },
+                  "transactionDate": "2018-03-05T00:00:00.0000000+00:00",
+                  "settlementDate": "2018-03-08T00:00:00.0000000+00:00",
+                  "units": 1000,
+                  "transactionPrice": {
+                    "price": 123,
+                    "type": "Price"
+                  },
+                  "totalConsideration": {
+                    "amount": 123000,
+                    "currency": "GBP"
+                  },
+                  "transactionCurrency": "GBP",
+                  "properties": {
+                    "transaction/Algo/Name": {
+                      "key": "Transaction/Algo/Name",
+                      "value": {
+                        "labelValue": "Algo1"
+                      }
                     }
-                  }
-                },
-                "counterpartyId": "CounterpartyId-118263",
-                "source": ""
-              }
+                  },
+                  "counterpartyId": "CounterpartyId-118263",
+                  "source": ""
+                }
+              ]
             }
           },
           "required": true
@@ -17452,7 +17079,7 @@
         "description": "OAuth2 Implicit Grant",
         "flows": {
           "implicit": {
-            "authorizationUrl": "https://lusid-fbn-ci.okta.com/oauth2/aus49h9b8rQPvouCH2p7/v1/authorize",
+            "authorizationUrl": "https://dummyurl.lusid.com/",
             "scopes": {}
           }
         }
