@@ -22,6 +22,16 @@ jobs:
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
       - uses: actions/checkout@v2
 
+      - name: Set env variable BRANCH_FOR_SLACK for Slack message
+        run: |
+          if ${{ github.event_name == 'push' }} ; then
+            echo "BRANCH_FOR_SLACK=${{ github.ref  }}" >> $GITHUB_ENV
+          elif ${{ github.event_name == 'pull_request' }}; then
+            echo "BRANCH_FOR_SLACK=${{ github.base_ref  }}" >> $GITHUB_ENV
+          else
+            exit 1
+          fi
+
       - name: Run tests on DEVELOP branch
         if: ${{ github.base_ref == 'develop' || github.ref == 'refs/heads/develop' }}
         env: 
@@ -57,16 +67,6 @@ jobs:
           echo "Running the tests..."
           docker-compose up --abort-on-container-exit
           echo "Tests COMPLETED"
-
-      - name: Set env variable BRANCH_FOR_SLACK for Slack message
-        run: |
-          if ${{ github.event_name == 'push' }} ; then
-            echo "BRANCH_FOR_SLACK=${{ github.ref  }}" >> $GITHUB_ENV
-          elif ${{ github.event_name == 'pull_request' }}; then
-            echo "BRANCH_FOR_SLACK=${{ github.base_ref  }}" >> $GITHUB_ENV
-          else
-            exit 1
-          fi
 
       - name: Slack notification
         uses: 8398a7/action-slack@v3
