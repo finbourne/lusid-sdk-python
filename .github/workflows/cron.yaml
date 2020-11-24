@@ -45,7 +45,7 @@ jobs:
             icon_emoji: ':octocat:',
             attachments: [{
               color: '${{ job.status }}' === 'success' ? 'good' : '${{ job.status }}' === 'failure' ? 'danger' : 'warning',
-              text: `${process.env.AS_WORKFLOW} on ${process.env.AS_REPO} has run in ${process.env.AS_TOOK} with status ${{ job.status }}`
+              text: `${process.env.AS_WORKFLOW} on ${process.env.AS_REPO}@${process.env.GITHUB_REF} has run in ${process.env.AS_TOOK} with status ${{ job.status }}`
             }]
             }
         env:
