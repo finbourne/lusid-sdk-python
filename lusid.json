@@ -9,7 +9,7 @@
       "url": "https://www.finbourne.com",
       "email": "info@finbourne.com"
     },
-    "version": "0.11.2318",
+    "version": "0.11.2319",
     "x-logo": {
       "url": "https://content.finbourne.com/LUSID-header.png",
       "backgroundColor": "#415464"
@@ -17,7 +17,7 @@
   },
   "servers": [
     {
-      "url": "https://fbn-prd.lusid.com/api"
+      "url": "http://localhost:50072"
     }
   ],
   "paths": {
@@ -189,7 +189,7 @@
             "required": true,
             "schema": {
               "maxLength": 64,
-              "minLength": 0,
+              "minLength": 1,
               "pattern": "^[a-zA-Z0-9\\-_]+$",
               "type": "string",
               "description": "The scope of the data type",
@@ -203,7 +203,7 @@
             "required": true,
             "schema": {
               "maxLength": 64,
-              "minLength": 0,
+              "minLength": 1,
               "pattern": "^[a-zA-Z0-9\\-_]+$",
               "type": "string",
               "description": "The code of the data type",
@@ -299,7 +299,7 @@
             "required": true,
             "schema": {
               "maxLength": 64,
-              "minLength": 0,
+              "minLength": 1,
               "pattern": "^[a-zA-Z0-9\\-_]+$",
               "type": "string",
               "description": "The scope of the data type",
@@ -313,7 +313,7 @@
             "required": true,
             "schema": {
               "maxLength": 64,
-              "minLength": 0,
+              "minLength": 1,
               "pattern": "^[a-zA-Z0-9\\-_]+$",
               "type": "string",
               "description": "The code of the data type",
@@ -615,7 +615,7 @@
             "required": true,
             "schema": {
               "maxLength": 64,
-              "minLength": 0,
+              "minLength": 1,
               "pattern": "^[a-zA-Z0-9\\-_]+$",
               "type": "string",
               "description": "The scope of the portfolio",
@@ -629,7 +629,7 @@
             "required": true,
             "schema": {
               "maxLength": 64,
-              "minLength": 0,
+              "minLength": 1,
               "pattern": "^[a-zA-Z0-9\\-_]+$",
               "type": "string",
               "description": "The code of the portfolio",
@@ -2607,7 +2607,7 @@
             "required": true,
             "schema": {
               "maxLength": 64,
-              "minLength": 0,
+              "minLength": 1,
               "pattern": "^[a-zA-Z0-9\\-_]+$",
               "type": "string",
               "description": "The scope of the portfolio group to update the definition for.",
@@ -2621,7 +2621,7 @@
             "required": true,
             "schema": {
               "maxLength": 64,
-              "minLength": 0,
+              "minLength": 1,
               "pattern": "^[a-zA-Z0-9\\-_]+$",
               "type": "string",
               "description": "The code of the portfolio group to update the definition for. Together with the scope this uniquely identifies the portfolio group.",
@@ -2756,7 +2756,7 @@
             "required": true,
             "schema": {
               "maxLength": 64,
-              "minLength": 0,
+              "minLength": 1,
               "pattern": "^[a-zA-Z0-9\\-_]+$",
               "type": "string",
               "description": "The scope of the portfolio group to delete.",
@@ -2770,7 +2770,7 @@
             "required": true,
             "schema": {
               "maxLength": 64,
-              "minLength": 0,
+              "minLength": 1,
               "pattern": "^[a-zA-Z0-9\\-_]+$",
               "type": "string",
               "description": "The code of the portfolio group to delete. Together with the scope this uniquely identifies the portfolio group to delete.",
@@ -2852,7 +2852,7 @@
             "required": true,
             "schema": {
               "maxLength": 64,
-              "minLength": 0,
+              "minLength": 1,
               "pattern": "^[a-zA-Z0-9\\-_]+$",
               "type": "string",
               "description": "The scope of the portfolio group to retrieve the definition for.",
@@ -2866,7 +2866,7 @@
             "required": true,
             "schema": {
               "maxLength": 64,
-              "minLength": 0,
+              "minLength": 1,
               "pattern": "^[a-zA-Z0-9\\-_]+$",
               "type": "string",
               "description": "The code of the portfolio group to retrieve the definition for. Together with the scope\r\n            this uniquely identifies the portfolio group.",
@@ -3100,7 +3100,7 @@
             "required": true,
             "schema": {
               "maxLength": 64,
-              "minLength": 0,
+              "minLength": 1,
               "pattern": "^[a-zA-Z0-9\\-_]+$",
               "type": "string",
               "description": "The scope of the portfolio group to expand.",
@@ -3114,7 +3114,7 @@
             "required": true,
             "schema": {
               "maxLength": 64,
-              "minLength": 0,
+              "minLength": 1,
               "pattern": "^[a-zA-Z0-9\\-_]+$",
               "type": "string",
               "description": "The code of the portfolio group to expand. Together with the scope this uniquely identifies the portfolio\r\n            group to expand.",
@@ -3237,7 +3237,7 @@
             "required": true,
             "schema": {
               "maxLength": 64,
-              "minLength": 0,
+              "minLength": 1,
               "pattern": "^[a-zA-Z0-9\\-_]+$",
               "type": "string",
               "description": "The scope of the portfolio group to add a portfolio to.",
@@ -3251,7 +3251,7 @@
             "required": true,
             "schema": {
               "maxLength": 64,
-              "minLength": 0,
+              "minLength": 1,
               "pattern": "^[a-zA-Z0-9\\-_]+$",
               "type": "string",
               "description": "The code of the portfolio group to add a portfolio to. Together with the scope this uniquely identifies the portfolio group.",
@@ -3388,7 +3388,7 @@
             "required": true,
             "schema": {
               "maxLength": 64,
-              "minLength": 0,
+              "minLength": 1,
               "pattern": "^[a-zA-Z0-9\\-_]+$",
               "type": "string",
               "description": "The scope of the portfolio group to remove the portfolio from.",
@@ -3402,7 +3402,7 @@
             "required": true,
             "schema": {
               "maxLength": 64,
-              "minLength": 0,
+              "minLength": 1,
               "pattern": "^[a-zA-Z0-9\\-_]+$",
               "type": "string",
               "description": "The code of the portfolio group to remove the portfolio from. Together with the scope this uniquely identifies the portfolio group.",
@@ -3520,7 +3520,7 @@
             "required": true,
             "schema": {
               "maxLength": 64,
-              "minLength": 0,
+              "minLength": 1,
               "pattern": "^[a-zA-Z0-9\\-_]+$",
               "type": "string",
               "description": "The scope of the group to list the properties for.",
@@ -3534,7 +3534,7 @@
             "required": true,
             "schema": {
               "maxLength": 64,
-              "minLength": 0,
+              "minLength": 1,
               "pattern": "^[a-zA-Z0-9\\-_]+$",
               "type": "string",
               "description": "The code of the group to list the properties for. Together with the scope this uniquely identifies the group.",
@@ -3641,7 +3641,7 @@
             "required": true,
             "schema": {
               "maxLength": 64,
-              "minLength": 0,
+              "minLength": 1,
               "pattern": "^[a-zA-Z0-9\\-_]+$",
               "type": "string",
               "description": "The scope of the group to delete properties from.",
@@ -3655,7 +3655,7 @@
             "required": true,
             "schema": {
               "maxLength": 64,
-              "minLength": 0,
+              "minLength": 1,
               "pattern": "^[a-zA-Z0-9\\-_]+$",
               "type": "string",
               "description": "The code of the group to delete properties from. Together with the scope this uniquely identifies the group.",
@@ -3812,7 +3812,7 @@
             "required": true,
             "schema": {
               "maxLength": 64,
-              "minLength": 0,
+              "minLength": 1,
               "pattern": "^[a-zA-Z0-9\\-_]+$",
               "type": "string",
               "description": "The scope of the group to update or insert the properties onto.",
@@ -3826,7 +3826,7 @@
             "required": true,
             "schema": {
               "maxLength": 64,
-              "minLength": 0,
+              "minLength": 1,
               "pattern": "^[a-zA-Z0-9\\-_]+$",
               "type": "string",
               "description": "The code of the group to update or insert the properties onto. Together with the scope this uniquely identifies the group.",
@@ -4027,7 +4027,7 @@
             "required": true,
             "schema": {
               "maxLength": 64,
-              "minLength": 0,
+              "minLength": 1,
               "pattern": "^[a-zA-Z0-9\\-_]+$",
               "type": "string",
               "description": "The scope of the portfolio group to add a portfolio group to.",
@@ -4041,7 +4041,7 @@
             "required": true,
             "schema": {
               "maxLength": 64,
-              "minLength": 0,
+              "minLength": 1,
               "pattern": "^[a-zA-Z0-9\\-_]+$",
               "type": "string",
               "description": "The code of the portfolio group to add a portfolio group to. Together with the scope this uniquely identifies the portfolio group.",
@@ -4178,7 +4178,7 @@
             "required": true,
             "schema": {
               "maxLength": 64,
-              "minLength": 0,
+              "minLength": 1,
               "pattern": "^[a-zA-Z0-9\\-_]+$",
               "type": "string",
               "description": "The scope of the portfolio group to remove the sub group from.",
@@ -4192,7 +4192,7 @@
             "required": true,
             "schema": {
               "maxLength": 64,
-              "minLength": 0,
+              "minLength": 1,
               "pattern": "^[a-zA-Z0-9\\-_]+$",
               "type": "string",
               "description": "The code of the portfolio group to remove the sub group from. Together with the scope this uniquely identifies the portfolio group.",
@@ -4474,7 +4474,7 @@
             "required": true,
             "schema": {
               "maxLength": 64,
-              "minLength": 0,
+              "minLength": 1,
               "pattern": "^[a-zA-Z0-9\\-_]+$",
               "type": "string",
               "description": "The scope of the portfolios.",
@@ -4642,7 +4642,7 @@
             "required": true,
             "schema": {
               "maxLength": 64,
-              "minLength": 0,
+              "minLength": 1,
               "pattern": "^[a-zA-Z0-9\\-_]+$",
               "type": "string",
               "description": "The scope of the portfolio to retrieve the definition for.",
@@ -4656,7 +4656,7 @@
             "required": true,
             "schema": {
               "maxLength": 64,
-              "minLength": 0,
+              "minLength": 1,
               "pattern": "^[a-zA-Z0-9\\-_]+$",
               "type": "string",
               "description": "The code of the portfolio to retrieve the definition for. Together with the scope this\r\n            uniquely identifies the portfolio.",
@@ -4776,7 +4776,7 @@
             "required": true,
             "schema": {
               "maxLength": 64,
-              "minLength": 0,
+              "minLength": 1,
               "pattern": "^[a-zA-Z0-9\\-_]+$",
               "type": "string",
               "description": "The scope of the portfolio.",
@@ -4790,7 +4790,7 @@
             "required": true,
             "schema": {
               "maxLength": 64,
-              "minLength": 0,
+              "minLength": 1,
               "pattern": "^[a-zA-Z0-9\\-_]+$",
               "type": "string",
               "description": "The code of the portfolio.",
@@ -4872,7 +4872,7 @@
             "required": true,
             "schema": {
               "maxLength": 64,
-              "minLength": 0,
+              "minLength": 1,
               "pattern": "^[a-zA-Z0-9\\-_]+$",
               "type": "string",
               "description": "The scope of the portfolio to update the definition for.",
@@ -4886,7 +4886,7 @@
             "required": true,
             "schema": {
               "maxLength": 64,
-              "minLength": 0,
+              "minLength": 1,
               "pattern": "^[a-zA-Z0-9\\-_]+$",
               "type": "string",
               "description": "The code of the portfolio to update the definition for. Together with the scope this uniquely\r\n            identifies the portfolio.",
@@ -5023,7 +5023,7 @@
             "required": true,
             "schema": {
               "maxLength": 64,
-              "minLength": 0,
+              "minLength": 1,
               "pattern": "^[a-zA-Z0-9\\-_]+$",
               "type": "string",
               "description": "The scope of the portfolio to retrieve the commands for.",
@@ -5037,7 +5037,7 @@
             "required": true,
             "schema": {
               "maxLength": 64,
-              "minLength": 0,
+              "minLength": 1,
               "pattern": "^[a-zA-Z0-9\\-_]+$",
               "type": "string",
               "description": "The code of the portfolio to retrieve the commands for. Together with the scope this uniquely identifies\r\n            the portfolio.",
@@ -5155,7 +5155,7 @@
             "required": true,
             "schema": {
               "maxLength": 64,
-              "minLength": 0,
+              "minLength": 1,
               "pattern": "^[a-zA-Z0-9\\-_]+$",
               "type": "string",
               "description": "The scope of the portfolio to list the properties for.",
@@ -5169,7 +5169,7 @@
             "required": true,
             "schema": {
               "maxLength": 64,
-              "minLength": 0,
+              "minLength": 1,
               "pattern": "^[a-zA-Z0-9\\-_]+$",
               "type": "string",
               "description": "The code of the portfolio to list the properties for. Together with the scope this uniquely\r\n            identifies the portfolio.",
@@ -5274,7 +5274,7 @@
             "required": true,
             "schema": {
               "maxLength": 64,
-              "minLength": 0,
+              "minLength": 1,
               "pattern": "^[a-zA-Z0-9\\-_]+$",
               "type": "string",
               "description": "The scope of the portfolio to delete properties from.",
@@ -5288,7 +5288,7 @@
             "required": true,
             "schema": {
               "maxLength": 64,
-              "minLength": 0,
+              "minLength": 1,
               "pattern": "^[a-zA-Z0-9\\-_]+$",
               "type": "string",
               "description": "The code of the portfolio to delete properties from. Together with the scope this uniquely\r\n            identifies the portfolio.",
@@ -5395,7 +5395,7 @@
             "required": true,
             "schema": {
               "maxLength": 64,
-              "minLength": 0,
+              "minLength": 1,
               "pattern": "^[a-zA-Z0-9\\-_]+$",
               "type": "string",
               "description": "The scope of the portfolio to update or insert the properties onto.",
@@ -5409,7 +5409,7 @@
             "required": true,
             "schema": {
               "maxLength": 64,
-              "minLength": 0,
+              "minLength": 1,
               "pattern": "^[a-zA-Z0-9\\-_]+$",
               "type": "string",
               "description": "The code of the portfolio to update or insert the properties onto. Together with the scope\r\n            this uniquely identifies the portfolio.",
@@ -6119,7 +6119,7 @@
             "required": true,
             "schema": {
               "maxLength": 64,
-              "minLength": 0,
+              "minLength": 1,
               "pattern": "^[a-zA-Z0-9\\-_]+$",
               "type": "string",
               "description": "The scope of the property being updated.",
@@ -6133,7 +6133,7 @@
             "required": true,
             "schema": {
               "maxLength": 64,
-              "minLength": 0,
+              "minLength": 1,
               "pattern": "^[a-zA-Z0-9\\-_]+$",
               "type": "string",
               "description": "The code of the property being updated. Together with the domain and scope this uniquely\r\n            identifies the property.",
@@ -6288,7 +6288,7 @@
             "required": true,
             "schema": {
               "maxLength": 64,
-              "minLength": 0,
+              "minLength": 1,
               "pattern": "^[a-zA-Z0-9\\-_]+$",
               "type": "string",
               "description": "The scope of the property to be deleted.",
@@ -6302,7 +6302,7 @@
             "required": true,
             "schema": {
               "maxLength": 64,
-              "minLength": 0,
+              "minLength": 1,
               "pattern": "^[a-zA-Z0-9\\-_]+$",
               "type": "string",
               "description": "The code of the property to be deleted. Together with the domain and scope this uniquely\r\n            identifies the property.",
@@ -6415,7 +6415,7 @@
             "required": true,
             "schema": {
               "maxLength": 64,
-              "minLength": 0,
+              "minLength": 1,
               "pattern": "^[a-zA-Z0-9\\-_]+$",
               "type": "string",
               "description": "The scope of the specified property.",
@@ -6429,7 +6429,7 @@
             "required": true,
             "schema": {
               "maxLength": 64,
-              "minLength": 0,
+              "minLength": 1,
               "pattern": "^[a-zA-Z0-9\\-_]+$",
               "type": "string",
               "description": "The code of the specified property. Together with the domain and scope this uniquely\r\n            identifies the property.",
@@ -6797,7 +6797,7 @@
             "required": true,
             "schema": {
               "maxLength": 64,
-              "minLength": 0,
+              "minLength": 1,
               "pattern": "^[a-zA-Z0-9\\-_]+$",
               "type": "string",
               "description": "The scope of the portfolio",
@@ -6811,7 +6811,7 @@
             "required": true,
             "schema": {
               "maxLength": 64,
-              "minLength": 0,
+              "minLength": 1,
               "pattern": "^[a-zA-Z0-9\\-_]+$",
               "type": "string",
               "description": "The code of the portfolio",
@@ -7063,7 +7063,7 @@
             "required": true,
             "schema": {
               "maxLength": 64,
-              "minLength": 0,
+              "minLength": 1,
               "pattern": "^[a-zA-Z0-9\\-_]+$",
               "type": "string",
               "description": "The scope of the reference portfolio.",
@@ -7077,7 +7077,7 @@
             "required": true,
             "schema": {
               "maxLength": 64,
-              "minLength": 0,
+              "minLength": 1,
               "pattern": "^[a-zA-Z0-9\\-_]+$",
               "type": "string",
               "description": "The code of the reference portfolio. Together with the scope this uniquely identifies\r\n            the reference portfolio.",
@@ -7199,7 +7199,7 @@
             "required": true,
             "schema": {
               "maxLength": 64,
-              "minLength": 0,
+              "minLength": 1,
               "pattern": "^[a-zA-Z0-9\\-_]+$",
               "type": "string",
               "description": "The scope of the portfolio",
@@ -7213,7 +7213,7 @@
             "required": true,
             "schema": {
               "maxLength": 64,
-              "minLength": 0,
+              "minLength": 1,
               "pattern": "^[a-zA-Z0-9\\-_]+$",
               "type": "string",
               "description": "Code for the portfolio",
@@ -8024,7 +8024,7 @@
             "required": true,
             "schema": {
               "maxLength": 64,
-              "minLength": 0,
+              "minLength": 1,
               "pattern": "^[a-zA-Z0-9\\-_]+$",
               "type": "string",
               "description": "The Code of the Cut Label that is being updated",
@@ -8167,7 +8167,7 @@
             "required": true,
             "schema": {
               "maxLength": 64,
-              "minLength": 0,
+              "minLength": 1,
               "pattern": "^[a-zA-Z0-9\\-_]+$",
               "type": "string",
               "description": "The Code of the Cut Label that is being queried",
@@ -8261,7 +8261,7 @@
             "required": true,
             "schema": {
               "maxLength": 64,
-              "minLength": 0,
+              "minLength": 1,
               "pattern": "^[a-zA-Z0-9\\-_]+$",
               "type": "string",
               "description": "The Code of the Cut Label that is being Deleted",
@@ -8836,7 +8836,7 @@
             "required": true,
             "schema": {
               "maxLength": 64,
-              "minLength": 0,
+              "minLength": 1,
               "pattern": "^[a-zA-Z0-9\\-_]+$",
               "type": "string",
               "description": "The scope of the transaction portfolio to retrieve the details for.",
@@ -8850,7 +8850,7 @@
             "required": true,
             "schema": {
               "maxLength": 64,
-              "minLength": 0,
+              "minLength": 1,
               "pattern": "^[a-zA-Z0-9\\-_]+$",
               "type": "string",
               "description": "The code of the transaction portfolio to retrieve the details for. Together with the\r\n            scope this uniquely identifies the transaction portfolio.",
@@ -8997,7 +8997,7 @@
             "required": true,
             "schema": {
               "maxLength": 64,
-              "minLength": 0,
+              "minLength": 1,
               "pattern": "^[a-zA-Z0-9\\-_]+$",
               "type": "string",
               "description": "The scope of the transaction portfolio to update or insert details for.",
@@ -9011,7 +9011,7 @@
             "required": true,
             "schema": {
               "maxLength": 64,
-              "minLength": 0,
+              "minLength": 1,
               "pattern": "^[a-zA-Z0-9\\-_]+$",
               "type": "string",
               "description": "The code of the transaction portfolio to update or insert details for. Together with the\r\n            scope this uniquely identifies the transaction portfolio.",
@@ -9198,7 +9198,7 @@
             "required": true,
             "schema": {
               "maxLength": 64,
-              "minLength": 0,
+              "minLength": 1,
               "pattern": "^[a-zA-Z0-9\\-_]+$",
               "type": "string",
               "description": "The scope of the transaction portfolio.",
@@ -9212,7 +9212,7 @@
             "required": true,
             "schema": {
               "maxLength": 64,
-              "minLength": 0,
+              "minLength": 1,
               "pattern": "^[a-zA-Z0-9\\-_]+$",
               "type": "string",
               "description": "The code of the transaction portfolio. Together with the scope this uniquely identifies\r\n            the transaction portfolio.",
@@ -9391,7 +9391,7 @@
             "required": true,
             "schema": {
               "maxLength": 64,
-              "minLength": 0,
+              "minLength": 1,
               "pattern": "^[a-zA-Z0-9\\-_]+$",
               "type": "string",
               "description": "The scope of the transaction portfolio.",
@@ -9405,7 +9405,7 @@
             "required": true,
             "schema": {
               "maxLength": 64,
-              "minLength": 0,
+              "minLength": 1,
               "pattern": "^[a-zA-Z0-9\\-_]+$",
               "type": "string",
               "description": "The code of the transaction portfolio. Together with the scope this uniquely identifies\r\n            the transaction portfolio.",
@@ -9502,7 +9502,7 @@
             "required": true,
             "schema": {
               "maxLength": 64,
-              "minLength": 0,
+              "minLength": 1,
               "pattern": "^[a-zA-Z0-9\\-_]+$",
               "type": "string",
               "description": "The scope of the transaction portfolio.",
@@ -9516,7 +9516,7 @@
             "required": true,
             "schema": {
               "maxLength": 64,
-              "minLength": 0,
+              "minLength": 1,
               "pattern": "^[a-zA-Z0-9\\-_]+$",
               "type": "string",
               "description": "The code of the transaction portfolio. Together with the scope this uniquely identifies\r\n            the transaction portfolio.",
@@ -9813,7 +9813,7 @@
             "required": true,
             "schema": {
               "maxLength": 64,
-              "minLength": 0,
+              "minLength": 1,
               "pattern": "^[a-zA-Z0-9\\-_]+$",
               "type": "string",
               "description": "The scope of the transaction portfolio.",
@@ -9827,7 +9827,7 @@
             "required": true,
             "schema": {
               "maxLength": 64,
-              "minLength": 0,
+              "minLength": 1,
               "pattern": "^[a-zA-Z0-9\\-_]+$",
               "type": "string",
               "description": "The code of the transaction portfolio. Together with the scope this uniquely identifies\r\n            the transaction portfolio.",
@@ -10124,7 +10124,7 @@
             "required": true,
             "schema": {
               "maxLength": 64,
-              "minLength": 0,
+              "minLength": 1,
               "pattern": "^[a-zA-Z0-9\\-_]+$",
               "type": "string",
               "description": "The scope of the transaction portfolio.",
@@ -10138,7 +10138,7 @@
             "required": true,
             "schema": {
               "maxLength": 64,
-              "minLength": 0,
+              "minLength": 1,
               "pattern": "^[a-zA-Z0-9\\-_]+$",
               "type": "string",
               "description": "The code of the transaction portfolio. Together with the scope this uniquely identifies\r\n            the transaction portfolio.",
@@ -10242,7 +10242,7 @@
             "required": true,
             "schema": {
               "maxLength": 64,
-              "minLength": 0,
+              "minLength": 1,
               "pattern": "^[a-zA-Z0-9\\-_]+$",
               "type": "string",
               "description": "The code of the transaction portfolio. Together with the scope this uniquely identifies\r\n            the transaction portfolio.",
@@ -10451,7 +10451,7 @@
             "required": true,
             "schema": {
               "maxLength": 64,
-              "minLength": 0,
+              "minLength": 1,
               "pattern": "^[a-zA-Z0-9\\-_]+$",
               "type": "string",
               "description": "The scope of the transaction portfolio.",
@@ -10465,7 +10465,7 @@
             "required": true,
             "schema": {
               "maxLength": 64,
-              "minLength": 0,
+              "minLength": 1,
               "pattern": "^[a-zA-Z0-9\\-_]+$",
               "type": "string",
               "description": "The code of the transaction portfolio. Together with the scope this uniquely identifies\r\n            the transaction portfolio.",
@@ -10583,7 +10583,7 @@
             "required": true,
             "schema": {
               "maxLength": 64,
-              "minLength": 0,
+              "minLength": 1,
               "pattern": "^[a-zA-Z0-9\\-_]+$",
               "type": "string",
               "description": "The scope of the transaction portfolio.",
@@ -10597,7 +10597,7 @@
             "required": true,
             "schema": {
               "maxLength": 64,
-              "minLength": 0,
+              "minLength": 1,
               "pattern": "^[a-zA-Z0-9\\-_]+$",
               "type": "string",
               "description": "The code of the transaction portfolio. Together with the scope this uniquely identifies\r\n            the transaction portfolio.",
@@ -10843,7 +10843,7 @@
             "required": true,
             "schema": {
               "maxLength": 64,
-              "minLength": 0,
+              "minLength": 1,
               "pattern": "^[a-zA-Z0-9\\-_]+$",
               "type": "string",
               "description": "The scope of the transaction portfolio.",
@@ -10857,7 +10857,7 @@
             "required": true,
             "schema": {
               "maxLength": 64,
-              "minLength": 0,
+              "minLength": 1,
               "pattern": "^[a-zA-Z0-9\\-_]+$",
               "type": "string",
               "description": "The code of the transaction portfolio. Together with the scope this uniquely identifies\r\n            the transaction portfolio.",
@@ -11151,7 +11151,7 @@
             "required": true,
             "schema": {
               "maxLength": 64,
-              "minLength": 0,
+              "minLength": 1,
               "pattern": "^[a-zA-Z0-9\\-_]+$",
               "type": "string",
               "description": "The scope of the transaction portfolio.",
@@ -11165,7 +11165,7 @@
             "required": true,
             "schema": {
               "maxLength": 64,
-              "minLength": 0,
+              "minLength": 1,
               "pattern": "^[a-zA-Z0-9\\-_]+$",
               "type": "string",
               "description": "The code of the transaction portfolio. Together with the scope this uniquely identifies\r\n            the transaction portfolio.",
@@ -11417,7 +11417,7 @@
             "required": true,
             "schema": {
               "maxLength": 64,
-              "minLength": 0,
+              "minLength": 1,
               "pattern": "^[a-zA-Z0-9\\-_]+$",
               "type": "string",
               "description": "The scope of the transaction portfolio.",
@@ -11431,7 +11431,7 @@
             "required": true,
             "schema": {
               "maxLength": 64,
-              "minLength": 0,
+              "minLength": 1,
               "pattern": "^[a-zA-Z0-9\\-_]+$",
               "type": "string",
               "description": "The code of the transaction portfolio. Together with the scope this uniquely identifies\r\n            the transaction portfolio.",
@@ -11528,7 +11528,7 @@
             "required": true,
             "schema": {
               "maxLength": 64,
-              "minLength": 0,
+              "minLength": 1,
               "pattern": "^[a-zA-Z0-9\\-_]+$",
               "type": "string",
               "description": "The scope of the transaction portfolio.",
@@ -11542,7 +11542,7 @@
             "required": true,
             "schema": {
               "maxLength": 64,
-              "minLength": 0,
+              "minLength": 1,
               "pattern": "^[a-zA-Z0-9\\-_]+$",
               "type": "string",
               "description": "The code of the transaction portfolio. Together with the scope this uniquely identifies\r\n            the transaction portfolio.",
@@ -11757,7 +11757,7 @@
             "required": true,
             "schema": {
               "maxLength": 64,
-              "minLength": 0,
+              "minLength": 1,
               "pattern": "^[a-zA-Z0-9\\-_]+$",
               "type": "string",
               "description": "The scope of the transaction portfolio.",
@@ -11771,7 +11771,7 @@
             "required": true,
             "schema": {
               "maxLength": 64,
-              "minLength": 0,
+              "minLength": 1,
               "pattern": "^[a-zA-Z0-9\\-_]+$",
               "type": "string",
               "description": "The code of the transaction portfolio. Together with the scope this uniquely identifies\r\n            the transaction portfolio.",
@@ -11880,7 +11880,7 @@
             "required": true,
             "schema": {
               "maxLength": 64,
-              "minLength": 0,
+              "minLength": 1,
               "pattern": "^[a-zA-Z0-9\\-_]+$",
               "type": "string",
               "description": "The scope of the transaction portfolio.",
@@ -17079,7 +17079,7 @@
         "description": "OAuth2 Implicit Grant",
         "flows": {
           "implicit": {
-            "authorizationUrl": "https://lusid-fbn-ci.okta.com/oauth2/aus49h9b8rQPvouCH2p7/v1/authorize",
+            "authorizationUrl": "https://dummyurl.lusid.com/",
             "scopes": {}
           }
         }
