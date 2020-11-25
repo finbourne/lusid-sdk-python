@@ -17,7 +17,7 @@
   },
   "servers": [
     {
-      "url": "http://localhost:37499"
+      "url": "https://fbn-prd.lusid.com/api"
     }
   ],
   "paths": {
@@ -17079,7 +17079,7 @@
         "description": "OAuth2 Implicit Grant",
         "flows": {
           "implicit": {
-            "authorizationUrl": "https://dummyurl.lusid.com/",
+            "authorizationUrl": "https://lusid-fbn-ci.okta.com/oauth2/aus49h9b8rQPvouCH2p7/v1/authorize",
             "scopes": {}
           }
         }
