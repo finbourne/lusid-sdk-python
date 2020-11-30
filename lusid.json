@@ -9,7 +9,7 @@
       "url": "https://www.finbourne.com",
       "email": "info@finbourne.com"
     },
-    "version": "0.11.2337",
+    "version": "0.11.2336",
     "x-logo": {
       "url": "https://content.finbourne.com/LUSID-header.png",
       "backgroundColor": "#415464"
@@ -17,7 +17,7 @@
   },
   "servers": [
     {
-      "url": "http://localhost:45648"
+      "url": "https://fbn-prd.lusid.com/api"
     }
   ],
   "paths": {
@@ -7938,12 +7938,12 @@
             }
           },
           {
-            "name": "page",
+            "name": "query",
             "in": "query",
-            "description": "The pagination token to use to continue listing cut labels from a previous call This value is returned from the previous call.\r\nIf a pagination token is provided the sortBy, filter, and asAt fields\r\nmust not have changed since the original request. Also, if set, a start value cannot be provided.",
+            "description": "Optional. Expression specifying the criteria that the returned cut labels must meet",
             "schema": {
               "type": "string",
-              "description": "The pagination token to use to continue listing cut labels from a previous call This value is returned from the previous call.\r\nIf a pagination token is provided the sortBy, filter, and asAt fields\r\nmust not have changed since the original request. Also, if set, a start value cannot be provided.",
+              "description": "Optional. Expression specifying the criteria that the returned cut labels must meet",
               "nullable": true
             }
           }
@@ -7954,17 +7954,17 @@
             "content": {
               "text/plain": {
                 "schema": {
-                  "$ref": "#/components/schemas/PagedResourceListOfCutLabelDefinition"
+                  "$ref": "#/components/schemas/ResourceListOfCutLabelDefinition"
                 }
               },
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/PagedResourceListOfCutLabelDefinition"
+                  "$ref": "#/components/schemas/ResourceListOfCutLabelDefinition"
                 }
               },
               "text/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/PagedResourceListOfCutLabelDefinition"
+                  "$ref": "#/components/schemas/ResourceListOfCutLabelDefinition"
                 }
               }
             }
@@ -16041,20 +16041,12 @@
         },
         "additionalProperties": false
       },
-      "PagedResourceListOfCutLabelDefinition": {
+      "ResourceListOfCutLabelDefinition": {
         "required": [
           "values"
         ],
         "type": "object",
         "properties": {
-          "nextPage": {
-            "type": "string",
-            "nullable": true
-          },
-          "previousPage": {
-            "type": "string",
-            "nullable": true
-          },
           "values": {
             "type": "array",
             "items": {
@@ -17087,7 +17079,7 @@
         "description": "OAuth2 Implicit Grant",
         "flows": {
           "implicit": {
-            "authorizationUrl": "https://dummyurl.lusid.com/",
+            "authorizationUrl": "https://lusid-fbn-ci.okta.com/oauth2/aus49h9b8rQPvouCH2p7/v1/authorize",
             "scopes": {}
           }
         }
