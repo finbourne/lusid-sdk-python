@@ -9,7 +9,7 @@
       "url": "https://www.finbourne.com",
       "email": "info@finbourne.com"
     },
-    "version": "0.11.2347",
+    "version": "0.11.2348",
     "x-logo": {
       "url": "https://content.finbourne.com/LUSID-header.png",
       "backgroundColor": "#415464"
@@ -17,7 +17,7 @@
   },
   "servers": [
     {
-      "url": "http://localhost:37319"
+      "url": "http://localhost:30673"
     }
   ],
   "paths": {
@@ -2295,9 +2295,6 @@
             "description": "The scope that the portfolio group will be created in.",
             "required": true,
             "schema": {
-              "maxLength": 64,
-              "minLength": 1,
-              "pattern": "^[a-zA-Z0-9\\-_]+$",
               "type": "string",
               "description": "The scope that the portfolio group will be created in.",
               "nullable": true
@@ -2494,9 +2491,6 @@
             "description": "The scope to list the portfolio groups in.",
             "required": true,
             "schema": {
-              "maxLength": 64,
-              "minLength": 1,
-              "pattern": "^[a-zA-Z0-9\\-_]+$",
               "type": "string",
               "description": "The scope to list the portfolio groups in.",
               "nullable": true
@@ -2531,9 +2525,6 @@
             "in": "query",
             "description": "Expression to filter the result set.\r\n            For example, to filter on the Display Name, use \"displayName eq 'string'\"\r\n            Read more about filtering results from LUSID here https://support.lusid.com/filtering-results-from-lusid.",
             "schema": {
-              "maxLength": 2147483647,
-              "minLength": 0,
-              "pattern": "(?s).*",
               "type": "string",
               "description": "Expression to filter the result set.\r\n            For example, to filter on the Display Name, use \"displayName eq 'string'\"\r\n            Read more about filtering results from LUSID here https://support.lusid.com/filtering-results-from-lusid.",
               "nullable": true
@@ -2982,9 +2973,6 @@
             "description": "The scope of the portfolio group to retrieve the commands for.",
             "required": true,
             "schema": {
-              "maxLength": 64,
-              "minLength": 1,
-              "pattern": "^[a-zA-Z0-9\\-_]+$",
               "type": "string",
               "description": "The scope of the portfolio group to retrieve the commands for.",
               "nullable": true
@@ -2996,9 +2984,6 @@
             "description": "The code of the portfolio group to retrieve the commands for. Together with the scope this uniquely identifies the portfolio group.",
             "required": true,
             "schema": {
-              "maxLength": 64,
-              "minLength": 1,
-              "pattern": "^[a-zA-Z0-9\\-_]+$",
               "type": "string",
               "description": "The code of the portfolio group to retrieve the commands for. Together with the scope this uniquely identifies the portfolio group.",
               "nullable": true
@@ -3033,9 +3018,6 @@
             "in": "query",
             "description": "Expression to filter the result set. \r\n             For example, to filter on the User ID, use \"userId.id eq 'string'\"\r\n            Read more about filtering results from LUSID here https://support.lusid.com/filtering-results-from-lusid.",
             "schema": {
-              "maxLength": 2147483647,
-              "minLength": 0,
-              "pattern": "(?s).*",
               "type": "string",
               "description": "Expression to filter the result set. \r\n             For example, to filter on the User ID, use \"userId.id eq 'string'\"\r\n            Read more about filtering results from LUSID here https://support.lusid.com/filtering-results-from-lusid.",
               "nullable": true
@@ -3433,9 +3415,6 @@
             "description": "The scope of the portfolio being removed from the portfolio group.",
             "required": true,
             "schema": {
-              "maxLength": 64,
-              "minLength": 1,
-              "pattern": "^[a-zA-Z0-9\\-_]+$",
               "type": "string",
               "description": "The scope of the portfolio being removed from the portfolio group.",
               "nullable": true
@@ -3447,9 +3426,6 @@
             "description": "The code of the portfolio being removed from the portfolio group. Together with the scope this uniquely identifies the portfolio to remove.",
             "required": true,
             "schema": {
-              "maxLength": 64,
-              "minLength": 1,
-              "pattern": "^[a-zA-Z0-9\\-_]+$",
               "type": "string",
               "description": "The code of the portfolio being removed from the portfolio group. Together with the scope this uniquely identifies the portfolio to remove.",
               "nullable": true
@@ -3570,9 +3546,6 @@
             "in": "query",
             "description": "The effective date time or cut label at which to list the group's properties. Defaults to the current LUSID system datetime if not specified.",
             "schema": {
-              "maxLength": 40,
-              "minLength": 0,
-              "pattern": "^[a-zA-Z0-9\\-_ \\+:\\/\\.]+$",
               "type": "string",
               "description": "The effective date time or cut label at which to list the group's properties. Defaults to the current LUSID system datetime if not specified.",
               "format": "dateorcutlabel",
@@ -3694,9 +3667,6 @@
             "in": "query",
             "description": "The effective datetime or cut label at which to delete the properties.",
             "schema": {
-              "maxLength": 40,
-              "minLength": 0,
-              "pattern": "^[a-zA-Z0-9\\-_ \\+:\\/\\.]+$",
               "type": "string",
               "description": "The effective datetime or cut label at which to delete the properties.",
               "format": "dateorcutlabel",
@@ -4235,9 +4205,6 @@
             "description": "The scope of the sub group to remove from the portfolio group.",
             "required": true,
             "schema": {
-              "maxLength": 64,
-              "minLength": 1,
-              "pattern": "^[a-zA-Z0-9\\-_]+$",
               "type": "string",
               "description": "The scope of the sub group to remove from the portfolio group.",
               "nullable": true
@@ -4249,9 +4216,6 @@
             "description": "The code of the sub group to remove from the portfolio group. Together with the scope this uniquely identifies the sub group.",
             "required": true,
             "schema": {
-              "maxLength": 64,
-              "minLength": 1,
-              "pattern": "^[a-zA-Z0-9\\-_]+$",
               "type": "string",
               "description": "The code of the sub group to remove from the portfolio group. Together with the scope this uniquely identifies the sub group.",
               "nullable": true
@@ -4344,9 +4308,6 @@
             "in": "query",
             "description": "The effective datetime or cut label at which to list the portfolios. Defaults to the current LUSID\r\n            system datetime if not specified.",
             "schema": {
-              "maxLength": 40,
-              "minLength": 0,
-              "pattern": "^[a-zA-Z0-9\\-_ \\+:\\/\\.]+$",
               "type": "string",
               "description": "The effective datetime or cut label at which to list the portfolios. Defaults to the current LUSID\r\n            system datetime if not specified.",
               "format": "dateorcutlabel",
@@ -4370,9 +4331,6 @@
             "in": "query",
             "description": "The pagination token to use to continue listing portfolios from a previous call to list portfolios. This\r\nvalue is returned from the previous call. If a pagination token is provided the filter, effectiveAt\r\nand asAt fields must not have changed since the original request. Also, if set, a start value cannot be provided.",
             "schema": {
-              "maxLength": 200,
-              "minLength": 1,
-              "pattern": "^[a-zA-Z0-9\\+/]*={0,3}$",
               "type": "string",
               "description": "The pagination token to use to continue listing portfolios from a previous call to list portfolios. This\r\nvalue is returned from the previous call. If a pagination token is provided the filter, effectiveAt\r\nand asAt fields must not have changed since the original request. Also, if set, a start value cannot be provided.",
               "nullable": true
@@ -4409,9 +4367,6 @@
             "in": "query",
             "description": "Expression to filter the result set.\r\n            For example, to filter on the Type, use \"type eq 'Transaction'\"\r\n            Read more about filtering results from LUSID here https://support.lusid.com/filtering-results-from-lusid.",
             "schema": {
-              "maxLength": 2147483647,
-              "minLength": 0,
-              "pattern": "(?s).*",
               "type": "string",
               "description": "Expression to filter the result set.\r\n            For example, to filter on the Type, use \"type eq 'Transaction'\"\r\n            Read more about filtering results from LUSID here https://support.lusid.com/filtering-results-from-lusid.",
               "nullable": true
@@ -4422,9 +4377,6 @@
             "in": "query",
             "description": "Expression specifying the criteria that the returned portfolios must meet e.g. to see which\r\n            portfolios have holdings in the instruments with a Lusid Instrument Id (LUID) of 'LUID_PPA8HI6M' or a Figi of 'BBG000BLNNH6'\r\n            you would specify \"instrument.identifiers in (('LusidInstrumentId', 'LUID_PPA8HI6M'), ('Figi', 'BBG000BLNNH6'))\".",
             "schema": {
-              "maxLength": 6000,
-              "minLength": 0,
-              "pattern": "(?s).*",
               "type": "string",
               "description": "Expression specifying the criteria that the returned portfolios must meet e.g. to see which\r\n            portfolios have holdings in the instruments with a Lusid Instrument Id (LUID) of 'LUID_PPA8HI6M' or a Figi of 'BBG000BLNNH6'\r\n            you would specify \"instrument.identifiers in (('LusidInstrumentId', 'LUID_PPA8HI6M'), ('Figi', 'BBG000BLNNH6'))\".",
               "nullable": true
@@ -4534,9 +4486,6 @@
             "in": "query",
             "description": "The effective datetime or cut label at which to list the portfolios. Defaults to the current LUSID\r\n            system datetime if not specified.",
             "schema": {
-              "maxLength": 40,
-              "minLength": 0,
-              "pattern": "^[a-zA-Z0-9\\-_ \\+:\\/\\.]+$",
               "type": "string",
               "description": "The effective datetime or cut label at which to list the portfolios. Defaults to the current LUSID\r\n            system datetime if not specified.",
               "format": "dateorcutlabel",
@@ -4560,9 +4509,6 @@
             "in": "query",
             "description": "The pagination token to use to continue listing portfolios from a previous call to list portfolios. This\r\nvalue is returned from the previous call. If a pagination token is provided the filter, effectiveAt\r\nand asAt fields must not have changed since the original request. Also, if set, a start value cannot be provided.",
             "schema": {
-              "maxLength": 200,
-              "minLength": 1,
-              "pattern": "^[a-zA-Z0-9\\+/]*={0,3}$",
               "type": "string",
               "description": "The pagination token to use to continue listing portfolios from a previous call to list portfolios. This\r\nvalue is returned from the previous call. If a pagination token is provided the filter, effectiveAt\r\nand asAt fields must not have changed since the original request. Also, if set, a start value cannot be provided.",
               "nullable": true
@@ -4599,9 +4545,6 @@
             "in": "query",
             "description": "Expression to filter the result set.\r\n            For example, to filter on the Type, use \"type eq 'Transaction'\"\r\n            Read more about filtering results from LUSID here https://support.lusid.com/filtering-results-from-lusid.",
             "schema": {
-              "maxLength": 2147483647,
-              "minLength": 0,
-              "pattern": "(?s).*",
               "type": "string",
               "description": "Expression to filter the result set.\r\n            For example, to filter on the Type, use \"type eq 'Transaction'\"\r\n            Read more about filtering results from LUSID here https://support.lusid.com/filtering-results-from-lusid.",
               "nullable": true
@@ -4725,9 +4668,6 @@
             "in": "query",
             "description": "The effective datetime or cut label at which to retrieve the portfolio definition. Defaults to the current LUSID system datetime if not specified.",
             "schema": {
-              "maxLength": 40,
-              "minLength": 0,
-              "pattern": "^[a-zA-Z0-9\\-_ \\+:\\/\\.]+$",
               "type": "string",
               "description": "The effective datetime or cut label at which to retrieve the portfolio definition. Defaults to the current LUSID system datetime if not specified.",
               "format": "dateorcutlabel",
@@ -4958,9 +4898,6 @@
             "in": "query",
             "description": "The effective datetime or cut label at which to update the definition. Defaults to the current\r\n            LUSID system datetime if not specified.",
             "schema": {
-              "maxLength": 40,
-              "minLength": 0,
-              "pattern": "^[a-zA-Z0-9\\-_ \\+:\\/\\.]+$",
               "type": "string",
               "description": "The effective datetime or cut label at which to update the definition. Defaults to the current\r\n            LUSID system datetime if not specified.",
               "format": "dateorcutlabel",
@@ -5136,9 +5073,6 @@
             "in": "query",
             "description": "Expression to filter the result set.\r\n            For example, to filter on the User ID, use \"userId.id eq 'string'\"\r\n            Read more about filtering results from LUSID here https://support.lusid.com/filtering-results-from-lusid.",
             "schema": {
-              "maxLength": 2147483647,
-              "minLength": 0,
-              "pattern": "(?s).*",
               "type": "string",
               "description": "Expression to filter the result set.\r\n            For example, to filter on the User ID, use \"userId.id eq 'string'\"\r\n            Read more about filtering results from LUSID here https://support.lusid.com/filtering-results-from-lusid.",
               "nullable": true
@@ -5247,9 +5181,6 @@
             "in": "query",
             "description": "The effective datetime or cut label at which to list the portfolio's properties. Defaults to the current LUSID system datetime if not specified.",
             "schema": {
-              "maxLength": 40,
-              "minLength": 0,
-              "pattern": "^[a-zA-Z0-9\\-_ \\+:\\/\\.]+$",
               "type": "string",
               "description": "The effective datetime or cut label at which to list the portfolio's properties. Defaults to the current LUSID system datetime if not specified.",
               "format": "dateorcutlabel",
@@ -5369,9 +5300,6 @@
             "in": "query",
             "description": "The effective datetime or cut label at which to delete the properties.",
             "schema": {
-              "maxLength": 40,
-              "minLength": 0,
-              "pattern": "^[a-zA-Z0-9\\-_ \\+:\\/\\.]+$",
               "type": "string",
               "description": "The effective datetime or cut label at which to delete the properties.",
               "format": "dateorcutlabel",
