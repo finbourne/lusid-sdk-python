@@ -14,6 +14,10 @@ source_config_details, config_keys = CredentialsSource.fetch_credentials(), Cred
 
 class ApiClientBuilderTests(unittest.TestCase):
 
+    # reused string literals
+    OS_ENVIRON = "os.environ"
+    REQUESTS_POST = "requests.post"
+
     # Test creation with configuration inc proxy settings
 
     @parameterized.expand(
@@ -76,7 +80,7 @@ class ApiClientBuilderTests(unittest.TestCase):
         })
 
         # Use a temporary file and no environment variables to generate the API Client
-        with patch.dict('os.environ', env_vars, clear=True), patch("requests.post") as mock_requests:
+        with patch.dict('os.environ', env_vars, clear=True), patch(self.REQUESTS_POST) as mock_requests:
 
             mock_requests.return_value.status_code = 200
             mock_requests.return_value.json.return_value = {
@@ -113,7 +117,7 @@ class ApiClientBuilderTests(unittest.TestCase):
         api_configuration = None
 
         # Use a temporary file and no environment variables to generate the API Client
-        with patch.dict('os.environ', env_vars, clear=True), patch("requests.post") as mock_requests:
+        with patch.dict('os.environ', env_vars, clear=True), patch(self.REQUESTS_POST) as mock_requests:
 
             mock_requests.return_value.status_code = 200
             mock_requests.return_value.json.return_value = {
@@ -195,7 +199,7 @@ class ApiClientBuilderTests(unittest.TestCase):
             if not okta_response.json.return_value.get("refresh_token", False):
                 raise ValueError("Refresh token missing from config")
 
-        with patch.dict('os.environ', env_vars, clear=True), patch("requests.post") as mock_requests, self.assertRaises(ValueError):
+        with patch.dict('os.environ', env_vars, clear=True), patch(self.REQUESTS_POST) as mock_requests, self.assertRaises(ValueError):
 
             mock_requests.return_value.status_code = 200
             mock_requests.return_value.json.return_value = {

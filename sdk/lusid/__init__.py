@@ -35,7 +35,7 @@ from lusid.api.search_api import SearchApi
 from lusid.api.system_configuration_api import SystemConfigurationApi
 from lusid.api.transaction_portfolios_api import TransactionPortfoliosApi
 
-# import ApiClient
+# import ApiClient module
 from lusid.api_client import ApiClient
 from lusid.configuration import Configuration
 from lusid.exceptions import OpenApiException
@@ -43,6 +43,7 @@ from lusid.exceptions import ApiTypeError
 from lusid.exceptions import ApiValueError
 from lusid.exceptions import ApiKeyError
 from lusid.exceptions import ApiException
+
 # import models into sdk package
 from lusid.models.access_controlled_action import AccessControlledAction
 from lusid.models.access_controlled_resource import AccessControlledResource

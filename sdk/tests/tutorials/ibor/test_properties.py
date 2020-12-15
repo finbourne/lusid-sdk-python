@@ -109,7 +109,6 @@ class Properties(unittest.TestCase):
 
         # create the property values
         metric_property_value_request = models.PropertyValue(metric_value=models.MetricValue(value=1100000, unit="GBP"))
-        # metric_property_value_request = models.PropertyValue(label_value="Active")
 
         # Details of the new portfolio to be created, created here with the minimum set of mandatory fields
         create_portfolio_request = models.CreateTransactionPortfolioRequest(

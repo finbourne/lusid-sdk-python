@@ -16,6 +16,7 @@ import six
 
 class OpenApiException(Exception):
     """The base exception class for all OpenAPIExceptions"""
+    EXCEPTION_FORMAT_STRING = "{0} at {1}"
 
 
 class ApiTypeError(OpenApiException, TypeError):
@@ -43,7 +44,7 @@ class ApiTypeError(OpenApiException, TypeError):
         self.key_type = key_type
         full_msg = msg
         if path_to_item:
-            full_msg = "{0} at {1}".format(msg, render_path(path_to_item))
+            full_msg = OpenApiException.EXCEPTION_FORMAT_STRING.format(msg, render_path(path_to_item))
         super(ApiTypeError, self).__init__(full_msg)
 
 
@@ -61,7 +62,7 @@ class ApiValueError(OpenApiException, ValueError):
         self.path_to_item = path_to_item
         full_msg = msg
         if path_to_item:
-            full_msg = "{0} at {1}".format(msg, render_path(path_to_item))
+            full_msg = OpenApiException.EXCEPTION_FORMAT_STRING.format(msg, render_path(path_to_item))
         super(ApiValueError, self).__init__(full_msg)
 
 
@@ -78,7 +79,7 @@ class ApiKeyError(OpenApiException, KeyError):
         self.path_to_item = path_to_item
         full_msg = msg
         if path_to_item:
-            full_msg = "{0} at {1}".format(msg, render_path(path_to_item))
+            full_msg = OpenApiException.EXCEPTION_FORMAT_STRING.format(msg, render_path(path_to_item))
         super(ApiKeyError, self).__init__(full_msg)
 
 

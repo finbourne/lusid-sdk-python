@@ -12,6 +12,12 @@ from utilities import TestDataUtilities
 
 class Holdings(unittest.TestCase):
 
+    # predefined audit messages
+    INCORRECT_HOLDING = "Incorrect holding type"
+    INCORRECT_INSTRUMENT_ID = "Incorrect instrument ID"
+    INCORRECT_UNITS = "Incorrect units"
+    INCORRECT_AMT = "Incorrect amount"
+
     @classmethod
     def setUpClass(cls):
         # create a configured API client
@@ -19,10 +25,12 @@ class Holdings(unittest.TestCase):
 
         cls.scopes_api = lusid.ScopesApi(api_client)
         cls.portfolios_api = lusid.PortfoliosApi(api_client)
-        cls.transaction_portfolios_api = lusid.TransactionPortfoliosApi(api_client)
+        cls.transaction_portfolios_api = lusid.TransactionPortfoliosApi(
+            api_client)
         cls.property_definitions_api = lusid.PropertyDefinitionsApi(api_client)
         cls.instruments_api = lusid.InstrumentsApi(api_client)
-        cls.test_data_utilities = TestDataUtilities(cls.transaction_portfolios_api)
+        cls.test_data_utilities = TestDataUtilities(
+            cls.transaction_portfolios_api)
 
         cls.instrument_loader = InstrumentLoader(cls.instruments_api)
         cls.instrument_ids = cls.instrument_loader.load_instruments()
@@ -38,11 +46,13 @@ class Holdings(unittest.TestCase):
         day_tplus10 = datetime(2018, 1, 10, tzinfo=pytz.utc)
 
         # Create a portfolio
-        portfolio_id = self.test_data_utilities.create_transaction_portfolio(TestDataUtilities.tutorials_scope)
+        portfolio_id = self.test_data_utilities.create_transaction_portfolio(
+            TestDataUtilities.tutorials_scope)
 
         transactions = [
             # Starting cash position
-            self.test_data_utilities.build_cash_fundsin_transaction_request(100000, currency, day_t1),
+            self.test_data_utilities.build_cash_fundsin_transaction_request(
+                100000, currency, day_t1),
 
             # Initial transaction on day_t1
             self.test_data_utilities.build_transaction_request(self.instrument_ids[0], 100.0, 101.0, currency, day_t1,
@@ -68,35 +78,53 @@ class Holdings(unittest.TestCase):
                                                                 effective_at=day_tplus10)
 
         # Ensure we have 5 holdings: 1 cash position and a position in 4 instruments that aggregates the 5 transactions
-        self.assertEqual(len(holdings.values), 5, msg="Unexpected number of holdings")
+        self.assertEqual(len(holdings.values), 5,
+                         msg="Unexpected number of holdings")
 
         holdings.values.sort(key=lambda x: x.instrument_uid)
 
         # Check the cash balance
-        self.assertEqual(holdings.values[0].instrument_uid, "CCY_{}".format(currency))
+        self.assertEqual(
+            holdings.values[0].instrument_uid, "CCY_{}".format(currency))
 
         # Validate the holdings
         self.assertEqual(holdings.values[0].holding_type, "B")
 
-        self.assertEqual(holdings.values[1].holding_type, "P", msg="Incorrect holding type")
-        self.assertEqual(holdings.values[1].instrument_uid, self.instrument_ids[0], msg="Incorrect instrument id")
-        self.assertEqual(holdings.values[1].units, 100.0, msg="Incorrect units")
-        self.assertEqual(holdings.values[1].cost.amount, 10100.0, msg="Incorrect amount")
+        self.assertEqual(
+            holdings.values[1].holding_type, "P", msg=self.INCORRECT_HOLDING)
+        self.assertEqual(holdings.values[1].instrument_uid,
+                         self.instrument_ids[0], msg=self.INCORRECT_INSTRUMENT_ID)
+        self.assertEqual(holdings.values[1].units,
+                         100.0, msg=self.INCORRECT_UNITS)
+        self.assertEqual(
+            holdings.values[1].cost.amount, 10100.0, msg=self.INCORRECT_AMT)
 
-        self.assertEqual(holdings.values[2].holding_type, "P", msg="Incorrect holding type")
-        self.assertEqual(holdings.values[2].instrument_uid, self.instrument_ids[1], msg="Incorrect instrument id")
-        self.assertEqual(holdings.values[2].units, 200.0, msg="Incorrect units")
-        self.assertEqual(holdings.values[2].cost.amount, 20600.0, msg="Incorrect amount")
+        self.assertEqual(
+            holdings.values[2].holding_type, "P", msg=self.INCORRECT_HOLDING)
+        self.assertEqual(holdings.values[2].instrument_uid,
+                         self.instrument_ids[1], msg=self.INCORRECT_INSTRUMENT_ID)
+        self.assertEqual(holdings.values[2].units,
+                         200.0, msg=self.INCORRECT_UNITS)
+        self.assertEqual(
+            holdings.values[2].cost.amount, 20600.0, msg=self.INCORRECT_AMT)
 
-        self.assertEqual(holdings.values[3].holding_type, "P", msg="Incorrect holding type")
-        self.assertEqual(holdings.values[3].instrument_uid, self.instrument_ids[2], msg="Incorrect instrument id")
-        self.assertEqual(holdings.values[3].units, 100.0, msg="Incorrect units")
-        self.assertEqual(holdings.values[3].cost.amount, 10300.0, msg="Incorrect amount")
+        self.assertEqual(
+            holdings.values[3].holding_type, "P", msg=self.INCORRECT_HOLDING)
+        self.assertEqual(holdings.values[3].instrument_uid,
+                         self.instrument_ids[2], msg=self.INCORRECT_INSTRUMENT_ID)
+        self.assertEqual(holdings.values[3].units,
+                         100.0, msg=self.INCORRECT_UNITS)
+        self.assertEqual(
+            holdings.values[3].cost.amount, 10300.0, msg=self.INCORRECT_AMT)
 
-        self.assertEqual(holdings.values[4].holding_type, "P", msg="Incorrect holding type")
-        self.assertEqual(holdings.values[4].instrument_uid, self.instrument_ids[3], msg="Incorrect instrument id")
-        self.assertEqual(holdings.values[4].units, 100.0, msg="Incorrect units")
-        self.assertEqual(holdings.values[4].cost.amount, 10500.0, msg="Incorrect amount")
+        self.assertEqual(
+            holdings.values[4].holding_type, "P", msg=self.INCORRECT_HOLDING)
+        self.assertEqual(holdings.values[4].instrument_uid,
+                         self.instrument_ids[3], msg=self.INCORRECT_INSTRUMENT_ID)
+        self.assertEqual(holdings.values[4].units,
+                         100.0, msg=self.INCORRECT_UNITS)
+        self.assertEqual(
+            holdings.values[4].cost.amount, 10500.0, msg=self.INCORRECT_AMT)
 
     @lusid_feature("F3")
     def test_set_target_holdings(self):
@@ -106,7 +134,8 @@ class Holdings(unittest.TestCase):
         day1 = datetime(2018, 1, 1, tzinfo=pytz.utc)
         day2 = datetime(2018, 1, 5, tzinfo=pytz.utc)
 
-        portfolio_code = self.test_data_utilities.create_transaction_portfolio(TestDataUtilities.tutorials_scope)
+        portfolio_code = self.test_data_utilities.create_transaction_portfolio(
+            TestDataUtilities.tutorials_scope)
 
         instrument1 = self.instrument_ids[0]
         instrument2 = self.instrument_ids[1]
@@ -131,7 +160,8 @@ class Holdings(unittest.TestCase):
                 tax_lots=[
                     models.TargetTaxLotRequest(units=100.0,
                                                price=101.0,
-                                               cost=models.CurrencyAndAmount(amount=10100.0, currency=currency),
+                                               cost=models.CurrencyAndAmount(
+                                                   amount=10100.0, currency=currency),
                                                portfolio_cost=10100.0,
                                                purchase_date=day1,
                                                settlement_date=day1)
@@ -145,7 +175,8 @@ class Holdings(unittest.TestCase):
                 tax_lots=[
                     models.TargetTaxLotRequest(units=100.0,
                                                price=102.0,
-                                               cost=models.CurrencyAndAmount(amount=10200.0, currency=currency),
+                                               cost=models.CurrencyAndAmount(
+                                                   amount=10200.0, currency=currency),
                                                portfolio_cost=10200.0,
                                                purchase_date=day1,
                                                settlement_date=day1)
@@ -212,6 +243,3 @@ class Holdings(unittest.TestCase):
         self.assertEqual(holdings.values[3].instrument_uid, instrument3)
         self.assertEqual(holdings.values[3].units, 100.0)
         self.assertEqual(holdings.values[3].cost.amount, 10300.0)
-
-
-
