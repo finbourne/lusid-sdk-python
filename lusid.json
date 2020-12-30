@@ -9,7 +9,7 @@
       "url": "https://www.finbourne.com",
       "email": "info@finbourne.com"
     },
-    "version": "0.11.2429",
+    "version": "0.11.2430",
     "x-logo": {
       "url": "https://content.finbourne.com/LUSID-header.png",
       "backgroundColor": "#415464"
@@ -17,7 +17,7 @@
   },
   "servers": [
     {
-      "url": "http://localhost:57334"
+      "url": "http://localhost:33330"
     }
   ],
   "paths": {
@@ -15405,11 +15405,10 @@
               "RIC",
               "QuotePermId",
               "Isin",
-              "CurrencyPair",
-              "ClientInternal"
+              "CurrencyPair"
             ],
             "type": "string",
-            "description": "The type of instrument identifier used to uniquely identify the instrument that the quote is for, e.g. 'Figi'. The available values are: LusidInstrumentId, Figi, RIC, QuotePermId, Isin, CurrencyPair, ClientInternal",
+            "description": "The type of instrument identifier used to uniquely identify the instrument that the quote is for, e.g. 'Figi'. The available values are: LusidInstrumentId, Figi, RIC, QuotePermId, Isin, CurrencyPair",
             "nullable": true
           },
           "quoteType": {
