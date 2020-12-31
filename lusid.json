@@ -9,7 +9,7 @@
       "url": "https://www.finbourne.com",
       "email": "info@finbourne.com"
     },
-    "version": "0.11.2431",
+    "version": "0.11.2432",
     "x-logo": {
       "url": "https://content.finbourne.com/LUSID-header.png",
       "backgroundColor": "#415464"
@@ -17,7 +17,7 @@
   },
   "servers": [
     {
-      "url": "http://localhost:39183"
+      "url": "http://localhost:62772"
     }
   ],
   "paths": {
@@ -12965,6 +12965,39 @@
         },
         "additionalProperties": false
       },
+      "DeletedEntityResponse": {
+        "required": [
+          "asAt"
+        ],
+        "type": "object",
+        "properties": {
+          "href": {
+            "type": "string",
+            "description": "The specific Uniform Resource Identifier (URI) for this resource at the requested effective and asAt datetime.",
+            "format": "uri",
+            "nullable": true
+          },
+          "effectiveFrom": {
+            "type": "string",
+            "description": "The effective datetime at which the deletion became valid. May be null in the case where multiple date times are applicable.",
+            "format": "date-time",
+            "nullable": true
+          },
+          "asAt": {
+            "type": "string",
+            "description": "The asAt datetime at which the deletion was committed to LUSID.",
+            "format": "date-time"
+          },
+          "links": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Link"
+            },
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
       "Property": {
         "required": [
           "key",
@@ -13021,39 +13054,6 @@
               }
             },
             "description": "Information about the particular instance of the failure (supplied information depends on the type of failure).",
-            "nullable": true
-          }
-        },
-        "additionalProperties": false
-      },
-      "DeletedEntityResponse": {
-        "required": [
-          "asAt"
-        ],
-        "type": "object",
-        "properties": {
-          "href": {
-            "type": "string",
-            "description": "The specific Uniform Resource Identifier (URI) for this resource at the requested effective and asAt datetime.",
-            "format": "uri",
-            "nullable": true
-          },
-          "effectiveFrom": {
-            "type": "string",
-            "description": "The effective datetime at which the deletion became valid. May be null in the case where multiple date times are applicable.",
-            "format": "date-time",
-            "nullable": true
-          },
-          "asAt": {
-            "type": "string",
-            "description": "The asAt datetime at which the deletion was committed to LUSID.",
-            "format": "date-time"
-          },
-          "links": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/Link"
-            },
             "nullable": true
           }
         },
