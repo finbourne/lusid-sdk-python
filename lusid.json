@@ -9,7 +9,7 @@
       "url": "https://www.finbourne.com",
       "email": "info@finbourne.com"
     },
-    "version": "0.11.2449",
+    "version": "0.11.2450",
     "x-logo": {
       "url": "https://content.finbourne.com/LUSID-header.png",
       "backgroundColor": "#415464"
@@ -17,7 +17,7 @@
   },
   "servers": [
     {
-      "url": "http://localhost:48144"
+      "url": "http://localhost:43498"
     }
   ],
   "paths": {
@@ -10337,7 +10337,8 @@
                         "currency": "GBP"
                       }
                     }
-                  ]
+                  ],
+                  "links": []
                 }
               },
               "application/json": {
@@ -10364,7 +10365,8 @@
                         "currency": "GBP"
                       }
                     }
-                  ]
+                  ],
+                  "links": []
                 }
               },
               "text/json": {
@@ -10391,7 +10393,8 @@
                         "currency": "GBP"
                       }
                     }
-                  ]
+                  ],
+                  "links": []
                 }
               }
             }
@@ -10981,7 +10984,8 @@
                       "source": ""
                     }
                   ],
-                  "href": "http://example.com"
+                  "href": "http://example.com",
+                  "links": []
                 }
               },
               "application/json": {
@@ -11037,7 +11041,8 @@
                       "source": ""
                     }
                   ],
-                  "href": "http://example.com"
+                  "href": "http://example.com",
+                  "links": []
                 }
               },
               "text/json": {
@@ -11093,7 +11098,8 @@
                       "source": ""
                     }
                   ],
-                  "href": "http://example.com"
+                  "href": "http://example.com",
+                  "links": []
                 }
               }
             }
@@ -12203,7 +12209,8 @@
                       ]
                     }
                   ],
-                  "href": "http://example.com"
+                  "href": "http://example.com",
+                  "links": []
                 }
               },
               "application/json": {
@@ -12419,7 +12426,8 @@
                       ]
                     }
                   ],
-                  "href": "http://example.com"
+                  "href": "http://example.com",
+                  "links": []
                 }
               },
               "text/json": {
@@ -12635,7 +12643,8 @@
                       ]
                     }
                   ],
-                  "href": "http://example.com"
+                  "href": "http://example.com",
+                  "links": []
                 }
               }
             }
@@ -13196,6 +13205,14 @@
             "format": "uri",
             "nullable": true
           },
+          "nextPage": {
+            "type": "string",
+            "nullable": true
+          },
+          "previousPage": {
+            "type": "string",
+            "nullable": true
+          },
           "links": {
             "type": "array",
             "items": {
@@ -13221,6 +13238,14 @@
           "href": {
             "type": "string",
             "format": "uri",
+            "nullable": true
+          },
+          "nextPage": {
+            "type": "string",
+            "nullable": true
+          },
+          "previousPage": {
+            "type": "string",
             "nullable": true
           },
           "links": {
@@ -13526,14 +13551,6 @@
         ],
         "type": "object",
         "properties": {
-          "nextPage": {
-            "type": "string",
-            "nullable": true
-          },
-          "previousPage": {
-            "type": "string",
-            "nullable": true
-          },
           "values": {
             "type": "array",
             "items": {
@@ -13543,6 +13560,14 @@
           "href": {
             "type": "string",
             "format": "uri",
+            "nullable": true
+          },
+          "nextPage": {
+            "type": "string",
+            "nullable": true
+          },
+          "previousPage": {
+            "type": "string",
             "nullable": true
           },
           "links": {
@@ -13727,6 +13752,14 @@
           "href": {
             "type": "string",
             "format": "uri",
+            "nullable": true
+          },
+          "nextPage": {
+            "type": "string",
+            "nullable": true
+          },
+          "previousPage": {
+            "type": "string",
             "nullable": true
           },
           "links": {
@@ -13923,6 +13956,14 @@
           "href": {
             "type": "string",
             "format": "uri",
+            "nullable": true
+          },
+          "nextPage": {
+            "type": "string",
+            "nullable": true
+          },
+          "previousPage": {
+            "type": "string",
             "nullable": true
           },
           "links": {
@@ -14146,6 +14187,14 @@
             "format": "uri",
             "nullable": true
           },
+          "nextPage": {
+            "type": "string",
+            "nullable": true
+          },
+          "previousPage": {
+            "type": "string",
+            "nullable": true
+          },
           "links": {
             "type": "array",
             "items": {
@@ -14230,6 +14279,14 @@
           "href": {
             "type": "string",
             "format": "uri",
+            "nullable": true
+          },
+          "nextPage": {
+            "type": "string",
+            "nullable": true
+          },
+          "previousPage": {
+            "type": "string",
             "nullable": true
           },
           "links": {
@@ -14569,6 +14626,14 @@
             "format": "uri",
             "nullable": true
           },
+          "nextPage": {
+            "type": "string",
+            "nullable": true
+          },
+          "previousPage": {
+            "type": "string",
+            "nullable": true
+          },
           "links": {
             "type": "array",
             "items": {
@@ -14628,6 +14693,14 @@
           "href": {
             "type": "string",
             "format": "uri",
+            "nullable": true
+          },
+          "nextPage": {
+            "type": "string",
+            "nullable": true
+          },
+          "previousPage": {
+            "type": "string",
             "nullable": true
           },
           "links": {
@@ -14882,6 +14955,14 @@
             "format": "uri",
             "nullable": true
           },
+          "nextPage": {
+            "type": "string",
+            "nullable": true
+          },
+          "previousPage": {
+            "type": "string",
+            "nullable": true
+          },
           "links": {
             "type": "array",
             "items": {
@@ -14907,6 +14988,14 @@
           "href": {
             "type": "string",
             "format": "uri",
+            "nullable": true
+          },
+          "nextPage": {
+            "type": "string",
+            "nullable": true
+          },
+          "previousPage": {
+            "type": "string",
             "nullable": true
           },
           "links": {
@@ -15091,6 +15180,14 @@
           "href": {
             "type": "string",
             "format": "uri",
+            "nullable": true
+          },
+          "nextPage": {
+            "type": "string",
+            "nullable": true
+          },
+          "previousPage": {
+            "type": "string",
             "nullable": true
           },
           "links": {
@@ -15345,6 +15442,14 @@
             "format": "uri",
             "nullable": true
           },
+          "nextPage": {
+            "type": "string",
+            "nullable": true
+          },
+          "previousPage": {
+            "type": "string",
+            "nullable": true
+          },
           "links": {
             "type": "array",
             "items": {
@@ -15504,6 +15609,14 @@
           "href": {
             "type": "string",
             "format": "uri",
+            "nullable": true
+          },
+          "nextPage": {
+            "type": "string",
+            "nullable": true
+          },
+          "previousPage": {
+            "type": "string",
             "nullable": true
           },
           "links": {
@@ -15805,6 +15918,14 @@
             "format": "uri",
             "nullable": true
           },
+          "nextPage": {
+            "type": "string",
+            "nullable": true
+          },
+          "previousPage": {
+            "type": "string",
+            "nullable": true
+          },
           "links": {
             "type": "array",
             "items": {
@@ -15844,6 +15965,14 @@
           "href": {
             "type": "string",
             "format": "uri",
+            "nullable": true
+          },
+          "nextPage": {
+            "type": "string",
+            "nullable": true
+          },
+          "previousPage": {
+            "type": "string",
             "nullable": true
           },
           "links": {
@@ -15946,6 +16075,14 @@
             "format": "uri",
             "nullable": true
           },
+          "nextPage": {
+            "type": "string",
+            "nullable": true
+          },
+          "previousPage": {
+            "type": "string",
+            "nullable": true
+          },
           "links": {
             "type": "array",
             "items": {
@@ -16046,14 +16183,6 @@
         ],
         "type": "object",
         "properties": {
-          "nextPage": {
-            "type": "string",
-            "nullable": true
-          },
-          "previousPage": {
-            "type": "string",
-            "nullable": true
-          },
           "values": {
             "type": "array",
             "items": {
@@ -16063,6 +16192,14 @@
           "href": {
             "type": "string",
             "format": "uri",
+            "nullable": true
+          },
+          "nextPage": {
+            "type": "string",
+            "nullable": true
+          },
+          "previousPage": {
+            "type": "string",
             "nullable": true
           },
           "links": {
@@ -16827,6 +16964,14 @@
           "href": {
             "type": "string",
             "format": "uri",
+            "nullable": true
+          },
+          "nextPage": {
+            "type": "string",
+            "nullable": true
+          },
+          "previousPage": {
+            "type": "string",
             "nullable": true
           },
           "links": {
