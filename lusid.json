@@ -9,7 +9,7 @@
       "url": "https://www.finbourne.com",
       "email": "info@finbourne.com"
     },
-    "version": "0.11.2461",
+    "version": "0.11.2462",
     "x-logo": {
       "url": "https://content.finbourne.com/LUSID-header.png",
       "backgroundColor": "#415464"
@@ -17,7 +17,7 @@
   },
   "servers": [
     {
-      "url": "https://fbn-prd.lusid.com/api"
+      "url": "http://local-unit-test-server.lusid.com:32025"
     }
   ],
   "paths": {
@@ -685,6 +685,112 @@
               "text/json": {
                 "schema": {
                   "$ref": "#/components/schemas/LusidValidationProblemDetails"
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "Error response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/LusidProblemDetails"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "oauth2": []
+          }
+        ],
+        "x-fbn-apistatus": "EarlyAccess"
+      }
+    },
+    "/api/entities/changes/portfolios": {
+      "get": {
+        "tags": [
+          "Entities"
+        ],
+        "summary": "[EARLY ACCESS] Get the next change to each portfolio in a scope.",
+        "description": "Gets the time of the next (earliest effective at) modification (correction and/or amendment) to each portfolio in a scope relative to a point in bitemporal time.\r\nIncludes changes from parent portfolios in different scopes.\r\nExcludes changes from subcriptions (e.g corporate actions).",
+        "operationId": "GetPortfolioChanges",
+        "parameters": [
+          {
+            "name": "scope",
+            "in": "query",
+            "description": "The scope",
+            "required": true,
+            "schema": {
+              "maxLength": 64,
+              "minLength": 1,
+              "pattern": "^[a-zA-Z0-9\\-_]+$",
+              "type": "string",
+              "description": "The scope"
+            }
+          },
+          {
+            "name": "effectiveAt",
+            "in": "query",
+            "description": "The effective date of the origin.",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "description": "The effective date of the origin.",
+              "format": "dateorcutlabel"
+            }
+          },
+          {
+            "name": "asAt",
+            "in": "query",
+            "description": "The as-at date of the origin.",
+            "schema": {
+              "type": "string",
+              "description": "The as-at date of the origin.",
+              "format": "date-time",
+              "nullable": true
+            },
+            "x-nullable": true
+          }
+        ],
+        "responses": {
+          "400": {
+            "description": "The details of the input related failure",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/LusidValidationProblemDetails"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/LusidValidationProblemDetails"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/LusidValidationProblemDetails"
+                }
+              }
+            }
+          },
+          "200": {
+            "description": "A list of portfolio changes in the requested scope relative to the specified time.",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResourceListOfChange"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResourceListOfChange"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResourceListOfChange"
                 }
               }
             }
@@ -6509,6 +6615,599 @@
         "x-fbn-apistatus": "Stable"
       }
     },
+    "/api/quotes/{scope}": {
+      "post": {
+        "tags": [
+          "Quotes"
+        ],
+        "summary": "[EARLY ACCESS] Upsert quotes",
+        "description": "Update or insert one or more quotes in a single scope. A quote will be updated if it already exists\r\nand inserted if it does not.\r\n            \r\nIn the request each quote must be keyed by a unique correlation id. This id is ephemeral and is not stored by LUSID.\r\nIt serves only as a way to easily identify each quote in the response.\r\n            \r\nThe response will return both the collection of successfully updated or inserted quotes, as well as those that failed.\r\nFor the failures a reason will be provided explaining why the quote could not be updated or inserted.\r\n            \r\nIt is important to always check the failed set for any unsuccessful results.\n\nThe maximum number of quotes that this method can upsert per request is 2,000.",
+        "operationId": "UpsertQuotes",
+        "parameters": [
+          {
+            "name": "scope",
+            "in": "path",
+            "description": "The scope to use when updating or inserting the quotes.",
+            "required": true,
+            "schema": {
+              "maxLength": 64,
+              "minLength": 1,
+              "pattern": "^[a-zA-Z0-9\\-_]+$",
+              "type": "string",
+              "description": "The scope to use when updating or inserting the quotes.",
+              "nullable": true
+            }
+          }
+        ],
+        "requestBody": {
+          "description": "The quotes to update or insert keyed by a unique correlation id.",
+          "content": {
+            "application/json-patch+json": {
+              "schema": {
+                "type": "object",
+                "additionalProperties": {
+                  "$ref": "#/components/schemas/UpsertQuoteRequest"
+                },
+                "description": "The quotes to update or insert keyed by a unique correlation id.",
+                "nullable": true
+              },
+              "example": {
+                "dS-VOD-PRICE-MID": {
+                  "quoteId": {
+                    "quoteSeriesId": {
+                      "provider": "DataScope",
+                      "priceSource": "",
+                      "instrumentId": "GB00BH4HKS39",
+                      "instrumentIdType": "Isin",
+                      "quoteType": "Price",
+                      "field": "mid"
+                    },
+                    "effectiveAt": "2018-03-05T00:00:00.0000000+00:00"
+                  },
+                  "metricValue": {
+                    "value": 1460,
+                    "unit": "CNY"
+                  }
+                },
+                "o-C-EURUSD-PRICE-BID": {
+                  "quoteId": {
+                    "quoteSeriesId": {
+                      "provider": "Oanda",
+                      "priceSource": "Citi",
+                      "instrumentId": "EUR/USD",
+                      "instrumentIdType": "CurrencyPair",
+                      "quoteType": "Price",
+                      "field": "bid"
+                    },
+                    "effectiveAt": "2018-03-05T00:00:00.0000000+00:00"
+                  },
+                  "metricValue": {
+                    "value": 1.367,
+                    "unit": "EUR/USD"
+                  },
+                  "lineage": "Oanda/FxRates_2018-10-22T00:00:00.0000000+00:00.csv"
+                }
+              }
+            },
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "additionalProperties": {
+                  "$ref": "#/components/schemas/UpsertQuoteRequest"
+                },
+                "description": "The quotes to update or insert keyed by a unique correlation id.",
+                "nullable": true
+              },
+              "example": {
+                "dS-VOD-PRICE-MID": {
+                  "quoteId": {
+                    "quoteSeriesId": {
+                      "provider": "DataScope",
+                      "priceSource": "",
+                      "instrumentId": "GB00BH4HKS39",
+                      "instrumentIdType": "Isin",
+                      "quoteType": "Price",
+                      "field": "mid"
+                    },
+                    "effectiveAt": "2018-03-05T00:00:00.0000000+00:00"
+                  },
+                  "metricValue": {
+                    "value": 1460,
+                    "unit": "CNY"
+                  }
+                },
+                "o-C-EURUSD-PRICE-BID": {
+                  "quoteId": {
+                    "quoteSeriesId": {
+                      "provider": "Oanda",
+                      "priceSource": "Citi",
+                      "instrumentId": "EUR/USD",
+                      "instrumentIdType": "CurrencyPair",
+                      "quoteType": "Price",
+                      "field": "bid"
+                    },
+                    "effectiveAt": "2018-03-05T00:00:00.0000000+00:00"
+                  },
+                  "metricValue": {
+                    "value": 1.367,
+                    "unit": "EUR/USD"
+                  },
+                  "lineage": "Oanda/FxRates_2018-10-22T00:00:00.0000000+00:00.csv"
+                }
+              }
+            },
+            "text/json": {
+              "schema": {
+                "type": "object",
+                "additionalProperties": {
+                  "$ref": "#/components/schemas/UpsertQuoteRequest"
+                },
+                "description": "The quotes to update or insert keyed by a unique correlation id.",
+                "nullable": true
+              },
+              "example": {
+                "dS-VOD-PRICE-MID": {
+                  "quoteId": {
+                    "quoteSeriesId": {
+                      "provider": "DataScope",
+                      "priceSource": "",
+                      "instrumentId": "GB00BH4HKS39",
+                      "instrumentIdType": "Isin",
+                      "quoteType": "Price",
+                      "field": "mid"
+                    },
+                    "effectiveAt": "2018-03-05T00:00:00.0000000+00:00"
+                  },
+                  "metricValue": {
+                    "value": 1460,
+                    "unit": "CNY"
+                  }
+                },
+                "o-C-EURUSD-PRICE-BID": {
+                  "quoteId": {
+                    "quoteSeriesId": {
+                      "provider": "Oanda",
+                      "priceSource": "Citi",
+                      "instrumentId": "EUR/USD",
+                      "instrumentIdType": "CurrencyPair",
+                      "quoteType": "Price",
+                      "field": "bid"
+                    },
+                    "effectiveAt": "2018-03-05T00:00:00.0000000+00:00"
+                  },
+                  "metricValue": {
+                    "value": 1.367,
+                    "unit": "EUR/USD"
+                  },
+                  "lineage": "Oanda/FxRates_2018-10-22T00:00:00.0000000+00:00.csv"
+                }
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "type": "object",
+                "additionalProperties": {
+                  "$ref": "#/components/schemas/UpsertQuoteRequest"
+                },
+                "description": "The quotes to update or insert keyed by a unique correlation id.",
+                "nullable": true
+              },
+              "example": {
+                "dS-VOD-PRICE-MID": {
+                  "quoteId": {
+                    "quoteSeriesId": {
+                      "provider": "DataScope",
+                      "priceSource": "",
+                      "instrumentId": "GB00BH4HKS39",
+                      "instrumentIdType": "Isin",
+                      "quoteType": "Price",
+                      "field": "mid"
+                    },
+                    "effectiveAt": "2018-03-05T00:00:00.0000000+00:00"
+                  },
+                  "metricValue": {
+                    "value": 1460,
+                    "unit": "CNY"
+                  }
+                },
+                "o-C-EURUSD-PRICE-BID": {
+                  "quoteId": {
+                    "quoteSeriesId": {
+                      "provider": "Oanda",
+                      "priceSource": "Citi",
+                      "instrumentId": "EUR/USD",
+                      "instrumentIdType": "CurrencyPair",
+                      "quoteType": "Price",
+                      "field": "bid"
+                    },
+                    "effectiveAt": "2018-03-05T00:00:00.0000000+00:00"
+                  },
+                  "metricValue": {
+                    "value": 1.367,
+                    "unit": "EUR/USD"
+                  },
+                  "lineage": "Oanda/FxRates_2018-10-22T00:00:00.0000000+00:00.csv"
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "The successfully updated or inserted quotes along with any failures",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/UpsertQuotesResponse"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/UpsertQuotesResponse"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/UpsertQuotesResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "The details of the input related failure",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/LusidValidationProblemDetails"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/LusidValidationProblemDetails"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/LusidValidationProblemDetails"
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "Error response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/LusidProblemDetails"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "oauth2": []
+          }
+        ],
+        "x-fbn-apistatus": "EarlyAccess"
+      },
+      "get": {
+        "tags": [
+          "Quotes"
+        ],
+        "summary": "[EARLY ACCESS] List quotes for scope",
+        "description": "List all the quotes from a single scope at the specified date/time",
+        "operationId": "ListQuotesForScope",
+        "parameters": [
+          {
+            "name": "scope",
+            "in": "path",
+            "description": "The scope of the quotes to list.",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "description": "The scope of the quotes to list.",
+              "nullable": true
+            }
+          },
+          {
+            "name": "asAt",
+            "in": "query",
+            "description": "The asAt datetime at which to list the quotes. Defaults to latest if not specified.",
+            "schema": {
+              "type": "string",
+              "description": "The asAt datetime at which to list the quotes. Defaults to latest if not specified.",
+              "format": "date-time",
+              "nullable": true
+            },
+            "x-nullable": true
+          },
+          {
+            "name": "page",
+            "in": "query",
+            "description": "The pagination token to use to continue listing quotes from a previous call to list quotes.\r\n            This value is returned from the previous call. If a pagination token is provided the sortBy, filter, effectiveAt, and asAt fields\r\n            must not have changed since the original request. Also, if set, a start value cannot be provided.",
+            "schema": {
+              "type": "string",
+              "description": "The pagination token to use to continue listing quotes from a previous call to list quotes.\r\n            This value is returned from the previous call. If a pagination token is provided the sortBy, filter, effectiveAt, and asAt fields\r\n            must not have changed since the original request. Also, if set, a start value cannot be provided.",
+              "nullable": true
+            }
+          },
+          {
+            "name": "start",
+            "in": "query",
+            "description": "When paginating, skip this number of results.",
+            "schema": {
+              "type": "integer",
+              "description": "When paginating, skip this number of results.",
+              "format": "int32",
+              "nullable": true
+            },
+            "x-nullable": true
+          },
+          {
+            "name": "limit",
+            "in": "query",
+            "description": "When paginating, limit the number of returned results to this many.",
+            "schema": {
+              "type": "integer",
+              "description": "When paginating, limit the number of returned results to this many.",
+              "format": "int32",
+              "nullable": true
+            },
+            "x-nullable": true
+          },
+          {
+            "name": "filter",
+            "in": "query",
+            "description": "Expression to filter the result set.\r\n            Read more about filtering results from LUSID here https://support.lusid.com/filtering-results-from-lusid.",
+            "schema": {
+              "type": "string",
+              "description": "Expression to filter the result set.\r\n            Read more about filtering results from LUSID here https://support.lusid.com/filtering-results-from-lusid.",
+              "nullable": true
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The requested quotes",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResourceListOfQuote"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResourceListOfQuote"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResourceListOfQuote"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "The details of the input related failure",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/LusidValidationProblemDetails"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/LusidValidationProblemDetails"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/LusidValidationProblemDetails"
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "Error response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/LusidProblemDetails"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "oauth2": []
+          }
+        ],
+        "x-fbn-apistatus": "EarlyAccess"
+      }
+    },
+    "/api/quotes/{scope}/$delete": {
+      "post": {
+        "tags": [
+          "Quotes"
+        ],
+        "summary": "[EARLY ACCESS] Delete quotes",
+        "description": "Delete one or more specified quotes from a single scope. A quote is identified by its unique id which includes information about\r\nthe type of quote as well as the exact effective datetime (to the microsecond) from which it became valid.\r\n            \r\nIn the request each quote must be keyed by a unique correlation id. This id is ephemeral and is not stored by LUSID.\r\nIt serves only as a way to easily identify each quote in the response.\r\n            \r\nThe response will return both the collection of successfully deleted quotes, as well as those that failed.\r\nFor the failures a reason will be provided explaining why the quote could not be deleted.\r\n            \r\nIt is important to always check the failed set for any unsuccessful results.",
+        "operationId": "DeleteQuotes",
+        "parameters": [
+          {
+            "name": "scope",
+            "in": "path",
+            "description": "The scope of the quotes to delete.",
+            "required": true,
+            "schema": {
+              "maxLength": 64,
+              "minLength": 1,
+              "pattern": "^[a-zA-Z0-9\\-_]+$",
+              "type": "string",
+              "description": "The scope of the quotes to delete.",
+              "nullable": true
+            }
+          }
+        ],
+        "requestBody": {
+          "description": "The quotes to delete keyed by a unique correlation id.",
+          "content": {
+            "application/json-patch+json": {
+              "schema": {
+                "type": "object",
+                "additionalProperties": {
+                  "$ref": "#/components/schemas/QuoteId"
+                },
+                "description": "The quotes to delete keyed by a unique correlation id.",
+                "nullable": true
+              },
+              "example": {
+                "dS-VOD-PRICE-MID": {
+                  "quoteSeriesId": {
+                    "provider": "DataScope",
+                    "priceSource": "",
+                    "instrumentId": "GB00BH4HKS39",
+                    "instrumentIdType": "Isin",
+                    "quoteType": "Price",
+                    "field": "mid"
+                  },
+                  "effectiveAt": "2018-03-05T00:00:00.0000000+00:00"
+                }
+              }
+            },
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "additionalProperties": {
+                  "$ref": "#/components/schemas/QuoteId"
+                },
+                "description": "The quotes to delete keyed by a unique correlation id.",
+                "nullable": true
+              },
+              "example": {
+                "dS-VOD-PRICE-MID": {
+                  "quoteSeriesId": {
+                    "provider": "DataScope",
+                    "priceSource": "",
+                    "instrumentId": "GB00BH4HKS39",
+                    "instrumentIdType": "Isin",
+                    "quoteType": "Price",
+                    "field": "mid"
+                  },
+                  "effectiveAt": "2018-03-05T00:00:00.0000000+00:00"
+                }
+              }
+            },
+            "text/json": {
+              "schema": {
+                "type": "object",
+                "additionalProperties": {
+                  "$ref": "#/components/schemas/QuoteId"
+                },
+                "description": "The quotes to delete keyed by a unique correlation id.",
+                "nullable": true
+              },
+              "example": {
+                "dS-VOD-PRICE-MID": {
+                  "quoteSeriesId": {
+                    "provider": "DataScope",
+                    "priceSource": "",
+                    "instrumentId": "GB00BH4HKS39",
+                    "instrumentIdType": "Isin",
+                    "quoteType": "Price",
+                    "field": "mid"
+                  },
+                  "effectiveAt": "2018-03-05T00:00:00.0000000+00:00"
+                }
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "type": "object",
+                "additionalProperties": {
+                  "$ref": "#/components/schemas/QuoteId"
+                },
+                "description": "The quotes to delete keyed by a unique correlation id.",
+                "nullable": true
+              },
+              "example": {
+                "dS-VOD-PRICE-MID": {
+                  "quoteSeriesId": {
+                    "provider": "DataScope",
+                    "priceSource": "",
+                    "instrumentId": "GB00BH4HKS39",
+                    "instrumentIdType": "Isin",
+                    "quoteType": "Price",
+                    "field": "mid"
+                  },
+                  "effectiveAt": "2018-03-05T00:00:00.0000000+00:00"
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "The successfully deleted quotes along with any failures",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/AnnulQuotesResponse"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AnnulQuotesResponse"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AnnulQuotesResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "The details of the input related failure",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/LusidValidationProblemDetails"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/LusidValidationProblemDetails"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/LusidValidationProblemDetails"
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "Error response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/LusidProblemDetails"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "oauth2": []
+          }
+        ],
+        "x-fbn-apistatus": "EarlyAccess"
+      }
+    },
     "/api/quotes/{scope}/$deprecated": {
       "get": {
         "tags": [
@@ -6644,6 +7343,209 @@
           }
         ],
         "x-fbn-apistatus": "Deprecated"
+      }
+    },
+    "/api/quotes/{scope}/$get": {
+      "post": {
+        "tags": [
+          "Quotes"
+        ],
+        "summary": "[EARLY ACCESS] Get quotes",
+        "description": "Get one or more quotes from a single scope.\r\n            \r\nEach quote can be identified by its time invariant quote series id.\r\n            \r\nFor each quote series id LUSID will return the most recent quote with respect to the provided (or default) effective datetime. \r\n            \r\nAn optional maximum age range window can be specified which defines how far back to look back for a quote from the specified effective datetime.\r\nLUSID will return the most recent quote within this window.\r\n            \r\nIn the request each quote series id must be keyed by a unique correlation id. This id is ephemeral and is not stored by LUSID.\r\nIt serves only as a way to easily identify each quote in the response.\r\n            \r\nThe response will return three collections. One, the successfully retrieved quotes. Two, those that had a\r\nvalid quote series id but could not be found. Three, those that failed because LUSID could not construct a valid quote series id from the request.\r\n\r\nFor the quotes that failed or could not be found a reason will be provided explaining why the quote could not be retrieved.\r\n            \r\nIt is important to always check the failed and not found sets for any unsuccessful results.\n\nThe maximum number of quotes that this method can get per request is 2,000.",
+        "operationId": "GetQuotes",
+        "parameters": [
+          {
+            "name": "scope",
+            "in": "path",
+            "description": "The scope of the quotes to retrieve.",
+            "required": true,
+            "schema": {
+              "maxLength": 64,
+              "minLength": 1,
+              "pattern": "^[a-zA-Z0-9\\-_]+$",
+              "type": "string",
+              "description": "The scope of the quotes to retrieve.",
+              "nullable": true
+            }
+          },
+          {
+            "name": "effectiveAt",
+            "in": "query",
+            "description": "The effective datetime or cut label at which to retrieve the quotes. Defaults to the current LUSID system datetime if not specified.",
+            "schema": {
+              "type": "string",
+              "description": "The effective datetime or cut label at which to retrieve the quotes. Defaults to the current LUSID system datetime if not specified.",
+              "format": "dateorcutlabel",
+              "nullable": true
+            }
+          },
+          {
+            "name": "asAt",
+            "in": "query",
+            "description": "The asAt datetime at which to retrieve the quotes. Defaults to return the latest version of each quote if not specified.",
+            "schema": {
+              "type": "string",
+              "description": "The asAt datetime at which to retrieve the quotes. Defaults to return the latest version of each quote if not specified.",
+              "format": "date-time",
+              "nullable": true
+            },
+            "x-nullable": true
+          },
+          {
+            "name": "maxAge",
+            "in": "query",
+            "description": "The duration of the look back window in an ISO8601 time interval format e.g. P1Y2M3DT4H30M (1 year, 2 months, 3 days, 4 hours and 30 minutes).\r\n             This is subtracted from the provided effectiveAt datetime or cut label to generate a effective datetime window inside which a quote must exist to be retrieved.",
+            "schema": {
+              "type": "string",
+              "description": "The duration of the look back window in an ISO8601 time interval format e.g. P1Y2M3DT4H30M (1 year, 2 months, 3 days, 4 hours and 30 minutes).\r\n             This is subtracted from the provided effectiveAt datetime or cut label to generate a effective datetime window inside which a quote must exist to be retrieved.",
+              "format": "date-span",
+              "nullable": true
+            }
+          }
+        ],
+        "requestBody": {
+          "description": "The time invariant quote series ids of the quotes to retrieve. These need to be\r\n             keyed by a unique correlation id allowing the retrieved quote to be identified in the response.",
+          "content": {
+            "application/json-patch+json": {
+              "schema": {
+                "type": "object",
+                "additionalProperties": {
+                  "$ref": "#/components/schemas/QuoteSeriesId"
+                },
+                "description": "The time invariant quote series ids of the quotes to retrieve. These need to be\r\n             keyed by a unique correlation id allowing the retrieved quote to be identified in the response.",
+                "nullable": true
+              },
+              "example": {
+                "dS-VOD-PRICE-MID": {
+                  "provider": "DataScope",
+                  "priceSource": "",
+                  "instrumentId": "GB00BH4HKS39",
+                  "instrumentIdType": "Isin",
+                  "quoteType": "Price",
+                  "field": "mid"
+                }
+              }
+            },
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "additionalProperties": {
+                  "$ref": "#/components/schemas/QuoteSeriesId"
+                },
+                "description": "The time invariant quote series ids of the quotes to retrieve. These need to be\r\n             keyed by a unique correlation id allowing the retrieved quote to be identified in the response.",
+                "nullable": true
+              },
+              "example": {
+                "dS-VOD-PRICE-MID": {
+                  "provider": "DataScope",
+                  "priceSource": "",
+                  "instrumentId": "GB00BH4HKS39",
+                  "instrumentIdType": "Isin",
+                  "quoteType": "Price",
+                  "field": "mid"
+                }
+              }
+            },
+            "text/json": {
+              "schema": {
+                "type": "object",
+                "additionalProperties": {
+                  "$ref": "#/components/schemas/QuoteSeriesId"
+                },
+                "description": "The time invariant quote series ids of the quotes to retrieve. These need to be\r\n             keyed by a unique correlation id allowing the retrieved quote to be identified in the response.",
+                "nullable": true
+              },
+              "example": {
+                "dS-VOD-PRICE-MID": {
+                  "provider": "DataScope",
+                  "priceSource": "",
+                  "instrumentId": "GB00BH4HKS39",
+                  "instrumentIdType": "Isin",
+                  "quoteType": "Price",
+                  "field": "mid"
+                }
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "type": "object",
+                "additionalProperties": {
+                  "$ref": "#/components/schemas/QuoteSeriesId"
+                },
+                "description": "The time invariant quote series ids of the quotes to retrieve. These need to be\r\n             keyed by a unique correlation id allowing the retrieved quote to be identified in the response.",
+                "nullable": true
+              },
+              "example": {
+                "dS-VOD-PRICE-MID": {
+                  "provider": "DataScope",
+                  "priceSource": "",
+                  "instrumentId": "GB00BH4HKS39",
+                  "instrumentIdType": "Isin",
+                  "quoteType": "Price",
+                  "field": "mid"
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "The successfully retrieved quotes along with any failures",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/GetQuotesResponse"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/GetQuotesResponse"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/GetQuotesResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "The details of the input related failure",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/LusidValidationProblemDetails"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/LusidValidationProblemDetails"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/LusidValidationProblemDetails"
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "Error response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/LusidProblemDetails"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "oauth2": []
+          }
+        ],
+        "x-fbn-apistatus": "EarlyAccess"
       }
     },
     "/api/referenceportfolios/{scope}": {
@@ -13365,6 +14267,92 @@
         "additionalProperties": false,
         "description": "A list of portfolios."
       },
+      "Change": {
+        "required": [
+          "amended",
+          "corrected",
+          "entityId"
+        ],
+        "type": "object",
+        "properties": {
+          "href": {
+            "type": "string",
+            "format": "uri",
+            "nullable": true
+          },
+          "entityId": {
+            "$ref": "#/components/schemas/ResourceId"
+          },
+          "corrected": {
+            "type": "boolean",
+            "description": ""
+          },
+          "correctionEffectiveAt": {
+            "type": "string",
+            "description": "",
+            "format": "date-time",
+            "nullable": true
+          },
+          "correctionAsAt": {
+            "type": "string",
+            "description": "",
+            "format": "date-time",
+            "nullable": true
+          },
+          "amended": {
+            "type": "boolean",
+            "description": ""
+          },
+          "amendmentEffectiveAt": {
+            "type": "string",
+            "description": "",
+            "format": "date-time",
+            "nullable": true
+          },
+          "amendmentAsAt": {
+            "type": "string",
+            "description": "",
+            "format": "date-time",
+            "nullable": true
+          },
+          "links": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Link"
+            },
+            "nullable": true
+          }
+        },
+        "additionalProperties": false,
+        "description": "The time an entity was modified (amendment and/or historical correction)."
+      },
+      "ResourceListOfChange": {
+        "required": [
+          "values"
+        ],
+        "type": "object",
+        "properties": {
+          "values": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Change"
+            }
+          },
+          "href": {
+            "type": "string",
+            "format": "uri",
+            "nullable": true
+          },
+          "links": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Link"
+            },
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
       "InstrumentIdValue": {
         "required": [
           "value"
@@ -15452,6 +16440,27 @@
         "additionalProperties": false,
         "description": "The unique identifier of the quote."
       },
+      "UpsertQuoteRequest": {
+        "required": [
+          "quoteId"
+        ],
+        "type": "object",
+        "properties": {
+          "quoteId": {
+            "$ref": "#/components/schemas/QuoteId"
+          },
+          "metricValue": {
+            "$ref": "#/components/schemas/MetricValue"
+          },
+          "lineage": {
+            "type": "string",
+            "description": "Description of the quote's lineage e.g. 'FundAccountant_GreenQuality'.",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false,
+        "description": "The details of the quote including its unique identifier, value and lineage."
+      },
       "Quote": {
         "required": [
           "asAt",
@@ -15489,6 +16498,41 @@
         "additionalProperties": false,
         "description": "The quote id, value and lineage of the quotes all keyed by a unique correlation id."
       },
+      "UpsertQuotesResponse": {
+        "type": "object",
+        "properties": {
+          "href": {
+            "type": "string",
+            "description": "The specific Uniform Resource Identifier (URI) for this resource at the requested effective and asAt datetime.",
+            "format": "uri",
+            "nullable": true
+          },
+          "values": {
+            "type": "object",
+            "additionalProperties": {
+              "$ref": "#/components/schemas/Quote"
+            },
+            "description": "The quotes which have been successfully updated or inserted.",
+            "nullable": true
+          },
+          "failed": {
+            "type": "object",
+            "additionalProperties": {
+              "$ref": "#/components/schemas/ErrorDetail"
+            },
+            "description": "The quotes that could not be updated or inserted along with a reason for their failure.",
+            "nullable": true
+          },
+          "links": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Link"
+            },
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
       "ResourceListOfQuote": {
         "required": [
           "values"
@@ -15504,6 +16548,85 @@
           "href": {
             "type": "string",
             "format": "uri",
+            "nullable": true
+          },
+          "links": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Link"
+            },
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "AnnulQuotesResponse": {
+        "type": "object",
+        "properties": {
+          "href": {
+            "type": "string",
+            "description": "The specific Uniform Resource Identifier (URI) for this resource at the requested effective and asAt datetime.",
+            "format": "uri",
+            "nullable": true
+          },
+          "values": {
+            "type": "object",
+            "additionalProperties": {
+              "type": "string",
+              "format": "date-time"
+            },
+            "description": "The quotes which have been successfully deleted along with the asAt datetime at which the deletion was committed to LUSID.",
+            "nullable": true
+          },
+          "failed": {
+            "type": "object",
+            "additionalProperties": {
+              "$ref": "#/components/schemas/ErrorDetail"
+            },
+            "description": "The quotes that could not be deleted along with a reason for their failure.",
+            "nullable": true
+          },
+          "links": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Link"
+            },
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "GetQuotesResponse": {
+        "type": "object",
+        "properties": {
+          "href": {
+            "type": "string",
+            "description": "The specific Uniform Resource Identifier (URI) for this resource at the requested effective and asAt datetime.",
+            "format": "uri",
+            "nullable": true
+          },
+          "values": {
+            "type": "object",
+            "additionalProperties": {
+              "$ref": "#/components/schemas/Quote"
+            },
+            "description": "The quotes which have been successfully retrieved.",
+            "nullable": true
+          },
+          "notFound": {
+            "type": "object",
+            "additionalProperties": {
+              "$ref": "#/components/schemas/ErrorDetail"
+            },
+            "description": "The quotes that could not be found along with a reason why.",
+            "nullable": true
+          },
+          "failed": {
+            "type": "object",
+            "additionalProperties": {
+              "$ref": "#/components/schemas/ErrorDetail"
+            },
+            "description": "The quotes that could not be retrieved due to an error along with a reason for their failure.",
             "nullable": true
           },
           "links": {
@@ -17086,7 +18209,7 @@
         "description": "OAuth2 Implicit Grant",
         "flows": {
           "implicit": {
-            "authorizationUrl": "https://lusid.okta.com/oauth2/default/v1/authorize",
+            "authorizationUrl": "https://dummyurl.lusid.com/",
             "scopes": {}
           }
         }

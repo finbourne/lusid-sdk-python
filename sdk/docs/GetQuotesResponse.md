@@ -3,7 +3,7 @@
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**href** | **str** | The specifc Uniform Resource Identifier (URI) for this resource at the requested effective and asAt datetime. | [optional] 
+**href** | **str** | The specific Uniform Resource Identifier (URI) for this resource at the requested effective and asAt datetime. | [optional] 
 **values** | [**dict(str, Quote)**](Quote.md) | The quotes which have been successfully retrieved. | [optional] 
 **not_found** | [**dict(str, ErrorDetail)**](ErrorDetail.md) | The quotes that could not be found along with a reason why. | [optional] 
 **failed** | [**dict(str, ErrorDetail)**](ErrorDetail.md) | The quotes that could not be retrieved due to an error along with a reason for their failure. | [optional] 
