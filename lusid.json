@@ -9,7 +9,7 @@
       "url": "https://www.finbourne.com",
       "email": "info@finbourne.com"
     },
-    "version": "0.11.2466",
+    "version": "0.11.2467",
     "x-logo": {
       "url": "https://content.finbourne.com/LUSID-header.png",
       "backgroundColor": "#415464"
@@ -17,7 +17,7 @@
   },
   "servers": [
     {
-      "url": "https://fbn-prd.lusid.com/api"
+      "url": "http://local-unit-test-server.lusid.com:52736"
     }
   ],
   "paths": {
@@ -11239,7 +11239,8 @@
                         "currency": "GBP"
                       }
                     }
-                  ]
+                  ],
+                  "links": []
                 }
               },
               "application/json": {
@@ -11266,7 +11267,8 @@
                         "currency": "GBP"
                       }
                     }
-                  ]
+                  ],
+                  "links": []
                 }
               },
               "text/json": {
@@ -11293,7 +11295,8 @@
                         "currency": "GBP"
                       }
                     }
-                  ]
+                  ],
+                  "links": []
                 }
               }
             }
@@ -11883,7 +11886,8 @@
                       "source": ""
                     }
                   ],
-                  "href": "http://example.com"
+                  "href": "http://example.com",
+                  "links": []
                 }
               },
               "application/json": {
@@ -11939,7 +11943,8 @@
                       "source": ""
                     }
                   ],
-                  "href": "http://example.com"
+                  "href": "http://example.com",
+                  "links": []
                 }
               },
               "text/json": {
@@ -11995,7 +12000,8 @@
                       "source": ""
                     }
                   ],
-                  "href": "http://example.com"
+                  "href": "http://example.com",
+                  "links": []
                 }
               }
             }
@@ -13105,7 +13111,8 @@
                       ]
                     }
                   ],
-                  "href": "http://example.com"
+                  "href": "http://example.com",
+                  "links": []
                 }
               },
               "application/json": {
@@ -13321,7 +13328,8 @@
                       ]
                     }
                   ],
-                  "href": "http://example.com"
+                  "href": "http://example.com",
+                  "links": []
                 }
               },
               "text/json": {
@@ -13537,7 +13545,8 @@
                       ]
                     }
                   ],
-                  "href": "http://example.com"
+                  "href": "http://example.com",
+                  "links": []
                 }
               }
             }
@@ -14104,6 +14113,14 @@
               "$ref": "#/components/schemas/Link"
             },
             "nullable": true
+          },
+          "nextPage": {
+            "type": "string",
+            "nullable": true
+          },
+          "previousPage": {
+            "type": "string",
+            "nullable": true
           }
         },
         "additionalProperties": false
@@ -14130,6 +14147,14 @@
             "items": {
               "$ref": "#/components/schemas/Link"
             },
+            "nullable": true
+          },
+          "nextPage": {
+            "type": "string",
+            "nullable": true
+          },
+          "previousPage": {
+            "type": "string",
             "nullable": true
           }
         },
@@ -14348,6 +14373,14 @@
             "items": {
               "$ref": "#/components/schemas/Link"
             },
+            "nullable": true
+          },
+          "nextPage": {
+            "type": "string",
+            "nullable": true
+          },
+          "previousPage": {
+            "type": "string",
             "nullable": true
           }
         },
@@ -14723,6 +14756,14 @@
               "$ref": "#/components/schemas/Link"
             },
             "nullable": true
+          },
+          "nextPage": {
+            "type": "string",
+            "nullable": true
+          },
+          "previousPage": {
+            "type": "string",
+            "nullable": true
           }
         },
         "additionalProperties": false
@@ -14918,6 +14959,14 @@
             "items": {
               "$ref": "#/components/schemas/Link"
             },
+            "nullable": true
+          },
+          "nextPage": {
+            "type": "string",
+            "nullable": true
+          },
+          "previousPage": {
+            "type": "string",
             "nullable": true
           }
         },
@@ -15140,6 +15189,14 @@
               "$ref": "#/components/schemas/Link"
             },
             "nullable": true
+          },
+          "nextPage": {
+            "type": "string",
+            "nullable": true
+          },
+          "previousPage": {
+            "type": "string",
+            "nullable": true
           }
         },
         "additionalProperties": false
@@ -15225,6 +15282,14 @@
             "items": {
               "$ref": "#/components/schemas/Link"
             },
+            "nullable": true
+          },
+          "nextPage": {
+            "type": "string",
+            "nullable": true
+          },
+          "previousPage": {
+            "type": "string",
             "nullable": true
           }
         },
@@ -15557,6 +15622,14 @@
             "format": "uri",
             "nullable": true
           },
+          "nextPage": {
+            "type": "string",
+            "nullable": true
+          },
+          "previousPage": {
+            "type": "string",
+            "nullable": true
+          },
           "links": {
             "type": "array",
             "items": {
@@ -15616,6 +15689,14 @@
           "href": {
             "type": "string",
             "format": "uri",
+            "nullable": true
+          },
+          "nextPage": {
+            "type": "string",
+            "nullable": true
+          },
+          "previousPage": {
+            "type": "string",
             "nullable": true
           },
           "links": {
@@ -15870,6 +15951,14 @@
             "format": "uri",
             "nullable": true
           },
+          "nextPage": {
+            "type": "string",
+            "nullable": true
+          },
+          "previousPage": {
+            "type": "string",
+            "nullable": true
+          },
           "links": {
             "type": "array",
             "items": {
@@ -15902,6 +15991,14 @@
             "items": {
               "$ref": "#/components/schemas/Link"
             },
+            "nullable": true
+          },
+          "nextPage": {
+            "type": "string",
+            "nullable": true
+          },
+          "previousPage": {
+            "type": "string",
             "nullable": true
           }
         },
@@ -16086,6 +16183,14 @@
             "items": {
               "$ref": "#/components/schemas/Link"
             },
+            "nullable": true
+          },
+          "nextPage": {
+            "type": "string",
+            "nullable": true
+          },
+          "previousPage": {
+            "type": "string",
             "nullable": true
           }
         },
@@ -16339,6 +16444,14 @@
               "$ref": "#/components/schemas/Link"
             },
             "nullable": true
+          },
+          "nextPage": {
+            "type": "string",
+            "nullable": true
+          },
+          "previousPage": {
+            "type": "string",
+            "nullable": true
           }
         },
         "additionalProperties": false
@@ -16555,6 +16668,14 @@
             "items": {
               "$ref": "#/components/schemas/Link"
             },
+            "nullable": true
+          },
+          "nextPage": {
+            "type": "string",
+            "nullable": true
+          },
+          "previousPage": {
+            "type": "string",
             "nullable": true
           }
         },
@@ -16934,6 +17055,14 @@
               "$ref": "#/components/schemas/Link"
             },
             "nullable": true
+          },
+          "nextPage": {
+            "type": "string",
+            "nullable": true
+          },
+          "previousPage": {
+            "type": "string",
+            "nullable": true
           }
         },
         "additionalProperties": false
@@ -16974,6 +17103,14 @@
             "items": {
               "$ref": "#/components/schemas/Link"
             },
+            "nullable": true
+          },
+          "nextPage": {
+            "type": "string",
+            "nullable": true
+          },
+          "previousPage": {
+            "type": "string",
             "nullable": true
           }
         },
@@ -17074,6 +17211,14 @@
             "items": {
               "$ref": "#/components/schemas/Link"
             },
+            "nullable": true
+          },
+          "nextPage": {
+            "type": "string",
+            "nullable": true
+          },
+          "previousPage": {
+            "type": "string",
             "nullable": true
           }
         },
@@ -17958,6 +18103,14 @@
               "$ref": "#/components/schemas/Link"
             },
             "nullable": true
+          },
+          "nextPage": {
+            "type": "string",
+            "nullable": true
+          },
+          "previousPage": {
+            "type": "string",
+            "nullable": true
           }
         },
         "additionalProperties": false
@@ -18209,7 +18362,7 @@
         "description": "OAuth2 Implicit Grant",
         "flows": {
           "implicit": {
-            "authorizationUrl": "https://lusid.okta.com/oauth2/default/v1/authorize",
+            "authorizationUrl": "https://dummyurl.lusid.com/",
             "scopes": {}
           }
         }
