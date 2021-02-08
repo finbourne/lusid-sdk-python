@@ -9,7 +9,7 @@
       "url": "https://www.finbourne.com",
       "email": "info@finbourne.com"
     },
-    "version": "0.11.2568",
+    "version": "0.11.2569",
     "x-logo": {
       "url": "https://content.finbourne.com/LUSID-header.png",
       "backgroundColor": "#415464"
@@ -18728,6 +18728,10 @@
       "description": "Methods for storage and retrieval of Corporate Action Sources"
     },
     {
+      "name": "Counterparty",
+      "description": "Methods for the storage and retrieval of counter-party related information; in particular counter-party, CSA and Netting set data."
+    },
+    {
       "name": "Cut Label Definitions",
       "description": "Methods for interacting with Cut Label Definitions"
     },
@@ -18834,6 +18838,7 @@
       "Configuration Recipe",
       "Conventions",
       "Corporate Action Sources",
+      "Counterparty",
       "Cut Label Definitions",
       "Data Types",
       "Derived Transaction Portfolios",
