@@ -9,7 +9,7 @@
       "url": "https://www.finbourne.com",
       "email": "info@finbourne.com"
     },
-    "version": "0.11.2584",
+    "version": "0.11.2581",
     "x-logo": {
       "url": "https://content.finbourne.com/LUSID-header.png",
       "backgroundColor": "#415464"
@@ -17,7 +17,7 @@
   },
   "servers": [
     {
-      "url": "http://local-unit-test-server.lusid.com:39684"
+      "url": "https://fbn-prd.lusid.com/api"
     }
   ],
   "paths": {
@@ -36,9 +36,6 @@
             "description": "The requested scope of the data types",
             "required": true,
             "schema": {
-              "maxLength": 64,
-              "minLength": 1,
-              "pattern": "^[a-zA-Z0-9\\-_]+$",
               "type": "string",
               "description": "The requested scope of the data types",
               "nullable": true
@@ -110,9 +107,6 @@
             "in": "query",
             "description": "Optional. Expression to filter the result set.\r\n            For example, to filter on the Display Name, use \"displayName eq 'string'\"\r\n            Read more about filtering results from LUSID here https://support.lusid.com/filtering-results-from-lusid.",
             "schema": {
-              "maxLength": 2147483647,
-              "minLength": 0,
-              "pattern": "(?s).*",
               "type": "string",
               "description": "Optional. Expression to filter the result set.\r\n            For example, to filter on the Display Name, use \"displayName eq 'string'\"\r\n            Read more about filtering results from LUSID here https://support.lusid.com/filtering-results-from-lusid.",
               "nullable": true
@@ -345,9 +339,6 @@
             "in": "query",
             "description": "Optional. Expression to filter the result set. \r\n            For example, to filter on the Schema, use \"schema eq 'string'\"\r\n            Read more about filtering results from LUSID here https://support.lusid.com/filtering-results-from-lusid.",
             "schema": {
-              "maxLength": 2147483647,
-              "minLength": 0,
-              "pattern": "(?s).*",
               "type": "string",
               "description": "Optional. Expression to filter the result set. \r\n            For example, to filter on the Schema, use \"schema eq 'string'\"\r\n            Read more about filtering results from LUSID here https://support.lusid.com/filtering-results-from-lusid.",
               "nullable": true
@@ -441,9 +432,6 @@
             "description": "The scope into which to create the new derived portfolio",
             "required": true,
             "schema": {
-              "maxLength": 64,
-              "minLength": 1,
-              "pattern": "^[a-zA-Z0-9\\-_]+$",
               "type": "string",
               "description": "The scope into which to create the new derived portfolio",
               "nullable": true
@@ -653,9 +641,6 @@
             "in": "query",
             "description": "The effective date of the change",
             "schema": {
-              "maxLength": 256,
-              "minLength": 0,
-              "pattern": "^[a-zA-Z0-9\\-_\\+:\\.]+$",
               "type": "string",
               "description": "The effective date of the change",
               "format": "dateorcutlabel",
@@ -751,9 +736,6 @@
             "description": "The effective date of the origin.",
             "required": true,
             "schema": {
-              "maxLength": 256,
-              "minLength": 0,
-              "pattern": "^[a-zA-Z0-9\\-_\\+:\\.]+$",
               "type": "string",
               "description": "The effective date of the origin.",
               "format": "dateorcutlabel"
@@ -8573,9 +8555,6 @@
             "in": "query",
             "description": "Expression to filter the result set.\r\n            For example, to filter on the Scope, use \"scope eq 'string'\"\r\n            Read more about filtering results from LUSID here https://support.lusid.com/filtering-results-from-lusid.",
             "schema": {
-              "maxLength": 2147483647,
-              "minLength": 0,
-              "pattern": "(?s).*",
               "type": "string",
               "description": "Expression to filter the result set.\r\n            For example, to filter on the Scope, use \"scope eq 'string'\"\r\n            Read more about filtering results from LUSID here https://support.lusid.com/filtering-results-from-lusid.",
               "nullable": true
@@ -14515,24 +14494,15 @@
         "type": "object",
         "properties": {
           "displayName": {
-            "maxLength": 512,
-            "minLength": 1,
-            "pattern": "(?s).*",
             "type": "string",
             "description": ""
           },
           "description": {
-            "maxLength": 1024,
-            "minLength": 0,
-            "pattern": "(?s).*",
             "type": "string",
             "description": "",
             "nullable": true
           },
           "code": {
-            "maxLength": 64,
-            "minLength": 1,
-            "pattern": "^[a-zA-Z0-9\\-_]+$",
             "type": "string",
             "description": ""
           },
@@ -18718,7 +18688,7 @@
         "description": "OAuth2 Implicit Grant",
         "flows": {
           "implicit": {
-            "authorizationUrl": "https://dummyurl.lusid.com/",
+            "authorizationUrl": "https://lusid.okta.com/oauth2/default/v1/authorize",
             "scopes": {}
           }
         }
