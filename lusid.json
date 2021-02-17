@@ -9,7 +9,7 @@
       "url": "https://www.finbourne.com",
       "email": "info@finbourne.com"
     },
-    "version": "0.11.2603",
+    "version": "0.11.2604",
     "x-logo": {
       "url": "https://content.finbourne.com/LUSID-header.png",
       "backgroundColor": "#415464"
@@ -17,7 +17,7 @@
   },
   "servers": [
     {
-      "url": "http://local-unit-test-server.lusid.com:45483"
+      "url": "http://local-unit-test-server.lusid.com:49159"
     }
   ],
   "paths": {
@@ -10065,6 +10065,193 @@
           }
         ],
         "x-fbn-apistatus": "Stable"
+      }
+    },
+    "/api/transactionportfolios/{scope}/{code}/$resolve": {
+      "post": {
+        "tags": [
+          "Transaction Portfolios"
+        ],
+        "summary": "[EARLY ACCESS] Resolve Instrument",
+        "description": "Try to resolve the instrument for transaction and holdings for a given instrument identifier and a specified  \r\nperiod of time. Also update the instrument identifiers with the given instrument identifiers collection.",
+        "operationId": "ResolveInstrument",
+        "parameters": [
+          {
+            "name": "scope",
+            "in": "path",
+            "description": "The scope of the transaction portfolio.",
+            "required": true,
+            "schema": {
+              "maxLength": 64,
+              "minLength": 1,
+              "pattern": "^[a-zA-Z0-9\\-_]+$",
+              "type": "string",
+              "description": "The scope of the transaction portfolio.",
+              "nullable": true
+            }
+          },
+          {
+            "name": "code",
+            "in": "path",
+            "description": "The code of the transaction portfolio. Together with the scope this uniquely identifies\r\n            the transaction portfolio.",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "description": "The code of the transaction portfolio. Together with the scope this uniquely identifies\r\n            the transaction portfolio.",
+              "nullable": true
+            }
+          },
+          {
+            "name": "instrumentIdentifierType",
+            "in": "query",
+            "description": "The instrument identifier type.",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "description": "The key that uniquely identifies the property. It has the format {domain}/{scope}/{code}."
+            }
+          },
+          {
+            "name": "instrumentIdentifierValue",
+            "in": "query",
+            "description": "The value for the given instrument identifier.",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "description": "The value for the given instrument identifier."
+            }
+          },
+          {
+            "name": "fromEffectiveAt",
+            "in": "query",
+            "description": "The lower bound effective datetime or cut label (inclusive) from which to retrieve the data.\r\n            There is no lower bound if this is not specified.",
+            "schema": {
+              "type": "string",
+              "description": "The lower bound effective datetime or cut label (inclusive) from which to retrieve the data.\r\n            There is no lower bound if this is not specified.",
+              "format": "dateorcutlabel",
+              "nullable": true
+            }
+          }
+        ],
+        "requestBody": {
+          "description": "The dictionary with the instrument identifiers to be updated on the \r\n           transaction and holdings.",
+          "content": {
+            "application/json-patch+json": {
+              "schema": {
+                "type": "object",
+                "additionalProperties": {
+                  "type": "string"
+                },
+                "description": "The dictionary with the instrument identifiers to be updated on the \r\n           transaction and holdings.",
+                "nullable": true
+              },
+              "example": {
+                "instrument/default/Figi": "BBG000C6K6G9",
+                "instrument/default/Isin": "GB00BH4HKS39"
+              }
+            },
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "additionalProperties": {
+                  "type": "string"
+                },
+                "description": "The dictionary with the instrument identifiers to be updated on the \r\n           transaction and holdings.",
+                "nullable": true
+              },
+              "example": {
+                "instrument/default/Figi": "BBG000C6K6G9",
+                "instrument/default/Isin": "GB00BH4HKS39"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "type": "object",
+                "additionalProperties": {
+                  "type": "string"
+                },
+                "description": "The dictionary with the instrument identifiers to be updated on the \r\n           transaction and holdings.",
+                "nullable": true
+              },
+              "example": {
+                "instrument/default/Figi": "BBG000C6K6G9",
+                "instrument/default/Isin": "GB00BH4HKS39"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "type": "object",
+                "additionalProperties": {
+                  "type": "string"
+                },
+                "description": "The dictionary with the instrument identifiers to be updated on the \r\n           transaction and holdings.",
+                "nullable": true
+              },
+              "example": {
+                "instrument/default/Figi": "BBG000C6K6G9",
+                "instrument/default/Isin": "GB00BH4HKS39"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "The version of the transaction portfolio that contains the newly updated or inserted transactions",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/UpsertPortfolioTransactionsResponse"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/UpsertPortfolioTransactionsResponse"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/UpsertPortfolioTransactionsResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "The details of the input related failure",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/LusidValidationProblemDetails"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/LusidValidationProblemDetails"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/LusidValidationProblemDetails"
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "Error response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/LusidProblemDetails"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "oauth2": []
+          }
+        ],
+        "x-fbn-apistatus": "EarlyAccess"
       }
     },
     "/api/transactionportfolios/{scope}/{code}/details": {
