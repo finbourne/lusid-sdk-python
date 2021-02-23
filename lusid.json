@@ -9,7 +9,7 @@
       "url": "https://www.finbourne.com",
       "email": "info@finbourne.com"
     },
-    "version": "0.11.2626",
+    "version": "0.11.2630",
     "x-logo": {
       "url": "https://content.finbourne.com/LUSID-header.png",
       "backgroundColor": "#415464"
@@ -17,7 +17,7 @@
   },
   "servers": [
     {
-      "url": "https://fbn-prd.lusid.com/api"
+      "url": "http://local-unit-test-server.lusid.com:58021"
     }
   ],
   "paths": {
@@ -8643,6 +8643,209 @@
       }
     },
     "/api/search/portfoliogroups": {
+      "get": {
+        "tags": [
+          "Search"
+        ],
+        "summary": "[EARLY ACCESS] Search Portfolio Groups",
+        "description": "Search through all portfolio groups",
+        "operationId": "SearchPortfolioGroups",
+        "parameters": [
+          {
+            "name": "search",
+            "in": "query",
+            "description": "A parameter used for searching any portfolio group field. Wildcards(*) are supported at the end of words (e.g. 'Port*'). Read more about filtering results from LUSID here https://support.lusid.com/filtering-results-from-lusid.",
+            "schema": {
+              "type": "string",
+              "description": "A parameter used for searching any portfolio group field. Wildcards(*) are supported at the end of words (e.g. 'Port*'). Read more about filtering results from LUSID here https://support.lusid.com/filtering-results-from-lusid.",
+              "nullable": true
+            }
+          },
+          {
+            "name": "filter",
+            "in": "query",
+            "description": "Expression to filter the result set. \r\nFor example, to filter on the Scope, use \"id.scope eq 'string'\"\r\nRead more about filtering results from LUSID here https://support.lusid.com/filtering-results-from-lusid.",
+            "schema": {
+              "type": "string",
+              "description": "Expression to filter the result set. \r\nFor example, to filter on the Scope, use \"id.scope eq 'string'\"\r\nRead more about filtering results from LUSID here https://support.lusid.com/filtering-results-from-lusid.",
+              "nullable": true
+            }
+          },
+          {
+            "name": "sortBy",
+            "in": "query",
+            "description": "Order the results by these fields. Use use the '-' sign to denote descending order e.g. -MyFieldName. Multiple fields can be denoted by a comma e.g. -MyFieldName,AnotherFieldName,-AFurtherFieldName",
+            "schema": {
+              "type": "string",
+              "description": "Order the results by these fields. Use use the '-' sign to denote descending order e.g. -MyFieldName. Multiple fields can be denoted by a comma e.g. -MyFieldName,AnotherFieldName,-AFurtherFieldName",
+              "nullable": true
+            }
+          },
+          {
+            "name": "limit",
+            "in": "query",
+            "description": "When paginating, only return this number of records",
+            "schema": {
+              "type": "integer",
+              "description": "When paginating, only return this number of records",
+              "format": "int32"
+            },
+            "x-nullable": true
+          },
+          {
+            "name": "page",
+            "in": "query",
+            "description": "Encoded page string returned from a previous search result that will retrieve the next page of data. When this field is supplied, filter, sortby and search fields should not be supplied.",
+            "schema": {
+              "type": "string",
+              "description": "Encoded page string returned from a previous search result that will retrieve the next page of data. When this field is supplied, filter, sortby and search fields should not be supplied.",
+              "nullable": true
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/PagedResourceListOfPortfolioGroupSearchResult"
+                },
+                "example": {
+                  "values": [
+                    {
+                      "href": "https://example.lusid.com/api/portfoliogroups/demo-scope/demo-code",
+                      "id": {
+                        "scope": "demo-scope",
+                        "code": "demo-group-code"
+                      },
+                      "displayName": "Test portfolio group",
+                      "description": "UK Portfolio",
+                      "created": "2020-03-28T00:00:00.0000000+00:00",
+                      "portfolios": [
+                        {
+                          "scope": "demo-scope",
+                          "code": "demo-portfolio"
+                        }
+                      ],
+                      "subGroups": [
+                        {
+                          "scope": "demo-scope",
+                          "code": "demo-sub-group"
+                        }
+                      ]
+                    }
+                  ],
+                  "href": "https://example.lusid.com/api/portfoliogroups",
+                  "links": []
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PagedResourceListOfPortfolioGroupSearchResult"
+                },
+                "example": {
+                  "values": [
+                    {
+                      "href": "https://example.lusid.com/api/portfoliogroups/demo-scope/demo-code",
+                      "id": {
+                        "scope": "demo-scope",
+                        "code": "demo-group-code"
+                      },
+                      "displayName": "Test portfolio group",
+                      "description": "UK Portfolio",
+                      "created": "2020-03-28T00:00:00.0000000+00:00",
+                      "portfolios": [
+                        {
+                          "scope": "demo-scope",
+                          "code": "demo-portfolio"
+                        }
+                      ],
+                      "subGroups": [
+                        {
+                          "scope": "demo-scope",
+                          "code": "demo-sub-group"
+                        }
+                      ]
+                    }
+                  ],
+                  "href": "https://example.lusid.com/api/portfoliogroups",
+                  "links": []
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PagedResourceListOfPortfolioGroupSearchResult"
+                },
+                "example": {
+                  "values": [
+                    {
+                      "href": "https://example.lusid.com/api/portfoliogroups/demo-scope/demo-code",
+                      "id": {
+                        "scope": "demo-scope",
+                        "code": "demo-group-code"
+                      },
+                      "displayName": "Test portfolio group",
+                      "description": "UK Portfolio",
+                      "created": "2020-03-28T00:00:00.0000000+00:00",
+                      "portfolios": [
+                        {
+                          "scope": "demo-scope",
+                          "code": "demo-portfolio"
+                        }
+                      ],
+                      "subGroups": [
+                        {
+                          "scope": "demo-scope",
+                          "code": "demo-sub-group"
+                        }
+                      ]
+                    }
+                  ],
+                  "href": "https://example.lusid.com/api/portfoliogroups",
+                  "links": []
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "The details of the input related failure",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/LusidValidationProblemDetails"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/LusidValidationProblemDetails"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/LusidValidationProblemDetails"
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "Error response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/LusidProblemDetails"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "oauth2": []
+          }
+        ],
+        "x-fbn-apistatus": "EarlyAccess"
+      },
       "post": {
         "tags": [
           "Search"
@@ -17659,6 +17862,100 @@
         },
         "additionalProperties": false
       },
+      "PortfolioGroupSearchResult": {
+        "required": [
+          "displayName",
+          "id"
+        ],
+        "type": "object",
+        "properties": {
+          "href": {
+            "type": "string",
+            "description": "The specific Uniform Resource Identifier (URI) for this resource at the requested effective and asAt datetime.",
+            "format": "uri",
+            "nullable": true
+          },
+          "id": {
+            "$ref": "#/components/schemas/ResourceId"
+          },
+          "displayName": {
+            "type": "string",
+            "description": "The name of the portfolio group."
+          },
+          "description": {
+            "type": "string",
+            "description": "The long form description of the portfolio group.",
+            "nullable": true
+          },
+          "created": {
+            "type": "string",
+            "description": "The effective datetime at which the portfolio group was created. No portfolios or sub groups can be added to the group before this date.",
+            "format": "date-time"
+          },
+          "portfolios": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ResourceId"
+            },
+            "description": "The collection of resource identifiers for the portfolios contained in the portfolio group.",
+            "nullable": true
+          },
+          "subGroups": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ResourceId"
+            },
+            "description": "The collection of resource identifiers for the portfolio groups contained in the portfolio group as sub groups.",
+            "nullable": true
+          },
+          "version": {
+            "$ref": "#/components/schemas/Version"
+          },
+          "links": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Link"
+            },
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "PagedResourceListOfPortfolioGroupSearchResult": {
+        "required": [
+          "values"
+        ],
+        "type": "object",
+        "properties": {
+          "nextPage": {
+            "type": "string",
+            "nullable": true
+          },
+          "previousPage": {
+            "type": "string",
+            "nullable": true
+          },
+          "values": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/PortfolioGroupSearchResult"
+            }
+          },
+          "href": {
+            "type": "string",
+            "format": "uri",
+            "nullable": true
+          },
+          "links": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Link"
+            },
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
       "PortfolioSearchResult": {
         "required": [
           "created",
@@ -18905,7 +19202,7 @@
         "description": "OAuth2 Implicit Grant",
         "flows": {
           "implicit": {
-            "authorizationUrl": "https://lusid.okta.com/oauth2/default/v1/authorize",
+            "authorizationUrl": "https://dummyurl.lusid.com/",
             "scopes": {}
           }
         }
