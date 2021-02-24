@@ -9,7 +9,7 @@
       "url": "https://www.finbourne.com",
       "email": "info@finbourne.com"
     },
-    "version": "0.11.2632",
+    "version": "0.11.2633",
     "x-logo": {
       "url": "https://content.finbourne.com/LUSID-header.png",
       "backgroundColor": "#415464"
@@ -17,7 +17,7 @@
   },
   "servers": [
     {
-      "url": "https://fbn-prd.lusid.com/api"
+      "url": "http://local-unit-test-server.lusid.com:36609"
     }
   ],
   "paths": {
@@ -8960,6 +8960,221 @@
       }
     },
     "/api/search/portfolios": {
+      "get": {
+        "tags": [
+          "Search"
+        ],
+        "summary": "[EARLY ACCESS] Search Portfolios",
+        "description": "Search through all portfolios",
+        "operationId": "SearchPortfolios",
+        "parameters": [
+          {
+            "name": "search",
+            "in": "query",
+            "description": "A parameter used for searching any portfolio field. Wildcards(*) are supported at the end of words (e.g. 'Port*'). Read more about filtering results from LUSID here https://support.lusid.com/filtering-results-from-lusid.",
+            "schema": {
+              "type": "string",
+              "description": "A parameter used for searching any portfolio field. Wildcards(*) are supported at the end of words (e.g. 'Port*'). Read more about filtering results from LUSID here https://support.lusid.com/filtering-results-from-lusid.",
+              "nullable": true
+            }
+          },
+          {
+            "name": "filter",
+            "in": "query",
+            "description": "Expression to filter the result set. \r\nFor example, to filter on the portfolio Type, use \"type eq 'Transaction'\"\r\nRead more about filtering results from LUSID here https://support.lusid.com/filtering-results-from-lusid.",
+            "schema": {
+              "type": "string",
+              "description": "Expression to filter the result set. \r\nFor example, to filter on the portfolio Type, use \"type eq 'Transaction'\"\r\nRead more about filtering results from LUSID here https://support.lusid.com/filtering-results-from-lusid.",
+              "nullable": true
+            }
+          },
+          {
+            "name": "sortBy",
+            "in": "query",
+            "description": "Order the results by these fields. Use use the '-' sign to denote descending order e.g. -MyFieldName. Multiple fields can be denoted by a comma e.g. -MyFieldName,AnotherFieldName,-AFurtherFieldName",
+            "schema": {
+              "type": "string",
+              "description": "Order the results by these fields. Use use the '-' sign to denote descending order e.g. -MyFieldName. Multiple fields can be denoted by a comma e.g. -MyFieldName,AnotherFieldName,-AFurtherFieldName",
+              "nullable": true
+            }
+          },
+          {
+            "name": "limit",
+            "in": "query",
+            "description": "When paginating, only return this number of records",
+            "schema": {
+              "type": "integer",
+              "description": "When paginating, only return this number of records",
+              "format": "int32"
+            },
+            "x-nullable": true
+          },
+          {
+            "name": "page",
+            "in": "query",
+            "description": "Encoded page string returned from a previous search result that will retrieve the next page of data. When this field is supplied, filter, sortby and search fields should not be supplied.",
+            "schema": {
+              "type": "string",
+              "description": "Encoded page string returned from a previous search result that will retrieve the next page of data. When this field is supplied, filter, sortby and search fields should not be supplied.",
+              "nullable": true
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/PagedResourceListOfPortfolioSearchResult"
+                },
+                "example": {
+                  "values": [
+                    {
+                      "id": {
+                        "scope": "demo-scope",
+                        "code": "demo-code"
+                      },
+                      "type": "Transaction",
+                      "href": "https://example.lusid.com/api/portfolios/demo-scope/demo-code",
+                      "description": "UK Holidings",
+                      "displayName": "UK Portfolio",
+                      "isDerived": true,
+                      "created": "2019-04-06T12:00:05.0000000+00:00",
+                      "parentPortfolioId": {
+                        "scope": "demo-parent",
+                        "code": "demo-parent"
+                      },
+                      "baseCurrency": "GBP",
+                      "properties": [
+                        {
+                          "key": "Portfolio/default/Country",
+                          "value": {
+                            "labelValue": "UK"
+                          },
+                          "effectiveFrom": "2019-04-06T12:00:05.0000000+00:00"
+                        }
+                      ]
+                    }
+                  ],
+                  "href": "https://example.lusid.com/api/portfolios",
+                  "links": []
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PagedResourceListOfPortfolioSearchResult"
+                },
+                "example": {
+                  "values": [
+                    {
+                      "id": {
+                        "scope": "demo-scope",
+                        "code": "demo-code"
+                      },
+                      "type": "Transaction",
+                      "href": "https://example.lusid.com/api/portfolios/demo-scope/demo-code",
+                      "description": "UK Holidings",
+                      "displayName": "UK Portfolio",
+                      "isDerived": true,
+                      "created": "2019-04-06T12:00:05.0000000+00:00",
+                      "parentPortfolioId": {
+                        "scope": "demo-parent",
+                        "code": "demo-parent"
+                      },
+                      "baseCurrency": "GBP",
+                      "properties": [
+                        {
+                          "key": "Portfolio/default/Country",
+                          "value": {
+                            "labelValue": "UK"
+                          },
+                          "effectiveFrom": "2019-04-06T12:00:05.0000000+00:00"
+                        }
+                      ]
+                    }
+                  ],
+                  "href": "https://example.lusid.com/api/portfolios",
+                  "links": []
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PagedResourceListOfPortfolioSearchResult"
+                },
+                "example": {
+                  "values": [
+                    {
+                      "id": {
+                        "scope": "demo-scope",
+                        "code": "demo-code"
+                      },
+                      "type": "Transaction",
+                      "href": "https://example.lusid.com/api/portfolios/demo-scope/demo-code",
+                      "description": "UK Holidings",
+                      "displayName": "UK Portfolio",
+                      "isDerived": true,
+                      "created": "2019-04-06T12:00:05.0000000+00:00",
+                      "parentPortfolioId": {
+                        "scope": "demo-parent",
+                        "code": "demo-parent"
+                      },
+                      "baseCurrency": "GBP",
+                      "properties": [
+                        {
+                          "key": "Portfolio/default/Country",
+                          "value": {
+                            "labelValue": "UK"
+                          },
+                          "effectiveFrom": "2019-04-06T12:00:05.0000000+00:00"
+                        }
+                      ]
+                    }
+                  ],
+                  "href": "https://example.lusid.com/api/portfolios",
+                  "links": []
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "The details of the input related failure",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/LusidValidationProblemDetails"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/LusidValidationProblemDetails"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/LusidValidationProblemDetails"
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "Error response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/LusidProblemDetails"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "oauth2": []
+          }
+        ],
+        "x-fbn-apistatus": "EarlyAccess"
+      },
       "post": {
         "tags": [
           "Search"
@@ -18029,6 +18244,41 @@
         "additionalProperties": false,
         "description": "A list of portfolios."
       },
+      "PagedResourceListOfPortfolioSearchResult": {
+        "required": [
+          "values"
+        ],
+        "type": "object",
+        "properties": {
+          "nextPage": {
+            "type": "string",
+            "nullable": true
+          },
+          "previousPage": {
+            "type": "string",
+            "nullable": true
+          },
+          "values": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/PortfolioSearchResult"
+            }
+          },
+          "href": {
+            "type": "string",
+            "format": "uri",
+            "nullable": true
+          },
+          "links": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Link"
+            },
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
       "ResourceListOfPortfolioSearchResult": {
         "required": [
           "values"
@@ -19202,7 +19452,7 @@
         "description": "OAuth2 Implicit Grant",
         "flows": {
           "implicit": {
-            "authorizationUrl": "https://lusid.okta.com/oauth2/default/v1/authorize",
+            "authorizationUrl": "https://dummyurl.lusid.com/",
             "scopes": {}
           }
         }
