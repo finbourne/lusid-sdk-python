@@ -9,7 +9,7 @@
       "url": "https://www.finbourne.com",
       "email": "info@finbourne.com"
     },
-    "version": "0.11.2641",
+    "version": "0.11.2642",
     "x-logo": {
       "url": "https://content.finbourne.com/LUSID-header.png",
       "backgroundColor": "#415464"
@@ -17,7 +17,7 @@
   },
   "servers": [
     {
-      "url": "https://fbn-prd.lusid.com/api"
+      "url": "http://local-unit-test-server.lusid.com:52868"
     }
   ],
   "paths": {
@@ -3453,6 +3453,232 @@
         "x-fbn-apistatus": "EarlyAccess"
       }
     },
+    "/api/portfoliogroups/{scope}/{code}/holdings": {
+      "get": {
+        "tags": [
+          "Portfolio Groups"
+        ],
+        "summary": "[EARLY ACCESS] Get holdings for transaction portfolios in portfolio group",
+        "description": "Get the holdings of transaction portfolios in specified portfolio group.",
+        "operationId": "GetHoldingsForPortfolioGroup",
+        "parameters": [
+          {
+            "name": "scope",
+            "in": "path",
+            "description": "The scope of the portfolio group.",
+            "required": true,
+            "schema": {
+              "maxLength": 64,
+              "minLength": 1,
+              "pattern": "^[a-zA-Z0-9\\-_]+$",
+              "type": "string",
+              "description": "The scope of the portfolio group.",
+              "nullable": true
+            }
+          },
+          {
+            "name": "code",
+            "in": "path",
+            "description": "The code of the portfolio group. Together with the scope this uniquely identifies\r\n            the portfolio group.",
+            "required": true,
+            "schema": {
+              "maxLength": 64,
+              "minLength": 1,
+              "pattern": "^[a-zA-Z0-9\\-_]+$",
+              "type": "string",
+              "description": "The code of the portfolio group. Together with the scope this uniquely identifies\r\n            the portfolio group.",
+              "nullable": true
+            }
+          },
+          {
+            "name": "effectiveAt",
+            "in": "query",
+            "description": "The effective datetime or cut label at which to retrieve the holdings of transaction\r\n            portfolios in the portfolio group. Defaults to the current LUSID system datetime if not specified.",
+            "schema": {
+              "type": "string",
+              "description": "The effective datetime or cut label at which to retrieve the holdings of transaction\r\n            portfolios in the portfolio group. Defaults to the current LUSID system datetime if not specified.",
+              "format": "dateorcutlabel",
+              "nullable": true
+            }
+          },
+          {
+            "name": "asAt",
+            "in": "query",
+            "description": "The asAt datetime at which to retrieve the holdings of transaction portfolios in the portfolio group. Defaults\r\n            to return the latest version of the holdings if not specified.",
+            "schema": {
+              "type": "string",
+              "description": "The asAt datetime at which to retrieve the holdings of transaction portfolios in the portfolio group. Defaults\r\n            to return the latest version of the holdings if not specified.",
+              "format": "date-time",
+              "nullable": true
+            },
+            "x-nullable": true
+          },
+          {
+            "name": "filter",
+            "in": "query",
+            "description": "Expression to filter the result set. Read more about filtering results from LUSID here https://support.lusid.com/filtering-results-from-lusid.",
+            "schema": {
+              "type": "string",
+              "description": "Expression to filter the result set. Read more about filtering results from LUSID here https://support.lusid.com/filtering-results-from-lusid.",
+              "nullable": true
+            }
+          },
+          {
+            "name": "propertyKeys",
+            "in": "query",
+            "description": "A list of property keys from the \"Instrument\" or \"Holding\" domain to decorate onto\r\n            the holdings. These take the format {domain}/{scope}/{code} e.g. \"Instrument/system/Name\" or \"Holding/system/Cost\".",
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "string",
+                "description": "The key that uniquely identifies the property. It has the format {domain}/{scope}/{code}."
+              },
+              "description": "A list of property keys from the \"Instrument\" or \"Holding\" domain to decorate onto\r\n            the holdings. These take the format {domain}/{scope}/{code} e.g. \"Instrument/system/Name\" or \"Holding/system/Cost\".",
+              "nullable": true
+            },
+            "x-nullable": true
+          },
+          {
+            "name": "byTaxlots",
+            "in": "query",
+            "description": "Whether or not to expand the holdings to return the underlying tax-lots. Defaults to\r\n            False.",
+            "schema": {
+              "type": "boolean",
+              "description": "Whether or not to expand the holdings to return the underlying tax-lots. Defaults to\r\n            False.",
+              "nullable": true
+            },
+            "x-nullable": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The holdings of transaction portfolios in a specific version of portfolio group",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/VersionedResourceListOfPortfolioHolding"
+                },
+                "example": {
+                  "version": {
+                    "effectiveFrom": "2019-03-05T12:00:00.0000000+00:00",
+                    "asAtDate": "2019-03-05T12:00:00.0000000+00:00"
+                  },
+                  "values": [
+                    {
+                      "instrumentUid": "LUID_XH4GNUEX",
+                      "holdingType": "P",
+                      "units": 10,
+                      "settledUnits": 10,
+                      "cost": {
+                        "amount": 2.5,
+                        "currency": "GBP"
+                      },
+                      "costPortfolioCcy": {
+                        "amount": 2.5,
+                        "currency": "GBP"
+                      }
+                    }
+                  ],
+                  "links": []
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/VersionedResourceListOfPortfolioHolding"
+                },
+                "example": {
+                  "version": {
+                    "effectiveFrom": "2019-03-05T12:00:00.0000000+00:00",
+                    "asAtDate": "2019-03-05T12:00:00.0000000+00:00"
+                  },
+                  "values": [
+                    {
+                      "instrumentUid": "LUID_XH4GNUEX",
+                      "holdingType": "P",
+                      "units": 10,
+                      "settledUnits": 10,
+                      "cost": {
+                        "amount": 2.5,
+                        "currency": "GBP"
+                      },
+                      "costPortfolioCcy": {
+                        "amount": 2.5,
+                        "currency": "GBP"
+                      }
+                    }
+                  ],
+                  "links": []
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/VersionedResourceListOfPortfolioHolding"
+                },
+                "example": {
+                  "version": {
+                    "effectiveFrom": "2019-03-05T12:00:00.0000000+00:00",
+                    "asAtDate": "2019-03-05T12:00:00.0000000+00:00"
+                  },
+                  "values": [
+                    {
+                      "instrumentUid": "LUID_XH4GNUEX",
+                      "holdingType": "P",
+                      "units": 10,
+                      "settledUnits": 10,
+                      "cost": {
+                        "amount": 2.5,
+                        "currency": "GBP"
+                      },
+                      "costPortfolioCcy": {
+                        "amount": 2.5,
+                        "currency": "GBP"
+                      }
+                    }
+                  ],
+                  "links": []
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "The details of the input related failure",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/LusidValidationProblemDetails"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/LusidValidationProblemDetails"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/LusidValidationProblemDetails"
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "Error response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/LusidProblemDetails"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "oauth2": []
+          }
+        ],
+        "x-fbn-apistatus": "EarlyAccess"
+      }
+    },
     "/api/portfoliogroups/{scope}/{code}/portfolios": {
       "post": {
         "tags": [
@@ -4591,6 +4817,1140 @@
               "text/json": {
                 "schema": {
                   "$ref": "#/components/schemas/PortfolioGroup"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "The details of the input related failure",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/LusidValidationProblemDetails"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/LusidValidationProblemDetails"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/LusidValidationProblemDetails"
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "Error response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/LusidProblemDetails"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "oauth2": []
+          }
+        ],
+        "x-fbn-apistatus": "EarlyAccess"
+      }
+    },
+    "/api/portfoliogroups/{scope}/{code}/transactions": {
+      "get": {
+        "tags": [
+          "Portfolio Groups"
+        ],
+        "summary": "[EARLY ACCESS] Get transactions for transaction portfolios in a portfolio group",
+        "description": "Get transactions for transaction portfolios in a portfolio group over a given interval of effective time. \r\n\r\nWhen the specified portfolio in a portfolio group is a derived transaction portfolio, the returned set of transactions is the\r\nunion set of all transactions of the parent (and any grandparents etc.) and the specified derived transaction portfolio itself.",
+        "operationId": "GetTransactionsForPortfolioGroup",
+        "parameters": [
+          {
+            "name": "scope",
+            "in": "path",
+            "description": "The scope of the portfolio group.",
+            "required": true,
+            "schema": {
+              "maxLength": 64,
+              "minLength": 1,
+              "pattern": "^[a-zA-Z0-9\\-_]+$",
+              "type": "string",
+              "description": "The scope of the portfolio group.",
+              "nullable": true
+            }
+          },
+          {
+            "name": "code",
+            "in": "path",
+            "description": "The code of the portfolio group. Together with the scope this uniquely identifies\r\n            the portfolio group.",
+            "required": true,
+            "schema": {
+              "maxLength": 64,
+              "minLength": 1,
+              "pattern": "^[a-zA-Z0-9\\-_]+$",
+              "type": "string",
+              "description": "The code of the portfolio group. Together with the scope this uniquely identifies\r\n            the portfolio group.",
+              "nullable": true
+            }
+          },
+          {
+            "name": "fromTransactionDate",
+            "in": "query",
+            "description": "The lower bound effective datetime or cut label (inclusive) from which to retrieve the transactions.\r\n            There is no lower bound if this is not specified.",
+            "schema": {
+              "type": "string",
+              "description": "The lower bound effective datetime or cut label (inclusive) from which to retrieve the transactions.\r\n            There is no lower bound if this is not specified.",
+              "format": "dateorcutlabel",
+              "nullable": true
+            }
+          },
+          {
+            "name": "toTransactionDate",
+            "in": "query",
+            "description": "The upper bound effective datetime or cut label (inclusive) from which to retrieve transactions.\r\n            There is no upper bound if this is not specified.",
+            "schema": {
+              "type": "string",
+              "description": "The upper bound effective datetime or cut label (inclusive) from which to retrieve transactions.\r\n            There is no upper bound if this is not specified.",
+              "format": "dateorcutlabel",
+              "nullable": true
+            }
+          },
+          {
+            "name": "asAt",
+            "in": "query",
+            "description": "The asAt datetime at which to retrieve the transactions. Defaults to return the latest version\r\n            of each transaction if not specified.",
+            "schema": {
+              "type": "string",
+              "description": "The asAt datetime at which to retrieve the transactions. Defaults to return the latest version\r\n            of each transaction if not specified.",
+              "format": "date-time",
+              "nullable": true
+            },
+            "x-nullable": true
+          },
+          {
+            "name": "filter",
+            "in": "query",
+            "description": "Expression to filter the result set. \r\n            For example, to filter on the Transaction Type, use \"type eq 'Buy'\"\r\n            Read more about filtering results from LUSID here https://support.lusid.com/filtering-results-from-lusid.",
+            "schema": {
+              "type": "string",
+              "description": "Expression to filter the result set. \r\n            For example, to filter on the Transaction Type, use \"type eq 'Buy'\"\r\n            Read more about filtering results from LUSID here https://support.lusid.com/filtering-results-from-lusid.",
+              "nullable": true
+            }
+          },
+          {
+            "name": "propertyKeys",
+            "in": "query",
+            "description": "A list of property keys from the \"Instrument\" or \"Transaction\" domain to decorate onto\r\n            the transactions. These take the format {domain}/{scope}/{code} e.g. \"Instrument/system/Name\" or\r\n            \"Transaction/strategy/quantsignal\".",
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "string",
+                "description": "The key that uniquely identifies the property. It has the format {domain}/{scope}/{code}."
+              },
+              "description": "A list of property keys from the \"Instrument\" or \"Transaction\" domain to decorate onto\r\n            the transactions. These take the format {domain}/{scope}/{code} e.g. \"Instrument/system/Name\" or\r\n            \"Transaction/strategy/quantsignal\".",
+              "nullable": true
+            },
+            "x-nullable": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The requested transactions from transaction portfolios in the specified portfolio group",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/VersionedResourceListOfTransaction"
+                },
+                "example": {
+                  "version": {
+                    "effectiveFrom": "2018-03-05T00:00:00.0000000+00:00",
+                    "asAtDate": "2018-03-04T23:50:00.0000000+00:00"
+                  },
+                  "values": [
+                    {
+                      "transactionId": "TXN-00001",
+                      "type": "Buy",
+                      "instrumentIdentifiers": {
+                        "instrument/default/RIC": "RIC.L"
+                      },
+                      "instrumentUid": "LUID_1C7YTL5M",
+                      "transactionDate": "2018-08-04T00:00:00.0000000+00:00",
+                      "settlementDate": "2018-08-06T00:00:00.0000000+00:00",
+                      "units": 1000,
+                      "transactionPrice": {
+                        "price": 88.8,
+                        "type": "Price"
+                      },
+                      "totalConsideration": {
+                        "amount": 88800,
+                        "currency": "USD"
+                      },
+                      "properties": {
+                        "transaction/default/TradeToPortfolioRate": {
+                          "key": "Transaction/default/TradeToPortfolioRate",
+                          "value": {
+                            "metricValue": {
+                              "value": 0.765
+                            }
+                          }
+                        },
+                        "transaction/default/SourcePortfolioId": {
+                          "key": "Transaction/default/SourcePortfolioId",
+                          "value": {
+                            "labelValue": "DEMO-PORTFOLIO-ID"
+                          }
+                        },
+                        "transaction/default/SourcePortfolioScope": {
+                          "key": "Transaction/default/SourcePortfolioScope",
+                          "value": {
+                            "labelValue": "DEMO-SCOPE"
+                          }
+                        }
+                      },
+                      "source": ""
+                    }
+                  ],
+                  "href": "http://example.com",
+                  "links": []
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/VersionedResourceListOfTransaction"
+                },
+                "example": {
+                  "version": {
+                    "effectiveFrom": "2018-03-05T00:00:00.0000000+00:00",
+                    "asAtDate": "2018-03-04T23:50:00.0000000+00:00"
+                  },
+                  "values": [
+                    {
+                      "transactionId": "TXN-00001",
+                      "type": "Buy",
+                      "instrumentIdentifiers": {
+                        "instrument/default/RIC": "RIC.L"
+                      },
+                      "instrumentUid": "LUID_1C7YTL5M",
+                      "transactionDate": "2018-08-04T00:00:00.0000000+00:00",
+                      "settlementDate": "2018-08-06T00:00:00.0000000+00:00",
+                      "units": 1000,
+                      "transactionPrice": {
+                        "price": 88.8,
+                        "type": "Price"
+                      },
+                      "totalConsideration": {
+                        "amount": 88800,
+                        "currency": "USD"
+                      },
+                      "properties": {
+                        "transaction/default/TradeToPortfolioRate": {
+                          "key": "Transaction/default/TradeToPortfolioRate",
+                          "value": {
+                            "metricValue": {
+                              "value": 0.765
+                            }
+                          }
+                        },
+                        "transaction/default/SourcePortfolioId": {
+                          "key": "Transaction/default/SourcePortfolioId",
+                          "value": {
+                            "labelValue": "DEMO-PORTFOLIO-ID"
+                          }
+                        },
+                        "transaction/default/SourcePortfolioScope": {
+                          "key": "Transaction/default/SourcePortfolioScope",
+                          "value": {
+                            "labelValue": "DEMO-SCOPE"
+                          }
+                        }
+                      },
+                      "source": ""
+                    }
+                  ],
+                  "href": "http://example.com",
+                  "links": []
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/VersionedResourceListOfTransaction"
+                },
+                "example": {
+                  "version": {
+                    "effectiveFrom": "2018-03-05T00:00:00.0000000+00:00",
+                    "asAtDate": "2018-03-04T23:50:00.0000000+00:00"
+                  },
+                  "values": [
+                    {
+                      "transactionId": "TXN-00001",
+                      "type": "Buy",
+                      "instrumentIdentifiers": {
+                        "instrument/default/RIC": "RIC.L"
+                      },
+                      "instrumentUid": "LUID_1C7YTL5M",
+                      "transactionDate": "2018-08-04T00:00:00.0000000+00:00",
+                      "settlementDate": "2018-08-06T00:00:00.0000000+00:00",
+                      "units": 1000,
+                      "transactionPrice": {
+                        "price": 88.8,
+                        "type": "Price"
+                      },
+                      "totalConsideration": {
+                        "amount": 88800,
+                        "currency": "USD"
+                      },
+                      "properties": {
+                        "transaction/default/TradeToPortfolioRate": {
+                          "key": "Transaction/default/TradeToPortfolioRate",
+                          "value": {
+                            "metricValue": {
+                              "value": 0.765
+                            }
+                          }
+                        },
+                        "transaction/default/SourcePortfolioId": {
+                          "key": "Transaction/default/SourcePortfolioId",
+                          "value": {
+                            "labelValue": "DEMO-PORTFOLIO-ID"
+                          }
+                        },
+                        "transaction/default/SourcePortfolioScope": {
+                          "key": "Transaction/default/SourcePortfolioScope",
+                          "value": {
+                            "labelValue": "DEMO-SCOPE"
+                          }
+                        }
+                      },
+                      "source": ""
+                    }
+                  ],
+                  "href": "http://example.com",
+                  "links": []
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "The details of the input related failure",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/LusidValidationProblemDetails"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/LusidValidationProblemDetails"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/LusidValidationProblemDetails"
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "Error response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/LusidProblemDetails"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "oauth2": []
+          }
+        ],
+        "x-fbn-apistatus": "EarlyAccess"
+      }
+    },
+    "/api/portfoliogroups/{scope}/{code}/transactions/$build": {
+      "post": {
+        "tags": [
+          "Portfolio Groups"
+        ],
+        "summary": "[EARLY ACCESS] Build transactions for transaction portfolios in a portfolio group",
+        "description": "Build transactions for transaction portfolios in a portfolio group over a given interval of effective time. \r\n\r\nWhen the specified portfolio in a portfolio group is a derived transaction portfolio, the returned set of transactions is the\r\nunion set of all transactions of the parent (and any grandparents etc.) and the specified derived transaction portfolio itself.",
+        "operationId": "BuildTransactionsForPortfolioGroup",
+        "parameters": [
+          {
+            "name": "scope",
+            "in": "path",
+            "description": "The scope of the portfolio group.",
+            "required": true,
+            "schema": {
+              "maxLength": 64,
+              "minLength": 1,
+              "pattern": "^[a-zA-Z0-9\\-_]+$",
+              "type": "string",
+              "description": "The scope of the portfolio group.",
+              "nullable": true
+            }
+          },
+          {
+            "name": "code",
+            "in": "path",
+            "description": "The code of the portfolio group. Together with the scope this uniquely identifies\r\n            the portfolio group.",
+            "required": true,
+            "schema": {
+              "maxLength": 64,
+              "minLength": 1,
+              "pattern": "^[a-zA-Z0-9\\-_]+$",
+              "type": "string",
+              "description": "The code of the portfolio group. Together with the scope this uniquely identifies\r\n            the portfolio group.",
+              "nullable": true
+            }
+          },
+          {
+            "name": "asAt",
+            "in": "query",
+            "description": "The asAt datetime at which to build the transactions. Defaults to return the latest\r\n            version of each transaction if not specified.",
+            "schema": {
+              "type": "string",
+              "description": "The asAt datetime at which to build the transactions. Defaults to return the latest\r\n            version of each transaction if not specified.",
+              "format": "date-time",
+              "nullable": true
+            },
+            "x-nullable": true
+          },
+          {
+            "name": "filter",
+            "in": "query",
+            "description": "Expression to filter the result set.\r\n            For example, to filter on the Transaction Type, use \"type eq 'Buy'\"\r\n            Read more about filtering results from LUSID here https://support.lusid.com/filtering-results-from-lusid.",
+            "schema": {
+              "type": "string",
+              "description": "Expression to filter the result set.\r\n            For example, to filter on the Transaction Type, use \"type eq 'Buy'\"\r\n            Read more about filtering results from LUSID here https://support.lusid.com/filtering-results-from-lusid.",
+              "nullable": true
+            }
+          },
+          {
+            "name": "propertyKeys",
+            "in": "query",
+            "description": "A list of property keys from the \"Instrument\" or \"Transaction\" domain to decorate onto\r\n            the transactions. These take the format {domain}/{scope}/{code} e.g. \"Instrument/system/Name\" or\r\n            \"Transaction/strategy/quantsignal\".",
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "string",
+                "description": "The key that uniquely identifies the property. It has the format {domain}/{scope}/{code}."
+              },
+              "description": "A list of property keys from the \"Instrument\" or \"Transaction\" domain to decorate onto\r\n            the transactions. These take the format {domain}/{scope}/{code} e.g. \"Instrument/system/Name\" or\r\n            \"Transaction/strategy/quantsignal\".",
+              "nullable": true
+            },
+            "x-nullable": true
+          }
+        ],
+        "requestBody": {
+          "description": "The query queryParameters which control how the output transactions are built.",
+          "content": {
+            "application/json-patch+json": {
+              "schema": {
+                "$ref": "#/components/schemas/TransactionQueryParameters"
+              },
+              "example": {
+                "startDate": "2018-03-05T00:00:00.0000000+00:00",
+                "endDate": "2018-03-19T00:00:00.0000000+00:00",
+                "queryMode": "TradeDate",
+                "showCancelledTransactions": false
+              }
+            },
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/TransactionQueryParameters"
+              },
+              "example": {
+                "startDate": "2018-03-05T00:00:00.0000000+00:00",
+                "endDate": "2018-03-19T00:00:00.0000000+00:00",
+                "queryMode": "TradeDate",
+                "showCancelledTransactions": false
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/TransactionQueryParameters"
+              },
+              "example": {
+                "startDate": "2018-03-05T00:00:00.0000000+00:00",
+                "endDate": "2018-03-19T00:00:00.0000000+00:00",
+                "queryMode": "TradeDate",
+                "showCancelledTransactions": false
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/TransactionQueryParameters"
+              },
+              "example": {
+                "startDate": "2018-03-05T00:00:00.0000000+00:00",
+                "endDate": "2018-03-19T00:00:00.0000000+00:00",
+                "queryMode": "TradeDate",
+                "showCancelledTransactions": false
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "The requested transactions from transaction portfolios in the specified portfolio group",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/VersionedResourceListOfOutputTransaction"
+                },
+                "example": {
+                  "version": {
+                    "effectiveFrom": "2018-03-05T00:00:00.0000000+00:00",
+                    "asAtDate": "2018-03-04T23:50:00.0000000+00:00"
+                  },
+                  "values": [
+                    {
+                      "transactionId": "TXN-00001",
+                      "type": "Buy",
+                      "description": "Purchase",
+                      "instrumentIdentifiers": {
+                        "instrument/default/RIC": "RIC.L"
+                      },
+                      "instrumentUid": "LUID_JLH24106",
+                      "transactionDate": "2018-08-04T00:00:00.0000000+00:00",
+                      "settlementDate": "2018-08-06T00:00:00.0000000+00:00",
+                      "units": 1000,
+                      "transactionAmount": 88800,
+                      "transactionPrice": {
+                        "price": 88.8,
+                        "type": "Price"
+                      },
+                      "totalConsideration": {
+                        "amount": 88800,
+                        "currency": "USD"
+                      },
+                      "exchangeRate": 1,
+                      "transactionToPortfolioRate": 0.7648,
+                      "transactionCurrency": "USD",
+                      "properties": {
+                        "transaction/default/TradeToPortfolioRate": {
+                          "key": "Transaction/default/TradeToPortfolioRate",
+                          "value": {
+                            "metricValue": {
+                              "value": 0.765
+                            }
+                          }
+                        },
+                        "transaction/default/SourcePortfolioId": {
+                          "key": "Transaction/default/SourcePortfolioId",
+                          "value": {
+                            "labelValue": "DEMO-PORTFOLIO-ID"
+                          }
+                        },
+                        "transaction/default/SourcePortfolioScope": {
+                          "key": "Transaction/default/SourcePortfolioScope",
+                          "value": {
+                            "labelValue": "DEMO-SCOPE"
+                          }
+                        }
+                      },
+                      "source": "",
+                      "transactionStatus": "Cancelled",
+                      "entryDateTime": "2018-08-04T12:22:06.0000000+00:00",
+                      "cancelDateTime": "2018-08-04T12:25:14.0000000+00:00"
+                    },
+                    {
+                      "transactionId": "TXN-00002",
+                      "type": "Sell",
+                      "description": "Sale",
+                      "instrumentIdentifiers": {
+                        "instrument/default/ClientInternal": "INT:00024106"
+                      },
+                      "instrumentUid": "LUID_OI5JX1V7",
+                      "transactionDate": "2018-08-07T00:00:00.0000000+00:00",
+                      "settlementDate": "2018-08-10T00:00:00.0000000+00:00",
+                      "units": 10000,
+                      "transactionAmount": 1470100,
+                      "transactionPrice": {
+                        "price": 147.01,
+                        "type": "Price"
+                      },
+                      "totalConsideration": {
+                        "amount": 1470100,
+                        "currency": "USD"
+                      },
+                      "exchangeRate": 1,
+                      "transactionToPortfolioRate": 0.772,
+                      "transactionCurrency": "USD",
+                      "properties": {
+                        "transaction/default/TradeToPortfolioRate": {
+                          "key": "Transaction/default/TradeToPortfolioRate",
+                          "value": {
+                            "metricValue": {
+                              "value": 0.772
+                            }
+                          }
+                        },
+                        "transaction/default/SourcePortfolioId": {
+                          "key": "Transaction/default/SourcePortfolioId",
+                          "value": {
+                            "labelValue": "DEMO-PORTFOLIO-ID"
+                          }
+                        },
+                        "transaction/default/SourcePortfolioScope": {
+                          "key": "Transaction/default/SourcePortfolioScope",
+                          "value": {
+                            "labelValue": "DEMO-SCOPE"
+                          }
+                        },
+                        "transaction/default/ResultantHolding": {
+                          "key": "Transaction/default/ResultantHolding",
+                          "value": {
+                            "metricValue": {
+                              "value": 3500
+                            }
+                          }
+                        }
+                      },
+                      "source": "",
+                      "transactionStatus": "Active",
+                      "entryDateTime": "2018-08-07T10:30:12.0000000+00:00",
+                      "realisedGainLoss": [
+                        {
+                          "instrumentUid": "LUID_OI5JX1V7",
+                          "units": 4500,
+                          "purchaseTradeDate": "2018-08-02T00:00:00.0000000+00:00",
+                          "purchaseSettlementDate": "2018-08-05T00:00:00.0000000+00:00",
+                          "purchasePrice": 142.96,
+                          "costTradeCcy": {
+                            "amount": 643320,
+                            "currency": "USD"
+                          },
+                          "costPortfolioCcy": {
+                            "amount": 493619.44,
+                            "currency": "GBP"
+                          },
+                          "realisedTradeCcy": {
+                            "amount": 18225,
+                            "currency": "USD"
+                          },
+                          "realisedTotal": {
+                            "amount": 17093.3,
+                            "currency": "GBP"
+                          },
+                          "realisedMarket": {
+                            "amount": 14069.7,
+                            "currency": "GBP"
+                          },
+                          "realisedCurrency": {
+                            "amount": 3023.6,
+                            "currency": "GBP"
+                          }
+                        },
+                        {
+                          "instrumentUid": "LUID_OI5JX1V7",
+                          "units": 4500,
+                          "purchaseTradeDate": "2018-08-03T00:00:00.0000000+00:00",
+                          "purchaseSettlementDate": "2018-08-06T00:00:00.0000000+00:00",
+                          "purchasePrice": 147.7,
+                          "costTradeCcy": {
+                            "amount": 664650,
+                            "currency": "USD"
+                          },
+                          "costPortfolioCcy": {
+                            "amount": 510517.67,
+                            "currency": "GBP"
+                          },
+                          "realisedTradeCcy": {
+                            "amount": -3105,
+                            "currency": "USD"
+                          },
+                          "realisedTotal": {
+                            "amount": 195.07,
+                            "currency": "GBP"
+                          },
+                          "realisedMarket": {
+                            "amount": -2397.06,
+                            "currency": "GBP"
+                          },
+                          "realisedCurrency": {
+                            "amount": 2592.13,
+                            "currency": "GBP"
+                          }
+                        },
+                        {
+                          "instrumentUid": "LUID_OI5JX1V7",
+                          "units": 1000,
+                          "purchaseTradeDate": "2018-08-06T00:00:00.0000000+00:00",
+                          "purchaseSettlementDate": "2018-08-08T00:00:00.0000000+00:00",
+                          "purchasePrice": 146.03,
+                          "costTradeCcy": {
+                            "amount": 146030,
+                            "currency": "USD"
+                          },
+                          "costPortfolioCcy": {
+                            "amount": 112851.98,
+                            "currency": "GBP"
+                          },
+                          "realisedTradeCcy": {
+                            "amount": 980,
+                            "currency": "USD"
+                          },
+                          "realisedTotal": {
+                            "amount": 639.74,
+                            "currency": "GBP"
+                          },
+                          "realisedMarket": {
+                            "amount": 756.56,
+                            "currency": "GBP"
+                          },
+                          "realisedCurrency": {
+                            "amount": -116.82,
+                            "currency": "GBP"
+                          }
+                        }
+                      ]
+                    }
+                  ],
+                  "href": "http://example.com",
+                  "links": []
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/VersionedResourceListOfOutputTransaction"
+                },
+                "example": {
+                  "version": {
+                    "effectiveFrom": "2018-03-05T00:00:00.0000000+00:00",
+                    "asAtDate": "2018-03-04T23:50:00.0000000+00:00"
+                  },
+                  "values": [
+                    {
+                      "transactionId": "TXN-00001",
+                      "type": "Buy",
+                      "description": "Purchase",
+                      "instrumentIdentifiers": {
+                        "instrument/default/RIC": "RIC.L"
+                      },
+                      "instrumentUid": "LUID_JLH24106",
+                      "transactionDate": "2018-08-04T00:00:00.0000000+00:00",
+                      "settlementDate": "2018-08-06T00:00:00.0000000+00:00",
+                      "units": 1000,
+                      "transactionAmount": 88800,
+                      "transactionPrice": {
+                        "price": 88.8,
+                        "type": "Price"
+                      },
+                      "totalConsideration": {
+                        "amount": 88800,
+                        "currency": "USD"
+                      },
+                      "exchangeRate": 1,
+                      "transactionToPortfolioRate": 0.7648,
+                      "transactionCurrency": "USD",
+                      "properties": {
+                        "transaction/default/TradeToPortfolioRate": {
+                          "key": "Transaction/default/TradeToPortfolioRate",
+                          "value": {
+                            "metricValue": {
+                              "value": 0.765
+                            }
+                          }
+                        },
+                        "transaction/default/SourcePortfolioId": {
+                          "key": "Transaction/default/SourcePortfolioId",
+                          "value": {
+                            "labelValue": "DEMO-PORTFOLIO-ID"
+                          }
+                        },
+                        "transaction/default/SourcePortfolioScope": {
+                          "key": "Transaction/default/SourcePortfolioScope",
+                          "value": {
+                            "labelValue": "DEMO-SCOPE"
+                          }
+                        }
+                      },
+                      "source": "",
+                      "transactionStatus": "Cancelled",
+                      "entryDateTime": "2018-08-04T12:22:06.0000000+00:00",
+                      "cancelDateTime": "2018-08-04T12:25:14.0000000+00:00"
+                    },
+                    {
+                      "transactionId": "TXN-00002",
+                      "type": "Sell",
+                      "description": "Sale",
+                      "instrumentIdentifiers": {
+                        "instrument/default/ClientInternal": "INT:00024106"
+                      },
+                      "instrumentUid": "LUID_OI5JX1V7",
+                      "transactionDate": "2018-08-07T00:00:00.0000000+00:00",
+                      "settlementDate": "2018-08-10T00:00:00.0000000+00:00",
+                      "units": 10000,
+                      "transactionAmount": 1470100,
+                      "transactionPrice": {
+                        "price": 147.01,
+                        "type": "Price"
+                      },
+                      "totalConsideration": {
+                        "amount": 1470100,
+                        "currency": "USD"
+                      },
+                      "exchangeRate": 1,
+                      "transactionToPortfolioRate": 0.772,
+                      "transactionCurrency": "USD",
+                      "properties": {
+                        "transaction/default/TradeToPortfolioRate": {
+                          "key": "Transaction/default/TradeToPortfolioRate",
+                          "value": {
+                            "metricValue": {
+                              "value": 0.772
+                            }
+                          }
+                        },
+                        "transaction/default/SourcePortfolioId": {
+                          "key": "Transaction/default/SourcePortfolioId",
+                          "value": {
+                            "labelValue": "DEMO-PORTFOLIO-ID"
+                          }
+                        },
+                        "transaction/default/SourcePortfolioScope": {
+                          "key": "Transaction/default/SourcePortfolioScope",
+                          "value": {
+                            "labelValue": "DEMO-SCOPE"
+                          }
+                        },
+                        "transaction/default/ResultantHolding": {
+                          "key": "Transaction/default/ResultantHolding",
+                          "value": {
+                            "metricValue": {
+                              "value": 3500
+                            }
+                          }
+                        }
+                      },
+                      "source": "",
+                      "transactionStatus": "Active",
+                      "entryDateTime": "2018-08-07T10:30:12.0000000+00:00",
+                      "realisedGainLoss": [
+                        {
+                          "instrumentUid": "LUID_OI5JX1V7",
+                          "units": 4500,
+                          "purchaseTradeDate": "2018-08-02T00:00:00.0000000+00:00",
+                          "purchaseSettlementDate": "2018-08-05T00:00:00.0000000+00:00",
+                          "purchasePrice": 142.96,
+                          "costTradeCcy": {
+                            "amount": 643320,
+                            "currency": "USD"
+                          },
+                          "costPortfolioCcy": {
+                            "amount": 493619.44,
+                            "currency": "GBP"
+                          },
+                          "realisedTradeCcy": {
+                            "amount": 18225,
+                            "currency": "USD"
+                          },
+                          "realisedTotal": {
+                            "amount": 17093.3,
+                            "currency": "GBP"
+                          },
+                          "realisedMarket": {
+                            "amount": 14069.7,
+                            "currency": "GBP"
+                          },
+                          "realisedCurrency": {
+                            "amount": 3023.6,
+                            "currency": "GBP"
+                          }
+                        },
+                        {
+                          "instrumentUid": "LUID_OI5JX1V7",
+                          "units": 4500,
+                          "purchaseTradeDate": "2018-08-03T00:00:00.0000000+00:00",
+                          "purchaseSettlementDate": "2018-08-06T00:00:00.0000000+00:00",
+                          "purchasePrice": 147.7,
+                          "costTradeCcy": {
+                            "amount": 664650,
+                            "currency": "USD"
+                          },
+                          "costPortfolioCcy": {
+                            "amount": 510517.67,
+                            "currency": "GBP"
+                          },
+                          "realisedTradeCcy": {
+                            "amount": -3105,
+                            "currency": "USD"
+                          },
+                          "realisedTotal": {
+                            "amount": 195.07,
+                            "currency": "GBP"
+                          },
+                          "realisedMarket": {
+                            "amount": -2397.06,
+                            "currency": "GBP"
+                          },
+                          "realisedCurrency": {
+                            "amount": 2592.13,
+                            "currency": "GBP"
+                          }
+                        },
+                        {
+                          "instrumentUid": "LUID_OI5JX1V7",
+                          "units": 1000,
+                          "purchaseTradeDate": "2018-08-06T00:00:00.0000000+00:00",
+                          "purchaseSettlementDate": "2018-08-08T00:00:00.0000000+00:00",
+                          "purchasePrice": 146.03,
+                          "costTradeCcy": {
+                            "amount": 146030,
+                            "currency": "USD"
+                          },
+                          "costPortfolioCcy": {
+                            "amount": 112851.98,
+                            "currency": "GBP"
+                          },
+                          "realisedTradeCcy": {
+                            "amount": 980,
+                            "currency": "USD"
+                          },
+                          "realisedTotal": {
+                            "amount": 639.74,
+                            "currency": "GBP"
+                          },
+                          "realisedMarket": {
+                            "amount": 756.56,
+                            "currency": "GBP"
+                          },
+                          "realisedCurrency": {
+                            "amount": -116.82,
+                            "currency": "GBP"
+                          }
+                        }
+                      ]
+                    }
+                  ],
+                  "href": "http://example.com",
+                  "links": []
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/VersionedResourceListOfOutputTransaction"
+                },
+                "example": {
+                  "version": {
+                    "effectiveFrom": "2018-03-05T00:00:00.0000000+00:00",
+                    "asAtDate": "2018-03-04T23:50:00.0000000+00:00"
+                  },
+                  "values": [
+                    {
+                      "transactionId": "TXN-00001",
+                      "type": "Buy",
+                      "description": "Purchase",
+                      "instrumentIdentifiers": {
+                        "instrument/default/RIC": "RIC.L"
+                      },
+                      "instrumentUid": "LUID_JLH24106",
+                      "transactionDate": "2018-08-04T00:00:00.0000000+00:00",
+                      "settlementDate": "2018-08-06T00:00:00.0000000+00:00",
+                      "units": 1000,
+                      "transactionAmount": 88800,
+                      "transactionPrice": {
+                        "price": 88.8,
+                        "type": "Price"
+                      },
+                      "totalConsideration": {
+                        "amount": 88800,
+                        "currency": "USD"
+                      },
+                      "exchangeRate": 1,
+                      "transactionToPortfolioRate": 0.7648,
+                      "transactionCurrency": "USD",
+                      "properties": {
+                        "transaction/default/TradeToPortfolioRate": {
+                          "key": "Transaction/default/TradeToPortfolioRate",
+                          "value": {
+                            "metricValue": {
+                              "value": 0.765
+                            }
+                          }
+                        },
+                        "transaction/default/SourcePortfolioId": {
+                          "key": "Transaction/default/SourcePortfolioId",
+                          "value": {
+                            "labelValue": "DEMO-PORTFOLIO-ID"
+                          }
+                        },
+                        "transaction/default/SourcePortfolioScope": {
+                          "key": "Transaction/default/SourcePortfolioScope",
+                          "value": {
+                            "labelValue": "DEMO-SCOPE"
+                          }
+                        }
+                      },
+                      "source": "",
+                      "transactionStatus": "Cancelled",
+                      "entryDateTime": "2018-08-04T12:22:06.0000000+00:00",
+                      "cancelDateTime": "2018-08-04T12:25:14.0000000+00:00"
+                    },
+                    {
+                      "transactionId": "TXN-00002",
+                      "type": "Sell",
+                      "description": "Sale",
+                      "instrumentIdentifiers": {
+                        "instrument/default/ClientInternal": "INT:00024106"
+                      },
+                      "instrumentUid": "LUID_OI5JX1V7",
+                      "transactionDate": "2018-08-07T00:00:00.0000000+00:00",
+                      "settlementDate": "2018-08-10T00:00:00.0000000+00:00",
+                      "units": 10000,
+                      "transactionAmount": 1470100,
+                      "transactionPrice": {
+                        "price": 147.01,
+                        "type": "Price"
+                      },
+                      "totalConsideration": {
+                        "amount": 1470100,
+                        "currency": "USD"
+                      },
+                      "exchangeRate": 1,
+                      "transactionToPortfolioRate": 0.772,
+                      "transactionCurrency": "USD",
+                      "properties": {
+                        "transaction/default/TradeToPortfolioRate": {
+                          "key": "Transaction/default/TradeToPortfolioRate",
+                          "value": {
+                            "metricValue": {
+                              "value": 0.772
+                            }
+                          }
+                        },
+                        "transaction/default/SourcePortfolioId": {
+                          "key": "Transaction/default/SourcePortfolioId",
+                          "value": {
+                            "labelValue": "DEMO-PORTFOLIO-ID"
+                          }
+                        },
+                        "transaction/default/SourcePortfolioScope": {
+                          "key": "Transaction/default/SourcePortfolioScope",
+                          "value": {
+                            "labelValue": "DEMO-SCOPE"
+                          }
+                        },
+                        "transaction/default/ResultantHolding": {
+                          "key": "Transaction/default/ResultantHolding",
+                          "value": {
+                            "metricValue": {
+                              "value": 3500
+                            }
+                          }
+                        }
+                      },
+                      "source": "",
+                      "transactionStatus": "Active",
+                      "entryDateTime": "2018-08-07T10:30:12.0000000+00:00",
+                      "realisedGainLoss": [
+                        {
+                          "instrumentUid": "LUID_OI5JX1V7",
+                          "units": 4500,
+                          "purchaseTradeDate": "2018-08-02T00:00:00.0000000+00:00",
+                          "purchaseSettlementDate": "2018-08-05T00:00:00.0000000+00:00",
+                          "purchasePrice": 142.96,
+                          "costTradeCcy": {
+                            "amount": 643320,
+                            "currency": "USD"
+                          },
+                          "costPortfolioCcy": {
+                            "amount": 493619.44,
+                            "currency": "GBP"
+                          },
+                          "realisedTradeCcy": {
+                            "amount": 18225,
+                            "currency": "USD"
+                          },
+                          "realisedTotal": {
+                            "amount": 17093.3,
+                            "currency": "GBP"
+                          },
+                          "realisedMarket": {
+                            "amount": 14069.7,
+                            "currency": "GBP"
+                          },
+                          "realisedCurrency": {
+                            "amount": 3023.6,
+                            "currency": "GBP"
+                          }
+                        },
+                        {
+                          "instrumentUid": "LUID_OI5JX1V7",
+                          "units": 4500,
+                          "purchaseTradeDate": "2018-08-03T00:00:00.0000000+00:00",
+                          "purchaseSettlementDate": "2018-08-06T00:00:00.0000000+00:00",
+                          "purchasePrice": 147.7,
+                          "costTradeCcy": {
+                            "amount": 664650,
+                            "currency": "USD"
+                          },
+                          "costPortfolioCcy": {
+                            "amount": 510517.67,
+                            "currency": "GBP"
+                          },
+                          "realisedTradeCcy": {
+                            "amount": -3105,
+                            "currency": "USD"
+                          },
+                          "realisedTotal": {
+                            "amount": 195.07,
+                            "currency": "GBP"
+                          },
+                          "realisedMarket": {
+                            "amount": -2397.06,
+                            "currency": "GBP"
+                          },
+                          "realisedCurrency": {
+                            "amount": 2592.13,
+                            "currency": "GBP"
+                          }
+                        },
+                        {
+                          "instrumentUid": "LUID_OI5JX1V7",
+                          "units": 1000,
+                          "purchaseTradeDate": "2018-08-06T00:00:00.0000000+00:00",
+                          "purchaseSettlementDate": "2018-08-08T00:00:00.0000000+00:00",
+                          "purchasePrice": 146.03,
+                          "costTradeCcy": {
+                            "amount": 146030,
+                            "currency": "USD"
+                          },
+                          "costPortfolioCcy": {
+                            "amount": 112851.98,
+                            "currency": "GBP"
+                          },
+                          "realisedTradeCcy": {
+                            "amount": 980,
+                            "currency": "USD"
+                          },
+                          "realisedTotal": {
+                            "amount": 639.74,
+                            "currency": "GBP"
+                          },
+                          "realisedMarket": {
+                            "amount": 756.56,
+                            "currency": "GBP"
+                          },
+                          "realisedCurrency": {
+                            "amount": -116.82,
+                            "currency": "GBP"
+                          }
+                        }
+                      ]
+                    }
+                  ],
+                  "href": "http://example.com",
+                  "links": []
                 }
               }
             }
@@ -19486,7 +20846,7 @@
         "description": "OAuth2 Implicit Grant",
         "flows": {
           "implicit": {
-            "authorizationUrl": "https://lusid.okta.com/oauth2/default/v1/authorize",
+            "authorizationUrl": "https://dummyurl.lusid.com/",
             "scopes": {}
           }
         }
