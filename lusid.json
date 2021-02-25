@@ -9,7 +9,7 @@
       "url": "https://www.finbourne.com",
       "email": "info@finbourne.com"
     },
-    "version": "0.11.2650",
+    "version": "0.11.2651",
     "x-logo": {
       "url": "https://content.finbourne.com/LUSID-header.png",
       "backgroundColor": "#415464"
@@ -17,7 +17,7 @@
   },
   "servers": [
     {
-      "url": "https://fbn-prd.lusid.com/api"
+      "url": "http://local-unit-test-server.lusid.com:49891"
     }
   ],
   "paths": {
@@ -10649,6 +10649,203 @@
       }
     },
     "/api/search/propertydefinitions": {
+      "get": {
+        "tags": [
+          "Search"
+        ],
+        "summary": "[EARLY ACCESS] Search Property Definitions",
+        "description": "Search through all Property Definitions",
+        "operationId": "SearchProperties",
+        "parameters": [
+          {
+            "name": "search",
+            "in": "query",
+            "description": "A parameter used for searching any field. Wildcards(*) are supported at the end of words (e.g. 'Port*'). Read more about filtering results from LUSID here https://support.lusid.com/filtering-results-from-lusid.",
+            "schema": {
+              "type": "string",
+              "description": "A parameter used for searching any field. Wildcards(*) are supported at the end of words (e.g. 'Port*'). Read more about filtering results from LUSID here https://support.lusid.com/filtering-results-from-lusid.",
+              "nullable": true
+            }
+          },
+          {
+            "name": "filter",
+            "in": "query",
+            "description": "Expression to filter the result set. \r\nFor example, to filter on the Value Type, use \"valueType eq 'string'\"\r\nRead more about filtering results from LUSID here https://support.lusid.com/filtering-results-from-lusid.",
+            "schema": {
+              "type": "string",
+              "description": "Expression to filter the result set. \r\nFor example, to filter on the Value Type, use \"valueType eq 'string'\"\r\nRead more about filtering results from LUSID here https://support.lusid.com/filtering-results-from-lusid.",
+              "nullable": true
+            }
+          },
+          {
+            "name": "sortBy",
+            "in": "query",
+            "description": "Order the results by these fields. Use use the '-' sign to denote descending order e.g. -MyFieldName. Multiple fields can be denoted by a comma e.g. -MyFieldName,AnotherFieldName,-AFurtherFieldName",
+            "schema": {
+              "type": "string",
+              "description": "Order the results by these fields. Use use the '-' sign to denote descending order e.g. -MyFieldName. Multiple fields can be denoted by a comma e.g. -MyFieldName,AnotherFieldName,-AFurtherFieldName",
+              "nullable": true
+            }
+          },
+          {
+            "name": "limit",
+            "in": "query",
+            "description": "When paginating, only return this number of records",
+            "schema": {
+              "type": "integer",
+              "description": "When paginating, only return this number of records",
+              "format": "int32"
+            },
+            "x-nullable": true
+          },
+          {
+            "name": "page",
+            "in": "query",
+            "description": "Encoded page string returned from a previous search result that will retrieve the next page of data. When this field is supplied, filter, sortby and search fields should not be supplied.",
+            "schema": {
+              "type": "string",
+              "description": "Encoded page string returned from a previous search result that will retrieve the next page of data. When this field is supplied, filter, sortby and search fields should not be supplied.",
+              "nullable": true
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/PagedResourceListOfPropertyDefinitionSearchResult"
+                },
+                "example": {
+                  "values": [
+                    {
+                      "href": "https://example.lusid.com/api/properties/demo-scope/demo-code",
+                      "key": "Portfolio/default/Country",
+                      "valueType": "String",
+                      "displayName": "Country",
+                      "dataTypeId": {
+                        "scope": "demo-scope",
+                        "code": "demo-code"
+                      },
+                      "type": "Information",
+                      "unitSchema": "Basic",
+                      "domain": "Portfolio",
+                      "scope": "default",
+                      "code": "Country",
+                      "valueRequired": false,
+                      "lifeTime": "Perpetual",
+                      "constraintStyle": "Property",
+                      "propertyDefinitionType": "ValueProperty",
+                      "propertyDescription": "A demonstration property definition search result"
+                    }
+                  ],
+                  "href": "https://example.lusid.com/api/properties",
+                  "links": []
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PagedResourceListOfPropertyDefinitionSearchResult"
+                },
+                "example": {
+                  "values": [
+                    {
+                      "href": "https://example.lusid.com/api/properties/demo-scope/demo-code",
+                      "key": "Portfolio/default/Country",
+                      "valueType": "String",
+                      "displayName": "Country",
+                      "dataTypeId": {
+                        "scope": "demo-scope",
+                        "code": "demo-code"
+                      },
+                      "type": "Information",
+                      "unitSchema": "Basic",
+                      "domain": "Portfolio",
+                      "scope": "default",
+                      "code": "Country",
+                      "valueRequired": false,
+                      "lifeTime": "Perpetual",
+                      "constraintStyle": "Property",
+                      "propertyDefinitionType": "ValueProperty",
+                      "propertyDescription": "A demonstration property definition search result"
+                    }
+                  ],
+                  "href": "https://example.lusid.com/api/properties",
+                  "links": []
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PagedResourceListOfPropertyDefinitionSearchResult"
+                },
+                "example": {
+                  "values": [
+                    {
+                      "href": "https://example.lusid.com/api/properties/demo-scope/demo-code",
+                      "key": "Portfolio/default/Country",
+                      "valueType": "String",
+                      "displayName": "Country",
+                      "dataTypeId": {
+                        "scope": "demo-scope",
+                        "code": "demo-code"
+                      },
+                      "type": "Information",
+                      "unitSchema": "Basic",
+                      "domain": "Portfolio",
+                      "scope": "default",
+                      "code": "Country",
+                      "valueRequired": false,
+                      "lifeTime": "Perpetual",
+                      "constraintStyle": "Property",
+                      "propertyDefinitionType": "ValueProperty",
+                      "propertyDescription": "A demonstration property definition search result"
+                    }
+                  ],
+                  "href": "https://example.lusid.com/api/properties",
+                  "links": []
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "The details of the input related failure",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/LusidValidationProblemDetails"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/LusidValidationProblemDetails"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/LusidValidationProblemDetails"
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "Error response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/LusidProblemDetails"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "oauth2": []
+          }
+        ],
+        "x-fbn-apistatus": "EarlyAccess"
+      },
       "post": {
         "tags": [
           "Search"
@@ -19708,6 +19905,190 @@
         },
         "additionalProperties": false
       },
+      "PropertyDefinitionSearchResult": {
+        "type": "object",
+        "properties": {
+          "href": {
+            "type": "string",
+            "description": "The specific Uniform Resource Identifier (URI) for this resource at the requested effective and asAt datetime.",
+            "format": "uri",
+            "nullable": true
+          },
+          "key": {
+            "type": "string",
+            "description": "The property key which uniquely identifies the property. The format for the property key is {domain}/{scope}/{code}, e.g. 'Portfolio/Manager/Id'.",
+            "nullable": true
+          },
+          "valueType": {
+            "enum": [
+              "String",
+              "Int",
+              "Decimal",
+              "DateTime",
+              "Boolean",
+              "Map",
+              "List",
+              "PropertyArray",
+              "Percentage",
+              "Code",
+              "Id",
+              "Uri",
+              "CurrencyAndAmount",
+              "TradePrice",
+              "Currency",
+              "MetricValue",
+              "ResourceId",
+              "ResultValue",
+              "CutLocalTime",
+              "DateOrCutLabel"
+            ],
+            "type": "string",
+            "description": "The type of values that can be associated with this property. This is defined by the property's data type. The available values are: String, Int, Decimal, DateTime, Boolean, Map, List, PropertyArray, Percentage, Code, Id, Uri, CurrencyAndAmount, TradePrice, Currency, MetricValue, ResourceId, ResultValue, CutLocalTime, DateOrCutLabel"
+          },
+          "displayName": {
+            "type": "string",
+            "description": "The display name of the property.",
+            "nullable": true
+          },
+          "dataTypeId": {
+            "$ref": "#/components/schemas/ResourceId"
+          },
+          "type": {
+            "enum": [
+              "Label",
+              "Metric",
+              "Information"
+            ],
+            "type": "string",
+            "description": "The type of the property. The available values are: Label, Metric, Information"
+          },
+          "unitSchema": {
+            "enum": [
+              "NoUnits",
+              "Basic",
+              "Iso4217Currency"
+            ],
+            "type": "string",
+            "description": "The units that can be associated with the property's values. This is defined by the property's data type. The available values are: NoUnits, Basic, Iso4217Currency"
+          },
+          "domain": {
+            "enum": [
+              "NotDefined",
+              "Transaction",
+              "Portfolio",
+              "Holding",
+              "ReferenceHolding",
+              "TransactionConfiguration",
+              "Instrument",
+              "CutLabelDefinition",
+              "Analytic",
+              "PortfolioGroup",
+              "Person",
+              "AccessMetadata",
+              "Order",
+              "UnitResult",
+              "MarketData",
+              "ConfigurationRecipe",
+              "Allocation",
+              "Calendar",
+              "LegalEntity"
+            ],
+            "type": "string",
+            "description": "The domain that the property exists in. The available values are: NotDefined, Transaction, Portfolio, Holding, ReferenceHolding, TransactionConfiguration, Instrument, CutLabelDefinition, Analytic, PortfolioGroup, Person, AccessMetadata, Order, UnitResult, MarketData, ConfigurationRecipe, Allocation, Calendar, LegalEntity"
+          },
+          "scope": {
+            "type": "string",
+            "description": "The scope that the property exists in.",
+            "nullable": true,
+            "readOnly": true
+          },
+          "code": {
+            "type": "string",
+            "description": "The code of the property. Together with the domain and scope this uniquely identifies the property.",
+            "nullable": true,
+            "readOnly": true
+          },
+          "valueRequired": {
+            "type": "boolean",
+            "description": "Whether or not a value is always required for this property."
+          },
+          "lifeTime": {
+            "enum": [
+              "Perpetual",
+              "TimeVariant"
+            ],
+            "type": "string",
+            "description": "Describes how the property's values can change over time. The available values are: Perpetual, TimeVariant"
+          },
+          "constraintStyle": {
+            "type": "string",
+            "description": "Describes the uniqueness and cardinality of the property for entity objects under the property domain specified in Key.",
+            "nullable": true
+          },
+          "propertyDefinitionType": {
+            "enum": [
+              "ValueProperty",
+              "DerivedDefinition"
+            ],
+            "type": "string",
+            "description": "The definition type (DerivedDefinition or Definition). The available values are: ValueProperty, DerivedDefinition"
+          },
+          "propertyDescription": {
+            "type": "string",
+            "description": "A brief description of what a property of this property definition contains.",
+            "nullable": true
+          },
+          "derivationFormula": {
+            "type": "string",
+            "description": "The rule that defines how data is composed for a derived property.",
+            "nullable": true
+          },
+          "links": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Link"
+            },
+            "nullable": true
+          }
+        },
+        "additionalProperties": false,
+        "description": "A property definition search result"
+      },
+      "PagedResourceListOfPropertyDefinitionSearchResult": {
+        "required": [
+          "values"
+        ],
+        "type": "object",
+        "properties": {
+          "nextPage": {
+            "type": "string",
+            "nullable": true
+          },
+          "previousPage": {
+            "type": "string",
+            "nullable": true
+          },
+          "values": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/PropertyDefinitionSearchResult"
+            }
+          },
+          "href": {
+            "type": "string",
+            "format": "uri",
+            "nullable": true
+          },
+          "links": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Link"
+            },
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
       "CutLocalTime": {
         "type": "object",
         "properties": {
@@ -20846,7 +21227,7 @@
         "description": "OAuth2 Implicit Grant",
         "flows": {
           "implicit": {
-            "authorizationUrl": "https://lusid.okta.com/oauth2/default/v1/authorize",
+            "authorizationUrl": "https://dummyurl.lusid.com/",
             "scopes": {}
           }
         }

@@ -1,6 +1,6 @@
 # lusid.SearchApi
 
-All URIs are relative to *https://fbn-prd.lusid.com/api*
+All URIs are relative to *http://local-unit-test-server.lusid.com:49891*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
@@ -9,6 +9,7 @@ Method | HTTP request | Description
 [**properties_search**](SearchApi.md#properties_search) | **POST** /api/search/propertydefinitions | [DEPRECATED] Search property definitions
 [**search_portfolio_groups**](SearchApi.md#search_portfolio_groups) | **GET** /api/search/portfoliogroups | [EARLY ACCESS] Search Portfolio Groups
 [**search_portfolios**](SearchApi.md#search_portfolios) | **GET** /api/search/portfolios | [EARLY ACCESS] Search Portfolios
+[**search_properties**](SearchApi.md#search_properties) | **GET** /api/search/propertydefinitions | [EARLY ACCESS] Search Property Definitions
 
 
 # **portfolio_groups_search**
@@ -31,8 +32,8 @@ configuration = lusid.Configuration()
 # Configure OAuth2 access token for authorization: oauth2
 configuration.access_token = 'YOUR_ACCESS_TOKEN'
 
-# Defining host is optional and default to https://fbn-prd.lusid.com/api
-configuration.host = "https://fbn-prd.lusid.com/api"
+# Defining host is optional and default to http://local-unit-test-server.lusid.com:49891
+configuration.host = "http://local-unit-test-server.lusid.com:49891"
 # Create an instance of the API class
 api_instance = lusid.SearchApi(lusid.ApiClient(configuration))
 body = None # object | The search query to use. Read more about search queries in LUSID here https://support.lusid.com/constructing-a-search-request.
@@ -95,8 +96,8 @@ configuration = lusid.Configuration()
 # Configure OAuth2 access token for authorization: oauth2
 configuration.access_token = 'YOUR_ACCESS_TOKEN'
 
-# Defining host is optional and default to https://fbn-prd.lusid.com/api
-configuration.host = "https://fbn-prd.lusid.com/api"
+# Defining host is optional and default to http://local-unit-test-server.lusid.com:49891
+configuration.host = "http://local-unit-test-server.lusid.com:49891"
 # Create an instance of the API class
 api_instance = lusid.SearchApi(lusid.ApiClient(configuration))
 body = None # object | The search query to use. Read more about search queries in LUSID here https://support.lusid.com/constructing-a-search-request.
@@ -159,8 +160,8 @@ configuration = lusid.Configuration()
 # Configure OAuth2 access token for authorization: oauth2
 configuration.access_token = 'YOUR_ACCESS_TOKEN'
 
-# Defining host is optional and default to https://fbn-prd.lusid.com/api
-configuration.host = "https://fbn-prd.lusid.com/api"
+# Defining host is optional and default to http://local-unit-test-server.lusid.com:49891
+configuration.host = "http://local-unit-test-server.lusid.com:49891"
 # Create an instance of the API class
 api_instance = lusid.SearchApi(lusid.ApiClient(configuration))
 body = None # object | The search query to use. Read more about search queries in LUSID here https://support.lusid.com/constructing-a-search-request.
@@ -223,8 +224,8 @@ configuration = lusid.Configuration()
 # Configure OAuth2 access token for authorization: oauth2
 configuration.access_token = 'YOUR_ACCESS_TOKEN'
 
-# Defining host is optional and default to https://fbn-prd.lusid.com/api
-configuration.host = "https://fbn-prd.lusid.com/api"
+# Defining host is optional and default to http://local-unit-test-server.lusid.com:49891
+configuration.host = "http://local-unit-test-server.lusid.com:49891"
 # Create an instance of the API class
 api_instance = lusid.SearchApi(lusid.ApiClient(configuration))
 search = 'search_example' # str | A parameter used for searching any portfolio group field. Wildcards(*) are supported at the end of words (e.g. 'Port*'). Read more about filtering results from LUSID here https://support.lusid.com/filtering-results-from-lusid. (optional)
@@ -293,8 +294,8 @@ configuration = lusid.Configuration()
 # Configure OAuth2 access token for authorization: oauth2
 configuration.access_token = 'YOUR_ACCESS_TOKEN'
 
-# Defining host is optional and default to https://fbn-prd.lusid.com/api
-configuration.host = "https://fbn-prd.lusid.com/api"
+# Defining host is optional and default to http://local-unit-test-server.lusid.com:49891
+configuration.host = "http://local-unit-test-server.lusid.com:49891"
 # Create an instance of the API class
 api_instance = lusid.SearchApi(lusid.ApiClient(configuration))
 search = 'search_example' # str | A parameter used for searching any portfolio field. Wildcards(*) are supported at the end of words (e.g. 'Port*'). Read more about filtering results from LUSID here https://support.lusid.com/filtering-results-from-lusid. (optional)
@@ -324,6 +325,76 @@ Name | Type | Description  | Notes
 ### Return type
 
 [**PagedResourceListOfPortfolioSearchResult**](PagedResourceListOfPortfolioSearchResult.md)
+
+### Authorization
+
+[oauth2](../README.md#oauth2)
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: text/plain, application/json, text/json
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | Success |  -  |
+**400** | The details of the input related failure |  -  |
+**0** | Error response |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **search_properties**
+> PagedResourceListOfPropertyDefinitionSearchResult search_properties(search=search, filter=filter, sort_by=sort_by, limit=limit, page=page)
+
+[EARLY ACCESS] Search Property Definitions
+
+Search through all Property Definitions
+
+### Example
+
+* OAuth Authentication (oauth2):
+```python
+from __future__ import print_function
+import time
+import lusid
+from lusid.rest import ApiException
+from pprint import pprint
+configuration = lusid.Configuration()
+# Configure OAuth2 access token for authorization: oauth2
+configuration.access_token = 'YOUR_ACCESS_TOKEN'
+
+# Defining host is optional and default to http://local-unit-test-server.lusid.com:49891
+configuration.host = "http://local-unit-test-server.lusid.com:49891"
+# Create an instance of the API class
+api_instance = lusid.SearchApi(lusid.ApiClient(configuration))
+search = 'search_example' # str | A parameter used for searching any field. Wildcards(*) are supported at the end of words (e.g. 'Port*'). Read more about filtering results from LUSID here https://support.lusid.com/filtering-results-from-lusid. (optional)
+filter = 'filter_example' # str | Expression to filter the result set.   For example, to filter on the Value Type, use \"valueType eq 'string'\"  Read more about filtering results from LUSID here https://support.lusid.com/filtering-results-from-lusid. (optional)
+sort_by = 'sort_by_example' # str | Order the results by these fields. Use use the '-' sign to denote descending order e.g. -MyFieldName. Multiple fields can be denoted by a comma e.g. -MyFieldName,AnotherFieldName,-AFurtherFieldName (optional)
+limit = 56 # int | When paginating, only return this number of records (optional)
+page = 'page_example' # str | Encoded page string returned from a previous search result that will retrieve the next page of data. When this field is supplied, filter, sortby and search fields should not be supplied. (optional)
+
+try:
+    # [EARLY ACCESS] Search Property Definitions
+    api_response = api_instance.search_properties(search=search, filter=filter, sort_by=sort_by, limit=limit, page=page)
+    pprint(api_response)
+except ApiException as e:
+    print("Exception when calling SearchApi->search_properties: %s\n" % e)
+```
+
+### Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **search** | **str**| A parameter used for searching any field. Wildcards(*) are supported at the end of words (e.g. &#39;Port*&#39;). Read more about filtering results from LUSID here https://support.lusid.com/filtering-results-from-lusid. | [optional] 
+ **filter** | **str**| Expression to filter the result set.   For example, to filter on the Value Type, use \&quot;valueType eq &#39;string&#39;\&quot;  Read more about filtering results from LUSID here https://support.lusid.com/filtering-results-from-lusid. | [optional] 
+ **sort_by** | **str**| Order the results by these fields. Use use the &#39;-&#39; sign to denote descending order e.g. -MyFieldName. Multiple fields can be denoted by a comma e.g. -MyFieldName,AnotherFieldName,-AFurtherFieldName | [optional] 
+ **limit** | **int**| When paginating, only return this number of records | [optional] 
+ **page** | **str**| Encoded page string returned from a previous search result that will retrieve the next page of data. When this field is supplied, filter, sortby and search fields should not be supplied. | [optional] 
+
+### Return type
+
+[**PagedResourceListOfPropertyDefinitionSearchResult**](PagedResourceListOfPropertyDefinitionSearchResult.md)
 
 ### Authorization
 
