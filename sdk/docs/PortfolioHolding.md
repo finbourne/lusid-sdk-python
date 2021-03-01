@@ -7,7 +7,6 @@ Name | Type | Description | Notes
 **sub_holding_keys** | [**dict(str, PerpetualProperty)**](PerpetualProperty.md) | The sub-holding properties which identify the holding. Each property will be from the &#39;Transaction&#39; domain. These are configured when a transaction portfolio is created. | [optional] 
 **properties** | [**dict(str, ModelProperty)**](ModelProperty.md) | The properties which have been requested to be decorated onto the holding. These will be from the &#39;Instrument&#39; or &#39;Holding&#39; domain. | [optional] 
 **holding_type** | **str** | The type of the holding e.g. Position, Balance, CashCommitment, Receivable, ForwardFX etc. | 
-**currency** | **str** | The holding currency. | 
 **units** | **float** | The total number of units of the holding. | 
 **settled_units** | **float** | The total number of settled units of the holding. | 
 **cost** | [**CurrencyAndAmount**](CurrencyAndAmount.md) |  | 

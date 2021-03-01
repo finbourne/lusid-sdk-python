@@ -9,7 +9,7 @@
       "url": "https://www.finbourne.com",
       "email": "info@finbourne.com"
     },
-    "version": "0.11.2666",
+    "version": "0.11.2667",
     "x-logo": {
       "url": "https://content.finbourne.com/LUSID-header.png",
       "backgroundColor": "#415464"
@@ -17,7 +17,7 @@
   },
   "servers": [
     {
-      "url": "http://local-unit-test-server.lusid.com:42999"
+      "url": "http://local-unit-test-server.lusid.com:40887"
     }
   ],
   "paths": {
@@ -3567,7 +3567,6 @@
                     {
                       "instrumentUid": "LUID_XH4GNUEX",
                       "holdingType": "P",
-                      "currency": "ZZZ",
                       "units": 10,
                       "settledUnits": 10,
                       "cost": {
@@ -3596,7 +3595,6 @@
                     {
                       "instrumentUid": "LUID_XH4GNUEX",
                       "holdingType": "P",
-                      "currency": "ZZZ",
                       "units": 10,
                       "settledUnits": 10,
                       "cost": {
@@ -3625,7 +3623,6 @@
                     {
                       "instrumentUid": "LUID_XH4GNUEX",
                       "holdingType": "P",
-                      "currency": "ZZZ",
                       "units": 10,
                       "settledUnits": 10,
                       "cost": {
@@ -13028,7 +13025,6 @@
                       }
                     }
                   },
-                  "currency": "GBP",
                   "taxLots": [
                     {
                       "units": 100,
@@ -13075,7 +13071,6 @@
                       }
                     }
                   },
-                  "currency": "GBP",
                   "taxLots": [
                     {
                       "units": 100,
@@ -13122,7 +13117,6 @@
                       }
                     }
                   },
-                  "currency": "GBP",
                   "taxLots": [
                     {
                       "units": 100,
@@ -13169,7 +13163,6 @@
                       }
                     }
                   },
-                  "currency": "GBP",
                   "taxLots": [
                     {
                       "units": 100,
@@ -13343,7 +13336,6 @@
                       }
                     }
                   },
-                  "currency": "GBP",
                   "taxLots": [
                     {
                       "units": 100,
@@ -13390,7 +13382,6 @@
                       }
                     }
                   },
-                  "currency": "GBP",
                   "taxLots": [
                     {
                       "units": 100,
@@ -13437,7 +13428,6 @@
                       }
                     }
                   },
-                  "currency": "GBP",
                   "taxLots": [
                     {
                       "units": 100,
@@ -13484,7 +13474,6 @@
                       }
                     }
                   },
-                  "currency": "GBP",
                   "taxLots": [
                     {
                       "units": 100,
@@ -13780,7 +13769,6 @@
                     {
                       "instrumentUid": "LUID_XH4GNUEX",
                       "holdingType": "P",
-                      "currency": "ZZZ",
                       "units": 10,
                       "settledUnits": 10,
                       "cost": {
@@ -13809,7 +13797,6 @@
                     {
                       "instrumentUid": "LUID_XH4GNUEX",
                       "holdingType": "P",
-                      "currency": "ZZZ",
                       "units": 10,
                       "settledUnits": 10,
                       "cost": {
@@ -13838,7 +13825,6 @@
                     {
                       "instrumentUid": "LUID_XH4GNUEX",
                       "holdingType": "P",
-                      "currency": "ZZZ",
                       "units": 10,
                       "settledUnits": 10,
                       "cost": {
@@ -14113,7 +14099,6 @@
                         "instrumentUid": "LUID_GNMKYXXK",
                         "subHoldingKeys": {},
                         "properties": {},
-                        "currency": "ZZZ",
                         "taxLots": [
                           {
                             "units": 10,
@@ -14131,7 +14116,6 @@
                         "instrumentUid": "LUID_LE9E5SJE",
                         "subHoldingKeys": {},
                         "properties": {},
-                        "currency": "ZZZ",
                         "taxLots": [
                           {
                             "units": 10,
@@ -14166,7 +14150,6 @@
                         "instrumentUid": "LUID_GNMKYXXK",
                         "subHoldingKeys": {},
                         "properties": {},
-                        "currency": "ZZZ",
                         "taxLots": [
                           {
                             "units": 10,
@@ -14184,7 +14167,6 @@
                         "instrumentUid": "LUID_LE9E5SJE",
                         "subHoldingKeys": {},
                         "properties": {},
-                        "currency": "ZZZ",
                         "taxLots": [
                           {
                             "units": 10,
@@ -14219,7 +14201,6 @@
                         "instrumentUid": "LUID_GNMKYXXK",
                         "subHoldingKeys": {},
                         "properties": {},
-                        "currency": "ZZZ",
                         "taxLots": [
                           {
                             "units": 10,
@@ -14237,7 +14218,6 @@
                         "instrumentUid": "LUID_LE9E5SJE",
                         "subHoldingKeys": {},
                         "properties": {},
-                        "currency": "ZZZ",
                         "taxLots": [
                           {
                             "units": 10,
@@ -18118,7 +18098,6 @@
         "required": [
           "cost",
           "costPortfolioCcy",
-          "currency",
           "holdingType",
           "instrumentUid",
           "settledUnits",
@@ -18149,10 +18128,6 @@
           "holdingType": {
             "type": "string",
             "description": "The type of the holding e.g. Position, Balance, CashCommitment, Receivable, ForwardFX etc."
-          },
-          "currency": {
-            "type": "string",
-            "description": "The holding currency."
           },
           "units": {
             "type": "number",
@@ -20899,11 +20874,6 @@
             "description": "Set of unique holding properties and associated values to store with the target holding. Each property must be from the 'Holding' domain.",
             "nullable": true
           },
-          "currency": {
-            "type": "string",
-            "description": "The Holding currency. This needs to be equal with the one on the TaxLot -> cost if one is specified",
-            "nullable": true
-          },
           "taxLots": {
             "type": "array",
             "items": {
@@ -21085,11 +21055,6 @@
               "$ref": "#/components/schemas/PerpetualProperty"
             },
             "description": "The set of unique holding properties and associated values stored with the target holding. Each property will be from the 'Holding' domain.",
-            "nullable": true
-          },
-          "currency": {
-            "type": "string",
-            "description": "The Holding currency.",
             "nullable": true
           },
           "taxLots": {
