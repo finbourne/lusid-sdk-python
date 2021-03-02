@@ -9,7 +9,7 @@
       "url": "https://www.finbourne.com",
       "email": "info@finbourne.com"
     },
-    "version": "0.11.2668",
+    "version": "0.11.2670",
     "x-logo": {
       "url": "https://content.finbourne.com/LUSID-header.png",
       "backgroundColor": "#415464"
@@ -17,7 +17,7 @@
   },
   "servers": [
     {
-      "url": "https://fbn-prd.lusid.com/api"
+      "url": "http://local-unit-test-server.lusid.com:64516"
     }
   ],
   "paths": {
@@ -12263,6 +12263,2496 @@
         "x-fbn-apistatus": "EarlyAccess"
       }
     },
+    "/api/transactionportfolios/{scope}/{code}/cashstatement": {
+      "get": {
+        "tags": [
+          "Transaction Portfolios"
+        ],
+        "summary": "[EARLY ACCESS] Get CashStatement for the given portfolio.",
+        "description": "Get CashStatement for the given portfolio.",
+        "operationId": "GetPortfolioCashStatement",
+        "parameters": [
+          {
+            "name": "scope",
+            "in": "path",
+            "description": "The scope of the portfolio to retrieve the CashStatement for.",
+            "required": true,
+            "schema": {
+              "maxLength": 64,
+              "minLength": 1,
+              "pattern": "^[a-zA-Z0-9\\-_]+$",
+              "type": "string",
+              "description": "The scope of the portfolio to retrieve the CashStatement for.",
+              "nullable": true
+            }
+          },
+          {
+            "name": "code",
+            "in": "path",
+            "description": "The code of the portfolio to retrieve the CashStatement for. Together with the scope this\r\n            uniquely identifies the portfolio.",
+            "required": true,
+            "schema": {
+              "maxLength": 64,
+              "minLength": 1,
+              "pattern": "^[a-zA-Z0-9\\-_]+$",
+              "type": "string",
+              "description": "The code of the portfolio to retrieve the CashStatement for. Together with the scope this\r\n            uniquely identifies the portfolio.",
+              "nullable": true
+            }
+          },
+          {
+            "name": "fromEffectiveAt",
+            "in": "query",
+            "description": "The lower bound effective datetime or cut label (inclusive) from which to retrieve the data.\r\n            There is no lower bound if this is not specified.",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "description": "The lower bound effective datetime or cut label (inclusive) from which to retrieve the data.\r\n            There is no lower bound if this is not specified.",
+              "format": "dateorcutlabel"
+            }
+          },
+          {
+            "name": "toEffectiveAt",
+            "in": "query",
+            "description": "The upper bound effective datetime or cut label (inclusive) from which to retrieve the data.\r\n            There is no upper bound if this is not specified.",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "description": "The upper bound effective datetime or cut label (inclusive) from which to retrieve the data.\r\n            There is no upper bound if this is not specified.",
+              "format": "dateorcutlabel"
+            }
+          },
+          {
+            "name": "asAt",
+            "in": "query",
+            "description": "The asAt datetime at which to retrieve the portfolio. Defaults to return the latest version\r\n            of each transaction if not specified.",
+            "schema": {
+              "type": "string",
+              "description": "The asAt datetime at which to retrieve the portfolio. Defaults to return the latest version\r\n            of each transaction if not specified.",
+              "format": "date-time",
+              "nullable": true
+            },
+            "x-nullable": true
+          },
+          {
+            "name": "filter",
+            "in": "query",
+            "description": "Expression to filter the result set. \r\n            For example, to filter on the Transaction Type, use \"type eq 'Buy'\"\r\n            Read more about filtering results from LUSID here https://support.lusid.com/filtering-results-from-lusid.",
+            "schema": {
+              "type": "string",
+              "description": "Expression to filter the result set. \r\n            For example, to filter on the Transaction Type, use \"type eq 'Buy'\"\r\n            Read more about filtering results from LUSID here https://support.lusid.com/filtering-results-from-lusid.",
+              "nullable": true
+            }
+          },
+          {
+            "name": "recipeIdScope",
+            "in": "query",
+            "description": "The scope of the given recipeId",
+            "schema": {
+              "type": "string",
+              "description": "The scope of the given recipeId",
+              "nullable": true
+            }
+          },
+          {
+            "name": "recipeIdCode",
+            "in": "query",
+            "description": "The code of the given recipeID",
+            "schema": {
+              "type": "string",
+              "description": "The code of the given recipeID",
+              "nullable": true
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The requested portfolio cash flow data",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResourceListOfPortfolioCashFlow"
+                },
+                "example": {
+                  "values": [
+                    {
+                      "groupById": 1,
+                      "sequenceNumber": 0,
+                      "effectiveDate": "2020-06-01T00:00:00.0000000+00:00",
+                      "subHoldingKeys": {
+                        "instrument/default/Strategy": {
+                          "key": "Instrument/default/Strategy",
+                          "value": {
+                            "labelValue": "ABC"
+                          }
+                        }
+                      },
+                      "type": "Open",
+                      "movementName": "",
+                      "cashflow": {
+                        "amount": 0,
+                        "currency": "USD"
+                      },
+                      "balance": {
+                        "amount": 128347,
+                        "currency": "USD"
+                      },
+                      "fxRate": 1,
+                      "cashflowReportingCurrency": {
+                        "amount": 0,
+                        "currency": "USD"
+                      },
+                      "balanceReportingCurrency": {
+                        "amount": 128347,
+                        "currency": "USD"
+                      },
+                      "translationGainLoss": {
+                        "amount": 0,
+                        "currency": "USD"
+                      },
+                      "costBasisReportingCurrency": {
+                        "amount": 128347,
+                        "currency": "USD"
+                      }
+                    },
+                    {
+                      "groupById": 1,
+                      "sequenceNumber": 1,
+                      "effectiveDate": "2020-06-13T00:00:00.0000000+00:00",
+                      "subHoldingKeys": {
+                        "instrument/default/Strategy": {
+                          "key": "Instrument/default/Strategy",
+                          "value": {
+                            "labelValue": "ABC"
+                          }
+                        }
+                      },
+                      "type": "Activity",
+                      "movementName": "principal",
+                      "cashflow": {
+                        "amount": 73494,
+                        "currency": "USD"
+                      },
+                      "balance": {
+                        "amount": 54853,
+                        "currency": "USD"
+                      },
+                      "fxRate": 1,
+                      "cashflowReportingCurrency": {
+                        "amount": 73494,
+                        "currency": "USD"
+                      },
+                      "balanceReportingCurrency": {
+                        "amount": 54853,
+                        "currency": "USD"
+                      },
+                      "translationGainLoss": {
+                        "amount": 0,
+                        "currency": "USD"
+                      },
+                      "costBasisReportingCurrency": {
+                        "amount": 54853,
+                        "currency": "USD"
+                      },
+                      "transaction": {
+                        "transactionId": "tid_234942982496001",
+                        "type": "Buy",
+                        "instrumentIdentifiers": {},
+                        "instrumentUid": "LUID_1C7YTL5M",
+                        "transactionDate": "2020-06-10T00:00:00.0000000+00:00",
+                        "settlementDate": "2020-06-13T00:00:00.0000000+00:00",
+                        "units": 1517.8,
+                        "transactionPrice": {
+                          "price": 48.4213,
+                          "type": "Price"
+                        },
+                        "totalConsideration": {
+                          "amount": 48.4213,
+                          "currency": "USD"
+                        },
+                        "properties": {},
+                        "source": ""
+                      }
+                    },
+                    {
+                      "groupById": 1,
+                      "sequenceNumber": 2,
+                      "effectiveDate": "2020-06-14T00:00:00.0000000+00:00",
+                      "subHoldingKeys": {
+                        "instrument/default/Strategy": {
+                          "key": "Instrument/default/Strategy",
+                          "value": {
+                            "labelValue": "ABC"
+                          }
+                        }
+                      },
+                      "type": "Activity",
+                      "movementName": "principal",
+                      "cashflow": {
+                        "amount": 33731.44,
+                        "currency": "USD"
+                      },
+                      "balance": {
+                        "amount": 21121.56,
+                        "currency": "USD"
+                      },
+                      "fxRate": 1,
+                      "cashflowReportingCurrency": {
+                        "amount": 33731.44,
+                        "currency": "USD"
+                      },
+                      "balanceReportingCurrency": {
+                        "amount": 21121.56,
+                        "currency": "USD"
+                      },
+                      "translationGainLoss": {
+                        "amount": 0,
+                        "currency": "USD"
+                      },
+                      "costBasisReportingCurrency": {
+                        "amount": 21121.56,
+                        "currency": "USD"
+                      },
+                      "transaction": {
+                        "transactionId": "tid_234295929052090",
+                        "type": "Buy",
+                        "instrumentIdentifiers": {},
+                        "instrumentUid": "LUID_1C7YTL5M",
+                        "transactionDate": "2020-06-11T00:00:00.0000000+00:00",
+                        "settlementDate": "2020-06-14T00:00:00.0000000+00:00",
+                        "units": 696.97,
+                        "transactionPrice": {
+                          "price": 48.3974,
+                          "type": "Price"
+                        },
+                        "totalConsideration": {
+                          "amount": 48.3974,
+                          "currency": "USD"
+                        },
+                        "properties": {},
+                        "source": ""
+                      }
+                    },
+                    {
+                      "groupById": 1,
+                      "sequenceNumber": 3,
+                      "effectiveDate": "2020-06-15T00:00:00.0000000+00:00",
+                      "subHoldingKeys": {
+                        "instrument/default/Strategy": {
+                          "key": "Instrument/default/Strategy",
+                          "value": {
+                            "labelValue": "ABC"
+                          }
+                        }
+                      },
+                      "type": "Activity",
+                      "movementName": "payment",
+                      "cashflow": {
+                        "amount": 20.68,
+                        "currency": "USD"
+                      },
+                      "balance": {
+                        "amount": 21142.24,
+                        "currency": "USD"
+                      },
+                      "fxRate": 1,
+                      "cashflowReportingCurrency": {
+                        "amount": 20.68,
+                        "currency": "USD"
+                      },
+                      "balanceReportingCurrency": {
+                        "amount": 21142.24,
+                        "currency": "USD"
+                      },
+                      "translationGainLoss": {
+                        "amount": 0,
+                        "currency": "USD"
+                      },
+                      "costBasisReportingCurrency": {
+                        "amount": 21142.24,
+                        "currency": "USD"
+                      },
+                      "transaction": {
+                        "transactionId": "tid_325452342424500",
+                        "type": "Dividend",
+                        "instrumentIdentifiers": {},
+                        "instrumentUid": "LUID_1C7YTL5M",
+                        "transactionDate": "2020-06-15T00:00:00.0000000+00:00",
+                        "settlementDate": "2020-06-15T00:00:00.0000000+00:00",
+                        "units": 0,
+                        "transactionPrice": {
+                          "price": 0,
+                          "type": "Price"
+                        },
+                        "totalConsideration": {
+                          "amount": 0,
+                          "currency": "USD"
+                        },
+                        "properties": {},
+                        "source": ""
+                      }
+                    },
+                    {
+                      "groupById": 1,
+                      "sequenceNumber": 4,
+                      "effectiveDate": "2020-06-20T00:00:00.0000000+00:00",
+                      "subHoldingKeys": {
+                        "instrument/default/Strategy": {
+                          "key": "Instrument/default/Strategy",
+                          "value": {
+                            "labelValue": "ABC"
+                          }
+                        }
+                      },
+                      "type": "Activity",
+                      "movementName": "principal",
+                      "cashflow": {
+                        "amount": 10374,
+                        "currency": "USD"
+                      },
+                      "balance": {
+                        "amount": 31516.24,
+                        "currency": "USD"
+                      },
+                      "fxRate": 1,
+                      "cashflowReportingCurrency": {
+                        "amount": 10374,
+                        "currency": "USD"
+                      },
+                      "balanceReportingCurrency": {
+                        "amount": 31516.24,
+                        "currency": "USD"
+                      },
+                      "translationGainLoss": {
+                        "amount": 0,
+                        "currency": "USD"
+                      },
+                      "costBasisReportingCurrency": {
+                        "amount": 31516.24,
+                        "currency": "USD"
+                      },
+                      "transaction": {
+                        "transactionId": "tid_329432525234324",
+                        "type": "Sell",
+                        "instrumentIdentifiers": {},
+                        "instrumentUid": "LUID_1C7YTL5M",
+                        "transactionDate": "2020-06-17T00:00:00.0000000+00:00",
+                        "settlementDate": "2020-06-20T00:00:00.0000000+00:00",
+                        "units": 211.63,
+                        "transactionPrice": {
+                          "price": 49.0192,
+                          "type": "Price"
+                        },
+                        "totalConsideration": {
+                          "amount": 49.0192,
+                          "currency": "USD"
+                        },
+                        "properties": {},
+                        "source": ""
+                      }
+                    },
+                    {
+                      "groupById": 1,
+                      "sequenceNumber": 5,
+                      "effectiveDate": "2020-06-20T00:00:00.0000000+00:00",
+                      "subHoldingKeys": {
+                        "instrument/default/Strategy": {
+                          "key": "Instrument/default/Strategy",
+                          "value": {
+                            "labelValue": "ABC"
+                          }
+                        }
+                      },
+                      "type": "Activity",
+                      "movementName": "bond accrual",
+                      "cashflow": {
+                        "amount": 10373,
+                        "currency": "USD"
+                      },
+                      "balance": {
+                        "amount": 41889.24,
+                        "currency": "USD"
+                      },
+                      "fxRate": 0,
+                      "cashflowReportingCurrency": {
+                        "amount": 10373,
+                        "currency": "USD"
+                      },
+                      "balanceReportingCurrency": {
+                        "amount": 41889.24,
+                        "currency": "USD"
+                      },
+                      "translationGainLoss": {
+                        "amount": -1,
+                        "currency": "USD"
+                      },
+                      "costBasisReportingCurrency": {
+                        "amount": 41889.24,
+                        "currency": "USD"
+                      },
+                      "transaction": {
+                        "transactionId": "tid_329432525234323",
+                        "type": "Sell",
+                        "instrumentIdentifiers": {},
+                        "instrumentUid": "LUID_1C7YTL5M",
+                        "transactionDate": "2019-06-17T00:00:00.0000000+00:00",
+                        "settlementDate": "2019-06-20T00:00:00.0000000+00:00",
+                        "units": 210.63,
+                        "transactionPrice": {
+                          "price": 48.0192,
+                          "type": "Price"
+                        },
+                        "totalConsideration": {
+                          "amount": 48.0192,
+                          "currency": "USD"
+                        },
+                        "properties": {},
+                        "source": ""
+                      }
+                    },
+                    {
+                      "groupById": 1,
+                      "sequenceNumber": 6,
+                      "effectiveDate": "2020-06-21T00:00:00.0000000+00:00",
+                      "subHoldingKeys": {
+                        "instrument/default/Strategy": {
+                          "key": "Instrument/default/Strategy",
+                          "value": {
+                            "labelValue": "ABC"
+                          }
+                        }
+                      },
+                      "type": "Activity",
+                      "movementName": "principal",
+                      "cashflow": {
+                        "amount": 8775,
+                        "currency": "USD"
+                      },
+                      "balance": {
+                        "amount": 50665.24,
+                        "currency": "USD"
+                      },
+                      "fxRate": 1,
+                      "cashflowReportingCurrency": {
+                        "amount": 8775,
+                        "currency": "USD"
+                      },
+                      "balanceReportingCurrency": {
+                        "amount": 50665.24,
+                        "currency": "USD"
+                      },
+                      "translationGainLoss": {
+                        "amount": 0,
+                        "currency": "USD"
+                      },
+                      "costBasisReportingCurrency": {
+                        "amount": 50665.24,
+                        "currency": "USD"
+                      },
+                      "transaction": {
+                        "transactionId": "tid_124319009950924",
+                        "type": "Sell",
+                        "instrumentIdentifiers": {},
+                        "instrumentUid": "LUID_1C7YTL5M",
+                        "transactionDate": "2020-06-18T00:00:00.0000000+00:00",
+                        "settlementDate": "2020-06-21T00:00:00.0000000+00:00",
+                        "units": 179.01,
+                        "transactionPrice": {
+                          "price": 49.0184,
+                          "type": "Price"
+                        },
+                        "totalConsideration": {
+                          "amount": 49.0184,
+                          "currency": "USD"
+                        },
+                        "properties": {},
+                        "source": ""
+                      }
+                    },
+                    {
+                      "groupById": 1,
+                      "sequenceNumber": 7,
+                      "effectiveDate": "2020-06-21T00:00:00.0000000+00:00",
+                      "subHoldingKeys": {
+                        "instrument/default/Strategy": {
+                          "key": "Instrument/default/Strategy",
+                          "value": {
+                            "labelValue": "ABC"
+                          }
+                        }
+                      },
+                      "type": "Activity",
+                      "movementName": "principal",
+                      "cashflow": {
+                        "amount": 13225.1,
+                        "currency": "USD"
+                      },
+                      "balance": {
+                        "amount": 63890.34,
+                        "currency": "USD"
+                      },
+                      "fxRate": 1,
+                      "cashflowReportingCurrency": {
+                        "amount": 13225.1,
+                        "currency": "USD"
+                      },
+                      "balanceReportingCurrency": {
+                        "amount": 63890.34,
+                        "currency": "USD"
+                      },
+                      "translationGainLoss": {
+                        "amount": 0,
+                        "currency": "USD"
+                      },
+                      "costBasisReportingCurrency": {
+                        "amount": 63890.34,
+                        "currency": "USD"
+                      },
+                      "transaction": {
+                        "transactionId": "tid_121309590059995",
+                        "type": "Sell",
+                        "instrumentIdentifiers": {},
+                        "instrumentUid": "LUID_1C7YTL5M",
+                        "transactionDate": "2020-06-18T00:00:00.0000000+00:00",
+                        "settlementDate": "2020-06-21T00:00:00.0000000+00:00",
+                        "units": 269.99,
+                        "transactionPrice": {
+                          "price": 48.9843,
+                          "type": "Price"
+                        },
+                        "totalConsideration": {
+                          "amount": 48.9843,
+                          "currency": "USD"
+                        },
+                        "properties": {},
+                        "source": ""
+                      }
+                    },
+                    {
+                      "groupById": 1,
+                      "sequenceNumber": 8,
+                      "effectiveDate": "2020-06-30T00:00:00.0000000+00:00",
+                      "subHoldingKeys": {
+                        "instrument/default/Strategy": {
+                          "key": "Instrument/default/Strategy",
+                          "value": {
+                            "labelValue": "ABC"
+                          }
+                        }
+                      },
+                      "type": "Closed",
+                      "movementName": "",
+                      "cashflow": {
+                        "amount": 0,
+                        "currency": "USD"
+                      },
+                      "balance": {
+                        "amount": 63890.34,
+                        "currency": "USD"
+                      },
+                      "fxRate": 1,
+                      "cashflowReportingCurrency": {
+                        "amount": 0,
+                        "currency": "USD"
+                      },
+                      "balanceReportingCurrency": {
+                        "amount": 63890.34,
+                        "currency": "USD"
+                      },
+                      "translationGainLoss": {
+                        "amount": 0,
+                        "currency": "USD"
+                      },
+                      "costBasisReportingCurrency": {
+                        "amount": 63890.34,
+                        "currency": "USD"
+                      }
+                    },
+                    {
+                      "groupById": 2,
+                      "sequenceNumber": 0,
+                      "effectiveDate": "2020-06-01T00:00:00.0000000+00:00",
+                      "subHoldingKeys": {
+                        "instrument/default/Strategy": {
+                          "key": "Instrument/default/Strategy",
+                          "value": {
+                            "labelValue": "ABC"
+                          }
+                        }
+                      },
+                      "type": "Open",
+                      "movementName": "",
+                      "cashflow": {
+                        "amount": 0,
+                        "currency": "GBP"
+                      },
+                      "balance": {
+                        "amount": 12738.22,
+                        "currency": "GBP"
+                      },
+                      "fxRate": 1.3145,
+                      "cashflowReportingCurrency": {
+                        "amount": 0,
+                        "currency": "USD"
+                      },
+                      "balanceReportingCurrency": {
+                        "amount": 16744.39,
+                        "currency": "USD"
+                      },
+                      "translationGainLoss": {
+                        "amount": 0,
+                        "currency": "USD"
+                      },
+                      "costBasisReportingCurrency": {
+                        "amount": 16744.39,
+                        "currency": "USD"
+                      }
+                    },
+                    {
+                      "groupById": 2,
+                      "sequenceNumber": 1,
+                      "effectiveDate": "2020-06-13T00:00:00.0000000+00:00",
+                      "subHoldingKeys": {
+                        "instrument/default/Strategy": {
+                          "key": "Instrument/default/Strategy",
+                          "value": {
+                            "labelValue": "ABC"
+                          }
+                        }
+                      },
+                      "type": "Activity",
+                      "movementName": "principal",
+                      "cashflow": {
+                        "amount": 43000,
+                        "currency": "GBP"
+                      },
+                      "balance": {
+                        "amount": 30261.78,
+                        "currency": "GBP"
+                      },
+                      "fxRate": 1.2,
+                      "cashflowReportingCurrency": {
+                        "amount": 51600,
+                        "currency": "USD"
+                      },
+                      "balanceReportingCurrency": {
+                        "amount": 36314.14,
+                        "currency": "USD"
+                      },
+                      "translationGainLoss": {
+                        "amount": -1458.52619,
+                        "currency": "USD"
+                      },
+                      "costBasisReportingCurrency": {
+                        "amount": -36314.14,
+                        "currency": "USD"
+                      },
+                      "transaction": {
+                        "transactionId": "tid_124319009950924",
+                        "type": "Buy",
+                        "instrumentIdentifiers": {},
+                        "instrumentUid": "LUID_1C7YTL5M",
+                        "transactionDate": "2020-06-10T00:00:00.0000000+00:00",
+                        "settlementDate": "2020-06-13T00:00:00.0000000+00:00",
+                        "units": 1829.79,
+                        "transactionPrice": {
+                          "price": 23.5,
+                          "type": "Price"
+                        },
+                        "totalConsideration": {
+                          "amount": 23.5,
+                          "currency": "USD"
+                        },
+                        "properties": {},
+                        "source": ""
+                      }
+                    },
+                    {
+                      "groupById": 2,
+                      "sequenceNumber": 2,
+                      "effectiveDate": "2020-06-18T00:00:00.0000000+00:00",
+                      "subHoldingKeys": {
+                        "instrument/default/Strategy": {
+                          "key": "Instrument/default/Strategy",
+                          "value": {
+                            "labelValue": "ABC"
+                          }
+                        }
+                      },
+                      "type": "Activity",
+                      "movementName": "principal",
+                      "cashflow": {
+                        "amount": 89994.71,
+                        "currency": "GBP"
+                      },
+                      "balance": {
+                        "amount": 59732.93,
+                        "currency": "GBP"
+                      },
+                      "fxRate": 1.3,
+                      "cashflowReportingCurrency": {
+                        "amount": 116993.12,
+                        "currency": "USD"
+                      },
+                      "balanceReportingCurrency": {
+                        "amount": 77652.81,
+                        "currency": "USD"
+                      },
+                      "translationGainLoss": {
+                        "amount": -3026.178,
+                        "currency": "USD"
+                      },
+                      "costBasisReportingCurrency": {
+                        "amount": 77652.81,
+                        "currency": "USD"
+                      },
+                      "transaction": {
+                        "transactionId": "tid_121309590059995",
+                        "type": "Sell",
+                        "instrumentIdentifiers": {},
+                        "instrumentUid": "LUID_1C7YTL5M",
+                        "transactionDate": "2020-06-15T00:00:00.0000000+00:00",
+                        "settlementDate": "2020-06-18T00:00:00.0000000+00:00",
+                        "units": 3333.14,
+                        "transactionPrice": {
+                          "price": 27,
+                          "type": "Price"
+                        },
+                        "totalConsideration": {
+                          "amount": 27,
+                          "currency": "USD"
+                        },
+                        "properties": {},
+                        "source": ""
+                      }
+                    },
+                    {
+                      "groupById": 2,
+                      "sequenceNumber": 3,
+                      "effectiveDate": "2020-06-30T00:00:00.0000000+00:00",
+                      "subHoldingKeys": {
+                        "instrument/default/Strategy": {
+                          "key": "Instrument/default/Strategy",
+                          "value": {
+                            "labelValue": "ABC"
+                          }
+                        }
+                      },
+                      "type": "Closed",
+                      "movementName": "",
+                      "cashflow": {
+                        "amount": 0,
+                        "currency": "GBP"
+                      },
+                      "balance": {
+                        "amount": 59732.93,
+                        "currency": "GBP"
+                      },
+                      "fxRate": 1.3244,
+                      "cashflowReportingCurrency": {
+                        "amount": 0,
+                        "currency": "USD"
+                      },
+                      "balanceReportingCurrency": {
+                        "amount": 79110.29,
+                        "currency": "USD"
+                      },
+                      "translationGainLoss": {
+                        "amount": 0,
+                        "currency": "USD"
+                      },
+                      "costBasisReportingCurrency": {
+                        "amount": 77652.81,
+                        "currency": "USD"
+                      }
+                    },
+                    {
+                      "groupById": 3,
+                      "sequenceNumber": 0,
+                      "effectiveDate": "2020-06-01T00:00:00.0000000+00:00",
+                      "subHoldingKeys": {
+                        "instrument/default/Strategy": {
+                          "key": "Instrument/default/Strategy",
+                          "value": {
+                            "labelValue": "XYZ"
+                          }
+                        }
+                      },
+                      "type": "Open",
+                      "movementName": "",
+                      "cashflow": {
+                        "amount": 0,
+                        "currency": "USD"
+                      },
+                      "balance": {
+                        "amount": 10000,
+                        "currency": "USD"
+                      },
+                      "fxRate": 1,
+                      "cashflowReportingCurrency": {
+                        "amount": 0,
+                        "currency": "USD"
+                      },
+                      "balanceReportingCurrency": {
+                        "amount": 10000,
+                        "currency": "USD"
+                      },
+                      "translationGainLoss": {
+                        "amount": 0,
+                        "currency": "USD"
+                      },
+                      "costBasisReportingCurrency": {
+                        "amount": 10000,
+                        "currency": "USD"
+                      }
+                    },
+                    {
+                      "groupById": 3,
+                      "sequenceNumber": 1,
+                      "effectiveDate": "2020-06-30T00:00:00.0000000+00:00",
+                      "subHoldingKeys": {
+                        "instrument/default/Strategy": {
+                          "key": "Instrument/default/Strategy",
+                          "value": {
+                            "labelValue": "XYZ"
+                          }
+                        }
+                      },
+                      "type": "Closed",
+                      "movementName": "",
+                      "cashflow": {
+                        "amount": 0,
+                        "currency": "USD"
+                      },
+                      "balance": {
+                        "amount": 10000,
+                        "currency": "USD"
+                      },
+                      "fxRate": 1,
+                      "cashflowReportingCurrency": {
+                        "amount": 0,
+                        "currency": "USD"
+                      },
+                      "balanceReportingCurrency": {
+                        "amount": 10000,
+                        "currency": "USD"
+                      },
+                      "translationGainLoss": {
+                        "amount": 0,
+                        "currency": "USD"
+                      },
+                      "costBasisReportingCurrency": {
+                        "amount": 10000,
+                        "currency": "USD"
+                      }
+                    }
+                  ],
+                  "links": []
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResourceListOfPortfolioCashFlow"
+                },
+                "example": {
+                  "values": [
+                    {
+                      "groupById": 1,
+                      "sequenceNumber": 0,
+                      "effectiveDate": "2020-06-01T00:00:00.0000000+00:00",
+                      "subHoldingKeys": {
+                        "instrument/default/Strategy": {
+                          "key": "Instrument/default/Strategy",
+                          "value": {
+                            "labelValue": "ABC"
+                          }
+                        }
+                      },
+                      "type": "Open",
+                      "movementName": "",
+                      "cashflow": {
+                        "amount": 0,
+                        "currency": "USD"
+                      },
+                      "balance": {
+                        "amount": 128347,
+                        "currency": "USD"
+                      },
+                      "fxRate": 1,
+                      "cashflowReportingCurrency": {
+                        "amount": 0,
+                        "currency": "USD"
+                      },
+                      "balanceReportingCurrency": {
+                        "amount": 128347,
+                        "currency": "USD"
+                      },
+                      "translationGainLoss": {
+                        "amount": 0,
+                        "currency": "USD"
+                      },
+                      "costBasisReportingCurrency": {
+                        "amount": 128347,
+                        "currency": "USD"
+                      }
+                    },
+                    {
+                      "groupById": 1,
+                      "sequenceNumber": 1,
+                      "effectiveDate": "2020-06-13T00:00:00.0000000+00:00",
+                      "subHoldingKeys": {
+                        "instrument/default/Strategy": {
+                          "key": "Instrument/default/Strategy",
+                          "value": {
+                            "labelValue": "ABC"
+                          }
+                        }
+                      },
+                      "type": "Activity",
+                      "movementName": "principal",
+                      "cashflow": {
+                        "amount": 73494,
+                        "currency": "USD"
+                      },
+                      "balance": {
+                        "amount": 54853,
+                        "currency": "USD"
+                      },
+                      "fxRate": 1,
+                      "cashflowReportingCurrency": {
+                        "amount": 73494,
+                        "currency": "USD"
+                      },
+                      "balanceReportingCurrency": {
+                        "amount": 54853,
+                        "currency": "USD"
+                      },
+                      "translationGainLoss": {
+                        "amount": 0,
+                        "currency": "USD"
+                      },
+                      "costBasisReportingCurrency": {
+                        "amount": 54853,
+                        "currency": "USD"
+                      },
+                      "transaction": {
+                        "transactionId": "tid_234942982496001",
+                        "type": "Buy",
+                        "instrumentIdentifiers": {},
+                        "instrumentUid": "LUID_1C7YTL5M",
+                        "transactionDate": "2020-06-10T00:00:00.0000000+00:00",
+                        "settlementDate": "2020-06-13T00:00:00.0000000+00:00",
+                        "units": 1517.8,
+                        "transactionPrice": {
+                          "price": 48.4213,
+                          "type": "Price"
+                        },
+                        "totalConsideration": {
+                          "amount": 48.4213,
+                          "currency": "USD"
+                        },
+                        "properties": {},
+                        "source": ""
+                      }
+                    },
+                    {
+                      "groupById": 1,
+                      "sequenceNumber": 2,
+                      "effectiveDate": "2020-06-14T00:00:00.0000000+00:00",
+                      "subHoldingKeys": {
+                        "instrument/default/Strategy": {
+                          "key": "Instrument/default/Strategy",
+                          "value": {
+                            "labelValue": "ABC"
+                          }
+                        }
+                      },
+                      "type": "Activity",
+                      "movementName": "principal",
+                      "cashflow": {
+                        "amount": 33731.44,
+                        "currency": "USD"
+                      },
+                      "balance": {
+                        "amount": 21121.56,
+                        "currency": "USD"
+                      },
+                      "fxRate": 1,
+                      "cashflowReportingCurrency": {
+                        "amount": 33731.44,
+                        "currency": "USD"
+                      },
+                      "balanceReportingCurrency": {
+                        "amount": 21121.56,
+                        "currency": "USD"
+                      },
+                      "translationGainLoss": {
+                        "amount": 0,
+                        "currency": "USD"
+                      },
+                      "costBasisReportingCurrency": {
+                        "amount": 21121.56,
+                        "currency": "USD"
+                      },
+                      "transaction": {
+                        "transactionId": "tid_234295929052090",
+                        "type": "Buy",
+                        "instrumentIdentifiers": {},
+                        "instrumentUid": "LUID_1C7YTL5M",
+                        "transactionDate": "2020-06-11T00:00:00.0000000+00:00",
+                        "settlementDate": "2020-06-14T00:00:00.0000000+00:00",
+                        "units": 696.97,
+                        "transactionPrice": {
+                          "price": 48.3974,
+                          "type": "Price"
+                        },
+                        "totalConsideration": {
+                          "amount": 48.3974,
+                          "currency": "USD"
+                        },
+                        "properties": {},
+                        "source": ""
+                      }
+                    },
+                    {
+                      "groupById": 1,
+                      "sequenceNumber": 3,
+                      "effectiveDate": "2020-06-15T00:00:00.0000000+00:00",
+                      "subHoldingKeys": {
+                        "instrument/default/Strategy": {
+                          "key": "Instrument/default/Strategy",
+                          "value": {
+                            "labelValue": "ABC"
+                          }
+                        }
+                      },
+                      "type": "Activity",
+                      "movementName": "payment",
+                      "cashflow": {
+                        "amount": 20.68,
+                        "currency": "USD"
+                      },
+                      "balance": {
+                        "amount": 21142.24,
+                        "currency": "USD"
+                      },
+                      "fxRate": 1,
+                      "cashflowReportingCurrency": {
+                        "amount": 20.68,
+                        "currency": "USD"
+                      },
+                      "balanceReportingCurrency": {
+                        "amount": 21142.24,
+                        "currency": "USD"
+                      },
+                      "translationGainLoss": {
+                        "amount": 0,
+                        "currency": "USD"
+                      },
+                      "costBasisReportingCurrency": {
+                        "amount": 21142.24,
+                        "currency": "USD"
+                      },
+                      "transaction": {
+                        "transactionId": "tid_325452342424500",
+                        "type": "Dividend",
+                        "instrumentIdentifiers": {},
+                        "instrumentUid": "LUID_1C7YTL5M",
+                        "transactionDate": "2020-06-15T00:00:00.0000000+00:00",
+                        "settlementDate": "2020-06-15T00:00:00.0000000+00:00",
+                        "units": 0,
+                        "transactionPrice": {
+                          "price": 0,
+                          "type": "Price"
+                        },
+                        "totalConsideration": {
+                          "amount": 0,
+                          "currency": "USD"
+                        },
+                        "properties": {},
+                        "source": ""
+                      }
+                    },
+                    {
+                      "groupById": 1,
+                      "sequenceNumber": 4,
+                      "effectiveDate": "2020-06-20T00:00:00.0000000+00:00",
+                      "subHoldingKeys": {
+                        "instrument/default/Strategy": {
+                          "key": "Instrument/default/Strategy",
+                          "value": {
+                            "labelValue": "ABC"
+                          }
+                        }
+                      },
+                      "type": "Activity",
+                      "movementName": "principal",
+                      "cashflow": {
+                        "amount": 10374,
+                        "currency": "USD"
+                      },
+                      "balance": {
+                        "amount": 31516.24,
+                        "currency": "USD"
+                      },
+                      "fxRate": 1,
+                      "cashflowReportingCurrency": {
+                        "amount": 10374,
+                        "currency": "USD"
+                      },
+                      "balanceReportingCurrency": {
+                        "amount": 31516.24,
+                        "currency": "USD"
+                      },
+                      "translationGainLoss": {
+                        "amount": 0,
+                        "currency": "USD"
+                      },
+                      "costBasisReportingCurrency": {
+                        "amount": 31516.24,
+                        "currency": "USD"
+                      },
+                      "transaction": {
+                        "transactionId": "tid_329432525234324",
+                        "type": "Sell",
+                        "instrumentIdentifiers": {},
+                        "instrumentUid": "LUID_1C7YTL5M",
+                        "transactionDate": "2020-06-17T00:00:00.0000000+00:00",
+                        "settlementDate": "2020-06-20T00:00:00.0000000+00:00",
+                        "units": 211.63,
+                        "transactionPrice": {
+                          "price": 49.0192,
+                          "type": "Price"
+                        },
+                        "totalConsideration": {
+                          "amount": 49.0192,
+                          "currency": "USD"
+                        },
+                        "properties": {},
+                        "source": ""
+                      }
+                    },
+                    {
+                      "groupById": 1,
+                      "sequenceNumber": 5,
+                      "effectiveDate": "2020-06-20T00:00:00.0000000+00:00",
+                      "subHoldingKeys": {
+                        "instrument/default/Strategy": {
+                          "key": "Instrument/default/Strategy",
+                          "value": {
+                            "labelValue": "ABC"
+                          }
+                        }
+                      },
+                      "type": "Activity",
+                      "movementName": "bond accrual",
+                      "cashflow": {
+                        "amount": 10373,
+                        "currency": "USD"
+                      },
+                      "balance": {
+                        "amount": 41889.24,
+                        "currency": "USD"
+                      },
+                      "fxRate": 0,
+                      "cashflowReportingCurrency": {
+                        "amount": 10373,
+                        "currency": "USD"
+                      },
+                      "balanceReportingCurrency": {
+                        "amount": 41889.24,
+                        "currency": "USD"
+                      },
+                      "translationGainLoss": {
+                        "amount": -1,
+                        "currency": "USD"
+                      },
+                      "costBasisReportingCurrency": {
+                        "amount": 41889.24,
+                        "currency": "USD"
+                      },
+                      "transaction": {
+                        "transactionId": "tid_329432525234323",
+                        "type": "Sell",
+                        "instrumentIdentifiers": {},
+                        "instrumentUid": "LUID_1C7YTL5M",
+                        "transactionDate": "2019-06-17T00:00:00.0000000+00:00",
+                        "settlementDate": "2019-06-20T00:00:00.0000000+00:00",
+                        "units": 210.63,
+                        "transactionPrice": {
+                          "price": 48.0192,
+                          "type": "Price"
+                        },
+                        "totalConsideration": {
+                          "amount": 48.0192,
+                          "currency": "USD"
+                        },
+                        "properties": {},
+                        "source": ""
+                      }
+                    },
+                    {
+                      "groupById": 1,
+                      "sequenceNumber": 6,
+                      "effectiveDate": "2020-06-21T00:00:00.0000000+00:00",
+                      "subHoldingKeys": {
+                        "instrument/default/Strategy": {
+                          "key": "Instrument/default/Strategy",
+                          "value": {
+                            "labelValue": "ABC"
+                          }
+                        }
+                      },
+                      "type": "Activity",
+                      "movementName": "principal",
+                      "cashflow": {
+                        "amount": 8775,
+                        "currency": "USD"
+                      },
+                      "balance": {
+                        "amount": 50665.24,
+                        "currency": "USD"
+                      },
+                      "fxRate": 1,
+                      "cashflowReportingCurrency": {
+                        "amount": 8775,
+                        "currency": "USD"
+                      },
+                      "balanceReportingCurrency": {
+                        "amount": 50665.24,
+                        "currency": "USD"
+                      },
+                      "translationGainLoss": {
+                        "amount": 0,
+                        "currency": "USD"
+                      },
+                      "costBasisReportingCurrency": {
+                        "amount": 50665.24,
+                        "currency": "USD"
+                      },
+                      "transaction": {
+                        "transactionId": "tid_124319009950924",
+                        "type": "Sell",
+                        "instrumentIdentifiers": {},
+                        "instrumentUid": "LUID_1C7YTL5M",
+                        "transactionDate": "2020-06-18T00:00:00.0000000+00:00",
+                        "settlementDate": "2020-06-21T00:00:00.0000000+00:00",
+                        "units": 179.01,
+                        "transactionPrice": {
+                          "price": 49.0184,
+                          "type": "Price"
+                        },
+                        "totalConsideration": {
+                          "amount": 49.0184,
+                          "currency": "USD"
+                        },
+                        "properties": {},
+                        "source": ""
+                      }
+                    },
+                    {
+                      "groupById": 1,
+                      "sequenceNumber": 7,
+                      "effectiveDate": "2020-06-21T00:00:00.0000000+00:00",
+                      "subHoldingKeys": {
+                        "instrument/default/Strategy": {
+                          "key": "Instrument/default/Strategy",
+                          "value": {
+                            "labelValue": "ABC"
+                          }
+                        }
+                      },
+                      "type": "Activity",
+                      "movementName": "principal",
+                      "cashflow": {
+                        "amount": 13225.1,
+                        "currency": "USD"
+                      },
+                      "balance": {
+                        "amount": 63890.34,
+                        "currency": "USD"
+                      },
+                      "fxRate": 1,
+                      "cashflowReportingCurrency": {
+                        "amount": 13225.1,
+                        "currency": "USD"
+                      },
+                      "balanceReportingCurrency": {
+                        "amount": 63890.34,
+                        "currency": "USD"
+                      },
+                      "translationGainLoss": {
+                        "amount": 0,
+                        "currency": "USD"
+                      },
+                      "costBasisReportingCurrency": {
+                        "amount": 63890.34,
+                        "currency": "USD"
+                      },
+                      "transaction": {
+                        "transactionId": "tid_121309590059995",
+                        "type": "Sell",
+                        "instrumentIdentifiers": {},
+                        "instrumentUid": "LUID_1C7YTL5M",
+                        "transactionDate": "2020-06-18T00:00:00.0000000+00:00",
+                        "settlementDate": "2020-06-21T00:00:00.0000000+00:00",
+                        "units": 269.99,
+                        "transactionPrice": {
+                          "price": 48.9843,
+                          "type": "Price"
+                        },
+                        "totalConsideration": {
+                          "amount": 48.9843,
+                          "currency": "USD"
+                        },
+                        "properties": {},
+                        "source": ""
+                      }
+                    },
+                    {
+                      "groupById": 1,
+                      "sequenceNumber": 8,
+                      "effectiveDate": "2020-06-30T00:00:00.0000000+00:00",
+                      "subHoldingKeys": {
+                        "instrument/default/Strategy": {
+                          "key": "Instrument/default/Strategy",
+                          "value": {
+                            "labelValue": "ABC"
+                          }
+                        }
+                      },
+                      "type": "Closed",
+                      "movementName": "",
+                      "cashflow": {
+                        "amount": 0,
+                        "currency": "USD"
+                      },
+                      "balance": {
+                        "amount": 63890.34,
+                        "currency": "USD"
+                      },
+                      "fxRate": 1,
+                      "cashflowReportingCurrency": {
+                        "amount": 0,
+                        "currency": "USD"
+                      },
+                      "balanceReportingCurrency": {
+                        "amount": 63890.34,
+                        "currency": "USD"
+                      },
+                      "translationGainLoss": {
+                        "amount": 0,
+                        "currency": "USD"
+                      },
+                      "costBasisReportingCurrency": {
+                        "amount": 63890.34,
+                        "currency": "USD"
+                      }
+                    },
+                    {
+                      "groupById": 2,
+                      "sequenceNumber": 0,
+                      "effectiveDate": "2020-06-01T00:00:00.0000000+00:00",
+                      "subHoldingKeys": {
+                        "instrument/default/Strategy": {
+                          "key": "Instrument/default/Strategy",
+                          "value": {
+                            "labelValue": "ABC"
+                          }
+                        }
+                      },
+                      "type": "Open",
+                      "movementName": "",
+                      "cashflow": {
+                        "amount": 0,
+                        "currency": "GBP"
+                      },
+                      "balance": {
+                        "amount": 12738.22,
+                        "currency": "GBP"
+                      },
+                      "fxRate": 1.3145,
+                      "cashflowReportingCurrency": {
+                        "amount": 0,
+                        "currency": "USD"
+                      },
+                      "balanceReportingCurrency": {
+                        "amount": 16744.39,
+                        "currency": "USD"
+                      },
+                      "translationGainLoss": {
+                        "amount": 0,
+                        "currency": "USD"
+                      },
+                      "costBasisReportingCurrency": {
+                        "amount": 16744.39,
+                        "currency": "USD"
+                      }
+                    },
+                    {
+                      "groupById": 2,
+                      "sequenceNumber": 1,
+                      "effectiveDate": "2020-06-13T00:00:00.0000000+00:00",
+                      "subHoldingKeys": {
+                        "instrument/default/Strategy": {
+                          "key": "Instrument/default/Strategy",
+                          "value": {
+                            "labelValue": "ABC"
+                          }
+                        }
+                      },
+                      "type": "Activity",
+                      "movementName": "principal",
+                      "cashflow": {
+                        "amount": 43000,
+                        "currency": "GBP"
+                      },
+                      "balance": {
+                        "amount": 30261.78,
+                        "currency": "GBP"
+                      },
+                      "fxRate": 1.2,
+                      "cashflowReportingCurrency": {
+                        "amount": 51600,
+                        "currency": "USD"
+                      },
+                      "balanceReportingCurrency": {
+                        "amount": 36314.14,
+                        "currency": "USD"
+                      },
+                      "translationGainLoss": {
+                        "amount": -1458.52619,
+                        "currency": "USD"
+                      },
+                      "costBasisReportingCurrency": {
+                        "amount": -36314.14,
+                        "currency": "USD"
+                      },
+                      "transaction": {
+                        "transactionId": "tid_124319009950924",
+                        "type": "Buy",
+                        "instrumentIdentifiers": {},
+                        "instrumentUid": "LUID_1C7YTL5M",
+                        "transactionDate": "2020-06-10T00:00:00.0000000+00:00",
+                        "settlementDate": "2020-06-13T00:00:00.0000000+00:00",
+                        "units": 1829.79,
+                        "transactionPrice": {
+                          "price": 23.5,
+                          "type": "Price"
+                        },
+                        "totalConsideration": {
+                          "amount": 23.5,
+                          "currency": "USD"
+                        },
+                        "properties": {},
+                        "source": ""
+                      }
+                    },
+                    {
+                      "groupById": 2,
+                      "sequenceNumber": 2,
+                      "effectiveDate": "2020-06-18T00:00:00.0000000+00:00",
+                      "subHoldingKeys": {
+                        "instrument/default/Strategy": {
+                          "key": "Instrument/default/Strategy",
+                          "value": {
+                            "labelValue": "ABC"
+                          }
+                        }
+                      },
+                      "type": "Activity",
+                      "movementName": "principal",
+                      "cashflow": {
+                        "amount": 89994.71,
+                        "currency": "GBP"
+                      },
+                      "balance": {
+                        "amount": 59732.93,
+                        "currency": "GBP"
+                      },
+                      "fxRate": 1.3,
+                      "cashflowReportingCurrency": {
+                        "amount": 116993.12,
+                        "currency": "USD"
+                      },
+                      "balanceReportingCurrency": {
+                        "amount": 77652.81,
+                        "currency": "USD"
+                      },
+                      "translationGainLoss": {
+                        "amount": -3026.178,
+                        "currency": "USD"
+                      },
+                      "costBasisReportingCurrency": {
+                        "amount": 77652.81,
+                        "currency": "USD"
+                      },
+                      "transaction": {
+                        "transactionId": "tid_121309590059995",
+                        "type": "Sell",
+                        "instrumentIdentifiers": {},
+                        "instrumentUid": "LUID_1C7YTL5M",
+                        "transactionDate": "2020-06-15T00:00:00.0000000+00:00",
+                        "settlementDate": "2020-06-18T00:00:00.0000000+00:00",
+                        "units": 3333.14,
+                        "transactionPrice": {
+                          "price": 27,
+                          "type": "Price"
+                        },
+                        "totalConsideration": {
+                          "amount": 27,
+                          "currency": "USD"
+                        },
+                        "properties": {},
+                        "source": ""
+                      }
+                    },
+                    {
+                      "groupById": 2,
+                      "sequenceNumber": 3,
+                      "effectiveDate": "2020-06-30T00:00:00.0000000+00:00",
+                      "subHoldingKeys": {
+                        "instrument/default/Strategy": {
+                          "key": "Instrument/default/Strategy",
+                          "value": {
+                            "labelValue": "ABC"
+                          }
+                        }
+                      },
+                      "type": "Closed",
+                      "movementName": "",
+                      "cashflow": {
+                        "amount": 0,
+                        "currency": "GBP"
+                      },
+                      "balance": {
+                        "amount": 59732.93,
+                        "currency": "GBP"
+                      },
+                      "fxRate": 1.3244,
+                      "cashflowReportingCurrency": {
+                        "amount": 0,
+                        "currency": "USD"
+                      },
+                      "balanceReportingCurrency": {
+                        "amount": 79110.29,
+                        "currency": "USD"
+                      },
+                      "translationGainLoss": {
+                        "amount": 0,
+                        "currency": "USD"
+                      },
+                      "costBasisReportingCurrency": {
+                        "amount": 77652.81,
+                        "currency": "USD"
+                      }
+                    },
+                    {
+                      "groupById": 3,
+                      "sequenceNumber": 0,
+                      "effectiveDate": "2020-06-01T00:00:00.0000000+00:00",
+                      "subHoldingKeys": {
+                        "instrument/default/Strategy": {
+                          "key": "Instrument/default/Strategy",
+                          "value": {
+                            "labelValue": "XYZ"
+                          }
+                        }
+                      },
+                      "type": "Open",
+                      "movementName": "",
+                      "cashflow": {
+                        "amount": 0,
+                        "currency": "USD"
+                      },
+                      "balance": {
+                        "amount": 10000,
+                        "currency": "USD"
+                      },
+                      "fxRate": 1,
+                      "cashflowReportingCurrency": {
+                        "amount": 0,
+                        "currency": "USD"
+                      },
+                      "balanceReportingCurrency": {
+                        "amount": 10000,
+                        "currency": "USD"
+                      },
+                      "translationGainLoss": {
+                        "amount": 0,
+                        "currency": "USD"
+                      },
+                      "costBasisReportingCurrency": {
+                        "amount": 10000,
+                        "currency": "USD"
+                      }
+                    },
+                    {
+                      "groupById": 3,
+                      "sequenceNumber": 1,
+                      "effectiveDate": "2020-06-30T00:00:00.0000000+00:00",
+                      "subHoldingKeys": {
+                        "instrument/default/Strategy": {
+                          "key": "Instrument/default/Strategy",
+                          "value": {
+                            "labelValue": "XYZ"
+                          }
+                        }
+                      },
+                      "type": "Closed",
+                      "movementName": "",
+                      "cashflow": {
+                        "amount": 0,
+                        "currency": "USD"
+                      },
+                      "balance": {
+                        "amount": 10000,
+                        "currency": "USD"
+                      },
+                      "fxRate": 1,
+                      "cashflowReportingCurrency": {
+                        "amount": 0,
+                        "currency": "USD"
+                      },
+                      "balanceReportingCurrency": {
+                        "amount": 10000,
+                        "currency": "USD"
+                      },
+                      "translationGainLoss": {
+                        "amount": 0,
+                        "currency": "USD"
+                      },
+                      "costBasisReportingCurrency": {
+                        "amount": 10000,
+                        "currency": "USD"
+                      }
+                    }
+                  ],
+                  "links": []
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResourceListOfPortfolioCashFlow"
+                },
+                "example": {
+                  "values": [
+                    {
+                      "groupById": 1,
+                      "sequenceNumber": 0,
+                      "effectiveDate": "2020-06-01T00:00:00.0000000+00:00",
+                      "subHoldingKeys": {
+                        "instrument/default/Strategy": {
+                          "key": "Instrument/default/Strategy",
+                          "value": {
+                            "labelValue": "ABC"
+                          }
+                        }
+                      },
+                      "type": "Open",
+                      "movementName": "",
+                      "cashflow": {
+                        "amount": 0,
+                        "currency": "USD"
+                      },
+                      "balance": {
+                        "amount": 128347,
+                        "currency": "USD"
+                      },
+                      "fxRate": 1,
+                      "cashflowReportingCurrency": {
+                        "amount": 0,
+                        "currency": "USD"
+                      },
+                      "balanceReportingCurrency": {
+                        "amount": 128347,
+                        "currency": "USD"
+                      },
+                      "translationGainLoss": {
+                        "amount": 0,
+                        "currency": "USD"
+                      },
+                      "costBasisReportingCurrency": {
+                        "amount": 128347,
+                        "currency": "USD"
+                      }
+                    },
+                    {
+                      "groupById": 1,
+                      "sequenceNumber": 1,
+                      "effectiveDate": "2020-06-13T00:00:00.0000000+00:00",
+                      "subHoldingKeys": {
+                        "instrument/default/Strategy": {
+                          "key": "Instrument/default/Strategy",
+                          "value": {
+                            "labelValue": "ABC"
+                          }
+                        }
+                      },
+                      "type": "Activity",
+                      "movementName": "principal",
+                      "cashflow": {
+                        "amount": 73494,
+                        "currency": "USD"
+                      },
+                      "balance": {
+                        "amount": 54853,
+                        "currency": "USD"
+                      },
+                      "fxRate": 1,
+                      "cashflowReportingCurrency": {
+                        "amount": 73494,
+                        "currency": "USD"
+                      },
+                      "balanceReportingCurrency": {
+                        "amount": 54853,
+                        "currency": "USD"
+                      },
+                      "translationGainLoss": {
+                        "amount": 0,
+                        "currency": "USD"
+                      },
+                      "costBasisReportingCurrency": {
+                        "amount": 54853,
+                        "currency": "USD"
+                      },
+                      "transaction": {
+                        "transactionId": "tid_234942982496001",
+                        "type": "Buy",
+                        "instrumentIdentifiers": {},
+                        "instrumentUid": "LUID_1C7YTL5M",
+                        "transactionDate": "2020-06-10T00:00:00.0000000+00:00",
+                        "settlementDate": "2020-06-13T00:00:00.0000000+00:00",
+                        "units": 1517.8,
+                        "transactionPrice": {
+                          "price": 48.4213,
+                          "type": "Price"
+                        },
+                        "totalConsideration": {
+                          "amount": 48.4213,
+                          "currency": "USD"
+                        },
+                        "properties": {},
+                        "source": ""
+                      }
+                    },
+                    {
+                      "groupById": 1,
+                      "sequenceNumber": 2,
+                      "effectiveDate": "2020-06-14T00:00:00.0000000+00:00",
+                      "subHoldingKeys": {
+                        "instrument/default/Strategy": {
+                          "key": "Instrument/default/Strategy",
+                          "value": {
+                            "labelValue": "ABC"
+                          }
+                        }
+                      },
+                      "type": "Activity",
+                      "movementName": "principal",
+                      "cashflow": {
+                        "amount": 33731.44,
+                        "currency": "USD"
+                      },
+                      "balance": {
+                        "amount": 21121.56,
+                        "currency": "USD"
+                      },
+                      "fxRate": 1,
+                      "cashflowReportingCurrency": {
+                        "amount": 33731.44,
+                        "currency": "USD"
+                      },
+                      "balanceReportingCurrency": {
+                        "amount": 21121.56,
+                        "currency": "USD"
+                      },
+                      "translationGainLoss": {
+                        "amount": 0,
+                        "currency": "USD"
+                      },
+                      "costBasisReportingCurrency": {
+                        "amount": 21121.56,
+                        "currency": "USD"
+                      },
+                      "transaction": {
+                        "transactionId": "tid_234295929052090",
+                        "type": "Buy",
+                        "instrumentIdentifiers": {},
+                        "instrumentUid": "LUID_1C7YTL5M",
+                        "transactionDate": "2020-06-11T00:00:00.0000000+00:00",
+                        "settlementDate": "2020-06-14T00:00:00.0000000+00:00",
+                        "units": 696.97,
+                        "transactionPrice": {
+                          "price": 48.3974,
+                          "type": "Price"
+                        },
+                        "totalConsideration": {
+                          "amount": 48.3974,
+                          "currency": "USD"
+                        },
+                        "properties": {},
+                        "source": ""
+                      }
+                    },
+                    {
+                      "groupById": 1,
+                      "sequenceNumber": 3,
+                      "effectiveDate": "2020-06-15T00:00:00.0000000+00:00",
+                      "subHoldingKeys": {
+                        "instrument/default/Strategy": {
+                          "key": "Instrument/default/Strategy",
+                          "value": {
+                            "labelValue": "ABC"
+                          }
+                        }
+                      },
+                      "type": "Activity",
+                      "movementName": "payment",
+                      "cashflow": {
+                        "amount": 20.68,
+                        "currency": "USD"
+                      },
+                      "balance": {
+                        "amount": 21142.24,
+                        "currency": "USD"
+                      },
+                      "fxRate": 1,
+                      "cashflowReportingCurrency": {
+                        "amount": 20.68,
+                        "currency": "USD"
+                      },
+                      "balanceReportingCurrency": {
+                        "amount": 21142.24,
+                        "currency": "USD"
+                      },
+                      "translationGainLoss": {
+                        "amount": 0,
+                        "currency": "USD"
+                      },
+                      "costBasisReportingCurrency": {
+                        "amount": 21142.24,
+                        "currency": "USD"
+                      },
+                      "transaction": {
+                        "transactionId": "tid_325452342424500",
+                        "type": "Dividend",
+                        "instrumentIdentifiers": {},
+                        "instrumentUid": "LUID_1C7YTL5M",
+                        "transactionDate": "2020-06-15T00:00:00.0000000+00:00",
+                        "settlementDate": "2020-06-15T00:00:00.0000000+00:00",
+                        "units": 0,
+                        "transactionPrice": {
+                          "price": 0,
+                          "type": "Price"
+                        },
+                        "totalConsideration": {
+                          "amount": 0,
+                          "currency": "USD"
+                        },
+                        "properties": {},
+                        "source": ""
+                      }
+                    },
+                    {
+                      "groupById": 1,
+                      "sequenceNumber": 4,
+                      "effectiveDate": "2020-06-20T00:00:00.0000000+00:00",
+                      "subHoldingKeys": {
+                        "instrument/default/Strategy": {
+                          "key": "Instrument/default/Strategy",
+                          "value": {
+                            "labelValue": "ABC"
+                          }
+                        }
+                      },
+                      "type": "Activity",
+                      "movementName": "principal",
+                      "cashflow": {
+                        "amount": 10374,
+                        "currency": "USD"
+                      },
+                      "balance": {
+                        "amount": 31516.24,
+                        "currency": "USD"
+                      },
+                      "fxRate": 1,
+                      "cashflowReportingCurrency": {
+                        "amount": 10374,
+                        "currency": "USD"
+                      },
+                      "balanceReportingCurrency": {
+                        "amount": 31516.24,
+                        "currency": "USD"
+                      },
+                      "translationGainLoss": {
+                        "amount": 0,
+                        "currency": "USD"
+                      },
+                      "costBasisReportingCurrency": {
+                        "amount": 31516.24,
+                        "currency": "USD"
+                      },
+                      "transaction": {
+                        "transactionId": "tid_329432525234324",
+                        "type": "Sell",
+                        "instrumentIdentifiers": {},
+                        "instrumentUid": "LUID_1C7YTL5M",
+                        "transactionDate": "2020-06-17T00:00:00.0000000+00:00",
+                        "settlementDate": "2020-06-20T00:00:00.0000000+00:00",
+                        "units": 211.63,
+                        "transactionPrice": {
+                          "price": 49.0192,
+                          "type": "Price"
+                        },
+                        "totalConsideration": {
+                          "amount": 49.0192,
+                          "currency": "USD"
+                        },
+                        "properties": {},
+                        "source": ""
+                      }
+                    },
+                    {
+                      "groupById": 1,
+                      "sequenceNumber": 5,
+                      "effectiveDate": "2020-06-20T00:00:00.0000000+00:00",
+                      "subHoldingKeys": {
+                        "instrument/default/Strategy": {
+                          "key": "Instrument/default/Strategy",
+                          "value": {
+                            "labelValue": "ABC"
+                          }
+                        }
+                      },
+                      "type": "Activity",
+                      "movementName": "bond accrual",
+                      "cashflow": {
+                        "amount": 10373,
+                        "currency": "USD"
+                      },
+                      "balance": {
+                        "amount": 41889.24,
+                        "currency": "USD"
+                      },
+                      "fxRate": 0,
+                      "cashflowReportingCurrency": {
+                        "amount": 10373,
+                        "currency": "USD"
+                      },
+                      "balanceReportingCurrency": {
+                        "amount": 41889.24,
+                        "currency": "USD"
+                      },
+                      "translationGainLoss": {
+                        "amount": -1,
+                        "currency": "USD"
+                      },
+                      "costBasisReportingCurrency": {
+                        "amount": 41889.24,
+                        "currency": "USD"
+                      },
+                      "transaction": {
+                        "transactionId": "tid_329432525234323",
+                        "type": "Sell",
+                        "instrumentIdentifiers": {},
+                        "instrumentUid": "LUID_1C7YTL5M",
+                        "transactionDate": "2019-06-17T00:00:00.0000000+00:00",
+                        "settlementDate": "2019-06-20T00:00:00.0000000+00:00",
+                        "units": 210.63,
+                        "transactionPrice": {
+                          "price": 48.0192,
+                          "type": "Price"
+                        },
+                        "totalConsideration": {
+                          "amount": 48.0192,
+                          "currency": "USD"
+                        },
+                        "properties": {},
+                        "source": ""
+                      }
+                    },
+                    {
+                      "groupById": 1,
+                      "sequenceNumber": 6,
+                      "effectiveDate": "2020-06-21T00:00:00.0000000+00:00",
+                      "subHoldingKeys": {
+                        "instrument/default/Strategy": {
+                          "key": "Instrument/default/Strategy",
+                          "value": {
+                            "labelValue": "ABC"
+                          }
+                        }
+                      },
+                      "type": "Activity",
+                      "movementName": "principal",
+                      "cashflow": {
+                        "amount": 8775,
+                        "currency": "USD"
+                      },
+                      "balance": {
+                        "amount": 50665.24,
+                        "currency": "USD"
+                      },
+                      "fxRate": 1,
+                      "cashflowReportingCurrency": {
+                        "amount": 8775,
+                        "currency": "USD"
+                      },
+                      "balanceReportingCurrency": {
+                        "amount": 50665.24,
+                        "currency": "USD"
+                      },
+                      "translationGainLoss": {
+                        "amount": 0,
+                        "currency": "USD"
+                      },
+                      "costBasisReportingCurrency": {
+                        "amount": 50665.24,
+                        "currency": "USD"
+                      },
+                      "transaction": {
+                        "transactionId": "tid_124319009950924",
+                        "type": "Sell",
+                        "instrumentIdentifiers": {},
+                        "instrumentUid": "LUID_1C7YTL5M",
+                        "transactionDate": "2020-06-18T00:00:00.0000000+00:00",
+                        "settlementDate": "2020-06-21T00:00:00.0000000+00:00",
+                        "units": 179.01,
+                        "transactionPrice": {
+                          "price": 49.0184,
+                          "type": "Price"
+                        },
+                        "totalConsideration": {
+                          "amount": 49.0184,
+                          "currency": "USD"
+                        },
+                        "properties": {},
+                        "source": ""
+                      }
+                    },
+                    {
+                      "groupById": 1,
+                      "sequenceNumber": 7,
+                      "effectiveDate": "2020-06-21T00:00:00.0000000+00:00",
+                      "subHoldingKeys": {
+                        "instrument/default/Strategy": {
+                          "key": "Instrument/default/Strategy",
+                          "value": {
+                            "labelValue": "ABC"
+                          }
+                        }
+                      },
+                      "type": "Activity",
+                      "movementName": "principal",
+                      "cashflow": {
+                        "amount": 13225.1,
+                        "currency": "USD"
+                      },
+                      "balance": {
+                        "amount": 63890.34,
+                        "currency": "USD"
+                      },
+                      "fxRate": 1,
+                      "cashflowReportingCurrency": {
+                        "amount": 13225.1,
+                        "currency": "USD"
+                      },
+                      "balanceReportingCurrency": {
+                        "amount": 63890.34,
+                        "currency": "USD"
+                      },
+                      "translationGainLoss": {
+                        "amount": 0,
+                        "currency": "USD"
+                      },
+                      "costBasisReportingCurrency": {
+                        "amount": 63890.34,
+                        "currency": "USD"
+                      },
+                      "transaction": {
+                        "transactionId": "tid_121309590059995",
+                        "type": "Sell",
+                        "instrumentIdentifiers": {},
+                        "instrumentUid": "LUID_1C7YTL5M",
+                        "transactionDate": "2020-06-18T00:00:00.0000000+00:00",
+                        "settlementDate": "2020-06-21T00:00:00.0000000+00:00",
+                        "units": 269.99,
+                        "transactionPrice": {
+                          "price": 48.9843,
+                          "type": "Price"
+                        },
+                        "totalConsideration": {
+                          "amount": 48.9843,
+                          "currency": "USD"
+                        },
+                        "properties": {},
+                        "source": ""
+                      }
+                    },
+                    {
+                      "groupById": 1,
+                      "sequenceNumber": 8,
+                      "effectiveDate": "2020-06-30T00:00:00.0000000+00:00",
+                      "subHoldingKeys": {
+                        "instrument/default/Strategy": {
+                          "key": "Instrument/default/Strategy",
+                          "value": {
+                            "labelValue": "ABC"
+                          }
+                        }
+                      },
+                      "type": "Closed",
+                      "movementName": "",
+                      "cashflow": {
+                        "amount": 0,
+                        "currency": "USD"
+                      },
+                      "balance": {
+                        "amount": 63890.34,
+                        "currency": "USD"
+                      },
+                      "fxRate": 1,
+                      "cashflowReportingCurrency": {
+                        "amount": 0,
+                        "currency": "USD"
+                      },
+                      "balanceReportingCurrency": {
+                        "amount": 63890.34,
+                        "currency": "USD"
+                      },
+                      "translationGainLoss": {
+                        "amount": 0,
+                        "currency": "USD"
+                      },
+                      "costBasisReportingCurrency": {
+                        "amount": 63890.34,
+                        "currency": "USD"
+                      }
+                    },
+                    {
+                      "groupById": 2,
+                      "sequenceNumber": 0,
+                      "effectiveDate": "2020-06-01T00:00:00.0000000+00:00",
+                      "subHoldingKeys": {
+                        "instrument/default/Strategy": {
+                          "key": "Instrument/default/Strategy",
+                          "value": {
+                            "labelValue": "ABC"
+                          }
+                        }
+                      },
+                      "type": "Open",
+                      "movementName": "",
+                      "cashflow": {
+                        "amount": 0,
+                        "currency": "GBP"
+                      },
+                      "balance": {
+                        "amount": 12738.22,
+                        "currency": "GBP"
+                      },
+                      "fxRate": 1.3145,
+                      "cashflowReportingCurrency": {
+                        "amount": 0,
+                        "currency": "USD"
+                      },
+                      "balanceReportingCurrency": {
+                        "amount": 16744.39,
+                        "currency": "USD"
+                      },
+                      "translationGainLoss": {
+                        "amount": 0,
+                        "currency": "USD"
+                      },
+                      "costBasisReportingCurrency": {
+                        "amount": 16744.39,
+                        "currency": "USD"
+                      }
+                    },
+                    {
+                      "groupById": 2,
+                      "sequenceNumber": 1,
+                      "effectiveDate": "2020-06-13T00:00:00.0000000+00:00",
+                      "subHoldingKeys": {
+                        "instrument/default/Strategy": {
+                          "key": "Instrument/default/Strategy",
+                          "value": {
+                            "labelValue": "ABC"
+                          }
+                        }
+                      },
+                      "type": "Activity",
+                      "movementName": "principal",
+                      "cashflow": {
+                        "amount": 43000,
+                        "currency": "GBP"
+                      },
+                      "balance": {
+                        "amount": 30261.78,
+                        "currency": "GBP"
+                      },
+                      "fxRate": 1.2,
+                      "cashflowReportingCurrency": {
+                        "amount": 51600,
+                        "currency": "USD"
+                      },
+                      "balanceReportingCurrency": {
+                        "amount": 36314.14,
+                        "currency": "USD"
+                      },
+                      "translationGainLoss": {
+                        "amount": -1458.52619,
+                        "currency": "USD"
+                      },
+                      "costBasisReportingCurrency": {
+                        "amount": -36314.14,
+                        "currency": "USD"
+                      },
+                      "transaction": {
+                        "transactionId": "tid_124319009950924",
+                        "type": "Buy",
+                        "instrumentIdentifiers": {},
+                        "instrumentUid": "LUID_1C7YTL5M",
+                        "transactionDate": "2020-06-10T00:00:00.0000000+00:00",
+                        "settlementDate": "2020-06-13T00:00:00.0000000+00:00",
+                        "units": 1829.79,
+                        "transactionPrice": {
+                          "price": 23.5,
+                          "type": "Price"
+                        },
+                        "totalConsideration": {
+                          "amount": 23.5,
+                          "currency": "USD"
+                        },
+                        "properties": {},
+                        "source": ""
+                      }
+                    },
+                    {
+                      "groupById": 2,
+                      "sequenceNumber": 2,
+                      "effectiveDate": "2020-06-18T00:00:00.0000000+00:00",
+                      "subHoldingKeys": {
+                        "instrument/default/Strategy": {
+                          "key": "Instrument/default/Strategy",
+                          "value": {
+                            "labelValue": "ABC"
+                          }
+                        }
+                      },
+                      "type": "Activity",
+                      "movementName": "principal",
+                      "cashflow": {
+                        "amount": 89994.71,
+                        "currency": "GBP"
+                      },
+                      "balance": {
+                        "amount": 59732.93,
+                        "currency": "GBP"
+                      },
+                      "fxRate": 1.3,
+                      "cashflowReportingCurrency": {
+                        "amount": 116993.12,
+                        "currency": "USD"
+                      },
+                      "balanceReportingCurrency": {
+                        "amount": 77652.81,
+                        "currency": "USD"
+                      },
+                      "translationGainLoss": {
+                        "amount": -3026.178,
+                        "currency": "USD"
+                      },
+                      "costBasisReportingCurrency": {
+                        "amount": 77652.81,
+                        "currency": "USD"
+                      },
+                      "transaction": {
+                        "transactionId": "tid_121309590059995",
+                        "type": "Sell",
+                        "instrumentIdentifiers": {},
+                        "instrumentUid": "LUID_1C7YTL5M",
+                        "transactionDate": "2020-06-15T00:00:00.0000000+00:00",
+                        "settlementDate": "2020-06-18T00:00:00.0000000+00:00",
+                        "units": 3333.14,
+                        "transactionPrice": {
+                          "price": 27,
+                          "type": "Price"
+                        },
+                        "totalConsideration": {
+                          "amount": 27,
+                          "currency": "USD"
+                        },
+                        "properties": {},
+                        "source": ""
+                      }
+                    },
+                    {
+                      "groupById": 2,
+                      "sequenceNumber": 3,
+                      "effectiveDate": "2020-06-30T00:00:00.0000000+00:00",
+                      "subHoldingKeys": {
+                        "instrument/default/Strategy": {
+                          "key": "Instrument/default/Strategy",
+                          "value": {
+                            "labelValue": "ABC"
+                          }
+                        }
+                      },
+                      "type": "Closed",
+                      "movementName": "",
+                      "cashflow": {
+                        "amount": 0,
+                        "currency": "GBP"
+                      },
+                      "balance": {
+                        "amount": 59732.93,
+                        "currency": "GBP"
+                      },
+                      "fxRate": 1.3244,
+                      "cashflowReportingCurrency": {
+                        "amount": 0,
+                        "currency": "USD"
+                      },
+                      "balanceReportingCurrency": {
+                        "amount": 79110.29,
+                        "currency": "USD"
+                      },
+                      "translationGainLoss": {
+                        "amount": 0,
+                        "currency": "USD"
+                      },
+                      "costBasisReportingCurrency": {
+                        "amount": 77652.81,
+                        "currency": "USD"
+                      }
+                    },
+                    {
+                      "groupById": 3,
+                      "sequenceNumber": 0,
+                      "effectiveDate": "2020-06-01T00:00:00.0000000+00:00",
+                      "subHoldingKeys": {
+                        "instrument/default/Strategy": {
+                          "key": "Instrument/default/Strategy",
+                          "value": {
+                            "labelValue": "XYZ"
+                          }
+                        }
+                      },
+                      "type": "Open",
+                      "movementName": "",
+                      "cashflow": {
+                        "amount": 0,
+                        "currency": "USD"
+                      },
+                      "balance": {
+                        "amount": 10000,
+                        "currency": "USD"
+                      },
+                      "fxRate": 1,
+                      "cashflowReportingCurrency": {
+                        "amount": 0,
+                        "currency": "USD"
+                      },
+                      "balanceReportingCurrency": {
+                        "amount": 10000,
+                        "currency": "USD"
+                      },
+                      "translationGainLoss": {
+                        "amount": 0,
+                        "currency": "USD"
+                      },
+                      "costBasisReportingCurrency": {
+                        "amount": 10000,
+                        "currency": "USD"
+                      }
+                    },
+                    {
+                      "groupById": 3,
+                      "sequenceNumber": 1,
+                      "effectiveDate": "2020-06-30T00:00:00.0000000+00:00",
+                      "subHoldingKeys": {
+                        "instrument/default/Strategy": {
+                          "key": "Instrument/default/Strategy",
+                          "value": {
+                            "labelValue": "XYZ"
+                          }
+                        }
+                      },
+                      "type": "Closed",
+                      "movementName": "",
+                      "cashflow": {
+                        "amount": 0,
+                        "currency": "USD"
+                      },
+                      "balance": {
+                        "amount": 10000,
+                        "currency": "USD"
+                      },
+                      "fxRate": 1,
+                      "cashflowReportingCurrency": {
+                        "amount": 0,
+                        "currency": "USD"
+                      },
+                      "balanceReportingCurrency": {
+                        "amount": 10000,
+                        "currency": "USD"
+                      },
+                      "translationGainLoss": {
+                        "amount": 0,
+                        "currency": "USD"
+                      },
+                      "costBasisReportingCurrency": {
+                        "amount": 10000,
+                        "currency": "USD"
+                      }
+                    }
+                  ],
+                  "links": []
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "The details of the input related failure",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/LusidValidationProblemDetails"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/LusidValidationProblemDetails"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/LusidValidationProblemDetails"
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "Error response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/LusidProblemDetails"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "oauth2": []
+          }
+        ],
+        "x-fbn-apistatus": "EarlyAccess"
+      }
+    },
     "/api/transactionportfolios/{scope}/{code}/details": {
       "get": {
         "tags": [
@@ -20675,6 +23165,125 @@
         },
         "additionalProperties": false
       },
+      "PortfolioCashFlow": {
+        "required": [
+          "balance",
+          "balanceReportingCurrency",
+          "cashflow",
+          "cashflowReportingCurrency",
+          "costBasisReportingCurrency",
+          "fxRate",
+          "groupById",
+          "movementName",
+          "sequenceNumber",
+          "translationGainLoss",
+          "type"
+        ],
+        "type": "object",
+        "properties": {
+          "groupById": {
+            "type": "integer",
+            "description": "The groupBy subHoldings and currency.",
+            "format": "int32"
+          },
+          "sequenceNumber": {
+            "type": "integer",
+            "description": "Sequence number determining the order of the cash flow records.",
+            "format": "int32"
+          },
+          "effectiveDate": {
+            "type": "string",
+            "description": "Indicates the date when the cash-flow settles.",
+            "format": "date-time"
+          },
+          "subHoldingKeys": {
+            "type": "object",
+            "additionalProperties": {
+              "$ref": "#/components/schemas/PerpetualProperty"
+            },
+            "description": "The sub-holding properties which identify the holding. Each property will be from the 'Transaction' domain. These are configured when a transaction portfolio is created.",
+            "nullable": true
+          },
+          "type": {
+            "type": "string",
+            "description": "Indicates the record type (Closed, Open, Activity)."
+          },
+          "movementName": {
+            "type": "string",
+            "description": "Indicates the specific movement of the transaction that generated this cash flow."
+          },
+          "cashflow": {
+            "$ref": "#/components/schemas/CurrencyAndAmount"
+          },
+          "balance": {
+            "$ref": "#/components/schemas/CurrencyAndAmount"
+          },
+          "fxRate": {
+            "type": "number",
+            "description": "Exchange rate between the currency of this cash flow and the reporting currency.",
+            "format": "double"
+          },
+          "cashflowReportingCurrency": {
+            "$ref": "#/components/schemas/CurrencyAndAmount"
+          },
+          "balanceReportingCurrency": {
+            "$ref": "#/components/schemas/CurrencyAndAmount"
+          },
+          "translationGainLoss": {
+            "$ref": "#/components/schemas/CurrencyAndAmount"
+          },
+          "costBasisReportingCurrency": {
+            "$ref": "#/components/schemas/CurrencyAndAmount"
+          },
+          "transaction": {
+            "$ref": "#/components/schemas/Transaction"
+          },
+          "links": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Link"
+            },
+            "nullable": true
+          }
+        },
+        "additionalProperties": false,
+        "description": "The details for the cashflow for a given portfolio."
+      },
+      "ResourceListOfPortfolioCashFlow": {
+        "required": [
+          "values"
+        ],
+        "type": "object",
+        "properties": {
+          "values": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/PortfolioCashFlow"
+            }
+          },
+          "href": {
+            "type": "string",
+            "format": "uri",
+            "nullable": true
+          },
+          "links": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Link"
+            },
+            "nullable": true
+          },
+          "nextPage": {
+            "type": "string",
+            "nullable": true
+          },
+          "previousPage": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
       "PortfolioDetails": {
         "required": [
           "baseCurrency",
@@ -21227,7 +23836,7 @@
         "description": "OAuth2 Implicit Grant",
         "flows": {
           "implicit": {
-            "authorizationUrl": "https://lusid.okta.com/oauth2/default/v1/authorize",
+            "authorizationUrl": "https://dummyurl.lusid.com/",
             "scopes": {}
           }
         }
