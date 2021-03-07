@@ -216,7 +216,7 @@ class Portfolios(unittest.TestCase):
         # This defines the scope that the portfolios will be retrieved from
         scope = TestDataUtilities.tutorials_scope + str(uuid.uuid4())
 
-        for i in range(10):
+        for _ in range(10):
             self.test_data_utilities.create_transaction_portfolio(scope)
 
         # Retrieve the list of portfolios

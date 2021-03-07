@@ -51,6 +51,7 @@ class ApiClient(object):
         to the API. More threads means more concurrent API requests.
     """
 
+    APPLICATION_JSON = "application/json"
     PRIMITIVE_TYPES = (float, bool, bytes, six.text_type) + six.integer_types
     NATIVE_TYPES_MAPPING = {
         'int': int,
@@ -479,8 +480,8 @@ class ApiClient(object):
 
         accepts = [x.lower() for x in accepts]
 
-        if 'application/json' in accepts:
-            return 'application/json'
+        if self.APPLICATION_JSON in accepts:
+            return self.APPLICATION_JSON
         else:
             return ', '.join(accepts)
 
@@ -491,12 +492,12 @@ class ApiClient(object):
         :return: Content-Type (e.g. application/json).
         """
         if not content_types:
-            return 'application/json'
+            return self.APPLICATION_JSON
 
         content_types = [x.lower() for x in content_types]
 
-        if 'application/json' in content_types or '*/*' in content_types:
-            return 'application/json'
+        if self.APPLICATION_JSON in content_types or '*/*' in content_types:
+            return self.APPLICATION_JSON
         else:
             return content_types[0]
 

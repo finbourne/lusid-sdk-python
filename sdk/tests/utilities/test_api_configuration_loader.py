@@ -17,6 +17,9 @@ class ApiConfigurationLoaderTests(unittest.TestCase):
     These test ensure that the ApiConfigurationLoader works as expected
 
     """
+    
+    OS_ENVIRON = "os_environ"
+    
     def assert_config_values(self, config, secrets):
         """
         Not a test. This is used to test the values of the ApiConfiguration.
@@ -60,7 +63,7 @@ class ApiConfigurationLoaderTests(unittest.TestCase):
         env_vars = {config_keys[key]["env"]: "DUMMYVALUE" for key, value in source_config_details.items() if value is not None}
 
         # Set the environment variables as desired
-        with patch.dict('os.environ', env_vars, clear=True):
+        with patch.dict(self.OS_ENVIRON, env_vars, clear=True):
             # Create a temporary secrets file as desired
             secrets_file = TempFileManager.create_temp_file(secrets)
             # Load the config
@@ -87,7 +90,7 @@ class ApiConfigurationLoaderTests(unittest.TestCase):
          value is not None and "token_url" not in key}
 
         # Set the environment variables as desired
-        with patch.dict('os.environ', env_vars, clear=True):
+        with patch.dict(self.OS_ENVIRON, env_vars, clear=True):
             # Create a temporary secrets file as desired
             secrets_file = TempFileManager.create_temp_file(secrets)
             # Load the config
@@ -118,7 +121,7 @@ class ApiConfigurationLoaderTests(unittest.TestCase):
         env_vars = {config_keys["token_url"]["env"]: source_config_details["token_url"]}
 
         # Set the environment variables as desired
-        with patch.dict('os.environ', env_vars, clear=True):
+        with patch.dict(self.OS_ENVIRON, env_vars, clear=True):
             # Create a temporary secrets file as desired
             secrets_file = TempFileManager.create_temp_file(secrets)
             # Load the config
@@ -149,7 +152,7 @@ class ApiConfigurationLoaderTests(unittest.TestCase):
         env_vars = {}
 
         # Set the environment variables as desired
-        with patch.dict('os.environ', env_vars, clear=True):
+        with patch.dict(self.OS_ENVIRON, env_vars, clear=True):
             # Create a temporary secrets file as desired
             secrets_file = TempFileManager.create_temp_file(secrets)
             # Load the config
@@ -167,7 +170,7 @@ class ApiConfigurationLoaderTests(unittest.TestCase):
         """
         # Set all the environment variables
         env_vars = {config_keys[key]["env"]: value for key, value in source_config_details.items() if value is not None}
-        with patch.dict('os.environ', env_vars, clear=True):
+        with patch.dict(self.OS_ENVIRON, env_vars, clear=True):
             config = ApiConfigurationLoader.load()
 
         self.assert_config_values(config, source_config_details)
