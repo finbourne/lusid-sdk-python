@@ -1,6 +1,5 @@
 from urllib3 import make_headers
-from urllib.request import pathname2url
-import requests
+import os
 
 from lusid import Configuration, ApiClient
 
@@ -36,70 +35,14 @@ class ApiClientBuilder:
                 f"please ensure that you have provided them directly, via a secrets file or environment "
                 f"variables")
 
-    @staticmethod
-    def __generate_access_token(configuration, okta_response_handler):
-        """
-        This function generates an access token by making a call to Okta
-
-        :param ApiConfiguration configuration: The configuration to use
-        :param typing.callable okta_response_handler: An optional function to handle the Okta response
-
-        :return: RefreshingToken api_token: A refreshing API token
-        """
-        # Encode credentials that may contain special characters
-        encoded_password = pathname2url(configuration.password)
-        encoded_client_id = pathname2url(configuration.client_id)
-        encoded_client_secret = pathname2url(configuration.client_secret)
-
-        # Prepare our authentication request
-        token_request_body = f"grant_type=password&username={configuration.username}" \
-            f"&password={encoded_password}&scope=openid client groups offline_access" \
-            f"&client_id={encoded_client_id}&client_secret={encoded_client_secret}"
-
-        headers = {"Accept": "application/json", "Content-Type": "application/x-www-form-urlencoded"}
-
-        # extra request args
-        kwargs = {"headers": headers}
-
-        if configuration.proxy_config is not None:
-            kwargs["proxies"] = configuration.proxy_config.format_proxy_schema()
-
-        # use certificate if supplied
-        if configuration.certificate_filename is not None:
-            kwargs["verify"] = configuration.certificate_filename
-
-        # make request to Okta to get an authentication token
-        okta_response = requests.post(configuration.token_url, data=token_request_body, **kwargs)
-
-        if okta_response_handler is not None:
-            okta_response_handler(okta_response)
-
-        # Ensure that we have a 200 response code
-        if okta_response.status_code != 200:
-            raise ValueError(okta_response.json())
-
-        # convert the json encoded response to be able to extract the token values
-        okta_json = okta_response.json()
-
-        # Retrieve our api token from the authentication response
-        api_token = RefreshingToken(token_url=configuration.token_url,
-                                    client_id=encoded_client_id,
-                                    client_secret=encoded_client_secret,
-                                    initial_access_token=okta_json["access_token"],
-                                    initial_token_expiry=okta_json["expires_in"],
-                                    refresh_token=okta_json["refresh_token"],
-                                    proxies=kwargs.get("proxies", None),
-                                    certificate_filename=kwargs.get("verify", None))
-
-        return api_token
-
     @classmethod
-    def build(cls, api_secrets_filename=None, okta_response_handler=None, api_configuration=None, token=None):
+    def build(cls, api_secrets_filename=None, id_provider_response_handler=None, api_configuration=None, token=None, correlation_id=None):
         """
         :param str api_secrets_filename: The full path to the JSON file containing the API credentials and optional proxy details
-        :param typing.callable okta_response_handler: An optional function to handle the Okta response
+        :param typing.callable id_provider_response_handler: An optional function to handle the Okta response
         :param lusid.utilities.ApiConfiguration api_configuration: A pre-populated ApiConfiguration
         :param str token: The pre-populated access token to use instead of asking Okta for a token
+        :param str correlation_id: Correlation id for all calls made from the returned ApiClient instance, added as a header to each request
 
         :return: lusid.ApiClient: The configured LUSID ApiClient
         """
@@ -130,9 +73,9 @@ class ApiClientBuilder:
                 "token_url"])
 
             # Generate an access token
-            api_token = cls.__generate_access_token(
-                configuration=configuration,
-                okta_response_handler=okta_response_handler
+            api_token = RefreshingToken(
+                api_configuration=configuration,
+                id_provider_response_handler=id_provider_response_handler
             )
 
         # Initialise the API client using the token so that it can be included in all future requests
@@ -152,7 +95,15 @@ class ApiClientBuilder:
                 )
 
         # Create and return the ApiClient
-        return ApiClient(
-            configuration=config,
-            header_name="X-LUSID-Application" if configuration.app_name is not None else None,
-            header_value=configuration.app_name)
+        api_client = ApiClient(configuration=config)
+
+        # set the application name if specified
+        if configuration.app_name is not None:
+            api_client.set_default_header("X-LUSID-Application", configuration.app_name)
+
+        # set a correlation id for all requests initiated with this ApiClient
+        corr_id = correlation_id or os.getenv("FBN_CORRELATION_ID")
+        if corr_id is not None:
+            api_client.set_default_header("CorrelationId", corr_id)
+
+        return api_client

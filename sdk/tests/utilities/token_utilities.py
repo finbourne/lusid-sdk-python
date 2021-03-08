@@ -16,6 +16,7 @@ class TokenUtilities:
             refresh_token = okta_json["refresh_token"]
             original_token = okta_json["access_token"]
 
-        ApiClientBuilder().build(secrets_path, extract_refresh_token)
+        client = ApiClientBuilder().build(secrets_path, extract_refresh_token)
+        repr(client.configuration.access_token)
 
         return original_token, refresh_token

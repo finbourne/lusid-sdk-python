@@ -38,10 +38,12 @@ class ApiClientBuilderTests(unittest.TestCase):
         """
         # Create an ApiConfiguration with all values populated
         proxy_config = ProxyConfig(**{
-            key.replace("proxy_", ""): value for key, value in source_config_details.items() if value is not None and "proxy" in key
+            key.replace("proxy_", ""): value for key, value in source_config_details.items() if
+            value is not None and "proxy" in key
         }) if source_config_details["proxy_address"] is not None else None
 
-        api_config_kwargs = {key: value for key, value in source_config_details.items() if value is not None and "proxy" not in key}
+        api_config_kwargs = {key: value for key, value in source_config_details.items() if
+                             value is not None and "proxy" not in key}
         api_config_kwargs["proxy_config"] = proxy_config
         api_configuration = ApiConfiguration(**api_config_kwargs)
 
@@ -63,21 +65,20 @@ class ApiClientBuilderTests(unittest.TestCase):
         """
 
         secrets = {
-                    "api": {
-                        config_keys[key]["config"]: "DUMMYVALUE" for key in source_config_details.keys() if
-                        "proxy" not in key
-                    }
-                }
+            "api": {
+                config_keys[key]["config"]: "DUMMYVALUE" for key in source_config_details.keys() if
+                "proxy" not in key
+            }
+        }
 
         env_vars = {}
 
         api_configuration = ApiConfiguration(**{
-                    key: value for key, value in source_config_details.items() if "proxy" not in key
+            key: value for key, value in source_config_details.items() if "proxy" not in key
         })
 
         # Use a temporary file and no environment variables to generate the API Client
         with patch.dict('os.environ', env_vars, clear=True), patch("requests.post") as mock_requests:
-
             mock_requests.return_value.status_code = 200
             mock_requests.return_value.json.return_value = {
                 "access_token": "mock_access_token",
@@ -91,9 +92,9 @@ class ApiClientBuilderTests(unittest.TestCase):
                 api_configuration=api_configuration)
 
             TempFileManager.delete_temp_file(secrets_file)
+            self.assertEqual(client.configuration.access_token, "mock_access_token")
 
         self.assertEqual(client.configuration.host, source_config_details["api_url"])
-        self.assertEqual(client.configuration.access_token, "mock_access_token")
         self.assertIsInstance(client, ApiClient)
 
     def test_build_client_no_token_provided_file_only(self):
@@ -102,11 +103,11 @@ class ApiClientBuilderTests(unittest.TestCase):
         """
 
         secrets = {
-                    "api": {
-                        config_keys[key]["config"]: value for key, value in source_config_details.items() if
-                        value is not None and "proxy" not in key
-                    }
-                }
+            "api": {
+                config_keys[key]["config"]: value for key, value in source_config_details.items() if
+                value is not None and "proxy" not in key
+            }
+        }
 
         env_vars = {}
 
@@ -114,7 +115,6 @@ class ApiClientBuilderTests(unittest.TestCase):
 
         # Use a temporary file and no environment variables to generate the API Client
         with patch.dict('os.environ', env_vars, clear=True), patch("requests.post") as mock_requests:
-
             mock_requests.return_value.status_code = 200
             mock_requests.return_value.json.return_value = {
                 "access_token": "mock_access_token",
@@ -128,9 +128,9 @@ class ApiClientBuilderTests(unittest.TestCase):
                 api_configuration=api_configuration)
 
             TempFileManager.delete_temp_file(secrets_file)
+            self.assertEqual(client.configuration.access_token, "mock_access_token")
 
         self.assertEqual(client.configuration.host, source_config_details["api_url"])
-        self.assertEqual(client.configuration.access_token, "mock_access_token")
         self.assertIsInstance(client, ApiClient)
 
     @parameterized.expand(
@@ -168,7 +168,6 @@ class ApiClientBuilderTests(unittest.TestCase):
 
         # Use a temporary file and no environment variables to generate the API Client
         with patch.dict('os.environ', env_vars, clear=True):
-
             secrets_file = TempFileManager.create_temp_file(secrets)
             client = ApiClientBuilder.build(
                 api_secrets_filename=secrets_file.name,
@@ -182,7 +181,6 @@ class ApiClientBuilderTests(unittest.TestCase):
         self.assertIsInstance(client, ApiClient)
 
     def test_use_okta_response_handler(self):
-
         api_configuration = ApiConfiguration(**{
             key: value for key, value in source_config_details.items() if "proxy" not in key
         })
@@ -195,15 +193,74 @@ class ApiClientBuilderTests(unittest.TestCase):
             if not okta_response.json.return_value.get("refresh_token", False):
                 raise ValueError("Refresh token missing from config")
 
-        with patch.dict('os.environ', env_vars, clear=True), patch("requests.post") as mock_requests, self.assertRaises(ValueError):
-
+        with patch.dict('os.environ', env_vars, clear=True), patch("requests.post") as mock_requests, self.assertRaises(
+                ValueError):
             mock_requests.return_value.status_code = 200
             mock_requests.return_value.json.return_value = {
                 "access_token": "mock_access_token",
                 "expires_in": 60
             }
 
-            ApiClientBuilder.build(
+            client = ApiClientBuilder.build(
                 api_configuration=api_configuration,
-                okta_response_handler=response_handler)
+                id_provider_response_handler=response_handler)
 
+            # Force evaluation of the access token so that it is retrieved
+            repr(client.configuration.access_token)
+
+    def test_set_correlation_id_from_env_var(self):
+
+        api_configuration = ApiConfiguration(**{
+            key: value for key, value in source_config_details.items() if "proxy" not in key
+        })
+
+        env_vars = {config_keys[key]["env"]: value for key, value in source_config_details.items() if value is not None}
+        env_vars["FBN_CORRELATION_ID"] = "env-correlation-id"
+
+        with patch.dict('os.environ', env_vars, clear=True):
+            client = ApiClientBuilder.build(api_configuration=api_configuration)
+
+        self.assertTrue("CorrelationId" in client.default_headers, msg="CorrelationId not found in headers")
+        self.assertEquals(client.default_headers["CorrelationId"], "env-correlation-id")
+
+    def test_set_correlation_id_from_param(self):
+
+        api_configuration = ApiConfiguration(**{
+            key: value for key, value in source_config_details.items() if "proxy" not in key
+        })
+
+        env_vars = {config_keys[key]["env"]: value for key, value in source_config_details.items() if value is not None}
+
+        with patch.dict('os.environ', env_vars, clear=True):
+            client = ApiClientBuilder.build(api_configuration=api_configuration, correlation_id="param-correlation-id")
+
+        self.assertTrue("CorrelationId" in client.default_headers, msg="CorrelationId not found in headers")
+        self.assertEquals(client.default_headers["CorrelationId"], "param-correlation-id")
+
+    def test_no_correlation_id_is_set_when_no_env_var_is_set(self):
+
+        api_configuration = ApiConfiguration(**{
+            key: value for key, value in source_config_details.items() if "proxy" not in key
+        })
+
+        env_vars = {config_keys[key]["env"]: value for key, value in source_config_details.items() if value is not None}
+
+        with patch.dict('os.environ', env_vars, clear=True):
+            client = ApiClientBuilder.build(api_configuration=api_configuration)
+
+        self.assertFalse("CorrelationId" in client.default_headers, msg="Unexpected CorrelationId found in headers")
+
+    def test_use_explicit_correlation_id_when_env_var_exists(self):
+
+        api_configuration = ApiConfiguration(**{
+            key: value for key, value in source_config_details.items() if "proxy" not in key
+        })
+
+        env_vars = {config_keys[key]["env"]: value for key, value in source_config_details.items() if value is not None}
+        env_vars["FBN_CORRELATION_ID"] = "env-correlation-id"
+
+        with patch.dict('os.environ', env_vars, clear=True):
+            client = ApiClientBuilder.build(api_configuration=api_configuration, correlation_id="param-correlation-id")
+
+        self.assertTrue("CorrelationId" in client.default_headers, msg="CorrelationId not found in headers")
+        self.assertEquals(client.default_headers["CorrelationId"], "param-correlation-id")
