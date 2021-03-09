@@ -9,7 +9,7 @@
       "url": "https://www.finbourne.com",
       "email": "info@finbourne.com"
     },
-    "version": "0.11.2706",
+    "version": "0.11.2709",
     "x-logo": {
       "url": "https://content.finbourne.com/LUSID-header.png",
       "backgroundColor": "#415464"
@@ -17,7 +17,7 @@
   },
   "servers": [
     {
-      "url": "https://fbn-prd.lusid.com/api"
+      "url": "http://local-unit-test-server.lusid.com:41667"
     }
   ],
   "paths": {
@@ -21615,6 +21615,12 @@
             "type": "string",
             "description": "Description of the quote's lineage e.g. 'FundAccountant_GreenQuality'.",
             "nullable": true
+          },
+          "scaleFactor": {
+            "type": "number",
+            "description": "An optional scale factor for non-standard scaling of quotes against the instrument. If not supplied, the default ScaleFactor is 1.",
+            "format": "double",
+            "nullable": true
           }
         },
         "additionalProperties": false,
@@ -21652,6 +21658,12 @@
             "type": "string",
             "description": "The asAt datetime at which the quote was committed to LUSID.",
             "format": "date-time"
+          },
+          "scaleFactor": {
+            "type": "number",
+            "description": "An optional scale factor for non-standard scaling of quotes against the instrument. If not supplied, the default ScaleFactor is 1.",
+            "format": "double",
+            "nullable": true
           }
         },
         "additionalProperties": false,
@@ -23840,7 +23852,7 @@
         "description": "OAuth2 Implicit Grant",
         "flows": {
           "implicit": {
-            "authorizationUrl": "https://lusid.okta.com/oauth2/default/v1/authorize",
+            "authorizationUrl": "https://dummyurl.lusid.com/",
             "scopes": {}
           }
         }
