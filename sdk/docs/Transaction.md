@@ -17,6 +17,7 @@ Name | Type | Description | Notes
 **properties** | [**dict(str, PerpetualProperty)**](PerpetualProperty.md) | Set of unique transaction properties and associated values to stored with the transaction. Each property will be from the &#39;Transaction&#39; domain. | [optional] 
 **counterparty_id** | **str** | The identifier for the counterparty of the transaction. | [optional] 
 **source** | **str** | The source of the transaction. This is used to look up the appropriate transaction group set in the transaction type configuration. | [optional] 
+**entry_date_time** | **datetime** | The asAt datetime that the transaction was added to LUSID. | [optional] 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 
