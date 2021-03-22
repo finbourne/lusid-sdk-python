@@ -9,7 +9,7 @@
       "url": "https://www.finbourne.com",
       "email": "info@finbourne.com"
     },
-    "version": "0.11.2786",
+    "version": "0.11.2785",
     "x-logo": {
       "url": "https://content.finbourne.com/LUSID-header.png",
       "backgroundColor": "#415464"
@@ -17,7 +17,7 @@
   },
   "servers": [
     {
-      "url": "http://local-unit-test-server.lusid.com:33720"
+      "url": "https://fbn-prd.lusid.com/api"
     }
   ],
   "paths": {
@@ -1694,164 +1694,6 @@
               "text/json": {
                 "schema": {
                   "$ref": "#/components/schemas/DeleteInstrumentResponse"
-                }
-              }
-            }
-          },
-          "400": {
-            "description": "The details of the input related failure",
-            "content": {
-              "text/plain": {
-                "schema": {
-                  "$ref": "#/components/schemas/LusidValidationProblemDetails"
-                }
-              },
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/LusidValidationProblemDetails"
-                }
-              },
-              "text/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/LusidValidationProblemDetails"
-                }
-              }
-            }
-          },
-          "default": {
-            "description": "Error response",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/LusidProblemDetails"
-                }
-              }
-            }
-          }
-        },
-        "security": [
-          {
-            "oauth2": []
-          }
-        ],
-        "x-fbn-apistatus": "EarlyAccess"
-      }
-    },
-    "/api/instruments/{identifierType}/{identifier}/properties/time-series": {
-      "get": {
-        "tags": [
-          "Instruments"
-        ],
-        "summary": "[EARLY ACCESS] Get the time series of an instrument property",
-        "description": "List the complete time series of an instrument property.",
-        "operationId": "GetInstrumentPropertyTimeSeries",
-        "parameters": [
-          {
-            "name": "identifierType",
-            "in": "path",
-            "description": "The identifier type of the instrument, e.g., \"Figi\"",
-            "required": true,
-            "schema": {
-              "type": "string",
-              "description": "The identifier type of the instrument, e.g., \"Figi\"",
-              "nullable": true
-            }
-          },
-          {
-            "name": "identifier",
-            "in": "path",
-            "description": "The value of the identifier for the requested instrument.",
-            "required": true,
-            "schema": {
-              "type": "string",
-              "description": "The value of the identifier for the requested instrument.",
-              "nullable": true
-            }
-          },
-          {
-            "name": "propertyKey",
-            "in": "query",
-            "description": "The property key of the property that will have its history shown.",
-            "schema": {
-              "type": "string",
-              "description": "The key that uniquely identifies the property. It has the format {domain}/{scope}/{code}.",
-              "nullable": true
-            }
-          },
-          {
-            "name": "identifierEffectiveAt",
-            "in": "query",
-            "description": "The effective datetime used to resolve the instrument from the provided identifier. Defaults to the current LUSID system datetime if not specified.",
-            "schema": {
-              "type": "string",
-              "description": "The effective datetime used to resolve the instrument from the provided identifier. Defaults to the current LUSID system datetime if not specified.",
-              "nullable": true
-            }
-          },
-          {
-            "name": "asAt",
-            "in": "query",
-            "description": "The asAt datetime at which to list the instrument's property history. Defaults to return the current datetime if not supplied.",
-            "schema": {
-              "type": "string",
-              "description": "The asAt datetime at which to list the instrument's property history. Defaults to return the current datetime if not supplied.",
-              "format": "date-time",
-              "nullable": true
-            },
-            "x-nullable": true
-          },
-          {
-            "name": "filter",
-            "in": "query",
-            "description": "Expression to filter the result set. Read more about filtering results from LUSID here https://support.lusid.com/filtering-results-from-lusid.",
-            "schema": {
-              "type": "string",
-              "description": "Expression to filter the result set. Read more about filtering results from LUSID here https://support.lusid.com/filtering-results-from-lusid.",
-              "nullable": true
-            }
-          },
-          {
-            "name": "page",
-            "in": "query",
-            "description": "The pagination token to use to continue listing properties from a previous call to get property time series.\r\n            This value is returned from the previous call. If a pagination token is provided the filter, effectiveAt, and asAt fields\r\n            must not have changed since the original request.",
-            "schema": {
-              "type": "string",
-              "description": "The pagination token to use to continue listing properties from a previous call to get property time series.\r\n            This value is returned from the previous call. If a pagination token is provided the filter, effectiveAt, and asAt fields\r\n            must not have changed since the original request.",
-              "nullable": true
-            }
-          },
-          {
-            "name": "limit",
-            "in": "query",
-            "description": "When paginating, limit the number of returned results to this many.",
-            "schema": {
-              "maximum": 5000,
-              "minimum": 1,
-              "type": "integer",
-              "description": "When paginating, limit the number of returned results to this many.",
-              "format": "int32",
-              "nullable": true
-            },
-            "x-nullable": true
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "The time series of the property",
-            "content": {
-              "text/plain": {
-                "schema": {
-                  "$ref": "#/components/schemas/ResourceListOfPropertyInterval"
-                }
-              },
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ResourceListOfPropertyInterval"
-                }
-              },
-              "text/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ResourceListOfPropertyInterval"
                 }
               }
             }
@@ -21056,84 +20898,6 @@
         },
         "additionalProperties": false
       },
-      "DateRange": {
-        "required": [
-          "fromDate"
-        ],
-        "type": "object",
-        "properties": {
-          "fromDate": {
-            "type": "string",
-            "format": "date-time"
-          },
-          "untilDate": {
-            "type": "string",
-            "format": "date-time",
-            "nullable": true
-          }
-        },
-        "additionalProperties": false
-      },
-      "PropertyInterval": {
-        "required": [
-          "asAtRange",
-          "effectiveRange",
-          "status",
-          "value"
-        ],
-        "type": "object",
-        "properties": {
-          "value": {
-            "$ref": "#/components/schemas/PropertyValue"
-          },
-          "effectiveRange": {
-            "$ref": "#/components/schemas/DateRange"
-          },
-          "asAtRange": {
-            "$ref": "#/components/schemas/DateRange"
-          },
-          "status": {
-            "type": "string",
-            "description": "Indicates whether the value is part of the prevailing effective date timeline for the requested asAt date, or whether it has been superseded by correctional activity"
-          }
-        },
-        "additionalProperties": false
-      },
-      "ResourceListOfPropertyInterval": {
-        "required": [
-          "values"
-        ],
-        "type": "object",
-        "properties": {
-          "values": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/PropertyInterval"
-            }
-          },
-          "href": {
-            "type": "string",
-            "format": "uri",
-            "nullable": true
-          },
-          "links": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/Link"
-            },
-            "nullable": true
-          },
-          "nextPage": {
-            "type": "string",
-            "nullable": true
-          },
-          "previousPage": {
-            "type": "string",
-            "nullable": true
-          }
-        },
-        "additionalProperties": false
-      },
       "GetInstrumentsResponse": {
         "type": "object",
         "properties": {
@@ -25464,7 +25228,7 @@
         "description": "OAuth2 Implicit Grant",
         "flows": {
           "implicit": {
-            "authorizationUrl": "https://dummyurl.lusid.com/",
+            "authorizationUrl": "https://lusid.okta.com/oauth2/default/v1/authorize",
             "scopes": {}
           }
         }
