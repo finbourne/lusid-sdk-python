@@ -9,7 +9,7 @@
       "url": "https://www.finbourne.com",
       "email": "info@finbourne.com"
     },
-    "version": "0.11.2788",
+    "version": "0.11.2789",
     "x-logo": {
       "url": "https://content.finbourne.com/LUSID-header.png",
       "backgroundColor": "#415464"
@@ -17,7 +17,7 @@
   },
   "servers": [
     {
-      "url": "https://fbn-prd.lusid.com/api"
+      "url": "http://local-unit-test-server.lusid.com:47992"
     }
   ],
   "paths": {
@@ -1771,7 +1771,7 @@
           {
             "name": "propertyKey",
             "in": "query",
-            "description": "The property key of the property that will have its history shown.",
+            "description": "The property key of the property that will have its history shown. These must be in the format {domain}/{scope}/{code} e.g. \"Instrument/system/Name\".\r\n            Each property must be from the \"Instrument\" domain.",
             "schema": {
               "type": "string",
               "description": "The key that uniquely identifies the property. It has the format {domain}/{scope}/{code}.",
@@ -3540,7 +3540,7 @@
         "tags": [
           "Legal Entities"
         ],
-        "summary": "[EARLY ACCESS] Delete legal entity",
+        "summary": "[EARLY ACCESS] Delete Legal Entity",
         "description": "Delete a legal entity. Deletion will be valid from the legal entity's creation datetime.\r\nThis means that the legal entity will no longer exist at any effective datetime from the asAt datetime of deletion.",
         "operationId": "DeleteLegalEntity",
         "parameters": [
@@ -25464,7 +25464,7 @@
         "description": "OAuth2 Implicit Grant",
         "flows": {
           "implicit": {
-            "authorizationUrl": "https://lusid.okta.com/oauth2/default/v1/authorize",
+            "authorizationUrl": "https://dummyurl.lusid.com/",
             "scopes": {}
           }
         }
