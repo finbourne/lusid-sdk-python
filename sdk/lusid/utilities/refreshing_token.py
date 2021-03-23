@@ -1,5 +1,6 @@
 import requests
 import base64
+import threading
 
 from datetime import datetime
 from datetime import timedelta
@@ -26,6 +27,7 @@ class RefreshingToken(UserString):
         self.api_configuration = api_configuration
         self.id_provider_response_handler = id_provider_response_handler
         self.refresh_func = self.get_refresh_token
+        self.lock = threading.Lock()
 
     def update_token_data(self, id_provider_json):
         """
@@ -135,13 +137,17 @@ class RefreshingToken(UserString):
 
         # return the value of the string
         if item == "data":
-            return object.__getattribute__(self, "refresh_func")()
+            self.lock.acquire()
+            # check if the token has expired and go through the refresh token logic if it has
+            token = object.__getattribute__(self, "refresh_func")()
+            self.lock.release()
+            return token
 
-        # get the attribute on the string value, not the RefreshingToken class itself, used for UserString base methods
-        # such as string concatenation, if this is missing the whole RefreshingToken class gets created again with the
-        # concatenated string as the input
+        # get the class attribute to be string class instead of the RefreshingToken class itself, used for UserString
+        # base methods such as string concatenation, if this is missing the whole RefreshingToken class gets created
+        # again with the concatenated string as the input, with this it creates a string instead
         if item == "__class__":
-            return object.__getattribute__(self, "refresh_func")().__getattribute__(item)
+            return str
 
         # used to get .self attributes on the RefreshingToken
         return object.__getattribute__(self, item)
