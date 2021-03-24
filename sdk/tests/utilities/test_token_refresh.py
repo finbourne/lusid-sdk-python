@@ -1,6 +1,7 @@
 import os
 import unittest
 from time import sleep
+from threading import Thread
 
 from lusid.utilities import ApiConfigurationLoader
 from lusid.utilities.proxy_config import ProxyConfig
@@ -9,21 +10,12 @@ from lusid.utilities import RefreshingToken
 from utilities import CredentialsSource
 from unittest.mock import patch
 from utilities.temp_file_manager import TempFileManager
+from utilities import MockApiResponse
 
 source_config_details, config_keys = CredentialsSource.fetch_credentials(), CredentialsSource.fetch_config_keys()
 
 
 class TokenRefresh(unittest.TestCase):
-
-    class MockApiResponse:
-
-        def __init__(self, json_data, status_code):
-            self.json_data = json_data
-            self.status_code = status_code
-
-        def json(self):
-            return self.json_data
-
 
     @classmethod
     def setUpClass(cls):
@@ -123,14 +115,14 @@ class TokenRefresh(unittest.TestCase):
         sleep(1)
 
         with patch("requests.post", side_effect=[
-            self.MockApiResponse(
+            MockApiResponse(
                 json_data={
                     "error": "invalid_grant",
                     "error_description": "The refresh token is invalid or expired."
                 },
                 status_code=400
             ),
-            self.MockApiResponse(
+            MockApiResponse(
                 json_data={
                     "access_token": "mock_access_token",
                     "refresh_token": "mock_refresh_token",
@@ -162,3 +154,35 @@ class TokenRefresh(unittest.TestCase):
         header = "Bearer " + refreshed_token
 
         self.assertIsNotNone(header)
+
+    def test_use_refresh_token_multiple_threads(self):
+
+        def force_refresh(refresh_token):
+            return f"{refresh_token}"
+
+        refreshed_token = RefreshingToken(api_configuration=self.config)
+
+        thread1 = Thread(target=force_refresh, args=[refreshed_token])
+        thread2 = Thread(target=force_refresh, args=[refreshed_token])
+        thread3 = Thread(target=force_refresh, args=[refreshed_token])
+
+        with patch("requests.post") as identity_mock:
+            identity_mock.side_effect = lambda *args, **kwargs: MockApiResponse(
+                json_data={
+                    "access_token": "mock_access_token",
+                    "refresh_token": "mock_refresh_token",
+                    "expires_in": 3600
+                },
+                status_code=200
+            )
+
+            thread1.start()
+            thread2.start()
+            thread3.start()
+
+            thread1.join()
+            thread2.join()
+            thread3.join()
+
+            # Ensure that we only got an access token once
+            self.assertEqual(1, identity_mock.call_count)

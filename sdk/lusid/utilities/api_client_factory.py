@@ -51,6 +51,9 @@ class ApiClientFactory:
         # Otherwise use a secrets file if it exists
         builder_kwargs["api_secrets_filename"] = kwargs.get("api_secrets_filename", None)
 
+        # add the correlation id if specified
+        builder_kwargs["correlation_id"] = kwargs.get("correlation_id", None)
+
         # Call the client builder, this will result in using either a token, secrets file or environment variables
         self.api_client = ApiClientBuilder.build(**builder_kwargs)
 

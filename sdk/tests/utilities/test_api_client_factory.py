@@ -3,12 +3,13 @@ from collections import UserString
 from datetime import datetime
 from unittest.mock import patch
 from parameterized import parameterized
-
-from lusid import ScopesApi, ResourceListOfScopeDefinition
+from threading import Thread
+from lusid import InstrumentsApi, ResourceListOfInstrumentIdTypeDescriptor
 from lusid.utilities import ApiClientFactory
 
 from utilities import TokenUtilities as tu, CredentialsSource
 from utilities.temp_file_manager import TempFileManager
+from utilities import MockApiResponse
 
 
 class UnknownApi:
@@ -42,10 +43,10 @@ class RefreshingToken(UserString):
 
 class ApiFactory(unittest.TestCase):
     def validate_api(self, api):
-        result = api.list_scopes()
+        result = api.get_instrument_identifier_types()
         self.assertIsNotNone(result)
+        self.assertIsInstance(result, ResourceListOfInstrumentIdTypeDescriptor)
         self.assertGreater(len(result.values), 0)
-        self.assertIsInstance(result, ResourceListOfScopeDefinition)
 
     @parameterized.expand([
         ["Unknown API", UnknownApi, "unknown api: UnknownApi"],
@@ -67,8 +68,8 @@ class ApiFactory(unittest.TestCase):
             api_url=source_config_details["api_url"],
             app_name=source_config_details["app_name"]
         )
-        api = factory.build(ScopesApi)
-        self.assertIsInstance(api, ScopesApi)
+        api = factory.build(InstrumentsApi)
+        self.assertIsInstance(api, InstrumentsApi)
         self.validate_api(api)
 
     def test_get_api_with_none_token(self):
@@ -78,8 +79,8 @@ class ApiFactory(unittest.TestCase):
             app_name=source_config_details["app_name"],
             api_secrets_filename=CredentialsSource.secrets_path(),
         )
-        api = factory.build(ScopesApi)
-        self.assertIsInstance(api, ScopesApi)
+        api = factory.build(InstrumentsApi)
+        self.assertIsInstance(api, InstrumentsApi)
         self.validate_api(api)
 
     def test_get_api_with_str_none_token(self):
@@ -89,8 +90,8 @@ class ApiFactory(unittest.TestCase):
             app_name=source_config_details["app_name"],
             api_secrets_filename=CredentialsSource.secrets_path(),
         )
-        api = factory.build(ScopesApi)
-        self.assertIsInstance(api, ScopesApi)
+        api = factory.build(InstrumentsApi)
+        self.assertIsInstance(api, InstrumentsApi)
         self.validate_api(api)
 
     def test_get_api_with_token_url_as_env_var(self):
@@ -99,26 +100,26 @@ class ApiFactory(unittest.TestCase):
             factory = ApiClientFactory(
                 token=token,
                 app_name=source_config_details["app_name"])
-        api = factory.build(ScopesApi)
-        self.assertIsInstance(api, ScopesApi)
+        api = factory.build(InstrumentsApi)
+        self.assertIsInstance(api, InstrumentsApi)
         self.validate_api(api)
 
     def test_get_api_with_configuration(self):
         factory = ApiClientFactory(
             api_secrets_filename=CredentialsSource.secrets_path()
         )
-        api = factory.build(ScopesApi)
-        self.assertIsInstance(api, ScopesApi)
+        api = factory.build(InstrumentsApi)
+        self.assertIsInstance(api, InstrumentsApi)
         self.validate_api(api)
 
     def test_get_api_with_info(self):
         factory = ApiClientFactory(
             api_secrets_filename=CredentialsSource.secrets_path()
         )
-        api = factory.build(ScopesApi)
+        api = factory.build(InstrumentsApi)
 
-        self.assertIsInstance(api, ScopesApi)
-        result = api.list_scopes(call_info=lambda r: print(r))
+        self.assertIsInstance(api, InstrumentsApi)
+        result = api.get_instrument_identifier_types(call_info=lambda r: print(r))
 
         self.assertIsNotNone(result)
 
@@ -126,11 +127,11 @@ class ApiFactory(unittest.TestCase):
         factory = ApiClientFactory(
             api_secrets_filename=CredentialsSource.secrets_path()
         )
-        api = factory.build(ScopesApi)
-        self.assertIsInstance(api, ScopesApi)
+        api = factory.build(InstrumentsApi)
+        self.assertIsInstance(api, InstrumentsApi)
 
         with self.assertRaises(ValueError) as error:
-            api.list_scopes(call_info="invalid param")
+            api.get_instrument_identifier_types(call_info="invalid param")
 
         self.assertEqual(error.exception.args[0], "call_info value must be a lambda")
 
@@ -139,8 +140,8 @@ class ApiFactory(unittest.TestCase):
             api_secrets_filename=CredentialsSource.secrets_path()
         )
 
-        wrapped_scopes_api = factory.build(ScopesApi)
-        portfolio = ScopesApi(wrapped_scopes_api.api_client)
+        wrapped_scopes_api = factory.build(InstrumentsApi)
+        portfolio = InstrumentsApi(wrapped_scopes_api.api_client)
 
         self.assertEqual(portfolio.__doc__, wrapped_scopes_api.__doc__)
         self.assertEqual(portfolio.__module__, wrapped_scopes_api.__module__)
@@ -169,7 +170,7 @@ class ApiFactory(unittest.TestCase):
         factory = ApiClientFactory(api_secrets_filename=secrets_file.name)
         # Close and thus delete the temporary file
         TempFileManager.delete_temp_file(secrets_file)
-        api = factory.build(ScopesApi)
+        api = factory.build(InstrumentsApi)
         self.validate_api(api)
 
     def test_get_api_with_proxy_config(self):
@@ -197,5 +198,71 @@ class ApiFactory(unittest.TestCase):
 
         # Close and thus delete the temporary file
         TempFileManager.delete_temp_file(secrets_file)
-        api = factory.build(ScopesApi)
+        api = factory.build(InstrumentsApi)
         self.validate_api(api)
+
+    def test_get_api_with_correlation_id_from_env_var(self):
+
+        env_vars = {config_keys[key]["env"]: value for key, value in source_config_details.items() if value is not None}
+        env_vars["FBN_CORRELATION_ID"] = "env-correlation-id"
+
+        with patch.dict('os.environ', env_vars, clear=True):
+            factory = ApiClientFactory()
+            api = factory.build(InstrumentsApi)
+            self.assertIsInstance(api, InstrumentsApi)
+            self.validate_api(api)
+            self.assertTrue("CorrelationId" in api.api_client.default_headers, msg="CorrelationId not found in headers")
+            self.assertEquals(api.api_client.default_headers["CorrelationId"], "env-correlation-id")
+
+    def test_get_api_with_correlation_id_from_param(self):
+
+        env_vars = {config_keys[key]["env"]: value for key, value in source_config_details.items() if value is not None}
+
+        with patch.dict('os.environ', env_vars, clear=True):
+            factory = ApiClientFactory(
+                api_secrets_filename=CredentialsSource.secrets_path(),
+                correlation_id="param-correlation-id"
+            )
+            api = factory.build(InstrumentsApi)
+            self.assertIsInstance(api, InstrumentsApi)
+            self.validate_api(api)
+            self.assertTrue("CorrelationId" in api.api_client.default_headers, msg="CorrelationId not found in headers")
+            self.assertEquals(api.api_client.default_headers["CorrelationId"], "param-correlation-id")
+
+    def test_use_apifactory_multiple_threads(self):
+
+        access_token = str(ApiClientFactory(
+            api_secrets_filename=CredentialsSource.secrets_path()
+        ).api_client.configuration.access_token)
+
+        api_factory = ApiClientFactory(
+            api_secrets_filename=CredentialsSource.secrets_path()
+        )
+
+        def get_identifier_types(factory):
+            return factory.build(InstrumentsApi).get_instrument_identifier_types()
+
+        thread1 = Thread(target=get_identifier_types, args=[api_factory])
+        thread2 = Thread(target=get_identifier_types, args=[api_factory])
+        thread3 = Thread(target=get_identifier_types, args=[api_factory])
+
+        with patch("requests.post") as identity_mock:
+            identity_mock.side_effect = lambda *args, **kwargs: MockApiResponse(
+                json_data={
+                    "access_token": f"{access_token}",
+                    "refresh_token": "mock_refresh_token",
+                    "expires_in": 3600
+                },
+                status_code=200
+            )
+
+            thread1.start()
+            thread2.start()
+            thread3.start()
+
+            thread1.join()
+            thread2.join()
+            thread3.join()
+
+            # Ensure that we only got an access token once
+            self.assertEqual(1, identity_mock.call_count)
