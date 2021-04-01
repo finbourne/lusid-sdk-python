@@ -32,14 +32,6 @@ import lusid.models as models
 from lusid.utilities import ApiConfigurationLoader
 ```
 
-Then import the following modules that are used in the code samples:
-
-```python
-import uuid
-import datetime
-import pytz
-```
-
 And construct the API factory:
 
 ```python
@@ -60,6 +52,14 @@ You can list all the API endpoints by running the following:
 ```
 
 An API endpoint can be constructed by calling `api_factory.build(lusid.api.<className>)` for any of the returned classes.
+
+Import the following modules that are used in the code samples:
+
+```python
+import uuid
+import datetime
+import pytz
+```
 
 The examples below should be run in order, as they assume that the preceding code has been executed.
 
