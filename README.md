@@ -13,7 +13,7 @@ pip install lusid-sdk
 
 We publish two versions of the Python SDK:
 
-* lusid-sdk-python (this one) - supports `Production` and `Early Access` API endpoints
+* **lusid-sdk-python (this one) - supports `Production` and `Early Access` API endpoints**
 * [lusid-sdk-python-preview](https://github.com/finbourne/lusid-sdk-python-preview) - supports `Production`, `Early Access`, `Beta` and `Experimental` API endpoints.
 
 For more details on API endpoint categories, see [What is the LUSID feature release lifecycle?](https://support.lusid.com/knowledgebase/article/KA-01786/en-us).
