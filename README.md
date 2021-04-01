@@ -11,8 +11,6 @@ The PyPi package for the LUSID SDK can installed using the following:
 pip install lusid-sdk
 ```
 
-### Preview and Non-Preview SDKs
-
 We publish two versions of the Python SDK:
 
 * lusid-sdk-python (this one) - supports `Production` and `Early Access` API endpoints
