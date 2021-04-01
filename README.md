@@ -23,6 +23,8 @@ To find out which category an API endpoint falls into, see [LUSID API Documentat
 
 ## Usage
 
+### Create API Client
+
 First, import the following LUSID modules:
 
 
@@ -52,6 +54,8 @@ You can list all the API endpoints by running the following:
 
 An API endpoint can be constructed by calling `api_factory.build(lusid.api.<className>)` for any of the returned classes.
 
+### Code Samples
+
 Before running the examples, import the following modules:
 
 ```python
@@ -62,7 +66,7 @@ import pytz
 
 The examples below should be run in order, as they assume that the preceding code has been executed.
 
-### Create portfolio
+#### Create portfolio
 
 ```python
 tx_portfolios_api = api_factory.build(lusid.api.TransactionPortfoliosApi)
@@ -82,7 +86,7 @@ portfolio_code = portfolio.id.code
 print("Porfolio Code:", portfolio_code)
 ```
 
-### Upsert instruments
+#### Upsert instruments
 
 ```python
 instruments_api = api_factory.build(lusid.api.InstrumentsApi)
@@ -97,7 +101,7 @@ figis_to_create = {
 instruments_api.upsert_instruments(request_body=figis_to_create)
 ```
 
-### Get instruments
+#### Get instruments
 
 ```python
 instruments_response = instruments_api.get_instruments(
@@ -109,7 +113,7 @@ name_to_luid = {
 luid_to_name = {v: k for k, v in name_to_luid.items()}
 ```
 
-### Upsert transactions
+#### Upsert transactions
 
 ```python
 tx_portfolios_api = api_factory.build(lusid.api.TransactionPortfoliosApi)
@@ -129,7 +133,7 @@ tx1 = models.TransactionRequest(
 tx_portfolios_api.upsert_transactions(scope=scope, code=portfolio_code, transaction_request=[tx1])
 ```
 
-### Get holdings
+#### Get holdings
 
 ```python
 tx_portfolios_api = api_factory.build(lusid.api.TransactionPortfoliosApi)
