@@ -23,7 +23,7 @@ To find out which category an API endpoint falls into, see [LUSID API Documentat
 
 ## Usage
 
-First, import the following modules:
+First, import the following LUSID modules:
 
 
 ```python
@@ -32,7 +32,15 @@ import lusid.models as models
 from lusid.utilities import ApiConfigurationLoader
 ```
 
-Then construct the API factory:
+Then import the following modules that are used in the code samples:
+
+```python
+import uuid
+import datetime
+import pytz
+```
+
+And construct the API factory:
 
 ```python
 secrets_file_path = "/path/to/secrets.json"
@@ -45,21 +53,19 @@ api_factory = lusid.utilities.ApiClientFactory(
 
 Now that the API client is ready, you are ready to use the various API endpoints.
 
-### List API endpoints
+You can list all the API endpoints by running the following: 
 
 ```python
 [api for api in dir(lusid.api) if "API" in api]
 ```
 
-You can construct an API endpoint by calling `api_factory.build(lusid.api.<className>)` for any of the returned classes.
+An API endpoint can be constructed by calling `api_factory.build(lusid.api.<className>)` for any of the returned classes.
+
+The examples below should be run in order, as they assume that the preceding code has been executed.
 
 ### Create portfolio
 
 ```python
-import uuid
-import datetime
-import pytz
-
 tx_portfolios_api = api_factory.build(lusid.api.TransactionPortfoliosApi)
 
 scope = "GettingStartedScope"
@@ -94,8 +100,6 @@ instruments_api.upsert_instruments(request_body=figis_to_create)
 
 ### Get instruments
 
-This example assumes that you have run the code samples under [upsert instruments](#upsert-instruments). You can retrieve the instruments and store them into two dictionaries (LUID->Name and Name->LUID) to use when interacting with other APIs:
-
 ```python
 instruments_response = instruments_api.get_instruments(
     identifier_type="Figi", request_body=list(figis_to_create.keys()))
@@ -108,13 +112,7 @@ luid_to_name = {v: k for k, v in name_to_luid.items()}
 
 ### Upsert transactions
 
-This example assumes that you have run the code samples under [create portfolio](#create-portfolio), [upsert instruments](#upsert-instruments), and [get instruments](#get-instruments).
-
 ```python
-import uuid
-import datetime
-import pytz
-
 tx_portfolios_api = api_factory.build(lusid.api.TransactionPortfoliosApi)
 
 tx1 = models.TransactionRequest(
@@ -134,13 +132,7 @@ tx_portfolios_api.upsert_transactions(scope=scope, code=portfolio_code, transact
 
 ### Get holdings
 
-This example assumes that you have run the code samples under [create a portfolio](#create-portfolio), [upsert instruments](#upsert-instruments), [get= instruments](#get-instruments), and [upsert transactions](#upsert-transactions).
-
 ```python
-import uuid
-import datetime
-import pytz
-
 tx_portfolios_api = api_factory.build(lusid.api.TransactionPortfoliosApi)
 
 holdings_response = tx_portfolios_api.get_holdings(
