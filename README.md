@@ -67,7 +67,8 @@ import pytz
 ```
 
 The examples below should be run in order, as they assume that the preceding code has been executed.
-For a Python script containing all the sample code, see [sdk/examples/hello_world.py](sdk/examples/hello_world.py).
+
+> For a Python script containing all the sample code, see [sdk/examples/hello_world.py](sdk/examples/hello_world.py).
 
 #### Create portfolio
 
