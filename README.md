@@ -19,7 +19,7 @@ We publish two versions of the Python SDK:
 For more details on API endpoint categories, see [What is the LUSID feature release lifecycle?](https://support.lusid.com/knowledgebase/article/KA-01786/en-us).
 To find out which category an API endpoint falls into, see [LUSID API Documentation](https://www.lusid.com/api/swagger/index.html).
 
-> If you install both `lusid-sdk-python` and `lusid-sdk-python-preview`, calling `import lusid` will refer to `lusid-sdk-python`. 
+> If you install both `lusid-sdk-python` and `lusid-sdk-python-preview`, `import lusid` will refer to `lusid-sdk-python`. 
 
 ## Usage
 
