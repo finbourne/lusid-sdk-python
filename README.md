@@ -11,6 +11,18 @@ The PyPi package for the LUSID SDK can installed using the following:
 pip install lusid-sdk
 ```
 
+### Preview and Non-Preview SDKs
+
+We publish two versions of the Python SDK:
+
+* lusid-sdk-python (this one) - supports `Production` and `Early Access` API endpoints
+* [lusid-sdk-python-preview](https://github.com/finbourne/lusid-sdk-python-preview) - supports `Production`, `Early Access`, `Beta` and `Experimental` API endpoints.
+
+For more details on API endpoint categories, see [What is the LUSID feature release lifecycle?](https://support.lusid.com/knowledgebase/article/KA-01786/en-us).
+To find out which category an API endpoint falls into, see [LUSID API Documentation](https://www.lusid.com/api/swagger/index.html).
+
+> If you install both `lusid-sdk-python` and `lusid-sdk-python-preview`, calling `import lusid` will refer to `lusid-sdk-python`. 
+
 ## Usage
 
 First, import the following modules:
@@ -124,7 +136,7 @@ tx_portfolios_api.upsert_transactions(scope=scope, code=portfolio_code, transact
 
 ### Get holdings
 
-This example assumes that you have run the code samples under [create a portfolio](#create-portfolio), [upsert instruments](#upsert-instruments), [get= instruments](#get-instruments), and (upsert transactions)[#upsert-transactions].
+This example assumes that you have run the code samples under [create a portfolio](#create-portfolio), [upsert instruments](#upsert-instruments), [get= instruments](#get-instruments), and [upsert transactions](#upsert-transactions).
 
 ```python
 import uuid
@@ -140,18 +152,6 @@ print("Holdings:")
 for holding in holdings_response:
     print(luid_to_name[holding.instrument_uid], holding.units, holding.cost.amount)
 ```
-
-## Preview and Non-Preview SDKs
-
-We publish two versions of the Python SDK:
-
-* lusid-sdk-python (this one) - supports `Production` and `Early Access` API endpoints
-* [lusid-sdk-python-preview](https://github.com/finbourne/lusid-sdk-python-preview) - supports `Production`, `Early Access`, `Beta` and `Experimental` API endpoints.
-
-For more details on API endpoint categories, see [What is the LUSID feature release lifecycle?](https://support.lusid.com/knowledgebase/article/KA-01786/en-us).
-To find out which category an API endpoint falls into, see [LUSID API Documentation](https://www.lusid.com/api/swagger/index.html).
-
-> If you install both `lusid-sdk-python` and `lusid-sdk-python-preview`, calling `import lusid` will refer to `lusid-sdk-python`. 
 
 ## Manually building the SDK
 
