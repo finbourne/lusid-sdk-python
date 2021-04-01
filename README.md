@@ -52,7 +52,7 @@ You can list all the API endpoints by running the following:
 
 An API endpoint can be constructed by calling `api_factory.build(lusid.api.<className>)` for any of the returned classes.
 
-Import the following modules that are used in the code samples:
+Before running the examples, import the following modules:
 
 ```python
 import uuid
