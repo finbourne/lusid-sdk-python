@@ -84,7 +84,7 @@ instruments_api.upsert_instruments(request_body=figis_to_create)
 
 ### Get instruments
 
-This example assumes that you have [upserted an instrument](#upsert-instrument). You can retrieve the instruments and store them into two dictionaries (LUID->Name and Name->LUID) to use when interacting with other APIs:
+This example assumes that you have run the code samples under [upsert instruments](#upsert-instruments). You can retrieve the instruments and store them into two dictionaries (LUID->Name and Name->LUID) to use when interacting with other APIs:
 
 ```python
 instruments_response = instruments_api.get_instruments(
@@ -98,7 +98,7 @@ luid_to_name = {v: k for k, v in name_to_luid.items()}
 
 ### Upsert transactions
 
-This example assumes that you run the code samples under [create a portfolio](#create-portfolio), [upsert an instrument](#upsert-instrument), and [get an instrument](#get-instrument).
+This example assumes that you have run the code samples under [create portfolio](#create-portfolio), [upsert instruments](#upsert-instruments), and [get instruments](#get-instruments).
 
 ```python
 import uuid
@@ -124,7 +124,7 @@ tx_portfolios_api.upsert_transactions(scope=scope, code=portfolio_code, transact
 
 ### Get holdings
 
-This example assumes that you run the code samples under [create a portfolio](#create-portfolio), [upsert an instrument](#upsert-instrument), [get an instrument](#get-instrument), and (upsert transactions)[#upsert-transactions].
+This example assumes that you have run the code samples under [create a portfolio](#create-portfolio), [upsert instruments](#upsert-instruments), [get= instruments](#get-instruments), and (upsert transactions)[#upsert-transactions].
 
 ```python
 import uuid
