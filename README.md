@@ -151,6 +151,8 @@ for holding in holdings_response:
     print(luid_to_name[holding.instrument_uid], holding.units, holding.cost.amount)
 ```
 
+For more fully fledged examples showing how to use the SDK, see [sdk/tests/tutorials](sdk/tests/tutorials)
+
 ## Manually building the SDK
 
 A pre-generated version of the latest SDK is included in the `sdk` folder. 
