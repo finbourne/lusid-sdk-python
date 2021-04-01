@@ -20,16 +20,12 @@ First, import the following modules:
 import lusid
 import lusid.models as models
 from lusid.utilities import ApiConfigurationLoader
-
-import uuid
-import datetime
-import pytz
 ```
 
 Then construct the API factory:
 
 ```python
-secrets_file_path = "/Users/markneedham/projects/lusid-sdk-java-preview/sdk/src/test/resources/secrets.json"
+secrets_file_path = "/path/to/secrets.json"
 config = ApiConfigurationLoader.load(secrets_file_path)
 api_factory = lusid.utilities.ApiClientFactory(
     token=lusid.utilities.RefreshingToken(config),
@@ -42,14 +38,17 @@ Now that the API client is ready, you are ready to use the various API endpoints
 ### List API endpoints
 
 ```python
-[api for api in dir(lusid.api) if api[0].isupper()]
+[api for api in dir(lusid.api) if "API" in api]
 ```
 
 You can construct an API endpoint by calling `api_factory.build(lusid.api.<className>)` for any of the returned classes.
 
-### Create a portfolio
+### Create portfolio
 
 ```python
+import uuid
+import datetime
+import pytz
 
 tx_portfolios_api = api_factory.build(lusid.api.TransactionPortfoliosApi)
 
@@ -68,12 +67,12 @@ portfolio_code = portfolio.id.code
 print("Porfolio Code:", portfolio_code)
 ```
 
-### Add instruments
+### Upsert instruments
 
 ```python
-# Add instruments (FIGI is from https://www.openfigi.com/id/BBG000C6K6G9)
 instruments_api = api_factory.build(lusid.api.InstrumentsApi)
 
+# FIGI is from https://www.openfigi.com/id/BBG000C6K6G9
 figis_to_create = {
     "BBG000C6K6G9": models.InstrumentDefinition(name="VODAFONE GROUP PLC",
         identifiers={"Figi": models.InstrumentIdValue(value="BBG000C6K6G9")}
@@ -83,9 +82,9 @@ figis_to_create = {
 instruments_api.upsert_instruments(request_body=figis_to_create)
 ```
 
-### Retrieve instruments
+### Get instruments
 
-You can retrieve the instruments and store them into two maps (LUID->Name and Name->LUID) to use when interacting with other APIs:
+This example assumes that you have [upserted an instrument](#upsert-instrument). You can retrieve the instruments and store them into two dictionaries (LUID->Name and Name->LUID) to use when interacting with other APIs:
 
 ```python
 instruments_response = instruments_api.get_instruments(
@@ -97,9 +96,17 @@ name_to_luid = {
 luid_to_name = {v: k for k, v in name_to_luid.items()}
 ```
 
-### Record transactions
+### Upsert transactions
+
+This example assumes that you run the code samples under [create a portfolio](#create-portfolio), [upsert an instrument](#upsert-instrument), and [get an instrument](#get-instrument).
 
 ```python
+import uuid
+import datetime
+import pytz
+
+tx_portfolios_api = api_factory.build(lusid.api.TransactionPortfoliosApi)
+
 tx1 = models.TransactionRequest(
     transaction_id=f"Transaction-{uuid.uuid4()}",
     type="StockIn",
@@ -115,9 +122,17 @@ tx1 = models.TransactionRequest(
 tx_portfolios_api.upsert_transactions(scope=scope, code=portfolio_code, transaction_request=[tx1])
 ```
 
-### Compute portfolio holdings
+### Get holdings
+
+This example assumes that you run the code samples under [create a portfolio](#create-portfolio), [upsert an instrument](#upsert-instrument), [get an instrument](#get-instrument), and (upsert transactions)[#upsert-transactions].
 
 ```python
+import uuid
+import datetime
+import pytz
+
+tx_portfolios_api = api_factory.build(lusid.api.TransactionPortfoliosApi)
+
 holdings_response = tx_portfolios_api.get_holdings(
     scope=scope, code=portfolio_code, property_keys=["Instrument/default/Name"]).values
 
