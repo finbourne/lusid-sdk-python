@@ -44,7 +44,6 @@ api_factory = lusid.utilities.ApiClientFactory(
 ```
 
 Now that the API client is ready, you are ready to use the various API endpoints.
-
 You can list all the API endpoints by running the following: 
 
 ```python
