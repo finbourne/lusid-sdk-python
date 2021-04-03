@@ -195,6 +195,7 @@ from lusid.models.versioned_resource_list_of_transaction import VersionedResourc
 
 # import utilities into sdk package
 from lusid.utilities.api_client_builder import ApiClientBuilder
+from lusid.utilities.api_client_factory import ApiClientFactory
 from lusid.utilities.api_configuration import ApiConfiguration
 from lusid.utilities.api_configuration_loader import ApiConfigurationLoader
 from lusid.utilities.refreshing_token import RefreshingToken
