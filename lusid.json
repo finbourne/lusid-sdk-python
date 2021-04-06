@@ -9,7 +9,7 @@
       "url": "https://www.finbourne.com",
       "email": "info@finbourne.com"
     },
-    "version": "0.11.2819",
+    "version": "0.11.2820",
     "x-logo": {
       "url": "https://content.finbourne.com/LUSID-header.png",
       "backgroundColor": "#415464"
@@ -17,7 +17,7 @@
   },
   "servers": [
     {
-      "url": "http://local-unit-test-server.lusid.com:62600"
+      "url": "http://local-unit-test-server.lusid.com:48163"
     }
   ],
   "paths": {
@@ -26270,10 +26270,12 @@
               "CashAccrual",
               "ForwardFx",
               "CashFxForward",
-              "UnsettledCashTypes"
+              "UnsettledCashTypes",
+              "Carry",
+              "CarryAsPnl"
             ],
             "type": "string",
-            "description": ". The available values are: Settlement, Traded, StockMovement, FutureCash, Commitment, Receivable, CashSettlement, CashForward, CashCommitment, CashReceivable, Accrual, CashAccrual, ForwardFx, CashFxForward, UnsettledCashTypes"
+            "description": ". The available values are: Settlement, Traded, StockMovement, FutureCash, Commitment, Receivable, CashSettlement, CashForward, CashCommitment, CashReceivable, Accrual, CashAccrual, ForwardFx, CashFxForward, UnsettledCashTypes, Carry, CarryAsPnl"
           },
           "side": {
             "type": "string",
@@ -26385,10 +26387,12 @@
               "CashAccrual",
               "ForwardFx",
               "CashFxForward",
-              "UnsettledCashTypes"
+              "UnsettledCashTypes",
+              "Carry",
+              "CarryAsPnl"
             ],
             "type": "string",
-            "description": ". The available values are: Settlement, Traded, StockMovement, FutureCash, Commitment, Receivable, CashSettlement, CashForward, CashCommitment, CashReceivable, Accrual, CashAccrual, ForwardFx, CashFxForward, UnsettledCashTypes"
+            "description": ". The available values are: Settlement, Traded, StockMovement, FutureCash, Commitment, Receivable, CashSettlement, CashForward, CashCommitment, CashReceivable, Accrual, CashAccrual, ForwardFx, CashFxForward, UnsettledCashTypes, Carry, CarryAsPnl"
           },
           "side": {
             "type": "string",
