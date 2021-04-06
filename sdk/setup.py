@@ -55,6 +55,6 @@ setup(
     license='MIT',
     keywords=["OpenAPI", "FINBOURNE", "LUSID", "LUSID API"],
     install_requires=REQUIRES,
-    packages=find_packages(exclude=['tests*']),
+    packages=find_packages(exclude=['tests*', 'examples*']),
     include_package_data=True
 )
