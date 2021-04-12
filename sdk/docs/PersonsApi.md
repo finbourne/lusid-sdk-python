@@ -1,6 +1,6 @@
 # lusid.PersonsApi
 
-All URIs are relative to *http://local-unit-test-server.lusid.com:39648*
+All URIs are relative to *http://local-unit-test-server.lusid.com:32329*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
@@ -27,8 +27,8 @@ configuration = lusid.Configuration()
 # Configure OAuth2 access token for authorization: oauth2
 configuration.access_token = 'YOUR_ACCESS_TOKEN'
 
-# Defining host is optional and default to http://local-unit-test-server.lusid.com:39648
-configuration.host = "http://local-unit-test-server.lusid.com:39648"
+# Defining host is optional and default to http://local-unit-test-server.lusid.com:32329
+configuration.host = "http://local-unit-test-server.lusid.com:32329"
 # Create an instance of the API class
 api_instance = lusid.PersonsApi(lusid.ApiClient(configuration))
 id_type_scope = 'id_type_scope_example' # str | Scope of the person identifier type.

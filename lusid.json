@@ -9,7 +9,7 @@
       "url": "https://www.finbourne.com",
       "email": "info@finbourne.com"
     },
-    "version": "0.11.2841",
+    "version": "0.11.2842",
     "x-logo": {
       "url": "https://content.finbourne.com/LUSID-header.png",
       "backgroundColor": "#415464"
@@ -17,7 +17,7 @@
   },
   "servers": [
     {
-      "url": "http://local-unit-test-server.lusid.com:39648"
+      "url": "http://local-unit-test-server.lusid.com:32329"
     }
   ],
   "paths": {
@@ -14750,11 +14750,11 @@
           {
             "name": "scope",
             "in": "path",
-            "description": "The scope that the transaction portfolio will be created in.",
+            "description": "The scope in which to create the transaction portfolio.",
             "required": true,
             "schema": {
               "type": "string",
-              "description": "The scope that the transaction portfolio will be created in.",
+              "description": "The scope in which to create the transaction portfolio.",
               "nullable": true
             }
           }
@@ -17728,10 +17728,10 @@
           {
             "name": "asAt",
             "in": "query",
-            "description": "The asAt datetime at which to retrieve the details of the transaction portfolio. Defaults\r\n            to return the latest version of the details if not specified.",
+            "description": "The asAt datetime at which to retrieve the details of the transaction portfolio. Defaults\r\n            to returning the latest version of the details if not specified.",
             "schema": {
               "type": "string",
-              "description": "The asAt datetime at which to retrieve the details of the transaction portfolio. Defaults\r\n            to return the latest version of the details if not specified.",
+              "description": "The asAt datetime at which to retrieve the details of the transaction portfolio. Defaults\r\n            to returning the latest version of the details if not specified.",
               "format": "date-time",
               "nullable": true
             },

@@ -1,6 +1,6 @@
 # lusid.TransactionPortfoliosApi
 
-All URIs are relative to *http://local-unit-test-server.lusid.com:39648*
+All URIs are relative to *http://local-unit-test-server.lusid.com:32329*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
@@ -45,8 +45,8 @@ configuration = lusid.Configuration()
 # Configure OAuth2 access token for authorization: oauth2
 configuration.access_token = 'YOUR_ACCESS_TOKEN'
 
-# Defining host is optional and default to http://local-unit-test-server.lusid.com:39648
-configuration.host = "http://local-unit-test-server.lusid.com:39648"
+# Defining host is optional and default to http://local-unit-test-server.lusid.com:32329
+configuration.host = "http://local-unit-test-server.lusid.com:32329"
 # Create an instance of the API class
 api_instance = lusid.TransactionPortfoliosApi(lusid.ApiClient(configuration))
 scope = 'scope_example' # str | The scope of the transaction portfolio.
@@ -115,8 +115,8 @@ configuration = lusid.Configuration()
 # Configure OAuth2 access token for authorization: oauth2
 configuration.access_token = 'YOUR_ACCESS_TOKEN'
 
-# Defining host is optional and default to http://local-unit-test-server.lusid.com:39648
-configuration.host = "http://local-unit-test-server.lusid.com:39648"
+# Defining host is optional and default to http://local-unit-test-server.lusid.com:32329
+configuration.host = "http://local-unit-test-server.lusid.com:32329"
 # Create an instance of the API class
 api_instance = lusid.TransactionPortfoliosApi(lusid.ApiClient(configuration))
 scope = 'scope_example' # str | The scope of the transaction portfolio.
@@ -187,8 +187,8 @@ configuration = lusid.Configuration()
 # Configure OAuth2 access token for authorization: oauth2
 configuration.access_token = 'YOUR_ACCESS_TOKEN'
 
-# Defining host is optional and default to http://local-unit-test-server.lusid.com:39648
-configuration.host = "http://local-unit-test-server.lusid.com:39648"
+# Defining host is optional and default to http://local-unit-test-server.lusid.com:32329
+configuration.host = "http://local-unit-test-server.lusid.com:32329"
 # Create an instance of the API class
 api_instance = lusid.TransactionPortfoliosApi(lusid.ApiClient(configuration))
 scope = 'scope_example' # str | The scope of the transaction portfolio.
@@ -253,8 +253,8 @@ configuration = lusid.Configuration()
 # Configure OAuth2 access token for authorization: oauth2
 configuration.access_token = 'YOUR_ACCESS_TOKEN'
 
-# Defining host is optional and default to http://local-unit-test-server.lusid.com:39648
-configuration.host = "http://local-unit-test-server.lusid.com:39648"
+# Defining host is optional and default to http://local-unit-test-server.lusid.com:32329
+configuration.host = "http://local-unit-test-server.lusid.com:32329"
 # Create an instance of the API class
 api_instance = lusid.TransactionPortfoliosApi(lusid.ApiClient(configuration))
 scope = 'scope_example' # str | The scope of the transaction portfolio.
@@ -319,8 +319,8 @@ configuration = lusid.Configuration()
 # Configure OAuth2 access token for authorization: oauth2
 configuration.access_token = 'YOUR_ACCESS_TOKEN'
 
-# Defining host is optional and default to http://local-unit-test-server.lusid.com:39648
-configuration.host = "http://local-unit-test-server.lusid.com:39648"
+# Defining host is optional and default to http://local-unit-test-server.lusid.com:32329
+configuration.host = "http://local-unit-test-server.lusid.com:32329"
 # Create an instance of the API class
 api_instance = lusid.TransactionPortfoliosApi(lusid.ApiClient(configuration))
 scope = 'scope_example' # str | The scope of the transaction portfolio.
@@ -385,11 +385,11 @@ configuration = lusid.Configuration()
 # Configure OAuth2 access token for authorization: oauth2
 configuration.access_token = 'YOUR_ACCESS_TOKEN'
 
-# Defining host is optional and default to http://local-unit-test-server.lusid.com:39648
-configuration.host = "http://local-unit-test-server.lusid.com:39648"
+# Defining host is optional and default to http://local-unit-test-server.lusid.com:32329
+configuration.host = "http://local-unit-test-server.lusid.com:32329"
 # Create an instance of the API class
 api_instance = lusid.TransactionPortfoliosApi(lusid.ApiClient(configuration))
-scope = 'scope_example' # str | The scope that the transaction portfolio will be created in.
+scope = 'scope_example' # str | The scope in which to create the transaction portfolio.
 create_transaction_portfolio_request = {"displayName":"Portfolio UK","description":"Portfolio for UK market","code":"PortfolioUk","created":"2018-03-05T12:00:00.0000000+00:00","baseCurrency":"GBP","corporateActionSourceId":{"scope":"Sources","code":"Vendor1"},"accountingMethod":"Default","subHoldingKeys":[],"properties":{"portfolio/Manager/Name":{"key":"Portfolio/Manager/Name","value":{"labelValue":"Matt Smith"},"effectiveFrom":"2018-03-05T12:00:00.0000000+00:00"},"portfolio/Manager/Id":{"key":"Portfolio/Manager/Id","value":{"metricValue":{"value":1628483,"unit":"NoUnits"}},"effectiveFrom":"2018-03-05T12:00:00.0000000+00:00"}}} # CreateTransactionPortfolioRequest | The definition and details of the transaction portfolio.
 
 try:
@@ -404,7 +404,7 @@ except ApiException as e:
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **scope** | **str**| The scope that the transaction portfolio will be created in. | 
+ **scope** | **str**| The scope in which to create the transaction portfolio. | 
  **create_transaction_portfolio_request** | [**CreateTransactionPortfolioRequest**](CreateTransactionPortfolioRequest.md)| The definition and details of the transaction portfolio. | 
 
 ### Return type
@@ -449,8 +449,8 @@ configuration = lusid.Configuration()
 # Configure OAuth2 access token for authorization: oauth2
 configuration.access_token = 'YOUR_ACCESS_TOKEN'
 
-# Defining host is optional and default to http://local-unit-test-server.lusid.com:39648
-configuration.host = "http://local-unit-test-server.lusid.com:39648"
+# Defining host is optional and default to http://local-unit-test-server.lusid.com:32329
+configuration.host = "http://local-unit-test-server.lusid.com:32329"
 # Create an instance of the API class
 api_instance = lusid.TransactionPortfoliosApi(lusid.ApiClient(configuration))
 scope = 'scope_example' # str | The scope of the transaction portfolio.
@@ -517,14 +517,14 @@ configuration = lusid.Configuration()
 # Configure OAuth2 access token for authorization: oauth2
 configuration.access_token = 'YOUR_ACCESS_TOKEN'
 
-# Defining host is optional and default to http://local-unit-test-server.lusid.com:39648
-configuration.host = "http://local-unit-test-server.lusid.com:39648"
+# Defining host is optional and default to http://local-unit-test-server.lusid.com:32329
+configuration.host = "http://local-unit-test-server.lusid.com:32329"
 # Create an instance of the API class
 api_instance = lusid.TransactionPortfoliosApi(lusid.ApiClient(configuration))
 scope = 'scope_example' # str | The scope of the transaction portfolio to retrieve the details for.
 code = 'code_example' # str | The code of the transaction portfolio to retrieve the details for. Together with the              scope this uniquely identifies the transaction portfolio.
 effective_at = 'effective_at_example' # str | The effective datetime or cut label at which to retrieve the details of the transaction              portfolio. Defaults to the current LUSID system datetime if not specified. (optional)
-as_at = '2013-10-20T19:20:30+01:00' # datetime | The asAt datetime at which to retrieve the details of the transaction portfolio. Defaults              to return the latest version of the details if not specified. (optional)
+as_at = '2013-10-20T19:20:30+01:00' # datetime | The asAt datetime at which to retrieve the details of the transaction portfolio. Defaults              to returning the latest version of the details if not specified. (optional)
 
 try:
     # Get details
@@ -541,7 +541,7 @@ Name | Type | Description  | Notes
  **scope** | **str**| The scope of the transaction portfolio to retrieve the details for. | 
  **code** | **str**| The code of the transaction portfolio to retrieve the details for. Together with the              scope this uniquely identifies the transaction portfolio. | 
  **effective_at** | **str**| The effective datetime or cut label at which to retrieve the details of the transaction              portfolio. Defaults to the current LUSID system datetime if not specified. | [optional] 
- **as_at** | **datetime**| The asAt datetime at which to retrieve the details of the transaction portfolio. Defaults              to return the latest version of the details if not specified. | [optional] 
+ **as_at** | **datetime**| The asAt datetime at which to retrieve the details of the transaction portfolio. Defaults              to returning the latest version of the details if not specified. | [optional] 
 
 ### Return type
 
@@ -585,8 +585,8 @@ configuration = lusid.Configuration()
 # Configure OAuth2 access token for authorization: oauth2
 configuration.access_token = 'YOUR_ACCESS_TOKEN'
 
-# Defining host is optional and default to http://local-unit-test-server.lusid.com:39648
-configuration.host = "http://local-unit-test-server.lusid.com:39648"
+# Defining host is optional and default to http://local-unit-test-server.lusid.com:32329
+configuration.host = "http://local-unit-test-server.lusid.com:32329"
 # Create an instance of the API class
 api_instance = lusid.TransactionPortfoliosApi(lusid.ApiClient(configuration))
 scope = 'scope_example' # str | The scope of the transaction portfolio.
@@ -659,8 +659,8 @@ configuration = lusid.Configuration()
 # Configure OAuth2 access token for authorization: oauth2
 configuration.access_token = 'YOUR_ACCESS_TOKEN'
 
-# Defining host is optional and default to http://local-unit-test-server.lusid.com:39648
-configuration.host = "http://local-unit-test-server.lusid.com:39648"
+# Defining host is optional and default to http://local-unit-test-server.lusid.com:32329
+configuration.host = "http://local-unit-test-server.lusid.com:32329"
 # Create an instance of the API class
 api_instance = lusid.TransactionPortfoliosApi(lusid.ApiClient(configuration))
 scope = 'scope_example' # str | The scope of the transaction portfolio.
@@ -727,8 +727,8 @@ configuration = lusid.Configuration()
 # Configure OAuth2 access token for authorization: oauth2
 configuration.access_token = 'YOUR_ACCESS_TOKEN'
 
-# Defining host is optional and default to http://local-unit-test-server.lusid.com:39648
-configuration.host = "http://local-unit-test-server.lusid.com:39648"
+# Defining host is optional and default to http://local-unit-test-server.lusid.com:32329
+configuration.host = "http://local-unit-test-server.lusid.com:32329"
 # Create an instance of the API class
 api_instance = lusid.TransactionPortfoliosApi(lusid.ApiClient(configuration))
 scope = 'scope_example' # str | The scope of the portfolio to retrieve the CashStatement for.
@@ -803,8 +803,8 @@ configuration = lusid.Configuration()
 # Configure OAuth2 access token for authorization: oauth2
 configuration.access_token = 'YOUR_ACCESS_TOKEN'
 
-# Defining host is optional and default to http://local-unit-test-server.lusid.com:39648
-configuration.host = "http://local-unit-test-server.lusid.com:39648"
+# Defining host is optional and default to http://local-unit-test-server.lusid.com:32329
+configuration.host = "http://local-unit-test-server.lusid.com:32329"
 # Create an instance of the API class
 api_instance = lusid.TransactionPortfoliosApi(lusid.ApiClient(configuration))
 scope = 'scope_example' # str | The scope of the transaction portfolio.
@@ -877,8 +877,8 @@ configuration = lusid.Configuration()
 # Configure OAuth2 access token for authorization: oauth2
 configuration.access_token = 'YOUR_ACCESS_TOKEN'
 
-# Defining host is optional and default to http://local-unit-test-server.lusid.com:39648
-configuration.host = "http://local-unit-test-server.lusid.com:39648"
+# Defining host is optional and default to http://local-unit-test-server.lusid.com:32329
+configuration.host = "http://local-unit-test-server.lusid.com:32329"
 # Create an instance of the API class
 api_instance = lusid.TransactionPortfoliosApi(lusid.ApiClient(configuration))
 scope = 'scope_example' # str | The scope of the transaction portfolio.
@@ -947,8 +947,8 @@ configuration = lusid.Configuration()
 # Configure OAuth2 access token for authorization: oauth2
 configuration.access_token = 'YOUR_ACCESS_TOKEN'
 
-# Defining host is optional and default to http://local-unit-test-server.lusid.com:39648
-configuration.host = "http://local-unit-test-server.lusid.com:39648"
+# Defining host is optional and default to http://local-unit-test-server.lusid.com:32329
+configuration.host = "http://local-unit-test-server.lusid.com:32329"
 # Create an instance of the API class
 api_instance = lusid.TransactionPortfoliosApi(lusid.ApiClient(configuration))
 scope = 'scope_example' # str | The scope of the transaction portfolio.
@@ -1019,8 +1019,8 @@ configuration = lusid.Configuration()
 # Configure OAuth2 access token for authorization: oauth2
 configuration.access_token = 'YOUR_ACCESS_TOKEN'
 
-# Defining host is optional and default to http://local-unit-test-server.lusid.com:39648
-configuration.host = "http://local-unit-test-server.lusid.com:39648"
+# Defining host is optional and default to http://local-unit-test-server.lusid.com:32329
+configuration.host = "http://local-unit-test-server.lusid.com:32329"
 # Create an instance of the API class
 api_instance = lusid.TransactionPortfoliosApi(lusid.ApiClient(configuration))
 scope = 'scope_example' # str | The scope of the transaction portfolio.
@@ -1089,8 +1089,8 @@ configuration = lusid.Configuration()
 # Configure OAuth2 access token for authorization: oauth2
 configuration.access_token = 'YOUR_ACCESS_TOKEN'
 
-# Defining host is optional and default to http://local-unit-test-server.lusid.com:39648
-configuration.host = "http://local-unit-test-server.lusid.com:39648"
+# Defining host is optional and default to http://local-unit-test-server.lusid.com:32329
+configuration.host = "http://local-unit-test-server.lusid.com:32329"
 # Create an instance of the API class
 api_instance = lusid.TransactionPortfoliosApi(lusid.ApiClient(configuration))
 scope = 'scope_example' # str | The scope of the transaction portfolio.
@@ -1155,8 +1155,8 @@ configuration = lusid.Configuration()
 # Configure OAuth2 access token for authorization: oauth2
 configuration.access_token = 'YOUR_ACCESS_TOKEN'
 
-# Defining host is optional and default to http://local-unit-test-server.lusid.com:39648
-configuration.host = "http://local-unit-test-server.lusid.com:39648"
+# Defining host is optional and default to http://local-unit-test-server.lusid.com:32329
+configuration.host = "http://local-unit-test-server.lusid.com:32329"
 # Create an instance of the API class
 api_instance = lusid.TransactionPortfoliosApi(lusid.ApiClient(configuration))
 scope = 'scope_example' # str | The scope of the transaction portfolio to update or insert details for.
@@ -1223,8 +1223,8 @@ configuration = lusid.Configuration()
 # Configure OAuth2 access token for authorization: oauth2
 configuration.access_token = 'YOUR_ACCESS_TOKEN'
 
-# Defining host is optional and default to http://local-unit-test-server.lusid.com:39648
-configuration.host = "http://local-unit-test-server.lusid.com:39648"
+# Defining host is optional and default to http://local-unit-test-server.lusid.com:32329
+configuration.host = "http://local-unit-test-server.lusid.com:32329"
 # Create an instance of the API class
 api_instance = lusid.TransactionPortfoliosApi(lusid.ApiClient(configuration))
 scope = 'scope_example' # str | The scope of the transaction portfolio.
@@ -1291,8 +1291,8 @@ configuration = lusid.Configuration()
 # Configure OAuth2 access token for authorization: oauth2
 configuration.access_token = 'YOUR_ACCESS_TOKEN'
 
-# Defining host is optional and default to http://local-unit-test-server.lusid.com:39648
-configuration.host = "http://local-unit-test-server.lusid.com:39648"
+# Defining host is optional and default to http://local-unit-test-server.lusid.com:32329
+configuration.host = "http://local-unit-test-server.lusid.com:32329"
 # Create an instance of the API class
 api_instance = lusid.TransactionPortfoliosApi(lusid.ApiClient(configuration))
 scope = 'scope_example' # str | The scope of the transaction portfolio.
