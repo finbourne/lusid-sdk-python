@@ -9,7 +9,7 @@
       "url": "https://www.finbourne.com",
       "email": "info@finbourne.com"
     },
-    "version": "0.11.2842",
+    "version": "0.11.2843",
     "x-logo": {
       "url": "https://content.finbourne.com/LUSID-header.png",
       "backgroundColor": "#415464"
@@ -17,7 +17,7 @@
   },
   "servers": [
     {
-      "url": "http://local-unit-test-server.lusid.com:32329"
+      "url": "http://local-unit-test-server.lusid.com:61725"
     }
   ],
   "paths": {
@@ -21588,6 +21588,31 @@
         },
         "additionalProperties": false
       },
+      "Link": {
+        "required": [
+          "href",
+          "method",
+          "relation"
+        ],
+        "type": "object",
+        "properties": {
+          "relation": {
+            "type": "string"
+          },
+          "href": {
+            "type": "string",
+            "format": "uri"
+          },
+          "description": {
+            "type": "string",
+            "nullable": true
+          },
+          "method": {
+            "type": "string"
+          }
+        },
+        "additionalProperties": false
+      },
       "LusidValidationProblemDetails": {
         "required": [
           "code",
@@ -21708,31 +21733,6 @@
             },
             "nullable": true,
             "readOnly": true
-          }
-        },
-        "additionalProperties": false
-      },
-      "Link": {
-        "required": [
-          "href",
-          "method",
-          "relation"
-        ],
-        "type": "object",
-        "properties": {
-          "relation": {
-            "type": "string"
-          },
-          "href": {
-            "type": "string",
-            "format": "uri"
-          },
-          "description": {
-            "type": "string",
-            "nullable": true
-          },
-          "method": {
-            "type": "string"
           }
         },
         "additionalProperties": false
