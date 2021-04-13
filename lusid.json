@@ -9,7 +9,7 @@
       "url": "https://www.finbourne.com",
       "email": "info@finbourne.com"
     },
-    "version": "0.11.2843",
+    "version": "0.11.2844",
     "x-logo": {
       "url": "https://content.finbourne.com/LUSID-header.png",
       "backgroundColor": "#415464"
@@ -17,7 +17,7 @@
   },
   "servers": [
     {
-      "url": "https://fbn-prd.lusid.com/api"
+      "url": "http://local-unit-test-server.lusid.com:45026"
     }
   ],
   "paths": {
@@ -2841,7 +2841,7 @@
             "in": "query",
             "description": "The pagination token to use to continue listing legal entities from a previous call to list legal entities. This\r\nvalue is returned from the previous call. If a pagination token is provided the filter, effectiveAt\r\nand asAt fields must not have changed since the original request.",
             "schema": {
-              "maxLength": 300,
+              "maxLength": 500,
               "minLength": 1,
               "pattern": "^[a-zA-Z0-9\\+/]*={0,3}$",
               "type": "string",
@@ -27306,7 +27306,7 @@
         "description": "OAuth2 Implicit Grant",
         "flows": {
           "implicit": {
-            "authorizationUrl": "https://lusid.okta.com/oauth2/default/v1/authorize",
+            "authorizationUrl": "https://dummyurl.lusid.com/",
             "scopes": {}
           }
         }
