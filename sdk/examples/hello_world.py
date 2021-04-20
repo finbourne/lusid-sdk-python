@@ -1,23 +1,30 @@
-import uuid
-import datetime
-import pytz
-
+# tag::lusid-imports[]
+# LUSID imports
 import lusid
 import lusid.models as models
 from lusid.utilities import ApiConfigurationLoader
 
+# Other imports
+import uuid
+import datetime
+import pytz
+# end::lusid-imports[]
 
+# tag::create-client-factory[]
 secrets_file_path = "/path/to/secrets.json"
 config = ApiConfigurationLoader.load(secrets_file_path)
 api_factory = lusid.utilities.ApiClientFactory(
     token=lusid.utilities.RefreshingToken(config),
     api_secrets_filename=secrets_file_path
 )
-
+# end::create-client-factory[]
 
 # Create portfolio
+# tag::create-tx-portfolios-api[]
 tx_portfolios_api = api_factory.build(lusid.api.TransactionPortfoliosApi)
+# end::create-tx-portfolios-api[]
 
+# tag::create-portfolio[]
 scope = "GettingStartedScope"
 guid = uuid.uuid4()
 
@@ -31,8 +38,9 @@ portfolio_request = models.CreateTransactionPortfolioRequest(
 portfolio = tx_portfolios_api.create_portfolio(scope, create_transaction_portfolio_request=portfolio_request)
 portfolio_code = portfolio.id.code
 print("Porfolio Code:", portfolio_code)
+# end::create-portfolio[]
 
-# Upsert instruments
+# tag::upsert-instruments[]
 instruments_api = api_factory.build(lusid.api.InstrumentsApi)
 
 # FIGI is from https://www.openfigi.com/id/BBG000C6K6G9
@@ -43,8 +51,9 @@ figis_to_create = {
 }
 
 instruments_api.upsert_instruments(request_body=figis_to_create)
+# end::upsert-instruments[]
 
-# Get instruments
+# tag::get-instruments[]
 instruments_response = instruments_api.get_instruments(
     identifier_type="Figi", request_body=list(figis_to_create.keys()))
 name_to_luid = {
@@ -52,8 +61,9 @@ name_to_luid = {
     for _, value in instruments_response.values.items()
 }
 luid_to_name = {v: k for k, v in name_to_luid.items()}
+# end::get-instruments[]
 
-# Upsert transactions
+# tag::upsert-transactions[]
 tx_portfolios_api = api_factory.build(lusid.api.TransactionPortfoliosApi)
 
 tx1 = models.TransactionRequest(
@@ -69,8 +79,9 @@ tx1 = models.TransactionRequest(
 )
 
 tx_portfolios_api.upsert_transactions(scope=scope, code=portfolio_code, transaction_request=[tx1])
+# end::upsert-transactions[]
 
-# Get holdings
+# tag::get-holdings[]
 tx_portfolios_api = api_factory.build(lusid.api.TransactionPortfoliosApi)
 
 holdings_response = tx_portfolios_api.get_holdings(
