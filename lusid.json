@@ -9,7 +9,7 @@
       "url": "https://www.finbourne.com",
       "email": "info@finbourne.com"
     },
-    "version": "0.11.2941",
+    "version": "0.11.2942",
     "x-logo": {
       "url": "https://content.finbourne.com/LUSID-header.png",
       "backgroundColor": "#415464"
@@ -17,7 +17,7 @@
   },
   "servers": [
     {
-      "url": "http://local-unit-test-server.lusid.com:58650"
+      "url": "http://local-unit-test-server.lusid.com:58960"
     }
   ],
   "paths": {
@@ -1381,6 +1381,492 @@
         "x-fbn-apistatus": "EarlyAccess"
       }
     },
+    "/api/instruments/$get": {
+      "post": {
+        "tags": [
+          "Instruments"
+        ],
+        "summary": "Get instruments",
+        "description": "Get the definition of one or more instruments identified by a collection of unique instrument identifiers.",
+        "operationId": "GetInstruments",
+        "parameters": [
+          {
+            "name": "identifierType",
+            "in": "query",
+            "description": "The identifier being supplied e.g. \"Figi\".",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "description": "The identifier being supplied e.g. \"Figi\"."
+            }
+          },
+          {
+            "name": "effectiveAt",
+            "in": "query",
+            "description": "The effective datetime or cut label at which to retrieve the instrument definitions.\r\n            Defaults to the current LUSID system datetime if not specified.",
+            "schema": {
+              "type": "string",
+              "description": "The effective datetime or cut label at which to retrieve the instrument definitions.\r\n            Defaults to the current LUSID system datetime if not specified.",
+              "format": "dateorcutlabel",
+              "nullable": true
+            }
+          },
+          {
+            "name": "asAt",
+            "in": "query",
+            "description": "The asAt datetime at which to retrieve the instrument definitions.\r\n            Defaults to return the latest version of each instrument definition if not specified.",
+            "schema": {
+              "type": "string",
+              "description": "The asAt datetime at which to retrieve the instrument definitions.\r\n            Defaults to return the latest version of each instrument definition if not specified.",
+              "format": "date-time",
+              "nullable": true
+            },
+            "x-nullable": true
+          },
+          {
+            "name": "propertyKeys",
+            "in": "query",
+            "description": "A list of property keys from the \"Instrument\" domain to decorate onto the instrument.\r\n            These take the format {domain}/{scope}/{code} e.g. \"Instrument/system/Name\".",
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "string",
+                "description": "The key that uniquely identifies the property. It has the format {domain}/{scope}/{code}."
+              },
+              "description": "A list of property keys from the \"Instrument\" domain to decorate onto the instrument.\r\n            These take the format {domain}/{scope}/{code} e.g. \"Instrument/system/Name\".",
+              "nullable": true
+            },
+            "x-nullable": true
+          }
+        ],
+        "requestBody": {
+          "description": "The values of the identifier for the requested instruments.",
+          "content": {
+            "application/json-patch+json": {
+              "schema": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                },
+                "description": "The values of the identifier for the requested instruments."
+              },
+              "example": [
+                "instrument-identifier-1",
+                "instrument-identifier-2"
+              ]
+            },
+            "application/json": {
+              "schema": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                },
+                "description": "The values of the identifier for the requested instruments."
+              },
+              "example": [
+                "instrument-identifier-1",
+                "instrument-identifier-2"
+              ]
+            },
+            "text/json": {
+              "schema": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                },
+                "description": "The values of the identifier for the requested instruments."
+              },
+              "example": [
+                "instrument-identifier-1",
+                "instrument-identifier-2"
+              ]
+            },
+            "application/*+json": {
+              "schema": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                },
+                "description": "The values of the identifier for the requested instruments."
+              },
+              "example": [
+                "instrument-identifier-1",
+                "instrument-identifier-2"
+              ]
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "The requested instruments which could be identified along with any failures",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/GetInstrumentsResponse"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/GetInstrumentsResponse"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/GetInstrumentsResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "The details of the input related failure",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/LusidValidationProblemDetails"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/LusidValidationProblemDetails"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/LusidValidationProblemDetails"
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "Error response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/LusidProblemDetails"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "oauth2": []
+          }
+        ],
+        "x-fbn-apistatus": "Stable"
+      }
+    },
+    "/api/instruments/$upsertproperties": {
+      "post": {
+        "tags": [
+          "Instruments"
+        ],
+        "summary": "Upsert instruments properties",
+        "description": "Update or insert one or more instrument properties for one or more instruments. Each instrument property will be updated\r\nif it already exists and inserted if it does not. If any properties fail to be updated or inserted, none will be updated or inserted and\r\nthe reason for the failure will be returned.\r\n            \r\nProperties have an <i>effectiveFrom</i> datetime for which the property is valid, and an <i>effectiveUntil</i>\r\ndatetime until which the property is valid. Not supplying an <i>effectiveUntil</i> datetime results in the property being\r\nvalid indefinitely, or until the next <i>effectiveFrom</i> datetime of the property.",
+        "operationId": "UpsertInstrumentsProperties",
+        "requestBody": {
+          "description": "A collection of instruments and associated instrument properties to update or insert.",
+          "content": {
+            "application/json-patch+json": {
+              "schema": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/components/schemas/UpsertInstrumentPropertyRequest"
+                },
+                "description": "A collection of instruments and associated instrument properties to update or insert."
+              },
+              "example": [
+                {
+                  "identifierType": "LusidInstrumentId",
+                  "identifier": "LUID_00000000",
+                  "properties": [
+                    {
+                      "key": "Instrument/MyScope/SomePropertyName",
+                      "value": {
+                        "labelValue": "SomeValue1"
+                      },
+                      "effectiveFrom": "2016-09-15T12:00:00.0000000+00:00"
+                    },
+                    {
+                      "key": "Instrument/MyScope/SomePropertyName",
+                      "value": {
+                        "labelValue": "SomeValue2"
+                      },
+                      "effectiveFrom": "2017-08-10T12:00:00.0000000+00:00"
+                    },
+                    {
+                      "key": "Instrument/MyScope/AnotherPropertyName",
+                      "value": {
+                        "labelValue": "AnotherValue1"
+                      },
+                      "effectiveFrom": "2018-03-05T12:00:00.0000000+00:00",
+                      "effectiveUntil": "2019-06-01T12:00:00.0000000+00:00"
+                    },
+                    {
+                      "key": "Instrument/MyScope/AnotherPropertyName",
+                      "value": {
+                        "labelValue": "AnotherValue2"
+                      },
+                      "effectiveFrom": "2020-03-15T12:00:00.0000000+00:00",
+                      "effectiveUntil": "2021-01-15T12:00:00.0000000+00:00"
+                    }
+                  ]
+                }
+              ]
+            },
+            "application/json": {
+              "schema": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/components/schemas/UpsertInstrumentPropertyRequest"
+                },
+                "description": "A collection of instruments and associated instrument properties to update or insert."
+              },
+              "example": [
+                {
+                  "identifierType": "LusidInstrumentId",
+                  "identifier": "LUID_00000000",
+                  "properties": [
+                    {
+                      "key": "Instrument/MyScope/SomePropertyName",
+                      "value": {
+                        "labelValue": "SomeValue1"
+                      },
+                      "effectiveFrom": "2016-09-15T12:00:00.0000000+00:00"
+                    },
+                    {
+                      "key": "Instrument/MyScope/SomePropertyName",
+                      "value": {
+                        "labelValue": "SomeValue2"
+                      },
+                      "effectiveFrom": "2017-08-10T12:00:00.0000000+00:00"
+                    },
+                    {
+                      "key": "Instrument/MyScope/AnotherPropertyName",
+                      "value": {
+                        "labelValue": "AnotherValue1"
+                      },
+                      "effectiveFrom": "2018-03-05T12:00:00.0000000+00:00",
+                      "effectiveUntil": "2019-06-01T12:00:00.0000000+00:00"
+                    },
+                    {
+                      "key": "Instrument/MyScope/AnotherPropertyName",
+                      "value": {
+                        "labelValue": "AnotherValue2"
+                      },
+                      "effectiveFrom": "2020-03-15T12:00:00.0000000+00:00",
+                      "effectiveUntil": "2021-01-15T12:00:00.0000000+00:00"
+                    }
+                  ]
+                }
+              ]
+            },
+            "text/json": {
+              "schema": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/components/schemas/UpsertInstrumentPropertyRequest"
+                },
+                "description": "A collection of instruments and associated instrument properties to update or insert."
+              },
+              "example": [
+                {
+                  "identifierType": "LusidInstrumentId",
+                  "identifier": "LUID_00000000",
+                  "properties": [
+                    {
+                      "key": "Instrument/MyScope/SomePropertyName",
+                      "value": {
+                        "labelValue": "SomeValue1"
+                      },
+                      "effectiveFrom": "2016-09-15T12:00:00.0000000+00:00"
+                    },
+                    {
+                      "key": "Instrument/MyScope/SomePropertyName",
+                      "value": {
+                        "labelValue": "SomeValue2"
+                      },
+                      "effectiveFrom": "2017-08-10T12:00:00.0000000+00:00"
+                    },
+                    {
+                      "key": "Instrument/MyScope/AnotherPropertyName",
+                      "value": {
+                        "labelValue": "AnotherValue1"
+                      },
+                      "effectiveFrom": "2018-03-05T12:00:00.0000000+00:00",
+                      "effectiveUntil": "2019-06-01T12:00:00.0000000+00:00"
+                    },
+                    {
+                      "key": "Instrument/MyScope/AnotherPropertyName",
+                      "value": {
+                        "labelValue": "AnotherValue2"
+                      },
+                      "effectiveFrom": "2020-03-15T12:00:00.0000000+00:00",
+                      "effectiveUntil": "2021-01-15T12:00:00.0000000+00:00"
+                    }
+                  ]
+                }
+              ]
+            },
+            "application/*+json": {
+              "schema": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/components/schemas/UpsertInstrumentPropertyRequest"
+                },
+                "description": "A collection of instruments and associated instrument properties to update or insert."
+              },
+              "example": [
+                {
+                  "identifierType": "LusidInstrumentId",
+                  "identifier": "LUID_00000000",
+                  "properties": [
+                    {
+                      "key": "Instrument/MyScope/SomePropertyName",
+                      "value": {
+                        "labelValue": "SomeValue1"
+                      },
+                      "effectiveFrom": "2016-09-15T12:00:00.0000000+00:00"
+                    },
+                    {
+                      "key": "Instrument/MyScope/SomePropertyName",
+                      "value": {
+                        "labelValue": "SomeValue2"
+                      },
+                      "effectiveFrom": "2017-08-10T12:00:00.0000000+00:00"
+                    },
+                    {
+                      "key": "Instrument/MyScope/AnotherPropertyName",
+                      "value": {
+                        "labelValue": "AnotherValue1"
+                      },
+                      "effectiveFrom": "2018-03-05T12:00:00.0000000+00:00",
+                      "effectiveUntil": "2019-06-01T12:00:00.0000000+00:00"
+                    },
+                    {
+                      "key": "Instrument/MyScope/AnotherPropertyName",
+                      "value": {
+                        "labelValue": "AnotherValue2"
+                      },
+                      "effectiveFrom": "2020-03-15T12:00:00.0000000+00:00",
+                      "effectiveUntil": "2021-01-15T12:00:00.0000000+00:00"
+                    }
+                  ]
+                }
+              ]
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "201": {
+            "description": "The asAt time at which the properties were updated, inserted or deleted",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/UpsertInstrumentPropertiesResponse"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/UpsertInstrumentPropertiesResponse"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/UpsertInstrumentPropertiesResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "The details of the input related failure",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/LusidValidationProblemDetails"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/LusidValidationProblemDetails"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/LusidValidationProblemDetails"
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "Error response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/LusidProblemDetails"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "oauth2": []
+          }
+        ],
+        "x-fbn-apistatus": "Stable"
+      }
+    },
+    "/api/instruments/identifierTypes": {
+      "get": {
+        "tags": [
+          "Instruments"
+        ],
+        "summary": "[EARLY ACCESS] Get instrument identifier types",
+        "description": "Get the allowable instrument identifier types and their descriptions.",
+        "operationId": "GetInstrumentIdentifierTypes",
+        "responses": {
+          "200": {
+            "description": "The allowable instrument identifier types",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResourceListOfInstrumentIdTypeDescriptor"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResourceListOfInstrumentIdTypeDescriptor"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResourceListOfInstrumentIdTypeDescriptor"
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "Error response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/LusidProblemDetails"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "oauth2": []
+          }
+        ],
+        "x-fbn-apistatus": "EarlyAccess"
+      }
+    },
     "/api/instruments/{identifierType}/{identifier}": {
       "get": {
         "tags": [
@@ -1872,492 +2358,6 @@
               "text/json": {
                 "schema": {
                   "$ref": "#/components/schemas/LusidValidationProblemDetails"
-                }
-              }
-            }
-          },
-          "default": {
-            "description": "Error response",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/LusidProblemDetails"
-                }
-              }
-            }
-          }
-        },
-        "security": [
-          {
-            "oauth2": []
-          }
-        ],
-        "x-fbn-apistatus": "EarlyAccess"
-      }
-    },
-    "/api/instruments/$get": {
-      "post": {
-        "tags": [
-          "Instruments"
-        ],
-        "summary": "Get instruments",
-        "description": "Get the definition of one or more instruments identified by a collection of unique instrument identifiers.",
-        "operationId": "GetInstruments",
-        "parameters": [
-          {
-            "name": "identifierType",
-            "in": "query",
-            "description": "The identifier being supplied e.g. \"Figi\".",
-            "required": true,
-            "schema": {
-              "type": "string",
-              "description": "The identifier being supplied e.g. \"Figi\"."
-            }
-          },
-          {
-            "name": "effectiveAt",
-            "in": "query",
-            "description": "The effective datetime or cut label at which to retrieve the instrument definitions.\r\n            Defaults to the current LUSID system datetime if not specified.",
-            "schema": {
-              "type": "string",
-              "description": "The effective datetime or cut label at which to retrieve the instrument definitions.\r\n            Defaults to the current LUSID system datetime if not specified.",
-              "format": "dateorcutlabel",
-              "nullable": true
-            }
-          },
-          {
-            "name": "asAt",
-            "in": "query",
-            "description": "The asAt datetime at which to retrieve the instrument definitions.\r\n            Defaults to return the latest version of each instrument definition if not specified.",
-            "schema": {
-              "type": "string",
-              "description": "The asAt datetime at which to retrieve the instrument definitions.\r\n            Defaults to return the latest version of each instrument definition if not specified.",
-              "format": "date-time",
-              "nullable": true
-            },
-            "x-nullable": true
-          },
-          {
-            "name": "propertyKeys",
-            "in": "query",
-            "description": "A list of property keys from the \"Instrument\" domain to decorate onto the instrument.\r\n            These take the format {domain}/{scope}/{code} e.g. \"Instrument/system/Name\".",
-            "schema": {
-              "type": "array",
-              "items": {
-                "type": "string",
-                "description": "The key that uniquely identifies the property. It has the format {domain}/{scope}/{code}."
-              },
-              "description": "A list of property keys from the \"Instrument\" domain to decorate onto the instrument.\r\n            These take the format {domain}/{scope}/{code} e.g. \"Instrument/system/Name\".",
-              "nullable": true
-            },
-            "x-nullable": true
-          }
-        ],
-        "requestBody": {
-          "description": "The values of the identifier for the requested instruments.",
-          "content": {
-            "application/json-patch+json": {
-              "schema": {
-                "type": "array",
-                "items": {
-                  "type": "string"
-                },
-                "description": "The values of the identifier for the requested instruments."
-              },
-              "example": [
-                "instrument-identifier-1",
-                "instrument-identifier-2"
-              ]
-            },
-            "application/json": {
-              "schema": {
-                "type": "array",
-                "items": {
-                  "type": "string"
-                },
-                "description": "The values of the identifier for the requested instruments."
-              },
-              "example": [
-                "instrument-identifier-1",
-                "instrument-identifier-2"
-              ]
-            },
-            "text/json": {
-              "schema": {
-                "type": "array",
-                "items": {
-                  "type": "string"
-                },
-                "description": "The values of the identifier for the requested instruments."
-              },
-              "example": [
-                "instrument-identifier-1",
-                "instrument-identifier-2"
-              ]
-            },
-            "application/*+json": {
-              "schema": {
-                "type": "array",
-                "items": {
-                  "type": "string"
-                },
-                "description": "The values of the identifier for the requested instruments."
-              },
-              "example": [
-                "instrument-identifier-1",
-                "instrument-identifier-2"
-              ]
-            }
-          },
-          "required": true
-        },
-        "responses": {
-          "200": {
-            "description": "The requested instruments which could be identified along with any failures",
-            "content": {
-              "text/plain": {
-                "schema": {
-                  "$ref": "#/components/schemas/GetInstrumentsResponse"
-                }
-              },
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/GetInstrumentsResponse"
-                }
-              },
-              "text/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/GetInstrumentsResponse"
-                }
-              }
-            }
-          },
-          "400": {
-            "description": "The details of the input related failure",
-            "content": {
-              "text/plain": {
-                "schema": {
-                  "$ref": "#/components/schemas/LusidValidationProblemDetails"
-                }
-              },
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/LusidValidationProblemDetails"
-                }
-              },
-              "text/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/LusidValidationProblemDetails"
-                }
-              }
-            }
-          },
-          "default": {
-            "description": "Error response",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/LusidProblemDetails"
-                }
-              }
-            }
-          }
-        },
-        "security": [
-          {
-            "oauth2": []
-          }
-        ],
-        "x-fbn-apistatus": "Stable"
-      }
-    },
-    "/api/instruments/$upsertproperties": {
-      "post": {
-        "tags": [
-          "Instruments"
-        ],
-        "summary": "Upsert instruments properties",
-        "description": "Update or insert one or more instrument properties for one or more instruments. Each instrument property will be updated\r\nif it already exists and inserted if it does not. If any properties fail to be updated or inserted, none will be updated or inserted and\r\nthe reason for the failure will be returned.\r\n            \r\nProperties have an <i>effectiveFrom</i> datetime for which the property is valid, and an <i>effectiveUntil</i>\r\ndatetime until which the property is valid. Not supplying an <i>effectiveUntil</i> datetime results in the property being\r\nvalid indefinitely, or until the next <i>effectiveFrom</i> datetime of the property.",
-        "operationId": "UpsertInstrumentsProperties",
-        "requestBody": {
-          "description": "A collection of instruments and associated instrument properties to update or insert.",
-          "content": {
-            "application/json-patch+json": {
-              "schema": {
-                "type": "array",
-                "items": {
-                  "$ref": "#/components/schemas/UpsertInstrumentPropertyRequest"
-                },
-                "description": "A collection of instruments and associated instrument properties to update or insert."
-              },
-              "example": [
-                {
-                  "identifierType": "LusidInstrumentId",
-                  "identifier": "LUID_00000000",
-                  "properties": [
-                    {
-                      "key": "Instrument/MyScope/SomePropertyName",
-                      "value": {
-                        "labelValue": "SomeValue1"
-                      },
-                      "effectiveFrom": "2016-09-15T12:00:00.0000000+00:00"
-                    },
-                    {
-                      "key": "Instrument/MyScope/SomePropertyName",
-                      "value": {
-                        "labelValue": "SomeValue2"
-                      },
-                      "effectiveFrom": "2017-08-10T12:00:00.0000000+00:00"
-                    },
-                    {
-                      "key": "Instrument/MyScope/AnotherPropertyName",
-                      "value": {
-                        "labelValue": "AnotherValue1"
-                      },
-                      "effectiveFrom": "2018-03-05T12:00:00.0000000+00:00",
-                      "effectiveUntil": "2019-06-01T12:00:00.0000000+00:00"
-                    },
-                    {
-                      "key": "Instrument/MyScope/AnotherPropertyName",
-                      "value": {
-                        "labelValue": "AnotherValue2"
-                      },
-                      "effectiveFrom": "2020-03-15T12:00:00.0000000+00:00",
-                      "effectiveUntil": "2021-01-15T12:00:00.0000000+00:00"
-                    }
-                  ]
-                }
-              ]
-            },
-            "application/json": {
-              "schema": {
-                "type": "array",
-                "items": {
-                  "$ref": "#/components/schemas/UpsertInstrumentPropertyRequest"
-                },
-                "description": "A collection of instruments and associated instrument properties to update or insert."
-              },
-              "example": [
-                {
-                  "identifierType": "LusidInstrumentId",
-                  "identifier": "LUID_00000000",
-                  "properties": [
-                    {
-                      "key": "Instrument/MyScope/SomePropertyName",
-                      "value": {
-                        "labelValue": "SomeValue1"
-                      },
-                      "effectiveFrom": "2016-09-15T12:00:00.0000000+00:00"
-                    },
-                    {
-                      "key": "Instrument/MyScope/SomePropertyName",
-                      "value": {
-                        "labelValue": "SomeValue2"
-                      },
-                      "effectiveFrom": "2017-08-10T12:00:00.0000000+00:00"
-                    },
-                    {
-                      "key": "Instrument/MyScope/AnotherPropertyName",
-                      "value": {
-                        "labelValue": "AnotherValue1"
-                      },
-                      "effectiveFrom": "2018-03-05T12:00:00.0000000+00:00",
-                      "effectiveUntil": "2019-06-01T12:00:00.0000000+00:00"
-                    },
-                    {
-                      "key": "Instrument/MyScope/AnotherPropertyName",
-                      "value": {
-                        "labelValue": "AnotherValue2"
-                      },
-                      "effectiveFrom": "2020-03-15T12:00:00.0000000+00:00",
-                      "effectiveUntil": "2021-01-15T12:00:00.0000000+00:00"
-                    }
-                  ]
-                }
-              ]
-            },
-            "text/json": {
-              "schema": {
-                "type": "array",
-                "items": {
-                  "$ref": "#/components/schemas/UpsertInstrumentPropertyRequest"
-                },
-                "description": "A collection of instruments and associated instrument properties to update or insert."
-              },
-              "example": [
-                {
-                  "identifierType": "LusidInstrumentId",
-                  "identifier": "LUID_00000000",
-                  "properties": [
-                    {
-                      "key": "Instrument/MyScope/SomePropertyName",
-                      "value": {
-                        "labelValue": "SomeValue1"
-                      },
-                      "effectiveFrom": "2016-09-15T12:00:00.0000000+00:00"
-                    },
-                    {
-                      "key": "Instrument/MyScope/SomePropertyName",
-                      "value": {
-                        "labelValue": "SomeValue2"
-                      },
-                      "effectiveFrom": "2017-08-10T12:00:00.0000000+00:00"
-                    },
-                    {
-                      "key": "Instrument/MyScope/AnotherPropertyName",
-                      "value": {
-                        "labelValue": "AnotherValue1"
-                      },
-                      "effectiveFrom": "2018-03-05T12:00:00.0000000+00:00",
-                      "effectiveUntil": "2019-06-01T12:00:00.0000000+00:00"
-                    },
-                    {
-                      "key": "Instrument/MyScope/AnotherPropertyName",
-                      "value": {
-                        "labelValue": "AnotherValue2"
-                      },
-                      "effectiveFrom": "2020-03-15T12:00:00.0000000+00:00",
-                      "effectiveUntil": "2021-01-15T12:00:00.0000000+00:00"
-                    }
-                  ]
-                }
-              ]
-            },
-            "application/*+json": {
-              "schema": {
-                "type": "array",
-                "items": {
-                  "$ref": "#/components/schemas/UpsertInstrumentPropertyRequest"
-                },
-                "description": "A collection of instruments and associated instrument properties to update or insert."
-              },
-              "example": [
-                {
-                  "identifierType": "LusidInstrumentId",
-                  "identifier": "LUID_00000000",
-                  "properties": [
-                    {
-                      "key": "Instrument/MyScope/SomePropertyName",
-                      "value": {
-                        "labelValue": "SomeValue1"
-                      },
-                      "effectiveFrom": "2016-09-15T12:00:00.0000000+00:00"
-                    },
-                    {
-                      "key": "Instrument/MyScope/SomePropertyName",
-                      "value": {
-                        "labelValue": "SomeValue2"
-                      },
-                      "effectiveFrom": "2017-08-10T12:00:00.0000000+00:00"
-                    },
-                    {
-                      "key": "Instrument/MyScope/AnotherPropertyName",
-                      "value": {
-                        "labelValue": "AnotherValue1"
-                      },
-                      "effectiveFrom": "2018-03-05T12:00:00.0000000+00:00",
-                      "effectiveUntil": "2019-06-01T12:00:00.0000000+00:00"
-                    },
-                    {
-                      "key": "Instrument/MyScope/AnotherPropertyName",
-                      "value": {
-                        "labelValue": "AnotherValue2"
-                      },
-                      "effectiveFrom": "2020-03-15T12:00:00.0000000+00:00",
-                      "effectiveUntil": "2021-01-15T12:00:00.0000000+00:00"
-                    }
-                  ]
-                }
-              ]
-            }
-          },
-          "required": true
-        },
-        "responses": {
-          "201": {
-            "description": "The asAt time at which the properties were updated, inserted or deleted",
-            "content": {
-              "text/plain": {
-                "schema": {
-                  "$ref": "#/components/schemas/UpsertInstrumentPropertiesResponse"
-                }
-              },
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/UpsertInstrumentPropertiesResponse"
-                }
-              },
-              "text/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/UpsertInstrumentPropertiesResponse"
-                }
-              }
-            }
-          },
-          "400": {
-            "description": "The details of the input related failure",
-            "content": {
-              "text/plain": {
-                "schema": {
-                  "$ref": "#/components/schemas/LusidValidationProblemDetails"
-                }
-              },
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/LusidValidationProblemDetails"
-                }
-              },
-              "text/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/LusidValidationProblemDetails"
-                }
-              }
-            }
-          },
-          "default": {
-            "description": "Error response",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/LusidProblemDetails"
-                }
-              }
-            }
-          }
-        },
-        "security": [
-          {
-            "oauth2": []
-          }
-        ],
-        "x-fbn-apistatus": "Stable"
-      }
-    },
-    "/api/instruments/identifierTypes": {
-      "get": {
-        "tags": [
-          "Instruments"
-        ],
-        "summary": "[EARLY ACCESS] Get instrument identifier types",
-        "description": "Get the allowable instrument identifier types and their descriptions.",
-        "operationId": "GetInstrumentIdentifierTypes",
-        "responses": {
-          "200": {
-            "description": "The allowable instrument identifier types",
-            "content": {
-              "text/plain": {
-                "schema": {
-                  "$ref": "#/components/schemas/ResourceListOfInstrumentIdTypeDescriptor"
-                }
-              },
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ResourceListOfInstrumentIdTypeDescriptor"
-                }
-              },
-              "text/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ResourceListOfInstrumentIdTypeDescriptor"
                 }
               }
             }
@@ -7537,6 +7537,233 @@
         "x-fbn-apistatus": "Stable"
       }
     },
+    "/api/portfolios/$reconcileholdings": {
+      "post": {
+        "tags": [
+          "Reconciliations"
+        ],
+        "summary": "[EARLY ACCESS] Reconcile portfolio holdings",
+        "description": "Reconcile the holdings of two portfolios.",
+        "operationId": "ReconcileHoldings",
+        "parameters": [
+          {
+            "name": "sortBy",
+            "in": "query",
+            "description": "Optional. Order the results by these fields. Use use the '-' sign to denote descending order e.g. -MyFieldName",
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              },
+              "description": "Optional. Order the results by these fields. Use use the '-' sign to denote descending order e.g. -MyFieldName",
+              "nullable": true
+            },
+            "x-nullable": true
+          },
+          {
+            "name": "start",
+            "in": "query",
+            "description": "Optional. When paginating, skip this number of results",
+            "schema": {
+              "type": "integer",
+              "description": "Optional. When paginating, skip this number of results",
+              "format": "int32",
+              "nullable": true
+            },
+            "x-nullable": true
+          },
+          {
+            "name": "limit",
+            "in": "query",
+            "description": "Optional. When paginating, limit the number of returned results to this many.",
+            "schema": {
+              "type": "integer",
+              "description": "Optional. When paginating, limit the number of returned results to this many.",
+              "format": "int32",
+              "nullable": true
+            },
+            "x-nullable": true
+          },
+          {
+            "name": "filter",
+            "in": "query",
+            "description": "Optional. Expression to filter the result set.\r\n            For example, to filter on the left portfolio Code, use \"left.portfolioId.code eq 'string'\"\r\n            Read more about filtering results from LUSID here https://support.lusid.com/filtering-results-from-lusid.",
+            "schema": {
+              "type": "string",
+              "description": "Optional. Expression to filter the result set.\r\n            For example, to filter on the left portfolio Code, use \"left.portfolioId.code eq 'string'\"\r\n            Read more about filtering results from LUSID here https://support.lusid.com/filtering-results-from-lusid.",
+              "nullable": true
+            }
+          }
+        ],
+        "requestBody": {
+          "description": "The specifications of the inputs to the reconciliation",
+          "content": {
+            "application/json-patch+json": {
+              "schema": {
+                "$ref": "#/components/schemas/PortfoliosReconciliationRequest"
+              },
+              "example": {
+                "left": {
+                  "portfolioId": {
+                    "scope": "MySourceScope",
+                    "code": "MySourcePortfolioCode"
+                  },
+                  "effectiveAt": "2018-03-05T00:00:00.0000000+00:00",
+                  "asAt": "2018-03-05T00:00:00.0000000+00:00"
+                },
+                "right": {
+                  "portfolioId": {
+                    "scope": "MyTargetScope",
+                    "code": "MyTargetPortfolioCode"
+                  },
+                  "effectiveAt": "2018-03-05T00:00:00.0000000+00:00",
+                  "asAt": "2018-03-05T00:00:00.0000000+00:00"
+                },
+                "instrumentPropertyKeys": [
+                  "Instrument/default/Name"
+                ]
+              }
+            },
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/PortfoliosReconciliationRequest"
+              },
+              "example": {
+                "left": {
+                  "portfolioId": {
+                    "scope": "MySourceScope",
+                    "code": "MySourcePortfolioCode"
+                  },
+                  "effectiveAt": "2018-03-05T00:00:00.0000000+00:00",
+                  "asAt": "2018-03-05T00:00:00.0000000+00:00"
+                },
+                "right": {
+                  "portfolioId": {
+                    "scope": "MyTargetScope",
+                    "code": "MyTargetPortfolioCode"
+                  },
+                  "effectiveAt": "2018-03-05T00:00:00.0000000+00:00",
+                  "asAt": "2018-03-05T00:00:00.0000000+00:00"
+                },
+                "instrumentPropertyKeys": [
+                  "Instrument/default/Name"
+                ]
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/PortfoliosReconciliationRequest"
+              },
+              "example": {
+                "left": {
+                  "portfolioId": {
+                    "scope": "MySourceScope",
+                    "code": "MySourcePortfolioCode"
+                  },
+                  "effectiveAt": "2018-03-05T00:00:00.0000000+00:00",
+                  "asAt": "2018-03-05T00:00:00.0000000+00:00"
+                },
+                "right": {
+                  "portfolioId": {
+                    "scope": "MyTargetScope",
+                    "code": "MyTargetPortfolioCode"
+                  },
+                  "effectiveAt": "2018-03-05T00:00:00.0000000+00:00",
+                  "asAt": "2018-03-05T00:00:00.0000000+00:00"
+                },
+                "instrumentPropertyKeys": [
+                  "Instrument/default/Name"
+                ]
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/PortfoliosReconciliationRequest"
+              },
+              "example": {
+                "left": {
+                  "portfolioId": {
+                    "scope": "MySourceScope",
+                    "code": "MySourcePortfolioCode"
+                  },
+                  "effectiveAt": "2018-03-05T00:00:00.0000000+00:00",
+                  "asAt": "2018-03-05T00:00:00.0000000+00:00"
+                },
+                "right": {
+                  "portfolioId": {
+                    "scope": "MyTargetScope",
+                    "code": "MyTargetPortfolioCode"
+                  },
+                  "effectiveAt": "2018-03-05T00:00:00.0000000+00:00",
+                  "asAt": "2018-03-05T00:00:00.0000000+00:00"
+                },
+                "instrumentPropertyKeys": [
+                  "Instrument/default/Name"
+                ]
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "The requested reconciliation",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResourceListOfReconciliationBreak"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResourceListOfReconciliationBreak"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResourceListOfReconciliationBreak"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "The details of the input related failure",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/LusidValidationProblemDetails"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/LusidValidationProblemDetails"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/LusidValidationProblemDetails"
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "Error response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/LusidProblemDetails"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "oauth2": []
+          }
+        ],
+        "x-fbn-apistatus": "EarlyAccess"
+      }
+    },
     "/api/portfolios/{scope}": {
       "get": {
         "tags": [
@@ -8728,233 +8955,6 @@
           }
         ],
         "x-fbn-apistatus": "Stable"
-      }
-    },
-    "/api/portfolios/$reconcileholdings": {
-      "post": {
-        "tags": [
-          "Reconciliations"
-        ],
-        "summary": "[EARLY ACCESS] Reconcile portfolio holdings",
-        "description": "Reconcile the holdings of two portfolios.",
-        "operationId": "ReconcileHoldings",
-        "parameters": [
-          {
-            "name": "sortBy",
-            "in": "query",
-            "description": "Optional. Order the results by these fields. Use use the '-' sign to denote descending order e.g. -MyFieldName",
-            "schema": {
-              "type": "array",
-              "items": {
-                "type": "string"
-              },
-              "description": "Optional. Order the results by these fields. Use use the '-' sign to denote descending order e.g. -MyFieldName",
-              "nullable": true
-            },
-            "x-nullable": true
-          },
-          {
-            "name": "start",
-            "in": "query",
-            "description": "Optional. When paginating, skip this number of results",
-            "schema": {
-              "type": "integer",
-              "description": "Optional. When paginating, skip this number of results",
-              "format": "int32",
-              "nullable": true
-            },
-            "x-nullable": true
-          },
-          {
-            "name": "limit",
-            "in": "query",
-            "description": "Optional. When paginating, limit the number of returned results to this many.",
-            "schema": {
-              "type": "integer",
-              "description": "Optional. When paginating, limit the number of returned results to this many.",
-              "format": "int32",
-              "nullable": true
-            },
-            "x-nullable": true
-          },
-          {
-            "name": "filter",
-            "in": "query",
-            "description": "Optional. Expression to filter the result set.\r\n            For example, to filter on the left portfolio Code, use \"left.portfolioId.code eq 'string'\"\r\n            Read more about filtering results from LUSID here https://support.lusid.com/filtering-results-from-lusid.",
-            "schema": {
-              "type": "string",
-              "description": "Optional. Expression to filter the result set.\r\n            For example, to filter on the left portfolio Code, use \"left.portfolioId.code eq 'string'\"\r\n            Read more about filtering results from LUSID here https://support.lusid.com/filtering-results-from-lusid.",
-              "nullable": true
-            }
-          }
-        ],
-        "requestBody": {
-          "description": "The specifications of the inputs to the reconciliation",
-          "content": {
-            "application/json-patch+json": {
-              "schema": {
-                "$ref": "#/components/schemas/PortfoliosReconciliationRequest"
-              },
-              "example": {
-                "left": {
-                  "portfolioId": {
-                    "scope": "MySourceScope",
-                    "code": "MySourcePortfolioCode"
-                  },
-                  "effectiveAt": "2018-03-05T00:00:00.0000000+00:00",
-                  "asAt": "2018-03-05T00:00:00.0000000+00:00"
-                },
-                "right": {
-                  "portfolioId": {
-                    "scope": "MyTargetScope",
-                    "code": "MyTargetPortfolioCode"
-                  },
-                  "effectiveAt": "2018-03-05T00:00:00.0000000+00:00",
-                  "asAt": "2018-03-05T00:00:00.0000000+00:00"
-                },
-                "instrumentPropertyKeys": [
-                  "Instrument/default/Name"
-                ]
-              }
-            },
-            "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/PortfoliosReconciliationRequest"
-              },
-              "example": {
-                "left": {
-                  "portfolioId": {
-                    "scope": "MySourceScope",
-                    "code": "MySourcePortfolioCode"
-                  },
-                  "effectiveAt": "2018-03-05T00:00:00.0000000+00:00",
-                  "asAt": "2018-03-05T00:00:00.0000000+00:00"
-                },
-                "right": {
-                  "portfolioId": {
-                    "scope": "MyTargetScope",
-                    "code": "MyTargetPortfolioCode"
-                  },
-                  "effectiveAt": "2018-03-05T00:00:00.0000000+00:00",
-                  "asAt": "2018-03-05T00:00:00.0000000+00:00"
-                },
-                "instrumentPropertyKeys": [
-                  "Instrument/default/Name"
-                ]
-              }
-            },
-            "text/json": {
-              "schema": {
-                "$ref": "#/components/schemas/PortfoliosReconciliationRequest"
-              },
-              "example": {
-                "left": {
-                  "portfolioId": {
-                    "scope": "MySourceScope",
-                    "code": "MySourcePortfolioCode"
-                  },
-                  "effectiveAt": "2018-03-05T00:00:00.0000000+00:00",
-                  "asAt": "2018-03-05T00:00:00.0000000+00:00"
-                },
-                "right": {
-                  "portfolioId": {
-                    "scope": "MyTargetScope",
-                    "code": "MyTargetPortfolioCode"
-                  },
-                  "effectiveAt": "2018-03-05T00:00:00.0000000+00:00",
-                  "asAt": "2018-03-05T00:00:00.0000000+00:00"
-                },
-                "instrumentPropertyKeys": [
-                  "Instrument/default/Name"
-                ]
-              }
-            },
-            "application/*+json": {
-              "schema": {
-                "$ref": "#/components/schemas/PortfoliosReconciliationRequest"
-              },
-              "example": {
-                "left": {
-                  "portfolioId": {
-                    "scope": "MySourceScope",
-                    "code": "MySourcePortfolioCode"
-                  },
-                  "effectiveAt": "2018-03-05T00:00:00.0000000+00:00",
-                  "asAt": "2018-03-05T00:00:00.0000000+00:00"
-                },
-                "right": {
-                  "portfolioId": {
-                    "scope": "MyTargetScope",
-                    "code": "MyTargetPortfolioCode"
-                  },
-                  "effectiveAt": "2018-03-05T00:00:00.0000000+00:00",
-                  "asAt": "2018-03-05T00:00:00.0000000+00:00"
-                },
-                "instrumentPropertyKeys": [
-                  "Instrument/default/Name"
-                ]
-              }
-            }
-          }
-        },
-        "responses": {
-          "200": {
-            "description": "The requested reconciliation",
-            "content": {
-              "text/plain": {
-                "schema": {
-                  "$ref": "#/components/schemas/ResourceListOfReconciliationBreak"
-                }
-              },
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ResourceListOfReconciliationBreak"
-                }
-              },
-              "text/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ResourceListOfReconciliationBreak"
-                }
-              }
-            }
-          },
-          "400": {
-            "description": "The details of the input related failure",
-            "content": {
-              "text/plain": {
-                "schema": {
-                  "$ref": "#/components/schemas/LusidValidationProblemDetails"
-                }
-              },
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/LusidValidationProblemDetails"
-                }
-              },
-              "text/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/LusidValidationProblemDetails"
-                }
-              }
-            }
-          },
-          "default": {
-            "description": "Error response",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/LusidProblemDetails"
-                }
-              }
-            }
-          }
-        },
-        "security": [
-          {
-            "oauth2": []
-          }
-        ],
-        "x-fbn-apistatus": "EarlyAccess"
       }
     },
     "/api/propertydefinitions": {
@@ -18829,358 +18829,6 @@
         "x-fbn-apistatus": "Stable"
       }
     },
-    "/api/transactionportfolios/{scope}/{code}/transactions/{transactionId}/properties": {
-      "post": {
-        "tags": [
-          "Transaction Portfolios"
-        ],
-        "summary": "Upsert transaction properties",
-        "description": "Update or insert one or more transaction properties to a single transaction in a transaction portfolio.\r\nEach property will be updated if it already exists and inserted if it does not.\r\nBoth transaction and portfolio must exist at the time when properties are updated or inserted.",
-        "operationId": "UpsertTransactionProperties",
-        "parameters": [
-          {
-            "name": "scope",
-            "in": "path",
-            "description": "The scope of the transaction portfolio.",
-            "required": true,
-            "schema": {
-              "maxLength": 64,
-              "minLength": 1,
-              "pattern": "^[a-zA-Z0-9\\-_]+$",
-              "type": "string",
-              "description": "The scope of the transaction portfolio.",
-              "nullable": true
-            }
-          },
-          {
-            "name": "code",
-            "in": "path",
-            "description": "The code of the transaction portfolio. Together with the scope this uniquely identifies\r\n            the transaction portfolio.",
-            "required": true,
-            "schema": {
-              "maxLength": 64,
-              "minLength": 1,
-              "pattern": "^[a-zA-Z0-9\\-_]+$",
-              "type": "string",
-              "description": "The code of the transaction portfolio. Together with the scope this uniquely identifies\r\n            the transaction portfolio.",
-              "nullable": true
-            }
-          },
-          {
-            "name": "transactionId",
-            "in": "path",
-            "description": "The unique id of the transaction to update or insert properties against.",
-            "required": true,
-            "schema": {
-              "type": "string",
-              "description": "The unique id of the transaction to update or insert properties against.",
-              "nullable": true
-            }
-          }
-        ],
-        "requestBody": {
-          "description": "The properties with their associated values to update or insert onto the\r\n            transaction.",
-          "content": {
-            "application/json-patch+json": {
-              "schema": {
-                "type": "object",
-                "additionalProperties": {
-                  "$ref": "#/components/schemas/PerpetualProperty"
-                },
-                "description": "The properties with their associated values to update or insert onto the\r\n            transaction."
-              },
-              "example": {
-                "transaction/MyScope/MyPropertyName": {
-                  "key": "Transaction/MyScope/MyPropertyName",
-                  "value": {
-                    "metricValue": {
-                      "value": 12345.5672,
-                      "unit": "Unit"
-                    }
-                  }
-                },
-                "transaction/MyScope/MyPropertyName2": {
-                  "key": "Transaction/MyScope/MyPropertyName2",
-                  "value": {
-                    "metricValue": {
-                      "value": 925.3,
-                      "unit": "Unit"
-                    }
-                  }
-                }
-              }
-            },
-            "application/json": {
-              "schema": {
-                "type": "object",
-                "additionalProperties": {
-                  "$ref": "#/components/schemas/PerpetualProperty"
-                },
-                "description": "The properties with their associated values to update or insert onto the\r\n            transaction."
-              },
-              "example": {
-                "transaction/MyScope/MyPropertyName": {
-                  "key": "Transaction/MyScope/MyPropertyName",
-                  "value": {
-                    "metricValue": {
-                      "value": 12345.5672,
-                      "unit": "Unit"
-                    }
-                  }
-                },
-                "transaction/MyScope/MyPropertyName2": {
-                  "key": "Transaction/MyScope/MyPropertyName2",
-                  "value": {
-                    "metricValue": {
-                      "value": 925.3,
-                      "unit": "Unit"
-                    }
-                  }
-                }
-              }
-            },
-            "text/json": {
-              "schema": {
-                "type": "object",
-                "additionalProperties": {
-                  "$ref": "#/components/schemas/PerpetualProperty"
-                },
-                "description": "The properties with their associated values to update or insert onto the\r\n            transaction."
-              },
-              "example": {
-                "transaction/MyScope/MyPropertyName": {
-                  "key": "Transaction/MyScope/MyPropertyName",
-                  "value": {
-                    "metricValue": {
-                      "value": 12345.5672,
-                      "unit": "Unit"
-                    }
-                  }
-                },
-                "transaction/MyScope/MyPropertyName2": {
-                  "key": "Transaction/MyScope/MyPropertyName2",
-                  "value": {
-                    "metricValue": {
-                      "value": 925.3,
-                      "unit": "Unit"
-                    }
-                  }
-                }
-              }
-            },
-            "application/*+json": {
-              "schema": {
-                "type": "object",
-                "additionalProperties": {
-                  "$ref": "#/components/schemas/PerpetualProperty"
-                },
-                "description": "The properties with their associated values to update or insert onto the\r\n            transaction."
-              },
-              "example": {
-                "transaction/MyScope/MyPropertyName": {
-                  "key": "Transaction/MyScope/MyPropertyName",
-                  "value": {
-                    "metricValue": {
-                      "value": 12345.5672,
-                      "unit": "Unit"
-                    }
-                  }
-                },
-                "transaction/MyScope/MyPropertyName2": {
-                  "key": "Transaction/MyScope/MyPropertyName2",
-                  "value": {
-                    "metricValue": {
-                      "value": 925.3,
-                      "unit": "Unit"
-                    }
-                  }
-                }
-              }
-            }
-          },
-          "required": true
-        },
-        "responses": {
-          "200": {
-            "description": "The version of the transaction portfolio that contains the newly updated or inserted transaction property",
-            "content": {
-              "text/plain": {
-                "schema": {
-                  "$ref": "#/components/schemas/UpsertTransactionPropertiesResponse"
-                }
-              },
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/UpsertTransactionPropertiesResponse"
-                }
-              },
-              "text/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/UpsertTransactionPropertiesResponse"
-                }
-              }
-            }
-          },
-          "400": {
-            "description": "The details of the input related failure",
-            "content": {
-              "text/plain": {
-                "schema": {
-                  "$ref": "#/components/schemas/LusidValidationProblemDetails"
-                }
-              },
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/LusidValidationProblemDetails"
-                }
-              },
-              "text/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/LusidValidationProblemDetails"
-                }
-              }
-            }
-          },
-          "default": {
-            "description": "Error response",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/LusidProblemDetails"
-                }
-              }
-            }
-          }
-        },
-        "security": [
-          {
-            "oauth2": []
-          }
-        ],
-        "x-fbn-apistatus": "Stable"
-      },
-      "delete": {
-        "tags": [
-          "Transaction Portfolios"
-        ],
-        "summary": "Delete properties from transaction",
-        "description": "Delete one or more property values from a single transaction in a transaction portfolio.",
-        "operationId": "DeletePropertiesFromTransaction",
-        "parameters": [
-          {
-            "name": "scope",
-            "in": "path",
-            "description": "The scope of the transaction portfolio.",
-            "required": true,
-            "schema": {
-              "maxLength": 64,
-              "minLength": 1,
-              "pattern": "^[a-zA-Z0-9\\-_]+$",
-              "type": "string",
-              "description": "The scope of the transaction portfolio.",
-              "nullable": true
-            }
-          },
-          {
-            "name": "code",
-            "in": "path",
-            "description": "The code of the transaction portfolio. Together with the scope this uniquely identifies\r\n            the transaction portfolio.",
-            "required": true,
-            "schema": {
-              "maxLength": 64,
-              "minLength": 1,
-              "pattern": "^[a-zA-Z0-9\\-_]+$",
-              "type": "string",
-              "description": "The code of the transaction portfolio. Together with the scope this uniquely identifies\r\n            the transaction portfolio.",
-              "nullable": true
-            }
-          },
-          {
-            "name": "transactionId",
-            "in": "path",
-            "description": "The unique id of the transaction to delete the property value from.",
-            "required": true,
-            "schema": {
-              "type": "string",
-              "description": "The unique id of the transaction to delete the property value from.",
-              "nullable": true
-            }
-          },
-          {
-            "name": "propertyKeys",
-            "in": "query",
-            "description": "The property keys of the properties to delete from the transaction.\r\n            This must be from the \"Transaction\" domain and will have the format {domain}/{scope}/{code} e.g.\r\n            \"Transaction/strategy/quantsignal\".",
-            "required": true,
-            "schema": {
-              "type": "array",
-              "items": {
-                "type": "string",
-                "description": "The key that uniquely identifies the property. It has the format {domain}/{scope}/{code}."
-              },
-              "description": "The property keys of the properties to delete from the transaction.\r\n            This must be from the \"Transaction\" domain and will have the format {domain}/{scope}/{code} e.g.\r\n            \"Transaction/strategy/quantsignal\"."
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "The datetime that the property was deleted",
-            "content": {
-              "text/plain": {
-                "schema": {
-                  "$ref": "#/components/schemas/DeletedEntityResponse"
-                }
-              },
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/DeletedEntityResponse"
-                }
-              },
-              "text/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/DeletedEntityResponse"
-                }
-              }
-            }
-          },
-          "400": {
-            "description": "The details of the input related failure",
-            "content": {
-              "text/plain": {
-                "schema": {
-                  "$ref": "#/components/schemas/LusidValidationProblemDetails"
-                }
-              },
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/LusidValidationProblemDetails"
-                }
-              },
-              "text/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/LusidValidationProblemDetails"
-                }
-              }
-            }
-          },
-          "default": {
-            "description": "Error response",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/LusidProblemDetails"
-                }
-              }
-            }
-          }
-        },
-        "security": [
-          {
-            "oauth2": []
-          }
-        ],
-        "x-fbn-apistatus": "Stable"
-      }
-    },
     "/api/transactionportfolios/{scope}/{code}/transactions/$build": {
       "post": {
         "tags": [
@@ -19956,6 +19604,358 @@
                   ],
                   "href": "http://example.com",
                   "links": []
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "The details of the input related failure",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/LusidValidationProblemDetails"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/LusidValidationProblemDetails"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/LusidValidationProblemDetails"
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "Error response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/LusidProblemDetails"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "oauth2": []
+          }
+        ],
+        "x-fbn-apistatus": "Stable"
+      }
+    },
+    "/api/transactionportfolios/{scope}/{code}/transactions/{transactionId}/properties": {
+      "post": {
+        "tags": [
+          "Transaction Portfolios"
+        ],
+        "summary": "Upsert transaction properties",
+        "description": "Update or insert one or more transaction properties to a single transaction in a transaction portfolio.\r\nEach property will be updated if it already exists and inserted if it does not.\r\nBoth transaction and portfolio must exist at the time when properties are updated or inserted.",
+        "operationId": "UpsertTransactionProperties",
+        "parameters": [
+          {
+            "name": "scope",
+            "in": "path",
+            "description": "The scope of the transaction portfolio.",
+            "required": true,
+            "schema": {
+              "maxLength": 64,
+              "minLength": 1,
+              "pattern": "^[a-zA-Z0-9\\-_]+$",
+              "type": "string",
+              "description": "The scope of the transaction portfolio.",
+              "nullable": true
+            }
+          },
+          {
+            "name": "code",
+            "in": "path",
+            "description": "The code of the transaction portfolio. Together with the scope this uniquely identifies\r\n            the transaction portfolio.",
+            "required": true,
+            "schema": {
+              "maxLength": 64,
+              "minLength": 1,
+              "pattern": "^[a-zA-Z0-9\\-_]+$",
+              "type": "string",
+              "description": "The code of the transaction portfolio. Together with the scope this uniquely identifies\r\n            the transaction portfolio.",
+              "nullable": true
+            }
+          },
+          {
+            "name": "transactionId",
+            "in": "path",
+            "description": "The unique id of the transaction to update or insert properties against.",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "description": "The unique id of the transaction to update or insert properties against.",
+              "nullable": true
+            }
+          }
+        ],
+        "requestBody": {
+          "description": "The properties with their associated values to update or insert onto the\r\n            transaction.",
+          "content": {
+            "application/json-patch+json": {
+              "schema": {
+                "type": "object",
+                "additionalProperties": {
+                  "$ref": "#/components/schemas/PerpetualProperty"
+                },
+                "description": "The properties with their associated values to update or insert onto the\r\n            transaction."
+              },
+              "example": {
+                "transaction/MyScope/MyPropertyName": {
+                  "key": "Transaction/MyScope/MyPropertyName",
+                  "value": {
+                    "metricValue": {
+                      "value": 12345.5672,
+                      "unit": "Unit"
+                    }
+                  }
+                },
+                "transaction/MyScope/MyPropertyName2": {
+                  "key": "Transaction/MyScope/MyPropertyName2",
+                  "value": {
+                    "metricValue": {
+                      "value": 925.3,
+                      "unit": "Unit"
+                    }
+                  }
+                }
+              }
+            },
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "additionalProperties": {
+                  "$ref": "#/components/schemas/PerpetualProperty"
+                },
+                "description": "The properties with their associated values to update or insert onto the\r\n            transaction."
+              },
+              "example": {
+                "transaction/MyScope/MyPropertyName": {
+                  "key": "Transaction/MyScope/MyPropertyName",
+                  "value": {
+                    "metricValue": {
+                      "value": 12345.5672,
+                      "unit": "Unit"
+                    }
+                  }
+                },
+                "transaction/MyScope/MyPropertyName2": {
+                  "key": "Transaction/MyScope/MyPropertyName2",
+                  "value": {
+                    "metricValue": {
+                      "value": 925.3,
+                      "unit": "Unit"
+                    }
+                  }
+                }
+              }
+            },
+            "text/json": {
+              "schema": {
+                "type": "object",
+                "additionalProperties": {
+                  "$ref": "#/components/schemas/PerpetualProperty"
+                },
+                "description": "The properties with their associated values to update or insert onto the\r\n            transaction."
+              },
+              "example": {
+                "transaction/MyScope/MyPropertyName": {
+                  "key": "Transaction/MyScope/MyPropertyName",
+                  "value": {
+                    "metricValue": {
+                      "value": 12345.5672,
+                      "unit": "Unit"
+                    }
+                  }
+                },
+                "transaction/MyScope/MyPropertyName2": {
+                  "key": "Transaction/MyScope/MyPropertyName2",
+                  "value": {
+                    "metricValue": {
+                      "value": 925.3,
+                      "unit": "Unit"
+                    }
+                  }
+                }
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "type": "object",
+                "additionalProperties": {
+                  "$ref": "#/components/schemas/PerpetualProperty"
+                },
+                "description": "The properties with their associated values to update or insert onto the\r\n            transaction."
+              },
+              "example": {
+                "transaction/MyScope/MyPropertyName": {
+                  "key": "Transaction/MyScope/MyPropertyName",
+                  "value": {
+                    "metricValue": {
+                      "value": 12345.5672,
+                      "unit": "Unit"
+                    }
+                  }
+                },
+                "transaction/MyScope/MyPropertyName2": {
+                  "key": "Transaction/MyScope/MyPropertyName2",
+                  "value": {
+                    "metricValue": {
+                      "value": 925.3,
+                      "unit": "Unit"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "The version of the transaction portfolio that contains the newly updated or inserted transaction property",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/UpsertTransactionPropertiesResponse"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/UpsertTransactionPropertiesResponse"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/UpsertTransactionPropertiesResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "The details of the input related failure",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/LusidValidationProblemDetails"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/LusidValidationProblemDetails"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/LusidValidationProblemDetails"
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "Error response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/LusidProblemDetails"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "oauth2": []
+          }
+        ],
+        "x-fbn-apistatus": "Stable"
+      },
+      "delete": {
+        "tags": [
+          "Transaction Portfolios"
+        ],
+        "summary": "Delete properties from transaction",
+        "description": "Delete one or more property values from a single transaction in a transaction portfolio.",
+        "operationId": "DeletePropertiesFromTransaction",
+        "parameters": [
+          {
+            "name": "scope",
+            "in": "path",
+            "description": "The scope of the transaction portfolio.",
+            "required": true,
+            "schema": {
+              "maxLength": 64,
+              "minLength": 1,
+              "pattern": "^[a-zA-Z0-9\\-_]+$",
+              "type": "string",
+              "description": "The scope of the transaction portfolio.",
+              "nullable": true
+            }
+          },
+          {
+            "name": "code",
+            "in": "path",
+            "description": "The code of the transaction portfolio. Together with the scope this uniquely identifies\r\n            the transaction portfolio.",
+            "required": true,
+            "schema": {
+              "maxLength": 64,
+              "minLength": 1,
+              "pattern": "^[a-zA-Z0-9\\-_]+$",
+              "type": "string",
+              "description": "The code of the transaction portfolio. Together with the scope this uniquely identifies\r\n            the transaction portfolio.",
+              "nullable": true
+            }
+          },
+          {
+            "name": "transactionId",
+            "in": "path",
+            "description": "The unique id of the transaction to delete the property value from.",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "description": "The unique id of the transaction to delete the property value from.",
+              "nullable": true
+            }
+          },
+          {
+            "name": "propertyKeys",
+            "in": "query",
+            "description": "The property keys of the properties to delete from the transaction.\r\n            This must be from the \"Transaction\" domain and will have the format {domain}/{scope}/{code} e.g.\r\n            \"Transaction/strategy/quantsignal\".",
+            "required": true,
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "string",
+                "description": "The key that uniquely identifies the property. It has the format {domain}/{scope}/{code}."
+              },
+              "description": "The property keys of the properties to delete from the transaction.\r\n            This must be from the \"Transaction\" domain and will have the format {domain}/{scope}/{code} e.g.\r\n            \"Transaction/strategy/quantsignal\"."
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The datetime that the property was deleted",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/DeletedEntityResponse"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/DeletedEntityResponse"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/DeletedEntityResponse"
                 }
               }
             }
