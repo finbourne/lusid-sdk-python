@@ -9,7 +9,7 @@
       "url": "https://www.finbourne.com",
       "email": "info@finbourne.com"
     },
-    "version": "0.11.2959",
+    "version": "0.11.2960",
     "x-logo": {
       "url": "https://content.finbourne.com/LUSID-header.png",
       "backgroundColor": "#415464"
@@ -17,7 +17,7 @@
   },
   "servers": [
     {
-      "url": "http://local-unit-test-server.lusid.com:64553"
+      "url": "http://local-unit-test-server.lusid.com:39142"
     }
   ],
   "paths": {
@@ -18144,7 +18144,7 @@
           "Transaction Portfolios"
         ],
         "summary": "Get transactions",
-        "description": "Get transactions from the specified transaction portfolio over a given interval of effective time. \r\n\r\nWhen the specified portfolio is a derived transaction portfolio, the returned set of transactions is the\r\nunion set of all transactions of the parent (and any grandparents etc.) and the specified derived transaction portfolio itself.\n\nThe maximum number of transactions that this method can get per request is 2,000.",
+        "description": "Get transactions from the specified transaction portfolio over a given interval of effective time. \r\n\r\nWhen the specified portfolio is a derived transaction portfolio, the returned set of transactions is the\r\nunion set of all transactions of the parent (and any grandparents etc.) and the specified derived transaction portfolio itself.",
         "operationId": "GetTransactions",
         "parameters": [
           {
