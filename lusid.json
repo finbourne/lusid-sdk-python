@@ -9,7 +9,7 @@
       "url": "https://www.finbourne.com",
       "email": "info@finbourne.com"
     },
-    "version": "0.11.2965",
+    "version": "0.11.2966",
     "x-logo": {
       "url": "https://content.finbourne.com/LUSID-header.png",
       "backgroundColor": "#415464"
@@ -17,7 +17,7 @@
   },
   "servers": [
     {
-      "url": "http://local-unit-test-server.lusid.com:33125"
+      "url": "http://local-unit-test-server.lusid.com:62629"
     }
   ],
   "paths": {
@@ -11536,118 +11536,6 @@
           }
         ],
         "x-fbn-apistatus": "EarlyAccess"
-      },
-      "post": {
-        "tags": [
-          "Search"
-        ],
-        "summary": "[DEPRECATED] Portfolio groups search",
-        "description": "Search across all portfolio groups across all scopes.",
-        "operationId": "PortfolioGroupsSearch",
-        "parameters": [
-          {
-            "name": "filter",
-            "in": "query",
-            "description": "Expression to filter the result set. Read more about filtering results from LUSID here https://support.lusid.com/filtering-results-from-lusid.",
-            "schema": {
-              "type": "string",
-              "description": "Expression to filter the result set. Read more about filtering results from LUSID here https://support.lusid.com/filtering-results-from-lusid.",
-              "nullable": true
-            }
-          }
-        ],
-        "requestBody": {
-          "description": "The search query to use. Read more about search queries in LUSID here https://support.lusid.com/constructing-a-search-request.",
-          "content": {
-            "application/json-patch+json": {
-              "schema": {
-                "type": "object",
-                "additionalProperties": false,
-                "description": "The search query to use. Read more about search queries in LUSID here https://support.lusid.com/constructing-a-search-request."
-              }
-            },
-            "application/json": {
-              "schema": {
-                "type": "object",
-                "additionalProperties": false,
-                "description": "The search query to use. Read more about search queries in LUSID here https://support.lusid.com/constructing-a-search-request."
-              }
-            },
-            "text/json": {
-              "schema": {
-                "type": "object",
-                "additionalProperties": false,
-                "description": "The search query to use. Read more about search queries in LUSID here https://support.lusid.com/constructing-a-search-request."
-              }
-            },
-            "application/*+json": {
-              "schema": {
-                "type": "object",
-                "additionalProperties": false,
-                "description": "The search query to use. Read more about search queries in LUSID here https://support.lusid.com/constructing-a-search-request."
-              }
-            }
-          },
-          "required": true
-        },
-        "responses": {
-          "200": {
-            "description": "The portfolio groups found by the search",
-            "content": {
-              "text/plain": {
-                "schema": {
-                  "$ref": "#/components/schemas/ResourceListOfPortfolioGroup"
-                }
-              },
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ResourceListOfPortfolioGroup"
-                }
-              },
-              "text/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ResourceListOfPortfolioGroup"
-                }
-              }
-            }
-          },
-          "400": {
-            "description": "The details of the input related failure",
-            "content": {
-              "text/plain": {
-                "schema": {
-                  "$ref": "#/components/schemas/LusidValidationProblemDetails"
-                }
-              },
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/LusidValidationProblemDetails"
-                }
-              },
-              "text/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/LusidValidationProblemDetails"
-                }
-              }
-            }
-          },
-          "default": {
-            "description": "Error response",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/LusidProblemDetails"
-                }
-              }
-            }
-          }
-        },
-        "security": [
-          {
-            "oauth2": []
-          }
-        ],
-        "x-fbn-apistatus": "Deprecated"
       }
     },
     "/api/search/portfolios": {
@@ -11865,118 +11753,6 @@
           }
         ],
         "x-fbn-apistatus": "EarlyAccess"
-      },
-      "post": {
-        "tags": [
-          "Search"
-        ],
-        "summary": "[DEPRECATED] Portfolios search",
-        "description": "Search across all portfolios across all scopes.",
-        "operationId": "PortfoliosSearch",
-        "parameters": [
-          {
-            "name": "filter",
-            "in": "query",
-            "description": "Expression to filter the result set. Read more about filtering results from LUSID here https://support.lusid.com/filtering-results-from-lusid.",
-            "schema": {
-              "type": "string",
-              "description": "Expression to filter the result set. Read more about filtering results from LUSID here https://support.lusid.com/filtering-results-from-lusid.",
-              "nullable": true
-            }
-          }
-        ],
-        "requestBody": {
-          "description": "The search query to use. Read more about search queries in LUSID here https://support.lusid.com/constructing-a-search-request.",
-          "content": {
-            "application/json-patch+json": {
-              "schema": {
-                "type": "object",
-                "additionalProperties": false,
-                "description": "The search query to use. Read more about search queries in LUSID here https://support.lusid.com/constructing-a-search-request."
-              }
-            },
-            "application/json": {
-              "schema": {
-                "type": "object",
-                "additionalProperties": false,
-                "description": "The search query to use. Read more about search queries in LUSID here https://support.lusid.com/constructing-a-search-request."
-              }
-            },
-            "text/json": {
-              "schema": {
-                "type": "object",
-                "additionalProperties": false,
-                "description": "The search query to use. Read more about search queries in LUSID here https://support.lusid.com/constructing-a-search-request."
-              }
-            },
-            "application/*+json": {
-              "schema": {
-                "type": "object",
-                "additionalProperties": false,
-                "description": "The search query to use. Read more about search queries in LUSID here https://support.lusid.com/constructing-a-search-request."
-              }
-            }
-          },
-          "required": true
-        },
-        "responses": {
-          "200": {
-            "description": "The portfolios found by the search",
-            "content": {
-              "text/plain": {
-                "schema": {
-                  "$ref": "#/components/schemas/ResourceListOfPortfolioSearchResult"
-                }
-              },
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ResourceListOfPortfolioSearchResult"
-                }
-              },
-              "text/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ResourceListOfPortfolioSearchResult"
-                }
-              }
-            }
-          },
-          "400": {
-            "description": "The details of the input related failure",
-            "content": {
-              "text/plain": {
-                "schema": {
-                  "$ref": "#/components/schemas/LusidValidationProblemDetails"
-                }
-              },
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/LusidValidationProblemDetails"
-                }
-              },
-              "text/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/LusidValidationProblemDetails"
-                }
-              }
-            }
-          },
-          "default": {
-            "description": "Error response",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/LusidProblemDetails"
-                }
-              }
-            }
-          }
-        },
-        "security": [
-          {
-            "oauth2": []
-          }
-        ],
-        "x-fbn-apistatus": "Deprecated"
       }
     },
     "/api/search/propertydefinitions": {
@@ -12176,118 +11952,6 @@
           }
         ],
         "x-fbn-apistatus": "EarlyAccess"
-      },
-      "post": {
-        "tags": [
-          "Search"
-        ],
-        "summary": "[DEPRECATED] Search property definitions",
-        "description": "Search across all user defined property definitions across all scopes.",
-        "operationId": "PropertiesSearch",
-        "parameters": [
-          {
-            "name": "filter",
-            "in": "query",
-            "description": "Expression to filter the result set. Read more about filtering results from LUSID here https://support.lusid.com/filtering-results-from-lusid.",
-            "schema": {
-              "type": "string",
-              "description": "Expression to filter the result set. Read more about filtering results from LUSID here https://support.lusid.com/filtering-results-from-lusid.",
-              "nullable": true
-            }
-          }
-        ],
-        "requestBody": {
-          "description": "The search query to use. Read more about search queries in LUSID here https://support.lusid.com/constructing-a-search-request.",
-          "content": {
-            "application/json-patch+json": {
-              "schema": {
-                "type": "object",
-                "additionalProperties": false,
-                "description": "The search query to use. Read more about search queries in LUSID here https://support.lusid.com/constructing-a-search-request."
-              }
-            },
-            "application/json": {
-              "schema": {
-                "type": "object",
-                "additionalProperties": false,
-                "description": "The search query to use. Read more about search queries in LUSID here https://support.lusid.com/constructing-a-search-request."
-              }
-            },
-            "text/json": {
-              "schema": {
-                "type": "object",
-                "additionalProperties": false,
-                "description": "The search query to use. Read more about search queries in LUSID here https://support.lusid.com/constructing-a-search-request."
-              }
-            },
-            "application/*+json": {
-              "schema": {
-                "type": "object",
-                "additionalProperties": false,
-                "description": "The search query to use. Read more about search queries in LUSID here https://support.lusid.com/constructing-a-search-request."
-              }
-            }
-          },
-          "required": true
-        },
-        "responses": {
-          "200": {
-            "description": "The property definitions found by the search",
-            "content": {
-              "text/plain": {
-                "schema": {
-                  "$ref": "#/components/schemas/ResourceListOfPropertyDefinition"
-                }
-              },
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ResourceListOfPropertyDefinition"
-                }
-              },
-              "text/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ResourceListOfPropertyDefinition"
-                }
-              }
-            }
-          },
-          "400": {
-            "description": "The details of the input related failure",
-            "content": {
-              "text/plain": {
-                "schema": {
-                  "$ref": "#/components/schemas/LusidValidationProblemDetails"
-                }
-              },
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/LusidValidationProblemDetails"
-                }
-              },
-              "text/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/LusidValidationProblemDetails"
-                }
-              }
-            }
-          },
-          "default": {
-            "description": "Error response",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/LusidProblemDetails"
-                }
-              }
-            }
-          }
-        },
-        "security": [
-          {
-            "oauth2": []
-          }
-        ],
-        "x-fbn-apistatus": "Deprecated"
       }
     },
     "/api/systemconfiguration/cutlabels": {
@@ -23974,41 +23638,6 @@
             "items": {
               "$ref": "#/components/schemas/Link"
             },
-            "nullable": true
-          }
-        },
-        "additionalProperties": false
-      },
-      "ResourceListOfPortfolioSearchResult": {
-        "required": [
-          "values"
-        ],
-        "type": "object",
-        "properties": {
-          "values": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/PortfolioSearchResult"
-            }
-          },
-          "href": {
-            "type": "string",
-            "format": "uri",
-            "nullable": true
-          },
-          "links": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/Link"
-            },
-            "nullable": true
-          },
-          "nextPage": {
-            "type": "string",
-            "nullable": true
-          },
-          "previousPage": {
-            "type": "string",
             "nullable": true
           }
         },
