@@ -9,7 +9,7 @@
       "url": "https://www.finbourne.com",
       "email": "info@finbourne.com"
     },
-    "version": "0.11.2970",
+    "version": "0.11.2971",
     "x-logo": {
       "url": "https://content.finbourne.com/LUSID-header.png",
       "backgroundColor": "#415464"
@@ -17,7 +17,7 @@
   },
   "servers": [
     {
-      "url": "http://local-unit-test-server.lusid.com:45592"
+      "url": "http://local-unit-test-server.lusid.com:50626"
     }
   ],
   "paths": {
@@ -4987,6 +4987,23 @@
                   "values": [
                     {
                       "instrumentUid": "LUID_XH4GNUEX",
+                      "subHoldingKeys": {
+                        "transaction/Algo/Name": {
+                          "key": "Transaction/Algo/Name",
+                          "value": {
+                            "labelValue": "Algo1"
+                          }
+                        }
+                      },
+                      "properties": {
+                        "instrument/default/Name": {
+                          "key": "Instrument/default/Name",
+                          "value": {
+                            "labelValue": "Example Instrument 1"
+                          },
+                          "effectiveFrom": "2010-01-01T00:00:00.0000000+00:00"
+                        }
+                      },
                       "holdingType": "P",
                       "units": 10,
                       "settledUnits": 10,
@@ -5016,6 +5033,23 @@
                   "values": [
                     {
                       "instrumentUid": "LUID_XH4GNUEX",
+                      "subHoldingKeys": {
+                        "transaction/Algo/Name": {
+                          "key": "Transaction/Algo/Name",
+                          "value": {
+                            "labelValue": "Algo1"
+                          }
+                        }
+                      },
+                      "properties": {
+                        "instrument/default/Name": {
+                          "key": "Instrument/default/Name",
+                          "value": {
+                            "labelValue": "Example Instrument 1"
+                          },
+                          "effectiveFrom": "2010-01-01T00:00:00.0000000+00:00"
+                        }
+                      },
                       "holdingType": "P",
                       "units": 10,
                       "settledUnits": 10,
@@ -5045,6 +5079,23 @@
                   "values": [
                     {
                       "instrumentUid": "LUID_XH4GNUEX",
+                      "subHoldingKeys": {
+                        "transaction/Algo/Name": {
+                          "key": "Transaction/Algo/Name",
+                          "value": {
+                            "labelValue": "Algo1"
+                          }
+                        }
+                      },
+                      "properties": {
+                        "instrument/default/Name": {
+                          "key": "Instrument/default/Name",
+                          "value": {
+                            "labelValue": "Example Instrument 1"
+                          },
+                          "effectiveFrom": "2010-01-01T00:00:00.0000000+00:00"
+                        }
+                      },
                       "holdingType": "P",
                       "units": 10,
                       "settledUnits": 10,
@@ -17288,6 +17339,23 @@
                   "values": [
                     {
                       "instrumentUid": "LUID_XH4GNUEX",
+                      "subHoldingKeys": {
+                        "transaction/Algo/Name": {
+                          "key": "Transaction/Algo/Name",
+                          "value": {
+                            "labelValue": "Algo1"
+                          }
+                        }
+                      },
+                      "properties": {
+                        "instrument/default/Name": {
+                          "key": "Instrument/default/Name",
+                          "value": {
+                            "labelValue": "Example Instrument 1"
+                          },
+                          "effectiveFrom": "2010-01-01T00:00:00.0000000+00:00"
+                        }
+                      },
                       "holdingType": "P",
                       "units": 10,
                       "settledUnits": 10,
@@ -17317,6 +17385,23 @@
                   "values": [
                     {
                       "instrumentUid": "LUID_XH4GNUEX",
+                      "subHoldingKeys": {
+                        "transaction/Algo/Name": {
+                          "key": "Transaction/Algo/Name",
+                          "value": {
+                            "labelValue": "Algo1"
+                          }
+                        }
+                      },
+                      "properties": {
+                        "instrument/default/Name": {
+                          "key": "Instrument/default/Name",
+                          "value": {
+                            "labelValue": "Example Instrument 1"
+                          },
+                          "effectiveFrom": "2010-01-01T00:00:00.0000000+00:00"
+                        }
+                      },
                       "holdingType": "P",
                       "units": 10,
                       "settledUnits": 10,
@@ -17346,6 +17431,23 @@
                   "values": [
                     {
                       "instrumentUid": "LUID_XH4GNUEX",
+                      "subHoldingKeys": {
+                        "transaction/Algo/Name": {
+                          "key": "Transaction/Algo/Name",
+                          "value": {
+                            "labelValue": "Algo1"
+                          }
+                        }
+                      },
+                      "properties": {
+                        "instrument/default/Name": {
+                          "key": "Instrument/default/Name",
+                          "value": {
+                            "labelValue": "Example Instrument 1"
+                          },
+                          "effectiveFrom": "2010-01-01T00:00:00.0000000+00:00"
+                        }
+                      },
                       "holdingType": "P",
                       "units": 10,
                       "settledUnits": 10,
