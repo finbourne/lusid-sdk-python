@@ -1,6 +1,6 @@
 # lusid.LoginApi
 
-All URIs are relative to *http://local-unit-test-server.lusid.com:60714*
+All URIs are relative to *http://local-unit-test-server.lusid.com:46443*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
@@ -27,8 +27,8 @@ configuration = lusid.Configuration()
 # Configure OAuth2 access token for authorization: oauth2
 configuration.access_token = 'YOUR_ACCESS_TOKEN'
 
-# Defining host is optional and default to http://local-unit-test-server.lusid.com:60714
-configuration.host = "http://local-unit-test-server.lusid.com:60714"
+# Defining host is optional and default to http://local-unit-test-server.lusid.com:46443
+configuration.host = "http://local-unit-test-server.lusid.com:46443"
 # Create an instance of the API class
 api_instance = lusid.LoginApi(lusid.ApiClient(configuration))
 domain = 'domain_example' # str | The domain that the user will be logging in to
