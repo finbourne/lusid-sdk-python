@@ -1,6 +1,6 @@
 # lusid.PortfoliosApi
 
-All URIs are relative to *http://local-unit-test-server.lusid.com:53156*
+All URIs are relative to *http://local-unit-test-server.lusid.com:54952*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
@@ -35,8 +35,8 @@ configuration = lusid.Configuration()
 # Configure OAuth2 access token for authorization: oauth2
 configuration.access_token = 'YOUR_ACCESS_TOKEN'
 
-# Defining host is optional and default to http://local-unit-test-server.lusid.com:53156
-configuration.host = "http://local-unit-test-server.lusid.com:53156"
+# Defining host is optional and default to http://local-unit-test-server.lusid.com:54952
+configuration.host = "http://local-unit-test-server.lusid.com:54952"
 # Create an instance of the API class
 api_instance = lusid.PortfoliosApi(lusid.ApiClient(configuration))
 scope = 'scope_example' # str | The scope of the portfolio.
@@ -99,8 +99,8 @@ configuration = lusid.Configuration()
 # Configure OAuth2 access token for authorization: oauth2
 configuration.access_token = 'YOUR_ACCESS_TOKEN'
 
-# Defining host is optional and default to http://local-unit-test-server.lusid.com:53156
-configuration.host = "http://local-unit-test-server.lusid.com:53156"
+# Defining host is optional and default to http://local-unit-test-server.lusid.com:54952
+configuration.host = "http://local-unit-test-server.lusid.com:54952"
 # Create an instance of the API class
 api_instance = lusid.PortfoliosApi(lusid.ApiClient(configuration))
 scope = 'scope_example' # str | The scope of the portfolio to delete properties from.
@@ -167,8 +167,8 @@ configuration = lusid.Configuration()
 # Configure OAuth2 access token for authorization: oauth2
 configuration.access_token = 'YOUR_ACCESS_TOKEN'
 
-# Defining host is optional and default to http://local-unit-test-server.lusid.com:53156
-configuration.host = "http://local-unit-test-server.lusid.com:53156"
+# Defining host is optional and default to http://local-unit-test-server.lusid.com:54952
+configuration.host = "http://local-unit-test-server.lusid.com:54952"
 # Create an instance of the API class
 api_instance = lusid.PortfoliosApi(lusid.ApiClient(configuration))
 scope = 'scope_example' # str | The scope of the portfolio to retrieve the definition for.
@@ -237,8 +237,8 @@ configuration = lusid.Configuration()
 # Configure OAuth2 access token for authorization: oauth2
 configuration.access_token = 'YOUR_ACCESS_TOKEN'
 
-# Defining host is optional and default to http://local-unit-test-server.lusid.com:53156
-configuration.host = "http://local-unit-test-server.lusid.com:53156"
+# Defining host is optional and default to http://local-unit-test-server.lusid.com:54952
+configuration.host = "http://local-unit-test-server.lusid.com:54952"
 # Create an instance of the API class
 api_instance = lusid.PortfoliosApi(lusid.ApiClient(configuration))
 scope = 'scope_example' # str | The scope of the portfolio to retrieve the commands for.
@@ -311,8 +311,8 @@ configuration = lusid.Configuration()
 # Configure OAuth2 access token for authorization: oauth2
 configuration.access_token = 'YOUR_ACCESS_TOKEN'
 
-# Defining host is optional and default to http://local-unit-test-server.lusid.com:53156
-configuration.host = "http://local-unit-test-server.lusid.com:53156"
+# Defining host is optional and default to http://local-unit-test-server.lusid.com:54952
+configuration.host = "http://local-unit-test-server.lusid.com:54952"
 # Create an instance of the API class
 api_instance = lusid.PortfoliosApi(lusid.ApiClient(configuration))
 scope = 'scope_example' # str | The scope of the portfolio to list the properties for.
@@ -379,8 +379,8 @@ configuration = lusid.Configuration()
 # Configure OAuth2 access token for authorization: oauth2
 configuration.access_token = 'YOUR_ACCESS_TOKEN'
 
-# Defining host is optional and default to http://local-unit-test-server.lusid.com:53156
-configuration.host = "http://local-unit-test-server.lusid.com:53156"
+# Defining host is optional and default to http://local-unit-test-server.lusid.com:54952
+configuration.host = "http://local-unit-test-server.lusid.com:54952"
 # Create an instance of the API class
 api_instance = lusid.PortfoliosApi(lusid.ApiClient(configuration))
 effective_at = 'effective_at_example' # str | The effective datetime or cut label at which to list the portfolios. Defaults to the current LUSID              system datetime if not specified. (optional)
@@ -455,8 +455,8 @@ configuration = lusid.Configuration()
 # Configure OAuth2 access token for authorization: oauth2
 configuration.access_token = 'YOUR_ACCESS_TOKEN'
 
-# Defining host is optional and default to http://local-unit-test-server.lusid.com:53156
-configuration.host = "http://local-unit-test-server.lusid.com:53156"
+# Defining host is optional and default to http://local-unit-test-server.lusid.com:54952
+configuration.host = "http://local-unit-test-server.lusid.com:54952"
 # Create an instance of the API class
 api_instance = lusid.PortfoliosApi(lusid.ApiClient(configuration))
 scope = 'scope_example' # str | The scope of the portfolios.
@@ -531,8 +531,8 @@ configuration = lusid.Configuration()
 # Configure OAuth2 access token for authorization: oauth2
 configuration.access_token = 'YOUR_ACCESS_TOKEN'
 
-# Defining host is optional and default to http://local-unit-test-server.lusid.com:53156
-configuration.host = "http://local-unit-test-server.lusid.com:53156"
+# Defining host is optional and default to http://local-unit-test-server.lusid.com:54952
+configuration.host = "http://local-unit-test-server.lusid.com:54952"
 # Create an instance of the API class
 api_instance = lusid.PortfoliosApi(lusid.ApiClient(configuration))
 scope = 'scope_example' # str | The scope of the portfolio to update the definition for.
@@ -599,8 +599,8 @@ configuration = lusid.Configuration()
 # Configure OAuth2 access token for authorization: oauth2
 configuration.access_token = 'YOUR_ACCESS_TOKEN'
 
-# Defining host is optional and default to http://local-unit-test-server.lusid.com:53156
-configuration.host = "http://local-unit-test-server.lusid.com:53156"
+# Defining host is optional and default to http://local-unit-test-server.lusid.com:54952
+configuration.host = "http://local-unit-test-server.lusid.com:54952"
 # Create an instance of the API class
 api_instance = lusid.PortfoliosApi(lusid.ApiClient(configuration))
 scope = 'scope_example' # str | The scope of the portfolio to update or insert the properties onto.
