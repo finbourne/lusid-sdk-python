@@ -9,7 +9,7 @@
       "url": "https://www.finbourne.com",
       "email": "info@finbourne.com"
     },
-    "version": "0.11.3002",
+    "version": "0.11.3005",
     "x-logo": {
       "url": "https://content.finbourne.com/LUSID-header.png",
       "backgroundColor": "#415464"
@@ -17,7 +17,7 @@
   },
   "servers": [
     {
-      "url": "https://fbn-prd.lusid.com/api"
+      "url": "http://local-unit-test-server.lusid.com:47936"
     }
   ],
   "paths": {
@@ -8434,6 +8434,30 @@
               "description": "Expression to filter the result set.\r\n            For example, to filter on the User ID, use \"userId.id eq 'string'\"\r\n            Read more about filtering results from LUSID here https://support.lusid.com/filtering-results-from-lusid.",
               "nullable": true
             }
+          },
+          {
+            "name": "page",
+            "in": "query",
+            "description": "The pagination token to use to continue listing commands from a previous call to GetPortfolioCommands.",
+            "schema": {
+              "type": "string",
+              "description": "The pagination token to use to continue listing commands from a previous call to GetPortfolioCommands.",
+              "nullable": true
+            }
+          },
+          {
+            "name": "limit",
+            "in": "query",
+            "description": "When paginating, limit the number of returned results to this many. Defaults to 500 if not specified.",
+            "schema": {
+              "maximum": 5000,
+              "minimum": 1,
+              "type": "integer",
+              "description": "When paginating, limit the number of returned results to this many. Defaults to 500 if not specified.",
+              "format": "int32",
+              "nullable": true
+            },
+            "x-nullable": true
           }
         ],
         "responses": {
@@ -25200,7 +25224,7 @@
         "description": "OAuth2 Implicit Grant",
         "flows": {
           "implicit": {
-            "authorizationUrl": "https://lusid.okta.com/oauth2/default/v1/authorize",
+            "authorizationUrl": "https://dummyurl.lusid.com/",
             "scopes": {}
           }
         }
