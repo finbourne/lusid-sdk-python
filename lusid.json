@@ -9,7 +9,7 @@
       "url": "https://www.finbourne.com",
       "email": "info@finbourne.com"
     },
-    "version": "0.11.3019",
+    "version": "0.11.3020",
     "x-logo": {
       "url": "https://content.finbourne.com/LUSID-header.png",
       "backgroundColor": "#415464"
@@ -17,7 +17,7 @@
   },
   "servers": [
     {
-      "url": "http://local-unit-test-server.lusid.com:41975"
+      "url": "http://local-unit-test-server.lusid.com:46029"
     }
   ],
   "paths": {
@@ -431,27 +431,27 @@
         "tags": [
           "Derived Transaction Portfolios"
         ],
-        "summary": "[EARLY ACCESS] Create derived transaction portfolio",
-        "description": "Creates a transaction portfolio that derives from an existing transaction portfolio. In a derived portfolio, parts of the portfolio can either be specific to this portfolio, or can be inherited from a \"parent\". Different parts of the portfolio (e.g. transactions or properties) are combined in different ways. The portfolio details are either overridden in entirety, or not at all. The same is true for properties. Transactions on a derived portfolio are merged with its parent portfolio's transactions. If the parent portfolio is itself a derived portfolio, transactions from that parent are also merged (and that parent's portfolio's, if it is also a derived portfolio, and so on).",
+        "summary": "[EARLY ACCESS] Create derived portfolio",
+        "description": "Create a derived transaction portfolio from a parent transaction portfolio (which may itself be derived).",
         "operationId": "CreateDerivedPortfolio",
         "parameters": [
           {
             "name": "scope",
             "in": "path",
-            "description": "The scope into which to create the new derived portfolio",
+            "description": "The scope in which to create the derived transaction portfolio.",
             "required": true,
             "schema": {
               "maxLength": 64,
               "minLength": 1,
               "pattern": "^[a-zA-Z0-9\\-_]+$",
               "type": "string",
-              "description": "The scope into which to create the new derived portfolio",
+              "description": "The scope in which to create the derived transaction portfolio.",
               "nullable": true
             }
           }
         ],
         "requestBody": {
-          "description": "The root object of the new derived portfolio, containing a populated reference portfolio id and reference scope",
+          "description": "The definition of the derived transaction portfolio.",
           "content": {
             "application/json-patch+json": {
               "schema": {
@@ -616,48 +616,48 @@
         "tags": [
           "Derived Transaction Portfolios"
         ],
-        "summary": "[EARLY ACCESS] Delete portfolio details",
-        "description": "Deletes the portfolio details for the specified derived transaction portfolio",
+        "summary": "[EARLY ACCESS] Delete derived portfolio details",
+        "description": "Delete all the portfolio details for a derived transaction portfolio.",
         "operationId": "DeleteDerivedPortfolioDetails",
         "parameters": [
           {
             "name": "scope",
             "in": "path",
-            "description": "The scope of the portfolio",
+            "description": "The scope of the derived transaction portfolio.",
             "required": true,
             "schema": {
               "maxLength": 64,
               "minLength": 1,
               "pattern": "^[a-zA-Z0-9\\-_]+$",
               "type": "string",
-              "description": "The scope of the portfolio",
+              "description": "The scope of the derived transaction portfolio.",
               "nullable": true
             }
           },
           {
             "name": "code",
             "in": "path",
-            "description": "The code of the portfolio",
+            "description": "The code of the derived transaction portfolio. Together with the scope this uniquely identifies\r\n            the derived transaction portfolio.",
             "required": true,
             "schema": {
               "maxLength": 64,
               "minLength": 1,
               "pattern": "^[a-zA-Z0-9\\-_]+$",
               "type": "string",
-              "description": "The code of the portfolio",
+              "description": "The code of the derived transaction portfolio. Together with the scope this uniquely identifies\r\n            the derived transaction portfolio.",
               "nullable": true
             }
           },
           {
             "name": "effectiveAt",
             "in": "query",
-            "description": "The effective date of the change",
+            "description": "The effective date of the change.",
             "schema": {
               "maxLength": 256,
               "minLength": 0,
               "pattern": "^[a-zA-Z0-9\\-_\\+:\\.]+$",
               "type": "string",
-              "description": "The effective date of the change",
+              "description": "The effective date of the change.",
               "format": "dateorcutlabel",
               "nullable": true
             }
@@ -7430,7 +7430,7 @@
           "Portfolios"
         ],
         "summary": "List portfolios",
-        "description": "List all the portfolios matching the specified criteria.",
+        "description": "List all the portfolios matching particular criteria.",
         "operationId": "ListPortfolios",
         "parameters": [
           {
@@ -7447,10 +7447,10 @@
           {
             "name": "asAt",
             "in": "query",
-            "description": "The asAt datetime at which to list the portfolios. Defaults to return the latest version\r\n            of each portfolio if not specified.",
+            "description": "The as-at datetime at which to list the portfolios. Defaults to return the latest version\r\n            of each portfolio if not specified.",
             "schema": {
               "type": "string",
-              "description": "The asAt datetime at which to list the portfolios. Defaults to return the latest version\r\n            of each portfolio if not specified.",
+              "description": "The as-at datetime at which to list the portfolios. Defaults to return the latest version\r\n            of each portfolio if not specified.",
               "format": "date-time",
               "nullable": true
             },
@@ -7505,24 +7505,24 @@
           {
             "name": "query",
             "in": "query",
-            "description": "Expression specifying the criteria that the returned portfolios must meet e.g. to see which\r\n            portfolios have holdings in the instruments with a Lusid Instrument Id (LUID) of 'LUID_PPA8HI6M' or a Figi of 'BBG000BLNNH6'\r\n            you would specify \"instrument.identifiers in (('LusidInstrumentId', 'LUID_PPA8HI6M'), ('Figi', 'BBG000BLNNH6'))\".",
+            "description": "Expression specifying the criteria that the returned portfolios must meet. For example, to see which\r\n            portfolios have holdings in the instruments with a Lusid Instrument Id (LUID) of 'LUID_PPA8HI6M' or a Figi of 'BBG000BLNNH6'\r\n            you would specify \"instrument.identifiers in (('LusidInstrumentId', 'LUID_PPA8HI6M'), ('Figi', 'BBG000BLNNH6'))\".",
             "schema": {
               "type": "string",
-              "description": "Expression specifying the criteria that the returned portfolios must meet e.g. to see which\r\n            portfolios have holdings in the instruments with a Lusid Instrument Id (LUID) of 'LUID_PPA8HI6M' or a Figi of 'BBG000BLNNH6'\r\n            you would specify \"instrument.identifiers in (('LusidInstrumentId', 'LUID_PPA8HI6M'), ('Figi', 'BBG000BLNNH6'))\".",
+              "description": "Expression specifying the criteria that the returned portfolios must meet. For example, to see which\r\n            portfolios have holdings in the instruments with a Lusid Instrument Id (LUID) of 'LUID_PPA8HI6M' or a Figi of 'BBG000BLNNH6'\r\n            you would specify \"instrument.identifiers in (('LusidInstrumentId', 'LUID_PPA8HI6M'), ('Figi', 'BBG000BLNNH6'))\".",
               "nullable": true
             }
           },
           {
             "name": "propertyKeys",
             "in": "query",
-            "description": "A list of property keys from the \"Portfolio\" domain to decorate onto each portfolio.\r\n            These take the format {domain}/{scope}/{code} e.g. \"Portfolio/Manager/Id\".",
+            "description": "A list of property keys from the 'Portfolio' domain to decorate onto each portfolio.\r\n            These must take the format {domain}/{scope}/{code}, for example 'Portfolio/Manager/Id'.",
             "schema": {
               "type": "array",
               "items": {
                 "type": "string",
                 "description": "The key that uniquely identifies the property. It has the format {domain}/{scope}/{code}."
               },
-              "description": "A list of property keys from the \"Portfolio\" domain to decorate onto each portfolio.\r\n            These take the format {domain}/{scope}/{code} e.g. \"Portfolio/Manager/Id\".",
+              "description": "A list of property keys from the 'Portfolio' domain to decorate onto each portfolio.\r\n            These must take the format {domain}/{scope}/{code}, for example 'Portfolio/Manager/Id'.",
               "nullable": true
             },
             "x-nullable": true
@@ -7821,7 +7821,7 @@
           "Portfolios"
         ],
         "summary": "List portfolios for scope",
-        "description": "List all the portfolios in a single scope.",
+        "description": "List all the portfolios in a scope.",
         "operationId": "ListPortfoliosForScope",
         "parameters": [
           {
@@ -7852,10 +7852,10 @@
           {
             "name": "asAt",
             "in": "query",
-            "description": "The asAt datetime at which to list the portfolios. Defaults to return the latest version\r\n            of each portfolio if not specified.",
+            "description": "The as-at datetime at which to list the portfolios. Defaults to return the latest version\r\n            of each portfolio if not specified.",
             "schema": {
               "type": "string",
-              "description": "The asAt datetime at which to list the portfolios. Defaults to return the latest version\r\n            of each portfolio if not specified.",
+              "description": "The as-at datetime at which to list the portfolios. Defaults to return the latest version\r\n            of each portfolio if not specified.",
               "format": "date-time",
               "nullable": true
             },
@@ -7900,24 +7900,24 @@
           {
             "name": "filter",
             "in": "query",
-            "description": "Expression to filter the result set.\r\n            For example, to filter on the Type, use \"type eq 'Transaction'\"\r\n            Read more about filtering results from LUSID here https://support.lusid.com/filtering-results-from-lusid.",
+            "description": "Expression to filter the result set.\r\n            For example, to return only transactions with a transaction type of 'Buy', specify \"type eq 'Buy'\".\r\n            For more information about filtering LUSID results, see https://support.lusid.com/knowledgebase/article/KA-01914.",
             "schema": {
               "type": "string",
-              "description": "Expression to filter the result set.\r\n            For example, to filter on the Type, use \"type eq 'Transaction'\"\r\n            Read more about filtering results from LUSID here https://support.lusid.com/filtering-results-from-lusid.",
+              "description": "Expression to filter the result set.\r\n            For example, to return only transactions with a transaction type of 'Buy', specify \"type eq 'Buy'\".\r\n            For more information about filtering LUSID results, see https://support.lusid.com/knowledgebase/article/KA-01914.",
               "nullable": true
             }
           },
           {
             "name": "propertyKeys",
             "in": "query",
-            "description": "A list of property keys from the \"Portfolio\" domain to decorate onto each portfolio.\r\n            These take the format {domain}/{scope}/{code} e.g. \"Portfolio/Manager/Id\".",
+            "description": "A list of property keys from the 'Portfolio' domain to decorate onto each portfolio.\r\n            These must take the format {domain}/{scope}/{code}, for example 'Portfolio/Manager/Id'.",
             "schema": {
               "type": "array",
               "items": {
                 "type": "string",
                 "description": "The key that uniquely identifies the property. It has the format {domain}/{scope}/{code}."
               },
-              "description": "A list of property keys from the \"Portfolio\" domain to decorate onto each portfolio.\r\n            These take the format {domain}/{scope}/{code} e.g. \"Portfolio/Manager/Id\".",
+              "description": "A list of property keys from the 'Portfolio' domain to decorate onto each portfolio.\r\n            These must take the format {domain}/{scope}/{code}, for example 'Portfolio/Manager/Id'.",
               "nullable": true
             },
             "x-nullable": true
@@ -7989,34 +7989,34 @@
           "Portfolios"
         ],
         "summary": "Get portfolio",
-        "description": "Retrieve the definition of a single portfolio.",
+        "description": "Retrieve the definition of a portfolio.",
         "operationId": "GetPortfolio",
         "parameters": [
           {
             "name": "scope",
             "in": "path",
-            "description": "The scope of the portfolio to retrieve the definition for.",
+            "description": "The scope of the portfolio.",
             "required": true,
             "schema": {
               "maxLength": 64,
               "minLength": 1,
               "pattern": "^[a-zA-Z0-9\\-_]+$",
               "type": "string",
-              "description": "The scope of the portfolio to retrieve the definition for.",
+              "description": "The scope of the portfolio.",
               "nullable": true
             }
           },
           {
             "name": "code",
             "in": "path",
-            "description": "The code of the portfolio to retrieve the definition for. Together with the scope this\r\n            uniquely identifies the portfolio.",
+            "description": "The code of the portfolio. Together with the scope this uniquely identifies the portfolio.",
             "required": true,
             "schema": {
               "maxLength": 64,
               "minLength": 1,
               "pattern": "^[a-zA-Z0-9\\-_]+$",
               "type": "string",
-              "description": "The code of the portfolio to retrieve the definition for. Together with the scope this\r\n            uniquely identifies the portfolio.",
+              "description": "The code of the portfolio. Together with the scope this uniquely identifies the portfolio.",
               "nullable": true
             }
           },
@@ -8046,14 +8046,14 @@
           {
             "name": "propertyKeys",
             "in": "query",
-            "description": "A list of property keys from the \"Portfolio\" domain to decorate onto the portfolio.\r\n            These take the format {domain}/{scope}/{code} e.g. \"Portfolio/Manager/Id\".",
+            "description": "A list of property keys from the 'Portfolio' domain to decorate onto the portfolio.\r\n            These must take the format {domain}/{scope}/{code}, for example 'Portfolio/Manager/Id'.",
             "schema": {
               "type": "array",
               "items": {
                 "type": "string",
                 "description": "The key that uniquely identifies the property. It has the format {domain}/{scope}/{code}."
               },
-              "description": "A list of property keys from the \"Portfolio\" domain to decorate onto the portfolio.\r\n            These take the format {domain}/{scope}/{code} e.g. \"Portfolio/Manager/Id\".",
+              "description": "A list of property keys from the 'Portfolio' domain to decorate onto the portfolio.\r\n            These must take the format {domain}/{scope}/{code}, for example 'Portfolio/Manager/Id'.",
               "nullable": true
             },
             "x-nullable": true
@@ -8123,7 +8123,7 @@
           "Portfolios"
         ],
         "summary": "Delete portfolio",
-        "description": "Delete a single portfolio. The deletion of the portfolio will be valid from the portfolio's creation datetime. This means that the portfolio will no longer exist at any effective datetime from the asAt datetime of deletion.",
+        "description": "Delete a portfolio.\r\n            \r\nThe deletion will take effect from the portfolio's creation datetime. This means that the portfolio will no longer exist at any effective datetime, from the as-at datetime of deletion.",
         "operationId": "DeletePortfolio",
         "parameters": [
           {
@@ -8143,14 +8143,14 @@
           {
             "name": "code",
             "in": "path",
-            "description": "The code of the portfolio.",
+            "description": "The code of the portfolio. Together with the scope this uniquely identifies the portfolio.",
             "required": true,
             "schema": {
               "maxLength": 64,
               "minLength": 1,
               "pattern": "^[a-zA-Z0-9\\-_]+$",
               "type": "string",
-              "description": "The code of the portfolio.",
+              "description": "The code of the portfolio. Together with the scope this uniquely identifies the portfolio.",
               "nullable": true
             }
           }
@@ -8219,44 +8219,44 @@
           "Portfolios"
         ],
         "summary": "Update portfolio",
-        "description": "Update the definition of a single portfolio. Not all elements within a portfolio definition are\r\nmodifiable due to the potential implications for data already stored against the portfolio.",
+        "description": "Update the definition of a portfolio.\r\n            \r\nNote that not all elements of a portfolio definition are\r\nmodifiable due to the potential implications for data already stored against the portfolio.",
         "operationId": "UpdatePortfolio",
         "parameters": [
           {
             "name": "scope",
             "in": "path",
-            "description": "The scope of the portfolio to update the definition for.",
+            "description": "The scope of the portfolio.",
             "required": true,
             "schema": {
               "maxLength": 64,
               "minLength": 1,
               "pattern": "^[a-zA-Z0-9\\-_]+$",
               "type": "string",
-              "description": "The scope of the portfolio to update the definition for.",
+              "description": "The scope of the portfolio.",
               "nullable": true
             }
           },
           {
             "name": "code",
             "in": "path",
-            "description": "The code of the portfolio to update the definition for. Together with the scope this uniquely\r\n            identifies the portfolio.",
+            "description": "The code of the portfolio. Together with the scope this uniquely identifies the portfolio.",
             "required": true,
             "schema": {
               "maxLength": 64,
               "minLength": 1,
               "pattern": "^[a-zA-Z0-9\\-_]+$",
               "type": "string",
-              "description": "The code of the portfolio to update the definition for. Together with the scope this uniquely\r\n            identifies the portfolio.",
+              "description": "The code of the portfolio. Together with the scope this uniquely identifies the portfolio.",
               "nullable": true
             }
           },
           {
             "name": "effectiveAt",
             "in": "query",
-            "description": "The effective datetime or cut label at which to update the definition. Defaults to the current\r\n            LUSID system datetime if not specified.",
+            "description": "The effective datetime or cut label at which to update the definition. Defaults to the current\r\n             LUSID system datetime if not specified.",
             "schema": {
               "type": "string",
-              "description": "The effective datetime or cut label at which to update the definition. Defaults to the current\r\n            LUSID system datetime if not specified.",
+              "description": "The effective datetime or cut label at which to update the definition. Defaults to the current\r\n             LUSID system datetime if not specified.",
               "format": "dateorcutlabel",
               "nullable": true
             }
@@ -8370,44 +8370,44 @@
           "Portfolios"
         ],
         "summary": "[EARLY ACCESS] Get portfolio commands",
-        "description": "Gets all the commands that modified a single portfolio, including any input transactions.",
+        "description": "Get all the commands that modified a portfolio, including any input transactions.",
         "operationId": "GetPortfolioCommands",
         "parameters": [
           {
             "name": "scope",
             "in": "path",
-            "description": "The scope of the portfolio to retrieve the commands for.",
+            "description": "The scope of the portfolio.",
             "required": true,
             "schema": {
               "maxLength": 64,
               "minLength": 1,
               "pattern": "^[a-zA-Z0-9\\-_]+$",
               "type": "string",
-              "description": "The scope of the portfolio to retrieve the commands for.",
+              "description": "The scope of the portfolio.",
               "nullable": true
             }
           },
           {
             "name": "code",
             "in": "path",
-            "description": "The code of the portfolio to retrieve the commands for. Together with the scope this uniquely identifies\r\n            the portfolio.",
+            "description": "The code of the portfolio. Together with the scope this uniquely identifies the portfolio.",
             "required": true,
             "schema": {
               "maxLength": 64,
               "minLength": 1,
               "pattern": "^[a-zA-Z0-9\\-_]+$",
               "type": "string",
-              "description": "The code of the portfolio to retrieve the commands for. Together with the scope this uniquely identifies\r\n            the portfolio.",
+              "description": "The code of the portfolio. Together with the scope this uniquely identifies the portfolio.",
               "nullable": true
             }
           },
           {
             "name": "fromAsAt",
             "in": "query",
-            "description": "The lower bound asAt datetime (inclusive) from which to retrieve commands. There is no lower bound if this is not specified.",
+            "description": "The lower bound as-at datetime (inclusive) from which to retrieve commands. There is no lower bound if this is not specified.",
             "schema": {
               "type": "string",
-              "description": "The lower bound asAt datetime (inclusive) from which to retrieve commands. There is no lower bound if this is not specified.",
+              "description": "The lower bound as-at datetime (inclusive) from which to retrieve commands. There is no lower bound if this is not specified.",
               "format": "date-time",
               "nullable": true
             },
@@ -8416,10 +8416,10 @@
           {
             "name": "toAsAt",
             "in": "query",
-            "description": "The upper bound asAt datetime (inclusive) from which to retrieve commands. There is no upper bound if this is not specified.",
+            "description": "The upper bound as-at datetime (inclusive) from which to retrieve commands. There is no upper bound if this is not specified.",
             "schema": {
               "type": "string",
-              "description": "The upper bound asAt datetime (inclusive) from which to retrieve commands. There is no upper bound if this is not specified.",
+              "description": "The upper bound as-at datetime (inclusive) from which to retrieve commands. There is no upper bound if this is not specified.",
               "format": "date-time",
               "nullable": true
             },
@@ -8526,34 +8526,34 @@
           "Portfolios"
         ],
         "summary": "Get portfolio properties",
-        "description": "List all the properties of a single portfolio.",
+        "description": "List all the properties of a portfolio.",
         "operationId": "GetPortfolioProperties",
         "parameters": [
           {
             "name": "scope",
             "in": "path",
-            "description": "The scope of the portfolio to list the properties for.",
+            "description": "The scope of the portfolio.",
             "required": true,
             "schema": {
               "maxLength": 64,
               "minLength": 1,
               "pattern": "^[a-zA-Z0-9\\-_]+$",
               "type": "string",
-              "description": "The scope of the portfolio to list the properties for.",
+              "description": "The scope of the portfolio.",
               "nullable": true
             }
           },
           {
             "name": "code",
             "in": "path",
-            "description": "The code of the portfolio to list the properties for. Together with the scope this uniquely\r\n            identifies the portfolio.",
+            "description": "The code of the portfolio. Together with the scope this uniquely identifies the portfolio.",
             "required": true,
             "schema": {
               "maxLength": 64,
               "minLength": 1,
               "pattern": "^[a-zA-Z0-9\\-_]+$",
               "type": "string",
-              "description": "The code of the portfolio to list the properties for. Together with the scope this uniquely\r\n            identifies the portfolio.",
+              "description": "The code of the portfolio. Together with the scope this uniquely identifies the portfolio.",
               "nullable": true
             }
           },
@@ -8571,10 +8571,10 @@
           {
             "name": "asAt",
             "in": "query",
-            "description": "The asAt datetime at which to list the portfolio's properties. Defaults to return the latest version of each property if not specified.",
+            "description": "The as-at datetime at which to list the portfolio's properties. Defaults to return the latest version of each property if not specified.",
             "schema": {
               "type": "string",
-              "description": "The asAt datetime at which to list the portfolio's properties. Defaults to return the latest version of each property if not specified.",
+              "description": "The as-at datetime at which to list the portfolio's properties. Defaults to return the latest version of each property if not specified.",
               "format": "date-time",
               "nullable": true
             },
@@ -8651,28 +8651,28 @@
           {
             "name": "scope",
             "in": "path",
-            "description": "The scope of the portfolio to delete properties from.",
+            "description": "The scope of the portfolio.",
             "required": true,
             "schema": {
               "maxLength": 64,
               "minLength": 1,
               "pattern": "^[a-zA-Z0-9\\-_]+$",
               "type": "string",
-              "description": "The scope of the portfolio to delete properties from.",
+              "description": "The scope of the portfolio.",
               "nullable": true
             }
           },
           {
             "name": "code",
             "in": "path",
-            "description": "The code of the portfolio to delete properties from. Together with the scope this uniquely\r\n            identifies the portfolio.",
+            "description": "The code of the portfolio. Together with the scope this uniquely identifies the portfolio.",
             "required": true,
             "schema": {
               "maxLength": 64,
               "minLength": 1,
               "pattern": "^[a-zA-Z0-9\\-_]+$",
               "type": "string",
-              "description": "The code of the portfolio to delete properties from. Together with the scope this uniquely\r\n            identifies the portfolio.",
+              "description": "The code of the portfolio. Together with the scope this uniquely identifies the portfolio.",
               "nullable": true
             }
           },
@@ -8690,7 +8690,7 @@
           {
             "name": "propertyKeys",
             "in": "query",
-            "description": "The property keys of the properties to delete. These take the format\r\n            {domain}/{scope}/{code} e.g. \"Portfolio/Manager/Id\". Each property must be from the \"Portfolio\" domain.",
+            "description": "The property keys of the properties to delete. These must take the format\r\n            {domain}/{scope}/{code}, for example 'Portfolio/Manager/Id'. Each property must be from the 'Portfolio' domain.",
             "required": true,
             "schema": {
               "type": "array",
@@ -8698,7 +8698,7 @@
                 "type": "string",
                 "description": "The key that uniquely identifies the property. It has the format {domain}/{scope}/{code}."
               },
-              "description": "The property keys of the properties to delete. These take the format\r\n            {domain}/{scope}/{code} e.g. \"Portfolio/Manager/Id\". Each property must be from the \"Portfolio\" domain."
+              "description": "The property keys of the properties to delete. These must take the format\r\n            {domain}/{scope}/{code}, for example 'Portfolio/Manager/Id'. Each property must be from the 'Portfolio' domain."
             }
           }
         ],
@@ -8766,40 +8766,40 @@
           "Portfolios"
         ],
         "summary": "Upsert portfolio properties",
-        "description": "Update or insert one or more properties onto a single portfolio. A property will be updated if it\r\nalready exists and inserted if it does not. All properties must be of the domain 'Portfolio'.\r\n            \r\nProperties have an <i>effectiveFrom</i> datetime for which the property is valid, and an <i>effectiveUntil</i>\r\ndatetime until which the property is valid. Not supplying an <i>effectiveUntil</i> datetime results in the property being\r\nvalid indefinitely, or until the next <i>effectiveFrom</i> datetime of the property.",
+        "description": "Update or insert one or more properties onto a single portfolio. A property will be updated if it\r\nalready exists and inserted if it does not. All properties must be from the 'Portfolio' domain.\r\n            \r\nProperties have an <i>effectiveFrom</i> datetime for which the property is valid, and an <i>effectiveUntil</i>\r\ndatetime until which the property is valid. Not supplying an <i>effectiveUntil</i> datetime results in the property being\r\nvalid indefinitely, or until the next <i>effectiveFrom</i> datetime of the property.",
         "operationId": "UpsertPortfolioProperties",
         "parameters": [
           {
             "name": "scope",
             "in": "path",
-            "description": "The scope of the portfolio to update or insert the properties onto.",
+            "description": "The scope of the portfolio.",
             "required": true,
             "schema": {
               "maxLength": 64,
               "minLength": 1,
               "pattern": "^[a-zA-Z0-9\\-_]+$",
               "type": "string",
-              "description": "The scope of the portfolio to update or insert the properties onto.",
+              "description": "The scope of the portfolio.",
               "nullable": true
             }
           },
           {
             "name": "code",
             "in": "path",
-            "description": "The code of the portfolio to update or insert the properties onto. Together with the scope\r\n             this uniquely identifies the portfolio.",
+            "description": "The code of the portfolio. Together with the scope this uniquely identifies the portfolio.",
             "required": true,
             "schema": {
               "maxLength": 64,
               "minLength": 1,
               "pattern": "^[a-zA-Z0-9\\-_]+$",
               "type": "string",
-              "description": "The code of the portfolio to update or insert the properties onto. Together with the scope\r\n             this uniquely identifies the portfolio.",
+              "description": "The code of the portfolio. Together with the scope this uniquely identifies the portfolio.",
               "nullable": true
             }
           }
         ],
         "requestBody": {
-          "description": "The properties to be updated or inserted onto the portfolio. Each property in\r\n             the request must be keyed by its unique property key. This has the format {domain}/{scope}/{code} e.g. \"Portfolio/Manager/Id\".",
+          "description": "The properties to be updated or inserted onto the portfolio. Each property in\r\n             the request must be keyed by its unique property key. This has the format {domain}/{scope}/{code}, for example\r\n             'Portfolio/Manager/Id'.",
           "content": {
             "application/json-patch+json": {
               "schema": {
@@ -8807,7 +8807,7 @@
                 "additionalProperties": {
                   "$ref": "#/components/schemas/Property"
                 },
-                "description": "The properties to be updated or inserted onto the portfolio. Each property in\r\n             the request must be keyed by its unique property key. This has the format {domain}/{scope}/{code} e.g. \"Portfolio/Manager/Id\"."
+                "description": "The properties to be updated or inserted onto the portfolio. Each property in\r\n             the request must be keyed by its unique property key. This has the format {domain}/{scope}/{code}, for example\r\n             'Portfolio/Manager/Id'."
               },
               "example": {
                 "portfolio/MyScope/FundManagerName": {
@@ -8849,7 +8849,7 @@
                 "additionalProperties": {
                   "$ref": "#/components/schemas/Property"
                 },
-                "description": "The properties to be updated or inserted onto the portfolio. Each property in\r\n             the request must be keyed by its unique property key. This has the format {domain}/{scope}/{code} e.g. \"Portfolio/Manager/Id\"."
+                "description": "The properties to be updated or inserted onto the portfolio. Each property in\r\n             the request must be keyed by its unique property key. This has the format {domain}/{scope}/{code}, for example\r\n             'Portfolio/Manager/Id'."
               },
               "example": {
                 "portfolio/MyScope/FundManagerName": {
@@ -8891,7 +8891,7 @@
                 "additionalProperties": {
                   "$ref": "#/components/schemas/Property"
                 },
-                "description": "The properties to be updated or inserted onto the portfolio. Each property in\r\n             the request must be keyed by its unique property key. This has the format {domain}/{scope}/{code} e.g. \"Portfolio/Manager/Id\"."
+                "description": "The properties to be updated or inserted onto the portfolio. Each property in\r\n             the request must be keyed by its unique property key. This has the format {domain}/{scope}/{code}, for example\r\n             'Portfolio/Manager/Id'."
               },
               "example": {
                 "portfolio/MyScope/FundManagerName": {
@@ -8933,7 +8933,7 @@
                 "additionalProperties": {
                   "$ref": "#/components/schemas/Property"
                 },
-                "description": "The properties to be updated or inserted onto the portfolio. Each property in\r\n             the request must be keyed by its unique property key. This has the format {domain}/{scope}/{code} e.g. \"Portfolio/Manager/Id\"."
+                "description": "The properties to be updated or inserted onto the portfolio. Each property in\r\n             the request must be keyed by its unique property key. This has the format {domain}/{scope}/{code}, for example\r\n             'Portfolio/Manager/Id'."
               },
               "example": {
                 "portfolio/MyScope/FundManagerName": {
@@ -10662,23 +10662,23 @@
           "Reference Portfolio"
         ],
         "summary": "Create reference portfolio",
-        "description": "Create a new reference portfolio.",
+        "description": "Create a reference portfolio in a particular scope.",
         "operationId": "CreateReferencePortfolio",
         "parameters": [
           {
             "name": "scope",
             "in": "path",
-            "description": "The intended scope of the portfolio",
+            "description": "The scope in which to create the reference portfolio.",
             "required": true,
             "schema": {
               "type": "string",
-              "description": "The intended scope of the portfolio",
+              "description": "The scope in which to create the reference portfolio.",
               "nullable": true
             }
           }
         ],
         "requestBody": {
-          "description": "The portfolio creation request object",
+          "description": "The definition of the reference portfolio.",
           "content": {
             "application/json-patch+json": {
               "schema": {
@@ -10796,41 +10796,41 @@
         "tags": [
           "Reference Portfolio"
         ],
-        "summary": "Add constituents",
-        "description": "Add constituents to the specified reference portfolio.",
+        "summary": "Upsert reference portfolio constituents",
+        "description": "Add constituents to a reference portfolio.",
         "operationId": "UpsertReferencePortfolioConstituents",
         "parameters": [
           {
             "name": "scope",
             "in": "path",
-            "description": "The scope of the portfolio",
+            "description": "The scope of the reference portfolio.",
             "required": true,
             "schema": {
               "maxLength": 64,
               "minLength": 1,
               "pattern": "^[a-zA-Z0-9\\-_]+$",
               "type": "string",
-              "description": "The scope of the portfolio",
+              "description": "The scope of the reference portfolio.",
               "nullable": true
             }
           },
           {
             "name": "code",
             "in": "path",
-            "description": "The code of the portfolio",
+            "description": "The code of the reference portfolio. Together with the scope this uniquely identifies\r\n            the reference portfolio.",
             "required": true,
             "schema": {
               "maxLength": 64,
               "minLength": 1,
               "pattern": "^[a-zA-Z0-9\\-_]+$",
               "type": "string",
-              "description": "The code of the portfolio",
+              "description": "The code of the reference portfolio. Together with the scope this uniquely identifies\r\n            the reference portfolio.",
               "nullable": true
             }
           }
         ],
         "requestBody": {
-          "description": "The constituents to upload to the portfolio",
+          "description": "The constituents to upload to the reference portfolio.",
           "content": {
             "application/json-patch+json": {
               "schema": {
@@ -11062,8 +11062,8 @@
         "tags": [
           "Reference Portfolio"
         ],
-        "summary": "Get constituents",
-        "description": "Get constituents from the specified reference portfolio at an effective time.",
+        "summary": "Get reference portfolio constituents",
+        "description": "Get constituents from a reference portfolio at a particular effective time.",
         "operationId": "GetReferencePortfolioConstituents",
         "parameters": [
           {
@@ -11120,14 +11120,14 @@
           {
             "name": "propertyKeys",
             "in": "query",
-            "description": "A list of property keys from the \"Instrument\" or \"ReferenceHolding\" domain to decorate onto\r\n            the constituents. These take the format {domain}/{scope}/{code} e.g. \"Instrument/system/Name\" or\r\n            \"ReferenceHolding/strategy/quantsignal\". Defaults to return all available instrument and reference holding properties if not specified.",
+            "description": "A list of property keys from the 'Instrument' or 'ReferenceHolding' domain to decorate onto\r\n            constituents. These take the format {domain}/{scope}/{code} e.g. 'Instrument/system/Name' or\r\n            'ReferenceHolding/strategy/quantsignal'. Defaults to return all available instrument and reference holding properties if not specified.",
             "schema": {
               "type": "array",
               "items": {
                 "type": "string",
                 "description": "The key that uniquely identifies the property. It has the format {domain}/{scope}/{code}."
               },
-              "description": "A list of property keys from the \"Instrument\" or \"ReferenceHolding\" domain to decorate onto\r\n            the constituents. These take the format {domain}/{scope}/{code} e.g. \"Instrument/system/Name\" or\r\n            \"ReferenceHolding/strategy/quantsignal\". Defaults to return all available instrument and reference holding properties if not specified.",
+              "description": "A list of property keys from the 'Instrument' or 'ReferenceHolding' domain to decorate onto\r\n            constituents. These take the format {domain}/{scope}/{code} e.g. 'Instrument/system/Name' or\r\n            'ReferenceHolding/strategy/quantsignal'. Defaults to return all available instrument and reference holding properties if not specified.",
               "nullable": true
             },
             "x-nullable": true
@@ -11199,34 +11199,34 @@
           "Reference Portfolio"
         ],
         "summary": "List constituents adjustments",
-        "description": "List the constituent adjustments made to the specified reference portfolio over a specified interval of effective time.",
+        "description": "List adjustments made to constituents in a reference portfolio.",
         "operationId": "ListConstituentsAdjustments",
         "parameters": [
           {
             "name": "scope",
             "in": "path",
-            "description": "The scope of the portfolio",
+            "description": "The scope of the reference portfolio.",
             "required": true,
             "schema": {
               "maxLength": 64,
               "minLength": 1,
               "pattern": "^[a-zA-Z0-9\\-_]+$",
               "type": "string",
-              "description": "The scope of the portfolio",
+              "description": "The scope of the reference portfolio.",
               "nullable": true
             }
           },
           {
             "name": "code",
             "in": "path",
-            "description": "Code for the portfolio",
+            "description": "The code of the reference portfolio. Together with the scope this uniquely identifies\r\n            the reference portfolio.",
             "required": true,
             "schema": {
               "maxLength": 64,
               "minLength": 1,
               "pattern": "^[a-zA-Z0-9\\-_]+$",
               "type": "string",
-              "description": "Code for the portfolio",
+              "description": "The code of the reference portfolio. Together with the scope this uniquely identifies\r\n            the reference portfolio.",
               "nullable": true
             }
           },
@@ -12917,7 +12917,7 @@
           "Transaction Portfolios"
         ],
         "summary": "Create portfolio",
-        "description": "Create a transaction portfolio in a specific scope.",
+        "description": "Create a transaction portfolio in a particular scope.",
         "operationId": "CreatePortfolio",
         "parameters": [
           {
@@ -12933,7 +12933,7 @@
           }
         ],
         "requestBody": {
-          "description": "The definition and details of the transaction portfolio.",
+          "description": "The definition of the transaction portfolio.",
           "content": {
             "application/json-patch+json": {
               "schema": {
@@ -13088,7 +13088,7 @@
         },
         "responses": {
           "201": {
-            "description": "The newly created transaction portfolio",
+            "description": "The newly-created transaction portfolio",
             "content": {
               "text/plain": {
                 "schema": {
@@ -13151,7 +13151,7 @@
         "tags": [
           "Transaction Portfolios"
         ],
-        "summary": "[EARLY ACCESS] Resolve Instrument",
+        "summary": "[EARLY ACCESS] Resolve instrument",
         "description": "Try to resolve the instrument for transaction and holdings for a given instrument identifier and a specified  \r\nperiod of time. Also update the instrument identifiers with the given instrument identifiers collection.",
         "operationId": "ResolveInstrument",
         "parameters": [
@@ -13338,35 +13338,35 @@
         "tags": [
           "Transaction Portfolios"
         ],
-        "summary": "[EARLY ACCESS] Get CashStatement for the given portfolio.",
-        "description": "Get CashStatement for the given portfolio.",
+        "summary": "[EARLY ACCESS] Get portfolio cash statement",
+        "description": "Get a cash statement for a transaction portfolio.",
         "operationId": "GetPortfolioCashStatement",
         "parameters": [
           {
             "name": "scope",
             "in": "path",
-            "description": "The scope of the portfolio to retrieve the CashStatement for.",
+            "description": "The scope of the transaction portfolio.",
             "required": true,
             "schema": {
               "maxLength": 64,
               "minLength": 1,
               "pattern": "^[a-zA-Z0-9\\-_]+$",
               "type": "string",
-              "description": "The scope of the portfolio to retrieve the CashStatement for.",
+              "description": "The scope of the transaction portfolio.",
               "nullable": true
             }
           },
           {
             "name": "code",
             "in": "path",
-            "description": "The code of the portfolio to retrieve the CashStatement for. Together with the scope this\r\n            uniquely identifies the portfolio.",
+            "description": "The code of the transaction portfolio. Together with the scope this\r\n            uniquely identifies the portfolio.",
             "required": true,
             "schema": {
               "maxLength": 64,
               "minLength": 1,
               "pattern": "^[a-zA-Z0-9\\-_]+$",
               "type": "string",
-              "description": "The code of the portfolio to retrieve the CashStatement for. Together with the scope this\r\n            uniquely identifies the portfolio.",
+              "description": "The code of the transaction portfolio. Together with the scope this\r\n            uniquely identifies the portfolio.",
               "nullable": true
             }
           },
@@ -13395,10 +13395,10 @@
           {
             "name": "asAt",
             "in": "query",
-            "description": "The asAt datetime at which to retrieve the portfolio. Defaults to return the latest version\r\n            of each transaction if not specified.",
+            "description": "The as-at datetime at which to retrieve the portfolio. Defaults to returning the latest version\r\n            of each transaction if not specified.",
             "schema": {
               "type": "string",
-              "description": "The asAt datetime at which to retrieve the portfolio. Defaults to return the latest version\r\n            of each transaction if not specified.",
+              "description": "The as-at datetime at which to retrieve the portfolio. Defaults to returning the latest version\r\n            of each transaction if not specified.",
               "format": "date-time",
               "nullable": true
             },
@@ -13407,10 +13407,10 @@
           {
             "name": "filter",
             "in": "query",
-            "description": "Expression to filter the result set. \r\n            For example, to filter on the Transaction Type, use \"type eq 'Buy'\"\r\n            Read more about filtering results from LUSID here https://support.lusid.com/filtering-results-from-lusid.",
+            "description": "Expression to filter the result set. \r\n            For example, to return only transactions with a transaction type of 'Buy', specify \"type eq 'Buy'\".\r\n            For more information about filtering LUSID results, see https://support.lusid.com/knowledgebase/article/KA-01914.",
             "schema": {
               "type": "string",
-              "description": "Expression to filter the result set. \r\n            For example, to filter on the Transaction Type, use \"type eq 'Buy'\"\r\n            Read more about filtering results from LUSID here https://support.lusid.com/filtering-results-from-lusid.",
+              "description": "Expression to filter the result set. \r\n            For example, to return only transactions with a transaction type of 'Buy', specify \"type eq 'Buy'\".\r\n            For more information about filtering LUSID results, see https://support.lusid.com/knowledgebase/article/KA-01914.",
               "nullable": true
             }
           },
@@ -15856,34 +15856,34 @@
           "Transaction Portfolios"
         ],
         "summary": "Get details",
-        "description": "Get the details associated with a transaction portfolio.",
+        "description": "Get certain details associated with a transaction portfolio.",
         "operationId": "GetDetails",
         "parameters": [
           {
             "name": "scope",
             "in": "path",
-            "description": "The scope of the transaction portfolio to retrieve the details for.",
+            "description": "The scope of the transaction portfolio.",
             "required": true,
             "schema": {
               "maxLength": 64,
               "minLength": 1,
               "pattern": "^[a-zA-Z0-9\\-_]+$",
               "type": "string",
-              "description": "The scope of the transaction portfolio to retrieve the details for.",
+              "description": "The scope of the transaction portfolio.",
               "nullable": true
             }
           },
           {
             "name": "code",
             "in": "path",
-            "description": "The code of the transaction portfolio to retrieve the details for. Together with the\r\n            scope this uniquely identifies the transaction portfolio.",
+            "description": "The code of the transaction portfolio. Together with the\r\n            scope this uniquely identifies the transaction portfolio.",
             "required": true,
             "schema": {
               "maxLength": 64,
               "minLength": 1,
               "pattern": "^[a-zA-Z0-9\\-_]+$",
               "type": "string",
-              "description": "The code of the transaction portfolio to retrieve the details for. Together with the\r\n            scope this uniquely identifies the transaction portfolio.",
+              "description": "The code of the transaction portfolio. Together with the\r\n            scope this uniquely identifies the transaction portfolio.",
               "nullable": true
             }
           },
@@ -16017,34 +16017,34 @@
           "Transaction Portfolios"
         ],
         "summary": "Upsert portfolio details",
-        "description": "Update or insert details for the specified transaction portfolio. The details will be updated\r\nif they already exist and inserted if they do not.",
+        "description": "Update or insert details that can be changed for a transaction portfolio once it has been created. The details will be updated\r\nif they already exist and inserted if they do not.",
         "operationId": "UpsertPortfolioDetails",
         "parameters": [
           {
             "name": "scope",
             "in": "path",
-            "description": "The scope of the transaction portfolio to update or insert details for.",
+            "description": "The scope of the transaction portfolio.",
             "required": true,
             "schema": {
               "maxLength": 64,
               "minLength": 1,
               "pattern": "^[a-zA-Z0-9\\-_]+$",
               "type": "string",
-              "description": "The scope of the transaction portfolio to update or insert details for.",
+              "description": "The scope of the transaction portfolio.",
               "nullable": true
             }
           },
           {
             "name": "code",
             "in": "path",
-            "description": "The code of the transaction portfolio to update or insert details for. Together with the\r\n            scope this uniquely identifies the transaction portfolio.",
+            "description": "The code of the transaction portfolio. Together with the\r\n            scope this uniquely identifies the transaction portfolio.",
             "required": true,
             "schema": {
               "maxLength": 64,
               "minLength": 1,
               "pattern": "^[a-zA-Z0-9\\-_]+$",
               "type": "string",
-              "description": "The code of the transaction portfolio to update or insert details for. Together with the\r\n            scope this uniquely identifies the transaction portfolio.",
+              "description": "The code of the transaction portfolio. Together with the\r\n            scope this uniquely identifies the transaction portfolio.",
               "nullable": true
             }
           },
@@ -17259,7 +17259,7 @@
           "Transaction Portfolios"
         ],
         "summary": "Get holdings",
-        "description": "Get the holdings of the specified transaction portfolio.",
+        "description": "Calculate holdings for a transaction portfolio.",
         "operationId": "GetHoldings",
         "parameters": [
           {
@@ -17301,10 +17301,10 @@
           {
             "name": "asAt",
             "in": "query",
-            "description": "The asAt datetime at which to retrieve the holdings of the transaction portfolio. Defaults\r\n            to return the latest version of the holdings if not specified.",
+            "description": "The as-at datetime at which to retrieve the holdings of the transaction portfolio. Defaults\r\n            to return the latest version if not specified.",
             "schema": {
               "type": "string",
-              "description": "The asAt datetime at which to retrieve the holdings of the transaction portfolio. Defaults\r\n            to return the latest version of the holdings if not specified.",
+              "description": "The as-at datetime at which to retrieve the holdings of the transaction portfolio. Defaults\r\n            to return the latest version if not specified.",
               "format": "date-time",
               "nullable": true
             },
@@ -17313,24 +17313,24 @@
           {
             "name": "filter",
             "in": "query",
-            "description": "Expression to filter the result set. \r\n            For example, to filter on the Holding Type, use \"holdingType eq 'p'\"\r\n            Read more about filtering results from LUSID here https://support.lusid.com/filtering-results-from-lusid.",
+            "description": "Expression to filter the result set. \r\n            For example, to filter on the Holding Type, use \"holdingType eq 'p'\".\r\n            For more information about filtering LUSID results, see https://support.lusid.com/knowledgebase/article/KA-01914.",
             "schema": {
               "type": "string",
-              "description": "Expression to filter the result set. \r\n            For example, to filter on the Holding Type, use \"holdingType eq 'p'\"\r\n            Read more about filtering results from LUSID here https://support.lusid.com/filtering-results-from-lusid.",
+              "description": "Expression to filter the result set. \r\n            For example, to filter on the Holding Type, use \"holdingType eq 'p'\".\r\n            For more information about filtering LUSID results, see https://support.lusid.com/knowledgebase/article/KA-01914.",
               "nullable": true
             }
           },
           {
             "name": "propertyKeys",
             "in": "query",
-            "description": "A list of property keys from the \"Instrument\" or \"Holding\" domain to decorate onto\r\n            the holdings. These take the format {domain}/{scope}/{code} e.g. \"Instrument/system/Name\" or \"Holding/system/Cost\".",
+            "description": "A list of property keys from the \"Instrument\" or \"Holding\" domain to decorate onto\r\n            holdings. These must have the format {domain}/{scope}/{code}, for example \"Instrument/system/Name\" or \"Holding/system/Cost\".",
             "schema": {
               "type": "array",
               "items": {
                 "type": "string",
                 "description": "The key that uniquely identifies the property. It has the format {domain}/{scope}/{code}."
               },
-              "description": "A list of property keys from the \"Instrument\" or \"Holding\" domain to decorate onto\r\n            the holdings. These take the format {domain}/{scope}/{code} e.g. \"Instrument/system/Name\" or \"Holding/system/Cost\".",
+              "description": "A list of property keys from the \"Instrument\" or \"Holding\" domain to decorate onto\r\n            holdings. These must have the format {domain}/{scope}/{code}, for example \"Instrument/system/Name\" or \"Holding/system/Cost\".",
               "nullable": true
             },
             "x-nullable": true
@@ -17934,7 +17934,7 @@
           "Transaction Portfolios"
         ],
         "summary": "Get transactions",
-        "description": "Get transactions from the specified transaction portfolio over a given interval of effective time. \r\n\r\nWhen the specified portfolio is a derived transaction portfolio, the returned set of transactions is the\r\nunion set of all transactions of the parent (and any grandparents etc.) and the specified derived transaction portfolio itself.",
+        "description": "Retrieve all the transactions that occurred during a particular time interval. \r\n\r\nIf the portfolio is a derived transaction portfolio, the transactions returned are the\r\nunion set of all transactions of the parent (and any grandparents, etc.) as well as\r\nthose of the derived transaction portfolio itself.",
         "operationId": "GetTransactions",
         "parameters": [
           {
@@ -17968,10 +17968,10 @@
           {
             "name": "fromTransactionDate",
             "in": "query",
-            "description": "The lower bound effective datetime or cut label (inclusive) from which to retrieve the transactions.\r\n            There is no lower bound if this is not specified.",
+            "description": "The lower bound effective datetime or cut label (inclusive) from which to retrieve transactions.\r\n            There is no lower bound if this is not specified.",
             "schema": {
               "type": "string",
-              "description": "The lower bound effective datetime or cut label (inclusive) from which to retrieve the transactions.\r\n            There is no lower bound if this is not specified.",
+              "description": "The lower bound effective datetime or cut label (inclusive) from which to retrieve transactions.\r\n            There is no lower bound if this is not specified.",
               "format": "dateorcutlabel",
               "nullable": true
             }
@@ -17990,10 +17990,10 @@
           {
             "name": "asAt",
             "in": "query",
-            "description": "The asAt datetime at which to retrieve the transactions. Defaults to return the latest version\r\n            of each transaction if not specified.",
+            "description": "The as-at datetime at which to retrieve transactions. Defaults to returning the latest version\r\n            of each transaction if not specified.",
             "schema": {
               "type": "string",
-              "description": "The asAt datetime at which to retrieve the transactions. Defaults to return the latest version\r\n            of each transaction if not specified.",
+              "description": "The as-at datetime at which to retrieve transactions. Defaults to returning the latest version\r\n            of each transaction if not specified.",
               "format": "date-time",
               "nullable": true
             },
@@ -18002,24 +18002,24 @@
           {
             "name": "filter",
             "in": "query",
-            "description": "Expression to filter the result set. \r\n            For example, to filter on the Transaction Type, use \"type eq 'Buy'\"\r\n            Read more about filtering results from LUSID here https://support.lusid.com/filtering-results-from-lusid.",
+            "description": "Expression with which to filter the result set. \r\n            For example, to return only transactions with a transaction type of 'Buy', specify \"type eq 'Buy'\"\r\n            For more information about filtering LUSID results, see https://support.lusid.com/knowledgebase/article/KA-01914.",
             "schema": {
               "type": "string",
-              "description": "Expression to filter the result set. \r\n            For example, to filter on the Transaction Type, use \"type eq 'Buy'\"\r\n            Read more about filtering results from LUSID here https://support.lusid.com/filtering-results-from-lusid.",
+              "description": "Expression with which to filter the result set. \r\n            For example, to return only transactions with a transaction type of 'Buy', specify \"type eq 'Buy'\"\r\n            For more information about filtering LUSID results, see https://support.lusid.com/knowledgebase/article/KA-01914.",
               "nullable": true
             }
           },
           {
             "name": "propertyKeys",
             "in": "query",
-            "description": "A list of property keys from the \"Instrument\" or \"Transaction\" domain to decorate onto\r\n            the transactions. These take the format {domain}/{scope}/{code} e.g. \"Instrument/system/Name\" or\r\n            \"Transaction/strategy/quantsignal\".",
+            "description": "A list of property keys from the 'Instrument' or 'Transaction' domain to decorate onto\r\n            transactions. These must have the format {domain}/{scope}/{code}, for example 'Instrument/system/Name' or\r\n            'Transaction/strategy/quantsignal'.",
             "schema": {
               "type": "array",
               "items": {
                 "type": "string",
                 "description": "The key that uniquely identifies the property. It has the format {domain}/{scope}/{code}."
               },
-              "description": "A list of property keys from the \"Instrument\" or \"Transaction\" domain to decorate onto\r\n            the transactions. These take the format {domain}/{scope}/{code} e.g. \"Instrument/system/Name\" or\r\n            \"Transaction/strategy/quantsignal\".",
+              "description": "A list of property keys from the 'Instrument' or 'Transaction' domain to decorate onto\r\n            transactions. These must have the format {domain}/{scope}/{code}, for example 'Instrument/system/Name' or\r\n            'Transaction/strategy/quantsignal'.",
               "nullable": true
             },
             "x-nullable": true
@@ -18248,7 +18248,7 @@
           "Transaction Portfolios"
         ],
         "summary": "Upsert transactions",
-        "description": "Update or insert transactions into the specified transaction portfolio. A transaction will be updated\r\nif it already exists and inserted if it does not.\n\nThe maximum number of transactions that this method can upsert per request is 10,000.",
+        "description": "Update or insert transactions into the transaction portfolio. A transaction will be updated\r\nif it already exists and inserted if it does not.\n\nThe maximum number of transactions that this method can upsert per request is 10,000.",
         "operationId": "UpsertTransactions",
         "parameters": [
           {
@@ -18281,7 +18281,7 @@
           }
         ],
         "requestBody": {
-          "description": "The transactions to be updated or inserted.",
+          "description": "A list of transactions to be updated or inserted.",
           "content": {
             "application/json-patch+json": {
               "schema": {
@@ -18289,7 +18289,7 @@
                 "items": {
                   "$ref": "#/components/schemas/TransactionRequest"
                 },
-                "description": "The transactions to be updated or inserted."
+                "description": "A list of transactions to be updated or inserted."
               },
               "example": [
                 {
@@ -18330,7 +18330,7 @@
                 "items": {
                   "$ref": "#/components/schemas/TransactionRequest"
                 },
-                "description": "The transactions to be updated or inserted."
+                "description": "A list of transactions to be updated or inserted."
               },
               "example": [
                 {
@@ -18371,7 +18371,7 @@
                 "items": {
                   "$ref": "#/components/schemas/TransactionRequest"
                 },
-                "description": "The transactions to be updated or inserted."
+                "description": "A list of transactions to be updated or inserted."
               },
               "example": [
                 {
@@ -18412,7 +18412,7 @@
                 "items": {
                   "$ref": "#/components/schemas/TransactionRequest"
                 },
-                "description": "The transactions to be updated or inserted."
+                "description": "A list of transactions to be updated or inserted."
               },
               "example": [
                 {
@@ -18514,7 +18514,7 @@
           "Transaction Portfolios"
         ],
         "summary": "Cancel transactions",
-        "description": "Cancel one or more transactions from the specified transaction portfolio.",
+        "description": "Cancel one or more transactions from the transaction portfolio.",
         "operationId": "CancelTransactions",
         "parameters": [
           {
@@ -18548,14 +18548,14 @@
           {
             "name": "transactionIds",
             "in": "query",
-            "description": "The ids of the transactions to cancel.",
+            "description": "The IDs of the transactions to cancel.",
             "required": true,
             "schema": {
               "type": "array",
               "items": {
                 "type": "string"
               },
-              "description": "The ids of the transactions to cancel."
+              "description": "The IDs of the transactions to cancel."
             }
           }
         ],
@@ -18668,10 +18668,10 @@
           {
             "name": "filter",
             "in": "query",
-            "description": "Expression to filter the result set.\r\n            For example, to filter on the Transaction Type, use \"type eq 'Buy'\"\r\n            Read more about filtering results from LUSID here https://support.lusid.com/filtering-results-from-lusid.",
+            "description": "Expression to filter the result set.\r\n            For example, to return only transactions with a transaction type of 'Buy', specify \"type eq 'Buy'\".\r\n            For more information about filtering LUSID results, see https://support.lusid.com/knowledgebase/article/KA-01914.",
             "schema": {
               "type": "string",
-              "description": "Expression to filter the result set.\r\n            For example, to filter on the Transaction Type, use \"type eq 'Buy'\"\r\n            Read more about filtering results from LUSID here https://support.lusid.com/filtering-results-from-lusid.",
+              "description": "Expression to filter the result set.\r\n            For example, to return only transactions with a transaction type of 'Buy', specify \"type eq 'Buy'\".\r\n            For more information about filtering LUSID results, see https://support.lusid.com/knowledgebase/article/KA-01914.",
               "nullable": true
             }
           },
@@ -19477,17 +19477,17 @@
           {
             "name": "transactionId",
             "in": "path",
-            "description": "The unique id of the transaction to update or insert properties against.",
+            "description": "The unique ID of the transaction to update or insert properties for.",
             "required": true,
             "schema": {
               "type": "string",
-              "description": "The unique id of the transaction to update or insert properties against.",
+              "description": "The unique ID of the transaction to update or insert properties for.",
               "nullable": true
             }
           }
         ],
         "requestBody": {
-          "description": "The properties with their associated values to update or insert onto the\r\n            transaction.",
+          "description": "The properties and their associated values to update or insert.",
           "content": {
             "application/json-patch+json": {
               "schema": {
@@ -19495,7 +19495,7 @@
                 "additionalProperties": {
                   "$ref": "#/components/schemas/PerpetualProperty"
                 },
-                "description": "The properties with their associated values to update or insert onto the\r\n            transaction."
+                "description": "The properties and their associated values to update or insert."
               },
               "example": {
                 "transaction/MyScope/MyPropertyName": {
@@ -19524,7 +19524,7 @@
                 "additionalProperties": {
                   "$ref": "#/components/schemas/PerpetualProperty"
                 },
-                "description": "The properties with their associated values to update or insert onto the\r\n            transaction."
+                "description": "The properties and their associated values to update or insert."
               },
               "example": {
                 "transaction/MyScope/MyPropertyName": {
@@ -19553,7 +19553,7 @@
                 "additionalProperties": {
                   "$ref": "#/components/schemas/PerpetualProperty"
                 },
-                "description": "The properties with their associated values to update or insert onto the\r\n            transaction."
+                "description": "The properties and their associated values to update or insert."
               },
               "example": {
                 "transaction/MyScope/MyPropertyName": {
@@ -19582,7 +19582,7 @@
                 "additionalProperties": {
                   "$ref": "#/components/schemas/PerpetualProperty"
                 },
-                "description": "The properties with their associated values to update or insert onto the\r\n            transaction."
+                "description": "The properties and their associated values to update or insert."
               },
               "example": {
                 "transaction/MyScope/MyPropertyName": {
@@ -19672,7 +19672,7 @@
           "Transaction Portfolios"
         ],
         "summary": "Delete properties from transaction",
-        "description": "Delete one or more property values from a single transaction in a transaction portfolio.",
+        "description": "Delete one or more properties from a single transaction in a transaction portfolio.",
         "operationId": "DeletePropertiesFromTransaction",
         "parameters": [
           {
@@ -19706,18 +19706,18 @@
           {
             "name": "transactionId",
             "in": "path",
-            "description": "The unique id of the transaction to delete the property value from.",
+            "description": "The unique ID of the transaction from which to delete properties.",
             "required": true,
             "schema": {
               "type": "string",
-              "description": "The unique id of the transaction to delete the property value from.",
+              "description": "The unique ID of the transaction from which to delete properties.",
               "nullable": true
             }
           },
           {
             "name": "propertyKeys",
             "in": "query",
-            "description": "The property keys of the properties to delete from the transaction.\r\n            This must be from the \"Transaction\" domain and will have the format {domain}/{scope}/{code} e.g.\r\n            \"Transaction/strategy/quantsignal\".",
+            "description": "The property keys of the properties to delete.\r\n            These must be from the \"Transaction\" domain and have the format {domain}/{scope}/{code}, for example\r\n            \"Transaction/strategy/quantsignal\".",
             "required": true,
             "schema": {
               "type": "array",
@@ -19725,7 +19725,7 @@
                 "type": "string",
                 "description": "The key that uniquely identifies the property. It has the format {domain}/{scope}/{code}."
               },
-              "description": "The property keys of the properties to delete from the transaction.\r\n            This must be from the \"Transaction\" domain and will have the format {domain}/{scope}/{code} e.g.\r\n            \"Transaction/strategy/quantsignal\"."
+              "description": "The property keys of the properties to delete.\r\n            These must be from the \"Transaction\" domain and have the format {domain}/{scope}/{code}, for example\r\n            \"Transaction/strategy/quantsignal\"."
             }
           }
         ],
@@ -20947,7 +20947,7 @@
             "additionalProperties": {
               "$ref": "#/components/schemas/ErrorDetail"
             },
-            "description": "The identifiers which did not resolve to an instrument along with the nature of the failure.",
+            "description": "The identifiers that did not resolve to an instrument along with the nature of the failure.",
             "nullable": true
           },
           "links": {
@@ -21910,7 +21910,7 @@
             "additionalProperties": {
               "type": "string"
             },
-            "description": "The set of instrument identifiers that can be used to resolve the transaction to a unique instrument.",
+            "description": "A set of instrument identifiers that can resolve the transaction to a unique instrument.",
             "nullable": true
           },
           "instrumentUid": {
@@ -22269,7 +22269,7 @@
             "additionalProperties": {
               "type": "string"
             },
-            "description": "The set of instrument identifiers that can be used to resolve the transaction to a unique instrument.",
+            "description": "A set of instrument identifiers that can resolve the transaction to a unique instrument.",
             "nullable": true
           },
           "instrumentUid": {
@@ -22454,7 +22454,7 @@
           },
           "description": {
             "type": "string",
-            "description": "A long form description of the transaction portfolio.",
+            "description": "The description of the transaction portfolio.",
             "nullable": true
           }
         },
@@ -24466,22 +24466,22 @@
           },
           "description": {
             "type": "string",
-            "description": "A long form description of the transaction portfolio.",
+            "description": "A description for the transaction portfolio.",
             "nullable": true
           },
           "code": {
             "type": "string",
-            "description": "The code that the transaction portfolio will be created with. Together with the scope this uniquely identifies the transaction portfolio."
+            "description": "The code of the transaction portfolio. Together with the scope this uniquely identifies the transaction portfolio."
           },
           "created": {
             "type": "string",
-            "description": "The effective datetime at which the transaction portfolio will be created. No transactions can be added to the transaction portfolio before this date. Defaults to the current LUSID system datetime if not specified.",
+            "description": "The effective datetime at which to create the transaction portfolio. No transactions can be added to the transaction portfolio before this date. Defaults to the current LUSID system datetime if not specified.",
             "format": "date-time",
             "nullable": true
           },
           "baseCurrency": {
             "type": "string",
-            "description": "The base currency of the transaction portfolio."
+            "description": "The base currency of the transaction portfolio in ISO 4217 currency code format."
           },
           "corporateActionSourceId": {
             "$ref": "#/components/schemas/ResourceId"
@@ -24504,7 +24504,7 @@
               "type": "string",
               "description": "The key that uniquely identifies the property. It has the format {domain}/{scope}/{code}."
             },
-            "description": "A set of unique transaction properties to group the transaction portfolio's holdings by. Each property must be from the 'Transaction' domain and should be identified by its key which has the format {domain}/{scope}/{code}, e.g. 'Transaction/strategies/quantsignal'.",
+            "description": "A set of unique transaction properties to group the transaction portfolio's holdings by. Each property must be from the 'Transaction' domain and identified by a key in the format {domain}/{scope}/{code}, for example 'Transaction/strategies/quantsignal'.",
             "nullable": true
           },
           "properties": {
@@ -24512,7 +24512,7 @@
             "additionalProperties": {
               "$ref": "#/components/schemas/Property"
             },
-            "description": "A set of unique portfolio properties to add to the transaction portfolio. Each property must be from the 'Portfolio' domain and should be identified by its key which has the format {domain}/{scope}/{code}, e.g. 'Portfolio/Manager/Id'. These properties must be pre-defined.",
+            "description": "A set of unique portfolio properties to add to the transaction portfolio. Each property must be from the 'Portfolio' domain and identified by a key in the format {domain}/{scope}/{code}, for example 'Portfolio/Manager/Id'. Note these properties must be pre-defined.",
             "nullable": true
           }
         },
@@ -24741,7 +24741,7 @@
             "additionalProperties": {
               "type": "string"
             },
-            "description": "A set of instrument identifiers to use to resolve the execution to a unique instrument."
+            "description": "A set of instrument identifiers that can resolve the execution to a unique instrument."
           },
           "transactionTime": {
             "type": "string",
@@ -24843,7 +24843,7 @@
             "additionalProperties": {
               "type": "string"
             },
-            "description": "A set of instrument identifiers to use to resolve the holding adjustment to a unique instrument."
+            "description": "A set of instrument identifiers that can resolve the holding adjustment to a unique instrument."
           },
           "subHoldingKeys": {
             "type": "object",
@@ -25026,7 +25026,7 @@
             "additionalProperties": {
               "type": "string"
             },
-            "description": "The set of instrument identifiers that can be used to resolve the holding adjustment to a unique instrument.",
+            "description": "A set of instrument identifiers that can resolve the holding adjustment to a unique instrument.",
             "nullable": true
           },
           "instrumentUid": {
@@ -25122,18 +25122,18 @@
         "properties": {
           "transactionId": {
             "type": "string",
-            "description": "The unique identifier for the transaction."
+            "description": "The unique identifier of the transaction."
           },
           "type": {
             "type": "string",
-            "description": "The type of the transaction e.g. 'Buy', 'Sell'. The transaction type should have been pre-configured via the System Configuration API endpoint. If it hasn't been pre-configured the transaction will still be updated or inserted however you will be unable to generate the resultant holdings for the portfolio that contains this transaction as LUSID does not know how to process it."
+            "description": "The type of the transaction, for example 'Buy' or 'Sell'. The transaction type must have been pre-configured using the System Configuration API. If not, this operation will succeed but you are not able to calculate holdings for the portfolio that include this transaction."
           },
           "instrumentIdentifiers": {
             "type": "object",
             "additionalProperties": {
               "type": "string"
             },
-            "description": "A set of instrument identifiers to use to resolve the transaction to a unique instrument."
+            "description": "A set of instrument identifiers that can resolve the transaction to a unique instrument."
           },
           "transactionDate": {
             "type": "string",
@@ -25147,7 +25147,7 @@
           },
           "units": {
             "type": "number",
-            "description": "The number of units transacted in the associated instrument.",
+            "description": "The number of units of the transacted instrument.",
             "format": "double"
           },
           "transactionPrice": {
@@ -25158,7 +25158,7 @@
           },
           "exchangeRate": {
             "type": "number",
-            "description": "The exchange rate between the transaction and settlement currency (settlement currency being represented by the TotalConsideration.Currency). For example if the transaction currency is in USD and the settlement currency is in GBP this this the USD/GBP rate.",
+            "description": "The exchange rate between the transaction and settlement currency (settlement currency being represented by TotalConsideration.Currency). For example, if the transaction currency is USD and the settlement currency is GBP, this would be the appropriate USD/GBP rate.",
             "format": "double",
             "nullable": true
           },
@@ -25172,7 +25172,7 @@
             "additionalProperties": {
               "$ref": "#/components/schemas/PerpetualProperty"
             },
-            "description": "Set of unique transaction properties and associated values to store with the transaction. Each property must be from the 'Transaction' domain.",
+            "description": "A list of unique transaction properties and associated values to store for the transaction. Each property must be from the 'Transaction' domain.",
             "nullable": true
           },
           "counterpartyId": {
@@ -25277,7 +25277,7 @@
     },
     {
       "name": "Derived Transaction Portfolios",
-      "description": "Methods for interacting with derived transaction portfolios"
+      "description": "A derived transaction portfolio inherits all the transactions from a parent transaction portfolio (though it can also contain its own transactions), enabling different modelling strategies to be devised, among other operations. Note that a derived transaction portfolio is a type of portfolio, so endpoints in the TransactionPortfolios API and the Portfolios API can also be called. For more information, see https://support.lusid.com/knowledgebase/article/KA-01853."
     },
     {
       "name": "Entities",
@@ -25309,7 +25309,7 @@
     },
     {
       "name": "Portfolios",
-      "description": "Methods for interacting with Portfolios. Read more about Portfolios in LUSID here https://support.lusid.com/what-is-portfolio."
+      "description": "A portfolio is a store of economic information. There are three types: transaction, reference and derived transaction. Note that Portfolio API endpoints can also be called when interacting with the Transaction Portfolios API,  Reference Portfolio API or Derived Transaction Portfolios API. For more information, see https://support.lusid.com/knowledgebase/article/KA-01848."
     },
     {
       "name": "Property Definitions",
@@ -25325,7 +25325,7 @@
     },
     {
       "name": "Reference Portfolio",
-      "description": "Methods for interacting with Reference Portfolios"
+      "description": "A reference portfolio stores a weighted set of instruments rather than transactions, enabling entities such as indices to be represented. Note that a reference portfolio is a type of portfolio, so endpoints in the Portfolios API can also be called. For more information, see https://support.lusid.com/knowledgebase/article/KA-01852."
     },
     {
       "name": "Relation Definitions",
@@ -25369,7 +25369,7 @@
     },
     {
       "name": "Transaction Portfolios",
-      "description": "Methods for interacting with Transaction Portfolios. Read more about Transaction Portfolios in the LUSID Knowledge Base here https://support.lusid.com/what-is-a-transaction-portfolio."
+      "description": "A transaction portfolio stores transactions and calculates instrument holdings and cash balances, enabling valuation, analytic, profit & loss, risk assessment and other operations to be performed. Note that a transaction portfolio is a type of portfolio, so endpoints in the Portfolios API can also be called. For more information, see https://support.lusid.com/knowledgebase/article/KA-01851."
     }
   ],
   "x-tagGroups": {
