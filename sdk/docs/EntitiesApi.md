@@ -1,6 +1,6 @@
 # lusid.EntitiesApi
 
-All URIs are relative to *http://local-unit-test-server.lusid.com:36531*
+All URIs are relative to *http://local-unit-test-server.lusid.com:41975*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
@@ -27,8 +27,8 @@ configuration = lusid.Configuration()
 # Configure OAuth2 access token for authorization: oauth2
 configuration.access_token = 'YOUR_ACCESS_TOKEN'
 
-# Defining host is optional and default to http://local-unit-test-server.lusid.com:36531
-configuration.host = "http://local-unit-test-server.lusid.com:36531"
+# Defining host is optional and default to http://local-unit-test-server.lusid.com:41975
+configuration.host = "http://local-unit-test-server.lusid.com:41975"
 # Create an instance of the API class
 api_instance = lusid.EntitiesApi(lusid.ApiClient(configuration))
 scope = 'scope_example' # str | The scope
