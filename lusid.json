@@ -9,7 +9,7 @@
       "url": "https://www.finbourne.com",
       "email": "info@finbourne.com"
     },
-    "version": "0.11.3084",
+    "version": "0.11.3085",
     "x-logo": {
       "url": "https://content.finbourne.com/LUSID-header.png",
       "backgroundColor": "#415464"
@@ -17,7 +17,7 @@
   },
   "servers": [
     {
-      "url": "http://local-unit-test-server.lusid.com:33259"
+      "url": "http://local-unit-test-server.lusid.com:48692"
     }
   ],
   "paths": {
@@ -21989,7 +21989,7 @@
         "properties": {
           "instrumentUid": {
             "type": "string",
-            "description": "The unqiue Lusid Instrument Id (LUID) of the instrument that the holding is in."
+            "description": "The unique Lusid Instrument Id (LUID) of the instrument that the holding is in."
           },
           "subHoldingKeys": {
             "type": "object",
