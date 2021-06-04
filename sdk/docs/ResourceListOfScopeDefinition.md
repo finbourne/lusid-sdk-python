@@ -1,6 +1,5 @@
 # ResourceListOfScopeDefinition
 
-
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------

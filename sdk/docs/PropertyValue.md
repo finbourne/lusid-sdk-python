@@ -1,7 +1,5 @@
 # PropertyValue
 
-The value of the property.
-
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------

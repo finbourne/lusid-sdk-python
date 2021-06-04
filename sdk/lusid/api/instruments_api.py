@@ -19,7 +19,7 @@ import re  # noqa: F401
 import six
 
 from lusid.api_client import ApiClient
-from lusid.exceptions import (  # noqa: F401
+from lusid.exceptions import (
     ApiTypeError,
     ApiValueError
 )
@@ -43,28 +43,22 @@ class InstrumentsApi(object):
         Delete a single instrument identified by a unique instrument identifier. Once an instrument has been  deleted it will be marked as 'inactive' and it can no longer be used when updating or inserting transactions or holdings.  You can still query existing transactions and holdings related to the deleted instrument.  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
-
         >>> thread = api.delete_instrument(identifier_type, identifier, async_req=True)
         >>> result = thread.get()
 
-        :param identifier_type: The identifier being supplied e.g. \"Figi\". (required)
-        :type identifier_type: str
-        :param identifier: The value of the identifier that resolves to the instrument to delete. (required)
-        :type identifier: str
-        :param async_req: Whether to execute the request asynchronously.
-        :type async_req: bool, optional
+        :param async_req bool: execute request asynchronously
+        :param str identifier_type: The identifier being supplied e.g. \"Figi\". (required)
+        :param str identifier: The value of the identifier that resolves to the instrument to delete. (required)
         :param _preload_content: if False, the urllib3.HTTPResponse object will
                                  be returned without reading/decoding response
                                  data. Default is True.
-        :type _preload_content: bool, optional
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
                                  (connection, read) timeouts.
-        :return: Returns the result object.
+        :return: DeleteInstrumentResponse
                  If the method is called asynchronously,
                  returns the request thread.
-        :rtype: DeleteInstrumentResponse
         """
         kwargs['_return_http_data_only'] = True
         return self.delete_instrument_with_http_info(identifier_type, identifier, **kwargs)  # noqa: E501
@@ -75,52 +69,33 @@ class InstrumentsApi(object):
         Delete a single instrument identified by a unique instrument identifier. Once an instrument has been  deleted it will be marked as 'inactive' and it can no longer be used when updating or inserting transactions or holdings.  You can still query existing transactions and holdings related to the deleted instrument.  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
-
         >>> thread = api.delete_instrument_with_http_info(identifier_type, identifier, async_req=True)
         >>> result = thread.get()
 
-        :param identifier_type: The identifier being supplied e.g. \"Figi\". (required)
-        :type identifier_type: str
-        :param identifier: The value of the identifier that resolves to the instrument to delete. (required)
-        :type identifier: str
-        :param async_req: Whether to execute the request asynchronously.
-        :type async_req: bool, optional
+        :param async_req bool: execute request asynchronously
+        :param str identifier_type: The identifier being supplied e.g. \"Figi\". (required)
+        :param str identifier: The value of the identifier that resolves to the instrument to delete. (required)
         :param _return_http_data_only: response data without head status code
                                        and headers
-        :type _return_http_data_only: bool, optional
         :param _preload_content: if False, the urllib3.HTTPResponse object will
                                  be returned without reading/decoding response
                                  data. Default is True.
-        :type _preload_content: bool, optional
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
                                  (connection, read) timeouts.
-        :param _request_auth: set to override the auth_settings for an a single
-                              request; this effectively ignores the authentication
-                              in the spec for a single request.
-        :type _request_auth: dict, optional
-        :return: Returns the result object.
+        :return: tuple(DeleteInstrumentResponse, status_code(int), headers(HTTPHeaderDict))
                  If the method is called asynchronously,
                  returns the request thread.
-        :rtype: tuple(DeleteInstrumentResponse, status_code(int), headers(HTTPHeaderDict))
         """
 
         local_var_params = locals()
 
-        all_params = [
-            'identifier_type',
-            'identifier'
-        ]
-        all_params.extend(
-            [
-                'async_req',
-                '_return_http_data_only',
-                '_preload_content',
-                '_request_timeout',
-                '_request_auth'
-            ]
-        )
+        all_params = ['identifier_type', 'identifier']  # noqa: E501
+        all_params.append('async_req')
+        all_params.append('_return_http_data_only')
+        all_params.append('_preload_content')
+        all_params.append('_request_timeout')
 
         for key, val in six.iteritems(local_var_params['kwargs']):
             if key not in all_params:
@@ -151,13 +126,13 @@ class InstrumentsApi(object):
         header_params['Accept'] = self.api_client.select_header_accept(
             ['text/plain', 'application/json', 'text/json'])  # noqa: E501
 
+
         # Authentication setting
         auth_settings = ['oauth2']  # noqa: E501
-        
-        response_types_map = {
-            200: "DeleteInstrumentResponse",
-            400: "LusidValidationProblemDetails",
-        }
+
+        # set the LUSID header
+        header_params['X-LUSID-SDK-Language'] = 'Python'
+        header_params['X-LUSID-SDK-Version'] = '0.11.3105'
 
         return self.api_client.call_api(
             '/api/instruments/{identifierType}/{identifier}', 'DELETE',
@@ -167,14 +142,13 @@ class InstrumentsApi(object):
             body=body_params,
             post_params=form_params,
             files=local_var_files,
-            response_types_map=response_types_map,
+            response_type='DeleteInstrumentResponse',  # noqa: E501
             auth_settings=auth_settings,
             async_req=local_var_params.get('async_req'),
             _return_http_data_only=local_var_params.get('_return_http_data_only'),  # noqa: E501
             _preload_content=local_var_params.get('_preload_content', True),
             _request_timeout=local_var_params.get('_request_timeout'),
-            collection_formats=collection_formats,
-            _request_auth=local_var_params.get('_request_auth'))
+            collection_formats=collection_formats)
 
     def get_instrument(self, identifier_type, identifier, **kwargs):  # noqa: E501
         """Get instrument  # noqa: E501
@@ -182,34 +156,25 @@ class InstrumentsApi(object):
         Get the definition of a single instrument identified by a unique instrument identifier.  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
-
         >>> thread = api.get_instrument(identifier_type, identifier, async_req=True)
         >>> result = thread.get()
 
-        :param identifier_type: The identifier being supplied e.g. \"Figi\". (required)
-        :type identifier_type: str
-        :param identifier: The value of the identifier for the requested instrument. (required)
-        :type identifier: str
-        :param effective_at: The effective datetime or cut label at which to retrieve the instrument definition.              Defaults to the current LUSID system datetime if not specified.
-        :type effective_at: str
-        :param as_at: The asAt datetime at which to retrieve the instrument definition. Defaults to              return the latest version of the instrument definition if not specified.
-        :type as_at: datetime
-        :param property_keys: A list of property keys from the \"Instrument\" domain to decorate onto the instrument.              These take the format {domain}/{scope}/{code} e.g. \"Instrument/system/Name\".
-        :type property_keys: list[str]
-        :param async_req: Whether to execute the request asynchronously.
-        :type async_req: bool, optional
+        :param async_req bool: execute request asynchronously
+        :param str identifier_type: The identifier being supplied e.g. \"Figi\". (required)
+        :param str identifier: The value of the identifier for the requested instrument. (required)
+        :param str effective_at: The effective datetime or cut label at which to retrieve the instrument definition.              Defaults to the current LUSID system datetime if not specified.
+        :param datetime as_at: The asAt datetime at which to retrieve the instrument definition. Defaults to              return the latest version of the instrument definition if not specified.
+        :param list[str] property_keys: A list of property keys from the \"Instrument\" domain to decorate onto the instrument.              These take the format {domain}/{scope}/{code} e.g. \"Instrument/system/Name\".
         :param _preload_content: if False, the urllib3.HTTPResponse object will
                                  be returned without reading/decoding response
                                  data. Default is True.
-        :type _preload_content: bool, optional
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
                                  (connection, read) timeouts.
-        :return: Returns the result object.
+        :return: Instrument
                  If the method is called asynchronously,
                  returns the request thread.
-        :rtype: Instrument
         """
         kwargs['_return_http_data_only'] = True
         return self.get_instrument_with_http_info(identifier_type, identifier, **kwargs)  # noqa: E501
@@ -220,61 +185,36 @@ class InstrumentsApi(object):
         Get the definition of a single instrument identified by a unique instrument identifier.  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
-
         >>> thread = api.get_instrument_with_http_info(identifier_type, identifier, async_req=True)
         >>> result = thread.get()
 
-        :param identifier_type: The identifier being supplied e.g. \"Figi\". (required)
-        :type identifier_type: str
-        :param identifier: The value of the identifier for the requested instrument. (required)
-        :type identifier: str
-        :param effective_at: The effective datetime or cut label at which to retrieve the instrument definition.              Defaults to the current LUSID system datetime if not specified.
-        :type effective_at: str
-        :param as_at: The asAt datetime at which to retrieve the instrument definition. Defaults to              return the latest version of the instrument definition if not specified.
-        :type as_at: datetime
-        :param property_keys: A list of property keys from the \"Instrument\" domain to decorate onto the instrument.              These take the format {domain}/{scope}/{code} e.g. \"Instrument/system/Name\".
-        :type property_keys: list[str]
-        :param async_req: Whether to execute the request asynchronously.
-        :type async_req: bool, optional
+        :param async_req bool: execute request asynchronously
+        :param str identifier_type: The identifier being supplied e.g. \"Figi\". (required)
+        :param str identifier: The value of the identifier for the requested instrument. (required)
+        :param str effective_at: The effective datetime or cut label at which to retrieve the instrument definition.              Defaults to the current LUSID system datetime if not specified.
+        :param datetime as_at: The asAt datetime at which to retrieve the instrument definition. Defaults to              return the latest version of the instrument definition if not specified.
+        :param list[str] property_keys: A list of property keys from the \"Instrument\" domain to decorate onto the instrument.              These take the format {domain}/{scope}/{code} e.g. \"Instrument/system/Name\".
         :param _return_http_data_only: response data without head status code
                                        and headers
-        :type _return_http_data_only: bool, optional
         :param _preload_content: if False, the urllib3.HTTPResponse object will
                                  be returned without reading/decoding response
                                  data. Default is True.
-        :type _preload_content: bool, optional
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
                                  (connection, read) timeouts.
-        :param _request_auth: set to override the auth_settings for an a single
-                              request; this effectively ignores the authentication
-                              in the spec for a single request.
-        :type _request_auth: dict, optional
-        :return: Returns the result object.
+        :return: tuple(Instrument, status_code(int), headers(HTTPHeaderDict))
                  If the method is called asynchronously,
                  returns the request thread.
-        :rtype: tuple(Instrument, status_code(int), headers(HTTPHeaderDict))
         """
 
         local_var_params = locals()
 
-        all_params = [
-            'identifier_type',
-            'identifier',
-            'effective_at',
-            'as_at',
-            'property_keys'
-        ]
-        all_params.extend(
-            [
-                'async_req',
-                '_return_http_data_only',
-                '_preload_content',
-                '_request_timeout',
-                '_request_auth'
-            ]
-        )
+        all_params = ['identifier_type', 'identifier', 'effective_at', 'as_at', 'property_keys']  # noqa: E501
+        all_params.append('async_req')
+        all_params.append('_return_http_data_only')
+        all_params.append('_preload_content')
+        all_params.append('_request_timeout')
 
         for key, val in six.iteritems(local_var_params['kwargs']):
             if key not in all_params:
@@ -294,11 +234,11 @@ class InstrumentsApi(object):
             path_params['identifier'] = local_var_params['identifier']  # noqa: E501
 
         query_params = []
-        if 'effective_at' in local_var_params and local_var_params['effective_at'] is not None:  # noqa: E501
+        if 'effective_at' in local_var_params:
             query_params.append(('effectiveAt', local_var_params['effective_at']))  # noqa: E501
-        if 'as_at' in local_var_params and local_var_params['as_at'] is not None:  # noqa: E501
+        if 'as_at' in local_var_params:
             query_params.append(('asAt', local_var_params['as_at']))  # noqa: E501
-        if 'property_keys' in local_var_params and local_var_params['property_keys'] is not None:  # noqa: E501
+        if 'property_keys' in local_var_params:
             query_params.append(('propertyKeys', local_var_params['property_keys']))  # noqa: E501
             collection_formats['propertyKeys'] = 'multi'  # noqa: E501
 
@@ -312,13 +252,13 @@ class InstrumentsApi(object):
         header_params['Accept'] = self.api_client.select_header_accept(
             ['text/plain', 'application/json', 'text/json'])  # noqa: E501
 
+
         # Authentication setting
         auth_settings = ['oauth2']  # noqa: E501
-        
-        response_types_map = {
-            200: "Instrument",
-            400: "LusidValidationProblemDetails",
-        }
+
+        # set the LUSID header
+        header_params['X-LUSID-SDK-Language'] = 'Python'
+        header_params['X-LUSID-SDK-Version'] = '0.11.3105'
 
         return self.api_client.call_api(
             '/api/instruments/{identifierType}/{identifier}', 'GET',
@@ -328,14 +268,13 @@ class InstrumentsApi(object):
             body=body_params,
             post_params=form_params,
             files=local_var_files,
-            response_types_map=response_types_map,
+            response_type='Instrument',  # noqa: E501
             auth_settings=auth_settings,
             async_req=local_var_params.get('async_req'),
             _return_http_data_only=local_var_params.get('_return_http_data_only'),  # noqa: E501
             _preload_content=local_var_params.get('_preload_content', True),
             _request_timeout=local_var_params.get('_request_timeout'),
-            collection_formats=collection_formats,
-            _request_auth=local_var_params.get('_request_auth'))
+            collection_formats=collection_formats)
 
     def get_instrument_identifier_types(self, **kwargs):  # noqa: E501
         """[EARLY ACCESS] Get instrument identifier types  # noqa: E501
@@ -343,24 +282,20 @@ class InstrumentsApi(object):
         Get the allowable instrument identifier types and their descriptions.  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
-
         >>> thread = api.get_instrument_identifier_types(async_req=True)
         >>> result = thread.get()
 
-        :param async_req: Whether to execute the request asynchronously.
-        :type async_req: bool, optional
+        :param async_req bool: execute request asynchronously
         :param _preload_content: if False, the urllib3.HTTPResponse object will
                                  be returned without reading/decoding response
                                  data. Default is True.
-        :type _preload_content: bool, optional
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
                                  (connection, read) timeouts.
-        :return: Returns the result object.
+        :return: ResourceListOfInstrumentIdTypeDescriptor
                  If the method is called asynchronously,
                  returns the request thread.
-        :rtype: ResourceListOfInstrumentIdTypeDescriptor
         """
         kwargs['_return_http_data_only'] = True
         return self.get_instrument_identifier_types_with_http_info(**kwargs)  # noqa: E501
@@ -371,46 +306,31 @@ class InstrumentsApi(object):
         Get the allowable instrument identifier types and their descriptions.  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
-
         >>> thread = api.get_instrument_identifier_types_with_http_info(async_req=True)
         >>> result = thread.get()
 
-        :param async_req: Whether to execute the request asynchronously.
-        :type async_req: bool, optional
+        :param async_req bool: execute request asynchronously
         :param _return_http_data_only: response data without head status code
                                        and headers
-        :type _return_http_data_only: bool, optional
         :param _preload_content: if False, the urllib3.HTTPResponse object will
                                  be returned without reading/decoding response
                                  data. Default is True.
-        :type _preload_content: bool, optional
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
                                  (connection, read) timeouts.
-        :param _request_auth: set to override the auth_settings for an a single
-                              request; this effectively ignores the authentication
-                              in the spec for a single request.
-        :type _request_auth: dict, optional
-        :return: Returns the result object.
+        :return: tuple(ResourceListOfInstrumentIdTypeDescriptor, status_code(int), headers(HTTPHeaderDict))
                  If the method is called asynchronously,
                  returns the request thread.
-        :rtype: tuple(ResourceListOfInstrumentIdTypeDescriptor, status_code(int), headers(HTTPHeaderDict))
         """
 
         local_var_params = locals()
 
-        all_params = [
-        ]
-        all_params.extend(
-            [
-                'async_req',
-                '_return_http_data_only',
-                '_preload_content',
-                '_request_timeout',
-                '_request_auth'
-            ]
-        )
+        all_params = []  # noqa: E501
+        all_params.append('async_req')
+        all_params.append('_return_http_data_only')
+        all_params.append('_preload_content')
+        all_params.append('_request_timeout')
 
         for key, val in six.iteritems(local_var_params['kwargs']):
             if key not in all_params:
@@ -437,12 +357,13 @@ class InstrumentsApi(object):
         header_params['Accept'] = self.api_client.select_header_accept(
             ['text/plain', 'application/json', 'text/json'])  # noqa: E501
 
+
         # Authentication setting
         auth_settings = ['oauth2']  # noqa: E501
-        
-        response_types_map = {
-            200: "ResourceListOfInstrumentIdTypeDescriptor",
-        }
+
+        # set the LUSID header
+        header_params['X-LUSID-SDK-Language'] = 'Python'
+        header_params['X-LUSID-SDK-Version'] = '0.11.3105'
 
         return self.api_client.call_api(
             '/api/instruments/identifierTypes', 'GET',
@@ -452,14 +373,13 @@ class InstrumentsApi(object):
             body=body_params,
             post_params=form_params,
             files=local_var_files,
-            response_types_map=response_types_map,
+            response_type='ResourceListOfInstrumentIdTypeDescriptor',  # noqa: E501
             auth_settings=auth_settings,
             async_req=local_var_params.get('async_req'),
             _return_http_data_only=local_var_params.get('_return_http_data_only'),  # noqa: E501
             _preload_content=local_var_params.get('_preload_content', True),
             _request_timeout=local_var_params.get('_request_timeout'),
-            collection_formats=collection_formats,
-            _request_auth=local_var_params.get('_request_auth'))
+            collection_formats=collection_formats)
 
     def get_instrument_property_time_series(self, identifier_type, identifier, **kwargs):  # noqa: E501
         """[EARLY ACCESS] Get the time series of an instrument property  # noqa: E501
@@ -467,40 +387,28 @@ class InstrumentsApi(object):
         List the complete time series of an instrument property.  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
-
         >>> thread = api.get_instrument_property_time_series(identifier_type, identifier, async_req=True)
         >>> result = thread.get()
 
-        :param identifier_type: The identifier type of the instrument, e.g., \"Figi\" (required)
-        :type identifier_type: str
-        :param identifier: The value of the identifier for the requested instrument. (required)
-        :type identifier: str
-        :param property_key: The property key of the property that will have its history shown. These must be in the format {domain}/{scope}/{code} e.g. \"Instrument/system/Name\".              Each property must be from the \"Instrument\" domain.
-        :type property_key: str
-        :param identifier_effective_at: The effective datetime used to resolve the instrument from the provided identifier. Defaults to the current LUSID system datetime if not specified.
-        :type identifier_effective_at: str
-        :param as_at: The asAt datetime at which to list the instrument's property history. Defaults to return the current datetime if not supplied.
-        :type as_at: datetime
-        :param filter: Expression to filter the result set. Read more about filtering results from LUSID here https://support.lusid.com/filtering-results-from-lusid.
-        :type filter: str
-        :param page: The pagination token to use to continue listing properties from a previous call to get property time series.              This value is returned from the previous call. If a pagination token is provided the filter, effectiveAt, and asAt fields              must not have changed since the original request.
-        :type page: str
-        :param limit: When paginating, limit the number of returned results to this many.
-        :type limit: int
-        :param async_req: Whether to execute the request asynchronously.
-        :type async_req: bool, optional
+        :param async_req bool: execute request asynchronously
+        :param str identifier_type: The identifier type of the instrument, e.g., \"Figi\" (required)
+        :param str identifier: The value of the identifier for the requested instrument. (required)
+        :param str property_key: The property key of the property that will have its history shown. These must be in the format {domain}/{scope}/{code} e.g. \"Instrument/system/Name\".              Each property must be from the \"Instrument\" domain.
+        :param str identifier_effective_at: The effective datetime used to resolve the instrument from the provided identifier. Defaults to the current LUSID system datetime if not specified.
+        :param datetime as_at: The asAt datetime at which to list the instrument's property history. Defaults to return the current datetime if not supplied.
+        :param str filter: Expression to filter the result set. Read more about filtering results from LUSID here https://support.lusid.com/filtering-results-from-lusid.
+        :param str page: The pagination token to use to continue listing properties from a previous call to get property time series.              This value is returned from the previous call. If a pagination token is provided the filter, effectiveAt, and asAt fields              must not have changed since the original request.
+        :param int limit: When paginating, limit the number of returned results to this many.
         :param _preload_content: if False, the urllib3.HTTPResponse object will
                                  be returned without reading/decoding response
                                  data. Default is True.
-        :type _preload_content: bool, optional
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
                                  (connection, read) timeouts.
-        :return: Returns the result object.
+        :return: ResourceListOfPropertyInterval
                  If the method is called asynchronously,
                  returns the request thread.
-        :rtype: ResourceListOfPropertyInterval
         """
         kwargs['_return_http_data_only'] = True
         return self.get_instrument_property_time_series_with_http_info(identifier_type, identifier, **kwargs)  # noqa: E501
@@ -511,70 +419,39 @@ class InstrumentsApi(object):
         List the complete time series of an instrument property.  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
-
         >>> thread = api.get_instrument_property_time_series_with_http_info(identifier_type, identifier, async_req=True)
         >>> result = thread.get()
 
-        :param identifier_type: The identifier type of the instrument, e.g., \"Figi\" (required)
-        :type identifier_type: str
-        :param identifier: The value of the identifier for the requested instrument. (required)
-        :type identifier: str
-        :param property_key: The property key of the property that will have its history shown. These must be in the format {domain}/{scope}/{code} e.g. \"Instrument/system/Name\".              Each property must be from the \"Instrument\" domain.
-        :type property_key: str
-        :param identifier_effective_at: The effective datetime used to resolve the instrument from the provided identifier. Defaults to the current LUSID system datetime if not specified.
-        :type identifier_effective_at: str
-        :param as_at: The asAt datetime at which to list the instrument's property history. Defaults to return the current datetime if not supplied.
-        :type as_at: datetime
-        :param filter: Expression to filter the result set. Read more about filtering results from LUSID here https://support.lusid.com/filtering-results-from-lusid.
-        :type filter: str
-        :param page: The pagination token to use to continue listing properties from a previous call to get property time series.              This value is returned from the previous call. If a pagination token is provided the filter, effectiveAt, and asAt fields              must not have changed since the original request.
-        :type page: str
-        :param limit: When paginating, limit the number of returned results to this many.
-        :type limit: int
-        :param async_req: Whether to execute the request asynchronously.
-        :type async_req: bool, optional
+        :param async_req bool: execute request asynchronously
+        :param str identifier_type: The identifier type of the instrument, e.g., \"Figi\" (required)
+        :param str identifier: The value of the identifier for the requested instrument. (required)
+        :param str property_key: The property key of the property that will have its history shown. These must be in the format {domain}/{scope}/{code} e.g. \"Instrument/system/Name\".              Each property must be from the \"Instrument\" domain.
+        :param str identifier_effective_at: The effective datetime used to resolve the instrument from the provided identifier. Defaults to the current LUSID system datetime if not specified.
+        :param datetime as_at: The asAt datetime at which to list the instrument's property history. Defaults to return the current datetime if not supplied.
+        :param str filter: Expression to filter the result set. Read more about filtering results from LUSID here https://support.lusid.com/filtering-results-from-lusid.
+        :param str page: The pagination token to use to continue listing properties from a previous call to get property time series.              This value is returned from the previous call. If a pagination token is provided the filter, effectiveAt, and asAt fields              must not have changed since the original request.
+        :param int limit: When paginating, limit the number of returned results to this many.
         :param _return_http_data_only: response data without head status code
                                        and headers
-        :type _return_http_data_only: bool, optional
         :param _preload_content: if False, the urllib3.HTTPResponse object will
                                  be returned without reading/decoding response
                                  data. Default is True.
-        :type _preload_content: bool, optional
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
                                  (connection, read) timeouts.
-        :param _request_auth: set to override the auth_settings for an a single
-                              request; this effectively ignores the authentication
-                              in the spec for a single request.
-        :type _request_auth: dict, optional
-        :return: Returns the result object.
+        :return: tuple(ResourceListOfPropertyInterval, status_code(int), headers(HTTPHeaderDict))
                  If the method is called asynchronously,
                  returns the request thread.
-        :rtype: tuple(ResourceListOfPropertyInterval, status_code(int), headers(HTTPHeaderDict))
         """
 
         local_var_params = locals()
 
-        all_params = [
-            'identifier_type',
-            'identifier',
-            'property_key',
-            'identifier_effective_at',
-            'as_at',
-            'filter',
-            'page',
-            'limit'
-        ]
-        all_params.extend(
-            [
-                'async_req',
-                '_return_http_data_only',
-                '_preload_content',
-                '_request_timeout',
-                '_request_auth'
-            ]
-        )
+        all_params = ['identifier_type', 'identifier', 'property_key', 'identifier_effective_at', 'as_at', 'filter', 'page', 'limit']  # noqa: E501
+        all_params.append('async_req')
+        all_params.append('_return_http_data_only')
+        all_params.append('_preload_content')
+        all_params.append('_request_timeout')
 
         for key, val in six.iteritems(local_var_params['kwargs']):
             if key not in all_params:
@@ -585,9 +462,9 @@ class InstrumentsApi(object):
             local_var_params[key] = val
         del local_var_params['kwargs']
 
-        if self.api_client.client_side_validation and 'limit' in local_var_params and local_var_params['limit'] > 5000:  # noqa: E501
+        if 'limit' in local_var_params and local_var_params['limit'] > 5000:  # noqa: E501
             raise ApiValueError("Invalid value for parameter `limit` when calling `get_instrument_property_time_series`, must be a value less than or equal to `5000`")  # noqa: E501
-        if self.api_client.client_side_validation and 'limit' in local_var_params and local_var_params['limit'] < 1:  # noqa: E501
+        if 'limit' in local_var_params and local_var_params['limit'] < 1:  # noqa: E501
             raise ApiValueError("Invalid value for parameter `limit` when calling `get_instrument_property_time_series`, must be a value greater than or equal to `1`")  # noqa: E501
         collection_formats = {}
 
@@ -598,17 +475,17 @@ class InstrumentsApi(object):
             path_params['identifier'] = local_var_params['identifier']  # noqa: E501
 
         query_params = []
-        if 'property_key' in local_var_params and local_var_params['property_key'] is not None:  # noqa: E501
+        if 'property_key' in local_var_params:
             query_params.append(('propertyKey', local_var_params['property_key']))  # noqa: E501
-        if 'identifier_effective_at' in local_var_params and local_var_params['identifier_effective_at'] is not None:  # noqa: E501
+        if 'identifier_effective_at' in local_var_params:
             query_params.append(('identifierEffectiveAt', local_var_params['identifier_effective_at']))  # noqa: E501
-        if 'as_at' in local_var_params and local_var_params['as_at'] is not None:  # noqa: E501
+        if 'as_at' in local_var_params:
             query_params.append(('asAt', local_var_params['as_at']))  # noqa: E501
-        if 'filter' in local_var_params and local_var_params['filter'] is not None:  # noqa: E501
+        if 'filter' in local_var_params:
             query_params.append(('filter', local_var_params['filter']))  # noqa: E501
-        if 'page' in local_var_params and local_var_params['page'] is not None:  # noqa: E501
+        if 'page' in local_var_params:
             query_params.append(('page', local_var_params['page']))  # noqa: E501
-        if 'limit' in local_var_params and local_var_params['limit'] is not None:  # noqa: E501
+        if 'limit' in local_var_params:
             query_params.append(('limit', local_var_params['limit']))  # noqa: E501
 
         header_params = {}
@@ -621,13 +498,13 @@ class InstrumentsApi(object):
         header_params['Accept'] = self.api_client.select_header_accept(
             ['text/plain', 'application/json', 'text/json'])  # noqa: E501
 
+
         # Authentication setting
         auth_settings = ['oauth2']  # noqa: E501
-        
-        response_types_map = {
-            200: "ResourceListOfPropertyInterval",
-            400: "LusidValidationProblemDetails",
-        }
+
+        # set the LUSID header
+        header_params['X-LUSID-SDK-Language'] = 'Python'
+        header_params['X-LUSID-SDK-Version'] = '0.11.3105'
 
         return self.api_client.call_api(
             '/api/instruments/{identifierType}/{identifier}/properties/time-series', 'GET',
@@ -637,14 +514,13 @@ class InstrumentsApi(object):
             body=body_params,
             post_params=form_params,
             files=local_var_files,
-            response_types_map=response_types_map,
+            response_type='ResourceListOfPropertyInterval',  # noqa: E501
             auth_settings=auth_settings,
             async_req=local_var_params.get('async_req'),
             _return_http_data_only=local_var_params.get('_return_http_data_only'),  # noqa: E501
             _preload_content=local_var_params.get('_preload_content', True),
             _request_timeout=local_var_params.get('_request_timeout'),
-            collection_formats=collection_formats,
-            _request_auth=local_var_params.get('_request_auth'))
+            collection_formats=collection_formats)
 
     def get_instruments(self, identifier_type, request_body, **kwargs):  # noqa: E501
         """Get instruments  # noqa: E501
@@ -652,34 +528,25 @@ class InstrumentsApi(object):
         Get the definition of one or more instruments identified by a collection of unique instrument identifiers.  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
-
         >>> thread = api.get_instruments(identifier_type, request_body, async_req=True)
         >>> result = thread.get()
 
-        :param identifier_type: The identifier being supplied e.g. \"Figi\". (required)
-        :type identifier_type: str
-        :param request_body: The values of the identifier for the requested instruments. (required)
-        :type request_body: list[str]
-        :param effective_at: The effective datetime or cut label at which to retrieve the instrument definitions.              Defaults to the current LUSID system datetime if not specified.
-        :type effective_at: str
-        :param as_at: The asAt datetime at which to retrieve the instrument definitions.              Defaults to return the latest version of each instrument definition if not specified.
-        :type as_at: datetime
-        :param property_keys: A list of property keys from the \"Instrument\" domain to decorate onto the instrument.              These take the format {domain}/{scope}/{code} e.g. \"Instrument/system/Name\".
-        :type property_keys: list[str]
-        :param async_req: Whether to execute the request asynchronously.
-        :type async_req: bool, optional
+        :param async_req bool: execute request asynchronously
+        :param str identifier_type: The identifier being supplied e.g. \"Figi\". (required)
+        :param list[str] request_body: The values of the identifier for the requested instruments. (required)
+        :param str effective_at: The effective datetime or cut label at which to retrieve the instrument definitions.              Defaults to the current LUSID system datetime if not specified.
+        :param datetime as_at: The asAt datetime at which to retrieve the instrument definitions.              Defaults to return the latest version of each instrument definition if not specified.
+        :param list[str] property_keys: A list of property keys from the \"Instrument\" domain to decorate onto the instrument.              These take the format {domain}/{scope}/{code} e.g. \"Instrument/system/Name\".
         :param _preload_content: if False, the urllib3.HTTPResponse object will
                                  be returned without reading/decoding response
                                  data. Default is True.
-        :type _preload_content: bool, optional
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
                                  (connection, read) timeouts.
-        :return: Returns the result object.
+        :return: GetInstrumentsResponse
                  If the method is called asynchronously,
                  returns the request thread.
-        :rtype: GetInstrumentsResponse
         """
         kwargs['_return_http_data_only'] = True
         return self.get_instruments_with_http_info(identifier_type, request_body, **kwargs)  # noqa: E501
@@ -690,61 +557,36 @@ class InstrumentsApi(object):
         Get the definition of one or more instruments identified by a collection of unique instrument identifiers.  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
-
         >>> thread = api.get_instruments_with_http_info(identifier_type, request_body, async_req=True)
         >>> result = thread.get()
 
-        :param identifier_type: The identifier being supplied e.g. \"Figi\". (required)
-        :type identifier_type: str
-        :param request_body: The values of the identifier for the requested instruments. (required)
-        :type request_body: list[str]
-        :param effective_at: The effective datetime or cut label at which to retrieve the instrument definitions.              Defaults to the current LUSID system datetime if not specified.
-        :type effective_at: str
-        :param as_at: The asAt datetime at which to retrieve the instrument definitions.              Defaults to return the latest version of each instrument definition if not specified.
-        :type as_at: datetime
-        :param property_keys: A list of property keys from the \"Instrument\" domain to decorate onto the instrument.              These take the format {domain}/{scope}/{code} e.g. \"Instrument/system/Name\".
-        :type property_keys: list[str]
-        :param async_req: Whether to execute the request asynchronously.
-        :type async_req: bool, optional
+        :param async_req bool: execute request asynchronously
+        :param str identifier_type: The identifier being supplied e.g. \"Figi\". (required)
+        :param list[str] request_body: The values of the identifier for the requested instruments. (required)
+        :param str effective_at: The effective datetime or cut label at which to retrieve the instrument definitions.              Defaults to the current LUSID system datetime if not specified.
+        :param datetime as_at: The asAt datetime at which to retrieve the instrument definitions.              Defaults to return the latest version of each instrument definition if not specified.
+        :param list[str] property_keys: A list of property keys from the \"Instrument\" domain to decorate onto the instrument.              These take the format {domain}/{scope}/{code} e.g. \"Instrument/system/Name\".
         :param _return_http_data_only: response data without head status code
                                        and headers
-        :type _return_http_data_only: bool, optional
         :param _preload_content: if False, the urllib3.HTTPResponse object will
                                  be returned without reading/decoding response
                                  data. Default is True.
-        :type _preload_content: bool, optional
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
                                  (connection, read) timeouts.
-        :param _request_auth: set to override the auth_settings for an a single
-                              request; this effectively ignores the authentication
-                              in the spec for a single request.
-        :type _request_auth: dict, optional
-        :return: Returns the result object.
+        :return: tuple(GetInstrumentsResponse, status_code(int), headers(HTTPHeaderDict))
                  If the method is called asynchronously,
                  returns the request thread.
-        :rtype: tuple(GetInstrumentsResponse, status_code(int), headers(HTTPHeaderDict))
         """
 
         local_var_params = locals()
 
-        all_params = [
-            'identifier_type',
-            'request_body',
-            'effective_at',
-            'as_at',
-            'property_keys'
-        ]
-        all_params.extend(
-            [
-                'async_req',
-                '_return_http_data_only',
-                '_preload_content',
-                '_request_timeout',
-                '_request_auth'
-            ]
-        )
+        all_params = ['identifier_type', 'request_body', 'effective_at', 'as_at', 'property_keys']  # noqa: E501
+        all_params.append('async_req')
+        all_params.append('_return_http_data_only')
+        all_params.append('_preload_content')
+        all_params.append('_request_timeout')
 
         for key, val in six.iteritems(local_var_params['kwargs']):
             if key not in all_params:
@@ -755,12 +597,12 @@ class InstrumentsApi(object):
             local_var_params[key] = val
         del local_var_params['kwargs']
         # verify the required parameter 'identifier_type' is set
-        if self.api_client.client_side_validation and ('identifier_type' not in local_var_params or  # noqa: E501
-                                                        local_var_params['identifier_type'] is None):  # noqa: E501
+        if ('identifier_type' not in local_var_params or
+                local_var_params['identifier_type'] is None):
             raise ApiValueError("Missing the required parameter `identifier_type` when calling `get_instruments`")  # noqa: E501
         # verify the required parameter 'request_body' is set
-        if self.api_client.client_side_validation and ('request_body' not in local_var_params or  # noqa: E501
-                                                        local_var_params['request_body'] is None):  # noqa: E501
+        if ('request_body' not in local_var_params or
+                local_var_params['request_body'] is None):
             raise ApiValueError("Missing the required parameter `request_body` when calling `get_instruments`")  # noqa: E501
 
         collection_formats = {}
@@ -768,13 +610,13 @@ class InstrumentsApi(object):
         path_params = {}
 
         query_params = []
-        if 'identifier_type' in local_var_params and local_var_params['identifier_type'] is not None:  # noqa: E501
+        if 'identifier_type' in local_var_params:
             query_params.append(('identifierType', local_var_params['identifier_type']))  # noqa: E501
-        if 'effective_at' in local_var_params and local_var_params['effective_at'] is not None:  # noqa: E501
+        if 'effective_at' in local_var_params:
             query_params.append(('effectiveAt', local_var_params['effective_at']))  # noqa: E501
-        if 'as_at' in local_var_params and local_var_params['as_at'] is not None:  # noqa: E501
+        if 'as_at' in local_var_params:
             query_params.append(('asAt', local_var_params['as_at']))  # noqa: E501
-        if 'property_keys' in local_var_params and local_var_params['property_keys'] is not None:  # noqa: E501
+        if 'property_keys' in local_var_params:
             query_params.append(('propertyKeys', local_var_params['property_keys']))  # noqa: E501
             collection_formats['propertyKeys'] = 'multi'  # noqa: E501
 
@@ -794,17 +636,12 @@ class InstrumentsApi(object):
         header_params['Content-Type'] = self.api_client.select_header_content_type(  # noqa: E501
             ['application/json-patch+json', 'application/json', 'text/json', 'application/*+json'])  # noqa: E501
 
+        # Authentication setting
+        auth_settings = ['oauth2']  # noqa: E501
+
         # set the LUSID header
         header_params['X-LUSID-SDK-Language'] = 'Python'
         header_params['X-LUSID-SDK-Version'] = '0.11.3105'
-
-        # Authentication setting
-        auth_settings = ['oauth2']  # noqa: E501
-        
-        response_types_map = {
-            200: "GetInstrumentsResponse",
-            400: "LusidValidationProblemDetails",
-        }
 
         return self.api_client.call_api(
             '/api/instruments/$get', 'POST',
@@ -814,14 +651,13 @@ class InstrumentsApi(object):
             body=body_params,
             post_params=form_params,
             files=local_var_files,
-            response_types_map=response_types_map,
+            response_type='GetInstrumentsResponse',  # noqa: E501
             auth_settings=auth_settings,
             async_req=local_var_params.get('async_req'),
             _return_http_data_only=local_var_params.get('_return_http_data_only'),  # noqa: E501
             _preload_content=local_var_params.get('_preload_content', True),
             _request_timeout=local_var_params.get('_request_timeout'),
-            collection_formats=collection_formats,
-            _request_auth=local_var_params.get('_request_auth'))
+            collection_formats=collection_formats)
 
     def list_instruments(self, **kwargs):  # noqa: E501
         """[EARLY ACCESS] List instruments  # noqa: E501
@@ -829,40 +665,28 @@ class InstrumentsApi(object):
         List all the instruments that have been mastered in the LUSID instrument master.  The maximum number of instruments that this method can list per request is 2,000.  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
-
         >>> thread = api.list_instruments(async_req=True)
         >>> result = thread.get()
 
-        :param as_at: The asAt datetime at which to list the instruments. Defaults to return the latest              version of each instruments if not specified.
-        :type as_at: datetime
-        :param effective_at: The effective datetime or cut label at which to list the instruments.              Defaults to the current LUSID system datetime if not specified.
-        :type effective_at: str
-        :param page: The pagination token to use to continue listing instruments from a previous call to list instruments.              This value is returned from the previous call. If a pagination token is provided the sortBy, filter, effectiveAt, and asAt fields              must not have changed since the original request. Also, if set, a start value cannot be provided.
-        :type page: str
-        :param sort_by: Order the results by these fields. Use use the '-' sign to denote descending order e.g. -MyFieldName.
-        :type sort_by: list[str]
-        :param start: When paginating, skip this number of results.
-        :type start: int
-        :param limit: When paginating, limit the number of returned results to this many.
-        :type limit: int
-        :param filter: Expression to filter the result set. Defaults to filter down to active instruments only, i.e. those              that have not been deleted. Read more about filtering results from LUSID here https://support.lusid.com/filtering-results-from-lusid.
-        :type filter: str
-        :param instrument_property_keys: A list of property keys from the \"Instrument\" domain to decorate onto each instrument. These take the format {domain}/{scope}/{code} e.g. \"Instrument/system/Name\".
-        :type instrument_property_keys: list[str]
-        :param async_req: Whether to execute the request asynchronously.
-        :type async_req: bool, optional
+        :param async_req bool: execute request asynchronously
+        :param datetime as_at: The asAt datetime at which to list the instruments. Defaults to return the latest              version of each instruments if not specified.
+        :param str effective_at: The effective datetime or cut label at which to list the instruments.              Defaults to the current LUSID system datetime if not specified.
+        :param str page: The pagination token to use to continue listing instruments from a previous call to list instruments.              This value is returned from the previous call. If a pagination token is provided the sortBy, filter, effectiveAt, and asAt fields              must not have changed since the original request. Also, if set, a start value cannot be provided.
+        :param list[str] sort_by: Order the results by these fields. Use use the '-' sign to denote descending order e.g. -MyFieldName.
+        :param int start: When paginating, skip this number of results.
+        :param int limit: When paginating, limit the number of returned results to this many.
+        :param str filter: Expression to filter the result set. Defaults to filter down to active instruments only, i.e. those              that have not been deleted. Read more about filtering results from LUSID here https://support.lusid.com/filtering-results-from-lusid.
+        :param list[str] instrument_property_keys: A list of property keys from the \"Instrument\" domain to decorate onto each instrument. These take the format {domain}/{scope}/{code} e.g. \"Instrument/system/Name\".
         :param _preload_content: if False, the urllib3.HTTPResponse object will
                                  be returned without reading/decoding response
                                  data. Default is True.
-        :type _preload_content: bool, optional
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
                                  (connection, read) timeouts.
-        :return: Returns the result object.
+        :return: PagedResourceListOfInstrument
                  If the method is called asynchronously,
                  returns the request thread.
-        :rtype: PagedResourceListOfInstrument
         """
         kwargs['_return_http_data_only'] = True
         return self.list_instruments_with_http_info(**kwargs)  # noqa: E501
@@ -873,70 +697,39 @@ class InstrumentsApi(object):
         List all the instruments that have been mastered in the LUSID instrument master.  The maximum number of instruments that this method can list per request is 2,000.  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
-
         >>> thread = api.list_instruments_with_http_info(async_req=True)
         >>> result = thread.get()
 
-        :param as_at: The asAt datetime at which to list the instruments. Defaults to return the latest              version of each instruments if not specified.
-        :type as_at: datetime
-        :param effective_at: The effective datetime or cut label at which to list the instruments.              Defaults to the current LUSID system datetime if not specified.
-        :type effective_at: str
-        :param page: The pagination token to use to continue listing instruments from a previous call to list instruments.              This value is returned from the previous call. If a pagination token is provided the sortBy, filter, effectiveAt, and asAt fields              must not have changed since the original request. Also, if set, a start value cannot be provided.
-        :type page: str
-        :param sort_by: Order the results by these fields. Use use the '-' sign to denote descending order e.g. -MyFieldName.
-        :type sort_by: list[str]
-        :param start: When paginating, skip this number of results.
-        :type start: int
-        :param limit: When paginating, limit the number of returned results to this many.
-        :type limit: int
-        :param filter: Expression to filter the result set. Defaults to filter down to active instruments only, i.e. those              that have not been deleted. Read more about filtering results from LUSID here https://support.lusid.com/filtering-results-from-lusid.
-        :type filter: str
-        :param instrument_property_keys: A list of property keys from the \"Instrument\" domain to decorate onto each instrument. These take the format {domain}/{scope}/{code} e.g. \"Instrument/system/Name\".
-        :type instrument_property_keys: list[str]
-        :param async_req: Whether to execute the request asynchronously.
-        :type async_req: bool, optional
+        :param async_req bool: execute request asynchronously
+        :param datetime as_at: The asAt datetime at which to list the instruments. Defaults to return the latest              version of each instruments if not specified.
+        :param str effective_at: The effective datetime or cut label at which to list the instruments.              Defaults to the current LUSID system datetime if not specified.
+        :param str page: The pagination token to use to continue listing instruments from a previous call to list instruments.              This value is returned from the previous call. If a pagination token is provided the sortBy, filter, effectiveAt, and asAt fields              must not have changed since the original request. Also, if set, a start value cannot be provided.
+        :param list[str] sort_by: Order the results by these fields. Use use the '-' sign to denote descending order e.g. -MyFieldName.
+        :param int start: When paginating, skip this number of results.
+        :param int limit: When paginating, limit the number of returned results to this many.
+        :param str filter: Expression to filter the result set. Defaults to filter down to active instruments only, i.e. those              that have not been deleted. Read more about filtering results from LUSID here https://support.lusid.com/filtering-results-from-lusid.
+        :param list[str] instrument_property_keys: A list of property keys from the \"Instrument\" domain to decorate onto each instrument. These take the format {domain}/{scope}/{code} e.g. \"Instrument/system/Name\".
         :param _return_http_data_only: response data without head status code
                                        and headers
-        :type _return_http_data_only: bool, optional
         :param _preload_content: if False, the urllib3.HTTPResponse object will
                                  be returned without reading/decoding response
                                  data. Default is True.
-        :type _preload_content: bool, optional
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
                                  (connection, read) timeouts.
-        :param _request_auth: set to override the auth_settings for an a single
-                              request; this effectively ignores the authentication
-                              in the spec for a single request.
-        :type _request_auth: dict, optional
-        :return: Returns the result object.
+        :return: tuple(PagedResourceListOfInstrument, status_code(int), headers(HTTPHeaderDict))
                  If the method is called asynchronously,
                  returns the request thread.
-        :rtype: tuple(PagedResourceListOfInstrument, status_code(int), headers(HTTPHeaderDict))
         """
 
         local_var_params = locals()
 
-        all_params = [
-            'as_at',
-            'effective_at',
-            'page',
-            'sort_by',
-            'start',
-            'limit',
-            'filter',
-            'instrument_property_keys'
-        ]
-        all_params.extend(
-            [
-                'async_req',
-                '_return_http_data_only',
-                '_preload_content',
-                '_request_timeout',
-                '_request_auth'
-            ]
-        )
+        all_params = ['as_at', 'effective_at', 'page', 'sort_by', 'start', 'limit', 'filter', 'instrument_property_keys']  # noqa: E501
+        all_params.append('async_req')
+        all_params.append('_return_http_data_only')
+        all_params.append('_preload_content')
+        all_params.append('_request_timeout')
 
         for key, val in six.iteritems(local_var_params['kwargs']):
             if key not in all_params:
@@ -947,31 +740,31 @@ class InstrumentsApi(object):
             local_var_params[key] = val
         del local_var_params['kwargs']
 
-        if self.api_client.client_side_validation and 'limit' in local_var_params and local_var_params['limit'] > 5000:  # noqa: E501
+        if 'limit' in local_var_params and local_var_params['limit'] > 5000:  # noqa: E501
             raise ApiValueError("Invalid value for parameter `limit` when calling `list_instruments`, must be a value less than or equal to `5000`")  # noqa: E501
-        if self.api_client.client_side_validation and 'limit' in local_var_params and local_var_params['limit'] < 1:  # noqa: E501
+        if 'limit' in local_var_params and local_var_params['limit'] < 1:  # noqa: E501
             raise ApiValueError("Invalid value for parameter `limit` when calling `list_instruments`, must be a value greater than or equal to `1`")  # noqa: E501
         collection_formats = {}
 
         path_params = {}
 
         query_params = []
-        if 'as_at' in local_var_params and local_var_params['as_at'] is not None:  # noqa: E501
+        if 'as_at' in local_var_params:
             query_params.append(('asAt', local_var_params['as_at']))  # noqa: E501
-        if 'effective_at' in local_var_params and local_var_params['effective_at'] is not None:  # noqa: E501
+        if 'effective_at' in local_var_params:
             query_params.append(('effectiveAt', local_var_params['effective_at']))  # noqa: E501
-        if 'page' in local_var_params and local_var_params['page'] is not None:  # noqa: E501
+        if 'page' in local_var_params:
             query_params.append(('page', local_var_params['page']))  # noqa: E501
-        if 'sort_by' in local_var_params and local_var_params['sort_by'] is not None:  # noqa: E501
+        if 'sort_by' in local_var_params:
             query_params.append(('sortBy', local_var_params['sort_by']))  # noqa: E501
             collection_formats['sortBy'] = 'multi'  # noqa: E501
-        if 'start' in local_var_params and local_var_params['start'] is not None:  # noqa: E501
+        if 'start' in local_var_params:
             query_params.append(('start', local_var_params['start']))  # noqa: E501
-        if 'limit' in local_var_params and local_var_params['limit'] is not None:  # noqa: E501
+        if 'limit' in local_var_params:
             query_params.append(('limit', local_var_params['limit']))  # noqa: E501
-        if 'filter' in local_var_params and local_var_params['filter'] is not None:  # noqa: E501
+        if 'filter' in local_var_params:
             query_params.append(('filter', local_var_params['filter']))  # noqa: E501
-        if 'instrument_property_keys' in local_var_params and local_var_params['instrument_property_keys'] is not None:  # noqa: E501
+        if 'instrument_property_keys' in local_var_params:
             query_params.append(('instrumentPropertyKeys', local_var_params['instrument_property_keys']))  # noqa: E501
             collection_formats['instrumentPropertyKeys'] = 'multi'  # noqa: E501
 
@@ -985,13 +778,13 @@ class InstrumentsApi(object):
         header_params['Accept'] = self.api_client.select_header_accept(
             ['text/plain', 'application/json', 'text/json'])  # noqa: E501
 
+
         # Authentication setting
         auth_settings = ['oauth2']  # noqa: E501
-        
-        response_types_map = {
-            200: "PagedResourceListOfInstrument",
-            400: "LusidValidationProblemDetails",
-        }
+
+        # set the LUSID header
+        header_params['X-LUSID-SDK-Language'] = 'Python'
+        header_params['X-LUSID-SDK-Version'] = '0.11.3105'
 
         return self.api_client.call_api(
             '/api/instruments', 'GET',
@@ -1001,14 +794,13 @@ class InstrumentsApi(object):
             body=body_params,
             post_params=form_params,
             files=local_var_files,
-            response_types_map=response_types_map,
+            response_type='PagedResourceListOfInstrument',  # noqa: E501
             auth_settings=auth_settings,
             async_req=local_var_params.get('async_req'),
             _return_http_data_only=local_var_params.get('_return_http_data_only'),  # noqa: E501
             _preload_content=local_var_params.get('_preload_content', True),
             _request_timeout=local_var_params.get('_request_timeout'),
-            collection_formats=collection_formats,
-            _request_auth=local_var_params.get('_request_auth'))
+            collection_formats=collection_formats)
 
     def update_instrument_identifier(self, identifier_type, identifier, update_instrument_identifier_request, **kwargs):  # noqa: E501
         """[EARLY ACCESS] Update instrument identifier  # noqa: E501
@@ -1016,30 +808,23 @@ class InstrumentsApi(object):
         Update, insert or delete a single instrument identifier for a single instrument. If it is not being deleted  the identifier will be updated if it already exists and inserted if it does not.  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
-
         >>> thread = api.update_instrument_identifier(identifier_type, identifier, update_instrument_identifier_request, async_req=True)
         >>> result = thread.get()
 
-        :param identifier_type: The identifier to use to resolve the instrument e.g. \"Figi\". (required)
-        :type identifier_type: str
-        :param identifier: The original value of the identifier for the requested instrument. (required)
-        :type identifier: str
-        :param update_instrument_identifier_request: The identifier to update or remove. This may or may not be the same identifier used              to resolve the instrument. (required)
-        :type update_instrument_identifier_request: UpdateInstrumentIdentifierRequest
-        :param async_req: Whether to execute the request asynchronously.
-        :type async_req: bool, optional
+        :param async_req bool: execute request asynchronously
+        :param str identifier_type: The identifier to use to resolve the instrument e.g. \"Figi\". (required)
+        :param str identifier: The original value of the identifier for the requested instrument. (required)
+        :param UpdateInstrumentIdentifierRequest update_instrument_identifier_request: The identifier to update or remove. This may or may not be the same identifier used              to resolve the instrument. (required)
         :param _preload_content: if False, the urllib3.HTTPResponse object will
                                  be returned without reading/decoding response
                                  data. Default is True.
-        :type _preload_content: bool, optional
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
                                  (connection, read) timeouts.
-        :return: Returns the result object.
+        :return: Instrument
                  If the method is called asynchronously,
                  returns the request thread.
-        :rtype: Instrument
         """
         kwargs['_return_http_data_only'] = True
         return self.update_instrument_identifier_with_http_info(identifier_type, identifier, update_instrument_identifier_request, **kwargs)  # noqa: E501
@@ -1050,55 +835,34 @@ class InstrumentsApi(object):
         Update, insert or delete a single instrument identifier for a single instrument. If it is not being deleted  the identifier will be updated if it already exists and inserted if it does not.  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
-
         >>> thread = api.update_instrument_identifier_with_http_info(identifier_type, identifier, update_instrument_identifier_request, async_req=True)
         >>> result = thread.get()
 
-        :param identifier_type: The identifier to use to resolve the instrument e.g. \"Figi\". (required)
-        :type identifier_type: str
-        :param identifier: The original value of the identifier for the requested instrument. (required)
-        :type identifier: str
-        :param update_instrument_identifier_request: The identifier to update or remove. This may or may not be the same identifier used              to resolve the instrument. (required)
-        :type update_instrument_identifier_request: UpdateInstrumentIdentifierRequest
-        :param async_req: Whether to execute the request asynchronously.
-        :type async_req: bool, optional
+        :param async_req bool: execute request asynchronously
+        :param str identifier_type: The identifier to use to resolve the instrument e.g. \"Figi\". (required)
+        :param str identifier: The original value of the identifier for the requested instrument. (required)
+        :param UpdateInstrumentIdentifierRequest update_instrument_identifier_request: The identifier to update or remove. This may or may not be the same identifier used              to resolve the instrument. (required)
         :param _return_http_data_only: response data without head status code
                                        and headers
-        :type _return_http_data_only: bool, optional
         :param _preload_content: if False, the urllib3.HTTPResponse object will
                                  be returned without reading/decoding response
                                  data. Default is True.
-        :type _preload_content: bool, optional
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
                                  (connection, read) timeouts.
-        :param _request_auth: set to override the auth_settings for an a single
-                              request; this effectively ignores the authentication
-                              in the spec for a single request.
-        :type _request_auth: dict, optional
-        :return: Returns the result object.
+        :return: tuple(Instrument, status_code(int), headers(HTTPHeaderDict))
                  If the method is called asynchronously,
                  returns the request thread.
-        :rtype: tuple(Instrument, status_code(int), headers(HTTPHeaderDict))
         """
 
         local_var_params = locals()
 
-        all_params = [
-            'identifier_type',
-            'identifier',
-            'update_instrument_identifier_request'
-        ]
-        all_params.extend(
-            [
-                'async_req',
-                '_return_http_data_only',
-                '_preload_content',
-                '_request_timeout',
-                '_request_auth'
-            ]
-        )
+        all_params = ['identifier_type', 'identifier', 'update_instrument_identifier_request']  # noqa: E501
+        all_params.append('async_req')
+        all_params.append('_return_http_data_only')
+        all_params.append('_preload_content')
+        all_params.append('_request_timeout')
 
         for key, val in six.iteritems(local_var_params['kwargs']):
             if key not in all_params:
@@ -1109,8 +873,8 @@ class InstrumentsApi(object):
             local_var_params[key] = val
         del local_var_params['kwargs']
         # verify the required parameter 'update_instrument_identifier_request' is set
-        if self.api_client.client_side_validation and ('update_instrument_identifier_request' not in local_var_params or  # noqa: E501
-                                                        local_var_params['update_instrument_identifier_request'] is None):  # noqa: E501
+        if ('update_instrument_identifier_request' not in local_var_params or
+                local_var_params['update_instrument_identifier_request'] is None):
             raise ApiValueError("Missing the required parameter `update_instrument_identifier_request` when calling `update_instrument_identifier`")  # noqa: E501
 
         collection_formats = {}
@@ -1139,17 +903,12 @@ class InstrumentsApi(object):
         header_params['Content-Type'] = self.api_client.select_header_content_type(  # noqa: E501
             ['application/json-patch+json', 'application/json', 'text/json', 'application/*+json'])  # noqa: E501
 
+        # Authentication setting
+        auth_settings = ['oauth2']  # noqa: E501
+
         # set the LUSID header
         header_params['X-LUSID-SDK-Language'] = 'Python'
         header_params['X-LUSID-SDK-Version'] = '0.11.3105'
-
-        # Authentication setting
-        auth_settings = ['oauth2']  # noqa: E501
-        
-        response_types_map = {
-            200: "Instrument",
-            400: "LusidValidationProblemDetails",
-        }
 
         return self.api_client.call_api(
             '/api/instruments/{identifierType}/{identifier}', 'POST',
@@ -1159,14 +918,13 @@ class InstrumentsApi(object):
             body=body_params,
             post_params=form_params,
             files=local_var_files,
-            response_types_map=response_types_map,
+            response_type='Instrument',  # noqa: E501
             auth_settings=auth_settings,
             async_req=local_var_params.get('async_req'),
             _return_http_data_only=local_var_params.get('_return_http_data_only'),  # noqa: E501
             _preload_content=local_var_params.get('_preload_content', True),
             _request_timeout=local_var_params.get('_request_timeout'),
-            collection_formats=collection_formats,
-            _request_auth=local_var_params.get('_request_auth'))
+            collection_formats=collection_formats)
 
     def upsert_instruments(self, request_body, **kwargs):  # noqa: E501
         """Upsert instruments  # noqa: E501
@@ -1174,26 +932,21 @@ class InstrumentsApi(object):
         Update or insert one or more instruments into the LUSID instrument master. An instrument will be updated  if it already exists and inserted if it does not.                In the request each instrument definition should be keyed by a unique correlation id. This id is ephemeral  and is not stored by LUSID. It serves only as a way to easily identify each instrument in the response.                The response will return both the collection of successfully updated or inserted instruments, as well as those that failed.  For the failures a reason will be provided explaining why the instrument could not be updated or inserted.                It is important to always check the failed set for any unsuccessful results.  The maximum number of instruments that this method can upsert per request is 2,000.  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
-
         >>> thread = api.upsert_instruments(request_body, async_req=True)
         >>> result = thread.get()
 
-        :param request_body: The definitions of the instruments to update or insert. (required)
-        :type request_body: dict(str, InstrumentDefinition)
-        :param async_req: Whether to execute the request asynchronously.
-        :type async_req: bool, optional
+        :param async_req bool: execute request asynchronously
+        :param dict(str, InstrumentDefinition) request_body: The definitions of the instruments to update or insert. (required)
         :param _preload_content: if False, the urllib3.HTTPResponse object will
                                  be returned without reading/decoding response
                                  data. Default is True.
-        :type _preload_content: bool, optional
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
                                  (connection, read) timeouts.
-        :return: Returns the result object.
+        :return: UpsertInstrumentsResponse
                  If the method is called asynchronously,
                  returns the request thread.
-        :rtype: UpsertInstrumentsResponse
         """
         kwargs['_return_http_data_only'] = True
         return self.upsert_instruments_with_http_info(request_body, **kwargs)  # noqa: E501
@@ -1204,49 +957,32 @@ class InstrumentsApi(object):
         Update or insert one or more instruments into the LUSID instrument master. An instrument will be updated  if it already exists and inserted if it does not.                In the request each instrument definition should be keyed by a unique correlation id. This id is ephemeral  and is not stored by LUSID. It serves only as a way to easily identify each instrument in the response.                The response will return both the collection of successfully updated or inserted instruments, as well as those that failed.  For the failures a reason will be provided explaining why the instrument could not be updated or inserted.                It is important to always check the failed set for any unsuccessful results.  The maximum number of instruments that this method can upsert per request is 2,000.  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
-
         >>> thread = api.upsert_instruments_with_http_info(request_body, async_req=True)
         >>> result = thread.get()
 
-        :param request_body: The definitions of the instruments to update or insert. (required)
-        :type request_body: dict(str, InstrumentDefinition)
-        :param async_req: Whether to execute the request asynchronously.
-        :type async_req: bool, optional
+        :param async_req bool: execute request asynchronously
+        :param dict(str, InstrumentDefinition) request_body: The definitions of the instruments to update or insert. (required)
         :param _return_http_data_only: response data without head status code
                                        and headers
-        :type _return_http_data_only: bool, optional
         :param _preload_content: if False, the urllib3.HTTPResponse object will
                                  be returned without reading/decoding response
                                  data. Default is True.
-        :type _preload_content: bool, optional
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
                                  (connection, read) timeouts.
-        :param _request_auth: set to override the auth_settings for an a single
-                              request; this effectively ignores the authentication
-                              in the spec for a single request.
-        :type _request_auth: dict, optional
-        :return: Returns the result object.
+        :return: tuple(UpsertInstrumentsResponse, status_code(int), headers(HTTPHeaderDict))
                  If the method is called asynchronously,
                  returns the request thread.
-        :rtype: tuple(UpsertInstrumentsResponse, status_code(int), headers(HTTPHeaderDict))
         """
 
         local_var_params = locals()
 
-        all_params = [
-            'request_body'
-        ]
-        all_params.extend(
-            [
-                'async_req',
-                '_return_http_data_only',
-                '_preload_content',
-                '_request_timeout',
-                '_request_auth'
-            ]
-        )
+        all_params = ['request_body']  # noqa: E501
+        all_params.append('async_req')
+        all_params.append('_return_http_data_only')
+        all_params.append('_preload_content')
+        all_params.append('_request_timeout')
 
         for key, val in six.iteritems(local_var_params['kwargs']):
             if key not in all_params:
@@ -1257,8 +993,8 @@ class InstrumentsApi(object):
             local_var_params[key] = val
         del local_var_params['kwargs']
         # verify the required parameter 'request_body' is set
-        if self.api_client.client_side_validation and ('request_body' not in local_var_params or  # noqa: E501
-                                                        local_var_params['request_body'] is None):  # noqa: E501
+        if ('request_body' not in local_var_params or
+                local_var_params['request_body'] is None):
             raise ApiValueError("Missing the required parameter `request_body` when calling `upsert_instruments`")  # noqa: E501
 
         collection_formats = {}
@@ -1283,17 +1019,12 @@ class InstrumentsApi(object):
         header_params['Content-Type'] = self.api_client.select_header_content_type(  # noqa: E501
             ['application/json-patch+json', 'application/json', 'text/json', 'application/*+json'])  # noqa: E501
 
+        # Authentication setting
+        auth_settings = ['oauth2']  # noqa: E501
+
         # set the LUSID header
         header_params['X-LUSID-SDK-Language'] = 'Python'
         header_params['X-LUSID-SDK-Version'] = '0.11.3105'
-
-        # Authentication setting
-        auth_settings = ['oauth2']  # noqa: E501
-        
-        response_types_map = {
-            201: "UpsertInstrumentsResponse",
-            400: "LusidValidationProblemDetails",
-        }
 
         return self.api_client.call_api(
             '/api/instruments', 'POST',
@@ -1303,14 +1034,13 @@ class InstrumentsApi(object):
             body=body_params,
             post_params=form_params,
             files=local_var_files,
-            response_types_map=response_types_map,
+            response_type='UpsertInstrumentsResponse',  # noqa: E501
             auth_settings=auth_settings,
             async_req=local_var_params.get('async_req'),
             _return_http_data_only=local_var_params.get('_return_http_data_only'),  # noqa: E501
             _preload_content=local_var_params.get('_preload_content', True),
             _request_timeout=local_var_params.get('_request_timeout'),
-            collection_formats=collection_formats,
-            _request_auth=local_var_params.get('_request_auth'))
+            collection_formats=collection_formats)
 
     def upsert_instruments_properties(self, upsert_instrument_property_request, **kwargs):  # noqa: E501
         """Upsert instruments properties  # noqa: E501
@@ -1318,26 +1048,21 @@ class InstrumentsApi(object):
         Update or insert one or more instrument properties for one or more instruments. Each instrument property will be updated  if it already exists and inserted if it does not. If any properties fail to be updated or inserted, none will be updated or inserted and  the reason for the failure will be returned.                Properties have an <i>effectiveFrom</i> datetime for which the property is valid, and an <i>effectiveUntil</i>  datetime until which the property is valid. Not supplying an <i>effectiveUntil</i> datetime results in the property being  valid indefinitely, or until the next <i>effectiveFrom</i> datetime of the property.  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
-
         >>> thread = api.upsert_instruments_properties(upsert_instrument_property_request, async_req=True)
         >>> result = thread.get()
 
-        :param upsert_instrument_property_request: A collection of instruments and associated instrument properties to update or insert. (required)
-        :type upsert_instrument_property_request: list[UpsertInstrumentPropertyRequest]
-        :param async_req: Whether to execute the request asynchronously.
-        :type async_req: bool, optional
+        :param async_req bool: execute request asynchronously
+        :param list[UpsertInstrumentPropertyRequest] upsert_instrument_property_request: A collection of instruments and associated instrument properties to update or insert. (required)
         :param _preload_content: if False, the urllib3.HTTPResponse object will
                                  be returned without reading/decoding response
                                  data. Default is True.
-        :type _preload_content: bool, optional
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
                                  (connection, read) timeouts.
-        :return: Returns the result object.
+        :return: UpsertInstrumentPropertiesResponse
                  If the method is called asynchronously,
                  returns the request thread.
-        :rtype: UpsertInstrumentPropertiesResponse
         """
         kwargs['_return_http_data_only'] = True
         return self.upsert_instruments_properties_with_http_info(upsert_instrument_property_request, **kwargs)  # noqa: E501
@@ -1348,49 +1073,32 @@ class InstrumentsApi(object):
         Update or insert one or more instrument properties for one or more instruments. Each instrument property will be updated  if it already exists and inserted if it does not. If any properties fail to be updated or inserted, none will be updated or inserted and  the reason for the failure will be returned.                Properties have an <i>effectiveFrom</i> datetime for which the property is valid, and an <i>effectiveUntil</i>  datetime until which the property is valid. Not supplying an <i>effectiveUntil</i> datetime results in the property being  valid indefinitely, or until the next <i>effectiveFrom</i> datetime of the property.  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
-
         >>> thread = api.upsert_instruments_properties_with_http_info(upsert_instrument_property_request, async_req=True)
         >>> result = thread.get()
 
-        :param upsert_instrument_property_request: A collection of instruments and associated instrument properties to update or insert. (required)
-        :type upsert_instrument_property_request: list[UpsertInstrumentPropertyRequest]
-        :param async_req: Whether to execute the request asynchronously.
-        :type async_req: bool, optional
+        :param async_req bool: execute request asynchronously
+        :param list[UpsertInstrumentPropertyRequest] upsert_instrument_property_request: A collection of instruments and associated instrument properties to update or insert. (required)
         :param _return_http_data_only: response data without head status code
                                        and headers
-        :type _return_http_data_only: bool, optional
         :param _preload_content: if False, the urllib3.HTTPResponse object will
                                  be returned without reading/decoding response
                                  data. Default is True.
-        :type _preload_content: bool, optional
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
                                  (connection, read) timeouts.
-        :param _request_auth: set to override the auth_settings for an a single
-                              request; this effectively ignores the authentication
-                              in the spec for a single request.
-        :type _request_auth: dict, optional
-        :return: Returns the result object.
+        :return: tuple(UpsertInstrumentPropertiesResponse, status_code(int), headers(HTTPHeaderDict))
                  If the method is called asynchronously,
                  returns the request thread.
-        :rtype: tuple(UpsertInstrumentPropertiesResponse, status_code(int), headers(HTTPHeaderDict))
         """
 
         local_var_params = locals()
 
-        all_params = [
-            'upsert_instrument_property_request'
-        ]
-        all_params.extend(
-            [
-                'async_req',
-                '_return_http_data_only',
-                '_preload_content',
-                '_request_timeout',
-                '_request_auth'
-            ]
-        )
+        all_params = ['upsert_instrument_property_request']  # noqa: E501
+        all_params.append('async_req')
+        all_params.append('_return_http_data_only')
+        all_params.append('_preload_content')
+        all_params.append('_request_timeout')
 
         for key, val in six.iteritems(local_var_params['kwargs']):
             if key not in all_params:
@@ -1401,8 +1109,8 @@ class InstrumentsApi(object):
             local_var_params[key] = val
         del local_var_params['kwargs']
         # verify the required parameter 'upsert_instrument_property_request' is set
-        if self.api_client.client_side_validation and ('upsert_instrument_property_request' not in local_var_params or  # noqa: E501
-                                                        local_var_params['upsert_instrument_property_request'] is None):  # noqa: E501
+        if ('upsert_instrument_property_request' not in local_var_params or
+                local_var_params['upsert_instrument_property_request'] is None):
             raise ApiValueError("Missing the required parameter `upsert_instrument_property_request` when calling `upsert_instruments_properties`")  # noqa: E501
 
         collection_formats = {}
@@ -1427,17 +1135,12 @@ class InstrumentsApi(object):
         header_params['Content-Type'] = self.api_client.select_header_content_type(  # noqa: E501
             ['application/json-patch+json', 'application/json', 'text/json', 'application/*+json'])  # noqa: E501
 
+        # Authentication setting
+        auth_settings = ['oauth2']  # noqa: E501
+
         # set the LUSID header
         header_params['X-LUSID-SDK-Language'] = 'Python'
         header_params['X-LUSID-SDK-Version'] = '0.11.3105'
-
-        # Authentication setting
-        auth_settings = ['oauth2']  # noqa: E501
-        
-        response_types_map = {
-            201: "UpsertInstrumentPropertiesResponse",
-            400: "LusidValidationProblemDetails",
-        }
 
         return self.api_client.call_api(
             '/api/instruments/$upsertproperties', 'POST',
@@ -1447,11 +1150,10 @@ class InstrumentsApi(object):
             body=body_params,
             post_params=form_params,
             files=local_var_files,
-            response_types_map=response_types_map,
+            response_type='UpsertInstrumentPropertiesResponse',  # noqa: E501
             auth_settings=auth_settings,
             async_req=local_var_params.get('async_req'),
             _return_http_data_only=local_var_params.get('_return_http_data_only'),  # noqa: E501
             _preload_content=local_var_params.get('_preload_content', True),
             _request_timeout=local_var_params.get('_request_timeout'),
-            collection_formats=collection_formats,
-            _request_auth=local_var_params.get('_request_auth'))
+            collection_formats=collection_formats)

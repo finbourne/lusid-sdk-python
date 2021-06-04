@@ -1,7 +1,5 @@
 # Transaction
 
-A list of transactions.
-
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------

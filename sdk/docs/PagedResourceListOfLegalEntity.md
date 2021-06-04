@@ -1,6 +1,5 @@
 # PagedResourceListOfLegalEntity
 
-
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------

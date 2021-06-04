@@ -1,6 +1,5 @@
 # ResourceListOfReconciliationBreak
 
-
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
