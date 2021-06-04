@@ -1,5 +1,6 @@
 # DateRange
 
+
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------

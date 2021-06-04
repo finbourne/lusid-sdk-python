@@ -1,5 +1,6 @@
 # AdjustHolding
 
+
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------

@@ -1,5 +1,6 @@
 # ResourceListOfPropertyDefinition
 
+
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
