@@ -1,6 +1,6 @@
 # lusid.ReferencePortfolioApi
 
-All URIs are relative to *https://fbn-prd.lusid.com/api*
+All URIs are relative to *http://local-unit-test-server.lusid.com:63946*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
@@ -30,8 +30,8 @@ configuration = lusid.Configuration()
 # Configure OAuth2 access token for authorization: oauth2
 configuration.access_token = 'YOUR_ACCESS_TOKEN'
 
-# Defining host is optional and default to https://fbn-prd.lusid.com/api
-configuration.host = "https://fbn-prd.lusid.com/api"
+# Defining host is optional and default to http://local-unit-test-server.lusid.com:63946
+configuration.host = "http://local-unit-test-server.lusid.com:63946"
 # Create an instance of the API class
 api_instance = lusid.ReferencePortfolioApi(lusid.ApiClient(configuration))
 scope = 'scope_example' # str | The scope in which to create the reference portfolio.
@@ -94,8 +94,8 @@ configuration = lusid.Configuration()
 # Configure OAuth2 access token for authorization: oauth2
 configuration.access_token = 'YOUR_ACCESS_TOKEN'
 
-# Defining host is optional and default to https://fbn-prd.lusid.com/api
-configuration.host = "https://fbn-prd.lusid.com/api"
+# Defining host is optional and default to http://local-unit-test-server.lusid.com:63946
+configuration.host = "http://local-unit-test-server.lusid.com:63946"
 # Create an instance of the API class
 api_instance = lusid.ReferencePortfolioApi(lusid.ApiClient(configuration))
 scope = 'scope_example' # str | The scope of the reference portfolio.
@@ -164,15 +164,15 @@ configuration = lusid.Configuration()
 # Configure OAuth2 access token for authorization: oauth2
 configuration.access_token = 'YOUR_ACCESS_TOKEN'
 
-# Defining host is optional and default to https://fbn-prd.lusid.com/api
-configuration.host = "https://fbn-prd.lusid.com/api"
+# Defining host is optional and default to http://local-unit-test-server.lusid.com:63946
+configuration.host = "http://local-unit-test-server.lusid.com:63946"
 # Create an instance of the API class
 api_instance = lusid.ReferencePortfolioApi(lusid.ApiClient(configuration))
 scope = 'scope_example' # str | The scope of the reference portfolio.
 code = 'code_example' # str | The code of the reference portfolio. Together with the scope this uniquely identifies              the reference portfolio.
 from_effective_at = 'from_effective_at_example' # str | Events between this time (inclusive) and the toEffectiveAt are returned.
 to_effective_at = 'to_effective_at_example' # str | Events between this time (inclusive) and the fromEffectiveAt are returned.
-as_at_time = '2013-10-20T19:20:30+01:00' # datetime | The as-at time for which the result is valid. (optional)
+as_at_time = '2013-10-20T19:20:30+01:00' # datetime | The asAt time for which the result is valid. (optional)
 
 try:
     # List constituents adjustments
@@ -190,7 +190,7 @@ Name | Type | Description  | Notes
  **code** | **str**| The code of the reference portfolio. Together with the scope this uniquely identifies              the reference portfolio. | 
  **from_effective_at** | **str**| Events between this time (inclusive) and the toEffectiveAt are returned. | 
  **to_effective_at** | **str**| Events between this time (inclusive) and the fromEffectiveAt are returned. | 
- **as_at_time** | **datetime**| The as-at time for which the result is valid. | [optional] 
+ **as_at_time** | **datetime**| The asAt time for which the result is valid. | [optional] 
 
 ### Return type
 
@@ -234,8 +234,8 @@ configuration = lusid.Configuration()
 # Configure OAuth2 access token for authorization: oauth2
 configuration.access_token = 'YOUR_ACCESS_TOKEN'
 
-# Defining host is optional and default to https://fbn-prd.lusid.com/api
-configuration.host = "https://fbn-prd.lusid.com/api"
+# Defining host is optional and default to http://local-unit-test-server.lusid.com:63946
+configuration.host = "http://local-unit-test-server.lusid.com:63946"
 # Create an instance of the API class
 api_instance = lusid.ReferencePortfolioApi(lusid.ApiClient(configuration))
 scope = 'scope_example' # str | The scope of the reference portfolio.

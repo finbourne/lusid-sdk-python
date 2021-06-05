@@ -9,7 +9,7 @@
       "url": "https://www.finbourne.com",
       "email": "info@finbourne.com"
     },
-    "version": "0.11.3108",
+    "version": "0.11.3109",
     "x-logo": {
       "url": "https://content.finbourne.com/LUSID-header.png",
       "backgroundColor": "#415464"
@@ -17,7 +17,7 @@
   },
   "servers": [
     {
-      "url": "https://fbn-prd.lusid.com/api"
+      "url": "http://local-unit-test-server.lusid.com:63946"
     }
   ],
   "paths": {
@@ -838,10 +838,10 @@
           "Instruments"
         ],
         "summary": "Upsert instruments",
-        "description": "Update or insert one or more instruments into the LUSID instrument master. An instrument will be updated\r\nif it already exists and inserted if it does not.\r\n            \r\nIn the request each instrument definition should be keyed by a unique correlation id. This id is ephemeral\r\nand is not stored by LUSID. It serves only as a way to easily identify each instrument in the response.\r\n            \r\nThe response will return both the collection of successfully updated or inserted instruments, as well as those that failed.\r\nFor the failures a reason will be provided explaining why the instrument could not be updated or inserted.\r\n            \r\nIt is important to always check the failed set for any unsuccessful results.\n\nThe maximum number of instruments that this method can upsert per request is 2,000.",
+        "description": "Create or update one or more instruments in the instrument master. An instrument is updated\r\nif it already exists and created if it does not.\r\n            \r\nIn the request, each instrument definition should be keyed by a unique correlation ID. This ID is ephemeral\r\nand not stored by LUSID. It serves only to easily identify each instrument in the response.\r\n            \r\nNote that an instrument must have at least one unique identifier, which is a combination of a type\r\n(such as 'Figi') and a value (such as 'BBG000BS1N49'). In addition, a random value is automatically\r\ngenerated for a LUSID Instrument ID (LUID) unique type by the system. For more information, see\r\nhttps://support.lusid.com/knowledgebase/article/KA-01862.\r\n            \r\nThe response returns both the collection of successfully created or updated instruments, as well as those\r\nthat failed. For each failure, a reason is provided. It is important to check the failed set for\r\nunsuccessful results.\n\nThe maximum number of instruments that this method can upsert per request is 2,000.",
         "operationId": "UpsertInstruments",
         "requestBody": {
-          "description": "The definitions of the instruments to update or insert.",
+          "description": "The definitions of the instruments to create or update.",
           "content": {
             "application/json-patch+json": {
               "schema": {
@@ -849,7 +849,7 @@
                 "additionalProperties": {
                   "$ref": "#/components/schemas/InstrumentDefinition"
                 },
-                "description": "The definitions of the instruments to update or insert."
+                "description": "The definitions of the instruments to create or update."
               },
               "example": {
                 "request_id_1": {
@@ -926,7 +926,7 @@
                 "additionalProperties": {
                   "$ref": "#/components/schemas/InstrumentDefinition"
                 },
-                "description": "The definitions of the instruments to update or insert."
+                "description": "The definitions of the instruments to create or update."
               },
               "example": {
                 "request_id_1": {
@@ -1003,7 +1003,7 @@
                 "additionalProperties": {
                   "$ref": "#/components/schemas/InstrumentDefinition"
                 },
-                "description": "The definitions of the instruments to update or insert."
+                "description": "The definitions of the instruments to create or update."
               },
               "example": {
                 "request_id_1": {
@@ -1080,7 +1080,7 @@
                 "additionalProperties": {
                   "$ref": "#/components/schemas/InstrumentDefinition"
                 },
-                "description": "The definitions of the instruments to update or insert."
+                "description": "The definitions of the instruments to create or update."
               },
               "example": {
                 "request_id_1": {
@@ -1156,7 +1156,7 @@
         },
         "responses": {
           "201": {
-            "description": "The successfully updated or inserted instruments along with any failures",
+            "description": "The successfully created or updated instruments along with any failures",
             "content": {
               "text/plain": {
                 "schema": {
@@ -1218,16 +1218,16 @@
           "Instruments"
         ],
         "summary": "[EARLY ACCESS] List instruments",
-        "description": "List all the instruments that have been mastered in the LUSID instrument master.\n\nThe maximum number of instruments that this method can list per request is 2,000.",
+        "description": "List all the instruments in the instrument master.\r\n            \r\nTo retrieve a particular set of instruments instead, use the Get instruments endpoint.\n\nThe maximum number of instruments that this method can list per request is 2,000.",
         "operationId": "ListInstruments",
         "parameters": [
           {
             "name": "asAt",
             "in": "query",
-            "description": "The asAt datetime at which to list the instruments. Defaults to return the latest\r\n            version of each instruments if not specified.",
+            "description": "The asAt datetime at which to list instruments. Defaults to returning the latest\r\n             version of each instrument if not specified.",
             "schema": {
               "type": "string",
-              "description": "The asAt datetime at which to list the instruments. Defaults to return the latest\r\n            version of each instruments if not specified.",
+              "description": "The asAt datetime at which to list instruments. Defaults to returning the latest\r\n             version of each instrument if not specified.",
               "format": "date-time",
               "nullable": true
             },
@@ -1236,10 +1236,10 @@
           {
             "name": "effectiveAt",
             "in": "query",
-            "description": "The effective datetime or cut label at which to list the instruments.\r\n            Defaults to the current LUSID system datetime if not specified.",
+            "description": "The effective datetime or cut label at which to list instruments.\r\n             Defaults to the current LUSID system datetime if not specified.",
             "schema": {
               "type": "string",
-              "description": "The effective datetime or cut label at which to list the instruments.\r\n            Defaults to the current LUSID system datetime if not specified.",
+              "description": "The effective datetime or cut label at which to list instruments.\r\n             Defaults to the current LUSID system datetime if not specified.",
               "format": "dateorcutlabel",
               "nullable": true
             }
@@ -1247,23 +1247,23 @@
           {
             "name": "page",
             "in": "query",
-            "description": "The pagination token to use to continue listing instruments from a previous call to list instruments.\r\n            This value is returned from the previous call. If a pagination token is provided the sortBy, filter, effectiveAt, and asAt fields\r\n            must not have changed since the original request. Also, if set, a start value cannot be provided.",
+            "description": "The pagination token to use to continue listing instruments; this value is returned from\r\n             the previous call. If a pagination token is provided, the <i>sortBy</i>, <i>filter</i>, <i>effectiveAt</i> and\r\n             <i>asAt</i> fields must not have changed since the original request. Also, a <i>start</i> value cannot be\r\n             provided. For more information, see https://support.lusid.com/knowledgebase/article/KA-01915.",
             "schema": {
               "type": "string",
-              "description": "The pagination token to use to continue listing instruments from a previous call to list instruments.\r\n            This value is returned from the previous call. If a pagination token is provided the sortBy, filter, effectiveAt, and asAt fields\r\n            must not have changed since the original request. Also, if set, a start value cannot be provided.",
+              "description": "The pagination token to use to continue listing instruments; this value is returned from\r\n             the previous call. If a pagination token is provided, the <i>sortBy</i>, <i>filter</i>, <i>effectiveAt</i> and\r\n             <i>asAt</i> fields must not have changed since the original request. Also, a <i>start</i> value cannot be\r\n             provided. For more information, see https://support.lusid.com/knowledgebase/article/KA-01915.",
               "nullable": true
             }
           },
           {
             "name": "sortBy",
             "in": "query",
-            "description": "Order the results by these fields. Use use the '-' sign to denote descending order e.g. -MyFieldName.",
+            "description": "Order results by particular fields. Use the '-' sign to denote descending order, for\r\n             example '-MyFieldName'.",
             "schema": {
               "type": "array",
               "items": {
                 "type": "string"
               },
-              "description": "Order the results by these fields. Use use the '-' sign to denote descending order e.g. -MyFieldName.",
+              "description": "Order results by particular fields. Use the '-' sign to denote descending order, for\r\n             example '-MyFieldName'.",
               "nullable": true
             },
             "x-nullable": true
@@ -1283,12 +1283,12 @@
           {
             "name": "limit",
             "in": "query",
-            "description": "When paginating, limit the number of returned results to this many.",
+            "description": "When paginating, limit the results to this number.",
             "schema": {
               "maximum": 5000,
               "minimum": 1,
               "type": "integer",
-              "description": "When paginating, limit the number of returned results to this many.",
+              "description": "When paginating, limit the results to this number.",
               "format": "int32",
               "nullable": true
             },
@@ -1297,10 +1297,10 @@
           {
             "name": "filter",
             "in": "query",
-            "description": "Expression to filter the result set. Defaults to filter down to active instruments only, i.e. those\r\n            that have not been deleted. Read more about filtering results from LUSID here https://support.lusid.com/filtering-results-from-lusid.",
+            "description": "Expression to filter the result set. Defaults to filtering out inactive instruments\r\n             (that is, those that have been deleted). For more information about filtering results,\r\n             see https://support.lusid.com/knowledgebase/article/KA-01914.",
             "schema": {
               "type": "string",
-              "description": "Expression to filter the result set. Defaults to filter down to active instruments only, i.e. those\r\n            that have not been deleted. Read more about filtering results from LUSID here https://support.lusid.com/filtering-results-from-lusid.",
+              "description": "Expression to filter the result set. Defaults to filtering out inactive instruments\r\n             (that is, those that have been deleted). For more information about filtering results,\r\n             see https://support.lusid.com/knowledgebase/article/KA-01914.",
               "default": "State eq 'Active'",
               "nullable": true
             }
@@ -1308,14 +1308,14 @@
           {
             "name": "instrumentPropertyKeys",
             "in": "query",
-            "description": "A list of property keys from the \"Instrument\" domain to decorate onto each instrument. These take the format {domain}/{scope}/{code} e.g. \"Instrument/system/Name\".",
+            "description": "A list of property keys from the 'Instrument' domain to decorate onto\r\n             instruments. These must have the format {domain}/{scope}/{code}, for example 'Instrument/system/Name'.",
             "schema": {
               "type": "array",
               "items": {
                 "type": "string",
                 "description": "The key that uniquely identifies the property. It has the format {domain}/{scope}/{code}."
               },
-              "description": "A list of property keys from the \"Instrument\" domain to decorate onto each instrument. These take the format {domain}/{scope}/{code} e.g. \"Instrument/system/Name\".",
+              "description": "A list of property keys from the 'Instrument' domain to decorate onto\r\n             instruments. These must have the format {domain}/{scope}/{code}, for example 'Instrument/system/Name'.",
               "nullable": true
             },
             "x-nullable": true
@@ -1387,26 +1387,26 @@
           "Instruments"
         ],
         "summary": "Get instruments",
-        "description": "Get the definition of one or more instruments identified by a collection of unique instrument identifiers.",
+        "description": "Retrieve the definition of one or more instruments, as identified by a collection of unique identifiers.\r\n            \r\nNote that to retrieve all the instruments in the instrument master, use the List instruments endpoint instead.",
         "operationId": "GetInstruments",
         "parameters": [
           {
             "name": "identifierType",
             "in": "query",
-            "description": "The identifier being supplied e.g. \"Figi\".",
+            "description": "The unique identifier type to use, for example 'Figi'.",
             "required": true,
             "schema": {
               "type": "string",
-              "description": "The identifier being supplied e.g. \"Figi\"."
+              "description": "The unique identifier type to use, for example 'Figi'."
             }
           },
           {
             "name": "effectiveAt",
             "in": "query",
-            "description": "The effective datetime or cut label at which to retrieve the instrument definitions.\r\n            Defaults to the current LUSID system datetime if not specified.",
+            "description": "The effective datetime or cut label at which to retrieve the instrument definitions.\r\n             Defaults to the current LUSID system datetime if not specified.",
             "schema": {
               "type": "string",
-              "description": "The effective datetime or cut label at which to retrieve the instrument definitions.\r\n            Defaults to the current LUSID system datetime if not specified.",
+              "description": "The effective datetime or cut label at which to retrieve the instrument definitions.\r\n             Defaults to the current LUSID system datetime if not specified.",
               "format": "dateorcutlabel",
               "nullable": true
             }
@@ -1414,10 +1414,10 @@
           {
             "name": "asAt",
             "in": "query",
-            "description": "The asAt datetime at which to retrieve the instrument definitions.\r\n            Defaults to return the latest version of each instrument definition if not specified.",
+            "description": "The asAt datetime at which to retrieve the instrument definitions.\r\n             Defaults to returning the latest version of each instrument definition if not specified.",
             "schema": {
               "type": "string",
-              "description": "The asAt datetime at which to retrieve the instrument definitions.\r\n            Defaults to return the latest version of each instrument definition if not specified.",
+              "description": "The asAt datetime at which to retrieve the instrument definitions.\r\n             Defaults to returning the latest version of each instrument definition if not specified.",
               "format": "date-time",
               "nullable": true
             },
@@ -1426,21 +1426,21 @@
           {
             "name": "propertyKeys",
             "in": "query",
-            "description": "A list of property keys from the \"Instrument\" domain to decorate onto the instrument.\r\n            These take the format {domain}/{scope}/{code} e.g. \"Instrument/system/Name\".",
+            "description": "A list of property keys from the 'Instrument' domain to decorate onto the instrument.\r\n             These must have the format {domain}/{scope}/{code}, for example 'Instrument/system/Name'.",
             "schema": {
               "type": "array",
               "items": {
                 "type": "string",
                 "description": "The key that uniquely identifies the property. It has the format {domain}/{scope}/{code}."
               },
-              "description": "A list of property keys from the \"Instrument\" domain to decorate onto the instrument.\r\n            These take the format {domain}/{scope}/{code} e.g. \"Instrument/system/Name\".",
+              "description": "A list of property keys from the 'Instrument' domain to decorate onto the instrument.\r\n             These must have the format {domain}/{scope}/{code}, for example 'Instrument/system/Name'.",
               "nullable": true
             },
             "x-nullable": true
           }
         ],
         "requestBody": {
-          "description": "The values of the identifier for the requested instruments.",
+          "description": "A list of one or more <i>identifierType</i> values to use to identify instruments.",
           "content": {
             "application/json-patch+json": {
               "schema": {
@@ -1448,7 +1448,7 @@
                 "items": {
                   "type": "string"
                 },
-                "description": "The values of the identifier for the requested instruments."
+                "description": "A list of one or more <i>identifierType</i> values to use to identify instruments."
               },
               "example": [
                 "instrument-identifier-1",
@@ -1461,7 +1461,7 @@
                 "items": {
                   "type": "string"
                 },
-                "description": "The values of the identifier for the requested instruments."
+                "description": "A list of one or more <i>identifierType</i> values to use to identify instruments."
               },
               "example": [
                 "instrument-identifier-1",
@@ -1474,7 +1474,7 @@
                 "items": {
                   "type": "string"
                 },
-                "description": "The values of the identifier for the requested instruments."
+                "description": "A list of one or more <i>identifierType</i> values to use to identify instruments."
               },
               "example": [
                 "instrument-identifier-1",
@@ -1487,7 +1487,7 @@
                 "items": {
                   "type": "string"
                 },
-                "description": "The values of the identifier for the requested instruments."
+                "description": "A list of one or more <i>identifierType</i> values to use to identify instruments."
               },
               "example": [
                 "instrument-identifier-1",
@@ -1563,10 +1563,10 @@
           "Instruments"
         ],
         "summary": "Upsert instruments properties",
-        "description": "Update or insert one or more instrument properties for one or more instruments. Each instrument property will be updated\r\nif it already exists and inserted if it does not. If any properties fail to be updated or inserted, none will be updated or inserted and\r\nthe reason for the failure will be returned.\r\n            \r\nProperties have an <i>effectiveFrom</i> datetime for which the property is valid, and an <i>effectiveUntil</i>\r\ndatetime until which the property is valid. Not supplying an <i>effectiveUntil</i> datetime results in the property being\r\nvalid indefinitely, or until the next <i>effectiveFrom</i> datetime of the property.",
+        "description": "Create or update one or more properties for particular instruments.\r\n            \r\nEach instrument property is updated if it exists and created if it does not. For any failures, a reason\r\nis provided.\r\n            \r\nProperties have an <i>effectiveFrom</i> datetime from which the property is valid, and an <i>effectiveUntil</i>\r\ndatetime until which the property is valid. Not supplying an <i>effectiveUntil</i> datetime results in the property being\r\nvalid indefinitely, or until the next <i>effectiveFrom</i> datetime of the property.",
         "operationId": "UpsertInstrumentsProperties",
         "requestBody": {
-          "description": "A collection of instruments and associated instrument properties to update or insert.",
+          "description": "A list of instruments and associated instrument properties to create or update.",
           "content": {
             "application/json-patch+json": {
               "schema": {
@@ -1574,7 +1574,7 @@
                 "items": {
                   "$ref": "#/components/schemas/UpsertInstrumentPropertyRequest"
                 },
-                "description": "A collection of instruments and associated instrument properties to update or insert."
+                "description": "A list of instruments and associated instrument properties to create or update."
               },
               "example": [
                 {
@@ -1621,7 +1621,7 @@
                 "items": {
                   "$ref": "#/components/schemas/UpsertInstrumentPropertyRequest"
                 },
-                "description": "A collection of instruments and associated instrument properties to update or insert."
+                "description": "A list of instruments and associated instrument properties to create or update."
               },
               "example": [
                 {
@@ -1668,7 +1668,7 @@
                 "items": {
                   "$ref": "#/components/schemas/UpsertInstrumentPropertyRequest"
                 },
-                "description": "A collection of instruments and associated instrument properties to update or insert."
+                "description": "A list of instruments and associated instrument properties to create or update."
               },
               "example": [
                 {
@@ -1715,7 +1715,7 @@
                 "items": {
                   "$ref": "#/components/schemas/UpsertInstrumentPropertyRequest"
                 },
-                "description": "A collection of instruments and associated instrument properties to update or insert."
+                "description": "A list of instruments and associated instrument properties to create or update."
               },
               "example": [
                 {
@@ -1761,7 +1761,7 @@
         },
         "responses": {
           "201": {
-            "description": "The asAt time at which the properties were updated, inserted or deleted",
+            "description": "The asAt datetime at which the properties were created or updated.",
             "content": {
               "text/plain": {
                 "schema": {
@@ -1825,11 +1825,11 @@
           "Instruments"
         ],
         "summary": "[EARLY ACCESS] Get instrument identifier types",
-        "description": "Get the allowable instrument identifier types and their descriptions.",
+        "description": "Retrieve a list of all valid instrument identifier types and whether they are unique or not.\r\n            \r\nAn instrument must have a value for at least one unique identifier type (it can have more than one unique type and value).\r\nIn addition, a value is automatically generated for a LUSID Instrument ID (LUID) unique type by the system.\r\n            \r\nAn instrument can have values for multiple non-unique identifier types (or it can have zero non-unique types and values).",
         "operationId": "GetInstrumentIdentifierTypes",
         "responses": {
           "200": {
-            "description": "The allowable instrument identifier types",
+            "description": "A list of valid instrument identifier types.",
             "content": {
               "text/plain": {
                 "schema": {
@@ -1873,38 +1873,38 @@
           "Instruments"
         ],
         "summary": "Get instrument",
-        "description": "Get the definition of a single instrument identified by a unique instrument identifier.",
+        "description": "Retrieve the definition of a particular instrument, as identified by a particular unique identifier.",
         "operationId": "GetInstrument",
         "parameters": [
           {
             "name": "identifierType",
             "in": "path",
-            "description": "The identifier being supplied e.g. \"Figi\".",
+            "description": "The unique identifier type to use, for example 'Figi'.",
             "required": true,
             "schema": {
               "type": "string",
-              "description": "The identifier being supplied e.g. \"Figi\".",
+              "description": "The unique identifier type to use, for example 'Figi'.",
               "nullable": true
             }
           },
           {
             "name": "identifier",
             "in": "path",
-            "description": "The value of the identifier for the requested instrument.",
+            "description": "An <i>identifierType</i> value to use to identify the instrument, for example 'BBG000BLNNV0'.",
             "required": true,
             "schema": {
               "type": "string",
-              "description": "The value of the identifier for the requested instrument.",
+              "description": "An <i>identifierType</i> value to use to identify the instrument, for example 'BBG000BLNNV0'.",
               "nullable": true
             }
           },
           {
             "name": "effectiveAt",
             "in": "query",
-            "description": "The effective datetime or cut label at which to retrieve the instrument definition.\r\n            Defaults to the current LUSID system datetime if not specified.",
+            "description": "The effective datetime or cut label at which to retrieve the instrument.\r\n            Defaults to the current LUSID system datetime if not specified.",
             "schema": {
               "type": "string",
-              "description": "The effective datetime or cut label at which to retrieve the instrument definition.\r\n            Defaults to the current LUSID system datetime if not specified.",
+              "description": "The effective datetime or cut label at which to retrieve the instrument.\r\n            Defaults to the current LUSID system datetime if not specified.",
               "format": "dateorcutlabel",
               "nullable": true
             }
@@ -1912,10 +1912,10 @@
           {
             "name": "asAt",
             "in": "query",
-            "description": "The asAt datetime at which to retrieve the instrument definition. Defaults to\r\n            return the latest version of the instrument definition if not specified.",
+            "description": "The asAt datetime at which to retrieve the instrument. Defaults to\r\n            returning the latest version if not specified.",
             "schema": {
               "type": "string",
-              "description": "The asAt datetime at which to retrieve the instrument definition. Defaults to\r\n            return the latest version of the instrument definition if not specified.",
+              "description": "The asAt datetime at which to retrieve the instrument. Defaults to\r\n            returning the latest version if not specified.",
               "format": "date-time",
               "nullable": true
             },
@@ -1924,14 +1924,14 @@
           {
             "name": "propertyKeys",
             "in": "query",
-            "description": "A list of property keys from the \"Instrument\" domain to decorate onto the instrument.\r\n            These take the format {domain}/{scope}/{code} e.g. \"Instrument/system/Name\".",
+            "description": "A list of property keys from the 'Instrument' domain to decorate onto the instrument.\r\n            These must have the format {domain}/{scope}/{code}, for example 'Instrument/system/Name'.",
             "schema": {
               "type": "array",
               "items": {
                 "type": "string",
                 "description": "The key that uniquely identifies the property. It has the format {domain}/{scope}/{code}."
               },
-              "description": "A list of property keys from the \"Instrument\" domain to decorate onto the instrument.\r\n            These take the format {domain}/{scope}/{code} e.g. \"Instrument/system/Name\".",
+              "description": "A list of property keys from the 'Instrument' domain to decorate onto the instrument.\r\n            These must have the format {domain}/{scope}/{code}, for example 'Instrument/system/Name'.",
               "nullable": true
             },
             "x-nullable": true
@@ -1939,7 +1939,7 @@
         ],
         "responses": {
           "200": {
-            "description": "The requested instrument",
+            "description": "The requested instrument.",
             "content": {
               "text/plain": {
                 "schema": {
@@ -2001,34 +2001,34 @@
           "Instruments"
         ],
         "summary": "[EARLY ACCESS] Update instrument identifier",
-        "description": "Update, insert or delete a single instrument identifier for a single instrument. If it is not being deleted\r\nthe identifier will be updated if it already exists and inserted if it does not.",
+        "description": "Create, update or delete a particular instrument identifier for an instrument.\r\n            \r\nTo delete the identifier, leave the value unspecified in the request. If not being deleted, the\r\nidentifier is updated if it exists and created if it does not.",
         "operationId": "UpdateInstrumentIdentifier",
         "parameters": [
           {
             "name": "identifierType",
             "in": "path",
-            "description": "The identifier to use to resolve the instrument e.g. \"Figi\".",
+            "description": "The unique identifier type to search, for example 'Figi'.",
             "required": true,
             "schema": {
               "type": "string",
-              "description": "The identifier to use to resolve the instrument e.g. \"Figi\".",
+              "description": "The unique identifier type to search, for example 'Figi'.",
               "nullable": true
             }
           },
           {
             "name": "identifier",
             "in": "path",
-            "description": "The original value of the identifier for the requested instrument.",
+            "description": "An <i>identifierType</i> value to use to identify the instrument, for example 'BBG000BLNNV0'.",
             "required": true,
             "schema": {
               "type": "string",
-              "description": "The original value of the identifier for the requested instrument.",
+              "description": "An <i>identifierType</i> value to use to identify the instrument, for example 'BBG000BLNNV0'.",
               "nullable": true
             }
           }
         ],
         "requestBody": {
-          "description": "The identifier to update or remove. This may or may not be the same identifier used\r\n            to resolve the instrument.",
+          "description": "The identifier to update or delete. This need not be the same value as the\r\n             'identifier' parameter used to retrieve the instrument.",
           "content": {
             "application/json-patch+json": {
               "schema": {
@@ -2075,7 +2075,7 @@
         },
         "responses": {
           "200": {
-            "description": "The updated instrument definition with the identifier updated, inserted or deleted",
+            "description": "The updated instrument definition with the identifier created, updated or deleted",
             "content": {
               "text/plain": {
                 "schema": {
@@ -2137,28 +2137,28 @@
           "Instruments"
         ],
         "summary": "[EARLY ACCESS] Delete instrument",
-        "description": "Delete a single instrument identified by a unique instrument identifier. Once an instrument has been\r\ndeleted it will be marked as 'inactive' and it can no longer be used when updating or inserting transactions or holdings.\r\nYou can still query existing transactions and holdings related to the deleted instrument.",
+        "description": "Delete a particular instrument, as identified by a particular instrument identifier.\r\n            \r\nOnce deleted, an instrument is marked as inactive and can no longer be referenced when creating or updating\r\ntransactions or holdings. You can still query existing transactions and holdings related to the\r\ndeleted instrument.",
         "operationId": "DeleteInstrument",
         "parameters": [
           {
             "name": "identifierType",
             "in": "path",
-            "description": "The identifier being supplied e.g. \"Figi\".",
+            "description": "The unique identifier type to search, for example 'Figi'.",
             "required": true,
             "schema": {
               "type": "string",
-              "description": "The identifier being supplied e.g. \"Figi\".",
+              "description": "The unique identifier type to search, for example 'Figi'.",
               "nullable": true
             }
           },
           {
             "name": "identifier",
             "in": "path",
-            "description": "The value of the identifier that resolves to the instrument to delete.",
+            "description": "An <i>identifierType</i> value to use to identify the instrument, for example 'BBG000BLNNV0'.",
             "required": true,
             "schema": {
               "type": "string",
-              "description": "The value of the identifier that resolves to the instrument to delete.",
+              "description": "An <i>identifierType</i> value to use to identify the instrument, for example 'BBG000BLNNV0'.",
               "nullable": true
             }
           }
@@ -2228,36 +2228,36 @@
         "tags": [
           "Instruments"
         ],
-        "summary": "[EARLY ACCESS] Get the time series of an instrument property",
-        "description": "List the complete time series of an instrument property.",
+        "summary": "[EARLY ACCESS] Get instrument property time series",
+        "description": "Retrieve the complete time series (history) for a particular property of an instrument.",
         "operationId": "GetInstrumentPropertyTimeSeries",
         "parameters": [
           {
             "name": "identifierType",
             "in": "path",
-            "description": "The identifier type of the instrument, e.g., \"Figi\"",
+            "description": "The unique identifier type to search, for example 'Figi'.",
             "required": true,
             "schema": {
               "type": "string",
-              "description": "The identifier type of the instrument, e.g., \"Figi\"",
+              "description": "The unique identifier type to search, for example 'Figi'.",
               "nullable": true
             }
           },
           {
             "name": "identifier",
             "in": "path",
-            "description": "The value of the identifier for the requested instrument.",
+            "description": "An <i>identifierType</i> value to use to identify the instrument, for example 'BBG000BLNNV0'.",
             "required": true,
             "schema": {
               "type": "string",
-              "description": "The value of the identifier for the requested instrument.",
+              "description": "An <i>identifierType</i> value to use to identify the instrument, for example 'BBG000BLNNV0'.",
               "nullable": true
             }
           },
           {
             "name": "propertyKey",
             "in": "query",
-            "description": "The property key of the property that will have its history shown. These must be in the format {domain}/{scope}/{code} e.g. \"Instrument/system/Name\".\r\n            Each property must be from the \"Instrument\" domain.",
+            "description": "The property key of a property from the 'Instrument' domain whose history to retrieve.\r\n            This must have the format {domain}/{scope}/{code}, for example 'Instrument/system/Name'.",
             "schema": {
               "type": "string",
               "description": "The key that uniquely identifies the property. It has the format {domain}/{scope}/{code}.",
@@ -2267,20 +2267,20 @@
           {
             "name": "identifierEffectiveAt",
             "in": "query",
-            "description": "The effective datetime used to resolve the instrument from the provided identifier. Defaults to the current LUSID system datetime if not specified.",
+            "description": "The effective datetime used to resolve the instrument from the identifier.\r\n            Defaults to the current LUSID system datetime if not specified.",
             "schema": {
               "type": "string",
-              "description": "The effective datetime used to resolve the instrument from the provided identifier. Defaults to the current LUSID system datetime if not specified.",
+              "description": "The effective datetime used to resolve the instrument from the identifier.\r\n            Defaults to the current LUSID system datetime if not specified.",
               "nullable": true
             }
           },
           {
             "name": "asAt",
             "in": "query",
-            "description": "The asAt datetime at which to list the instrument's property history. Defaults to return the current datetime if not supplied.",
+            "description": "The asAt datetime at which to retrieve the instrument's property history. Defaults to\r\n            returning the current datetime if not supplied.",
             "schema": {
               "type": "string",
-              "description": "The asAt datetime at which to list the instrument's property history. Defaults to return the current datetime if not supplied.",
+              "description": "The asAt datetime at which to retrieve the instrument's property history. Defaults to\r\n            returning the current datetime if not supplied.",
               "format": "date-time",
               "nullable": true
             },
@@ -2289,32 +2289,32 @@
           {
             "name": "filter",
             "in": "query",
-            "description": "Expression to filter the result set. Read more about filtering results from LUSID here https://support.lusid.com/filtering-results-from-lusid.",
+            "description": "Expression to filter the results. For more information about filtering,\r\n            see https://support.lusid.com/knowledgebase/article/KA-01914.",
             "schema": {
               "type": "string",
-              "description": "Expression to filter the result set. Read more about filtering results from LUSID here https://support.lusid.com/filtering-results-from-lusid.",
+              "description": "Expression to filter the results. For more information about filtering,\r\n            see https://support.lusid.com/knowledgebase/article/KA-01914.",
               "nullable": true
             }
           },
           {
             "name": "page",
             "in": "query",
-            "description": "The pagination token to use to continue listing properties from a previous call to get property time series.\r\n            This value is returned from the previous call. If a pagination token is provided the filter, effectiveAt, and asAt fields\r\n            must not have changed since the original request.",
+            "description": "The pagination token to use to continue listing properties; this value is returned from\r\n            the previous call. If a pagination token is provided, the <i>filter</i>, <i>effectiveAt</i> and\r\n            <i>asAt</i> fields must not have changed since the original request. For more information, see\r\n            https://support.lusid.com/knowledgebase/article/KA-01915.",
             "schema": {
               "type": "string",
-              "description": "The pagination token to use to continue listing properties from a previous call to get property time series.\r\n            This value is returned from the previous call. If a pagination token is provided the filter, effectiveAt, and asAt fields\r\n            must not have changed since the original request.",
+              "description": "The pagination token to use to continue listing properties; this value is returned from\r\n            the previous call. If a pagination token is provided, the <i>filter</i>, <i>effectiveAt</i> and\r\n            <i>asAt</i> fields must not have changed since the original request. For more information, see\r\n            https://support.lusid.com/knowledgebase/article/KA-01915.",
               "nullable": true
             }
           },
           {
             "name": "limit",
             "in": "query",
-            "description": "When paginating, limit the number of returned results to this many.",
+            "description": "When paginating, limit the results to this number.",
             "schema": {
               "maximum": 5000,
               "minimum": 1,
               "type": "integer",
-              "description": "When paginating, limit the number of returned results to this many.",
+              "description": "When paginating, limit the results to this number.",
               "format": "int32",
               "nullable": true
             },
@@ -7447,10 +7447,10 @@
           {
             "name": "asAt",
             "in": "query",
-            "description": "The as-at datetime at which to list the portfolios. Defaults to return the latest version\r\n            of each portfolio if not specified.",
+            "description": "The asAt datetime at which to list the portfolios. Defaults to returning the latest version\r\n            of each portfolio if not specified.",
             "schema": {
               "type": "string",
-              "description": "The as-at datetime at which to list the portfolios. Defaults to return the latest version\r\n            of each portfolio if not specified.",
+              "description": "The asAt datetime at which to list the portfolios. Defaults to returning the latest version\r\n            of each portfolio if not specified.",
               "format": "date-time",
               "nullable": true
             },
@@ -7459,10 +7459,10 @@
           {
             "name": "page",
             "in": "query",
-            "description": "The pagination token to use to continue listing portfolios from a previous call to list portfolios. This\r\nvalue is returned from the previous call. If a pagination token is provided the filter, effectiveAt\r\nand asAt fields must not have changed since the original request. Also, if set, a start value cannot be provided.",
+            "description": "The pagination token to use to continue listing portfolios; this\r\n            value is returned from the previous call. If a pagination token is provided, the filter, effectiveAt\r\n            and asAt fields must not have changed since the original request. Also, if set, a start value cannot be provided.",
             "schema": {
               "type": "string",
-              "description": "The pagination token to use to continue listing portfolios from a previous call to list portfolios. This\r\nvalue is returned from the previous call. If a pagination token is provided the filter, effectiveAt\r\nand asAt fields must not have changed since the original request. Also, if set, a start value cannot be provided.",
+              "description": "The pagination token to use to continue listing portfolios; this\r\n            value is returned from the previous call. If a pagination token is provided, the filter, effectiveAt\r\n            and asAt fields must not have changed since the original request. Also, if set, a start value cannot be provided.",
               "nullable": true
             }
           },
@@ -7481,12 +7481,12 @@
           {
             "name": "limit",
             "in": "query",
-            "description": "When paginating, limit the number of returned results to this many. Defaults to 65,535 if not specified.",
+            "description": "When paginating, limit the results to this number. Defaults to 65,535 if not specified.",
             "schema": {
               "maximum": 5000,
               "minimum": 1,
               "type": "integer",
-              "description": "When paginating, limit the number of returned results to this many. Defaults to 65,535 if not specified.",
+              "description": "When paginating, limit the results to this number. Defaults to 65,535 if not specified.",
               "format": "int32",
               "nullable": true
             },
@@ -7495,20 +7495,20 @@
           {
             "name": "filter",
             "in": "query",
-            "description": "Expression to filter the result set.\r\n            For example, to filter on the Type, use \"type eq 'Transaction'\"\r\n            Read more about filtering results from LUSID here https://support.lusid.com/filtering-results-from-lusid.",
+            "description": "Expression to filter the results.\r\n            For example, to filter on the transaction type, specify \"type eq 'Transaction'\". For more information about filtering\r\n            results, see https://support.lusid.com/knowledgebase/article/KA-01914.",
             "schema": {
               "type": "string",
-              "description": "Expression to filter the result set.\r\n            For example, to filter on the Type, use \"type eq 'Transaction'\"\r\n            Read more about filtering results from LUSID here https://support.lusid.com/filtering-results-from-lusid.",
+              "description": "Expression to filter the results.\r\n            For example, to filter on the transaction type, specify \"type eq 'Transaction'\". For more information about filtering\r\n            results, see https://support.lusid.com/knowledgebase/article/KA-01914.",
               "nullable": true
             }
           },
           {
             "name": "query",
             "in": "query",
-            "description": "Expression specifying the criteria that the returned portfolios must meet. For example, to see which\r\n            portfolios have holdings in the instruments with a Lusid Instrument Id (LUID) of 'LUID_PPA8HI6M' or a Figi of 'BBG000BLNNH6'\r\n            you would specify \"instrument.identifiers in (('LusidInstrumentId', 'LUID_PPA8HI6M'), ('Figi', 'BBG000BLNNH6'))\".",
+            "description": "Expression specifying the criteria that the returned portfolios must meet. For example, to see which\r\n            portfolios have holdings in instruments with a LusidInstrumentId (LUID) of 'LUID_PPA8HI6M' or a Figi of 'BBG000BLNNH6',\r\n            specify \"instrument.identifiers in (('LusidInstrumentId', 'LUID_PPA8HI6M'), ('Figi', 'BBG000BLNNH6'))\".",
             "schema": {
               "type": "string",
-              "description": "Expression specifying the criteria that the returned portfolios must meet. For example, to see which\r\n            portfolios have holdings in the instruments with a Lusid Instrument Id (LUID) of 'LUID_PPA8HI6M' or a Figi of 'BBG000BLNNH6'\r\n            you would specify \"instrument.identifiers in (('LusidInstrumentId', 'LUID_PPA8HI6M'), ('Figi', 'BBG000BLNNH6'))\".",
+              "description": "Expression specifying the criteria that the returned portfolios must meet. For example, to see which\r\n            portfolios have holdings in instruments with a LusidInstrumentId (LUID) of 'LUID_PPA8HI6M' or a Figi of 'BBG000BLNNH6',\r\n            specify \"instrument.identifiers in (('LusidInstrumentId', 'LUID_PPA8HI6M'), ('Figi', 'BBG000BLNNH6'))\".",
               "nullable": true
             }
           },
@@ -7821,20 +7821,20 @@
           "Portfolios"
         ],
         "summary": "List portfolios for scope",
-        "description": "List all the portfolios in a scope.",
+        "description": "List all the portfolios in a particular scope.",
         "operationId": "ListPortfoliosForScope",
         "parameters": [
           {
             "name": "scope",
             "in": "path",
-            "description": "The scope of the portfolios.",
+            "description": "The scope whose portfolios to list.",
             "required": true,
             "schema": {
               "maxLength": 64,
               "minLength": 1,
               "pattern": "^[a-zA-Z0-9\\-_]+$",
               "type": "string",
-              "description": "The scope of the portfolios.",
+              "description": "The scope whose portfolios to list.",
               "nullable": true
             }
           },
@@ -7852,10 +7852,10 @@
           {
             "name": "asAt",
             "in": "query",
-            "description": "The as-at datetime at which to list the portfolios. Defaults to return the latest version\r\n            of each portfolio if not specified.",
+            "description": "The asAt datetime at which to list the portfolios. Defaults to returning the latest version\r\n            of each portfolio if not specified.",
             "schema": {
               "type": "string",
-              "description": "The as-at datetime at which to list the portfolios. Defaults to return the latest version\r\n            of each portfolio if not specified.",
+              "description": "The asAt datetime at which to list the portfolios. Defaults to returning the latest version\r\n            of each portfolio if not specified.",
               "format": "date-time",
               "nullable": true
             },
@@ -7864,10 +7864,10 @@
           {
             "name": "page",
             "in": "query",
-            "description": "The pagination token to use to continue listing portfolios from a previous call to list portfolios. This\r\nvalue is returned from the previous call. If a pagination token is provided the filter, effectiveAt\r\nand asAt fields must not have changed since the original request. Also, if set, a start value cannot be provided.",
+            "description": "The pagination token to use to continue listing portfolios. This\r\nvalue is returned from the previous call. If a pagination token is provided, the filter, effectiveAt\r\nand asAt fields must not have changed since the original request. Also, if set, a start value cannot be provided.",
             "schema": {
               "type": "string",
-              "description": "The pagination token to use to continue listing portfolios from a previous call to list portfolios. This\r\nvalue is returned from the previous call. If a pagination token is provided the filter, effectiveAt\r\nand asAt fields must not have changed since the original request. Also, if set, a start value cannot be provided.",
+              "description": "The pagination token to use to continue listing portfolios. This\r\nvalue is returned from the previous call. If a pagination token is provided, the filter, effectiveAt\r\nand asAt fields must not have changed since the original request. Also, if set, a start value cannot be provided.",
               "nullable": true
             }
           },
@@ -7886,12 +7886,12 @@
           {
             "name": "limit",
             "in": "query",
-            "description": "When paginating, limit the number of returned results to this many. Defaults to 65,535 if not specified.",
+            "description": "When paginating, limit the results to this number. Defaults to 65,535 if not specified.",
             "schema": {
               "maximum": 5000,
               "minimum": 1,
               "type": "integer",
-              "description": "When paginating, limit the number of returned results to this many. Defaults to 65,535 if not specified.",
+              "description": "When paginating, limit the results to this number. Defaults to 65,535 if not specified.",
               "format": "int32",
               "nullable": true
             },
@@ -7900,10 +7900,10 @@
           {
             "name": "filter",
             "in": "query",
-            "description": "Expression to filter the result set.\r\n            For example, to return only transactions with a transaction type of 'Buy', specify \"type eq 'Buy'\".\r\n            For more information about filtering LUSID results, see https://support.lusid.com/knowledgebase/article/KA-01914.",
+            "description": "Expression to filter the results.\r\n            For example, to return only transactions with a transaction type of 'Buy', specify \"type eq 'Buy'\".\r\n            For more information about filtering results, see https://support.lusid.com/knowledgebase/article/KA-01914.",
             "schema": {
               "type": "string",
-              "description": "Expression to filter the result set.\r\n            For example, to return only transactions with a transaction type of 'Buy', specify \"type eq 'Buy'\".\r\n            For more information about filtering LUSID results, see https://support.lusid.com/knowledgebase/article/KA-01914.",
+              "description": "Expression to filter the results.\r\n            For example, to return only transactions with a transaction type of 'Buy', specify \"type eq 'Buy'\".\r\n            For more information about filtering results, see https://support.lusid.com/knowledgebase/article/KA-01914.",
               "nullable": true
             }
           },
@@ -7989,7 +7989,7 @@
           "Portfolios"
         ],
         "summary": "Get portfolio",
-        "description": "Retrieve the definition of a portfolio.",
+        "description": "Retrieve the definition of a particular portfolio.",
         "operationId": "GetPortfolio",
         "parameters": [
           {
@@ -8034,10 +8034,10 @@
           {
             "name": "asAt",
             "in": "query",
-            "description": "The asAt datetime at which to retrieve the portfolio definition. Defaults to return the latest version of the portfolio definition if not specified.",
+            "description": "The asAt datetime at which to retrieve the portfolio definition. Defaults to returning the latest version of the portfolio definition if not specified.",
             "schema": {
               "type": "string",
-              "description": "The asAt datetime at which to retrieve the portfolio definition. Defaults to return the latest version of the portfolio definition if not specified.",
+              "description": "The asAt datetime at which to retrieve the portfolio definition. Defaults to returning the latest version of the portfolio definition if not specified.",
               "format": "date-time",
               "nullable": true
             },
@@ -8123,7 +8123,7 @@
           "Portfolios"
         ],
         "summary": "Delete portfolio",
-        "description": "Delete a portfolio.\r\n            \r\nThe deletion will take effect from the portfolio's creation datetime. This means that the portfolio will no longer exist at any effective datetime, from the as-at datetime of deletion.",
+        "description": "Delete a particular portfolio.\r\n            \r\nThe deletion will take effect from the portfolio's creation datetime. This means that the portfolio will no longer exist at any effective datetime, as per the asAt datetime of deletion.",
         "operationId": "DeletePortfolio",
         "parameters": [
           {
@@ -8219,7 +8219,7 @@
           "Portfolios"
         ],
         "summary": "Update portfolio",
-        "description": "Update the definition of a portfolio.\r\n            \r\nNote that not all elements of a portfolio definition are\r\nmodifiable due to the potential implications for data already stored against the portfolio.",
+        "description": "Update the definition of a particular portfolio.\r\n            \r\nNote that not all elements of a portfolio definition are\r\nmodifiable due to the potential implications for data already stored.",
         "operationId": "UpdatePortfolio",
         "parameters": [
           {
@@ -8370,7 +8370,7 @@
           "Portfolios"
         ],
         "summary": "[EARLY ACCESS] Get portfolio commands",
-        "description": "Get all the commands that modified a portfolio, including any input transactions.",
+        "description": "Get all the commands that modified a particular portfolio, including any input transactions.",
         "operationId": "GetPortfolioCommands",
         "parameters": [
           {
@@ -8404,10 +8404,10 @@
           {
             "name": "fromAsAt",
             "in": "query",
-            "description": "The lower bound as-at datetime (inclusive) from which to retrieve commands. There is no lower bound if this is not specified.",
+            "description": "The lower bound asAt datetime (inclusive) from which to retrieve commands. There is no lower bound if this is not specified.",
             "schema": {
               "type": "string",
-              "description": "The lower bound as-at datetime (inclusive) from which to retrieve commands. There is no lower bound if this is not specified.",
+              "description": "The lower bound asAt datetime (inclusive) from which to retrieve commands. There is no lower bound if this is not specified.",
               "format": "date-time",
               "nullable": true
             },
@@ -8416,10 +8416,10 @@
           {
             "name": "toAsAt",
             "in": "query",
-            "description": "The upper bound as-at datetime (inclusive) from which to retrieve commands. There is no upper bound if this is not specified.",
+            "description": "The upper bound asAt datetime (inclusive) from which to retrieve commands. There is no upper bound if this is not specified.",
             "schema": {
               "type": "string",
-              "description": "The upper bound as-at datetime (inclusive) from which to retrieve commands. There is no upper bound if this is not specified.",
+              "description": "The upper bound asAt datetime (inclusive) from which to retrieve commands. There is no upper bound if this is not specified.",
               "format": "date-time",
               "nullable": true
             },
@@ -8428,32 +8428,32 @@
           {
             "name": "filter",
             "in": "query",
-            "description": "Expression to filter the result set.\r\n            For example, to filter on the User ID, use \"userId.id eq 'string'\"\r\n            Read more about filtering results from LUSID here https://support.lusid.com/filtering-results-from-lusid.",
+            "description": "Expression to filter the results.\r\n            For example, to filter on the User ID, specify \"userId.id eq 'string'\".\r\n            For more information about filtering, see https://support.lusid.com/knowledgebase/article/KA-01914.",
             "schema": {
               "type": "string",
-              "description": "Expression to filter the result set.\r\n            For example, to filter on the User ID, use \"userId.id eq 'string'\"\r\n            Read more about filtering results from LUSID here https://support.lusid.com/filtering-results-from-lusid.",
+              "description": "Expression to filter the results.\r\n            For example, to filter on the User ID, specify \"userId.id eq 'string'\".\r\n            For more information about filtering, see https://support.lusid.com/knowledgebase/article/KA-01914.",
               "nullable": true
             }
           },
           {
             "name": "page",
             "in": "query",
-            "description": "The pagination token to use to continue listing commands from a previous call to GetPortfolioCommands.",
+            "description": "The pagination token to use to continue listing commands; this value is returned from the previous call.",
             "schema": {
               "type": "string",
-              "description": "The pagination token to use to continue listing commands from a previous call to GetPortfolioCommands.",
+              "description": "The pagination token to use to continue listing commands; this value is returned from the previous call.",
               "nullable": true
             }
           },
           {
             "name": "limit",
             "in": "query",
-            "description": "When paginating, limit the number of returned results to this many. Defaults to 500 if not specified.",
+            "description": "When paginating, limit the results to this number. Defaults to 500 if not specified.",
             "schema": {
               "maximum": 5000,
               "minimum": 1,
               "type": "integer",
-              "description": "When paginating, limit the number of returned results to this many. Defaults to 500 if not specified.",
+              "description": "When paginating, limit the results to this number. Defaults to 500 if not specified.",
               "format": "int32",
               "nullable": true
             },
@@ -8526,7 +8526,7 @@
           "Portfolios"
         ],
         "summary": "Get portfolio properties",
-        "description": "List all the properties of a portfolio.",
+        "description": "List all the properties of a particular portfolio.",
         "operationId": "GetPortfolioProperties",
         "parameters": [
           {
@@ -8571,10 +8571,10 @@
           {
             "name": "asAt",
             "in": "query",
-            "description": "The as-at datetime at which to list the portfolio's properties. Defaults to return the latest version of each property if not specified.",
+            "description": "The asAt datetime at which to list the portfolio's properties. Defaults to returning the latest version of each property if not specified.",
             "schema": {
               "type": "string",
-              "description": "The as-at datetime at which to list the portfolio's properties. Defaults to return the latest version of each property if not specified.",
+              "description": "The asAt datetime at which to list the portfolio's properties. Defaults to returning the latest version of each property if not specified.",
               "format": "date-time",
               "nullable": true
             },
@@ -8645,7 +8645,7 @@
           "Portfolios"
         ],
         "summary": "Delete portfolio properties",
-        "description": "Delete one or more properties from a single portfolio. If the properties are time variant then an effective date time from which the properties\r\nwill be deleted must be specified. If the properties are perpetual then it is invalid to specify an effective date time for deletion.",
+        "description": "Delete one or more properties from a particular portfolio. If the properties are time-variant then an effective datetime from which\r\nto delete properties must be specified. If the properties are perpetual then it is invalid to specify an effective datetime for deletion.",
         "operationId": "DeletePortfolioProperties",
         "parameters": [
           {
@@ -8679,10 +8679,10 @@
           {
             "name": "effectiveAt",
             "in": "query",
-            "description": "The effective datetime or cut label at which to delete the properties.",
+            "description": "The effective datetime or cut label at which to delete time-variant properties.",
             "schema": {
               "type": "string",
-              "description": "The effective datetime or cut label at which to delete the properties.",
+              "description": "The effective datetime or cut label at which to delete time-variant properties.",
               "format": "dateorcutlabel",
               "nullable": true
             }
@@ -8766,7 +8766,7 @@
           "Portfolios"
         ],
         "summary": "Upsert portfolio properties",
-        "description": "Update or insert one or more properties onto a single portfolio. A property will be updated if it\r\nalready exists and inserted if it does not. All properties must be from the 'Portfolio' domain.\r\n            \r\nProperties have an <i>effectiveFrom</i> datetime for which the property is valid, and an <i>effectiveUntil</i>\r\ndatetime until which the property is valid. Not supplying an <i>effectiveUntil</i> datetime results in the property being\r\nvalid indefinitely, or until the next <i>effectiveFrom</i> datetime of the property.",
+        "description": "Create or update one or more properties for a particular portfolio. A property is updated if it\r\nalready exists and created if it does not. All properties must be from the 'Portfolio' domain.\r\n            \r\nProperties have an <i>effectiveFrom</i> datetime from which the property is valid, and an <i>effectiveUntil</i>\r\ndatetime until which it is valid. Not supplying an <i>effectiveUntil</i> datetime results in the property being\r\nvalid indefinitely, or until the next <i>effectiveFrom</i> datetime of the property.",
         "operationId": "UpsertPortfolioProperties",
         "parameters": [
           {
@@ -8799,7 +8799,7 @@
           }
         ],
         "requestBody": {
-          "description": "The properties to be updated or inserted onto the portfolio. Each property in\r\n             the request must be keyed by its unique property key. This has the format {domain}/{scope}/{code}, for example\r\n             'Portfolio/Manager/Id'.",
+          "description": "The properties to be created or updated. Each property in\r\n             the request must be keyed by its unique property key. This has the format {domain}/{scope}/{code}, for example\r\n             'Portfolio/Manager/Id'.",
           "content": {
             "application/json-patch+json": {
               "schema": {
@@ -8807,7 +8807,7 @@
                 "additionalProperties": {
                   "$ref": "#/components/schemas/Property"
                 },
-                "description": "The properties to be updated or inserted onto the portfolio. Each property in\r\n             the request must be keyed by its unique property key. This has the format {domain}/{scope}/{code}, for example\r\n             'Portfolio/Manager/Id'."
+                "description": "The properties to be created or updated. Each property in\r\n             the request must be keyed by its unique property key. This has the format {domain}/{scope}/{code}, for example\r\n             'Portfolio/Manager/Id'."
               },
               "example": {
                 "portfolio/MyScope/FundManagerName": {
@@ -8849,7 +8849,7 @@
                 "additionalProperties": {
                   "$ref": "#/components/schemas/Property"
                 },
-                "description": "The properties to be updated or inserted onto the portfolio. Each property in\r\n             the request must be keyed by its unique property key. This has the format {domain}/{scope}/{code}, for example\r\n             'Portfolio/Manager/Id'."
+                "description": "The properties to be created or updated. Each property in\r\n             the request must be keyed by its unique property key. This has the format {domain}/{scope}/{code}, for example\r\n             'Portfolio/Manager/Id'."
               },
               "example": {
                 "portfolio/MyScope/FundManagerName": {
@@ -8891,7 +8891,7 @@
                 "additionalProperties": {
                   "$ref": "#/components/schemas/Property"
                 },
-                "description": "The properties to be updated or inserted onto the portfolio. Each property in\r\n             the request must be keyed by its unique property key. This has the format {domain}/{scope}/{code}, for example\r\n             'Portfolio/Manager/Id'."
+                "description": "The properties to be created or updated. Each property in\r\n             the request must be keyed by its unique property key. This has the format {domain}/{scope}/{code}, for example\r\n             'Portfolio/Manager/Id'."
               },
               "example": {
                 "portfolio/MyScope/FundManagerName": {
@@ -8933,7 +8933,7 @@
                 "additionalProperties": {
                   "$ref": "#/components/schemas/Property"
                 },
-                "description": "The properties to be updated or inserted onto the portfolio. Each property in\r\n             the request must be keyed by its unique property key. This has the format {domain}/{scope}/{code}, for example\r\n             'Portfolio/Manager/Id'."
+                "description": "The properties to be created or updated. Each property in\r\n             the request must be keyed by its unique property key. This has the format {domain}/{scope}/{code}, for example\r\n             'Portfolio/Manager/Id'."
               },
               "example": {
                 "portfolio/MyScope/FundManagerName": {
@@ -11255,10 +11255,10 @@
           {
             "name": "asAtTime",
             "in": "query",
-            "description": "The as-at time for which the result is valid.",
+            "description": "The asAt time for which the result is valid.",
             "schema": {
               "type": "string",
-              "description": "The as-at time for which the result is valid.",
+              "description": "The asAt time for which the result is valid.",
               "format": "date-time",
               "nullable": true
             },
@@ -12630,16 +12630,16 @@
           "System Configuration"
         ],
         "summary": "[EARLY ACCESS] List transaction types",
-        "description": "Get the list of persisted transaction types",
+        "description": "Get the list of current transaction types. For information on the default transaction types provided with\r\nLUSID, see https://support.lusid.com/knowledgebase/article/KA-01873/.",
         "operationId": "ListConfigurationTransactionTypes",
         "parameters": [
           {
             "name": "asAt",
             "in": "query",
-            "description": "The asAt datetime at which to retrieve the Transaction configuration types. Defaults\r\n            to return the latest version of the holdings if not specified.",
+            "description": "The asAt datetime at which to retrieve the transaction types. Defaults\r\n            to returning the latest versions if not specified.",
             "schema": {
               "type": "string",
-              "description": "The asAt datetime at which to retrieve the Transaction configuration types. Defaults\r\n            to return the latest version of the holdings if not specified.",
+              "description": "The asAt datetime at which to retrieve the transaction types. Defaults\r\n            to returning the latest versions if not specified.",
               "format": "date-time",
               "nullable": true
             },
@@ -12712,10 +12712,10 @@
           "System Configuration"
         ],
         "summary": "[EARLY ACCESS] Create transaction type",
-        "description": "Create a new transaction type by specifying a definition and the mappings to movements",
+        "description": "Create a new transaction type by specifying a definition and mappings to movements.",
         "operationId": "CreateConfigurationTransactionType",
         "requestBody": {
-          "description": "A transaction type definition",
+          "description": "A transaction type definition.",
           "content": {
             "application/json-patch+json": {
               "schema": {
@@ -13395,10 +13395,10 @@
           {
             "name": "asAt",
             "in": "query",
-            "description": "The as-at datetime at which to retrieve the portfolio. Defaults to returning the latest version\r\n            of each transaction if not specified.",
+            "description": "The asAt datetime at which to retrieve the portfolio. Defaults to returning the latest version\r\n            of each transaction if not specified.",
             "schema": {
               "type": "string",
-              "description": "The as-at datetime at which to retrieve the portfolio. Defaults to returning the latest version\r\n            of each transaction if not specified.",
+              "description": "The asAt datetime at which to retrieve the portfolio. Defaults to returning the latest version\r\n            of each transaction if not specified.",
               "format": "date-time",
               "nullable": true
             },
@@ -16017,7 +16017,7 @@
           "Transaction Portfolios"
         ],
         "summary": "Upsert portfolio details",
-        "description": "Update or insert details that can be changed for a transaction portfolio once it has been created. The details will be updated\r\nif they already exist and inserted if they do not.",
+        "description": "Create or update certain details for a particular transaction portfolio. The details are updated if they already exist, and inserted if they do not.\r\n            \r\nNote that not all elements of a transaction portfolio definition are\r\nmodifiable once it has been created due to the potential implications for data already stored.",
         "operationId": "UpsertPortfolioDetails",
         "parameters": [
           {
@@ -16037,31 +16037,31 @@
           {
             "name": "code",
             "in": "path",
-            "description": "The code of the transaction portfolio. Together with the\r\n            scope this uniquely identifies the transaction portfolio.",
+            "description": "The code of the transaction portfolio. Together with the\r\n             scope this uniquely identifies the transaction portfolio.",
             "required": true,
             "schema": {
               "maxLength": 64,
               "minLength": 1,
               "pattern": "^[a-zA-Z0-9\\-_]+$",
               "type": "string",
-              "description": "The code of the transaction portfolio. Together with the\r\n            scope this uniquely identifies the transaction portfolio.",
+              "description": "The code of the transaction portfolio. Together with the\r\n             scope this uniquely identifies the transaction portfolio.",
               "nullable": true
             }
           },
           {
             "name": "effectiveAt",
             "in": "query",
-            "description": "The effective datetime or cut label at which the updated or inserted details should become valid.\r\n            Defaults to the current LUSID system datetime if not specified.",
+            "description": "The effective datetime or cut label at which the updated or inserted details should become valid.\r\n             Defaults to the current LUSID system datetime if not specified.",
             "schema": {
               "type": "string",
-              "description": "The effective datetime or cut label at which the updated or inserted details should become valid.\r\n            Defaults to the current LUSID system datetime if not specified.",
+              "description": "The effective datetime or cut label at which the updated or inserted details should become valid.\r\n             Defaults to the current LUSID system datetime if not specified.",
               "format": "dateorcutlabel",
               "nullable": true
             }
           }
         ],
         "requestBody": {
-          "description": "The details to update or insert for the specified transaction portfolio.",
+          "description": "The details to create or update for the specified transaction portfolio.",
           "content": {
             "application/json-patch+json": {
               "schema": {
@@ -16218,7 +16218,7 @@
           "Transaction Portfolios"
         ],
         "summary": "[EARLY ACCESS] Upsert executions",
-        "description": "Update or insert executions into the specified transaction portfolio. An execution will be updated\r\nif it already exists and inserted if it does not.",
+        "description": "Create or update executions in the transaction portfolio. An execution will be updated\r\nif it already exists and created if it does not.",
         "operationId": "UpsertExecutions",
         "parameters": [
           {
@@ -16251,7 +16251,7 @@
           }
         ],
         "requestBody": {
-          "description": "The executions to update or insert.",
+          "description": "The executions to create or update.",
           "content": {
             "application/json-patch+json": {
               "schema": {
@@ -16259,7 +16259,7 @@
                 "items": {
                   "$ref": "#/components/schemas/ExecutionRequest"
                 },
-                "description": "The executions to update or insert.",
+                "description": "The executions to create or update.",
                 "nullable": true
               },
               "example": [
@@ -16282,7 +16282,7 @@
                 "items": {
                   "$ref": "#/components/schemas/ExecutionRequest"
                 },
-                "description": "The executions to update or insert.",
+                "description": "The executions to create or update.",
                 "nullable": true
               },
               "example": [
@@ -16305,7 +16305,7 @@
                 "items": {
                   "$ref": "#/components/schemas/ExecutionRequest"
                 },
-                "description": "The executions to update or insert.",
+                "description": "The executions to create or update.",
                 "nullable": true
               },
               "example": [
@@ -16328,7 +16328,7 @@
                 "items": {
                   "$ref": "#/components/schemas/ExecutionRequest"
                 },
-                "description": "The executions to update or insert.",
+                "description": "The executions to create or update.",
                 "nullable": true
               },
               "example": [
@@ -17301,10 +17301,10 @@
           {
             "name": "asAt",
             "in": "query",
-            "description": "The as-at datetime at which to retrieve the holdings of the transaction portfolio. Defaults\r\n            to return the latest version if not specified.",
+            "description": "The asAt datetime at which to retrieve the holdings of the transaction portfolio. Defaults\r\n            to return the latest version if not specified.",
             "schema": {
               "type": "string",
-              "description": "The as-at datetime at which to retrieve the holdings of the transaction portfolio. Defaults\r\n            to return the latest version if not specified.",
+              "description": "The asAt datetime at which to retrieve the holdings of the transaction portfolio. Defaults\r\n            to return the latest version if not specified.",
               "format": "date-time",
               "nullable": true
             },
@@ -17990,10 +17990,10 @@
           {
             "name": "asAt",
             "in": "query",
-            "description": "The as-at datetime at which to retrieve transactions. Defaults to returning the latest version\r\n            of each transaction if not specified.",
+            "description": "The asAt datetime at which to retrieve transactions. Defaults to returning the latest version\r\n            of each transaction if not specified.",
             "schema": {
               "type": "string",
-              "description": "The as-at datetime at which to retrieve transactions. Defaults to returning the latest version\r\n            of each transaction if not specified.",
+              "description": "The asAt datetime at which to retrieve transactions. Defaults to returning the latest version\r\n            of each transaction if not specified.",
               "format": "date-time",
               "nullable": true
             },
@@ -18248,7 +18248,7 @@
           "Transaction Portfolios"
         ],
         "summary": "Upsert transactions",
-        "description": "Update or insert transactions into the transaction portfolio. A transaction will be updated\r\nif it already exists and inserted if it does not.\n\nThe maximum number of transactions that this method can upsert per request is 10,000.",
+        "description": "Create or update transactions in the transaction portfolio. A transaction will be updated\r\nif it already exists and created if it does not.\n\nThe maximum number of transactions that this method can upsert per request is 10,000.",
         "operationId": "UpsertTransactions",
         "parameters": [
           {
@@ -18281,7 +18281,7 @@
           }
         ],
         "requestBody": {
-          "description": "A list of transactions to be updated or inserted.",
+          "description": "A list of transactions to be created or updated.",
           "content": {
             "application/json-patch+json": {
               "schema": {
@@ -18289,7 +18289,7 @@
                 "items": {
                   "$ref": "#/components/schemas/TransactionRequest"
                 },
-                "description": "A list of transactions to be updated or inserted."
+                "description": "A list of transactions to be created or updated."
               },
               "example": [
                 {
@@ -18330,7 +18330,7 @@
                 "items": {
                   "$ref": "#/components/schemas/TransactionRequest"
                 },
-                "description": "A list of transactions to be updated or inserted."
+                "description": "A list of transactions to be created or updated."
               },
               "example": [
                 {
@@ -18371,7 +18371,7 @@
                 "items": {
                   "$ref": "#/components/schemas/TransactionRequest"
                 },
-                "description": "A list of transactions to be updated or inserted."
+                "description": "A list of transactions to be created or updated."
               },
               "example": [
                 {
@@ -18412,7 +18412,7 @@
                 "items": {
                   "$ref": "#/components/schemas/TransactionRequest"
                 },
-                "description": "A list of transactions to be updated or inserted."
+                "description": "A list of transactions to be created or updated."
               },
               "example": [
                 {
@@ -19443,7 +19443,7 @@
           "Transaction Portfolios"
         ],
         "summary": "Upsert transaction properties",
-        "description": "Update or insert one or more transaction properties to a single transaction in a transaction portfolio.\r\nEach property will be updated if it already exists and inserted if it does not.\r\nBoth transaction and portfolio must exist at the time when properties are updated or inserted.",
+        "description": "Create or update one or more transaction properties for a single transaction in the transaction portfolio.\r\nEach property will be updated if it already exists and created if it does not.\r\nBoth transaction and portfolio must exist at the time when properties are created or updated.",
         "operationId": "UpsertTransactionProperties",
         "parameters": [
           {
@@ -19477,17 +19477,17 @@
           {
             "name": "transactionId",
             "in": "path",
-            "description": "The unique ID of the transaction to update or insert properties for.",
+            "description": "The unique ID of the transaction to create or update properties for.",
             "required": true,
             "schema": {
               "type": "string",
-              "description": "The unique ID of the transaction to update or insert properties for.",
+              "description": "The unique ID of the transaction to create or update properties for.",
               "nullable": true
             }
           }
         ],
         "requestBody": {
-          "description": "The properties and their associated values to update or insert.",
+          "description": "The properties and their associated values to create or update.",
           "content": {
             "application/json-patch+json": {
               "schema": {
@@ -19495,7 +19495,7 @@
                 "additionalProperties": {
                   "$ref": "#/components/schemas/PerpetualProperty"
                 },
-                "description": "The properties and their associated values to update or insert."
+                "description": "The properties and their associated values to create or update."
               },
               "example": {
                 "transaction/MyScope/MyPropertyName": {
@@ -19524,7 +19524,7 @@
                 "additionalProperties": {
                   "$ref": "#/components/schemas/PerpetualProperty"
                 },
-                "description": "The properties and their associated values to update or insert."
+                "description": "The properties and their associated values to create or update."
               },
               "example": {
                 "transaction/MyScope/MyPropertyName": {
@@ -19553,7 +19553,7 @@
                 "additionalProperties": {
                   "$ref": "#/components/schemas/PerpetualProperty"
                 },
-                "description": "The properties and their associated values to update or insert."
+                "description": "The properties and their associated values to create or update."
               },
               "example": {
                 "transaction/MyScope/MyPropertyName": {
@@ -19582,7 +19582,7 @@
                 "additionalProperties": {
                   "$ref": "#/components/schemas/PerpetualProperty"
                 },
-                "description": "The properties and their associated values to update or insert."
+                "description": "The properties and their associated values to create or update."
               },
               "example": {
                 "transaction/MyScope/MyPropertyName": {
@@ -20835,7 +20835,7 @@
           },
           "asAt": {
             "type": "string",
-            "description": "The asAt datetime at which the instrument was deleted.",
+            "description": "The as-at datetime at which the instrument was deleted.",
             "format": "date-time"
           },
           "links": {
@@ -20970,18 +20970,18 @@
         "properties": {
           "identifierType": {
             "type": "string",
-            "description": "The instrument identifier type."
+            "description": "The unique identifier type to search for the instrument, for example 'Figi'."
           },
           "identifier": {
             "type": "string",
-            "description": "The unique instrument identifier of the instrument to update or insert properties on."
+            "description": "A value of that type to identify the instrument to upsert properties for, for example 'BBG000BLNNV0'."
           },
           "properties": {
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/Property"
             },
-            "description": "Set of unique instrument properties and associated values to store with the instrument. Each property must be from the 'Instrument' domain.",
+            "description": "A set of instrument properties and associated values to store for the instrument. Each property must be from the 'Instrument' domain.",
             "nullable": true
           }
         },
@@ -20995,7 +20995,7 @@
         "properties": {
           "asAtDate": {
             "type": "string",
-            "description": "The asAt datetime at which the properties were updated or inserted on the specified instruments.",
+            "description": "The as-at datetime at which properties were created or updated.",
             "format": "date-time"
           },
           "links": {
@@ -24505,7 +24505,7 @@
               "type": "string",
               "description": "The key that uniquely identifies the property. It has the format {domain}/{scope}/{code}."
             },
-            "description": "A set of unique transaction properties to group the transaction portfolio's holdings by. Each property must be from the 'Transaction' domain and identified by a key in the format {domain}/{scope}/{code}, for example 'Transaction/strategies/quantsignal'.",
+            "description": "A set of unique transaction properties to group the transaction portfolio's holdings by, perhaps for strategy tagging. Each property must be from the 'Transaction' domain and identified by a key in the format {domain}/{scope}/{code}, for example 'Transaction/strategies/quantsignal'. Note that sub-holding keys cannot currently be added after the transaction portfolio has been created; see https://support.lusid.com/knowledgebase/article/KA-01879/en-us for more information.",
             "nullable": true
           },
           "properties": {
@@ -24513,7 +24513,7 @@
             "additionalProperties": {
               "$ref": "#/components/schemas/Property"
             },
-            "description": "A set of unique portfolio properties to add to the transaction portfolio. Each property must be from the 'Portfolio' domain and identified by a key in the format {domain}/{scope}/{code}, for example 'Portfolio/Manager/Id'. Note these properties must be pre-defined.",
+            "description": "A set of unique portfolio properties to add custom data to the transaction portfolio. Each property must be from the 'Portfolio' domain and identified by a key in the format {domain}/{scope}/{code}, for example 'Portfolio/Manager/Id'. Note these properties must be pre-defined.",
             "nullable": true
           }
         },
@@ -25225,7 +25225,7 @@
         "description": "OAuth2 Implicit Grant",
         "flows": {
           "implicit": {
-            "authorizationUrl": "https://lusid.okta.com/oauth2/default/v1/authorize",
+            "authorizationUrl": "https://dummyurl.lusid.com/",
             "scopes": {}
           }
         }
@@ -25286,7 +25286,7 @@
     },
     {
       "name": "Instruments",
-      "description": "Methods for interacting with instruments. Read more about instruments in the LUSID Knowledge Base here https://support.lusid.com/what-is-an-instrument."
+      "description": "An instrument represents a financial asset that an investor owns or has exposure to. Each transaction should be booked against an instrument stored in the LUSID instrument master. For more information, see https://support.lusid.com/knowledgebase/article/KA-01857."
     },
     {
       "name": "Legal Entities",
@@ -25310,7 +25310,7 @@
     },
     {
       "name": "Portfolios",
-      "description": "A portfolio is a store of economic information. There are three types: transaction, reference and derived transaction. Note that Portfolio API endpoints can also be called when interacting with the Transaction Portfolios API,  Reference Portfolio API or Derived Transaction Portfolios API. For more information, see https://support.lusid.com/knowledgebase/article/KA-01848."
+      "description": "A portfolio is a store of economic information. There are three types: transaction, reference and derived transaction. Note that these endpoints can also be called when interacting with the respective Transaction Portfolios API,  Reference Portfolio API and Derived Transaction Portfolios API. For more information, see https://support.lusid.com/knowledgebase/article/KA-01848."
     },
     {
       "name": "Property Definitions",
@@ -25362,11 +25362,11 @@
     },
     {
       "name": "Structured Result Data",
-      "description": "Methods for the storage and retrieval of structured result data documents. Read more about these in the LUSID Knowledge Base here https://support.lusid.com/knowledgebase/article/KA-01893."
+      "description": "The structured result store persists information that might be useful to help value a portfolio or analyse performance or risk, but that is not traded like quote data (which can be stored in the quote store). For more information, see https://support.lusid.com/knowledgebase/article/KA-01893."
     },
     {
       "name": "System Configuration",
-      "description": "Methods for updating system configuration with Portfolios"
+      "description": "LUSID is a transaction-based system. Every transaction in a particular instrument should belong to a transaction type in order that it might contribute to measuring your holding (position) in that instrument. Transaction types are a fundamental building block of LUSID, and care should be exercised when changing them. For more information, see https://support.lusid.com/knowledgebase/article/KA-01872/."
     },
     {
       "name": "Transaction Portfolios",
