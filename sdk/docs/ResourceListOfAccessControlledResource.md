@@ -1,6 +1,5 @@
 # ResourceListOfAccessControlledResource
 
-
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------

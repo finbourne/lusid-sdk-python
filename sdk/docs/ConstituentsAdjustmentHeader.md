@@ -1,6 +1,5 @@
 # ConstituentsAdjustmentHeader
 
-
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------

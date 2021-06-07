@@ -1,6 +1,5 @@
 # ResourceListOfProcessedCommand
 
-
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------

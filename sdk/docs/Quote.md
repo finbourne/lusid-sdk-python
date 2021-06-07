@@ -1,7 +1,5 @@
 # Quote
 
-The quote id, value and lineage of the quotes all keyed by a unique correlation id.
-
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------

@@ -1,6 +1,5 @@
 # PortfolioDetails
 
-
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------

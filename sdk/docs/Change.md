@@ -1,7 +1,5 @@
 # Change
 
-The time an entity was modified (amendment and/or historical correction).
-
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
