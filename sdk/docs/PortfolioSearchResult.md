@@ -1,5 +1,7 @@
 # PortfolioSearchResult
 
+A list of portfolios.
+
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
@@ -8,7 +10,7 @@ Name | Type | Description | Notes
 **href** | **str** | The specific Uniform Resource Identifier (URI) for this resource at the requested effective and asAt datetime. | [optional] 
 **description** | **str** | The long form description of the portfolio. | [optional] 
 **display_name** | **str** | The name of the portfolio. | 
-**is_derived** | **bool** | Whether or not this is a derived portfolio. | [optional] 
+**is_derived** | **bool** | Whether or not this is a derived portfolio. | [optional] [readonly] 
 **created** | **datetime** | The effective datetime at which the portfolio was created. No transactions or constituents can be added to the portfolio before this date. | 
 **parent_portfolio_id** | [**ResourceId**](ResourceId.md) |  | [optional] 
 **base_currency** | **str** | The base currency of the portfolio. This will be an empty string for reference portfolios. | [optional] 

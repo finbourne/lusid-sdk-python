@@ -1,5 +1,6 @@
 # ResourceListOfPortfolioGroup
 
+
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------

@@ -1,5 +1,6 @@
 # TargetTaxLotRequest
 
+
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
