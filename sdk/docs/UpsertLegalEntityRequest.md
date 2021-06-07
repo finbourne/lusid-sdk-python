@@ -1,5 +1,7 @@
 # UpsertLegalEntityRequest
 
+Request to create or update an legal entity
+
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------

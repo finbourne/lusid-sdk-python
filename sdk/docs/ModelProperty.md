@@ -1,5 +1,6 @@
 # ModelProperty
 
+
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
