@@ -1,7 +1,5 @@
 # HoldingsAdjustment
 
-Full content of a holdings adjustment for a single portfolio and effective date.
-
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------

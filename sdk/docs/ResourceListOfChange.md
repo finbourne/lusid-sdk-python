@@ -1,6 +1,5 @@
 # ResourceListOfChange
 
-
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------

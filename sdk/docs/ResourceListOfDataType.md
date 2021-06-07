@@ -1,6 +1,5 @@
 # ResourceListOfDataType
 
-
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------

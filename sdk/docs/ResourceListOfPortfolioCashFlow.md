@@ -1,6 +1,5 @@
 # ResourceListOfPortfolioCashFlow
 
-
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------

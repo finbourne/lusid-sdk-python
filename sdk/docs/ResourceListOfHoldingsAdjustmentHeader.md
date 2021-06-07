@@ -1,6 +1,5 @@
 # ResourceListOfHoldingsAdjustmentHeader
 
-
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
