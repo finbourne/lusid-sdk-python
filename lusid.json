@@ -9,7 +9,7 @@
       "url": "https://www.finbourne.com",
       "email": "info@finbourne.com"
     },
-    "version": "0.11.3125",
+    "version": "0.11.3126",
     "x-logo": {
       "url": "https://content.finbourne.com/LUSID-header.png",
       "backgroundColor": "#415464"
@@ -17,7 +17,7 @@
   },
   "servers": [
     {
-      "url": "https://fbn-prd.lusid.com/api"
+      "url": "http://local-unit-test-server.lusid.com:41106"
     }
   ],
   "paths": {
@@ -20089,6 +20089,21 @@
         },
         "additionalProperties": false
       },
+      "CurrencyAndAmount": {
+        "type": "object",
+        "properties": {
+          "amount": {
+            "type": "number",
+            "format": "double"
+          },
+          "currency": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false,
+        "description": "An amount of a specific currency, specifying a value and an associated unit"
+      },
       "DeletedEntityResponse": {
         "required": [
           "asAt"
@@ -21483,21 +21498,6 @@
           }
         },
         "additionalProperties": false
-      },
-      "CurrencyAndAmount": {
-        "type": "object",
-        "properties": {
-          "amount": {
-            "type": "number",
-            "format": "double"
-          },
-          "currency": {
-            "type": "string",
-            "nullable": true
-          }
-        },
-        "additionalProperties": false,
-        "description": "An amount of a specific currency, specifying a value and an associated unit"
       },
       "CreatePortfolioGroupRequest": {
         "required": [
@@ -25226,7 +25226,7 @@
         "description": "OAuth2 Implicit Grant",
         "flows": {
           "implicit": {
-            "authorizationUrl": "https://lusid.okta.com/oauth2/default/v1/authorize",
+            "authorizationUrl": "https://dummyurl.lusid.com/",
             "scopes": {}
           }
         }
