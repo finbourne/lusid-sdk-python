@@ -9,7 +9,7 @@
       "url": "https://www.finbourne.com",
       "email": "info@finbourne.com"
     },
-    "version": "0.11.3140",
+    "version": "0.11.3142",
     "x-logo": {
       "url": "https://content.finbourne.com/LUSID-header.png",
       "backgroundColor": "#415464"
@@ -17,7 +17,7 @@
   },
   "servers": [
     {
-      "url": "http://local-unit-test-server.lusid.com:63802"
+      "url": "http://local-unit-test-server.lusid.com:45793"
     }
   ],
   "paths": {
@@ -18041,6 +18041,28 @@
               "nullable": true
             },
             "x-nullable": true
+          },
+          {
+            "name": "page",
+            "in": "query",
+            "description": "The pagination token to use to continue listing transactions from a previous call to GetTransactions.",
+            "schema": {
+              "type": "string",
+              "description": "The pagination token to use to continue listing transactions from a previous call to GetTransactions.",
+              "nullable": true
+            }
+          },
+          {
+            "name": "limit",
+            "in": "query",
+            "description": "When paginating, limit the number of returned results to this many. Defaults to 100 if not specified.",
+            "schema": {
+              "type": "integer",
+              "description": "When paginating, limit the number of returned results to this many. Defaults to 100 if not specified.",
+              "format": "int32",
+              "nullable": true
+            },
+            "x-nullable": true
           }
         ],
         "responses": {
@@ -20107,6 +20129,21 @@
         },
         "additionalProperties": false
       },
+      "CurrencyAndAmount": {
+        "type": "object",
+        "properties": {
+          "amount": {
+            "type": "number",
+            "format": "double"
+          },
+          "currency": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false,
+        "description": "An amount of a specific currency, specifying a value and an associated unit"
+      },
       "DeletedEntityResponse": {
         "required": [
           "asAt"
@@ -21501,21 +21538,6 @@
           }
         },
         "additionalProperties": false
-      },
-      "CurrencyAndAmount": {
-        "type": "object",
-        "properties": {
-          "amount": {
-            "type": "number",
-            "format": "double"
-          },
-          "currency": {
-            "type": "string",
-            "nullable": true
-          }
-        },
-        "additionalProperties": false,
-        "description": "An amount of a specific currency, specifying a value and an associated unit"
       },
       "CreatePortfolioGroupRequest": {
         "required": [
