@@ -1,6 +1,6 @@
 # lusid.ScopesApi
 
-All URIs are relative to *http://local-unit-test-server.lusid.com:64642*
+All URIs are relative to *http://local-unit-test-server.lusid.com:37682*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
@@ -27,8 +27,8 @@ configuration = lusid.Configuration()
 # Configure OAuth2 access token for authorization: oauth2
 configuration.access_token = 'YOUR_ACCESS_TOKEN'
 
-# Defining host is optional and default to http://local-unit-test-server.lusid.com:64642
-configuration.host = "http://local-unit-test-server.lusid.com:64642"
+# Defining host is optional and default to http://local-unit-test-server.lusid.com:37682
+configuration.host = "http://local-unit-test-server.lusid.com:37682"
 # Create an instance of the API class
 api_instance = lusid.ScopesApi(lusid.ApiClient(configuration))
 filter = 'filter_example' # str | Expression to filter the result set.              For example, to filter on the Scope, use \"scope eq 'string'\"              Read more about filtering results from LUSID here https://support.lusid.com/filtering-results-from-lusid. (optional)
