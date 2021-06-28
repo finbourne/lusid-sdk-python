@@ -1,6 +1,6 @@
 # lusid.SystemConfigurationApi
 
-All URIs are relative to *http://local-unit-test-server.lusid.com:37215*
+All URIs are relative to *http://local-unit-test-server.lusid.com:62596*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
@@ -28,8 +28,8 @@ configuration = lusid.Configuration()
 # Configure OAuth2 access token for authorization: oauth2
 configuration.access_token = 'YOUR_ACCESS_TOKEN'
 
-# Defining host is optional and default to http://local-unit-test-server.lusid.com:37215
-configuration.host = "http://local-unit-test-server.lusid.com:37215"
+# Defining host is optional and default to http://local-unit-test-server.lusid.com:62596
+configuration.host = "http://local-unit-test-server.lusid.com:62596"
 # Create an instance of the API class
 api_instance = lusid.SystemConfigurationApi(lusid.ApiClient(configuration))
 transaction_configuration_data_request = {"aliases":[{"type":"Another-Sell","description":"Sale","transactionClass":"MyDefault","transactionGroup":"MyGroup","transactionRoles":"LongShorter"}],"movements":[{"movementTypes":"StockMovement","side":"Side1","direction":-1,"properties":{},"mappings":[]},{"movementTypes":"CashCommitment","side":"Side2","direction":1,"properties":{},"mappings":[]}],"properties":{}} # TransactionConfigurationDataRequest | A transaction type definition. (optional)
@@ -90,8 +90,8 @@ configuration = lusid.Configuration()
 # Configure OAuth2 access token for authorization: oauth2
 configuration.access_token = 'YOUR_ACCESS_TOKEN'
 
-# Defining host is optional and default to http://local-unit-test-server.lusid.com:37215
-configuration.host = "http://local-unit-test-server.lusid.com:37215"
+# Defining host is optional and default to http://local-unit-test-server.lusid.com:62596
+configuration.host = "http://local-unit-test-server.lusid.com:62596"
 # Create an instance of the API class
 api_instance = lusid.SystemConfigurationApi(lusid.ApiClient(configuration))
 as_at = '2013-10-20T19:20:30+01:00' # datetime | The asAt datetime at which to retrieve the transaction types. Defaults              to returning the latest versions if not specified. (optional)
