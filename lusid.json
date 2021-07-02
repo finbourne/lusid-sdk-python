@@ -9,7 +9,7 @@
       "url": "https://www.finbourne.com",
       "email": "info@finbourne.com"
     },
-    "version": "0.11.3224",
+    "version": "0.11.3223",
     "x-logo": {
       "url": "https://content.finbourne.com/LUSID-header.png",
       "backgroundColor": "#415464"
@@ -17,973 +17,10 @@
   },
   "servers": [
     {
-      "url": "http://local-unit-test-server.lusid.com:36497"
+      "url": "https://fbn-prd.lusid.com/api"
     }
   ],
   "paths": {
-    "/api/allocations": {
-      "get": {
-        "tags": [
-          "Allocations"
-        ],
-        "summary": "[EARLY ACCESS] List Allocations",
-        "description": "Fetch the last pre-AsAt date version of each allocation in scope (does not fetch the entire history).",
-        "operationId": "ListAllocations",
-        "parameters": [
-          {
-            "name": "asAt",
-            "in": "query",
-            "description": "The asAt datetime at which to retrieve the allocation. Defaults to return the latest version of the allocation if not specified.",
-            "schema": {
-              "type": "string",
-              "description": "The asAt datetime at which to retrieve the allocation. Defaults to return the latest version of the allocation if not specified.",
-              "format": "date-time",
-              "nullable": true
-            },
-            "x-nullable": true
-          },
-          {
-            "name": "page",
-            "in": "query",
-            "description": "The pagination token to use to continue listing allocations from a previous call to list allocations.\r\n            This value is returned from the previous call. If a pagination token is provided the sortBy, filter, effectiveAt, and asAt fields\r\n            must not have changed since the original request. Also, if set, a start value cannot be provided.",
-            "schema": {
-              "type": "string",
-              "description": "The pagination token to use to continue listing allocations from a previous call to list allocations.\r\n            This value is returned from the previous call. If a pagination token is provided the sortBy, filter, effectiveAt, and asAt fields\r\n            must not have changed since the original request. Also, if set, a start value cannot be provided.",
-              "nullable": true
-            }
-          },
-          {
-            "name": "sortBy",
-            "in": "query",
-            "description": "Allocation the results by these fields. Use use the '-' sign to denote descending allocation e.g. -MyFieldName.",
-            "schema": {
-              "type": "array",
-              "items": {
-                "type": "string"
-              },
-              "description": "Allocation the results by these fields. Use use the '-' sign to denote descending allocation e.g. -MyFieldName.",
-              "nullable": true
-            },
-            "x-nullable": true
-          },
-          {
-            "name": "start",
-            "in": "query",
-            "description": "When paginating, skip this number of results.",
-            "schema": {
-              "type": "integer",
-              "description": "When paginating, skip this number of results.",
-              "format": "int32",
-              "nullable": true
-            },
-            "x-nullable": true
-          },
-          {
-            "name": "limit",
-            "in": "query",
-            "description": "When paginating, limit the number of returned results to this many.",
-            "schema": {
-              "maximum": 5000,
-              "minimum": 1,
-              "type": "integer",
-              "description": "When paginating, limit the number of returned results to this many.",
-              "format": "int32",
-              "nullable": true
-            },
-            "x-nullable": true
-          },
-          {
-            "name": "filter",
-            "in": "query",
-            "description": "Expression to filter the result set. Read more about filtering results from LUSID here:\r\n            https://support.lusid.com/filtering-results-from-lusid.",
-            "schema": {
-              "type": "string",
-              "description": "Expression to filter the result set. Read more about filtering results from LUSID here:\r\n            https://support.lusid.com/filtering-results-from-lusid.",
-              "default": "",
-              "nullable": true
-            }
-          },
-          {
-            "name": "propertyKeys",
-            "in": "query",
-            "description": "A list of property keys from the \"Allocations\" domain to decorate onto each allocation.\r\n                These take the format {domain}/{scope}/{code} e.g. \"Allocations/system/Name\".",
-            "schema": {
-              "type": "array",
-              "items": {
-                "type": "string",
-                "description": "The key that uniquely identifies the property. It has the format {domain}/{scope}/{code}."
-              },
-              "description": "A list of property keys from the \"Allocations\" domain to decorate onto each allocation.\r\n                These take the format {domain}/{scope}/{code} e.g. \"Allocations/system/Name\".",
-              "nullable": true
-            },
-            "x-nullable": true
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Allocations.",
-            "content": {
-              "text/plain": {
-                "schema": {
-                  "$ref": "#/components/schemas/PagedResourceListOfAllocation"
-                }
-              },
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/PagedResourceListOfAllocation"
-                }
-              },
-              "text/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/PagedResourceListOfAllocation"
-                }
-              }
-            }
-          },
-          "400": {
-            "description": "The details of the input related failure",
-            "content": {
-              "text/plain": {
-                "schema": {
-                  "$ref": "#/components/schemas/LusidValidationProblemDetails"
-                }
-              },
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/LusidValidationProblemDetails"
-                }
-              },
-              "text/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/LusidValidationProblemDetails"
-                }
-              }
-            }
-          },
-          "default": {
-            "description": "Error response",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/LusidProblemDetails"
-                }
-              }
-            }
-          }
-        },
-        "security": [
-          {
-            "oauth2": []
-          }
-        ],
-        "x-fbn-apistatus": "EarlyAccess"
-      },
-      "post": {
-        "tags": [
-          "Allocations"
-        ],
-        "summary": "[EARLY ACCESS] Upsert Allocations",
-        "description": "Upsert; update existing allocations with given ids, or create new allocations otherwise.",
-        "operationId": "UpsertAllocations",
-        "requestBody": {
-          "description": "The collection of allocation requests.",
-          "content": {
-            "application/json-patch+json": {
-              "schema": {
-                "$ref": "#/components/schemas/AllocationSetRequest"
-              },
-              "example": {
-                "allocationRequests": [
-                  {
-                    "properties": {
-                      "allocation/MyScope/SomeAllocationProperty": {
-                        "key": "Allocation/MyScope/SomeAllocationProperty",
-                        "value": {
-                          "labelValue": "XYZ000034567"
-                        }
-                      }
-                    },
-                    "instrumentIdentifiers": {
-                      "instrument/default/Currency": "GBP"
-                    },
-                    "quantity": 100,
-                    "portfolioId": {
-                      "scope": "MyScope",
-                      "code": "UK Equity"
-                    },
-                    "allocatedOrderId": {
-                      "scope": "MyScope",
-                      "code": "ORD00000123"
-                    },
-                    "id": {
-                      "scope": "MyScope",
-                      "code": "ALLOC00000123"
-                    },
-                    "placementIds": [
-                      {
-                        "scope": "MyScope",
-                        "code": "A placement"
-                      }
-                    ],
-                    "state": "New",
-                    "side": "Buy",
-                    "type": "Limit",
-                    "settlementDate": "2006-04-14T00:00:00.0000000+00:00",
-                    "date": "2006-04-11T00:00:00.0000000+00:00",
-                    "price": {
-                      "amount": 12413.33,
-                      "currency": "USD"
-                    },
-                    "settlementCurrency": "USD",
-                    "settlementCurrencyFxRate": 1,
-                    "counterparty": "SomeCounterparty"
-                  }
-                ]
-              }
-            },
-            "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/AllocationSetRequest"
-              },
-              "example": {
-                "allocationRequests": [
-                  {
-                    "properties": {
-                      "allocation/MyScope/SomeAllocationProperty": {
-                        "key": "Allocation/MyScope/SomeAllocationProperty",
-                        "value": {
-                          "labelValue": "XYZ000034567"
-                        }
-                      }
-                    },
-                    "instrumentIdentifiers": {
-                      "instrument/default/Currency": "GBP"
-                    },
-                    "quantity": 100,
-                    "portfolioId": {
-                      "scope": "MyScope",
-                      "code": "UK Equity"
-                    },
-                    "allocatedOrderId": {
-                      "scope": "MyScope",
-                      "code": "ORD00000123"
-                    },
-                    "id": {
-                      "scope": "MyScope",
-                      "code": "ALLOC00000123"
-                    },
-                    "placementIds": [
-                      {
-                        "scope": "MyScope",
-                        "code": "A placement"
-                      }
-                    ],
-                    "state": "New",
-                    "side": "Buy",
-                    "type": "Limit",
-                    "settlementDate": "2006-04-14T00:00:00.0000000+00:00",
-                    "date": "2006-04-11T00:00:00.0000000+00:00",
-                    "price": {
-                      "amount": 12413.33,
-                      "currency": "USD"
-                    },
-                    "settlementCurrency": "USD",
-                    "settlementCurrencyFxRate": 1,
-                    "counterparty": "SomeCounterparty"
-                  }
-                ]
-              }
-            },
-            "text/json": {
-              "schema": {
-                "$ref": "#/components/schemas/AllocationSetRequest"
-              },
-              "example": {
-                "allocationRequests": [
-                  {
-                    "properties": {
-                      "allocation/MyScope/SomeAllocationProperty": {
-                        "key": "Allocation/MyScope/SomeAllocationProperty",
-                        "value": {
-                          "labelValue": "XYZ000034567"
-                        }
-                      }
-                    },
-                    "instrumentIdentifiers": {
-                      "instrument/default/Currency": "GBP"
-                    },
-                    "quantity": 100,
-                    "portfolioId": {
-                      "scope": "MyScope",
-                      "code": "UK Equity"
-                    },
-                    "allocatedOrderId": {
-                      "scope": "MyScope",
-                      "code": "ORD00000123"
-                    },
-                    "id": {
-                      "scope": "MyScope",
-                      "code": "ALLOC00000123"
-                    },
-                    "placementIds": [
-                      {
-                        "scope": "MyScope",
-                        "code": "A placement"
-                      }
-                    ],
-                    "state": "New",
-                    "side": "Buy",
-                    "type": "Limit",
-                    "settlementDate": "2006-04-14T00:00:00.0000000+00:00",
-                    "date": "2006-04-11T00:00:00.0000000+00:00",
-                    "price": {
-                      "amount": 12413.33,
-                      "currency": "USD"
-                    },
-                    "settlementCurrency": "USD",
-                    "settlementCurrencyFxRate": 1,
-                    "counterparty": "SomeCounterparty"
-                  }
-                ]
-              }
-            },
-            "application/*+json": {
-              "schema": {
-                "$ref": "#/components/schemas/AllocationSetRequest"
-              },
-              "example": {
-                "allocationRequests": [
-                  {
-                    "properties": {
-                      "allocation/MyScope/SomeAllocationProperty": {
-                        "key": "Allocation/MyScope/SomeAllocationProperty",
-                        "value": {
-                          "labelValue": "XYZ000034567"
-                        }
-                      }
-                    },
-                    "instrumentIdentifiers": {
-                      "instrument/default/Currency": "GBP"
-                    },
-                    "quantity": 100,
-                    "portfolioId": {
-                      "scope": "MyScope",
-                      "code": "UK Equity"
-                    },
-                    "allocatedOrderId": {
-                      "scope": "MyScope",
-                      "code": "ORD00000123"
-                    },
-                    "id": {
-                      "scope": "MyScope",
-                      "code": "ALLOC00000123"
-                    },
-                    "placementIds": [
-                      {
-                        "scope": "MyScope",
-                        "code": "A placement"
-                      }
-                    ],
-                    "state": "New",
-                    "side": "Buy",
-                    "type": "Limit",
-                    "settlementDate": "2006-04-14T00:00:00.0000000+00:00",
-                    "date": "2006-04-11T00:00:00.0000000+00:00",
-                    "price": {
-                      "amount": 12413.33,
-                      "currency": "USD"
-                    },
-                    "settlementCurrency": "USD",
-                    "settlementCurrencyFxRate": 1,
-                    "counterparty": "SomeCounterparty"
-                  }
-                ]
-              }
-            }
-          }
-        },
-        "responses": {
-          "200": {
-            "description": "A collection of allocations.",
-            "content": {
-              "text/plain": {
-                "schema": {
-                  "$ref": "#/components/schemas/ResourceListOfAllocation"
-                },
-                "example": {
-                  "values": [
-                    {
-                      "id": {
-                        "scope": "MyScope",
-                        "code": "ALLOC00000123"
-                      },
-                      "allocatedOrderId": {
-                        "scope": "MyScope",
-                        "code": "ORD00000123"
-                      },
-                      "portfolioId": {
-                        "scope": "MyScope",
-                        "code": "testPortfolio"
-                      },
-                      "quantity": 100,
-                      "instrumentIdentifiers": {
-                        "instrument/default/Currency": "GBP"
-                      },
-                      "version": {
-                        "effectiveFrom": "2018-03-05T10:10:10.0000000+00:00",
-                        "asAtDate": "2018-03-05T10:10:10.0000000+00:00"
-                      },
-                      "properties": {
-                        "allocation/MyScope/SomeAllocationProperty": {
-                          "key": "Allocation/MyScope/SomeAllocationProperty",
-                          "value": {
-                            "labelValue": "XYZ000034567"
-                          }
-                        }
-                      },
-                      "placementIds": [
-                        {
-                          "scope": "MyScope",
-                          "code": "A placement"
-                        }
-                      ],
-                      "state": "New",
-                      "side": "Buy",
-                      "type": "Limit",
-                      "settlementDate": "2006-04-14T00:00:00.0000000+00:00",
-                      "date": "2006-04-11T00:00:00.0000000+00:00",
-                      "price": {
-                        "amount": 12413.33,
-                        "currency": "USD"
-                      },
-                      "settlementCurrency": "USD",
-                      "settlementCurrencyFxRate": 1,
-                      "counterparty": "SomeCounterparty"
-                    }
-                  ],
-                  "links": []
-                }
-              },
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ResourceListOfAllocation"
-                },
-                "example": {
-                  "values": [
-                    {
-                      "id": {
-                        "scope": "MyScope",
-                        "code": "ALLOC00000123"
-                      },
-                      "allocatedOrderId": {
-                        "scope": "MyScope",
-                        "code": "ORD00000123"
-                      },
-                      "portfolioId": {
-                        "scope": "MyScope",
-                        "code": "testPortfolio"
-                      },
-                      "quantity": 100,
-                      "instrumentIdentifiers": {
-                        "instrument/default/Currency": "GBP"
-                      },
-                      "version": {
-                        "effectiveFrom": "2018-03-05T10:10:10.0000000+00:00",
-                        "asAtDate": "2018-03-05T10:10:10.0000000+00:00"
-                      },
-                      "properties": {
-                        "allocation/MyScope/SomeAllocationProperty": {
-                          "key": "Allocation/MyScope/SomeAllocationProperty",
-                          "value": {
-                            "labelValue": "XYZ000034567"
-                          }
-                        }
-                      },
-                      "placementIds": [
-                        {
-                          "scope": "MyScope",
-                          "code": "A placement"
-                        }
-                      ],
-                      "state": "New",
-                      "side": "Buy",
-                      "type": "Limit",
-                      "settlementDate": "2006-04-14T00:00:00.0000000+00:00",
-                      "date": "2006-04-11T00:00:00.0000000+00:00",
-                      "price": {
-                        "amount": 12413.33,
-                        "currency": "USD"
-                      },
-                      "settlementCurrency": "USD",
-                      "settlementCurrencyFxRate": 1,
-                      "counterparty": "SomeCounterparty"
-                    }
-                  ],
-                  "links": []
-                }
-              },
-              "text/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ResourceListOfAllocation"
-                },
-                "example": {
-                  "values": [
-                    {
-                      "id": {
-                        "scope": "MyScope",
-                        "code": "ALLOC00000123"
-                      },
-                      "allocatedOrderId": {
-                        "scope": "MyScope",
-                        "code": "ORD00000123"
-                      },
-                      "portfolioId": {
-                        "scope": "MyScope",
-                        "code": "testPortfolio"
-                      },
-                      "quantity": 100,
-                      "instrumentIdentifiers": {
-                        "instrument/default/Currency": "GBP"
-                      },
-                      "version": {
-                        "effectiveFrom": "2018-03-05T10:10:10.0000000+00:00",
-                        "asAtDate": "2018-03-05T10:10:10.0000000+00:00"
-                      },
-                      "properties": {
-                        "allocation/MyScope/SomeAllocationProperty": {
-                          "key": "Allocation/MyScope/SomeAllocationProperty",
-                          "value": {
-                            "labelValue": "XYZ000034567"
-                          }
-                        }
-                      },
-                      "placementIds": [
-                        {
-                          "scope": "MyScope",
-                          "code": "A placement"
-                        }
-                      ],
-                      "state": "New",
-                      "side": "Buy",
-                      "type": "Limit",
-                      "settlementDate": "2006-04-14T00:00:00.0000000+00:00",
-                      "date": "2006-04-11T00:00:00.0000000+00:00",
-                      "price": {
-                        "amount": 12413.33,
-                        "currency": "USD"
-                      },
-                      "settlementCurrency": "USD",
-                      "settlementCurrencyFxRate": 1,
-                      "counterparty": "SomeCounterparty"
-                    }
-                  ],
-                  "links": []
-                }
-              }
-            }
-          },
-          "400": {
-            "description": "The details of the input related failure",
-            "content": {
-              "text/plain": {
-                "schema": {
-                  "$ref": "#/components/schemas/LusidValidationProblemDetails"
-                }
-              },
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/LusidValidationProblemDetails"
-                }
-              },
-              "text/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/LusidValidationProblemDetails"
-                }
-              }
-            }
-          },
-          "default": {
-            "description": "Error response",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/LusidProblemDetails"
-                }
-              }
-            }
-          }
-        },
-        "security": [
-          {
-            "oauth2": []
-          }
-        ],
-        "x-fbn-apistatus": "EarlyAccess"
-      }
-    },
-    "/api/allocations/{scope}/{code}": {
-      "get": {
-        "tags": [
-          "Allocations"
-        ],
-        "summary": "[EARLY ACCESS] Get Allocation",
-        "description": "Fetch an Allocation matching the provided identifier",
-        "operationId": "GetAllocation",
-        "parameters": [
-          {
-            "name": "scope",
-            "in": "path",
-            "description": "The scope to which the allocation belongs.",
-            "required": true,
-            "schema": {
-              "maxLength": 64,
-              "minLength": 1,
-              "pattern": "^[a-zA-Z0-9\\-_]+$",
-              "type": "string",
-              "description": "The scope to which the allocation belongs.",
-              "nullable": true
-            }
-          },
-          {
-            "name": "code",
-            "in": "path",
-            "description": "The allocation's unique identifier.",
-            "required": true,
-            "schema": {
-              "maxLength": 64,
-              "minLength": 1,
-              "pattern": "^[a-zA-Z0-9\\-_]+$",
-              "type": "string",
-              "description": "The allocation's unique identifier.",
-              "nullable": true
-            }
-          },
-          {
-            "name": "asAt",
-            "in": "query",
-            "description": "The asAt datetime at which to retrieve the allocation. Defaults to return the latest version of the allocation if not specified.",
-            "schema": {
-              "type": "string",
-              "description": "The asAt datetime at which to retrieve the allocation. Defaults to return the latest version of the allocation if not specified.",
-              "format": "date-time",
-              "nullable": true
-            },
-            "x-nullable": true
-          },
-          {
-            "name": "propertyKeys",
-            "in": "query",
-            "description": "A list of property keys from the \"Allocations\" domain to decorate onto the allocation.\r\n            These take the format {domain}/{scope}/{code} e.g. \"Allocations/system/Name\".",
-            "schema": {
-              "type": "array",
-              "items": {
-                "type": "string",
-                "description": "The key that uniquely identifies the property. It has the format {domain}/{scope}/{code}."
-              },
-              "description": "A list of property keys from the \"Allocations\" domain to decorate onto the allocation.\r\n            These take the format {domain}/{scope}/{code} e.g. \"Allocations/system/Name\".",
-              "nullable": true
-            },
-            "x-nullable": true
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "The allocation matching the given identifier.",
-            "content": {
-              "text/plain": {
-                "schema": {
-                  "$ref": "#/components/schemas/Allocation"
-                },
-                "example": {
-                  "id": {
-                    "scope": "MyScope",
-                    "code": "ALLOC00000123"
-                  },
-                  "allocatedOrderId": {
-                    "scope": "MyScope",
-                    "code": "ORD00000123"
-                  },
-                  "portfolioId": {
-                    "scope": "MyScope",
-                    "code": "testPortfolio"
-                  },
-                  "quantity": 100,
-                  "instrumentIdentifiers": {
-                    "instrument/default/Currency": "GBP"
-                  },
-                  "version": {
-                    "effectiveFrom": "2018-03-05T10:10:10.0000000+00:00",
-                    "asAtDate": "2018-03-05T10:10:10.0000000+00:00"
-                  },
-                  "properties": {
-                    "allocation/MyScope/SomeAllocationProperty": {
-                      "key": "Allocation/MyScope/SomeAllocationProperty",
-                      "value": {
-                        "labelValue": "XYZ000034567"
-                      }
-                    }
-                  },
-                  "placementIds": [
-                    {
-                      "scope": "MyScope",
-                      "code": "A placement"
-                    }
-                  ],
-                  "state": "New",
-                  "side": "Buy",
-                  "type": "Limit",
-                  "settlementDate": "2006-04-14T00:00:00.0000000+00:00",
-                  "date": "2006-04-11T00:00:00.0000000+00:00",
-                  "price": {
-                    "amount": 12413.33,
-                    "currency": "USD"
-                  },
-                  "settlementCurrency": "USD",
-                  "settlementCurrencyFxRate": 1,
-                  "counterparty": "SomeCounterparty"
-                }
-              },
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Allocation"
-                },
-                "example": {
-                  "id": {
-                    "scope": "MyScope",
-                    "code": "ALLOC00000123"
-                  },
-                  "allocatedOrderId": {
-                    "scope": "MyScope",
-                    "code": "ORD00000123"
-                  },
-                  "portfolioId": {
-                    "scope": "MyScope",
-                    "code": "testPortfolio"
-                  },
-                  "quantity": 100,
-                  "instrumentIdentifiers": {
-                    "instrument/default/Currency": "GBP"
-                  },
-                  "version": {
-                    "effectiveFrom": "2018-03-05T10:10:10.0000000+00:00",
-                    "asAtDate": "2018-03-05T10:10:10.0000000+00:00"
-                  },
-                  "properties": {
-                    "allocation/MyScope/SomeAllocationProperty": {
-                      "key": "Allocation/MyScope/SomeAllocationProperty",
-                      "value": {
-                        "labelValue": "XYZ000034567"
-                      }
-                    }
-                  },
-                  "placementIds": [
-                    {
-                      "scope": "MyScope",
-                      "code": "A placement"
-                    }
-                  ],
-                  "state": "New",
-                  "side": "Buy",
-                  "type": "Limit",
-                  "settlementDate": "2006-04-14T00:00:00.0000000+00:00",
-                  "date": "2006-04-11T00:00:00.0000000+00:00",
-                  "price": {
-                    "amount": 12413.33,
-                    "currency": "USD"
-                  },
-                  "settlementCurrency": "USD",
-                  "settlementCurrencyFxRate": 1,
-                  "counterparty": "SomeCounterparty"
-                }
-              },
-              "text/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Allocation"
-                },
-                "example": {
-                  "id": {
-                    "scope": "MyScope",
-                    "code": "ALLOC00000123"
-                  },
-                  "allocatedOrderId": {
-                    "scope": "MyScope",
-                    "code": "ORD00000123"
-                  },
-                  "portfolioId": {
-                    "scope": "MyScope",
-                    "code": "testPortfolio"
-                  },
-                  "quantity": 100,
-                  "instrumentIdentifiers": {
-                    "instrument/default/Currency": "GBP"
-                  },
-                  "version": {
-                    "effectiveFrom": "2018-03-05T10:10:10.0000000+00:00",
-                    "asAtDate": "2018-03-05T10:10:10.0000000+00:00"
-                  },
-                  "properties": {
-                    "allocation/MyScope/SomeAllocationProperty": {
-                      "key": "Allocation/MyScope/SomeAllocationProperty",
-                      "value": {
-                        "labelValue": "XYZ000034567"
-                      }
-                    }
-                  },
-                  "placementIds": [
-                    {
-                      "scope": "MyScope",
-                      "code": "A placement"
-                    }
-                  ],
-                  "state": "New",
-                  "side": "Buy",
-                  "type": "Limit",
-                  "settlementDate": "2006-04-14T00:00:00.0000000+00:00",
-                  "date": "2006-04-11T00:00:00.0000000+00:00",
-                  "price": {
-                    "amount": 12413.33,
-                    "currency": "USD"
-                  },
-                  "settlementCurrency": "USD",
-                  "settlementCurrencyFxRate": 1,
-                  "counterparty": "SomeCounterparty"
-                }
-              }
-            }
-          },
-          "400": {
-            "description": "The details of the input related failure",
-            "content": {
-              "text/plain": {
-                "schema": {
-                  "$ref": "#/components/schemas/LusidValidationProblemDetails"
-                }
-              },
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/LusidValidationProblemDetails"
-                }
-              },
-              "text/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/LusidValidationProblemDetails"
-                }
-              }
-            }
-          },
-          "default": {
-            "description": "Error response",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/LusidProblemDetails"
-                }
-              }
-            }
-          }
-        },
-        "security": [
-          {
-            "oauth2": []
-          }
-        ],
-        "x-fbn-apistatus": "EarlyAccess"
-      },
-      "delete": {
-        "tags": [
-          "Allocations"
-        ],
-        "summary": "[EARLY ACCESS] Delete allocation",
-        "description": "Delete an allocation. Deletion will be valid from the allocation's creation datetime.\r\nThis means that the allocation will no longer exist at any effective datetime from the asAt datetime of deletion.",
-        "operationId": "DeleteAllocation",
-        "parameters": [
-          {
-            "name": "scope",
-            "in": "path",
-            "description": "The allocation scope.",
-            "required": true,
-            "schema": {
-              "maxLength": 64,
-              "minLength": 1,
-              "pattern": "^[a-zA-Z0-9\\-_]+$",
-              "type": "string",
-              "description": "The allocation scope."
-            }
-          },
-          {
-            "name": "code",
-            "in": "path",
-            "description": "The allocation's code. This, together with the scope uniquely identifies the allocation to delete.",
-            "required": true,
-            "schema": {
-              "maxLength": 64,
-              "minLength": 1,
-              "pattern": "^[a-zA-Z0-9\\-_]+$",
-              "type": "string",
-              "description": "The allocation's code. This, together with the scope uniquely identifies the allocation to delete."
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "The response from deleting an allocation.",
-            "content": {
-              "text/plain": {
-                "schema": {
-                  "$ref": "#/components/schemas/DeletedEntityResponse"
-                }
-              },
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/DeletedEntityResponse"
-                }
-              },
-              "text/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/DeletedEntityResponse"
-                }
-              }
-            }
-          },
-          "400": {
-            "description": "The details of the input related failure",
-            "content": {
-              "text/plain": {
-                "schema": {
-                  "$ref": "#/components/schemas/LusidValidationProblemDetails"
-                }
-              },
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/LusidValidationProblemDetails"
-                }
-              },
-              "text/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/LusidValidationProblemDetails"
-                }
-              }
-            }
-          },
-          "default": {
-            "description": "Error response",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/LusidProblemDetails"
-                }
-              }
-            }
-          }
-        },
-        "security": [
-          {
-            "oauth2": []
-          }
-        ],
-        "x-fbn-apistatus": "EarlyAccess"
-      }
-    },
     "/api/datatypes/{scope}": {
       "get": {
         "tags": [
@@ -4873,959 +3910,6 @@
               "text/json": {
                 "schema": {
                   "$ref": "#/components/schemas/VersionSummaryDto"
-                }
-              }
-            }
-          },
-          "default": {
-            "description": "Error response",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/LusidProblemDetails"
-                }
-              }
-            }
-          }
-        },
-        "security": [
-          {
-            "oauth2": []
-          }
-        ],
-        "x-fbn-apistatus": "EarlyAccess"
-      }
-    },
-    "/api/orders": {
-      "get": {
-        "tags": [
-          "Orders"
-        ],
-        "summary": "[EARLY ACCESS] List Orders",
-        "description": "Fetch the last pre-AsAt date version of each order in scope (does not fetch the entire history).",
-        "operationId": "ListOrders",
-        "parameters": [
-          {
-            "name": "asAt",
-            "in": "query",
-            "description": "The asAt datetime at which to retrieve the order. Defaults to return the latest version of the order if not specified.",
-            "schema": {
-              "type": "string",
-              "description": "The asAt datetime at which to retrieve the order. Defaults to return the latest version of the order if not specified.",
-              "format": "date-time",
-              "nullable": true
-            },
-            "x-nullable": true
-          },
-          {
-            "name": "page",
-            "in": "query",
-            "description": "The pagination token to use to continue listing orders from a previous call to list orders.\r\n            This value is returned from the previous call. If a pagination token is provided the sortBy, filter, effectiveAt, and asAt fields\r\n            must not have changed since the original request. Also, if set, a start value cannot be provided.",
-            "schema": {
-              "type": "string",
-              "description": "The pagination token to use to continue listing orders from a previous call to list orders.\r\n            This value is returned from the previous call. If a pagination token is provided the sortBy, filter, effectiveAt, and asAt fields\r\n            must not have changed since the original request. Also, if set, a start value cannot be provided.",
-              "nullable": true
-            }
-          },
-          {
-            "name": "sortBy",
-            "in": "query",
-            "description": "Order the results by these fields. Use use the '-' sign to denote descending order e.g. -MyFieldName.",
-            "schema": {
-              "type": "array",
-              "items": {
-                "type": "string"
-              },
-              "description": "Order the results by these fields. Use use the '-' sign to denote descending order e.g. -MyFieldName.",
-              "nullable": true
-            },
-            "x-nullable": true
-          },
-          {
-            "name": "start",
-            "in": "query",
-            "description": "When paginating, skip this number of results.",
-            "schema": {
-              "type": "integer",
-              "description": "When paginating, skip this number of results.",
-              "format": "int32",
-              "nullable": true
-            },
-            "x-nullable": true
-          },
-          {
-            "name": "limit",
-            "in": "query",
-            "description": "When paginating, limit the number of returned results to this many.",
-            "schema": {
-              "maximum": 5000,
-              "minimum": 1,
-              "type": "integer",
-              "description": "When paginating, limit the number of returned results to this many.",
-              "format": "int32",
-              "nullable": true
-            },
-            "x-nullable": true
-          },
-          {
-            "name": "filter",
-            "in": "query",
-            "description": "Expression to filter the result set. Read more about filtering results from LUSID here:\r\n            https://support.lusid.com/filtering-results-from-lusid.",
-            "schema": {
-              "type": "string",
-              "description": "Expression to filter the result set. Read more about filtering results from LUSID here:\r\n            https://support.lusid.com/filtering-results-from-lusid.",
-              "default": "",
-              "nullable": true
-            }
-          },
-          {
-            "name": "propertyKeys",
-            "in": "query",
-            "description": "A list of property keys from the \"Orders\" domain to decorate onto each order.\r\n                These take the format {domain}/{scope}/{code} e.g. \"Orders/system/Name\".",
-            "schema": {
-              "type": "array",
-              "items": {
-                "type": "string",
-                "description": "The key that uniquely identifies the property. It has the format {domain}/{scope}/{code}."
-              },
-              "description": "A list of property keys from the \"Orders\" domain to decorate onto each order.\r\n                These take the format {domain}/{scope}/{code} e.g. \"Orders/system/Name\".",
-              "nullable": true
-            },
-            "x-nullable": true
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Orders in scope.",
-            "content": {
-              "text/plain": {
-                "schema": {
-                  "$ref": "#/components/schemas/PagedResourceListOfOrder"
-                }
-              },
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/PagedResourceListOfOrder"
-                }
-              },
-              "text/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/PagedResourceListOfOrder"
-                }
-              }
-            }
-          },
-          "400": {
-            "description": "The details of the input related failure",
-            "content": {
-              "text/plain": {
-                "schema": {
-                  "$ref": "#/components/schemas/LusidValidationProblemDetails"
-                }
-              },
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/LusidValidationProblemDetails"
-                }
-              },
-              "text/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/LusidValidationProblemDetails"
-                }
-              }
-            }
-          },
-          "default": {
-            "description": "Error response",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/LusidProblemDetails"
-                }
-              }
-            }
-          }
-        },
-        "security": [
-          {
-            "oauth2": []
-          }
-        ],
-        "x-fbn-apistatus": "EarlyAccess"
-      },
-      "post": {
-        "tags": [
-          "Orders"
-        ],
-        "summary": "[EARLY ACCESS] Upsert Order",
-        "description": "Upsert; update existing orders with given ids, or create new orders otherwise.",
-        "operationId": "UpsertOrders",
-        "requestBody": {
-          "description": "The collection of order requests.",
-          "content": {
-            "application/json-patch+json": {
-              "schema": {
-                "$ref": "#/components/schemas/OrderSetRequest"
-              },
-              "example": {
-                "orderRequests": [
-                  {
-                    "properties": {
-                      "order/MyScope/SomeOrderProperty": {
-                        "key": "Order/MyScope/SomeOrderProperty",
-                        "value": {
-                          "labelValue": "XYZ000034567"
-                        }
-                      }
-                    },
-                    "instrumentIdentifiers": {
-                      "instrument/default/Currency": "GBP"
-                    },
-                    "quantity": 100,
-                    "side": "Buy",
-                    "orderBookId": {
-                      "scope": "MyScope",
-                      "code": "UKEQ Orders"
-                    },
-                    "portfolioId": {
-                      "scope": "MyScope",
-                      "code": "UK Equity"
-                    },
-                    "id": {
-                      "scope": "MyScope",
-                      "code": "ORD00000123"
-                    },
-                    "state": "New",
-                    "type": "Limit",
-                    "timeInForce": "GoodTilCancel",
-                    "date": "2023-05-02T00:00:00.0000000+00:00",
-                    "price": {
-                      "amount": 534,
-                      "currency": "USD"
-                    },
-                    "orderInstruction": {
-                      "scope": "MyScope",
-                      "code": "Instruction-06"
-                    },
-                    "package": {
-                      "scope": "MyScope",
-                      "code": "UKEQ Package"
-                    }
-                  }
-                ]
-              }
-            },
-            "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/OrderSetRequest"
-              },
-              "example": {
-                "orderRequests": [
-                  {
-                    "properties": {
-                      "order/MyScope/SomeOrderProperty": {
-                        "key": "Order/MyScope/SomeOrderProperty",
-                        "value": {
-                          "labelValue": "XYZ000034567"
-                        }
-                      }
-                    },
-                    "instrumentIdentifiers": {
-                      "instrument/default/Currency": "GBP"
-                    },
-                    "quantity": 100,
-                    "side": "Buy",
-                    "orderBookId": {
-                      "scope": "MyScope",
-                      "code": "UKEQ Orders"
-                    },
-                    "portfolioId": {
-                      "scope": "MyScope",
-                      "code": "UK Equity"
-                    },
-                    "id": {
-                      "scope": "MyScope",
-                      "code": "ORD00000123"
-                    },
-                    "state": "New",
-                    "type": "Limit",
-                    "timeInForce": "GoodTilCancel",
-                    "date": "2023-05-02T00:00:00.0000000+00:00",
-                    "price": {
-                      "amount": 534,
-                      "currency": "USD"
-                    },
-                    "orderInstruction": {
-                      "scope": "MyScope",
-                      "code": "Instruction-06"
-                    },
-                    "package": {
-                      "scope": "MyScope",
-                      "code": "UKEQ Package"
-                    }
-                  }
-                ]
-              }
-            },
-            "text/json": {
-              "schema": {
-                "$ref": "#/components/schemas/OrderSetRequest"
-              },
-              "example": {
-                "orderRequests": [
-                  {
-                    "properties": {
-                      "order/MyScope/SomeOrderProperty": {
-                        "key": "Order/MyScope/SomeOrderProperty",
-                        "value": {
-                          "labelValue": "XYZ000034567"
-                        }
-                      }
-                    },
-                    "instrumentIdentifiers": {
-                      "instrument/default/Currency": "GBP"
-                    },
-                    "quantity": 100,
-                    "side": "Buy",
-                    "orderBookId": {
-                      "scope": "MyScope",
-                      "code": "UKEQ Orders"
-                    },
-                    "portfolioId": {
-                      "scope": "MyScope",
-                      "code": "UK Equity"
-                    },
-                    "id": {
-                      "scope": "MyScope",
-                      "code": "ORD00000123"
-                    },
-                    "state": "New",
-                    "type": "Limit",
-                    "timeInForce": "GoodTilCancel",
-                    "date": "2023-05-02T00:00:00.0000000+00:00",
-                    "price": {
-                      "amount": 534,
-                      "currency": "USD"
-                    },
-                    "orderInstruction": {
-                      "scope": "MyScope",
-                      "code": "Instruction-06"
-                    },
-                    "package": {
-                      "scope": "MyScope",
-                      "code": "UKEQ Package"
-                    }
-                  }
-                ]
-              }
-            },
-            "application/*+json": {
-              "schema": {
-                "$ref": "#/components/schemas/OrderSetRequest"
-              },
-              "example": {
-                "orderRequests": [
-                  {
-                    "properties": {
-                      "order/MyScope/SomeOrderProperty": {
-                        "key": "Order/MyScope/SomeOrderProperty",
-                        "value": {
-                          "labelValue": "XYZ000034567"
-                        }
-                      }
-                    },
-                    "instrumentIdentifiers": {
-                      "instrument/default/Currency": "GBP"
-                    },
-                    "quantity": 100,
-                    "side": "Buy",
-                    "orderBookId": {
-                      "scope": "MyScope",
-                      "code": "UKEQ Orders"
-                    },
-                    "portfolioId": {
-                      "scope": "MyScope",
-                      "code": "UK Equity"
-                    },
-                    "id": {
-                      "scope": "MyScope",
-                      "code": "ORD00000123"
-                    },
-                    "state": "New",
-                    "type": "Limit",
-                    "timeInForce": "GoodTilCancel",
-                    "date": "2023-05-02T00:00:00.0000000+00:00",
-                    "price": {
-                      "amount": 534,
-                      "currency": "USD"
-                    },
-                    "orderInstruction": {
-                      "scope": "MyScope",
-                      "code": "Instruction-06"
-                    },
-                    "package": {
-                      "scope": "MyScope",
-                      "code": "UKEQ Package"
-                    }
-                  }
-                ]
-              }
-            }
-          }
-        },
-        "responses": {
-          "201": {
-            "description": "A collection of orders.",
-            "content": {
-              "text/plain": {
-                "schema": {
-                  "$ref": "#/components/schemas/ResourceListOfOrder"
-                },
-                "example": {
-                  "values": [
-                    {
-                      "properties": {
-                        "order/MyScope/SomeOrderProperty": {
-                          "key": "Order/MyScope/SomeOrderProperty",
-                          "value": {
-                            "labelValue": "XYZ000034567"
-                          }
-                        }
-                      },
-                      "version": {
-                        "effectiveFrom": "2018-03-05T10:10:10.0000000+00:00",
-                        "asAtDate": "2018-03-05T10:10:10.0000000+00:00"
-                      },
-                      "instrumentIdentifiers": {
-                        "instrument/default/Currency": "GBP"
-                      },
-                      "quantity": 100,
-                      "side": "Buy",
-                      "orderBookId": {
-                        "scope": "MyScope",
-                        "code": "UKEQ Orders"
-                      },
-                      "portfolioId": {
-                        "scope": "MyScope",
-                        "code": "testPortfolio"
-                      },
-                      "id": {
-                        "scope": "MyScope",
-                        "code": "ORD00000123"
-                      },
-                      "state": "New",
-                      "type": "Limit",
-                      "timeInForce": "GoodTilCancel",
-                      "date": "1999-06-05T00:00:00.0000000+00:00",
-                      "price": {
-                        "amount": 534,
-                        "currency": "USD"
-                      },
-                      "orderInstructionId": {
-                        "scope": "MyScope",
-                        "code": "Instruction-06"
-                      },
-                      "packageId": {
-                        "scope": "MyScope",
-                        "code": "UKEQ Package"
-                      }
-                    }
-                  ],
-                  "links": []
-                }
-              },
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ResourceListOfOrder"
-                },
-                "example": {
-                  "values": [
-                    {
-                      "properties": {
-                        "order/MyScope/SomeOrderProperty": {
-                          "key": "Order/MyScope/SomeOrderProperty",
-                          "value": {
-                            "labelValue": "XYZ000034567"
-                          }
-                        }
-                      },
-                      "version": {
-                        "effectiveFrom": "2018-03-05T10:10:10.0000000+00:00",
-                        "asAtDate": "2018-03-05T10:10:10.0000000+00:00"
-                      },
-                      "instrumentIdentifiers": {
-                        "instrument/default/Currency": "GBP"
-                      },
-                      "quantity": 100,
-                      "side": "Buy",
-                      "orderBookId": {
-                        "scope": "MyScope",
-                        "code": "UKEQ Orders"
-                      },
-                      "portfolioId": {
-                        "scope": "MyScope",
-                        "code": "testPortfolio"
-                      },
-                      "id": {
-                        "scope": "MyScope",
-                        "code": "ORD00000123"
-                      },
-                      "state": "New",
-                      "type": "Limit",
-                      "timeInForce": "GoodTilCancel",
-                      "date": "1999-06-05T00:00:00.0000000+00:00",
-                      "price": {
-                        "amount": 534,
-                        "currency": "USD"
-                      },
-                      "orderInstructionId": {
-                        "scope": "MyScope",
-                        "code": "Instruction-06"
-                      },
-                      "packageId": {
-                        "scope": "MyScope",
-                        "code": "UKEQ Package"
-                      }
-                    }
-                  ],
-                  "links": []
-                }
-              },
-              "text/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ResourceListOfOrder"
-                },
-                "example": {
-                  "values": [
-                    {
-                      "properties": {
-                        "order/MyScope/SomeOrderProperty": {
-                          "key": "Order/MyScope/SomeOrderProperty",
-                          "value": {
-                            "labelValue": "XYZ000034567"
-                          }
-                        }
-                      },
-                      "version": {
-                        "effectiveFrom": "2018-03-05T10:10:10.0000000+00:00",
-                        "asAtDate": "2018-03-05T10:10:10.0000000+00:00"
-                      },
-                      "instrumentIdentifiers": {
-                        "instrument/default/Currency": "GBP"
-                      },
-                      "quantity": 100,
-                      "side": "Buy",
-                      "orderBookId": {
-                        "scope": "MyScope",
-                        "code": "UKEQ Orders"
-                      },
-                      "portfolioId": {
-                        "scope": "MyScope",
-                        "code": "testPortfolio"
-                      },
-                      "id": {
-                        "scope": "MyScope",
-                        "code": "ORD00000123"
-                      },
-                      "state": "New",
-                      "type": "Limit",
-                      "timeInForce": "GoodTilCancel",
-                      "date": "1999-06-05T00:00:00.0000000+00:00",
-                      "price": {
-                        "amount": 534,
-                        "currency": "USD"
-                      },
-                      "orderInstructionId": {
-                        "scope": "MyScope",
-                        "code": "Instruction-06"
-                      },
-                      "packageId": {
-                        "scope": "MyScope",
-                        "code": "UKEQ Package"
-                      }
-                    }
-                  ],
-                  "links": []
-                }
-              }
-            }
-          },
-          "400": {
-            "description": "The details of the input related failure",
-            "content": {
-              "text/plain": {
-                "schema": {
-                  "$ref": "#/components/schemas/LusidValidationProblemDetails"
-                }
-              },
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/LusidValidationProblemDetails"
-                }
-              },
-              "text/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/LusidValidationProblemDetails"
-                }
-              }
-            }
-          },
-          "default": {
-            "description": "Error response",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/LusidProblemDetails"
-                }
-              }
-            }
-          }
-        },
-        "security": [
-          {
-            "oauth2": []
-          }
-        ],
-        "x-fbn-apistatus": "EarlyAccess"
-      }
-    },
-    "/api/orders/{scope}/{code}": {
-      "get": {
-        "tags": [
-          "Orders"
-        ],
-        "summary": "[EARLY ACCESS] Get Order",
-        "description": "Fetch an Order that matches the specified identifier",
-        "operationId": "GetOrder",
-        "parameters": [
-          {
-            "name": "scope",
-            "in": "path",
-            "description": "The scope to which the order belongs.",
-            "required": true,
-            "schema": {
-              "maxLength": 64,
-              "minLength": 1,
-              "pattern": "^[a-zA-Z0-9\\-_]+$",
-              "type": "string",
-              "description": "The scope to which the order belongs.",
-              "nullable": true
-            }
-          },
-          {
-            "name": "code",
-            "in": "path",
-            "description": "The order's unique identifier.",
-            "required": true,
-            "schema": {
-              "maxLength": 64,
-              "minLength": 1,
-              "pattern": "^[a-zA-Z0-9\\-_]+$",
-              "type": "string",
-              "description": "The order's unique identifier.",
-              "nullable": true
-            }
-          },
-          {
-            "name": "asAt",
-            "in": "query",
-            "description": "The asAt datetime at which to retrieve the order. Defaults to return the latest version of the order if not specified.",
-            "schema": {
-              "type": "string",
-              "description": "The asAt datetime at which to retrieve the order. Defaults to return the latest version of the order if not specified.",
-              "format": "date-time",
-              "nullable": true
-            },
-            "x-nullable": true
-          },
-          {
-            "name": "propertyKeys",
-            "in": "query",
-            "description": "A list of property keys from the \"Orders\" domain to decorate onto the order.\r\n            These take the format {domain}/{scope}/{code} e.g. \"Orders/system/Name\".",
-            "schema": {
-              "type": "array",
-              "items": {
-                "type": "string",
-                "description": "The key that uniquely identifies the property. It has the format {domain}/{scope}/{code}."
-              },
-              "description": "A list of property keys from the \"Orders\" domain to decorate onto the order.\r\n            These take the format {domain}/{scope}/{code} e.g. \"Orders/system/Name\".",
-              "nullable": true
-            },
-            "x-nullable": true
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "The order matching the given identifier.",
-            "content": {
-              "text/plain": {
-                "schema": {
-                  "$ref": "#/components/schemas/Order"
-                },
-                "example": {
-                  "properties": {
-                    "order/MyScope/SomeOrderProperty": {
-                      "key": "Order/MyScope/SomeOrderProperty",
-                      "value": {
-                        "labelValue": "XYZ000034567"
-                      }
-                    }
-                  },
-                  "version": {
-                    "effectiveFrom": "2018-03-05T10:10:10.0000000+00:00",
-                    "asAtDate": "2018-03-05T10:10:10.0000000+00:00"
-                  },
-                  "instrumentIdentifiers": {
-                    "instrument/default/Currency": "GBP"
-                  },
-                  "quantity": 100,
-                  "side": "Buy",
-                  "orderBookId": {
-                    "scope": "MyScope",
-                    "code": "UKEQ Orders"
-                  },
-                  "portfolioId": {
-                    "scope": "MyScope",
-                    "code": "testPortfolio"
-                  },
-                  "id": {
-                    "scope": "MyScope",
-                    "code": "ORD00000123"
-                  },
-                  "state": "New",
-                  "type": "Limit",
-                  "timeInForce": "GoodTilCancel",
-                  "date": "1999-06-05T00:00:00.0000000+00:00",
-                  "price": {
-                    "amount": 534,
-                    "currency": "USD"
-                  },
-                  "orderInstructionId": {
-                    "scope": "MyScope",
-                    "code": "Instruction-06"
-                  },
-                  "packageId": {
-                    "scope": "MyScope",
-                    "code": "UKEQ Package"
-                  }
-                }
-              },
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Order"
-                },
-                "example": {
-                  "properties": {
-                    "order/MyScope/SomeOrderProperty": {
-                      "key": "Order/MyScope/SomeOrderProperty",
-                      "value": {
-                        "labelValue": "XYZ000034567"
-                      }
-                    }
-                  },
-                  "version": {
-                    "effectiveFrom": "2018-03-05T10:10:10.0000000+00:00",
-                    "asAtDate": "2018-03-05T10:10:10.0000000+00:00"
-                  },
-                  "instrumentIdentifiers": {
-                    "instrument/default/Currency": "GBP"
-                  },
-                  "quantity": 100,
-                  "side": "Buy",
-                  "orderBookId": {
-                    "scope": "MyScope",
-                    "code": "UKEQ Orders"
-                  },
-                  "portfolioId": {
-                    "scope": "MyScope",
-                    "code": "testPortfolio"
-                  },
-                  "id": {
-                    "scope": "MyScope",
-                    "code": "ORD00000123"
-                  },
-                  "state": "New",
-                  "type": "Limit",
-                  "timeInForce": "GoodTilCancel",
-                  "date": "1999-06-05T00:00:00.0000000+00:00",
-                  "price": {
-                    "amount": 534,
-                    "currency": "USD"
-                  },
-                  "orderInstructionId": {
-                    "scope": "MyScope",
-                    "code": "Instruction-06"
-                  },
-                  "packageId": {
-                    "scope": "MyScope",
-                    "code": "UKEQ Package"
-                  }
-                }
-              },
-              "text/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Order"
-                },
-                "example": {
-                  "properties": {
-                    "order/MyScope/SomeOrderProperty": {
-                      "key": "Order/MyScope/SomeOrderProperty",
-                      "value": {
-                        "labelValue": "XYZ000034567"
-                      }
-                    }
-                  },
-                  "version": {
-                    "effectiveFrom": "2018-03-05T10:10:10.0000000+00:00",
-                    "asAtDate": "2018-03-05T10:10:10.0000000+00:00"
-                  },
-                  "instrumentIdentifiers": {
-                    "instrument/default/Currency": "GBP"
-                  },
-                  "quantity": 100,
-                  "side": "Buy",
-                  "orderBookId": {
-                    "scope": "MyScope",
-                    "code": "UKEQ Orders"
-                  },
-                  "portfolioId": {
-                    "scope": "MyScope",
-                    "code": "testPortfolio"
-                  },
-                  "id": {
-                    "scope": "MyScope",
-                    "code": "ORD00000123"
-                  },
-                  "state": "New",
-                  "type": "Limit",
-                  "timeInForce": "GoodTilCancel",
-                  "date": "1999-06-05T00:00:00.0000000+00:00",
-                  "price": {
-                    "amount": 534,
-                    "currency": "USD"
-                  },
-                  "orderInstructionId": {
-                    "scope": "MyScope",
-                    "code": "Instruction-06"
-                  },
-                  "packageId": {
-                    "scope": "MyScope",
-                    "code": "UKEQ Package"
-                  }
-                }
-              }
-            }
-          },
-          "400": {
-            "description": "The details of the input related failure",
-            "content": {
-              "text/plain": {
-                "schema": {
-                  "$ref": "#/components/schemas/LusidValidationProblemDetails"
-                }
-              },
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/LusidValidationProblemDetails"
-                }
-              },
-              "text/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/LusidValidationProblemDetails"
-                }
-              }
-            }
-          },
-          "default": {
-            "description": "Error response",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/LusidProblemDetails"
-                }
-              }
-            }
-          }
-        },
-        "security": [
-          {
-            "oauth2": []
-          }
-        ],
-        "x-fbn-apistatus": "EarlyAccess"
-      },
-      "delete": {
-        "tags": [
-          "Orders"
-        ],
-        "summary": "[EARLY ACCESS] Delete order",
-        "description": "Delete an order. Deletion will be valid from the order's creation datetime.\r\nThis means that the order will no longer exist at any effective datetime from the asAt datetime of deletion.",
-        "operationId": "DeleteOrder",
-        "parameters": [
-          {
-            "name": "scope",
-            "in": "path",
-            "description": "The order scope.",
-            "required": true,
-            "schema": {
-              "maxLength": 64,
-              "minLength": 1,
-              "pattern": "^[a-zA-Z0-9\\-_]+$",
-              "type": "string",
-              "description": "The order scope."
-            }
-          },
-          {
-            "name": "code",
-            "in": "path",
-            "description": "The order's code. This, together with the scope uniquely identifies the order to delete.",
-            "required": true,
-            "schema": {
-              "maxLength": 64,
-              "minLength": 1,
-              "pattern": "^[a-zA-Z0-9\\-_]+$",
-              "type": "string",
-              "description": "The order's code. This, together with the scope uniquely identifies the order to delete."
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "The response from deleting an order.",
-            "content": {
-              "text/plain": {
-                "schema": {
-                  "$ref": "#/components/schemas/DeletedEntityResponse"
-                }
-              },
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/DeletedEntityResponse"
-                }
-              },
-              "text/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/DeletedEntityResponse"
-                }
-              }
-            }
-          },
-          "400": {
-            "description": "The details of the input related failure",
-            "content": {
-              "text/plain": {
-                "schema": {
-                  "$ref": "#/components/schemas/LusidValidationProblemDetails"
-                }
-              },
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/LusidValidationProblemDetails"
-                }
-              },
-              "text/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/LusidValidationProblemDetails"
                 }
               }
             }
@@ -21756,8 +19840,7 @@
         "type": "object",
         "properties": {
           "description": {
-            "type": "string",
-            "description": "The description of the action"
+            "type": "string"
           },
           "action": {
             "$ref": "#/components/schemas/ActionId"
@@ -21767,7 +19850,6 @@
             "items": {
               "$ref": "#/components/schemas/IdSelectorDefinition"
             },
-            "description": "When populated, the provided values are the limited set of resources that are allowed to be specified for\r\naccess control for this action",
             "nullable": true
           },
           "links": {
@@ -21775,12 +19857,10 @@
             "items": {
               "$ref": "#/components/schemas/Link"
             },
-            "description": "Collection of links.",
             "nullable": true
           }
         },
-        "additionalProperties": false,
-        "description": "An action that can be access controlled"
+        "additionalProperties": false
       },
       "AccessControlledResource": {
         "required": [
@@ -21791,31 +19871,26 @@
         "properties": {
           "application": {
             "type": "string",
-            "description": "The application to which this resource belongs",
             "nullable": true
           },
           "name": {
             "type": "string",
-            "description": "The display name of the resource",
             "nullable": true
           },
           "description": {
-            "type": "string",
-            "description": "The description of the resource"
+            "type": "string"
           },
           "actions": {
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/AccessControlledAction"
-            },
-            "description": "The actions acceptable for this type of resource"
+            }
           },
           "identifierParts": {
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/IdentifierPartSchema"
             },
-            "description": "The constituent parts of a valid identifier for this resource",
             "nullable": true
           },
           "links": {
@@ -21823,12 +19898,10 @@
             "items": {
               "$ref": "#/components/schemas/Link"
             },
-            "description": "Collection of links.",
             "nullable": true
           }
         },
-        "additionalProperties": false,
-        "description": "A resource to which access can be controlled"
+        "additionalProperties": false
       },
       "ActionId": {
         "required": [
@@ -21876,7 +19949,6 @@
             "items": {
               "$ref": "#/components/schemas/Link"
             },
-            "description": "Collection of links.",
             "nullable": true
           }
         },
@@ -21928,225 +20000,6 @@
         "additionalProperties": false,
         "description": "This request specifies target holdings. i.e. holding data that the\r\nsystem should match. When processed by the movement\r\nengine, it will create 'true-up' adjustments on the fly."
       },
-      "Allocation": {
-        "required": [
-          "allocatedOrderId",
-          "id",
-          "instrumentIdentifiers",
-          "lusidInstrumentId",
-          "portfolioId",
-          "quantity"
-        ],
-        "type": "object",
-        "properties": {
-          "id": {
-            "$ref": "#/components/schemas/ResourceId"
-          },
-          "allocatedOrderId": {
-            "$ref": "#/components/schemas/ResourceId"
-          },
-          "portfolioId": {
-            "$ref": "#/components/schemas/ResourceId"
-          },
-          "quantity": {
-            "type": "integer",
-            "description": "The quantity of given instrument allocated.",
-            "format": "int32"
-          },
-          "instrumentIdentifiers": {
-            "type": "object",
-            "additionalProperties": {
-              "type": "string"
-            },
-            "description": "The instrument allocated."
-          },
-          "version": {
-            "$ref": "#/components/schemas/Version"
-          },
-          "properties": {
-            "type": "object",
-            "additionalProperties": {
-              "$ref": "#/components/schemas/PerpetualProperty"
-            },
-            "description": "Client-defined properties associated with this allocation.",
-            "nullable": true
-          },
-          "lusidInstrumentId": {
-            "type": "string",
-            "description": "The LUSID instrument id for the instrument allocated."
-          },
-          "placementIds": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/ResourceId"
-            },
-            "description": "A placement - also known as an order placed in the market - associated with this allocation.",
-            "nullable": true
-          },
-          "state": {
-            "type": "string",
-            "description": "The state of this allocation.",
-            "nullable": true
-          },
-          "side": {
-            "type": "string",
-            "description": "The side of this allocation (examples: Buy, Sell, ...).",
-            "nullable": true
-          },
-          "type": {
-            "type": "string",
-            "description": "The type of order associated with this allocation (examples: Limit, Market, ...).",
-            "nullable": true
-          },
-          "settlementDate": {
-            "type": "string",
-            "description": "The settlement date for this allocation.",
-            "format": "date-time"
-          },
-          "date": {
-            "type": "string",
-            "description": "The date of this allocation.",
-            "format": "date-time"
-          },
-          "price": {
-            "$ref": "#/components/schemas/CurrencyAndAmount"
-          },
-          "settlementCurrency": {
-            "type": "string",
-            "description": "The settlement currency of this allocation.",
-            "nullable": true
-          },
-          "settlementCurrencyFxRate": {
-            "type": "number",
-            "description": "The settlement currency to allocation currency FX rate.",
-            "format": "double"
-          },
-          "counterparty": {
-            "type": "string",
-            "description": "The counterparty for this allocation.",
-            "nullable": true
-          },
-          "links": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/Link"
-            },
-            "description": "Collection of links.",
-            "nullable": true
-          }
-        },
-        "additionalProperties": false,
-        "description": "An Allocation of a certain quantity of a specific instrument against an originating\r\nOrder."
-      },
-      "AllocationRequest": {
-        "required": [
-          "allocatedOrderId",
-          "id",
-          "instrumentIdentifiers",
-          "portfolioId",
-          "quantity"
-        ],
-        "type": "object",
-        "properties": {
-          "properties": {
-            "type": "object",
-            "additionalProperties": {
-              "$ref": "#/components/schemas/PerpetualProperty"
-            },
-            "description": "Client-defined properties associated with this allocation.",
-            "nullable": true
-          },
-          "instrumentIdentifiers": {
-            "type": "object",
-            "additionalProperties": {
-              "type": "string"
-            },
-            "description": "The instrument allocated."
-          },
-          "quantity": {
-            "type": "integer",
-            "description": "The quantity of given instrument allocated.",
-            "format": "int32"
-          },
-          "portfolioId": {
-            "$ref": "#/components/schemas/ResourceId"
-          },
-          "allocatedOrderId": {
-            "$ref": "#/components/schemas/ResourceId"
-          },
-          "id": {
-            "$ref": "#/components/schemas/ResourceId"
-          },
-          "placementIds": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/ResourceId"
-            },
-            "description": "A placement - also known as an order placed in the market - associated with this allocation.",
-            "nullable": true
-          },
-          "state": {
-            "type": "string",
-            "description": "The state of this allocation.",
-            "nullable": true
-          },
-          "side": {
-            "type": "string",
-            "description": "The side of this allocation (examples: Buy, Sell, ...).",
-            "nullable": true
-          },
-          "type": {
-            "type": "string",
-            "description": "The type of order associated with this allocation (examples: Limit, Market, ...).",
-            "nullable": true
-          },
-          "settlementDate": {
-            "type": "string",
-            "description": "The settlement date for this allocation.",
-            "format": "date-time"
-          },
-          "date": {
-            "type": "string",
-            "description": "The date of this allocation.",
-            "format": "date-time"
-          },
-          "price": {
-            "$ref": "#/components/schemas/CurrencyAndAmount"
-          },
-          "settlementCurrency": {
-            "type": "string",
-            "description": "The settlement currency of this allocation.",
-            "nullable": true
-          },
-          "settlementCurrencyFxRate": {
-            "type": "number",
-            "description": "The settlement currency to allocation currency FX rate.",
-            "format": "double"
-          },
-          "counterparty": {
-            "type": "string",
-            "description": "The counterparty for this allocation.",
-            "nullable": true
-          }
-        },
-        "additionalProperties": false,
-        "description": "A request to create or update an Allocation."
-      },
-      "AllocationSetRequest": {
-        "type": "object",
-        "properties": {
-          "allocationRequests": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/AllocationRequest"
-            },
-            "description": "A collection of AllocationRequests.",
-            "nullable": true
-          }
-        },
-        "additionalProperties": false,
-        "description": "A request to create or update multiple Allocations."
-      },
       "AnnulQuotesResponse": {
         "type": "object",
         "properties": {
@@ -22178,7 +20031,6 @@
             "items": {
               "$ref": "#/components/schemas/Link"
             },
-            "description": "Collection of links.",
             "nullable": true
           }
         },
@@ -22237,7 +20089,6 @@
             "items": {
               "$ref": "#/components/schemas/Link"
             },
-            "description": "Collection of links.",
             "nullable": true
           }
         },
@@ -22313,7 +20164,6 @@
             "items": {
               "$ref": "#/components/schemas/Link"
             },
-            "description": "Collection of links.",
             "nullable": true
           }
         },
@@ -22335,7 +20185,6 @@
             "items": {
               "$ref": "#/components/schemas/Link"
             },
-            "description": "Collection of links.",
             "nullable": true
           }
         },
@@ -22734,7 +20583,6 @@
             "items": {
               "$ref": "#/components/schemas/Link"
             },
-            "description": "Collection of links.",
             "nullable": true
           }
         },
@@ -22840,7 +20688,6 @@
             "items": {
               "$ref": "#/components/schemas/Link"
             },
-            "description": "Collection of links.",
             "nullable": true
           }
         },
@@ -22892,7 +20739,6 @@
             "items": {
               "$ref": "#/components/schemas/Link"
             },
-            "description": "Collection of links.",
             "nullable": true
           }
         },
@@ -22920,7 +20766,6 @@
             "items": {
               "$ref": "#/components/schemas/Link"
             },
-            "description": "Collection of links.",
             "nullable": true
           }
         },
@@ -23056,7 +20901,6 @@
             "items": {
               "$ref": "#/components/schemas/Link"
             },
-            "description": "Collection of links.",
             "nullable": true
           }
         },
@@ -23110,7 +20954,6 @@
             "items": {
               "$ref": "#/components/schemas/Link"
             },
-            "description": "Collection of links.",
             "nullable": true
           }
         },
@@ -23154,7 +20997,6 @@
             "items": {
               "$ref": "#/components/schemas/Link"
             },
-            "description": "Collection of links.",
             "nullable": true
           }
         },
@@ -23218,7 +21060,6 @@
             "items": {
               "$ref": "#/components/schemas/Link"
             },
-            "description": "Collection of links.",
             "nullable": true
           }
         },
@@ -23312,7 +21153,6 @@
             "items": {
               "$ref": "#/components/schemas/Link"
             },
-            "description": "Collection of links.",
             "nullable": true
           }
         },
@@ -23348,7 +21188,6 @@
             "items": {
               "$ref": "#/components/schemas/Link"
             },
-            "description": "Collection of links.",
             "nullable": true
           }
         },
@@ -23367,36 +21206,29 @@
         "properties": {
           "index": {
             "type": "integer",
-            "description": "The typical index in the identifier in which this part appears",
             "format": "int32"
           },
           "name": {
-            "type": "string",
-            "description": "The name of the identifier part that can/should be provided for this resource type"
+            "type": "string"
           },
           "displayName": {
-            "type": "string",
-            "description": "The display name of the identifier part"
+            "type": "string"
           },
           "description": {
-            "type": "string",
-            "description": "A brief description of the point of this identifier part"
+            "type": "string"
           },
           "required": {
-            "type": "boolean",
-            "description": "Whether a value is required to be provided"
+            "type": "boolean"
           },
           "links": {
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/Link"
             },
-            "description": "Collection of links.",
             "nullable": true
           }
         },
-        "additionalProperties": false,
-        "description": "The schema of an contributing part of a valid LUSID resource identifier"
+        "additionalProperties": false
       },
       "IdSelectorDefinition": {
         "required": [
@@ -23495,7 +21327,6 @@
             "items": {
               "$ref": "#/components/schemas/Link"
             },
-            "description": "Collection of links.",
             "nullable": true
           }
         },
@@ -23675,7 +21506,6 @@
             "items": {
               "$ref": "#/components/schemas/Link"
             },
-            "description": "Collection of links.",
             "nullable": true
           }
         },
@@ -23691,26 +21521,21 @@
         "type": "object",
         "properties": {
           "relation": {
-            "type": "string",
-            "description": "Relation of link."
+            "type": "string"
           },
           "href": {
             "type": "string",
-            "description": "Href of link.",
             "format": "uri"
           },
           "description": {
             "type": "string",
-            "description": "Description of link.",
             "nullable": true
           },
           "method": {
-            "type": "string",
-            "description": "Http method of link."
+            "type": "string"
           }
         },
-        "additionalProperties": false,
-        "description": "Link class."
+        "additionalProperties": false
       },
       "LusidInstrument": {
         "required": [
@@ -23763,8 +21588,7 @@
         "type": "object",
         "properties": {
           "name": {
-            "type": "string",
-            "description": "The name of the error"
+            "type": "string"
           },
           "errorDetails": {
             "type": "array",
@@ -23774,12 +21598,10 @@
                 "type": "string"
               }
             },
-            "description": "Any additional informational information available about the nature and detail of the problem",
             "nullable": true
           },
           "code": {
             "type": "integer",
-            "description": "Get the error code of the response",
             "format": "int32"
           },
           "type": {
@@ -23813,8 +21635,7 @@
             "readOnly": true
           }
         },
-        "additionalProperties": false,
-        "description": "A description of a problem that has arisen during the processing of a request."
+        "additionalProperties": false
       },
       "LusidValidationProblemDetails": {
         "required": [
@@ -23824,8 +21645,7 @@
         "type": "object",
         "properties": {
           "name": {
-            "type": "string",
-            "description": "The name of the error"
+            "type": "string"
           },
           "errorDetails": {
             "type": "array",
@@ -23835,12 +21655,10 @@
                 "type": "string"
               }
             },
-            "description": "Any additional informational information available about the nature and detail of the problem",
             "nullable": true
           },
           "code": {
             "type": "integer",
-            "description": "Get the error code of the response",
             "format": "int32"
           },
           "errors": {
@@ -23884,8 +21702,7 @@
             "readOnly": true
           }
         },
-        "additionalProperties": false,
-        "description": "A description of a problem that has arisen whilst validating a request"
+        "additionalProperties": false
       },
       "MetricValue": {
         "type": "object",
@@ -23901,189 +21718,6 @@
           }
         },
         "additionalProperties": false
-      },
-      "Order": {
-        "required": [
-          "id",
-          "instrumentIdentifiers",
-          "lusidInstrumentId",
-          "portfolioId",
-          "quantity",
-          "side"
-        ],
-        "type": "object",
-        "properties": {
-          "properties": {
-            "type": "object",
-            "additionalProperties": {
-              "$ref": "#/components/schemas/PerpetualProperty"
-            },
-            "description": "Client-defined properties associated with this order.",
-            "nullable": true
-          },
-          "version": {
-            "$ref": "#/components/schemas/Version"
-          },
-          "instrumentIdentifiers": {
-            "type": "object",
-            "additionalProperties": {
-              "type": "string"
-            },
-            "description": "The instrument ordered."
-          },
-          "quantity": {
-            "type": "integer",
-            "description": "The quantity of given instrument ordered.",
-            "format": "int32"
-          },
-          "side": {
-            "type": "string",
-            "description": "The client's representation of the order's side (buy, sell, short, etc)"
-          },
-          "orderBookId": {
-            "$ref": "#/components/schemas/ResourceId"
-          },
-          "portfolioId": {
-            "$ref": "#/components/schemas/ResourceId"
-          },
-          "id": {
-            "$ref": "#/components/schemas/ResourceId"
-          },
-          "lusidInstrumentId": {
-            "type": "string",
-            "description": "The LUSID instrument id for the instrument ordered."
-          },
-          "state": {
-            "type": "string",
-            "description": "The order's state (examples: New, PartiallyFilled, ...)",
-            "nullable": true
-          },
-          "type": {
-            "type": "string",
-            "description": "The order's type (examples: Limit, Market, ...)",
-            "nullable": true
-          },
-          "timeInForce": {
-            "type": "string",
-            "description": "The order's time in force (examples: Day, GoodTilCancel, ...)",
-            "nullable": true
-          },
-          "date": {
-            "type": "string",
-            "description": "The date on which the order was made",
-            "format": "date-time"
-          },
-          "price": {
-            "$ref": "#/components/schemas/CurrencyAndAmount"
-          },
-          "orderInstructionId": {
-            "$ref": "#/components/schemas/ResourceId"
-          },
-          "packageId": {
-            "$ref": "#/components/schemas/ResourceId"
-          },
-          "links": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/Link"
-            },
-            "description": "Collection of links.",
-            "nullable": true
-          }
-        },
-        "additionalProperties": false,
-        "description": "An Order for a certain quantity of a specific instrument"
-      },
-      "OrderRequest": {
-        "required": [
-          "id",
-          "instrumentIdentifiers",
-          "portfolioId",
-          "quantity",
-          "side"
-        ],
-        "type": "object",
-        "properties": {
-          "properties": {
-            "type": "object",
-            "additionalProperties": {
-              "$ref": "#/components/schemas/PerpetualProperty"
-            },
-            "description": "Client-defined properties associated with this order.",
-            "nullable": true
-          },
-          "instrumentIdentifiers": {
-            "type": "object",
-            "additionalProperties": {
-              "type": "string"
-            },
-            "description": "The instrument ordered."
-          },
-          "quantity": {
-            "type": "integer",
-            "description": "The quantity of given instrument ordered.",
-            "format": "int32"
-          },
-          "side": {
-            "type": "string",
-            "description": "The client's representation of the order's side (buy, sell, short, etc)"
-          },
-          "orderBookId": {
-            "$ref": "#/components/schemas/ResourceId"
-          },
-          "portfolioId": {
-            "$ref": "#/components/schemas/ResourceId"
-          },
-          "id": {
-            "$ref": "#/components/schemas/ResourceId"
-          },
-          "state": {
-            "type": "string",
-            "description": "The order's state (examples: New, PartiallyFilled, ...)",
-            "nullable": true
-          },
-          "type": {
-            "type": "string",
-            "description": "The order's type (examples: Limit, Market, ...)",
-            "nullable": true
-          },
-          "timeInForce": {
-            "type": "string",
-            "description": "The order's time in force (examples: Day, GoodTilCancel, ...)",
-            "nullable": true
-          },
-          "date": {
-            "type": "string",
-            "description": "The date on which the order was made",
-            "format": "date-time"
-          },
-          "price": {
-            "$ref": "#/components/schemas/CurrencyAndAmount"
-          },
-          "orderInstruction": {
-            "$ref": "#/components/schemas/ResourceId"
-          },
-          "package": {
-            "$ref": "#/components/schemas/ResourceId"
-          }
-        },
-        "additionalProperties": false,
-        "description": "A request to create or update an Order."
-      },
-      "OrderSetRequest": {
-        "type": "object",
-        "properties": {
-          "orderRequests": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/OrderRequest"
-            },
-            "description": "A collection of OrderRequests.",
-            "nullable": true
-          }
-        },
-        "additionalProperties": false,
-        "description": "A request to create or update multiple Orders."
       },
       "OutputTransaction": {
         "required": [
@@ -24213,47 +21847,6 @@
         "additionalProperties": false,
         "description": "A list of output transactions."
       },
-      "PagedResourceListOfAllocation": {
-        "required": [
-          "values"
-        ],
-        "type": "object",
-        "properties": {
-          "nextPage": {
-            "type": "string",
-            "description": "The next page of results.",
-            "nullable": true
-          },
-          "previousPage": {
-            "type": "string",
-            "description": "The previous page of results.",
-            "nullable": true
-          },
-          "values": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/Allocation"
-            },
-            "description": "The resources to list."
-          },
-          "href": {
-            "type": "string",
-            "description": "The URI of the resource list.",
-            "format": "uri",
-            "nullable": true
-          },
-          "links": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/Link"
-            },
-            "description": "Collection of links.",
-            "nullable": true
-          }
-        },
-        "additionalProperties": false,
-        "description": "A paginated list of resource that can be returned from a request."
-      },
       "PagedResourceListOfCutLabelDefinition": {
         "required": [
           "values"
@@ -24262,24 +21855,20 @@
         "properties": {
           "nextPage": {
             "type": "string",
-            "description": "The next page of results.",
             "nullable": true
           },
           "previousPage": {
             "type": "string",
-            "description": "The previous page of results.",
             "nullable": true
           },
           "values": {
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/CutLabelDefinition"
-            },
-            "description": "The resources to list."
+            }
           },
           "href": {
             "type": "string",
-            "description": "The URI of the resource list.",
             "format": "uri",
             "nullable": true
           },
@@ -24288,12 +21877,10 @@
             "items": {
               "$ref": "#/components/schemas/Link"
             },
-            "description": "Collection of links.",
             "nullable": true
           }
         },
-        "additionalProperties": false,
-        "description": "A paginated list of resource that can be returned from a request."
+        "additionalProperties": false
       },
       "PagedResourceListOfInstrument": {
         "required": [
@@ -24303,24 +21890,20 @@
         "properties": {
           "nextPage": {
             "type": "string",
-            "description": "The next page of results.",
             "nullable": true
           },
           "previousPage": {
             "type": "string",
-            "description": "The previous page of results.",
             "nullable": true
           },
           "values": {
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/Instrument"
-            },
-            "description": "The resources to list."
+            }
           },
           "href": {
             "type": "string",
-            "description": "The URI of the resource list.",
             "format": "uri",
             "nullable": true
           },
@@ -24329,12 +21912,10 @@
             "items": {
               "$ref": "#/components/schemas/Link"
             },
-            "description": "Collection of links.",
             "nullable": true
           }
         },
-        "additionalProperties": false,
-        "description": "A paginated list of resource that can be returned from a request."
+        "additionalProperties": false
       },
       "PagedResourceListOfLegalEntity": {
         "required": [
@@ -24344,24 +21925,20 @@
         "properties": {
           "nextPage": {
             "type": "string",
-            "description": "The next page of results.",
             "nullable": true
           },
           "previousPage": {
             "type": "string",
-            "description": "The previous page of results.",
             "nullable": true
           },
           "values": {
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/LegalEntity"
-            },
-            "description": "The resources to list."
+            }
           },
           "href": {
             "type": "string",
-            "description": "The URI of the resource list.",
             "format": "uri",
             "nullable": true
           },
@@ -24370,53 +21947,10 @@
             "items": {
               "$ref": "#/components/schemas/Link"
             },
-            "description": "Collection of links.",
             "nullable": true
           }
         },
-        "additionalProperties": false,
-        "description": "A paginated list of resource that can be returned from a request."
-      },
-      "PagedResourceListOfOrder": {
-        "required": [
-          "values"
-        ],
-        "type": "object",
-        "properties": {
-          "nextPage": {
-            "type": "string",
-            "description": "The next page of results.",
-            "nullable": true
-          },
-          "previousPage": {
-            "type": "string",
-            "description": "The previous page of results.",
-            "nullable": true
-          },
-          "values": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/Order"
-            },
-            "description": "The resources to list."
-          },
-          "href": {
-            "type": "string",
-            "description": "The URI of the resource list.",
-            "format": "uri",
-            "nullable": true
-          },
-          "links": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/Link"
-            },
-            "description": "Collection of links.",
-            "nullable": true
-          }
-        },
-        "additionalProperties": false,
-        "description": "A paginated list of resource that can be returned from a request."
+        "additionalProperties": false
       },
       "PagedResourceListOfPortfolioGroupSearchResult": {
         "required": [
@@ -24426,24 +21960,20 @@
         "properties": {
           "nextPage": {
             "type": "string",
-            "description": "The next page of results.",
             "nullable": true
           },
           "previousPage": {
             "type": "string",
-            "description": "The previous page of results.",
             "nullable": true
           },
           "values": {
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/PortfolioGroupSearchResult"
-            },
-            "description": "The resources to list."
+            }
           },
           "href": {
             "type": "string",
-            "description": "The URI of the resource list.",
             "format": "uri",
             "nullable": true
           },
@@ -24452,12 +21982,10 @@
             "items": {
               "$ref": "#/components/schemas/Link"
             },
-            "description": "Collection of links.",
             "nullable": true
           }
         },
-        "additionalProperties": false,
-        "description": "A paginated list of resource that can be returned from a request."
+        "additionalProperties": false
       },
       "PagedResourceListOfPortfolioSearchResult": {
         "required": [
@@ -24467,24 +21995,20 @@
         "properties": {
           "nextPage": {
             "type": "string",
-            "description": "The next page of results.",
             "nullable": true
           },
           "previousPage": {
             "type": "string",
-            "description": "The previous page of results.",
             "nullable": true
           },
           "values": {
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/PortfolioSearchResult"
-            },
-            "description": "The resources to list."
+            }
           },
           "href": {
             "type": "string",
-            "description": "The URI of the resource list.",
             "format": "uri",
             "nullable": true
           },
@@ -24493,12 +22017,10 @@
             "items": {
               "$ref": "#/components/schemas/Link"
             },
-            "description": "Collection of links.",
             "nullable": true
           }
         },
-        "additionalProperties": false,
-        "description": "A paginated list of resource that can be returned from a request."
+        "additionalProperties": false
       },
       "PagedResourceListOfPropertyDefinitionSearchResult": {
         "required": [
@@ -24508,24 +22030,20 @@
         "properties": {
           "nextPage": {
             "type": "string",
-            "description": "The next page of results.",
             "nullable": true
           },
           "previousPage": {
             "type": "string",
-            "description": "The previous page of results.",
             "nullable": true
           },
           "values": {
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/PropertyDefinitionSearchResult"
-            },
-            "description": "The resources to list."
+            }
           },
           "href": {
             "type": "string",
-            "description": "The URI of the resource list.",
             "format": "uri",
             "nullable": true
           },
@@ -24534,12 +22052,10 @@
             "items": {
               "$ref": "#/components/schemas/Link"
             },
-            "description": "Collection of links.",
             "nullable": true
           }
         },
-        "additionalProperties": false,
-        "description": "A paginated list of resource that can be returned from a request."
+        "additionalProperties": false
       },
       "PerpetualProperty": {
         "required": [
@@ -24626,7 +22142,6 @@
             "items": {
               "$ref": "#/components/schemas/Link"
             },
-            "description": "Collection of links.",
             "nullable": true
           }
         },
@@ -24711,7 +22226,6 @@
             "items": {
               "$ref": "#/components/schemas/Link"
             },
-            "description": "Collection of links.",
             "nullable": true
           }
         },
@@ -24758,7 +22272,6 @@
             "items": {
               "$ref": "#/components/schemas/Link"
             },
-            "description": "Collection of links.",
             "nullable": true
           }
         },
@@ -24818,7 +22331,6 @@
             "items": {
               "$ref": "#/components/schemas/Link"
             },
-            "description": "Collection of links.",
             "nullable": true
           }
         },
@@ -24849,7 +22361,6 @@
             "items": {
               "$ref": "#/components/schemas/Link"
             },
-            "description": "Collection of links.",
             "nullable": true
           }
         },
@@ -24909,7 +22420,6 @@
             "items": {
               "$ref": "#/components/schemas/Link"
             },
-            "description": "Collection of links.",
             "nullable": true
           }
         },
@@ -25003,7 +22513,6 @@
             "items": {
               "$ref": "#/components/schemas/Link"
             },
-            "description": "Collection of links.",
             "nullable": true
           }
         },
@@ -25100,7 +22609,6 @@
             "items": {
               "$ref": "#/components/schemas/Link"
             },
-            "description": "Collection of links.",
             "nullable": true
           }
         },
@@ -25338,7 +22846,6 @@
             "items": {
               "$ref": "#/components/schemas/Link"
             },
-            "description": "Collection of links.",
             "nullable": true
           }
         },
@@ -25494,7 +23001,6 @@
             "items": {
               "$ref": "#/components/schemas/Link"
             },
-            "description": "Collection of links.",
             "nullable": true
           }
         },
@@ -25877,18 +23383,15 @@
           "scope": {
             "maxLength": 512,
             "minLength": 1,
-            "type": "string",
-            "description": "The scope used to identify an entity"
+            "type": "string"
           },
           "code": {
             "maxLength": 512,
             "minLength": 1,
-            "type": "string",
-            "description": "The code used to identify an entity"
+            "type": "string"
           }
         },
-        "additionalProperties": false,
-        "description": "Identifiers of an entity"
+        "additionalProperties": false
       },
       "ResourceListOfAccessControlledResource": {
         "required": [
@@ -25900,12 +23403,10 @@
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/AccessControlledResource"
-            },
-            "description": "The resources to list."
+            }
           },
           "href": {
             "type": "string",
-            "description": "The URI of the resource list.",
             "format": "uri",
             "nullable": true
           },
@@ -25914,63 +23415,18 @@
             "items": {
               "$ref": "#/components/schemas/Link"
             },
-            "description": "Collection of links.",
             "nullable": true
           },
           "nextPage": {
             "type": "string",
-            "description": "The next page of results.",
             "nullable": true
           },
           "previousPage": {
             "type": "string",
-            "description": "The previous page of results.",
             "nullable": true
           }
         },
-        "additionalProperties": false,
-        "description": "A collection of resources that can be returned from requests."
-      },
-      "ResourceListOfAllocation": {
-        "required": [
-          "values"
-        ],
-        "type": "object",
-        "properties": {
-          "values": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/Allocation"
-            },
-            "description": "The resources to list."
-          },
-          "href": {
-            "type": "string",
-            "description": "The URI of the resource list.",
-            "format": "uri",
-            "nullable": true
-          },
-          "links": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/Link"
-            },
-            "description": "Collection of links.",
-            "nullable": true
-          },
-          "nextPage": {
-            "type": "string",
-            "description": "The next page of results.",
-            "nullable": true
-          },
-          "previousPage": {
-            "type": "string",
-            "description": "The previous page of results.",
-            "nullable": true
-          }
-        },
-        "additionalProperties": false,
-        "description": "A collection of resources that can be returned from requests."
+        "additionalProperties": false
       },
       "ResourceListOfChange": {
         "required": [
@@ -25982,12 +23438,10 @@
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/Change"
-            },
-            "description": "The resources to list."
+            }
           },
           "href": {
             "type": "string",
-            "description": "The URI of the resource list.",
             "format": "uri",
             "nullable": true
           },
@@ -25996,22 +23450,18 @@
             "items": {
               "$ref": "#/components/schemas/Link"
             },
-            "description": "Collection of links.",
             "nullable": true
           },
           "nextPage": {
             "type": "string",
-            "description": "The next page of results.",
             "nullable": true
           },
           "previousPage": {
             "type": "string",
-            "description": "The previous page of results.",
             "nullable": true
           }
         },
-        "additionalProperties": false,
-        "description": "A collection of resources that can be returned from requests."
+        "additionalProperties": false
       },
       "ResourceListOfConstituentsAdjustmentHeader": {
         "required": [
@@ -26023,12 +23473,10 @@
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/ConstituentsAdjustmentHeader"
-            },
-            "description": "The resources to list."
+            }
           },
           "href": {
             "type": "string",
-            "description": "The URI of the resource list.",
             "format": "uri",
             "nullable": true
           },
@@ -26037,22 +23485,18 @@
             "items": {
               "$ref": "#/components/schemas/Link"
             },
-            "description": "Collection of links.",
             "nullable": true
           },
           "nextPage": {
             "type": "string",
-            "description": "The next page of results.",
             "nullable": true
           },
           "previousPage": {
             "type": "string",
-            "description": "The previous page of results.",
             "nullable": true
           }
         },
-        "additionalProperties": false,
-        "description": "A collection of resources that can be returned from requests."
+        "additionalProperties": false
       },
       "ResourceListOfDataType": {
         "required": [
@@ -26064,12 +23508,10 @@
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/DataType"
-            },
-            "description": "The resources to list."
+            }
           },
           "href": {
             "type": "string",
-            "description": "The URI of the resource list.",
             "format": "uri",
             "nullable": true
           },
@@ -26078,22 +23520,18 @@
             "items": {
               "$ref": "#/components/schemas/Link"
             },
-            "description": "Collection of links.",
             "nullable": true
           },
           "nextPage": {
             "type": "string",
-            "description": "The next page of results.",
             "nullable": true
           },
           "previousPage": {
             "type": "string",
-            "description": "The previous page of results.",
             "nullable": true
           }
         },
-        "additionalProperties": false,
-        "description": "A collection of resources that can be returned from requests."
+        "additionalProperties": false
       },
       "ResourceListOfHoldingsAdjustmentHeader": {
         "required": [
@@ -26105,12 +23543,10 @@
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/HoldingsAdjustmentHeader"
-            },
-            "description": "The resources to list."
+            }
           },
           "href": {
             "type": "string",
-            "description": "The URI of the resource list.",
             "format": "uri",
             "nullable": true
           },
@@ -26119,22 +23555,18 @@
             "items": {
               "$ref": "#/components/schemas/Link"
             },
-            "description": "Collection of links.",
             "nullable": true
           },
           "nextPage": {
             "type": "string",
-            "description": "The next page of results.",
             "nullable": true
           },
           "previousPage": {
             "type": "string",
-            "description": "The previous page of results.",
             "nullable": true
           }
         },
-        "additionalProperties": false,
-        "description": "A collection of resources that can be returned from requests."
+        "additionalProperties": false
       },
       "ResourceListOfInstrumentIdTypeDescriptor": {
         "required": [
@@ -26146,12 +23578,10 @@
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/InstrumentIdTypeDescriptor"
-            },
-            "description": "The resources to list."
+            }
           },
           "href": {
             "type": "string",
-            "description": "The URI of the resource list.",
             "format": "uri",
             "nullable": true
           },
@@ -26160,22 +23590,18 @@
             "items": {
               "$ref": "#/components/schemas/Link"
             },
-            "description": "Collection of links.",
             "nullable": true
           },
           "nextPage": {
             "type": "string",
-            "description": "The next page of results.",
             "nullable": true
           },
           "previousPage": {
             "type": "string",
-            "description": "The previous page of results.",
             "nullable": true
           }
         },
-        "additionalProperties": false,
-        "description": "A collection of resources that can be returned from requests."
+        "additionalProperties": false
       },
       "ResourceListOfIUnitDefinitionDto": {
         "required": [
@@ -26187,12 +23613,10 @@
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/IUnitDefinitionDto"
-            },
-            "description": "The resources to list."
+            }
           },
           "href": {
             "type": "string",
-            "description": "The URI of the resource list.",
             "format": "uri",
             "nullable": true
           },
@@ -26201,63 +23625,18 @@
             "items": {
               "$ref": "#/components/schemas/Link"
             },
-            "description": "Collection of links.",
             "nullable": true
           },
           "nextPage": {
             "type": "string",
-            "description": "The next page of results.",
             "nullable": true
           },
           "previousPage": {
             "type": "string",
-            "description": "The previous page of results.",
             "nullable": true
           }
         },
-        "additionalProperties": false,
-        "description": "A collection of resources that can be returned from requests."
-      },
-      "ResourceListOfOrder": {
-        "required": [
-          "values"
-        ],
-        "type": "object",
-        "properties": {
-          "values": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/Order"
-            },
-            "description": "The resources to list."
-          },
-          "href": {
-            "type": "string",
-            "description": "The URI of the resource list.",
-            "format": "uri",
-            "nullable": true
-          },
-          "links": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/Link"
-            },
-            "description": "Collection of links.",
-            "nullable": true
-          },
-          "nextPage": {
-            "type": "string",
-            "description": "The next page of results.",
-            "nullable": true
-          },
-          "previousPage": {
-            "type": "string",
-            "description": "The previous page of results.",
-            "nullable": true
-          }
-        },
-        "additionalProperties": false,
-        "description": "A collection of resources that can be returned from requests."
+        "additionalProperties": false
       },
       "ResourceListOfPortfolio": {
         "required": [
@@ -26269,12 +23648,10 @@
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/Portfolio"
-            },
-            "description": "The resources to list."
+            }
           },
           "href": {
             "type": "string",
-            "description": "The URI of the resource list.",
             "format": "uri",
             "nullable": true
           },
@@ -26283,22 +23660,18 @@
             "items": {
               "$ref": "#/components/schemas/Link"
             },
-            "description": "Collection of links.",
             "nullable": true
           },
           "nextPage": {
             "type": "string",
-            "description": "The next page of results.",
             "nullable": true
           },
           "previousPage": {
             "type": "string",
-            "description": "The previous page of results.",
             "nullable": true
           }
         },
-        "additionalProperties": false,
-        "description": "A collection of resources that can be returned from requests."
+        "additionalProperties": false
       },
       "ResourceListOfPortfolioCashFlow": {
         "required": [
@@ -26310,12 +23683,10 @@
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/PortfolioCashFlow"
-            },
-            "description": "The resources to list."
+            }
           },
           "href": {
             "type": "string",
-            "description": "The URI of the resource list.",
             "format": "uri",
             "nullable": true
           },
@@ -26324,22 +23695,18 @@
             "items": {
               "$ref": "#/components/schemas/Link"
             },
-            "description": "Collection of links.",
             "nullable": true
           },
           "nextPage": {
             "type": "string",
-            "description": "The next page of results.",
             "nullable": true
           },
           "previousPage": {
             "type": "string",
-            "description": "The previous page of results.",
             "nullable": true
           }
         },
-        "additionalProperties": false,
-        "description": "A collection of resources that can be returned from requests."
+        "additionalProperties": false
       },
       "ResourceListOfPortfolioGroup": {
         "required": [
@@ -26351,12 +23718,10 @@
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/PortfolioGroup"
-            },
-            "description": "The resources to list."
+            }
           },
           "href": {
             "type": "string",
-            "description": "The URI of the resource list.",
             "format": "uri",
             "nullable": true
           },
@@ -26365,22 +23730,18 @@
             "items": {
               "$ref": "#/components/schemas/Link"
             },
-            "description": "Collection of links.",
             "nullable": true
           },
           "nextPage": {
             "type": "string",
-            "description": "The next page of results.",
             "nullable": true
           },
           "previousPage": {
             "type": "string",
-            "description": "The previous page of results.",
             "nullable": true
           }
         },
-        "additionalProperties": false,
-        "description": "A collection of resources that can be returned from requests."
+        "additionalProperties": false
       },
       "ResourceListOfProcessedCommand": {
         "required": [
@@ -26392,12 +23753,10 @@
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/ProcessedCommand"
-            },
-            "description": "The resources to list."
+            }
           },
           "href": {
             "type": "string",
-            "description": "The URI of the resource list.",
             "format": "uri",
             "nullable": true
           },
@@ -26406,22 +23765,18 @@
             "items": {
               "$ref": "#/components/schemas/Link"
             },
-            "description": "Collection of links.",
             "nullable": true
           },
           "nextPage": {
             "type": "string",
-            "description": "The next page of results.",
             "nullable": true
           },
           "previousPage": {
             "type": "string",
-            "description": "The previous page of results.",
             "nullable": true
           }
         },
-        "additionalProperties": false,
-        "description": "A collection of resources that can be returned from requests."
+        "additionalProperties": false
       },
       "ResourceListOfPropertyDefinition": {
         "required": [
@@ -26433,12 +23788,10 @@
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/PropertyDefinition"
-            },
-            "description": "The resources to list."
+            }
           },
           "href": {
             "type": "string",
-            "description": "The URI of the resource list.",
             "format": "uri",
             "nullable": true
           },
@@ -26447,22 +23800,18 @@
             "items": {
               "$ref": "#/components/schemas/Link"
             },
-            "description": "Collection of links.",
             "nullable": true
           },
           "nextPage": {
             "type": "string",
-            "description": "The next page of results.",
             "nullable": true
           },
           "previousPage": {
             "type": "string",
-            "description": "The previous page of results.",
             "nullable": true
           }
         },
-        "additionalProperties": false,
-        "description": "A collection of resources that can be returned from requests."
+        "additionalProperties": false
       },
       "ResourceListOfPropertyInterval": {
         "required": [
@@ -26474,12 +23823,10 @@
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/PropertyInterval"
-            },
-            "description": "The resources to list."
+            }
           },
           "href": {
             "type": "string",
-            "description": "The URI of the resource list.",
             "format": "uri",
             "nullable": true
           },
@@ -26488,22 +23835,18 @@
             "items": {
               "$ref": "#/components/schemas/Link"
             },
-            "description": "Collection of links.",
             "nullable": true
           },
           "nextPage": {
             "type": "string",
-            "description": "The next page of results.",
             "nullable": true
           },
           "previousPage": {
             "type": "string",
-            "description": "The previous page of results.",
             "nullable": true
           }
         },
-        "additionalProperties": false,
-        "description": "A collection of resources that can be returned from requests."
+        "additionalProperties": false
       },
       "ResourceListOfQuote": {
         "required": [
@@ -26515,12 +23858,10 @@
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/Quote"
-            },
-            "description": "The resources to list."
+            }
           },
           "href": {
             "type": "string",
-            "description": "The URI of the resource list.",
             "format": "uri",
             "nullable": true
           },
@@ -26529,22 +23870,18 @@
             "items": {
               "$ref": "#/components/schemas/Link"
             },
-            "description": "Collection of links.",
             "nullable": true
           },
           "nextPage": {
             "type": "string",
-            "description": "The next page of results.",
             "nullable": true
           },
           "previousPage": {
             "type": "string",
-            "description": "The previous page of results.",
             "nullable": true
           }
         },
-        "additionalProperties": false,
-        "description": "A collection of resources that can be returned from requests."
+        "additionalProperties": false
       },
       "ResourceListOfReconciliationBreak": {
         "required": [
@@ -26556,12 +23893,10 @@
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/ReconciliationBreak"
-            },
-            "description": "The resources to list."
+            }
           },
           "href": {
             "type": "string",
-            "description": "The URI of the resource list.",
             "format": "uri",
             "nullable": true
           },
@@ -26570,22 +23905,18 @@
             "items": {
               "$ref": "#/components/schemas/Link"
             },
-            "description": "Collection of links.",
             "nullable": true
           },
           "nextPage": {
             "type": "string",
-            "description": "The next page of results.",
             "nullable": true
           },
           "previousPage": {
             "type": "string",
-            "description": "The previous page of results.",
             "nullable": true
           }
         },
-        "additionalProperties": false,
-        "description": "A collection of resources that can be returned from requests."
+        "additionalProperties": false
       },
       "ResourceListOfScopeDefinition": {
         "required": [
@@ -26597,12 +23928,10 @@
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/ScopeDefinition"
-            },
-            "description": "The resources to list."
+            }
           },
           "href": {
             "type": "string",
-            "description": "The URI of the resource list.",
             "format": "uri",
             "nullable": true
           },
@@ -26611,22 +23940,18 @@
             "items": {
               "$ref": "#/components/schemas/Link"
             },
-            "description": "Collection of links.",
             "nullable": true
           },
           "nextPage": {
             "type": "string",
-            "description": "The next page of results.",
             "nullable": true
           },
           "previousPage": {
             "type": "string",
-            "description": "The previous page of results.",
             "nullable": true
           }
         },
-        "additionalProperties": false,
-        "description": "A collection of resources that can be returned from requests."
+        "additionalProperties": false
       },
       "ScopeDefinition": {
         "required": [
@@ -26682,7 +24007,6 @@
             "items": {
               "$ref": "#/components/schemas/Link"
             },
-            "description": "Collection of links.",
             "nullable": true
           }
         },
@@ -27336,7 +24660,6 @@
             "items": {
               "$ref": "#/components/schemas/Link"
             },
-            "description": "Collection of links.",
             "nullable": true
           }
         },
@@ -27463,7 +24786,6 @@
             "items": {
               "$ref": "#/components/schemas/Link"
             },
-            "description": "Collection of links.",
             "nullable": true
           }
         },
@@ -27525,7 +24847,6 @@
             "items": {
               "$ref": "#/components/schemas/Link"
             },
-            "description": "Collection of links.",
             "nullable": true
           }
         },
@@ -27592,7 +24913,6 @@
             "items": {
               "$ref": "#/components/schemas/Link"
             },
-            "description": "Collection of links.",
             "nullable": true
           }
         },
@@ -27618,7 +24938,6 @@
             "items": {
               "$ref": "#/components/schemas/Link"
             },
-            "description": "Collection of links.",
             "nullable": true
           }
         },
@@ -27681,7 +25000,6 @@
             "items": {
               "$ref": "#/components/schemas/Link"
             },
-            "description": "Collection of links.",
             "nullable": true
           }
         },
@@ -27753,7 +25071,6 @@
             "items": {
               "$ref": "#/components/schemas/Link"
             },
-            "description": "Collection of links.",
             "nullable": true
           }
         },
@@ -27783,7 +25100,6 @@
             "items": {
               "$ref": "#/components/schemas/Link"
             },
-            "description": "Collection of links.",
             "nullable": true
           }
         },
@@ -27836,23 +25152,19 @@
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/OutputTransaction"
-            },
-            "description": "The resources to list."
+            }
           },
           "href": {
             "type": "string",
-            "description": "The URI of the resource list.",
             "format": "uri",
             "nullable": true
           },
           "nextPage": {
             "type": "string",
-            "description": "The next page of results.",
             "nullable": true
           },
           "previousPage": {
             "type": "string",
-            "description": "The previous page of results.",
             "nullable": true
           },
           "links": {
@@ -27860,7 +25172,6 @@
             "items": {
               "$ref": "#/components/schemas/Link"
             },
-            "description": "Collection of links.",
             "nullable": true
           }
         },
@@ -27880,23 +25191,19 @@
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/PortfolioHolding"
-            },
-            "description": "The resources to list."
+            }
           },
           "href": {
             "type": "string",
-            "description": "The URI of the resource list.",
             "format": "uri",
             "nullable": true
           },
           "nextPage": {
             "type": "string",
-            "description": "The next page of results.",
             "nullable": true
           },
           "previousPage": {
             "type": "string",
-            "description": "The previous page of results.",
             "nullable": true
           },
           "links": {
@@ -27904,7 +25211,6 @@
             "items": {
               "$ref": "#/components/schemas/Link"
             },
-            "description": "Collection of links.",
             "nullable": true
           }
         },
@@ -27924,23 +25230,19 @@
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/Transaction"
-            },
-            "description": "The resources to list."
+            }
           },
           "href": {
             "type": "string",
-            "description": "The URI of the resource list.",
             "format": "uri",
             "nullable": true
           },
           "nextPage": {
             "type": "string",
-            "description": "The next page of results.",
             "nullable": true
           },
           "previousPage": {
             "type": "string",
-            "description": "The previous page of results.",
             "nullable": true
           },
           "links": {
@@ -27948,7 +25250,6 @@
             "items": {
               "$ref": "#/components/schemas/Link"
             },
-            "description": "Collection of links.",
             "nullable": true
           }
         },
@@ -27974,7 +25275,6 @@
             "items": {
               "$ref": "#/components/schemas/Link"
             },
-            "description": "Collection of links.",
             "nullable": true
           }
         },
@@ -27987,7 +25287,7 @@
         "description": "OAuth2 Implicit Grant",
         "flows": {
           "implicit": {
-            "authorizationUrl": "https://dummyurl.lusid.com/",
+            "authorizationUrl": "https://lusid.okta.com/oauth2/default/v1/authorize",
             "scopes": {}
           }
         }
