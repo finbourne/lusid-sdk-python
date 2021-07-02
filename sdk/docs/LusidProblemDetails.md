@@ -3,9 +3,9 @@
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**name** | **str** | The name of the error | 
-**error_details** | **list[dict(str, str)]** | Any additional informational information available about the nature and detail of the problem | [optional] 
-**code** | **int** | Get the error code of the response | 
+**name** | **str** |  | 
+**error_details** | **list[dict(str, str)]** |  | [optional] 
+**code** | **int** |  | 
 **type** | **str** |  | [optional] 
 **title** | **str** |  | [optional] 
 **status** | **int** |  | [optional] 
