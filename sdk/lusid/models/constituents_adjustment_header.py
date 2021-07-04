@@ -58,7 +58,7 @@ class ConstituentsAdjustmentHeader(object):
         :type effective_at: datetime
         :param version: 
         :type version: lusid.Version
-        :param links:  Collection of links.
+        :param links: 
         :type links: list[lusid.Link]
 
         """  # noqa: E501
@@ -122,7 +122,6 @@ class ConstituentsAdjustmentHeader(object):
     def links(self):
         """Gets the links of this ConstituentsAdjustmentHeader.  # noqa: E501
 
-        Collection of links.  # noqa: E501
 
         :return: The links of this ConstituentsAdjustmentHeader.  # noqa: E501
         :rtype: list[Link]
@@ -133,7 +132,6 @@ class ConstituentsAdjustmentHeader(object):
     def links(self, links):
         """Sets the links of this ConstituentsAdjustmentHeader.
 
-        Collection of links.  # noqa: E501
 
         :param links: The links of this ConstituentsAdjustmentHeader.  # noqa: E501
         :type: list[Link]
