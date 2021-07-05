@@ -63,17 +63,17 @@ class IdentifierPartSchema(object):
         """
         IdentifierPartSchema - a model defined in OpenAPI
 
-        :param index:  The typical index in the identifier in which this part appears (required)
+        :param index:  (required)
         :type index: int
-        :param name:  The name of the identifier part that can/should be provided for this resource type (required)
+        :param name:  (required)
         :type name: str
-        :param display_name:  The display name of the identifier part (required)
+        :param display_name:  (required)
         :type display_name: str
-        :param description:  A brief description of the point of this identifier part (required)
+        :param description:  (required)
         :type description: str
-        :param required:  Whether a value is required to be provided (required)
+        :param required:  (required)
         :type required: bool
-        :param links:  Collection of links.
+        :param links: 
         :type links: list[lusid.Link]
 
         """  # noqa: E501
@@ -97,7 +97,6 @@ class IdentifierPartSchema(object):
     def index(self):
         """Gets the index of this IdentifierPartSchema.  # noqa: E501
 
-        The typical index in the identifier in which this part appears  # noqa: E501
 
         :return: The index of this IdentifierPartSchema.  # noqa: E501
         :rtype: int
@@ -108,7 +107,6 @@ class IdentifierPartSchema(object):
     def index(self, index):
         """Sets the index of this IdentifierPartSchema.
 
-        The typical index in the identifier in which this part appears  # noqa: E501
 
         :param index: The index of this IdentifierPartSchema.  # noqa: E501
         :type: int
@@ -122,7 +120,6 @@ class IdentifierPartSchema(object):
     def name(self):
         """Gets the name of this IdentifierPartSchema.  # noqa: E501
 
-        The name of the identifier part that can/should be provided for this resource type  # noqa: E501
 
         :return: The name of this IdentifierPartSchema.  # noqa: E501
         :rtype: str
@@ -133,7 +130,6 @@ class IdentifierPartSchema(object):
     def name(self, name):
         """Sets the name of this IdentifierPartSchema.
 
-        The name of the identifier part that can/should be provided for this resource type  # noqa: E501
 
         :param name: The name of this IdentifierPartSchema.  # noqa: E501
         :type: str
@@ -147,7 +143,6 @@ class IdentifierPartSchema(object):
     def display_name(self):
         """Gets the display_name of this IdentifierPartSchema.  # noqa: E501
 
-        The display name of the identifier part  # noqa: E501
 
         :return: The display_name of this IdentifierPartSchema.  # noqa: E501
         :rtype: str
@@ -158,7 +153,6 @@ class IdentifierPartSchema(object):
     def display_name(self, display_name):
         """Sets the display_name of this IdentifierPartSchema.
 
-        The display name of the identifier part  # noqa: E501
 
         :param display_name: The display_name of this IdentifierPartSchema.  # noqa: E501
         :type: str
@@ -172,7 +166,6 @@ class IdentifierPartSchema(object):
     def description(self):
         """Gets the description of this IdentifierPartSchema.  # noqa: E501
 
-        A brief description of the point of this identifier part  # noqa: E501
 
         :return: The description of this IdentifierPartSchema.  # noqa: E501
         :rtype: str
@@ -183,7 +176,6 @@ class IdentifierPartSchema(object):
     def description(self, description):
         """Sets the description of this IdentifierPartSchema.
 
-        A brief description of the point of this identifier part  # noqa: E501
 
         :param description: The description of this IdentifierPartSchema.  # noqa: E501
         :type: str
@@ -197,7 +189,6 @@ class IdentifierPartSchema(object):
     def required(self):
         """Gets the required of this IdentifierPartSchema.  # noqa: E501
 
-        Whether a value is required to be provided  # noqa: E501
 
         :return: The required of this IdentifierPartSchema.  # noqa: E501
         :rtype: bool
@@ -208,7 +199,6 @@ class IdentifierPartSchema(object):
     def required(self, required):
         """Sets the required of this IdentifierPartSchema.
 
-        Whether a value is required to be provided  # noqa: E501
 
         :param required: The required of this IdentifierPartSchema.  # noqa: E501
         :type: bool
@@ -222,7 +212,6 @@ class IdentifierPartSchema(object):
     def links(self):
         """Gets the links of this IdentifierPartSchema.  # noqa: E501
 
-        Collection of links.  # noqa: E501
 
         :return: The links of this IdentifierPartSchema.  # noqa: E501
         :rtype: list[Link]
@@ -233,7 +222,6 @@ class IdentifierPartSchema(object):
     def links(self, links):
         """Sets the links of this IdentifierPartSchema.
 
-        Collection of links.  # noqa: E501
 
         :param links: The links of this IdentifierPartSchema.  # noqa: E501
         :type: list[Link]
