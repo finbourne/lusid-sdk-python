@@ -83,7 +83,7 @@ class ExpandedGroup(object):
         :type sub_groups: list[lusid.ExpandedGroup]
         :param version: 
         :type version: lusid.Version
-        :param links:  Collection of links.
+        :param links: 
         :type links: list[lusid.Link]
 
         """  # noqa: E501
@@ -273,7 +273,6 @@ class ExpandedGroup(object):
     def links(self):
         """Gets the links of this ExpandedGroup.  # noqa: E501
 
-        Collection of links.  # noqa: E501
 
         :return: The links of this ExpandedGroup.  # noqa: E501
         :rtype: list[Link]
@@ -284,7 +283,6 @@ class ExpandedGroup(object):
     def links(self, links):
         """Sets the links of this ExpandedGroup.
 
-        Collection of links.  # noqa: E501
 
         :param links: The links of this ExpandedGroup.  # noqa: E501
         :type: list[Link]
