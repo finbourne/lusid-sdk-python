@@ -14,7 +14,7 @@ Name | Type | Description | Notes
 **is_derived** | **bool** | Whether or not this is a derived portfolio. | [optional] 
 **base_currency** | **str** | The base currency of the portfolio. This will be an empty string for reference portfolios. | [optional] 
 **properties** | [**dict(str, ModelProperty)**](ModelProperty.md) | The requested portfolio properties. These will be from the &#39;Portfolio&#39; domain. | [optional] 
-**links** | [**list[Link]**](Link.md) |  | [optional] 
+**links** | [**list[Link]**](Link.md) | Collection of links. | [optional] 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 
