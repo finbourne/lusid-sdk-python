@@ -9,7 +9,7 @@
       "url": "https://www.finbourne.com",
       "email": "info@finbourne.com"
     },
-    "version": "0.11.3259",
+    "version": "0.11.3262",
     "x-logo": {
       "url": "https://content.finbourne.com/LUSID-header.png",
       "backgroundColor": "#415464"
@@ -17,7 +17,7 @@
   },
   "servers": [
     {
-      "url": "https://fbn-prd.lusid.com/api"
+      "url": "http://local-unit-test-server.lusid.com:58898"
     }
   ],
   "paths": {
@@ -11202,6 +11202,148 @@
         "x-fbn-apistatus": "Stable"
       }
     },
+    "/api/propertydefinitions/derived": {
+      "post": {
+        "tags": [
+          "Property Definitions"
+        ],
+        "summary": "[EARLY ACCESS] Create derived property definition",
+        "description": "Define a new derived property.",
+        "operationId": "CreateDerivedPropertyDefinition",
+        "requestBody": {
+          "description": "The definition of the new derived property.",
+          "content": {
+            "application/json-patch+json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateDerivedPropertyDefinitionRequest"
+              },
+              "example": {
+                "domain": "Instrument",
+                "scope": "MyScope",
+                "code": "MyDerivedPropertyName",
+                "displayName": "My Property Display Name",
+                "dataTypeId": {
+                  "scope": "system",
+                  "code": "string"
+                },
+                "propertyDescription": "My Property Description",
+                "derivationFormula": "(Properties[Instrument/default/Price] * Properties[Instrument/default/Cost]) / Properties[Instrument/default/Shares]"
+              }
+            },
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateDerivedPropertyDefinitionRequest"
+              },
+              "example": {
+                "domain": "Instrument",
+                "scope": "MyScope",
+                "code": "MyDerivedPropertyName",
+                "displayName": "My Property Display Name",
+                "dataTypeId": {
+                  "scope": "system",
+                  "code": "string"
+                },
+                "propertyDescription": "My Property Description",
+                "derivationFormula": "(Properties[Instrument/default/Price] * Properties[Instrument/default/Cost]) / Properties[Instrument/default/Shares]"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateDerivedPropertyDefinitionRequest"
+              },
+              "example": {
+                "domain": "Instrument",
+                "scope": "MyScope",
+                "code": "MyDerivedPropertyName",
+                "displayName": "My Property Display Name",
+                "dataTypeId": {
+                  "scope": "system",
+                  "code": "string"
+                },
+                "propertyDescription": "My Property Description",
+                "derivationFormula": "(Properties[Instrument/default/Price] * Properties[Instrument/default/Cost]) / Properties[Instrument/default/Shares]"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateDerivedPropertyDefinitionRequest"
+              },
+              "example": {
+                "domain": "Instrument",
+                "scope": "MyScope",
+                "code": "MyDerivedPropertyName",
+                "displayName": "My Property Display Name",
+                "dataTypeId": {
+                  "scope": "system",
+                  "code": "string"
+                },
+                "propertyDescription": "My Property Description",
+                "derivationFormula": "(Properties[Instrument/default/Price] * Properties[Instrument/default/Cost]) / Properties[Instrument/default/Shares]"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "201": {
+            "description": "The newly created derived property definition",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/PropertyDefinition"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PropertyDefinition"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PropertyDefinition"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "The details of the input related failure",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/LusidValidationProblemDetails"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/LusidValidationProblemDetails"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/LusidValidationProblemDetails"
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "Error response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/LusidProblemDetails"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "oauth2": []
+          }
+        ],
+        "x-fbn-apistatus": "EarlyAccess"
+      }
+    },
     "/api/propertydefinitions/{domain}/{scope}/{code}": {
       "put": {
         "tags": [
@@ -22066,6 +22208,76 @@
         "additionalProperties": false,
         "description": "This request specifies a new Cut Label Definition"
       },
+      "CreateDerivedPropertyDefinitionRequest": {
+        "required": [
+          "code",
+          "dataTypeId",
+          "displayName",
+          "domain",
+          "scope"
+        ],
+        "type": "object",
+        "properties": {
+          "domain": {
+            "enum": [
+              "NotDefined",
+              "Transaction",
+              "Portfolio",
+              "Holding",
+              "ReferenceHolding",
+              "TransactionConfiguration",
+              "Instrument",
+              "CutLabelDefinition",
+              "Analytic",
+              "PortfolioGroup",
+              "Person",
+              "AccessMetadata",
+              "Order",
+              "UnitResult",
+              "MarketData",
+              "ConfigurationRecipe",
+              "Allocation",
+              "Calendar",
+              "LegalEntity",
+              "Placement",
+              "Execution",
+              "Block",
+              "Participation",
+              "Package",
+              "OrderInstruction"
+            ],
+            "type": "string",
+            "description": "The domain that the property exists in. The available values are: NotDefined, Transaction, Portfolio, Holding, ReferenceHolding, TransactionConfiguration, Instrument, CutLabelDefinition, Analytic, PortfolioGroup, Person, AccessMetadata, Order, UnitResult, MarketData, ConfigurationRecipe, Allocation, Calendar, LegalEntity, Placement, Execution, Block, Participation, Package, OrderInstruction"
+          },
+          "scope": {
+            "type": "string",
+            "description": "The scope that the property exists in."
+          },
+          "code": {
+            "type": "string",
+            "description": "The code of the property. Together with the domain and scope this uniquely identifies the property."
+          },
+          "displayName": {
+            "type": "string",
+            "description": "The display name of the property."
+          },
+          "dataTypeId": {
+            "$ref": "#/components/schemas/ResourceId"
+          },
+          "propertyDescription": {
+            "maxLength": 512,
+            "type": "string",
+            "description": "Describes the property",
+            "nullable": true
+          },
+          "derivationFormula": {
+            "type": "string",
+            "description": "The rule that defines how data is composed for a derived property.",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
       "CreateDerivedTransactionPortfolioRequest": {
         "required": [
           "code",
@@ -27609,7 +27821,7 @@
         "description": "OAuth2 Implicit Grant",
         "flows": {
           "implicit": {
-            "authorizationUrl": "https://lusid.okta.com/oauth2/default/v1/authorize",
+            "authorizationUrl": "https://dummyurl.lusid.com/",
             "scopes": {}
           }
         }
