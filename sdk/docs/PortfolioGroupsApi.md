@@ -1,6 +1,6 @@
 # lusid.PortfolioGroupsApi
 
-All URIs are relative to *http://local-unit-test-server.lusid.com:56650*
+All URIs are relative to *http://local-unit-test-server.lusid.com:33651*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
@@ -43,8 +43,8 @@ configuration = lusid.Configuration()
 # Configure OAuth2 access token for authorization: oauth2
 configuration.access_token = 'YOUR_ACCESS_TOKEN'
 
-# Defining host is optional and default to http://local-unit-test-server.lusid.com:56650
-configuration.host = "http://local-unit-test-server.lusid.com:56650"
+# Defining host is optional and default to http://local-unit-test-server.lusid.com:33651
+configuration.host = "http://local-unit-test-server.lusid.com:33651"
 # Create an instance of the API class
 api_instance = lusid.PortfolioGroupsApi(lusid.ApiClient(configuration))
 scope = 'scope_example' # str | The scope of the portfolio group to add a portfolio to.
@@ -111,8 +111,8 @@ configuration = lusid.Configuration()
 # Configure OAuth2 access token for authorization: oauth2
 configuration.access_token = 'YOUR_ACCESS_TOKEN'
 
-# Defining host is optional and default to http://local-unit-test-server.lusid.com:56650
-configuration.host = "http://local-unit-test-server.lusid.com:56650"
+# Defining host is optional and default to http://local-unit-test-server.lusid.com:33651
+configuration.host = "http://local-unit-test-server.lusid.com:33651"
 # Create an instance of the API class
 api_instance = lusid.PortfolioGroupsApi(lusid.ApiClient(configuration))
 scope = 'scope_example' # str | The scope of the portfolio group to add a portfolio group to.
@@ -179,8 +179,8 @@ configuration = lusid.Configuration()
 # Configure OAuth2 access token for authorization: oauth2
 configuration.access_token = 'YOUR_ACCESS_TOKEN'
 
-# Defining host is optional and default to http://local-unit-test-server.lusid.com:56650
-configuration.host = "http://local-unit-test-server.lusid.com:56650"
+# Defining host is optional and default to http://local-unit-test-server.lusid.com:33651
+configuration.host = "http://local-unit-test-server.lusid.com:33651"
 # Create an instance of the API class
 api_instance = lusid.PortfolioGroupsApi(lusid.ApiClient(configuration))
 scope = 'scope_example' # str | The scope of the portfolio group.
@@ -251,8 +251,8 @@ configuration = lusid.Configuration()
 # Configure OAuth2 access token for authorization: oauth2
 configuration.access_token = 'YOUR_ACCESS_TOKEN'
 
-# Defining host is optional and default to http://local-unit-test-server.lusid.com:56650
-configuration.host = "http://local-unit-test-server.lusid.com:56650"
+# Defining host is optional and default to http://local-unit-test-server.lusid.com:33651
+configuration.host = "http://local-unit-test-server.lusid.com:33651"
 # Create an instance of the API class
 api_instance = lusid.PortfolioGroupsApi(lusid.ApiClient(configuration))
 scope = 'scope_example' # str | The scope that the portfolio group will be created in.
@@ -315,8 +315,8 @@ configuration = lusid.Configuration()
 # Configure OAuth2 access token for authorization: oauth2
 configuration.access_token = 'YOUR_ACCESS_TOKEN'
 
-# Defining host is optional and default to http://local-unit-test-server.lusid.com:56650
-configuration.host = "http://local-unit-test-server.lusid.com:56650"
+# Defining host is optional and default to http://local-unit-test-server.lusid.com:33651
+configuration.host = "http://local-unit-test-server.lusid.com:33651"
 # Create an instance of the API class
 api_instance = lusid.PortfolioGroupsApi(lusid.ApiClient(configuration))
 scope = 'scope_example' # str | The scope of the group to delete properties from.
@@ -383,8 +383,8 @@ configuration = lusid.Configuration()
 # Configure OAuth2 access token for authorization: oauth2
 configuration.access_token = 'YOUR_ACCESS_TOKEN'
 
-# Defining host is optional and default to http://local-unit-test-server.lusid.com:56650
-configuration.host = "http://local-unit-test-server.lusid.com:56650"
+# Defining host is optional and default to http://local-unit-test-server.lusid.com:33651
+configuration.host = "http://local-unit-test-server.lusid.com:33651"
 # Create an instance of the API class
 api_instance = lusid.PortfolioGroupsApi(lusid.ApiClient(configuration))
 scope = 'scope_example' # str | The scope of the portfolio group to remove the portfolio from.
@@ -453,8 +453,8 @@ configuration = lusid.Configuration()
 # Configure OAuth2 access token for authorization: oauth2
 configuration.access_token = 'YOUR_ACCESS_TOKEN'
 
-# Defining host is optional and default to http://local-unit-test-server.lusid.com:56650
-configuration.host = "http://local-unit-test-server.lusid.com:56650"
+# Defining host is optional and default to http://local-unit-test-server.lusid.com:33651
+configuration.host = "http://local-unit-test-server.lusid.com:33651"
 # Create an instance of the API class
 api_instance = lusid.PortfolioGroupsApi(lusid.ApiClient(configuration))
 scope = 'scope_example' # str | The scope of the portfolio group to delete.
@@ -517,8 +517,8 @@ configuration = lusid.Configuration()
 # Configure OAuth2 access token for authorization: oauth2
 configuration.access_token = 'YOUR_ACCESS_TOKEN'
 
-# Defining host is optional and default to http://local-unit-test-server.lusid.com:56650
-configuration.host = "http://local-unit-test-server.lusid.com:56650"
+# Defining host is optional and default to http://local-unit-test-server.lusid.com:33651
+configuration.host = "http://local-unit-test-server.lusid.com:33651"
 # Create an instance of the API class
 api_instance = lusid.PortfolioGroupsApi(lusid.ApiClient(configuration))
 scope = 'scope_example' # str | The scope of the portfolio group to remove the sub group from.
@@ -587,8 +587,8 @@ configuration = lusid.Configuration()
 # Configure OAuth2 access token for authorization: oauth2
 configuration.access_token = 'YOUR_ACCESS_TOKEN'
 
-# Defining host is optional and default to http://local-unit-test-server.lusid.com:56650
-configuration.host = "http://local-unit-test-server.lusid.com:56650"
+# Defining host is optional and default to http://local-unit-test-server.lusid.com:33651
+configuration.host = "http://local-unit-test-server.lusid.com:33651"
 # Create an instance of the API class
 api_instance = lusid.PortfolioGroupsApi(lusid.ApiClient(configuration))
 scope = 'scope_example' # str | The scope of the group to list the properties for.
@@ -655,8 +655,8 @@ configuration = lusid.Configuration()
 # Configure OAuth2 access token for authorization: oauth2
 configuration.access_token = 'YOUR_ACCESS_TOKEN'
 
-# Defining host is optional and default to http://local-unit-test-server.lusid.com:56650
-configuration.host = "http://local-unit-test-server.lusid.com:56650"
+# Defining host is optional and default to http://local-unit-test-server.lusid.com:33651
+configuration.host = "http://local-unit-test-server.lusid.com:33651"
 # Create an instance of the API class
 api_instance = lusid.PortfolioGroupsApi(lusid.ApiClient(configuration))
 scope = 'scope_example' # str | The scope of the portfolio group.
@@ -729,8 +729,8 @@ configuration = lusid.Configuration()
 # Configure OAuth2 access token for authorization: oauth2
 configuration.access_token = 'YOUR_ACCESS_TOKEN'
 
-# Defining host is optional and default to http://local-unit-test-server.lusid.com:56650
-configuration.host = "http://local-unit-test-server.lusid.com:56650"
+# Defining host is optional and default to http://local-unit-test-server.lusid.com:33651
+configuration.host = "http://local-unit-test-server.lusid.com:33651"
 # Create an instance of the API class
 api_instance = lusid.PortfolioGroupsApi(lusid.ApiClient(configuration))
 scope = 'scope_example' # str | The scope of the portfolio group to retrieve the definition for.
@@ -797,8 +797,8 @@ configuration = lusid.Configuration()
 # Configure OAuth2 access token for authorization: oauth2
 configuration.access_token = 'YOUR_ACCESS_TOKEN'
 
-# Defining host is optional and default to http://local-unit-test-server.lusid.com:56650
-configuration.host = "http://local-unit-test-server.lusid.com:56650"
+# Defining host is optional and default to http://local-unit-test-server.lusid.com:33651
+configuration.host = "http://local-unit-test-server.lusid.com:33651"
 # Create an instance of the API class
 api_instance = lusid.PortfolioGroupsApi(lusid.ApiClient(configuration))
 scope = 'scope_example' # str | The scope of the portfolio group to retrieve the commands for.
@@ -867,8 +867,8 @@ configuration = lusid.Configuration()
 # Configure OAuth2 access token for authorization: oauth2
 configuration.access_token = 'YOUR_ACCESS_TOKEN'
 
-# Defining host is optional and default to http://local-unit-test-server.lusid.com:56650
-configuration.host = "http://local-unit-test-server.lusid.com:56650"
+# Defining host is optional and default to http://local-unit-test-server.lusid.com:33651
+configuration.host = "http://local-unit-test-server.lusid.com:33651"
 # Create an instance of the API class
 api_instance = lusid.PortfolioGroupsApi(lusid.ApiClient(configuration))
 scope = 'scope_example' # str | The scope of the portfolio group to expand.
@@ -918,7 +918,7 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **get_transactions_for_portfolio_group**
-> VersionedResourceListOfTransaction get_transactions_for_portfolio_group(scope, code, from_transaction_date=from_transaction_date, to_transaction_date=to_transaction_date, as_at=as_at, filter=filter, property_keys=property_keys)
+> VersionedResourceListOfTransaction get_transactions_for_portfolio_group(scope, code, from_transaction_date=from_transaction_date, to_transaction_date=to_transaction_date, as_at=as_at, filter=filter, property_keys=property_keys, limit=limit, page=page)
 
 [EARLY ACCESS] Get transactions for transaction portfolios in a portfolio group
 
@@ -937,8 +937,8 @@ configuration = lusid.Configuration()
 # Configure OAuth2 access token for authorization: oauth2
 configuration.access_token = 'YOUR_ACCESS_TOKEN'
 
-# Defining host is optional and default to http://local-unit-test-server.lusid.com:56650
-configuration.host = "http://local-unit-test-server.lusid.com:56650"
+# Defining host is optional and default to http://local-unit-test-server.lusid.com:33651
+configuration.host = "http://local-unit-test-server.lusid.com:33651"
 # Create an instance of the API class
 api_instance = lusid.PortfolioGroupsApi(lusid.ApiClient(configuration))
 scope = 'scope_example' # str | The scope of the portfolio group.
@@ -948,10 +948,12 @@ to_transaction_date = 'to_transaction_date_example' # str | The upper bound effe
 as_at = '2013-10-20T19:20:30+01:00' # datetime | The asAt datetime at which to retrieve the transactions. Defaults to return the latest version              of each transaction if not specified. (optional)
 filter = 'filter_example' # str | Expression to filter the result set.               For example, to filter on the Transaction Type, use \"type eq 'Buy'\"              Read more about filtering results from LUSID here https://support.lusid.com/filtering-results-from-lusid. (optional)
 property_keys = ['property_keys_example'] # list[str] | A list of property keys from the \"Instrument\" or \"Transaction\" domain to decorate onto              the transactions. These take the format {domain}/{scope}/{code} e.g. \"Instrument/system/Name\" or              \"Transaction/strategy/quantsignal\". (optional)
+limit = 56 # int | When paginating, limit the number of returned results to this many. Defaults to 100 if not specified. (optional)
+page = 'page_example' # str | The pagination token to use to continue listing transactions from a previous call to GetTransactions. (optional)
 
 try:
     # [EARLY ACCESS] Get transactions for transaction portfolios in a portfolio group
-    api_response = api_instance.get_transactions_for_portfolio_group(scope, code, from_transaction_date=from_transaction_date, to_transaction_date=to_transaction_date, as_at=as_at, filter=filter, property_keys=property_keys)
+    api_response = api_instance.get_transactions_for_portfolio_group(scope, code, from_transaction_date=from_transaction_date, to_transaction_date=to_transaction_date, as_at=as_at, filter=filter, property_keys=property_keys, limit=limit, page=page)
     pprint(api_response)
 except ApiException as e:
     print("Exception when calling PortfolioGroupsApi->get_transactions_for_portfolio_group: %s\n" % e)
@@ -968,6 +970,8 @@ Name | Type | Description  | Notes
  **as_at** | **datetime**| The asAt datetime at which to retrieve the transactions. Defaults to return the latest version              of each transaction if not specified. | [optional] 
  **filter** | **str**| Expression to filter the result set.               For example, to filter on the Transaction Type, use \&quot;type eq &#39;Buy&#39;\&quot;              Read more about filtering results from LUSID here https://support.lusid.com/filtering-results-from-lusid. | [optional] 
  **property_keys** | [**list[str]**](str.md)| A list of property keys from the \&quot;Instrument\&quot; or \&quot;Transaction\&quot; domain to decorate onto              the transactions. These take the format {domain}/{scope}/{code} e.g. \&quot;Instrument/system/Name\&quot; or              \&quot;Transaction/strategy/quantsignal\&quot;. | [optional] 
+ **limit** | **int**| When paginating, limit the number of returned results to this many. Defaults to 100 if not specified. | [optional] 
+ **page** | **str**| The pagination token to use to continue listing transactions from a previous call to GetTransactions. | [optional] 
 
 ### Return type
 
@@ -1011,8 +1015,8 @@ configuration = lusid.Configuration()
 # Configure OAuth2 access token for authorization: oauth2
 configuration.access_token = 'YOUR_ACCESS_TOKEN'
 
-# Defining host is optional and default to http://local-unit-test-server.lusid.com:56650
-configuration.host = "http://local-unit-test-server.lusid.com:56650"
+# Defining host is optional and default to http://local-unit-test-server.lusid.com:33651
+configuration.host = "http://local-unit-test-server.lusid.com:33651"
 # Create an instance of the API class
 api_instance = lusid.PortfolioGroupsApi(lusid.ApiClient(configuration))
 scope = 'scope_example' # str | The scope to list the portfolio groups in.
@@ -1079,8 +1083,8 @@ configuration = lusid.Configuration()
 # Configure OAuth2 access token for authorization: oauth2
 configuration.access_token = 'YOUR_ACCESS_TOKEN'
 
-# Defining host is optional and default to http://local-unit-test-server.lusid.com:56650
-configuration.host = "http://local-unit-test-server.lusid.com:56650"
+# Defining host is optional and default to http://local-unit-test-server.lusid.com:33651
+configuration.host = "http://local-unit-test-server.lusid.com:33651"
 # Create an instance of the API class
 api_instance = lusid.PortfolioGroupsApi(lusid.ApiClient(configuration))
 scope = 'scope_example' # str | The scope of the portfolio group to update the definition for.
@@ -1147,8 +1151,8 @@ configuration = lusid.Configuration()
 # Configure OAuth2 access token for authorization: oauth2
 configuration.access_token = 'YOUR_ACCESS_TOKEN'
 
-# Defining host is optional and default to http://local-unit-test-server.lusid.com:56650
-configuration.host = "http://local-unit-test-server.lusid.com:56650"
+# Defining host is optional and default to http://local-unit-test-server.lusid.com:33651
+configuration.host = "http://local-unit-test-server.lusid.com:33651"
 # Create an instance of the API class
 api_instance = lusid.PortfolioGroupsApi(lusid.ApiClient(configuration))
 scope = 'scope_example' # str | The scope of the group to update or insert the properties onto.

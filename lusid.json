@@ -9,7 +9,7 @@
       "url": "https://www.finbourne.com",
       "email": "info@finbourne.com"
     },
-    "version": "0.11.3274",
+    "version": "0.11.3275",
     "x-logo": {
       "url": "https://content.finbourne.com/LUSID-header.png",
       "backgroundColor": "#415464"
@@ -17,7 +17,7 @@
   },
   "servers": [
     {
-      "url": "http://local-unit-test-server.lusid.com:56650"
+      "url": "http://local-unit-test-server.lusid.com:33651"
     }
   ],
   "paths": {
@@ -8298,6 +8298,28 @@
               "nullable": true
             },
             "x-nullable": true
+          },
+          {
+            "name": "limit",
+            "in": "query",
+            "description": "When paginating, limit the number of returned results to this many. Defaults to 100 if not specified.",
+            "schema": {
+              "type": "integer",
+              "description": "When paginating, limit the number of returned results to this many. Defaults to 100 if not specified.",
+              "format": "int32",
+              "nullable": true
+            },
+            "x-nullable": true
+          },
+          {
+            "name": "page",
+            "in": "query",
+            "description": "The pagination token to use to continue listing transactions from a previous call to GetTransactions.",
+            "schema": {
+              "type": "string",
+              "description": "The pagination token to use to continue listing transactions from a previous call to GetTransactions.",
+              "nullable": true
+            }
           }
         ],
         "responses": {
