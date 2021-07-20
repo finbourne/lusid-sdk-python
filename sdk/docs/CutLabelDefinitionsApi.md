@@ -1,6 +1,6 @@
 # lusid.CutLabelDefinitionsApi
 
-All URIs are relative to *https://fbn-prd.lusid.com/api*
+All URIs are relative to *http://local-unit-test-server.lusid.com:59600*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
@@ -31,8 +31,8 @@ configuration = lusid.Configuration()
 # Configure OAuth2 access token for authorization: oauth2
 configuration.access_token = 'YOUR_ACCESS_TOKEN'
 
-# Defining host is optional and default to https://fbn-prd.lusid.com/api
-configuration.host = "https://fbn-prd.lusid.com/api"
+# Defining host is optional and default to http://local-unit-test-server.lusid.com:59600
+configuration.host = "http://local-unit-test-server.lusid.com:59600"
 # Create an instance of the API class
 api_instance = lusid.CutLabelDefinitionsApi(lusid.ApiClient(configuration))
 create_cut_label_definition_request = {"code":"CutLabelCode","displayName":"CutLabelDisplayName","description":"description of cut label","cutLocalTime":{"hours":17,"minutes":0},"timeZone":"GB"} # CreateCutLabelDefinitionRequest | The cut label definition (optional)
@@ -93,8 +93,8 @@ configuration = lusid.Configuration()
 # Configure OAuth2 access token for authorization: oauth2
 configuration.access_token = 'YOUR_ACCESS_TOKEN'
 
-# Defining host is optional and default to https://fbn-prd.lusid.com/api
-configuration.host = "https://fbn-prd.lusid.com/api"
+# Defining host is optional and default to http://local-unit-test-server.lusid.com:59600
+configuration.host = "http://local-unit-test-server.lusid.com:59600"
 # Create an instance of the API class
 api_instance = lusid.CutLabelDefinitionsApi(lusid.ApiClient(configuration))
 code = 'code_example' # str | The Code of the Cut Label that is being Deleted
@@ -155,8 +155,8 @@ configuration = lusid.Configuration()
 # Configure OAuth2 access token for authorization: oauth2
 configuration.access_token = 'YOUR_ACCESS_TOKEN'
 
-# Defining host is optional and default to https://fbn-prd.lusid.com/api
-configuration.host = "https://fbn-prd.lusid.com/api"
+# Defining host is optional and default to http://local-unit-test-server.lusid.com:59600
+configuration.host = "http://local-unit-test-server.lusid.com:59600"
 # Create an instance of the API class
 api_instance = lusid.CutLabelDefinitionsApi(lusid.ApiClient(configuration))
 code = 'code_example' # str | The Code of the Cut Label that is being queried
@@ -219,8 +219,8 @@ configuration = lusid.Configuration()
 # Configure OAuth2 access token for authorization: oauth2
 configuration.access_token = 'YOUR_ACCESS_TOKEN'
 
-# Defining host is optional and default to https://fbn-prd.lusid.com/api
-configuration.host = "https://fbn-prd.lusid.com/api"
+# Defining host is optional and default to http://local-unit-test-server.lusid.com:59600
+configuration.host = "http://local-unit-test-server.lusid.com:59600"
 # Create an instance of the API class
 api_instance = lusid.CutLabelDefinitionsApi(lusid.ApiClient(configuration))
 as_at = '2013-10-20T19:20:30+01:00' # datetime | Optional. The As At time at which listed Cut Labels are valid (optional)
@@ -291,8 +291,8 @@ configuration = lusid.Configuration()
 # Configure OAuth2 access token for authorization: oauth2
 configuration.access_token = 'YOUR_ACCESS_TOKEN'
 
-# Defining host is optional and default to https://fbn-prd.lusid.com/api
-configuration.host = "https://fbn-prd.lusid.com/api"
+# Defining host is optional and default to http://local-unit-test-server.lusid.com:59600
+configuration.host = "http://local-unit-test-server.lusid.com:59600"
 # Create an instance of the API class
 api_instance = lusid.CutLabelDefinitionsApi(lusid.ApiClient(configuration))
 code = 'code_example' # str | The Code of the Cut Label that is being updated
