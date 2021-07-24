@@ -1,5 +1,7 @@
 # HoldingAdjustment
 
+The target holdings.
+
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------

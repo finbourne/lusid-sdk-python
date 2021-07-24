@@ -1,5 +1,7 @@
 # ResourceListOfOrder
 
+A collection of resources that can be returned from requests.
+
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------

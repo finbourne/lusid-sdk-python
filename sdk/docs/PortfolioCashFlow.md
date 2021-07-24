@@ -1,5 +1,7 @@
 # PortfolioCashFlow
 
+The details for the cashflow for a given portfolio.
+
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------

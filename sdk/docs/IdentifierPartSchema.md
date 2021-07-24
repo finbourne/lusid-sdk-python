@@ -1,5 +1,7 @@
 # IdentifierPartSchema
 
+The schema of an contributing part of a valid LUSID resource identifier
+
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
