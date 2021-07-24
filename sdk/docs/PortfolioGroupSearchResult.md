@@ -1,6 +1,5 @@
 # PortfolioGroupSearchResult
 
-
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------

@@ -1,7 +1,5 @@
 # HoldingsAdjustmentHeader
 
-A record of holdings adjustments made on the transaction portfolio.
-
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------

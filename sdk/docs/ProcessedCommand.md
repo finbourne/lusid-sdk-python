@@ -1,7 +1,5 @@
 # ProcessedCommand
 
-The list of commands.
-
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------

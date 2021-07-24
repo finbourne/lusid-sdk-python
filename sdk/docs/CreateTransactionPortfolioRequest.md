@@ -1,6 +1,5 @@
 # CreateTransactionPortfolioRequest
 
-
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------

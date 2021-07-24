@@ -1,14 +1,13 @@
 # Stream
 
-
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**can_read** | **bool** |  | [optional] [readonly] 
-**can_seek** | **bool** |  | [optional] [readonly] 
-**can_timeout** | **bool** |  | [optional] [readonly] 
-**can_write** | **bool** |  | [optional] [readonly] 
-**length** | **int** |  | [optional] [readonly] 
+**can_read** | **bool** |  | [optional] 
+**can_seek** | **bool** |  | [optional] 
+**can_timeout** | **bool** |  | [optional] 
+**can_write** | **bool** |  | [optional] 
+**length** | **int** |  | [optional] 
 **position** | **int** |  | [optional] 
 **read_timeout** | **int** |  | [optional] 
 **write_timeout** | **int** |  | [optional] 

@@ -1,7 +1,5 @@
 # Order
 
-An Order for a certain quantity of a specific instrument
-
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------

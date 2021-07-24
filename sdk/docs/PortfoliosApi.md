@@ -1,6 +1,6 @@
 # lusid.PortfoliosApi
 
-All URIs are relative to *http://local-unit-test-server.lusid.com:32886*
+All URIs are relative to *http://local-unit-test-server.lusid.com:43074*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
@@ -31,36 +31,23 @@ import time
 import lusid
 from lusid.rest import ApiException
 from pprint import pprint
-# Defining the host is optional and defaults to http://local-unit-test-server.lusid.com:32886
-# See configuration.py for a list of all supported configuration parameters.
-configuration = lusid.Configuration(
-    host = "http://local-unit-test-server.lusid.com:32886"
-)
-
-# The client must configure the authentication and authorization parameters
-# in accordance with the API server security policy.
-# Examples for each auth method are provided below, use the example that
-# satisfies your auth use case.
-
+configuration = lusid.Configuration()
 # Configure OAuth2 access token for authorization: oauth2
-configuration = lusid.Configuration(
-    host = "http://local-unit-test-server.lusid.com:32886"
-)
 configuration.access_token = 'YOUR_ACCESS_TOKEN'
 
-# Enter a context with an instance of the API client
-with lusid.ApiClient(configuration) as api_client:
-    # Create an instance of the API class
-    api_instance = lusid.PortfoliosApi(api_client)
-    scope = 'scope_example' # str | The scope of the portfolio.
+# Defining host is optional and default to http://local-unit-test-server.lusid.com:43074
+configuration.host = "http://local-unit-test-server.lusid.com:43074"
+# Create an instance of the API class
+api_instance = lusid.PortfoliosApi(lusid.ApiClient(configuration))
+scope = 'scope_example' # str | The scope of the portfolio.
 code = 'code_example' # str | The code of the portfolio. Together with the scope this uniquely identifies the portfolio.
 
-    try:
-        # Delete portfolio
-        api_response = api_instance.delete_portfolio(scope, code)
-        pprint(api_response)
-    except ApiException as e:
-        print("Exception when calling PortfoliosApi->delete_portfolio: %s\n" % e)
+try:
+    # Delete portfolio
+    api_response = api_instance.delete_portfolio(scope, code)
+    pprint(api_response)
+except ApiException as e:
+    print("Exception when calling PortfoliosApi->delete_portfolio: %s\n" % e)
 ```
 
 ### Parameters
@@ -108,38 +95,25 @@ import time
 import lusid
 from lusid.rest import ApiException
 from pprint import pprint
-# Defining the host is optional and defaults to http://local-unit-test-server.lusid.com:32886
-# See configuration.py for a list of all supported configuration parameters.
-configuration = lusid.Configuration(
-    host = "http://local-unit-test-server.lusid.com:32886"
-)
-
-# The client must configure the authentication and authorization parameters
-# in accordance with the API server security policy.
-# Examples for each auth method are provided below, use the example that
-# satisfies your auth use case.
-
+configuration = lusid.Configuration()
 # Configure OAuth2 access token for authorization: oauth2
-configuration = lusid.Configuration(
-    host = "http://local-unit-test-server.lusid.com:32886"
-)
 configuration.access_token = 'YOUR_ACCESS_TOKEN'
 
-# Enter a context with an instance of the API client
-with lusid.ApiClient(configuration) as api_client:
-    # Create an instance of the API class
-    api_instance = lusid.PortfoliosApi(api_client)
-    scope = 'scope_example' # str | The scope of the portfolio.
+# Defining host is optional and default to http://local-unit-test-server.lusid.com:43074
+configuration.host = "http://local-unit-test-server.lusid.com:43074"
+# Create an instance of the API class
+api_instance = lusid.PortfoliosApi(lusid.ApiClient(configuration))
+scope = 'scope_example' # str | The scope of the portfolio.
 code = 'code_example' # str | The code of the portfolio. Together with the scope this uniquely identifies the portfolio.
 property_keys = ['property_keys_example'] # list[str] | The property keys of the properties to delete. These must take the format              {domain}/{scope}/{code}, for example 'Portfolio/Manager/Id'. Each property must be from the 'Portfolio' domain.
 effective_at = 'effective_at_example' # str | The effective datetime or cut label at which to delete time-variant properties. (optional)
 
-    try:
-        # Delete portfolio properties
-        api_response = api_instance.delete_portfolio_properties(scope, code, property_keys, effective_at=effective_at)
-        pprint(api_response)
-    except ApiException as e:
-        print("Exception when calling PortfoliosApi->delete_portfolio_properties: %s\n" % e)
+try:
+    # Delete portfolio properties
+    api_response = api_instance.delete_portfolio_properties(scope, code, property_keys, effective_at=effective_at)
+    pprint(api_response)
+except ApiException as e:
+    print("Exception when calling PortfoliosApi->delete_portfolio_properties: %s\n" % e)
 ```
 
 ### Parameters
@@ -189,39 +163,26 @@ import time
 import lusid
 from lusid.rest import ApiException
 from pprint import pprint
-# Defining the host is optional and defaults to http://local-unit-test-server.lusid.com:32886
-# See configuration.py for a list of all supported configuration parameters.
-configuration = lusid.Configuration(
-    host = "http://local-unit-test-server.lusid.com:32886"
-)
-
-# The client must configure the authentication and authorization parameters
-# in accordance with the API server security policy.
-# Examples for each auth method are provided below, use the example that
-# satisfies your auth use case.
-
+configuration = lusid.Configuration()
 # Configure OAuth2 access token for authorization: oauth2
-configuration = lusid.Configuration(
-    host = "http://local-unit-test-server.lusid.com:32886"
-)
 configuration.access_token = 'YOUR_ACCESS_TOKEN'
 
-# Enter a context with an instance of the API client
-with lusid.ApiClient(configuration) as api_client:
-    # Create an instance of the API class
-    api_instance = lusid.PortfoliosApi(api_client)
-    scope = 'scope_example' # str | The scope of the portfolio.
+# Defining host is optional and default to http://local-unit-test-server.lusid.com:43074
+configuration.host = "http://local-unit-test-server.lusid.com:43074"
+# Create an instance of the API class
+api_instance = lusid.PortfoliosApi(lusid.ApiClient(configuration))
+scope = 'scope_example' # str | The scope of the portfolio.
 code = 'code_example' # str | The code of the portfolio. Together with the scope this uniquely identifies the portfolio.
 effective_at = 'effective_at_example' # str | The effective datetime or cut label at which to retrieve the portfolio definition. Defaults to the current LUSID system datetime if not specified. (optional)
 as_at = '2013-10-20T19:20:30+01:00' # datetime | The asAt datetime at which to retrieve the portfolio definition. Defaults to returning the latest version of the portfolio definition if not specified. (optional)
 property_keys = ['property_keys_example'] # list[str] | A list of property keys from the 'Portfolio' domain to decorate onto the portfolio.              These must take the format {domain}/{scope}/{code}, for example 'Portfolio/Manager/Id'. (optional)
 
-    try:
-        # Get portfolio
-        api_response = api_instance.get_portfolio(scope, code, effective_at=effective_at, as_at=as_at, property_keys=property_keys)
-        pprint(api_response)
-    except ApiException as e:
-        print("Exception when calling PortfoliosApi->get_portfolio: %s\n" % e)
+try:
+    # Get portfolio
+    api_response = api_instance.get_portfolio(scope, code, effective_at=effective_at, as_at=as_at, property_keys=property_keys)
+    pprint(api_response)
+except ApiException as e:
+    print("Exception when calling PortfoliosApi->get_portfolio: %s\n" % e)
 ```
 
 ### Parameters
@@ -272,28 +233,15 @@ import time
 import lusid
 from lusid.rest import ApiException
 from pprint import pprint
-# Defining the host is optional and defaults to http://local-unit-test-server.lusid.com:32886
-# See configuration.py for a list of all supported configuration parameters.
-configuration = lusid.Configuration(
-    host = "http://local-unit-test-server.lusid.com:32886"
-)
-
-# The client must configure the authentication and authorization parameters
-# in accordance with the API server security policy.
-# Examples for each auth method are provided below, use the example that
-# satisfies your auth use case.
-
+configuration = lusid.Configuration()
 # Configure OAuth2 access token for authorization: oauth2
-configuration = lusid.Configuration(
-    host = "http://local-unit-test-server.lusid.com:32886"
-)
 configuration.access_token = 'YOUR_ACCESS_TOKEN'
 
-# Enter a context with an instance of the API client
-with lusid.ApiClient(configuration) as api_client:
-    # Create an instance of the API class
-    api_instance = lusid.PortfoliosApi(api_client)
-    scope = 'scope_example' # str | The scope of the portfolio.
+# Defining host is optional and default to http://local-unit-test-server.lusid.com:43074
+configuration.host = "http://local-unit-test-server.lusid.com:43074"
+# Create an instance of the API class
+api_instance = lusid.PortfoliosApi(lusid.ApiClient(configuration))
+scope = 'scope_example' # str | The scope of the portfolio.
 code = 'code_example' # str | The code of the portfolio. Together with the scope this uniquely identifies the portfolio.
 from_as_at = '2013-10-20T19:20:30+01:00' # datetime | The lower bound asAt datetime (inclusive) from which to retrieve commands. There is no lower bound if this is not specified. (optional)
 to_as_at = '2013-10-20T19:20:30+01:00' # datetime | The upper bound asAt datetime (inclusive) from which to retrieve commands. There is no upper bound if this is not specified. (optional)
@@ -301,12 +249,12 @@ filter = 'filter_example' # str | Expression to filter the results.             
 page = 'page_example' # str | The pagination token to use to continue listing commands; this value is returned from the previous call. (optional)
 limit = 56 # int | When paginating, limit the results to this number. Defaults to 500 if not specified. (optional)
 
-    try:
-        # [EARLY ACCESS] Get portfolio commands
-        api_response = api_instance.get_portfolio_commands(scope, code, from_as_at=from_as_at, to_as_at=to_as_at, filter=filter, page=page, limit=limit)
-        pprint(api_response)
-    except ApiException as e:
-        print("Exception when calling PortfoliosApi->get_portfolio_commands: %s\n" % e)
+try:
+    # [EARLY ACCESS] Get portfolio commands
+    api_response = api_instance.get_portfolio_commands(scope, code, from_as_at=from_as_at, to_as_at=to_as_at, filter=filter, page=page, limit=limit)
+    pprint(api_response)
+except ApiException as e:
+    print("Exception when calling PortfoliosApi->get_portfolio_commands: %s\n" % e)
 ```
 
 ### Parameters
@@ -359,38 +307,25 @@ import time
 import lusid
 from lusid.rest import ApiException
 from pprint import pprint
-# Defining the host is optional and defaults to http://local-unit-test-server.lusid.com:32886
-# See configuration.py for a list of all supported configuration parameters.
-configuration = lusid.Configuration(
-    host = "http://local-unit-test-server.lusid.com:32886"
-)
-
-# The client must configure the authentication and authorization parameters
-# in accordance with the API server security policy.
-# Examples for each auth method are provided below, use the example that
-# satisfies your auth use case.
-
+configuration = lusid.Configuration()
 # Configure OAuth2 access token for authorization: oauth2
-configuration = lusid.Configuration(
-    host = "http://local-unit-test-server.lusid.com:32886"
-)
 configuration.access_token = 'YOUR_ACCESS_TOKEN'
 
-# Enter a context with an instance of the API client
-with lusid.ApiClient(configuration) as api_client:
-    # Create an instance of the API class
-    api_instance = lusid.PortfoliosApi(api_client)
-    scope = 'scope_example' # str | The scope of the portfolio.
+# Defining host is optional and default to http://local-unit-test-server.lusid.com:43074
+configuration.host = "http://local-unit-test-server.lusid.com:43074"
+# Create an instance of the API class
+api_instance = lusid.PortfoliosApi(lusid.ApiClient(configuration))
+scope = 'scope_example' # str | The scope of the portfolio.
 code = 'code_example' # str | The code of the portfolio. Together with the scope this uniquely identifies the portfolio.
 effective_at = 'effective_at_example' # str | The effective datetime or cut label at which to list the portfolio's properties. Defaults to the current LUSID system datetime if not specified. (optional)
 as_at = '2013-10-20T19:20:30+01:00' # datetime | The asAt datetime at which to list the portfolio's properties. Defaults to returning the latest version of each property if not specified. (optional)
 
-    try:
-        # Get portfolio properties
-        api_response = api_instance.get_portfolio_properties(scope, code, effective_at=effective_at, as_at=as_at)
-        pprint(api_response)
-    except ApiException as e:
-        print("Exception when calling PortfoliosApi->get_portfolio_properties: %s\n" % e)
+try:
+    # Get portfolio properties
+    api_response = api_instance.get_portfolio_properties(scope, code, effective_at=effective_at, as_at=as_at)
+    pprint(api_response)
+except ApiException as e:
+    print("Exception when calling PortfoliosApi->get_portfolio_properties: %s\n" % e)
 ```
 
 ### Parameters
@@ -440,28 +375,15 @@ import time
 import lusid
 from lusid.rest import ApiException
 from pprint import pprint
-# Defining the host is optional and defaults to http://local-unit-test-server.lusid.com:32886
-# See configuration.py for a list of all supported configuration parameters.
-configuration = lusid.Configuration(
-    host = "http://local-unit-test-server.lusid.com:32886"
-)
-
-# The client must configure the authentication and authorization parameters
-# in accordance with the API server security policy.
-# Examples for each auth method are provided below, use the example that
-# satisfies your auth use case.
-
+configuration = lusid.Configuration()
 # Configure OAuth2 access token for authorization: oauth2
-configuration = lusid.Configuration(
-    host = "http://local-unit-test-server.lusid.com:32886"
-)
 configuration.access_token = 'YOUR_ACCESS_TOKEN'
 
-# Enter a context with an instance of the API client
-with lusid.ApiClient(configuration) as api_client:
-    # Create an instance of the API class
-    api_instance = lusid.PortfoliosApi(api_client)
-    effective_at = 'effective_at_example' # str | The effective datetime or cut label at which to list the portfolios. Defaults to the current LUSID              system datetime if not specified. (optional)
+# Defining host is optional and default to http://local-unit-test-server.lusid.com:43074
+configuration.host = "http://local-unit-test-server.lusid.com:43074"
+# Create an instance of the API class
+api_instance = lusid.PortfoliosApi(lusid.ApiClient(configuration))
+effective_at = 'effective_at_example' # str | The effective datetime or cut label at which to list the portfolios. Defaults to the current LUSID              system datetime if not specified. (optional)
 as_at = '2013-10-20T19:20:30+01:00' # datetime | The asAt datetime at which to list the portfolios. Defaults to returning the latest version              of each portfolio if not specified. (optional)
 page = 'page_example' # str | The pagination token to use to continue listing portfolios; this              value is returned from the previous call. If a pagination token is provided, the filter, effectiveAt              and asAt fields must not have changed since the original request. Also, if set, a start value cannot be provided. (optional)
 start = 56 # int | When paginating, skip this number of results. (optional)
@@ -470,12 +392,12 @@ filter = 'filter_example' # str | Expression to filter the results.             
 query = 'query_example' # str | Expression specifying the criteria that the returned portfolios must meet. For example, to see which              portfolios have holdings in instruments with a LusidInstrumentId (LUID) of 'LUID_PPA8HI6M' or a Figi of 'BBG000BLNNH6',              specify \"instrument.identifiers in (('LusidInstrumentId', 'LUID_PPA8HI6M'), ('Figi', 'BBG000BLNNH6'))\". (optional)
 property_keys = ['property_keys_example'] # list[str] | A list of property keys from the 'Portfolio' domain to decorate onto each portfolio.              These must take the format {domain}/{scope}/{code}, for example 'Portfolio/Manager/Id'. (optional)
 
-    try:
-        # List portfolios
-        api_response = api_instance.list_portfolios(effective_at=effective_at, as_at=as_at, page=page, start=start, limit=limit, filter=filter, query=query, property_keys=property_keys)
-        pprint(api_response)
-    except ApiException as e:
-        print("Exception when calling PortfoliosApi->list_portfolios: %s\n" % e)
+try:
+    # List portfolios
+    api_response = api_instance.list_portfolios(effective_at=effective_at, as_at=as_at, page=page, start=start, limit=limit, filter=filter, query=query, property_keys=property_keys)
+    pprint(api_response)
+except ApiException as e:
+    print("Exception when calling PortfoliosApi->list_portfolios: %s\n" % e)
 ```
 
 ### Parameters
@@ -529,28 +451,15 @@ import time
 import lusid
 from lusid.rest import ApiException
 from pprint import pprint
-# Defining the host is optional and defaults to http://local-unit-test-server.lusid.com:32886
-# See configuration.py for a list of all supported configuration parameters.
-configuration = lusid.Configuration(
-    host = "http://local-unit-test-server.lusid.com:32886"
-)
-
-# The client must configure the authentication and authorization parameters
-# in accordance with the API server security policy.
-# Examples for each auth method are provided below, use the example that
-# satisfies your auth use case.
-
+configuration = lusid.Configuration()
 # Configure OAuth2 access token for authorization: oauth2
-configuration = lusid.Configuration(
-    host = "http://local-unit-test-server.lusid.com:32886"
-)
 configuration.access_token = 'YOUR_ACCESS_TOKEN'
 
-# Enter a context with an instance of the API client
-with lusid.ApiClient(configuration) as api_client:
-    # Create an instance of the API class
-    api_instance = lusid.PortfoliosApi(api_client)
-    scope = 'scope_example' # str | The scope whose portfolios to list.
+# Defining host is optional and default to http://local-unit-test-server.lusid.com:43074
+configuration.host = "http://local-unit-test-server.lusid.com:43074"
+# Create an instance of the API class
+api_instance = lusid.PortfoliosApi(lusid.ApiClient(configuration))
+scope = 'scope_example' # str | The scope whose portfolios to list.
 effective_at = 'effective_at_example' # str | The effective datetime or cut label at which to list the portfolios. Defaults to the current LUSID              system datetime if not specified. (optional)
 as_at = '2013-10-20T19:20:30+01:00' # datetime | The asAt datetime at which to list the portfolios. Defaults to returning the latest version              of each portfolio if not specified. (optional)
 page = 'page_example' # str | The pagination token to use to continue listing portfolios. This  value is returned from the previous call. If a pagination token is provided, the filter, effectiveAt  and asAt fields must not have changed since the original request. Also, if set, a start value cannot be provided. (optional)
@@ -559,12 +468,12 @@ limit = 56 # int | When paginating, limit the results to this number. Defaults t
 filter = 'filter_example' # str | Expression to filter the results.              For example, to return only transactions with a transaction type of 'Buy', specify \"type eq 'Buy'\".              For more information about filtering results, see https://support.lusid.com/knowledgebase/article/KA-01914. (optional)
 property_keys = ['property_keys_example'] # list[str] | A list of property keys from the 'Portfolio' domain to decorate onto each portfolio.              These must take the format {domain}/{scope}/{code}, for example 'Portfolio/Manager/Id'. (optional)
 
-    try:
-        # List portfolios for scope
-        api_response = api_instance.list_portfolios_for_scope(scope, effective_at=effective_at, as_at=as_at, page=page, start=start, limit=limit, filter=filter, property_keys=property_keys)
-        pprint(api_response)
-    except ApiException as e:
-        print("Exception when calling PortfoliosApi->list_portfolios_for_scope: %s\n" % e)
+try:
+    # List portfolios for scope
+    api_response = api_instance.list_portfolios_for_scope(scope, effective_at=effective_at, as_at=as_at, page=page, start=start, limit=limit, filter=filter, property_keys=property_keys)
+    pprint(api_response)
+except ApiException as e:
+    print("Exception when calling PortfoliosApi->list_portfolios_for_scope: %s\n" % e)
 ```
 
 ### Parameters
@@ -618,38 +527,25 @@ import time
 import lusid
 from lusid.rest import ApiException
 from pprint import pprint
-# Defining the host is optional and defaults to http://local-unit-test-server.lusid.com:32886
-# See configuration.py for a list of all supported configuration parameters.
-configuration = lusid.Configuration(
-    host = "http://local-unit-test-server.lusid.com:32886"
-)
-
-# The client must configure the authentication and authorization parameters
-# in accordance with the API server security policy.
-# Examples for each auth method are provided below, use the example that
-# satisfies your auth use case.
-
+configuration = lusid.Configuration()
 # Configure OAuth2 access token for authorization: oauth2
-configuration = lusid.Configuration(
-    host = "http://local-unit-test-server.lusid.com:32886"
-)
 configuration.access_token = 'YOUR_ACCESS_TOKEN'
 
-# Enter a context with an instance of the API client
-with lusid.ApiClient(configuration) as api_client:
-    # Create an instance of the API class
-    api_instance = lusid.PortfoliosApi(api_client)
-    scope = 'scope_example' # str | The scope of the portfolio.
+# Defining host is optional and default to http://local-unit-test-server.lusid.com:43074
+configuration.host = "http://local-unit-test-server.lusid.com:43074"
+# Create an instance of the API class
+api_instance = lusid.PortfoliosApi(lusid.ApiClient(configuration))
+scope = 'scope_example' # str | The scope of the portfolio.
 code = 'code_example' # str | The code of the portfolio. Together with the scope this uniquely identifies the portfolio.
 update_portfolio_request = {"displayName":"MyPortfolioName","description":"Long form description of portfolio"} # UpdatePortfolioRequest | The updated portfolio definition.
 effective_at = 'effective_at_example' # str | The effective datetime or cut label at which to update the definition. Defaults to the current               LUSID system datetime if not specified. (optional)
 
-    try:
-        # Update portfolio
-        api_response = api_instance.update_portfolio(scope, code, update_portfolio_request, effective_at=effective_at)
-        pprint(api_response)
-    except ApiException as e:
-        print("Exception when calling PortfoliosApi->update_portfolio: %s\n" % e)
+try:
+    # Update portfolio
+    api_response = api_instance.update_portfolio(scope, code, update_portfolio_request, effective_at=effective_at)
+    pprint(api_response)
+except ApiException as e:
+    print("Exception when calling PortfoliosApi->update_portfolio: %s\n" % e)
 ```
 
 ### Parameters
@@ -699,37 +595,24 @@ import time
 import lusid
 from lusid.rest import ApiException
 from pprint import pprint
-# Defining the host is optional and defaults to http://local-unit-test-server.lusid.com:32886
-# See configuration.py for a list of all supported configuration parameters.
-configuration = lusid.Configuration(
-    host = "http://local-unit-test-server.lusid.com:32886"
-)
-
-# The client must configure the authentication and authorization parameters
-# in accordance with the API server security policy.
-# Examples for each auth method are provided below, use the example that
-# satisfies your auth use case.
-
+configuration = lusid.Configuration()
 # Configure OAuth2 access token for authorization: oauth2
-configuration = lusid.Configuration(
-    host = "http://local-unit-test-server.lusid.com:32886"
-)
 configuration.access_token = 'YOUR_ACCESS_TOKEN'
 
-# Enter a context with an instance of the API client
-with lusid.ApiClient(configuration) as api_client:
-    # Create an instance of the API class
-    api_instance = lusid.PortfoliosApi(api_client)
-    scope = 'scope_example' # str | The scope of the portfolio.
+# Defining host is optional and default to http://local-unit-test-server.lusid.com:43074
+configuration.host = "http://local-unit-test-server.lusid.com:43074"
+# Create an instance of the API class
+api_instance = lusid.PortfoliosApi(lusid.ApiClient(configuration))
+scope = 'scope_example' # str | The scope of the portfolio.
 code = 'code_example' # str | The code of the portfolio. Together with the scope this uniquely identifies the portfolio.
 request_body = {"portfolio/MyScope/FundManagerName":{"key":"Portfolio/MyScope/FundManagerName","value":{"labelValue":"Smith"},"effectiveFrom":"2018-03-05T00:00:00.0000000+00:00"},"portfolio/MyScope/SomeProperty":{"key":"Portfolio/MyScope/SomeProperty","value":{"labelValue":"SomeValue"},"effectiveFrom":"2016-01-01T00:00:00.0000000+00:00"},"portfolio/MyScope/AnotherProperty":{"key":"Portfolio/MyScope/AnotherProperty","value":{"labelValue":"AnotherValue"},"effectiveFrom":"2018-03-05T00:00:00.0000000+00:00","effectiveUntil":"2020-01-01T00:00:00.0000000+00:00"},"portfolio/MyScope/ReBalanceInterval":{"key":"Portfolio/MyScope/ReBalanceInterval","value":{"metricValue":{"value":30,"unit":"Days"}}}} # dict(str, ModelProperty) | The properties to be created or updated. Each property in               the request must be keyed by its unique property key. This has the format {domain}/{scope}/{code}, for example               'Portfolio/Manager/Id'.
 
-    try:
-        # Upsert portfolio properties
-        api_response = api_instance.upsert_portfolio_properties(scope, code, request_body)
-        pprint(api_response)
-    except ApiException as e:
-        print("Exception when calling PortfoliosApi->upsert_portfolio_properties: %s\n" % e)
+try:
+    # Upsert portfolio properties
+    api_response = api_instance.upsert_portfolio_properties(scope, code, request_body)
+    pprint(api_response)
+except ApiException as e:
+    print("Exception when calling PortfoliosApi->upsert_portfolio_properties: %s\n" % e)
 ```
 
 ### Parameters
