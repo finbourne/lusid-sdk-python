@@ -1,6 +1,6 @@
 # lusid.SearchApi
 
-All URIs are relative to *http://local-unit-test-server.lusid.com:37050*
+All URIs are relative to *http://local-unit-test-server.lusid.com:39433*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
@@ -29,8 +29,8 @@ configuration = lusid.Configuration()
 # Configure OAuth2 access token for authorization: oauth2
 configuration.access_token = 'YOUR_ACCESS_TOKEN'
 
-# Defining host is optional and default to http://local-unit-test-server.lusid.com:37050
-configuration.host = "http://local-unit-test-server.lusid.com:37050"
+# Defining host is optional and default to http://local-unit-test-server.lusid.com:39433
+configuration.host = "http://local-unit-test-server.lusid.com:39433"
 # Create an instance of the API class
 api_instance = lusid.SearchApi(lusid.ApiClient(configuration))
 search = 'search_example' # str | A parameter used for searching any portfolio group field. Wildcards(*) are supported at the end of words (e.g. 'Port*'). Read more about filtering results from LUSID here https://support.lusid.com/filtering-results-from-lusid. (optional)
@@ -99,8 +99,8 @@ configuration = lusid.Configuration()
 # Configure OAuth2 access token for authorization: oauth2
 configuration.access_token = 'YOUR_ACCESS_TOKEN'
 
-# Defining host is optional and default to http://local-unit-test-server.lusid.com:37050
-configuration.host = "http://local-unit-test-server.lusid.com:37050"
+# Defining host is optional and default to http://local-unit-test-server.lusid.com:39433
+configuration.host = "http://local-unit-test-server.lusid.com:39433"
 # Create an instance of the API class
 api_instance = lusid.SearchApi(lusid.ApiClient(configuration))
 search = 'search_example' # str | A parameter used for searching any portfolio field. Wildcards(*) are supported at the end of words (e.g. 'Port*'). Read more about filtering results from LUSID here https://support.lusid.com/filtering-results-from-lusid. (optional)
@@ -169,8 +169,8 @@ configuration = lusid.Configuration()
 # Configure OAuth2 access token for authorization: oauth2
 configuration.access_token = 'YOUR_ACCESS_TOKEN'
 
-# Defining host is optional and default to http://local-unit-test-server.lusid.com:37050
-configuration.host = "http://local-unit-test-server.lusid.com:37050"
+# Defining host is optional and default to http://local-unit-test-server.lusid.com:39433
+configuration.host = "http://local-unit-test-server.lusid.com:39433"
 # Create an instance of the API class
 api_instance = lusid.SearchApi(lusid.ApiClient(configuration))
 search = 'search_example' # str | A parameter used for searching any field. Wildcards(*) are supported at the end of words (e.g. 'Port*'). Read more about filtering results from LUSID here https://support.lusid.com/filtering-results-from-lusid. (optional)
