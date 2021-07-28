@@ -9,7 +9,7 @@
       "url": "https://www.finbourne.com",
       "email": "info@finbourne.com"
     },
-    "version": "0.11.3327",
+    "version": "0.11.3328",
     "x-logo": {
       "url": "https://content.finbourne.com/LUSID-header.png",
       "backgroundColor": "#415464"
@@ -17,7 +17,7 @@
   },
   "servers": [
     {
-      "url": "https://fbn-prd.lusid.com/api"
+      "url": "http://local-unit-test-server.lusid.com:42767"
     }
   ],
   "paths": {
@@ -10990,6 +10990,382 @@
           }
         ],
         "x-fbn-apistatus": "Stable"
+      }
+    },
+    "/api/portfolios/{scope}/{code}/returns/{returnScope}/{returnCode}": {
+      "post": {
+        "tags": [
+          "Portfolios"
+        ],
+        "summary": "[EARLY ACCESS] Upsert Returns",
+        "description": "Update or insert returns into the specified portfolio.",
+        "operationId": "UpsertPortfolioReturns",
+        "parameters": [
+          {
+            "name": "scope",
+            "in": "path",
+            "description": "The scope of the Portfolio.",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "description": "The scope of the Portfolio.",
+              "nullable": true
+            }
+          },
+          {
+            "name": "code",
+            "in": "path",
+            "description": "The code of the  Portfolio.",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "description": "The code of the  Portfolio.",
+              "nullable": true
+            }
+          },
+          {
+            "name": "returnScope",
+            "in": "path",
+            "description": "The scope of the Returns.",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "description": "The scope of the Returns.",
+              "nullable": true
+            }
+          },
+          {
+            "name": "returnCode",
+            "in": "path",
+            "description": "The code of the Returns.",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "description": "The code of the Returns.",
+              "nullable": true
+            }
+          }
+        ],
+        "requestBody": {
+          "description": "This contains the Returns which need to be upsert.",
+          "content": {
+            "application/json-patch+json": {
+              "schema": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/components/schemas/PerformanceReturn"
+                },
+                "description": "This contains the Returns which need to be upsert."
+              },
+              "example": [
+                {
+                  "effectiveAt": "2019-11-28T00:00:00.0000000+00:00",
+                  "rateOfReturn": 0.1,
+                  "openingMarketValue": 500,
+                  "closingMarketValue": 550,
+                  "period": "Daily"
+                },
+                {
+                  "effectiveAt": "2019-11-29T00:00:00.0000000+00:00",
+                  "rateOfReturn": -0.2,
+                  "openingMarketValue": 550,
+                  "closingMarketValue": 440,
+                  "period": "Daily"
+                }
+              ]
+            },
+            "application/json": {
+              "schema": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/components/schemas/PerformanceReturn"
+                },
+                "description": "This contains the Returns which need to be upsert."
+              },
+              "example": [
+                {
+                  "effectiveAt": "2019-11-28T00:00:00.0000000+00:00",
+                  "rateOfReturn": 0.1,
+                  "openingMarketValue": 500,
+                  "closingMarketValue": 550,
+                  "period": "Daily"
+                },
+                {
+                  "effectiveAt": "2019-11-29T00:00:00.0000000+00:00",
+                  "rateOfReturn": -0.2,
+                  "openingMarketValue": 550,
+                  "closingMarketValue": 440,
+                  "period": "Daily"
+                }
+              ]
+            },
+            "text/json": {
+              "schema": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/components/schemas/PerformanceReturn"
+                },
+                "description": "This contains the Returns which need to be upsert."
+              },
+              "example": [
+                {
+                  "effectiveAt": "2019-11-28T00:00:00.0000000+00:00",
+                  "rateOfReturn": 0.1,
+                  "openingMarketValue": 500,
+                  "closingMarketValue": 550,
+                  "period": "Daily"
+                },
+                {
+                  "effectiveAt": "2019-11-29T00:00:00.0000000+00:00",
+                  "rateOfReturn": -0.2,
+                  "openingMarketValue": 550,
+                  "closingMarketValue": 440,
+                  "period": "Daily"
+                }
+              ]
+            },
+            "application/*+json": {
+              "schema": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/components/schemas/PerformanceReturn"
+                },
+                "description": "This contains the Returns which need to be upsert."
+              },
+              "example": [
+                {
+                  "effectiveAt": "2019-11-28T00:00:00.0000000+00:00",
+                  "rateOfReturn": 0.1,
+                  "openingMarketValue": 500,
+                  "closingMarketValue": 550,
+                  "period": "Daily"
+                },
+                {
+                  "effectiveAt": "2019-11-29T00:00:00.0000000+00:00",
+                  "rateOfReturn": -0.2,
+                  "openingMarketValue": 550,
+                  "closingMarketValue": 440,
+                  "period": "Daily"
+                }
+              ]
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "The version of the portfolio that contains the newly updated or inserted Returns.",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/UpsertReturnsResponse"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/UpsertReturnsResponse"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/UpsertReturnsResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "The details of the input related failure",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/LusidValidationProblemDetails"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/LusidValidationProblemDetails"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/LusidValidationProblemDetails"
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "Error response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/LusidProblemDetails"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "oauth2": []
+          }
+        ],
+        "x-fbn-apistatus": "EarlyAccess"
+      },
+      "get": {
+        "tags": [
+          "Portfolios"
+        ],
+        "summary": "[EARLY ACCESS] Get Returns",
+        "description": "Get Returns which are on the specified portfolio.",
+        "operationId": "GetPortfolioReturns",
+        "parameters": [
+          {
+            "name": "scope",
+            "in": "path",
+            "description": "The scope of the Portfolio.",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "description": "The scope of the Portfolio.",
+              "nullable": true
+            }
+          },
+          {
+            "name": "code",
+            "in": "path",
+            "description": "The code of the  Portfolio.",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "description": "The code of the  Portfolio.",
+              "nullable": true
+            }
+          },
+          {
+            "name": "returnScope",
+            "in": "path",
+            "description": "The scope of the Returns.",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "description": "The scope of the Returns.",
+              "nullable": true
+            }
+          },
+          {
+            "name": "returnCode",
+            "in": "path",
+            "description": "The code of the Returns.",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "description": "The code of the Returns.",
+              "nullable": true
+            }
+          },
+          {
+            "name": "fromEffectiveAt",
+            "in": "query",
+            "description": "The start date from which to delete the Returns.",
+            "schema": {
+              "type": "string",
+              "description": "The start date from which to delete the Returns.",
+              "format": "dateorcutlabel",
+              "nullable": true
+            }
+          },
+          {
+            "name": "toEffectiveAt",
+            "in": "query",
+            "description": "The end date from which to delete the Returns",
+            "schema": {
+              "type": "string",
+              "description": "The end date from which to delete the Returns",
+              "format": "dateorcutlabel",
+              "nullable": true
+            }
+          },
+          {
+            "name": "period",
+            "in": "query",
+            "description": "Show the Returns on a Daily or Monthly period.",
+            "schema": {
+              "type": "string",
+              "description": "Show the Returns on a Daily or Monthly period.",
+              "nullable": true
+            }
+          },
+          {
+            "name": "asAt",
+            "in": "query",
+            "description": "The asAt datetime at which to retrieve the Returns. Defaults to the latest.",
+            "schema": {
+              "type": "string",
+              "description": "The asAt datetime at which to retrieve the Returns. Defaults to the latest.",
+              "format": "date-time",
+              "nullable": true
+            },
+            "x-nullable": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The Returns on the given time period.",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResourceListOfPerformanceReturn"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResourceListOfPerformanceReturn"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResourceListOfPerformanceReturn"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "The details of the input related failure",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/LusidValidationProblemDetails"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/LusidValidationProblemDetails"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/LusidValidationProblemDetails"
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "Error response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/LusidProblemDetails"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "oauth2": []
+          }
+        ],
+        "x-fbn-apistatus": "EarlyAccess"
       }
     },
     "/api/propertydefinitions": {
@@ -24468,6 +24844,44 @@
         "additionalProperties": false,
         "description": "A paginated list of resource that can be returned from a request."
       },
+      "PerformanceReturn": {
+        "required": [
+          "effectiveAt",
+          "rateOfReturn"
+        ],
+        "type": "object",
+        "properties": {
+          "effectiveAt": {
+            "type": "string",
+            "description": "The effectiveAt for the return.",
+            "format": "date-time"
+          },
+          "rateOfReturn": {
+            "type": "number",
+            "description": "The return number.",
+            "format": "double"
+          },
+          "openingMarketValue": {
+            "type": "number",
+            "description": "The opening market value.",
+            "format": "double",
+            "nullable": true
+          },
+          "closingMarketValue": {
+            "type": "number",
+            "description": "The closing market value.",
+            "format": "double",
+            "nullable": true
+          },
+          "period": {
+            "type": "string",
+            "description": "Show the returns on a Daily or Monthly period.",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false,
+        "description": "A list of Returns."
+      },
       "PerpetualProperty": {
         "required": [
           "key"
@@ -26186,6 +26600,47 @@
         "additionalProperties": false,
         "description": "A collection of resources that can be returned from requests."
       },
+      "ResourceListOfPerformanceReturn": {
+        "required": [
+          "values"
+        ],
+        "type": "object",
+        "properties": {
+          "values": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/PerformanceReturn"
+            },
+            "description": "The resources to list."
+          },
+          "href": {
+            "type": "string",
+            "description": "The URI of the resource list.",
+            "format": "uri",
+            "nullable": true
+          },
+          "links": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Link"
+            },
+            "description": "Collection of links.",
+            "nullable": true
+          },
+          "nextPage": {
+            "type": "string",
+            "description": "The next page of results.",
+            "nullable": true
+          },
+          "previousPage": {
+            "type": "string",
+            "description": "The previous page of results.",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false,
+        "description": "A collection of resources that can be returned from requests."
+      },
       "ResourceListOfPortfolio": {
         "required": [
           "values"
@@ -27660,6 +28115,56 @@
         },
         "additionalProperties": false
       },
+      "UpsertReturnsResponse": {
+        "required": [
+          "version"
+        ],
+        "type": "object",
+        "properties": {
+          "version": {
+            "$ref": "#/components/schemas/Version"
+          },
+          "href": {
+            "type": "string",
+            "description": "The specific Uniform Resource Identifier (URI) for this resource at the requested effective and asAt datetime.",
+            "format": "uri",
+            "nullable": true
+          },
+          "values": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "additionalProperties": {
+                "type": "string",
+                "format": "date-time"
+              }
+            },
+            "description": "The set of values that were successfully retrieved.",
+            "nullable": true
+          },
+          "failed": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "additionalProperties": {
+                "$ref": "#/components/schemas/ErrorDetail"
+              }
+            },
+            "description": "The set of values that could not be retrieved due along with a reason for this, e.g badly formed request.",
+            "nullable": true
+          },
+          "links": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Link"
+            },
+            "description": "Collection of links.",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false,
+        "description": "Response from upserting Returns"
+      },
       "UpsertTransactionPropertiesResponse": {
         "type": "object",
         "properties": {
@@ -27888,7 +28393,7 @@
         "description": "OAuth2 Implicit Grant",
         "flows": {
           "implicit": {
-            "authorizationUrl": "https://lusid.okta.com/oauth2/default/v1/authorize",
+            "authorizationUrl": "https://dummyurl.lusid.com/",
             "scopes": {}
           }
         }
