@@ -9,7 +9,7 @@
       "url": "https://www.finbourne.com",
       "email": "info@finbourne.com"
     },
-    "version": "0.11.3341",
+    "version": "0.11.3340",
     "x-logo": {
       "url": "https://content.finbourne.com/LUSID-header.png",
       "backgroundColor": "#415464"
@@ -17,7 +17,7 @@
   },
   "servers": [
     {
-      "url": "http://local-unit-test-server.lusid.com:31406"
+      "url": "https://fbn-prd.lusid.com/api"
     }
   ],
   "paths": {
@@ -28394,7 +28394,7 @@
         "description": "OAuth2 Implicit Grant",
         "flows": {
           "implicit": {
-            "authorizationUrl": "https://dummyurl.lusid.com/",
+            "authorizationUrl": "https://lusid.okta.com/oauth2/default/v1/authorize",
             "scopes": {}
           }
         }
@@ -28444,10 +28444,6 @@
     {
       "name": "Counterparties",
       "description": "Methods for the storage and retrieval of counterparty related information such as Counterparty Agreements, Credit Support Annexes and Netting Set data."
-    },
-    {
-      "name": "CustomEntityDefinitions",
-      "description": ""
     },
     {
       "name": "Cut Label Definitions",
@@ -28591,7 +28587,6 @@
       "Conventions",
       "Corporate Action Sources",
       "Counterparties",
-      "CustomEntityDefinitions",
       "Cut Label Definitions",
       "Data Types",
       "Derived Transaction Portfolios",
