@@ -227,7 +227,8 @@ class RESTClientObject(object):
 
         if retries and (r.status in {502}):
             logger.debug("Temporary HTTP Error %s encountered, trying again", r.status)
-            argument_cache['retries'] -= 1
+            argument_cache["retries"] -= 1
+            del argument_cache["self"]
             return self.request(**argument_cache)
         
         if not 200 <= r.status <= 299:
