@@ -1,6 +1,6 @@
 # lusid.DerivedTransactionPortfoliosApi
 
-All URIs are relative to *http://local-unit-test-server.lusid.com:39653*
+All URIs are relative to *http://local-unit-test-server.lusid.com:51280*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
@@ -28,8 +28,8 @@ configuration = lusid.Configuration()
 # Configure OAuth2 access token for authorization: oauth2
 configuration.access_token = 'YOUR_ACCESS_TOKEN'
 
-# Defining host is optional and default to http://local-unit-test-server.lusid.com:39653
-configuration.host = "http://local-unit-test-server.lusid.com:39653"
+# Defining host is optional and default to http://local-unit-test-server.lusid.com:51280
+configuration.host = "http://local-unit-test-server.lusid.com:51280"
 # Create an instance of the API class
 api_instance = lusid.DerivedTransactionPortfoliosApi(lusid.ApiClient(configuration))
 scope = 'scope_example' # str | The scope in which to create the derived transaction portfolio.
@@ -92,8 +92,8 @@ configuration = lusid.Configuration()
 # Configure OAuth2 access token for authorization: oauth2
 configuration.access_token = 'YOUR_ACCESS_TOKEN'
 
-# Defining host is optional and default to http://local-unit-test-server.lusid.com:39653
-configuration.host = "http://local-unit-test-server.lusid.com:39653"
+# Defining host is optional and default to http://local-unit-test-server.lusid.com:51280
+configuration.host = "http://local-unit-test-server.lusid.com:51280"
 # Create an instance of the API class
 api_instance = lusid.DerivedTransactionPortfoliosApi(lusid.ApiClient(configuration))
 scope = 'scope_example' # str | The scope of the derived transaction portfolio.
