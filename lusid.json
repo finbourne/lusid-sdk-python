@@ -9,7 +9,7 @@
       "url": "https://www.finbourne.com",
       "email": "info@finbourne.com"
     },
-    "version": "0.11.3381",
+    "version": "0.11.3379",
     "x-logo": {
       "url": "https://content.finbourne.com/LUSID-header.png",
       "backgroundColor": "#415464"
@@ -17,7 +17,7 @@
   },
   "servers": [
     {
-      "url": "http://local-unit-test-server.lusid.com:48859"
+      "url": "https://fbn-prd.lusid.com/api"
     }
   ],
   "paths": {
@@ -27311,7 +27311,6 @@
             "additionalProperties": {
               "$ref": "#/components/schemas/PerpetualProperty"
             },
-            "description": "Properties attached to the underlying holding.",
             "nullable": true
           }
         },
@@ -27343,7 +27342,6 @@
             "additionalProperties": {
               "$ref": "#/components/schemas/PerpetualProperty"
             },
-            "description": "Properties attached to the underlying holding.",
             "nullable": true
           }
         },
@@ -27394,7 +27392,6 @@
             "additionalProperties": {
               "$ref": "#/components/schemas/PerpetualProperty"
             },
-            "description": "The properties associated with the underlying Movement.",
             "nullable": true
           },
           "mappings": {
@@ -27402,7 +27399,6 @@
             "items": {
               "$ref": "#/components/schemas/TransactionPropertyMapping"
             },
-            "description": "This allows you to map a transaction property to a property on the underlying holding.",
             "nullable": true
           },
           "name": {
@@ -27458,7 +27454,6 @@
             "additionalProperties": {
               "$ref": "#/components/schemas/PerpetualProperty"
             },
-            "description": "The properties associated with the underlying Movement.",
             "nullable": true
           },
           "mappings": {
@@ -27466,7 +27461,6 @@
             "items": {
               "$ref": "#/components/schemas/TransactionPropertyMappingRequest"
             },
-            "description": "This allows you to map a transaction property to a property on the underlying holding.",
             "nullable": true
           },
           "name": {
@@ -27547,17 +27541,17 @@
         "properties": {
           "propertyKey": {
             "type": "string",
-            "description": "Uniquely identifies the property definiton and consists of a Domain, Scope and Code."
+            "description": "The Side"
           },
           "mapFrom": {
             "type": "string",
-            "description": "The Property Key of the Property to map from.",
+            "description": "The Side",
             "nullable": true
           },
           "setTo": {
             "type": "object",
             "additionalProperties": false,
-            "description": "A pointer to the Property being mapped from.",
+            "description": "The Side",
             "nullable": true
           }
         },
@@ -27571,17 +27565,17 @@
         "properties": {
           "propertyKey": {
             "type": "string",
-            "description": "Uniquely identifies the property definition and consists of a Domain, Scope and Code."
+            "description": "The Side"
           },
           "mapFrom": {
             "type": "string",
-            "description": "The Property Key of the Property to map from.",
+            "description": "The Side",
             "nullable": true
           },
           "setTo": {
             "type": "object",
             "additionalProperties": false,
-            "description": "A pointer to the Property being mapped from.",
+            "description": "The Side",
             "nullable": true
           }
         },
@@ -28400,7 +28394,7 @@
         "description": "OAuth2 Implicit Grant",
         "flows": {
           "implicit": {
-            "authorizationUrl": "https://dummyurl.lusid.com/",
+            "authorizationUrl": "https://lusid.okta.com/oauth2/default/v1/authorize",
             "scopes": {}
           }
         }
