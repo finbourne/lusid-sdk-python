@@ -1,6 +1,5 @@
 # UpsertReferencePortfolioConstituentsResponse
 
-
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------

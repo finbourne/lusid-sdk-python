@@ -1,6 +1,5 @@
 # PortfolioReconciliationRequest
 
-
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------

@@ -1,6 +1,5 @@
 # AnnulQuotesResponse
 
-
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------

@@ -1,6 +1,5 @@
 # VersionedResourceListOfPortfolioHolding
 
-
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------

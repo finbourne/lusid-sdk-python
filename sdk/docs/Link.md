@@ -1,7 +1,5 @@
 # Link
 
-Link class.
-
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------

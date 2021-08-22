@@ -1,7 +1,5 @@
 # PerformanceReturn
 
-A list of Returns.
-
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------

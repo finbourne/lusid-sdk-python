@@ -1,7 +1,5 @@
 # OutputTransaction
 
-A list of output transactions.
-
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
