@@ -1,5 +1,6 @@
 # CreatePortfolioGroupRequest
 
+
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------

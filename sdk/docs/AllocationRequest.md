@@ -1,5 +1,7 @@
 # AllocationRequest
 
+A request to create or update an Allocation.
+
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------

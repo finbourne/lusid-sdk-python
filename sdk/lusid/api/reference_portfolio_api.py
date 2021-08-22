@@ -19,7 +19,7 @@ import re  # noqa: F401
 import six
 
 from lusid.api_client import ApiClient
-from lusid.exceptions import (
+from lusid.exceptions import (  # noqa: F401
     ApiTypeError,
     ApiValueError
 )
@@ -43,22 +43,28 @@ class ReferencePortfolioApi(object):
         Create a reference portfolio in a particular scope.  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
+
         >>> thread = api.create_reference_portfolio(scope, create_reference_portfolio_request, async_req=True)
         >>> result = thread.get()
 
-        :param async_req bool: execute request asynchronously
-        :param str scope: The scope in which to create the reference portfolio. (required)
-        :param CreateReferencePortfolioRequest create_reference_portfolio_request: The definition of the reference portfolio. (required)
+        :param scope: The scope in which to create the reference portfolio. (required)
+        :type scope: str
+        :param create_reference_portfolio_request: The definition of the reference portfolio. (required)
+        :type create_reference_portfolio_request: CreateReferencePortfolioRequest
+        :param async_req: Whether to execute the request asynchronously.
+        :type async_req: bool, optional
         :param _preload_content: if False, the urllib3.HTTPResponse object will
                                  be returned without reading/decoding response
                                  data. Default is True.
+        :type _preload_content: bool, optional
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
                                  (connection, read) timeouts.
-        :return: Portfolio
+        :return: Returns the result object.
                  If the method is called asynchronously,
                  returns the request thread.
+        :rtype: Portfolio
         """
         kwargs['_return_http_data_only'] = True
         return self.create_reference_portfolio_with_http_info(scope, create_reference_portfolio_request, **kwargs)  # noqa: E501
@@ -69,33 +75,52 @@ class ReferencePortfolioApi(object):
         Create a reference portfolio in a particular scope.  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
+
         >>> thread = api.create_reference_portfolio_with_http_info(scope, create_reference_portfolio_request, async_req=True)
         >>> result = thread.get()
 
-        :param async_req bool: execute request asynchronously
-        :param str scope: The scope in which to create the reference portfolio. (required)
-        :param CreateReferencePortfolioRequest create_reference_portfolio_request: The definition of the reference portfolio. (required)
+        :param scope: The scope in which to create the reference portfolio. (required)
+        :type scope: str
+        :param create_reference_portfolio_request: The definition of the reference portfolio. (required)
+        :type create_reference_portfolio_request: CreateReferencePortfolioRequest
+        :param async_req: Whether to execute the request asynchronously.
+        :type async_req: bool, optional
         :param _return_http_data_only: response data without head status code
                                        and headers
+        :type _return_http_data_only: bool, optional
         :param _preload_content: if False, the urllib3.HTTPResponse object will
                                  be returned without reading/decoding response
                                  data. Default is True.
+        :type _preload_content: bool, optional
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
                                  (connection, read) timeouts.
-        :return: tuple(Portfolio, status_code(int), headers(HTTPHeaderDict))
+        :param _request_auth: set to override the auth_settings for an a single
+                              request; this effectively ignores the authentication
+                              in the spec for a single request.
+        :type _request_auth: dict, optional
+        :return: Returns the result object.
                  If the method is called asynchronously,
                  returns the request thread.
+        :rtype: tuple(Portfolio, status_code(int), headers(HTTPHeaderDict))
         """
 
         local_var_params = locals()
 
-        all_params = ['scope', 'create_reference_portfolio_request']  # noqa: E501
-        all_params.append('async_req')
-        all_params.append('_return_http_data_only')
-        all_params.append('_preload_content')
-        all_params.append('_request_timeout')
+        all_params = [
+            'scope',
+            'create_reference_portfolio_request'
+        ]
+        all_params.extend(
+            [
+                'async_req',
+                '_return_http_data_only',
+                '_preload_content',
+                '_request_timeout',
+                '_request_auth'
+            ]
+        )
 
         for key, val in six.iteritems(local_var_params['kwargs']):
             if key not in all_params:
@@ -106,8 +131,8 @@ class ReferencePortfolioApi(object):
             local_var_params[key] = val
         del local_var_params['kwargs']
         # verify the required parameter 'create_reference_portfolio_request' is set
-        if ('create_reference_portfolio_request' not in local_var_params or
-                local_var_params['create_reference_portfolio_request'] is None):
+        if self.api_client.client_side_validation and ('create_reference_portfolio_request' not in local_var_params or  # noqa: E501
+                                                        local_var_params['create_reference_portfolio_request'] is None):  # noqa: E501
             raise ApiValueError("Missing the required parameter `create_reference_portfolio_request` when calling `create_reference_portfolio`")  # noqa: E501
 
         collection_formats = {}
@@ -136,12 +161,17 @@ class ReferencePortfolioApi(object):
         header_params['Content-Type'] = self.api_client.select_header_content_type(  # noqa: E501
             ['application/json-patch+json', 'application/json', 'text/json', 'application/*+json'])  # noqa: E501
 
-        # Authentication setting
-        auth_settings = ['oauth2']  # noqa: E501
-
         # set the LUSID header
         header_params['X-LUSID-SDK-Language'] = 'Python'
         header_params['X-LUSID-SDK-Version'] = '0.11.3412'
+
+        # Authentication setting
+        auth_settings = ['oauth2']  # noqa: E501
+        
+        response_types_map = {
+            201: "Portfolio",
+            400: "LusidValidationProblemDetails",
+        }
 
         return self.api_client.call_api(
             '/api/referenceportfolios/{scope}', 'POST',
@@ -151,13 +181,14 @@ class ReferencePortfolioApi(object):
             body=body_params,
             post_params=form_params,
             files=local_var_files,
-            response_type='Portfolio',  # noqa: E501
+            response_types_map=response_types_map,
             auth_settings=auth_settings,
             async_req=local_var_params.get('async_req'),
             _return_http_data_only=local_var_params.get('_return_http_data_only'),  # noqa: E501
             _preload_content=local_var_params.get('_preload_content', True),
             _request_timeout=local_var_params.get('_request_timeout'),
-            collection_formats=collection_formats)
+            collection_formats=collection_formats,
+            _request_auth=local_var_params.get('_request_auth'))
 
     def get_reference_portfolio_constituents(self, scope, code, **kwargs):  # noqa: E501
         """Get reference portfolio constituents  # noqa: E501
@@ -165,25 +196,34 @@ class ReferencePortfolioApi(object):
         Get constituents from a reference portfolio at a particular effective time.  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
+
         >>> thread = api.get_reference_portfolio_constituents(scope, code, async_req=True)
         >>> result = thread.get()
 
-        :param async_req bool: execute request asynchronously
-        :param str scope: The scope of the reference portfolio. (required)
-        :param str code: The code of the reference portfolio. Together with the scope this uniquely identifies              the reference portfolio. (required)
-        :param str effective_at: The effective date of the constituents to retrieve. Defaults to the current LUSID system datetime if not specified.
-        :param datetime as_at: The asAt datetime at which to retrieve constituents. Defaults to return the latest version              of each constituent if not specified.
-        :param list[str] property_keys: A list of property keys from the 'Instrument' or 'ReferenceHolding' domain to decorate onto              constituents. These take the format {domain}/{scope}/{code} e.g. 'Instrument/system/Name' or              'ReferenceHolding/strategy/quantsignal'. Defaults to return all available instrument and reference holding properties if not specified.
+        :param scope: The scope of the reference portfolio. (required)
+        :type scope: str
+        :param code: The code of the reference portfolio. Together with the scope this uniquely identifies              the reference portfolio. (required)
+        :type code: str
+        :param effective_at: The effective date of the constituents to retrieve. Defaults to the current LUSID system datetime if not specified.
+        :type effective_at: str
+        :param as_at: The asAt datetime at which to retrieve constituents. Defaults to return the latest version              of each constituent if not specified.
+        :type as_at: datetime
+        :param property_keys: A list of property keys from the 'Instrument' or 'ReferenceHolding' domain to decorate onto              constituents. These take the format {domain}/{scope}/{code} e.g. 'Instrument/system/Name' or              'ReferenceHolding/strategy/quantsignal'. Defaults to return all available instrument and reference holding properties if not specified.
+        :type property_keys: list[str]
+        :param async_req: Whether to execute the request asynchronously.
+        :type async_req: bool, optional
         :param _preload_content: if False, the urllib3.HTTPResponse object will
                                  be returned without reading/decoding response
                                  data. Default is True.
+        :type _preload_content: bool, optional
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
                                  (connection, read) timeouts.
-        :return: GetReferencePortfolioConstituentsResponse
+        :return: Returns the result object.
                  If the method is called asynchronously,
                  returns the request thread.
+        :rtype: GetReferencePortfolioConstituentsResponse
         """
         kwargs['_return_http_data_only'] = True
         return self.get_reference_portfolio_constituents_with_http_info(scope, code, **kwargs)  # noqa: E501
@@ -194,36 +234,61 @@ class ReferencePortfolioApi(object):
         Get constituents from a reference portfolio at a particular effective time.  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
+
         >>> thread = api.get_reference_portfolio_constituents_with_http_info(scope, code, async_req=True)
         >>> result = thread.get()
 
-        :param async_req bool: execute request asynchronously
-        :param str scope: The scope of the reference portfolio. (required)
-        :param str code: The code of the reference portfolio. Together with the scope this uniquely identifies              the reference portfolio. (required)
-        :param str effective_at: The effective date of the constituents to retrieve. Defaults to the current LUSID system datetime if not specified.
-        :param datetime as_at: The asAt datetime at which to retrieve constituents. Defaults to return the latest version              of each constituent if not specified.
-        :param list[str] property_keys: A list of property keys from the 'Instrument' or 'ReferenceHolding' domain to decorate onto              constituents. These take the format {domain}/{scope}/{code} e.g. 'Instrument/system/Name' or              'ReferenceHolding/strategy/quantsignal'. Defaults to return all available instrument and reference holding properties if not specified.
+        :param scope: The scope of the reference portfolio. (required)
+        :type scope: str
+        :param code: The code of the reference portfolio. Together with the scope this uniquely identifies              the reference portfolio. (required)
+        :type code: str
+        :param effective_at: The effective date of the constituents to retrieve. Defaults to the current LUSID system datetime if not specified.
+        :type effective_at: str
+        :param as_at: The asAt datetime at which to retrieve constituents. Defaults to return the latest version              of each constituent if not specified.
+        :type as_at: datetime
+        :param property_keys: A list of property keys from the 'Instrument' or 'ReferenceHolding' domain to decorate onto              constituents. These take the format {domain}/{scope}/{code} e.g. 'Instrument/system/Name' or              'ReferenceHolding/strategy/quantsignal'. Defaults to return all available instrument and reference holding properties if not specified.
+        :type property_keys: list[str]
+        :param async_req: Whether to execute the request asynchronously.
+        :type async_req: bool, optional
         :param _return_http_data_only: response data without head status code
                                        and headers
+        :type _return_http_data_only: bool, optional
         :param _preload_content: if False, the urllib3.HTTPResponse object will
                                  be returned without reading/decoding response
                                  data. Default is True.
+        :type _preload_content: bool, optional
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
                                  (connection, read) timeouts.
-        :return: tuple(GetReferencePortfolioConstituentsResponse, status_code(int), headers(HTTPHeaderDict))
+        :param _request_auth: set to override the auth_settings for an a single
+                              request; this effectively ignores the authentication
+                              in the spec for a single request.
+        :type _request_auth: dict, optional
+        :return: Returns the result object.
                  If the method is called asynchronously,
                  returns the request thread.
+        :rtype: tuple(GetReferencePortfolioConstituentsResponse, status_code(int), headers(HTTPHeaderDict))
         """
 
         local_var_params = locals()
 
-        all_params = ['scope', 'code', 'effective_at', 'as_at', 'property_keys']  # noqa: E501
-        all_params.append('async_req')
-        all_params.append('_return_http_data_only')
-        all_params.append('_preload_content')
-        all_params.append('_request_timeout')
+        all_params = [
+            'scope',
+            'code',
+            'effective_at',
+            'as_at',
+            'property_keys'
+        ]
+        all_params.extend(
+            [
+                'async_req',
+                '_return_http_data_only',
+                '_preload_content',
+                '_request_timeout',
+                '_request_auth'
+            ]
+        )
 
         for key, val in six.iteritems(local_var_params['kwargs']):
             if key not in all_params:
@@ -234,21 +299,21 @@ class ReferencePortfolioApi(object):
             local_var_params[key] = val
         del local_var_params['kwargs']
 
-        if ('scope' in local_var_params and
-                len(local_var_params['scope']) > 64):
+        if self.api_client.client_side_validation and ('scope' in local_var_params and  # noqa: E501
+                                                        len(local_var_params['scope']) > 64):  # noqa: E501
             raise ApiValueError("Invalid value for parameter `scope` when calling `get_reference_portfolio_constituents`, length must be less than or equal to `64`")  # noqa: E501
-        if ('scope' in local_var_params and
-                len(local_var_params['scope']) < 1):
+        if self.api_client.client_side_validation and ('scope' in local_var_params and  # noqa: E501
+                                                        len(local_var_params['scope']) < 1):  # noqa: E501
             raise ApiValueError("Invalid value for parameter `scope` when calling `get_reference_portfolio_constituents`, length must be greater than or equal to `1`")  # noqa: E501
-        if 'scope' in local_var_params and not re.search(r'^[a-zA-Z0-9\-_]+$', local_var_params['scope']):  # noqa: E501
+        if self.api_client.client_side_validation and 'scope' in local_var_params and not re.search(r'^[a-zA-Z0-9\-_]+$', local_var_params['scope']):  # noqa: E501
             raise ApiValueError("Invalid value for parameter `scope` when calling `get_reference_portfolio_constituents`, must conform to the pattern `/^[a-zA-Z0-9\-_]+$/`")  # noqa: E501
-        if ('code' in local_var_params and
-                len(local_var_params['code']) > 64):
+        if self.api_client.client_side_validation and ('code' in local_var_params and  # noqa: E501
+                                                        len(local_var_params['code']) > 64):  # noqa: E501
             raise ApiValueError("Invalid value for parameter `code` when calling `get_reference_portfolio_constituents`, length must be less than or equal to `64`")  # noqa: E501
-        if ('code' in local_var_params and
-                len(local_var_params['code']) < 1):
+        if self.api_client.client_side_validation and ('code' in local_var_params and  # noqa: E501
+                                                        len(local_var_params['code']) < 1):  # noqa: E501
             raise ApiValueError("Invalid value for parameter `code` when calling `get_reference_portfolio_constituents`, length must be greater than or equal to `1`")  # noqa: E501
-        if 'code' in local_var_params and not re.search(r'^[a-zA-Z0-9\-_]+$', local_var_params['code']):  # noqa: E501
+        if self.api_client.client_side_validation and 'code' in local_var_params and not re.search(r'^[a-zA-Z0-9\-_]+$', local_var_params['code']):  # noqa: E501
             raise ApiValueError("Invalid value for parameter `code` when calling `get_reference_portfolio_constituents`, must conform to the pattern `/^[a-zA-Z0-9\-_]+$/`")  # noqa: E501
         collection_formats = {}
 
@@ -259,11 +324,11 @@ class ReferencePortfolioApi(object):
             path_params['code'] = local_var_params['code']  # noqa: E501
 
         query_params = []
-        if 'effective_at' in local_var_params:
+        if 'effective_at' in local_var_params and local_var_params['effective_at'] is not None:  # noqa: E501
             query_params.append(('effectiveAt', local_var_params['effective_at']))  # noqa: E501
-        if 'as_at' in local_var_params:
+        if 'as_at' in local_var_params and local_var_params['as_at'] is not None:  # noqa: E501
             query_params.append(('asAt', local_var_params['as_at']))  # noqa: E501
-        if 'property_keys' in local_var_params:
+        if 'property_keys' in local_var_params and local_var_params['property_keys'] is not None:  # noqa: E501
             query_params.append(('propertyKeys', local_var_params['property_keys']))  # noqa: E501
             collection_formats['propertyKeys'] = 'multi'  # noqa: E501
 
@@ -279,13 +344,13 @@ class ReferencePortfolioApi(object):
 
         header_params['Accept-Encoding'] = "gzip, deflate, br"
 
-
         # Authentication setting
         auth_settings = ['oauth2']  # noqa: E501
-
-        # set the LUSID header
-        header_params['X-LUSID-SDK-Language'] = 'Python'
-        header_params['X-LUSID-SDK-Version'] = '0.11.3412'
+        
+        response_types_map = {
+            200: "GetReferencePortfolioConstituentsResponse",
+            400: "LusidValidationProblemDetails",
+        }
 
         return self.api_client.call_api(
             '/api/referenceportfolios/{scope}/{code}/constituents', 'GET',
@@ -295,13 +360,14 @@ class ReferencePortfolioApi(object):
             body=body_params,
             post_params=form_params,
             files=local_var_files,
-            response_type='GetReferencePortfolioConstituentsResponse',  # noqa: E501
+            response_types_map=response_types_map,
             auth_settings=auth_settings,
             async_req=local_var_params.get('async_req'),
             _return_http_data_only=local_var_params.get('_return_http_data_only'),  # noqa: E501
             _preload_content=local_var_params.get('_preload_content', True),
             _request_timeout=local_var_params.get('_request_timeout'),
-            collection_formats=collection_formats)
+            collection_formats=collection_formats,
+            _request_auth=local_var_params.get('_request_auth'))
 
     def list_constituents_adjustments(self, scope, code, from_effective_at, to_effective_at, **kwargs):  # noqa: E501
         """List constituents adjustments  # noqa: E501
@@ -309,25 +375,34 @@ class ReferencePortfolioApi(object):
         List adjustments made to constituents in a reference portfolio.  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
+
         >>> thread = api.list_constituents_adjustments(scope, code, from_effective_at, to_effective_at, async_req=True)
         >>> result = thread.get()
 
-        :param async_req bool: execute request asynchronously
-        :param str scope: The scope of the reference portfolio. (required)
-        :param str code: The code of the reference portfolio. Together with the scope this uniquely identifies              the reference portfolio. (required)
-        :param str from_effective_at: Events between this time (inclusive) and the toEffectiveAt are returned. (required)
-        :param str to_effective_at: Events between this time (inclusive) and the fromEffectiveAt are returned. (required)
-        :param datetime as_at_time: The asAt time for which the result is valid.
+        :param scope: The scope of the reference portfolio. (required)
+        :type scope: str
+        :param code: The code of the reference portfolio. Together with the scope this uniquely identifies              the reference portfolio. (required)
+        :type code: str
+        :param from_effective_at: Events between this time (inclusive) and the toEffectiveAt are returned. (required)
+        :type from_effective_at: str
+        :param to_effective_at: Events between this time (inclusive) and the fromEffectiveAt are returned. (required)
+        :type to_effective_at: str
+        :param as_at_time: The asAt time for which the result is valid.
+        :type as_at_time: datetime
+        :param async_req: Whether to execute the request asynchronously.
+        :type async_req: bool, optional
         :param _preload_content: if False, the urllib3.HTTPResponse object will
                                  be returned without reading/decoding response
                                  data. Default is True.
+        :type _preload_content: bool, optional
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
                                  (connection, read) timeouts.
-        :return: ResourceListOfConstituentsAdjustmentHeader
+        :return: Returns the result object.
                  If the method is called asynchronously,
                  returns the request thread.
+        :rtype: ResourceListOfConstituentsAdjustmentHeader
         """
         kwargs['_return_http_data_only'] = True
         return self.list_constituents_adjustments_with_http_info(scope, code, from_effective_at, to_effective_at, **kwargs)  # noqa: E501
@@ -338,36 +413,61 @@ class ReferencePortfolioApi(object):
         List adjustments made to constituents in a reference portfolio.  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
+
         >>> thread = api.list_constituents_adjustments_with_http_info(scope, code, from_effective_at, to_effective_at, async_req=True)
         >>> result = thread.get()
 
-        :param async_req bool: execute request asynchronously
-        :param str scope: The scope of the reference portfolio. (required)
-        :param str code: The code of the reference portfolio. Together with the scope this uniquely identifies              the reference portfolio. (required)
-        :param str from_effective_at: Events between this time (inclusive) and the toEffectiveAt are returned. (required)
-        :param str to_effective_at: Events between this time (inclusive) and the fromEffectiveAt are returned. (required)
-        :param datetime as_at_time: The asAt time for which the result is valid.
+        :param scope: The scope of the reference portfolio. (required)
+        :type scope: str
+        :param code: The code of the reference portfolio. Together with the scope this uniquely identifies              the reference portfolio. (required)
+        :type code: str
+        :param from_effective_at: Events between this time (inclusive) and the toEffectiveAt are returned. (required)
+        :type from_effective_at: str
+        :param to_effective_at: Events between this time (inclusive) and the fromEffectiveAt are returned. (required)
+        :type to_effective_at: str
+        :param as_at_time: The asAt time for which the result is valid.
+        :type as_at_time: datetime
+        :param async_req: Whether to execute the request asynchronously.
+        :type async_req: bool, optional
         :param _return_http_data_only: response data without head status code
                                        and headers
+        :type _return_http_data_only: bool, optional
         :param _preload_content: if False, the urllib3.HTTPResponse object will
                                  be returned without reading/decoding response
                                  data. Default is True.
+        :type _preload_content: bool, optional
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
                                  (connection, read) timeouts.
-        :return: tuple(ResourceListOfConstituentsAdjustmentHeader, status_code(int), headers(HTTPHeaderDict))
+        :param _request_auth: set to override the auth_settings for an a single
+                              request; this effectively ignores the authentication
+                              in the spec for a single request.
+        :type _request_auth: dict, optional
+        :return: Returns the result object.
                  If the method is called asynchronously,
                  returns the request thread.
+        :rtype: tuple(ResourceListOfConstituentsAdjustmentHeader, status_code(int), headers(HTTPHeaderDict))
         """
 
         local_var_params = locals()
 
-        all_params = ['scope', 'code', 'from_effective_at', 'to_effective_at', 'as_at_time']  # noqa: E501
-        all_params.append('async_req')
-        all_params.append('_return_http_data_only')
-        all_params.append('_preload_content')
-        all_params.append('_request_timeout')
+        all_params = [
+            'scope',
+            'code',
+            'from_effective_at',
+            'to_effective_at',
+            'as_at_time'
+        ]
+        all_params.extend(
+            [
+                'async_req',
+                '_return_http_data_only',
+                '_preload_content',
+                '_request_timeout',
+                '_request_auth'
+            ]
+        )
 
         for key, val in six.iteritems(local_var_params['kwargs']):
             if key not in all_params:
@@ -378,29 +478,29 @@ class ReferencePortfolioApi(object):
             local_var_params[key] = val
         del local_var_params['kwargs']
         # verify the required parameter 'from_effective_at' is set
-        if ('from_effective_at' not in local_var_params or
-                local_var_params['from_effective_at'] is None):
+        if self.api_client.client_side_validation and ('from_effective_at' not in local_var_params or  # noqa: E501
+                                                        local_var_params['from_effective_at'] is None):  # noqa: E501
             raise ApiValueError("Missing the required parameter `from_effective_at` when calling `list_constituents_adjustments`")  # noqa: E501
         # verify the required parameter 'to_effective_at' is set
-        if ('to_effective_at' not in local_var_params or
-                local_var_params['to_effective_at'] is None):
+        if self.api_client.client_side_validation and ('to_effective_at' not in local_var_params or  # noqa: E501
+                                                        local_var_params['to_effective_at'] is None):  # noqa: E501
             raise ApiValueError("Missing the required parameter `to_effective_at` when calling `list_constituents_adjustments`")  # noqa: E501
 
-        if ('scope' in local_var_params and
-                len(local_var_params['scope']) > 64):
+        if self.api_client.client_side_validation and ('scope' in local_var_params and  # noqa: E501
+                                                        len(local_var_params['scope']) > 64):  # noqa: E501
             raise ApiValueError("Invalid value for parameter `scope` when calling `list_constituents_adjustments`, length must be less than or equal to `64`")  # noqa: E501
-        if ('scope' in local_var_params and
-                len(local_var_params['scope']) < 1):
+        if self.api_client.client_side_validation and ('scope' in local_var_params and  # noqa: E501
+                                                        len(local_var_params['scope']) < 1):  # noqa: E501
             raise ApiValueError("Invalid value for parameter `scope` when calling `list_constituents_adjustments`, length must be greater than or equal to `1`")  # noqa: E501
-        if 'scope' in local_var_params and not re.search(r'^[a-zA-Z0-9\-_]+$', local_var_params['scope']):  # noqa: E501
+        if self.api_client.client_side_validation and 'scope' in local_var_params and not re.search(r'^[a-zA-Z0-9\-_]+$', local_var_params['scope']):  # noqa: E501
             raise ApiValueError("Invalid value for parameter `scope` when calling `list_constituents_adjustments`, must conform to the pattern `/^[a-zA-Z0-9\-_]+$/`")  # noqa: E501
-        if ('code' in local_var_params and
-                len(local_var_params['code']) > 64):
+        if self.api_client.client_side_validation and ('code' in local_var_params and  # noqa: E501
+                                                        len(local_var_params['code']) > 64):  # noqa: E501
             raise ApiValueError("Invalid value for parameter `code` when calling `list_constituents_adjustments`, length must be less than or equal to `64`")  # noqa: E501
-        if ('code' in local_var_params and
-                len(local_var_params['code']) < 1):
+        if self.api_client.client_side_validation and ('code' in local_var_params and  # noqa: E501
+                                                        len(local_var_params['code']) < 1):  # noqa: E501
             raise ApiValueError("Invalid value for parameter `code` when calling `list_constituents_adjustments`, length must be greater than or equal to `1`")  # noqa: E501
-        if 'code' in local_var_params and not re.search(r'^[a-zA-Z0-9\-_]+$', local_var_params['code']):  # noqa: E501
+        if self.api_client.client_side_validation and 'code' in local_var_params and not re.search(r'^[a-zA-Z0-9\-_]+$', local_var_params['code']):  # noqa: E501
             raise ApiValueError("Invalid value for parameter `code` when calling `list_constituents_adjustments`, must conform to the pattern `/^[a-zA-Z0-9\-_]+$/`")  # noqa: E501
         collection_formats = {}
 
@@ -411,11 +511,11 @@ class ReferencePortfolioApi(object):
             path_params['code'] = local_var_params['code']  # noqa: E501
 
         query_params = []
-        if 'from_effective_at' in local_var_params:
+        if 'from_effective_at' in local_var_params and local_var_params['from_effective_at'] is not None:  # noqa: E501
             query_params.append(('fromEffectiveAt', local_var_params['from_effective_at']))  # noqa: E501
-        if 'to_effective_at' in local_var_params:
+        if 'to_effective_at' in local_var_params and local_var_params['to_effective_at'] is not None:  # noqa: E501
             query_params.append(('toEffectiveAt', local_var_params['to_effective_at']))  # noqa: E501
-        if 'as_at_time' in local_var_params:
+        if 'as_at_time' in local_var_params and local_var_params['as_at_time'] is not None:  # noqa: E501
             query_params.append(('asAtTime', local_var_params['as_at_time']))  # noqa: E501
 
         header_params = {}
@@ -430,13 +530,13 @@ class ReferencePortfolioApi(object):
 
         header_params['Accept-Encoding'] = "gzip, deflate, br"
 
-
         # Authentication setting
         auth_settings = ['oauth2']  # noqa: E501
-
-        # set the LUSID header
-        header_params['X-LUSID-SDK-Language'] = 'Python'
-        header_params['X-LUSID-SDK-Version'] = '0.11.3412'
+        
+        response_types_map = {
+            200: "ResourceListOfConstituentsAdjustmentHeader",
+            400: "LusidValidationProblemDetails",
+        }
 
         return self.api_client.call_api(
             '/api/referenceportfolios/{scope}/{code}/constituentsadjustments', 'GET',
@@ -446,13 +546,14 @@ class ReferencePortfolioApi(object):
             body=body_params,
             post_params=form_params,
             files=local_var_files,
-            response_type='ResourceListOfConstituentsAdjustmentHeader',  # noqa: E501
+            response_types_map=response_types_map,
             auth_settings=auth_settings,
             async_req=local_var_params.get('async_req'),
             _return_http_data_only=local_var_params.get('_return_http_data_only'),  # noqa: E501
             _preload_content=local_var_params.get('_preload_content', True),
             _request_timeout=local_var_params.get('_request_timeout'),
-            collection_formats=collection_formats)
+            collection_formats=collection_formats,
+            _request_auth=local_var_params.get('_request_auth'))
 
     def upsert_reference_portfolio_constituents(self, scope, code, upsert_reference_portfolio_constituents_request, **kwargs):  # noqa: E501
         """Upsert reference portfolio constituents  # noqa: E501
@@ -460,23 +561,30 @@ class ReferencePortfolioApi(object):
         Add constituents to a reference portfolio.  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
+
         >>> thread = api.upsert_reference_portfolio_constituents(scope, code, upsert_reference_portfolio_constituents_request, async_req=True)
         >>> result = thread.get()
 
-        :param async_req bool: execute request asynchronously
-        :param str scope: The scope of the reference portfolio. (required)
-        :param str code: The code of the reference portfolio. Together with the scope this uniquely identifies              the reference portfolio. (required)
-        :param UpsertReferencePortfolioConstituentsRequest upsert_reference_portfolio_constituents_request: The constituents to upload to the reference portfolio. (required)
+        :param scope: The scope of the reference portfolio. (required)
+        :type scope: str
+        :param code: The code of the reference portfolio. Together with the scope this uniquely identifies              the reference portfolio. (required)
+        :type code: str
+        :param upsert_reference_portfolio_constituents_request: The constituents to upload to the reference portfolio. (required)
+        :type upsert_reference_portfolio_constituents_request: UpsertReferencePortfolioConstituentsRequest
+        :param async_req: Whether to execute the request asynchronously.
+        :type async_req: bool, optional
         :param _preload_content: if False, the urllib3.HTTPResponse object will
                                  be returned without reading/decoding response
                                  data. Default is True.
+        :type _preload_content: bool, optional
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
                                  (connection, read) timeouts.
-        :return: UpsertReferencePortfolioConstituentsResponse
+        :return: Returns the result object.
                  If the method is called asynchronously,
                  returns the request thread.
+        :rtype: UpsertReferencePortfolioConstituentsResponse
         """
         kwargs['_return_http_data_only'] = True
         return self.upsert_reference_portfolio_constituents_with_http_info(scope, code, upsert_reference_portfolio_constituents_request, **kwargs)  # noqa: E501
@@ -487,34 +595,55 @@ class ReferencePortfolioApi(object):
         Add constituents to a reference portfolio.  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
+
         >>> thread = api.upsert_reference_portfolio_constituents_with_http_info(scope, code, upsert_reference_portfolio_constituents_request, async_req=True)
         >>> result = thread.get()
 
-        :param async_req bool: execute request asynchronously
-        :param str scope: The scope of the reference portfolio. (required)
-        :param str code: The code of the reference portfolio. Together with the scope this uniquely identifies              the reference portfolio. (required)
-        :param UpsertReferencePortfolioConstituentsRequest upsert_reference_portfolio_constituents_request: The constituents to upload to the reference portfolio. (required)
+        :param scope: The scope of the reference portfolio. (required)
+        :type scope: str
+        :param code: The code of the reference portfolio. Together with the scope this uniquely identifies              the reference portfolio. (required)
+        :type code: str
+        :param upsert_reference_portfolio_constituents_request: The constituents to upload to the reference portfolio. (required)
+        :type upsert_reference_portfolio_constituents_request: UpsertReferencePortfolioConstituentsRequest
+        :param async_req: Whether to execute the request asynchronously.
+        :type async_req: bool, optional
         :param _return_http_data_only: response data without head status code
                                        and headers
+        :type _return_http_data_only: bool, optional
         :param _preload_content: if False, the urllib3.HTTPResponse object will
                                  be returned without reading/decoding response
                                  data. Default is True.
+        :type _preload_content: bool, optional
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
                                  (connection, read) timeouts.
-        :return: tuple(UpsertReferencePortfolioConstituentsResponse, status_code(int), headers(HTTPHeaderDict))
+        :param _request_auth: set to override the auth_settings for an a single
+                              request; this effectively ignores the authentication
+                              in the spec for a single request.
+        :type _request_auth: dict, optional
+        :return: Returns the result object.
                  If the method is called asynchronously,
                  returns the request thread.
+        :rtype: tuple(UpsertReferencePortfolioConstituentsResponse, status_code(int), headers(HTTPHeaderDict))
         """
 
         local_var_params = locals()
 
-        all_params = ['scope', 'code', 'upsert_reference_portfolio_constituents_request']  # noqa: E501
-        all_params.append('async_req')
-        all_params.append('_return_http_data_only')
-        all_params.append('_preload_content')
-        all_params.append('_request_timeout')
+        all_params = [
+            'scope',
+            'code',
+            'upsert_reference_portfolio_constituents_request'
+        ]
+        all_params.extend(
+            [
+                'async_req',
+                '_return_http_data_only',
+                '_preload_content',
+                '_request_timeout',
+                '_request_auth'
+            ]
+        )
 
         for key, val in six.iteritems(local_var_params['kwargs']):
             if key not in all_params:
@@ -525,25 +654,25 @@ class ReferencePortfolioApi(object):
             local_var_params[key] = val
         del local_var_params['kwargs']
         # verify the required parameter 'upsert_reference_portfolio_constituents_request' is set
-        if ('upsert_reference_portfolio_constituents_request' not in local_var_params or
-                local_var_params['upsert_reference_portfolio_constituents_request'] is None):
+        if self.api_client.client_side_validation and ('upsert_reference_portfolio_constituents_request' not in local_var_params or  # noqa: E501
+                                                        local_var_params['upsert_reference_portfolio_constituents_request'] is None):  # noqa: E501
             raise ApiValueError("Missing the required parameter `upsert_reference_portfolio_constituents_request` when calling `upsert_reference_portfolio_constituents`")  # noqa: E501
 
-        if ('scope' in local_var_params and
-                len(local_var_params['scope']) > 64):
+        if self.api_client.client_side_validation and ('scope' in local_var_params and  # noqa: E501
+                                                        len(local_var_params['scope']) > 64):  # noqa: E501
             raise ApiValueError("Invalid value for parameter `scope` when calling `upsert_reference_portfolio_constituents`, length must be less than or equal to `64`")  # noqa: E501
-        if ('scope' in local_var_params and
-                len(local_var_params['scope']) < 1):
+        if self.api_client.client_side_validation and ('scope' in local_var_params and  # noqa: E501
+                                                        len(local_var_params['scope']) < 1):  # noqa: E501
             raise ApiValueError("Invalid value for parameter `scope` when calling `upsert_reference_portfolio_constituents`, length must be greater than or equal to `1`")  # noqa: E501
-        if 'scope' in local_var_params and not re.search(r'^[a-zA-Z0-9\-_]+$', local_var_params['scope']):  # noqa: E501
+        if self.api_client.client_side_validation and 'scope' in local_var_params and not re.search(r'^[a-zA-Z0-9\-_]+$', local_var_params['scope']):  # noqa: E501
             raise ApiValueError("Invalid value for parameter `scope` when calling `upsert_reference_portfolio_constituents`, must conform to the pattern `/^[a-zA-Z0-9\-_]+$/`")  # noqa: E501
-        if ('code' in local_var_params and
-                len(local_var_params['code']) > 64):
+        if self.api_client.client_side_validation and ('code' in local_var_params and  # noqa: E501
+                                                        len(local_var_params['code']) > 64):  # noqa: E501
             raise ApiValueError("Invalid value for parameter `code` when calling `upsert_reference_portfolio_constituents`, length must be less than or equal to `64`")  # noqa: E501
-        if ('code' in local_var_params and
-                len(local_var_params['code']) < 1):
+        if self.api_client.client_side_validation and ('code' in local_var_params and  # noqa: E501
+                                                        len(local_var_params['code']) < 1):  # noqa: E501
             raise ApiValueError("Invalid value for parameter `code` when calling `upsert_reference_portfolio_constituents`, length must be greater than or equal to `1`")  # noqa: E501
-        if 'code' in local_var_params and not re.search(r'^[a-zA-Z0-9\-_]+$', local_var_params['code']):  # noqa: E501
+        if self.api_client.client_side_validation and 'code' in local_var_params and not re.search(r'^[a-zA-Z0-9\-_]+$', local_var_params['code']):  # noqa: E501
             raise ApiValueError("Invalid value for parameter `code` when calling `upsert_reference_portfolio_constituents`, must conform to the pattern `/^[a-zA-Z0-9\-_]+$/`")  # noqa: E501
         collection_formats = {}
 
@@ -573,12 +702,17 @@ class ReferencePortfolioApi(object):
         header_params['Content-Type'] = self.api_client.select_header_content_type(  # noqa: E501
             ['application/json-patch+json', 'application/json', 'text/json', 'application/*+json'])  # noqa: E501
 
-        # Authentication setting
-        auth_settings = ['oauth2']  # noqa: E501
-
         # set the LUSID header
         header_params['X-LUSID-SDK-Language'] = 'Python'
         header_params['X-LUSID-SDK-Version'] = '0.11.3412'
+
+        # Authentication setting
+        auth_settings = ['oauth2']  # noqa: E501
+        
+        response_types_map = {
+            200: "UpsertReferencePortfolioConstituentsResponse",
+            400: "LusidValidationProblemDetails",
+        }
 
         return self.api_client.call_api(
             '/api/referenceportfolios/{scope}/{code}/constituents', 'POST',
@@ -588,10 +722,11 @@ class ReferencePortfolioApi(object):
             body=body_params,
             post_params=form_params,
             files=local_var_files,
-            response_type='UpsertReferencePortfolioConstituentsResponse',  # noqa: E501
+            response_types_map=response_types_map,
             auth_settings=auth_settings,
             async_req=local_var_params.get('async_req'),
             _return_http_data_only=local_var_params.get('_return_http_data_only'),  # noqa: E501
             _preload_content=local_var_params.get('_preload_content', True),
             _request_timeout=local_var_params.get('_request_timeout'),
-            collection_formats=collection_formats)
+            collection_formats=collection_formats,
+            _request_auth=local_var_params.get('_request_auth'))
