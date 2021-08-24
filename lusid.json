@@ -9,7 +9,7 @@
       "url": "https://www.finbourne.com",
       "email": "info@finbourne.com"
     },
-    "version": "0.11.3422",
+    "version": "0.11.3423",
     "x-logo": {
       "url": "https://content.finbourne.com/LUSID-header.png",
       "backgroundColor": "#415464"
@@ -17,7 +17,7 @@
   },
   "servers": [
     {
-      "url": "http://local-unit-test-server.lusid.com:62546"
+      "url": "http://local-unit-test-server.lusid.com:53089"
     }
   ],
   "paths": {
@@ -6447,7 +6447,7 @@
           }
         },
         "responses": {
-          "201": {
+          "200": {
             "description": "The updated definition of the portfolio group",
             "content": {
               "text/plain": {
