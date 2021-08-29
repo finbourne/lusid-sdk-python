@@ -1,5 +1,6 @@
 # CreatePortfolioDetails
 
+
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------

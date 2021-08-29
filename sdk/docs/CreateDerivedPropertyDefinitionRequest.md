@@ -1,5 +1,6 @@
 # CreateDerivedPropertyDefinitionRequest
 
+
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------

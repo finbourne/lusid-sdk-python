@@ -1,5 +1,6 @@
 # PortfolioGroupProperties
 
+
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------

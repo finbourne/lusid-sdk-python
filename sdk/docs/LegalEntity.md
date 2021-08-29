@@ -1,5 +1,7 @@
 # LegalEntity
 
+Representation of Legal Entity on LUSID API
+
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------

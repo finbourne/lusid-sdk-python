@@ -1,6 +1,6 @@
 # lusid.LegalEntitiesApi
 
-All URIs are relative to *https://fbn-prd.lusid.com/api*
+All URIs are relative to *http://local-unit-test-server.lusid.com:53397*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
@@ -26,24 +26,37 @@ import time
 import lusid
 from lusid.rest import ApiException
 from pprint import pprint
-configuration = lusid.Configuration()
+# Defining the host is optional and defaults to http://local-unit-test-server.lusid.com:53397
+# See configuration.py for a list of all supported configuration parameters.
+configuration = lusid.Configuration(
+    host = "http://local-unit-test-server.lusid.com:53397"
+)
+
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
+
 # Configure OAuth2 access token for authorization: oauth2
+configuration = lusid.Configuration(
+    host = "http://local-unit-test-server.lusid.com:53397"
+)
 configuration.access_token = 'YOUR_ACCESS_TOKEN'
 
-# Defining host is optional and default to https://fbn-prd.lusid.com/api
-configuration.host = "https://fbn-prd.lusid.com/api"
-# Create an instance of the API class
-api_instance = lusid.LegalEntitiesApi(lusid.ApiClient(configuration))
-id_type_scope = 'id_type_scope_example' # str | The scope of the legal entity identifier type.
+# Enter a context with an instance of the API client
+with lusid.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = lusid.LegalEntitiesApi(api_client)
+    id_type_scope = 'id_type_scope_example' # str | The scope of the legal entity identifier type.
 id_type_code = 'id_type_code_example' # str | The code of the legal entity identifier type.
 code = 'code_example' # str | Code of the legal entity under specified identifier type's scope and code. This together with defined              identifier type uniquely identifies the legal entity to delete.
 
-try:
-    # [EARLY ACCESS] Delete Legal Entity
-    api_response = api_instance.delete_legal_entity(id_type_scope, id_type_code, code)
-    pprint(api_response)
-except ApiException as e:
-    print("Exception when calling LegalEntitiesApi->delete_legal_entity: %s\n" % e)
+    try:
+        # [EARLY ACCESS] Delete Legal Entity
+        api_response = api_instance.delete_legal_entity(id_type_scope, id_type_code, code)
+        pprint(api_response)
+    except ApiException as e:
+        print("Exception when calling LegalEntitiesApi->delete_legal_entity: %s\n" % e)
 ```
 
 ### Parameters
@@ -92,27 +105,40 @@ import time
 import lusid
 from lusid.rest import ApiException
 from pprint import pprint
-configuration = lusid.Configuration()
+# Defining the host is optional and defaults to http://local-unit-test-server.lusid.com:53397
+# See configuration.py for a list of all supported configuration parameters.
+configuration = lusid.Configuration(
+    host = "http://local-unit-test-server.lusid.com:53397"
+)
+
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
+
 # Configure OAuth2 access token for authorization: oauth2
+configuration = lusid.Configuration(
+    host = "http://local-unit-test-server.lusid.com:53397"
+)
 configuration.access_token = 'YOUR_ACCESS_TOKEN'
 
-# Defining host is optional and default to https://fbn-prd.lusid.com/api
-configuration.host = "https://fbn-prd.lusid.com/api"
-# Create an instance of the API class
-api_instance = lusid.LegalEntitiesApi(lusid.ApiClient(configuration))
-id_type_scope = 'id_type_scope_example' # str | Scope of the legal entity identifier type.
+# Enter a context with an instance of the API client
+with lusid.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = lusid.LegalEntitiesApi(api_client)
+    id_type_scope = 'id_type_scope_example' # str | Scope of the legal entity identifier type.
 id_type_code = 'id_type_code_example' # str | Code of the legal entity identifier type.
 code = 'code_example' # str | Code of the legal entity under specified identifier type's scope and code. This together with stated identifier type uniquely              identifies the legal entity.
 property_keys = ['property_keys_example'] # list[str] | A list of property keys or identifier types (as property keys) from the \"LegalEntity\" domain to include for found legal entity.              These take the format {domain}/{scope}/{code} e.g. \"LegalEntity/ContactDetails/Address\". (optional)
 effective_at = 'effective_at_example' # str | The effective datetime or cut label at which to retrieve the legal entity. Defaults to the current LUSID system datetime if not specified. (optional)
 as_at = '2013-10-20T19:20:30+01:00' # datetime | The asAt datetime at which to retrieve the legal entity. Defaults to return the latest version of the legal entity if not specified. (optional)
 
-try:
-    # [EARLY ACCESS] Get Legal Entity
-    api_response = api_instance.get_legal_entity(id_type_scope, id_type_code, code, property_keys=property_keys, effective_at=effective_at, as_at=as_at)
-    pprint(api_response)
-except ApiException as e:
-    print("Exception when calling LegalEntitiesApi->get_legal_entity: %s\n" % e)
+    try:
+        # [EARLY ACCESS] Get Legal Entity
+        api_response = api_instance.get_legal_entity(id_type_scope, id_type_code, code, property_keys=property_keys, effective_at=effective_at, as_at=as_at)
+        pprint(api_response)
+    except ApiException as e:
+        print("Exception when calling LegalEntitiesApi->get_legal_entity: %s\n" % e)
 ```
 
 ### Parameters
@@ -164,15 +190,28 @@ import time
 import lusid
 from lusid.rest import ApiException
 from pprint import pprint
-configuration = lusid.Configuration()
+# Defining the host is optional and defaults to http://local-unit-test-server.lusid.com:53397
+# See configuration.py for a list of all supported configuration parameters.
+configuration = lusid.Configuration(
+    host = "http://local-unit-test-server.lusid.com:53397"
+)
+
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
+
 # Configure OAuth2 access token for authorization: oauth2
+configuration = lusid.Configuration(
+    host = "http://local-unit-test-server.lusid.com:53397"
+)
 configuration.access_token = 'YOUR_ACCESS_TOKEN'
 
-# Defining host is optional and default to https://fbn-prd.lusid.com/api
-configuration.host = "https://fbn-prd.lusid.com/api"
-# Create an instance of the API class
-api_instance = lusid.LegalEntitiesApi(lusid.ApiClient(configuration))
-id_type_scope = 'id_type_scope_example' # str | Scope of the legal entity identifier type.
+# Enter a context with an instance of the API client
+with lusid.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = lusid.LegalEntitiesApi(api_client)
+    id_type_scope = 'id_type_scope_example' # str | Scope of the legal entity identifier type.
 id_type_code = 'id_type_code_example' # str | Code of the legal entity identifier type.
 effective_at = 'effective_at_example' # str | The effective datetime or cut label at which to list the people. Defaults to the current LUSID              system datetime if not specified. (optional)
 as_at = '2013-10-20T19:20:30+01:00' # datetime | The asAt datetime at which to list the people. Defaults to return the latest version              of each people if not specified. (optional)
@@ -181,12 +220,12 @@ limit = 56 # int | When paginating, limit the number of returned results to this
 filter = 'filter_example' # str | Expression to filter the result set.               Read more about filtering results from LUSID here https://support.lusid.com/filtering-results-from-lusid. (optional)
 property_keys = ['property_keys_example'] # list[str] | A list of property keys or identifier types (as property keys) from the \"LegalEntity\" domain to include for each legal entity.              These take the format {domain}/{scope}/{code} e.g. \"LegalEntity/ContactDetails/Address\". (optional)
 
-try:
-    # [EARLY ACCESS] List Legal Entities
-    api_response = api_instance.list_legal_entities(id_type_scope, id_type_code, effective_at=effective_at, as_at=as_at, page=page, limit=limit, filter=filter, property_keys=property_keys)
-    pprint(api_response)
-except ApiException as e:
-    print("Exception when calling LegalEntitiesApi->list_legal_entities: %s\n" % e)
+    try:
+        # [EARLY ACCESS] List Legal Entities
+        api_response = api_instance.list_legal_entities(id_type_scope, id_type_code, effective_at=effective_at, as_at=as_at, page=page, limit=limit, filter=filter, property_keys=property_keys)
+        pprint(api_response)
+    except ApiException as e:
+        print("Exception when calling LegalEntitiesApi->list_legal_entities: %s\n" % e)
 ```
 
 ### Parameters
@@ -240,22 +279,35 @@ import time
 import lusid
 from lusid.rest import ApiException
 from pprint import pprint
-configuration = lusid.Configuration()
+# Defining the host is optional and defaults to http://local-unit-test-server.lusid.com:53397
+# See configuration.py for a list of all supported configuration parameters.
+configuration = lusid.Configuration(
+    host = "http://local-unit-test-server.lusid.com:53397"
+)
+
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
+
 # Configure OAuth2 access token for authorization: oauth2
+configuration = lusid.Configuration(
+    host = "http://local-unit-test-server.lusid.com:53397"
+)
 configuration.access_token = 'YOUR_ACCESS_TOKEN'
 
-# Defining host is optional and default to https://fbn-prd.lusid.com/api
-configuration.host = "https://fbn-prd.lusid.com/api"
-# Create an instance of the API class
-api_instance = lusid.LegalEntitiesApi(lusid.ApiClient(configuration))
-upsert_legal_entity_request = {"identifiers":{"legalEntity/ExternalIdentifier/LEI":{"key":"LegalEntity/ExternalIdentifier/LEI","value":{"labelValue":"LEI_12345678"}},"legalEntity/InternalIdentifier/InternalLeiId":{"key":"LegalEntity/InternalIdentifier/InternalLeiId","value":{"labelValue":"Internal_XHSP2038"}}},"properties":{"legalEntity/Details/Name":{"key":"LegalEntity/Details/Name","value":{"labelValue":"Legal Entity Inc."}},"legalEntity/Details/Country":{"key":"LegalEntity/Details/Country","value":{"labelValue":"United Kingdom"},"effectiveFrom":"2016-01-01T00:00:00.0000000+00:00"},"legalEntity/Status/Active":{"key":"LegalEntity/Status/Active","value":{"labelValue":"Active"},"effectiveFrom":"2016-07-01T00:00:00.0000000+00:00"}},"displayName":"LegalEntity1DisplayName","description":"LegalEntity1Description","counterpartyRiskInformation":{"countryOfRisk":"UnitedKingdom","creditRatings":[{"ratingSource":"StandardAndPoors","rating":"AA+"}],"industryClassifiers":[{"classificationSystemName":"GICS2018","classificationCode":"10101010"}]}} # UpsertLegalEntityRequest | Request to create or update a legal entity.
+# Enter a context with an instance of the API client
+with lusid.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = lusid.LegalEntitiesApi(api_client)
+    upsert_legal_entity_request = {"identifiers":{"legalEntity/ExternalIdentifier/LEI":{"key":"LegalEntity/ExternalIdentifier/LEI","value":{"labelValue":"LEI_12345678"}},"legalEntity/InternalIdentifier/InternalLeiId":{"key":"LegalEntity/InternalIdentifier/InternalLeiId","value":{"labelValue":"Internal_XHSP2038"}}},"properties":{"legalEntity/Details/Name":{"key":"LegalEntity/Details/Name","value":{"labelValue":"Legal Entity Inc."}},"legalEntity/Details/Country":{"key":"LegalEntity/Details/Country","value":{"labelValue":"United Kingdom"},"effectiveFrom":"2016-01-01T00:00:00.0000000+00:00"},"legalEntity/Status/Active":{"key":"LegalEntity/Status/Active","value":{"labelValue":"Active"},"effectiveFrom":"2016-07-01T00:00:00.0000000+00:00"}},"displayName":"LegalEntity1DisplayName","description":"LegalEntity1Description","counterpartyRiskInformation":{"countryOfRisk":"UnitedKingdom","creditRatings":[{"ratingSource":"StandardAndPoors","rating":"AA+"}],"industryClassifiers":[{"classificationSystemName":"GICS2018","classificationCode":"10101010"}]}} # UpsertLegalEntityRequest | Request to create or update a legal entity.
 
-try:
-    # [EARLY ACCESS] Upsert Legal Entity
-    api_response = api_instance.upsert_legal_entity(upsert_legal_entity_request)
-    pprint(api_response)
-except ApiException as e:
-    print("Exception when calling LegalEntitiesApi->upsert_legal_entity: %s\n" % e)
+    try:
+        # [EARLY ACCESS] Upsert Legal Entity
+        api_response = api_instance.upsert_legal_entity(upsert_legal_entity_request)
+        pprint(api_response)
+    except ApiException as e:
+        print("Exception when calling LegalEntitiesApi->upsert_legal_entity: %s\n" % e)
 ```
 
 ### Parameters

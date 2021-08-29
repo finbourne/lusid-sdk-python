@@ -1,5 +1,7 @@
 # PortfolioHolding
 
+A list of holdings.
+
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
