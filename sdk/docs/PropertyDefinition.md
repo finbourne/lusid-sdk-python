@@ -12,7 +12,7 @@ Name | Type | Description | Notes
 **data_type_id** | [**ResourceId**](ResourceId.md) |  | [optional] 
 **type** | **str** | The type of the property. The available values are: Label, Metric, Information | [optional] 
 **unit_schema** | **str** | The units that can be associated with the property&#39;s values. This is defined by the property&#39;s data type. The available values are: NoUnits, Basic, Iso4217Currency | [optional] 
-**domain** | **str** | The domain that the property exists in. The available values are: NotDefined, Transaction, Portfolio, Holding, ReferenceHolding, TransactionConfiguration, Instrument, CutLabelDefinition, Analytic, PortfolioGroup, Person, AccessMetadata, Order, UnitResult, MarketData, ConfigurationRecipe, Allocation, Calendar, LegalEntity, Placement, Execution, Block, Participation, Package, OrderInstruction, CustomEntity | [optional] 
+**domain** | **str** | The domain that the property exists in. The available values are: NotDefined, Transaction, Portfolio, Holding, ReferenceHolding, TransactionConfiguration, Instrument, CutLabelDefinition, Analytic, PortfolioGroup, Person, AccessMetadata, Order, UnitResult, MarketData, ConfigurationRecipe, Allocation, Calendar, LegalEntity, Placement, Execution, Block, Participation, Package, OrderInstruction | [optional] 
 **scope** | **str** | The scope that the property exists in. | [optional] [readonly] 
 **code** | **str** | The code of the property. Together with the domain and scope this uniquely identifies the property. | [optional] [readonly] 
 **value_required** | **bool** | Whether or not a value is always required for this property. | [optional] 
