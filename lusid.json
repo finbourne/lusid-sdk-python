@@ -9,7 +9,7 @@
       "url": "https://www.finbourne.com",
       "email": "info@finbourne.com"
     },
-    "version": "0.11.3456",
+    "version": "0.11.3457",
     "x-logo": {
       "url": "https://content.finbourne.com/LUSID-header.png",
       "backgroundColor": "#415464"
@@ -17,7 +17,7 @@
   },
   "servers": [
     {
-      "url": "http://local-unit-test-server.lusid.com:53463"
+      "url": "http://local-unit-test-server.lusid.com:51720"
     }
   ],
   "paths": {
@@ -28768,6 +28768,10 @@
       "description": "Methods for interacting with Executions. This is experimental functionality, with limited documentation presently. An Execution represents a market's fill of a street order. Executions are treated monotemporally; any updates are effective at the as-at time of update, and its not possible to make retroactive (or forward) changes."
     },
     {
+      "name": "FeesAndCommissions",
+      "description": "Methods for storage and retrieval of Fees and Commissions rules"
+    },
+    {
       "name": "Instruments",
       "description": "An instrument represents a financial asset that an investor owns or has exposure to. Each transaction should be booked against an instrument stored in the LUSID instrument master. For more information, see https://support.lusid.com/knowledgebase/article/KA-01857."
     },
@@ -28896,6 +28900,7 @@
       "Derived Transaction Portfolios",
       "Entities",
       "Executions",
+      "FeesAndCommissions",
       "Instruments",
       "Legal Entities",
       "Login",
