@@ -2,9 +2,10 @@ import unittest
 from collections import UserString
 from datetime import datetime
 from unittest.mock import patch
+from urllib3 import PoolManager
 from parameterized import parameterized
 from threading import Thread
-from lusid import InstrumentsApi, ResourceListOfInstrumentIdTypeDescriptor
+from lusid import InstrumentsApi, ResourceListOfInstrumentIdTypeDescriptor, TCPKeepAlivePoolManager
 from lusid.utilities import ApiClientFactory
 
 from utilities import TokenUtilities as tu, CredentialsSource
@@ -228,6 +229,21 @@ class ApiFactory(unittest.TestCase):
             self.validate_api(api)
             self.assertTrue("CorrelationId" in api.api_client.default_headers, msg="CorrelationId not found in headers")
             self.assertEquals(api.api_client.default_headers["CorrelationId"], "param-correlation-id")
+
+    def test_get_api_with_tcp_keep_alive(self):
+        api_factory = ApiClientFactory(
+            api_secrets_filename=CredentialsSource.secrets_path(),
+            tcp_keep_alive=True
+        )
+        # Make sure tcp_keep_alive was passed through all of the layers
+        self.assertTrue(api_factory.api_client.configuration.tcp_keep_alive)
+        self.assertIsInstance(api_factory.api_client.rest_client.pool_manager, TCPKeepAlivePoolManager)
+
+    def test_get_api_without_tcp_keep_alive(self):
+        api_factory = ApiClientFactory(api_secrets_filename=CredentialsSource.secrets_path())
+        # Make sure tcp_keep_alive was passed through all of the layers
+        self.assertFalse(api_factory.api_client.configuration.tcp_keep_alive)
+        self.assertIsInstance(api_factory.api_client.rest_client.pool_manager, PoolManager)
 
     def test_use_apifactory_multiple_threads(self):
 

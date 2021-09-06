@@ -95,6 +95,7 @@ class Configuration(object):
                  server_index=None, server_variables=None,
                  server_operation_index=None, server_operation_variables=None,
                  ssl_ca_cert=None,
+                 tcp_keep_alive=False,
                  ):
         """Constructor
         """
@@ -198,6 +199,9 @@ class Configuration(object):
         """
         # Enable client side validation
         self.client_side_validation = True
+
+        # Set TCP keep alive
+        self.tcp_keep_alive = tcp_keep_alive
 
         self.socket_options = None
         """Options to pass down to the underlying urllib3 socket
