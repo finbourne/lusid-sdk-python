@@ -43,7 +43,6 @@ class TCPKeepAliveValidationMethods:
             conn.sock.setsockopt(socket.IPPROTO_TCP, socket.TCP_KEEPIDLE, TCP_KEEP_IDLE)
             conn.sock.setsockopt(socket.IPPROTO_TCP, socket.TCP_KEEPINTVL, TCP_KEEPALIVE_INTERVAL)
             conn.sock.setsockopt(socket.IPPROTO_TCP, socket.TCP_KEEPCNT, TCP_KEEP_CNT)
-            pass
 
         # TCP Keep Alive Probes for Windows OS
         elif platform == 'win32' and hasattr(socket, "SIO_KEEPALIVE_VALS") and getattr(conn.sock, "ioctl", None) is not None:
