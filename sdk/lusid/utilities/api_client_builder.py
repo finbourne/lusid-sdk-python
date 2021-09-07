@@ -36,13 +36,15 @@ class ApiClientBuilder:
                 f"variables")
 
     @classmethod
-    def build(cls, api_secrets_filename=None, id_provider_response_handler=None, api_configuration=None, token=None, correlation_id=None):
+    def build(cls, api_secrets_filename=None, id_provider_response_handler=None, api_configuration=None,
+              token=None, correlation_id=None, tcp_keep_alive=False):
         """
         :param str api_secrets_filename: The full path to the JSON file containing the API credentials and optional proxy details
         :param typing.callable id_provider_response_handler: An optional function to handle the Okta response
         :param lusid.utilities.ApiConfiguration api_configuration: A pre-populated ApiConfiguration
         :param str token: The pre-populated access token to use instead of asking Okta for a token
         :param str correlation_id: Correlation id for all calls made from the returned ApiClient instance, added as a header to each request
+        :param bool tcp_keep_alive: A flag that controls if the API client uses tcp keep-alive probes
 
         :return: lusid.ApiClient: The configured LUSID ApiClient
         """
@@ -79,7 +81,7 @@ class ApiClientBuilder:
             )
 
         # Initialise the API client using the token so that it can be included in all future requests
-        config = Configuration()
+        config = Configuration(tcp_keep_alive=tcp_keep_alive)
         config.access_token = api_token
         config.host = configuration.api_url
 

@@ -28,6 +28,7 @@ class ApiClientFactory:
         :param str proxy_url: The url of the proxy to use including the port e.g. http://myproxy.com:8888
         :param str proxy_username: The username for the proxy to use
         :param str proxy_password: The password for the proxy to use
+        :param bool tcp_keep_alive: A flag for controlling if the API client uses TCP keep-alive probes
         """
 
         builder_kwargs = {}
@@ -53,6 +54,8 @@ class ApiClientFactory:
 
         # add the correlation id if specified
         builder_kwargs["correlation_id"] = kwargs.get("correlation_id", None)
+
+        builder_kwargs["tcp_keep_alive"] = kwargs.get("tcp_keep_alive", False)
 
         # Call the client builder, this will result in using either a token, secrets file or environment variables
         self.api_client = ApiClientBuilder.build(**builder_kwargs)
