@@ -9,7 +9,7 @@
       "url": "https://www.finbourne.com",
       "email": "info@finbourne.com"
     },
-    "version": "0.11.3456",
+    "version": "0.11.3462",
     "x-logo": {
       "url": "https://content.finbourne.com/LUSID-header.png",
       "backgroundColor": "#415464"
@@ -17,7 +17,7 @@
   },
   "servers": [
     {
-      "url": "http://local-unit-test-server.lusid.com:53463"
+      "url": "https://fbn-prd.lusid.com/api"
     }
   ],
   "paths": {
@@ -28688,7 +28688,7 @@
         "description": "OAuth2 Implicit Grant",
         "flows": {
           "implicit": {
-            "authorizationUrl": "https://dummyurl.lusid.com/",
+            "authorizationUrl": "https://lusid.okta.com/oauth2/default/v1/authorize",
             "scopes": {}
           }
         }
@@ -28766,6 +28766,10 @@
     {
       "name": "Executions",
       "description": "Methods for interacting with Executions. This is experimental functionality, with limited documentation presently. An Execution represents a market's fill of a street order. Executions are treated monotemporally; any updates are effective at the as-at time of update, and its not possible to make retroactive (or forward) changes."
+    },
+    {
+      "name": "FeesAndCommissions",
+      "description": "Methods for storage and retrieval of Fees and Commissions rules"
     },
     {
       "name": "Instruments",
@@ -28896,6 +28900,7 @@
       "Derived Transaction Portfolios",
       "Entities",
       "Executions",
+      "FeesAndCommissions",
       "Instruments",
       "Legal Entities",
       "Login",
