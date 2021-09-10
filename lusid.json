@@ -9,7 +9,7 @@
       "url": "https://www.finbourne.com",
       "email": "info@finbourne.com"
     },
-    "version": "0.11.3469",
+    "version": "0.11.3470",
     "x-logo": {
       "url": "https://content.finbourne.com/LUSID-header.png",
       "backgroundColor": "#415464"
@@ -17,7 +17,7 @@
   },
   "servers": [
     {
-      "url": "http://local-unit-test-server.lusid.com:59385"
+      "url": "http://local-unit-test-server.lusid.com:31634"
     }
   ],
   "paths": {
@@ -29024,10 +29024,6 @@
       "description": "Methods providing Search capability."
     },
     {
-      "name": "Sequences",
-      "description": "Methods for generating and using sequences."
-    },
-    {
       "name": "Structured Market Data",
       "description": "Methods for the storage and retrieval of structured market data documents. Read more about these in the LUSID Knowledge Base here https://support.lusid.com/knowledgebase/article/KA-01894."
     },
@@ -29091,7 +29087,6 @@
       "Schemas",
       "Scopes",
       "Search",
-      "Sequences",
       "Structured Market Data",
       "Structured Result Data",
       "System Configuration",
