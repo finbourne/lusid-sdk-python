@@ -108,7 +108,7 @@ class Properties(unittest.TestCase):
         metric_property_definition_result = self.property_definitions_api.create_property_definition(metric_property_definition)
 
         # create the property values
-        metric_property_value_request = models.PropertyValue(metric_value=models.MetricValue(value="289884350.173235074209"))
+        metric_property_value_request = models.PropertyValue(metric_value=models.MetricValue(value=289884350.173235074209))
         # metric_property_value_request = models.PropertyValue(label_value="Active")
 
         # Details of the new portfolio to be created, created here with the minimum set of mandatory fields
