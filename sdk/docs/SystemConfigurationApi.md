@@ -1,6 +1,6 @@
 # lusid.SystemConfigurationApi
 
-All URIs are relative to *http://local-unit-test-server.lusid.com:60569*
+All URIs are relative to *http://local-unit-test-server.lusid.com:60231*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
@@ -24,10 +24,10 @@ import time
 import lusid
 from lusid.rest import ApiException
 from pprint import pprint
-# Defining the host is optional and defaults to http://local-unit-test-server.lusid.com:60569
+# Defining the host is optional and defaults to http://local-unit-test-server.lusid.com:60231
 # See configuration.py for a list of all supported configuration parameters.
 configuration = lusid.Configuration(
-    host = "http://local-unit-test-server.lusid.com:60569"
+    host = "http://local-unit-test-server.lusid.com:60231"
 )
 
 # The client must configure the authentication and authorization parameters
@@ -37,7 +37,7 @@ configuration = lusid.Configuration(
 
 # Configure OAuth2 access token for authorization: oauth2
 configuration = lusid.Configuration(
-    host = "http://local-unit-test-server.lusid.com:60569"
+    host = "http://local-unit-test-server.lusid.com:60231"
 )
 configuration.access_token = 'YOUR_ACCESS_TOKEN'
 
@@ -45,7 +45,7 @@ configuration.access_token = 'YOUR_ACCESS_TOKEN'
 with lusid.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = lusid.SystemConfigurationApi(api_client)
-    transaction_configuration_data_request = {"aliases":[{"type":"Another-Sell","description":"Sale","transactionClass":"MyDefault","transactionGroup":"MyGroup","transactionRoles":"LongShorter"}],"movements":[{"movementTypes":"StockMovement","side":"Side1","direction":-1,"properties":{},"mappings":[]},{"movementTypes":"CashCommitment","side":"Side2","direction":1,"properties":{},"mappings":[]}],"properties":{}} # TransactionConfigurationDataRequest | A transaction type definition. (optional)
+    transaction_configuration_data_request = {"aliases":[{"type":"Another-Sell","description":"Sale","transactionClass":"MyDefault","transactionGroup":"MyGroup","transactionRoles":"LongShorter","isDefault":false}],"movements":[{"movementTypes":"StockMovement","side":"Side1","direction":-1,"properties":{},"mappings":[]},{"movementTypes":"CashCommitment","side":"Side2","direction":1,"properties":{},"mappings":[]}],"properties":{}} # TransactionConfigurationDataRequest | A transaction type definition. (optional)
 
     try:
         # [EARLY ACCESS] Create transaction type
@@ -99,10 +99,10 @@ import time
 import lusid
 from lusid.rest import ApiException
 from pprint import pprint
-# Defining the host is optional and defaults to http://local-unit-test-server.lusid.com:60569
+# Defining the host is optional and defaults to http://local-unit-test-server.lusid.com:60231
 # See configuration.py for a list of all supported configuration parameters.
 configuration = lusid.Configuration(
-    host = "http://local-unit-test-server.lusid.com:60569"
+    host = "http://local-unit-test-server.lusid.com:60231"
 )
 
 # The client must configure the authentication and authorization parameters
@@ -112,7 +112,7 @@ configuration = lusid.Configuration(
 
 # Configure OAuth2 access token for authorization: oauth2
 configuration = lusid.Configuration(
-    host = "http://local-unit-test-server.lusid.com:60569"
+    host = "http://local-unit-test-server.lusid.com:60231"
 )
 configuration.access_token = 'YOUR_ACCESS_TOKEN'
 

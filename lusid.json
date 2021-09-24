@@ -9,7 +9,7 @@
       "url": "https://www.finbourne.com",
       "email": "info@finbourne.com"
     },
-    "version": "0.11.3537",
+    "version": "0.11.3538",
     "x-logo": {
       "url": "https://content.finbourne.com/LUSID-header.png",
       "backgroundColor": "#415464"
@@ -17,7 +17,7 @@
   },
   "servers": [
     {
-      "url": "http://local-unit-test-server.lusid.com:60569"
+      "url": "http://local-unit-test-server.lusid.com:60231"
     }
   ],
   "paths": {
@@ -15586,7 +15586,8 @@
                     "description": "Sale",
                     "transactionClass": "MyDefault",
                     "transactionGroup": "MyGroup",
-                    "transactionRoles": "LongShorter"
+                    "transactionRoles": "LongShorter",
+                    "isDefault": false
                   }
                 ],
                 "movements": [
@@ -15619,7 +15620,8 @@
                     "description": "Sale",
                     "transactionClass": "MyDefault",
                     "transactionGroup": "MyGroup",
-                    "transactionRoles": "LongShorter"
+                    "transactionRoles": "LongShorter",
+                    "isDefault": false
                   }
                 ],
                 "movements": [
@@ -15652,7 +15654,8 @@
                     "description": "Sale",
                     "transactionClass": "MyDefault",
                     "transactionGroup": "MyGroup",
-                    "transactionRoles": "LongShorter"
+                    "transactionRoles": "LongShorter",
+                    "isDefault": false
                   }
                 ],
                 "movements": [
@@ -15685,7 +15688,8 @@
                     "description": "Sale",
                     "transactionClass": "MyDefault",
                     "transactionGroup": "MyGroup",
-                    "transactionRoles": "LongShorter"
+                    "transactionRoles": "LongShorter",
+                    "isDefault": false
                   }
                 ],
                 "movements": [
@@ -27966,6 +27970,10 @@
             ],
             "type": "string",
             "description": ". The available values are: None, LongLonger, LongShorter, ShortShorter, Shorter, ShortLonger, Longer, AllRoles"
+          },
+          "isDefault": {
+            "type": "boolean",
+            "description": "IsDefault is a flag that denotes the default alias for a group"
           }
         },
         "additionalProperties": false
