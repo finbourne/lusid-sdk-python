@@ -135,7 +135,8 @@ class Properties(unittest.TestCase):
         # Perform assertions on codes, keys, values and units
         self.assertEqual(portfolio_result.id.code, create_portfolio_request.code)
         self.assertEqual(list(portfolio_properties.keys())[0], metric_property_definition_result.key)
-        print(metric_property.value.metric_value.value)
+
         self.assertEqual(metric_property.value.metric_value.value, 289884350.17323506)
+        self.assertEqual(metric_property.value.metric_value.value, 289884350.173235074)
         self.assertEqual(metric_property.value.metric_value.unit, metric_property_value_request.metric_value.unit)
 
