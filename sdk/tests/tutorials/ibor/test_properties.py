@@ -101,14 +101,14 @@ class Properties(unittest.TestCase):
             display_name="fund NAV",
             life_time="Perpetual",
             value_required=False,
-            data_type_id=models.resource_id.ResourceId(scope="system", code="currencyAndAmount")
+            data_type_id=models.resource_id.ResourceId(scope="system", code="number")
         )
 
         # create property definitions
         metric_property_definition_result = self.property_definitions_api.create_property_definition(metric_property_definition)
 
         # create the property values
-        metric_property_value_request = models.PropertyValue(metric_value=models.MetricValue(value=1100000, unit="GBP"))
+        metric_property_value_request = models.PropertyValue(metric_value=models.MetricValue(value=289884350.173235074209))
         # metric_property_value_request = models.PropertyValue(label_value="Active")
 
         # Details of the new portfolio to be created, created here with the minimum set of mandatory fields
