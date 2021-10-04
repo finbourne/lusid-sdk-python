@@ -159,7 +159,7 @@ This is based on the [OpenAPI specification](https://github.com/OAI/OpenAPI-Spec
 
 If you want to generate the Python SDK locally from the FINBOURNE OpenAPI specification, see [github.com/finbourne/lusid-sdk-generators](https://github.com/finbourne/lusid-sdk-generators).
 
-## Build status
+## Build status 
 
 | branch | status |
 | --- | --- |
