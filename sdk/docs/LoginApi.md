@@ -1,16 +1,16 @@
 # lusid.LoginApi
 
-All URIs are relative to *http://local-unit-test-server.lusid.com:37599*
+All URIs are relative to *http://local-unit-test-server.lusid.com:57003*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
-[**get_saml_identity_provider_id**](LoginApi.md#get_saml_identity_provider_id) | **GET** /api/login/saml/{domain} | Get SAML Identity Provider
+[**get_saml_identity_provider_id**](LoginApi.md#get_saml_identity_provider_id) | **GET** /api/login/saml/{domain} | GetSamlIdentityProviderId: Get SAML Identity Provider
 
 
 # **get_saml_identity_provider_id**
 > str get_saml_identity_provider_id(domain)
 
-Get SAML Identity Provider
+GetSamlIdentityProviderId: Get SAML Identity Provider
 
 Get the unique identifier for the SAML 2.0 Identity Provider to be used for domain.
 
@@ -23,10 +23,10 @@ import time
 import lusid
 from lusid.rest import ApiException
 from pprint import pprint
-# Defining the host is optional and defaults to http://local-unit-test-server.lusid.com:37599
+# Defining the host is optional and defaults to http://local-unit-test-server.lusid.com:57003
 # See configuration.py for a list of all supported configuration parameters.
 configuration = lusid.Configuration(
-    host = "http://local-unit-test-server.lusid.com:37599"
+    host = "http://local-unit-test-server.lusid.com:57003"
 )
 
 # The client must configure the authentication and authorization parameters
@@ -36,7 +36,7 @@ configuration = lusid.Configuration(
 
 # Configure OAuth2 access token for authorization: oauth2
 configuration = lusid.Configuration(
-    host = "http://local-unit-test-server.lusid.com:37599"
+    host = "http://local-unit-test-server.lusid.com:57003"
 )
 configuration.access_token = 'YOUR_ACCESS_TOKEN'
 
@@ -47,7 +47,7 @@ with lusid.ApiClient(configuration) as api_client:
     domain = 'domain_example' # str | The domain that the user will be logging in to
 
     try:
-        # Get SAML Identity Provider
+        # GetSamlIdentityProviderId: Get SAML Identity Provider
         api_response = api_instance.get_saml_identity_provider_id(domain)
         pprint(api_response)
     except ApiException as e:

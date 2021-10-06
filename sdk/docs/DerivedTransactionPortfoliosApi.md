@@ -1,17 +1,17 @@
 # lusid.DerivedTransactionPortfoliosApi
 
-All URIs are relative to *http://local-unit-test-server.lusid.com:37599*
+All URIs are relative to *http://local-unit-test-server.lusid.com:57003*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
-[**create_derived_portfolio**](DerivedTransactionPortfoliosApi.md#create_derived_portfolio) | **POST** /api/derivedtransactionportfolios/{scope} | [EARLY ACCESS] Create derived portfolio
-[**delete_derived_portfolio_details**](DerivedTransactionPortfoliosApi.md#delete_derived_portfolio_details) | **DELETE** /api/derivedtransactionportfolios/{scope}/{code}/details | [EARLY ACCESS] Delete derived portfolio details
+[**create_derived_portfolio**](DerivedTransactionPortfoliosApi.md#create_derived_portfolio) | **POST** /api/derivedtransactionportfolios/{scope} | [EARLY ACCESS] CreateDerivedPortfolio: Create derived portfolio
+[**delete_derived_portfolio_details**](DerivedTransactionPortfoliosApi.md#delete_derived_portfolio_details) | **DELETE** /api/derivedtransactionportfolios/{scope}/{code}/details | [EARLY ACCESS] DeleteDerivedPortfolioDetails: Delete derived portfolio details
 
 
 # **create_derived_portfolio**
 > Portfolio create_derived_portfolio(scope, create_derived_transaction_portfolio_request=create_derived_transaction_portfolio_request)
 
-[EARLY ACCESS] Create derived portfolio
+[EARLY ACCESS] CreateDerivedPortfolio: Create derived portfolio
 
 Create a derived transaction portfolio from a parent transaction portfolio (which may itself be derived).
 
@@ -24,10 +24,10 @@ import time
 import lusid
 from lusid.rest import ApiException
 from pprint import pprint
-# Defining the host is optional and defaults to http://local-unit-test-server.lusid.com:37599
+# Defining the host is optional and defaults to http://local-unit-test-server.lusid.com:57003
 # See configuration.py for a list of all supported configuration parameters.
 configuration = lusid.Configuration(
-    host = "http://local-unit-test-server.lusid.com:37599"
+    host = "http://local-unit-test-server.lusid.com:57003"
 )
 
 # The client must configure the authentication and authorization parameters
@@ -37,7 +37,7 @@ configuration = lusid.Configuration(
 
 # Configure OAuth2 access token for authorization: oauth2
 configuration = lusid.Configuration(
-    host = "http://local-unit-test-server.lusid.com:37599"
+    host = "http://local-unit-test-server.lusid.com:57003"
 )
 configuration.access_token = 'YOUR_ACCESS_TOKEN'
 
@@ -49,7 +49,7 @@ with lusid.ApiClient(configuration) as api_client:
 create_derived_transaction_portfolio_request = {"displayName":"MyDerivedPortfolioName","description":"Example long form portfolio description","code":"MyDerivedPortfolioCode","parentPortfolioId":{"scope":"MyParentPortfolioScope","code":"MyParentPortfolioCode"},"created":"2018-03-05T00:00:00.0000000+00:00","corporateActionSourceId":{"scope":"MyScope","code":"MyCorporateActionSourceId"},"accountingMethod":"FirstInFirstOut","subHoldingKeys":["Transaction/MyScope/Strategy","Transaction/MyScope/SubAccount"]} # CreateDerivedTransactionPortfolioRequest | The definition of the derived transaction portfolio. (optional)
 
     try:
-        # [EARLY ACCESS] Create derived portfolio
+        # [EARLY ACCESS] CreateDerivedPortfolio: Create derived portfolio
         api_response = api_instance.create_derived_portfolio(scope, create_derived_transaction_portfolio_request=create_derived_transaction_portfolio_request)
         pprint(api_response)
     except ApiException as e:
@@ -88,7 +88,7 @@ Name | Type | Description  | Notes
 # **delete_derived_portfolio_details**
 > DeletedEntityResponse delete_derived_portfolio_details(scope, code, effective_at=effective_at)
 
-[EARLY ACCESS] Delete derived portfolio details
+[EARLY ACCESS] DeleteDerivedPortfolioDetails: Delete derived portfolio details
 
 Delete all the portfolio details for a derived transaction portfolio.
 
@@ -101,10 +101,10 @@ import time
 import lusid
 from lusid.rest import ApiException
 from pprint import pprint
-# Defining the host is optional and defaults to http://local-unit-test-server.lusid.com:37599
+# Defining the host is optional and defaults to http://local-unit-test-server.lusid.com:57003
 # See configuration.py for a list of all supported configuration parameters.
 configuration = lusid.Configuration(
-    host = "http://local-unit-test-server.lusid.com:37599"
+    host = "http://local-unit-test-server.lusid.com:57003"
 )
 
 # The client must configure the authentication and authorization parameters
@@ -114,7 +114,7 @@ configuration = lusid.Configuration(
 
 # Configure OAuth2 access token for authorization: oauth2
 configuration = lusid.Configuration(
-    host = "http://local-unit-test-server.lusid.com:37599"
+    host = "http://local-unit-test-server.lusid.com:57003"
 )
 configuration.access_token = 'YOUR_ACCESS_TOKEN'
 
@@ -127,7 +127,7 @@ code = 'code_example' # str | The code of the derived transaction portfolio. Tog
 effective_at = 'effective_at_example' # str | The effective date of the change. (optional)
 
     try:
-        # [EARLY ACCESS] Delete derived portfolio details
+        # [EARLY ACCESS] DeleteDerivedPortfolioDetails: Delete derived portfolio details
         api_response = api_instance.delete_derived_portfolio_details(scope, code, effective_at=effective_at)
         pprint(api_response)
     except ApiException as e:

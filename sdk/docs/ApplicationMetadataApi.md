@@ -1,18 +1,18 @@
 # lusid.ApplicationMetadataApi
 
-All URIs are relative to *http://local-unit-test-server.lusid.com:37599*
+All URIs are relative to *http://local-unit-test-server.lusid.com:57003*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
-[**get_excel_addin**](ApplicationMetadataApi.md#get_excel_addin) | **GET** /api/metadata/downloads/exceladdin | [EARLY ACCESS] Download Excel Addin
-[**get_lusid_versions**](ApplicationMetadataApi.md#get_lusid_versions) | **GET** /api/metadata/versions | [EARLY ACCESS] Get LUSID versions
-[**list_access_controlled_resources**](ApplicationMetadataApi.md#list_access_controlled_resources) | **GET** /api/metadata/access/resources | [EARLY ACCESS] Get resources available for access control
+[**get_excel_addin**](ApplicationMetadataApi.md#get_excel_addin) | **GET** /api/metadata/downloads/exceladdin | [EARLY ACCESS] GetExcelAddin: Download Excel Addin
+[**get_lusid_versions**](ApplicationMetadataApi.md#get_lusid_versions) | **GET** /api/metadata/versions | [EARLY ACCESS] GetLusidVersions: Get LUSID versions
+[**list_access_controlled_resources**](ApplicationMetadataApi.md#list_access_controlled_resources) | **GET** /api/metadata/access/resources | [EARLY ACCESS] ListAccessControlledResources: Get resources available for access control
 
 
 # **get_excel_addin**
 > FileResponse get_excel_addin(version=version)
 
-[EARLY ACCESS] Download Excel Addin
+[EARLY ACCESS] GetExcelAddin: Download Excel Addin
 
 Download the LUSID Excel Addin for Microsoft Excel. Not providing a specific value will return the latest version being returned
 
@@ -25,10 +25,10 @@ import time
 import lusid
 from lusid.rest import ApiException
 from pprint import pprint
-# Defining the host is optional and defaults to http://local-unit-test-server.lusid.com:37599
+# Defining the host is optional and defaults to http://local-unit-test-server.lusid.com:57003
 # See configuration.py for a list of all supported configuration parameters.
 configuration = lusid.Configuration(
-    host = "http://local-unit-test-server.lusid.com:37599"
+    host = "http://local-unit-test-server.lusid.com:57003"
 )
 
 # The client must configure the authentication and authorization parameters
@@ -38,7 +38,7 @@ configuration = lusid.Configuration(
 
 # Configure OAuth2 access token for authorization: oauth2
 configuration = lusid.Configuration(
-    host = "http://local-unit-test-server.lusid.com:37599"
+    host = "http://local-unit-test-server.lusid.com:57003"
 )
 configuration.access_token = 'YOUR_ACCESS_TOKEN'
 
@@ -49,7 +49,7 @@ with lusid.ApiClient(configuration) as api_client:
     version = 'version_example' # str | The requested version of the Excel plugin (optional)
 
     try:
-        # [EARLY ACCESS] Download Excel Addin
+        # [EARLY ACCESS] GetExcelAddin: Download Excel Addin
         api_response = api_instance.get_excel_addin(version=version)
         pprint(api_response)
     except ApiException as e:
@@ -87,7 +87,7 @@ Name | Type | Description  | Notes
 # **get_lusid_versions**
 > VersionSummaryDto get_lusid_versions()
 
-[EARLY ACCESS] Get LUSID versions
+[EARLY ACCESS] GetLusidVersions: Get LUSID versions
 
 Get the semantic versions associated with LUSID and its ecosystem
 
@@ -100,10 +100,10 @@ import time
 import lusid
 from lusid.rest import ApiException
 from pprint import pprint
-# Defining the host is optional and defaults to http://local-unit-test-server.lusid.com:37599
+# Defining the host is optional and defaults to http://local-unit-test-server.lusid.com:57003
 # See configuration.py for a list of all supported configuration parameters.
 configuration = lusid.Configuration(
-    host = "http://local-unit-test-server.lusid.com:37599"
+    host = "http://local-unit-test-server.lusid.com:57003"
 )
 
 # The client must configure the authentication and authorization parameters
@@ -113,7 +113,7 @@ configuration = lusid.Configuration(
 
 # Configure OAuth2 access token for authorization: oauth2
 configuration = lusid.Configuration(
-    host = "http://local-unit-test-server.lusid.com:37599"
+    host = "http://local-unit-test-server.lusid.com:57003"
 )
 configuration.access_token = 'YOUR_ACCESS_TOKEN'
 
@@ -123,7 +123,7 @@ with lusid.ApiClient(configuration) as api_client:
     api_instance = lusid.ApplicationMetadataApi(api_client)
     
     try:
-        # [EARLY ACCESS] Get LUSID versions
+        # [EARLY ACCESS] GetLusidVersions: Get LUSID versions
         api_response = api_instance.get_lusid_versions()
         pprint(api_response)
     except ApiException as e:
@@ -157,7 +157,7 @@ This endpoint does not need any parameter.
 # **list_access_controlled_resources**
 > ResourceListOfAccessControlledResource list_access_controlled_resources(filter=filter)
 
-[EARLY ACCESS] Get resources available for access control
+[EARLY ACCESS] ListAccessControlledResources: Get resources available for access control
 
 Get the comprehensive set of resources that are available for access control
 
@@ -170,10 +170,10 @@ import time
 import lusid
 from lusid.rest import ApiException
 from pprint import pprint
-# Defining the host is optional and defaults to http://local-unit-test-server.lusid.com:37599
+# Defining the host is optional and defaults to http://local-unit-test-server.lusid.com:57003
 # See configuration.py for a list of all supported configuration parameters.
 configuration = lusid.Configuration(
-    host = "http://local-unit-test-server.lusid.com:37599"
+    host = "http://local-unit-test-server.lusid.com:57003"
 )
 
 # The client must configure the authentication and authorization parameters
@@ -183,7 +183,7 @@ configuration = lusid.Configuration(
 
 # Configure OAuth2 access token for authorization: oauth2
 configuration = lusid.Configuration(
-    host = "http://local-unit-test-server.lusid.com:37599"
+    host = "http://local-unit-test-server.lusid.com:57003"
 )
 configuration.access_token = 'YOUR_ACCESS_TOKEN'
 
@@ -194,7 +194,7 @@ with lusid.ApiClient(configuration) as api_client:
     filter = 'filter_example' # str | Optional. Expression to filter the result set.               For example, to filter on the Application, use \"application eq 'string'\"              Read more about filtering results from LUSID here https://support.lusid.com/filtering-results-from-lusid. (optional)
 
     try:
-        # [EARLY ACCESS] Get resources available for access control
+        # [EARLY ACCESS] ListAccessControlledResources: Get resources available for access control
         api_response = api_instance.list_access_controlled_resources(filter=filter)
         pprint(api_response)
     except ApiException as e:

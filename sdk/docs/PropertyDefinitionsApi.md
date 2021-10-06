@@ -1,21 +1,21 @@
 # lusid.PropertyDefinitionsApi
 
-All URIs are relative to *http://local-unit-test-server.lusid.com:37599*
+All URIs are relative to *http://local-unit-test-server.lusid.com:57003*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
-[**create_derived_property_definition**](PropertyDefinitionsApi.md#create_derived_property_definition) | **POST** /api/propertydefinitions/derived | [EARLY ACCESS] Create derived property definition
-[**create_property_definition**](PropertyDefinitionsApi.md#create_property_definition) | **POST** /api/propertydefinitions | Create property definition
-[**delete_property_definition**](PropertyDefinitionsApi.md#delete_property_definition) | **DELETE** /api/propertydefinitions/{domain}/{scope}/{code} | Delete property definition
-[**get_multiple_property_definitions**](PropertyDefinitionsApi.md#get_multiple_property_definitions) | **GET** /api/propertydefinitions | Get multiple property definitions
-[**get_property_definition**](PropertyDefinitionsApi.md#get_property_definition) | **GET** /api/propertydefinitions/{domain}/{scope}/{code} | Get property definition
-[**update_property_definition**](PropertyDefinitionsApi.md#update_property_definition) | **PUT** /api/propertydefinitions/{domain}/{scope}/{code} | Update property definition
+[**create_derived_property_definition**](PropertyDefinitionsApi.md#create_derived_property_definition) | **POST** /api/propertydefinitions/derived | [EARLY ACCESS] CreateDerivedPropertyDefinition: Create derived property definition
+[**create_property_definition**](PropertyDefinitionsApi.md#create_property_definition) | **POST** /api/propertydefinitions | CreatePropertyDefinition: Create property definition
+[**delete_property_definition**](PropertyDefinitionsApi.md#delete_property_definition) | **DELETE** /api/propertydefinitions/{domain}/{scope}/{code} | DeletePropertyDefinition: Delete property definition
+[**get_multiple_property_definitions**](PropertyDefinitionsApi.md#get_multiple_property_definitions) | **GET** /api/propertydefinitions | GetMultiplePropertyDefinitions: Get multiple property definitions
+[**get_property_definition**](PropertyDefinitionsApi.md#get_property_definition) | **GET** /api/propertydefinitions/{domain}/{scope}/{code} | GetPropertyDefinition: Get property definition
+[**update_property_definition**](PropertyDefinitionsApi.md#update_property_definition) | **PUT** /api/propertydefinitions/{domain}/{scope}/{code} | UpdatePropertyDefinition: Update property definition
 
 
 # **create_derived_property_definition**
 > PropertyDefinition create_derived_property_definition(create_derived_property_definition_request)
 
-[EARLY ACCESS] Create derived property definition
+[EARLY ACCESS] CreateDerivedPropertyDefinition: Create derived property definition
 
 Define a new derived property.
 
@@ -28,10 +28,10 @@ import time
 import lusid
 from lusid.rest import ApiException
 from pprint import pprint
-# Defining the host is optional and defaults to http://local-unit-test-server.lusid.com:37599
+# Defining the host is optional and defaults to http://local-unit-test-server.lusid.com:57003
 # See configuration.py for a list of all supported configuration parameters.
 configuration = lusid.Configuration(
-    host = "http://local-unit-test-server.lusid.com:37599"
+    host = "http://local-unit-test-server.lusid.com:57003"
 )
 
 # The client must configure the authentication and authorization parameters
@@ -41,7 +41,7 @@ configuration = lusid.Configuration(
 
 # Configure OAuth2 access token for authorization: oauth2
 configuration = lusid.Configuration(
-    host = "http://local-unit-test-server.lusid.com:37599"
+    host = "http://local-unit-test-server.lusid.com:57003"
 )
 configuration.access_token = 'YOUR_ACCESS_TOKEN'
 
@@ -52,7 +52,7 @@ with lusid.ApiClient(configuration) as api_client:
     create_derived_property_definition_request = {"domain":"Instrument","scope":"MyScope","code":"MyDerivedPropertyName","displayName":"My Property Display Name","dataTypeId":{"scope":"system","code":"string"},"propertyDescription":"My Property Description","derivationFormula":"(Properties[Instrument/default/Price] * Properties[Instrument/default/Cost]) / Properties[Instrument/default/Shares]"} # CreateDerivedPropertyDefinitionRequest | The definition of the new derived property.
 
     try:
-        # [EARLY ACCESS] Create derived property definition
+        # [EARLY ACCESS] CreateDerivedPropertyDefinition: Create derived property definition
         api_response = api_instance.create_derived_property_definition(create_derived_property_definition_request)
         pprint(api_response)
     except ApiException as e:
@@ -90,7 +90,7 @@ Name | Type | Description  | Notes
 # **create_property_definition**
 > PropertyDefinition create_property_definition(create_property_definition_request)
 
-Create property definition
+CreatePropertyDefinition: Create property definition
 
 Define a new property.
 
@@ -103,10 +103,10 @@ import time
 import lusid
 from lusid.rest import ApiException
 from pprint import pprint
-# Defining the host is optional and defaults to http://local-unit-test-server.lusid.com:37599
+# Defining the host is optional and defaults to http://local-unit-test-server.lusid.com:57003
 # See configuration.py for a list of all supported configuration parameters.
 configuration = lusid.Configuration(
-    host = "http://local-unit-test-server.lusid.com:37599"
+    host = "http://local-unit-test-server.lusid.com:57003"
 )
 
 # The client must configure the authentication and authorization parameters
@@ -116,7 +116,7 @@ configuration = lusid.Configuration(
 
 # Configure OAuth2 access token for authorization: oauth2
 configuration = lusid.Configuration(
-    host = "http://local-unit-test-server.lusid.com:37599"
+    host = "http://local-unit-test-server.lusid.com:57003"
 )
 configuration.access_token = 'YOUR_ACCESS_TOKEN'
 
@@ -127,7 +127,7 @@ with lusid.ApiClient(configuration) as api_client:
     create_property_definition_request = {"domain":"Portfolio","scope":"MyScope","code":"MyPropertyName","valueRequired":false,"displayName":"My Property Display Name","dataTypeId":{"scope":"system","code":"string"},"lifeTime":"Perpetual","constraintStyle":"Property","propertyDescription":"Optional property description"} # CreatePropertyDefinitionRequest | The definition of the new property.
 
     try:
-        # Create property definition
+        # CreatePropertyDefinition: Create property definition
         api_response = api_instance.create_property_definition(create_property_definition_request)
         pprint(api_response)
     except ApiException as e:
@@ -165,7 +165,7 @@ Name | Type | Description  | Notes
 # **delete_property_definition**
 > DeletedEntityResponse delete_property_definition(domain, scope, code)
 
-Delete property definition
+DeletePropertyDefinition: Delete property definition
 
 Delete the definition of the specified property.
 
@@ -178,10 +178,10 @@ import time
 import lusid
 from lusid.rest import ApiException
 from pprint import pprint
-# Defining the host is optional and defaults to http://local-unit-test-server.lusid.com:37599
+# Defining the host is optional and defaults to http://local-unit-test-server.lusid.com:57003
 # See configuration.py for a list of all supported configuration parameters.
 configuration = lusid.Configuration(
-    host = "http://local-unit-test-server.lusid.com:37599"
+    host = "http://local-unit-test-server.lusid.com:57003"
 )
 
 # The client must configure the authentication and authorization parameters
@@ -191,7 +191,7 @@ configuration = lusid.Configuration(
 
 # Configure OAuth2 access token for authorization: oauth2
 configuration = lusid.Configuration(
-    host = "http://local-unit-test-server.lusid.com:37599"
+    host = "http://local-unit-test-server.lusid.com:57003"
 )
 configuration.access_token = 'YOUR_ACCESS_TOKEN'
 
@@ -204,7 +204,7 @@ scope = 'scope_example' # str | The scope of the property to be deleted.
 code = 'code_example' # str | The code of the property to be deleted. Together with the domain and scope this uniquely              identifies the property.
 
     try:
-        # Delete property definition
+        # DeletePropertyDefinition: Delete property definition
         api_response = api_instance.delete_property_definition(domain, scope, code)
         pprint(api_response)
     except ApiException as e:
@@ -244,7 +244,7 @@ Name | Type | Description  | Notes
 # **get_multiple_property_definitions**
 > ResourceListOfPropertyDefinition get_multiple_property_definitions(property_keys, as_at=as_at, filter=filter)
 
-Get multiple property definitions
+GetMultiplePropertyDefinitions: Get multiple property definitions
 
 Retrieve the definition of one or more specified properties.
 
@@ -257,10 +257,10 @@ import time
 import lusid
 from lusid.rest import ApiException
 from pprint import pprint
-# Defining the host is optional and defaults to http://local-unit-test-server.lusid.com:37599
+# Defining the host is optional and defaults to http://local-unit-test-server.lusid.com:57003
 # See configuration.py for a list of all supported configuration parameters.
 configuration = lusid.Configuration(
-    host = "http://local-unit-test-server.lusid.com:37599"
+    host = "http://local-unit-test-server.lusid.com:57003"
 )
 
 # The client must configure the authentication and authorization parameters
@@ -270,7 +270,7 @@ configuration = lusid.Configuration(
 
 # Configure OAuth2 access token for authorization: oauth2
 configuration = lusid.Configuration(
-    host = "http://local-unit-test-server.lusid.com:37599"
+    host = "http://local-unit-test-server.lusid.com:57003"
 )
 configuration.access_token = 'YOUR_ACCESS_TOKEN'
 
@@ -283,7 +283,7 @@ as_at = '2013-10-20T19:20:30+01:00' # datetime | The asAt datetime at which to r
 filter = 'filter_example' # str | Expression to filter the result set.               For example, to filter on the Lifetime, use \"lifeTime eq 'Perpetual'\"              Read more about filtering results from LUSID here https://support.lusid.com/filtering-results-from-lusid. (optional)
 
     try:
-        # Get multiple property definitions
+        # GetMultiplePropertyDefinitions: Get multiple property definitions
         api_response = api_instance.get_multiple_property_definitions(property_keys, as_at=as_at, filter=filter)
         pprint(api_response)
     except ApiException as e:
@@ -323,7 +323,7 @@ Name | Type | Description  | Notes
 # **get_property_definition**
 > PropertyDefinition get_property_definition(domain, scope, code, as_at=as_at)
 
-Get property definition
+GetPropertyDefinition: Get property definition
 
 Retrieve the definition of a specified property.
 
@@ -336,10 +336,10 @@ import time
 import lusid
 from lusid.rest import ApiException
 from pprint import pprint
-# Defining the host is optional and defaults to http://local-unit-test-server.lusid.com:37599
+# Defining the host is optional and defaults to http://local-unit-test-server.lusid.com:57003
 # See configuration.py for a list of all supported configuration parameters.
 configuration = lusid.Configuration(
-    host = "http://local-unit-test-server.lusid.com:37599"
+    host = "http://local-unit-test-server.lusid.com:57003"
 )
 
 # The client must configure the authentication and authorization parameters
@@ -349,7 +349,7 @@ configuration = lusid.Configuration(
 
 # Configure OAuth2 access token for authorization: oauth2
 configuration = lusid.Configuration(
-    host = "http://local-unit-test-server.lusid.com:37599"
+    host = "http://local-unit-test-server.lusid.com:57003"
 )
 configuration.access_token = 'YOUR_ACCESS_TOKEN'
 
@@ -363,7 +363,7 @@ code = 'code_example' # str | The code of the specified property. Together with 
 as_at = '2013-10-20T19:20:30+01:00' # datetime | The asAt datetime at which to retrieve the property definition. Defaults to return              the latest version of the definition if not specified. (optional)
 
     try:
-        # Get property definition
+        # GetPropertyDefinition: Get property definition
         api_response = api_instance.get_property_definition(domain, scope, code, as_at=as_at)
         pprint(api_response)
     except ApiException as e:
@@ -404,7 +404,7 @@ Name | Type | Description  | Notes
 # **update_property_definition**
 > PropertyDefinition update_property_definition(domain, scope, code, update_property_definition_request)
 
-Update property definition
+UpdatePropertyDefinition: Update property definition
 
 Update the definition of a specified existing property. Not all elements within a property definition  are modifiable due to the potential implications for values already stored against the property.
 
@@ -417,10 +417,10 @@ import time
 import lusid
 from lusid.rest import ApiException
 from pprint import pprint
-# Defining the host is optional and defaults to http://local-unit-test-server.lusid.com:37599
+# Defining the host is optional and defaults to http://local-unit-test-server.lusid.com:57003
 # See configuration.py for a list of all supported configuration parameters.
 configuration = lusid.Configuration(
-    host = "http://local-unit-test-server.lusid.com:37599"
+    host = "http://local-unit-test-server.lusid.com:57003"
 )
 
 # The client must configure the authentication and authorization parameters
@@ -430,7 +430,7 @@ configuration = lusid.Configuration(
 
 # Configure OAuth2 access token for authorization: oauth2
 configuration = lusid.Configuration(
-    host = "http://local-unit-test-server.lusid.com:37599"
+    host = "http://local-unit-test-server.lusid.com:57003"
 )
 configuration.access_token = 'YOUR_ACCESS_TOKEN'
 
@@ -444,7 +444,7 @@ code = 'code_example' # str | The code of the property being updated. Together w
 update_property_definition_request = {"displayName":"MyPropertyName","propertyDescription":"Option Property description"} # UpdatePropertyDefinitionRequest | The updated definition of the property.
 
     try:
-        # Update property definition
+        # UpdatePropertyDefinition: Update property definition
         api_response = api_instance.update_property_definition(domain, scope, code, update_property_definition_request)
         pprint(api_response)
     except ApiException as e:
