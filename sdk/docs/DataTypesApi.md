@@ -1,18 +1,18 @@
 # lusid.DataTypesApi
 
-All URIs are relative to *http://local-unit-test-server.lusid.com:55238*
+All URIs are relative to *https://fbn-prd.lusid.com/api*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
-[**get_data_type**](DataTypesApi.md#get_data_type) | **GET** /api/datatypes/{scope}/{code} | [EARLY ACCESS] GetDataType: Get data type definition
-[**get_units_from_data_type**](DataTypesApi.md#get_units_from_data_type) | **GET** /api/datatypes/{scope}/{code}/units | [EARLY ACCESS] GetUnitsFromDataType: Get units from data type
-[**list_data_types**](DataTypesApi.md#list_data_types) | **GET** /api/datatypes/{scope} | [EARLY ACCESS] ListDataTypes: List data types
+[**get_data_type**](DataTypesApi.md#get_data_type) | **GET** /api/datatypes/{scope}/{code} | [EARLY ACCESS] Get data type definition
+[**get_units_from_data_type**](DataTypesApi.md#get_units_from_data_type) | **GET** /api/datatypes/{scope}/{code}/units | [EARLY ACCESS] Get units from data type
+[**list_data_types**](DataTypesApi.md#list_data_types) | **GET** /api/datatypes/{scope} | [EARLY ACCESS] List data types
 
 
 # **get_data_type**
 > DataType get_data_type(scope, code, as_at=as_at)
 
-[EARLY ACCESS] GetDataType: Get data type definition
+[EARLY ACCESS] Get data type definition
 
 Get the definition of a specified data type
 
@@ -25,10 +25,10 @@ import time
 import lusid
 from lusid.rest import ApiException
 from pprint import pprint
-# Defining the host is optional and defaults to http://local-unit-test-server.lusid.com:55238
+# Defining the host is optional and defaults to https://fbn-prd.lusid.com/api
 # See configuration.py for a list of all supported configuration parameters.
 configuration = lusid.Configuration(
-    host = "http://local-unit-test-server.lusid.com:55238"
+    host = "https://fbn-prd.lusid.com/api"
 )
 
 # The client must configure the authentication and authorization parameters
@@ -38,7 +38,7 @@ configuration = lusid.Configuration(
 
 # Configure OAuth2 access token for authorization: oauth2
 configuration = lusid.Configuration(
-    host = "http://local-unit-test-server.lusid.com:55238"
+    host = "https://fbn-prd.lusid.com/api"
 )
 configuration.access_token = 'YOUR_ACCESS_TOKEN'
 
@@ -51,7 +51,7 @@ code = 'code_example' # str | The code of the data type
 as_at = '2013-10-20T19:20:30+01:00' # datetime | The asAt datetime at which to retrieve the data type definition. Defaults to              return the latest version of the instrument definition if not specified. (optional)
 
     try:
-        # [EARLY ACCESS] GetDataType: Get data type definition
+        # [EARLY ACCESS] Get data type definition
         api_response = api_instance.get_data_type(scope, code, as_at=as_at)
         pprint(api_response)
     except ApiException as e:
@@ -91,7 +91,7 @@ Name | Type | Description  | Notes
 # **get_units_from_data_type**
 > ResourceListOfIUnitDefinitionDto get_units_from_data_type(scope, code, units=units, filter=filter, as_at=as_at)
 
-[EARLY ACCESS] GetUnitsFromDataType: Get units from data type
+[EARLY ACCESS] Get units from data type
 
 Get the definitions of the specified units associated bound to a specific data type
 
@@ -104,10 +104,10 @@ import time
 import lusid
 from lusid.rest import ApiException
 from pprint import pprint
-# Defining the host is optional and defaults to http://local-unit-test-server.lusid.com:55238
+# Defining the host is optional and defaults to https://fbn-prd.lusid.com/api
 # See configuration.py for a list of all supported configuration parameters.
 configuration = lusid.Configuration(
-    host = "http://local-unit-test-server.lusid.com:55238"
+    host = "https://fbn-prd.lusid.com/api"
 )
 
 # The client must configure the authentication and authorization parameters
@@ -117,7 +117,7 @@ configuration = lusid.Configuration(
 
 # Configure OAuth2 access token for authorization: oauth2
 configuration = lusid.Configuration(
-    host = "http://local-unit-test-server.lusid.com:55238"
+    host = "https://fbn-prd.lusid.com/api"
 )
 configuration.access_token = 'YOUR_ACCESS_TOKEN'
 
@@ -132,7 +132,7 @@ filter = 'filter_example' # str | Optional. Expression to filter the result set.
 as_at = '2013-10-20T19:20:30+01:00' # datetime | Optional. The as at of the requested data type (optional)
 
     try:
-        # [EARLY ACCESS] GetUnitsFromDataType: Get units from data type
+        # [EARLY ACCESS] Get units from data type
         api_response = api_instance.get_units_from_data_type(scope, code, units=units, filter=filter, as_at=as_at)
         pprint(api_response)
     except ApiException as e:
@@ -174,7 +174,7 @@ Name | Type | Description  | Notes
 # **list_data_types**
 > ResourceListOfDataType list_data_types(scope, as_at=as_at, include_system=include_system, sort_by=sort_by, start=start, limit=limit, filter=filter)
 
-[EARLY ACCESS] ListDataTypes: List data types
+[EARLY ACCESS] List data types
 
 List all data types in a specified scope
 
@@ -187,10 +187,10 @@ import time
 import lusid
 from lusid.rest import ApiException
 from pprint import pprint
-# Defining the host is optional and defaults to http://local-unit-test-server.lusid.com:55238
+# Defining the host is optional and defaults to https://fbn-prd.lusid.com/api
 # See configuration.py for a list of all supported configuration parameters.
 configuration = lusid.Configuration(
-    host = "http://local-unit-test-server.lusid.com:55238"
+    host = "https://fbn-prd.lusid.com/api"
 )
 
 # The client must configure the authentication and authorization parameters
@@ -200,7 +200,7 @@ configuration = lusid.Configuration(
 
 # Configure OAuth2 access token for authorization: oauth2
 configuration = lusid.Configuration(
-    host = "http://local-unit-test-server.lusid.com:55238"
+    host = "https://fbn-prd.lusid.com/api"
 )
 configuration.access_token = 'YOUR_ACCESS_TOKEN'
 
@@ -217,7 +217,7 @@ limit = 56 # int | Optional. When paginating, limit the number of returned resul
 filter = 'filter_example' # str | Optional. Expression to filter the result set.              For example, to filter on the Display Name, use \"displayName eq 'string'\"              Read more about filtering results from LUSID here https://support.lusid.com/filtering-results-from-lusid. (optional)
 
     try:
-        # [EARLY ACCESS] ListDataTypes: List data types
+        # [EARLY ACCESS] List data types
         api_response = api_instance.list_data_types(scope, as_at=as_at, include_system=include_system, sort_by=sort_by, start=start, limit=limit, filter=filter)
         pprint(api_response)
     except ApiException as e:

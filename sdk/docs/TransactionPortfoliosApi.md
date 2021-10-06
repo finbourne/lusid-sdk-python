@@ -1,32 +1,32 @@
 # lusid.TransactionPortfoliosApi
 
-All URIs are relative to *http://local-unit-test-server.lusid.com:55238*
+All URIs are relative to *https://fbn-prd.lusid.com/api*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
-[**adjust_holdings**](TransactionPortfoliosApi.md#adjust_holdings) | **POST** /api/transactionportfolios/{scope}/{code}/holdings | AdjustHoldings: Adjust holdings
-[**build_transactions**](TransactionPortfoliosApi.md#build_transactions) | **POST** /api/transactionportfolios/{scope}/{code}/transactions/$build | BuildTransactions: Build transactions
-[**cancel_adjust_holdings**](TransactionPortfoliosApi.md#cancel_adjust_holdings) | **DELETE** /api/transactionportfolios/{scope}/{code}/holdings | CancelAdjustHoldings: Cancel adjust holdings
-[**cancel_transactions**](TransactionPortfoliosApi.md#cancel_transactions) | **DELETE** /api/transactionportfolios/{scope}/{code}/transactions | CancelTransactions: Cancel transactions
-[**create_portfolio**](TransactionPortfoliosApi.md#create_portfolio) | **POST** /api/transactionportfolios/{scope} | CreatePortfolio: Create portfolio
-[**delete_properties_from_transaction**](TransactionPortfoliosApi.md#delete_properties_from_transaction) | **DELETE** /api/transactionportfolios/{scope}/{code}/transactions/{transactionId}/properties | DeletePropertiesFromTransaction: Delete properties from transaction
-[**get_details**](TransactionPortfoliosApi.md#get_details) | **GET** /api/transactionportfolios/{scope}/{code}/details | GetDetails: Get details
-[**get_holdings**](TransactionPortfoliosApi.md#get_holdings) | **GET** /api/transactionportfolios/{scope}/{code}/holdings | GetHoldings: Get holdings
-[**get_holdings_adjustment**](TransactionPortfoliosApi.md#get_holdings_adjustment) | **GET** /api/transactionportfolios/{scope}/{code}/holdingsadjustments/{effectiveAt} | GetHoldingsAdjustment: Get holdings adjustment
-[**get_portfolio_cash_statement**](TransactionPortfoliosApi.md#get_portfolio_cash_statement) | **GET** /api/transactionportfolios/{scope}/{code}/cashstatement | [EARLY ACCESS] GetPortfolioCashStatement: Get portfolio cash statement
-[**get_transactions**](TransactionPortfoliosApi.md#get_transactions) | **GET** /api/transactionportfolios/{scope}/{code}/transactions | GetTransactions: Get transactions
-[**list_holdings_adjustments**](TransactionPortfoliosApi.md#list_holdings_adjustments) | **GET** /api/transactionportfolios/{scope}/{code}/holdingsadjustments | ListHoldingsAdjustments: List holdings adjustments
-[**resolve_instrument**](TransactionPortfoliosApi.md#resolve_instrument) | **POST** /api/transactionportfolios/{scope}/{code}/$resolve | [EARLY ACCESS] ResolveInstrument: Resolve instrument
-[**set_holdings**](TransactionPortfoliosApi.md#set_holdings) | **PUT** /api/transactionportfolios/{scope}/{code}/holdings | SetHoldings: Set holdings
-[**upsert_portfolio_details**](TransactionPortfoliosApi.md#upsert_portfolio_details) | **POST** /api/transactionportfolios/{scope}/{code}/details | UpsertPortfolioDetails: Upsert portfolio details
-[**upsert_transaction_properties**](TransactionPortfoliosApi.md#upsert_transaction_properties) | **POST** /api/transactionportfolios/{scope}/{code}/transactions/{transactionId}/properties | UpsertTransactionProperties: Upsert transaction properties
-[**upsert_transactions**](TransactionPortfoliosApi.md#upsert_transactions) | **POST** /api/transactionportfolios/{scope}/{code}/transactions | UpsertTransactions: Upsert transactions
+[**adjust_holdings**](TransactionPortfoliosApi.md#adjust_holdings) | **POST** /api/transactionportfolios/{scope}/{code}/holdings | Adjust holdings
+[**build_transactions**](TransactionPortfoliosApi.md#build_transactions) | **POST** /api/transactionportfolios/{scope}/{code}/transactions/$build | Build transactions
+[**cancel_adjust_holdings**](TransactionPortfoliosApi.md#cancel_adjust_holdings) | **DELETE** /api/transactionportfolios/{scope}/{code}/holdings | Cancel adjust holdings
+[**cancel_transactions**](TransactionPortfoliosApi.md#cancel_transactions) | **DELETE** /api/transactionportfolios/{scope}/{code}/transactions | Cancel transactions
+[**create_portfolio**](TransactionPortfoliosApi.md#create_portfolio) | **POST** /api/transactionportfolios/{scope} | Create portfolio
+[**delete_properties_from_transaction**](TransactionPortfoliosApi.md#delete_properties_from_transaction) | **DELETE** /api/transactionportfolios/{scope}/{code}/transactions/{transactionId}/properties | Delete properties from transaction
+[**get_details**](TransactionPortfoliosApi.md#get_details) | **GET** /api/transactionportfolios/{scope}/{code}/details | Get details
+[**get_holdings**](TransactionPortfoliosApi.md#get_holdings) | **GET** /api/transactionportfolios/{scope}/{code}/holdings | Get holdings
+[**get_holdings_adjustment**](TransactionPortfoliosApi.md#get_holdings_adjustment) | **GET** /api/transactionportfolios/{scope}/{code}/holdingsadjustments/{effectiveAt} | Get holdings adjustment
+[**get_portfolio_cash_statement**](TransactionPortfoliosApi.md#get_portfolio_cash_statement) | **GET** /api/transactionportfolios/{scope}/{code}/cashstatement | [EARLY ACCESS] Get portfolio cash statement
+[**get_transactions**](TransactionPortfoliosApi.md#get_transactions) | **GET** /api/transactionportfolios/{scope}/{code}/transactions | Get transactions
+[**list_holdings_adjustments**](TransactionPortfoliosApi.md#list_holdings_adjustments) | **GET** /api/transactionportfolios/{scope}/{code}/holdingsadjustments | List holdings adjustments
+[**resolve_instrument**](TransactionPortfoliosApi.md#resolve_instrument) | **POST** /api/transactionportfolios/{scope}/{code}/$resolve | [EARLY ACCESS] Resolve instrument
+[**set_holdings**](TransactionPortfoliosApi.md#set_holdings) | **PUT** /api/transactionportfolios/{scope}/{code}/holdings | Set holdings
+[**upsert_portfolio_details**](TransactionPortfoliosApi.md#upsert_portfolio_details) | **POST** /api/transactionportfolios/{scope}/{code}/details | Upsert portfolio details
+[**upsert_transaction_properties**](TransactionPortfoliosApi.md#upsert_transaction_properties) | **POST** /api/transactionportfolios/{scope}/{code}/transactions/{transactionId}/properties | Upsert transaction properties
+[**upsert_transactions**](TransactionPortfoliosApi.md#upsert_transactions) | **POST** /api/transactionportfolios/{scope}/{code}/transactions | Upsert transactions
 
 
 # **adjust_holdings**
 > AdjustHolding adjust_holdings(scope, code, effective_at, adjust_holding_request, reconciliation_methods=reconciliation_methods)
 
-AdjustHoldings: Adjust holdings
+Adjust holdings
 
 Adjust one or more holdings of the specified transaction portfolio to the provided targets. LUSID will  automatically construct adjustment transactions to ensure that the holdings which have been adjusted are  always set to the provided targets for the specified effective datetime. Read more about the difference between  adjusting and setting holdings here https://support.lusid.com/how-do-i-adjust-my-holdings.
 
@@ -39,10 +39,10 @@ import time
 import lusid
 from lusid.rest import ApiException
 from pprint import pprint
-# Defining the host is optional and defaults to http://local-unit-test-server.lusid.com:55238
+# Defining the host is optional and defaults to https://fbn-prd.lusid.com/api
 # See configuration.py for a list of all supported configuration parameters.
 configuration = lusid.Configuration(
-    host = "http://local-unit-test-server.lusid.com:55238"
+    host = "https://fbn-prd.lusid.com/api"
 )
 
 # The client must configure the authentication and authorization parameters
@@ -52,7 +52,7 @@ configuration = lusid.Configuration(
 
 # Configure OAuth2 access token for authorization: oauth2
 configuration = lusid.Configuration(
-    host = "http://local-unit-test-server.lusid.com:55238"
+    host = "https://fbn-prd.lusid.com/api"
 )
 configuration.access_token = 'YOUR_ACCESS_TOKEN'
 
@@ -67,7 +67,7 @@ adjust_holding_request = [{"instrumentIdentifiers":{"instrument/default/Figi":"B
 reconciliation_methods = ['reconciliation_methods_example'] # list[str] | Optional parameter for specifying a reconciliation method: e.g. FxForward. (optional)
 
     try:
-        # AdjustHoldings: Adjust holdings
+        # Adjust holdings
         api_response = api_instance.adjust_holdings(scope, code, effective_at, adjust_holding_request, reconciliation_methods=reconciliation_methods)
         pprint(api_response)
     except ApiException as e:
@@ -109,7 +109,7 @@ Name | Type | Description  | Notes
 # **build_transactions**
 > VersionedResourceListOfOutputTransaction build_transactions(scope, code, transaction_query_parameters, as_at=as_at, filter=filter, property_keys=property_keys, limit=limit, page=page)
 
-BuildTransactions: Build transactions
+Build transactions
 
 Builds and returns all transactions that affect the holdings of a portfolio over a given interval of  effective time into a set of output transactions. This includes transactions automatically generated by  LUSID such as holding adjustments.
 
@@ -122,10 +122,10 @@ import time
 import lusid
 from lusid.rest import ApiException
 from pprint import pprint
-# Defining the host is optional and defaults to http://local-unit-test-server.lusid.com:55238
+# Defining the host is optional and defaults to https://fbn-prd.lusid.com/api
 # See configuration.py for a list of all supported configuration parameters.
 configuration = lusid.Configuration(
-    host = "http://local-unit-test-server.lusid.com:55238"
+    host = "https://fbn-prd.lusid.com/api"
 )
 
 # The client must configure the authentication and authorization parameters
@@ -135,7 +135,7 @@ configuration = lusid.Configuration(
 
 # Configure OAuth2 access token for authorization: oauth2
 configuration = lusid.Configuration(
-    host = "http://local-unit-test-server.lusid.com:55238"
+    host = "https://fbn-prd.lusid.com/api"
 )
 configuration.access_token = 'YOUR_ACCESS_TOKEN'
 
@@ -153,7 +153,7 @@ limit = 56 # int | When paginating, limit the number of returned results to this
 page = 'page_example' # str | The pagination token to use to continue listing transactions from a previous call to BuildTransactions. (optional)
 
     try:
-        # BuildTransactions: Build transactions
+        # Build transactions
         api_response = api_instance.build_transactions(scope, code, transaction_query_parameters, as_at=as_at, filter=filter, property_keys=property_keys, limit=limit, page=page)
         pprint(api_response)
     except ApiException as e:
@@ -198,7 +198,7 @@ Name | Type | Description  | Notes
 # **cancel_adjust_holdings**
 > DeletedEntityResponse cancel_adjust_holdings(scope, code, effective_at)
 
-CancelAdjustHoldings: Cancel adjust holdings
+Cancel adjust holdings
 
 Cancel all previous holding adjustments made on the specified transaction portfolio for a specified effective  datetime. This should be used to undo holding adjustments made via set holdings or adjust holdings.
 
@@ -211,10 +211,10 @@ import time
 import lusid
 from lusid.rest import ApiException
 from pprint import pprint
-# Defining the host is optional and defaults to http://local-unit-test-server.lusid.com:55238
+# Defining the host is optional and defaults to https://fbn-prd.lusid.com/api
 # See configuration.py for a list of all supported configuration parameters.
 configuration = lusid.Configuration(
-    host = "http://local-unit-test-server.lusid.com:55238"
+    host = "https://fbn-prd.lusid.com/api"
 )
 
 # The client must configure the authentication and authorization parameters
@@ -224,7 +224,7 @@ configuration = lusid.Configuration(
 
 # Configure OAuth2 access token for authorization: oauth2
 configuration = lusid.Configuration(
-    host = "http://local-unit-test-server.lusid.com:55238"
+    host = "https://fbn-prd.lusid.com/api"
 )
 configuration.access_token = 'YOUR_ACCESS_TOKEN'
 
@@ -237,7 +237,7 @@ code = 'code_example' # str | The code of the transaction portfolio. Together wi
 effective_at = 'effective_at_example' # str | The effective datetime or cut label at which the holding adjustments should be undone.
 
     try:
-        # CancelAdjustHoldings: Cancel adjust holdings
+        # Cancel adjust holdings
         api_response = api_instance.cancel_adjust_holdings(scope, code, effective_at)
         pprint(api_response)
     except ApiException as e:
@@ -277,7 +277,7 @@ Name | Type | Description  | Notes
 # **cancel_transactions**
 > DeletedEntityResponse cancel_transactions(scope, code, transaction_ids)
 
-CancelTransactions: Cancel transactions
+Cancel transactions
 
 Cancel one or more transactions from the transaction portfolio.
 
@@ -290,10 +290,10 @@ import time
 import lusid
 from lusid.rest import ApiException
 from pprint import pprint
-# Defining the host is optional and defaults to http://local-unit-test-server.lusid.com:55238
+# Defining the host is optional and defaults to https://fbn-prd.lusid.com/api
 # See configuration.py for a list of all supported configuration parameters.
 configuration = lusid.Configuration(
-    host = "http://local-unit-test-server.lusid.com:55238"
+    host = "https://fbn-prd.lusid.com/api"
 )
 
 # The client must configure the authentication and authorization parameters
@@ -303,7 +303,7 @@ configuration = lusid.Configuration(
 
 # Configure OAuth2 access token for authorization: oauth2
 configuration = lusid.Configuration(
-    host = "http://local-unit-test-server.lusid.com:55238"
+    host = "https://fbn-prd.lusid.com/api"
 )
 configuration.access_token = 'YOUR_ACCESS_TOKEN'
 
@@ -316,7 +316,7 @@ code = 'code_example' # str | The code of the transaction portfolio. Together wi
 transaction_ids = ['transaction_ids_example'] # list[str] | The IDs of the transactions to cancel.
 
     try:
-        # CancelTransactions: Cancel transactions
+        # Cancel transactions
         api_response = api_instance.cancel_transactions(scope, code, transaction_ids)
         pprint(api_response)
     except ApiException as e:
@@ -356,7 +356,7 @@ Name | Type | Description  | Notes
 # **create_portfolio**
 > Portfolio create_portfolio(scope, create_transaction_portfolio_request)
 
-CreatePortfolio: Create portfolio
+Create portfolio
 
 Create a transaction portfolio in a particular scope.
 
@@ -369,10 +369,10 @@ import time
 import lusid
 from lusid.rest import ApiException
 from pprint import pprint
-# Defining the host is optional and defaults to http://local-unit-test-server.lusid.com:55238
+# Defining the host is optional and defaults to https://fbn-prd.lusid.com/api
 # See configuration.py for a list of all supported configuration parameters.
 configuration = lusid.Configuration(
-    host = "http://local-unit-test-server.lusid.com:55238"
+    host = "https://fbn-prd.lusid.com/api"
 )
 
 # The client must configure the authentication and authorization parameters
@@ -382,7 +382,7 @@ configuration = lusid.Configuration(
 
 # Configure OAuth2 access token for authorization: oauth2
 configuration = lusid.Configuration(
-    host = "http://local-unit-test-server.lusid.com:55238"
+    host = "https://fbn-prd.lusid.com/api"
 )
 configuration.access_token = 'YOUR_ACCESS_TOKEN'
 
@@ -394,7 +394,7 @@ with lusid.ApiClient(configuration) as api_client:
 create_transaction_portfolio_request = {"displayName":"Portfolio UK","description":"Portfolio for UK market","code":"PortfolioUk","created":"2018-03-05T12:00:00.0000000+00:00","baseCurrency":"GBP","corporateActionSourceId":{"scope":"Sources","code":"Vendor1"},"accountingMethod":"Default","subHoldingKeys":[],"properties":{"portfolio/Manager/Name":{"key":"Portfolio/Manager/Name","value":{"labelValue":"Matt Smith"},"effectiveFrom":"2018-03-05T12:00:00.0000000+00:00"},"portfolio/Manager/Id":{"key":"Portfolio/Manager/Id","value":{"metricValue":{"value":1628483,"unit":"NoUnits"}},"effectiveFrom":"2018-03-05T12:00:00.0000000+00:00"}}} # CreateTransactionPortfolioRequest | The definition of the transaction portfolio.
 
     try:
-        # CreatePortfolio: Create portfolio
+        # Create portfolio
         api_response = api_instance.create_portfolio(scope, create_transaction_portfolio_request)
         pprint(api_response)
     except ApiException as e:
@@ -433,7 +433,7 @@ Name | Type | Description  | Notes
 # **delete_properties_from_transaction**
 > DeletedEntityResponse delete_properties_from_transaction(scope, code, transaction_id, property_keys)
 
-DeletePropertiesFromTransaction: Delete properties from transaction
+Delete properties from transaction
 
 Delete one or more properties from a single transaction in a transaction portfolio.
 
@@ -446,10 +446,10 @@ import time
 import lusid
 from lusid.rest import ApiException
 from pprint import pprint
-# Defining the host is optional and defaults to http://local-unit-test-server.lusid.com:55238
+# Defining the host is optional and defaults to https://fbn-prd.lusid.com/api
 # See configuration.py for a list of all supported configuration parameters.
 configuration = lusid.Configuration(
-    host = "http://local-unit-test-server.lusid.com:55238"
+    host = "https://fbn-prd.lusid.com/api"
 )
 
 # The client must configure the authentication and authorization parameters
@@ -459,7 +459,7 @@ configuration = lusid.Configuration(
 
 # Configure OAuth2 access token for authorization: oauth2
 configuration = lusid.Configuration(
-    host = "http://local-unit-test-server.lusid.com:55238"
+    host = "https://fbn-prd.lusid.com/api"
 )
 configuration.access_token = 'YOUR_ACCESS_TOKEN'
 
@@ -473,7 +473,7 @@ transaction_id = 'transaction_id_example' # str | The unique ID of the transacti
 property_keys = ['property_keys_example'] # list[str] | The property keys of the properties to delete.              These must be from the \"Transaction\" domain and have the format {domain}/{scope}/{code}, for example              \"Transaction/strategy/quantsignal\".
 
     try:
-        # DeletePropertiesFromTransaction: Delete properties from transaction
+        # Delete properties from transaction
         api_response = api_instance.delete_properties_from_transaction(scope, code, transaction_id, property_keys)
         pprint(api_response)
     except ApiException as e:
@@ -514,7 +514,7 @@ Name | Type | Description  | Notes
 # **get_details**
 > PortfolioDetails get_details(scope, code, effective_at=effective_at, as_at=as_at)
 
-GetDetails: Get details
+Get details
 
 Get certain details associated with a transaction portfolio.
 
@@ -527,10 +527,10 @@ import time
 import lusid
 from lusid.rest import ApiException
 from pprint import pprint
-# Defining the host is optional and defaults to http://local-unit-test-server.lusid.com:55238
+# Defining the host is optional and defaults to https://fbn-prd.lusid.com/api
 # See configuration.py for a list of all supported configuration parameters.
 configuration = lusid.Configuration(
-    host = "http://local-unit-test-server.lusid.com:55238"
+    host = "https://fbn-prd.lusid.com/api"
 )
 
 # The client must configure the authentication and authorization parameters
@@ -540,7 +540,7 @@ configuration = lusid.Configuration(
 
 # Configure OAuth2 access token for authorization: oauth2
 configuration = lusid.Configuration(
-    host = "http://local-unit-test-server.lusid.com:55238"
+    host = "https://fbn-prd.lusid.com/api"
 )
 configuration.access_token = 'YOUR_ACCESS_TOKEN'
 
@@ -554,7 +554,7 @@ effective_at = 'effective_at_example' # str | The effective datetime or cut labe
 as_at = '2013-10-20T19:20:30+01:00' # datetime | The asAt datetime at which to retrieve the details of the transaction portfolio. Defaults              to returning the latest version of the details if not specified. (optional)
 
     try:
-        # GetDetails: Get details
+        # Get details
         api_response = api_instance.get_details(scope, code, effective_at=effective_at, as_at=as_at)
         pprint(api_response)
     except ApiException as e:
@@ -595,7 +595,7 @@ Name | Type | Description  | Notes
 # **get_holdings**
 > VersionedResourceListOfPortfolioHolding get_holdings(scope, code, effective_at=effective_at, as_at=as_at, filter=filter, property_keys=property_keys, by_taxlots=by_taxlots)
 
-GetHoldings: Get holdings
+Get holdings
 
 Calculate holdings for a transaction portfolio.
 
@@ -608,10 +608,10 @@ import time
 import lusid
 from lusid.rest import ApiException
 from pprint import pprint
-# Defining the host is optional and defaults to http://local-unit-test-server.lusid.com:55238
+# Defining the host is optional and defaults to https://fbn-prd.lusid.com/api
 # See configuration.py for a list of all supported configuration parameters.
 configuration = lusid.Configuration(
-    host = "http://local-unit-test-server.lusid.com:55238"
+    host = "https://fbn-prd.lusid.com/api"
 )
 
 # The client must configure the authentication and authorization parameters
@@ -621,7 +621,7 @@ configuration = lusid.Configuration(
 
 # Configure OAuth2 access token for authorization: oauth2
 configuration = lusid.Configuration(
-    host = "http://local-unit-test-server.lusid.com:55238"
+    host = "https://fbn-prd.lusid.com/api"
 )
 configuration.access_token = 'YOUR_ACCESS_TOKEN'
 
@@ -638,7 +638,7 @@ property_keys = ['property_keys_example'] # list[str] | A list of property keys 
 by_taxlots = True # bool | Whether or not to expand the holdings to return the underlying tax-lots. Defaults to              False. (optional)
 
     try:
-        # GetHoldings: Get holdings
+        # Get holdings
         api_response = api_instance.get_holdings(scope, code, effective_at=effective_at, as_at=as_at, filter=filter, property_keys=property_keys, by_taxlots=by_taxlots)
         pprint(api_response)
     except ApiException as e:
@@ -682,7 +682,7 @@ Name | Type | Description  | Notes
 # **get_holdings_adjustment**
 > HoldingsAdjustment get_holdings_adjustment(scope, code, effective_at, as_at=as_at)
 
-GetHoldingsAdjustment: Get holdings adjustment
+Get holdings adjustment
 
 Get a holdings adjustment made to a transaction portfolio at a specific effective datetime. Note that a  holdings adjustment will only be returned if one exists for the specified effective datetime.
 
@@ -695,10 +695,10 @@ import time
 import lusid
 from lusid.rest import ApiException
 from pprint import pprint
-# Defining the host is optional and defaults to http://local-unit-test-server.lusid.com:55238
+# Defining the host is optional and defaults to https://fbn-prd.lusid.com/api
 # See configuration.py for a list of all supported configuration parameters.
 configuration = lusid.Configuration(
-    host = "http://local-unit-test-server.lusid.com:55238"
+    host = "https://fbn-prd.lusid.com/api"
 )
 
 # The client must configure the authentication and authorization parameters
@@ -708,7 +708,7 @@ configuration = lusid.Configuration(
 
 # Configure OAuth2 access token for authorization: oauth2
 configuration = lusid.Configuration(
-    host = "http://local-unit-test-server.lusid.com:55238"
+    host = "https://fbn-prd.lusid.com/api"
 )
 configuration.access_token = 'YOUR_ACCESS_TOKEN'
 
@@ -722,7 +722,7 @@ effective_at = 'effective_at_example' # str | The effective datetime or cut labe
 as_at = '2013-10-20T19:20:30+01:00' # datetime | The asAt datetime at which to retrieve the holdings adjustment. Defaults to the return the latest              version of the holdings adjustment if not specified. (optional)
 
     try:
-        # GetHoldingsAdjustment: Get holdings adjustment
+        # Get holdings adjustment
         api_response = api_instance.get_holdings_adjustment(scope, code, effective_at, as_at=as_at)
         pprint(api_response)
     except ApiException as e:
@@ -763,7 +763,7 @@ Name | Type | Description  | Notes
 # **get_portfolio_cash_statement**
 > ResourceListOfPortfolioCashFlow get_portfolio_cash_statement(scope, code, from_effective_at, to_effective_at, as_at=as_at, filter=filter, recipe_id_scope=recipe_id_scope, recipe_id_code=recipe_id_code)
 
-[EARLY ACCESS] GetPortfolioCashStatement: Get portfolio cash statement
+[EARLY ACCESS] Get portfolio cash statement
 
 Get a cash statement for a transaction portfolio.
 
@@ -776,10 +776,10 @@ import time
 import lusid
 from lusid.rest import ApiException
 from pprint import pprint
-# Defining the host is optional and defaults to http://local-unit-test-server.lusid.com:55238
+# Defining the host is optional and defaults to https://fbn-prd.lusid.com/api
 # See configuration.py for a list of all supported configuration parameters.
 configuration = lusid.Configuration(
-    host = "http://local-unit-test-server.lusid.com:55238"
+    host = "https://fbn-prd.lusid.com/api"
 )
 
 # The client must configure the authentication and authorization parameters
@@ -789,7 +789,7 @@ configuration = lusid.Configuration(
 
 # Configure OAuth2 access token for authorization: oauth2
 configuration = lusid.Configuration(
-    host = "http://local-unit-test-server.lusid.com:55238"
+    host = "https://fbn-prd.lusid.com/api"
 )
 configuration.access_token = 'YOUR_ACCESS_TOKEN'
 
@@ -807,7 +807,7 @@ recipe_id_scope = 'recipe_id_scope_example' # str | The scope of the given recip
 recipe_id_code = 'recipe_id_code_example' # str | The code of the given recipeID (optional)
 
     try:
-        # [EARLY ACCESS] GetPortfolioCashStatement: Get portfolio cash statement
+        # [EARLY ACCESS] Get portfolio cash statement
         api_response = api_instance.get_portfolio_cash_statement(scope, code, from_effective_at, to_effective_at, as_at=as_at, filter=filter, recipe_id_scope=recipe_id_scope, recipe_id_code=recipe_id_code)
         pprint(api_response)
     except ApiException as e:
@@ -852,7 +852,7 @@ Name | Type | Description  | Notes
 # **get_transactions**
 > VersionedResourceListOfTransaction get_transactions(scope, code, from_transaction_date=from_transaction_date, to_transaction_date=to_transaction_date, as_at=as_at, filter=filter, property_keys=property_keys, page=page, limit=limit)
 
-GetTransactions: Get transactions
+Get transactions
 
 Retrieve all the transactions that occurred during a particular time interval.     If the portfolio is a derived transaction portfolio, the transactions returned are the  union set of all transactions of the parent (and any grandparents, etc.) as well as  those of the derived transaction portfolio itself.
 
@@ -865,10 +865,10 @@ import time
 import lusid
 from lusid.rest import ApiException
 from pprint import pprint
-# Defining the host is optional and defaults to http://local-unit-test-server.lusid.com:55238
+# Defining the host is optional and defaults to https://fbn-prd.lusid.com/api
 # See configuration.py for a list of all supported configuration parameters.
 configuration = lusid.Configuration(
-    host = "http://local-unit-test-server.lusid.com:55238"
+    host = "https://fbn-prd.lusid.com/api"
 )
 
 # The client must configure the authentication and authorization parameters
@@ -878,7 +878,7 @@ configuration = lusid.Configuration(
 
 # Configure OAuth2 access token for authorization: oauth2
 configuration = lusid.Configuration(
-    host = "http://local-unit-test-server.lusid.com:55238"
+    host = "https://fbn-prd.lusid.com/api"
 )
 configuration.access_token = 'YOUR_ACCESS_TOKEN'
 
@@ -897,7 +897,7 @@ page = 'page_example' # str | The pagination token to use to continue listing tr
 limit = 56 # int | When paginating, limit the number of returned results to this many. Defaults to 100 if not specified. (optional)
 
     try:
-        # GetTransactions: Get transactions
+        # Get transactions
         api_response = api_instance.get_transactions(scope, code, from_transaction_date=from_transaction_date, to_transaction_date=to_transaction_date, as_at=as_at, filter=filter, property_keys=property_keys, page=page, limit=limit)
         pprint(api_response)
     except ApiException as e:
@@ -943,7 +943,7 @@ Name | Type | Description  | Notes
 # **list_holdings_adjustments**
 > ResourceListOfHoldingsAdjustmentHeader list_holdings_adjustments(scope, code, from_effective_at=from_effective_at, to_effective_at=to_effective_at, as_at=as_at)
 
-ListHoldingsAdjustments: List holdings adjustments
+List holdings adjustments
 
 List the holdings adjustments made to the specified transaction portfolio over a specified interval of effective time.
 
@@ -956,10 +956,10 @@ import time
 import lusid
 from lusid.rest import ApiException
 from pprint import pprint
-# Defining the host is optional and defaults to http://local-unit-test-server.lusid.com:55238
+# Defining the host is optional and defaults to https://fbn-prd.lusid.com/api
 # See configuration.py for a list of all supported configuration parameters.
 configuration = lusid.Configuration(
-    host = "http://local-unit-test-server.lusid.com:55238"
+    host = "https://fbn-prd.lusid.com/api"
 )
 
 # The client must configure the authentication and authorization parameters
@@ -969,7 +969,7 @@ configuration = lusid.Configuration(
 
 # Configure OAuth2 access token for authorization: oauth2
 configuration = lusid.Configuration(
-    host = "http://local-unit-test-server.lusid.com:55238"
+    host = "https://fbn-prd.lusid.com/api"
 )
 configuration.access_token = 'YOUR_ACCESS_TOKEN'
 
@@ -984,7 +984,7 @@ to_effective_at = 'to_effective_at_example' # str | The upper bound effective da
 as_at = '2013-10-20T19:20:30+01:00' # datetime | The asAt datetime at which to retrieve the holdings adjustments. Defaults to return the              latest version of each holding adjustment if not specified. (optional)
 
     try:
-        # ListHoldingsAdjustments: List holdings adjustments
+        # List holdings adjustments
         api_response = api_instance.list_holdings_adjustments(scope, code, from_effective_at=from_effective_at, to_effective_at=to_effective_at, as_at=as_at)
         pprint(api_response)
     except ApiException as e:
@@ -1026,7 +1026,7 @@ Name | Type | Description  | Notes
 # **resolve_instrument**
 > UpsertPortfolioTransactionsResponse resolve_instrument(scope, code, instrument_identifier_type, instrument_identifier_value, from_effective_at=from_effective_at, request_body=request_body)
 
-[EARLY ACCESS] ResolveInstrument: Resolve instrument
+[EARLY ACCESS] Resolve instrument
 
 Try to resolve the instrument for transaction and holdings for a given instrument identifier and a specified    period of time. Also update the instrument identifiers with the given instrument identifiers collection.
 
@@ -1039,10 +1039,10 @@ import time
 import lusid
 from lusid.rest import ApiException
 from pprint import pprint
-# Defining the host is optional and defaults to http://local-unit-test-server.lusid.com:55238
+# Defining the host is optional and defaults to https://fbn-prd.lusid.com/api
 # See configuration.py for a list of all supported configuration parameters.
 configuration = lusid.Configuration(
-    host = "http://local-unit-test-server.lusid.com:55238"
+    host = "https://fbn-prd.lusid.com/api"
 )
 
 # The client must configure the authentication and authorization parameters
@@ -1052,7 +1052,7 @@ configuration = lusid.Configuration(
 
 # Configure OAuth2 access token for authorization: oauth2
 configuration = lusid.Configuration(
-    host = "http://local-unit-test-server.lusid.com:55238"
+    host = "https://fbn-prd.lusid.com/api"
 )
 configuration.access_token = 'YOUR_ACCESS_TOKEN'
 
@@ -1068,7 +1068,7 @@ from_effective_at = 'from_effective_at_example' # str | The lower bound effectiv
 request_body = {"instrument/default/Figi":"BBG000C6K6G9","instrument/default/Isin":"GB00BH4HKS39"} # dict(str, str) | The dictionary with the instrument identifiers to be updated on the              transaction and holdings. (optional)
 
     try:
-        # [EARLY ACCESS] ResolveInstrument: Resolve instrument
+        # [EARLY ACCESS] Resolve instrument
         api_response = api_instance.resolve_instrument(scope, code, instrument_identifier_type, instrument_identifier_value, from_effective_at=from_effective_at, request_body=request_body)
         pprint(api_response)
     except ApiException as e:
@@ -1111,7 +1111,7 @@ Name | Type | Description  | Notes
 # **set_holdings**
 > AdjustHolding set_holdings(scope, code, effective_at, adjust_holding_request, reconciliation_methods=reconciliation_methods)
 
-SetHoldings: Set holdings
+Set holdings
 
 Set the holdings of the specified transaction portfolio to the provided targets. LUSID will automatically  construct adjustment transactions to ensure that the entire set of holdings for the transaction portfolio  are always set to the provided targets for the specified effective datetime. Read more about the difference between  adjusting and setting holdings here https://support.lusid.com/how-do-i-adjust-my-holdings.
 
@@ -1124,10 +1124,10 @@ import time
 import lusid
 from lusid.rest import ApiException
 from pprint import pprint
-# Defining the host is optional and defaults to http://local-unit-test-server.lusid.com:55238
+# Defining the host is optional and defaults to https://fbn-prd.lusid.com/api
 # See configuration.py for a list of all supported configuration parameters.
 configuration = lusid.Configuration(
-    host = "http://local-unit-test-server.lusid.com:55238"
+    host = "https://fbn-prd.lusid.com/api"
 )
 
 # The client must configure the authentication and authorization parameters
@@ -1137,7 +1137,7 @@ configuration = lusid.Configuration(
 
 # Configure OAuth2 access token for authorization: oauth2
 configuration = lusid.Configuration(
-    host = "http://local-unit-test-server.lusid.com:55238"
+    host = "https://fbn-prd.lusid.com/api"
 )
 configuration.access_token = 'YOUR_ACCESS_TOKEN'
 
@@ -1152,7 +1152,7 @@ adjust_holding_request = [{"instrumentIdentifiers":{"instrument/default/Figi":"B
 reconciliation_methods = ['reconciliation_methods_example'] # list[str] | Optional parameter for specifying a reconciliation method: e.g. FxForward. (optional)
 
     try:
-        # SetHoldings: Set holdings
+        # Set holdings
         api_response = api_instance.set_holdings(scope, code, effective_at, adjust_holding_request, reconciliation_methods=reconciliation_methods)
         pprint(api_response)
     except ApiException as e:
@@ -1194,7 +1194,7 @@ Name | Type | Description  | Notes
 # **upsert_portfolio_details**
 > PortfolioDetails upsert_portfolio_details(scope, code, create_portfolio_details, effective_at=effective_at)
 
-UpsertPortfolioDetails: Upsert portfolio details
+Upsert portfolio details
 
 Create or update certain details for a particular transaction portfolio. The details are updated if they already exist, and inserted if they do not.                Note that not all elements of a transaction portfolio definition are  modifiable once it has been created due to the potential implications for data already stored.
 
@@ -1207,10 +1207,10 @@ import time
 import lusid
 from lusid.rest import ApiException
 from pprint import pprint
-# Defining the host is optional and defaults to http://local-unit-test-server.lusid.com:55238
+# Defining the host is optional and defaults to https://fbn-prd.lusid.com/api
 # See configuration.py for a list of all supported configuration parameters.
 configuration = lusid.Configuration(
-    host = "http://local-unit-test-server.lusid.com:55238"
+    host = "https://fbn-prd.lusid.com/api"
 )
 
 # The client must configure the authentication and authorization parameters
@@ -1220,7 +1220,7 @@ configuration = lusid.Configuration(
 
 # Configure OAuth2 access token for authorization: oauth2
 configuration = lusid.Configuration(
-    host = "http://local-unit-test-server.lusid.com:55238"
+    host = "https://fbn-prd.lusid.com/api"
 )
 configuration.access_token = 'YOUR_ACCESS_TOKEN'
 
@@ -1234,7 +1234,7 @@ create_portfolio_details = {"corporateActionSourceId":{"scope":"Sources","code":
 effective_at = 'effective_at_example' # str | The effective datetime or cut label at which the updated or inserted details should become valid.               Defaults to the current LUSID system datetime if not specified. (optional)
 
     try:
-        # UpsertPortfolioDetails: Upsert portfolio details
+        # Upsert portfolio details
         api_response = api_instance.upsert_portfolio_details(scope, code, create_portfolio_details, effective_at=effective_at)
         pprint(api_response)
     except ApiException as e:
@@ -1275,7 +1275,7 @@ Name | Type | Description  | Notes
 # **upsert_transaction_properties**
 > UpsertTransactionPropertiesResponse upsert_transaction_properties(scope, code, transaction_id, request_body)
 
-UpsertTransactionProperties: Upsert transaction properties
+Upsert transaction properties
 
 Create or update one or more transaction properties for a single transaction in the transaction portfolio.  Each property will be updated if it already exists and created if it does not.  Both transaction and portfolio must exist at the time when properties are created or updated.
 
@@ -1288,10 +1288,10 @@ import time
 import lusid
 from lusid.rest import ApiException
 from pprint import pprint
-# Defining the host is optional and defaults to http://local-unit-test-server.lusid.com:55238
+# Defining the host is optional and defaults to https://fbn-prd.lusid.com/api
 # See configuration.py for a list of all supported configuration parameters.
 configuration = lusid.Configuration(
-    host = "http://local-unit-test-server.lusid.com:55238"
+    host = "https://fbn-prd.lusid.com/api"
 )
 
 # The client must configure the authentication and authorization parameters
@@ -1301,7 +1301,7 @@ configuration = lusid.Configuration(
 
 # Configure OAuth2 access token for authorization: oauth2
 configuration = lusid.Configuration(
-    host = "http://local-unit-test-server.lusid.com:55238"
+    host = "https://fbn-prd.lusid.com/api"
 )
 configuration.access_token = 'YOUR_ACCESS_TOKEN'
 
@@ -1315,7 +1315,7 @@ transaction_id = 'transaction_id_example' # str | The unique ID of the transacti
 request_body = {"transaction/MyScope/MyPropertyName":{"key":"Transaction/MyScope/MyPropertyName","value":{"metricValue":{"value":12345.5672,"unit":"Unit"}}},"transaction/MyScope/MyPropertyName2":{"key":"Transaction/MyScope/MyPropertyName2","value":{"metricValue":{"value":925.3,"unit":"Unit"}}}} # dict(str, PerpetualProperty) | The properties and their associated values to create or update.
 
     try:
-        # UpsertTransactionProperties: Upsert transaction properties
+        # Upsert transaction properties
         api_response = api_instance.upsert_transaction_properties(scope, code, transaction_id, request_body)
         pprint(api_response)
     except ApiException as e:
@@ -1356,7 +1356,7 @@ Name | Type | Description  | Notes
 # **upsert_transactions**
 > UpsertPortfolioTransactionsResponse upsert_transactions(scope, code, transaction_request)
 
-UpsertTransactions: Upsert transactions
+Upsert transactions
 
 Create or update transactions in the transaction portfolio. A transaction will be updated  if it already exists and created if it does not.  The maximum number of transactions that this method can upsert per request is 10,000.
 
@@ -1369,10 +1369,10 @@ import time
 import lusid
 from lusid.rest import ApiException
 from pprint import pprint
-# Defining the host is optional and defaults to http://local-unit-test-server.lusid.com:55238
+# Defining the host is optional and defaults to https://fbn-prd.lusid.com/api
 # See configuration.py for a list of all supported configuration parameters.
 configuration = lusid.Configuration(
-    host = "http://local-unit-test-server.lusid.com:55238"
+    host = "https://fbn-prd.lusid.com/api"
 )
 
 # The client must configure the authentication and authorization parameters
@@ -1382,7 +1382,7 @@ configuration = lusid.Configuration(
 
 # Configure OAuth2 access token for authorization: oauth2
 configuration = lusid.Configuration(
-    host = "http://local-unit-test-server.lusid.com:55238"
+    host = "https://fbn-prd.lusid.com/api"
 )
 configuration.access_token = 'YOUR_ACCESS_TOKEN'
 
@@ -1395,7 +1395,7 @@ code = 'code_example' # str | The code of the transaction portfolio. Together wi
 transaction_request = [{"transactionId":"TransactionId-111111","type":"StockIn","instrumentIdentifiers":{"instrument/default/Figi":"BBG000C6K6G9","instrument/default/Isin":"GB00BH4HKS39"},"transactionDate":"2018-03-05T00:00:00.0000000+00:00","settlementDate":"2018-03-08T00:00:00.0000000+00:00","units":1000,"transactionPrice":{"price":123,"type":"Price"},"totalConsideration":{"amount":123000,"currency":"GBP"},"transactionCurrency":"GBP","properties":{"transaction/Algo/Name":{"key":"Transaction/Algo/Name","value":{"labelValue":"Algo1"}}},"counterpartyId":"CounterpartyId-118263","source":""}] # list[TransactionRequest] | A list of transactions to be created or updated.
 
     try:
-        # UpsertTransactions: Upsert transactions
+        # Upsert transactions
         api_response = api_instance.upsert_transactions(scope, code, transaction_request)
         pprint(api_response)
     except ApiException as e:

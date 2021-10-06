@@ -1,19 +1,19 @@
 # lusid.ReferencePortfolioApi
 
-All URIs are relative to *http://local-unit-test-server.lusid.com:55238*
+All URIs are relative to *https://fbn-prd.lusid.com/api*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
-[**create_reference_portfolio**](ReferencePortfolioApi.md#create_reference_portfolio) | **POST** /api/referenceportfolios/{scope} | CreateReferencePortfolio: Create reference portfolio
-[**get_reference_portfolio_constituents**](ReferencePortfolioApi.md#get_reference_portfolio_constituents) | **GET** /api/referenceportfolios/{scope}/{code}/constituents | GetReferencePortfolioConstituents: Get reference portfolio constituents
-[**list_constituents_adjustments**](ReferencePortfolioApi.md#list_constituents_adjustments) | **GET** /api/referenceportfolios/{scope}/{code}/constituentsadjustments | ListConstituentsAdjustments: List constituents adjustments
-[**upsert_reference_portfolio_constituents**](ReferencePortfolioApi.md#upsert_reference_portfolio_constituents) | **POST** /api/referenceportfolios/{scope}/{code}/constituents | UpsertReferencePortfolioConstituents: Upsert reference portfolio constituents
+[**create_reference_portfolio**](ReferencePortfolioApi.md#create_reference_portfolio) | **POST** /api/referenceportfolios/{scope} | Create reference portfolio
+[**get_reference_portfolio_constituents**](ReferencePortfolioApi.md#get_reference_portfolio_constituents) | **GET** /api/referenceportfolios/{scope}/{code}/constituents | Get reference portfolio constituents
+[**list_constituents_adjustments**](ReferencePortfolioApi.md#list_constituents_adjustments) | **GET** /api/referenceportfolios/{scope}/{code}/constituentsadjustments | List constituents adjustments
+[**upsert_reference_portfolio_constituents**](ReferencePortfolioApi.md#upsert_reference_portfolio_constituents) | **POST** /api/referenceportfolios/{scope}/{code}/constituents | Upsert reference portfolio constituents
 
 
 # **create_reference_portfolio**
 > Portfolio create_reference_portfolio(scope, create_reference_portfolio_request)
 
-CreateReferencePortfolio: Create reference portfolio
+Create reference portfolio
 
 Create a reference portfolio in a particular scope.
 
@@ -26,10 +26,10 @@ import time
 import lusid
 from lusid.rest import ApiException
 from pprint import pprint
-# Defining the host is optional and defaults to http://local-unit-test-server.lusid.com:55238
+# Defining the host is optional and defaults to https://fbn-prd.lusid.com/api
 # See configuration.py for a list of all supported configuration parameters.
 configuration = lusid.Configuration(
-    host = "http://local-unit-test-server.lusid.com:55238"
+    host = "https://fbn-prd.lusid.com/api"
 )
 
 # The client must configure the authentication and authorization parameters
@@ -39,7 +39,7 @@ configuration = lusid.Configuration(
 
 # Configure OAuth2 access token for authorization: oauth2
 configuration = lusid.Configuration(
-    host = "http://local-unit-test-server.lusid.com:55238"
+    host = "https://fbn-prd.lusid.com/api"
 )
 configuration.access_token = 'YOUR_ACCESS_TOKEN'
 
@@ -51,7 +51,7 @@ with lusid.ApiClient(configuration) as api_client:
 create_reference_portfolio_request = {"displayName":"MyPortfolioName","description":"Description of my portfolio","code":"MyPortfolioCode","created":"2018-03-05T00:00:00.0000000+00:00","properties":{}} # CreateReferencePortfolioRequest | The definition of the reference portfolio.
 
     try:
-        # CreateReferencePortfolio: Create reference portfolio
+        # Create reference portfolio
         api_response = api_instance.create_reference_portfolio(scope, create_reference_portfolio_request)
         pprint(api_response)
     except ApiException as e:
@@ -90,7 +90,7 @@ Name | Type | Description  | Notes
 # **get_reference_portfolio_constituents**
 > GetReferencePortfolioConstituentsResponse get_reference_portfolio_constituents(scope, code, effective_at=effective_at, as_at=as_at, property_keys=property_keys)
 
-GetReferencePortfolioConstituents: Get reference portfolio constituents
+Get reference portfolio constituents
 
 Get constituents from a reference portfolio at a particular effective time.
 
@@ -103,10 +103,10 @@ import time
 import lusid
 from lusid.rest import ApiException
 from pprint import pprint
-# Defining the host is optional and defaults to http://local-unit-test-server.lusid.com:55238
+# Defining the host is optional and defaults to https://fbn-prd.lusid.com/api
 # See configuration.py for a list of all supported configuration parameters.
 configuration = lusid.Configuration(
-    host = "http://local-unit-test-server.lusid.com:55238"
+    host = "https://fbn-prd.lusid.com/api"
 )
 
 # The client must configure the authentication and authorization parameters
@@ -116,7 +116,7 @@ configuration = lusid.Configuration(
 
 # Configure OAuth2 access token for authorization: oauth2
 configuration = lusid.Configuration(
-    host = "http://local-unit-test-server.lusid.com:55238"
+    host = "https://fbn-prd.lusid.com/api"
 )
 configuration.access_token = 'YOUR_ACCESS_TOKEN'
 
@@ -131,7 +131,7 @@ as_at = '2013-10-20T19:20:30+01:00' # datetime | The asAt datetime at which to r
 property_keys = ['property_keys_example'] # list[str] | A list of property keys from the 'Instrument' or 'ReferenceHolding' domain to decorate onto              constituents. These take the format {domain}/{scope}/{code} e.g. 'Instrument/system/Name' or              'ReferenceHolding/strategy/quantsignal'. Defaults to return all available instrument and reference holding properties if not specified. (optional)
 
     try:
-        # GetReferencePortfolioConstituents: Get reference portfolio constituents
+        # Get reference portfolio constituents
         api_response = api_instance.get_reference_portfolio_constituents(scope, code, effective_at=effective_at, as_at=as_at, property_keys=property_keys)
         pprint(api_response)
     except ApiException as e:
@@ -173,7 +173,7 @@ Name | Type | Description  | Notes
 # **list_constituents_adjustments**
 > ResourceListOfConstituentsAdjustmentHeader list_constituents_adjustments(scope, code, from_effective_at, to_effective_at, as_at_time=as_at_time)
 
-ListConstituentsAdjustments: List constituents adjustments
+List constituents adjustments
 
 List adjustments made to constituents in a reference portfolio.
 
@@ -186,10 +186,10 @@ import time
 import lusid
 from lusid.rest import ApiException
 from pprint import pprint
-# Defining the host is optional and defaults to http://local-unit-test-server.lusid.com:55238
+# Defining the host is optional and defaults to https://fbn-prd.lusid.com/api
 # See configuration.py for a list of all supported configuration parameters.
 configuration = lusid.Configuration(
-    host = "http://local-unit-test-server.lusid.com:55238"
+    host = "https://fbn-prd.lusid.com/api"
 )
 
 # The client must configure the authentication and authorization parameters
@@ -199,7 +199,7 @@ configuration = lusid.Configuration(
 
 # Configure OAuth2 access token for authorization: oauth2
 configuration = lusid.Configuration(
-    host = "http://local-unit-test-server.lusid.com:55238"
+    host = "https://fbn-prd.lusid.com/api"
 )
 configuration.access_token = 'YOUR_ACCESS_TOKEN'
 
@@ -214,7 +214,7 @@ to_effective_at = 'to_effective_at_example' # str | Events between this time (in
 as_at_time = '2013-10-20T19:20:30+01:00' # datetime | The asAt time for which the result is valid. (optional)
 
     try:
-        # ListConstituentsAdjustments: List constituents adjustments
+        # List constituents adjustments
         api_response = api_instance.list_constituents_adjustments(scope, code, from_effective_at, to_effective_at, as_at_time=as_at_time)
         pprint(api_response)
     except ApiException as e:
@@ -256,7 +256,7 @@ Name | Type | Description  | Notes
 # **upsert_reference_portfolio_constituents**
 > UpsertReferencePortfolioConstituentsResponse upsert_reference_portfolio_constituents(scope, code, upsert_reference_portfolio_constituents_request)
 
-UpsertReferencePortfolioConstituents: Upsert reference portfolio constituents
+Upsert reference portfolio constituents
 
 Add constituents to a reference portfolio.
 
@@ -269,10 +269,10 @@ import time
 import lusid
 from lusid.rest import ApiException
 from pprint import pprint
-# Defining the host is optional and defaults to http://local-unit-test-server.lusid.com:55238
+# Defining the host is optional and defaults to https://fbn-prd.lusid.com/api
 # See configuration.py for a list of all supported configuration parameters.
 configuration = lusid.Configuration(
-    host = "http://local-unit-test-server.lusid.com:55238"
+    host = "https://fbn-prd.lusid.com/api"
 )
 
 # The client must configure the authentication and authorization parameters
@@ -282,7 +282,7 @@ configuration = lusid.Configuration(
 
 # Configure OAuth2 access token for authorization: oauth2
 configuration = lusid.Configuration(
-    host = "http://local-unit-test-server.lusid.com:55238"
+    host = "https://fbn-prd.lusid.com/api"
 )
 configuration.access_token = 'YOUR_ACCESS_TOKEN'
 
@@ -295,7 +295,7 @@ code = 'code_example' # str | The code of the reference portfolio. Together with
 upsert_reference_portfolio_constituents_request = {"effectiveFrom":"2018-03-05T00:00:00.0000000+00:00","weightType":"Periodical","periodType":"Quarterly","periodCount":2,"constituents":[{"instrumentIdentifiers":{"instrument/default/Figi":"BBG0077GZM13","instrument/default/Isin":"GB00BH4HKS39"},"properties":{"portfolio/MyScope/MyPropertyKey":{"key":"Portfolio/MyScope/MyPropertyKey","value":{"metricValue":{"value":12345.5672,"unit":"Unit"}}}},"weight":100,"currency":"GBP"},{"instrumentIdentifiers":{"instrument/default/Figi":"BBG0077H2WN1","instrument/default/Isin":"US0378331005"},"properties":{},"weight":50,"currency":"USD"}]} # UpsertReferencePortfolioConstituentsRequest | The constituents to upload to the reference portfolio.
 
     try:
-        # UpsertReferencePortfolioConstituents: Upsert reference portfolio constituents
+        # Upsert reference portfolio constituents
         api_response = api_instance.upsert_reference_portfolio_constituents(scope, code, upsert_reference_portfolio_constituents_request)
         pprint(api_response)
     except ApiException as e:

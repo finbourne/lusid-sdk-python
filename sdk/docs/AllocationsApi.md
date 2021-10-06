@@ -1,19 +1,19 @@
 # lusid.AllocationsApi
 
-All URIs are relative to *http://local-unit-test-server.lusid.com:55238*
+All URIs are relative to *https://fbn-prd.lusid.com/api*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
-[**delete_allocation**](AllocationsApi.md#delete_allocation) | **DELETE** /api/allocations/{scope}/{code} | [EARLY ACCESS] DeleteAllocation: Delete allocation
-[**get_allocation**](AllocationsApi.md#get_allocation) | **GET** /api/allocations/{scope}/{code} | [EARLY ACCESS] GetAllocation: Get Allocation
-[**list_allocations**](AllocationsApi.md#list_allocations) | **GET** /api/allocations | [EARLY ACCESS] ListAllocations: List Allocations
-[**upsert_allocations**](AllocationsApi.md#upsert_allocations) | **POST** /api/allocations | [EARLY ACCESS] UpsertAllocations: Upsert Allocations
+[**delete_allocation**](AllocationsApi.md#delete_allocation) | **DELETE** /api/allocations/{scope}/{code} | [EARLY ACCESS] Delete allocation
+[**get_allocation**](AllocationsApi.md#get_allocation) | **GET** /api/allocations/{scope}/{code} | [EARLY ACCESS] Get Allocation
+[**list_allocations**](AllocationsApi.md#list_allocations) | **GET** /api/allocations | [EARLY ACCESS] List Allocations
+[**upsert_allocations**](AllocationsApi.md#upsert_allocations) | **POST** /api/allocations | [EARLY ACCESS] Upsert Allocations
 
 
 # **delete_allocation**
 > DeletedEntityResponse delete_allocation(scope, code)
 
-[EARLY ACCESS] DeleteAllocation: Delete allocation
+[EARLY ACCESS] Delete allocation
 
 Delete an allocation. Deletion will be valid from the allocation's creation datetime.  This means that the allocation will no longer exist at any effective datetime from the asAt datetime of deletion.
 
@@ -26,10 +26,10 @@ import time
 import lusid
 from lusid.rest import ApiException
 from pprint import pprint
-# Defining the host is optional and defaults to http://local-unit-test-server.lusid.com:55238
+# Defining the host is optional and defaults to https://fbn-prd.lusid.com/api
 # See configuration.py for a list of all supported configuration parameters.
 configuration = lusid.Configuration(
-    host = "http://local-unit-test-server.lusid.com:55238"
+    host = "https://fbn-prd.lusid.com/api"
 )
 
 # The client must configure the authentication and authorization parameters
@@ -39,7 +39,7 @@ configuration = lusid.Configuration(
 
 # Configure OAuth2 access token for authorization: oauth2
 configuration = lusid.Configuration(
-    host = "http://local-unit-test-server.lusid.com:55238"
+    host = "https://fbn-prd.lusid.com/api"
 )
 configuration.access_token = 'YOUR_ACCESS_TOKEN'
 
@@ -51,7 +51,7 @@ with lusid.ApiClient(configuration) as api_client:
 code = 'code_example' # str | The allocation's code. This, together with the scope uniquely identifies the allocation to delete.
 
     try:
-        # [EARLY ACCESS] DeleteAllocation: Delete allocation
+        # [EARLY ACCESS] Delete allocation
         api_response = api_instance.delete_allocation(scope, code)
         pprint(api_response)
     except ApiException as e:
@@ -90,7 +90,7 @@ Name | Type | Description  | Notes
 # **get_allocation**
 > Allocation get_allocation(scope, code, as_at=as_at, property_keys=property_keys)
 
-[EARLY ACCESS] GetAllocation: Get Allocation
+[EARLY ACCESS] Get Allocation
 
 Fetch an Allocation matching the provided identifier
 
@@ -103,10 +103,10 @@ import time
 import lusid
 from lusid.rest import ApiException
 from pprint import pprint
-# Defining the host is optional and defaults to http://local-unit-test-server.lusid.com:55238
+# Defining the host is optional and defaults to https://fbn-prd.lusid.com/api
 # See configuration.py for a list of all supported configuration parameters.
 configuration = lusid.Configuration(
-    host = "http://local-unit-test-server.lusid.com:55238"
+    host = "https://fbn-prd.lusid.com/api"
 )
 
 # The client must configure the authentication and authorization parameters
@@ -116,7 +116,7 @@ configuration = lusid.Configuration(
 
 # Configure OAuth2 access token for authorization: oauth2
 configuration = lusid.Configuration(
-    host = "http://local-unit-test-server.lusid.com:55238"
+    host = "https://fbn-prd.lusid.com/api"
 )
 configuration.access_token = 'YOUR_ACCESS_TOKEN'
 
@@ -130,7 +130,7 @@ as_at = '2013-10-20T19:20:30+01:00' # datetime | The asAt datetime at which to r
 property_keys = ['property_keys_example'] # list[str] | A list of property keys from the \"Allocations\" domain to decorate onto the allocation.              These take the format {domain}/{scope}/{code} e.g. \"Allocations/system/Name\". (optional)
 
     try:
-        # [EARLY ACCESS] GetAllocation: Get Allocation
+        # [EARLY ACCESS] Get Allocation
         api_response = api_instance.get_allocation(scope, code, as_at=as_at, property_keys=property_keys)
         pprint(api_response)
     except ApiException as e:
@@ -171,7 +171,7 @@ Name | Type | Description  | Notes
 # **list_allocations**
 > PagedResourceListOfAllocation list_allocations(as_at=as_at, page=page, sort_by=sort_by, start=start, limit=limit, filter=filter, property_keys=property_keys)
 
-[EARLY ACCESS] ListAllocations: List Allocations
+[EARLY ACCESS] List Allocations
 
 Fetch the last pre-AsAt date version of each allocation in scope (does not fetch the entire history).
 
@@ -184,10 +184,10 @@ import time
 import lusid
 from lusid.rest import ApiException
 from pprint import pprint
-# Defining the host is optional and defaults to http://local-unit-test-server.lusid.com:55238
+# Defining the host is optional and defaults to https://fbn-prd.lusid.com/api
 # See configuration.py for a list of all supported configuration parameters.
 configuration = lusid.Configuration(
-    host = "http://local-unit-test-server.lusid.com:55238"
+    host = "https://fbn-prd.lusid.com/api"
 )
 
 # The client must configure the authentication and authorization parameters
@@ -197,7 +197,7 @@ configuration = lusid.Configuration(
 
 # Configure OAuth2 access token for authorization: oauth2
 configuration = lusid.Configuration(
-    host = "http://local-unit-test-server.lusid.com:55238"
+    host = "https://fbn-prd.lusid.com/api"
 )
 configuration.access_token = 'YOUR_ACCESS_TOKEN'
 
@@ -214,7 +214,7 @@ filter = '' # str | Expression to filter the result set. Read more about filteri
 property_keys = ['property_keys_example'] # list[str] | A list of property keys from the \"Allocations\" domain to decorate onto each allocation.                  These take the format {domain}/{scope}/{code} e.g. \"Allocations/system/Name\". (optional)
 
     try:
-        # [EARLY ACCESS] ListAllocations: List Allocations
+        # [EARLY ACCESS] List Allocations
         api_response = api_instance.list_allocations(as_at=as_at, page=page, sort_by=sort_by, start=start, limit=limit, filter=filter, property_keys=property_keys)
         pprint(api_response)
     except ApiException as e:
@@ -258,7 +258,7 @@ Name | Type | Description  | Notes
 # **upsert_allocations**
 > ResourceListOfAllocation upsert_allocations(allocation_set_request=allocation_set_request)
 
-[EARLY ACCESS] UpsertAllocations: Upsert Allocations
+[EARLY ACCESS] Upsert Allocations
 
 Upsert; update existing allocations with given ids, or create new allocations otherwise.
 
@@ -271,10 +271,10 @@ import time
 import lusid
 from lusid.rest import ApiException
 from pprint import pprint
-# Defining the host is optional and defaults to http://local-unit-test-server.lusid.com:55238
+# Defining the host is optional and defaults to https://fbn-prd.lusid.com/api
 # See configuration.py for a list of all supported configuration parameters.
 configuration = lusid.Configuration(
-    host = "http://local-unit-test-server.lusid.com:55238"
+    host = "https://fbn-prd.lusid.com/api"
 )
 
 # The client must configure the authentication and authorization parameters
@@ -284,7 +284,7 @@ configuration = lusid.Configuration(
 
 # Configure OAuth2 access token for authorization: oauth2
 configuration = lusid.Configuration(
-    host = "http://local-unit-test-server.lusid.com:55238"
+    host = "https://fbn-prd.lusid.com/api"
 )
 configuration.access_token = 'YOUR_ACCESS_TOKEN'
 
@@ -295,7 +295,7 @@ with lusid.ApiClient(configuration) as api_client:
     allocation_set_request = {"allocationRequests":[{"properties":{"allocation/MyScope/SomeAllocationProperty":{"key":"Allocation/MyScope/SomeAllocationProperty","value":{"labelValue":"XYZ000034567"}}},"instrumentIdentifiers":{"instrument/default/Currency":"GBP"},"quantity":100,"portfolioId":{"scope":"MyScope","code":"UK Equity"},"allocatedOrderId":{"scope":"MyScope","code":"ORD00000123"},"id":{"scope":"MyScope","code":"ALLOC00000123"},"placementIds":[{"scope":"MyScope","code":"A placement"}],"state":"New","side":"Buy","type":"Limit","settlementDate":"2006-04-14T00:00:00.0000000+00:00","date":"2006-04-11T00:00:00.0000000+00:00","price":{"amount":12413.33,"currency":"USD"},"settlementCurrency":"USD","settlementCurrencyFxRate":1,"counterparty":"SomeCounterparty"}]} # AllocationSetRequest | The collection of allocation requests. (optional)
 
     try:
-        # [EARLY ACCESS] UpsertAllocations: Upsert Allocations
+        # [EARLY ACCESS] Upsert Allocations
         api_response = api_instance.upsert_allocations(allocation_set_request=allocation_set_request)
         pprint(api_response)
     except ApiException as e:
