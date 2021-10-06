@@ -4,17 +4,17 @@ All URIs are relative to *https://fbn-prd.lusid.com/api*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
-[**create_cut_label_definition**](CutLabelDefinitionsApi.md#create_cut_label_definition) | **POST** /api/systemconfiguration/cutlabels | [EARLY ACCESS] Create a Cut Label
-[**delete_cut_label_definition**](CutLabelDefinitionsApi.md#delete_cut_label_definition) | **DELETE** /api/systemconfiguration/cutlabels/{code} | [EARLY ACCESS] Delete a Cut Label
-[**get_cut_label_definition**](CutLabelDefinitionsApi.md#get_cut_label_definition) | **GET** /api/systemconfiguration/cutlabels/{code} | [EARLY ACCESS] Get a Cut Label
-[**list_cut_label_definitions**](CutLabelDefinitionsApi.md#list_cut_label_definitions) | **GET** /api/systemconfiguration/cutlabels | [EARLY ACCESS] List Existing Cut Labels
-[**update_cut_label_definition**](CutLabelDefinitionsApi.md#update_cut_label_definition) | **PUT** /api/systemconfiguration/cutlabels/{code} | [EARLY ACCESS] Update a Cut Label
+[**create_cut_label_definition**](CutLabelDefinitionsApi.md#create_cut_label_definition) | **POST** /api/systemconfiguration/cutlabels | [EARLY ACCESS] CreateCutLabelDefinition: Create a Cut Label
+[**delete_cut_label_definition**](CutLabelDefinitionsApi.md#delete_cut_label_definition) | **DELETE** /api/systemconfiguration/cutlabels/{code} | [EARLY ACCESS] DeleteCutLabelDefinition: Delete a Cut Label
+[**get_cut_label_definition**](CutLabelDefinitionsApi.md#get_cut_label_definition) | **GET** /api/systemconfiguration/cutlabels/{code} | [EARLY ACCESS] GetCutLabelDefinition: Get a Cut Label
+[**list_cut_label_definitions**](CutLabelDefinitionsApi.md#list_cut_label_definitions) | **GET** /api/systemconfiguration/cutlabels | [EARLY ACCESS] ListCutLabelDefinitions: List Existing Cut Labels
+[**update_cut_label_definition**](CutLabelDefinitionsApi.md#update_cut_label_definition) | **PUT** /api/systemconfiguration/cutlabels/{code} | [EARLY ACCESS] UpdateCutLabelDefinition: Update a Cut Label
 
 
 # **create_cut_label_definition**
 > CutLabelDefinition create_cut_label_definition(create_cut_label_definition_request=create_cut_label_definition_request)
 
-[EARLY ACCESS] Create a Cut Label
+[EARLY ACCESS] CreateCutLabelDefinition: Create a Cut Label
 
 Create a Cut Label valid in all scopes
 
@@ -51,7 +51,7 @@ with lusid.ApiClient(configuration) as api_client:
     create_cut_label_definition_request = {"code":"CutLabelCode","displayName":"CutLabelDisplayName","description":"description of cut label","cutLocalTime":{"hours":17,"minutes":0},"timeZone":"GB"} # CreateCutLabelDefinitionRequest | The cut label definition (optional)
 
     try:
-        # [EARLY ACCESS] Create a Cut Label
+        # [EARLY ACCESS] CreateCutLabelDefinition: Create a Cut Label
         api_response = api_instance.create_cut_label_definition(create_cut_label_definition_request=create_cut_label_definition_request)
         pprint(api_response)
     except ApiException as e:
@@ -89,7 +89,7 @@ Name | Type | Description  | Notes
 # **delete_cut_label_definition**
 > datetime delete_cut_label_definition(code)
 
-[EARLY ACCESS] Delete a Cut Label
+[EARLY ACCESS] DeleteCutLabelDefinition: Delete a Cut Label
 
 Delete a specified cut label
 
@@ -126,7 +126,7 @@ with lusid.ApiClient(configuration) as api_client:
     code = 'code_example' # str | The Code of the Cut Label that is being Deleted
 
     try:
-        # [EARLY ACCESS] Delete a Cut Label
+        # [EARLY ACCESS] DeleteCutLabelDefinition: Delete a Cut Label
         api_response = api_instance.delete_cut_label_definition(code)
         pprint(api_response)
     except ApiException as e:
@@ -164,7 +164,7 @@ Name | Type | Description  | Notes
 # **get_cut_label_definition**
 > CutLabelDefinition get_cut_label_definition(code, as_at=as_at)
 
-[EARLY ACCESS] Get a Cut Label
+[EARLY ACCESS] GetCutLabelDefinition: Get a Cut Label
 
 Get a specified cut label at a given time
 
@@ -202,7 +202,7 @@ with lusid.ApiClient(configuration) as api_client:
 as_at = '2013-10-20T19:20:30+01:00' # datetime | The time at which to get the Cut Label (optional)
 
     try:
-        # [EARLY ACCESS] Get a Cut Label
+        # [EARLY ACCESS] GetCutLabelDefinition: Get a Cut Label
         api_response = api_instance.get_cut_label_definition(code, as_at=as_at)
         pprint(api_response)
     except ApiException as e:
@@ -241,7 +241,7 @@ Name | Type | Description  | Notes
 # **list_cut_label_definitions**
 > PagedResourceListOfCutLabelDefinition list_cut_label_definitions(as_at=as_at, sort_by=sort_by, start=start, limit=limit, filter=filter, page=page)
 
-[EARLY ACCESS] List Existing Cut Labels
+[EARLY ACCESS] ListCutLabelDefinitions: List Existing Cut Labels
 
 List all the Cut Label Definitions that are valid at the given AsAt time
 
@@ -283,7 +283,7 @@ filter = 'filter_example' # str | Optional. Expression to filter the result set.
 page = 'page_example' # str | The pagination token to use to continue listing cut labels from a previous call This value is returned from the previous call.  If a pagination token is provided the sortBy, filter, and asAt fields  must not have changed since the original request. Also, if set, a start value cannot be provided. (optional)
 
     try:
-        # [EARLY ACCESS] List Existing Cut Labels
+        # [EARLY ACCESS] ListCutLabelDefinitions: List Existing Cut Labels
         api_response = api_instance.list_cut_label_definitions(as_at=as_at, sort_by=sort_by, start=start, limit=limit, filter=filter, page=page)
         pprint(api_response)
     except ApiException as e:
@@ -326,7 +326,7 @@ Name | Type | Description  | Notes
 # **update_cut_label_definition**
 > CutLabelDefinition update_cut_label_definition(code, update_cut_label_definition_request=update_cut_label_definition_request)
 
-[EARLY ACCESS] Update a Cut Label
+[EARLY ACCESS] UpdateCutLabelDefinition: Update a Cut Label
 
 Update a specified cut label
 
@@ -364,7 +364,7 @@ with lusid.ApiClient(configuration) as api_client:
 update_cut_label_definition_request = {"displayName":"CutLabelDisplayName","description":"description of cut label","cutLocalTime":{"hours":17,"minutes":0},"timeZone":"GB"} # UpdateCutLabelDefinitionRequest | The cut label update definition (optional)
 
     try:
-        # [EARLY ACCESS] Update a Cut Label
+        # [EARLY ACCESS] UpdateCutLabelDefinition: Update a Cut Label
         api_response = api_instance.update_cut_label_definition(code, update_cut_label_definition_request=update_cut_label_definition_request)
         pprint(api_response)
     except ApiException as e:

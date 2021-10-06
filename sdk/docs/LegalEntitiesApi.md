@@ -4,16 +4,16 @@ All URIs are relative to *https://fbn-prd.lusid.com/api*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
-[**delete_legal_entity**](LegalEntitiesApi.md#delete_legal_entity) | **DELETE** /api/legalentities/{idTypeScope}/{idTypeCode}/{code} | [EARLY ACCESS] Delete Legal Entity
-[**get_legal_entity**](LegalEntitiesApi.md#get_legal_entity) | **GET** /api/legalentities/{idTypeScope}/{idTypeCode}/{code} | [EARLY ACCESS] Get Legal Entity
-[**list_legal_entities**](LegalEntitiesApi.md#list_legal_entities) | **GET** /api/legalentities/{idTypeScope}/{idTypeCode} | [EARLY ACCESS] List Legal Entities
-[**upsert_legal_entity**](LegalEntitiesApi.md#upsert_legal_entity) | **POST** /api/legalentities | [EARLY ACCESS] Upsert Legal Entity
+[**delete_legal_entity**](LegalEntitiesApi.md#delete_legal_entity) | **DELETE** /api/legalentities/{idTypeScope}/{idTypeCode}/{code} | [EARLY ACCESS] DeleteLegalEntity: Delete Legal Entity
+[**get_legal_entity**](LegalEntitiesApi.md#get_legal_entity) | **GET** /api/legalentities/{idTypeScope}/{idTypeCode}/{code} | [EARLY ACCESS] GetLegalEntity: Get Legal Entity
+[**list_legal_entities**](LegalEntitiesApi.md#list_legal_entities) | **GET** /api/legalentities/{idTypeScope}/{idTypeCode} | [EARLY ACCESS] ListLegalEntities: List Legal Entities
+[**upsert_legal_entity**](LegalEntitiesApi.md#upsert_legal_entity) | **POST** /api/legalentities | [EARLY ACCESS] UpsertLegalEntity: Upsert Legal Entity
 
 
 # **delete_legal_entity**
 > DeletedEntityResponse delete_legal_entity(id_type_scope, id_type_code, code)
 
-[EARLY ACCESS] Delete Legal Entity
+[EARLY ACCESS] DeleteLegalEntity: Delete Legal Entity
 
 Delete a legal entity. Deletion will be valid from the legal entity's creation datetime.  This means that the legal entity will no longer exist at any effective datetime from the asAt datetime of deletion.
 
@@ -52,7 +52,7 @@ id_type_code = 'id_type_code_example' # str | The code of the legal entity ident
 code = 'code_example' # str | Code of the legal entity under specified identifier type's scope and code. This together with defined              identifier type uniquely identifies the legal entity to delete.
 
     try:
-        # [EARLY ACCESS] Delete Legal Entity
+        # [EARLY ACCESS] DeleteLegalEntity: Delete Legal Entity
         api_response = api_instance.delete_legal_entity(id_type_scope, id_type_code, code)
         pprint(api_response)
     except ApiException as e:
@@ -92,7 +92,7 @@ Name | Type | Description  | Notes
 # **get_legal_entity**
 > LegalEntity get_legal_entity(id_type_scope, id_type_code, code, property_keys=property_keys, effective_at=effective_at, as_at=as_at)
 
-[EARLY ACCESS] Get Legal Entity
+[EARLY ACCESS] GetLegalEntity: Get Legal Entity
 
 Retrieve the definition of a legal entity.
 
@@ -134,7 +134,7 @@ effective_at = 'effective_at_example' # str | The effective datetime or cut labe
 as_at = '2013-10-20T19:20:30+01:00' # datetime | The asAt datetime at which to retrieve the legal entity. Defaults to return the latest version of the legal entity if not specified. (optional)
 
     try:
-        # [EARLY ACCESS] Get Legal Entity
+        # [EARLY ACCESS] GetLegalEntity: Get Legal Entity
         api_response = api_instance.get_legal_entity(id_type_scope, id_type_code, code, property_keys=property_keys, effective_at=effective_at, as_at=as_at)
         pprint(api_response)
     except ApiException as e:
@@ -177,7 +177,7 @@ Name | Type | Description  | Notes
 # **list_legal_entities**
 > PagedResourceListOfLegalEntity list_legal_entities(id_type_scope, id_type_code, effective_at=effective_at, as_at=as_at, page=page, limit=limit, filter=filter, property_keys=property_keys)
 
-[EARLY ACCESS] List Legal Entities
+[EARLY ACCESS] ListLegalEntities: List Legal Entities
 
 List legal entities which has identifier of specific identifier type's scope and code, and satisfies filter criteria.
 
@@ -221,7 +221,7 @@ filter = 'filter_example' # str | Expression to filter the result set.          
 property_keys = ['property_keys_example'] # list[str] | A list of property keys or identifier types (as property keys) from the \"LegalEntity\" domain to include for each legal entity.              These take the format {domain}/{scope}/{code} e.g. \"LegalEntity/ContactDetails/Address\". (optional)
 
     try:
-        # [EARLY ACCESS] List Legal Entities
+        # [EARLY ACCESS] ListLegalEntities: List Legal Entities
         api_response = api_instance.list_legal_entities(id_type_scope, id_type_code, effective_at=effective_at, as_at=as_at, page=page, limit=limit, filter=filter, property_keys=property_keys)
         pprint(api_response)
     except ApiException as e:
@@ -266,7 +266,7 @@ Name | Type | Description  | Notes
 # **upsert_legal_entity**
 > LegalEntity upsert_legal_entity(upsert_legal_entity_request)
 
-[EARLY ACCESS] Upsert Legal Entity
+[EARLY ACCESS] UpsertLegalEntity: Upsert Legal Entity
 
 Create or update a legal entity
 
@@ -303,7 +303,7 @@ with lusid.ApiClient(configuration) as api_client:
     upsert_legal_entity_request = {"identifiers":{"legalEntity/ExternalIdentifier/LEI":{"key":"LegalEntity/ExternalIdentifier/LEI","value":{"labelValue":"LEI_12345678"}},"legalEntity/InternalIdentifier/InternalLeiId":{"key":"LegalEntity/InternalIdentifier/InternalLeiId","value":{"labelValue":"Internal_XHSP2038"}}},"properties":{"legalEntity/Details/Name":{"key":"LegalEntity/Details/Name","value":{"labelValue":"Legal Entity Inc."}},"legalEntity/Details/Country":{"key":"LegalEntity/Details/Country","value":{"labelValue":"United Kingdom"},"effectiveFrom":"2016-01-01T00:00:00.0000000+00:00"},"legalEntity/Status/Active":{"key":"LegalEntity/Status/Active","value":{"labelValue":"Active"},"effectiveFrom":"2016-07-01T00:00:00.0000000+00:00"}},"displayName":"LegalEntity1DisplayName","description":"LegalEntity1Description","counterpartyRiskInformation":{"countryOfRisk":"UnitedKingdom","creditRatings":[{"ratingSource":"StandardAndPoors","rating":"AA+"}],"industryClassifiers":[{"classificationSystemName":"GICS2018","classificationCode":"10101010"}]}} # UpsertLegalEntityRequest | Request to create or update a legal entity.
 
     try:
-        # [EARLY ACCESS] Upsert Legal Entity
+        # [EARLY ACCESS] UpsertLegalEntity: Upsert Legal Entity
         api_response = api_instance.upsert_legal_entity(upsert_legal_entity_request)
         pprint(api_response)
     except ApiException as e:

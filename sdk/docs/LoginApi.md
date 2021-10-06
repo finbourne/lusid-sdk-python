@@ -4,13 +4,13 @@ All URIs are relative to *https://fbn-prd.lusid.com/api*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
-[**get_saml_identity_provider_id**](LoginApi.md#get_saml_identity_provider_id) | **GET** /api/login/saml/{domain} | Get SAML Identity Provider
+[**get_saml_identity_provider_id**](LoginApi.md#get_saml_identity_provider_id) | **GET** /api/login/saml/{domain} | GetSamlIdentityProviderId: Get SAML Identity Provider
 
 
 # **get_saml_identity_provider_id**
 > str get_saml_identity_provider_id(domain)
 
-Get SAML Identity Provider
+GetSamlIdentityProviderId: Get SAML Identity Provider
 
 Get the unique identifier for the SAML 2.0 Identity Provider to be used for domain.
 
@@ -47,7 +47,7 @@ with lusid.ApiClient(configuration) as api_client:
     domain = 'domain_example' # str | The domain that the user will be logging in to
 
     try:
-        # Get SAML Identity Provider
+        # GetSamlIdentityProviderId: Get SAML Identity Provider
         api_response = api_instance.get_saml_identity_provider_id(domain)
         pprint(api_response)
     except ApiException as e:

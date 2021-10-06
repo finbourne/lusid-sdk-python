@@ -4,13 +4,13 @@ All URIs are relative to *https://fbn-prd.lusid.com/api*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
-[**get_portfolio_changes**](EntitiesApi.md#get_portfolio_changes) | **GET** /api/entities/changes/portfolios | [EARLY ACCESS] Get the next change to each portfolio in a scope.
+[**get_portfolio_changes**](EntitiesApi.md#get_portfolio_changes) | **GET** /api/entities/changes/portfolios | [EARLY ACCESS] GetPortfolioChanges: Get the next change to each portfolio in a scope.
 
 
 # **get_portfolio_changes**
 > ResourceListOfChange get_portfolio_changes(scope, effective_at, as_at=as_at)
 
-[EARLY ACCESS] Get the next change to each portfolio in a scope.
+[EARLY ACCESS] GetPortfolioChanges: Get the next change to each portfolio in a scope.
 
 Gets the time of the next (earliest effective at) modification (correction and/or amendment) to each portfolio in a scope relative to a point in bitemporal time.  Includes changes from parent portfolios in different scopes.  Excludes changes from subcriptions (e.g corporate actions).
 
@@ -49,7 +49,7 @@ effective_at = 'effective_at_example' # str | The effective date of the origin.
 as_at = '2013-10-20T19:20:30+01:00' # datetime | The as-at date of the origin. (optional)
 
     try:
-        # [EARLY ACCESS] Get the next change to each portfolio in a scope.
+        # [EARLY ACCESS] GetPortfolioChanges: Get the next change to each portfolio in a scope.
         api_response = api_instance.get_portfolio_changes(scope, effective_at, as_at=as_at)
         pprint(api_response)
     except ApiException as e:

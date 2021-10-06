@@ -4,14 +4,14 @@ All URIs are relative to *https://fbn-prd.lusid.com/api*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
-[**create_configuration_transaction_type**](SystemConfigurationApi.md#create_configuration_transaction_type) | **POST** /api/systemconfiguration/transactions/type | [EARLY ACCESS] Create transaction type
-[**list_configuration_transaction_types**](SystemConfigurationApi.md#list_configuration_transaction_types) | **GET** /api/systemconfiguration/transactions | [EARLY ACCESS] List transaction types
+[**create_configuration_transaction_type**](SystemConfigurationApi.md#create_configuration_transaction_type) | **POST** /api/systemconfiguration/transactions/type | [EARLY ACCESS] CreateConfigurationTransactionType: Create transaction type
+[**list_configuration_transaction_types**](SystemConfigurationApi.md#list_configuration_transaction_types) | **GET** /api/systemconfiguration/transactions | [EARLY ACCESS] ListConfigurationTransactionTypes: List transaction types
 
 
 # **create_configuration_transaction_type**
 > TransactionSetConfigurationData create_configuration_transaction_type(transaction_configuration_data_request=transaction_configuration_data_request)
 
-[EARLY ACCESS] Create transaction type
+[EARLY ACCESS] CreateConfigurationTransactionType: Create transaction type
 
 Create a new transaction type by specifying a definition and mappings to movements.
 
@@ -48,7 +48,7 @@ with lusid.ApiClient(configuration) as api_client:
     transaction_configuration_data_request = {"aliases":[{"type":"Another-Sell","description":"Sale","transactionClass":"MyDefault","transactionGroup":"MyGroup","transactionRoles":"LongShorter","isDefault":false}],"movements":[{"movementTypes":"StockMovement","side":"Side1","direction":-1,"properties":{},"mappings":[]},{"movementTypes":"CashCommitment","side":"Side2","direction":1,"properties":{},"mappings":[]}],"properties":{}} # TransactionConfigurationDataRequest | A transaction type definition. (optional)
 
     try:
-        # [EARLY ACCESS] Create transaction type
+        # [EARLY ACCESS] CreateConfigurationTransactionType: Create transaction type
         api_response = api_instance.create_configuration_transaction_type(transaction_configuration_data_request=transaction_configuration_data_request)
         pprint(api_response)
     except ApiException as e:
@@ -86,7 +86,7 @@ Name | Type | Description  | Notes
 # **list_configuration_transaction_types**
 > TransactionSetConfigurationData list_configuration_transaction_types(as_at=as_at)
 
-[EARLY ACCESS] List transaction types
+[EARLY ACCESS] ListConfigurationTransactionTypes: List transaction types
 
 Get the list of current transaction types. For information on the default transaction types provided with  LUSID, see https://support.lusid.com/knowledgebase/article/KA-01873/.
 
@@ -123,7 +123,7 @@ with lusid.ApiClient(configuration) as api_client:
     as_at = '2013-10-20T19:20:30+01:00' # datetime | The asAt datetime at which to retrieve the transaction types. Defaults              to returning the latest versions if not specified. (optional)
 
     try:
-        # [EARLY ACCESS] List transaction types
+        # [EARLY ACCESS] ListConfigurationTransactionTypes: List transaction types
         api_response = api_instance.list_configuration_transaction_types(as_at=as_at)
         pprint(api_response)
     except ApiException as e:

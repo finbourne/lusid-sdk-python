@@ -4,13 +4,13 @@ All URIs are relative to *https://fbn-prd.lusid.com/api*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
-[**list_scopes**](ScopesApi.md#list_scopes) | **GET** /api/scopes | [EARLY ACCESS] List Scopes
+[**list_scopes**](ScopesApi.md#list_scopes) | **GET** /api/scopes | [EARLY ACCESS] ListScopes: List Scopes
 
 
 # **list_scopes**
 > ResourceListOfScopeDefinition list_scopes(filter=filter)
 
-[EARLY ACCESS] List Scopes
+[EARLY ACCESS] ListScopes: List Scopes
 
 List all the scopes that contain data.
 
@@ -47,7 +47,7 @@ with lusid.ApiClient(configuration) as api_client:
     filter = 'filter_example' # str | Expression to filter the result set.              For example, to filter on the Scope, use \"scope eq 'string'\"              Read more about filtering results from LUSID here https://support.lusid.com/filtering-results-from-lusid. (optional)
 
     try:
-        # [EARLY ACCESS] List Scopes
+        # [EARLY ACCESS] ListScopes: List Scopes
         api_response = api_instance.list_scopes(filter=filter)
         pprint(api_response)
     except ApiException as e:

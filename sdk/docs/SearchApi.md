@@ -4,15 +4,15 @@ All URIs are relative to *https://fbn-prd.lusid.com/api*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
-[**search_portfolio_groups**](SearchApi.md#search_portfolio_groups) | **GET** /api/search/portfoliogroups | [EARLY ACCESS] Search Portfolio Groups
-[**search_portfolios**](SearchApi.md#search_portfolios) | **GET** /api/search/portfolios | [EARLY ACCESS] Search Portfolios
-[**search_properties**](SearchApi.md#search_properties) | **GET** /api/search/propertydefinitions | [EARLY ACCESS] Search Property Definitions
+[**search_portfolio_groups**](SearchApi.md#search_portfolio_groups) | **GET** /api/search/portfoliogroups | [EARLY ACCESS] SearchPortfolioGroups: Search Portfolio Groups
+[**search_portfolios**](SearchApi.md#search_portfolios) | **GET** /api/search/portfolios | [EARLY ACCESS] SearchPortfolios: Search Portfolios
+[**search_properties**](SearchApi.md#search_properties) | **GET** /api/search/propertydefinitions | [EARLY ACCESS] SearchProperties: Search Property Definitions
 
 
 # **search_portfolio_groups**
 > PagedResourceListOfPortfolioGroupSearchResult search_portfolio_groups(search=search, filter=filter, sort_by=sort_by, limit=limit, page=page)
 
-[EARLY ACCESS] Search Portfolio Groups
+[EARLY ACCESS] SearchPortfolioGroups: Search Portfolio Groups
 
 Search through all portfolio groups
 
@@ -53,7 +53,7 @@ limit = 56 # int | When paginating, only return this number of records (optional
 page = 'page_example' # str | Encoded page string returned from a previous search result that will retrieve the next page of data. When this field is supplied, filter, sortBy and search fields should not be supplied. (optional)
 
     try:
-        # [EARLY ACCESS] Search Portfolio Groups
+        # [EARLY ACCESS] SearchPortfolioGroups: Search Portfolio Groups
         api_response = api_instance.search_portfolio_groups(search=search, filter=filter, sort_by=sort_by, limit=limit, page=page)
         pprint(api_response)
     except ApiException as e:
@@ -95,7 +95,7 @@ Name | Type | Description  | Notes
 # **search_portfolios**
 > PagedResourceListOfPortfolioSearchResult search_portfolios(search=search, filter=filter, sort_by=sort_by, limit=limit, page=page)
 
-[EARLY ACCESS] Search Portfolios
+[EARLY ACCESS] SearchPortfolios: Search Portfolios
 
 Search through all portfolios
 
@@ -136,7 +136,7 @@ limit = 56 # int | When paginating, only return this number of records (optional
 page = 'page_example' # str | Encoded page string returned from a previous search result that will retrieve the next page of data. When this field is supplied, filter, sortBy and search fields should not be supplied. (optional)
 
     try:
-        # [EARLY ACCESS] Search Portfolios
+        # [EARLY ACCESS] SearchPortfolios: Search Portfolios
         api_response = api_instance.search_portfolios(search=search, filter=filter, sort_by=sort_by, limit=limit, page=page)
         pprint(api_response)
     except ApiException as e:
@@ -178,7 +178,7 @@ Name | Type | Description  | Notes
 # **search_properties**
 > PagedResourceListOfPropertyDefinitionSearchResult search_properties(search=search, filter=filter, sort_by=sort_by, limit=limit, page=page)
 
-[EARLY ACCESS] Search Property Definitions
+[EARLY ACCESS] SearchProperties: Search Property Definitions
 
 Search through all Property Definitions
 
@@ -219,7 +219,7 @@ limit = 56 # int | When paginating, only return this number of records (optional
 page = 'page_example' # str | Encoded page string returned from a previous search result that will retrieve the next page of data. When this field is supplied, filter, sortBy and search fields should not be supplied. (optional)
 
     try:
-        # [EARLY ACCESS] Search Property Definitions
+        # [EARLY ACCESS] SearchProperties: Search Property Definitions
         api_response = api_instance.search_properties(search=search, filter=filter, sort_by=sort_by, limit=limit, page=page)
         pprint(api_response)
     except ApiException as e:

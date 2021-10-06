@@ -4,21 +4,21 @@ All URIs are relative to *https://fbn-prd.lusid.com/api*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
-[**delete_instrument**](InstrumentsApi.md#delete_instrument) | **DELETE** /api/instruments/{identifierType}/{identifier} | [EARLY ACCESS] Delete instrument
-[**get_instrument**](InstrumentsApi.md#get_instrument) | **GET** /api/instruments/{identifierType}/{identifier} | Get instrument
-[**get_instrument_identifier_types**](InstrumentsApi.md#get_instrument_identifier_types) | **GET** /api/instruments/identifierTypes | [EARLY ACCESS] Get instrument identifier types
-[**get_instrument_property_time_series**](InstrumentsApi.md#get_instrument_property_time_series) | **GET** /api/instruments/{identifierType}/{identifier}/properties/time-series | [EARLY ACCESS] Get instrument property time series
-[**get_instruments**](InstrumentsApi.md#get_instruments) | **POST** /api/instruments/$get | Get instruments
-[**list_instruments**](InstrumentsApi.md#list_instruments) | **GET** /api/instruments | [EARLY ACCESS] List instruments
-[**update_instrument_identifier**](InstrumentsApi.md#update_instrument_identifier) | **POST** /api/instruments/{identifierType}/{identifier} | [EARLY ACCESS] Update instrument identifier
-[**upsert_instruments**](InstrumentsApi.md#upsert_instruments) | **POST** /api/instruments | Upsert instruments
-[**upsert_instruments_properties**](InstrumentsApi.md#upsert_instruments_properties) | **POST** /api/instruments/$upsertproperties | Upsert instruments properties
+[**delete_instrument**](InstrumentsApi.md#delete_instrument) | **DELETE** /api/instruments/{identifierType}/{identifier} | [EARLY ACCESS] DeleteInstrument: Delete instrument
+[**get_instrument**](InstrumentsApi.md#get_instrument) | **GET** /api/instruments/{identifierType}/{identifier} | GetInstrument: Get instrument
+[**get_instrument_identifier_types**](InstrumentsApi.md#get_instrument_identifier_types) | **GET** /api/instruments/identifierTypes | [EARLY ACCESS] GetInstrumentIdentifierTypes: Get instrument identifier types
+[**get_instrument_property_time_series**](InstrumentsApi.md#get_instrument_property_time_series) | **GET** /api/instruments/{identifierType}/{identifier}/properties/time-series | [EARLY ACCESS] GetInstrumentPropertyTimeSeries: Get instrument property time series
+[**get_instruments**](InstrumentsApi.md#get_instruments) | **POST** /api/instruments/$get | GetInstruments: Get instruments
+[**list_instruments**](InstrumentsApi.md#list_instruments) | **GET** /api/instruments | [EARLY ACCESS] ListInstruments: List instruments
+[**update_instrument_identifier**](InstrumentsApi.md#update_instrument_identifier) | **POST** /api/instruments/{identifierType}/{identifier} | [EARLY ACCESS] UpdateInstrumentIdentifier: Update instrument identifier
+[**upsert_instruments**](InstrumentsApi.md#upsert_instruments) | **POST** /api/instruments | UpsertInstruments: Upsert instruments
+[**upsert_instruments_properties**](InstrumentsApi.md#upsert_instruments_properties) | **POST** /api/instruments/$upsertproperties | UpsertInstrumentsProperties: Upsert instruments properties
 
 
 # **delete_instrument**
 > DeleteInstrumentResponse delete_instrument(identifier_type, identifier)
 
-[EARLY ACCESS] Delete instrument
+[EARLY ACCESS] DeleteInstrument: Delete instrument
 
 Delete a particular instrument, as identified by a particular instrument identifier.                Once deleted, an instrument is marked as inactive and can no longer be referenced when creating or updating  transactions or holdings. You can still query existing transactions and holdings related to the  deleted instrument.
 
@@ -56,7 +56,7 @@ with lusid.ApiClient(configuration) as api_client:
 identifier = 'identifier_example' # str | An <i>identifierType</i> value to use to identify the instrument, for example 'BBG000BLNNV0'.
 
     try:
-        # [EARLY ACCESS] Delete instrument
+        # [EARLY ACCESS] DeleteInstrument: Delete instrument
         api_response = api_instance.delete_instrument(identifier_type, identifier)
         pprint(api_response)
     except ApiException as e:
@@ -95,7 +95,7 @@ Name | Type | Description  | Notes
 # **get_instrument**
 > Instrument get_instrument(identifier_type, identifier, effective_at=effective_at, as_at=as_at, property_keys=property_keys)
 
-Get instrument
+GetInstrument: Get instrument
 
 Retrieve the definition of a particular instrument, as identified by a particular unique identifier.
 
@@ -136,7 +136,7 @@ as_at = '2013-10-20T19:20:30+01:00' # datetime | The asAt datetime at which to r
 property_keys = ['property_keys_example'] # list[str] | A list of property keys from the 'Instrument' domain to decorate onto the instrument.              These must have the format {domain}/{scope}/{code}, for example 'Instrument/system/Name'. (optional)
 
     try:
-        # Get instrument
+        # GetInstrument: Get instrument
         api_response = api_instance.get_instrument(identifier_type, identifier, effective_at=effective_at, as_at=as_at, property_keys=property_keys)
         pprint(api_response)
     except ApiException as e:
@@ -178,7 +178,7 @@ Name | Type | Description  | Notes
 # **get_instrument_identifier_types**
 > ResourceListOfInstrumentIdTypeDescriptor get_instrument_identifier_types()
 
-[EARLY ACCESS] Get instrument identifier types
+[EARLY ACCESS] GetInstrumentIdentifierTypes: Get instrument identifier types
 
 Retrieve a list of all valid instrument identifier types and whether they are unique or not.                An instrument must have a value for at least one unique identifier type (it can have more than one unique type and value).  In addition, a value is automatically generated for a LUSID Instrument ID (LUID) unique type by the system.                An instrument can have values for multiple non-unique identifier types (or it can have zero non-unique types and values).
 
@@ -214,7 +214,7 @@ with lusid.ApiClient(configuration) as api_client:
     api_instance = lusid.InstrumentsApi(api_client)
     
     try:
-        # [EARLY ACCESS] Get instrument identifier types
+        # [EARLY ACCESS] GetInstrumentIdentifierTypes: Get instrument identifier types
         api_response = api_instance.get_instrument_identifier_types()
         pprint(api_response)
     except ApiException as e:
@@ -248,7 +248,7 @@ This endpoint does not need any parameter.
 # **get_instrument_property_time_series**
 > ResourceListOfPropertyInterval get_instrument_property_time_series(identifier_type, identifier, property_key, identifier_effective_at=identifier_effective_at, as_at=as_at, filter=filter, page=page, limit=limit)
 
-[EARLY ACCESS] Get instrument property time series
+[EARLY ACCESS] GetInstrumentPropertyTimeSeries: Get instrument property time series
 
 Retrieve the complete time series (history) for a particular property of an instrument.
 
@@ -292,7 +292,7 @@ page = 'page_example' # str | The pagination token to use to continue listing pr
 limit = 56 # int | When paginating, limit the results to this number. (optional)
 
     try:
-        # [EARLY ACCESS] Get instrument property time series
+        # [EARLY ACCESS] GetInstrumentPropertyTimeSeries: Get instrument property time series
         api_response = api_instance.get_instrument_property_time_series(identifier_type, identifier, property_key, identifier_effective_at=identifier_effective_at, as_at=as_at, filter=filter, page=page, limit=limit)
         pprint(api_response)
     except ApiException as e:
@@ -337,7 +337,7 @@ Name | Type | Description  | Notes
 # **get_instruments**
 > GetInstrumentsResponse get_instruments(identifier_type, request_body, effective_at=effective_at, as_at=as_at, property_keys=property_keys)
 
-Get instruments
+GetInstruments: Get instruments
 
 Retrieve the definition of one or more instruments, as identified by a collection of unique identifiers.                Note that to retrieve all the instruments in the instrument master, use the List instruments endpoint instead.
 
@@ -378,7 +378,7 @@ as_at = '2013-10-20T19:20:30+01:00' # datetime | The asAt datetime at which to r
 property_keys = ['property_keys_example'] # list[str] | A list of property keys from the 'Instrument' domain to decorate onto the instrument.               These must have the format {domain}/{scope}/{code}, for example 'Instrument/system/Name'. (optional)
 
     try:
-        # Get instruments
+        # GetInstruments: Get instruments
         api_response = api_instance.get_instruments(identifier_type, request_body, effective_at=effective_at, as_at=as_at, property_keys=property_keys)
         pprint(api_response)
     except ApiException as e:
@@ -420,7 +420,7 @@ Name | Type | Description  | Notes
 # **list_instruments**
 > PagedResourceListOfInstrument list_instruments(as_at=as_at, effective_at=effective_at, page=page, sort_by=sort_by, start=start, limit=limit, filter=filter, instrument_property_keys=instrument_property_keys)
 
-[EARLY ACCESS] List instruments
+[EARLY ACCESS] ListInstruments: List instruments
 
 List all the instruments in the instrument master.                To retrieve a particular set of instruments instead, use the Get instruments endpoint.  The maximum number of instruments that this method can list per request is 2,000.
 
@@ -464,7 +464,7 @@ filter = 'State eq 'Active'' # str | Expression to filter the result set. Defaul
 instrument_property_keys = ['instrument_property_keys_example'] # list[str] | A list of property keys from the 'Instrument' domain to decorate onto               instruments. These must have the format {domain}/{scope}/{code}, for example 'Instrument/system/Name'. (optional)
 
     try:
-        # [EARLY ACCESS] List instruments
+        # [EARLY ACCESS] ListInstruments: List instruments
         api_response = api_instance.list_instruments(as_at=as_at, effective_at=effective_at, page=page, sort_by=sort_by, start=start, limit=limit, filter=filter, instrument_property_keys=instrument_property_keys)
         pprint(api_response)
     except ApiException as e:
@@ -509,7 +509,7 @@ Name | Type | Description  | Notes
 # **update_instrument_identifier**
 > Instrument update_instrument_identifier(identifier_type, identifier, update_instrument_identifier_request)
 
-[EARLY ACCESS] Update instrument identifier
+[EARLY ACCESS] UpdateInstrumentIdentifier: Update instrument identifier
 
 Create, update or delete a particular instrument identifier for an instrument.                To delete the identifier, leave the value unspecified in the request. If not being deleted, the  identifier is updated if it exists and created if it does not.
 
@@ -548,7 +548,7 @@ identifier = 'identifier_example' # str | An <i>identifierType</i> value to use 
 update_instrument_identifier_request = {"type":"Figi","value":"updated-figi","effectiveAt":"2018-02-01T10:00:00.0000000+00:00"} # UpdateInstrumentIdentifierRequest | The identifier to update or delete. This need not be the same value as the               'identifier' parameter used to retrieve the instrument.
 
     try:
-        # [EARLY ACCESS] Update instrument identifier
+        # [EARLY ACCESS] UpdateInstrumentIdentifier: Update instrument identifier
         api_response = api_instance.update_instrument_identifier(identifier_type, identifier, update_instrument_identifier_request)
         pprint(api_response)
     except ApiException as e:
@@ -588,7 +588,7 @@ Name | Type | Description  | Notes
 # **upsert_instruments**
 > UpsertInstrumentsResponse upsert_instruments(request_body)
 
-Upsert instruments
+UpsertInstruments: Upsert instruments
 
 Create or update one or more instruments in the instrument master. An instrument is updated  if it already exists and created if it does not.                In the request, each instrument definition should be keyed by a unique correlation ID. This ID is ephemeral  and not stored by LUSID. It serves only to easily identify each instrument in the response.                Note that an instrument must have at least one unique identifier, which is a combination of a type  (such as 'Figi') and a value (such as 'BBG000BS1N49'). In addition, a random value is automatically  generated for a LUSID Instrument ID (LUID) unique type by the system. For more information, see  https://support.lusid.com/knowledgebase/article/KA-01862.                The response returns both the collection of successfully created or updated instruments, as well as those  that failed. For each failure, a reason is provided. It is important to check the failed set for  unsuccessful results.  The maximum number of instruments that this method can upsert per request is 2,000.
 
@@ -625,7 +625,7 @@ with lusid.ApiClient(configuration) as api_client:
     request_body = {"request_id_1":{"name":"Instrument name","identifiers":{"clientInternal":{"value":"some-identifier","effectiveAt":"0001-01-01T00:00:00.0000000+00:00"},"figi":{"value":"some-figi-code","effectiveAt":"0001-01-01T00:00:00.0000000+00:00"},"isin":{"value":"some-isin-code","effectiveAt":"0001-01-01T00:00:00.0000000+00:00"}},"properties":[{"key":"Instrument/someScope/somePropertyName","value":{"labelValue":"some-property-value"},"effectiveFrom":"2018-06-18T09:00:00.0000000+00:00"}],"lookThroughPortfolioId":{"scope":"MyScope","code":"portfolio-code"},"definition":{"instrumentFormat":{"sourceSystem":"systemA","vendor":"Unknown","version":"1.0.0"},"content":"{\"some-key\": \"some-value\"}","instrumentType":"ExoticInstrument"}},"request_id_2":{"name":"Instrument name","identifiers":{"clientInternal":{"value":"some-identifier-2","effectiveAt":"0001-01-01T00:00:00.0000000+00:00"},"figi":{"value":"some-figi-code-2","effectiveAt":"0001-01-01T00:00:00.0000000+00:00"}},"properties":[],"lookThroughPortfolioId":{"scope":"MyScope","code":"portfolio-code"},"definition":{"instrumentFormat":{"sourceSystem":"systemA","vendor":"Unknown","version":"1.0.0"},"content":"{\"some-key\": \"some-value\"}","instrumentType":"ExoticInstrument"}}} # dict(str, InstrumentDefinition) | The definitions of the instruments to create or update.
 
     try:
-        # Upsert instruments
+        # UpsertInstruments: Upsert instruments
         api_response = api_instance.upsert_instruments(request_body)
         pprint(api_response)
     except ApiException as e:
@@ -663,7 +663,7 @@ Name | Type | Description  | Notes
 # **upsert_instruments_properties**
 > UpsertInstrumentPropertiesResponse upsert_instruments_properties(upsert_instrument_property_request)
 
-Upsert instruments properties
+UpsertInstrumentsProperties: Upsert instruments properties
 
 Create or update one or more properties for particular instruments.                Each instrument property is updated if it exists and created if it does not. For any failures, a reason  is provided.                Properties have an <i>effectiveFrom</i> datetime from which the property is valid, and an <i>effectiveUntil</i>  datetime until which the property is valid. Not supplying an <i>effectiveUntil</i> datetime results in the property being  valid indefinitely, or until the next <i>effectiveFrom</i> datetime of the property.
 
@@ -700,7 +700,7 @@ with lusid.ApiClient(configuration) as api_client:
     upsert_instrument_property_request = [{"identifierType":"LusidInstrumentId","identifier":"LUID_00000000","properties":[{"key":"Instrument/MyScope/SomePropertyName","value":{"labelValue":"SomeValue1"},"effectiveFrom":"2016-09-15T12:00:00.0000000+00:00"},{"key":"Instrument/MyScope/SomePropertyName","value":{"labelValue":"SomeValue2"},"effectiveFrom":"2017-08-10T12:00:00.0000000+00:00"},{"key":"Instrument/MyScope/AnotherPropertyName","value":{"labelValue":"AnotherValue1"},"effectiveFrom":"2018-03-05T12:00:00.0000000+00:00","effectiveUntil":"2019-06-01T12:00:00.0000000+00:00"},{"key":"Instrument/MyScope/AnotherPropertyName","value":{"labelValue":"AnotherValue2"},"effectiveFrom":"2020-03-15T12:00:00.0000000+00:00","effectiveUntil":"2021-01-15T12:00:00.0000000+00:00"}]}] # list[UpsertInstrumentPropertyRequest] | A list of instruments and associated instrument properties to create or update.
 
     try:
-        # Upsert instruments properties
+        # UpsertInstrumentsProperties: Upsert instruments properties
         api_response = api_instance.upsert_instruments_properties(upsert_instrument_property_request)
         pprint(api_response)
     except ApiException as e:
