@@ -9,7 +9,7 @@
       "url": "https://www.finbourne.com",
       "email": "info@finbourne.com"
     },
-    "version": "0.11.3584",
+    "version": "0.11.3585",
     "x-logo": {
       "url": "https://content.finbourne.com/LUSID-header.png",
       "backgroundColor": "#415464"
@@ -17,7 +17,7 @@
   },
   "servers": [
     {
-      "url": "https://fbn-prd.lusid.com/api"
+      "url": "http://local-unit-test-server.lusid.com:32821"
     }
   ],
   "paths": {
@@ -444,7 +444,7 @@
                       "placementIds": [
                         {
                           "scope": "MyScope",
-                          "code": "A placement"
+                          "code": "PLAC00000123"
                         }
                       ],
                       "state": "New",
@@ -502,7 +502,7 @@
                       "placementIds": [
                         {
                           "scope": "MyScope",
-                          "code": "A placement"
+                          "code": "PLAC00000123"
                         }
                       ],
                       "state": "New",
@@ -560,7 +560,7 @@
                       "placementIds": [
                         {
                           "scope": "MyScope",
-                          "code": "A placement"
+                          "code": "PLAC00000123"
                         }
                       ],
                       "state": "New",
@@ -726,7 +726,7 @@
                   "placementIds": [
                     {
                       "scope": "MyScope",
-                      "code": "A placement"
+                      "code": "PLAC00000123"
                     }
                   ],
                   "state": "New",
@@ -779,7 +779,7 @@
                   "placementIds": [
                     {
                       "scope": "MyScope",
-                      "code": "A placement"
+                      "code": "PLAC00000123"
                     }
                   ],
                   "state": "New",
@@ -832,7 +832,7 @@
                   "placementIds": [
                     {
                       "scope": "MyScope",
-                      "code": "A placement"
+                      "code": "PLAC00000123"
                     }
                   ],
                   "state": "New",
@@ -28862,7 +28862,7 @@
         "description": "OAuth2 Implicit Grant",
         "flows": {
           "implicit": {
-            "authorizationUrl": "https://lusid.okta.com/oauth2/default/v1/authorize",
+            "authorizationUrl": "https://dummyurl.lusid.com/",
             "scopes": {}
           }
         }
@@ -28887,7 +28887,7 @@
     },
     {
       "name": "Blocks",
-      "description": "A Block represents a set of orders for the same instrument, intended to record for example a trader'saggregation of outstanding orders at a given time. Blocks are treated monotemporally; any updates are effectiveat the as-at time of update, and its not possible to make retroactive (or forward) changes."
+      "description": "A Block represents a set of orders for the same instrument, intended to record for example a trader'saggregation of outstanding orders at a given time. Blocks are treated monotemporally; any updates are effectiveat the as-at time of update, and it's not possible to make retroactive (or forward) changes."
     },
     {
       "name": "Calendars",
@@ -28956,6 +28956,10 @@
     {
       "name": "Login",
       "description": "Methods to handle login"
+    },
+    {
+      "name": "OrderGraph",
+      "description": "The order graph is a way of looking at orders with the various entities relating to the order, such as blocks, orders, placements, allocations and executions in one place. It also contains some state information which can not be obtained any other way."
     },
     {
       "name": "OrderInstructions",
@@ -29082,6 +29086,7 @@
       "Instruments",
       "Legal Entities",
       "Login",
+      "OrderGraph",
       "OrderInstructions",
       "Orders",
       "Packages",
