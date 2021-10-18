@@ -9,7 +9,7 @@
       "url": "https://www.finbourne.com",
       "email": "info@finbourne.com"
     },
-    "version": "0.11.3619",
+    "version": "0.11.3620",
     "x-logo": {
       "url": "https://content.finbourne.com/LUSID-header.png",
       "backgroundColor": "#415464"
@@ -17,7 +17,7 @@
   },
   "servers": [
     {
-      "url": "http://local-unit-test-server.lusid.com:33164"
+      "url": "http://local-unit-test-server.lusid.com:62898"
     }
   ],
   "paths": {
@@ -28551,7 +28551,7 @@
           },
           "isDefault": {
             "type": "boolean",
-            "description": "IsDefault is a flag that denotes the default alias for a group"
+            "description": "IsDefault is a flag that denotes the default alias for a source. There can only be, at most, one per source."
           }
         },
         "additionalProperties": false
