@@ -13,6 +13,7 @@ Name | Type | Description | Notes
 **acceptable_values** | **list[str]** |  | [optional] 
 **unit_schema** | **str** | The available values are: NoUnits, Basic, Iso4217Currency | [optional] 
 **acceptable_units** | [**list[IUnitDefinitionDto]**](IUnitDefinitionDto.md) |  | [optional] 
+**reference_data** | [**ReferenceData**](ReferenceData.md) |  | [optional] 
 **links** | [**list[Link]**](Link.md) | Collection of links. | [optional] 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
