@@ -9,7 +9,7 @@
       "url": "https://www.finbourne.com",
       "email": "info@finbourne.com"
     },
-    "version": "0.11.3634",
+    "version": "0.11.3635",
     "x-logo": {
       "url": "https://content.finbourne.com/LUSID-header.png",
       "backgroundColor": "#415464"
@@ -17,7 +17,7 @@
   },
   "servers": [
     {
-      "url": "http://local-unit-test-server.lusid.com:53528"
+      "url": "http://local-unit-test-server.lusid.com:56369"
     }
   ],
   "paths": {
@@ -29879,10 +29879,6 @@
       "description": "Methods for generating and using sequences."
     },
     {
-      "name": "Structured Market Data",
-      "description": "Methods for the storage and retrieval of structured market data documents. Read more about these in the LUSID Knowledge Base here https://support.lusid.com/knowledgebase/article/KA-01894."
-    },
-    {
       "name": "Structured Result Data",
       "description": "The structured result store persists information that might be useful to help value a portfolio or analyse performance or risk, but that is not traded like quote data (which can be stored in the quote store). For more information, see https://support.lusid.com/knowledgebase/article/KA-01893."
     },
@@ -29945,7 +29941,6 @@
       "Scopes",
       "Search",
       "Sequences",
-      "Structured Market Data",
       "Structured Result Data",
       "System Configuration",
       "Transaction Portfolios",
