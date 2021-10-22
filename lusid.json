@@ -9,7 +9,7 @@
       "url": "https://www.finbourne.com",
       "email": "info@finbourne.com"
     },
-    "version": "0.11.3641",
+    "version": "0.11.3642",
     "x-logo": {
       "url": "https://content.finbourne.com/LUSID-header.png",
       "backgroundColor": "#415464"
@@ -17,7 +17,7 @@
   },
   "servers": [
     {
-      "url": "http://local-unit-test-server.lusid.com:38867"
+      "url": "http://local-unit-test-server.lusid.com:62927"
     }
   ],
   "paths": {
@@ -26088,9 +26088,8 @@
             "description": "Bool if the metric should consider the fees when is calculated. Default to false."
           },
           "seedAmount": {
-            "type": "number",
+            "type": "string",
             "description": "The given seed amount for the calculation of the indicative amount metrics.",
-            "format": "double",
             "nullable": true
           },
           "alias": {
