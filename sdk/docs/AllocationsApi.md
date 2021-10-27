@@ -1,6 +1,6 @@
 # lusid.AllocationsApi
 
-All URIs are relative to *http://local-unit-test-server.lusid.com:31036*
+All URIs are relative to *http://local-unit-test-server.lusid.com:48971*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
@@ -26,10 +26,10 @@ import time
 import lusid
 from lusid.rest import ApiException
 from pprint import pprint
-# Defining the host is optional and defaults to http://local-unit-test-server.lusid.com:31036
+# Defining the host is optional and defaults to http://local-unit-test-server.lusid.com:48971
 # See configuration.py for a list of all supported configuration parameters.
 configuration = lusid.Configuration(
-    host = "http://local-unit-test-server.lusid.com:31036"
+    host = "http://local-unit-test-server.lusid.com:48971"
 )
 
 # The client must configure the authentication and authorization parameters
@@ -39,7 +39,7 @@ configuration = lusid.Configuration(
 
 # Configure OAuth2 access token for authorization: oauth2
 configuration = lusid.Configuration(
-    host = "http://local-unit-test-server.lusid.com:31036"
+    host = "http://local-unit-test-server.lusid.com:48971"
 )
 configuration.access_token = 'YOUR_ACCESS_TOKEN'
 
@@ -103,10 +103,10 @@ import time
 import lusid
 from lusid.rest import ApiException
 from pprint import pprint
-# Defining the host is optional and defaults to http://local-unit-test-server.lusid.com:31036
+# Defining the host is optional and defaults to http://local-unit-test-server.lusid.com:48971
 # See configuration.py for a list of all supported configuration parameters.
 configuration = lusid.Configuration(
-    host = "http://local-unit-test-server.lusid.com:31036"
+    host = "http://local-unit-test-server.lusid.com:48971"
 )
 
 # The client must configure the authentication and authorization parameters
@@ -116,7 +116,7 @@ configuration = lusid.Configuration(
 
 # Configure OAuth2 access token for authorization: oauth2
 configuration = lusid.Configuration(
-    host = "http://local-unit-test-server.lusid.com:31036"
+    host = "http://local-unit-test-server.lusid.com:48971"
 )
 configuration.access_token = 'YOUR_ACCESS_TOKEN'
 
@@ -184,10 +184,10 @@ import time
 import lusid
 from lusid.rest import ApiException
 from pprint import pprint
-# Defining the host is optional and defaults to http://local-unit-test-server.lusid.com:31036
+# Defining the host is optional and defaults to http://local-unit-test-server.lusid.com:48971
 # See configuration.py for a list of all supported configuration parameters.
 configuration = lusid.Configuration(
-    host = "http://local-unit-test-server.lusid.com:31036"
+    host = "http://local-unit-test-server.lusid.com:48971"
 )
 
 # The client must configure the authentication and authorization parameters
@@ -197,7 +197,7 @@ configuration = lusid.Configuration(
 
 # Configure OAuth2 access token for authorization: oauth2
 configuration = lusid.Configuration(
-    host = "http://local-unit-test-server.lusid.com:31036"
+    host = "http://local-unit-test-server.lusid.com:48971"
 )
 configuration.access_token = 'YOUR_ACCESS_TOKEN'
 
@@ -271,10 +271,10 @@ import time
 import lusid
 from lusid.rest import ApiException
 from pprint import pprint
-# Defining the host is optional and defaults to http://local-unit-test-server.lusid.com:31036
+# Defining the host is optional and defaults to http://local-unit-test-server.lusid.com:48971
 # See configuration.py for a list of all supported configuration parameters.
 configuration = lusid.Configuration(
-    host = "http://local-unit-test-server.lusid.com:31036"
+    host = "http://local-unit-test-server.lusid.com:48971"
 )
 
 # The client must configure the authentication and authorization parameters
@@ -284,7 +284,7 @@ configuration = lusid.Configuration(
 
 # Configure OAuth2 access token for authorization: oauth2
 configuration = lusid.Configuration(
-    host = "http://local-unit-test-server.lusid.com:31036"
+    host = "http://local-unit-test-server.lusid.com:48971"
 )
 configuration.access_token = 'YOUR_ACCESS_TOKEN'
 
@@ -292,7 +292,7 @@ configuration.access_token = 'YOUR_ACCESS_TOKEN'
 with lusid.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = lusid.AllocationsApi(api_client)
-    allocation_set_request = {"allocationRequests":[{"properties":{"allocation/MyScope/SomeAllocationProperty":{"key":"Allocation/MyScope/SomeAllocationProperty","value":{"labelValue":"XYZ000034567"}}},"instrumentIdentifiers":{"instrument/default/Currency":"GBP"},"quantity":100,"portfolioId":{"scope":"MyScope","code":"UK Equity"},"allocatedOrderId":{"scope":"MyScope","code":"ORD00000123"},"id":{"scope":"MyScope","code":"ALLOC00000123"},"placementIds":[{"scope":"MyScope","code":"A placement"}],"state":"New","side":"Buy","type":"Limit","settlementDate":"2006-04-14T00:00:00.0000000+00:00","date":"2006-04-11T00:00:00.0000000+00:00","price":{"amount":12413.33,"currency":"USD"},"settlementCurrency":"USD","settlementCurrencyFxRate":1,"counterparty":"SomeCounterparty"}]} # AllocationSetRequest | The collection of allocation requests. (optional)
+    allocation_set_request = {"allocationRequests":[{"id":{"scope":"MyScope","code":"ALLOC00000123"},"allocatedOrderId":{"scope":"MyScope","code":"ORD00000123"},"portfolioId":{"scope":"MyScope","code":"UK Equity"},"quantity":100,"instrumentIdentifiers":{"instrument/default/Currency":"GBP"},"properties":{"allocation/MyScope/SomeAllocationProperty":{"key":"Allocation/MyScope/SomeAllocationProperty","value":{"labelValue":"XYZ000034567"}}},"placementIds":[{"scope":"MyScope","code":"A placement"}],"state":"New","side":"Buy","type":"Limit","settlementDate":"2006-04-14T00:00:00.0000000+00:00","date":"2006-04-11T00:00:00.0000000+00:00","price":{"amount":12413.33,"currency":"USD"},"settlementCurrency":"USD","settlementCurrencyFxRate":1,"counterparty":"SomeCounterparty"}]} # AllocationSetRequest | The collection of allocation requests. (optional)
 
     try:
         # [EARLY ACCESS] UpsertAllocations: Upsert Allocations

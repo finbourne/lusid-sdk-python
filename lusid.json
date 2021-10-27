@@ -9,7 +9,7 @@
       "url": "https://www.finbourne.com",
       "email": "info@finbourne.com"
     },
-    "version": "0.11.3651",
+    "version": "0.11.3652",
     "x-logo": {
       "url": "https://content.finbourne.com/LUSID-header.png",
       "backgroundColor": "#415464"
@@ -17,7 +17,7 @@
   },
   "servers": [
     {
-      "url": "http://local-unit-test-server.lusid.com:31036"
+      "url": "http://local-unit-test-server.lusid.com:48971"
     }
   ],
   "paths": {
@@ -195,6 +195,22 @@
               "example": {
                 "allocationRequests": [
                   {
+                    "id": {
+                      "scope": "MyScope",
+                      "code": "ALLOC00000123"
+                    },
+                    "allocatedOrderId": {
+                      "scope": "MyScope",
+                      "code": "ORD00000123"
+                    },
+                    "portfolioId": {
+                      "scope": "MyScope",
+                      "code": "UK Equity"
+                    },
+                    "quantity": 100,
+                    "instrumentIdentifiers": {
+                      "instrument/default/Currency": "GBP"
+                    },
                     "properties": {
                       "allocation/MyScope/SomeAllocationProperty": {
                         "key": "Allocation/MyScope/SomeAllocationProperty",
@@ -202,22 +218,6 @@
                           "labelValue": "XYZ000034567"
                         }
                       }
-                    },
-                    "instrumentIdentifiers": {
-                      "instrument/default/Currency": "GBP"
-                    },
-                    "quantity": 100,
-                    "portfolioId": {
-                      "scope": "MyScope",
-                      "code": "UK Equity"
-                    },
-                    "allocatedOrderId": {
-                      "scope": "MyScope",
-                      "code": "ORD00000123"
-                    },
-                    "id": {
-                      "scope": "MyScope",
-                      "code": "ALLOC00000123"
                     },
                     "placementIds": [
                       {
@@ -248,6 +248,22 @@
               "example": {
                 "allocationRequests": [
                   {
+                    "id": {
+                      "scope": "MyScope",
+                      "code": "ALLOC00000123"
+                    },
+                    "allocatedOrderId": {
+                      "scope": "MyScope",
+                      "code": "ORD00000123"
+                    },
+                    "portfolioId": {
+                      "scope": "MyScope",
+                      "code": "UK Equity"
+                    },
+                    "quantity": 100,
+                    "instrumentIdentifiers": {
+                      "instrument/default/Currency": "GBP"
+                    },
                     "properties": {
                       "allocation/MyScope/SomeAllocationProperty": {
                         "key": "Allocation/MyScope/SomeAllocationProperty",
@@ -255,22 +271,6 @@
                           "labelValue": "XYZ000034567"
                         }
                       }
-                    },
-                    "instrumentIdentifiers": {
-                      "instrument/default/Currency": "GBP"
-                    },
-                    "quantity": 100,
-                    "portfolioId": {
-                      "scope": "MyScope",
-                      "code": "UK Equity"
-                    },
-                    "allocatedOrderId": {
-                      "scope": "MyScope",
-                      "code": "ORD00000123"
-                    },
-                    "id": {
-                      "scope": "MyScope",
-                      "code": "ALLOC00000123"
                     },
                     "placementIds": [
                       {
@@ -301,6 +301,22 @@
               "example": {
                 "allocationRequests": [
                   {
+                    "id": {
+                      "scope": "MyScope",
+                      "code": "ALLOC00000123"
+                    },
+                    "allocatedOrderId": {
+                      "scope": "MyScope",
+                      "code": "ORD00000123"
+                    },
+                    "portfolioId": {
+                      "scope": "MyScope",
+                      "code": "UK Equity"
+                    },
+                    "quantity": 100,
+                    "instrumentIdentifiers": {
+                      "instrument/default/Currency": "GBP"
+                    },
                     "properties": {
                       "allocation/MyScope/SomeAllocationProperty": {
                         "key": "Allocation/MyScope/SomeAllocationProperty",
@@ -308,22 +324,6 @@
                           "labelValue": "XYZ000034567"
                         }
                       }
-                    },
-                    "instrumentIdentifiers": {
-                      "instrument/default/Currency": "GBP"
-                    },
-                    "quantity": 100,
-                    "portfolioId": {
-                      "scope": "MyScope",
-                      "code": "UK Equity"
-                    },
-                    "allocatedOrderId": {
-                      "scope": "MyScope",
-                      "code": "ORD00000123"
-                    },
-                    "id": {
-                      "scope": "MyScope",
-                      "code": "ALLOC00000123"
                     },
                     "placementIds": [
                       {
@@ -354,6 +354,22 @@
               "example": {
                 "allocationRequests": [
                   {
+                    "id": {
+                      "scope": "MyScope",
+                      "code": "ALLOC00000123"
+                    },
+                    "allocatedOrderId": {
+                      "scope": "MyScope",
+                      "code": "ORD00000123"
+                    },
+                    "portfolioId": {
+                      "scope": "MyScope",
+                      "code": "UK Equity"
+                    },
+                    "quantity": 100,
+                    "instrumentIdentifiers": {
+                      "instrument/default/Currency": "GBP"
+                    },
                     "properties": {
                       "allocation/MyScope/SomeAllocationProperty": {
                         "key": "Allocation/MyScope/SomeAllocationProperty",
@@ -361,22 +377,6 @@
                           "labelValue": "XYZ000034567"
                         }
                       }
-                    },
-                    "instrumentIdentifiers": {
-                      "instrument/default/Currency": "GBP"
-                    },
-                    "quantity": 100,
-                    "portfolioId": {
-                      "scope": "MyScope",
-                      "code": "UK Equity"
-                    },
-                    "allocatedOrderId": {
-                      "scope": "MyScope",
-                      "code": "ORD00000123"
-                    },
-                    "id": {
-                      "scope": "MyScope",
-                      "code": "ALLOC00000123"
                     },
                     "placementIds": [
                       {
@@ -23369,13 +23369,19 @@
         ],
         "type": "object",
         "properties": {
-          "properties": {
-            "type": "object",
-            "additionalProperties": {
-              "$ref": "#/components/schemas/PerpetualProperty"
-            },
-            "description": "Client-defined properties associated with this allocation.",
-            "nullable": true
+          "id": {
+            "$ref": "#/components/schemas/ResourceId"
+          },
+          "allocatedOrderId": {
+            "$ref": "#/components/schemas/ResourceId"
+          },
+          "portfolioId": {
+            "$ref": "#/components/schemas/ResourceId"
+          },
+          "quantity": {
+            "type": "integer",
+            "description": "The quantity of given instrument allocated.",
+            "format": "int32"
           },
           "instrumentIdentifiers": {
             "type": "object",
@@ -23384,19 +23390,13 @@
             },
             "description": "The instrument allocated."
           },
-          "quantity": {
-            "type": "integer",
-            "description": "The quantity of given instrument allocated.",
-            "format": "int32"
-          },
-          "portfolioId": {
-            "$ref": "#/components/schemas/ResourceId"
-          },
-          "allocatedOrderId": {
-            "$ref": "#/components/schemas/ResourceId"
-          },
-          "id": {
-            "$ref": "#/components/schemas/ResourceId"
+          "properties": {
+            "type": "object",
+            "additionalProperties": {
+              "$ref": "#/components/schemas/PerpetualProperty"
+            },
+            "description": "Client-defined properties associated with this allocation.",
+            "nullable": true
           },
           "placementIds": {
             "type": "array",
