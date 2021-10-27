@@ -5,12 +5,12 @@ A request to create or update an Allocation.
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**id** | [**ResourceId**](ResourceId.md) |  | 
-**allocated_order_id** | [**ResourceId**](ResourceId.md) |  | 
-**portfolio_id** | [**ResourceId**](ResourceId.md) |  | 
-**quantity** | **int** | The quantity of given instrument allocated. | 
-**instrument_identifiers** | **dict(str, str)** | The instrument allocated. | 
 **properties** | [**dict(str, PerpetualProperty)**](PerpetualProperty.md) | Client-defined properties associated with this allocation. | [optional] 
+**instrument_identifiers** | **dict(str, str)** | The instrument allocated. | 
+**quantity** | **int** | The quantity of given instrument allocated. | 
+**portfolio_id** | [**ResourceId**](ResourceId.md) |  | 
+**allocated_order_id** | [**ResourceId**](ResourceId.md) |  | 
+**id** | [**ResourceId**](ResourceId.md) |  | 
 **placement_ids** | [**list[ResourceId]**](ResourceId.md) | A placement - also known as an order placed in the market - associated with this allocation. | [optional] 
 **state** | **str** | The state of this allocation. | [optional] 
 **side** | **str** | The side of this allocation (examples: Buy, Sell, ...). | [optional] 
