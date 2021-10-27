@@ -9,7 +9,7 @@
       "url": "https://www.finbourne.com",
       "email": "info@finbourne.com"
     },
-    "version": "0.11.3655",
+    "version": "0.11.3656",
     "x-logo": {
       "url": "https://content.finbourne.com/LUSID-header.png",
       "backgroundColor": "#415464"
@@ -17,7 +17,7 @@
   },
   "servers": [
     {
-      "url": "http://local-unit-test-server.lusid.com:43276"
+      "url": "http://local-unit-test-server.lusid.com:37910"
     }
   ],
   "paths": {
@@ -28768,6 +28768,7 @@
         "required": [
           "description",
           "transactionClass",
+          "transactionGroup",
           "transactionRoles",
           "type"
         ],
@@ -28787,16 +28788,7 @@
           },
           "transactionGroup": {
             "type": "string",
-            "description": "Group is a set of codes related to a source, or sync. DEPRECATED: This field will be removed, use `Source` instead",
-            "nullable": true
-          },
-          "source": {
-            "maxLength": 64,
-            "minLength": 1,
-            "pattern": "^[a-zA-Z0-9\\-_]+$",
-            "type": "string",
-            "description": "Used to group a set of transaction types",
-            "nullable": true
+            "description": "Group is a set of codes related to a source, or sync"
           },
           "transactionRoles": {
             "enum": [
