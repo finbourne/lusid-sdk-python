@@ -9,7 +9,7 @@
       "url": "https://www.finbourne.com",
       "email": "info@finbourne.com"
     },
-    "version": "0.11.3657",
+    "version": "0.11.3659",
     "x-logo": {
       "url": "https://content.finbourne.com/LUSID-header.png",
       "backgroundColor": "#415464"
@@ -17,7 +17,7 @@
   },
   "servers": [
     {
-      "url": "https://fbn-prd.lusid.com/api"
+      "url": "http://local-unit-test-server.lusid.com:45241"
     }
   ],
   "paths": {
@@ -28768,7 +28768,6 @@
         "required": [
           "description",
           "transactionClass",
-          "transactionGroup",
           "transactionRoles",
           "type"
         ],
@@ -28788,7 +28787,16 @@
           },
           "transactionGroup": {
             "type": "string",
-            "description": "Group is a set of codes related to a source, or sync"
+            "description": "Group is a set of codes related to a source, or sync. DEPRECATED: This field will be removed, use `Source` instead",
+            "nullable": true
+          },
+          "source": {
+            "maxLength": 64,
+            "minLength": 1,
+            "pattern": "^[a-zA-Z0-9\\-_]+$",
+            "type": "string",
+            "description": "Used to group a set of transaction types",
+            "nullable": true
           },
           "transactionRoles": {
             "enum": [
@@ -29694,7 +29702,7 @@
         "description": "OAuth2 Implicit Grant",
         "flows": {
           "implicit": {
-            "authorizationUrl": "https://lusid.okta.com/oauth2/default/v1/authorize",
+            "authorizationUrl": "https://dummyurl.lusid.com/",
             "scopes": {}
           }
         }
