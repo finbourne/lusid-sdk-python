@@ -1,6 +1,6 @@
 # lusid.PortfoliosApi
 
-All URIs are relative to *http://local-unit-test-server.lusid.com:42844*
+All URIs are relative to *http://local-unit-test-server.lusid.com:43999*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
@@ -35,10 +35,10 @@ import time
 import lusid
 from lusid.rest import ApiException
 from pprint import pprint
-# Defining the host is optional and defaults to http://local-unit-test-server.lusid.com:42844
+# Defining the host is optional and defaults to http://local-unit-test-server.lusid.com:43999
 # See configuration.py for a list of all supported configuration parameters.
 configuration = lusid.Configuration(
-    host = "http://local-unit-test-server.lusid.com:42844"
+    host = "http://local-unit-test-server.lusid.com:43999"
 )
 
 # The client must configure the authentication and authorization parameters
@@ -48,7 +48,7 @@ configuration = lusid.Configuration(
 
 # Configure OAuth2 access token for authorization: oauth2
 configuration = lusid.Configuration(
-    host = "http://local-unit-test-server.lusid.com:42844"
+    host = "http://local-unit-test-server.lusid.com:43999"
 )
 configuration.access_token = 'YOUR_ACCESS_TOKEN'
 
@@ -112,10 +112,10 @@ import time
 import lusid
 from lusid.rest import ApiException
 from pprint import pprint
-# Defining the host is optional and defaults to http://local-unit-test-server.lusid.com:42844
+# Defining the host is optional and defaults to http://local-unit-test-server.lusid.com:43999
 # See configuration.py for a list of all supported configuration parameters.
 configuration = lusid.Configuration(
-    host = "http://local-unit-test-server.lusid.com:42844"
+    host = "http://local-unit-test-server.lusid.com:43999"
 )
 
 # The client must configure the authentication and authorization parameters
@@ -125,7 +125,7 @@ configuration = lusid.Configuration(
 
 # Configure OAuth2 access token for authorization: oauth2
 configuration = lusid.Configuration(
-    host = "http://local-unit-test-server.lusid.com:42844"
+    host = "http://local-unit-test-server.lusid.com:43999"
 )
 configuration.access_token = 'YOUR_ACCESS_TOKEN'
 
@@ -193,10 +193,10 @@ import time
 import lusid
 from lusid.rest import ApiException
 from pprint import pprint
-# Defining the host is optional and defaults to http://local-unit-test-server.lusid.com:42844
+# Defining the host is optional and defaults to http://local-unit-test-server.lusid.com:43999
 # See configuration.py for a list of all supported configuration parameters.
 configuration = lusid.Configuration(
-    host = "http://local-unit-test-server.lusid.com:42844"
+    host = "http://local-unit-test-server.lusid.com:43999"
 )
 
 # The client must configure the authentication and authorization parameters
@@ -206,7 +206,7 @@ configuration = lusid.Configuration(
 
 # Configure OAuth2 access token for authorization: oauth2
 configuration = lusid.Configuration(
-    host = "http://local-unit-test-server.lusid.com:42844"
+    host = "http://local-unit-test-server.lusid.com:43999"
 )
 configuration.access_token = 'YOUR_ACCESS_TOKEN'
 
@@ -280,10 +280,10 @@ import time
 import lusid
 from lusid.rest import ApiException
 from pprint import pprint
-# Defining the host is optional and defaults to http://local-unit-test-server.lusid.com:42844
+# Defining the host is optional and defaults to http://local-unit-test-server.lusid.com:43999
 # See configuration.py for a list of all supported configuration parameters.
 configuration = lusid.Configuration(
-    host = "http://local-unit-test-server.lusid.com:42844"
+    host = "http://local-unit-test-server.lusid.com:43999"
 )
 
 # The client must configure the authentication and authorization parameters
@@ -293,7 +293,7 @@ configuration = lusid.Configuration(
 
 # Configure OAuth2 access token for authorization: oauth2
 configuration = lusid.Configuration(
-    host = "http://local-unit-test-server.lusid.com:42844"
+    host = "http://local-unit-test-server.lusid.com:43999"
 )
 configuration.access_token = 'YOUR_ACCESS_TOKEN'
 
@@ -363,10 +363,10 @@ import time
 import lusid
 from lusid.rest import ApiException
 from pprint import pprint
-# Defining the host is optional and defaults to http://local-unit-test-server.lusid.com:42844
+# Defining the host is optional and defaults to http://local-unit-test-server.lusid.com:43999
 # See configuration.py for a list of all supported configuration parameters.
 configuration = lusid.Configuration(
-    host = "http://local-unit-test-server.lusid.com:42844"
+    host = "http://local-unit-test-server.lusid.com:43999"
 )
 
 # The client must configure the authentication and authorization parameters
@@ -376,7 +376,7 @@ configuration = lusid.Configuration(
 
 # Configure OAuth2 access token for authorization: oauth2
 configuration = lusid.Configuration(
-    host = "http://local-unit-test-server.lusid.com:42844"
+    host = "http://local-unit-test-server.lusid.com:43999"
 )
 configuration.access_token = 'YOUR_ACCESS_TOKEN'
 
@@ -452,10 +452,10 @@ import time
 import lusid
 from lusid.rest import ApiException
 from pprint import pprint
-# Defining the host is optional and defaults to http://local-unit-test-server.lusid.com:42844
+# Defining the host is optional and defaults to http://local-unit-test-server.lusid.com:43999
 # See configuration.py for a list of all supported configuration parameters.
 configuration = lusid.Configuration(
-    host = "http://local-unit-test-server.lusid.com:42844"
+    host = "http://local-unit-test-server.lusid.com:43999"
 )
 
 # The client must configure the authentication and authorization parameters
@@ -465,7 +465,7 @@ configuration = lusid.Configuration(
 
 # Configure OAuth2 access token for authorization: oauth2
 configuration = lusid.Configuration(
-    host = "http://local-unit-test-server.lusid.com:42844"
+    host = "http://local-unit-test-server.lusid.com:43999"
 )
 configuration.access_token = 'YOUR_ACCESS_TOKEN'
 
@@ -539,10 +539,10 @@ import time
 import lusid
 from lusid.rest import ApiException
 from pprint import pprint
-# Defining the host is optional and defaults to http://local-unit-test-server.lusid.com:42844
+# Defining the host is optional and defaults to http://local-unit-test-server.lusid.com:43999
 # See configuration.py for a list of all supported configuration parameters.
 configuration = lusid.Configuration(
-    host = "http://local-unit-test-server.lusid.com:42844"
+    host = "http://local-unit-test-server.lusid.com:43999"
 )
 
 # The client must configure the authentication and authorization parameters
@@ -552,7 +552,7 @@ configuration = lusid.Configuration(
 
 # Configure OAuth2 access token for authorization: oauth2
 configuration = lusid.Configuration(
-    host = "http://local-unit-test-server.lusid.com:42844"
+    host = "http://local-unit-test-server.lusid.com:43999"
 )
 configuration.access_token = 'YOUR_ACCESS_TOKEN'
 
@@ -620,10 +620,10 @@ import time
 import lusid
 from lusid.rest import ApiException
 from pprint import pprint
-# Defining the host is optional and defaults to http://local-unit-test-server.lusid.com:42844
+# Defining the host is optional and defaults to http://local-unit-test-server.lusid.com:43999
 # See configuration.py for a list of all supported configuration parameters.
 configuration = lusid.Configuration(
-    host = "http://local-unit-test-server.lusid.com:42844"
+    host = "http://local-unit-test-server.lusid.com:43999"
 )
 
 # The client must configure the authentication and authorization parameters
@@ -633,7 +633,7 @@ configuration = lusid.Configuration(
 
 # Configure OAuth2 access token for authorization: oauth2
 configuration = lusid.Configuration(
-    host = "http://local-unit-test-server.lusid.com:42844"
+    host = "http://local-unit-test-server.lusid.com:43999"
 )
 configuration.access_token = 'YOUR_ACCESS_TOKEN'
 
@@ -709,10 +709,10 @@ import time
 import lusid
 from lusid.rest import ApiException
 from pprint import pprint
-# Defining the host is optional and defaults to http://local-unit-test-server.lusid.com:42844
+# Defining the host is optional and defaults to http://local-unit-test-server.lusid.com:43999
 # See configuration.py for a list of all supported configuration parameters.
 configuration = lusid.Configuration(
-    host = "http://local-unit-test-server.lusid.com:42844"
+    host = "http://local-unit-test-server.lusid.com:43999"
 )
 
 # The client must configure the authentication and authorization parameters
@@ -722,7 +722,7 @@ configuration = lusid.Configuration(
 
 # Configure OAuth2 access token for authorization: oauth2
 configuration = lusid.Configuration(
-    host = "http://local-unit-test-server.lusid.com:42844"
+    host = "http://local-unit-test-server.lusid.com:43999"
 )
 configuration.access_token = 'YOUR_ACCESS_TOKEN'
 
@@ -734,7 +734,7 @@ with lusid.ApiClient(configuration) as api_client:
 as_at = '2013-10-20T19:20:30+01:00' # datetime | The asAt datetime at which to list the portfolios. Defaults to returning the latest version              of each portfolio if not specified. (optional)
 page = 'page_example' # str | The pagination token to use to continue listing portfolios; this              value is returned from the previous call. If a pagination token is provided, the filter, effectiveAt              and asAt fields must not have changed since the original request. Also, if set, a start value cannot be provided. (optional)
 start = 56 # int | When paginating, skip this number of results. (optional)
-limit = 56 # int | When paginating, limit the results to this number. Defaults to 65,535 if not specified. (optional)
+limit = 56 # int | When paginating, limit the results to this number. Defaults to 100 if not specified. (optional)
 filter = 'filter_example' # str | Expression to filter the results.              For example, to filter on the transaction type, specify \"type eq 'Transaction'\". For more information about filtering              results, see https://support.lusid.com/knowledgebase/article/KA-01914. (optional)
 query = 'query_example' # str | Expression specifying the criteria that the returned portfolios must meet. For example, to see which              portfolios have holdings in instruments with a LusidInstrumentId (LUID) of 'LUID_PPA8HI6M' or a Figi of 'BBG000BLNNH6',              specify \"instrument.identifiers in (('LusidInstrumentId', 'LUID_PPA8HI6M'), ('Figi', 'BBG000BLNNH6'))\". (optional)
 property_keys = ['property_keys_example'] # list[str] | A list of property keys from the 'Portfolio' domain to decorate onto each portfolio.              These must take the format {domain}/{scope}/{code}, for example 'Portfolio/Manager/Id'. (optional)
@@ -755,7 +755,7 @@ Name | Type | Description  | Notes
  **as_at** | **datetime**| The asAt datetime at which to list the portfolios. Defaults to returning the latest version              of each portfolio if not specified. | [optional] 
  **page** | **str**| The pagination token to use to continue listing portfolios; this              value is returned from the previous call. If a pagination token is provided, the filter, effectiveAt              and asAt fields must not have changed since the original request. Also, if set, a start value cannot be provided. | [optional] 
  **start** | **int**| When paginating, skip this number of results. | [optional] 
- **limit** | **int**| When paginating, limit the results to this number. Defaults to 65,535 if not specified. | [optional] 
+ **limit** | **int**| When paginating, limit the results to this number. Defaults to 100 if not specified. | [optional] 
  **filter** | **str**| Expression to filter the results.              For example, to filter on the transaction type, specify \&quot;type eq &#39;Transaction&#39;\&quot;. For more information about filtering              results, see https://support.lusid.com/knowledgebase/article/KA-01914. | [optional] 
  **query** | **str**| Expression specifying the criteria that the returned portfolios must meet. For example, to see which              portfolios have holdings in instruments with a LusidInstrumentId (LUID) of &#39;LUID_PPA8HI6M&#39; or a Figi of &#39;BBG000BLNNH6&#39;,              specify \&quot;instrument.identifiers in ((&#39;LusidInstrumentId&#39;, &#39;LUID_PPA8HI6M&#39;), (&#39;Figi&#39;, &#39;BBG000BLNNH6&#39;))\&quot;. | [optional] 
  **property_keys** | [**list[str]**](str.md)| A list of property keys from the &#39;Portfolio&#39; domain to decorate onto each portfolio.              These must take the format {domain}/{scope}/{code}, for example &#39;Portfolio/Manager/Id&#39;. | [optional] 
@@ -798,10 +798,10 @@ import time
 import lusid
 from lusid.rest import ApiException
 from pprint import pprint
-# Defining the host is optional and defaults to http://local-unit-test-server.lusid.com:42844
+# Defining the host is optional and defaults to http://local-unit-test-server.lusid.com:43999
 # See configuration.py for a list of all supported configuration parameters.
 configuration = lusid.Configuration(
-    host = "http://local-unit-test-server.lusid.com:42844"
+    host = "http://local-unit-test-server.lusid.com:43999"
 )
 
 # The client must configure the authentication and authorization parameters
@@ -811,7 +811,7 @@ configuration = lusid.Configuration(
 
 # Configure OAuth2 access token for authorization: oauth2
 configuration = lusid.Configuration(
-    host = "http://local-unit-test-server.lusid.com:42844"
+    host = "http://local-unit-test-server.lusid.com:43999"
 )
 configuration.access_token = 'YOUR_ACCESS_TOKEN'
 
@@ -824,7 +824,7 @@ effective_at = 'effective_at_example' # str | The effective datetime or cut labe
 as_at = '2013-10-20T19:20:30+01:00' # datetime | The asAt datetime at which to list the portfolios. Defaults to returning the latest version              of each portfolio if not specified. (optional)
 page = 'page_example' # str | The pagination token to use to continue listing portfolios. This  value is returned from the previous call. If a pagination token is provided, the filter, effectiveAt  and asAt fields must not have changed since the original request. Also, if set, a start value cannot be provided. (optional)
 start = 56 # int | When paginating, skip this number of results. (optional)
-limit = 56 # int | When paginating, limit the results to this number. Defaults to 65,535 if not specified. (optional)
+limit = 56 # int | When paginating, limit the results to this number. Defaults to 100 if not specified. (optional)
 filter = 'filter_example' # str | Expression to filter the results.              For example, to return only transactions with a transaction type of 'Buy', specify \"type eq 'Buy'\".              For more information about filtering results, see https://support.lusid.com/knowledgebase/article/KA-01914. (optional)
 property_keys = ['property_keys_example'] # list[str] | A list of property keys from the 'Portfolio' domain to decorate onto each portfolio.              These must take the format {domain}/{scope}/{code}, for example 'Portfolio/Manager/Id'. (optional)
 
@@ -845,7 +845,7 @@ Name | Type | Description  | Notes
  **as_at** | **datetime**| The asAt datetime at which to list the portfolios. Defaults to returning the latest version              of each portfolio if not specified. | [optional] 
  **page** | **str**| The pagination token to use to continue listing portfolios. This  value is returned from the previous call. If a pagination token is provided, the filter, effectiveAt  and asAt fields must not have changed since the original request. Also, if set, a start value cannot be provided. | [optional] 
  **start** | **int**| When paginating, skip this number of results. | [optional] 
- **limit** | **int**| When paginating, limit the results to this number. Defaults to 65,535 if not specified. | [optional] 
+ **limit** | **int**| When paginating, limit the results to this number. Defaults to 100 if not specified. | [optional] 
  **filter** | **str**| Expression to filter the results.              For example, to return only transactions with a transaction type of &#39;Buy&#39;, specify \&quot;type eq &#39;Buy&#39;\&quot;.              For more information about filtering results, see https://support.lusid.com/knowledgebase/article/KA-01914. | [optional] 
  **property_keys** | [**list[str]**](str.md)| A list of property keys from the &#39;Portfolio&#39; domain to decorate onto each portfolio.              These must take the format {domain}/{scope}/{code}, for example &#39;Portfolio/Manager/Id&#39;. | [optional] 
 
@@ -887,10 +887,10 @@ import time
 import lusid
 from lusid.rest import ApiException
 from pprint import pprint
-# Defining the host is optional and defaults to http://local-unit-test-server.lusid.com:42844
+# Defining the host is optional and defaults to http://local-unit-test-server.lusid.com:43999
 # See configuration.py for a list of all supported configuration parameters.
 configuration = lusid.Configuration(
-    host = "http://local-unit-test-server.lusid.com:42844"
+    host = "http://local-unit-test-server.lusid.com:43999"
 )
 
 # The client must configure the authentication and authorization parameters
@@ -900,7 +900,7 @@ configuration = lusid.Configuration(
 
 # Configure OAuth2 access token for authorization: oauth2
 configuration = lusid.Configuration(
-    host = "http://local-unit-test-server.lusid.com:42844"
+    host = "http://local-unit-test-server.lusid.com:43999"
 )
 configuration.access_token = 'YOUR_ACCESS_TOKEN'
 
@@ -968,10 +968,10 @@ import time
 import lusid
 from lusid.rest import ApiException
 from pprint import pprint
-# Defining the host is optional and defaults to http://local-unit-test-server.lusid.com:42844
+# Defining the host is optional and defaults to http://local-unit-test-server.lusid.com:43999
 # See configuration.py for a list of all supported configuration parameters.
 configuration = lusid.Configuration(
-    host = "http://local-unit-test-server.lusid.com:42844"
+    host = "http://local-unit-test-server.lusid.com:43999"
 )
 
 # The client must configure the authentication and authorization parameters
@@ -981,7 +981,7 @@ configuration = lusid.Configuration(
 
 # Configure OAuth2 access token for authorization: oauth2
 configuration = lusid.Configuration(
-    host = "http://local-unit-test-server.lusid.com:42844"
+    host = "http://local-unit-test-server.lusid.com:43999"
 )
 configuration.access_token = 'YOUR_ACCESS_TOKEN'
 
@@ -1047,10 +1047,10 @@ import time
 import lusid
 from lusid.rest import ApiException
 from pprint import pprint
-# Defining the host is optional and defaults to http://local-unit-test-server.lusid.com:42844
+# Defining the host is optional and defaults to http://local-unit-test-server.lusid.com:43999
 # See configuration.py for a list of all supported configuration parameters.
 configuration = lusid.Configuration(
-    host = "http://local-unit-test-server.lusid.com:42844"
+    host = "http://local-unit-test-server.lusid.com:43999"
 )
 
 # The client must configure the authentication and authorization parameters
@@ -1060,7 +1060,7 @@ configuration = lusid.Configuration(
 
 # Configure OAuth2 access token for authorization: oauth2
 configuration = lusid.Configuration(
-    host = "http://local-unit-test-server.lusid.com:42844"
+    host = "http://local-unit-test-server.lusid.com:43999"
 )
 configuration.access_token = 'YOUR_ACCESS_TOKEN'
 
