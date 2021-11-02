@@ -9,7 +9,7 @@
       "url": "https://www.finbourne.com",
       "email": "info@finbourne.com"
     },
-    "version": "0.11.3671",
+    "version": "0.11.3673",
     "x-logo": {
       "url": "https://content.finbourne.com/LUSID-header.png",
       "backgroundColor": "#415464"
@@ -17,7 +17,7 @@
   },
   "servers": [
     {
-      "url": "https://fbn-prd.lusid.com/api"
+      "url": "http://local-unit-test-server.lusid.com:35846"
     }
   ],
   "paths": {
@@ -6780,10 +6780,10 @@
           {
             "name": "filter",
             "in": "query",
-            "description": "Expression to filter the result set. \r\n             For example, to filter on the User ID, use \"userId.id eq 'string'\"\r\n            Read more about filtering results from LUSID here https://support.lusid.com/filtering-results-from-lusid.",
+            "description": "Expression to filter the result set.\r\n             For example, to filter on the User ID, use \"userId.id eq 'string'\"\r\n            Read more about filtering results from LUSID here https://support.lusid.com/filtering-results-from-lusid.",
             "schema": {
               "type": "string",
-              "description": "Expression to filter the result set. \r\n             For example, to filter on the User ID, use \"userId.id eq 'string'\"\r\n            Read more about filtering results from LUSID here https://support.lusid.com/filtering-results-from-lusid.",
+              "description": "Expression to filter the result set.\r\n             For example, to filter on the User ID, use \"userId.id eq 'string'\"\r\n            Read more about filtering results from LUSID here https://support.lusid.com/filtering-results-from-lusid.",
               "nullable": true
             }
           }
@@ -7846,7 +7846,7 @@
           "Portfolio Groups"
         ],
         "summary": "[EARLY ACCESS] UpsertGroupProperties: Upsert group properties",
-        "description": "Update or insert one or more properties onto a single group. A property will be updated if it\r\nalready exists and inserted if it does not. All properties must be of the domain 'PortfolioGroup'.\r\n            \r\nUpserting a property that exists for a group, with a null value, will delete the instance of the property for that group.\r\n\r\nProperties have an <i>effectiveFrom</i> datetime for which the property is valid, and an <i>effectiveUntil</i>\r\ndatetime until which the property is valid. Not supplying an <i>effectiveUntil</i> datetime results in the property being\r\nvalid indefinitely, or until the next <i>effectiveFrom</i> datetime of the property.",
+        "description": "Update or insert one or more properties onto a single group. A property will be updated if it\r\nalready exists and inserted if it does not. All properties must be of the domain 'PortfolioGroup'.\r\n            \r\nUpserting a property that exists for a group, with a null value, will delete the instance of the property for that group.\r\n            \r\nProperties have an <i>effectiveFrom</i> datetime for which the property is valid, and an <i>effectiveUntil</i>\r\ndatetime until which the property is valid. Not supplying an <i>effectiveUntil</i> datetime results in the property being\r\nvalid indefinitely, or until the next <i>effectiveFrom</i> datetime of the property.",
         "operationId": "UpsertGroupProperties",
         "parameters": [
           {
@@ -8568,7 +8568,7 @@
           "Portfolio Groups"
         ],
         "summary": "[EARLY ACCESS] GetTransactionsForPortfolioGroup: Get transactions for transaction portfolios in a portfolio group",
-        "description": "Get transactions for transaction portfolios in a portfolio group over a given interval of effective time. \r\n\r\nWhen the specified portfolio in a portfolio group is a derived transaction portfolio, the returned set of transactions is the\r\nunion set of all transactions of the parent (and any grandparents etc.) and the specified derived transaction portfolio itself.",
+        "description": "Get transactions for transaction portfolios in a portfolio group over a given interval of effective time.\r\n            \r\nWhen the specified portfolio in a portfolio group is a derived transaction portfolio, the returned set of transactions is the\r\nunion set of all transactions of the parent (and any grandparents etc.) and the specified derived transaction portfolio itself.",
         "operationId": "GetTransactionsForPortfolioGroup",
         "parameters": [
           {
@@ -8588,24 +8588,24 @@
           {
             "name": "code",
             "in": "path",
-            "description": "The code of the portfolio group. Together with the scope this uniquely identifies\r\n            the portfolio group.",
+            "description": "The code of the portfolio group. Together with the scope this uniquely identifies\r\n             the portfolio group.",
             "required": true,
             "schema": {
               "maxLength": 64,
               "minLength": 1,
               "pattern": "^[a-zA-Z0-9\\-_]+$",
               "type": "string",
-              "description": "The code of the portfolio group. Together with the scope this uniquely identifies\r\n            the portfolio group.",
+              "description": "The code of the portfolio group. Together with the scope this uniquely identifies\r\n             the portfolio group.",
               "nullable": true
             }
           },
           {
             "name": "fromTransactionDate",
             "in": "query",
-            "description": "The lower bound effective datetime or cut label (inclusive) from which to retrieve the transactions.\r\n            There is no lower bound if this is not specified.",
+            "description": "The lower bound effective datetime or cut label (inclusive) from which to retrieve the transactions.\r\n             There is no lower bound if this is not specified.",
             "schema": {
               "type": "string",
-              "description": "The lower bound effective datetime or cut label (inclusive) from which to retrieve the transactions.\r\n            There is no lower bound if this is not specified.",
+              "description": "The lower bound effective datetime or cut label (inclusive) from which to retrieve the transactions.\r\n             There is no lower bound if this is not specified.",
               "format": "dateorcutlabel",
               "nullable": true
             }
@@ -8613,10 +8613,10 @@
           {
             "name": "toTransactionDate",
             "in": "query",
-            "description": "The upper bound effective datetime or cut label (inclusive) from which to retrieve transactions.\r\n            There is no upper bound if this is not specified.",
+            "description": "The upper bound effective datetime or cut label (inclusive) from which to retrieve transactions.\r\n             There is no upper bound if this is not specified.",
             "schema": {
               "type": "string",
-              "description": "The upper bound effective datetime or cut label (inclusive) from which to retrieve transactions.\r\n            There is no upper bound if this is not specified.",
+              "description": "The upper bound effective datetime or cut label (inclusive) from which to retrieve transactions.\r\n             There is no upper bound if this is not specified.",
               "format": "dateorcutlabel",
               "nullable": true
             }
@@ -8624,10 +8624,10 @@
           {
             "name": "asAt",
             "in": "query",
-            "description": "The asAt datetime at which to retrieve the transactions. Defaults to return the latest version\r\n            of each transaction if not specified.",
+            "description": "The asAt datetime at which to retrieve the transactions. Defaults to return the latest version\r\n             of each transaction if not specified.",
             "schema": {
               "type": "string",
-              "description": "The asAt datetime at which to retrieve the transactions. Defaults to return the latest version\r\n            of each transaction if not specified.",
+              "description": "The asAt datetime at which to retrieve the transactions. Defaults to return the latest version\r\n             of each transaction if not specified.",
               "format": "date-time",
               "nullable": true
             },
@@ -8636,24 +8636,24 @@
           {
             "name": "filter",
             "in": "query",
-            "description": "Expression to filter the result set. \r\n            For example, to filter on the Transaction Type, use \"type eq 'Buy'\"\r\n            Read more about filtering results from LUSID here https://support.lusid.com/filtering-results-from-lusid.",
+            "description": "Expression to filter the result set.\r\n             For example, to filter on the Transaction Type, use \"type eq 'Buy'\"\r\n             Read more about filtering results from LUSID here https://support.lusid.com/filtering-results-from-lusid.",
             "schema": {
               "type": "string",
-              "description": "Expression to filter the result set. \r\n            For example, to filter on the Transaction Type, use \"type eq 'Buy'\"\r\n            Read more about filtering results from LUSID here https://support.lusid.com/filtering-results-from-lusid.",
+              "description": "Expression to filter the result set.\r\n             For example, to filter on the Transaction Type, use \"type eq 'Buy'\"\r\n             Read more about filtering results from LUSID here https://support.lusid.com/filtering-results-from-lusid.",
               "nullable": true
             }
           },
           {
             "name": "propertyKeys",
             "in": "query",
-            "description": "A list of property keys from the \"Instrument\" or \"Transaction\" domain to decorate onto\r\n            the transactions. These take the format {domain}/{scope}/{code} e.g. \"Instrument/system/Name\" or\r\n            \"Transaction/strategy/quantsignal\".",
+            "description": "A list of property keys from the \"Instrument\" or \"Transaction\" domain to decorate onto\r\n             the transactions. These take the format {domain}/{scope}/{code} e.g. \"Instrument/system/Name\" or\r\n             \"Transaction/strategy/quantsignal\".",
             "schema": {
               "type": "array",
               "items": {
                 "type": "string",
                 "description": "The key that uniquely identifies the property. It has the format {domain}/{scope}/{code}."
               },
-              "description": "A list of property keys from the \"Instrument\" or \"Transaction\" domain to decorate onto\r\n            the transactions. These take the format {domain}/{scope}/{code} e.g. \"Instrument/system/Name\" or\r\n            \"Transaction/strategy/quantsignal\".",
+              "description": "A list of property keys from the \"Instrument\" or \"Transaction\" domain to decorate onto\r\n             the transactions. These take the format {domain}/{scope}/{code} e.g. \"Instrument/system/Name\" or\r\n             \"Transaction/strategy/quantsignal\".",
               "nullable": true
             },
             "x-nullable": true
@@ -8906,7 +8906,7 @@
           "Portfolio Groups"
         ],
         "summary": "[EARLY ACCESS] BuildTransactionsForPortfolioGroup: Build transactions for transaction portfolios in a portfolio group",
-        "description": "Build transactions for transaction portfolios in a portfolio group over a given interval of effective time. \r\n\r\nWhen the specified portfolio in a portfolio group is a derived transaction portfolio, the returned set of transactions is the\r\nunion set of all transactions of the parent (and any grandparents etc.) and the specified derived transaction portfolio itself.",
+        "description": "Build transactions for transaction portfolios in a portfolio group over a given interval of effective time.\r\n            \r\nWhen the specified portfolio in a portfolio group is a derived transaction portfolio, the returned set of transactions is the\r\nunion set of all transactions of the parent (and any grandparents etc.) and the specified derived transaction portfolio itself.",
         "operationId": "BuildTransactionsForPortfolioGroup",
         "parameters": [
           {
@@ -8926,24 +8926,24 @@
           {
             "name": "code",
             "in": "path",
-            "description": "The code of the portfolio group. Together with the scope this uniquely identifies\r\n            the portfolio group.",
+            "description": "The code of the portfolio group. Together with the scope this uniquely identifies\r\n             the portfolio group.",
             "required": true,
             "schema": {
               "maxLength": 64,
               "minLength": 1,
               "pattern": "^[a-zA-Z0-9\\-_]+$",
               "type": "string",
-              "description": "The code of the portfolio group. Together with the scope this uniquely identifies\r\n            the portfolio group.",
+              "description": "The code of the portfolio group. Together with the scope this uniquely identifies\r\n             the portfolio group.",
               "nullable": true
             }
           },
           {
             "name": "asAt",
             "in": "query",
-            "description": "The asAt datetime at which to build the transactions. Defaults to return the latest\r\n            version of each transaction if not specified.",
+            "description": "The asAt datetime at which to build the transactions. Defaults to return the latest\r\n             version of each transaction if not specified.",
             "schema": {
               "type": "string",
-              "description": "The asAt datetime at which to build the transactions. Defaults to return the latest\r\n            version of each transaction if not specified.",
+              "description": "The asAt datetime at which to build the transactions. Defaults to return the latest\r\n             version of each transaction if not specified.",
               "format": "date-time",
               "nullable": true
             },
@@ -8952,24 +8952,24 @@
           {
             "name": "filter",
             "in": "query",
-            "description": "Expression to filter the result set.\r\n            For example, to filter on the Transaction Type, use \"type eq 'Buy'\"\r\n            Read more about filtering results from LUSID here https://support.lusid.com/filtering-results-from-lusid.",
+            "description": "Expression to filter the result set.\r\n             For example, to filter on the Transaction Type, use \"type eq 'Buy'\"\r\n             Read more about filtering results from LUSID here https://support.lusid.com/filtering-results-from-lusid.",
             "schema": {
               "type": "string",
-              "description": "Expression to filter the result set.\r\n            For example, to filter on the Transaction Type, use \"type eq 'Buy'\"\r\n            Read more about filtering results from LUSID here https://support.lusid.com/filtering-results-from-lusid.",
+              "description": "Expression to filter the result set.\r\n             For example, to filter on the Transaction Type, use \"type eq 'Buy'\"\r\n             Read more about filtering results from LUSID here https://support.lusid.com/filtering-results-from-lusid.",
               "nullable": true
             }
           },
           {
             "name": "propertyKeys",
             "in": "query",
-            "description": "A list of property keys from the \"Instrument\" or \"Transaction\" domain to decorate onto\r\n            the transactions. These take the format {domain}/{scope}/{code} e.g. \"Instrument/system/Name\" or\r\n            \"Transaction/strategy/quantsignal\".",
+            "description": "A list of property keys from the \"Instrument\" or \"Transaction\" domain to decorate onto\r\n             the transactions. These take the format {domain}/{scope}/{code} e.g. \"Instrument/system/Name\" or\r\n             \"Transaction/strategy/quantsignal\".",
             "schema": {
               "type": "array",
               "items": {
                 "type": "string",
                 "description": "The key that uniquely identifies the property. It has the format {domain}/{scope}/{code}."
               },
-              "description": "A list of property keys from the \"Instrument\" or \"Transaction\" domain to decorate onto\r\n            the transactions. These take the format {domain}/{scope}/{code} e.g. \"Instrument/system/Name\" or\r\n            \"Transaction/strategy/quantsignal\".",
+              "description": "A list of property keys from the \"Instrument\" or \"Transaction\" domain to decorate onto\r\n             the transactions. These take the format {domain}/{scope}/{code} e.g. \"Instrument/system/Name\" or\r\n             \"Transaction/strategy/quantsignal\".",
               "nullable": true
             },
             "x-nullable": true
@@ -16414,7 +16414,7 @@
           "Transaction Portfolios"
         ],
         "summary": "[EARLY ACCESS] ResolveInstrument: Resolve instrument",
-        "description": "Try to resolve the instrument for transaction and holdings for a given instrument identifier and a specified  \r\nperiod of time. Also update the instrument identifiers with the given instrument identifiers collection.",
+        "description": "Try to resolve the instrument for transaction and holdings for a given instrument identifier and a specified\r\nperiod of time. Also update the instrument identifiers with the given instrument identifiers collection.",
         "operationId": "ResolveInstrument",
         "parameters": [
           {
@@ -16475,7 +16475,7 @@
           }
         ],
         "requestBody": {
-          "description": "The dictionary with the instrument identifiers to be updated on the \r\n           transaction and holdings.",
+          "description": "The dictionary with the instrument identifiers to be updated on the\r\n           transaction and holdings.",
           "content": {
             "application/json-patch+json": {
               "schema": {
@@ -16483,7 +16483,7 @@
                 "additionalProperties": {
                   "type": "string"
                 },
-                "description": "The dictionary with the instrument identifiers to be updated on the \r\n           transaction and holdings.",
+                "description": "The dictionary with the instrument identifiers to be updated on the\r\n           transaction and holdings.",
                 "nullable": true
               },
               "example": {
@@ -16497,7 +16497,7 @@
                 "additionalProperties": {
                   "type": "string"
                 },
-                "description": "The dictionary with the instrument identifiers to be updated on the \r\n           transaction and holdings.",
+                "description": "The dictionary with the instrument identifiers to be updated on the\r\n           transaction and holdings.",
                 "nullable": true
               },
               "example": {
@@ -16511,7 +16511,7 @@
                 "additionalProperties": {
                   "type": "string"
                 },
-                "description": "The dictionary with the instrument identifiers to be updated on the \r\n           transaction and holdings.",
+                "description": "The dictionary with the instrument identifiers to be updated on the\r\n           transaction and holdings.",
                 "nullable": true
               },
               "example": {
@@ -16525,7 +16525,7 @@
                 "additionalProperties": {
                   "type": "string"
                 },
-                "description": "The dictionary with the instrument identifiers to be updated on the \r\n           transaction and holdings.",
+                "description": "The dictionary with the instrument identifiers to be updated on the\r\n           transaction and holdings.",
                 "nullable": true
               },
               "example": {
@@ -16669,10 +16669,10 @@
           {
             "name": "filter",
             "in": "query",
-            "description": "Expression to filter the result set. \r\n            For example, to return only transactions with a transaction type of 'Buy', specify \"type eq 'Buy'\".\r\n            For more information about filtering LUSID results, see https://support.lusid.com/knowledgebase/article/KA-01914.",
+            "description": "Expression to filter the result set.\r\n            For example, to return only transactions with a transaction type of 'Buy', specify \"type eq 'Buy'\".\r\n            For more information about filtering LUSID results, see https://support.lusid.com/knowledgebase/article/KA-01914.",
             "schema": {
               "type": "string",
-              "description": "Expression to filter the result set. \r\n            For example, to return only transactions with a transaction type of 'Buy', specify \"type eq 'Buy'\".\r\n            For more information about filtering LUSID results, see https://support.lusid.com/knowledgebase/article/KA-01914.",
+              "description": "Expression to filter the result set.\r\n            For example, to return only transactions with a transaction type of 'Buy', specify \"type eq 'Buy'\".\r\n            For more information about filtering LUSID results, see https://support.lusid.com/knowledgebase/article/KA-01914.",
               "nullable": true
             }
           },
@@ -20451,10 +20451,10 @@
           {
             "name": "filter",
             "in": "query",
-            "description": "Expression to filter the result set. \r\n            For example, to filter on the Holding Type, use \"holdingType eq 'p'\".\r\n            For more information about filtering LUSID results, see https://support.lusid.com/knowledgebase/article/KA-01914.",
+            "description": "Expression to filter the result set.\r\n            For example, to filter on the Holding Type, use \"holdingType eq 'p'\".\r\n            For more information about filtering LUSID results, see https://support.lusid.com/knowledgebase/article/KA-01914.",
             "schema": {
               "type": "string",
-              "description": "Expression to filter the result set. \r\n            For example, to filter on the Holding Type, use \"holdingType eq 'p'\".\r\n            For more information about filtering LUSID results, see https://support.lusid.com/knowledgebase/article/KA-01914.",
+              "description": "Expression to filter the result set.\r\n            For example, to filter on the Holding Type, use \"holdingType eq 'p'\".\r\n            For more information about filtering LUSID results, see https://support.lusid.com/knowledgebase/article/KA-01914.",
               "nullable": true
             }
           },
@@ -21072,7 +21072,7 @@
           "Transaction Portfolios"
         ],
         "summary": "GetTransactions: Get transactions",
-        "description": "Retrieve all the transactions that occurred during a particular time interval. \r\n\r\nIf the portfolio is a derived transaction portfolio, the transactions returned are the\r\nunion set of all transactions of the parent (and any grandparents, etc.) as well as\r\nthose of the derived transaction portfolio itself.",
+        "description": "Retrieve all the transactions that occurred during a particular time interval.\r\n            \r\nIf the portfolio is a derived transaction portfolio, the transactions returned are the\r\nunion set of all transactions of the parent (and any grandparents, etc.) as well as\r\nthose of the derived transaction portfolio itself.",
         "operationId": "GetTransactions",
         "parameters": [
           {
@@ -21092,24 +21092,24 @@
           {
             "name": "code",
             "in": "path",
-            "description": "The code of the transaction portfolio. Together with the scope this uniquely identifies\r\n            the transaction portfolio.",
+            "description": "The code of the transaction portfolio. Together with the scope this uniquely identifies\r\n             the transaction portfolio.",
             "required": true,
             "schema": {
               "maxLength": 64,
               "minLength": 1,
               "pattern": "^[a-zA-Z0-9\\-_]+$",
               "type": "string",
-              "description": "The code of the transaction portfolio. Together with the scope this uniquely identifies\r\n            the transaction portfolio.",
+              "description": "The code of the transaction portfolio. Together with the scope this uniquely identifies\r\n             the transaction portfolio.",
               "nullable": true
             }
           },
           {
             "name": "fromTransactionDate",
             "in": "query",
-            "description": "The lower bound effective datetime or cut label (inclusive) from which to retrieve transactions.\r\n            There is no lower bound if this is not specified.",
+            "description": "The lower bound effective datetime or cut label (inclusive) from which to retrieve transactions.\r\n             There is no lower bound if this is not specified.",
             "schema": {
               "type": "string",
-              "description": "The lower bound effective datetime or cut label (inclusive) from which to retrieve transactions.\r\n            There is no lower bound if this is not specified.",
+              "description": "The lower bound effective datetime or cut label (inclusive) from which to retrieve transactions.\r\n             There is no lower bound if this is not specified.",
               "format": "dateorcutlabel",
               "nullable": true
             }
@@ -21117,10 +21117,10 @@
           {
             "name": "toTransactionDate",
             "in": "query",
-            "description": "The upper bound effective datetime or cut label (inclusive) from which to retrieve transactions.\r\n            There is no upper bound if this is not specified.",
+            "description": "The upper bound effective datetime or cut label (inclusive) from which to retrieve transactions.\r\n             There is no upper bound if this is not specified.",
             "schema": {
               "type": "string",
-              "description": "The upper bound effective datetime or cut label (inclusive) from which to retrieve transactions.\r\n            There is no upper bound if this is not specified.",
+              "description": "The upper bound effective datetime or cut label (inclusive) from which to retrieve transactions.\r\n             There is no upper bound if this is not specified.",
               "format": "dateorcutlabel",
               "nullable": true
             }
@@ -21128,10 +21128,10 @@
           {
             "name": "asAt",
             "in": "query",
-            "description": "The asAt datetime at which to retrieve transactions. Defaults to returning the latest version\r\n            of each transaction if not specified.",
+            "description": "The asAt datetime at which to retrieve transactions. Defaults to returning the latest version\r\n             of each transaction if not specified.",
             "schema": {
               "type": "string",
-              "description": "The asAt datetime at which to retrieve transactions. Defaults to returning the latest version\r\n            of each transaction if not specified.",
+              "description": "The asAt datetime at which to retrieve transactions. Defaults to returning the latest version\r\n             of each transaction if not specified.",
               "format": "date-time",
               "nullable": true
             },
@@ -21140,24 +21140,24 @@
           {
             "name": "filter",
             "in": "query",
-            "description": "Expression with which to filter the result set. \r\n            For example, to return only transactions with a transaction type of 'Buy', specify \"type eq 'Buy'\"\r\n            For more information about filtering LUSID results, see https://support.lusid.com/knowledgebase/article/KA-01914.",
+            "description": "Expression with which to filter the result set.\r\n             For example, to return only transactions with a transaction type of 'Buy', specify \"type eq 'Buy'\"\r\n             For more information about filtering LUSID results, see https://support.lusid.com/knowledgebase/article/KA-01914.",
             "schema": {
               "type": "string",
-              "description": "Expression with which to filter the result set. \r\n            For example, to return only transactions with a transaction type of 'Buy', specify \"type eq 'Buy'\"\r\n            For more information about filtering LUSID results, see https://support.lusid.com/knowledgebase/article/KA-01914.",
+              "description": "Expression with which to filter the result set.\r\n             For example, to return only transactions with a transaction type of 'Buy', specify \"type eq 'Buy'\"\r\n             For more information about filtering LUSID results, see https://support.lusid.com/knowledgebase/article/KA-01914.",
               "nullable": true
             }
           },
           {
             "name": "propertyKeys",
             "in": "query",
-            "description": "A list of property keys from the 'Instrument' or 'Transaction' domain to decorate onto\r\n            transactions. These must have the format {domain}/{scope}/{code}, for example 'Instrument/system/Name' or\r\n            'Transaction/strategy/quantsignal'.",
+            "description": "A list of property keys from the 'Instrument' or 'Transaction' domain to decorate onto\r\n             transactions. These must have the format {domain}/{scope}/{code}, for example 'Instrument/system/Name' or\r\n             'Transaction/strategy/quantsignal'.",
             "schema": {
               "type": "array",
               "items": {
                 "type": "string",
                 "description": "The key that uniquely identifies the property. It has the format {domain}/{scope}/{code}."
               },
-              "description": "A list of property keys from the 'Instrument' or 'Transaction' domain to decorate onto\r\n            transactions. These must have the format {domain}/{scope}/{code}, for example 'Instrument/system/Name' or\r\n            'Transaction/strategy/quantsignal'.",
+              "description": "A list of property keys from the 'Instrument' or 'Transaction' domain to decorate onto\r\n             transactions. These must have the format {domain}/{scope}/{code}, for example 'Instrument/system/Name' or\r\n             'Transaction/strategy/quantsignal'.",
               "nullable": true
             },
             "x-nullable": true
@@ -29702,7 +29702,7 @@
         "description": "OAuth2 Implicit Grant",
         "flows": {
           "implicit": {
-            "authorizationUrl": "https://lusid.okta.com/oauth2/default/v1/authorize",
+            "authorizationUrl": "https://dummyurl.lusid.com/",
             "scopes": {}
           }
         }
