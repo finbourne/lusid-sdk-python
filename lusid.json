@@ -9,7 +9,7 @@
       "url": "https://www.finbourne.com",
       "email": "info@finbourne.com"
     },
-    "version": "0.11.3677",
+    "version": "0.11.3678",
     "x-logo": {
       "url": "https://content.finbourne.com/LUSID-header.png",
       "backgroundColor": "#415464"
@@ -17,7 +17,7 @@
   },
   "servers": [
     {
-      "url": "http://local-unit-test-server.lusid.com:33819"
+      "url": "http://local-unit-test-server.lusid.com:48404"
     }
   ],
   "paths": {
@@ -24963,6 +24963,24 @@
             ],
             "type": "string",
             "description": "The state of of the instrument at the asAt datetime of this version of the instrument definition. The available values are: Active, Inactive"
+          },
+          "assetClass": {
+            "enum": [
+              "InterestRates",
+              "FX",
+              "Inflation",
+              "Equities",
+              "Credit",
+              "Commodities",
+              "Unknown"
+            ],
+            "type": "string",
+            "description": "The nominal asset class of the instrument, e.g. InterestRates, FX, Inflation, Equities, Credit, Commodities, etc. The available values are: InterestRates, FX, Inflation, Equities, Credit, Commodities, Unknown"
+          },
+          "domCcy": {
+            "type": "string",
+            "description": "The domestic currency, meaning the currency in which the instrument would typically be expected to pay cashflows, e.g. a share in AAPL being USD.",
+            "nullable": true
           },
           "links": {
             "type": "array",
