@@ -11,7 +11,6 @@ from lusid.api.derived_transaction_portfolios_api import DerivedTransactionPortf
 from lusid.api.entities_api import EntitiesApi
 from lusid.api.instruments_api import InstrumentsApi
 from lusid.api.legal_entities_api import LegalEntitiesApi
-from lusid.api.login_api import LoginApi
 from lusid.api.orders_api import OrdersApi
 from lusid.api.portfolio_groups_api import PortfolioGroupsApi
 from lusid.api.portfolios_api import PortfoliosApi

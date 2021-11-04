@@ -9,7 +9,7 @@
       "url": "https://www.finbourne.com",
       "email": "info@finbourne.com"
     },
-    "version": "0.11.3683",
+    "version": "0.11.3684",
     "x-logo": {
       "url": "https://content.finbourne.com/LUSID-header.png",
       "backgroundColor": "#415464"
@@ -17,7 +17,7 @@
   },
   "servers": [
     {
-      "url": "http://local-unit-test-server.lusid.com:46169"
+      "url": "http://local-unit-test-server.lusid.com:56757"
     }
   ],
   "paths": {
@@ -4800,87 +4800,6 @@
           }
         ],
         "x-fbn-apistatus": "EarlyAccess"
-      }
-    },
-    "/api/login/saml/{domain}": {
-      "get": {
-        "tags": [
-          "Login"
-        ],
-        "summary": "GetSamlIdentityProviderId: Get SAML Identity Provider",
-        "description": "Get the unique identifier for the SAML 2.0 Identity Provider to be used for domain.",
-        "operationId": "GetSamlIdentityProviderId",
-        "parameters": [
-          {
-            "name": "domain",
-            "in": "path",
-            "description": "The domain that the user will be logging in to",
-            "required": true,
-            "schema": {
-              "type": "string",
-              "description": "The domain that the user will be logging in to",
-              "nullable": true
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "The ID of the SAML Identity Provider to be used (may be null)",
-            "content": {
-              "text/plain": {
-                "schema": {
-                  "type": "string"
-                }
-              },
-              "application/json": {
-                "schema": {
-                  "type": "string"
-                }
-              },
-              "text/json": {
-                "schema": {
-                  "type": "string"
-                }
-              }
-            }
-          },
-          "400": {
-            "description": "The details of the input related failure",
-            "content": {
-              "text/plain": {
-                "schema": {
-                  "$ref": "#/components/schemas/LusidValidationProblemDetails"
-                }
-              },
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/LusidValidationProblemDetails"
-                }
-              },
-              "text/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/LusidValidationProblemDetails"
-                }
-              }
-            }
-          },
-          "default": {
-            "description": "Error response",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/LusidProblemDetails"
-                }
-              }
-            }
-          }
-        },
-        "security": [
-          {
-            "oauth2": []
-          }
-        ],
-        "x-fbn-apistatus": "Stable"
       }
     },
     "/api/metadata/access/resources": {
@@ -29816,10 +29735,6 @@
       "description": "Endpoints for interacting with Legal Entities."
     },
     {
-      "name": "Login",
-      "description": "Methods to handle login"
-    },
-    {
       "name": "OrderGraph",
       "description": "The order graph is a way of looking at orders with the various entities relating to the order, such as blocks, orders, placements, allocations and executions in one place. It also contains some state information which can not be obtained any other way."
     },
@@ -29944,7 +29859,6 @@
       "FeesAndCommissions",
       "Instruments",
       "Legal Entities",
-      "Login",
       "OrderGraph",
       "OrderInstructions",
       "Orders",
