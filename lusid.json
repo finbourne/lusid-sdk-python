@@ -9,7 +9,7 @@
       "url": "https://www.finbourne.com",
       "email": "info@finbourne.com"
     },
-    "version": "0.11.3702",
+    "version": "0.11.3703",
     "x-logo": {
       "url": "https://content.finbourne.com/LUSID-header.png",
       "backgroundColor": "#415464"
@@ -17,7 +17,7 @@
   },
   "servers": [
     {
-      "url": "http://local-unit-test-server.lusid.com:56988"
+      "url": "http://local-unit-test-server.lusid.com:49073"
     }
   ],
   "paths": {
@@ -4896,9 +4896,6 @@
             "in": "query",
             "description": "The requested version of the Excel plugin",
             "schema": {
-              "maxLength": 30,
-              "minLength": 1,
-              "pattern": "^\\d+\\.\\d+\\.\\d+(-[a-zA-Z0-9\\.-]{1,30})?$",
               "type": "string",
               "description": "The requested version of the Excel plugin",
               "nullable": true
