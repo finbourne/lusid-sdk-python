@@ -9,7 +9,7 @@
       "url": "https://www.finbourne.com",
       "email": "info@finbourne.com"
     },
-    "version": "0.11.3712",
+    "version": "0.11.3713",
     "x-logo": {
       "url": "https://content.finbourne.com/LUSID-header.png",
       "backgroundColor": "#415464"
@@ -17,7 +17,7 @@
   },
   "servers": [
     {
-      "url": "https://fbn-prd.lusid.com/api"
+      "url": "http://local-unit-test-server.lusid.com:58922"
     }
   ],
   "paths": {
@@ -21097,10 +21097,10 @@
           {
             "name": "limit",
             "in": "query",
-            "description": "When paginating, limit the number of returned results to this many. Defaults to 100 if not specified.",
+            "description": "When paginating, limit the number of returned results to this many. The current behaviour is\r\n             to return all transactions if possible, but this will change to defaulting to 1000 if not specified in the future. It is recommended\r\n             to populate this field to enable pagination.",
             "schema": {
               "type": "integer",
-              "description": "When paginating, limit the number of returned results to this many. Defaults to 100 if not specified.",
+              "description": "When paginating, limit the number of returned results to this many. The current behaviour is\r\n             to return all transactions if possible, but this will change to defaulting to 1000 if not specified in the future. It is recommended\r\n             to populate this field to enable pagination.",
               "format": "int32",
               "nullable": true
             },
@@ -29642,7 +29642,7 @@
         "description": "OAuth2 Implicit Grant",
         "flows": {
           "implicit": {
-            "authorizationUrl": "https://lusid.okta.com/oauth2/default/v1/authorize",
+            "authorizationUrl": "https://dummyurl.lusid.com/",
             "scopes": {}
           }
         }
