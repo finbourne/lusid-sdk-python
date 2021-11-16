@@ -9,7 +9,7 @@
       "url": "https://www.finbourne.com",
       "email": "info@finbourne.com"
     },
-    "version": "0.11.3727",
+    "version": "0.11.3728",
     "x-logo": {
       "url": "https://content.finbourne.com/LUSID-header.png",
       "backgroundColor": "#415464"
@@ -17,7 +17,7 @@
   },
   "servers": [
     {
-      "url": "http://local-unit-test-server.lusid.com:49236"
+      "url": "http://local-unit-test-server.lusid.com:41371"
     }
   ],
   "paths": {
@@ -2271,6 +2271,9 @@
             "in": "query",
             "description": "Expression to filter the result set. Defaults to filtering out inactive instruments\r\n             (that is, those that have been deleted). For more information about filtering results,\r\n             see https://support.lusid.com/knowledgebase/article/KA-01914.",
             "schema": {
+              "maxLength": 16384,
+              "minLength": 0,
+              "pattern": "^[\\s\\S]*$",
               "type": "string",
               "description": "Expression to filter the result set. Defaults to filtering out inactive instruments\r\n             (that is, those that have been deleted). For more information about filtering results,\r\n             see https://support.lusid.com/knowledgebase/article/KA-01914.",
               "default": "State eq 'Active'",
@@ -11363,6 +11366,9 @@
             "description": "The scope of the Portfolio.",
             "required": true,
             "schema": {
+              "maxLength": 64,
+              "minLength": 1,
+              "pattern": "^[a-zA-Z0-9\\-_]+$",
               "type": "string",
               "description": "The scope of the Portfolio.",
               "nullable": true
@@ -11374,6 +11380,9 @@
             "description": "The code of the  Portfolio.",
             "required": true,
             "schema": {
+              "maxLength": 64,
+              "minLength": 1,
+              "pattern": "^[a-zA-Z0-9\\-_]+$",
               "type": "string",
               "description": "The code of the  Portfolio.",
               "nullable": true
@@ -11385,6 +11394,9 @@
             "description": "The scope of the Returns.",
             "required": true,
             "schema": {
+              "maxLength": 64,
+              "minLength": 1,
+              "pattern": "^[a-zA-Z0-9\\-_]+$",
               "type": "string",
               "description": "The scope of the Returns.",
               "nullable": true
@@ -11396,6 +11408,9 @@
             "description": "The code of the Returns.",
             "required": true,
             "schema": {
+              "maxLength": 64,
+              "minLength": 1,
+              "pattern": "^[a-zA-Z0-9\\-_]+$",
               "type": "string",
               "description": "The code of the Returns.",
               "nullable": true
@@ -11581,6 +11596,9 @@
             "description": "The scope of the Portfolio.",
             "required": true,
             "schema": {
+              "maxLength": 64,
+              "minLength": 1,
+              "pattern": "^[a-zA-Z0-9\\-_]+$",
               "type": "string",
               "description": "The scope of the Portfolio.",
               "nullable": true
@@ -11592,6 +11610,9 @@
             "description": "The code of the  Portfolio.",
             "required": true,
             "schema": {
+              "maxLength": 64,
+              "minLength": 1,
+              "pattern": "^[a-zA-Z0-9\\-_]+$",
               "type": "string",
               "description": "The code of the  Portfolio.",
               "nullable": true
@@ -11603,6 +11624,9 @@
             "description": "The scope of the Returns.",
             "required": true,
             "schema": {
+              "maxLength": 64,
+              "minLength": 1,
+              "pattern": "^[a-zA-Z0-9\\-_]+$",
               "type": "string",
               "description": "The scope of the Returns.",
               "nullable": true
@@ -11614,6 +11638,9 @@
             "description": "The code of the Returns.",
             "required": true,
             "schema": {
+              "maxLength": 64,
+              "minLength": 1,
+              "pattern": "^[a-zA-Z0-9\\-_]+$",
               "type": "string",
               "description": "The code of the Returns.",
               "nullable": true
@@ -11739,6 +11766,9 @@
             "description": "The scope of the Portfolio.",
             "required": true,
             "schema": {
+              "maxLength": 64,
+              "minLength": 1,
+              "pattern": "^[a-zA-Z0-9\\-_]+$",
               "type": "string",
               "description": "The scope of the Portfolio.",
               "nullable": true
@@ -11750,6 +11780,9 @@
             "description": "The code of the  Portfolio.",
             "required": true,
             "schema": {
+              "maxLength": 64,
+              "minLength": 1,
+              "pattern": "^[a-zA-Z0-9\\-_]+$",
               "type": "string",
               "description": "The code of the  Portfolio.",
               "nullable": true
@@ -11761,6 +11794,9 @@
             "description": "The scope of the Returns.",
             "required": true,
             "schema": {
+              "maxLength": 64,
+              "minLength": 1,
+              "pattern": "^[a-zA-Z0-9\\-_]+$",
               "type": "string",
               "description": "The scope of the Returns.",
               "nullable": true
@@ -11772,6 +11808,9 @@
             "description": "The code of the Returns.",
             "required": true,
             "schema": {
+              "maxLength": 64,
+              "minLength": 1,
+              "pattern": "^[a-zA-Z0-9\\-_]+$",
               "type": "string",
               "description": "The code of the Returns.",
               "nullable": true
@@ -11993,6 +12032,9 @@
             "description": "The scope of the Portfolio.",
             "required": true,
             "schema": {
+              "maxLength": 64,
+              "minLength": 1,
+              "pattern": "^[a-zA-Z0-9\\-_]+$",
               "type": "string",
               "description": "The scope of the Portfolio.",
               "nullable": true
@@ -12004,6 +12046,9 @@
             "description": "The code of the  Portfolio.",
             "required": true,
             "schema": {
+              "maxLength": 64,
+              "minLength": 1,
+              "pattern": "^[a-zA-Z0-9\\-_]+$",
               "type": "string",
               "description": "The code of the  Portfolio.",
               "nullable": true
@@ -12015,6 +12060,9 @@
             "description": "The scope of the Returns.",
             "required": true,
             "schema": {
+              "maxLength": 64,
+              "minLength": 1,
+              "pattern": "^[a-zA-Z0-9\\-_]+$",
               "type": "string",
               "description": "The scope of the Returns.",
               "nullable": true
@@ -12026,6 +12074,9 @@
             "description": "The code of the Returns.",
             "required": true,
             "schema": {
+              "maxLength": 64,
+              "minLength": 1,
+              "pattern": "^[a-zA-Z0-9\\-_]+$",
               "type": "string",
               "description": "The code of the Returns.",
               "nullable": true
@@ -13941,6 +13992,9 @@
             "description": "The scope in which to create the reference portfolio.",
             "required": true,
             "schema": {
+              "maxLength": 64,
+              "minLength": 1,
+              "pattern": "^[a-zA-Z0-9\\-_]+$",
               "type": "string",
               "description": "The scope in which to create the reference portfolio.",
               "nullable": true
@@ -16233,6 +16287,9 @@
             "description": "The scope in which to create the transaction portfolio.",
             "required": true,
             "schema": {
+              "maxLength": 64,
+              "minLength": 1,
+              "pattern": "^[a-zA-Z0-9\\-_]+$",
               "type": "string",
               "description": "The scope in which to create the transaction portfolio.",
               "nullable": true
@@ -16482,6 +16539,9 @@
             "description": "The code of the transaction portfolio. Together with the scope this uniquely identifies\r\n            the transaction portfolio.",
             "required": true,
             "schema": {
+              "maxLength": 64,
+              "minLength": 1,
+              "pattern": "^[a-zA-Z0-9\\-_]+$",
               "type": "string",
               "description": "The code of the transaction portfolio. Together with the scope this uniquely identifies\r\n            the transaction portfolio.",
               "nullable": true
@@ -21865,6 +21925,9 @@
             "description": "The code of the transaction portfolio. Together with the scope this uniquely identifies\r\n            the transaction portfolio.",
             "required": true,
             "schema": {
+              "maxLength": 64,
+              "minLength": 1,
+              "pattern": "^[a-zA-Z0-9\\-_]+$",
               "type": "string",
               "description": "The code of the transaction portfolio. Together with the scope this uniquely identifies\r\n            the transaction portfolio.",
               "nullable": true
