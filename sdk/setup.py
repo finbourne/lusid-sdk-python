@@ -37,8 +37,7 @@ REQUIRES = [
     "certifi >= 14.05.14",
     "python-dateutil >= 2.5.3",
     "urllib3 >= 1.15.1",
-    "requests >= 2.21.0",
-    "simplejson >= 3.17.3"
+    "requests >= 2.21.0"
 ]
 
 version = {}
