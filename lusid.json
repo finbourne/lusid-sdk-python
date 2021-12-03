@@ -9,7 +9,7 @@
       "url": "https://www.finbourne.com",
       "email": "info@finbourne.com"
     },
-    "version": "0.11.3798",
+    "version": "0.11.3799",
     "x-logo": {
       "url": "https://www.lusid.com/app/assets/logo_white.png",
       "backgroundColor": "#415464"
@@ -17,7 +17,7 @@
   },
   "servers": [
     {
-      "url": "http://local-unit-test-server.lusid.com:64043"
+      "url": "http://local-unit-test-server.lusid.com:58231"
     }
   ],
   "paths": {
@@ -6008,6 +6008,9 @@
             "description": "The scope that the portfolio group will be created in.",
             "required": true,
             "schema": {
+              "maxLength": 64,
+              "minLength": 1,
+              "pattern": "^[a-zA-Z0-9\\-_]+$",
               "type": "string",
               "description": "The scope that the portfolio group will be created in.",
               "nullable": true
@@ -6204,6 +6207,9 @@
             "description": "The scope to list the portfolio groups in.",
             "required": true,
             "schema": {
+              "maxLength": 64,
+              "minLength": 1,
+              "pattern": "^[a-zA-Z0-9\\-_]+$",
               "type": "string",
               "description": "The scope to list the portfolio groups in.",
               "nullable": true
@@ -6689,6 +6695,9 @@
             "description": "The scope of the portfolio group to retrieve the commands for.",
             "required": true,
             "schema": {
+              "maxLength": 64,
+              "minLength": 1,
+              "pattern": "^[a-zA-Z0-9\\-_]+$",
               "type": "string",
               "description": "The scope of the portfolio group to retrieve the commands for.",
               "nullable": true
@@ -6700,6 +6709,9 @@
             "description": "The code of the portfolio group to retrieve the commands for. Together with the scope this uniquely identifies the portfolio group.",
             "required": true,
             "schema": {
+              "maxLength": 64,
+              "minLength": 1,
+              "pattern": "^[a-zA-Z0-9\\-_]+$",
               "type": "string",
               "description": "The code of the portfolio group to retrieve the commands for. Together with the scope this uniquely identifies the portfolio group.",
               "nullable": true
@@ -7417,6 +7429,9 @@
             "description": "The scope of the portfolio being removed from the portfolio group.",
             "required": true,
             "schema": {
+              "maxLength": 64,
+              "minLength": 1,
+              "pattern": "^[a-zA-Z0-9\\-_]+$",
               "type": "string",
               "description": "The scope of the portfolio being removed from the portfolio group.",
               "nullable": true
@@ -7428,6 +7443,9 @@
             "description": "The code of the portfolio being removed from the portfolio group. Together with the scope this uniquely identifies the portfolio to remove.",
             "required": true,
             "schema": {
+              "maxLength": 64,
+              "minLength": 1,
+              "pattern": "^[a-zA-Z0-9\\-_]+$",
               "type": "string",
               "description": "The code of the portfolio being removed from the portfolio group. Together with the scope this uniquely identifies the portfolio to remove.",
               "nullable": true
@@ -13322,6 +13340,9 @@
             "description": "The scope of the quotes to list.",
             "required": true,
             "schema": {
+              "maxLength": 64,
+              "minLength": 1,
+              "pattern": "^[a-zA-Z0-9\\-_]+$",
               "type": "string",
               "description": "The scope of the quotes to list.",
               "nullable": true
@@ -13646,6 +13667,9 @@
             "description": "The scope of the quotes to list.",
             "required": true,
             "schema": {
+              "maxLength": 64,
+              "minLength": 1,
+              "pattern": "^[a-zA-Z0-9\\-_]+$",
               "type": "string",
               "description": "The scope of the quotes to list.",
               "nullable": true
@@ -20514,6 +20538,9 @@
             "description": "The scope of the transaction portfolio.",
             "required": true,
             "schema": {
+              "maxLength": 64,
+              "minLength": 1,
+              "pattern": "^[a-zA-Z0-9\\-_]+$",
               "type": "string",
               "description": "The scope of the transaction portfolio.",
               "nullable": true
