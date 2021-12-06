@@ -9,7 +9,7 @@
       "url": "https://www.finbourne.com",
       "email": "info@finbourne.com"
     },
-    "version": "0.11.3802",
+    "version": "0.11.3804",
     "x-logo": {
       "url": "https://www.lusid.com/app/assets/logo_white.png",
       "backgroundColor": "#415464"
@@ -17,7 +17,7 @@
   },
   "servers": [
     {
-      "url": "http://local-unit-test-server.lusid.com:34946"
+      "url": "http://local-unit-test-server.lusid.com:50729"
     }
   ],
   "paths": {
@@ -947,6 +947,690 @@
               "text/json": {
                 "schema": {
                   "$ref": "#/components/schemas/DeletedEntityResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "The details of the input related failure",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/LusidValidationProblemDetails"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/LusidValidationProblemDetails"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/LusidValidationProblemDetails"
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "Error response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/LusidProblemDetails"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "oauth2": []
+          }
+        ],
+        "x-fbn-apistatus": "EarlyAccess"
+      }
+    },
+    "/api/complexmarketdata/{scope}": {
+      "post": {
+        "tags": [
+          "Complex Market Data"
+        ],
+        "summary": "[EARLY ACCESS] UpsertComplexMarketData: Upsert a set of complex market data items. This creates or updates the data in Lusid.",
+        "description": "Update or insert one or more complex market data items in a single scope. An item will be updated if it already exists\r\nand inserted if it does not.\r\n            \r\nIn the request each complex market data item must be keyed by a unique correlation id. This id is ephemeral and is not stored by LUSID.\r\nIt serves only as a way to easily identify each complex market data in the response.\r\n            \r\nThe response will return both the collection of successfully updated or inserted complex market data, as well as those that failed.\r\nFor the failures a reason will be provided explaining why the item could not be updated or inserted.\r\n            \r\nIt is important to always check the failed set for any unsuccessful results.",
+        "operationId": "UpsertComplexMarketData",
+        "parameters": [
+          {
+            "name": "scope",
+            "in": "path",
+            "description": "The scope to use when updating or inserting the complex market data.",
+            "required": true,
+            "schema": {
+              "maxLength": 64,
+              "minLength": 1,
+              "pattern": "^[a-zA-Z0-9\\-_]+$",
+              "type": "string",
+              "description": "The scope to use when updating or inserting the complex market data."
+            }
+          }
+        ],
+        "requestBody": {
+          "description": "The set of complex market data items to update or insert keyed by a unique correlation id.",
+          "content": {
+            "application/json-patch+json": {
+              "schema": {
+                "type": "object",
+                "additionalProperties": {
+                  "$ref": "#/components/schemas/UpsertComplexMarketDataRequest"
+                },
+                "description": "The set of complex market data items to update or insert keyed by a unique correlation id."
+              },
+              "example": {
+                "first-item": {
+                  "marketDataId": {
+                    "provider": "DataScope",
+                    "priceSource": "Some Bank Plc",
+                    "lineage": "Swaps Desk Trader A",
+                    "effectiveAt": "2018-03-05T00:00:00.0000000+00:00",
+                    "marketAsset": "USDOIS"
+                  },
+                  "marketData": {
+                    "baseDate": "1970-01-01T00:00:00.0000000+00:00",
+                    "dates": [
+                      "1970-01-01T00:00:00.0000000+00:00"
+                    ],
+                    "discountFactors": [
+                      1
+                    ],
+                    "marketDataType": "DiscountFactorCurveData"
+                  }
+                },
+                "second-item": {
+                  "marketDataId": {
+                    "provider": "DataScope",
+                    "priceSource": "AN.Other Bank Plc",
+                    "lineage": "Swaps Desk Trader B",
+                    "effectiveAt": "2018-03-05T00:00:00.0000000+00:00",
+                    "marketAsset": "RBS"
+                  },
+                  "marketData": {
+                    "document": "{ \"some\":\"valid json\"}",
+                    "format": "Json",
+                    "name": "free text identifier of document 1",
+                    "marketDataType": "OpaqueMarketData"
+                  }
+                }
+              }
+            },
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "additionalProperties": {
+                  "$ref": "#/components/schemas/UpsertComplexMarketDataRequest"
+                },
+                "description": "The set of complex market data items to update or insert keyed by a unique correlation id."
+              },
+              "example": {
+                "first-item": {
+                  "marketDataId": {
+                    "provider": "DataScope",
+                    "priceSource": "Some Bank Plc",
+                    "lineage": "Swaps Desk Trader A",
+                    "effectiveAt": "2018-03-05T00:00:00.0000000+00:00",
+                    "marketAsset": "USDOIS"
+                  },
+                  "marketData": {
+                    "baseDate": "1970-01-01T00:00:00.0000000+00:00",
+                    "dates": [
+                      "1970-01-01T00:00:00.0000000+00:00"
+                    ],
+                    "discountFactors": [
+                      1
+                    ],
+                    "marketDataType": "DiscountFactorCurveData"
+                  }
+                },
+                "second-item": {
+                  "marketDataId": {
+                    "provider": "DataScope",
+                    "priceSource": "AN.Other Bank Plc",
+                    "lineage": "Swaps Desk Trader B",
+                    "effectiveAt": "2018-03-05T00:00:00.0000000+00:00",
+                    "marketAsset": "RBS"
+                  },
+                  "marketData": {
+                    "document": "{ \"some\":\"valid json\"}",
+                    "format": "Json",
+                    "name": "free text identifier of document 1",
+                    "marketDataType": "OpaqueMarketData"
+                  }
+                }
+              }
+            },
+            "text/json": {
+              "schema": {
+                "type": "object",
+                "additionalProperties": {
+                  "$ref": "#/components/schemas/UpsertComplexMarketDataRequest"
+                },
+                "description": "The set of complex market data items to update or insert keyed by a unique correlation id."
+              },
+              "example": {
+                "first-item": {
+                  "marketDataId": {
+                    "provider": "DataScope",
+                    "priceSource": "Some Bank Plc",
+                    "lineage": "Swaps Desk Trader A",
+                    "effectiveAt": "2018-03-05T00:00:00.0000000+00:00",
+                    "marketAsset": "USDOIS"
+                  },
+                  "marketData": {
+                    "baseDate": "1970-01-01T00:00:00.0000000+00:00",
+                    "dates": [
+                      "1970-01-01T00:00:00.0000000+00:00"
+                    ],
+                    "discountFactors": [
+                      1
+                    ],
+                    "marketDataType": "DiscountFactorCurveData"
+                  }
+                },
+                "second-item": {
+                  "marketDataId": {
+                    "provider": "DataScope",
+                    "priceSource": "AN.Other Bank Plc",
+                    "lineage": "Swaps Desk Trader B",
+                    "effectiveAt": "2018-03-05T00:00:00.0000000+00:00",
+                    "marketAsset": "RBS"
+                  },
+                  "marketData": {
+                    "document": "{ \"some\":\"valid json\"}",
+                    "format": "Json",
+                    "name": "free text identifier of document 1",
+                    "marketDataType": "OpaqueMarketData"
+                  }
+                }
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "type": "object",
+                "additionalProperties": {
+                  "$ref": "#/components/schemas/UpsertComplexMarketDataRequest"
+                },
+                "description": "The set of complex market data items to update or insert keyed by a unique correlation id."
+              },
+              "example": {
+                "first-item": {
+                  "marketDataId": {
+                    "provider": "DataScope",
+                    "priceSource": "Some Bank Plc",
+                    "lineage": "Swaps Desk Trader A",
+                    "effectiveAt": "2018-03-05T00:00:00.0000000+00:00",
+                    "marketAsset": "USDOIS"
+                  },
+                  "marketData": {
+                    "baseDate": "1970-01-01T00:00:00.0000000+00:00",
+                    "dates": [
+                      "1970-01-01T00:00:00.0000000+00:00"
+                    ],
+                    "discountFactors": [
+                      1
+                    ],
+                    "marketDataType": "DiscountFactorCurveData"
+                  }
+                },
+                "second-item": {
+                  "marketDataId": {
+                    "provider": "DataScope",
+                    "priceSource": "AN.Other Bank Plc",
+                    "lineage": "Swaps Desk Trader B",
+                    "effectiveAt": "2018-03-05T00:00:00.0000000+00:00",
+                    "marketAsset": "RBS"
+                  },
+                  "marketData": {
+                    "document": "{ \"some\":\"valid json\"}",
+                    "format": "Json",
+                    "name": "free text identifier of document 1",
+                    "marketDataType": "OpaqueMarketData"
+                  }
+                }
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "The successfully updated or inserted ComplexMarketData along with any failures",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/UpsertStructuredDataResponse"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/UpsertStructuredDataResponse"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/UpsertStructuredDataResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "The details of the input related failure",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/LusidValidationProblemDetails"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/LusidValidationProblemDetails"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/LusidValidationProblemDetails"
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "Error response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/LusidProblemDetails"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "oauth2": []
+          }
+        ],
+        "x-fbn-apistatus": "EarlyAccess"
+      }
+    },
+    "/api/complexmarketdata/{scope}/$delete": {
+      "post": {
+        "tags": [
+          "Complex Market Data"
+        ],
+        "summary": "[EARLY ACCESS] DeleteComplexMarketData: Delete one or more items of complex market data, assuming they are present.",
+        "description": "Delete one or more specified complex market data items from a single scope. Each item is identified by a unique id which includes\r\ninformation about its type as well as the exact effective datetime (to the microsecond) at which it entered the system (became valid).\r\n            \r\nIn the request each complex market data item must be keyed by a unique correlation id. This id is ephemeral and is not stored by LUSID.\r\nIt serves only as a way to easily identify each quote in the response.\r\n            \r\nThe response will return both the collection of successfully deleted  complex market data items, as well as those that failed.\r\nFor the failures a reason will be provided explaining why the it could not be deleted.\r\n            \r\nIt is important to always check the failed set for any unsuccessful results.",
+        "operationId": "DeleteComplexMarketData",
+        "parameters": [
+          {
+            "name": "scope",
+            "in": "path",
+            "description": "The scope of the complex market data to delete.",
+            "required": true,
+            "schema": {
+              "maxLength": 64,
+              "minLength": 1,
+              "pattern": "^[a-zA-Z0-9\\-_]+$",
+              "type": "string",
+              "description": "The scope of the complex market data to delete."
+            }
+          }
+        ],
+        "requestBody": {
+          "description": "The complex market data Ids to delete, each keyed by a unique correlation id.",
+          "content": {
+            "application/json-patch+json": {
+              "schema": {
+                "type": "object",
+                "additionalProperties": {
+                  "$ref": "#/components/schemas/ComplexMarketDataId"
+                },
+                "description": "The complex market data Ids to delete, each keyed by a unique correlation id."
+              },
+              "example": {
+                "first-item": {
+                  "provider": "DataScope",
+                  "priceSource": "Some Bank Plc",
+                  "lineage": "Swaps Desk Trader A",
+                  "effectiveAt": "2018-03-05T00:00:00.0000000+00:00",
+                  "marketAsset": "USDOIS"
+                },
+                "second-item": {
+                  "provider": "DataScope",
+                  "priceSource": "AN.Other Bank Plc",
+                  "lineage": "Swaps Desk Trader B",
+                  "effectiveAt": "2018-03-05T00:00:00.0000000+00:00",
+                  "marketAsset": "RBS"
+                }
+              }
+            },
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "additionalProperties": {
+                  "$ref": "#/components/schemas/ComplexMarketDataId"
+                },
+                "description": "The complex market data Ids to delete, each keyed by a unique correlation id."
+              },
+              "example": {
+                "first-item": {
+                  "provider": "DataScope",
+                  "priceSource": "Some Bank Plc",
+                  "lineage": "Swaps Desk Trader A",
+                  "effectiveAt": "2018-03-05T00:00:00.0000000+00:00",
+                  "marketAsset": "USDOIS"
+                },
+                "second-item": {
+                  "provider": "DataScope",
+                  "priceSource": "AN.Other Bank Plc",
+                  "lineage": "Swaps Desk Trader B",
+                  "effectiveAt": "2018-03-05T00:00:00.0000000+00:00",
+                  "marketAsset": "RBS"
+                }
+              }
+            },
+            "text/json": {
+              "schema": {
+                "type": "object",
+                "additionalProperties": {
+                  "$ref": "#/components/schemas/ComplexMarketDataId"
+                },
+                "description": "The complex market data Ids to delete, each keyed by a unique correlation id."
+              },
+              "example": {
+                "first-item": {
+                  "provider": "DataScope",
+                  "priceSource": "Some Bank Plc",
+                  "lineage": "Swaps Desk Trader A",
+                  "effectiveAt": "2018-03-05T00:00:00.0000000+00:00",
+                  "marketAsset": "USDOIS"
+                },
+                "second-item": {
+                  "provider": "DataScope",
+                  "priceSource": "AN.Other Bank Plc",
+                  "lineage": "Swaps Desk Trader B",
+                  "effectiveAt": "2018-03-05T00:00:00.0000000+00:00",
+                  "marketAsset": "RBS"
+                }
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "type": "object",
+                "additionalProperties": {
+                  "$ref": "#/components/schemas/ComplexMarketDataId"
+                },
+                "description": "The complex market data Ids to delete, each keyed by a unique correlation id."
+              },
+              "example": {
+                "first-item": {
+                  "provider": "DataScope",
+                  "priceSource": "Some Bank Plc",
+                  "lineage": "Swaps Desk Trader A",
+                  "effectiveAt": "2018-03-05T00:00:00.0000000+00:00",
+                  "marketAsset": "USDOIS"
+                },
+                "second-item": {
+                  "provider": "DataScope",
+                  "priceSource": "AN.Other Bank Plc",
+                  "lineage": "Swaps Desk Trader B",
+                  "effectiveAt": "2018-03-05T00:00:00.0000000+00:00",
+                  "marketAsset": "RBS"
+                }
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "The successfully deleted ComplexMarketData along with any failures",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/AnnulStructuredDataResponse"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AnnulStructuredDataResponse"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AnnulStructuredDataResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "The details of the input related failure",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/LusidValidationProblemDetails"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/LusidValidationProblemDetails"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/LusidValidationProblemDetails"
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "Error response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/LusidProblemDetails"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "oauth2": []
+          }
+        ],
+        "x-fbn-apistatus": "EarlyAccess"
+      }
+    },
+    "/api/complexmarketdata/{scope}/$get": {
+      "post": {
+        "tags": [
+          "Complex Market Data"
+        ],
+        "summary": "[EARLY ACCESS] GetComplexMarketData: Get complex market data",
+        "description": "Get one or more items of complex market data from a single scope.\r\n            \r\nEach item can be identified by its time invariant complex market data identifier.\r\n            \r\nFor each id LUSID will return the most recent matched item with respect to the provided (or default) effective datetime.\r\n            \r\nAn optional maximum age range window can be specified which defines how far back to look back for data from the specified effective datetime.\r\nLUSID will return the most recent item within this window.\r\n            \r\nIn the request each complex market data id must be keyed by a unique correlation id. This id is ephemeral and is not stored by LUSID.\r\nIt serves only as a way to easily identify each item in the response.\r\n            \r\nThe response will return three collections. One, the successfully retrieved complex market data. Two, those that had a\r\nvalid identifier but could not be found. Three, those that failed because LUSID could not construct a valid identifier from the request.\r\n            \r\nFor the ids that failed to resolve or could not be found a reason will be provided explaining why that is the case.\r\n            \r\nIt is important to always check the failed and not found sets for any unsuccessful results.",
+        "operationId": "GetComplexMarketData",
+        "parameters": [
+          {
+            "name": "scope",
+            "in": "path",
+            "description": "The scope of the complex market data to retrieve.",
+            "required": true,
+            "schema": {
+              "maxLength": 64,
+              "minLength": 1,
+              "pattern": "^[a-zA-Z0-9\\-_]+$",
+              "type": "string",
+              "description": "The scope of the complex market data to retrieve."
+            }
+          },
+          {
+            "name": "effectiveAt",
+            "in": "query",
+            "description": "The effective datetime at which to retrieve the complex market data. Defaults to the current LUSID system datetime if not specified.",
+            "schema": {
+              "maxLength": 256,
+              "minLength": 0,
+              "pattern": "^[a-zA-Z0-9\\-_\\+:\\.]+$",
+              "type": "string",
+              "description": "The effective datetime at which to retrieve the complex market data. Defaults to the current LUSID system datetime if not specified.",
+              "format": "dateorcutlabel",
+              "nullable": true
+            }
+          },
+          {
+            "name": "asAt",
+            "in": "query",
+            "description": "The asAt datetime at which to retrieve the complex market data. Defaults to return the latest version if not specified.",
+            "schema": {
+              "type": "string",
+              "description": "The asAt datetime at which to retrieve the complex market data. Defaults to return the latest version if not specified.",
+              "format": "date-time",
+              "nullable": true
+            },
+            "x-nullable": true
+          },
+          {
+            "name": "maxAge",
+            "in": "query",
+            "description": "The duration of the look back window in an ISO8601 time interval format e.g. P1Y2M3DT4H30M (1 year, 2 months, 3 days, 4 hours and 30 minutes).\r\n             This is subtracted from the provided effectiveAt datetime to generate a effective datetime window inside which a complex market data item must exist to be retrieved.",
+            "schema": {
+              "type": "string",
+              "description": "The duration of the look back window in an ISO8601 time interval format e.g. P1Y2M3DT4H30M (1 year, 2 months, 3 days, 4 hours and 30 minutes).\r\n             This is subtracted from the provided effectiveAt datetime to generate a effective datetime window inside which a complex market data item must exist to be retrieved.",
+              "format": "date-span",
+              "nullable": true
+            }
+          }
+        ],
+        "requestBody": {
+          "description": "The time invariant set of complex data identifiers to retrieve the data for. These need to be\r\n             keyed by a unique correlation id allowing the retrieved item to be identified in the response.",
+          "content": {
+            "application/json-patch+json": {
+              "schema": {
+                "type": "object",
+                "additionalProperties": {
+                  "$ref": "#/components/schemas/ComplexMarketDataId"
+                },
+                "description": "The time invariant set of complex data identifiers to retrieve the data for. These need to be\r\n             keyed by a unique correlation id allowing the retrieved item to be identified in the response."
+              },
+              "example": {
+                "first-item": {
+                  "provider": "DataScope",
+                  "priceSource": "Some Bank Plc",
+                  "lineage": "Swaps Desk Trader A",
+                  "effectiveAt": "2018-03-05T00:00:00.0000000+00:00",
+                  "marketAsset": "USDOIS"
+                },
+                "second-item": {
+                  "provider": "DataScope",
+                  "priceSource": "AN.Other Bank Plc",
+                  "lineage": "Swaps Desk Trader B",
+                  "effectiveAt": "2018-03-05T00:00:00.0000000+00:00",
+                  "marketAsset": "RBS"
+                }
+              }
+            },
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "additionalProperties": {
+                  "$ref": "#/components/schemas/ComplexMarketDataId"
+                },
+                "description": "The time invariant set of complex data identifiers to retrieve the data for. These need to be\r\n             keyed by a unique correlation id allowing the retrieved item to be identified in the response."
+              },
+              "example": {
+                "first-item": {
+                  "provider": "DataScope",
+                  "priceSource": "Some Bank Plc",
+                  "lineage": "Swaps Desk Trader A",
+                  "effectiveAt": "2018-03-05T00:00:00.0000000+00:00",
+                  "marketAsset": "USDOIS"
+                },
+                "second-item": {
+                  "provider": "DataScope",
+                  "priceSource": "AN.Other Bank Plc",
+                  "lineage": "Swaps Desk Trader B",
+                  "effectiveAt": "2018-03-05T00:00:00.0000000+00:00",
+                  "marketAsset": "RBS"
+                }
+              }
+            },
+            "text/json": {
+              "schema": {
+                "type": "object",
+                "additionalProperties": {
+                  "$ref": "#/components/schemas/ComplexMarketDataId"
+                },
+                "description": "The time invariant set of complex data identifiers to retrieve the data for. These need to be\r\n             keyed by a unique correlation id allowing the retrieved item to be identified in the response."
+              },
+              "example": {
+                "first-item": {
+                  "provider": "DataScope",
+                  "priceSource": "Some Bank Plc",
+                  "lineage": "Swaps Desk Trader A",
+                  "effectiveAt": "2018-03-05T00:00:00.0000000+00:00",
+                  "marketAsset": "USDOIS"
+                },
+                "second-item": {
+                  "provider": "DataScope",
+                  "priceSource": "AN.Other Bank Plc",
+                  "lineage": "Swaps Desk Trader B",
+                  "effectiveAt": "2018-03-05T00:00:00.0000000+00:00",
+                  "marketAsset": "RBS"
+                }
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "type": "object",
+                "additionalProperties": {
+                  "$ref": "#/components/schemas/ComplexMarketDataId"
+                },
+                "description": "The time invariant set of complex data identifiers to retrieve the data for. These need to be\r\n             keyed by a unique correlation id allowing the retrieved item to be identified in the response."
+              },
+              "example": {
+                "first-item": {
+                  "provider": "DataScope",
+                  "priceSource": "Some Bank Plc",
+                  "lineage": "Swaps Desk Trader A",
+                  "effectiveAt": "2018-03-05T00:00:00.0000000+00:00",
+                  "marketAsset": "USDOIS"
+                },
+                "second-item": {
+                  "provider": "DataScope",
+                  "priceSource": "AN.Other Bank Plc",
+                  "lineage": "Swaps Desk Trader B",
+                  "effectiveAt": "2018-03-05T00:00:00.0000000+00:00",
+                  "marketAsset": "RBS"
+                }
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "The successfully retrieved complex market data along with any failures",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/GetComplexMarketDataResponse"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/GetComplexMarketDataResponse"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/GetComplexMarketDataResponse"
                 }
               }
             }
@@ -23658,6 +24342,44 @@
         },
         "additionalProperties": false
       },
+      "AnnulStructuredDataResponse": {
+        "type": "object",
+        "properties": {
+          "href": {
+            "type": "string",
+            "description": "The specific Uniform Resource Identifier (URI) for this resource at the requested effective and asAt datetime.",
+            "format": "uri",
+            "nullable": true
+          },
+          "values": {
+            "type": "object",
+            "additionalProperties": {
+              "type": "string",
+              "format": "date-time"
+            },
+            "description": "The set of values that were removed.",
+            "nullable": true
+          },
+          "failed": {
+            "type": "object",
+            "additionalProperties": {
+              "$ref": "#/components/schemas/ErrorDetail"
+            },
+            "description": "The set of values where removal failed, with a description as to why that is the case, e.g. badly formed request",
+            "nullable": true
+          },
+          "links": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Link"
+            },
+            "description": "Collection of links.",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false,
+        "description": "The response to a request to annul (delete) a set of structured data from Lusid. This might have been for market data or some other structured entity."
+      },
       "Change": {
         "required": [
           "amended",
@@ -23792,6 +24514,80 @@
           }
         },
         "additionalProperties": false
+      },
+      "ComplexMarketData": {
+        "required": [
+          "marketDataType"
+        ],
+        "type": "object",
+        "properties": {
+          "marketDataType": {
+            "enum": [
+              "DiscountFactorCurveData",
+              "EquityVolSurfaceData",
+              "FxVolSurfaceData",
+              "IrVolCubeData",
+              "OpaqueMarketData",
+              "YieldCurveData",
+              "FxForwardCurveData",
+              "FxForwardPipsCurveData",
+              "FxForwardTenorCurveData",
+              "FxForwardTenorPipsCurveData",
+              "FxForwardCurveByQuoteReference",
+              "CreditSpreadCurveData"
+            ],
+            "type": "string",
+            "description": "The available values are: DiscountFactorCurveData, EquityVolSurfaceData, FxVolSurfaceData, IrVolCubeData, OpaqueMarketData, YieldCurveData, FxForwardCurveData, FxForwardPipsCurveData, FxForwardTenorCurveData, FxForwardTenorPipsCurveData, FxForwardCurveByQuoteReference, CreditSpreadCurveData"
+          }
+        },
+        "additionalProperties": false,
+        "description": "A base class for any form of market data with structure",
+        "discriminator": {
+          "propertyName": "marketDataType"
+        }
+      },
+      "ComplexMarketDataId": {
+        "required": [
+          "provider"
+        ],
+        "type": "object",
+        "properties": {
+          "provider": {
+            "maxLength": 32,
+            "minLength": 0,
+            "type": "string",
+            "description": "The platform or vendor that provided the complex market data, e.g. 'DataScope', 'LUSID', 'ISDA' etc."
+          },
+          "priceSource": {
+            "maxLength": 256,
+            "minLength": 0,
+            "type": "string",
+            "description": "The source or originator of the complex market data, e.g. a bank or financial institution.",
+            "nullable": true
+          },
+          "lineage": {
+            "maxLength": 1024,
+            "minLength": 0,
+            "type": "string",
+            "description": "Description of the complex market data's lineage e.g. 'FundAccountant_GreenQuality'.",
+            "nullable": true
+          },
+          "effectiveAt": {
+            "type": "string",
+            "description": "The effectiveAt or cut label that this item of complex market data is/was updated/inserted with.",
+            "format": "dateorcutlabel",
+            "nullable": true
+          },
+          "marketAsset": {
+            "maxLength": 32,
+            "minLength": 0,
+            "type": "string",
+            "description": "The name of the market entity that the document represents",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false,
+        "description": "An identifier that uniquely describes an item of complex market data such as an interest rate curve or volatility surface."
       },
       "ConstituentsAdjustmentHeader": {
         "type": "object",
@@ -24686,6 +25482,42 @@
         },
         "additionalProperties": false,
         "description": "Allows a file (represented as a stream) to be returned from an Api call"
+      },
+      "GetComplexMarketDataResponse": {
+        "type": "object",
+        "properties": {
+          "href": {
+            "type": "string",
+            "description": "The specific Uniform Resource Identifier (URI) for this resource at the requested effective and asAt datetime.",
+            "format": "uri",
+            "nullable": true
+          },
+          "values": {
+            "type": "object",
+            "additionalProperties": {
+              "$ref": "#/components/schemas/ComplexMarketData"
+            },
+            "description": "The set of values that were successfully retrieved.",
+            "nullable": true
+          },
+          "failed": {
+            "type": "object",
+            "additionalProperties": {
+              "$ref": "#/components/schemas/ErrorDetail"
+            },
+            "description": "The set of values that could not be retrieved due along with a reason for this, e.g badly formed request.",
+            "nullable": true
+          },
+          "links": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Link"
+            },
+            "description": "Collection of links.",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
       },
       "GetInstrumentsResponse": {
         "type": "object",
@@ -29326,6 +30158,23 @@
         },
         "additionalProperties": false
       },
+      "UpsertComplexMarketDataRequest": {
+        "required": [
+          "marketData",
+          "marketDataId"
+        ],
+        "type": "object",
+        "properties": {
+          "marketDataId": {
+            "$ref": "#/components/schemas/ComplexMarketDataId"
+          },
+          "marketData": {
+            "$ref": "#/components/schemas/ComplexMarketData"
+          }
+        },
+        "additionalProperties": false,
+        "description": "The details of the complex market data item to upsert into Lusid."
+      },
       "UpsertInstrumentPropertiesResponse": {
         "required": [
           "asAtDate"
@@ -29664,6 +30513,44 @@
         },
         "additionalProperties": false,
         "description": "Response from upserting Returns"
+      },
+      "UpsertStructuredDataResponse": {
+        "type": "object",
+        "properties": {
+          "href": {
+            "type": "string",
+            "description": "The specific Uniform Resource Identifier (URI) for this resource at the requested effective and asAt datetime.",
+            "format": "uri",
+            "nullable": true
+          },
+          "values": {
+            "type": "object",
+            "additionalProperties": {
+              "type": "string",
+              "format": "date-time"
+            },
+            "description": "The set of values that were successfully retrieved.",
+            "nullable": true
+          },
+          "failed": {
+            "type": "object",
+            "additionalProperties": {
+              "$ref": "#/components/schemas/ErrorDetail"
+            },
+            "description": "The set of values that could not be retrieved due along with a reason for this, e.g badly formed request.",
+            "nullable": true
+          },
+          "links": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Link"
+            },
+            "description": "Collection of links.",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false,
+        "description": "Response from upserting structured data document"
       },
       "UpsertTransactionPropertiesResponse": {
         "type": "object",
