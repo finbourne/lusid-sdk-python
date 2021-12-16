@@ -9,7 +9,7 @@
       "url": "https://www.finbourne.com",
       "email": "info@finbourne.com"
     },
-    "version": "0.11.3837",
+    "version": "0.11.3838",
     "x-logo": {
       "url": "https://www.lusid.com/app/assets/logo_white.png",
       "backgroundColor": "#415464"
@@ -17,7 +17,7 @@
   },
   "servers": [
     {
-      "url": "http://local-unit-test-server.lusid.com:63727"
+      "url": "http://local-unit-test-server.lusid.com:53351"
     }
   ],
   "paths": {
@@ -26806,7 +26806,6 @@
       },
       "OutputTransaction": {
         "required": [
-          "instrumentScope",
           "instrumentUid",
           "settlementDate",
           "transactionDate",
@@ -26839,7 +26838,8 @@
           },
           "instrumentScope": {
             "type": "string",
-            "description": "The unqiue Lusid Instrument Id (LUID) of the instrument that the transaction is in."
+            "description": "The scope in which the instrument lies.",
+            "nullable": true
           },
           "instrumentUid": {
             "type": "string",
