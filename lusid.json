@@ -9,7 +9,7 @@
       "url": "https://www.finbourne.com",
       "email": "info@finbourne.com"
     },
-    "version": "0.11.3835",
+    "version": "0.11.3836",
     "x-logo": {
       "url": "https://www.lusid.com/app/assets/logo_white.png",
       "backgroundColor": "#415464"
@@ -17,7 +17,7 @@
   },
   "servers": [
     {
-      "url": "https://fbn-prd.lusid.com/api"
+      "url": "http://local-unit-test-server.lusid.com:30343"
     }
   ],
   "paths": {
@@ -2493,6 +2493,22 @@
         "summary": "UpsertInstruments: Upsert instruments",
         "description": "Create or update one or more instruments in the instrument master. An instrument is updated\r\nif it already exists and created if it does not.\r\n            \r\nIn the request, each instrument definition should be keyed by a unique correlation ID. This ID is ephemeral\r\nand not stored by LUSID. It serves only to easily identify each instrument in the response.\r\n            \r\nNote that an instrument must have at least one unique identifier, which is a combination of a type\r\n(such as 'Figi') and a value (such as 'BBG000BS1N49'). In addition, a random value is automatically\r\ngenerated for a LUSID Instrument ID (LUID) unique type by the system. For more information, see\r\nhttps://support.lusid.com/knowledgebase/article/KA-01862.\r\n            \r\nThe response returns both the collection of successfully created or updated instruments, as well as those\r\nthat failed. For each failure, a reason is provided. It is important to check the failed set for\r\nunsuccessful results.\n\nThe maximum number of instruments that this method can upsert per request is 2,000.",
         "operationId": "UpsertInstruments",
+        "parameters": [
+          {
+            "name": "scope",
+            "in": "query",
+            "description": "The scope in which the instrument lies. When not supplied the scope is 'default'.",
+            "schema": {
+              "maxLength": 64,
+              "minLength": 1,
+              "pattern": "^[a-zA-Z0-9\\-_]+$",
+              "type": "string",
+              "description": "The scope in which the instrument lies. When not supplied the scope is 'default'.",
+              "default": "default",
+              "nullable": true
+            }
+          }
+        ],
         "requestBody": {
           "description": "The definitions of the instruments to create or update.",
           "content": {
@@ -2978,6 +2994,20 @@
               "nullable": true
             },
             "x-nullable": true
+          },
+          {
+            "name": "scope",
+            "in": "query",
+            "description": "The scope in which the instrument lies. When not supplied the scope is 'default'.",
+            "schema": {
+              "maxLength": 64,
+              "minLength": 1,
+              "pattern": "^[a-zA-Z0-9\\-_]+$",
+              "type": "string",
+              "description": "The scope in which the instrument lies. When not supplied the scope is 'default'.",
+              "default": "default",
+              "nullable": true
+            }
           }
         ],
         "responses": {
@@ -3096,6 +3126,20 @@
               "nullable": true
             },
             "x-nullable": true
+          },
+          {
+            "name": "scope",
+            "in": "query",
+            "description": "The scope in which the instrument lies. When not supplied the scope is 'default'.",
+            "schema": {
+              "maxLength": 64,
+              "minLength": 1,
+              "pattern": "^[a-zA-Z0-9\\-_]+$",
+              "type": "string",
+              "description": "The scope in which the instrument lies. When not supplied the scope is 'default'.",
+              "default": "default",
+              "nullable": true
+            }
           }
         ],
         "requestBody": {
@@ -3224,6 +3268,22 @@
         "summary": "UpsertInstrumentsProperties: Upsert instruments properties",
         "description": "Create or update one or more properties for particular instruments.\r\n            \r\nEach instrument property is updated if it exists and created if it does not. For any failures, a reason\r\nis provided.\r\n            \r\nProperties have an <i>effectiveFrom</i> datetime from which the property is valid, and an <i>effectiveUntil</i>\r\ndatetime until which the property is valid. Not supplying an <i>effectiveUntil</i> datetime results in the property being\r\nvalid indefinitely, or until the next <i>effectiveFrom</i> datetime of the property.",
         "operationId": "UpsertInstrumentsProperties",
+        "parameters": [
+          {
+            "name": "scope",
+            "in": "query",
+            "description": "The scope in which the instrument lies. When not supplied the scope is 'default'.",
+            "schema": {
+              "maxLength": 64,
+              "minLength": 1,
+              "pattern": "^[a-zA-Z0-9\\-_]+$",
+              "type": "string",
+              "description": "The scope in which the instrument lies. When not supplied the scope is 'default'.",
+              "default": "default",
+              "nullable": true
+            }
+          }
+        ],
         "requestBody": {
           "description": "A list of instruments and associated instrument properties to create or update.",
           "content": {
@@ -3594,6 +3654,20 @@
               "nullable": true
             },
             "x-nullable": true
+          },
+          {
+            "name": "scope",
+            "in": "query",
+            "description": "The scope in which the instrument lies. When not supplied the scope is 'default'.",
+            "schema": {
+              "maxLength": 64,
+              "minLength": 1,
+              "pattern": "^[a-zA-Z0-9\\-_]+$",
+              "type": "string",
+              "description": "The scope in which the instrument lies. When not supplied the scope is 'default'.",
+              "default": "default",
+              "nullable": true
+            }
           }
         ],
         "responses": {
@@ -3682,6 +3756,20 @@
             "schema": {
               "type": "string",
               "description": "An <i>identifierType</i> value to use to identify the instrument, for example 'BBG000BLNNV0'.",
+              "nullable": true
+            }
+          },
+          {
+            "name": "scope",
+            "in": "query",
+            "description": "The scope in which the instrument lies. When not supplied the scope is 'default'.",
+            "schema": {
+              "maxLength": 64,
+              "minLength": 1,
+              "pattern": "^[a-zA-Z0-9\\-_]+$",
+              "type": "string",
+              "description": "The scope in which the instrument lies. When not supplied the scope is 'default'.",
+              "default": "default",
               "nullable": true
             }
           }
@@ -3818,6 +3906,20 @@
             "schema": {
               "type": "string",
               "description": "An <i>identifierType</i> value to use to identify the instrument, for example 'BBG000BLNNV0'.",
+              "nullable": true
+            }
+          },
+          {
+            "name": "scope",
+            "in": "query",
+            "description": "The scope in which the instrument lies. When not supplied the scope is 'default'.",
+            "schema": {
+              "maxLength": 64,
+              "minLength": 1,
+              "pattern": "^[a-zA-Z0-9\\-_]+$",
+              "type": "string",
+              "description": "The scope in which the instrument lies. When not supplied the scope is 'default'.",
+              "default": "default",
               "nullable": true
             }
           }
@@ -3984,6 +4086,20 @@
               "nullable": true
             },
             "x-nullable": true
+          },
+          {
+            "name": "scope",
+            "in": "query",
+            "description": "The scope in which the instrument lies. When not supplied the scope is 'default'.",
+            "schema": {
+              "maxLength": 64,
+              "minLength": 1,
+              "pattern": "^[a-zA-Z0-9\\-_]+$",
+              "type": "string",
+              "description": "The scope in which the instrument lies. When not supplied the scope is 'default'.",
+              "default": "default",
+              "nullable": true
+            }
           }
         ],
         "responses": {
@@ -7751,6 +7867,7 @@
                   },
                   "values": [
                     {
+                      "instrumentScope": "default",
                       "instrumentUid": "LUID_XH4GNUEX",
                       "subHoldingKeys": {
                         "transaction/Algo/Name": {
@@ -7797,6 +7914,7 @@
                   },
                   "values": [
                     {
+                      "instrumentScope": "default",
                       "instrumentUid": "LUID_XH4GNUEX",
                       "subHoldingKeys": {
                         "transaction/Algo/Name": {
@@ -7843,6 +7961,7 @@
                   },
                   "values": [
                     {
+                      "instrumentScope": "default",
                       "instrumentUid": "LUID_XH4GNUEX",
                       "subHoldingKeys": {
                         "transaction/Algo/Name": {
@@ -9373,6 +9492,7 @@
                       "instrumentIdentifiers": {
                         "instrument/default/RIC": "RIC.L"
                       },
+                      "instrumentScope": "default",
                       "instrumentUid": "LUID_1C7YTL5M",
                       "transactionDate": "2018-08-04T00:00:00.0000000+00:00",
                       "settlementDate": "2018-08-06T00:00:00.0000000+00:00",
@@ -9431,6 +9551,7 @@
                       "instrumentIdentifiers": {
                         "instrument/default/RIC": "RIC.L"
                       },
+                      "instrumentScope": "default",
                       "instrumentUid": "LUID_1C7YTL5M",
                       "transactionDate": "2018-08-04T00:00:00.0000000+00:00",
                       "settlementDate": "2018-08-06T00:00:00.0000000+00:00",
@@ -9489,6 +9610,7 @@
                       "instrumentIdentifiers": {
                         "instrument/default/RIC": "RIC.L"
                       },
+                      "instrumentScope": "default",
                       "instrumentUid": "LUID_1C7YTL5M",
                       "transactionDate": "2018-08-04T00:00:00.0000000+00:00",
                       "settlementDate": "2018-08-06T00:00:00.0000000+00:00",
@@ -9746,6 +9868,7 @@
                       "instrumentIdentifiers": {
                         "instrument/default/RIC": "RIC.L"
                       },
+                      "instrumentScope": "default",
                       "instrumentUid": "LUID_JLH24106",
                       "transactionDate": "2018-08-04T00:00:00.0000000+00:00",
                       "settlementDate": "2018-08-06T00:00:00.0000000+00:00",
@@ -9796,6 +9919,7 @@
                       "instrumentIdentifiers": {
                         "instrument/default/ClientInternal": "INT:00024106"
                       },
+                      "instrumentScope": "default",
                       "instrumentUid": "LUID_OI5JX1V7",
                       "transactionDate": "2018-08-07T00:00:00.0000000+00:00",
                       "settlementDate": "2018-08-10T00:00:00.0000000+00:00",
@@ -9963,6 +10087,7 @@
                       "instrumentIdentifiers": {
                         "instrument/default/RIC": "RIC.L"
                       },
+                      "instrumentScope": "default",
                       "instrumentUid": "LUID_JLH24106",
                       "transactionDate": "2018-08-04T00:00:00.0000000+00:00",
                       "settlementDate": "2018-08-06T00:00:00.0000000+00:00",
@@ -10013,6 +10138,7 @@
                       "instrumentIdentifiers": {
                         "instrument/default/ClientInternal": "INT:00024106"
                       },
+                      "instrumentScope": "default",
                       "instrumentUid": "LUID_OI5JX1V7",
                       "transactionDate": "2018-08-07T00:00:00.0000000+00:00",
                       "settlementDate": "2018-08-10T00:00:00.0000000+00:00",
@@ -10180,6 +10306,7 @@
                       "instrumentIdentifiers": {
                         "instrument/default/RIC": "RIC.L"
                       },
+                      "instrumentScope": "default",
                       "instrumentUid": "LUID_JLH24106",
                       "transactionDate": "2018-08-04T00:00:00.0000000+00:00",
                       "settlementDate": "2018-08-06T00:00:00.0000000+00:00",
@@ -10230,6 +10357,7 @@
                       "instrumentIdentifiers": {
                         "instrument/default/ClientInternal": "INT:00024106"
                       },
+                      "instrumentScope": "default",
                       "instrumentUid": "LUID_OI5JX1V7",
                       "transactionDate": "2018-08-07T00:00:00.0000000+00:00",
                       "settlementDate": "2018-08-10T00:00:00.0000000+00:00",
@@ -14721,7 +14849,8 @@
                 "description": "Description of my portfolio",
                 "code": "MyPortfolioCode",
                 "created": "2018-03-05T00:00:00.0000000+00:00",
-                "properties": {}
+                "properties": {},
+                "instrumentScopes": []
               }
             },
             "application/json": {
@@ -14733,7 +14862,8 @@
                 "description": "Description of my portfolio",
                 "code": "MyPortfolioCode",
                 "created": "2018-03-05T00:00:00.0000000+00:00",
-                "properties": {}
+                "properties": {},
+                "instrumentScopes": []
               }
             },
             "text/json": {
@@ -14745,7 +14875,8 @@
                 "description": "Description of my portfolio",
                 "code": "MyPortfolioCode",
                 "created": "2018-03-05T00:00:00.0000000+00:00",
-                "properties": {}
+                "properties": {},
+                "instrumentScopes": []
               }
             },
             "application/*+json": {
@@ -14757,7 +14888,8 @@
                 "description": "Description of my portfolio",
                 "code": "MyPortfolioCode",
                 "created": "2018-03-05T00:00:00.0000000+00:00",
-                "properties": {}
+                "properties": {},
+                "instrumentScopes": []
               }
             }
           },
@@ -17041,7 +17173,8 @@
                     },
                     "effectiveFrom": "2018-03-05T12:00:00.0000000+00:00"
                   }
-                }
+                },
+                "instrumentScopes": []
               }
             },
             "application/json": {
@@ -17078,7 +17211,8 @@
                     },
                     "effectiveFrom": "2018-03-05T12:00:00.0000000+00:00"
                   }
-                }
+                },
+                "instrumentScopes": []
               }
             },
             "text/json": {
@@ -17115,7 +17249,8 @@
                     },
                     "effectiveFrom": "2018-03-05T12:00:00.0000000+00:00"
                   }
-                }
+                },
+                "instrumentScopes": []
               }
             },
             "application/*+json": {
@@ -17152,7 +17287,8 @@
                     },
                     "effectiveFrom": "2018-03-05T12:00:00.0000000+00:00"
                   }
-                }
+                },
+                "instrumentScopes": []
               }
             }
           },
@@ -17610,6 +17746,7 @@
                         "transactionId": "tid_234942982496001",
                         "type": "Buy",
                         "instrumentIdentifiers": {},
+                        "instrumentScope": "default",
                         "instrumentUid": "LUID_1C7YTL5M",
                         "transactionDate": "2020-06-10T00:00:00.0000000+00:00",
                         "settlementDate": "2020-06-13T00:00:00.0000000+00:00",
@@ -17674,6 +17811,7 @@
                         "transactionId": "tid_234295929052090",
                         "type": "Buy",
                         "instrumentIdentifiers": {},
+                        "instrumentScope": "default",
                         "instrumentUid": "LUID_1C7YTL5M",
                         "transactionDate": "2020-06-11T00:00:00.0000000+00:00",
                         "settlementDate": "2020-06-14T00:00:00.0000000+00:00",
@@ -17738,6 +17876,7 @@
                         "transactionId": "tid_325452342424500",
                         "type": "Dividend",
                         "instrumentIdentifiers": {},
+                        "instrumentScope": "default",
                         "instrumentUid": "LUID_1C7YTL5M",
                         "transactionDate": "2020-06-15T00:00:00.0000000+00:00",
                         "settlementDate": "2020-06-15T00:00:00.0000000+00:00",
@@ -17802,6 +17941,7 @@
                         "transactionId": "tid_329432525234324",
                         "type": "Sell",
                         "instrumentIdentifiers": {},
+                        "instrumentScope": "default",
                         "instrumentUid": "LUID_1C7YTL5M",
                         "transactionDate": "2020-06-17T00:00:00.0000000+00:00",
                         "settlementDate": "2020-06-20T00:00:00.0000000+00:00",
@@ -17866,6 +18006,7 @@
                         "transactionId": "tid_329432525234323",
                         "type": "Sell",
                         "instrumentIdentifiers": {},
+                        "instrumentScope": "default",
                         "instrumentUid": "LUID_1C7YTL5M",
                         "transactionDate": "2019-06-17T00:00:00.0000000+00:00",
                         "settlementDate": "2019-06-20T00:00:00.0000000+00:00",
@@ -17930,6 +18071,7 @@
                         "transactionId": "tid_124319009950924",
                         "type": "Sell",
                         "instrumentIdentifiers": {},
+                        "instrumentScope": "default",
                         "instrumentUid": "LUID_1C7YTL5M",
                         "transactionDate": "2020-06-18T00:00:00.0000000+00:00",
                         "settlementDate": "2020-06-21T00:00:00.0000000+00:00",
@@ -17994,6 +18136,7 @@
                         "transactionId": "tid_121309590059995",
                         "type": "Sell",
                         "instrumentIdentifiers": {},
+                        "instrumentScope": "default",
                         "instrumentUid": "LUID_1C7YTL5M",
                         "transactionDate": "2020-06-18T00:00:00.0000000+00:00",
                         "settlementDate": "2020-06-21T00:00:00.0000000+00:00",
@@ -18146,6 +18289,7 @@
                         "transactionId": "tid_124319009950924",
                         "type": "Buy",
                         "instrumentIdentifiers": {},
+                        "instrumentScope": "default",
                         "instrumentUid": "LUID_1C7YTL5M",
                         "transactionDate": "2020-06-10T00:00:00.0000000+00:00",
                         "settlementDate": "2020-06-13T00:00:00.0000000+00:00",
@@ -18210,6 +18354,7 @@
                         "transactionId": "tid_121309590059995",
                         "type": "Sell",
                         "instrumentIdentifiers": {},
+                        "instrumentScope": "default",
                         "instrumentUid": "LUID_1C7YTL5M",
                         "transactionDate": "2020-06-15T00:00:00.0000000+00:00",
                         "settlementDate": "2020-06-18T00:00:00.0000000+00:00",
@@ -18460,6 +18605,7 @@
                         "transactionId": "tid_234942982496001",
                         "type": "Buy",
                         "instrumentIdentifiers": {},
+                        "instrumentScope": "default",
                         "instrumentUid": "LUID_1C7YTL5M",
                         "transactionDate": "2020-06-10T00:00:00.0000000+00:00",
                         "settlementDate": "2020-06-13T00:00:00.0000000+00:00",
@@ -18524,6 +18670,7 @@
                         "transactionId": "tid_234295929052090",
                         "type": "Buy",
                         "instrumentIdentifiers": {},
+                        "instrumentScope": "default",
                         "instrumentUid": "LUID_1C7YTL5M",
                         "transactionDate": "2020-06-11T00:00:00.0000000+00:00",
                         "settlementDate": "2020-06-14T00:00:00.0000000+00:00",
@@ -18588,6 +18735,7 @@
                         "transactionId": "tid_325452342424500",
                         "type": "Dividend",
                         "instrumentIdentifiers": {},
+                        "instrumentScope": "default",
                         "instrumentUid": "LUID_1C7YTL5M",
                         "transactionDate": "2020-06-15T00:00:00.0000000+00:00",
                         "settlementDate": "2020-06-15T00:00:00.0000000+00:00",
@@ -18652,6 +18800,7 @@
                         "transactionId": "tid_329432525234324",
                         "type": "Sell",
                         "instrumentIdentifiers": {},
+                        "instrumentScope": "default",
                         "instrumentUid": "LUID_1C7YTL5M",
                         "transactionDate": "2020-06-17T00:00:00.0000000+00:00",
                         "settlementDate": "2020-06-20T00:00:00.0000000+00:00",
@@ -18716,6 +18865,7 @@
                         "transactionId": "tid_329432525234323",
                         "type": "Sell",
                         "instrumentIdentifiers": {},
+                        "instrumentScope": "default",
                         "instrumentUid": "LUID_1C7YTL5M",
                         "transactionDate": "2019-06-17T00:00:00.0000000+00:00",
                         "settlementDate": "2019-06-20T00:00:00.0000000+00:00",
@@ -18780,6 +18930,7 @@
                         "transactionId": "tid_124319009950924",
                         "type": "Sell",
                         "instrumentIdentifiers": {},
+                        "instrumentScope": "default",
                         "instrumentUid": "LUID_1C7YTL5M",
                         "transactionDate": "2020-06-18T00:00:00.0000000+00:00",
                         "settlementDate": "2020-06-21T00:00:00.0000000+00:00",
@@ -18844,6 +18995,7 @@
                         "transactionId": "tid_121309590059995",
                         "type": "Sell",
                         "instrumentIdentifiers": {},
+                        "instrumentScope": "default",
                         "instrumentUid": "LUID_1C7YTL5M",
                         "transactionDate": "2020-06-18T00:00:00.0000000+00:00",
                         "settlementDate": "2020-06-21T00:00:00.0000000+00:00",
@@ -18996,6 +19148,7 @@
                         "transactionId": "tid_124319009950924",
                         "type": "Buy",
                         "instrumentIdentifiers": {},
+                        "instrumentScope": "default",
                         "instrumentUid": "LUID_1C7YTL5M",
                         "transactionDate": "2020-06-10T00:00:00.0000000+00:00",
                         "settlementDate": "2020-06-13T00:00:00.0000000+00:00",
@@ -19060,6 +19213,7 @@
                         "transactionId": "tid_121309590059995",
                         "type": "Sell",
                         "instrumentIdentifiers": {},
+                        "instrumentScope": "default",
                         "instrumentUid": "LUID_1C7YTL5M",
                         "transactionDate": "2020-06-15T00:00:00.0000000+00:00",
                         "settlementDate": "2020-06-18T00:00:00.0000000+00:00",
@@ -19310,6 +19464,7 @@
                         "transactionId": "tid_234942982496001",
                         "type": "Buy",
                         "instrumentIdentifiers": {},
+                        "instrumentScope": "default",
                         "instrumentUid": "LUID_1C7YTL5M",
                         "transactionDate": "2020-06-10T00:00:00.0000000+00:00",
                         "settlementDate": "2020-06-13T00:00:00.0000000+00:00",
@@ -19374,6 +19529,7 @@
                         "transactionId": "tid_234295929052090",
                         "type": "Buy",
                         "instrumentIdentifiers": {},
+                        "instrumentScope": "default",
                         "instrumentUid": "LUID_1C7YTL5M",
                         "transactionDate": "2020-06-11T00:00:00.0000000+00:00",
                         "settlementDate": "2020-06-14T00:00:00.0000000+00:00",
@@ -19438,6 +19594,7 @@
                         "transactionId": "tid_325452342424500",
                         "type": "Dividend",
                         "instrumentIdentifiers": {},
+                        "instrumentScope": "default",
                         "instrumentUid": "LUID_1C7YTL5M",
                         "transactionDate": "2020-06-15T00:00:00.0000000+00:00",
                         "settlementDate": "2020-06-15T00:00:00.0000000+00:00",
@@ -19502,6 +19659,7 @@
                         "transactionId": "tid_329432525234324",
                         "type": "Sell",
                         "instrumentIdentifiers": {},
+                        "instrumentScope": "default",
                         "instrumentUid": "LUID_1C7YTL5M",
                         "transactionDate": "2020-06-17T00:00:00.0000000+00:00",
                         "settlementDate": "2020-06-20T00:00:00.0000000+00:00",
@@ -19566,6 +19724,7 @@
                         "transactionId": "tid_329432525234323",
                         "type": "Sell",
                         "instrumentIdentifiers": {},
+                        "instrumentScope": "default",
                         "instrumentUid": "LUID_1C7YTL5M",
                         "transactionDate": "2019-06-17T00:00:00.0000000+00:00",
                         "settlementDate": "2019-06-20T00:00:00.0000000+00:00",
@@ -19630,6 +19789,7 @@
                         "transactionId": "tid_124319009950924",
                         "type": "Sell",
                         "instrumentIdentifiers": {},
+                        "instrumentScope": "default",
                         "instrumentUid": "LUID_1C7YTL5M",
                         "transactionDate": "2020-06-18T00:00:00.0000000+00:00",
                         "settlementDate": "2020-06-21T00:00:00.0000000+00:00",
@@ -19694,6 +19854,7 @@
                         "transactionId": "tid_121309590059995",
                         "type": "Sell",
                         "instrumentIdentifiers": {},
+                        "instrumentScope": "default",
                         "instrumentUid": "LUID_1C7YTL5M",
                         "transactionDate": "2020-06-18T00:00:00.0000000+00:00",
                         "settlementDate": "2020-06-21T00:00:00.0000000+00:00",
@@ -19846,6 +20007,7 @@
                         "transactionId": "tid_124319009950924",
                         "type": "Buy",
                         "instrumentIdentifiers": {},
+                        "instrumentScope": "default",
                         "instrumentUid": "LUID_1C7YTL5M",
                         "transactionDate": "2020-06-10T00:00:00.0000000+00:00",
                         "settlementDate": "2020-06-13T00:00:00.0000000+00:00",
@@ -19910,6 +20072,7 @@
                         "transactionId": "tid_121309590059995",
                         "type": "Sell",
                         "instrumentIdentifiers": {},
+                        "instrumentScope": "default",
                         "instrumentUid": "LUID_1C7YTL5M",
                         "transactionDate": "2020-06-15T00:00:00.0000000+00:00",
                         "settlementDate": "2020-06-18T00:00:00.0000000+00:00",
@@ -21322,6 +21485,7 @@
                   },
                   "values": [
                     {
+                      "instrumentScope": "default",
                       "instrumentUid": "LUID_XH4GNUEX",
                       "subHoldingKeys": {
                         "transaction/Algo/Name": {
@@ -21368,6 +21532,7 @@
                   },
                   "values": [
                     {
+                      "instrumentScope": "default",
                       "instrumentUid": "LUID_XH4GNUEX",
                       "subHoldingKeys": {
                         "transaction/Algo/Name": {
@@ -21414,6 +21579,7 @@
                   },
                   "values": [
                     {
+                      "instrumentScope": "default",
                       "instrumentUid": "LUID_XH4GNUEX",
                       "subHoldingKeys": {
                         "transaction/Algo/Name": {
@@ -21705,6 +21871,7 @@
                         "instrumentIdentifiers": {
                           "instrument/default/ClientInternal": "CLI-192836"
                         },
+                        "instrumentScope": "default",
                         "instrumentUid": "LUID_GNMKYXXK",
                         "subHoldingKeys": {},
                         "properties": {},
@@ -21723,6 +21890,7 @@
                         "instrumentIdentifiers": {
                           "instrument/default/ClientInternal": "CLI-462810"
                         },
+                        "instrumentScope": "default",
                         "instrumentUid": "LUID_LE9E5SJE",
                         "subHoldingKeys": {},
                         "properties": {},
@@ -21758,6 +21926,7 @@
                         "instrumentIdentifiers": {
                           "instrument/default/ClientInternal": "CLI-192836"
                         },
+                        "instrumentScope": "default",
                         "instrumentUid": "LUID_GNMKYXXK",
                         "subHoldingKeys": {},
                         "properties": {},
@@ -21776,6 +21945,7 @@
                         "instrumentIdentifiers": {
                           "instrument/default/ClientInternal": "CLI-462810"
                         },
+                        "instrumentScope": "default",
                         "instrumentUid": "LUID_LE9E5SJE",
                         "subHoldingKeys": {},
                         "properties": {},
@@ -21811,6 +21981,7 @@
                         "instrumentIdentifiers": {
                           "instrument/default/ClientInternal": "CLI-192836"
                         },
+                        "instrumentScope": "default",
                         "instrumentUid": "LUID_GNMKYXXK",
                         "subHoldingKeys": {},
                         "properties": {},
@@ -21829,6 +22000,7 @@
                         "instrumentIdentifiers": {
                           "instrument/default/ClientInternal": "CLI-462810"
                         },
+                        "instrumentScope": "default",
                         "instrumentUid": "LUID_LE9E5SJE",
                         "subHoldingKeys": {},
                         "properties": {},
@@ -22033,6 +22205,7 @@
                       "instrumentIdentifiers": {
                         "instrument/default/RIC": "RIC.L"
                       },
+                      "instrumentScope": "default",
                       "instrumentUid": "LUID_1C7YTL5M",
                       "transactionDate": "2018-08-04T00:00:00.0000000+00:00",
                       "settlementDate": "2018-08-06T00:00:00.0000000+00:00",
@@ -22091,6 +22264,7 @@
                       "instrumentIdentifiers": {
                         "instrument/default/RIC": "RIC.L"
                       },
+                      "instrumentScope": "default",
                       "instrumentUid": "LUID_1C7YTL5M",
                       "transactionDate": "2018-08-04T00:00:00.0000000+00:00",
                       "settlementDate": "2018-08-06T00:00:00.0000000+00:00",
@@ -22149,6 +22323,7 @@
                       "instrumentIdentifiers": {
                         "instrument/default/RIC": "RIC.L"
                       },
+                      "instrumentScope": "default",
                       "instrumentUid": "LUID_1C7YTL5M",
                       "transactionDate": "2018-08-04T00:00:00.0000000+00:00",
                       "settlementDate": "2018-08-06T00:00:00.0000000+00:00",
@@ -22781,6 +22956,7 @@
                       "instrumentIdentifiers": {
                         "instrument/default/RIC": "RIC.L"
                       },
+                      "instrumentScope": "default",
                       "instrumentUid": "LUID_JLH24106",
                       "transactionDate": "2018-08-04T00:00:00.0000000+00:00",
                       "settlementDate": "2018-08-06T00:00:00.0000000+00:00",
@@ -22831,6 +23007,7 @@
                       "instrumentIdentifiers": {
                         "instrument/default/ClientInternal": "INT:00024106"
                       },
+                      "instrumentScope": "default",
                       "instrumentUid": "LUID_OI5JX1V7",
                       "transactionDate": "2018-08-07T00:00:00.0000000+00:00",
                       "settlementDate": "2018-08-10T00:00:00.0000000+00:00",
@@ -22998,6 +23175,7 @@
                       "instrumentIdentifiers": {
                         "instrument/default/RIC": "RIC.L"
                       },
+                      "instrumentScope": "default",
                       "instrumentUid": "LUID_JLH24106",
                       "transactionDate": "2018-08-04T00:00:00.0000000+00:00",
                       "settlementDate": "2018-08-06T00:00:00.0000000+00:00",
@@ -23048,6 +23226,7 @@
                       "instrumentIdentifiers": {
                         "instrument/default/ClientInternal": "INT:00024106"
                       },
+                      "instrumentScope": "default",
                       "instrumentUid": "LUID_OI5JX1V7",
                       "transactionDate": "2018-08-07T00:00:00.0000000+00:00",
                       "settlementDate": "2018-08-10T00:00:00.0000000+00:00",
@@ -23215,6 +23394,7 @@
                       "instrumentIdentifiers": {
                         "instrument/default/RIC": "RIC.L"
                       },
+                      "instrumentScope": "default",
                       "instrumentUid": "LUID_JLH24106",
                       "transactionDate": "2018-08-04T00:00:00.0000000+00:00",
                       "settlementDate": "2018-08-06T00:00:00.0000000+00:00",
@@ -23265,6 +23445,7 @@
                       "instrumentIdentifiers": {
                         "instrument/default/ClientInternal": "INT:00024106"
                       },
+                      "instrumentScope": "default",
                       "instrumentUid": "LUID_OI5JX1V7",
                       "transactionDate": "2018-08-07T00:00:00.0000000+00:00",
                       "settlementDate": "2018-08-10T00:00:00.0000000+00:00",
@@ -24759,14 +24940,14 @@
             "minLength": 1,
             "pattern": "^[\\s\\S]*$",
             "type": "string",
-            "description": ""
+            "description": "The name of the derived transaction portfolio."
           },
           "description": {
             "maxLength": 1024,
             "minLength": 0,
             "pattern": "^[\\s\\S]*$",
             "type": "string",
-            "description": "",
+            "description": "A description for the derived transaction portfolio.",
             "nullable": true
           },
           "code": {
@@ -24774,14 +24955,14 @@
             "minLength": 1,
             "pattern": "^[a-zA-Z0-9\\-_]+$",
             "type": "string",
-            "description": ""
+            "description": "The code of the derived transaction portfolio. Together with the scope this uniquely identifies the derived transaction portfolio."
           },
           "parentPortfolioId": {
             "$ref": "#/components/schemas/ResourceId"
           },
           "created": {
             "type": "string",
-            "description": "",
+            "description": "The effective datetime at which to create the derived transaction portfolio. No transactions can be added to the derived transaction portfolio before this date. Defaults to the current LUSID system datetime if not specified.",
             "format": "date-time",
             "nullable": true
           },
@@ -24798,7 +24979,7 @@
               "LowestCostFirst"
             ],
             "type": "string",
-            "description": "The available values are: Default, AverageCost, FirstInFirstOut, LastInFirstOut, HighestCostFirst, LowestCostFirst"
+            "description": "Determines the accounting treatment given to the transaction portfolio's tax lots. The available values are: Default, AverageCost, FirstInFirstOut, LastInFirstOut, HighestCostFirst, LowestCostFirst"
           },
           "subHoldingKeys": {
             "type": "array",
@@ -24806,7 +24987,16 @@
               "type": "string",
               "description": "The key that uniquely identifies the property. It has the format {domain}/{scope}/{code}."
             },
-            "description": "",
+            "description": "A set of unique transaction properties to group the derived transaction portfolio's holdings by, perhaps for strategy tagging. Each property must be from the 'Transaction' domain and identified by a key in the format {domain}/{scope}/{code}, for example 'Transaction/strategies/quantsignal'. Note that sub-holding keys cannot currently be added after the transaction portfolio has been created; see https://support.lusid.com/knowledgebase/article/KA-01879/en-us for more information.",
+            "nullable": true
+          },
+          "instrumentScopes": {
+            "maxLength": 1,
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "description": "The resolution strategy used to resolve instruments of transactions/holdings upserted to this derived portfolio.",
             "nullable": true
           }
         },
@@ -24990,6 +25180,15 @@
             },
             "description": "Portfolio properties to add to the portfolio",
             "nullable": true
+          },
+          "instrumentScopes": {
+            "maxLength": 1,
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "description": "",
+            "nullable": true
           }
         },
         "additionalProperties": false
@@ -25055,6 +25254,15 @@
               "$ref": "#/components/schemas/Property"
             },
             "description": "A set of unique portfolio properties to add custom data to the transaction portfolio. Each property must be from the 'Portfolio' domain and identified by a key in the format {domain}/{scope}/{code}, for example 'Portfolio/Manager/Id'. Note these properties must be pre-defined.",
+            "nullable": true
+          },
+          "instrumentScopes": {
+            "maxLength": 1,
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "description": "The resolution strategy used to resolve instruments of transactions/holdings upserted to this portfolio.",
             "nullable": true
           }
         },
@@ -25678,6 +25886,11 @@
             "description": "A set of instrument identifiers that can resolve the holding adjustment to a unique instrument.",
             "nullable": true
           },
+          "instrumentScope": {
+            "type": "string",
+            "description": "The scope of the instrument that the holding adjustment is in.",
+            "nullable": true
+          },
           "instrumentUid": {
             "type": "string",
             "description": "The unqiue Lusid Instrument Id (LUID) of the instrument that the holding adjustment is in."
@@ -25909,6 +26122,11 @@
             "type": "string",
             "description": "The specific Uniform Resource Identifier (URI) for this resource at the requested effective and asAt datetime.",
             "format": "uri",
+            "nullable": true
+          },
+          "scope": {
+            "type": "string",
+            "description": "The scope in which the instrument lies.",
             "nullable": true
           },
           "lusidInstrumentId": {
@@ -26588,6 +26806,7 @@
       },
       "OutputTransaction": {
         "required": [
+          "instrumentScope",
           "instrumentUid",
           "settlementDate",
           "transactionDate",
@@ -26617,6 +26836,10 @@
             },
             "description": "A set of instrument identifiers that can resolve the transaction to a unique instrument.",
             "nullable": true
+          },
+          "instrumentScope": {
+            "type": "string",
+            "description": "The unqiue Lusid Instrument Id (LUID) of the instrument that the transaction is in."
           },
           "instrumentUid": {
             "type": "string",
@@ -27199,6 +27422,14 @@
             "description": "The requested portfolio properties. These will be from the 'Portfolio' domain.",
             "nullable": true
           },
+          "instrumentScopes": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "description": "The instrument scope resolution strategy of this portfolio.",
+            "nullable": true
+          },
           "links": {
             "type": "array",
             "items": {
@@ -27333,6 +27564,14 @@
               "type": "string",
               "description": "The key that uniquely identifies the property. It has the format {domain}/{scope}/{code}."
             },
+            "nullable": true
+          },
+          "instrumentScopes": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "description": "The resolution strategy used to resolve instruments of transactions/holdings upserted to the transaction portfolio.",
             "nullable": true
           },
           "links": {
@@ -27508,6 +27747,11 @@
         ],
         "type": "object",
         "properties": {
+          "instrumentScope": {
+            "type": "string",
+            "description": "The scope in which the holding's instrument is in.",
+            "nullable": true
+          },
           "instrumentUid": {
             "type": "string",
             "description": "The unique Lusid Instrument Id (LUID) of the instrument that the holding is in."
@@ -28434,6 +28678,11 @@
             "type": "number",
             "description": "",
             "format": "double",
+            "nullable": true
+          },
+          "instrumentScope": {
+            "type": "string",
+            "description": "",
             "nullable": true
           }
         },
@@ -29525,6 +29774,11 @@
               "type": "string"
             },
             "description": "A set of instrument identifiers that can resolve the transaction to a unique instrument.",
+            "nullable": true
+          },
+          "instrumentScope": {
+            "type": "string",
+            "description": "The scope in which the transaction's instrument lies.",
             "nullable": true
           },
           "instrumentUid": {
@@ -30780,7 +31034,7 @@
         "description": "OAuth2 Implicit Grant",
         "flows": {
           "implicit": {
-            "authorizationUrl": "https://lusid.okta.com/oauth2/default/v1/authorize",
+            "authorizationUrl": "https://dummyurl.lusid.com/",
             "scopes": {}
           }
         }

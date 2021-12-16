@@ -6,6 +6,7 @@ A list of instruments.
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **href** | **str** | The specific Uniform Resource Identifier (URI) for this resource at the requested effective and asAt datetime. | [optional] 
+**scope** | **str** | The scope in which the instrument lies. | [optional] 
 **lusid_instrument_id** | **str** | The unique LUSID Instrument Identifier (LUID) of the instrument. | 
 **version** | [**Version**](Version.md) |  | 
 **name** | **str** | The name of the instrument. | 
