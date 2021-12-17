@@ -9,7 +9,7 @@
       "url": "https://www.finbourne.com",
       "email": "info@finbourne.com"
     },
-    "version": "0.11.3848",
+    "version": "0.11.3849",
     "x-logo": {
       "url": "https://www.lusid.com/app/assets/logo_white.png",
       "backgroundColor": "#415464"
@@ -17,7 +17,7 @@
   },
   "servers": [
     {
-      "url": "http://local-unit-test-server.lusid.com:64099"
+      "url": "http://local-unit-test-server.lusid.com:41824"
     }
   ],
   "paths": {
@@ -5620,6 +5620,630 @@
         "x-fbn-apistatus": "EarlyAccess"
       }
     },
+    "/api/legalentities/{idTypeScope}/{idTypeCode}/{code}/metadata": {
+      "get": {
+        "tags": [
+          "Legal Entities"
+        ],
+        "summary": "[EARLY ACCESS] GetAllLegalEntityAccessMetadata: Get Access Metadata rules for a Legal Entity",
+        "description": "Pass the Scope and Code of the Legal Entity identifier along with the Legal Entity code parameter to retrieve the associated Access Metadata",
+        "operationId": "GetAllLegalEntityAccessMetadata",
+        "parameters": [
+          {
+            "name": "idTypeScope",
+            "in": "path",
+            "description": "Scope of the Legal Entity identifier.",
+            "required": true,
+            "schema": {
+              "maxLength": 64,
+              "minLength": 1,
+              "pattern": "^[a-zA-Z0-9\\-_]+$",
+              "type": "string",
+              "description": "Scope of the Legal Entity identifier."
+            }
+          },
+          {
+            "name": "idTypeCode",
+            "in": "path",
+            "description": "Code of the Legal Entity identifier.",
+            "required": true,
+            "schema": {
+              "maxLength": 64,
+              "minLength": 1,
+              "pattern": "^[a-zA-Z0-9\\-_]+$",
+              "type": "string",
+              "description": "Code of the Legal Entity identifier."
+            }
+          },
+          {
+            "name": "code",
+            "in": "path",
+            "description": "Code of the Legal Entity under specified identifier type's scope and code.",
+            "required": true,
+            "schema": {
+              "maxLength": 64,
+              "minLength": 1,
+              "pattern": "^[a-zA-Z0-9\\-_]+$",
+              "type": "string",
+              "description": "Code of the Legal Entity under specified identifier type's scope and code."
+            }
+          },
+          {
+            "name": "effectiveAt",
+            "in": "query",
+            "description": "The effectiveAt datetime at which to retrieve the Access Metadata",
+            "schema": {
+              "type": "string",
+              "description": "The effectiveAt datetime at which to retrieve the Access Metadata",
+              "format": "dateorcutlabel",
+              "nullable": true
+            }
+          },
+          {
+            "name": "asAt",
+            "in": "query",
+            "description": "The asAt datetime at which to retrieve the Access Metadata",
+            "schema": {
+              "type": "string",
+              "description": "The asAt datetime at which to retrieve the Access Metadata",
+              "format": "date-time",
+              "nullable": true
+            },
+            "x-nullable": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The access metadata for the Legal Entity or any failure.",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "type": "object",
+                  "additionalProperties": {
+                    "type": "array",
+                    "items": {
+                      "$ref": "#/components/schemas/AccessMetadataValue"
+                    }
+                  }
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "additionalProperties": {
+                    "type": "array",
+                    "items": {
+                      "$ref": "#/components/schemas/AccessMetadataValue"
+                    }
+                  }
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "type": "object",
+                  "additionalProperties": {
+                    "type": "array",
+                    "items": {
+                      "$ref": "#/components/schemas/AccessMetadataValue"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "The details of the input related failure",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/LusidValidationProblemDetails"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/LusidValidationProblemDetails"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/LusidValidationProblemDetails"
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "Error response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/LusidProblemDetails"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "oauth2": []
+          }
+        ],
+        "x-fbn-apistatus": "EarlyAccess"
+      }
+    },
+    "/api/legalentities/{idTypeScope}/{idTypeCode}/{code}/metadata/{metadataKey}": {
+      "put": {
+        "tags": [
+          "Legal Entities"
+        ],
+        "summary": "[EARLY ACCESS] UpsertLegalEntityAccessMetadata: Upsert a Legal Entity Access Metadata entry associated with a specific metadataKey. This creates or updates the data in LUSID.",
+        "description": "Update or insert one Legal Entity Access Metadata entry in a single scope. An item will be updated if it already exists\r\nand inserted if it does not.\r\n            \r\nThe response will return the successfully updated or inserted Legal Entity Access Metadata rule or failure message if unsuccessful.\r\n            \r\nIt is important to always check to verify success (or failure).\r\n            \r\nMultiple rules for a metadataKey can exist with different effective at dates, when resources are accessed the rule that is active for the current time will be fetched.",
+        "operationId": "UpsertLegalEntityAccessMetadata",
+        "parameters": [
+          {
+            "name": "idTypeScope",
+            "in": "path",
+            "description": "Scope of the Legal Entity identifier.",
+            "required": true,
+            "schema": {
+              "maxLength": 64,
+              "minLength": 1,
+              "pattern": "^[a-zA-Z0-9\\-_]+$",
+              "type": "string",
+              "description": "Scope of the Legal Entity identifier."
+            }
+          },
+          {
+            "name": "idTypeCode",
+            "in": "path",
+            "description": "Code of the Legal Entity identifier.",
+            "required": true,
+            "schema": {
+              "maxLength": 64,
+              "minLength": 1,
+              "pattern": "^[a-zA-Z0-9\\-_]+$",
+              "type": "string",
+              "description": "Code of the Legal Entity identifier."
+            }
+          },
+          {
+            "name": "code",
+            "in": "path",
+            "description": "Code of the Legal Entity under specified identifier type's scope and code.",
+            "required": true,
+            "schema": {
+              "maxLength": 64,
+              "minLength": 1,
+              "pattern": "^[a-zA-Z0-9\\-_]+$",
+              "type": "string",
+              "description": "Code of the Legal Entity under specified identifier type's scope and code."
+            }
+          },
+          {
+            "name": "metadataKey",
+            "in": "path",
+            "description": "Key of the metadata entry to retrieve",
+            "required": true,
+            "schema": {
+              "maxLength": 100,
+              "minLength": 1,
+              "pattern": "^[a-zA-Z0-9\\-_]+$",
+              "type": "string",
+              "description": "Key of the metadata entry to retrieve"
+            }
+          },
+          {
+            "name": "effectiveAt",
+            "in": "query",
+            "description": "The effectiveAt datetime at which to upsert the Access Metadata",
+            "schema": {
+              "type": "string",
+              "description": "The effectiveAt datetime at which to upsert the Access Metadata",
+              "format": "dateorcutlabel",
+              "nullable": true
+            }
+          }
+        ],
+        "requestBody": {
+          "description": "The Legal Entity Access Metadata entry to upsert",
+          "content": {
+            "application/json-patch+json": {
+              "schema": {
+                "$ref": "#/components/schemas/UpsertLegalEntityAccessMetadataRequest"
+              },
+              "example": {
+                "metadata": [
+                  {
+                    "value": "SilverLicence",
+                    "provider": "TestDataProvider"
+                  }
+                ]
+              }
+            },
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UpsertLegalEntityAccessMetadataRequest"
+              },
+              "example": {
+                "metadata": [
+                  {
+                    "value": "SilverLicence",
+                    "provider": "TestDataProvider"
+                  }
+                ]
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UpsertLegalEntityAccessMetadataRequest"
+              },
+              "example": {
+                "metadata": [
+                  {
+                    "value": "SilverLicence",
+                    "provider": "TestDataProvider"
+                  }
+                ]
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/UpsertLegalEntityAccessMetadataRequest"
+              },
+              "example": {
+                "metadata": [
+                  {
+                    "value": "SilverLicence",
+                    "provider": "TestDataProvider"
+                  }
+                ]
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "The successfully updated or inserted item or any failure.",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResourceListOfAccessMetadataValueOf"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResourceListOfAccessMetadataValueOf"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResourceListOfAccessMetadataValueOf"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "The details of the input related failure",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/LusidValidationProblemDetails"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/LusidValidationProblemDetails"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/LusidValidationProblemDetails"
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "Error response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/LusidProblemDetails"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "oauth2": []
+          }
+        ],
+        "x-fbn-apistatus": "EarlyAccess"
+      },
+      "get": {
+        "tags": [
+          "Legal Entities"
+        ],
+        "summary": "[EARLY ACCESS] GetLegalEntityAccessMetadataByKey: Get an entry identified by a metadataKey in the Access Metadata of a Legal Entity",
+        "description": "Get a specific Legal Entity Access Metadata by specifying the corresponding identifier parts and Legal Entity code\r\n            \r\nNo matching will be performed through this endpoint. To retrieve an entry, it is necessary to specify, exactly, the identifier of the entry",
+        "operationId": "GetLegalEntityAccessMetadataByKey",
+        "parameters": [
+          {
+            "name": "idTypeScope",
+            "in": "path",
+            "description": "Scope of the Legal Entity identifier.",
+            "required": true,
+            "schema": {
+              "maxLength": 64,
+              "minLength": 1,
+              "pattern": "^[a-zA-Z0-9\\-_]+$",
+              "type": "string",
+              "description": "Scope of the Legal Entity identifier."
+            }
+          },
+          {
+            "name": "idTypeCode",
+            "in": "path",
+            "description": "Code of the Legal Entity identifier.",
+            "required": true,
+            "schema": {
+              "maxLength": 64,
+              "minLength": 1,
+              "pattern": "^[a-zA-Z0-9\\-_]+$",
+              "type": "string",
+              "description": "Code of the Legal Entity identifier."
+            }
+          },
+          {
+            "name": "code",
+            "in": "path",
+            "description": "Code of the Legal Entity under specified identifier type's scope and code.",
+            "required": true,
+            "schema": {
+              "maxLength": 64,
+              "minLength": 1,
+              "pattern": "^[a-zA-Z0-9\\-_]+$",
+              "type": "string",
+              "description": "Code of the Legal Entity under specified identifier type's scope and code."
+            }
+          },
+          {
+            "name": "metadataKey",
+            "in": "path",
+            "description": "Key of the metadata entry to retrieve",
+            "required": true,
+            "schema": {
+              "maxLength": 100,
+              "minLength": 1,
+              "pattern": "^[a-zA-Z0-9\\-_]+$",
+              "type": "string",
+              "description": "Key of the metadata entry to retrieve"
+            }
+          },
+          {
+            "name": "effectiveAt",
+            "in": "query",
+            "description": "The effectiveAt datetime at which to retrieve the Access Metadata",
+            "schema": {
+              "type": "string",
+              "description": "The effectiveAt datetime at which to retrieve the Access Metadata",
+              "format": "dateorcutlabel",
+              "nullable": true
+            }
+          },
+          {
+            "name": "asAt",
+            "in": "query",
+            "description": "The asAt datetime at which to retrieve the Access Metadata",
+            "schema": {
+              "type": "string",
+              "description": "The asAt datetime at which to retrieve the Access Metadata",
+              "format": "date-time",
+              "nullable": true
+            },
+            "x-nullable": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The successfully retrieved Legal Entity access metadata filtered by metadataKey or any failure.",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/AccessMetadataValue"
+                  }
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/AccessMetadataValue"
+                  }
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/AccessMetadataValue"
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "The details of the input related failure",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/LusidValidationProblemDetails"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/LusidValidationProblemDetails"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/LusidValidationProblemDetails"
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "Error response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/LusidProblemDetails"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "oauth2": []
+          }
+        ],
+        "x-fbn-apistatus": "EarlyAccess"
+      },
+      "delete": {
+        "tags": [
+          "Legal Entities"
+        ],
+        "summary": "[EARLY ACCESS] DeleteLegalEntityAccessMetadata: Delete a Legal Entity Access Metadata entry",
+        "description": "Deletes the Legal Entity Access Metadata entry that exactly matches the provided identifier parts.\r\n\r\nIt is important to always check to verify success (or failure).",
+        "operationId": "DeleteLegalEntityAccessMetadata",
+        "parameters": [
+          {
+            "name": "idTypeScope",
+            "in": "path",
+            "description": "Scope of the Legal Entity identifier.",
+            "required": true,
+            "schema": {
+              "maxLength": 64,
+              "minLength": 1,
+              "pattern": "^[a-zA-Z0-9\\-_]+$",
+              "type": "string",
+              "description": "Scope of the Legal Entity identifier."
+            }
+          },
+          {
+            "name": "idTypeCode",
+            "in": "path",
+            "description": "Code of the Legal Entity identifier.",
+            "required": true,
+            "schema": {
+              "maxLength": 64,
+              "minLength": 1,
+              "pattern": "^[a-zA-Z0-9\\-_]+$",
+              "type": "string",
+              "description": "Code of the Legal Entity identifier."
+            }
+          },
+          {
+            "name": "code",
+            "in": "path",
+            "description": "Code of the Legal Entity under specified identifier type's scope and code.",
+            "required": true,
+            "schema": {
+              "maxLength": 64,
+              "minLength": 1,
+              "pattern": "^[a-zA-Z0-9\\-_]+$",
+              "type": "string",
+              "description": "Code of the Legal Entity under specified identifier type's scope and code."
+            }
+          },
+          {
+            "name": "metadataKey",
+            "in": "path",
+            "description": "Key of the metadata entry to retrieve",
+            "required": true,
+            "schema": {
+              "maxLength": 100,
+              "minLength": 1,
+              "pattern": "^[a-zA-Z0-9\\-_]+$",
+              "type": "string",
+              "description": "Key of the metadata entry to retrieve"
+            }
+          },
+          {
+            "name": "effectiveAt",
+            "in": "query",
+            "description": "The effective date to delete at, if this is not supplied, it will delete all data found",
+            "schema": {
+              "type": "string",
+              "description": "The effective date to delete at, if this is not supplied, it will delete all data found",
+              "format": "dateorcutlabel",
+              "nullable": true
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The Access Metadata with the given metadataKey has been deleted",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/DeletedEntityResponse"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/DeletedEntityResponse"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/DeletedEntityResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "The details of the input related failure",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/LusidValidationProblemDetails"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/LusidValidationProblemDetails"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/LusidValidationProblemDetails"
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "Error response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/LusidProblemDetails"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "oauth2": []
+          }
+        ],
+        "x-fbn-apistatus": "EarlyAccess"
+      }
+    },
     "/api/metadata/access/resources": {
       "get": {
         "tags": [
@@ -6736,6 +7360,601 @@
         "responses": {
           "200": {
             "description": "The response from deleting an order.",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/DeletedEntityResponse"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/DeletedEntityResponse"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/DeletedEntityResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "The details of the input related failure",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/LusidValidationProblemDetails"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/LusidValidationProblemDetails"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/LusidValidationProblemDetails"
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "Error response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/LusidProblemDetails"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "oauth2": []
+          }
+        ],
+        "x-fbn-apistatus": "EarlyAccess"
+      }
+    },
+    "/api/persons/{idTypeScope}/{idTypeCode}/{code}/metadata": {
+      "get": {
+        "tags": [
+          "Persons"
+        ],
+        "summary": "[EARLY ACCESS] GetAllPersonAccessMetadata: Get Access Metadata rules for a Person",
+        "description": "Pass the Scope and Code of the Person identifier along with the person code parameter to retrieve the associated Access Metadata",
+        "operationId": "GetAllPersonAccessMetadata",
+        "parameters": [
+          {
+            "name": "idTypeScope",
+            "in": "path",
+            "description": "Scope of the person identifier.",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "description": "Scope of the person identifier."
+            }
+          },
+          {
+            "name": "idTypeCode",
+            "in": "path",
+            "description": "Code of the person identifier.",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "description": "Code of the person identifier."
+            }
+          },
+          {
+            "name": "code",
+            "in": "path",
+            "description": "Code of the person under specified identifier type's scope and code.",
+            "required": true,
+            "schema": {
+              "maxLength": 64,
+              "minLength": 1,
+              "pattern": "^[a-zA-Z0-9\\-_]+$",
+              "type": "string",
+              "description": "Code of the person under specified identifier type's scope and code."
+            }
+          },
+          {
+            "name": "effectiveAt",
+            "in": "query",
+            "description": "The effectiveAt datetime at which to retrieve the Access Metadata",
+            "schema": {
+              "type": "string",
+              "description": "The effectiveAt datetime at which to retrieve the Access Metadata",
+              "format": "dateorcutlabel",
+              "nullable": true
+            }
+          },
+          {
+            "name": "asAt",
+            "in": "query",
+            "description": "The asAt datetime at which to retrieve the Access Metadata",
+            "schema": {
+              "type": "string",
+              "description": "The asAt datetime at which to retrieve the Access Metadata",
+              "format": "date-time",
+              "nullable": true
+            },
+            "x-nullable": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The access metadata for the Person or any failure.",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "type": "object",
+                  "additionalProperties": {
+                    "type": "array",
+                    "items": {
+                      "$ref": "#/components/schemas/AccessMetadataValue"
+                    }
+                  }
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "additionalProperties": {
+                    "type": "array",
+                    "items": {
+                      "$ref": "#/components/schemas/AccessMetadataValue"
+                    }
+                  }
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "type": "object",
+                  "additionalProperties": {
+                    "type": "array",
+                    "items": {
+                      "$ref": "#/components/schemas/AccessMetadataValue"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "The details of the input related failure",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/LusidValidationProblemDetails"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/LusidValidationProblemDetails"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/LusidValidationProblemDetails"
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "Error response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/LusidProblemDetails"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "oauth2": []
+          }
+        ],
+        "x-fbn-apistatus": "EarlyAccess"
+      }
+    },
+    "/api/persons/{idTypeScope}/{idTypeCode}/{code}/metadata/{metadataKey}": {
+      "put": {
+        "tags": [
+          "Persons"
+        ],
+        "summary": "[EARLY ACCESS] UpsertPersonAccessMetadata: Upsert a Person Access Metadata entry associated with a specific metadataKey. This creates or updates the data in LUSID.",
+        "description": "Update or insert one Person Access Metadata entry in a single scope. An item will be updated if it already exists\r\nand inserted if it does not.\r\n            \r\nThe response will return the successfully updated or inserted Person Access Metadata rule or failure message if unsuccessful.\r\n            \r\nIt is important to always check to verify success (or failure).\r\n            \r\nMultiple rules for a metadataKey can exist with different effective at dates, when resources are accessed the rule that is active for the current time will be fetched.",
+        "operationId": "UpsertPersonAccessMetadata",
+        "parameters": [
+          {
+            "name": "idTypeScope",
+            "in": "path",
+            "description": "Scope of the person identifier.",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "description": "Scope of the person identifier."
+            }
+          },
+          {
+            "name": "idTypeCode",
+            "in": "path",
+            "description": "Code of the person identifier.",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "description": "Code of the person identifier."
+            }
+          },
+          {
+            "name": "code",
+            "in": "path",
+            "description": "Code of the person under specified identifier type's scope and code.",
+            "required": true,
+            "schema": {
+              "maxLength": 64,
+              "minLength": 1,
+              "pattern": "^[a-zA-Z0-9\\-_]+$",
+              "type": "string",
+              "description": "Code of the person under specified identifier type's scope and code."
+            }
+          },
+          {
+            "name": "metadataKey",
+            "in": "path",
+            "description": "Key of the metadata entry to retrieve",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "description": "Key of the metadata entry to retrieve"
+            }
+          },
+          {
+            "name": "effectiveAt",
+            "in": "query",
+            "description": "The effectiveAt datetime at which to upsert the Access Metadata",
+            "schema": {
+              "type": "string",
+              "description": "The effectiveAt datetime at which to upsert the Access Metadata",
+              "format": "dateorcutlabel",
+              "nullable": true
+            }
+          }
+        ],
+        "requestBody": {
+          "description": "The Person Access Metadata entry to upsert",
+          "content": {
+            "application/json-patch+json": {
+              "schema": {
+                "$ref": "#/components/schemas/UpsertPersonAccessMetadataRequest"
+              },
+              "example": {
+                "metadata": [
+                  {
+                    "value": "SilverLicence",
+                    "provider": "TestDataProvider"
+                  }
+                ]
+              }
+            },
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UpsertPersonAccessMetadataRequest"
+              },
+              "example": {
+                "metadata": [
+                  {
+                    "value": "SilverLicence",
+                    "provider": "TestDataProvider"
+                  }
+                ]
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UpsertPersonAccessMetadataRequest"
+              },
+              "example": {
+                "metadata": [
+                  {
+                    "value": "SilverLicence",
+                    "provider": "TestDataProvider"
+                  }
+                ]
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/UpsertPersonAccessMetadataRequest"
+              },
+              "example": {
+                "metadata": [
+                  {
+                    "value": "SilverLicence",
+                    "provider": "TestDataProvider"
+                  }
+                ]
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "The successfully updated or inserted item or any failure.",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResourceListOfAccessMetadataValueOf"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResourceListOfAccessMetadataValueOf"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResourceListOfAccessMetadataValueOf"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "The details of the input related failure",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/LusidValidationProblemDetails"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/LusidValidationProblemDetails"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/LusidValidationProblemDetails"
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "Error response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/LusidProblemDetails"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "oauth2": []
+          }
+        ],
+        "x-fbn-apistatus": "EarlyAccess"
+      },
+      "get": {
+        "tags": [
+          "Persons"
+        ],
+        "summary": "[EARLY ACCESS] GetPersonAccessMetadataByKey: Get an entry identified by a metadataKey in the Access Metadata of a Person",
+        "description": "Get a specific Person Access Metadata by specifying the corresponding identifier parts and Person code\r\n            \r\nNo matching will be performed through this endpoint. To retrieve an entry, it is necessary to specify, exactly, the identifier of the entry",
+        "operationId": "GetPersonAccessMetadataByKey",
+        "parameters": [
+          {
+            "name": "idTypeScope",
+            "in": "path",
+            "description": "Scope of the person identifier.",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "description": "Scope of the person identifier."
+            }
+          },
+          {
+            "name": "idTypeCode",
+            "in": "path",
+            "description": "Code of the person identifier.",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "description": "Code of the person identifier."
+            }
+          },
+          {
+            "name": "code",
+            "in": "path",
+            "description": "Code of the person under specified identifier type's scope and code.",
+            "required": true,
+            "schema": {
+              "maxLength": 64,
+              "minLength": 1,
+              "pattern": "^[a-zA-Z0-9\\-_]+$",
+              "type": "string",
+              "description": "Code of the person under specified identifier type's scope and code."
+            }
+          },
+          {
+            "name": "metadataKey",
+            "in": "path",
+            "description": "Key of the metadata entry to retrieve",
+            "required": true,
+            "schema": {
+              "pattern": "^[a-zA-Z0-9\\-_]+$",
+              "type": "string",
+              "description": "Key of the metadata entry to retrieve"
+            }
+          },
+          {
+            "name": "effectiveAt",
+            "in": "query",
+            "description": "The effectiveAt datetime at which to retrieve the Access Metadata",
+            "schema": {
+              "type": "string",
+              "description": "The effectiveAt datetime at which to retrieve the Access Metadata",
+              "format": "dateorcutlabel",
+              "nullable": true
+            }
+          },
+          {
+            "name": "asAt",
+            "in": "query",
+            "description": "The asAt datetime at which to retrieve the Access Metadata",
+            "schema": {
+              "type": "string",
+              "description": "The asAt datetime at which to retrieve the Access Metadata",
+              "format": "date-time",
+              "nullable": true
+            },
+            "x-nullable": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The successfully retrieved Person access metadata filtered by metadataKey or any failure.",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/AccessMetadataValue"
+                  }
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/AccessMetadataValue"
+                  }
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/AccessMetadataValue"
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "The details of the input related failure",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/LusidValidationProblemDetails"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/LusidValidationProblemDetails"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/LusidValidationProblemDetails"
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "Error response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/LusidProblemDetails"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "oauth2": []
+          }
+        ],
+        "x-fbn-apistatus": "EarlyAccess"
+      },
+      "delete": {
+        "tags": [
+          "Persons"
+        ],
+        "summary": "[EARLY ACCESS] DeletePersonAccessMetadata: Delete a Person Access Metadata entry",
+        "description": "Deletes the Person Access Metadata entry that exactly matches the provided identifier parts.\r\n\r\nIt is important to always check to verify success (or failure).",
+        "operationId": "DeletePersonAccessMetadata",
+        "parameters": [
+          {
+            "name": "idTypeScope",
+            "in": "path",
+            "description": "Scope of the person identifier.",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "description": "Scope of the person identifier."
+            }
+          },
+          {
+            "name": "idTypeCode",
+            "in": "path",
+            "description": "Code of the person identifier.",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "description": "Code of the person identifier."
+            }
+          },
+          {
+            "name": "code",
+            "in": "path",
+            "description": "Code of the person under specified identifier type's scope and code.",
+            "required": true,
+            "schema": {
+              "maxLength": 64,
+              "minLength": 1,
+              "pattern": "^[a-zA-Z0-9\\-_]+$",
+              "type": "string",
+              "description": "Code of the person under specified identifier type's scope and code."
+            }
+          },
+          {
+            "name": "metadataKey",
+            "in": "path",
+            "description": "Key of the metadata entry to retrieve",
+            "required": true,
+            "schema": {
+              "maxLength": 256,
+              "minLength": 1,
+              "pattern": "^[a-zA-Z0-9\\-_]+$",
+              "type": "string",
+              "description": "Key of the metadata entry to retrieve"
+            }
+          },
+          {
+            "name": "effectiveAt",
+            "in": "query",
+            "description": "The effective date to delete at, if this is not supplied, it will delete all data found",
+            "schema": {
+              "type": "string",
+              "description": "The effective date to delete at, if this is not supplied, it will delete all data found",
+              "format": "dateorcutlabel",
+              "nullable": true
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The Access Metadata with the given metadataKey has been deleted",
             "content": {
               "text/plain": {
                 "schema": {
@@ -7995,6 +9214,575 @@
                     }
                   ],
                   "links": []
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "The details of the input related failure",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/LusidValidationProblemDetails"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/LusidValidationProblemDetails"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/LusidValidationProblemDetails"
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "Error response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/LusidProblemDetails"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "oauth2": []
+          }
+        ],
+        "x-fbn-apistatus": "EarlyAccess"
+      }
+    },
+    "/api/portfoliogroups/{scope}/{code}/metadata": {
+      "get": {
+        "tags": [
+          "Portfolio Groups"
+        ],
+        "summary": "[EARLY ACCESS] GetPortfolioGroupMetadata: Get Access Metadata rules for Portfolio Group",
+        "description": "Pass the scope and Portfolio Group code parameters to retrieve the associated Access Metadata",
+        "operationId": "GetPortfolioGroupMetadata",
+        "parameters": [
+          {
+            "name": "scope",
+            "in": "path",
+            "description": "The scope of the Portfolio Group",
+            "required": true,
+            "schema": {
+              "maxLength": 64,
+              "minLength": 1,
+              "pattern": "^[a-zA-Z0-9\\-_]+$",
+              "type": "string",
+              "description": "The scope of the Portfolio Group"
+            }
+          },
+          {
+            "name": "code",
+            "in": "path",
+            "description": "The Portfolio Group code",
+            "required": true,
+            "schema": {
+              "maxLength": 64,
+              "minLength": 1,
+              "pattern": "^[a-zA-Z0-9\\-_]+$",
+              "type": "string",
+              "description": "The Portfolio Group code"
+            }
+          },
+          {
+            "name": "effectiveAt",
+            "in": "query",
+            "description": "The effectiveAt datetime at which to retrieve the Access Metadata",
+            "schema": {
+              "type": "string",
+              "description": "The effectiveAt datetime at which to retrieve the Access Metadata",
+              "format": "dateorcutlabel",
+              "nullable": true
+            }
+          },
+          {
+            "name": "asAt",
+            "in": "query",
+            "description": "The asAt datetime at which to retrieve the Access Metadata",
+            "schema": {
+              "type": "string",
+              "description": "The asAt datetime at which to retrieve the Access Metadata",
+              "format": "date-time",
+              "nullable": true
+            },
+            "x-nullable": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The access metadata for the portfolio group or any failure.",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "type": "object",
+                  "additionalProperties": {
+                    "type": "array",
+                    "items": {
+                      "$ref": "#/components/schemas/AccessMetadataValue"
+                    }
+                  }
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "additionalProperties": {
+                    "type": "array",
+                    "items": {
+                      "$ref": "#/components/schemas/AccessMetadataValue"
+                    }
+                  }
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "type": "object",
+                  "additionalProperties": {
+                    "type": "array",
+                    "items": {
+                      "$ref": "#/components/schemas/AccessMetadataValue"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "The details of the input related failure",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/LusidValidationProblemDetails"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/LusidValidationProblemDetails"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/LusidValidationProblemDetails"
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "Error response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/LusidProblemDetails"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "oauth2": []
+          }
+        ],
+        "x-fbn-apistatus": "EarlyAccess"
+      }
+    },
+    "/api/portfoliogroups/{scope}/{code}/metadata/{metadataKey}": {
+      "get": {
+        "tags": [
+          "Portfolio Groups"
+        ],
+        "summary": "[EARLY ACCESS] GetPortfolioGroupAccessMetadataByKey: Get an entry identified by a metadataKey in the Access Metadata of a Portfolio Group",
+        "description": "Get a specific Portfolio Group access metadata by specifying the corresponding identifier parts\r\n            \r\nNo matching will be performed through this endpoint. To retrieve a rule, it is necessary to specify, exactly, the identifier of the rule",
+        "operationId": "GetPortfolioGroupAccessMetadataByKey",
+        "parameters": [
+          {
+            "name": "scope",
+            "in": "path",
+            "description": "The scope of the Portfolio Group",
+            "required": true,
+            "schema": {
+              "maxLength": 64,
+              "minLength": 1,
+              "pattern": "^[a-zA-Z0-9\\-_]+$",
+              "type": "string",
+              "description": "The scope of the Portfolio Group"
+            }
+          },
+          {
+            "name": "code",
+            "in": "path",
+            "description": "The Portfolio Group code",
+            "required": true,
+            "schema": {
+              "maxLength": 64,
+              "minLength": 1,
+              "pattern": "^[a-zA-Z0-9\\-_]+$",
+              "type": "string",
+              "description": "The Portfolio Group code"
+            }
+          },
+          {
+            "name": "metadataKey",
+            "in": "path",
+            "description": "Key of the metadata entry to retrieve",
+            "required": true,
+            "schema": {
+              "maxLength": 256,
+              "minLength": 1,
+              "type": "string",
+              "description": "Key of the metadata entry to retrieve"
+            }
+          },
+          {
+            "name": "effectiveAt",
+            "in": "query",
+            "description": "The effectiveAt datetime at which to retrieve the access metadata",
+            "schema": {
+              "type": "string",
+              "description": "The effectiveAt datetime at which to retrieve the access metadata",
+              "format": "dateorcutlabel",
+              "nullable": true
+            }
+          },
+          {
+            "name": "asAt",
+            "in": "query",
+            "description": "The asAt datetime at which to retrieve the access metadata",
+            "schema": {
+              "type": "string",
+              "description": "The asAt datetime at which to retrieve the access metadata",
+              "format": "date-time",
+              "nullable": true
+            },
+            "x-nullable": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The successfully retrieved Portfolio group access metadata filtered by metadataKey or any failure.",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/AccessMetadataValue"
+                  }
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/AccessMetadataValue"
+                  }
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/AccessMetadataValue"
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "The details of the input related failure",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/LusidValidationProblemDetails"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/LusidValidationProblemDetails"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/LusidValidationProblemDetails"
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "Error response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/LusidProblemDetails"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "oauth2": []
+          }
+        ],
+        "x-fbn-apistatus": "EarlyAccess"
+      },
+      "put": {
+        "tags": [
+          "Portfolio Groups"
+        ],
+        "summary": "[EARLY ACCESS] UpsertPortfolioGroupAccessMetadata: Upsert a Portfolio Group Access Metadata entry associated with a specific metadataKey. This creates or updates the data in LUSID.",
+        "description": "Update or insert one Portfolio Group Access Metadata Entry in a single scope. An item will be updated if it already exists\r\nand inserted if it does not.\r\n            \r\nThe response will return the successfully updated or inserted Portfolio Group Access Metadata rule or failure message if unsuccessful.\r\n            \r\nIt is important to always check to verify success (or failure).\r\n            \r\nMultiple rules for a metadataKey can exist with different effective at dates, when resources are accessed the rule that is active for the current time will be fetched.",
+        "operationId": "UpsertPortfolioGroupAccessMetadata",
+        "parameters": [
+          {
+            "name": "scope",
+            "in": "path",
+            "description": "The scope of the Portfolio Group",
+            "required": true,
+            "schema": {
+              "maxLength": 64,
+              "minLength": 1,
+              "pattern": "^[a-zA-Z0-9\\-_]+$",
+              "type": "string",
+              "description": "The scope of the Portfolio Group"
+            }
+          },
+          {
+            "name": "code",
+            "in": "path",
+            "description": "The Portfolio Group code",
+            "required": true,
+            "schema": {
+              "maxLength": 64,
+              "minLength": 1,
+              "pattern": "^[a-zA-Z0-9\\-_]+$",
+              "type": "string",
+              "description": "The Portfolio Group code"
+            }
+          },
+          {
+            "name": "metadataKey",
+            "in": "path",
+            "description": "Key of the access metadata entry to upsert",
+            "required": true,
+            "schema": {
+              "maxLength": 256,
+              "minLength": 1,
+              "type": "string",
+              "description": "Key of the access metadata entry to upsert"
+            }
+          },
+          {
+            "name": "effectiveAt",
+            "in": "query",
+            "description": "The date this rule will be effective from",
+            "schema": {
+              "type": "string",
+              "description": "The date this rule will be effective from",
+              "format": "dateorcutlabel",
+              "nullable": true
+            }
+          }
+        ],
+        "requestBody": {
+          "description": "The Portfolio Group Access Metadata rule to upsert",
+          "content": {
+            "application/json-patch+json": {
+              "schema": {
+                "$ref": "#/components/schemas/UpsertPortfolioGroupAccessMetadataRequest"
+              },
+              "example": {
+                "metadata": [
+                  {
+                    "value": "SilverLicence",
+                    "provider": "TestDataProvider"
+                  }
+                ]
+              }
+            },
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UpsertPortfolioGroupAccessMetadataRequest"
+              },
+              "example": {
+                "metadata": [
+                  {
+                    "value": "SilverLicence",
+                    "provider": "TestDataProvider"
+                  }
+                ]
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UpsertPortfolioGroupAccessMetadataRequest"
+              },
+              "example": {
+                "metadata": [
+                  {
+                    "value": "SilverLicence",
+                    "provider": "TestDataProvider"
+                  }
+                ]
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/UpsertPortfolioGroupAccessMetadataRequest"
+              },
+              "example": {
+                "metadata": [
+                  {
+                    "value": "SilverLicence",
+                    "provider": "TestDataProvider"
+                  }
+                ]
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "The successfully updated or inserted item or any failure.",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResourceListOfAccessMetadataValueOf"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResourceListOfAccessMetadataValueOf"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResourceListOfAccessMetadataValueOf"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "The details of the input related failure",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/LusidValidationProblemDetails"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/LusidValidationProblemDetails"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/LusidValidationProblemDetails"
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "Error response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/LusidProblemDetails"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "oauth2": []
+          }
+        ],
+        "x-fbn-apistatus": "EarlyAccess"
+      },
+      "delete": {
+        "tags": [
+          "Portfolio Groups"
+        ],
+        "summary": "[EARLY ACCESS] DeleteKeyFromPortfolioGroupAccessMetadata: Delete a Portfolio Group Access Metadata entry",
+        "description": "Deletes the Portfolio Group Access Metadata entry that exactly matches the provided identifier parts.\r\n\r\nIt is important to always check to verify success (or failure).",
+        "operationId": "DeleteKeyFromPortfolioGroupAccessMetadata",
+        "parameters": [
+          {
+            "name": "scope",
+            "in": "path",
+            "description": "The scope of the Portfolio Group",
+            "required": true,
+            "schema": {
+              "maxLength": 64,
+              "minLength": 1,
+              "pattern": "^[a-zA-Z0-9\\-_]+$",
+              "type": "string",
+              "description": "The scope of the Portfolio Group"
+            }
+          },
+          {
+            "name": "code",
+            "in": "path",
+            "description": "The Portfolio Group code",
+            "required": true,
+            "schema": {
+              "maxLength": 64,
+              "minLength": 1,
+              "pattern": "^[a-zA-Z0-9\\-_]+$",
+              "type": "string",
+              "description": "The Portfolio Group code"
+            }
+          },
+          {
+            "name": "metadataKey",
+            "in": "path",
+            "description": "Key of the Access Metadata entry to delete",
+            "required": true,
+            "schema": {
+              "maxLength": 256,
+              "minLength": 1,
+              "type": "string",
+              "description": "Key of the Access Metadata entry to delete"
+            }
+          },
+          {
+            "name": "effectiveAt",
+            "in": "query",
+            "description": "The effective date to delete at, if this is not supplied, it will delete all data found",
+            "schema": {
+              "type": "string",
+              "description": "The effective date to delete at, if this is not supplied, it will delete all data found",
+              "format": "dateorcutlabel",
+              "nullable": true
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The has been deleted",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/DeletedEntityResponse"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/DeletedEntityResponse"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/DeletedEntityResponse"
                 }
               }
             }
@@ -11626,6 +13414,574 @@
               "text/json": {
                 "schema": {
                   "$ref": "#/components/schemas/ResourceListOfProcessedCommand"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "The details of the input related failure",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/LusidValidationProblemDetails"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/LusidValidationProblemDetails"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/LusidValidationProblemDetails"
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "Error response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/LusidProblemDetails"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "oauth2": []
+          }
+        ],
+        "x-fbn-apistatus": "EarlyAccess"
+      }
+    },
+    "/api/portfolios/{scope}/{code}/metadata": {
+      "get": {
+        "tags": [
+          "Portfolios"
+        ],
+        "summary": "[EARLY ACCESS] GetPortfolioMetadata: Get access metadata rules for a portfolio",
+        "description": "Pass the scope and portfolio code parameters to retrieve the AccessMetadata associated with a portfolio",
+        "operationId": "GetPortfolioMetadata",
+        "parameters": [
+          {
+            "name": "scope",
+            "in": "path",
+            "description": "The scope of the Portfolio Access Metadata Rule to retrieve.",
+            "required": true,
+            "schema": {
+              "maxLength": 64,
+              "minLength": 1,
+              "pattern": "^[a-zA-Z0-9\\-_]+$",
+              "type": "string",
+              "description": "The scope of the Portfolio Access Metadata Rule to retrieve."
+            }
+          },
+          {
+            "name": "code",
+            "in": "path",
+            "description": "Portfolio code",
+            "required": true,
+            "schema": {
+              "maxLength": 64,
+              "minLength": 1,
+              "pattern": "^[a-zA-Z0-9\\-_]+$",
+              "type": "string",
+              "description": "Portfolio code"
+            }
+          },
+          {
+            "name": "effectiveAt",
+            "in": "query",
+            "description": "The effectiveAt datetime at which to retrieve the access metadata rule.",
+            "schema": {
+              "type": "string",
+              "description": "The effectiveAt datetime at which to retrieve the access metadata rule.",
+              "nullable": true
+            }
+          },
+          {
+            "name": "asAt",
+            "in": "query",
+            "description": "The asAt datetime at which to retrieve the portfolio access metadata.",
+            "schema": {
+              "type": "string",
+              "description": "The asAt datetime at which to retrieve the portfolio access metadata.",
+              "format": "date-time",
+              "nullable": true
+            },
+            "x-nullable": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The filtered list of results",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "type": "object",
+                  "additionalProperties": {
+                    "type": "array",
+                    "items": {
+                      "$ref": "#/components/schemas/AccessMetadataValue"
+                    }
+                  }
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "additionalProperties": {
+                    "type": "array",
+                    "items": {
+                      "$ref": "#/components/schemas/AccessMetadataValue"
+                    }
+                  }
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "type": "object",
+                  "additionalProperties": {
+                    "type": "array",
+                    "items": {
+                      "$ref": "#/components/schemas/AccessMetadataValue"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "The details of the input related failure",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/LusidValidationProblemDetails"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/LusidValidationProblemDetails"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/LusidValidationProblemDetails"
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "Error response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/LusidProblemDetails"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "oauth2": []
+          }
+        ],
+        "x-fbn-apistatus": "EarlyAccess"
+      }
+    },
+    "/api/portfolios/{scope}/{code}/metadata/{metadataKey}": {
+      "get": {
+        "tags": [
+          "Portfolios"
+        ],
+        "summary": "[EARLY ACCESS] GetPortfoliosAccessMetadataByKey: Get an entry identified by a metadataKey in the access metadata object",
+        "description": "Get a specific portfolio access metadata rule by specifying the corresponding identifier parts\r\n            \r\nNo matching will be performed through this endpoint. To retrieve a rule, it is necessary to specify, exactly, the identifier of the rule",
+        "operationId": "GetPortfoliosAccessMetadataByKey",
+        "parameters": [
+          {
+            "name": "scope",
+            "in": "path",
+            "description": "The scope of the Portfolio Access Metadata Rule to retrieve.",
+            "required": true,
+            "schema": {
+              "maxLength": 64,
+              "minLength": 1,
+              "pattern": "^[a-zA-Z0-9\\-_]+$",
+              "type": "string",
+              "description": "The scope of the Portfolio Access Metadata Rule to retrieve."
+            }
+          },
+          {
+            "name": "code",
+            "in": "path",
+            "description": "The code of the portfolio",
+            "required": true,
+            "schema": {
+              "maxLength": 64,
+              "minLength": 1,
+              "pattern": "^[a-zA-Z0-9\\-_]+$",
+              "type": "string",
+              "description": "The code of the portfolio"
+            }
+          },
+          {
+            "name": "metadataKey",
+            "in": "path",
+            "description": "Key of the metadata to retrieve",
+            "required": true,
+            "schema": {
+              "maxLength": 256,
+              "minLength": 1,
+              "type": "string",
+              "description": "Key of the metadata to retrieve"
+            }
+          },
+          {
+            "name": "effectiveAt",
+            "in": "query",
+            "description": "The effective date of the rule",
+            "schema": {
+              "type": "string",
+              "description": "The effective date of the rule",
+              "format": "dateorcutlabel",
+              "nullable": true
+            }
+          },
+          {
+            "name": "asAt",
+            "in": "query",
+            "description": "The asAt datetime at which to retrieve the portfolio access metadata.",
+            "schema": {
+              "type": "string",
+              "description": "The asAt datetime at which to retrieve the portfolio access metadata.",
+              "format": "date-time",
+              "nullable": true
+            },
+            "x-nullable": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The successfully retrieved Portfolio Access Metadata Rule or any failure",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/AccessMetadataValue"
+                  }
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/AccessMetadataValue"
+                  }
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/AccessMetadataValue"
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "The details of the input related failure",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/LusidValidationProblemDetails"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/LusidValidationProblemDetails"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/LusidValidationProblemDetails"
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "Error response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/LusidProblemDetails"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "oauth2": []
+          }
+        ],
+        "x-fbn-apistatus": "EarlyAccess"
+      },
+      "put": {
+        "tags": [
+          "Portfolios"
+        ],
+        "summary": "[EARLY ACCESS] UpsertPortfolioAccessMetadata: Upsert a Portfolio Access Metadata Rule associated with specific metadataKey. This creates or updates the data in LUSID.",
+        "description": "Update or insert one Portfolio Access Metadata Rule in a single scope. An item will be updated if it already exists\r\nand inserted if it does not.\r\n\r\nThe response will return the successfully updated or inserted Portfolio Access Metadata Rule or failure message if unsuccessful\r\n\r\nIt is important to always check to verify success (or failure).\r\n            \r\nMultiple rules for a metadataKey can exists with different effective at dates, when resources are accessed the rule that is active for the current time will be fetched",
+        "operationId": "UpsertPortfolioAccessMetadata",
+        "parameters": [
+          {
+            "name": "scope",
+            "in": "path",
+            "description": "The scope to use when updating or inserting the Portfolio Access Metadata Rule.",
+            "required": true,
+            "schema": {
+              "maxLength": 64,
+              "minLength": 1,
+              "pattern": "^[a-zA-Z0-9\\-_]+$",
+              "type": "string",
+              "description": "The scope to use when updating or inserting the Portfolio Access Metadata Rule."
+            }
+          },
+          {
+            "name": "code",
+            "in": "path",
+            "description": "Portfolio code",
+            "required": true,
+            "schema": {
+              "maxLength": 64,
+              "minLength": 1,
+              "pattern": "^[a-zA-Z0-9\\-_]+$",
+              "type": "string",
+              "description": "Portfolio code"
+            }
+          },
+          {
+            "name": "metadataKey",
+            "in": "path",
+            "description": "Key of the access metadata to upsert",
+            "required": true,
+            "schema": {
+              "maxLength": 256,
+              "minLength": 1,
+              "type": "string",
+              "description": "Key of the access metadata to upsert"
+            }
+          },
+          {
+            "name": "effectiveAt",
+            "in": "query",
+            "description": "The date this rule will effective from",
+            "schema": {
+              "type": "string",
+              "description": "The date this rule will effective from",
+              "format": "dateorcutlabel",
+              "nullable": true
+            }
+          }
+        ],
+        "requestBody": {
+          "description": "The Portfolio Access Metadata Rule to update or insert",
+          "content": {
+            "application/json-patch+json": {
+              "schema": {
+                "$ref": "#/components/schemas/UpsertPortfolioAccessMetadataRequest"
+              },
+              "example": {
+                "metadata": [
+                  {
+                    "value": "SilverLicence",
+                    "provider": "TestDataProvider"
+                  }
+                ]
+              }
+            },
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UpsertPortfolioAccessMetadataRequest"
+              },
+              "example": {
+                "metadata": [
+                  {
+                    "value": "SilverLicence",
+                    "provider": "TestDataProvider"
+                  }
+                ]
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UpsertPortfolioAccessMetadataRequest"
+              },
+              "example": {
+                "metadata": [
+                  {
+                    "value": "SilverLicence",
+                    "provider": "TestDataProvider"
+                  }
+                ]
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/UpsertPortfolioAccessMetadataRequest"
+              },
+              "example": {
+                "metadata": [
+                  {
+                    "value": "SilverLicence",
+                    "provider": "TestDataProvider"
+                  }
+                ]
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "The successfully updated or inserted item or any failure",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResourceListOfAccessMetadataValueOf"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResourceListOfAccessMetadataValueOf"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResourceListOfAccessMetadataValueOf"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "The details of the input related failure",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/LusidValidationProblemDetails"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/LusidValidationProblemDetails"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/LusidValidationProblemDetails"
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "Error response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/LusidProblemDetails"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "oauth2": []
+          }
+        ],
+        "x-fbn-apistatus": "EarlyAccess"
+      },
+      "delete": {
+        "tags": [
+          "Portfolios"
+        ],
+        "summary": "[EARLY ACCESS] DeleteKeyFromPortfolioAccessMetadata: Delete a Portfolio Access Metadata Rule",
+        "description": "Delete the Portfolio Access Metadata Rule that exactly matches the provided identifier parts",
+        "operationId": "DeleteKeyFromPortfolioAccessMetadata",
+        "parameters": [
+          {
+            "name": "scope",
+            "in": "path",
+            "description": "The scope of the Quote Access Metadata Rule to retrieve.",
+            "required": true,
+            "schema": {
+              "maxLength": 64,
+              "minLength": 1,
+              "pattern": "^[a-zA-Z0-9\\-_]+$",
+              "type": "string",
+              "description": "The scope of the Quote Access Metadata Rule to retrieve."
+            }
+          },
+          {
+            "name": "code",
+            "in": "path",
+            "description": "Portfolio code",
+            "required": true,
+            "schema": {
+              "maxLength": 64,
+              "minLength": 1,
+              "pattern": "^[a-zA-Z0-9\\-_]+$",
+              "type": "string",
+              "description": "Portfolio code"
+            }
+          },
+          {
+            "name": "metadataKey",
+            "in": "path",
+            "description": "The metadataKey identifying the access metadata entry to delete",
+            "required": true,
+            "schema": {
+              "maxLength": 256,
+              "minLength": 1,
+              "type": "string",
+              "description": "The metadataKey identifying the access metadata entry to delete"
+            }
+          },
+          {
+            "name": "effectiveAt",
+            "in": "query",
+            "description": "The effective date to delete at, if this is not supplied, it will delete all data found",
+            "schema": {
+              "type": "string",
+              "description": "The effective date to delete at, if this is not supplied, it will delete all data found",
+              "format": "dateorcutlabel",
+              "nullable": true
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The rule that has been deleted",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/DeletedEntityResponse"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/DeletedEntityResponse"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/DeletedEntityResponse"
                 }
               }
             }
@@ -24074,6 +26430,27 @@
         "additionalProperties": false,
         "description": "A resource to which access can be controlled"
       },
+      "AccessMetadataValue": {
+        "required": [
+          "value"
+        ],
+        "type": "object",
+        "properties": {
+          "value": {
+            "maxLength": 2048,
+            "minLength": 0,
+            "type": "string"
+          },
+          "provider": {
+            "maxLength": 50,
+            "minLength": 0,
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false,
+        "description": "An access control value. Provider should only be used if you are a service provide licensing data. In that case\r\nthe provider value must match your domain."
+      },
       "ActionId": {
         "required": [
           "activity",
@@ -28786,6 +31163,50 @@
         "additionalProperties": false,
         "description": "A collection of resources that can be returned from requests."
       },
+      "ResourceListOfAccessMetadataValueOf": {
+        "required": [
+          "values"
+        ],
+        "type": "object",
+        "properties": {
+          "values": {
+            "type": "array",
+            "items": {
+              "type": "array",
+              "items": {
+                "$ref": "#/components/schemas/AccessMetadataValue"
+              }
+            },
+            "description": "The resources to list."
+          },
+          "href": {
+            "type": "string",
+            "description": "The URI of the resource list.",
+            "format": "uri",
+            "nullable": true
+          },
+          "links": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Link"
+            },
+            "description": "Collection of links.",
+            "nullable": true
+          },
+          "nextPage": {
+            "type": "string",
+            "description": "The next page of results.",
+            "nullable": true
+          },
+          "previousPage": {
+            "type": "string",
+            "description": "The previous page of results.",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false,
+        "description": "A collection of resources that can be returned from requests."
+      },
       "ResourceListOfAggregatedReturn": {
         "required": [
           "values"
@@ -30513,6 +32934,20 @@
         },
         "additionalProperties": false
       },
+      "UpsertLegalEntityAccessMetadataRequest": {
+        "type": "object",
+        "properties": {
+          "metadata": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/AccessMetadataValue"
+            },
+            "description": "The access control metadata to assign to a Legal Entity that matches the identifier",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
       "UpsertLegalEntityRequest": {
         "required": [
           "displayName",
@@ -30556,6 +32991,52 @@
         },
         "additionalProperties": false,
         "description": "Request to create or update an legal entity"
+      },
+      "UpsertPersonAccessMetadataRequest": {
+        "type": "object",
+        "properties": {
+          "metadata": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/AccessMetadataValue"
+            },
+            "description": "The access control metadata to assign to a Person that matches the identifier",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "UpsertPortfolioAccessMetadataRequest": {
+        "required": [
+          "metadata"
+        ],
+        "type": "object",
+        "properties": {
+          "metadata": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/AccessMetadataValue"
+            },
+            "description": "The access control metadata to assign to portfolios that match the identifier"
+          }
+        },
+        "additionalProperties": false
+      },
+      "UpsertPortfolioGroupAccessMetadataRequest": {
+        "required": [
+          "metadata"
+        ],
+        "type": "object",
+        "properties": {
+          "metadata": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/AccessMetadataValue"
+            },
+            "description": "The access control metadata to assign to portfolio groups that match the identifier"
+          }
+        },
+        "additionalProperties": false
       },
       "UpsertPortfolioTransactionsResponse": {
         "required": [
