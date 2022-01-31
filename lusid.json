@@ -9,7 +9,7 @@
       "url": "https://www.finbourne.com",
       "email": "info@finbourne.com"
     },
-    "version": "0.11.3919",
+    "version": "0.11.3920",
     "x-logo": {
       "url": "https://www.lusid.com/app/assets/logo_white.png",
       "backgroundColor": "#415464"
@@ -17,7 +17,7 @@
   },
   "servers": [
     {
-      "url": "https://fbn-prd.lusid.com/api"
+      "url": "http://local-unit-test-server.lusid.com:41326"
     }
   ],
   "paths": {
@@ -26687,6 +26687,11 @@
             "description": "Client-defined properties associated with this allocation.",
             "nullable": true
           },
+          "instrumentScope": {
+            "type": "string",
+            "description": "The scope in which the instrument lies",
+            "nullable": true
+          },
           "lusidInstrumentId": {
             "type": "string",
             "description": "The LUSID instrument id for the instrument allocated."
@@ -29032,6 +29037,11 @@
           },
           "id": {
             "$ref": "#/components/schemas/ResourceId"
+          },
+          "instrumentScope": {
+            "type": "string",
+            "description": "The scope in which the instrument lies",
+            "nullable": true
           },
           "lusidInstrumentId": {
             "type": "string",
@@ -33515,7 +33525,7 @@
         "description": "OAuth2 Implicit Grant",
         "flows": {
           "implicit": {
-            "authorizationUrl": "https://lusid.okta.com/oauth2/default/v1/authorize",
+            "authorizationUrl": "https://dummyurl.lusid.com/",
             "scopes": {}
           }
         }

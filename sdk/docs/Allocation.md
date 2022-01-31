@@ -12,6 +12,7 @@ Name | Type | Description | Notes
 **instrument_identifiers** | **dict(str, str)** | The instrument allocated. | 
 **version** | [**Version**](Version.md) |  | [optional] 
 **properties** | [**dict(str, PerpetualProperty)**](PerpetualProperty.md) | Client-defined properties associated with this allocation. | [optional] 
+**instrument_scope** | **str** | The scope in which the instrument lies | [optional] 
 **lusid_instrument_id** | **str** | The LUSID instrument id for the instrument allocated. | 
 **placement_ids** | [**list[ResourceId]**](ResourceId.md) | A placement - also known as an order placed in the market - associated with this allocation. | [optional] 
 **state** | **str** | The state of this allocation. | [optional] 
