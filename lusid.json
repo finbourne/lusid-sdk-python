@@ -9,7 +9,7 @@
       "url": "https://www.finbourne.com",
       "email": "info@finbourne.com"
     },
-    "version": "0.11.3938",
+    "version": "0.11.3939",
     "x-logo": {
       "url": "https://www.lusid.com/app/assets/logo_white.png",
       "backgroundColor": "#415464"
@@ -17,7 +17,7 @@
   },
   "servers": [
     {
-      "url": "https://fbn-prd.lusid.com/api"
+      "url": "http://local-unit-test-server.lusid.com:39643"
     }
   ],
   "paths": {
@@ -14537,6 +14537,260 @@
         "x-fbn-apistatus": "Stable"
       }
     },
+    "/api/portfolios/{scope}/{code}/returns/$aggregated": {
+      "post": {
+        "tags": [
+          "Portfolios"
+        ],
+        "summary": "[EARLY ACCESS] GetPortfolioAggregatedReturns: Aggregated Returns",
+        "description": "Aggregate Returns which are on the specified portfolio.",
+        "operationId": "GetPortfolioAggregatedReturns",
+        "parameters": [
+          {
+            "name": "scope",
+            "in": "path",
+            "description": "The scope of the Portfolio.",
+            "required": true,
+            "schema": {
+              "maxLength": 64,
+              "minLength": 1,
+              "pattern": "^[a-zA-Z0-9\\-_]+$",
+              "type": "string",
+              "description": "The scope of the Portfolio.",
+              "nullable": true
+            }
+          },
+          {
+            "name": "code",
+            "in": "path",
+            "description": "The code of the  Portfolio.",
+            "required": true,
+            "schema": {
+              "maxLength": 64,
+              "minLength": 1,
+              "pattern": "^[a-zA-Z0-9\\-_]+$",
+              "type": "string",
+              "description": "The code of the  Portfolio.",
+              "nullable": true
+            }
+          },
+          {
+            "name": "fromEffectiveAt",
+            "in": "query",
+            "description": "The start date from which to calculate the Returns.",
+            "schema": {
+              "type": "string",
+              "description": "The start date from which to calculate the Returns.",
+              "format": "dateorcutlabel",
+              "nullable": true
+            }
+          },
+          {
+            "name": "toEffectiveAt",
+            "in": "query",
+            "description": "The end date for which to calculate the Returns.",
+            "schema": {
+              "type": "string",
+              "description": "The end date for which to calculate the Returns.",
+              "format": "dateorcutlabel",
+              "nullable": true
+            }
+          },
+          {
+            "name": "asAt",
+            "in": "query",
+            "description": "The asAt datetime at which to retrieve the Returns. Defaults to the latest.",
+            "schema": {
+              "type": "string",
+              "description": "The asAt datetime at which to retrieve the Returns. Defaults to the latest.",
+              "format": "date-time",
+              "nullable": true
+            },
+            "x-nullable": true
+          }
+        ],
+        "requestBody": {
+          "description": "The request used in the AggregatedReturns.",
+          "content": {
+            "application/json-patch+json": {
+              "schema": {
+                "$ref": "#/components/schemas/AggregatedReturnsRequest"
+              },
+              "example": {
+                "metrics": [
+                  {
+                    "type": "Return",
+                    "window": "1Y",
+                    "allowPartial": false,
+                    "annualised": false,
+                    "withFee": true,
+                    "alias": "1M"
+                  }
+                ],
+                "returnId": {
+                  "scope": "ReturnsScope",
+                  "code": "ReturnCode"
+                },
+                "recipeId": {
+                  "scope": "TestScope",
+                  "code": "default"
+                },
+                "compositeMethod": "Asset",
+                "period": "Daily",
+                "outputFrequency": "Daily",
+                "alternativeInceptionDate": "2020-01-01"
+              }
+            },
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/AggregatedReturnsRequest"
+              },
+              "example": {
+                "metrics": [
+                  {
+                    "type": "Return",
+                    "window": "1Y",
+                    "allowPartial": false,
+                    "annualised": false,
+                    "withFee": true,
+                    "alias": "1M"
+                  }
+                ],
+                "returnId": {
+                  "scope": "ReturnsScope",
+                  "code": "ReturnCode"
+                },
+                "recipeId": {
+                  "scope": "TestScope",
+                  "code": "default"
+                },
+                "compositeMethod": "Asset",
+                "period": "Daily",
+                "outputFrequency": "Daily",
+                "alternativeInceptionDate": "2020-01-01"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/AggregatedReturnsRequest"
+              },
+              "example": {
+                "metrics": [
+                  {
+                    "type": "Return",
+                    "window": "1Y",
+                    "allowPartial": false,
+                    "annualised": false,
+                    "withFee": true,
+                    "alias": "1M"
+                  }
+                ],
+                "returnId": {
+                  "scope": "ReturnsScope",
+                  "code": "ReturnCode"
+                },
+                "recipeId": {
+                  "scope": "TestScope",
+                  "code": "default"
+                },
+                "compositeMethod": "Asset",
+                "period": "Daily",
+                "outputFrequency": "Daily",
+                "alternativeInceptionDate": "2020-01-01"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/AggregatedReturnsRequest"
+              },
+              "example": {
+                "metrics": [
+                  {
+                    "type": "Return",
+                    "window": "1Y",
+                    "allowPartial": false,
+                    "annualised": false,
+                    "withFee": true,
+                    "alias": "1M"
+                  }
+                ],
+                "returnId": {
+                  "scope": "ReturnsScope",
+                  "code": "ReturnCode"
+                },
+                "recipeId": {
+                  "scope": "TestScope",
+                  "code": "default"
+                },
+                "compositeMethod": "Asset",
+                "period": "Daily",
+                "outputFrequency": "Daily",
+                "alternativeInceptionDate": "2020-01-01"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "The aggregated returns.",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResourceListOfAggregatedReturn"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResourceListOfAggregatedReturn"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResourceListOfAggregatedReturn"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "The details of the input related failure",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/LusidValidationProblemDetails"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/LusidValidationProblemDetails"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/LusidValidationProblemDetails"
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "Error response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/LusidProblemDetails"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "oauth2": []
+          }
+        ],
+        "x-fbn-apistatus": "EarlyAccess"
+      }
+    },
     "/api/portfolios/{scope}/{code}/returns/{returnScope}/{returnCode}": {
       "post": {
         "tags": [
@@ -14894,272 +15148,6 @@
               "text/json": {
                 "schema": {
                   "$ref": "#/components/schemas/ResourceListOfPerformanceReturn"
-                }
-              }
-            }
-          },
-          "400": {
-            "description": "The details of the input related failure",
-            "content": {
-              "text/plain": {
-                "schema": {
-                  "$ref": "#/components/schemas/LusidValidationProblemDetails"
-                }
-              },
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/LusidValidationProblemDetails"
-                }
-              },
-              "text/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/LusidValidationProblemDetails"
-                }
-              }
-            }
-          },
-          "default": {
-            "description": "Error response",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/LusidProblemDetails"
-                }
-              }
-            }
-          }
-        },
-        "security": [
-          {
-            "oauth2": []
-          }
-        ],
-        "x-fbn-apistatus": "EarlyAccess"
-      }
-    },
-    "/api/portfolios/{scope}/{code}/returns/{returnScope}/{returnCode}/$aggregated": {
-      "post": {
-        "tags": [
-          "Portfolios"
-        ],
-        "summary": "[EARLY ACCESS] GetPortfolioAggregatedReturns: Aggregated Returns",
-        "description": "Aggregate Returns which are on the specified portfolio.",
-        "operationId": "GetPortfolioAggregatedReturns",
-        "parameters": [
-          {
-            "name": "scope",
-            "in": "path",
-            "description": "The scope of the Portfolio.",
-            "required": true,
-            "schema": {
-              "maxLength": 64,
-              "minLength": 1,
-              "pattern": "^[a-zA-Z0-9\\-_]+$",
-              "type": "string",
-              "description": "The scope of the Portfolio.",
-              "nullable": true
-            }
-          },
-          {
-            "name": "code",
-            "in": "path",
-            "description": "The code of the  Portfolio.",
-            "required": true,
-            "schema": {
-              "maxLength": 64,
-              "minLength": 1,
-              "pattern": "^[a-zA-Z0-9\\-_]+$",
-              "type": "string",
-              "description": "The code of the  Portfolio.",
-              "nullable": true
-            }
-          },
-          {
-            "name": "returnScope",
-            "in": "path",
-            "description": "The scope of the Returns.",
-            "required": true,
-            "schema": {
-              "maxLength": 64,
-              "minLength": 1,
-              "pattern": "^[a-zA-Z0-9\\-_]+$",
-              "type": "string",
-              "description": "The scope of the Returns.",
-              "nullable": true
-            }
-          },
-          {
-            "name": "returnCode",
-            "in": "path",
-            "description": "The code of the Returns.",
-            "required": true,
-            "schema": {
-              "maxLength": 64,
-              "minLength": 1,
-              "pattern": "^[a-zA-Z0-9\\-_]+$",
-              "type": "string",
-              "description": "The code of the Returns.",
-              "nullable": true
-            }
-          },
-          {
-            "name": "fromEffectiveAt",
-            "in": "query",
-            "description": "The start date from which to calculate the Returns.",
-            "schema": {
-              "type": "string",
-              "description": "The start date from which to calculate the Returns.",
-              "format": "dateorcutlabel",
-              "nullable": true
-            }
-          },
-          {
-            "name": "toEffectiveAt",
-            "in": "query",
-            "description": "The end date for which to calculate the Returns.",
-            "schema": {
-              "type": "string",
-              "description": "The end date for which to calculate the Returns.",
-              "format": "dateorcutlabel",
-              "nullable": true
-            }
-          },
-          {
-            "name": "asAt",
-            "in": "query",
-            "description": "The asAt datetime at which to retrieve the Returns. Defaults to the latest.",
-            "schema": {
-              "type": "string",
-              "description": "The asAt datetime at which to retrieve the Returns. Defaults to the latest.",
-              "format": "date-time",
-              "nullable": true
-            },
-            "x-nullable": true
-          }
-        ],
-        "requestBody": {
-          "description": "The request used in the AggregatedReturns.",
-          "content": {
-            "application/json-patch+json": {
-              "schema": {
-                "$ref": "#/components/schemas/AggregatedReturnsRequest"
-              },
-              "example": {
-                "metrics": [
-                  {
-                    "type": "Return",
-                    "window": "1Y",
-                    "allowPartial": false,
-                    "annualised": false,
-                    "withFee": true,
-                    "alias": "1M"
-                  }
-                ],
-                "recipeId": {
-                  "scope": "TestScope",
-                  "code": "default"
-                },
-                "compositeMethod": "Asset",
-                "period": "Daily",
-                "outputFrequency": "Daily",
-                "alternativeInceptionDate": "2020-01-01"
-              }
-            },
-            "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/AggregatedReturnsRequest"
-              },
-              "example": {
-                "metrics": [
-                  {
-                    "type": "Return",
-                    "window": "1Y",
-                    "allowPartial": false,
-                    "annualised": false,
-                    "withFee": true,
-                    "alias": "1M"
-                  }
-                ],
-                "recipeId": {
-                  "scope": "TestScope",
-                  "code": "default"
-                },
-                "compositeMethod": "Asset",
-                "period": "Daily",
-                "outputFrequency": "Daily",
-                "alternativeInceptionDate": "2020-01-01"
-              }
-            },
-            "text/json": {
-              "schema": {
-                "$ref": "#/components/schemas/AggregatedReturnsRequest"
-              },
-              "example": {
-                "metrics": [
-                  {
-                    "type": "Return",
-                    "window": "1Y",
-                    "allowPartial": false,
-                    "annualised": false,
-                    "withFee": true,
-                    "alias": "1M"
-                  }
-                ],
-                "recipeId": {
-                  "scope": "TestScope",
-                  "code": "default"
-                },
-                "compositeMethod": "Asset",
-                "period": "Daily",
-                "outputFrequency": "Daily",
-                "alternativeInceptionDate": "2020-01-01"
-              }
-            },
-            "application/*+json": {
-              "schema": {
-                "$ref": "#/components/schemas/AggregatedReturnsRequest"
-              },
-              "example": {
-                "metrics": [
-                  {
-                    "type": "Return",
-                    "window": "1Y",
-                    "allowPartial": false,
-                    "annualised": false,
-                    "withFee": true,
-                    "alias": "1M"
-                  }
-                ],
-                "recipeId": {
-                  "scope": "TestScope",
-                  "code": "default"
-                },
-                "compositeMethod": "Asset",
-                "period": "Daily",
-                "outputFrequency": "Daily",
-                "alternativeInceptionDate": "2020-01-01"
-              }
-            }
-          },
-          "required": true
-        },
-        "responses": {
-          "200": {
-            "description": "The aggregated returns.",
-            "content": {
-              "text/plain": {
-                "schema": {
-                  "$ref": "#/components/schemas/ResourceListOfAggregatedReturn"
-                }
-              },
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ResourceListOfAggregatedReturn"
-                }
-              },
-              "text/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ResourceListOfAggregatedReturn"
                 }
               }
             }
@@ -26617,6 +26605,9 @@
             },
             "description": "A list of metrics to calculate in the AggregatedReturns."
           },
+          "returnId": {
+            "$ref": "#/components/schemas/ResourceId"
+          },
           "recipeId": {
             "$ref": "#/components/schemas/ResourceId"
           },
@@ -33524,7 +33515,7 @@
         "description": "OAuth2 Implicit Grant",
         "flows": {
           "implicit": {
-            "authorizationUrl": "https://lusid.okta.com/oauth2/default/v1/authorize",
+            "authorizationUrl": "https://dummyurl.lusid.com/",
             "scopes": {}
           }
         }
