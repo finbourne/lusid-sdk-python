@@ -33,7 +33,7 @@ class ReferencePortfolio(unittest.TestCase):
         cls.instrument_loader = InstrumentLoader(cls.instruments_api)
         cls.instrument_ids = cls.instrument_loader.load_instruments()
 
-    @lusid_feature("F39")
+    @lusid_feature("F6-1")
     def test_create_reference_portfolio(self):
 
         f39_reference_portfolio_code = "F39p_ReferencePortfolioCode"
@@ -58,7 +58,7 @@ class ReferencePortfolio(unittest.TestCase):
             scope=TestDataUtilities.tutorials_scope, code=f39_reference_portfolio_code
         )
 
-    @lusid_feature("F40")
+    @lusid_feature("F6-2")
     def test_upsert_reference_portfolio_constituents(self):
 
         constituent_weights = [10, 20, 30, 15, 25]
