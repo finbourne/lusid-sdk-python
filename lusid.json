@@ -9,7 +9,7 @@
       "url": "https://www.finbourne.com",
       "email": "info@finbourne.com"
     },
-    "version": "0.11.3939",
+    "version": "0.11.3940",
     "x-logo": {
       "url": "https://www.lusid.com/app/assets/logo_white.png",
       "backgroundColor": "#415464"
@@ -17,7 +17,7 @@
   },
   "servers": [
     {
-      "url": "http://local-unit-test-server.lusid.com:39643"
+      "url": "http://local-unit-test-server.lusid.com:45080"
     }
   ],
   "paths": {
@@ -11759,6 +11759,7 @@
                       "entryDateTime": "2018-08-07T10:30:12.0000000+00:00",
                       "realisedGainLoss": [
                         {
+                          "instrumentScope": "default",
                           "instrumentUid": "LUID_OI5JX1V7",
                           "units": 4500,
                           "purchaseTradeDate": "2018-08-02T00:00:00.0000000+00:00",
@@ -11790,6 +11791,7 @@
                           }
                         },
                         {
+                          "instrumentScope": "default",
                           "instrumentUid": "LUID_OI5JX1V7",
                           "units": 4500,
                           "purchaseTradeDate": "2018-08-03T00:00:00.0000000+00:00",
@@ -11821,6 +11823,7 @@
                           }
                         },
                         {
+                          "instrumentScope": "default",
                           "instrumentUid": "LUID_OI5JX1V7",
                           "units": 1000,
                           "purchaseTradeDate": "2018-08-06T00:00:00.0000000+00:00",
@@ -11978,6 +11981,7 @@
                       "entryDateTime": "2018-08-07T10:30:12.0000000+00:00",
                       "realisedGainLoss": [
                         {
+                          "instrumentScope": "default",
                           "instrumentUid": "LUID_OI5JX1V7",
                           "units": 4500,
                           "purchaseTradeDate": "2018-08-02T00:00:00.0000000+00:00",
@@ -12009,6 +12013,7 @@
                           }
                         },
                         {
+                          "instrumentScope": "default",
                           "instrumentUid": "LUID_OI5JX1V7",
                           "units": 4500,
                           "purchaseTradeDate": "2018-08-03T00:00:00.0000000+00:00",
@@ -12040,6 +12045,7 @@
                           }
                         },
                         {
+                          "instrumentScope": "default",
                           "instrumentUid": "LUID_OI5JX1V7",
                           "units": 1000,
                           "purchaseTradeDate": "2018-08-06T00:00:00.0000000+00:00",
@@ -12197,6 +12203,7 @@
                       "entryDateTime": "2018-08-07T10:30:12.0000000+00:00",
                       "realisedGainLoss": [
                         {
+                          "instrumentScope": "default",
                           "instrumentUid": "LUID_OI5JX1V7",
                           "units": 4500,
                           "purchaseTradeDate": "2018-08-02T00:00:00.0000000+00:00",
@@ -12228,6 +12235,7 @@
                           }
                         },
                         {
+                          "instrumentScope": "default",
                           "instrumentUid": "LUID_OI5JX1V7",
                           "units": 4500,
                           "purchaseTradeDate": "2018-08-03T00:00:00.0000000+00:00",
@@ -12259,6 +12267,7 @@
                           }
                         },
                         {
+                          "instrumentScope": "default",
                           "instrumentUid": "LUID_OI5JX1V7",
                           "units": 1000,
                           "purchaseTradeDate": "2018-08-06T00:00:00.0000000+00:00",
@@ -25403,6 +25412,7 @@
                       "entryDateTime": "2018-08-07T10:30:12.0000000+00:00",
                       "realisedGainLoss": [
                         {
+                          "instrumentScope": "default",
                           "instrumentUid": "LUID_OI5JX1V7",
                           "units": 4500,
                           "purchaseTradeDate": "2018-08-02T00:00:00.0000000+00:00",
@@ -25434,6 +25444,7 @@
                           }
                         },
                         {
+                          "instrumentScope": "default",
                           "instrumentUid": "LUID_OI5JX1V7",
                           "units": 4500,
                           "purchaseTradeDate": "2018-08-03T00:00:00.0000000+00:00",
@@ -25465,6 +25476,7 @@
                           }
                         },
                         {
+                          "instrumentScope": "default",
                           "instrumentUid": "LUID_OI5JX1V7",
                           "units": 1000,
                           "purchaseTradeDate": "2018-08-06T00:00:00.0000000+00:00",
@@ -25622,6 +25634,7 @@
                       "entryDateTime": "2018-08-07T10:30:12.0000000+00:00",
                       "realisedGainLoss": [
                         {
+                          "instrumentScope": "default",
                           "instrumentUid": "LUID_OI5JX1V7",
                           "units": 4500,
                           "purchaseTradeDate": "2018-08-02T00:00:00.0000000+00:00",
@@ -25653,6 +25666,7 @@
                           }
                         },
                         {
+                          "instrumentScope": "default",
                           "instrumentUid": "LUID_OI5JX1V7",
                           "units": 4500,
                           "purchaseTradeDate": "2018-08-03T00:00:00.0000000+00:00",
@@ -25684,6 +25698,7 @@
                           }
                         },
                         {
+                          "instrumentScope": "default",
                           "instrumentUid": "LUID_OI5JX1V7",
                           "units": 1000,
                           "purchaseTradeDate": "2018-08-06T00:00:00.0000000+00:00",
@@ -25841,6 +25856,7 @@
                       "entryDateTime": "2018-08-07T10:30:12.0000000+00:00",
                       "realisedGainLoss": [
                         {
+                          "instrumentScope": "default",
                           "instrumentUid": "LUID_OI5JX1V7",
                           "units": 4500,
                           "purchaseTradeDate": "2018-08-02T00:00:00.0000000+00:00",
@@ -25872,6 +25888,7 @@
                           }
                         },
                         {
+                          "instrumentScope": "default",
                           "instrumentUid": "LUID_OI5JX1V7",
                           "units": 4500,
                           "purchaseTradeDate": "2018-08-03T00:00:00.0000000+00:00",
@@ -25903,6 +25920,7 @@
                           }
                         },
                         {
+                          "instrumentScope": "default",
                           "instrumentUid": "LUID_OI5JX1V7",
                           "units": 1000,
                           "purchaseTradeDate": "2018-08-06T00:00:00.0000000+00:00",
@@ -30875,6 +30893,7 @@
         "required": [
           "costPortfolioCcy",
           "costTradeCcy",
+          "instrumentScope",
           "instrumentUid",
           "realisedTotal",
           "realisedTradeCcy",
@@ -30882,6 +30901,10 @@
         ],
         "type": "object",
         "properties": {
+          "instrumentScope": {
+            "type": "string",
+            "description": "The scope in which the instrument lies."
+          },
           "instrumentUid": {
             "type": "string",
             "description": "The unqiue Lusid Instrument Id (LUID) of the instrument that this gain or loss is associated with."
@@ -30937,6 +30960,7 @@
           "differenceCost",
           "differenceUnits",
           "instrumentProperties",
+          "instrumentScope",
           "instrumentUid",
           "leftCost",
           "leftUnits",
@@ -30946,6 +30970,10 @@
         ],
         "type": "object",
         "properties": {
+          "instrumentScope": {
+            "type": "string",
+            "description": "The scope in which the instrument lies."
+          },
           "instrumentUid": {
             "type": "string",
             "description": "Unique instrument identifier"

@@ -5,6 +5,7 @@ A reconciliation break
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
+**instrument_scope** | **str** | The scope in which the instrument lies. | 
 **instrument_uid** | **str** | Unique instrument identifier | 
 **sub_holding_keys** | [**dict(str, PerpetualProperty)**](PerpetualProperty.md) | Any other properties that comprise the Sub-Holding Key | 
 **left_units** | **float** | Units from the left hand side | 
