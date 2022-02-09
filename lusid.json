@@ -9,7 +9,7 @@
       "url": "https://www.finbourne.com",
       "email": "info@finbourne.com"
     },
-    "version": "0.11.3946",
+    "version": "0.11.3947",
     "x-logo": {
       "url": "https://www.lusid.com/app/assets/logo_white.png",
       "backgroundColor": "#415464"
@@ -17,7 +17,7 @@
   },
   "servers": [
     {
-      "url": "http://local-unit-test-server.lusid.com:36748"
+      "url": "http://local-unit-test-server.lusid.com:32224"
     }
   ],
   "paths": {
@@ -24198,6 +24198,21 @@
               "type": "string",
               "description": "The asAt datetime at which to retrieve the holdings adjustment. Defaults to the return the latest\r\n            version of the holdings adjustment if not specified.",
               "format": "date-time",
+              "nullable": true
+            },
+            "x-nullable": true
+          },
+          {
+            "name": "propertyKeys",
+            "in": "query",
+            "description": "A list of property keys from the ‘Instrument' domain to decorate onto holdings adjustments.\r\n            These must have the format {domain}/{scope}/{code}, for example 'Instrument/system/Name'.\r\n            Note that properties from the 'Holding’ domain are automatically returned.",
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "string",
+                "description": "The key that uniquely identifies the property. It has the format {domain}/{scope}/{code}."
+              },
+              "description": "A list of property keys from the ‘Instrument' domain to decorate onto holdings adjustments.\r\n            These must have the format {domain}/{scope}/{code}, for example 'Instrument/system/Name'.\r\n            Note that properties from the 'Holding’ domain are automatically returned.",
               "nullable": true
             },
             "x-nullable": true
