@@ -14,7 +14,7 @@ Name | Type | Description | Notes
 **parent_portfolio_id** | [**ResourceId**](ResourceId.md) |  | [optional] 
 **version** | [**Version**](Version.md) |  | [optional] 
 **is_derived** | **bool** | Whether or not this is a derived portfolio. | [optional] 
-**base_currency** | **str** | The base currency of the portfolio. This will be an empty string for reference portfolios. | [optional] 
+**base_currency** | **str** | The base currency of the portfolio. | [optional] 
 **properties** | [**dict(str, ModelProperty)**](ModelProperty.md) | The requested portfolio properties. These will be from the &#39;Portfolio&#39; domain. | [optional] 
 **instrument_scopes** | **list[str]** | The instrument scope resolution strategy of this portfolio. | [optional] 
 **links** | [**list[Link]**](Link.md) | Collection of links. | [optional] 

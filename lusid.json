@@ -9,7 +9,7 @@
       "url": "https://www.finbourne.com",
       "email": "info@finbourne.com"
     },
-    "version": "0.11.3953",
+    "version": "0.11.3954",
     "x-logo": {
       "url": "https://www.lusid.com/app/assets/logo_white.png",
       "backgroundColor": "#415464"
@@ -17,7 +17,7 @@
   },
   "servers": [
     {
-      "url": "http://local-unit-test-server.lusid.com:63663"
+      "url": "http://local-unit-test-server.lusid.com:64666"
     }
   ],
   "paths": {
@@ -29830,7 +29830,7 @@
           },
           "baseCurrency": {
             "type": "string",
-            "description": "The base currency of the portfolio. This will be an empty string for reference portfolios.",
+            "description": "The base currency of the portfolio.",
             "nullable": true
           },
           "properties": {
@@ -30329,7 +30329,7 @@
           },
           "baseCurrency": {
             "type": "string",
-            "description": "The base currency of the portfolio. This will be an empty string for reference portfolios.",
+            "description": "The base currency of the portfolio.",
             "nullable": true
           },
           "properties": {
