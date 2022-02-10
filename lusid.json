@@ -9,7 +9,7 @@
       "url": "https://www.finbourne.com",
       "email": "info@finbourne.com"
     },
-    "version": "0.11.3949",
+    "version": "0.11.3952",
     "x-logo": {
       "url": "https://www.lusid.com/app/assets/logo_white.png",
       "backgroundColor": "#415464"
@@ -17,7 +17,7 @@
   },
   "servers": [
     {
-      "url": "http://local-unit-test-server.lusid.com:33231"
+      "url": "http://local-unit-test-server.lusid.com:44800"
     }
   ],
   "paths": {
@@ -17203,7 +17203,8 @@
                 "code": "MyPortfolioCode",
                 "created": "2018-03-05T00:00:00.0000000+00:00",
                 "properties": {},
-                "instrumentScopes": []
+                "instrumentScopes": [],
+                "baseCurrency": "GBP"
               }
             },
             "application/json": {
@@ -17216,7 +17217,8 @@
                 "code": "MyPortfolioCode",
                 "created": "2018-03-05T00:00:00.0000000+00:00",
                 "properties": {},
-                "instrumentScopes": []
+                "instrumentScopes": [],
+                "baseCurrency": "GBP"
               }
             },
             "text/json": {
@@ -17229,7 +17231,8 @@
                 "code": "MyPortfolioCode",
                 "created": "2018-03-05T00:00:00.0000000+00:00",
                 "properties": {},
-                "instrumentScopes": []
+                "instrumentScopes": [],
+                "baseCurrency": "GBP"
               }
             },
             "application/*+json": {
@@ -17242,7 +17245,8 @@
                 "code": "MyPortfolioCode",
                 "created": "2018-03-05T00:00:00.0000000+00:00",
                 "properties": {},
-                "instrumentScopes": []
+                "instrumentScopes": [],
+                "baseCurrency": "GBP"
               }
             }
           },
@@ -27562,20 +27566,20 @@
         "properties": {
           "displayName": {
             "type": "string",
-            "description": ""
+            "description": "The name of the reference portfolio."
           },
           "description": {
             "type": "string",
-            "description": "",
+            "description": "A long form text description of the portfolio.",
             "nullable": true
           },
           "code": {
             "type": "string",
-            "description": ""
+            "description": "Unique identifier for the portfolio."
           },
           "created": {
             "type": "string",
-            "description": "",
+            "description": "The original creation date, defaults to today if not specified when creating a portfolio.",
             "format": "date-time",
             "nullable": true
           },
@@ -27584,7 +27588,7 @@
             "additionalProperties": {
               "$ref": "#/components/schemas/Property"
             },
-            "description": "Portfolio properties to add to the portfolio",
+            "description": "Portfolio properties to add to the portfolio.",
             "nullable": true
           },
           "instrumentScopes": {
@@ -27593,7 +27597,12 @@
             "items": {
               "type": "string"
             },
-            "description": "",
+            "description": "Instrument Scopes.",
+            "nullable": true
+          },
+          "baseCurrency": {
+            "type": "string",
+            "description": "The base currency of the transaction portfolio in ISO 4217 currency code format.",
             "nullable": true
           }
         },
