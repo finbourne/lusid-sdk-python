@@ -9,7 +9,7 @@
       "url": "https://www.finbourne.com",
       "email": "info@finbourne.com"
     },
-    "version": "0.11.3948",
+    "version": "0.11.3949",
     "x-logo": {
       "url": "https://www.lusid.com/app/assets/logo_white.png",
       "backgroundColor": "#415464"
@@ -17,7 +17,7 @@
   },
   "servers": [
     {
-      "url": "https://fbn-prd.lusid.com/api"
+      "url": "http://local-unit-test-server.lusid.com:33231"
     }
   ],
   "paths": {
@@ -27266,6 +27266,7 @@
         "required": [
           "code",
           "dataTypeId",
+          "derivationFormula",
           "displayName",
           "domain",
           "scope"
@@ -27327,8 +27328,7 @@
           },
           "derivationFormula": {
             "type": "string",
-            "description": "The rule that defines how data is composed for a derived property.",
-            "nullable": true
+            "description": "The rule that defines how data is composed for a derived property."
           }
         },
         "additionalProperties": false
@@ -33558,7 +33558,7 @@
         "description": "OAuth2 Implicit Grant",
         "flows": {
           "implicit": {
-            "authorizationUrl": "https://lusid.okta.com/oauth2/default/v1/authorize",
+            "authorizationUrl": "https://dummyurl.lusid.com/",
             "scopes": {}
           }
         }
