@@ -36,7 +36,7 @@ class Bitemporal(unittest.TestCase):
                                               transaction.transaction_price.price,
                                               transaction.total_consideration.amount))
 
-    @lusid_feature("F1")
+    @lusid_feature("F2-3")
     def test_apply_bitemporal_portfolio_change(self):
         portfolio_code = self.test_data_utilities.create_transaction_portfolio(TestDataUtilities.tutorials_scope)
 

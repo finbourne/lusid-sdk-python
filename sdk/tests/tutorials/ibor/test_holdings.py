@@ -27,7 +27,7 @@ class Holdings(unittest.TestCase):
         cls.instrument_loader = InstrumentLoader(cls.instruments_api)
         cls.instrument_ids = cls.instrument_loader.load_instruments()
 
-    @lusid_feature("F2")
+    @lusid_feature("F15-3")
     def test_get_holdings(self):
         # The currency of the cash and transactions
         currency = "GBP"
@@ -98,7 +98,7 @@ class Holdings(unittest.TestCase):
         self.assertEqual(holdings.values[4].units, 100.0, msg="Incorrect units")
         self.assertEqual(holdings.values[4].cost.amount, 10500.0, msg="Incorrect amount")
 
-    @lusid_feature("F3")
+    @lusid_feature("F15-1")
     def test_set_target_holdings(self):
 
         currency = "GBP"

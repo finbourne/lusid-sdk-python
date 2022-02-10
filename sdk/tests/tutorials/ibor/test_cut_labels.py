@@ -26,7 +26,7 @@ class CutLabels(unittest.TestCase):
 
         cls.cut_labels = lusid.CutLabelDefinitionsApi(api_client)
 
-    @lusid_feature("F32")
+    @lusid_feature("F16-3")
     def test_cut_labels(self):
         def get_guid():
             return str(uuid.uuid4())[:4]
