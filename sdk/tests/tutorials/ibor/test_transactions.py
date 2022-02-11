@@ -62,7 +62,7 @@ class Transactions(unittest.TestCase):
         self.assertEqual(len(transactions.values), 1)
         self.assertEqual(transactions.values[0].transaction_id, transaction.transaction_id)
 
-    @lusid_feature("F13-10")
+    @lusid_feature("F13-2")
     def test_load_cash_transaction(self):
         # create the portfolio
         portfolio_code = self.test_data_utilities.create_transaction_portfolio(TestDataUtilities.tutorials_scope)

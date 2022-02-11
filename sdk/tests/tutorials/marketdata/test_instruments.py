@@ -42,7 +42,7 @@ class Instruments(unittest.TestCase):
             # create the property
             cls.property_definitions_api.create_property_definition(definition=property_definition)
 
-    @lusid_feature("F41")
+    @lusid_feature("F5-4")
     def test_seed_instrument_master(self):
         response = self.instruments_api.upsert_instruments(requests={
 
