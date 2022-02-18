@@ -9,7 +9,7 @@
       "url": "https://www.finbourne.com",
       "email": "info@finbourne.com"
     },
-    "version": "0.11.3982",
+    "version": "0.11.3983",
     "x-logo": {
       "url": "https://www.lusid.com/app/assets/logo_white.png",
       "backgroundColor": "#415464"
@@ -17,7 +17,7 @@
   },
   "servers": [
     {
-      "url": "https://fbn-prd.lusid.com/api"
+      "url": "http://local-unit-test-server.lusid.com:64878"
     }
   ],
   "paths": {
@@ -7141,7 +7141,7 @@
         "tags": [
           "Application Metadata"
         ],
-        "summary": "[EARLY ACCESS] ListAccessControlledResources: Get resources available for access control",
+        "summary": "ListAccessControlledResources: Get resources available for access control",
         "description": "Get the comprehensive set of resources that are available for access control",
         "operationId": "ListAccessControlledResources",
         "parameters": [
@@ -7216,7 +7216,7 @@
             "oauth2": []
           }
         ],
-        "x-fbn-apistatus": "EarlyAccess"
+        "x-fbn-apistatus": "Stable"
       }
     },
     "/api/metadata/downloads/exceladdin": {
@@ -7224,7 +7224,7 @@
         "tags": [
           "Application Metadata"
         ],
-        "summary": "[EARLY ACCESS] GetExcelAddin: Download Excel Addin",
+        "summary": "GetExcelAddin: Download Excel Addin",
         "description": "Download the LUSID Excel Addin for Microsoft Excel. Not providing a specific value will return the latest version being returned",
         "operationId": "GetExcelAddin",
         "parameters": [
@@ -7299,7 +7299,7 @@
             "oauth2": []
           }
         ],
-        "x-fbn-apistatus": "EarlyAccess"
+        "x-fbn-apistatus": "Stable"
       }
     },
     "/api/metadata/versions": {
@@ -7307,7 +7307,7 @@
         "tags": [
           "Application Metadata"
         ],
-        "summary": "[EARLY ACCESS] GetLusidVersions: Get LUSID versions",
+        "summary": "GetLusidVersions: Get LUSID versions",
         "description": "Get the semantic versions associated with LUSID and its ecosystem",
         "operationId": "GetLusidVersions",
         "responses": {
@@ -7347,7 +7347,7 @@
             "oauth2": []
           }
         ],
-        "x-fbn-apistatus": "EarlyAccess"
+        "x-fbn-apistatus": "Stable"
       }
     },
     "/api/orders": {
@@ -34487,7 +34487,7 @@
         "description": "OAuth2 Implicit Grant",
         "flows": {
           "implicit": {
-            "authorizationUrl": "https://lusid.okta.com/oauth2/default/v1/authorize",
+            "authorizationUrl": "https://dummyurl.lusid.com/",
             "scopes": {}
           }
         }
