@@ -9,7 +9,7 @@
       "url": "https://www.finbourne.com",
       "email": "info@finbourne.com"
     },
-    "version": "0.11.3983",
+    "version": "0.11.3984",
     "x-logo": {
       "url": "https://www.lusid.com/app/assets/logo_white.png",
       "backgroundColor": "#415464"
@@ -17,7 +17,7 @@
   },
   "servers": [
     {
-      "url": "http://local-unit-test-server.lusid.com:64878"
+      "url": "http://local-unit-test-server.lusid.com:44463"
     }
   ],
   "paths": {
@@ -28289,7 +28289,7 @@
               "type": "string",
               "description": "The key that uniquely identifies the property. It has the format {domain}/{scope}/{code}."
             },
-            "description": "A set of unique transaction properties to group the derived transaction portfolio's holdings by, perhaps for strategy tagging. Each property must be from the 'Transaction' domain and identified by a key in the format {domain}/{scope}/{code}, for example 'Transaction/strategies/quantsignal'. Note that sub-holding keys cannot currently be added after the transaction portfolio has been created; see https://support.lusid.com/knowledgebase/article/KA-01879/en-us for more information.",
+            "description": "A set of unique transaction properties to group the derived transaction portfolio's holdings by, perhaps for strategy tagging. Each property must be from the 'Transaction' domain and identified by a key in the format {domain}/{scope}/{code}, for example 'Transaction/strategies/quantsignal'. See https://support.lusid.com/knowledgebase/article/KA-01879/en-us for more information.",
             "nullable": true
           },
           "instrumentScopes": {
@@ -28552,7 +28552,7 @@
               "type": "string",
               "description": "The key that uniquely identifies the property. It has the format {domain}/{scope}/{code}."
             },
-            "description": "A set of unique transaction properties to group the transaction portfolio's holdings by, perhaps for strategy tagging. Each property must be from the 'Transaction' domain and identified by a key in the format {domain}/{scope}/{code}, for example 'Transaction/strategies/quantsignal'. Note that sub-holding keys cannot currently be added after the transaction portfolio has been created; see https://support.lusid.com/knowledgebase/article/KA-01879/en-us for more information.",
+            "description": "A set of unique transaction properties to group the transaction portfolio's holdings by, perhaps for strategy tagging. Each property must be from the 'Transaction' domain and identified by a key in the format {domain}/{scope}/{code}, for example 'Transaction/strategies/quantsignal'. See https://support.lusid.com/knowledgebase/article/KA-01879/en-us for more information.",
             "nullable": true
           },
           "properties": {
@@ -30790,7 +30790,7 @@
             "additionalProperties": {
               "$ref": "#/components/schemas/PerpetualProperty"
             },
-            "description": "The sub-holding properties which identify the holding. Each property will be from the 'Transaction' domain. These are configured when a transaction portfolio is created.",
+            "description": "The sub-holding properties which identify the holding. Each property will be from the 'Transaction' domain. These are configured on a transaction portfolio.",
             "nullable": true
           },
           "type": {
@@ -31072,7 +31072,7 @@
             "additionalProperties": {
               "$ref": "#/components/schemas/PerpetualProperty"
             },
-            "description": "The sub-holding properties which identify the holding. Each property will be from the 'Transaction' domain. These are configured when a transaction portfolio is created.",
+            "description": "The sub-holding properties which identify the holding. Each property will be from the 'Transaction' domain. These are configured on a transaction portfolio.",
             "nullable": true
           },
           "properties": {

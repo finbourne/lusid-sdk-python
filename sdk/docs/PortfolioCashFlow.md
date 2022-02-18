@@ -8,7 +8,7 @@ Name | Type | Description | Notes
 **group_by_id** | **int** | The groupBy subHoldings and currency. | 
 **sequence_number** | **int** | Sequence number determining the order of the cash flow records. | 
 **effective_date** | **datetime** | Indicates the date when the cash-flow settles. | [optional] 
-**sub_holding_keys** | [**dict(str, PerpetualProperty)**](PerpetualProperty.md) | The sub-holding properties which identify the holding. Each property will be from the &#39;Transaction&#39; domain. These are configured when a transaction portfolio is created. | [optional] 
+**sub_holding_keys** | [**dict(str, PerpetualProperty)**](PerpetualProperty.md) | The sub-holding properties which identify the holding. Each property will be from the &#39;Transaction&#39; domain. These are configured on a transaction portfolio. | [optional] 
 **type** | **str** | Indicates the record type (Closed, Open, Activity). | 
 **movement_name** | **str** | Indicates the specific movement of the transaction that generated this cash flow. | 
 **cashflow** | [**CurrencyAndAmount**](CurrencyAndAmount.md) |  | 
