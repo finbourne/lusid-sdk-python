@@ -1,5 +1,6 @@
 # ResultDataSchema
 
+
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------

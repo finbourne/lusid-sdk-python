@@ -1,21 +1,19 @@
 # lusid.AggregationApi
 
-All URIs are relative to *http://localhost/api*
+All URIs are relative to *http://local-unit-test-server.lusid.com:48293*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
-[**get_aggregation_by_group**](AggregationApi.md#get_aggregation_by_group) | **POST** /api/portfoliogroups/{scope}/{code}/$aggregate | [EXPERIMENTAL] Aggregate data in a portfolio group
-[**get_aggregation_by_portfolio**](AggregationApi.md#get_aggregation_by_portfolio) | **POST** /api/portfolios/{scope}/{code}/$aggregate | [EXPERIMENTAL] Aggregate data in a portfolio
-[**get_aggregation_by_result_set**](AggregationApi.md#get_aggregation_by_result_set) | **POST** /api/results/{scope}/{resultsKey}/$aggregate | [EXPERIMENTAL] Aggregate using result data
-[**get_nested_aggregation_by_group**](AggregationApi.md#get_nested_aggregation_by_group) | **POST** /api/portfoliogroups/{scope}/{code}/$aggregatenested | [EXPERIMENTAL] Aggregate data in a portfolio group, as nested
+[**get_valuation**](AggregationApi.md#get_valuation) | **POST** /api/aggregation/$valuation | GetValuation: Perform valuation for a list of portfolios and/or portfolio groups
+[**get_valuation_of_weighted_instruments**](AggregationApi.md#get_valuation_of_weighted_instruments) | **POST** /api/aggregation/$valuationinlined | GetValuationOfWeightedInstruments: Perform valuation for an inlined portfolio
 
 
-# **get_aggregation_by_group**
-> ListAggregationResponse get_aggregation_by_group(scope, code, sort_by=sort_by, start=start, limit=limit, request=request)
+# **get_valuation**
+> ListAggregationResponse get_valuation(valuation_request=valuation_request)
 
-[EXPERIMENTAL] Aggregate data in a portfolio group
+GetValuation: Perform valuation for a list of portfolios and/or portfolio groups
 
-Aggregate data sourced from the specified portfolio group
+Perform valuation on specified list of portfolio and/or portfolio groups for a set of dates.
 
 ### Example
 
@@ -26,39 +24,42 @@ import time
 import lusid
 from lusid.rest import ApiException
 from pprint import pprint
-configuration = lusid.Configuration()
+# Defining the host is optional and defaults to http://local-unit-test-server.lusid.com:48293
+# See configuration.py for a list of all supported configuration parameters.
+configuration = lusid.Configuration(
+    host = "http://local-unit-test-server.lusid.com:48293"
+)
+
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
+
 # Configure OAuth2 access token for authorization: oauth2
+configuration = lusid.Configuration(
+    host = "http://local-unit-test-server.lusid.com:48293"
+)
 configuration.access_token = 'YOUR_ACCESS_TOKEN'
 
-# Defining host is optional and default to http://localhost/api
-configuration.host = "http://localhost/api"
-# Create an instance of the API class
-api_instance = lusid.AggregationApi(lusid.ApiClient(configuration))
-scope = 'scope_example' # str | The scope of the portfolio group
-code = 'code_example' # str | The code of the portfolio group
-sort_by = ['sort_by_example'] # list[str] | Optional. Order the results by these fields. Use use the '-' sign to denote descending order e.g. -MyFieldName (optional)
-start = 56 # int | Optional. When paginating, skip this number of results (optional)
-limit = 56 # int | Optional. When paginating, limit the number of returned results to this many. (optional)
-request = lusid.AggregationRequest() # AggregationRequest | The request specifying the parameters of the aggregation (optional)
+# Enter a context with an instance of the API client
+with lusid.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = lusid.AggregationApi(api_client)
+    valuation_request = {"recipeId":{"scope":"MyRecipeScope","code":"default"},"asAt":"2018-03-05T00:00:00.0000000+00:00","metrics":[{"key":"Instrument/default/Name","op":"Value"},{"key":"Holding/default/PV","op":"Value"}],"groupBy":["Instrument/default/Name"],"sort":[{"key":"Instrument/default/RIC","sortOrder":"Ascending"}],"reportCurrency":"USD","equipWithSubtotals":false,"portfolioEntityIds":[{"scope":"PortfolioScope1","code":"MyPortfolioAbC","portfolioEntityType":"SinglePortfolio"},{"scope":"PortfolioScope2","code":"MyPortfolioDeF","portfolioEntityType":"SinglePortfolio"}],"valuationSchedule":{"effectiveFrom":"2018-03-05T00:00:00.0000000+00:00","effectiveAt":"2018-03-05T00:00:00.0000000+00:00","tenor":"1D","rollConvention":"F","holidayCalendars":[],"valuationDateTimes":[]}} # ValuationRequest | The request specifying the set of portfolios and dates on which to calculate a set of valuation metrics (optional)
 
-try:
-    # [EXPERIMENTAL] Aggregate data in a portfolio group
-    api_response = api_instance.get_aggregation_by_group(scope, code, sort_by=sort_by, start=start, limit=limit, request=request)
-    pprint(api_response)
-except ApiException as e:
-    print("Exception when calling AggregationApi->get_aggregation_by_group: %s\n" % e)
+    try:
+        # GetValuation: Perform valuation for a list of portfolios and/or portfolio groups
+        api_response = api_instance.get_valuation(valuation_request=valuation_request)
+        pprint(api_response)
+    except ApiException as e:
+        print("Exception when calling AggregationApi->get_valuation: %s\n" % e)
 ```
 
 ### Parameters
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **scope** | **str**| The scope of the portfolio group | 
- **code** | **str**| The code of the portfolio group | 
- **sort_by** | [**list[str]**](str.md)| Optional. Order the results by these fields. Use use the &#39;-&#39; sign to denote descending order e.g. -MyFieldName | [optional] 
- **start** | **int**| Optional. When paginating, skip this number of results | [optional] 
- **limit** | **int**| Optional. When paginating, limit the number of returned results to this many. | [optional] 
- **request** | [**AggregationRequest**](AggregationRequest.md)| The request specifying the parameters of the aggregation | [optional] 
+ **valuation_request** | [**ValuationRequest**](ValuationRequest.md)| The request specifying the set of portfolios and dates on which to calculate a set of valuation metrics | [optional] 
 
 ### Return type
 
@@ -70,7 +71,7 @@ Name | Type | Description  | Notes
 
 ### HTTP request headers
 
- - **Content-Type**: Not defined
+ - **Content-Type**: application/json-patch+json, application/json, text/json, application/*+json
  - **Accept**: text/plain, application/json, text/json
 
 ### HTTP response details
@@ -82,12 +83,12 @@ Name | Type | Description  | Notes
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
-# **get_aggregation_by_portfolio**
-> ListAggregationResponse get_aggregation_by_portfolio(scope, code, sort_by=sort_by, start=start, limit=limit, request=request)
+# **get_valuation_of_weighted_instruments**
+> ListAggregationResponse get_valuation_of_weighted_instruments(inline_valuation_request=inline_valuation_request)
 
-[EXPERIMENTAL] Aggregate data in a portfolio
+GetValuationOfWeightedInstruments: Perform valuation for an inlined portfolio
 
-Aggregate data sourced from the specified portfolio
+Perform valuation on the portfolio that is defined by the weighted set of instruments passed to the request.
 
 ### Example
 
@@ -98,39 +99,42 @@ import time
 import lusid
 from lusid.rest import ApiException
 from pprint import pprint
-configuration = lusid.Configuration()
+# Defining the host is optional and defaults to http://local-unit-test-server.lusid.com:48293
+# See configuration.py for a list of all supported configuration parameters.
+configuration = lusid.Configuration(
+    host = "http://local-unit-test-server.lusid.com:48293"
+)
+
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
+
 # Configure OAuth2 access token for authorization: oauth2
+configuration = lusid.Configuration(
+    host = "http://local-unit-test-server.lusid.com:48293"
+)
 configuration.access_token = 'YOUR_ACCESS_TOKEN'
 
-# Defining host is optional and default to http://localhost/api
-configuration.host = "http://localhost/api"
-# Create an instance of the API class
-api_instance = lusid.AggregationApi(lusid.ApiClient(configuration))
-scope = 'scope_example' # str | The scope of the portfolio
-code = 'code_example' # str | The code of the portfolio
-sort_by = ['sort_by_example'] # list[str] | Optional. Order the results by these fields. Use use the '-' sign to denote descending order e.g. -MyFieldName (optional)
-start = 56 # int | Optional. When paginating, skip this number of results (optional)
-limit = 56 # int | Optional. When paginating, limit the number of returned results to this many. (optional)
-request = lusid.AggregationRequest() # AggregationRequest | The request specifying the parameters of the aggregation (optional)
+# Enter a context with an instance of the API client
+with lusid.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = lusid.AggregationApi(api_client)
+    inline_valuation_request = {"recipeId":{"scope":"MyRecipeScope","code":"default"},"asAt":"2018-03-05T00:00:00.0000000+00:00","metrics":[{"key":"Instrument/default/Name","op":"Value"},{"key":"Holding/default/PV","op":"Value"}],"groupBy":["Instrument/default/Name"],"reportCurrency":"USD","equipWithSubtotals":false,"valuationSchedule":{"effectiveFrom":"2018-03-05T00:00:00.0000000+00:00","effectiveAt":"2018-03-05T00:00:00.0000000+00:00","tenor":"1D","rollConvention":"F","holidayCalendars":[],"valuationDateTimes":[]},"instruments":[{"quantity":10000,"holdingIdentifier":"my-holding-on-some-date","instrument":{"startDate":"2018-03-05T00:00:00.0000000+00:00","maturityDate":"2018-04-04T00:00:00.0000000+00:00","domAmount":100,"domCcy":"GBP","fgnAmount":-150,"fgnCcy":"USD","refSpotRate":1.5,"isNdf":false,"fixingDate":"0001-01-01T00:00:00.0000000+00:00","instrumentType":"FxForward"}}]} # InlineValuationRequest | The request specifying the set of portfolios and dates on which to calculate a set of valuation metrics (optional)
 
-try:
-    # [EXPERIMENTAL] Aggregate data in a portfolio
-    api_response = api_instance.get_aggregation_by_portfolio(scope, code, sort_by=sort_by, start=start, limit=limit, request=request)
-    pprint(api_response)
-except ApiException as e:
-    print("Exception when calling AggregationApi->get_aggregation_by_portfolio: %s\n" % e)
+    try:
+        # GetValuationOfWeightedInstruments: Perform valuation for an inlined portfolio
+        api_response = api_instance.get_valuation_of_weighted_instruments(inline_valuation_request=inline_valuation_request)
+        pprint(api_response)
+    except ApiException as e:
+        print("Exception when calling AggregationApi->get_valuation_of_weighted_instruments: %s\n" % e)
 ```
 
 ### Parameters
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **scope** | **str**| The scope of the portfolio | 
- **code** | **str**| The code of the portfolio | 
- **sort_by** | [**list[str]**](str.md)| Optional. Order the results by these fields. Use use the &#39;-&#39; sign to denote descending order e.g. -MyFieldName | [optional] 
- **start** | **int**| Optional. When paginating, skip this number of results | [optional] 
- **limit** | **int**| Optional. When paginating, limit the number of returned results to this many. | [optional] 
- **request** | [**AggregationRequest**](AggregationRequest.md)| The request specifying the parameters of the aggregation | [optional] 
+ **inline_valuation_request** | [**InlineValuationRequest**](InlineValuationRequest.md)| The request specifying the set of portfolios and dates on which to calculate a set of valuation metrics | [optional] 
 
 ### Return type
 
@@ -142,145 +146,7 @@ Name | Type | Description  | Notes
 
 ### HTTP request headers
 
- - **Content-Type**: Not defined
- - **Accept**: text/plain, application/json, text/json
-
-### HTTP response details
-| Status code | Description | Response headers |
-|-------------|-------------|------------------|
-**200** | Success |  -  |
-**400** | The details of the input related failure |  -  |
-**0** | Error response |  -  |
-
-[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
-
-# **get_aggregation_by_result_set**
-> ListAggregationResponse get_aggregation_by_result_set(scope, results_key, sort_by=sort_by, start=start, limit=limit, request=request)
-
-[EXPERIMENTAL] Aggregate using result data
-
-Aggregate data from a previously-run Result data set into a flat row of results
-
-### Example
-
-* OAuth Authentication (oauth2):
-```python
-from __future__ import print_function
-import time
-import lusid
-from lusid.rest import ApiException
-from pprint import pprint
-configuration = lusid.Configuration()
-# Configure OAuth2 access token for authorization: oauth2
-configuration.access_token = 'YOUR_ACCESS_TOKEN'
-
-# Defining host is optional and default to http://localhost/api
-configuration.host = "http://localhost/api"
-# Create an instance of the API class
-api_instance = lusid.AggregationApi(lusid.ApiClient(configuration))
-scope = 'scope_example' # str | The scope of the Result data set
-results_key = 'results_key_example' # str | The key of the Result data set
-sort_by = ['sort_by_example'] # list[str] | Optional. Order the results by these fields. Use use the '-' sign to denote descending order e.g. -MyFieldName (optional)
-start = 56 # int | Optional. When paginating, skip this number of results (optional)
-limit = 56 # int | Optional. When paginating, limit the number of returned results to this many. (optional)
-request = lusid.AggregationRequest() # AggregationRequest | The request specifying the parameters of the aggregation (optional)
-
-try:
-    # [EXPERIMENTAL] Aggregate using result data
-    api_response = api_instance.get_aggregation_by_result_set(scope, results_key, sort_by=sort_by, start=start, limit=limit, request=request)
-    pprint(api_response)
-except ApiException as e:
-    print("Exception when calling AggregationApi->get_aggregation_by_result_set: %s\n" % e)
-```
-
-### Parameters
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
- **scope** | **str**| The scope of the Result data set | 
- **results_key** | **str**| The key of the Result data set | 
- **sort_by** | [**list[str]**](str.md)| Optional. Order the results by these fields. Use use the &#39;-&#39; sign to denote descending order e.g. -MyFieldName | [optional] 
- **start** | **int**| Optional. When paginating, skip this number of results | [optional] 
- **limit** | **int**| Optional. When paginating, limit the number of returned results to this many. | [optional] 
- **request** | [**AggregationRequest**](AggregationRequest.md)| The request specifying the parameters of the aggregation | [optional] 
-
-### Return type
-
-[**ListAggregationResponse**](ListAggregationResponse.md)
-
-### Authorization
-
-[oauth2](../README.md#oauth2)
-
-### HTTP request headers
-
- - **Content-Type**: Not defined
- - **Accept**: text/plain, application/json, text/json
-
-### HTTP response details
-| Status code | Description | Response headers |
-|-------------|-------------|------------------|
-**200** | Success |  -  |
-**400** | The details of the input related failure |  -  |
-**0** | Error response |  -  |
-
-[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
-
-# **get_nested_aggregation_by_group**
-> NestedAggregationResponse get_nested_aggregation_by_group(scope, code, request=request)
-
-[EXPERIMENTAL] Aggregate data in a portfolio group, as nested
-
-Obsolete - Aggregate data sourced from the specified portfolio group into a nested structure. Data is nested following the group-by specifications.
-
-### Example
-
-* OAuth Authentication (oauth2):
-```python
-from __future__ import print_function
-import time
-import lusid
-from lusid.rest import ApiException
-from pprint import pprint
-configuration = lusid.Configuration()
-# Configure OAuth2 access token for authorization: oauth2
-configuration.access_token = 'YOUR_ACCESS_TOKEN'
-
-# Defining host is optional and default to http://localhost/api
-configuration.host = "http://localhost/api"
-# Create an instance of the API class
-api_instance = lusid.AggregationApi(lusid.ApiClient(configuration))
-scope = 'scope_example' # str | The scope of the portfolio group
-code = 'code_example' # str | The code of the portfolio group
-request = lusid.AggregationRequest() # AggregationRequest | The request specifying the parameters of the aggregation (optional)
-
-try:
-    # [EXPERIMENTAL] Aggregate data in a portfolio group, as nested
-    api_response = api_instance.get_nested_aggregation_by_group(scope, code, request=request)
-    pprint(api_response)
-except ApiException as e:
-    print("Exception when calling AggregationApi->get_nested_aggregation_by_group: %s\n" % e)
-```
-
-### Parameters
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
- **scope** | **str**| The scope of the portfolio group | 
- **code** | **str**| The code of the portfolio group | 
- **request** | [**AggregationRequest**](AggregationRequest.md)| The request specifying the parameters of the aggregation | [optional] 
-
-### Return type
-
-[**NestedAggregationResponse**](NestedAggregationResponse.md)
-
-### Authorization
-
-[oauth2](../README.md#oauth2)
-
-### HTTP request headers
-
- - **Content-Type**: Not defined
+ - **Content-Type**: application/json-patch+json, application/json, text/json, application/*+json
  - **Accept**: text/plain, application/json, text/json
 
 ### HTTP response details
