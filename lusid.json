@@ -9,7 +9,7 @@
       "url": "https://www.finbourne.com",
       "email": "info@finbourne.com"
     },
-    "version": "0.11.3999",
+    "version": "0.11.4000",
     "x-logo": {
       "url": "https://www.lusid.com/app/assets/logo_white.png",
       "backgroundColor": "#415464"
@@ -17,7 +17,7 @@
   },
   "servers": [
     {
-      "url": "http://local-unit-test-server.lusid.com:62296"
+      "url": "http://local-unit-test-server.lusid.com:61840"
     }
   ],
   "paths": {
@@ -22491,17 +22491,6 @@
               "format": "dateorcutlabel",
               "nullable": true
             }
-          },
-          {
-            "name": "reResolve",
-            "in": "query",
-            "description": "When set to true, instrument resolution will be attempted for all transactions and holdings for the given identifier and date range.\r\n            When set to false (default behaviour), instrument resolution will only be attempted for those transactions and holdings that were previously unresolved.",
-            "schema": {
-              "type": "boolean",
-              "description": "When set to true, instrument resolution will be attempted for all transactions and holdings for the given identifier and date range.\r\n            When set to false (default behaviour), instrument resolution will only be attempted for those transactions and holdings that were previously unresolved.",
-              "default": false
-            },
-            "x-nullable": true
           }
         ],
         "requestBody": {
