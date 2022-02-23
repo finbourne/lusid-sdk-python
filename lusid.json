@@ -9,7 +9,7 @@
       "url": "https://www.finbourne.com",
       "email": "info@finbourne.com"
     },
-    "version": "0.11.4001",
+    "version": "0.11.4002",
     "x-logo": {
       "url": "https://www.lusid.com/app/assets/logo_white.png",
       "backgroundColor": "#415464"
@@ -17,7 +17,7 @@
   },
   "servers": [
     {
-      "url": "http://local-unit-test-server.lusid.com:31592"
+      "url": "http://local-unit-test-server.lusid.com:48882"
     }
   ],
   "paths": {
@@ -21295,7 +21295,7 @@
         "tags": [
           "Cut Label Definitions"
         ],
-        "summary": "[EARLY ACCESS] CreateCutLabelDefinition: Create a Cut Label",
+        "summary": "CreateCutLabelDefinition: Create a Cut Label",
         "description": "Create a Cut Label valid in all scopes",
         "operationId": "CreateCutLabelDefinition",
         "requestBody": {
@@ -21420,13 +21420,13 @@
             "oauth2": []
           }
         ],
-        "x-fbn-apistatus": "EarlyAccess"
+        "x-fbn-apistatus": "Stable"
       },
       "get": {
         "tags": [
           "Cut Label Definitions"
         ],
-        "summary": "[EARLY ACCESS] ListCutLabelDefinitions: List Existing Cut Labels",
+        "summary": "ListCutLabelDefinitions: List Existing Cut Labels",
         "description": "List all the Cut Label Definitions that are valid at the given AsAt time",
         "operationId": "ListCutLabelDefinitions",
         "parameters": [
@@ -21564,7 +21564,7 @@
             "oauth2": []
           }
         ],
-        "x-fbn-apistatus": "EarlyAccess"
+        "x-fbn-apistatus": "Stable"
       }
     },
     "/api/systemconfiguration/cutlabels/{code}": {
@@ -21572,7 +21572,7 @@
         "tags": [
           "Cut Label Definitions"
         ],
-        "summary": "[EARLY ACCESS] UpdateCutLabelDefinition: Update a Cut Label",
+        "summary": "UpdateCutLabelDefinition: Update a Cut Label",
         "description": "Update a specified cut label",
         "operationId": "UpdateCutLabelDefinition",
         "parameters": [
@@ -21709,13 +21709,13 @@
             "oauth2": []
           }
         ],
-        "x-fbn-apistatus": "EarlyAccess"
+        "x-fbn-apistatus": "Stable"
       },
       "get": {
         "tags": [
           "Cut Label Definitions"
         ],
-        "summary": "[EARLY ACCESS] GetCutLabelDefinition: Get a Cut Label",
+        "summary": "GetCutLabelDefinition: Get a Cut Label",
         "description": "Get a specified cut label at a given time",
         "operationId": "GetCutLabelDefinition",
         "parameters": [
@@ -21803,13 +21803,13 @@
             "oauth2": []
           }
         ],
-        "x-fbn-apistatus": "EarlyAccess"
+        "x-fbn-apistatus": "Stable"
       },
       "delete": {
         "tags": [
           "Cut Label Definitions"
         ],
-        "summary": "[EARLY ACCESS] DeleteCutLabelDefinition: Delete a Cut Label",
+        "summary": "DeleteCutLabelDefinition: Delete a Cut Label",
         "description": "Delete a specified cut label",
         "operationId": "DeleteCutLabelDefinition",
         "parameters": [
@@ -21888,7 +21888,7 @@
             "oauth2": []
           }
         ],
-        "x-fbn-apistatus": "EarlyAccess"
+        "x-fbn-apistatus": "Stable"
       }
     },
     "/api/systemconfiguration/transactions": {
