@@ -9,7 +9,7 @@
       "url": "https://www.finbourne.com",
       "email": "info@finbourne.com"
     },
-    "version": "0.11.4002",
+    "version": "0.11.4003",
     "x-logo": {
       "url": "https://www.lusid.com/app/assets/logo_white.png",
       "backgroundColor": "#415464"
@@ -17,7 +17,7 @@
   },
   "servers": [
     {
-      "url": "http://local-unit-test-server.lusid.com:48882"
+      "url": "http://local-unit-test-server.lusid.com:32485"
     }
   ],
   "paths": {
@@ -20564,7 +20564,7 @@
         "tags": [
           "Scopes"
         ],
-        "summary": "[EARLY ACCESS] ListScopes: List Scopes",
+        "summary": "ListScopes: List Scopes",
         "description": "List all the scopes that contain data.",
         "operationId": "ListScopes",
         "parameters": [
@@ -20639,7 +20639,7 @@
             "oauth2": []
           }
         ],
-        "x-fbn-apistatus": "EarlyAccess"
+        "x-fbn-apistatus": "Stable"
       }
     },
     "/api/search/portfoliogroups": {
