@@ -9,7 +9,7 @@
       "url": "https://www.finbourne.com",
       "email": "info@finbourne.com"
     },
-    "version": "0.11.4005",
+    "version": "0.11.4006",
     "x-logo": {
       "url": "https://www.lusid.com/app/assets/logo_white.png",
       "backgroundColor": "#415464"
@@ -17,7 +17,7 @@
   },
   "servers": [
     {
-      "url": "http://local-unit-test-server.lusid.com:59505"
+      "url": "http://local-unit-test-server.lusid.com:37514"
     }
   ],
   "paths": {
@@ -20647,7 +20647,7 @@
         "tags": [
           "Search"
         ],
-        "summary": "[EARLY ACCESS] SearchPortfolioGroups: Search Portfolio Groups",
+        "summary": "SearchPortfolioGroups: Search Portfolio Groups",
         "description": "Search through all portfolio groups",
         "operationId": "SearchPortfolioGroups",
         "parameters": [
@@ -20853,7 +20853,7 @@
             "oauth2": []
           }
         ],
-        "x-fbn-apistatus": "EarlyAccess"
+        "x-fbn-apistatus": "Stable"
       }
     },
     "/api/search/portfolios": {
@@ -20861,7 +20861,7 @@
         "tags": [
           "Search"
         ],
-        "summary": "[EARLY ACCESS] SearchPortfolios: Search Portfolios",
+        "summary": "SearchPortfolios: Search Portfolios",
         "description": "Search through all portfolios",
         "operationId": "SearchPortfolios",
         "parameters": [
@@ -21079,7 +21079,7 @@
             "oauth2": []
           }
         ],
-        "x-fbn-apistatus": "EarlyAccess"
+        "x-fbn-apistatus": "Stable"
       }
     },
     "/api/search/propertydefinitions": {
@@ -21087,7 +21087,7 @@
         "tags": [
           "Search"
         ],
-        "summary": "[EARLY ACCESS] SearchProperties: Search Property Definitions",
+        "summary": "SearchProperties: Search Property Definitions",
         "description": "Search through all Property Definitions",
         "operationId": "SearchProperties",
         "parameters": [
@@ -21287,7 +21287,7 @@
             "oauth2": []
           }
         ],
-        "x-fbn-apistatus": "EarlyAccess"
+        "x-fbn-apistatus": "Stable"
       }
     },
     "/api/systemconfiguration/cutlabels": {
@@ -22491,6 +22491,17 @@
               "format": "dateorcutlabel",
               "nullable": true
             }
+          },
+          {
+            "name": "reResolve",
+            "in": "query",
+            "description": "When set to true, instrument resolution will be attempted for all transactions and holdings for the given identifier and date range.\r\n            When set to false (default behaviour), instrument resolution will only be attempted for those transactions and holdings that were previously unresolved.",
+            "schema": {
+              "type": "boolean",
+              "description": "When set to true, instrument resolution will be attempted for all transactions and holdings for the given identifier and date range.\r\n            When set to false (default behaviour), instrument resolution will only be attempted for those transactions and holdings that were previously unresolved.",
+              "default": false
+            },
+            "x-nullable": true
           }
         ],
         "requestBody": {
