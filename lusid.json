@@ -9,7 +9,7 @@
       "url": "https://www.finbourne.com",
       "email": "info@finbourne.com"
     },
-    "version": "0.11.4006",
+    "version": "0.11.4007",
     "x-logo": {
       "url": "https://www.lusid.com/app/assets/logo_white.png",
       "backgroundColor": "#415464"
@@ -17,7 +17,7 @@
   },
   "servers": [
     {
-      "url": "http://local-unit-test-server.lusid.com:37514"
+      "url": "http://local-unit-test-server.lusid.com:45016"
     }
   ],
   "paths": {
@@ -18669,7 +18669,8 @@
                       "attemptToInferMissingFx": false,
                       "calendarScope": "CoppClarkHolidayCalendars",
                       "conventionScope": "Conventions"
-                    }
+                    },
+                    "specificRules": []
                   },
                   "pricing": {
                     "modelRules": [],
@@ -18732,7 +18733,8 @@
                       "attemptToInferMissingFx": false,
                       "calendarScope": "CoppClarkHolidayCalendars",
                       "conventionScope": "Conventions"
-                    }
+                    },
+                    "specificRules": []
                   },
                   "pricing": {
                     "modelRules": [],
@@ -18795,7 +18797,8 @@
                       "attemptToInferMissingFx": false,
                       "calendarScope": "CoppClarkHolidayCalendars",
                       "conventionScope": "Conventions"
-                    }
+                    },
+                    "specificRules": []
                   },
                   "pricing": {
                     "modelRules": [],
@@ -18858,7 +18861,8 @@
                       "attemptToInferMissingFx": false,
                       "calendarScope": "CoppClarkHolidayCalendars",
                       "conventionScope": "Conventions"
-                    }
+                    },
+                    "specificRules": []
                   },
                   "pricing": {
                     "modelRules": [],
@@ -19023,7 +19027,8 @@
                             "attemptToInferMissingFx": false,
                             "calendarScope": "CoppClarkHolidayCalendars",
                             "conventionScope": "Conventions"
-                          }
+                          },
+                          "specificRules": []
                         },
                         "pricing": {
                           "modelRules": [
@@ -19092,7 +19097,8 @@
                             "attemptToInferMissingFx": false,
                             "calendarScope": "CoppClarkHolidayCalendars",
                             "conventionScope": "Conventions"
-                          }
+                          },
+                          "specificRules": []
                         },
                         "pricing": {
                           "modelRules": [],
@@ -19168,7 +19174,8 @@
                             "attemptToInferMissingFx": false,
                             "calendarScope": "CoppClarkHolidayCalendars",
                             "conventionScope": "Conventions"
-                          }
+                          },
+                          "specificRules": []
                         },
                         "pricing": {
                           "modelRules": [
@@ -19237,7 +19244,8 @@
                             "attemptToInferMissingFx": false,
                             "calendarScope": "CoppClarkHolidayCalendars",
                             "conventionScope": "Conventions"
-                          }
+                          },
+                          "specificRules": []
                         },
                         "pricing": {
                           "modelRules": [],
@@ -19313,7 +19321,8 @@
                             "attemptToInferMissingFx": false,
                             "calendarScope": "CoppClarkHolidayCalendars",
                             "conventionScope": "Conventions"
-                          }
+                          },
+                          "specificRules": []
                         },
                         "pricing": {
                           "modelRules": [
@@ -19382,7 +19391,8 @@
                             "attemptToInferMissingFx": false,
                             "calendarScope": "CoppClarkHolidayCalendars",
                             "conventionScope": "Conventions"
-                          }
+                          },
+                          "specificRules": []
                         },
                         "pricing": {
                           "modelRules": [],
@@ -19549,7 +19559,8 @@
                         "attemptToInferMissingFx": false,
                         "calendarScope": "CoppClarkHolidayCalendars",
                         "conventionScope": "Conventions"
-                      }
+                      },
+                      "specificRules": []
                     },
                     "pricing": {
                       "modelRules": [
@@ -19623,7 +19634,8 @@
                         "attemptToInferMissingFx": false,
                         "calendarScope": "CoppClarkHolidayCalendars",
                         "conventionScope": "Conventions"
-                      }
+                      },
+                      "specificRules": []
                     },
                     "pricing": {
                       "modelRules": [
@@ -19697,7 +19709,8 @@
                         "attemptToInferMissingFx": false,
                         "calendarScope": "CoppClarkHolidayCalendars",
                         "conventionScope": "Conventions"
-                      }
+                      },
+                      "specificRules": []
                     },
                     "pricing": {
                       "modelRules": [
@@ -30894,6 +30907,32 @@
         },
         "additionalProperties": false
       },
+      "DependencySourceFilter": {
+        "type": "object",
+        "properties": {
+          "instrumentType": {
+            "maxLength": 32,
+            "minLength": 0,
+            "type": "string",
+            "description": "Specify that a rule should only apply if the market data is requested by an instrument of a given instrument type.\r\nIf null, then no filtering on instrument type is applied.",
+            "nullable": true
+          },
+          "assetClass": {
+            "maxLength": 32,
+            "minLength": 0,
+            "type": "string",
+            "description": "Specify that a rule should only apply if the market data is requested by an instrument of a given asset class.\r\nIf null, then no filtering on asset class is applied.",
+            "nullable": true
+          },
+          "domCcy": {
+            "type": "string",
+            "description": "Specify that a rule should only apply if the market data is requested by an instrument with a given domestic currency.\r\nIf null, then no filtering on currency is applied.",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false,
+        "description": "Encapsulates parts of a market data rule relating not to the nature of the market data requested, but rather the nature of the thing (instrument/model) that is requesting it.\r\nIn the first instance, this includes the instrument type, asset class, and the currency of the underlying instrument.\r\nThis can be used to differentiate requests for market data according to the source of the request. See MarketDataSpecificRule."
+      },
       "ErrorDetail": {
         "type": "object",
         "properties": {
@@ -32190,6 +32229,14 @@
           },
           "options": {
             "$ref": "#/components/schemas/MarketOptions"
+          },
+          "specificRules": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/MarketDataSpecificRule"
+            },
+            "description": "Extends market data key rules to be able to catch dependencies depending on where the dependency comes from, as opposed to what the dependency is asking for.\r\nUsing two specific rules, one could instruct rates curves requested by bonds to be retrieved from a different scope than rates curves requested by swaps.\r\nWARNING: The use of specific rules impacts performance. Where possible, one should use MarketDataKeyRules only.",
+            "nullable": true
           }
         },
         "additionalProperties": false,
@@ -32274,6 +32321,90 @@
         },
         "additionalProperties": false,
         "description": "A market data key rule describes a mapping for satisfying a particular market dependency. The supplier, scope, quote type and price side\r\ninformation define the quote in the market and which Vendor for market data would be used to perform the lookup.\r\nThe market data key defines what dependency this satisfies. The key is a rule that describes the asset class, its identifier and any other\r\nspecifics required to uniquely describe a specific economic entity (e.g. an Fx currency pair, equity name or credit curve)."
+      },
+      "MarketDataSpecificRule": {
+        "required": [
+          "dataScope",
+          "dependencySourceFilter",
+          "field",
+          "key",
+          "quoteType",
+          "supplier"
+        ],
+        "type": "object",
+        "properties": {
+          "key": {
+            "maxLength": 128,
+            "minLength": 0,
+            "type": "string",
+            "description": "The market data key pattern which this is a rule for. A dot separated string (A.B.C.D.*)"
+          },
+          "supplier": {
+            "maxLength": 32,
+            "minLength": 0,
+            "type": "string",
+            "description": "The market data supplier (where the data comes from)"
+          },
+          "dataScope": {
+            "maxLength": 256,
+            "minLength": 1,
+            "pattern": "^[a-zA-Z0-9\\-_]+$",
+            "type": "string",
+            "description": "The scope in which the data should be found when using this rule."
+          },
+          "quoteType": {
+            "enum": [
+              "Price",
+              "Spread",
+              "Rate",
+              "LogNormalVol",
+              "NormalVol",
+              "ParSpread",
+              "IsdaSpread",
+              "Upfront"
+            ],
+            "type": "string",
+            "description": "The available values are: Price, Spread, Rate, LogNormalVol, NormalVol, ParSpread, IsdaSpread, Upfront"
+          },
+          "field": {
+            "maxLength": 32,
+            "minLength": 0,
+            "type": "string",
+            "description": "The conceptual qualification for the field, such as bid, mid, or ask.\r\nThe field must be one of a defined set for the given supplier, in the same way as it\r\nis for the Finbourne.WebApi.Interface.Dto.Quotes.QuoteSeriesId"
+          },
+          "quoteInterval": {
+            "maxLength": 16,
+            "minLength": 0,
+            "type": "string",
+            "description": "Shorthand for the time interval used to select market data. This must be a dot-separated string\r\n            nominating a start and end date, for example '5D.0D' to look back 5 days from today (0 days ago). The syntax\r\n            is <i>int</i><i>char</i>.<i>int</i><i>char</i>, where <i>char</i> is one of D(ay), W(eek), M(onth) or Y(ear).",
+            "nullable": true
+          },
+          "asAt": {
+            "type": "string",
+            "description": "The AsAt predicate specification.",
+            "format": "date-time",
+            "nullable": true
+          },
+          "priceSource": {
+            "maxLength": 256,
+            "minLength": 0,
+            "type": "string",
+            "description": "The source of the quote. For a given provider/supplier of market data there may be an additional qualifier, e.g. the exchange or bank that provided the quote",
+            "nullable": true
+          },
+          "mask": {
+            "maxLength": 256,
+            "minLength": 0,
+            "type": "string",
+            "description": "Allows for partial or complete override of the market asset resolved for a dependency\r\nEither a named override or a dot separated string (A.B.C.D.*).\r\ne.g. for Rates curve 'EUR.*' will replace the resolve MarketAsset 'GBP/12M', 'GBP/3M' with the EUR equivalent, if there\r\nare no wildcards in the mask, the mask is taken as the MarketAsset for any dependency matching the rule.",
+            "nullable": true
+          },
+          "dependencySourceFilter": {
+            "$ref": "#/components/schemas/DependencySourceFilter"
+          }
+        },
+        "additionalProperties": false,
+        "description": "Extends market data key rules to be able to catch dependencies depending on where the dependency comes from, as opposed to what the dependency is asking for.\r\nFor example, a market data rule might instruct all rates curves to be retrieved from a particular scope.\r\nThis class gives the ability to set different behaviour depending on what is requesting the rates curve.\r\nUsing two specific rules, one could instruct rates curves requested by bonds to be retrieved from a different scope than rates curves requested by swaps."
       },
       "MarketOptions": {
         "required": [
@@ -34381,7 +34512,7 @@
           },
           "scaleFactor": {
             "type": "number",
-            "description": "An optional scale factor for non-standard scaling of quotes against the instrument. If not supplied, the default ScaleFactor is 1.",
+            "description": "An optional scale factor for non-standard scaling of quotes against the instrument. For example, if you wish the quote's Value to be scaled down by a factor of 100, enter 100. If not supplied, the default ScaleFactor is 1.",
             "format": "double",
             "nullable": true
           }
@@ -36830,7 +36961,7 @@
           },
           "scaleFactor": {
             "type": "number",
-            "description": "An optional scale factor for non-standard scaling of quotes against the instrument. If not supplied, the default ScaleFactor is 1.",
+            "description": "An optional scale factor for non-standard scaling of quotes against the instrument. For example, if you wish the quote's Value to be scaled down by a factor of 100, enter 100. If not supplied, the default ScaleFactor is 1.",
             "format": "double",
             "nullable": true
           }
