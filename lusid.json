@@ -9,7 +9,7 @@
       "url": "https://www.finbourne.com",
       "email": "info@finbourne.com"
     },
-    "version": "0.11.4007",
+    "version": "0.11.4008",
     "x-logo": {
       "url": "https://www.lusid.com/app/assets/logo_white.png",
       "backgroundColor": "#415464"
@@ -17,7 +17,7 @@
   },
   "servers": [
     {
-      "url": "http://local-unit-test-server.lusid.com:45016"
+      "url": "http://local-unit-test-server.lusid.com:56824"
     }
   ],
   "paths": {
@@ -14771,7 +14771,7 @@
         "tags": [
           "Portfolios"
         ],
-        "summary": "[EARLY ACCESS] GetPortfolioCommands: Get portfolio commands",
+        "summary": "GetPortfolioCommands: Get portfolio commands",
         "description": "Get all the commands that modified a particular portfolio, including any input transactions.",
         "operationId": "GetPortfolioCommands",
         "parameters": [
@@ -14925,7 +14925,7 @@
             "oauth2": []
           }
         ],
-        "x-fbn-apistatus": "EarlyAccess"
+        "x-fbn-apistatus": "Stable"
       }
     },
     "/api/portfolios/{scope}/{code}/metadata": {
