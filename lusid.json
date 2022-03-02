@@ -9,7 +9,7 @@
       "url": "https://www.finbourne.com",
       "email": "info@finbourne.com"
     },
-    "version": "0.11.4033",
+    "version": "0.11.4035",
     "x-logo": {
       "url": "https://www.lusid.com/app/assets/logo_white.png",
       "backgroundColor": "#415464"
@@ -17,7 +17,7 @@
   },
   "servers": [
     {
-      "url": "https://fbn-prd.lusid.com/api"
+      "url": "http://local-unit-test-server.lusid.com:32160"
     }
   ],
   "paths": {
@@ -2654,7 +2654,7 @@
         "tags": [
           "Derived Transaction Portfolios"
         ],
-        "summary": "[EARLY ACCESS] CreateDerivedPortfolio: Create derived portfolio",
+        "summary": "CreateDerivedPortfolio: Create derived portfolio",
         "description": "Create a derived transaction portfolio from a parent transaction portfolio (which may itself be derived).",
         "operationId": "CreateDerivedPortfolio",
         "parameters": [
@@ -2831,7 +2831,7 @@
             "oauth2": []
           }
         ],
-        "x-fbn-apistatus": "EarlyAccess"
+        "x-fbn-apistatus": "Stable"
       }
     },
     "/api/derivedtransactionportfolios/{scope}/{code}/details": {
@@ -37630,7 +37630,7 @@
         "description": "OAuth2 Implicit Grant",
         "flows": {
           "implicit": {
-            "authorizationUrl": "https://lusid.okta.com/oauth2/default/v1/authorize",
+            "authorizationUrl": "https://dummyurl.lusid.com/",
             "scopes": {}
           }
         }
