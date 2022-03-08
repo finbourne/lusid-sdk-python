@@ -9,7 +9,7 @@
       "url": "https://www.finbourne.com",
       "email": "info@finbourne.com"
     },
-    "version": "0.11.4067",
+    "version": "0.11.4068",
     "x-logo": {
       "url": "https://www.lusid.com/app/assets/logo_white.png",
       "backgroundColor": "#415464"
@@ -17,7 +17,7 @@
   },
   "servers": [
     {
-      "url": "http://local-unit-test-server.lusid.com:45897"
+      "url": "http://local-unit-test-server.lusid.com:61916"
     }
   ],
   "paths": {
@@ -36159,21 +36159,21 @@
             "items": {
               "$ref": "#/components/schemas/TransactionConfigurationTypeAlias"
             },
-            "description": "List of transaction codes that map to this specific transaction model"
+            "description": "List of transaction types that map to this specific transaction configuration"
           },
           "movements": {
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/TransactionConfigurationMovementData"
             },
-            "description": "Movement data for the transaction code"
+            "description": "Movement data for the transaction type"
           },
           "properties": {
             "type": "object",
             "additionalProperties": {
               "$ref": "#/components/schemas/PerpetualProperty"
             },
-            "description": "Properties attached to the underlying holding.",
+            "description": "Properties attached to the transaction type",
             "nullable": true
           }
         },
@@ -36244,11 +36244,11 @@
           },
           "side": {
             "type": "string",
-            "description": "The movement side"
+            "description": "The Side determines which of the fields from our transaction are used to generate the Movement. Side1 means the 'security' side of the transaction, ie the Instrument and Units; Side2 means the 'cash' side, ie the Total Consideration"
           },
           "direction": {
             "type": "integer",
-            "description": "The movement direction",
+            "description": " A multiplier to apply to Transaction amounts; the values are -1 to indicate to reverse the signs and 1 to indicate to use the signed values from the Transaction directly. For a typical Transaction with unsigned values, 1 means increase, -1 means decrease",
             "format": "int32"
           },
           "properties": {
@@ -36256,7 +36256,7 @@
             "additionalProperties": {
               "$ref": "#/components/schemas/PerpetualProperty"
             },
-            "description": "The properties associated with the underlying Movement.",
+            "description": "The properties associated with the underlying Movement",
             "nullable": true
           },
           "mappings": {
@@ -36264,7 +36264,7 @@
             "items": {
               "$ref": "#/components/schemas/TransactionPropertyMapping"
             },
-            "description": "This allows you to map a transaction property to a property on the underlying holding.",
+            "description": "This allows you to map a transaction property to a property on the underlying holding",
             "nullable": true
           },
           "name": {
@@ -36421,17 +36421,17 @@
         "properties": {
           "propertyKey": {
             "type": "string",
-            "description": "Uniquely identifies the property definiton and consists of a Domain, Scope and Code."
+            "description": "The key that uniquely identifies the property. It has the format {domain}/{scope}/{code}"
           },
           "mapFrom": {
             "type": "string",
-            "description": "The Property Key of the Property to map from.",
+            "description": "The Property Key of the Property to map from",
             "nullable": true
           },
           "setTo": {
             "type": "object",
             "additionalProperties": false,
-            "description": "A pointer to the Property being mapped from.",
+            "description": "A pointer to the Property being mapped from",
             "nullable": true
           }
         },
@@ -37819,6 +37819,10 @@
       "description": "LUSID is a transaction-based system. Every transaction in a particular instrument should belong to a transaction type in order that it might contribute to measuring your holding (position) in that instrument. Transaction types are a fundamental building block of LUSID, and care should be exercised when changing them. For more information, see https://support.lusid.com/knowledgebase/article/KA-01872/."
     },
     {
+      "name": "Transaction Configuration",
+      "description": "LUSID is a transaction-based system. Every transaction in a particular instrument should belong to a transaction type in order that it might contribute to measuring your holding (position) in that instrument. Transaction types are a fundamental building block of LUSID, and care should be exercised when changing them. For more information, see https://support.lusid.com/knowledgebase/article/KA-01872/."
+    },
+    {
       "name": "Transaction Fees",
       "description": "Methods to retrieve applicable fees for a transaction, and manage the rules that defined them"
     },
@@ -37878,6 +37882,7 @@
       "Sequences",
       "Structured Result Data",
       "System Configuration",
+      "Transaction Configuration",
       "Transaction Fees",
       "Transaction Portfolios",
       "Translation"
