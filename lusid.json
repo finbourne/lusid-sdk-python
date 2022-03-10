@@ -9,7 +9,7 @@
       "url": "https://www.finbourne.com",
       "email": "info@finbourne.com"
     },
-    "version": "0.11.4079",
+    "version": "0.11.4080",
     "x-logo": {
       "url": "https://www.lusid.com/app/assets/logo_white.png",
       "backgroundColor": "#415464"
@@ -17,7 +17,7 @@
   },
   "servers": [
     {
-      "url": "https://fbn-prd.lusid.com/api"
+      "url": "http://local-unit-test-server.lusid.com:33316"
     }
   ],
   "paths": {
@@ -33971,7 +33971,7 @@
           "resultDataRules": {
             "type": "array",
             "items": {
-              "$ref": "#/components/schemas/ResultDataKeyRule"
+              "$ref": "#/components/schemas/ResultKeyRule"
             },
             "description": "Set of rules that control querying of unit results either for direct queries into aggregation or for\r\noverriding intermediate calculations. For example, a dirty price is made up from a clean price and the accrued interest.\r\nOne might consider overriding the accrued interest calculated by a model (perhaps one wants to match an external value or simply disagrees with the\r\ncalculated result) and use that in calculation of the dirty price.",
             "nullable": true
@@ -35767,57 +35767,6 @@
         "additionalProperties": false,
         "description": "A collection of resources that can be returned from requests."
       },
-      "ResultDataKeyRule": {
-        "required": [
-          "dataScope",
-          "documentCode",
-          "resourceKey",
-          "supplier"
-        ],
-        "type": "object",
-        "properties": {
-          "resourceKey": {
-            "maxLength": 256,
-            "minLength": 0,
-            "type": "string",
-            "description": "The result data key that identifies the address pattern that this is a rule for"
-          },
-          "supplier": {
-            "maxLength": 32,
-            "minLength": 0,
-            "type": "string",
-            "description": "the result resource supplier (where the data comes from)"
-          },
-          "dataScope": {
-            "maxLength": 256,
-            "minLength": 1,
-            "pattern": "^[a-zA-Z0-9\\-_]+$",
-            "type": "string",
-            "description": "which is the scope in which the data should be found"
-          },
-          "documentCode": {
-            "maxLength": 256,
-            "minLength": 1,
-            "type": "string",
-            "description": "document code that defines which document is desired"
-          },
-          "quoteInterval": {
-            "maxLength": 16,
-            "minLength": 0,
-            "type": "string",
-            "description": "Shorthand for the time interval used to select result data. This must be a dot-separated string\r\n            specifying a start and end date, for example '5D.0D' to look back 5 days from today (0 days ago).",
-            "nullable": true
-          },
-          "asAt": {
-            "type": "string",
-            "description": "The AsAt predicate specification.",
-            "format": "date-time",
-            "nullable": true
-          }
-        },
-        "additionalProperties": false,
-        "description": "A rule that describes how we resolve (unit) result data."
-      },
       "ResultDataSchema": {
         "type": "object",
         "properties": {
@@ -35837,6 +35786,28 @@
           }
         },
         "additionalProperties": false
+      },
+      "ResultKeyRule": {
+        "required": [
+          "resultKeyRuleType"
+        ],
+        "type": "object",
+        "properties": {
+          "resultKeyRuleType": {
+            "enum": [
+              "Invalid",
+              "ResultDataKeyRule",
+              "PortfolioResultDataKeyRule"
+            ],
+            "type": "string",
+            "description": "The available values are: Invalid, ResultDataKeyRule, PortfolioResultDataKeyRule"
+          }
+        },
+        "additionalProperties": false,
+        "description": "A rule that describes how we resolve (unit) result data.",
+        "discriminator": {
+          "propertyName": "resultKeyRuleType"
+        }
       },
       "ScopeDefinition": {
         "required": [
@@ -37632,7 +37603,7 @@
         "description": "OAuth2 Implicit Grant",
         "flows": {
           "implicit": {
-            "authorizationUrl": "https://lusid.okta.com/oauth2/default/v1/authorize",
+            "authorizationUrl": "https://dummyurl.lusid.com/",
             "scopes": {}
           }
         }
