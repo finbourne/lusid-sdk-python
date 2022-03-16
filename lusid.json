@@ -9,7 +9,7 @@
       "url": "https://www.finbourne.com",
       "email": "info@finbourne.com"
     },
-    "version": "0.11.4108",
+    "version": "0.11.4109",
     "x-logo": {
       "url": "https://www.lusid.com/app/assets/logo_white.png",
       "backgroundColor": "#415464"
@@ -17,7 +17,7 @@
   },
   "servers": [
     {
-      "url": "http://local-unit-test-server.lusid.com:63618"
+      "url": "http://local-unit-test-server.lusid.com:63112"
     }
   ],
   "paths": {
@@ -22103,7 +22103,8 @@
                     "type": "Another-Sell",
                     "description": "Sale",
                     "transactionClass": "MyDefault",
-                    "transactionGroup": "MyGroup",
+                    "transactionGroup": "mysource",
+                    "source": "mysource",
                     "transactionRoles": "LongShorter",
                     "isDefault": false
                   }
@@ -22137,7 +22138,8 @@
                     "type": "Another-Sell",
                     "description": "Sale",
                     "transactionClass": "MyDefault",
-                    "transactionGroup": "MyGroup",
+                    "transactionGroup": "mysource",
+                    "source": "mysource",
                     "transactionRoles": "LongShorter",
                     "isDefault": false
                   }
@@ -22171,7 +22173,8 @@
                     "type": "Another-Sell",
                     "description": "Sale",
                     "transactionClass": "MyDefault",
-                    "transactionGroup": "MyGroup",
+                    "transactionGroup": "mysource",
+                    "source": "mysource",
                     "transactionRoles": "LongShorter",
                     "isDefault": false
                   }
@@ -22205,7 +22208,8 @@
                     "type": "Another-Sell",
                     "description": "Sale",
                     "transactionClass": "MyDefault",
-                    "transactionGroup": "MyGroup",
+                    "transactionGroup": "mysource",
+                    "source": "mysource",
                     "transactionRoles": "LongShorter",
                     "isDefault": false
                   }
