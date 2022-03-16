@@ -9,7 +9,7 @@
       "url": "https://www.finbourne.com",
       "email": "info@finbourne.com"
     },
-    "version": "0.11.4107",
+    "version": "0.11.4108",
     "x-logo": {
       "url": "https://www.lusid.com/app/assets/logo_white.png",
       "backgroundColor": "#415464"
@@ -17,7 +17,7 @@
   },
   "servers": [
     {
-      "url": "https://fbn-prd.lusid.com/api"
+      "url": "http://local-unit-test-server.lusid.com:63618"
     }
   ],
   "paths": {
@@ -6931,6 +6931,18 @@
               "format": "dateorcutlabel",
               "nullable": true
             }
+          },
+          {
+            "name": "effectiveUntil",
+            "in": "query",
+            "description": "The effective datetime until which the Access Metadata is valid. If not supplied this will be valid indefinitely, or until the next 'effectiveAt' datetime of the Access Metadata",
+            "schema": {
+              "type": "string",
+              "description": "The effective datetime until which the Access Metadata is valid. If not supplied this will be valid indefinitely, or until the next 'effectiveAt' datetime of the Access Metadata",
+              "format": "date-time",
+              "nullable": true
+            },
+            "x-nullable": true
           }
         ],
         "requestBody": {
@@ -7272,6 +7284,18 @@
               "format": "dateorcutlabel",
               "nullable": true
             }
+          },
+          {
+            "name": "effectiveUntil",
+            "in": "query",
+            "description": "The effective date until which the delete is valid. If not supplied this will be valid indefinitely, or until the next 'effectiveAt' date of the Access Metadata",
+            "schema": {
+              "type": "string",
+              "description": "The effective date until which the delete is valid. If not supplied this will be valid indefinitely, or until the next 'effectiveAt' date of the Access Metadata",
+              "format": "date-time",
+              "nullable": true
+            },
+            "x-nullable": true
           }
         ],
         "responses": {
@@ -9085,6 +9109,18 @@
               "format": "dateorcutlabel",
               "nullable": true
             }
+          },
+          {
+            "name": "effectiveUntil",
+            "in": "query",
+            "description": "The effective datetime until which the Access Metadata is valid. If not supplied this will be valid indefinitely, or until the next 'effectiveAt' datetime of the Access Metadata",
+            "schema": {
+              "type": "string",
+              "description": "The effective datetime until which the Access Metadata is valid. If not supplied this will be valid indefinitely, or until the next 'effectiveAt' datetime of the Access Metadata",
+              "format": "date-time",
+              "nullable": true
+            },
+            "x-nullable": true
           }
         ],
         "requestBody": {
@@ -9412,6 +9448,18 @@
               "format": "dateorcutlabel",
               "nullable": true
             }
+          },
+          {
+            "name": "effectiveUntil",
+            "in": "query",
+            "description": "The effective date until which the delete is valid. If not supplied this will be valid indefinitely, or until the next 'effectiveAt' date of the Access Metadata",
+            "schema": {
+              "type": "string",
+              "description": "The effective date until which the delete is valid. If not supplied this will be valid indefinitely, or until the next 'effectiveAt' date of the Access Metadata",
+              "format": "date-time",
+              "nullable": true
+            },
+            "x-nullable": true
           }
         ],
         "responses": {
@@ -11051,6 +11099,18 @@
               "format": "dateorcutlabel",
               "nullable": true
             }
+          },
+          {
+            "name": "effectiveUntil",
+            "in": "query",
+            "description": "The effective date until which the Access Metadata is valid. If not supplied this will be valid indefinitely, or until the next 'effectiveAt' date of the Access Metadata",
+            "schema": {
+              "type": "string",
+              "description": "The effective date until which the Access Metadata is valid. If not supplied this will be valid indefinitely, or until the next 'effectiveAt' date of the Access Metadata",
+              "format": "date-time",
+              "nullable": true
+            },
+            "x-nullable": true
           }
         ],
         "requestBody": {
@@ -11226,6 +11286,18 @@
               "format": "dateorcutlabel",
               "nullable": true
             }
+          },
+          {
+            "name": "effectiveUntil",
+            "in": "query",
+            "description": "The effective date until which the delete is valid. If not supplied this will be valid indefinitely, or until the next 'effectiveAt' date of the Access Metadata",
+            "schema": {
+              "type": "string",
+              "description": "The effective date until which the delete is valid. If not supplied this will be valid indefinitely, or until the next 'effectiveAt' date of the Access Metadata",
+              "format": "date-time",
+              "nullable": true
+            },
+            "x-nullable": true
           }
         ],
         "responses": {
@@ -15259,6 +15331,18 @@
               "format": "dateorcutlabel",
               "nullable": true
             }
+          },
+          {
+            "name": "effectiveUntil",
+            "in": "query",
+            "description": "The effective date until which the Access Metadata is valid. If not supplied this will be valid indefinitely, or until the next 'effectiveAt' date of the Access Metadata",
+            "schema": {
+              "type": "string",
+              "description": "The effective date until which the Access Metadata is valid. If not supplied this will be valid indefinitely, or until the next 'effectiveAt' date of the Access Metadata",
+              "format": "date-time",
+              "nullable": true
+            },
+            "x-nullable": true
           }
         ],
         "requestBody": {
@@ -15434,6 +15518,18 @@
               "format": "dateorcutlabel",
               "nullable": true
             }
+          },
+          {
+            "name": "effectiveUntil",
+            "in": "query",
+            "description": "The effective date until which the delete is valid. If not supplied this will be valid indefinitely, or until the next 'effectiveAt' date of the Access Metadata",
+            "schema": {
+              "type": "string",
+              "description": "The effective date until which the delete is valid. If not supplied this will be valid indefinitely, or until the next 'effectiveAt' date of the Access Metadata",
+              "format": "date-time",
+              "nullable": true
+            },
+            "x-nullable": true
           }
         ],
         "responses": {
@@ -37603,7 +37699,7 @@
         "description": "OAuth2 Implicit Grant",
         "flows": {
           "implicit": {
-            "authorizationUrl": "https://lusid.okta.com/oauth2/default/v1/authorize",
+            "authorizationUrl": "https://dummyurl.lusid.com/",
             "scopes": {}
           }
         }
