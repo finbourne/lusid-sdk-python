@@ -9,7 +9,7 @@
       "url": "https://www.finbourne.com",
       "email": "info@finbourne.com"
     },
-    "version": "0.11.4109",
+    "version": "0.11.4110",
     "x-logo": {
       "url": "https://www.lusid.com/app/assets/logo_white.png",
       "backgroundColor": "#415464"
@@ -17,7 +17,7 @@
   },
   "servers": [
     {
-      "url": "http://local-unit-test-server.lusid.com:63112"
+      "url": "http://local-unit-test-server.lusid.com:45372"
     }
   ],
   "paths": {
@@ -32325,7 +32325,7 @@
               }
             },
             "additionalProperties": false,
-            "description": "It is possible to control which supplier is used for a given asset class.",
+            "description": "It is possible to control which supplier is used for a given asset class.\r\nThis field is deprecated in favour of market data rules, which subsumes its functionality.",
             "nullable": true
           },
           "options": {
