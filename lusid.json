@@ -9,7 +9,7 @@
       "url": "https://www.finbourne.com",
       "email": "info@finbourne.com"
     },
-    "version": "0.11.4150",
+    "version": "0.11.4151",
     "x-logo": {
       "url": "https://www.lusid.com/app/assets/logo_white.png",
       "backgroundColor": "#415464"
@@ -17,7 +17,7 @@
   },
   "servers": [
     {
-      "url": "http://local-unit-test-server.lusid.com:58189"
+      "url": "http://local-unit-test-server.lusid.com:39968"
     }
   ],
   "paths": {
@@ -16194,9 +16194,15 @@
                     "alias": "1M"
                   }
                 ],
+                "returnIds": [
+                  {
+                    "scope": "TestScope",
+                    "code": "default"
+                  }
+                ],
                 "recipeId": {
-                  "scope": "TestScope",
-                  "code": "default"
+                  "scope": "ReturnsScope",
+                  "code": "ReturnCode"
                 },
                 "compositeMethod": "Asset",
                 "period": "Daily",
@@ -16219,9 +16225,15 @@
                     "alias": "1M"
                   }
                 ],
+                "returnIds": [
+                  {
+                    "scope": "TestScope",
+                    "code": "default"
+                  }
+                ],
                 "recipeId": {
-                  "scope": "TestScope",
-                  "code": "default"
+                  "scope": "ReturnsScope",
+                  "code": "ReturnCode"
                 },
                 "compositeMethod": "Asset",
                 "period": "Daily",
@@ -16244,9 +16256,15 @@
                     "alias": "1M"
                   }
                 ],
+                "returnIds": [
+                  {
+                    "scope": "TestScope",
+                    "code": "default"
+                  }
+                ],
                 "recipeId": {
-                  "scope": "TestScope",
-                  "code": "default"
+                  "scope": "ReturnsScope",
+                  "code": "ReturnCode"
                 },
                 "compositeMethod": "Asset",
                 "period": "Daily",
@@ -16269,9 +16287,15 @@
                     "alias": "1M"
                   }
                 ],
+                "returnIds": [
+                  {
+                    "scope": "TestScope",
+                    "code": "default"
+                  }
+                ],
                 "recipeId": {
-                  "scope": "TestScope",
-                  "code": "default"
+                  "scope": "ReturnsScope",
+                  "code": "ReturnCode"
                 },
                 "compositeMethod": "Asset",
                 "period": "Daily",
