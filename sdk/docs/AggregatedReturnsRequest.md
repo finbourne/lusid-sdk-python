@@ -6,7 +6,7 @@ The request used in the AggregatedReturns.
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **metrics** | [**list[PerformanceReturnsMetric]**](PerformanceReturnsMetric.md) | A list of metrics to calculate in the AggregatedReturns. | 
-**return_id** | [**ResourceId**](ResourceId.md) |  | [optional] 
+**return_ids** | [**list[ResourceId]**](ResourceId.md) | The Scope and code of the returns. | [optional] 
 **recipe_id** | [**ResourceId**](ResourceId.md) |  | [optional] 
 **composite_method** | **str** | The method used to calculate the Portfolio performance: Equal/Asset. | [optional] 
 **period** | **str** | The type of the returns used to calculate the aggregation result: Daily/Monthly. | [optional] 
