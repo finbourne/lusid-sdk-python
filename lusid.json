@@ -9,7 +9,7 @@
       "url": "https://www.finbourne.com",
       "email": "info@finbourne.com"
     },
-    "version": "0.11.4152",
+    "version": "0.11.4153",
     "x-logo": {
       "url": "https://www.lusid.com/app/assets/logo_white.png",
       "backgroundColor": "#415464"
@@ -17,7 +17,7 @@
   },
   "servers": [
     {
-      "url": "http://local-unit-test-server.lusid.com:53480"
+      "url": "http://local-unit-test-server.lusid.com:32342"
     }
   ],
   "paths": {
@@ -27700,7 +27700,13 @@
                     }
                   },
                   "counterpartyId": "CounterpartyId-118263",
-                  "source": ""
+                  "source": "",
+                  "otcConfirmation": {
+                    "counterpartyAgreementId": {
+                      "scope": "someScope",
+                      "code": "someCode"
+                    }
+                  }
                 }
               ]
             },
@@ -27741,7 +27747,13 @@
                     }
                   },
                   "counterpartyId": "CounterpartyId-118263",
-                  "source": ""
+                  "source": "",
+                  "otcConfirmation": {
+                    "counterpartyAgreementId": {
+                      "scope": "someScope",
+                      "code": "someCode"
+                    }
+                  }
                 }
               ]
             },
@@ -27782,7 +27794,13 @@
                     }
                   },
                   "counterpartyId": "CounterpartyId-118263",
-                  "source": ""
+                  "source": "",
+                  "otcConfirmation": {
+                    "counterpartyAgreementId": {
+                      "scope": "someScope",
+                      "code": "someCode"
+                    }
+                  }
                 }
               ]
             },
@@ -27823,7 +27841,13 @@
                     }
                   },
                   "counterpartyId": "CounterpartyId-118263",
-                  "source": ""
+                  "source": "",
+                  "otcConfirmation": {
+                    "counterpartyAgreementId": {
+                      "scope": "someScope",
+                      "code": "someCode"
+                    }
+                  }
                 }
               ]
             }
@@ -32897,10 +32921,8 @@
       "OtcConfirmation": {
         "type": "object",
         "properties": {
-          "counterpartyAgreementCode": {
-            "type": "string",
-            "description": "The counterparty party agreement code used to identify and retrieve the specific Counterparty Agreement that governs a transaction",
-            "nullable": true
+          "counterpartyAgreementId": {
+            "$ref": "#/components/schemas/ResourceId"
           }
         },
         "additionalProperties": false,
@@ -36644,6 +36666,9 @@
             "type": "string",
             "description": "The source of the transaction. This is used to look up the appropriate transaction group set in the transaction type configuration.",
             "nullable": true
+          },
+          "otcConfirmation": {
+            "$ref": "#/components/schemas/OtcConfirmation"
           }
         },
         "additionalProperties": false
