@@ -9,7 +9,7 @@
       "url": "https://www.finbourne.com",
       "email": "info@finbourne.com"
     },
-    "version": "0.11.4195",
+    "version": "0.11.4196",
     "x-logo": {
       "url": "https://www.lusid.com/app/assets/logo_white.png",
       "backgroundColor": "#415464"
@@ -32442,7 +32442,7 @@
             "maxLength": 128,
             "minLength": 0,
             "type": "string",
-            "description": "The market data key pattern which this is a rule for. A dot separated string (A.B.C.D.*)"
+            "description": "A dot-separated string that defines a pattern for matching market data dependencies.\r\nThe form of the string depends on the type of the dependency; see below for basic types and the Knowledge Base for further info.\r\nQuote lookup: \"Quote.{CodeType}.{Identifier}\" e.g. \"Quote.RIC.IBM\"\r\nFx rates: \"Fx.CurrencyPair.{FgnCcy}{DomCcy}\" e.g. \"Fx.CurrencyPair.USDGBP\"\r\nDiscounting curves: \"Rates.{Currency}.{Currency}OIS e.g. \"Rates.USD.USDOIS\"\r\n            \r\nTrailing parameters can be replaced by the wildcard character '*'.\r\ne.g. \"Quote.RIC.*\" matches any dependency on a RIC quote."
           },
           "supplier": {
             "maxLength": 32,
@@ -32506,7 +32506,7 @@
           }
         },
         "additionalProperties": false,
-        "description": "A market data key rule describes a mapping for satisfying a particular market dependency. The supplier, scope, quote type and price side\r\ninformation define the quote in the market and which Vendor for market data would be used to perform the lookup.\r\nThe market data key defines what dependency this satisfies. The key is a rule that describes the asset class, its identifier and any other\r\nspecifics required to uniquely describe a specific economic entity (e.g. an Fx currency pair, equity name or credit curve)."
+        "description": "When performing analytics, instruments and models have dependencies on market data.\r\nA market data key rule essentially tells lusid to \"resolve dependencies matching the pattern 'X' using data of the form 'Y'\".\r\nThe parameter 'X' is defined by the key of the key rule, and might specify \"all USD rates curves\" or \"all RIC-based prices\".\r\nThe parameter 'Y' is defined by the remaining fields of the key rule, and allows the user to configure things such as\r\nwhere to look for data, what sort of data should be looked for (e.g. bid/mid/ask), and how old the data is allowed to be."
       },
       "MarketDataSpecificRule": {
         "required": [
