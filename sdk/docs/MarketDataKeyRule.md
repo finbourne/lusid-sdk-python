@@ -1,11 +1,11 @@
 # MarketDataKeyRule
 
-When performing analytics, instruments and models have dependencies on market data.  A market data key rule essentially tells lusid to \"resolve dependencies matching the pattern 'X' using data of the form 'Y'\".  The parameter 'X' is defined by the key of the key rule, and might specify \"all USD rates curves\" or \"all RIC-based prices\".  The parameter 'Y' is defined by the remaining fields of the key rule, and allows the user to configure things such as  where to look for data, what sort of data should be looked for (e.g. bid/mid/ask), and how old the data is allowed to be.
+A market data key rule describes a mapping for satisfying a particular market dependency. The supplier, scope, quote type and price side  information define the quote in the market and which Vendor for market data would be used to perform the lookup.  The market data key defines what dependency this satisfies. The key is a rule that describes the asset class, its identifier and any other  specifics required to uniquely describe a specific economic entity (e.g. an Fx currency pair, equity name or credit curve).
 
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**key** | **str** | A dot-separated string that defines a pattern for matching market data dependencies.  The form of the string depends on the type of the dependency; see below for basic types and the Knowledge Base for further info.  Quote lookup: \&quot;Quote.{CodeType}.{Identifier}\&quot; e.g. \&quot;Quote.RIC.IBM\&quot;  Fx rates: \&quot;Fx.CurrencyPair.{FgnCcy}{DomCcy}\&quot; e.g. \&quot;Fx.CurrencyPair.USDGBP\&quot;  Discounting curves: \&quot;Rates.{Currency}.{Currency}OIS e.g. \&quot;Rates.USD.USDOIS\&quot;                Trailing parameters can be replaced by the wildcard character &#39;*&#39;.  e.g. \&quot;Quote.RIC.*\&quot; matches any dependency on a RIC quote. | 
+**key** | **str** | The market data key pattern which this is a rule for. A dot separated string (A.B.C.D.*) | 
 **supplier** | **str** | The market data supplier (where the data comes from) | 
 **data_scope** | **str** | The scope in which the data should be found when using this rule. | 
 **quote_type** | **str** | The available values are: Price, Spread, Rate, LogNormalVol, NormalVol, ParSpread, IsdaSpread, Upfront | 
