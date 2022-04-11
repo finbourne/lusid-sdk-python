@@ -9,7 +9,7 @@
       "url": "https://www.finbourne.com",
       "email": "info@finbourne.com"
     },
-    "version": "0.11.4207",
+    "version": "0.11.4208",
     "x-logo": {
       "url": "https://www.lusid.com/app/assets/logo_white.png",
       "backgroundColor": "#415464"
@@ -17,7 +17,7 @@
   },
   "servers": [
     {
-      "url": "http://local-unit-test-server.lusid.com:44032"
+      "url": "http://local-unit-test-server.lusid.com:42036"
     }
   ],
   "paths": {
@@ -2249,7 +2249,7 @@
         "tags": [
           "Data Types"
         ],
-        "summary": "[EARLY ACCESS] ListDataTypes: List data types",
+        "summary": "ListDataTypes: List data types",
         "description": "List all data types in a specified scope",
         "operationId": "ListDataTypes",
         "parameters": [
@@ -2399,7 +2399,7 @@
             "oauth2": []
           }
         ],
-        "x-fbn-apistatus": "EarlyAccess"
+        "x-fbn-apistatus": "Stable"
       }
     },
     "/api/datatypes/{scope}/{code}": {
@@ -2407,7 +2407,7 @@
         "tags": [
           "Data Types"
         ],
-        "summary": "[EARLY ACCESS] GetDataType: Get data type definition",
+        "summary": "GetDataType: Get data type definition",
         "description": "Get the definition of a specified data type",
         "operationId": "GetDataType",
         "parameters": [
@@ -2509,7 +2509,7 @@
             "oauth2": []
           }
         ],
-        "x-fbn-apistatus": "EarlyAccess"
+        "x-fbn-apistatus": "Stable"
       }
     },
     "/api/datatypes/{scope}/{code}/units": {
