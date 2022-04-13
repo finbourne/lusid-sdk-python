@@ -9,7 +9,7 @@
       "url": "https://www.finbourne.com",
       "email": "info@finbourne.com"
     },
-    "version": "0.11.4221",
+    "version": "0.11.4222",
     "x-logo": {
       "url": "https://www.lusid.com/app/assets/logo_white.png",
       "backgroundColor": "#415464"
@@ -17,7 +17,7 @@
   },
   "servers": [
     {
-      "url": "http://local-unit-test-server.lusid.com:31097"
+      "url": "http://local-unit-test-server.lusid.com:31396"
     }
   ],
   "paths": {
@@ -30664,7 +30664,7 @@
           },
           "valueRequired": {
             "type": "boolean",
-            "description": "Whether or not a value is always required for this property."
+            "description": "This field is not implemented and should be disregarded."
           },
           "displayName": {
             "type": "string",
@@ -34379,7 +34379,7 @@
           },
           "valueRequired": {
             "type": "boolean",
-            "description": "Whether or not a value is always required for this property."
+            "description": "This field is not implemented and should be disregarded."
           },
           "lifeTime": {
             "enum": [
@@ -34537,7 +34537,7 @@
           },
           "valueRequired": {
             "type": "boolean",
-            "description": "Whether or not a value is always required for this property."
+            "description": "This field is not implemented and should be disregarded."
           },
           "lifeTime": {
             "enum": [
