@@ -9,7 +9,7 @@
       "url": "https://www.finbourne.com",
       "email": "info@finbourne.com"
     },
-    "version": "0.11.4223",
+    "version": "0.11.4224",
     "x-logo": {
       "url": "https://www.lusid.com/app/assets/logo_white.png",
       "backgroundColor": "#415464"
@@ -17,7 +17,7 @@
   },
   "servers": [
     {
-      "url": "https://fbn-prd.lusid.com/api"
+      "url": "http://local-unit-test-server.lusid.com:52735"
     }
   ],
   "paths": {
@@ -2201,6 +2201,699 @@
               "text/json": {
                 "schema": {
                   "$ref": "#/components/schemas/GetComplexMarketDataResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "The details of the input related failure",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/LusidValidationProblemDetails"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/LusidValidationProblemDetails"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/LusidValidationProblemDetails"
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "Error response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/LusidProblemDetails"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "oauth2": []
+          }
+        ],
+        "x-fbn-apistatus": "EarlyAccess"
+      }
+    },
+    "/api/corporateactionsources": {
+      "post": {
+        "tags": [
+          "Corporate Action Sources"
+        ],
+        "summary": "[EARLY ACCESS] CreateCorporateActionSource: Create corporate action source",
+        "description": "Create a corporate action source.",
+        "operationId": "CreateCorporateActionSource",
+        "requestBody": {
+          "description": "The corporate action source definition",
+          "content": {
+            "application/json-patch+json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateCorporateActionSourceRequest"
+              },
+              "example": {
+                "scope": "ExampleScope",
+                "code": "ExampleCode",
+                "displayName": "ExampleDisplayName",
+                "description": "Example Description",
+                "instrumentScopes": []
+              }
+            },
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateCorporateActionSourceRequest"
+              },
+              "example": {
+                "scope": "ExampleScope",
+                "code": "ExampleCode",
+                "displayName": "ExampleDisplayName",
+                "description": "Example Description",
+                "instrumentScopes": []
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateCorporateActionSourceRequest"
+              },
+              "example": {
+                "scope": "ExampleScope",
+                "code": "ExampleCode",
+                "displayName": "ExampleDisplayName",
+                "description": "Example Description",
+                "instrumentScopes": []
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateCorporateActionSourceRequest"
+              },
+              "example": {
+                "scope": "ExampleScope",
+                "code": "ExampleCode",
+                "displayName": "ExampleDisplayName",
+                "description": "Example Description",
+                "instrumentScopes": []
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "201": {
+            "description": "The created corporate action source",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/CorporateActionSource"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CorporateActionSource"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CorporateActionSource"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "The details of the input related failure",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/LusidValidationProblemDetails"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/LusidValidationProblemDetails"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/LusidValidationProblemDetails"
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "Error response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/LusidProblemDetails"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "oauth2": []
+          }
+        ],
+        "x-fbn-apistatus": "EarlyAccess"
+      },
+      "get": {
+        "tags": [
+          "Corporate Action Sources"
+        ],
+        "summary": "[EARLY ACCESS] ListCorporateActionSources: List corporate action sources",
+        "description": "Gets a list of all corporate action sources",
+        "operationId": "ListCorporateActionSources",
+        "parameters": [
+          {
+            "name": "asAt",
+            "in": "query",
+            "description": "Optional. The AsAt date of the data",
+            "schema": {
+              "type": "string",
+              "description": "Optional. The AsAt date of the data",
+              "format": "date-time",
+              "nullable": true
+            },
+            "x-nullable": true
+          },
+          {
+            "name": "sortBy",
+            "in": "query",
+            "description": "Optional. Order the results by these fields. Use use the '-' sign to denote descending order e.g. -MyFieldName",
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              },
+              "description": "Optional. Order the results by these fields. Use use the '-' sign to denote descending order e.g. -MyFieldName",
+              "nullable": true
+            },
+            "x-nullable": true
+          },
+          {
+            "name": "limit",
+            "in": "query",
+            "description": "Optional. When paginating, limit the number of returned results to this many. If not specified, a default\r\nof 100 is used.",
+            "schema": {
+              "type": "integer",
+              "description": "Optional. When paginating, limit the number of returned results to this many. If not specified, a default\r\nof 100 is used.",
+              "format": "int32",
+              "default": 100,
+              "nullable": true
+            },
+            "x-nullable": true
+          },
+          {
+            "name": "filter",
+            "in": "query",
+            "description": "Optional. Expression to filter the result set. For example, to\r\nfilter on the Display Name, use \"displayName eq 'string'\"\r\nRead more about filtering results from LUSID here https://support.lusid.com/filtering-results-from-lusid.",
+            "schema": {
+              "maxLength": 16384,
+              "minLength": 0,
+              "pattern": "^[\\s\\S]*$",
+              "type": "string",
+              "description": "Optional. Expression to filter the result set. For example, to\r\nfilter on the Display Name, use \"displayName eq 'string'\"\r\nRead more about filtering results from LUSID here https://support.lusid.com/filtering-results-from-lusid.",
+              "nullable": true
+            }
+          },
+          {
+            "name": "page",
+            "in": "query",
+            "description": "Optional. The pagination token to use to continue listing items from a previous call. Page values are\r\nreturn from list calls, and must be supplied exactly as returned. Additionally, when specifying this\r\nvalue, the filter, asAt, and limit must not\r\nbe modified.",
+            "schema": {
+              "maxLength": 500,
+              "minLength": 1,
+              "pattern": "^[a-zA-Z0-9\\+/]*={0,3}$",
+              "type": "string",
+              "description": "Optional. The pagination token to use to continue listing items from a previous call. Page values are\r\nreturn from list calls, and must be supplied exactly as returned. Additionally, when specifying this\r\nvalue, the filter, asAt, and limit must not\r\nbe modified.",
+              "nullable": true
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "All Existing Corporate Action Sources",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/PagedResourceListOfCorporateActionSource"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PagedResourceListOfCorporateActionSource"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PagedResourceListOfCorporateActionSource"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "The details of the input related failure",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/LusidValidationProblemDetails"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/LusidValidationProblemDetails"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/LusidValidationProblemDetails"
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "Error response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/LusidProblemDetails"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "oauth2": []
+          }
+        ],
+        "x-fbn-apistatus": "EarlyAccess"
+      }
+    },
+    "/api/corporateactionsources/{scope}/{code}/corporateactions": {
+      "post": {
+        "tags": [
+          "Corporate Action Sources"
+        ],
+        "summary": "[EARLY ACCESS] BatchUpsertCorporateActions: Upsert corporate actions",
+        "description": "Create or update one or more corporate actions in a particular corporate action source. Failures are identified in the body of the response.\r\n            \r\nIf a corporate action is upserted at exactly the same effective datetime as a transaction for the same instrument, the corporate action takes precedence. Depending on the nature of the corporate action, this may mean it affects the transaction.",
+        "operationId": "BatchUpsertCorporateActions",
+        "parameters": [
+          {
+            "name": "scope",
+            "in": "path",
+            "description": "The scope of corporate action source",
+            "required": true,
+            "schema": {
+              "maxLength": 64,
+              "minLength": 1,
+              "pattern": "^[a-zA-Z0-9\\-_]+$",
+              "type": "string",
+              "description": "The scope of corporate action source",
+              "nullable": true
+            }
+          },
+          {
+            "name": "code",
+            "in": "path",
+            "description": "The code of the corporate action source",
+            "required": true,
+            "schema": {
+              "maxLength": 64,
+              "minLength": 1,
+              "pattern": "^[a-zA-Z0-9\\-_]+$",
+              "type": "string",
+              "description": "The code of the corporate action source",
+              "nullable": true
+            }
+          }
+        ],
+        "requestBody": {
+          "description": "The corporate action definitions",
+          "content": {
+            "application/json-patch+json": {
+              "schema": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/components/schemas/UpsertCorporateActionRequest"
+                },
+                "description": "The corporate action definitions",
+                "nullable": true
+              },
+              "example": [
+                {
+                  "corporateActionCode": "MyStockSplitId",
+                  "description": "2-for-1 stock split of instrument BBG001S6PJ31",
+                  "announcementDate": "2018-03-01T00:00:00.0000000+00:00",
+                  "exDate": "2018-06-01T00:00:00.0000000+00:00",
+                  "recordDate": "2018-06-02T00:00:00.0000000+00:00",
+                  "paymentDate": "2018-08-02T00:00:00.0000000+00:00",
+                  "transitions": [
+                    {
+                      "inputTransition": {
+                        "instrumentIdentifiers": {
+                          "instrument/default/Figi": "BBG001S6PJ31"
+                        },
+                        "unitsFactor": 1,
+                        "costFactor": 1
+                      },
+                      "outputTransitions": [
+                        {
+                          "instrumentIdentifiers": {
+                            "instrument/default/Figi": "BBG001S6PJ31"
+                          },
+                          "unitsFactor": 2,
+                          "costFactor": 1
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            },
+            "application/json": {
+              "schema": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/components/schemas/UpsertCorporateActionRequest"
+                },
+                "description": "The corporate action definitions",
+                "nullable": true
+              },
+              "example": [
+                {
+                  "corporateActionCode": "MyStockSplitId",
+                  "description": "2-for-1 stock split of instrument BBG001S6PJ31",
+                  "announcementDate": "2018-03-01T00:00:00.0000000+00:00",
+                  "exDate": "2018-06-01T00:00:00.0000000+00:00",
+                  "recordDate": "2018-06-02T00:00:00.0000000+00:00",
+                  "paymentDate": "2018-08-02T00:00:00.0000000+00:00",
+                  "transitions": [
+                    {
+                      "inputTransition": {
+                        "instrumentIdentifiers": {
+                          "instrument/default/Figi": "BBG001S6PJ31"
+                        },
+                        "unitsFactor": 1,
+                        "costFactor": 1
+                      },
+                      "outputTransitions": [
+                        {
+                          "instrumentIdentifiers": {
+                            "instrument/default/Figi": "BBG001S6PJ31"
+                          },
+                          "unitsFactor": 2,
+                          "costFactor": 1
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            },
+            "text/json": {
+              "schema": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/components/schemas/UpsertCorporateActionRequest"
+                },
+                "description": "The corporate action definitions",
+                "nullable": true
+              },
+              "example": [
+                {
+                  "corporateActionCode": "MyStockSplitId",
+                  "description": "2-for-1 stock split of instrument BBG001S6PJ31",
+                  "announcementDate": "2018-03-01T00:00:00.0000000+00:00",
+                  "exDate": "2018-06-01T00:00:00.0000000+00:00",
+                  "recordDate": "2018-06-02T00:00:00.0000000+00:00",
+                  "paymentDate": "2018-08-02T00:00:00.0000000+00:00",
+                  "transitions": [
+                    {
+                      "inputTransition": {
+                        "instrumentIdentifiers": {
+                          "instrument/default/Figi": "BBG001S6PJ31"
+                        },
+                        "unitsFactor": 1,
+                        "costFactor": 1
+                      },
+                      "outputTransitions": [
+                        {
+                          "instrumentIdentifiers": {
+                            "instrument/default/Figi": "BBG001S6PJ31"
+                          },
+                          "unitsFactor": 2,
+                          "costFactor": 1
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            },
+            "application/*+json": {
+              "schema": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/components/schemas/UpsertCorporateActionRequest"
+                },
+                "description": "The corporate action definitions",
+                "nullable": true
+              },
+              "example": [
+                {
+                  "corporateActionCode": "MyStockSplitId",
+                  "description": "2-for-1 stock split of instrument BBG001S6PJ31",
+                  "announcementDate": "2018-03-01T00:00:00.0000000+00:00",
+                  "exDate": "2018-06-01T00:00:00.0000000+00:00",
+                  "recordDate": "2018-06-02T00:00:00.0000000+00:00",
+                  "paymentDate": "2018-08-02T00:00:00.0000000+00:00",
+                  "transitions": [
+                    {
+                      "inputTransition": {
+                        "instrumentIdentifiers": {
+                          "instrument/default/Figi": "BBG001S6PJ31"
+                        },
+                        "unitsFactor": 1,
+                        "costFactor": 1
+                      },
+                      "outputTransitions": [
+                        {
+                          "instrumentIdentifiers": {
+                            "instrument/default/Figi": "BBG001S6PJ31"
+                          },
+                          "unitsFactor": 2,
+                          "costFactor": 1
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "The created corporate actions",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/UpsertCorporateActionsResponse"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/UpsertCorporateActionsResponse"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/UpsertCorporateActionsResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "The details of the input related failure",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/LusidValidationProblemDetails"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/LusidValidationProblemDetails"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/LusidValidationProblemDetails"
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "Error response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/LusidProblemDetails"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "oauth2": []
+          }
+        ],
+        "x-fbn-apistatus": "EarlyAccess"
+      },
+      "get": {
+        "tags": [
+          "Corporate Action Sources"
+        ],
+        "summary": "[EARLY ACCESS] GetCorporateActions: Get corporate actions",
+        "description": "Get corporate actions from a particular corporate action source.",
+        "operationId": "GetCorporateActions",
+        "parameters": [
+          {
+            "name": "scope",
+            "in": "path",
+            "description": "The scope of the corporate action source.",
+            "required": true,
+            "schema": {
+              "maxLength": 64,
+              "minLength": 1,
+              "pattern": "^[a-zA-Z0-9\\-_]+$",
+              "type": "string",
+              "description": "The scope of the corporate action source.",
+              "nullable": true
+            }
+          },
+          {
+            "name": "code",
+            "in": "path",
+            "description": "The code of the corporate action source.",
+            "required": true,
+            "schema": {
+              "maxLength": 64,
+              "minLength": 1,
+              "pattern": "^[a-zA-Z0-9\\-_]+$",
+              "type": "string",
+              "description": "The code of the corporate action source.",
+              "nullable": true
+            }
+          },
+          {
+            "name": "fromEffectiveAt",
+            "in": "query",
+            "description": "Optional. The start effective date of the data range.",
+            "schema": {
+              "maxLength": 256,
+              "minLength": 0,
+              "pattern": "^[a-zA-Z0-9\\-_\\+:\\.]+$",
+              "type": "string",
+              "description": "Optional. The start effective date of the data range.",
+              "format": "dateorcutlabel",
+              "nullable": true
+            }
+          },
+          {
+            "name": "toEffectiveAt",
+            "in": "query",
+            "description": "Optional. The end effective date of the data range.",
+            "schema": {
+              "maxLength": 256,
+              "minLength": 0,
+              "pattern": "^[a-zA-Z0-9\\-_\\+:\\.]+$",
+              "type": "string",
+              "description": "Optional. The end effective date of the data range.",
+              "format": "dateorcutlabel",
+              "nullable": true
+            }
+          },
+          {
+            "name": "asAt",
+            "in": "query",
+            "description": "Optional. The AsAt date of the data.",
+            "schema": {
+              "type": "string",
+              "description": "Optional. The AsAt date of the data.",
+              "format": "date-time",
+              "nullable": true
+            },
+            "x-nullable": true
+          },
+          {
+            "name": "sortBy",
+            "in": "query",
+            "description": "Optional. Order the results by these fields. Use use the '-' sign to denote descending order e.g. -MyFieldName",
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              },
+              "description": "Optional. Order the results by these fields. Use use the '-' sign to denote descending order e.g. -MyFieldName",
+              "nullable": true
+            },
+            "x-nullable": true
+          },
+          {
+            "name": "limit",
+            "in": "query",
+            "description": "Optional. When paginating, limit the results to this number.",
+            "schema": {
+              "type": "integer",
+              "description": "Optional. When paginating, limit the results to this number.",
+              "format": "int32",
+              "nullable": true
+            },
+            "x-nullable": true
+          },
+          {
+            "name": "filter",
+            "in": "query",
+            "description": "Optional. Expression to filter the result set.\r\n            For example, to filter on the Announcement Date, use \"announcementDate eq '2020-03-06'\"\r\n            Read more about filtering results from LUSID here https://support.lusid.com/filtering-results-from-lusid.",
+            "schema": {
+              "maxLength": 16384,
+              "minLength": 0,
+              "pattern": "^[\\s\\S]*$",
+              "type": "string",
+              "description": "Optional. Expression to filter the result set.\r\n            For example, to filter on the Announcement Date, use \"announcementDate eq '2020-03-06'\"\r\n            Read more about filtering results from LUSID here https://support.lusid.com/filtering-results-from-lusid.",
+              "nullable": true
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Corporate Actions",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResourceListOfCorporateAction"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResourceListOfCorporateAction"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResourceListOfCorporateAction"
                 }
               }
             }
@@ -30338,6 +31031,201 @@
         },
         "additionalProperties": false
       },
+      "CorporateAction": {
+        "required": [
+          "corporateActionCode"
+        ],
+        "type": "object",
+        "properties": {
+          "corporateActionCode": {
+            "type": "string",
+            "description": "The unique identifier of this corporate action"
+          },
+          "description": {
+            "type": "string",
+            "description": "The description of the corporate action.",
+            "nullable": true
+          },
+          "announcementDate": {
+            "type": "string",
+            "description": "The announcement date of the corporate action",
+            "format": "date-time"
+          },
+          "exDate": {
+            "type": "string",
+            "description": "The ex date of the corporate action",
+            "format": "date-time"
+          },
+          "recordDate": {
+            "type": "string",
+            "description": "The record date of the corporate action",
+            "format": "date-time"
+          },
+          "paymentDate": {
+            "type": "string",
+            "description": "The payment date of the corporate action",
+            "format": "date-time"
+          },
+          "transitions": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/CorporateActionTransition"
+            },
+            "description": "The transitions that result from this corporate action",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false,
+        "description": "A corporate action"
+      },
+      "CorporateActionSource": {
+        "type": "object",
+        "properties": {
+          "href": {
+            "type": "string",
+            "description": "The specific Uniform Resource Identifier (URI) for this resource at the requested effective and asAt datetime.",
+            "format": "uri",
+            "nullable": true
+          },
+          "id": {
+            "$ref": "#/components/schemas/ResourceId"
+          },
+          "version": {
+            "$ref": "#/components/schemas/Version"
+          },
+          "displayName": {
+            "type": "string",
+            "description": "The name of the corporate action source",
+            "nullable": true
+          },
+          "description": {
+            "type": "string",
+            "description": "The description of the corporate action source",
+            "nullable": true
+          },
+          "instrumentScopes": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "description": "The list of instrument scopes used as the scope resolution strategy when resolving instruments of upserted corporate actions.",
+            "nullable": true
+          },
+          "links": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Link"
+            },
+            "description": "Collection of links.",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false,
+        "description": "A corporate action source"
+      },
+      "CorporateActionTransition": {
+        "type": "object",
+        "properties": {
+          "inputTransition": {
+            "$ref": "#/components/schemas/CorporateActionTransitionComponent"
+          },
+          "outputTransitions": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/CorporateActionTransitionComponent"
+            },
+            "description": "What will be generated relative to the input transition",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false,
+        "description": "A 'transition' within a corporate action, representing a set of output movements paired to a single input position"
+      },
+      "CorporateActionTransitionComponent": {
+        "required": [
+          "costFactor",
+          "instrumentIdentifiers",
+          "instrumentScope",
+          "instrumentUid",
+          "unitsFactor"
+        ],
+        "type": "object",
+        "properties": {
+          "instrumentScope": {
+            "type": "string",
+            "description": "The scope in which the instrument lies."
+          },
+          "instrumentIdentifiers": {
+            "type": "object",
+            "additionalProperties": {
+              "type": "string"
+            },
+            "description": "Unique instrument identifiers"
+          },
+          "instrumentUid": {
+            "type": "string",
+            "description": "LUSID's internal unique instrument identifier, resolved from the instrument identifiers"
+          },
+          "unitsFactor": {
+            "type": "number",
+            "description": "The factor to scale units by",
+            "format": "double"
+          },
+          "costFactor": {
+            "type": "number",
+            "description": "The factor to scale cost by",
+            "format": "double"
+          }
+        },
+        "additionalProperties": false,
+        "description": "A single transition component, when grouped with other components a corporate action transition is formed."
+      },
+      "CorporateActionTransitionComponentRequest": {
+        "required": [
+          "costFactor",
+          "instrumentIdentifiers",
+          "unitsFactor"
+        ],
+        "type": "object",
+        "properties": {
+          "instrumentIdentifiers": {
+            "type": "object",
+            "additionalProperties": {
+              "type": "string"
+            },
+            "description": "Unique instrument identifiers"
+          },
+          "unitsFactor": {
+            "type": "number",
+            "description": "The factor to scale units by",
+            "format": "double"
+          },
+          "costFactor": {
+            "type": "number",
+            "description": "The factor to scale cost by",
+            "format": "double"
+          }
+        },
+        "additionalProperties": false,
+        "description": "A single transition component request, when grouped with other transition component requests a corporate action\r\ntransition request is formed."
+      },
+      "CorporateActionTransitionRequest": {
+        "type": "object",
+        "properties": {
+          "inputTransition": {
+            "$ref": "#/components/schemas/CorporateActionTransitionComponentRequest"
+          },
+          "outputTransitions": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/CorporateActionTransitionComponentRequest"
+            },
+            "nullable": true
+          }
+        },
+        "additionalProperties": false,
+        "description": "A 'transition' within a corporate action, representing a set of output movements paired to a single input position"
+      },
       "CounterpartyRiskInformation": {
         "required": [
           "countryOfRisk",
@@ -30370,6 +31258,55 @@
         },
         "additionalProperties": false,
         "description": "In the event that the legal entity is a counterparty to an OTC transaction\r\n(as signatory to a counterparty agreement such as an ISDA 2002 Master Agreement),\r\nthis information would be needed for calculations\r\nsuch as Credit-Valuation-Adjustments and Debit-Valuation-Adjustments (CVA, DVA, XVA etc)."
+      },
+      "CreateCorporateActionSourceRequest": {
+        "required": [
+          "code",
+          "displayName",
+          "scope"
+        ],
+        "type": "object",
+        "properties": {
+          "scope": {
+            "maxLength": 64,
+            "minLength": 1,
+            "pattern": "^[a-zA-Z0-9\\-_]+$",
+            "type": "string",
+            "description": "The scope of the corporate action source"
+          },
+          "code": {
+            "maxLength": 64,
+            "minLength": 1,
+            "pattern": "^[a-zA-Z0-9\\-_]+$",
+            "type": "string",
+            "description": "The code of the corporate action source"
+          },
+          "displayName": {
+            "maxLength": 512,
+            "minLength": 1,
+            "pattern": "^[\\s\\S]*$",
+            "type": "string",
+            "description": "The name of the corporate action source"
+          },
+          "description": {
+            "maxLength": 1024,
+            "minLength": 0,
+            "pattern": "^[\\s\\S]*$",
+            "type": "string",
+            "description": "The description of the corporate action source",
+            "nullable": true
+          },
+          "instrumentScopes": {
+            "maxLength": 1,
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "description": "The list of instrument scopes used as the scope resolution strategy when resolving instruments of upserted corporate actions.",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
       },
       "CreateCutLabelDefinitionRequest": {
         "required": [
@@ -33119,6 +34056,47 @@
         "additionalProperties": false,
         "description": "A paginated list of resource that can be returned from a request."
       },
+      "PagedResourceListOfCorporateActionSource": {
+        "required": [
+          "values"
+        ],
+        "type": "object",
+        "properties": {
+          "nextPage": {
+            "type": "string",
+            "description": "The next page of results.",
+            "nullable": true
+          },
+          "previousPage": {
+            "type": "string",
+            "description": "The previous page of results.",
+            "nullable": true
+          },
+          "values": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/CorporateActionSource"
+            },
+            "description": "The resources to list."
+          },
+          "href": {
+            "type": "string",
+            "description": "The URI of the resource list.",
+            "format": "uri",
+            "nullable": true
+          },
+          "links": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Link"
+            },
+            "description": "Collection of links.",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false,
+        "description": "A paginated list of resource that can be returned from a request."
+      },
       "PagedResourceListOfCutLabelDefinition": {
         "required": [
           "values"
@@ -35253,6 +36231,47 @@
         "additionalProperties": false,
         "description": "A collection of resources that can be returned from requests."
       },
+      "ResourceListOfCorporateAction": {
+        "required": [
+          "values"
+        ],
+        "type": "object",
+        "properties": {
+          "values": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/CorporateAction"
+            },
+            "description": "The resources to list."
+          },
+          "href": {
+            "type": "string",
+            "description": "The URI of the resource list.",
+            "format": "uri",
+            "nullable": true
+          },
+          "links": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Link"
+            },
+            "description": "Collection of links.",
+            "nullable": true
+          },
+          "nextPage": {
+            "type": "string",
+            "description": "The next page of results.",
+            "nullable": true
+          },
+          "previousPage": {
+            "type": "string",
+            "description": "The previous page of results.",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false,
+        "description": "A collection of resources that can be returned from requests."
+      },
       "ResourceListOfDataType": {
         "required": [
           "values"
@@ -36846,6 +37865,98 @@
         "additionalProperties": false,
         "description": "The details of the complex market data item to upsert into Lusid."
       },
+      "UpsertCorporateActionRequest": {
+        "required": [
+          "announcementDate",
+          "corporateActionCode",
+          "exDate",
+          "paymentDate",
+          "recordDate",
+          "transitions"
+        ],
+        "type": "object",
+        "properties": {
+          "corporateActionCode": {
+            "maxLength": 64,
+            "minLength": 1,
+            "pattern": "^[a-zA-Z0-9\\-_]+$",
+            "type": "string",
+            "description": "The unique identifier of this corporate action"
+          },
+          "description": {
+            "maxLength": 1024,
+            "minLength": 0,
+            "pattern": "^[\\s\\S]*$",
+            "type": "string",
+            "description": "The description of the corporate action.",
+            "nullable": true
+          },
+          "announcementDate": {
+            "type": "string",
+            "description": "The announcement date of the corporate action",
+            "format": "date-time"
+          },
+          "exDate": {
+            "type": "string",
+            "description": "The ex date of the corporate action",
+            "format": "date-time"
+          },
+          "recordDate": {
+            "type": "string",
+            "description": "The record date of the corporate action",
+            "format": "date-time"
+          },
+          "paymentDate": {
+            "type": "string",
+            "description": "The payment date of the corporate action",
+            "format": "date-time"
+          },
+          "transitions": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/CorporateActionTransitionRequest"
+            },
+            "description": "The transitions that result from this corporate action"
+          }
+        },
+        "additionalProperties": false
+      },
+      "UpsertCorporateActionsResponse": {
+        "type": "object",
+        "properties": {
+          "href": {
+            "type": "string",
+            "description": "The specific Uniform Resource Identifier (URI) for this resource at the requested effective and asAt datetime.",
+            "format": "uri",
+            "nullable": true
+          },
+          "values": {
+            "type": "object",
+            "additionalProperties": {
+              "$ref": "#/components/schemas/CorporateAction"
+            },
+            "description": "The corporate actions which have been successfully updated or inserted.",
+            "nullable": true
+          },
+          "failed": {
+            "type": "object",
+            "additionalProperties": {
+              "$ref": "#/components/schemas/ErrorDetail"
+            },
+            "description": "The corporate actions that could not be updated or inserted along with a reason for their failure.",
+            "nullable": true
+          },
+          "links": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Link"
+            },
+            "description": "Collection of links.",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
       "UpsertInstrumentPropertiesResponse": {
         "required": [
           "asAtDate"
@@ -37748,7 +38859,7 @@
         "description": "OAuth2 Implicit Grant",
         "flows": {
           "implicit": {
-            "authorizationUrl": "https://lusid.okta.com/oauth2/default/v1/authorize",
+            "authorizationUrl": "https://dummyurl.lusid.com/",
             "scopes": {}
           }
         }
