@@ -31,6 +31,24 @@ class MockApi:
             self.invocations += 1
             return self.invocations
 
+    def execute_retryable_call_with_str(self):
+
+        if self.invocations < 2:
+            self.invocations += 1
+
+            # include Retry-After header
+            failed_response = type("FailedHttpResponse", (object,), {
+                "getheaders": lambda: {"Retry-After": "0.1"},
+                "status": 429,
+                "reason": "retryable",
+                "data": None
+            })
+
+            raise ApiException(429, http_resp=failed_response)
+        else:
+            self.invocations += 1
+            return self.invocations
+
     def execute_non_retryable_call(self):
 
         self.invocations += 1
@@ -58,6 +76,19 @@ class MockApi:
 
         raise ApiException(404, http_resp=failed_response)
 
+    def execute_retryable_call_with_invalid_header(self):
+        self.invocations += 1
+
+        # include Retry-After header
+        failed_response = type("FailedHttpResponse", (object,), {
+            "getheaders": lambda: {"Retry-After": "abc"},
+            "status": 429,
+            "reason": "non-retryable",
+            "data": None
+        })
+
+        raise ApiException(429, http_resp=failed_response)
+
 
 class RetryTests(unittest.TestCase):
     factory = None
@@ -83,6 +114,21 @@ class RetryTests(unittest.TestCase):
         api.execute_retryable_call()
 
         self.assertEqual(api.invocations, 3)
+
+    def test_retry_when_sdk_response_contains_retry_header_as_str(self):
+        api = self.factory.build(MockApi)
+
+        api.execute_retryable_call_with_str()
+
+        self.assertEqual(api.invocations, 3)
+
+    def test_retry_when_sdk_response_contains_invalid_retry_header(self):
+        api = self.factory.build(MockApi)
+
+        with self.assertRaises(ValueError):
+            api.execute_retryable_call_with_invalid_header()
+
+        self.assertEqual(api.invocations, 1)
 
     def test_retry_after_max_attempts_fails(self):
         api = self.factory.build(MockApi)
@@ -131,3 +177,20 @@ class RetryTests(unittest.TestCase):
 
         self.assertEqual(ex.exception.status, 404)
         self.assertEqual(api.invocations, 3)
+
+    def test_providing_retry_override_with_no_retry_invokes_call(self):
+        api = self.factory.build(MockApi)
+
+        api.execute_retryable_call("Portfolio", name="Portfolio", lusid_retries=0)
+
+        self.assertEqual(api.invocations, 1)
+
+    def test_providing_retry_invokes_call(self):
+        with self.assertRaises(ApiException) as ex:
+            self.factory.build(lusid.InstrumentsApi).get_instrument(
+                identifier_type="doesnt_exist",
+                identifier="blah",
+                lusid_retries=1
+            )
+
+        self.assertEqual(ex.exception.status, 400)
