@@ -9,7 +9,7 @@
       "url": "https://www.finbourne.com",
       "email": "info@finbourne.com"
     },
-    "version": "0.11.4251",
+    "version": "0.11.4252",
     "x-logo": {
       "url": "https://www.lusid.com/app/assets/logo_white.png",
       "backgroundColor": "#415464"
@@ -17,7 +17,7 @@
   },
   "servers": [
     {
-      "url": "http://local-unit-test-server.lusid.com:34332"
+      "url": "http://local-unit-test-server.lusid.com:47444"
     }
   ],
   "paths": {
@@ -33379,7 +33379,7 @@
             "maxLength": 128,
             "minLength": 0,
             "type": "string",
-            "description": "A dot-separated string that defines a pattern for matching market data dependencies.\r\nThe form of the string depends on the type of the dependency; see below for basic types and the Knowledge Base for further info.\r\nQuote lookup: \"Quote.{CodeType}.{Identifier}\" e.g. \"Quote.RIC.IBM\"\r\nFx rates: \"Fx.CurrencyPair.{FgnCcy}{DomCcy}\" e.g. \"Fx.CurrencyPair.USDGBP\"\r\nDiscounting curves: \"Rates.{Currency}.{Currency}OIS e.g. \"Rates.USD.USDOIS\"\r\n            \r\nTrailing parameters can be replaced by the wildcard character '*'.\r\ne.g. \"Quote.RIC.*\" matches any dependency on a RIC quote."
+            "description": "A dot-separated string that defines a pattern for matching market data dependencies.\r\nThe form of the string depends on the type of the dependency; see below for basic types and the Knowledge Base for further info.\r\nQuote lookup: \"Quote.{CodeType}.*\" e.g. \"Quote.RIC.*\" refers to 'any RIC quote'\r\nFx rates: \"Fx.CurrencyPair.*\", which refers to 'any FX rate'\r\nDiscounting curves: \"Rates.{Currency}.{Currency}OIS e.g. \"Rates.USD.USDOIS\" refers to the OIS USD discounting curve\r\n            \r\nFor non-fx and non-quote rules, trailing parameters can be replaced by the wildcard character '*'.\r\ne.g. \"Rates.*.*\" matches any dependency on a discounting curve."
           },
           "supplier": {
             "maxLength": 32,
