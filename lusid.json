@@ -9,7 +9,7 @@
       "url": "https://www.finbourne.com",
       "email": "info@finbourne.com"
     },
-    "version": "0.11.4265",
+    "version": "0.11.4266",
     "x-logo": {
       "url": "https://www.lusid.com/app/assets/logo_white.png",
       "backgroundColor": "#415464"
@@ -17,7 +17,7 @@
   },
   "servers": [
     {
-      "url": "http://local-unit-test-server.lusid.com:60669"
+      "url": "http://local-unit-test-server.lusid.com:37918"
     }
   ],
   "paths": {
@@ -1611,6 +1611,7 @@
                     "discountFactors": [
                       1
                     ],
+                    "lineage": "SomeLineage",
                     "marketDataType": "DiscountFactorCurveData"
                   }
                 },
@@ -1656,6 +1657,7 @@
                     "discountFactors": [
                       1
                     ],
+                    "lineage": "SomeLineage",
                     "marketDataType": "DiscountFactorCurveData"
                   }
                 },
@@ -1701,6 +1703,7 @@
                     "discountFactors": [
                       1
                     ],
+                    "lineage": "SomeLineage",
                     "marketDataType": "DiscountFactorCurveData"
                   }
                 },
@@ -1746,6 +1749,7 @@
                     "discountFactors": [
                       1
                     ],
+                    "lineage": "SomeLineage",
                     "marketDataType": "DiscountFactorCurveData"
                   }
                 },
@@ -30883,7 +30887,7 @@
             "maxLength": 1024,
             "minLength": 0,
             "type": "string",
-            "description": "Description of the complex market data's lineage e.g. 'FundAccountant_GreenQuality'.",
+            "description": "This is obsolete. It is not used, it will not be stored, and has no effects.\r\nIf you wish to attach a Lineage to your ComplexMarketData,\r\nyou should provide it in the optional Lineage field in the ComplexMarketData class.",
             "nullable": true
           },
           "effectiveAt": {

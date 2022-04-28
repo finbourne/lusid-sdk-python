@@ -1,6 +1,6 @@
 # lusid.ComplexMarketDataApi
 
-All URIs are relative to *http://local-unit-test-server.lusid.com:60669*
+All URIs are relative to *http://local-unit-test-server.lusid.com:37918*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
@@ -25,10 +25,10 @@ import time
 import lusid
 from lusid.rest import ApiException
 from pprint import pprint
-# Defining the host is optional and defaults to http://local-unit-test-server.lusid.com:60669
+# Defining the host is optional and defaults to http://local-unit-test-server.lusid.com:37918
 # See configuration.py for a list of all supported configuration parameters.
 configuration = lusid.Configuration(
-    host = "http://local-unit-test-server.lusid.com:60669"
+    host = "http://local-unit-test-server.lusid.com:37918"
 )
 
 # The client must configure the authentication and authorization parameters
@@ -38,7 +38,7 @@ configuration = lusid.Configuration(
 
 # Configure OAuth2 access token for authorization: oauth2
 configuration = lusid.Configuration(
-    host = "http://local-unit-test-server.lusid.com:60669"
+    host = "http://local-unit-test-server.lusid.com:37918"
 )
 configuration.access_token = 'YOUR_ACCESS_TOKEN'
 
@@ -102,10 +102,10 @@ import time
 import lusid
 from lusid.rest import ApiException
 from pprint import pprint
-# Defining the host is optional and defaults to http://local-unit-test-server.lusid.com:60669
+# Defining the host is optional and defaults to http://local-unit-test-server.lusid.com:37918
 # See configuration.py for a list of all supported configuration parameters.
 configuration = lusid.Configuration(
-    host = "http://local-unit-test-server.lusid.com:60669"
+    host = "http://local-unit-test-server.lusid.com:37918"
 )
 
 # The client must configure the authentication and authorization parameters
@@ -115,7 +115,7 @@ configuration = lusid.Configuration(
 
 # Configure OAuth2 access token for authorization: oauth2
 configuration = lusid.Configuration(
-    host = "http://local-unit-test-server.lusid.com:60669"
+    host = "http://local-unit-test-server.lusid.com:37918"
 )
 configuration.access_token = 'YOUR_ACCESS_TOKEN'
 
@@ -185,10 +185,10 @@ import time
 import lusid
 from lusid.rest import ApiException
 from pprint import pprint
-# Defining the host is optional and defaults to http://local-unit-test-server.lusid.com:60669
+# Defining the host is optional and defaults to http://local-unit-test-server.lusid.com:37918
 # See configuration.py for a list of all supported configuration parameters.
 configuration = lusid.Configuration(
-    host = "http://local-unit-test-server.lusid.com:60669"
+    host = "http://local-unit-test-server.lusid.com:37918"
 )
 
 # The client must configure the authentication and authorization parameters
@@ -198,7 +198,7 @@ configuration = lusid.Configuration(
 
 # Configure OAuth2 access token for authorization: oauth2
 configuration = lusid.Configuration(
-    host = "http://local-unit-test-server.lusid.com:60669"
+    host = "http://local-unit-test-server.lusid.com:37918"
 )
 configuration.access_token = 'YOUR_ACCESS_TOKEN'
 
@@ -207,7 +207,7 @@ with lusid.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = lusid.ComplexMarketDataApi(api_client)
     scope = 'scope_example' # str | The scope to use when updating or inserting the complex market data.
-request_body = {"first-item":{"marketDataId":{"provider":"DataScope","priceSource":"Some Bank Plc","lineage":"Swaps Desk Trader A","effectiveAt":"2018-03-05T00:00:00.0000000+00:00","marketAsset":"USDOIS"},"marketData":{"baseDate":"1970-01-01T00:00:00.0000000+00:00","dates":["1970-01-01T00:00:00.0000000+00:00"],"discountFactors":[1],"marketDataType":"DiscountFactorCurveData"}},"second-item":{"marketDataId":{"provider":"DataScope","priceSource":"AN.Other Bank Plc","lineage":"Swaps Desk Trader B","effectiveAt":"2018-03-05T00:00:00.0000000+00:00","marketAsset":"RBS"},"marketData":{"document":"{ \"some\":\"valid json\"}","format":"Json","name":"free text identifier of document 1","marketDataType":"OpaqueMarketData"}}} # dict(str, UpsertComplexMarketDataRequest) | The set of complex market data items to update or insert keyed by a unique correlation id.
+request_body = {"first-item":{"marketDataId":{"provider":"DataScope","priceSource":"Some Bank Plc","lineage":"Swaps Desk Trader A","effectiveAt":"2018-03-05T00:00:00.0000000+00:00","marketAsset":"USDOIS"},"marketData":{"baseDate":"1970-01-01T00:00:00.0000000+00:00","dates":["1970-01-01T00:00:00.0000000+00:00"],"discountFactors":[1],"lineage":"SomeLineage","marketDataType":"DiscountFactorCurveData"}},"second-item":{"marketDataId":{"provider":"DataScope","priceSource":"AN.Other Bank Plc","lineage":"Swaps Desk Trader B","effectiveAt":"2018-03-05T00:00:00.0000000+00:00","marketAsset":"RBS"},"marketData":{"document":"{ \"some\":\"valid json\"}","format":"Json","name":"free text identifier of document 1","marketDataType":"OpaqueMarketData"}}} # dict(str, UpsertComplexMarketDataRequest) | The set of complex market data items to update or insert keyed by a unique correlation id.
 
     try:
         # [EARLY ACCESS] UpsertComplexMarketData: Upsert a set of complex market data items. This creates or updates the data in Lusid.
