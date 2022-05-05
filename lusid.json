@@ -9,7 +9,7 @@
       "url": "https://www.finbourne.com",
       "email": "info@finbourne.com"
     },
-    "version": "0.11.4298",
+    "version": "0.11.4299",
     "x-logo": {
       "url": "https://www.lusid.com/app/assets/logo_white.png",
       "backgroundColor": "#415464"
@@ -17,7 +17,7 @@
   },
   "servers": [
     {
-      "url": "http://local-unit-test-server.lusid.com:30553"
+      "url": "http://local-unit-test-server.lusid.com:59898"
     }
   ],
   "paths": {
@@ -30451,7 +30451,8 @@
           "settlementDate": {
             "type": "string",
             "description": "The settlement date for this allocation.",
-            "format": "date-time"
+            "format": "date-time",
+            "nullable": true
           },
           "date": {
             "type": "string",
@@ -30469,7 +30470,8 @@
           "settlementCurrencyFxRate": {
             "type": "number",
             "description": "The settlement currency to allocation currency FX rate.",
-            "format": "double"
+            "format": "double",
+            "nullable": true
           },
           "counterparty": {
             "type": "string",
