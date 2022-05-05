@@ -5,6 +5,8 @@ from datetime import date, timedelta
 import lusid
 import lusid.models as models
 from lusidfeature import lusid_feature
+
+from lusid import ApiException
 from utilities import InstrumentLoader
 from utilities import TestDataUtilities
 
@@ -54,8 +56,10 @@ class CutLabels(unittest.TestCase):
             code_dict[request.display_name] = request.code
 
             # Send the request to LUSID to create the cut label
-            result = self.cut_labels.create_cut_label_definition(
-                create_cut_label_definition_request=request)
+            try:
+                result = self.cut_labels.create_cut_label_definition(create_cut_label_definition_request=request)
+            except ApiException:
+                pass
 
             # Check that result gives same details as input
             self.assertEqual(result.display_name, display_name)
