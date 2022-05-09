@@ -32,7 +32,7 @@ class CutLabels(unittest.TestCase):
     def test_cut_labels(self):
         def get_guid():
             return str(uuid.uuid4())[:4]
-
+            
         # define function to format cut labels
         def cut_label_formatter(date, cut_label_code):
             return str(date) + "N" + cut_label_code
@@ -56,10 +56,11 @@ class CutLabels(unittest.TestCase):
             code_dict[request.display_name] = request.code
 
             # Send the request to LUSID to create the cut label
+            result = None
             try:
-                result = self.cut_labels.create_cut_label_definition(create_cut_label_definition_request=request)
+                 result = self.cut_labels.create_cut_label_definition(create_cut_label_definition_request=request)
             except ApiException:
-                pass
+                result = self.cut_labels.get_cut_label_definition(request.code)
 
             # Check that result gives same details as input
             self.assertEqual(result.display_name, display_name)
