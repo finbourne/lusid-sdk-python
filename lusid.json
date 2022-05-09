@@ -9,7 +9,7 @@
       "url": "https://www.finbourne.com",
       "email": "info@finbourne.com"
     },
-    "version": "0.11.4309",
+    "version": "0.11.4310",
     "x-logo": {
       "url": "https://www.lusid.com/app/assets/logo_white.png",
       "backgroundColor": "#415464"
@@ -17,7 +17,7 @@
   },
   "servers": [
     {
-      "url": "http://local-unit-test-server.lusid.com:39168"
+      "url": "http://local-unit-test-server.lusid.com:38132"
     }
   ],
   "paths": {
@@ -675,7 +675,6 @@
               "pattern": "^[\\s\\S]*$",
               "type": "string",
               "description": "Expression to filter the result set. Read more about filtering results from LUSID here:\r\n            https://support.lusid.com/filtering-results-from-lusid.",
-              "default": "",
               "nullable": true
             }
           },
@@ -8725,7 +8724,6 @@
               "pattern": "^[\\s\\S]*$",
               "type": "string",
               "description": "Expression to filter the result set. Read more about filtering results from LUSID here:\r\n            https://support.lusid.com/filtering-results-from-lusid.",
-              "default": "",
               "nullable": true
             }
           },
