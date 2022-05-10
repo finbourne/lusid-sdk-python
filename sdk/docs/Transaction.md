@@ -22,6 +22,8 @@ Name | Type | Description | Notes
 **source** | **str** | The source of the transaction. This is used to look up the appropriate transaction group set in the transaction type configuration. | [optional] 
 **entry_date_time** | **datetime** | The asAt datetime that the transaction was added to LUSID. | [optional] 
 **otc_confirmation** | [**OtcConfirmation**](OtcConfirmation.md) |  | [optional] 
+**transaction_status** | **str** | The status of the transaction. The available values are: Active, Amended, Cancelled | [optional] 
+**cancel_date_time** | **datetime** | If the transaction has been cancelled, the asAt datetime that the transaction was cancelled. | [optional] 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 
