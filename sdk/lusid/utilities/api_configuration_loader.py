@@ -19,6 +19,7 @@ class ApiConfigurationLoader:
 
         :return: lusid.utilities.ApiConfiguration: The populated ApiConfiguration
         """
+
         # Get the config keys which contain the mapping between the ApiConfiguration attributes and the variable names
         # in the secrets.json file and environment variables e.g. token_url is tokenUrl (secrets.json) and
         # FBN_TOKEN_URL (env variable)
@@ -29,32 +30,52 @@ class ApiConfigurationLoader:
         api_config_key = "api"
         proxy_config_key = "proxy"
 
-        # If there is a secrets file specified and it exists get the details from it
-        if api_secrets_filename is not None and os.path.exists(api_secrets_filename) and os.path.isfile(api_secrets_filename):
-            with open(api_secrets_filename, "r") as secrets:
-                config = json.load(secrets)
-        # If there is a secrets file specified and it does not exist log a warning to indicate that the specified file
-        # could not be found and create an empty config
-        elif api_secrets_filename is not None and (not os.path.exists(api_secrets_filename) or not os.path.isfile(api_secrets_filename)):
-            logging.warning(f"Provided secrets file of {api_secrets_filename} can not be found, please ensure you "
-                             f"have correctly specified the full path to the file or don't provide a secrets file to use "
-                             f"environment variables instead.")
-            config = {}
-        # If no secrets file is specified just create an empty config
-        else:
-            config = {}
+        def _load_config_from_secrets_file():
 
-        # Populate the values for the api configuration preferring the secrets file over the environment variables
-        populated_api_config_values = {
-            key: config.get(api_config_key, {}).get(value["config"], os.getenv(value["env"], None))
-            for key, value in config_keys.items() if "proxy" not in key
-        }
+            # If there is a secrets file specified and it exists get the details from it
+            if api_secrets_filename is not None and os.path.exists(api_secrets_filename) and os.path.isfile(api_secrets_filename):
+                with open(api_secrets_filename, "r") as secrets:
+                    config = json.load(secrets)
 
-        # Populate the values for the proxy preferring the secrets file over the environment variables
-        populated_proxy_values = {
-            key.replace("proxy_", ""): config.get(proxy_config_key, {}).get(value["config"], os.getenv(value["env"], None))
-            for key, value in config_keys.items() if "proxy" in key
-        }
+            # If there is a secrets file specified and it does not exist log a warning to indicate that the specified file
+            # could not be found and create an empty config
+            elif api_secrets_filename is not None and (not os.path.exists(api_secrets_filename) or not os.path.isfile(api_secrets_filename)):
+                logging.debug(f"Provided secrets file of {api_secrets_filename} can not be found, please ensure you "
+                                 f"have correctly specified the full path to the file or don't provide a secrets file to use "
+                                 f"environment variables instead.")
+                config = {}
+            # If no secrets file is specified just create an empty config
+            else:
+                config = {}
+
+            return config
+
+        def _get_access_api_config():
+
+            config = _load_config_from_secrets_file()
+
+            # Populate the values for the api configuration preferring the secrets file over the environment variables
+            populated_api_config_values = {
+                key: config.get(api_config_key, {}).get(value["config"], os.getenv(value["env"], None))
+                for key, value in config_keys.items() if "proxy" not in key
+            }
+
+            return populated_api_config_values
+
+        def _get_proxy_api_config():
+
+            config = _load_config_from_secrets_file()
+
+            # Populate the values for the proxy preferring the secrets file over the environment variables
+            populated_proxy_values = {
+                key.replace("proxy_", ""): config.get(proxy_config_key, {}).get(value["config"], os.getenv(value["env"], None))
+                for key, value in config_keys.items() if "proxy" in key
+            }
+
+            return populated_proxy_values
+
+        populated_api_config_values = _get_access_api_config()
+        populated_proxy_values = _get_proxy_api_config()
 
         # If the proxy address is missing ensure that no proxy is used in the ApiConfiguration
         if populated_proxy_values.get("address", None) is None:

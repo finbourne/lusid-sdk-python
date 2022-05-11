@@ -11,7 +11,6 @@ class TokenUtilities:
         def extract_refresh_token(okta_response):
             nonlocal refresh_token
             nonlocal original_token
-
             okta_json = okta_response.json()
             refresh_token = okta_json["refresh_token"]
             original_token = okta_json["access_token"]

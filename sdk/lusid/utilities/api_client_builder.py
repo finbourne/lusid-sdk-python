@@ -36,33 +36,41 @@ class ApiClientBuilder:
                 f"variables")
 
     @classmethod
-    def build(cls, api_secrets_filename=None, id_provider_response_handler=None, api_configuration=None,
-              token=None, correlation_id=None, tcp_keep_alive=False):
+    def resolve_api_token(cls, token=None, api_secrets_filename=None, configuration=None,
+                          id_provider_response_handler=None):
+
         """
-        :param str api_secrets_filename: The full path to the JSON file containing the API credentials and optional proxy details
-        :param typing.callable id_provider_response_handler: An optional function to handle the Okta response
-        :param lusid.utilities.ApiConfiguration api_configuration: A pre-populated ApiConfiguration
+        Description:
+        This method uses a PAT (Personal Access Token) or secrets to return an API token.
+        The method uses the following conditional logic in order of precedence to resolve an
+        authentication path:
+
+            1. Use PAT passed into the function
+            2. Use secrets files passed into the function
+            3. Use environment variables
+
+        PAT are used in preference to supplied credentials.
+        secrets files are used in preference to environment variables.
+
         :param str token: The pre-populated access token to use instead of asking Okta for a token
-        :param str correlation_id: Correlation id for all calls made from the returned ApiClient instance, added as a header to each request
-        :param bool tcp_keep_alive: A flag that controls if the API client uses tcp keep-alive probes
+        :param str api_secrets_filename: The full path to the JSON file containing the API credentials and optional proxy details
+        :param ApiConfiguration configuration: configuration object containing secrets loaded from env vars
+        :param typing.callable id_provider_response_handler: An optional function to handle the Okta response
 
-        :return: lusid.ApiClient: The configured LUSID ApiClient
+        :return: str api_token
         """
 
-        # Load the configuration
-        configuration = ApiConfigurationLoader.load(api_secrets_filename)
-
-        # If an api_configuration has been provided override the loaded configuration with any properties that it has
-        if api_configuration is not None:
-            for key, value in vars(api_configuration).items():
-                if value is not None:
-                    setattr(configuration, key, value)
-
-        # Use the access token provided if it exists
+        # If token is passed in by user, then use that token
         if token is not None:
-            # Check that there is an api_url available
             cls.__check_required_fields(configuration, ["api_url"])
             api_token = token
+
+        # If there is a token in the env vars, and the user has not provided a secrets file, use the token
+        elif configuration.access_token is not None and api_secrets_filename is None:
+            # Check that there is an api_url available
+            cls.__check_required_fields(configuration, ["api_url"])
+            api_token = configuration.access_token
+
         # Otherwise generate an access token from Okta and use a RefreshingToken going forward
         else:
             # Check that all the required fields for generating a token exist
@@ -79,6 +87,34 @@ class ApiClientBuilder:
                 api_configuration=configuration,
                 id_provider_response_handler=id_provider_response_handler
             )
+
+        return api_token
+
+    @classmethod
+    def build(cls, api_secrets_filename=None, id_provider_response_handler=None, api_configuration=None,
+              token=None, correlation_id=None, tcp_keep_alive=False):
+        """
+        :param str api_secrets_filename: The full path to the JSON file containing the API credentials and optional proxy details
+        :param typing.callable id_provider_response_handler: An optional function to handle the Okta response
+        :param lusid.utilities.ApiConfiguration api_configuration: A pre-populated ApiConfiguration
+        :param str token: The pre-populated access token to use instead of asking Okta for a token
+        :param str correlation_id: Correlation id for all calls made from the returned ApiClient instance, added as a header to each request
+        :param bool tcp_keep_alive: A flag that controls if the API client uses tcp keep-alive probes
+
+        :return: lusid.ApiClient: The configured LUSID ApiClient
+        """
+
+        # Load the configuration
+        configuration = ApiConfigurationLoader.load(api_secrets_filename)
+
+        # If an api_configuration has been provided override the loaded configuration
+        # with any properties that it has
+        if api_configuration is not None:
+            for key, value in vars(api_configuration).items():
+                if value is not None:
+                    setattr(configuration, key, value)
+
+        api_token = cls.resolve_api_token(token, api_secrets_filename, configuration, id_provider_response_handler)
 
         # Initialise the API client using the token so that it can be included in all future requests
         config = Configuration(tcp_keep_alive=tcp_keep_alive)
