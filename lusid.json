@@ -9,7 +9,7 @@
       "url": "https://www.finbourne.com",
       "email": "info@finbourne.com"
     },
-    "version": "0.11.4332",
+    "version": "0.11.4335",
     "x-logo": {
       "url": "https://www.lusid.com/app/assets/logo_white.png",
       "backgroundColor": "#415464"
@@ -17,7 +17,7 @@
   },
   "servers": [
     {
-      "url": "https://fbn-prd.lusid.com/api"
+      "url": "http://local-unit-test-server.lusid.com:41170"
     }
   ],
   "paths": {
@@ -5694,7 +5694,7 @@
                   "displayName": "LegalEntity1DisplayName",
                   "description": "LegalEntity1Description",
                   "href": "https://example.com",
-                  "lusidLegalEntityId": "UniqueLusidLegalEntityId1",
+                  "lusidLegalEntityId": "LUID_00003D4V",
                   "identifiers": {
                     "legalEntity/ExternalIdentifier/LEI": {
                       "key": "LegalEntity/ExternalIdentifier/LEI",
@@ -5760,7 +5760,7 @@
                   "displayName": "LegalEntity1DisplayName",
                   "description": "LegalEntity1Description",
                   "href": "https://example.com",
-                  "lusidLegalEntityId": "UniqueLusidLegalEntityId1",
+                  "lusidLegalEntityId": "LUID_00003D4V",
                   "identifiers": {
                     "legalEntity/ExternalIdentifier/LEI": {
                       "key": "LegalEntity/ExternalIdentifier/LEI",
@@ -5826,7 +5826,7 @@
                   "displayName": "LegalEntity1DisplayName",
                   "description": "LegalEntity1Description",
                   "href": "https://example.com",
-                  "lusidLegalEntityId": "UniqueLusidLegalEntityId1",
+                  "lusidLegalEntityId": "LUID_00003D4V",
                   "identifiers": {
                     "legalEntity/ExternalIdentifier/LEI": {
                       "key": "LegalEntity/ExternalIdentifier/LEI",
@@ -6058,7 +6058,7 @@
                       "displayName": "LegalEntity1DisplayName",
                       "description": "LegalEntity1Description",
                       "href": "https://example.com",
-                      "lusidLegalEntityId": "UniqueLusidLegalEntityId1",
+                      "lusidLegalEntityId": "LUID_00003D4V",
                       "identifiers": {
                         "legalEntity/ExternalIdentifier/LEI": {
                           "key": "LegalEntity/ExternalIdentifier/LEI",
@@ -6119,7 +6119,7 @@
                       "displayName": "LegalEntity2DisplayName",
                       "description": "LegalEntity2Description",
                       "href": "https://example.com",
-                      "lusidLegalEntityId": "UniqueLusidLegalEntityId2",
+                      "lusidLegalEntityId": "LUID_00003D55",
                       "identifiers": {
                         "legalEntity/ExternalIdentifier/LEI": {
                           "key": "LegalEntity/ExternalIdentifier/LEI",
@@ -6176,7 +6176,7 @@
                       "displayName": "LegalEntity1DisplayName",
                       "description": "LegalEntity1Description",
                       "href": "https://example.com",
-                      "lusidLegalEntityId": "UniqueLusidLegalEntityId1",
+                      "lusidLegalEntityId": "LUID_00003D4V",
                       "identifiers": {
                         "legalEntity/ExternalIdentifier/LEI": {
                           "key": "LegalEntity/ExternalIdentifier/LEI",
@@ -6237,7 +6237,7 @@
                       "displayName": "LegalEntity2DisplayName",
                       "description": "LegalEntity2Description",
                       "href": "https://example.com",
-                      "lusidLegalEntityId": "UniqueLusidLegalEntityId2",
+                      "lusidLegalEntityId": "LUID_00003D55",
                       "identifiers": {
                         "legalEntity/ExternalIdentifier/LEI": {
                           "key": "LegalEntity/ExternalIdentifier/LEI",
@@ -6294,7 +6294,7 @@
                       "displayName": "LegalEntity1DisplayName",
                       "description": "LegalEntity1Description",
                       "href": "https://example.com",
-                      "lusidLegalEntityId": "UniqueLusidLegalEntityId1",
+                      "lusidLegalEntityId": "LUID_00003D4V",
                       "identifiers": {
                         "legalEntity/ExternalIdentifier/LEI": {
                           "key": "LegalEntity/ExternalIdentifier/LEI",
@@ -6355,7 +6355,7 @@
                       "displayName": "LegalEntity2DisplayName",
                       "description": "LegalEntity2Description",
                       "href": "https://example.com",
-                      "lusidLegalEntityId": "UniqueLusidLegalEntityId2",
+                      "lusidLegalEntityId": "LUID_00003D55",
                       "identifiers": {
                         "legalEntity/ExternalIdentifier/LEI": {
                           "key": "LegalEntity/ExternalIdentifier/LEI",
@@ -6548,7 +6548,7 @@
                   "displayName": "LegalEntity1DisplayName",
                   "description": "LegalEntity1Description",
                   "href": "https://example.com",
-                  "lusidLegalEntityId": "UniqueLusidLegalEntityId1",
+                  "lusidLegalEntityId": "LUID_00003D4V",
                   "identifiers": {
                     "legalEntity/ExternalIdentifier/LEI": {
                       "key": "LegalEntity/ExternalIdentifier/LEI",
@@ -6614,7 +6614,7 @@
                   "displayName": "LegalEntity1DisplayName",
                   "description": "LegalEntity1Description",
                   "href": "https://example.com",
-                  "lusidLegalEntityId": "UniqueLusidLegalEntityId1",
+                  "lusidLegalEntityId": "LUID_00003D4V",
                   "identifiers": {
                     "legalEntity/ExternalIdentifier/LEI": {
                       "key": "LegalEntity/ExternalIdentifier/LEI",
@@ -6680,7 +6680,7 @@
                   "displayName": "LegalEntity1DisplayName",
                   "description": "LegalEntity1Description",
                   "href": "https://example.com",
-                  "lusidLegalEntityId": "UniqueLusidLegalEntityId1",
+                  "lusidLegalEntityId": "LUID_00003D4V",
                   "identifiers": {
                     "legalEntity/ExternalIdentifier/LEI": {
                       "key": "LegalEntity/ExternalIdentifier/LEI",
@@ -7175,7 +7175,7 @@
                   "displayName": "LegalEntity1DisplayName",
                   "description": "LegalEntity1Description",
                   "href": "https://example.com",
-                  "lusidLegalEntityId": "UniqueLusidLegalEntityId1",
+                  "lusidLegalEntityId": "LUID_00003D4V",
                   "identifiers": {
                     "legalEntity/ExternalIdentifier/LEI": {
                       "key": "LegalEntity/ExternalIdentifier/LEI",
@@ -7241,7 +7241,7 @@
                   "displayName": "LegalEntity1DisplayName",
                   "description": "LegalEntity1Description",
                   "href": "https://example.com",
-                  "lusidLegalEntityId": "UniqueLusidLegalEntityId1",
+                  "lusidLegalEntityId": "LUID_00003D4V",
                   "identifiers": {
                     "legalEntity/ExternalIdentifier/LEI": {
                       "key": "LegalEntity/ExternalIdentifier/LEI",
@@ -7307,7 +7307,7 @@
                   "displayName": "LegalEntity1DisplayName",
                   "description": "LegalEntity1Description",
                   "href": "https://example.com",
-                  "lusidLegalEntityId": "UniqueLusidLegalEntityId1",
+                  "lusidLegalEntityId": "LUID_00003D4V",
                   "identifiers": {
                     "legalEntity/ExternalIdentifier/LEI": {
                       "key": "LegalEntity/ExternalIdentifier/LEI",
@@ -8215,7 +8215,7 @@
                 "example": {
                   "displayName": "LegalEntity1Description",
                   "description": "LegalEntity1DisplayName",
-                  "lusidLegalEntityId": "UniqueLusidLegalEntityId1",
+                  "lusidLegalEntityId": "LUID_00003D4V",
                   "identifiers": {
                     "legalEntity/ExternalIdentifier/LEI": {
                       "key": "LegalEntity/ExternalIdentifier/LEI",
@@ -8274,7 +8274,7 @@
                 "example": {
                   "displayName": "LegalEntity1Description",
                   "description": "LegalEntity1DisplayName",
-                  "lusidLegalEntityId": "UniqueLusidLegalEntityId1",
+                  "lusidLegalEntityId": "LUID_00003D4V",
                   "identifiers": {
                     "legalEntity/ExternalIdentifier/LEI": {
                       "key": "LegalEntity/ExternalIdentifier/LEI",
@@ -8333,7 +8333,7 @@
                 "example": {
                   "displayName": "LegalEntity1Description",
                   "description": "LegalEntity1DisplayName",
-                  "lusidLegalEntityId": "UniqueLusidLegalEntityId1",
+                  "lusidLegalEntityId": "LUID_00003D4V",
                   "identifiers": {
                     "legalEntity/ExternalIdentifier/LEI": {
                       "key": "LegalEntity/ExternalIdentifier/LEI",
@@ -33075,7 +33075,7 @@
           },
           "lusidLegalEntityId": {
             "type": "string",
-            "description": "The unique LUSID Legal Entity Identifier (LULEID) of the Legal Entity. This field is not populated until further notice.",
+            "description": "The unique LUSID Legal Entity Identifier of the Legal Entity.",
             "nullable": true
           },
           "identifiers": {
@@ -33713,10 +33713,12 @@
               "IndexPrice",
               "InlinedIndex",
               "ForwardFromCurve",
-              "ForwardFromCurveUndiscounted"
+              "ForwardFromCurveUndiscounted",
+              "BlackScholesDigital",
+              "BjerksundStensland1993"
             ],
             "type": "string",
-            "description": "The available values are: SimpleStatic, Discounting, VendorDefault, BlackScholes, ConstantTimeValueOfMoney, Bachelier, ForwardWithPoints, ForwardWithPointsUndiscounted, ForwardSpecifiedRate, ForwardSpecifiedRateUndiscounted, IndexNav, IndexPrice, InlinedIndex, ForwardFromCurve, ForwardFromCurveUndiscounted"
+            "description": "The available values are: SimpleStatic, Discounting, VendorDefault, BlackScholes, ConstantTimeValueOfMoney, Bachelier, ForwardWithPoints, ForwardWithPointsUndiscounted, ForwardSpecifiedRate, ForwardSpecifiedRateUndiscounted, IndexNav, IndexPrice, InlinedIndex, ForwardFromCurve, ForwardFromCurveUndiscounted, BlackScholesDigital, BjerksundStensland1993"
           }
         },
         "additionalProperties": false,
@@ -38934,7 +38936,7 @@
         "description": "OAuth2 Implicit Grant",
         "flows": {
           "implicit": {
-            "authorizationUrl": "https://lusid.okta.com/oauth2/default/v1/authorize",
+            "authorizationUrl": "https://dummyurl.lusid.com/",
             "scopes": {}
           }
         }

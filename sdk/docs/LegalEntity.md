@@ -8,7 +8,7 @@ Name | Type | Description | Notes
 **display_name** | **str** | The display name of the Legal Entity | [optional] 
 **description** | **str** | The description of the Legal Entity | [optional] 
 **href** | **str** | The specific Uniform Resource Identifier (URI) for this resource at the requested effective and asAt datetime. | [optional] 
-**lusid_legal_entity_id** | **str** | The unique LUSID Legal Entity Identifier (LULEID) of the Legal Entity. This field is not populated until further notice. | [optional] 
+**lusid_legal_entity_id** | **str** | The unique LUSID Legal Entity Identifier of the Legal Entity. | [optional] 
 **identifiers** | [**dict(str, ModelProperty)**](ModelProperty.md) | Unique client-defined identifiers of the Legal Entity. | [optional] 
 **properties** | [**dict(str, ModelProperty)**](ModelProperty.md) | A set of properties associated to the Legal Entity. | [optional] 
 **counterparty_risk_information** | [**CounterpartyRiskInformation**](CounterpartyRiskInformation.md) |  | [optional] 
