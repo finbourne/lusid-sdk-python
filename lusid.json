@@ -9,7 +9,7 @@
       "url": "https://www.finbourne.com",
       "email": "info@finbourne.com"
     },
-    "version": "0.11.4354",
+    "version": "0.11.4355",
     "x-logo": {
       "url": "https://www.lusid.com/app/assets/logo_white.png",
       "backgroundColor": "#415464"
@@ -17,7 +17,7 @@
   },
   "servers": [
     {
-      "url": "http://local-unit-test-server.lusid.com:45636"
+      "url": "http://local-unit-test-server.lusid.com:62885"
     }
   ],
   "paths": {
@@ -22129,6 +22129,571 @@
         "x-fbn-apistatus": "Stable"
       }
     },
+    "/api/sequences": {
+      "get": {
+        "tags": [
+          "Sequences"
+        ],
+        "summary": "[EARLY ACCESS] ListSequences: List Sequences",
+        "description": "List sequences which satisfies filtering criteria.",
+        "operationId": "ListSequences",
+        "parameters": [
+          {
+            "name": "page",
+            "in": "query",
+            "description": "The pagination token to use to continue listing sequences from a previous call to list sequences. This\r\nvalue is returned from the previous call.",
+            "schema": {
+              "maxLength": 500,
+              "minLength": 1,
+              "pattern": "^[a-zA-Z0-9\\+/]*={0,3}$",
+              "type": "string",
+              "description": "The pagination token to use to continue listing sequences from a previous call to list sequences. This\r\nvalue is returned from the previous call.",
+              "nullable": true
+            }
+          },
+          {
+            "name": "limit",
+            "in": "query",
+            "description": "When paginating, limit the number of returned results to this many. Defaults to 500 if not specified.",
+            "schema": {
+              "maximum": 5000,
+              "minimum": 1,
+              "type": "integer",
+              "description": "When paginating, limit the number of returned results to this many. Defaults to 500 if not specified.",
+              "format": "int32",
+              "nullable": true
+            },
+            "x-nullable": true
+          },
+          {
+            "name": "filter",
+            "in": "query",
+            "description": "Expression to filter the result set. \r\n            Read more about filtering results from LUSID here https://support.lusid.com/filtering-results-from-lusid.",
+            "schema": {
+              "maxLength": 16384,
+              "minLength": 0,
+              "pattern": "^[\\s\\S]*$",
+              "type": "string",
+              "description": "Expression to filter the result set. \r\n            Read more about filtering results from LUSID here https://support.lusid.com/filtering-results-from-lusid.",
+              "nullable": true
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The sequences matching filtering criteria",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/PagedResourceListOfSequenceDefinition"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PagedResourceListOfSequenceDefinition"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PagedResourceListOfSequenceDefinition"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "The details of the input related failure",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/LusidValidationProblemDetails"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/LusidValidationProblemDetails"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/LusidValidationProblemDetails"
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "Error response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/LusidProblemDetails"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "oauth2": []
+          }
+        ],
+        "x-fbn-apistatus": "EarlyAccess"
+      }
+    },
+    "/api/sequences/{scope}": {
+      "post": {
+        "tags": [
+          "Sequences"
+        ],
+        "summary": "[EARLY ACCESS] CreateSequence: Create a new sequence",
+        "description": "Create a new sequence",
+        "operationId": "CreateSequence",
+        "parameters": [
+          {
+            "name": "scope",
+            "in": "path",
+            "description": "Scope of the sequence.",
+            "required": true,
+            "schema": {
+              "maxLength": 64,
+              "minLength": 1,
+              "pattern": "^[a-zA-Z0-9\\-_]+$",
+              "type": "string",
+              "description": "Scope of the sequence.",
+              "nullable": true
+            }
+          }
+        ],
+        "requestBody": {
+          "description": "Request to create sequence",
+          "content": {
+            "application/json-patch+json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateSequenceRequest"
+              },
+              "example": {
+                "code": "TestCode",
+                "increment": 1,
+                "minValue": 0,
+                "maxValue": 10,
+                "start": 0,
+                "cycle": false,
+                "pattern": "TXN-{{seqValue}}"
+              }
+            },
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateSequenceRequest"
+              },
+              "example": {
+                "code": "TestCode",
+                "increment": 1,
+                "minValue": 0,
+                "maxValue": 10,
+                "start": 0,
+                "cycle": false,
+                "pattern": "TXN-{{seqValue}}"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateSequenceRequest"
+              },
+              "example": {
+                "code": "TestCode",
+                "increment": 1,
+                "minValue": 0,
+                "maxValue": 10,
+                "start": 0,
+                "cycle": false,
+                "pattern": "TXN-{{seqValue}}"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateSequenceRequest"
+              },
+              "example": {
+                "code": "TestCode",
+                "increment": 1,
+                "minValue": 0,
+                "maxValue": 10,
+                "start": 0,
+                "cycle": false,
+                "pattern": "TXN-{{seqValue}}"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "201": {
+            "description": "The newly created Sequence",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/SequenceDefinition"
+                },
+                "example": {
+                  "id": {
+                    "scope": "TestScope",
+                    "code": "TestCode"
+                  },
+                  "increment": 1,
+                  "minValue": 0,
+                  "maxValue": 10,
+                  "start": 1,
+                  "value": 3,
+                  "cycle": false,
+                  "pattern": "TXN-{{seqValue}}"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SequenceDefinition"
+                },
+                "example": {
+                  "id": {
+                    "scope": "TestScope",
+                    "code": "TestCode"
+                  },
+                  "increment": 1,
+                  "minValue": 0,
+                  "maxValue": 10,
+                  "start": 1,
+                  "value": 3,
+                  "cycle": false,
+                  "pattern": "TXN-{{seqValue}}"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SequenceDefinition"
+                },
+                "example": {
+                  "id": {
+                    "scope": "TestScope",
+                    "code": "TestCode"
+                  },
+                  "increment": 1,
+                  "minValue": 0,
+                  "maxValue": 10,
+                  "start": 1,
+                  "value": 3,
+                  "cycle": false,
+                  "pattern": "TXN-{{seqValue}}"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "The details of the input related failure",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/LusidValidationProblemDetails"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/LusidValidationProblemDetails"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/LusidValidationProblemDetails"
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "Error response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/LusidProblemDetails"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "oauth2": []
+          }
+        ],
+        "x-fbn-apistatus": "EarlyAccess"
+      }
+    },
+    "/api/sequences/{scope}/{code}": {
+      "get": {
+        "tags": [
+          "Sequences"
+        ],
+        "summary": "[EARLY ACCESS] GetSequence: Get a specified sequence",
+        "description": "Return the details of a specified sequence",
+        "operationId": "GetSequence",
+        "parameters": [
+          {
+            "name": "scope",
+            "in": "path",
+            "description": "Scope of the sequence.",
+            "required": true,
+            "schema": {
+              "maxLength": 64,
+              "minLength": 1,
+              "pattern": "^[a-zA-Z0-9\\-_]+$",
+              "type": "string",
+              "description": "Scope of the sequence.",
+              "nullable": true
+            }
+          },
+          {
+            "name": "code",
+            "in": "path",
+            "description": "Code of the sequence. This together with stated scope uniquely\r\n            identifies the sequence.",
+            "required": true,
+            "schema": {
+              "maxLength": 64,
+              "minLength": 1,
+              "pattern": "^[a-zA-Z0-9\\-_]+$",
+              "type": "string",
+              "description": "Code of the sequence. This together with stated scope uniquely\r\n            identifies the sequence.",
+              "nullable": true
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The requested sequence",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/SequenceDefinition"
+                },
+                "example": {
+                  "id": {
+                    "scope": "TestScope",
+                    "code": "TestCode"
+                  },
+                  "increment": 1,
+                  "minValue": 0,
+                  "maxValue": 10,
+                  "start": 1,
+                  "value": 3,
+                  "cycle": false,
+                  "pattern": "TXN-{{seqValue}}"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SequenceDefinition"
+                },
+                "example": {
+                  "id": {
+                    "scope": "TestScope",
+                    "code": "TestCode"
+                  },
+                  "increment": 1,
+                  "minValue": 0,
+                  "maxValue": 10,
+                  "start": 1,
+                  "value": 3,
+                  "cycle": false,
+                  "pattern": "TXN-{{seqValue}}"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SequenceDefinition"
+                },
+                "example": {
+                  "id": {
+                    "scope": "TestScope",
+                    "code": "TestCode"
+                  },
+                  "increment": 1,
+                  "minValue": 0,
+                  "maxValue": 10,
+                  "start": 1,
+                  "value": 3,
+                  "cycle": false,
+                  "pattern": "TXN-{{seqValue}}"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "The details of the input related failure",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/LusidValidationProblemDetails"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/LusidValidationProblemDetails"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/LusidValidationProblemDetails"
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "Error response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/LusidProblemDetails"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "oauth2": []
+          }
+        ],
+        "x-fbn-apistatus": "EarlyAccess"
+      }
+    },
+    "/api/sequences/{scope}/{code}/next": {
+      "get": {
+        "tags": [
+          "Sequences"
+        ],
+        "summary": "[EARLY ACCESS] Next: Get next values from sequence",
+        "description": "Get the next set of values from a specified sequence",
+        "operationId": "Next",
+        "parameters": [
+          {
+            "name": "scope",
+            "in": "path",
+            "description": "Scope of the sequence.",
+            "required": true,
+            "schema": {
+              "maxLength": 64,
+              "minLength": 1,
+              "pattern": "^[a-zA-Z0-9\\-_]+$",
+              "type": "string",
+              "description": "Scope of the sequence.",
+              "nullable": true
+            }
+          },
+          {
+            "name": "code",
+            "in": "path",
+            "description": "Code of the sequence. This together with stated scope uniquely\r\n            identifies the sequence.",
+            "required": true,
+            "schema": {
+              "maxLength": 64,
+              "minLength": 1,
+              "pattern": "^[a-zA-Z0-9\\-_]+$",
+              "type": "string",
+              "description": "Code of the sequence. This together with stated scope uniquely\r\n            identifies the sequence.",
+              "nullable": true
+            }
+          },
+          {
+            "name": "batch",
+            "in": "query",
+            "description": "Number of sequences items to return for the specified sequence. Default to 1 if not specified.",
+            "schema": {
+              "maximum": 5000,
+              "minimum": 1,
+              "type": "integer",
+              "description": "Number of sequences items to return for the specified sequence. Default to 1 if not specified.",
+              "format": "int32",
+              "nullable": true
+            },
+            "x-nullable": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The response containing next available values in specified sequence.",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/NextValueInSequenceResponse"
+                },
+                "example": {
+                  "values": [
+                    "TXN-0",
+                    "TXN-1",
+                    "TXN-2"
+                  ]
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/NextValueInSequenceResponse"
+                },
+                "example": {
+                  "values": [
+                    "TXN-0",
+                    "TXN-1",
+                    "TXN-2"
+                  ]
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/NextValueInSequenceResponse"
+                },
+                "example": {
+                  "values": [
+                    "TXN-0",
+                    "TXN-1",
+                    "TXN-2"
+                  ]
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "The details of the input related failure",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/LusidValidationProblemDetails"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/LusidValidationProblemDetails"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/LusidValidationProblemDetails"
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "Error response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/LusidProblemDetails"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "oauth2": []
+          }
+        ],
+        "x-fbn-apistatus": "EarlyAccess"
+      }
+    },
     "/api/systemconfiguration/cutlabels": {
       "post": {
         "tags": [
@@ -31742,6 +32307,58 @@
         },
         "additionalProperties": false
       },
+      "CreateSequenceRequest": {
+        "required": [
+          "code"
+        ],
+        "type": "object",
+        "properties": {
+          "code": {
+            "maxLength": 64,
+            "minLength": 1,
+            "pattern": "^[a-zA-Z0-9\\-_]+$",
+            "type": "string",
+            "description": "The code of the sequence definition to create"
+          },
+          "increment": {
+            "type": "integer",
+            "description": "The value to increment between each value in the sequence",
+            "format": "int64",
+            "nullable": true
+          },
+          "minValue": {
+            "type": "integer",
+            "description": "The minimum value of the sequence",
+            "format": "int64",
+            "nullable": true
+          },
+          "maxValue": {
+            "type": "integer",
+            "description": "The maximum value of the sequence",
+            "format": "int64",
+            "nullable": true
+          },
+          "start": {
+            "type": "integer",
+            "description": "The start value of the sequence",
+            "format": "int64",
+            "nullable": true
+          },
+          "cycle": {
+            "type": "boolean",
+            "description": "Set to true to start the sequence over again when it reaches the end. Defaults to false if not provided."
+          },
+          "pattern": {
+            "maxLength": 44,
+            "minLength": 1,
+            "pattern": "^[A-Za-z0-9_-]*\\{\\{seqValue\\}\\}[A-Za-z0-9_-]*$",
+            "type": "string",
+            "description": "The pattern to be used to generate next values in the sequence. Defaults to null if not provided.",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
       "CreateTransactionPortfolioRequest": {
         "required": [
           "baseCurrency",
@@ -33730,6 +34347,30 @@
         "additionalProperties": false,
         "description": "The combination of a library to use and a model in that library that defines which pricing code will evaluate instruments\r\nhaving a particular type/class. This allows us to control the model type and library for a given instrument."
       },
+      "NextValueInSequenceResponse": {
+        "required": [
+          "values"
+        ],
+        "type": "object",
+        "properties": {
+          "values": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "description": "The next set of values for the specified Sequence."
+          },
+          "links": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Link"
+            },
+            "description": "Collection of links.",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
       "Order": {
         "required": [
           "id",
@@ -34431,6 +35072,47 @@
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/PropertyDefinitionSearchResult"
+            },
+            "description": "The resources to list."
+          },
+          "href": {
+            "type": "string",
+            "description": "The URI of the resource list.",
+            "format": "uri",
+            "nullable": true
+          },
+          "links": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Link"
+            },
+            "description": "Collection of links.",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false,
+        "description": "A paginated list of resource that can be returned from a request."
+      },
+      "PagedResourceListOfSequenceDefinition": {
+        "required": [
+          "values"
+        ],
+        "type": "object",
+        "properties": {
+          "nextPage": {
+            "type": "string",
+            "description": "The next page of results.",
+            "nullable": true
+          },
+          "previousPage": {
+            "type": "string",
+            "description": "The previous page of results.",
+            "nullable": true
+          },
+          "values": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/SequenceDefinition"
             },
             "description": "The resources to list."
           },
@@ -37054,6 +37736,66 @@
         },
         "additionalProperties": false,
         "description": "A list of scopes."
+      },
+      "SequenceDefinition": {
+        "required": [
+          "cycle",
+          "id",
+          "increment",
+          "maxValue",
+          "minValue",
+          "start"
+        ],
+        "type": "object",
+        "properties": {
+          "id": {
+            "$ref": "#/components/schemas/ResourceId"
+          },
+          "increment": {
+            "type": "integer",
+            "description": "The Resource Id of the sequence definition",
+            "format": "int64"
+          },
+          "minValue": {
+            "type": "integer",
+            "description": "The minimum value of the sequence",
+            "format": "int64"
+          },
+          "maxValue": {
+            "type": "integer",
+            "description": "The maximum value of the sequence",
+            "format": "int64"
+          },
+          "start": {
+            "type": "integer",
+            "description": "The start value of the sequence",
+            "format": "int64"
+          },
+          "value": {
+            "type": "integer",
+            "description": "The last used value of the sequence",
+            "format": "int64",
+            "nullable": true
+          },
+          "cycle": {
+            "type": "boolean",
+            "description": "Indicates if the sequence would start from minimun value once it reaches maximum value. If set to false, a failure would return if the sequence reaches maximum value."
+          },
+          "pattern": {
+            "type": "string",
+            "description": "The pattern to be used to generate next values in the sequence.",
+            "nullable": true
+          },
+          "links": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Link"
+            },
+            "description": "Collection of links.",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
       },
       "SetLegalEntityIdentifiersRequest": {
         "type": "object",
