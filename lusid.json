@@ -9,7 +9,7 @@
       "url": "https://www.finbourne.com",
       "email": "info@finbourne.com"
     },
-    "version": "0.11.4379",
+    "version": "0.11.4370",
     "x-logo": {
       "url": "https://www.lusid.com/app/assets/logo_white.png",
       "backgroundColor": "#415464"
@@ -17,7 +17,7 @@
   },
   "servers": [
     {
-      "url": "http://local-unit-test-server.lusid.com:35606"
+      "url": "https://fbn-prd.lusid.com/api"
     }
   ],
   "paths": {
@@ -31173,8 +31173,7 @@
           "settlementDate": {
             "type": "string",
             "description": "The settlement date for this allocation.",
-            "format": "date-time",
-            "nullable": true
+            "format": "date-time"
           },
           "date": {
             "type": "string",
@@ -31192,8 +31191,7 @@
           "settlementCurrencyFxRate": {
             "type": "number",
             "description": "The settlement currency to allocation currency FX rate.",
-            "format": "double",
-            "nullable": true
+            "format": "double"
           },
           "counterparty": {
             "type": "string",
@@ -39689,7 +39687,7 @@
         "description": "OAuth2 Implicit Grant",
         "flows": {
           "implicit": {
-            "authorizationUrl": "https://dummyurl.lusid.com/",
+            "authorizationUrl": "https://lusid.okta.com/oauth2/default/v1/authorize",
             "scopes": {}
           }
         }
