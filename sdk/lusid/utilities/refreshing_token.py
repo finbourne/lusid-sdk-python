@@ -1,6 +1,7 @@
 import requests
 import base64
 import threading
+import time
 
 from datetime import datetime
 from datetime import timedelta
@@ -16,6 +17,8 @@ class RefreshingToken(UserString):
 
         :param ApiConfiguration api_configuration: The api configuration with all required values
         :param int expiry_offset: number of seconds before token expiry to refresh the token
+        :param callable id_provider_response_handler: A handler taking the Requests.Response from the identity provider
+        before it is consumed by the RefreshingToken, mutation of the Response is possible with this handler
         """
 
         self.token_data = {
@@ -28,6 +31,9 @@ class RefreshingToken(UserString):
         self.id_provider_response_handler = id_provider_response_handler
         self.refresh_func = self.get_refresh_token
         self.lock = threading.Lock()
+        self.retry_count = 0
+        self.retry_limit = 5
+        self.backoff_base = 2
 
     def update_token_data(self, id_provider_json):
         """
@@ -76,8 +82,13 @@ class RefreshingToken(UserString):
             self.id_provider_response_handler(id_provider_response)
 
         # Ensure that we have a 200 response code
-        if id_provider_response.status_code != 200:
+        if id_provider_response.status_code == 429:
+            self._handle_retry(id_provider_response)
+            return self.get_access_token()
+        elif id_provider_response.status_code != 200:
             raise ValueError(id_provider_response.json())
+
+        self.retry_count = 0
 
         # convert the json encoded response to be able to extract the token values
         id_provider_json = id_provider_response.json()
@@ -120,18 +131,73 @@ class RefreshingToken(UserString):
 
             id_provider_response = requests.post(self.api_configuration.token_url, data=request_body, **kwargs)
 
+            if self.id_provider_response_handler is not None:
+                self.id_provider_response_handler(id_provider_response)
+
             # Refresh token may be expired, if so, get new request token
             if id_provider_response.status_code == 400 and 'refresh token is invalid or expired' \
                     in id_provider_response.json()['error_description']:
                 return self.get_access_token()
+            elif id_provider_response.status_code == 429:
+                self._handle_retry(id_provider_response)
+                return self.get_refresh_token()
             elif id_provider_response.status_code != 200:
                 raise ValueError(id_provider_response.json())
+
+            self.retry_count = 0
 
             id_provider_json = id_provider_response.json()
 
             self.update_token_data(id_provider_json)
 
         return self.token_data["access_token"]
+
+    def _handle_retry(self, id_provider_response):
+        """
+        Determines how to handle retrying in the event of a failed response. Currently uses the HTTP "Retry-After"
+        header to determine how long to wait before retrying. If this header is not present defaults to a simple
+        exponential back-off strategy.
+
+        If the identity provider that you are interacting with does not provide a "Retry-After" header but does provide
+        other custom headers, you can pass an id_provider_response_handler to the RefreshingToken which constructs
+        the "Retry-After" header from the custom headers.
+
+        :param requests.Response id_provider_response: The response from the identity provider
+        """
+        if self.retry_count >= self.retry_limit:
+            raise ValueError(f"Max retry limit of {self.retry_limit} reached with response of {id_provider_response.json()}")
+
+        self.retry_count += 1
+
+        if "Retry-After" in id_provider_response.headers:
+            retry_value = id_provider_response.headers.get("Retry-After")
+
+            # Can be a delay in seconds or http date (https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Retry-After)
+            try:
+                wait_time = int(retry_value)
+            except ValueError:
+                # http date always in GMT
+                wait_time = int(datetime.strptime(retry_value, '%a, %d %b %Y %H:%M:%S GMT').timestamp() - datetime.utcnow().timestamp())
+                if wait_time <= 0:  # Won't wait for a negative period
+                    return
+
+            time.sleep(wait_time)
+            return
+
+        # If no "Retry-After" header implement a simple exponential back-off
+        time.sleep(self._calculate_backoff(self.backoff_base, self.retry_count))
+
+    @staticmethod
+    def _calculate_backoff(backoff_base, retries):
+        """
+        Calculates the time to wait before retrying
+
+        :param int retries: The number of retries attempted so far
+        :param int backoff_base: The base to use for calculating the backoff
+
+        :return: int: The number of seconds to wait
+        """
+        return backoff_base ** retries
 
     def __getattribute__(self, item):
 

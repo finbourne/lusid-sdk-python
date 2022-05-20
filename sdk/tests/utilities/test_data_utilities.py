@@ -13,11 +13,12 @@ import unittest
 
 
 class TestDataUtilities:
-    tutorials_scope = "Testdemo"
+    tutorials_scope = f"Testdemo"
     market_data_scope = "FinbourneMarketData"
 
     lusid_cash_identifier = "Instrument/default/Currency"
     lusid_luid_identifier = "Instrument/default/LusidInstrumentId"
+    lusid_figi_identifier = "Instrument/default/Figi"
 
     def __init__(self, transaction_portfolio_api: lusid.TransactionPortfoliosApi):
         self.transaction_portfolio_api = transaction_portfolio_api

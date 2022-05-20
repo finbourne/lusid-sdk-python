@@ -28,12 +28,14 @@ class ApiClientFactory:
         :param str proxy_url: The url of the proxy to use including the port e.g. http://myproxy.com:8888
         :param str proxy_username: The username for the proxy to use
         :param str proxy_password: The password for the proxy to use
+        :param str correlation_id: Correlation id for all calls made from the returned LUSID API instances
         :param bool tcp_keep_alive: A flag for controlling if the API client uses TCP keep-alive probes
         """
 
         builder_kwargs = {}
 
         if "token" in kwargs and str(kwargs["token"]) != "None":
+
             # If there is a token use it along with the specified proxy details if specified
             config = ApiConfiguration(
                 api_url=kwargs.get("api_url", None),
@@ -54,6 +56,9 @@ class ApiClientFactory:
 
         # add the correlation id if specified
         builder_kwargs["correlation_id"] = kwargs.get("correlation_id", None)
+
+        # add the id provider response handler if specified
+        builder_kwargs["id_provider_response_handler"] = kwargs.get("id_provider_response_handler", None)
 
         builder_kwargs["tcp_keep_alive"] = kwargs.get("tcp_keep_alive", False)
 

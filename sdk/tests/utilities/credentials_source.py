@@ -28,6 +28,10 @@ class CredentialsSource:
         return f"{testcase_func.__name__}: {param.args[0]}"
 
     @classmethod
+    def fetch_pat(cls):
+        return os.getenv("FBN_LUSID_ACCESS_TOKEN", None)
+
+    @classmethod
     def fetch_credentials(cls):
         credentials = cls.secrets_path()
 

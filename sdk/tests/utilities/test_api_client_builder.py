@@ -31,9 +31,9 @@ class ApiClientBuilderTests(unittest.TestCase):
         ], testcase_func_name=CredentialsSource.custom_name_func
     )
     def test_missing_from_config_file_throws(self, _, missing_attributes, token):
+
         """
         Tests that if some required fields are missing from the ApiConfiguration an error is thrown
-
         :return:
         """
         # Create an ApiConfiguration with all values populated

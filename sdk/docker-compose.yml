@@ -14,7 +14,7 @@ services:
       - ANY
     tty: false
 
-  lusid-sdk-python-preview-test:
+  lusid-sdk-python-test:
     build: .
     container_name: lusid-sdk-python-preview-test
     image: finbourne/lusid-sdk-python-preview-test
@@ -28,6 +28,7 @@ services:
       - FBN_PROXY_ADDRESS=http://tinyproxy:8888
       - FBN_PROXY_USERNAME=user
       - FBN_PROXY_PASSWORD=password
+      - FBN_LUSID_ACCESS_TOKEN
     volumes:
       - .:/usr/src
     depends_on:

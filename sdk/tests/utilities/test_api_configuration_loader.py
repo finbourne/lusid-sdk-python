@@ -17,6 +17,7 @@ class ApiConfigurationLoaderTests(unittest.TestCase):
     These test ensure that the ApiConfigurationLoader works as expected
 
     """
+
     def assert_config_values(self, config, secrets):
         """
         Not a test. This is used to test the values of the ApiConfiguration.
@@ -47,17 +48,18 @@ class ApiConfigurationLoaderTests(unittest.TestCase):
         """
 
         secrets = {
-                "api": {
-                    config_keys[key]["config"]: value for key, value in source_config_details.items() if
-                    value is not None and "proxy" not in key
-                },
-                "proxy": {
-                    config_keys[key]["config"]: value for key, value in source_config_details.items() if
-                    value is not None and "proxy" in key
-                }
+            "api": {
+                config_keys[key]["config"]: value for key, value in source_config_details.items() if
+                value is not None and "proxy" not in key
+            },
+            "proxy": {
+                config_keys[key]["config"]: value for key, value in source_config_details.items() if
+                value is not None and "proxy" in key
             }
+        }
 
-        env_vars = {config_keys[key]["env"]: "DUMMYVALUE" for key, value in source_config_details.items() if value is not None}
+        env_vars = {config_keys[key]["env"]: "DUMMYVALUE" for key, value in source_config_details.items() if
+                    value is not None}
 
         # Set the environment variables as desired
         with patch.dict('os.environ', env_vars, clear=True):
@@ -84,7 +86,7 @@ class ApiConfigurationLoaderTests(unittest.TestCase):
         }
 
         env_vars = {config_keys[key]["env"]: value for key, value in source_config_details.items() if
-         value is not None and "token_url" not in key}
+                    value is not None and "token_url" not in key}
 
         # Set the environment variables as desired
         with patch.dict('os.environ', env_vars, clear=True):
@@ -172,21 +174,34 @@ class ApiConfigurationLoaderTests(unittest.TestCase):
 
         self.assert_config_values(config, source_config_details)
 
-    @unittest.skip("Logging a warning instead of raising an exception")
-    def test_specify_config_file_not_exist(self):
-        """
-        This test checks that an error is raised if a secrets file is specified which can not be found
+    def test_missing_secrets_file_logs_message_at_debug(self):
 
-        :return: None
-        """
-        non_existent_secrets_file = "Thisfiledefinitelydoesnotexist.json"
+        with self.assertLogs() as captured:
+            import logging
+            logger = logging.getLogger()
+            logger.setLevel(logging.DEBUG)
 
-        with self.assertRaises(ValueError) as ex:
+            non_existent_secrets_file = "Thisfiledefinitelydoesnotexist.json"
             ApiConfigurationLoader.load(non_existent_secrets_file)
 
-        self.assertEqual(ex.exception.args[0], f"Provided secrets file of {non_existent_secrets_file} can not be found, please ensure you "
-                             f"have correctly specified the full path to the file or don't provide a secrets file to use "
-                             f"environment variables instead.")
+            # 2 loggers are configured by default (see configuration.py)
+            self.assertEqual(len(captured.records), 2)
+
+            for log in captured.records:
+                self.assertEqual("DEBUG", log.levelname)
+                self.assertTrue(
+                    log.message.startswith(f"Provided secrets file of {non_existent_secrets_file} can not be found,"))
+
+    def test_missing_secrets_file_does_not_log_message_at_info(self):
+
+        # using with self.assertRaises(AssertionError) doesn't give
+        # anything we can assert on so use a try-except
+        try:
+            with self.assertLogs():
+                non_existent_secrets_file = "Thisfiledefinitelydoesnotexist.json"
+                ApiConfigurationLoader.load(non_existent_secrets_file)
+        except AssertionError as ex:
+            self.assertRegex(ex.args[0], r"^no logs of level INFO or higher triggered.")
 
     def test_config_keys_aligned(self):
         """

@@ -204,13 +204,6 @@ class Portfolios(unittest.TestCase):
         self.assertEqual(trades.values[0].transaction_id, transaction.transaction_id)
         self.assertEqual(trades.values[0].properties[property_definition_result.key].value.label_value, property_value_as_string)
 
-    @lusid_feature("F19-1")
-    def test_list_scopes(self):
-        # Get the list of scopes across all entities
-        scopes = self.scopes_api.list_scopes()
-
-        self.assertGreater(len(scopes.values), 0)
-
     @lusid_feature("F2-4")
     def test_list_portfolios(self):
         # This defines the scope that the portfolios will be retrieved from

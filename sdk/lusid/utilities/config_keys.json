@@ -42,5 +42,9 @@
   "proxy_password": {
       "env": "FBN_PROXY_PASSWORD",
       "config": "password"
+  },
+    "access_token": {
+      "env": "FBN_LUSID_ACCESS_TOKEN",
+      "config": "accessToken"
   }
 }
