@@ -9,7 +9,7 @@
       "url": "https://www.finbourne.com",
       "email": "info@finbourne.com"
     },
-    "version": "0.11.4394",
+    "version": "0.11.4396",
     "x-logo": {
       "url": "https://www.lusid.com/app/assets/logo_white.png",
       "backgroundColor": "#415464"
@@ -17,7 +17,7 @@
   },
   "servers": [
     {
-      "url": "http://local-unit-test-server.lusid.com:36130"
+      "url": "http://local-unit-test-server.lusid.com:42062"
     }
   ],
   "paths": {
@@ -38200,10 +38200,11 @@
               "CashFxForward",
               "UnsettledCashTypes",
               "Carry",
-              "CarryAsPnl"
+              "CarryAsPnl",
+              "VariationMargin"
             ],
             "type": "string",
-            "description": ". The available values are: Settlement, Traded, StockMovement, FutureCash, Commitment, Receivable, CashSettlement, CashForward, CashCommitment, CashReceivable, Accrual, CashAccrual, ForwardFx, CashFxForward, UnsettledCashTypes, Carry, CarryAsPnl"
+            "description": ". The available values are: Settlement, Traded, StockMovement, FutureCash, Commitment, Receivable, CashSettlement, CashForward, CashCommitment, CashReceivable, Accrual, CashAccrual, ForwardFx, CashFxForward, UnsettledCashTypes, Carry, CarryAsPnl, VariationMargin"
           },
           "side": {
             "type": "string",
@@ -38264,10 +38265,11 @@
               "CashFxForward",
               "UnsettledCashTypes",
               "Carry",
-              "CarryAsPnl"
+              "CarryAsPnl",
+              "VariationMargin"
             ],
             "type": "string",
-            "description": ". The available values are: Settlement, Traded, StockMovement, FutureCash, Commitment, Receivable, CashSettlement, CashForward, CashCommitment, CashReceivable, Accrual, CashAccrual, ForwardFx, CashFxForward, UnsettledCashTypes, Carry, CarryAsPnl"
+            "description": ". The available values are: Settlement, Traded, StockMovement, FutureCash, Commitment, Receivable, CashSettlement, CashForward, CashCommitment, CashReceivable, Accrual, CashAccrual, ForwardFx, CashFxForward, UnsettledCashTypes, Carry, CarryAsPnl, VariationMargin"
           },
           "side": {
             "type": "string",
