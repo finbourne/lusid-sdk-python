@@ -9,7 +9,7 @@
       "url": "https://www.finbourne.com",
       "email": "info@finbourne.com"
     },
-    "version": "0.11.4416",
+    "version": "0.11.4417",
     "x-logo": {
       "url": "https://www.lusid.com/app/assets/logo_white.png",
       "backgroundColor": "#415464"
@@ -17,7 +17,7 @@
   },
   "servers": [
     {
-      "url": "https://fbn-prd.lusid.com/api"
+      "url": "https://www.lusid.com/api"
     }
   ],
   "paths": {
@@ -4152,7 +4152,7 @@
         "tags": [
           "Instruments"
         ],
-        "summary": "[EARLY ACCESS] ListInstruments: List instruments",
+        "summary": "ListInstruments: List instruments",
         "description": "List all the instruments in the instrument master.\r\n            \r\nTo retrieve a particular set of instruments instead, use the Get instruments endpoint.\n\nThe maximum number of instruments that this method can list per request is 2,000.",
         "operationId": "ListInstruments",
         "parameters": [
@@ -4333,7 +4333,7 @@
             "oauth2": []
           }
         ],
-        "x-fbn-apistatus": "EarlyAccess"
+        "x-fbn-apistatus": "Stable"
       }
     },
     "/api/instruments/$get": {
@@ -4809,7 +4809,7 @@
         "tags": [
           "Instruments"
         ],
-        "summary": "[EARLY ACCESS] GetInstrumentIdentifierTypes: Get instrument identifier types",
+        "summary": "GetInstrumentIdentifierTypes: Get instrument identifier types",
         "description": "Retrieve a list of all valid instrument identifier types and whether they are unique or not.\r\n            \r\nAn instrument must have a value for at least one unique identifier type (it can have more than one unique type and value).\r\nIn addition, a value is automatically generated for a LUSID Instrument ID (LUID) unique type by the system.\r\n            \r\nAn instrument can have values for multiple non-unique identifier types (or it can have zero non-unique types and values).",
         "operationId": "GetInstrumentIdentifierTypes",
         "responses": {
@@ -4849,7 +4849,7 @@
             "oauth2": []
           }
         ],
-        "x-fbn-apistatus": "EarlyAccess"
+        "x-fbn-apistatus": "Stable"
       }
     },
     "/api/instruments/{identifierType}/{identifier}": {
@@ -4999,7 +4999,7 @@
         "tags": [
           "Instruments"
         ],
-        "summary": "[EARLY ACCESS] UpdateInstrumentIdentifier: Update instrument identifier",
+        "summary": "UpdateInstrumentIdentifier: Update instrument identifier",
         "description": "Create, update or delete a particular instrument identifier for an instrument.\r\n            \r\nTo delete the identifier, leave the value unspecified in the request. If not being deleted, the\r\nidentifier is updated if it exists and created if it does not.",
         "operationId": "UpdateInstrumentIdentifier",
         "parameters": [
@@ -5143,7 +5143,7 @@
             "oauth2": []
           }
         ],
-        "x-fbn-apistatus": "EarlyAccess"
+        "x-fbn-apistatus": "Stable"
       },
       "delete": {
         "tags": [
@@ -45764,7 +45764,7 @@
         "description": "OAuth2 Implicit Grant",
         "flows": {
           "implicit": {
-            "authorizationUrl": "https://lusid.okta.com/oauth2/default/v1/authorize",
+            "authorizationUrl": "https://dummyurl.lusid.com/",
             "scopes": {}
           }
         }
