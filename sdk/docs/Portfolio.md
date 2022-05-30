@@ -17,6 +17,7 @@ Name | Type | Description | Notes
 **base_currency** | **str** | The base currency of the portfolio. | [optional] 
 **properties** | [**dict(str, ModelProperty)**](ModelProperty.md) | The requested portfolio properties. These will be from the &#39;Portfolio&#39; domain. | [optional] 
 **instrument_scopes** | **list[str]** | The instrument scope resolution strategy of this portfolio. | [optional] 
+**accounting_method** | **str** | . The available values are: Default, AverageCost, FirstInFirstOut, LastInFirstOut, HighestCostFirst, LowestCostFirst | [optional] 
 **links** | [**list[Link]**](Link.md) | Collection of links. | [optional] 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
