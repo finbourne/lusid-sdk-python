@@ -9,7 +9,7 @@
       "url": "https://www.finbourne.com",
       "email": "info@finbourne.com"
     },
-    "version": "0.11.4459",
+    "version": "0.11.4460",
     "x-logo": {
       "url": "https://www.lusid.com/app/assets/logo_white.png",
       "backgroundColor": "#415464"
@@ -45892,10 +45892,6 @@
       "description": "Methods for interacting with Executions. This is experimental functionality, with limited documentation presently. An Execution represents a market's fill of a street order. Executions are treated monotemporally; any updates are effective at the as-at time of update, and its not possible to make retroactive (or forward) changes."
     },
     {
-      "name": "FeesAndCommissions",
-      "description": "Methods for storage and retrieval of Fees and Commissions rules"
-    },
-    {
       "name": "Instrument Events",
       "description": "Methods for querying for instrument events."
     },
@@ -46037,7 +46033,6 @@
       "Derived Transaction Portfolios",
       "Entities",
       "Executions",
-      "FeesAndCommissions",
       "Instrument Events",
       "Instruments",
       "Legal Entities",
