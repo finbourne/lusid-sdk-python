@@ -9,7 +9,7 @@
       "url": "https://www.finbourne.com",
       "email": "info@finbourne.com"
     },
-    "version": "0.11.4500",
+    "version": "0.11.4501",
     "x-logo": {
       "url": "https://www.lusid.com/app/assets/logo_white.png",
       "backgroundColor": "#415464"
@@ -2507,7 +2507,7 @@
         "tags": [
           "Corporate Action Sources"
         ],
-        "summary": "[EARLY ACCESS] BatchUpsertCorporateActions: Upsert corporate actions",
+        "summary": "[EARLY ACCESS] BatchUpsertCorporateActions: Batch upsert corporate actions (instrument transition events) to corporate action source.",
         "description": "Create or update one or more corporate actions in a particular corporate action source. Failures are identified in the body of the response.\r\n            \r\nIf a corporate action is upserted at exactly the same effective datetime as a transaction for the same instrument, the corporate action takes precedence. Depending on the nature of the corporate action, this may mean it affects the transaction.",
         "operationId": "BatchUpsertCorporateActions",
         "parameters": [
@@ -2768,7 +2768,7 @@
         "tags": [
           "Corporate Action Sources"
         ],
-        "summary": "[EARLY ACCESS] GetCorporateActions: Get corporate actions",
+        "summary": "[EARLY ACCESS] GetCorporateActions: List corporate actions (instrument transition events) from the corporate action source.",
         "description": "Get corporate actions from a particular corporate action source.",
         "operationId": "GetCorporateActions",
         "parameters": [
