@@ -4,7 +4,7 @@ All URIs are relative to *https://www.lusid.com/api*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
-[**delete_instrument**](InstrumentsApi.md#delete_instrument) | **DELETE** /api/instruments/{identifierType}/{identifier} | [EARLY ACCESS] DeleteInstrument: Delete instrument
+[**delete_instrument**](InstrumentsApi.md#delete_instrument) | **DELETE** /api/instruments/{identifierType}/{identifier} | [EARLY ACCESS] DeleteInstrument: Soft delete a single instrument
 [**get_instrument**](InstrumentsApi.md#get_instrument) | **GET** /api/instruments/{identifierType}/{identifier} | GetInstrument: Get instrument
 [**get_instrument_identifier_types**](InstrumentsApi.md#get_instrument_identifier_types) | **GET** /api/instruments/identifierTypes | GetInstrumentIdentifierTypes: Get instrument identifier types
 [**get_instrument_property_time_series**](InstrumentsApi.md#get_instrument_property_time_series) | **GET** /api/instruments/{identifierType}/{identifier}/properties/time-series | [EARLY ACCESS] GetInstrumentPropertyTimeSeries: Get instrument property time series
@@ -18,9 +18,9 @@ Method | HTTP request | Description
 # **delete_instrument**
 > DeleteInstrumentResponse delete_instrument(identifier_type, identifier, scope=scope)
 
-[EARLY ACCESS] DeleteInstrument: Delete instrument
+[EARLY ACCESS] DeleteInstrument: Soft delete a single instrument
 
-Delete a particular instrument, as identified by a particular instrument identifier.                Once deleted, an instrument is marked as inactive and can no longer be referenced when creating or updating  transactions or holdings. You can still query existing transactions and holdings related to the  deleted instrument.
+Soft delete a particular instrument, as identified by a particular instrument identifier.                Once deleted, an instrument is marked as inactive and can no longer be referenced when creating or updating  transactions or holdings. You can still query existing transactions and holdings related to the  deleted instrument.
 
 ### Example
 
@@ -57,7 +57,7 @@ identifier = 'identifier_example' # str | An <i>identifierType</i> value to use 
 scope = 'default' # str | The scope in which the instrument lies. When not supplied the scope is 'default'. (optional) (default to 'default')
 
     try:
-        # [EARLY ACCESS] DeleteInstrument: Delete instrument
+        # [EARLY ACCESS] DeleteInstrument: Soft delete a single instrument
         api_response = api_instance.delete_instrument(identifier_type, identifier, scope=scope)
         pprint(api_response)
     except ApiException as e:

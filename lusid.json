@@ -9,7 +9,7 @@
       "url": "https://www.finbourne.com",
       "email": "info@finbourne.com"
     },
-    "version": "0.11.4502",
+    "version": "0.11.4503",
     "x-logo": {
       "url": "https://www.lusid.com/app/assets/logo_white.png",
       "backgroundColor": "#415464"
@@ -5149,8 +5149,8 @@
         "tags": [
           "Instruments"
         ],
-        "summary": "[EARLY ACCESS] DeleteInstrument: Delete instrument",
-        "description": "Delete a particular instrument, as identified by a particular instrument identifier.\r\n            \r\nOnce deleted, an instrument is marked as inactive and can no longer be referenced when creating or updating\r\ntransactions or holdings. You can still query existing transactions and holdings related to the\r\ndeleted instrument.",
+        "summary": "[EARLY ACCESS] DeleteInstrument: Soft delete a single instrument",
+        "description": "Soft delete a particular instrument, as identified by a particular instrument identifier.\r\n            \r\nOnce deleted, an instrument is marked as inactive and can no longer be referenced when creating or updating\r\ntransactions or holdings. You can still query existing transactions and holdings related to the\r\ndeleted instrument.",
         "operationId": "DeleteInstrument",
         "parameters": [
           {
