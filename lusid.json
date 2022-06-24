@@ -9,7 +9,7 @@
       "url": "https://www.finbourne.com",
       "email": "info@finbourne.com"
     },
-    "version": "0.11.4512",
+    "version": "0.11.4513",
     "x-logo": {
       "url": "https://www.lusid.com/app/assets/logo_white.png",
       "backgroundColor": "#415464"
@@ -23983,16 +23983,73 @@
               "text/plain": {
                 "schema": {
                   "$ref": "#/components/schemas/UpsertPortfolioTransactionsResponse"
+                },
+                "example": {
+                  "version": {
+                    "effectiveFrom": "2018-03-05T11:32:15.0000000+00:00",
+                    "asAtDate": "2022-03-05T10:09:01.0000000+00:00"
+                  },
+                  "metadata": {
+                    "warnings": [
+                      {
+                        "type": "TransactionTypesNotFound",
+                        "description": "No transaction types could be found for the listed transactions",
+                        "identifierType": "TransactionId",
+                        "identifiers": [
+                          "Transaction-001",
+                          "Transaction-123"
+                        ]
+                      }
+                    ]
+                  }
                 }
               },
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/UpsertPortfolioTransactionsResponse"
+                },
+                "example": {
+                  "version": {
+                    "effectiveFrom": "2018-03-05T11:32:15.0000000+00:00",
+                    "asAtDate": "2022-03-05T10:09:01.0000000+00:00"
+                  },
+                  "metadata": {
+                    "warnings": [
+                      {
+                        "type": "TransactionTypesNotFound",
+                        "description": "No transaction types could be found for the listed transactions",
+                        "identifierType": "TransactionId",
+                        "identifiers": [
+                          "Transaction-001",
+                          "Transaction-123"
+                        ]
+                      }
+                    ]
+                  }
                 }
               },
               "text/json": {
                 "schema": {
                   "$ref": "#/components/schemas/UpsertPortfolioTransactionsResponse"
+                },
+                "example": {
+                  "version": {
+                    "effectiveFrom": "2018-03-05T11:32:15.0000000+00:00",
+                    "asAtDate": "2022-03-05T10:09:01.0000000+00:00"
+                  },
+                  "metadata": {
+                    "warnings": [
+                      {
+                        "type": "TransactionTypesNotFound",
+                        "description": "No transaction types could be found for the listed transactions",
+                        "identifierType": "TransactionId",
+                        "identifiers": [
+                          "Transaction-001",
+                          "Transaction-123"
+                        ]
+                      }
+                    ]
+                  }
                 }
               }
             }
@@ -34873,16 +34930,73 @@
               "text/plain": {
                 "schema": {
                   "$ref": "#/components/schemas/UpsertPortfolioTransactionsResponse"
+                },
+                "example": {
+                  "version": {
+                    "effectiveFrom": "2018-03-05T11:32:15.0000000+00:00",
+                    "asAtDate": "2022-03-05T10:09:01.0000000+00:00"
+                  },
+                  "metadata": {
+                    "warnings": [
+                      {
+                        "type": "TransactionTypesNotFound",
+                        "description": "No transaction types could be found for the listed transactions",
+                        "identifierType": "TransactionId",
+                        "identifiers": [
+                          "Transaction-001",
+                          "Transaction-123"
+                        ]
+                      }
+                    ]
+                  }
                 }
               },
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/UpsertPortfolioTransactionsResponse"
+                },
+                "example": {
+                  "version": {
+                    "effectiveFrom": "2018-03-05T11:32:15.0000000+00:00",
+                    "asAtDate": "2022-03-05T10:09:01.0000000+00:00"
+                  },
+                  "metadata": {
+                    "warnings": [
+                      {
+                        "type": "TransactionTypesNotFound",
+                        "description": "No transaction types could be found for the listed transactions",
+                        "identifierType": "TransactionId",
+                        "identifiers": [
+                          "Transaction-001",
+                          "Transaction-123"
+                        ]
+                      }
+                    ]
+                  }
                 }
               },
               "text/json": {
                 "schema": {
                   "$ref": "#/components/schemas/UpsertPortfolioTransactionsResponse"
+                },
+                "example": {
+                  "version": {
+                    "effectiveFrom": "2018-03-05T11:32:15.0000000+00:00",
+                    "asAtDate": "2022-03-05T10:09:01.0000000+00:00"
+                  },
+                  "metadata": {
+                    "warnings": [
+                      {
+                        "type": "TransactionTypesNotFound",
+                        "description": "No transaction types could be found for the listed transactions",
+                        "identifierType": "TransactionId",
+                        "identifiers": [
+                          "Transaction-001",
+                          "Transaction-123"
+                        ]
+                      }
+                    ]
+                  }
                 }
               }
             }
@@ -43720,6 +43834,36 @@
         "additionalProperties": false,
         "description": "A collection of resources that can be returned from requests."
       },
+      "ResponseMetaData": {
+        "type": "object",
+        "properties": {
+          "type": {
+            "type": "string",
+            "description": "The type of meta data information being provided",
+            "nullable": true
+          },
+          "description": {
+            "type": "string",
+            "description": "The description of what occured for this specific piece of meta data",
+            "nullable": true
+          },
+          "identifierType": {
+            "type": "string",
+            "description": "The type of the listed identifiers",
+            "nullable": true
+          },
+          "identifiers": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "description": "The related identifiers that were impacted by this event",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false,
+        "description": "Metadata related to an api response"
+      },
       "ResultDataSchema": {
         "type": "object",
         "properties": {
@@ -45027,6 +45171,17 @@
             "type": "string",
             "description": "The specific Uniform Resource Identifier (URI) for this resource at the requested effective and asAt datetime.",
             "format": "uri",
+            "nullable": true
+          },
+          "metadata": {
+            "type": "object",
+            "additionalProperties": {
+              "type": "array",
+              "items": {
+                "$ref": "#/components/schemas/ResponseMetaData"
+              }
+            },
+            "description": "Contains warnings related to unresolved instruments or non-existent transaction types for the upserted trades",
             "nullable": true
           },
           "links": {
