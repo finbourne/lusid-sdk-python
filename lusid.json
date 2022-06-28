@@ -9,7 +9,7 @@
       "url": "https://www.finbourne.com",
       "email": "info@finbourne.com"
     },
-    "version": "0.11.4532",
+    "version": "0.11.4533",
     "x-logo": {
       "url": "https://www.lusid.com/app/assets/logo_white.png",
       "backgroundColor": "#415464"
@@ -39538,10 +39538,11 @@
           "state": {
             "enum": [
               "Active",
-              "Inactive"
+              "Inactive",
+              "Deleted"
             ],
             "type": "string",
-            "description": "The state of of the instrument at the asAt datetime of this version of the instrument definition. The available values are: Active, Inactive"
+            "description": "The state of of the instrument at the asAt datetime of this version of the instrument definition. The available values are: Active, Inactive, Deleted"
           },
           "assetClass": {
             "enum": [
