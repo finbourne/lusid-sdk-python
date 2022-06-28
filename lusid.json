@@ -9,7 +9,7 @@
       "url": "https://www.finbourne.com",
       "email": "info@finbourne.com"
     },
-    "version": "0.11.4536",
+    "version": "0.11.4537",
     "x-logo": {
       "url": "https://www.lusid.com/app/assets/logo_white.png",
       "backgroundColor": "#415464"
@@ -37128,9 +37128,9 @@
             "description": "The instrument allocated."
           },
           "quantity": {
-            "type": "integer",
+            "type": "number",
             "description": "The quantity of given instrument allocated.",
-            "format": "int32"
+            "format": "double"
           },
           "portfolioId": {
             "$ref": "#/components/schemas/ResourceId"
@@ -40552,9 +40552,9 @@
             "description": "The instrument ordered."
           },
           "quantity": {
-            "type": "integer",
+            "type": "number",
             "description": "The quantity of given instrument ordered.",
-            "format": "int32"
+            "format": "double"
           },
           "side": {
             "type": "string",
