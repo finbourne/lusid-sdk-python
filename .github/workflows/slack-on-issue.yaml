@@ -7,14 +7,13 @@ on:
     types: [created, deleted, edited]
 
 jobs:
-
-  build:
+  slack-alert-on-issue:
     if: ${{ !github.event.issue.pull_request }}
     runs-on: ubuntu-latest
     steps:
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
       - uses: actions/checkout@v2
-          
+
       - name: Slack notification
         uses: 8398a7/action-slack@v3
         with:

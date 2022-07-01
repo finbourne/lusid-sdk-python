@@ -1,44 +1,44 @@
 name: Notifier
 
-on: [pull_request, issues]
+on: [pull_request_target, issues]
 
 jobs:
-  build:
+  notify-on-issue:
     runs-on: ubuntu-latest
     steps:
       - name: NotifyOpsGenie
         run: |
-              cat << EOF > contents.json
-              {
-                  "message": "${GITHUB_EVENT_NAME} raised against ${GITHUB_REPOSITORY}",
-                  "alias": "${GITHUB_REPOSITORY} requires attention",
-                  "description": "${GITHUB_EVENT_NAME} raised against ${GITHUB_REPOSITORY}",
-                  "details":
-                      {
-                          "CI": "$CI",
-                          "GITHUB_RUN_ID": "$GITHUB_RUN_ID",
-                          "GITHUB_RUN_NUMBER": "$GITHUB_RUN_NUMBER",
-                          "GITHUB_ACTION": "$GITHUB_ACTION",
-                          "GITHUB_ACTIONS": "$GITHUB_ACTIONS",
-                          "GITHUB_ACTOR": "$GITHUB_ACTOR",
-                          "GITHUB_REPOSITORY": "$GITHUB_REPOSITORY",
-                          "GITHUB_EVENT_NAME": "$GITHUB_EVENT_NAME",
-                          "GITHUB_WORKFLOW": "$GITHUB_WORKFLOW",
-                          "GITHUB_EVENT_PATH": "$GITHUB_EVENT_PATH",
-                          "GITHUB_WORKSPACE": "$GITHUB_WORKSPACE",
-                          "GITHUB_SHA": "$GITHUB_SHA",
-                          "GITHUB_REF": "$GITHUB_REF",
-                          "GITHUB_HEAD_REF": "$GITHUB_HEAD_REF",
-                          "GITHUB_BASE_REF": "$GITHUB_BASE_REF",
-                          "GITHUB_SERVER_URL": "$GITHUB_SERVER_URL",
-                          "GITHUB_API_URL": "$GITHUB_API_URL",
-                          "GITHUB_GRAPHQL_URL": "$GITHUB_GRAPHQL_URL"
-                      },
-                  "priority":"P2"
-              }
-              EOF
+          cat << EOF > contents.json
+          {
+              "message": "${GITHUB_EVENT_NAME} raised against ${GITHUB_REPOSITORY}",
+              "alias": "${GITHUB_REPOSITORY} requires attention",
+              "description": "${GITHUB_EVENT_NAME} raised against ${GITHUB_REPOSITORY}",
+              "details":
+                  {
+                      "CI": "$CI",
+                      "GITHUB_RUN_ID": "$GITHUB_RUN_ID",
+                      "GITHUB_RUN_NUMBER": "$GITHUB_RUN_NUMBER",
+                      "GITHUB_ACTION": "$GITHUB_ACTION",
+                      "GITHUB_ACTIONS": "$GITHUB_ACTIONS",
+                      "GITHUB_ACTOR": "$GITHUB_ACTOR",
+                      "GITHUB_REPOSITORY": "$GITHUB_REPOSITORY",
+                      "GITHUB_EVENT_NAME": "$GITHUB_EVENT_NAME",
+                      "GITHUB_WORKFLOW": "$GITHUB_WORKFLOW",
+                      "GITHUB_EVENT_PATH": "$GITHUB_EVENT_PATH",
+                      "GITHUB_WORKSPACE": "$GITHUB_WORKSPACE",
+                      "GITHUB_SHA": "$GITHUB_SHA",
+                      "GITHUB_REF": "$GITHUB_REF",
+                      "GITHUB_HEAD_REF": "$GITHUB_HEAD_REF",
+                      "GITHUB_BASE_REF": "$GITHUB_BASE_REF",
+                      "GITHUB_SERVER_URL": "$GITHUB_SERVER_URL",
+                      "GITHUB_API_URL": "$GITHUB_API_URL",
+                      "GITHUB_GRAPHQL_URL": "$GITHUB_GRAPHQL_URL"
+                  },
+              "priority":"P2"
+          }
+          EOF
 
-              curl -X POST https://api.opsgenie.com/v2/alerts \
-                  -H "Content-Type: application/json" \
-                  -H "Authorization: GenieKey ${{ secrets.OPSGENIE }}" \
-                  -d "@contents.json"
+          curl -X POST https://api.opsgenie.com/v2/alerts \
+              -H "Content-Type: application/json" \
+              -H "Authorization: GenieKey ${{ secrets.OPSGENIE }}" \
+              -d "@contents.json"
