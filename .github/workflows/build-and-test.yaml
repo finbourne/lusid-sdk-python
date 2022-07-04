@@ -1,9 +1,6 @@
-# This job runs the project tests
-
 name: Build and test
 
-# Trigger the workflow on push or pull request to master or develop
-
+# Trigger the workflow when a workflow_dispatch is received.
 on:
   workflow_dispatch:
     inputs:
@@ -56,7 +53,7 @@ jobs:
               status: "in_progress",
 
               output: {
-                title: "Integration Test Results",
+                title: "Integration Tests",
                 summary: "Build started",
                 text: "Just gonna do stuff ya know."
               }
