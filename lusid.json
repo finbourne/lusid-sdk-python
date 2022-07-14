@@ -9,7 +9,7 @@
       "url": "https://www.finbourne.com",
       "email": "info@finbourne.com"
     },
-    "version": "0.11.4601",
+    "version": "0.11.4602",
     "x-logo": {
       "url": "https://www.lusid.com/app/assets/logo_white.png",
       "backgroundColor": "#415464"
@@ -5882,6 +5882,491 @@
                     "effectiveFrom": "2019-01-01T12:00:00.0000000+00:00",
                     "asAtDate": "2019-01-01T12:00:00.0100000+00:00"
                   }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "The details of the input related failure",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/LusidValidationProblemDetails"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/LusidValidationProblemDetails"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/LusidValidationProblemDetails"
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "Error response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/LusidProblemDetails"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "oauth2": []
+          }
+        ],
+        "x-fbn-apistatus": "EarlyAccess"
+      },
+      "get": {
+        "tags": [
+          "Legal Entities"
+        ],
+        "summary": "[EARLY ACCESS] ListAllLegalEntities: List Legal Entities",
+        "description": "List all legal entities which the user is entitled to see.",
+        "operationId": "ListAllLegalEntities",
+        "parameters": [
+          {
+            "name": "effectiveAt",
+            "in": "query",
+            "description": "The effective datetime or cut label at which to list the legal entities. Defaults to the current LUSID\r\n            system datetime if not specified.",
+            "schema": {
+              "type": "string",
+              "description": "The effective datetime or cut label at which to list the legal entities. Defaults to the current LUSID\r\n            system datetime if not specified.",
+              "format": "dateorcutlabel",
+              "nullable": true
+            }
+          },
+          {
+            "name": "asAt",
+            "in": "query",
+            "description": "The asAt datetime at which to list the legal entities. Defaults to return the latest version\r\n            of each legal entities if not specified.",
+            "schema": {
+              "type": "string",
+              "description": "The asAt datetime at which to list the legal entities. Defaults to return the latest version\r\n            of each legal entities if not specified.",
+              "format": "date-time",
+              "nullable": true
+            },
+            "x-nullable": true
+          },
+          {
+            "name": "page",
+            "in": "query",
+            "description": "The pagination token to use to continue listing legal entities from a previous call to list legal entities. This\r\nvalue is returned from the previous call. If a pagination token is provided the filter, effectiveAt\r\nand asAt fields must not have changed since the original request.",
+            "schema": {
+              "maxLength": 500,
+              "minLength": 1,
+              "pattern": "^[a-zA-Z0-9\\+/]*={0,3}$",
+              "type": "string",
+              "description": "The pagination token to use to continue listing legal entities from a previous call to list legal entities. This\r\nvalue is returned from the previous call. If a pagination token is provided the filter, effectiveAt\r\nand asAt fields must not have changed since the original request.",
+              "nullable": true
+            }
+          },
+          {
+            "name": "limit",
+            "in": "query",
+            "description": "When paginating, limit the number of returned results to this many. Defaults to 5000 if not specified.",
+            "schema": {
+              "maximum": 5000,
+              "minimum": 1,
+              "type": "integer",
+              "description": "When paginating, limit the number of returned results to this many. Defaults to 5000 if not specified.",
+              "format": "int32",
+              "nullable": true
+            },
+            "x-nullable": true
+          },
+          {
+            "name": "filter",
+            "in": "query",
+            "description": "Expression to filter the result set. \r\n            Read more about filtering results from LUSID here https://support.lusid.com/filtering-results-from-lusid.",
+            "schema": {
+              "maxLength": 16384,
+              "minLength": 0,
+              "pattern": "^[\\s\\S]*$",
+              "type": "string",
+              "description": "Expression to filter the result set. \r\n            Read more about filtering results from LUSID here https://support.lusid.com/filtering-results-from-lusid.",
+              "nullable": true
+            }
+          },
+          {
+            "name": "propertyKeys",
+            "in": "query",
+            "description": "A list of property keys or identifier types (as property keys) from the \"LegalEntity\" domain to include for each legal entity.\r\n            These take the format {domain}/{scope}/{code} e.g. \"LegalEntity/ContactDetails/Address\".",
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "string",
+                "description": "The key that uniquely identifies the property. It has the format {domain}/{scope}/{code}."
+              },
+              "description": "A list of property keys or identifier types (as property keys) from the \"LegalEntity\" domain to include for each legal entity.\r\n            These take the format {domain}/{scope}/{code} e.g. \"LegalEntity/ContactDetails/Address\".",
+              "nullable": true
+            },
+            "x-nullable": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "All existing Legal Entities",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResourceListOfLegalEntity"
+                },
+                "example": {
+                  "values": [
+                    {
+                      "displayName": "LegalEntity1DisplayName",
+                      "description": "LegalEntity1Description",
+                      "href": "https://example.com",
+                      "lusidLegalEntityId": "LUID_00003D4V",
+                      "identifiers": {
+                        "legalEntity/ExternalIdentifier/LEI": {
+                          "key": "LegalEntity/ExternalIdentifier/LEI",
+                          "value": {
+                            "labelValue": "LEI_12345678"
+                          }
+                        },
+                        "legalEntity/InternalIdentifier/InternalLeiId": {
+                          "key": "LegalEntity/InternalIdentifier/InternalLeiId",
+                          "value": {
+                            "labelValue": "Internal_XHSP2038"
+                          }
+                        }
+                      },
+                      "properties": {
+                        "legalEntity/Details/Name": {
+                          "key": "LegalEntity/Details/Name",
+                          "value": {
+                            "labelValue": "Legal Entity Inc."
+                          }
+                        },
+                        "legalEntity/Details/Country": {
+                          "key": "LegalEntity/Details/Country",
+                          "value": {
+                            "labelValue": "United Kingdom"
+                          },
+                          "effectiveFrom": "2016-01-01T00:00:00.0000000+00:00"
+                        },
+                        "legalEntity/Status/Active": {
+                          "key": "LegalEntity/Status/Active",
+                          "value": {
+                            "labelValue": "Active"
+                          },
+                          "effectiveFrom": "2016-07-01T00:00:00.0000000+00:00"
+                        }
+                      },
+                      "counterpartyRiskInformation": {
+                        "countryOfRisk": "UnitedKingdom",
+                        "creditRatings": [
+                          {
+                            "ratingSource": "StandardAndPoors",
+                            "rating": "AA+"
+                          }
+                        ],
+                        "industryClassifiers": [
+                          {
+                            "classificationSystemName": "GICS2018",
+                            "classificationCode": "10101010"
+                          }
+                        ]
+                      },
+                      "version": {
+                        "effectiveFrom": "2019-01-01T12:00:00.0000000+00:00",
+                        "asAtDate": "2019-01-01T12:00:00.0100000+00:00"
+                      }
+                    },
+                    {
+                      "displayName": "LegalEntity2DisplayName",
+                      "description": "LegalEntity2Description",
+                      "href": "https://example.com",
+                      "lusidLegalEntityId": "LUID_00003D55",
+                      "identifiers": {
+                        "legalEntity/ExternalIdentifier/LEI": {
+                          "key": "LegalEntity/ExternalIdentifier/LEI",
+                          "value": {
+                            "labelValue": "LEI_22345678"
+                          }
+                        },
+                        "legalEntity/InternalIdentifier/InternalLeiId": {
+                          "key": "LegalEntity/InternalIdentifier/InternalLeiId",
+                          "value": {
+                            "labelValue": "Internal_XHSP2038"
+                          }
+                        }
+                      },
+                      "properties": {
+                        "legalEntity/Details/Name": {
+                          "key": "LegalEntity/Details/Name",
+                          "value": {
+                            "labelValue": "Legal Entity 2 Inc."
+                          }
+                        },
+                        "legalEntity/Details/Country": {
+                          "key": "LegalEntity/Details/Country",
+                          "value": {
+                            "labelValue": "Germany"
+                          },
+                          "effectiveFrom": "2016-01-01T00:00:00.0000000+00:00"
+                        },
+                        "legalEntity/Status/Active": {
+                          "key": "LegalEntity/Status/Active",
+                          "value": {
+                            "labelValue": "Active"
+                          },
+                          "effectiveFrom": "2016-04-01T00:00:00.0000000+00:00"
+                        }
+                      },
+                      "version": {
+                        "effectiveFrom": "2019-01-01T12:00:00.0000000+00:00",
+                        "asAtDate": "2019-01-01T12:00:00.0100000+00:00"
+                      }
+                    }
+                  ],
+                  "href": "http://example.com",
+                  "links": []
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResourceListOfLegalEntity"
+                },
+                "example": {
+                  "values": [
+                    {
+                      "displayName": "LegalEntity1DisplayName",
+                      "description": "LegalEntity1Description",
+                      "href": "https://example.com",
+                      "lusidLegalEntityId": "LUID_00003D4V",
+                      "identifiers": {
+                        "legalEntity/ExternalIdentifier/LEI": {
+                          "key": "LegalEntity/ExternalIdentifier/LEI",
+                          "value": {
+                            "labelValue": "LEI_12345678"
+                          }
+                        },
+                        "legalEntity/InternalIdentifier/InternalLeiId": {
+                          "key": "LegalEntity/InternalIdentifier/InternalLeiId",
+                          "value": {
+                            "labelValue": "Internal_XHSP2038"
+                          }
+                        }
+                      },
+                      "properties": {
+                        "legalEntity/Details/Name": {
+                          "key": "LegalEntity/Details/Name",
+                          "value": {
+                            "labelValue": "Legal Entity Inc."
+                          }
+                        },
+                        "legalEntity/Details/Country": {
+                          "key": "LegalEntity/Details/Country",
+                          "value": {
+                            "labelValue": "United Kingdom"
+                          },
+                          "effectiveFrom": "2016-01-01T00:00:00.0000000+00:00"
+                        },
+                        "legalEntity/Status/Active": {
+                          "key": "LegalEntity/Status/Active",
+                          "value": {
+                            "labelValue": "Active"
+                          },
+                          "effectiveFrom": "2016-07-01T00:00:00.0000000+00:00"
+                        }
+                      },
+                      "counterpartyRiskInformation": {
+                        "countryOfRisk": "UnitedKingdom",
+                        "creditRatings": [
+                          {
+                            "ratingSource": "StandardAndPoors",
+                            "rating": "AA+"
+                          }
+                        ],
+                        "industryClassifiers": [
+                          {
+                            "classificationSystemName": "GICS2018",
+                            "classificationCode": "10101010"
+                          }
+                        ]
+                      },
+                      "version": {
+                        "effectiveFrom": "2019-01-01T12:00:00.0000000+00:00",
+                        "asAtDate": "2019-01-01T12:00:00.0100000+00:00"
+                      }
+                    },
+                    {
+                      "displayName": "LegalEntity2DisplayName",
+                      "description": "LegalEntity2Description",
+                      "href": "https://example.com",
+                      "lusidLegalEntityId": "LUID_00003D55",
+                      "identifiers": {
+                        "legalEntity/ExternalIdentifier/LEI": {
+                          "key": "LegalEntity/ExternalIdentifier/LEI",
+                          "value": {
+                            "labelValue": "LEI_22345678"
+                          }
+                        },
+                        "legalEntity/InternalIdentifier/InternalLeiId": {
+                          "key": "LegalEntity/InternalIdentifier/InternalLeiId",
+                          "value": {
+                            "labelValue": "Internal_XHSP2038"
+                          }
+                        }
+                      },
+                      "properties": {
+                        "legalEntity/Details/Name": {
+                          "key": "LegalEntity/Details/Name",
+                          "value": {
+                            "labelValue": "Legal Entity 2 Inc."
+                          }
+                        },
+                        "legalEntity/Details/Country": {
+                          "key": "LegalEntity/Details/Country",
+                          "value": {
+                            "labelValue": "Germany"
+                          },
+                          "effectiveFrom": "2016-01-01T00:00:00.0000000+00:00"
+                        },
+                        "legalEntity/Status/Active": {
+                          "key": "LegalEntity/Status/Active",
+                          "value": {
+                            "labelValue": "Active"
+                          },
+                          "effectiveFrom": "2016-04-01T00:00:00.0000000+00:00"
+                        }
+                      },
+                      "version": {
+                        "effectiveFrom": "2019-01-01T12:00:00.0000000+00:00",
+                        "asAtDate": "2019-01-01T12:00:00.0100000+00:00"
+                      }
+                    }
+                  ],
+                  "href": "http://example.com",
+                  "links": []
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResourceListOfLegalEntity"
+                },
+                "example": {
+                  "values": [
+                    {
+                      "displayName": "LegalEntity1DisplayName",
+                      "description": "LegalEntity1Description",
+                      "href": "https://example.com",
+                      "lusidLegalEntityId": "LUID_00003D4V",
+                      "identifiers": {
+                        "legalEntity/ExternalIdentifier/LEI": {
+                          "key": "LegalEntity/ExternalIdentifier/LEI",
+                          "value": {
+                            "labelValue": "LEI_12345678"
+                          }
+                        },
+                        "legalEntity/InternalIdentifier/InternalLeiId": {
+                          "key": "LegalEntity/InternalIdentifier/InternalLeiId",
+                          "value": {
+                            "labelValue": "Internal_XHSP2038"
+                          }
+                        }
+                      },
+                      "properties": {
+                        "legalEntity/Details/Name": {
+                          "key": "LegalEntity/Details/Name",
+                          "value": {
+                            "labelValue": "Legal Entity Inc."
+                          }
+                        },
+                        "legalEntity/Details/Country": {
+                          "key": "LegalEntity/Details/Country",
+                          "value": {
+                            "labelValue": "United Kingdom"
+                          },
+                          "effectiveFrom": "2016-01-01T00:00:00.0000000+00:00"
+                        },
+                        "legalEntity/Status/Active": {
+                          "key": "LegalEntity/Status/Active",
+                          "value": {
+                            "labelValue": "Active"
+                          },
+                          "effectiveFrom": "2016-07-01T00:00:00.0000000+00:00"
+                        }
+                      },
+                      "counterpartyRiskInformation": {
+                        "countryOfRisk": "UnitedKingdom",
+                        "creditRatings": [
+                          {
+                            "ratingSource": "StandardAndPoors",
+                            "rating": "AA+"
+                          }
+                        ],
+                        "industryClassifiers": [
+                          {
+                            "classificationSystemName": "GICS2018",
+                            "classificationCode": "10101010"
+                          }
+                        ]
+                      },
+                      "version": {
+                        "effectiveFrom": "2019-01-01T12:00:00.0000000+00:00",
+                        "asAtDate": "2019-01-01T12:00:00.0100000+00:00"
+                      }
+                    },
+                    {
+                      "displayName": "LegalEntity2DisplayName",
+                      "description": "LegalEntity2Description",
+                      "href": "https://example.com",
+                      "lusidLegalEntityId": "LUID_00003D55",
+                      "identifiers": {
+                        "legalEntity/ExternalIdentifier/LEI": {
+                          "key": "LegalEntity/ExternalIdentifier/LEI",
+                          "value": {
+                            "labelValue": "LEI_22345678"
+                          }
+                        },
+                        "legalEntity/InternalIdentifier/InternalLeiId": {
+                          "key": "LegalEntity/InternalIdentifier/InternalLeiId",
+                          "value": {
+                            "labelValue": "Internal_XHSP2038"
+                          }
+                        }
+                      },
+                      "properties": {
+                        "legalEntity/Details/Name": {
+                          "key": "LegalEntity/Details/Name",
+                          "value": {
+                            "labelValue": "Legal Entity 2 Inc."
+                          }
+                        },
+                        "legalEntity/Details/Country": {
+                          "key": "LegalEntity/Details/Country",
+                          "value": {
+                            "labelValue": "Germany"
+                          },
+                          "effectiveFrom": "2016-01-01T00:00:00.0000000+00:00"
+                        },
+                        "legalEntity/Status/Active": {
+                          "key": "LegalEntity/Status/Active",
+                          "value": {
+                            "labelValue": "Active"
+                          },
+                          "effectiveFrom": "2016-04-01T00:00:00.0000000+00:00"
+                        }
+                      },
+                      "version": {
+                        "effectiveFrom": "2019-01-01T12:00:00.0000000+00:00",
+                        "asAtDate": "2019-01-01T12:00:00.0100000+00:00"
+                      }
+                    }
+                  ],
+                  "href": "http://example.com",
+                  "links": []
                 }
               }
             }
@@ -43312,6 +43797,47 @@
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/IUnitDefinitionDto"
+            },
+            "description": "The resources to list."
+          },
+          "href": {
+            "type": "string",
+            "description": "The URI of the resource list.",
+            "format": "uri",
+            "nullable": true
+          },
+          "links": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Link"
+            },
+            "description": "Collection of links.",
+            "nullable": true
+          },
+          "nextPage": {
+            "type": "string",
+            "description": "The next page of results.",
+            "nullable": true
+          },
+          "previousPage": {
+            "type": "string",
+            "description": "The previous page of results.",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false,
+        "description": "A collection of resources that can be returned from requests."
+      },
+      "ResourceListOfLegalEntity": {
+        "required": [
+          "values"
+        ],
+        "type": "object",
+        "properties": {
+          "values": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/LegalEntity"
             },
             "description": "The resources to list."
           },
