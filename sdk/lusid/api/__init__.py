@@ -23,6 +23,8 @@ from lusid.api.property_definitions_api import PropertyDefinitionsApi
 from lusid.api.quotes_api import QuotesApi
 from lusid.api.reconciliations_api import ReconciliationsApi
 from lusid.api.reference_portfolio_api import ReferencePortfolioApi
+from lusid.api.relationship_definitions_api import RelationshipDefinitionsApi
+from lusid.api.relationships_api import RelationshipsApi
 from lusid.api.scopes_api import ScopesApi
 from lusid.api.search_api import SearchApi
 from lusid.api.sequences_api import SequencesApi
