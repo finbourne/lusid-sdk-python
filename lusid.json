@@ -9,7 +9,7 @@
       "url": "https://www.finbourne.com",
       "email": "info@finbourne.com"
     },
-    "version": "0.11.4644",
+    "version": "0.11.4646",
     "x-logo": {
       "url": "https://www.lusid.com/app/assets/logo_white.png",
       "backgroundColor": "#415464"
@@ -17,7 +17,7 @@
   },
   "servers": [
     {
-      "url": "https://fbn-prd.lusid.com/api"
+      "url": "https://www.lusid.com/api"
     }
   ],
   "paths": {
@@ -24057,7 +24057,9 @@
                   "idTypeScope": "HrSystem1",
                   "idTypeCode": "InternalId",
                   "code": "XY10001111"
-                }
+                },
+                "effectiveFrom": "2019-01-01T12:00:00.0000000+00:00",
+                "effectiveUntil": "2022-01-01T12:00:00.0000000+00:00"
               }
             },
             "application/json": {
@@ -24073,7 +24075,9 @@
                   "idTypeScope": "HrSystem1",
                   "idTypeCode": "InternalId",
                   "code": "XY10001111"
-                }
+                },
+                "effectiveFrom": "2019-01-01T12:00:00.0000000+00:00",
+                "effectiveUntil": "2022-01-01T12:00:00.0000000+00:00"
               }
             },
             "text/json": {
@@ -24089,7 +24093,9 @@
                   "idTypeScope": "HrSystem1",
                   "idTypeCode": "InternalId",
                   "code": "XY10001111"
-                }
+                },
+                "effectiveFrom": "2019-01-01T12:00:00.0000000+00:00",
+                "effectiveUntil": "2022-01-01T12:00:00.0000000+00:00"
               }
             },
             "application/*+json": {
@@ -24105,7 +24111,9 @@
                   "idTypeScope": "HrSystem1",
                   "idTypeCode": "InternalId",
                   "code": "XY10001111"
-                }
+                },
+                "effectiveFrom": "2019-01-01T12:00:00.0000000+00:00",
+                "effectiveUntil": "2022-01-01T12:00:00.0000000+00:00"
               }
             }
           },
@@ -49613,7 +49621,7 @@
         "description": "OAuth2 Implicit Grant",
         "flows": {
           "implicit": {
-            "authorizationUrl": "https://lusid.okta.com/oauth2/default/v1/authorize",
+            "authorizationUrl": "https://dummyurl.lusid.com/",
             "scopes": {}
           }
         }
