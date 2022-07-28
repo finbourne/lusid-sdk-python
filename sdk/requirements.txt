@@ -6,3 +6,4 @@ urllib3 >= 1.15.1
 pytz >= 2019.1
 requests >= 2.21.0
 lusidfeature
+finbourne-sdk-utilities
