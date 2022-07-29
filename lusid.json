@@ -9,7 +9,7 @@
       "url": "https://www.finbourne.com",
       "email": "info@finbourne.com"
     },
-    "version": "0.11.4656",
+    "version": "0.11.4657",
     "x-logo": {
       "url": "https://www.lusid.com/app/assets/logo_white.png",
       "backgroundColor": "#415464"
@@ -42003,6 +42003,15 @@
             "pattern": "^[a-zA-Z0-9\\-_\\+:\\.]+$",
             "type": "string",
             "description": "The effective date of the relationship to be deleted",
+            "format": "dateorcutlabel",
+            "nullable": true
+          },
+          "effectiveUntil": {
+            "maxLength": 256,
+            "minLength": 0,
+            "pattern": "^[a-zA-Z0-9\\-_\\+:\\.]+$",
+            "type": "string",
+            "description": "The effective datetime until which the relationship will be deleted. If not supplied the deletion will be permanent.",
             "format": "dateorcutlabel",
             "nullable": true
           }
