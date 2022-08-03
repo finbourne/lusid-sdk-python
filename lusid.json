@@ -9,7 +9,7 @@
       "url": "https://www.finbourne.com",
       "email": "info@finbourne.com"
     },
-    "version": "0.11.4666",
+    "version": "0.11.4667",
     "x-logo": {
       "url": "https://www.lusid.com/app/assets/logo_white.png",
       "backgroundColor": "#415464"
@@ -17,7 +17,7 @@
   },
   "servers": [
     {
-      "url": "https://fbn-prd.lusid.com/api"
+      "url": "https://www.lusid.com/api"
     }
   ],
   "paths": {
@@ -12582,6 +12582,7 @@
                         }
                       },
                       "holdingType": "P",
+                      "holdingTypeName": "Position",
                       "units": 10,
                       "settledUnits": 10,
                       "cost": {
@@ -12629,6 +12630,7 @@
                         }
                       },
                       "holdingType": "P",
+                      "holdingTypeName": "Position",
                       "units": 10,
                       "settledUnits": 10,
                       "cost": {
@@ -12676,6 +12678,7 @@
                         }
                       },
                       "holdingType": "P",
+                      "holdingTypeName": "Position",
                       "units": 10,
                       "settledUnits": 10,
                       "cost": {
@@ -36841,6 +36844,7 @@
                         }
                       },
                       "holdingType": "P",
+                      "holdingTypeName": "Position",
                       "units": 10,
                       "settledUnits": 10,
                       "cost": {
@@ -36888,6 +36892,7 @@
                         }
                       },
                       "holdingType": "P",
+                      "holdingTypeName": "Position",
                       "units": 10,
                       "settledUnits": 10,
                       "cost": {
@@ -36935,6 +36940,7 @@
                         }
                       },
                       "holdingType": "P",
+                      "holdingTypeName": "Position",
                       "units": 10,
                       "settledUnits": 10,
                       "cost": {
@@ -39494,7 +39500,7 @@
           },
           "holdingType": {
             "type": "string",
-            "description": "The type of the holding e.g. Position, Balance, CashCommitment, Receivable, ForwardFX etc.",
+            "description": "The code for the type of the holding e.g. P, B, C, R, F etc.",
             "nullable": true
           },
           "instrumentScope": {
@@ -39565,7 +39571,7 @@
           },
           "holdingType": {
             "type": "string",
-            "description": "The type of the holding e.g. Position, Balance, CashCommitment, Receivable, ForwardFX etc.",
+            "description": "The code for the type of the holding e.g. P, B, C, R, F etc.",
             "nullable": true
           },
           "instrumentScope": {
@@ -45120,6 +45126,7 @@
           "cost",
           "costPortfolioCcy",
           "holdingType",
+          "holdingTypeName",
           "instrumentUid",
           "settledUnits",
           "units"
@@ -45153,7 +45160,11 @@
           },
           "holdingType": {
             "type": "string",
-            "description": "The type of the holding e.g. Position, Balance, CashCommitment, Receivable, ForwardFX etc."
+            "description": "The code for the type of the holding e.g. P, B, C, R, F etc."
+          },
+          "holdingTypeName": {
+            "type": "string",
+            "description": "The decoded type of the holding e.g. Position, Balance, CashCommitment, Receivable, ForwardFX etc."
           },
           "units": {
             "type": "number",
@@ -49631,7 +49642,7 @@
         "description": "OAuth2 Implicit Grant",
         "flows": {
           "implicit": {
-            "authorizationUrl": "https://lusid.okta.com/oauth2/default/v1/authorize",
+            "authorizationUrl": "https://dummyurl.lusid.com/",
             "scopes": {}
           }
         }
