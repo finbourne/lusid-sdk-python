@@ -301,10 +301,10 @@ from lusid.models.versioned_resource_list_of_transaction import VersionedResourc
 from lusid.models.weighted_instrument import WeightedInstrument
 
 # import utilities into sdk package
-from fbnsdkutilities.utilities.api_client_builder import ApiClientBuilder
-from fbnsdkutilities.utilities.api_configuration import ApiConfiguration
-from fbnsdkutilities.utilities.api_configuration_loader import ApiConfigurationLoader
-from fbnsdkutilities.utilities.refreshing_token import RefreshingToken
+from lusid.utilities.api_client_builder import ApiClientBuilder
+from lusid.utilities.api_configuration import ApiConfiguration
+from lusid.utilities.api_configuration_loader import ApiConfigurationLoader
+from lusid.utilities.refreshing_token import RefreshingToken
 
 # import tcp utilities
-from fbnsdkutilities.tcp.tcp_keep_alive_probes import TCPKeepAlivePoolManager, TCPKeepAliveProxyManager
+from lusid.tcp.tcp_keep_alive_probes import TCPKeepAlivePoolManager, TCPKeepAliveProxyManager
