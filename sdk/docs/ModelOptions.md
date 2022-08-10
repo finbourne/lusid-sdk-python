@@ -1,5 +1,6 @@
 # ModelOptions
 
+Base class for representing model options in LUSID, which provide config for instrument analytics.  This base class should not be directly instantiated; each supported ModelOptionsType has a corresponding inherited class.
 
 ## Properties
 Name | Type | Description | Notes

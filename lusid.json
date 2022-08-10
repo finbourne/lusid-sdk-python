@@ -9,7 +9,7 @@
       "url": "https://www.finbourne.com",
       "email": "info@finbourne.com"
     },
-    "version": "0.11.4697",
+    "version": "0.11.4698",
     "x-logo": {
       "url": "https://www.lusid.com/app/assets/logo_white.png",
       "backgroundColor": "#415464"
@@ -40637,7 +40637,7 @@
           }
         },
         "additionalProperties": false,
-        "description": "A base class for any form of market data with structure",
+        "description": "Base class for representing complex market data in LUSID.\r\nGenerally speaking, market data is complex when it cannot be represented as a single quote.\r\nExamples include discounting curves, projection curves, and volatility surfaces, which are used to compute instrument analytics.\r\nThis base class should not be directly instantiated; each supported MarketDataType has a corresponding inherited class.",
         "discriminator": {
           "propertyName": "marketDataType"
         }
@@ -43198,7 +43198,7 @@
           }
         },
         "additionalProperties": false,
-        "description": "Base class in hierarchy for LUSID Instruments. Valuation would normally be performed through passing LUSID a Code for a portfolio to be valued.\r\nIn that case the set of instruments have already been uploaded. Equally, one might wish to pass in a set of instruments directly and have LUSID\r\nvalue the inlined set. This the base instrument for this case.",
+        "description": "Base class in the hierarchy for representing the full economic definition of instruments in LUSID.\r\nThese definitions are used to provide instrument analytics such as PV, accrual, cash flows, and risk.\r\nThis base class should not be directly instantiated; each supported InstrumentType has a corresponding inherited class.",
         "discriminator": {
           "propertyName": "instrumentType"
         }
@@ -43659,6 +43659,7 @@
           }
         },
         "additionalProperties": false,
+        "description": "Base class for representing model options in LUSID, which provide config for instrument analytics.\r\nThis base class should not be directly instantiated; each supported ModelOptionsType has a corresponding inherited class.",
         "discriminator": {
           "propertyName": "modelOptionsType"
         }
@@ -47526,7 +47527,7 @@
           }
         },
         "additionalProperties": false,
-        "description": "A rule that describes how we resolve (unit) result data.",
+        "description": "Base class for representing result key rules in LUSID, which describe how to resolve (unit) result data.\r\nThis base class should not be directly instantiated; each supported ResultKeyRuleType has a corresponding inherited class.",
         "discriminator": {
           "propertyName": "resultKeyRuleType"
         }
