@@ -9,7 +9,7 @@
       "url": "https://www.finbourne.com",
       "email": "info@finbourne.com"
     },
-    "version": "0.11.4693",
+    "version": "0.11.4694",
     "x-logo": {
       "url": "https://www.lusid.com/app/assets/logo_white.png",
       "backgroundColor": "#415464"
@@ -40629,10 +40629,11 @@
               "FxForwardTenorCurveData",
               "FxForwardTenorPipsCurveData",
               "FxForwardCurveByQuoteReference",
-              "CreditSpreadCurveData"
+              "CreditSpreadCurveData",
+              "EquityCurveByPricesData"
             ],
             "type": "string",
-            "description": "The available values are: DiscountFactorCurveData, EquityVolSurfaceData, FxVolSurfaceData, IrVolCubeData, OpaqueMarketData, YieldCurveData, FxForwardCurveData, FxForwardPipsCurveData, FxForwardTenorCurveData, FxForwardTenorPipsCurveData, FxForwardCurveByQuoteReference, CreditSpreadCurveData"
+            "description": "The available values are: DiscountFactorCurveData, EquityVolSurfaceData, FxVolSurfaceData, IrVolCubeData, OpaqueMarketData, YieldCurveData, FxForwardCurveData, FxForwardPipsCurveData, FxForwardTenorCurveData, FxForwardTenorPipsCurveData, FxForwardCurveByQuoteReference, CreditSpreadCurveData, EquityCurveByPricesData"
           }
         },
         "additionalProperties": false,
@@ -43650,10 +43651,11 @@
               "EmptyModelOptions",
               "IndexModelOptions",
               "FxForwardModelOptions",
-              "FundingLegModelOptions"
+              "FundingLegModelOptions",
+              "EquityModelOptions"
             ],
             "type": "string",
-            "description": "The available values are: Invalid, OpaqueModelOptions, EmptyModelOptions, IndexModelOptions, FxForwardModelOptions, FundingLegModelOptions"
+            "description": "The available values are: Invalid, OpaqueModelOptions, EmptyModelOptions, IndexModelOptions, FxForwardModelOptions, FundingLegModelOptions, EquityModelOptions"
           }
         },
         "additionalProperties": false,
