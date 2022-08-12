@@ -101,14 +101,14 @@ class Properties(unittest.TestCase):
             display_name="fund NAV",
             life_time="Perpetual",
             value_required=False,
-            data_type_id=models.resource_id.ResourceId(scope="system", code="currencyAndAmount")
+            data_type_id=models.resource_id.ResourceId(scope="system", code="number")
         )
 
         # create property definitions
         metric_property_definition_result = self.property_definitions_api.create_property_definition(metric_property_definition)
 
         # create the property values
-        metric_property_value_request = models.PropertyValue(metric_value=models.MetricValue(value=1100000, unit="GBP"))
+        metric_property_value_request = models.PropertyValue(metric_value=models.MetricValue(value=289884350.173235074209))
         # metric_property_value_request = models.PropertyValue(label_value="Active")
 
         # Details of the new portfolio to be created, created here with the minimum set of mandatory fields
@@ -135,6 +135,9 @@ class Properties(unittest.TestCase):
         # Perform assertions on codes, keys, values and units
         self.assertEqual(portfolio_result.id.code, create_portfolio_request.code)
         self.assertEqual(list(portfolio_properties.keys())[0], metric_property_definition_result.key)
-        self.assertEqual(metric_property.value.metric_value.value, metric_property_value_request.metric_value.value)
+
+        print(metric_property.value.metric_value.value)
+        self.assertEqual(metric_property.value.metric_value.value, 289884350.17323506)
+        self.assertEqual(metric_property.value.metric_value.value, 289884350.173235074)
         self.assertEqual(metric_property.value.metric_value.unit, metric_property_value_request.metric_value.unit)
 
