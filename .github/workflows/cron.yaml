@@ -28,6 +28,7 @@ jobs:
           FBN_APP_NAME: ${{ secrets.MASTER_FBN_CLIENT_ID }}
           FBN_ACCESS_TOKEN: ${{ secrets.MASTER_FBN_ACCESS_TOKEN }}
           FBN_LUSID_ACCESS_TOKEN: ${{ secrets.MASTER_FBN_ACCESS_TOKEN }}
+          FBN_BASE_API_URL: ${{ secrets.MASTER_FBN_BASE_API_URL }}
         run: |
           echo "env variables for MASTER have been set"
           echo "Changing directory into sdk directory"
