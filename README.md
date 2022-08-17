@@ -163,5 +163,4 @@ If you want to generate the Python SDK locally from the FINBOURNE OpenAPI specif
 
 | branch | status |
 | --- | --- |
-| `master` | ![PyPI](https://img.shields.io/pypi/v/lusid-sdk?color=blue) ![run-sdk-tests](https://github.com/finbourne/lusid-sdk-python/workflows/run-sdk-tests/badge.svg?branch=master) [![Quality Gate Status](https://sonarcloud.io/api/project_badges/measure?project=finbourne_lusid-sdk-python&metric=alert_status)](https://sonarcloud.io/dashboard?id=finbourne_lusid-sdk-python) |
-| `develop` | ![run-sdk-tests](https://github.com/finbourne/lusid-sdk-python/workflows/run-sdk-tests/badge.svg?branch=develop) |
+| `master` | ![PyPI](https://img.shields.io/pypi/v/lusid-sdk?color=blue) [![Quality Gate Status](https://sonarcloud.io/api/project_badges/measure?project=finbourne_lusid-sdk-python&metric=alert_status)](https://sonarcloud.io/dashboard?id=finbourne_lusid-sdk-python) |
