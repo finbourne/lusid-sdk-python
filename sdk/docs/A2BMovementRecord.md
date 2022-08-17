@@ -22,6 +22,7 @@ Name | Type | Description | Notes
 **end** | [**A2BCategory**](A2BCategory.md) |  | [optional] 
 **properties** | [**dict(str, ModelProperty)**](ModelProperty.md) | The properties which have been requested to be decorated onto the holding. These will be from the &#39;Instrument&#39; domain. | [optional] 
 **group_id** | **str** | Arbitrary string that can be used to cross reference an entry in the A2B report with activity in the A2B-Movements. This should be used purely as a token. The content should not be relied upon. | [optional] 
+**errors** | [**list[ResponseMetaData]**](ResponseMetaData.md) | Any errors with the record are reported here. | [optional] 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

@@ -9,7 +9,7 @@
       "url": "https://www.finbourne.com",
       "email": "info@finbourne.com"
     },
-    "version": "0.11.4706",
+    "version": "0.11.4707",
     "x-logo": {
       "url": "https://www.lusid.com/app/assets/logo_white.png",
       "backgroundColor": "#415464"
@@ -17,7 +17,7 @@
   },
   "servers": [
     {
-      "url": "https://fbn-prd.lusid.com/api"
+      "url": "https://www.lusid.com/api"
     }
   ],
   "paths": {
@@ -27398,7 +27398,8 @@
                           }
                         }
                       },
-                      "groupId": "Grp1"
+                      "groupId": "Grp1",
+                      "errors": []
                     },
                     {
                       "portfolioId": {
@@ -27463,7 +27464,8 @@
                           }
                         }
                       },
-                      "groupId": "Grp2"
+                      "groupId": "Grp2",
+                      "errors": []
                     },
                     {
                       "portfolioId": {
@@ -27538,7 +27540,8 @@
                           }
                         }
                       },
-                      "groupId": "Grp3"
+                      "groupId": "Grp3",
+                      "errors": []
                     },
                     {
                       "portfolioId": {
@@ -27616,7 +27619,8 @@
                           }
                         }
                       },
-                      "groupId": "Grp4"
+                      "groupId": "Grp4",
+                      "errors": []
                     },
                     {
                       "portfolioId": {
@@ -27741,7 +27745,8 @@
                           }
                         }
                       },
-                      "groupId": "Grp5"
+                      "groupId": "Grp5",
+                      "errors": []
                     },
                     {
                       "portfolioId": {
@@ -27843,7 +27848,8 @@
                           }
                         }
                       },
-                      "groupId": "Grp6"
+                      "groupId": "Grp6",
+                      "errors": []
                     },
                     {
                       "portfolioId": {
@@ -27968,7 +27974,8 @@
                           }
                         }
                       },
-                      "groupId": "Grp7"
+                      "groupId": "Grp7",
+                      "errors": []
                     },
                     {
                       "portfolioId": {
@@ -28088,7 +28095,8 @@
                           }
                         }
                       },
-                      "groupId": "Grp8"
+                      "groupId": "Grp8",
+                      "errors": []
                     },
                     {
                       "portfolioId": {
@@ -28176,7 +28184,8 @@
                           }
                         }
                       },
-                      "groupId": "Grp9"
+                      "groupId": "Grp9",
+                      "errors": []
                     },
                     {
                       "portfolioId": {
@@ -28283,7 +28292,8 @@
                           }
                         }
                       },
-                      "groupId": "Grp10"
+                      "groupId": "Grp10",
+                      "errors": []
                     },
                     {
                       "portfolioId": {
@@ -28408,7 +28418,8 @@
                           }
                         }
                       },
-                      "groupId": "Grp11"
+                      "groupId": "Grp11",
+                      "errors": []
                     },
                     {
                       "portfolioId": {
@@ -28496,7 +28507,8 @@
                           }
                         }
                       },
-                      "groupId": "Grp12"
+                      "groupId": "Grp12",
+                      "errors": []
                     },
                     {
                       "portfolioId": {
@@ -28603,7 +28615,8 @@
                           }
                         }
                       },
-                      "groupId": "Grp13"
+                      "groupId": "Grp13",
+                      "errors": []
                     },
                     {
                       "portfolioId": {
@@ -28691,7 +28704,8 @@
                           }
                         }
                       },
-                      "groupId": "Grp14"
+                      "groupId": "Grp14",
+                      "errors": []
                     }
                   ],
                   "links": []
@@ -28800,7 +28814,8 @@
                           }
                         }
                       },
-                      "groupId": "Grp1"
+                      "groupId": "Grp1",
+                      "errors": []
                     },
                     {
                       "portfolioId": {
@@ -28865,7 +28880,8 @@
                           }
                         }
                       },
-                      "groupId": "Grp2"
+                      "groupId": "Grp2",
+                      "errors": []
                     },
                     {
                       "portfolioId": {
@@ -28940,7 +28956,8 @@
                           }
                         }
                       },
-                      "groupId": "Grp3"
+                      "groupId": "Grp3",
+                      "errors": []
                     },
                     {
                       "portfolioId": {
@@ -29018,7 +29035,8 @@
                           }
                         }
                       },
-                      "groupId": "Grp4"
+                      "groupId": "Grp4",
+                      "errors": []
                     },
                     {
                       "portfolioId": {
@@ -29143,7 +29161,8 @@
                           }
                         }
                       },
-                      "groupId": "Grp5"
+                      "groupId": "Grp5",
+                      "errors": []
                     },
                     {
                       "portfolioId": {
@@ -29245,7 +29264,8 @@
                           }
                         }
                       },
-                      "groupId": "Grp6"
+                      "groupId": "Grp6",
+                      "errors": []
                     },
                     {
                       "portfolioId": {
@@ -29370,7 +29390,8 @@
                           }
                         }
                       },
-                      "groupId": "Grp7"
+                      "groupId": "Grp7",
+                      "errors": []
                     },
                     {
                       "portfolioId": {
@@ -29490,7 +29511,8 @@
                           }
                         }
                       },
-                      "groupId": "Grp8"
+                      "groupId": "Grp8",
+                      "errors": []
                     },
                     {
                       "portfolioId": {
@@ -29578,7 +29600,8 @@
                           }
                         }
                       },
-                      "groupId": "Grp9"
+                      "groupId": "Grp9",
+                      "errors": []
                     },
                     {
                       "portfolioId": {
@@ -29685,7 +29708,8 @@
                           }
                         }
                       },
-                      "groupId": "Grp10"
+                      "groupId": "Grp10",
+                      "errors": []
                     },
                     {
                       "portfolioId": {
@@ -29810,7 +29834,8 @@
                           }
                         }
                       },
-                      "groupId": "Grp11"
+                      "groupId": "Grp11",
+                      "errors": []
                     },
                     {
                       "portfolioId": {
@@ -29898,7 +29923,8 @@
                           }
                         }
                       },
-                      "groupId": "Grp12"
+                      "groupId": "Grp12",
+                      "errors": []
                     },
                     {
                       "portfolioId": {
@@ -30005,7 +30031,8 @@
                           }
                         }
                       },
-                      "groupId": "Grp13"
+                      "groupId": "Grp13",
+                      "errors": []
                     },
                     {
                       "portfolioId": {
@@ -30093,7 +30120,8 @@
                           }
                         }
                       },
-                      "groupId": "Grp14"
+                      "groupId": "Grp14",
+                      "errors": []
                     }
                   ],
                   "links": []
@@ -30202,7 +30230,8 @@
                           }
                         }
                       },
-                      "groupId": "Grp1"
+                      "groupId": "Grp1",
+                      "errors": []
                     },
                     {
                       "portfolioId": {
@@ -30267,7 +30296,8 @@
                           }
                         }
                       },
-                      "groupId": "Grp2"
+                      "groupId": "Grp2",
+                      "errors": []
                     },
                     {
                       "portfolioId": {
@@ -30342,7 +30372,8 @@
                           }
                         }
                       },
-                      "groupId": "Grp3"
+                      "groupId": "Grp3",
+                      "errors": []
                     },
                     {
                       "portfolioId": {
@@ -30420,7 +30451,8 @@
                           }
                         }
                       },
-                      "groupId": "Grp4"
+                      "groupId": "Grp4",
+                      "errors": []
                     },
                     {
                       "portfolioId": {
@@ -30545,7 +30577,8 @@
                           }
                         }
                       },
-                      "groupId": "Grp5"
+                      "groupId": "Grp5",
+                      "errors": []
                     },
                     {
                       "portfolioId": {
@@ -30647,7 +30680,8 @@
                           }
                         }
                       },
-                      "groupId": "Grp6"
+                      "groupId": "Grp6",
+                      "errors": []
                     },
                     {
                       "portfolioId": {
@@ -30772,7 +30806,8 @@
                           }
                         }
                       },
-                      "groupId": "Grp7"
+                      "groupId": "Grp7",
+                      "errors": []
                     },
                     {
                       "portfolioId": {
@@ -30892,7 +30927,8 @@
                           }
                         }
                       },
-                      "groupId": "Grp8"
+                      "groupId": "Grp8",
+                      "errors": []
                     },
                     {
                       "portfolioId": {
@@ -30980,7 +31016,8 @@
                           }
                         }
                       },
-                      "groupId": "Grp9"
+                      "groupId": "Grp9",
+                      "errors": []
                     },
                     {
                       "portfolioId": {
@@ -31087,7 +31124,8 @@
                           }
                         }
                       },
-                      "groupId": "Grp10"
+                      "groupId": "Grp10",
+                      "errors": []
                     },
                     {
                       "portfolioId": {
@@ -31212,7 +31250,8 @@
                           }
                         }
                       },
-                      "groupId": "Grp11"
+                      "groupId": "Grp11",
+                      "errors": []
                     },
                     {
                       "portfolioId": {
@@ -31300,7 +31339,8 @@
                           }
                         }
                       },
-                      "groupId": "Grp12"
+                      "groupId": "Grp12",
+                      "errors": []
                     },
                     {
                       "portfolioId": {
@@ -31407,7 +31447,8 @@
                           }
                         }
                       },
-                      "groupId": "Grp13"
+                      "groupId": "Grp13",
+                      "errors": []
                     },
                     {
                       "portfolioId": {
@@ -31495,7 +31536,8 @@
                           }
                         }
                       },
-                      "groupId": "Grp14"
+                      "groupId": "Grp14",
+                      "errors": []
                     }
                   ],
                   "links": []
@@ -31728,7 +31770,8 @@
                           }
                         }
                       },
-                      "groupId": "g1"
+                      "groupId": "g1",
+                      "errors": []
                     },
                     {
                       "portfolioId": {
@@ -31797,7 +31840,8 @@
                           }
                         }
                       },
-                      "groupId": "g1"
+                      "groupId": "g1",
+                      "errors": []
                     },
                     {
                       "portfolioId": {
@@ -31868,7 +31912,8 @@
                           }
                         }
                       },
-                      "groupId": "g1"
+                      "groupId": "g1",
+                      "errors": []
                     }
                   ],
                   "links": []
@@ -31936,7 +31981,8 @@
                           }
                         }
                       },
-                      "groupId": "g1"
+                      "groupId": "g1",
+                      "errors": []
                     },
                     {
                       "portfolioId": {
@@ -32005,7 +32051,8 @@
                           }
                         }
                       },
-                      "groupId": "g1"
+                      "groupId": "g1",
+                      "errors": []
                     },
                     {
                       "portfolioId": {
@@ -32076,7 +32123,8 @@
                           }
                         }
                       },
-                      "groupId": "g1"
+                      "groupId": "g1",
+                      "errors": []
                     }
                   ],
                   "links": []
@@ -32144,7 +32192,8 @@
                           }
                         }
                       },
-                      "groupId": "g1"
+                      "groupId": "g1",
+                      "errors": []
                     },
                     {
                       "portfolioId": {
@@ -32213,7 +32262,8 @@
                           }
                         }
                       },
-                      "groupId": "g1"
+                      "groupId": "g1",
+                      "errors": []
                     },
                     {
                       "portfolioId": {
@@ -32284,7 +32334,8 @@
                           }
                         }
                       },
-                      "groupId": "g1"
+                      "groupId": "g1",
+                      "errors": []
                     }
                   ],
                   "links": []
@@ -39554,6 +39605,14 @@
             "type": "string",
             "description": "Arbitrary string that can be used to cross reference an entry in the A2B report with activity in the A2B-Movements. This should be used purely as a token. The content should not be relied upon.",
             "nullable": true
+          },
+          "errors": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ResponseMetaData"
+            },
+            "description": "Any errors with the record are reported here.",
+            "nullable": true
           }
         },
         "additionalProperties": false,
@@ -39639,6 +39698,14 @@
           "groupId": {
             "type": "string",
             "description": "Arbitrary string that can be used to cross reference an entry in the A2B report with activity in the A2B-Movements. This should be used purely as a token. The content should not be relied upon.",
+            "nullable": true
+          },
+          "errors": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ResponseMetaData"
+            },
+            "description": "Any errors with the record are reported here.",
             "nullable": true
           }
         },
@@ -49641,7 +49708,7 @@
         "description": "OAuth2 Implicit Grant",
         "flows": {
           "implicit": {
-            "authorizationUrl": "https://lusid.okta.com/oauth2/default/v1/authorize",
+            "authorizationUrl": "https://dummyurl.lusid.com/",
             "scopes": {}
           }
         }
