@@ -1,6 +1,6 @@
-from pathlib import Path
 import json
 import os
+from pathlib import Path
 
 
 class CredentialsSource:
@@ -63,6 +63,15 @@ class CredentialsSource:
             for key, value in vars.items():
                 if value is None:
                     vars[key] = config_vars[key]
+
+        # Allow the Personal Access Token (PAT) to take precedence.
+        # If the PAT exists, then an API URL must also exist in either an env var, or the secrets file.
+        if cls.fetch_pat() is not None:
+            vars_pat = {
+                "access_token": cls.fetch_pat(),
+                "api_url": vars.get("api_url", None)
+            }
+            return vars_pat
 
         if None in vars.values():
             assert False, "Source test configuration missing values from both secrets file and environment variables"
