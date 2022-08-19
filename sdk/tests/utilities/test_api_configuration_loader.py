@@ -1,13 +1,12 @@
+import inspect
 import unittest
 from unittest.mock import patch
-import inspect
 
 from lusid import ApiConfigurationLoader
 from lusid.utilities.api_configuration import ApiConfiguration
 from lusid.utilities.proxy_config import ProxyConfig
-
-from tests.utilities import CredentialsSource
-from tests.utilities.temp_file_manager import TempFileManager
+from utilities import CredentialsSource
+from utilities.temp_file_manager import TempFileManager
 
 source_config_details, config_keys = CredentialsSource.fetch_credentials(), CredentialsSource.fetch_config_keys()
 
@@ -72,6 +71,7 @@ class ApiConfigurationLoaderTests(unittest.TestCase):
             # Ensure that the config is populated as expected
             self.assert_config_values(config, source_config_details)
 
+    @unittest.skipIf(CredentialsSource.fetch_credentials().__contains__("access_token"), "do not run on PR's")
     def test_missing_env_vars_uses_config_file(self):
         """
         This tests loading the configuration details in multiple different ways
@@ -99,6 +99,7 @@ class ApiConfigurationLoaderTests(unittest.TestCase):
             # Ensure that the config is populated as expected
             self.assert_config_values(config, source_config_details)
 
+    @unittest.skipIf(CredentialsSource.fetch_credentials().__contains__("access_token"), "do not run on PR's")
     def test_missing_config_file_vars_uses_env_vars(self):
         """
         This tests loading the configuration details in multiple different ways
@@ -117,7 +118,7 @@ class ApiConfigurationLoaderTests(unittest.TestCase):
             }
         }
 
-        env_vars = {config_keys["token_url"]["env"]: source_config_details["token_url"]}
+        env_vars = {config_keys["api_url"]["env"]: source_config_details["api_url"]}
 
         # Set the environment variables as desired
         with patch.dict('os.environ', env_vars, clear=True):
@@ -130,6 +131,7 @@ class ApiConfigurationLoaderTests(unittest.TestCase):
             # Ensure that the config is populated as expected
             self.assert_config_values(config, source_config_details)
 
+    @unittest.skipIf(CredentialsSource.fetch_credentials().__contains__("access_token"), "do not run on PR's")
     def test_load_from_config_file_only(self):
         """
         This tests loading the configuration details in multiple different ways
@@ -177,7 +179,7 @@ class ApiConfigurationLoaderTests(unittest.TestCase):
     def test_missing_secrets_file_logs_message_at_debug(self):
 
         with self.assertLogs(level="DEBUG") as captured:
-
+            
             non_existent_secrets_file = "Thisfiledefinitelydoesnotexist.json"
             ApiConfigurationLoader.load(non_existent_secrets_file)
 

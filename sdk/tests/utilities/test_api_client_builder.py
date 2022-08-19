@@ -1,13 +1,13 @@
 import unittest
 from unittest.mock import patch
+
 from parameterized import parameterized
 
 from lusid import ApiClient
 from lusid.utilities import ApiClientBuilder, ApiConfiguration
 from lusid.utilities.proxy_config import ProxyConfig
-
-from tests.utilities import CredentialsSource
-from tests.utilities.temp_file_manager import TempFileManager
+from utilities import CredentialsSource
+from utilities.temp_file_manager import TempFileManager
 
 source_config_details, config_keys = CredentialsSource.fetch_credentials(), CredentialsSource.fetch_config_keys()
 
@@ -31,7 +31,6 @@ class ApiClientBuilderTests(unittest.TestCase):
         ], testcase_func_name=CredentialsSource.custom_name_func
     )
     def test_missing_from_config_file_throws(self, _, missing_attributes, token):
-
         """
         Tests that if some required fields are missing from the ApiConfiguration an error is thrown
         :return:
@@ -40,15 +39,16 @@ class ApiClientBuilderTests(unittest.TestCase):
         proxy_config = ProxyConfig(**{
             key.replace("proxy_", ""): value for key, value in source_config_details.items() if
             value is not None and "proxy" in key
-        }) if source_config_details["proxy_address"] is not None else None
+        }) if source_config_details.get("proxy_address", None) is not None else None
 
-        api_config_kwargs = {key: value for key, value in source_config_details.items() if
-                             value is not None and "proxy" not in key}
+        api_config_kwargs = {key: "value" for key, value in config_keys.items() if "proxy" not in key}
         api_config_kwargs["proxy_config"] = proxy_config
         api_configuration = ApiConfiguration(**api_config_kwargs)
 
         # Pop off the missing attributes
         [setattr(api_configuration, missing_attribute, None) for missing_attribute in missing_attributes]
+        # remove the access_token
+        setattr(api_configuration, "access_token", None)
 
         # Ensure that there are no environment variables which can be used to fill the missing Api Url
         with patch.dict('os.environ', clear=True), self.assertRaises(ValueError) as ex:
@@ -59,6 +59,7 @@ class ApiClientBuilderTests(unittest.TestCase):
                                   f"please ensure that you have provided them directly, via a secrets file or environment "
                                   f"variables")
 
+    @unittest.skipIf(CredentialsSource.fetch_credentials().__contains__("access_token"), "do not run on PR's")
     def test_build_client_no_token_provided_config_takes_precedence(self):
         """
         This test builds an ApiClient from a provided secrets.json file. The call to generate the token is mocked here.
@@ -92,11 +93,12 @@ class ApiClientBuilderTests(unittest.TestCase):
                 api_configuration=api_configuration)
 
             TempFileManager.delete_temp_file(secrets_file)
-            self.assertEqual(client.configuration.access_token, "mock_access_token")
+            self.assertEqual("mock_access_token", client.configuration.access_token)
 
         self.assertEqual(client.configuration.host, source_config_details["api_url"])
         self.assertIsInstance(client, ApiClient)
 
+    @unittest.skipIf(CredentialsSource.fetch_credentials().__contains__("access_token"), "do not run on PR's")
     def test_build_client_no_token_provided_file_only(self):
         """
         This test builds an ApiClient from a provided secrets.json file. The call to generate the token is mocked here.
@@ -180,6 +182,7 @@ class ApiClientBuilderTests(unittest.TestCase):
         self.assertEqual(client.configuration.access_token, token)
         self.assertIsInstance(client, ApiClient)
 
+    @unittest.skipIf(CredentialsSource.fetch_credentials().__contains__("access_token"), "do not run on PR's")
     def test_use_okta_response_handler(self):
         api_configuration = ApiConfiguration(**{
             key: value for key, value in source_config_details.items() if "proxy" not in key
@@ -209,7 +212,6 @@ class ApiClientBuilderTests(unittest.TestCase):
             repr(client.configuration.access_token)
 
     def test_set_correlation_id_from_env_var(self):
-
         api_configuration = ApiConfiguration(**{
             key: value for key, value in source_config_details.items() if "proxy" not in key
         })
@@ -224,7 +226,6 @@ class ApiClientBuilderTests(unittest.TestCase):
         self.assertEquals(client.default_headers["CorrelationId"], "env-correlation-id")
 
     def test_set_correlation_id_from_param(self):
-
         api_configuration = ApiConfiguration(**{
             key: value for key, value in source_config_details.items() if "proxy" not in key
         })
@@ -238,7 +239,6 @@ class ApiClientBuilderTests(unittest.TestCase):
         self.assertEquals(client.default_headers["CorrelationId"], "param-correlation-id")
 
     def test_no_correlation_id_is_set_when_no_env_var_is_set(self):
-
         api_configuration = ApiConfiguration(**{
             key: value for key, value in source_config_details.items() if "proxy" not in key
         })
@@ -251,7 +251,6 @@ class ApiClientBuilderTests(unittest.TestCase):
         self.assertFalse("CorrelationId" in client.default_headers, msg="Unexpected CorrelationId found in headers")
 
     def test_use_explicit_correlation_id_when_env_var_exists(self):
-
         api_configuration = ApiConfiguration(**{
             key: value for key, value in source_config_details.items() if "proxy" not in key
         })
