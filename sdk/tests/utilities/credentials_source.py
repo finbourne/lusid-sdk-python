@@ -29,7 +29,7 @@ class CredentialsSource:
 
     @classmethod
     def fetch_pat(cls):
-        return os.getenv("FBN_LUSID_ACCESS_TOKEN", None)
+        return os.getenv("FBN_ACCESS_TOKEN", None)
 
     @classmethod
     def fetch_credentials(cls):
