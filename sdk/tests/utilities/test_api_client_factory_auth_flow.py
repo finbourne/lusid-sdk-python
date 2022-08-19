@@ -3,7 +3,7 @@ from unittest.mock import patch
 
 from lusid import InstrumentsApi, ResourceListOfInstrumentIdTypeDescriptor, ApiException
 from lusid.utilities import ApiClientFactory
-from utilities import CredentialsSource
+from tests.utilities import CredentialsSource
 
 
 class ApiFactory(unittest.TestCase):

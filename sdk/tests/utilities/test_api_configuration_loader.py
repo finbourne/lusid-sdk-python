@@ -6,8 +6,8 @@ from lusid import ApiConfigurationLoader
 from lusid.utilities.api_configuration import ApiConfiguration
 from lusid.utilities.proxy_config import ProxyConfig
 
-from utilities import CredentialsSource
-from utilities.temp_file_manager import TempFileManager
+from tests.utilities import CredentialsSource
+from tests.utilities.temp_file_manager import TempFileManager
 
 source_config_details, config_keys = CredentialsSource.fetch_credentials(), CredentialsSource.fetch_config_keys()
 

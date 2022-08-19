@@ -4,7 +4,7 @@ import lusid.api
 from lusid import ApiException
 from lusid.utilities import ApiClientFactory
 
-from utilities import CredentialsSource
+from tests.utilities import CredentialsSource
 
 
 class MockApi:

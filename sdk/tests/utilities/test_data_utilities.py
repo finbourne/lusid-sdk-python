@@ -7,7 +7,7 @@ import lusid
 import lusid.models as models
 from lusid.utilities import ApiClientBuilder
 
-from utilities import CredentialsSource
+from tests.utilities import CredentialsSource
 
 import unittest
 
