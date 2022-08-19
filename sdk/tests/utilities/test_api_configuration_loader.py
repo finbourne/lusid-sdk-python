@@ -176,10 +176,7 @@ class ApiConfigurationLoaderTests(unittest.TestCase):
 
     def test_missing_secrets_file_logs_message_at_debug(self):
 
-        with self.assertLogs() as captured:
-            import logging
-            logger = logging.getLogger()
-            logger.setLevel(logging.DEBUG)
+        with self.assertLogs(level="DEBUG") as captured:
 
             non_existent_secrets_file = "Thisfiledefinitelydoesnotexist.json"
             ApiConfigurationLoader.load(non_existent_secrets_file)
