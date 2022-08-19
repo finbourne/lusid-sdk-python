@@ -3,7 +3,7 @@ import os
 
 import lusid
 from lusid import ApiException
-from tests.utilities import TestDataUtilities
+from utilities import TestDataUtilities
 
 
 def delete_entities(id_generator):

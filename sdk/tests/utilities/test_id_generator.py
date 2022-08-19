@@ -1,7 +1,7 @@
 import unittest
 import uuid
 
-from tests.utilities import IdGenerator
+from utilities import IdGenerator
 from parameterized import parameterized
 
 
