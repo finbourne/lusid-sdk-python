@@ -6,6 +6,7 @@ from __future__ import absolute_import
 from lusid.api.aggregation_api import AggregationApi
 from lusid.api.allocations_api import AllocationsApi
 from lusid.api.application_metadata_api import ApplicationMetadataApi
+from lusid.api.calendars_api import CalendarsApi
 from lusid.api.complex_market_data_api import ComplexMarketDataApi
 from lusid.api.configuration_recipe_api import ConfigurationRecipeApi
 from lusid.api.corporate_action_sources_api import CorporateActionSourcesApi

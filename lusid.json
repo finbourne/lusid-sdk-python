@@ -9,7 +9,7 @@
       "url": "https://www.finbourne.com",
       "email": "info@finbourne.com"
     },
-    "version": "0.11.4718",
+    "version": "0.11.4719",
     "x-logo": {
       "url": "https://www.lusid.com/app/assets/logo_white.png",
       "backgroundColor": "#415464"
@@ -17,7 +17,7 @@
   },
   "servers": [
     {
-      "url": "https://fbn-prd.lusid.com/api"
+      "url": "https://www.lusid.com/api"
     }
   ],
   "paths": {
@@ -1516,6 +1516,2449 @@
               "text/json": {
                 "schema": {
                   "$ref": "#/components/schemas/DeletedEntityResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "The details of the input related failure",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/LusidValidationProblemDetails"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/LusidValidationProblemDetails"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/LusidValidationProblemDetails"
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "Error response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/LusidProblemDetails"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "oauth2": []
+          }
+        ],
+        "x-fbn-apistatus": "EarlyAccess"
+      }
+    },
+    "/api/calendars/businessday/{scope}/add": {
+      "post": {
+        "tags": [
+          "Calendars"
+        ],
+        "summary": "[EARLY ACCESS] AddBusinessDaysToDate: Adds the requested number of Business Days to the provided date.",
+        "description": "A Business day is defined as a point in time that:\r\n    * Does not represent a day in the calendar's weekend\r\n    * Does not represent a day in the calendar's list of holidays (e.g. Christmas Day in the UK)\r\n             \r\nAll dates specified must be UTC and the upper bound of a calendar is not inclusive\r\n             \r\ne.g. From: 2020-12-24-00-00-00:\r\n     Adding 3 business days returns 2020-12-30, assuming Saturday and Sunday are weekends, and the 25th and 28th are holidays.\r\n     Adding -2 business days returns 2020-12-22 under the same assumptions.\r\n            \r\nIf the provided number of days to add is zero, returns a failure.",
+        "operationId": "AddBusinessDaysToDate",
+        "parameters": [
+          {
+            "name": "scope",
+            "in": "path",
+            "description": "Scope within which to search for the calendars",
+            "required": true,
+            "schema": {
+              "maxLength": 64,
+              "minLength": 1,
+              "pattern": "^[a-zA-Z0-9\\-_]+$",
+              "type": "string",
+              "description": "Scope within which to search for the calendars"
+            }
+          }
+        ],
+        "requestBody": {
+          "description": "Request Details: start date, number of days to add (which can be negative, but not zero), calendar codes and optionally an AsAt date for searching the calendar store",
+          "content": {
+            "application/json-patch+json": {
+              "schema": {
+                "$ref": "#/components/schemas/AddBusinessDaysToDateRequest"
+              },
+              "example": {
+                "businessDayOffset": 5,
+                "holidayCodes": [
+                  "GBP"
+                ],
+                "startDate": "2020-02-10T00:00:00.0000000+00:00"
+              }
+            },
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/AddBusinessDaysToDateRequest"
+              },
+              "example": {
+                "businessDayOffset": 5,
+                "holidayCodes": [
+                  "GBP"
+                ],
+                "startDate": "2020-02-10T00:00:00.0000000+00:00"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/AddBusinessDaysToDateRequest"
+              },
+              "example": {
+                "businessDayOffset": 5,
+                "holidayCodes": [
+                  "GBP"
+                ],
+                "startDate": "2020-02-10T00:00:00.0000000+00:00"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/AddBusinessDaysToDateRequest"
+              },
+              "example": {
+                "businessDayOffset": 5,
+                "holidayCodes": [
+                  "GBP"
+                ],
+                "startDate": "2020-02-10T00:00:00.0000000+00:00"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "The business day that is a number of business days after the given date as determined by the given calendar codes",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/AddBusinessDaysToDateResponse"
+                },
+                "example": {
+                  "value": "2020-02-18T00:00:00.0000000+00:00"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AddBusinessDaysToDateResponse"
+                },
+                "example": {
+                  "value": "2020-02-18T00:00:00.0000000+00:00"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AddBusinessDaysToDateResponse"
+                },
+                "example": {
+                  "value": "2020-02-18T00:00:00.0000000+00:00"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "The details of the input related failure",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/LusidValidationProblemDetails"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/LusidValidationProblemDetails"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/LusidValidationProblemDetails"
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "Error response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/LusidProblemDetails"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "oauth2": []
+          }
+        ],
+        "x-fbn-apistatus": "EarlyAccess"
+      }
+    },
+    "/api/calendars/businessday/{scope}/{code}": {
+      "get": {
+        "tags": [
+          "Calendars"
+        ],
+        "summary": "[EARLY ACCESS] IsBusinessDateTime: Check whether a DateTime is a \"Business DateTime\"",
+        "description": "A Business DateTime is defined as a point in time that:\r\n    * Does not represent a day that overlaps with the calendars WeekendMask\r\n    * If the calendar is a \"Holiday Calendar\" Does not overlap with any dates in the calendar\r\n    * If the calendar is a \"TradingHours Calendar\" Does overlap with a date in the calendar\r\n            \r\nAll dates specified must be UTC and the upper bound of a calendar is not inclusive \r\ne.g. From: 2020-12-25-00-00-00 \r\n     To: 2020-12-26-00-00-00\r\nIsBusinessDay(2020-12-26-00-00-00) == false",
+        "operationId": "IsBusinessDateTime",
+        "parameters": [
+          {
+            "name": "dateTime",
+            "in": "query",
+            "description": "DateTime to check - This DateTime must be UTC",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "description": "DateTime to check - This DateTime must be UTC",
+              "format": "date-time"
+            },
+            "x-nullable": true
+          },
+          {
+            "name": "scope",
+            "in": "path",
+            "description": "Scope of the calendar",
+            "required": true,
+            "schema": {
+              "maxLength": 64,
+              "minLength": 1,
+              "pattern": "^[a-zA-Z0-9\\-_]+$",
+              "type": "string",
+              "description": "Scope of the calendar"
+            }
+          },
+          {
+            "name": "code",
+            "in": "path",
+            "description": "Code of the calendar",
+            "required": true,
+            "schema": {
+              "maxLength": 64,
+              "minLength": 1,
+              "pattern": "^[a-zA-Z0-9\\-_]+$",
+              "type": "string",
+              "description": "Code of the calendar"
+            }
+          },
+          {
+            "name": "asAt",
+            "in": "query",
+            "description": "AsAt for the request",
+            "schema": {
+              "type": "string",
+              "description": "AsAt for the request",
+              "format": "date-time",
+              "nullable": true
+            },
+            "x-nullable": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Whether or not the requested DateTime is a BusinessDay or not",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/IsBusinessDayResponse"
+                },
+                "example": {
+                  "requestedDateTime": "2020-02-12T12:00:00.0000000+00:00",
+                  "isBusinessDay": true
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/IsBusinessDayResponse"
+                },
+                "example": {
+                  "requestedDateTime": "2020-02-12T12:00:00.0000000+00:00",
+                  "isBusinessDay": true
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/IsBusinessDayResponse"
+                },
+                "example": {
+                  "requestedDateTime": "2020-02-12T12:00:00.0000000+00:00",
+                  "isBusinessDay": true
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "The details of the input related failure",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/LusidValidationProblemDetails"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/LusidValidationProblemDetails"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/LusidValidationProblemDetails"
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "Error response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/LusidProblemDetails"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "oauth2": []
+          }
+        ],
+        "x-fbn-apistatus": "EarlyAccess"
+      }
+    },
+    "/api/calendars/generic": {
+      "get": {
+        "tags": [
+          "Calendars"
+        ],
+        "summary": "[EARLY ACCESS] ListCalendars: List Calendars",
+        "description": "List calendars at a point in AsAt time.",
+        "operationId": "ListCalendars",
+        "parameters": [
+          {
+            "name": "asAt",
+            "in": "query",
+            "description": "The AsAt datetime at which to retrieve the calendars",
+            "schema": {
+              "type": "string",
+              "description": "The AsAt datetime at which to retrieve the calendars",
+              "format": "date-time",
+              "nullable": true
+            },
+            "x-nullable": true
+          },
+          {
+            "name": "page",
+            "in": "query",
+            "description": "The pagination token to use to continue listing calendars from a previous call to list calendars.\r\n            This value is returned from the previous call. If a pagination token is provided the sortBy, filter, and asAt fields\r\n            must not have changed since the original request. Also, if set, a start value cannot be provided.",
+            "schema": {
+              "maxLength": 500,
+              "minLength": 1,
+              "pattern": "^[a-zA-Z0-9\\+/]*={0,3}$",
+              "type": "string",
+              "description": "The pagination token to use to continue listing calendars from a previous call to list calendars.\r\n            This value is returned from the previous call. If a pagination token is provided the sortBy, filter, and asAt fields\r\n            must not have changed since the original request. Also, if set, a start value cannot be provided.",
+              "nullable": true
+            }
+          },
+          {
+            "name": "limit",
+            "in": "query",
+            "description": "When paginating, limit the number of returned results to this many.",
+            "schema": {
+              "maximum": 5000,
+              "minimum": 1,
+              "type": "integer",
+              "description": "When paginating, limit the number of returned results to this many.",
+              "format": "int32",
+              "nullable": true
+            },
+            "x-nullable": true
+          },
+          {
+            "name": "filter",
+            "in": "query",
+            "description": "Expression to filter the result set. Read more about filtering results from LUSID here https://support.lusid.com/filtering-results-from-lusid.",
+            "schema": {
+              "maxLength": 16384,
+              "minLength": 0,
+              "pattern": "^[\\s\\S]*$",
+              "type": "string",
+              "description": "Expression to filter the result set. Read more about filtering results from LUSID here https://support.lusid.com/filtering-results-from-lusid.",
+              "nullable": true
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "List Calendars",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/PagedResourceListOfCalendar"
+                },
+                "example": {
+                  "values": [
+                    {
+                      "href": "https://myco.lusid.com/api/api/calendar/testscope/testcode",
+                      "id": {
+                        "scope": "TestScope",
+                        "code": "TestCode"
+                      },
+                      "type": "Holiday",
+                      "weekendMask": {
+                        "days": [
+                          "Saturday",
+                          "Sunday"
+                        ],
+                        "timeZone": "UTC"
+                      },
+                      "sourceProvider": "Finbourne-Calendar-Service",
+                      "properties": [
+                        {
+                          "key": "Calendar/HolidayType/Statutory",
+                          "value": {
+                            "labelValue": "CBTR"
+                          }
+                        }
+                      ]
+                    },
+                    {
+                      "href": "https://myco.lusid.com/api/api/calendar/testscope/testcode2",
+                      "id": {
+                        "scope": "TestScope",
+                        "code": "TestCode2"
+                      },
+                      "type": "Holiday",
+                      "weekendMask": {
+                        "days": [
+                          "Saturday",
+                          "Sunday"
+                        ],
+                        "timeZone": "UTC"
+                      },
+                      "sourceProvider": "Finbourne-Calendar-Service",
+                      "properties": [
+                        {
+                          "key": "Calendar/HolidayType/Statutory",
+                          "value": {
+                            "labelValue": "CBTR"
+                          }
+                        }
+                      ]
+                    }
+                  ],
+                  "href": "https://myco.lusid.com/api/api/calendar/testscope",
+                  "links": []
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PagedResourceListOfCalendar"
+                },
+                "example": {
+                  "values": [
+                    {
+                      "href": "https://myco.lusid.com/api/api/calendar/testscope/testcode",
+                      "id": {
+                        "scope": "TestScope",
+                        "code": "TestCode"
+                      },
+                      "type": "Holiday",
+                      "weekendMask": {
+                        "days": [
+                          "Saturday",
+                          "Sunday"
+                        ],
+                        "timeZone": "UTC"
+                      },
+                      "sourceProvider": "Finbourne-Calendar-Service",
+                      "properties": [
+                        {
+                          "key": "Calendar/HolidayType/Statutory",
+                          "value": {
+                            "labelValue": "CBTR"
+                          }
+                        }
+                      ]
+                    },
+                    {
+                      "href": "https://myco.lusid.com/api/api/calendar/testscope/testcode2",
+                      "id": {
+                        "scope": "TestScope",
+                        "code": "TestCode2"
+                      },
+                      "type": "Holiday",
+                      "weekendMask": {
+                        "days": [
+                          "Saturday",
+                          "Sunday"
+                        ],
+                        "timeZone": "UTC"
+                      },
+                      "sourceProvider": "Finbourne-Calendar-Service",
+                      "properties": [
+                        {
+                          "key": "Calendar/HolidayType/Statutory",
+                          "value": {
+                            "labelValue": "CBTR"
+                          }
+                        }
+                      ]
+                    }
+                  ],
+                  "href": "https://myco.lusid.com/api/api/calendar/testscope",
+                  "links": []
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PagedResourceListOfCalendar"
+                },
+                "example": {
+                  "values": [
+                    {
+                      "href": "https://myco.lusid.com/api/api/calendar/testscope/testcode",
+                      "id": {
+                        "scope": "TestScope",
+                        "code": "TestCode"
+                      },
+                      "type": "Holiday",
+                      "weekendMask": {
+                        "days": [
+                          "Saturday",
+                          "Sunday"
+                        ],
+                        "timeZone": "UTC"
+                      },
+                      "sourceProvider": "Finbourne-Calendar-Service",
+                      "properties": [
+                        {
+                          "key": "Calendar/HolidayType/Statutory",
+                          "value": {
+                            "labelValue": "CBTR"
+                          }
+                        }
+                      ]
+                    },
+                    {
+                      "href": "https://myco.lusid.com/api/api/calendar/testscope/testcode2",
+                      "id": {
+                        "scope": "TestScope",
+                        "code": "TestCode2"
+                      },
+                      "type": "Holiday",
+                      "weekendMask": {
+                        "days": [
+                          "Saturday",
+                          "Sunday"
+                        ],
+                        "timeZone": "UTC"
+                      },
+                      "sourceProvider": "Finbourne-Calendar-Service",
+                      "properties": [
+                        {
+                          "key": "Calendar/HolidayType/Statutory",
+                          "value": {
+                            "labelValue": "CBTR"
+                          }
+                        }
+                      ]
+                    }
+                  ],
+                  "href": "https://myco.lusid.com/api/api/calendar/testscope",
+                  "links": []
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "The details of the input related failure",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/LusidValidationProblemDetails"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/LusidValidationProblemDetails"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/LusidValidationProblemDetails"
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "Error response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/LusidProblemDetails"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "oauth2": []
+          }
+        ],
+        "x-fbn-apistatus": "EarlyAccess"
+      },
+      "post": {
+        "tags": [
+          "Calendars"
+        ],
+        "summary": "[EARLY ACCESS] CreateCalendar: Create a calendar in its generic form",
+        "description": "Create a calendar in a generic form which can be used to store date events.",
+        "operationId": "CreateCalendar",
+        "requestBody": {
+          "description": "A request to create the calendar",
+          "content": {
+            "application/json-patch+json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateCalendarRequest"
+              },
+              "example": {
+                "calendarId": {
+                  "scope": "TestScope",
+                  "code": "TestCode"
+                },
+                "calendarType": "Holiday",
+                "weekendMask": {
+                  "days": [
+                    "Saturday",
+                    "Sunday"
+                  ],
+                  "timeZone": "UTC"
+                },
+                "sourceProvider": "Finbourne-Calendar-Service",
+                "properties": [
+                  {
+                    "key": "Calendar/HolidayType/Statutory",
+                    "value": {
+                      "labelValue": "CBTR"
+                    }
+                  }
+                ]
+              }
+            },
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateCalendarRequest"
+              },
+              "example": {
+                "calendarId": {
+                  "scope": "TestScope",
+                  "code": "TestCode"
+                },
+                "calendarType": "Holiday",
+                "weekendMask": {
+                  "days": [
+                    "Saturday",
+                    "Sunday"
+                  ],
+                  "timeZone": "UTC"
+                },
+                "sourceProvider": "Finbourne-Calendar-Service",
+                "properties": [
+                  {
+                    "key": "Calendar/HolidayType/Statutory",
+                    "value": {
+                      "labelValue": "CBTR"
+                    }
+                  }
+                ]
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateCalendarRequest"
+              },
+              "example": {
+                "calendarId": {
+                  "scope": "TestScope",
+                  "code": "TestCode"
+                },
+                "calendarType": "Holiday",
+                "weekendMask": {
+                  "days": [
+                    "Saturday",
+                    "Sunday"
+                  ],
+                  "timeZone": "UTC"
+                },
+                "sourceProvider": "Finbourne-Calendar-Service",
+                "properties": [
+                  {
+                    "key": "Calendar/HolidayType/Statutory",
+                    "value": {
+                      "labelValue": "CBTR"
+                    }
+                  }
+                ]
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateCalendarRequest"
+              },
+              "example": {
+                "calendarId": {
+                  "scope": "TestScope",
+                  "code": "TestCode"
+                },
+                "calendarType": "Holiday",
+                "weekendMask": {
+                  "days": [
+                    "Saturday",
+                    "Sunday"
+                  ],
+                  "timeZone": "UTC"
+                },
+                "sourceProvider": "Finbourne-Calendar-Service",
+                "properties": [
+                  {
+                    "key": "Calendar/HolidayType/Statutory",
+                    "value": {
+                      "labelValue": "CBTR"
+                    }
+                  }
+                ]
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "The created calendar",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/Calendar"
+                },
+                "example": {
+                  "href": "https://myco.lusid.com/api/api/calendar/testscope/testcode",
+                  "id": {
+                    "scope": "TestScope",
+                    "code": "TestCode"
+                  },
+                  "type": "Holiday",
+                  "weekendMask": {
+                    "days": [
+                      "Saturday",
+                      "Sunday"
+                    ],
+                    "timeZone": "UTC"
+                  },
+                  "sourceProvider": "Finbourne-Calendar-Service",
+                  "properties": [
+                    {
+                      "key": "Calendar/HolidayType/Statutory",
+                      "value": {
+                        "labelValue": "CBTR"
+                      }
+                    }
+                  ]
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Calendar"
+                },
+                "example": {
+                  "href": "https://myco.lusid.com/api/api/calendar/testscope/testcode",
+                  "id": {
+                    "scope": "TestScope",
+                    "code": "TestCode"
+                  },
+                  "type": "Holiday",
+                  "weekendMask": {
+                    "days": [
+                      "Saturday",
+                      "Sunday"
+                    ],
+                    "timeZone": "UTC"
+                  },
+                  "sourceProvider": "Finbourne-Calendar-Service",
+                  "properties": [
+                    {
+                      "key": "Calendar/HolidayType/Statutory",
+                      "value": {
+                        "labelValue": "CBTR"
+                      }
+                    }
+                  ]
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Calendar"
+                },
+                "example": {
+                  "href": "https://myco.lusid.com/api/api/calendar/testscope/testcode",
+                  "id": {
+                    "scope": "TestScope",
+                    "code": "TestCode"
+                  },
+                  "type": "Holiday",
+                  "weekendMask": {
+                    "days": [
+                      "Saturday",
+                      "Sunday"
+                    ],
+                    "timeZone": "UTC"
+                  },
+                  "sourceProvider": "Finbourne-Calendar-Service",
+                  "properties": [
+                    {
+                      "key": "Calendar/HolidayType/Statutory",
+                      "value": {
+                        "labelValue": "CBTR"
+                      }
+                    }
+                  ]
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "The details of the input related failure",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/LusidValidationProblemDetails"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/LusidValidationProblemDetails"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/LusidValidationProblemDetails"
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "Error response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/LusidProblemDetails"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "oauth2": []
+          }
+        ],
+        "x-fbn-apistatus": "EarlyAccess"
+      }
+    },
+    "/api/calendars/generic/{scope}": {
+      "get": {
+        "tags": [
+          "Calendars"
+        ],
+        "summary": "[EARLY ACCESS] ListCalendarsInScope: List all calenders in a specified scope",
+        "description": "List calendars at a point in AsAt time.",
+        "operationId": "ListCalendarsInScope",
+        "parameters": [
+          {
+            "name": "scope",
+            "in": "path",
+            "description": "Scope of the calendars",
+            "required": true,
+            "schema": {
+              "maxLength": 64,
+              "minLength": 1,
+              "pattern": "^[a-zA-Z0-9\\-_]+$",
+              "type": "string",
+              "description": "Scope of the calendars"
+            }
+          },
+          {
+            "name": "asAt",
+            "in": "query",
+            "description": "The AsAt datetime at which to retrieve the calendars",
+            "schema": {
+              "type": "string",
+              "description": "The AsAt datetime at which to retrieve the calendars",
+              "format": "date-time",
+              "nullable": true
+            },
+            "x-nullable": true
+          },
+          {
+            "name": "page",
+            "in": "query",
+            "description": "The pagination token to use to continue listing calendars from a previous call to list calendars.\r\n            This value is returned from the previous call. If a pagination token is provided the sortBy, filter, and asAt fields\r\n            must not have changed since the original request. Also, if set, a start value cannot be provided.",
+            "schema": {
+              "maxLength": 500,
+              "minLength": 1,
+              "pattern": "^[a-zA-Z0-9\\+/]*={0,3}$",
+              "type": "string",
+              "description": "The pagination token to use to continue listing calendars from a previous call to list calendars.\r\n            This value is returned from the previous call. If a pagination token is provided the sortBy, filter, and asAt fields\r\n            must not have changed since the original request. Also, if set, a start value cannot be provided.",
+              "nullable": true
+            }
+          },
+          {
+            "name": "start",
+            "in": "query",
+            "description": "When paginating, skip this number of results.",
+            "schema": {
+              "type": "integer",
+              "description": "When paginating, skip this number of results.",
+              "format": "int32",
+              "nullable": true
+            },
+            "x-nullable": true
+          },
+          {
+            "name": "limit",
+            "in": "query",
+            "description": "When paginating, limit the number of returned results to this many.",
+            "schema": {
+              "maximum": 5000,
+              "minimum": 1,
+              "type": "integer",
+              "description": "When paginating, limit the number of returned results to this many.",
+              "format": "int32",
+              "nullable": true
+            },
+            "x-nullable": true
+          },
+          {
+            "name": "filter",
+            "in": "query",
+            "description": "Expression to filter the result set. Read more about filtering results from LUSID here https://support.lusid.com/filtering-results-from-lusid.",
+            "schema": {
+              "maxLength": 16384,
+              "minLength": 0,
+              "pattern": "^[\\s\\S]*$",
+              "type": "string",
+              "description": "Expression to filter the result set. Read more about filtering results from LUSID here https://support.lusid.com/filtering-results-from-lusid.",
+              "nullable": true
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Calendars in the requested scope",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/PagedResourceListOfCalendar"
+                },
+                "example": {
+                  "values": [
+                    {
+                      "href": "https://myco.lusid.com/api/api/calendar/testscope/testcode",
+                      "id": {
+                        "scope": "TestScope",
+                        "code": "TestCode"
+                      },
+                      "type": "Holiday",
+                      "weekendMask": {
+                        "days": [
+                          "Saturday",
+                          "Sunday"
+                        ],
+                        "timeZone": "UTC"
+                      },
+                      "sourceProvider": "Finbourne-Calendar-Service",
+                      "properties": [
+                        {
+                          "key": "Calendar/HolidayType/Statutory",
+                          "value": {
+                            "labelValue": "CBTR"
+                          }
+                        }
+                      ]
+                    },
+                    {
+                      "href": "https://myco.lusid.com/api/api/calendar/testscope/testcode2",
+                      "id": {
+                        "scope": "TestScope",
+                        "code": "TestCode2"
+                      },
+                      "type": "Holiday",
+                      "weekendMask": {
+                        "days": [
+                          "Saturday",
+                          "Sunday"
+                        ],
+                        "timeZone": "UTC"
+                      },
+                      "sourceProvider": "Finbourne-Calendar-Service",
+                      "properties": [
+                        {
+                          "key": "Calendar/HolidayType/Statutory",
+                          "value": {
+                            "labelValue": "CBTR"
+                          }
+                        }
+                      ]
+                    }
+                  ],
+                  "href": "https://myco.lusid.com/api/api/calendar/testscope",
+                  "links": []
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PagedResourceListOfCalendar"
+                },
+                "example": {
+                  "values": [
+                    {
+                      "href": "https://myco.lusid.com/api/api/calendar/testscope/testcode",
+                      "id": {
+                        "scope": "TestScope",
+                        "code": "TestCode"
+                      },
+                      "type": "Holiday",
+                      "weekendMask": {
+                        "days": [
+                          "Saturday",
+                          "Sunday"
+                        ],
+                        "timeZone": "UTC"
+                      },
+                      "sourceProvider": "Finbourne-Calendar-Service",
+                      "properties": [
+                        {
+                          "key": "Calendar/HolidayType/Statutory",
+                          "value": {
+                            "labelValue": "CBTR"
+                          }
+                        }
+                      ]
+                    },
+                    {
+                      "href": "https://myco.lusid.com/api/api/calendar/testscope/testcode2",
+                      "id": {
+                        "scope": "TestScope",
+                        "code": "TestCode2"
+                      },
+                      "type": "Holiday",
+                      "weekendMask": {
+                        "days": [
+                          "Saturday",
+                          "Sunday"
+                        ],
+                        "timeZone": "UTC"
+                      },
+                      "sourceProvider": "Finbourne-Calendar-Service",
+                      "properties": [
+                        {
+                          "key": "Calendar/HolidayType/Statutory",
+                          "value": {
+                            "labelValue": "CBTR"
+                          }
+                        }
+                      ]
+                    }
+                  ],
+                  "href": "https://myco.lusid.com/api/api/calendar/testscope",
+                  "links": []
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PagedResourceListOfCalendar"
+                },
+                "example": {
+                  "values": [
+                    {
+                      "href": "https://myco.lusid.com/api/api/calendar/testscope/testcode",
+                      "id": {
+                        "scope": "TestScope",
+                        "code": "TestCode"
+                      },
+                      "type": "Holiday",
+                      "weekendMask": {
+                        "days": [
+                          "Saturday",
+                          "Sunday"
+                        ],
+                        "timeZone": "UTC"
+                      },
+                      "sourceProvider": "Finbourne-Calendar-Service",
+                      "properties": [
+                        {
+                          "key": "Calendar/HolidayType/Statutory",
+                          "value": {
+                            "labelValue": "CBTR"
+                          }
+                        }
+                      ]
+                    },
+                    {
+                      "href": "https://myco.lusid.com/api/api/calendar/testscope/testcode2",
+                      "id": {
+                        "scope": "TestScope",
+                        "code": "TestCode2"
+                      },
+                      "type": "Holiday",
+                      "weekendMask": {
+                        "days": [
+                          "Saturday",
+                          "Sunday"
+                        ],
+                        "timeZone": "UTC"
+                      },
+                      "sourceProvider": "Finbourne-Calendar-Service",
+                      "properties": [
+                        {
+                          "key": "Calendar/HolidayType/Statutory",
+                          "value": {
+                            "labelValue": "CBTR"
+                          }
+                        }
+                      ]
+                    }
+                  ],
+                  "href": "https://myco.lusid.com/api/api/calendar/testscope",
+                  "links": []
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "The details of the input related failure",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/LusidValidationProblemDetails"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/LusidValidationProblemDetails"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/LusidValidationProblemDetails"
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "Error response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/LusidProblemDetails"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "oauth2": []
+          }
+        ],
+        "x-fbn-apistatus": "EarlyAccess"
+      }
+    },
+    "/api/calendars/generic/{scope}/{code}": {
+      "get": {
+        "tags": [
+          "Calendars"
+        ],
+        "summary": "[EARLY ACCESS] GetCalendar: Get a calendar in its generic form",
+        "description": "Retrieve a generic calendar by a specific ID at a point in AsAt time",
+        "operationId": "GetCalendar",
+        "parameters": [
+          {
+            "name": "scope",
+            "in": "path",
+            "description": "Scope of the calendar identifier",
+            "required": true,
+            "schema": {
+              "maxLength": 64,
+              "minLength": 1,
+              "pattern": "^[a-zA-Z0-9\\-_]+$",
+              "type": "string",
+              "description": "Scope of the calendar identifier"
+            }
+          },
+          {
+            "name": "code",
+            "in": "path",
+            "description": "Code of the calendar identifier",
+            "required": true,
+            "schema": {
+              "maxLength": 64,
+              "minLength": 1,
+              "pattern": "^[a-zA-Z0-9\\-_]+$",
+              "type": "string",
+              "description": "Code of the calendar identifier"
+            }
+          },
+          {
+            "name": "asAt",
+            "in": "query",
+            "description": "The AsAt datetime at which to retrieve the calendar",
+            "schema": {
+              "type": "string",
+              "description": "The AsAt datetime at which to retrieve the calendar",
+              "format": "date-time",
+              "nullable": true
+            },
+            "x-nullable": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The requested calendar",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/Calendar"
+                },
+                "example": {
+                  "href": "https://myco.lusid.com/api/api/calendar/testscope/testcode",
+                  "id": {
+                    "scope": "TestScope",
+                    "code": "TestCode"
+                  },
+                  "type": "Holiday",
+                  "weekendMask": {
+                    "days": [
+                      "Saturday",
+                      "Sunday"
+                    ],
+                    "timeZone": "UTC"
+                  },
+                  "sourceProvider": "Finbourne-Calendar-Service",
+                  "properties": [
+                    {
+                      "key": "Calendar/HolidayType/Statutory",
+                      "value": {
+                        "labelValue": "CBTR"
+                      }
+                    }
+                  ]
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Calendar"
+                },
+                "example": {
+                  "href": "https://myco.lusid.com/api/api/calendar/testscope/testcode",
+                  "id": {
+                    "scope": "TestScope",
+                    "code": "TestCode"
+                  },
+                  "type": "Holiday",
+                  "weekendMask": {
+                    "days": [
+                      "Saturday",
+                      "Sunday"
+                    ],
+                    "timeZone": "UTC"
+                  },
+                  "sourceProvider": "Finbourne-Calendar-Service",
+                  "properties": [
+                    {
+                      "key": "Calendar/HolidayType/Statutory",
+                      "value": {
+                        "labelValue": "CBTR"
+                      }
+                    }
+                  ]
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Calendar"
+                },
+                "example": {
+                  "href": "https://myco.lusid.com/api/api/calendar/testscope/testcode",
+                  "id": {
+                    "scope": "TestScope",
+                    "code": "TestCode"
+                  },
+                  "type": "Holiday",
+                  "weekendMask": {
+                    "days": [
+                      "Saturday",
+                      "Sunday"
+                    ],
+                    "timeZone": "UTC"
+                  },
+                  "sourceProvider": "Finbourne-Calendar-Service",
+                  "properties": [
+                    {
+                      "key": "Calendar/HolidayType/Statutory",
+                      "value": {
+                        "labelValue": "CBTR"
+                      }
+                    }
+                  ]
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "The details of the input related failure",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/LusidValidationProblemDetails"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/LusidValidationProblemDetails"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/LusidValidationProblemDetails"
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "Error response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/LusidProblemDetails"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "oauth2": []
+          }
+        ],
+        "x-fbn-apistatus": "EarlyAccess"
+      },
+      "post": {
+        "tags": [
+          "Calendars"
+        ],
+        "summary": "[EARLY ACCESS] UpdateCalendar: Update a calendar",
+        "description": "Update the calendars WeekendMask, SourceProvider or Properties",
+        "operationId": "UpdateCalendar",
+        "parameters": [
+          {
+            "name": "scope",
+            "in": "path",
+            "description": "Scope of the request",
+            "required": true,
+            "schema": {
+              "maxLength": 64,
+              "minLength": 1,
+              "pattern": "^[a-zA-Z0-9\\-_]+$",
+              "type": "string",
+              "description": "Scope of the request"
+            }
+          },
+          {
+            "name": "code",
+            "in": "path",
+            "description": "Code of the request",
+            "required": true,
+            "schema": {
+              "maxLength": 64,
+              "minLength": 1,
+              "pattern": "^[a-zA-Z0-9\\-_]+$",
+              "type": "string",
+              "description": "Code of the request"
+            }
+          }
+        ],
+        "requestBody": {
+          "description": "The new state of the calendar",
+          "content": {
+            "application/json-patch+json": {
+              "schema": {
+                "$ref": "#/components/schemas/UpdateCalendarRequest"
+              },
+              "example": {
+                "weekendMask": {
+                  "days": [
+                    "Saturday",
+                    "Sunday"
+                  ],
+                  "timeZone": "UTC"
+                },
+                "sourceProvider": "Finbourne-Calendar-Service",
+                "properties": [
+                  {
+                    "key": "Calendar/HolidayType/Statutory",
+                    "value": {
+                      "labelValue": "CBTR"
+                    }
+                  }
+                ]
+              }
+            },
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UpdateCalendarRequest"
+              },
+              "example": {
+                "weekendMask": {
+                  "days": [
+                    "Saturday",
+                    "Sunday"
+                  ],
+                  "timeZone": "UTC"
+                },
+                "sourceProvider": "Finbourne-Calendar-Service",
+                "properties": [
+                  {
+                    "key": "Calendar/HolidayType/Statutory",
+                    "value": {
+                      "labelValue": "CBTR"
+                    }
+                  }
+                ]
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UpdateCalendarRequest"
+              },
+              "example": {
+                "weekendMask": {
+                  "days": [
+                    "Saturday",
+                    "Sunday"
+                  ],
+                  "timeZone": "UTC"
+                },
+                "sourceProvider": "Finbourne-Calendar-Service",
+                "properties": [
+                  {
+                    "key": "Calendar/HolidayType/Statutory",
+                    "value": {
+                      "labelValue": "CBTR"
+                    }
+                  }
+                ]
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/UpdateCalendarRequest"
+              },
+              "example": {
+                "weekendMask": {
+                  "days": [
+                    "Saturday",
+                    "Sunday"
+                  ],
+                  "timeZone": "UTC"
+                },
+                "sourceProvider": "Finbourne-Calendar-Service",
+                "properties": [
+                  {
+                    "key": "Calendar/HolidayType/Statutory",
+                    "value": {
+                      "labelValue": "CBTR"
+                    }
+                  }
+                ]
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "The updated calendar",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/Calendar"
+                },
+                "example": {
+                  "href": "https://myco.lusid.com/api/api/calendar/testscope/testcode",
+                  "id": {
+                    "scope": "TestScope",
+                    "code": "TestCode"
+                  },
+                  "type": "Holiday",
+                  "weekendMask": {
+                    "days": [
+                      "Saturday",
+                      "Sunday"
+                    ],
+                    "timeZone": "UTC"
+                  },
+                  "sourceProvider": "Finbourne-Calendar-Service",
+                  "properties": [
+                    {
+                      "key": "Calendar/HolidayType/Statutory",
+                      "value": {
+                        "labelValue": "CBTR"
+                      }
+                    }
+                  ]
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Calendar"
+                },
+                "example": {
+                  "href": "https://myco.lusid.com/api/api/calendar/testscope/testcode",
+                  "id": {
+                    "scope": "TestScope",
+                    "code": "TestCode"
+                  },
+                  "type": "Holiday",
+                  "weekendMask": {
+                    "days": [
+                      "Saturday",
+                      "Sunday"
+                    ],
+                    "timeZone": "UTC"
+                  },
+                  "sourceProvider": "Finbourne-Calendar-Service",
+                  "properties": [
+                    {
+                      "key": "Calendar/HolidayType/Statutory",
+                      "value": {
+                        "labelValue": "CBTR"
+                      }
+                    }
+                  ]
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Calendar"
+                },
+                "example": {
+                  "href": "https://myco.lusid.com/api/api/calendar/testscope/testcode",
+                  "id": {
+                    "scope": "TestScope",
+                    "code": "TestCode"
+                  },
+                  "type": "Holiday",
+                  "weekendMask": {
+                    "days": [
+                      "Saturday",
+                      "Sunday"
+                    ],
+                    "timeZone": "UTC"
+                  },
+                  "sourceProvider": "Finbourne-Calendar-Service",
+                  "properties": [
+                    {
+                      "key": "Calendar/HolidayType/Statutory",
+                      "value": {
+                        "labelValue": "CBTR"
+                      }
+                    }
+                  ]
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "The details of the input related failure",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/LusidValidationProblemDetails"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/LusidValidationProblemDetails"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/LusidValidationProblemDetails"
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "Error response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/LusidProblemDetails"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "oauth2": []
+          }
+        ],
+        "x-fbn-apistatus": "EarlyAccess"
+      },
+      "delete": {
+        "tags": [
+          "Calendars"
+        ],
+        "summary": "[EARLY ACCESS] DeleteCalendar: Delete a calendar",
+        "description": "Delete a calendar and all of its respective dates",
+        "operationId": "DeleteCalendar",
+        "parameters": [
+          {
+            "name": "scope",
+            "in": "path",
+            "description": "Scope of the calendar",
+            "required": true,
+            "schema": {
+              "maxLength": 64,
+              "minLength": 1,
+              "pattern": "^[a-zA-Z0-9\\-_]+$",
+              "type": "string",
+              "description": "Scope of the calendar"
+            }
+          },
+          {
+            "name": "code",
+            "in": "path",
+            "description": "Code of the calendar",
+            "required": true,
+            "schema": {
+              "maxLength": 64,
+              "minLength": 1,
+              "pattern": "^[a-zA-Z0-9\\-_]+$",
+              "type": "string",
+              "description": "Code of the calendar"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The deleted calendar",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/Calendar"
+                },
+                "example": {
+                  "href": "https://myco.lusid.com/api/api/calendar/testscope/testcode",
+                  "id": {
+                    "scope": "TestScope",
+                    "code": "TestCode"
+                  },
+                  "type": "Holiday",
+                  "weekendMask": {
+                    "days": [
+                      "Saturday",
+                      "Sunday"
+                    ],
+                    "timeZone": "UTC"
+                  },
+                  "sourceProvider": "Finbourne-Calendar-Service",
+                  "properties": [
+                    {
+                      "key": "Calendar/HolidayType/Statutory",
+                      "value": {
+                        "labelValue": "CBTR"
+                      }
+                    }
+                  ]
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Calendar"
+                },
+                "example": {
+                  "href": "https://myco.lusid.com/api/api/calendar/testscope/testcode",
+                  "id": {
+                    "scope": "TestScope",
+                    "code": "TestCode"
+                  },
+                  "type": "Holiday",
+                  "weekendMask": {
+                    "days": [
+                      "Saturday",
+                      "Sunday"
+                    ],
+                    "timeZone": "UTC"
+                  },
+                  "sourceProvider": "Finbourne-Calendar-Service",
+                  "properties": [
+                    {
+                      "key": "Calendar/HolidayType/Statutory",
+                      "value": {
+                        "labelValue": "CBTR"
+                      }
+                    }
+                  ]
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Calendar"
+                },
+                "example": {
+                  "href": "https://myco.lusid.com/api/api/calendar/testscope/testcode",
+                  "id": {
+                    "scope": "TestScope",
+                    "code": "TestCode"
+                  },
+                  "type": "Holiday",
+                  "weekendMask": {
+                    "days": [
+                      "Saturday",
+                      "Sunday"
+                    ],
+                    "timeZone": "UTC"
+                  },
+                  "sourceProvider": "Finbourne-Calendar-Service",
+                  "properties": [
+                    {
+                      "key": "Calendar/HolidayType/Statutory",
+                      "value": {
+                        "labelValue": "CBTR"
+                      }
+                    }
+                  ]
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "The details of the input related failure",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/LusidValidationProblemDetails"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/LusidValidationProblemDetails"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/LusidValidationProblemDetails"
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "Error response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/LusidProblemDetails"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "oauth2": []
+          }
+        ],
+        "x-fbn-apistatus": "EarlyAccess"
+      }
+    },
+    "/api/calendars/generic/{scope}/{code}/dates": {
+      "get": {
+        "tags": [
+          "Calendars"
+        ],
+        "summary": "[EARLY ACCESS] GetDates: Get dates for a specific calendar",
+        "description": "Get dates from a specific calendar within a specific window of effective time, at a point in AsAt time.\r\nProviding an id filter can further refine the results.",
+        "operationId": "GetDates",
+        "parameters": [
+          {
+            "name": "scope",
+            "in": "path",
+            "description": "Scope of the calendar",
+            "required": true,
+            "schema": {
+              "maxLength": 64,
+              "minLength": 1,
+              "pattern": "^[a-zA-Z0-9\\-_]+$",
+              "type": "string",
+              "description": "Scope of the calendar"
+            }
+          },
+          {
+            "name": "code",
+            "in": "path",
+            "description": "Code of the calendar",
+            "required": true,
+            "schema": {
+              "maxLength": 64,
+              "minLength": 1,
+              "pattern": "^[a-zA-Z0-9\\-_]+$",
+              "type": "string",
+              "description": "Code of the calendar"
+            }
+          },
+          {
+            "name": "fromEffectiveAt",
+            "in": "query",
+            "description": "Where the effective window of dates should begin from",
+            "schema": {
+              "maxLength": 256,
+              "minLength": 0,
+              "pattern": "^[a-zA-Z0-9\\-_\\+:\\.]+$",
+              "type": "string",
+              "description": "Where the effective window of dates should begin from",
+              "format": "dateorcutlabel",
+              "nullable": true
+            }
+          },
+          {
+            "name": "toEffectiveAt",
+            "in": "query",
+            "description": "Where the effective window of dates should end",
+            "schema": {
+              "maxLength": 256,
+              "minLength": 0,
+              "pattern": "^[a-zA-Z0-9\\-_\\+:\\.]+$",
+              "type": "string",
+              "description": "Where the effective window of dates should end",
+              "format": "dateorcutlabel",
+              "nullable": true
+            }
+          },
+          {
+            "name": "asAt",
+            "in": "query",
+            "description": "AsAt the dates should be retrieved at",
+            "schema": {
+              "type": "string",
+              "description": "AsAt the dates should be retrieved at",
+              "format": "date-time",
+              "nullable": true
+            },
+            "x-nullable": true
+          },
+          {
+            "name": "idFilter",
+            "in": "query",
+            "description": "An additional filter that will filter dates based on their identifer",
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              },
+              "description": "An additional filter that will filter dates based on their identifer",
+              "nullable": true
+            },
+            "x-nullable": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The requested date",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResourceListOfCalendarDate"
+                },
+                "example": {
+                  "values": [
+                    {
+                      "href": "https://myco.lusid.com/api/api/calendar/dates",
+                      "dateIdentifier": "TestDate",
+                      "fromUtc": "2020-02-12T12:00:00.0000000+00:00",
+                      "toUtc": "2020-02-13T12:00:00.0000000+00:00",
+                      "localDate": "2020-02-02",
+                      "timezone": "CET",
+                      "description": "Chinese New year",
+                      "type": "Holiday",
+                      "sourceData": {}
+                    }
+                  ],
+                  "links": []
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResourceListOfCalendarDate"
+                },
+                "example": {
+                  "values": [
+                    {
+                      "href": "https://myco.lusid.com/api/api/calendar/dates",
+                      "dateIdentifier": "TestDate",
+                      "fromUtc": "2020-02-12T12:00:00.0000000+00:00",
+                      "toUtc": "2020-02-13T12:00:00.0000000+00:00",
+                      "localDate": "2020-02-02",
+                      "timezone": "CET",
+                      "description": "Chinese New year",
+                      "type": "Holiday",
+                      "sourceData": {}
+                    }
+                  ],
+                  "links": []
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResourceListOfCalendarDate"
+                },
+                "example": {
+                  "values": [
+                    {
+                      "href": "https://myco.lusid.com/api/api/calendar/dates",
+                      "dateIdentifier": "TestDate",
+                      "fromUtc": "2020-02-12T12:00:00.0000000+00:00",
+                      "toUtc": "2020-02-13T12:00:00.0000000+00:00",
+                      "localDate": "2020-02-02",
+                      "timezone": "CET",
+                      "description": "Chinese New year",
+                      "type": "Holiday",
+                      "sourceData": {}
+                    }
+                  ],
+                  "links": []
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "The details of the input related failure",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/LusidValidationProblemDetails"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/LusidValidationProblemDetails"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/LusidValidationProblemDetails"
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "Error response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/LusidProblemDetails"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "oauth2": []
+          }
+        ],
+        "x-fbn-apistatus": "EarlyAccess"
+      },
+      "put": {
+        "tags": [
+          "Calendars"
+        ],
+        "summary": "[EARLY ACCESS] AddDateToCalendar: Add a date to a calendar",
+        "description": "Add an event to the calendar. These Events can be a maximum of 24 hours and must be specified in UTC.\r\nA local date will be calculated by the system and applied to the calendar before processing.",
+        "operationId": "AddDateToCalendar",
+        "parameters": [
+          {
+            "name": "scope",
+            "in": "path",
+            "description": "Scope of the calendar",
+            "required": true,
+            "schema": {
+              "maxLength": 64,
+              "minLength": 1,
+              "pattern": "^[a-zA-Z0-9\\-_]+$",
+              "type": "string",
+              "description": "Scope of the calendar"
+            }
+          },
+          {
+            "name": "code",
+            "in": "path",
+            "description": "Code of the calendar",
+            "required": true,
+            "schema": {
+              "maxLength": 64,
+              "minLength": 1,
+              "pattern": "^[a-zA-Z0-9\\-_]+$",
+              "type": "string",
+              "description": "Code of the calendar"
+            }
+          }
+        ],
+        "requestBody": {
+          "description": "Add date to calendar request",
+          "content": {
+            "application/json-patch+json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateDateRequest"
+              },
+              "example": {
+                "dateId": "TestDate",
+                "fromUtc": "2020-02-12T12:00:00.0000000+00:00",
+                "toUtc": "2020-02-13T12:00:00.0000000+00:00",
+                "timeZone": "CET",
+                "description": "Chinese New year",
+                "type": "Holiday",
+                "sourceData": {}
+              }
+            },
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateDateRequest"
+              },
+              "example": {
+                "dateId": "TestDate",
+                "fromUtc": "2020-02-12T12:00:00.0000000+00:00",
+                "toUtc": "2020-02-13T12:00:00.0000000+00:00",
+                "timeZone": "CET",
+                "description": "Chinese New year",
+                "type": "Holiday",
+                "sourceData": {}
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateDateRequest"
+              },
+              "example": {
+                "dateId": "TestDate",
+                "fromUtc": "2020-02-12T12:00:00.0000000+00:00",
+                "toUtc": "2020-02-13T12:00:00.0000000+00:00",
+                "timeZone": "CET",
+                "description": "Chinese New year",
+                "type": "Holiday",
+                "sourceData": {}
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateDateRequest"
+              },
+              "example": {
+                "dateId": "TestDate",
+                "fromUtc": "2020-02-12T12:00:00.0000000+00:00",
+                "toUtc": "2020-02-13T12:00:00.0000000+00:00",
+                "timeZone": "CET",
+                "description": "Chinese New year",
+                "type": "Holiday",
+                "sourceData": {}
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "The created date",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/CalendarDate"
+                },
+                "example": {
+                  "href": "https://myco.lusid.com/api/api/calendar/dates",
+                  "dateIdentifier": "TestDate",
+                  "fromUtc": "2020-02-12T12:00:00.0000000+00:00",
+                  "toUtc": "2020-02-13T12:00:00.0000000+00:00",
+                  "localDate": "2020-02-02",
+                  "timezone": "CET",
+                  "description": "Chinese New year",
+                  "type": "Holiday",
+                  "sourceData": {}
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CalendarDate"
+                },
+                "example": {
+                  "href": "https://myco.lusid.com/api/api/calendar/dates",
+                  "dateIdentifier": "TestDate",
+                  "fromUtc": "2020-02-12T12:00:00.0000000+00:00",
+                  "toUtc": "2020-02-13T12:00:00.0000000+00:00",
+                  "localDate": "2020-02-02",
+                  "timezone": "CET",
+                  "description": "Chinese New year",
+                  "type": "Holiday",
+                  "sourceData": {}
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CalendarDate"
+                },
+                "example": {
+                  "href": "https://myco.lusid.com/api/api/calendar/dates",
+                  "dateIdentifier": "TestDate",
+                  "fromUtc": "2020-02-12T12:00:00.0000000+00:00",
+                  "toUtc": "2020-02-13T12:00:00.0000000+00:00",
+                  "localDate": "2020-02-02",
+                  "timezone": "CET",
+                  "description": "Chinese New year",
+                  "type": "Holiday",
+                  "sourceData": {}
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "The details of the input related failure",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/LusidValidationProblemDetails"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/LusidValidationProblemDetails"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/LusidValidationProblemDetails"
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "Error response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/LusidProblemDetails"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "oauth2": []
+          }
+        ],
+        "x-fbn-apistatus": "EarlyAccess"
+      }
+    },
+    "/api/calendars/generic/{scope}/{code}/dates/{dateId}": {
+      "delete": {
+        "tags": [
+          "Calendars"
+        ],
+        "summary": "[EARLY ACCESS] DeleteDateFromCalendar: Remove a date from a calendar",
+        "description": "Remove a date from a calendar.",
+        "operationId": "DeleteDateFromCalendar",
+        "parameters": [
+          {
+            "name": "scope",
+            "in": "path",
+            "description": "Scope of the calendar",
+            "required": true,
+            "schema": {
+              "maxLength": 64,
+              "minLength": 1,
+              "pattern": "^[a-zA-Z0-9\\-_]+$",
+              "type": "string",
+              "description": "Scope of the calendar"
+            }
+          },
+          {
+            "name": "code",
+            "in": "path",
+            "description": "Code of the calendar",
+            "required": true,
+            "schema": {
+              "maxLength": 64,
+              "minLength": 1,
+              "pattern": "^[a-zA-Z0-9\\-_]+$",
+              "type": "string",
+              "description": "Code of the calendar"
+            }
+          },
+          {
+            "name": "dateId",
+            "in": "path",
+            "description": "Identifier of the date to be removed",
+            "required": true,
+            "schema": {
+              "maxLength": 64,
+              "minLength": 1,
+              "pattern": "^[a-zA-Z0-9\\-_]+$",
+              "type": "string",
+              "description": "Identifier of the date to be removed"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The deleted date",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/CalendarDate"
+                },
+                "example": {
+                  "href": "https://myco.lusid.com/api/api/calendar/dates",
+                  "dateIdentifier": "TestDate",
+                  "fromUtc": "2020-02-12T12:00:00.0000000+00:00",
+                  "toUtc": "2020-02-13T12:00:00.0000000+00:00",
+                  "localDate": "2020-02-02",
+                  "timezone": "CET",
+                  "description": "Chinese New year",
+                  "type": "Holiday",
+                  "sourceData": {}
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CalendarDate"
+                },
+                "example": {
+                  "href": "https://myco.lusid.com/api/api/calendar/dates",
+                  "dateIdentifier": "TestDate",
+                  "fromUtc": "2020-02-12T12:00:00.0000000+00:00",
+                  "toUtc": "2020-02-13T12:00:00.0000000+00:00",
+                  "localDate": "2020-02-02",
+                  "timezone": "CET",
+                  "description": "Chinese New year",
+                  "type": "Holiday",
+                  "sourceData": {}
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CalendarDate"
+                },
+                "example": {
+                  "href": "https://myco.lusid.com/api/api/calendar/dates",
+                  "dateIdentifier": "TestDate",
+                  "fromUtc": "2020-02-12T12:00:00.0000000+00:00",
+                  "toUtc": "2020-02-13T12:00:00.0000000+00:00",
+                  "localDate": "2020-02-02",
+                  "timezone": "CET",
+                  "description": "Chinese New year",
+                  "type": "Holiday",
+                  "sourceData": {}
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "The details of the input related failure",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/LusidValidationProblemDetails"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/LusidValidationProblemDetails"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/LusidValidationProblemDetails"
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "Error response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/LusidProblemDetails"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "oauth2": []
+          }
+        ],
+        "x-fbn-apistatus": "EarlyAccess"
+      }
+    },
+    "/api/calendars/schedule/{scope}": {
+      "post": {
+        "tags": [
+          "Calendars"
+        ],
+        "summary": "[EARLY ACCESS] GenerateSchedule: Generate an ordered schedule of dates.",
+        "description": "Returns an ordered array of dates. The dates will only fall on business\r\ndays as defined by the scope and calendar codes in the valuation schedule.\r\n            \r\nValuations are made at a frequency defined by the valuation schedule's tenor, e.g. every day (\"1D\"),\r\nevery other week (\"2W\") etc. These dates will be adjusted onto business days as defined by the schedule's\r\nrollConvention.",
+        "operationId": "GenerateSchedule",
+        "parameters": [
+          {
+            "name": "scope",
+            "in": "path",
+            "description": "Scope of the calendars to use",
+            "required": true,
+            "schema": {
+              "maxLength": 64,
+              "minLength": 1,
+              "pattern": "^[a-zA-Z0-9\\-_]+$",
+              "type": "string",
+              "description": "Scope of the calendars to use"
+            }
+          },
+          {
+            "name": "asAt",
+            "in": "query",
+            "description": "Optional AsAt for searching the calendar store. Defaults to Latest.",
+            "schema": {
+              "type": "string",
+              "description": "Optional AsAt for searching the calendar store. Defaults to Latest.",
+              "format": "date-time",
+              "nullable": true
+            },
+            "x-nullable": true
+          }
+        ],
+        "requestBody": {
+          "description": "The ValuationSchedule to generate schedule dates from",
+          "content": {
+            "application/json-patch+json": {
+              "schema": {
+                "$ref": "#/components/schemas/ValuationSchedule"
+              },
+              "example": {
+                "effectiveFrom": "2020-01-01",
+                "effectiveAt": "2021-01-01",
+                "tenor": "1M",
+                "rollConvention": "F",
+                "holidayCalendars": [
+                  "GBP",
+                  "USD"
+                ],
+                "valuationDateTimes": []
+              }
+            },
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ValuationSchedule"
+              },
+              "example": {
+                "effectiveFrom": "2020-01-01",
+                "effectiveAt": "2021-01-01",
+                "tenor": "1M",
+                "rollConvention": "F",
+                "holidayCalendars": [
+                  "GBP",
+                  "USD"
+                ],
+                "valuationDateTimes": []
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ValuationSchedule"
+              },
+              "example": {
+                "effectiveFrom": "2020-01-01",
+                "effectiveAt": "2021-01-01",
+                "tenor": "1M",
+                "rollConvention": "F",
+                "holidayCalendars": [
+                  "GBP",
+                  "USD"
+                ],
+                "valuationDateTimes": []
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/ValuationSchedule"
+              },
+              "example": {
+                "effectiveFrom": "2020-01-01",
+                "effectiveAt": "2021-01-01",
+                "tenor": "1M",
+                "rollConvention": "F",
+                "holidayCalendars": [
+                  "GBP",
+                  "USD"
+                ],
+                "valuationDateTimes": []
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "An array of dates in chronological order.",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "type": "string",
+                    "format": "date-time"
+                  }
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "type": "string",
+                    "format": "date-time"
+                  }
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "type": "string",
+                    "format": "date-time"
+                  }
                 }
               }
             }
@@ -39841,6 +42284,49 @@
         },
         "additionalProperties": false
       },
+      "AddBusinessDaysToDateRequest": {
+        "required": [
+          "businessDayOffset",
+          "holidayCodes"
+        ],
+        "type": "object",
+        "properties": {
+          "businessDayOffset": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "holidayCodes": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "startDate": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "asAt": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "AddBusinessDaysToDateResponse": {
+        "required": [
+          "value"
+        ],
+        "type": "object",
+        "properties": {
+          "value": {
+            "type": "string",
+            "format": "date-time"
+          }
+        },
+        "additionalProperties": false,
+        "description": "The date that is the requested number of business days after the given start date"
+      },
       "AdjustHolding": {
         "required": [
           "version"
@@ -40461,6 +42947,95 @@
         },
         "additionalProperties": false,
         "description": "The response to a request to annul (delete) a set of structured data from Lusid. This might have been for market data or some other structured entity."
+      },
+      "Calendar": {
+        "required": [
+          "id",
+          "properties",
+          "sourceProvider",
+          "type",
+          "weekendMask"
+        ],
+        "type": "object",
+        "properties": {
+          "href": {
+            "type": "string",
+            "format": "uri",
+            "nullable": true
+          },
+          "id": {
+            "$ref": "#/components/schemas/ResourceId"
+          },
+          "type": {
+            "type": "string"
+          },
+          "weekendMask": {
+            "$ref": "#/components/schemas/WeekendMask"
+          },
+          "sourceProvider": {
+            "type": "string"
+          },
+          "properties": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Property"
+            }
+          }
+        },
+        "additionalProperties": false
+      },
+      "CalendarDate": {
+        "required": [
+          "dateIdentifier",
+          "description",
+          "fromUtc",
+          "localDate",
+          "timezone",
+          "toUtc",
+          "type"
+        ],
+        "type": "object",
+        "properties": {
+          "href": {
+            "type": "string",
+            "format": "uri",
+            "nullable": true
+          },
+          "dateIdentifier": {
+            "type": "string"
+          },
+          "fromUtc": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "toUtc": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "localDate": {
+            "type": "string"
+          },
+          "timezone": {
+            "type": "string"
+          },
+          "description": {
+            "type": "string"
+          },
+          "type": {
+            "type": "string"
+          },
+          "attributes": {
+            "$ref": "#/components/schemas/DateAttributes"
+          },
+          "sourceData": {
+            "type": "object",
+            "additionalProperties": {
+              "type": "string"
+            },
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
       },
       "CashLadderRecord": {
         "required": [
@@ -41108,6 +43683,43 @@
         "additionalProperties": false,
         "description": "In the event that the legal entity is a counterparty to an OTC transaction\r\n(as signatory to a counterparty agreement such as an ISDA 2002 Master Agreement),\r\nthis information would be needed for calculations\r\nsuch as Credit-Valuation-Adjustments and Debit-Valuation-Adjustments (CVA, DVA, XVA etc)."
       },
+      "CreateCalendarRequest": {
+        "required": [
+          "calendarId",
+          "calendarType",
+          "sourceProvider",
+          "weekendMask"
+        ],
+        "type": "object",
+        "properties": {
+          "calendarId": {
+            "$ref": "#/components/schemas/ResourceId"
+          },
+          "calendarType": {
+            "maxLength": 256,
+            "minLength": 1,
+            "pattern": "^[a-zA-Z0-9\\-_]+$",
+            "type": "string"
+          },
+          "weekendMask": {
+            "$ref": "#/components/schemas/WeekendMask"
+          },
+          "sourceProvider": {
+            "maxLength": 50,
+            "minLength": 0,
+            "pattern": "^[a-zA-Z0-9\\-_]+$",
+            "type": "string"
+          },
+          "properties": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Property"
+            },
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
       "CreateCorporateActionSourceRequest": {
         "required": [
           "code",
@@ -41187,6 +43799,62 @@
         },
         "additionalProperties": false,
         "description": "This request specifies a new Cut Label Definition"
+      },
+      "CreateDateRequest": {
+        "required": [
+          "dateId",
+          "description",
+          "fromUtc",
+          "timeZone",
+          "toUtc"
+        ],
+        "type": "object",
+        "properties": {
+          "dateId": {
+            "maxLength": 256,
+            "minLength": 1,
+            "pattern": "^[a-zA-Z0-9\\-_]+$",
+            "type": "string"
+          },
+          "fromUtc": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "toUtc": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "timeZone": {
+            "maxLength": 5,
+            "minLength": 0,
+            "pattern": "^[a-zA-Z0-9\\-_]+$",
+            "type": "string"
+          },
+          "description": {
+            "maxLength": 100,
+            "minLength": 0,
+            "pattern": "^[\\s\\S]*$",
+            "type": "string"
+          },
+          "type": {
+            "maxLength": 10,
+            "minLength": 0,
+            "pattern": "^[a-zA-Z0-9\\-_]+$",
+            "type": "string",
+            "nullable": true
+          },
+          "attributes": {
+            "$ref": "#/components/schemas/DateAttributes"
+          },
+          "sourceData": {
+            "type": "object",
+            "additionalProperties": {
+              "type": "string"
+            },
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
       },
       "CreateDerivedPropertyDefinitionRequest": {
         "required": [
@@ -41966,6 +44634,61 @@
         },
         "additionalProperties": false
       },
+      "DateAttributes": {
+        "required": [
+          "irregular",
+          "irregularSession",
+          "newHours"
+        ],
+        "type": "object",
+        "properties": {
+          "irregular": {
+            "type": "boolean"
+          },
+          "irregularSession": {
+            "type": "boolean"
+          },
+          "newHours": {
+            "type": "boolean"
+          },
+          "activity": {
+            "maxLength": 100,
+            "minLength": 0,
+            "pattern": "^[a-zA-Z0-9\\-_]+$",
+            "type": "string",
+            "nullable": true
+          },
+          "firstOpen": {
+            "maxLength": 100,
+            "minLength": 0,
+            "pattern": "^[a-zA-Z0-9\\-_]+$",
+            "type": "string",
+            "nullable": true
+          },
+          "lastOpen": {
+            "maxLength": 100,
+            "minLength": 0,
+            "pattern": "^[a-zA-Z0-9\\-_]+$",
+            "type": "string",
+            "nullable": true
+          },
+          "firstClose": {
+            "maxLength": 100,
+            "minLength": 0,
+            "pattern": "^[a-zA-Z0-9\\-_]+$",
+            "type": "string",
+            "nullable": true
+          },
+          "lastClose": {
+            "maxLength": 100,
+            "minLength": 0,
+            "pattern": "^[a-zA-Z0-9\\-_]+$",
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
       "DateRange": {
         "required": [
           "fromDate"
@@ -41983,6 +44706,18 @@
           }
         },
         "additionalProperties": false
+      },
+      "DayOfWeek": {
+        "enum": [
+          "Sunday",
+          "Monday",
+          "Tuesday",
+          "Wednesday",
+          "Thursday",
+          "Friday",
+          "Saturday"
+        ],
+        "type": "string"
       },
       "DeletedEntityResponse": {
         "required": [
@@ -43030,6 +45765,24 @@
           }
         },
         "additionalProperties": false
+      },
+      "IsBusinessDayResponse": {
+        "required": [
+          "isBusinessDay",
+          "requestedDateTime"
+        ],
+        "type": "object",
+        "properties": {
+          "requestedDateTime": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "isBusinessDay": {
+            "type": "boolean"
+          }
+        },
+        "additionalProperties": false,
+        "description": "Whether or not a DateTimeOffset is a business DateTime"
       },
       "IUnitDefinitionDto": {
         "type": "object",
@@ -44186,6 +46939,47 @@
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/Allocation"
+            },
+            "description": "The resources to list."
+          },
+          "href": {
+            "type": "string",
+            "description": "The URI of the resource list.",
+            "format": "uri",
+            "nullable": true
+          },
+          "links": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Link"
+            },
+            "description": "Collection of links.",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false,
+        "description": "A paginated list of resource that can be returned from a request."
+      },
+      "PagedResourceListOfCalendar": {
+        "required": [
+          "values"
+        ],
+        "type": "object",
+        "properties": {
+          "nextPage": {
+            "type": "string",
+            "description": "The next page of results.",
+            "nullable": true
+          },
+          "previousPage": {
+            "type": "string",
+            "description": "The previous page of results.",
+            "nullable": true
+          },
+          "values": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Calendar"
             },
             "description": "The resources to list."
           },
@@ -46625,6 +49419,47 @@
         "additionalProperties": false,
         "description": "A collection of resources that can be returned from requests."
       },
+      "ResourceListOfCalendarDate": {
+        "required": [
+          "values"
+        ],
+        "type": "object",
+        "properties": {
+          "values": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/CalendarDate"
+            },
+            "description": "The resources to list."
+          },
+          "href": {
+            "type": "string",
+            "description": "The URI of the resource list.",
+            "format": "uri",
+            "nullable": true
+          },
+          "links": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Link"
+            },
+            "description": "Collection of links.",
+            "nullable": true
+          },
+          "nextPage": {
+            "type": "string",
+            "description": "The next page of results.",
+            "nullable": true
+          },
+          "previousPage": {
+            "type": "string",
+            "description": "The previous page of results.",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false,
+        "description": "A collection of resources that can be returned from requests."
+      },
       "ResourceListOfChange": {
         "required": [
           "values"
@@ -48448,6 +51283,32 @@
         "additionalProperties": false,
         "description": "A collection of the data required to configure transaction types.."
       },
+      "UpdateCalendarRequest": {
+        "required": [
+          "properties",
+          "sourceProvider",
+          "weekendMask"
+        ],
+        "type": "object",
+        "properties": {
+          "weekendMask": {
+            "$ref": "#/components/schemas/WeekendMask"
+          },
+          "sourceProvider": {
+            "maxLength": 256,
+            "minLength": 1,
+            "pattern": "^[a-zA-Z0-9\\-_]+$",
+            "type": "string"
+          },
+          "properties": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Property"
+            }
+          }
+        },
+        "additionalProperties": false
+      },
       "UpdateCutLabelDefinitionRequest": {
         "required": [
           "cutLocalTime",
@@ -49679,6 +52540,28 @@
         },
         "additionalProperties": false
       },
+      "WeekendMask": {
+        "required": [
+          "days",
+          "timeZone"
+        ],
+        "type": "object",
+        "properties": {
+          "days": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/DayOfWeek"
+            }
+          },
+          "timeZone": {
+            "maxLength": 256,
+            "minLength": 1,
+            "pattern": "^[a-zA-Z0-9\\-_]+$",
+            "type": "string"
+          }
+        },
+        "additionalProperties": false
+      },
       "WeightedInstrument": {
         "type": "object",
         "properties": {
@@ -49708,7 +52591,7 @@
         "description": "OAuth2 Implicit Grant",
         "flows": {
           "implicit": {
-            "authorizationUrl": "https://lusid.okta.com/oauth2/default/v1/authorize",
+            "authorizationUrl": "https://dummyurl.lusid.com/",
             "scopes": {}
           }
         }
