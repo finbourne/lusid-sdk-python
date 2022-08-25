@@ -9,7 +9,7 @@
       "url": "https://www.finbourne.com",
       "email": "info@finbourne.com"
     },
-    "version": "0.11.4731",
+    "version": "0.11.4732",
     "x-logo": {
       "url": "https://www.lusid.com/app/assets/logo_white.png",
       "backgroundColor": "#415464"
@@ -6652,8 +6652,7 @@
                 "subHoldingKeys": [
                   "Transaction/MyScope/Strategy",
                   "Transaction/MyScope/SubAccount"
-                ],
-                "amortisationMethod": "EffectiveYield"
+                ]
               }
             },
             "application/json": {
@@ -6676,8 +6675,7 @@
                 "subHoldingKeys": [
                   "Transaction/MyScope/Strategy",
                   "Transaction/MyScope/SubAccount"
-                ],
-                "amortisationMethod": "EffectiveYield"
+                ]
               }
             },
             "text/json": {
@@ -6700,8 +6698,7 @@
                 "subHoldingKeys": [
                   "Transaction/MyScope/Strategy",
                   "Transaction/MyScope/SubAccount"
-                ],
-                "amortisationMethod": "EffectiveYield"
+                ]
               }
             },
             "application/*+json": {
@@ -6724,8 +6721,7 @@
                 "subHoldingKeys": [
                   "Transaction/MyScope/Strategy",
                   "Transaction/MyScope/SubAccount"
-                ],
-                "amortisationMethod": "EffectiveYield"
+                ]
               }
             }
           }
@@ -29997,8 +29993,7 @@
                     "effectiveFrom": "2018-03-05T12:00:00.0000000+00:00"
                   }
                 },
-                "instrumentScopes": [],
-                "amortisationMethod": "NoAmortisation"
+                "instrumentScopes": []
               }
             },
             "application/json": {
@@ -30036,8 +30031,7 @@
                     "effectiveFrom": "2018-03-05T12:00:00.0000000+00:00"
                   }
                 },
-                "instrumentScopes": [],
-                "amortisationMethod": "NoAmortisation"
+                "instrumentScopes": []
               }
             },
             "text/json": {
@@ -30075,8 +30069,7 @@
                     "effectiveFrom": "2018-03-05T12:00:00.0000000+00:00"
                   }
                 },
-                "instrumentScopes": [],
-                "amortisationMethod": "NoAmortisation"
+                "instrumentScopes": []
               }
             },
             "application/*+json": {
@@ -30114,8 +30107,7 @@
                     "effectiveFrom": "2018-03-05T12:00:00.0000000+00:00"
                   }
                 },
-                "instrumentScopes": [],
-                "amortisationMethod": "NoAmortisation"
+                "instrumentScopes": []
               }
             }
           },
@@ -45137,11 +45129,6 @@
             },
             "description": "The resolution strategy used to resolve instruments of transactions/holdings upserted to this derived portfolio.",
             "nullable": true
-          },
-          "amortisationMethod": {
-            "type": "string",
-            "description": "The amortisation method the portfolio is using in the calculation.",
-            "nullable": true
           }
         },
         "additionalProperties": false
@@ -45580,11 +45567,6 @@
               "type": "string"
             },
             "description": "The resolution strategy used to resolve instruments of transactions/holdings upserted to this portfolio.",
-            "nullable": true
-          },
-          "amortisationMethod": {
-            "type": "string",
-            "description": "The amortisation method the portfolio is using in the calculation.",
             "nullable": true
           }
         },
@@ -48895,11 +48877,6 @@
             "type": "string",
             "description": ". The available values are: Default, AverageCost, FirstInFirstOut, LastInFirstOut, HighestCostFirst, LowestCostFirst"
           },
-          "amortisationMethod": {
-            "type": "string",
-            "description": "The amortisation method the portfolio is using in the calculation.",
-            "nullable": true
-          },
           "links": {
             "type": "array",
             "items": {
@@ -49100,11 +49077,6 @@
             ],
             "type": "string",
             "description": ". The available values are: Default, AverageCost, FirstInFirstOut, LastInFirstOut, HighestCostFirst, LowestCostFirst"
-          },
-          "amortisationMethod": {
-            "type": "string",
-            "description": "The amortisation method the portfolio is using in the calculation.",
-            "nullable": true
           },
           "links": {
             "type": "array",
