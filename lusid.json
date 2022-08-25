@@ -9,7 +9,7 @@
       "url": "https://www.finbourne.com",
       "email": "info@finbourne.com"
     },
-    "version": "0.11.4730",
+    "version": "0.11.4731",
     "x-logo": {
       "url": "https://www.lusid.com/app/assets/logo_white.png",
       "backgroundColor": "#415464"
@@ -42413,6 +42413,127 @@
         "x-fbn-apistatus": "Stable"
       }
     },
+    "/api/transactionportfolios/{scope}/{code}/transactions/{transactionId}/history": {
+      "get": {
+        "tags": [
+          "Transaction Portfolios"
+        ],
+        "summary": "[EARLY ACCESS] GetTransactionHistory: Get the history of a transaction",
+        "description": "Get all of the changes that have happened to a transaction.",
+        "operationId": "GetTransactionHistory",
+        "parameters": [
+          {
+            "name": "scope",
+            "in": "path",
+            "description": "The scope of the transaction portfolio.",
+            "required": true,
+            "schema": {
+              "maxLength": 64,
+              "minLength": 1,
+              "pattern": "^[a-zA-Z0-9\\-_]+$",
+              "type": "string",
+              "description": "The scope of the transaction portfolio.",
+              "nullable": true
+            }
+          },
+          {
+            "name": "code",
+            "in": "path",
+            "description": "The code of the transaction portfolio. Together with the scope this uniquely identifies\r\n            the transaction portfolio.",
+            "required": true,
+            "schema": {
+              "maxLength": 64,
+              "minLength": 1,
+              "pattern": "^[a-zA-Z0-9\\-_]+$",
+              "type": "string",
+              "description": "The code of the transaction portfolio. Together with the scope this uniquely identifies\r\n            the transaction portfolio.",
+              "nullable": true
+            }
+          },
+          {
+            "name": "transactionId",
+            "in": "path",
+            "description": "The unique ID of the transaction to create or update.",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "description": "The unique ID of the transaction to create or update.",
+              "nullable": true
+            }
+          },
+          {
+            "name": "asAt",
+            "in": "query",
+            "description": "The asAt datetime at which to retrieve the history of the transaction. Defaults\r\n            to return the latest version if not specified.",
+            "schema": {
+              "type": "string",
+              "description": "The asAt datetime at which to retrieve the history of the transaction. Defaults\r\n            to return the latest version if not specified.",
+              "format": "date-time",
+              "nullable": true
+            },
+            "x-nullable": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The history of the specified transaction (changes that have been made to it).",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResourceListOfChangeHistory"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResourceListOfChangeHistory"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResourceListOfChangeHistory"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "The details of the input related failure",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/LusidValidationProblemDetails"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/LusidValidationProblemDetails"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/LusidValidationProblemDetails"
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "Error response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/LusidProblemDetails"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "oauth2": []
+          }
+        ],
+        "x-fbn-apistatus": "EarlyAccess"
+      }
+    },
     "/api/transactionportfolios/{scope}/{code}/transactions/{transactionId}/properties": {
       "post": {
         "tags": [
@@ -43951,6 +44072,93 @@
         },
         "additionalProperties": false,
         "description": "The time an entity was modified (amendment and/or historical correction)."
+      },
+      "ChangeHistory": {
+        "required": [
+          "action",
+          "changes",
+          "modifiedAsAt",
+          "requestId",
+          "userId"
+        ],
+        "type": "object",
+        "properties": {
+          "userId": {
+            "type": "string",
+            "description": "The unique identifier of the user that made the change."
+          },
+          "modifiedAsAt": {
+            "type": "string",
+            "description": "The date/time of the change.",
+            "format": "date-time"
+          },
+          "requestId": {
+            "type": "string",
+            "description": "The unique identifier of the request that the changes were part of."
+          },
+          "action": {
+            "enum": [
+              "Create",
+              "Update",
+              "Delete"
+            ],
+            "type": "string",
+            "description": "The action performed on the transaction, either created, updated, or deleted. The available values are: Create, Update, Delete"
+          },
+          "changes": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ChangeItem"
+            },
+            "description": "The collection of changes that were made."
+          },
+          "links": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Link"
+            },
+            "description": "Collection of links.",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false,
+        "description": "A group of changes made by the same person at the same time."
+      },
+      "ChangeItem": {
+        "required": [
+          "fieldName"
+        ],
+        "type": "object",
+        "properties": {
+          "fieldName": {
+            "type": "string",
+            "description": "The name of the field or property that has been changed."
+          },
+          "previousValue": {
+            "type": "string",
+            "description": "The previous value for this field / property.",
+            "nullable": true
+          },
+          "newValue": {
+            "type": "string",
+            "description": "The new value for this field / property.",
+            "nullable": true
+          },
+          "effectiveFrom": {
+            "type": "string",
+            "description": "The market data time, i.e. the time to run the change from.",
+            "format": "date-time",
+            "nullable": true
+          },
+          "effectiveUntil": {
+            "type": "string",
+            "description": "The market data time, i.e. the time to run the change until.",
+            "format": "date-time",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false,
+        "description": "Information about a change to a field / property.\r\nAt least one of 'PreviousValue' or 'NewValue' will be set."
       },
       "CompletePortfolio": {
         "required": [
@@ -50579,6 +50787,47 @@
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/Change"
+            },
+            "description": "The resources to list."
+          },
+          "href": {
+            "type": "string",
+            "description": "The URI of the resource list.",
+            "format": "uri",
+            "nullable": true
+          },
+          "links": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Link"
+            },
+            "description": "Collection of links.",
+            "nullable": true
+          },
+          "nextPage": {
+            "type": "string",
+            "description": "The next page of results.",
+            "nullable": true
+          },
+          "previousPage": {
+            "type": "string",
+            "description": "The previous page of results.",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false,
+        "description": "A collection of resources that can be returned from requests."
+      },
+      "ResourceListOfChangeHistory": {
+        "required": [
+          "values"
+        ],
+        "type": "object",
+        "properties": {
+          "values": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ChangeHistory"
             },
             "description": "The resources to list."
           },
