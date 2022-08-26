@@ -9,7 +9,7 @@
       "url": "https://www.finbourne.com",
       "email": "info@finbourne.com"
     },
-    "version": "0.11.4734",
+    "version": "0.11.4735",
     "x-logo": {
       "url": "https://www.lusid.com/app/assets/logo_white.png",
       "backgroundColor": "#415464"
@@ -17,7 +17,7 @@
   },
   "servers": [
     {
-      "url": "https://fbn-prd.lusid.com/api"
+      "url": "https://www.lusid.com/api"
     }
   ],
   "paths": {
@@ -6984,6 +6984,872 @@
               "text/json": {
                 "schema": {
                   "$ref": "#/components/schemas/ResourceListOfChange"
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "Error response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/LusidProblemDetails"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "oauth2": []
+          }
+        ],
+        "x-fbn-apistatus": "EarlyAccess"
+      }
+    },
+    "/api/executions": {
+      "get": {
+        "tags": [
+          "Executions"
+        ],
+        "summary": "[EARLY ACCESS] ListExecutions: List Executions",
+        "description": "Fetch the last pre-AsAt date version of each execution in scope (does not fetch the entire history).",
+        "operationId": "ListExecutions",
+        "parameters": [
+          {
+            "name": "asAt",
+            "in": "query",
+            "description": "The asAt datetime at which to retrieve the execution. Defaults to return the latest version of the execution if not specified.",
+            "schema": {
+              "type": "string",
+              "description": "The asAt datetime at which to retrieve the execution. Defaults to return the latest version of the execution if not specified.",
+              "format": "date-time",
+              "nullable": true
+            },
+            "x-nullable": true
+          },
+          {
+            "name": "page",
+            "in": "query",
+            "description": "The pagination token to use to continue listing execution from a previous call to list executions.\r\n            This value is returned from the previous call. If a pagination token is provided the sortBy, filter, effectiveAt, and asAt fields\r\n            must not have changed since the original request.",
+            "schema": {
+              "maxLength": 500,
+              "minLength": 1,
+              "pattern": "^[a-zA-Z0-9\\+/]*={0,3}$",
+              "type": "string",
+              "description": "The pagination token to use to continue listing execution from a previous call to list executions.\r\n            This value is returned from the previous call. If a pagination token is provided the sortBy, filter, effectiveAt, and asAt fields\r\n            must not have changed since the original request.",
+              "nullable": true
+            }
+          },
+          {
+            "name": "sortBy",
+            "in": "query",
+            "description": "Order the results by these fields. Use use the '-' sign to denote descending order e.g. -MyFieldName.",
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              },
+              "description": "Order the results by these fields. Use use the '-' sign to denote descending order e.g. -MyFieldName.",
+              "nullable": true
+            },
+            "x-nullable": true
+          },
+          {
+            "name": "limit",
+            "in": "query",
+            "description": "When paginating, limit the number of returned results to this many.",
+            "schema": {
+              "maximum": 5000,
+              "minimum": 1,
+              "type": "integer",
+              "description": "When paginating, limit the number of returned results to this many.",
+              "format": "int32",
+              "nullable": true
+            },
+            "x-nullable": true
+          },
+          {
+            "name": "filter",
+            "in": "query",
+            "description": "Expression to filter the result set. Read more about filtering results from LUSID here:\r\n            https://support.lusid.com/filtering-results-from-lusid.",
+            "schema": {
+              "maxLength": 16384,
+              "minLength": 0,
+              "pattern": "^[\\s\\S]*$",
+              "type": "string",
+              "description": "Expression to filter the result set. Read more about filtering results from LUSID here:\r\n            https://support.lusid.com/filtering-results-from-lusid.",
+              "nullable": true
+            }
+          },
+          {
+            "name": "propertyKeys",
+            "in": "query",
+            "description": "A list of property keys from the \"Execution\" domain to decorate onto each execution.\r\n                These take the format {domain}/{scope}/{code} e.g. \"Execution/system/Name\".",
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "string",
+                "description": "The key that uniquely identifies the property. It has the format {domain}/{scope}/{code}."
+              },
+              "description": "A list of property keys from the \"Execution\" domain to decorate onto each execution.\r\n                These take the format {domain}/{scope}/{code} e.g. \"Execution/system/Name\".",
+              "nullable": true
+            },
+            "x-nullable": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Executions in scope.",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/PagedResourceListOfExecution"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PagedResourceListOfExecution"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PagedResourceListOfExecution"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "The details of the input related failure",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/LusidValidationProblemDetails"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/LusidValidationProblemDetails"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/LusidValidationProblemDetails"
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "Error response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/LusidProblemDetails"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "oauth2": []
+          }
+        ],
+        "x-fbn-apistatus": "EarlyAccess"
+      },
+      "post": {
+        "tags": [
+          "Executions"
+        ],
+        "summary": "[EARLY ACCESS] UpsertExecutions: Upsert Execution",
+        "description": "Upsert; update existing executions with given ids, or create new executions otherwise.",
+        "operationId": "UpsertExecutions",
+        "requestBody": {
+          "description": "The collection of execution requests.",
+          "content": {
+            "application/json-patch+json": {
+              "schema": {
+                "$ref": "#/components/schemas/ExecutionSetRequest"
+              },
+              "example": {
+                "requests": [
+                  {
+                    "id": {
+                      "scope": "MyScope",
+                      "code": "EXEC00000123"
+                    },
+                    "placementId": {
+                      "scope": "MyScope",
+                      "code": "PLAC00000123"
+                    },
+                    "properties": {
+                      "execution/MyScope/SomeExecutionProperty": {
+                        "key": "Execution/MyScope/SomeExecutionProperty",
+                        "value": {
+                          "labelValue": "XYZ000034567"
+                        }
+                      }
+                    },
+                    "instrumentIdentifiers": {
+                      "instrument/default/Currency": "GBP"
+                    },
+                    "quantity": 100,
+                    "state": "New",
+                    "side": "Buy",
+                    "type": "Limit",
+                    "createdDate": "2006-04-11T00:00:00.0000000+00:00",
+                    "settlementDate": "2006-04-13T00:00:00.0000000+00:00",
+                    "price": {
+                      "amount": 12413.33,
+                      "currency": "USD"
+                    },
+                    "settlementCurrency": "GBP",
+                    "settlementCurrencyFxRate": 0.67,
+                    "counterparty": "SomeCounterparty",
+                    "averagePrice": 12419.2
+                  }
+                ]
+              }
+            },
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ExecutionSetRequest"
+              },
+              "example": {
+                "requests": [
+                  {
+                    "id": {
+                      "scope": "MyScope",
+                      "code": "EXEC00000123"
+                    },
+                    "placementId": {
+                      "scope": "MyScope",
+                      "code": "PLAC00000123"
+                    },
+                    "properties": {
+                      "execution/MyScope/SomeExecutionProperty": {
+                        "key": "Execution/MyScope/SomeExecutionProperty",
+                        "value": {
+                          "labelValue": "XYZ000034567"
+                        }
+                      }
+                    },
+                    "instrumentIdentifiers": {
+                      "instrument/default/Currency": "GBP"
+                    },
+                    "quantity": 100,
+                    "state": "New",
+                    "side": "Buy",
+                    "type": "Limit",
+                    "createdDate": "2006-04-11T00:00:00.0000000+00:00",
+                    "settlementDate": "2006-04-13T00:00:00.0000000+00:00",
+                    "price": {
+                      "amount": 12413.33,
+                      "currency": "USD"
+                    },
+                    "settlementCurrency": "GBP",
+                    "settlementCurrencyFxRate": 0.67,
+                    "counterparty": "SomeCounterparty",
+                    "averagePrice": 12419.2
+                  }
+                ]
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ExecutionSetRequest"
+              },
+              "example": {
+                "requests": [
+                  {
+                    "id": {
+                      "scope": "MyScope",
+                      "code": "EXEC00000123"
+                    },
+                    "placementId": {
+                      "scope": "MyScope",
+                      "code": "PLAC00000123"
+                    },
+                    "properties": {
+                      "execution/MyScope/SomeExecutionProperty": {
+                        "key": "Execution/MyScope/SomeExecutionProperty",
+                        "value": {
+                          "labelValue": "XYZ000034567"
+                        }
+                      }
+                    },
+                    "instrumentIdentifiers": {
+                      "instrument/default/Currency": "GBP"
+                    },
+                    "quantity": 100,
+                    "state": "New",
+                    "side": "Buy",
+                    "type": "Limit",
+                    "createdDate": "2006-04-11T00:00:00.0000000+00:00",
+                    "settlementDate": "2006-04-13T00:00:00.0000000+00:00",
+                    "price": {
+                      "amount": 12413.33,
+                      "currency": "USD"
+                    },
+                    "settlementCurrency": "GBP",
+                    "settlementCurrencyFxRate": 0.67,
+                    "counterparty": "SomeCounterparty",
+                    "averagePrice": 12419.2
+                  }
+                ]
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/ExecutionSetRequest"
+              },
+              "example": {
+                "requests": [
+                  {
+                    "id": {
+                      "scope": "MyScope",
+                      "code": "EXEC00000123"
+                    },
+                    "placementId": {
+                      "scope": "MyScope",
+                      "code": "PLAC00000123"
+                    },
+                    "properties": {
+                      "execution/MyScope/SomeExecutionProperty": {
+                        "key": "Execution/MyScope/SomeExecutionProperty",
+                        "value": {
+                          "labelValue": "XYZ000034567"
+                        }
+                      }
+                    },
+                    "instrumentIdentifiers": {
+                      "instrument/default/Currency": "GBP"
+                    },
+                    "quantity": 100,
+                    "state": "New",
+                    "side": "Buy",
+                    "type": "Limit",
+                    "createdDate": "2006-04-11T00:00:00.0000000+00:00",
+                    "settlementDate": "2006-04-13T00:00:00.0000000+00:00",
+                    "price": {
+                      "amount": 12413.33,
+                      "currency": "USD"
+                    },
+                    "settlementCurrency": "GBP",
+                    "settlementCurrencyFxRate": 0.67,
+                    "counterparty": "SomeCounterparty",
+                    "averagePrice": 12419.2
+                  }
+                ]
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "A collection of executions.",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResourceListOfExecution"
+                },
+                "example": {
+                  "values": [
+                    {
+                      "id": {
+                        "scope": "MyScope",
+                        "code": "EXEC0000123"
+                      },
+                      "placementId": {
+                        "scope": "MyScope",
+                        "code": "PLAC00000123"
+                      },
+                      "properties": {
+                        "allocation/MyScope/SomeAllocationProperty": {
+                          "key": "Allocation/MyScope/SomeAllocationProperty",
+                          "value": {
+                            "labelValue": "XYZ000034567"
+                          }
+                        }
+                      },
+                      "instrumentIdentifiers": {
+                        "instrument/default/Currency": "GBP"
+                      },
+                      "quantity": 100.5,
+                      "state": "New",
+                      "side": "Buy",
+                      "type": "Limit",
+                      "createdDate": "2006-04-11T00:00:00.0000000+00:00",
+                      "settlementDate": "2006-04-13T00:00:00.0000000+00:00",
+                      "price": {
+                        "amount": 12413.33,
+                        "currency": "USD"
+                      },
+                      "settlementCurrency": "GBP",
+                      "settlementCurrencyFxRate": 0.67,
+                      "counterparty": "SomeCounterparty",
+                      "averagePrice": 12419.2,
+                      "version": {
+                        "effectiveFrom": "2018-03-05T10:10:10.0000000+00:00",
+                        "asAtDate": "2018-03-05T10:10:10.0000000+00:00"
+                      }
+                    }
+                  ],
+                  "links": []
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResourceListOfExecution"
+                },
+                "example": {
+                  "values": [
+                    {
+                      "id": {
+                        "scope": "MyScope",
+                        "code": "EXEC0000123"
+                      },
+                      "placementId": {
+                        "scope": "MyScope",
+                        "code": "PLAC00000123"
+                      },
+                      "properties": {
+                        "allocation/MyScope/SomeAllocationProperty": {
+                          "key": "Allocation/MyScope/SomeAllocationProperty",
+                          "value": {
+                            "labelValue": "XYZ000034567"
+                          }
+                        }
+                      },
+                      "instrumentIdentifiers": {
+                        "instrument/default/Currency": "GBP"
+                      },
+                      "quantity": 100.5,
+                      "state": "New",
+                      "side": "Buy",
+                      "type": "Limit",
+                      "createdDate": "2006-04-11T00:00:00.0000000+00:00",
+                      "settlementDate": "2006-04-13T00:00:00.0000000+00:00",
+                      "price": {
+                        "amount": 12413.33,
+                        "currency": "USD"
+                      },
+                      "settlementCurrency": "GBP",
+                      "settlementCurrencyFxRate": 0.67,
+                      "counterparty": "SomeCounterparty",
+                      "averagePrice": 12419.2,
+                      "version": {
+                        "effectiveFrom": "2018-03-05T10:10:10.0000000+00:00",
+                        "asAtDate": "2018-03-05T10:10:10.0000000+00:00"
+                      }
+                    }
+                  ],
+                  "links": []
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResourceListOfExecution"
+                },
+                "example": {
+                  "values": [
+                    {
+                      "id": {
+                        "scope": "MyScope",
+                        "code": "EXEC0000123"
+                      },
+                      "placementId": {
+                        "scope": "MyScope",
+                        "code": "PLAC00000123"
+                      },
+                      "properties": {
+                        "allocation/MyScope/SomeAllocationProperty": {
+                          "key": "Allocation/MyScope/SomeAllocationProperty",
+                          "value": {
+                            "labelValue": "XYZ000034567"
+                          }
+                        }
+                      },
+                      "instrumentIdentifiers": {
+                        "instrument/default/Currency": "GBP"
+                      },
+                      "quantity": 100.5,
+                      "state": "New",
+                      "side": "Buy",
+                      "type": "Limit",
+                      "createdDate": "2006-04-11T00:00:00.0000000+00:00",
+                      "settlementDate": "2006-04-13T00:00:00.0000000+00:00",
+                      "price": {
+                        "amount": 12413.33,
+                        "currency": "USD"
+                      },
+                      "settlementCurrency": "GBP",
+                      "settlementCurrencyFxRate": 0.67,
+                      "counterparty": "SomeCounterparty",
+                      "averagePrice": 12419.2,
+                      "version": {
+                        "effectiveFrom": "2018-03-05T10:10:10.0000000+00:00",
+                        "asAtDate": "2018-03-05T10:10:10.0000000+00:00"
+                      }
+                    }
+                  ],
+                  "links": []
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "The details of the input related failure",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/LusidValidationProblemDetails"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/LusidValidationProblemDetails"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/LusidValidationProblemDetails"
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "Error response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/LusidProblemDetails"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "oauth2": []
+          }
+        ],
+        "x-fbn-apistatus": "EarlyAccess"
+      }
+    },
+    "/api/executions/{scope}/{code}": {
+      "get": {
+        "tags": [
+          "Executions"
+        ],
+        "summary": "[EARLY ACCESS] GetExecution: Get Execution",
+        "description": "Fetch a Execution that matches the specified identifier",
+        "operationId": "GetExecution",
+        "parameters": [
+          {
+            "name": "scope",
+            "in": "path",
+            "description": "The scope to which the execution belongs.",
+            "required": true,
+            "schema": {
+              "maxLength": 64,
+              "minLength": 1,
+              "pattern": "^[a-zA-Z0-9\\-_]+$",
+              "type": "string",
+              "description": "The scope to which the execution belongs.",
+              "nullable": true
+            }
+          },
+          {
+            "name": "code",
+            "in": "path",
+            "description": "The execution's unique identifier.",
+            "required": true,
+            "schema": {
+              "maxLength": 64,
+              "minLength": 1,
+              "pattern": "^[a-zA-Z0-9\\-_]+$",
+              "type": "string",
+              "description": "The execution's unique identifier.",
+              "nullable": true
+            }
+          },
+          {
+            "name": "asAt",
+            "in": "query",
+            "description": "The asAt datetime at which to retrieve the execution. Defaults to return the latest version of the execution if not specified.",
+            "schema": {
+              "type": "string",
+              "description": "The asAt datetime at which to retrieve the execution. Defaults to return the latest version of the execution if not specified.",
+              "format": "date-time",
+              "nullable": true
+            },
+            "x-nullable": true
+          },
+          {
+            "name": "propertyKeys",
+            "in": "query",
+            "description": "A list of property keys from the \"Execution\" domain to decorate onto the execution.\r\n            These take the format {domain}/{scope}/{code} e.g. \"Execution/system/Name\".",
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "string",
+                "description": "The key that uniquely identifies the property. It has the format {domain}/{scope}/{code}."
+              },
+              "description": "A list of property keys from the \"Execution\" domain to decorate onto the execution.\r\n            These take the format {domain}/{scope}/{code} e.g. \"Execution/system/Name\".",
+              "nullable": true
+            },
+            "x-nullable": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The execution matching the given identifier.",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/Execution"
+                },
+                "example": {
+                  "id": {
+                    "scope": "MyScope",
+                    "code": "EXEC0000123"
+                  },
+                  "placementId": {
+                    "scope": "MyScope",
+                    "code": "PLAC00000123"
+                  },
+                  "properties": {
+                    "allocation/MyScope/SomeAllocationProperty": {
+                      "key": "Allocation/MyScope/SomeAllocationProperty",
+                      "value": {
+                        "labelValue": "XYZ000034567"
+                      }
+                    }
+                  },
+                  "instrumentIdentifiers": {
+                    "instrument/default/Currency": "GBP"
+                  },
+                  "quantity": 100.5,
+                  "state": "New",
+                  "side": "Buy",
+                  "type": "Limit",
+                  "createdDate": "2006-04-11T00:00:00.0000000+00:00",
+                  "settlementDate": "2006-04-13T00:00:00.0000000+00:00",
+                  "price": {
+                    "amount": 12413.33,
+                    "currency": "USD"
+                  },
+                  "settlementCurrency": "GBP",
+                  "settlementCurrencyFxRate": 0.67,
+                  "counterparty": "SomeCounterparty",
+                  "averagePrice": 12419.2,
+                  "version": {
+                    "effectiveFrom": "2018-03-05T10:10:10.0000000+00:00",
+                    "asAtDate": "2018-03-05T10:10:10.0000000+00:00"
+                  }
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Execution"
+                },
+                "example": {
+                  "id": {
+                    "scope": "MyScope",
+                    "code": "EXEC0000123"
+                  },
+                  "placementId": {
+                    "scope": "MyScope",
+                    "code": "PLAC00000123"
+                  },
+                  "properties": {
+                    "allocation/MyScope/SomeAllocationProperty": {
+                      "key": "Allocation/MyScope/SomeAllocationProperty",
+                      "value": {
+                        "labelValue": "XYZ000034567"
+                      }
+                    }
+                  },
+                  "instrumentIdentifiers": {
+                    "instrument/default/Currency": "GBP"
+                  },
+                  "quantity": 100.5,
+                  "state": "New",
+                  "side": "Buy",
+                  "type": "Limit",
+                  "createdDate": "2006-04-11T00:00:00.0000000+00:00",
+                  "settlementDate": "2006-04-13T00:00:00.0000000+00:00",
+                  "price": {
+                    "amount": 12413.33,
+                    "currency": "USD"
+                  },
+                  "settlementCurrency": "GBP",
+                  "settlementCurrencyFxRate": 0.67,
+                  "counterparty": "SomeCounterparty",
+                  "averagePrice": 12419.2,
+                  "version": {
+                    "effectiveFrom": "2018-03-05T10:10:10.0000000+00:00",
+                    "asAtDate": "2018-03-05T10:10:10.0000000+00:00"
+                  }
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Execution"
+                },
+                "example": {
+                  "id": {
+                    "scope": "MyScope",
+                    "code": "EXEC0000123"
+                  },
+                  "placementId": {
+                    "scope": "MyScope",
+                    "code": "PLAC00000123"
+                  },
+                  "properties": {
+                    "allocation/MyScope/SomeAllocationProperty": {
+                      "key": "Allocation/MyScope/SomeAllocationProperty",
+                      "value": {
+                        "labelValue": "XYZ000034567"
+                      }
+                    }
+                  },
+                  "instrumentIdentifiers": {
+                    "instrument/default/Currency": "GBP"
+                  },
+                  "quantity": 100.5,
+                  "state": "New",
+                  "side": "Buy",
+                  "type": "Limit",
+                  "createdDate": "2006-04-11T00:00:00.0000000+00:00",
+                  "settlementDate": "2006-04-13T00:00:00.0000000+00:00",
+                  "price": {
+                    "amount": 12413.33,
+                    "currency": "USD"
+                  },
+                  "settlementCurrency": "GBP",
+                  "settlementCurrencyFxRate": 0.67,
+                  "counterparty": "SomeCounterparty",
+                  "averagePrice": 12419.2,
+                  "version": {
+                    "effectiveFrom": "2018-03-05T10:10:10.0000000+00:00",
+                    "asAtDate": "2018-03-05T10:10:10.0000000+00:00"
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "The details of the input related failure",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/LusidValidationProblemDetails"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/LusidValidationProblemDetails"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/LusidValidationProblemDetails"
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "Error response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/LusidProblemDetails"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "oauth2": []
+          }
+        ],
+        "x-fbn-apistatus": "EarlyAccess"
+      },
+      "delete": {
+        "tags": [
+          "Executions"
+        ],
+        "summary": "[EARLY ACCESS] DeleteExecution: Delete execution",
+        "description": "Delete an execution. Deletion will be valid from the execution's creation datetime.\r\nThis means that the execution will no longer exist at any effective datetime from the asAt datetime of deletion.",
+        "operationId": "DeleteExecution",
+        "parameters": [
+          {
+            "name": "scope",
+            "in": "path",
+            "description": "The execution scope.",
+            "required": true,
+            "schema": {
+              "maxLength": 64,
+              "minLength": 1,
+              "pattern": "^[a-zA-Z0-9\\-_]+$",
+              "type": "string",
+              "description": "The execution scope."
+            }
+          },
+          {
+            "name": "code",
+            "in": "path",
+            "description": "The execution's code. This, together with the scope uniquely identifies the execution to delete.",
+            "required": true,
+            "schema": {
+              "maxLength": 64,
+              "minLength": 1,
+              "pattern": "^[a-zA-Z0-9\\-_]+$",
+              "type": "string",
+              "description": "The execution's code. This, together with the scope uniquely identifies the execution to delete."
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The response from deleting an execution.",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/DeletedEntityResponse"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/DeletedEntityResponse"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/DeletedEntityResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "The details of the input related failure",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/LusidValidationProblemDetails"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/LusidValidationProblemDetails"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/LusidValidationProblemDetails"
                 }
               }
             }
@@ -46153,6 +47019,221 @@
         },
         "additionalProperties": false
       },
+      "Execution": {
+        "required": [
+          "counterparty",
+          "createdDate",
+          "id",
+          "instrumentIdentifiers",
+          "lusidInstrumentId",
+          "placementId",
+          "price",
+          "quantity",
+          "settlementCurrency",
+          "settlementCurrencyFxRate",
+          "side",
+          "state",
+          "type"
+        ],
+        "type": "object",
+        "properties": {
+          "id": {
+            "$ref": "#/components/schemas/ResourceId"
+          },
+          "placementId": {
+            "$ref": "#/components/schemas/ResourceId"
+          },
+          "properties": {
+            "type": "object",
+            "additionalProperties": {
+              "$ref": "#/components/schemas/PerpetualProperty"
+            },
+            "description": "Client-defined properties associated with this execution.",
+            "nullable": true
+          },
+          "instrumentIdentifiers": {
+            "type": "object",
+            "additionalProperties": {
+              "type": "string"
+            },
+            "description": "The instrument ordered."
+          },
+          "lusidInstrumentId": {
+            "type": "string",
+            "description": "The LUSID instrument id for the instrument execution."
+          },
+          "quantity": {
+            "type": "number",
+            "description": "The quantity of given instrument ordered.",
+            "format": "double"
+          },
+          "state": {
+            "type": "string",
+            "description": "The state of this execution (typically a FIX state; Open, Filled, etc)."
+          },
+          "side": {
+            "type": "string",
+            "description": "The side (Buy, Sell, ...) of this execution."
+          },
+          "type": {
+            "type": "string",
+            "description": "The type of this execution (Market, Limit, etc)."
+          },
+          "createdDate": {
+            "type": "string",
+            "description": "The active date of this execution.",
+            "format": "date-time"
+          },
+          "settlementDate": {
+            "type": "string",
+            "description": "The (optional) settlement date for this execution",
+            "format": "date-time",
+            "nullable": true
+          },
+          "price": {
+            "$ref": "#/components/schemas/CurrencyAndAmount"
+          },
+          "settlementCurrency": {
+            "type": "string",
+            "description": "The execution's settlement currency."
+          },
+          "settlementCurrencyFxRate": {
+            "type": "number",
+            "description": "The exectuion's settlement currency rate.",
+            "format": "double"
+          },
+          "counterparty": {
+            "type": "string",
+            "description": "The market entity this placement is placed with."
+          },
+          "averagePrice": {
+            "type": "number",
+            "description": "The average price of all executions for a given placement at the time of upsert",
+            "format": "double",
+            "nullable": true
+          },
+          "version": {
+            "$ref": "#/components/schemas/Version"
+          },
+          "links": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Link"
+            },
+            "description": "Collection of links.",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false,
+        "description": "The record of a number of executions against a single Placement (directly analogous to\r\na partial or full fill against a street order)."
+      },
+      "ExecutionRequest": {
+        "required": [
+          "counterparty",
+          "createdDate",
+          "id",
+          "instrumentIdentifiers",
+          "placementId",
+          "price",
+          "quantity",
+          "settlementCurrency",
+          "settlementCurrencyFxRate",
+          "side",
+          "state",
+          "type"
+        ],
+        "type": "object",
+        "properties": {
+          "id": {
+            "$ref": "#/components/schemas/ResourceId"
+          },
+          "placementId": {
+            "$ref": "#/components/schemas/ResourceId"
+          },
+          "properties": {
+            "type": "object",
+            "additionalProperties": {
+              "$ref": "#/components/schemas/PerpetualProperty"
+            },
+            "description": "Client-defined properties associated with this execution.",
+            "nullable": true
+          },
+          "instrumentIdentifiers": {
+            "type": "object",
+            "additionalProperties": {
+              "type": "string"
+            },
+            "description": "The instrument ordered."
+          },
+          "quantity": {
+            "type": "number",
+            "description": "The quantity of given instrument ordered.",
+            "format": "double"
+          },
+          "state": {
+            "type": "string",
+            "description": "The state of this execution (typically a FIX state; Open, Filled, etc)."
+          },
+          "side": {
+            "type": "string",
+            "description": "The side (Buy, Sell, ...) of this execution."
+          },
+          "type": {
+            "type": "string",
+            "description": "The type of this execution (Market, Limit, etc)."
+          },
+          "createdDate": {
+            "type": "string",
+            "description": "The active date of this execution.",
+            "format": "date-time"
+          },
+          "settlementDate": {
+            "type": "string",
+            "description": "The (optional) settlement date for this execution",
+            "format": "date-time",
+            "nullable": true
+          },
+          "price": {
+            "$ref": "#/components/schemas/CurrencyAndAmount"
+          },
+          "settlementCurrency": {
+            "type": "string",
+            "description": "The execution's settlement currency."
+          },
+          "settlementCurrencyFxRate": {
+            "type": "number",
+            "description": "The exectuion's settlement currency rate.",
+            "format": "double"
+          },
+          "counterparty": {
+            "type": "string",
+            "description": "The market entity this placement is placed with."
+          },
+          "averagePrice": {
+            "type": "number",
+            "description": "The average price of all executions for a given placement at the time of upsert",
+            "format": "double",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false,
+        "description": "A request to create or update a Execution."
+      },
+      "ExecutionSetRequest": {
+        "type": "object",
+        "properties": {
+          "requests": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ExecutionRequest"
+            },
+            "description": "A collection of ExecutionRequests.",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false,
+        "description": "A request to create or update multiple Executions."
+      },
       "ExpandedGroup": {
         "required": [
           "displayName",
@@ -48351,6 +49432,47 @@
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/DataTypeSummary"
+            },
+            "description": "The resources to list."
+          },
+          "href": {
+            "type": "string",
+            "description": "The URI of the resource list.",
+            "format": "uri",
+            "nullable": true
+          },
+          "links": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Link"
+            },
+            "description": "Collection of links.",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false,
+        "description": "A paginated list of resource that can be returned from a request."
+      },
+      "PagedResourceListOfExecution": {
+        "required": [
+          "values"
+        ],
+        "type": "object",
+        "properties": {
+          "nextPage": {
+            "type": "string",
+            "description": "The next page of results.",
+            "nullable": true
+          },
+          "previousPage": {
+            "type": "string",
+            "description": "The previous page of results.",
+            "nullable": true
+          },
+          "values": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Execution"
             },
             "description": "The resources to list."
           },
@@ -50923,6 +52045,47 @@
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/DataType"
+            },
+            "description": "The resources to list."
+          },
+          "href": {
+            "type": "string",
+            "description": "The URI of the resource list.",
+            "format": "uri",
+            "nullable": true
+          },
+          "links": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Link"
+            },
+            "description": "Collection of links.",
+            "nullable": true
+          },
+          "nextPage": {
+            "type": "string",
+            "description": "The next page of results.",
+            "nullable": true
+          },
+          "previousPage": {
+            "type": "string",
+            "description": "The previous page of results.",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false,
+        "description": "A collection of resources that can be returned from requests."
+      },
+      "ResourceListOfExecution": {
+        "required": [
+          "values"
+        ],
+        "type": "object",
+        "properties": {
+          "values": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Execution"
             },
             "description": "The resources to list."
           },
@@ -53986,7 +55149,7 @@
         "description": "OAuth2 Implicit Grant",
         "flows": {
           "implicit": {
-            "authorizationUrl": "https://lusid.okta.com/oauth2/default/v1/authorize",
+            "authorizationUrl": "https://dummyurl.lusid.com/",
             "scopes": {}
           }
         }

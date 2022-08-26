@@ -14,6 +14,7 @@ from lusid.api.cut_label_definitions_api import CutLabelDefinitionsApi
 from lusid.api.data_types_api import DataTypesApi
 from lusid.api.derived_transaction_portfolios_api import DerivedTransactionPortfoliosApi
 from lusid.api.entities_api import EntitiesApi
+from lusid.api.executions_api import ExecutionsApi
 from lusid.api.instruments_api import InstrumentsApi
 from lusid.api.legal_entities_api import LegalEntitiesApi
 from lusid.api.orders_api import OrdersApi

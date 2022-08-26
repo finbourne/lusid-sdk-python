@@ -1,15 +1,25 @@
 # ExecutionRequest
 
+A request to create or update a Execution.
+
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**execution_id** | **str** | The unique identifier of the Execution Report (8) message as assigned by sell-side. FIX field 17. | 
-**side** | **str** | The side of the order. FIX field 54. | 
-**instrument_identifiers** | **dict(str, str)** | A set of instrument identifiers that can resolve the execution to a unique instrument. | 
-**transaction_time** | **datetime** | Time of execution/order creation. FIX field 60. | 
-**last_shares** | **float** | Quantity (e.g. shares) bought/sold on this (last) fill. FIX field 32. | 
-**last_px** | **float** | Price of this (last) fill. FIX field 31. | 
-**currency** | **str** | The currency used for the price. FIX field 15. | 
+**id** | [**ResourceId**](ResourceId.md) |  | 
+**placement_id** | [**ResourceId**](ResourceId.md) |  | 
+**properties** | [**dict(str, PerpetualProperty)**](PerpetualProperty.md) | Client-defined properties associated with this execution. | [optional] 
+**instrument_identifiers** | **dict(str, str)** | The instrument ordered. | 
+**quantity** | **float** | The quantity of given instrument ordered. | 
+**state** | **str** | The state of this execution (typically a FIX state; Open, Filled, etc). | 
+**side** | **str** | The side (Buy, Sell, ...) of this execution. | 
+**type** | **str** | The type of this execution (Market, Limit, etc). | 
+**created_date** | **datetime** | The active date of this execution. | 
+**settlement_date** | **datetime** | The (optional) settlement date for this execution | [optional] 
+**price** | [**CurrencyAndAmount**](CurrencyAndAmount.md) |  | 
+**settlement_currency** | **str** | The execution&#39;s settlement currency. | 
+**settlement_currency_fx_rate** | **float** | The exectuion&#39;s settlement currency rate. | 
+**counterparty** | **str** | The market entity this placement is placed with. | 
+**average_price** | **float** | The average price of all executions for a given placement at the time of upsert | [optional] 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 
