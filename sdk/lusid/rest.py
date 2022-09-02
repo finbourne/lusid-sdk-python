@@ -26,7 +26,7 @@ from six.moves.urllib.parse import urlencode
 import urllib3
 
 from lusid.exceptions import ApiException, ApiValueError
-from lusid.tcp.tcp_keep_alive_probes import TCPKeepAlivePoolManager, TCPKeepAliveProxyManager
+from fbnsdkutilities.tcp.tcp_keep_alive_probes import TCPKeepAlivePoolManager, TCPKeepAliveProxyManager
 
 logger = logging.getLogger(__name__)
 

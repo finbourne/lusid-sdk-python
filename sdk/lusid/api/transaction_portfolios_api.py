@@ -2039,7 +2039,7 @@ class TransactionPortfoliosApi(object):
         :type effective_at: str
         :param as_at: The asAt datetime at which to retrieve the holdings adjustment. Defaults to the return the latest              version of the holdings adjustment if not specified.
         :type as_at: datetime
-        :param property_keys: A list of property keys from the ‘Instrument' domain to decorate onto holdings adjustments.              These must have the format {domain}/{scope}/{code}, for example 'Instrument/system/Name'.              Note that properties from the 'Holding’ domain are automatically returned.
+        :param property_keys: A list of property keys from the â€˜Instrument' domain to decorate onto holdings adjustments.              These must have the format {domain}/{scope}/{code}, for example 'Instrument/system/Name'.              Note that properties from the 'Holdingâ€™ domain are automatically returned.
         :type property_keys: list[str]
         :param async_req: Whether to execute the request asynchronously.
         :type async_req: bool, optional
@@ -2077,7 +2077,7 @@ class TransactionPortfoliosApi(object):
         :type effective_at: str
         :param as_at: The asAt datetime at which to retrieve the holdings adjustment. Defaults to the return the latest              version of the holdings adjustment if not specified.
         :type as_at: datetime
-        :param property_keys: A list of property keys from the ‘Instrument' domain to decorate onto holdings adjustments.              These must have the format {domain}/{scope}/{code}, for example 'Instrument/system/Name'.              Note that properties from the 'Holding’ domain are automatically returned.
+        :param property_keys: A list of property keys from the â€˜Instrument' domain to decorate onto holdings adjustments.              These must have the format {domain}/{scope}/{code}, for example 'Instrument/system/Name'.              Note that properties from the 'Holdingâ€™ domain are automatically returned.
         :type property_keys: list[str]
         :param async_req: Whether to execute the request asynchronously.
         :type async_req: bool, optional
