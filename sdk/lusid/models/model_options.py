@@ -51,6 +51,11 @@ class ModelOptions(object):
     }
 
     discriminator_value_class_map = {
+        'EmptyModelOptions': 'EmptyModelOptions',
+        'OpaqueModelOptions': 'OpaqueModelOptions',
+        'IndexModelOptions': 'IndexModelOptions',
+        'EquityModelOptions': 'EquityModelOptions',
+        'FxForwardModelOptions': 'FxForwardModelOptions'
     }
 
     def __init__(self, model_options_type=None, local_vars_configuration=None):  # noqa: E501

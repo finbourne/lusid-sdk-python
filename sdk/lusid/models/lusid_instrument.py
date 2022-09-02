@@ -51,6 +51,32 @@ class LusidInstrument(object):
     }
 
     discriminator_value_class_map = {
+        'InterestRateSwaption': 'InterestRateSwaption',
+        'ContractForDifference': 'ContractForDifference',
+        'FxOption': 'FxOption',
+        'CashPerpetual': 'CashPerpetual',
+        'ComplexBond': 'ComplexBond',
+        'EquitySwap': 'EquitySwap',
+        'CapFloor': 'CapFloor',
+        'TermDeposit': 'TermDeposit',
+        'CreditDefaultSwap': 'CreditDefaultSwap',
+        'CdsIndex': 'CdsIndex',
+        'InflationLinkedBond': 'InflationLinkedBond',
+        'ExchangeTradedOption': 'ExchangeTradedOption',
+        'EquityOption': 'EquityOption',
+        'InstrumentLeg': 'InstrumentLeg',
+        'ForwardRateAgreement': 'ForwardRateAgreement',
+        'FxForward': 'FxForward',
+        'SimpleInstrument': 'SimpleInstrument',
+        'InterestRateSwap': 'InterestRateSwap',
+        'ExoticInstrument': 'ExoticInstrument',
+        'Equity': 'Equity',
+        'Bond': 'Bond',
+        'FxSwap': 'FxSwap',
+        'Repo': 'Repo',
+        'ReferenceInstrument': 'ReferenceInstrument',
+        'Basket': 'Basket',
+        'Future': 'Future'
     }
 
     def __init__(self, instrument_type=None, local_vars_configuration=None):  # noqa: E501

@@ -51,6 +51,8 @@ class ResultKeyRule(object):
     }
 
     discriminator_value_class_map = {
+        'ResultDataKeyRule': 'ResultDataKeyRule',
+        'PortfolioResultDataKeyRule': 'PortfolioResultDataKeyRule'
     }
 
     def __init__(self, result_key_rule_type=None, local_vars_configuration=None):  # noqa: E501
