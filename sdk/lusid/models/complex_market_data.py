@@ -51,6 +51,19 @@ class ComplexMarketData(object):
     }
 
     discriminator_value_class_map = {
+        'FxForwardCurveData': 'FxForwardCurveData',
+        'FxForwardTenorPipsCurveData': 'FxForwardTenorPipsCurveData',
+        'FxForwardTenorCurveData': 'FxForwardTenorCurveData',
+        'EquityCurveByPricesData': 'EquityCurveByPricesData',
+        'FxForwardPipsCurveData': 'FxForwardPipsCurveData',
+        'YieldCurveData': 'YieldCurveData',
+        'EquityVolSurfaceData': 'EquityVolSurfaceData',
+        'OpaqueMarketData': 'OpaqueMarketData',
+        'FxForwardCurveByQuoteReference': 'FxForwardCurveByQuoteReference',
+        'FxVolSurfaceData': 'FxVolSurfaceData',
+        'IrVolCubeData': 'IrVolCubeData',
+        'CreditSpreadCurveData': 'CreditSpreadCurveData',
+        'DiscountFactorCurveData': 'DiscountFactorCurveData'
     }
 
     def __init__(self, market_data_type=None, local_vars_configuration=None):  # noqa: E501
