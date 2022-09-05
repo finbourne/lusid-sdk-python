@@ -9,7 +9,7 @@
       "url": "https://www.finbourne.com",
       "email": "info@finbourne.com"
     },
-    "version": "0.11.4758",
+    "version": "0.11.4756",
     "x-logo": {
       "url": "https://www.lusid.com/app/assets/logo_white.png",
       "backgroundColor": "#415464"
@@ -17,7 +17,7 @@
   },
   "servers": [
     {
-      "url": "https://www.lusid.com/api"
+      "url": "https://fbn-prd.lusid.com/api"
     }
   ],
   "paths": {
@@ -28692,186 +28692,6 @@
         "x-fbn-apistatus": "Stable"
       }
     },
-    "/api/search/instruments": {
-      "post": {
-        "tags": [
-          "Search"
-        ],
-        "summary": "[EARLY ACCESS] InstrumentsSearch: Instruments search",
-        "description": "Search across all instruments that have been mastered in LUSID. Optionally augment the results with instruments from an external symbology service,\r\ncurrently OpenFIGI.",
-        "operationId": "InstrumentsSearch",
-        "parameters": [
-          {
-            "name": "masteredEffectiveAt",
-            "in": "query",
-            "description": "The effective datetime or cut label to use when searching mastered instruments. This parameter has no effect on instruments that\r\nhave not been mastered within LUSID. Defaults to the current LUSID system datetime if not specified.",
-            "schema": {
-              "type": "string",
-              "description": "The effective datetime or cut label to use when searching mastered instruments. This parameter has no effect on instruments that\r\nhave not been mastered within LUSID. Defaults to the current LUSID system datetime if not specified.",
-              "format": "dateorcutlabel",
-              "nullable": true
-            }
-          },
-          {
-            "name": "masteredOnly",
-            "in": "query",
-            "description": "If set to true, only search over instruments that have been mastered within LUSID. Defaults to false.",
-            "schema": {
-              "type": "boolean",
-              "description": "If set to true, only search over instruments that have been mastered within LUSID. Defaults to false.",
-              "default": false
-            },
-            "x-nullable": true
-          },
-          {
-            "name": "scope",
-            "in": "query",
-            "description": "The scope in which the instrument lies.",
-            "schema": {
-              "maxLength": 64,
-              "minLength": 1,
-              "pattern": "^[a-zA-Z0-9\\-_]+$",
-              "type": "string",
-              "description": "The scope in which the instrument lies.",
-              "nullable": true
-            }
-          }
-        ],
-        "requestBody": {
-          "description": "A collection of instrument properties to search for. LUSID will return instruments for any matched\r\n            properties.",
-          "content": {
-            "application/json-patch+json": {
-              "schema": {
-                "type": "array",
-                "items": {
-                  "$ref": "#/components/schemas/InstrumentSearchProperty"
-                },
-                "description": "A collection of instrument properties to search for. LUSID will return instruments for any matched\r\n            properties."
-              },
-              "example": [
-                {
-                  "key": "Instrument/default/Isin",
-                  "value": "US0378331005"
-                }
-              ]
-            },
-            "application/json": {
-              "schema": {
-                "type": "array",
-                "items": {
-                  "$ref": "#/components/schemas/InstrumentSearchProperty"
-                },
-                "description": "A collection of instrument properties to search for. LUSID will return instruments for any matched\r\n            properties."
-              },
-              "example": [
-                {
-                  "key": "Instrument/default/Isin",
-                  "value": "US0378331005"
-                }
-              ]
-            },
-            "text/json": {
-              "schema": {
-                "type": "array",
-                "items": {
-                  "$ref": "#/components/schemas/InstrumentSearchProperty"
-                },
-                "description": "A collection of instrument properties to search for. LUSID will return instruments for any matched\r\n            properties."
-              },
-              "example": [
-                {
-                  "key": "Instrument/default/Isin",
-                  "value": "US0378331005"
-                }
-              ]
-            },
-            "application/*+json": {
-              "schema": {
-                "type": "array",
-                "items": {
-                  "$ref": "#/components/schemas/InstrumentSearchProperty"
-                },
-                "description": "A collection of instrument properties to search for. LUSID will return instruments for any matched\r\n            properties."
-              },
-              "example": [
-                {
-                  "key": "Instrument/default/Isin",
-                  "value": "US0378331005"
-                }
-              ]
-            }
-          },
-          "required": true
-        },
-        "responses": {
-          "200": {
-            "description": "The instruments found by the search",
-            "content": {
-              "text/plain": {
-                "schema": {
-                  "type": "array",
-                  "items": {
-                    "$ref": "#/components/schemas/InstrumentMatch"
-                  }
-                }
-              },
-              "application/json": {
-                "schema": {
-                  "type": "array",
-                  "items": {
-                    "$ref": "#/components/schemas/InstrumentMatch"
-                  }
-                }
-              },
-              "text/json": {
-                "schema": {
-                  "type": "array",
-                  "items": {
-                    "$ref": "#/components/schemas/InstrumentMatch"
-                  }
-                }
-              }
-            }
-          },
-          "400": {
-            "description": "The details of the input related failure",
-            "content": {
-              "text/plain": {
-                "schema": {
-                  "$ref": "#/components/schemas/LusidValidationProblemDetails"
-                }
-              },
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/LusidValidationProblemDetails"
-                }
-              },
-              "text/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/LusidValidationProblemDetails"
-                }
-              }
-            }
-          },
-          "default": {
-            "description": "Error response",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/LusidProblemDetails"
-                }
-              }
-            }
-          }
-        },
-        "security": [
-          {
-            "oauth2": []
-          }
-        ],
-        "x-fbn-apistatus": "EarlyAccess"
-      }
-    },
     "/api/search/portfoliogroups": {
       "get": {
         "tags": [
@@ -51877,47 +51697,6 @@
           "propertyName": "instrumentType"
         }
       },
-      "InstrumentMatch": {
-        "type": "object",
-        "properties": {
-          "masteredInstruments": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/InstrumentDefinition"
-            },
-            "description": "The collection of instruments found by the search which have been mastered within LUSID.",
-            "nullable": true
-          },
-          "externalInstruments": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/InstrumentDefinition"
-            },
-            "description": "The collection of instruments found by the search which have not been mastered within LUSID and instead found via OpenFIGI.",
-            "nullable": true
-          }
-        },
-        "additionalProperties": false,
-        "description": "A collection of instrument search results"
-      },
-      "InstrumentSearchProperty": {
-        "required": [
-          "key",
-          "value"
-        ],
-        "type": "object",
-        "properties": {
-          "key": {
-            "type": "string",
-            "description": "The property key of instrument property to search for. This will be from the 'Instrument' domain and will take the format {domain}/{scope}/{code} e.g. 'Instrument/system/Isin' or 'Instrument/MyScope/AssetClass'."
-          },
-          "value": {
-            "type": "string",
-            "description": "The value of the property e.g. 'US0378331005' or 'Equity'."
-          }
-        },
-        "additionalProperties": false
-      },
       "InterestRateSwap": {
         "allOf": [
           {
@@ -60111,7 +59890,7 @@
         "description": "OAuth2 Implicit Grant",
         "flows": {
           "implicit": {
-            "authorizationUrl": "https://dummyurl.lusid.com/",
+            "authorizationUrl": "https://lusid.okta.com/oauth2/default/v1/authorize",
             "scopes": {}
           }
         }
