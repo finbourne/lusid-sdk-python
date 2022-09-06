@@ -2,7 +2,7 @@ name: Slack alert on PR
 
 on:
   pull_request_target:
-    branches: [master, develop]
+    branches: [main, master, develop]
 
 jobs:
   slack-alert-on-pr:
