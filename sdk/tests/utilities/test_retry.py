@@ -3,7 +3,6 @@ import unittest
 import lusid.api
 from lusid import ApiException
 from lusid.utilities import ApiClientFactory
-
 from utilities import CredentialsSource
 
 
@@ -97,7 +96,12 @@ class RetryTests(unittest.TestCase):
     def setUpClass(cls):
         # add mock to the module
         lusid.api.MockApi = MockApi
-        cls.factory = ApiClientFactory(api_secrets_filename=CredentialsSource.secrets_path())
+        token = CredentialsSource.fetch_pat()
+        if token is None:
+            cls.factory = ApiClientFactory(api_secrets_filename=CredentialsSource.secrets_path())
+        else:
+            creds = CredentialsSource.fetch_credentials()
+            cls.factory = ApiClientFactory(token=creds["access_token"], api_url=creds["api_url"])
 
     def test_non_retryable_is_not_retried(self):
         api = self.factory.build(MockApi)

@@ -1,17 +1,18 @@
 import unittest
 from collections import UserString
 from datetime import datetime
-from unittest.mock import patch
-from urllib3 import PoolManager, ProxyManager
-from parameterized import parameterized
 from threading import Thread
+from unittest.mock import patch
+
+from parameterized import parameterized
+from urllib3 import PoolManager, ProxyManager
+
 from lusid import (InstrumentsApi, ResourceListOfInstrumentIdTypeDescriptor,
                    TCPKeepAlivePoolManager, TCPKeepAliveProxyManager)
 from lusid.utilities import ApiClientFactory
-
+from utilities import MockApiResponse
 from utilities import TokenUtilities as tu, CredentialsSource
 from utilities.temp_file_manager import TempFileManager
-from utilities import MockApiResponse
 
 
 class UnknownApi:
@@ -24,6 +25,7 @@ class UnknownImpl:
 
 source_config_details, config_keys = CredentialsSource.fetch_credentials(), CredentialsSource.fetch_config_keys()
 pat_token = CredentialsSource.fetch_pat()
+
 
 class RefreshingToken(UserString):
 
@@ -46,8 +48,8 @@ class RefreshingToken(UserString):
 class ApiFactory(unittest.TestCase):
 
     def get_env_vars_without_pat(self):
-        env_vars = {config_keys[key]["env"]: value for key, value in source_config_details.items()if value is not None}
-        env_vars_without_pat = {k:env_vars[k] for k in env_vars if k !="FBN_LUSID_ACCESS_TOKEN"}
+        env_vars = {config_keys[key]["env"]: value for key, value in source_config_details.items() if value is not None}
+        env_vars_without_pat = {k: env_vars[k] for k in env_vars if k != "FBN_ACCESS_TOKEN"}
         return env_vars_without_pat
 
     def validate_api(self, api):
@@ -61,14 +63,13 @@ class ApiFactory(unittest.TestCase):
         ["Unknown Implementation", UnknownImpl, "unknown api: UnknownImpl"]
     ])
     def test_get_unknown_api_throws_exception(self, _, api_to_build, error_message):
-        factory = ApiClientFactory(
-            api_secrets_filename=CredentialsSource.secrets_path()
-        )
+        factory = ApiClientFactory(api_secrets_filename=CredentialsSource.secrets_path())
 
         with self.assertRaises(TypeError) as error:
             factory.build(api_to_build)
         self.assertEqual(error.exception.args[0], error_message)
 
+    @unittest.skipIf(CredentialsSource.fetch_credentials().__contains__("access_token"), "do not run on PR's")
     def test_get_api_with_token(self):
         token, refresh_token = tu.get_okta_tokens(CredentialsSource.secrets_path())
         factory = ApiClientFactory(
@@ -80,6 +81,7 @@ class ApiFactory(unittest.TestCase):
         self.assertIsInstance(api, InstrumentsApi)
         self.validate_api(api)
 
+    @unittest.skipIf(CredentialsSource.fetch_credentials().__contains__("access_token"), "do not run on PR's")
     def test_get_api_with_none_token(self):
         factory = ApiClientFactory(
             token=None,
@@ -91,6 +93,7 @@ class ApiFactory(unittest.TestCase):
         self.assertIsInstance(api, InstrumentsApi)
         self.validate_api(api)
 
+    @unittest.skipIf(CredentialsSource.fetch_credentials().__contains__("access_token"), "do not run on PR's")
     def test_get_api_with_str_none_token(self):
         factory = ApiClientFactory(
             token=RefreshingToken(),
@@ -102,6 +105,7 @@ class ApiFactory(unittest.TestCase):
         self.assertIsInstance(api, InstrumentsApi)
         self.validate_api(api)
 
+    @unittest.skipIf(not CredentialsSource.fetch_credentials().__contains__("app_name"), "do not run on PR's")
     def test_get_api_with_token_url_as_env_var(self):
         token, refresh_token = tu.get_okta_tokens(CredentialsSource.secrets_path())
         with patch.dict('os.environ', {"FBN_LUSID_API_URL": source_config_details["api_url"]}, clear=True):
@@ -113,9 +117,7 @@ class ApiFactory(unittest.TestCase):
         self.validate_api(api)
 
     def test_get_api_with_configuration(self):
-        factory = ApiClientFactory(
-            api_secrets_filename=CredentialsSource.secrets_path()
-        )
+        factory = ApiClientFactory(api_secrets_filename=CredentialsSource.secrets_path())
         api = factory.build(InstrumentsApi)
         self.assertIsInstance(api, InstrumentsApi)
         self.validate_api(api)
@@ -132,9 +134,7 @@ class ApiFactory(unittest.TestCase):
         self.assertIsNotNone(result)
 
     def test_get_info_with_invalid_param_throws_error(self):
-        factory = ApiClientFactory(
-            api_secrets_filename=CredentialsSource.secrets_path()
-        )
+        factory = ApiClientFactory(api_secrets_filename=CredentialsSource.secrets_path())
         api = factory.build(InstrumentsApi)
         self.assertIsInstance(api, InstrumentsApi)
 
@@ -144,9 +144,7 @@ class ApiFactory(unittest.TestCase):
         self.assertEqual(error.exception.args[0], "call_info value must be a lambda")
 
     def test_wrapped_method(self):
-        factory = ApiClientFactory(
-            api_secrets_filename=CredentialsSource.secrets_path()
-        )
+        factory = ApiClientFactory(api_secrets_filename=CredentialsSource.secrets_path())
 
         wrapped_scopes_api = factory.build(InstrumentsApi)
         portfolio = InstrumentsApi(wrapped_scopes_api.api_client)
@@ -253,6 +251,7 @@ class ApiFactory(unittest.TestCase):
         self.assertFalse(api_factory.api_client.configuration.tcp_keep_alive)
         self.assertIsInstance(api_factory.api_client.rest_client.pool_manager, (PoolManager, ProxyManager))
 
+    @unittest.skipIf(CredentialsSource.fetch_credentials().__contains__("access_token"), "do not run on PR's")
     def test_use_apifactory_with_id_provider_response_handler(self):
         """
         Ensures that an id_provider_response handler that is passed to the ApiClientFactory can be used during
@@ -260,7 +259,6 @@ class ApiFactory(unittest.TestCase):
         """
 
         with patch.dict('os.environ', self.get_env_vars_without_pat(), clear=True):
-
             responses = []
 
             def record_response(id_provider_response):
@@ -277,17 +275,12 @@ class ApiFactory(unittest.TestCase):
 
             self.assertGreater(len(responses), 0)
 
+    @unittest.skipIf(CredentialsSource.fetch_credentials().__contains__("access_token"), "do not run on PR's")
     def test_use_apifactory_multiple_threads(self):
 
         with patch.dict('os.environ', self.get_env_vars_without_pat(), clear=True):
 
-            access_token = str(ApiClientFactory(
-                api_secrets_filename=CredentialsSource.secrets_path()
-            ).api_client.configuration.access_token)
-
-            api_factory = ApiClientFactory(
-                api_secrets_filename=CredentialsSource.secrets_path()
-            )
+            api_factory = ApiClientFactory(api_secrets_filename=CredentialsSource.secrets_path())
 
             def get_identifier_types(factory):
                 return factory.build(InstrumentsApi).get_instrument_identifier_types()
@@ -299,7 +292,7 @@ class ApiFactory(unittest.TestCase):
             with patch("requests.post") as identity_mock:
                 identity_mock.side_effect = lambda *args, **kwargs: MockApiResponse(
                     json_data={
-                        "access_token": f"{access_token}",
+                        "access_token": f"mock_access_token",
                         "refresh_token": "mock_refresh_token",
                         "expires_in": 3600
                     },
