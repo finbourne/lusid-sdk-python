@@ -17,6 +17,8 @@ from utilities import MockApiResponse
 source_config_details, config_keys = CredentialsSource.fetch_credentials(), CredentialsSource.fetch_config_keys()
 
 
+
+@unittest.skipIf(CredentialsSource.fetch_credentials().__contains__("access_token"), "do not run on PR's")
 class TokenRefresh(unittest.TestCase):
 
     @classmethod
@@ -627,4 +629,3 @@ class TokenRefresh(unittest.TestCase):
                                     f"&password={expected_password_encoding}&scope=openid client groups offline_access" \
                                     f"&client_id=test&client_secret=test"
             self.assertEqual(identity_mock.call_args[1]["data"], expected_request_body)
-

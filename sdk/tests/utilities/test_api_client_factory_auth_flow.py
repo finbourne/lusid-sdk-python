@@ -27,7 +27,7 @@ class ApiFactory(unittest.TestCase):
 
         pat_env_vars = {
             "FBN_LUSID_API_URL": self.source_config_details["api_url"],
-            "FBN_LUSID_ACCESS_TOKEN": self.pat_token
+            "FBN_ACCESS_TOKEN": self.pat_token
         }
 
         return pat_env_vars
@@ -35,9 +35,10 @@ class ApiFactory(unittest.TestCase):
     def get_env_vars_without_pat(self):
         env_vars = {self.config_keys[key]["env"]: value for key, value in self.source_config_details.items() if
                     value is not None}
-        env_vars_wout_pat = {k: env_vars[k] for k in env_vars if k != "FBN_LUSID_ACCESS_TOKEN"}
+        env_vars_wout_pat = {k: env_vars[k] for k in env_vars if k != "FBN_ACCESS_TOKEN"}
         return env_vars_wout_pat
 
+    @unittest.skipIf(not CredentialsSource.fetch_credentials().__contains__("access_token"), "do not run if no token present")
     def test_bad_pat_in_param_but_good_pat_in_env_vars(self):
 
         with patch.dict(self.os_environ_dict_str, self.get_pat_env_var(), clear=True):
@@ -52,10 +53,11 @@ class ApiFactory(unittest.TestCase):
 
                 self.assertEquals(401, e.status)
 
+    @unittest.skipIf(not CredentialsSource.fetch_credentials().__contains__("access_token"), "do not run if no token present")
     def test_bad_secrets_file_in_param_but_good_pat_in_env_vars(self):
 
         all_env_vars = self.get_env_vars_without_pat()
-        all_env_vars["FBN_LUSID_ACCESS_TOKEN"] = self.pat_token
+        all_env_vars["FBN_ACCESS_TOKEN"] = self.pat_token
 
         with patch.dict(self.os_environ_dict_str, all_env_vars, clear=True):
             with self.assertLogs() as context_manager:
@@ -70,6 +72,7 @@ class ApiFactory(unittest.TestCase):
                     context_manager.output[1],
                 )
 
+    @unittest.skipIf(not CredentialsSource.fetch_credentials().__contains__("access_token"), "do not run if no token present")
     def test_good_env_pat_but_no_param_pat(self):
 
         with patch.dict(self.os_environ_dict_str, self.get_pat_env_var(), clear=True):
@@ -78,6 +81,7 @@ class ApiFactory(unittest.TestCase):
             self.assertIsInstance(api, InstrumentsApi)
             self.validate_api(api)
 
+    @unittest.skipIf(not CredentialsSource.fetch_credentials().__contains__("access_token"), "do not run if no token present")
     def test_no_env_pat_but_good_param_pat(self):
 
         with patch.dict(self.os_environ_dict_str, {"FBN_LUSID_API_URL": self.source_config_details["api_url"]},
@@ -87,6 +91,7 @@ class ApiFactory(unittest.TestCase):
             self.assertIsInstance(api, InstrumentsApi)
             self.validate_api(api)
 
+    @unittest.skipIf(CredentialsSource.fetch_credentials().__contains__("access_token"), "do not run on PR's")
     def test_no_pat_but_good_secrets_file_as_param(self):
 
         with patch.dict(self.os_environ_dict_str, self.get_env_vars_without_pat(), clear=True):
@@ -95,6 +100,7 @@ class ApiFactory(unittest.TestCase):
             self.assertIsInstance(api, InstrumentsApi)
             self.validate_api(api)
 
+    @unittest.skipIf(CredentialsSource.fetch_credentials().__contains__("access_token"), "do not run on PR's")
     def test_none_str_param_pat_but_good_secrets_envs(self):
 
         with patch.dict(self.os_environ_dict_str, self.get_env_vars_without_pat(), clear=True):
@@ -103,6 +109,7 @@ class ApiFactory(unittest.TestCase):
             self.assertIsInstance(api, InstrumentsApi)
             self.validate_api(api)
 
+    @unittest.skipIf(CredentialsSource.fetch_credentials().__contains__("access_token"), "do not run on PR's")
     def test_none_param_pat_but_good_secrets_envs(self):
 
         with patch.dict(self.os_environ_dict_str, self.get_env_vars_without_pat(), clear=True):
@@ -111,6 +118,7 @@ class ApiFactory(unittest.TestCase):
             self.assertIsInstance(api, InstrumentsApi)
             self.validate_api(api)
 
+    @unittest.skipIf(not CredentialsSource.fetch_credentials().__contains__("access_token"), "do not run if no token present")
     def test_none_secrets_param_but_good_env_pat(self):
 
         with patch.dict(self.os_environ_dict_str, self.get_pat_env_var(), clear=True):

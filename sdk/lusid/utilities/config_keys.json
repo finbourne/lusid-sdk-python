@@ -44,7 +44,7 @@
       "config": "password"
   },
     "access_token": {
-      "env": "FBN_LUSID_ACCESS_TOKEN",
+      "env": "FBN_ACCESS_TOKEN",
       "config": "accessToken"
   }
 }

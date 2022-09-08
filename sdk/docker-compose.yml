@@ -21,14 +21,14 @@ services:
     environment:
       - FBN_CLIENT_ID
       - FBN_CLIENT_SECRET
-      - FBN_LUSID_API_URL
       - FBN_PASSWORD
       - FBN_TOKEN_URL
       - FBN_USERNAME
       - FBN_PROXY_ADDRESS=http://tinyproxy:8888
       - FBN_PROXY_USERNAME=user
       - FBN_PROXY_PASSWORD=password
-      - FBN_LUSID_ACCESS_TOKEN
+      - FBN_LUSID_API_URL=${FBN_BASE_API_URL}/api
+      - FBN_ACCESS_TOKEN
     volumes:
       - .:/usr/src
     depends_on:
