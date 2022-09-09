@@ -9,7 +9,7 @@
       "url": "https://www.finbourne.com",
       "email": "info@finbourne.com"
     },
-    "version": "0.11.4773",
+    "version": "0.11.4774",
     "x-logo": {
       "url": "https://www.lusid.com/app/assets/logo_white.png",
       "backgroundColor": "#415464"
@@ -46259,6 +46259,17 @@
           },
           "version": {
             "$ref": "#/components/schemas/Version"
+          },
+          "metadata": {
+            "type": "object",
+            "additionalProperties": {
+              "type": "array",
+              "items": {
+                "$ref": "#/components/schemas/ResponseMetaData"
+              }
+            },
+            "description": "Contains warnings related to unresolved instruments",
+            "nullable": true
           },
           "links": {
             "type": "array",
