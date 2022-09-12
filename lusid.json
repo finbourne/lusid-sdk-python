@@ -9,7 +9,7 @@
       "url": "https://www.finbourne.com",
       "email": "info@finbourne.com"
     },
-    "version": "0.11.4777",
+    "version": "0.11.4778",
     "x-logo": {
       "url": "https://www.lusid.com/app/assets/logo_white.png",
       "backgroundColor": "#415464"
@@ -17,7 +17,7 @@
   },
   "servers": [
     {
-      "url": "https://fbn-prd.lusid.com/api"
+      "url": "https://www.lusid.com/api"
     }
   ],
   "paths": {
@@ -50164,6 +50164,77 @@
         ],
         "description": "A curve containing discount factors and dates to which they apply"
       },
+      "EconomicDependency": {
+        "required": [
+          "dependencyType"
+        ],
+        "type": "object",
+        "properties": {
+          "dependencyType": {
+            "enum": [
+              "Opaque",
+              "Cash",
+              "Discounting",
+              "EquityCurve",
+              "EquityVol",
+              "Fx",
+              "FxForwards",
+              "FxVol",
+              "IndexProjection",
+              "IrVol",
+              "Quote",
+              "Vendor"
+            ],
+            "type": "string",
+            "description": "The available values are: Opaque, Cash, Discounting, EquityCurve, EquityVol, Fx, FxForwards, FxVol, IndexProjection, IrVol, Quote, Vendor"
+          }
+        },
+        "additionalProperties": false,
+        "description": "Base class for representing economic dependencies.\r\nEconomic dependencies are a way of indicating how one concept depends upon another.\r\nFor example, when pricing an instrument with a particular model,\r\nthat model will declare that it has an EconomicDependency for each bit of market data\r\nthat it needs to complete the calculation.\r\nConcretely, a pricing an FxForward will declare a dependency on the exchange rate between the two currencies\r\nat the forward date.\r\n            \r\nAnother example is when data is included in a data-structure only by reference.\r\nConcretely, an object depending on a FlowConvention that is referenced only semantically via a FlowConventionName\r\nwill declare a FlowConventionDependency\r\nso that the full data-structure of the referenced FlowConvention can be retrieved.\r\n            \r\nFor deserialization purposes,\r\nthis class contains a discriminator EconomicDependencyType to indicate the derived type.",
+        "discriminator": {
+          "propertyName": "economicDependencyType"
+        }
+      },
+      "EconomicDependencyWithComplexMarketData": {
+        "required": [
+          "complexMarketData",
+          "economicDependency"
+        ],
+        "type": "object",
+        "properties": {
+          "economicDependency": {
+            "$ref": "#/components/schemas/EconomicDependency"
+          },
+          "complexMarketData": {
+            "$ref": "#/components/schemas/ComplexMarketData"
+          }
+        },
+        "additionalProperties": false,
+        "description": "Container class pairing economic dependency and complex market data (i.e. discounting curves, etc.)"
+      },
+      "EconomicDependencyWithQuote": {
+        "required": [
+          "economicDependency",
+          "metricValue"
+        ],
+        "type": "object",
+        "properties": {
+          "economicDependency": {
+            "$ref": "#/components/schemas/EconomicDependency"
+          },
+          "metricValue": {
+            "$ref": "#/components/schemas/MetricValue"
+          },
+          "scaleFactor": {
+            "type": "number",
+            "description": "Scale factor for the quote - this can be null, in which case we default to 1.",
+            "format": "double",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false,
+        "description": "Container class pairing economic dependencies and quote data"
+      },
       "EmptyModelOptions": {
         "allOf": [
           {
@@ -53558,6 +53629,9 @@
               "$ref": "#/components/schemas/WeightedInstrument"
             },
             "description": "The set of instruments, weighted by the quantities held that are required.\r\nIt is identified by an identifier tag that can be used to identify it externally.\r\nFor a single, unique trade or transaction this can be thought of as equivalent to the transaction identifier, or\r\na composite of the sub-holding keys for a regular sub-holding. When there are multiple transactions sharing the same underlying instrument\r\nsuch as purchase of shares on multiple dates where tax implications are different this would not be the case."
+          },
+          "marketDataOverrides": {
+            "$ref": "#/components/schemas/MarketDataOverrides"
           }
         },
         "additionalProperties": false,
@@ -54691,6 +54765,29 @@
         },
         "additionalProperties": false,
         "description": "When performing analytics, instruments and models have dependencies on market data.\r\nA market data key rule essentially tells lusid to \"resolve dependencies matching the pattern 'X' using data of the form 'Y'\".\r\nThe parameter 'X' is defined by the key of the key rule, and might specify \"all USD rates curves\" or \"all RIC-based prices\".\r\nThe parameter 'Y' is defined by the remaining fields of the key rule, and allows the user to configure things such as\r\nwhere to look for data, what sort of data should be looked for (e.g. bid/mid/ask), and how old the data is allowed to be."
+      },
+      "MarketDataOverrides": {
+        "type": "object",
+        "properties": {
+          "complexMarketData": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/EconomicDependencyWithComplexMarketData"
+            },
+            "description": "A list of EconomicDependency paired with quote data satisfying that economic dependency",
+            "nullable": true
+          },
+          "quotes": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/EconomicDependencyWithQuote"
+            },
+            "description": "A list of EconomicDependency paired with a ComplexMarketData satisfying that economic dependency",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false,
+        "description": "Class which holds market data overrides to be used in valuation"
       },
       "MarketDataSpecificRule": {
         "required": [
@@ -61606,6 +61703,9 @@
           },
           "valuationSchedule": {
             "$ref": "#/components/schemas/ValuationSchedule"
+          },
+          "marketDataOverrides": {
+            "$ref": "#/components/schemas/MarketDataOverrides"
           }
         },
         "additionalProperties": false,
@@ -62112,7 +62212,7 @@
         "description": "OAuth2 Implicit Grant",
         "flows": {
           "implicit": {
-            "authorizationUrl": "https://lusid.okta.com/oauth2/default/v1/authorize",
+            "authorizationUrl": "https://dummyurl.lusid.com/",
             "scopes": {}
           }
         }

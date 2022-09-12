@@ -15,6 +15,7 @@ Name | Type | Description | Notes
 **equip_with_subtotals** | **bool** | Flag directing the Valuation call to populate the results with subtotals of aggregates. | [optional] 
 **portfolio_entity_ids** | [**list[PortfolioEntityId]**](PortfolioEntityId.md) | The set of portfolio or portfolio group identifier(s) that is to be valued. | 
 **valuation_schedule** | [**ValuationSchedule**](ValuationSchedule.md) |  | 
+**market_data_overrides** | [**MarketDataOverrides**](MarketDataOverrides.md) |  | [optional] 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 
