@@ -24,8 +24,6 @@ Name | Type | Description | Notes
 **otc_confirmation** | [**OtcConfirmation**](OtcConfirmation.md) |  | [optional] 
 **transaction_status** | **str** | The status of the transaction. The available values are: Active, Amended, Cancelled | [optional] 
 **cancel_date_time** | **datetime** | If the transaction has been cancelled, the asAt datetime that the transaction was cancelled. | [optional] 
-**order_id** | [**ResourceId**](ResourceId.md) |  | [optional] 
-**allocation_id** | [**ResourceId**](ResourceId.md) |  | [optional] 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 
