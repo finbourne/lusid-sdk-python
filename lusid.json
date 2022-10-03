@@ -9,7 +9,7 @@
       "url": "https://www.finbourne.com",
       "email": "info@finbourne.com"
     },
-    "version": "0.11.4838",
+    "version": "0.11.4841",
     "x-logo": {
       "url": "https://www.lusid.com/app/assets/logo_white.png",
       "backgroundColor": "#415464"
@@ -17,7 +17,7 @@
   },
   "servers": [
     {
-      "url": "https://fbn-prd.lusid.com/api"
+      "url": "https://www.lusid.com/api"
     }
   ],
   "paths": {
@@ -20741,7 +20741,15 @@
                       },
                       "source": "",
                       "entryDateTime": "2018-03-04T23:50:00.0000000+00:00",
-                      "transactionStatus": "Active"
+                      "transactionStatus": "Active",
+                      "orderId": {
+                        "scope": "someScope",
+                        "code": "ORD001"
+                      },
+                      "allocationId": {
+                        "scope": "someScope",
+                        "code": "ALLOC001"
+                      }
                     }
                   ],
                   "href": "http://example.com",
@@ -20801,7 +20809,15 @@
                       },
                       "source": "",
                       "entryDateTime": "2018-03-04T23:50:00.0000000+00:00",
-                      "transactionStatus": "Active"
+                      "transactionStatus": "Active",
+                      "orderId": {
+                        "scope": "someScope",
+                        "code": "ORD001"
+                      },
+                      "allocationId": {
+                        "scope": "someScope",
+                        "code": "ALLOC001"
+                      }
                     }
                   ],
                   "href": "http://example.com",
@@ -20861,7 +20877,15 @@
                       },
                       "source": "",
                       "entryDateTime": "2018-03-04T23:50:00.0000000+00:00",
-                      "transactionStatus": "Active"
+                      "transactionStatus": "Active",
+                      "orderId": {
+                        "scope": "someScope",
+                        "code": "ORD001"
+                      },
+                      "allocationId": {
+                        "scope": "someScope",
+                        "code": "ALLOC001"
+                      }
                     }
                   ],
                   "href": "http://example.com",
@@ -43887,7 +43911,15 @@
                       },
                       "source": "",
                       "entryDateTime": "2018-03-04T23:50:00.0000000+00:00",
-                      "transactionStatus": "Active"
+                      "transactionStatus": "Active",
+                      "orderId": {
+                        "scope": "someScope",
+                        "code": "ORD001"
+                      },
+                      "allocationId": {
+                        "scope": "someScope",
+                        "code": "ALLOC001"
+                      }
                     }
                   ],
                   "href": "http://example.com",
@@ -43947,7 +43979,15 @@
                       },
                       "source": "",
                       "entryDateTime": "2018-03-04T23:50:00.0000000+00:00",
-                      "transactionStatus": "Active"
+                      "transactionStatus": "Active",
+                      "orderId": {
+                        "scope": "someScope",
+                        "code": "ORD001"
+                      },
+                      "allocationId": {
+                        "scope": "someScope",
+                        "code": "ALLOC001"
+                      }
                     }
                   ],
                   "href": "http://example.com",
@@ -44007,7 +44047,15 @@
                       },
                       "source": "",
                       "entryDateTime": "2018-03-04T23:50:00.0000000+00:00",
-                      "transactionStatus": "Active"
+                      "transactionStatus": "Active",
+                      "orderId": {
+                        "scope": "someScope",
+                        "code": "ORD001"
+                      },
+                      "allocationId": {
+                        "scope": "someScope",
+                        "code": "ALLOC001"
+                      }
                     }
                   ],
                   "href": "http://example.com",
@@ -44137,6 +44185,14 @@
                       "scope": "someScope",
                       "code": "someCode"
                     }
+                  },
+                  "orderId": {
+                    "scope": "someScope",
+                    "code": "ORD001"
+                  },
+                  "allocationId": {
+                    "scope": "someScope",
+                    "code": "ALLOC001"
                   }
                 }
               ]
@@ -44184,6 +44240,14 @@
                       "scope": "someScope",
                       "code": "someCode"
                     }
+                  },
+                  "orderId": {
+                    "scope": "someScope",
+                    "code": "ORD001"
+                  },
+                  "allocationId": {
+                    "scope": "someScope",
+                    "code": "ALLOC001"
                   }
                 }
               ]
@@ -44231,6 +44295,14 @@
                       "scope": "someScope",
                       "code": "someCode"
                     }
+                  },
+                  "orderId": {
+                    "scope": "someScope",
+                    "code": "ORD001"
+                  },
+                  "allocationId": {
+                    "scope": "someScope",
+                    "code": "ALLOC001"
                   }
                 }
               ]
@@ -44278,6 +44350,14 @@
                       "scope": "someScope",
                       "code": "someCode"
                     }
+                  },
+                  "orderId": {
+                    "scope": "someScope",
+                    "code": "ORD001"
+                  },
+                  "allocationId": {
+                    "scope": "someScope",
+                    "code": "ALLOC001"
                   }
                 }
               ]
@@ -48947,7 +49027,7 @@
           },
           "amortisationMethod": {
             "type": "string",
-            "description": "The amortisation method the portfolio is using in the calculation.",
+            "description": "The amortisation method the portfolio is using in the calculation. This can be 'NoAmortisation', 'StraightLine' or 'EffectiveYield'.",
             "nullable": true
           }
         },
@@ -49393,7 +49473,7 @@
           },
           "amortisationMethod": {
             "type": "string",
-            "description": "The amortisation method the portfolio is using in the calculation.",
+            "description": "The amortisation method the portfolio is using in the calculation. This can be 'NoAmortisation', 'StraightLine' or 'EffectiveYield'.",
             "nullable": true
           }
         },
@@ -56315,7 +56395,7 @@
           },
           "amortisationMethod": {
             "type": "string",
-            "description": "The amortisation method the portfolio is using in the calculation.",
+            "description": "The amortisation method the portfolio is using in the calculation. This can be 'NoAmortisation', 'StraightLine' or 'EffectiveYield'.",
             "nullable": true
           },
           "links": {
@@ -56521,7 +56601,7 @@
           },
           "amortisationMethod": {
             "type": "string",
-            "description": "The amortisation method the portfolio is using in the calculation.",
+            "description": "The amortisation method the portfolio is using in the calculation. This can be 'NoAmortisation', 'StraightLine' or 'EffectiveYield'.",
             "nullable": true
           },
           "links": {
@@ -60301,6 +60381,12 @@
             "description": "If the transaction has been cancelled, the asAt datetime that the transaction was cancelled.",
             "format": "date-time",
             "nullable": true
+          },
+          "orderId": {
+            "$ref": "#/components/schemas/ResourceId"
+          },
+          "allocationId": {
+            "$ref": "#/components/schemas/ResourceId"
           }
         },
         "additionalProperties": false,
@@ -60733,6 +60819,12 @@
           },
           "otcConfirmation": {
             "$ref": "#/components/schemas/OtcConfirmation"
+          },
+          "orderId": {
+            "$ref": "#/components/schemas/ResourceId"
+          },
+          "allocationId": {
+            "$ref": "#/components/schemas/ResourceId"
           }
         },
         "additionalProperties": false
@@ -62227,7 +62319,7 @@
         "description": "OAuth2 Implicit Grant",
         "flows": {
           "implicit": {
-            "authorizationUrl": "https://lusid.okta.com/oauth2/default/v1/authorize",
+            "authorizationUrl": "https://dummyurl.lusid.com/",
             "scopes": {}
           }
         }
