@@ -13,6 +13,7 @@ Name | Type | Description | Notes
 **sort** | [**list[OrderBySpec]**](OrderBySpec.md) | A (possibly empty/null) set of specifications for how to order the results. | [optional] 
 **report_currency** | **str** | Three letter ISO currency string indicating what currency to report in for ReportCurrency denominated queries.  If not present, then the currency of the relevant portfolio will be used in its place. | [optional] 
 **equip_with_subtotals** | **bool** | Flag directing the Valuation call to populate the results with subtotals of aggregates. | [optional] 
+**return_result_as_expanded_types** | **bool** | For complex results or financially meaningful results,  there is a need for a result to contain metadata about its currency and/or units  or to have a more complicated 1D or 2D structure | [optional] 
 **portfolio_entity_ids** | [**list[PortfolioEntityId]**](PortfolioEntityId.md) | The set of portfolio or portfolio group identifier(s) that is to be valued. | 
 **valuation_schedule** | [**ValuationSchedule**](ValuationSchedule.md) |  | 
 **market_data_overrides** | [**MarketDataOverrides**](MarketDataOverrides.md) |  | [optional] 
