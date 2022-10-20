@@ -9,7 +9,7 @@
       "url": "https://www.finbourne.com",
       "email": "info@finbourne.com"
     },
-    "version": "0.11.4881",
+    "version": "0.11.4882",
     "x-logo": {
       "url": "https://www.lusid.com/app/assets/logo_white.png",
       "backgroundColor": "#415464"
@@ -54841,7 +54841,7 @@
             "maxLength": 16,
             "minLength": 0,
             "type": "string",
-            "description": "Shorthand for the time interval used to select market data. This must be a dot-separated string\r\n            nominating a start and end date, for example '5D.0D' to look back 5 days from today (0 days ago). The syntax\r\n            is <i>int</i><i>char</i>.<i>int</i><i>char</i>, where <i>char</i> is one of D(ay), W(eek), M(onth) or Y(ear).",
+            "description": "Shorthand for the time interval used to select market data. This must be a dot-separated string\r\n            nominating a start and end date, for example '5D.0D' to look back 5 days from today (0 days ago). The syntax\r\n            is <i>int</i><i>char</i>.<i>int</i><i>char</i>, where <i>char</i> is one of\r\n            D(ay), Bd(business day), W(eek), M(onth) or Y(ear).\r\n            Business days are calculated using the calendars specified on the Valuation Request.\r\n            If no calendar is provided in the request, then it will default to only skipping weekends.\r\n            For example, if the valuation date is a Monday, then a quote interval of \"1Bd\" would behave as \"3D\",\r\n            looking back to the Friday. Data with effectiveAt on the weekend will still be found in that window.",
             "nullable": true
           },
           "asAt": {
