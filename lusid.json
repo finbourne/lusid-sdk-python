@@ -9,7 +9,7 @@
       "url": "https://www.finbourne.com",
       "email": "info@finbourne.com"
     },
-    "version": "0.11.4881",
+    "version": "0.11.4883",
     "x-logo": {
       "url": "https://www.lusid.com/app/assets/logo_white.png",
       "backgroundColor": "#415464"
@@ -17,7 +17,7 @@
   },
   "servers": [
     {
-      "url": "https://fbn-prd.lusid.com/api"
+      "url": "https://www.lusid.com/api"
     }
   ],
   "paths": {
@@ -46339,6 +46339,52 @@
         "additionalProperties": false,
         "description": "The date that is the requested number of business days after the given start date"
       },
+      "AddressDefinition": {
+        "type": "object",
+        "properties": {
+          "displayName": {
+            "type": "string",
+            "description": "The display name of the address key.",
+            "nullable": true
+          },
+          "type": {
+            "enum": [
+              "String",
+              "Int",
+              "Decimal",
+              "DateTime",
+              "Boolean",
+              "ResultValue",
+              "Result0D",
+              "Json"
+            ],
+            "type": "string",
+            "description": "The available values are: String, Int, Decimal, DateTime, Boolean, ResultValue, Result0D, Json"
+          },
+          "description": {
+            "type": "string",
+            "description": "The description for this result.",
+            "nullable": true
+          },
+          "lifeCycleStatus": {
+            "type": "string",
+            "description": "What is the status of the address path. If it is not Production then it might be removed at some point in the future.\r\nSee the removal date for the likely timing of that if any.",
+            "nullable": true
+          },
+          "removalDate": {
+            "type": "string",
+            "description": "If the life-cycle status of the address is Deprecated then this is the date at which support of the address will be suspended.\r\nAfter that date it will be removed at the earliest possible point subject to any specific contractual support and development constraints.",
+            "format": "date-time",
+            "nullable": true
+          },
+          "documentationLink": {
+            "type": "string",
+            "description": "Contains a link to the documentation for this AddressDefinition in KnowledgeBase.",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
       "AdjustHolding": {
         "required": [
           "version"
@@ -54841,7 +54887,7 @@
             "maxLength": 16,
             "minLength": 0,
             "type": "string",
-            "description": "Shorthand for the time interval used to select market data. This must be a dot-separated string\r\n            nominating a start and end date, for example '5D.0D' to look back 5 days from today (0 days ago). The syntax\r\n            is <i>int</i><i>char</i>.<i>int</i><i>char</i>, where <i>char</i> is one of D(ay), W(eek), M(onth) or Y(ear).",
+            "description": "Shorthand for the time interval used to select market data. This must be a dot-separated string\r\n            nominating a start and end date, for example '5D.0D' to look back 5 days from today (0 days ago). The syntax\r\n            is <i>int</i><i>char</i>.<i>int</i><i>char</i>, where <i>char</i> is one of\r\n            D(ay), Bd(business day), W(eek), M(onth) or Y(ear).\r\n            Business days are calculated using the calendars specified on the Valuation Request.\r\n            If no calendar is provided in the request, then it will default to only skipping weekends.\r\n            For example, if the valuation date is a Monday, then a quote interval of \"1Bd\" would behave as \"3D\",\r\n            looking back to the Friday. Data with effectiveAt on the weekend will still be found in that window.",
             "nullable": true
           },
           "asAt": {
@@ -59713,6 +59759,7 @@
             "additionalProperties": {
               "$ref": "#/components/schemas/FieldSchema"
             },
+            "description": "This has been deprecated. Please use AddressSchema instead.",
             "nullable": true
           },
           "propertySchema": {
@@ -59720,10 +59767,19 @@
             "additionalProperties": {
               "$ref": "#/components/schemas/FieldSchema"
             },
+            "description": "This has been deprecated. Please use AddressSchema instead.",
+            "nullable": true
+          },
+          "addressSchema": {
+            "type": "object",
+            "additionalProperties": {
+              "$ref": "#/components/schemas/AddressDefinition"
+            },
             "nullable": true
           }
         },
-        "additionalProperties": false
+        "additionalProperties": false,
+        "description": "The shape and type of the returned data. The AddressSchema gives information about the requested keys,\r\nincluding the return type, links to further documentation, lifecycle status and removal date if they are\r\ndeprecated.\r\n            \r\nNote: the NodeValueSchema and PropertySchema fields have been deprecated. Please use the AddressSchema instead."
       },
       "ResultKeyRule": {
         "required": [
@@ -62337,7 +62393,7 @@
         "description": "OAuth2 Implicit Grant",
         "flows": {
           "implicit": {
-            "authorizationUrl": "https://lusid.okta.com/oauth2/default/v1/authorize",
+            "authorizationUrl": "https://dummyurl.lusid.com/",
             "scopes": {}
           }
         }
