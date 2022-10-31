@@ -9,7 +9,7 @@
       "url": "https://www.finbourne.com",
       "email": "info@finbourne.com"
     },
-    "version": "0.11.4903",
+    "version": "0.11.4901",
     "x-logo": {
       "url": "https://www.lusid.com/app/assets/logo_white.png",
       "backgroundColor": "#415464"
@@ -17,7 +17,7 @@
   },
   "servers": [
     {
-      "url": "https://www.lusid.com/api"
+      "url": "https://fbn-prd.lusid.com/api"
     }
   ],
   "paths": {
@@ -597,146 +597,6 @@
           }
         ],
         "x-fbn-apistatus": "Stable"
-      }
-    },
-    "/api/aggregation/supportedanalyticsinternal": {
-      "post": {
-        "tags": [
-          "Aggregation"
-        ],
-        "summary": "[INTERNAL] SupportedAnalyticsInternal: Generates a matrix of analytics features supported by LUSID.",
-        "description": "Breaks down, e.g. by model and instrument type, either feature groups (such as pv, accrued, risk, cashflows) that are supported or the specific address keys that are supported for them.",
-        "operationId": "SupportedAnalyticsInternal",
-        "requestBody": {
-          "content": {
-            "application/json-patch+json": {
-              "schema": {
-                "$ref": "#/components/schemas/SupportedAnalyticsInternalRequest"
-              },
-              "example": {
-                "includeAllAddresses": false,
-                "addresses": [
-                  "Valuation/DirtyPriceKey",
-                  "Valuation/PvKeys",
-                  "Valuation/InstrumentAccrued"
-                ],
-                "groupBy": [
-                  "Valuation/InstrumentType"
-                ],
-                "showTestCounts": true
-              }
-            },
-            "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/SupportedAnalyticsInternalRequest"
-              },
-              "example": {
-                "includeAllAddresses": false,
-                "addresses": [
-                  "Valuation/DirtyPriceKey",
-                  "Valuation/PvKeys",
-                  "Valuation/InstrumentAccrued"
-                ],
-                "groupBy": [
-                  "Valuation/InstrumentType"
-                ],
-                "showTestCounts": true
-              }
-            },
-            "text/json": {
-              "schema": {
-                "$ref": "#/components/schemas/SupportedAnalyticsInternalRequest"
-              },
-              "example": {
-                "includeAllAddresses": false,
-                "addresses": [
-                  "Valuation/DirtyPriceKey",
-                  "Valuation/PvKeys",
-                  "Valuation/InstrumentAccrued"
-                ],
-                "groupBy": [
-                  "Valuation/InstrumentType"
-                ],
-                "showTestCounts": true
-              }
-            },
-            "application/*+json": {
-              "schema": {
-                "$ref": "#/components/schemas/SupportedAnalyticsInternalRequest"
-              },
-              "example": {
-                "includeAllAddresses": false,
-                "addresses": [
-                  "Valuation/DirtyPriceKey",
-                  "Valuation/PvKeys",
-                  "Valuation/InstrumentAccrued"
-                ],
-                "groupBy": [
-                  "Valuation/InstrumentType"
-                ],
-                "showTestCounts": true
-              }
-            }
-          }
-        },
-        "responses": {
-          "200": {
-            "description": "Success",
-            "content": {
-              "text/plain": {
-                "schema": {
-                  "$ref": "#/components/schemas/Aggregation"
-                }
-              },
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Aggregation"
-                }
-              },
-              "text/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Aggregation"
-                }
-              }
-            }
-          },
-          "400": {
-            "description": "The details of the input related failure",
-            "content": {
-              "text/plain": {
-                "schema": {
-                  "$ref": "#/components/schemas/LusidValidationProblemDetails"
-                }
-              },
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/LusidValidationProblemDetails"
-                }
-              },
-              "text/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/LusidValidationProblemDetails"
-                }
-              }
-            }
-          },
-          "default": {
-            "description": "Error response",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/LusidProblemDetails"
-                }
-              }
-            }
-          }
-        },
-        "security": [
-          {
-            "oauth2": []
-          }
-        ],
-        "x-fbn-apistatus": "Internal"
       }
     },
     "/api/allocations": {
@@ -26147,7 +26007,7 @@
             "schema": {
               "maxLength": 64,
               "minLength": 1,
-              "pattern": "^[a-zA-Z0-9@+\\-_&]+$",
+              "pattern": "^[a-zA-Z0-9\\-_]+$",
               "type": "string",
               "description": "The scope of the property being updated.",
               "nullable": true
@@ -26161,7 +26021,7 @@
             "schema": {
               "maxLength": 64,
               "minLength": 1,
-              "pattern": "^[a-zA-Z0-9@+\\-_&]+$",
+              "pattern": "^[a-zA-Z0-9\\-_]+$",
               "type": "string",
               "description": "The code of the property being updated. Together with the domain and scope this uniquely\r\n            identifies the property.",
               "nullable": true
@@ -26327,7 +26187,7 @@
             "schema": {
               "maxLength": 64,
               "minLength": 1,
-              "pattern": "^[a-zA-Z0-9@+\\-_&]+$",
+              "pattern": "^[a-zA-Z0-9\\-_]+$",
               "type": "string",
               "description": "The scope of the property to be deleted.",
               "nullable": true
@@ -26341,7 +26201,7 @@
             "schema": {
               "maxLength": 64,
               "minLength": 1,
-              "pattern": "^[a-zA-Z0-9@+\\-_&]+$",
+              "pattern": "^[a-zA-Z0-9\\-_]+$",
               "type": "string",
               "description": "The code of the property to be deleted. Together with the domain and scope this uniquely\r\n            identifies the property.",
               "nullable": true
@@ -26465,7 +26325,7 @@
             "schema": {
               "maxLength": 64,
               "minLength": 1,
-              "pattern": "^[a-zA-Z0-9@+\\-_&]+$",
+              "pattern": "^[a-zA-Z0-9\\-_]+$",
               "type": "string",
               "description": "The scope of the specified property.",
               "nullable": true
@@ -26479,7 +26339,7 @@
             "schema": {
               "maxLength": 64,
               "minLength": 1,
-              "pattern": "^[a-zA-Z0-9@+\\-_&]+$",
+              "pattern": "^[a-zA-Z0-9\\-_]+$",
               "type": "string",
               "description": "The code of the specified property. Together with the domain and scope this uniquely\r\n            identifies the property.",
               "nullable": true
@@ -46773,54 +46633,6 @@
         },
         "additionalProperties": false
       },
-      "Aggregation": {
-        "type": "object",
-        "properties": {
-          "aggregationEffectiveAt": {
-            "type": "string",
-            "format": "date-time"
-          },
-          "aggregationAsAt": {
-            "type": "string",
-            "format": "date-time"
-          },
-          "href": {
-            "type": "string",
-            "format": "uri",
-            "nullable": true
-          },
-          "data": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/IDataRecord"
-            },
-            "nullable": true
-          },
-          "aggregationCurrency": {
-            "type": "string",
-            "nullable": true
-          },
-          "dataSchema": {
-            "$ref": "#/components/schemas/ResultDataSchema"
-          },
-          "aggregationFailures": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/AggregationMeasureFailureDetail"
-            },
-            "nullable": true
-          },
-          "links": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/Link"
-            },
-            "description": "Collection of links.",
-            "nullable": true
-          }
-        },
-        "additionalProperties": false
-      },
       "AggregationContext": {
         "type": "object",
         "properties": {
@@ -51277,7 +51089,7 @@
           },
           "exchangeCode": {
             "type": "string",
-            "description": "Exchange code for contract. This can be any string to uniquely identify the exchange (e.g. Exchange Name, MIC, BBG code)."
+            "description": "Exchange code for contract\r\n\r\nSupported string (enumeration) values are: [ASX, CBOT, CBF, CME, CMX, EOP, HKG, KFE, MFM, OSE, SGX, NYBOT, KCBT, MGE, MATIF, SFE, NYFE, NYM, LIFFE, EUREX, ICE, MSE, NASDAQ, EEX, LME, MIL, MEXDER]."
           },
           "exerciseDate": {
             "type": "string",
@@ -52377,7 +52189,7 @@
           },
           "exchangeCode": {
             "type": "string",
-            "description": "Exchange code for contract. This can be any string to uniquely identify the exchange (e.g. Exchange Name, MIC, BBG code)."
+            "description": "Exchange code for contract\r\n\r\nSupported string (enumeration) values are: [ASX, CBOT, CBF, CME, CMX, EOP, HKG, KFE, MFM, OSE, SGX, NYBOT, KCBT, MGE, MATIF, SFE, NYFE, NYM, LIFFE, EUREX, ICE, MSE, NASDAQ, EEX, LME, MIL, MEXDER]."
           },
           "exchangeName": {
             "type": "string",
@@ -53558,17 +53370,6 @@
         },
         "additionalProperties": false,
         "description": "A record of holdings adjustments made on the transaction portfolio."
-      },
-      "IDataRecord": {
-        "type": "object",
-        "properties": {
-          "fieldCount": {
-            "type": "integer",
-            "format": "int32",
-            "readOnly": true
-          }
-        },
-        "additionalProperties": false
       },
       "IdentifierPartSchema": {
         "required": [
@@ -60494,42 +60295,6 @@
         },
         "additionalProperties": false
       },
-      "SupportedAnalyticsInternalRequest": {
-        "required": [
-          "groupBy",
-          "includeAllAddresses"
-        ],
-        "type": "object",
-        "properties": {
-          "includeAllAddresses": {
-            "type": "boolean",
-            "description": "If true, then we show every possible address key, otherwise we show the address keys specified in addresses array."
-          },
-          "addresses": {
-            "type": "array",
-            "items": {
-              "type": "string",
-              "description": "The key that uniquely identifies a queryable address in Lusid."
-            },
-            "description": "Address keys specified here will be included in the response to the call, which will include details on whether those keys are supported.",
-            "nullable": true
-          },
-          "groupBy": {
-            "type": "array",
-            "items": {
-              "type": "string",
-              "description": "The key that uniquely identifies a queryable address in Lusid."
-            },
-            "description": "The address keys to group by."
-          },
-          "showTestCounts": {
-            "type": "boolean",
-            "description": "If true, returns an integer matrix showing test counts for each address.\r\nIf false, masks to a boolean matrix representing whether an address is supported or unsupported."
-          }
-        },
-        "additionalProperties": false,
-        "description": "The request body for the SupportedAnalyticsInternal endpoint"
-      },
       "TargetTaxLot": {
         "required": [
           "units"
@@ -62783,7 +62548,7 @@
         "description": "OAuth2 Implicit Grant",
         "flows": {
           "implicit": {
-            "authorizationUrl": "https://dummyurl.lusid.com/",
+            "authorizationUrl": "https://lusid.okta.com/oauth2/default/v1/authorize",
             "scopes": {}
           }
         }

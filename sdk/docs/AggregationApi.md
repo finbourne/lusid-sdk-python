@@ -1,12 +1,11 @@
 # lusid.AggregationApi
 
-All URIs are relative to *https://www.lusid.com/api*
+All URIs are relative to *https://fbn-prd.lusid.com/api*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
 [**get_valuation**](AggregationApi.md#get_valuation) | **POST** /api/aggregation/$valuation | GetValuation: Perform valuation for a list of portfolios and/or portfolio groups
 [**get_valuation_of_weighted_instruments**](AggregationApi.md#get_valuation_of_weighted_instruments) | **POST** /api/aggregation/$valuationinlined | GetValuationOfWeightedInstruments: Perform valuation for an inlined portfolio
-[**supported_analytics_internal**](AggregationApi.md#supported_analytics_internal) | **POST** /api/aggregation/supportedanalyticsinternal | [INTERNAL] SupportedAnalyticsInternal: Generates a matrix of analytics features supported by LUSID.
 
 
 # **get_valuation**
@@ -25,10 +24,10 @@ import time
 import lusid
 from lusid.rest import ApiException
 from pprint import pprint
-# Defining the host is optional and defaults to https://www.lusid.com/api
+# Defining the host is optional and defaults to https://fbn-prd.lusid.com/api
 # See configuration.py for a list of all supported configuration parameters.
 configuration = lusid.Configuration(
-    host = "https://www.lusid.com/api"
+    host = "https://fbn-prd.lusid.com/api"
 )
 
 # The client must configure the authentication and authorization parameters
@@ -38,7 +37,7 @@ configuration = lusid.Configuration(
 
 # Configure OAuth2 access token for authorization: oauth2
 configuration = lusid.Configuration(
-    host = "https://www.lusid.com/api"
+    host = "https://fbn-prd.lusid.com/api"
 )
 configuration.access_token = 'YOUR_ACCESS_TOKEN'
 
@@ -100,10 +99,10 @@ import time
 import lusid
 from lusid.rest import ApiException
 from pprint import pprint
-# Defining the host is optional and defaults to https://www.lusid.com/api
+# Defining the host is optional and defaults to https://fbn-prd.lusid.com/api
 # See configuration.py for a list of all supported configuration parameters.
 configuration = lusid.Configuration(
-    host = "https://www.lusid.com/api"
+    host = "https://fbn-prd.lusid.com/api"
 )
 
 # The client must configure the authentication and authorization parameters
@@ -113,7 +112,7 @@ configuration = lusid.Configuration(
 
 # Configure OAuth2 access token for authorization: oauth2
 configuration = lusid.Configuration(
-    host = "https://www.lusid.com/api"
+    host = "https://fbn-prd.lusid.com/api"
 )
 configuration.access_token = 'YOUR_ACCESS_TOKEN'
 
@@ -140,81 +139,6 @@ Name | Type | Description  | Notes
 ### Return type
 
 [**ListAggregationResponse**](ListAggregationResponse.md)
-
-### Authorization
-
-[oauth2](../README.md#oauth2)
-
-### HTTP request headers
-
- - **Content-Type**: application/json-patch+json, application/json, text/json, application/*+json
- - **Accept**: text/plain, application/json, text/json
-
-### HTTP response details
-| Status code | Description | Response headers |
-|-------------|-------------|------------------|
-**200** | Success |  -  |
-**400** | The details of the input related failure |  -  |
-**0** | Error response |  -  |
-
-[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
-
-# **supported_analytics_internal**
-> Aggregation supported_analytics_internal(supported_analytics_internal_request=supported_analytics_internal_request)
-
-[INTERNAL] SupportedAnalyticsInternal: Generates a matrix of analytics features supported by LUSID.
-
-Breaks down, e.g. by model and instrument type, either feature groups (such as pv, accrued, risk, cashflows) that are supported or the specific address keys that are supported for them.
-
-### Example
-
-* OAuth Authentication (oauth2):
-```python
-from __future__ import print_function
-import time
-import lusid
-from lusid.rest import ApiException
-from pprint import pprint
-# Defining the host is optional and defaults to https://www.lusid.com/api
-# See configuration.py for a list of all supported configuration parameters.
-configuration = lusid.Configuration(
-    host = "https://www.lusid.com/api"
-)
-
-# The client must configure the authentication and authorization parameters
-# in accordance with the API server security policy.
-# Examples for each auth method are provided below, use the example that
-# satisfies your auth use case.
-
-# Configure OAuth2 access token for authorization: oauth2
-configuration = lusid.Configuration(
-    host = "https://www.lusid.com/api"
-)
-configuration.access_token = 'YOUR_ACCESS_TOKEN'
-
-# Enter a context with an instance of the API client
-with lusid.ApiClient(configuration) as api_client:
-    # Create an instance of the API class
-    api_instance = lusid.AggregationApi(api_client)
-    supported_analytics_internal_request = {"includeAllAddresses":false,"addresses":["Valuation/DirtyPriceKey","Valuation/PvKeys","Valuation/InstrumentAccrued"],"groupBy":["Valuation/InstrumentType"],"showTestCounts":true} # SupportedAnalyticsInternalRequest |  (optional)
-
-    try:
-        # [INTERNAL] SupportedAnalyticsInternal: Generates a matrix of analytics features supported by LUSID.
-        api_response = api_instance.supported_analytics_internal(supported_analytics_internal_request=supported_analytics_internal_request)
-        pprint(api_response)
-    except ApiException as e:
-        print("Exception when calling AggregationApi->supported_analytics_internal: %s\n" % e)
-```
-
-### Parameters
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
- **supported_analytics_internal_request** | [**SupportedAnalyticsInternalRequest**](SupportedAnalyticsInternalRequest.md)|  | [optional] 
-
-### Return type
-
-[**Aggregation**](Aggregation.md)
 
 ### Authorization
 
