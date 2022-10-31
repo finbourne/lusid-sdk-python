@@ -9,7 +9,7 @@
       "url": "https://www.finbourne.com",
       "email": "info@finbourne.com"
     },
-    "version": "0.11.4901",
+    "version": "0.11.4902",
     "x-logo": {
       "url": "https://www.lusid.com/app/assets/logo_white.png",
       "backgroundColor": "#415464"
@@ -26007,7 +26007,7 @@
             "schema": {
               "maxLength": 64,
               "minLength": 1,
-              "pattern": "^[a-zA-Z0-9\\-_]+$",
+              "pattern": "^[a-zA-Z0-9@+\\-_&]+$",
               "type": "string",
               "description": "The scope of the property being updated.",
               "nullable": true
@@ -26021,7 +26021,7 @@
             "schema": {
               "maxLength": 64,
               "minLength": 1,
-              "pattern": "^[a-zA-Z0-9\\-_]+$",
+              "pattern": "^[a-zA-Z0-9@+\\-_&]+$",
               "type": "string",
               "description": "The code of the property being updated. Together with the domain and scope this uniquely\r\n            identifies the property.",
               "nullable": true
@@ -26187,7 +26187,7 @@
             "schema": {
               "maxLength": 64,
               "minLength": 1,
-              "pattern": "^[a-zA-Z0-9\\-_]+$",
+              "pattern": "^[a-zA-Z0-9@+\\-_&]+$",
               "type": "string",
               "description": "The scope of the property to be deleted.",
               "nullable": true
@@ -26201,7 +26201,7 @@
             "schema": {
               "maxLength": 64,
               "minLength": 1,
-              "pattern": "^[a-zA-Z0-9\\-_]+$",
+              "pattern": "^[a-zA-Z0-9@+\\-_&]+$",
               "type": "string",
               "description": "The code of the property to be deleted. Together with the domain and scope this uniquely\r\n            identifies the property.",
               "nullable": true
@@ -26325,7 +26325,7 @@
             "schema": {
               "maxLength": 64,
               "minLength": 1,
-              "pattern": "^[a-zA-Z0-9\\-_]+$",
+              "pattern": "^[a-zA-Z0-9@+\\-_&]+$",
               "type": "string",
               "description": "The scope of the specified property.",
               "nullable": true
@@ -26339,7 +26339,7 @@
             "schema": {
               "maxLength": 64,
               "minLength": 1,
-              "pattern": "^[a-zA-Z0-9\\-_]+$",
+              "pattern": "^[a-zA-Z0-9@+\\-_&]+$",
               "type": "string",
               "description": "The code of the specified property. Together with the domain and scope this uniquely\r\n            identifies the property.",
               "nullable": true
@@ -51089,7 +51089,7 @@
           },
           "exchangeCode": {
             "type": "string",
-            "description": "Exchange code for contract\r\n\r\nSupported string (enumeration) values are: [ASX, CBOT, CBF, CME, CMX, EOP, HKG, KFE, MFM, OSE, SGX, NYBOT, KCBT, MGE, MATIF, SFE, NYFE, NYM, LIFFE, EUREX, ICE, MSE, NASDAQ, EEX, LME, MIL, MEXDER]."
+            "description": "Exchange code for contract. This can be any string to uniquely identify the exchange (e.g. Exchange Name, MIC, BBG code)."
           },
           "exerciseDate": {
             "type": "string",
@@ -52189,7 +52189,7 @@
           },
           "exchangeCode": {
             "type": "string",
-            "description": "Exchange code for contract\r\n\r\nSupported string (enumeration) values are: [ASX, CBOT, CBF, CME, CMX, EOP, HKG, KFE, MFM, OSE, SGX, NYBOT, KCBT, MGE, MATIF, SFE, NYFE, NYM, LIFFE, EUREX, ICE, MSE, NASDAQ, EEX, LME, MIL, MEXDER]."
+            "description": "Exchange code for contract. This can be any string to uniquely identify the exchange (e.g. Exchange Name, MIC, BBG code)."
           },
           "exchangeName": {
             "type": "string",
