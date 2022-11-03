@@ -9,7 +9,7 @@
       "url": "https://www.finbourne.com",
       "email": "info@finbourne.com"
     },
-    "version": "0.11.4926",
+    "version": "0.11.4927",
     "x-logo": {
       "url": "https://www.lusid.com/app/assets/logo_white.png",
       "backgroundColor": "#415464"
@@ -17,7 +17,7 @@
   },
   "servers": [
     {
-      "url": "https://fbn-prd.lusid.com/api"
+      "url": "https://www.lusid.com/api"
     }
   ],
   "paths": {
@@ -24972,7 +24972,8 @@
                 "compositeMethod": "Asset",
                 "period": "Daily",
                 "outputFrequency": "Daily",
-                "alternativeInceptionDate": "2020-01-01"
+                "alternativeInceptionDate": "2020-01-01",
+                "holidayCalendars": []
               }
             },
             "application/json": {
@@ -25003,7 +25004,8 @@
                 "compositeMethod": "Asset",
                 "period": "Daily",
                 "outputFrequency": "Daily",
-                "alternativeInceptionDate": "2020-01-01"
+                "alternativeInceptionDate": "2020-01-01",
+                "holidayCalendars": []
               }
             },
             "text/json": {
@@ -25034,7 +25036,8 @@
                 "compositeMethod": "Asset",
                 "period": "Daily",
                 "outputFrequency": "Daily",
-                "alternativeInceptionDate": "2020-01-01"
+                "alternativeInceptionDate": "2020-01-01",
+                "holidayCalendars": []
               }
             },
             "application/*+json": {
@@ -25065,7 +25068,8 @@
                 "compositeMethod": "Asset",
                 "period": "Daily",
                 "outputFrequency": "Daily",
-                "alternativeInceptionDate": "2020-01-01"
+                "alternativeInceptionDate": "2020-01-01",
+                "holidayCalendars": []
               }
             }
           },
@@ -46706,6 +46710,14 @@
             "type": "string",
             "description": "Optional - either a date, or the key for a portfolio property containing a date. If provided, the given date will override the inception date for this request.",
             "nullable": true
+          },
+          "holidayCalendars": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "description": "The holiday calendar(s) that should be used in determining the date schedule. Holiday calendar(s) are supplied by their codes, for example, 'CoppClarke'. Note that when the calendars are not available (e.g. when the user has insufficient permissions), a recipe setting will be used to determine whether the whole batch should then fail or whether the calendar not being available should simply be ignored.",
+            "nullable": true
           }
         },
         "additionalProperties": false,
@@ -62783,7 +62795,7 @@
         "description": "OAuth2 Implicit Grant",
         "flows": {
           "implicit": {
-            "authorizationUrl": "https://lusid.okta.com/oauth2/default/v1/authorize",
+            "authorizationUrl": "https://dummyurl.lusid.com/",
             "scopes": {}
           }
         }
