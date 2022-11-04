@@ -9,7 +9,7 @@
       "url": "https://www.finbourne.com",
       "email": "info@finbourne.com"
     },
-    "version": "0.11.4927",
+    "version": "0.11.4930",
     "x-logo": {
       "url": "https://www.lusid.com/app/assets/logo_white.png",
       "backgroundColor": "#415464"
@@ -17,7 +17,7 @@
   },
   "servers": [
     {
-      "url": "https://fbn-prd.lusid.com/api"
+      "url": "https://www.lusid.com/api"
     }
   ],
   "paths": {
@@ -10267,6 +10267,7 @@
                       "effectiveFrom": "2016-07-01T00:00:00.0000000+00:00"
                     }
                   },
+                  "relationships": [],
                   "counterpartyRiskInformation": {
                     "countryOfRisk": "UnitedKingdom",
                     "creditRatings": [
@@ -10333,6 +10334,7 @@
                       "effectiveFrom": "2016-07-01T00:00:00.0000000+00:00"
                     }
                   },
+                  "relationships": [],
                   "counterpartyRiskInformation": {
                     "countryOfRisk": "UnitedKingdom",
                     "creditRatings": [
@@ -10399,6 +10401,7 @@
                       "effectiveFrom": "2016-07-01T00:00:00.0000000+00:00"
                     }
                   },
+                  "relationships": [],
                   "counterpartyRiskInformation": {
                     "countryOfRisk": "UnitedKingdom",
                     "creditRatings": [
@@ -10598,6 +10601,7 @@
                           "effectiveFrom": "2016-07-01T00:00:00.0000000+00:00"
                         }
                       },
+                      "relationships": [],
                       "counterpartyRiskInformation": {
                         "countryOfRisk": "UnitedKingdom",
                         "creditRatings": [
@@ -10659,6 +10663,7 @@
                           "effectiveFrom": "2016-04-01T00:00:00.0000000+00:00"
                         }
                       },
+                      "relationships": [],
                       "version": {
                         "effectiveFrom": "2019-01-01T12:00:00.0000000+00:00",
                         "asAtDate": "2019-01-01T12:00:00.0100000+00:00"
@@ -10716,6 +10721,7 @@
                           "effectiveFrom": "2016-07-01T00:00:00.0000000+00:00"
                         }
                       },
+                      "relationships": [],
                       "counterpartyRiskInformation": {
                         "countryOfRisk": "UnitedKingdom",
                         "creditRatings": [
@@ -10777,6 +10783,7 @@
                           "effectiveFrom": "2016-04-01T00:00:00.0000000+00:00"
                         }
                       },
+                      "relationships": [],
                       "version": {
                         "effectiveFrom": "2019-01-01T12:00:00.0000000+00:00",
                         "asAtDate": "2019-01-01T12:00:00.0100000+00:00"
@@ -10834,6 +10841,7 @@
                           "effectiveFrom": "2016-07-01T00:00:00.0000000+00:00"
                         }
                       },
+                      "relationships": [],
                       "counterpartyRiskInformation": {
                         "countryOfRisk": "UnitedKingdom",
                         "creditRatings": [
@@ -10895,6 +10903,7 @@
                           "effectiveFrom": "2016-04-01T00:00:00.0000000+00:00"
                         }
                       },
+                      "relationships": [],
                       "version": {
                         "effectiveFrom": "2019-01-01T12:00:00.0000000+00:00",
                         "asAtDate": "2019-01-01T12:00:00.0100000+00:00"
@@ -11116,6 +11125,7 @@
                           "effectiveFrom": "2016-07-01T00:00:00.0000000+00:00"
                         }
                       },
+                      "relationships": [],
                       "counterpartyRiskInformation": {
                         "countryOfRisk": "UnitedKingdom",
                         "creditRatings": [
@@ -11177,6 +11187,7 @@
                           "effectiveFrom": "2016-04-01T00:00:00.0000000+00:00"
                         }
                       },
+                      "relationships": [],
                       "version": {
                         "effectiveFrom": "2019-01-01T12:00:00.0000000+00:00",
                         "asAtDate": "2019-01-01T12:00:00.0100000+00:00"
@@ -11234,6 +11245,7 @@
                           "effectiveFrom": "2016-07-01T00:00:00.0000000+00:00"
                         }
                       },
+                      "relationships": [],
                       "counterpartyRiskInformation": {
                         "countryOfRisk": "UnitedKingdom",
                         "creditRatings": [
@@ -11295,6 +11307,7 @@
                           "effectiveFrom": "2016-04-01T00:00:00.0000000+00:00"
                         }
                       },
+                      "relationships": [],
                       "version": {
                         "effectiveFrom": "2019-01-01T12:00:00.0000000+00:00",
                         "asAtDate": "2019-01-01T12:00:00.0100000+00:00"
@@ -11352,6 +11365,7 @@
                           "effectiveFrom": "2016-07-01T00:00:00.0000000+00:00"
                         }
                       },
+                      "relationships": [],
                       "counterpartyRiskInformation": {
                         "countryOfRisk": "UnitedKingdom",
                         "creditRatings": [
@@ -11413,6 +11427,7 @@
                           "effectiveFrom": "2016-04-01T00:00:00.0000000+00:00"
                         }
                       },
+                      "relationships": [],
                       "version": {
                         "effectiveFrom": "2019-01-01T12:00:00.0000000+00:00",
                         "asAtDate": "2019-01-01T12:00:00.0100000+00:00"
@@ -11606,6 +11621,7 @@
                       "effectiveFrom": "2016-07-01T00:00:00.0000000+00:00"
                     }
                   },
+                  "relationships": [],
                   "counterpartyRiskInformation": {
                     "countryOfRisk": "UnitedKingdom",
                     "creditRatings": [
@@ -11672,6 +11688,7 @@
                       "effectiveFrom": "2016-07-01T00:00:00.0000000+00:00"
                     }
                   },
+                  "relationships": [],
                   "counterpartyRiskInformation": {
                     "countryOfRisk": "UnitedKingdom",
                     "creditRatings": [
@@ -11738,6 +11755,7 @@
                       "effectiveFrom": "2016-07-01T00:00:00.0000000+00:00"
                     }
                   },
+                  "relationships": [],
                   "counterpartyRiskInformation": {
                     "countryOfRisk": "UnitedKingdom",
                     "creditRatings": [
@@ -12233,6 +12251,7 @@
                       "effectiveFrom": "2016-07-01T00:00:00.0000000+00:00"
                     }
                   },
+                  "relationships": [],
                   "counterpartyRiskInformation": {
                     "countryOfRisk": "UnitedKingdom",
                     "creditRatings": [
@@ -12299,6 +12318,7 @@
                       "effectiveFrom": "2016-07-01T00:00:00.0000000+00:00"
                     }
                   },
+                  "relationships": [],
                   "counterpartyRiskInformation": {
                     "countryOfRisk": "UnitedKingdom",
                     "creditRatings": [
@@ -12365,6 +12385,7 @@
                       "effectiveFrom": "2016-07-01T00:00:00.0000000+00:00"
                     }
                   },
+                  "relationships": [],
                   "counterpartyRiskInformation": {
                     "countryOfRisk": "UnitedKingdom",
                     "creditRatings": [
@@ -13267,6 +13288,7 @@
                       "effectiveFrom": "2016-07-01T00:00:00.0000000+00:00"
                     }
                   },
+                  "relationships": [],
                   "counterpartyRiskInformation": {
                     "countryOfRisk": "UnitedKingdom",
                     "creditRatings": [
@@ -13326,6 +13348,7 @@
                       "effectiveFrom": "2016-07-01T00:00:00.0000000+00:00"
                     }
                   },
+                  "relationships": [],
                   "counterpartyRiskInformation": {
                     "countryOfRisk": "UnitedKingdom",
                     "creditRatings": [
@@ -13385,6 +13408,7 @@
                       "effectiveFrom": "2016-07-01T00:00:00.0000000+00:00"
                     }
                   },
+                  "relationships": [],
                   "counterpartyRiskInformation": {
                     "countryOfRisk": "UnitedKingdom",
                     "creditRatings": [
@@ -54224,6 +54248,14 @@
             "description": "The domestic currency, meaning the currency in which the instrument would typically be expected to pay cashflows, e.g. a share in AAPL being USD.",
             "nullable": true
           },
+          "relationships": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Relationship"
+            },
+            "description": "A set of relationships associated to the instrument.",
+            "nullable": true
+          },
           "links": {
             "type": "array",
             "items": {
@@ -54766,6 +54798,14 @@
               "$ref": "#/components/schemas/Property"
             },
             "description": "A set of properties associated to the Legal Entity.",
+            "nullable": true
+          },
+          "relationships": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Relationship"
+            },
+            "description": "A set of relationships associated to the Legal Entity.",
             "nullable": true
           },
           "counterpartyRiskInformation": {
@@ -56794,6 +56834,14 @@
             "description": "The requested portfolio properties. These will be from the 'Portfolio' domain.",
             "nullable": true
           },
+          "relationships": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Relationship"
+            },
+            "description": "A set of relationships associated to the portfolio.",
+            "nullable": true
+          },
           "instrumentScopes": {
             "type": "array",
             "items": {
@@ -57110,6 +57158,14 @@
               "$ref": "#/components/schemas/ResourceId"
             },
             "description": "The collection of resource identifiers for the portfolio groups contained in the portfolio group as sub groups.",
+            "nullable": true
+          },
+          "relationships": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Relationship"
+            },
+            "description": "A set of relationships associated to the portfolio group.",
             "nullable": true
           },
           "version": {
@@ -62795,7 +62851,7 @@
         "description": "OAuth2 Implicit Grant",
         "flows": {
           "implicit": {
-            "authorizationUrl": "https://lusid.okta.com/oauth2/default/v1/authorize",
+            "authorizationUrl": "https://dummyurl.lusid.com/",
             "scopes": {}
           }
         }

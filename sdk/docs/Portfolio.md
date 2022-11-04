@@ -16,6 +16,7 @@ Name | Type | Description | Notes
 **is_derived** | **bool** | Whether or not this is a derived portfolio. | [optional] 
 **base_currency** | **str** | The base currency of the portfolio. | [optional] 
 **properties** | [**dict(str, ModelProperty)**](ModelProperty.md) | The requested portfolio properties. These will be from the &#39;Portfolio&#39; domain. | [optional] 
+**relationships** | [**list[Relationship]**](Relationship.md) | A set of relationships associated to the portfolio. | [optional] 
 **instrument_scopes** | **list[str]** | The instrument scope resolution strategy of this portfolio. | [optional] 
 **accounting_method** | **str** | . The available values are: Default, AverageCost, FirstInFirstOut, LastInFirstOut, HighestCostFirst, LowestCostFirst | [optional] 
 **amortisation_method** | **str** | The amortisation method the portfolio is using in the calculation. This can be &#39;NoAmortisation&#39;, &#39;StraightLine&#39; or &#39;EffectiveYield&#39;. | [optional] 
