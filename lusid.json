@@ -9,7 +9,7 @@
       "url": "https://www.finbourne.com",
       "email": "info@finbourne.com"
     },
-    "version": "0.11.4948",
+    "version": "0.11.4947",
     "x-logo": {
       "url": "https://www.lusid.com/app/assets/logo_white.png",
       "backgroundColor": "#415464"
@@ -17,7 +17,7 @@
   },
   "servers": [
     {
-      "url": "https://www.lusid.com/api"
+      "url": "https://fbn-prd.lusid.com/api"
     }
   ],
   "paths": {
@@ -16011,16 +16011,14 @@
           {
             "name": "effectiveAt",
             "in": "query",
-            "description": "The effective datetime or cut label at which to list the portfolio groups. Defaults to the current LUSID system datetime if not specified.",
+            "description": "The effective datetime at which to list the portfolio groups. Defaults to the current LUSID system datetime if not specified.",
             "schema": {
-              "maxLength": 256,
-              "minLength": 0,
-              "pattern": "^[a-zA-Z0-9\\-_\\+:\\.]+$",
               "type": "string",
-              "description": "The effective datetime or cut label at which to list the portfolio groups. Defaults to the current LUSID system datetime if not specified.",
-              "format": "dateorcutlabel",
+              "description": "The effective datetime at which to list the portfolio groups. Defaults to the current LUSID system datetime if not specified.",
+              "format": "date-time",
               "nullable": true
-            }
+            },
+            "x-nullable": true
           },
           {
             "name": "asAt",
@@ -16148,16 +16146,14 @@
           {
             "name": "effectiveAt",
             "in": "query",
-            "description": "The effective datetime or cut label at which to update the definition.",
+            "description": "The effective datetime at which to update the definition.",
             "schema": {
-              "maxLength": 256,
-              "minLength": 0,
-              "pattern": "^[a-zA-Z0-9\\-_\\+:\\.]+$",
               "type": "string",
-              "description": "The effective datetime or cut label at which to update the definition.",
-              "format": "dateorcutlabel",
+              "description": "The effective datetime at which to update the definition.",
+              "format": "date-time",
               "nullable": true
-            }
+            },
+            "x-nullable": true
           }
         ],
         "requestBody": {
@@ -16395,16 +16391,14 @@
           {
             "name": "effectiveAt",
             "in": "query",
-            "description": "The effective datetime or cut label at which to retrieve the portfolio group definition. Defaults to the current LUSID system datetime if not specified.",
+            "description": "The effective datetime at which to retrieve the portfolio group definition. Defaults to the current LUSID system datetime if not specified.",
             "schema": {
-              "maxLength": 256,
-              "minLength": 0,
-              "pattern": "^[a-zA-Z0-9\\-_\\+:\\.]+$",
               "type": "string",
-              "description": "The effective datetime or cut label at which to retrieve the portfolio group definition. Defaults to the current LUSID system datetime if not specified.",
-              "format": "dateorcutlabel",
+              "description": "The effective datetime at which to retrieve the portfolio group definition. Defaults to the current LUSID system datetime if not specified.",
+              "format": "date-time",
               "nullable": true
-            }
+            },
+            "x-nullable": true
           },
           {
             "name": "asAt",
@@ -18190,16 +18184,14 @@
           {
             "name": "effectiveAt",
             "in": "query",
-            "description": "The effective datetime or cut label at which to expand the portfolio group. Defaults to the current LUSID system datetime if not specified.",
+            "description": "The effective datetime at which to expand the portfolio group. Defaults to the current LUSID system datetime if not specified.",
             "schema": {
-              "maxLength": 256,
-              "minLength": 0,
-              "pattern": "^[a-zA-Z0-9\\-_\\+:\\.]+$",
               "type": "string",
-              "description": "The effective datetime or cut label at which to expand the portfolio group. Defaults to the current LUSID system datetime if not specified.",
-              "format": "dateorcutlabel",
+              "description": "The effective datetime at which to expand the portfolio group. Defaults to the current LUSID system datetime if not specified.",
+              "format": "date-time",
               "nullable": true
-            }
+            },
+            "x-nullable": true
           },
           {
             "name": "asAt",
@@ -19211,16 +19203,14 @@
           {
             "name": "effectiveAt",
             "in": "query",
-            "description": "The effective datetime or cut label from which the portfolio will be added to the group.",
+            "description": "The effective datetime from which the portfolio will be added to the group.",
             "schema": {
-              "maxLength": 256,
-              "minLength": 0,
-              "pattern": "^[a-zA-Z0-9\\-_\\+:\\.]+$",
               "type": "string",
-              "description": "The effective datetime or cut label from which the portfolio will be added to the group.",
-              "format": "dateorcutlabel",
+              "description": "The effective datetime from which the portfolio will be added to the group.",
+              "format": "date-time",
               "nullable": true
-            }
+            },
+            "x-nullable": true
           }
         ],
         "requestBody": {
@@ -19392,16 +19382,14 @@
           {
             "name": "effectiveAt",
             "in": "query",
-            "description": "The effective datetime or cut label from which the portfolio will be removed from the portfolio group.",
+            "description": "The effective datetime from which the portfolio will be removed from the portfolio group.",
             "schema": {
-              "maxLength": 256,
-              "minLength": 0,
-              "pattern": "^[a-zA-Z0-9\\-_\\+:\\.]+$",
               "type": "string",
-              "description": "The effective datetime or cut label from which the portfolio will be removed from the portfolio group.",
-              "format": "dateorcutlabel",
+              "description": "The effective datetime from which the portfolio will be removed from the portfolio group.",
+              "format": "date-time",
               "nullable": true
-            }
+            },
+            "x-nullable": true
           }
         ],
         "responses": {
@@ -20489,16 +20477,14 @@
           {
             "name": "effectiveAt",
             "in": "query",
-            "description": "The effective datetime or cut label from which the sub group will be added to the group.",
+            "description": "The effective datetime from which the sub group will be added to the group.",
             "schema": {
-              "maxLength": 256,
-              "minLength": 0,
-              "pattern": "^[a-zA-Z0-9\\-_\\+:\\.]+$",
               "type": "string",
-              "description": "The effective datetime or cut label from which the sub group will be added to the group.",
-              "format": "dateorcutlabel",
+              "description": "The effective datetime from which the sub group will be added to the group.",
+              "format": "date-time",
               "nullable": true
-            }
+            },
+            "x-nullable": true
           }
         ],
         "requestBody": {
@@ -20664,16 +20650,14 @@
           {
             "name": "effectiveAt",
             "in": "query",
-            "description": "The effective datetime or cut label from which the sub group will be removed from the portfolio group.",
+            "description": "The effective datetime from which the sub group will be removed from the portfolio group.",
             "schema": {
-              "maxLength": 256,
-              "minLength": 0,
-              "pattern": "^[a-zA-Z0-9\\-_\\+:\\.]+$",
               "type": "string",
-              "description": "The effective datetime or cut label from which the sub group will be removed from the portfolio group.",
-              "format": "dateorcutlabel",
+              "description": "The effective datetime from which the sub group will be removed from the portfolio group.",
+              "format": "date-time",
               "nullable": true
-            }
+            },
+            "x-nullable": true
           }
         ],
         "responses": {
@@ -62867,7 +62851,7 @@
         "description": "OAuth2 Implicit Grant",
         "flows": {
           "implicit": {
-            "authorizationUrl": "https://dummyurl.lusid.com/",
+            "authorizationUrl": "https://lusid.okta.com/oauth2/default/v1/authorize",
             "scopes": {}
           }
         }
