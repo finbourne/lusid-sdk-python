@@ -9,7 +9,7 @@
       "url": "https://www.finbourne.com",
       "email": "info@finbourne.com"
     },
-    "version": "0.11.4956",
+    "version": "0.11.4957",
     "x-logo": {
       "url": "https://www.lusid.com/app/assets/logo_white.png",
       "backgroundColor": "#415464"
@@ -17,7 +17,7 @@
   },
   "servers": [
     {
-      "url": "https://fbn-prd.lusid.com/api"
+      "url": "https://www.lusid.com/api"
     }
   ],
   "paths": {
@@ -22158,6 +22158,519 @@
         "x-fbn-apistatus": "Stable"
       }
     },
+    "/api/portfolios/$reconcileGeneric": {
+      "post": {
+        "tags": [
+          "Reconciliations"
+        ],
+        "summary": "ReconcileGeneric: Reconcile either holdings or valuations performed on one or two sets of holdings using one or two configuration recipes.\r\n            \r\nThe output is configurable for various types of comparisons, to allow tolerances on numerical and date-time data or case-insensitivity on strings,\r\nand elision of resulting differences where they are 'empty' or null or zero.",
+        "description": "Perform evaluation of one or two set of holdings (a portfolio of instruments) using one or two (potentially different) configuration recipes.\r\nProduce a breakdown of the resulting differences in evaluation that can be iterated through.",
+        "operationId": "ReconcileGeneric",
+        "requestBody": {
+          "description": "The specifications of the inputs to the reconciliation",
+          "content": {
+            "application/json-patch+json": {
+              "schema": {
+                "$ref": "#/components/schemas/ReconciliationRequest"
+              },
+              "example": {
+                "left": {
+                  "recipeId": {
+                    "scope": "MySourceScope",
+                    "code": "MySourcePortfolioCode"
+                  },
+                  "asAt": "2018-03-05T00:00:00.0000000+00:00",
+                  "metrics": [
+                    {
+                      "key": "Instrument/default/Name",
+                      "op": "Value"
+                    },
+                    {
+                      "key": "Holding/default/PV",
+                      "op": "Sum"
+                    }
+                  ],
+                  "groupBy": [
+                    "Instrument/default/Name"
+                  ],
+                  "sort": [],
+                  "reportCurrency": "USD",
+                  "equipWithSubtotals": false,
+                  "returnResultAsExpandedTypes": false,
+                  "portfolioEntityIds": [
+                    {
+                      "scope": "PortfolioScope1",
+                      "code": "MyPortfolioAbC",
+                      "portfolioEntityType": "SinglePortfolio"
+                    },
+                    {
+                      "scope": "PortfolioScope2",
+                      "code": "MyPortfolioDeF",
+                      "portfolioEntityType": "SinglePortfolio"
+                    }
+                  ],
+                  "valuationSchedule": {
+                    "effectiveFrom": "2018-03-05T00:00:00.0000000+00:00",
+                    "effectiveAt": "2018-03-05T00:00:00.0000000+00:00",
+                    "tenor": "1D",
+                    "rollConvention": "F",
+                    "holidayCalendars": [],
+                    "valuationDateTimes": []
+                  }
+                },
+                "right": {
+                  "recipeId": {
+                    "scope": "MyTargetScope",
+                    "code": "MyTargetPortfolioCode"
+                  },
+                  "asAt": "2018-03-05T00:00:00.0000000+00:00",
+                  "metrics": [
+                    {
+                      "key": "Instrument/default/Name",
+                      "op": "Value"
+                    },
+                    {
+                      "key": "Holding/default/PV",
+                      "op": "Sum"
+                    }
+                  ],
+                  "groupBy": [
+                    "Instrument/default/Name"
+                  ],
+                  "sort": [],
+                  "reportCurrency": "USD",
+                  "equipWithSubtotals": false,
+                  "returnResultAsExpandedTypes": false,
+                  "portfolioEntityIds": [
+                    {
+                      "scope": "PortfolioScope1",
+                      "code": "MyPortfolioAbC",
+                      "portfolioEntityType": "SinglePortfolio"
+                    },
+                    {
+                      "scope": "PortfolioScope2",
+                      "code": "MyPortfolioDeF",
+                      "portfolioEntityType": "SinglePortfolio"
+                    }
+                  ],
+                  "valuationSchedule": {
+                    "effectiveFrom": "2018-03-05T00:00:00.0000000+00:00",
+                    "effectiveAt": "2018-03-05T00:00:00.0000000+00:00",
+                    "tenor": "1D",
+                    "rollConvention": "F",
+                    "holidayCalendars": [],
+                    "valuationDateTimes": []
+                  }
+                },
+                "leftToRightMapping": [],
+                "comparisonRules": [
+                  {
+                    "comparisonType": "AbsoluteDifference",
+                    "tolerance": 1.2345,
+                    "appliesTo": {
+                      "key": "Holding/default/PV",
+                      "op": "Sum"
+                    },
+                    "ruleType": "ReconcileNumericRule"
+                  }
+                ],
+                "preserveKeys": [
+                  "Instrument/default/Name"
+                ]
+              }
+            },
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ReconciliationRequest"
+              },
+              "example": {
+                "left": {
+                  "recipeId": {
+                    "scope": "MySourceScope",
+                    "code": "MySourcePortfolioCode"
+                  },
+                  "asAt": "2018-03-05T00:00:00.0000000+00:00",
+                  "metrics": [
+                    {
+                      "key": "Instrument/default/Name",
+                      "op": "Value"
+                    },
+                    {
+                      "key": "Holding/default/PV",
+                      "op": "Sum"
+                    }
+                  ],
+                  "groupBy": [
+                    "Instrument/default/Name"
+                  ],
+                  "sort": [],
+                  "reportCurrency": "USD",
+                  "equipWithSubtotals": false,
+                  "returnResultAsExpandedTypes": false,
+                  "portfolioEntityIds": [
+                    {
+                      "scope": "PortfolioScope1",
+                      "code": "MyPortfolioAbC",
+                      "portfolioEntityType": "SinglePortfolio"
+                    },
+                    {
+                      "scope": "PortfolioScope2",
+                      "code": "MyPortfolioDeF",
+                      "portfolioEntityType": "SinglePortfolio"
+                    }
+                  ],
+                  "valuationSchedule": {
+                    "effectiveFrom": "2018-03-05T00:00:00.0000000+00:00",
+                    "effectiveAt": "2018-03-05T00:00:00.0000000+00:00",
+                    "tenor": "1D",
+                    "rollConvention": "F",
+                    "holidayCalendars": [],
+                    "valuationDateTimes": []
+                  }
+                },
+                "right": {
+                  "recipeId": {
+                    "scope": "MyTargetScope",
+                    "code": "MyTargetPortfolioCode"
+                  },
+                  "asAt": "2018-03-05T00:00:00.0000000+00:00",
+                  "metrics": [
+                    {
+                      "key": "Instrument/default/Name",
+                      "op": "Value"
+                    },
+                    {
+                      "key": "Holding/default/PV",
+                      "op": "Sum"
+                    }
+                  ],
+                  "groupBy": [
+                    "Instrument/default/Name"
+                  ],
+                  "sort": [],
+                  "reportCurrency": "USD",
+                  "equipWithSubtotals": false,
+                  "returnResultAsExpandedTypes": false,
+                  "portfolioEntityIds": [
+                    {
+                      "scope": "PortfolioScope1",
+                      "code": "MyPortfolioAbC",
+                      "portfolioEntityType": "SinglePortfolio"
+                    },
+                    {
+                      "scope": "PortfolioScope2",
+                      "code": "MyPortfolioDeF",
+                      "portfolioEntityType": "SinglePortfolio"
+                    }
+                  ],
+                  "valuationSchedule": {
+                    "effectiveFrom": "2018-03-05T00:00:00.0000000+00:00",
+                    "effectiveAt": "2018-03-05T00:00:00.0000000+00:00",
+                    "tenor": "1D",
+                    "rollConvention": "F",
+                    "holidayCalendars": [],
+                    "valuationDateTimes": []
+                  }
+                },
+                "leftToRightMapping": [],
+                "comparisonRules": [
+                  {
+                    "comparisonType": "AbsoluteDifference",
+                    "tolerance": 1.2345,
+                    "appliesTo": {
+                      "key": "Holding/default/PV",
+                      "op": "Sum"
+                    },
+                    "ruleType": "ReconcileNumericRule"
+                  }
+                ],
+                "preserveKeys": [
+                  "Instrument/default/Name"
+                ]
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ReconciliationRequest"
+              },
+              "example": {
+                "left": {
+                  "recipeId": {
+                    "scope": "MySourceScope",
+                    "code": "MySourcePortfolioCode"
+                  },
+                  "asAt": "2018-03-05T00:00:00.0000000+00:00",
+                  "metrics": [
+                    {
+                      "key": "Instrument/default/Name",
+                      "op": "Value"
+                    },
+                    {
+                      "key": "Holding/default/PV",
+                      "op": "Sum"
+                    }
+                  ],
+                  "groupBy": [
+                    "Instrument/default/Name"
+                  ],
+                  "sort": [],
+                  "reportCurrency": "USD",
+                  "equipWithSubtotals": false,
+                  "returnResultAsExpandedTypes": false,
+                  "portfolioEntityIds": [
+                    {
+                      "scope": "PortfolioScope1",
+                      "code": "MyPortfolioAbC",
+                      "portfolioEntityType": "SinglePortfolio"
+                    },
+                    {
+                      "scope": "PortfolioScope2",
+                      "code": "MyPortfolioDeF",
+                      "portfolioEntityType": "SinglePortfolio"
+                    }
+                  ],
+                  "valuationSchedule": {
+                    "effectiveFrom": "2018-03-05T00:00:00.0000000+00:00",
+                    "effectiveAt": "2018-03-05T00:00:00.0000000+00:00",
+                    "tenor": "1D",
+                    "rollConvention": "F",
+                    "holidayCalendars": [],
+                    "valuationDateTimes": []
+                  }
+                },
+                "right": {
+                  "recipeId": {
+                    "scope": "MyTargetScope",
+                    "code": "MyTargetPortfolioCode"
+                  },
+                  "asAt": "2018-03-05T00:00:00.0000000+00:00",
+                  "metrics": [
+                    {
+                      "key": "Instrument/default/Name",
+                      "op": "Value"
+                    },
+                    {
+                      "key": "Holding/default/PV",
+                      "op": "Sum"
+                    }
+                  ],
+                  "groupBy": [
+                    "Instrument/default/Name"
+                  ],
+                  "sort": [],
+                  "reportCurrency": "USD",
+                  "equipWithSubtotals": false,
+                  "returnResultAsExpandedTypes": false,
+                  "portfolioEntityIds": [
+                    {
+                      "scope": "PortfolioScope1",
+                      "code": "MyPortfolioAbC",
+                      "portfolioEntityType": "SinglePortfolio"
+                    },
+                    {
+                      "scope": "PortfolioScope2",
+                      "code": "MyPortfolioDeF",
+                      "portfolioEntityType": "SinglePortfolio"
+                    }
+                  ],
+                  "valuationSchedule": {
+                    "effectiveFrom": "2018-03-05T00:00:00.0000000+00:00",
+                    "effectiveAt": "2018-03-05T00:00:00.0000000+00:00",
+                    "tenor": "1D",
+                    "rollConvention": "F",
+                    "holidayCalendars": [],
+                    "valuationDateTimes": []
+                  }
+                },
+                "leftToRightMapping": [],
+                "comparisonRules": [
+                  {
+                    "comparisonType": "AbsoluteDifference",
+                    "tolerance": 1.2345,
+                    "appliesTo": {
+                      "key": "Holding/default/PV",
+                      "op": "Sum"
+                    },
+                    "ruleType": "ReconcileNumericRule"
+                  }
+                ],
+                "preserveKeys": [
+                  "Instrument/default/Name"
+                ]
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/ReconciliationRequest"
+              },
+              "example": {
+                "left": {
+                  "recipeId": {
+                    "scope": "MySourceScope",
+                    "code": "MySourcePortfolioCode"
+                  },
+                  "asAt": "2018-03-05T00:00:00.0000000+00:00",
+                  "metrics": [
+                    {
+                      "key": "Instrument/default/Name",
+                      "op": "Value"
+                    },
+                    {
+                      "key": "Holding/default/PV",
+                      "op": "Sum"
+                    }
+                  ],
+                  "groupBy": [
+                    "Instrument/default/Name"
+                  ],
+                  "sort": [],
+                  "reportCurrency": "USD",
+                  "equipWithSubtotals": false,
+                  "returnResultAsExpandedTypes": false,
+                  "portfolioEntityIds": [
+                    {
+                      "scope": "PortfolioScope1",
+                      "code": "MyPortfolioAbC",
+                      "portfolioEntityType": "SinglePortfolio"
+                    },
+                    {
+                      "scope": "PortfolioScope2",
+                      "code": "MyPortfolioDeF",
+                      "portfolioEntityType": "SinglePortfolio"
+                    }
+                  ],
+                  "valuationSchedule": {
+                    "effectiveFrom": "2018-03-05T00:00:00.0000000+00:00",
+                    "effectiveAt": "2018-03-05T00:00:00.0000000+00:00",
+                    "tenor": "1D",
+                    "rollConvention": "F",
+                    "holidayCalendars": [],
+                    "valuationDateTimes": []
+                  }
+                },
+                "right": {
+                  "recipeId": {
+                    "scope": "MyTargetScope",
+                    "code": "MyTargetPortfolioCode"
+                  },
+                  "asAt": "2018-03-05T00:00:00.0000000+00:00",
+                  "metrics": [
+                    {
+                      "key": "Instrument/default/Name",
+                      "op": "Value"
+                    },
+                    {
+                      "key": "Holding/default/PV",
+                      "op": "Sum"
+                    }
+                  ],
+                  "groupBy": [
+                    "Instrument/default/Name"
+                  ],
+                  "sort": [],
+                  "reportCurrency": "USD",
+                  "equipWithSubtotals": false,
+                  "returnResultAsExpandedTypes": false,
+                  "portfolioEntityIds": [
+                    {
+                      "scope": "PortfolioScope1",
+                      "code": "MyPortfolioAbC",
+                      "portfolioEntityType": "SinglePortfolio"
+                    },
+                    {
+                      "scope": "PortfolioScope2",
+                      "code": "MyPortfolioDeF",
+                      "portfolioEntityType": "SinglePortfolio"
+                    }
+                  ],
+                  "valuationSchedule": {
+                    "effectiveFrom": "2018-03-05T00:00:00.0000000+00:00",
+                    "effectiveAt": "2018-03-05T00:00:00.0000000+00:00",
+                    "tenor": "1D",
+                    "rollConvention": "F",
+                    "holidayCalendars": [],
+                    "valuationDateTimes": []
+                  }
+                },
+                "leftToRightMapping": [],
+                "comparisonRules": [
+                  {
+                    "comparisonType": "AbsoluteDifference",
+                    "tolerance": 1.2345,
+                    "appliesTo": {
+                      "key": "Holding/default/PV",
+                      "op": "Sum"
+                    },
+                    "ruleType": "ReconcileNumericRule"
+                  }
+                ],
+                "preserveKeys": [
+                  "Instrument/default/Name"
+                ]
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "The requested reconciliation",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ReconciliationResponse"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ReconciliationResponse"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ReconciliationResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "The details of the input related failure",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/LusidValidationProblemDetails"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/LusidValidationProblemDetails"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/LusidValidationProblemDetails"
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "Error response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/LusidProblemDetails"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "oauth2": []
+          }
+        ],
+        "x-fbn-apistatus": "Stable"
+      }
+    },
     "/api/portfolios/$reconcileholdings": {
       "post": {
         "tags": [
@@ -22386,6 +22899,976 @@
           }
         ],
         "x-fbn-apistatus": "EarlyAccess"
+      }
+    },
+    "/api/portfolios/$reconcileInline": {
+      "post": {
+        "tags": [
+          "Reconciliations"
+        ],
+        "summary": "ReconcileInline: Reconcile valuations performed on one or two sets of inline instruments using one or two configuration recipes.",
+        "description": "Perform valuation of one or two set of inline instruments using different one or two configuration recipes. Produce a breakdown of the resulting differences in valuation.",
+        "operationId": "ReconcileInline",
+        "requestBody": {
+          "description": "The specifications of the inputs to the reconciliation",
+          "content": {
+            "application/json-patch+json": {
+              "schema": {
+                "$ref": "#/components/schemas/InlineValuationsReconciliationRequest"
+              },
+              "example": {
+                "left": {
+                  "recipeId": {
+                    "scope": "MyScope",
+                    "code": "default"
+                  },
+                  "asAt": "2018-03-05T00:00:00.0000000+00:00",
+                  "metrics": [
+                    {
+                      "key": "Instrument/default/Name",
+                      "op": "Value"
+                    },
+                    {
+                      "key": "Holding/default/PV",
+                      "op": "Value"
+                    }
+                  ],
+                  "groupBy": [
+                    "Instrument/default/Name"
+                  ],
+                  "reportCurrency": "USD",
+                  "equipWithSubtotals": false,
+                  "returnResultAsExpandedTypes": false,
+                  "valuationSchedule": {
+                    "effectiveFrom": "2018-03-05T00:00:00.0000000+00:00",
+                    "effectiveAt": "2018-03-05T00:00:00.0000000+00:00",
+                    "tenor": "1D",
+                    "rollConvention": "F",
+                    "holidayCalendars": [],
+                    "valuationDateTimes": []
+                  },
+                  "instruments": [
+                    {
+                      "quantity": 10000,
+                      "holdingIdentifier": "fx-fwd-GBPUSD",
+                      "instrument": {
+                        "startDate": "2018-03-01T00:00:00.0000000+00:00",
+                        "maturityDate": "2018-03-30T00:00:00.0000000+00:00",
+                        "domAmount": 100,
+                        "domCcy": "GBP",
+                        "fgnAmount": -150,
+                        "fgnCcy": "USD",
+                        "refSpotRate": 1.5,
+                        "isNdf": false,
+                        "fixingDate": "0001-01-01T00:00:00.0000000+00:00",
+                        "instrumentType": "FxForward"
+                      }
+                    }
+                  ]
+                },
+                "right": {
+                  "recipeId": {
+                    "scope": "MyScope",
+                    "code": "default"
+                  },
+                  "asAt": "2018-03-05T00:00:00.0000000+00:00",
+                  "metrics": [
+                    {
+                      "key": "Instrument/default/Name",
+                      "op": "Value"
+                    },
+                    {
+                      "key": "Holding/default/PV",
+                      "op": "Value"
+                    }
+                  ],
+                  "groupBy": [
+                    "Instrument/default/Name"
+                  ],
+                  "reportCurrency": "USD",
+                  "equipWithSubtotals": false,
+                  "returnResultAsExpandedTypes": false,
+                  "valuationSchedule": {
+                    "effectiveFrom": "2018-03-05T00:00:00.0000000+00:00",
+                    "effectiveAt": "2018-03-05T00:00:00.0000000+00:00",
+                    "tenor": "1D",
+                    "rollConvention": "F",
+                    "holidayCalendars": [],
+                    "valuationDateTimes": []
+                  },
+                  "instruments": [
+                    {
+                      "quantity": 10000,
+                      "holdingIdentifier": "fx-fwd-GBPJPY",
+                      "instrument": {
+                        "startDate": "2018-03-01T00:00:00.0000000+00:00",
+                        "maturityDate": "2018-03-30T00:00:00.0000000+00:00",
+                        "domAmount": 100,
+                        "domCcy": "GBP",
+                        "fgnAmount": -150,
+                        "fgnCcy": "JPY",
+                        "refSpotRate": 132,
+                        "isNdf": false,
+                        "fixingDate": "0001-01-01T00:00:00.0000000+00:00",
+                        "instrumentType": "FxForward"
+                      }
+                    }
+                  ]
+                },
+                "leftToRightMapping": [],
+                "preserveKeys": []
+              }
+            },
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/InlineValuationsReconciliationRequest"
+              },
+              "example": {
+                "left": {
+                  "recipeId": {
+                    "scope": "MyScope",
+                    "code": "default"
+                  },
+                  "asAt": "2018-03-05T00:00:00.0000000+00:00",
+                  "metrics": [
+                    {
+                      "key": "Instrument/default/Name",
+                      "op": "Value"
+                    },
+                    {
+                      "key": "Holding/default/PV",
+                      "op": "Value"
+                    }
+                  ],
+                  "groupBy": [
+                    "Instrument/default/Name"
+                  ],
+                  "reportCurrency": "USD",
+                  "equipWithSubtotals": false,
+                  "returnResultAsExpandedTypes": false,
+                  "valuationSchedule": {
+                    "effectiveFrom": "2018-03-05T00:00:00.0000000+00:00",
+                    "effectiveAt": "2018-03-05T00:00:00.0000000+00:00",
+                    "tenor": "1D",
+                    "rollConvention": "F",
+                    "holidayCalendars": [],
+                    "valuationDateTimes": []
+                  },
+                  "instruments": [
+                    {
+                      "quantity": 10000,
+                      "holdingIdentifier": "fx-fwd-GBPUSD",
+                      "instrument": {
+                        "startDate": "2018-03-01T00:00:00.0000000+00:00",
+                        "maturityDate": "2018-03-30T00:00:00.0000000+00:00",
+                        "domAmount": 100,
+                        "domCcy": "GBP",
+                        "fgnAmount": -150,
+                        "fgnCcy": "USD",
+                        "refSpotRate": 1.5,
+                        "isNdf": false,
+                        "fixingDate": "0001-01-01T00:00:00.0000000+00:00",
+                        "instrumentType": "FxForward"
+                      }
+                    }
+                  ]
+                },
+                "right": {
+                  "recipeId": {
+                    "scope": "MyScope",
+                    "code": "default"
+                  },
+                  "asAt": "2018-03-05T00:00:00.0000000+00:00",
+                  "metrics": [
+                    {
+                      "key": "Instrument/default/Name",
+                      "op": "Value"
+                    },
+                    {
+                      "key": "Holding/default/PV",
+                      "op": "Value"
+                    }
+                  ],
+                  "groupBy": [
+                    "Instrument/default/Name"
+                  ],
+                  "reportCurrency": "USD",
+                  "equipWithSubtotals": false,
+                  "returnResultAsExpandedTypes": false,
+                  "valuationSchedule": {
+                    "effectiveFrom": "2018-03-05T00:00:00.0000000+00:00",
+                    "effectiveAt": "2018-03-05T00:00:00.0000000+00:00",
+                    "tenor": "1D",
+                    "rollConvention": "F",
+                    "holidayCalendars": [],
+                    "valuationDateTimes": []
+                  },
+                  "instruments": [
+                    {
+                      "quantity": 10000,
+                      "holdingIdentifier": "fx-fwd-GBPJPY",
+                      "instrument": {
+                        "startDate": "2018-03-01T00:00:00.0000000+00:00",
+                        "maturityDate": "2018-03-30T00:00:00.0000000+00:00",
+                        "domAmount": 100,
+                        "domCcy": "GBP",
+                        "fgnAmount": -150,
+                        "fgnCcy": "JPY",
+                        "refSpotRate": 132,
+                        "isNdf": false,
+                        "fixingDate": "0001-01-01T00:00:00.0000000+00:00",
+                        "instrumentType": "FxForward"
+                      }
+                    }
+                  ]
+                },
+                "leftToRightMapping": [],
+                "preserveKeys": []
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/InlineValuationsReconciliationRequest"
+              },
+              "example": {
+                "left": {
+                  "recipeId": {
+                    "scope": "MyScope",
+                    "code": "default"
+                  },
+                  "asAt": "2018-03-05T00:00:00.0000000+00:00",
+                  "metrics": [
+                    {
+                      "key": "Instrument/default/Name",
+                      "op": "Value"
+                    },
+                    {
+                      "key": "Holding/default/PV",
+                      "op": "Value"
+                    }
+                  ],
+                  "groupBy": [
+                    "Instrument/default/Name"
+                  ],
+                  "reportCurrency": "USD",
+                  "equipWithSubtotals": false,
+                  "returnResultAsExpandedTypes": false,
+                  "valuationSchedule": {
+                    "effectiveFrom": "2018-03-05T00:00:00.0000000+00:00",
+                    "effectiveAt": "2018-03-05T00:00:00.0000000+00:00",
+                    "tenor": "1D",
+                    "rollConvention": "F",
+                    "holidayCalendars": [],
+                    "valuationDateTimes": []
+                  },
+                  "instruments": [
+                    {
+                      "quantity": 10000,
+                      "holdingIdentifier": "fx-fwd-GBPUSD",
+                      "instrument": {
+                        "startDate": "2018-03-01T00:00:00.0000000+00:00",
+                        "maturityDate": "2018-03-30T00:00:00.0000000+00:00",
+                        "domAmount": 100,
+                        "domCcy": "GBP",
+                        "fgnAmount": -150,
+                        "fgnCcy": "USD",
+                        "refSpotRate": 1.5,
+                        "isNdf": false,
+                        "fixingDate": "0001-01-01T00:00:00.0000000+00:00",
+                        "instrumentType": "FxForward"
+                      }
+                    }
+                  ]
+                },
+                "right": {
+                  "recipeId": {
+                    "scope": "MyScope",
+                    "code": "default"
+                  },
+                  "asAt": "2018-03-05T00:00:00.0000000+00:00",
+                  "metrics": [
+                    {
+                      "key": "Instrument/default/Name",
+                      "op": "Value"
+                    },
+                    {
+                      "key": "Holding/default/PV",
+                      "op": "Value"
+                    }
+                  ],
+                  "groupBy": [
+                    "Instrument/default/Name"
+                  ],
+                  "reportCurrency": "USD",
+                  "equipWithSubtotals": false,
+                  "returnResultAsExpandedTypes": false,
+                  "valuationSchedule": {
+                    "effectiveFrom": "2018-03-05T00:00:00.0000000+00:00",
+                    "effectiveAt": "2018-03-05T00:00:00.0000000+00:00",
+                    "tenor": "1D",
+                    "rollConvention": "F",
+                    "holidayCalendars": [],
+                    "valuationDateTimes": []
+                  },
+                  "instruments": [
+                    {
+                      "quantity": 10000,
+                      "holdingIdentifier": "fx-fwd-GBPJPY",
+                      "instrument": {
+                        "startDate": "2018-03-01T00:00:00.0000000+00:00",
+                        "maturityDate": "2018-03-30T00:00:00.0000000+00:00",
+                        "domAmount": 100,
+                        "domCcy": "GBP",
+                        "fgnAmount": -150,
+                        "fgnCcy": "JPY",
+                        "refSpotRate": 132,
+                        "isNdf": false,
+                        "fixingDate": "0001-01-01T00:00:00.0000000+00:00",
+                        "instrumentType": "FxForward"
+                      }
+                    }
+                  ]
+                },
+                "leftToRightMapping": [],
+                "preserveKeys": []
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/InlineValuationsReconciliationRequest"
+              },
+              "example": {
+                "left": {
+                  "recipeId": {
+                    "scope": "MyScope",
+                    "code": "default"
+                  },
+                  "asAt": "2018-03-05T00:00:00.0000000+00:00",
+                  "metrics": [
+                    {
+                      "key": "Instrument/default/Name",
+                      "op": "Value"
+                    },
+                    {
+                      "key": "Holding/default/PV",
+                      "op": "Value"
+                    }
+                  ],
+                  "groupBy": [
+                    "Instrument/default/Name"
+                  ],
+                  "reportCurrency": "USD",
+                  "equipWithSubtotals": false,
+                  "returnResultAsExpandedTypes": false,
+                  "valuationSchedule": {
+                    "effectiveFrom": "2018-03-05T00:00:00.0000000+00:00",
+                    "effectiveAt": "2018-03-05T00:00:00.0000000+00:00",
+                    "tenor": "1D",
+                    "rollConvention": "F",
+                    "holidayCalendars": [],
+                    "valuationDateTimes": []
+                  },
+                  "instruments": [
+                    {
+                      "quantity": 10000,
+                      "holdingIdentifier": "fx-fwd-GBPUSD",
+                      "instrument": {
+                        "startDate": "2018-03-01T00:00:00.0000000+00:00",
+                        "maturityDate": "2018-03-30T00:00:00.0000000+00:00",
+                        "domAmount": 100,
+                        "domCcy": "GBP",
+                        "fgnAmount": -150,
+                        "fgnCcy": "USD",
+                        "refSpotRate": 1.5,
+                        "isNdf": false,
+                        "fixingDate": "0001-01-01T00:00:00.0000000+00:00",
+                        "instrumentType": "FxForward"
+                      }
+                    }
+                  ]
+                },
+                "right": {
+                  "recipeId": {
+                    "scope": "MyScope",
+                    "code": "default"
+                  },
+                  "asAt": "2018-03-05T00:00:00.0000000+00:00",
+                  "metrics": [
+                    {
+                      "key": "Instrument/default/Name",
+                      "op": "Value"
+                    },
+                    {
+                      "key": "Holding/default/PV",
+                      "op": "Value"
+                    }
+                  ],
+                  "groupBy": [
+                    "Instrument/default/Name"
+                  ],
+                  "reportCurrency": "USD",
+                  "equipWithSubtotals": false,
+                  "returnResultAsExpandedTypes": false,
+                  "valuationSchedule": {
+                    "effectiveFrom": "2018-03-05T00:00:00.0000000+00:00",
+                    "effectiveAt": "2018-03-05T00:00:00.0000000+00:00",
+                    "tenor": "1D",
+                    "rollConvention": "F",
+                    "holidayCalendars": [],
+                    "valuationDateTimes": []
+                  },
+                  "instruments": [
+                    {
+                      "quantity": 10000,
+                      "holdingIdentifier": "fx-fwd-GBPJPY",
+                      "instrument": {
+                        "startDate": "2018-03-01T00:00:00.0000000+00:00",
+                        "maturityDate": "2018-03-30T00:00:00.0000000+00:00",
+                        "domAmount": 100,
+                        "domCcy": "GBP",
+                        "fgnAmount": -150,
+                        "fgnCcy": "JPY",
+                        "refSpotRate": 132,
+                        "isNdf": false,
+                        "fixingDate": "0001-01-01T00:00:00.0000000+00:00",
+                        "instrumentType": "FxForward"
+                      }
+                    }
+                  ]
+                },
+                "leftToRightMapping": [],
+                "preserveKeys": []
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "The requested reconciliation",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ListAggregationReconciliation"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ListAggregationReconciliation"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ListAggregationReconciliation"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "The details of the input related failure",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/LusidValidationProblemDetails"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/LusidValidationProblemDetails"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/LusidValidationProblemDetails"
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "Error response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/LusidProblemDetails"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "oauth2": []
+          }
+        ],
+        "x-fbn-apistatus": "Stable"
+      }
+    },
+    "/api/portfolios/$reconcileValuation": {
+      "post": {
+        "tags": [
+          "Reconciliations"
+        ],
+        "summary": "ReconcileValuation: Reconcile valuations performed on one or two sets of holdings using one or two configuration recipes.",
+        "description": "Perform valuation of one or two set of holdings using different one or two configuration recipes. Produce a breakdown of the resulting differences in valuation.",
+        "operationId": "ReconcileValuation",
+        "requestBody": {
+          "description": "The specifications of the inputs to the reconciliation",
+          "content": {
+            "application/json-patch+json": {
+              "schema": {
+                "$ref": "#/components/schemas/ValuationsReconciliationRequest"
+              },
+              "example": {
+                "left": {
+                  "recipeId": {
+                    "scope": "MySourceScope",
+                    "code": "MySourcePortfolioCode"
+                  },
+                  "asAt": "2018-03-05T00:00:00.0000000+00:00",
+                  "metrics": [
+                    {
+                      "key": "Instrument/default/Name",
+                      "op": "Value"
+                    },
+                    {
+                      "key": "Holding/default/PV",
+                      "op": "Sum"
+                    }
+                  ],
+                  "groupBy": [
+                    "Instrument/default/Name"
+                  ],
+                  "sort": [],
+                  "reportCurrency": "USD",
+                  "equipWithSubtotals": false,
+                  "returnResultAsExpandedTypes": false,
+                  "portfolioEntityIds": [
+                    {
+                      "scope": "PortfolioScope1",
+                      "code": "MyPortfolioAbC",
+                      "portfolioEntityType": "SinglePortfolio"
+                    },
+                    {
+                      "scope": "PortfolioScope2",
+                      "code": "MyPortfolioDeF",
+                      "portfolioEntityType": "SinglePortfolio"
+                    }
+                  ],
+                  "valuationSchedule": {
+                    "effectiveFrom": "2018-03-05T00:00:00.0000000+00:00",
+                    "effectiveAt": "2018-03-05T00:00:00.0000000+00:00",
+                    "tenor": "1D",
+                    "rollConvention": "F",
+                    "holidayCalendars": [],
+                    "valuationDateTimes": []
+                  }
+                },
+                "right": {
+                  "recipeId": {
+                    "scope": "MyTargetScope",
+                    "code": "MyTargetPortfolioCode"
+                  },
+                  "asAt": "2018-03-05T00:00:00.0000000+00:00",
+                  "metrics": [
+                    {
+                      "key": "Instrument/default/Name",
+                      "op": "Value"
+                    },
+                    {
+                      "key": "Holding/default/PV",
+                      "op": "Sum"
+                    }
+                  ],
+                  "groupBy": [
+                    "Instrument/default/Name"
+                  ],
+                  "sort": [],
+                  "reportCurrency": "USD",
+                  "equipWithSubtotals": false,
+                  "returnResultAsExpandedTypes": false,
+                  "portfolioEntityIds": [
+                    {
+                      "scope": "PortfolioScope1",
+                      "code": "MyPortfolioAbC",
+                      "portfolioEntityType": "SinglePortfolio"
+                    },
+                    {
+                      "scope": "PortfolioScope2",
+                      "code": "MyPortfolioDeF",
+                      "portfolioEntityType": "SinglePortfolio"
+                    }
+                  ],
+                  "valuationSchedule": {
+                    "effectiveFrom": "2018-03-05T00:00:00.0000000+00:00",
+                    "effectiveAt": "2018-03-05T00:00:00.0000000+00:00",
+                    "tenor": "1D",
+                    "rollConvention": "F",
+                    "holidayCalendars": [],
+                    "valuationDateTimes": []
+                  }
+                },
+                "leftToRightMapping": [],
+                "preserveKeys": [
+                  "Instrument/default/Name"
+                ]
+              }
+            },
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ValuationsReconciliationRequest"
+              },
+              "example": {
+                "left": {
+                  "recipeId": {
+                    "scope": "MySourceScope",
+                    "code": "MySourcePortfolioCode"
+                  },
+                  "asAt": "2018-03-05T00:00:00.0000000+00:00",
+                  "metrics": [
+                    {
+                      "key": "Instrument/default/Name",
+                      "op": "Value"
+                    },
+                    {
+                      "key": "Holding/default/PV",
+                      "op": "Sum"
+                    }
+                  ],
+                  "groupBy": [
+                    "Instrument/default/Name"
+                  ],
+                  "sort": [],
+                  "reportCurrency": "USD",
+                  "equipWithSubtotals": false,
+                  "returnResultAsExpandedTypes": false,
+                  "portfolioEntityIds": [
+                    {
+                      "scope": "PortfolioScope1",
+                      "code": "MyPortfolioAbC",
+                      "portfolioEntityType": "SinglePortfolio"
+                    },
+                    {
+                      "scope": "PortfolioScope2",
+                      "code": "MyPortfolioDeF",
+                      "portfolioEntityType": "SinglePortfolio"
+                    }
+                  ],
+                  "valuationSchedule": {
+                    "effectiveFrom": "2018-03-05T00:00:00.0000000+00:00",
+                    "effectiveAt": "2018-03-05T00:00:00.0000000+00:00",
+                    "tenor": "1D",
+                    "rollConvention": "F",
+                    "holidayCalendars": [],
+                    "valuationDateTimes": []
+                  }
+                },
+                "right": {
+                  "recipeId": {
+                    "scope": "MyTargetScope",
+                    "code": "MyTargetPortfolioCode"
+                  },
+                  "asAt": "2018-03-05T00:00:00.0000000+00:00",
+                  "metrics": [
+                    {
+                      "key": "Instrument/default/Name",
+                      "op": "Value"
+                    },
+                    {
+                      "key": "Holding/default/PV",
+                      "op": "Sum"
+                    }
+                  ],
+                  "groupBy": [
+                    "Instrument/default/Name"
+                  ],
+                  "sort": [],
+                  "reportCurrency": "USD",
+                  "equipWithSubtotals": false,
+                  "returnResultAsExpandedTypes": false,
+                  "portfolioEntityIds": [
+                    {
+                      "scope": "PortfolioScope1",
+                      "code": "MyPortfolioAbC",
+                      "portfolioEntityType": "SinglePortfolio"
+                    },
+                    {
+                      "scope": "PortfolioScope2",
+                      "code": "MyPortfolioDeF",
+                      "portfolioEntityType": "SinglePortfolio"
+                    }
+                  ],
+                  "valuationSchedule": {
+                    "effectiveFrom": "2018-03-05T00:00:00.0000000+00:00",
+                    "effectiveAt": "2018-03-05T00:00:00.0000000+00:00",
+                    "tenor": "1D",
+                    "rollConvention": "F",
+                    "holidayCalendars": [],
+                    "valuationDateTimes": []
+                  }
+                },
+                "leftToRightMapping": [],
+                "preserveKeys": [
+                  "Instrument/default/Name"
+                ]
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ValuationsReconciliationRequest"
+              },
+              "example": {
+                "left": {
+                  "recipeId": {
+                    "scope": "MySourceScope",
+                    "code": "MySourcePortfolioCode"
+                  },
+                  "asAt": "2018-03-05T00:00:00.0000000+00:00",
+                  "metrics": [
+                    {
+                      "key": "Instrument/default/Name",
+                      "op": "Value"
+                    },
+                    {
+                      "key": "Holding/default/PV",
+                      "op": "Sum"
+                    }
+                  ],
+                  "groupBy": [
+                    "Instrument/default/Name"
+                  ],
+                  "sort": [],
+                  "reportCurrency": "USD",
+                  "equipWithSubtotals": false,
+                  "returnResultAsExpandedTypes": false,
+                  "portfolioEntityIds": [
+                    {
+                      "scope": "PortfolioScope1",
+                      "code": "MyPortfolioAbC",
+                      "portfolioEntityType": "SinglePortfolio"
+                    },
+                    {
+                      "scope": "PortfolioScope2",
+                      "code": "MyPortfolioDeF",
+                      "portfolioEntityType": "SinglePortfolio"
+                    }
+                  ],
+                  "valuationSchedule": {
+                    "effectiveFrom": "2018-03-05T00:00:00.0000000+00:00",
+                    "effectiveAt": "2018-03-05T00:00:00.0000000+00:00",
+                    "tenor": "1D",
+                    "rollConvention": "F",
+                    "holidayCalendars": [],
+                    "valuationDateTimes": []
+                  }
+                },
+                "right": {
+                  "recipeId": {
+                    "scope": "MyTargetScope",
+                    "code": "MyTargetPortfolioCode"
+                  },
+                  "asAt": "2018-03-05T00:00:00.0000000+00:00",
+                  "metrics": [
+                    {
+                      "key": "Instrument/default/Name",
+                      "op": "Value"
+                    },
+                    {
+                      "key": "Holding/default/PV",
+                      "op": "Sum"
+                    }
+                  ],
+                  "groupBy": [
+                    "Instrument/default/Name"
+                  ],
+                  "sort": [],
+                  "reportCurrency": "USD",
+                  "equipWithSubtotals": false,
+                  "returnResultAsExpandedTypes": false,
+                  "portfolioEntityIds": [
+                    {
+                      "scope": "PortfolioScope1",
+                      "code": "MyPortfolioAbC",
+                      "portfolioEntityType": "SinglePortfolio"
+                    },
+                    {
+                      "scope": "PortfolioScope2",
+                      "code": "MyPortfolioDeF",
+                      "portfolioEntityType": "SinglePortfolio"
+                    }
+                  ],
+                  "valuationSchedule": {
+                    "effectiveFrom": "2018-03-05T00:00:00.0000000+00:00",
+                    "effectiveAt": "2018-03-05T00:00:00.0000000+00:00",
+                    "tenor": "1D",
+                    "rollConvention": "F",
+                    "holidayCalendars": [],
+                    "valuationDateTimes": []
+                  }
+                },
+                "leftToRightMapping": [],
+                "preserveKeys": [
+                  "Instrument/default/Name"
+                ]
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/ValuationsReconciliationRequest"
+              },
+              "example": {
+                "left": {
+                  "recipeId": {
+                    "scope": "MySourceScope",
+                    "code": "MySourcePortfolioCode"
+                  },
+                  "asAt": "2018-03-05T00:00:00.0000000+00:00",
+                  "metrics": [
+                    {
+                      "key": "Instrument/default/Name",
+                      "op": "Value"
+                    },
+                    {
+                      "key": "Holding/default/PV",
+                      "op": "Sum"
+                    }
+                  ],
+                  "groupBy": [
+                    "Instrument/default/Name"
+                  ],
+                  "sort": [],
+                  "reportCurrency": "USD",
+                  "equipWithSubtotals": false,
+                  "returnResultAsExpandedTypes": false,
+                  "portfolioEntityIds": [
+                    {
+                      "scope": "PortfolioScope1",
+                      "code": "MyPortfolioAbC",
+                      "portfolioEntityType": "SinglePortfolio"
+                    },
+                    {
+                      "scope": "PortfolioScope2",
+                      "code": "MyPortfolioDeF",
+                      "portfolioEntityType": "SinglePortfolio"
+                    }
+                  ],
+                  "valuationSchedule": {
+                    "effectiveFrom": "2018-03-05T00:00:00.0000000+00:00",
+                    "effectiveAt": "2018-03-05T00:00:00.0000000+00:00",
+                    "tenor": "1D",
+                    "rollConvention": "F",
+                    "holidayCalendars": [],
+                    "valuationDateTimes": []
+                  }
+                },
+                "right": {
+                  "recipeId": {
+                    "scope": "MyTargetScope",
+                    "code": "MyTargetPortfolioCode"
+                  },
+                  "asAt": "2018-03-05T00:00:00.0000000+00:00",
+                  "metrics": [
+                    {
+                      "key": "Instrument/default/Name",
+                      "op": "Value"
+                    },
+                    {
+                      "key": "Holding/default/PV",
+                      "op": "Sum"
+                    }
+                  ],
+                  "groupBy": [
+                    "Instrument/default/Name"
+                  ],
+                  "sort": [],
+                  "reportCurrency": "USD",
+                  "equipWithSubtotals": false,
+                  "returnResultAsExpandedTypes": false,
+                  "portfolioEntityIds": [
+                    {
+                      "scope": "PortfolioScope1",
+                      "code": "MyPortfolioAbC",
+                      "portfolioEntityType": "SinglePortfolio"
+                    },
+                    {
+                      "scope": "PortfolioScope2",
+                      "code": "MyPortfolioDeF",
+                      "portfolioEntityType": "SinglePortfolio"
+                    }
+                  ],
+                  "valuationSchedule": {
+                    "effectiveFrom": "2018-03-05T00:00:00.0000000+00:00",
+                    "effectiveAt": "2018-03-05T00:00:00.0000000+00:00",
+                    "tenor": "1D",
+                    "rollConvention": "F",
+                    "holidayCalendars": [],
+                    "valuationDateTimes": []
+                  }
+                },
+                "leftToRightMapping": [],
+                "preserveKeys": [
+                  "Instrument/default/Name"
+                ]
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "The requested reconciliation",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ListAggregationReconciliation"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ListAggregationReconciliation"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ListAggregationReconciliation"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "The details of the input related failure",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/LusidValidationProblemDetails"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/LusidValidationProblemDetails"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/LusidValidationProblemDetails"
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "Error response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/LusidProblemDetails"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "oauth2": []
+          }
+        ],
+        "x-fbn-apistatus": "Stable"
       }
     },
     "/api/portfolios/{scope}": {
@@ -54183,6 +55666,40 @@
         "additionalProperties": false,
         "description": "Specification object for the parameters of an inline valuation"
       },
+      "InlineValuationsReconciliationRequest": {
+        "required": [
+          "left",
+          "right"
+        ],
+        "type": "object",
+        "properties": {
+          "left": {
+            "$ref": "#/components/schemas/InlineValuationRequest"
+          },
+          "right": {
+            "$ref": "#/components/schemas/InlineValuationRequest"
+          },
+          "leftToRightMapping": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ReconciliationLeftRightAddressKeyPair"
+            },
+            "description": "The mapping from property keys requested by left aggregation to property keys on right hand side",
+            "nullable": true
+          },
+          "preserveKeys": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "description": "The key that uniquely identifies a queryable address in Lusid."
+            },
+            "description": "List of keys to preserve (from rhs) in the diff. Used in conjunction with filtering/grouping",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false,
+        "description": "Specification for the reconciliation request. Left and Right hand sides are constructed. Each consists of a valuation of a inline set of instruments\r\nusing an inline aggregation request. The results of this can then be compared to each other. The difference, which is effectively a risk based\r\ndifference allows comparison of the effects of changing a recipe, valuation date, or (though it may or may not make logical sense) a set of instruments."
+      },
       "Instrument": {
         "required": [
           "identifiers",
@@ -54945,6 +56462,32 @@
         },
         "additionalProperties": false,
         "description": "Link class."
+      },
+      "ListAggregationReconciliation": {
+        "type": "object",
+        "properties": {
+          "left": {
+            "$ref": "#/components/schemas/ListAggregationResponse"
+          },
+          "right": {
+            "$ref": "#/components/schemas/ListAggregationResponse"
+          },
+          "diff": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "additionalProperties": {
+                "type": "object",
+                "additionalProperties": false
+              }
+            },
+            "nullable": true
+          },
+          "dataSchema": {
+            "$ref": "#/components/schemas/ResultDataSchema"
+          }
+        },
+        "additionalProperties": false
       },
       "ListAggregationResponse": {
         "type": "object",
@@ -58409,6 +59952,150 @@
         },
         "additionalProperties": false,
         "description": "A reconciliation break"
+      },
+      "ReconciliationLeftRightAddressKeyPair": {
+        "required": [
+          "left",
+          "right"
+        ],
+        "type": "object",
+        "properties": {
+          "left": {
+            "type": "string",
+            "description": "Address key defined by the lhs aggregation"
+          },
+          "right": {
+            "type": "string",
+            "description": "Address key defined by the rhs aggregation"
+          }
+        },
+        "additionalProperties": false
+      },
+      "ReconciliationLine": {
+        "type": "object",
+        "properties": {
+          "left": {
+            "type": "object",
+            "additionalProperties": {
+              "type": "object",
+              "additionalProperties": false
+            },
+            "description": "Left hand side of the comparison",
+            "nullable": true
+          },
+          "right": {
+            "type": "object",
+            "additionalProperties": {
+              "type": "object",
+              "additionalProperties": false
+            },
+            "description": "Right hand side of the comparison",
+            "nullable": true
+          },
+          "difference": {
+            "type": "object",
+            "additionalProperties": {
+              "type": "object",
+              "additionalProperties": false
+            },
+            "description": "Difference between LHS and RHS of comparison",
+            "nullable": true
+          },
+          "resultComparison": {
+            "type": "object",
+            "additionalProperties": {
+              "type": "object",
+              "additionalProperties": false
+            },
+            "description": "The logical or semantic description of the difference, e.g. \"Matches\" or \"MatchesWithTolerance\" or \"Failed\".",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false,
+        "description": "In evaluating a left and right hand side holding or valuation set, two data records result. These are then compared based on a set of\r\nrules. This results in either a match or failure to match. If there is a match both left and right will be present, otherwise one will not.\r\nA difference will be present if a match was calculated.\r\nThe options used in comparison may result in elision of results where an exact or tolerable match is made."
+      },
+      "ReconciliationRequest": {
+        "required": [
+          "left",
+          "right"
+        ],
+        "type": "object",
+        "properties": {
+          "left": {
+            "$ref": "#/components/schemas/ValuationRequest"
+          },
+          "right": {
+            "$ref": "#/components/schemas/ValuationRequest"
+          },
+          "leftToRightMapping": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ReconciliationLeftRightAddressKeyPair"
+            },
+            "description": "The mapping from property keys requested by left aggregation to property keys on right hand side",
+            "nullable": true
+          },
+          "comparisonRules": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ReconciliationRule"
+            },
+            "description": "The set of rules to be used in comparing values. These are the rules that determine what constitues a match.\r\nThe simplest is obviously an exact one-for-one comparison, but tolerances on numerical or date time values and\r\ncase-insensitive string comparison are supported amongst other types.",
+            "nullable": true
+          },
+          "preserveKeys": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "description": "The key that uniquely identifies a queryable address in Lusid."
+            },
+            "description": "List of keys to preserve (from rhs) in the diff. Used in conjunction with filtering/grouping.\r\nIf two values are equal, for a given key then the value is elided from the results. Setting it here\r\nwill preserve it (takes the values from the RHS and puts it into the line by line results).",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false,
+        "description": "Specification for the reconciliation request. Left and Right hand sides are constructed. Each consists of a valuation of a portfolio\r\nusing an aggregation request. The results of this can then be compared to each other. The difference, which is effectively a risk based\r\ndifference allows comparison of the effects of changing a recipe, valuation date, or (though it may or may not make logical sense) a portfolio.\r\nFor instance, one might look at the difference in risk caused by the addition of transaction to a portfolio, or through changing the valuation\r\nmethodology or system."
+      },
+      "ReconciliationResponse": {
+        "type": "object",
+        "properties": {
+          "comparisons": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ReconciliationLine"
+            },
+            "description": "List of comparisons of left to right hand sides.",
+            "nullable": true
+          },
+          "dataSchema": {
+            "$ref": "#/components/schemas/ResultDataSchema"
+          }
+        },
+        "additionalProperties": false,
+        "description": "Class representing the set of comparisons that result from comparing holdings and their valuations between two separate evaluations."
+      },
+      "ReconciliationRule": {
+        "required": [
+          "ruleType"
+        ],
+        "type": "object",
+        "properties": {
+          "ruleType": {
+            "enum": [
+              "ReconcileNumericRule",
+              "ReconcileDateTimeRule",
+              "ReconcileStringRule",
+              "ReconcileExact"
+            ],
+            "type": "string",
+            "description": "The available values are: ReconcileNumericRule, ReconcileDateTimeRule, ReconcileStringRule, ReconcileExact"
+          }
+        },
+        "additionalProperties": false,
+        "description": "Base class for representing reconciliation rules in LUSID.\r\nReconciliation rules describe how a comparison between two items in the reconciliation should be performed and what constitutes equality.\r\nThis does not influence WHAT constitutes a match, but only whether once a line has been matched whether an item within it matches another item.\r\nIf a rule is not given for an item, it will default to equality comparison.\r\nThis base class should not be directly instantiated; each supported ReconciliationRuleType has a corresponding inherited class.",
+        "discriminator": {
+          "propertyName": "reconciliationRuleType"
+        }
       },
       "ReferenceData": {
         "required": [
@@ -62416,6 +64103,40 @@
         "additionalProperties": false,
         "description": "Specification object for the valuation schedule, how do we determine which days we wish to perform a valuation upon."
       },
+      "ValuationsReconciliationRequest": {
+        "required": [
+          "left",
+          "right"
+        ],
+        "type": "object",
+        "properties": {
+          "left": {
+            "$ref": "#/components/schemas/ValuationRequest"
+          },
+          "right": {
+            "$ref": "#/components/schemas/ValuationRequest"
+          },
+          "leftToRightMapping": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ReconciliationLeftRightAddressKeyPair"
+            },
+            "description": "The mapping from property keys requested by left aggregation to property keys on right hand side",
+            "nullable": true
+          },
+          "preserveKeys": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "description": "The key that uniquely identifies a queryable address in Lusid."
+            },
+            "description": "List of keys to preserve (from rhs) in the diff. Used in conjunction with filtering/grouping.\r\nIf two values are equal, for a given key then the value is elided from the results. Setting it here\r\nwill preserve it (takes the values from the RHS and puts it into the line by line results).",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false,
+        "description": "Specification for the reconciliation request. Left and Right hand sides are constructed. Each consists of a valuation of a portfolio\r\nusing an aggregation request. The results of this can then be compared to each other. The difference, which is effectively a risk based\r\ndifference allows comparison of the effects of changing a recipe, valuation date, or (though it may or may not make logical sense) a portfolio.\r\nFor instance, one might look at the difference in risk caused by the addition of transaction to a portfolio, or through changing the valuation\r\nmethodology or system."
+      },
       "VendorModelRule": {
         "required": [
           "instrumentType",
@@ -62867,7 +64588,7 @@
         "description": "OAuth2 Implicit Grant",
         "flows": {
           "implicit": {
-            "authorizationUrl": "https://lusid.okta.com/oauth2/default/v1/authorize",
+            "authorizationUrl": "https://dummyurl.lusid.com/",
             "scopes": {}
           }
         }
