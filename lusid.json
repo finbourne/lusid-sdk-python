@@ -9,7 +9,7 @@
       "url": "https://www.finbourne.com",
       "email": "info@finbourne.com"
     },
-    "version": "0.11.4973",
+    "version": "0.11.4974",
     "x-logo": {
       "url": "https://www.lusid.com/app/assets/logo_white.png",
       "backgroundColor": "#415464"
@@ -48233,7 +48233,7 @@
             "items": {
               "type": "string"
             },
-            "description": "The holiday calendar(s) that should be used in determining the date schedule. Holiday calendar(s) are supplied by their codes, for example, 'CoppClarke'. Note that when the calendars are not available (e.g. when the user has insufficient permissions), a recipe setting will be used to determine whether the whole batch should then fail or whether the calendar not being available should simply be ignored.",
+            "description": "The holiday calendar(s) that should be used in determining the date schedule. Holiday calendar(s) are supplied by their codes, for example, 'CoppClark'. Note that when the calendars are not available (e.g. when the user has insufficient permissions), a recipe setting will be used to determine whether the whole batch should then fail or whether the calendar not being available should simply be ignored.",
             "nullable": true
           }
         },
@@ -64082,7 +64082,7 @@
             "items": {
               "type": "string"
             },
-            "description": "The holiday calendar(s) that should be used in determining the date schedule.\r\nHoliday calendar(s) are supplied by their names, for example, \"CoppClarke\". \r\nNote that when the calendars are not available (e.g. when the user has insufficient permissions), \r\na recipe setting will be used to determine whether the whole batch should then fail or whether the calendar not being available should simply be ignored.",
+            "description": "The holiday calendar(s) that should be used in determining the date schedule.\r\nHoliday calendar(s) are supplied by their names, for example, \"CoppClark\". \r\nNote that when the calendars are not available (e.g. when the user has insufficient permissions), \r\na recipe setting will be used to determine whether the whole batch should then fail or whether the calendar not being available should simply be ignored.",
             "nullable": true
           },
           "valuationDateTimes": {
