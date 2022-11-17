@@ -9,7 +9,7 @@
       "url": "https://www.finbourne.com",
       "email": "info@finbourne.com"
     },
-    "version": "0.11.4977",
+    "version": "0.11.4978",
     "x-logo": {
       "url": "https://www.lusid.com/app/assets/logo_white.png",
       "backgroundColor": "#415464"
@@ -5488,6 +5488,926 @@
               "text/json": {
                 "schema": {
                   "$ref": "#/components/schemas/ResourceListOfCorporateAction"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "The details of the input related failure",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/LusidValidationProblemDetails"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/LusidValidationProblemDetails"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/LusidValidationProblemDetails"
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "Error response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/LusidProblemDetails"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "oauth2": []
+          }
+        ],
+        "x-fbn-apistatus": "EarlyAccess"
+      }
+    },
+    "/api/counterparties/counterpartyagreements": {
+      "get": {
+        "tags": [
+          "Counterparties"
+        ],
+        "summary": "[EARLY ACCESS] ListCounterpartyAgreements: List the set of Counterparty Agreements",
+        "description": "List the set of Counterparty Agreements at the specified AsAt date/time",
+        "operationId": "ListCounterpartyAgreements",
+        "parameters": [
+          {
+            "name": "asAt",
+            "in": "query",
+            "description": "The asAt datetime at which to list the Counterparty Agreements. Defaults to latest if not specified.",
+            "schema": {
+              "type": "string",
+              "description": "The asAt datetime at which to list the Counterparty Agreements. Defaults to latest if not specified.",
+              "format": "date-time",
+              "nullable": true
+            },
+            "x-nullable": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The requested Counterparty Agreements",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResourceListOfGetCounterpartyAgreementResponse"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResourceListOfGetCounterpartyAgreementResponse"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResourceListOfGetCounterpartyAgreementResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "The details of the input related failure",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/LusidValidationProblemDetails"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/LusidValidationProblemDetails"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/LusidValidationProblemDetails"
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "Error response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/LusidProblemDetails"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "oauth2": []
+          }
+        ],
+        "x-fbn-apistatus": "EarlyAccess"
+      },
+      "post": {
+        "tags": [
+          "Counterparties"
+        ],
+        "summary": "[EARLY ACCESS] UpsertCounterpartyAgreement: Upsert Counterparty Agreement",
+        "description": "Update or insert Counterparty Agreement in a single scope. An item will be updated if it already exists and inserted if it does not.\r\n            \r\nThe response will return the successfully updated or inserted Counterparty Agreement or failure message if unsuccessful\r\n            \r\nIt is important to always check to verify success (or failure).",
+        "operationId": "UpsertCounterpartyAgreement",
+        "requestBody": {
+          "description": "The Counterparty Agreement to update or insert",
+          "content": {
+            "application/json-patch+json": {
+              "schema": {
+                "$ref": "#/components/schemas/UpsertCounterpartyAgreementRequest"
+              },
+              "example": {
+                "counterpartyAgreement": {
+                  "displayName": "display-name",
+                  "agreementType": "type",
+                  "counterpartySignatory": {
+                    "name": "counterparty-signatory-name",
+                    "legalEntityIdentifier": {
+                      "idTypeScope": "legal-identifier-idTypeScope",
+                      "idTypeCode": "legal-identifier-idTypeCode",
+                      "code": "legal-identifier-code"
+                    }
+                  },
+                  "datedAsOf": "2020-01-01T01:00:00.0000000+00:00",
+                  "creditSupportAnnexId": {
+                    "scope": "credit-support-annex-scope",
+                    "code": "credit-support-annex-code"
+                  },
+                  "id": {
+                    "scope": "some-scope",
+                    "code": "some-code"
+                  }
+                }
+              }
+            },
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UpsertCounterpartyAgreementRequest"
+              },
+              "example": {
+                "counterpartyAgreement": {
+                  "displayName": "display-name",
+                  "agreementType": "type",
+                  "counterpartySignatory": {
+                    "name": "counterparty-signatory-name",
+                    "legalEntityIdentifier": {
+                      "idTypeScope": "legal-identifier-idTypeScope",
+                      "idTypeCode": "legal-identifier-idTypeCode",
+                      "code": "legal-identifier-code"
+                    }
+                  },
+                  "datedAsOf": "2020-01-01T01:00:00.0000000+00:00",
+                  "creditSupportAnnexId": {
+                    "scope": "credit-support-annex-scope",
+                    "code": "credit-support-annex-code"
+                  },
+                  "id": {
+                    "scope": "some-scope",
+                    "code": "some-code"
+                  }
+                }
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UpsertCounterpartyAgreementRequest"
+              },
+              "example": {
+                "counterpartyAgreement": {
+                  "displayName": "display-name",
+                  "agreementType": "type",
+                  "counterpartySignatory": {
+                    "name": "counterparty-signatory-name",
+                    "legalEntityIdentifier": {
+                      "idTypeScope": "legal-identifier-idTypeScope",
+                      "idTypeCode": "legal-identifier-idTypeCode",
+                      "code": "legal-identifier-code"
+                    }
+                  },
+                  "datedAsOf": "2020-01-01T01:00:00.0000000+00:00",
+                  "creditSupportAnnexId": {
+                    "scope": "credit-support-annex-scope",
+                    "code": "credit-support-annex-code"
+                  },
+                  "id": {
+                    "scope": "some-scope",
+                    "code": "some-code"
+                  }
+                }
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/UpsertCounterpartyAgreementRequest"
+              },
+              "example": {
+                "counterpartyAgreement": {
+                  "displayName": "display-name",
+                  "agreementType": "type",
+                  "counterpartySignatory": {
+                    "name": "counterparty-signatory-name",
+                    "legalEntityIdentifier": {
+                      "idTypeScope": "legal-identifier-idTypeScope",
+                      "idTypeCode": "legal-identifier-idTypeCode",
+                      "code": "legal-identifier-code"
+                    }
+                  },
+                  "datedAsOf": "2020-01-01T01:00:00.0000000+00:00",
+                  "creditSupportAnnexId": {
+                    "scope": "credit-support-annex-scope",
+                    "code": "credit-support-annex-code"
+                  },
+                  "id": {
+                    "scope": "some-scope",
+                    "code": "some-code"
+                  }
+                }
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "The successfully updated or inserted Counterparty Agreement or any failure",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/UpsertSingleStructuredDataResponse"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/UpsertSingleStructuredDataResponse"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/UpsertSingleStructuredDataResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "The details of the input related failure",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/LusidValidationProblemDetails"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/LusidValidationProblemDetails"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/LusidValidationProblemDetails"
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "Error response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/LusidProblemDetails"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "oauth2": []
+          }
+        ],
+        "x-fbn-apistatus": "EarlyAccess"
+      }
+    },
+    "/api/counterparties/counterpartyagreements/{scope}/{code}": {
+      "get": {
+        "tags": [
+          "Counterparties"
+        ],
+        "summary": "[EARLY ACCESS] GetCounterpartyAgreement: Get Counterparty Agreement",
+        "description": "Get a Counterparty Agreement from a single scope.\r\nThe response will return either the Counterparty Agreement that has been stored, or a failure explaining why the request was unsuccessful.\r\nIt is important to always check for any unsuccessful requests (failures).",
+        "operationId": "GetCounterpartyAgreement",
+        "parameters": [
+          {
+            "name": "scope",
+            "in": "path",
+            "description": "The scope of the Counterparty Agreement to retrieve.",
+            "required": true,
+            "schema": {
+              "maxLength": 64,
+              "minLength": 1,
+              "pattern": "^[a-zA-Z0-9\\-_]+$",
+              "type": "string",
+              "description": "The scope of the Counterparty Agreement to retrieve."
+            }
+          },
+          {
+            "name": "code",
+            "in": "path",
+            "description": "The name of the Counterparty Agreement to retrieve the data for.",
+            "required": true,
+            "schema": {
+              "maxLength": 64,
+              "minLength": 1,
+              "pattern": "^[a-zA-Z0-9\\-_]+$",
+              "type": "string",
+              "description": "The name of the Counterparty Agreement to retrieve the data for."
+            }
+          },
+          {
+            "name": "asAt",
+            "in": "query",
+            "description": "The asAt datetime at which to retrieve the Counterparty Agreement. Defaults to return the latest version if not specified.",
+            "schema": {
+              "type": "string",
+              "description": "The asAt datetime at which to retrieve the Counterparty Agreement. Defaults to return the latest version if not specified.",
+              "format": "date-time",
+              "nullable": true
+            },
+            "x-nullable": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The successfully retrieved Counterparty Agreement or any failure",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/GetCounterpartyAgreementResponse"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/GetCounterpartyAgreementResponse"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/GetCounterpartyAgreementResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "The details of the input related failure",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/LusidValidationProblemDetails"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/LusidValidationProblemDetails"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/LusidValidationProblemDetails"
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "Error response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/LusidProblemDetails"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "oauth2": []
+          }
+        ],
+        "x-fbn-apistatus": "EarlyAccess"
+      },
+      "delete": {
+        "tags": [
+          "Counterparties"
+        ],
+        "summary": "[EARLY ACCESS] DeleteCounterpartyAgreement: Delete the Counterparty Agreement of given scope and code",
+        "description": "Delete the specified Counterparty Agreement from a single scope.\r\nThe response will return either detail of the deleted item, or an explanation (failure) as to why this did not succeed.\r\n            \r\nIt is important to always check for any unsuccessful response.",
+        "operationId": "DeleteCounterpartyAgreement",
+        "parameters": [
+          {
+            "name": "scope",
+            "in": "path",
+            "description": "The scope of the Counterparty Agreement to delete.",
+            "required": true,
+            "schema": {
+              "maxLength": 64,
+              "minLength": 1,
+              "pattern": "^[a-zA-Z0-9\\-_]+$",
+              "type": "string",
+              "description": "The scope of the Counterparty Agreement to delete."
+            }
+          },
+          {
+            "name": "code",
+            "in": "path",
+            "description": "The Counterparty Agreement to delete.",
+            "required": true,
+            "schema": {
+              "maxLength": 64,
+              "minLength": 1,
+              "pattern": "^[a-zA-Z0-9\\-_]+$",
+              "type": "string",
+              "description": "The Counterparty Agreement to delete."
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The AsAt of deletion or failure",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/AnnulSingleStructuredDataResponse"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AnnulSingleStructuredDataResponse"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AnnulSingleStructuredDataResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "The details of the input related failure",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/LusidValidationProblemDetails"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/LusidValidationProblemDetails"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/LusidValidationProblemDetails"
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "Error response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/LusidProblemDetails"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "oauth2": []
+          }
+        ],
+        "x-fbn-apistatus": "EarlyAccess"
+      }
+    },
+    "/api/counterparties/creditsupportannexes": {
+      "get": {
+        "tags": [
+          "Counterparties"
+        ],
+        "summary": "[EARLY ACCESS] ListCreditSupportAnnexes: List the set of Credit Support Annexes",
+        "description": "List the set of Credit Support Annexes at the specified AsAt date/time",
+        "operationId": "ListCreditSupportAnnexes",
+        "parameters": [
+          {
+            "name": "asAt",
+            "in": "query",
+            "description": "The asAt datetime at which to list the Credit Support Annexes. Defaults to latest if not specified.",
+            "schema": {
+              "type": "string",
+              "description": "The asAt datetime at which to list the Credit Support Annexes. Defaults to latest if not specified.",
+              "format": "date-time",
+              "nullable": true
+            },
+            "x-nullable": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The requested Credit Support Annexes",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResourceListOfGetCreditSupportAnnexResponse"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResourceListOfGetCreditSupportAnnexResponse"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResourceListOfGetCreditSupportAnnexResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "The details of the input related failure",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/LusidValidationProblemDetails"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/LusidValidationProblemDetails"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/LusidValidationProblemDetails"
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "Error response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/LusidProblemDetails"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "oauth2": []
+          }
+        ],
+        "x-fbn-apistatus": "EarlyAccess"
+      },
+      "post": {
+        "tags": [
+          "Counterparties"
+        ],
+        "summary": "[EARLY ACCESS] UpsertCreditSupportAnnex: Upsert Credit Support Annex",
+        "description": "Update or insert Credit Support Annex in a single scope. An item will be updated if it already exists and inserted if it does not.\r\n            \r\nThe response will return the successfully updated or inserted Credit Support Annex or failure message if unsuccessful\r\n            \r\nIt is important to always check to verify success (or failure).",
+        "operationId": "UpsertCreditSupportAnnex",
+        "requestBody": {
+          "description": "The Credit Support Annex to update or insert",
+          "content": {
+            "application/json-patch+json": {
+              "schema": {
+                "$ref": "#/components/schemas/UpsertCreditSupportAnnexRequest"
+              },
+              "example": {
+                "creditSupportAnnex": {
+                  "referenceCurrency": "GBP",
+                  "collateralCurrencies": [
+                    "GBP"
+                  ],
+                  "isdaAgreementVersion": "ISDA2002",
+                  "marginCallFrequency": "1W",
+                  "valuationAgent": "Institution",
+                  "thresholdAmount": 0,
+                  "roundingDecimalPlaces": 2,
+                  "initialMarginAmount": 100000,
+                  "minimumTransferAmount": 10000,
+                  "id": {
+                    "scope": "some-scope",
+                    "code": "some-code"
+                  }
+                }
+              }
+            },
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UpsertCreditSupportAnnexRequest"
+              },
+              "example": {
+                "creditSupportAnnex": {
+                  "referenceCurrency": "GBP",
+                  "collateralCurrencies": [
+                    "GBP"
+                  ],
+                  "isdaAgreementVersion": "ISDA2002",
+                  "marginCallFrequency": "1W",
+                  "valuationAgent": "Institution",
+                  "thresholdAmount": 0,
+                  "roundingDecimalPlaces": 2,
+                  "initialMarginAmount": 100000,
+                  "minimumTransferAmount": 10000,
+                  "id": {
+                    "scope": "some-scope",
+                    "code": "some-code"
+                  }
+                }
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UpsertCreditSupportAnnexRequest"
+              },
+              "example": {
+                "creditSupportAnnex": {
+                  "referenceCurrency": "GBP",
+                  "collateralCurrencies": [
+                    "GBP"
+                  ],
+                  "isdaAgreementVersion": "ISDA2002",
+                  "marginCallFrequency": "1W",
+                  "valuationAgent": "Institution",
+                  "thresholdAmount": 0,
+                  "roundingDecimalPlaces": 2,
+                  "initialMarginAmount": 100000,
+                  "minimumTransferAmount": 10000,
+                  "id": {
+                    "scope": "some-scope",
+                    "code": "some-code"
+                  }
+                }
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/UpsertCreditSupportAnnexRequest"
+              },
+              "example": {
+                "creditSupportAnnex": {
+                  "referenceCurrency": "GBP",
+                  "collateralCurrencies": [
+                    "GBP"
+                  ],
+                  "isdaAgreementVersion": "ISDA2002",
+                  "marginCallFrequency": "1W",
+                  "valuationAgent": "Institution",
+                  "thresholdAmount": 0,
+                  "roundingDecimalPlaces": 2,
+                  "initialMarginAmount": 100000,
+                  "minimumTransferAmount": 10000,
+                  "id": {
+                    "scope": "some-scope",
+                    "code": "some-code"
+                  }
+                }
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "The successfully updated or inserted item or any failure",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/UpsertSingleStructuredDataResponse"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/UpsertSingleStructuredDataResponse"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/UpsertSingleStructuredDataResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "The details of the input related failure",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/LusidValidationProblemDetails"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/LusidValidationProblemDetails"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/LusidValidationProblemDetails"
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "Error response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/LusidProblemDetails"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "oauth2": []
+          }
+        ],
+        "x-fbn-apistatus": "EarlyAccess"
+      }
+    },
+    "/api/counterparties/creditsupportannexes/{scope}/{code}": {
+      "get": {
+        "tags": [
+          "Counterparties"
+        ],
+        "summary": "[EARLY ACCESS] GetCreditSupportAnnex: Get Credit Support Annex",
+        "description": "Get a Credit Support Annex from a single scope.\r\nThe response will return either the Credit Support Annex that has been stored, or a failure explaining why the request was unsuccessful.\r\nIt is important to always check for any unsuccessful requests (failures).",
+        "operationId": "GetCreditSupportAnnex",
+        "parameters": [
+          {
+            "name": "scope",
+            "in": "path",
+            "description": "The scope of the Credit Support Annex to retrieve.",
+            "required": true,
+            "schema": {
+              "maxLength": 64,
+              "minLength": 1,
+              "pattern": "^[a-zA-Z0-9\\-_]+$",
+              "type": "string",
+              "description": "The scope of the Credit Support Annex to retrieve."
+            }
+          },
+          {
+            "name": "code",
+            "in": "path",
+            "description": "The name of the Credit Support Annex to retrieve the data for.",
+            "required": true,
+            "schema": {
+              "maxLength": 64,
+              "minLength": 1,
+              "pattern": "^[a-zA-Z0-9\\-_]+$",
+              "type": "string",
+              "description": "The name of the Credit Support Annex to retrieve the data for."
+            }
+          },
+          {
+            "name": "asAt",
+            "in": "query",
+            "description": "The asAt datetime at which to retrieve the Credit Support Annex . Defaults to return the latest version if not specified.",
+            "schema": {
+              "type": "string",
+              "description": "The asAt datetime at which to retrieve the Credit Support Annex . Defaults to return the latest version if not specified.",
+              "format": "date-time",
+              "nullable": true
+            },
+            "x-nullable": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The successfully retrieved credit support annexes or any failure",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/GetCreditSupportAnnexResponse"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/GetCreditSupportAnnexResponse"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/GetCreditSupportAnnexResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "The details of the input related failure",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/LusidValidationProblemDetails"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/LusidValidationProblemDetails"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/LusidValidationProblemDetails"
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "Error response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/LusidProblemDetails"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "oauth2": []
+          }
+        ],
+        "x-fbn-apistatus": "EarlyAccess"
+      },
+      "delete": {
+        "tags": [
+          "Counterparties"
+        ],
+        "summary": "[EARLY ACCESS] DeleteCreditSupportAnnex: Delete the Credit Support Annex of given scope and code",
+        "description": "Delete the specified Credit Support Annex from a single scope.\r\nThe response will return either detail of the deleted item, or an explanation (failure) as to why this did not succeed.\r\n            \r\nIt is important to always check for any unsuccessful response.",
+        "operationId": "DeleteCreditSupportAnnex",
+        "parameters": [
+          {
+            "name": "scope",
+            "in": "path",
+            "description": "The scope of the Credit Support Annex to delete.",
+            "required": true,
+            "schema": {
+              "maxLength": 64,
+              "minLength": 1,
+              "pattern": "^[a-zA-Z0-9\\-_]+$",
+              "type": "string",
+              "description": "The scope of the Credit Support Annex to delete."
+            }
+          },
+          {
+            "name": "code",
+            "in": "path",
+            "description": "The Credit Support Annex to delete.",
+            "required": true,
+            "schema": {
+              "maxLength": 64,
+              "minLength": 1,
+              "pattern": "^[a-zA-Z0-9\\-_]+$",
+              "type": "string",
+              "description": "The Credit Support Annex to delete."
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The AsAt of deletion or failure",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/AnnulSingleStructuredDataResponse"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AnnulSingleStructuredDataResponse"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AnnulSingleStructuredDataResponse"
                 }
               }
             }
@@ -50346,6 +51266,45 @@
         "additionalProperties": false,
         "description": "A 'transition' within a corporate action, representing a set of output movements paired to a single input position"
       },
+      "CounterpartyAgreement": {
+        "required": [
+          "agreementType",
+          "counterpartySignatory",
+          "creditSupportAnnexId",
+          "datedAsOf",
+          "displayName",
+          "id"
+        ],
+        "type": "object",
+        "properties": {
+          "displayName": {
+            "type": "string",
+            "description": "A user-defined display label for the Counterparty Agreement."
+          },
+          "agreementType": {
+            "maxLength": 256,
+            "minLength": 0,
+            "type": "string",
+            "description": "A user-defined field to capture the type of agreement this represents. Examples might be \"ISDA 2002 Master Agreement\" or \"ISDA 1992 Master Agreement\"."
+          },
+          "counterpartySignatory": {
+            "$ref": "#/components/schemas/CounterpartySignatory"
+          },
+          "datedAsOf": {
+            "type": "string",
+            "description": "The date on which the CounterpartyAgreement was signed by both parties.",
+            "format": "date-time"
+          },
+          "creditSupportAnnexId": {
+            "$ref": "#/components/schemas/ResourceId"
+          },
+          "id": {
+            "$ref": "#/components/schemas/ResourceId"
+          }
+        },
+        "additionalProperties": false,
+        "description": "Represents the legal agreement between two parties engaged in an OTC transaction.\r\nA typical example would be a 2002 ISDA Master Agreement, signed by two legal entities on a given date."
+      },
       "CounterpartyRiskInformation": {
         "required": [
           "countryOfRisk",
@@ -50378,6 +51337,24 @@
         },
         "additionalProperties": false,
         "description": "In the event that the legal entity is a counterparty to an OTC transaction\r\n(as signatory to a counterparty agreement such as an ISDA 2002 Master Agreement),\r\nthis information would be needed for calculations\r\nsuch as Credit-Valuation-Adjustments and Debit-Valuation-Adjustments (CVA, DVA, XVA etc)."
+      },
+      "CounterpartySignatory": {
+        "required": [
+          "legalEntityIdentifier",
+          "name"
+        ],
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string",
+            "description": "A user-defined name or label for the counterparty signatory.  There is no requirement for this to match the \"displayName\" of the legal entity."
+          },
+          "legalEntityIdentifier": {
+            "$ref": "#/components/schemas/TypedResourceId"
+          }
+        },
+        "additionalProperties": false,
+        "description": "The counterpartyAgreement is signed by two parties, one of which is implicitly the LUSID user.\r\nThe CounterpartySignatory represents the 'other side' of the agreement.\r\nIt comprises a name and identifier for a Legal Entity in LUSID."
       },
       "CreateCalendarRequest": {
         "required": [
@@ -51502,6 +52479,77 @@
           }
         ],
         "description": "A credit spread curve matching tenors against par spread quotes"
+      },
+      "CreditSupportAnnex": {
+        "required": [
+          "collateralCurrencies",
+          "id",
+          "initialMarginAmount",
+          "isdaAgreementVersion",
+          "marginCallFrequency",
+          "minimumTransferAmount",
+          "referenceCurrency",
+          "roundingDecimalPlaces",
+          "thresholdAmount",
+          "valuationAgent"
+        ],
+        "type": "object",
+        "properties": {
+          "referenceCurrency": {
+            "type": "string",
+            "description": "The base, or reference, currency against which MtM value and exposure should be calculated\r\nand in which the CSA parameters are defined if the currency is not otherwise explicitly stated."
+          },
+          "collateralCurrencies": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "description": "The set of currencies within which it is acceptable to post cash collateral."
+          },
+          "isdaAgreementVersion": {
+            "maxLength": 128,
+            "minLength": 0,
+            "type": "string",
+            "description": "The transactions will take place with reference to a particular ISDA master agreement. This\r\nwill likely be either the ISDA 1992 or ISDA 2002 agremeents or ISDA close-out 2009."
+          },
+          "marginCallFrequency": {
+            "maxLength": 32,
+            "minLength": 0,
+            "type": "string",
+            "description": "The tenor, e.g. daily (1D) or biweekly (2W), at which frequency a margin call will be made, calculations\r\nmade and money transferred to readjust. The calculation might also require a specific time for valuation and notification."
+          },
+          "valuationAgent": {
+            "maxLength": 256,
+            "minLength": 0,
+            "type": "string",
+            "description": "Are the calculations performed by the institutions's counterparty or the institution trading with them."
+          },
+          "thresholdAmount": {
+            "type": "number",
+            "description": "At what level of exposure does collateral need to be posted. Will typically be zero for banks.\r\nShould be stated in reference currency",
+            "format": "double"
+          },
+          "roundingDecimalPlaces": {
+            "type": "integer",
+            "description": "Where a calculation needs to be rounded to a specific number of decimal places,\r\nthis states the number that that requires.",
+            "format": "int32"
+          },
+          "initialMarginAmount": {
+            "type": "number",
+            "description": "The initial margin that is required. In the reference currency",
+            "format": "double"
+          },
+          "minimumTransferAmount": {
+            "type": "number",
+            "description": "The minimum amount, in the reference currency, that must be transferred when required.",
+            "format": "double"
+          },
+          "id": {
+            "$ref": "#/components/schemas/ResourceId"
+          }
+        },
+        "additionalProperties": false,
+        "description": "Entity to capture the calculable and queryable methods and practices of determining and transferring collateral\r\nto a counterparty as part of margining of transactions. These typically come from a particular ISDA agreement\r\nthat is in place between the two counterparties."
       },
       "CurrencyAndAmount": {
         "type": "object",
@@ -54761,6 +55809,68 @@
               "$ref": "#/components/schemas/ErrorDetail"
             },
             "description": "The set of values that could not be retrieved due along with a reason for this, e.g badly formed request.",
+            "nullable": true
+          },
+          "links": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Link"
+            },
+            "description": "Collection of links.",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "GetCounterpartyAgreementResponse": {
+        "type": "object",
+        "properties": {
+          "href": {
+            "type": "string",
+            "description": "The specific Uniform Resource Identifier (URI) for this resource at the requested effective and asAt datetime.",
+            "format": "uri",
+            "nullable": true
+          },
+          "value": {
+            "$ref": "#/components/schemas/CounterpartyAgreement"
+          },
+          "failed": {
+            "type": "object",
+            "additionalProperties": {
+              "$ref": "#/components/schemas/ErrorDetail"
+            },
+            "description": "The counterparty agreement that could not be retrieved along with a reason for failure.",
+            "nullable": true
+          },
+          "links": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Link"
+            },
+            "description": "Collection of links.",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "GetCreditSupportAnnexResponse": {
+        "type": "object",
+        "properties": {
+          "href": {
+            "type": "string",
+            "description": "The specific Uniform Resource Identifier (URI) for this resource at the requested effective and asAt datetime.",
+            "format": "uri",
+            "nullable": true
+          },
+          "value": {
+            "$ref": "#/components/schemas/CreditSupportAnnex"
+          },
+          "failed": {
+            "type": "object",
+            "additionalProperties": {
+              "$ref": "#/components/schemas/ErrorDetail"
+            },
+            "description": "The credit support annex that could not be updated or inserted along with a reason for failure.",
             "nullable": true
           },
           "links": {
@@ -60989,6 +62099,88 @@
         "additionalProperties": false,
         "description": "A collection of resources that can be returned from requests."
       },
+      "ResourceListOfGetCounterpartyAgreementResponse": {
+        "required": [
+          "values"
+        ],
+        "type": "object",
+        "properties": {
+          "values": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/GetCounterpartyAgreementResponse"
+            },
+            "description": "The resources to list."
+          },
+          "href": {
+            "type": "string",
+            "description": "The URI of the resource list.",
+            "format": "uri",
+            "nullable": true
+          },
+          "links": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Link"
+            },
+            "description": "Collection of links.",
+            "nullable": true
+          },
+          "nextPage": {
+            "type": "string",
+            "description": "The next page of results.",
+            "nullable": true
+          },
+          "previousPage": {
+            "type": "string",
+            "description": "The previous page of results.",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false,
+        "description": "A collection of resources that can be returned from requests."
+      },
+      "ResourceListOfGetCreditSupportAnnexResponse": {
+        "required": [
+          "values"
+        ],
+        "type": "object",
+        "properties": {
+          "values": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/GetCreditSupportAnnexResponse"
+            },
+            "description": "The resources to list."
+          },
+          "href": {
+            "type": "string",
+            "description": "The URI of the resource list.",
+            "format": "uri",
+            "nullable": true
+          },
+          "links": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Link"
+            },
+            "description": "Collection of links.",
+            "nullable": true
+          },
+          "nextPage": {
+            "type": "string",
+            "description": "The next page of results.",
+            "nullable": true
+          },
+          "previousPage": {
+            "type": "string",
+            "description": "The previous page of results.",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false,
+        "description": "A collection of resources that can be returned from requests."
+      },
       "ResourceListOfGetRecipeResponse": {
         "required": [
           "values"
@@ -63086,6 +64278,39 @@
         "additionalProperties": false,
         "description": "A collection of the data required to configure transaction types.."
       },
+      "TypedResourceId": {
+        "required": [
+          "code",
+          "idTypeCode",
+          "idTypeScope"
+        ],
+        "type": "object",
+        "properties": {
+          "idTypeScope": {
+            "maxLength": 64,
+            "minLength": 1,
+            "pattern": "^[a-zA-Z0-9\\-_]+$",
+            "type": "string",
+            "description": "The scope of the identifier's (property) definition."
+          },
+          "idTypeCode": {
+            "maxLength": 64,
+            "minLength": 1,
+            "pattern": "^[a-zA-Z0-9\\-_]+$",
+            "type": "string",
+            "description": "The code of identifier's (property) definition. This describes what the identifier represents.\r\nFor a Person this might be a username, nationalInsuranceNumber or similar.\r\nFor a Legal Entity, this might be a registeredCompanyNumber or LEI."
+          },
+          "code": {
+            "maxLength": 64,
+            "minLength": 1,
+            "pattern": "^[a-zA-Z0-9\\-_]+$",
+            "type": "string",
+            "description": "The value of the user-defined identifier in respect of the entity."
+          }
+        },
+        "additionalProperties": false,
+        "description": "Represents the user-defined identifier for a Legal Entity or Person.\r\nUsers can define their own, scoped identifiers for Legal Entities and Persons using identifier properties.\r\nFor example,\r\nwhen used to identify a Person, the identifier defined by Person/myScope/username would be represented as\r\n {\r\n   \"idTypeScope\": \"myScope\",\r\n   \"idTypeCode\": \"username\",\r\n   \"code\": \"john_doe_001\"\r\n }"
+      },
       "UpdateCalendarRequest": {
         "required": [
           "properties",
@@ -63423,6 +64648,29 @@
           }
         },
         "additionalProperties": false
+      },
+      "UpsertCounterpartyAgreementRequest": {
+        "required": [
+          "counterpartyAgreement"
+        ],
+        "type": "object",
+        "properties": {
+          "counterpartyAgreement": {
+            "$ref": "#/components/schemas/CounterpartyAgreement"
+          }
+        },
+        "additionalProperties": false,
+        "description": "Counterparty Agreement that is to be stored in the convention data store.\r\nThere must be only one of these present."
+      },
+      "UpsertCreditSupportAnnexRequest": {
+        "type": "object",
+        "properties": {
+          "creditSupportAnnex": {
+            "$ref": "#/components/schemas/CreditSupportAnnex"
+          }
+        },
+        "additionalProperties": false,
+        "description": "Credit Support Annex information. The interaction in terms of margining requirements between a set of trades for a given counterparty."
       },
       "UpsertInstrumentPropertiesResponse": {
         "required": [
