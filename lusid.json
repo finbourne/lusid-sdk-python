@@ -9,7 +9,7 @@
       "url": "https://www.finbourne.com",
       "email": "info@finbourne.com"
     },
-    "version": "0.11.4984",
+    "version": "0.11.4985",
     "x-logo": {
       "url": "https://www.lusid.com/app/assets/logo_white.png",
       "backgroundColor": "#415464"
@@ -35525,14 +35525,16 @@
                     "side": "Side1",
                     "direction": -1,
                     "properties": {},
-                    "mappings": []
+                    "mappings": [],
+                    "movementOptions": []
                   },
                   {
                     "movementTypes": "CashCommitment",
                     "side": "Side2",
                     "direction": 1,
                     "properties": {},
-                    "mappings": []
+                    "mappings": [],
+                    "movementOptions": []
                   }
                 ],
                 "properties": {}
@@ -35560,14 +35562,16 @@
                     "side": "Side1",
                     "direction": -1,
                     "properties": {},
-                    "mappings": []
+                    "mappings": [],
+                    "movementOptions": []
                   },
                   {
                     "movementTypes": "CashCommitment",
                     "side": "Side2",
                     "direction": 1,
                     "properties": {},
-                    "mappings": []
+                    "mappings": [],
+                    "movementOptions": []
                   }
                 ],
                 "properties": {}
@@ -35595,14 +35599,16 @@
                     "side": "Side1",
                     "direction": -1,
                     "properties": {},
-                    "mappings": []
+                    "mappings": [],
+                    "movementOptions": []
                   },
                   {
                     "movementTypes": "CashCommitment",
                     "side": "Side2",
                     "direction": 1,
                     "properties": {},
-                    "mappings": []
+                    "mappings": [],
+                    "movementOptions": []
                   }
                 ],
                 "properties": {}
@@ -35630,14 +35636,16 @@
                     "side": "Side1",
                     "direction": -1,
                     "properties": {},
-                    "mappings": []
+                    "mappings": [],
+                    "movementOptions": []
                   },
                   {
                     "movementTypes": "CashCommitment",
                     "side": "Side2",
                     "direction": 1,
                     "properties": {},
-                    "mappings": []
+                    "mappings": [],
+                    "movementOptions": []
                   }
                 ],
                 "properties": {}
@@ -64130,6 +64138,14 @@
             "type": "string",
             "description": "The movement name (optional)",
             "nullable": true
+          },
+          "movementOptions": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "description": "Allows extra specifications for the movement. The only option currently available is 'DirectAdjustment'. A movement type of 'StockMovement' with an option of 'DirectAdjusment' will allow you to adjust the unitsof a holding without affecting its cost base. You will, therefore, be able to reflect the impact of a stock split by loading a Transaction.",
+            "nullable": true
           }
         },
         "additionalProperties": false
@@ -64194,6 +64210,14 @@
           "name": {
             "type": "string",
             "description": "The movement name (optional)",
+            "nullable": true
+          },
+          "movementOptions": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "description": "Allows extra specifications for the movement. The only option currently available is 'DirectAdjustment'. A movement type of 'StockMovement' with an option of 'DirectAdjusment' will allow you to adjust the unitsof a holding without affecting its cost base. You will, therefore, be able to reflect the impact of a stock split by loading a Transaction.",
             "nullable": true
           }
         },
