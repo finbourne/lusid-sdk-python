@@ -9,7 +9,7 @@
       "url": "https://www.finbourne.com",
       "email": "info@finbourne.com"
     },
-    "version": "0.11.5004",
+    "version": "0.11.5005",
     "x-logo": {
       "url": "https://www.lusid.com/app/assets/logo_white.png",
       "backgroundColor": "#415464"
@@ -1363,7 +1363,8 @@
               "minLength": 1,
               "pattern": "^[a-zA-Z0-9\\-_]+$",
               "type": "string",
-              "description": "The scope to which the allocation belongs."
+              "description": "The scope to which the allocation belongs.",
+              "nullable": true
             }
           },
           {
@@ -1374,8 +1375,10 @@
             "schema": {
               "maxLength": 64,
               "minLength": 1,
+              "pattern": "^[a-zA-Z0-9\\-_]+$",
               "type": "string",
-              "description": "The allocation's unique identifier."
+              "description": "The allocation's unique identifier.",
+              "nullable": true
             }
           },
           {
@@ -1638,6 +1641,7 @@
             "schema": {
               "maxLength": 64,
               "minLength": 1,
+              "pattern": "^[a-zA-Z0-9\\-_]+$",
               "type": "string",
               "description": "The allocation's code. This, together with the scope uniquely identifies the allocation to delete."
             }
@@ -15567,7 +15571,8 @@
               "minLength": 1,
               "pattern": "^[a-zA-Z0-9\\-_]+$",
               "type": "string",
-              "description": "The scope to which the order belongs."
+              "description": "The scope to which the order belongs.",
+              "nullable": true
             }
           },
           {
@@ -15578,8 +15583,10 @@
             "schema": {
               "maxLength": 64,
               "minLength": 1,
+              "pattern": "^[a-zA-Z0-9\\-_]+$",
               "type": "string",
-              "description": "The order's unique identifier."
+              "description": "The order's unique identifier.",
+              "nullable": true
             }
           },
           {
@@ -15839,6 +15846,7 @@
             "schema": {
               "maxLength": 64,
               "minLength": 1,
+              "pattern": "^[a-zA-Z0-9\\-_]+$",
               "type": "string",
               "description": "The order's code. This, together with the scope uniquely identifies the order to delete."
             }
