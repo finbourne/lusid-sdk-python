@@ -9,7 +9,7 @@
       "url": "https://www.finbourne.com",
       "email": "info@finbourne.com"
     },
-    "version": "0.11.5006",
+    "version": "0.11.5007",
     "x-logo": {
       "url": "https://www.lusid.com/app/assets/logo_white.png",
       "backgroundColor": "#415464"
@@ -17,7 +17,7 @@
   },
   "servers": [
     {
-      "url": "https://fbn-prd.lusid.com/api"
+      "url": "https://www.lusid.com/api"
     }
   ],
   "paths": {
@@ -49781,6 +49781,7 @@
       "AggregatedReturn": {
         "required": [
           "effectiveAt",
+          "endOfPeriod",
           "metricsValue"
         ],
         "type": "object",
@@ -49788,6 +49789,11 @@
           "effectiveAt": {
             "type": "string",
             "description": "The effectiveAt for the return.",
+            "format": "date-time"
+          },
+          "endOfPeriod": {
+            "type": "string",
+            "description": "The end of period date. For the monthly period this will be the Month End Date.",
             "format": "date-time"
           },
           "openingMarketValue": {
@@ -66682,7 +66688,7 @@
         "description": "OAuth2 Implicit Grant",
         "flows": {
           "implicit": {
-            "authorizationUrl": "https://lusid.okta.com/oauth2/default/v1/authorize",
+            "authorizationUrl": "https://dummyurl.lusid.com/",
             "scopes": {}
           }
         }
