@@ -9,7 +9,7 @@
       "url": "https://www.finbourne.com",
       "email": "info@finbourne.com"
     },
-    "version": "0.11.5036",
+    "version": "0.11.5037",
     "x-logo": {
       "url": "https://www.lusid.com/app/assets/logo_white.png",
       "backgroundColor": "#415464"
@@ -10485,6 +10485,596 @@
         "x-fbn-apistatus": "EarlyAccess"
       }
     },
+    "/api/instruments/{identifierType}/{identifier}/properties": {
+      "get": {
+        "tags": [
+          "Instruments"
+        ],
+        "summary": "[EARLY ACCESS] GetInstrumentProperties: Get instrument properties",
+        "description": "List all the properties of a particular instrument, as identified by a particular unique identifier.",
+        "operationId": "GetInstrumentProperties",
+        "parameters": [
+          {
+            "name": "identifierType",
+            "in": "path",
+            "description": "The unique identifier type to search, for example 'Figi'.",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "description": "The unique identifier type to search, for example 'Figi'.",
+              "nullable": true
+            }
+          },
+          {
+            "name": "identifier",
+            "in": "path",
+            "description": "An <i>identifierType</i> value to use to identify the instrument, for example 'BBG000BLNNV0'.",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "description": "An <i>identifierType</i> value to use to identify the instrument, for example 'BBG000BLNNV0'.",
+              "nullable": true
+            }
+          },
+          {
+            "name": "effectiveAt",
+            "in": "query",
+            "description": "The effective datetime or cut label at which to list the instrument's properties.\r\n            Defaults to the current LUSID system datetime if not specified.",
+            "schema": {
+              "type": "string",
+              "description": "The effective datetime or cut label at which to list the instrument's properties.\r\n            Defaults to the current LUSID system datetime if not specified.",
+              "format": "dateorcutlabel",
+              "nullable": true
+            }
+          },
+          {
+            "name": "asAt",
+            "in": "query",
+            "description": "The asAt datetime at which to list the instrument's properties. Defaults to returning\r\n            the latest version of each property if not specified.",
+            "schema": {
+              "type": "string",
+              "description": "The asAt datetime at which to list the instrument's properties. Defaults to returning\r\n            the latest version of each property if not specified.",
+              "format": "date-time",
+              "nullable": true
+            },
+            "x-nullable": true
+          },
+          {
+            "name": "scope",
+            "in": "query",
+            "description": "The scope in which the instrument lies. When not supplied the scope is 'default'.",
+            "schema": {
+              "maxLength": 64,
+              "minLength": 1,
+              "pattern": "^[a-zA-Z0-9\\-_]+$",
+              "type": "string",
+              "description": "The scope in which the instrument lies. When not supplied the scope is 'default'.",
+              "default": "default",
+              "nullable": true
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The properties of the specified instrument",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/InstrumentProperties"
+                },
+                "example": {
+                  "properties": {
+                    "instrument/MyScope/SomeInstrumentProperty": {
+                      "key": "Instrument/MyScope/SomeInstrumentProperty",
+                      "value": {
+                        "labelValue": "XYZ000034567"
+                      },
+                      "effectiveFrom": "2018-01-01T12:00:00.0000000+00:00"
+                    },
+                    "instrument/MyScope/SomeOtherInstrumentProperty": {
+                      "key": "Instrument/MyScope/SomeOtherInstrumentProperty",
+                      "value": {
+                        "labelValue": "XYZ00008910"
+                      },
+                      "effectiveFrom": "2017-01-01T12:00:00.0000000+00:00"
+                    }
+                  },
+                  "version": {
+                    "effectiveFrom": "2015-01-01T12:00:00.0000000+00:00",
+                    "asAtDate": "2020-01-01T12:00:00.0000000+00:00"
+                  }
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/InstrumentProperties"
+                },
+                "example": {
+                  "properties": {
+                    "instrument/MyScope/SomeInstrumentProperty": {
+                      "key": "Instrument/MyScope/SomeInstrumentProperty",
+                      "value": {
+                        "labelValue": "XYZ000034567"
+                      },
+                      "effectiveFrom": "2018-01-01T12:00:00.0000000+00:00"
+                    },
+                    "instrument/MyScope/SomeOtherInstrumentProperty": {
+                      "key": "Instrument/MyScope/SomeOtherInstrumentProperty",
+                      "value": {
+                        "labelValue": "XYZ00008910"
+                      },
+                      "effectiveFrom": "2017-01-01T12:00:00.0000000+00:00"
+                    }
+                  },
+                  "version": {
+                    "effectiveFrom": "2015-01-01T12:00:00.0000000+00:00",
+                    "asAtDate": "2020-01-01T12:00:00.0000000+00:00"
+                  }
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/InstrumentProperties"
+                },
+                "example": {
+                  "properties": {
+                    "instrument/MyScope/SomeInstrumentProperty": {
+                      "key": "Instrument/MyScope/SomeInstrumentProperty",
+                      "value": {
+                        "labelValue": "XYZ000034567"
+                      },
+                      "effectiveFrom": "2018-01-01T12:00:00.0000000+00:00"
+                    },
+                    "instrument/MyScope/SomeOtherInstrumentProperty": {
+                      "key": "Instrument/MyScope/SomeOtherInstrumentProperty",
+                      "value": {
+                        "labelValue": "XYZ00008910"
+                      },
+                      "effectiveFrom": "2017-01-01T12:00:00.0000000+00:00"
+                    }
+                  },
+                  "version": {
+                    "effectiveFrom": "2015-01-01T12:00:00.0000000+00:00",
+                    "asAtDate": "2020-01-01T12:00:00.0000000+00:00"
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "The details of the input related failure",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/LusidValidationProblemDetails"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/LusidValidationProblemDetails"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/LusidValidationProblemDetails"
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "Error response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/LusidProblemDetails"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "oauth2": []
+          }
+        ],
+        "x-fbn-apistatus": "EarlyAccess"
+      }
+    },
+    "/api/instruments/{identifierType}/{identifier}/properties/$delete": {
+      "post": {
+        "tags": [
+          "Instruments"
+        ],
+        "summary": "[EARLY ACCESS] DeleteInstrumentProperties: Delete instrument properties",
+        "description": "Delete one or more properties from a particular instrument. If the properties are time-variant then an effective datetime from which\r\nto delete properties must be specified. If the properties are perpetual then it is invalid to specify an effective datetime for deletion.",
+        "operationId": "DeleteInstrumentProperties",
+        "parameters": [
+          {
+            "name": "identifierType",
+            "in": "path",
+            "description": "The unique identifier type to search, for example 'Figi'.",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "description": "The unique identifier type to search, for example 'Figi'.",
+              "nullable": true
+            }
+          },
+          {
+            "name": "identifier",
+            "in": "path",
+            "description": "An <i>identifierType</i> value to use to identify the instrument, for example 'BBG000BLNNV0'.",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "description": "An <i>identifierType</i> value to use to identify the instrument, for example 'BBG000BLNNV0'.",
+              "nullable": true
+            }
+          },
+          {
+            "name": "effectiveAt",
+            "in": "query",
+            "description": "The effective datetime or cut label at which to delete time-variant properties from.\r\n            The property must exist at the specified 'effectiveAt' datetime. If the 'effectiveAt' is not provided or is\r\n            before the time-variant property exists then a failure is returned. Do not specify this parameter if any of\r\n            the properties to delete are perpetual.",
+            "schema": {
+              "type": "string",
+              "description": "The effective datetime or cut label at which to delete time-variant properties from.\r\n            The property must exist at the specified 'effectiveAt' datetime. If the 'effectiveAt' is not provided or is\r\n            before the time-variant property exists then a failure is returned. Do not specify this parameter if any of\r\n            the properties to delete are perpetual.",
+              "format": "dateorcutlabel",
+              "nullable": true
+            }
+          },
+          {
+            "name": "scope",
+            "in": "query",
+            "description": "The scope in which the instrument lies. When not supplied the scope is 'default'.",
+            "schema": {
+              "maxLength": 64,
+              "minLength": 1,
+              "pattern": "^[a-zA-Z0-9\\-_]+$",
+              "type": "string",
+              "description": "The scope in which the instrument lies. When not supplied the scope is 'default'.",
+              "default": "default",
+              "nullable": true
+            }
+          }
+        ],
+        "requestBody": {
+          "description": "A list of property keys from the 'Instruments' domain whose properties to delete.",
+          "content": {
+            "application/json-patch+json": {
+              "schema": {
+                "type": "array",
+                "items": {
+                  "type": "string",
+                  "description": "The key that uniquely identifies the property. It has the format {domain}/{scope}/{code}."
+                },
+                "description": "A list of property keys from the 'Instruments' domain whose properties to delete."
+              },
+              "example": [
+                "Instrument/scope/market-sector",
+                "Instrument/scope/tenor"
+              ]
+            },
+            "application/json": {
+              "schema": {
+                "type": "array",
+                "items": {
+                  "type": "string",
+                  "description": "The key that uniquely identifies the property. It has the format {domain}/{scope}/{code}."
+                },
+                "description": "A list of property keys from the 'Instruments' domain whose properties to delete."
+              },
+              "example": [
+                "Instrument/scope/market-sector",
+                "Instrument/scope/tenor"
+              ]
+            },
+            "text/json": {
+              "schema": {
+                "type": "array",
+                "items": {
+                  "type": "string",
+                  "description": "The key that uniquely identifies the property. It has the format {domain}/{scope}/{code}."
+                },
+                "description": "A list of property keys from the 'Instruments' domain whose properties to delete."
+              },
+              "example": [
+                "Instrument/scope/market-sector",
+                "Instrument/scope/tenor"
+              ]
+            },
+            "application/*+json": {
+              "schema": {
+                "type": "array",
+                "items": {
+                  "type": "string",
+                  "description": "The key that uniquely identifies the property. It has the format {domain}/{scope}/{code}."
+                },
+                "description": "A list of property keys from the 'Instruments' domain whose properties to delete."
+              },
+              "example": [
+                "Instrument/scope/market-sector",
+                "Instrument/scope/tenor"
+              ]
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "The asAt datetime at which properties were deleted.",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/DeleteInstrumentPropertiesResponse"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/DeleteInstrumentPropertiesResponse"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/DeleteInstrumentPropertiesResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "The details of the input related failure",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/LusidValidationProblemDetails"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/LusidValidationProblemDetails"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/LusidValidationProblemDetails"
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "Error response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/LusidProblemDetails"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "oauth2": []
+          }
+        ],
+        "x-fbn-apistatus": "EarlyAccess"
+      }
+    },
+    "/api/instruments/{identifierType}/{identifier}/properties/list": {
+      "get": {
+        "tags": [
+          "Instruments"
+        ],
+        "summary": "[EARLY ACCESS] ListInstrumentProperties: Get instrument properties (with Pagination)",
+        "description": "List all the properties of a particular instrument, as identified by a particular unique identifier.",
+        "operationId": "ListInstrumentProperties",
+        "parameters": [
+          {
+            "name": "identifierType",
+            "in": "path",
+            "description": "The unique identifier type to search, for example 'Figi'.",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "description": "The unique identifier type to search, for example 'Figi'.",
+              "nullable": true
+            }
+          },
+          {
+            "name": "identifier",
+            "in": "path",
+            "description": "An <i>identifierType</i> value to use to identify the instrument, for example 'BBG000BLNNV0'.",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "description": "An <i>identifierType</i> value to use to identify the instrument, for example 'BBG000BLNNV0'.",
+              "nullable": true
+            }
+          },
+          {
+            "name": "effectiveAt",
+            "in": "query",
+            "description": "The effective datetime or cut label at which to list the instrument's properties.\r\n            Defaults to the current LUSID system datetime if not specified.",
+            "schema": {
+              "maxLength": 256,
+              "minLength": 0,
+              "pattern": "^[a-zA-Z0-9\\-_\\+:\\.]+$",
+              "type": "string",
+              "description": "The effective datetime or cut label at which to list the instrument's properties.\r\n            Defaults to the current LUSID system datetime if not specified.",
+              "format": "dateorcutlabel",
+              "nullable": true
+            }
+          },
+          {
+            "name": "asAt",
+            "in": "query",
+            "description": "The asAt datetime at which to list the instrument's properties. Defaults to returning\r\n            the latest version of each property if not specified.",
+            "schema": {
+              "type": "string",
+              "description": "The asAt datetime at which to list the instrument's properties. Defaults to returning\r\n            the latest version of each property if not specified.",
+              "format": "date-time",
+              "nullable": true
+            },
+            "x-nullable": true
+          },
+          {
+            "name": "page",
+            "in": "query",
+            "description": "The pagination token to use to continue listing commands; this value is returned from the previous call.",
+            "schema": {
+              "maxLength": 500,
+              "minLength": 1,
+              "pattern": "^[a-zA-Z0-9\\+/]*={0,3}$",
+              "type": "string",
+              "description": "The pagination token to use to continue listing commands; this value is returned from the previous call.",
+              "nullable": true
+            }
+          },
+          {
+            "name": "limit",
+            "in": "query",
+            "description": "When paginating, limit the results per page to this number.",
+            "schema": {
+              "maximum": 5000,
+              "minimum": 1,
+              "type": "integer",
+              "description": "When paginating, limit the results per page to this number.",
+              "format": "int32",
+              "nullable": true
+            },
+            "x-nullable": true
+          },
+          {
+            "name": "scope",
+            "in": "query",
+            "description": "The scope in which the instrument lies. When not supplied the scope is 'default'.",
+            "schema": {
+              "maxLength": 64,
+              "minLength": 1,
+              "pattern": "^[a-zA-Z0-9\\-_]+$",
+              "type": "string",
+              "description": "The scope in which the instrument lies. When not supplied the scope is 'default'.",
+              "default": "default",
+              "nullable": true
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The properties of the specified instrument",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResourceListOfProperty"
+                },
+                "example": {
+                  "values": [
+                    {
+                      "key": "Instrument/MyScope/SomeInstrumentProperty",
+                      "value": {
+                        "labelValue": "XYZ000034567"
+                      },
+                      "effectiveFrom": "2018-01-01T12:00:00.0000000+00:00"
+                    },
+                    {
+                      "key": "Instrument/MyScope/SomeOtherInstrumentProperty",
+                      "value": {
+                        "labelValue": "XYZ00008910"
+                      },
+                      "effectiveFrom": "2017-01-01T12:00:00.0000000+00:00"
+                    }
+                  ],
+                  "links": []
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResourceListOfProperty"
+                },
+                "example": {
+                  "values": [
+                    {
+                      "key": "Instrument/MyScope/SomeInstrumentProperty",
+                      "value": {
+                        "labelValue": "XYZ000034567"
+                      },
+                      "effectiveFrom": "2018-01-01T12:00:00.0000000+00:00"
+                    },
+                    {
+                      "key": "Instrument/MyScope/SomeOtherInstrumentProperty",
+                      "value": {
+                        "labelValue": "XYZ00008910"
+                      },
+                      "effectiveFrom": "2017-01-01T12:00:00.0000000+00:00"
+                    }
+                  ],
+                  "links": []
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResourceListOfProperty"
+                },
+                "example": {
+                  "values": [
+                    {
+                      "key": "Instrument/MyScope/SomeInstrumentProperty",
+                      "value": {
+                        "labelValue": "XYZ000034567"
+                      },
+                      "effectiveFrom": "2018-01-01T12:00:00.0000000+00:00"
+                    },
+                    {
+                      "key": "Instrument/MyScope/SomeOtherInstrumentProperty",
+                      "value": {
+                        "labelValue": "XYZ00008910"
+                      },
+                      "effectiveFrom": "2017-01-01T12:00:00.0000000+00:00"
+                    }
+                  ],
+                  "links": []
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "The details of the input related failure",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/LusidValidationProblemDetails"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/LusidValidationProblemDetails"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/LusidValidationProblemDetails"
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "Error response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/LusidProblemDetails"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "oauth2": []
+          }
+        ],
+        "x-fbn-apistatus": "EarlyAccess"
+      }
+    },
     "/api/instruments/{identifierType}/{identifier}/properties/time-series": {
       "get": {
         "tags": [
@@ -14099,6 +14689,140 @@
       }
     },
     "/api/legalentities/{idTypeScope}/{idTypeCode}/{code}/properties": {
+      "delete": {
+        "tags": [
+          "Legal Entities"
+        ],
+        "summary": "[EARLY ACCESS] DeleteLegalEntityProperties: Delete Legal Entity Properties",
+        "description": "Delete all properties that belong to the given property keys of the legal entity.",
+        "operationId": "DeleteLegalEntityProperties",
+        "parameters": [
+          {
+            "name": "idTypeScope",
+            "in": "path",
+            "description": "Scope of the legal entity identifier type.",
+            "required": true,
+            "schema": {
+              "maxLength": 64,
+              "minLength": 1,
+              "pattern": "^[a-zA-Z0-9\\-_]+$",
+              "type": "string",
+              "description": "Scope of the legal entity identifier type.",
+              "nullable": true
+            }
+          },
+          {
+            "name": "idTypeCode",
+            "in": "path",
+            "description": "Code of the legal entity identifier type.",
+            "required": true,
+            "schema": {
+              "maxLength": 64,
+              "minLength": 1,
+              "pattern": "^[a-zA-Z0-9\\-_]+$",
+              "type": "string",
+              "description": "Code of the legal entity identifier type.",
+              "nullable": true
+            }
+          },
+          {
+            "name": "code",
+            "in": "path",
+            "description": "Code of the legal entity under specified identifier type's scope and code. This together with stated identifier type uniquely\r\n            identifies the legal entity.",
+            "required": true,
+            "schema": {
+              "maxLength": 64,
+              "minLength": 1,
+              "type": "string",
+              "description": "Code of the legal entity under specified identifier type's scope and code. This together with stated identifier type uniquely\r\n            identifies the legal entity.",
+              "nullable": true
+            }
+          },
+          {
+            "name": "propertyKeys",
+            "in": "query",
+            "description": "The property keys of the legal entities properties to delete. These take the format\r\n            {domain}/{scope}/{code} e.g. \"LegalEntity/CompanyDetails/Role\". Each property must be from the \"LegalEntity\" domain. Properties or identifiers not specified in request will not be changed.",
+            "required": true,
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "string",
+                "description": "The key that uniquely identifies the property. It has the format {domain}/{scope}/{code}."
+              },
+              "description": "The property keys of the legal entities properties to delete. These take the format\r\n            {domain}/{scope}/{code} e.g. \"LegalEntity/CompanyDetails/Role\". Each property must be from the \"LegalEntity\" domain. Properties or identifiers not specified in request will not be changed."
+            }
+          },
+          {
+            "name": "effectiveAt",
+            "in": "query",
+            "description": "The effective datetime or cut label at which to delete time-variant properties from.\r\n            The property must exist at the specified 'effectiveAt' datetime. If the 'effectiveAt' is not provided or is\r\n            before the time-variant property exists then a failure is returned. Do not specify this parameter if any of\r\n            the properties to delete are perpetual.",
+            "schema": {
+              "type": "string",
+              "description": "The effective datetime or cut label at which to delete time-variant properties from.\r\n            The property must exist at the specified 'effectiveAt' datetime. If the 'effectiveAt' is not provided or is\r\n            before the time-variant property exists then a failure is returned. Do not specify this parameter if any of\r\n            the properties to delete are perpetual.",
+              "format": "dateorcutlabel",
+              "nullable": true
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The datetime that the properties were deleted from the specified legal entity",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/DeletedEntityResponse"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/DeletedEntityResponse"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/DeletedEntityResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "The details of the input related failure",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/LusidValidationProblemDetails"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/LusidValidationProblemDetails"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/LusidValidationProblemDetails"
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "Error response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/LusidProblemDetails"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "oauth2": []
+          }
+        ],
+        "x-fbn-apistatus": "EarlyAccess"
+      },
       "post": {
         "tags": [
           "Legal Entities"
@@ -14429,6 +15153,179 @@
                     "effectiveFrom": "2019-01-01T12:00:00.0000000+00:00",
                     "asAtDate": "2019-01-01T12:00:00.0100000+00:00"
                   }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "The details of the input related failure",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/LusidValidationProblemDetails"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/LusidValidationProblemDetails"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/LusidValidationProblemDetails"
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "Error response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/LusidProblemDetails"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "oauth2": []
+          }
+        ],
+        "x-fbn-apistatus": "EarlyAccess"
+      }
+    },
+    "/api/legalentities/{idTypeScope}/{idTypeCode}/{code}/properties/time-series": {
+      "get": {
+        "tags": [
+          "Legal Entities"
+        ],
+        "summary": "[EARLY ACCESS] GetLegalEntityPropertyTimeSeries: Get Legal Entity Property Time Series",
+        "description": "List the complete time series of a legal entity property.",
+        "operationId": "GetLegalEntityPropertyTimeSeries",
+        "parameters": [
+          {
+            "name": "idTypeScope",
+            "in": "path",
+            "description": "Scope of the legal entity identifier type.",
+            "required": true,
+            "schema": {
+              "maxLength": 64,
+              "minLength": 1,
+              "pattern": "^[a-zA-Z0-9\\-_]+$",
+              "type": "string",
+              "description": "Scope of the legal entity identifier type.",
+              "nullable": true
+            }
+          },
+          {
+            "name": "idTypeCode",
+            "in": "path",
+            "description": "Code of the legal entity identifier type.",
+            "required": true,
+            "schema": {
+              "maxLength": 64,
+              "minLength": 1,
+              "pattern": "^[a-zA-Z0-9\\-_]+$",
+              "type": "string",
+              "description": "Code of the legal entity identifier type.",
+              "nullable": true
+            }
+          },
+          {
+            "name": "code",
+            "in": "path",
+            "description": "Code of the legal entity under specified identifier type's scope and code. This together with stated identifier type uniquely identifies the legal entity.",
+            "required": true,
+            "schema": {
+              "maxLength": 64,
+              "minLength": 1,
+              "type": "string",
+              "description": "Code of the legal entity under specified identifier type's scope and code. This together with stated identifier type uniquely identifies the legal entity.",
+              "nullable": true
+            }
+          },
+          {
+            "name": "propertyKey",
+            "in": "query",
+            "description": "The property key of the property that will have its history shown. These must be in the format {domain}/{scope}/{code} e.g. \"LegalEntity/ContactDetails/Address\".\r\n            Each property must be from the \"LegalEntity\" domain.",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "description": "The key that uniquely identifies the property. It has the format {domain}/{scope}/{code}."
+            }
+          },
+          {
+            "name": "asAt",
+            "in": "query",
+            "description": "The asAt datetime at which to list the person's property history. Defaults to return the current datetime if not supplied.",
+            "schema": {
+              "type": "string",
+              "description": "The asAt datetime at which to list the person's property history. Defaults to return the current datetime if not supplied.",
+              "format": "date-time",
+              "nullable": true
+            },
+            "x-nullable": true
+          },
+          {
+            "name": "filter",
+            "in": "query",
+            "description": "Expression to filter the result set. Read more about filtering results from LUSID here https://support.lusid.com/filtering-results-from-lusid.",
+            "schema": {
+              "maxLength": 16384,
+              "minLength": 0,
+              "pattern": "^[\\s\\S]*$",
+              "type": "string",
+              "description": "Expression to filter the result set. Read more about filtering results from LUSID here https://support.lusid.com/filtering-results-from-lusid.",
+              "nullable": true
+            }
+          },
+          {
+            "name": "page",
+            "in": "query",
+            "description": "The pagination token to use to continue listing properties from a previous call to get property time series.\r\n            This value is returned from the previous call. If a pagination token is provided the filter and asAt fields\r\n            must not have changed since the original request.",
+            "schema": {
+              "maxLength": 500,
+              "minLength": 1,
+              "pattern": "^[a-zA-Z0-9\\+/]*={0,3}$",
+              "type": "string",
+              "description": "The pagination token to use to continue listing properties from a previous call to get property time series.\r\n            This value is returned from the previous call. If a pagination token is provided the filter and asAt fields\r\n            must not have changed since the original request.",
+              "nullable": true
+            }
+          },
+          {
+            "name": "limit",
+            "in": "query",
+            "description": "When paginating, limit the number of returned results to this many.",
+            "schema": {
+              "maximum": 5000,
+              "minimum": 1,
+              "type": "integer",
+              "description": "When paginating, limit the number of returned results to this many.",
+              "format": "int32",
+              "nullable": true
+            },
+            "x-nullable": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The time series of the property",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResourceListOfPropertyInterval"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResourceListOfPropertyInterval"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResourceListOfPropertyInterval"
                 }
               }
             }
@@ -27124,6 +28021,176 @@
                     }
                   ],
                   "links": []
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "The details of the input related failure",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/LusidValidationProblemDetails"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/LusidValidationProblemDetails"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/LusidValidationProblemDetails"
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "Error response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/LusidProblemDetails"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "oauth2": []
+          }
+        ],
+        "x-fbn-apistatus": "EarlyAccess"
+      }
+    },
+    "/api/portfolios/{scope}/{code}/properties/time-series": {
+      "get": {
+        "tags": [
+          "Portfolios"
+        ],
+        "summary": "[EARLY ACCESS] GetPortfolioPropertyTimeSeries: Get portfolio property time series",
+        "description": "Show the complete time series (history) for a particular portfolio property.",
+        "operationId": "GetPortfolioPropertyTimeSeries",
+        "parameters": [
+          {
+            "name": "scope",
+            "in": "path",
+            "description": "The scope of the portfolio.",
+            "required": true,
+            "schema": {
+              "maxLength": 64,
+              "minLength": 1,
+              "pattern": "^[a-zA-Z0-9\\-_]+$",
+              "type": "string",
+              "description": "The scope of the portfolio.",
+              "nullable": true
+            }
+          },
+          {
+            "name": "code",
+            "in": "path",
+            "description": "The code of the portfolio. Together with the scope this uniquely identifies the portfolio.",
+            "required": true,
+            "schema": {
+              "maxLength": 64,
+              "minLength": 1,
+              "pattern": "^[a-zA-Z0-9\\-_]+$",
+              "type": "string",
+              "description": "The code of the portfolio. Together with the scope this uniquely identifies the portfolio.",
+              "nullable": true
+            }
+          },
+          {
+            "name": "propertyKey",
+            "in": "query",
+            "description": "The property key of the property whose history to show.\r\n            This must be from the 'Portfolio' domain and in the format {domain}/{scope}/{code}, for example 'Portfolio/Manager/Id'.",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "description": "The key that uniquely identifies the property. It has the format {domain}/{scope}/{code}."
+            }
+          },
+          {
+            "name": "portfolioEffectiveAt",
+            "in": "query",
+            "description": "The effective datetime used to resolve the portfolio. Defaults to the current LUSID system datetime if not specified.",
+            "schema": {
+              "type": "string",
+              "description": "The effective datetime used to resolve the portfolio. Defaults to the current LUSID system datetime if not specified.",
+              "nullable": true
+            }
+          },
+          {
+            "name": "asAt",
+            "in": "query",
+            "description": "The asAt datetime at which to show the history. Defaults to returning the current datetime if not supplied.",
+            "schema": {
+              "type": "string",
+              "description": "The asAt datetime at which to show the history. Defaults to returning the current datetime if not supplied.",
+              "format": "date-time",
+              "nullable": true
+            },
+            "x-nullable": true
+          },
+          {
+            "name": "filter",
+            "in": "query",
+            "description": "Expression to filter the results. For more information about filtering,\r\n            see https://support.lusid.com/knowledgebase/article/KA-01914.",
+            "schema": {
+              "maxLength": 16384,
+              "minLength": 0,
+              "pattern": "^[\\s\\S]*$",
+              "type": "string",
+              "description": "Expression to filter the results. For more information about filtering,\r\n            see https://support.lusid.com/knowledgebase/article/KA-01914.",
+              "nullable": true
+            }
+          },
+          {
+            "name": "page",
+            "in": "query",
+            "description": "The pagination token to use to continue listing properties; this value is returned from\r\n            the previous call. If a pagination token is provided, the filter, portfolioEffectiveAt, and asAt fields\r\n            must not have changed since the original request.",
+            "schema": {
+              "maxLength": 500,
+              "minLength": 1,
+              "pattern": "^[a-zA-Z0-9\\+/]*={0,3}$",
+              "type": "string",
+              "description": "The pagination token to use to continue listing properties; this value is returned from\r\n            the previous call. If a pagination token is provided, the filter, portfolioEffectiveAt, and asAt fields\r\n            must not have changed since the original request.",
+              "nullable": true
+            }
+          },
+          {
+            "name": "limit",
+            "in": "query",
+            "description": "When paginating, limit the results to this number.",
+            "schema": {
+              "maximum": 5000,
+              "minimum": 1,
+              "type": "integer",
+              "description": "When paginating, limit the results to this number.",
+              "format": "int32",
+              "nullable": true
+            },
+            "x-nullable": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The time series of the property",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResourceListOfPropertyInterval"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResourceListOfPropertyInterval"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResourceListOfPropertyInterval"
                 }
               }
             }
@@ -53699,6 +54766,28 @@
         },
         "additionalProperties": false
       },
+      "DeleteInstrumentPropertiesResponse": {
+        "required": [
+          "asAt"
+        ],
+        "type": "object",
+        "properties": {
+          "asAt": {
+            "type": "string",
+            "description": "The as-at datetime at which properties were deleted.",
+            "format": "date-time"
+          },
+          "links": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Link"
+            },
+            "description": "Collection of links.",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
       "DeleteInstrumentResponse": {
         "required": [
           "asAt"
@@ -57926,6 +59015,37 @@
         },
         "additionalProperties": false,
         "description": "A collection of instrument search results"
+      },
+      "InstrumentProperties": {
+        "type": "object",
+        "properties": {
+          "href": {
+            "type": "string",
+            "description": "The specific Uniform Resource Identifier (URI) for this resource at the requested effective and asAt datetime.",
+            "format": "uri",
+            "nullable": true
+          },
+          "properties": {
+            "type": "object",
+            "additionalProperties": {
+              "$ref": "#/components/schemas/Property"
+            },
+            "description": "The instrument properties. These will be from the 'Instrument' domain.",
+            "nullable": true
+          },
+          "version": {
+            "$ref": "#/components/schemas/Version"
+          },
+          "links": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Link"
+            },
+            "description": "Collection of links.",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
       },
       "InstrumentSearchProperty": {
         "required": [
