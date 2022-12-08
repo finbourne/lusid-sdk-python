@@ -159,6 +159,9 @@ This is based on the [OpenAPI specification](https://github.com/OAI/OpenAPI-Spec
 
 If you want to generate the Python SDK locally from the FINBOURNE OpenAPI specification, see [github.com/finbourne/lusid-sdk-generators](https://github.com/finbourne/lusid-sdk-generators).
 
+## Contributing
+
+This SDK is automatically generated and so cannot accept changes. We welcome contributions to other repos, such as the [Sample Jupyter Notebooks](https://github.com/finbourne/sample-notebooks) repo and the [LUSID SDK Examples Python](https://github.com/finbourne/lusid-sdk-examples-python) repo.
 ## Build status 
 
 | branch | status |
