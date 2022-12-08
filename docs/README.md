@@ -1,7 +1,3 @@
-# Contributing to the SDK
-
-Please read `CONTRIBUTING.md` and `CODE_OF_CONDUCT.md`.
-
 # Viewing the SDK documentation online
 
 The SDK documentation is [available to view online](https://lusid-sdk-python.readthedocs.io/en/latest/_autosummary/sdk.lusid.html).
