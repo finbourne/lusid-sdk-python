@@ -9,7 +9,7 @@
       "url": "https://www.finbourne.com",
       "email": "info@finbourne.com"
     },
-    "version": "0.11.5061",
+    "version": "0.11.5062",
     "x-logo": {
       "url": "https://www.lusid.com/app/assets/logo_white.png",
       "backgroundColor": "#415464"
@@ -67878,6 +67878,10 @@
       "description": ""
     },
     {
+      "name": "Chart Of Accounts",
+      "description": "Methods to create and manage chart of accounts and accounts."
+    },
+    {
       "name": "Complex Market Data",
       "description": "Methods for the storage and retrieval of complex market data documents."
     },
@@ -68062,6 +68066,7 @@
       "Application Metadata",
       "Blocks",
       "Calendars",
+      "Chart Of Accounts",
       "Complex Market Data",
       "Compliance",
       "Configuration Recipe",
