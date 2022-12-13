@@ -9,7 +9,7 @@
       "url": "https://www.finbourne.com",
       "email": "info@finbourne.com"
     },
-    "version": "0.11.5063",
+    "version": "0.11.5064",
     "x-logo": {
       "url": "https://www.lusid.com/app/assets/logo_white.png",
       "backgroundColor": "#415464"
@@ -17,7 +17,7 @@
   },
   "servers": [
     {
-      "url": "https://fbn-prd.lusid.com/api"
+      "url": "https://www.lusid.com/api"
     }
   ],
   "paths": {
@@ -932,7 +932,7 @@
                     "quantity": 100,
                     "portfolioId": {
                       "scope": "MyScope",
-                      "code": "UK Equity"
+                      "code": "UKEquity"
                     },
                     "allocatedOrderId": {
                       "scope": "MyScope",
@@ -945,7 +945,7 @@
                     "placementIds": [
                       {
                         "scope": "MyScope",
-                        "code": "A placement"
+                        "code": "SomePlacement"
                       }
                     ],
                     "state": "New",
@@ -985,7 +985,7 @@
                     "quantity": 100,
                     "portfolioId": {
                       "scope": "MyScope",
-                      "code": "UK Equity"
+                      "code": "UKEquity"
                     },
                     "allocatedOrderId": {
                       "scope": "MyScope",
@@ -998,7 +998,7 @@
                     "placementIds": [
                       {
                         "scope": "MyScope",
-                        "code": "A placement"
+                        "code": "SomePlacement"
                       }
                     ],
                     "state": "New",
@@ -1038,7 +1038,7 @@
                     "quantity": 100,
                     "portfolioId": {
                       "scope": "MyScope",
-                      "code": "UK Equity"
+                      "code": "UKEquity"
                     },
                     "allocatedOrderId": {
                       "scope": "MyScope",
@@ -1051,7 +1051,7 @@
                     "placementIds": [
                       {
                         "scope": "MyScope",
-                        "code": "A placement"
+                        "code": "SomePlacement"
                       }
                     ],
                     "state": "New",
@@ -1091,7 +1091,7 @@
                     "quantity": 100,
                     "portfolioId": {
                       "scope": "MyScope",
-                      "code": "UK Equity"
+                      "code": "UKEquity"
                     },
                     "allocatedOrderId": {
                       "scope": "MyScope",
@@ -1104,7 +1104,7 @@
                     "placementIds": [
                       {
                         "scope": "MyScope",
-                        "code": "A placement"
+                        "code": "SomePlacement"
                       }
                     ],
                     "state": "New",
@@ -16041,11 +16041,11 @@
                     "side": "Buy",
                     "orderBookId": {
                       "scope": "MyScope",
-                      "code": "UKEQ Orders"
+                      "code": "UKEQ-Orders"
                     },
                     "portfolioId": {
                       "scope": "MyScope",
-                      "code": "UK Equity"
+                      "code": "UK-Equity"
                     },
                     "id": {
                       "scope": "MyScope",
@@ -16065,7 +16065,7 @@
                     },
                     "package": {
                       "scope": "MyScope",
-                      "code": "UKEQ Package"
+                      "code": "UKEQ-Package"
                     }
                   }
                 ]
@@ -16093,11 +16093,11 @@
                     "side": "Buy",
                     "orderBookId": {
                       "scope": "MyScope",
-                      "code": "UKEQ Orders"
+                      "code": "UKEQ-Orders"
                     },
                     "portfolioId": {
                       "scope": "MyScope",
-                      "code": "UK Equity"
+                      "code": "UK-Equity"
                     },
                     "id": {
                       "scope": "MyScope",
@@ -16117,7 +16117,7 @@
                     },
                     "package": {
                       "scope": "MyScope",
-                      "code": "UKEQ Package"
+                      "code": "UKEQ-Package"
                     }
                   }
                 ]
@@ -16145,11 +16145,11 @@
                     "side": "Buy",
                     "orderBookId": {
                       "scope": "MyScope",
-                      "code": "UKEQ Orders"
+                      "code": "UKEQ-Orders"
                     },
                     "portfolioId": {
                       "scope": "MyScope",
-                      "code": "UK Equity"
+                      "code": "UK-Equity"
                     },
                     "id": {
                       "scope": "MyScope",
@@ -16169,7 +16169,7 @@
                     },
                     "package": {
                       "scope": "MyScope",
-                      "code": "UKEQ Package"
+                      "code": "UKEQ-Package"
                     }
                   }
                 ]
@@ -16197,11 +16197,11 @@
                     "side": "Buy",
                     "orderBookId": {
                       "scope": "MyScope",
-                      "code": "UKEQ Orders"
+                      "code": "UKEQ-Orders"
                     },
                     "portfolioId": {
                       "scope": "MyScope",
-                      "code": "UK Equity"
+                      "code": "UK-Equity"
                     },
                     "id": {
                       "scope": "MyScope",
@@ -16221,7 +16221,7 @@
                     },
                     "package": {
                       "scope": "MyScope",
-                      "code": "UKEQ Package"
+                      "code": "UKEQ-Package"
                     }
                   }
                 ]
@@ -16259,7 +16259,7 @@
                       "side": "Buy",
                       "orderBookId": {
                         "scope": "MyScope",
-                        "code": "UKEQ Orders"
+                        "code": "UKEQ-Orders"
                       },
                       "portfolioId": {
                         "scope": "MyScope",
@@ -16283,7 +16283,7 @@
                       },
                       "packageId": {
                         "scope": "MyScope",
-                        "code": "UKEQ Package"
+                        "code": "UKEQ-Package"
                       }
                     }
                   ],
@@ -16316,7 +16316,7 @@
                       "side": "Buy",
                       "orderBookId": {
                         "scope": "MyScope",
-                        "code": "UKEQ Orders"
+                        "code": "UKEQ-Orders"
                       },
                       "portfolioId": {
                         "scope": "MyScope",
@@ -16340,7 +16340,7 @@
                       },
                       "packageId": {
                         "scope": "MyScope",
-                        "code": "UKEQ Package"
+                        "code": "UKEQ-Package"
                       }
                     }
                   ],
@@ -16373,7 +16373,7 @@
                       "side": "Buy",
                       "orderBookId": {
                         "scope": "MyScope",
-                        "code": "UKEQ Orders"
+                        "code": "UKEQ-Orders"
                       },
                       "portfolioId": {
                         "scope": "MyScope",
@@ -16397,7 +16397,7 @@
                       },
                       "packageId": {
                         "scope": "MyScope",
-                        "code": "UKEQ Package"
+                        "code": "UKEQ-Package"
                       }
                     }
                   ],
@@ -16535,7 +16535,7 @@
                   "side": "Buy",
                   "orderBookId": {
                     "scope": "MyScope",
-                    "code": "UKEQ Orders"
+                    "code": "UKEQ-Orders"
                   },
                   "portfolioId": {
                     "scope": "MyScope",
@@ -16559,7 +16559,7 @@
                   },
                   "packageId": {
                     "scope": "MyScope",
-                    "code": "UKEQ Package"
+                    "code": "UKEQ-Package"
                   }
                 }
               },
@@ -16587,7 +16587,7 @@
                   "side": "Buy",
                   "orderBookId": {
                     "scope": "MyScope",
-                    "code": "UKEQ Orders"
+                    "code": "UKEQ-Orders"
                   },
                   "portfolioId": {
                     "scope": "MyScope",
@@ -16611,7 +16611,7 @@
                   },
                   "packageId": {
                     "scope": "MyScope",
-                    "code": "UKEQ Package"
+                    "code": "UKEQ-Package"
                   }
                 }
               },
@@ -16639,7 +16639,7 @@
                   "side": "Buy",
                   "orderBookId": {
                     "scope": "MyScope",
-                    "code": "UKEQ Orders"
+                    "code": "UKEQ-Orders"
                   },
                   "portfolioId": {
                     "scope": "MyScope",
@@ -16663,7 +16663,7 @@
                   },
                   "packageId": {
                     "scope": "MyScope",
-                    "code": "UKEQ Package"
+                    "code": "UKEQ-Package"
                   }
                 }
               }
@@ -67846,7 +67846,7 @@
         "description": "OAuth2 Implicit Grant",
         "flows": {
           "implicit": {
-            "authorizationUrl": "https://lusid.okta.com/oauth2/default/v1/authorize",
+            "authorizationUrl": "https://dummyurl.lusid.com/",
             "scopes": {}
           }
         }
