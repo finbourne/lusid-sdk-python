@@ -9,7 +9,7 @@
       "url": "https://www.finbourne.com",
       "email": "info@finbourne.com"
     },
-    "version": "0.11.5068",
+    "version": "0.11.5069",
     "x-logo": {
       "url": "https://www.lusid.com/app/assets/logo_white.png",
       "backgroundColor": "#415464"
@@ -58696,7 +58696,7 @@
           },
           "returnResultAsExpandedTypes": {
             "type": "boolean",
-            "description": "For complex results or financially meaningful results,\r\nthere is a need for a result to contain metadata about its currency and/or units\r\nor to have a more complicated 1D or 2D structure"
+            "description": "Financially meaningful results can be presented as either simple flat types or more complex expanded types.\r\nFor example, the present value (PV) of a holding could be represented either as a simple decimal (with currency implied)\r\nor as a decimal-currency pair. This flag allows either representation to be returned. In the PV example,\r\nthe returned value would be the decimal-currency pair if this flag is true, or the decimal only if this flag is false."
           },
           "valuationSchedule": {
             "$ref": "#/components/schemas/ValuationSchedule"
@@ -67291,7 +67291,7 @@
           },
           "returnResultAsExpandedTypes": {
             "type": "boolean",
-            "description": "For complex results or financially meaningful results,\r\nthere is a need for a result to contain metadata about its currency and/or units\r\nor to have a more complicated 1D or 2D structure"
+            "description": "Financially meaningful results can be presented as either simple flat types or more complex expanded types.\r\nFor example, the present value (PV) of a holding could be represented either as a simple decimal (with currency implied)\r\nor as a decimal-currency pair. This flag allows either representation to be returned. In the PV example,\r\nthe returned value would be the decimal-currency pair if this flag is true, or the decimal only if this flag is false."
           },
           "portfolioEntityIds": {
             "type": "array",
