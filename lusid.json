@@ -9,7 +9,7 @@
       "url": "https://www.finbourne.com",
       "email": "info@finbourne.com"
     },
-    "version": "0.11.5066",
+    "version": "0.11.5067",
     "x-logo": {
       "url": "https://www.lusid.com/app/assets/logo_white.png",
       "backgroundColor": "#415464"
@@ -47181,7 +47181,7 @@
           "Transaction Portfolios"
         ],
         "summary": "[EARLY ACCESS] BatchAdjustHoldings: Batch adjust holdings",
-        "description": "Adjust one or more holdings of the specified transaction portfolio to the provided targets. LUSID will\r\nautomatically construct adjustment transactions to ensure that the holdings which have been adjusted are\r\nalways set to the provided targets for the specified effective datetime in each request.\r\nNote: If using partial failure modes, then it is important to check the response body for failures as any failures will still return a 200 status code",
+        "description": "Adjust one or more holdings of the specified transaction portfolio to the provided targets. LUSID will\r\nautomatically construct adjustment transactions to ensure that the holdings which have been adjusted are\r\nalways set to the provided targets for the specified effective datetime in each request.\r\n            \r\nEach request must be keyed by a unique correlation id. This id is ephemeral and is not stored by LUSID.\r\nIt serves only as a way to easily identify each adjustment in the response.\r\n\r\nNote: If using partial failure modes, then it is important to check the response body for failures as any failures will still return a 200 status code",
         "operationId": "BatchAdjustHoldings",
         "parameters": [
           {
@@ -47201,14 +47201,14 @@
           {
             "name": "code",
             "in": "path",
-            "description": "The code of the transaction portfolio. Together with the scope this uniquely identifies\r\n            the transaction portfolio.",
+            "description": "The code of the transaction portfolio. Together with the scope this uniquely identifies\r\n             the transaction portfolio.",
             "required": true,
             "schema": {
               "maxLength": 64,
               "minLength": 1,
               "pattern": "^[a-zA-Z0-9\\-_]+$",
               "type": "string",
-              "description": "The code of the transaction portfolio. Together with the scope this uniquely identifies\r\n            the transaction portfolio.",
+              "description": "The code of the transaction portfolio. Together with the scope this uniquely identifies\r\n             the transaction portfolio.",
               "nullable": true
             }
           },
@@ -47241,7 +47241,7 @@
           }
         ],
         "requestBody": {
-          "description": "The selected set of holdings to adjust to the provided targets for the\r\n            transaction portfolio.",
+          "description": "The selected set of holdings to adjust to the provided targets for the\r\n             transaction portfolio.",
           "content": {
             "application/json-patch+json": {
               "schema": {
@@ -47249,7 +47249,7 @@
                 "additionalProperties": {
                   "$ref": "#/components/schemas/AdjustHoldingForDateRequest"
                 },
-                "description": "The selected set of holdings to adjust to the provided targets for the\r\n            transaction portfolio."
+                "description": "The selected set of holdings to adjust to the provided targets for the\r\n             transaction portfolio."
               },
               "example": {
                 "adjustHoldingRequest1": {
@@ -47334,7 +47334,7 @@
                 "additionalProperties": {
                   "$ref": "#/components/schemas/AdjustHoldingForDateRequest"
                 },
-                "description": "The selected set of holdings to adjust to the provided targets for the\r\n            transaction portfolio."
+                "description": "The selected set of holdings to adjust to the provided targets for the\r\n             transaction portfolio."
               },
               "example": {
                 "adjustHoldingRequest1": {
@@ -47419,7 +47419,7 @@
                 "additionalProperties": {
                   "$ref": "#/components/schemas/AdjustHoldingForDateRequest"
                 },
-                "description": "The selected set of holdings to adjust to the provided targets for the\r\n            transaction portfolio."
+                "description": "The selected set of holdings to adjust to the provided targets for the\r\n             transaction portfolio."
               },
               "example": {
                 "adjustHoldingRequest1": {
@@ -47504,7 +47504,7 @@
                 "additionalProperties": {
                   "$ref": "#/components/schemas/AdjustHoldingForDateRequest"
                 },
-                "description": "The selected set of holdings to adjust to the provided targets for the\r\n            transaction portfolio."
+                "description": "The selected set of holdings to adjust to the provided targets for the\r\n             transaction portfolio."
               },
               "example": {
                 "adjustHoldingRequest1": {
