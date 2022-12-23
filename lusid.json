@@ -9,7 +9,7 @@
       "url": "https://www.finbourne.com",
       "email": "info@finbourne.com"
     },
-    "version": "0.11.5089",
+    "version": "0.11.5090",
     "x-logo": {
       "url": "https://www.lusid.com/app/assets/logo_white.png",
       "backgroundColor": "#415464"
@@ -42626,6 +42626,17 @@
               "description": "The code of the given recipeID",
               "nullable": true
             }
+          },
+          {
+            "name": "excludeUnsettledTrades",
+            "in": "query",
+            "description": "If absent or set to false, cashflows will returned based on trade date - more specifically, cashflows from any unsettled trades will be included in the results. If set to true, unsettled trades will be excluded from the result set.",
+            "schema": {
+              "type": "boolean",
+              "description": "If absent or set to false, cashflows will returned based on trade date - more specifically, cashflows from any unsettled trades will be included in the results. If set to true, unsettled trades will be excluded from the result set.",
+              "default": false
+            },
+            "x-nullable": true
           }
         ],
         "responses": {
