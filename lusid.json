@@ -9,7 +9,7 @@
       "url": "https://www.finbourne.com",
       "email": "info@finbourne.com"
     },
-    "version": "0.11.5102",
+    "version": "0.11.5103",
     "x-logo": {
       "url": "https://www.lusid.com/app/assets/logo_white.png",
       "backgroundColor": "#415464"
@@ -17,7 +17,7 @@
   },
   "servers": [
     {
-      "url": "https://fbn-prd.lusid.com/api"
+      "url": "https://www.lusid.com/api"
     }
   ],
   "paths": {
@@ -62997,6 +62997,147 @@
         },
         "additionalProperties": false
       },
+      "ReconcileDateTimeRule": {
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/ReconciliationRule"
+          },
+          {
+            "required": [
+              "appliesTo",
+              "comparisonType",
+              "ruleType"
+            ],
+            "type": "object",
+            "properties": {
+              "comparisonType": {
+                "enum": [
+                  "Exact",
+                  "AbsoluteDifference"
+                ],
+                "type": "string",
+                "description": "The available values are: Exact, AbsoluteDifference"
+              },
+              "tolerance": {
+                "type": "number",
+                "description": "For a numeric type only (i.e. decimal, integer, date or datetime offset possibly controversially), this is the quantity used in the comparison.\r\nThe units of the tolerance must be set appropriately for the item being compared.\r\nFor a number such as a currency or amount that will be a simple quantity, for a DateTime or DateTimeOffset it should be days. If fewer than a single day then this should be\r\npassed as a fraction.",
+                "format": "double"
+              },
+              "appliesTo": {
+                "$ref": "#/components/schemas/AggregateSpec"
+              },
+              "ruleType": {
+                "enum": [
+                  "ReconcileNumericRule",
+                  "ReconcileDateTimeRule",
+                  "ReconcileStringRule",
+                  "ReconcileExact"
+                ],
+                "type": "string",
+                "description": "The available values are: ReconcileNumericRule, ReconcileDateTimeRule, ReconcileStringRule, ReconcileExact"
+              }
+            }
+          }
+        ],
+        "description": "Comparison of date time values"
+      },
+      "ReconcileNumericRule": {
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/ReconciliationRule"
+          },
+          {
+            "required": [
+              "appliesTo",
+              "comparisonType",
+              "ruleType"
+            ],
+            "type": "object",
+            "properties": {
+              "comparisonType": {
+                "enum": [
+                  "Exact",
+                  "AbsoluteDifference",
+                  "RelativeDifference"
+                ],
+                "type": "string",
+                "description": "The available values are: Exact, AbsoluteDifference, RelativeDifference"
+              },
+              "tolerance": {
+                "type": "number",
+                "description": "For a numeric type only (i.e. decimal, integer, date or datetime offset possibly controversially), this is the quantity used in the comparison.\r\nThe units of the tolerance must be set appropriately for the item being compared.\r\nFor a number such as a currency or amount that will be a simple quantity, for a DateTime or DateTimeOffset it should be days. If fewer than a single day then this should be\r\npassed as a fraction.",
+                "format": "double"
+              },
+              "appliesTo": {
+                "$ref": "#/components/schemas/AggregateSpec"
+              },
+              "ruleType": {
+                "enum": [
+                  "ReconcileNumericRule",
+                  "ReconcileDateTimeRule",
+                  "ReconcileStringRule",
+                  "ReconcileExact"
+                ],
+                "type": "string",
+                "description": "The available values are: ReconcileNumericRule, ReconcileDateTimeRule, ReconcileStringRule, ReconcileExact"
+              }
+            }
+          }
+        ]
+      },
+      "ReconcileStringRule": {
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/ReconciliationRule"
+          },
+          {
+            "required": [
+              "appliesTo",
+              "comparisonType",
+              "ruleType"
+            ],
+            "type": "object",
+            "properties": {
+              "comparisonType": {
+                "enum": [
+                  "Exact",
+                  "Contains",
+                  "CaseInsensitive",
+                  "ContainsAnyCase",
+                  "IsOneOf"
+                ],
+                "type": "string",
+                "description": "The available values are: Exact, Contains, CaseInsensitive, ContainsAnyCase, IsOneOf"
+              },
+              "oneOfCandidates": {
+                "type": "object",
+                "additionalProperties": {
+                  "type": "array",
+                  "items": {
+                    "type": "string"
+                  }
+                },
+                "description": "For cases of \"IsOneOf\" a set is required to match values against.\r\nFuzzy matching of strings against one of a set. There can be cases where systems \"A\" and \"B\" might use different terms for the same logical entity. A common case would be\r\ncomparison of something like a day count fraction where some convention like the \"actual 365\" convention might be represented as one of [\"A365\", \"Act365\", \"Actual365\"] or similar.\r\nThis is to allow this kind of fuzzy matching of values. Note that as this is exhaustive comparison across sets it will be slow and should therefore be used sparingly.",
+                "nullable": true
+              },
+              "appliesTo": {
+                "$ref": "#/components/schemas/AggregateSpec"
+              },
+              "ruleType": {
+                "enum": [
+                  "ReconcileNumericRule",
+                  "ReconcileDateTimeRule",
+                  "ReconcileStringRule",
+                  "ReconcileExact"
+                ],
+                "type": "string",
+                "description": "The available values are: ReconcileNumericRule, ReconcileDateTimeRule, ReconcileStringRule, ReconcileExact"
+              }
+            }
+          }
+        ],
+        "description": "Comparison of string values"
+      },
       "ReconciliationBreak": {
         "required": [
           "differenceCost",
@@ -63203,7 +63344,7 @@
         "additionalProperties": false,
         "description": "Base class for representing reconciliation rules in LUSID.\r\nReconciliation rules describe how a comparison between two items in the reconciliation should be performed and what constitutes equality.\r\nThis does not influence WHAT constitutes a match, but only whether once a line has been matched whether an item within it matches another item.\r\nIf a rule is not given for an item, it will default to equality comparison.\r\nThis base class should not be directly instantiated; each supported ReconciliationRuleType has a corresponding inherited class.",
         "discriminator": {
-          "propertyName": "reconciliationRuleType"
+          "propertyName": "ruleType"
         }
       },
       "ReferenceData": {
@@ -67851,7 +67992,7 @@
         "description": "OAuth2 Implicit Grant",
         "flows": {
           "implicit": {
-            "authorizationUrl": "https://lusid.okta.com/oauth2/default/v1/authorize",
+            "authorizationUrl": "https://dummyurl.lusid.com/",
             "scopes": {}
           }
         }
