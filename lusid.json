@@ -9,7 +9,7 @@
       "url": "https://www.finbourne.com",
       "email": "info@finbourne.com"
     },
-    "version": "0.11.5105",
+    "version": "0.11.5106",
     "x-logo": {
       "url": "https://www.lusid.com/app/assets/logo_white.png",
       "backgroundColor": "#415464"
@@ -48938,6 +48938,519 @@
         "x-fbn-apistatus": "Stable"
       }
     },
+    "/api/transactionportfolios/{scope}/{code}/transactions/$batchUpsert": {
+      "post": {
+        "tags": [
+          "Transaction Portfolios"
+        ],
+        "summary": "[EARLY ACCESS] BatchUpsertTransactions: Batch upsert transactions",
+        "description": "Create or update transactions in the transaction portfolio. A transaction will be updated\r\nif it already exists and created if it does not.\r\n\r\nEach request must be keyed by a unique correlation id. This id is ephemeral and is not stored by LUSID.\r\nIt serves only as a way to easily identify each transaction in the response.\r\n\r\nNote: If using partial failure modes, then it is important to check the response body for failures as any failures will still return a 200 status code",
+        "operationId": "BatchUpsertTransactions",
+        "parameters": [
+          {
+            "name": "scope",
+            "in": "path",
+            "description": "The scope of the transaction portfolio.",
+            "required": true,
+            "schema": {
+              "maxLength": 64,
+              "minLength": 1,
+              "pattern": "^[a-zA-Z0-9\\-_]+$",
+              "type": "string",
+              "description": "The scope of the transaction portfolio.",
+              "nullable": true
+            }
+          },
+          {
+            "name": "code",
+            "in": "path",
+            "description": "The code of the transaction portfolio. Together with the scope this uniquely identifies\r\n            the transaction portfolio.",
+            "required": true,
+            "schema": {
+              "maxLength": 64,
+              "minLength": 1,
+              "pattern": "^[a-zA-Z0-9\\-_]+$",
+              "type": "string",
+              "description": "The code of the transaction portfolio. Together with the scope this uniquely identifies\r\n            the transaction portfolio.",
+              "nullable": true
+            }
+          },
+          {
+            "name": "successMode",
+            "in": "query",
+            "description": "Whether the batch request should fail Atomically or in a Partial fashion - Allowed Values: Atomic, Partial.",
+            "required": true,
+            "schema": {
+              "maxLength": 64,
+              "minLength": 1,
+              "type": "string",
+              "description": "Whether the batch request should fail Atomically or in a Partial fashion - Allowed Values: Atomic, Partial.",
+              "default": "Partial"
+            }
+          }
+        ],
+        "requestBody": {
+          "description": "The payload describing the transactions to be created or updated.",
+          "content": {
+            "application/json-patch+json": {
+              "schema": {
+                "type": "object",
+                "additionalProperties": {
+                  "$ref": "#/components/schemas/TransactionRequest"
+                },
+                "description": "The payload describing the transactions to be created or updated."
+              },
+              "example": {
+                "transactionRequest-1": {
+                  "transactionId": "TransactionId-111111",
+                  "type": "StockIn",
+                  "instrumentIdentifiers": {
+                    "instrument/default/Figi": "BBG000C6K6G9",
+                    "instrument/default/Isin": "GB00BH4HKS39"
+                  },
+                  "transactionDate": "2018-03-05T00:00:00.0000000+00:00",
+                  "settlementDate": "2018-03-08T00:00:00.0000000+00:00",
+                  "units": 1000,
+                  "transactionPrice": {
+                    "price": 123,
+                    "type": "Price"
+                  },
+                  "totalConsideration": {
+                    "amount": 123000,
+                    "currency": "GBP"
+                  },
+                  "transactionCurrency": "GBP",
+                  "properties": {
+                    "transaction/Algo/Name": {
+                      "key": "Transaction/Algo/Name",
+                      "value": {
+                        "labelValue": "Algo1"
+                      }
+                    }
+                  },
+                  "counterpartyId": "CounterpartyId-118263",
+                  "source": "",
+                  "otcConfirmation": {
+                    "counterpartyAgreementId": {
+                      "scope": "someScope",
+                      "code": "someCode"
+                    }
+                  },
+                  "orderId": {
+                    "scope": "someScope",
+                    "code": "ORD001"
+                  },
+                  "allocationId": {
+                    "scope": "someScope",
+                    "code": "ALLOC001"
+                  }
+                },
+                "transactionRequest-2": {
+                  "transactionId": "TransactionId-222222",
+                  "type": "StockIn",
+                  "instrumentIdentifiers": {
+                    "instrument/default/Figi": "BBG000GJ45S5",
+                    "instrument/default/Isin": "GB00BFRLS45S"
+                  },
+                  "transactionDate": "2019-03-05T00:00:00.0000000+00:00",
+                  "settlementDate": "2019-03-08T00:00:00.0000000+00:00",
+                  "units": 1000,
+                  "transactionPrice": {
+                    "price": 123,
+                    "type": "Price"
+                  },
+                  "totalConsideration": {
+                    "amount": 123000,
+                    "currency": "GBP"
+                  },
+                  "transactionCurrency": "GBP",
+                  "properties": {
+                    "transaction/Algo/Name": {
+                      "key": "Transaction/Algo/Name",
+                      "value": {
+                        "labelValue": "Algo1"
+                      }
+                    }
+                  },
+                  "counterpartyId": "CounterpartyId-141556",
+                  "source": "",
+                  "otcConfirmation": {
+                    "counterpartyAgreementId": {
+                      "scope": "someScope",
+                      "code": "someCode"
+                    }
+                  },
+                  "orderId": {
+                    "scope": "someScope",
+                    "code": "ORD001"
+                  },
+                  "allocationId": {
+                    "scope": "someScope",
+                    "code": "ALLOC001"
+                  }
+                }
+              }
+            },
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "additionalProperties": {
+                  "$ref": "#/components/schemas/TransactionRequest"
+                },
+                "description": "The payload describing the transactions to be created or updated."
+              },
+              "example": {
+                "transactionRequest-1": {
+                  "transactionId": "TransactionId-111111",
+                  "type": "StockIn",
+                  "instrumentIdentifiers": {
+                    "instrument/default/Figi": "BBG000C6K6G9",
+                    "instrument/default/Isin": "GB00BH4HKS39"
+                  },
+                  "transactionDate": "2018-03-05T00:00:00.0000000+00:00",
+                  "settlementDate": "2018-03-08T00:00:00.0000000+00:00",
+                  "units": 1000,
+                  "transactionPrice": {
+                    "price": 123,
+                    "type": "Price"
+                  },
+                  "totalConsideration": {
+                    "amount": 123000,
+                    "currency": "GBP"
+                  },
+                  "transactionCurrency": "GBP",
+                  "properties": {
+                    "transaction/Algo/Name": {
+                      "key": "Transaction/Algo/Name",
+                      "value": {
+                        "labelValue": "Algo1"
+                      }
+                    }
+                  },
+                  "counterpartyId": "CounterpartyId-118263",
+                  "source": "",
+                  "otcConfirmation": {
+                    "counterpartyAgreementId": {
+                      "scope": "someScope",
+                      "code": "someCode"
+                    }
+                  },
+                  "orderId": {
+                    "scope": "someScope",
+                    "code": "ORD001"
+                  },
+                  "allocationId": {
+                    "scope": "someScope",
+                    "code": "ALLOC001"
+                  }
+                },
+                "transactionRequest-2": {
+                  "transactionId": "TransactionId-222222",
+                  "type": "StockIn",
+                  "instrumentIdentifiers": {
+                    "instrument/default/Figi": "BBG000GJ45S5",
+                    "instrument/default/Isin": "GB00BFRLS45S"
+                  },
+                  "transactionDate": "2019-03-05T00:00:00.0000000+00:00",
+                  "settlementDate": "2019-03-08T00:00:00.0000000+00:00",
+                  "units": 1000,
+                  "transactionPrice": {
+                    "price": 123,
+                    "type": "Price"
+                  },
+                  "totalConsideration": {
+                    "amount": 123000,
+                    "currency": "GBP"
+                  },
+                  "transactionCurrency": "GBP",
+                  "properties": {
+                    "transaction/Algo/Name": {
+                      "key": "Transaction/Algo/Name",
+                      "value": {
+                        "labelValue": "Algo1"
+                      }
+                    }
+                  },
+                  "counterpartyId": "CounterpartyId-141556",
+                  "source": "",
+                  "otcConfirmation": {
+                    "counterpartyAgreementId": {
+                      "scope": "someScope",
+                      "code": "someCode"
+                    }
+                  },
+                  "orderId": {
+                    "scope": "someScope",
+                    "code": "ORD001"
+                  },
+                  "allocationId": {
+                    "scope": "someScope",
+                    "code": "ALLOC001"
+                  }
+                }
+              }
+            },
+            "text/json": {
+              "schema": {
+                "type": "object",
+                "additionalProperties": {
+                  "$ref": "#/components/schemas/TransactionRequest"
+                },
+                "description": "The payload describing the transactions to be created or updated."
+              },
+              "example": {
+                "transactionRequest-1": {
+                  "transactionId": "TransactionId-111111",
+                  "type": "StockIn",
+                  "instrumentIdentifiers": {
+                    "instrument/default/Figi": "BBG000C6K6G9",
+                    "instrument/default/Isin": "GB00BH4HKS39"
+                  },
+                  "transactionDate": "2018-03-05T00:00:00.0000000+00:00",
+                  "settlementDate": "2018-03-08T00:00:00.0000000+00:00",
+                  "units": 1000,
+                  "transactionPrice": {
+                    "price": 123,
+                    "type": "Price"
+                  },
+                  "totalConsideration": {
+                    "amount": 123000,
+                    "currency": "GBP"
+                  },
+                  "transactionCurrency": "GBP",
+                  "properties": {
+                    "transaction/Algo/Name": {
+                      "key": "Transaction/Algo/Name",
+                      "value": {
+                        "labelValue": "Algo1"
+                      }
+                    }
+                  },
+                  "counterpartyId": "CounterpartyId-118263",
+                  "source": "",
+                  "otcConfirmation": {
+                    "counterpartyAgreementId": {
+                      "scope": "someScope",
+                      "code": "someCode"
+                    }
+                  },
+                  "orderId": {
+                    "scope": "someScope",
+                    "code": "ORD001"
+                  },
+                  "allocationId": {
+                    "scope": "someScope",
+                    "code": "ALLOC001"
+                  }
+                },
+                "transactionRequest-2": {
+                  "transactionId": "TransactionId-222222",
+                  "type": "StockIn",
+                  "instrumentIdentifiers": {
+                    "instrument/default/Figi": "BBG000GJ45S5",
+                    "instrument/default/Isin": "GB00BFRLS45S"
+                  },
+                  "transactionDate": "2019-03-05T00:00:00.0000000+00:00",
+                  "settlementDate": "2019-03-08T00:00:00.0000000+00:00",
+                  "units": 1000,
+                  "transactionPrice": {
+                    "price": 123,
+                    "type": "Price"
+                  },
+                  "totalConsideration": {
+                    "amount": 123000,
+                    "currency": "GBP"
+                  },
+                  "transactionCurrency": "GBP",
+                  "properties": {
+                    "transaction/Algo/Name": {
+                      "key": "Transaction/Algo/Name",
+                      "value": {
+                        "labelValue": "Algo1"
+                      }
+                    }
+                  },
+                  "counterpartyId": "CounterpartyId-141556",
+                  "source": "",
+                  "otcConfirmation": {
+                    "counterpartyAgreementId": {
+                      "scope": "someScope",
+                      "code": "someCode"
+                    }
+                  },
+                  "orderId": {
+                    "scope": "someScope",
+                    "code": "ORD001"
+                  },
+                  "allocationId": {
+                    "scope": "someScope",
+                    "code": "ALLOC001"
+                  }
+                }
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "type": "object",
+                "additionalProperties": {
+                  "$ref": "#/components/schemas/TransactionRequest"
+                },
+                "description": "The payload describing the transactions to be created or updated."
+              },
+              "example": {
+                "transactionRequest-1": {
+                  "transactionId": "TransactionId-111111",
+                  "type": "StockIn",
+                  "instrumentIdentifiers": {
+                    "instrument/default/Figi": "BBG000C6K6G9",
+                    "instrument/default/Isin": "GB00BH4HKS39"
+                  },
+                  "transactionDate": "2018-03-05T00:00:00.0000000+00:00",
+                  "settlementDate": "2018-03-08T00:00:00.0000000+00:00",
+                  "units": 1000,
+                  "transactionPrice": {
+                    "price": 123,
+                    "type": "Price"
+                  },
+                  "totalConsideration": {
+                    "amount": 123000,
+                    "currency": "GBP"
+                  },
+                  "transactionCurrency": "GBP",
+                  "properties": {
+                    "transaction/Algo/Name": {
+                      "key": "Transaction/Algo/Name",
+                      "value": {
+                        "labelValue": "Algo1"
+                      }
+                    }
+                  },
+                  "counterpartyId": "CounterpartyId-118263",
+                  "source": "",
+                  "otcConfirmation": {
+                    "counterpartyAgreementId": {
+                      "scope": "someScope",
+                      "code": "someCode"
+                    }
+                  },
+                  "orderId": {
+                    "scope": "someScope",
+                    "code": "ORD001"
+                  },
+                  "allocationId": {
+                    "scope": "someScope",
+                    "code": "ALLOC001"
+                  }
+                },
+                "transactionRequest-2": {
+                  "transactionId": "TransactionId-222222",
+                  "type": "StockIn",
+                  "instrumentIdentifiers": {
+                    "instrument/default/Figi": "BBG000GJ45S5",
+                    "instrument/default/Isin": "GB00BFRLS45S"
+                  },
+                  "transactionDate": "2019-03-05T00:00:00.0000000+00:00",
+                  "settlementDate": "2019-03-08T00:00:00.0000000+00:00",
+                  "units": 1000,
+                  "transactionPrice": {
+                    "price": 123,
+                    "type": "Price"
+                  },
+                  "totalConsideration": {
+                    "amount": 123000,
+                    "currency": "GBP"
+                  },
+                  "transactionCurrency": "GBP",
+                  "properties": {
+                    "transaction/Algo/Name": {
+                      "key": "Transaction/Algo/Name",
+                      "value": {
+                        "labelValue": "Algo1"
+                      }
+                    }
+                  },
+                  "counterpartyId": "CounterpartyId-141556",
+                  "source": "",
+                  "otcConfirmation": {
+                    "counterpartyAgreementId": {
+                      "scope": "someScope",
+                      "code": "someCode"
+                    }
+                  },
+                  "orderId": {
+                    "scope": "someScope",
+                    "code": "ORD001"
+                  },
+                  "allocationId": {
+                    "scope": "someScope",
+                    "code": "ALLOC001"
+                  }
+                }
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "The successfully upserted transaction requests along with any failures",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/BatchUpsertPortfolioTransactionsResponse"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/BatchUpsertPortfolioTransactionsResponse"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/BatchUpsertPortfolioTransactionsResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "The details of the input related failure",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/LusidValidationProblemDetails"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/LusidValidationProblemDetails"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/LusidValidationProblemDetails"
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "Error response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/LusidProblemDetails"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "oauth2": []
+          }
+        ],
+        "x-fbn-apistatus": "EarlyAccess"
+      }
+    },
     "/api/transactionportfolios/{scope}/{code}/transactions/$build": {
       "post": {
         "tags": [
@@ -51626,6 +52139,47 @@
               }
             },
             "description": "Contains warnings related to adjusted holdings",
+            "nullable": true
+          },
+          "links": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Link"
+            },
+            "description": "Collection of links.",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "BatchUpsertPortfolioTransactionsResponse": {
+        "type": "object",
+        "properties": {
+          "values": {
+            "type": "object",
+            "additionalProperties": {
+              "$ref": "#/components/schemas/Transaction"
+            },
+            "description": "The transactions which have been successfully upserted.",
+            "nullable": true
+          },
+          "failed": {
+            "type": "object",
+            "additionalProperties": {
+              "$ref": "#/components/schemas/ErrorDetail"
+            },
+            "description": "The transactions that could not be upserted along with a reason for their failure.",
+            "nullable": true
+          },
+          "metadata": {
+            "type": "object",
+            "additionalProperties": {
+              "type": "array",
+              "items": {
+                "$ref": "#/components/schemas/ResponseMetaData"
+              }
+            },
+            "description": "Contains warnings related to unresolved instruments or non-existent transaction types for the upserted trades",
             "nullable": true
           },
           "links": {
