@@ -9,7 +9,7 @@
       "url": "https://www.finbourne.com",
       "email": "info@finbourne.com"
     },
-    "version": "0.11.5122",
+    "version": "0.11.5123",
     "x-logo": {
       "url": "https://www.lusid.com/app/assets/logo_white.png",
       "backgroundColor": "#415464"
@@ -17,7 +17,7 @@
   },
   "servers": [
     {
-      "url": "https://fbn-prd.lusid.com/api"
+      "url": "https://www.lusid.com/api"
     }
   ],
   "paths": {
@@ -6404,6 +6404,2098 @@
               "text/json": {
                 "schema": {
                   "$ref": "#/components/schemas/AnnulSingleStructuredDataResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "The details of the input related failure",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/LusidValidationProblemDetails"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/LusidValidationProblemDetails"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/LusidValidationProblemDetails"
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "Error response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/LusidProblemDetails"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "oauth2": []
+          }
+        ],
+        "x-fbn-apistatus": "EarlyAccess"
+      }
+    },
+    "/api/customentities/entitytypes": {
+      "post": {
+        "tags": [
+          "CustomEntityDefinitions"
+        ],
+        "summary": "[EARLY ACCESS] CreateCustomEntityDefinition: Define a new Custom Entity type.",
+        "description": "The API will return a Bad Request if the Custom Entity type already exists.",
+        "operationId": "CreateCustomEntityDefinition",
+        "requestBody": {
+          "description": "The payload containing the description of the Custom Entity type.",
+          "content": {
+            "application/json-patch+json": {
+              "schema": {
+                "$ref": "#/components/schemas/CustomEntityDefinitionRequest"
+              },
+              "example": {
+                "entityTypeName": "SupportTicket",
+                "displayName": "Support Ticket",
+                "description": "Support Ticket",
+                "fieldSchema": [
+                  {
+                    "name": "clientId",
+                    "lifetime": "Perpetual",
+                    "type": "String",
+                    "required": true
+                  },
+                  {
+                    "name": "issueDescription",
+                    "lifetime": "TimeVariant",
+                    "type": "String",
+                    "required": true
+                  },
+                  {
+                    "name": "internalNotes",
+                    "lifetime": "TimeVariant",
+                    "type": "String",
+                    "required": false
+                  },
+                  {
+                    "name": "isResolved",
+                    "lifetime": "TimeVariant",
+                    "type": "Boolean",
+                    "required": false
+                  }
+                ]
+              }
+            },
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CustomEntityDefinitionRequest"
+              },
+              "example": {
+                "entityTypeName": "SupportTicket",
+                "displayName": "Support Ticket",
+                "description": "Support Ticket",
+                "fieldSchema": [
+                  {
+                    "name": "clientId",
+                    "lifetime": "Perpetual",
+                    "type": "String",
+                    "required": true
+                  },
+                  {
+                    "name": "issueDescription",
+                    "lifetime": "TimeVariant",
+                    "type": "String",
+                    "required": true
+                  },
+                  {
+                    "name": "internalNotes",
+                    "lifetime": "TimeVariant",
+                    "type": "String",
+                    "required": false
+                  },
+                  {
+                    "name": "isResolved",
+                    "lifetime": "TimeVariant",
+                    "type": "Boolean",
+                    "required": false
+                  }
+                ]
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CustomEntityDefinitionRequest"
+              },
+              "example": {
+                "entityTypeName": "SupportTicket",
+                "displayName": "Support Ticket",
+                "description": "Support Ticket",
+                "fieldSchema": [
+                  {
+                    "name": "clientId",
+                    "lifetime": "Perpetual",
+                    "type": "String",
+                    "required": true
+                  },
+                  {
+                    "name": "issueDescription",
+                    "lifetime": "TimeVariant",
+                    "type": "String",
+                    "required": true
+                  },
+                  {
+                    "name": "internalNotes",
+                    "lifetime": "TimeVariant",
+                    "type": "String",
+                    "required": false
+                  },
+                  {
+                    "name": "isResolved",
+                    "lifetime": "TimeVariant",
+                    "type": "Boolean",
+                    "required": false
+                  }
+                ]
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/CustomEntityDefinitionRequest"
+              },
+              "example": {
+                "entityTypeName": "SupportTicket",
+                "displayName": "Support Ticket",
+                "description": "Support Ticket",
+                "fieldSchema": [
+                  {
+                    "name": "clientId",
+                    "lifetime": "Perpetual",
+                    "type": "String",
+                    "required": true
+                  },
+                  {
+                    "name": "issueDescription",
+                    "lifetime": "TimeVariant",
+                    "type": "String",
+                    "required": true
+                  },
+                  {
+                    "name": "internalNotes",
+                    "lifetime": "TimeVariant",
+                    "type": "String",
+                    "required": false
+                  },
+                  {
+                    "name": "isResolved",
+                    "lifetime": "TimeVariant",
+                    "type": "Boolean",
+                    "required": false
+                  }
+                ]
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "The created Custom Entity type.",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/CustomEntityDefinition"
+                },
+                "example": {
+                  "href": "https://myco.lusid.com/api/customentities/entitytypes/~SupportTicket?asAt=2022-02-28T14:27:01.2728000+00:00",
+                  "entityTypeName": "SupportTicket",
+                  "displayName": "Support Ticket",
+                  "description": "Support Ticket",
+                  "entityType": "~SupportTicket",
+                  "fieldSchema": [
+                    {
+                      "name": "clientId",
+                      "lifetime": "Perpetual",
+                      "type": "String",
+                      "required": true
+                    },
+                    {
+                      "name": "issueDescription",
+                      "lifetime": "TimeVariant",
+                      "type": "String",
+                      "required": true
+                    },
+                    {
+                      "name": "internalNotes",
+                      "lifetime": "TimeVariant",
+                      "type": "String",
+                      "required": false
+                    },
+                    {
+                      "name": "isResolved",
+                      "lifetime": "TimeVariant",
+                      "type": "Boolean",
+                      "required": false
+                    }
+                  ]
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CustomEntityDefinition"
+                },
+                "example": {
+                  "href": "https://myco.lusid.com/api/customentities/entitytypes/~SupportTicket?asAt=2022-02-28T14:27:01.2728000+00:00",
+                  "entityTypeName": "SupportTicket",
+                  "displayName": "Support Ticket",
+                  "description": "Support Ticket",
+                  "entityType": "~SupportTicket",
+                  "fieldSchema": [
+                    {
+                      "name": "clientId",
+                      "lifetime": "Perpetual",
+                      "type": "String",
+                      "required": true
+                    },
+                    {
+                      "name": "issueDescription",
+                      "lifetime": "TimeVariant",
+                      "type": "String",
+                      "required": true
+                    },
+                    {
+                      "name": "internalNotes",
+                      "lifetime": "TimeVariant",
+                      "type": "String",
+                      "required": false
+                    },
+                    {
+                      "name": "isResolved",
+                      "lifetime": "TimeVariant",
+                      "type": "Boolean",
+                      "required": false
+                    }
+                  ]
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CustomEntityDefinition"
+                },
+                "example": {
+                  "href": "https://myco.lusid.com/api/customentities/entitytypes/~SupportTicket?asAt=2022-02-28T14:27:01.2728000+00:00",
+                  "entityTypeName": "SupportTicket",
+                  "displayName": "Support Ticket",
+                  "description": "Support Ticket",
+                  "entityType": "~SupportTicket",
+                  "fieldSchema": [
+                    {
+                      "name": "clientId",
+                      "lifetime": "Perpetual",
+                      "type": "String",
+                      "required": true
+                    },
+                    {
+                      "name": "issueDescription",
+                      "lifetime": "TimeVariant",
+                      "type": "String",
+                      "required": true
+                    },
+                    {
+                      "name": "internalNotes",
+                      "lifetime": "TimeVariant",
+                      "type": "String",
+                      "required": false
+                    },
+                    {
+                      "name": "isResolved",
+                      "lifetime": "TimeVariant",
+                      "type": "Boolean",
+                      "required": false
+                    }
+                  ]
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "The details of the input related failure",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/LusidValidationProblemDetails"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/LusidValidationProblemDetails"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/LusidValidationProblemDetails"
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "Error response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/LusidProblemDetails"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "oauth2": []
+          }
+        ],
+        "x-fbn-apistatus": "EarlyAccess"
+      },
+      "get": {
+        "tags": [
+          "CustomEntityDefinitions"
+        ],
+        "summary": "[EARLY ACCESS] ListCustomEntityDefinitions: List the Custom Entity type definitions",
+        "description": "List all Custom Entity type definitions matching particular criteria.",
+        "operationId": "ListCustomEntityDefinitions",
+        "parameters": [
+          {
+            "name": "asAt",
+            "in": "query",
+            "description": "The asAt datetime at which to list the entities. Defaults to returning the latest version\r\n            of each portfolio if not specified.",
+            "schema": {
+              "type": "string",
+              "description": "The asAt datetime at which to list the entities. Defaults to returning the latest version\r\n            of each portfolio if not specified.",
+              "format": "date-time",
+              "nullable": true
+            },
+            "x-nullable": true
+          },
+          {
+            "name": "limit",
+            "in": "query",
+            "description": "When paginating, limit the results to this number. Defaults to 100 if not specified.",
+            "schema": {
+              "maximum": 5000,
+              "minimum": 1,
+              "type": "integer",
+              "description": "When paginating, limit the results to this number. Defaults to 100 if not specified.",
+              "format": "int32",
+              "nullable": true
+            },
+            "x-nullable": true
+          },
+          {
+            "name": "filter",
+            "in": "query",
+            "description": "Expression to filter the results. For more information about filtering\r\n            results, see https://support.lusid.com/knowledgebase/article/KA-01914.",
+            "schema": {
+              "maxLength": 16384,
+              "minLength": 0,
+              "pattern": "^[\\s\\S]*$",
+              "type": "string",
+              "description": "Expression to filter the results. For more information about filtering\r\n            results, see https://support.lusid.com/knowledgebase/article/KA-01914.",
+              "nullable": true
+            }
+          },
+          {
+            "name": "page",
+            "in": "query",
+            "description": "The pagination token to use to continue listing entities; this\r\n            value is returned from the previous call. If a pagination token is provided, the filter, limit\r\n            and asAt fields must not have changed since the original request.",
+            "schema": {
+              "maxLength": 500,
+              "minLength": 1,
+              "pattern": "^[a-zA-Z0-9\\+/]*={0,3}$",
+              "type": "string",
+              "description": "The pagination token to use to continue listing entities; this\r\n            value is returned from the previous call. If a pagination token is provided, the filter, limit\r\n            and asAt fields must not have changed since the original request.",
+              "nullable": true
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "List Custom Entity type definitions.",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/PagedResourceListOfCustomEntityDefinition"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PagedResourceListOfCustomEntityDefinition"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PagedResourceListOfCustomEntityDefinition"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "The details of the input related failure",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/LusidValidationProblemDetails"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/LusidValidationProblemDetails"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/LusidValidationProblemDetails"
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "Error response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/LusidProblemDetails"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "oauth2": []
+          }
+        ],
+        "x-fbn-apistatus": "EarlyAccess"
+      }
+    },
+    "/api/customentities/entitytypes/{entityType}": {
+      "get": {
+        "tags": [
+          "CustomEntityDefinitions"
+        ],
+        "summary": "[EARLY ACCESS] GetDefinition: Get a Custom Entity type definition.",
+        "description": "Retrieve a CustomEntityDefinition by a specific entityType at a point in AsAt time",
+        "operationId": "GetDefinition",
+        "parameters": [
+          {
+            "name": "entityType",
+            "in": "path",
+            "description": "The identifier for the Custom Entity type, derived from the \"entityTypeName\" provided on creation.",
+            "required": true,
+            "schema": {
+              "maxLength": 64,
+              "minLength": 1,
+              "type": "string",
+              "description": "The identifier for the Custom Entity type, derived from the \"entityTypeName\" provided on creation."
+            }
+          },
+          {
+            "name": "asAt",
+            "in": "query",
+            "description": "The AsAt datetime at which to retrieve the definition.",
+            "schema": {
+              "type": "string",
+              "description": "The AsAt datetime at which to retrieve the definition.",
+              "format": "date-time",
+              "nullable": true
+            },
+            "x-nullable": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The requested Custom Entity definition.",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/CustomEntityDefinition"
+                },
+                "example": {
+                  "href": "https://myco.lusid.com/api/customentities/entitytypes/~SupportTicket?asAt=2022-02-28T14:27:01.2728000+00:00",
+                  "entityTypeName": "SupportTicket",
+                  "displayName": "Support Ticket",
+                  "description": "Support Ticket",
+                  "entityType": "~SupportTicket",
+                  "fieldSchema": [
+                    {
+                      "name": "clientId",
+                      "lifetime": "Perpetual",
+                      "type": "String",
+                      "required": true
+                    },
+                    {
+                      "name": "issueDescription",
+                      "lifetime": "TimeVariant",
+                      "type": "String",
+                      "required": true
+                    },
+                    {
+                      "name": "internalNotes",
+                      "lifetime": "TimeVariant",
+                      "type": "String",
+                      "required": false
+                    },
+                    {
+                      "name": "isResolved",
+                      "lifetime": "TimeVariant",
+                      "type": "Boolean",
+                      "required": false
+                    }
+                  ]
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CustomEntityDefinition"
+                },
+                "example": {
+                  "href": "https://myco.lusid.com/api/customentities/entitytypes/~SupportTicket?asAt=2022-02-28T14:27:01.2728000+00:00",
+                  "entityTypeName": "SupportTicket",
+                  "displayName": "Support Ticket",
+                  "description": "Support Ticket",
+                  "entityType": "~SupportTicket",
+                  "fieldSchema": [
+                    {
+                      "name": "clientId",
+                      "lifetime": "Perpetual",
+                      "type": "String",
+                      "required": true
+                    },
+                    {
+                      "name": "issueDescription",
+                      "lifetime": "TimeVariant",
+                      "type": "String",
+                      "required": true
+                    },
+                    {
+                      "name": "internalNotes",
+                      "lifetime": "TimeVariant",
+                      "type": "String",
+                      "required": false
+                    },
+                    {
+                      "name": "isResolved",
+                      "lifetime": "TimeVariant",
+                      "type": "Boolean",
+                      "required": false
+                    }
+                  ]
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CustomEntityDefinition"
+                },
+                "example": {
+                  "href": "https://myco.lusid.com/api/customentities/entitytypes/~SupportTicket?asAt=2022-02-28T14:27:01.2728000+00:00",
+                  "entityTypeName": "SupportTicket",
+                  "displayName": "Support Ticket",
+                  "description": "Support Ticket",
+                  "entityType": "~SupportTicket",
+                  "fieldSchema": [
+                    {
+                      "name": "clientId",
+                      "lifetime": "Perpetual",
+                      "type": "String",
+                      "required": true
+                    },
+                    {
+                      "name": "issueDescription",
+                      "lifetime": "TimeVariant",
+                      "type": "String",
+                      "required": true
+                    },
+                    {
+                      "name": "internalNotes",
+                      "lifetime": "TimeVariant",
+                      "type": "String",
+                      "required": false
+                    },
+                    {
+                      "name": "isResolved",
+                      "lifetime": "TimeVariant",
+                      "type": "Boolean",
+                      "required": false
+                    }
+                  ]
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "The details of the input related failure",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/LusidValidationProblemDetails"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/LusidValidationProblemDetails"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/LusidValidationProblemDetails"
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "Error response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/LusidProblemDetails"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "oauth2": []
+          }
+        ],
+        "x-fbn-apistatus": "EarlyAccess"
+      },
+      "put": {
+        "tags": [
+          "CustomEntityDefinitions"
+        ],
+        "summary": "[EARLY ACCESS] UpdateCustomEntityDefinition: Modify an existing Custom Entity type.",
+        "description": "The API will return a Bad Request if the Custom Entity type does not exist.",
+        "operationId": "UpdateCustomEntityDefinition",
+        "parameters": [
+          {
+            "name": "entityType",
+            "in": "path",
+            "description": "The identifier for the Custom Entity type, derived from the \"entityTypeName\" provided on creation.",
+            "required": true,
+            "schema": {
+              "maxLength": 64,
+              "minLength": 1,
+              "type": "string",
+              "description": "The identifier for the Custom Entity type, derived from the \"entityTypeName\" provided on creation."
+            }
+          }
+        ],
+        "requestBody": {
+          "description": "The payload containing the description of the Custom Entity type.",
+          "content": {
+            "application/json-patch+json": {
+              "schema": {
+                "$ref": "#/components/schemas/UpdateCustomEntityDefinitionRequest"
+              },
+              "example": {
+                "displayName": "Support Ticket",
+                "description": "Support Ticket",
+                "fieldSchema": [
+                  {
+                    "name": "clientId",
+                    "lifetime": "Perpetual",
+                    "type": "String",
+                    "required": true
+                  },
+                  {
+                    "name": "issueDescription",
+                    "lifetime": "TimeVariant",
+                    "type": "String",
+                    "required": true
+                  },
+                  {
+                    "name": "internalNotes",
+                    "lifetime": "TimeVariant",
+                    "type": "String",
+                    "required": false
+                  },
+                  {
+                    "name": "isResolved",
+                    "lifetime": "TimeVariant",
+                    "type": "Boolean",
+                    "required": false
+                  }
+                ]
+              }
+            },
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UpdateCustomEntityDefinitionRequest"
+              },
+              "example": {
+                "displayName": "Support Ticket",
+                "description": "Support Ticket",
+                "fieldSchema": [
+                  {
+                    "name": "clientId",
+                    "lifetime": "Perpetual",
+                    "type": "String",
+                    "required": true
+                  },
+                  {
+                    "name": "issueDescription",
+                    "lifetime": "TimeVariant",
+                    "type": "String",
+                    "required": true
+                  },
+                  {
+                    "name": "internalNotes",
+                    "lifetime": "TimeVariant",
+                    "type": "String",
+                    "required": false
+                  },
+                  {
+                    "name": "isResolved",
+                    "lifetime": "TimeVariant",
+                    "type": "Boolean",
+                    "required": false
+                  }
+                ]
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UpdateCustomEntityDefinitionRequest"
+              },
+              "example": {
+                "displayName": "Support Ticket",
+                "description": "Support Ticket",
+                "fieldSchema": [
+                  {
+                    "name": "clientId",
+                    "lifetime": "Perpetual",
+                    "type": "String",
+                    "required": true
+                  },
+                  {
+                    "name": "issueDescription",
+                    "lifetime": "TimeVariant",
+                    "type": "String",
+                    "required": true
+                  },
+                  {
+                    "name": "internalNotes",
+                    "lifetime": "TimeVariant",
+                    "type": "String",
+                    "required": false
+                  },
+                  {
+                    "name": "isResolved",
+                    "lifetime": "TimeVariant",
+                    "type": "Boolean",
+                    "required": false
+                  }
+                ]
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/UpdateCustomEntityDefinitionRequest"
+              },
+              "example": {
+                "displayName": "Support Ticket",
+                "description": "Support Ticket",
+                "fieldSchema": [
+                  {
+                    "name": "clientId",
+                    "lifetime": "Perpetual",
+                    "type": "String",
+                    "required": true
+                  },
+                  {
+                    "name": "issueDescription",
+                    "lifetime": "TimeVariant",
+                    "type": "String",
+                    "required": true
+                  },
+                  {
+                    "name": "internalNotes",
+                    "lifetime": "TimeVariant",
+                    "type": "String",
+                    "required": false
+                  },
+                  {
+                    "name": "isResolved",
+                    "lifetime": "TimeVariant",
+                    "type": "Boolean",
+                    "required": false
+                  }
+                ]
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "The updated Custom Entity type.",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/CustomEntityDefinition"
+                },
+                "example": {
+                  "href": "https://myco.lusid.com/api/customentities/entitytypes/~SupportTicket?asAt=2022-02-28T14:27:01.2728000+00:00",
+                  "entityTypeName": "SupportTicket",
+                  "displayName": "Support Ticket",
+                  "description": "Support Ticket",
+                  "entityType": "~SupportTicket",
+                  "fieldSchema": [
+                    {
+                      "name": "clientId",
+                      "lifetime": "Perpetual",
+                      "type": "String",
+                      "required": true
+                    },
+                    {
+                      "name": "issueDescription",
+                      "lifetime": "TimeVariant",
+                      "type": "String",
+                      "required": true
+                    },
+                    {
+                      "name": "internalNotes",
+                      "lifetime": "TimeVariant",
+                      "type": "String",
+                      "required": false
+                    },
+                    {
+                      "name": "isResolved",
+                      "lifetime": "TimeVariant",
+                      "type": "Boolean",
+                      "required": false
+                    }
+                  ]
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CustomEntityDefinition"
+                },
+                "example": {
+                  "href": "https://myco.lusid.com/api/customentities/entitytypes/~SupportTicket?asAt=2022-02-28T14:27:01.2728000+00:00",
+                  "entityTypeName": "SupportTicket",
+                  "displayName": "Support Ticket",
+                  "description": "Support Ticket",
+                  "entityType": "~SupportTicket",
+                  "fieldSchema": [
+                    {
+                      "name": "clientId",
+                      "lifetime": "Perpetual",
+                      "type": "String",
+                      "required": true
+                    },
+                    {
+                      "name": "issueDescription",
+                      "lifetime": "TimeVariant",
+                      "type": "String",
+                      "required": true
+                    },
+                    {
+                      "name": "internalNotes",
+                      "lifetime": "TimeVariant",
+                      "type": "String",
+                      "required": false
+                    },
+                    {
+                      "name": "isResolved",
+                      "lifetime": "TimeVariant",
+                      "type": "Boolean",
+                      "required": false
+                    }
+                  ]
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CustomEntityDefinition"
+                },
+                "example": {
+                  "href": "https://myco.lusid.com/api/customentities/entitytypes/~SupportTicket?asAt=2022-02-28T14:27:01.2728000+00:00",
+                  "entityTypeName": "SupportTicket",
+                  "displayName": "Support Ticket",
+                  "description": "Support Ticket",
+                  "entityType": "~SupportTicket",
+                  "fieldSchema": [
+                    {
+                      "name": "clientId",
+                      "lifetime": "Perpetual",
+                      "type": "String",
+                      "required": true
+                    },
+                    {
+                      "name": "issueDescription",
+                      "lifetime": "TimeVariant",
+                      "type": "String",
+                      "required": true
+                    },
+                    {
+                      "name": "internalNotes",
+                      "lifetime": "TimeVariant",
+                      "type": "String",
+                      "required": false
+                    },
+                    {
+                      "name": "isResolved",
+                      "lifetime": "TimeVariant",
+                      "type": "Boolean",
+                      "required": false
+                    }
+                  ]
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "The details of the input related failure",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/LusidValidationProblemDetails"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/LusidValidationProblemDetails"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/LusidValidationProblemDetails"
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "Error response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/LusidProblemDetails"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "oauth2": []
+          }
+        ],
+        "x-fbn-apistatus": "EarlyAccess"
+      }
+    },
+    "/api/customentities/{entityType}": {
+      "post": {
+        "tags": [
+          "CustomEntities"
+        ],
+        "summary": "[EARLY ACCESS] UpsertCustomEntity: Upsert a Custom Entity instance",
+        "description": "Insert the Custom Entity if it does not exist or update the Custom Entity with the supplied state if it does exist.",
+        "operationId": "UpsertCustomEntity",
+        "parameters": [
+          {
+            "name": "entityType",
+            "in": "path",
+            "description": "The type of the Custom Entity to be created. An entityType can be created using the \"CreateCustomEntityDefinition\" endpoint for CustomEntityDefinitions.",
+            "required": true,
+            "schema": {
+              "maxLength": 64,
+              "minLength": 1,
+              "type": "string",
+              "description": "The type of the Custom Entity to be created. An entityType can be created using the \"CreateCustomEntityDefinition\" endpoint for CustomEntityDefinitions."
+            }
+          }
+        ],
+        "requestBody": {
+          "description": "The payload describing the Custom Entity instance.",
+          "content": {
+            "application/json-patch+json": {
+              "schema": {
+                "$ref": "#/components/schemas/CustomEntityRequest"
+              },
+              "example": {
+                "displayName": "Portfolio Access Denied",
+                "description": "User cannot access the portfolio",
+                "identifiers": [
+                  {
+                    "identifierScope": "someScope",
+                    "identifierType": "supportTicketId",
+                    "identifierValue": "xyz123pqr"
+                  }
+                ],
+                "fields": [
+                  {
+                    "name": "clientId",
+                    "value": "AcmeLtd"
+                  },
+                  {
+                    "name": "issueDescription",
+                    "value": "I can't access this portfolio",
+                    "effectiveFrom": "2023-03-03T09:00:00.0000000+00:00"
+                  }
+                ]
+              }
+            },
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CustomEntityRequest"
+              },
+              "example": {
+                "displayName": "Portfolio Access Denied",
+                "description": "User cannot access the portfolio",
+                "identifiers": [
+                  {
+                    "identifierScope": "someScope",
+                    "identifierType": "supportTicketId",
+                    "identifierValue": "xyz123pqr"
+                  }
+                ],
+                "fields": [
+                  {
+                    "name": "clientId",
+                    "value": "AcmeLtd"
+                  },
+                  {
+                    "name": "issueDescription",
+                    "value": "I can't access this portfolio",
+                    "effectiveFrom": "2023-03-03T09:00:00.0000000+00:00"
+                  }
+                ]
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CustomEntityRequest"
+              },
+              "example": {
+                "displayName": "Portfolio Access Denied",
+                "description": "User cannot access the portfolio",
+                "identifiers": [
+                  {
+                    "identifierScope": "someScope",
+                    "identifierType": "supportTicketId",
+                    "identifierValue": "xyz123pqr"
+                  }
+                ],
+                "fields": [
+                  {
+                    "name": "clientId",
+                    "value": "AcmeLtd"
+                  },
+                  {
+                    "name": "issueDescription",
+                    "value": "I can't access this portfolio",
+                    "effectiveFrom": "2023-03-03T09:00:00.0000000+00:00"
+                  }
+                ]
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/CustomEntityRequest"
+              },
+              "example": {
+                "displayName": "Portfolio Access Denied",
+                "description": "User cannot access the portfolio",
+                "identifiers": [
+                  {
+                    "identifierScope": "someScope",
+                    "identifierType": "supportTicketId",
+                    "identifierValue": "xyz123pqr"
+                  }
+                ],
+                "fields": [
+                  {
+                    "name": "clientId",
+                    "value": "AcmeLtd"
+                  },
+                  {
+                    "name": "issueDescription",
+                    "value": "I can't access this portfolio",
+                    "effectiveFrom": "2023-03-03T09:00:00.0000000+00:00"
+                  }
+                ]
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "The upserted custom entity instance",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/CustomEntityResponse"
+                },
+                "example": {
+                  "href": "https://myco.lusid.com/api/api/customentities/~SupportTicket",
+                  "entityType": "~SupportTicket",
+                  "version": {
+                    "effectiveFrom": "0001-01-01T00:00:00.0000000+00:00",
+                    "asAtDate": "2022-03-02T09:00:00.0000000+00:00"
+                  },
+                  "displayName": "Portfolio Access Denied",
+                  "description": "User cannot access the portfolio",
+                  "identifiers": [
+                    {
+                      "identifierScope": "someScope",
+                      "identifierType": "supportTicketId",
+                      "identifierValue": "xyz123pqr",
+                      "effectiveFrom": "0001-01-01T00:00:00.0000000+00:00",
+                      "effectiveUntil": "9999-12-31T23:59:59.9999999+00:00"
+                    }
+                  ],
+                  "fields": [
+                    {
+                      "name": "clientId",
+                      "value": "AcmeLtd",
+                      "effectiveFrom": "0001-01-01T00:00:00.0000000+00:00",
+                      "effectiveUntil": "9999-12-31T23:59:59.9999999+00:00"
+                    },
+                    {
+                      "name": "issueDescription",
+                      "value": "I can't access this portfolio",
+                      "effectiveFrom": "2022-03-03T09:00:00.0000000+00:00",
+                      "effectiveUntil": "9999-12-31T23:59:59.9999999+00:00"
+                    }
+                  ],
+                  "relationships": []
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CustomEntityResponse"
+                },
+                "example": {
+                  "href": "https://myco.lusid.com/api/api/customentities/~SupportTicket",
+                  "entityType": "~SupportTicket",
+                  "version": {
+                    "effectiveFrom": "0001-01-01T00:00:00.0000000+00:00",
+                    "asAtDate": "2022-03-02T09:00:00.0000000+00:00"
+                  },
+                  "displayName": "Portfolio Access Denied",
+                  "description": "User cannot access the portfolio",
+                  "identifiers": [
+                    {
+                      "identifierScope": "someScope",
+                      "identifierType": "supportTicketId",
+                      "identifierValue": "xyz123pqr",
+                      "effectiveFrom": "0001-01-01T00:00:00.0000000+00:00",
+                      "effectiveUntil": "9999-12-31T23:59:59.9999999+00:00"
+                    }
+                  ],
+                  "fields": [
+                    {
+                      "name": "clientId",
+                      "value": "AcmeLtd",
+                      "effectiveFrom": "0001-01-01T00:00:00.0000000+00:00",
+                      "effectiveUntil": "9999-12-31T23:59:59.9999999+00:00"
+                    },
+                    {
+                      "name": "issueDescription",
+                      "value": "I can't access this portfolio",
+                      "effectiveFrom": "2022-03-03T09:00:00.0000000+00:00",
+                      "effectiveUntil": "9999-12-31T23:59:59.9999999+00:00"
+                    }
+                  ],
+                  "relationships": []
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CustomEntityResponse"
+                },
+                "example": {
+                  "href": "https://myco.lusid.com/api/api/customentities/~SupportTicket",
+                  "entityType": "~SupportTicket",
+                  "version": {
+                    "effectiveFrom": "0001-01-01T00:00:00.0000000+00:00",
+                    "asAtDate": "2022-03-02T09:00:00.0000000+00:00"
+                  },
+                  "displayName": "Portfolio Access Denied",
+                  "description": "User cannot access the portfolio",
+                  "identifiers": [
+                    {
+                      "identifierScope": "someScope",
+                      "identifierType": "supportTicketId",
+                      "identifierValue": "xyz123pqr",
+                      "effectiveFrom": "0001-01-01T00:00:00.0000000+00:00",
+                      "effectiveUntil": "9999-12-31T23:59:59.9999999+00:00"
+                    }
+                  ],
+                  "fields": [
+                    {
+                      "name": "clientId",
+                      "value": "AcmeLtd",
+                      "effectiveFrom": "0001-01-01T00:00:00.0000000+00:00",
+                      "effectiveUntil": "9999-12-31T23:59:59.9999999+00:00"
+                    },
+                    {
+                      "name": "issueDescription",
+                      "value": "I can't access this portfolio",
+                      "effectiveFrom": "2022-03-03T09:00:00.0000000+00:00",
+                      "effectiveUntil": "9999-12-31T23:59:59.9999999+00:00"
+                    }
+                  ],
+                  "relationships": []
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "The details of the input related failure",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/LusidValidationProblemDetails"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/LusidValidationProblemDetails"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/LusidValidationProblemDetails"
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "Error response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/LusidProblemDetails"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "oauth2": []
+          }
+        ],
+        "x-fbn-apistatus": "EarlyAccess"
+      },
+      "get": {
+        "tags": [
+          "CustomEntities"
+        ],
+        "summary": "[EARLY ACCESS] ListCustomEntities: List Custom Entities of the specified entityType.",
+        "description": "List all the Custom Entities matching particular criteria.",
+        "operationId": "ListCustomEntities",
+        "parameters": [
+          {
+            "name": "entityType",
+            "in": "path",
+            "description": "The type of Custom Entity to list.",
+            "required": true,
+            "schema": {
+              "maxLength": 64,
+              "minLength": 1,
+              "type": "string",
+              "description": "The type of Custom Entity to list."
+            }
+          },
+          {
+            "name": "effectiveAt",
+            "in": "query",
+            "description": "The effective datetime or cut label at which to list the entities. Defaults to the current LUSID\r\n            system datetime if not specified.",
+            "schema": {
+              "type": "string",
+              "description": "The effective datetime or cut label at which to list the entities. Defaults to the current LUSID\r\n            system datetime if not specified.",
+              "format": "dateorcutlabel",
+              "nullable": true
+            }
+          },
+          {
+            "name": "asAt",
+            "in": "query",
+            "description": "The asAt datetime at which to list the entities. Defaults to returning the latest version\r\n            of each portfolio if not specified.",
+            "schema": {
+              "type": "string",
+              "description": "The asAt datetime at which to list the entities. Defaults to returning the latest version\r\n            of each portfolio if not specified.",
+              "format": "date-time",
+              "nullable": true
+            },
+            "x-nullable": true
+          },
+          {
+            "name": "limit",
+            "in": "query",
+            "description": "When paginating, limit the results to this number. Defaults to 100 if not specified.",
+            "schema": {
+              "maximum": 5000,
+              "minimum": 1,
+              "type": "integer",
+              "description": "When paginating, limit the results to this number. Defaults to 100 if not specified.",
+              "format": "int32",
+              "nullable": true
+            },
+            "x-nullable": true
+          },
+          {
+            "name": "filter",
+            "in": "query",
+            "description": "Expression to filter the results. For more information about filtering\r\n            results, see https://support.lusid.com/knowledgebase/article/KA-01914.",
+            "schema": {
+              "maxLength": 16384,
+              "minLength": 0,
+              "pattern": "^[\\s\\S]*$",
+              "type": "string",
+              "description": "Expression to filter the results. For more information about filtering\r\n            results, see https://support.lusid.com/knowledgebase/article/KA-01914.",
+              "nullable": true
+            }
+          },
+          {
+            "name": "page",
+            "in": "query",
+            "description": "The pagination token to use to continue listing entities; this\r\n            value is returned from the previous call. If a pagination token is provided, the filter, effectiveAt\r\n            and asAt fields must not have changed since the original request.",
+            "schema": {
+              "maxLength": 500,
+              "minLength": 1,
+              "pattern": "^[a-zA-Z0-9\\+/]*={0,3}$",
+              "type": "string",
+              "description": "The pagination token to use to continue listing entities; this\r\n            value is returned from the previous call. If a pagination token is provided, the filter, effectiveAt\r\n            and asAt fields must not have changed since the original request.",
+              "nullable": true
+            }
+          },
+          {
+            "name": "relatedEntityPropertyKeys",
+            "in": "query",
+            "description": "A list of property keys from any domain that supports relationships\r\n            to decorate onto related entities. These must take the format {domain}/{scope}/{code}, for example 'Portfolio/Manager/Id'.",
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "string",
+                "description": "The key that uniquely identifies the property. It has the format {domain}/{scope}/{code}."
+              },
+              "description": "A list of property keys from any domain that supports relationships\r\n            to decorate onto related entities. These must take the format {domain}/{scope}/{code}, for example 'Portfolio/Manager/Id'.",
+              "nullable": true
+            },
+            "x-nullable": true
+          },
+          {
+            "name": "relationshipDefinitionIds",
+            "in": "query",
+            "description": "A list of relationship definitions that are used to decorate related entities\r\n            onto the entities in the response. These must take the form {relationshipDefinitionScope}/{relationshipDefinitionCode}.",
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "string",
+                "description": "Identifiers of an entity"
+              },
+              "description": "A list of relationship definitions that are used to decorate related entities\r\n            onto the entities in the response. These must take the form {relationshipDefinitionScope}/{relationshipDefinitionCode}.",
+              "nullable": true
+            },
+            "x-nullable": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "List custom entities of the specified entityType.",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/PagedResourceListOfCustomEntityResponse"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PagedResourceListOfCustomEntityResponse"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PagedResourceListOfCustomEntityResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "The details of the input related failure",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/LusidValidationProblemDetails"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/LusidValidationProblemDetails"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/LusidValidationProblemDetails"
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "Error response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/LusidProblemDetails"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "oauth2": []
+          }
+        ],
+        "x-fbn-apistatus": "EarlyAccess"
+      }
+    },
+    "/api/customentities/{entityType}/{identifierType}/{identifierValue}": {
+      "get": {
+        "tags": [
+          "CustomEntities"
+        ],
+        "summary": "[EARLY ACCESS] GetCustomEntity: Get a Custom Entity instance.",
+        "description": "Retrieve a Custom Entity instance by a specific entity type at a point in AsAt time.",
+        "operationId": "GetCustomEntity",
+        "parameters": [
+          {
+            "name": "entityType",
+            "in": "path",
+            "description": "The type of Custom Entity to retrieve. An entityType can be created using the \"CreateCustomEntityDefinition\" endpoint for CustomEntityDefinitions.",
+            "required": true,
+            "schema": {
+              "maxLength": 64,
+              "minLength": 1,
+              "type": "string",
+              "description": "The type of Custom Entity to retrieve. An entityType can be created using the \"CreateCustomEntityDefinition\" endpoint for CustomEntityDefinitions."
+            }
+          },
+          {
+            "name": "identifierType",
+            "in": "path",
+            "description": "An identifier type attached to the Custom Entity instance.",
+            "required": true,
+            "schema": {
+              "maxLength": 64,
+              "minLength": 1,
+              "pattern": "^[a-zA-Z0-9\\-_]+$",
+              "type": "string",
+              "description": "An identifier type attached to the Custom Entity instance."
+            }
+          },
+          {
+            "name": "identifierValue",
+            "in": "path",
+            "description": "The identifier value.",
+            "required": true,
+            "schema": {
+              "maxLength": 1024,
+              "minLength": 1,
+              "pattern": "^[a-zA-Z0-9\\-_]+$",
+              "type": "string",
+              "description": "The identifier value."
+            }
+          },
+          {
+            "name": "identifierScope",
+            "in": "query",
+            "description": "The identifier scope.",
+            "required": true,
+            "schema": {
+              "maxLength": 64,
+              "minLength": 1,
+              "pattern": "^[a-zA-Z0-9\\-_]+$",
+              "type": "string",
+              "description": "The identifier scope."
+            }
+          },
+          {
+            "name": "asAt",
+            "in": "query",
+            "description": "The AsAt datetime at which to retrieve the Custom Entity instance.",
+            "schema": {
+              "type": "string",
+              "description": "The AsAt datetime at which to retrieve the Custom Entity instance.",
+              "format": "date-time",
+              "nullable": true
+            },
+            "x-nullable": true
+          },
+          {
+            "name": "effectiveAt",
+            "in": "query",
+            "description": "The effective datetime or cut label at which to get the Custom Entity instance. Defaults to the current LUSID system datetime if not specified.",
+            "schema": {
+              "type": "string",
+              "description": "The effective datetime or cut label at which to get the Custom Entity instance. Defaults to the current LUSID system datetime if not specified.",
+              "format": "dateorcutlabel",
+              "nullable": true
+            }
+          },
+          {
+            "name": "relatedEntityPropertyKeys",
+            "in": "query",
+            "description": "A list of property keys from any domain that supports relationships\r\n            to decorate onto related entities. These must take the format {domain}/{scope}/{code}, for example 'Portfolio/Manager/Id'.",
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "string",
+                "description": "The key that uniquely identifies the property. It has the format {domain}/{scope}/{code}."
+              },
+              "description": "A list of property keys from any domain that supports relationships\r\n            to decorate onto related entities. These must take the format {domain}/{scope}/{code}, for example 'Portfolio/Manager/Id'.",
+              "nullable": true
+            },
+            "x-nullable": true
+          },
+          {
+            "name": "relationshipDefinitionIds",
+            "in": "query",
+            "description": "A list of relationship definitions that are used to decorate related entities\r\n            onto the entity in the response. These must take the form {relationshipDefinitionScope}/{relationshipDefinitionCode}.",
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "string",
+                "description": "Identifiers of an entity"
+              },
+              "description": "A list of relationship definitions that are used to decorate related entities\r\n            onto the entity in the response. These must take the form {relationshipDefinitionScope}/{relationshipDefinitionCode}.",
+              "nullable": true
+            },
+            "x-nullable": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Get a custom entity instance.",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/CustomEntityResponse"
+                },
+                "example": {
+                  "href": "https://myco.lusid.com/api/api/customentities/~SupportTicket",
+                  "entityType": "~SupportTicket",
+                  "version": {
+                    "effectiveFrom": "0001-01-01T00:00:00.0000000+00:00",
+                    "asAtDate": "2022-03-02T09:00:00.0000000+00:00"
+                  },
+                  "displayName": "Portfolio Access Denied",
+                  "description": "User cannot access the portfolio",
+                  "identifiers": [
+                    {
+                      "identifierScope": "someScope",
+                      "identifierType": "supportTicketId",
+                      "identifierValue": "xyz123pqr",
+                      "effectiveFrom": "0001-01-01T00:00:00.0000000+00:00",
+                      "effectiveUntil": "9999-12-31T23:59:59.9999999+00:00"
+                    }
+                  ],
+                  "fields": [
+                    {
+                      "name": "clientId",
+                      "value": "AcmeLtd",
+                      "effectiveFrom": "0001-01-01T00:00:00.0000000+00:00",
+                      "effectiveUntil": "9999-12-31T23:59:59.9999999+00:00"
+                    },
+                    {
+                      "name": "issueDescription",
+                      "value": "I can't access this portfolio",
+                      "effectiveFrom": "2022-03-03T09:00:00.0000000+00:00",
+                      "effectiveUntil": "9999-12-31T23:59:59.9999999+00:00"
+                    }
+                  ],
+                  "relationships": []
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CustomEntityResponse"
+                },
+                "example": {
+                  "href": "https://myco.lusid.com/api/api/customentities/~SupportTicket",
+                  "entityType": "~SupportTicket",
+                  "version": {
+                    "effectiveFrom": "0001-01-01T00:00:00.0000000+00:00",
+                    "asAtDate": "2022-03-02T09:00:00.0000000+00:00"
+                  },
+                  "displayName": "Portfolio Access Denied",
+                  "description": "User cannot access the portfolio",
+                  "identifiers": [
+                    {
+                      "identifierScope": "someScope",
+                      "identifierType": "supportTicketId",
+                      "identifierValue": "xyz123pqr",
+                      "effectiveFrom": "0001-01-01T00:00:00.0000000+00:00",
+                      "effectiveUntil": "9999-12-31T23:59:59.9999999+00:00"
+                    }
+                  ],
+                  "fields": [
+                    {
+                      "name": "clientId",
+                      "value": "AcmeLtd",
+                      "effectiveFrom": "0001-01-01T00:00:00.0000000+00:00",
+                      "effectiveUntil": "9999-12-31T23:59:59.9999999+00:00"
+                    },
+                    {
+                      "name": "issueDescription",
+                      "value": "I can't access this portfolio",
+                      "effectiveFrom": "2022-03-03T09:00:00.0000000+00:00",
+                      "effectiveUntil": "9999-12-31T23:59:59.9999999+00:00"
+                    }
+                  ],
+                  "relationships": []
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CustomEntityResponse"
+                },
+                "example": {
+                  "href": "https://myco.lusid.com/api/api/customentities/~SupportTicket",
+                  "entityType": "~SupportTicket",
+                  "version": {
+                    "effectiveFrom": "0001-01-01T00:00:00.0000000+00:00",
+                    "asAtDate": "2022-03-02T09:00:00.0000000+00:00"
+                  },
+                  "displayName": "Portfolio Access Denied",
+                  "description": "User cannot access the portfolio",
+                  "identifiers": [
+                    {
+                      "identifierScope": "someScope",
+                      "identifierType": "supportTicketId",
+                      "identifierValue": "xyz123pqr",
+                      "effectiveFrom": "0001-01-01T00:00:00.0000000+00:00",
+                      "effectiveUntil": "9999-12-31T23:59:59.9999999+00:00"
+                    }
+                  ],
+                  "fields": [
+                    {
+                      "name": "clientId",
+                      "value": "AcmeLtd",
+                      "effectiveFrom": "0001-01-01T00:00:00.0000000+00:00",
+                      "effectiveUntil": "9999-12-31T23:59:59.9999999+00:00"
+                    },
+                    {
+                      "name": "issueDescription",
+                      "value": "I can't access this portfolio",
+                      "effectiveFrom": "2022-03-03T09:00:00.0000000+00:00",
+                      "effectiveUntil": "9999-12-31T23:59:59.9999999+00:00"
+                    }
+                  ],
+                  "relationships": []
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "The details of the input related failure",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/LusidValidationProblemDetails"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/LusidValidationProblemDetails"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/LusidValidationProblemDetails"
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "Error response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/LusidProblemDetails"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "oauth2": []
+          }
+        ],
+        "x-fbn-apistatus": "EarlyAccess"
+      },
+      "delete": {
+        "tags": [
+          "CustomEntities"
+        ],
+        "summary": "[EARLY ACCESS] DeleteCustomEntity: Delete a Custom Entity instance.",
+        "description": "Delete a Custom Entity instance by a specific entity type.",
+        "operationId": "DeleteCustomEntity",
+        "parameters": [
+          {
+            "name": "entityType",
+            "in": "path",
+            "description": "The type of Custom Entity to remove.",
+            "required": true,
+            "schema": {
+              "maxLength": 64,
+              "minLength": 1,
+              "type": "string",
+              "description": "The type of Custom Entity to remove."
+            }
+          },
+          {
+            "name": "identifierType",
+            "in": "path",
+            "description": "An identifier type attached to the Custom Entity instance.",
+            "required": true,
+            "schema": {
+              "maxLength": 64,
+              "minLength": 1,
+              "pattern": "^[a-zA-Z0-9\\-_]+$",
+              "type": "string",
+              "description": "An identifier type attached to the Custom Entity instance."
+            }
+          },
+          {
+            "name": "identifierValue",
+            "in": "path",
+            "description": "The identifier value.",
+            "required": true,
+            "schema": {
+              "maxLength": 1024,
+              "minLength": 1,
+              "pattern": "^[a-zA-Z0-9\\-_]+$",
+              "type": "string",
+              "description": "The identifier value."
+            }
+          },
+          {
+            "name": "identifierScope",
+            "in": "query",
+            "description": "The identifier scope.",
+            "required": true,
+            "schema": {
+              "maxLength": 64,
+              "minLength": 1,
+              "pattern": "^[a-zA-Z0-9\\-_]+$",
+              "type": "string",
+              "description": "The identifier scope."
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Delete a Custom Entity instance.",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/DeletedEntityResponse"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/DeletedEntityResponse"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/DeletedEntityResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "The details of the input related failure",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/LusidValidationProblemDetails"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/LusidValidationProblemDetails"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/LusidValidationProblemDetails"
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "Error response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/LusidProblemDetails"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "oauth2": []
+          }
+        ],
+        "x-fbn-apistatus": "EarlyAccess"
+      }
+    },
+    "/api/customentities/{entityType}/{identifierType}/{identifierValue}/relationships": {
+      "get": {
+        "tags": [
+          "CustomEntities"
+        ],
+        "summary": "[EARLY ACCESS] GetCustomEntityRelationships: Get Relationships for Custom Entity",
+        "description": "Get relationships for the specified Custom Entity.",
+        "operationId": "GetCustomEntityRelationships",
+        "parameters": [
+          {
+            "name": "entityType",
+            "in": "path",
+            "description": "The type of entity get relationships for.",
+            "required": true,
+            "schema": {
+              "maxLength": 64,
+              "minLength": 1,
+              "type": "string",
+              "description": "The type of entity get relationships for."
+            }
+          },
+          {
+            "name": "identifierScope",
+            "in": "query",
+            "description": "The identifier scope.",
+            "required": true,
+            "schema": {
+              "maxLength": 64,
+              "minLength": 1,
+              "pattern": "^[a-zA-Z0-9\\-_]+$",
+              "type": "string",
+              "description": "The identifier scope."
+            }
+          },
+          {
+            "name": "identifierType",
+            "in": "path",
+            "description": "An identifier type attached to the Custom Entity.",
+            "required": true,
+            "schema": {
+              "maxLength": 64,
+              "minLength": 1,
+              "pattern": "^[a-zA-Z0-9\\-_]+$",
+              "type": "string",
+              "description": "An identifier type attached to the Custom Entity."
+            }
+          },
+          {
+            "name": "identifierValue",
+            "in": "path",
+            "description": "The identifier value.",
+            "required": true,
+            "schema": {
+              "maxLength": 1024,
+              "minLength": 1,
+              "pattern": "^[a-zA-Z0-9\\-_]+$",
+              "type": "string",
+              "description": "The identifier value."
+            }
+          },
+          {
+            "name": "effectiveAt",
+            "in": "query",
+            "description": "The effective datetime or cut label at which to get relationships. Defaults to the current LUSID system datetime if not specified.",
+            "schema": {
+              "maxLength": 256,
+              "minLength": 0,
+              "pattern": "^[a-zA-Z0-9\\-_\\+:\\.]+$",
+              "type": "string",
+              "description": "The effective datetime or cut label at which to get relationships. Defaults to the current LUSID system datetime if not specified.",
+              "format": "dateorcutlabel",
+              "nullable": true
+            }
+          },
+          {
+            "name": "asAt",
+            "in": "query",
+            "description": "The asAt datetime at which to retrieve relationships. Defaults to return the latest LUSID AsAt time if not specified.",
+            "schema": {
+              "type": "string",
+              "description": "The asAt datetime at which to retrieve relationships. Defaults to return the latest LUSID AsAt time if not specified.",
+              "format": "date-time",
+              "nullable": true
+            },
+            "x-nullable": true
+          },
+          {
+            "name": "filter",
+            "in": "query",
+            "description": "Expression to filter relationships. Users should provide null or empty string for this field until further notice.",
+            "schema": {
+              "maxLength": 16384,
+              "minLength": 0,
+              "pattern": "^[\\s\\S]*$",
+              "type": "string",
+              "description": "Expression to filter relationships. Users should provide null or empty string for this field until further notice.",
+              "nullable": true
+            }
+          },
+          {
+            "name": "identifierTypes",
+            "in": "query",
+            "description": "Identifiers types (as property keys) used for referencing Persons or Legal Entities. These take the format\r\n            {domain}/{scope}/{code} e.g. \"Person/CompanyDetails/Role\". They must be from the \"Person\" or \"LegalEntity\" domain.\r\n            Only identifier types stated will be used to look up relevant entities in relationships. If not applicable, provide an empty array.",
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "string",
+                "description": "The key that uniquely identifies the property. It has the format {domain}/{scope}/{code}."
+              },
+              "description": "Identifiers types (as property keys) used for referencing Persons or Legal Entities. These take the format\r\n            {domain}/{scope}/{code} e.g. \"Person/CompanyDetails/Role\". They must be from the \"Person\" or \"LegalEntity\" domain.\r\n            Only identifier types stated will be used to look up relevant entities in relationships. If not applicable, provide an empty array.",
+              "nullable": true
+            },
+            "x-nullable": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The relationships for the specified custom entity.",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResourceListOfRelationship"
+                },
+                "example": {
+                  "values": [
+                    {
+                      "relationshipDefinitionId": {
+                        "scope": "relationshipDefinitionScope",
+                        "code": "relationshipDefinitionCode"
+                      },
+                      "relatedEntity": {
+                        "entityType": "~entityType",
+                        "entityId": {
+                          "identifierScope": "idScope",
+                          "identifierType": "idType",
+                          "identifierValue": "idValue"
+                        },
+                        "displayName": "RelatedEntityDisplayName",
+                        "properties": {},
+                        "identifiers": [
+                          {
+                            "identifierScope": "idScope",
+                            "identifierType": "idType",
+                            "identifierValue": "idValue"
+                          }
+                        ]
+                      },
+                      "traversalDirection": "Out",
+                      "traversalDescription": "Outward relationship description",
+                      "effectiveFrom": "0001-01-01T00:00:00.0000000+00:00",
+                      "effectiveUntil": "9999-12-31T23:59:59.9999999+00:00"
+                    }
+                  ],
+                  "links": []
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResourceListOfRelationship"
+                },
+                "example": {
+                  "values": [
+                    {
+                      "relationshipDefinitionId": {
+                        "scope": "relationshipDefinitionScope",
+                        "code": "relationshipDefinitionCode"
+                      },
+                      "relatedEntity": {
+                        "entityType": "~entityType",
+                        "entityId": {
+                          "identifierScope": "idScope",
+                          "identifierType": "idType",
+                          "identifierValue": "idValue"
+                        },
+                        "displayName": "RelatedEntityDisplayName",
+                        "properties": {},
+                        "identifiers": [
+                          {
+                            "identifierScope": "idScope",
+                            "identifierType": "idType",
+                            "identifierValue": "idValue"
+                          }
+                        ]
+                      },
+                      "traversalDirection": "Out",
+                      "traversalDescription": "Outward relationship description",
+                      "effectiveFrom": "0001-01-01T00:00:00.0000000+00:00",
+                      "effectiveUntil": "9999-12-31T23:59:59.9999999+00:00"
+                    }
+                  ],
+                  "links": []
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResourceListOfRelationship"
+                },
+                "example": {
+                  "values": [
+                    {
+                      "relationshipDefinitionId": {
+                        "scope": "relationshipDefinitionScope",
+                        "code": "relationshipDefinitionCode"
+                      },
+                      "relatedEntity": {
+                        "entityType": "~entityType",
+                        "entityId": {
+                          "identifierScope": "idScope",
+                          "identifierType": "idType",
+                          "identifierValue": "idValue"
+                        },
+                        "displayName": "RelatedEntityDisplayName",
+                        "properties": {},
+                        "identifiers": [
+                          {
+                            "identifierScope": "idScope",
+                            "identifierType": "idType",
+                            "identifierValue": "idValue"
+                          }
+                        ]
+                      },
+                      "traversalDirection": "Out",
+                      "traversalDescription": "Outward relationship description",
+                      "effectiveFrom": "0001-01-01T00:00:00.0000000+00:00",
+                      "effectiveUntil": "9999-12-31T23:59:59.9999999+00:00"
+                    }
+                  ],
+                  "links": []
                 }
               }
             }
@@ -54996,6 +57088,297 @@
         "additionalProperties": false,
         "description": "An amount of a specific currency, specifying a value and an associated unit"
       },
+      "CustomEntityDefinition": {
+        "required": [
+          "displayName",
+          "entityType",
+          "entityTypeName",
+          "fieldSchema"
+        ],
+        "type": "object",
+        "properties": {
+          "href": {
+            "type": "string",
+            "description": "The specific Uniform Resource Identifier (URI) for this resource at the requested effective and asAt datetime.",
+            "format": "uri",
+            "nullable": true
+          },
+          "entityTypeName": {
+            "type": "string",
+            "description": "The name provided when the custom entity type was created. This has been prefixed with “~” and returned as “entityType”, which is the identifier for the custom entity type."
+          },
+          "displayName": {
+            "type": "string",
+            "description": "A display label for the custom entity type."
+          },
+          "description": {
+            "type": "string",
+            "description": "A description for the custom entity type.",
+            "nullable": true
+          },
+          "entityType": {
+            "type": "string",
+            "description": "The identifier for the custom entity type, derived from the “entityTypeName” provided on creation."
+          },
+          "fieldSchema": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/CustomEntityFieldDefinition"
+            },
+            "description": "The description of the fields on the custom entity type."
+          }
+        },
+        "additionalProperties": false,
+        "description": "Representation of Custom Entity Definition on LUSID API"
+      },
+      "CustomEntityDefinitionRequest": {
+        "required": [
+          "description",
+          "displayName",
+          "entityTypeName",
+          "fieldSchema"
+        ],
+        "type": "object",
+        "properties": {
+          "entityTypeName": {
+            "maxLength": 64,
+            "minLength": 1,
+            "type": "string",
+            "description": "A name for the custom entity type. This will be prefixed with “~” and returned as “entityType”, which is the identifier for the custom entity type."
+          },
+          "displayName": {
+            "pattern": "^[\\s\\S]*$",
+            "type": "string",
+            "description": "A display label for the custom entity type."
+          },
+          "description": {
+            "pattern": "^[\\s\\S]*$",
+            "type": "string",
+            "description": "A description for the custom entity type."
+          },
+          "fieldSchema": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/CustomEntityFieldDefinition"
+            },
+            "description": "The description of the fields on the custom entity type."
+          }
+        },
+        "additionalProperties": false
+      },
+      "CustomEntityField": {
+        "required": [
+          "name",
+          "value"
+        ],
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string",
+            "description": "The name of the field in the custom entity type definition."
+          },
+          "value": {
+            "type": "object",
+            "additionalProperties": false,
+            "description": "The value for the field."
+          },
+          "effectiveFrom": {
+            "type": "string",
+            "description": "The effective datetime from which the field's value is valid. For timeVariant fields, this defaults to the beginning of time.",
+            "format": "date-time",
+            "nullable": true
+          },
+          "effectiveUntil": {
+            "type": "string",
+            "description": "The effective datetime until which the field's value is valid. If not supplied, the value will be valid indefinitely or until the next “effectiveFrom” date of the field.",
+            "format": "date-time",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "CustomEntityFieldDefinition": {
+        "required": [
+          "lifetime",
+          "name",
+          "required",
+          "type"
+        ],
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string",
+            "description": "The name of the field."
+          },
+          "lifetime": {
+            "type": "string",
+            "description": "Describes how the field’s values can change over time. The available values are: “Perpetual”, “TimeVariant”."
+          },
+          "type": {
+            "type": "string",
+            "description": "The value type for the field. Available values are: “String”, “Boolean”, “DateTime”, “Decimal”."
+          },
+          "collectionType": {
+            "type": "string",
+            "description": "The collection type for the field. Available values are: “Single”, “Array”. Null value defaults to “Single”",
+            "nullable": true
+          },
+          "required": {
+            "type": "boolean",
+            "description": "Whether the field is required or not."
+          },
+          "description": {
+            "maxLength": 512,
+            "type": "string",
+            "description": "An optional description for the field.",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "CustomEntityId": {
+        "required": [
+          "identifierScope",
+          "identifierType",
+          "identifierValue"
+        ],
+        "type": "object",
+        "properties": {
+          "identifierScope": {
+            "maxLength": 64,
+            "minLength": 1,
+            "pattern": "^[a-zA-Z0-9\\-_]+$",
+            "type": "string",
+            "description": "The scope the identifier resides in (the scope of the identifier property definition)."
+          },
+          "identifierType": {
+            "maxLength": 64,
+            "minLength": 1,
+            "pattern": "^[a-zA-Z0-9\\-_]+$",
+            "type": "string",
+            "description": "What the identifier represents (the code of the identifier property definition)."
+          },
+          "identifierValue": {
+            "maxLength": 1024,
+            "minLength": 1,
+            "pattern": "^[a-zA-Z0-9\\-_]+$",
+            "type": "string",
+            "description": "The value of the identifier for this entity."
+          },
+          "effectiveFrom": {
+            "type": "string",
+            "description": "The effective datetime from which the identifier is valid.",
+            "format": "date-time",
+            "nullable": true
+          },
+          "effectiveUntil": {
+            "type": "string",
+            "description": "The effective datetime until which the identifier is valid. If not supplied this will be valid indefinitely, or until the next 'effectiveFrom' datetime of the identifier.",
+            "format": "date-time",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "CustomEntityRequest": {
+        "required": [
+          "description",
+          "displayName",
+          "identifiers"
+        ],
+        "type": "object",
+        "properties": {
+          "displayName": {
+            "type": "string",
+            "description": "A display label for the custom entity."
+          },
+          "description": {
+            "type": "string",
+            "description": "A description of the custom entity."
+          },
+          "identifiers": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/CustomEntityId"
+            },
+            "description": "The identifiers the custom entity will be upserted with."
+          },
+          "fields": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/CustomEntityField"
+            },
+            "description": "The fields that decorate the custom entity.",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "CustomEntityResponse": {
+        "required": [
+          "displayName",
+          "entityType",
+          "fields",
+          "identifiers",
+          "relationships",
+          "version"
+        ],
+        "type": "object",
+        "properties": {
+          "href": {
+            "type": "string",
+            "description": "The specific Uniform Resource Identifier (URI) for this resource at the requested effective and asAt datetime.",
+            "format": "uri",
+            "nullable": true
+          },
+          "entityType": {
+            "type": "string",
+            "description": "The type of custom entity this is."
+          },
+          "version": {
+            "$ref": "#/components/schemas/Version"
+          },
+          "displayName": {
+            "type": "string",
+            "description": "A display label for the custom entity."
+          },
+          "description": {
+            "type": "string",
+            "description": "A description of the custom entity.",
+            "nullable": true
+          },
+          "identifiers": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/CustomEntityId"
+            },
+            "description": "The identifiers the custom entity will be upserted with."
+          },
+          "fields": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/CustomEntityField"
+            },
+            "description": "The fields that decorate the custom entity."
+          },
+          "relationships": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Relationship"
+            },
+            "description": "A set of relationships associated to the custom entity."
+          },
+          "links": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Link"
+            },
+            "description": "Collection of links.",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
       "CutLabelDefinition": {
         "type": "object",
         "properties": {
@@ -61449,6 +63832,88 @@
         "additionalProperties": false,
         "description": "A paginated list of resource that can be returned from a request."
       },
+      "PagedResourceListOfCustomEntityDefinition": {
+        "required": [
+          "values"
+        ],
+        "type": "object",
+        "properties": {
+          "nextPage": {
+            "type": "string",
+            "description": "The next page of results.",
+            "nullable": true
+          },
+          "previousPage": {
+            "type": "string",
+            "description": "The previous page of results.",
+            "nullable": true
+          },
+          "values": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/CustomEntityDefinition"
+            },
+            "description": "The resources to list."
+          },
+          "href": {
+            "type": "string",
+            "description": "The URI of the resource list.",
+            "format": "uri",
+            "nullable": true
+          },
+          "links": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Link"
+            },
+            "description": "Collection of links.",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false,
+        "description": "A paginated list of resource that can be returned from a request."
+      },
+      "PagedResourceListOfCustomEntityResponse": {
+        "required": [
+          "values"
+        ],
+        "type": "object",
+        "properties": {
+          "nextPage": {
+            "type": "string",
+            "description": "The next page of results.",
+            "nullable": true
+          },
+          "previousPage": {
+            "type": "string",
+            "description": "The previous page of results.",
+            "nullable": true
+          },
+          "values": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/CustomEntityResponse"
+            },
+            "description": "The resources to list."
+          },
+          "href": {
+            "type": "string",
+            "description": "The URI of the resource list.",
+            "format": "uri",
+            "nullable": true
+          },
+          "links": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Link"
+            },
+            "description": "Collection of links.",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false,
+        "description": "A paginated list of resource that can be returned from a request."
+      },
       "PagedResourceListOfCutLabelDefinition": {
         "required": [
           "values"
@@ -67064,6 +69529,34 @@
         },
         "additionalProperties": false
       },
+      "UpdateCustomEntityDefinitionRequest": {
+        "required": [
+          "description",
+          "displayName",
+          "fieldSchema"
+        ],
+        "type": "object",
+        "properties": {
+          "displayName": {
+            "pattern": "^[\\s\\S]*$",
+            "type": "string",
+            "description": "A display label for the custom entity type."
+          },
+          "description": {
+            "pattern": "^[\\s\\S]*$",
+            "type": "string",
+            "description": "A description for the custom entity type."
+          },
+          "fieldSchema": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/CustomEntityFieldDefinition"
+            },
+            "description": "The description of the fields on the custom entity type."
+          }
+        },
+        "additionalProperties": false
+      },
       "UpdateCutLabelDefinitionRequest": {
         "required": [
           "cutLocalTime",
@@ -68557,7 +71050,7 @@
         "description": "OAuth2 Implicit Grant",
         "flows": {
           "implicit": {
-            "authorizationUrl": "https://lusid.okta.com/oauth2/default/v1/authorize",
+            "authorizationUrl": "https://dummyurl.lusid.com/",
             "scopes": {}
           }
         }
