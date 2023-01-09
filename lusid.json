@@ -9,7 +9,7 @@
       "url": "https://www.finbourne.com",
       "email": "info@finbourne.com"
     },
-    "version": "0.11.5123",
+    "version": "0.11.5124",
     "x-logo": {
       "url": "https://www.lusid.com/app/assets/logo_white.png",
       "backgroundColor": "#415464"
@@ -17,7 +17,7 @@
   },
   "servers": [
     {
-      "url": "https://fbn-prd.lusid.com/api"
+      "url": "https://www.lusid.com/api"
     }
   ],
   "paths": {
@@ -33366,7 +33366,8 @@
                       "windowValuationOnInstrumentStartEnd": false,
                       "removeContingentCashflowsInPaymentDiary": false,
                       "useChildSubHoldingKeysForPortfolioExpansion": false,
-                      "validateDomesticAndQuoteCurrenciesAreConsistent": false
+                      "validateDomesticAndQuoteCurrenciesAreConsistent": false,
+                      "conservedQuantityForLookthroughExpansion": "PV"
                     },
                     "resultDataRules": []
                   },
@@ -33432,7 +33433,8 @@
                       "windowValuationOnInstrumentStartEnd": false,
                       "removeContingentCashflowsInPaymentDiary": false,
                       "useChildSubHoldingKeysForPortfolioExpansion": false,
-                      "validateDomesticAndQuoteCurrenciesAreConsistent": false
+                      "validateDomesticAndQuoteCurrenciesAreConsistent": false,
+                      "conservedQuantityForLookthroughExpansion": "PV"
                     },
                     "resultDataRules": []
                   },
@@ -33498,7 +33500,8 @@
                       "windowValuationOnInstrumentStartEnd": false,
                       "removeContingentCashflowsInPaymentDiary": false,
                       "useChildSubHoldingKeysForPortfolioExpansion": false,
-                      "validateDomesticAndQuoteCurrenciesAreConsistent": false
+                      "validateDomesticAndQuoteCurrenciesAreConsistent": false,
+                      "conservedQuantityForLookthroughExpansion": "PV"
                     },
                     "resultDataRules": []
                   },
@@ -33564,7 +33567,8 @@
                       "windowValuationOnInstrumentStartEnd": false,
                       "removeContingentCashflowsInPaymentDiary": false,
                       "useChildSubHoldingKeysForPortfolioExpansion": false,
-                      "validateDomesticAndQuoteCurrenciesAreConsistent": false
+                      "validateDomesticAndQuoteCurrenciesAreConsistent": false,
+                      "conservedQuantityForLookthroughExpansion": "PV"
                     },
                     "resultDataRules": []
                   },
@@ -33743,7 +33747,8 @@
                             "windowValuationOnInstrumentStartEnd": false,
                             "removeContingentCashflowsInPaymentDiary": false,
                             "useChildSubHoldingKeysForPortfolioExpansion": false,
-                            "validateDomesticAndQuoteCurrenciesAreConsistent": false
+                            "validateDomesticAndQuoteCurrenciesAreConsistent": false,
+                            "conservedQuantityForLookthroughExpansion": "PV"
                           },
                           "resultDataRules": []
                         },
@@ -33804,7 +33809,8 @@
                             "windowValuationOnInstrumentStartEnd": false,
                             "removeContingentCashflowsInPaymentDiary": false,
                             "useChildSubHoldingKeysForPortfolioExpansion": false,
-                            "validateDomesticAndQuoteCurrenciesAreConsistent": false
+                            "validateDomesticAndQuoteCurrenciesAreConsistent": false,
+                            "conservedQuantityForLookthroughExpansion": "PV"
                           },
                           "resultDataRules": []
                         },
@@ -33894,7 +33900,8 @@
                             "windowValuationOnInstrumentStartEnd": false,
                             "removeContingentCashflowsInPaymentDiary": false,
                             "useChildSubHoldingKeysForPortfolioExpansion": false,
-                            "validateDomesticAndQuoteCurrenciesAreConsistent": false
+                            "validateDomesticAndQuoteCurrenciesAreConsistent": false,
+                            "conservedQuantityForLookthroughExpansion": "PV"
                           },
                           "resultDataRules": []
                         },
@@ -33955,7 +33962,8 @@
                             "windowValuationOnInstrumentStartEnd": false,
                             "removeContingentCashflowsInPaymentDiary": false,
                             "useChildSubHoldingKeysForPortfolioExpansion": false,
-                            "validateDomesticAndQuoteCurrenciesAreConsistent": false
+                            "validateDomesticAndQuoteCurrenciesAreConsistent": false,
+                            "conservedQuantityForLookthroughExpansion": "PV"
                           },
                           "resultDataRules": []
                         },
@@ -34045,7 +34053,8 @@
                             "windowValuationOnInstrumentStartEnd": false,
                             "removeContingentCashflowsInPaymentDiary": false,
                             "useChildSubHoldingKeysForPortfolioExpansion": false,
-                            "validateDomesticAndQuoteCurrenciesAreConsistent": false
+                            "validateDomesticAndQuoteCurrenciesAreConsistent": false,
+                            "conservedQuantityForLookthroughExpansion": "PV"
                           },
                           "resultDataRules": []
                         },
@@ -34106,7 +34115,8 @@
                             "windowValuationOnInstrumentStartEnd": false,
                             "removeContingentCashflowsInPaymentDiary": false,
                             "useChildSubHoldingKeysForPortfolioExpansion": false,
-                            "validateDomesticAndQuoteCurrenciesAreConsistent": false
+                            "validateDomesticAndQuoteCurrenciesAreConsistent": false,
+                            "conservedQuantityForLookthroughExpansion": "PV"
                           },
                           "resultDataRules": []
                         },
@@ -34287,7 +34297,8 @@
                         "windowValuationOnInstrumentStartEnd": false,
                         "removeContingentCashflowsInPaymentDiary": false,
                         "useChildSubHoldingKeysForPortfolioExpansion": false,
-                        "validateDomesticAndQuoteCurrenciesAreConsistent": false
+                        "validateDomesticAndQuoteCurrenciesAreConsistent": false,
+                        "conservedQuantityForLookthroughExpansion": "PV"
                       },
                       "resultDataRules": []
                     },
@@ -34364,7 +34375,8 @@
                         "windowValuationOnInstrumentStartEnd": false,
                         "removeContingentCashflowsInPaymentDiary": false,
                         "useChildSubHoldingKeysForPortfolioExpansion": false,
-                        "validateDomesticAndQuoteCurrenciesAreConsistent": false
+                        "validateDomesticAndQuoteCurrenciesAreConsistent": false,
+                        "conservedQuantityForLookthroughExpansion": "PV"
                       },
                       "resultDataRules": []
                     },
@@ -34441,7 +34453,8 @@
                         "windowValuationOnInstrumentStartEnd": false,
                         "removeContingentCashflowsInPaymentDiary": false,
                         "useChildSubHoldingKeysForPortfolioExpansion": false,
-                        "validateDomesticAndQuoteCurrenciesAreConsistent": false
+                        "validateDomesticAndQuoteCurrenciesAreConsistent": false,
+                        "conservedQuantityForLookthroughExpansion": "PV"
                       },
                       "resultDataRules": []
                     },
@@ -65362,6 +65375,11 @@
           "validateDomesticAndQuoteCurrenciesAreConsistent": {
             "type": "boolean",
             "description": "Do we validate that the instrument domestic currency matches the quote currency (unless unknown/zzz) when using lookup pricing."
+          },
+          "conservedQuantityForLookthroughExpansion": {
+            "type": "string",
+            "description": "When performing lookthrough portfolio expansion with ScalingMethodology set to \"Sum\" or \"AbsoluteSum\",\r\nthe quantity specified here will be conserved and apportioned to lookthrough constituents.\r\nFor example, an equal-weighting index with 100 constituents can be modelled as a reference portfolio with 1% weights on each equity.\r\nWhen expanding a $9000 holding of that index into its constituents while conserving PV, we end up with $90 of each equity.\r\nThe number of units of each equity held is then implied.\r\nNote that conservation of one quantity may imply non-conservation of others, especially when some constituents are OTCs.\r\n            \r\nAllowed values are: \"PV\" (default), \"Exposure\".",
+            "nullable": true
           }
         },
         "additionalProperties": false,
@@ -71050,7 +71068,7 @@
         "description": "OAuth2 Implicit Grant",
         "flows": {
           "implicit": {
-            "authorizationUrl": "https://lusid.okta.com/oauth2/default/v1/authorize",
+            "authorizationUrl": "https://dummyurl.lusid.com/",
             "scopes": {}
           }
         }
