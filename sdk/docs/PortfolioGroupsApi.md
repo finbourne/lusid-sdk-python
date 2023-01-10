@@ -1,6 +1,6 @@
 # lusid.PortfolioGroupsApi
 
-All URIs are relative to *https://fbn-prd.lusid.com/api*
+All URIs are relative to *https://www.lusid.com/api*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
@@ -25,6 +25,7 @@ Method | HTTP request | Description
 [**get_portfolio_group_relationships**](PortfolioGroupsApi.md#get_portfolio_group_relationships) | **GET** /api/portfoliogroups/{scope}/{code}/relationships | [EARLY ACCESS] GetPortfolioGroupRelationships: Get Relationships for Portfolio Group
 [**get_transactions_for_portfolio_group**](PortfolioGroupsApi.md#get_transactions_for_portfolio_group) | **GET** /api/portfoliogroups/{scope}/{code}/transactions | GetTransactionsForPortfolioGroup: Get transactions for transaction portfolios in a portfolio group
 [**list_portfolio_groups**](PortfolioGroupsApi.md#list_portfolio_groups) | **GET** /api/portfoliogroups/{scope} | [EARLY ACCESS] ListPortfolioGroups: List portfolio groups
+[**patch_portfolio_group_access_metadata**](PortfolioGroupsApi.md#patch_portfolio_group_access_metadata) | **PATCH** /api/portfoliogroups/{scope}/{code}/metadata | [EARLY ACCESS] PatchPortfolioGroupAccessMetadata: Patch Access Metadata rules for a Portfolio Group.
 [**update_portfolio_group**](PortfolioGroupsApi.md#update_portfolio_group) | **PUT** /api/portfoliogroups/{scope}/{code} | [EARLY ACCESS] UpdatePortfolioGroup: Update portfolio group
 [**upsert_group_properties**](PortfolioGroupsApi.md#upsert_group_properties) | **POST** /api/portfoliogroups/{scope}/{code}/properties/$upsert | [EARLY ACCESS] UpsertGroupProperties: Upsert group properties
 [**upsert_portfolio_group_access_metadata**](PortfolioGroupsApi.md#upsert_portfolio_group_access_metadata) | **PUT** /api/portfoliogroups/{scope}/{code}/metadata/{metadataKey} | [EARLY ACCESS] UpsertPortfolioGroupAccessMetadata: Upsert a Portfolio Group Access Metadata entry associated with a specific metadataKey. This creates or updates the data in LUSID.
@@ -46,10 +47,10 @@ import time
 import lusid
 from lusid.rest import ApiException
 from pprint import pprint
-# Defining the host is optional and defaults to https://fbn-prd.lusid.com/api
+# Defining the host is optional and defaults to https://www.lusid.com/api
 # See configuration.py for a list of all supported configuration parameters.
 configuration = lusid.Configuration(
-    host = "https://fbn-prd.lusid.com/api"
+    host = "https://www.lusid.com/api"
 )
 
 # The client must configure the authentication and authorization parameters
@@ -59,7 +60,7 @@ configuration = lusid.Configuration(
 
 # Configure OAuth2 access token for authorization: oauth2
 configuration = lusid.Configuration(
-    host = "https://fbn-prd.lusid.com/api"
+    host = "https://www.lusid.com/api"
 )
 configuration.access_token = 'YOUR_ACCESS_TOKEN'
 
@@ -127,10 +128,10 @@ import time
 import lusid
 from lusid.rest import ApiException
 from pprint import pprint
-# Defining the host is optional and defaults to https://fbn-prd.lusid.com/api
+# Defining the host is optional and defaults to https://www.lusid.com/api
 # See configuration.py for a list of all supported configuration parameters.
 configuration = lusid.Configuration(
-    host = "https://fbn-prd.lusid.com/api"
+    host = "https://www.lusid.com/api"
 )
 
 # The client must configure the authentication and authorization parameters
@@ -140,7 +141,7 @@ configuration = lusid.Configuration(
 
 # Configure OAuth2 access token for authorization: oauth2
 configuration = lusid.Configuration(
-    host = "https://fbn-prd.lusid.com/api"
+    host = "https://www.lusid.com/api"
 )
 configuration.access_token = 'YOUR_ACCESS_TOKEN'
 
@@ -208,10 +209,10 @@ import time
 import lusid
 from lusid.rest import ApiException
 from pprint import pprint
-# Defining the host is optional and defaults to https://fbn-prd.lusid.com/api
+# Defining the host is optional and defaults to https://www.lusid.com/api
 # See configuration.py for a list of all supported configuration parameters.
 configuration = lusid.Configuration(
-    host = "https://fbn-prd.lusid.com/api"
+    host = "https://www.lusid.com/api"
 )
 
 # The client must configure the authentication and authorization parameters
@@ -221,7 +222,7 @@ configuration = lusid.Configuration(
 
 # Configure OAuth2 access token for authorization: oauth2
 configuration = lusid.Configuration(
-    host = "https://fbn-prd.lusid.com/api"
+    host = "https://www.lusid.com/api"
 )
 configuration.access_token = 'YOUR_ACCESS_TOKEN'
 
@@ -297,10 +298,10 @@ import time
 import lusid
 from lusid.rest import ApiException
 from pprint import pprint
-# Defining the host is optional and defaults to https://fbn-prd.lusid.com/api
+# Defining the host is optional and defaults to https://www.lusid.com/api
 # See configuration.py for a list of all supported configuration parameters.
 configuration = lusid.Configuration(
-    host = "https://fbn-prd.lusid.com/api"
+    host = "https://www.lusid.com/api"
 )
 
 # The client must configure the authentication and authorization parameters
@@ -310,7 +311,7 @@ configuration = lusid.Configuration(
 
 # Configure OAuth2 access token for authorization: oauth2
 configuration = lusid.Configuration(
-    host = "https://fbn-prd.lusid.com/api"
+    host = "https://www.lusid.com/api"
 )
 configuration.access_token = 'YOUR_ACCESS_TOKEN'
 
@@ -374,10 +375,10 @@ import time
 import lusid
 from lusid.rest import ApiException
 from pprint import pprint
-# Defining the host is optional and defaults to https://fbn-prd.lusid.com/api
+# Defining the host is optional and defaults to https://www.lusid.com/api
 # See configuration.py for a list of all supported configuration parameters.
 configuration = lusid.Configuration(
-    host = "https://fbn-prd.lusid.com/api"
+    host = "https://www.lusid.com/api"
 )
 
 # The client must configure the authentication and authorization parameters
@@ -387,7 +388,7 @@ configuration = lusid.Configuration(
 
 # Configure OAuth2 access token for authorization: oauth2
 configuration = lusid.Configuration(
-    host = "https://fbn-prd.lusid.com/api"
+    host = "https://www.lusid.com/api"
 )
 configuration.access_token = 'YOUR_ACCESS_TOKEN'
 
@@ -455,10 +456,10 @@ import time
 import lusid
 from lusid.rest import ApiException
 from pprint import pprint
-# Defining the host is optional and defaults to https://fbn-prd.lusid.com/api
+# Defining the host is optional and defaults to https://www.lusid.com/api
 # See configuration.py for a list of all supported configuration parameters.
 configuration = lusid.Configuration(
-    host = "https://fbn-prd.lusid.com/api"
+    host = "https://www.lusid.com/api"
 )
 
 # The client must configure the authentication and authorization parameters
@@ -468,7 +469,7 @@ configuration = lusid.Configuration(
 
 # Configure OAuth2 access token for authorization: oauth2
 configuration = lusid.Configuration(
-    host = "https://fbn-prd.lusid.com/api"
+    host = "https://www.lusid.com/api"
 )
 configuration.access_token = 'YOUR_ACCESS_TOKEN'
 
@@ -538,10 +539,10 @@ import time
 import lusid
 from lusid.rest import ApiException
 from pprint import pprint
-# Defining the host is optional and defaults to https://fbn-prd.lusid.com/api
+# Defining the host is optional and defaults to https://www.lusid.com/api
 # See configuration.py for a list of all supported configuration parameters.
 configuration = lusid.Configuration(
-    host = "https://fbn-prd.lusid.com/api"
+    host = "https://www.lusid.com/api"
 )
 
 # The client must configure the authentication and authorization parameters
@@ -551,7 +552,7 @@ configuration = lusid.Configuration(
 
 # Configure OAuth2 access token for authorization: oauth2
 configuration = lusid.Configuration(
-    host = "https://fbn-prd.lusid.com/api"
+    host = "https://www.lusid.com/api"
 )
 configuration.access_token = 'YOUR_ACCESS_TOKEN'
 
@@ -621,10 +622,10 @@ import time
 import lusid
 from lusid.rest import ApiException
 from pprint import pprint
-# Defining the host is optional and defaults to https://fbn-prd.lusid.com/api
+# Defining the host is optional and defaults to https://www.lusid.com/api
 # See configuration.py for a list of all supported configuration parameters.
 configuration = lusid.Configuration(
-    host = "https://fbn-prd.lusid.com/api"
+    host = "https://www.lusid.com/api"
 )
 
 # The client must configure the authentication and authorization parameters
@@ -634,7 +635,7 @@ configuration = lusid.Configuration(
 
 # Configure OAuth2 access token for authorization: oauth2
 configuration = lusid.Configuration(
-    host = "https://fbn-prd.lusid.com/api"
+    host = "https://www.lusid.com/api"
 )
 configuration.access_token = 'YOUR_ACCESS_TOKEN'
 
@@ -698,10 +699,10 @@ import time
 import lusid
 from lusid.rest import ApiException
 from pprint import pprint
-# Defining the host is optional and defaults to https://fbn-prd.lusid.com/api
+# Defining the host is optional and defaults to https://www.lusid.com/api
 # See configuration.py for a list of all supported configuration parameters.
 configuration = lusid.Configuration(
-    host = "https://fbn-prd.lusid.com/api"
+    host = "https://www.lusid.com/api"
 )
 
 # The client must configure the authentication and authorization parameters
@@ -711,7 +712,7 @@ configuration = lusid.Configuration(
 
 # Configure OAuth2 access token for authorization: oauth2
 configuration = lusid.Configuration(
-    host = "https://fbn-prd.lusid.com/api"
+    host = "https://www.lusid.com/api"
 )
 configuration.access_token = 'YOUR_ACCESS_TOKEN'
 
@@ -781,10 +782,10 @@ import time
 import lusid
 from lusid.rest import ApiException
 from pprint import pprint
-# Defining the host is optional and defaults to https://fbn-prd.lusid.com/api
+# Defining the host is optional and defaults to https://www.lusid.com/api
 # See configuration.py for a list of all supported configuration parameters.
 configuration = lusid.Configuration(
-    host = "https://fbn-prd.lusid.com/api"
+    host = "https://www.lusid.com/api"
 )
 
 # The client must configure the authentication and authorization parameters
@@ -794,7 +795,7 @@ configuration = lusid.Configuration(
 
 # Configure OAuth2 access token for authorization: oauth2
 configuration = lusid.Configuration(
-    host = "https://fbn-prd.lusid.com/api"
+    host = "https://www.lusid.com/api"
 )
 configuration.access_token = 'YOUR_ACCESS_TOKEN'
 
@@ -872,10 +873,10 @@ import time
 import lusid
 from lusid.rest import ApiException
 from pprint import pprint
-# Defining the host is optional and defaults to https://fbn-prd.lusid.com/api
+# Defining the host is optional and defaults to https://www.lusid.com/api
 # See configuration.py for a list of all supported configuration parameters.
 configuration = lusid.Configuration(
-    host = "https://fbn-prd.lusid.com/api"
+    host = "https://www.lusid.com/api"
 )
 
 # The client must configure the authentication and authorization parameters
@@ -885,7 +886,7 @@ configuration = lusid.Configuration(
 
 # Configure OAuth2 access token for authorization: oauth2
 configuration = lusid.Configuration(
-    host = "https://fbn-prd.lusid.com/api"
+    host = "https://www.lusid.com/api"
 )
 configuration.access_token = 'YOUR_ACCESS_TOKEN'
 
@@ -953,10 +954,10 @@ import time
 import lusid
 from lusid.rest import ApiException
 from pprint import pprint
-# Defining the host is optional and defaults to https://fbn-prd.lusid.com/api
+# Defining the host is optional and defaults to https://www.lusid.com/api
 # See configuration.py for a list of all supported configuration parameters.
 configuration = lusid.Configuration(
-    host = "https://fbn-prd.lusid.com/api"
+    host = "https://www.lusid.com/api"
 )
 
 # The client must configure the authentication and authorization parameters
@@ -966,7 +967,7 @@ configuration = lusid.Configuration(
 
 # Configure OAuth2 access token for authorization: oauth2
 configuration = lusid.Configuration(
-    host = "https://fbn-prd.lusid.com/api"
+    host = "https://www.lusid.com/api"
 )
 configuration.access_token = 'YOUR_ACCESS_TOKEN'
 
@@ -1040,10 +1041,10 @@ import time
 import lusid
 from lusid.rest import ApiException
 from pprint import pprint
-# Defining the host is optional and defaults to https://fbn-prd.lusid.com/api
+# Defining the host is optional and defaults to https://www.lusid.com/api
 # See configuration.py for a list of all supported configuration parameters.
 configuration = lusid.Configuration(
-    host = "https://fbn-prd.lusid.com/api"
+    host = "https://www.lusid.com/api"
 )
 
 # The client must configure the authentication and authorization parameters
@@ -1053,7 +1054,7 @@ configuration = lusid.Configuration(
 
 # Configure OAuth2 access token for authorization: oauth2
 configuration = lusid.Configuration(
-    host = "https://fbn-prd.lusid.com/api"
+    host = "https://www.lusid.com/api"
 )
 configuration.access_token = 'YOUR_ACCESS_TOKEN'
 
@@ -1125,10 +1126,10 @@ import time
 import lusid
 from lusid.rest import ApiException
 from pprint import pprint
-# Defining the host is optional and defaults to https://fbn-prd.lusid.com/api
+# Defining the host is optional and defaults to https://www.lusid.com/api
 # See configuration.py for a list of all supported configuration parameters.
 configuration = lusid.Configuration(
-    host = "https://fbn-prd.lusid.com/api"
+    host = "https://www.lusid.com/api"
 )
 
 # The client must configure the authentication and authorization parameters
@@ -1138,7 +1139,7 @@ configuration = lusid.Configuration(
 
 # Configure OAuth2 access token for authorization: oauth2
 configuration = lusid.Configuration(
-    host = "https://fbn-prd.lusid.com/api"
+    host = "https://www.lusid.com/api"
 )
 configuration.access_token = 'YOUR_ACCESS_TOKEN'
 
@@ -1208,10 +1209,10 @@ import time
 import lusid
 from lusid.rest import ApiException
 from pprint import pprint
-# Defining the host is optional and defaults to https://fbn-prd.lusid.com/api
+# Defining the host is optional and defaults to https://www.lusid.com/api
 # See configuration.py for a list of all supported configuration parameters.
 configuration = lusid.Configuration(
-    host = "https://fbn-prd.lusid.com/api"
+    host = "https://www.lusid.com/api"
 )
 
 # The client must configure the authentication and authorization parameters
@@ -1221,7 +1222,7 @@ configuration = lusid.Configuration(
 
 # Configure OAuth2 access token for authorization: oauth2
 configuration = lusid.Configuration(
-    host = "https://fbn-prd.lusid.com/api"
+    host = "https://www.lusid.com/api"
 )
 configuration.access_token = 'YOUR_ACCESS_TOKEN'
 
@@ -1291,10 +1292,10 @@ import time
 import lusid
 from lusid.rest import ApiException
 from pprint import pprint
-# Defining the host is optional and defaults to https://fbn-prd.lusid.com/api
+# Defining the host is optional and defaults to https://www.lusid.com/api
 # See configuration.py for a list of all supported configuration parameters.
 configuration = lusid.Configuration(
-    host = "https://fbn-prd.lusid.com/api"
+    host = "https://www.lusid.com/api"
 )
 
 # The client must configure the authentication and authorization parameters
@@ -1304,7 +1305,7 @@ configuration = lusid.Configuration(
 
 # Configure OAuth2 access token for authorization: oauth2
 configuration = lusid.Configuration(
-    host = "https://fbn-prd.lusid.com/api"
+    host = "https://www.lusid.com/api"
 )
 configuration.access_token = 'YOUR_ACCESS_TOKEN'
 
@@ -1374,10 +1375,10 @@ import time
 import lusid
 from lusid.rest import ApiException
 from pprint import pprint
-# Defining the host is optional and defaults to https://fbn-prd.lusid.com/api
+# Defining the host is optional and defaults to https://www.lusid.com/api
 # See configuration.py for a list of all supported configuration parameters.
 configuration = lusid.Configuration(
-    host = "https://fbn-prd.lusid.com/api"
+    host = "https://www.lusid.com/api"
 )
 
 # The client must configure the authentication and authorization parameters
@@ -1387,7 +1388,7 @@ configuration = lusid.Configuration(
 
 # Configure OAuth2 access token for authorization: oauth2
 configuration = lusid.Configuration(
-    host = "https://fbn-prd.lusid.com/api"
+    host = "https://www.lusid.com/api"
 )
 configuration.access_token = 'YOUR_ACCESS_TOKEN'
 
@@ -1455,10 +1456,10 @@ import time
 import lusid
 from lusid.rest import ApiException
 from pprint import pprint
-# Defining the host is optional and defaults to https://fbn-prd.lusid.com/api
+# Defining the host is optional and defaults to https://www.lusid.com/api
 # See configuration.py for a list of all supported configuration parameters.
 configuration = lusid.Configuration(
-    host = "https://fbn-prd.lusid.com/api"
+    host = "https://www.lusid.com/api"
 )
 
 # The client must configure the authentication and authorization parameters
@@ -1468,7 +1469,7 @@ configuration = lusid.Configuration(
 
 # Configure OAuth2 access token for authorization: oauth2
 configuration = lusid.Configuration(
-    host = "https://fbn-prd.lusid.com/api"
+    host = "https://www.lusid.com/api"
 )
 configuration.access_token = 'YOUR_ACCESS_TOKEN'
 
@@ -1544,10 +1545,10 @@ import time
 import lusid
 from lusid.rest import ApiException
 from pprint import pprint
-# Defining the host is optional and defaults to https://fbn-prd.lusid.com/api
+# Defining the host is optional and defaults to https://www.lusid.com/api
 # See configuration.py for a list of all supported configuration parameters.
 configuration = lusid.Configuration(
-    host = "https://fbn-prd.lusid.com/api"
+    host = "https://www.lusid.com/api"
 )
 
 # The client must configure the authentication and authorization parameters
@@ -1557,7 +1558,7 @@ configuration = lusid.Configuration(
 
 # Configure OAuth2 access token for authorization: oauth2
 configuration = lusid.Configuration(
-    host = "https://fbn-prd.lusid.com/api"
+    host = "https://www.lusid.com/api"
 )
 configuration.access_token = 'YOUR_ACCESS_TOKEN'
 
@@ -1629,10 +1630,10 @@ import time
 import lusid
 from lusid.rest import ApiException
 from pprint import pprint
-# Defining the host is optional and defaults to https://fbn-prd.lusid.com/api
+# Defining the host is optional and defaults to https://www.lusid.com/api
 # See configuration.py for a list of all supported configuration parameters.
 configuration = lusid.Configuration(
-    host = "https://fbn-prd.lusid.com/api"
+    host = "https://www.lusid.com/api"
 )
 
 # The client must configure the authentication and authorization parameters
@@ -1642,7 +1643,7 @@ configuration = lusid.Configuration(
 
 # Configure OAuth2 access token for authorization: oauth2
 configuration = lusid.Configuration(
-    host = "https://fbn-prd.lusid.com/api"
+    host = "https://www.lusid.com/api"
 )
 configuration.access_token = 'YOUR_ACCESS_TOKEN'
 
@@ -1722,10 +1723,10 @@ import time
 import lusid
 from lusid.rest import ApiException
 from pprint import pprint
-# Defining the host is optional and defaults to https://fbn-prd.lusid.com/api
+# Defining the host is optional and defaults to https://www.lusid.com/api
 # See configuration.py for a list of all supported configuration parameters.
 configuration = lusid.Configuration(
-    host = "https://fbn-prd.lusid.com/api"
+    host = "https://www.lusid.com/api"
 )
 
 # The client must configure the authentication and authorization parameters
@@ -1735,7 +1736,7 @@ configuration = lusid.Configuration(
 
 # Configure OAuth2 access token for authorization: oauth2
 configuration = lusid.Configuration(
-    host = "https://fbn-prd.lusid.com/api"
+    host = "https://www.lusid.com/api"
 )
 configuration.access_token = 'YOUR_ACCESS_TOKEN'
 
@@ -1791,6 +1792,89 @@ Name | Type | Description  | Notes
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
+# **patch_portfolio_group_access_metadata**
+> dict(str, list[AccessMetadataValue]) patch_portfolio_group_access_metadata(scope, code, access_metadata_operation, effective_at=effective_at, effective_until=effective_until)
+
+[EARLY ACCESS] PatchPortfolioGroupAccessMetadata: Patch Access Metadata rules for a Portfolio Group.
+
+Patch Portfolio Group Access Metadata Rules in a single scope.  The behaviour is defined by the JSON Patch specification.                Currently only 'add' is a supported operation on the patch document.    Currently only valid metadata keys are supported paths on the patch document.                The response will return any affected Portfolio Group Access Metadata rules or a failure message if unsuccessful.                It is important to always check to verify success (or failure).                Multiple rules for a metadataKey can exist with different effective at dates, when resources are accessed the rule that is active for the current time will be fetched.
+
+### Example
+
+* OAuth Authentication (oauth2):
+```python
+from __future__ import print_function
+import time
+import lusid
+from lusid.rest import ApiException
+from pprint import pprint
+# Defining the host is optional and defaults to https://www.lusid.com/api
+# See configuration.py for a list of all supported configuration parameters.
+configuration = lusid.Configuration(
+    host = "https://www.lusid.com/api"
+)
+
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
+
+# Configure OAuth2 access token for authorization: oauth2
+configuration = lusid.Configuration(
+    host = "https://www.lusid.com/api"
+)
+configuration.access_token = 'YOUR_ACCESS_TOKEN'
+
+# Enter a context with an instance of the API client
+with lusid.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = lusid.PortfolioGroupsApi(api_client)
+    scope = 'scope_example' # str | The scope of the Portfolio Group
+code = 'code_example' # str | The Portfolio Group code
+access_metadata_operation = [{"value":[{"value":"SilverLicence","provider":"TestDataProvider"}],"path":"/exampleMetadataKey","op":"add"}] # list[AccessMetadataOperation] | The Json patch document
+effective_at = 'effective_at_example' # str | The date this rule will be effective from (optional)
+effective_until = '2013-10-20T19:20:30+01:00' # datetime | The effective date until which the Access Metadata is valid. If not supplied this will be valid indefinitely, or until the next 'effectiveAt' date of the Access Metadata (optional)
+
+    try:
+        # [EARLY ACCESS] PatchPortfolioGroupAccessMetadata: Patch Access Metadata rules for a Portfolio Group.
+        api_response = api_instance.patch_portfolio_group_access_metadata(scope, code, access_metadata_operation, effective_at=effective_at, effective_until=effective_until)
+        pprint(api_response)
+    except ApiException as e:
+        print("Exception when calling PortfolioGroupsApi->patch_portfolio_group_access_metadata: %s\n" % e)
+```
+
+### Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **scope** | **str**| The scope of the Portfolio Group | 
+ **code** | **str**| The Portfolio Group code | 
+ **access_metadata_operation** | [**list[AccessMetadataOperation]**](AccessMetadataOperation.md)| The Json patch document | 
+ **effective_at** | **str**| The date this rule will be effective from | [optional] 
+ **effective_until** | **datetime**| The effective date until which the Access Metadata is valid. If not supplied this will be valid indefinitely, or until the next &#39;effectiveAt&#39; date of the Access Metadata | [optional] 
+
+### Return type
+
+**dict(str, list[AccessMetadataValue])**
+
+### Authorization
+
+[oauth2](../README.md#oauth2)
+
+### HTTP request headers
+
+ - **Content-Type**: application/json-patch+json, application/json, text/json, application/*+json
+ - **Accept**: text/plain, application/json, text/json
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | The successfully patched items. |  -  |
+**400** | The details of the input related failure |  -  |
+**0** | Error response |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
 # **update_portfolio_group**
 > PortfolioGroup update_portfolio_group(scope, code, effective_at=effective_at, update_portfolio_group_request=update_portfolio_group_request)
 
@@ -1807,10 +1891,10 @@ import time
 import lusid
 from lusid.rest import ApiException
 from pprint import pprint
-# Defining the host is optional and defaults to https://fbn-prd.lusid.com/api
+# Defining the host is optional and defaults to https://www.lusid.com/api
 # See configuration.py for a list of all supported configuration parameters.
 configuration = lusid.Configuration(
-    host = "https://fbn-prd.lusid.com/api"
+    host = "https://www.lusid.com/api"
 )
 
 # The client must configure the authentication and authorization parameters
@@ -1820,7 +1904,7 @@ configuration = lusid.Configuration(
 
 # Configure OAuth2 access token for authorization: oauth2
 configuration = lusid.Configuration(
-    host = "https://fbn-prd.lusid.com/api"
+    host = "https://www.lusid.com/api"
 )
 configuration.access_token = 'YOUR_ACCESS_TOKEN'
 
@@ -1888,10 +1972,10 @@ import time
 import lusid
 from lusid.rest import ApiException
 from pprint import pprint
-# Defining the host is optional and defaults to https://fbn-prd.lusid.com/api
+# Defining the host is optional and defaults to https://www.lusid.com/api
 # See configuration.py for a list of all supported configuration parameters.
 configuration = lusid.Configuration(
-    host = "https://fbn-prd.lusid.com/api"
+    host = "https://www.lusid.com/api"
 )
 
 # The client must configure the authentication and authorization parameters
@@ -1901,7 +1985,7 @@ configuration = lusid.Configuration(
 
 # Configure OAuth2 access token for authorization: oauth2
 configuration = lusid.Configuration(
-    host = "https://fbn-prd.lusid.com/api"
+    host = "https://www.lusid.com/api"
 )
 configuration.access_token = 'YOUR_ACCESS_TOKEN'
 
@@ -1967,10 +2051,10 @@ import time
 import lusid
 from lusid.rest import ApiException
 from pprint import pprint
-# Defining the host is optional and defaults to https://fbn-prd.lusid.com/api
+# Defining the host is optional and defaults to https://www.lusid.com/api
 # See configuration.py for a list of all supported configuration parameters.
 configuration = lusid.Configuration(
-    host = "https://fbn-prd.lusid.com/api"
+    host = "https://www.lusid.com/api"
 )
 
 # The client must configure the authentication and authorization parameters
@@ -1980,7 +2064,7 @@ configuration = lusid.Configuration(
 
 # Configure OAuth2 access token for authorization: oauth2
 configuration = lusid.Configuration(
-    host = "https://fbn-prd.lusid.com/api"
+    host = "https://www.lusid.com/api"
 )
 configuration.access_token = 'YOUR_ACCESS_TOKEN'
 

@@ -1,11 +1,12 @@
 # lusid.InstrumentsApi
 
-All URIs are relative to *https://fbn-prd.lusid.com/api*
+All URIs are relative to *https://www.lusid.com/api*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
 [**delete_instrument**](InstrumentsApi.md#delete_instrument) | **DELETE** /api/instruments/{identifierType}/{identifier} | [EARLY ACCESS] DeleteInstrument: Soft delete a single instrument
 [**delete_instrument_properties**](InstrumentsApi.md#delete_instrument_properties) | **POST** /api/instruments/{identifierType}/{identifier}/properties/$delete | [EARLY ACCESS] DeleteInstrumentProperties: Delete instrument properties
+[**delete_instruments**](InstrumentsApi.md#delete_instruments) | **POST** /api/instruments/$delete | [EARLY ACCESS] DeleteInstruments: Soft or hard delete multiple instruments
 [**get_instrument**](InstrumentsApi.md#get_instrument) | **GET** /api/instruments/{identifierType}/{identifier} | GetInstrument: Get instrument
 [**get_instrument_identifier_types**](InstrumentsApi.md#get_instrument_identifier_types) | **GET** /api/instruments/identifierTypes | GetInstrumentIdentifierTypes: Get instrument identifier types
 [**get_instrument_properties**](InstrumentsApi.md#get_instrument_properties) | **GET** /api/instruments/{identifierType}/{identifier}/properties | [EARLY ACCESS] GetInstrumentProperties: Get instrument properties
@@ -35,10 +36,10 @@ import time
 import lusid
 from lusid.rest import ApiException
 from pprint import pprint
-# Defining the host is optional and defaults to https://fbn-prd.lusid.com/api
+# Defining the host is optional and defaults to https://www.lusid.com/api
 # See configuration.py for a list of all supported configuration parameters.
 configuration = lusid.Configuration(
-    host = "https://fbn-prd.lusid.com/api"
+    host = "https://www.lusid.com/api"
 )
 
 # The client must configure the authentication and authorization parameters
@@ -48,7 +49,7 @@ configuration = lusid.Configuration(
 
 # Configure OAuth2 access token for authorization: oauth2
 configuration = lusid.Configuration(
-    host = "https://fbn-prd.lusid.com/api"
+    host = "https://www.lusid.com/api"
 )
 configuration.access_token = 'YOUR_ACCESS_TOKEN'
 
@@ -114,10 +115,10 @@ import time
 import lusid
 from lusid.rest import ApiException
 from pprint import pprint
-# Defining the host is optional and defaults to https://fbn-prd.lusid.com/api
+# Defining the host is optional and defaults to https://www.lusid.com/api
 # See configuration.py for a list of all supported configuration parameters.
 configuration = lusid.Configuration(
-    host = "https://fbn-prd.lusid.com/api"
+    host = "https://www.lusid.com/api"
 )
 
 # The client must configure the authentication and authorization parameters
@@ -127,7 +128,7 @@ configuration = lusid.Configuration(
 
 # Configure OAuth2 access token for authorization: oauth2
 configuration = lusid.Configuration(
-    host = "https://fbn-prd.lusid.com/api"
+    host = "https://www.lusid.com/api"
 )
 configuration.access_token = 'YOUR_ACCESS_TOKEN'
 
@@ -181,6 +182,85 @@ Name | Type | Description  | Notes
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
+# **delete_instruments**
+> DeleteInstrumentsResponse delete_instruments(request_body, delete_mode=delete_mode, scope=scope)
+
+[EARLY ACCESS] DeleteInstruments: Soft or hard delete multiple instruments
+
+Deletes a number of instruments identified by LusidInstrumentId.                Soft deletion marks the instrument as inactive so it can no longer be referenced when creating or updating transactions or holdings. You can still query existing transactions and holdings related to the inactive instrument.                In addition to the above behaviour, hard deletion: (i) completely removes all external identifiers from the instrument; (ii) marks the instrument as 'Deleted'; (iii) prepends the instrument's name with 'DELETED '; (iv) prevents the instrument from being returned in list instruments queries.                Following hard deletion, an instrument may only be retrieved by making a direct get instrument request for the LusidInstrumentId. Instrument deletion cannot be undone. Please note that currency instruments cannot currently be deleted.  The maximum number of instruments that this method can delete per request is 2,000.
+
+### Example
+
+* OAuth Authentication (oauth2):
+```python
+from __future__ import print_function
+import time
+import lusid
+from lusid.rest import ApiException
+from pprint import pprint
+# Defining the host is optional and defaults to https://www.lusid.com/api
+# See configuration.py for a list of all supported configuration parameters.
+configuration = lusid.Configuration(
+    host = "https://www.lusid.com/api"
+)
+
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
+
+# Configure OAuth2 access token for authorization: oauth2
+configuration = lusid.Configuration(
+    host = "https://www.lusid.com/api"
+)
+configuration.access_token = 'YOUR_ACCESS_TOKEN'
+
+# Enter a context with an instance of the API client
+with lusid.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = lusid.InstrumentsApi(api_client)
+    request_body = ["LUID_12345678","LUID_87654321"] # list[str] | The list of lusidInstrumentId's to delete.
+delete_mode = 'delete_mode_example' # str | The delete mode to use (defaults to 'Soft'). (optional)
+scope = 'default' # str | The scope in which the instruments lie. When not supplied the scope is 'default'. (optional) (default to 'default')
+
+    try:
+        # [EARLY ACCESS] DeleteInstruments: Soft or hard delete multiple instruments
+        api_response = api_instance.delete_instruments(request_body, delete_mode=delete_mode, scope=scope)
+        pprint(api_response)
+    except ApiException as e:
+        print("Exception when calling InstrumentsApi->delete_instruments: %s\n" % e)
+```
+
+### Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **request_body** | [**list[str]**](str.md)| The list of lusidInstrumentId&#39;s to delete. | 
+ **delete_mode** | **str**| The delete mode to use (defaults to &#39;Soft&#39;). | [optional] 
+ **scope** | **str**| The scope in which the instruments lie. When not supplied the scope is &#39;default&#39;. | [optional] [default to &#39;default&#39;]
+
+### Return type
+
+[**DeleteInstrumentsResponse**](DeleteInstrumentsResponse.md)
+
+### Authorization
+
+[oauth2](../README.md#oauth2)
+
+### HTTP request headers
+
+ - **Content-Type**: application/json-patch+json, application/json, text/json, application/*+json
+ - **Accept**: text/plain, application/json, text/json
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | The datetime that the instruments were deleted |  -  |
+**400** | The details of the input related failure |  -  |
+**0** | Error response |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
 # **get_instrument**
 > Instrument get_instrument(identifier_type, identifier, effective_at=effective_at, as_at=as_at, property_keys=property_keys, scope=scope, relationship_definition_ids=relationship_definition_ids)
 
@@ -197,10 +277,10 @@ import time
 import lusid
 from lusid.rest import ApiException
 from pprint import pprint
-# Defining the host is optional and defaults to https://fbn-prd.lusid.com/api
+# Defining the host is optional and defaults to https://www.lusid.com/api
 # See configuration.py for a list of all supported configuration parameters.
 configuration = lusid.Configuration(
-    host = "https://fbn-prd.lusid.com/api"
+    host = "https://www.lusid.com/api"
 )
 
 # The client must configure the authentication and authorization parameters
@@ -210,7 +290,7 @@ configuration = lusid.Configuration(
 
 # Configure OAuth2 access token for authorization: oauth2
 configuration = lusid.Configuration(
-    host = "https://fbn-prd.lusid.com/api"
+    host = "https://www.lusid.com/api"
 )
 configuration.access_token = 'YOUR_ACCESS_TOKEN'
 
@@ -284,10 +364,10 @@ import time
 import lusid
 from lusid.rest import ApiException
 from pprint import pprint
-# Defining the host is optional and defaults to https://fbn-prd.lusid.com/api
+# Defining the host is optional and defaults to https://www.lusid.com/api
 # See configuration.py for a list of all supported configuration parameters.
 configuration = lusid.Configuration(
-    host = "https://fbn-prd.lusid.com/api"
+    host = "https://www.lusid.com/api"
 )
 
 # The client must configure the authentication and authorization parameters
@@ -297,7 +377,7 @@ configuration = lusid.Configuration(
 
 # Configure OAuth2 access token for authorization: oauth2
 configuration = lusid.Configuration(
-    host = "https://fbn-prd.lusid.com/api"
+    host = "https://www.lusid.com/api"
 )
 configuration.access_token = 'YOUR_ACCESS_TOKEN'
 
@@ -354,10 +434,10 @@ import time
 import lusid
 from lusid.rest import ApiException
 from pprint import pprint
-# Defining the host is optional and defaults to https://fbn-prd.lusid.com/api
+# Defining the host is optional and defaults to https://www.lusid.com/api
 # See configuration.py for a list of all supported configuration parameters.
 configuration = lusid.Configuration(
-    host = "https://fbn-prd.lusid.com/api"
+    host = "https://www.lusid.com/api"
 )
 
 # The client must configure the authentication and authorization parameters
@@ -367,7 +447,7 @@ configuration = lusid.Configuration(
 
 # Configure OAuth2 access token for authorization: oauth2
 configuration = lusid.Configuration(
-    host = "https://fbn-prd.lusid.com/api"
+    host = "https://www.lusid.com/api"
 )
 configuration.access_token = 'YOUR_ACCESS_TOKEN'
 
@@ -437,10 +517,10 @@ import time
 import lusid
 from lusid.rest import ApiException
 from pprint import pprint
-# Defining the host is optional and defaults to https://fbn-prd.lusid.com/api
+# Defining the host is optional and defaults to https://www.lusid.com/api
 # See configuration.py for a list of all supported configuration parameters.
 configuration = lusid.Configuration(
-    host = "https://fbn-prd.lusid.com/api"
+    host = "https://www.lusid.com/api"
 )
 
 # The client must configure the authentication and authorization parameters
@@ -450,7 +530,7 @@ configuration = lusid.Configuration(
 
 # Configure OAuth2 access token for authorization: oauth2
 configuration = lusid.Configuration(
-    host = "https://fbn-prd.lusid.com/api"
+    host = "https://www.lusid.com/api"
 )
 configuration.access_token = 'YOUR_ACCESS_TOKEN'
 
@@ -528,10 +608,10 @@ import time
 import lusid
 from lusid.rest import ApiException
 from pprint import pprint
-# Defining the host is optional and defaults to https://fbn-prd.lusid.com/api
+# Defining the host is optional and defaults to https://www.lusid.com/api
 # See configuration.py for a list of all supported configuration parameters.
 configuration = lusid.Configuration(
-    host = "https://fbn-prd.lusid.com/api"
+    host = "https://www.lusid.com/api"
 )
 
 # The client must configure the authentication and authorization parameters
@@ -541,7 +621,7 @@ configuration = lusid.Configuration(
 
 # Configure OAuth2 access token for authorization: oauth2
 configuration = lusid.Configuration(
-    host = "https://fbn-prd.lusid.com/api"
+    host = "https://www.lusid.com/api"
 )
 configuration.access_token = 'YOUR_ACCESS_TOKEN'
 
@@ -615,10 +695,10 @@ import time
 import lusid
 from lusid.rest import ApiException
 from pprint import pprint
-# Defining the host is optional and defaults to https://fbn-prd.lusid.com/api
+# Defining the host is optional and defaults to https://www.lusid.com/api
 # See configuration.py for a list of all supported configuration parameters.
 configuration = lusid.Configuration(
-    host = "https://fbn-prd.lusid.com/api"
+    host = "https://www.lusid.com/api"
 )
 
 # The client must configure the authentication and authorization parameters
@@ -628,7 +708,7 @@ configuration = lusid.Configuration(
 
 # Configure OAuth2 access token for authorization: oauth2
 configuration = lusid.Configuration(
-    host = "https://fbn-prd.lusid.com/api"
+    host = "https://www.lusid.com/api"
 )
 configuration.access_token = 'YOUR_ACCESS_TOKEN'
 
@@ -702,10 +782,10 @@ import time
 import lusid
 from lusid.rest import ApiException
 from pprint import pprint
-# Defining the host is optional and defaults to https://fbn-prd.lusid.com/api
+# Defining the host is optional and defaults to https://www.lusid.com/api
 # See configuration.py for a list of all supported configuration parameters.
 configuration = lusid.Configuration(
-    host = "https://fbn-prd.lusid.com/api"
+    host = "https://www.lusid.com/api"
 )
 
 # The client must configure the authentication and authorization parameters
@@ -715,7 +795,7 @@ configuration = lusid.Configuration(
 
 # Configure OAuth2 access token for authorization: oauth2
 configuration = lusid.Configuration(
-    host = "https://fbn-prd.lusid.com/api"
+    host = "https://www.lusid.com/api"
 )
 configuration.access_token = 'YOUR_ACCESS_TOKEN'
 
@@ -789,10 +869,10 @@ import time
 import lusid
 from lusid.rest import ApiException
 from pprint import pprint
-# Defining the host is optional and defaults to https://fbn-prd.lusid.com/api
+# Defining the host is optional and defaults to https://www.lusid.com/api
 # See configuration.py for a list of all supported configuration parameters.
 configuration = lusid.Configuration(
-    host = "https://fbn-prd.lusid.com/api"
+    host = "https://www.lusid.com/api"
 )
 
 # The client must configure the authentication and authorization parameters
@@ -802,7 +882,7 @@ configuration = lusid.Configuration(
 
 # Configure OAuth2 access token for authorization: oauth2
 configuration = lusid.Configuration(
-    host = "https://fbn-prd.lusid.com/api"
+    host = "https://www.lusid.com/api"
 )
 configuration.access_token = 'YOUR_ACCESS_TOKEN'
 
@@ -882,10 +962,10 @@ import time
 import lusid
 from lusid.rest import ApiException
 from pprint import pprint
-# Defining the host is optional and defaults to https://fbn-prd.lusid.com/api
+# Defining the host is optional and defaults to https://www.lusid.com/api
 # See configuration.py for a list of all supported configuration parameters.
 configuration = lusid.Configuration(
-    host = "https://fbn-prd.lusid.com/api"
+    host = "https://www.lusid.com/api"
 )
 
 # The client must configure the authentication and authorization parameters
@@ -895,7 +975,7 @@ configuration = lusid.Configuration(
 
 # Configure OAuth2 access token for authorization: oauth2
 configuration = lusid.Configuration(
-    host = "https://fbn-prd.lusid.com/api"
+    host = "https://www.lusid.com/api"
 )
 configuration.access_token = 'YOUR_ACCESS_TOKEN'
 
@@ -963,10 +1043,10 @@ import time
 import lusid
 from lusid.rest import ApiException
 from pprint import pprint
-# Defining the host is optional and defaults to https://fbn-prd.lusid.com/api
+# Defining the host is optional and defaults to https://www.lusid.com/api
 # See configuration.py for a list of all supported configuration parameters.
 configuration = lusid.Configuration(
-    host = "https://fbn-prd.lusid.com/api"
+    host = "https://www.lusid.com/api"
 )
 
 # The client must configure the authentication and authorization parameters
@@ -976,7 +1056,7 @@ configuration = lusid.Configuration(
 
 # Configure OAuth2 access token for authorization: oauth2
 configuration = lusid.Configuration(
-    host = "https://fbn-prd.lusid.com/api"
+    host = "https://www.lusid.com/api"
 )
 configuration.access_token = 'YOUR_ACCESS_TOKEN'
 
@@ -1040,10 +1120,10 @@ import time
 import lusid
 from lusid.rest import ApiException
 from pprint import pprint
-# Defining the host is optional and defaults to https://fbn-prd.lusid.com/api
+# Defining the host is optional and defaults to https://www.lusid.com/api
 # See configuration.py for a list of all supported configuration parameters.
 configuration = lusid.Configuration(
-    host = "https://fbn-prd.lusid.com/api"
+    host = "https://www.lusid.com/api"
 )
 
 # The client must configure the authentication and authorization parameters
@@ -1053,7 +1133,7 @@ configuration = lusid.Configuration(
 
 # Configure OAuth2 access token for authorization: oauth2
 configuration = lusid.Configuration(
-    host = "https://fbn-prd.lusid.com/api"
+    host = "https://www.lusid.com/api"
 )
 configuration.access_token = 'YOUR_ACCESS_TOKEN'
 

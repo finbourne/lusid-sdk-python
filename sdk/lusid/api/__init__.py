@@ -6,6 +6,7 @@ from __future__ import absolute_import
 from lusid.api.aggregation_api import AggregationApi
 from lusid.api.allocations_api import AllocationsApi
 from lusid.api.application_metadata_api import ApplicationMetadataApi
+from lusid.api.blocks_api import BlocksApi
 from lusid.api.calendars_api import CalendarsApi
 from lusid.api.complex_market_data_api import ComplexMarketDataApi
 from lusid.api.configuration_recipe_api import ConfigurationRecipeApi
@@ -21,6 +22,7 @@ from lusid.api.executions_api import ExecutionsApi
 from lusid.api.instruments_api import InstrumentsApi
 from lusid.api.legal_entities_api import LegalEntitiesApi
 from lusid.api.orders_api import OrdersApi
+from lusid.api.participations_api import ParticipationsApi
 from lusid.api.persons_api import PersonsApi
 from lusid.api.portfolio_groups_api import PortfolioGroupsApi
 from lusid.api.portfolios_api import PortfoliosApi
