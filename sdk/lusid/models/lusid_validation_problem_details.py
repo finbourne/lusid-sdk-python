@@ -80,11 +80,11 @@ class LusidValidationProblemDetails(object):
     def __init__(self, name=None, error_details=None, code=None, errors=None, type=None, title=None, status=None, detail=None, instance=None, extensions=None, local_vars_configuration=None):  # noqa: E501
         """LusidValidationProblemDetails - a model defined in OpenAPI"
         
-        :param name:  The name of the error (required)
+        :param name:  (required)
         :type name: str
-        :param error_details:  Any additional informational information available about the nature and detail of the problem
+        :param error_details: 
         :type error_details: list[dict(str, str)]
-        :param code:  Get the error code of the response (required)
+        :param code:  (required)
         :type code: int
         :param errors: 
         :type errors: dict(str, list[str])
@@ -133,7 +133,6 @@ class LusidValidationProblemDetails(object):
     def name(self):
         """Gets the name of this LusidValidationProblemDetails.  # noqa: E501
 
-        The name of the error  # noqa: E501
 
         :return: The name of this LusidValidationProblemDetails.  # noqa: E501
         :rtype: str
@@ -144,7 +143,6 @@ class LusidValidationProblemDetails(object):
     def name(self, name):
         """Sets the name of this LusidValidationProblemDetails.
 
-        The name of the error  # noqa: E501
 
         :param name: The name of this LusidValidationProblemDetails.  # noqa: E501
         :type name: str
@@ -158,7 +156,6 @@ class LusidValidationProblemDetails(object):
     def error_details(self):
         """Gets the error_details of this LusidValidationProblemDetails.  # noqa: E501
 
-        Any additional informational information available about the nature and detail of the problem  # noqa: E501
 
         :return: The error_details of this LusidValidationProblemDetails.  # noqa: E501
         :rtype: list[dict(str, str)]
@@ -169,7 +166,6 @@ class LusidValidationProblemDetails(object):
     def error_details(self, error_details):
         """Sets the error_details of this LusidValidationProblemDetails.
 
-        Any additional informational information available about the nature and detail of the problem  # noqa: E501
 
         :param error_details: The error_details of this LusidValidationProblemDetails.  # noqa: E501
         :type error_details: list[dict(str, str)]
@@ -181,7 +177,6 @@ class LusidValidationProblemDetails(object):
     def code(self):
         """Gets the code of this LusidValidationProblemDetails.  # noqa: E501
 
-        Get the error code of the response  # noqa: E501
 
         :return: The code of this LusidValidationProblemDetails.  # noqa: E501
         :rtype: int
@@ -192,7 +187,6 @@ class LusidValidationProblemDetails(object):
     def code(self, code):
         """Sets the code of this LusidValidationProblemDetails.
 
-        Get the error code of the response  # noqa: E501
 
         :param code: The code of this LusidValidationProblemDetails.  # noqa: E501
         :type code: int
