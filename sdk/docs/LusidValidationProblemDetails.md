@@ -1,12 +1,13 @@
 # LusidValidationProblemDetails
 
+A description of a problem that has arisen whilst validating a request
 
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**name** | **str** |  | 
-**error_details** | **list[dict(str, str)]** |  | [optional] 
-**code** | **int** |  | 
+**name** | **str** | The name of the error | 
+**error_details** | **list[dict(str, str)]** | Any additional informational information available about the nature and detail of the problem | [optional] 
+**code** | **int** | Get the error code of the response | 
 **errors** | **dict(str, list[str])** |  | [optional] 
 **type** | **str** |  | [optional] 
 **title** | **str** |  | [optional] 
