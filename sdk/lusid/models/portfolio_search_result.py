@@ -103,7 +103,7 @@ class PortfolioSearchResult(object):
         :type base_currency: str
         :param properties:  The requested portfolio properties. These will be from the 'Portfolio' domain.
         :type properties: list[lusid.ModelProperty]
-        :param links:  Collection of links.
+        :param links: 
         :type links: list[lusid.Link]
 
         """  # noqa: E501
@@ -382,7 +382,6 @@ class PortfolioSearchResult(object):
     def links(self):
         """Gets the links of this PortfolioSearchResult.  # noqa: E501
 
-        Collection of links.  # noqa: E501
 
         :return: The links of this PortfolioSearchResult.  # noqa: E501
         :rtype: list[lusid.Link]
@@ -393,7 +392,6 @@ class PortfolioSearchResult(object):
     def links(self, links):
         """Sets the links of this PortfolioSearchResult.
 
-        Collection of links.  # noqa: E501
 
         :param links: The links of this PortfolioSearchResult.  # noqa: E501
         :type links: list[lusid.Link]

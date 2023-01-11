@@ -128,7 +128,7 @@ class Portfolio(object):
         :type accounting_method: str
         :param amortisation_method:  The amortisation method the portfolio is using in the calculation. This can be 'NoAmortisation', 'StraightLine' or 'EffectiveYield'.
         :type amortisation_method: str
-        :param links:  Collection of links.
+        :param links: 
         :type links: list[lusid.Link]
 
         """  # noqa: E501
@@ -538,7 +538,6 @@ class Portfolio(object):
     def links(self):
         """Gets the links of this Portfolio.  # noqa: E501
 
-        Collection of links.  # noqa: E501
 
         :return: The links of this Portfolio.  # noqa: E501
         :rtype: list[lusid.Link]
@@ -549,7 +548,6 @@ class Portfolio(object):
     def links(self, links):
         """Sets the links of this Portfolio.
 
-        Collection of links.  # noqa: E501
 
         :param links: The links of this Portfolio.  # noqa: E501
         :type links: list[lusid.Link]
