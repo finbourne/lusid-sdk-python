@@ -22,7 +22,7 @@ Name | Type | Description | Notes
 **counterparty** | **str** | The market entity this placement is placed with. | 
 **average_price** | **float** | The average price of all executions for a given placement at the time of upsert | [optional] 
 **version** | [**Version**](Version.md) |  | [optional] 
-**links** | [**list[Link]**](Link.md) | Collection of links. | [optional] 
+**links** | [**list[Link]**](Link.md) |  | [optional] 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 
