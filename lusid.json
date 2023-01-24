@@ -9,7 +9,7 @@
       "url": "https://www.finbourne.com",
       "email": "info@finbourne.com"
     },
-    "version": "0.11.5171",
+    "version": "0.11.5172",
     "x-logo": {
       "url": "https://www.lusid.com/app/assets/logo_white.png",
       "backgroundColor": "#415464"
@@ -66168,6 +66168,21 @@
         },
         "additionalProperties": false
       },
+      "EventDateRange": {
+        "type": "object",
+        "properties": {
+          "start": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "end": {
+            "type": "string",
+            "format": "date-time"
+          }
+        },
+        "additionalProperties": false,
+        "description": "A standard representation of the effective date range for the event, used for display, filtering and windowing use cases.\r\nThe start and end values for the eventDateRange are mapped from the particular dates contained within the specific\r\nInstrumentEvent schema.  Note that the start and end values may be identical for some types of events."
+      },
       "ExchangeTradedOption": {
         "allOf": [
           {
@@ -69692,6 +69707,7 @@
       "InstrumentEventHolder": {
         "required": [
           "description",
+          "eventDateRange",
           "instrumentEvent",
           "instrumentEventId",
           "instrumentIdentifiers",
@@ -69731,6 +69747,9 @@
             "pattern": "^[\\s\\S]*$",
             "type": "string",
             "description": "The description of the instrument event."
+          },
+          "eventDateRange": {
+            "$ref": "#/components/schemas/EventDateRange"
           },
           "instrumentEvent": {
             "$ref": "#/components/schemas/InstrumentEvent"
