@@ -1393,7 +1393,7 @@ Name | Type | Description  | Notes
 
 [EARLY ACCESS] PatchPortfolio: Patch portfolio.
 
-Create or update certain fields for a particular  portfolio.  The behaviour is defined by the JSON Patch specification.                Currently supported are: CreationDate.
+Create or update certain fields for a particular  portfolio.  The behaviour is defined by the JSON Patch specification.                Currently supported are: CreationDate, InstrumentScopes.
 
 ### Example
 
