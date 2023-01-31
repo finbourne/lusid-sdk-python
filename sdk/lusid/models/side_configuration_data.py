@@ -83,7 +83,7 @@ class SideConfigurationData(object):
         :type units: str
         :param amount:  The amount. (required)
         :type amount: str
-        :param links:  Collection of links.
+        :param links: 
         :type links: list[lusid.Link]
 
         """  # noqa: E501
@@ -262,7 +262,6 @@ class SideConfigurationData(object):
     def links(self):
         """Gets the links of this SideConfigurationData.  # noqa: E501
 
-        Collection of links.  # noqa: E501
 
         :return: The links of this SideConfigurationData.  # noqa: E501
         :rtype: list[lusid.Link]
@@ -273,7 +272,6 @@ class SideConfigurationData(object):
     def links(self, links):
         """Sets the links of this SideConfigurationData.
 
-        Collection of links.  # noqa: E501
 
         :param links: The links of this SideConfigurationData.  # noqa: E501
         :type links: list[lusid.Link]
