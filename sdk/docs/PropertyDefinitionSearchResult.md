@@ -21,7 +21,7 @@ Name | Type | Description | Notes
 **property_definition_type** | **str** | The definition type (DerivedDefinition or Definition). The available values are: ValueProperty, DerivedDefinition | [optional] 
 **property_description** | **str** | A brief description of what a property of this property definition contains. | [optional] 
 **derivation_formula** | **str** | The rule that defines how data is composed for a derived property. | [optional] 
-**links** | [**list[Link]**](Link.md) |  | [optional] 
+**links** | [**list[Link]**](Link.md) | Collection of links. | [optional] 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 
