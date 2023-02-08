@@ -9,7 +9,7 @@
       "url": "https://www.finbourne.com",
       "email": "info@finbourne.com"
     },
-    "version": "0.11.5215",
+    "version": "0.11.5216",
     "x-logo": {
       "url": "https://www.lusid.com/app/assets/logo_white.png",
       "backgroundColor": "#415464"
@@ -78205,6 +78205,39 @@
             "type": "string",
             "description": "The asAt datetime at which the data was committed to LUSID.",
             "format": "date-time"
+          },
+          "asAtCreated": {
+            "type": "string",
+            "description": "The asAt datetime at which the entity was first created in LUSID.",
+            "format": "date-time",
+            "nullable": true,
+            "readOnly": true
+          },
+          "userIdCreated": {
+            "type": "string",
+            "description": "The unique id of the user who created the entity.",
+            "nullable": true,
+            "readOnly": true
+          },
+          "asAtModified": {
+            "type": "string",
+            "description": "The asAt datetime at which the entity (including its properties) was last updated in LUSID.",
+            "format": "date-time",
+            "nullable": true,
+            "readOnly": true
+          },
+          "userIdModified": {
+            "type": "string",
+            "description": "The unique id of the user who last updated the entity (including its properties) in LUSID.",
+            "nullable": true,
+            "readOnly": true
+          },
+          "asAtVersionNumber": {
+            "type": "integer",
+            "description": "The integer version number for the entity (the entity was created at version 1)",
+            "format": "int32",
+            "nullable": true,
+            "readOnly": true
           }
         },
         "additionalProperties": false,
