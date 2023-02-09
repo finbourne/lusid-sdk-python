@@ -26,7 +26,6 @@ Name | Type | Description | Notes
 **cancel_date_time** | **datetime** | If the transaction has been cancelled, the asAt datetime that the transaction was cancelled. | [optional] 
 **order_id** | [**ResourceId**](ResourceId.md) |  | [optional] 
 **allocation_id** | [**ResourceId**](ResourceId.md) |  | [optional] 
-**custodian_account** | [**CustodianAccount**](CustodianAccount.md) |  | [optional] 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 
