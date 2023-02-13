@@ -7,7 +7,7 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **href** | **str** | The specific Uniform Resource Identifier (URI) for this resource at the requested effective and asAt datetime. | [optional] 
 **key** | **str** | The property key which uniquely identifies the property. The format for the property key is {domain}/{scope}/{code}, e.g. &#39;Portfolio/Manager/Id&#39;. | [optional] 
-**value_type** | **str** | The type of values that can be associated with this property. This is defined by the property&#39;s data type. The available values are: String, Int, Decimal, DateTime, Boolean, Map, List, PropertyArray, Percentage, Code, Id, Uri, CurrencyAndAmount, TradePrice, Currency, MetricValue, ResourceId, ResultValue, CutLocalTime, DateOrCutLabel | [optional] 
+**value_type** | **str** | The type of values that can be associated with this property. This is defined by the property&#39;s data type. The available values are: String, Int, Decimal, DateTime, Boolean, Map, List, PropertyArray, Percentage, Code, Id, Uri, CurrencyAndAmount, TradePrice, Currency, MetricValue, ResourceId, ResultValue, CutLocalTime, DateOrCutLabel, UnindexedText | [optional] 
 **display_name** | **str** | The display name of the property. | [optional] 
 **data_type_id** | [**ResourceId**](ResourceId.md) |  | [optional] 
 **type** | **str** | The type of the property. The available values are: Label, Metric, Information | [optional] 
@@ -21,7 +21,7 @@ Name | Type | Description | Notes
 **property_definition_type** | **str** | The definition type (DerivedDefinition or Definition). The available values are: ValueProperty, DerivedDefinition | [optional] 
 **property_description** | **str** | A brief description of what a property of this property definition contains. | [optional] 
 **derivation_formula** | **str** | The rule that defines how data is composed for a derived property. | [optional] 
-**links** | [**list[Link]**](Link.md) |  | [optional] 
+**links** | [**list[Link]**](Link.md) | Collection of links. | [optional] 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 
