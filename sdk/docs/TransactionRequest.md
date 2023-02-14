@@ -20,7 +20,6 @@ Name | Type | Description | Notes
 **otc_confirmation** | [**OtcConfirmation**](OtcConfirmation.md) |  | [optional] 
 **order_id** | [**ResourceId**](ResourceId.md) |  | [optional] 
 **allocation_id** | [**ResourceId**](ResourceId.md) |  | [optional] 
-**custodian_account_id** | [**ResourceId**](ResourceId.md) |  | [optional] 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 
