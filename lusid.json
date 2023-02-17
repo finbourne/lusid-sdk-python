@@ -9,7 +9,7 @@
       "url": "https://www.finbourne.com",
       "email": "info@finbourne.com"
     },
-    "version": "0.11.5245",
+    "version": "0.11.5246",
     "x-logo": {
       "url": "https://www.lusid.com/app/assets/logo_white.png",
       "backgroundColor": "#415464"
@@ -62929,10 +62929,11 @@
               "ResourceId",
               "ResultValue",
               "CutLocalTime",
-              "DateOrCutLabel"
+              "DateOrCutLabel",
+              "UnindexedText"
             ],
             "type": "string",
-            "description": "The expected type of the values. The available values are: String, Int, Decimal, DateTime, Boolean, Map, List, PropertyArray, Percentage, Code, Id, Uri, CurrencyAndAmount, TradePrice, Currency, MetricValue, ResourceId, ResultValue, CutLocalTime, DateOrCutLabel"
+            "description": "The expected type of the values. The available values are: String, Int, Decimal, DateTime, Boolean, Map, List, PropertyArray, Percentage, Code, Id, Uri, CurrencyAndAmount, TradePrice, Currency, MetricValue, ResourceId, ResultValue, CutLocalTime, DateOrCutLabel, UnindexedText"
           },
           "acceptableValues": {
             "type": "array",
@@ -64382,10 +64383,11 @@
               "ResourceId",
               "ResultValue",
               "CutLocalTime",
-              "DateOrCutLabel"
+              "DateOrCutLabel",
+              "UnindexedText"
             ],
             "type": "string",
-            "description": "The available values are: String, Int, Decimal, DateTime, Boolean, Map, List, PropertyArray, Percentage, Code, Id, Uri, CurrencyAndAmount, TradePrice, Currency, MetricValue, ResourceId, ResultValue, CutLocalTime, DateOrCutLabel"
+            "description": "The available values are: String, Int, Decimal, DateTime, Boolean, Map, List, PropertyArray, Percentage, Code, Id, Uri, CurrencyAndAmount, TradePrice, Currency, MetricValue, ResourceId, ResultValue, CutLocalTime, DateOrCutLabel, UnindexedText"
           },
           "acceptableValues": {
             "type": "array",
@@ -64476,10 +64478,11 @@
               "ResourceId",
               "ResultValue",
               "CutLocalTime",
-              "DateOrCutLabel"
+              "DateOrCutLabel",
+              "UnindexedText"
             ],
             "type": "string",
-            "description": "The expected type of the values. The available values are: String, Int, Decimal, DateTime, Boolean, Map, List, PropertyArray, Percentage, Code, Id, Uri, CurrencyAndAmount, TradePrice, Currency, MetricValue, ResourceId, ResultValue, CutLocalTime, DateOrCutLabel"
+            "description": "The expected type of the values. The available values are: String, Int, Decimal, DateTime, Boolean, Map, List, PropertyArray, Percentage, Code, Id, Uri, CurrencyAndAmount, TradePrice, Currency, MetricValue, ResourceId, ResultValue, CutLocalTime, DateOrCutLabel, UnindexedText"
           },
           "acceptableValues": {
             "type": "array",
@@ -66134,10 +66137,11 @@
               "ResourceId",
               "ResultValue",
               "CutLocalTime",
-              "DateOrCutLabel"
+              "DateOrCutLabel",
+              "UnindexedText"
             ],
             "type": "string",
-            "description": "The available values are: String, Int, Decimal, DateTime, Boolean, Map, List, PropertyArray, Percentage, Code, Id, Uri, CurrencyAndAmount, TradePrice, Currency, MetricValue, ResourceId, ResultValue, CutLocalTime, DateOrCutLabel"
+            "description": "The available values are: String, Int, Decimal, DateTime, Boolean, Map, List, PropertyArray, Percentage, Code, Id, Uri, CurrencyAndAmount, TradePrice, Currency, MetricValue, ResourceId, ResultValue, CutLocalTime, DateOrCutLabel, UnindexedText"
           },
           "displayOrder": {
             "type": "integer",
@@ -73202,10 +73206,11 @@
               "ResourceId",
               "ResultValue",
               "CutLocalTime",
-              "DateOrCutLabel"
+              "DateOrCutLabel",
+              "UnindexedText"
             ],
             "type": "string",
-            "description": "The type of values that can be associated with this property. This is defined by the property's data type. The available values are: String, Int, Decimal, DateTime, Boolean, Map, List, PropertyArray, Percentage, Code, Id, Uri, CurrencyAndAmount, TradePrice, Currency, MetricValue, ResourceId, ResultValue, CutLocalTime, DateOrCutLabel"
+            "description": "The type of values that can be associated with this property. This is defined by the property's data type. The available values are: String, Int, Decimal, DateTime, Boolean, Map, List, PropertyArray, Percentage, Code, Id, Uri, CurrencyAndAmount, TradePrice, Currency, MetricValue, ResourceId, ResultValue, CutLocalTime, DateOrCutLabel, UnindexedText"
           },
           "displayName": {
             "type": "string",
@@ -73367,10 +73372,11 @@
               "ResourceId",
               "ResultValue",
               "CutLocalTime",
-              "DateOrCutLabel"
+              "DateOrCutLabel",
+              "UnindexedText"
             ],
             "type": "string",
-            "description": "The type of values that can be associated with this property. This is defined by the property's data type. The available values are: String, Int, Decimal, DateTime, Boolean, Map, List, PropertyArray, Percentage, Code, Id, Uri, CurrencyAndAmount, TradePrice, Currency, MetricValue, ResourceId, ResultValue, CutLocalTime, DateOrCutLabel"
+            "description": "The type of values that can be associated with this property. This is defined by the property's data type. The available values are: String, Int, Decimal, DateTime, Boolean, Map, List, PropertyArray, Percentage, Code, Id, Uri, CurrencyAndAmount, TradePrice, Currency, MetricValue, ResourceId, ResultValue, CutLocalTime, DateOrCutLabel, UnindexedText"
           },
           "displayName": {
             "type": "string",
