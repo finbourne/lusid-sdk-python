@@ -1,19 +1,19 @@
 # lusid.SchemasApi
 
-All URIs are relative to *http://localhost/api*
+All URIs are relative to *https://www.lusid.com/api*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
-[**get_entity_schema**](SchemasApi.md#get_entity_schema) | **GET** /api/schemas/entities/{entity} | [BETA] Get schema
-[**get_property_schema**](SchemasApi.md#get_property_schema) | **GET** /api/schemas/properties | [BETA] Get property schema
-[**get_value_types**](SchemasApi.md#get_value_types) | **GET** /api/schemas/types | [BETA] Get value types
-[**list_entities**](SchemasApi.md#list_entities) | **GET** /api/schemas/entities | [BETA] List entities
+[**get_entity_schema**](SchemasApi.md#get_entity_schema) | **GET** /api/schemas/entities/{entity} | [EARLY ACCESS] GetEntitySchema: Get schema
+[**get_property_schema**](SchemasApi.md#get_property_schema) | **GET** /api/schemas/properties | [EARLY ACCESS] GetPropertySchema: Get property schema
+[**get_value_types**](SchemasApi.md#get_value_types) | **GET** /api/schemas/types | [EARLY ACCESS] GetValueTypes: Get value types
+[**list_entities**](SchemasApi.md#list_entities) | **GET** /api/schemas/entities | [EARLY ACCESS] ListEntities: List entities
 
 
 # **get_entity_schema**
 > Schema get_entity_schema(entity)
 
-[BETA] Get schema
+[EARLY ACCESS] GetEntitySchema: Get schema
 
 Gets the schema and meta-data for a given entity
 
@@ -26,22 +26,35 @@ import time
 import lusid
 from lusid.rest import ApiException
 from pprint import pprint
-configuration = lusid.Configuration()
+# Defining the host is optional and defaults to https://www.lusid.com/api
+# See configuration.py for a list of all supported configuration parameters.
+configuration = lusid.Configuration(
+    host = "https://www.lusid.com/api"
+)
+
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
+
 # Configure OAuth2 access token for authorization: oauth2
+configuration = lusid.Configuration(
+    host = "https://www.lusid.com/api"
+)
 configuration.access_token = 'YOUR_ACCESS_TOKEN'
 
-# Defining host is optional and default to http://localhost/api
-configuration.host = "http://localhost/api"
-# Create an instance of the API class
-api_instance = lusid.SchemasApi(lusid.ApiClient(configuration))
-entity = 'entity_example' # str | The name of a valid entity
+# Enter a context with an instance of the API client
+with lusid.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = lusid.SchemasApi(api_client)
+    entity = 'entity_example' # str | The name of a valid entity
 
-try:
-    # [BETA] Get schema
-    api_response = api_instance.get_entity_schema(entity)
-    pprint(api_response)
-except ApiException as e:
-    print("Exception when calling SchemasApi->get_entity_schema: %s\n" % e)
+    try:
+        # [EARLY ACCESS] GetEntitySchema: Get schema
+        api_response = api_instance.get_entity_schema(entity)
+        pprint(api_response)
+    except ApiException as e:
+        print("Exception when calling SchemasApi->get_entity_schema: %s\n" % e)
 ```
 
 ### Parameters
@@ -75,7 +88,7 @@ Name | Type | Description  | Notes
 # **get_property_schema**
 > PropertySchema get_property_schema(property_keys=property_keys, as_at=as_at)
 
-[BETA] Get property schema
+[EARLY ACCESS] GetPropertySchema: Get property schema
 
 Get the schemas for the provided list of property keys.
 
@@ -88,23 +101,36 @@ import time
 import lusid
 from lusid.rest import ApiException
 from pprint import pprint
-configuration = lusid.Configuration()
+# Defining the host is optional and defaults to https://www.lusid.com/api
+# See configuration.py for a list of all supported configuration parameters.
+configuration = lusid.Configuration(
+    host = "https://www.lusid.com/api"
+)
+
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
+
 # Configure OAuth2 access token for authorization: oauth2
+configuration = lusid.Configuration(
+    host = "https://www.lusid.com/api"
+)
 configuration.access_token = 'YOUR_ACCESS_TOKEN'
 
-# Defining host is optional and default to http://localhost/api
-configuration.host = "http://localhost/api"
-# Create an instance of the API class
-api_instance = lusid.SchemasApi(lusid.ApiClient(configuration))
-property_keys = ['property_keys_example'] # list[str] | One or more property keys for which the schema is requested (optional)
+# Enter a context with an instance of the API client
+with lusid.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = lusid.SchemasApi(api_client)
+    property_keys = ['property_keys_example'] # list[str] | One or more property keys for which the schema is requested (optional)
 as_at = '2013-10-20T19:20:30+01:00' # datetime | Optional. The AsAt date of the data (optional)
 
-try:
-    # [BETA] Get property schema
-    api_response = api_instance.get_property_schema(property_keys=property_keys, as_at=as_at)
-    pprint(api_response)
-except ApiException as e:
-    print("Exception when calling SchemasApi->get_property_schema: %s\n" % e)
+    try:
+        # [EARLY ACCESS] GetPropertySchema: Get property schema
+        api_response = api_instance.get_property_schema(property_keys=property_keys, as_at=as_at)
+        pprint(api_response)
+    except ApiException as e:
+        print("Exception when calling SchemasApi->get_property_schema: %s\n" % e)
 ```
 
 ### Parameters
@@ -139,7 +165,7 @@ Name | Type | Description  | Notes
 # **get_value_types**
 > ResourceListOfValueType get_value_types(sort_by=sort_by, start=start, limit=limit)
 
-[BETA] Get value types
+[EARLY ACCESS] GetValueTypes: Get value types
 
 Gets the available value types for which a schema is available.
 
@@ -152,24 +178,37 @@ import time
 import lusid
 from lusid.rest import ApiException
 from pprint import pprint
-configuration = lusid.Configuration()
+# Defining the host is optional and defaults to https://www.lusid.com/api
+# See configuration.py for a list of all supported configuration parameters.
+configuration = lusid.Configuration(
+    host = "https://www.lusid.com/api"
+)
+
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
+
 # Configure OAuth2 access token for authorization: oauth2
+configuration = lusid.Configuration(
+    host = "https://www.lusid.com/api"
+)
 configuration.access_token = 'YOUR_ACCESS_TOKEN'
 
-# Defining host is optional and default to http://localhost/api
-configuration.host = "http://localhost/api"
-# Create an instance of the API class
-api_instance = lusid.SchemasApi(lusid.ApiClient(configuration))
-sort_by = ['sort_by_example'] # list[str] | Optional. Order the results by these fields. Use use the '-' sign to denote descending order e.g. -MyFieldName (optional)
+# Enter a context with an instance of the API client
+with lusid.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = lusid.SchemasApi(api_client)
+    sort_by = ['sort_by_example'] # list[str] | Optional. Order the results by these fields. Use use the '-' sign to denote descending order e.g. -MyFieldName (optional)
 start = 56 # int | Optional. When paginating, skip this number of results (optional)
 limit = 56 # int | Optional. When paginating, limit the number of returned results to this many. (optional)
 
-try:
-    # [BETA] Get value types
-    api_response = api_instance.get_value_types(sort_by=sort_by, start=start, limit=limit)
-    pprint(api_response)
-except ApiException as e:
-    print("Exception when calling SchemasApi->get_value_types: %s\n" % e)
+    try:
+        # [EARLY ACCESS] GetValueTypes: Get value types
+        api_response = api_instance.get_value_types(sort_by=sort_by, start=start, limit=limit)
+        pprint(api_response)
+    except ApiException as e:
+        print("Exception when calling SchemasApi->get_value_types: %s\n" % e)
 ```
 
 ### Parameters
@@ -205,7 +244,7 @@ Name | Type | Description  | Notes
 # **list_entities**
 > ResourceListOfString list_entities()
 
-[BETA] List entities
+[EARLY ACCESS] ListEntities: List entities
 
 List all available entities for which schema information is available.
 
@@ -218,21 +257,34 @@ import time
 import lusid
 from lusid.rest import ApiException
 from pprint import pprint
-configuration = lusid.Configuration()
+# Defining the host is optional and defaults to https://www.lusid.com/api
+# See configuration.py for a list of all supported configuration parameters.
+configuration = lusid.Configuration(
+    host = "https://www.lusid.com/api"
+)
+
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
+
 # Configure OAuth2 access token for authorization: oauth2
+configuration = lusid.Configuration(
+    host = "https://www.lusid.com/api"
+)
 configuration.access_token = 'YOUR_ACCESS_TOKEN'
 
-# Defining host is optional and default to http://localhost/api
-configuration.host = "http://localhost/api"
-# Create an instance of the API class
-api_instance = lusid.SchemasApi(lusid.ApiClient(configuration))
-
-try:
-    # [BETA] List entities
-    api_response = api_instance.list_entities()
-    pprint(api_response)
-except ApiException as e:
-    print("Exception when calling SchemasApi->list_entities: %s\n" % e)
+# Enter a context with an instance of the API client
+with lusid.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = lusid.SchemasApi(api_client)
+    
+    try:
+        # [EARLY ACCESS] ListEntities: List entities
+        api_response = api_instance.list_entities()
+        pprint(api_response)
+    except ApiException as e:
+        print("Exception when calling SchemasApi->list_entities: %s\n" % e)
 ```
 
 ### Parameters
