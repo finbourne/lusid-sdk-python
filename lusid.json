@@ -9,7 +9,7 @@
       "url": "https://www.finbourne.com",
       "email": "info@finbourne.com"
     },
-    "version": "0.11.5260",
+    "version": "0.11.5261",
     "x-logo": {
       "url": "https://www.lusid.com/app/assets/logo_white.png",
       "backgroundColor": "#415464"
@@ -16490,7 +16490,12 @@
                   },
                   "version": {
                     "effectiveFrom": "2019-01-01T12:00:00.0000000+00:00",
-                    "asAtDate": "2019-01-01T12:00:00.0100000+00:00"
+                    "asAtDate": "2019-01-01T12:00:00.0100000+00:00",
+                    "asAtCreated": "2019-01-01T12:00:00.0000000+00:00",
+                    "userIdCreated": "UserId1",
+                    "asAtModified": "2019-01-01T12:00:00.0100000+00:00",
+                    "userIdModified": "UserId2",
+                    "asAtVersionNumber": 3
                   }
                 }
               },
@@ -16557,7 +16562,12 @@
                   },
                   "version": {
                     "effectiveFrom": "2019-01-01T12:00:00.0000000+00:00",
-                    "asAtDate": "2019-01-01T12:00:00.0100000+00:00"
+                    "asAtDate": "2019-01-01T12:00:00.0100000+00:00",
+                    "asAtCreated": "2019-01-01T12:00:00.0000000+00:00",
+                    "userIdCreated": "UserId1",
+                    "asAtModified": "2019-01-01T12:00:00.0100000+00:00",
+                    "userIdModified": "UserId2",
+                    "asAtVersionNumber": 3
                   }
                 }
               },
@@ -16624,7 +16634,12 @@
                   },
                   "version": {
                     "effectiveFrom": "2019-01-01T12:00:00.0000000+00:00",
-                    "asAtDate": "2019-01-01T12:00:00.0100000+00:00"
+                    "asAtDate": "2019-01-01T12:00:00.0100000+00:00",
+                    "asAtCreated": "2019-01-01T12:00:00.0000000+00:00",
+                    "userIdCreated": "UserId1",
+                    "asAtModified": "2019-01-01T12:00:00.0100000+00:00",
+                    "userIdModified": "UserId2",
+                    "asAtVersionNumber": 3
                   }
                 }
               }
@@ -16825,7 +16840,12 @@
                       },
                       "version": {
                         "effectiveFrom": "2019-01-01T12:00:00.0000000+00:00",
-                        "asAtDate": "2019-01-01T12:00:00.0100000+00:00"
+                        "asAtDate": "2019-01-01T12:00:00.0100000+00:00",
+                        "asAtCreated": "2019-01-01T12:00:00.0000000+00:00",
+                        "userIdCreated": "UserId1",
+                        "asAtModified": "2019-01-01T12:00:00.0100000+00:00",
+                        "userIdModified": "UserId2",
+                        "asAtVersionNumber": 3
                       }
                     },
                     {
@@ -16872,7 +16892,12 @@
                       "relationships": [],
                       "version": {
                         "effectiveFrom": "2019-01-01T12:00:00.0000000+00:00",
-                        "asAtDate": "2019-01-01T12:00:00.0100000+00:00"
+                        "asAtDate": "2019-01-01T12:00:00.0100000+00:00",
+                        "asAtCreated": "2019-01-01T12:00:00.0000000+00:00",
+                        "userIdCreated": "UserId1",
+                        "asAtModified": "2019-01-01T12:00:00.0100000+00:00",
+                        "userIdModified": "UserId2",
+                        "asAtVersionNumber": 3
                       }
                     }
                   ],
@@ -16945,7 +16970,12 @@
                       },
                       "version": {
                         "effectiveFrom": "2019-01-01T12:00:00.0000000+00:00",
-                        "asAtDate": "2019-01-01T12:00:00.0100000+00:00"
+                        "asAtDate": "2019-01-01T12:00:00.0100000+00:00",
+                        "asAtCreated": "2019-01-01T12:00:00.0000000+00:00",
+                        "userIdCreated": "UserId1",
+                        "asAtModified": "2019-01-01T12:00:00.0100000+00:00",
+                        "userIdModified": "UserId2",
+                        "asAtVersionNumber": 3
                       }
                     },
                     {
@@ -16992,7 +17022,12 @@
                       "relationships": [],
                       "version": {
                         "effectiveFrom": "2019-01-01T12:00:00.0000000+00:00",
-                        "asAtDate": "2019-01-01T12:00:00.0100000+00:00"
+                        "asAtDate": "2019-01-01T12:00:00.0100000+00:00",
+                        "asAtCreated": "2019-01-01T12:00:00.0000000+00:00",
+                        "userIdCreated": "UserId1",
+                        "asAtModified": "2019-01-01T12:00:00.0100000+00:00",
+                        "userIdModified": "UserId2",
+                        "asAtVersionNumber": 3
                       }
                     }
                   ],
@@ -17065,7 +17100,12 @@
                       },
                       "version": {
                         "effectiveFrom": "2019-01-01T12:00:00.0000000+00:00",
-                        "asAtDate": "2019-01-01T12:00:00.0100000+00:00"
+                        "asAtDate": "2019-01-01T12:00:00.0100000+00:00",
+                        "asAtCreated": "2019-01-01T12:00:00.0000000+00:00",
+                        "userIdCreated": "UserId1",
+                        "asAtModified": "2019-01-01T12:00:00.0100000+00:00",
+                        "userIdModified": "UserId2",
+                        "asAtVersionNumber": 3
                       }
                     },
                     {
@@ -17112,7 +17152,12 @@
                       "relationships": [],
                       "version": {
                         "effectiveFrom": "2019-01-01T12:00:00.0000000+00:00",
-                        "asAtDate": "2019-01-01T12:00:00.0100000+00:00"
+                        "asAtDate": "2019-01-01T12:00:00.0100000+00:00",
+                        "asAtCreated": "2019-01-01T12:00:00.0000000+00:00",
+                        "userIdCreated": "UserId1",
+                        "asAtModified": "2019-01-01T12:00:00.0100000+00:00",
+                        "userIdModified": "UserId2",
+                        "asAtVersionNumber": 3
                       }
                     }
                   ],
@@ -17346,7 +17391,12 @@
                       },
                       "version": {
                         "effectiveFrom": "2019-01-01T12:00:00.0000000+00:00",
-                        "asAtDate": "2019-01-01T12:00:00.0100000+00:00"
+                        "asAtDate": "2019-01-01T12:00:00.0100000+00:00",
+                        "asAtCreated": "2019-01-01T12:00:00.0000000+00:00",
+                        "userIdCreated": "UserId1",
+                        "asAtModified": "2019-01-01T12:00:00.0100000+00:00",
+                        "userIdModified": "UserId2",
+                        "asAtVersionNumber": 3
                       }
                     },
                     {
@@ -17393,7 +17443,12 @@
                       "relationships": [],
                       "version": {
                         "effectiveFrom": "2019-01-01T12:00:00.0000000+00:00",
-                        "asAtDate": "2019-01-01T12:00:00.0100000+00:00"
+                        "asAtDate": "2019-01-01T12:00:00.0100000+00:00",
+                        "asAtCreated": "2019-01-01T12:00:00.0000000+00:00",
+                        "userIdCreated": "UserId1",
+                        "asAtModified": "2019-01-01T12:00:00.0100000+00:00",
+                        "userIdModified": "UserId2",
+                        "asAtVersionNumber": 3
                       }
                     }
                   ],
@@ -17466,7 +17521,12 @@
                       },
                       "version": {
                         "effectiveFrom": "2019-01-01T12:00:00.0000000+00:00",
-                        "asAtDate": "2019-01-01T12:00:00.0100000+00:00"
+                        "asAtDate": "2019-01-01T12:00:00.0100000+00:00",
+                        "asAtCreated": "2019-01-01T12:00:00.0000000+00:00",
+                        "userIdCreated": "UserId1",
+                        "asAtModified": "2019-01-01T12:00:00.0100000+00:00",
+                        "userIdModified": "UserId2",
+                        "asAtVersionNumber": 3
                       }
                     },
                     {
@@ -17513,7 +17573,12 @@
                       "relationships": [],
                       "version": {
                         "effectiveFrom": "2019-01-01T12:00:00.0000000+00:00",
-                        "asAtDate": "2019-01-01T12:00:00.0100000+00:00"
+                        "asAtDate": "2019-01-01T12:00:00.0100000+00:00",
+                        "asAtCreated": "2019-01-01T12:00:00.0000000+00:00",
+                        "userIdCreated": "UserId1",
+                        "asAtModified": "2019-01-01T12:00:00.0100000+00:00",
+                        "userIdModified": "UserId2",
+                        "asAtVersionNumber": 3
                       }
                     }
                   ],
@@ -17586,7 +17651,12 @@
                       },
                       "version": {
                         "effectiveFrom": "2019-01-01T12:00:00.0000000+00:00",
-                        "asAtDate": "2019-01-01T12:00:00.0100000+00:00"
+                        "asAtDate": "2019-01-01T12:00:00.0100000+00:00",
+                        "asAtCreated": "2019-01-01T12:00:00.0000000+00:00",
+                        "userIdCreated": "UserId1",
+                        "asAtModified": "2019-01-01T12:00:00.0100000+00:00",
+                        "userIdModified": "UserId2",
+                        "asAtVersionNumber": 3
                       }
                     },
                     {
@@ -17633,7 +17703,12 @@
                       "relationships": [],
                       "version": {
                         "effectiveFrom": "2019-01-01T12:00:00.0000000+00:00",
-                        "asAtDate": "2019-01-01T12:00:00.0100000+00:00"
+                        "asAtDate": "2019-01-01T12:00:00.0100000+00:00",
+                        "asAtCreated": "2019-01-01T12:00:00.0000000+00:00",
+                        "userIdCreated": "UserId1",
+                        "asAtModified": "2019-01-01T12:00:00.0100000+00:00",
+                        "userIdModified": "UserId2",
+                        "asAtVersionNumber": 3
                       }
                     }
                   ],
@@ -17842,7 +17917,12 @@
                   },
                   "version": {
                     "effectiveFrom": "2019-01-01T12:00:00.0000000+00:00",
-                    "asAtDate": "2019-01-01T12:00:00.0100000+00:00"
+                    "asAtDate": "2019-01-01T12:00:00.0100000+00:00",
+                    "asAtCreated": "2019-01-01T12:00:00.0000000+00:00",
+                    "userIdCreated": "UserId1",
+                    "asAtModified": "2019-01-01T12:00:00.0100000+00:00",
+                    "userIdModified": "UserId2",
+                    "asAtVersionNumber": 3
                   }
                 }
               },
@@ -17909,7 +17989,12 @@
                   },
                   "version": {
                     "effectiveFrom": "2019-01-01T12:00:00.0000000+00:00",
-                    "asAtDate": "2019-01-01T12:00:00.0100000+00:00"
+                    "asAtDate": "2019-01-01T12:00:00.0100000+00:00",
+                    "asAtCreated": "2019-01-01T12:00:00.0000000+00:00",
+                    "userIdCreated": "UserId1",
+                    "asAtModified": "2019-01-01T12:00:00.0100000+00:00",
+                    "userIdModified": "UserId2",
+                    "asAtVersionNumber": 3
                   }
                 }
               },
@@ -17976,7 +18061,12 @@
                   },
                   "version": {
                     "effectiveFrom": "2019-01-01T12:00:00.0000000+00:00",
-                    "asAtDate": "2019-01-01T12:00:00.0100000+00:00"
+                    "asAtDate": "2019-01-01T12:00:00.0100000+00:00",
+                    "asAtCreated": "2019-01-01T12:00:00.0000000+00:00",
+                    "userIdCreated": "UserId1",
+                    "asAtModified": "2019-01-01T12:00:00.0100000+00:00",
+                    "userIdModified": "UserId2",
+                    "asAtVersionNumber": 3
                   }
                 }
               }
@@ -18451,7 +18541,12 @@
                   },
                   "version": {
                     "effectiveFrom": "2019-01-01T12:00:00.0000000+00:00",
-                    "asAtDate": "2019-01-01T12:00:00.0100000+00:00"
+                    "asAtDate": "2019-01-01T12:00:00.0100000+00:00",
+                    "asAtCreated": "2019-01-01T12:00:00.0000000+00:00",
+                    "userIdCreated": "UserId1",
+                    "asAtModified": "2019-01-01T12:00:00.0100000+00:00",
+                    "userIdModified": "UserId2",
+                    "asAtVersionNumber": 3
                   }
                 }
               },
@@ -18518,7 +18613,12 @@
                   },
                   "version": {
                     "effectiveFrom": "2019-01-01T12:00:00.0000000+00:00",
-                    "asAtDate": "2019-01-01T12:00:00.0100000+00:00"
+                    "asAtDate": "2019-01-01T12:00:00.0100000+00:00",
+                    "asAtCreated": "2019-01-01T12:00:00.0000000+00:00",
+                    "userIdCreated": "UserId1",
+                    "asAtModified": "2019-01-01T12:00:00.0100000+00:00",
+                    "userIdModified": "UserId2",
+                    "asAtVersionNumber": 3
                   }
                 }
               },
@@ -18585,7 +18685,12 @@
                   },
                   "version": {
                     "effectiveFrom": "2019-01-01T12:00:00.0000000+00:00",
-                    "asAtDate": "2019-01-01T12:00:00.0100000+00:00"
+                    "asAtDate": "2019-01-01T12:00:00.0100000+00:00",
+                    "asAtCreated": "2019-01-01T12:00:00.0000000+00:00",
+                    "userIdCreated": "UserId1",
+                    "asAtModified": "2019-01-01T12:00:00.0100000+00:00",
+                    "userIdModified": "UserId2",
+                    "asAtVersionNumber": 3
                   }
                 }
               }
@@ -19802,7 +19907,12 @@
                   },
                   "version": {
                     "effectiveFrom": "2019-01-01T12:00:00.0000000+00:00",
-                    "asAtDate": "2019-01-01T12:00:00.0100000+00:00"
+                    "asAtDate": "2019-01-01T12:00:00.0100000+00:00",
+                    "asAtCreated": "2019-01-01T12:00:00.0000000+00:00",
+                    "userIdCreated": "UserId1",
+                    "asAtModified": "2019-01-01T12:00:00.0100000+00:00",
+                    "userIdModified": "UserId2",
+                    "asAtVersionNumber": 3
                   }
                 }
               },
@@ -19862,7 +19972,12 @@
                   },
                   "version": {
                     "effectiveFrom": "2019-01-01T12:00:00.0000000+00:00",
-                    "asAtDate": "2019-01-01T12:00:00.0100000+00:00"
+                    "asAtDate": "2019-01-01T12:00:00.0100000+00:00",
+                    "asAtCreated": "2019-01-01T12:00:00.0000000+00:00",
+                    "userIdCreated": "UserId1",
+                    "asAtModified": "2019-01-01T12:00:00.0100000+00:00",
+                    "userIdModified": "UserId2",
+                    "asAtVersionNumber": 3
                   }
                 }
               },
@@ -19922,7 +20037,12 @@
                   },
                   "version": {
                     "effectiveFrom": "2019-01-01T12:00:00.0000000+00:00",
-                    "asAtDate": "2019-01-01T12:00:00.0100000+00:00"
+                    "asAtDate": "2019-01-01T12:00:00.0100000+00:00",
+                    "asAtCreated": "2019-01-01T12:00:00.0000000+00:00",
+                    "userIdCreated": "UserId1",
+                    "asAtModified": "2019-01-01T12:00:00.0100000+00:00",
+                    "userIdModified": "UserId2",
+                    "asAtVersionNumber": 3
                   }
                 }
               }
