@@ -9,7 +9,7 @@
       "url": "https://www.finbourne.com",
       "email": "info@finbourne.com"
     },
-    "version": "0.11.5261",
+    "version": "0.11.5262",
     "x-logo": {
       "url": "https://www.lusid.com/app/assets/logo_white.png",
       "backgroundColor": "#415464"
@@ -64660,6 +64660,60 @@
         "additionalProperties": false,
         "description": "An amount of a specific currency, specifying a value and an associated unit"
       },
+      "CustodianAccount": {
+        "required": [
+          "accountingMethod",
+          "accountName",
+          "accountNumber",
+          "currency",
+          "custodian",
+          "custodianAccountId",
+          "status"
+        ],
+        "type": "object",
+        "properties": {
+          "custodianAccountId": {
+            "$ref": "#/components/schemas/ResourceId"
+          },
+          "status": {
+            "minLength": 1,
+            "type": "string",
+            "description": "The account status. Can be Active, Inactive or Deleted. Defaults to Active."
+          },
+          "accountNumber": {
+            "maxLength": 64,
+            "minLength": 1,
+            "type": "string",
+            "description": "The Custodian Account Number"
+          },
+          "accountName": {
+            "minLength": 1,
+            "type": "string",
+            "description": "The identifiable name given to the Custodian Account"
+          },
+          "accountingMethod": {
+            "minLength": 1,
+            "type": "string",
+            "description": "The Accounting method to be used"
+          },
+          "currency": {
+            "type": "string",
+            "description": "The Currency for the Account"
+          },
+          "properties": {
+            "type": "object",
+            "additionalProperties": {
+              "$ref": "#/components/schemas/Property"
+            },
+            "description": "Set of unique Custodian Account properties and associated values to store with the Custodian Account. Each property must be from the 'CustodianAccount' domain.",
+            "nullable": true
+          },
+          "custodian": {
+            "$ref": "#/components/schemas/LegalEntity"
+          }
+        },
+        "additionalProperties": false
+      },
       "CustomEntityDefinition": {
         "required": [
           "displayName",
@@ -78114,6 +78168,9 @@
           },
           "allocationId": {
             "$ref": "#/components/schemas/ResourceId"
+          },
+          "custodianAccount": {
+            "$ref": "#/components/schemas/CustodianAccount"
           }
         },
         "additionalProperties": false,
@@ -78574,6 +78631,9 @@
             "$ref": "#/components/schemas/ResourceId"
           },
           "allocationId": {
+            "$ref": "#/components/schemas/ResourceId"
+          },
+          "custodianAccountId": {
             "$ref": "#/components/schemas/ResourceId"
           }
         },
