@@ -9,7 +9,7 @@
       "url": "https://www.finbourne.com",
       "email": "info@finbourne.com"
     },
-    "version": "0.11.5263",
+    "version": "0.11.5264",
     "x-logo": {
       "url": "https://www.lusid.com/app/assets/logo_white.png",
       "backgroundColor": "#415464"
@@ -5030,9 +5030,8 @@
                   "marketDataId": {
                     "provider": "DataScope",
                     "priceSource": "Some Bank Plc",
-                    "lineage": "Swaps Desk Trader A",
                     "effectiveAt": "2018-03-05T00:00:00.0000000+00:00",
-                    "marketAsset": "USDOIS"
+                    "marketAsset": "USD/USDOIS"
                   },
                   "marketData": {
                     "baseDate": "1970-01-01T00:00:00.0000000+00:00",
@@ -5048,17 +5047,52 @@
                 },
                 "second-item": {
                   "marketDataId": {
-                    "provider": "DataScope",
-                    "priceSource": "AN.Other Bank Plc",
-                    "lineage": "Swaps Desk Trader B",
-                    "effectiveAt": "2018-03-05T00:00:00.0000000+00:00",
-                    "marketAsset": "RBS"
+                    "provider": "Lusid",
+                    "effectiveAt": "2021-01-20T00:00:00.0000000+00:00",
+                    "marketAsset": "EUR/USD/FxFwdCurve"
                   },
                   "marketData": {
-                    "document": "{ \"some\":\"valid json\"}",
-                    "format": "Json",
-                    "name": "free text identifier of document 1",
-                    "marketDataType": "OpaqueMarketData"
+                    "baseDate": "2021-01-20T00:00:00.0000000+00:00",
+                    "domCcy": "EUR",
+                    "fgnCcy": "USD",
+                    "tenors": [
+                      "1D",
+                      "1W",
+                      "2W",
+                      "3W",
+                      "1M",
+                      "2M",
+                      "3M",
+                      "4M",
+                      "5M",
+                      "6M",
+                      "9M",
+                      "1Y",
+                      "15M",
+                      "18M",
+                      "2Y",
+                      "3Y"
+                    ],
+                    "pipRates": [
+                      0.6375,
+                      1.4975,
+                      3.0275,
+                      4.5625,
+                      6.7525,
+                      19.5125,
+                      27.3225,
+                      34.0625,
+                      41.5175,
+                      49.2025,
+                      74.8125,
+                      104.9125,
+                      141.1925,
+                      176.8375,
+                      260.1475,
+                      453.2625
+                    ],
+                    "lineage": "",
+                    "marketDataType": "FxForwardTenorPipsCurveData"
                   }
                 }
               }
@@ -5075,9 +5109,8 @@
                   "marketDataId": {
                     "provider": "DataScope",
                     "priceSource": "Some Bank Plc",
-                    "lineage": "Swaps Desk Trader A",
                     "effectiveAt": "2018-03-05T00:00:00.0000000+00:00",
-                    "marketAsset": "USDOIS"
+                    "marketAsset": "USD/USDOIS"
                   },
                   "marketData": {
                     "baseDate": "1970-01-01T00:00:00.0000000+00:00",
@@ -5093,17 +5126,52 @@
                 },
                 "second-item": {
                   "marketDataId": {
-                    "provider": "DataScope",
-                    "priceSource": "AN.Other Bank Plc",
-                    "lineage": "Swaps Desk Trader B",
-                    "effectiveAt": "2018-03-05T00:00:00.0000000+00:00",
-                    "marketAsset": "RBS"
+                    "provider": "Lusid",
+                    "effectiveAt": "2021-01-20T00:00:00.0000000+00:00",
+                    "marketAsset": "EUR/USD/FxFwdCurve"
                   },
                   "marketData": {
-                    "document": "{ \"some\":\"valid json\"}",
-                    "format": "Json",
-                    "name": "free text identifier of document 1",
-                    "marketDataType": "OpaqueMarketData"
+                    "baseDate": "2021-01-20T00:00:00.0000000+00:00",
+                    "domCcy": "EUR",
+                    "fgnCcy": "USD",
+                    "tenors": [
+                      "1D",
+                      "1W",
+                      "2W",
+                      "3W",
+                      "1M",
+                      "2M",
+                      "3M",
+                      "4M",
+                      "5M",
+                      "6M",
+                      "9M",
+                      "1Y",
+                      "15M",
+                      "18M",
+                      "2Y",
+                      "3Y"
+                    ],
+                    "pipRates": [
+                      0.6375,
+                      1.4975,
+                      3.0275,
+                      4.5625,
+                      6.7525,
+                      19.5125,
+                      27.3225,
+                      34.0625,
+                      41.5175,
+                      49.2025,
+                      74.8125,
+                      104.9125,
+                      141.1925,
+                      176.8375,
+                      260.1475,
+                      453.2625
+                    ],
+                    "lineage": "",
+                    "marketDataType": "FxForwardTenorPipsCurveData"
                   }
                 }
               }
@@ -5120,9 +5188,8 @@
                   "marketDataId": {
                     "provider": "DataScope",
                     "priceSource": "Some Bank Plc",
-                    "lineage": "Swaps Desk Trader A",
                     "effectiveAt": "2018-03-05T00:00:00.0000000+00:00",
-                    "marketAsset": "USDOIS"
+                    "marketAsset": "USD/USDOIS"
                   },
                   "marketData": {
                     "baseDate": "1970-01-01T00:00:00.0000000+00:00",
@@ -5138,17 +5205,52 @@
                 },
                 "second-item": {
                   "marketDataId": {
-                    "provider": "DataScope",
-                    "priceSource": "AN.Other Bank Plc",
-                    "lineage": "Swaps Desk Trader B",
-                    "effectiveAt": "2018-03-05T00:00:00.0000000+00:00",
-                    "marketAsset": "RBS"
+                    "provider": "Lusid",
+                    "effectiveAt": "2021-01-20T00:00:00.0000000+00:00",
+                    "marketAsset": "EUR/USD/FxFwdCurve"
                   },
                   "marketData": {
-                    "document": "{ \"some\":\"valid json\"}",
-                    "format": "Json",
-                    "name": "free text identifier of document 1",
-                    "marketDataType": "OpaqueMarketData"
+                    "baseDate": "2021-01-20T00:00:00.0000000+00:00",
+                    "domCcy": "EUR",
+                    "fgnCcy": "USD",
+                    "tenors": [
+                      "1D",
+                      "1W",
+                      "2W",
+                      "3W",
+                      "1M",
+                      "2M",
+                      "3M",
+                      "4M",
+                      "5M",
+                      "6M",
+                      "9M",
+                      "1Y",
+                      "15M",
+                      "18M",
+                      "2Y",
+                      "3Y"
+                    ],
+                    "pipRates": [
+                      0.6375,
+                      1.4975,
+                      3.0275,
+                      4.5625,
+                      6.7525,
+                      19.5125,
+                      27.3225,
+                      34.0625,
+                      41.5175,
+                      49.2025,
+                      74.8125,
+                      104.9125,
+                      141.1925,
+                      176.8375,
+                      260.1475,
+                      453.2625
+                    ],
+                    "lineage": "",
+                    "marketDataType": "FxForwardTenorPipsCurveData"
                   }
                 }
               }
@@ -5165,9 +5267,8 @@
                   "marketDataId": {
                     "provider": "DataScope",
                     "priceSource": "Some Bank Plc",
-                    "lineage": "Swaps Desk Trader A",
                     "effectiveAt": "2018-03-05T00:00:00.0000000+00:00",
-                    "marketAsset": "USDOIS"
+                    "marketAsset": "USD/USDOIS"
                   },
                   "marketData": {
                     "baseDate": "1970-01-01T00:00:00.0000000+00:00",
@@ -5183,17 +5284,52 @@
                 },
                 "second-item": {
                   "marketDataId": {
-                    "provider": "DataScope",
-                    "priceSource": "AN.Other Bank Plc",
-                    "lineage": "Swaps Desk Trader B",
-                    "effectiveAt": "2018-03-05T00:00:00.0000000+00:00",
-                    "marketAsset": "RBS"
+                    "provider": "Lusid",
+                    "effectiveAt": "2021-01-20T00:00:00.0000000+00:00",
+                    "marketAsset": "EUR/USD/FxFwdCurve"
                   },
                   "marketData": {
-                    "document": "{ \"some\":\"valid json\"}",
-                    "format": "Json",
-                    "name": "free text identifier of document 1",
-                    "marketDataType": "OpaqueMarketData"
+                    "baseDate": "2021-01-20T00:00:00.0000000+00:00",
+                    "domCcy": "EUR",
+                    "fgnCcy": "USD",
+                    "tenors": [
+                      "1D",
+                      "1W",
+                      "2W",
+                      "3W",
+                      "1M",
+                      "2M",
+                      "3M",
+                      "4M",
+                      "5M",
+                      "6M",
+                      "9M",
+                      "1Y",
+                      "15M",
+                      "18M",
+                      "2Y",
+                      "3Y"
+                    ],
+                    "pipRates": [
+                      0.6375,
+                      1.4975,
+                      3.0275,
+                      4.5625,
+                      6.7525,
+                      19.5125,
+                      27.3225,
+                      34.0625,
+                      41.5175,
+                      49.2025,
+                      74.8125,
+                      104.9125,
+                      141.1925,
+                      176.8375,
+                      260.1475,
+                      453.2625
+                    ],
+                    "lineage": "",
+                    "marketDataType": "FxForwardTenorPipsCurveData"
                   }
                 }
               }
@@ -62841,7 +62977,7 @@
             "maxLength": 32,
             "minLength": 0,
             "type": "string",
-            "description": "The platform or vendor that provided the complex market data, e.g. 'DataScope', 'LUSID', 'ISDA' etc."
+            "description": "The platform or vendor that provided the complex market data, e.g. 'DataScope', 'LUSID', etc."
           },
           "priceSource": {
             "maxLength": 256,
