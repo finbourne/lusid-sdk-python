@@ -9,7 +9,7 @@
       "url": "https://www.finbourne.com",
       "email": "info@finbourne.com"
     },
-    "version": "0.11.5275",
+    "version": "0.11.5276",
     "x-logo": {
       "url": "https://www.lusid.com/app/assets/logo_white.png",
       "backgroundColor": "#415464"
@@ -80191,7 +80191,7 @@
             "nullable": true
           },
           "rollConvention": {
-            "maxLength": 16,
+            "maxLength": 50,
             "minLength": 0,
             "type": "string",
             "description": "When Tenor is given and is not equal to \"1D\", there may be cases where \"date + tenor\" land on non-business days around month end.\r\nIn that case, the RollConvention, e.g. modified following \"MF\" would be applied to determine the next GBD.",
