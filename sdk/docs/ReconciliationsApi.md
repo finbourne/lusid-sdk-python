@@ -4,11 +4,245 @@ All URIs are relative to *https://www.lusid.com/api*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
+[**delete_reconciliation_mapping**](ReconciliationsApi.md#delete_reconciliation_mapping) | **DELETE** /api/portfolios/mapping/{scope}/{code} | [EARLY ACCESS] DeleteReconciliationMapping: Delete a mapping
+[**get_reconciliation_mapping**](ReconciliationsApi.md#get_reconciliation_mapping) | **GET** /api/portfolios/mapping/{scope}/{code} | [EARLY ACCESS] GetReconciliationMapping: Get a mapping
+[**list_reconciliation_mappings**](ReconciliationsApi.md#list_reconciliation_mappings) | **GET** /api/portfolios/mapping | [EARLY ACCESS] ListReconciliationMappings: List the reconciliation mappings
 [**reconcile_generic**](ReconciliationsApi.md#reconcile_generic) | **POST** /api/portfolios/$reconcileGeneric | ReconcileGeneric: Reconcile either holdings or valuations performed on one or two sets of holdings using one or two configuration recipes.                The output is configurable for various types of comparisons, to allow tolerances on numerical and date-time data or case-insensitivity on strings,  and elision of resulting differences where they are &#39;empty&#39; or null or zero.
 [**reconcile_holdings**](ReconciliationsApi.md#reconcile_holdings) | **POST** /api/portfolios/$reconcileholdings | [EARLY ACCESS] ReconcileHoldings: Reconcile portfolio holdings
 [**reconcile_inline**](ReconciliationsApi.md#reconcile_inline) | **POST** /api/portfolios/$reconcileInline | ReconcileInline: Reconcile valuations performed on one or two sets of inline instruments using one or two configuration recipes.
+[**reconcile_transactions**](ReconciliationsApi.md#reconcile_transactions) | **POST** /api/portfolios/$reconcileTransactions | [EARLY ACCESS] ReconcileTransactions: Perform a Transactions Reconciliation.
 [**reconcile_valuation**](ReconciliationsApi.md#reconcile_valuation) | **POST** /api/portfolios/$reconcileValuation | ReconcileValuation: Reconcile valuations performed on one or two sets of holdings using one or two configuration recipes.
+[**upsert_reconciliation_mapping**](ReconciliationsApi.md#upsert_reconciliation_mapping) | **POST** /api/portfolios/mapping | [EARLY ACCESS] UpsertReconciliationMapping: Create or update a mapping
 
+
+# **delete_reconciliation_mapping**
+> str delete_reconciliation_mapping(scope, code)
+
+[EARLY ACCESS] DeleteReconciliationMapping: Delete a mapping
+
+Deletes the mapping identified by the scope and code
+
+### Example
+
+* OAuth Authentication (oauth2):
+```python
+from __future__ import print_function
+import time
+import lusid
+from lusid.rest import ApiException
+from pprint import pprint
+# Defining the host is optional and defaults to https://www.lusid.com/api
+# See configuration.py for a list of all supported configuration parameters.
+configuration = lusid.Configuration(
+    host = "https://www.lusid.com/api"
+)
+
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
+
+# Configure OAuth2 access token for authorization: oauth2
+configuration = lusid.Configuration(
+    host = "https://www.lusid.com/api"
+)
+configuration.access_token = 'YOUR_ACCESS_TOKEN'
+
+# Enter a context with an instance of the API client
+with lusid.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = lusid.ReconciliationsApi(api_client)
+    scope = 'scope_example' # str | The scope of the mapping.
+code = 'code_example' # str | The code fof the mapping.
+
+    try:
+        # [EARLY ACCESS] DeleteReconciliationMapping: Delete a mapping
+        api_response = api_instance.delete_reconciliation_mapping(scope, code)
+        pprint(api_response)
+    except ApiException as e:
+        print("Exception when calling ReconciliationsApi->delete_reconciliation_mapping: %s\n" % e)
+```
+
+### Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **scope** | **str**| The scope of the mapping. | 
+ **code** | **str**| The code fof the mapping. | 
+
+### Return type
+
+**str**
+
+### Authorization
+
+[oauth2](../README.md#oauth2)
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: text/plain, application/json, text/json
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | A string specifying the scope and code that were deleted |  -  |
+**400** | The details of the input related failure |  -  |
+**0** | Error response |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **get_reconciliation_mapping**
+> Mapping get_reconciliation_mapping(scope, code)
+
+[EARLY ACCESS] GetReconciliationMapping: Get a mapping
+
+Gets a mapping identified by the given scope and code
+
+### Example
+
+* OAuth Authentication (oauth2):
+```python
+from __future__ import print_function
+import time
+import lusid
+from lusid.rest import ApiException
+from pprint import pprint
+# Defining the host is optional and defaults to https://www.lusid.com/api
+# See configuration.py for a list of all supported configuration parameters.
+configuration = lusid.Configuration(
+    host = "https://www.lusid.com/api"
+)
+
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
+
+# Configure OAuth2 access token for authorization: oauth2
+configuration = lusid.Configuration(
+    host = "https://www.lusid.com/api"
+)
+configuration.access_token = 'YOUR_ACCESS_TOKEN'
+
+# Enter a context with an instance of the API client
+with lusid.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = lusid.ReconciliationsApi(api_client)
+    scope = 'scope_example' # str | The scope of the mapping.
+code = 'code_example' # str | The code fof the mapping.
+
+    try:
+        # [EARLY ACCESS] GetReconciliationMapping: Get a mapping
+        api_response = api_instance.get_reconciliation_mapping(scope, code)
+        pprint(api_response)
+    except ApiException as e:
+        print("Exception when calling ReconciliationsApi->get_reconciliation_mapping: %s\n" % e)
+```
+
+### Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **scope** | **str**| The scope of the mapping. | 
+ **code** | **str**| The code fof the mapping. | 
+
+### Return type
+
+[**Mapping**](Mapping.md)
+
+### Authorization
+
+[oauth2](../README.md#oauth2)
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: text/plain, application/json, text/json
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | The mapping with the specified scope/code. |  -  |
+**400** | The details of the input related failure |  -  |
+**0** | Error response |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **list_reconciliation_mappings**
+> ResourceListOfMapping list_reconciliation_mappings(reconciliation_type=reconciliation_type)
+
+[EARLY ACCESS] ListReconciliationMappings: List the reconciliation mappings
+
+Lists all mappings this user is entitled to see
+
+### Example
+
+* OAuth Authentication (oauth2):
+```python
+from __future__ import print_function
+import time
+import lusid
+from lusid.rest import ApiException
+from pprint import pprint
+# Defining the host is optional and defaults to https://www.lusid.com/api
+# See configuration.py for a list of all supported configuration parameters.
+configuration = lusid.Configuration(
+    host = "https://www.lusid.com/api"
+)
+
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
+
+# Configure OAuth2 access token for authorization: oauth2
+configuration = lusid.Configuration(
+    host = "https://www.lusid.com/api"
+)
+configuration.access_token = 'YOUR_ACCESS_TOKEN'
+
+# Enter a context with an instance of the API client
+with lusid.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = lusid.ReconciliationsApi(api_client)
+    reconciliation_type = 'reconciliation_type_example' # str | Optional parameter to specify which type of mappings should be returned.  Defaults to Transaction if not provided. (optional)
+
+    try:
+        # [EARLY ACCESS] ListReconciliationMappings: List the reconciliation mappings
+        api_response = api_instance.list_reconciliation_mappings(reconciliation_type=reconciliation_type)
+        pprint(api_response)
+    except ApiException as e:
+        print("Exception when calling ReconciliationsApi->list_reconciliation_mappings: %s\n" % e)
+```
+
+### Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **reconciliation_type** | **str**| Optional parameter to specify which type of mappings should be returned.  Defaults to Transaction if not provided. | [optional] 
+
+### Return type
+
+[**ResourceListOfMapping**](ResourceListOfMapping.md)
+
+### Authorization
+
+[oauth2](../README.md#oauth2)
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: text/plain, application/json, text/json
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | The mappings that the caller has access to. |  -  |
+**400** | The details of the input related failure |  -  |
+**0** | Error response |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **reconcile_generic**
 > ReconciliationResponse reconcile_generic(reconciliation_request=reconciliation_request)
@@ -243,6 +477,81 @@ Name | Type | Description  | Notes
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
+# **reconcile_transactions**
+> TransactionsReconciliationsResponse reconcile_transactions(transaction_reconciliation_request=transaction_reconciliation_request)
+
+[EARLY ACCESS] ReconcileTransactions: Perform a Transactions Reconciliation.
+
+Evaluates two sets of transactions to determine which transactions from each set likely match  using the rules of a specified mapping.
+
+### Example
+
+* OAuth Authentication (oauth2):
+```python
+from __future__ import print_function
+import time
+import lusid
+from lusid.rest import ApiException
+from pprint import pprint
+# Defining the host is optional and defaults to https://www.lusid.com/api
+# See configuration.py for a list of all supported configuration parameters.
+configuration = lusid.Configuration(
+    host = "https://www.lusid.com/api"
+)
+
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
+
+# Configure OAuth2 access token for authorization: oauth2
+configuration = lusid.Configuration(
+    host = "https://www.lusid.com/api"
+)
+configuration.access_token = 'YOUR_ACCESS_TOKEN'
+
+# Enter a context with an instance of the API client
+with lusid.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = lusid.ReconciliationsApi(api_client)
+    transaction_reconciliation_request = {"leftPortfolioId":{"scope":"street","code":"Global-Equity"},"rightPortfolioId":{"scope":"custodian","code":"Global-Equity"},"fromTransactionDate":"2019-04-01T12:00:00.0000000+00:00","toTransactionDate":"2019-05-01T12:00:00.0000000+00:00","propertyKeys":["Instrument/default/Name","Transaction/common/Strategy"]} # TransactionReconciliationRequest |  (optional)
+
+    try:
+        # [EARLY ACCESS] ReconcileTransactions: Perform a Transactions Reconciliation.
+        api_response = api_instance.reconcile_transactions(transaction_reconciliation_request=transaction_reconciliation_request)
+        pprint(api_response)
+    except ApiException as e:
+        print("Exception when calling ReconciliationsApi->reconcile_transactions: %s\n" % e)
+```
+
+### Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **transaction_reconciliation_request** | [**TransactionReconciliationRequest**](TransactionReconciliationRequest.md)|  | [optional] 
+
+### Return type
+
+[**TransactionsReconciliationsResponse**](TransactionsReconciliationsResponse.md)
+
+### Authorization
+
+[oauth2](../README.md#oauth2)
+
+### HTTP request headers
+
+ - **Content-Type**: application/json-patch+json, application/json, text/json, application/*+json
+ - **Accept**: text/plain, application/json, text/json
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | The transaction reconciliation data for the supplied portfolios. |  -  |
+**400** | The details of the input related failure |  -  |
+**0** | Error response |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
 # **reconcile_valuation**
 > ListAggregationReconciliation reconcile_valuation(valuations_reconciliation_request=valuations_reconciliation_request)
 
@@ -313,6 +622,81 @@ Name | Type | Description  | Notes
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 **200** | The requested reconciliation |  -  |
+**400** | The details of the input related failure |  -  |
+**0** | Error response |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **upsert_reconciliation_mapping**
+> Mapping upsert_reconciliation_mapping(mapping=mapping)
+
+[EARLY ACCESS] UpsertReconciliationMapping: Create or update a mapping
+
+If no mapping exists with the specified scope and code will create a new one.  Else will update the existing mapping
+
+### Example
+
+* OAuth Authentication (oauth2):
+```python
+from __future__ import print_function
+import time
+import lusid
+from lusid.rest import ApiException
+from pprint import pprint
+# Defining the host is optional and defaults to https://www.lusid.com/api
+# See configuration.py for a list of all supported configuration parameters.
+configuration = lusid.Configuration(
+    host = "https://www.lusid.com/api"
+)
+
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
+
+# Configure OAuth2 access token for authorization: oauth2
+configuration = lusid.Configuration(
+    host = "https://www.lusid.com/api"
+)
+configuration.access_token = 'YOUR_ACCESS_TOKEN'
+
+# Enter a context with an instance of the API client
+with lusid.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = lusid.ReconciliationsApi(api_client)
+    mapping = {"scope":"default","code":"TransactionReconciliationMapping","name":"Mapping Name","reconciliationType":"Transaction","rules":[{"left":"TransactionId","right":"TransactionId","comparisonType":"Equals","weight":10,"isCaseSensitive":false},{"left":"InstrumentUid","right":"InstrumentUid","comparisonType":"Equals","weight":5,"isCaseSensitive":false},{"left":"TransactionPrice","right":"TransactionPrice","comparisonType":"Equals","weight":1,"isCaseSensitive":false},{"left":"TransactionCurrency","right":"TransactionCurrency","comparisonType":"Equals","weight":1,"isCaseSensitive":false},{"left":"TransactionDate","right":"TransactionDate","comparisonType":"SameDate","weight":1,"isCaseSensitive":false},{"left":"SettlementDate","right":"SettlementDate","comparisonType":"SameDate","weight":1,"isCaseSensitive":false},{"left":"CounterpartyId","right":"CounterpartyId","comparisonType":"Equals","weight":1,"isCaseSensitive":false},{"left":"ExchangeRate","right":"ExchangeRate","comparisonType":"WithinPercentage","comparisonValue":0.5,"weight":1,"isCaseSensitive":false},{"left":"Type","right":"Type","comparisonType":"MappedString","weight":1,"mappedStrings":[{"leftValue":"Buy","rightValue":"Purchase","mappingDirection":"BothWays","isCaseSensitive":false}],"isCaseSensitive":false}]} # Mapping | The mapping to be created / updated. (optional)
+
+    try:
+        # [EARLY ACCESS] UpsertReconciliationMapping: Create or update a mapping
+        api_response = api_instance.upsert_reconciliation_mapping(mapping=mapping)
+        pprint(api_response)
+    except ApiException as e:
+        print("Exception when calling ReconciliationsApi->upsert_reconciliation_mapping: %s\n" % e)
+```
+
+### Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **mapping** | [**Mapping**](Mapping.md)| The mapping to be created / updated. | [optional] 
+
+### Return type
+
+[**Mapping**](Mapping.md)
+
+### Authorization
+
+[oauth2](../README.md#oauth2)
+
+### HTTP request headers
+
+ - **Content-Type**: application/json-patch+json, application/json, text/json, application/*+json
+ - **Accept**: text/plain, application/json, text/json
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | The created / updated mapping. |  -  |
 **400** | The details of the input related failure |  -  |
 **0** | Error response |  -  |
 

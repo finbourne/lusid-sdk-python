@@ -9,7 +9,7 @@
       "url": "https://www.finbourne.com",
       "email": "info@finbourne.com"
     },
-    "version": "0.11.5282",
+    "version": "0.11.5283",
     "x-logo": {
       "url": "https://www.lusid.com/app/assets/logo_white.png",
       "backgroundColor": "#415464"
@@ -34255,6 +34255,642 @@
         "x-fbn-apistatus": "Stable"
       }
     },
+    "/api/portfolios/$reconcileTransactions": {
+      "post": {
+        "tags": [
+          "Reconciliations"
+        ],
+        "summary": "[EARLY ACCESS] ReconcileTransactions: Perform a Transactions Reconciliation.",
+        "description": "Evaluates two sets of transactions to determine which transactions from each set likely match\r\nusing the rules of a specified mapping.",
+        "operationId": "ReconcileTransactions",
+        "requestBody": {
+          "content": {
+            "application/json-patch+json": {
+              "schema": {
+                "$ref": "#/components/schemas/TransactionReconciliationRequest"
+              },
+              "example": {
+                "leftPortfolioId": {
+                  "scope": "street",
+                  "code": "Global-Equity"
+                },
+                "rightPortfolioId": {
+                  "scope": "custodian",
+                  "code": "Global-Equity"
+                },
+                "fromTransactionDate": "2019-04-01T12:00:00.0000000+00:00",
+                "toTransactionDate": "2019-05-01T12:00:00.0000000+00:00",
+                "propertyKeys": [
+                  "Instrument/default/Name",
+                  "Transaction/common/Strategy"
+                ]
+              }
+            },
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/TransactionReconciliationRequest"
+              },
+              "example": {
+                "leftPortfolioId": {
+                  "scope": "street",
+                  "code": "Global-Equity"
+                },
+                "rightPortfolioId": {
+                  "scope": "custodian",
+                  "code": "Global-Equity"
+                },
+                "fromTransactionDate": "2019-04-01T12:00:00.0000000+00:00",
+                "toTransactionDate": "2019-05-01T12:00:00.0000000+00:00",
+                "propertyKeys": [
+                  "Instrument/default/Name",
+                  "Transaction/common/Strategy"
+                ]
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/TransactionReconciliationRequest"
+              },
+              "example": {
+                "leftPortfolioId": {
+                  "scope": "street",
+                  "code": "Global-Equity"
+                },
+                "rightPortfolioId": {
+                  "scope": "custodian",
+                  "code": "Global-Equity"
+                },
+                "fromTransactionDate": "2019-04-01T12:00:00.0000000+00:00",
+                "toTransactionDate": "2019-05-01T12:00:00.0000000+00:00",
+                "propertyKeys": [
+                  "Instrument/default/Name",
+                  "Transaction/common/Strategy"
+                ]
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/TransactionReconciliationRequest"
+              },
+              "example": {
+                "leftPortfolioId": {
+                  "scope": "street",
+                  "code": "Global-Equity"
+                },
+                "rightPortfolioId": {
+                  "scope": "custodian",
+                  "code": "Global-Equity"
+                },
+                "fromTransactionDate": "2019-04-01T12:00:00.0000000+00:00",
+                "toTransactionDate": "2019-05-01T12:00:00.0000000+00:00",
+                "propertyKeys": [
+                  "Instrument/default/Name",
+                  "Transaction/common/Strategy"
+                ]
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "The transaction reconciliation data for the supplied portfolios.",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/TransactionsReconciliationsResponse"
+                },
+                "example": {
+                  "mapping": {
+                    "scope": "default",
+                    "code": "TransactionReconciliationMapping",
+                    "name": "Mapping Name",
+                    "reconciliationType": "Transaction",
+                    "rules": [
+                      {
+                        "left": "TransactionId",
+                        "right": "TransactionId",
+                        "comparisonType": "Equals",
+                        "weight": 10,
+                        "isCaseSensitive": false
+                      },
+                      {
+                        "left": "InstrumentUid",
+                        "right": "InstrumentUid",
+                        "comparisonType": "Equals",
+                        "weight": 5,
+                        "isCaseSensitive": false
+                      },
+                      {
+                        "left": "TransactionPrice",
+                        "right": "TransactionPrice",
+                        "comparisonType": "Equals",
+                        "weight": 1,
+                        "isCaseSensitive": false
+                      },
+                      {
+                        "left": "TransactionCurrency",
+                        "right": "TransactionCurrency",
+                        "comparisonType": "Equals",
+                        "weight": 1,
+                        "isCaseSensitive": false
+                      },
+                      {
+                        "left": "TransactionDate",
+                        "right": "TransactionDate",
+                        "comparisonType": "SameDate",
+                        "weight": 1,
+                        "isCaseSensitive": false
+                      },
+                      {
+                        "left": "SettlementDate",
+                        "right": "SettlementDate",
+                        "comparisonType": "SameDate",
+                        "weight": 1,
+                        "isCaseSensitive": false
+                      },
+                      {
+                        "left": "CounterpartyId",
+                        "right": "CounterpartyId",
+                        "comparisonType": "Equals",
+                        "weight": 1,
+                        "isCaseSensitive": false
+                      },
+                      {
+                        "left": "ExchangeRate",
+                        "right": "ExchangeRate",
+                        "comparisonType": "WithinPercentage",
+                        "comparisonValue": 0.5,
+                        "weight": 1,
+                        "isCaseSensitive": false
+                      }
+                    ]
+                  },
+                  "data": [
+                    {
+                      "left": {
+                        "transactionId": "TXN-001",
+                        "type": "BUY",
+                        "instrumentIdentifiers": {
+                          "Instrument/default/Figi": "BBG000B9XRY4"
+                        },
+                        "instrumentScope": "default",
+                        "instrumentUid": "LUID_008XGQ1D",
+                        "transactionDate": "2019-04-02T12:00:00.0000000+00:00",
+                        "settlementDate": "2019-04-05T12:00:00.0000000+00:00",
+                        "units": 100,
+                        "transactionPrice": {
+                          "price": 199.23,
+                          "type": "Price"
+                        },
+                        "totalConsideration": {
+                          "amount": 20000,
+                          "currency": "USD"
+                        },
+                        "exchangeRate": 1.31,
+                        "transactionCurrency": "USD",
+                        "properties": {
+                          "Instrument/default/Name": {
+                            "key": "Instrument/default/Name",
+                            "value": {
+                              "labelValue": "APPLE INC"
+                            }
+                          },
+                          "Transaction/common/Strategy": {
+                            "key": "Transaction/common/Strategy",
+                            "value": {
+                              "labelValue": "Strategy 1"
+                            }
+                          }
+                        },
+                        "source": "",
+                        "entryDateTime": "2019-04-02T16:30:15.0000000+00:00",
+                        "transactionStatus": "Active"
+                      },
+                      "right": {
+                        "transactionId": "TXN-001",
+                        "type": "BUY",
+                        "instrumentIdentifiers": {
+                          "Instrument/default/Figi": "BBG000B9XRY4"
+                        },
+                        "instrumentScope": "default",
+                        "instrumentUid": "LUID_008XGQ1D",
+                        "transactionDate": "2019-04-02T12:00:00.0000000+00:00",
+                        "settlementDate": "2019-04-05T12:00:00.0000000+00:00",
+                        "units": 100,
+                        "transactionPrice": {
+                          "price": 199.23,
+                          "type": "Price"
+                        },
+                        "totalConsideration": {
+                          "amount": 20000,
+                          "currency": "USD"
+                        },
+                        "exchangeRate": 1.31,
+                        "transactionCurrency": "USD",
+                        "properties": {
+                          "Instrument/default/Name": {
+                            "key": "Instrument/default/Name",
+                            "value": {
+                              "labelValue": "APPLE INC"
+                            }
+                          },
+                          "Transaction/common/Strategy": {
+                            "key": "Transaction/common/Strategy",
+                            "value": {
+                              "labelValue": "Strategy 1"
+                            }
+                          }
+                        },
+                        "source": "custodian file /var/data/xyz",
+                        "entryDateTime": "2019-04-02T16:30:15.0000000+00:00",
+                        "transactionStatus": "Active"
+                      },
+                      "percentageMatch": 100,
+                      "mappingRuleSetResults": [
+                        true,
+                        true,
+                        true,
+                        true,
+                        true,
+                        true,
+                        true,
+                        true
+                      ]
+                    }
+                  ]
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/TransactionsReconciliationsResponse"
+                },
+                "example": {
+                  "mapping": {
+                    "scope": "default",
+                    "code": "TransactionReconciliationMapping",
+                    "name": "Mapping Name",
+                    "reconciliationType": "Transaction",
+                    "rules": [
+                      {
+                        "left": "TransactionId",
+                        "right": "TransactionId",
+                        "comparisonType": "Equals",
+                        "weight": 10,
+                        "isCaseSensitive": false
+                      },
+                      {
+                        "left": "InstrumentUid",
+                        "right": "InstrumentUid",
+                        "comparisonType": "Equals",
+                        "weight": 5,
+                        "isCaseSensitive": false
+                      },
+                      {
+                        "left": "TransactionPrice",
+                        "right": "TransactionPrice",
+                        "comparisonType": "Equals",
+                        "weight": 1,
+                        "isCaseSensitive": false
+                      },
+                      {
+                        "left": "TransactionCurrency",
+                        "right": "TransactionCurrency",
+                        "comparisonType": "Equals",
+                        "weight": 1,
+                        "isCaseSensitive": false
+                      },
+                      {
+                        "left": "TransactionDate",
+                        "right": "TransactionDate",
+                        "comparisonType": "SameDate",
+                        "weight": 1,
+                        "isCaseSensitive": false
+                      },
+                      {
+                        "left": "SettlementDate",
+                        "right": "SettlementDate",
+                        "comparisonType": "SameDate",
+                        "weight": 1,
+                        "isCaseSensitive": false
+                      },
+                      {
+                        "left": "CounterpartyId",
+                        "right": "CounterpartyId",
+                        "comparisonType": "Equals",
+                        "weight": 1,
+                        "isCaseSensitive": false
+                      },
+                      {
+                        "left": "ExchangeRate",
+                        "right": "ExchangeRate",
+                        "comparisonType": "WithinPercentage",
+                        "comparisonValue": 0.5,
+                        "weight": 1,
+                        "isCaseSensitive": false
+                      }
+                    ]
+                  },
+                  "data": [
+                    {
+                      "left": {
+                        "transactionId": "TXN-001",
+                        "type": "BUY",
+                        "instrumentIdentifiers": {
+                          "Instrument/default/Figi": "BBG000B9XRY4"
+                        },
+                        "instrumentScope": "default",
+                        "instrumentUid": "LUID_008XGQ1D",
+                        "transactionDate": "2019-04-02T12:00:00.0000000+00:00",
+                        "settlementDate": "2019-04-05T12:00:00.0000000+00:00",
+                        "units": 100,
+                        "transactionPrice": {
+                          "price": 199.23,
+                          "type": "Price"
+                        },
+                        "totalConsideration": {
+                          "amount": 20000,
+                          "currency": "USD"
+                        },
+                        "exchangeRate": 1.31,
+                        "transactionCurrency": "USD",
+                        "properties": {
+                          "Instrument/default/Name": {
+                            "key": "Instrument/default/Name",
+                            "value": {
+                              "labelValue": "APPLE INC"
+                            }
+                          },
+                          "Transaction/common/Strategy": {
+                            "key": "Transaction/common/Strategy",
+                            "value": {
+                              "labelValue": "Strategy 1"
+                            }
+                          }
+                        },
+                        "source": "",
+                        "entryDateTime": "2019-04-02T16:30:15.0000000+00:00",
+                        "transactionStatus": "Active"
+                      },
+                      "right": {
+                        "transactionId": "TXN-001",
+                        "type": "BUY",
+                        "instrumentIdentifiers": {
+                          "Instrument/default/Figi": "BBG000B9XRY4"
+                        },
+                        "instrumentScope": "default",
+                        "instrumentUid": "LUID_008XGQ1D",
+                        "transactionDate": "2019-04-02T12:00:00.0000000+00:00",
+                        "settlementDate": "2019-04-05T12:00:00.0000000+00:00",
+                        "units": 100,
+                        "transactionPrice": {
+                          "price": 199.23,
+                          "type": "Price"
+                        },
+                        "totalConsideration": {
+                          "amount": 20000,
+                          "currency": "USD"
+                        },
+                        "exchangeRate": 1.31,
+                        "transactionCurrency": "USD",
+                        "properties": {
+                          "Instrument/default/Name": {
+                            "key": "Instrument/default/Name",
+                            "value": {
+                              "labelValue": "APPLE INC"
+                            }
+                          },
+                          "Transaction/common/Strategy": {
+                            "key": "Transaction/common/Strategy",
+                            "value": {
+                              "labelValue": "Strategy 1"
+                            }
+                          }
+                        },
+                        "source": "custodian file /var/data/xyz",
+                        "entryDateTime": "2019-04-02T16:30:15.0000000+00:00",
+                        "transactionStatus": "Active"
+                      },
+                      "percentageMatch": 100,
+                      "mappingRuleSetResults": [
+                        true,
+                        true,
+                        true,
+                        true,
+                        true,
+                        true,
+                        true,
+                        true
+                      ]
+                    }
+                  ]
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/TransactionsReconciliationsResponse"
+                },
+                "example": {
+                  "mapping": {
+                    "scope": "default",
+                    "code": "TransactionReconciliationMapping",
+                    "name": "Mapping Name",
+                    "reconciliationType": "Transaction",
+                    "rules": [
+                      {
+                        "left": "TransactionId",
+                        "right": "TransactionId",
+                        "comparisonType": "Equals",
+                        "weight": 10,
+                        "isCaseSensitive": false
+                      },
+                      {
+                        "left": "InstrumentUid",
+                        "right": "InstrumentUid",
+                        "comparisonType": "Equals",
+                        "weight": 5,
+                        "isCaseSensitive": false
+                      },
+                      {
+                        "left": "TransactionPrice",
+                        "right": "TransactionPrice",
+                        "comparisonType": "Equals",
+                        "weight": 1,
+                        "isCaseSensitive": false
+                      },
+                      {
+                        "left": "TransactionCurrency",
+                        "right": "TransactionCurrency",
+                        "comparisonType": "Equals",
+                        "weight": 1,
+                        "isCaseSensitive": false
+                      },
+                      {
+                        "left": "TransactionDate",
+                        "right": "TransactionDate",
+                        "comparisonType": "SameDate",
+                        "weight": 1,
+                        "isCaseSensitive": false
+                      },
+                      {
+                        "left": "SettlementDate",
+                        "right": "SettlementDate",
+                        "comparisonType": "SameDate",
+                        "weight": 1,
+                        "isCaseSensitive": false
+                      },
+                      {
+                        "left": "CounterpartyId",
+                        "right": "CounterpartyId",
+                        "comparisonType": "Equals",
+                        "weight": 1,
+                        "isCaseSensitive": false
+                      },
+                      {
+                        "left": "ExchangeRate",
+                        "right": "ExchangeRate",
+                        "comparisonType": "WithinPercentage",
+                        "comparisonValue": 0.5,
+                        "weight": 1,
+                        "isCaseSensitive": false
+                      }
+                    ]
+                  },
+                  "data": [
+                    {
+                      "left": {
+                        "transactionId": "TXN-001",
+                        "type": "BUY",
+                        "instrumentIdentifiers": {
+                          "Instrument/default/Figi": "BBG000B9XRY4"
+                        },
+                        "instrumentScope": "default",
+                        "instrumentUid": "LUID_008XGQ1D",
+                        "transactionDate": "2019-04-02T12:00:00.0000000+00:00",
+                        "settlementDate": "2019-04-05T12:00:00.0000000+00:00",
+                        "units": 100,
+                        "transactionPrice": {
+                          "price": 199.23,
+                          "type": "Price"
+                        },
+                        "totalConsideration": {
+                          "amount": 20000,
+                          "currency": "USD"
+                        },
+                        "exchangeRate": 1.31,
+                        "transactionCurrency": "USD",
+                        "properties": {
+                          "Instrument/default/Name": {
+                            "key": "Instrument/default/Name",
+                            "value": {
+                              "labelValue": "APPLE INC"
+                            }
+                          },
+                          "Transaction/common/Strategy": {
+                            "key": "Transaction/common/Strategy",
+                            "value": {
+                              "labelValue": "Strategy 1"
+                            }
+                          }
+                        },
+                        "source": "",
+                        "entryDateTime": "2019-04-02T16:30:15.0000000+00:00",
+                        "transactionStatus": "Active"
+                      },
+                      "right": {
+                        "transactionId": "TXN-001",
+                        "type": "BUY",
+                        "instrumentIdentifiers": {
+                          "Instrument/default/Figi": "BBG000B9XRY4"
+                        },
+                        "instrumentScope": "default",
+                        "instrumentUid": "LUID_008XGQ1D",
+                        "transactionDate": "2019-04-02T12:00:00.0000000+00:00",
+                        "settlementDate": "2019-04-05T12:00:00.0000000+00:00",
+                        "units": 100,
+                        "transactionPrice": {
+                          "price": 199.23,
+                          "type": "Price"
+                        },
+                        "totalConsideration": {
+                          "amount": 20000,
+                          "currency": "USD"
+                        },
+                        "exchangeRate": 1.31,
+                        "transactionCurrency": "USD",
+                        "properties": {
+                          "Instrument/default/Name": {
+                            "key": "Instrument/default/Name",
+                            "value": {
+                              "labelValue": "APPLE INC"
+                            }
+                          },
+                          "Transaction/common/Strategy": {
+                            "key": "Transaction/common/Strategy",
+                            "value": {
+                              "labelValue": "Strategy 1"
+                            }
+                          }
+                        },
+                        "source": "custodian file /var/data/xyz",
+                        "entryDateTime": "2019-04-02T16:30:15.0000000+00:00",
+                        "transactionStatus": "Active"
+                      },
+                      "percentageMatch": 100,
+                      "mappingRuleSetResults": [
+                        true,
+                        true,
+                        true,
+                        true,
+                        true,
+                        true,
+                        true,
+                        true
+                      ]
+                    }
+                  ]
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "The details of the input related failure",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/LusidValidationProblemDetails"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/LusidValidationProblemDetails"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/LusidValidationProblemDetails"
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "Error response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/LusidProblemDetails"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "oauth2": []
+          }
+        ],
+        "x-fbn-apistatus": "EarlyAccess"
+      }
+    },
     "/api/portfolios/$reconcileValuation": {
       "post": {
         "tags": [
@@ -34738,6 +35374,1161 @@
           }
         ],
         "x-fbn-apistatus": "Stable"
+      }
+    },
+    "/api/portfolios/mapping": {
+      "post": {
+        "tags": [
+          "Reconciliations"
+        ],
+        "summary": "[EARLY ACCESS] UpsertReconciliationMapping: Create or update a mapping",
+        "description": "If no mapping exists with the specified scope and code will create a new one.\r\nElse will update the existing mapping",
+        "operationId": "UpsertReconciliationMapping",
+        "requestBody": {
+          "description": "The mapping to be created / updated.",
+          "content": {
+            "application/json-patch+json": {
+              "schema": {
+                "$ref": "#/components/schemas/Mapping"
+              },
+              "example": {
+                "scope": "default",
+                "code": "TransactionReconciliationMapping",
+                "name": "Mapping Name",
+                "reconciliationType": "Transaction",
+                "rules": [
+                  {
+                    "left": "TransactionId",
+                    "right": "TransactionId",
+                    "comparisonType": "Equals",
+                    "weight": 10,
+                    "isCaseSensitive": false
+                  },
+                  {
+                    "left": "InstrumentUid",
+                    "right": "InstrumentUid",
+                    "comparisonType": "Equals",
+                    "weight": 5,
+                    "isCaseSensitive": false
+                  },
+                  {
+                    "left": "TransactionPrice",
+                    "right": "TransactionPrice",
+                    "comparisonType": "Equals",
+                    "weight": 1,
+                    "isCaseSensitive": false
+                  },
+                  {
+                    "left": "TransactionCurrency",
+                    "right": "TransactionCurrency",
+                    "comparisonType": "Equals",
+                    "weight": 1,
+                    "isCaseSensitive": false
+                  },
+                  {
+                    "left": "TransactionDate",
+                    "right": "TransactionDate",
+                    "comparisonType": "SameDate",
+                    "weight": 1,
+                    "isCaseSensitive": false
+                  },
+                  {
+                    "left": "SettlementDate",
+                    "right": "SettlementDate",
+                    "comparisonType": "SameDate",
+                    "weight": 1,
+                    "isCaseSensitive": false
+                  },
+                  {
+                    "left": "CounterpartyId",
+                    "right": "CounterpartyId",
+                    "comparisonType": "Equals",
+                    "weight": 1,
+                    "isCaseSensitive": false
+                  },
+                  {
+                    "left": "ExchangeRate",
+                    "right": "ExchangeRate",
+                    "comparisonType": "WithinPercentage",
+                    "comparisonValue": 0.5,
+                    "weight": 1,
+                    "isCaseSensitive": false
+                  },
+                  {
+                    "left": "Type",
+                    "right": "Type",
+                    "comparisonType": "MappedString",
+                    "weight": 1,
+                    "mappedStrings": [
+                      {
+                        "leftValue": "Buy",
+                        "rightValue": "Purchase",
+                        "mappingDirection": "BothWays",
+                        "isCaseSensitive": false
+                      }
+                    ],
+                    "isCaseSensitive": false
+                  }
+                ]
+              }
+            },
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Mapping"
+              },
+              "example": {
+                "scope": "default",
+                "code": "TransactionReconciliationMapping",
+                "name": "Mapping Name",
+                "reconciliationType": "Transaction",
+                "rules": [
+                  {
+                    "left": "TransactionId",
+                    "right": "TransactionId",
+                    "comparisonType": "Equals",
+                    "weight": 10,
+                    "isCaseSensitive": false
+                  },
+                  {
+                    "left": "InstrumentUid",
+                    "right": "InstrumentUid",
+                    "comparisonType": "Equals",
+                    "weight": 5,
+                    "isCaseSensitive": false
+                  },
+                  {
+                    "left": "TransactionPrice",
+                    "right": "TransactionPrice",
+                    "comparisonType": "Equals",
+                    "weight": 1,
+                    "isCaseSensitive": false
+                  },
+                  {
+                    "left": "TransactionCurrency",
+                    "right": "TransactionCurrency",
+                    "comparisonType": "Equals",
+                    "weight": 1,
+                    "isCaseSensitive": false
+                  },
+                  {
+                    "left": "TransactionDate",
+                    "right": "TransactionDate",
+                    "comparisonType": "SameDate",
+                    "weight": 1,
+                    "isCaseSensitive": false
+                  },
+                  {
+                    "left": "SettlementDate",
+                    "right": "SettlementDate",
+                    "comparisonType": "SameDate",
+                    "weight": 1,
+                    "isCaseSensitive": false
+                  },
+                  {
+                    "left": "CounterpartyId",
+                    "right": "CounterpartyId",
+                    "comparisonType": "Equals",
+                    "weight": 1,
+                    "isCaseSensitive": false
+                  },
+                  {
+                    "left": "ExchangeRate",
+                    "right": "ExchangeRate",
+                    "comparisonType": "WithinPercentage",
+                    "comparisonValue": 0.5,
+                    "weight": 1,
+                    "isCaseSensitive": false
+                  },
+                  {
+                    "left": "Type",
+                    "right": "Type",
+                    "comparisonType": "MappedString",
+                    "weight": 1,
+                    "mappedStrings": [
+                      {
+                        "leftValue": "Buy",
+                        "rightValue": "Purchase",
+                        "mappingDirection": "BothWays",
+                        "isCaseSensitive": false
+                      }
+                    ],
+                    "isCaseSensitive": false
+                  }
+                ]
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Mapping"
+              },
+              "example": {
+                "scope": "default",
+                "code": "TransactionReconciliationMapping",
+                "name": "Mapping Name",
+                "reconciliationType": "Transaction",
+                "rules": [
+                  {
+                    "left": "TransactionId",
+                    "right": "TransactionId",
+                    "comparisonType": "Equals",
+                    "weight": 10,
+                    "isCaseSensitive": false
+                  },
+                  {
+                    "left": "InstrumentUid",
+                    "right": "InstrumentUid",
+                    "comparisonType": "Equals",
+                    "weight": 5,
+                    "isCaseSensitive": false
+                  },
+                  {
+                    "left": "TransactionPrice",
+                    "right": "TransactionPrice",
+                    "comparisonType": "Equals",
+                    "weight": 1,
+                    "isCaseSensitive": false
+                  },
+                  {
+                    "left": "TransactionCurrency",
+                    "right": "TransactionCurrency",
+                    "comparisonType": "Equals",
+                    "weight": 1,
+                    "isCaseSensitive": false
+                  },
+                  {
+                    "left": "TransactionDate",
+                    "right": "TransactionDate",
+                    "comparisonType": "SameDate",
+                    "weight": 1,
+                    "isCaseSensitive": false
+                  },
+                  {
+                    "left": "SettlementDate",
+                    "right": "SettlementDate",
+                    "comparisonType": "SameDate",
+                    "weight": 1,
+                    "isCaseSensitive": false
+                  },
+                  {
+                    "left": "CounterpartyId",
+                    "right": "CounterpartyId",
+                    "comparisonType": "Equals",
+                    "weight": 1,
+                    "isCaseSensitive": false
+                  },
+                  {
+                    "left": "ExchangeRate",
+                    "right": "ExchangeRate",
+                    "comparisonType": "WithinPercentage",
+                    "comparisonValue": 0.5,
+                    "weight": 1,
+                    "isCaseSensitive": false
+                  },
+                  {
+                    "left": "Type",
+                    "right": "Type",
+                    "comparisonType": "MappedString",
+                    "weight": 1,
+                    "mappedStrings": [
+                      {
+                        "leftValue": "Buy",
+                        "rightValue": "Purchase",
+                        "mappingDirection": "BothWays",
+                        "isCaseSensitive": false
+                      }
+                    ],
+                    "isCaseSensitive": false
+                  }
+                ]
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/Mapping"
+              },
+              "example": {
+                "scope": "default",
+                "code": "TransactionReconciliationMapping",
+                "name": "Mapping Name",
+                "reconciliationType": "Transaction",
+                "rules": [
+                  {
+                    "left": "TransactionId",
+                    "right": "TransactionId",
+                    "comparisonType": "Equals",
+                    "weight": 10,
+                    "isCaseSensitive": false
+                  },
+                  {
+                    "left": "InstrumentUid",
+                    "right": "InstrumentUid",
+                    "comparisonType": "Equals",
+                    "weight": 5,
+                    "isCaseSensitive": false
+                  },
+                  {
+                    "left": "TransactionPrice",
+                    "right": "TransactionPrice",
+                    "comparisonType": "Equals",
+                    "weight": 1,
+                    "isCaseSensitive": false
+                  },
+                  {
+                    "left": "TransactionCurrency",
+                    "right": "TransactionCurrency",
+                    "comparisonType": "Equals",
+                    "weight": 1,
+                    "isCaseSensitive": false
+                  },
+                  {
+                    "left": "TransactionDate",
+                    "right": "TransactionDate",
+                    "comparisonType": "SameDate",
+                    "weight": 1,
+                    "isCaseSensitive": false
+                  },
+                  {
+                    "left": "SettlementDate",
+                    "right": "SettlementDate",
+                    "comparisonType": "SameDate",
+                    "weight": 1,
+                    "isCaseSensitive": false
+                  },
+                  {
+                    "left": "CounterpartyId",
+                    "right": "CounterpartyId",
+                    "comparisonType": "Equals",
+                    "weight": 1,
+                    "isCaseSensitive": false
+                  },
+                  {
+                    "left": "ExchangeRate",
+                    "right": "ExchangeRate",
+                    "comparisonType": "WithinPercentage",
+                    "comparisonValue": 0.5,
+                    "weight": 1,
+                    "isCaseSensitive": false
+                  },
+                  {
+                    "left": "Type",
+                    "right": "Type",
+                    "comparisonType": "MappedString",
+                    "weight": 1,
+                    "mappedStrings": [
+                      {
+                        "leftValue": "Buy",
+                        "rightValue": "Purchase",
+                        "mappingDirection": "BothWays",
+                        "isCaseSensitive": false
+                      }
+                    ],
+                    "isCaseSensitive": false
+                  }
+                ]
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "The created / updated mapping.",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/Mapping"
+                },
+                "example": {
+                  "scope": "default",
+                  "code": "TransactionReconciliationMapping",
+                  "name": "Mapping Name",
+                  "reconciliationType": "Transaction",
+                  "rules": [
+                    {
+                      "left": "TransactionId",
+                      "right": "TransactionId",
+                      "comparisonType": "Equals",
+                      "weight": 10,
+                      "isCaseSensitive": false
+                    },
+                    {
+                      "left": "InstrumentUid",
+                      "right": "InstrumentUid",
+                      "comparisonType": "Equals",
+                      "weight": 5,
+                      "isCaseSensitive": false
+                    },
+                    {
+                      "left": "TransactionPrice",
+                      "right": "TransactionPrice",
+                      "comparisonType": "Equals",
+                      "weight": 1,
+                      "isCaseSensitive": false
+                    },
+                    {
+                      "left": "TransactionCurrency",
+                      "right": "TransactionCurrency",
+                      "comparisonType": "Equals",
+                      "weight": 1,
+                      "isCaseSensitive": false
+                    },
+                    {
+                      "left": "TransactionDate",
+                      "right": "TransactionDate",
+                      "comparisonType": "SameDate",
+                      "weight": 1,
+                      "isCaseSensitive": false
+                    },
+                    {
+                      "left": "SettlementDate",
+                      "right": "SettlementDate",
+                      "comparisonType": "SameDate",
+                      "weight": 1,
+                      "isCaseSensitive": false
+                    },
+                    {
+                      "left": "CounterpartyId",
+                      "right": "CounterpartyId",
+                      "comparisonType": "Equals",
+                      "weight": 1,
+                      "isCaseSensitive": false
+                    },
+                    {
+                      "left": "ExchangeRate",
+                      "right": "ExchangeRate",
+                      "comparisonType": "WithinPercentage",
+                      "comparisonValue": 0.5,
+                      "weight": 1,
+                      "isCaseSensitive": false
+                    },
+                    {
+                      "left": "Type",
+                      "right": "Type",
+                      "comparisonType": "MappedString",
+                      "weight": 1,
+                      "mappedStrings": [
+                        {
+                          "leftValue": "Buy",
+                          "rightValue": "Purchase",
+                          "mappingDirection": "BothWays",
+                          "isCaseSensitive": false
+                        }
+                      ],
+                      "isCaseSensitive": false
+                    }
+                  ]
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Mapping"
+                },
+                "example": {
+                  "scope": "default",
+                  "code": "TransactionReconciliationMapping",
+                  "name": "Mapping Name",
+                  "reconciliationType": "Transaction",
+                  "rules": [
+                    {
+                      "left": "TransactionId",
+                      "right": "TransactionId",
+                      "comparisonType": "Equals",
+                      "weight": 10,
+                      "isCaseSensitive": false
+                    },
+                    {
+                      "left": "InstrumentUid",
+                      "right": "InstrumentUid",
+                      "comparisonType": "Equals",
+                      "weight": 5,
+                      "isCaseSensitive": false
+                    },
+                    {
+                      "left": "TransactionPrice",
+                      "right": "TransactionPrice",
+                      "comparisonType": "Equals",
+                      "weight": 1,
+                      "isCaseSensitive": false
+                    },
+                    {
+                      "left": "TransactionCurrency",
+                      "right": "TransactionCurrency",
+                      "comparisonType": "Equals",
+                      "weight": 1,
+                      "isCaseSensitive": false
+                    },
+                    {
+                      "left": "TransactionDate",
+                      "right": "TransactionDate",
+                      "comparisonType": "SameDate",
+                      "weight": 1,
+                      "isCaseSensitive": false
+                    },
+                    {
+                      "left": "SettlementDate",
+                      "right": "SettlementDate",
+                      "comparisonType": "SameDate",
+                      "weight": 1,
+                      "isCaseSensitive": false
+                    },
+                    {
+                      "left": "CounterpartyId",
+                      "right": "CounterpartyId",
+                      "comparisonType": "Equals",
+                      "weight": 1,
+                      "isCaseSensitive": false
+                    },
+                    {
+                      "left": "ExchangeRate",
+                      "right": "ExchangeRate",
+                      "comparisonType": "WithinPercentage",
+                      "comparisonValue": 0.5,
+                      "weight": 1,
+                      "isCaseSensitive": false
+                    },
+                    {
+                      "left": "Type",
+                      "right": "Type",
+                      "comparisonType": "MappedString",
+                      "weight": 1,
+                      "mappedStrings": [
+                        {
+                          "leftValue": "Buy",
+                          "rightValue": "Purchase",
+                          "mappingDirection": "BothWays",
+                          "isCaseSensitive": false
+                        }
+                      ],
+                      "isCaseSensitive": false
+                    }
+                  ]
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Mapping"
+                },
+                "example": {
+                  "scope": "default",
+                  "code": "TransactionReconciliationMapping",
+                  "name": "Mapping Name",
+                  "reconciliationType": "Transaction",
+                  "rules": [
+                    {
+                      "left": "TransactionId",
+                      "right": "TransactionId",
+                      "comparisonType": "Equals",
+                      "weight": 10,
+                      "isCaseSensitive": false
+                    },
+                    {
+                      "left": "InstrumentUid",
+                      "right": "InstrumentUid",
+                      "comparisonType": "Equals",
+                      "weight": 5,
+                      "isCaseSensitive": false
+                    },
+                    {
+                      "left": "TransactionPrice",
+                      "right": "TransactionPrice",
+                      "comparisonType": "Equals",
+                      "weight": 1,
+                      "isCaseSensitive": false
+                    },
+                    {
+                      "left": "TransactionCurrency",
+                      "right": "TransactionCurrency",
+                      "comparisonType": "Equals",
+                      "weight": 1,
+                      "isCaseSensitive": false
+                    },
+                    {
+                      "left": "TransactionDate",
+                      "right": "TransactionDate",
+                      "comparisonType": "SameDate",
+                      "weight": 1,
+                      "isCaseSensitive": false
+                    },
+                    {
+                      "left": "SettlementDate",
+                      "right": "SettlementDate",
+                      "comparisonType": "SameDate",
+                      "weight": 1,
+                      "isCaseSensitive": false
+                    },
+                    {
+                      "left": "CounterpartyId",
+                      "right": "CounterpartyId",
+                      "comparisonType": "Equals",
+                      "weight": 1,
+                      "isCaseSensitive": false
+                    },
+                    {
+                      "left": "ExchangeRate",
+                      "right": "ExchangeRate",
+                      "comparisonType": "WithinPercentage",
+                      "comparisonValue": 0.5,
+                      "weight": 1,
+                      "isCaseSensitive": false
+                    },
+                    {
+                      "left": "Type",
+                      "right": "Type",
+                      "comparisonType": "MappedString",
+                      "weight": 1,
+                      "mappedStrings": [
+                        {
+                          "leftValue": "Buy",
+                          "rightValue": "Purchase",
+                          "mappingDirection": "BothWays",
+                          "isCaseSensitive": false
+                        }
+                      ],
+                      "isCaseSensitive": false
+                    }
+                  ]
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "The details of the input related failure",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/LusidValidationProblemDetails"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/LusidValidationProblemDetails"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/LusidValidationProblemDetails"
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "Error response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/LusidProblemDetails"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "oauth2": []
+          }
+        ],
+        "x-fbn-apistatus": "EarlyAccess"
+      },
+      "get": {
+        "tags": [
+          "Reconciliations"
+        ],
+        "summary": "[EARLY ACCESS] ListReconciliationMappings: List the reconciliation mappings",
+        "description": "Lists all mappings this user is entitled to see",
+        "operationId": "ListReconciliationMappings",
+        "parameters": [
+          {
+            "name": "reconciliationType",
+            "in": "query",
+            "description": "Optional parameter to specify which type of mappings should be returned.\r\nDefaults to Transaction if not provided.",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The mappings that the caller has access to.",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResourceListOfMapping"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResourceListOfMapping"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResourceListOfMapping"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "The details of the input related failure",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/LusidValidationProblemDetails"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/LusidValidationProblemDetails"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/LusidValidationProblemDetails"
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "Error response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/LusidProblemDetails"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "oauth2": []
+          }
+        ],
+        "x-fbn-apistatus": "EarlyAccess"
+      }
+    },
+    "/api/portfolios/mapping/{scope}/{code}": {
+      "get": {
+        "tags": [
+          "Reconciliations"
+        ],
+        "summary": "[EARLY ACCESS] GetReconciliationMapping: Get a mapping",
+        "description": "Gets a mapping identified by the given scope and code",
+        "operationId": "GetReconciliationMapping",
+        "parameters": [
+          {
+            "name": "scope",
+            "in": "path",
+            "description": "The scope of the mapping.",
+            "required": true,
+            "schema": {
+              "maxLength": 64,
+              "minLength": 1,
+              "pattern": "^[a-zA-Z0-9\\-_]+$",
+              "type": "string"
+            }
+          },
+          {
+            "name": "code",
+            "in": "path",
+            "description": "The code fof the mapping.",
+            "required": true,
+            "schema": {
+              "maxLength": 64,
+              "minLength": 1,
+              "pattern": "^[a-zA-Z0-9\\-_]+$",
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The mapping with the specified scope/code.",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/Mapping"
+                },
+                "example": {
+                  "scope": "default",
+                  "code": "TransactionReconciliationMapping",
+                  "name": "Mapping Name",
+                  "reconciliationType": "Transaction",
+                  "rules": [
+                    {
+                      "left": "TransactionId",
+                      "right": "TransactionId",
+                      "comparisonType": "Equals",
+                      "weight": 10,
+                      "isCaseSensitive": false
+                    },
+                    {
+                      "left": "InstrumentUid",
+                      "right": "InstrumentUid",
+                      "comparisonType": "Equals",
+                      "weight": 5,
+                      "isCaseSensitive": false
+                    },
+                    {
+                      "left": "TransactionPrice",
+                      "right": "TransactionPrice",
+                      "comparisonType": "Equals",
+                      "weight": 1,
+                      "isCaseSensitive": false
+                    },
+                    {
+                      "left": "TransactionCurrency",
+                      "right": "TransactionCurrency",
+                      "comparisonType": "Equals",
+                      "weight": 1,
+                      "isCaseSensitive": false
+                    },
+                    {
+                      "left": "TransactionDate",
+                      "right": "TransactionDate",
+                      "comparisonType": "SameDate",
+                      "weight": 1,
+                      "isCaseSensitive": false
+                    },
+                    {
+                      "left": "SettlementDate",
+                      "right": "SettlementDate",
+                      "comparisonType": "SameDate",
+                      "weight": 1,
+                      "isCaseSensitive": false
+                    },
+                    {
+                      "left": "CounterpartyId",
+                      "right": "CounterpartyId",
+                      "comparisonType": "Equals",
+                      "weight": 1,
+                      "isCaseSensitive": false
+                    },
+                    {
+                      "left": "ExchangeRate",
+                      "right": "ExchangeRate",
+                      "comparisonType": "WithinPercentage",
+                      "comparisonValue": 0.5,
+                      "weight": 1,
+                      "isCaseSensitive": false
+                    },
+                    {
+                      "left": "Type",
+                      "right": "Type",
+                      "comparisonType": "MappedString",
+                      "weight": 1,
+                      "mappedStrings": [
+                        {
+                          "leftValue": "Buy",
+                          "rightValue": "Purchase",
+                          "mappingDirection": "BothWays",
+                          "isCaseSensitive": false
+                        }
+                      ],
+                      "isCaseSensitive": false
+                    }
+                  ]
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Mapping"
+                },
+                "example": {
+                  "scope": "default",
+                  "code": "TransactionReconciliationMapping",
+                  "name": "Mapping Name",
+                  "reconciliationType": "Transaction",
+                  "rules": [
+                    {
+                      "left": "TransactionId",
+                      "right": "TransactionId",
+                      "comparisonType": "Equals",
+                      "weight": 10,
+                      "isCaseSensitive": false
+                    },
+                    {
+                      "left": "InstrumentUid",
+                      "right": "InstrumentUid",
+                      "comparisonType": "Equals",
+                      "weight": 5,
+                      "isCaseSensitive": false
+                    },
+                    {
+                      "left": "TransactionPrice",
+                      "right": "TransactionPrice",
+                      "comparisonType": "Equals",
+                      "weight": 1,
+                      "isCaseSensitive": false
+                    },
+                    {
+                      "left": "TransactionCurrency",
+                      "right": "TransactionCurrency",
+                      "comparisonType": "Equals",
+                      "weight": 1,
+                      "isCaseSensitive": false
+                    },
+                    {
+                      "left": "TransactionDate",
+                      "right": "TransactionDate",
+                      "comparisonType": "SameDate",
+                      "weight": 1,
+                      "isCaseSensitive": false
+                    },
+                    {
+                      "left": "SettlementDate",
+                      "right": "SettlementDate",
+                      "comparisonType": "SameDate",
+                      "weight": 1,
+                      "isCaseSensitive": false
+                    },
+                    {
+                      "left": "CounterpartyId",
+                      "right": "CounterpartyId",
+                      "comparisonType": "Equals",
+                      "weight": 1,
+                      "isCaseSensitive": false
+                    },
+                    {
+                      "left": "ExchangeRate",
+                      "right": "ExchangeRate",
+                      "comparisonType": "WithinPercentage",
+                      "comparisonValue": 0.5,
+                      "weight": 1,
+                      "isCaseSensitive": false
+                    },
+                    {
+                      "left": "Type",
+                      "right": "Type",
+                      "comparisonType": "MappedString",
+                      "weight": 1,
+                      "mappedStrings": [
+                        {
+                          "leftValue": "Buy",
+                          "rightValue": "Purchase",
+                          "mappingDirection": "BothWays",
+                          "isCaseSensitive": false
+                        }
+                      ],
+                      "isCaseSensitive": false
+                    }
+                  ]
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Mapping"
+                },
+                "example": {
+                  "scope": "default",
+                  "code": "TransactionReconciliationMapping",
+                  "name": "Mapping Name",
+                  "reconciliationType": "Transaction",
+                  "rules": [
+                    {
+                      "left": "TransactionId",
+                      "right": "TransactionId",
+                      "comparisonType": "Equals",
+                      "weight": 10,
+                      "isCaseSensitive": false
+                    },
+                    {
+                      "left": "InstrumentUid",
+                      "right": "InstrumentUid",
+                      "comparisonType": "Equals",
+                      "weight": 5,
+                      "isCaseSensitive": false
+                    },
+                    {
+                      "left": "TransactionPrice",
+                      "right": "TransactionPrice",
+                      "comparisonType": "Equals",
+                      "weight": 1,
+                      "isCaseSensitive": false
+                    },
+                    {
+                      "left": "TransactionCurrency",
+                      "right": "TransactionCurrency",
+                      "comparisonType": "Equals",
+                      "weight": 1,
+                      "isCaseSensitive": false
+                    },
+                    {
+                      "left": "TransactionDate",
+                      "right": "TransactionDate",
+                      "comparisonType": "SameDate",
+                      "weight": 1,
+                      "isCaseSensitive": false
+                    },
+                    {
+                      "left": "SettlementDate",
+                      "right": "SettlementDate",
+                      "comparisonType": "SameDate",
+                      "weight": 1,
+                      "isCaseSensitive": false
+                    },
+                    {
+                      "left": "CounterpartyId",
+                      "right": "CounterpartyId",
+                      "comparisonType": "Equals",
+                      "weight": 1,
+                      "isCaseSensitive": false
+                    },
+                    {
+                      "left": "ExchangeRate",
+                      "right": "ExchangeRate",
+                      "comparisonType": "WithinPercentage",
+                      "comparisonValue": 0.5,
+                      "weight": 1,
+                      "isCaseSensitive": false
+                    },
+                    {
+                      "left": "Type",
+                      "right": "Type",
+                      "comparisonType": "MappedString",
+                      "weight": 1,
+                      "mappedStrings": [
+                        {
+                          "leftValue": "Buy",
+                          "rightValue": "Purchase",
+                          "mappingDirection": "BothWays",
+                          "isCaseSensitive": false
+                        }
+                      ],
+                      "isCaseSensitive": false
+                    }
+                  ]
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "The details of the input related failure",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/LusidValidationProblemDetails"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/LusidValidationProblemDetails"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/LusidValidationProblemDetails"
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "Error response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/LusidProblemDetails"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "oauth2": []
+          }
+        ],
+        "x-fbn-apistatus": "EarlyAccess"
+      },
+      "delete": {
+        "tags": [
+          "Reconciliations"
+        ],
+        "summary": "[EARLY ACCESS] DeleteReconciliationMapping: Delete a mapping",
+        "description": "Deletes the mapping identified by the scope and code",
+        "operationId": "DeleteReconciliationMapping",
+        "parameters": [
+          {
+            "name": "scope",
+            "in": "path",
+            "description": "The scope of the mapping.",
+            "required": true,
+            "schema": {
+              "maxLength": 64,
+              "minLength": 1,
+              "pattern": "^[a-zA-Z0-9\\-_]+$",
+              "type": "string"
+            }
+          },
+          {
+            "name": "code",
+            "in": "path",
+            "description": "The code fof the mapping.",
+            "required": true,
+            "schema": {
+              "maxLength": 64,
+              "minLength": 1,
+              "pattern": "^[a-zA-Z0-9\\-_]+$",
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "A string specifying the scope and code that were deleted",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "type": "string"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "type": "string"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "type": "string"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "The details of the input related failure",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/LusidValidationProblemDetails"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/LusidValidationProblemDetails"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/LusidValidationProblemDetails"
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "Error response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/LusidProblemDetails"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "oauth2": []
+          }
+        ],
+        "x-fbn-apistatus": "EarlyAccess"
       }
     },
     "/api/portfolios/{scope}": {
@@ -71133,6 +72924,118 @@
         "additionalProperties": false,
         "description": "A description of a problem that has arisen whilst validating a request"
       },
+      "MappedString": {
+        "type": "object",
+        "properties": {
+          "leftValue": {
+            "type": "string",
+            "nullable": true
+          },
+          "rightValue": {
+            "type": "string",
+            "nullable": true
+          },
+          "mappingDirection": {
+            "type": "string",
+            "nullable": true
+          },
+          "isCaseSensitive": {
+            "type": "boolean"
+          }
+        },
+        "additionalProperties": false
+      },
+      "Mapping": {
+        "required": [
+          "code",
+          "name",
+          "reconciliationType",
+          "scope"
+        ],
+        "type": "object",
+        "properties": {
+          "scope": {
+            "maxLength": 64,
+            "minLength": 1,
+            "pattern": "^[a-zA-Z0-9\\-_]+$",
+            "type": "string",
+            "description": "The scope for this mapping."
+          },
+          "code": {
+            "maxLength": 64,
+            "minLength": 1,
+            "pattern": "^[a-zA-Z0-9\\-_]+$",
+            "type": "string",
+            "description": "The code for this mapping."
+          },
+          "name": {
+            "minLength": 1,
+            "pattern": "^[\\s\\S]*$",
+            "type": "string",
+            "description": "The mapping name"
+          },
+          "reconciliationType": {
+            "minLength": 1,
+            "type": "string",
+            "description": "What type of reconciliation this mapping is for"
+          },
+          "rules": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/MappingRule"
+            },
+            "description": "The rules in this mapping, keyed by the left field/property name",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false,
+        "description": "Defines the rule set to be used to determine if entries should be considered as a match."
+      },
+      "MappingRule": {
+        "type": "object",
+        "properties": {
+          "left": {
+            "type": "string",
+            "description": "The name of the field/property in the left resource (e.g. a transaction)",
+            "nullable": true
+          },
+          "right": {
+            "type": "string",
+            "description": "The name of the field/property in the right resource (e.g. a transaction)",
+            "nullable": true
+          },
+          "comparisonType": {
+            "type": "string",
+            "description": "The type of comparison to be performed",
+            "nullable": true
+          },
+          "comparisonValue": {
+            "type": "number",
+            "description": "The (optional) value used with Finbourne.WebApi.Interface.Dto.Mappings.MappingRule.ComparisonType",
+            "format": "double",
+            "nullable": true
+          },
+          "weight": {
+            "type": "number",
+            "description": "A factor used to influence the importance of this item.",
+            "format": "double"
+          },
+          "mappedStrings": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/MappedString"
+            },
+            "description": "The (optional) value used to map string values.",
+            "nullable": true
+          },
+          "isCaseSensitive": {
+            "type": "boolean",
+            "description": "Should string comparisons take case into account, defaults to `false`."
+          }
+        },
+        "additionalProperties": false,
+        "description": "An individual mapping rule, for mapping between a left and right field/property."
+      },
       "MarketContext": {
         "type": "object",
         "properties": {
@@ -74914,6 +76817,32 @@
         ],
         "description": "Comparison of date time values"
       },
+      "ReconciledTransaction": {
+        "type": "object",
+        "properties": {
+          "left": {
+            "$ref": "#/components/schemas/Transaction"
+          },
+          "right": {
+            "$ref": "#/components/schemas/Transaction"
+          },
+          "percentageMatch": {
+            "type": "number",
+            "description": "How good a match this is considered to be.",
+            "format": "double"
+          },
+          "mappingRuleSetResults": {
+            "type": "array",
+            "items": {
+              "type": "boolean"
+            },
+            "description": "The result of each individual mapping rule result.\r\nWill only be present if both Finbourne.WebApi.Interface.Dto.Reconciliation.ReconciledTransaction.Left and Finbourne.WebApi.Interface.Dto.Reconciliation.ReconciledTransaction.Right are populated.",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false,
+        "description": "Information about reconciled transactions.\r\nAt least one of Finbourne.WebApi.Interface.Dto.Reconciliation.ReconciledTransaction.Left and Finbourne.WebApi.Interface.Dto.Reconciliation.ReconciledTransaction.Right will be populated."
+      },
       "ReconcileNumericRule": {
         "allOf": [
           {
@@ -76572,6 +78501,47 @@
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/LegalEntity"
+            },
+            "description": "The resources to list."
+          },
+          "href": {
+            "type": "string",
+            "description": "The URI of the resource list.",
+            "format": "uri",
+            "nullable": true
+          },
+          "links": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Link"
+            },
+            "description": "Collection of links.",
+            "nullable": true
+          },
+          "nextPage": {
+            "type": "string",
+            "description": "The next page of results.",
+            "nullable": true
+          },
+          "previousPage": {
+            "type": "string",
+            "description": "The previous page of results.",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false,
+        "description": "A collection of resources that can be returned from requests."
+      },
+      "ResourceListOfMapping": {
+        "required": [
+          "values"
+        ],
+        "type": "object",
+        "properties": {
+          "values": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Mapping"
             },
             "description": "The resources to list."
           },
@@ -78804,6 +80774,49 @@
         },
         "additionalProperties": false
       },
+      "TransactionReconciliationRequest": {
+        "required": [
+          "fromTransactionDate",
+          "leftPortfolioId",
+          "rightPortfolioId",
+          "toTransactionDate"
+        ],
+        "type": "object",
+        "properties": {
+          "leftPortfolioId": {
+            "$ref": "#/components/schemas/ResourceId"
+          },
+          "rightPortfolioId": {
+            "$ref": "#/components/schemas/ResourceId"
+          },
+          "mappingId": {
+            "$ref": "#/components/schemas/ResourceId"
+          },
+          "fromTransactionDate": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "toTransactionDate": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "asAt": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          },
+          "propertyKeys": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "description": "The key that uniquely identifies the property. It has the format {domain}/{scope}/{code}."
+            },
+            "nullable": true
+          }
+        },
+        "additionalProperties": false,
+        "description": "Specifies the parameter to be use when performing a Transaction Reconciliation."
+      },
       "TransactionRequest": {
         "required": [
           "instrumentIdentifiers",
@@ -78932,6 +80945,23 @@
         },
         "additionalProperties": false,
         "description": "A collection of the data required to configure transaction types.."
+      },
+      "TransactionsReconciliationsResponse": {
+        "type": "object",
+        "properties": {
+          "mapping": {
+            "$ref": "#/components/schemas/Mapping"
+          },
+          "data": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ReconciledTransaction"
+            },
+            "description": "The result of this reconciliation",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
       },
       "TransitionEvent": {
         "allOf": [
