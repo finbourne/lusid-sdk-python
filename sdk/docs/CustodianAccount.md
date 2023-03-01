@@ -10,7 +10,6 @@ Name | Type | Description | Notes
 **account_name** | **str** | The identifiable name given to the Custodian Account | 
 **accounting_method** | **str** | The Accounting method to be used | 
 **currency** | **str** | The Currency for the Account | 
-**account_type** | **str** | The Type of the Custodian Account. Can be Margin, Cash or Swap. Defaults to Margin. | 
 **properties** | [**dict(str, ModelProperty)**](ModelProperty.md) | Set of unique Custodian Account properties and associated values to store with the Custodian Account. Each property must be from the &#39;CustodianAccount&#39; domain. | [optional] 
 **custodian** | [**LegalEntity**](LegalEntity.md) |  | 
 
