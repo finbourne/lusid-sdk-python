@@ -9,7 +9,7 @@
       "url": "https://www.finbourne.com",
       "email": "info@finbourne.com"
     },
-    "version": "0.11.5294",
+    "version": "0.11.5295",
     "x-logo": {
       "url": "https://www.lusid.com/app/assets/logo_white.png",
       "backgroundColor": "#415464"
@@ -66588,6 +66588,7 @@
           "accountingMethod",
           "accountName",
           "accountNumber",
+          "accountType",
           "currency",
           "custodian",
           "custodianAccountId",
@@ -66633,6 +66634,11 @@
           },
           "custodian": {
             "$ref": "#/components/schemas/LegalEntity"
+          },
+          "accountType": {
+            "minLength": 1,
+            "type": "string",
+            "description": "The Type of the Custodian Account. Can be Margin, Cash or Swap. Defaults to Margin."
           }
         },
         "additionalProperties": false

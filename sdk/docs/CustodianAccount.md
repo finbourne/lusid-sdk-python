@@ -12,6 +12,7 @@ Name | Type | Description | Notes
 **currency** | **str** | The Currency for the Account | 
 **properties** | [**dict(str, ModelProperty)**](ModelProperty.md) | Set of unique Custodian Account properties and associated values to store with the Custodian Account. Each property must be from the &#39;CustodianAccount&#39; domain. | [optional] 
 **custodian** | [**LegalEntity**](LegalEntity.md) |  | 
+**account_type** | **str** | The Type of the Custodian Account. Can be Margin, Cash or Swap. Defaults to Margin. | 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 
