@@ -9,7 +9,7 @@
       "url": "https://www.finbourne.com",
       "email": "info@finbourne.com"
     },
-    "version": "0.11.5301",
+    "version": "0.11.5302",
     "x-logo": {
       "url": "https://www.lusid.com/app/assets/logo_white.png",
       "backgroundColor": "#415464"
@@ -1164,7 +1164,12 @@
                       },
                       "version": {
                         "effectiveFrom": "2018-03-05T10:10:10.0000000+00:00",
-                        "asAtDate": "2018-03-05T10:10:10.0000000+00:00"
+                        "asAtDate": "2018-03-05T10:10:10.0000000+00:00",
+                        "asAtCreated": "2018-03-05T10:10:10.0000000+00:00",
+                        "userIdCreated": "AllocationUser1",
+                        "asAtModified": "2018-03-08T10:10:10.0000000+00:00",
+                        "userIdModified": "AllocationUser2",
+                        "asAtVersionNumber": 2
                       },
                       "properties": {
                         "Allocation/MyScope/SomeAllocationProperty": {
@@ -1228,7 +1233,12 @@
                       },
                       "version": {
                         "effectiveFrom": "2018-03-05T10:10:10.0000000+00:00",
-                        "asAtDate": "2018-03-05T10:10:10.0000000+00:00"
+                        "asAtDate": "2018-03-05T10:10:10.0000000+00:00",
+                        "asAtCreated": "2018-03-05T10:10:10.0000000+00:00",
+                        "userIdCreated": "AllocationUser1",
+                        "asAtModified": "2018-03-08T10:10:10.0000000+00:00",
+                        "userIdModified": "AllocationUser2",
+                        "asAtVersionNumber": 2
                       },
                       "properties": {
                         "Allocation/MyScope/SomeAllocationProperty": {
@@ -1292,7 +1302,12 @@
                       },
                       "version": {
                         "effectiveFrom": "2018-03-05T10:10:10.0000000+00:00",
-                        "asAtDate": "2018-03-05T10:10:10.0000000+00:00"
+                        "asAtDate": "2018-03-05T10:10:10.0000000+00:00",
+                        "asAtCreated": "2018-03-05T10:10:10.0000000+00:00",
+                        "userIdCreated": "AllocationUser1",
+                        "asAtModified": "2018-03-08T10:10:10.0000000+00:00",
+                        "userIdModified": "AllocationUser2",
+                        "asAtVersionNumber": 2
                       },
                       "properties": {
                         "Allocation/MyScope/SomeAllocationProperty": {
@@ -1455,7 +1470,12 @@
                   },
                   "version": {
                     "effectiveFrom": "2018-03-05T10:10:10.0000000+00:00",
-                    "asAtDate": "2018-03-05T10:10:10.0000000+00:00"
+                    "asAtDate": "2018-03-05T10:10:10.0000000+00:00",
+                    "asAtCreated": "2018-03-05T10:10:10.0000000+00:00",
+                    "userIdCreated": "AllocationUser1",
+                    "asAtModified": "2018-03-08T10:10:10.0000000+00:00",
+                    "userIdModified": "AllocationUser2",
+                    "asAtVersionNumber": 2
                   },
                   "properties": {
                     "Allocation/MyScope/SomeAllocationProperty": {
@@ -1514,7 +1534,12 @@
                   },
                   "version": {
                     "effectiveFrom": "2018-03-05T10:10:10.0000000+00:00",
-                    "asAtDate": "2018-03-05T10:10:10.0000000+00:00"
+                    "asAtDate": "2018-03-05T10:10:10.0000000+00:00",
+                    "asAtCreated": "2018-03-05T10:10:10.0000000+00:00",
+                    "userIdCreated": "AllocationUser1",
+                    "asAtModified": "2018-03-08T10:10:10.0000000+00:00",
+                    "userIdModified": "AllocationUser2",
+                    "asAtVersionNumber": 2
                   },
                   "properties": {
                     "Allocation/MyScope/SomeAllocationProperty": {
@@ -1573,7 +1598,12 @@
                   },
                   "version": {
                     "effectiveFrom": "2018-03-05T10:10:10.0000000+00:00",
-                    "asAtDate": "2018-03-05T10:10:10.0000000+00:00"
+                    "asAtDate": "2018-03-05T10:10:10.0000000+00:00",
+                    "asAtCreated": "2018-03-05T10:10:10.0000000+00:00",
+                    "userIdCreated": "AllocationUser1",
+                    "asAtModified": "2018-03-08T10:10:10.0000000+00:00",
+                    "userIdModified": "AllocationUser2",
+                    "asAtVersionNumber": 2
                   },
                   "properties": {
                     "Allocation/MyScope/SomeAllocationProperty": {
@@ -2119,7 +2149,12 @@
                       },
                       "version": {
                         "effectiveFrom": "2018-03-05T10:10:10.0000000+00:00",
-                        "asAtDate": "2018-03-05T10:10:10.0000000+00:00"
+                        "asAtDate": "2018-03-05T10:10:10.0000000+00:00",
+                        "asAtCreated": "2018-03-05T10:10:10.0000000+00:00",
+                        "userIdCreated": "BlockUser1",
+                        "asAtModified": "2018-03-08T10:10:10.0000000+00:00",
+                        "userIdModified": "BlockUser2",
+                        "asAtVersionNumber": 2
                       }
                     }
                   ],
@@ -2170,7 +2205,12 @@
                       },
                       "version": {
                         "effectiveFrom": "2018-03-05T10:10:10.0000000+00:00",
-                        "asAtDate": "2018-03-05T10:10:10.0000000+00:00"
+                        "asAtDate": "2018-03-05T10:10:10.0000000+00:00",
+                        "asAtCreated": "2018-03-05T10:10:10.0000000+00:00",
+                        "userIdCreated": "BlockUser1",
+                        "asAtModified": "2018-03-08T10:10:10.0000000+00:00",
+                        "userIdModified": "BlockUser2",
+                        "asAtVersionNumber": 2
                       }
                     }
                   ],
@@ -2221,7 +2261,12 @@
                       },
                       "version": {
                         "effectiveFrom": "2018-03-05T10:10:10.0000000+00:00",
-                        "asAtDate": "2018-03-05T10:10:10.0000000+00:00"
+                        "asAtDate": "2018-03-05T10:10:10.0000000+00:00",
+                        "asAtCreated": "2018-03-05T10:10:10.0000000+00:00",
+                        "userIdCreated": "BlockUser1",
+                        "asAtModified": "2018-03-08T10:10:10.0000000+00:00",
+                        "userIdModified": "BlockUser2",
+                        "asAtVersionNumber": 2
                       }
                     }
                   ],
@@ -2371,7 +2416,12 @@
                   },
                   "version": {
                     "effectiveFrom": "2018-03-05T10:10:10.0000000+00:00",
-                    "asAtDate": "2018-03-05T10:10:10.0000000+00:00"
+                    "asAtDate": "2018-03-05T10:10:10.0000000+00:00",
+                    "asAtCreated": "2018-03-05T10:10:10.0000000+00:00",
+                    "userIdCreated": "BlockUser1",
+                    "asAtModified": "2018-03-08T10:10:10.0000000+00:00",
+                    "userIdModified": "BlockUser2",
+                    "asAtVersionNumber": 2
                   }
                 }
               },
@@ -2417,7 +2467,12 @@
                   },
                   "version": {
                     "effectiveFrom": "2018-03-05T10:10:10.0000000+00:00",
-                    "asAtDate": "2018-03-05T10:10:10.0000000+00:00"
+                    "asAtDate": "2018-03-05T10:10:10.0000000+00:00",
+                    "asAtCreated": "2018-03-05T10:10:10.0000000+00:00",
+                    "userIdCreated": "BlockUser1",
+                    "asAtModified": "2018-03-08T10:10:10.0000000+00:00",
+                    "userIdModified": "BlockUser2",
+                    "asAtVersionNumber": 2
                   }
                 }
               },
@@ -2463,7 +2518,12 @@
                   },
                   "version": {
                     "effectiveFrom": "2018-03-05T10:10:10.0000000+00:00",
-                    "asAtDate": "2018-03-05T10:10:10.0000000+00:00"
+                    "asAtDate": "2018-03-05T10:10:10.0000000+00:00",
+                    "asAtCreated": "2018-03-05T10:10:10.0000000+00:00",
+                    "userIdCreated": "BlockUser1",
+                    "asAtModified": "2018-03-08T10:10:10.0000000+00:00",
+                    "userIdModified": "BlockUser2",
+                    "asAtVersionNumber": 2
                   }
                 }
               }
@@ -13246,7 +13306,12 @@
                       "averagePrice": 12419.2,
                       "version": {
                         "effectiveFrom": "2018-03-05T10:10:10.0000000+00:00",
-                        "asAtDate": "2018-03-05T10:10:10.0000000+00:00"
+                        "asAtDate": "2018-03-05T10:10:10.0000000+00:00",
+                        "asAtCreated": "2018-03-05T10:10:10.0000000+00:00",
+                        "userIdCreated": "ExecutionUser1",
+                        "asAtModified": "2018-03-08T10:10:10.0000000+00:00",
+                        "userIdModified": "ExecutionUser2",
+                        "asAtVersionNumber": 2
                       }
                     }
                   ],
@@ -13295,7 +13360,12 @@
                       "averagePrice": 12419.2,
                       "version": {
                         "effectiveFrom": "2018-03-05T10:10:10.0000000+00:00",
-                        "asAtDate": "2018-03-05T10:10:10.0000000+00:00"
+                        "asAtDate": "2018-03-05T10:10:10.0000000+00:00",
+                        "asAtCreated": "2018-03-05T10:10:10.0000000+00:00",
+                        "userIdCreated": "ExecutionUser1",
+                        "asAtModified": "2018-03-08T10:10:10.0000000+00:00",
+                        "userIdModified": "ExecutionUser2",
+                        "asAtVersionNumber": 2
                       }
                     }
                   ],
@@ -13344,7 +13414,12 @@
                       "averagePrice": 12419.2,
                       "version": {
                         "effectiveFrom": "2018-03-05T10:10:10.0000000+00:00",
-                        "asAtDate": "2018-03-05T10:10:10.0000000+00:00"
+                        "asAtDate": "2018-03-05T10:10:10.0000000+00:00",
+                        "asAtCreated": "2018-03-05T10:10:10.0000000+00:00",
+                        "userIdCreated": "ExecutionUser1",
+                        "asAtModified": "2018-03-08T10:10:10.0000000+00:00",
+                        "userIdModified": "ExecutionUser2",
+                        "asAtVersionNumber": 2
                       }
                     }
                   ],
@@ -13492,7 +13567,12 @@
                   "averagePrice": 12419.2,
                   "version": {
                     "effectiveFrom": "2018-03-05T10:10:10.0000000+00:00",
-                    "asAtDate": "2018-03-05T10:10:10.0000000+00:00"
+                    "asAtDate": "2018-03-05T10:10:10.0000000+00:00",
+                    "asAtCreated": "2018-03-05T10:10:10.0000000+00:00",
+                    "userIdCreated": "ExecutionUser1",
+                    "asAtModified": "2018-03-08T10:10:10.0000000+00:00",
+                    "userIdModified": "ExecutionUser2",
+                    "asAtVersionNumber": 2
                   }
                 }
               },
@@ -13536,7 +13616,12 @@
                   "averagePrice": 12419.2,
                   "version": {
                     "effectiveFrom": "2018-03-05T10:10:10.0000000+00:00",
-                    "asAtDate": "2018-03-05T10:10:10.0000000+00:00"
+                    "asAtDate": "2018-03-05T10:10:10.0000000+00:00",
+                    "asAtCreated": "2018-03-05T10:10:10.0000000+00:00",
+                    "userIdCreated": "ExecutionUser1",
+                    "asAtModified": "2018-03-08T10:10:10.0000000+00:00",
+                    "userIdModified": "ExecutionUser2",
+                    "asAtVersionNumber": 2
                   }
                 }
               },
@@ -13580,7 +13665,12 @@
                   "averagePrice": 12419.2,
                   "version": {
                     "effectiveFrom": "2018-03-05T10:10:10.0000000+00:00",
-                    "asAtDate": "2018-03-05T10:10:10.0000000+00:00"
+                    "asAtDate": "2018-03-05T10:10:10.0000000+00:00",
+                    "asAtCreated": "2018-03-05T10:10:10.0000000+00:00",
+                    "userIdCreated": "ExecutionUser1",
+                    "asAtModified": "2018-03-08T10:10:10.0000000+00:00",
+                    "userIdModified": "ExecutionUser2",
+                    "asAtVersionNumber": 2
                   }
                 }
               }
@@ -21497,7 +21587,12 @@
                   },
                   "version": {
                     "effectiveFrom": "2018-03-05T10:10:10.0000000+00:00",
-                    "asAtDate": "2018-03-05T10:10:10.0000000+00:00"
+                    "asAtDate": "2018-03-05T10:10:10.0000000+00:00",
+                    "asAtCreated": "2018-03-05T10:10:10.0000000+00:00",
+                    "userIdCreated": "OrderUser1",
+                    "asAtModified": "2018-03-08T10:10:10.0000000+00:00",
+                    "userIdModified": "OrderUser2",
+                    "asAtVersionNumber": 2
                   },
                   "instrumentIdentifiers": {
                     "Instrument/default/Currency": "GBP"
@@ -21549,7 +21644,12 @@
                   },
                   "version": {
                     "effectiveFrom": "2018-03-05T10:10:10.0000000+00:00",
-                    "asAtDate": "2018-03-05T10:10:10.0000000+00:00"
+                    "asAtDate": "2018-03-05T10:10:10.0000000+00:00",
+                    "asAtCreated": "2018-03-05T10:10:10.0000000+00:00",
+                    "userIdCreated": "OrderUser1",
+                    "asAtModified": "2018-03-08T10:10:10.0000000+00:00",
+                    "userIdModified": "OrderUser2",
+                    "asAtVersionNumber": 2
                   },
                   "instrumentIdentifiers": {
                     "Instrument/default/Currency": "GBP"
@@ -21601,7 +21701,12 @@
                   },
                   "version": {
                     "effectiveFrom": "2018-03-05T10:10:10.0000000+00:00",
-                    "asAtDate": "2018-03-05T10:10:10.0000000+00:00"
+                    "asAtDate": "2018-03-05T10:10:10.0000000+00:00",
+                    "asAtCreated": "2018-03-05T10:10:10.0000000+00:00",
+                    "userIdCreated": "OrderUser1",
+                    "asAtModified": "2018-03-08T10:10:10.0000000+00:00",
+                    "userIdModified": "OrderUser2",
+                    "asAtVersionNumber": 2
                   },
                   "instrumentIdentifiers": {
                     "Instrument/default/Currency": "GBP"
@@ -22037,7 +22142,12 @@
                       },
                       "version": {
                         "effectiveFrom": "2018-03-05T10:10:10.0000000+00:00",
-                        "asAtDate": "2018-03-05T10:10:10.0000000+00:00"
+                        "asAtDate": "2018-03-05T10:10:10.0000000+00:00",
+                        "asAtCreated": "2018-03-05T10:10:10.0000000+00:00",
+                        "userIdCreated": "ParticipationUser1",
+                        "asAtModified": "2018-03-08T10:10:10.0000000+00:00",
+                        "userIdModified": "ParticipationUser2",
+                        "asAtVersionNumber": 2
                       }
                     }
                   ],
@@ -22065,7 +22175,12 @@
                       },
                       "version": {
                         "effectiveFrom": "2018-03-05T10:10:10.0000000+00:00",
-                        "asAtDate": "2018-03-05T10:10:10.0000000+00:00"
+                        "asAtDate": "2018-03-05T10:10:10.0000000+00:00",
+                        "asAtCreated": "2018-03-05T10:10:10.0000000+00:00",
+                        "userIdCreated": "ParticipationUser1",
+                        "asAtModified": "2018-03-08T10:10:10.0000000+00:00",
+                        "userIdModified": "ParticipationUser2",
+                        "asAtVersionNumber": 2
                       }
                     }
                   ],
@@ -22093,7 +22208,12 @@
                       },
                       "version": {
                         "effectiveFrom": "2018-03-05T10:10:10.0000000+00:00",
-                        "asAtDate": "2018-03-05T10:10:10.0000000+00:00"
+                        "asAtDate": "2018-03-05T10:10:10.0000000+00:00",
+                        "asAtCreated": "2018-03-05T10:10:10.0000000+00:00",
+                        "userIdCreated": "ParticipationUser1",
+                        "asAtModified": "2018-03-08T10:10:10.0000000+00:00",
+                        "userIdModified": "ParticipationUser2",
+                        "asAtVersionNumber": 2
                       }
                     }
                   ],
@@ -22220,7 +22340,12 @@
                   },
                   "version": {
                     "effectiveFrom": "2018-03-05T10:10:10.0000000+00:00",
-                    "asAtDate": "2018-03-05T10:10:10.0000000+00:00"
+                    "asAtDate": "2018-03-05T10:10:10.0000000+00:00",
+                    "asAtCreated": "2018-03-05T10:10:10.0000000+00:00",
+                    "userIdCreated": "ParticipationUser1",
+                    "asAtModified": "2018-03-08T10:10:10.0000000+00:00",
+                    "userIdModified": "ParticipationUser2",
+                    "asAtVersionNumber": 2
                   }
                 }
               },
@@ -22243,7 +22368,12 @@
                   },
                   "version": {
                     "effectiveFrom": "2018-03-05T10:10:10.0000000+00:00",
-                    "asAtDate": "2018-03-05T10:10:10.0000000+00:00"
+                    "asAtDate": "2018-03-05T10:10:10.0000000+00:00",
+                    "asAtCreated": "2018-03-05T10:10:10.0000000+00:00",
+                    "userIdCreated": "ParticipationUser1",
+                    "asAtModified": "2018-03-08T10:10:10.0000000+00:00",
+                    "userIdModified": "ParticipationUser2",
+                    "asAtVersionNumber": 2
                   }
                 }
               },
@@ -22266,7 +22396,12 @@
                   },
                   "version": {
                     "effectiveFrom": "2018-03-05T10:10:10.0000000+00:00",
-                    "asAtDate": "2018-03-05T10:10:10.0000000+00:00"
+                    "asAtDate": "2018-03-05T10:10:10.0000000+00:00",
+                    "asAtCreated": "2018-03-05T10:10:10.0000000+00:00",
+                    "userIdCreated": "ParticipationUser1",
+                    "asAtModified": "2018-03-08T10:10:10.0000000+00:00",
+                    "userIdModified": "ParticipationUser2",
+                    "asAtVersionNumber": 2
                   }
                 }
               }
