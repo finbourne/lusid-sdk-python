@@ -9,7 +9,7 @@
       "url": "https://www.finbourne.com",
       "email": "info@finbourne.com"
     },
-    "version": "0.11.5319",
+    "version": "0.11.5320",
     "x-logo": {
       "url": "https://www.lusid.com/app/assets/logo_white.png",
       "backgroundColor": "#415464"
@@ -79932,38 +79932,52 @@
         "description": "LUSID representation of a Simple Instrument, used as a basic definition of a generic instrument.\r\nNo analytics can be obtained for this."
       },
       "StepSchedule": {
-        "required": [
-          "levelType",
-          "scheduleType",
-          "steps",
-          "stepScheduleType"
-        ],
-        "type": "object",
-        "properties": {
-          "levelType": {
-            "minLength": 1,
-            "type": "string",
-            "description": "The type of shift or adjustment that the quantity represents.\r\n\r\nSupported string (enumeration) values are: [Absolute, AbsoluteShift, Percentage, AbsolutePercentage]."
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/Schedule"
           },
-          "scheduleType": {
-            "minLength": 1,
-            "type": "string",
-            "description": "What type of schedule does this represent.\r\nSupported string (enumeration) values are: [Fixed, Float, Optionality, Step, Payment, Accrual]."
-          },
-          "stepScheduleType": {
-            "minLength": 1,
-            "type": "string",
-            "description": "The type of step that this schedule is for.\r\nSupported string (enumeration) values are: [Coupon, Notional, Spread]."
-          },
-          "steps": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/LevelStep"
-            },
-            "description": "The level steps which are applied."
+          {
+            "required": [
+              "levelType",
+              "scheduleType",
+              "steps",
+              "stepScheduleType"
+            ],
+            "type": "object",
+            "properties": {
+              "levelType": {
+                "minLength": 1,
+                "type": "string",
+                "description": "The type of shift or adjustment that the quantity represents.\r\n\r\nSupported string (enumeration) values are: [Absolute, AbsoluteShift, Percentage, AbsolutePercentage]."
+              },
+              "stepScheduleType": {
+                "minLength": 1,
+                "type": "string",
+                "description": "The type of step that this schedule is for.\r\nSupported string (enumeration) values are: [Coupon, Notional, Spread]."
+              },
+              "steps": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/components/schemas/LevelStep"
+                },
+                "description": "The level steps which are applied."
+              },
+              "scheduleType": {
+                "enum": [
+                  "Fixed",
+                  "Float",
+                  "Optionality",
+                  "Step",
+                  "Exercise",
+                  "FxRate",
+                  "Invalid"
+                ],
+                "type": "string",
+                "description": "The available values are: Fixed, Float, Optionality, Step, Exercise, FxRate, Invalid"
+              }
+            }
           }
-        },
-        "additionalProperties": false,
+        ],
         "description": "Schedule that steps at known dated points in time.\r\nUsed in representation of a sinking bond, also called amortisation, steps in coupons for fixed bonds and spreads for floating bonds."
       },
       "StockSplitEvent": {
