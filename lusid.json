@@ -9,7 +9,7 @@
       "url": "https://www.finbourne.com",
       "email": "info@finbourne.com"
     },
-    "version": "0.11.5324",
+    "version": "0.11.5325",
     "x-logo": {
       "url": "https://www.lusid.com/app/assets/logo_white.png",
       "backgroundColor": "#415464"
@@ -42329,7 +42329,8 @@
                               "modelOptions": {
                                 "modelOptionsType": "EmptyModelOptions"
                               },
-                              "instrumentId": ""
+                              "instrumentId": "",
+                              "addressKeyFilters": []
                             }
                           ],
                           "modelChoice": {},
@@ -42482,7 +42483,8 @@
                               "modelOptions": {
                                 "modelOptionsType": "EmptyModelOptions"
                               },
-                              "instrumentId": ""
+                              "instrumentId": "",
+                              "addressKeyFilters": []
                             }
                           ],
                           "modelChoice": {},
@@ -42635,7 +42637,8 @@
                               "modelOptions": {
                                 "modelOptionsType": "EmptyModelOptions"
                               },
-                              "instrumentId": ""
+                              "instrumentId": "",
+                              "addressKeyFilters": []
                             }
                           ],
                           "modelChoice": {},
@@ -42875,7 +42878,8 @@
                           "modelOptions": {
                             "modelOptionsType": "EmptyModelOptions"
                           },
-                          "instrumentId": ""
+                          "instrumentId": "",
+                          "addressKeyFilters": []
                         }
                       ],
                       "modelChoice": {},
@@ -42953,7 +42957,8 @@
                           "modelOptions": {
                             "modelOptionsType": "EmptyModelOptions"
                           },
-                          "instrumentId": ""
+                          "instrumentId": "",
+                          "addressKeyFilters": []
                         }
                       ],
                       "modelChoice": {},
@@ -43031,7 +43036,8 @@
                           "modelOptions": {
                             "modelOptionsType": "EmptyModelOptions"
                           },
-                          "instrumentId": ""
+                          "instrumentId": "",
+                          "addressKeyFilters": []
                         }
                       ],
                       "modelChoice": {},
@@ -62271,6 +62277,28 @@
         },
         "additionalProperties": false
       },
+      "AddressKeyFilter": {
+        "type": "object",
+        "properties": {
+          "left": {
+            "type": "string",
+            "description": "Address for the value in the row",
+            "nullable": true
+          },
+          "operator": {
+            "maxLength": 2,
+            "minLength": 0,
+            "type": "string",
+            "description": "What sort of comparison is the filter preforming",
+            "nullable": true
+          },
+          "right": {
+            "$ref": "#/components/schemas/ResultValue"
+          }
+        },
+        "additionalProperties": false,
+        "description": "Class specifying a filtering operation"
+      },
       "AdjustHolding": {
         "required": [
           "version"
@@ -64141,6 +64169,48 @@
           }
         ],
         "description": "Result class for a cash flow value"
+      },
+      "CashFlowValueSet": {
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/ResultValue"
+          },
+          {
+            "required": [
+              "resultValueType"
+            ],
+            "type": "object",
+            "properties": {
+              "cashflows": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/components/schemas/CashFlowValue"
+                },
+                "description": "The set of cash flows in the result",
+                "nullable": true
+              },
+              "resultValueType": {
+                "enum": [
+                  "ResultValue",
+                  "ResultValueDictionary",
+                  "ResultValue0D",
+                  "ResultValueDecimal",
+                  "ResultValueInt",
+                  "ResultValueString",
+                  "ResultValueBool",
+                  "ResultValueCurrency",
+                  "CashFlowValue",
+                  "CashFlowValueSet",
+                  "ResultValueLifeCycleEventValue",
+                  "ResultValueDateTimeOffset"
+                ],
+                "type": "string",
+                "description": "The available values are: ResultValue, ResultValueDictionary, ResultValue0D, ResultValueDecimal, ResultValueInt, ResultValueString, ResultValueBool, ResultValueCurrency, CashFlowValue, CashFlowValueSet, ResultValueLifeCycleEventValue, ResultValueDateTimeOffset"
+              }
+            }
+          }
+        ],
+        "description": "Result value for a collection of cash flow values"
       },
       "CashLadderRecord": {
         "required": [
@@ -79553,6 +79623,223 @@
           "propertyName": "resultValueType"
         }
       },
+      "ResultValue0D": {
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/ResultValue"
+          },
+          {
+            "required": [
+              "resultValueType"
+            ],
+            "type": "object",
+            "properties": {
+              "units": {
+                "type": "string",
+                "description": "Unit of the result",
+                "nullable": true
+              },
+              "value": {
+                "type": "number",
+                "description": "The value of the result",
+                "format": "double"
+              },
+              "dimension": {
+                "type": "integer",
+                "description": "The dimension of the result. Can be null if there is no sensible way of defining the dimension. This field should not be\r\npopulate by the user on upsertion.",
+                "format": "int32",
+                "nullable": true
+              },
+              "resultValueType": {
+                "enum": [
+                  "ResultValue",
+                  "ResultValueDictionary",
+                  "ResultValue0D",
+                  "ResultValueDecimal",
+                  "ResultValueInt",
+                  "ResultValueString",
+                  "ResultValueBool",
+                  "ResultValueCurrency",
+                  "CashFlowValue",
+                  "CashFlowValueSet",
+                  "ResultValueLifeCycleEventValue",
+                  "ResultValueDateTimeOffset"
+                ],
+                "type": "string",
+                "description": "The available values are: ResultValue, ResultValueDictionary, ResultValue0D, ResultValueDecimal, ResultValueInt, ResultValueString, ResultValueBool, ResultValueCurrency, CashFlowValue, CashFlowValueSet, ResultValueLifeCycleEventValue, ResultValueDateTimeOffset"
+              }
+            }
+          }
+        ],
+        "description": "Result value representing a 0D result. These results can be equipped with a unit"
+      },
+      "ResultValueBool": {
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/ResultValue"
+          },
+          {
+            "required": [
+              "resultValueType"
+            ],
+            "type": "object",
+            "properties": {
+              "value": {
+                "type": "boolean",
+                "description": "The value itself"
+              },
+              "resultValueType": {
+                "enum": [
+                  "ResultValue",
+                  "ResultValueDictionary",
+                  "ResultValue0D",
+                  "ResultValueDecimal",
+                  "ResultValueInt",
+                  "ResultValueString",
+                  "ResultValueBool",
+                  "ResultValueCurrency",
+                  "CashFlowValue",
+                  "CashFlowValueSet",
+                  "ResultValueLifeCycleEventValue",
+                  "ResultValueDateTimeOffset"
+                ],
+                "type": "string",
+                "description": "The available values are: ResultValue, ResultValueDictionary, ResultValue0D, ResultValueDecimal, ResultValueInt, ResultValueString, ResultValueBool, ResultValueCurrency, CashFlowValue, CashFlowValueSet, ResultValueLifeCycleEventValue, ResultValueDateTimeOffset"
+              }
+            }
+          }
+        ],
+        "description": "A simple result for a boolean value"
+      },
+      "ResultValueCurrency": {
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/ResultValue"
+          },
+          {
+            "required": [
+              "resultValueType"
+            ],
+            "type": "object",
+            "properties": {
+              "value": {
+                "type": "string",
+                "description": "The value itself",
+                "nullable": true
+              },
+              "resultValueType": {
+                "enum": [
+                  "ResultValue",
+                  "ResultValueDictionary",
+                  "ResultValue0D",
+                  "ResultValueDecimal",
+                  "ResultValueInt",
+                  "ResultValueString",
+                  "ResultValueBool",
+                  "ResultValueCurrency",
+                  "CashFlowValue",
+                  "CashFlowValueSet",
+                  "ResultValueLifeCycleEventValue",
+                  "ResultValueDateTimeOffset"
+                ],
+                "type": "string",
+                "description": "The available values are: ResultValue, ResultValueDictionary, ResultValue0D, ResultValueDecimal, ResultValueInt, ResultValueString, ResultValueBool, ResultValueCurrency, CashFlowValue, CashFlowValueSet, ResultValueLifeCycleEventValue, ResultValueDateTimeOffset"
+              }
+            }
+          }
+        ],
+        "description": "A simple result for a currency value"
+      },
+      "ResultValueDateTimeOffset": {
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/ResultValue"
+          },
+          {
+            "required": [
+              "resultValueType"
+            ],
+            "type": "object",
+            "properties": {
+              "value": {
+                "type": "string",
+                "description": "The value itself",
+                "format": "date-time"
+              },
+              "dimension": {
+                "type": "integer",
+                "description": "The dimension of the result. Can be null if there is no sensible way of defining the dimension. This field should not be\r\npopulate by the user on upsertion.",
+                "format": "int32",
+                "nullable": true
+              },
+              "resultValueType": {
+                "enum": [
+                  "ResultValue",
+                  "ResultValueDictionary",
+                  "ResultValue0D",
+                  "ResultValueDecimal",
+                  "ResultValueInt",
+                  "ResultValueString",
+                  "ResultValueBool",
+                  "ResultValueCurrency",
+                  "CashFlowValue",
+                  "CashFlowValueSet",
+                  "ResultValueLifeCycleEventValue",
+                  "ResultValueDateTimeOffset"
+                ],
+                "type": "string",
+                "description": "The available values are: ResultValue, ResultValueDictionary, ResultValue0D, ResultValueDecimal, ResultValueInt, ResultValueString, ResultValueBool, ResultValueCurrency, CashFlowValue, CashFlowValueSet, ResultValueLifeCycleEventValue, ResultValueDateTimeOffset"
+              }
+            }
+          }
+        ],
+        "description": "A simple result for a date time value"
+      },
+      "ResultValueDecimal": {
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/ResultValue"
+          },
+          {
+            "required": [
+              "resultValueType"
+            ],
+            "type": "object",
+            "properties": {
+              "value": {
+                "type": "number",
+                "description": "The value itself",
+                "format": "double"
+              },
+              "dimension": {
+                "type": "integer",
+                "description": "The dimension of the result. Can be null if there is no sensible way of defining the dimension. This field should not be\r\npopulate by the user on upsertion.",
+                "format": "int32",
+                "nullable": true
+              },
+              "resultValueType": {
+                "enum": [
+                  "ResultValue",
+                  "ResultValueDictionary",
+                  "ResultValue0D",
+                  "ResultValueDecimal",
+                  "ResultValueInt",
+                  "ResultValueString",
+                  "ResultValueBool",
+                  "ResultValueCurrency",
+                  "CashFlowValue",
+                  "CashFlowValueSet",
+                  "ResultValueLifeCycleEventValue",
+                  "ResultValueDateTimeOffset"
+                ],
+                "type": "string",
+                "description": "The available values are: ResultValue, ResultValueDictionary, ResultValue0D, ResultValueDecimal, ResultValueInt, ResultValueString, ResultValueBool, ResultValueCurrency, CashFlowValue, CashFlowValueSet, ResultValueLifeCycleEventValue, ResultValueDateTimeOffset"
+              }
+            }
+          }
+        ],
+        "description": "A simple result for a decimal value"
+      },
       "ResultValueDictionary": {
         "allOf": [
           {
@@ -79594,6 +79881,90 @@
           }
         ],
         "description": "Result value for a collection of key-value pairs. Used for diagnostics associated to a cash flow, etc."
+      },
+      "ResultValueInt": {
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/ResultValue"
+          },
+          {
+            "required": [
+              "resultValueType"
+            ],
+            "type": "object",
+            "properties": {
+              "value": {
+                "type": "integer",
+                "description": "The value itself",
+                "format": "int32"
+              },
+              "dimension": {
+                "type": "integer",
+                "description": "The dimension of the result. Can be null if there is no sensible way of defining the dimension. This field should not be\r\npopulate by the user on upsertion.",
+                "format": "int32",
+                "nullable": true
+              },
+              "resultValueType": {
+                "enum": [
+                  "ResultValue",
+                  "ResultValueDictionary",
+                  "ResultValue0D",
+                  "ResultValueDecimal",
+                  "ResultValueInt",
+                  "ResultValueString",
+                  "ResultValueBool",
+                  "ResultValueCurrency",
+                  "CashFlowValue",
+                  "CashFlowValueSet",
+                  "ResultValueLifeCycleEventValue",
+                  "ResultValueDateTimeOffset"
+                ],
+                "type": "string",
+                "description": "The available values are: ResultValue, ResultValueDictionary, ResultValue0D, ResultValueDecimal, ResultValueInt, ResultValueString, ResultValueBool, ResultValueCurrency, CashFlowValue, CashFlowValueSet, ResultValueLifeCycleEventValue, ResultValueDateTimeOffset"
+              }
+            }
+          }
+        ],
+        "description": "A simple result type which holds an integer"
+      },
+      "ResultValueString": {
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/ResultValue"
+          },
+          {
+            "required": [
+              "resultValueType"
+            ],
+            "type": "object",
+            "properties": {
+              "value": {
+                "type": "string",
+                "description": "the value itself",
+                "nullable": true
+              },
+              "resultValueType": {
+                "enum": [
+                  "ResultValue",
+                  "ResultValueDictionary",
+                  "ResultValue0D",
+                  "ResultValueDecimal",
+                  "ResultValueInt",
+                  "ResultValueString",
+                  "ResultValueBool",
+                  "ResultValueCurrency",
+                  "CashFlowValue",
+                  "CashFlowValueSet",
+                  "ResultValueLifeCycleEventValue",
+                  "ResultValueDateTimeOffset"
+                ],
+                "type": "string",
+                "description": "The available values are: ResultValue, ResultValueDictionary, ResultValue0D, ResultValueDecimal, ResultValueInt, ResultValueString, ResultValueBool, ResultValueCurrency, CashFlowValue, CashFlowValueSet, ResultValueLifeCycleEventValue, ResultValueDateTimeOffset"
+              }
+            }
+          }
+        ],
+        "description": "A simple result value holding a string"
       },
       "Schedule": {
         "required": [
@@ -82509,6 +82880,14 @@
           "instrumentId": {
             "type": "string",
             "description": "This field should generally not be required. It indicates a specific case where there is a particular need to make a rule apply to only a single instrument\r\nspecified by an identifier on that instrument such as its LUID. One particular example would be to control the behaviour of a look-through portfolio scaling\r\nmethodology, such as where there is a mixture of indices and credit-debit portfolios where scaling on the sum of valuation would be deemed incorrectly for one\r\nset but desired in general.",
+            "nullable": true
+          },
+          "addressKeyFilters": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/AddressKeyFilter"
+            },
+            "description": "Condition for model selection. If a condition is satisfied the default model for valuation is overridden (for that instrument).",
             "nullable": true
           }
         },
