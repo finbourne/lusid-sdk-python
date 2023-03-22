@@ -14,7 +14,6 @@ Name | Type | Description | Notes
 **settle_days** | **int** | Number of Good Business Days between the trade date and the effective or settlement date of the instrument. | 
 **reset_days** | **int** | The number of Good Business Days between determination and payment of reset. | 
 **leap_days_included** | **bool** | If this flag is set to true, the 29th of February is included in the date schedule when the business roll convention is applied.  If this flag is set to false, the business roll convention ignores February 29 for date schedules, cash flow payments etc.  This flag defaults to true if not specified, i.e., leap days are included in a date schedule generation. | [optional] 
-**accrual_date_adjustment** | **str** | Indicates if the accrual dates are adjusted to the payment dates. The default value is &#39;Adjusted&#39;.    Supported string (enumeration) values are: [Adjusted, Unadjusted]. | [optional] 
 **scope** | **str** | The scope used when updating or inserting the convention. | [optional] 
 **code** | **str** | The code of the convention. | [optional] 
 
