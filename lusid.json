@@ -9,7 +9,7 @@
       "url": "https://www.finbourne.com",
       "email": "info@finbourne.com"
     },
-    "version": "1.0.16",
+    "version": "1.0.17",
     "x-logo": {
       "url": "https://www.lusid.com/app/assets/logo_white.png",
       "backgroundColor": "#415464"
@@ -70330,6 +70330,13 @@
           "leapDaysIncluded": {
             "type": "boolean",
             "description": "If this flag is set to true, the 29th of February is included in the date schedule when the business roll convention is applied.\r\nIf this flag is set to false, the business roll convention ignores February 29 for date schedules, cash flow payments etc.\r\nThis flag defaults to true if not specified, i.e., leap days are included in a date schedule generation.",
+            "nullable": true
+          },
+          "accrualDateAdjustment": {
+            "maxLength": 50,
+            "minLength": 0,
+            "type": "string",
+            "description": "Indicates if the accrual dates are adjusted to the payment dates. The default value is 'Adjusted'.\r\n\r\nSupported string (enumeration) values are: [Adjusted, Unadjusted].",
             "nullable": true
           },
           "scope": {
