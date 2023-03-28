@@ -9,7 +9,7 @@
       "url": "https://www.finbourne.com",
       "email": "info@finbourne.com"
     },
-    "version": "1.0.31",
+    "version": "1.0.32",
     "x-logo": {
       "url": "https://www.lusid.com/app/assets/logo_white.png",
       "backgroundColor": "#415464"
@@ -41205,16 +41205,79 @@
               "text/plain": {
                 "schema": {
                   "$ref": "#/components/schemas/PropertyDefinition"
+                },
+                "example": {
+                  "href": "https://example.lusid.com/api/properties/demo-scope/demo-code",
+                  "key": "Instrument/default/MyDerivedPropertyName",
+                  "valueType": "String",
+                  "displayName": "Value",
+                  "dataTypeId": {
+                    "scope": "system",
+                    "code": "number"
+                  },
+                  "type": "Label",
+                  "unitSchema": "NoUnits",
+                  "domain": "Instrument",
+                  "scope": "default",
+                  "code": "MyDerivedPropertyName",
+                  "valueRequired": true,
+                  "lifeTime": "Perpetual",
+                  "constraintStyle": "Property",
+                  "propertyDefinitionType": "ValueProperty",
+                  "propertyDescription": "A demonstration property definition",
+                  "derivationFormula": "(Properties[Instrument/default/Price] * Properties[Instrument/default/Cost]) / Properties[Instrument/default/Shares]"
                 }
               },
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/PropertyDefinition"
+                },
+                "example": {
+                  "href": "https://example.lusid.com/api/properties/demo-scope/demo-code",
+                  "key": "Instrument/default/MyDerivedPropertyName",
+                  "valueType": "String",
+                  "displayName": "Value",
+                  "dataTypeId": {
+                    "scope": "system",
+                    "code": "number"
+                  },
+                  "type": "Label",
+                  "unitSchema": "NoUnits",
+                  "domain": "Instrument",
+                  "scope": "default",
+                  "code": "MyDerivedPropertyName",
+                  "valueRequired": true,
+                  "lifeTime": "Perpetual",
+                  "constraintStyle": "Property",
+                  "propertyDefinitionType": "ValueProperty",
+                  "propertyDescription": "A demonstration property definition",
+                  "derivationFormula": "(Properties[Instrument/default/Price] * Properties[Instrument/default/Cost]) / Properties[Instrument/default/Shares]"
                 }
               },
               "text/json": {
                 "schema": {
                   "$ref": "#/components/schemas/PropertyDefinition"
+                },
+                "example": {
+                  "href": "https://example.lusid.com/api/properties/demo-scope/demo-code",
+                  "key": "Instrument/default/MyDerivedPropertyName",
+                  "valueType": "String",
+                  "displayName": "Value",
+                  "dataTypeId": {
+                    "scope": "system",
+                    "code": "number"
+                  },
+                  "type": "Label",
+                  "unitSchema": "NoUnits",
+                  "domain": "Instrument",
+                  "scope": "default",
+                  "code": "MyDerivedPropertyName",
+                  "valueRequired": true,
+                  "lifeTime": "Perpetual",
+                  "constraintStyle": "Property",
+                  "propertyDefinitionType": "ValueProperty",
+                  "propertyDescription": "A demonstration property definition",
+                  "derivationFormula": "(Properties[Instrument/default/Price] * Properties[Instrument/default/Cost]) / Properties[Instrument/default/Shares]"
                 }
               }
             }
@@ -41382,7 +41445,7 @@
                 "displayName": "My Property Display Name",
                 "dataTypeId": {
                   "scope": "system",
-                  "code": "string"
+                  "code": "number"
                 },
                 "propertyDescription": "My Property Description",
                 "derivationFormula": "(Properties[Instrument/default/Price] * Properties[Instrument/default/Cost]) / Properties[Instrument/default/Shares]"
@@ -41399,7 +41462,7 @@
                 "displayName": "My Property Display Name",
                 "dataTypeId": {
                   "scope": "system",
-                  "code": "string"
+                  "code": "number"
                 },
                 "propertyDescription": "My Property Description",
                 "derivationFormula": "(Properties[Instrument/default/Price] * Properties[Instrument/default/Cost]) / Properties[Instrument/default/Shares]"
@@ -41416,7 +41479,7 @@
                 "displayName": "My Property Display Name",
                 "dataTypeId": {
                   "scope": "system",
-                  "code": "string"
+                  "code": "number"
                 },
                 "propertyDescription": "My Property Description",
                 "derivationFormula": "(Properties[Instrument/default/Price] * Properties[Instrument/default/Cost]) / Properties[Instrument/default/Shares]"
@@ -41433,7 +41496,7 @@
                 "displayName": "My Property Display Name",
                 "dataTypeId": {
                   "scope": "system",
-                  "code": "string"
+                  "code": "number"
                 },
                 "propertyDescription": "My Property Description",
                 "derivationFormula": "(Properties[Instrument/default/Price] * Properties[Instrument/default/Cost]) / Properties[Instrument/default/Shares]"
@@ -41449,16 +41512,344 @@
               "text/plain": {
                 "schema": {
                   "$ref": "#/components/schemas/PropertyDefinition"
+                },
+                "example": {
+                  "href": "https://example.lusid.com/api/properties/demo-scope/demo-code",
+                  "key": "Instrument/default/MyDerivedPropertyName",
+                  "valueType": "String",
+                  "displayName": "Value",
+                  "dataTypeId": {
+                    "scope": "system",
+                    "code": "number"
+                  },
+                  "type": "Label",
+                  "unitSchema": "NoUnits",
+                  "domain": "Instrument",
+                  "scope": "default",
+                  "code": "MyDerivedPropertyName",
+                  "valueRequired": true,
+                  "lifeTime": "Perpetual",
+                  "constraintStyle": "Property",
+                  "propertyDefinitionType": "ValueProperty",
+                  "propertyDescription": "A demonstration property definition",
+                  "derivationFormula": "(Properties[Instrument/default/Price] * Properties[Instrument/default/Cost]) / Properties[Instrument/default/Shares]"
                 }
               },
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/PropertyDefinition"
+                },
+                "example": {
+                  "href": "https://example.lusid.com/api/properties/demo-scope/demo-code",
+                  "key": "Instrument/default/MyDerivedPropertyName",
+                  "valueType": "String",
+                  "displayName": "Value",
+                  "dataTypeId": {
+                    "scope": "system",
+                    "code": "number"
+                  },
+                  "type": "Label",
+                  "unitSchema": "NoUnits",
+                  "domain": "Instrument",
+                  "scope": "default",
+                  "code": "MyDerivedPropertyName",
+                  "valueRequired": true,
+                  "lifeTime": "Perpetual",
+                  "constraintStyle": "Property",
+                  "propertyDefinitionType": "ValueProperty",
+                  "propertyDescription": "A demonstration property definition",
+                  "derivationFormula": "(Properties[Instrument/default/Price] * Properties[Instrument/default/Cost]) / Properties[Instrument/default/Shares]"
                 }
               },
               "text/json": {
                 "schema": {
                   "$ref": "#/components/schemas/PropertyDefinition"
+                },
+                "example": {
+                  "href": "https://example.lusid.com/api/properties/demo-scope/demo-code",
+                  "key": "Instrument/default/MyDerivedPropertyName",
+                  "valueType": "String",
+                  "displayName": "Value",
+                  "dataTypeId": {
+                    "scope": "system",
+                    "code": "number"
+                  },
+                  "type": "Label",
+                  "unitSchema": "NoUnits",
+                  "domain": "Instrument",
+                  "scope": "default",
+                  "code": "MyDerivedPropertyName",
+                  "valueRequired": true,
+                  "lifeTime": "Perpetual",
+                  "constraintStyle": "Property",
+                  "propertyDefinitionType": "ValueProperty",
+                  "propertyDescription": "A demonstration property definition",
+                  "derivationFormula": "(Properties[Instrument/default/Price] * Properties[Instrument/default/Cost]) / Properties[Instrument/default/Shares]"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "The details of the input related failure",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/LusidValidationProblemDetails"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/LusidValidationProblemDetails"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/LusidValidationProblemDetails"
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "Error response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/LusidProblemDetails"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "oauth2": []
+          }
+        ],
+        "x-fbn-apistatus": "EarlyAccess"
+      }
+    },
+    "/api/propertydefinitions/derived/{domain}/{scope}/{code}": {
+      "put": {
+        "tags": [
+          "Property Definitions"
+        ],
+        "summary": "[EARLY ACCESS] UpdateDerivedPropertyDefinition: Update a pre-existing derived property definition",
+        "description": "This will fail if the property definition already exists",
+        "operationId": "UpdateDerivedPropertyDefinition",
+        "parameters": [
+          {
+            "name": "domain",
+            "in": "path",
+            "description": "Domain of the property definition",
+            "required": true,
+            "schema": {
+              "enum": [
+                "NotDefined",
+                "Transaction",
+                "Portfolio",
+                "Holding",
+                "ReferenceHolding",
+                "TransactionConfiguration",
+                "Instrument",
+                "CutLabelDefinition",
+                "Analytic",
+                "PortfolioGroup",
+                "Person",
+                "AccessMetadata",
+                "Order",
+                "UnitResult",
+                "MarketData",
+                "ConfigurationRecipe",
+                "Allocation",
+                "Calendar",
+                "LegalEntity",
+                "Placement",
+                "Execution",
+                "Block",
+                "Participation",
+                "Package",
+                "OrderInstruction",
+                "NextBestAction",
+                "CustomEntity",
+                "InstrumentEvent",
+                "Account",
+                "ChartOfAccounts",
+                "CustodianAccount",
+                "Abor",
+                "AborConfiguration",
+                "Reconciliation"
+              ],
+              "type": "string",
+              "description": "The available values are: NotDefined, Transaction, Portfolio, Holding, ReferenceHolding, TransactionConfiguration, Instrument, CutLabelDefinition, Analytic, PortfolioGroup, Person, AccessMetadata, Order, UnitResult, MarketData, ConfigurationRecipe, Allocation, Calendar, LegalEntity, Placement, Execution, Block, Participation, Package, OrderInstruction, NextBestAction, CustomEntity, InstrumentEvent, Account, ChartOfAccounts, CustodianAccount, Abor, AborConfiguration, Reconciliation"
+            }
+          },
+          {
+            "name": "scope",
+            "in": "path",
+            "description": "Scope of the property definition",
+            "required": true,
+            "schema": {
+              "maxLength": 64,
+              "minLength": 1,
+              "pattern": "^[a-zA-Z0-9@+\\-_&]+$",
+              "type": "string"
+            }
+          },
+          {
+            "name": "code",
+            "in": "path",
+            "description": "Code of the property definition",
+            "required": true,
+            "schema": {
+              "maxLength": 64,
+              "minLength": 1,
+              "pattern": "^[a-zA-Z0-9@+\\-_&]+$",
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "description": "Information about the derived property definition being updated",
+          "content": {
+            "application/json-patch+json": {
+              "schema": {
+                "$ref": "#/components/schemas/UpdateDerivedPropertyDefinitionRequest"
+              },
+              "example": {
+                "displayName": "My Property Display Name",
+                "dataTypeId": {
+                  "scope": "system",
+                  "code": "number"
+                },
+                "propertyDescription": "My Property Description",
+                "derivationFormula": "(Properties[Instrument/default/Price] * Properties[Instrument/default/Cost]) / Properties[Instrument/default/Shares]"
+              }
+            },
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UpdateDerivedPropertyDefinitionRequest"
+              },
+              "example": {
+                "displayName": "My Property Display Name",
+                "dataTypeId": {
+                  "scope": "system",
+                  "code": "number"
+                },
+                "propertyDescription": "My Property Description",
+                "derivationFormula": "(Properties[Instrument/default/Price] * Properties[Instrument/default/Cost]) / Properties[Instrument/default/Shares]"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UpdateDerivedPropertyDefinitionRequest"
+              },
+              "example": {
+                "displayName": "My Property Display Name",
+                "dataTypeId": {
+                  "scope": "system",
+                  "code": "number"
+                },
+                "propertyDescription": "My Property Description",
+                "derivationFormula": "(Properties[Instrument/default/Price] * Properties[Instrument/default/Cost]) / Properties[Instrument/default/Shares]"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/UpdateDerivedPropertyDefinitionRequest"
+              },
+              "example": {
+                "displayName": "My Property Display Name",
+                "dataTypeId": {
+                  "scope": "system",
+                  "code": "number"
+                },
+                "propertyDescription": "My Property Description",
+                "derivationFormula": "(Properties[Instrument/default/Price] * Properties[Instrument/default/Cost]) / Properties[Instrument/default/Shares]"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "The updated derived property definition",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/PropertyDefinition"
+                },
+                "example": {
+                  "href": "https://example.lusid.com/api/properties/demo-scope/demo-code",
+                  "key": "Instrument/default/MyDerivedPropertyName",
+                  "valueType": "String",
+                  "displayName": "Value",
+                  "dataTypeId": {
+                    "scope": "system",
+                    "code": "number"
+                  },
+                  "type": "Label",
+                  "unitSchema": "NoUnits",
+                  "domain": "Instrument",
+                  "scope": "default",
+                  "code": "MyDerivedPropertyName",
+                  "valueRequired": true,
+                  "lifeTime": "Perpetual",
+                  "constraintStyle": "Property",
+                  "propertyDefinitionType": "ValueProperty",
+                  "propertyDescription": "A demonstration property definition",
+                  "derivationFormula": "(Properties[Instrument/default/Price] * Properties[Instrument/default/Cost]) / Properties[Instrument/default/Shares]"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PropertyDefinition"
+                },
+                "example": {
+                  "href": "https://example.lusid.com/api/properties/demo-scope/demo-code",
+                  "key": "Instrument/default/MyDerivedPropertyName",
+                  "valueType": "String",
+                  "displayName": "Value",
+                  "dataTypeId": {
+                    "scope": "system",
+                    "code": "number"
+                  },
+                  "type": "Label",
+                  "unitSchema": "NoUnits",
+                  "domain": "Instrument",
+                  "scope": "default",
+                  "code": "MyDerivedPropertyName",
+                  "valueRequired": true,
+                  "lifeTime": "Perpetual",
+                  "constraintStyle": "Property",
+                  "propertyDefinitionType": "ValueProperty",
+                  "propertyDescription": "A demonstration property definition",
+                  "derivationFormula": "(Properties[Instrument/default/Price] * Properties[Instrument/default/Cost]) / Properties[Instrument/default/Shares]"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PropertyDefinition"
+                },
+                "example": {
+                  "href": "https://example.lusid.com/api/properties/demo-scope/demo-code",
+                  "key": "Instrument/default/MyDerivedPropertyName",
+                  "valueType": "String",
+                  "displayName": "Value",
+                  "dataTypeId": {
+                    "scope": "system",
+                    "code": "number"
+                  },
+                  "type": "Label",
+                  "unitSchema": "NoUnits",
+                  "domain": "Instrument",
+                  "scope": "default",
+                  "code": "MyDerivedPropertyName",
+                  "valueRequired": true,
+                  "lifeTime": "Perpetual",
+                  "constraintStyle": "Property",
+                  "propertyDefinitionType": "ValueProperty",
+                  "propertyDescription": "A demonstration property definition",
+                  "derivationFormula": "(Properties[Instrument/default/Price] * Properties[Instrument/default/Cost]) / Properties[Instrument/default/Shares]"
                 }
               }
             }
@@ -41631,16 +42022,79 @@
               "text/plain": {
                 "schema": {
                   "$ref": "#/components/schemas/PropertyDefinition"
+                },
+                "example": {
+                  "href": "https://example.lusid.com/api/properties/demo-scope/demo-code",
+                  "key": "Instrument/default/MyDerivedPropertyName",
+                  "valueType": "String",
+                  "displayName": "Value",
+                  "dataTypeId": {
+                    "scope": "system",
+                    "code": "number"
+                  },
+                  "type": "Label",
+                  "unitSchema": "NoUnits",
+                  "domain": "Instrument",
+                  "scope": "default",
+                  "code": "MyDerivedPropertyName",
+                  "valueRequired": true,
+                  "lifeTime": "Perpetual",
+                  "constraintStyle": "Property",
+                  "propertyDefinitionType": "ValueProperty",
+                  "propertyDescription": "A demonstration property definition",
+                  "derivationFormula": "(Properties[Instrument/default/Price] * Properties[Instrument/default/Cost]) / Properties[Instrument/default/Shares]"
                 }
               },
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/PropertyDefinition"
+                },
+                "example": {
+                  "href": "https://example.lusid.com/api/properties/demo-scope/demo-code",
+                  "key": "Instrument/default/MyDerivedPropertyName",
+                  "valueType": "String",
+                  "displayName": "Value",
+                  "dataTypeId": {
+                    "scope": "system",
+                    "code": "number"
+                  },
+                  "type": "Label",
+                  "unitSchema": "NoUnits",
+                  "domain": "Instrument",
+                  "scope": "default",
+                  "code": "MyDerivedPropertyName",
+                  "valueRequired": true,
+                  "lifeTime": "Perpetual",
+                  "constraintStyle": "Property",
+                  "propertyDefinitionType": "ValueProperty",
+                  "propertyDescription": "A demonstration property definition",
+                  "derivationFormula": "(Properties[Instrument/default/Price] * Properties[Instrument/default/Cost]) / Properties[Instrument/default/Shares]"
                 }
               },
               "text/json": {
                 "schema": {
                   "$ref": "#/components/schemas/PropertyDefinition"
+                },
+                "example": {
+                  "href": "https://example.lusid.com/api/properties/demo-scope/demo-code",
+                  "key": "Instrument/default/MyDerivedPropertyName",
+                  "valueType": "String",
+                  "displayName": "Value",
+                  "dataTypeId": {
+                    "scope": "system",
+                    "code": "number"
+                  },
+                  "type": "Label",
+                  "unitSchema": "NoUnits",
+                  "domain": "Instrument",
+                  "scope": "default",
+                  "code": "MyDerivedPropertyName",
+                  "valueRequired": true,
+                  "lifeTime": "Perpetual",
+                  "constraintStyle": "Property",
+                  "propertyDefinitionType": "ValueProperty",
+                  "propertyDescription": "A demonstration property definition",
+                  "derivationFormula": "(Properties[Instrument/default/Price] * Properties[Instrument/default/Cost]) / Properties[Instrument/default/Shares]"
                 }
               }
             }
@@ -41917,16 +42371,79 @@
               "text/plain": {
                 "schema": {
                   "$ref": "#/components/schemas/PropertyDefinition"
+                },
+                "example": {
+                  "href": "https://example.lusid.com/api/properties/demo-scope/demo-code",
+                  "key": "Instrument/default/MyDerivedPropertyName",
+                  "valueType": "String",
+                  "displayName": "Value",
+                  "dataTypeId": {
+                    "scope": "system",
+                    "code": "number"
+                  },
+                  "type": "Label",
+                  "unitSchema": "NoUnits",
+                  "domain": "Instrument",
+                  "scope": "default",
+                  "code": "MyDerivedPropertyName",
+                  "valueRequired": true,
+                  "lifeTime": "Perpetual",
+                  "constraintStyle": "Property",
+                  "propertyDefinitionType": "ValueProperty",
+                  "propertyDescription": "A demonstration property definition",
+                  "derivationFormula": "(Properties[Instrument/default/Price] * Properties[Instrument/default/Cost]) / Properties[Instrument/default/Shares]"
                 }
               },
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/PropertyDefinition"
+                },
+                "example": {
+                  "href": "https://example.lusid.com/api/properties/demo-scope/demo-code",
+                  "key": "Instrument/default/MyDerivedPropertyName",
+                  "valueType": "String",
+                  "displayName": "Value",
+                  "dataTypeId": {
+                    "scope": "system",
+                    "code": "number"
+                  },
+                  "type": "Label",
+                  "unitSchema": "NoUnits",
+                  "domain": "Instrument",
+                  "scope": "default",
+                  "code": "MyDerivedPropertyName",
+                  "valueRequired": true,
+                  "lifeTime": "Perpetual",
+                  "constraintStyle": "Property",
+                  "propertyDefinitionType": "ValueProperty",
+                  "propertyDescription": "A demonstration property definition",
+                  "derivationFormula": "(Properties[Instrument/default/Price] * Properties[Instrument/default/Cost]) / Properties[Instrument/default/Shares]"
                 }
               },
               "text/json": {
                 "schema": {
                   "$ref": "#/components/schemas/PropertyDefinition"
+                },
+                "example": {
+                  "href": "https://example.lusid.com/api/properties/demo-scope/demo-code",
+                  "key": "Instrument/default/MyDerivedPropertyName",
+                  "valueType": "String",
+                  "displayName": "Value",
+                  "dataTypeId": {
+                    "scope": "system",
+                    "code": "number"
+                  },
+                  "type": "Label",
+                  "unitSchema": "NoUnits",
+                  "domain": "Instrument",
+                  "scope": "default",
+                  "code": "MyDerivedPropertyName",
+                  "valueRequired": true,
+                  "lifeTime": "Perpetual",
+                  "constraintStyle": "Property",
+                  "propertyDefinitionType": "ValueProperty",
+                  "propertyDescription": "A demonstration property definition",
+                  "derivationFormula": "(Properties[Instrument/default/Price] * Properties[Instrument/default/Cost]) / Properties[Instrument/default/Shares]"
                 }
               }
             }
@@ -82221,6 +82738,36 @@
             },
             "description": "The definitions of the acceptable units.",
             "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "UpdateDerivedPropertyDefinitionRequest": {
+        "required": [
+          "dataTypeId",
+          "derivationFormula",
+          "displayName"
+        ],
+        "type": "object",
+        "properties": {
+          "displayName": {
+            "minLength": 1,
+            "type": "string",
+            "description": "The display name of the property."
+          },
+          "dataTypeId": {
+            "$ref": "#/components/schemas/ResourceId"
+          },
+          "propertyDescription": {
+            "maxLength": 512,
+            "type": "string",
+            "description": "Describes the property",
+            "nullable": true
+          },
+          "derivationFormula": {
+            "minLength": 1,
+            "type": "string",
+            "description": "The rule that defines how data is composed for a derived property."
           }
         },
         "additionalProperties": false
