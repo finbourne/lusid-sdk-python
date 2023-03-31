@@ -9,7 +9,7 @@
       "url": "https://www.finbourne.com",
       "email": "info@finbourne.com"
     },
-    "version": "1.0.35",
+    "version": "1.0.36",
     "x-logo": {
       "url": "https://www.lusid.com/app/assets/logo_white.png",
       "backgroundColor": "#415464"
@@ -16405,6 +16405,169 @@
           }
         ],
         "x-fbn-apistatus": "EarlyAccess"
+      }
+    },
+    "/api/instruments/{identifier}/models": {
+      "get": {
+        "tags": [
+          "Instruments"
+        ],
+        "summary": "GetExistingInstrumentModels: Retrieve supported pricing models for an existing instrument identified by LUID.",
+        "description": "Get the supported pricing models of a single instrument.",
+        "operationId": "GetExistingInstrumentModels",
+        "parameters": [
+          {
+            "name": "identifier",
+            "in": "path",
+            "description": "A lusid instrument id identifying the instrument.",
+            "required": true,
+            "schema": {
+              "maxLength": 64,
+              "minLength": 1,
+              "pattern": "^[a-zA-Z0-9\\-_]+$",
+              "type": "string"
+            }
+          },
+          {
+            "name": "effectiveAt",
+            "in": "query",
+            "description": "The effective datetime or cut label at which to retrieve the instrument.\r\n            Defaults to the current LUSID system datetime if not specified.",
+            "schema": {
+              "type": "string",
+              "format": "dateorcutlabel"
+            }
+          },
+          {
+            "name": "asAt",
+            "in": "query",
+            "description": "The asAt datetime at which to retrieve the instrument. Defaults to\r\n            returning the latest version if not specified.",
+            "schema": {
+              "type": "string",
+              "format": "date-time"
+            },
+            "x-nullable": true
+          },
+          {
+            "name": "instrumentScope",
+            "in": "query",
+            "description": "The scope in which the instrument lies. When not supplied the scope is 'default'.",
+            "schema": {
+              "maxLength": 64,
+              "minLength": 1,
+              "pattern": "^[a-zA-Z0-9\\-_]+$",
+              "type": "string",
+              "default": "default"
+            }
+          },
+          {
+            "name": "recipeScope",
+            "in": "query",
+            "description": "The scope in which the recipe lies. When not supplied the scope is 'default'.",
+            "schema": {
+              "maxLength": 64,
+              "minLength": 1,
+              "pattern": "^[a-zA-Z0-9\\-_]+$",
+              "type": "string",
+              "default": "default"
+            }
+          },
+          {
+            "name": "recipeCode",
+            "in": "query",
+            "description": "A unique identifier for an entity, used to obtain configuration recipe details. Default configuration recipe is used if not provided.",
+            "schema": {
+              "maxLength": 64,
+              "minLength": 1,
+              "pattern": "^[a-zA-Z0-9\\-_]+$",
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Models which can be used to value a given instrument.",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/InstrumentModels"
+                },
+                "example": {
+                  "instrumentId": "LUID_00003D4X",
+                  "supportedModels": [
+                    "SimpleStatic",
+                    "Discounting",
+                    "VendorDefault",
+                    "ConstantTimeValueOfMoney"
+                  ]
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/InstrumentModels"
+                },
+                "example": {
+                  "instrumentId": "LUID_00003D4X",
+                  "supportedModels": [
+                    "SimpleStatic",
+                    "Discounting",
+                    "VendorDefault",
+                    "ConstantTimeValueOfMoney"
+                  ]
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/InstrumentModels"
+                },
+                "example": {
+                  "instrumentId": "LUID_00003D4X",
+                  "supportedModels": [
+                    "SimpleStatic",
+                    "Discounting",
+                    "VendorDefault",
+                    "ConstantTimeValueOfMoney"
+                  ]
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "The details of the input related failure",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/LusidValidationProblemDetails"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/LusidValidationProblemDetails"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/LusidValidationProblemDetails"
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "Error response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/LusidProblemDetails"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "oauth2": []
+          }
+        ],
+        "x-fbn-apistatus": "Stable"
       }
     },
     "/api/legalentities": {
@@ -73681,6 +73844,34 @@
         },
         "additionalProperties": false,
         "description": "A collection of instrument search results"
+      },
+      "InstrumentModels": {
+        "type": "object",
+        "properties": {
+          "instrumentId": {
+            "type": "string",
+            "description": "The unique LUSID Instrument Identifier (LUID) of the instrument.",
+            "nullable": true
+          },
+          "supportedModels": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "description": "The pricing models supported by the instrument e.g. 'Discounting'.",
+            "nullable": true
+          },
+          "links": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Link"
+            },
+            "description": "Collection of links.",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false,
+        "description": "Supported pricing models for an instrument."
       },
       "InstrumentProperties": {
         "type": "object",

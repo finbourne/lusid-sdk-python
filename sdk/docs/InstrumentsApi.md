@@ -7,6 +7,7 @@ Method | HTTP request | Description
 [**delete_instrument**](InstrumentsApi.md#delete_instrument) | **DELETE** /api/instruments/{identifierType}/{identifier} | [EARLY ACCESS] DeleteInstrument: Soft delete a single instrument
 [**delete_instrument_properties**](InstrumentsApi.md#delete_instrument_properties) | **POST** /api/instruments/{identifierType}/{identifier}/properties/$delete | [EARLY ACCESS] DeleteInstrumentProperties: Delete instrument properties
 [**delete_instruments**](InstrumentsApi.md#delete_instruments) | **POST** /api/instruments/$delete | [EARLY ACCESS] DeleteInstruments: Soft or hard delete multiple instruments
+[**get_existing_instrument_models**](InstrumentsApi.md#get_existing_instrument_models) | **GET** /api/instruments/{identifier}/models | GetExistingInstrumentModels: Retrieve supported pricing models for an existing instrument identified by LUID.
 [**get_instrument**](InstrumentsApi.md#get_instrument) | **GET** /api/instruments/{identifierType}/{identifier} | GetInstrument: Get instrument
 [**get_instrument_identifier_types**](InstrumentsApi.md#get_instrument_identifier_types) | **GET** /api/instruments/identifierTypes | GetInstrumentIdentifierTypes: Get instrument identifier types
 [**get_instrument_properties**](InstrumentsApi.md#get_instrument_properties) | **GET** /api/instruments/{identifierType}/{identifier}/properties | [EARLY ACCESS] GetInstrumentProperties: Get instrument properties
@@ -256,6 +257,91 @@ Name | Type | Description  | Notes
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 **200** | The datetime that the instruments were deleted |  -  |
+**400** | The details of the input related failure |  -  |
+**0** | Error response |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **get_existing_instrument_models**
+> InstrumentModels get_existing_instrument_models(identifier, effective_at=effective_at, as_at=as_at, instrument_scope=instrument_scope, recipe_scope=recipe_scope, recipe_code=recipe_code)
+
+GetExistingInstrumentModels: Retrieve supported pricing models for an existing instrument identified by LUID.
+
+Get the supported pricing models of a single instrument.
+
+### Example
+
+* OAuth Authentication (oauth2):
+```python
+from __future__ import print_function
+import time
+import lusid
+from lusid.rest import ApiException
+from pprint import pprint
+# Defining the host is optional and defaults to https://www.lusid.com/api
+# See configuration.py for a list of all supported configuration parameters.
+configuration = lusid.Configuration(
+    host = "https://www.lusid.com/api"
+)
+
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
+
+# Configure OAuth2 access token for authorization: oauth2
+configuration = lusid.Configuration(
+    host = "https://www.lusid.com/api"
+)
+configuration.access_token = 'YOUR_ACCESS_TOKEN'
+
+# Enter a context with an instance of the API client
+with lusid.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = lusid.InstrumentsApi(api_client)
+    identifier = 'identifier_example' # str | A lusid instrument id identifying the instrument.
+effective_at = 'effective_at_example' # str | The effective datetime or cut label at which to retrieve the instrument.              Defaults to the current LUSID system datetime if not specified. (optional)
+as_at = '2013-10-20T19:20:30+01:00' # datetime | The asAt datetime at which to retrieve the instrument. Defaults to              returning the latest version if not specified. (optional)
+instrument_scope = 'default' # str | The scope in which the instrument lies. When not supplied the scope is 'default'. (optional) (default to 'default')
+recipe_scope = 'default' # str | The scope in which the recipe lies. When not supplied the scope is 'default'. (optional) (default to 'default')
+recipe_code = 'recipe_code_example' # str | A unique identifier for an entity, used to obtain configuration recipe details. Default configuration recipe is used if not provided. (optional)
+
+    try:
+        # GetExistingInstrumentModels: Retrieve supported pricing models for an existing instrument identified by LUID.
+        api_response = api_instance.get_existing_instrument_models(identifier, effective_at=effective_at, as_at=as_at, instrument_scope=instrument_scope, recipe_scope=recipe_scope, recipe_code=recipe_code)
+        pprint(api_response)
+    except ApiException as e:
+        print("Exception when calling InstrumentsApi->get_existing_instrument_models: %s\n" % e)
+```
+
+### Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **identifier** | **str**| A lusid instrument id identifying the instrument. | 
+ **effective_at** | **str**| The effective datetime or cut label at which to retrieve the instrument.              Defaults to the current LUSID system datetime if not specified. | [optional] 
+ **as_at** | **datetime**| The asAt datetime at which to retrieve the instrument. Defaults to              returning the latest version if not specified. | [optional] 
+ **instrument_scope** | **str**| The scope in which the instrument lies. When not supplied the scope is &#39;default&#39;. | [optional] [default to &#39;default&#39;]
+ **recipe_scope** | **str**| The scope in which the recipe lies. When not supplied the scope is &#39;default&#39;. | [optional] [default to &#39;default&#39;]
+ **recipe_code** | **str**| A unique identifier for an entity, used to obtain configuration recipe details. Default configuration recipe is used if not provided. | [optional] 
+
+### Return type
+
+[**InstrumentModels**](InstrumentModels.md)
+
+### Authorization
+
+[oauth2](../README.md#oauth2)
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: text/plain, application/json, text/json
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | Models which can be used to value a given instrument. |  -  |
 **400** | The details of the input related failure |  -  |
 **0** | Error response |  -  |
 
