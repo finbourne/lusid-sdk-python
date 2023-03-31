@@ -11,7 +11,7 @@ Name | Type | Description | Notes
 **quantity** | **float** | The quantity of given instrument ordered. | 
 **side** | **str** | The client&#39;s representation of the order&#39;s side (buy, sell, short, etc) | 
 **order_book_id** | [**ResourceId**](ResourceId.md) |  | [optional] 
-**portfolio_id** | [**ResourceId**](ResourceId.md) |  | 
+**portfolio_id** | [**ResourceId**](ResourceId.md) |  | [optional] 
 **id** | [**ResourceId**](ResourceId.md) |  | 
 **instrument_scope** | **str** | The scope in which the instrument lies | [optional] 
 **lusid_instrument_id** | **str** | The LUSID instrument id for the instrument ordered. | 
@@ -24,7 +24,7 @@ Name | Type | Description | Notes
 **stop_price** | [**CurrencyAndAmount**](CurrencyAndAmount.md) |  | [optional] 
 **order_instruction_id** | [**ResourceId**](ResourceId.md) |  | [optional] 
 **package_id** | [**ResourceId**](ResourceId.md) |  | [optional] 
-**links** | [**list[Link]**](Link.md) |  | [optional] 
+**links** | [**list[Link]**](Link.md) | Collection of links. | [optional] 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

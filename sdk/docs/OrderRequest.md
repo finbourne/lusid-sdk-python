@@ -10,7 +10,7 @@ Name | Type | Description | Notes
 **quantity** | **float** | The quantity of given instrument ordered. | 
 **side** | **str** | The client&#39;s representation of the order&#39;s side (buy, sell, short, etc) | 
 **order_book_id** | [**ResourceId**](ResourceId.md) |  | [optional] 
-**portfolio_id** | [**ResourceId**](ResourceId.md) |  | 
+**portfolio_id** | [**ResourceId**](ResourceId.md) |  | [optional] 
 **id** | [**ResourceId**](ResourceId.md) |  | 
 **state** | **str** | The order&#39;s state (examples: New, PartiallyFilled, ...) | [optional] 
 **type** | **str** | The order&#39;s type (examples: Limit, Market, ...) | [optional] 
