@@ -9,7 +9,7 @@
       "url": "https://www.finbourne.com",
       "email": "info@finbourne.com"
     },
-    "version": "1.0.45",
+    "version": "1.0.46",
     "x-logo": {
       "url": "https://www.lusid.com/app/assets/logo_white.png",
       "backgroundColor": "#415464"
@@ -68364,6 +68364,9 @@
                 "description": "Description of the complex market data's lineage e.g. 'FundAccountant_GreenQuality'.",
                 "nullable": true
               },
+              "marketDataOptions": {
+                "$ref": "#/components/schemas/MarketDataOptions"
+              },
               "marketDataType": {
                 "enum": [
                   "DiscountFactorCurveData",
@@ -69383,6 +69386,9 @@
                 "description": "Description of the complex market data's lineage e.g. 'FundAccountant_GreenQuality'.",
                 "nullable": true
               },
+              "marketDataOptions": {
+                "$ref": "#/components/schemas/MarketDataOptions"
+              },
               "marketDataType": {
                 "enum": [
                   "DiscountFactorCurveData",
@@ -69672,6 +69678,9 @@
                   "format": "double"
                 },
                 "description": "Prices provided for the forward price of the Equity at the corresponding date in Dates."
+              },
+              "marketDataOptions": {
+                "$ref": "#/components/schemas/MarketDataOptions"
               },
               "marketDataType": {
                 "enum": [
@@ -71574,6 +71583,9 @@
                 "description": "Description of the complex market data's lineage e.g. 'FundAccountant_GreenQuality'.",
                 "nullable": true
               },
+              "marketDataOptions": {
+                "$ref": "#/components/schemas/MarketDataOptions"
+              },
               "marketDataType": {
                 "enum": [
                   "DiscountFactorCurveData",
@@ -71649,6 +71661,9 @@
                 "type": "string",
                 "description": "Description of the complex market data's lineage e.g. 'FundAccountant_GreenQuality'.",
                 "nullable": true
+              },
+              "marketDataOptions": {
+                "$ref": "#/components/schemas/MarketDataOptions"
               },
               "marketDataType": {
                 "enum": [
@@ -71781,6 +71796,9 @@
                 "description": "Description of the complex market data's lineage e.g. 'FundAccountant_GreenQuality'.",
                 "nullable": true
               },
+              "marketDataOptions": {
+                "$ref": "#/components/schemas/MarketDataOptions"
+              },
               "marketDataType": {
                 "enum": [
                   "DiscountFactorCurveData",
@@ -71856,6 +71874,9 @@
                 "description": "Description of the complex market data's lineage e.g. 'FundAccountant_GreenQuality'.",
                 "nullable": true
               },
+              "marketDataOptions": {
+                "$ref": "#/components/schemas/MarketDataOptions"
+              },
               "marketDataType": {
                 "enum": [
                   "DiscountFactorCurveData",
@@ -71930,6 +71951,9 @@
                 "type": "string",
                 "description": "Description of the complex market data's lineage e.g. 'FundAccountant_GreenQuality'.",
                 "nullable": true
+              },
+              "marketDataOptions": {
+                "$ref": "#/components/schemas/MarketDataOptions"
               },
               "marketDataType": {
                 "enum": [
@@ -74982,6 +75006,26 @@
         },
         "additionalProperties": false,
         "description": "When performing analytics, instruments and models have dependencies on market data.\r\nA market data key rule essentially tells lusid to \"resolve dependencies matching the pattern 'X' using data of the form 'Y'\".\r\nThe parameter 'X' is defined by the key of the key rule, and might specify \"all USD rates curves\" or \"all RIC-based prices\".\r\nThe parameter 'Y' is defined by the remaining fields of the key rule, and allows the user to configure things such as\r\nwhere to look for data, what sort of data should be looked for (e.g. bid/mid/ask), and how old the data is allowed to be."
+      },
+      "MarketDataOptions": {
+        "required": [
+          "marketDataOptionsType"
+        ],
+        "type": "object",
+        "properties": {
+          "marketDataOptionsType": {
+            "enum": [
+              "CurveOptions"
+            ],
+            "type": "string",
+            "description": "The available values are: CurveOptions"
+          }
+        },
+        "additionalProperties": false,
+        "description": "Base class for representing market data options in LUSID.\r\nAbstractly, these are any options that one should be able to specify for ComplexMarketData entities.\r\nFor example, CurveOptions allows one to decide how the data provided in a discountFactorCurve is interpolated.\r\nThis base class should not be directly instantiated;\r\neach supported MarketDataOptionsType has a corresponding inherited class.",
+        "discriminator": {
+          "propertyName": "marketDataOptionsType"
+        }
       },
       "MarketDataOverrides": {
         "type": "object",
@@ -85079,6 +85123,9 @@
                 "type": "string",
                 "description": "Description of the complex market data's lineage e.g. 'FundAccountant_GreenQuality'.",
                 "nullable": true
+              },
+              "marketDataOptions": {
+                "$ref": "#/components/schemas/MarketDataOptions"
               },
               "marketDataType": {
                 "enum": [
