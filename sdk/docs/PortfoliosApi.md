@@ -1427,7 +1427,7 @@ with lusid.ApiClient(configuration) as api_client:
     api_instance = lusid.PortfoliosApi(api_client)
     scope = 'scope_example' # str | The scope of the portfolio.
 code = 'code_example' # str | The code of the portfolio. Together with the               scope this uniquely identifies the portfolio.
-operation = [{"value":"2020-01-01","path":"/creationDate","op":"add"}] # list[Operation] | The json patch document. For more check: https://datatracker.ietf.org/doc/html/rfc6902.
+operation = [{"op":"add","path":"/creationDate","value":"2020-01-01"}] # list[Operation] | The json patch document. For more check: https://datatracker.ietf.org/doc/html/rfc6902.
 
     try:
         # [EARLY ACCESS] PatchPortfolio: Patch portfolio.

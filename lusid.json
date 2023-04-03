@@ -9,7 +9,7 @@
       "url": "https://www.finbourne.com",
       "email": "info@finbourne.com"
     },
-    "version": "1.0.46",
+    "version": "1.0.47",
     "x-logo": {
       "url": "https://www.lusid.com/app/assets/logo_white.png",
       "backgroundColor": "#415464"
@@ -38300,9 +38300,9 @@
               },
               "example": [
                 {
-                  "value": "2020-01-01",
+                  "op": "add",
                   "path": "/creationDate",
-                  "op": "add"
+                  "value": "2020-01-01"
                 }
               ]
             },
@@ -38315,9 +38315,9 @@
               },
               "example": [
                 {
-                  "value": "2020-01-01",
+                  "op": "add",
                   "path": "/creationDate",
-                  "op": "add"
+                  "value": "2020-01-01"
                 }
               ]
             },
@@ -38330,9 +38330,9 @@
               },
               "example": [
                 {
-                  "value": "2020-01-01",
+                  "op": "add",
                   "path": "/creationDate",
-                  "op": "add"
+                  "value": "2020-01-01"
                 }
               ]
             },
@@ -38345,9 +38345,9 @@
               },
               "example": [
                 {
-                  "value": "2020-01-01",
+                  "op": "add",
                   "path": "/creationDate",
-                  "op": "add"
+                  "value": "2020-01-01"
                 }
               ]
             }
@@ -58748,16 +58748,16 @@
               },
               "example": [
                 {
+                  "op": "add",
+                  "path": "/subHoldingKeys",
                   "value": [
                     "Transaction/Client/AccountType"
-                  ],
-                  "path": "/subHoldingKeys",
-                  "op": "add"
+                  ]
                 },
                 {
-                  "value": "GBP",
+                  "op": "add",
                   "path": "/baseCurrency",
-                  "op": "add"
+                  "value": "GBP"
                 }
               ]
             },
@@ -58770,16 +58770,16 @@
               },
               "example": [
                 {
+                  "op": "add",
+                  "path": "/subHoldingKeys",
                   "value": [
                     "Transaction/Client/AccountType"
-                  ],
-                  "path": "/subHoldingKeys",
-                  "op": "add"
+                  ]
                 },
                 {
-                  "value": "GBP",
+                  "op": "add",
                   "path": "/baseCurrency",
-                  "op": "add"
+                  "value": "GBP"
                 }
               ]
             },
@@ -58792,16 +58792,16 @@
               },
               "example": [
                 {
+                  "op": "add",
+                  "path": "/subHoldingKeys",
                   "value": [
                     "Transaction/Client/AccountType"
-                  ],
-                  "path": "/subHoldingKeys",
-                  "op": "add"
+                  ]
                 },
                 {
-                  "value": "GBP",
+                  "op": "add",
                   "path": "/baseCurrency",
-                  "op": "add"
+                  "value": "GBP"
                 }
               ]
             },
@@ -58814,16 +58814,16 @@
               },
               "example": [
                 {
+                  "op": "add",
+                  "path": "/subHoldingKeys",
                   "value": [
                     "Transaction/Client/AccountType"
-                  ],
-                  "path": "/subHoldingKeys",
-                  "op": "add"
+                  ]
                 },
                 {
-                  "value": "GBP",
+                  "op": "add",
                   "path": "/baseCurrency",
-                  "op": "add"
+                  "value": "GBP"
                 }
               ]
             }
@@ -75478,20 +75478,30 @@
         "description": "The opening of an instrument."
       },
       "Operation": {
+        "required": [
+          "op",
+          "path"
+        ],
         "type": "object",
         "properties": {
+          "op": {
+            "enum": [
+              "add"
+            ],
+            "type": "string",
+            "description": "The available values are: add"
+          },
+          "path": {
+            "maxLength": 6000,
+            "minLength": 0,
+            "type": "string"
+          },
           "value": {
             "nullable": true
           },
-          "path": {
-            "type": "string",
-            "nullable": true
-          },
-          "op": {
-            "type": "string",
-            "nullable": true
-          },
           "from": {
+            "maxLength": 6000,
+            "minLength": 0,
             "type": "string",
             "nullable": true
           }
