@@ -20,7 +20,7 @@ Name | Type | Description | Notes
 **cost_basis_reporting_currency** | [**CurrencyAndAmount**](CurrencyAndAmount.md) |  | 
 **transaction** | [**Transaction**](Transaction.md) |  | [optional] 
 **unrealised_gain_loss_reporting_currency** | [**CurrencyAndAmount**](CurrencyAndAmount.md) |  | 
-**links** | [**list[Link]**](Link.md) | Collection of links. | [optional] 
+**links** | [**list[Link]**](Link.md) |  | [optional] 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 
