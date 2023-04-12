@@ -118,7 +118,7 @@ class Instrument(object):
         :type dom_ccy: str
         :param relationships:  A set of relationships associated to the instrument.
         :type relationships: list[lusid.Relationship]
-        :param links:  Collection of links.
+        :param links: 
         :type links: list[lusid.Link]
 
         """  # noqa: E501
@@ -485,7 +485,6 @@ class Instrument(object):
     def links(self):
         """Gets the links of this Instrument.  # noqa: E501
 
-        Collection of links.  # noqa: E501
 
         :return: The links of this Instrument.  # noqa: E501
         :rtype: list[lusid.Link]
@@ -496,7 +495,6 @@ class Instrument(object):
     def links(self, links):
         """Sets the links of this Instrument.
 
-        Collection of links.  # noqa: E501
 
         :param links: The links of this Instrument.  # noqa: E501
         :type links: list[lusid.Link]
