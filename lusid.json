@@ -9,7 +9,7 @@
       "url": "https://www.finbourne.com",
       "email": "info@finbourne.com"
     },
-    "version": "1.0.68",
+    "version": "1.0.69",
     "x-logo": {
       "url": "https://www.lusid.com/app/assets/logo_white.png",
       "backgroundColor": "#415464"
@@ -69017,6 +69017,7 @@
             "description": "Determines the accounting treatment given to the transaction portfolio's tax lots. The available values are: Default, AverageCost, FirstInFirstOut, LastInFirstOut, HighestCostFirst, LowestCostFirst"
           },
           "subHoldingKeys": {
+            "maxItems": 100,
             "type": "array",
             "items": {
               "type": "string",
