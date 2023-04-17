@@ -9,7 +9,7 @@
       "url": "https://www.finbourne.com",
       "email": "info@finbourne.com"
     },
-    "version": "1.0.74",
+    "version": "1.0.75",
     "x-logo": {
       "url": "https://www.lusid.com/app/assets/logo_white.png",
       "backgroundColor": "#415464"
@@ -33755,7 +33755,7 @@
           {
             "name": "propertyKeys",
             "in": "query",
-            "description": "A list of property keys from the \"Instrument\" or \"Transaction\" domain to decorate onto\r\n             the transactions. These take the format {domain}/{scope}/{code} e.g. \"Instrument/system/Name\" or\r\n             \"Transaction/strategy/quantsignal\".",
+            "description": "A list of property keys from the \"Instrument\", \"Transaction\", \"LegalEntity\" or \"CustodianAccount\" domain to decorate onto\r\n             the transactions. These take the format {domain}/{scope}/{code} e.g. \"Instrument/system/Name\" or\r\n             \"Transaction/strategy/quantsignal\".",
             "schema": {
               "type": "array",
               "items": {
@@ -61756,7 +61756,7 @@
           {
             "name": "propertyKeys",
             "in": "query",
-            "description": "A list of property keys from the 'Instrument' or 'Transaction' domain to decorate onto\r\n             transactions. These must have the format {domain}/{scope}/{code}, for example 'Instrument/system/Name' or\r\n             'Transaction/strategy/quantsignal'.",
+            "description": "A list of property keys from the 'Instrument', 'Transaction', \"LegalEntity\" or \"CustodianAccount\" domain to decorate onto\r\n             transactions. These must have the format {domain}/{scope}/{code}, for example 'Instrument/system/Name' or\r\n             'Transaction/strategy/quantsignal'.",
             "schema": {
               "type": "array",
               "items": {
