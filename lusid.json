@@ -9,7 +9,7 @@
       "url": "https://www.finbourne.com",
       "email": "info@finbourne.com"
     },
-    "version": "1.0.84",
+    "version": "1.0.85",
     "x-logo": {
       "url": "https://www.lusid.com/app/assets/logo_white.png",
       "backgroundColor": "#415464"
@@ -86539,6 +86539,10 @@
       "description": "Methods for accessing aggregated data"
     },
     {
+      "name": "Allocation Service",
+      "description": "Methods for interacting with the Allocation Service"
+    },
+    {
       "name": "Allocations",
       "description": "Methods for interacting with Allocations. An Allocation represents the redistribution of market Executions against an originating Order. Allocations are treated monotemporally; any updates are effective at the as-at time of update, and its not possible to make retroactive (or forward) changes."
     },
@@ -86741,6 +86745,7 @@
       "Abor",
       "AborConfiguration",
       "Aggregation",
+      "Allocation Service",
       "Allocations",
       "Application Metadata",
       "Blocks",
