@@ -407,7 +407,7 @@ Name | Type | Description  | Notes
 
 [EARLY ACCESS] UpdateDerivedPropertyDefinition: Update a pre-existing derived property definition
 
-This will fail if the property definition already exists
+This will fail if the property definition does not exist
 
 ### Example
 
