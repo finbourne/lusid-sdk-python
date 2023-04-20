@@ -9,7 +9,7 @@
       "url": "https://www.finbourne.com",
       "email": "info@finbourne.com"
     },
-    "version": "1.0.88",
+    "version": "1.0.89",
     "x-logo": {
       "url": "https://www.lusid.com/app/assets/logo_white.png",
       "backgroundColor": "#415464"
@@ -72969,7 +72969,7 @@
               },
               "isDeliveryNotCash": {
                 "type": "boolean",
-                "description": "True if the option is settled in cash, false if delivery."
+                "description": "True if the option delivers the FX underlying, False if the option is settled in cash."
               },
               "isPayoffDigital": {
                 "type": "boolean",
@@ -72987,7 +72987,7 @@
               },
               "payoutStyle": {
                 "type": "string",
-                "description": "PayoutStyle for touch options.\r\nFor options without touch optionality (IsTouch==false),\r\nPayoutStyle should not be set (ot it can be set to None)\r\nFor options with touch optionality (IsTouch==true),\r\nPayoutStyle cannot be None.\r\n\r\nSupported string (enumeration) values are: [Deferred, Immediate].",
+                "description": "PayoutStyle for touch options.\r\n            \r\nFor options without touch optionality, payoutStyle should not be set.\r\nFor options with touch optionality (where the touches data has been set), payoutStyle must be defined and cannot be None.\r\n\r\nSupported string (enumeration) values are: [Deferred, Immediate].",
                 "nullable": true
               },
               "premium": {
