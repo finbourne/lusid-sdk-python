@@ -9,7 +9,7 @@
       "url": "https://www.finbourne.com",
       "email": "info@finbourne.com"
     },
-    "version": "1.0.100",
+    "version": "1.0.101",
     "x-logo": {
       "url": "https://www.lusid.com/app/assets/logo_white.png",
       "backgroundColor": "#415464"
@@ -66264,6 +66264,14 @@
                 "description": "The calculation type applied to the bond coupon amount. This is required for bonds that have a particular type of computing the period coupon, such as simple compounding,\r\nirregular coupons etc.\r\nThe default CalculationType is `Standard`, which returns a coupon amount equal to Principal * Coupon Rate / Coupon Frequency. Coupon Frequency is 12M / Payment Frequency.\r\nPayment Frequency can be 1M, 3M, 6M, 12M etc. So Coupon Frequency can be 12, 4, 2, 1 respectively.\r\n\r\nSupported string (enumeration) values are: [Standard, DayCountCoupon, NoCalculationFloater, BrazilFixedCoupon].",
                 "nullable": true
               },
+              "roundingConventions": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/components/schemas/RoundingConvention"
+                },
+                "description": "Rounding conventions for analytics, if any.",
+                "nullable": true
+              },
               "instrumentType": {
                 "enum": [
                   "QuotedSecurity",
@@ -67473,6 +67481,14 @@
                   "$ref": "#/components/schemas/Schedule"
                 },
                 "description": "schedules.",
+                "nullable": true
+              },
+              "roundingConventions": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/components/schemas/RoundingConvention"
+                },
+                "description": "Rounding conventions for analytics, if any.",
                 "nullable": true
               },
               "instrumentType": {
@@ -83002,6 +83018,33 @@
           }
         ],
         "description": "A simple result value holding a string"
+      },
+      "RoundingConvention": {
+        "type": "object",
+        "properties": {
+          "faceValue": {
+            "type": "number",
+            "description": "The face value to round against.\r\nThe number to be rounded is scaled to this face value before being rounded, and then re-scaled to the holding amount.\r\nFor example if rounding an accrued interest value using a FaceValue of 1,000, but 10,000 units are held,\r\nthen the initial calculated value would be divided by 10,000, then multiplied by 1,000 and rounded per the convention.\r\nThe result of this would then be divided by 1,000 and multiplied by 10,000 to get the final value.",
+            "format": "double"
+          },
+          "precision": {
+            "type": "integer",
+            "description": "The precision of the rounding.  The decimal places to which the rounding takes place.",
+            "format": "int32"
+          },
+          "roundingTarget": {
+            "type": "string",
+            "description": "The target of the rounding convention.\r\nAccepted values are 'AccruedInterest', 'Cashflows', or 'All'\r\n\r\nSupported string (enumeration) values are: [All, AccruedInterest, Cashflows].",
+            "nullable": true
+          },
+          "roundingType": {
+            "type": "string",
+            "description": "The type of rounding.  e.g. Round Up, Round Down\r\n\r\nSupported string (enumeration) values are: [Down, Up, Floor, Ceiling, Nearest].",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false,
+        "description": "Certain bonds will follow certain rounding conventions.\r\nFor example, Thai government bonds will round accrued interest and cashflow values 2dp, whereas for\r\nFrench government bonds, the rounding is to 7dp."
       },
       "Schedule": {
         "required": [
