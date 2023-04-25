@@ -130,7 +130,7 @@ with lusid.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = lusid.ReconciliationsApi(api_client)
     scope = 'scope_example' # str | The scope of the mapping.
-code = 'code_example' # str | The code fof the mapping.
+code = 'code_example' # str | The code of the mapping.
 
     try:
         # [EARLY ACCESS] GetReconciliationMapping: Get a mapping
@@ -145,7 +145,7 @@ code = 'code_example' # str | The code fof the mapping.
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **scope** | **str**| The scope of the mapping. | 
- **code** | **str**| The code fof the mapping. | 
+ **code** | **str**| The code of the mapping. | 
 
 ### Return type
 
