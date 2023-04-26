@@ -9,7 +9,7 @@
       "url": "https://www.finbourne.com",
       "email": "info@finbourne.com"
     },
-    "version": "1.0.112",
+    "version": "1.0.113",
     "x-logo": {
       "url": "https://www.lusid.com/app/assets/logo_white.png",
       "backgroundColor": "#415464"
@@ -80546,7 +80546,7 @@
           "traversalDirection": {
             "minLength": 1,
             "type": "string",
-            "description": "Direction of relationship betwen the requested entity and related entity. This can be 'In' or 'Out'. Read more about relationships traversal direction in LUSID Knowledge Base here https://support.lusid.com/relationships."
+            "description": "Direction of relationship between the requested entity and related entity. This can be 'In' or 'Out'. Read more about relationships traversal direction in LUSID Knowledge Base here https://support.lusid.com/knowledgebase/article/KA-01679."
           },
           "traversalDescription": {
             "minLength": 1,
@@ -86731,11 +86731,11 @@
     },
     {
       "name": "Relationship Definitions",
-      "description": "Methods for interacting with Relationship Definitions. Read more about Relationship in the LUSID Knowledge Base at https://support.lusid.com/relationships."
+      "description": "Methods for interacting with Relationship Definitions. Read more about Relationships in the LUSID Knowledge Base at https://support.lusid.com/knowledgebase/article/KA-01679."
     },
     {
       "name": "Relationships",
-      "description": "Methods for interacting with Relationships. Read more about Relationships in the LUSID Knowledge Base here https://support.lusid.com/relationships."
+      "description": "Methods for interacting with Relationships. Read more about Relationships in the LUSID Knowledge Base here https://support.lusid.com/knowledgebase/article/KA-01679."
     },
     {
       "name": "Schemas",
