@@ -6,7 +6,7 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **start_date** | **datetime** | The Start date of the bond, this is normally when accrual of the first coupon begins. | 
 **maturity_date** | **datetime** | The Maturity date of the bond, this is when the last coupon accrual period ends.  Note that while most bonds have their last payment on this date there are some cases where the final payment is the next working day. | 
-**dom_ccy** | **str** | The domestic currency of the instrument. | 
+**dom_ccy** | **str** | The domestic currency of the instrument. This should be the same as the Currency set on the FlowConventions. | 
 **flow_conventions** | [**FlowConventions**](FlowConventions.md) |  | 
 **principal** | **float** | The face-value or principal for the bond at outset.  This might be reduced through its lifetime in the event of amortisation or similar. | 
 **coupon_rate** | **float** | Simple coupon rate. | 
