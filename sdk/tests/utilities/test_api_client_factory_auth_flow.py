@@ -60,10 +60,7 @@ class ApiFactory(unittest.TestCase):
         all_env_vars["FBN_ACCESS_TOKEN"] = self.pat_token
 
         with patch.dict(self.os_environ_dict_str, all_env_vars, clear=True):
-            with self.assertLogs() as context_manager:
-                import logging
-                logger = logging.getLogger()
-                logger.setLevel(logging.DEBUG)
+            with self.assertLogs('root', level='DEBUG') as context_manager:
 
                 ApiClientFactory(api_secrets_filename="secrets_file_not_exist.json")
 
