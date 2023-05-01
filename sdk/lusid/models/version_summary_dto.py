@@ -68,7 +68,7 @@ class VersionSummaryDto(object):
         :type build_version: str
         :param excel_version: 
         :type excel_version: str
-        :param links:  Collection of links.
+        :param links: 
         :type links: list[lusid.Link]
 
         """  # noqa: E501
@@ -154,7 +154,6 @@ class VersionSummaryDto(object):
     def links(self):
         """Gets the links of this VersionSummaryDto.  # noqa: E501
 
-        Collection of links.  # noqa: E501
 
         :return: The links of this VersionSummaryDto.  # noqa: E501
         :rtype: list[lusid.Link]
@@ -165,7 +164,6 @@ class VersionSummaryDto(object):
     def links(self, links):
         """Sets the links of this VersionSummaryDto.
 
-        Collection of links.  # noqa: E501
 
         :param links: The links of this VersionSummaryDto.  # noqa: E501
         :type links: list[lusid.Link]
