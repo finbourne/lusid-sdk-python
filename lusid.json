@@ -9,7 +9,7 @@
       "url": "https://www.finbourne.com",
       "email": "info@finbourne.com"
     },
-    "version": "1.0.129",
+    "version": "1.0.130",
     "x-logo": {
       "url": "https://www.lusid.com/app/assets/logo_white.png",
       "backgroundColor": "#415464"
@@ -71933,9 +71933,7 @@
           "paymentCalendars",
           "paymentFrequency",
           "resetCalendars",
-          "resetDays",
-          "rollConvention",
-          "settleDays"
+          "rollConvention"
         ],
         "type": "object",
         "properties": {
@@ -71977,12 +71975,12 @@
           },
           "settleDays": {
             "type": "integer",
-            "description": "DEPRECATED\r\nNumber of Good Business Days between the trade date and the effective or settlement date of the instrument.\r\nThis field is now deprecated and not picked up in schedule generation or adjustment to bond accrual start date. Default to 0.",
+            "description": "DEPRECATED\r\nNumber of Good Business Days between the trade date and the effective or settlement date of the instrument.\r\nThis field is now deprecated and not picked up in schedule generation or adjustment to bond accrual start date. Defaulted to 0 if not set.",
             "format": "int32"
           },
           "resetDays": {
             "type": "integer",
-            "description": "The number of Good Business Days between determination and payment of reset.",
+            "description": "The number of Good Business Days between determination and payment of reset. Defaulted to 0 if not set.",
             "format": "int32"
           },
           "leapDaysIncluded": {
