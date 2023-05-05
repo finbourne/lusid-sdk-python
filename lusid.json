@@ -9,7 +9,7 @@
       "url": "https://www.finbourne.com",
       "email": "info@finbourne.com"
     },
-    "version": "1.0.134",
+    "version": "1.0.135",
     "x-logo": {
       "url": "https://www.lusid.com/app/assets/logo_white.png",
       "backgroundColor": "#415464"
@@ -41655,6 +41655,200 @@
         "x-fbn-apistatus": "EarlyAccess"
       }
     },
+    "/api/portfolios/{scope}/{code}/returns/dispersion/$aggregated": {
+      "post": {
+        "tags": [
+          "Portfolios"
+        ],
+        "summary": "[EARLY ACCESS] GetAggregatedReturnsDispersionMetrics: Get the Aggregated Returns Dispersion metric",
+        "description": "Calculate the dispersion metric with the Aggregate Returns which are on the specified portfolio.\r\n           This works only for composites which have at least 6 constituents for a full year in.",
+        "operationId": "GetAggregatedReturnsDispersionMetrics",
+        "parameters": [
+          {
+            "name": "scope",
+            "in": "path",
+            "description": "The scope of the Portfolio.",
+            "required": true,
+            "schema": {
+              "maxLength": 64,
+              "minLength": 1,
+              "pattern": "^[a-zA-Z0-9\\-_]+$",
+              "type": "string"
+            }
+          },
+          {
+            "name": "code",
+            "in": "path",
+            "description": "The code of the  Portfolio.",
+            "required": true,
+            "schema": {
+              "maxLength": 64,
+              "minLength": 1,
+              "pattern": "^[a-zA-Z0-9\\-_]+$",
+              "type": "string"
+            }
+          },
+          {
+            "name": "asAt",
+            "in": "query",
+            "description": "The asAt datetime at which to retrieve the Returns. Defaults to the latest.",
+            "schema": {
+              "type": "string",
+              "format": "date-time"
+            },
+            "x-nullable": true
+          }
+        ],
+        "requestBody": {
+          "description": "The request used in the AggregatedReturnsDispersionMetric.",
+          "content": {
+            "application/json-patch+json": {
+              "schema": {
+                "$ref": "#/components/schemas/AggregatedReturnsDispersionRequest"
+              },
+              "example": {
+                "toEffectiveAt": "2023-01-01",
+                "yearsCount": 10,
+                "returnIds": [
+                  {
+                    "scope": "TestScope",
+                    "code": "default"
+                  }
+                ],
+                "recipeId": {
+                  "scope": "ReturnsScope",
+                  "code": "ReturnCode"
+                },
+                "compositeMethod": "Asset",
+                "alternativeInceptionDate": "2020-01-01"
+              }
+            },
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/AggregatedReturnsDispersionRequest"
+              },
+              "example": {
+                "toEffectiveAt": "2023-01-01",
+                "yearsCount": 10,
+                "returnIds": [
+                  {
+                    "scope": "TestScope",
+                    "code": "default"
+                  }
+                ],
+                "recipeId": {
+                  "scope": "ReturnsScope",
+                  "code": "ReturnCode"
+                },
+                "compositeMethod": "Asset",
+                "alternativeInceptionDate": "2020-01-01"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/AggregatedReturnsDispersionRequest"
+              },
+              "example": {
+                "toEffectiveAt": "2023-01-01",
+                "yearsCount": 10,
+                "returnIds": [
+                  {
+                    "scope": "TestScope",
+                    "code": "default"
+                  }
+                ],
+                "recipeId": {
+                  "scope": "ReturnsScope",
+                  "code": "ReturnCode"
+                },
+                "compositeMethod": "Asset",
+                "alternativeInceptionDate": "2020-01-01"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/AggregatedReturnsDispersionRequest"
+              },
+              "example": {
+                "toEffectiveAt": "2023-01-01",
+                "yearsCount": 10,
+                "returnIds": [
+                  {
+                    "scope": "TestScope",
+                    "code": "default"
+                  }
+                ],
+                "recipeId": {
+                  "scope": "ReturnsScope",
+                  "code": "ReturnCode"
+                },
+                "compositeMethod": "Asset",
+                "alternativeInceptionDate": "2020-01-01"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "The aggregated returns grouped by return stream.",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/CompositeDispersionResponse"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CompositeDispersionResponse"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CompositeDispersionResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "The details of the input related failure",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/LusidValidationProblemDetails"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/LusidValidationProblemDetails"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/LusidValidationProblemDetails"
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "Error response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/LusidProblemDetails"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "oauth2": []
+          }
+        ],
+        "x-fbn-apistatus": "EarlyAccess"
+      }
+    },
     "/api/portfolios/{scope}/{code}/returns/{returnScope}/{returnCode}": {
       "post": {
         "tags": [
@@ -65067,6 +65261,50 @@
         "additionalProperties": false,
         "description": "A list of Aggregated Returns."
       },
+      "AggregatedReturnsDispersionRequest": {
+        "type": "object",
+        "properties": {
+          "toEffectiveAt": {
+            "maxLength": 256,
+            "minLength": 0,
+            "pattern": "^[a-zA-Z0-9\\-_\\+:\\.]+$",
+            "type": "string",
+            "description": "The end date for when the you want the dispersion to be calculated.",
+            "format": "dateorcutlabel",
+            "nullable": true
+          },
+          "yearsCount": {
+            "type": "integer",
+            "description": "For how many years to calculate the dispersion. Default to 10.",
+            "format": "int32"
+          },
+          "returnIds": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ResourceId"
+            },
+            "description": "The Scope and code of the returns.",
+            "nullable": true
+          },
+          "recipeId": {
+            "$ref": "#/components/schemas/ResourceId"
+          },
+          "compositeMethod": {
+            "type": "string",
+            "description": "The method used to calculate the Portfolio performance: Equal/Asset.",
+            "nullable": true
+          },
+          "alternativeInceptionDate": {
+            "maxLength": 1024,
+            "minLength": 0,
+            "type": "string",
+            "description": "Optional - either a date, or the key for a portfolio property containing a date. If provided, the given date will override the inception date for this request.",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false,
+        "description": "The request used in the AggregatedReturnsDispersionMetric."
+      },
       "AggregatedReturnsRequest": {
         "required": [
           "metrics"
@@ -67610,6 +67848,98 @@
         },
         "additionalProperties": false,
         "description": "An identifier that uniquely describes an item of complex market data such as an interest rate curve or volatility surface."
+      },
+      "CompositeDispersion": {
+        "required": [
+          "dispersionCalculation",
+          "effectiveAt",
+          "firstQuartile",
+          "range",
+          "thirdQuartile",
+          "variance"
+        ],
+        "type": "object",
+        "properties": {
+          "effectiveAt": {
+            "type": "string",
+            "description": "The date for which dipsersion calculation has been done. This should be 31 Dec for each given year.",
+            "format": "date-time"
+          },
+          "dispersionCalculation": {
+            "type": "number",
+            "description": "The result for the dispersion calculation on the given effectiveAt.",
+            "format": "double"
+          },
+          "variance": {
+            "type": "number",
+            "description": "The variance on the given effectiveAt.",
+            "format": "double"
+          },
+          "firstQuartile": {
+            "type": "number",
+            "description": "First Quartile (Q1) =  (lower quartile) = the middle of the bottom half of the returns.",
+            "format": "double"
+          },
+          "thirdQuartile": {
+            "type": "number",
+            "description": "Third Quartile (Q3) =  (higher quartile) = the middle of the top half of the returns.",
+            "format": "double"
+          },
+          "range": {
+            "type": "number",
+            "description": "Highest return - Lowest return.",
+            "format": "double"
+          },
+          "constituentsInScope": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ResourceId"
+            },
+            "description": "List containing Composite members which are part of the dispersion calcualtion.",
+            "nullable": true
+          },
+          "constituentsExcluded": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ResourceId"
+            },
+            "description": "List containing the Composite members which are not part of the dispersion calculation",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false,
+        "description": "A list of Dispersion calculations for the given years."
+      },
+      "CompositeDispersionResponse": {
+        "type": "object",
+        "properties": {
+          "href": {
+            "type": "string",
+            "description": "The specific Uniform Resource Identifier (URI) for this resource at the requested effective and asAt datetime.",
+            "format": "uri",
+            "nullable": true
+          },
+          "results": {
+            "type": "object",
+            "additionalProperties": {
+              "type": "array",
+              "items": {
+                "$ref": "#/components/schemas/CompositeDispersion"
+              }
+            },
+            "description": "Dispersion returns calculation grouped by ReturnId",
+            "nullable": true
+          },
+          "links": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Link"
+            },
+            "description": "Collection of links.",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
       },
       "Compounding": {
         "required": [
