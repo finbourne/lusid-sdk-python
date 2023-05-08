@@ -15,7 +15,6 @@ Name | Type | Description | Notes
 **properties** | [**dict(str, ModelProperty)**](ModelProperty.md) | A set of unique portfolio properties to add custom data to the transaction portfolio. Each property must be from the &#39;Portfolio&#39; domain and identified by a key in the format {domain}/{scope}/{code}, for example &#39;Portfolio/Manager/Id&#39;. Note these properties must be pre-defined. | [optional] 
 **instrument_scopes** | **list[str]** | The resolution strategy used to resolve instruments of transactions/holdings upserted to this portfolio. | [optional] 
 **amortisation_method** | **str** | The amortisation method the portfolio is using in the calculation. This can be &#39;NoAmortisation&#39;, &#39;StraightLine&#39; or &#39;EffectiveYield&#39;. | [optional] 
-**transaction_type_scope** | **str** | The scope of the transaction types. | [optional] 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 
