@@ -20,6 +20,7 @@ Name | Type | Description | Notes
 **instrument_scopes** | **list[str]** | The instrument scope resolution strategy of this portfolio. | [optional] 
 **accounting_method** | **str** | . The available values are: Default, AverageCost, FirstInFirstOut, LastInFirstOut, HighestCostFirst, LowestCostFirst | [optional] 
 **amortisation_method** | **str** | The amortisation method the portfolio is using in the calculation. This can be &#39;NoAmortisation&#39;, &#39;StraightLine&#39; or &#39;EffectiveYield&#39;. | [optional] 
+**transaction_type_scope** | **str** | The scope of the transaction types. | [optional] 
 **links** | [**list[Link]**](Link.md) | Collection of links. | [optional] 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)

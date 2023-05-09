@@ -9,7 +9,7 @@
       "url": "https://www.finbourne.com",
       "email": "info@finbourne.com"
     },
-    "version": "1.0.146",
+    "version": "1.0.147",
     "x-logo": {
       "url": "https://www.lusid.com/app/assets/logo_white.png",
       "backgroundColor": "#415464"
@@ -50622,7 +50622,8 @@
                   }
                 },
                 "instrumentScopes": [],
-                "amortisationMethod": "NoAmortisation"
+                "amortisationMethod": "NoAmortisation",
+                "transactionTypeScope": "SomeScope"
               }
             },
             "application/json": {
@@ -50661,7 +50662,8 @@
                   }
                 },
                 "instrumentScopes": [],
-                "amortisationMethod": "NoAmortisation"
+                "amortisationMethod": "NoAmortisation",
+                "transactionTypeScope": "SomeScope"
               }
             },
             "text/json": {
@@ -50700,7 +50702,8 @@
                   }
                 },
                 "instrumentScopes": [],
-                "amortisationMethod": "NoAmortisation"
+                "amortisationMethod": "NoAmortisation",
+                "transactionTypeScope": "SomeScope"
               }
             },
             "application/*+json": {
@@ -50739,7 +50742,8 @@
                   }
                 },
                 "instrumentScopes": [],
-                "amortisationMethod": "NoAmortisation"
+                "amortisationMethod": "NoAmortisation",
+                "transactionTypeScope": "SomeScope"
               }
             }
           },
@@ -68977,6 +68981,14 @@
             "type": "string",
             "description": "The amortisation method the portfolio is using in the calculation. This can be 'NoAmortisation', 'StraightLine' or 'EffectiveYield'.",
             "nullable": true
+          },
+          "transactionTypeScope": {
+            "maxLength": 64,
+            "minLength": 1,
+            "pattern": "^[a-zA-Z0-9\\-_]+$",
+            "type": "string",
+            "description": "The scope of the transaction types.",
+            "nullable": true
           }
         },
         "additionalProperties": false
@@ -69431,6 +69443,14 @@
           "amortisationMethod": {
             "type": "string",
             "description": "The amortisation method the portfolio is using in the calculation. This can be 'NoAmortisation', 'StraightLine' or 'EffectiveYield'.",
+            "nullable": true
+          },
+          "transactionTypeScope": {
+            "maxLength": 64,
+            "minLength": 1,
+            "pattern": "^[a-zA-Z0-9\\-_]+$",
+            "type": "string",
+            "description": "The scope of the transaction types.",
             "nullable": true
           }
         },
@@ -78658,6 +78678,11 @@
           "amortisationMethod": {
             "type": "string",
             "description": "The amortisation method the portfolio is using in the calculation. This can be 'NoAmortisation', 'StraightLine' or 'EffectiveYield'.",
+            "nullable": true
+          },
+          "transactionTypeScope": {
+            "type": "string",
+            "description": "The scope of the transaction types.",
             "nullable": true
           },
           "links": {
