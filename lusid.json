@@ -9,7 +9,7 @@
       "url": "https://www.finbourne.com",
       "email": "info@finbourne.com"
     },
-    "version": "1.0.143",
+    "version": "1.0.144",
     "x-logo": {
       "url": "https://www.lusid.com/app/assets/logo_white.png",
       "backgroundColor": "#415464"
@@ -2990,6 +2990,19 @@
             "x-nullable": true
           },
           {
+            "name": "propertyKeys",
+            "in": "query",
+            "description": "A list of property keys from the \"Calendar\" domain to decorate onto the calendar, \r\n            These take the format {domain}/{scope}/{code} e.g. \"Calendar/System/Name\".",
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "string",
+                "description": "The key that uniquely identifies the property. It has the format {domain}/{scope}/{code}."
+              }
+            },
+            "x-nullable": true
+          },
+          {
             "name": "filter",
             "in": "query",
             "description": "Expression to filter the result set. Read more about filtering results from LUSID here https://support.lusid.com/filtering-results-from-lusid.",
@@ -3485,7 +3498,7 @@
           "Calendars"
         ],
         "summary": "[EARLY ACCESS] ListCalendarsInScope: List all calenders in a specified scope",
-        "description": "List calendars at a point in AsAt time.",
+        "description": "List calendars in a Scope at a point in AsAt time.",
         "operationId": "ListCalendarsInScope",
         "parameters": [
           {
@@ -3540,6 +3553,19 @@
               "minimum": 1,
               "type": "integer",
               "format": "int32"
+            },
+            "x-nullable": true
+          },
+          {
+            "name": "propertyKeys",
+            "in": "query",
+            "description": "A list of property keys from the \"Calendar\" domain to decorate onto the calendar, \r\n            These take the format {domain}/{scope}/{code} e.g. \"Calendar/System/Name\".",
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "string",
+                "description": "The key that uniquely identifies the property. It has the format {domain}/{scope}/{code}."
+              }
             },
             "x-nullable": true
           },
@@ -3809,6 +3835,19 @@
               "pattern": "^[a-zA-Z0-9\\-_]+$",
               "type": "string"
             }
+          },
+          {
+            "name": "propertyKeys",
+            "in": "query",
+            "description": "A list of property keys from the \"Calendar\" domain to decorate onto the calendar, \r\n            These take the format {domain}/{scope}/{code} e.g. \"Calendar/System/Name\".",
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "string",
+                "description": "The key that uniquely identifies the property. It has the format {domain}/{scope}/{code}."
+              }
+            },
+            "x-nullable": true
           },
           {
             "name": "asAt",
