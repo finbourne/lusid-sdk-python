@@ -9,7 +9,7 @@
       "url": "https://www.finbourne.com",
       "email": "info@finbourne.com"
     },
-    "version": "1.0.145",
+    "version": "1.0.146",
     "x-logo": {
       "url": "https://www.lusid.com/app/assets/logo_white.png",
       "backgroundColor": "#415464"
@@ -74304,19 +74304,19 @@
               },
               "baseCPI": {
                 "type": "number",
-                "description": "BaseCPI value. This is optional, if not provided the BaseCPI value will be calculated from the BaseCPIDate,\r\nIf that too is not present the StartDate will be used.\r\nNote that both BaseCPI and BaseCPIDate cannot be set.\r\nSome bonds are issued with a BaseCPI date that does not correspond to the StartDate CPI value, in this\r\ncase the value should be provided here or with the BaseCPIDate.",
+                "description": "BaseCPI value. This is optional, if not provided the BaseCPI value will be calculated from the BaseCPIDate,\r\nif that too is not present the StartDate will be used.\r\n            \r\nIf provided then this value will always set the BaseCPI on this bond.\r\n            \r\nThe BaseCPI of an inflation linked bond is calculated using the following logic:\r\n- If a BaseCPI value is provided, this is used.\r\n- Otherwise, if BaseCPIDate is provided, the CPI for this date is calculated and used.\r\n- Otherwise, the CPI for the StartDate is calculated and used.\r\n            \r\nNote that if both BaseCPI and BaseCPIDate are set, the BaseCPI value will be used and the BaseCPIDate\r\nwill be ignored but can still be added for informative purposes.\r\n            \r\nSome bonds are issued with a BaseCPI date that does not correspond to the StartDate CPI value, in this\r\ncase the value should be provided here or with the BaseCPIDate.",
                 "format": "double",
                 "nullable": true
               },
               "baseCPIDate": {
                 "type": "string",
-                "description": "BaseCPIDate. This is optional, if not provided the BaseCPI value will taken from the BaseCPI property,\r\nif that too is not present than the StartDate will be used.\r\nIf present, the BaseCPI is calculated for this date, note this is an un-lagged date (similar to StartDate)\r\nso the Bond ObservationLag will be applied to this date when calculating the CPI.\r\nNote that both BaseCPI and BaseCPIDate cannot be set.\r\nSome bonds are issued with a BaseCPI date that does not correspond to the StartDate CPI value, in this\r\ncase the value should be provided here or with the actual BaseCPI.",
+                "description": "BaseCPIDate. This is optional. Gives the date that the BaseCPI is calculated for.\r\n            \r\nNote this is an un-lagged date (similar to StartDate) so the Bond ObservationLag will\r\nbe applied to this date when calculating the CPI.\r\n            \r\nThe BaseCPI of an inflation linked bond is calculated using the following logic:\r\n- If a BaseCPI value is provided, this is used.\r\n- Otherwise, if BaseCPIDate is provided, the CPI for this date is calculated and used.\r\n- Otherwise, the CPI for the StartDate is calculated and used.\r\n            \r\nNote that if both BaseCPI and BaseCPIDate are set, the BaseCPI value will be used and the BaseCPIDate\r\nwill be ignored but can still be added for informative purposes.\r\n            \r\nSome bonds are issued with a BaseCPI date that does not correspond to the StartDate CPI value, in this\r\ncase the value should be provided here or with the actual BaseCPI.",
                 "format": "date-time",
                 "nullable": true
               },
               "calculationType": {
                 "type": "string",
-                "description": "The calculation type applied to the bond coupon and principal amount.\r\nThe default CalculationType is `Standard` and currently this is the only value supported.\r\n\r\nSupported string (enumeration) values are: [Standard, Quarterly, Ratio].",
+                "description": "The calculation type applied to the bond coupon and principal amount.\r\nThe default CalculationType is `Standard`.\r\n\r\nSupported string (enumeration) values are: [Standard, Quarterly, Ratio].",
                 "nullable": true
               },
               "exDividendDays": {
