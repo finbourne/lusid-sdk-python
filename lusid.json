@@ -9,7 +9,7 @@
       "url": "https://www.finbourne.com",
       "email": "info@finbourne.com"
     },
-    "version": "1.0.144",
+    "version": "1.0.145",
     "x-logo": {
       "url": "https://www.lusid.com/app/assets/logo_white.png",
       "backgroundColor": "#415464"
@@ -5205,8 +5205,6 @@
                       453.2625
                     ],
                     "lineage": "",
-                    "calendars": [],
-                    "spotDaysCalculationType": "SingleCalendar",
                     "marketDataType": "FxForwardTenorPipsCurveData"
                   }
                 }
@@ -5286,8 +5284,6 @@
                       453.2625
                     ],
                     "lineage": "",
-                    "calendars": [],
-                    "spotDaysCalculationType": "SingleCalendar",
                     "marketDataType": "FxForwardTenorPipsCurveData"
                   }
                 }
@@ -5367,8 +5363,6 @@
                       453.2625
                     ],
                     "lineage": "",
-                    "calendars": [],
-                    "spotDaysCalculationType": "SingleCalendar",
                     "marketDataType": "FxForwardTenorPipsCurveData"
                   }
                 }
@@ -5448,8 +5442,6 @@
                       453.2625
                     ],
                     "lineage": "",
-                    "calendars": [],
-                    "spotDaysCalculationType": "SingleCalendar",
                     "marketDataType": "FxForwardTenorPipsCurveData"
                   }
                 }
@@ -72899,19 +72891,6 @@
               "marketDataOptions": {
                 "$ref": "#/components/schemas/MarketDataOptions"
               },
-              "calendars": {
-                "type": "array",
-                "items": {
-                  "$ref": "#/components/schemas/FxTenorConvention"
-                },
-                "description": "The list of conventions that should be used when interpreting tenors as dates.",
-                "nullable": true
-              },
-              "spotDaysCalculationType": {
-                "type": "string",
-                "description": "Configures how to calculate the spot date from the build date using the Calendars provided.",
-                "nullable": true
-              },
               "marketDataType": {
                 "enum": [
                   "DiscountFactorCurveData",
@@ -73203,19 +73182,6 @@
               "marketDataOptions": {
                 "$ref": "#/components/schemas/MarketDataOptions"
               },
-              "calendars": {
-                "type": "array",
-                "items": {
-                  "$ref": "#/components/schemas/FxTenorConvention"
-                },
-                "description": "The list of conventions that should be used when interpreting tenors as dates.",
-                "nullable": true
-              },
-              "spotDaysCalculationType": {
-                "type": "string",
-                "description": "Configures how to calculate the spot date from the build date using the Calendars provided.",
-                "nullable": true
-              },
               "marketDataType": {
                 "enum": [
                   "DiscountFactorCurveData",
@@ -73293,19 +73259,6 @@
               },
               "marketDataOptions": {
                 "$ref": "#/components/schemas/MarketDataOptions"
-              },
-              "calendars": {
-                "type": "array",
-                "items": {
-                  "$ref": "#/components/schemas/FxTenorConvention"
-                },
-                "description": "The list of conventions that should be used when interpreting tenors as dates.",
-                "nullable": true
-              },
-              "spotDaysCalculationType": {
-                "type": "string",
-                "description": "Configures how to calculate the spot date from the build date using the Calendars provided.",
-                "nullable": true
               },
               "marketDataType": {
                 "enum": [
@@ -73544,28 +73497,6 @@
           }
         ],
         "description": "LUSID representation of an FX Swap. Composed of two FX Forwards."
-      },
-      "FxTenorConvention": {
-        "required": [
-          "calendarCode",
-          "spotDays"
-        ],
-        "type": "object",
-        "properties": {
-          "calendarCode": {
-            "maxLength": 64,
-            "minLength": 0,
-            "type": "string",
-            "description": "The code of the holiday calendar that should be used when interpreting FX tenors."
-          },
-          "spotDays": {
-            "type": "integer",
-            "description": "The minimum number of business days that must pass within this calendar when calculating the spot date.",
-            "format": "int32"
-          }
-        },
-        "additionalProperties": false,
-        "description": "A wrapper of conventions that should be used when interpreting tenors in the context of FX.\r\nFor instance, can be used to control how tenors are interpreted on an FxForwardTenorCurveData instance."
       },
       "FxVolSurfaceData": {
         "allOf": [
