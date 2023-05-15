@@ -9,7 +9,7 @@
       "url": "https://www.finbourne.com",
       "email": "info@finbourne.com"
     },
-    "version": "1.0.165",
+    "version": "1.0.166",
     "x-logo": {
       "url": "https://www.lusid.com/app/assets/logo_white.png",
       "backgroundColor": "#415464"
@@ -75783,6 +75783,28 @@
           },
           "amortisation": {
             "$ref": "#/components/schemas/StepSchedule"
+          },
+          "firstRegularPaymentDate": {
+            "type": "string",
+            "description": "Optional payment date of the first regular coupon.\r\nMust be greater than the StartDate.\r\nIf set, the regular coupon schedule will be built such that the first regular coupon\r\nwill end on this date. The start date of this coupon will be calculated as normal and\r\na stub coupon will be created from the StartDate to the start of the first regular coupon.",
+            "format": "date-time",
+            "nullable": true
+          },
+          "firstCouponType": {
+            "type": "string",
+            "description": "Optional coupon type setting for the first coupon, can be used with Stub coupons.\r\nIf set to \"ProRata\" (the default), the coupon year fraction is calculated as normal,\r\nhowever if set to \"Full\" the year fraction is overwritten with the standard year fraction\r\nfor a regular ful\" coupon. Note this does not use the day count convention but rather is defined\r\ndirectly from the tenor (i.e. a quarterly leg will be set to 0.25).\r\n\r\nSupported string (enumeration) values are: [ProRata, Full].",
+            "nullable": true
+          },
+          "lastRegularPaymentDate": {
+            "type": "string",
+            "description": "Optional payment date of the last regular coupon.\r\nMust be less than the Maturity date.\r\nIf set, the regular coupon schedule will be built up to this date and the final\r\ncoupon will be a stub between this date and the Maturity date.",
+            "format": "date-time",
+            "nullable": true
+          },
+          "lastCouponType": {
+            "type": "string",
+            "description": "Optional coupon type setting for the last coupon, can be used with Stub coupons.\r\nIf set to \"ProRata\" (the default), the coupon year fraction is calculated as normal,\r\nhowever if set to \"Full\" the year fraction is overwritten with the standard year fraction\r\nfor a regular ful\" coupon. Note this does not use the day count convention but rather is defined\r\ndirectly from the tenor (i.e. a quarterly leg will be set to 0.25).\r\n\r\nSupported string (enumeration) values are: [ProRata, Full].",
+            "nullable": true
           }
         },
         "additionalProperties": false,
