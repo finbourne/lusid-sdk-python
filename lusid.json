@@ -9,7 +9,7 @@
       "url": "https://www.finbourne.com",
       "email": "info@finbourne.com"
     },
-    "version": "1.0.174",
+    "version": "1.0.175",
     "x-logo": {
       "url": "https://www.lusid.com/app/assets/logo_white.png",
       "backgroundColor": "#415464"
@@ -10524,7 +10524,7 @@
           {
             "name": "effectiveAt",
             "in": "query",
-            "description": "The effectiveAt datetime at which to retrieve the Access Metadata",
+            "description": "The effectiveAt datetime at which the Access Metadata will be effective from",
             "schema": {
               "type": "string",
               "format": "dateorcutlabel"
@@ -10885,7 +10885,7 @@
           {
             "name": "effectiveAt",
             "in": "query",
-            "description": "The effectiveAt datetime at which to retrieve the Access Metadata",
+            "description": "The effectiveAt datetime at which the Access Metadata will be effective from",
             "schema": {
               "type": "string",
               "format": "dateorcutlabel"
