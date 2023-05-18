@@ -9,7 +9,7 @@
       "url": "https://www.finbourne.com",
       "email": "info@finbourne.com"
     },
-    "version": "1.0.181",
+    "version": "1.0.182",
     "x-logo": {
       "url": "https://www.lusid.com/app/assets/logo_white.png",
       "backgroundColor": "#415464"
@@ -67350,7 +67350,7 @@
                 "additionalProperties": {
                   "type": "string"
                 },
-                "description": "external market codes and identifiers for the cds index, e.g. a RED code, BBG ID or ICE code."
+                "description": "External market codes and identifiers for the cds index, e.g. a RED code, BBG ID or ICE code."
               },
               "basket": {
                 "$ref": "#/components/schemas/Basket"
@@ -67778,7 +67778,7 @@
                 "additionalProperties": {
                   "type": "string"
                 },
-                "description": "external market codes and identifiers for the bond, e.g. ISIN.",
+                "description": "External market codes and identifiers for the bond, e.g. ISIN.",
                 "nullable": true
               },
               "calculationType": {
@@ -68238,7 +68238,7 @@
               "underlyingIdentifier": {
                 "minLength": 1,
                 "type": "string",
-                "description": "external market codes and identifiers for the CFD, e.g. RIC.\r\n\r\nSupported string (enumeration) values are: [LusidInstrumentId, Isin, Sedol, Cusip, ClientInternal, Figi, RIC, QuotePermId, REDCode, BBGId, ICECode]."
+                "description": "External market codes and identifiers for the CFD, e.g. RIC.\r\n\r\nSupported string (enumeration) values are: [LusidInstrumentId, Isin, Sedol, Cusip, ClientInternal, Figi, RIC, QuotePermId, REDCode, BBGId, ICECode]."
               },
               "instrumentType": {
                 "enum": [
@@ -70934,7 +70934,7 @@
                   }
                 },
                 "additionalProperties": false,
-                "description": "external market codes and identifiers for the equity, e.g. IBM",
+                "description": "External market codes and identifiers for the equity, e.g. IBM",
                 "nullable": true
               },
               "domCcy": {
@@ -71128,7 +71128,7 @@
               "deliveryType": {
                 "minLength": 1,
                 "type": "string",
-                "description": "is the option cash settled or physical delivery of option\r\n\r\nSupported string (enumeration) values are: [Cash, Physical]."
+                "description": "Is the option cash settled or physical delivery of option\r\n\r\nSupported string (enumeration) values are: [Cash, Physical]."
               },
               "optionType": {
                 "minLength": 1,
@@ -71281,7 +71281,7 @@
               "underlyingIdentifier": {
                 "minLength": 1,
                 "type": "string",
-                "description": "external market codes and identifiers for the EquitySwap, e.g. RIC.\r\n\r\nSupported string (enumeration) values are: [LusidInstrumentId, Isin, Sedol, Cusip, ClientInternal, Figi, RIC, QuotePermId, REDCode, BBGId, ICECode]."
+                "description": "External market codes and identifiers for the EquitySwap, e.g. RIC.\r\n\r\nSupported string (enumeration) values are: [LusidInstrumentId, Isin, Sedol, Cusip, ClientInternal, Figi, RIC, QuotePermId, REDCode, BBGId, ICECode]."
               },
               "equitySwapDividendPaymentTiming": {
                 "type": "string",
@@ -74578,11 +74578,11 @@
               "inflationIndexName": {
                 "minLength": 1,
                 "type": "string",
-                "description": "Name"
+                "description": "Name of the Inflation Index"
               },
               "inflationInterpolation": {
                 "type": "string",
-                "description": "silly flag for old swaps\r\n\r\nSupported string (enumeration) values are: [Linear, Flat].",
+                "description": "Inflation Interpolation flag, defaults to Linear but some older swaps require Flat.\r\n\r\nSupported string (enumeration) values are: [Linear, Flat].",
                 "nullable": true
               },
               "inflationRollDay": {
@@ -80808,12 +80808,12 @@
               "instrumentIdType": {
                 "minLength": 1,
                 "type": "string",
-                "description": "the type of the instrument id e.g. LusidInstrument Id"
+                "description": "The type of the instrument id e.g. LusidInstrument Id"
               },
               "scope": {
                 "minLength": 1,
                 "type": "string",
-                "description": "(optional) Scope for the instrument"
+                "description": "Scope for the instrument (optional)"
               },
               "instrumentType": {
                 "enum": [
@@ -81223,7 +81223,7 @@
               },
               "repoRate": {
                 "type": "number",
-                "description": "the rate at which interest is to be accrue and be paid upon redemption of the collateral at maturity.\r\nThis field is used to calculate the Repurchase price.\r\nWhile this property is optional, one, and only one, of the RepoRate and RepurchasePrice must be specified.",
+                "description": "The rate at which interest is to be accrue and be paid upon redemption of the collateral at maturity.\r\nThis field is used to calculate the Repurchase price.\r\nWhile this property is optional, one, and only one, of the RepoRate and RepurchasePrice must be specified.",
                 "format": "double",
                 "nullable": true
               },

@@ -8,7 +8,7 @@ Name | Type | Description | Notes
 **start_date** | **datetime** | The start date of the instrument. This is normally synonymous with the trade-date. | 
 **option_maturity_date** | **datetime** | The maturity date of the option. | 
 **option_settlement_date** | **datetime** | The settlement date of the option. | 
-**delivery_type** | **str** | is the option cash settled or physical delivery of option    Supported string (enumeration) values are: [Cash, Physical]. | 
+**delivery_type** | **str** | Is the option cash settled or physical delivery of option    Supported string (enumeration) values are: [Cash, Physical]. | 
 **option_type** | **str** | Type of optionality for the option    Supported string (enumeration) values are: [Call, Put]. | 
 **strike** | **float** | The strike of the option. | 
 **dom_ccy** | **str** | The domestic currency of the instrument. | 

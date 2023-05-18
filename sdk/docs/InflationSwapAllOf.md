@@ -11,8 +11,8 @@ Name | Type | Description | Notes
 **inflation_cap** | **float** | Optional cap, needed for LPI swaps. Should not be set for ZCIIS. | [optional] 
 **inflation_floor** | **float** | Optional floor, needed for LPI swaps. Should not be set for ZCIIS. | [optional] 
 **inflation_frequency** | **str** | Frequency of inflation updated. Optional and defaults to Monthly which is the most common.  However both Australian and New Zealand inflation is published Quarterly. Only tenors of 1M or 3M are supported. | [optional] 
-**inflation_index_name** | **str** | Name | 
-**inflation_interpolation** | **str** | silly flag for old swaps    Supported string (enumeration) values are: [Linear, Flat]. | [optional] 
+**inflation_index_name** | **str** | Name of the Inflation Index | 
+**inflation_interpolation** | **str** | Inflation Interpolation flag, defaults to Linear but some older swaps require Flat.    Supported string (enumeration) values are: [Linear, Flat]. | [optional] 
 **inflation_roll_day** | **int** | Day of the month that inflation rolls from one month to the next. This is optional and defaults to 1, which is  the typically value for the majority of inflation bonds (exceptions include Japan which rolls on the 10th  and some LatAm bonds which roll on the 15th). | [optional] 
 **notional** | **float** | The notional | 
 **observation_lag** | **str** | Observation Lag, must be a number of Months, typically 3 or 4 but sometimes 8. | 
