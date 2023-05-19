@@ -9,7 +9,7 @@
       "url": "https://www.finbourne.com",
       "email": "info@finbourne.com"
     },
-    "version": "1.0.183",
+    "version": "1.0.184",
     "x-logo": {
       "url": "https://www.lusid.com/app/assets/logo_white.png",
       "backgroundColor": "#415464"
@@ -66903,6 +66903,51 @@
         ],
         "description": "LUSID representation of Cap, Floor, or Collar."
       },
+      "CashDependency": {
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/EconomicDependency"
+          },
+          {
+            "required": [
+              "currency",
+              "date",
+              "dependencyType"
+            ],
+            "type": "object",
+            "properties": {
+              "currency": {
+                "type": "string",
+                "description": "The Currency that is depended upon."
+              },
+              "date": {
+                "type": "string",
+                "description": "The effectiveDate of the entity that this is a dependency for.\r\nUnless there is an obvious date this should be, like for a historic reset, then this is the valuation date.",
+                "format": "date-time"
+              },
+              "dependencyType": {
+                "enum": [
+                  "OpaqueDependency",
+                  "CashDependency",
+                  "DiscountingDependency",
+                  "EquityCurveDependency",
+                  "EquityVolDependency",
+                  "FxDependency",
+                  "FxForwardsDependency",
+                  "FxVolDependency",
+                  "IndexProjectionDependency",
+                  "IrVolDependency",
+                  "QuoteDependency",
+                  "Vendor"
+                ],
+                "type": "string",
+                "description": "The available values are: OpaqueDependency, CashDependency, DiscountingDependency, EquityCurveDependency, EquityVolDependency, FxDependency, FxForwardsDependency, FxVolDependency, IndexProjectionDependency, IrVolDependency, QuoteDependency, Vendor"
+              }
+            }
+          }
+        ],
+        "description": "For indicating a dependency upon a currency.\r\nE.g. A Bond will declare a CashDependency for its domestic currency."
+      },
       "CashDividendEvent": {
         "allOf": [
           {
@@ -70785,6 +70830,51 @@
         ],
         "description": "A curve containing discount factors and dates to which they apply"
       },
+      "DiscountingDependency": {
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/EconomicDependency"
+          },
+          {
+            "required": [
+              "currency",
+              "date",
+              "dependencyType"
+            ],
+            "type": "object",
+            "properties": {
+              "currency": {
+                "type": "string",
+                "description": "The currency that needs to be discounted."
+              },
+              "date": {
+                "type": "string",
+                "description": "The effectiveDate of the entity that this is a dependency for.\r\nUnless there is an obvious date this should be, like for a historic reset, then this is the valuation date.",
+                "format": "date-time"
+              },
+              "dependencyType": {
+                "enum": [
+                  "OpaqueDependency",
+                  "CashDependency",
+                  "DiscountingDependency",
+                  "EquityCurveDependency",
+                  "EquityVolDependency",
+                  "FxDependency",
+                  "FxForwardsDependency",
+                  "FxVolDependency",
+                  "IndexProjectionDependency",
+                  "IrVolDependency",
+                  "QuoteDependency",
+                  "Vendor"
+                ],
+                "type": "string",
+                "description": "The available values are: OpaqueDependency, CashDependency, DiscountingDependency, EquityCurveDependency, EquityVolDependency, FxDependency, FxForwardsDependency, FxVolDependency, IndexProjectionDependency, IrVolDependency, QuoteDependency, Vendor"
+              }
+            }
+          }
+        ],
+        "description": "For indicating a dependency on discounting for a given currency.\r\nE.g Valuing a Bond with the Discounting model will declare a DiscountingDependency\r\nfor the domestic currency of the bond to account for the time-value of the future cashFlows of the bond."
+      },
       "EconomicDependency": {
         "required": [
           "dependencyType"
@@ -70793,21 +70883,21 @@
         "properties": {
           "dependencyType": {
             "enum": [
-              "Opaque",
-              "Cash",
-              "Discounting",
-              "EquityCurve",
-              "EquityVol",
-              "Fx",
-              "FxForwards",
-              "FxVol",
-              "IndexProjection",
-              "IrVol",
-              "Quote",
+              "OpaqueDependency",
+              "CashDependency",
+              "DiscountingDependency",
+              "EquityCurveDependency",
+              "EquityVolDependency",
+              "FxDependency",
+              "FxForwardsDependency",
+              "FxVolDependency",
+              "IndexProjectionDependency",
+              "IrVolDependency",
+              "QuoteDependency",
               "Vendor"
             ],
             "type": "string",
-            "description": "The available values are: Opaque, Cash, Discounting, EquityCurve, EquityVol, Fx, FxForwards, FxVol, IndexProjection, IrVol, Quote, Vendor"
+            "description": "The available values are: OpaqueDependency, CashDependency, DiscountingDependency, EquityCurveDependency, EquityVolDependency, FxDependency, FxForwardsDependency, FxVolDependency, IndexProjectionDependency, IrVolDependency, QuoteDependency, Vendor"
           }
         },
         "additionalProperties": false,
@@ -71078,6 +71168,67 @@
           }
         ],
         "description": "Contains data (i.e. dates and prices + metadata) for building Equity curves"
+      },
+      "EquityCurveDependency": {
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/EconomicDependency"
+          },
+          {
+            "required": [
+              "code",
+              "curveType",
+              "date",
+              "dependencyType",
+              "marketIdentifier"
+            ],
+            "type": "object",
+            "properties": {
+              "marketIdentifier": {
+                "maxLength": 50,
+                "minLength": 0,
+                "type": "string",
+                "description": "Type of the code identifying the corresponding equity, e.g. ISIN or CUSIP"
+              },
+              "code": {
+                "maxLength": 50,
+                "minLength": 0,
+                "type": "string",
+                "description": "The code identifying the corresponding equity, e.g. US0378331005 if the MarketIdentifier was set to ISIN"
+              },
+              "curveType": {
+                "maxLength": 50,
+                "minLength": 0,
+                "type": "string",
+                "description": "The curve type of the EquityCurve required. E.g. EquityCurveByPrices"
+              },
+              "date": {
+                "type": "string",
+                "description": "The effectiveDate of the entity that this is a dependency for.\r\nUnless there is an obvious date this should be, like for a historic reset, then this is the valuation date.",
+                "format": "date-time"
+              },
+              "dependencyType": {
+                "enum": [
+                  "OpaqueDependency",
+                  "CashDependency",
+                  "DiscountingDependency",
+                  "EquityCurveDependency",
+                  "EquityVolDependency",
+                  "FxDependency",
+                  "FxForwardsDependency",
+                  "FxVolDependency",
+                  "IndexProjectionDependency",
+                  "IrVolDependency",
+                  "QuoteDependency",
+                  "Vendor"
+                ],
+                "type": "string",
+                "description": "The available values are: OpaqueDependency, CashDependency, DiscountingDependency, EquityCurveDependency, EquityVolDependency, FxDependency, FxForwardsDependency, FxVolDependency, IndexProjectionDependency, IrVolDependency, QuoteDependency, Vendor"
+              }
+            }
+          }
+        ],
+        "description": "For indicating a dependency on an EquityCurve.\r\nE.g. When pricing an EquitySwap one may want to make predictions about the price of the underlying equity at future dates.\r\nIf so, that model would declare an EquityCurve dependency so that it could obtain predictions from the EquityCurve."
       },
       "EquityModelOptions": {
         "allOf": [
@@ -71356,6 +71507,65 @@
           }
         ],
         "description": "LUSID representation of an Equity Swap."
+      },
+      "EquityVolDependency": {
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/EconomicDependency"
+          },
+          {
+            "required": [
+              "code",
+              "date",
+              "dependencyType",
+              "domesticCurrency",
+              "volType"
+            ],
+            "type": "object",
+            "properties": {
+              "code": {
+                "maxLength": 50,
+                "minLength": 0,
+                "type": "string",
+                "description": "The code identifying the corresponding equity, e.g. US0378331005 if the MarketIdentifier was set to ISIN"
+              },
+              "domesticCurrency": {
+                "type": "string",
+                "description": "The domestic currency of the instrument declaring this dependency."
+              },
+              "volType": {
+                "maxLength": 50,
+                "minLength": 0,
+                "type": "string",
+                "description": "Volatility type e.g. \"LN\" and \"N\" for log-normal and normal volatility."
+              },
+              "date": {
+                "type": "string",
+                "description": "The effectiveDate of the entity that this is a dependency for.\r\nUnless there is an obvious date this should be, like for a historic reset, then this is the valuation date.",
+                "format": "date-time"
+              },
+              "dependencyType": {
+                "enum": [
+                  "OpaqueDependency",
+                  "CashDependency",
+                  "DiscountingDependency",
+                  "EquityCurveDependency",
+                  "EquityVolDependency",
+                  "FxDependency",
+                  "FxForwardsDependency",
+                  "FxVolDependency",
+                  "IndexProjectionDependency",
+                  "IrVolDependency",
+                  "QuoteDependency",
+                  "Vendor"
+                ],
+                "type": "string",
+                "description": "The available values are: OpaqueDependency, CashDependency, DiscountingDependency, EquityCurveDependency, EquityVolDependency, FxDependency, FxForwardsDependency, FxVolDependency, IndexProjectionDependency, IrVolDependency, QuoteDependency, Vendor"
+              }
+            }
+          }
+        ],
+        "description": "Economic dependency required to price Equity derivative products that contain optionality.\r\nEquity Vol surface is a grid of implied volatilities for an array of strikes and tenors,\r\nderived from vanilla option prices in the market."
       },
       "EquityVolSurfaceData": {
         "allOf": [
@@ -72808,6 +73018,56 @@
         "additionalProperties": false,
         "description": "Most, if not all, information about contracts is standardized. See, e.g. https://www.cmegroup.com/ for\r\ncommon codes and similar data. This appears to be in common use by well known market information providers, e.g. Bloomberg and Refinitiv."
       },
+      "FxDependency": {
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/EconomicDependency"
+          },
+          {
+            "required": [
+              "date",
+              "dependencyType",
+              "domesticCurrency",
+              "foreignCurrency"
+            ],
+            "type": "object",
+            "properties": {
+              "domesticCurrency": {
+                "type": "string",
+                "description": "DomesticCurrency is the first currency in a currency pair quote e.g. eur-gbp, eur is the domestic currency."
+              },
+              "foreignCurrency": {
+                "type": "string",
+                "description": "ForeignCurrency is the second currency in a currency pair quote e.g. eur-gbp, gbp is the foreign currency."
+              },
+              "date": {
+                "type": "string",
+                "description": "The effectiveAt of the fx rate.",
+                "format": "date-time"
+              },
+              "dependencyType": {
+                "enum": [
+                  "OpaqueDependency",
+                  "CashDependency",
+                  "DiscountingDependency",
+                  "EquityCurveDependency",
+                  "EquityVolDependency",
+                  "FxDependency",
+                  "FxForwardsDependency",
+                  "FxVolDependency",
+                  "IndexProjectionDependency",
+                  "IrVolDependency",
+                  "QuoteDependency",
+                  "Vendor"
+                ],
+                "type": "string",
+                "description": "The available values are: OpaqueDependency, CashDependency, DiscountingDependency, EquityCurveDependency, EquityVolDependency, FxDependency, FxForwardsDependency, FxVolDependency, IndexProjectionDependency, IrVolDependency, QuoteDependency, Vendor"
+              }
+            }
+          }
+        ],
+        "description": "For indicating a dependency on an fx rate.\r\nFor example domestic-foreign for USD-JPY\r\nmeans that 1 unit (dollar) of domestic currency will buy you \"X\" units of foreign (Yen) currency; currently somewhere around 100.\r\nThis is equivalently denoted as USDJPY and USD/JPY\r\n            \r\nOn the assumption that you wish to convert an amount in the domestic currency to the foreign, you would want the (dom,fgn) dependency; domfgn currency pair.\r\nOn the assumption that you wish to convert an amount in the foreign currency to the domestic, you would want the (fgn,dom) dependency; fgndom currency pair.\r\n            \r\nNB: There alternate descriptions for currency pairs that seem to vary between different banks and sectors of the industry, e.g. base and contract\r\n            \r\nIn pricing we are taking the convention that we will convert from FGN to DOM by DIVIDING through by the DOMFGN spot rate."
+      },
       "FxForward": {
         "allOf": [
           {
@@ -73216,6 +73476,63 @@
           }
         ],
         "description": "Contains data (i.e. dates and pips + metadata) for building fx forward curves (when combined with a spot rate to build on)"
+      },
+      "FxForwardsDependency": {
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/EconomicDependency"
+          },
+          {
+            "required": [
+              "curveType",
+              "date",
+              "dependencyType",
+              "domesticCurrency",
+              "foreignCurrency"
+            ],
+            "type": "object",
+            "properties": {
+              "domesticCurrency": {
+                "type": "string",
+                "description": "DomesticCurrency is the first currency in a currency pair quote e.g. eur-gbp, eur is the domestic currency."
+              },
+              "foreignCurrency": {
+                "type": "string",
+                "description": "ForeignCurrency is the second currency in a currency pair quote e.g. eur-gbp, gbp is the foreign currency."
+              },
+              "curveType": {
+                "maxLength": 50,
+                "minLength": 0,
+                "type": "string",
+                "description": "Used to describe the format in which the curve is expressed\r\ne.g. FxFwdCurve (general term to describe any representation), TenorFxFwdCurve, PipsFxFwdCurve."
+              },
+              "date": {
+                "type": "string",
+                "description": "The effectiveDate of the entity that this is a dependency for.\r\nUnless there is an obvious date this should be, like for a historic reset, then this is the valuation date.",
+                "format": "date-time"
+              },
+              "dependencyType": {
+                "enum": [
+                  "OpaqueDependency",
+                  "CashDependency",
+                  "DiscountingDependency",
+                  "EquityCurveDependency",
+                  "EquityVolDependency",
+                  "FxDependency",
+                  "FxForwardsDependency",
+                  "FxVolDependency",
+                  "IndexProjectionDependency",
+                  "IrVolDependency",
+                  "QuoteDependency",
+                  "Vendor"
+                ],
+                "type": "string",
+                "description": "The available values are: OpaqueDependency, CashDependency, DiscountingDependency, EquityCurveDependency, EquityVolDependency, FxDependency, FxForwardsDependency, FxVolDependency, IndexProjectionDependency, IrVolDependency, QuoteDependency, Vendor"
+              }
+            }
+          }
+        ],
+        "description": "Indicates a dependency on an FxForwardCurve.\r\nIdentical to Fx dependencies in the meaning of domestic and foreign currencies, but describes a *set* of fx rates.\r\nThese rates are quoted rates for fx forwards, which can be used to interpolate the forward rate at a specific time in the future.\r\nIn the case of pips, the absolute rates can be expressed as rate = spotFx + pips / pipsPerUnit"
       },
       "FxForwardTenorCurveData": {
         "allOf": [
@@ -73634,6 +73951,63 @@
         },
         "additionalProperties": false,
         "description": "A wrapper of conventions that should be used when interpreting tenors in the context of FX.\r\nFor instance, can be used to control how tenors are interpreted on an FxForwardTenorCurveData instance."
+      },
+      "FxVolDependency": {
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/EconomicDependency"
+          },
+          {
+            "required": [
+              "date",
+              "dependencyType",
+              "domesticCurrency",
+              "foreignCurrency",
+              "volType"
+            ],
+            "type": "object",
+            "properties": {
+              "domesticCurrency": {
+                "type": "string",
+                "description": "DomesticCurrency is the first currency in a currency pair quote e.g. eur-gbp, eur is the domestic currency."
+              },
+              "foreignCurrency": {
+                "type": "string",
+                "description": "ForeignCurrency is the second currency in a currency pair quote e.g. eur-gbp, gbp is the foreign currency."
+              },
+              "volType": {
+                "maxLength": 50,
+                "minLength": 0,
+                "type": "string",
+                "description": "Volatility type e.g. \"LN\" and \"N\" for log-normal and normal volatility."
+              },
+              "date": {
+                "type": "string",
+                "description": "The effectiveDate of the entity that this is a dependency for.\r\nUnless there is an obvious date this should be, like for a historic reset, then this is the valuation date.",
+                "format": "date-time"
+              },
+              "dependencyType": {
+                "enum": [
+                  "OpaqueDependency",
+                  "CashDependency",
+                  "DiscountingDependency",
+                  "EquityCurveDependency",
+                  "EquityVolDependency",
+                  "FxDependency",
+                  "FxForwardsDependency",
+                  "FxVolDependency",
+                  "IndexProjectionDependency",
+                  "IrVolDependency",
+                  "QuoteDependency",
+                  "Vendor"
+                ],
+                "type": "string",
+                "description": "The available values are: OpaqueDependency, CashDependency, DiscountingDependency, EquityCurveDependency, EquityVolDependency, FxDependency, FxForwardsDependency, FxVolDependency, IndexProjectionDependency, IrVolDependency, QuoteDependency, Vendor"
+              }
+            }
+          }
+        ],
+        "description": "Economic dependency required to price FX derivative products that contain optionality.\r\nFX Vol surface is a grid of implied volatilities for an array of strikes and tenors,\r\nderived from vanilla option prices in the market."
       },
       "FxVolSurfaceData": {
         "allOf": [
@@ -74367,6 +74741,65 @@
             }
           }
         ]
+      },
+      "IndexProjectionDependency": {
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/EconomicDependency"
+          },
+          {
+            "required": [
+              "currency",
+              "date",
+              "dependencyType",
+              "indexName",
+              "tenor"
+            ],
+            "type": "object",
+            "properties": {
+              "currency": {
+                "type": "string",
+                "description": "The currency of the corresponding IndexConvention. E.g. this would be USD for a convention named USD.6M.LIBOR"
+              },
+              "tenor": {
+                "maxLength": 50,
+                "minLength": 0,
+                "type": "string",
+                "description": "The tenor of the corresponding IndexConvention. E.g. this would be \"6M\" for a convention named USD.6M.LIBOR"
+              },
+              "indexName": {
+                "maxLength": 50,
+                "minLength": 0,
+                "type": "string",
+                "description": "The IndexName of the corresponding IndexConvention. E.g. this would be \"LIBOR\" for a convention named USD.6M.LIBOR"
+              },
+              "date": {
+                "type": "string",
+                "description": "The effectiveDate of the entity that this is a dependency for.\r\nUnless there is an obvious date this should be, like for a historic reset, then this is the valuation date.",
+                "format": "date-time"
+              },
+              "dependencyType": {
+                "enum": [
+                  "OpaqueDependency",
+                  "CashDependency",
+                  "DiscountingDependency",
+                  "EquityCurveDependency",
+                  "EquityVolDependency",
+                  "FxDependency",
+                  "FxForwardsDependency",
+                  "FxVolDependency",
+                  "IndexProjectionDependency",
+                  "IrVolDependency",
+                  "QuoteDependency",
+                  "Vendor"
+                ],
+                "type": "string",
+                "description": "The available values are: OpaqueDependency, CashDependency, DiscountingDependency, EquityCurveDependency, EquityVolDependency, FxDependency, FxForwardsDependency, FxVolDependency, IndexProjectionDependency, IrVolDependency, QuoteDependency, Vendor"
+              }
+            }
+          }
+        ],
+        "description": "Represents either a dependency on projections of an index.\r\nE.g. If the interest leg of a swap is a FloatingLeg, then it will declare an IndexProjectionDependency upon pricing.\r\nThis is to indicate that pricing the floating leg requires predictions of future fixings of the index."
       },
       "IndustryClassifier": {
         "required": [
@@ -75624,6 +76057,58 @@
         ],
         "description": "Market Data required to build a volatility cube for swaption pricing,  represented by a list of instruments and corresponding market quotes"
       },
+      "IrVolDependency": {
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/EconomicDependency"
+          },
+          {
+            "required": [
+              "currency",
+              "date",
+              "dependencyType",
+              "volType"
+            ],
+            "type": "object",
+            "properties": {
+              "currency": {
+                "type": "string",
+                "description": "The domestic currency of the instrument declaring this dependency."
+              },
+              "volType": {
+                "maxLength": 50,
+                "minLength": 0,
+                "type": "string",
+                "description": "Volatility type e.g. \"LN\" and \"N\" for log-normal and normal volatility."
+              },
+              "date": {
+                "type": "string",
+                "description": "The effectiveDate of the entity that this is a dependency for.\r\nUnless there is an obvious date this should be, like for a historic reset, then this is the valuation date.",
+                "format": "date-time"
+              },
+              "dependencyType": {
+                "enum": [
+                  "OpaqueDependency",
+                  "CashDependency",
+                  "DiscountingDependency",
+                  "EquityCurveDependency",
+                  "EquityVolDependency",
+                  "FxDependency",
+                  "FxForwardsDependency",
+                  "FxVolDependency",
+                  "IndexProjectionDependency",
+                  "IrVolDependency",
+                  "QuoteDependency",
+                  "Vendor"
+                ],
+                "type": "string",
+                "description": "The available values are: OpaqueDependency, CashDependency, DiscountingDependency, EquityCurveDependency, EquityVolDependency, FxDependency, FxForwardsDependency, FxVolDependency, IndexProjectionDependency, IrVolDependency, QuoteDependency, Vendor"
+              }
+            }
+          }
+        ],
+        "description": "Economic dependency required to price interest rate products that contain optionality, for example swaptions.\r\nFor example, can indicate a dependency on an IrVolCubeData."
+      },
       "IsBusinessDayResponse": {
         "required": [
           "isBusinessDay",
@@ -76834,6 +77319,40 @@
           }
         },
         "additionalProperties": false
+      },
+      "OpaqueDependency": {
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/EconomicDependency"
+          },
+          {
+            "required": [
+              "dependencyType"
+            ],
+            "type": "object",
+            "properties": {
+              "dependencyType": {
+                "enum": [
+                  "OpaqueDependency",
+                  "CashDependency",
+                  "DiscountingDependency",
+                  "EquityCurveDependency",
+                  "EquityVolDependency",
+                  "FxDependency",
+                  "FxForwardsDependency",
+                  "FxVolDependency",
+                  "IndexProjectionDependency",
+                  "IrVolDependency",
+                  "QuoteDependency",
+                  "Vendor"
+                ],
+                "type": "string",
+                "description": "The available values are: OpaqueDependency, CashDependency, DiscountingDependency, EquityCurveDependency, EquityVolDependency, FxDependency, FxForwardsDependency, FxVolDependency, IndexProjectionDependency, IrVolDependency, QuoteDependency, Vendor"
+              }
+            }
+          }
+        ],
+        "description": "Represents a dependency that could not be understood as an externally exposed dependency.\r\nIf this is an unexpected dependency, then please contact support."
       },
       "OpaqueMarketData": {
         "allOf": [
@@ -80197,6 +80716,59 @@
         },
         "additionalProperties": false,
         "description": "The quote id, value and lineage of the quotes all keyed by a unique correlation id."
+      },
+      "QuoteDependency": {
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/EconomicDependency"
+          },
+          {
+            "required": [
+              "code",
+              "date",
+              "dependencyType",
+              "marketIdentifier"
+            ],
+            "type": "object",
+            "properties": {
+              "marketIdentifier": {
+                "minLength": 1,
+                "type": "string",
+                "description": "Type of the code identifying the asset, e.g. ISIN or CUSIP"
+              },
+              "code": {
+                "maxLength": 50,
+                "minLength": 0,
+                "type": "string",
+                "description": "The code identifying the corresponding equity, e.g. US0378331005 if the MarketIdentifier was set to ISIN"
+              },
+              "date": {
+                "type": "string",
+                "description": "The effectiveAt of the quote for the identified entity.",
+                "format": "date-time"
+              },
+              "dependencyType": {
+                "enum": [
+                  "OpaqueDependency",
+                  "CashDependency",
+                  "DiscountingDependency",
+                  "EquityCurveDependency",
+                  "EquityVolDependency",
+                  "FxDependency",
+                  "FxForwardsDependency",
+                  "FxVolDependency",
+                  "IndexProjectionDependency",
+                  "IrVolDependency",
+                  "QuoteDependency",
+                  "Vendor"
+                ],
+                "type": "string",
+                "description": "The available values are: OpaqueDependency, CashDependency, DiscountingDependency, EquityCurveDependency, EquityVolDependency, FxDependency, FxForwardsDependency, FxVolDependency, IndexProjectionDependency, IrVolDependency, QuoteDependency, Vendor"
+              }
+            }
+          }
+        ],
+        "description": "For indicating a dependency on the value of an asset at a point in time.\r\nIf the time is omitted, then the dependency is interpreted as the latest value with respect to anything observing it.\r\nE.g. An EquitySwap will declare a dependency on the current price of the underlying equity."
       },
       "QuoteId": {
         "required": [
