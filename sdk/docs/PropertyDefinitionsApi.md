@@ -1,6 +1,6 @@
 # lusid.PropertyDefinitionsApi
 
-All URIs are relative to *https://fbn-prd.lusid.com/api*
+All URIs are relative to *https://www.lusid.com/api*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
@@ -11,6 +11,7 @@ Method | HTTP request | Description
 [**get_property_definition**](PropertyDefinitionsApi.md#get_property_definition) | **GET** /api/propertydefinitions/{domain}/{scope}/{code} | GetPropertyDefinition: Get property definition
 [**update_derived_property_definition**](PropertyDefinitionsApi.md#update_derived_property_definition) | **PUT** /api/propertydefinitions/derived/{domain}/{scope}/{code} | [EARLY ACCESS] UpdateDerivedPropertyDefinition: Update a pre-existing derived property definition
 [**update_property_definition**](PropertyDefinitionsApi.md#update_property_definition) | **PUT** /api/propertydefinitions/{domain}/{scope}/{code} | UpdatePropertyDefinition: Update property definition
+[**upsert_property_definition_properties**](PropertyDefinitionsApi.md#upsert_property_definition_properties) | **POST** /api/propertydefinitions/{domain}/{scope}/{code}/properties | [EARLY ACCESS] UpsertPropertyDefinitionProperties: Upsert properties to a property definition
 
 
 # **create_derived_property_definition**
@@ -29,10 +30,10 @@ import time
 import lusid
 from lusid.rest import ApiException
 from pprint import pprint
-# Defining the host is optional and defaults to https://fbn-prd.lusid.com/api
+# Defining the host is optional and defaults to https://www.lusid.com/api
 # See configuration.py for a list of all supported configuration parameters.
 configuration = lusid.Configuration(
-    host = "https://fbn-prd.lusid.com/api"
+    host = "https://www.lusid.com/api"
 )
 
 # The client must configure the authentication and authorization parameters
@@ -42,7 +43,7 @@ configuration = lusid.Configuration(
 
 # Configure OAuth2 access token for authorization: oauth2
 configuration = lusid.Configuration(
-    host = "https://fbn-prd.lusid.com/api"
+    host = "https://www.lusid.com/api"
 )
 configuration.access_token = 'YOUR_ACCESS_TOKEN'
 
@@ -104,10 +105,10 @@ import time
 import lusid
 from lusid.rest import ApiException
 from pprint import pprint
-# Defining the host is optional and defaults to https://fbn-prd.lusid.com/api
+# Defining the host is optional and defaults to https://www.lusid.com/api
 # See configuration.py for a list of all supported configuration parameters.
 configuration = lusid.Configuration(
-    host = "https://fbn-prd.lusid.com/api"
+    host = "https://www.lusid.com/api"
 )
 
 # The client must configure the authentication and authorization parameters
@@ -117,7 +118,7 @@ configuration = lusid.Configuration(
 
 # Configure OAuth2 access token for authorization: oauth2
 configuration = lusid.Configuration(
-    host = "https://fbn-prd.lusid.com/api"
+    host = "https://www.lusid.com/api"
 )
 configuration.access_token = 'YOUR_ACCESS_TOKEN'
 
@@ -179,10 +180,10 @@ import time
 import lusid
 from lusid.rest import ApiException
 from pprint import pprint
-# Defining the host is optional and defaults to https://fbn-prd.lusid.com/api
+# Defining the host is optional and defaults to https://www.lusid.com/api
 # See configuration.py for a list of all supported configuration parameters.
 configuration = lusid.Configuration(
-    host = "https://fbn-prd.lusid.com/api"
+    host = "https://www.lusid.com/api"
 )
 
 # The client must configure the authentication and authorization parameters
@@ -192,7 +193,7 @@ configuration = lusid.Configuration(
 
 # Configure OAuth2 access token for authorization: oauth2
 configuration = lusid.Configuration(
-    host = "https://fbn-prd.lusid.com/api"
+    host = "https://www.lusid.com/api"
 )
 configuration.access_token = 'YOUR_ACCESS_TOKEN'
 
@@ -258,10 +259,10 @@ import time
 import lusid
 from lusid.rest import ApiException
 from pprint import pprint
-# Defining the host is optional and defaults to https://fbn-prd.lusid.com/api
+# Defining the host is optional and defaults to https://www.lusid.com/api
 # See configuration.py for a list of all supported configuration parameters.
 configuration = lusid.Configuration(
-    host = "https://fbn-prd.lusid.com/api"
+    host = "https://www.lusid.com/api"
 )
 
 # The client must configure the authentication and authorization parameters
@@ -271,7 +272,7 @@ configuration = lusid.Configuration(
 
 # Configure OAuth2 access token for authorization: oauth2
 configuration = lusid.Configuration(
-    host = "https://fbn-prd.lusid.com/api"
+    host = "https://www.lusid.com/api"
 )
 configuration.access_token = 'YOUR_ACCESS_TOKEN'
 
@@ -339,10 +340,10 @@ import time
 import lusid
 from lusid.rest import ApiException
 from pprint import pprint
-# Defining the host is optional and defaults to https://fbn-prd.lusid.com/api
+# Defining the host is optional and defaults to https://www.lusid.com/api
 # See configuration.py for a list of all supported configuration parameters.
 configuration = lusid.Configuration(
-    host = "https://fbn-prd.lusid.com/api"
+    host = "https://www.lusid.com/api"
 )
 
 # The client must configure the authentication and authorization parameters
@@ -352,7 +353,7 @@ configuration = lusid.Configuration(
 
 # Configure OAuth2 access token for authorization: oauth2
 configuration = lusid.Configuration(
-    host = "https://fbn-prd.lusid.com/api"
+    host = "https://www.lusid.com/api"
 )
 configuration.access_token = 'YOUR_ACCESS_TOKEN'
 
@@ -422,10 +423,10 @@ import time
 import lusid
 from lusid.rest import ApiException
 from pprint import pprint
-# Defining the host is optional and defaults to https://fbn-prd.lusid.com/api
+# Defining the host is optional and defaults to https://www.lusid.com/api
 # See configuration.py for a list of all supported configuration parameters.
 configuration = lusid.Configuration(
-    host = "https://fbn-prd.lusid.com/api"
+    host = "https://www.lusid.com/api"
 )
 
 # The client must configure the authentication and authorization parameters
@@ -435,7 +436,7 @@ configuration = lusid.Configuration(
 
 # Configure OAuth2 access token for authorization: oauth2
 configuration = lusid.Configuration(
-    host = "https://fbn-prd.lusid.com/api"
+    host = "https://www.lusid.com/api"
 )
 configuration.access_token = 'YOUR_ACCESS_TOKEN'
 
@@ -503,10 +504,10 @@ import time
 import lusid
 from lusid.rest import ApiException
 from pprint import pprint
-# Defining the host is optional and defaults to https://fbn-prd.lusid.com/api
+# Defining the host is optional and defaults to https://www.lusid.com/api
 # See configuration.py for a list of all supported configuration parameters.
 configuration = lusid.Configuration(
-    host = "https://fbn-prd.lusid.com/api"
+    host = "https://www.lusid.com/api"
 )
 
 # The client must configure the authentication and authorization parameters
@@ -516,7 +517,7 @@ configuration = lusid.Configuration(
 
 # Configure OAuth2 access token for authorization: oauth2
 configuration = lusid.Configuration(
-    host = "https://fbn-prd.lusid.com/api"
+    host = "https://www.lusid.com/api"
 )
 configuration.access_token = 'YOUR_ACCESS_TOKEN'
 
@@ -563,6 +564,89 @@ Name | Type | Description  | Notes
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 **200** | The updated property definition |  -  |
+**400** | The details of the input related failure |  -  |
+**0** | Error response |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **upsert_property_definition_properties**
+> BatchUpsertPropertyDefinitionPropertiesResponse upsert_property_definition_properties(domain, scope, code, request_body, success_mode=success_mode)
+
+[EARLY ACCESS] UpsertPropertyDefinitionProperties: Upsert properties to a property definition
+
+Create or update properties for a particular property definition
+
+### Example
+
+* OAuth Authentication (oauth2):
+```python
+from __future__ import print_function
+import time
+import lusid
+from lusid.rest import ApiException
+from pprint import pprint
+# Defining the host is optional and defaults to https://www.lusid.com/api
+# See configuration.py for a list of all supported configuration parameters.
+configuration = lusid.Configuration(
+    host = "https://www.lusid.com/api"
+)
+
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
+
+# Configure OAuth2 access token for authorization: oauth2
+configuration = lusid.Configuration(
+    host = "https://www.lusid.com/api"
+)
+configuration.access_token = 'YOUR_ACCESS_TOKEN'
+
+# Enter a context with an instance of the API client
+with lusid.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = lusid.PropertyDefinitionsApi(api_client)
+    domain = 'domain_example' # str | The domain of the specified property.
+scope = 'scope_example' # str | The scope of the specified property.
+code = 'code_example' # str | The code of the specified property. Together with the domain and scope this uniquely
+request_body = {"PropertyDefinition/MyScope/FundManagerName":{"key":"PropertyDefinition/MyScope/FundManagerName","value":{"labelValue":"Smith"},"effectiveFrom":"2018-03-05T00:00:00.0000000+00:00"},"PropertyDefinition/MyScope/SomeProperty":{"key":"PropertyDefinition/MyScope/SomeProperty","value":{"labelValue":"SomeValue"},"effectiveFrom":"2016-01-01T00:00:00.0000000+00:00"},"PropertyDefinition/MyScope/AnotherProperty":{"key":"PropertyDefinition/MyScope/AnotherProperty","value":{"labelValue":"AnotherValue"},"effectiveFrom":"2018-03-05T00:00:00.0000000+00:00","effectiveUntil":"2020-01-01T00:00:00.0000000+00:00"},"PropertyDefinition/MyScope/ReBalanceInterval":{"key":"PropertyDefinition/MyScope/ReBalanceInterval","value":{"metricValue":{"value":30,"unit":"Days"}}}} # dict(str, ModelProperty) | The properties to be created or updated. Each property in              the request must be keyed by its unique property key. This has the format {domain}/{scope}/{code}, for example              'PropertyDefinition/Manager/Id'.
+success_mode = 'Partial' # str | Whether the batch request should fail Atomically or in a Partial fashion - Allowed Values: Atomic, Partial. (optional) (default to 'Partial')
+
+    try:
+        # [EARLY ACCESS] UpsertPropertyDefinitionProperties: Upsert properties to a property definition
+        api_response = api_instance.upsert_property_definition_properties(domain, scope, code, request_body, success_mode=success_mode)
+        pprint(api_response)
+    except ApiException as e:
+        print("Exception when calling PropertyDefinitionsApi->upsert_property_definition_properties: %s\n" % e)
+```
+
+### Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **domain** | **str**| The domain of the specified property. | 
+ **scope** | **str**| The scope of the specified property. | 
+ **code** | **str**| The code of the specified property. Together with the domain and scope this uniquely | 
+ **request_body** | [**dict(str, ModelProperty)**](ModelProperty.md)| The properties to be created or updated. Each property in              the request must be keyed by its unique property key. This has the format {domain}/{scope}/{code}, for example              &#39;PropertyDefinition/Manager/Id&#39;. | 
+ **success_mode** | **str**| Whether the batch request should fail Atomically or in a Partial fashion - Allowed Values: Atomic, Partial. | [optional] [default to &#39;Partial&#39;]
+
+### Return type
+
+[**BatchUpsertPropertyDefinitionPropertiesResponse**](BatchUpsertPropertyDefinitionPropertiesResponse.md)
+
+### Authorization
+
+[oauth2](../README.md#oauth2)
+
+### HTTP request headers
+
+ - **Content-Type**: application/json-patch+json, application/json, text/json, application/*+json
+ - **Accept**: text/plain, application/json, text/json
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | The asAt datetime at which the properties were updated or created. |  -  |
 **400** | The details of the input related failure |  -  |
 **0** | Error response |  -  |
 
