@@ -666,7 +666,7 @@ identifier_type = 'identifier_type_example' # str | An identifier type attached 
 identifier_value = 'identifier_value_example' # str | The identifier value.
 identifier_scope = 'identifier_scope_example' # str | The identifier scope.
 access_metadata_operation = [lusid.AccessMetadataOperation()] # list[AccessMetadataOperation] | The Json Patch document
-effective_at = 'effective_at_example' # str | The effectiveAt datetime at which to retrieve the Access Metadata (optional)
+effective_at = 'effective_at_example' # str | The effectiveAt datetime at which the Access Metadata will be effective from (optional)
 effective_until = '2013-10-20T19:20:30+01:00' # datetime | The effective datetime until which the Access Metadata is valid. If not supplied this will be valid indefinitely, or until the next 'effectiveAt' datetime of the Access Metadata (optional)
 
     try:
@@ -686,7 +686,7 @@ Name | Type | Description  | Notes
  **identifier_value** | **str**| The identifier value. | 
  **identifier_scope** | **str**| The identifier scope. | 
  **access_metadata_operation** | [**list[AccessMetadataOperation]**](AccessMetadataOperation.md)| The Json Patch document | 
- **effective_at** | **str**| The effectiveAt datetime at which to retrieve the Access Metadata | [optional] 
+ **effective_at** | **str**| The effectiveAt datetime at which the Access Metadata will be effective from | [optional] 
  **effective_until** | **datetime**| The effective datetime until which the Access Metadata is valid. If not supplied this will be valid indefinitely, or until the next &#39;effectiveAt&#39; datetime of the Access Metadata | [optional] 
 
 ### Return type
@@ -910,7 +910,7 @@ identifier_value = 'identifier_value_example' # str | The identifier value.
 metadata_key = 'metadata_key_example' # str | Key of the metadata entry to retrieve
 identifier_scope = 'identifier_scope_example' # str | The identifier scope.
 upsert_custom_entity_access_metadata_request = {"metadata":[{"value":"SilverLicence","provider":"TestDataProvider"}]} # UpsertCustomEntityAccessMetadataRequest | The Custom Entity Access Metadata entry to upsert
-effective_at = 'effective_at_example' # str | The effectiveAt datetime at which to retrieve the Access Metadata (optional)
+effective_at = 'effective_at_example' # str | The effectiveAt datetime at which the Access Metadata will be effective from (optional)
 effective_until = '2013-10-20T19:20:30+01:00' # datetime | The effective datetime until which the Access Metadata is valid. If not supplied this will be valid indefinitely, or until the next 'effectiveAt' datetime of the Access Metadata (optional)
 
     try:
@@ -931,7 +931,7 @@ Name | Type | Description  | Notes
  **metadata_key** | **str**| Key of the metadata entry to retrieve | 
  **identifier_scope** | **str**| The identifier scope. | 
  **upsert_custom_entity_access_metadata_request** | [**UpsertCustomEntityAccessMetadataRequest**](UpsertCustomEntityAccessMetadataRequest.md)| The Custom Entity Access Metadata entry to upsert | 
- **effective_at** | **str**| The effectiveAt datetime at which to retrieve the Access Metadata | [optional] 
+ **effective_at** | **str**| The effectiveAt datetime at which the Access Metadata will be effective from | [optional] 
  **effective_until** | **datetime**| The effective datetime until which the Access Metadata is valid. If not supplied this will be valid indefinitely, or until the next &#39;effectiveAt&#39; datetime of the Access Metadata | [optional] 
 
 ### Return type
