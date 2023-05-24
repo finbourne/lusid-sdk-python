@@ -9,7 +9,7 @@
       "url": "https://www.finbourne.com",
       "email": "info@finbourne.com"
     },
-    "version": "1.0.197",
+    "version": "1.0.198",
     "x-logo": {
       "url": "https://www.lusid.com/app/assets/logo_white.png",
       "backgroundColor": "#415464"
@@ -60273,6 +60273,11 @@
                   "value": "GBP",
                   "path": "/baseCurrency",
                   "op": "add"
+                },
+                {
+                  "value": "newscope",
+                  "path": "/transactiontypescope",
+                  "op": "add"
                 }
               ]
             },
@@ -60294,6 +60299,11 @@
                 {
                   "value": "GBP",
                   "path": "/baseCurrency",
+                  "op": "add"
+                },
+                {
+                  "value": "newscope",
+                  "path": "/transactiontypescope",
                   "op": "add"
                 }
               ]
@@ -60317,6 +60327,11 @@
                   "value": "GBP",
                   "path": "/baseCurrency",
                   "op": "add"
+                },
+                {
+                  "value": "newscope",
+                  "path": "/transactiontypescope",
+                  "op": "add"
                 }
               ]
             },
@@ -60338,6 +60353,11 @@
                 {
                   "value": "GBP",
                   "path": "/baseCurrency",
+                  "op": "add"
+                },
+                {
+                  "value": "newscope",
+                  "path": "/transactiontypescope",
                   "op": "add"
                 }
               ]
