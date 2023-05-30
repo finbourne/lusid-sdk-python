@@ -11,7 +11,7 @@ Name | Type | Description | Notes
 **rate** | **str** | The rate. | 
 **units** | **str** | The units. | 
 **amount** | **str** | The amount. | 
-**links** | [**list[Link]**](Link.md) | Collection of links. | [optional] 
+**links** | [**list[Link]**](Link.md) |  | [optional] 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 
