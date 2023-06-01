@@ -9,7 +9,7 @@
       "url": "https://www.finbourne.com",
       "email": "info@finbourne.com"
     },
-    "version": "1.0.221",
+    "version": "1.0.222",
     "x-logo": {
       "url": "https://www.lusid.com/app/assets/logo_white.png",
       "backgroundColor": "#415464"
@@ -80341,6 +80341,11 @@
           "amortisationMethod": {
             "type": "string",
             "description": "The amortisation method the portfolio is using in the calculation. This can be 'NoAmortisation', 'StraightLine' or 'EffectiveYield'.",
+            "nullable": true
+          },
+          "transactionTypeScope": {
+            "type": "string",
+            "description": "The scope of the transaction types.",
             "nullable": true
           },
           "links": {
