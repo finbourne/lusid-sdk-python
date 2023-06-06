@@ -9,7 +9,7 @@
       "url": "https://www.finbourne.com",
       "email": "info@finbourne.com"
     },
-    "version": "1.0.234",
+    "version": "1.0.235",
     "x-logo": {
       "url": "https://www.lusid.com/app/assets/logo_white.png",
       "backgroundColor": "#415464"
@@ -7294,7 +7294,7 @@
           }
         },
         "responses": {
-          "200": {
+          "201": {
             "description": "Instrument Events Upserted",
             "content": {
               "text/plain": {
@@ -79147,8 +79147,6 @@
         "required": [
           "costFactor",
           "instrumentIdentifiers",
-          "instrumentScope",
-          "lusidInstrumentId",
           "unitsFactor"
         ],
         "type": "object",
@@ -79171,15 +79169,15 @@
             "format": "double"
           },
           "lusidInstrumentId": {
-            "minLength": 1,
             "type": "string",
             "description": "LUSID's internal unique instrument identifier, resolved from the instrument identifiers",
+            "nullable": true,
             "readOnly": true
           },
           "instrumentScope": {
-            "minLength": 1,
             "type": "string",
             "description": "The scope in which the instrument lies.",
+            "nullable": true,
             "readOnly": true
           }
         },
