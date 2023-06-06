@@ -1,6 +1,6 @@
 # lusid.CustomEntityDefinitionsApi
 
-All URIs are relative to *https://fbn-prd.lusid.com/api*
+All URIs are relative to *https://fbn-ci.lusid.com/api*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
@@ -23,13 +23,14 @@ The API will return a Bad Request if the Custom Entity type already exists.
 ```python
 from __future__ import print_function
 import time
+import os
 import lusid
 from lusid.rest import ApiException
 from pprint import pprint
-# Defining the host is optional and defaults to https://fbn-prd.lusid.com/api
+# Defining the host is optional and defaults to https://fbn-ci.lusid.com/api
 # See configuration.py for a list of all supported configuration parameters.
 configuration = lusid.Configuration(
-    host = "https://fbn-prd.lusid.com/api"
+    host = "https://fbn-ci.lusid.com/api"
 )
 
 # The client must configure the authentication and authorization parameters
@@ -37,23 +38,20 @@ configuration = lusid.Configuration(
 # Examples for each auth method are provided below, use the example that
 # satisfies your auth use case.
 
-# Configure OAuth2 access token for authorization: oauth2
-configuration = lusid.Configuration(
-    host = "https://fbn-prd.lusid.com/api"
-)
-configuration.access_token = 'YOUR_ACCESS_TOKEN'
+configuration.access_token = os.environ["ACCESS_TOKEN"]
 
 # Enter a context with an instance of the API client
-with lusid.ApiClient(configuration) as api_client:
+async with lusid.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = lusid.CustomEntityDefinitionsApi(api_client)
     custom_entity_definition_request = {"entityTypeName":"SupportTicket","displayName":"Support Ticket","description":"Support Ticket","fieldSchema":[{"name":"clientId","lifetime":"Perpetual","type":"String","required":true},{"name":"issueDescription","lifetime":"TimeVariant","type":"String","required":true},{"name":"internalNotes","lifetime":"TimeVariant","type":"String","required":false},{"name":"isResolved","lifetime":"TimeVariant","type":"Boolean","required":false}]} # CustomEntityDefinitionRequest | The payload containing the description of the Custom Entity type.
 
     try:
         # [EARLY ACCESS] CreateCustomEntityDefinition: Define a new Custom Entity type.
-        api_response = api_instance.create_custom_entity_definition(custom_entity_definition_request)
+        api_response = await api_instance.create_custom_entity_definition(custom_entity_definition_request)
+        print("The response of CustomEntityDefinitionsApi->create_custom_entity_definition:\n")
         pprint(api_response)
-    except ApiException as e:
+    except Exception as e:
         print("Exception when calling CustomEntityDefinitionsApi->create_custom_entity_definition: %s\n" % e)
 ```
 
@@ -98,13 +96,14 @@ Retrieve a CustomEntityDefinition by a specific entityType at a point in AsAt ti
 ```python
 from __future__ import print_function
 import time
+import os
 import lusid
 from lusid.rest import ApiException
 from pprint import pprint
-# Defining the host is optional and defaults to https://fbn-prd.lusid.com/api
+# Defining the host is optional and defaults to https://fbn-ci.lusid.com/api
 # See configuration.py for a list of all supported configuration parameters.
 configuration = lusid.Configuration(
-    host = "https://fbn-prd.lusid.com/api"
+    host = "https://fbn-ci.lusid.com/api"
 )
 
 # The client must configure the authentication and authorization parameters
@@ -112,24 +111,21 @@ configuration = lusid.Configuration(
 # Examples for each auth method are provided below, use the example that
 # satisfies your auth use case.
 
-# Configure OAuth2 access token for authorization: oauth2
-configuration = lusid.Configuration(
-    host = "https://fbn-prd.lusid.com/api"
-)
-configuration.access_token = 'YOUR_ACCESS_TOKEN'
+configuration.access_token = os.environ["ACCESS_TOKEN"]
 
 # Enter a context with an instance of the API client
-with lusid.ApiClient(configuration) as api_client:
+async with lusid.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = lusid.CustomEntityDefinitionsApi(api_client)
     entity_type = 'entity_type_example' # str | The identifier for the Custom Entity type, derived from the \"entityTypeName\" provided on creation.
-as_at = '2013-10-20T19:20:30+01:00' # datetime | The AsAt datetime at which to retrieve the definition. (optional)
+    as_at = '2013-10-20T19:20:30+01:00' # datetime | The AsAt datetime at which to retrieve the definition. (optional)
 
     try:
         # [EARLY ACCESS] GetDefinition: Get a Custom Entity type definition.
-        api_response = api_instance.get_definition(entity_type, as_at=as_at)
+        api_response = await api_instance.get_definition(entity_type, as_at=as_at)
+        print("The response of CustomEntityDefinitionsApi->get_definition:\n")
         pprint(api_response)
-    except ApiException as e:
+    except Exception as e:
         print("Exception when calling CustomEntityDefinitionsApi->get_definition: %s\n" % e)
 ```
 
@@ -175,13 +171,14 @@ List all Custom Entity type definitions matching particular criteria.
 ```python
 from __future__ import print_function
 import time
+import os
 import lusid
 from lusid.rest import ApiException
 from pprint import pprint
-# Defining the host is optional and defaults to https://fbn-prd.lusid.com/api
+# Defining the host is optional and defaults to https://fbn-ci.lusid.com/api
 # See configuration.py for a list of all supported configuration parameters.
 configuration = lusid.Configuration(
-    host = "https://fbn-prd.lusid.com/api"
+    host = "https://fbn-ci.lusid.com/api"
 )
 
 # The client must configure the authentication and authorization parameters
@@ -189,26 +186,23 @@ configuration = lusid.Configuration(
 # Examples for each auth method are provided below, use the example that
 # satisfies your auth use case.
 
-# Configure OAuth2 access token for authorization: oauth2
-configuration = lusid.Configuration(
-    host = "https://fbn-prd.lusid.com/api"
-)
-configuration.access_token = 'YOUR_ACCESS_TOKEN'
+configuration.access_token = os.environ["ACCESS_TOKEN"]
 
 # Enter a context with an instance of the API client
-with lusid.ApiClient(configuration) as api_client:
+async with lusid.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = lusid.CustomEntityDefinitionsApi(api_client)
     as_at = '2013-10-20T19:20:30+01:00' # datetime | The asAt datetime at which to list the entities. Defaults to returning the latest version              of each portfolio if not specified. (optional)
-limit = 56 # int | When paginating, limit the results to this number. Defaults to 100 if not specified. (optional)
-filter = 'filter_example' # str | Expression to filter the results. For more information about filtering              results, see https://support.lusid.com/knowledgebase/article/KA-01914. (optional)
-page = 'page_example' # str | The pagination token to use to continue listing entities; this              value is returned from the previous call. If a pagination token is provided, the filter, limit              and asAt fields must not have changed since the original request. (optional)
+    limit = 56 # int | When paginating, limit the results to this number. Defaults to 100 if not specified. (optional)
+    filter = 'filter_example' # str | Expression to filter the results. For more information about filtering              results, see https://support.lusid.com/knowledgebase/article/KA-01914. (optional)
+    page = 'page_example' # str | The pagination token to use to continue listing entities; this              value is returned from the previous call. If a pagination token is provided, the filter, limit              and asAt fields must not have changed since the original request. (optional)
 
     try:
         # [EARLY ACCESS] ListCustomEntityDefinitions: List the Custom Entity type definitions
-        api_response = api_instance.list_custom_entity_definitions(as_at=as_at, limit=limit, filter=filter, page=page)
+        api_response = await api_instance.list_custom_entity_definitions(as_at=as_at, limit=limit, filter=filter, page=page)
+        print("The response of CustomEntityDefinitionsApi->list_custom_entity_definitions:\n")
         pprint(api_response)
-    except ApiException as e:
+    except Exception as e:
         print("Exception when calling CustomEntityDefinitionsApi->list_custom_entity_definitions: %s\n" % e)
 ```
 
@@ -256,13 +250,14 @@ The API will return a Bad Request if the Custom Entity type does not exist.
 ```python
 from __future__ import print_function
 import time
+import os
 import lusid
 from lusid.rest import ApiException
 from pprint import pprint
-# Defining the host is optional and defaults to https://fbn-prd.lusid.com/api
+# Defining the host is optional and defaults to https://fbn-ci.lusid.com/api
 # See configuration.py for a list of all supported configuration parameters.
 configuration = lusid.Configuration(
-    host = "https://fbn-prd.lusid.com/api"
+    host = "https://fbn-ci.lusid.com/api"
 )
 
 # The client must configure the authentication and authorization parameters
@@ -270,24 +265,21 @@ configuration = lusid.Configuration(
 # Examples for each auth method are provided below, use the example that
 # satisfies your auth use case.
 
-# Configure OAuth2 access token for authorization: oauth2
-configuration = lusid.Configuration(
-    host = "https://fbn-prd.lusid.com/api"
-)
-configuration.access_token = 'YOUR_ACCESS_TOKEN'
+configuration.access_token = os.environ["ACCESS_TOKEN"]
 
 # Enter a context with an instance of the API client
-with lusid.ApiClient(configuration) as api_client:
+async with lusid.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = lusid.CustomEntityDefinitionsApi(api_client)
     entity_type = 'entity_type_example' # str | The identifier for the Custom Entity type, derived from the \"entityTypeName\" provided on creation.
-update_custom_entity_definition_request = {"displayName":"Support Ticket","description":"Support Ticket","fieldSchema":[{"name":"clientId","lifetime":"Perpetual","type":"String","required":true},{"name":"issueDescription","lifetime":"TimeVariant","type":"String","required":true},{"name":"internalNotes","lifetime":"TimeVariant","type":"String","required":false},{"name":"isResolved","lifetime":"TimeVariant","type":"Boolean","required":false}]} # UpdateCustomEntityDefinitionRequest | The payload containing the description of the Custom Entity type.
+    update_custom_entity_definition_request = {"displayName":"Support Ticket","description":"Support Ticket","fieldSchema":[{"name":"clientId","lifetime":"Perpetual","type":"String","required":true},{"name":"issueDescription","lifetime":"TimeVariant","type":"String","required":true},{"name":"internalNotes","lifetime":"TimeVariant","type":"String","required":false},{"name":"isResolved","lifetime":"TimeVariant","type":"Boolean","required":false}]} # UpdateCustomEntityDefinitionRequest | The payload containing the description of the Custom Entity type.
 
     try:
         # [EARLY ACCESS] UpdateCustomEntityDefinition: Modify an existing Custom Entity type.
-        api_response = api_instance.update_custom_entity_definition(entity_type, update_custom_entity_definition_request)
+        api_response = await api_instance.update_custom_entity_definition(entity_type, update_custom_entity_definition_request)
+        print("The response of CustomEntityDefinitionsApi->update_custom_entity_definition:\n")
         pprint(api_response)
-    except ApiException as e:
+    except Exception as e:
         print("Exception when calling CustomEntityDefinitionsApi->update_custom_entity_definition: %s\n" % e)
 ```
 

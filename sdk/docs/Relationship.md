@@ -13,6 +13,23 @@ Name | Type | Description | Notes
 **effective_from** | **datetime** | The effective datetime from which the relationship is valid. | [optional] 
 **effective_until** | **datetime** | The effective datetime until which the relationship is valid. If no future deletions are present or an effective until has not been set for the relationship, this will be indefinite and represented by the maximum date. | [optional] 
 
+## Example
+
+```python
+from lusid.models.relationship import Relationship
+
+# TODO update the JSON string below
+json = "{}"
+# create an instance of Relationship from a JSON string
+relationship_instance = Relationship.from_json(json)
+# print the JSON string representation of the object
+print Relationship.to_json()
+
+# convert the object into a dict
+relationship_dict = relationship_instance.to_dict()
+# create an instance of Relationship from a dict
+relationship_form_dict = relationship.from_dict(relationship_dict)
+```
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 
 

@@ -11,6 +11,23 @@ Name | Type | Description | Notes
 **event_status** | **str** | What is the event status, is it a known (ie historic) or unknown (ie projected) event? | 
 **instrument_event_type** | **str** | The Type of Event. The available values are: TransitionEvent, InformationalEvent, OpenEvent, CloseEvent, StockSplitEvent, BondDefaultEvent, CashDividendEvent, AmortisationEvent, CashFlowEvent, ExerciseEvent, ResetEvent, TriggerEvent, RawVendorEvent, InformationalErrorEvent | 
 
+## Example
+
+```python
+from lusid.models.raw_vendor_event import RawVendorEvent
+
+# TODO update the JSON string below
+json = "{}"
+# create an instance of RawVendorEvent from a JSON string
+raw_vendor_event_instance = RawVendorEvent.from_json(json)
+# print the JSON string representation of the object
+print RawVendorEvent.to_json()
+
+# convert the object into a dict
+raw_vendor_event_dict = raw_vendor_event_instance.to_dict()
+# create an instance of RawVendorEvent from a dict
+raw_vendor_event_form_dict = raw_vendor_event.from_dict(raw_vendor_event_dict)
+```
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 
 

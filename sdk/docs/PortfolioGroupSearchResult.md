@@ -9,11 +9,28 @@ Name | Type | Description | Notes
 **display_name** | **str** | The name of the portfolio group. | 
 **description** | **str** | The long form description of the portfolio group. | [optional] 
 **created** | **datetime** | The effective datetime at which the portfolio group was created. No portfolios or sub groups can be added to the group before this date. | [optional] 
-**portfolios** | [**list[ResourceId]**](ResourceId.md) | The collection of resource identifiers for the portfolios contained in the portfolio group. | [optional] 
-**sub_groups** | [**list[ResourceId]**](ResourceId.md) | The collection of resource identifiers for the portfolio groups contained in the portfolio group as sub groups. | [optional] 
+**portfolios** | [**List[ResourceId]**](ResourceId.md) | The collection of resource identifiers for the portfolios contained in the portfolio group. | [optional] 
+**sub_groups** | [**List[ResourceId]**](ResourceId.md) | The collection of resource identifiers for the portfolio groups contained in the portfolio group as sub groups. | [optional] 
 **version** | [**Version**](Version.md) |  | [optional] 
-**links** | [**list[Link]**](Link.md) |  | [optional] 
+**links** | [**List[Link]**](Link.md) |  | [optional] 
 
+## Example
+
+```python
+from lusid.models.portfolio_group_search_result import PortfolioGroupSearchResult
+
+# TODO update the JSON string below
+json = "{}"
+# create an instance of PortfolioGroupSearchResult from a JSON string
+portfolio_group_search_result_instance = PortfolioGroupSearchResult.from_json(json)
+# print the JSON string representation of the object
+print PortfolioGroupSearchResult.to_json()
+
+# convert the object into a dict
+portfolio_group_search_result_dict = portfolio_group_search_result_instance.to_dict()
+# create an instance of PortfolioGroupSearchResult from a dict
+portfolio_group_search_result_form_dict = portfolio_group_search_result.from_dict(portfolio_group_search_result_dict)
+```
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 
 

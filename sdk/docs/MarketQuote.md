@@ -8,6 +8,23 @@ Name | Type | Description | Notes
 **quote_type** | **str** | The available values are: Price, Spread, Rate, LogNormalVol, NormalVol, ParSpread, IsdaSpread, Upfront, Index, Ratio, Delta | 
 **value** | **float** | Numeric value of the quote | 
 
+## Example
+
+```python
+from lusid.models.market_quote import MarketQuote
+
+# TODO update the JSON string below
+json = "{}"
+# create an instance of MarketQuote from a JSON string
+market_quote_instance = MarketQuote.from_json(json)
+# print the JSON string representation of the object
+print MarketQuote.to_json()
+
+# convert the object into a dict
+market_quote_dict = market_quote_instance.to_dict()
+# create an instance of MarketQuote from a dict
+market_quote_form_dict = market_quote.from_dict(market_quote_dict)
+```
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 
 

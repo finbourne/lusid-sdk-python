@@ -1,6 +1,6 @@
 # lusid.ApplicationMetadataApi
 
-All URIs are relative to *https://fbn-prd.lusid.com/api*
+All URIs are relative to *https://fbn-ci.lusid.com/api*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
@@ -22,13 +22,14 @@ Download the LUSID Excel Addin for Microsoft Excel. Not providing a specific val
 ```python
 from __future__ import print_function
 import time
+import os
 import lusid
 from lusid.rest import ApiException
 from pprint import pprint
-# Defining the host is optional and defaults to https://fbn-prd.lusid.com/api
+# Defining the host is optional and defaults to https://fbn-ci.lusid.com/api
 # See configuration.py for a list of all supported configuration parameters.
 configuration = lusid.Configuration(
-    host = "https://fbn-prd.lusid.com/api"
+    host = "https://fbn-ci.lusid.com/api"
 )
 
 # The client must configure the authentication and authorization parameters
@@ -36,23 +37,20 @@ configuration = lusid.Configuration(
 # Examples for each auth method are provided below, use the example that
 # satisfies your auth use case.
 
-# Configure OAuth2 access token for authorization: oauth2
-configuration = lusid.Configuration(
-    host = "https://fbn-prd.lusid.com/api"
-)
-configuration.access_token = 'YOUR_ACCESS_TOKEN'
+configuration.access_token = os.environ["ACCESS_TOKEN"]
 
 # Enter a context with an instance of the API client
-with lusid.ApiClient(configuration) as api_client:
+async with lusid.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = lusid.ApplicationMetadataApi(api_client)
     version = 'version_example' # str | The requested version of the Excel plugin (optional)
 
     try:
         # GetExcelAddin: Download Excel Addin
-        api_response = api_instance.get_excel_addin(version=version)
+        api_response = await api_instance.get_excel_addin(version=version)
+        print("The response of ApplicationMetadataApi->get_excel_addin:\n")
         pprint(api_response)
-    except ApiException as e:
+    except Exception as e:
         print("Exception when calling ApplicationMetadataApi->get_excel_addin: %s\n" % e)
 ```
 
@@ -97,13 +95,14 @@ Get the semantic versions associated with LUSID and its ecosystem
 ```python
 from __future__ import print_function
 import time
+import os
 import lusid
 from lusid.rest import ApiException
 from pprint import pprint
-# Defining the host is optional and defaults to https://fbn-prd.lusid.com/api
+# Defining the host is optional and defaults to https://fbn-ci.lusid.com/api
 # See configuration.py for a list of all supported configuration parameters.
 configuration = lusid.Configuration(
-    host = "https://fbn-prd.lusid.com/api"
+    host = "https://fbn-ci.lusid.com/api"
 )
 
 # The client must configure the authentication and authorization parameters
@@ -111,22 +110,19 @@ configuration = lusid.Configuration(
 # Examples for each auth method are provided below, use the example that
 # satisfies your auth use case.
 
-# Configure OAuth2 access token for authorization: oauth2
-configuration = lusid.Configuration(
-    host = "https://fbn-prd.lusid.com/api"
-)
-configuration.access_token = 'YOUR_ACCESS_TOKEN'
+configuration.access_token = os.environ["ACCESS_TOKEN"]
 
 # Enter a context with an instance of the API client
-with lusid.ApiClient(configuration) as api_client:
+async with lusid.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = lusid.ApplicationMetadataApi(api_client)
-    
+
     try:
         # GetLusidVersions: Get LUSID versions
-        api_response = api_instance.get_lusid_versions()
+        api_response = await api_instance.get_lusid_versions()
+        print("The response of ApplicationMetadataApi->get_lusid_versions:\n")
         pprint(api_response)
-    except ApiException as e:
+    except Exception as e:
         print("Exception when calling ApplicationMetadataApi->get_lusid_versions: %s\n" % e)
 ```
 
@@ -167,13 +163,14 @@ Get the comprehensive set of resources that are available for access control
 ```python
 from __future__ import print_function
 import time
+import os
 import lusid
 from lusid.rest import ApiException
 from pprint import pprint
-# Defining the host is optional and defaults to https://fbn-prd.lusid.com/api
+# Defining the host is optional and defaults to https://fbn-ci.lusid.com/api
 # See configuration.py for a list of all supported configuration parameters.
 configuration = lusid.Configuration(
-    host = "https://fbn-prd.lusid.com/api"
+    host = "https://fbn-ci.lusid.com/api"
 )
 
 # The client must configure the authentication and authorization parameters
@@ -181,23 +178,20 @@ configuration = lusid.Configuration(
 # Examples for each auth method are provided below, use the example that
 # satisfies your auth use case.
 
-# Configure OAuth2 access token for authorization: oauth2
-configuration = lusid.Configuration(
-    host = "https://fbn-prd.lusid.com/api"
-)
-configuration.access_token = 'YOUR_ACCESS_TOKEN'
+configuration.access_token = os.environ["ACCESS_TOKEN"]
 
 # Enter a context with an instance of the API client
-with lusid.ApiClient(configuration) as api_client:
+async with lusid.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = lusid.ApplicationMetadataApi(api_client)
     filter = 'filter_example' # str | Optional. Expression to filter the result set.               For example, to filter on the Application, use \"application eq 'string'\"              Read more about filtering results from LUSID here https://support.lusid.com/filtering-results-from-lusid. (optional)
 
     try:
         # ListAccessControlledResources: Get resources available for access control
-        api_response = api_instance.list_access_controlled_resources(filter=filter)
+        api_response = await api_instance.list_access_controlled_resources(filter=filter)
+        print("The response of ApplicationMetadataApi->list_access_controlled_resources:\n")
         pprint(api_response)
-    except ApiException as e:
+    except Exception as e:
         print("Exception when calling ApplicationMetadataApi->list_access_controlled_resources: %s\n" % e)
 ```
 

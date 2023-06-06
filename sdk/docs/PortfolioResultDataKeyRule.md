@@ -13,6 +13,23 @@ Name | Type | Description | Notes
 **portfolio_scope** | **str** |  | [optional] 
 **result_key_rule_type** | **str** | The available values are: Invalid, ResultDataKeyRule, PortfolioResultDataKeyRule | 
 
+## Example
+
+```python
+from lusid.models.portfolio_result_data_key_rule import PortfolioResultDataKeyRule
+
+# TODO update the JSON string below
+json = "{}"
+# create an instance of PortfolioResultDataKeyRule from a JSON string
+portfolio_result_data_key_rule_instance = PortfolioResultDataKeyRule.from_json(json)
+# print the JSON string representation of the object
+print PortfolioResultDataKeyRule.to_json()
+
+# convert the object into a dict
+portfolio_result_data_key_rule_dict = portfolio_result_data_key_rule_instance.to_dict()
+# create an instance of PortfolioResultDataKeyRule from a dict
+portfolio_result_data_key_rule_form_dict = portfolio_result_data_key_rule.from_dict(portfolio_result_data_key_rule_dict)
+```
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 
 

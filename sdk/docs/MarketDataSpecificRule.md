@@ -17,6 +17,23 @@ Name | Type | Description | Notes
 **dependency_source_filter** | [**DependencySourceFilter**](DependencySourceFilter.md) |  | 
 **source_system** | **str** | Determines from where LUSID should attempt to find the data. Optional and, if omitted, will default to \&quot;Lusid\&quot;.  This means that data will be retrieved from the Quotes store and the ComplexMarketData store.  These can be populated using the Quotes and ComplexMarketData endpoints. | [optional] 
 
+## Example
+
+```python
+from lusid.models.market_data_specific_rule import MarketDataSpecificRule
+
+# TODO update the JSON string below
+json = "{}"
+# create an instance of MarketDataSpecificRule from a JSON string
+market_data_specific_rule_instance = MarketDataSpecificRule.from_json(json)
+# print the JSON string representation of the object
+print MarketDataSpecificRule.to_json()
+
+# convert the object into a dict
+market_data_specific_rule_dict = market_data_specific_rule_instance.to_dict()
+# create an instance of MarketDataSpecificRule from a dict
+market_data_specific_rule_form_dict = market_data_specific_rule.from_dict(market_data_specific_rule_dict)
+```
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 
 

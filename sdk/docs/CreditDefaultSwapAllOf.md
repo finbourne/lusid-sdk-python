@@ -14,6 +14,23 @@ Name | Type | Description | Notes
 **protection_detail_specification** | [**CdsProtectionDetailSpecification**](CdsProtectionDetailSpecification.md) |  | 
 **instrument_type** | **str** | The available values are: QuotedSecurity, InterestRateSwap, FxForward, Future, ExoticInstrument, FxOption, CreditDefaultSwap, InterestRateSwaption, Bond, EquityOption, FixedLeg, FloatingLeg, BespokeCashFlowsLeg, Unknown, TermDeposit, ContractForDifference, EquitySwap, CashPerpetual, CapFloor, CashSettled, CdsIndex, Basket, FundingLeg, FxSwap, ForwardRateAgreement, SimpleInstrument, Repo, Equity, ExchangeTradedOption, ReferenceInstrument, ComplexBond, InflationLinkedBond, InflationSwap, SimpleCashFlowLoan | 
 
+## Example
+
+```python
+from lusid.models.credit_default_swap_all_of import CreditDefaultSwapAllOf
+
+# TODO update the JSON string below
+json = "{}"
+# create an instance of CreditDefaultSwapAllOf from a JSON string
+credit_default_swap_all_of_instance = CreditDefaultSwapAllOf.from_json(json)
+# print the JSON string representation of the object
+print CreditDefaultSwapAllOf.to_json()
+
+# convert the object into a dict
+credit_default_swap_all_of_dict = credit_default_swap_all_of_instance.to_dict()
+# create an instance of CreditDefaultSwapAllOf from a dict
+credit_default_swap_all_of_form_dict = credit_default_swap_all_of.from_dict(credit_default_swap_all_of_dict)
+```
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 
 

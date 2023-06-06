@@ -12,6 +12,23 @@ Name | Type | Description | Notes
 **diagnostics** | [**ResultValueDictionary**](ResultValueDictionary.md) |  | [optional] 
 **instrument_event_type** | **str** | The Type of Event. The available values are: TransitionEvent, InformationalEvent, OpenEvent, CloseEvent, StockSplitEvent, BondDefaultEvent, CashDividendEvent, AmortisationEvent, CashFlowEvent, ExerciseEvent, ResetEvent, TriggerEvent, RawVendorEvent, InformationalErrorEvent | 
 
+## Example
+
+```python
+from lusid.models.informational_event import InformationalEvent
+
+# TODO update the JSON string below
+json = "{}"
+# create an instance of InformationalEvent from a JSON string
+informational_event_instance = InformationalEvent.from_json(json)
+# print the JSON string representation of the object
+print InformationalEvent.to_json()
+
+# convert the object into a dict
+informational_event_dict = informational_event_instance.to_dict()
+# create an instance of InformationalEvent from a dict
+informational_event_form_dict = informational_event.from_dict(informational_event_dict)
+```
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 
 

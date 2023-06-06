@@ -9,6 +9,23 @@ Name | Type | Description | Notes
 **asset_class** | **str** | Specify that a rule should only apply if the market data is requested by an instrument of a given asset class.  If null, then no filtering on asset class is applied. | [optional] 
 **dom_ccy** | **str** | Specify that a rule should only apply if the market data is requested by an instrument with a given domestic currency.  If null, then no filtering on currency is applied. | [optional] 
 
+## Example
+
+```python
+from lusid.models.dependency_source_filter import DependencySourceFilter
+
+# TODO update the JSON string below
+json = "{}"
+# create an instance of DependencySourceFilter from a JSON string
+dependency_source_filter_instance = DependencySourceFilter.from_json(json)
+# print the JSON string representation of the object
+print DependencySourceFilter.to_json()
+
+# convert the object into a dict
+dependency_source_filter_dict = dependency_source_filter_instance.to_dict()
+# create an instance of DependencySourceFilter from a dict
+dependency_source_filter_form_dict = dependency_source_filter.from_dict(dependency_source_filter_dict)
+```
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 
 

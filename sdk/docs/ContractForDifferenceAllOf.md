@@ -12,9 +12,26 @@ Name | Type | Description | Notes
 **reference_rate** | **float** | The reference rate of the CFD, this can be set to 0 but not negative values.  This field is optional, if not set it will default to 0. | [optional] 
 **type** | **str** | The type of CFD.    Supported string (enumeration) values are: [Cash, Futures]. | 
 **underlying_ccy** | **str** | The currency of the underlying | 
-**underlying_identifier** | **str** | External market codes and identifiers for the CFD, e.g. RIC.    Supported string (enumeration) values are: [LusidInstrumentId, Isin, Sedol, Cusip, ClientInternal, Figi, RIC, QuotePermId, REDCode, BBGId, ICECode]. | 
+**underlying_identifier** | **str** | external market codes and identifiers for the CFD, e.g. RIC.    Supported string (enumeration) values are: [LusidInstrumentId, Isin, Sedol, Cusip, ClientInternal, Figi, RIC, QuotePermId, REDCode, BBGId, ICECode]. | 
 **instrument_type** | **str** | The available values are: QuotedSecurity, InterestRateSwap, FxForward, Future, ExoticInstrument, FxOption, CreditDefaultSwap, InterestRateSwaption, Bond, EquityOption, FixedLeg, FloatingLeg, BespokeCashFlowsLeg, Unknown, TermDeposit, ContractForDifference, EquitySwap, CashPerpetual, CapFloor, CashSettled, CdsIndex, Basket, FundingLeg, FxSwap, ForwardRateAgreement, SimpleInstrument, Repo, Equity, ExchangeTradedOption, ReferenceInstrument, ComplexBond, InflationLinkedBond, InflationSwap, SimpleCashFlowLoan | 
 
+## Example
+
+```python
+from lusid.models.contract_for_difference_all_of import ContractForDifferenceAllOf
+
+# TODO update the JSON string below
+json = "{}"
+# create an instance of ContractForDifferenceAllOf from a JSON string
+contract_for_difference_all_of_instance = ContractForDifferenceAllOf.from_json(json)
+# print the JSON string representation of the object
+print ContractForDifferenceAllOf.to_json()
+
+# convert the object into a dict
+contract_for_difference_all_of_dict = contract_for_difference_all_of_instance.to_dict()
+# create an instance of ContractForDifferenceAllOf from a dict
+contract_for_difference_all_of_form_dict = contract_for_difference_all_of.from_dict(contract_for_difference_all_of_dict)
+```
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 
 

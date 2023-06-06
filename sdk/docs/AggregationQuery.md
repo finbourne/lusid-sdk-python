@@ -13,8 +13,25 @@ Name | Type | Description | Notes
 **supported_operations** | **str** | When performing an aggregation operation, what column type operations can be performed on the data. For example, it makes sense to sum decimals but not strings. Either can be counted. With more complex types, e.g. ResultValues, operations may be linked to a semantic meaning such as the currency of the result. In such cases the operations may be supported but context specific. For example, it makes sense to sum PVs in a single currency but not when the currency is different. In such cases, an error would result (it being assumed that no fx rates for currency conversion were implicit in the context). | 
 **life_cycle_status** | **str** | Within an API where an item can be accessed through an address or property, there is an associated status that determines whether the item is stable or likely to change. This status is one of [Experimental, Beta, EAP, Prod,  Deprecated]. If the item is deprecated it will be removed on or after the associated DateTime RemovalDate field. That field will not otherwise be set. | 
 **removal_date** | **datetime** | If the life cycle status is set to deprecated then this will be populated with the date on or after which removal of the address query will happen | [optional] 
-**applicable_options** | [**dict(str, AddressKeyOptionDefinition)**](AddressKeyOptionDefinition.md) | A mapping from option names to the definition that the corresponding option value must match. | [optional] 
+**applicable_options** | [**Dict[str, AddressKeyOptionDefinition]**](AddressKeyOptionDefinition.md) | A mapping from option names to the definition that the corresponding option value must match. | [optional] 
 
+## Example
+
+```python
+from lusid.models.aggregation_query import AggregationQuery
+
+# TODO update the JSON string below
+json = "{}"
+# create an instance of AggregationQuery from a JSON string
+aggregation_query_instance = AggregationQuery.from_json(json)
+# print the JSON string representation of the object
+print AggregationQuery.to_json()
+
+# convert the object into a dict
+aggregation_query_dict = aggregation_query_instance.to_dict()
+# create an instance of AggregationQuery from a dict
+aggregation_query_form_dict = aggregation_query.from_dict(aggregation_query_dict)
+```
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 
 

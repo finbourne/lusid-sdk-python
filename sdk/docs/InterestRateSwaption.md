@@ -12,6 +12,23 @@ Name | Type | Description | Notes
 **swap** | [**InterestRateSwap**](InterestRateSwap.md) |  | 
 **instrument_type** | **str** | The available values are: QuotedSecurity, InterestRateSwap, FxForward, Future, ExoticInstrument, FxOption, CreditDefaultSwap, InterestRateSwaption, Bond, EquityOption, FixedLeg, FloatingLeg, BespokeCashFlowsLeg, Unknown, TermDeposit, ContractForDifference, EquitySwap, CashPerpetual, CapFloor, CashSettled, CdsIndex, Basket, FundingLeg, FxSwap, ForwardRateAgreement, SimpleInstrument, Repo, Equity, ExchangeTradedOption, ReferenceInstrument, ComplexBond, InflationLinkedBond, InflationSwap, SimpleCashFlowLoan | 
 
+## Example
+
+```python
+from lusid.models.interest_rate_swaption import InterestRateSwaption
+
+# TODO update the JSON string below
+json = "{}"
+# create an instance of InterestRateSwaption from a JSON string
+interest_rate_swaption_instance = InterestRateSwaption.from_json(json)
+# print the JSON string representation of the object
+print InterestRateSwaption.to_json()
+
+# convert the object into a dict
+interest_rate_swaption_dict = interest_rate_swaption_instance.to_dict()
+# create an instance of InterestRateSwaption from a dict
+interest_rate_swaption_form_dict = interest_rate_swaption.from_dict(interest_rate_swaption_dict)
+```
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 
 

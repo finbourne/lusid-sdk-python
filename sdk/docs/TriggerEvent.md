@@ -12,6 +12,23 @@ Name | Type | Description | Notes
 **maturity_date** | **datetime** | The date the trigger takes effect. | 
 **instrument_event_type** | **str** | The Type of Event. The available values are: TransitionEvent, InformationalEvent, OpenEvent, CloseEvent, StockSplitEvent, BondDefaultEvent, CashDividendEvent, AmortisationEvent, CashFlowEvent, ExerciseEvent, ResetEvent, TriggerEvent, RawVendorEvent, InformationalErrorEvent | 
 
+## Example
+
+```python
+from lusid.models.trigger_event import TriggerEvent
+
+# TODO update the JSON string below
+json = "{}"
+# create an instance of TriggerEvent from a JSON string
+trigger_event_instance = TriggerEvent.from_json(json)
+# print the JSON string representation of the object
+print TriggerEvent.to_json()
+
+# convert the object into a dict
+trigger_event_dict = trigger_event_instance.to_dict()
+# create an instance of TriggerEvent from a dict
+trigger_event_form_dict = trigger_event.from_dict(trigger_event_dict)
+```
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 
 

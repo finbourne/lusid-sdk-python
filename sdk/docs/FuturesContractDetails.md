@@ -19,6 +19,23 @@ Name | Type | Description | Notes
 **ticker_step** | **float** | Minimal step size change in ticker. | [optional] 
 **unit_value** | **float** | The value in the currency of a 1 unit change in the contract price. | [optional] 
 
+## Example
+
+```python
+from lusid.models.futures_contract_details import FuturesContractDetails
+
+# TODO update the JSON string below
+json = "{}"
+# create an instance of FuturesContractDetails from a JSON string
+futures_contract_details_instance = FuturesContractDetails.from_json(json)
+# print the JSON string representation of the object
+print FuturesContractDetails.to_json()
+
+# convert the object into a dict
+futures_contract_details_dict = futures_contract_details_instance.to_dict()
+# create an instance of FuturesContractDetails from a dict
+futures_contract_details_form_dict = futures_contract_details.from_dict(futures_contract_details_dict)
+```
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 
 

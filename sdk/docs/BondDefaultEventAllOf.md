@@ -12,6 +12,23 @@ Name | Type | Description | Notes
 **payment_date** | **datetime** | The date the coupon payment was missed. | 
 **instrument_event_type** | **str** | The Type of Event. The available values are: TransitionEvent, InformationalEvent, OpenEvent, CloseEvent, StockSplitEvent, BondDefaultEvent, CashDividendEvent, AmortisationEvent, CashFlowEvent, ExerciseEvent, ResetEvent, TriggerEvent, RawVendorEvent, InformationalErrorEvent | 
 
+## Example
+
+```python
+from lusid.models.bond_default_event_all_of import BondDefaultEventAllOf
+
+# TODO update the JSON string below
+json = "{}"
+# create an instance of BondDefaultEventAllOf from a JSON string
+bond_default_event_all_of_instance = BondDefaultEventAllOf.from_json(json)
+# print the JSON string representation of the object
+print BondDefaultEventAllOf.to_json()
+
+# convert the object into a dict
+bond_default_event_all_of_dict = bond_default_event_all_of_instance.to_dict()
+# create an instance of BondDefaultEventAllOf from a dict
+bond_default_event_all_of_form_dict = bond_default_event_all_of.from_dict(bond_default_event_all_of_dict)
+```
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 
 

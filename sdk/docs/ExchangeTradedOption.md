@@ -11,6 +11,23 @@ Name | Type | Description | Notes
 **ref_spot_price** | **float** | The reference spot price for the option at which the contract was entered into. | 
 **instrument_type** | **str** | The available values are: QuotedSecurity, InterestRateSwap, FxForward, Future, ExoticInstrument, FxOption, CreditDefaultSwap, InterestRateSwaption, Bond, EquityOption, FixedLeg, FloatingLeg, BespokeCashFlowsLeg, Unknown, TermDeposit, ContractForDifference, EquitySwap, CashPerpetual, CapFloor, CashSettled, CdsIndex, Basket, FundingLeg, FxSwap, ForwardRateAgreement, SimpleInstrument, Repo, Equity, ExchangeTradedOption, ReferenceInstrument, ComplexBond, InflationLinkedBond, InflationSwap, SimpleCashFlowLoan | 
 
+## Example
+
+```python
+from lusid.models.exchange_traded_option import ExchangeTradedOption
+
+# TODO update the JSON string below
+json = "{}"
+# create an instance of ExchangeTradedOption from a JSON string
+exchange_traded_option_instance = ExchangeTradedOption.from_json(json)
+# print the JSON string representation of the object
+print ExchangeTradedOption.to_json()
+
+# convert the object into a dict
+exchange_traded_option_dict = exchange_traded_option_instance.to_dict()
+# create an instance of ExchangeTradedOption from a dict
+exchange_traded_option_form_dict = exchange_traded_option.from_dict(exchange_traded_option_dict)
+```
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 
 

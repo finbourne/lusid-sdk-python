@@ -7,6 +7,23 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **rule_type** | **str** | The available values are: ReconcileNumericRule, ReconcileDateTimeRule, ReconcileStringRule, ReconcileExact | 
 
+## Example
+
+```python
+from lusid.models.reconciliation_rule import ReconciliationRule
+
+# TODO update the JSON string below
+json = "{}"
+# create an instance of ReconciliationRule from a JSON string
+reconciliation_rule_instance = ReconciliationRule.from_json(json)
+# print the JSON string representation of the object
+print ReconciliationRule.to_json()
+
+# convert the object into a dict
+reconciliation_rule_dict = reconciliation_rule_instance.to_dict()
+# create an instance of ReconciliationRule from a dict
+reconciliation_rule_form_dict = reconciliation_rule.from_dict(reconciliation_rule_dict)
+```
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 
 

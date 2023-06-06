@@ -12,6 +12,23 @@ Name | Type | Description | Notes
 **fixing_date** | **datetime** | The date the reset fixes, or is observed upon. | 
 **instrument_event_type** | **str** | The Type of Event. The available values are: TransitionEvent, InformationalEvent, OpenEvent, CloseEvent, StockSplitEvent, BondDefaultEvent, CashDividendEvent, AmortisationEvent, CashFlowEvent, ExerciseEvent, ResetEvent, TriggerEvent, RawVendorEvent, InformationalErrorEvent | 
 
+## Example
+
+```python
+from lusid.models.reset_event import ResetEvent
+
+# TODO update the JSON string below
+json = "{}"
+# create an instance of ResetEvent from a JSON string
+reset_event_instance = ResetEvent.from_json(json)
+# print the JSON string representation of the object
+print ResetEvent.to_json()
+
+# convert the object into a dict
+reset_event_dict = reset_event_instance.to_dict()
+# create an instance of ResetEvent from a dict
+reset_event_form_dict = reset_event.from_dict(reset_event_dict)
+```
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 
 

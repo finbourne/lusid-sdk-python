@@ -10,6 +10,23 @@ Name | Type | Description | Notes
 **rounding_target** | **str** | The target of the rounding convention.  Accepted values are &#39;AccruedInterest&#39;, &#39;Cashflows&#39;, or &#39;All&#39;    Supported string (enumeration) values are: [All, AccruedInterest, Cashflows]. | [optional] 
 **rounding_type** | **str** | The type of rounding.  e.g. Round Up, Round Down    Supported string (enumeration) values are: [Down, Up, Floor, Ceiling, Nearest]. | [optional] 
 
+## Example
+
+```python
+from lusid.models.rounding_convention import RoundingConvention
+
+# TODO update the JSON string below
+json = "{}"
+# create an instance of RoundingConvention from a JSON string
+rounding_convention_instance = RoundingConvention.from_json(json)
+# print the JSON string representation of the object
+print RoundingConvention.to_json()
+
+# convert the object into a dict
+rounding_convention_dict = rounding_convention_instance.to_dict()
+# create an instance of RoundingConvention from a dict
+rounding_convention_form_dict = rounding_convention.from_dict(rounding_convention_dict)
+```
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 
 

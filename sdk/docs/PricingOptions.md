@@ -17,6 +17,23 @@ Name | Type | Description | Notes
 **validate_domestic_and_quote_currencies_are_consistent** | **bool** | Do we validate that the instrument domestic currency matches the quote currency (unless unknown/zzz) when using lookup pricing. | [optional] 
 **conserved_quantity_for_lookthrough_expansion** | **str** | When performing lookthrough portfolio expansion with ScalingMethodology set to \&quot;Sum\&quot; or \&quot;AbsoluteSum\&quot;,  the quantity specified here will be conserved and apportioned to lookthrough constituents.  For example, an equal-weighting index with 100 constituents can be modelled as a reference portfolio with 1% weights on each equity.  When expanding a $9000 holding of that index into its constituents while conserving PV, we end up with $90 of each equity.  The number of units of each equity held is then implied.  Note that conservation of one quantity may imply non-conservation of others, especially when some constituents are OTCs.                Allowed values are: \&quot;PV\&quot; (default), \&quot;Exposure\&quot;. | [optional] 
 
+## Example
+
+```python
+from lusid.models.pricing_options import PricingOptions
+
+# TODO update the JSON string below
+json = "{}"
+# create an instance of PricingOptions from a JSON string
+pricing_options_instance = PricingOptions.from_json(json)
+# print the JSON string representation of the object
+print PricingOptions.to_json()
+
+# convert the object into a dict
+pricing_options_dict = pricing_options_instance.to_dict()
+# create an instance of PricingOptions from a dict
+pricing_options_form_dict = pricing_options.from_dict(pricing_options_dict)
+```
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 
 

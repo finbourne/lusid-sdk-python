@@ -7,9 +7,26 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **left** | [**InlineValuationRequest**](InlineValuationRequest.md) |  | 
 **right** | [**InlineValuationRequest**](InlineValuationRequest.md) |  | 
-**left_to_right_mapping** | [**list[ReconciliationLeftRightAddressKeyPair]**](ReconciliationLeftRightAddressKeyPair.md) | The mapping from property keys requested by left aggregation to property keys on right hand side | [optional] 
-**preserve_keys** | **list[str]** | List of keys to preserve (from rhs) in the diff. Used in conjunction with filtering/grouping | [optional] 
+**left_to_right_mapping** | [**List[ReconciliationLeftRightAddressKeyPair]**](ReconciliationLeftRightAddressKeyPair.md) | The mapping from property keys requested by left aggregation to property keys on right hand side | [optional] 
+**preserve_keys** | **List[str]** | List of keys to preserve (from rhs) in the diff. Used in conjunction with filtering/grouping | [optional] 
 
+## Example
+
+```python
+from lusid.models.inline_valuations_reconciliation_request import InlineValuationsReconciliationRequest
+
+# TODO update the JSON string below
+json = "{}"
+# create an instance of InlineValuationsReconciliationRequest from a JSON string
+inline_valuations_reconciliation_request_instance = InlineValuationsReconciliationRequest.from_json(json)
+# print the JSON string representation of the object
+print InlineValuationsReconciliationRequest.to_json()
+
+# convert the object into a dict
+inline_valuations_reconciliation_request_dict = inline_valuations_reconciliation_request_instance.to_dict()
+# create an instance of InlineValuationsReconciliationRequest from a dict
+inline_valuations_reconciliation_request_form_dict = inline_valuations_reconciliation_request.from_dict(inline_valuations_reconciliation_request_dict)
+```
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 
 

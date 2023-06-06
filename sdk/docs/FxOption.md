@@ -11,7 +11,7 @@ Name | Type | Description | Notes
 **fgn_ccy** | **str** | The foreign currency of the FX. | 
 **fgn_amount** | **float** | For a vanilla FxOption contract, FgnAmount cannot be set.  In case of a digital FxOption (IsPayoffDigital&#x3D;&#x3D;true)  a payoff (if the option is in the money) can be either  in domestic or in foreign currency - for the latter  FgnAmount must be set.  Note: It is invalid to have FgnAmount and DomAmount  at the same time. | [optional] 
 **strike** | **float** | The strike of the option. | [optional] 
-**barriers** | [**list[Barrier]**](Barrier.md) | For a barrier option the list should not be empty. Up to two barriers are supported.  An option cannot be at the same time barrier- and touch-option.  One (or both) of the lists must be empty. | [optional] 
+**barriers** | [**List[Barrier]**](Barrier.md) | For a barrier option the list should not be empty. Up to two barriers are supported.  An option cannot be at the same time barrier- and touch-option.  One (or both) of the lists must be empty. | [optional] 
 **exercise_type** | **str** | Type of optionality that is present; European, American.    Supported string (enumeration) values are: [European, American]. | [optional] 
 **is_call_not_put** | **bool** | True if the option is a call, false if the option is a put. | 
 **is_delivery_not_cash** | **bool** | True if the option delivers the FX underlying, False if the option is settled in cash. | 
@@ -20,9 +20,26 @@ Name | Type | Description | Notes
 **option_settlement_date** | **datetime** | The settlement date of the option. | 
 **payout_style** | **str** | PayoutStyle for touch options.                For options without touch optionality, payoutStyle should not be set.  For options with touch optionality (where the touches data has been set), payoutStyle must be defined and cannot be None.    Supported string (enumeration) values are: [Deferred, Immediate]. | [optional] 
 **premium** | [**Premium**](Premium.md) |  | [optional] 
-**touches** | [**list[Touch]**](Touch.md) | For a touch option the list should not be empty. Up to two touches are supported.  An option cannot be at the same time barrier- and touch-option.  One (or both) of the lists must be empty. | [optional] 
+**touches** | [**List[Touch]**](Touch.md) | For a touch option the list should not be empty. Up to two touches are supported.  An option cannot be at the same time barrier- and touch-option.  One (or both) of the lists must be empty. | [optional] 
 **instrument_type** | **str** | The available values are: QuotedSecurity, InterestRateSwap, FxForward, Future, ExoticInstrument, FxOption, CreditDefaultSwap, InterestRateSwaption, Bond, EquityOption, FixedLeg, FloatingLeg, BespokeCashFlowsLeg, Unknown, TermDeposit, ContractForDifference, EquitySwap, CashPerpetual, CapFloor, CashSettled, CdsIndex, Basket, FundingLeg, FxSwap, ForwardRateAgreement, SimpleInstrument, Repo, Equity, ExchangeTradedOption, ReferenceInstrument, ComplexBond, InflationLinkedBond, InflationSwap, SimpleCashFlowLoan | 
 
+## Example
+
+```python
+from lusid.models.fx_option import FxOption
+
+# TODO update the JSON string below
+json = "{}"
+# create an instance of FxOption from a JSON string
+fx_option_instance = FxOption.from_json(json)
+# print the JSON string representation of the object
+print FxOption.to_json()
+
+# convert the object into a dict
+fx_option_dict = fx_option_instance.to_dict()
+# create an instance of FxOption from a dict
+fx_option_form_dict = fx_option.from_dict(fx_option_dict)
+```
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 
 

@@ -17,6 +17,23 @@ Name | Type | Description | Notes
 **realised_market** | [**CurrencyAndAmount**](CurrencyAndAmount.md) |  | [optional] 
 **realised_currency** | [**CurrencyAndAmount**](CurrencyAndAmount.md) |  | [optional] 
 
+## Example
+
+```python
+from lusid.models.realised_gain_loss import RealisedGainLoss
+
+# TODO update the JSON string below
+json = "{}"
+# create an instance of RealisedGainLoss from a JSON string
+realised_gain_loss_instance = RealisedGainLoss.from_json(json)
+# print the JSON string representation of the object
+print RealisedGainLoss.to_json()
+
+# convert the object into a dict
+realised_gain_loss_dict = realised_gain_loss_instance.to_dict()
+# create an instance of RealisedGainLoss from a dict
+realised_gain_loss_form_dict = realised_gain_loss.from_dict(realised_gain_loss_dict)
+```
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 
 

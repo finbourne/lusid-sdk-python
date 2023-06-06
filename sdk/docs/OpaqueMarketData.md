@@ -11,6 +11,23 @@ Name | Type | Description | Notes
 **lineage** | **str** | Description of the complex market data&#39;s lineage e.g. &#39;FundAccountant_GreenQuality&#39;. | [optional] 
 **market_data_type** | **str** | The available values are: DiscountFactorCurveData, EquityVolSurfaceData, FxVolSurfaceData, IrVolCubeData, OpaqueMarketData, YieldCurveData, FxForwardCurveData, FxForwardPipsCurveData, FxForwardTenorCurveData, FxForwardTenorPipsCurveData, FxForwardCurveByQuoteReference, CreditSpreadCurveData, EquityCurveByPricesData | 
 
+## Example
+
+```python
+from lusid.models.opaque_market_data import OpaqueMarketData
+
+# TODO update the JSON string below
+json = "{}"
+# create an instance of OpaqueMarketData from a JSON string
+opaque_market_data_instance = OpaqueMarketData.from_json(json)
+# print the JSON string representation of the object
+print OpaqueMarketData.to_json()
+
+# convert the object into a dict
+opaque_market_data_dict = opaque_market_data_instance.to_dict()
+# create an instance of OpaqueMarketData from a dict
+opaque_market_data_form_dict = opaque_market_data.from_dict(opaque_market_data_dict)
+```
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 
 
