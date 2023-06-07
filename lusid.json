@@ -9,7 +9,7 @@
       "url": "https://www.finbourne.com",
       "email": "info@finbourne.com"
     },
-    "version": "1.0.240",
+    "version": "1.0.241",
     "x-logo": {
       "url": "https://www.lusid.com/app/assets/logo_white.png",
       "backgroundColor": "#415464"
@@ -67079,7 +67079,10 @@
           },
           "options": {
             "type": "object",
-            "additionalProperties": {},
+            "additionalProperties": {
+              "type": "object",
+              "additionalProperties": false
+            },
             "description": "Additional options to apply when performing computations. Options that do not apply to the Key will be\r\nignored. Option values can be boolean, numeric, string or date-time.",
             "nullable": true
           }
@@ -78183,7 +78186,10 @@
             "type": "array",
             "items": {
               "type": "object",
-              "additionalProperties": {}
+              "additionalProperties": {
+                "type": "object",
+                "additionalProperties": false
+              }
             },
             "nullable": true
           },
@@ -78213,7 +78219,10 @@
             "type": "array",
             "items": {
               "type": "object",
-              "additionalProperties": {}
+              "additionalProperties": {
+                "type": "object",
+                "additionalProperties": false
+              }
             },
             "nullable": true
           },
@@ -79145,7 +79154,10 @@
             "properties": {
               "data": {
                 "type": "object",
-                "additionalProperties": {}
+                "additionalProperties": {
+                  "type": "object",
+                  "additionalProperties": false
+                }
               },
               "modelOptionsType": {
                 "enum": [
@@ -82999,25 +83011,37 @@
         "properties": {
           "left": {
             "type": "object",
-            "additionalProperties": {},
+            "additionalProperties": {
+              "type": "object",
+              "additionalProperties": false
+            },
             "description": "Left hand side of the comparison",
             "nullable": true
           },
           "right": {
             "type": "object",
-            "additionalProperties": {},
+            "additionalProperties": {
+              "type": "object",
+              "additionalProperties": false
+            },
             "description": "Right hand side of the comparison",
             "nullable": true
           },
           "difference": {
             "type": "object",
-            "additionalProperties": {},
+            "additionalProperties": {
+              "type": "object",
+              "additionalProperties": false
+            },
             "description": "Difference between LHS and RHS of comparison",
             "nullable": true
           },
           "resultComparison": {
             "type": "object",
-            "additionalProperties": {},
+            "additionalProperties": {
+              "type": "object",
+              "additionalProperties": false
+            },
             "description": "The logical or semantic description of the difference, e.g. \"Matches\" or \"MatchesWithTolerance\" or \"Failed\".",
             "nullable": true
           }
