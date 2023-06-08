@@ -9,7 +9,7 @@
       "url": "https://www.finbourne.com",
       "email": "info@finbourne.com"
     },
-    "version": "1.0.244",
+    "version": "1.0.248",
     "x-logo": {
       "url": "https://www.lusid.com/app/assets/logo_white.png",
       "backgroundColor": "#415464"
@@ -74579,7 +74579,7 @@
               },
               "calculationType": {
                 "type": "string",
-                "description": "Calculation type for some Future instruments which have non-standard methodology.\r\nOptional, if not set defaults as follows:\r\n- If ExchangeCode is \"ASX\" and ContractCode is \"IR\" or \"BB\" set to ASX_BankBills\r\n- If ExchangeCode is \"ASX\" and ContractCode is \"YT\" set to ASX_3Year\r\n- If ExchangeCode is \"ASX\" and ContractCode is \"VT\" set to ASX_5Year\r\n- If ExchangeCode is \"ASX\" and ContractCode is \"XT\" set to ASX_10Year\r\n- If ExchangeCode is \"ASX\" and ContractCode is \"LT\" set to ASX_20Year\r\n- otherwise set to Standard\r\n\r\nSpecific calculation types for ASX bond futures are:\r\n- [Standard] The default calculation type, which does not fit into any of the categories below.\r\n- [ASX_BankBills] Used for AUD and NZD futures “IR” and “BB” on ASX. 90D Bank Bills.\r\n- [ASX_3Year] Used for “YT” on ASX. 3YR semi-annual bond (6 coupons) @ 6%.\r\n- [ASX_5Year] Used for “VT” on ASX. 5yr semi-annual bond (10 coupons) @ 2%.\r\n- [ASX_10Year] Used for “XT” on ASX. 10yr semi-annual bond (20 coupons) @ 6%.\r\n- [ASX_20Year] Used for “LT” on ASX. 20yr semi-annual bond (40 coupons) @ 4%.\r\n\r\nSupported string (enumeration) values are: [Standard, ASX_BankBills, ASX_3Year, ASX_5Year, ASX_10Year, ASX_20Year].",
+                "description": "Calculation type for some Future instruments which have non-standard methodology.\r\nOptional, if not set defaults as follows:\r\n- If ExchangeCode is \"ASX\" and ContractCode is \"IR\" or \"BB\" set to ASX_BankBills\r\n- If ExchangeCode is \"ASX\" and ContractCode is \"YT\" set to ASX_3Year\r\n- If ExchangeCode is \"ASX\" and ContractCode is \"VT\" set to ASX_5Year\r\n- If ExchangeCode is \"ASX\" and ContractCode is \"XT\" set to ASX_10Year\r\n- If ExchangeCode is \"ASX\" and ContractCode is \"LT\" set to ASX_20Year\r\n- otherwise set to Standard\r\n\r\nSpecific calculation types for ASX bond futures are:\r\n- [Standard] The default calculation type, which does not fit into any of the categories below.\r\n- [ASX_BankBills] Used for AUD and NZD futures “IR” and “BB” on ASX. 90D Bank Bills.\r\n- [ASX_3Year] Used for “YT” on ASX. 3YR semi-annual bond (6 coupons) @ 6%.\r\n- [ASX_5Year] Used for “VT” on ASX. 5yr semi-annual bond (10 coupons) @ 2%.\r\n- [ASX_10Year] Used for “XT” on ASX. 10yr semi-annual bond (20 coupons) @ 6%.\r\n- [ASX_20Year] Used for “LT” on ASX. 20yr semi-annual bond (40 coupons) @ 4%.\r\n\r\nSupported string (enumeration) values are: [Standard, ASX_BankBills, ASX_3Year, ASX_5Year, ASX_10Year, ASX_20Year, B3_DI1].",
                 "nullable": true
               },
               "instrumentType": {
@@ -74700,6 +74700,14 @@
             "type": "number",
             "description": "The value in the currency of a 1 unit change in the contract price.",
             "format": "double"
+          },
+          "calendars": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "description": "Holiday calendars that apply to yield-to-price conversions (i.e. for BRL futures).",
+            "nullable": true
           }
         },
         "additionalProperties": false,
