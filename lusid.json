@@ -9,7 +9,7 @@
       "url": "https://www.finbourne.com",
       "email": "info@finbourne.com"
     },
-    "version": "1.0.249",
+    "version": "1.0.250",
     "x-logo": {
       "url": "https://www.lusid.com/app/assets/logo_white.png",
       "backgroundColor": "#415464"
@@ -15255,7 +15255,7 @@
           {
             "name": "sortBy",
             "in": "query",
-            "description": "Order results by particular fields. Use the '-' sign to denote descending order, for\r\n             example '-MyFieldName'.",
+            "description": "A list of field names or properties to sort by, each suffixed by \" ASC\" or \" DESC\"",
             "schema": {
               "type": "array",
               "items": {
