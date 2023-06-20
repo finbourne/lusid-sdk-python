@@ -9,7 +9,7 @@
       "url": "https://www.finbourne.com",
       "email": "info@finbourne.com"
     },
-    "version": "1.0.268",
+    "version": "1.0.269",
     "x-logo": {
       "url": "https://www.lusid.com/app/assets/logo_white.png",
       "backgroundColor": "#415464"
@@ -9318,9 +9318,9 @@
         "tags": [
           "CustomEntityDefinitions"
         ],
-        "summary": "[EARLY ACCESS] GetDefinition: Get a Custom Entity type definition.",
+        "summary": "[EARLY ACCESS] GetCustomEntityDefinition: Get a Custom Entity type definition.",
         "description": "Retrieve a CustomEntityDefinition by a specific entityType at a point in AsAt time",
-        "operationId": "GetDefinition",
+        "operationId": "GetCustomEntityDefinition",
         "parameters": [
           {
             "name": "entityType",
@@ -9825,6 +9825,196 @@
           }
         ],
         "x-fbn-apistatus": "EarlyAccess"
+      }
+    },
+    "/api/customentities/entitytypes/{entityType}/$deprecated": {
+      "get": {
+        "tags": [
+          "CustomEntityDefinitions"
+        ],
+        "summary": "[DEPRECATED] GetDefinition: Get a Custom Entity type definition.",
+        "description": "Retrieve a CustomEntityDefinition by a specific entityType at a point in AsAt time",
+        "operationId": "GetDefinition",
+        "parameters": [
+          {
+            "name": "entityType",
+            "in": "path",
+            "description": "The identifier for the Custom Entity type, derived from the \"entityTypeName\" provided on creation.",
+            "required": true,
+            "schema": {
+              "maxLength": 65,
+              "minLength": 1,
+              "type": "string"
+            }
+          },
+          {
+            "name": "asAt",
+            "in": "query",
+            "description": "The AsAt datetime at which to retrieve the definition.",
+            "schema": {
+              "type": "string",
+              "format": "date-time"
+            },
+            "x-nullable": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The requested Custom Entity definition.",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/CustomEntityDefinition"
+                },
+                "example": {
+                  "href": "https://myco.lusid.com/api/customentities/entitytypes/~SupportTicket?asAt=2022-02-28T14:27:01.2728000+00:00",
+                  "entityTypeName": "SupportTicket",
+                  "displayName": "Support Ticket",
+                  "description": "Support Ticket",
+                  "entityType": "~SupportTicket",
+                  "fieldSchema": [
+                    {
+                      "name": "clientId",
+                      "lifetime": "Perpetual",
+                      "type": "String",
+                      "required": true
+                    },
+                    {
+                      "name": "issueDescription",
+                      "lifetime": "TimeVariant",
+                      "type": "String",
+                      "required": true
+                    },
+                    {
+                      "name": "internalNotes",
+                      "lifetime": "TimeVariant",
+                      "type": "String",
+                      "required": false
+                    },
+                    {
+                      "name": "isResolved",
+                      "lifetime": "TimeVariant",
+                      "type": "Boolean",
+                      "required": false
+                    }
+                  ]
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CustomEntityDefinition"
+                },
+                "example": {
+                  "href": "https://myco.lusid.com/api/customentities/entitytypes/~SupportTicket?asAt=2022-02-28T14:27:01.2728000+00:00",
+                  "entityTypeName": "SupportTicket",
+                  "displayName": "Support Ticket",
+                  "description": "Support Ticket",
+                  "entityType": "~SupportTicket",
+                  "fieldSchema": [
+                    {
+                      "name": "clientId",
+                      "lifetime": "Perpetual",
+                      "type": "String",
+                      "required": true
+                    },
+                    {
+                      "name": "issueDescription",
+                      "lifetime": "TimeVariant",
+                      "type": "String",
+                      "required": true
+                    },
+                    {
+                      "name": "internalNotes",
+                      "lifetime": "TimeVariant",
+                      "type": "String",
+                      "required": false
+                    },
+                    {
+                      "name": "isResolved",
+                      "lifetime": "TimeVariant",
+                      "type": "Boolean",
+                      "required": false
+                    }
+                  ]
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CustomEntityDefinition"
+                },
+                "example": {
+                  "href": "https://myco.lusid.com/api/customentities/entitytypes/~SupportTicket?asAt=2022-02-28T14:27:01.2728000+00:00",
+                  "entityTypeName": "SupportTicket",
+                  "displayName": "Support Ticket",
+                  "description": "Support Ticket",
+                  "entityType": "~SupportTicket",
+                  "fieldSchema": [
+                    {
+                      "name": "clientId",
+                      "lifetime": "Perpetual",
+                      "type": "String",
+                      "required": true
+                    },
+                    {
+                      "name": "issueDescription",
+                      "lifetime": "TimeVariant",
+                      "type": "String",
+                      "required": true
+                    },
+                    {
+                      "name": "internalNotes",
+                      "lifetime": "TimeVariant",
+                      "type": "String",
+                      "required": false
+                    },
+                    {
+                      "name": "isResolved",
+                      "lifetime": "TimeVariant",
+                      "type": "Boolean",
+                      "required": false
+                    }
+                  ]
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "The details of the input related failure",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/LusidValidationProblemDetails"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/LusidValidationProblemDetails"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/LusidValidationProblemDetails"
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "Error response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/LusidProblemDetails"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "oauth2": []
+          }
+        ],
+        "x-fbn-apistatus": "Deprecated"
       }
     },
     "/api/customentities/{entityType}": {
@@ -46346,7 +46536,6 @@
                       "applyIso4217Rounding": false
                     }
                   },
-                  "inheritedRecipes": [],
                   "description": "",
                   "holding": {
                     "taxLotLevelHoldings": true
@@ -46413,7 +46602,6 @@
                       "applyIso4217Rounding": false
                     }
                   },
-                  "inheritedRecipes": [],
                   "description": "",
                   "holding": {
                     "taxLotLevelHoldings": true
@@ -46480,7 +46668,6 @@
                       "applyIso4217Rounding": false
                     }
                   },
-                  "inheritedRecipes": [],
                   "description": "",
                   "holding": {
                     "taxLotLevelHoldings": true
@@ -46547,7 +46734,6 @@
                       "applyIso4217Rounding": false
                     }
                   },
-                  "inheritedRecipes": [],
                   "description": "",
                   "holding": {
                     "taxLotLevelHoldings": true
@@ -46724,7 +46910,6 @@
                             "applyIso4217Rounding": false
                           }
                         },
-                        "inheritedRecipes": [],
                         "description": "",
                         "holding": {
                           "taxLotLevelHoldings": true
@@ -46786,7 +46971,6 @@
                             "applyIso4217Rounding": false
                           }
                         },
-                        "inheritedRecipes": [],
                         "description": "",
                         "holding": {
                           "taxLotLevelHoldings": true
@@ -46878,7 +47062,6 @@
                             "applyIso4217Rounding": false
                           }
                         },
-                        "inheritedRecipes": [],
                         "description": "",
                         "holding": {
                           "taxLotLevelHoldings": true
@@ -46940,7 +47123,6 @@
                             "applyIso4217Rounding": false
                           }
                         },
-                        "inheritedRecipes": [],
                         "description": "",
                         "holding": {
                           "taxLotLevelHoldings": true
@@ -47032,7 +47214,6 @@
                             "applyIso4217Rounding": false
                           }
                         },
-                        "inheritedRecipes": [],
                         "description": "",
                         "holding": {
                           "taxLotLevelHoldings": true
@@ -47094,7 +47275,6 @@
                             "applyIso4217Rounding": false
                           }
                         },
-                        "inheritedRecipes": [],
                         "description": "",
                         "holding": {
                           "taxLotLevelHoldings": true
@@ -47273,7 +47453,6 @@
                         "applyIso4217Rounding": false
                       }
                     },
-                    "inheritedRecipes": [],
                     "description": "",
                     "holding": {
                       "taxLotLevelHoldings": true
@@ -47352,7 +47531,6 @@
                         "applyIso4217Rounding": false
                       }
                     },
-                    "inheritedRecipes": [],
                     "description": "",
                     "holding": {
                       "taxLotLevelHoldings": true
@@ -47431,7 +47609,6 @@
                         "applyIso4217Rounding": false
                       }
                     },
-                    "inheritedRecipes": [],
                     "description": "",
                     "holding": {
                       "taxLotLevelHoldings": true
@@ -90947,6 +91124,10 @@
       "description": "An instrument represents a financial asset that an investor owns or has exposure to. Each transaction should be booked against an instrument stored in the LUSID instrument master. For more information, see https://support.lusid.com/knowledgebase/article/KA-01857."
     },
     {
+      "name": "Legacy Compliance",
+      "description": "Methods for storage and retrieval of legacy compliance data: legacy rules and legacy results."
+    },
+    {
       "name": "Legal Entities",
       "description": "Endpoints for interacting with Legal Entities."
     },
@@ -91096,6 +91277,7 @@
       "Executions",
       "Instrument Events",
       "Instruments",
+      "Legacy Compliance",
       "Legal Entities",
       "OrderGraph",
       "OrderInstructions",
