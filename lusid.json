@@ -9,7 +9,7 @@
       "url": "https://www.finbourne.com",
       "email": "info@finbourne.com"
     },
-    "version": "1.0.281",
+    "version": "1.0.282",
     "x-logo": {
       "url": "https://www.lusid.com/app/assets/logo_white.png",
       "backgroundColor": "#415464"
@@ -2020,16 +2020,25 @@
               "text/plain": {
                 "schema": {
                   "$ref": "#/components/schemas/DeletedEntityResponse"
+                },
+                "example": {
+                  "asAt": "2018-03-05T10:10:10.0000000+00:00"
                 }
               },
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/DeletedEntityResponse"
+                },
+                "example": {
+                  "asAt": "2018-03-05T10:10:10.0000000+00:00"
                 }
               },
               "text/json": {
                 "schema": {
                   "$ref": "#/components/schemas/DeletedEntityResponse"
+                },
+                "example": {
+                  "asAt": "2018-03-05T10:10:10.0000000+00:00"
                 }
               }
             }
@@ -2908,16 +2917,25 @@
               "text/plain": {
                 "schema": {
                   "$ref": "#/components/schemas/DeletedEntityResponse"
+                },
+                "example": {
+                  "asAt": "2018-03-05T10:10:10.0000000+00:00"
                 }
               },
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/DeletedEntityResponse"
+                },
+                "example": {
+                  "asAt": "2018-03-05T10:10:10.0000000+00:00"
                 }
               },
               "text/json": {
                 "schema": {
                   "$ref": "#/components/schemas/DeletedEntityResponse"
+                },
+                "example": {
+                  "asAt": "2018-03-05T10:10:10.0000000+00:00"
                 }
               }
             }
@@ -6203,6 +6221,897 @@
         "x-fbn-apistatus": "EarlyAccess"
       }
     },
+    "/api/compliance/generic/rules": {
+      "post": {
+        "tags": [
+          "Compliance - Generic"
+        ],
+        "summary": "[EARLY ACCESS] UpsertComplianceRule: Upsert a compliance rule.",
+        "description": "PLEASE NOTE: loopback EarlyAccess endpoint for discussion only.",
+        "operationId": "UpsertComplianceRule",
+        "requestBody": {
+          "content": {
+            "application/json-patch+json": {
+              "schema": {
+                "$ref": "#/components/schemas/UpsertComplianceRuleRequest"
+              },
+              "example": {
+                "id": {
+                  "scope": "live",
+                  "code": "exampleRule"
+                },
+                "name": "A friendly name.",
+                "description": "A friendly description.",
+                "active": true,
+                "templateId": {
+                  "scope": "live",
+                  "code": "exampleTemplate"
+                },
+                "variation": "Single",
+                "parameters": {
+                  "UpperBound": {
+                    "parameterType": "Decimal",
+                    "value": 15
+                  }
+                },
+                "properties": {
+                  "Compliance/MyScope/SomeRuleProperty": {
+                    "key": "Compliance/MyScope/SomeRuleProperty",
+                    "value": {
+                      "labelValue": "XYZ000034567"
+                    }
+                  }
+                }
+              }
+            },
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UpsertComplianceRuleRequest"
+              },
+              "example": {
+                "id": {
+                  "scope": "live",
+                  "code": "exampleRule"
+                },
+                "name": "A friendly name.",
+                "description": "A friendly description.",
+                "active": true,
+                "templateId": {
+                  "scope": "live",
+                  "code": "exampleTemplate"
+                },
+                "variation": "Single",
+                "parameters": {
+                  "UpperBound": {
+                    "parameterType": "Decimal",
+                    "value": 15
+                  }
+                },
+                "properties": {
+                  "Compliance/MyScope/SomeRuleProperty": {
+                    "key": "Compliance/MyScope/SomeRuleProperty",
+                    "value": {
+                      "labelValue": "XYZ000034567"
+                    }
+                  }
+                }
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UpsertComplianceRuleRequest"
+              },
+              "example": {
+                "id": {
+                  "scope": "live",
+                  "code": "exampleRule"
+                },
+                "name": "A friendly name.",
+                "description": "A friendly description.",
+                "active": true,
+                "templateId": {
+                  "scope": "live",
+                  "code": "exampleTemplate"
+                },
+                "variation": "Single",
+                "parameters": {
+                  "UpperBound": {
+                    "parameterType": "Decimal",
+                    "value": 15
+                  }
+                },
+                "properties": {
+                  "Compliance/MyScope/SomeRuleProperty": {
+                    "key": "Compliance/MyScope/SomeRuleProperty",
+                    "value": {
+                      "labelValue": "XYZ000034567"
+                    }
+                  }
+                }
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/UpsertComplianceRuleRequest"
+              },
+              "example": {
+                "id": {
+                  "scope": "live",
+                  "code": "exampleRule"
+                },
+                "name": "A friendly name.",
+                "description": "A friendly description.",
+                "active": true,
+                "templateId": {
+                  "scope": "live",
+                  "code": "exampleTemplate"
+                },
+                "variation": "Single",
+                "parameters": {
+                  "UpperBound": {
+                    "parameterType": "Decimal",
+                    "value": 15
+                  }
+                },
+                "properties": {
+                  "Compliance/MyScope/SomeRuleProperty": {
+                    "key": "Compliance/MyScope/SomeRuleProperty",
+                    "value": {
+                      "labelValue": "XYZ000034567"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "The upserted compliance rule.",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ComplianceRuleResponse"
+                },
+                "example": {
+                  "id": {
+                    "scope": "examples",
+                    "code": "exampleRule"
+                  },
+                  "name": "A friendly example rule name.",
+                  "description": "An friendly description example.",
+                  "active": true,
+                  "templateId": {
+                    "scope": "live",
+                    "code": "exampleTemplate"
+                  },
+                  "variation": "Single",
+                  "parameters": {
+                    "UpperBound": {
+                      "parameterType": "Decimal",
+                      "value": 30
+                    }
+                  },
+                  "properties": {
+                    "Compliance/MyScope/SomeOrderProperty": {
+                      "key": "Compliance/MyScope/SomeOrderProperty",
+                      "value": {
+                        "labelValue": "XYZ000034567"
+                      }
+                    }
+                  },
+                  "version": {
+                    "effectiveFrom": "2018-03-05T10:10:10.0000000+00:00",
+                    "asAtDate": "2018-03-05T10:10:10.0000000+00:00",
+                    "asAtCreated": "2018-03-05T10:10:10.0000000+00:00",
+                    "userIdCreated": "User1",
+                    "asAtModified": "2018-03-08T10:10:10.0000000+00:00",
+                    "userIdModified": "User2",
+                    "asAtVersionNumber": 2
+                  },
+                  "links": []
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ComplianceRuleResponse"
+                },
+                "example": {
+                  "id": {
+                    "scope": "examples",
+                    "code": "exampleRule"
+                  },
+                  "name": "A friendly example rule name.",
+                  "description": "An friendly description example.",
+                  "active": true,
+                  "templateId": {
+                    "scope": "live",
+                    "code": "exampleTemplate"
+                  },
+                  "variation": "Single",
+                  "parameters": {
+                    "UpperBound": {
+                      "parameterType": "Decimal",
+                      "value": 30
+                    }
+                  },
+                  "properties": {
+                    "Compliance/MyScope/SomeOrderProperty": {
+                      "key": "Compliance/MyScope/SomeOrderProperty",
+                      "value": {
+                        "labelValue": "XYZ000034567"
+                      }
+                    }
+                  },
+                  "version": {
+                    "effectiveFrom": "2018-03-05T10:10:10.0000000+00:00",
+                    "asAtDate": "2018-03-05T10:10:10.0000000+00:00",
+                    "asAtCreated": "2018-03-05T10:10:10.0000000+00:00",
+                    "userIdCreated": "User1",
+                    "asAtModified": "2018-03-08T10:10:10.0000000+00:00",
+                    "userIdModified": "User2",
+                    "asAtVersionNumber": 2
+                  },
+                  "links": []
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ComplianceRuleResponse"
+                },
+                "example": {
+                  "id": {
+                    "scope": "examples",
+                    "code": "exampleRule"
+                  },
+                  "name": "A friendly example rule name.",
+                  "description": "An friendly description example.",
+                  "active": true,
+                  "templateId": {
+                    "scope": "live",
+                    "code": "exampleTemplate"
+                  },
+                  "variation": "Single",
+                  "parameters": {
+                    "UpperBound": {
+                      "parameterType": "Decimal",
+                      "value": 30
+                    }
+                  },
+                  "properties": {
+                    "Compliance/MyScope/SomeOrderProperty": {
+                      "key": "Compliance/MyScope/SomeOrderProperty",
+                      "value": {
+                        "labelValue": "XYZ000034567"
+                      }
+                    }
+                  },
+                  "version": {
+                    "effectiveFrom": "2018-03-05T10:10:10.0000000+00:00",
+                    "asAtDate": "2018-03-05T10:10:10.0000000+00:00",
+                    "asAtCreated": "2018-03-05T10:10:10.0000000+00:00",
+                    "userIdCreated": "User1",
+                    "asAtModified": "2018-03-08T10:10:10.0000000+00:00",
+                    "userIdModified": "User2",
+                    "asAtVersionNumber": 2
+                  },
+                  "links": []
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "The details of the input related failure",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/LusidValidationProblemDetails"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/LusidValidationProblemDetails"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/LusidValidationProblemDetails"
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "Error response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/LusidProblemDetails"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "oauth2": []
+          }
+        ],
+        "x-fbn-apistatus": "EarlyAccess"
+      },
+      "get": {
+        "tags": [
+          "Compliance - Generic"
+        ],
+        "summary": "[EARLY ACCESS] ListComplianceRules2: List compliance rules.",
+        "description": "PLEASE NOTE: loopback EarlyAccess endpoint for discussion only.",
+        "operationId": "ListComplianceRules2",
+        "parameters": [
+          {
+            "name": "asAt",
+            "in": "query",
+            "description": "Optional. Asat time.",
+            "schema": {
+              "type": "string",
+              "format": "date-time"
+            },
+            "x-nullable": true
+          },
+          {
+            "name": "page",
+            "in": "query",
+            "description": "Optional. Pagination token.",
+            "schema": {
+              "maxLength": 500,
+              "minLength": 1,
+              "pattern": "^[a-zA-Z0-9\\+/]*={0,3}$",
+              "type": "string"
+            }
+          },
+          {
+            "name": "start",
+            "in": "query",
+            "description": "Optional. Entry at which to start.",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            },
+            "x-nullable": true
+          },
+          {
+            "name": "limit",
+            "in": "query",
+            "description": "Optional. Entries per page.",
+            "schema": {
+              "maximum": 5000,
+              "minimum": 1,
+              "type": "integer",
+              "format": "int32"
+            },
+            "x-nullable": true
+          },
+          {
+            "name": "filter",
+            "in": "query",
+            "description": "Optional. Filter.",
+            "schema": {
+              "maxLength": 16384,
+              "minLength": 0,
+              "pattern": "^[\\s\\S]*$",
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The list of compliance rules.",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/PagedResourceListOfComplianceRuleResponse"
+                },
+                "example": {
+                  "values": [
+                    {
+                      "id": {
+                        "scope": "examples",
+                        "code": "exampleRule"
+                      },
+                      "name": "A friendly example rule name.",
+                      "description": "An friendly description example.",
+                      "active": true,
+                      "templateId": {
+                        "scope": "live",
+                        "code": "exampleTemplate"
+                      },
+                      "variation": "Single",
+                      "parameters": {
+                        "UpperBound": {
+                          "parameterType": "Decimal",
+                          "value": 30
+                        }
+                      },
+                      "properties": {
+                        "Compliance/MyScope/SomeOrderProperty": {
+                          "key": "Compliance/MyScope/SomeOrderProperty",
+                          "value": {
+                            "labelValue": "XYZ000034567"
+                          }
+                        }
+                      },
+                      "version": {
+                        "effectiveFrom": "2018-03-05T10:10:10.0000000+00:00",
+                        "asAtDate": "2018-03-05T10:10:10.0000000+00:00",
+                        "asAtCreated": "2018-03-05T10:10:10.0000000+00:00",
+                        "userIdCreated": "User1",
+                        "asAtModified": "2018-03-08T10:10:10.0000000+00:00",
+                        "userIdModified": "User2",
+                        "asAtVersionNumber": 2
+                      },
+                      "links": []
+                    }
+                  ],
+                  "href": "https://myco.lusid.com/api/api/compliance/generic/rules",
+                  "links": []
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PagedResourceListOfComplianceRuleResponse"
+                },
+                "example": {
+                  "values": [
+                    {
+                      "id": {
+                        "scope": "examples",
+                        "code": "exampleRule"
+                      },
+                      "name": "A friendly example rule name.",
+                      "description": "An friendly description example.",
+                      "active": true,
+                      "templateId": {
+                        "scope": "live",
+                        "code": "exampleTemplate"
+                      },
+                      "variation": "Single",
+                      "parameters": {
+                        "UpperBound": {
+                          "parameterType": "Decimal",
+                          "value": 30
+                        }
+                      },
+                      "properties": {
+                        "Compliance/MyScope/SomeOrderProperty": {
+                          "key": "Compliance/MyScope/SomeOrderProperty",
+                          "value": {
+                            "labelValue": "XYZ000034567"
+                          }
+                        }
+                      },
+                      "version": {
+                        "effectiveFrom": "2018-03-05T10:10:10.0000000+00:00",
+                        "asAtDate": "2018-03-05T10:10:10.0000000+00:00",
+                        "asAtCreated": "2018-03-05T10:10:10.0000000+00:00",
+                        "userIdCreated": "User1",
+                        "asAtModified": "2018-03-08T10:10:10.0000000+00:00",
+                        "userIdModified": "User2",
+                        "asAtVersionNumber": 2
+                      },
+                      "links": []
+                    }
+                  ],
+                  "href": "https://myco.lusid.com/api/api/compliance/generic/rules",
+                  "links": []
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PagedResourceListOfComplianceRuleResponse"
+                },
+                "example": {
+                  "values": [
+                    {
+                      "id": {
+                        "scope": "examples",
+                        "code": "exampleRule"
+                      },
+                      "name": "A friendly example rule name.",
+                      "description": "An friendly description example.",
+                      "active": true,
+                      "templateId": {
+                        "scope": "live",
+                        "code": "exampleTemplate"
+                      },
+                      "variation": "Single",
+                      "parameters": {
+                        "UpperBound": {
+                          "parameterType": "Decimal",
+                          "value": 30
+                        }
+                      },
+                      "properties": {
+                        "Compliance/MyScope/SomeOrderProperty": {
+                          "key": "Compliance/MyScope/SomeOrderProperty",
+                          "value": {
+                            "labelValue": "XYZ000034567"
+                          }
+                        }
+                      },
+                      "version": {
+                        "effectiveFrom": "2018-03-05T10:10:10.0000000+00:00",
+                        "asAtDate": "2018-03-05T10:10:10.0000000+00:00",
+                        "asAtCreated": "2018-03-05T10:10:10.0000000+00:00",
+                        "userIdCreated": "User1",
+                        "asAtModified": "2018-03-08T10:10:10.0000000+00:00",
+                        "userIdModified": "User2",
+                        "asAtVersionNumber": 2
+                      },
+                      "links": []
+                    }
+                  ],
+                  "href": "https://myco.lusid.com/api/api/compliance/generic/rules",
+                  "links": []
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "The details of the input related failure",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/LusidValidationProblemDetails"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/LusidValidationProblemDetails"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/LusidValidationProblemDetails"
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "Error response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/LusidProblemDetails"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "oauth2": []
+          }
+        ],
+        "x-fbn-apistatus": "EarlyAccess"
+      }
+    },
+    "/api/compliance/generic/rules/{scope}/{code}": {
+      "get": {
+        "tags": [
+          "Compliance - Generic"
+        ],
+        "summary": "[EARLY ACCESS] GetComplianceRule2: Get compliance rule.",
+        "description": "PLEASE NOTE: loopback EarlyAccess endpoint for discussion only.",
+        "operationId": "GetComplianceRule2",
+        "parameters": [
+          {
+            "name": "scope",
+            "in": "path",
+            "description": "The compliance rule's scope.",
+            "required": true,
+            "schema": {
+              "maxLength": 64,
+              "minLength": 1,
+              "pattern": "^[a-zA-Z0-9\\-_]+$",
+              "type": "string"
+            }
+          },
+          {
+            "name": "code",
+            "in": "path",
+            "description": "The compliance rule's code.",
+            "required": true,
+            "schema": {
+              "maxLength": 64,
+              "minLength": 1,
+              "pattern": "^[a-zA-Z0-9\\-_]+$",
+              "type": "string"
+            }
+          },
+          {
+            "name": "asAt",
+            "in": "query",
+            "description": "Optional. Asat time for query.",
+            "schema": {
+              "type": "string",
+              "format": "date-time"
+            },
+            "x-nullable": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The requested compliance rule.",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ComplianceRuleResponse"
+                },
+                "example": {
+                  "id": {
+                    "scope": "examples",
+                    "code": "exampleRule"
+                  },
+                  "name": "A friendly example rule name.",
+                  "description": "An friendly description example.",
+                  "active": true,
+                  "templateId": {
+                    "scope": "live",
+                    "code": "exampleTemplate"
+                  },
+                  "variation": "Single",
+                  "parameters": {
+                    "UpperBound": {
+                      "parameterType": "Decimal",
+                      "value": 30
+                    }
+                  },
+                  "properties": {
+                    "Compliance/MyScope/SomeOrderProperty": {
+                      "key": "Compliance/MyScope/SomeOrderProperty",
+                      "value": {
+                        "labelValue": "XYZ000034567"
+                      }
+                    }
+                  },
+                  "version": {
+                    "effectiveFrom": "2018-03-05T10:10:10.0000000+00:00",
+                    "asAtDate": "2018-03-05T10:10:10.0000000+00:00",
+                    "asAtCreated": "2018-03-05T10:10:10.0000000+00:00",
+                    "userIdCreated": "User1",
+                    "asAtModified": "2018-03-08T10:10:10.0000000+00:00",
+                    "userIdModified": "User2",
+                    "asAtVersionNumber": 2
+                  },
+                  "links": []
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ComplianceRuleResponse"
+                },
+                "example": {
+                  "id": {
+                    "scope": "examples",
+                    "code": "exampleRule"
+                  },
+                  "name": "A friendly example rule name.",
+                  "description": "An friendly description example.",
+                  "active": true,
+                  "templateId": {
+                    "scope": "live",
+                    "code": "exampleTemplate"
+                  },
+                  "variation": "Single",
+                  "parameters": {
+                    "UpperBound": {
+                      "parameterType": "Decimal",
+                      "value": 30
+                    }
+                  },
+                  "properties": {
+                    "Compliance/MyScope/SomeOrderProperty": {
+                      "key": "Compliance/MyScope/SomeOrderProperty",
+                      "value": {
+                        "labelValue": "XYZ000034567"
+                      }
+                    }
+                  },
+                  "version": {
+                    "effectiveFrom": "2018-03-05T10:10:10.0000000+00:00",
+                    "asAtDate": "2018-03-05T10:10:10.0000000+00:00",
+                    "asAtCreated": "2018-03-05T10:10:10.0000000+00:00",
+                    "userIdCreated": "User1",
+                    "asAtModified": "2018-03-08T10:10:10.0000000+00:00",
+                    "userIdModified": "User2",
+                    "asAtVersionNumber": 2
+                  },
+                  "links": []
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ComplianceRuleResponse"
+                },
+                "example": {
+                  "id": {
+                    "scope": "examples",
+                    "code": "exampleRule"
+                  },
+                  "name": "A friendly example rule name.",
+                  "description": "An friendly description example.",
+                  "active": true,
+                  "templateId": {
+                    "scope": "live",
+                    "code": "exampleTemplate"
+                  },
+                  "variation": "Single",
+                  "parameters": {
+                    "UpperBound": {
+                      "parameterType": "Decimal",
+                      "value": 30
+                    }
+                  },
+                  "properties": {
+                    "Compliance/MyScope/SomeOrderProperty": {
+                      "key": "Compliance/MyScope/SomeOrderProperty",
+                      "value": {
+                        "labelValue": "XYZ000034567"
+                      }
+                    }
+                  },
+                  "version": {
+                    "effectiveFrom": "2018-03-05T10:10:10.0000000+00:00",
+                    "asAtDate": "2018-03-05T10:10:10.0000000+00:00",
+                    "asAtCreated": "2018-03-05T10:10:10.0000000+00:00",
+                    "userIdCreated": "User1",
+                    "asAtModified": "2018-03-08T10:10:10.0000000+00:00",
+                    "userIdModified": "User2",
+                    "asAtVersionNumber": 2
+                  },
+                  "links": []
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "The details of the input related failure",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/LusidValidationProblemDetails"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/LusidValidationProblemDetails"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/LusidValidationProblemDetails"
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "Error response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/LusidProblemDetails"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "oauth2": []
+          }
+        ],
+        "x-fbn-apistatus": "EarlyAccess"
+      },
+      "delete": {
+        "tags": [
+          "Compliance - Generic"
+        ],
+        "summary": "[EARLY ACCESS] DeleteComplianceRule2: Get compliance rule.",
+        "description": "PLEASE NOTE: loopback EarlyAccess endpoint for discussion only.",
+        "operationId": "DeleteComplianceRule2",
+        "parameters": [
+          {
+            "name": "scope",
+            "in": "path",
+            "description": "The compliance rule's scope.",
+            "required": true,
+            "schema": {
+              "maxLength": 64,
+              "minLength": 1,
+              "pattern": "^[a-zA-Z0-9\\-_]+$",
+              "type": "string"
+            }
+          },
+          {
+            "name": "code",
+            "in": "path",
+            "description": "The compliance rule's code.",
+            "required": true,
+            "schema": {
+              "maxLength": 64,
+              "minLength": 1,
+              "pattern": "^[a-zA-Z0-9\\-_]+$",
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/DeletedEntityResponse"
+                },
+                "example": {
+                  "asAt": "2018-03-05T10:10:10.0000000+00:00"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/DeletedEntityResponse"
+                },
+                "example": {
+                  "asAt": "2018-03-05T10:10:10.0000000+00:00"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/DeletedEntityResponse"
+                },
+                "example": {
+                  "asAt": "2018-03-05T10:10:10.0000000+00:00"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "The details of the input related failure",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/LusidValidationProblemDetails"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/LusidValidationProblemDetails"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/LusidValidationProblemDetails"
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "Error response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/LusidProblemDetails"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "oauth2": []
+          }
+        ],
+        "x-fbn-apistatus": "EarlyAccess"
+      }
+    },
     "/api/compliance/templates": {
       "get": {
         "tags": [
@@ -7437,16 +8346,25 @@
               "text/plain": {
                 "schema": {
                   "$ref": "#/components/schemas/DeletedEntityResponse"
+                },
+                "example": {
+                  "asAt": "2018-03-05T10:10:10.0000000+00:00"
                 }
               },
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/DeletedEntityResponse"
+                },
+                "example": {
+                  "asAt": "2018-03-05T10:10:10.0000000+00:00"
                 }
               },
               "text/json": {
                 "schema": {
                   "$ref": "#/components/schemas/DeletedEntityResponse"
+                },
+                "example": {
+                  "asAt": "2018-03-05T10:10:10.0000000+00:00"
                 }
               }
             }
@@ -7927,16 +8845,25 @@
               "text/plain": {
                 "schema": {
                   "$ref": "#/components/schemas/DeletedEntityResponse"
+                },
+                "example": {
+                  "asAt": "2018-03-05T10:10:10.0000000+00:00"
                 }
               },
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/DeletedEntityResponse"
+                },
+                "example": {
+                  "asAt": "2018-03-05T10:10:10.0000000+00:00"
                 }
               },
               "text/json": {
                 "schema": {
                   "$ref": "#/components/schemas/DeletedEntityResponse"
+                },
+                "example": {
+                  "asAt": "2018-03-05T10:10:10.0000000+00:00"
                 }
               }
             }
@@ -11072,16 +11999,25 @@
               "text/plain": {
                 "schema": {
                   "$ref": "#/components/schemas/DeletedEntityResponse"
+                },
+                "example": {
+                  "asAt": "2018-03-05T10:10:10.0000000+00:00"
                 }
               },
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/DeletedEntityResponse"
+                },
+                "example": {
+                  "asAt": "2018-03-05T10:10:10.0000000+00:00"
                 }
               },
               "text/json": {
                 "schema": {
                   "$ref": "#/components/schemas/DeletedEntityResponse"
+                },
+                "example": {
+                  "asAt": "2018-03-05T10:10:10.0000000+00:00"
                 }
               }
             }
@@ -11937,16 +12873,25 @@
               "text/plain": {
                 "schema": {
                   "$ref": "#/components/schemas/DeletedEntityResponse"
+                },
+                "example": {
+                  "asAt": "2018-03-05T10:10:10.0000000+00:00"
                 }
               },
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/DeletedEntityResponse"
+                },
+                "example": {
+                  "asAt": "2018-03-05T10:10:10.0000000+00:00"
                 }
               },
               "text/json": {
                 "schema": {
                   "$ref": "#/components/schemas/DeletedEntityResponse"
+                },
+                "example": {
+                  "asAt": "2018-03-05T10:10:10.0000000+00:00"
                 }
               }
             }
@@ -13653,16 +14598,25 @@
               "text/plain": {
                 "schema": {
                   "$ref": "#/components/schemas/DeletedEntityResponse"
+                },
+                "example": {
+                  "asAt": "2018-03-05T10:10:10.0000000+00:00"
                 }
               },
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/DeletedEntityResponse"
+                },
+                "example": {
+                  "asAt": "2018-03-05T10:10:10.0000000+00:00"
                 }
               },
               "text/json": {
                 "schema": {
                   "$ref": "#/components/schemas/DeletedEntityResponse"
+                },
+                "example": {
+                  "asAt": "2018-03-05T10:10:10.0000000+00:00"
                 }
               }
             }
@@ -14630,16 +15584,25 @@
               "text/plain": {
                 "schema": {
                   "$ref": "#/components/schemas/DeletedEntityResponse"
+                },
+                "example": {
+                  "asAt": "2018-03-05T10:10:10.0000000+00:00"
                 }
               },
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/DeletedEntityResponse"
+                },
+                "example": {
+                  "asAt": "2018-03-05T10:10:10.0000000+00:00"
                 }
               },
               "text/json": {
                 "schema": {
                   "$ref": "#/components/schemas/DeletedEntityResponse"
+                },
+                "example": {
+                  "asAt": "2018-03-05T10:10:10.0000000+00:00"
                 }
               }
             }
@@ -20329,16 +21292,25 @@
               "text/plain": {
                 "schema": {
                   "$ref": "#/components/schemas/DeletedEntityResponse"
+                },
+                "example": {
+                  "asAt": "2018-03-05T10:10:10.0000000+00:00"
                 }
               },
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/DeletedEntityResponse"
+                },
+                "example": {
+                  "asAt": "2018-03-05T10:10:10.0000000+00:00"
                 }
               },
               "text/json": {
                 "schema": {
                   "$ref": "#/components/schemas/DeletedEntityResponse"
+                },
+                "example": {
+                  "asAt": "2018-03-05T10:10:10.0000000+00:00"
                 }
               }
             }
@@ -20456,16 +21428,25 @@
               "text/plain": {
                 "schema": {
                   "$ref": "#/components/schemas/DeletedEntityResponse"
+                },
+                "example": {
+                  "asAt": "2018-03-05T10:10:10.0000000+00:00"
                 }
               },
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/DeletedEntityResponse"
+                },
+                "example": {
+                  "asAt": "2018-03-05T10:10:10.0000000+00:00"
                 }
               },
               "text/json": {
                 "schema": {
                   "$ref": "#/components/schemas/DeletedEntityResponse"
+                },
+                "example": {
+                  "asAt": "2018-03-05T10:10:10.0000000+00:00"
                 }
               }
             }
@@ -21694,16 +22675,25 @@
               "text/plain": {
                 "schema": {
                   "$ref": "#/components/schemas/DeletedEntityResponse"
+                },
+                "example": {
+                  "asAt": "2018-03-05T10:10:10.0000000+00:00"
                 }
               },
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/DeletedEntityResponse"
+                },
+                "example": {
+                  "asAt": "2018-03-05T10:10:10.0000000+00:00"
                 }
               },
               "text/json": {
                 "schema": {
                   "$ref": "#/components/schemas/DeletedEntityResponse"
+                },
+                "example": {
+                  "asAt": "2018-03-05T10:10:10.0000000+00:00"
                 }
               }
             }
@@ -21821,16 +22811,25 @@
               "text/plain": {
                 "schema": {
                   "$ref": "#/components/schemas/DeletedEntityResponse"
+                },
+                "example": {
+                  "asAt": "2018-03-05T10:10:10.0000000+00:00"
                 }
               },
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/DeletedEntityResponse"
+                },
+                "example": {
+                  "asAt": "2018-03-05T10:10:10.0000000+00:00"
                 }
               },
               "text/json": {
                 "schema": {
                   "$ref": "#/components/schemas/DeletedEntityResponse"
+                },
+                "example": {
+                  "asAt": "2018-03-05T10:10:10.0000000+00:00"
                 }
               }
             }
@@ -23768,16 +24767,25 @@
               "text/plain": {
                 "schema": {
                   "$ref": "#/components/schemas/DeletedEntityResponse"
+                },
+                "example": {
+                  "asAt": "2018-03-05T10:10:10.0000000+00:00"
                 }
               },
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/DeletedEntityResponse"
+                },
+                "example": {
+                  "asAt": "2018-03-05T10:10:10.0000000+00:00"
                 }
               },
               "text/json": {
                 "schema": {
                   "$ref": "#/components/schemas/DeletedEntityResponse"
+                },
+                "example": {
+                  "asAt": "2018-03-05T10:10:10.0000000+00:00"
                 }
               }
             }
@@ -24430,16 +25438,25 @@
               "text/plain": {
                 "schema": {
                   "$ref": "#/components/schemas/DeletedEntityResponse"
+                },
+                "example": {
+                  "asAt": "2018-03-05T10:10:10.0000000+00:00"
                 }
               },
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/DeletedEntityResponse"
+                },
+                "example": {
+                  "asAt": "2018-03-05T10:10:10.0000000+00:00"
                 }
               },
               "text/json": {
                 "schema": {
                   "$ref": "#/components/schemas/DeletedEntityResponse"
+                },
+                "example": {
+                  "asAt": "2018-03-05T10:10:10.0000000+00:00"
                 }
               }
             }
@@ -26323,16 +27340,25 @@
               "text/plain": {
                 "schema": {
                   "$ref": "#/components/schemas/DeletedEntityResponse"
+                },
+                "example": {
+                  "asAt": "2018-03-05T10:10:10.0000000+00:00"
                 }
               },
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/DeletedEntityResponse"
+                },
+                "example": {
+                  "asAt": "2018-03-05T10:10:10.0000000+00:00"
                 }
               },
               "text/json": {
                 "schema": {
                   "$ref": "#/components/schemas/DeletedEntityResponse"
+                },
+                "example": {
+                  "asAt": "2018-03-05T10:10:10.0000000+00:00"
                 }
               }
             }
@@ -26750,16 +27776,25 @@
               "text/plain": {
                 "schema": {
                   "$ref": "#/components/schemas/DeletedEntityResponse"
+                },
+                "example": {
+                  "asAt": "2018-03-05T10:10:10.0000000+00:00"
                 }
               },
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/DeletedEntityResponse"
+                },
+                "example": {
+                  "asAt": "2018-03-05T10:10:10.0000000+00:00"
                 }
               },
               "text/json": {
                 "schema": {
                   "$ref": "#/components/schemas/DeletedEntityResponse"
+                },
+                "example": {
+                  "asAt": "2018-03-05T10:10:10.0000000+00:00"
                 }
               }
             }
@@ -27559,16 +28594,25 @@
               "text/plain": {
                 "schema": {
                   "$ref": "#/components/schemas/DeletedEntityResponse"
+                },
+                "example": {
+                  "asAt": "2018-03-05T10:10:10.0000000+00:00"
                 }
               },
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/DeletedEntityResponse"
+                },
+                "example": {
+                  "asAt": "2018-03-05T10:10:10.0000000+00:00"
                 }
               },
               "text/json": {
                 "schema": {
                   "$ref": "#/components/schemas/DeletedEntityResponse"
+                },
+                "example": {
+                  "asAt": "2018-03-05T10:10:10.0000000+00:00"
                 }
               }
             }
@@ -27990,16 +29034,25 @@
               "text/plain": {
                 "schema": {
                   "$ref": "#/components/schemas/DeletedEntityResponse"
+                },
+                "example": {
+                  "asAt": "2018-03-05T10:10:10.0000000+00:00"
                 }
               },
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/DeletedEntityResponse"
+                },
+                "example": {
+                  "asAt": "2018-03-05T10:10:10.0000000+00:00"
                 }
               },
               "text/json": {
                 "schema": {
                   "$ref": "#/components/schemas/DeletedEntityResponse"
+                },
+                "example": {
+                  "asAt": "2018-03-05T10:10:10.0000000+00:00"
                 }
               }
             }
@@ -29488,16 +30541,25 @@
               "text/plain": {
                 "schema": {
                   "$ref": "#/components/schemas/DeletedEntityResponse"
+                },
+                "example": {
+                  "asAt": "2018-03-05T10:10:10.0000000+00:00"
                 }
               },
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/DeletedEntityResponse"
+                },
+                "example": {
+                  "asAt": "2018-03-05T10:10:10.0000000+00:00"
                 }
               },
               "text/json": {
                 "schema": {
                   "$ref": "#/components/schemas/DeletedEntityResponse"
+                },
+                "example": {
+                  "asAt": "2018-03-05T10:10:10.0000000+00:00"
                 }
               }
             }
@@ -30065,16 +31127,25 @@
               "text/plain": {
                 "schema": {
                   "$ref": "#/components/schemas/DeletedEntityResponse"
+                },
+                "example": {
+                  "asAt": "2018-03-05T10:10:10.0000000+00:00"
                 }
               },
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/DeletedEntityResponse"
+                },
+                "example": {
+                  "asAt": "2018-03-05T10:10:10.0000000+00:00"
                 }
               },
               "text/json": {
                 "schema": {
                   "$ref": "#/components/schemas/DeletedEntityResponse"
+                },
+                "example": {
+                  "asAt": "2018-03-05T10:10:10.0000000+00:00"
                 }
               }
             }
@@ -33035,16 +34106,25 @@
               "text/plain": {
                 "schema": {
                   "$ref": "#/components/schemas/DeletedEntityResponse"
+                },
+                "example": {
+                  "asAt": "2018-03-05T10:10:10.0000000+00:00"
                 }
               },
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/DeletedEntityResponse"
+                },
+                "example": {
+                  "asAt": "2018-03-05T10:10:10.0000000+00:00"
                 }
               },
               "text/json": {
                 "schema": {
                   "$ref": "#/components/schemas/DeletedEntityResponse"
+                },
+                "example": {
+                  "asAt": "2018-03-05T10:10:10.0000000+00:00"
                 }
               }
             }
@@ -33586,16 +34666,25 @@
               "text/plain": {
                 "schema": {
                   "$ref": "#/components/schemas/DeletedEntityResponse"
+                },
+                "example": {
+                  "asAt": "2018-03-05T10:10:10.0000000+00:00"
                 }
               },
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/DeletedEntityResponse"
+                },
+                "example": {
+                  "asAt": "2018-03-05T10:10:10.0000000+00:00"
                 }
               },
               "text/json": {
                 "schema": {
                   "$ref": "#/components/schemas/DeletedEntityResponse"
+                },
+                "example": {
+                  "asAt": "2018-03-05T10:10:10.0000000+00:00"
                 }
               }
             }
@@ -39847,16 +40936,25 @@
               "text/plain": {
                 "schema": {
                   "$ref": "#/components/schemas/DeletedEntityResponse"
+                },
+                "example": {
+                  "asAt": "2018-03-05T10:10:10.0000000+00:00"
                 }
               },
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/DeletedEntityResponse"
+                },
+                "example": {
+                  "asAt": "2018-03-05T10:10:10.0000000+00:00"
                 }
               },
               "text/json": {
                 "schema": {
                   "$ref": "#/components/schemas/DeletedEntityResponse"
+                },
+                "example": {
+                  "asAt": "2018-03-05T10:10:10.0000000+00:00"
                 }
               }
             }
@@ -41076,16 +42174,25 @@
               "text/plain": {
                 "schema": {
                   "$ref": "#/components/schemas/DeletedEntityResponse"
+                },
+                "example": {
+                  "asAt": "2018-03-05T10:10:10.0000000+00:00"
                 }
               },
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/DeletedEntityResponse"
+                },
+                "example": {
+                  "asAt": "2018-03-05T10:10:10.0000000+00:00"
                 }
               },
               "text/json": {
                 "schema": {
                   "$ref": "#/components/schemas/DeletedEntityResponse"
+                },
+                "example": {
+                  "asAt": "2018-03-05T10:10:10.0000000+00:00"
                 }
               }
             }
@@ -41303,16 +42410,25 @@
               "text/plain": {
                 "schema": {
                   "$ref": "#/components/schemas/DeletedEntityResponse"
+                },
+                "example": {
+                  "asAt": "2018-03-05T10:10:10.0000000+00:00"
                 }
               },
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/DeletedEntityResponse"
+                },
+                "example": {
+                  "asAt": "2018-03-05T10:10:10.0000000+00:00"
                 }
               },
               "text/json": {
                 "schema": {
                   "$ref": "#/components/schemas/DeletedEntityResponse"
+                },
+                "example": {
+                  "asAt": "2018-03-05T10:10:10.0000000+00:00"
                 }
               }
             }
@@ -43199,16 +44315,25 @@
               "text/plain": {
                 "schema": {
                   "$ref": "#/components/schemas/DeletedEntityResponse"
+                },
+                "example": {
+                  "asAt": "2018-03-05T10:10:10.0000000+00:00"
                 }
               },
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/DeletedEntityResponse"
+                },
+                "example": {
+                  "asAt": "2018-03-05T10:10:10.0000000+00:00"
                 }
               },
               "text/json": {
                 "schema": {
                   "$ref": "#/components/schemas/DeletedEntityResponse"
+                },
+                "example": {
+                  "asAt": "2018-03-05T10:10:10.0000000+00:00"
                 }
               }
             }
@@ -44382,16 +45507,25 @@
               "text/plain": {
                 "schema": {
                   "$ref": "#/components/schemas/DeletedEntityResponse"
+                },
+                "example": {
+                  "asAt": "2018-03-05T10:10:10.0000000+00:00"
                 }
               },
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/DeletedEntityResponse"
+                },
+                "example": {
+                  "asAt": "2018-03-05T10:10:10.0000000+00:00"
                 }
               },
               "text/json": {
                 "schema": {
                   "$ref": "#/components/schemas/DeletedEntityResponse"
+                },
+                "example": {
+                  "asAt": "2018-03-05T10:10:10.0000000+00:00"
                 }
               }
             }
@@ -45136,16 +46270,25 @@
               "text/plain": {
                 "schema": {
                   "$ref": "#/components/schemas/DeletedEntityResponse"
+                },
+                "example": {
+                  "asAt": "2018-03-05T10:10:10.0000000+00:00"
                 }
               },
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/DeletedEntityResponse"
+                },
+                "example": {
+                  "asAt": "2018-03-05T10:10:10.0000000+00:00"
                 }
               },
               "text/json": {
                 "schema": {
                   "$ref": "#/components/schemas/DeletedEntityResponse"
+                },
+                "example": {
+                  "asAt": "2018-03-05T10:10:10.0000000+00:00"
                 }
               }
             }
@@ -48552,16 +49695,25 @@
               "text/plain": {
                 "schema": {
                   "$ref": "#/components/schemas/DeletedEntityResponse"
+                },
+                "example": {
+                  "asAt": "2018-03-05T10:10:10.0000000+00:00"
                 }
               },
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/DeletedEntityResponse"
+                },
+                "example": {
+                  "asAt": "2018-03-05T10:10:10.0000000+00:00"
                 }
               },
               "text/json": {
                 "schema": {
                   "$ref": "#/components/schemas/DeletedEntityResponse"
+                },
+                "example": {
+                  "asAt": "2018-03-05T10:10:10.0000000+00:00"
                 }
               }
             }
@@ -49790,16 +50942,25 @@
               "text/plain": {
                 "schema": {
                   "$ref": "#/components/schemas/DeletedEntityResponse"
+                },
+                "example": {
+                  "asAt": "2018-03-05T10:10:10.0000000+00:00"
                 }
               },
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/DeletedEntityResponse"
+                },
+                "example": {
+                  "asAt": "2018-03-05T10:10:10.0000000+00:00"
                 }
               },
               "text/json": {
                 "schema": {
                   "$ref": "#/components/schemas/DeletedEntityResponse"
+                },
+                "example": {
+                  "asAt": "2018-03-05T10:10:10.0000000+00:00"
                 }
               }
             }
@@ -50412,16 +51573,25 @@
               "text/plain": {
                 "schema": {
                   "$ref": "#/components/schemas/DeletedEntityResponse"
+                },
+                "example": {
+                  "asAt": "2018-03-05T10:10:10.0000000+00:00"
                 }
               },
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/DeletedEntityResponse"
+                },
+                "example": {
+                  "asAt": "2018-03-05T10:10:10.0000000+00:00"
                 }
               },
               "text/json": {
                 "schema": {
                   "$ref": "#/components/schemas/DeletedEntityResponse"
+                },
+                "example": {
+                  "asAt": "2018-03-05T10:10:10.0000000+00:00"
                 }
               }
             }
@@ -63386,16 +64556,25 @@
               "text/plain": {
                 "schema": {
                   "$ref": "#/components/schemas/DeletedEntityResponse"
+                },
+                "example": {
+                  "asAt": "2018-03-05T10:10:10.0000000+00:00"
                 }
               },
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/DeletedEntityResponse"
+                },
+                "example": {
+                  "asAt": "2018-03-05T10:10:10.0000000+00:00"
                 }
               },
               "text/json": {
                 "schema": {
                   "$ref": "#/components/schemas/DeletedEntityResponse"
+                },
+                "example": {
+                  "asAt": "2018-03-05T10:10:10.0000000+00:00"
                 }
               }
             }
@@ -65358,16 +66537,25 @@
               "text/plain": {
                 "schema": {
                   "$ref": "#/components/schemas/DeletedEntityResponse"
+                },
+                "example": {
+                  "asAt": "2018-03-05T10:10:10.0000000+00:00"
                 }
               },
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/DeletedEntityResponse"
+                },
+                "example": {
+                  "asAt": "2018-03-05T10:10:10.0000000+00:00"
                 }
               },
               "text/json": {
                 "schema": {
                   "$ref": "#/components/schemas/DeletedEntityResponse"
+                },
+                "example": {
+                  "asAt": "2018-03-05T10:10:10.0000000+00:00"
                 }
               }
             }
@@ -67160,16 +68348,25 @@
               "text/plain": {
                 "schema": {
                   "$ref": "#/components/schemas/DeletedEntityResponse"
+                },
+                "example": {
+                  "asAt": "2018-03-05T10:10:10.0000000+00:00"
                 }
               },
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/DeletedEntityResponse"
+                },
+                "example": {
+                  "asAt": "2018-03-05T10:10:10.0000000+00:00"
                 }
               },
               "text/json": {
                 "schema": {
                   "$ref": "#/components/schemas/DeletedEntityResponse"
+                },
+                "example": {
+                  "asAt": "2018-03-05T10:10:10.0000000+00:00"
                 }
               }
             }
@@ -70621,6 +71818,75 @@
         },
         "additionalProperties": false,
         "description": "An identifier that uniquely describes an item of complex market data such as an interest rate curve or volatility surface."
+      },
+      "ComplianceParameter": {
+        "required": [
+          "parameterType",
+          "value"
+        ],
+        "type": "object",
+        "properties": {
+          "parameterType": {
+            "minLength": 1,
+            "type": "string",
+            "description": "The parameter type."
+          },
+          "value": {
+            "description": "The parameter value."
+          }
+        },
+        "additionalProperties": false
+      },
+      "ComplianceRuleResponse": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "$ref": "#/components/schemas/ResourceId"
+          },
+          "name": {
+            "type": "string",
+            "nullable": true
+          },
+          "description": {
+            "type": "string",
+            "nullable": true
+          },
+          "active": {
+            "type": "boolean"
+          },
+          "templateId": {
+            "$ref": "#/components/schemas/ResourceId"
+          },
+          "variation": {
+            "type": "string",
+            "nullable": true
+          },
+          "parameters": {
+            "type": "object",
+            "additionalProperties": {
+              "$ref": "#/components/schemas/ComplianceParameter"
+            },
+            "nullable": true
+          },
+          "properties": {
+            "type": "object",
+            "additionalProperties": {
+              "$ref": "#/components/schemas/PerpetualProperty"
+            },
+            "nullable": true
+          },
+          "version": {
+            "$ref": "#/components/schemas/Version"
+          },
+          "links": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Link"
+            },
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
       },
       "ComplianceTemplate": {
         "required": [
@@ -80851,6 +82117,41 @@
         },
         "additionalProperties": false
       },
+      "PagedResourceListOfComplianceRuleResponse": {
+        "required": [
+          "values"
+        ],
+        "type": "object",
+        "properties": {
+          "nextPage": {
+            "type": "string",
+            "nullable": true
+          },
+          "previousPage": {
+            "type": "string",
+            "nullable": true
+          },
+          "values": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ComplianceRuleResponse"
+            }
+          },
+          "href": {
+            "type": "string",
+            "format": "uri",
+            "nullable": true
+          },
+          "links": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Link"
+            },
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
       "PagedResourceListOfComplianceTemplate": {
         "required": [
           "values"
@@ -88800,6 +90101,52 @@
         },
         "additionalProperties": false,
         "description": "The details of the complex market data item to upsert into Lusid."
+      },
+      "UpsertComplianceRuleRequest": {
+        "required": [
+          "id",
+          "parameters",
+          "properties",
+          "templateId",
+          "variation"
+        ],
+        "type": "object",
+        "properties": {
+          "id": {
+            "$ref": "#/components/schemas/ResourceId"
+          },
+          "name": {
+            "type": "string",
+            "nullable": true
+          },
+          "description": {
+            "type": "string",
+            "nullable": true
+          },
+          "active": {
+            "type": "boolean"
+          },
+          "templateId": {
+            "$ref": "#/components/schemas/ResourceId"
+          },
+          "variation": {
+            "minLength": 1,
+            "type": "string"
+          },
+          "parameters": {
+            "type": "object",
+            "additionalProperties": {
+              "$ref": "#/components/schemas/ComplianceParameter"
+            }
+          },
+          "properties": {
+            "type": "object",
+            "additionalProperties": {
+              "$ref": "#/components/schemas/PerpetualProperty"
+            }
+          }
+        },
+        "additionalProperties": false
       },
       "UpsertCorporateActionRequest": {
         "required": [
