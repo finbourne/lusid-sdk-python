@@ -9,7 +9,7 @@
       "url": "https://www.finbourne.com",
       "email": "info@finbourne.com"
     },
-    "version": "1.0.278",
+    "version": "1.0.279",
     "x-logo": {
       "url": "https://www.lusid.com/app/assets/logo_white.png",
       "backgroundColor": "#415464"
@@ -9318,9 +9318,9 @@
         "tags": [
           "CustomEntityDefinitions"
         ],
-        "summary": "[EARLY ACCESS] GetCustomEntityDefinition: Get a Custom Entity type definition.",
+        "summary": "[EARLY ACCESS] GetDefinition: Get a Custom Entity type definition.",
         "description": "Retrieve a CustomEntityDefinition by a specific entityType at a point in AsAt time",
-        "operationId": "GetCustomEntityDefinition",
+        "operationId": "GetDefinition",
         "parameters": [
           {
             "name": "entityType",
@@ -9825,196 +9825,6 @@
           }
         ],
         "x-fbn-apistatus": "EarlyAccess"
-      }
-    },
-    "/api/customentities/entitytypes/{entityType}/$deprecated": {
-      "get": {
-        "tags": [
-          "CustomEntityDefinitions"
-        ],
-        "summary": "[DEPRECATED] GetDefinition: Get a Custom Entity type definition.",
-        "description": "Retrieve a CustomEntityDefinition by a specific entityType at a point in AsAt time",
-        "operationId": "GetDefinition",
-        "parameters": [
-          {
-            "name": "entityType",
-            "in": "path",
-            "description": "The identifier for the Custom Entity type, derived from the \"entityTypeName\" provided on creation.",
-            "required": true,
-            "schema": {
-              "maxLength": 65,
-              "minLength": 1,
-              "type": "string"
-            }
-          },
-          {
-            "name": "asAt",
-            "in": "query",
-            "description": "The AsAt datetime at which to retrieve the definition.",
-            "schema": {
-              "type": "string",
-              "format": "date-time"
-            },
-            "x-nullable": true
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "The requested Custom Entity definition.",
-            "content": {
-              "text/plain": {
-                "schema": {
-                  "$ref": "#/components/schemas/CustomEntityDefinition"
-                },
-                "example": {
-                  "href": "https://myco.lusid.com/api/customentities/entitytypes/~SupportTicket?asAt=2022-02-28T14:27:01.2728000+00:00",
-                  "entityTypeName": "SupportTicket",
-                  "displayName": "Support Ticket",
-                  "description": "Support Ticket",
-                  "entityType": "~SupportTicket",
-                  "fieldSchema": [
-                    {
-                      "name": "clientId",
-                      "lifetime": "Perpetual",
-                      "type": "String",
-                      "required": true
-                    },
-                    {
-                      "name": "issueDescription",
-                      "lifetime": "TimeVariant",
-                      "type": "String",
-                      "required": true
-                    },
-                    {
-                      "name": "internalNotes",
-                      "lifetime": "TimeVariant",
-                      "type": "String",
-                      "required": false
-                    },
-                    {
-                      "name": "isResolved",
-                      "lifetime": "TimeVariant",
-                      "type": "Boolean",
-                      "required": false
-                    }
-                  ]
-                }
-              },
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/CustomEntityDefinition"
-                },
-                "example": {
-                  "href": "https://myco.lusid.com/api/customentities/entitytypes/~SupportTicket?asAt=2022-02-28T14:27:01.2728000+00:00",
-                  "entityTypeName": "SupportTicket",
-                  "displayName": "Support Ticket",
-                  "description": "Support Ticket",
-                  "entityType": "~SupportTicket",
-                  "fieldSchema": [
-                    {
-                      "name": "clientId",
-                      "lifetime": "Perpetual",
-                      "type": "String",
-                      "required": true
-                    },
-                    {
-                      "name": "issueDescription",
-                      "lifetime": "TimeVariant",
-                      "type": "String",
-                      "required": true
-                    },
-                    {
-                      "name": "internalNotes",
-                      "lifetime": "TimeVariant",
-                      "type": "String",
-                      "required": false
-                    },
-                    {
-                      "name": "isResolved",
-                      "lifetime": "TimeVariant",
-                      "type": "Boolean",
-                      "required": false
-                    }
-                  ]
-                }
-              },
-              "text/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/CustomEntityDefinition"
-                },
-                "example": {
-                  "href": "https://myco.lusid.com/api/customentities/entitytypes/~SupportTicket?asAt=2022-02-28T14:27:01.2728000+00:00",
-                  "entityTypeName": "SupportTicket",
-                  "displayName": "Support Ticket",
-                  "description": "Support Ticket",
-                  "entityType": "~SupportTicket",
-                  "fieldSchema": [
-                    {
-                      "name": "clientId",
-                      "lifetime": "Perpetual",
-                      "type": "String",
-                      "required": true
-                    },
-                    {
-                      "name": "issueDescription",
-                      "lifetime": "TimeVariant",
-                      "type": "String",
-                      "required": true
-                    },
-                    {
-                      "name": "internalNotes",
-                      "lifetime": "TimeVariant",
-                      "type": "String",
-                      "required": false
-                    },
-                    {
-                      "name": "isResolved",
-                      "lifetime": "TimeVariant",
-                      "type": "Boolean",
-                      "required": false
-                    }
-                  ]
-                }
-              }
-            }
-          },
-          "400": {
-            "description": "The details of the input related failure",
-            "content": {
-              "text/plain": {
-                "schema": {
-                  "$ref": "#/components/schemas/LusidValidationProblemDetails"
-                }
-              },
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/LusidValidationProblemDetails"
-                }
-              },
-              "text/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/LusidValidationProblemDetails"
-                }
-              }
-            }
-          },
-          "default": {
-            "description": "Error response",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/LusidProblemDetails"
-                }
-              }
-            }
-          }
-        },
-        "security": [
-          {
-            "oauth2": []
-          }
-        ],
-        "x-fbn-apistatus": "Deprecated"
       }
     },
     "/api/customentities/{entityType}": {
