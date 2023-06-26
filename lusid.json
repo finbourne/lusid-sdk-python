@@ -9,7 +9,7 @@
       "url": "https://www.finbourne.com",
       "email": "info@finbourne.com"
     },
-    "version": "1.0.285",
+    "version": "1.0.286",
     "x-logo": {
       "url": "https://www.lusid.com/app/assets/logo_white.png",
       "backgroundColor": "#415464"
@@ -79019,6 +79019,14 @@
               "stubType": {
                 "type": "string",
                 "description": "StubType. Most Inflation linked bonds have a ShortFront stub type so this is the default, however in some cases\r\nwith a long front stub LongFront should be selected.\r\nStubType Both is not supported for InflationLinkedBonds.\r\n\r\nSupported string (enumeration) values are: [ShortFront, ShortBack, LongBack, LongFront, Both].",
+                "nullable": true
+              },
+              "roundingConventions": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/components/schemas/RoundingConvention"
+                },
+                "description": "Rounding conventions for analytics, if any.",
                 "nullable": true
               },
               "instrumentType": {
