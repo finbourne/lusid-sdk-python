@@ -98,7 +98,7 @@ class ComplianceRuleResponse(object):
         :type properties: dict[str, lusid.PerpetualProperty]
         :param version: 
         :type version: lusid.Version
-        :param links:  Collection of links.
+        :param links: 
         :type links: list[lusid.Link]
 
         """  # noqa: E501
@@ -326,7 +326,6 @@ class ComplianceRuleResponse(object):
     def links(self):
         """Gets the links of this ComplianceRuleResponse.  # noqa: E501
 
-        Collection of links.  # noqa: E501
 
         :return: The links of this ComplianceRuleResponse.  # noqa: E501
         :rtype: list[lusid.Link]
@@ -337,7 +336,6 @@ class ComplianceRuleResponse(object):
     def links(self, links):
         """Sets the links of this ComplianceRuleResponse.
 
-        Collection of links.  # noqa: E501
 
         :param links: The links of this ComplianceRuleResponse.  # noqa: E501
         :type links: list[lusid.Link]
