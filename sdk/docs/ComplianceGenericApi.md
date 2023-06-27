@@ -450,7 +450,7 @@ configuration.access_token = 'YOUR_ACCESS_TOKEN'
 with lusid.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = lusid.ComplianceGenericApi(api_client)
-    upsert_compliance_rule_request = {"id":{"scope":"live","code":"exampleRule"},"name":"A friendly name.","description":"A friendly description.","active":true,"templateId":{"scope":"live","code":"exampleTemplate"},"variation":"Single","parameters":{"UpperBound":{"parameterType":"Decimal","value":15}},"properties":{"Compliance/MyScope/SomeRuleProperty":{"key":"Compliance/MyScope/SomeRuleProperty","value":{"labelValue":"XYZ000034567"}}}} # UpsertComplianceRuleRequest |  (optional)
+    upsert_compliance_rule_request = {"id":{"scope":"live","code":"exampleRule"},"name":"A friendly name.","description":"A friendly description.","active":true,"templateId":{"scope":"live","code":"exampleTemplate"},"variation":"Single","portfolioGroupId":{"scope":"examples","code":"examplePortfolioGroup"},"parameters":{"UpperBound":{"parameterType":"Decimal","value":15}},"properties":{"Compliance/MyScope/SomeRuleProperty":{"key":"Compliance/MyScope/SomeRuleProperty","value":{"labelValue":"XYZ000034567"}}}} # UpsertComplianceRuleRequest |  (optional)
 
     try:
         # [EARLY ACCESS] UpsertComplianceRule: Upsert a compliance rule.

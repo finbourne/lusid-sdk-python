@@ -9,7 +9,7 @@
       "url": "https://www.finbourne.com",
       "email": "info@finbourne.com"
     },
-    "version": "1.0.289",
+    "version": "1.0.290",
     "x-logo": {
       "url": "https://www.lusid.com/app/assets/logo_white.png",
       "backgroundColor": "#415464"
@@ -6248,6 +6248,10 @@
                   "code": "exampleTemplate"
                 },
                 "variation": "Single",
+                "portfolioGroupId": {
+                  "scope": "examples",
+                  "code": "examplePortfolioGroup"
+                },
                 "parameters": {
                   "UpperBound": {
                     "parameterType": "Decimal",
@@ -6281,6 +6285,10 @@
                   "code": "exampleTemplate"
                 },
                 "variation": "Single",
+                "portfolioGroupId": {
+                  "scope": "examples",
+                  "code": "examplePortfolioGroup"
+                },
                 "parameters": {
                   "UpperBound": {
                     "parameterType": "Decimal",
@@ -6314,6 +6322,10 @@
                   "code": "exampleTemplate"
                 },
                 "variation": "Single",
+                "portfolioGroupId": {
+                  "scope": "examples",
+                  "code": "examplePortfolioGroup"
+                },
                 "parameters": {
                   "UpperBound": {
                     "parameterType": "Decimal",
@@ -6347,6 +6359,10 @@
                   "code": "exampleTemplate"
                 },
                 "variation": "Single",
+                "portfolioGroupId": {
+                  "scope": "examples",
+                  "code": "examplePortfolioGroup"
+                },
                 "parameters": {
                   "UpperBound": {
                     "parameterType": "Decimal",
@@ -6386,6 +6402,10 @@
                     "code": "exampleTemplate"
                   },
                   "variation": "Single",
+                  "portfolioGroupId": {
+                    "scope": "examples",
+                    "code": "examplePortfolioGroup"
+                  },
                   "parameters": {
                     "UpperBound": {
                       "parameterType": "Decimal",
@@ -6429,6 +6449,10 @@
                     "code": "exampleTemplate"
                   },
                   "variation": "Single",
+                  "portfolioGroupId": {
+                    "scope": "examples",
+                    "code": "examplePortfolioGroup"
+                  },
                   "parameters": {
                     "UpperBound": {
                       "parameterType": "Decimal",
@@ -6472,6 +6496,10 @@
                     "code": "exampleTemplate"
                   },
                   "variation": "Single",
+                  "portfolioGroupId": {
+                    "scope": "examples",
+                    "code": "examplePortfolioGroup"
+                  },
                   "parameters": {
                     "UpperBound": {
                       "parameterType": "Decimal",
@@ -6624,6 +6652,10 @@
                         "code": "exampleTemplate"
                       },
                       "variation": "Single",
+                      "portfolioGroupId": {
+                        "scope": "examples",
+                        "code": "examplePortfolioGroup"
+                      },
                       "parameters": {
                         "UpperBound": {
                           "parameterType": "Decimal",
@@ -6673,6 +6705,10 @@
                         "code": "exampleTemplate"
                       },
                       "variation": "Single",
+                      "portfolioGroupId": {
+                        "scope": "examples",
+                        "code": "examplePortfolioGroup"
+                      },
                       "parameters": {
                         "UpperBound": {
                           "parameterType": "Decimal",
@@ -6722,6 +6758,10 @@
                         "code": "exampleTemplate"
                       },
                       "variation": "Single",
+                      "portfolioGroupId": {
+                        "scope": "examples",
+                        "code": "examplePortfolioGroup"
+                      },
                       "parameters": {
                         "UpperBound": {
                           "parameterType": "Decimal",
@@ -6858,6 +6898,10 @@
                     "code": "exampleTemplate"
                   },
                   "variation": "Single",
+                  "portfolioGroupId": {
+                    "scope": "examples",
+                    "code": "examplePortfolioGroup"
+                  },
                   "parameters": {
                     "UpperBound": {
                       "parameterType": "Decimal",
@@ -6901,6 +6945,10 @@
                     "code": "exampleTemplate"
                   },
                   "variation": "Single",
+                  "portfolioGroupId": {
+                    "scope": "examples",
+                    "code": "examplePortfolioGroup"
+                  },
                   "parameters": {
                     "UpperBound": {
                       "parameterType": "Decimal",
@@ -6944,6 +6992,10 @@
                     "code": "exampleTemplate"
                   },
                   "variation": "Single",
+                  "portfolioGroupId": {
+                    "scope": "examples",
+                    "code": "examplePortfolioGroup"
+                  },
                   "parameters": {
                     "UpperBound": {
                       "parameterType": "Decimal",
@@ -71886,6 +71938,9 @@
             "type": "string",
             "nullable": true
           },
+          "portfolioGroupId": {
+            "$ref": "#/components/schemas/ResourceId"
+          },
           "parameters": {
             "type": "object",
             "additionalProperties": {
@@ -90650,6 +90705,9 @@
           "variation": {
             "minLength": 1,
             "type": "string"
+          },
+          "portfolioGroupId": {
+            "$ref": "#/components/schemas/ResourceId"
           },
           "parameters": {
             "type": "object",

@@ -10,6 +10,7 @@ Name | Type | Description | Notes
 **active** | **bool** |  | [optional] 
 **template_id** | [**ResourceId**](ResourceId.md) |  | 
 **variation** | **str** |  | 
+**portfolio_group_id** | [**ResourceId**](ResourceId.md) |  | [optional] 
 **parameters** | [**dict(str, ComplianceParameter)**](ComplianceParameter.md) |  | 
 **properties** | [**dict(str, PerpetualProperty)**](PerpetualProperty.md) |  | 
 
