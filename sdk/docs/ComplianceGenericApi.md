@@ -9,6 +9,7 @@ Method | HTTP request | Description
 [**get_compliance_template**](ComplianceGenericApi.md#get_compliance_template) | **GET** /api/compliance/templates/{scope}/{code} | [EARLY ACCESS] GetComplianceTemplate: Get the requested compliance template.
 [**list_compliance_rules2**](ComplianceGenericApi.md#list_compliance_rules2) | **GET** /api/compliance/generic/rules | [EARLY ACCESS] ListComplianceRules2: List compliance rules.
 [**list_compliance_templates**](ComplianceGenericApi.md#list_compliance_templates) | **GET** /api/compliance/templates | [EARLY ACCESS] ListComplianceTemplates: Get a specific compliance template
+[**run_generic_compliance**](ComplianceGenericApi.md#run_generic_compliance) | **POST** /api/compliance/generic/runs | [EARLY ACCESS] RunGenericCompliance: Kick off the compliance check process
 [**upsert_compliance_rule**](ComplianceGenericApi.md#upsert_compliance_rule) | **POST** /api/compliance/generic/rules | [EARLY ACCESS] UpsertComplianceRule: Upsert a compliance rule.
 
 
@@ -408,6 +409,89 @@ Name | Type | Description  | Notes
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 **200** | The list of compliance templates available. |  -  |
+**400** | The details of the input related failure |  -  |
+**0** | Error response |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **run_generic_compliance**
+> ComplianceRunInfoV2 run_generic_compliance(run_scope, rule_scope, is_pre_trade, recipe_id_scope, recipe_id_code)
+
+[EARLY ACCESS] RunGenericCompliance: Kick off the compliance check process
+
+Use this endpoint to fetch the start a compliance run, based on a pre-set mapping file.
+
+### Example
+
+* OAuth Authentication (oauth2):
+```python
+from __future__ import print_function
+import time
+import lusid
+from lusid.rest import ApiException
+from pprint import pprint
+# Defining the host is optional and defaults to https://www.lusid.com/api
+# See configuration.py for a list of all supported configuration parameters.
+configuration = lusid.Configuration(
+    host = "https://www.lusid.com/api"
+)
+
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
+
+# Configure OAuth2 access token for authorization: oauth2
+configuration = lusid.Configuration(
+    host = "https://www.lusid.com/api"
+)
+configuration.access_token = 'YOUR_ACCESS_TOKEN'
+
+# Enter a context with an instance of the API client
+with lusid.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = lusid.ComplianceGenericApi(api_client)
+    run_scope = 'run_scope_example' # str | Required: Scope to save the run results in.
+rule_scope = 'rule_scope_example' # str | Required: Scope from which to select rules to be run.
+is_pre_trade = True # bool | Required: Boolean flag indicating if a run should be PreTrade (Including orders). For post-trade only, set to false
+recipe_id_scope = 'recipe_id_scope_example' # str | Required: the scope of the recipe to be used
+recipe_id_code = 'recipe_id_code_example' # str | Required: The code of the recipe to be used. If left blank, the default recipe will be used.
+
+    try:
+        # [EARLY ACCESS] RunGenericCompliance: Kick off the compliance check process
+        api_response = api_instance.run_generic_compliance(run_scope, rule_scope, is_pre_trade, recipe_id_scope, recipe_id_code)
+        pprint(api_response)
+    except ApiException as e:
+        print("Exception when calling ComplianceGenericApi->run_generic_compliance: %s\n" % e)
+```
+
+### Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **run_scope** | **str**| Required: Scope to save the run results in. | 
+ **rule_scope** | **str**| Required: Scope from which to select rules to be run. | 
+ **is_pre_trade** | **bool**| Required: Boolean flag indicating if a run should be PreTrade (Including orders). For post-trade only, set to false | 
+ **recipe_id_scope** | **str**| Required: the scope of the recipe to be used | 
+ **recipe_id_code** | **str**| Required: The code of the recipe to be used. If left blank, the default recipe will be used. | 
+
+### Return type
+
+[**ComplianceRunInfoV2**](ComplianceRunInfoV2.md)
+
+### Authorization
+
+[oauth2](../README.md#oauth2)
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: text/plain, application/json, text/json
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | The identifying information of a compliance run |  -  |
 **400** | The details of the input related failure |  -  |
 **0** | Error response |  -  |
 

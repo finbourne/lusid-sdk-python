@@ -9,7 +9,7 @@
       "url": "https://www.finbourne.com",
       "email": "info@finbourne.com"
     },
-    "version": "1.0.297",
+    "version": "1.0.298",
     "x-logo": {
       "url": "https://www.lusid.com/app/assets/logo_white.png",
       "backgroundColor": "#415464"
@@ -7121,6 +7121,160 @@
                 },
                 "example": {
                   "asAt": "2018-03-05T10:10:10.0000000+00:00"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "The details of the input related failure",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/LusidValidationProblemDetails"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/LusidValidationProblemDetails"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/LusidValidationProblemDetails"
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "Error response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/LusidProblemDetails"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "oauth2": []
+          }
+        ],
+        "x-fbn-apistatus": "EarlyAccess"
+      }
+    },
+    "/api/compliance/generic/runs": {
+      "post": {
+        "tags": [
+          "Compliance - Generic"
+        ],
+        "summary": "[EARLY ACCESS] RunGenericCompliance: Kick off the compliance check process",
+        "description": "Use this endpoint to fetch the start a compliance run, based on a pre-set mapping file.",
+        "operationId": "RunGenericCompliance",
+        "parameters": [
+          {
+            "name": "runScope",
+            "in": "query",
+            "description": "Required: Scope to save the run results in.",
+            "required": true,
+            "schema": {
+              "maxLength": 64,
+              "minLength": 1,
+              "pattern": "^[a-zA-Z0-9\\-_]+$",
+              "type": "string"
+            }
+          },
+          {
+            "name": "ruleScope",
+            "in": "query",
+            "description": "Required: Scope from which to select rules to be run.",
+            "required": true,
+            "schema": {
+              "maxLength": 64,
+              "minLength": 1,
+              "pattern": "^[a-zA-Z0-9\\-_]+$",
+              "type": "string"
+            }
+          },
+          {
+            "name": "isPreTrade",
+            "in": "query",
+            "description": "Required: Boolean flag indicating if a run should be PreTrade (Including orders). For post-trade only, set to false",
+            "required": true,
+            "schema": {
+              "type": "boolean"
+            }
+          },
+          {
+            "name": "recipeIdScope",
+            "in": "query",
+            "description": "Required: the scope of the recipe to be used",
+            "required": true,
+            "schema": {
+              "maxLength": 64,
+              "minLength": 1,
+              "pattern": "^[a-zA-Z0-9\\-_]+$",
+              "type": "string"
+            }
+          },
+          {
+            "name": "recipeIdCode",
+            "in": "query",
+            "description": "Required: The code of the recipe to be used. If left blank, the default recipe will be used.",
+            "required": true,
+            "schema": {
+              "maxLength": 64,
+              "minLength": 1,
+              "pattern": "^[a-zA-Z0-9\\-_]+$",
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The identifying information of a compliance run",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ComplianceRunInfoV2"
+                },
+                "example": {
+                  "runId": {
+                    "scope": "SomeScope",
+                    "code": "run-1"
+                  },
+                  "instigatedAt": "2020-01-05T00:00:00.0000000+00:00",
+                  "completedAt": "2020-01-05T00:00:01.0000000+00:00",
+                  "schedule": "PostTrade"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ComplianceRunInfoV2"
+                },
+                "example": {
+                  "runId": {
+                    "scope": "SomeScope",
+                    "code": "run-1"
+                  },
+                  "instigatedAt": "2020-01-05T00:00:00.0000000+00:00",
+                  "completedAt": "2020-01-05T00:00:01.0000000+00:00",
+                  "schedule": "PostTrade"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ComplianceRunInfoV2"
+                },
+                "example": {
+                  "runId": {
+                    "scope": "SomeScope",
+                    "code": "run-1"
+                  },
+                  "instigatedAt": "2020-01-05T00:00:00.0000000+00:00",
+                  "completedAt": "2020-01-05T00:00:01.0000000+00:00",
+                  "schedule": "PostTrade"
                 }
               }
             }
@@ -72175,6 +72329,33 @@
             },
             "description": "Collection of links.",
             "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "ComplianceRunInfoV2": {
+        "required": [
+          "completedAt",
+          "instigatedAt",
+          "runId",
+          "schedule"
+        ],
+        "type": "object",
+        "properties": {
+          "runId": {
+            "$ref": "#/components/schemas/ResourceId"
+          },
+          "instigatedAt": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "completedAt": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "schedule": {
+            "minLength": 1,
+            "type": "string"
           }
         },
         "additionalProperties": false
