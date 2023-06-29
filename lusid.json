@@ -9,7 +9,7 @@
       "url": "https://www.finbourne.com",
       "email": "info@finbourne.com"
     },
-    "version": "1.0.300",
+    "version": "1.0.301",
     "x-logo": {
       "url": "https://www.lusid.com/app/assets/logo_white.png",
       "backgroundColor": "#415464"
@@ -30098,7 +30098,8 @@
                       "amount": 124335.33,
                       "currency": "USD"
                     },
-                    "counterparty": "SomeCounterparty"
+                    "counterparty": "SomeCounterparty",
+                    "entryType": "Manual"
                   }
                 ]
               }
@@ -30145,7 +30146,8 @@
                       "amount": 124335.33,
                       "currency": "USD"
                     },
-                    "counterparty": "SomeCounterparty"
+                    "counterparty": "SomeCounterparty",
+                    "entryType": "Manual"
                   }
                 ]
               }
@@ -30192,7 +30194,8 @@
                       "amount": 124335.33,
                       "currency": "USD"
                     },
-                    "counterparty": "SomeCounterparty"
+                    "counterparty": "SomeCounterparty",
+                    "entryType": "Manual"
                   }
                 ]
               }
@@ -30239,7 +30242,8 @@
                       "amount": 124335.33,
                       "currency": "USD"
                     },
-                    "counterparty": "SomeCounterparty"
+                    "counterparty": "SomeCounterparty",
+                    "entryType": "Manual"
                   }
                 ]
               }
@@ -30293,6 +30297,7 @@
                         "currency": "USD"
                       },
                       "counterparty": "SomeCounterparty",
+                      "entryType": "Manual",
                       "version": {
                         "effectiveFrom": "2018-03-05T10:10:10.0000000+00:00",
                         "asAtDate": "2018-03-05T10:10:10.0000000+00:00",
@@ -30350,6 +30355,7 @@
                         "currency": "USD"
                       },
                       "counterparty": "SomeCounterparty",
+                      "entryType": "Manual",
                       "version": {
                         "effectiveFrom": "2018-03-05T10:10:10.0000000+00:00",
                         "asAtDate": "2018-03-05T10:10:10.0000000+00:00",
@@ -30407,6 +30413,7 @@
                         "currency": "USD"
                       },
                       "counterparty": "SomeCounterparty",
+                      "entryType": "Manual",
                       "version": {
                         "effectiveFrom": "2018-03-05T10:10:10.0000000+00:00",
                         "asAtDate": "2018-03-05T10:10:10.0000000+00:00",
@@ -30563,6 +30570,7 @@
                     "currency": "USD"
                   },
                   "counterparty": "SomeCounterparty",
+                  "entryType": "Manual",
                   "version": {
                     "effectiveFrom": "2018-03-05T10:10:10.0000000+00:00",
                     "asAtDate": "2018-03-05T10:10:10.0000000+00:00",
@@ -30615,6 +30623,7 @@
                     "currency": "USD"
                   },
                   "counterparty": "SomeCounterparty",
+                  "entryType": "Manual",
                   "version": {
                     "effectiveFrom": "2018-03-05T10:10:10.0000000+00:00",
                     "asAtDate": "2018-03-05T10:10:10.0000000+00:00",
@@ -30667,6 +30676,7 @@
                     "currency": "USD"
                   },
                   "counterparty": "SomeCounterparty",
+                  "entryType": "Manual",
                   "version": {
                     "effectiveFrom": "2018-03-05T10:10:10.0000000+00:00",
                     "asAtDate": "2018-03-05T10:10:10.0000000+00:00",
