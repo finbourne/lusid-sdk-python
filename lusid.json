@@ -9,7 +9,7 @@
       "url": "https://www.finbourne.com",
       "email": "info@finbourne.com"
     },
-    "version": "1.0.311",
+    "version": "1.0.312",
     "x-logo": {
       "url": "https://www.lusid.com/app/assets/logo_white.png",
       "backgroundColor": "#415464"
@@ -8942,7 +8942,12 @@
                           "Instrument/default/Figi": "BBG001S6PJ31"
                         },
                         "unitsFactor": 2,
-                        "costFactor": 1
+                        "costFactor": 1,
+                        "rounding": {
+                          "stockUnits": {
+                            "roundingType": "NearestRoundHalfAwayFromZero"
+                          }
+                        }
                       }
                     ],
                     "instrumentEventType": "TransitionEvent"
@@ -8981,7 +8986,12 @@
                           "Instrument/default/Figi": "BBG001S6PJ31"
                         },
                         "unitsFactor": 2,
-                        "costFactor": 1
+                        "costFactor": 1,
+                        "rounding": {
+                          "stockUnits": {
+                            "roundingType": "NearestRoundHalfAwayFromZero"
+                          }
+                        }
                       }
                     ],
                     "instrumentEventType": "TransitionEvent"
@@ -9020,7 +9030,12 @@
                           "Instrument/default/Figi": "BBG001S6PJ31"
                         },
                         "unitsFactor": 2,
-                        "costFactor": 1
+                        "costFactor": 1,
+                        "rounding": {
+                          "stockUnits": {
+                            "roundingType": "NearestRoundHalfAwayFromZero"
+                          }
+                        }
                       }
                     ],
                     "instrumentEventType": "TransitionEvent"
@@ -9059,7 +9074,12 @@
                           "Instrument/default/Figi": "BBG001S6PJ31"
                         },
                         "unitsFactor": 2,
-                        "costFactor": 1
+                        "costFactor": 1,
+                        "rounding": {
+                          "stockUnits": {
+                            "roundingType": "NearestRoundHalfAwayFromZero"
+                          }
+                        }
                       }
                     ],
                     "instrumentEventType": "TransitionEvent"
@@ -82918,6 +82938,9 @@
             "description": "The scope in which the instrument lies.",
             "nullable": true,
             "readOnly": true
+          },
+          "rounding": {
+            "$ref": "#/components/schemas/RoundingConfiguration"
           }
         },
         "additionalProperties": false,
@@ -89511,6 +89534,29 @@
           }
         ],
         "description": "A simple result value holding a string"
+      },
+      "RoundingConfiguration": {
+        "type": "object",
+        "properties": {
+          "stockUnits": {
+            "$ref": "#/components/schemas/RoundingConfigurationComponent"
+          }
+        },
+        "additionalProperties": false
+      },
+      "RoundingConfigurationComponent": {
+        "required": [
+          "roundingType"
+        ],
+        "type": "object",
+        "properties": {
+          "roundingType": {
+            "minLength": 1,
+            "type": "string",
+            "description": "The type of rounding that should be used, eg: Up, Down, NearestRoundHalfAwayFromZero"
+          }
+        },
+        "additionalProperties": false
       },
       "RoundingConvention": {
         "type": "object",
