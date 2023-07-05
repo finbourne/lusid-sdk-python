@@ -83,7 +83,7 @@ class CutLabelDefinition(object):
         :type time_zone: str
         :param href: 
         :type href: str
-        :param links:  Collection of links.
+        :param links: 
         :type links: list[lusid.Link]
 
         """  # noqa: E501
@@ -239,7 +239,6 @@ class CutLabelDefinition(object):
     def links(self):
         """Gets the links of this CutLabelDefinition.  # noqa: E501
 
-        Collection of links.  # noqa: E501
 
         :return: The links of this CutLabelDefinition.  # noqa: E501
         :rtype: list[lusid.Link]
@@ -250,7 +249,6 @@ class CutLabelDefinition(object):
     def links(self, links):
         """Sets the links of this CutLabelDefinition.
 
-        Collection of links.  # noqa: E501
 
         :param links: The links of this CutLabelDefinition.  # noqa: E501
         :type links: list[lusid.Link]
