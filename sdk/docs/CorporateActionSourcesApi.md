@@ -19,7 +19,7 @@ Method | HTTP request | Description
 
 [EARLY ACCESS] BatchUpsertCorporateActions: Batch upsert corporate actions (instrument transition events) to corporate action source.
 
-Create or update one or more corporate actions in a particular corporate action source. Failures are identified in the body of the response.                If a corporate action is upserted at exactly the same effective datetime as a transaction for the same instrument, the corporate action takes precedence. Depending on the nature of the corporate action, this may mean it affects the transaction.
+Create or update one or more corporate actions in a particular corporate action source. Failures are identified in the body of the response.                If a corporate action is upserted at exactly the same effective datetime as a transaction for the same instrument, the corporate action takes precedence. Depending on the nature of the corporate action, this may mean it affects the transaction.                The maximum number of corporate actions that this method can upsert per request is 10,000.
 
 ### Example
 
@@ -173,7 +173,7 @@ Name | Type | Description  | Notes
 
 [EARLY ACCESS] DeleteCorporateActions: Delete corporate actions
 
-Delete one or more corporate actions from a particular corporate action source.
+Delete one or more corporate actions from a particular corporate action source.                The maximum number of corporate actions that this method can delete per request is 1,000.
 
 ### Example
 
@@ -252,7 +252,7 @@ Name | Type | Description  | Notes
 
 [EARLY ACCESS] DeleteInstrumentEvents: Delete corporate actions (instrument transition events) from the corporate action source.
 
-Delete one or more corporate actions from a particular corporate action source.
+Delete one or more corporate actions from a particular corporate action source.                The maximum number of instrument events that this method can delete per request is 1,000.
 
 ### Example
 
@@ -588,7 +588,7 @@ Name | Type | Description  | Notes
 
 [EARLY ACCESS] UpsertInstrumentEvents: Upsert instrument events to the provided corporate actions source.
 
-Batch upsert instrument events to corporate action sources.
+Batch upsert instrument events to corporate action sources.                The maximum number of instrument events that this method can upsert per request is 10,000.
 
 ### Example
 
