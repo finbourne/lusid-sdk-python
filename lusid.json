@@ -9,7 +9,7 @@
       "url": "https://www.finbourne.com",
       "email": "info@finbourne.com"
     },
-    "version": "1.0.325",
+    "version": "1.0.326",
     "x-logo": {
       "url": "https://www.lusid.com/app/assets/logo_white.png",
       "backgroundColor": "#415464"
@@ -93353,6 +93353,10 @@
       "description": "A portfolio is a store of economic information. There are three types: transaction, reference and derived transaction. Note that these endpoints can also be called when interacting with the respective Transaction Portfolios API,  Reference Portfolio API and Derived Transaction Portfolios API. For more information, see https://support.lusid.com/knowledgebase/article/KA-01848."
     },
     {
+      "name": "Posting Modules",
+      "description": "Methods to create and manage Posting modules and their rules."
+    },
+    {
       "name": "Property Definitions",
       "description": "Methods for interacting with Properties. Read more about Properties in the LUSID Knowledge Base here https://support.lusid.com/what-is-a-property."
     },
@@ -93473,6 +93477,7 @@
       "Placements",
       "Portfolio Groups",
       "Portfolios",
+      "Posting Modules",
       "Property Definitions",
       "Quotes",
       "Reconciliations",
