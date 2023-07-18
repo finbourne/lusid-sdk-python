@@ -10,7 +10,7 @@ Name | Type | Description | Notes
 **tags** | **list[str]** | The tags associated with the reference list. | [optional] 
 **reference_list** | [**ReferenceList**](ReferenceList.md) |  | 
 **version** | [**Version**](Version.md) |  | 
-**links** | [**list[Link]**](Link.md) |  | [optional] 
+**links** | [**list[Link]**](Link.md) | Collection of links. | [optional] 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 
