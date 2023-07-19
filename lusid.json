@@ -9,7 +9,7 @@
       "url": "https://www.finbourne.com",
       "email": "info@finbourne.com"
     },
-    "version": "1.0.356",
+    "version": "1.0.357",
     "x-logo": {
       "url": "https://www.lusid.com/app/assets/logo_white.png",
       "backgroundColor": "#415464"
@@ -7246,7 +7246,8 @@
                   },
                   "instigatedAt": "2020-01-05T00:00:00.0000000+00:00",
                   "completedAt": "2020-01-05T00:00:01.0000000+00:00",
-                  "schedule": "PostTrade"
+                  "schedule": "PostTrade",
+                  "instigatedBy": "UserId"
                 }
               },
               "application/json": {
@@ -7260,7 +7261,8 @@
                   },
                   "instigatedAt": "2020-01-05T00:00:00.0000000+00:00",
                   "completedAt": "2020-01-05T00:00:01.0000000+00:00",
-                  "schedule": "PostTrade"
+                  "schedule": "PostTrade",
+                  "instigatedBy": "UserId"
                 }
               },
               "text/json": {
@@ -7274,7 +7276,8 @@
                   },
                   "instigatedAt": "2020-01-05T00:00:00.0000000+00:00",
                   "completedAt": "2020-01-05T00:00:01.0000000+00:00",
-                  "schedule": "PostTrade"
+                  "schedule": "PostTrade",
+                  "instigatedBy": "UserId"
                 }
               }
             }
@@ -7400,7 +7403,14 @@
                             "Exposure/PV": 650
                           },
                           "propertiesUsed": {
-                            "Instrument/data/Issuer": "ABC"
+                            "Instrument/data/Issuer": [
+                              {
+                                "key": "Instrument/data/Issuer",
+                                "value": {
+                                  "labelValue": "ABC"
+                                }
+                              }
+                            ]
                           },
                           "parametersUsed": {
                             "UpperBound": "30",
@@ -7459,7 +7469,14 @@
                             "Exposure/PV": 650
                           },
                           "propertiesUsed": {
-                            "Instrument/data/Issuer": "ABC"
+                            "Instrument/data/Issuer": [
+                              {
+                                "key": "Instrument/data/Issuer",
+                                "value": {
+                                  "labelValue": "ABC"
+                                }
+                              }
+                            ]
                           },
                           "parametersUsed": {
                             "UpperBound": "30",
@@ -7518,7 +7535,14 @@
                             "Exposure/PV": 650
                           },
                           "propertiesUsed": {
-                            "Instrument/data/Issuer": "ABC"
+                            "Instrument/data/Issuer": [
+                              {
+                                "key": "Instrument/data/Issuer",
+                                "value": {
+                                  "labelValue": "ABC"
+                                }
+                              }
+                            ]
                           },
                           "parametersUsed": {
                             "UpperBound": "30",
@@ -72611,7 +72635,10 @@
           "propertiesUsed": {
             "type": "object",
             "additionalProperties": {
-              "type": "string"
+              "type": "array",
+              "items": {
+                "$ref": "#/components/schemas/Property"
+              }
             }
           },
           "parametersUsed": {
@@ -72688,6 +72715,7 @@
         "required": [
           "completedAt",
           "instigatedAt",
+          "instigatedBy",
           "runId",
           "schedule"
         ],
@@ -72705,6 +72733,10 @@
             "format": "date-time"
           },
           "schedule": {
+            "minLength": 1,
+            "type": "string"
+          },
+          "instigatedBy": {
             "minLength": 1,
             "type": "string"
           }

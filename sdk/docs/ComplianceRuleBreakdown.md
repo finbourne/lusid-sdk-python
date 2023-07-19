@@ -6,7 +6,7 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **group_status** | **str** |  | 
 **results_used** | **dict(str, float)** |  | 
-**properties_used** | **dict(str, str)** |  | 
+**properties_used** | **dict(str, list[ModelProperty])** |  | 
 **parameters_used** | **dict(str, str)** |  | 
 **missing_data_information** | **list[str]** |  | 
 
