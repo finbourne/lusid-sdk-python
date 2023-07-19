@@ -4,7 +4,7 @@ All URIs are relative to *https://www.lusid.com/api*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
-[**delete_compliance_rule2**](ComplianceGenericApi.md#delete_compliance_rule2) | **DELETE** /api/compliance/generic/rules/{scope}/{code} | [EARLY ACCESS] DeleteComplianceRule2: Get compliance rule.
+[**delete_compliance_rule2**](ComplianceGenericApi.md#delete_compliance_rule2) | **DELETE** /api/compliance/generic/rules/{scope}/{code} | [EARLY ACCESS] DeleteComplianceRule2: Delete compliance rule.
 [**get_compliance_rule2**](ComplianceGenericApi.md#get_compliance_rule2) | **GET** /api/compliance/generic/rules/{scope}/{code} | [EARLY ACCESS] GetComplianceRule2: Get compliance rule.
 [**get_compliance_run_summary**](ComplianceGenericApi.md#get_compliance_run_summary) | **GET** /api/compliance/generic/runs/summary/{scope}/{code} | [EARLY ACCESS] GetComplianceRunSummary: Get compliance summary results.
 [**get_compliance_template**](ComplianceGenericApi.md#get_compliance_template) | **GET** /api/compliance/templates/{scope}/{code} | [EARLY ACCESS] GetComplianceTemplate: Get the requested compliance template.
@@ -17,9 +17,9 @@ Method | HTTP request | Description
 # **delete_compliance_rule2**
 > DeletedEntityResponse delete_compliance_rule2(scope, code)
 
-[EARLY ACCESS] DeleteComplianceRule2: Get compliance rule.
+[EARLY ACCESS] DeleteComplianceRule2: Delete compliance rule.
 
-PLEASE NOTE: loopback EarlyAccess endpoint for discussion only.
+Use this endpoint to delete a compliance rule. The rule will be recoverable for asat times earlier than the  delete time, but will otherwise appear to have never existed.
 
 ### Example
 
@@ -55,7 +55,7 @@ with lusid.ApiClient(configuration) as api_client:
 code = 'code_example' # str | The compliance rule's code.
 
     try:
-        # [EARLY ACCESS] DeleteComplianceRule2: Get compliance rule.
+        # [EARLY ACCESS] DeleteComplianceRule2: Delete compliance rule.
         api_response = api_instance.delete_compliance_rule2(scope, code)
         pprint(api_response)
     except ApiException as e:
@@ -92,11 +92,11 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **get_compliance_rule2**
-> ComplianceRuleResponse get_compliance_rule2(scope, code, as_at=as_at)
+> ComplianceRuleResponse get_compliance_rule2(scope, code, as_at=as_at, property_keys=property_keys)
 
 [EARLY ACCESS] GetComplianceRule2: Get compliance rule.
 
-PLEASE NOTE: loopback EarlyAccess endpoint for discussion only.
+Use this endpoint to retrieve a single compliance rule.
 
 ### Example
 
@@ -131,10 +131,11 @@ with lusid.ApiClient(configuration) as api_client:
     scope = 'scope_example' # str | The compliance rule's scope.
 code = 'code_example' # str | The compliance rule's code.
 as_at = '2013-10-20T19:20:30+01:00' # datetime | Optional. Asat time for query. (optional)
+property_keys = ['property_keys_example'] # list[str] | A list of property keys from the 'Compliance' domain to decorate onto the rule.              These must take the format {domain}/{scope}/{code}, for example 'Compliance/live/UCITS'. If not provided will return all the entitled properties for that rule. (optional)
 
     try:
         # [EARLY ACCESS] GetComplianceRule2: Get compliance rule.
-        api_response = api_instance.get_compliance_rule2(scope, code, as_at=as_at)
+        api_response = api_instance.get_compliance_rule2(scope, code, as_at=as_at, property_keys=property_keys)
         pprint(api_response)
     except ApiException as e:
         print("Exception when calling ComplianceGenericApi->get_compliance_rule2: %s\n" % e)
@@ -147,6 +148,7 @@ Name | Type | Description  | Notes
  **scope** | **str**| The compliance rule&#39;s scope. | 
  **code** | **str**| The compliance rule&#39;s code. | 
  **as_at** | **datetime**| Optional. Asat time for query. | [optional] 
+ **property_keys** | [**list[str]**](str.md)| A list of property keys from the &#39;Compliance&#39; domain to decorate onto the rule.              These must take the format {domain}/{scope}/{code}, for example &#39;Compliance/live/UCITS&#39;. If not provided will return all the entitled properties for that rule. | [optional] 
 
 ### Return type
 
@@ -327,11 +329,11 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **list_compliance_rules2**
-> PagedResourceListOfComplianceRuleResponse list_compliance_rules2(as_at=as_at, page=page, start=start, limit=limit, filter=filter)
+> PagedResourceListOfComplianceRuleResponse list_compliance_rules2(as_at=as_at, page=page, limit=limit, filter=filter, property_keys=property_keys)
 
 [EARLY ACCESS] ListComplianceRules2: List compliance rules.
 
-PLEASE NOTE: loopback EarlyAccess endpoint for discussion only.
+Use this endpoint to retrieve all compliance rules, or a collection defined by an optional filter.
 
 ### Example
 
@@ -365,13 +367,13 @@ with lusid.ApiClient(configuration) as api_client:
     api_instance = lusid.ComplianceGenericApi(api_client)
     as_at = '2013-10-20T19:20:30+01:00' # datetime | Optional. Asat time. (optional)
 page = 'page_example' # str | Optional. Pagination token. (optional)
-start = 56 # int | Optional. Entry at which to start. (optional)
 limit = 56 # int | Optional. Entries per page. (optional)
 filter = 'filter_example' # str | Optional. Filter. (optional)
+property_keys = ['property_keys_example'] # list[str] | A list of property keys from the 'Compliance' domain to decorate onto each rule.              These must take the format {domain}/{scope}/{code}, for example 'Compliance/live/UCITS'. If not provided will return all the entitled properties for each rule. (optional)
 
     try:
         # [EARLY ACCESS] ListComplianceRules2: List compliance rules.
-        api_response = api_instance.list_compliance_rules2(as_at=as_at, page=page, start=start, limit=limit, filter=filter)
+        api_response = api_instance.list_compliance_rules2(as_at=as_at, page=page, limit=limit, filter=filter, property_keys=property_keys)
         pprint(api_response)
     except ApiException as e:
         print("Exception when calling ComplianceGenericApi->list_compliance_rules2: %s\n" % e)
@@ -383,9 +385,9 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **as_at** | **datetime**| Optional. Asat time. | [optional] 
  **page** | **str**| Optional. Pagination token. | [optional] 
- **start** | **int**| Optional. Entry at which to start. | [optional] 
  **limit** | **int**| Optional. Entries per page. | [optional] 
  **filter** | **str**| Optional. Filter. | [optional] 
+ **property_keys** | [**list[str]**](str.md)| A list of property keys from the &#39;Compliance&#39; domain to decorate onto each rule.              These must take the format {domain}/{scope}/{code}, for example &#39;Compliance/live/UCITS&#39;. If not provided will return all the entitled properties for each rule. | [optional] 
 
 ### Return type
 
@@ -580,7 +582,7 @@ Name | Type | Description  | Notes
 
 [EARLY ACCESS] UpsertComplianceRule: Upsert a compliance rule.
 
-PLEASE NOTE: loopback EarlyAccess endpoint for discussion only.
+Use this endpoint to upsert a single compliance rule. The template and variation specified must already  exist. The parameters passed must match those required by the template.
 
 ### Example
 
@@ -612,7 +614,7 @@ configuration.access_token = 'YOUR_ACCESS_TOKEN'
 with lusid.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = lusid.ComplianceGenericApi(api_client)
-    upsert_compliance_rule_request = {"id":{"scope":"live","code":"exampleRule"},"name":"A friendly name.","description":"A friendly description.","active":true,"templateId":{"scope":"live","code":"exampleTemplate"},"variation":"Single","portfolioGroupId":{"scope":"examples","code":"examplePortfolioGroup"},"parameters":{"UpperBound":{"parameterType":"Decimal","value":15}},"properties":{"Compliance/MyScope/SomeRuleProperty":{"key":"Compliance/MyScope/SomeRuleProperty","value":{"labelValue":"XYZ000034567"}}}} # UpsertComplianceRuleRequest |  (optional)
+    upsert_compliance_rule_request = {"id":{"scope":"live","code":"exampleRule"},"name":"A friendly name.","description":"A friendly description.","active":true,"templateId":{"scope":"system","code":"PortfolioLuidMetricCheck"},"variation":"standard","portfolioGroupId":{"scope":"examples","code":"examplePortfolioGroup"},"parameters":{"UpperBound":{"value":15,"parameterType":"DecimalComplianceParameter"},"LowerBound":{"value":0,"parameterType":"DecimalComplianceParameter"},"UpperWarning":{"value":15,"parameterType":"DecimalComplianceParameter"},"LowerWarning":{"value":0,"parameterType":"DecimalComplianceParameter"},"Metric":{"value":"Valuation/PvInReportCcy","parameterType":"AddressKeyComplianceParameter"},"Excludes":{"value":{"scope":"testscope","code":"testcode"},"parameterType":"PortfolioIdListComplianceParameter"}},"properties":{"Compliance/MyScope/SomeRuleProperty":{"key":"Compliance/MyScope/SomeRuleProperty","value":{"labelValue":"XYZ000034567"}}}} # UpsertComplianceRuleRequest |  (optional)
 
     try:
         # [EARLY ACCESS] UpsertComplianceRule: Upsert a compliance rule.

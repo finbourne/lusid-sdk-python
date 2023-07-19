@@ -9,7 +9,7 @@
       "url": "https://www.finbourne.com",
       "email": "info@finbourne.com"
     },
-    "version": "1.0.359",
+    "version": "1.0.360",
     "x-logo": {
       "url": "https://www.lusid.com/app/assets/logo_white.png",
       "backgroundColor": "#415464"
@@ -6227,7 +6227,7 @@
           "Compliance - Generic"
         ],
         "summary": "[EARLY ACCESS] UpsertComplianceRule: Upsert a compliance rule.",
-        "description": "PLEASE NOTE: loopback EarlyAccess endpoint for discussion only.",
+        "description": "Use this endpoint to upsert a single compliance rule. The template and variation specified must already\r\nexist. The parameters passed must match those required by the template.",
         "operationId": "UpsertComplianceRule",
         "requestBody": {
           "content": {
@@ -6244,18 +6244,41 @@
                 "description": "A friendly description.",
                 "active": true,
                 "templateId": {
-                  "scope": "live",
-                  "code": "exampleTemplate"
+                  "scope": "system",
+                  "code": "PortfolioLuidMetricCheck"
                 },
-                "variation": "Single",
+                "variation": "standard",
                 "portfolioGroupId": {
                   "scope": "examples",
                   "code": "examplePortfolioGroup"
                 },
                 "parameters": {
                   "UpperBound": {
-                    "parameterType": "Decimal",
-                    "value": 15
+                    "value": 15,
+                    "parameterType": "DecimalComplianceParameter"
+                  },
+                  "LowerBound": {
+                    "value": 0,
+                    "parameterType": "DecimalComplianceParameter"
+                  },
+                  "UpperWarning": {
+                    "value": 15,
+                    "parameterType": "DecimalComplianceParameter"
+                  },
+                  "LowerWarning": {
+                    "value": 0,
+                    "parameterType": "DecimalComplianceParameter"
+                  },
+                  "Metric": {
+                    "value": "Valuation/PvInReportCcy",
+                    "parameterType": "AddressKeyComplianceParameter"
+                  },
+                  "Excludes": {
+                    "value": {
+                      "scope": "testscope",
+                      "code": "testcode"
+                    },
+                    "parameterType": "PortfolioIdListComplianceParameter"
                   }
                 },
                 "properties": {
@@ -6281,18 +6304,41 @@
                 "description": "A friendly description.",
                 "active": true,
                 "templateId": {
-                  "scope": "live",
-                  "code": "exampleTemplate"
+                  "scope": "system",
+                  "code": "PortfolioLuidMetricCheck"
                 },
-                "variation": "Single",
+                "variation": "standard",
                 "portfolioGroupId": {
                   "scope": "examples",
                   "code": "examplePortfolioGroup"
                 },
                 "parameters": {
                   "UpperBound": {
-                    "parameterType": "Decimal",
-                    "value": 15
+                    "value": 15,
+                    "parameterType": "DecimalComplianceParameter"
+                  },
+                  "LowerBound": {
+                    "value": 0,
+                    "parameterType": "DecimalComplianceParameter"
+                  },
+                  "UpperWarning": {
+                    "value": 15,
+                    "parameterType": "DecimalComplianceParameter"
+                  },
+                  "LowerWarning": {
+                    "value": 0,
+                    "parameterType": "DecimalComplianceParameter"
+                  },
+                  "Metric": {
+                    "value": "Valuation/PvInReportCcy",
+                    "parameterType": "AddressKeyComplianceParameter"
+                  },
+                  "Excludes": {
+                    "value": {
+                      "scope": "testscope",
+                      "code": "testcode"
+                    },
+                    "parameterType": "PortfolioIdListComplianceParameter"
                   }
                 },
                 "properties": {
@@ -6318,18 +6364,41 @@
                 "description": "A friendly description.",
                 "active": true,
                 "templateId": {
-                  "scope": "live",
-                  "code": "exampleTemplate"
+                  "scope": "system",
+                  "code": "PortfolioLuidMetricCheck"
                 },
-                "variation": "Single",
+                "variation": "standard",
                 "portfolioGroupId": {
                   "scope": "examples",
                   "code": "examplePortfolioGroup"
                 },
                 "parameters": {
                   "UpperBound": {
-                    "parameterType": "Decimal",
-                    "value": 15
+                    "value": 15,
+                    "parameterType": "DecimalComplianceParameter"
+                  },
+                  "LowerBound": {
+                    "value": 0,
+                    "parameterType": "DecimalComplianceParameter"
+                  },
+                  "UpperWarning": {
+                    "value": 15,
+                    "parameterType": "DecimalComplianceParameter"
+                  },
+                  "LowerWarning": {
+                    "value": 0,
+                    "parameterType": "DecimalComplianceParameter"
+                  },
+                  "Metric": {
+                    "value": "Valuation/PvInReportCcy",
+                    "parameterType": "AddressKeyComplianceParameter"
+                  },
+                  "Excludes": {
+                    "value": {
+                      "scope": "testscope",
+                      "code": "testcode"
+                    },
+                    "parameterType": "PortfolioIdListComplianceParameter"
                   }
                 },
                 "properties": {
@@ -6355,18 +6424,41 @@
                 "description": "A friendly description.",
                 "active": true,
                 "templateId": {
-                  "scope": "live",
-                  "code": "exampleTemplate"
+                  "scope": "system",
+                  "code": "PortfolioLuidMetricCheck"
                 },
-                "variation": "Single",
+                "variation": "standard",
                 "portfolioGroupId": {
                   "scope": "examples",
                   "code": "examplePortfolioGroup"
                 },
                 "parameters": {
                   "UpperBound": {
-                    "parameterType": "Decimal",
-                    "value": 15
+                    "value": 15,
+                    "parameterType": "DecimalComplianceParameter"
+                  },
+                  "LowerBound": {
+                    "value": 0,
+                    "parameterType": "DecimalComplianceParameter"
+                  },
+                  "UpperWarning": {
+                    "value": 15,
+                    "parameterType": "DecimalComplianceParameter"
+                  },
+                  "LowerWarning": {
+                    "value": 0,
+                    "parameterType": "DecimalComplianceParameter"
+                  },
+                  "Metric": {
+                    "value": "Valuation/PvInReportCcy",
+                    "parameterType": "AddressKeyComplianceParameter"
+                  },
+                  "Excludes": {
+                    "value": {
+                      "scope": "testscope",
+                      "code": "testcode"
+                    },
+                    "parameterType": "PortfolioIdListComplianceParameter"
                   }
                 },
                 "properties": {
@@ -6408,8 +6500,8 @@
                   },
                   "parameters": {
                     "UpperBound": {
-                      "parameterType": "Decimal",
-                      "value": 30
+                      "value": 30,
+                      "parameterType": "DecimalComplianceParameter"
                     }
                   },
                   "properties": {
@@ -6455,8 +6547,8 @@
                   },
                   "parameters": {
                     "UpperBound": {
-                      "parameterType": "Decimal",
-                      "value": 30
+                      "value": 30,
+                      "parameterType": "DecimalComplianceParameter"
                     }
                   },
                   "properties": {
@@ -6502,8 +6594,8 @@
                   },
                   "parameters": {
                     "UpperBound": {
-                      "parameterType": "Decimal",
-                      "value": 30
+                      "value": 30,
+                      "parameterType": "DecimalComplianceParameter"
                     }
                   },
                   "properties": {
@@ -6571,7 +6663,7 @@
           "Compliance - Generic"
         ],
         "summary": "[EARLY ACCESS] ListComplianceRules2: List compliance rules.",
-        "description": "PLEASE NOTE: loopback EarlyAccess endpoint for discussion only.",
+        "description": "Use this endpoint to retrieve all compliance rules, or a collection defined by an optional filter.",
         "operationId": "ListComplianceRules2",
         "parameters": [
           {
@@ -6596,16 +6688,6 @@
             }
           },
           {
-            "name": "start",
-            "in": "query",
-            "description": "Optional. Entry at which to start.",
-            "schema": {
-              "type": "integer",
-              "format": "int32"
-            },
-            "x-nullable": true
-          },
-          {
             "name": "limit",
             "in": "query",
             "description": "Optional. Entries per page.",
@@ -6627,6 +6709,19 @@
               "pattern": "^[\\s\\S]*$",
               "type": "string"
             }
+          },
+          {
+            "name": "propertyKeys",
+            "in": "query",
+            "description": "A list of property keys from the 'Compliance' domain to decorate onto each rule.\r\n            These must take the format {domain}/{scope}/{code}, for example 'Compliance/live/UCITS'. If not provided will return all the entitled properties for each rule.",
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "string",
+                "description": "The key that uniquely identifies the property. It has the format {domain}/{scope}/{code}."
+              }
+            },
+            "x-nullable": true
           }
         ],
         "responses": {
@@ -6658,8 +6753,8 @@
                       },
                       "parameters": {
                         "UpperBound": {
-                          "parameterType": "Decimal",
-                          "value": 30
+                          "value": 30,
+                          "parameterType": "DecimalComplianceParameter"
                         }
                       },
                       "properties": {
@@ -6711,8 +6806,8 @@
                       },
                       "parameters": {
                         "UpperBound": {
-                          "parameterType": "Decimal",
-                          "value": 30
+                          "value": 30,
+                          "parameterType": "DecimalComplianceParameter"
                         }
                       },
                       "properties": {
@@ -6764,8 +6859,8 @@
                       },
                       "parameters": {
                         "UpperBound": {
-                          "parameterType": "Decimal",
-                          "value": 30
+                          "value": 30,
+                          "parameterType": "DecimalComplianceParameter"
                         }
                       },
                       "properties": {
@@ -6839,7 +6934,7 @@
           "Compliance - Generic"
         ],
         "summary": "[EARLY ACCESS] GetComplianceRule2: Get compliance rule.",
-        "description": "PLEASE NOTE: loopback EarlyAccess endpoint for discussion only.",
+        "description": "Use this endpoint to retrieve a single compliance rule.",
         "operationId": "GetComplianceRule2",
         "parameters": [
           {
@@ -6875,6 +6970,19 @@
               "format": "date-time"
             },
             "x-nullable": true
+          },
+          {
+            "name": "propertyKeys",
+            "in": "query",
+            "description": "A list of property keys from the 'Compliance' domain to decorate onto the rule.\r\n            These must take the format {domain}/{scope}/{code}, for example 'Compliance/live/UCITS'. If not provided will return all the entitled properties for that rule.",
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "string",
+                "description": "The key that uniquely identifies the property. It has the format {domain}/{scope}/{code}."
+              }
+            },
+            "x-nullable": true
           }
         ],
         "responses": {
@@ -6904,8 +7012,8 @@
                   },
                   "parameters": {
                     "UpperBound": {
-                      "parameterType": "Decimal",
-                      "value": 30
+                      "value": 30,
+                      "parameterType": "DecimalComplianceParameter"
                     }
                   },
                   "properties": {
@@ -6951,8 +7059,8 @@
                   },
                   "parameters": {
                     "UpperBound": {
-                      "parameterType": "Decimal",
-                      "value": 30
+                      "value": 30,
+                      "parameterType": "DecimalComplianceParameter"
                     }
                   },
                   "properties": {
@@ -6998,8 +7106,8 @@
                   },
                   "parameters": {
                     "UpperBound": {
-                      "parameterType": "Decimal",
-                      "value": 30
+                      "value": 30,
+                      "parameterType": "DecimalComplianceParameter"
                     }
                   },
                   "properties": {
@@ -7066,8 +7174,8 @@
         "tags": [
           "Compliance - Generic"
         ],
-        "summary": "[EARLY ACCESS] DeleteComplianceRule2: Get compliance rule.",
-        "description": "PLEASE NOTE: loopback EarlyAccess endpoint for discussion only.",
+        "summary": "[EARLY ACCESS] DeleteComplianceRule2: Delete compliance rule.",
+        "description": "Use this endpoint to delete a compliance rule. The rule will be recoverable for asat times earlier than the\r\ndelete time, but will otherwise appear to have never existed.",
         "operationId": "DeleteComplianceRule2",
         "parameters": [
           {
@@ -69707,7 +69815,7 @@
             "properties": {
               "values": {
                 "maxItems": 100,
-                "minItems": 1,
+                "minItems": 0,
                 "type": "array",
                 "items": {
                   "type": "string",
@@ -72595,18 +72703,31 @@
       },
       "ComplianceParameter": {
         "required": [
-          "parameterType",
-          "value"
+          "parameterType"
         ],
         "type": "object",
         "properties": {
           "parameterType": {
-            "minLength": 1,
+            "enum": [
+              "BoolComplianceParameter",
+              "StringComplianceParameter",
+              "DecimalComplianceParameter",
+              "DateTimeComplianceParameter",
+              "PropertyKeyComplianceParameter",
+              "AddressKeyComplianceParameter",
+              "PortfolioIdComplianceParameter",
+              "PortfolioGroupIdComplianceParameter",
+              "StringListComplianceParameter",
+              "BoolListComplianceParameter",
+              "DateTimeListComplianceParameter",
+              "DecimalListComplianceParameter",
+              "PropertyKeyListComplianceParameter",
+              "AddressKeyListComplianceParameter",
+              "PortfolioIdListComplianceParameter",
+              "PortfolioGroupIdListComplianceParameter"
+            ],
             "type": "string",
-            "description": "The parameter type."
-          },
-          "value": {
-            "description": "The parameter value."
+            "description": "The parameter type. The available values are: BoolComplianceParameter, StringComplianceParameter, DecimalComplianceParameter, DateTimeComplianceParameter, PropertyKeyComplianceParameter, AddressKeyComplianceParameter, PortfolioIdComplianceParameter, PortfolioGroupIdComplianceParameter, StringListComplianceParameter, BoolListComplianceParameter, DateTimeListComplianceParameter, DecimalListComplianceParameter, PropertyKeyListComplianceParameter, AddressKeyListComplianceParameter, PortfolioIdListComplianceParameter, PortfolioGroupIdListComplianceParameter"
           }
         },
         "additionalProperties": false
@@ -75560,7 +75681,7 @@
             "properties": {
               "values": {
                 "maxItems": 100,
-                "minItems": 1,
+                "minItems": 0,
                 "type": "array",
                 "items": {
                   "type": "number",
@@ -80781,7 +80902,7 @@
             "properties": {
               "values": {
                 "maxItems": 100,
-                "minItems": 1,
+                "minItems": 0,
                 "type": "array",
                 "items": {
                   "type": "string"
@@ -90261,7 +90382,7 @@
             "properties": {
               "values": {
                 "maxItems": 100,
-                "minItems": 1,
+                "minItems": 0,
                 "type": "array",
                 "items": {
                   "type": "string"
