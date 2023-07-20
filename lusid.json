@@ -9,7 +9,7 @@
       "url": "https://www.finbourne.com",
       "email": "info@finbourne.com"
     },
-    "version": "1.0.362",
+    "version": "1.0.363",
     "x-logo": {
       "url": "https://www.lusid.com/app/assets/logo_white.png",
       "backgroundColor": "#415464"
@@ -6235,57 +6235,185 @@
               "schema": {
                 "$ref": "#/components/schemas/UpsertComplianceRuleRequest"
               },
-              "example": {
-                "id": {
-                  "scope": "live",
-                  "code": "exampleRule"
-                },
-                "name": "A friendly name.",
-                "description": "A friendly description.",
-                "active": true,
-                "templateId": {
-                  "scope": "system",
-                  "code": "PortfolioLuidMetricCheck"
-                },
-                "variation": "standard",
-                "portfolioGroupId": {
-                  "scope": "examples",
-                  "code": "examplePortfolioGroup"
-                },
-                "parameters": {
-                  "UpperBound": {
-                    "value": 15,
-                    "parameterType": "DecimalComplianceParameter"
-                  },
-                  "LowerBound": {
-                    "value": 0,
-                    "parameterType": "DecimalComplianceParameter"
-                  },
-                  "UpperWarning": {
-                    "value": 15,
-                    "parameterType": "DecimalComplianceParameter"
-                  },
-                  "LowerWarning": {
-                    "value": 0,
-                    "parameterType": "DecimalComplianceParameter"
-                  },
-                  "Metric": {
-                    "value": "Valuation/PvInReportCcy",
-                    "parameterType": "AddressKeyComplianceParameter"
-                  },
-                  "Excludes": {
-                    "value": {
-                      "scope": "testscope",
-                      "code": "testcode"
+              "examples": {
+                "Example with all parameter types": {
+                  "value": {
+                    "id": {
+                      "scope": "live",
+                      "code": "exampleRule"
                     },
-                    "parameterType": "PortfolioIdListComplianceParameter"
+                    "name": "A friendly name.",
+                    "description": "A friendly description.",
+                    "active": true,
+                    "templateId": {
+                      "scope": "system",
+                      "code": "PortfolioLuidMetricCheck"
+                    },
+                    "variation": "standard",
+                    "portfolioGroupId": {
+                      "scope": "examples",
+                      "code": "examplePortfolioGroup"
+                    },
+                    "parameters": {
+                      "BoolParameter": {
+                        "value": true,
+                        "complianceParameterType": "BoolComplianceParameter"
+                      },
+                      "DecimalParameter": {
+                        "value": 0,
+                        "complianceParameterType": "DecimalComplianceParameter"
+                      },
+                      "StringParameter": {
+                        "value": "An example string parameter",
+                        "complianceParameterType": "StringComplianceParameter"
+                      },
+                      "DateTimeParameter": {
+                        "value": "2023-06-06T00:00:00.0000000+00:00",
+                        "complianceParameterType": "DateTimeComplianceParameter"
+                      },
+                      "PropertyKeyParameter": {
+                        "value": "Compliance/live/RuleGroup",
+                        "complianceParameterType": "PropertyKeyComplianceParameter"
+                      },
+                      "AddressKeyParameter": {
+                        "value": "Valuation/PvInReportCcy",
+                        "complianceParameterType": "AddressKeyComplianceParameter"
+                      },
+                      "PortfolioIdParameter": {
+                        "value": {
+                          "scope": "testscope",
+                          "code": "testcode"
+                        },
+                        "complianceParameterType": "PortfolioIdComplianceParameter"
+                      },
+                      "PortfolioGroupIdParameter": {
+                        "value": {
+                          "scope": "testscope",
+                          "code": "testcode"
+                        },
+                        "complianceParameterType": "PortfolioGroupIdComplianceParameter"
+                      },
+                      "DecimalListParameter": {
+                        "value": {
+                          "scope": "testscope",
+                          "code": "testcode"
+                        },
+                        "complianceParameterType": "DecimalListComplianceParameter"
+                      },
+                      "AddressKeyListParameter": {
+                        "value": {
+                          "scope": "testscope",
+                          "code": "testcode"
+                        },
+                        "complianceParameterType": "AddressKeyListComplianceParameter"
+                      },
+                      "BoolListParameter": {
+                        "value": {
+                          "scope": "testscope",
+                          "code": "testcode"
+                        },
+                        "complianceParameterType": "BoolListComplianceParameter"
+                      },
+                      "StringListParameter": {
+                        "value": {
+                          "scope": "testscope",
+                          "code": "testcode"
+                        },
+                        "complianceParameterType": "StringListComplianceParameter"
+                      },
+                      "DateTimeListParameter": {
+                        "value": {
+                          "scope": "testscope",
+                          "code": "testcode"
+                        },
+                        "complianceParameterType": "DateTimeListComplianceParameter"
+                      },
+                      "PropertyKeyListParameter": {
+                        "value": {
+                          "scope": "testscope",
+                          "code": "testcode"
+                        },
+                        "complianceParameterType": "PropertyKeyListComplianceParameter"
+                      },
+                      "PortfolioIdListParameter": {
+                        "value": {
+                          "scope": "testscope",
+                          "code": "testcode"
+                        },
+                        "complianceParameterType": "PortfolioIdListComplianceParameter"
+                      },
+                      "PortfolioGroupIdListParameter": {
+                        "value": {
+                          "scope": "testscope",
+                          "code": "testcode"
+                        },
+                        "complianceParameterType": "PortfolioGroupIdListComplianceParameter"
+                      }
+                    },
+                    "properties": {
+                      "Compliance/MyScope/SomeRuleProperty": {
+                        "key": "Compliance/MyScope/SomeRuleProperty",
+                        "value": {
+                          "labelValue": "XYZ000034567"
+                        }
+                      }
+                    }
                   }
                 },
-                "properties": {
-                  "Compliance/MyScope/SomeRuleProperty": {
-                    "key": "Compliance/MyScope/SomeRuleProperty",
-                    "value": {
-                      "labelValue": "XYZ000034567"
+                "PortfolioLuidMetricCheck example": {
+                  "value": {
+                    "id": {
+                      "scope": "live",
+                      "code": "exampleRule"
+                    },
+                    "name": "A friendly name.",
+                    "description": "A friendly description.",
+                    "active": true,
+                    "templateId": {
+                      "scope": "system",
+                      "code": "PortfolioLuidMetricCheck"
+                    },
+                    "variation": "standard",
+                    "portfolioGroupId": {
+                      "scope": "examples",
+                      "code": "examplePortfolioGroup"
+                    },
+                    "parameters": {
+                      "UpperBound": {
+                        "value": 15,
+                        "complianceParameterType": "DecimalComplianceParameter"
+                      },
+                      "LowerBound": {
+                        "value": 0,
+                        "complianceParameterType": "DecimalComplianceParameter"
+                      },
+                      "UpperWarning": {
+                        "value": 15,
+                        "complianceParameterType": "DecimalComplianceParameter"
+                      },
+                      "LowerWarning": {
+                        "value": 0,
+                        "complianceParameterType": "DecimalComplianceParameter"
+                      },
+                      "Metric": {
+                        "value": "Valuation/PvInReportCcy",
+                        "complianceParameterType": "AddressKeyComplianceParameter"
+                      },
+                      "Excludes": {
+                        "value": {
+                          "scope": "testscope",
+                          "code": "testcode"
+                        },
+                        "complianceParameterType": "PortfolioIdListComplianceParameter"
+                      }
+                    },
+                    "properties": {
+                      "Compliance/MyScope/SomeRuleProperty": {
+                        "key": "Compliance/MyScope/SomeRuleProperty",
+                        "value": {
+                          "labelValue": "XYZ000034567"
+                        }
+                      }
                     }
                   }
                 }
@@ -6295,57 +6423,185 @@
               "schema": {
                 "$ref": "#/components/schemas/UpsertComplianceRuleRequest"
               },
-              "example": {
-                "id": {
-                  "scope": "live",
-                  "code": "exampleRule"
-                },
-                "name": "A friendly name.",
-                "description": "A friendly description.",
-                "active": true,
-                "templateId": {
-                  "scope": "system",
-                  "code": "PortfolioLuidMetricCheck"
-                },
-                "variation": "standard",
-                "portfolioGroupId": {
-                  "scope": "examples",
-                  "code": "examplePortfolioGroup"
-                },
-                "parameters": {
-                  "UpperBound": {
-                    "value": 15,
-                    "parameterType": "DecimalComplianceParameter"
-                  },
-                  "LowerBound": {
-                    "value": 0,
-                    "parameterType": "DecimalComplianceParameter"
-                  },
-                  "UpperWarning": {
-                    "value": 15,
-                    "parameterType": "DecimalComplianceParameter"
-                  },
-                  "LowerWarning": {
-                    "value": 0,
-                    "parameterType": "DecimalComplianceParameter"
-                  },
-                  "Metric": {
-                    "value": "Valuation/PvInReportCcy",
-                    "parameterType": "AddressKeyComplianceParameter"
-                  },
-                  "Excludes": {
-                    "value": {
-                      "scope": "testscope",
-                      "code": "testcode"
+              "examples": {
+                "Example with all parameter types": {
+                  "value": {
+                    "id": {
+                      "scope": "live",
+                      "code": "exampleRule"
                     },
-                    "parameterType": "PortfolioIdListComplianceParameter"
+                    "name": "A friendly name.",
+                    "description": "A friendly description.",
+                    "active": true,
+                    "templateId": {
+                      "scope": "system",
+                      "code": "PortfolioLuidMetricCheck"
+                    },
+                    "variation": "standard",
+                    "portfolioGroupId": {
+                      "scope": "examples",
+                      "code": "examplePortfolioGroup"
+                    },
+                    "parameters": {
+                      "BoolParameter": {
+                        "value": true,
+                        "complianceParameterType": "BoolComplianceParameter"
+                      },
+                      "DecimalParameter": {
+                        "value": 0,
+                        "complianceParameterType": "DecimalComplianceParameter"
+                      },
+                      "StringParameter": {
+                        "value": "An example string parameter",
+                        "complianceParameterType": "StringComplianceParameter"
+                      },
+                      "DateTimeParameter": {
+                        "value": "2023-06-06T00:00:00.0000000+00:00",
+                        "complianceParameterType": "DateTimeComplianceParameter"
+                      },
+                      "PropertyKeyParameter": {
+                        "value": "Compliance/live/RuleGroup",
+                        "complianceParameterType": "PropertyKeyComplianceParameter"
+                      },
+                      "AddressKeyParameter": {
+                        "value": "Valuation/PvInReportCcy",
+                        "complianceParameterType": "AddressKeyComplianceParameter"
+                      },
+                      "PortfolioIdParameter": {
+                        "value": {
+                          "scope": "testscope",
+                          "code": "testcode"
+                        },
+                        "complianceParameterType": "PortfolioIdComplianceParameter"
+                      },
+                      "PortfolioGroupIdParameter": {
+                        "value": {
+                          "scope": "testscope",
+                          "code": "testcode"
+                        },
+                        "complianceParameterType": "PortfolioGroupIdComplianceParameter"
+                      },
+                      "DecimalListParameter": {
+                        "value": {
+                          "scope": "testscope",
+                          "code": "testcode"
+                        },
+                        "complianceParameterType": "DecimalListComplianceParameter"
+                      },
+                      "AddressKeyListParameter": {
+                        "value": {
+                          "scope": "testscope",
+                          "code": "testcode"
+                        },
+                        "complianceParameterType": "AddressKeyListComplianceParameter"
+                      },
+                      "BoolListParameter": {
+                        "value": {
+                          "scope": "testscope",
+                          "code": "testcode"
+                        },
+                        "complianceParameterType": "BoolListComplianceParameter"
+                      },
+                      "StringListParameter": {
+                        "value": {
+                          "scope": "testscope",
+                          "code": "testcode"
+                        },
+                        "complianceParameterType": "StringListComplianceParameter"
+                      },
+                      "DateTimeListParameter": {
+                        "value": {
+                          "scope": "testscope",
+                          "code": "testcode"
+                        },
+                        "complianceParameterType": "DateTimeListComplianceParameter"
+                      },
+                      "PropertyKeyListParameter": {
+                        "value": {
+                          "scope": "testscope",
+                          "code": "testcode"
+                        },
+                        "complianceParameterType": "PropertyKeyListComplianceParameter"
+                      },
+                      "PortfolioIdListParameter": {
+                        "value": {
+                          "scope": "testscope",
+                          "code": "testcode"
+                        },
+                        "complianceParameterType": "PortfolioIdListComplianceParameter"
+                      },
+                      "PortfolioGroupIdListParameter": {
+                        "value": {
+                          "scope": "testscope",
+                          "code": "testcode"
+                        },
+                        "complianceParameterType": "PortfolioGroupIdListComplianceParameter"
+                      }
+                    },
+                    "properties": {
+                      "Compliance/MyScope/SomeRuleProperty": {
+                        "key": "Compliance/MyScope/SomeRuleProperty",
+                        "value": {
+                          "labelValue": "XYZ000034567"
+                        }
+                      }
+                    }
                   }
                 },
-                "properties": {
-                  "Compliance/MyScope/SomeRuleProperty": {
-                    "key": "Compliance/MyScope/SomeRuleProperty",
-                    "value": {
-                      "labelValue": "XYZ000034567"
+                "PortfolioLuidMetricCheck example": {
+                  "value": {
+                    "id": {
+                      "scope": "live",
+                      "code": "exampleRule"
+                    },
+                    "name": "A friendly name.",
+                    "description": "A friendly description.",
+                    "active": true,
+                    "templateId": {
+                      "scope": "system",
+                      "code": "PortfolioLuidMetricCheck"
+                    },
+                    "variation": "standard",
+                    "portfolioGroupId": {
+                      "scope": "examples",
+                      "code": "examplePortfolioGroup"
+                    },
+                    "parameters": {
+                      "UpperBound": {
+                        "value": 15,
+                        "complianceParameterType": "DecimalComplianceParameter"
+                      },
+                      "LowerBound": {
+                        "value": 0,
+                        "complianceParameterType": "DecimalComplianceParameter"
+                      },
+                      "UpperWarning": {
+                        "value": 15,
+                        "complianceParameterType": "DecimalComplianceParameter"
+                      },
+                      "LowerWarning": {
+                        "value": 0,
+                        "complianceParameterType": "DecimalComplianceParameter"
+                      },
+                      "Metric": {
+                        "value": "Valuation/PvInReportCcy",
+                        "complianceParameterType": "AddressKeyComplianceParameter"
+                      },
+                      "Excludes": {
+                        "value": {
+                          "scope": "testscope",
+                          "code": "testcode"
+                        },
+                        "complianceParameterType": "PortfolioIdListComplianceParameter"
+                      }
+                    },
+                    "properties": {
+                      "Compliance/MyScope/SomeRuleProperty": {
+                        "key": "Compliance/MyScope/SomeRuleProperty",
+                        "value": {
+                          "labelValue": "XYZ000034567"
+                        }
+                      }
                     }
                   }
                 }
@@ -6355,57 +6611,185 @@
               "schema": {
                 "$ref": "#/components/schemas/UpsertComplianceRuleRequest"
               },
-              "example": {
-                "id": {
-                  "scope": "live",
-                  "code": "exampleRule"
-                },
-                "name": "A friendly name.",
-                "description": "A friendly description.",
-                "active": true,
-                "templateId": {
-                  "scope": "system",
-                  "code": "PortfolioLuidMetricCheck"
-                },
-                "variation": "standard",
-                "portfolioGroupId": {
-                  "scope": "examples",
-                  "code": "examplePortfolioGroup"
-                },
-                "parameters": {
-                  "UpperBound": {
-                    "value": 15,
-                    "parameterType": "DecimalComplianceParameter"
-                  },
-                  "LowerBound": {
-                    "value": 0,
-                    "parameterType": "DecimalComplianceParameter"
-                  },
-                  "UpperWarning": {
-                    "value": 15,
-                    "parameterType": "DecimalComplianceParameter"
-                  },
-                  "LowerWarning": {
-                    "value": 0,
-                    "parameterType": "DecimalComplianceParameter"
-                  },
-                  "Metric": {
-                    "value": "Valuation/PvInReportCcy",
-                    "parameterType": "AddressKeyComplianceParameter"
-                  },
-                  "Excludes": {
-                    "value": {
-                      "scope": "testscope",
-                      "code": "testcode"
+              "examples": {
+                "Example with all parameter types": {
+                  "value": {
+                    "id": {
+                      "scope": "live",
+                      "code": "exampleRule"
                     },
-                    "parameterType": "PortfolioIdListComplianceParameter"
+                    "name": "A friendly name.",
+                    "description": "A friendly description.",
+                    "active": true,
+                    "templateId": {
+                      "scope": "system",
+                      "code": "PortfolioLuidMetricCheck"
+                    },
+                    "variation": "standard",
+                    "portfolioGroupId": {
+                      "scope": "examples",
+                      "code": "examplePortfolioGroup"
+                    },
+                    "parameters": {
+                      "BoolParameter": {
+                        "value": true,
+                        "complianceParameterType": "BoolComplianceParameter"
+                      },
+                      "DecimalParameter": {
+                        "value": 0,
+                        "complianceParameterType": "DecimalComplianceParameter"
+                      },
+                      "StringParameter": {
+                        "value": "An example string parameter",
+                        "complianceParameterType": "StringComplianceParameter"
+                      },
+                      "DateTimeParameter": {
+                        "value": "2023-06-06T00:00:00.0000000+00:00",
+                        "complianceParameterType": "DateTimeComplianceParameter"
+                      },
+                      "PropertyKeyParameter": {
+                        "value": "Compliance/live/RuleGroup",
+                        "complianceParameterType": "PropertyKeyComplianceParameter"
+                      },
+                      "AddressKeyParameter": {
+                        "value": "Valuation/PvInReportCcy",
+                        "complianceParameterType": "AddressKeyComplianceParameter"
+                      },
+                      "PortfolioIdParameter": {
+                        "value": {
+                          "scope": "testscope",
+                          "code": "testcode"
+                        },
+                        "complianceParameterType": "PortfolioIdComplianceParameter"
+                      },
+                      "PortfolioGroupIdParameter": {
+                        "value": {
+                          "scope": "testscope",
+                          "code": "testcode"
+                        },
+                        "complianceParameterType": "PortfolioGroupIdComplianceParameter"
+                      },
+                      "DecimalListParameter": {
+                        "value": {
+                          "scope": "testscope",
+                          "code": "testcode"
+                        },
+                        "complianceParameterType": "DecimalListComplianceParameter"
+                      },
+                      "AddressKeyListParameter": {
+                        "value": {
+                          "scope": "testscope",
+                          "code": "testcode"
+                        },
+                        "complianceParameterType": "AddressKeyListComplianceParameter"
+                      },
+                      "BoolListParameter": {
+                        "value": {
+                          "scope": "testscope",
+                          "code": "testcode"
+                        },
+                        "complianceParameterType": "BoolListComplianceParameter"
+                      },
+                      "StringListParameter": {
+                        "value": {
+                          "scope": "testscope",
+                          "code": "testcode"
+                        },
+                        "complianceParameterType": "StringListComplianceParameter"
+                      },
+                      "DateTimeListParameter": {
+                        "value": {
+                          "scope": "testscope",
+                          "code": "testcode"
+                        },
+                        "complianceParameterType": "DateTimeListComplianceParameter"
+                      },
+                      "PropertyKeyListParameter": {
+                        "value": {
+                          "scope": "testscope",
+                          "code": "testcode"
+                        },
+                        "complianceParameterType": "PropertyKeyListComplianceParameter"
+                      },
+                      "PortfolioIdListParameter": {
+                        "value": {
+                          "scope": "testscope",
+                          "code": "testcode"
+                        },
+                        "complianceParameterType": "PortfolioIdListComplianceParameter"
+                      },
+                      "PortfolioGroupIdListParameter": {
+                        "value": {
+                          "scope": "testscope",
+                          "code": "testcode"
+                        },
+                        "complianceParameterType": "PortfolioGroupIdListComplianceParameter"
+                      }
+                    },
+                    "properties": {
+                      "Compliance/MyScope/SomeRuleProperty": {
+                        "key": "Compliance/MyScope/SomeRuleProperty",
+                        "value": {
+                          "labelValue": "XYZ000034567"
+                        }
+                      }
+                    }
                   }
                 },
-                "properties": {
-                  "Compliance/MyScope/SomeRuleProperty": {
-                    "key": "Compliance/MyScope/SomeRuleProperty",
-                    "value": {
-                      "labelValue": "XYZ000034567"
+                "PortfolioLuidMetricCheck example": {
+                  "value": {
+                    "id": {
+                      "scope": "live",
+                      "code": "exampleRule"
+                    },
+                    "name": "A friendly name.",
+                    "description": "A friendly description.",
+                    "active": true,
+                    "templateId": {
+                      "scope": "system",
+                      "code": "PortfolioLuidMetricCheck"
+                    },
+                    "variation": "standard",
+                    "portfolioGroupId": {
+                      "scope": "examples",
+                      "code": "examplePortfolioGroup"
+                    },
+                    "parameters": {
+                      "UpperBound": {
+                        "value": 15,
+                        "complianceParameterType": "DecimalComplianceParameter"
+                      },
+                      "LowerBound": {
+                        "value": 0,
+                        "complianceParameterType": "DecimalComplianceParameter"
+                      },
+                      "UpperWarning": {
+                        "value": 15,
+                        "complianceParameterType": "DecimalComplianceParameter"
+                      },
+                      "LowerWarning": {
+                        "value": 0,
+                        "complianceParameterType": "DecimalComplianceParameter"
+                      },
+                      "Metric": {
+                        "value": "Valuation/PvInReportCcy",
+                        "complianceParameterType": "AddressKeyComplianceParameter"
+                      },
+                      "Excludes": {
+                        "value": {
+                          "scope": "testscope",
+                          "code": "testcode"
+                        },
+                        "complianceParameterType": "PortfolioIdListComplianceParameter"
+                      }
+                    },
+                    "properties": {
+                      "Compliance/MyScope/SomeRuleProperty": {
+                        "key": "Compliance/MyScope/SomeRuleProperty",
+                        "value": {
+                          "labelValue": "XYZ000034567"
+                        }
+                      }
                     }
                   }
                 }
@@ -6415,57 +6799,185 @@
               "schema": {
                 "$ref": "#/components/schemas/UpsertComplianceRuleRequest"
               },
-              "example": {
-                "id": {
-                  "scope": "live",
-                  "code": "exampleRule"
-                },
-                "name": "A friendly name.",
-                "description": "A friendly description.",
-                "active": true,
-                "templateId": {
-                  "scope": "system",
-                  "code": "PortfolioLuidMetricCheck"
-                },
-                "variation": "standard",
-                "portfolioGroupId": {
-                  "scope": "examples",
-                  "code": "examplePortfolioGroup"
-                },
-                "parameters": {
-                  "UpperBound": {
-                    "value": 15,
-                    "parameterType": "DecimalComplianceParameter"
-                  },
-                  "LowerBound": {
-                    "value": 0,
-                    "parameterType": "DecimalComplianceParameter"
-                  },
-                  "UpperWarning": {
-                    "value": 15,
-                    "parameterType": "DecimalComplianceParameter"
-                  },
-                  "LowerWarning": {
-                    "value": 0,
-                    "parameterType": "DecimalComplianceParameter"
-                  },
-                  "Metric": {
-                    "value": "Valuation/PvInReportCcy",
-                    "parameterType": "AddressKeyComplianceParameter"
-                  },
-                  "Excludes": {
-                    "value": {
-                      "scope": "testscope",
-                      "code": "testcode"
+              "examples": {
+                "Example with all parameter types": {
+                  "value": {
+                    "id": {
+                      "scope": "live",
+                      "code": "exampleRule"
                     },
-                    "parameterType": "PortfolioIdListComplianceParameter"
+                    "name": "A friendly name.",
+                    "description": "A friendly description.",
+                    "active": true,
+                    "templateId": {
+                      "scope": "system",
+                      "code": "PortfolioLuidMetricCheck"
+                    },
+                    "variation": "standard",
+                    "portfolioGroupId": {
+                      "scope": "examples",
+                      "code": "examplePortfolioGroup"
+                    },
+                    "parameters": {
+                      "BoolParameter": {
+                        "value": true,
+                        "complianceParameterType": "BoolComplianceParameter"
+                      },
+                      "DecimalParameter": {
+                        "value": 0,
+                        "complianceParameterType": "DecimalComplianceParameter"
+                      },
+                      "StringParameter": {
+                        "value": "An example string parameter",
+                        "complianceParameterType": "StringComplianceParameter"
+                      },
+                      "DateTimeParameter": {
+                        "value": "2023-06-06T00:00:00.0000000+00:00",
+                        "complianceParameterType": "DateTimeComplianceParameter"
+                      },
+                      "PropertyKeyParameter": {
+                        "value": "Compliance/live/RuleGroup",
+                        "complianceParameterType": "PropertyKeyComplianceParameter"
+                      },
+                      "AddressKeyParameter": {
+                        "value": "Valuation/PvInReportCcy",
+                        "complianceParameterType": "AddressKeyComplianceParameter"
+                      },
+                      "PortfolioIdParameter": {
+                        "value": {
+                          "scope": "testscope",
+                          "code": "testcode"
+                        },
+                        "complianceParameterType": "PortfolioIdComplianceParameter"
+                      },
+                      "PortfolioGroupIdParameter": {
+                        "value": {
+                          "scope": "testscope",
+                          "code": "testcode"
+                        },
+                        "complianceParameterType": "PortfolioGroupIdComplianceParameter"
+                      },
+                      "DecimalListParameter": {
+                        "value": {
+                          "scope": "testscope",
+                          "code": "testcode"
+                        },
+                        "complianceParameterType": "DecimalListComplianceParameter"
+                      },
+                      "AddressKeyListParameter": {
+                        "value": {
+                          "scope": "testscope",
+                          "code": "testcode"
+                        },
+                        "complianceParameterType": "AddressKeyListComplianceParameter"
+                      },
+                      "BoolListParameter": {
+                        "value": {
+                          "scope": "testscope",
+                          "code": "testcode"
+                        },
+                        "complianceParameterType": "BoolListComplianceParameter"
+                      },
+                      "StringListParameter": {
+                        "value": {
+                          "scope": "testscope",
+                          "code": "testcode"
+                        },
+                        "complianceParameterType": "StringListComplianceParameter"
+                      },
+                      "DateTimeListParameter": {
+                        "value": {
+                          "scope": "testscope",
+                          "code": "testcode"
+                        },
+                        "complianceParameterType": "DateTimeListComplianceParameter"
+                      },
+                      "PropertyKeyListParameter": {
+                        "value": {
+                          "scope": "testscope",
+                          "code": "testcode"
+                        },
+                        "complianceParameterType": "PropertyKeyListComplianceParameter"
+                      },
+                      "PortfolioIdListParameter": {
+                        "value": {
+                          "scope": "testscope",
+                          "code": "testcode"
+                        },
+                        "complianceParameterType": "PortfolioIdListComplianceParameter"
+                      },
+                      "PortfolioGroupIdListParameter": {
+                        "value": {
+                          "scope": "testscope",
+                          "code": "testcode"
+                        },
+                        "complianceParameterType": "PortfolioGroupIdListComplianceParameter"
+                      }
+                    },
+                    "properties": {
+                      "Compliance/MyScope/SomeRuleProperty": {
+                        "key": "Compliance/MyScope/SomeRuleProperty",
+                        "value": {
+                          "labelValue": "XYZ000034567"
+                        }
+                      }
+                    }
                   }
                 },
-                "properties": {
-                  "Compliance/MyScope/SomeRuleProperty": {
-                    "key": "Compliance/MyScope/SomeRuleProperty",
-                    "value": {
-                      "labelValue": "XYZ000034567"
+                "PortfolioLuidMetricCheck example": {
+                  "value": {
+                    "id": {
+                      "scope": "live",
+                      "code": "exampleRule"
+                    },
+                    "name": "A friendly name.",
+                    "description": "A friendly description.",
+                    "active": true,
+                    "templateId": {
+                      "scope": "system",
+                      "code": "PortfolioLuidMetricCheck"
+                    },
+                    "variation": "standard",
+                    "portfolioGroupId": {
+                      "scope": "examples",
+                      "code": "examplePortfolioGroup"
+                    },
+                    "parameters": {
+                      "UpperBound": {
+                        "value": 15,
+                        "complianceParameterType": "DecimalComplianceParameter"
+                      },
+                      "LowerBound": {
+                        "value": 0,
+                        "complianceParameterType": "DecimalComplianceParameter"
+                      },
+                      "UpperWarning": {
+                        "value": 15,
+                        "complianceParameterType": "DecimalComplianceParameter"
+                      },
+                      "LowerWarning": {
+                        "value": 0,
+                        "complianceParameterType": "DecimalComplianceParameter"
+                      },
+                      "Metric": {
+                        "value": "Valuation/PvInReportCcy",
+                        "complianceParameterType": "AddressKeyComplianceParameter"
+                      },
+                      "Excludes": {
+                        "value": {
+                          "scope": "testscope",
+                          "code": "testcode"
+                        },
+                        "complianceParameterType": "PortfolioIdListComplianceParameter"
+                      }
+                    },
+                    "properties": {
+                      "Compliance/MyScope/SomeRuleProperty": {
+                        "key": "Compliance/MyScope/SomeRuleProperty",
+                        "value": {
+                          "labelValue": "XYZ000034567"
+                        }
+                      }
                     }
                   }
                 }
@@ -6501,7 +7013,7 @@
                   "parameters": {
                     "UpperBound": {
                       "value": 30,
-                      "parameterType": "DecimalComplianceParameter"
+                      "complianceParameterType": "DecimalComplianceParameter"
                     }
                   },
                   "properties": {
@@ -6548,7 +7060,7 @@
                   "parameters": {
                     "UpperBound": {
                       "value": 30,
-                      "parameterType": "DecimalComplianceParameter"
+                      "complianceParameterType": "DecimalComplianceParameter"
                     }
                   },
                   "properties": {
@@ -6595,7 +7107,7 @@
                   "parameters": {
                     "UpperBound": {
                       "value": 30,
-                      "parameterType": "DecimalComplianceParameter"
+                      "complianceParameterType": "DecimalComplianceParameter"
                     }
                   },
                   "properties": {
@@ -6754,7 +7266,7 @@
                       "parameters": {
                         "UpperBound": {
                           "value": 30,
-                          "parameterType": "DecimalComplianceParameter"
+                          "complianceParameterType": "DecimalComplianceParameter"
                         }
                       },
                       "properties": {
@@ -6807,7 +7319,7 @@
                       "parameters": {
                         "UpperBound": {
                           "value": 30,
-                          "parameterType": "DecimalComplianceParameter"
+                          "complianceParameterType": "DecimalComplianceParameter"
                         }
                       },
                       "properties": {
@@ -6860,7 +7372,7 @@
                       "parameters": {
                         "UpperBound": {
                           "value": 30,
-                          "parameterType": "DecimalComplianceParameter"
+                          "complianceParameterType": "DecimalComplianceParameter"
                         }
                       },
                       "properties": {
@@ -7013,7 +7525,7 @@
                   "parameters": {
                     "UpperBound": {
                       "value": 30,
-                      "parameterType": "DecimalComplianceParameter"
+                      "complianceParameterType": "DecimalComplianceParameter"
                     }
                   },
                   "properties": {
@@ -7060,7 +7572,7 @@
                   "parameters": {
                     "UpperBound": {
                       "value": 30,
-                      "parameterType": "DecimalComplianceParameter"
+                      "complianceParameterType": "DecimalComplianceParameter"
                     }
                   },
                   "properties": {
@@ -7107,7 +7619,7 @@
                   "parameters": {
                     "UpperBound": {
                       "value": 30,
-                      "parameterType": "DecimalComplianceParameter"
+                      "complianceParameterType": "DecimalComplianceParameter"
                     }
                   },
                   "properties": {
@@ -69749,6 +70261,49 @@
         },
         "additionalProperties": false
       },
+      "AddressKeyComplianceParameter": {
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/ComplianceParameter"
+          },
+          {
+            "required": [
+              "complianceParameterType",
+              "value"
+            ],
+            "type": "object",
+            "properties": {
+              "value": {
+                "pattern": "^[a-zA-Z0-9\\-_]+$",
+                "type": "string",
+                "description": "The key that uniquely identifies a queryable address in Lusid."
+              },
+              "complianceParameterType": {
+                "enum": [
+                  "BoolComplianceParameter",
+                  "StringComplianceParameter",
+                  "DecimalComplianceParameter",
+                  "DateTimeComplianceParameter",
+                  "PropertyKeyComplianceParameter",
+                  "AddressKeyComplianceParameter",
+                  "PortfolioIdComplianceParameter",
+                  "PortfolioGroupIdComplianceParameter",
+                  "StringListComplianceParameter",
+                  "BoolListComplianceParameter",
+                  "DateTimeListComplianceParameter",
+                  "DecimalListComplianceParameter",
+                  "PropertyKeyListComplianceParameter",
+                  "AddressKeyListComplianceParameter",
+                  "PortfolioIdListComplianceParameter",
+                  "PortfolioGroupIdListComplianceParameter"
+                ],
+                "type": "string",
+                "description": "The parameter type. The available values are: BoolComplianceParameter, StringComplianceParameter, DecimalComplianceParameter, DateTimeComplianceParameter, PropertyKeyComplianceParameter, AddressKeyComplianceParameter, PortfolioIdComplianceParameter, PortfolioGroupIdComplianceParameter, StringListComplianceParameter, BoolListComplianceParameter, DateTimeListComplianceParameter, DecimalListComplianceParameter, PropertyKeyListComplianceParameter, AddressKeyListComplianceParameter, PortfolioIdListComplianceParameter, PortfolioGroupIdListComplianceParameter"
+              }
+            }
+          }
+        ]
+      },
       "AddressKeyDefinition": {
         "required": [
           "addressKey",
@@ -69833,6 +70388,47 @@
                 ],
                 "type": "string",
                 "description": "The reference list values. The available values are: PortfolioGroupIdList, PortfolioIdList, AddressKeyList, StringList, InstrumentList, DecimalList"
+              }
+            }
+          }
+        ]
+      },
+      "AddressKeyListComplianceParameter": {
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/ComplianceParameter"
+          },
+          {
+            "required": [
+              "complianceParameterType",
+              "value"
+            ],
+            "type": "object",
+            "properties": {
+              "value": {
+                "$ref": "#/components/schemas/ResourceId"
+              },
+              "complianceParameterType": {
+                "enum": [
+                  "BoolComplianceParameter",
+                  "StringComplianceParameter",
+                  "DecimalComplianceParameter",
+                  "DateTimeComplianceParameter",
+                  "PropertyKeyComplianceParameter",
+                  "AddressKeyComplianceParameter",
+                  "PortfolioIdComplianceParameter",
+                  "PortfolioGroupIdComplianceParameter",
+                  "StringListComplianceParameter",
+                  "BoolListComplianceParameter",
+                  "DateTimeListComplianceParameter",
+                  "DecimalListComplianceParameter",
+                  "PropertyKeyListComplianceParameter",
+                  "AddressKeyListComplianceParameter",
+                  "PortfolioIdListComplianceParameter",
+                  "PortfolioGroupIdListComplianceParameter"
+                ],
+                "type": "string",
+                "description": "The parameter type. The available values are: BoolComplianceParameter, StringComplianceParameter, DecimalComplianceParameter, DateTimeComplianceParameter, PropertyKeyComplianceParameter, AddressKeyComplianceParameter, PortfolioIdComplianceParameter, PortfolioGroupIdComplianceParameter, StringListComplianceParameter, BoolListComplianceParameter, DateTimeListComplianceParameter, DecimalListComplianceParameter, PropertyKeyListComplianceParameter, AddressKeyListComplianceParameter, PortfolioIdListComplianceParameter, PortfolioGroupIdListComplianceParameter"
               }
             }
           }
@@ -71430,6 +72026,88 @@
         ],
         "description": "Indicates when an issuer has defaulted on an obligation due to technical default, missed payments, or bankruptcy filing."
       },
+      "BoolComplianceParameter": {
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/ComplianceParameter"
+          },
+          {
+            "required": [
+              "complianceParameterType",
+              "value"
+            ],
+            "type": "object",
+            "properties": {
+              "value": {
+                "type": "boolean"
+              },
+              "complianceParameterType": {
+                "enum": [
+                  "BoolComplianceParameter",
+                  "StringComplianceParameter",
+                  "DecimalComplianceParameter",
+                  "DateTimeComplianceParameter",
+                  "PropertyKeyComplianceParameter",
+                  "AddressKeyComplianceParameter",
+                  "PortfolioIdComplianceParameter",
+                  "PortfolioGroupIdComplianceParameter",
+                  "StringListComplianceParameter",
+                  "BoolListComplianceParameter",
+                  "DateTimeListComplianceParameter",
+                  "DecimalListComplianceParameter",
+                  "PropertyKeyListComplianceParameter",
+                  "AddressKeyListComplianceParameter",
+                  "PortfolioIdListComplianceParameter",
+                  "PortfolioGroupIdListComplianceParameter"
+                ],
+                "type": "string",
+                "description": "The parameter type. The available values are: BoolComplianceParameter, StringComplianceParameter, DecimalComplianceParameter, DateTimeComplianceParameter, PropertyKeyComplianceParameter, AddressKeyComplianceParameter, PortfolioIdComplianceParameter, PortfolioGroupIdComplianceParameter, StringListComplianceParameter, BoolListComplianceParameter, DateTimeListComplianceParameter, DecimalListComplianceParameter, PropertyKeyListComplianceParameter, AddressKeyListComplianceParameter, PortfolioIdListComplianceParameter, PortfolioGroupIdListComplianceParameter"
+              }
+            }
+          }
+        ]
+      },
+      "BoolListComplianceParameter": {
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/ComplianceParameter"
+          },
+          {
+            "required": [
+              "complianceParameterType",
+              "value"
+            ],
+            "type": "object",
+            "properties": {
+              "value": {
+                "$ref": "#/components/schemas/ResourceId"
+              },
+              "complianceParameterType": {
+                "enum": [
+                  "BoolComplianceParameter",
+                  "StringComplianceParameter",
+                  "DecimalComplianceParameter",
+                  "DateTimeComplianceParameter",
+                  "PropertyKeyComplianceParameter",
+                  "AddressKeyComplianceParameter",
+                  "PortfolioIdComplianceParameter",
+                  "PortfolioGroupIdComplianceParameter",
+                  "StringListComplianceParameter",
+                  "BoolListComplianceParameter",
+                  "DateTimeListComplianceParameter",
+                  "DecimalListComplianceParameter",
+                  "PropertyKeyListComplianceParameter",
+                  "AddressKeyListComplianceParameter",
+                  "PortfolioIdListComplianceParameter",
+                  "PortfolioGroupIdListComplianceParameter"
+                ],
+                "type": "string",
+                "description": "The parameter type. The available values are: BoolComplianceParameter, StringComplianceParameter, DecimalComplianceParameter, DateTimeComplianceParameter, PropertyKeyComplianceParameter, AddressKeyComplianceParameter, PortfolioIdComplianceParameter, PortfolioGroupIdComplianceParameter, StringListComplianceParameter, BoolListComplianceParameter, DateTimeListComplianceParameter, DecimalListComplianceParameter, PropertyKeyListComplianceParameter, AddressKeyListComplianceParameter, PortfolioIdListComplianceParameter, PortfolioGroupIdListComplianceParameter"
+              }
+            }
+          }
+        ]
+      },
       "Calendar": {
         "required": [
           "id",
@@ -72703,11 +73381,11 @@
       },
       "ComplianceParameter": {
         "required": [
-          "parameterType"
+          "complianceParameterType"
         ],
         "type": "object",
         "properties": {
-          "parameterType": {
+          "complianceParameterType": {
             "enum": [
               "BoolComplianceParameter",
               "StringComplianceParameter",
@@ -72730,7 +73408,10 @@
             "description": "The parameter type. The available values are: BoolComplianceParameter, StringComplianceParameter, DecimalComplianceParameter, DateTimeComplianceParameter, PropertyKeyComplianceParameter, AddressKeyComplianceParameter, PortfolioIdComplianceParameter, PortfolioGroupIdComplianceParameter, StringListComplianceParameter, BoolListComplianceParameter, DateTimeListComplianceParameter, DecimalListComplianceParameter, PropertyKeyListComplianceParameter, AddressKeyListComplianceParameter, PortfolioIdListComplianceParameter, PortfolioGroupIdListComplianceParameter"
           }
         },
-        "additionalProperties": false
+        "additionalProperties": false,
+        "discriminator": {
+          "propertyName": "complianceParameterType"
+        }
       },
       "ComplianceRuleBreakdown": {
         "required": [
@@ -75655,6 +76336,89 @@
         },
         "additionalProperties": false
       },
+      "DateTimeComplianceParameter": {
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/ComplianceParameter"
+          },
+          {
+            "required": [
+              "complianceParameterType",
+              "value"
+            ],
+            "type": "object",
+            "properties": {
+              "value": {
+                "type": "string",
+                "format": "date-time"
+              },
+              "complianceParameterType": {
+                "enum": [
+                  "BoolComplianceParameter",
+                  "StringComplianceParameter",
+                  "DecimalComplianceParameter",
+                  "DateTimeComplianceParameter",
+                  "PropertyKeyComplianceParameter",
+                  "AddressKeyComplianceParameter",
+                  "PortfolioIdComplianceParameter",
+                  "PortfolioGroupIdComplianceParameter",
+                  "StringListComplianceParameter",
+                  "BoolListComplianceParameter",
+                  "DateTimeListComplianceParameter",
+                  "DecimalListComplianceParameter",
+                  "PropertyKeyListComplianceParameter",
+                  "AddressKeyListComplianceParameter",
+                  "PortfolioIdListComplianceParameter",
+                  "PortfolioGroupIdListComplianceParameter"
+                ],
+                "type": "string",
+                "description": "The parameter type. The available values are: BoolComplianceParameter, StringComplianceParameter, DecimalComplianceParameter, DateTimeComplianceParameter, PropertyKeyComplianceParameter, AddressKeyComplianceParameter, PortfolioIdComplianceParameter, PortfolioGroupIdComplianceParameter, StringListComplianceParameter, BoolListComplianceParameter, DateTimeListComplianceParameter, DecimalListComplianceParameter, PropertyKeyListComplianceParameter, AddressKeyListComplianceParameter, PortfolioIdListComplianceParameter, PortfolioGroupIdListComplianceParameter"
+              }
+            }
+          }
+        ]
+      },
+      "DateTimeListComplianceParameter": {
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/ComplianceParameter"
+          },
+          {
+            "required": [
+              "complianceParameterType",
+              "value"
+            ],
+            "type": "object",
+            "properties": {
+              "value": {
+                "$ref": "#/components/schemas/ResourceId"
+              },
+              "complianceParameterType": {
+                "enum": [
+                  "BoolComplianceParameter",
+                  "StringComplianceParameter",
+                  "DecimalComplianceParameter",
+                  "DateTimeComplianceParameter",
+                  "PropertyKeyComplianceParameter",
+                  "AddressKeyComplianceParameter",
+                  "PortfolioIdComplianceParameter",
+                  "PortfolioGroupIdComplianceParameter",
+                  "StringListComplianceParameter",
+                  "BoolListComplianceParameter",
+                  "DateTimeListComplianceParameter",
+                  "DecimalListComplianceParameter",
+                  "PropertyKeyListComplianceParameter",
+                  "AddressKeyListComplianceParameter",
+                  "PortfolioIdListComplianceParameter",
+                  "PortfolioGroupIdListComplianceParameter"
+                ],
+                "type": "string",
+                "description": "The parameter type. The available values are: BoolComplianceParameter, StringComplianceParameter, DecimalComplianceParameter, DateTimeComplianceParameter, PropertyKeyComplianceParameter, AddressKeyComplianceParameter, PortfolioIdComplianceParameter, PortfolioGroupIdComplianceParameter, StringListComplianceParameter, BoolListComplianceParameter, DateTimeListComplianceParameter, DecimalListComplianceParameter, PropertyKeyListComplianceParameter, AddressKeyListComplianceParameter, PortfolioIdListComplianceParameter, PortfolioGroupIdListComplianceParameter"
+              }
+            }
+          }
+        ]
+      },
       "DayOfWeek": {
         "enum": [
           "Sunday",
@@ -75666,6 +76430,48 @@
           "Saturday"
         ],
         "type": "string"
+      },
+      "DecimalComplianceParameter": {
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/ComplianceParameter"
+          },
+          {
+            "required": [
+              "complianceParameterType",
+              "value"
+            ],
+            "type": "object",
+            "properties": {
+              "value": {
+                "type": "number",
+                "format": "double"
+              },
+              "complianceParameterType": {
+                "enum": [
+                  "BoolComplianceParameter",
+                  "StringComplianceParameter",
+                  "DecimalComplianceParameter",
+                  "DateTimeComplianceParameter",
+                  "PropertyKeyComplianceParameter",
+                  "AddressKeyComplianceParameter",
+                  "PortfolioIdComplianceParameter",
+                  "PortfolioGroupIdComplianceParameter",
+                  "StringListComplianceParameter",
+                  "BoolListComplianceParameter",
+                  "DateTimeListComplianceParameter",
+                  "DecimalListComplianceParameter",
+                  "PropertyKeyListComplianceParameter",
+                  "AddressKeyListComplianceParameter",
+                  "PortfolioIdListComplianceParameter",
+                  "PortfolioGroupIdListComplianceParameter"
+                ],
+                "type": "string",
+                "description": "The parameter type. The available values are: BoolComplianceParameter, StringComplianceParameter, DecimalComplianceParameter, DateTimeComplianceParameter, PropertyKeyComplianceParameter, AddressKeyComplianceParameter, PortfolioIdComplianceParameter, PortfolioGroupIdComplianceParameter, StringListComplianceParameter, BoolListComplianceParameter, DateTimeListComplianceParameter, DecimalListComplianceParameter, PropertyKeyListComplianceParameter, AddressKeyListComplianceParameter, PortfolioIdListComplianceParameter, PortfolioGroupIdListComplianceParameter"
+              }
+            }
+          }
+        ]
       },
       "DecimalList": {
         "allOf": [
@@ -75699,6 +76505,47 @@
                 ],
                 "type": "string",
                 "description": "The reference list values. The available values are: PortfolioGroupIdList, PortfolioIdList, AddressKeyList, StringList, InstrumentList, DecimalList"
+              }
+            }
+          }
+        ]
+      },
+      "DecimalListComplianceParameter": {
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/ComplianceParameter"
+          },
+          {
+            "required": [
+              "complianceParameterType",
+              "value"
+            ],
+            "type": "object",
+            "properties": {
+              "value": {
+                "$ref": "#/components/schemas/ResourceId"
+              },
+              "complianceParameterType": {
+                "enum": [
+                  "BoolComplianceParameter",
+                  "StringComplianceParameter",
+                  "DecimalComplianceParameter",
+                  "DateTimeComplianceParameter",
+                  "PropertyKeyComplianceParameter",
+                  "AddressKeyComplianceParameter",
+                  "PortfolioIdComplianceParameter",
+                  "PortfolioGroupIdComplianceParameter",
+                  "StringListComplianceParameter",
+                  "BoolListComplianceParameter",
+                  "DateTimeListComplianceParameter",
+                  "DecimalListComplianceParameter",
+                  "PropertyKeyListComplianceParameter",
+                  "AddressKeyListComplianceParameter",
+                  "PortfolioIdListComplianceParameter",
+                  "PortfolioGroupIdListComplianceParameter"
+                ],
+                "type": "string",
+                "description": "The parameter type. The available values are: BoolComplianceParameter, StringComplianceParameter, DecimalComplianceParameter, DateTimeComplianceParameter, PropertyKeyComplianceParameter, AddressKeyComplianceParameter, PortfolioIdComplianceParameter, PortfolioGroupIdComplianceParameter, StringListComplianceParameter, BoolListComplianceParameter, DateTimeListComplianceParameter, DecimalListComplianceParameter, PropertyKeyListComplianceParameter, AddressKeyListComplianceParameter, PortfolioIdListComplianceParameter, PortfolioGroupIdListComplianceParameter"
               }
             }
           }
@@ -85066,6 +85913,47 @@
         },
         "additionalProperties": false
       },
+      "PortfolioGroupIdComplianceParameter": {
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/ComplianceParameter"
+          },
+          {
+            "required": [
+              "complianceParameterType",
+              "value"
+            ],
+            "type": "object",
+            "properties": {
+              "value": {
+                "$ref": "#/components/schemas/ResourceId"
+              },
+              "complianceParameterType": {
+                "enum": [
+                  "BoolComplianceParameter",
+                  "StringComplianceParameter",
+                  "DecimalComplianceParameter",
+                  "DateTimeComplianceParameter",
+                  "PropertyKeyComplianceParameter",
+                  "AddressKeyComplianceParameter",
+                  "PortfolioIdComplianceParameter",
+                  "PortfolioGroupIdComplianceParameter",
+                  "StringListComplianceParameter",
+                  "BoolListComplianceParameter",
+                  "DateTimeListComplianceParameter",
+                  "DecimalListComplianceParameter",
+                  "PropertyKeyListComplianceParameter",
+                  "AddressKeyListComplianceParameter",
+                  "PortfolioIdListComplianceParameter",
+                  "PortfolioGroupIdListComplianceParameter"
+                ],
+                "type": "string",
+                "description": "The parameter type. The available values are: BoolComplianceParameter, StringComplianceParameter, DecimalComplianceParameter, DateTimeComplianceParameter, PropertyKeyComplianceParameter, AddressKeyComplianceParameter, PortfolioIdComplianceParameter, PortfolioGroupIdComplianceParameter, StringListComplianceParameter, BoolListComplianceParameter, DateTimeListComplianceParameter, DecimalListComplianceParameter, PropertyKeyListComplianceParameter, AddressKeyListComplianceParameter, PortfolioIdListComplianceParameter, PortfolioGroupIdListComplianceParameter"
+              }
+            }
+          }
+        ]
+      },
       "PortfolioGroupIdList": {
         "allOf": [
           {
@@ -85096,6 +85984,47 @@
                 ],
                 "type": "string",
                 "description": "The reference list values. The available values are: PortfolioGroupIdList, PortfolioIdList, AddressKeyList, StringList, InstrumentList, DecimalList"
+              }
+            }
+          }
+        ]
+      },
+      "PortfolioGroupIdListComplianceParameter": {
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/ComplianceParameter"
+          },
+          {
+            "required": [
+              "complianceParameterType",
+              "value"
+            ],
+            "type": "object",
+            "properties": {
+              "value": {
+                "$ref": "#/components/schemas/ResourceId"
+              },
+              "complianceParameterType": {
+                "enum": [
+                  "BoolComplianceParameter",
+                  "StringComplianceParameter",
+                  "DecimalComplianceParameter",
+                  "DateTimeComplianceParameter",
+                  "PropertyKeyComplianceParameter",
+                  "AddressKeyComplianceParameter",
+                  "PortfolioIdComplianceParameter",
+                  "PortfolioGroupIdComplianceParameter",
+                  "StringListComplianceParameter",
+                  "BoolListComplianceParameter",
+                  "DateTimeListComplianceParameter",
+                  "DecimalListComplianceParameter",
+                  "PropertyKeyListComplianceParameter",
+                  "AddressKeyListComplianceParameter",
+                  "PortfolioIdListComplianceParameter",
+                  "PortfolioGroupIdListComplianceParameter"
+                ],
+                "type": "string",
+                "description": "The parameter type. The available values are: BoolComplianceParameter, StringComplianceParameter, DecimalComplianceParameter, DateTimeComplianceParameter, PropertyKeyComplianceParameter, AddressKeyComplianceParameter, PortfolioIdComplianceParameter, PortfolioGroupIdComplianceParameter, StringListComplianceParameter, BoolListComplianceParameter, DateTimeListComplianceParameter, DecimalListComplianceParameter, PropertyKeyListComplianceParameter, AddressKeyListComplianceParameter, PortfolioIdListComplianceParameter, PortfolioGroupIdListComplianceParameter"
               }
             }
           }
@@ -85268,6 +86197,47 @@
         "additionalProperties": false,
         "description": "A list of holdings."
       },
+      "PortfolioIdComplianceParameter": {
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/ComplianceParameter"
+          },
+          {
+            "required": [
+              "complianceParameterType",
+              "value"
+            ],
+            "type": "object",
+            "properties": {
+              "value": {
+                "$ref": "#/components/schemas/ResourceId"
+              },
+              "complianceParameterType": {
+                "enum": [
+                  "BoolComplianceParameter",
+                  "StringComplianceParameter",
+                  "DecimalComplianceParameter",
+                  "DateTimeComplianceParameter",
+                  "PropertyKeyComplianceParameter",
+                  "AddressKeyComplianceParameter",
+                  "PortfolioIdComplianceParameter",
+                  "PortfolioGroupIdComplianceParameter",
+                  "StringListComplianceParameter",
+                  "BoolListComplianceParameter",
+                  "DateTimeListComplianceParameter",
+                  "DecimalListComplianceParameter",
+                  "PropertyKeyListComplianceParameter",
+                  "AddressKeyListComplianceParameter",
+                  "PortfolioIdListComplianceParameter",
+                  "PortfolioGroupIdListComplianceParameter"
+                ],
+                "type": "string",
+                "description": "The parameter type. The available values are: BoolComplianceParameter, StringComplianceParameter, DecimalComplianceParameter, DateTimeComplianceParameter, PropertyKeyComplianceParameter, AddressKeyComplianceParameter, PortfolioIdComplianceParameter, PortfolioGroupIdComplianceParameter, StringListComplianceParameter, BoolListComplianceParameter, DateTimeListComplianceParameter, DecimalListComplianceParameter, PropertyKeyListComplianceParameter, AddressKeyListComplianceParameter, PortfolioIdListComplianceParameter, PortfolioGroupIdListComplianceParameter"
+              }
+            }
+          }
+        ]
+      },
       "PortfolioIdList": {
         "allOf": [
           {
@@ -85298,6 +86268,47 @@
                 ],
                 "type": "string",
                 "description": "The reference list values. The available values are: PortfolioGroupIdList, PortfolioIdList, AddressKeyList, StringList, InstrumentList, DecimalList"
+              }
+            }
+          }
+        ]
+      },
+      "PortfolioIdListComplianceParameter": {
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/ComplianceParameter"
+          },
+          {
+            "required": [
+              "complianceParameterType",
+              "value"
+            ],
+            "type": "object",
+            "properties": {
+              "value": {
+                "$ref": "#/components/schemas/ResourceId"
+              },
+              "complianceParameterType": {
+                "enum": [
+                  "BoolComplianceParameter",
+                  "StringComplianceParameter",
+                  "DecimalComplianceParameter",
+                  "DateTimeComplianceParameter",
+                  "PropertyKeyComplianceParameter",
+                  "AddressKeyComplianceParameter",
+                  "PortfolioIdComplianceParameter",
+                  "PortfolioGroupIdComplianceParameter",
+                  "StringListComplianceParameter",
+                  "BoolListComplianceParameter",
+                  "DateTimeListComplianceParameter",
+                  "DecimalListComplianceParameter",
+                  "PropertyKeyListComplianceParameter",
+                  "AddressKeyListComplianceParameter",
+                  "PortfolioIdListComplianceParameter",
+                  "PortfolioGroupIdListComplianceParameter"
+                ],
+                "type": "string",
+                "description": "The parameter type. The available values are: BoolComplianceParameter, StringComplianceParameter, DecimalComplianceParameter, DateTimeComplianceParameter, PropertyKeyComplianceParameter, AddressKeyComplianceParameter, PortfolioIdComplianceParameter, PortfolioGroupIdComplianceParameter, StringListComplianceParameter, BoolListComplianceParameter, DateTimeListComplianceParameter, DecimalListComplianceParameter, PropertyKeyListComplianceParameter, AddressKeyListComplianceParameter, PortfolioIdListComplianceParameter, PortfolioGroupIdListComplianceParameter"
               }
             }
           }
@@ -86107,6 +87118,90 @@
           }
         },
         "additionalProperties": false
+      },
+      "PropertyKeyComplianceParameter": {
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/ComplianceParameter"
+          },
+          {
+            "required": [
+              "complianceParameterType",
+              "value"
+            ],
+            "type": "object",
+            "properties": {
+              "value": {
+                "pattern": "^[a-zA-Z0-9@+\\-_&]+$",
+                "type": "string",
+                "description": "The key that uniquely identifies the property. It has the format {domain}/{scope}/{code}."
+              },
+              "complianceParameterType": {
+                "enum": [
+                  "BoolComplianceParameter",
+                  "StringComplianceParameter",
+                  "DecimalComplianceParameter",
+                  "DateTimeComplianceParameter",
+                  "PropertyKeyComplianceParameter",
+                  "AddressKeyComplianceParameter",
+                  "PortfolioIdComplianceParameter",
+                  "PortfolioGroupIdComplianceParameter",
+                  "StringListComplianceParameter",
+                  "BoolListComplianceParameter",
+                  "DateTimeListComplianceParameter",
+                  "DecimalListComplianceParameter",
+                  "PropertyKeyListComplianceParameter",
+                  "AddressKeyListComplianceParameter",
+                  "PortfolioIdListComplianceParameter",
+                  "PortfolioGroupIdListComplianceParameter"
+                ],
+                "type": "string",
+                "description": "The parameter type. The available values are: BoolComplianceParameter, StringComplianceParameter, DecimalComplianceParameter, DateTimeComplianceParameter, PropertyKeyComplianceParameter, AddressKeyComplianceParameter, PortfolioIdComplianceParameter, PortfolioGroupIdComplianceParameter, StringListComplianceParameter, BoolListComplianceParameter, DateTimeListComplianceParameter, DecimalListComplianceParameter, PropertyKeyListComplianceParameter, AddressKeyListComplianceParameter, PortfolioIdListComplianceParameter, PortfolioGroupIdListComplianceParameter"
+              }
+            }
+          }
+        ]
+      },
+      "PropertyKeyListComplianceParameter": {
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/ComplianceParameter"
+          },
+          {
+            "required": [
+              "complianceParameterType",
+              "value"
+            ],
+            "type": "object",
+            "properties": {
+              "value": {
+                "$ref": "#/components/schemas/ResourceId"
+              },
+              "complianceParameterType": {
+                "enum": [
+                  "BoolComplianceParameter",
+                  "StringComplianceParameter",
+                  "DecimalComplianceParameter",
+                  "DateTimeComplianceParameter",
+                  "PropertyKeyComplianceParameter",
+                  "AddressKeyComplianceParameter",
+                  "PortfolioIdComplianceParameter",
+                  "PortfolioGroupIdComplianceParameter",
+                  "StringListComplianceParameter",
+                  "BoolListComplianceParameter",
+                  "DateTimeListComplianceParameter",
+                  "DecimalListComplianceParameter",
+                  "PropertyKeyListComplianceParameter",
+                  "AddressKeyListComplianceParameter",
+                  "PortfolioIdListComplianceParameter",
+                  "PortfolioGroupIdListComplianceParameter"
+                ],
+                "type": "string",
+                "description": "The parameter type. The available values are: BoolComplianceParameter, StringComplianceParameter, DecimalComplianceParameter, DateTimeComplianceParameter, PropertyKeyComplianceParameter, AddressKeyComplianceParameter, PortfolioIdComplianceParameter, PortfolioGroupIdComplianceParameter, StringListComplianceParameter, BoolListComplianceParameter, DateTimeListComplianceParameter, DecimalListComplianceParameter, PropertyKeyListComplianceParameter, AddressKeyListComplianceParameter, PortfolioIdListComplianceParameter, PortfolioGroupIdListComplianceParameter"
+              }
+            }
+          }
+        ]
       },
       "PropertySchema": {
         "type": "object",
@@ -90368,6 +91463,48 @@
         },
         "additionalProperties": false
       },
+      "StringComplianceParameter": {
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/ComplianceParameter"
+          },
+          {
+            "required": [
+              "complianceParameterType",
+              "value"
+            ],
+            "type": "object",
+            "properties": {
+              "value": {
+                "minLength": 1,
+                "type": "string"
+              },
+              "complianceParameterType": {
+                "enum": [
+                  "BoolComplianceParameter",
+                  "StringComplianceParameter",
+                  "DecimalComplianceParameter",
+                  "DateTimeComplianceParameter",
+                  "PropertyKeyComplianceParameter",
+                  "AddressKeyComplianceParameter",
+                  "PortfolioIdComplianceParameter",
+                  "PortfolioGroupIdComplianceParameter",
+                  "StringListComplianceParameter",
+                  "BoolListComplianceParameter",
+                  "DateTimeListComplianceParameter",
+                  "DecimalListComplianceParameter",
+                  "PropertyKeyListComplianceParameter",
+                  "AddressKeyListComplianceParameter",
+                  "PortfolioIdListComplianceParameter",
+                  "PortfolioGroupIdListComplianceParameter"
+                ],
+                "type": "string",
+                "description": "The parameter type. The available values are: BoolComplianceParameter, StringComplianceParameter, DecimalComplianceParameter, DateTimeComplianceParameter, PropertyKeyComplianceParameter, AddressKeyComplianceParameter, PortfolioIdComplianceParameter, PortfolioGroupIdComplianceParameter, StringListComplianceParameter, BoolListComplianceParameter, DateTimeListComplianceParameter, DecimalListComplianceParameter, PropertyKeyListComplianceParameter, AddressKeyListComplianceParameter, PortfolioIdListComplianceParameter, PortfolioGroupIdListComplianceParameter"
+              }
+            }
+          }
+        ]
+      },
       "StringList": {
         "allOf": [
           {
@@ -90399,6 +91536,47 @@
                 ],
                 "type": "string",
                 "description": "The reference list values. The available values are: PortfolioGroupIdList, PortfolioIdList, AddressKeyList, StringList, InstrumentList, DecimalList"
+              }
+            }
+          }
+        ]
+      },
+      "StringListComplianceParameter": {
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/ComplianceParameter"
+          },
+          {
+            "required": [
+              "complianceParameterType",
+              "value"
+            ],
+            "type": "object",
+            "properties": {
+              "value": {
+                "$ref": "#/components/schemas/ResourceId"
+              },
+              "complianceParameterType": {
+                "enum": [
+                  "BoolComplianceParameter",
+                  "StringComplianceParameter",
+                  "DecimalComplianceParameter",
+                  "DateTimeComplianceParameter",
+                  "PropertyKeyComplianceParameter",
+                  "AddressKeyComplianceParameter",
+                  "PortfolioIdComplianceParameter",
+                  "PortfolioGroupIdComplianceParameter",
+                  "StringListComplianceParameter",
+                  "BoolListComplianceParameter",
+                  "DateTimeListComplianceParameter",
+                  "DecimalListComplianceParameter",
+                  "PropertyKeyListComplianceParameter",
+                  "AddressKeyListComplianceParameter",
+                  "PortfolioIdListComplianceParameter",
+                  "PortfolioGroupIdListComplianceParameter"
+                ],
+                "type": "string",
+                "description": "The parameter type. The available values are: BoolComplianceParameter, StringComplianceParameter, DecimalComplianceParameter, DateTimeComplianceParameter, PropertyKeyComplianceParameter, AddressKeyComplianceParameter, PortfolioIdComplianceParameter, PortfolioGroupIdComplianceParameter, StringListComplianceParameter, BoolListComplianceParameter, DateTimeListComplianceParameter, DecimalListComplianceParameter, PropertyKeyListComplianceParameter, AddressKeyListComplianceParameter, PortfolioIdListComplianceParameter, PortfolioGroupIdListComplianceParameter"
               }
             }
           }
