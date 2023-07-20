@@ -9,7 +9,7 @@
       "url": "https://www.finbourne.com",
       "email": "info@finbourne.com"
     },
-    "version": "1.0.363",
+    "version": "1.0.364",
     "x-logo": {
       "url": "https://www.lusid.com/app/assets/logo_white.png",
       "backgroundColor": "#415464"
@@ -8311,14 +8311,12 @@
                             {
                               "name": "Param1Name",
                               "description": "Parameter 1 Description",
-                              "type": "string",
-                              "isCheckingParameter": true
+                              "type": "string"
                             },
                             {
                               "name": "Param2Name",
                               "description": "Parameter 2 Description",
-                              "type": "addressKey",
-                              "isCheckingParameter": false
+                              "type": "addressKey"
                             }
                           ],
                           "properties": {
@@ -8369,14 +8367,12 @@
                             {
                               "name": "Param1Name",
                               "description": "Parameter 1 Description",
-                              "type": "string",
-                              "isCheckingParameter": true
+                              "type": "string"
                             },
                             {
                               "name": "Param2Name",
                               "description": "Parameter 2 Description",
-                              "type": "addressKey",
-                              "isCheckingParameter": false
+                              "type": "addressKey"
                             }
                           ],
                           "properties": {
@@ -8427,14 +8423,12 @@
                             {
                               "name": "Param1Name",
                               "description": "Parameter 1 Description",
-                              "type": "string",
-                              "isCheckingParameter": true
+                              "type": "string"
                             },
                             {
                               "name": "Param2Name",
                               "description": "Parameter 2 Description",
-                              "type": "addressKey",
-                              "isCheckingParameter": false
+                              "type": "addressKey"
                             }
                           ],
                           "properties": {
@@ -8572,14 +8566,12 @@
                         {
                           "name": "Param1Name",
                           "description": "Parameter 1 Description",
-                          "type": "string",
-                          "isCheckingParameter": true
+                          "type": "string"
                         },
                         {
                           "name": "Param2Name",
                           "description": "Parameter 2 Description",
-                          "type": "addressKey",
-                          "isCheckingParameter": false
+                          "type": "addressKey"
                         }
                       ],
                       "properties": {
@@ -8624,14 +8616,12 @@
                         {
                           "name": "Param1Name",
                           "description": "Parameter 1 Description",
-                          "type": "string",
-                          "isCheckingParameter": true
+                          "type": "string"
                         },
                         {
                           "name": "Param2Name",
                           "description": "Parameter 2 Description",
-                          "type": "addressKey",
-                          "isCheckingParameter": false
+                          "type": "addressKey"
                         }
                       ],
                       "properties": {
@@ -8676,14 +8666,12 @@
                         {
                           "name": "Param1Name",
                           "description": "Parameter 1 Description",
-                          "type": "string",
-                          "isCheckingParameter": true
+                          "type": "string"
                         },
                         {
                           "name": "Param2Name",
                           "description": "Parameter 2 Description",
-                          "type": "addressKey",
-                          "isCheckingParameter": false
+                          "type": "addressKey"
                         }
                       ],
                       "properties": {
@@ -73671,7 +73659,6 @@
       "ComplianceTemplateParameter": {
         "required": [
           "description",
-          "isCheckingParameter",
           "name",
           "type"
         ],
@@ -73691,10 +73678,6 @@
             "minLength": 1,
             "type": "string",
             "description": "The type for the required Compliance Template Parameter"
-          },
-          "isCheckingParameter": {
-            "type": "boolean",
-            "description": "Indicates whether this is the Compliance Template Parameter that will be used in the final check process"
           }
         },
         "additionalProperties": false
