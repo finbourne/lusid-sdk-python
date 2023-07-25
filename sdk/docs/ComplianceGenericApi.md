@@ -1,6 +1,6 @@
 # lusid.ComplianceGenericApi
 
-All URIs are relative to *https://fbn-prd.lusid.com/api*
+All URIs are relative to *https://www.lusid.com/api*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
@@ -9,6 +9,7 @@ Method | HTTP request | Description
 [**get_compliance_run_summary**](ComplianceGenericApi.md#get_compliance_run_summary) | **GET** /api/compliance/generic/runs/summary/{scope}/{code} | [EARLY ACCESS] GetComplianceRunSummary: Get compliance summary results.
 [**get_compliance_template**](ComplianceGenericApi.md#get_compliance_template) | **GET** /api/compliance/templates/{scope}/{code} | [EARLY ACCESS] GetComplianceTemplate: Get the requested compliance template.
 [**list_compliance_rules2**](ComplianceGenericApi.md#list_compliance_rules2) | **GET** /api/compliance/generic/rules | [EARLY ACCESS] ListComplianceRules2: List compliance rules.
+[**list_compliance_runs**](ComplianceGenericApi.md#list_compliance_runs) | **GET** /api/compliance/generic/runs | [EARLY ACCESS] ListComplianceRuns: List historical Compliance RunIds
 [**list_compliance_templates**](ComplianceGenericApi.md#list_compliance_templates) | **GET** /api/compliance/templates | [EARLY ACCESS] ListComplianceTemplates: Get a specific compliance template
 [**run_generic_compliance**](ComplianceGenericApi.md#run_generic_compliance) | **POST** /api/compliance/generic/runs | [EARLY ACCESS] RunGenericCompliance: Kick off the compliance check process
 [**upsert_compliance_rule**](ComplianceGenericApi.md#upsert_compliance_rule) | **POST** /api/compliance/generic/rules | [EARLY ACCESS] UpsertComplianceRule: Upsert a compliance rule.
@@ -30,10 +31,10 @@ import time
 import lusid
 from lusid.rest import ApiException
 from pprint import pprint
-# Defining the host is optional and defaults to https://fbn-prd.lusid.com/api
+# Defining the host is optional and defaults to https://www.lusid.com/api
 # See configuration.py for a list of all supported configuration parameters.
 configuration = lusid.Configuration(
-    host = "https://fbn-prd.lusid.com/api"
+    host = "https://www.lusid.com/api"
 )
 
 # The client must configure the authentication and authorization parameters
@@ -43,7 +44,7 @@ configuration = lusid.Configuration(
 
 # Configure OAuth2 access token for authorization: oauth2
 configuration = lusid.Configuration(
-    host = "https://fbn-prd.lusid.com/api"
+    host = "https://www.lusid.com/api"
 )
 configuration.access_token = 'YOUR_ACCESS_TOKEN'
 
@@ -107,10 +108,10 @@ import time
 import lusid
 from lusid.rest import ApiException
 from pprint import pprint
-# Defining the host is optional and defaults to https://fbn-prd.lusid.com/api
+# Defining the host is optional and defaults to https://www.lusid.com/api
 # See configuration.py for a list of all supported configuration parameters.
 configuration = lusid.Configuration(
-    host = "https://fbn-prd.lusid.com/api"
+    host = "https://www.lusid.com/api"
 )
 
 # The client must configure the authentication and authorization parameters
@@ -120,7 +121,7 @@ configuration = lusid.Configuration(
 
 # Configure OAuth2 access token for authorization: oauth2
 configuration = lusid.Configuration(
-    host = "https://fbn-prd.lusid.com/api"
+    host = "https://www.lusid.com/api"
 )
 configuration.access_token = 'YOUR_ACCESS_TOKEN'
 
@@ -188,10 +189,10 @@ import time
 import lusid
 from lusid.rest import ApiException
 from pprint import pprint
-# Defining the host is optional and defaults to https://fbn-prd.lusid.com/api
+# Defining the host is optional and defaults to https://www.lusid.com/api
 # See configuration.py for a list of all supported configuration parameters.
 configuration = lusid.Configuration(
-    host = "https://fbn-prd.lusid.com/api"
+    host = "https://www.lusid.com/api"
 )
 
 # The client must configure the authentication and authorization parameters
@@ -201,7 +202,7 @@ configuration = lusid.Configuration(
 
 # Configure OAuth2 access token for authorization: oauth2
 configuration = lusid.Configuration(
-    host = "https://fbn-prd.lusid.com/api"
+    host = "https://www.lusid.com/api"
 )
 configuration.access_token = 'YOUR_ACCESS_TOKEN'
 
@@ -265,10 +266,10 @@ import time
 import lusid
 from lusid.rest import ApiException
 from pprint import pprint
-# Defining the host is optional and defaults to https://fbn-prd.lusid.com/api
+# Defining the host is optional and defaults to https://www.lusid.com/api
 # See configuration.py for a list of all supported configuration parameters.
 configuration = lusid.Configuration(
-    host = "https://fbn-prd.lusid.com/api"
+    host = "https://www.lusid.com/api"
 )
 
 # The client must configure the authentication and authorization parameters
@@ -278,7 +279,7 @@ configuration = lusid.Configuration(
 
 # Configure OAuth2 access token for authorization: oauth2
 configuration = lusid.Configuration(
-    host = "https://fbn-prd.lusid.com/api"
+    host = "https://www.lusid.com/api"
 )
 configuration.access_token = 'YOUR_ACCESS_TOKEN'
 
@@ -344,10 +345,10 @@ import time
 import lusid
 from lusid.rest import ApiException
 from pprint import pprint
-# Defining the host is optional and defaults to https://fbn-prd.lusid.com/api
+# Defining the host is optional and defaults to https://www.lusid.com/api
 # See configuration.py for a list of all supported configuration parameters.
 configuration = lusid.Configuration(
-    host = "https://fbn-prd.lusid.com/api"
+    host = "https://www.lusid.com/api"
 )
 
 # The client must configure the authentication and authorization parameters
@@ -357,7 +358,7 @@ configuration = lusid.Configuration(
 
 # Configure OAuth2 access token for authorization: oauth2
 configuration = lusid.Configuration(
-    host = "https://fbn-prd.lusid.com/api"
+    host = "https://www.lusid.com/api"
 )
 configuration.access_token = 'YOUR_ACCESS_TOKEN'
 
@@ -411,6 +412,91 @@ Name | Type | Description  | Notes
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
+# **list_compliance_runs**
+> PagedResourceListOfComplianceRunInfoV2 list_compliance_runs(as_at=as_at, page=page, start=start, limit=limit, filter=filter, sort_by=sort_by)
+
+[EARLY ACCESS] ListComplianceRuns: List historical Compliance RunIds
+
+Lists out all RunIds of prior compliance runs.
+
+### Example
+
+* OAuth Authentication (oauth2):
+```python
+from __future__ import print_function
+import time
+import lusid
+from lusid.rest import ApiException
+from pprint import pprint
+# Defining the host is optional and defaults to https://www.lusid.com/api
+# See configuration.py for a list of all supported configuration parameters.
+configuration = lusid.Configuration(
+    host = "https://www.lusid.com/api"
+)
+
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
+
+# Configure OAuth2 access token for authorization: oauth2
+configuration = lusid.Configuration(
+    host = "https://www.lusid.com/api"
+)
+configuration.access_token = 'YOUR_ACCESS_TOKEN'
+
+# Enter a context with an instance of the API client
+with lusid.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = lusid.ComplianceGenericApi(api_client)
+    as_at = '2013-10-20T19:20:30+01:00' # datetime | Optional. The time at which to get results from. Default : latest (optional)
+page = 'page_example' # str | Optional. The pagination token to use to continue listing compliance runs from a previous call to list compliance runs.              This value is returned from the previous call. If a pagination token is provided the sortBy, filter, and asAt fields              must not have changed since the original request. Also, if set, a start value cannot be provided. (optional)
+start = 56 # int | Optional. When paginating, skip this number of results. (optional)
+limit = 56 # int | Optional. When paginating, limit the number of returned results to this many. (optional)
+filter = 'filter_example' # str | Optional. Expression to filter the result set. Read more about filtering results from LUSID here https://support.lusid.com/filtering-results-from-lusid. (optional)
+sort_by = ['sort_by_example'] # list[str] | Optional. A list of field names to sort by, each suffixed by \"ASC\" or \"DESC\" (optional)
+
+    try:
+        # [EARLY ACCESS] ListComplianceRuns: List historical Compliance RunIds
+        api_response = api_instance.list_compliance_runs(as_at=as_at, page=page, start=start, limit=limit, filter=filter, sort_by=sort_by)
+        pprint(api_response)
+    except ApiException as e:
+        print("Exception when calling ComplianceGenericApi->list_compliance_runs: %s\n" % e)
+```
+
+### Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **as_at** | **datetime**| Optional. The time at which to get results from. Default : latest | [optional] 
+ **page** | **str**| Optional. The pagination token to use to continue listing compliance runs from a previous call to list compliance runs.              This value is returned from the previous call. If a pagination token is provided the sortBy, filter, and asAt fields              must not have changed since the original request. Also, if set, a start value cannot be provided. | [optional] 
+ **start** | **int**| Optional. When paginating, skip this number of results. | [optional] 
+ **limit** | **int**| Optional. When paginating, limit the number of returned results to this many. | [optional] 
+ **filter** | **str**| Optional. Expression to filter the result set. Read more about filtering results from LUSID here https://support.lusid.com/filtering-results-from-lusid. | [optional] 
+ **sort_by** | [**list[str]**](str.md)| Optional. A list of field names to sort by, each suffixed by \&quot;ASC\&quot; or \&quot;DESC\&quot; | [optional] 
+
+### Return type
+
+[**PagedResourceListOfComplianceRunInfoV2**](PagedResourceListOfComplianceRunInfoV2.md)
+
+### Authorization
+
+[oauth2](../README.md#oauth2)
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: text/plain, application/json, text/json
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | List of previous compliance RunIds |  -  |
+**400** | The details of the input related failure |  -  |
+**0** | Error response |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
 # **list_compliance_templates**
 > PagedResourceListOfComplianceTemplate list_compliance_templates(as_at=as_at, page=page, start=start, limit=limit, filter=filter)
 
@@ -427,10 +513,10 @@ import time
 import lusid
 from lusid.rest import ApiException
 from pprint import pprint
-# Defining the host is optional and defaults to https://fbn-prd.lusid.com/api
+# Defining the host is optional and defaults to https://www.lusid.com/api
 # See configuration.py for a list of all supported configuration parameters.
 configuration = lusid.Configuration(
-    host = "https://fbn-prd.lusid.com/api"
+    host = "https://www.lusid.com/api"
 )
 
 # The client must configure the authentication and authorization parameters
@@ -440,7 +526,7 @@ configuration = lusid.Configuration(
 
 # Configure OAuth2 access token for authorization: oauth2
 configuration = lusid.Configuration(
-    host = "https://fbn-prd.lusid.com/api"
+    host = "https://www.lusid.com/api"
 )
 configuration.access_token = 'YOUR_ACCESS_TOKEN'
 
@@ -510,10 +596,10 @@ import time
 import lusid
 from lusid.rest import ApiException
 from pprint import pprint
-# Defining the host is optional and defaults to https://fbn-prd.lusid.com/api
+# Defining the host is optional and defaults to https://www.lusid.com/api
 # See configuration.py for a list of all supported configuration parameters.
 configuration = lusid.Configuration(
-    host = "https://fbn-prd.lusid.com/api"
+    host = "https://www.lusid.com/api"
 )
 
 # The client must configure the authentication and authorization parameters
@@ -523,7 +609,7 @@ configuration = lusid.Configuration(
 
 # Configure OAuth2 access token for authorization: oauth2
 configuration = lusid.Configuration(
-    host = "https://fbn-prd.lusid.com/api"
+    host = "https://www.lusid.com/api"
 )
 configuration.access_token = 'YOUR_ACCESS_TOKEN'
 
@@ -593,10 +679,10 @@ import time
 import lusid
 from lusid.rest import ApiException
 from pprint import pprint
-# Defining the host is optional and defaults to https://fbn-prd.lusid.com/api
+# Defining the host is optional and defaults to https://www.lusid.com/api
 # See configuration.py for a list of all supported configuration parameters.
 configuration = lusid.Configuration(
-    host = "https://fbn-prd.lusid.com/api"
+    host = "https://www.lusid.com/api"
 )
 
 # The client must configure the authentication and authorization parameters
@@ -606,7 +692,7 @@ configuration = lusid.Configuration(
 
 # Configure OAuth2 access token for authorization: oauth2
 configuration = lusid.Configuration(
-    host = "https://fbn-prd.lusid.com/api"
+    host = "https://www.lusid.com/api"
 )
 configuration.access_token = 'YOUR_ACCESS_TOKEN'
 
