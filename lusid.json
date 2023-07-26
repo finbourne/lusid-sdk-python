@@ -9,7 +9,7 @@
       "url": "https://www.finbourne.com",
       "email": "info@finbourne.com"
     },
-    "version": "1.0.376",
+    "version": "1.0.377",
     "x-logo": {
       "url": "https://www.lusid.com/app/assets/logo_white.png",
       "backgroundColor": "#415464"
@@ -41862,17 +41862,20 @@
               "text/plain": {
                 "schema": {
                   "type": "string"
-                }
+                },
+                "example": "function Translate(input){ const fxfwd = JSON.parse(input);  fxfwd[\"endDate\"] = fxfwd[\"maturityDate\"];  delete fxfwd[\"maturityDate\"];  return JSON.stringify(fxfwd); }"
               },
               "application/json": {
                 "schema": {
                   "type": "string"
-                }
+                },
+                "example": "function Translate(input){ const fxfwd = JSON.parse(input);  fxfwd[\"endDate\"] = fxfwd[\"maturityDate\"];  delete fxfwd[\"maturityDate\"];  return JSON.stringify(fxfwd); }"
               },
               "text/json": {
                 "schema": {
                   "type": "string"
-                }
+                },
+                "example": "function Translate(input){ const fxfwd = JSON.parse(input);  fxfwd[\"endDate\"] = fxfwd[\"maturityDate\"];  delete fxfwd[\"maturityDate\"];  return JSON.stringify(fxfwd); }"
               }
             }
           },
