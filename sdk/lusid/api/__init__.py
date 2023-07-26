@@ -16,6 +16,7 @@ from lusid.api.corporate_action_sources_api import CorporateActionSourcesApi
 from lusid.api.counterparties_api import CounterpartiesApi
 from lusid.api.custom_entities_api import CustomEntitiesApi
 from lusid.api.custom_entity_definitions_api import CustomEntityDefinitionsApi
+from lusid.api.custom_entity_types_api import CustomEntityTypesApi
 from lusid.api.cut_label_definitions_api import CutLabelDefinitionsApi
 from lusid.api.data_types_api import DataTypesApi
 from lusid.api.derived_transaction_portfolios_api import DerivedTransactionPortfoliosApi
