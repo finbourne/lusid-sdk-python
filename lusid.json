@@ -9,7 +9,7 @@
       "url": "https://www.finbourne.com",
       "email": "info@finbourne.com"
     },
-    "version": "1.0.394",
+    "version": "1.0.395",
     "x-logo": {
       "url": "https://www.lusid.com/app/assets/logo_white.png",
       "backgroundColor": "#415464"
@@ -39377,6 +39377,18 @@
             }
           },
           {
+            "name": "sortBy",
+            "in": "query",
+            "description": "A list of field names or properties to sort by, each suffixed by \" ASC\" or \" DESC\"",
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            },
+            "x-nullable": true
+          },
+          {
             "name": "query",
             "in": "query",
             "description": "Expression specifying the criteria that the returned portfolios must meet. For example, to see which\r\n            portfolios have holdings in instruments with a LusidInstrumentId (LUID) of 'LUID_PPA8HI6M' or a Figi of 'BBG000BLNNH6',\r\n            specify \"instrument.identifiers in (('LusidInstrumentId', 'LUID_PPA8HI6M'), ('Figi', 'BBG000BLNNH6'))\".",
@@ -43108,6 +43120,18 @@
               "pattern": "^[\\s\\S]*$",
               "type": "string"
             }
+          },
+          {
+            "name": "sortBy",
+            "in": "query",
+            "description": "A list of field names or properties to sort by, each suffixed by \" ASC\" or \" DESC\"",
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            },
+            "x-nullable": true
           },
           {
             "name": "propertyKeys",
