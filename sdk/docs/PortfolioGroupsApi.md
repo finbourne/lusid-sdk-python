@@ -1708,7 +1708,7 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **list_portfolio_groups**
-> ResourceListOfPortfolioGroup list_portfolio_groups(scope, effective_at=effective_at, as_at=as_at, filter=filter, related_entity_property_keys=related_entity_property_keys, relationship_definition_ids=relationship_definition_ids)
+> PagedResourceListOfPortfolioGroup list_portfolio_groups(scope, effective_at=effective_at, as_at=as_at, page=page, limit=limit, filter=filter, sort_by=sort_by, related_entity_property_keys=related_entity_property_keys, relationship_definition_ids=relationship_definition_ids)
 
 [EARLY ACCESS] ListPortfolioGroups: List portfolio groups
 
@@ -1747,13 +1747,16 @@ with lusid.ApiClient(configuration) as api_client:
     scope = 'scope_example' # str | The scope to list the portfolio groups in.
 effective_at = 'effective_at_example' # str | The effective datetime or cut label at which to list the portfolio groups. Defaults to the current LUSID system datetime if not specified. (optional)
 as_at = '2013-10-20T19:20:30+01:00' # datetime | The asAt datetime at which to list the portfolio groups. Defaults to return the latest version of each portfolio group if not specified. (optional)
+page = 'page_example' # str | The pagination token to use to continue listing portfolio groups from a previous call to list portfolio groups. This  value is returned from the previous call. If a pagination token is provided the filter, effectiveAt, sortBy  and asAt fields must not have changed since the original request. (optional)
+limit = 56 # int | When paginating, limit the number of returned results to this many. Defaults to no limit if not specified. (optional)
 filter = 'filter_example' # str | Expression to filter the result set.              For example, to filter on the Display Name, use \"displayName eq 'string'\"              Read more about filtering results from LUSID here https://support.lusid.com/filtering-results-from-lusid. (optional)
+sort_by = ['sort_by_example'] # list[str] | A list of field names to sort by, each suffixed by \" ASC\" or \" DESC\" (optional)
 related_entity_property_keys = ['related_entity_property_keys_example'] # list[str] | A list of property keys from any domain that supports relationships              to decorate onto related entities. These must take the format {domain}/{scope}/{code}, for example 'Portfolio/Manager/Id'. (optional)
 relationship_definition_ids = ['relationship_definition_ids_example'] # list[str] | A list of relationship definitions that are used to decorate related entities              onto the portfolio groups in the response. These must take the form {relationshipDefinitionScope}/{relationshipDefinitionCode}. (optional)
 
     try:
         # [EARLY ACCESS] ListPortfolioGroups: List portfolio groups
-        api_response = api_instance.list_portfolio_groups(scope, effective_at=effective_at, as_at=as_at, filter=filter, related_entity_property_keys=related_entity_property_keys, relationship_definition_ids=relationship_definition_ids)
+        api_response = api_instance.list_portfolio_groups(scope, effective_at=effective_at, as_at=as_at, page=page, limit=limit, filter=filter, sort_by=sort_by, related_entity_property_keys=related_entity_property_keys, relationship_definition_ids=relationship_definition_ids)
         pprint(api_response)
     except ApiException as e:
         print("Exception when calling PortfolioGroupsApi->list_portfolio_groups: %s\n" % e)
@@ -1766,13 +1769,16 @@ Name | Type | Description  | Notes
  **scope** | **str**| The scope to list the portfolio groups in. | 
  **effective_at** | **str**| The effective datetime or cut label at which to list the portfolio groups. Defaults to the current LUSID system datetime if not specified. | [optional] 
  **as_at** | **datetime**| The asAt datetime at which to list the portfolio groups. Defaults to return the latest version of each portfolio group if not specified. | [optional] 
+ **page** | **str**| The pagination token to use to continue listing portfolio groups from a previous call to list portfolio groups. This  value is returned from the previous call. If a pagination token is provided the filter, effectiveAt, sortBy  and asAt fields must not have changed since the original request. | [optional] 
+ **limit** | **int**| When paginating, limit the number of returned results to this many. Defaults to no limit if not specified. | [optional] 
  **filter** | **str**| Expression to filter the result set.              For example, to filter on the Display Name, use \&quot;displayName eq &#39;string&#39;\&quot;              Read more about filtering results from LUSID here https://support.lusid.com/filtering-results-from-lusid. | [optional] 
+ **sort_by** | [**list[str]**](str.md)| A list of field names to sort by, each suffixed by \&quot; ASC\&quot; or \&quot; DESC\&quot; | [optional] 
  **related_entity_property_keys** | [**list[str]**](str.md)| A list of property keys from any domain that supports relationships              to decorate onto related entities. These must take the format {domain}/{scope}/{code}, for example &#39;Portfolio/Manager/Id&#39;. | [optional] 
  **relationship_definition_ids** | [**list[str]**](str.md)| A list of relationship definitions that are used to decorate related entities              onto the portfolio groups in the response. These must take the form {relationshipDefinitionScope}/{relationshipDefinitionCode}. | [optional] 
 
 ### Return type
 
-[**ResourceListOfPortfolioGroup**](ResourceListOfPortfolioGroup.md)
+[**PagedResourceListOfPortfolioGroup**](PagedResourceListOfPortfolioGroup.md)
 
 ### Authorization
 

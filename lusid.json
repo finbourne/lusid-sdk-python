@@ -9,7 +9,7 @@
       "url": "https://www.finbourne.com",
       "email": "info@finbourne.com"
     },
-    "version": "1.0.392",
+    "version": "1.0.393",
     "x-logo": {
       "url": "https://www.lusid.com/app/assets/logo_white.png",
       "backgroundColor": "#415464"
@@ -21318,7 +21318,7 @@
           {
             "name": "page",
             "in": "query",
-            "description": "The pagination token to use to continue listing legal entities from a previous call to list legal entities. This\r\nvalue is returned from the previous call. If a pagination token is provided the filter, effectiveAt\r\nand asAt fields must not have changed since the original request.",
+            "description": "The pagination token to use to continue listing legal entities from a previous call to list legal entities. This\r\nvalue is returned from the previous call. If a pagination token is provided the filter, effectiveAt, sortBy\r\nand asAt fields must not have changed since the original request.",
             "schema": {
               "maxLength": 500,
               "minLength": 1,
@@ -22763,7 +22763,7 @@
           {
             "name": "page",
             "in": "query",
-            "description": "The pagination token to use to continue listing legal entities from a previous call to list legal entities. This\r\nvalue is returned from the previous call. If a pagination token is provided the filter, effectiveAt\r\nand asAt fields must not have changed since the original request.",
+            "description": "The pagination token to use to continue listing legal entities from a previous call to list legal entities. This\r\nvalue is returned from the previous call. If a pagination token is provided the filter, effectiveAt, sortBy\r\nand asAt fields must not have changed since the original request.",
             "schema": {
               "maxLength": 500,
               "minLength": 1,
@@ -33234,6 +33234,29 @@
             "x-nullable": true
           },
           {
+            "name": "page",
+            "in": "query",
+            "description": "The pagination token to use to continue listing portfolio groups from a previous call to list portfolio groups. This\r\nvalue is returned from the previous call. If a pagination token is provided the filter, effectiveAt, sortBy\r\nand asAt fields must not have changed since the original request.",
+            "schema": {
+              "maxLength": 500,
+              "minLength": 1,
+              "pattern": "^[a-zA-Z0-9\\+/]*={0,3}$",
+              "type": "string"
+            }
+          },
+          {
+            "name": "limit",
+            "in": "query",
+            "description": "When paginating, limit the number of returned results to this many. Defaults to no limit if not specified.",
+            "schema": {
+              "maximum": 5000,
+              "minimum": 1,
+              "type": "integer",
+              "format": "int32"
+            },
+            "x-nullable": true
+          },
+          {
             "name": "filter",
             "in": "query",
             "description": "Expression to filter the result set.\r\n            For example, to filter on the Display Name, use \"displayName eq 'string'\"\r\n            Read more about filtering results from LUSID here https://support.lusid.com/filtering-results-from-lusid.",
@@ -33243,6 +33266,18 @@
               "pattern": "^[\\s\\S]*$",
               "type": "string"
             }
+          },
+          {
+            "name": "sortBy",
+            "in": "query",
+            "description": "A list of field names to sort by, each suffixed by \" ASC\" or \" DESC\"",
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            },
+            "x-nullable": true
           },
           {
             "name": "relatedEntityPropertyKeys",
@@ -33277,17 +33312,17 @@
             "content": {
               "text/plain": {
                 "schema": {
-                  "$ref": "#/components/schemas/ResourceListOfPortfolioGroup"
+                  "$ref": "#/components/schemas/PagedResourceListOfPortfolioGroup"
                 }
               },
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/ResourceListOfPortfolioGroup"
+                  "$ref": "#/components/schemas/PagedResourceListOfPortfolioGroup"
                 }
               },
               "text/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/ResourceListOfPortfolioGroup"
+                  "$ref": "#/components/schemas/PagedResourceListOfPortfolioGroup"
                 }
               }
             }
@@ -86188,6 +86223,47 @@
         "additionalProperties": false,
         "description": "A paginated list of resource that can be returned from a request."
       },
+      "PagedResourceListOfPortfolioGroup": {
+        "required": [
+          "values"
+        ],
+        "type": "object",
+        "properties": {
+          "nextPage": {
+            "type": "string",
+            "description": "The next page of results.",
+            "nullable": true
+          },
+          "previousPage": {
+            "type": "string",
+            "description": "The previous page of results.",
+            "nullable": true
+          },
+          "values": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/PortfolioGroup"
+            },
+            "description": "The resources to list."
+          },
+          "href": {
+            "type": "string",
+            "description": "The URI of the resource list.",
+            "format": "uri",
+            "nullable": true
+          },
+          "links": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Link"
+            },
+            "description": "Collection of links.",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false,
+        "description": "A paginated list of resource that can be returned from a request."
+      },
       "PagedResourceListOfPortfolioGroupSearchResult": {
         "required": [
           "values"
@@ -91198,47 +91274,6 @@
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/PortfolioCashLadder"
-            },
-            "description": "The resources to list."
-          },
-          "href": {
-            "type": "string",
-            "description": "The URI of the resource list.",
-            "format": "uri",
-            "nullable": true
-          },
-          "links": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/Link"
-            },
-            "description": "Collection of links.",
-            "nullable": true
-          },
-          "nextPage": {
-            "type": "string",
-            "description": "The next page of results.",
-            "nullable": true
-          },
-          "previousPage": {
-            "type": "string",
-            "description": "The previous page of results.",
-            "nullable": true
-          }
-        },
-        "additionalProperties": false,
-        "description": "A collection of resources that can be returned from requests."
-      },
-      "ResourceListOfPortfolioGroup": {
-        "required": [
-          "values"
-        ],
-        "type": "object",
-        "properties": {
-          "values": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/PortfolioGroup"
             },
             "description": "The resources to list."
           },
