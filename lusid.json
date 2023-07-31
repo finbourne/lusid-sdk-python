@@ -9,7 +9,7 @@
       "url": "https://www.finbourne.com",
       "email": "info@finbourne.com"
     },
-    "version": "1.0.393",
+    "version": "1.0.394",
     "x-logo": {
       "url": "https://www.lusid.com/app/assets/logo_white.png",
       "backgroundColor": "#415464"
@@ -6221,13 +6221,13 @@
         "x-fbn-apistatus": "EarlyAccess"
       }
     },
-    "/api/compliance/rules": {
+    "/api/compliance/generic/rules": {
       "post": {
         "tags": [
-          "Compliance"
+          "Compliance - Generic"
         ],
         "summary": "[EARLY ACCESS] UpsertComplianceRule: Upsert a compliance rule.",
-        "description": "Use this endpoint to upsert a single compliance rule. The template and variation specified must already\r\nexist, as must the portfolio group. The parameters passed must match those required by the template variation.",
+        "description": "Use this endpoint to upsert a single compliance rule. The template and variation specified must already\r\nexist. The parameters passed must match those required by the template.",
         "operationId": "UpsertComplianceRule",
         "requestBody": {
           "content": {
@@ -7172,11 +7172,11 @@
       },
       "get": {
         "tags": [
-          "Compliance"
+          "Compliance - Generic"
         ],
-        "summary": "[EARLY ACCESS] ListComplianceRules: List compliance rules.",
-        "description": "Use this endpoint to retrieve all compliance rules, or a subset defined by an optional filter.",
-        "operationId": "ListComplianceRules",
+        "summary": "[EARLY ACCESS] ListComplianceRules2: List compliance rules.",
+        "description": "Use this endpoint to retrieve all compliance rules, or a collection defined by an optional filter.",
+        "operationId": "ListComplianceRules2",
         "parameters": [
           {
             "name": "asAt",
@@ -7440,14 +7440,14 @@
         "x-fbn-apistatus": "EarlyAccess"
       }
     },
-    "/api/compliance/rules/{scope}/{code}": {
+    "/api/compliance/generic/rules/{scope}/{code}": {
       "get": {
         "tags": [
-          "Compliance"
+          "Compliance - Generic"
         ],
-        "summary": "[EARLY ACCESS] GetComplianceRule: Get compliance rule.",
+        "summary": "[EARLY ACCESS] GetComplianceRule2: Get compliance rule.",
         "description": "Use this endpoint to retrieve a single compliance rule.",
-        "operationId": "GetComplianceRule",
+        "operationId": "GetComplianceRule2",
         "parameters": [
           {
             "name": "scope",
@@ -7684,11 +7684,11 @@
       },
       "delete": {
         "tags": [
-          "Compliance"
+          "Compliance - Generic"
         ],
-        "summary": "[EARLY ACCESS] DeleteComplianceRule: Delete compliance rule.",
+        "summary": "[EARLY ACCESS] DeleteComplianceRule2: Delete compliance rule.",
         "description": "Use this endpoint to delete a compliance rule. The rule will be recoverable for asat times earlier than the\r\ndelete time, but will otherwise appear to have never existed.",
-        "operationId": "DeleteComplianceRule",
+        "operationId": "DeleteComplianceRule2",
         "parameters": [
           {
             "name": "scope",
@@ -7784,14 +7784,14 @@
         "x-fbn-apistatus": "EarlyAccess"
       }
     },
-    "/api/compliance/runs": {
+    "/api/compliance/generic/runs": {
       "post": {
         "tags": [
-          "Compliance"
+          "Compliance - Generic"
         ],
-        "summary": "[EARLY ACCESS] RunCompliance: Run a compliance check.",
-        "description": "Use this endpoint to run a compliance check using rules from a specific scope.",
-        "operationId": "RunCompliance",
+        "summary": "[EARLY ACCESS] RunGenericCompliance: Kick off the compliance check process",
+        "description": "Use this endpoint to fetch the start a compliance run, based on a pre-set mapping file.",
+        "operationId": "RunGenericCompliance",
         "parameters": [
           {
             "name": "runScope",
@@ -7942,10 +7942,10 @@
       },
       "get": {
         "tags": [
-          "Compliance"
+          "Compliance - Generic"
         ],
-        "summary": "[EARLY ACCESS] ListComplianceRuns: List historical compliance run identifiers.",
-        "description": "Lists RunIds of prior compliance runs, or a subset with a filter.",
+        "summary": "[EARLY ACCESS] ListComplianceRuns: List historical Compliance RunIds",
+        "description": "Lists out all RunIds of prior compliance runs.",
         "operationId": "ListComplianceRuns",
         "parameters": [
           {
@@ -7968,6 +7968,16 @@
               "pattern": "^[a-zA-Z0-9\\+/]*={0,3}$",
               "type": "string"
             }
+          },
+          {
+            "name": "start",
+            "in": "query",
+            "description": "Optional. When paginating, skip this number of results.",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            },
+            "x-nullable": true
           },
           {
             "name": "limit",
@@ -8113,12 +8123,12 @@
         "x-fbn-apistatus": "EarlyAccess"
       }
     },
-    "/api/compliance/runs/summary/{scope}/{code}": {
+    "/api/compliance/generic/runs/summary/{scope}/{code}": {
       "get": {
         "tags": [
-          "Compliance"
+          "Compliance - Generic"
         ],
-        "summary": "[EARLY ACCESS] GetComplianceRunSummary: Get summary results for a specific compliance run.",
+        "summary": "[EARLY ACCESS] GetComplianceRunSummary: Get compliance summary results.",
         "description": "Specify a run scope and code from a previously run compliance check to get summarised results.",
         "operationId": "GetComplianceRunSummary",
         "parameters": [
@@ -8393,10 +8403,10 @@
     "/api/compliance/templates": {
       "get": {
         "tags": [
-          "Compliance"
+          "Compliance - Generic"
         ],
-        "summary": "[EARLY ACCESS] ListComplianceTemplates: List compliance templates.",
-        "description": "Use this endpoint to fetch a list of all available compliance template ids, or a subset using a filter.",
+        "summary": "[EARLY ACCESS] ListComplianceTemplates: Get a specific compliance template",
+        "description": "Use this endpoint to fetch a list of all available compliance template ids.",
         "operationId": "ListComplianceTemplates",
         "parameters": [
           {
@@ -8670,7 +8680,7 @@
     "/api/compliance/templates/{scope}/{code}": {
       "get": {
         "tags": [
-          "Compliance"
+          "Compliance - Generic"
         ],
         "summary": "[EARLY ACCESS] GetComplianceTemplate: Get the requested compliance template.",
         "description": "Use this endpoint to fetch a specific compliance template.",
@@ -96060,7 +96070,11 @@
     },
     {
       "name": "Compliance",
-      "description": "Methods for storage and retrieval of generic compliance data"
+      "description": "Methods for storage and retrieval of compliance data: rules and results."
+    },
+    {
+      "name": "Compliance - Generic",
+      "description": "Methods for storage and retrieval of generic compliance data: templates"
     },
     {
       "name": "Configuration Recipe",
@@ -96265,6 +96279,7 @@
       "Chart Of Accounts",
       "Complex Market Data",
       "Compliance",
+      "Compliance - Generic",
       "Configuration Recipe",
       "Conventions",
       "Corporate Action Sources",
