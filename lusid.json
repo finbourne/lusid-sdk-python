@@ -9,7 +9,7 @@
       "url": "https://www.finbourne.com",
       "email": "info@finbourne.com"
     },
-    "version": "1.0.400",
+    "version": "1.0.401",
     "x-logo": {
       "url": "https://www.lusid.com/app/assets/logo_white.png",
       "backgroundColor": "#415464"
@@ -17,7 +17,7 @@
   },
   "servers": [
     {
-      "url": "https://fbn-prd.lusid.com/api"
+      "url": "https://www.lusid.com/api"
     }
   ],
   "paths": {
@@ -15911,7 +15911,7 @@
           {
             "name": "page",
             "in": "query",
-            "description": "The pagination token to use to continue listing data type summaries. This\r\nvalue is returned from the previous call. If a pagination token is provided, the filter, effectiveAt\r\nand asAt fields must not have changed since the original request. Also, if set, a start value cannot be provided.",
+            "description": "The pagination token to use to continue listing data type summaries. This\r\nvalue is returned from the previous call. If a pagination token is provided, the filter, sortBy\r\nand asAt fields must not have changed since the original request. Also, if set, a start value cannot be provided.",
             "schema": {
               "maxLength": 500,
               "minLength": 1,
@@ -15955,7 +15955,7 @@
           {
             "name": "sortBy",
             "in": "query",
-            "description": "Sort the results by these fields. Use use the '-' sign to denote descending allocation e.g. -MyFieldName.",
+            "description": "A list of field names to sort by, each suffixed by \" ASC\" or \" DESC\"",
             "schema": {
               "type": "array",
               "items": {
@@ -46084,6 +46084,214 @@
         "x-fbn-apistatus": "EarlyAccess"
       }
     },
+    "/api/portfolios/{scope}/{code}/returns/breakdown": {
+      "post": {
+        "tags": [
+          "Portfolios"
+        ],
+        "summary": "[EARLY ACCESS] GetCompositeBreakdown: Get the Composite Breakdown on how the composite Returns are calculated",
+        "description": "Calculate the Composite Returns and return this with the constituents which are included in this calculation",
+        "operationId": "GetCompositeBreakdown",
+        "parameters": [
+          {
+            "name": "scope",
+            "in": "path",
+            "description": "The scope of the Portfolio.",
+            "required": true,
+            "schema": {
+              "maxLength": 64,
+              "minLength": 1,
+              "pattern": "^[a-zA-Z0-9\\-_]+$",
+              "type": "string"
+            }
+          },
+          {
+            "name": "code",
+            "in": "path",
+            "description": "The code of the  Portfolio.",
+            "required": true,
+            "schema": {
+              "maxLength": 64,
+              "minLength": 1,
+              "pattern": "^[a-zA-Z0-9\\-_]+$",
+              "type": "string"
+            }
+          },
+          {
+            "name": "fromEffectiveAt",
+            "in": "query",
+            "description": "The start date from which to calculate the Returns.",
+            "schema": {
+              "type": "string",
+              "format": "dateorcutlabel"
+            }
+          },
+          {
+            "name": "toEffectiveAt",
+            "in": "query",
+            "description": "The end date for which to calculate the Returns.",
+            "schema": {
+              "type": "string",
+              "format": "dateorcutlabel"
+            }
+          },
+          {
+            "name": "asAt",
+            "in": "query",
+            "description": "The asAt datetime at which to retrieve the Returns. Defaults to the latest.",
+            "schema": {
+              "type": "string",
+              "format": "date-time"
+            },
+            "x-nullable": true
+          }
+        ],
+        "requestBody": {
+          "description": "The request used in the GetCompositeBreakdown.",
+          "content": {
+            "application/json-patch+json": {
+              "schema": {
+                "$ref": "#/components/schemas/CompositeBreakdownRequest"
+              },
+              "example": {
+                "returnIds": [
+                  {
+                    "scope": "TestScope",
+                    "code": "default"
+                  }
+                ],
+                "recipeId": {
+                  "scope": "ReturnsScope",
+                  "code": "ReturnCode"
+                },
+                "compositeMethod": "Asset",
+                "period": "Monthly",
+                "holidayCalendars": []
+              }
+            },
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CompositeBreakdownRequest"
+              },
+              "example": {
+                "returnIds": [
+                  {
+                    "scope": "TestScope",
+                    "code": "default"
+                  }
+                ],
+                "recipeId": {
+                  "scope": "ReturnsScope",
+                  "code": "ReturnCode"
+                },
+                "compositeMethod": "Asset",
+                "period": "Monthly",
+                "holidayCalendars": []
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CompositeBreakdownRequest"
+              },
+              "example": {
+                "returnIds": [
+                  {
+                    "scope": "TestScope",
+                    "code": "default"
+                  }
+                ],
+                "recipeId": {
+                  "scope": "ReturnsScope",
+                  "code": "ReturnCode"
+                },
+                "compositeMethod": "Asset",
+                "period": "Monthly",
+                "holidayCalendars": []
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/CompositeBreakdownRequest"
+              },
+              "example": {
+                "returnIds": [
+                  {
+                    "scope": "TestScope",
+                    "code": "default"
+                  }
+                ],
+                "recipeId": {
+                  "scope": "ReturnsScope",
+                  "code": "ReturnCode"
+                },
+                "compositeMethod": "Asset",
+                "period": "Monthly",
+                "holidayCalendars": []
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "The aggregated returns grouped by return stream.",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/CompositeBreakdownResponse"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CompositeBreakdownResponse"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CompositeBreakdownResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "The details of the input related failure",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/LusidValidationProblemDetails"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/LusidValidationProblemDetails"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/LusidValidationProblemDetails"
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "Error response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/LusidProblemDetails"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "oauth2": []
+          }
+        ],
+        "x-fbn-apistatus": "EarlyAccess"
+      }
+    },
     "/api/portfolios/{scope}/{code}/returns/dispersion/$aggregated": {
       "post": {
         "tags": [
@@ -71269,7 +71477,8 @@
         "properties": {
           "description": {
             "minLength": 1,
-            "type": "string"
+            "type": "string",
+            "description": "The description of the action"
           },
           "action": {
             "$ref": "#/components/schemas/ActionId"
@@ -71279,6 +71488,7 @@
             "items": {
               "$ref": "#/components/schemas/IdSelectorDefinition"
             },
+            "description": "When populated, the provided values are the limited set of resources that are allowed to be specified for\r\naccess control for this action",
             "nullable": true
           },
           "links": {
@@ -71286,10 +71496,12 @@
             "items": {
               "$ref": "#/components/schemas/Link"
             },
+            "description": "Collection of links.",
             "nullable": true
           }
         },
-        "additionalProperties": false
+        "additionalProperties": false,
+        "description": "An action that can be access controlled"
       },
       "AccessControlledResource": {
         "required": [
@@ -71300,27 +71512,32 @@
         "properties": {
           "application": {
             "type": "string",
+            "description": "The application to which this resource belongs",
             "nullable": true
           },
           "name": {
             "type": "string",
+            "description": "The display name of the resource",
             "nullable": true
           },
           "description": {
             "minLength": 1,
-            "type": "string"
+            "type": "string",
+            "description": "The description of the resource"
           },
           "actions": {
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/AccessControlledAction"
-            }
+            },
+            "description": "The actions acceptable for this type of resource"
           },
           "identifierParts": {
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/IdentifierPartSchema"
             },
+            "description": "The constituent parts of a valid identifier for this resource",
             "nullable": true
           },
           "links": {
@@ -71328,10 +71545,12 @@
             "items": {
               "$ref": "#/components/schemas/Link"
             },
+            "description": "Collection of links.",
             "nullable": true
           }
         },
-        "additionalProperties": false
+        "additionalProperties": false,
+        "description": "A resource to which access can be controlled"
       },
       "AccessMetadataOperation": {
         "required": [
@@ -71587,6 +71806,7 @@
             "items": {
               "$ref": "#/components/schemas/Link"
             },
+            "description": "Collection of links.",
             "nullable": true
           }
         },
@@ -71762,6 +71982,7 @@
             "items": {
               "$ref": "#/components/schemas/Link"
             },
+            "description": "Collection of links.",
             "nullable": true
           }
         },
@@ -72052,6 +72273,7 @@
             "items": {
               "$ref": "#/components/schemas/Link"
             },
+            "description": "Collection of links.",
             "nullable": true
           }
         },
@@ -72360,6 +72582,7 @@
             "items": {
               "$ref": "#/components/schemas/Link"
             },
+            "description": "Collection of links.",
             "nullable": true
           }
         },
@@ -72581,6 +72804,7 @@
             "items": {
               "$ref": "#/components/schemas/Link"
             },
+            "description": "Collection of links.",
             "nullable": true
           }
         },
@@ -72605,6 +72829,7 @@
             "items": {
               "$ref": "#/components/schemas/Link"
             },
+            "description": "Collection of links.",
             "nullable": true
           }
         },
@@ -72642,6 +72867,7 @@
             "items": {
               "$ref": "#/components/schemas/Link"
             },
+            "description": "Collection of links.",
             "nullable": true
           }
         },
@@ -72815,6 +73041,7 @@
             "items": {
               "$ref": "#/components/schemas/Link"
             },
+            "description": "Collection of links.",
             "nullable": true
           }
         },
@@ -72855,6 +73082,7 @@
             "items": {
               "$ref": "#/components/schemas/Link"
             },
+            "description": "Collection of links.",
             "nullable": true
           }
         },
@@ -72892,6 +73120,7 @@
             "items": {
               "$ref": "#/components/schemas/Link"
             },
+            "description": "Collection of links.",
             "nullable": true
           }
         },
@@ -72980,6 +73209,7 @@
             "items": {
               "$ref": "#/components/schemas/Link"
             },
+            "description": "Collection of links.",
             "nullable": true
           }
         },
@@ -74197,6 +74427,7 @@
             "items": {
               "$ref": "#/components/schemas/Link"
             },
+            "description": "Collection of links.",
             "nullable": true
           }
         },
@@ -74249,6 +74480,7 @@
             "items": {
               "$ref": "#/components/schemas/Link"
             },
+            "description": "Collection of links.",
             "nullable": true
           }
         },
@@ -74407,6 +74639,7 @@
             "items": {
               "$ref": "#/components/schemas/Link"
             },
+            "description": "Collection of links.",
             "nullable": true
           }
         },
@@ -74752,6 +74985,7 @@
             "items": {
               "$ref": "#/components/schemas/Link"
             },
+            "description": "Collection of links.",
             "nullable": true
           }
         },
@@ -74906,6 +75140,7 @@
             "items": {
               "$ref": "#/components/schemas/Link"
             },
+            "description": "Collection of links.",
             "nullable": true
           }
         },
@@ -74969,6 +75204,101 @@
               "$ref": "#/components/schemas/PerpetualProperty"
             },
             "description": "Properties associated with the Compliance Template Variation"
+          }
+        },
+        "additionalProperties": false
+      },
+      "CompositeBreakdown": {
+        "required": [
+          "effectiveAt"
+        ],
+        "type": "object",
+        "properties": {
+          "effectiveAt": {
+            "type": "string",
+            "description": "The effectiveAt for the calculation.",
+            "format": "date-time"
+          },
+          "composite": {
+            "$ref": "#/components/schemas/PortfolioReturnBreakdown"
+          },
+          "constituents": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/PortfolioReturnBreakdown"
+            },
+            "description": "The constituents with their information which are part of the composite.",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false,
+        "description": "A list of Composite Breakdowns."
+      },
+      "CompositeBreakdownRequest": {
+        "type": "object",
+        "properties": {
+          "returnIds": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ResourceId"
+            },
+            "description": "The Scope and code of the returns.",
+            "nullable": true
+          },
+          "recipeId": {
+            "$ref": "#/components/schemas/ResourceId"
+          },
+          "compositeMethod": {
+            "type": "string",
+            "description": "The method used to calculate the Portfolio performance: Equal/Asset.",
+            "nullable": true
+          },
+          "period": {
+            "type": "string",
+            "description": "The type of the returns used to calculate the aggregation result: Daily/Monthly.",
+            "nullable": true
+          },
+          "holidayCalendars": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "description": "The holiday calendar(s) that should be used in determining the date schedule. Holiday calendar(s) are supplied by their codes, for example, 'CoppClark'. Note that when the calendars are not available (e.g. when the user has insufficient permissions), a recipe setting will be used to determine whether the whole batch should then fail or whether the calendar not being available should simply be ignored.",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false,
+        "description": "The request used in the GetCompositeBreakdown."
+      },
+      "CompositeBreakdownResponse": {
+        "required": [
+          "results"
+        ],
+        "type": "object",
+        "properties": {
+          "href": {
+            "type": "string",
+            "description": "The specific Uniform Resource Identifier (URI) for this resource at the requested effective and asAt datetime.",
+            "format": "uri",
+            "nullable": true
+          },
+          "results": {
+            "type": "object",
+            "additionalProperties": {
+              "type": "array",
+              "items": {
+                "$ref": "#/components/schemas/CompositeBreakdown"
+              }
+            },
+            "description": "The Composite calculation with the constituens which were included."
+          },
+          "links": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Link"
+            },
+            "description": "Collection of links.",
+            "nullable": true
           }
         },
         "additionalProperties": false
@@ -75059,6 +75389,7 @@
             "items": {
               "$ref": "#/components/schemas/Link"
             },
+            "description": "Collection of links.",
             "nullable": true
           }
         },
@@ -75223,6 +75554,7 @@
             "items": {
               "$ref": "#/components/schemas/Link"
             },
+            "description": "Collection of links.",
             "nullable": true
           }
         },
@@ -75419,6 +75751,7 @@
             "items": {
               "$ref": "#/components/schemas/Link"
             },
+            "description": "Collection of links.",
             "nullable": true
           }
         },
@@ -77289,6 +77622,7 @@
             "items": {
               "$ref": "#/components/schemas/Link"
             },
+            "description": "Collection of links.",
             "nullable": true
           }
         },
@@ -77376,6 +77710,7 @@
             "items": {
               "$ref": "#/components/schemas/Link"
             },
+            "description": "Collection of links.",
             "nullable": true
           }
         },
@@ -77487,6 +77822,7 @@
             "items": {
               "$ref": "#/components/schemas/Link"
             },
+            "description": "Collection of links.",
             "nullable": true
           }
         },
@@ -77894,6 +78230,7 @@
             "items": {
               "$ref": "#/components/schemas/Link"
             },
+            "description": "Collection of links.",
             "nullable": true
           }
         },
@@ -77915,6 +78252,7 @@
             "items": {
               "$ref": "#/components/schemas/Link"
             },
+            "description": "Collection of links.",
             "nullable": true
           }
         },
@@ -77942,6 +78280,7 @@
             "items": {
               "$ref": "#/components/schemas/Link"
             },
+            "description": "Collection of links.",
             "nullable": true
           }
         },
@@ -77969,6 +78308,7 @@
             "items": {
               "$ref": "#/components/schemas/Link"
             },
+            "description": "Collection of links.",
             "nullable": true
           }
         },
@@ -79229,6 +79569,7 @@
             "items": {
               "$ref": "#/components/schemas/Link"
             },
+            "description": "Collection of links.",
             "nullable": true
           }
         },
@@ -79520,6 +79861,7 @@
             "items": {
               "$ref": "#/components/schemas/Link"
             },
+            "description": "Collection of links.",
             "nullable": true
           }
         },
@@ -81398,6 +81740,7 @@
             "items": {
               "$ref": "#/components/schemas/Link"
             },
+            "description": "Collection of links.",
             "nullable": true
           }
         },
@@ -81428,6 +81771,7 @@
             "items": {
               "$ref": "#/components/schemas/Link"
             },
+            "description": "Collection of links.",
             "nullable": true
           }
         },
@@ -81458,6 +81802,7 @@
             "items": {
               "$ref": "#/components/schemas/Link"
             },
+            "description": "Collection of links.",
             "nullable": true
           }
         },
@@ -81493,6 +81838,7 @@
             "items": {
               "$ref": "#/components/schemas/Link"
             },
+            "description": "Collection of links.",
             "nullable": true
           }
         },
@@ -81536,6 +81882,7 @@
             "items": {
               "$ref": "#/components/schemas/Link"
             },
+            "description": "Collection of links.",
             "nullable": true
           }
         },
@@ -81558,6 +81905,7 @@
             "items": {
               "$ref": "#/components/schemas/Link"
             },
+            "description": "Collection of links.",
             "nullable": true
           }
         },
@@ -81621,6 +81969,7 @@
             "items": {
               "$ref": "#/components/schemas/Link"
             },
+            "description": "Collection of links.",
             "nullable": true
           }
         },
@@ -81792,6 +82141,7 @@
             "items": {
               "$ref": "#/components/schemas/Link"
             },
+            "description": "Collection of links.",
             "nullable": true
           }
         },
@@ -81827,6 +82177,7 @@
             "items": {
               "$ref": "#/components/schemas/Link"
             },
+            "description": "Collection of links.",
             "nullable": true
           }
         },
@@ -81845,32 +82196,39 @@
         "properties": {
           "index": {
             "type": "integer",
+            "description": "The typical index in the identifier in which this part appears",
             "format": "int32"
           },
           "name": {
             "minLength": 1,
-            "type": "string"
+            "type": "string",
+            "description": "The name of the identifier part that can/should be provided for this resource type"
           },
           "displayName": {
             "minLength": 1,
-            "type": "string"
+            "type": "string",
+            "description": "The display name of the identifier part"
           },
           "description": {
             "minLength": 1,
-            "type": "string"
+            "type": "string",
+            "description": "A brief description of the point of this identifier part"
           },
           "required": {
-            "type": "boolean"
+            "type": "boolean",
+            "description": "Whether a value is required to be provided"
           },
           "links": {
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/Link"
             },
+            "description": "Collection of links.",
             "nullable": true
           }
         },
-        "additionalProperties": false
+        "additionalProperties": false,
+        "description": "The schema of an contributing part of a valid LUSID resource identifier"
       },
       "IdSelectorDefinition": {
         "required": [
@@ -82758,6 +83116,7 @@
             "items": {
               "$ref": "#/components/schemas/Link"
             },
+            "description": "Collection of links.",
             "nullable": true
           }
         },
@@ -83107,6 +83466,7 @@
             "items": {
               "$ref": "#/components/schemas/Link"
             },
+            "description": "Collection of links.",
             "nullable": true
           }
         },
@@ -83138,6 +83498,7 @@
             "items": {
               "$ref": "#/components/schemas/Link"
             },
+            "description": "Collection of links.",
             "nullable": true
           }
         },
@@ -83569,6 +83930,7 @@
             "items": {
               "$ref": "#/components/schemas/Link"
             },
+            "description": "Collection of links.",
             "nullable": true
           }
         },
@@ -83760,21 +84122,26 @@
         "type": "object",
         "properties": {
           "relation": {
-            "type": "string"
+            "type": "string",
+            "description": "Relation of link."
           },
           "href": {
             "type": "string",
+            "description": "Href of link.",
             "format": "uri"
           },
           "description": {
             "type": "string",
+            "description": "Description of link.",
             "nullable": true
           },
           "method": {
-            "type": "string"
+            "type": "string",
+            "description": "Http method of link."
           }
         },
-        "additionalProperties": false
+        "additionalProperties": false,
+        "description": "Link class."
       },
       "ListAggregationReconciliation": {
         "type": "object",
@@ -83842,6 +84209,7 @@
             "items": {
               "$ref": "#/components/schemas/Link"
             },
+            "description": "Collection of links.",
             "nullable": true
           }
         },
@@ -83972,7 +84340,8 @@
         "properties": {
           "name": {
             "minLength": 1,
-            "type": "string"
+            "type": "string",
+            "description": "The name of the error"
           },
           "errorDetails": {
             "type": "array",
@@ -83982,10 +84351,12 @@
                 "type": "string"
               }
             },
+            "description": "Any additional informational information available about the nature and detail of the problem",
             "nullable": true
           },
           "code": {
             "type": "integer",
+            "description": "Get the error code of the response",
             "format": "int32"
           },
           "type": {
@@ -84010,7 +84381,8 @@
             "nullable": true
           }
         },
-        "additionalProperties": false
+        "additionalProperties": false,
+        "description": "A description of a problem that has arisen during the processing of a request."
       },
       "LusidUniqueId": {
         "required": [
@@ -84041,7 +84413,8 @@
         "properties": {
           "name": {
             "minLength": 1,
-            "type": "string"
+            "type": "string",
+            "description": "The name of the error"
           },
           "errorDetails": {
             "type": "array",
@@ -84051,10 +84424,12 @@
                 "type": "string"
               }
             },
+            "description": "Any additional informational information available about the nature and detail of the problem",
             "nullable": true
           },
           "code": {
             "type": "integer",
+            "description": "Get the error code of the response",
             "format": "int32"
           },
           "errors": {
@@ -84088,7 +84463,8 @@
             "nullable": true
           }
         },
-        "additionalProperties": false
+        "additionalProperties": false,
+        "description": "A description of a problem that has arisen whilst validating a request"
       },
       "MappedString": {
         "type": "object",
@@ -84670,6 +85046,7 @@
             "items": {
               "$ref": "#/components/schemas/Link"
             },
+            "description": "Collection of links.",
             "nullable": true
           }
         },
@@ -84972,6 +85349,7 @@
             "items": {
               "$ref": "#/components/schemas/Link"
             },
+            "description": "Collection of links.",
             "nullable": true
           }
         },
@@ -85295,20 +85673,24 @@
         "properties": {
           "nextPage": {
             "type": "string",
+            "description": "The next page of results.",
             "nullable": true
           },
           "previousPage": {
             "type": "string",
+            "description": "The previous page of results.",
             "nullable": true
           },
           "values": {
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/AddressKeyDefinition"
-            }
+            },
+            "description": "The resources to list."
           },
           "href": {
             "type": "string",
+            "description": "The URI of the resource list.",
             "format": "uri",
             "nullable": true
           },
@@ -85317,10 +85699,12 @@
             "items": {
               "$ref": "#/components/schemas/Link"
             },
+            "description": "Collection of links.",
             "nullable": true
           }
         },
-        "additionalProperties": false
+        "additionalProperties": false,
+        "description": "A paginated list of resource that can be returned from a request."
       },
       "PagedResourceListOfAllocation": {
         "required": [
@@ -85330,20 +85714,24 @@
         "properties": {
           "nextPage": {
             "type": "string",
+            "description": "The next page of results.",
             "nullable": true
           },
           "previousPage": {
             "type": "string",
+            "description": "The previous page of results.",
             "nullable": true
           },
           "values": {
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/Allocation"
-            }
+            },
+            "description": "The resources to list."
           },
           "href": {
             "type": "string",
+            "description": "The URI of the resource list.",
             "format": "uri",
             "nullable": true
           },
@@ -85352,10 +85740,12 @@
             "items": {
               "$ref": "#/components/schemas/Link"
             },
+            "description": "Collection of links.",
             "nullable": true
           }
         },
-        "additionalProperties": false
+        "additionalProperties": false,
+        "description": "A paginated list of resource that can be returned from a request."
       },
       "PagedResourceListOfBlock": {
         "required": [
@@ -85365,20 +85755,24 @@
         "properties": {
           "nextPage": {
             "type": "string",
+            "description": "The next page of results.",
             "nullable": true
           },
           "previousPage": {
             "type": "string",
+            "description": "The previous page of results.",
             "nullable": true
           },
           "values": {
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/Block"
-            }
+            },
+            "description": "The resources to list."
           },
           "href": {
             "type": "string",
+            "description": "The URI of the resource list.",
             "format": "uri",
             "nullable": true
           },
@@ -85387,10 +85781,12 @@
             "items": {
               "$ref": "#/components/schemas/Link"
             },
+            "description": "Collection of links.",
             "nullable": true
           }
         },
-        "additionalProperties": false
+        "additionalProperties": false,
+        "description": "A paginated list of resource that can be returned from a request."
       },
       "PagedResourceListOfCalendar": {
         "required": [
@@ -85400,20 +85796,24 @@
         "properties": {
           "nextPage": {
             "type": "string",
+            "description": "The next page of results.",
             "nullable": true
           },
           "previousPage": {
             "type": "string",
+            "description": "The previous page of results.",
             "nullable": true
           },
           "values": {
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/Calendar"
-            }
+            },
+            "description": "The resources to list."
           },
           "href": {
             "type": "string",
+            "description": "The URI of the resource list.",
             "format": "uri",
             "nullable": true
           },
@@ -85422,10 +85822,12 @@
             "items": {
               "$ref": "#/components/schemas/Link"
             },
+            "description": "Collection of links.",
             "nullable": true
           }
         },
-        "additionalProperties": false
+        "additionalProperties": false,
+        "description": "A paginated list of resource that can be returned from a request."
       },
       "PagedResourceListOfComplianceRuleResponse": {
         "required": [
@@ -85435,20 +85837,24 @@
         "properties": {
           "nextPage": {
             "type": "string",
+            "description": "The next page of results.",
             "nullable": true
           },
           "previousPage": {
             "type": "string",
+            "description": "The previous page of results.",
             "nullable": true
           },
           "values": {
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/ComplianceRuleResponse"
-            }
+            },
+            "description": "The resources to list."
           },
           "href": {
             "type": "string",
+            "description": "The URI of the resource list.",
             "format": "uri",
             "nullable": true
           },
@@ -85457,10 +85863,12 @@
             "items": {
               "$ref": "#/components/schemas/Link"
             },
+            "description": "Collection of links.",
             "nullable": true
           }
         },
-        "additionalProperties": false
+        "additionalProperties": false,
+        "description": "A paginated list of resource that can be returned from a request."
       },
       "PagedResourceListOfComplianceRunInfoV2": {
         "required": [
@@ -85470,20 +85878,24 @@
         "properties": {
           "nextPage": {
             "type": "string",
+            "description": "The next page of results.",
             "nullable": true
           },
           "previousPage": {
             "type": "string",
+            "description": "The previous page of results.",
             "nullable": true
           },
           "values": {
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/ComplianceRunInfoV2"
-            }
+            },
+            "description": "The resources to list."
           },
           "href": {
             "type": "string",
+            "description": "The URI of the resource list.",
             "format": "uri",
             "nullable": true
           },
@@ -85492,10 +85904,12 @@
             "items": {
               "$ref": "#/components/schemas/Link"
             },
+            "description": "Collection of links.",
             "nullable": true
           }
         },
-        "additionalProperties": false
+        "additionalProperties": false,
+        "description": "A paginated list of resource that can be returned from a request."
       },
       "PagedResourceListOfComplianceTemplate": {
         "required": [
@@ -85505,20 +85919,24 @@
         "properties": {
           "nextPage": {
             "type": "string",
+            "description": "The next page of results.",
             "nullable": true
           },
           "previousPage": {
             "type": "string",
+            "description": "The previous page of results.",
             "nullable": true
           },
           "values": {
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/ComplianceTemplate"
-            }
+            },
+            "description": "The resources to list."
           },
           "href": {
             "type": "string",
+            "description": "The URI of the resource list.",
             "format": "uri",
             "nullable": true
           },
@@ -85527,10 +85945,12 @@
             "items": {
               "$ref": "#/components/schemas/Link"
             },
+            "description": "Collection of links.",
             "nullable": true
           }
         },
-        "additionalProperties": false
+        "additionalProperties": false,
+        "description": "A paginated list of resource that can be returned from a request."
       },
       "PagedResourceListOfCorporateActionSource": {
         "required": [
@@ -85540,20 +85960,24 @@
         "properties": {
           "nextPage": {
             "type": "string",
+            "description": "The next page of results.",
             "nullable": true
           },
           "previousPage": {
             "type": "string",
+            "description": "The previous page of results.",
             "nullable": true
           },
           "values": {
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/CorporateActionSource"
-            }
+            },
+            "description": "The resources to list."
           },
           "href": {
             "type": "string",
+            "description": "The URI of the resource list.",
             "format": "uri",
             "nullable": true
           },
@@ -85562,10 +85986,12 @@
             "items": {
               "$ref": "#/components/schemas/Link"
             },
+            "description": "Collection of links.",
             "nullable": true
           }
         },
-        "additionalProperties": false
+        "additionalProperties": false,
+        "description": "A paginated list of resource that can be returned from a request."
       },
       "PagedResourceListOfCustomEntityDefinition": {
         "required": [
@@ -85575,20 +86001,24 @@
         "properties": {
           "nextPage": {
             "type": "string",
+            "description": "The next page of results.",
             "nullable": true
           },
           "previousPage": {
             "type": "string",
+            "description": "The previous page of results.",
             "nullable": true
           },
           "values": {
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/CustomEntityDefinition"
-            }
+            },
+            "description": "The resources to list."
           },
           "href": {
             "type": "string",
+            "description": "The URI of the resource list.",
             "format": "uri",
             "nullable": true
           },
@@ -85597,10 +86027,12 @@
             "items": {
               "$ref": "#/components/schemas/Link"
             },
+            "description": "Collection of links.",
             "nullable": true
           }
         },
-        "additionalProperties": false
+        "additionalProperties": false,
+        "description": "A paginated list of resource that can be returned from a request."
       },
       "PagedResourceListOfCustomEntityResponse": {
         "required": [
@@ -85610,20 +86042,24 @@
         "properties": {
           "nextPage": {
             "type": "string",
+            "description": "The next page of results.",
             "nullable": true
           },
           "previousPage": {
             "type": "string",
+            "description": "The previous page of results.",
             "nullable": true
           },
           "values": {
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/CustomEntityResponse"
-            }
+            },
+            "description": "The resources to list."
           },
           "href": {
             "type": "string",
+            "description": "The URI of the resource list.",
             "format": "uri",
             "nullable": true
           },
@@ -85632,10 +86068,12 @@
             "items": {
               "$ref": "#/components/schemas/Link"
             },
+            "description": "Collection of links.",
             "nullable": true
           }
         },
-        "additionalProperties": false
+        "additionalProperties": false,
+        "description": "A paginated list of resource that can be returned from a request."
       },
       "PagedResourceListOfCustomEntityType": {
         "required": [
@@ -85645,20 +86083,24 @@
         "properties": {
           "nextPage": {
             "type": "string",
+            "description": "The next page of results.",
             "nullable": true
           },
           "previousPage": {
             "type": "string",
+            "description": "The previous page of results.",
             "nullable": true
           },
           "values": {
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/CustomEntityType"
-            }
+            },
+            "description": "The resources to list."
           },
           "href": {
             "type": "string",
+            "description": "The URI of the resource list.",
             "format": "uri",
             "nullable": true
           },
@@ -85667,10 +86109,12 @@
             "items": {
               "$ref": "#/components/schemas/Link"
             },
+            "description": "Collection of links.",
             "nullable": true
           }
         },
-        "additionalProperties": false
+        "additionalProperties": false,
+        "description": "A paginated list of resource that can be returned from a request."
       },
       "PagedResourceListOfCutLabelDefinition": {
         "required": [
@@ -85680,20 +86124,24 @@
         "properties": {
           "nextPage": {
             "type": "string",
+            "description": "The next page of results.",
             "nullable": true
           },
           "previousPage": {
             "type": "string",
+            "description": "The previous page of results.",
             "nullable": true
           },
           "values": {
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/CutLabelDefinition"
-            }
+            },
+            "description": "The resources to list."
           },
           "href": {
             "type": "string",
+            "description": "The URI of the resource list.",
             "format": "uri",
             "nullable": true
           },
@@ -85702,10 +86150,12 @@
             "items": {
               "$ref": "#/components/schemas/Link"
             },
+            "description": "Collection of links.",
             "nullable": true
           }
         },
-        "additionalProperties": false
+        "additionalProperties": false,
+        "description": "A paginated list of resource that can be returned from a request."
       },
       "PagedResourceListOfDataTypeSummary": {
         "required": [
@@ -85715,20 +86165,24 @@
         "properties": {
           "nextPage": {
             "type": "string",
+            "description": "The next page of results.",
             "nullable": true
           },
           "previousPage": {
             "type": "string",
+            "description": "The previous page of results.",
             "nullable": true
           },
           "values": {
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/DataTypeSummary"
-            }
+            },
+            "description": "The resources to list."
           },
           "href": {
             "type": "string",
+            "description": "The URI of the resource list.",
             "format": "uri",
             "nullable": true
           },
@@ -85737,10 +86191,12 @@
             "items": {
               "$ref": "#/components/schemas/Link"
             },
+            "description": "Collection of links.",
             "nullable": true
           }
         },
-        "additionalProperties": false
+        "additionalProperties": false,
+        "description": "A paginated list of resource that can be returned from a request."
       },
       "PagedResourceListOfExecution": {
         "required": [
@@ -85750,20 +86206,24 @@
         "properties": {
           "nextPage": {
             "type": "string",
+            "description": "The next page of results.",
             "nullable": true
           },
           "previousPage": {
             "type": "string",
+            "description": "The previous page of results.",
             "nullable": true
           },
           "values": {
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/Execution"
-            }
+            },
+            "description": "The resources to list."
           },
           "href": {
             "type": "string",
+            "description": "The URI of the resource list.",
             "format": "uri",
             "nullable": true
           },
@@ -85772,10 +86232,12 @@
             "items": {
               "$ref": "#/components/schemas/Link"
             },
+            "description": "Collection of links.",
             "nullable": true
           }
         },
-        "additionalProperties": false
+        "additionalProperties": false,
+        "description": "A paginated list of resource that can be returned from a request."
       },
       "PagedResourceListOfInstrument": {
         "required": [
@@ -85785,20 +86247,24 @@
         "properties": {
           "nextPage": {
             "type": "string",
+            "description": "The next page of results.",
             "nullable": true
           },
           "previousPage": {
             "type": "string",
+            "description": "The previous page of results.",
             "nullable": true
           },
           "values": {
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/Instrument"
-            }
+            },
+            "description": "The resources to list."
           },
           "href": {
             "type": "string",
+            "description": "The URI of the resource list.",
             "format": "uri",
             "nullable": true
           },
@@ -85807,10 +86273,12 @@
             "items": {
               "$ref": "#/components/schemas/Link"
             },
+            "description": "Collection of links.",
             "nullable": true
           }
         },
-        "additionalProperties": false
+        "additionalProperties": false,
+        "description": "A paginated list of resource that can be returned from a request."
       },
       "PagedResourceListOfInstrumentEventHolder": {
         "required": [
@@ -85820,20 +86288,24 @@
         "properties": {
           "nextPage": {
             "type": "string",
+            "description": "The next page of results.",
             "nullable": true
           },
           "previousPage": {
             "type": "string",
+            "description": "The previous page of results.",
             "nullable": true
           },
           "values": {
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/InstrumentEventHolder"
-            }
+            },
+            "description": "The resources to list."
           },
           "href": {
             "type": "string",
+            "description": "The URI of the resource list.",
             "format": "uri",
             "nullable": true
           },
@@ -85842,10 +86314,12 @@
             "items": {
               "$ref": "#/components/schemas/Link"
             },
+            "description": "Collection of links.",
             "nullable": true
           }
         },
-        "additionalProperties": false
+        "additionalProperties": false,
+        "description": "A paginated list of resource that can be returned from a request."
       },
       "PagedResourceListOfLegalEntity": {
         "required": [
@@ -85855,20 +86329,24 @@
         "properties": {
           "nextPage": {
             "type": "string",
+            "description": "The next page of results.",
             "nullable": true
           },
           "previousPage": {
             "type": "string",
+            "description": "The previous page of results.",
             "nullable": true
           },
           "values": {
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/LegalEntity"
-            }
+            },
+            "description": "The resources to list."
           },
           "href": {
             "type": "string",
+            "description": "The URI of the resource list.",
             "format": "uri",
             "nullable": true
           },
@@ -85877,10 +86355,12 @@
             "items": {
               "$ref": "#/components/schemas/Link"
             },
+            "description": "Collection of links.",
             "nullable": true
           }
         },
-        "additionalProperties": false
+        "additionalProperties": false,
+        "description": "A paginated list of resource that can be returned from a request."
       },
       "PagedResourceListOfOrder": {
         "required": [
@@ -85890,20 +86370,24 @@
         "properties": {
           "nextPage": {
             "type": "string",
+            "description": "The next page of results.",
             "nullable": true
           },
           "previousPage": {
             "type": "string",
+            "description": "The previous page of results.",
             "nullable": true
           },
           "values": {
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/Order"
-            }
+            },
+            "description": "The resources to list."
           },
           "href": {
             "type": "string",
+            "description": "The URI of the resource list.",
             "format": "uri",
             "nullable": true
           },
@@ -85912,10 +86396,12 @@
             "items": {
               "$ref": "#/components/schemas/Link"
             },
+            "description": "Collection of links.",
             "nullable": true
           }
         },
-        "additionalProperties": false
+        "additionalProperties": false,
+        "description": "A paginated list of resource that can be returned from a request."
       },
       "PagedResourceListOfParticipation": {
         "required": [
@@ -85925,20 +86411,24 @@
         "properties": {
           "nextPage": {
             "type": "string",
+            "description": "The next page of results.",
             "nullable": true
           },
           "previousPage": {
             "type": "string",
+            "description": "The previous page of results.",
             "nullable": true
           },
           "values": {
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/Participation"
-            }
+            },
+            "description": "The resources to list."
           },
           "href": {
             "type": "string",
+            "description": "The URI of the resource list.",
             "format": "uri",
             "nullable": true
           },
@@ -85947,10 +86437,12 @@
             "items": {
               "$ref": "#/components/schemas/Link"
             },
+            "description": "Collection of links.",
             "nullable": true
           }
         },
-        "additionalProperties": false
+        "additionalProperties": false,
+        "description": "A paginated list of resource that can be returned from a request."
       },
       "PagedResourceListOfPerson": {
         "required": [
@@ -85960,20 +86452,24 @@
         "properties": {
           "nextPage": {
             "type": "string",
+            "description": "The next page of results.",
             "nullable": true
           },
           "previousPage": {
             "type": "string",
+            "description": "The previous page of results.",
             "nullable": true
           },
           "values": {
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/Person"
-            }
+            },
+            "description": "The resources to list."
           },
           "href": {
             "type": "string",
+            "description": "The URI of the resource list.",
             "format": "uri",
             "nullable": true
           },
@@ -85982,10 +86478,12 @@
             "items": {
               "$ref": "#/components/schemas/Link"
             },
+            "description": "Collection of links.",
             "nullable": true
           }
         },
-        "additionalProperties": false
+        "additionalProperties": false,
+        "description": "A paginated list of resource that can be returned from a request."
       },
       "PagedResourceListOfPlacement": {
         "required": [
@@ -85995,20 +86493,24 @@
         "properties": {
           "nextPage": {
             "type": "string",
+            "description": "The next page of results.",
             "nullable": true
           },
           "previousPage": {
             "type": "string",
+            "description": "The previous page of results.",
             "nullable": true
           },
           "values": {
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/Placement"
-            }
+            },
+            "description": "The resources to list."
           },
           "href": {
             "type": "string",
+            "description": "The URI of the resource list.",
             "format": "uri",
             "nullable": true
           },
@@ -86017,10 +86519,12 @@
             "items": {
               "$ref": "#/components/schemas/Link"
             },
+            "description": "Collection of links.",
             "nullable": true
           }
         },
-        "additionalProperties": false
+        "additionalProperties": false,
+        "description": "A paginated list of resource that can be returned from a request."
       },
       "PagedResourceListOfPortfolioGroup": {
         "required": [
@@ -86030,20 +86534,24 @@
         "properties": {
           "nextPage": {
             "type": "string",
+            "description": "The next page of results.",
             "nullable": true
           },
           "previousPage": {
             "type": "string",
+            "description": "The previous page of results.",
             "nullable": true
           },
           "values": {
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/PortfolioGroup"
-            }
+            },
+            "description": "The resources to list."
           },
           "href": {
             "type": "string",
+            "description": "The URI of the resource list.",
             "format": "uri",
             "nullable": true
           },
@@ -86052,10 +86560,12 @@
             "items": {
               "$ref": "#/components/schemas/Link"
             },
+            "description": "Collection of links.",
             "nullable": true
           }
         },
-        "additionalProperties": false
+        "additionalProperties": false,
+        "description": "A paginated list of resource that can be returned from a request."
       },
       "PagedResourceListOfPortfolioGroupSearchResult": {
         "required": [
@@ -86065,20 +86575,24 @@
         "properties": {
           "nextPage": {
             "type": "string",
+            "description": "The next page of results.",
             "nullable": true
           },
           "previousPage": {
             "type": "string",
+            "description": "The previous page of results.",
             "nullable": true
           },
           "values": {
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/PortfolioGroupSearchResult"
-            }
+            },
+            "description": "The resources to list."
           },
           "href": {
             "type": "string",
+            "description": "The URI of the resource list.",
             "format": "uri",
             "nullable": true
           },
@@ -86087,10 +86601,12 @@
             "items": {
               "$ref": "#/components/schemas/Link"
             },
+            "description": "Collection of links.",
             "nullable": true
           }
         },
-        "additionalProperties": false
+        "additionalProperties": false,
+        "description": "A paginated list of resource that can be returned from a request."
       },
       "PagedResourceListOfPortfolioSearchResult": {
         "required": [
@@ -86100,20 +86616,24 @@
         "properties": {
           "nextPage": {
             "type": "string",
+            "description": "The next page of results.",
             "nullable": true
           },
           "previousPage": {
             "type": "string",
+            "description": "The previous page of results.",
             "nullable": true
           },
           "values": {
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/PortfolioSearchResult"
-            }
+            },
+            "description": "The resources to list."
           },
           "href": {
             "type": "string",
+            "description": "The URI of the resource list.",
             "format": "uri",
             "nullable": true
           },
@@ -86122,10 +86642,12 @@
             "items": {
               "$ref": "#/components/schemas/Link"
             },
+            "description": "Collection of links.",
             "nullable": true
           }
         },
-        "additionalProperties": false
+        "additionalProperties": false,
+        "description": "A paginated list of resource that can be returned from a request."
       },
       "PagedResourceListOfPropertyDefinitionSearchResult": {
         "required": [
@@ -86135,20 +86657,24 @@
         "properties": {
           "nextPage": {
             "type": "string",
+            "description": "The next page of results.",
             "nullable": true
           },
           "previousPage": {
             "type": "string",
+            "description": "The previous page of results.",
             "nullable": true
           },
           "values": {
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/PropertyDefinitionSearchResult"
-            }
+            },
+            "description": "The resources to list."
           },
           "href": {
             "type": "string",
+            "description": "The URI of the resource list.",
             "format": "uri",
             "nullable": true
           },
@@ -86157,10 +86683,12 @@
             "items": {
               "$ref": "#/components/schemas/Link"
             },
+            "description": "Collection of links.",
             "nullable": true
           }
         },
-        "additionalProperties": false
+        "additionalProperties": false,
+        "description": "A paginated list of resource that can be returned from a request."
       },
       "PagedResourceListOfReferenceListResponse": {
         "required": [
@@ -86170,20 +86698,24 @@
         "properties": {
           "nextPage": {
             "type": "string",
+            "description": "The next page of results.",
             "nullable": true
           },
           "previousPage": {
             "type": "string",
+            "description": "The previous page of results.",
             "nullable": true
           },
           "values": {
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/ReferenceListResponse"
-            }
+            },
+            "description": "The resources to list."
           },
           "href": {
             "type": "string",
+            "description": "The URI of the resource list.",
             "format": "uri",
             "nullable": true
           },
@@ -86192,10 +86724,12 @@
             "items": {
               "$ref": "#/components/schemas/Link"
             },
+            "description": "Collection of links.",
             "nullable": true
           }
         },
-        "additionalProperties": false
+        "additionalProperties": false,
+        "description": "A paginated list of resource that can be returned from a request."
       },
       "PagedResourceListOfRelationshipDefinition": {
         "required": [
@@ -86205,20 +86739,24 @@
         "properties": {
           "nextPage": {
             "type": "string",
+            "description": "The next page of results.",
             "nullable": true
           },
           "previousPage": {
             "type": "string",
+            "description": "The previous page of results.",
             "nullable": true
           },
           "values": {
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/RelationshipDefinition"
-            }
+            },
+            "description": "The resources to list."
           },
           "href": {
             "type": "string",
+            "description": "The URI of the resource list.",
             "format": "uri",
             "nullable": true
           },
@@ -86227,10 +86765,12 @@
             "items": {
               "$ref": "#/components/schemas/Link"
             },
+            "description": "Collection of links.",
             "nullable": true
           }
         },
-        "additionalProperties": false
+        "additionalProperties": false,
+        "description": "A paginated list of resource that can be returned from a request."
       },
       "PagedResourceListOfSequenceDefinition": {
         "required": [
@@ -86240,20 +86780,24 @@
         "properties": {
           "nextPage": {
             "type": "string",
+            "description": "The next page of results.",
             "nullable": true
           },
           "previousPage": {
             "type": "string",
+            "description": "The previous page of results.",
             "nullable": true
           },
           "values": {
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/SequenceDefinition"
-            }
+            },
+            "description": "The resources to list."
           },
           "href": {
             "type": "string",
+            "description": "The URI of the resource list.",
             "format": "uri",
             "nullable": true
           },
@@ -86262,10 +86806,12 @@
             "items": {
               "$ref": "#/components/schemas/Link"
             },
+            "description": "Collection of links.",
             "nullable": true
           }
         },
-        "additionalProperties": false
+        "additionalProperties": false,
+        "description": "A paginated list of resource that can be returned from a request."
       },
       "Participation": {
         "required": [
@@ -86292,6 +86838,7 @@
             "items": {
               "$ref": "#/components/schemas/Link"
             },
+            "description": "Collection of links.",
             "nullable": true
           }
         },
@@ -86591,6 +87138,7 @@
             "items": {
               "$ref": "#/components/schemas/Link"
             },
+            "description": "Collection of links.",
             "nullable": true
           }
         },
@@ -86821,6 +87369,7 @@
             "items": {
               "$ref": "#/components/schemas/Link"
             },
+            "description": "Collection of links.",
             "nullable": true
           }
         },
@@ -86911,6 +87460,7 @@
             "items": {
               "$ref": "#/components/schemas/Link"
             },
+            "description": "Collection of links.",
             "nullable": true
           }
         },
@@ -86956,6 +87506,7 @@
             "items": {
               "$ref": "#/components/schemas/Link"
             },
+            "description": "Collection of links.",
             "nullable": true
           }
         },
@@ -87031,6 +87582,7 @@
             "items": {
               "$ref": "#/components/schemas/Link"
             },
+            "description": "Collection of links.",
             "nullable": true
           }
         },
@@ -87129,6 +87681,7 @@
             "items": {
               "$ref": "#/components/schemas/Link"
             },
+            "description": "Collection of links.",
             "nullable": true
           }
         },
@@ -87276,6 +87829,7 @@
             "items": {
               "$ref": "#/components/schemas/Link"
             },
+            "description": "Collection of links.",
             "nullable": true
           }
         },
@@ -87336,6 +87890,7 @@
             "items": {
               "$ref": "#/components/schemas/Link"
             },
+            "description": "Collection of links.",
             "nullable": true
           }
         },
@@ -87558,6 +88113,7 @@
             "items": {
               "$ref": "#/components/schemas/Link"
             },
+            "description": "Collection of links.",
             "nullable": true
           }
         },
@@ -87661,6 +88217,84 @@
           }
         ]
       },
+      "PortfolioReturnBreakdown": {
+        "required": [
+          "portfolioId"
+        ],
+        "type": "object",
+        "properties": {
+          "portfolioId": {
+            "$ref": "#/components/schemas/ResourceId"
+          },
+          "rateOfReturn": {
+            "type": "number",
+            "description": "The return number.",
+            "format": "double"
+          },
+          "openingMarketValue": {
+            "type": "number",
+            "description": "The opening market value.",
+            "format": "double",
+            "nullable": true
+          },
+          "closingMarketValue": {
+            "type": "number",
+            "description": "The closing market value.",
+            "format": "double",
+            "nullable": true
+          },
+          "weight": {
+            "type": "number",
+            "description": "The weight of the constituent into the composite.",
+            "format": "double"
+          },
+          "constituentsInTheComposite": {
+            "type": "integer",
+            "description": "The number of members in the Composite on the given day.",
+            "format": "int32"
+          },
+          "constituentsMissing": {
+            "type": "integer",
+            "description": "The number of the constituents which have a missing return on that day.",
+            "format": "int32"
+          },
+          "currency": {
+            "type": "string",
+            "description": "The currency of the portfolio.",
+            "nullable": true
+          },
+          "openFxRate": {
+            "type": "number",
+            "description": "The opening fxRate which is used in calculation.",
+            "format": "double"
+          },
+          "closeFxRate": {
+            "type": "number",
+            "description": "The closing fxRate which is used in calculation.",
+            "format": "double"
+          },
+          "localRateOfReturn": {
+            "type": "number",
+            "description": "The rate of return in the local currency.",
+            "format": "double",
+            "nullable": true
+          },
+          "localOpeningMarketValue": {
+            "type": "number",
+            "description": "The opening market value in the local currency.",
+            "format": "double",
+            "nullable": true
+          },
+          "localClosingMarketValue": {
+            "type": "number",
+            "description": "The closing market value in the local currency.",
+            "format": "double",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false,
+        "description": "A list of Composite Breakdowns."
+      },
       "PortfolioSearchResult": {
         "required": [
           "created",
@@ -87729,6 +88363,7 @@
             "items": {
               "$ref": "#/components/schemas/Link"
             },
+            "description": "Collection of links.",
             "nullable": true
           }
         },
@@ -88099,6 +88734,7 @@
             "items": {
               "$ref": "#/components/schemas/Link"
             },
+            "description": "Collection of links.",
             "nullable": true
           }
         },
@@ -88267,6 +88903,7 @@
             "items": {
               "$ref": "#/components/schemas/Link"
             },
+            "description": "Collection of links.",
             "nullable": true
           }
         },
@@ -88438,6 +89075,7 @@
             "items": {
               "$ref": "#/components/schemas/Link"
             },
+            "description": "Collection of links.",
             "nullable": true
           }
         },
@@ -89344,6 +89982,7 @@
             "items": {
               "$ref": "#/components/schemas/Link"
             },
+            "description": "Collection of links.",
             "nullable": true
           }
         },
@@ -89638,6 +90277,7 @@
             "items": {
               "$ref": "#/components/schemas/Link"
             },
+            "description": "Collection of links.",
             "nullable": true
           }
         },
@@ -89864,10 +90504,12 @@
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/AccessControlledResource"
-            }
+            },
+            "description": "The resources to list."
           },
           "href": {
             "type": "string",
+            "description": "The URI of the resource list.",
             "format": "uri",
             "nullable": true
           },
@@ -89876,18 +90518,22 @@
             "items": {
               "$ref": "#/components/schemas/Link"
             },
+            "description": "Collection of links.",
             "nullable": true
           },
           "nextPage": {
             "type": "string",
+            "description": "The next page of results.",
             "nullable": true
           },
           "previousPage": {
             "type": "string",
+            "description": "The previous page of results.",
             "nullable": true
           }
         },
-        "additionalProperties": false
+        "additionalProperties": false,
+        "description": "A collection of resources that can be returned from requests."
       },
       "ResourceListOfAccessMetadataValueOf": {
         "required": [
@@ -89902,10 +90548,12 @@
               "items": {
                 "$ref": "#/components/schemas/AccessMetadataValue"
               }
-            }
+            },
+            "description": "The resources to list."
           },
           "href": {
             "type": "string",
+            "description": "The URI of the resource list.",
             "format": "uri",
             "nullable": true
           },
@@ -89914,18 +90562,22 @@
             "items": {
               "$ref": "#/components/schemas/Link"
             },
+            "description": "Collection of links.",
             "nullable": true
           },
           "nextPage": {
             "type": "string",
+            "description": "The next page of results.",
             "nullable": true
           },
           "previousPage": {
             "type": "string",
+            "description": "The previous page of results.",
             "nullable": true
           }
         },
-        "additionalProperties": false
+        "additionalProperties": false,
+        "description": "A collection of resources that can be returned from requests."
       },
       "ResourceListOfAddressKeyDefinition": {
         "required": [
@@ -89937,10 +90589,12 @@
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/AddressKeyDefinition"
-            }
+            },
+            "description": "The resources to list."
           },
           "href": {
             "type": "string",
+            "description": "The URI of the resource list.",
             "format": "uri",
             "nullable": true
           },
@@ -89949,18 +90603,22 @@
             "items": {
               "$ref": "#/components/schemas/Link"
             },
+            "description": "Collection of links.",
             "nullable": true
           },
           "nextPage": {
             "type": "string",
+            "description": "The next page of results.",
             "nullable": true
           },
           "previousPage": {
             "type": "string",
+            "description": "The previous page of results.",
             "nullable": true
           }
         },
-        "additionalProperties": false
+        "additionalProperties": false,
+        "description": "A collection of resources that can be returned from requests."
       },
       "ResourceListOfAggregationQuery": {
         "required": [
@@ -89972,10 +90630,12 @@
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/AggregationQuery"
-            }
+            },
+            "description": "The resources to list."
           },
           "href": {
             "type": "string",
+            "description": "The URI of the resource list.",
             "format": "uri",
             "nullable": true
           },
@@ -89984,18 +90644,22 @@
             "items": {
               "$ref": "#/components/schemas/Link"
             },
+            "description": "Collection of links.",
             "nullable": true
           },
           "nextPage": {
             "type": "string",
+            "description": "The next page of results.",
             "nullable": true
           },
           "previousPage": {
             "type": "string",
+            "description": "The previous page of results.",
             "nullable": true
           }
         },
-        "additionalProperties": false
+        "additionalProperties": false,
+        "description": "A collection of resources that can be returned from requests."
       },
       "ResourceListOfAllocation": {
         "required": [
@@ -90007,10 +90671,12 @@
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/Allocation"
-            }
+            },
+            "description": "The resources to list."
           },
           "href": {
             "type": "string",
+            "description": "The URI of the resource list.",
             "format": "uri",
             "nullable": true
           },
@@ -90019,18 +90685,22 @@
             "items": {
               "$ref": "#/components/schemas/Link"
             },
+            "description": "Collection of links.",
             "nullable": true
           },
           "nextPage": {
             "type": "string",
+            "description": "The next page of results.",
             "nullable": true
           },
           "previousPage": {
             "type": "string",
+            "description": "The previous page of results.",
             "nullable": true
           }
         },
-        "additionalProperties": false
+        "additionalProperties": false,
+        "description": "A collection of resources that can be returned from requests."
       },
       "ResourceListOfBlock": {
         "required": [
@@ -90042,10 +90712,12 @@
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/Block"
-            }
+            },
+            "description": "The resources to list."
           },
           "href": {
             "type": "string",
+            "description": "The URI of the resource list.",
             "format": "uri",
             "nullable": true
           },
@@ -90054,18 +90726,22 @@
             "items": {
               "$ref": "#/components/schemas/Link"
             },
+            "description": "Collection of links.",
             "nullable": true
           },
           "nextPage": {
             "type": "string",
+            "description": "The next page of results.",
             "nullable": true
           },
           "previousPage": {
             "type": "string",
+            "description": "The previous page of results.",
             "nullable": true
           }
         },
-        "additionalProperties": false
+        "additionalProperties": false,
+        "description": "A collection of resources that can be returned from requests."
       },
       "ResourceListOfCalendarDate": {
         "required": [
@@ -90077,10 +90753,12 @@
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/CalendarDate"
-            }
+            },
+            "description": "The resources to list."
           },
           "href": {
             "type": "string",
+            "description": "The URI of the resource list.",
             "format": "uri",
             "nullable": true
           },
@@ -90089,18 +90767,22 @@
             "items": {
               "$ref": "#/components/schemas/Link"
             },
+            "description": "Collection of links.",
             "nullable": true
           },
           "nextPage": {
             "type": "string",
+            "description": "The next page of results.",
             "nullable": true
           },
           "previousPage": {
             "type": "string",
+            "description": "The previous page of results.",
             "nullable": true
           }
         },
-        "additionalProperties": false
+        "additionalProperties": false,
+        "description": "A collection of resources that can be returned from requests."
       },
       "ResourceListOfChange": {
         "required": [
@@ -90112,10 +90794,12 @@
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/Change"
-            }
+            },
+            "description": "The resources to list."
           },
           "href": {
             "type": "string",
+            "description": "The URI of the resource list.",
             "format": "uri",
             "nullable": true
           },
@@ -90124,18 +90808,22 @@
             "items": {
               "$ref": "#/components/schemas/Link"
             },
+            "description": "Collection of links.",
             "nullable": true
           },
           "nextPage": {
             "type": "string",
+            "description": "The next page of results.",
             "nullable": true
           },
           "previousPage": {
             "type": "string",
+            "description": "The previous page of results.",
             "nullable": true
           }
         },
-        "additionalProperties": false
+        "additionalProperties": false,
+        "description": "A collection of resources that can be returned from requests."
       },
       "ResourceListOfChangeHistory": {
         "required": [
@@ -90147,10 +90835,12 @@
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/ChangeHistory"
-            }
+            },
+            "description": "The resources to list."
           },
           "href": {
             "type": "string",
+            "description": "The URI of the resource list.",
             "format": "uri",
             "nullable": true
           },
@@ -90159,18 +90849,22 @@
             "items": {
               "$ref": "#/components/schemas/Link"
             },
+            "description": "Collection of links.",
             "nullable": true
           },
           "nextPage": {
             "type": "string",
+            "description": "The next page of results.",
             "nullable": true
           },
           "previousPage": {
             "type": "string",
+            "description": "The previous page of results.",
             "nullable": true
           }
         },
-        "additionalProperties": false
+        "additionalProperties": false,
+        "description": "A collection of resources that can be returned from requests."
       },
       "ResourceListOfConstituentsAdjustmentHeader": {
         "required": [
@@ -90182,10 +90876,12 @@
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/ConstituentsAdjustmentHeader"
-            }
+            },
+            "description": "The resources to list."
           },
           "href": {
             "type": "string",
+            "description": "The URI of the resource list.",
             "format": "uri",
             "nullable": true
           },
@@ -90194,18 +90890,22 @@
             "items": {
               "$ref": "#/components/schemas/Link"
             },
+            "description": "Collection of links.",
             "nullable": true
           },
           "nextPage": {
             "type": "string",
+            "description": "The next page of results.",
             "nullable": true
           },
           "previousPage": {
             "type": "string",
+            "description": "The previous page of results.",
             "nullable": true
           }
         },
-        "additionalProperties": false
+        "additionalProperties": false,
+        "description": "A collection of resources that can be returned from requests."
       },
       "ResourceListOfCorporateAction": {
         "required": [
@@ -90217,10 +90917,12 @@
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/CorporateAction"
-            }
+            },
+            "description": "The resources to list."
           },
           "href": {
             "type": "string",
+            "description": "The URI of the resource list.",
             "format": "uri",
             "nullable": true
           },
@@ -90229,18 +90931,22 @@
             "items": {
               "$ref": "#/components/schemas/Link"
             },
+            "description": "Collection of links.",
             "nullable": true
           },
           "nextPage": {
             "type": "string",
+            "description": "The next page of results.",
             "nullable": true
           },
           "previousPage": {
             "type": "string",
+            "description": "The previous page of results.",
             "nullable": true
           }
         },
-        "additionalProperties": false
+        "additionalProperties": false,
+        "description": "A collection of resources that can be returned from requests."
       },
       "ResourceListOfDataType": {
         "required": [
@@ -90252,10 +90958,12 @@
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/DataType"
-            }
+            },
+            "description": "The resources to list."
           },
           "href": {
             "type": "string",
+            "description": "The URI of the resource list.",
             "format": "uri",
             "nullable": true
           },
@@ -90264,18 +90972,22 @@
             "items": {
               "$ref": "#/components/schemas/Link"
             },
+            "description": "Collection of links.",
             "nullable": true
           },
           "nextPage": {
             "type": "string",
+            "description": "The next page of results.",
             "nullable": true
           },
           "previousPage": {
             "type": "string",
+            "description": "The previous page of results.",
             "nullable": true
           }
         },
-        "additionalProperties": false
+        "additionalProperties": false,
+        "description": "A collection of resources that can be returned from requests."
       },
       "ResourceListOfExecution": {
         "required": [
@@ -90287,10 +90999,12 @@
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/Execution"
-            }
+            },
+            "description": "The resources to list."
           },
           "href": {
             "type": "string",
+            "description": "The URI of the resource list.",
             "format": "uri",
             "nullable": true
           },
@@ -90299,18 +91013,22 @@
             "items": {
               "$ref": "#/components/schemas/Link"
             },
+            "description": "Collection of links.",
             "nullable": true
           },
           "nextPage": {
             "type": "string",
+            "description": "The next page of results.",
             "nullable": true
           },
           "previousPage": {
             "type": "string",
+            "description": "The previous page of results.",
             "nullable": true
           }
         },
-        "additionalProperties": false
+        "additionalProperties": false,
+        "description": "A collection of resources that can be returned from requests."
       },
       "ResourceListOfGetCounterpartyAgreementResponse": {
         "required": [
@@ -90322,10 +91040,12 @@
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/GetCounterpartyAgreementResponse"
-            }
+            },
+            "description": "The resources to list."
           },
           "href": {
             "type": "string",
+            "description": "The URI of the resource list.",
             "format": "uri",
             "nullable": true
           },
@@ -90334,18 +91054,22 @@
             "items": {
               "$ref": "#/components/schemas/Link"
             },
+            "description": "Collection of links.",
             "nullable": true
           },
           "nextPage": {
             "type": "string",
+            "description": "The next page of results.",
             "nullable": true
           },
           "previousPage": {
             "type": "string",
+            "description": "The previous page of results.",
             "nullable": true
           }
         },
-        "additionalProperties": false
+        "additionalProperties": false,
+        "description": "A collection of resources that can be returned from requests."
       },
       "ResourceListOfGetCreditSupportAnnexResponse": {
         "required": [
@@ -90357,10 +91081,12 @@
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/GetCreditSupportAnnexResponse"
-            }
+            },
+            "description": "The resources to list."
           },
           "href": {
             "type": "string",
+            "description": "The URI of the resource list.",
             "format": "uri",
             "nullable": true
           },
@@ -90369,18 +91095,22 @@
             "items": {
               "$ref": "#/components/schemas/Link"
             },
+            "description": "Collection of links.",
             "nullable": true
           },
           "nextPage": {
             "type": "string",
+            "description": "The next page of results.",
             "nullable": true
           },
           "previousPage": {
             "type": "string",
+            "description": "The previous page of results.",
             "nullable": true
           }
         },
-        "additionalProperties": false
+        "additionalProperties": false,
+        "description": "A collection of resources that can be returned from requests."
       },
       "ResourceListOfGetRecipeResponse": {
         "required": [
@@ -90392,10 +91122,12 @@
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/GetRecipeResponse"
-            }
+            },
+            "description": "The resources to list."
           },
           "href": {
             "type": "string",
+            "description": "The URI of the resource list.",
             "format": "uri",
             "nullable": true
           },
@@ -90404,18 +91136,22 @@
             "items": {
               "$ref": "#/components/schemas/Link"
             },
+            "description": "Collection of links.",
             "nullable": true
           },
           "nextPage": {
             "type": "string",
+            "description": "The next page of results.",
             "nullable": true
           },
           "previousPage": {
             "type": "string",
+            "description": "The previous page of results.",
             "nullable": true
           }
         },
-        "additionalProperties": false
+        "additionalProperties": false,
+        "description": "A collection of resources that can be returned from requests."
       },
       "ResourceListOfHoldingsAdjustmentHeader": {
         "required": [
@@ -90427,10 +91163,12 @@
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/HoldingsAdjustmentHeader"
-            }
+            },
+            "description": "The resources to list."
           },
           "href": {
             "type": "string",
+            "description": "The URI of the resource list.",
             "format": "uri",
             "nullable": true
           },
@@ -90439,18 +91177,22 @@
             "items": {
               "$ref": "#/components/schemas/Link"
             },
+            "description": "Collection of links.",
             "nullable": true
           },
           "nextPage": {
             "type": "string",
+            "description": "The next page of results.",
             "nullable": true
           },
           "previousPage": {
             "type": "string",
+            "description": "The previous page of results.",
             "nullable": true
           }
         },
-        "additionalProperties": false
+        "additionalProperties": false,
+        "description": "A collection of resources that can be returned from requests."
       },
       "ResourceListOfInstrumentIdTypeDescriptor": {
         "required": [
@@ -90462,10 +91204,12 @@
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/InstrumentIdTypeDescriptor"
-            }
+            },
+            "description": "The resources to list."
           },
           "href": {
             "type": "string",
+            "description": "The URI of the resource list.",
             "format": "uri",
             "nullable": true
           },
@@ -90474,18 +91218,22 @@
             "items": {
               "$ref": "#/components/schemas/Link"
             },
+            "description": "Collection of links.",
             "nullable": true
           },
           "nextPage": {
             "type": "string",
+            "description": "The next page of results.",
             "nullable": true
           },
           "previousPage": {
             "type": "string",
+            "description": "The previous page of results.",
             "nullable": true
           }
         },
-        "additionalProperties": false
+        "additionalProperties": false,
+        "description": "A collection of resources that can be returned from requests."
       },
       "ResourceListOfIUnitDefinitionDto": {
         "required": [
@@ -90497,10 +91245,12 @@
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/IUnitDefinitionDto"
-            }
+            },
+            "description": "The resources to list."
           },
           "href": {
             "type": "string",
+            "description": "The URI of the resource list.",
             "format": "uri",
             "nullable": true
           },
@@ -90509,18 +91259,22 @@
             "items": {
               "$ref": "#/components/schemas/Link"
             },
+            "description": "Collection of links.",
             "nullable": true
           },
           "nextPage": {
             "type": "string",
+            "description": "The next page of results.",
             "nullable": true
           },
           "previousPage": {
             "type": "string",
+            "description": "The previous page of results.",
             "nullable": true
           }
         },
-        "additionalProperties": false
+        "additionalProperties": false,
+        "description": "A collection of resources that can be returned from requests."
       },
       "ResourceListOfLegalEntity": {
         "required": [
@@ -90532,10 +91286,12 @@
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/LegalEntity"
-            }
+            },
+            "description": "The resources to list."
           },
           "href": {
             "type": "string",
+            "description": "The URI of the resource list.",
             "format": "uri",
             "nullable": true
           },
@@ -90544,18 +91300,22 @@
             "items": {
               "$ref": "#/components/schemas/Link"
             },
+            "description": "Collection of links.",
             "nullable": true
           },
           "nextPage": {
             "type": "string",
+            "description": "The next page of results.",
             "nullable": true
           },
           "previousPage": {
             "type": "string",
+            "description": "The previous page of results.",
             "nullable": true
           }
         },
-        "additionalProperties": false
+        "additionalProperties": false,
+        "description": "A collection of resources that can be returned from requests."
       },
       "ResourceListOfMapping": {
         "required": [
@@ -90567,10 +91327,12 @@
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/Mapping"
-            }
+            },
+            "description": "The resources to list."
           },
           "href": {
             "type": "string",
+            "description": "The URI of the resource list.",
             "format": "uri",
             "nullable": true
           },
@@ -90579,18 +91341,22 @@
             "items": {
               "$ref": "#/components/schemas/Link"
             },
+            "description": "Collection of links.",
             "nullable": true
           },
           "nextPage": {
             "type": "string",
+            "description": "The next page of results.",
             "nullable": true
           },
           "previousPage": {
             "type": "string",
+            "description": "The previous page of results.",
             "nullable": true
           }
         },
-        "additionalProperties": false
+        "additionalProperties": false,
+        "description": "A collection of resources that can be returned from requests."
       },
       "ResourceListOfOrder": {
         "required": [
@@ -90602,10 +91368,12 @@
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/Order"
-            }
+            },
+            "description": "The resources to list."
           },
           "href": {
             "type": "string",
+            "description": "The URI of the resource list.",
             "format": "uri",
             "nullable": true
           },
@@ -90614,18 +91382,22 @@
             "items": {
               "$ref": "#/components/schemas/Link"
             },
+            "description": "Collection of links.",
             "nullable": true
           },
           "nextPage": {
             "type": "string",
+            "description": "The next page of results.",
             "nullable": true
           },
           "previousPage": {
             "type": "string",
+            "description": "The previous page of results.",
             "nullable": true
           }
         },
-        "additionalProperties": false
+        "additionalProperties": false,
+        "description": "A collection of resources that can be returned from requests."
       },
       "ResourceListOfParticipation": {
         "required": [
@@ -90637,10 +91409,12 @@
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/Participation"
-            }
+            },
+            "description": "The resources to list."
           },
           "href": {
             "type": "string",
+            "description": "The URI of the resource list.",
             "format": "uri",
             "nullable": true
           },
@@ -90649,18 +91423,22 @@
             "items": {
               "$ref": "#/components/schemas/Link"
             },
+            "description": "Collection of links.",
             "nullable": true
           },
           "nextPage": {
             "type": "string",
+            "description": "The next page of results.",
             "nullable": true
           },
           "previousPage": {
             "type": "string",
+            "description": "The previous page of results.",
             "nullable": true
           }
         },
-        "additionalProperties": false
+        "additionalProperties": false,
+        "description": "A collection of resources that can be returned from requests."
       },
       "ResourceListOfPerformanceReturn": {
         "required": [
@@ -90672,10 +91450,12 @@
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/PerformanceReturn"
-            }
+            },
+            "description": "The resources to list."
           },
           "href": {
             "type": "string",
+            "description": "The URI of the resource list.",
             "format": "uri",
             "nullable": true
           },
@@ -90684,18 +91464,22 @@
             "items": {
               "$ref": "#/components/schemas/Link"
             },
+            "description": "Collection of links.",
             "nullable": true
           },
           "nextPage": {
             "type": "string",
+            "description": "The next page of results.",
             "nullable": true
           },
           "previousPage": {
             "type": "string",
+            "description": "The previous page of results.",
             "nullable": true
           }
         },
-        "additionalProperties": false
+        "additionalProperties": false,
+        "description": "A collection of resources that can be returned from requests."
       },
       "ResourceListOfPerson": {
         "required": [
@@ -90707,10 +91491,12 @@
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/Person"
-            }
+            },
+            "description": "The resources to list."
           },
           "href": {
             "type": "string",
+            "description": "The URI of the resource list.",
             "format": "uri",
             "nullable": true
           },
@@ -90719,18 +91505,22 @@
             "items": {
               "$ref": "#/components/schemas/Link"
             },
+            "description": "Collection of links.",
             "nullable": true
           },
           "nextPage": {
             "type": "string",
+            "description": "The next page of results.",
             "nullable": true
           },
           "previousPage": {
             "type": "string",
+            "description": "The previous page of results.",
             "nullable": true
           }
         },
-        "additionalProperties": false
+        "additionalProperties": false,
+        "description": "A collection of resources that can be returned from requests."
       },
       "ResourceListOfPlacement": {
         "required": [
@@ -90742,10 +91532,12 @@
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/Placement"
-            }
+            },
+            "description": "The resources to list."
           },
           "href": {
             "type": "string",
+            "description": "The URI of the resource list.",
             "format": "uri",
             "nullable": true
           },
@@ -90754,18 +91546,22 @@
             "items": {
               "$ref": "#/components/schemas/Link"
             },
+            "description": "Collection of links.",
             "nullable": true
           },
           "nextPage": {
             "type": "string",
+            "description": "The next page of results.",
             "nullable": true
           },
           "previousPage": {
             "type": "string",
+            "description": "The previous page of results.",
             "nullable": true
           }
         },
-        "additionalProperties": false
+        "additionalProperties": false,
+        "description": "A collection of resources that can be returned from requests."
       },
       "ResourceListOfPortfolio": {
         "required": [
@@ -90777,10 +91573,12 @@
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/Portfolio"
-            }
+            },
+            "description": "The resources to list."
           },
           "href": {
             "type": "string",
+            "description": "The URI of the resource list.",
             "format": "uri",
             "nullable": true
           },
@@ -90789,18 +91587,22 @@
             "items": {
               "$ref": "#/components/schemas/Link"
             },
+            "description": "Collection of links.",
             "nullable": true
           },
           "nextPage": {
             "type": "string",
+            "description": "The next page of results.",
             "nullable": true
           },
           "previousPage": {
             "type": "string",
+            "description": "The previous page of results.",
             "nullable": true
           }
         },
-        "additionalProperties": false
+        "additionalProperties": false,
+        "description": "A collection of resources that can be returned from requests."
       },
       "ResourceListOfPortfolioCashFlow": {
         "required": [
@@ -90812,10 +91614,12 @@
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/PortfolioCashFlow"
-            }
+            },
+            "description": "The resources to list."
           },
           "href": {
             "type": "string",
+            "description": "The URI of the resource list.",
             "format": "uri",
             "nullable": true
           },
@@ -90824,18 +91628,22 @@
             "items": {
               "$ref": "#/components/schemas/Link"
             },
+            "description": "Collection of links.",
             "nullable": true
           },
           "nextPage": {
             "type": "string",
+            "description": "The next page of results.",
             "nullable": true
           },
           "previousPage": {
             "type": "string",
+            "description": "The previous page of results.",
             "nullable": true
           }
         },
-        "additionalProperties": false
+        "additionalProperties": false,
+        "description": "A collection of resources that can be returned from requests."
       },
       "ResourceListOfPortfolioCashLadder": {
         "required": [
@@ -90847,10 +91655,12 @@
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/PortfolioCashLadder"
-            }
+            },
+            "description": "The resources to list."
           },
           "href": {
             "type": "string",
+            "description": "The URI of the resource list.",
             "format": "uri",
             "nullable": true
           },
@@ -90859,18 +91669,22 @@
             "items": {
               "$ref": "#/components/schemas/Link"
             },
+            "description": "Collection of links.",
             "nullable": true
           },
           "nextPage": {
             "type": "string",
+            "description": "The next page of results.",
             "nullable": true
           },
           "previousPage": {
             "type": "string",
+            "description": "The previous page of results.",
             "nullable": true
           }
         },
-        "additionalProperties": false
+        "additionalProperties": false,
+        "description": "A collection of resources that can be returned from requests."
       },
       "ResourceListOfProcessedCommand": {
         "required": [
@@ -90882,10 +91696,12 @@
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/ProcessedCommand"
-            }
+            },
+            "description": "The resources to list."
           },
           "href": {
             "type": "string",
+            "description": "The URI of the resource list.",
             "format": "uri",
             "nullable": true
           },
@@ -90894,18 +91710,22 @@
             "items": {
               "$ref": "#/components/schemas/Link"
             },
+            "description": "Collection of links.",
             "nullable": true
           },
           "nextPage": {
             "type": "string",
+            "description": "The next page of results.",
             "nullable": true
           },
           "previousPage": {
             "type": "string",
+            "description": "The previous page of results.",
             "nullable": true
           }
         },
-        "additionalProperties": false
+        "additionalProperties": false,
+        "description": "A collection of resources that can be returned from requests."
       },
       "ResourceListOfProperty": {
         "required": [
@@ -90917,10 +91737,12 @@
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/Property"
-            }
+            },
+            "description": "The resources to list."
           },
           "href": {
             "type": "string",
+            "description": "The URI of the resource list.",
             "format": "uri",
             "nullable": true
           },
@@ -90929,18 +91751,22 @@
             "items": {
               "$ref": "#/components/schemas/Link"
             },
+            "description": "Collection of links.",
             "nullable": true
           },
           "nextPage": {
             "type": "string",
+            "description": "The next page of results.",
             "nullable": true
           },
           "previousPage": {
             "type": "string",
+            "description": "The previous page of results.",
             "nullable": true
           }
         },
-        "additionalProperties": false
+        "additionalProperties": false,
+        "description": "A collection of resources that can be returned from requests."
       },
       "ResourceListOfPropertyDefinition": {
         "required": [
@@ -90952,10 +91778,12 @@
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/PropertyDefinition"
-            }
+            },
+            "description": "The resources to list."
           },
           "href": {
             "type": "string",
+            "description": "The URI of the resource list.",
             "format": "uri",
             "nullable": true
           },
@@ -90964,18 +91792,22 @@
             "items": {
               "$ref": "#/components/schemas/Link"
             },
+            "description": "Collection of links.",
             "nullable": true
           },
           "nextPage": {
             "type": "string",
+            "description": "The next page of results.",
             "nullable": true
           },
           "previousPage": {
             "type": "string",
+            "description": "The previous page of results.",
             "nullable": true
           }
         },
-        "additionalProperties": false
+        "additionalProperties": false,
+        "description": "A collection of resources that can be returned from requests."
       },
       "ResourceListOfPropertyInterval": {
         "required": [
@@ -90987,10 +91819,12 @@
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/PropertyInterval"
-            }
+            },
+            "description": "The resources to list."
           },
           "href": {
             "type": "string",
+            "description": "The URI of the resource list.",
             "format": "uri",
             "nullable": true
           },
@@ -90999,18 +91833,22 @@
             "items": {
               "$ref": "#/components/schemas/Link"
             },
+            "description": "Collection of links.",
             "nullable": true
           },
           "nextPage": {
             "type": "string",
+            "description": "The next page of results.",
             "nullable": true
           },
           "previousPage": {
             "type": "string",
+            "description": "The previous page of results.",
             "nullable": true
           }
         },
-        "additionalProperties": false
+        "additionalProperties": false,
+        "description": "A collection of resources that can be returned from requests."
       },
       "ResourceListOfQuote": {
         "required": [
@@ -91022,10 +91860,12 @@
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/Quote"
-            }
+            },
+            "description": "The resources to list."
           },
           "href": {
             "type": "string",
+            "description": "The URI of the resource list.",
             "format": "uri",
             "nullable": true
           },
@@ -91034,18 +91874,22 @@
             "items": {
               "$ref": "#/components/schemas/Link"
             },
+            "description": "Collection of links.",
             "nullable": true
           },
           "nextPage": {
             "type": "string",
+            "description": "The next page of results.",
             "nullable": true
           },
           "previousPage": {
             "type": "string",
+            "description": "The previous page of results.",
             "nullable": true
           }
         },
-        "additionalProperties": false
+        "additionalProperties": false,
+        "description": "A collection of resources that can be returned from requests."
       },
       "ResourceListOfReconciliationBreak": {
         "required": [
@@ -91057,10 +91901,12 @@
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/ReconciliationBreak"
-            }
+            },
+            "description": "The resources to list."
           },
           "href": {
             "type": "string",
+            "description": "The URI of the resource list.",
             "format": "uri",
             "nullable": true
           },
@@ -91069,18 +91915,22 @@
             "items": {
               "$ref": "#/components/schemas/Link"
             },
+            "description": "Collection of links.",
             "nullable": true
           },
           "nextPage": {
             "type": "string",
+            "description": "The next page of results.",
             "nullable": true
           },
           "previousPage": {
             "type": "string",
+            "description": "The previous page of results.",
             "nullable": true
           }
         },
-        "additionalProperties": false
+        "additionalProperties": false,
+        "description": "A collection of resources that can be returned from requests."
       },
       "ResourceListOfRelation": {
         "required": [
@@ -91092,10 +91942,12 @@
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/Relation"
-            }
+            },
+            "description": "The resources to list."
           },
           "href": {
             "type": "string",
+            "description": "The URI of the resource list.",
             "format": "uri",
             "nullable": true
           },
@@ -91104,18 +91956,22 @@
             "items": {
               "$ref": "#/components/schemas/Link"
             },
+            "description": "Collection of links.",
             "nullable": true
           },
           "nextPage": {
             "type": "string",
+            "description": "The next page of results.",
             "nullable": true
           },
           "previousPage": {
             "type": "string",
+            "description": "The previous page of results.",
             "nullable": true
           }
         },
-        "additionalProperties": false
+        "additionalProperties": false,
+        "description": "A collection of resources that can be returned from requests."
       },
       "ResourceListOfRelationship": {
         "required": [
@@ -91127,10 +91983,12 @@
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/Relationship"
-            }
+            },
+            "description": "The resources to list."
           },
           "href": {
             "type": "string",
+            "description": "The URI of the resource list.",
             "format": "uri",
             "nullable": true
           },
@@ -91139,18 +91997,22 @@
             "items": {
               "$ref": "#/components/schemas/Link"
             },
+            "description": "Collection of links.",
             "nullable": true
           },
           "nextPage": {
             "type": "string",
+            "description": "The next page of results.",
             "nullable": true
           },
           "previousPage": {
             "type": "string",
+            "description": "The previous page of results.",
             "nullable": true
           }
         },
-        "additionalProperties": false
+        "additionalProperties": false,
+        "description": "A collection of resources that can be returned from requests."
       },
       "ResourceListOfScopeDefinition": {
         "required": [
@@ -91162,10 +92024,12 @@
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/ScopeDefinition"
-            }
+            },
+            "description": "The resources to list."
           },
           "href": {
             "type": "string",
+            "description": "The URI of the resource list.",
             "format": "uri",
             "nullable": true
           },
@@ -91174,18 +92038,22 @@
             "items": {
               "$ref": "#/components/schemas/Link"
             },
+            "description": "Collection of links.",
             "nullable": true
           },
           "nextPage": {
             "type": "string",
+            "description": "The next page of results.",
             "nullable": true
           },
           "previousPage": {
             "type": "string",
+            "description": "The previous page of results.",
             "nullable": true
           }
         },
-        "additionalProperties": false
+        "additionalProperties": false,
+        "description": "A collection of resources that can be returned from requests."
       },
       "ResourceListOfString": {
         "required": [
@@ -91197,10 +92065,12 @@
             "type": "array",
             "items": {
               "type": "string"
-            }
+            },
+            "description": "The resources to list."
           },
           "href": {
             "type": "string",
+            "description": "The URI of the resource list.",
             "format": "uri",
             "nullable": true
           },
@@ -91209,18 +92079,22 @@
             "items": {
               "$ref": "#/components/schemas/Link"
             },
+            "description": "Collection of links.",
             "nullable": true
           },
           "nextPage": {
             "type": "string",
+            "description": "The next page of results.",
             "nullable": true
           },
           "previousPage": {
             "type": "string",
+            "description": "The previous page of results.",
             "nullable": true
           }
         },
-        "additionalProperties": false
+        "additionalProperties": false,
+        "description": "A collection of resources that can be returned from requests."
       },
       "ResourceListOfValueType": {
         "required": [
@@ -91232,10 +92106,12 @@
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/ValueType"
-            }
+            },
+            "description": "The resources to list."
           },
           "href": {
             "type": "string",
+            "description": "The URI of the resource list.",
             "format": "uri",
             "nullable": true
           },
@@ -91244,18 +92120,22 @@
             "items": {
               "$ref": "#/components/schemas/Link"
             },
+            "description": "Collection of links.",
             "nullable": true
           },
           "nextPage": {
             "type": "string",
+            "description": "The next page of results.",
             "nullable": true
           },
           "previousPage": {
             "type": "string",
+            "description": "The previous page of results.",
             "nullable": true
           }
         },
-        "additionalProperties": false
+        "additionalProperties": false,
+        "description": "A collection of resources that can be returned from requests."
       },
       "ResponseMetaData": {
         "type": "object",
@@ -91884,6 +92764,7 @@
             "items": {
               "$ref": "#/components/schemas/Link"
             },
+            "description": "Collection of links.",
             "nullable": true
           }
         },
@@ -91958,6 +92839,7 @@
             "items": {
               "$ref": "#/components/schemas/Link"
             },
+            "description": "Collection of links.",
             "nullable": true
           }
         },
@@ -92067,6 +92949,7 @@
             "items": {
               "$ref": "#/components/schemas/Link"
             },
+            "description": "Collection of links.",
             "nullable": true
           }
         },
@@ -93372,6 +94255,7 @@
             "items": {
               "$ref": "#/components/schemas/Link"
             },
+            "description": "Collection of links.",
             "nullable": true
           }
         },
@@ -94038,6 +94922,7 @@
             "items": {
               "$ref": "#/components/schemas/Link"
             },
+            "description": "Collection of links.",
             "nullable": true
           }
         },
@@ -94096,6 +94981,7 @@
             "items": {
               "$ref": "#/components/schemas/Link"
             },
+            "description": "Collection of links.",
             "nullable": true
           }
         },
@@ -94189,6 +95075,7 @@
             "items": {
               "$ref": "#/components/schemas/Link"
             },
+            "description": "Collection of links.",
             "nullable": true
           }
         },
@@ -94210,6 +95097,7 @@
             "items": {
               "$ref": "#/components/schemas/Link"
             },
+            "description": "Collection of links.",
             "nullable": true
           }
         },
@@ -94284,6 +95172,7 @@
             "items": {
               "$ref": "#/components/schemas/Link"
             },
+            "description": "Collection of links.",
             "nullable": true
           }
         },
@@ -94319,6 +95208,7 @@
             "items": {
               "$ref": "#/components/schemas/Link"
             },
+            "description": "Collection of links.",
             "nullable": true
           }
         },
@@ -94497,6 +95387,7 @@
             "items": {
               "$ref": "#/components/schemas/Link"
             },
+            "description": "Collection of links.",
             "nullable": true
           }
         },
@@ -94559,6 +95450,7 @@
             "items": {
               "$ref": "#/components/schemas/Link"
             },
+            "description": "Collection of links.",
             "nullable": true
           }
         },
@@ -94644,6 +95536,7 @@
             "items": {
               "$ref": "#/components/schemas/Link"
             },
+            "description": "Collection of links.",
             "nullable": true
           }
         },
@@ -94692,6 +95585,7 @@
             "items": {
               "$ref": "#/components/schemas/Link"
             },
+            "description": "Collection of links.",
             "nullable": true
           }
         },
@@ -94717,6 +95611,7 @@
             "items": {
               "$ref": "#/components/schemas/Link"
             },
+            "description": "Collection of links.",
             "nullable": true
           }
         },
@@ -94754,6 +95649,7 @@
             "items": {
               "$ref": "#/components/schemas/Link"
             },
+            "description": "Collection of links.",
             "nullable": true
           }
         },
@@ -94784,6 +95680,7 @@
             "items": {
               "$ref": "#/components/schemas/Link"
             },
+            "description": "Collection of links.",
             "nullable": true
           }
         },
@@ -95124,19 +96021,23 @@
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/A2BDataRecord"
-            }
+            },
+            "description": "The resources to list."
           },
           "href": {
             "type": "string",
+            "description": "The URI of the resource list.",
             "format": "uri",
             "nullable": true
           },
           "nextPage": {
             "type": "string",
+            "description": "The next page of results.",
             "nullable": true
           },
           "previousPage": {
             "type": "string",
+            "description": "The previous page of results.",
             "nullable": true
           },
           "links": {
@@ -95144,6 +96045,7 @@
             "items": {
               "$ref": "#/components/schemas/Link"
             },
+            "description": "Collection of links.",
             "nullable": true
           }
         },
@@ -95163,19 +96065,23 @@
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/A2BMovementRecord"
-            }
+            },
+            "description": "The resources to list."
           },
           "href": {
             "type": "string",
+            "description": "The URI of the resource list.",
             "format": "uri",
             "nullable": true
           },
           "nextPage": {
             "type": "string",
+            "description": "The next page of results.",
             "nullable": true
           },
           "previousPage": {
             "type": "string",
+            "description": "The previous page of results.",
             "nullable": true
           },
           "links": {
@@ -95183,6 +96089,7 @@
             "items": {
               "$ref": "#/components/schemas/Link"
             },
+            "description": "Collection of links.",
             "nullable": true
           }
         },
@@ -95202,19 +96109,23 @@
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/OutputTransaction"
-            }
+            },
+            "description": "The resources to list."
           },
           "href": {
             "type": "string",
+            "description": "The URI of the resource list.",
             "format": "uri",
             "nullable": true
           },
           "nextPage": {
             "type": "string",
+            "description": "The next page of results.",
             "nullable": true
           },
           "previousPage": {
             "type": "string",
+            "description": "The previous page of results.",
             "nullable": true
           },
           "links": {
@@ -95222,6 +96133,7 @@
             "items": {
               "$ref": "#/components/schemas/Link"
             },
+            "description": "Collection of links.",
             "nullable": true
           }
         },
@@ -95241,19 +96153,23 @@
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/PortfolioHolding"
-            }
+            },
+            "description": "The resources to list."
           },
           "href": {
             "type": "string",
+            "description": "The URI of the resource list.",
             "format": "uri",
             "nullable": true
           },
           "nextPage": {
             "type": "string",
+            "description": "The next page of results.",
             "nullable": true
           },
           "previousPage": {
             "type": "string",
+            "description": "The previous page of results.",
             "nullable": true
           },
           "links": {
@@ -95261,6 +96177,7 @@
             "items": {
               "$ref": "#/components/schemas/Link"
             },
+            "description": "Collection of links.",
             "nullable": true
           }
         },
@@ -95280,19 +96197,23 @@
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/Transaction"
-            }
+            },
+            "description": "The resources to list."
           },
           "href": {
             "type": "string",
+            "description": "The URI of the resource list.",
             "format": "uri",
             "nullable": true
           },
           "nextPage": {
             "type": "string",
+            "description": "The next page of results.",
             "nullable": true
           },
           "previousPage": {
             "type": "string",
+            "description": "The previous page of results.",
             "nullable": true
           },
           "links": {
@@ -95300,6 +96221,7 @@
             "items": {
               "$ref": "#/components/schemas/Link"
             },
+            "description": "Collection of links.",
             "nullable": true
           }
         },
@@ -95325,6 +96247,7 @@
             "items": {
               "$ref": "#/components/schemas/Link"
             },
+            "description": "Collection of links.",
             "nullable": true
           }
         },
@@ -95465,7 +96388,7 @@
         "description": "OAuth2 Implicit Grant",
         "flows": {
           "implicit": {
-            "authorizationUrl": "https://lusid.okta.com/oauth2/default/v1/authorize",
+            "authorizationUrl": "https://dummyurl.lusid.com/",
             "scopes": {}
           }
         }
