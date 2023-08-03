@@ -9,7 +9,7 @@
       "url": "https://www.finbourne.com",
       "email": "info@finbourne.com"
     },
-    "version": "1.0.407",
+    "version": "1.0.408",
     "x-logo": {
       "url": "https://www.lusid.com/app/assets/logo_white.png",
       "backgroundColor": "#415464"
@@ -92750,16 +92750,16 @@
         "properties": {
           "scheduleType": {
             "enum": [
-              "Fixed",
-              "Float",
-              "Optionality",
-              "Step",
+              "FixedSchedule",
+              "FloatSchedule",
+              "OptionalitySchedule",
+              "StepSchedule",
               "Exercise",
-              "FxRate",
+              "FxRateSchedule",
               "Invalid"
             ],
             "type": "string",
-            "description": "The available values are: Fixed, Float, Optionality, Step, Exercise, FxRate, Invalid"
+            "description": "The available values are: FixedSchedule, FloatSchedule, OptionalitySchedule, StepSchedule, Exercise, FxRateSchedule, Invalid"
           }
         },
         "additionalProperties": false,
@@ -93193,16 +93193,16 @@
               },
               "scheduleType": {
                 "enum": [
-                  "Fixed",
-                  "Float",
-                  "Optionality",
-                  "Step",
+                  "FixedSchedule",
+                  "FloatSchedule",
+                  "OptionalitySchedule",
+                  "StepSchedule",
                   "Exercise",
-                  "FxRate",
+                  "FxRateSchedule",
                   "Invalid"
                 ],
                 "type": "string",
-                "description": "The available values are: Fixed, Float, Optionality, Step, Exercise, FxRate, Invalid"
+                "description": "The available values are: FixedSchedule, FloatSchedule, OptionalitySchedule, StepSchedule, Exercise, FxRateSchedule, Invalid"
               }
             }
           }
