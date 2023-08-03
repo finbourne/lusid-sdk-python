@@ -9,7 +9,7 @@
       "url": "https://www.finbourne.com",
       "email": "info@finbourne.com"
     },
-    "version": "1.0.408",
+    "version": "1.0.409",
     "x-logo": {
       "url": "https://www.lusid.com/app/assets/logo_white.png",
       "backgroundColor": "#415464"
@@ -15911,7 +15911,7 @@
           {
             "name": "page",
             "in": "query",
-            "description": "The pagination token to use to continue listing data type summaries. This\r\nvalue is returned from the previous call. If a pagination token is provided, the filter, effectiveAt\r\nand asAt fields must not have changed since the original request. Also, if set, a start value cannot be provided.",
+            "description": "The pagination token to use to continue listing data type summaries. This\r\nvalue is returned from the previous call. If a pagination token is provided, the filter, sortBy\r\nand asAt fields must not have changed since the original request. Also, if set, a start value cannot be provided.",
             "schema": {
               "maxLength": 500,
               "minLength": 1,
@@ -15955,7 +15955,7 @@
           {
             "name": "sortBy",
             "in": "query",
-            "description": "Sort the results by these fields. Use use the '-' sign to denote descending allocation e.g. -MyFieldName.",
+            "description": "A list of field names to sort by, each suffixed by \" ASC\" or \" DESC\"",
             "schema": {
               "type": "array",
               "items": {
