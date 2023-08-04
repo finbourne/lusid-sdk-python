@@ -9,7 +9,7 @@
       "url": "https://www.finbourne.com",
       "email": "info@finbourne.com"
     },
-    "version": "1.0.414",
+    "version": "1.0.415",
     "x-logo": {
       "url": "https://www.lusid.com/app/assets/logo_white.png",
       "backgroundColor": "#415464"
@@ -80156,6 +80156,18 @@
                 },
                 "additionalProperties": false,
                 "description": "Any overriding data for notionals, spreads or rates that would affect generation of a leg.\r\nThis supports the case where an amortisation schedule is given but otherwise generation is allowed as usual.",
+                "nullable": true
+              },
+              "capRate": {
+                "type": "number",
+                "description": "The maximum floating rate which a cashflow can accrue.",
+                "format": "double",
+                "nullable": true
+              },
+              "floorRate": {
+                "type": "number",
+                "description": "The minimum floating rate which a cashflow can accrue.",
+                "format": "double",
                 "nullable": true
               },
               "instrumentType": {
