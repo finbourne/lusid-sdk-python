@@ -9,7 +9,7 @@
       "url": "https://www.finbourne.com",
       "email": "info@finbourne.com"
     },
-    "version": "1.0.412",
+    "version": "1.0.413",
     "x-logo": {
       "url": "https://www.lusid.com/app/assets/logo_white.png",
       "backgroundColor": "#415464"
@@ -1074,7 +1074,7 @@
           {
             "name": "sortBy",
             "in": "query",
-            "description": "Allocation the results by these fields. Use use the '-' sign to denote descending allocation e.g. -MyFieldName.",
+            "description": "A list of field names or properties to sort by, each suffixed by \" ASC\" or \" DESC\"",
             "schema": {
               "type": "array",
               "items": {
@@ -2115,7 +2115,7 @@
           {
             "name": "sortBy",
             "in": "query",
-            "description": "Order the results by these fields. Use use the '-' sign to denote descending order e.g. -MyFieldName.",
+            "description": "A list of field names or properties to sort by, each suffixed by \" ASC\" or \" DESC\"",
             "schema": {
               "type": "array",
               "items": {
@@ -17178,7 +17178,7 @@
           {
             "name": "sortBy",
             "in": "query",
-            "description": "Order the results by these fields. Use use the '-' sign to denote descending order e.g. -MyFieldName.",
+            "description": "A list of field names or properties to sort by, each suffixed by \" ASC\" or \" DESC\"",
             "schema": {
               "type": "array",
               "items": {
@@ -26286,7 +26286,7 @@
           {
             "name": "sortBy",
             "in": "query",
-            "description": "Order the results by these fields. Use use the '-' sign to denote descending order e.g. -MyFieldName.",
+            "description": "A list of field names or properties to sort by, each suffixed by \" ASC\" or \" DESC\"",
             "schema": {
               "type": "array",
               "items": {
@@ -27242,7 +27242,7 @@
           {
             "name": "sortBy",
             "in": "query",
-            "description": "Order the results by these fields. Use use the '-' sign to denote descending order e.g. -MyFieldName.",
+            "description": "A list of field names to sort by, each suffixed by \" ASC\" or \" DESC\"",
             "schema": {
               "type": "array",
               "items": {
@@ -32105,7 +32105,7 @@
           {
             "name": "sortBy",
             "in": "query",
-            "description": "Order the results by these fields. Use use the '-' sign to denote descending order e.g. -MyFieldName.",
+            "description": "A list of field names or properties to sort by, each suffixed by \" ASC\" or \" DESC\"",
             "schema": {
               "type": "array",
               "items": {
