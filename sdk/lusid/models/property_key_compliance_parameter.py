@@ -95,9 +95,6 @@ class PropertyKeyComplianceParameter(object):
         """
         if self.local_vars_configuration.client_side_validation and value is None:  # noqa: E501
             raise ValueError("Invalid value for `value`, must not be `None`")  # noqa: E501
-        if (self.local_vars_configuration.client_side_validation and
-                value is not None and not re.search(r'^[a-zA-Z0-9@+\-_&]+$', value)):  # noqa: E501
-            raise ValueError(r"Invalid value for `value`, must be a follow pattern or equal to `/^[a-zA-Z0-9@+\-_&]+$/`")  # noqa: E501
 
         self._value = value
 

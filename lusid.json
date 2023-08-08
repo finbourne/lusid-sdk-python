@@ -89023,7 +89023,6 @@
             "type": "object",
             "properties": {
               "value": {
-                "pattern": "^[a-zA-Z0-9@+\\-_&]+$",
                 "type": "string",
                 "description": "The key that uniquely identifies the property. It has the format {domain}/{scope}/{code}."
               },
