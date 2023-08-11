@@ -9,7 +9,7 @@
       "url": "https://www.finbourne.com",
       "email": "info@finbourne.com"
     },
-    "version": "1.0.435",
+    "version": "1.0.436",
     "x-logo": {
       "url": "https://www.lusid.com/app/assets/logo_white.png",
       "backgroundColor": "#415464"
@@ -53581,7 +53581,7 @@
           {
             "name": "page",
             "in": "query",
-            "description": "The pagination token to use to continue listing relationship definitions from a previous call to list relationship definitions. This\r\nvalue is returned from the previous call. If a pagination token is provided the filter, sortBy and asAt field\r\nmust not have changed since the original request.",
+            "description": "The pagination token to use to continue listing relationship definitions from a previous call to list relationship definitions. This\r\nvalue is returned from the previous call. If a pagination token is provided the filter, asAt field\r\nmust not have changed since the original request.",
             "schema": {
               "maxLength": 500,
               "minLength": 1,
@@ -53609,18 +53609,6 @@
               "pattern": "^[\\s\\S]*$",
               "type": "string"
             }
-          },
-          {
-            "name": "sortBy",
-            "in": "query",
-            "description": "A list of field names to sort by, each suffixed by \" ASC\" or \" DESC\"",
-            "schema": {
-              "type": "array",
-              "items": {
-                "type": "string"
-              }
-            },
-            "x-nullable": true
           }
         ],
         "responses": {
