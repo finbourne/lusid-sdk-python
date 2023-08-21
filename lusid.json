@@ -9,7 +9,7 @@
       "url": "https://www.finbourne.com",
       "email": "info@finbourne.com"
     },
-    "version": "1.0.453",
+    "version": "1.0.454",
     "x-logo": {
       "url": "https://www.lusid.com/app/assets/logo_white.png",
       "backgroundColor": "#415464"
@@ -46238,7 +46238,8 @@
                 "period": "Daily",
                 "outputFrequency": "Daily",
                 "alternativeInceptionDate": "2020-01-01",
-                "holidayCalendars": []
+                "holidayCalendars": [],
+                "currency": "USD"
               }
             },
             "application/json": {
@@ -46270,7 +46271,8 @@
                 "period": "Daily",
                 "outputFrequency": "Daily",
                 "alternativeInceptionDate": "2020-01-01",
-                "holidayCalendars": []
+                "holidayCalendars": [],
+                "currency": "USD"
               }
             },
             "text/json": {
@@ -46302,7 +46304,8 @@
                 "period": "Daily",
                 "outputFrequency": "Daily",
                 "alternativeInceptionDate": "2020-01-01",
-                "holidayCalendars": []
+                "holidayCalendars": [],
+                "currency": "USD"
               }
             },
             "application/*+json": {
@@ -46334,7 +46337,8 @@
                 "period": "Daily",
                 "outputFrequency": "Daily",
                 "alternativeInceptionDate": "2020-01-01",
-                "holidayCalendars": []
+                "holidayCalendars": [],
+                "currency": "USD"
               }
             }
           },
@@ -72559,6 +72563,13 @@
             },
             "description": "The holiday calendar(s) that should be used in determining the date schedule. Holiday calendar(s) are supplied by their codes, for example, 'CoppClark'. Note that when the calendars are not available (e.g. when the user has insufficient permissions), a recipe setting will be used to determine whether the whole batch should then fail or whether the calendar not being available should simply be ignored.",
             "nullable": true
+          },
+          "currency": {
+            "maxLength": 6000,
+            "minLength": 0,
+            "type": "string",
+            "description": "Optional - either a string or a property. If provided, the results will be converted to the specified currency",
+            "nullable": true
           }
         },
         "additionalProperties": false,
@@ -75624,6 +75635,13 @@
               "type": "string"
             },
             "description": "The holiday calendar(s) that should be used in determining the date schedule. Holiday calendar(s) are supplied by their codes, for example, 'CoppClark'. Note that when the calendars are not available (e.g. when the user has insufficient permissions), a recipe setting will be used to determine whether the whole batch should then fail or whether the calendar not being available should simply be ignored.",
+            "nullable": true
+          },
+          "currency": {
+            "maxLength": 6000,
+            "minLength": 0,
+            "type": "string",
+            "description": "Optional - either a string or a property. If provided, the results will be converted to the specified currency",
             "nullable": true
           }
         },
