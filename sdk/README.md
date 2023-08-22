@@ -53,10 +53,10 @@ import lusid
 from lusid.rest import ApiException
 from pprint import pprint
 
-# Defining the host is optional and defaults to https://www.lusid.com/api
+# Defining the host is optional and defaults to https://fbn-prd.lusid.com/api
 # See configuration.py for a list of all supported configuration parameters.
 configuration = lusid.Configuration(
-    host = "https://www.lusid.com/api"
+    host = "https://fbn-prd.lusid.com/api"
 )
 
 # The client must configure the authentication and authorization parameters
@@ -66,7 +66,7 @@ configuration = lusid.Configuration(
 
 # Configure OAuth2 access token for authorization: oauth2
 configuration = lusid.Configuration(
-    host = "https://www.lusid.com/api"
+    host = "https://fbn-prd.lusid.com/api"
 )
 configuration.access_token = 'YOUR_ACCESS_TOKEN'
 
@@ -88,7 +88,7 @@ with lusid.ApiClient(configuration) as api_client:
 
 ## Documentation for API Endpoints
 
-All URIs are relative to *https://www.lusid.com/api*
+All URIs are relative to *https://fbn-prd.lusid.com/api*
 
 Class | Method | HTTP request | Description
 ------------ | ------------- | ------------- | -------------
@@ -133,6 +133,7 @@ Class | Method | HTTP request | Description
 *ComplianceApi* | [**list_compliance_templates**](docs/ComplianceApi.md#list_compliance_templates) | **GET** /api/compliance/templates | [EARLY ACCESS] ListComplianceTemplates: List compliance templates.
 *ComplianceApi* | [**run_compliance**](docs/ComplianceApi.md#run_compliance) | **POST** /api/compliance/runs | [EARLY ACCESS] RunCompliance: Run a compliance check.
 *ComplianceApi* | [**upsert_compliance_rule**](docs/ComplianceApi.md#upsert_compliance_rule) | **POST** /api/compliance/rules | [EARLY ACCESS] UpsertComplianceRule: Upsert a compliance rule.
+*ComplianceApi* | [**upsert_compliance_run_summary**](docs/ComplianceApi.md#upsert_compliance_run_summary) | **POST** /api/compliance/runs/summary | [EARLY ACCESS] UpsertComplianceRunSummary: Upsert a compliance run summary.
 *ConfigurationRecipeApi* | [**delete_configuration_recipe**](docs/ConfigurationRecipeApi.md#delete_configuration_recipe) | **DELETE** /api/recipes/{scope}/{code} | DeleteConfigurationRecipe: Delete a Configuration Recipe, assuming that it is present.
 *ConfigurationRecipeApi* | [**get_configuration_recipe**](docs/ConfigurationRecipeApi.md#get_configuration_recipe) | **GET** /api/recipes/{scope}/{code} | GetConfigurationRecipe: Get Configuration Recipe
 *ConfigurationRecipeApi* | [**list_configuration_recipes**](docs/ConfigurationRecipeApi.md#list_configuration_recipes) | **GET** /api/recipes | ListConfigurationRecipes: List the set of Configuration Recipes
@@ -480,10 +481,12 @@ Class | Method | HTTP request | Description
  - [ComplexMarketDataId](docs/ComplexMarketDataId.md)
  - [ComplianceParameter](docs/ComplianceParameter.md)
  - [ComplianceRuleBreakdown](docs/ComplianceRuleBreakdown.md)
+ - [ComplianceRuleBreakdownRequest](docs/ComplianceRuleBreakdownRequest.md)
  - [ComplianceRuleResponse](docs/ComplianceRuleResponse.md)
  - [ComplianceRunInfoV2](docs/ComplianceRunInfoV2.md)
  - [ComplianceRunSummary](docs/ComplianceRunSummary.md)
  - [ComplianceSummaryRuleResult](docs/ComplianceSummaryRuleResult.md)
+ - [ComplianceSummaryRuleResultRequest](docs/ComplianceSummaryRuleResultRequest.md)
  - [ComplianceTemplate](docs/ComplianceTemplate.md)
  - [ComplianceTemplateParameter](docs/ComplianceTemplateParameter.md)
  - [ComplianceTemplateVariation](docs/ComplianceTemplateVariation.md)
@@ -990,6 +993,7 @@ Class | Method | HTTP request | Description
  - [UpdateUnitRequest](docs/UpdateUnitRequest.md)
  - [UpsertComplexMarketDataRequest](docs/UpsertComplexMarketDataRequest.md)
  - [UpsertComplianceRuleRequest](docs/UpsertComplianceRuleRequest.md)
+ - [UpsertComplianceRunSummaryRequest](docs/UpsertComplianceRunSummaryRequest.md)
  - [UpsertCorporateActionRequest](docs/UpsertCorporateActionRequest.md)
  - [UpsertCorporateActionsResponse](docs/UpsertCorporateActionsResponse.md)
  - [UpsertCounterpartyAgreementRequest](docs/UpsertCounterpartyAgreementRequest.md)
@@ -1045,7 +1049,7 @@ Class | Method | HTTP request | Description
 
 - **Type**: OAuth
 - **Flow**: implicit
-- **Authorization URL**: https://dummyurl.lusid.com/
+- **Authorization URL**: https://lusid.okta.com/oauth2/default/v1/authorize
 - **Scopes**: N/A
 
 
