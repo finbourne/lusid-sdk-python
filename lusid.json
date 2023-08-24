@@ -9,7 +9,7 @@
       "url": "https://www.finbourne.com",
       "email": "info@finbourne.com"
     },
-    "version": "1.0.459",
+    "version": "1.0.460",
     "x-logo": {
       "url": "https://www.lusid.com/app/assets/logo_white.png",
       "backgroundColor": "#415464"
@@ -84590,6 +84590,9 @@
                 "description": "Settlement currency if IRS is non-deliverable.",
                 "nullable": true
               },
+              "upFrontPayment": {
+                "$ref": "#/components/schemas/UpFrontPayment"
+              },
               "instrumentType": {
                 "enum": [
                   "QuotedSecurity",
@@ -95799,6 +95802,38 @@
           }
         },
         "additionalProperties": false
+      },
+      "UpFrontPayment": {
+        "required": [
+          "amount",
+          "currency",
+          "payDate",
+          "payReceive"
+        ],
+        "type": "object",
+        "properties": {
+          "amount": {
+            "type": "number",
+            "description": "The upfront amount.",
+            "format": "double"
+          },
+          "currency": {
+            "type": "string",
+            "description": "The upfront currency."
+          },
+          "payDate": {
+            "type": "string",
+            "description": "Date when the upfront is paid.",
+            "format": "date-time"
+          },
+          "payReceive": {
+            "minLength": 1,
+            "type": "string",
+            "description": "Is it pay or receive.\r\n\r\nSupported string (enumeration) values are: [Pay, Receive]."
+          }
+        },
+        "additionalProperties": false,
+        "description": "Record describing an upfront payment entity."
       },
       "UpsertComplexMarketDataRequest": {
         "required": [
