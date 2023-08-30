@@ -85710,10 +85710,11 @@
               "Index",
               "Ratio",
               "Delta",
-              "PoolFactor"
+              "PoolFactor",
+              "InflationAssumption"
             ],
             "type": "string",
-            "description": "The available values are: Price, Spread, Rate, LogNormalVol, NormalVol, ParSpread, IsdaSpread, Upfront, Index, Ratio, Delta, PoolFactor"
+            "description": "The available values are: Price, Spread, Rate, LogNormalVol, NormalVol, ParSpread, IsdaSpread, Upfront, Index, Ratio, Delta, PoolFactor, InflationAssumption"
           },
           "field": {
             "maxLength": 32,
@@ -85846,10 +85847,11 @@
               "Index",
               "Ratio",
               "Delta",
-              "PoolFactor"
+              "PoolFactor",
+              "InflationAssumption"
             ],
             "type": "string",
-            "description": "The available values are: Price, Spread, Rate, LogNormalVol, NormalVol, ParSpread, IsdaSpread, Upfront, Index, Ratio, Delta, PoolFactor"
+            "description": "The available values are: Price, Spread, Rate, LogNormalVol, NormalVol, ParSpread, IsdaSpread, Upfront, Index, Ratio, Delta, PoolFactor, InflationAssumption"
           },
           "field": {
             "maxLength": 32,
@@ -85969,10 +85971,11 @@
               "Index",
               "Ratio",
               "Delta",
-              "PoolFactor"
+              "PoolFactor",
+              "InflationAssumption"
             ],
             "type": "string",
-            "description": "The available values are: Price, Spread, Rate, LogNormalVol, NormalVol, ParSpread, IsdaSpread, Upfront, Index, Ratio, Delta, PoolFactor"
+            "description": "The available values are: Price, Spread, Rate, LogNormalVol, NormalVol, ParSpread, IsdaSpread, Upfront, Index, Ratio, Delta, PoolFactor, InflationAssumption"
           },
           "value": {
             "type": "number",
@@ -90314,10 +90317,11 @@
               "Index",
               "Ratio",
               "Delta",
-              "PoolFactor"
+              "PoolFactor",
+              "InflationAssumption"
             ],
             "type": "string",
-            "description": "The type of the quote. This allows for quotes other than prices e.g. rates or spreads to be used. The available values are: Price, Spread, Rate, LogNormalVol, NormalVol, ParSpread, IsdaSpread, Upfront, Index, Ratio, Delta, PoolFactor",
+            "description": "The type of the quote. This allows for quotes other than prices e.g. rates or spreads to be used. The available values are: Price, Spread, Rate, LogNormalVol, NormalVol, ParSpread, IsdaSpread, Upfront, Index, Ratio, Delta, PoolFactor, InflationAssumption",
             "nullable": true
           },
           "field": {
