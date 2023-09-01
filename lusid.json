@@ -9,7 +9,7 @@
       "url": "https://www.finbourne.com",
       "email": "info@finbourne.com"
     },
-    "version": "1.0.474",
+    "version": "1.0.475",
     "x-logo": {
       "url": "https://www.lusid.com/app/assets/logo_white.png",
       "backgroundColor": "#415464"
@@ -97103,12 +97103,6 @@
             "nullable": true,
             "readOnly": true
           },
-          "requestIdCreated": {
-            "type": "string",
-            "description": "The unique request id of the command that created the entity.",
-            "nullable": true,
-            "readOnly": true
-          },
           "asAtModified": {
             "type": "string",
             "description": "The asAt datetime at which the entity (including its properties) was last updated in LUSID.",
@@ -97119,12 +97113,6 @@
           "userIdModified": {
             "type": "string",
             "description": "The unique id of the user who last updated the entity (including its properties) in LUSID.",
-            "nullable": true,
-            "readOnly": true
-          },
-          "requestIdModified": {
-            "type": "string",
-            "description": "The unique request id of the command that last updated the entity (including its properties) in LUSID.",
             "nullable": true,
             "readOnly": true
           },
