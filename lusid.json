@@ -9,7 +9,7 @@
       "url": "https://www.finbourne.com",
       "email": "info@finbourne.com"
     },
-    "version": "1.0.484",
+    "version": "1.0.485",
     "x-logo": {
       "url": "https://www.lusid.com/app/assets/logo_white.png",
       "backgroundColor": "#415464"
@@ -96452,7 +96452,7 @@
               },
               "domCcy": {
                 "type": "string",
-                "description": "The domestic currency of the instrument. This should be the same as the Currency set on the FlowConventions.",
+                "description": "The domestic currency of the instrument. This should be the same as the Currency set on the FlowConventions.\r\nYou do not need to populate this field for Term Deposits in LUSID as all functionality is driven by the Currency set on the FlowConventions.\r\nLUSID will not store values saved on this field.",
                 "nullable": true
               },
               "instrumentType": {
