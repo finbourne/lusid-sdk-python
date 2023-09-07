@@ -5,7 +5,7 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **instrument_scope** | **str** | The scope in which the instrument lies. | [optional] 
-**instrument_uid** | **str** | The unqiue Lusid Instrument Id (LUID) of the instrument that this gain or loss is associated with. | 
+**instrument_uid** | **str** | The unique Lusid Instrument Id (LUID) of the instrument that this gain or loss is associated with. | 
 **units** | **float** | The number of units of the associated instrument against which the gain or loss has been realised. | 
 **purchase_trade_date** | **datetime** | The effective datetime that the units associated with this gain or loss where originally purchased. | [optional] [readonly] 
 **purchase_settlement_date** | **datetime** | The effective datetime that the units associated with this gain or loss where originally settled. | [optional] [readonly] 

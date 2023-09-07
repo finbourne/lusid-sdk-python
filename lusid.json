@@ -9,7 +9,7 @@
       "url": "https://www.finbourne.com",
       "email": "info@finbourne.com"
     },
-    "version": "1.0.487",
+    "version": "1.0.488",
     "x-logo": {
       "url": "https://www.lusid.com/app/assets/logo_white.png",
       "backgroundColor": "#415464"
@@ -70932,6 +70932,18 @@
               "type": "boolean"
             },
             "x-nullable": true
+          },
+          {
+            "name": "sortBy",
+            "in": "query",
+            "description": "A list of field names or properties to sort by, each suffixed by \" ASC\" or \" DESC\"",
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            },
+            "x-nullable": true
           }
         ],
         "responses": {
@@ -84703,7 +84715,7 @@
           "instrumentUid": {
             "minLength": 1,
             "type": "string",
-            "description": "The unqiue Lusid Instrument Id (LUID) of the instrument that the holding adjustment is in."
+            "description": "The unique Lusid Instrument Id (LUID) of the instrument that the holding adjustment is in."
           },
           "subHoldingKeys": {
             "type": "object",
@@ -84765,7 +84777,7 @@
           "instrumentUid": {
             "minLength": 1,
             "type": "string",
-            "description": "The unqiue Lusid Instrument Id (LUID) of the instrument that the holding adjustment is in."
+            "description": "The unique Lusid Instrument Id (LUID) of the instrument that the holding adjustment is in."
           },
           "subHoldingKeys": {
             "type": "object",
@@ -88241,7 +88253,7 @@
           "instrumentUid": {
             "minLength": 1,
             "type": "string",
-            "description": "The unqiue Lusid Instrument Id (LUID) of the instrument that the transaction is in."
+            "description": "The unique Lusid Instrument Id (LUID) of the instrument that the transaction is in."
           },
           "transactionDate": {
             "type": "string",
@@ -92158,7 +92170,7 @@
           "instrumentUid": {
             "minLength": 1,
             "type": "string",
-            "description": "The unqiue Lusid Instrument Id (LUID) of the instrument that this gain or loss is associated with."
+            "description": "The unique Lusid Instrument Id (LUID) of the instrument that this gain or loss is associated with."
           },
           "units": {
             "type": "number",
@@ -96432,7 +96444,7 @@
           "instrumentUid": {
             "minLength": 1,
             "type": "string",
-            "description": "The unqiue Lusid Instrument Id (LUID) of the instrument that the transaction is in."
+            "description": "The unique Lusid Instrument Id (LUID) of the instrument that the transaction is in."
           },
           "transactionDate": {
             "type": "string",

@@ -9,7 +9,7 @@ Name | Type | Description | Notes
 **type** | **str** | The type of the transaction e.g. &#39;Buy&#39;, &#39;Sell&#39;. The transaction type should have been pre-configured via the System Configuration API endpoint. | 
 **instrument_identifiers** | **dict(str, str)** | A set of instrument identifiers that can resolve the transaction to a unique instrument. | [optional] 
 **instrument_scope** | **str** | The scope in which the transaction&#39;s instrument lies. | [optional] 
-**instrument_uid** | **str** | The unqiue Lusid Instrument Id (LUID) of the instrument that the transaction is in. | 
+**instrument_uid** | **str** | The unique Lusid Instrument Id (LUID) of the instrument that the transaction is in. | 
 **transaction_date** | **datetime** | The date of the transaction. | 
 **settlement_date** | **datetime** | The settlement date of the transaction. | 
 **units** | **float** | The number of units transacted in the associated instrument. | 
