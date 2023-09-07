@@ -9,7 +9,7 @@
       "url": "https://www.finbourne.com",
       "email": "info@finbourne.com"
     },
-    "version": "1.0.488",
+    "version": "1.0.489",
     "x-logo": {
       "url": "https://www.lusid.com/app/assets/logo_white.png",
       "backgroundColor": "#415464"
@@ -73490,6 +73490,295 @@
         "x-fbn-apistatus": "Stable"
       }
     },
+    "/api/unitresults/virtualdocument/{scope}/{code}/{source}/{resultType}": {
+      "get": {
+        "tags": [
+          "Structured Result Data"
+        ],
+        "summary": "[EARLY ACCESS] GetVirtualDocumentRows: Get Virtual Document Rows",
+        "description": "Retrieve the rows of the virtual document with the specified identifiers and the given effectiveAt date time.\r\n\r\nGet virtual document rows merges multiple StructuredResultData items upserted with UpsertStructuredResultData\r\nfor a single StructuredResultDataId.\r\n            \r\nSince an item of StructuredResultData is always upserted with a StructuredResultDataId, of which\r\neffectiveAt is a part, then merging across the asAt dimension is supported but not merging across the\r\neffectiveAt dimension.",
+        "operationId": "GetVirtualDocumentRows",
+        "parameters": [
+          {
+            "name": "scope",
+            "in": "path",
+            "description": "The scope in which to retrieve the virtual document.",
+            "required": true,
+            "schema": {
+              "maxLength": 256,
+              "minLength": 1,
+              "pattern": "^[a-zA-Z0-9\\-_]+$",
+              "type": "string"
+            }
+          },
+          {
+            "name": "code",
+            "in": "path",
+            "description": "The code of the virtual document to retrieve.",
+            "required": true,
+            "schema": {
+              "maxLength": 256,
+              "minLength": 1,
+              "pattern": "^[a-zA-Z0-9\\-_]+$",
+              "type": "string"
+            }
+          },
+          {
+            "name": "source",
+            "in": "path",
+            "description": "The source of the virtual document to retrieve.",
+            "required": true,
+            "schema": {
+              "maxLength": 256,
+              "minLength": 1,
+              "pattern": "^[a-zA-Z0-9\\-_]+$",
+              "type": "string"
+            }
+          },
+          {
+            "name": "resultType",
+            "in": "path",
+            "description": "The result type of the virtual document to retrieve.",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "effectiveAt",
+            "in": "query",
+            "description": "The effectiveAt datetime at which to retrieve the virtual document.",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "dateorcutlabel"
+            }
+          },
+          {
+            "name": "asAt",
+            "in": "query",
+            "description": "The asAt datetime at which to retrieve the virtual document. Defaults to returning the latest version if not specified.",
+            "schema": {
+              "type": "string",
+              "format": "date-time"
+            },
+            "x-nullable": true
+          },
+          {
+            "name": "page",
+            "in": "query",
+            "description": "The pagination token to use to continue listing virtual document rows from a previous\r\n             call to list virtual document rows. This value is returned from the previous call. If a pagination token is\r\n             provided the filter, effectiveAt, and asAt fields must not have changed since the original request.",
+            "schema": {
+              "maxLength": 500,
+              "minLength": 1,
+              "pattern": "^[a-zA-Z0-9\\+/]*={0,3}$",
+              "type": "string"
+            }
+          },
+          {
+            "name": "limit",
+            "in": "query",
+            "description": "When paginating, limit the number of returned results to this many.",
+            "schema": {
+              "maximum": 5000,
+              "minimum": 1,
+              "type": "integer",
+              "format": "int32"
+            },
+            "x-nullable": true
+          },
+          {
+            "name": "filter",
+            "in": "query",
+            "description": "Expression to filter the result set. Read more about filtering results from LUSID here:\r\n             https://support.lusid.com/filtering-results-from-lusid.",
+            "schema": {
+              "maxLength": 16384,
+              "minLength": 0,
+              "pattern": "^[\\s\\S]*$",
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The rows of the virtual document.",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/PagedResourceListOfVirtualRow"
+                },
+                "example": {
+                  "values": [
+                    {
+                      "rowId": {
+                        "Instrument/default/LusidInstrumentId": "LUID_11111111"
+                      },
+                      "rowData": {
+                        "Valuation/PV": {
+                          "units": "GBP",
+                          "value": 123.2,
+                          "dimension": 0,
+                          "resultValueType": "ResultValue0D"
+                        },
+                        "Instrument/default/Name": {
+                          "value": "instr1",
+                          "resultValueType": "ResultValueString"
+                        }
+                      }
+                    },
+                    {
+                      "rowId": {
+                        "Instrument/default/LusidInstrumentId": "LUID_22222222"
+                      },
+                      "rowData": {
+                        "Valuation/PV": {
+                          "units": "GBP",
+                          "value": 45.9,
+                          "dimension": 0,
+                          "resultValueType": "ResultValue0D"
+                        },
+                        "Instrument/default/Name": {
+                          "value": "instr2",
+                          "resultValueType": "ResultValueString"
+                        }
+                      }
+                    }
+                  ],
+                  "href": "https://myco.lusid.com/api/api/virtualdocument/TestScope/TestCode/Client/Risk/",
+                  "links": []
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PagedResourceListOfVirtualRow"
+                },
+                "example": {
+                  "values": [
+                    {
+                      "rowId": {
+                        "Instrument/default/LusidInstrumentId": "LUID_11111111"
+                      },
+                      "rowData": {
+                        "Valuation/PV": {
+                          "units": "GBP",
+                          "value": 123.2,
+                          "dimension": 0,
+                          "resultValueType": "ResultValue0D"
+                        },
+                        "Instrument/default/Name": {
+                          "value": "instr1",
+                          "resultValueType": "ResultValueString"
+                        }
+                      }
+                    },
+                    {
+                      "rowId": {
+                        "Instrument/default/LusidInstrumentId": "LUID_22222222"
+                      },
+                      "rowData": {
+                        "Valuation/PV": {
+                          "units": "GBP",
+                          "value": 45.9,
+                          "dimension": 0,
+                          "resultValueType": "ResultValue0D"
+                        },
+                        "Instrument/default/Name": {
+                          "value": "instr2",
+                          "resultValueType": "ResultValueString"
+                        }
+                      }
+                    }
+                  ],
+                  "href": "https://myco.lusid.com/api/api/virtualdocument/TestScope/TestCode/Client/Risk/",
+                  "links": []
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PagedResourceListOfVirtualRow"
+                },
+                "example": {
+                  "values": [
+                    {
+                      "rowId": {
+                        "Instrument/default/LusidInstrumentId": "LUID_11111111"
+                      },
+                      "rowData": {
+                        "Valuation/PV": {
+                          "units": "GBP",
+                          "value": 123.2,
+                          "dimension": 0,
+                          "resultValueType": "ResultValue0D"
+                        },
+                        "Instrument/default/Name": {
+                          "value": "instr1",
+                          "resultValueType": "ResultValueString"
+                        }
+                      }
+                    },
+                    {
+                      "rowId": {
+                        "Instrument/default/LusidInstrumentId": "LUID_22222222"
+                      },
+                      "rowData": {
+                        "Valuation/PV": {
+                          "units": "GBP",
+                          "value": 45.9,
+                          "dimension": 0,
+                          "resultValueType": "ResultValue0D"
+                        },
+                        "Instrument/default/Name": {
+                          "value": "instr2",
+                          "resultValueType": "ResultValueString"
+                        }
+                      }
+                    }
+                  ],
+                  "href": "https://myco.lusid.com/api/api/virtualdocument/TestScope/TestCode/Client/Risk/",
+                  "links": []
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "The details of the input related failure",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/LusidValidationProblemDetails"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/LusidValidationProblemDetails"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/LusidValidationProblemDetails"
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "Error response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/LusidProblemDetails"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "oauth2": []
+          }
+        ],
+        "x-fbn-apistatus": "EarlyAccess"
+      }
+    },
     "/api/unitresults/virtualdocument/{scope}/{code}/{source}/{resultType}/addresskeydefinitions": {
       "get": {
         "tags": [
@@ -89621,6 +89910,47 @@
         "additionalProperties": false,
         "description": "A paginated list of resource that can be returned from a request."
       },
+      "PagedResourceListOfVirtualRow": {
+        "required": [
+          "values"
+        ],
+        "type": "object",
+        "properties": {
+          "nextPage": {
+            "type": "string",
+            "description": "The next page of results.",
+            "nullable": true
+          },
+          "previousPage": {
+            "type": "string",
+            "description": "The previous page of results.",
+            "nullable": true
+          },
+          "values": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/VirtualRow"
+            },
+            "description": "The resources to list."
+          },
+          "href": {
+            "type": "string",
+            "description": "The URI of the resource list.",
+            "format": "uri",
+            "nullable": true
+          },
+          "links": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Link"
+            },
+            "description": "Collection of links.",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false,
+        "description": "A paginated list of resource that can be returned from a request."
+      },
       "Participation": {
         "required": [
           "id",
@@ -99308,6 +99638,29 @@
           }
         },
         "additionalProperties": false
+      },
+      "VirtualRow": {
+        "type": "object",
+        "properties": {
+          "rowId": {
+            "type": "object",
+            "additionalProperties": {
+              "type": "string"
+            },
+            "description": "The identifier for the row. This is keyed by address keys, and values obtained through applying the data map to the documents.",
+            "nullable": true
+          },
+          "rowData": {
+            "type": "object",
+            "additionalProperties": {
+              "$ref": "#/components/schemas/ResultValue"
+            },
+            "description": "The data for the particular row",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false,
+        "description": "Rows identified by the composite id, based on the data maps"
       },
       "WeekendMask": {
         "required": [
