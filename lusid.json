@@ -9,7 +9,7 @@
       "url": "https://www.finbourne.com",
       "email": "info@finbourne.com"
     },
-    "version": "1.0.507",
+    "version": "1.0.509",
     "x-logo": {
       "url": "https://www.lusid.com/app/assets/logo_white.png",
       "backgroundColor": "#415464"
@@ -85521,7 +85521,7 @@
               },
               "exDividendDays": {
                 "type": "integer",
-                "description": "Number of Good Business Days before the next coupon payment, in which the bond goes ex-dividend.\r\nThis is not common in inflation linked bonds but has been seen with (for example) bonds issued by\r\nthe Bank of Thailand.",
+                "description": "Number of Good Business Days before the next coupon payment, in which the bond goes ex-dividend.",
                 "format": "int32",
                 "nullable": true
               },
