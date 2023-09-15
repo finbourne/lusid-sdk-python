@@ -9,7 +9,7 @@
       "url": "https://www.finbourne.com",
       "email": "info@finbourne.com"
     },
-    "version": "1.0.518",
+    "version": "1.0.519",
     "x-logo": {
       "url": "https://www.lusid.com/app/assets/logo_white.png",
       "backgroundColor": "#415464"
@@ -76463,6 +76463,50 @@
         },
         "additionalProperties": false
       },
+      "CalendarDependency": {
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/EconomicDependency"
+          },
+          {
+            "required": [
+              "calendars",
+              "dependencyType"
+            ],
+            "type": "object",
+            "properties": {
+              "calendars": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                },
+                "description": "The Codes of the calendars that are depended upon."
+              },
+              "dependencyType": {
+                "enum": [
+                  "OpaqueDependency",
+                  "CashDependency",
+                  "DiscountingDependency",
+                  "EquityCurveDependency",
+                  "EquityVolDependency",
+                  "FxDependency",
+                  "FxForwardsDependency",
+                  "FxVolDependency",
+                  "IndexProjectionDependency",
+                  "IrVolDependency",
+                  "QuoteDependency",
+                  "Vendor",
+                  "CalendarDependency",
+                  "InflationFixingDependency"
+                ],
+                "type": "string",
+                "description": "The available values are: OpaqueDependency, CashDependency, DiscountingDependency, EquityCurveDependency, EquityVolDependency, FxDependency, FxForwardsDependency, FxVolDependency, IndexProjectionDependency, IrVolDependency, QuoteDependency, Vendor, CalendarDependency, InflationFixingDependency"
+              }
+            }
+          }
+        ],
+        "description": "For indicating a dependency upon calendar codes"
+      },
       "CapFloor": {
         "allOf": [
           {
@@ -76581,10 +76625,12 @@
                   "IndexProjectionDependency",
                   "IrVolDependency",
                   "QuoteDependency",
-                  "Vendor"
+                  "Vendor",
+                  "CalendarDependency",
+                  "InflationFixingDependency"
                 ],
                 "type": "string",
-                "description": "The available values are: OpaqueDependency, CashDependency, DiscountingDependency, EquityCurveDependency, EquityVolDependency, FxDependency, FxForwardsDependency, FxVolDependency, IndexProjectionDependency, IrVolDependency, QuoteDependency, Vendor"
+                "description": "The available values are: OpaqueDependency, CashDependency, DiscountingDependency, EquityCurveDependency, EquityVolDependency, FxDependency, FxForwardsDependency, FxVolDependency, IndexProjectionDependency, IrVolDependency, QuoteDependency, Vendor, CalendarDependency, InflationFixingDependency"
               }
             }
           }
@@ -81466,10 +81512,12 @@
                   "IndexProjectionDependency",
                   "IrVolDependency",
                   "QuoteDependency",
-                  "Vendor"
+                  "Vendor",
+                  "CalendarDependency",
+                  "InflationFixingDependency"
                 ],
                 "type": "string",
-                "description": "The available values are: OpaqueDependency, CashDependency, DiscountingDependency, EquityCurveDependency, EquityVolDependency, FxDependency, FxForwardsDependency, FxVolDependency, IndexProjectionDependency, IrVolDependency, QuoteDependency, Vendor"
+                "description": "The available values are: OpaqueDependency, CashDependency, DiscountingDependency, EquityCurveDependency, EquityVolDependency, FxDependency, FxForwardsDependency, FxVolDependency, IndexProjectionDependency, IrVolDependency, QuoteDependency, Vendor, CalendarDependency, InflationFixingDependency"
               }
             }
           }
@@ -81495,10 +81543,12 @@
               "IndexProjectionDependency",
               "IrVolDependency",
               "QuoteDependency",
-              "Vendor"
+              "Vendor",
+              "CalendarDependency",
+              "InflationFixingDependency"
             ],
             "type": "string",
-            "description": "The available values are: OpaqueDependency, CashDependency, DiscountingDependency, EquityCurveDependency, EquityVolDependency, FxDependency, FxForwardsDependency, FxVolDependency, IndexProjectionDependency, IrVolDependency, QuoteDependency, Vendor"
+            "description": "The available values are: OpaqueDependency, CashDependency, DiscountingDependency, EquityCurveDependency, EquityVolDependency, FxDependency, FxForwardsDependency, FxVolDependency, IndexProjectionDependency, IrVolDependency, QuoteDependency, Vendor, CalendarDependency, InflationFixingDependency"
           }
         },
         "additionalProperties": false,
@@ -81822,10 +81872,12 @@
                   "IndexProjectionDependency",
                   "IrVolDependency",
                   "QuoteDependency",
-                  "Vendor"
+                  "Vendor",
+                  "CalendarDependency",
+                  "InflationFixingDependency"
                 ],
                 "type": "string",
-                "description": "The available values are: OpaqueDependency, CashDependency, DiscountingDependency, EquityCurveDependency, EquityVolDependency, FxDependency, FxForwardsDependency, FxVolDependency, IndexProjectionDependency, IrVolDependency, QuoteDependency, Vendor"
+                "description": "The available values are: OpaqueDependency, CashDependency, DiscountingDependency, EquityCurveDependency, EquityVolDependency, FxDependency, FxForwardsDependency, FxVolDependency, IndexProjectionDependency, IrVolDependency, QuoteDependency, Vendor, CalendarDependency, InflationFixingDependency"
               }
             }
           }
@@ -82160,10 +82212,12 @@
                   "IndexProjectionDependency",
                   "IrVolDependency",
                   "QuoteDependency",
-                  "Vendor"
+                  "Vendor",
+                  "CalendarDependency",
+                  "InflationFixingDependency"
                 ],
                 "type": "string",
-                "description": "The available values are: OpaqueDependency, CashDependency, DiscountingDependency, EquityCurveDependency, EquityVolDependency, FxDependency, FxForwardsDependency, FxVolDependency, IndexProjectionDependency, IrVolDependency, QuoteDependency, Vendor"
+                "description": "The available values are: OpaqueDependency, CashDependency, DiscountingDependency, EquityCurveDependency, EquityVolDependency, FxDependency, FxForwardsDependency, FxVolDependency, IndexProjectionDependency, IrVolDependency, QuoteDependency, Vendor, CalendarDependency, InflationFixingDependency"
               }
             }
           }
@@ -83709,10 +83763,12 @@
                   "IndexProjectionDependency",
                   "IrVolDependency",
                   "QuoteDependency",
-                  "Vendor"
+                  "Vendor",
+                  "CalendarDependency",
+                  "InflationFixingDependency"
                 ],
                 "type": "string",
-                "description": "The available values are: OpaqueDependency, CashDependency, DiscountingDependency, EquityCurveDependency, EquityVolDependency, FxDependency, FxForwardsDependency, FxVolDependency, IndexProjectionDependency, IrVolDependency, QuoteDependency, Vendor"
+                "description": "The available values are: OpaqueDependency, CashDependency, DiscountingDependency, EquityCurveDependency, EquityVolDependency, FxDependency, FxForwardsDependency, FxVolDependency, IndexProjectionDependency, IrVolDependency, QuoteDependency, Vendor, CalendarDependency, InflationFixingDependency"
               }
             }
           }
@@ -84176,10 +84232,12 @@
                   "IndexProjectionDependency",
                   "IrVolDependency",
                   "QuoteDependency",
-                  "Vendor"
+                  "Vendor",
+                  "CalendarDependency",
+                  "InflationFixingDependency"
                 ],
                 "type": "string",
-                "description": "The available values are: OpaqueDependency, CashDependency, DiscountingDependency, EquityCurveDependency, EquityVolDependency, FxDependency, FxForwardsDependency, FxVolDependency, IndexProjectionDependency, IrVolDependency, QuoteDependency, Vendor"
+                "description": "The available values are: OpaqueDependency, CashDependency, DiscountingDependency, EquityCurveDependency, EquityVolDependency, FxDependency, FxForwardsDependency, FxVolDependency, IndexProjectionDependency, IrVolDependency, QuoteDependency, Vendor, CalendarDependency, InflationFixingDependency"
               }
             }
           }
@@ -84651,10 +84709,12 @@
                   "IndexProjectionDependency",
                   "IrVolDependency",
                   "QuoteDependency",
-                  "Vendor"
+                  "Vendor",
+                  "CalendarDependency",
+                  "InflationFixingDependency"
                 ],
                 "type": "string",
-                "description": "The available values are: OpaqueDependency, CashDependency, DiscountingDependency, EquityCurveDependency, EquityVolDependency, FxDependency, FxForwardsDependency, FxVolDependency, IndexProjectionDependency, IrVolDependency, QuoteDependency, Vendor"
+                "description": "The available values are: OpaqueDependency, CashDependency, DiscountingDependency, EquityCurveDependency, EquityVolDependency, FxDependency, FxForwardsDependency, FxVolDependency, IndexProjectionDependency, IrVolDependency, QuoteDependency, Vendor, CalendarDependency, InflationFixingDependency"
               }
             }
           }
@@ -85433,10 +85493,12 @@
                   "IndexProjectionDependency",
                   "IrVolDependency",
                   "QuoteDependency",
-                  "Vendor"
+                  "Vendor",
+                  "CalendarDependency",
+                  "InflationFixingDependency"
                 ],
                 "type": "string",
-                "description": "The available values are: OpaqueDependency, CashDependency, DiscountingDependency, EquityCurveDependency, EquityVolDependency, FxDependency, FxForwardsDependency, FxVolDependency, IndexProjectionDependency, IrVolDependency, QuoteDependency, Vendor"
+                "description": "The available values are: OpaqueDependency, CashDependency, DiscountingDependency, EquityCurveDependency, EquityVolDependency, FxDependency, FxForwardsDependency, FxVolDependency, IndexProjectionDependency, IrVolDependency, QuoteDependency, Vendor, CalendarDependency, InflationFixingDependency"
               }
             }
           }
@@ -85465,6 +85527,60 @@
         },
         "additionalProperties": false,
         "description": "Object describing a particular industry classifier,\r\nwhich comprises a classification code and the name of the classification system to which the code belongs."
+      },
+      "InflationFixingDependency": {
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/EconomicDependency"
+          },
+          {
+            "required": [
+              "code",
+              "date",
+              "dependencyType",
+              "type"
+            ],
+            "type": "object",
+            "properties": {
+              "type": {
+                "minLength": 1,
+                "type": "string",
+                "description": "The Type of fixing (index, ratio or assumption)"
+              },
+              "code": {
+                "minLength": 1,
+                "type": "string",
+                "description": "The Code of the fixing, typically the index name"
+              },
+              "date": {
+                "type": "string",
+                "description": "The effectiveAt of the inflation fixing",
+                "format": "date-time"
+              },
+              "dependencyType": {
+                "enum": [
+                  "OpaqueDependency",
+                  "CashDependency",
+                  "DiscountingDependency",
+                  "EquityCurveDependency",
+                  "EquityVolDependency",
+                  "FxDependency",
+                  "FxForwardsDependency",
+                  "FxVolDependency",
+                  "IndexProjectionDependency",
+                  "IrVolDependency",
+                  "QuoteDependency",
+                  "Vendor",
+                  "CalendarDependency",
+                  "InflationFixingDependency"
+                ],
+                "type": "string",
+                "description": "The available values are: OpaqueDependency, CashDependency, DiscountingDependency, EquityCurveDependency, EquityVolDependency, FxDependency, FxForwardsDependency, FxVolDependency, IndexProjectionDependency, IrVolDependency, QuoteDependency, Vendor, CalendarDependency, InflationFixingDependency"
+              }
+            }
+          }
+        ],
+        "description": "For indicating a dependency upon an inflation fixing"
       },
       "InflationIndexConventions": {
         "required": [
@@ -86852,10 +86968,12 @@
                   "IndexProjectionDependency",
                   "IrVolDependency",
                   "QuoteDependency",
-                  "Vendor"
+                  "Vendor",
+                  "CalendarDependency",
+                  "InflationFixingDependency"
                 ],
                 "type": "string",
-                "description": "The available values are: OpaqueDependency, CashDependency, DiscountingDependency, EquityCurveDependency, EquityVolDependency, FxDependency, FxForwardsDependency, FxVolDependency, IndexProjectionDependency, IrVolDependency, QuoteDependency, Vendor"
+                "description": "The available values are: OpaqueDependency, CashDependency, DiscountingDependency, EquityCurveDependency, EquityVolDependency, FxDependency, FxForwardsDependency, FxVolDependency, IndexProjectionDependency, IrVolDependency, QuoteDependency, Vendor, CalendarDependency, InflationFixingDependency"
               }
             }
           }
@@ -88139,10 +88257,12 @@
                   "IndexProjectionDependency",
                   "IrVolDependency",
                   "QuoteDependency",
-                  "Vendor"
+                  "Vendor",
+                  "CalendarDependency",
+                  "InflationFixingDependency"
                 ],
                 "type": "string",
-                "description": "The available values are: OpaqueDependency, CashDependency, DiscountingDependency, EquityCurveDependency, EquityVolDependency, FxDependency, FxForwardsDependency, FxVolDependency, IndexProjectionDependency, IrVolDependency, QuoteDependency, Vendor"
+                "description": "The available values are: OpaqueDependency, CashDependency, DiscountingDependency, EquityCurveDependency, EquityVolDependency, FxDependency, FxForwardsDependency, FxVolDependency, IndexProjectionDependency, IrVolDependency, QuoteDependency, Vendor, CalendarDependency, InflationFixingDependency"
               }
             }
           }
@@ -92377,10 +92497,12 @@
                   "IndexProjectionDependency",
                   "IrVolDependency",
                   "QuoteDependency",
-                  "Vendor"
+                  "Vendor",
+                  "CalendarDependency",
+                  "InflationFixingDependency"
                 ],
                 "type": "string",
-                "description": "The available values are: OpaqueDependency, CashDependency, DiscountingDependency, EquityCurveDependency, EquityVolDependency, FxDependency, FxForwardsDependency, FxVolDependency, IndexProjectionDependency, IrVolDependency, QuoteDependency, Vendor"
+                "description": "The available values are: OpaqueDependency, CashDependency, DiscountingDependency, EquityCurveDependency, EquityVolDependency, FxDependency, FxForwardsDependency, FxVolDependency, IndexProjectionDependency, IrVolDependency, QuoteDependency, Vendor, CalendarDependency, InflationFixingDependency"
               }
             }
           }
