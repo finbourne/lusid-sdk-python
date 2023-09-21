@@ -1,0 +1,11 @@
+# OrderFlowConfiguration
+
+
+## Properties
+Name | Type | Description | Notes
+------------ | ------------- | ------------- | -------------
+**include_entity_types** | **str** |  | 
+
+[[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
+
+
