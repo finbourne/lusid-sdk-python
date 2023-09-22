@@ -9,7 +9,7 @@
       "url": "https://www.finbourne.com",
       "email": "info@finbourne.com"
     },
-    "version": "1.0.537",
+    "version": "1.0.538",
     "x-logo": {
       "url": "https://www.lusid.com/app/assets/logo_white.png",
       "backgroundColor": "#415464"
@@ -77564,6 +77564,18 @@
                 "description": "Rounding conventions for analytics, if any.",
                 "nullable": true
               },
+              "assetBacked": {
+                "type": "boolean",
+                "description": "If this flag is set to true, then the outstanding notional and principal repayments will be calculated based\r\non pool factors in the quote store. Usually AssetBacked bonds also require a RollConvention setting of \r\nwithin the FlowConventions any given rates schedule (to ensure payment dates always happen on the same day\r\nof the month) and US Agency MBSs with Pay Delay features also require their rates schedules to include an\r\nExDividendConfiguration to drive the lag between interest accrual and payment.",
+                "nullable": true
+              },
+              "assetPoolIdentifier": {
+                "maxLength": 50,
+                "minLength": 0,
+                "type": "string",
+                "description": "Identifier used to retrieve pool factor information about this bond from the quote store. This is expected to\r\nbe the bond's ISIN as the pricer for asset backed securities will specifically look for an identifier of\r\nISIN identifier type when searching for pool factor reset values in the quote store.",
+                "nullable": true
+              },
               "instrumentType": {
                 "enum": [
                   "QuotedSecurity",
@@ -77607,7 +77619,7 @@
             }
           }
         ],
-        "description": "LUSID representation of a Complex Bond.\r\nIncluding Floating, Callable, Puttable, Sinkable, and Fixed-to-float."
+        "description": "LUSID representation of a Complex Bond.\r\nIncluding Floating, Fixed-to-float, Sinkable, Callable, Puttable, and Mortgage Backed Securities."
       },
       "ComplexMarketData": {
         "required": [
@@ -82515,6 +82527,10 @@
           "returnNegativeAccrued": {
             "type": "boolean",
             "description": "Does the accrued interest go negative in the ex-dividend period, or does it go to zero.\r\nDefaults to true if not set."
+          },
+          "applyThirty360PayDelay": {
+            "type": "boolean",
+            "description": "Set this flag to true if the ex-dividend days represent a pay delay from the accrual end date in calendar\r\ndays under the 30/360 day count convention. The typical use case for this flag are Mortgage Backed Securities\r\nwith pay delay between 1 and 60 days, such as FreddieMac and FannieMae. If this flag is set, the useBusinessDays\r\nsetting will be ignored.\r\nDefaults to false if not provided."
           }
         },
         "additionalProperties": false,
