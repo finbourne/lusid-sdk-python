@@ -9,7 +9,7 @@
       "url": "https://www.finbourne.com",
       "email": "info@finbourne.com"
     },
-    "version": "1.0.544",
+    "version": "1.0.545",
     "x-logo": {
       "url": "https://www.lusid.com/app/assets/logo_white.png",
       "backgroundColor": "#415464"
@@ -27176,6 +27176,1638 @@
           }
         ],
         "x-fbn-apistatus": "Stable"
+      }
+    },
+    "/api/ordergraph/blocks": {
+      "get": {
+        "tags": [
+          "OrderGraph"
+        ],
+        "summary": "[EARLY ACCESS] ListOrderGraphBlocks: Lists blocks that pass the filter provided, and builds a summary picture of the state of their associated order entities.",
+        "description": "Lists all blocks of orders, subject to the filter, along with the IDs of orders, placements, allocations and\r\nexecutions in the block, the total quantities of each, and a simple text field describing the overall state.",
+        "operationId": "ListOrderGraphBlocks",
+        "parameters": [
+          {
+            "name": "asAt",
+            "in": "query",
+            "description": "See https://support.lusid.com/knowledgebase/article/KA-01832/",
+            "schema": {
+              "type": "string",
+              "format": "date-time"
+            },
+            "x-nullable": true
+          },
+          {
+            "name": "paginationToken",
+            "in": "query",
+            "description": "See https://support.lusid.com/knowledgebase/article/KA-01915/",
+            "schema": {
+              "maxLength": 500,
+              "minLength": 1,
+              "pattern": "^[a-zA-Z0-9\\+/]*={0,3}$",
+              "type": "string"
+            }
+          },
+          {
+            "name": "sortBy",
+            "in": "query",
+            "description": "A list of field names or properties to sort by, each suffixed by \" ASC\" or \" DESC\"",
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            },
+            "x-nullable": true
+          },
+          {
+            "name": "limit",
+            "in": "query",
+            "description": "See https://support.lusid.com/knowledgebase/article/KA-01915/",
+            "schema": {
+              "maximum": 5000,
+              "minimum": 1,
+              "type": "integer",
+              "format": "int32"
+            },
+            "x-nullable": true
+          },
+          {
+            "name": "filter",
+            "in": "query",
+            "description": "See https://support.lusid.com/knowledgebase/article/KA-01914/",
+            "schema": {
+              "maxLength": 16384,
+              "minLength": 0,
+              "pattern": "^[\\s\\S]*$",
+              "type": "string",
+              "default": ""
+            }
+          },
+          {
+            "name": "propertyKeys",
+            "in": "query",
+            "description": "Must be block-level properties. See https://support.lusid.com/knowledgebase/article/KA-01855/",
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "string",
+                "description": "The key that uniquely identifies the property. It has the format {domain}/{scope}/{code}."
+              }
+            },
+            "x-nullable": true
+          },
+          {
+            "name": "useComplianceV2",
+            "in": "query",
+            "description": "Whether to use the V2 compliance engine when deriving compliance statuses for orders. (default: false)",
+            "schema": {
+              "type": "boolean",
+              "default": false
+            },
+            "x-nullable": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Blocks in scope.",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/PagedResourceListOfOrderGraphBlock"
+                },
+                "example": {
+                  "values": [
+                    {
+                      "block": {
+                        "id": {
+                          "scope": "MyScope",
+                          "code": "BLOC00000123"
+                        },
+                        "orderIds": [
+                          {
+                            "scope": "MyScope",
+                            "code": "ORDER00000123"
+                          }
+                        ],
+                        "properties": {
+                          "Allocation/MyScope/SomeAllocationProperty": {
+                            "key": "Allocation/MyScope/SomeAllocationProperty",
+                            "value": {
+                              "labelValue": "XYZ000034567"
+                            }
+                          }
+                        },
+                        "instrumentIdentifiers": {
+                          "Instrument/default/Currency": "GBP"
+                        },
+                        "lusidInstrumentId": "LUID_1234567",
+                        "quantity": 100.5,
+                        "side": "Buy",
+                        "type": "Limit",
+                        "timeInForce": "GoodTilCancel",
+                        "createdDate": "2006-04-11T00:00:00.0000000+00:00",
+                        "limitPrice": {
+                          "amount": 12413.33,
+                          "currency": "USD"
+                        },
+                        "stopPrice": {
+                          "amount": 12376.33,
+                          "currency": "USD"
+                        },
+                        "version": {
+                          "effectiveFrom": "2018-03-05T10:10:10.0000000+00:00",
+                          "asAtDate": "2018-03-05T10:10:10.0000000+00:00",
+                          "asAtCreated": "2018-03-05T10:10:10.0000000+00:00",
+                          "userIdCreated": "BlockUser1",
+                          "requestIdCreated": "BlockRequestId1",
+                          "asAtModified": "2018-03-08T10:10:10.0000000+00:00",
+                          "userIdModified": "BlockUser2",
+                          "requestIdModified": "BlockRequestId2",
+                          "asAtVersionNumber": 2
+                        }
+                      },
+                      "ordered": {
+                        "quantity": 1500,
+                        "details": [
+                          {
+                            "id": {
+                              "scope": "MyScope",
+                              "code": "ORD00000123"
+                            },
+                            "complianceState": "Passed",
+                            "portfolioId": {
+                              "scope": "MyScope",
+                              "code": "MyPortfolio"
+                            },
+                            "portfolioName": "My Equities Portfolio"
+                          },
+                          {
+                            "id": {
+                              "scope": "MyScope",
+                              "code": "ORD00000456"
+                            },
+                            "complianceState": "Failed",
+                            "portfolioId": {
+                              "scope": "MyScope",
+                              "code": "MyPortfolio"
+                            },
+                            "portfolioName": "My Equities Portfolio"
+                          }
+                        ]
+                      },
+                      "placed": {
+                        "quantity": 1250,
+                        "details": [
+                          {
+                            "id": {
+                              "scope": "MyScope",
+                              "code": "PLAC00000123"
+                            }
+                          },
+                          {
+                            "id": {
+                              "scope": "MyScope",
+                              "code": "PLAC00000456"
+                            }
+                          }
+                        ]
+                      },
+                      "executed": {
+                        "quantity": 1100,
+                        "details": [
+                          {
+                            "id": {
+                              "scope": "MyScope",
+                              "code": "EXEC0000123"
+                            }
+                          },
+                          {
+                            "id": {
+                              "scope": "MyScope",
+                              "code": "EXEC0000456"
+                            }
+                          }
+                        ]
+                      },
+                      "allocated": {
+                        "quantity": 800,
+                        "details": [
+                          {
+                            "id": {
+                              "scope": "MyScope",
+                              "code": "ALLOC00000123"
+                            }
+                          },
+                          {
+                            "id": {
+                              "scope": "MyScope",
+                              "code": "ALLOC00000456"
+                            }
+                          }
+                        ]
+                      },
+                      "derivedState": "Partially placed",
+                      "derivedComplianceState": "Failed"
+                    }
+                  ],
+                  "links": []
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PagedResourceListOfOrderGraphBlock"
+                },
+                "example": {
+                  "values": [
+                    {
+                      "block": {
+                        "id": {
+                          "scope": "MyScope",
+                          "code": "BLOC00000123"
+                        },
+                        "orderIds": [
+                          {
+                            "scope": "MyScope",
+                            "code": "ORDER00000123"
+                          }
+                        ],
+                        "properties": {
+                          "Allocation/MyScope/SomeAllocationProperty": {
+                            "key": "Allocation/MyScope/SomeAllocationProperty",
+                            "value": {
+                              "labelValue": "XYZ000034567"
+                            }
+                          }
+                        },
+                        "instrumentIdentifiers": {
+                          "Instrument/default/Currency": "GBP"
+                        },
+                        "lusidInstrumentId": "LUID_1234567",
+                        "quantity": 100.5,
+                        "side": "Buy",
+                        "type": "Limit",
+                        "timeInForce": "GoodTilCancel",
+                        "createdDate": "2006-04-11T00:00:00.0000000+00:00",
+                        "limitPrice": {
+                          "amount": 12413.33,
+                          "currency": "USD"
+                        },
+                        "stopPrice": {
+                          "amount": 12376.33,
+                          "currency": "USD"
+                        },
+                        "version": {
+                          "effectiveFrom": "2018-03-05T10:10:10.0000000+00:00",
+                          "asAtDate": "2018-03-05T10:10:10.0000000+00:00",
+                          "asAtCreated": "2018-03-05T10:10:10.0000000+00:00",
+                          "userIdCreated": "BlockUser1",
+                          "requestIdCreated": "BlockRequestId1",
+                          "asAtModified": "2018-03-08T10:10:10.0000000+00:00",
+                          "userIdModified": "BlockUser2",
+                          "requestIdModified": "BlockRequestId2",
+                          "asAtVersionNumber": 2
+                        }
+                      },
+                      "ordered": {
+                        "quantity": 1500,
+                        "details": [
+                          {
+                            "id": {
+                              "scope": "MyScope",
+                              "code": "ORD00000123"
+                            },
+                            "complianceState": "Passed",
+                            "portfolioId": {
+                              "scope": "MyScope",
+                              "code": "MyPortfolio"
+                            },
+                            "portfolioName": "My Equities Portfolio"
+                          },
+                          {
+                            "id": {
+                              "scope": "MyScope",
+                              "code": "ORD00000456"
+                            },
+                            "complianceState": "Failed",
+                            "portfolioId": {
+                              "scope": "MyScope",
+                              "code": "MyPortfolio"
+                            },
+                            "portfolioName": "My Equities Portfolio"
+                          }
+                        ]
+                      },
+                      "placed": {
+                        "quantity": 1250,
+                        "details": [
+                          {
+                            "id": {
+                              "scope": "MyScope",
+                              "code": "PLAC00000123"
+                            }
+                          },
+                          {
+                            "id": {
+                              "scope": "MyScope",
+                              "code": "PLAC00000456"
+                            }
+                          }
+                        ]
+                      },
+                      "executed": {
+                        "quantity": 1100,
+                        "details": [
+                          {
+                            "id": {
+                              "scope": "MyScope",
+                              "code": "EXEC0000123"
+                            }
+                          },
+                          {
+                            "id": {
+                              "scope": "MyScope",
+                              "code": "EXEC0000456"
+                            }
+                          }
+                        ]
+                      },
+                      "allocated": {
+                        "quantity": 800,
+                        "details": [
+                          {
+                            "id": {
+                              "scope": "MyScope",
+                              "code": "ALLOC00000123"
+                            }
+                          },
+                          {
+                            "id": {
+                              "scope": "MyScope",
+                              "code": "ALLOC00000456"
+                            }
+                          }
+                        ]
+                      },
+                      "derivedState": "Partially placed",
+                      "derivedComplianceState": "Failed"
+                    }
+                  ],
+                  "links": []
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PagedResourceListOfOrderGraphBlock"
+                },
+                "example": {
+                  "values": [
+                    {
+                      "block": {
+                        "id": {
+                          "scope": "MyScope",
+                          "code": "BLOC00000123"
+                        },
+                        "orderIds": [
+                          {
+                            "scope": "MyScope",
+                            "code": "ORDER00000123"
+                          }
+                        ],
+                        "properties": {
+                          "Allocation/MyScope/SomeAllocationProperty": {
+                            "key": "Allocation/MyScope/SomeAllocationProperty",
+                            "value": {
+                              "labelValue": "XYZ000034567"
+                            }
+                          }
+                        },
+                        "instrumentIdentifiers": {
+                          "Instrument/default/Currency": "GBP"
+                        },
+                        "lusidInstrumentId": "LUID_1234567",
+                        "quantity": 100.5,
+                        "side": "Buy",
+                        "type": "Limit",
+                        "timeInForce": "GoodTilCancel",
+                        "createdDate": "2006-04-11T00:00:00.0000000+00:00",
+                        "limitPrice": {
+                          "amount": 12413.33,
+                          "currency": "USD"
+                        },
+                        "stopPrice": {
+                          "amount": 12376.33,
+                          "currency": "USD"
+                        },
+                        "version": {
+                          "effectiveFrom": "2018-03-05T10:10:10.0000000+00:00",
+                          "asAtDate": "2018-03-05T10:10:10.0000000+00:00",
+                          "asAtCreated": "2018-03-05T10:10:10.0000000+00:00",
+                          "userIdCreated": "BlockUser1",
+                          "requestIdCreated": "BlockRequestId1",
+                          "asAtModified": "2018-03-08T10:10:10.0000000+00:00",
+                          "userIdModified": "BlockUser2",
+                          "requestIdModified": "BlockRequestId2",
+                          "asAtVersionNumber": 2
+                        }
+                      },
+                      "ordered": {
+                        "quantity": 1500,
+                        "details": [
+                          {
+                            "id": {
+                              "scope": "MyScope",
+                              "code": "ORD00000123"
+                            },
+                            "complianceState": "Passed",
+                            "portfolioId": {
+                              "scope": "MyScope",
+                              "code": "MyPortfolio"
+                            },
+                            "portfolioName": "My Equities Portfolio"
+                          },
+                          {
+                            "id": {
+                              "scope": "MyScope",
+                              "code": "ORD00000456"
+                            },
+                            "complianceState": "Failed",
+                            "portfolioId": {
+                              "scope": "MyScope",
+                              "code": "MyPortfolio"
+                            },
+                            "portfolioName": "My Equities Portfolio"
+                          }
+                        ]
+                      },
+                      "placed": {
+                        "quantity": 1250,
+                        "details": [
+                          {
+                            "id": {
+                              "scope": "MyScope",
+                              "code": "PLAC00000123"
+                            }
+                          },
+                          {
+                            "id": {
+                              "scope": "MyScope",
+                              "code": "PLAC00000456"
+                            }
+                          }
+                        ]
+                      },
+                      "executed": {
+                        "quantity": 1100,
+                        "details": [
+                          {
+                            "id": {
+                              "scope": "MyScope",
+                              "code": "EXEC0000123"
+                            }
+                          },
+                          {
+                            "id": {
+                              "scope": "MyScope",
+                              "code": "EXEC0000456"
+                            }
+                          }
+                        ]
+                      },
+                      "allocated": {
+                        "quantity": 800,
+                        "details": [
+                          {
+                            "id": {
+                              "scope": "MyScope",
+                              "code": "ALLOC00000123"
+                            }
+                          },
+                          {
+                            "id": {
+                              "scope": "MyScope",
+                              "code": "ALLOC00000456"
+                            }
+                          }
+                        ]
+                      },
+                      "derivedState": "Partially placed",
+                      "derivedComplianceState": "Failed"
+                    }
+                  ],
+                  "links": []
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "The details of the input related failure",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/LusidValidationProblemDetails"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/LusidValidationProblemDetails"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/LusidValidationProblemDetails"
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "Error response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/LusidProblemDetails"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "oauth2": []
+          }
+        ],
+        "x-fbn-apistatus": "EarlyAccess"
+      }
+    },
+    "/api/ordergraph/placementchildren/{scope}/{code}": {
+      "get": {
+        "tags": [
+          "OrderGraph"
+        ],
+        "summary": "[EARLY ACCESS] ListOrderGraphPlacementChildren: Lists all placements for the parent placement specified by the scope and code, and builds a summary picture of the state of their associated order entities.",
+        "description": "Lists all child order placements, for the specified parent placement, along with the IDs of the block and order that the\r\nplacement is for, each placement's quantity, the IDs of all allocations and executions in the placement\r\nand the total quantities of those, and a simple text field describing the overall state of the placement.",
+        "operationId": "ListOrderGraphPlacementChildren",
+        "parameters": [
+          {
+            "name": "scope",
+            "in": "path",
+            "description": "The parent placement's scope",
+            "required": true,
+            "schema": {
+              "maxLength": 64,
+              "minLength": 1,
+              "pattern": "^[a-zA-Z0-9\\-_]+$",
+              "type": "string"
+            }
+          },
+          {
+            "name": "code",
+            "in": "path",
+            "description": "The parent placement's code",
+            "required": true,
+            "schema": {
+              "maxLength": 64,
+              "minLength": 1,
+              "type": "string"
+            }
+          },
+          {
+            "name": "asAt",
+            "in": "query",
+            "description": "See https://support.lusid.com/knowledgebase/article/KA-01832/",
+            "schema": {
+              "type": "string",
+              "format": "date-time"
+            },
+            "x-nullable": true
+          },
+          {
+            "name": "paginationToken",
+            "in": "query",
+            "description": "See https://support.lusid.com/knowledgebase/article/KA-01915/",
+            "schema": {
+              "maxLength": 500,
+              "minLength": 1,
+              "pattern": "^[a-zA-Z0-9\\+/]*={0,3}$",
+              "type": "string"
+            }
+          },
+          {
+            "name": "sortBy",
+            "in": "query",
+            "description": "Order the results by these fields. Use use the '-' sign to denote descending order e.g. -MyFieldName.",
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            },
+            "x-nullable": true
+          },
+          {
+            "name": "limit",
+            "in": "query",
+            "description": "See https://support.lusid.com/knowledgebase/article/KA-01915/",
+            "schema": {
+              "maximum": 5000,
+              "minimum": 1,
+              "type": "integer",
+              "format": "int32"
+            },
+            "x-nullable": true
+          },
+          {
+            "name": "propertyKeys",
+            "in": "query",
+            "description": "Must be placement properties. See https://support.lusid.com/knowledgebase/article/KA-01855/",
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "string",
+                "description": "The key that uniquely identifies the property. It has the format {domain}/{scope}/{code}."
+              }
+            },
+            "x-nullable": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "List all child Placements for the specified Placement.",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/PagedResourceListOfOrderGraphPlacement"
+                },
+                "example": {
+                  "values": [
+                    {
+                      "placement": {
+                        "id": {
+                          "scope": "MyScope",
+                          "code": "PLAC00000123"
+                        },
+                        "blockIds": [
+                          {
+                            "scope": "MyScope",
+                            "code": "BLOC00000123"
+                          }
+                        ],
+                        "properties": {
+                          "Allocation/MyScope/SomeAllocationProperty": {
+                            "key": "Allocation/MyScope/SomeAllocationProperty",
+                            "value": {
+                              "labelValue": "XYZ000034567"
+                            }
+                          }
+                        },
+                        "instrumentIdentifiers": {
+                          "Instrument/default/Currency": "GBP"
+                        },
+                        "quantity": 100.5,
+                        "state": "New",
+                        "side": "Buy",
+                        "timeInForce": "GoodTilCancel",
+                        "type": "Limit",
+                        "createdDate": "2006-04-11T00:00:00.0000000+00:00",
+                        "limitPrice": {
+                          "amount": 12413.33,
+                          "currency": "USD"
+                        },
+                        "stopPrice": {
+                          "amount": 51244.33,
+                          "currency": "USD"
+                        },
+                        "counterparty": "SomeCounterparty",
+                        "entryType": "Manual",
+                        "version": {
+                          "effectiveFrom": "2018-03-05T10:10:10.0000000+00:00",
+                          "asAtDate": "2018-03-05T10:10:10.0000000+00:00",
+                          "asAtCreated": "2018-03-05T10:10:10.0000000+00:00",
+                          "userIdCreated": "PlacementUser1",
+                          "requestIdCreated": "PlacementRequestId1",
+                          "asAtModified": "2018-03-08T10:10:10.0000000+00:00",
+                          "userIdModified": "PlacementUser2",
+                          "requestIdModified": "PlacementRequestId2",
+                          "asAtVersionNumber": 2
+                        }
+                      },
+                      "blockId": {
+                        "scope": "MyScope",
+                        "code": "BLOC00000123"
+                      },
+                      "ordered": {
+                        "details": [
+                          {
+                            "id": {
+                              "scope": "MyScope",
+                              "code": "ORD00000123"
+                            }
+                          },
+                          {
+                            "id": {
+                              "scope": "MyScope",
+                              "code": "ORD00000456"
+                            }
+                          }
+                        ]
+                      },
+                      "placed": {
+                        "details": [
+                          {
+                            "id": {
+                              "scope": "MyScope",
+                              "code": "PLAC0000123"
+                            }
+                          },
+                          {
+                            "id": {
+                              "scope": "MyScope",
+                              "code": "PLAC0000456"
+                            }
+                          }
+                        ],
+                        "quantity": 1250
+                      },
+                      "executed": {
+                        "quantity": 1100,
+                        "details": [
+                          {
+                            "id": {
+                              "scope": "MyScope",
+                              "code": "EXEC0000123"
+                            }
+                          },
+                          {
+                            "id": {
+                              "scope": "MyScope",
+                              "code": "EXEC0000456"
+                            }
+                          }
+                        ]
+                      },
+                      "allocated": {
+                        "quantity": 800,
+                        "details": [
+                          {
+                            "id": {
+                              "scope": "MyScope",
+                              "code": "ALLOC00000123"
+                            }
+                          },
+                          {
+                            "id": {
+                              "scope": "MyScope",
+                              "code": "ALLOC00000456"
+                            }
+                          }
+                        ]
+                      },
+                      "derivedState": "In progress",
+                      "calculatedAveragePrice": 12401.26
+                    }
+                  ],
+                  "links": []
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PagedResourceListOfOrderGraphPlacement"
+                },
+                "example": {
+                  "values": [
+                    {
+                      "placement": {
+                        "id": {
+                          "scope": "MyScope",
+                          "code": "PLAC00000123"
+                        },
+                        "blockIds": [
+                          {
+                            "scope": "MyScope",
+                            "code": "BLOC00000123"
+                          }
+                        ],
+                        "properties": {
+                          "Allocation/MyScope/SomeAllocationProperty": {
+                            "key": "Allocation/MyScope/SomeAllocationProperty",
+                            "value": {
+                              "labelValue": "XYZ000034567"
+                            }
+                          }
+                        },
+                        "instrumentIdentifiers": {
+                          "Instrument/default/Currency": "GBP"
+                        },
+                        "quantity": 100.5,
+                        "state": "New",
+                        "side": "Buy",
+                        "timeInForce": "GoodTilCancel",
+                        "type": "Limit",
+                        "createdDate": "2006-04-11T00:00:00.0000000+00:00",
+                        "limitPrice": {
+                          "amount": 12413.33,
+                          "currency": "USD"
+                        },
+                        "stopPrice": {
+                          "amount": 51244.33,
+                          "currency": "USD"
+                        },
+                        "counterparty": "SomeCounterparty",
+                        "entryType": "Manual",
+                        "version": {
+                          "effectiveFrom": "2018-03-05T10:10:10.0000000+00:00",
+                          "asAtDate": "2018-03-05T10:10:10.0000000+00:00",
+                          "asAtCreated": "2018-03-05T10:10:10.0000000+00:00",
+                          "userIdCreated": "PlacementUser1",
+                          "requestIdCreated": "PlacementRequestId1",
+                          "asAtModified": "2018-03-08T10:10:10.0000000+00:00",
+                          "userIdModified": "PlacementUser2",
+                          "requestIdModified": "PlacementRequestId2",
+                          "asAtVersionNumber": 2
+                        }
+                      },
+                      "blockId": {
+                        "scope": "MyScope",
+                        "code": "BLOC00000123"
+                      },
+                      "ordered": {
+                        "details": [
+                          {
+                            "id": {
+                              "scope": "MyScope",
+                              "code": "ORD00000123"
+                            }
+                          },
+                          {
+                            "id": {
+                              "scope": "MyScope",
+                              "code": "ORD00000456"
+                            }
+                          }
+                        ]
+                      },
+                      "placed": {
+                        "details": [
+                          {
+                            "id": {
+                              "scope": "MyScope",
+                              "code": "PLAC0000123"
+                            }
+                          },
+                          {
+                            "id": {
+                              "scope": "MyScope",
+                              "code": "PLAC0000456"
+                            }
+                          }
+                        ],
+                        "quantity": 1250
+                      },
+                      "executed": {
+                        "quantity": 1100,
+                        "details": [
+                          {
+                            "id": {
+                              "scope": "MyScope",
+                              "code": "EXEC0000123"
+                            }
+                          },
+                          {
+                            "id": {
+                              "scope": "MyScope",
+                              "code": "EXEC0000456"
+                            }
+                          }
+                        ]
+                      },
+                      "allocated": {
+                        "quantity": 800,
+                        "details": [
+                          {
+                            "id": {
+                              "scope": "MyScope",
+                              "code": "ALLOC00000123"
+                            }
+                          },
+                          {
+                            "id": {
+                              "scope": "MyScope",
+                              "code": "ALLOC00000456"
+                            }
+                          }
+                        ]
+                      },
+                      "derivedState": "In progress",
+                      "calculatedAveragePrice": 12401.26
+                    }
+                  ],
+                  "links": []
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PagedResourceListOfOrderGraphPlacement"
+                },
+                "example": {
+                  "values": [
+                    {
+                      "placement": {
+                        "id": {
+                          "scope": "MyScope",
+                          "code": "PLAC00000123"
+                        },
+                        "blockIds": [
+                          {
+                            "scope": "MyScope",
+                            "code": "BLOC00000123"
+                          }
+                        ],
+                        "properties": {
+                          "Allocation/MyScope/SomeAllocationProperty": {
+                            "key": "Allocation/MyScope/SomeAllocationProperty",
+                            "value": {
+                              "labelValue": "XYZ000034567"
+                            }
+                          }
+                        },
+                        "instrumentIdentifiers": {
+                          "Instrument/default/Currency": "GBP"
+                        },
+                        "quantity": 100.5,
+                        "state": "New",
+                        "side": "Buy",
+                        "timeInForce": "GoodTilCancel",
+                        "type": "Limit",
+                        "createdDate": "2006-04-11T00:00:00.0000000+00:00",
+                        "limitPrice": {
+                          "amount": 12413.33,
+                          "currency": "USD"
+                        },
+                        "stopPrice": {
+                          "amount": 51244.33,
+                          "currency": "USD"
+                        },
+                        "counterparty": "SomeCounterparty",
+                        "entryType": "Manual",
+                        "version": {
+                          "effectiveFrom": "2018-03-05T10:10:10.0000000+00:00",
+                          "asAtDate": "2018-03-05T10:10:10.0000000+00:00",
+                          "asAtCreated": "2018-03-05T10:10:10.0000000+00:00",
+                          "userIdCreated": "PlacementUser1",
+                          "requestIdCreated": "PlacementRequestId1",
+                          "asAtModified": "2018-03-08T10:10:10.0000000+00:00",
+                          "userIdModified": "PlacementUser2",
+                          "requestIdModified": "PlacementRequestId2",
+                          "asAtVersionNumber": 2
+                        }
+                      },
+                      "blockId": {
+                        "scope": "MyScope",
+                        "code": "BLOC00000123"
+                      },
+                      "ordered": {
+                        "details": [
+                          {
+                            "id": {
+                              "scope": "MyScope",
+                              "code": "ORD00000123"
+                            }
+                          },
+                          {
+                            "id": {
+                              "scope": "MyScope",
+                              "code": "ORD00000456"
+                            }
+                          }
+                        ]
+                      },
+                      "placed": {
+                        "details": [
+                          {
+                            "id": {
+                              "scope": "MyScope",
+                              "code": "PLAC0000123"
+                            }
+                          },
+                          {
+                            "id": {
+                              "scope": "MyScope",
+                              "code": "PLAC0000456"
+                            }
+                          }
+                        ],
+                        "quantity": 1250
+                      },
+                      "executed": {
+                        "quantity": 1100,
+                        "details": [
+                          {
+                            "id": {
+                              "scope": "MyScope",
+                              "code": "EXEC0000123"
+                            }
+                          },
+                          {
+                            "id": {
+                              "scope": "MyScope",
+                              "code": "EXEC0000456"
+                            }
+                          }
+                        ]
+                      },
+                      "allocated": {
+                        "quantity": 800,
+                        "details": [
+                          {
+                            "id": {
+                              "scope": "MyScope",
+                              "code": "ALLOC00000123"
+                            }
+                          },
+                          {
+                            "id": {
+                              "scope": "MyScope",
+                              "code": "ALLOC00000456"
+                            }
+                          }
+                        ]
+                      },
+                      "derivedState": "In progress",
+                      "calculatedAveragePrice": 12401.26
+                    }
+                  ],
+                  "links": []
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "The details of the input related failure",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/LusidValidationProblemDetails"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/LusidValidationProblemDetails"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/LusidValidationProblemDetails"
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "Error response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/LusidProblemDetails"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "oauth2": []
+          }
+        ],
+        "x-fbn-apistatus": "EarlyAccess"
+      }
+    },
+    "/api/ordergraph/placements": {
+      "get": {
+        "tags": [
+          "OrderGraph"
+        ],
+        "summary": "[EARLY ACCESS] ListOrderGraphPlacements: Lists placements that pass the filter provided, and builds a summary picture of the state of their associated order entities.",
+        "description": "Lists all order placements, subject to the filter, along with the IDs of the block and order that the\r\nplacement is for, each placement's quantity, the IDs of all allocations and executions in the placement\r\nand the total quantities of those, and a simple text field describing the overall state of the placement.",
+        "operationId": "ListOrderGraphPlacements",
+        "parameters": [
+          {
+            "name": "asAt",
+            "in": "query",
+            "description": "See https://support.lusid.com/knowledgebase/article/KA-01832/",
+            "schema": {
+              "type": "string",
+              "format": "date-time"
+            },
+            "x-nullable": true
+          },
+          {
+            "name": "paginationToken",
+            "in": "query",
+            "description": "See https://support.lusid.com/knowledgebase/article/KA-01915/",
+            "schema": {
+              "maxLength": 500,
+              "minLength": 1,
+              "pattern": "^[a-zA-Z0-9\\+/]*={0,3}$",
+              "type": "string"
+            }
+          },
+          {
+            "name": "sortBy",
+            "in": "query",
+            "description": "A list of field names or properties to sort by, each suffixed by \" ASC\" or \" DESC\"",
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            },
+            "x-nullable": true
+          },
+          {
+            "name": "limit",
+            "in": "query",
+            "description": "See https://support.lusid.com/knowledgebase/article/KA-01915/",
+            "schema": {
+              "maximum": 5000,
+              "minimum": 1,
+              "type": "integer",
+              "format": "int32"
+            },
+            "x-nullable": true
+          },
+          {
+            "name": "filter",
+            "in": "query",
+            "description": "See https://support.lusid.com/knowledgebase/article/KA-01914/",
+            "schema": {
+              "maxLength": 16384,
+              "minLength": 0,
+              "pattern": "^[\\s\\S]*$",
+              "type": "string",
+              "default": ""
+            }
+          },
+          {
+            "name": "propertyKeys",
+            "in": "query",
+            "description": "Must be placement properties. See https://support.lusid.com/knowledgebase/article/KA-01855/",
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "string",
+                "description": "The key that uniquely identifies the property. It has the format {domain}/{scope}/{code}."
+              }
+            },
+            "x-nullable": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Placements in scope.",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/PagedResourceListOfOrderGraphPlacement"
+                },
+                "example": {
+                  "values": [
+                    {
+                      "placement": {
+                        "id": {
+                          "scope": "MyScope",
+                          "code": "PLAC00000123"
+                        },
+                        "blockIds": [
+                          {
+                            "scope": "MyScope",
+                            "code": "BLOC00000123"
+                          }
+                        ],
+                        "properties": {
+                          "Allocation/MyScope/SomeAllocationProperty": {
+                            "key": "Allocation/MyScope/SomeAllocationProperty",
+                            "value": {
+                              "labelValue": "XYZ000034567"
+                            }
+                          }
+                        },
+                        "instrumentIdentifiers": {
+                          "Instrument/default/Currency": "GBP"
+                        },
+                        "quantity": 100.5,
+                        "state": "New",
+                        "side": "Buy",
+                        "timeInForce": "GoodTilCancel",
+                        "type": "Limit",
+                        "createdDate": "2006-04-11T00:00:00.0000000+00:00",
+                        "limitPrice": {
+                          "amount": 12413.33,
+                          "currency": "USD"
+                        },
+                        "stopPrice": {
+                          "amount": 51244.33,
+                          "currency": "USD"
+                        },
+                        "counterparty": "SomeCounterparty",
+                        "entryType": "Manual",
+                        "version": {
+                          "effectiveFrom": "2018-03-05T10:10:10.0000000+00:00",
+                          "asAtDate": "2018-03-05T10:10:10.0000000+00:00",
+                          "asAtCreated": "2018-03-05T10:10:10.0000000+00:00",
+                          "userIdCreated": "PlacementUser1",
+                          "requestIdCreated": "PlacementRequestId1",
+                          "asAtModified": "2018-03-08T10:10:10.0000000+00:00",
+                          "userIdModified": "PlacementUser2",
+                          "requestIdModified": "PlacementRequestId2",
+                          "asAtVersionNumber": 2
+                        }
+                      },
+                      "blockId": {
+                        "scope": "MyScope",
+                        "code": "BLOC00000123"
+                      },
+                      "ordered": {
+                        "details": [
+                          {
+                            "id": {
+                              "scope": "MyScope",
+                              "code": "ORD00000123"
+                            }
+                          },
+                          {
+                            "id": {
+                              "scope": "MyScope",
+                              "code": "ORD00000456"
+                            }
+                          }
+                        ]
+                      },
+                      "placed": {
+                        "details": [
+                          {
+                            "id": {
+                              "scope": "MyScope",
+                              "code": "PLAC0000123"
+                            }
+                          },
+                          {
+                            "id": {
+                              "scope": "MyScope",
+                              "code": "PLAC0000456"
+                            }
+                          }
+                        ],
+                        "quantity": 1250
+                      },
+                      "executed": {
+                        "quantity": 1100,
+                        "details": [
+                          {
+                            "id": {
+                              "scope": "MyScope",
+                              "code": "EXEC0000123"
+                            }
+                          },
+                          {
+                            "id": {
+                              "scope": "MyScope",
+                              "code": "EXEC0000456"
+                            }
+                          }
+                        ]
+                      },
+                      "allocated": {
+                        "quantity": 800,
+                        "details": [
+                          {
+                            "id": {
+                              "scope": "MyScope",
+                              "code": "ALLOC00000123"
+                            }
+                          },
+                          {
+                            "id": {
+                              "scope": "MyScope",
+                              "code": "ALLOC00000456"
+                            }
+                          }
+                        ]
+                      },
+                      "derivedState": "In progress",
+                      "calculatedAveragePrice": 12401.26
+                    }
+                  ],
+                  "links": []
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PagedResourceListOfOrderGraphPlacement"
+                },
+                "example": {
+                  "values": [
+                    {
+                      "placement": {
+                        "id": {
+                          "scope": "MyScope",
+                          "code": "PLAC00000123"
+                        },
+                        "blockIds": [
+                          {
+                            "scope": "MyScope",
+                            "code": "BLOC00000123"
+                          }
+                        ],
+                        "properties": {
+                          "Allocation/MyScope/SomeAllocationProperty": {
+                            "key": "Allocation/MyScope/SomeAllocationProperty",
+                            "value": {
+                              "labelValue": "XYZ000034567"
+                            }
+                          }
+                        },
+                        "instrumentIdentifiers": {
+                          "Instrument/default/Currency": "GBP"
+                        },
+                        "quantity": 100.5,
+                        "state": "New",
+                        "side": "Buy",
+                        "timeInForce": "GoodTilCancel",
+                        "type": "Limit",
+                        "createdDate": "2006-04-11T00:00:00.0000000+00:00",
+                        "limitPrice": {
+                          "amount": 12413.33,
+                          "currency": "USD"
+                        },
+                        "stopPrice": {
+                          "amount": 51244.33,
+                          "currency": "USD"
+                        },
+                        "counterparty": "SomeCounterparty",
+                        "entryType": "Manual",
+                        "version": {
+                          "effectiveFrom": "2018-03-05T10:10:10.0000000+00:00",
+                          "asAtDate": "2018-03-05T10:10:10.0000000+00:00",
+                          "asAtCreated": "2018-03-05T10:10:10.0000000+00:00",
+                          "userIdCreated": "PlacementUser1",
+                          "requestIdCreated": "PlacementRequestId1",
+                          "asAtModified": "2018-03-08T10:10:10.0000000+00:00",
+                          "userIdModified": "PlacementUser2",
+                          "requestIdModified": "PlacementRequestId2",
+                          "asAtVersionNumber": 2
+                        }
+                      },
+                      "blockId": {
+                        "scope": "MyScope",
+                        "code": "BLOC00000123"
+                      },
+                      "ordered": {
+                        "details": [
+                          {
+                            "id": {
+                              "scope": "MyScope",
+                              "code": "ORD00000123"
+                            }
+                          },
+                          {
+                            "id": {
+                              "scope": "MyScope",
+                              "code": "ORD00000456"
+                            }
+                          }
+                        ]
+                      },
+                      "placed": {
+                        "details": [
+                          {
+                            "id": {
+                              "scope": "MyScope",
+                              "code": "PLAC0000123"
+                            }
+                          },
+                          {
+                            "id": {
+                              "scope": "MyScope",
+                              "code": "PLAC0000456"
+                            }
+                          }
+                        ],
+                        "quantity": 1250
+                      },
+                      "executed": {
+                        "quantity": 1100,
+                        "details": [
+                          {
+                            "id": {
+                              "scope": "MyScope",
+                              "code": "EXEC0000123"
+                            }
+                          },
+                          {
+                            "id": {
+                              "scope": "MyScope",
+                              "code": "EXEC0000456"
+                            }
+                          }
+                        ]
+                      },
+                      "allocated": {
+                        "quantity": 800,
+                        "details": [
+                          {
+                            "id": {
+                              "scope": "MyScope",
+                              "code": "ALLOC00000123"
+                            }
+                          },
+                          {
+                            "id": {
+                              "scope": "MyScope",
+                              "code": "ALLOC00000456"
+                            }
+                          }
+                        ]
+                      },
+                      "derivedState": "In progress",
+                      "calculatedAveragePrice": 12401.26
+                    }
+                  ],
+                  "links": []
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PagedResourceListOfOrderGraphPlacement"
+                },
+                "example": {
+                  "values": [
+                    {
+                      "placement": {
+                        "id": {
+                          "scope": "MyScope",
+                          "code": "PLAC00000123"
+                        },
+                        "blockIds": [
+                          {
+                            "scope": "MyScope",
+                            "code": "BLOC00000123"
+                          }
+                        ],
+                        "properties": {
+                          "Allocation/MyScope/SomeAllocationProperty": {
+                            "key": "Allocation/MyScope/SomeAllocationProperty",
+                            "value": {
+                              "labelValue": "XYZ000034567"
+                            }
+                          }
+                        },
+                        "instrumentIdentifiers": {
+                          "Instrument/default/Currency": "GBP"
+                        },
+                        "quantity": 100.5,
+                        "state": "New",
+                        "side": "Buy",
+                        "timeInForce": "GoodTilCancel",
+                        "type": "Limit",
+                        "createdDate": "2006-04-11T00:00:00.0000000+00:00",
+                        "limitPrice": {
+                          "amount": 12413.33,
+                          "currency": "USD"
+                        },
+                        "stopPrice": {
+                          "amount": 51244.33,
+                          "currency": "USD"
+                        },
+                        "counterparty": "SomeCounterparty",
+                        "entryType": "Manual",
+                        "version": {
+                          "effectiveFrom": "2018-03-05T10:10:10.0000000+00:00",
+                          "asAtDate": "2018-03-05T10:10:10.0000000+00:00",
+                          "asAtCreated": "2018-03-05T10:10:10.0000000+00:00",
+                          "userIdCreated": "PlacementUser1",
+                          "requestIdCreated": "PlacementRequestId1",
+                          "asAtModified": "2018-03-08T10:10:10.0000000+00:00",
+                          "userIdModified": "PlacementUser2",
+                          "requestIdModified": "PlacementRequestId2",
+                          "asAtVersionNumber": 2
+                        }
+                      },
+                      "blockId": {
+                        "scope": "MyScope",
+                        "code": "BLOC00000123"
+                      },
+                      "ordered": {
+                        "details": [
+                          {
+                            "id": {
+                              "scope": "MyScope",
+                              "code": "ORD00000123"
+                            }
+                          },
+                          {
+                            "id": {
+                              "scope": "MyScope",
+                              "code": "ORD00000456"
+                            }
+                          }
+                        ]
+                      },
+                      "placed": {
+                        "details": [
+                          {
+                            "id": {
+                              "scope": "MyScope",
+                              "code": "PLAC0000123"
+                            }
+                          },
+                          {
+                            "id": {
+                              "scope": "MyScope",
+                              "code": "PLAC0000456"
+                            }
+                          }
+                        ],
+                        "quantity": 1250
+                      },
+                      "executed": {
+                        "quantity": 1100,
+                        "details": [
+                          {
+                            "id": {
+                              "scope": "MyScope",
+                              "code": "EXEC0000123"
+                            }
+                          },
+                          {
+                            "id": {
+                              "scope": "MyScope",
+                              "code": "EXEC0000456"
+                            }
+                          }
+                        ]
+                      },
+                      "allocated": {
+                        "quantity": 800,
+                        "details": [
+                          {
+                            "id": {
+                              "scope": "MyScope",
+                              "code": "ALLOC00000123"
+                            }
+                          },
+                          {
+                            "id": {
+                              "scope": "MyScope",
+                              "code": "ALLOC00000456"
+                            }
+                          }
+                        ]
+                      },
+                      "derivedState": "In progress",
+                      "calculatedAveragePrice": 12401.26
+                    }
+                  ],
+                  "links": []
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "The details of the input related failure",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/LusidValidationProblemDetails"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/LusidValidationProblemDetails"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/LusidValidationProblemDetails"
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "Error response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/LusidProblemDetails"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "oauth2": []
+          }
+        ],
+        "x-fbn-apistatus": "EarlyAccess"
       }
     },
     "/api/orders": {
@@ -88680,6 +90312,370 @@
         },
         "additionalProperties": false
       },
+      "OrderGraphBlock": {
+        "required": [
+          "allocated",
+          "block",
+          "derivedComplianceState",
+          "derivedState",
+          "executed",
+          "ordered",
+          "placed"
+        ],
+        "type": "object",
+        "properties": {
+          "block": {
+            "$ref": "#/components/schemas/Block"
+          },
+          "ordered": {
+            "$ref": "#/components/schemas/OrderGraphBlockOrderSynopsis"
+          },
+          "placed": {
+            "$ref": "#/components/schemas/OrderGraphBlockPlacementSynopsis"
+          },
+          "executed": {
+            "$ref": "#/components/schemas/OrderGraphBlockExecutionSynopsis"
+          },
+          "allocated": {
+            "$ref": "#/components/schemas/OrderGraphBlockAllocationSynopsis"
+          },
+          "derivedState": {
+            "minLength": 1,
+            "type": "string",
+            "description": "A simple description of the overall state of a block."
+          },
+          "derivedComplianceState": {
+            "minLength": 1,
+            "type": "string",
+            "description": "The overall compliance state of a block, derived from the block's orders. Possible values are 'Pending', 'Failed', 'Manually approved' and 'Passed'."
+          }
+        },
+        "additionalProperties": false
+      },
+      "OrderGraphBlockAllocationDetail": {
+        "required": [
+          "id"
+        ],
+        "type": "object",
+        "properties": {
+          "id": {
+            "$ref": "#/components/schemas/ResourceId"
+          }
+        },
+        "additionalProperties": false
+      },
+      "OrderGraphBlockAllocationSynopsis": {
+        "required": [
+          "details",
+          "quantity"
+        ],
+        "type": "object",
+        "properties": {
+          "quantity": {
+            "type": "number",
+            "description": "Total number of units allocated.",
+            "format": "double"
+          },
+          "details": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/OrderGraphBlockAllocationDetail"
+            },
+            "description": "Identifiers for each allocation in this block."
+          }
+        },
+        "additionalProperties": false
+      },
+      "OrderGraphBlockExecutionDetail": {
+        "required": [
+          "id"
+        ],
+        "type": "object",
+        "properties": {
+          "id": {
+            "$ref": "#/components/schemas/ResourceId"
+          }
+        },
+        "additionalProperties": false
+      },
+      "OrderGraphBlockExecutionSynopsis": {
+        "required": [
+          "details",
+          "quantity"
+        ],
+        "type": "object",
+        "properties": {
+          "quantity": {
+            "type": "number",
+            "description": "Total number of units executed.",
+            "format": "double"
+          },
+          "details": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/OrderGraphBlockExecutionDetail"
+            },
+            "description": "Identifiers for each execution in this block."
+          }
+        },
+        "additionalProperties": false
+      },
+      "OrderGraphBlockOrderDetail": {
+        "required": [
+          "complianceState",
+          "id"
+        ],
+        "type": "object",
+        "properties": {
+          "id": {
+            "$ref": "#/components/schemas/ResourceId"
+          },
+          "complianceState": {
+            "minLength": 1,
+            "type": "string",
+            "description": "The compliance state of this order. Possible values are 'Pending', 'Failed', 'Manually approved' and 'Passed'."
+          },
+          "portfolioId": {
+            "$ref": "#/components/schemas/ResourceId"
+          },
+          "portfolioName": {
+            "type": "string",
+            "description": "The name of the order's referenced Portfolio.",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "OrderGraphBlockOrderSynopsis": {
+        "required": [
+          "details",
+          "quantity"
+        ],
+        "type": "object",
+        "properties": {
+          "quantity": {
+            "type": "number",
+            "description": "Total number of units ordered.",
+            "format": "double"
+          },
+          "details": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/OrderGraphBlockOrderDetail"
+            },
+            "description": "Identifiers and other info for each order in this block."
+          }
+        },
+        "additionalProperties": false
+      },
+      "OrderGraphBlockPlacementDetail": {
+        "required": [
+          "id"
+        ],
+        "type": "object",
+        "properties": {
+          "id": {
+            "$ref": "#/components/schemas/ResourceId"
+          }
+        },
+        "additionalProperties": false
+      },
+      "OrderGraphBlockPlacementSynopsis": {
+        "required": [
+          "details",
+          "quantity"
+        ],
+        "type": "object",
+        "properties": {
+          "quantity": {
+            "type": "number",
+            "description": "Total number of units placed.",
+            "format": "double"
+          },
+          "details": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/OrderGraphBlockPlacementDetail"
+            },
+            "description": "Identifiers for each placement in this block."
+          }
+        },
+        "additionalProperties": false
+      },
+      "OrderGraphPlacement": {
+        "required": [
+          "allocated",
+          "blockId",
+          "derivedState",
+          "executed",
+          "ordered",
+          "placed",
+          "placement"
+        ],
+        "type": "object",
+        "properties": {
+          "placement": {
+            "$ref": "#/components/schemas/Placement"
+          },
+          "blockId": {
+            "$ref": "#/components/schemas/ResourceId"
+          },
+          "ordered": {
+            "$ref": "#/components/schemas/OrderGraphPlacementOrderSynopsis"
+          },
+          "placed": {
+            "$ref": "#/components/schemas/OrderGraphPlacementPlacementSynopsis"
+          },
+          "executed": {
+            "$ref": "#/components/schemas/OrderGraphPlacementExecutionSynopsis"
+          },
+          "allocated": {
+            "$ref": "#/components/schemas/OrderGraphPlacementAllocationSynopsis"
+          },
+          "derivedState": {
+            "minLength": 1,
+            "type": "string",
+            "description": "A simple description of the overall state of a placement."
+          },
+          "calculatedAveragePrice": {
+            "type": "number",
+            "description": "Average price realised on executions for a given placement",
+            "format": "double",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "OrderGraphPlacementAllocationDetail": {
+        "required": [
+          "id"
+        ],
+        "type": "object",
+        "properties": {
+          "id": {
+            "$ref": "#/components/schemas/ResourceId"
+          }
+        },
+        "additionalProperties": false
+      },
+      "OrderGraphPlacementAllocationSynopsis": {
+        "required": [
+          "details",
+          "quantity"
+        ],
+        "type": "object",
+        "properties": {
+          "quantity": {
+            "type": "number",
+            "description": "Total number of units allocated.",
+            "format": "double"
+          },
+          "details": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/OrderGraphPlacementAllocationDetail"
+            },
+            "description": "Identifiers for each allocation in this placement."
+          }
+        },
+        "additionalProperties": false
+      },
+      "OrderGraphPlacementChildPlacementDetail": {
+        "required": [
+          "id"
+        ],
+        "type": "object",
+        "properties": {
+          "id": {
+            "$ref": "#/components/schemas/ResourceId"
+          }
+        },
+        "additionalProperties": false
+      },
+      "OrderGraphPlacementExecutionDetail": {
+        "required": [
+          "id"
+        ],
+        "type": "object",
+        "properties": {
+          "id": {
+            "$ref": "#/components/schemas/ResourceId"
+          }
+        },
+        "additionalProperties": false
+      },
+      "OrderGraphPlacementExecutionSynopsis": {
+        "required": [
+          "details",
+          "quantity"
+        ],
+        "type": "object",
+        "properties": {
+          "quantity": {
+            "type": "number",
+            "description": "Total number of units executed.",
+            "format": "double"
+          },
+          "details": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/OrderGraphPlacementExecutionDetail"
+            },
+            "description": "Identifiers info for each execution against this placement."
+          }
+        },
+        "additionalProperties": false
+      },
+      "OrderGraphPlacementOrderDetail": {
+        "required": [
+          "id"
+        ],
+        "type": "object",
+        "properties": {
+          "id": {
+            "$ref": "#/components/schemas/ResourceId"
+          }
+        },
+        "additionalProperties": false
+      },
+      "OrderGraphPlacementOrderSynopsis": {
+        "required": [
+          "details"
+        ],
+        "type": "object",
+        "properties": {
+          "details": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/OrderGraphPlacementOrderDetail"
+            },
+            "description": "Identifiers for each order in the block."
+          }
+        },
+        "additionalProperties": false
+      },
+      "OrderGraphPlacementPlacementSynopsis": {
+        "required": [
+          "details",
+          "quantity"
+        ],
+        "type": "object",
+        "properties": {
+          "details": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/OrderGraphPlacementChildPlacementDetail"
+            },
+            "description": "Identifiers for each child placement for this placement."
+          },
+          "quantity": {
+            "type": "number",
+            "description": "Total number of units placed.",
+            "format": "double"
+          }
+        },
+        "additionalProperties": false
+      },
       "OrderRequest": {
         "required": [
           "id",
@@ -89725,6 +91721,88 @@
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/Order"
+            },
+            "description": "The resources to list."
+          },
+          "href": {
+            "type": "string",
+            "description": "The URI of the resource list.",
+            "format": "uri",
+            "nullable": true
+          },
+          "links": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Link"
+            },
+            "description": "Collection of links.",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false,
+        "description": "A paginated list of resource that can be returned from a request."
+      },
+      "PagedResourceListOfOrderGraphBlock": {
+        "required": [
+          "values"
+        ],
+        "type": "object",
+        "properties": {
+          "nextPage": {
+            "type": "string",
+            "description": "The next page of results.",
+            "nullable": true
+          },
+          "previousPage": {
+            "type": "string",
+            "description": "The previous page of results.",
+            "nullable": true
+          },
+          "values": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/OrderGraphBlock"
+            },
+            "description": "The resources to list."
+          },
+          "href": {
+            "type": "string",
+            "description": "The URI of the resource list.",
+            "format": "uri",
+            "nullable": true
+          },
+          "links": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Link"
+            },
+            "description": "Collection of links.",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false,
+        "description": "A paginated list of resource that can be returned from a request."
+      },
+      "PagedResourceListOfOrderGraphPlacement": {
+        "required": [
+          "values"
+        ],
+        "type": "object",
+        "properties": {
+          "nextPage": {
+            "type": "string",
+            "description": "The next page of results.",
+            "nullable": true
+          },
+          "previousPage": {
+            "type": "string",
+            "description": "The previous page of results.",
+            "nullable": true
+          },
+          "values": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/OrderGraphPlacement"
             },
             "description": "The resources to list."
           },
