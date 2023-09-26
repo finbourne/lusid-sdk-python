@@ -9,7 +9,7 @@
       "url": "https://www.finbourne.com",
       "email": "info@finbourne.com"
     },
-    "version": "1.0.543",
+    "version": "1.0.544",
     "x-logo": {
       "url": "https://www.lusid.com/app/assets/logo_white.png",
       "backgroundColor": "#415464"
@@ -39194,6 +39194,18 @@
             "description": "Option to specify whether or not to include cancelled transactions,\r\n             including previous versions of transactions which have since been amended.\r\n             Defaults to False if not specified.",
             "schema": {
               "type": "boolean"
+            },
+            "x-nullable": true
+          },
+          {
+            "name": "sortBy",
+            "in": "query",
+            "description": "A list of field names or properties to sort by, each suffixed by \" ASC\" or \" DESC\"",
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
             },
             "x-nullable": true
           }
