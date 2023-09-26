@@ -24,6 +24,7 @@ from lusid.api.entities_api import EntitiesApi
 from lusid.api.executions_api import ExecutionsApi
 from lusid.api.instruments_api import InstrumentsApi
 from lusid.api.legal_entities_api import LegalEntitiesApi
+from lusid.api.order_graph_api import OrderGraphApi
 from lusid.api.orders_api import OrdersApi
 from lusid.api.participations_api import ParticipationsApi
 from lusid.api.persons_api import PersonsApi
