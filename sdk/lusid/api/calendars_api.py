@@ -848,8 +848,8 @@ class CalendarsApi(object):
         if self.api_client.client_side_validation and 'code' in local_var_params and not re.search(r'^[a-zA-Z0-9\-_]+$', local_var_params['code']):  # noqa: E501
             raise ApiValueError("Invalid value for parameter `code` when calling `delete_date_from_calendar`, must conform to the pattern `/^[a-zA-Z0-9\-_]+$/`")  # noqa: E501
         if self.api_client.client_side_validation and ('date_id' in local_var_params and  # noqa: E501
-                                                        len(local_var_params['date_id']) > 64):  # noqa: E501
-            raise ApiValueError("Invalid value for parameter `date_id` when calling `delete_date_from_calendar`, length must be less than or equal to `64`")  # noqa: E501
+                                                        len(local_var_params['date_id']) > 256):  # noqa: E501
+            raise ApiValueError("Invalid value for parameter `date_id` when calling `delete_date_from_calendar`, length must be less than or equal to `256`")  # noqa: E501
         if self.api_client.client_side_validation and ('date_id' in local_var_params and  # noqa: E501
                                                         len(local_var_params['date_id']) < 1):  # noqa: E501
             raise ApiValueError("Invalid value for parameter `date_id` when calling `delete_date_from_calendar`, length must be greater than or equal to `1`")  # noqa: E501
