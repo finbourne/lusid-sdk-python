@@ -5160,7 +5160,7 @@
             "description": "Identifier of the date to be removed",
             "required": true,
             "schema": {
-              "maxLength": 64,
+              "maxLength": 256,
               "minLength": 1,
               "pattern": "^[a-zA-Z0-9\\-_]+$",
               "type": "string"
