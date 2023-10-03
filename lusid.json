@@ -9,7 +9,7 @@
       "url": "https://www.finbourne.com",
       "email": "info@finbourne.com"
     },
-    "version": "1.0.560",
+    "version": "1.0.561",
     "x-logo": {
       "url": "https://www.lusid.com/app/assets/logo_white.png",
       "backgroundColor": "#415464"
@@ -81949,7 +81949,7 @@
           "status": {
             "minLength": 1,
             "type": "string",
-            "description": "The account status. Can be Active, Inactive or Deleted. Defaults to Active."
+            "description": "The Account status. Can be Active, Inactive or Deleted. Defaults to Active."
           },
           "accountNumber": {
             "maxLength": 64,
@@ -102172,11 +102172,11 @@
   "tags": [
     {
       "name": "Abor",
-      "description": "Methods to create and manage abor."
+      "description": "Methods to create and manage Abor entities."
     },
     {
       "name": "AborConfiguration",
-      "description": "Methods to create and manage abor configuration."
+      "description": "Methods to create and manage Abor Configuration entities."
     },
     {
       "name": "AddressKeyDefinition",
@@ -102204,7 +102204,7 @@
     },
     {
       "name": "Chart Of Accounts",
-      "description": "Methods to create and manage chart of accounts and accounts."
+      "description": "Methods to create and manage Chart of Accounts entities."
     },
     {
       "name": "Complex Market Data",
