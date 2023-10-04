@@ -9,7 +9,7 @@
       "url": "https://www.finbourne.com",
       "email": "info@finbourne.com"
     },
-    "version": "1.0.567",
+    "version": "1.0.568",
     "x-logo": {
       "url": "https://www.lusid.com/app/assets/logo_white.png",
       "backgroundColor": "#415464"
@@ -48594,7 +48594,8 @@
                 "outputFrequency": "Daily",
                 "alternativeInceptionDate": "2020-01-01",
                 "holidayCalendars": [],
-                "currency": "USD"
+                "currency": "USD",
+                "runMode": "ReturnData"
               }
             },
             "application/json": {
@@ -48627,7 +48628,8 @@
                 "outputFrequency": "Daily",
                 "alternativeInceptionDate": "2020-01-01",
                 "holidayCalendars": [],
-                "currency": "USD"
+                "currency": "USD",
+                "runMode": "ReturnData"
               }
             },
             "text/json": {
@@ -48660,7 +48662,8 @@
                 "outputFrequency": "Daily",
                 "alternativeInceptionDate": "2020-01-01",
                 "holidayCalendars": [],
-                "currency": "USD"
+                "currency": "USD",
+                "runMode": "ReturnData"
               }
             },
             "application/*+json": {
@@ -48693,7 +48696,8 @@
                 "outputFrequency": "Daily",
                 "alternativeInceptionDate": "2020-01-01",
                 "holidayCalendars": [],
-                "currency": "USD"
+                "currency": "USD",
+                "runMode": "ReturnData"
               }
             }
           },
@@ -76580,6 +76584,14 @@
             },
             "description": "List containing Composite members which post no return on the given day.",
             "nullable": true
+          },
+          "warnings": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "description": "List of the warnings about the calculation of the aggregated return.",
+            "nullable": true
           }
         },
         "additionalProperties": false,
@@ -76686,6 +76698,11 @@
             "minLength": 0,
             "type": "string",
             "description": "Optional - either a string or a property. If provided, the results will be converted to the specified currency",
+            "nullable": true
+          },
+          "runMode": {
+            "type": "string",
+            "description": "The RunMode the aggregation will calculate metrics for. Defaults to ReturnData.",
             "nullable": true
           }
         },
