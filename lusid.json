@@ -9,7 +9,7 @@
       "url": "https://www.finbourne.com",
       "email": "info@finbourne.com"
     },
-    "version": "1.0.573",
+    "version": "1.0.574",
     "x-logo": {
       "url": "https://www.lusid.com/app/assets/logo_white.png",
       "backgroundColor": "#415464"
@@ -76715,7 +76715,7 @@
           },
           "runMode": {
             "type": "string",
-            "description": "The RunMode the aggregation will calculate metrics for. Defaults to ReturnData.",
+            "description": "The dates the AggregatedReturns output will be calculated: ReturnData/WeekDays/AllDays/MonthEnd. Defaults to ReturnData.",
             "nullable": true
           }
         },
