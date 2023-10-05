@@ -9,7 +9,7 @@
       "url": "https://www.finbourne.com",
       "email": "info@finbourne.com"
     },
-    "version": "1.0.570",
+    "version": "1.0.571",
     "x-logo": {
       "url": "https://www.lusid.com/app/assets/logo_white.png",
       "backgroundColor": "#415464"
@@ -475,7 +475,7 @@
                     "options": {}
                   },
                   {
-                    "key": "Holding/default/PV",
+                    "key": "Valuation/PV",
                     "op": "Value",
                     "options": {}
                   }
@@ -531,7 +531,7 @@
                     "options": {}
                   },
                   {
-                    "key": "Holding/default/PV",
+                    "key": "Valuation/PV",
                     "op": "Value",
                     "options": {}
                   }
@@ -587,7 +587,7 @@
                     "options": {}
                   },
                   {
-                    "key": "Holding/default/PV",
+                    "key": "Valuation/PV",
                     "op": "Value",
                     "options": {}
                   }
@@ -643,7 +643,7 @@
                     "options": {}
                   },
                   {
-                    "key": "Holding/default/PV",
+                    "key": "Valuation/PV",
                     "op": "Value",
                     "options": {}
                   }
@@ -772,7 +772,7 @@
                     "options": {}
                   },
                   {
-                    "key": "Holding/default/PV",
+                    "key": "Valuation/PV",
                     "op": "Value",
                     "options": {}
                   }
@@ -828,7 +828,7 @@
                     "options": {}
                   },
                   {
-                    "key": "Holding/default/PV",
+                    "key": "Valuation/PV",
                     "op": "Value",
                     "options": {}
                   }
@@ -884,7 +884,7 @@
                     "options": {}
                   },
                   {
-                    "key": "Holding/default/PV",
+                    "key": "Valuation/PV",
                     "op": "Value",
                     "options": {}
                   }
@@ -940,7 +940,7 @@
                     "options": {}
                   },
                   {
-                    "key": "Holding/default/PV",
+                    "key": "Valuation/PV",
                     "op": "Value",
                     "options": {}
                   }
@@ -42152,7 +42152,7 @@
                       "options": {}
                     },
                     {
-                      "key": "Holding/default/PV",
+                      "key": "Valuation/PV",
                       "op": "Sum",
                       "options": {}
                     }
@@ -42198,7 +42198,7 @@
                       "options": {}
                     },
                     {
-                      "key": "Holding/default/PV",
+                      "key": "Valuation/PV",
                       "op": "Sum",
                       "options": {}
                     }
@@ -42237,7 +42237,7 @@
                     "comparisonType": "AbsoluteDifference",
                     "tolerance": 1.2345,
                     "appliesTo": {
-                      "key": "Holding/default/PV",
+                      "key": "Valuation/PV",
                       "op": "Sum",
                       "options": {}
                     },
@@ -42267,7 +42267,7 @@
                       "options": {}
                     },
                     {
-                      "key": "Holding/default/PV",
+                      "key": "Valuation/PV",
                       "op": "Sum",
                       "options": {}
                     }
@@ -42313,7 +42313,7 @@
                       "options": {}
                     },
                     {
-                      "key": "Holding/default/PV",
+                      "key": "Valuation/PV",
                       "op": "Sum",
                       "options": {}
                     }
@@ -42352,7 +42352,7 @@
                     "comparisonType": "AbsoluteDifference",
                     "tolerance": 1.2345,
                     "appliesTo": {
-                      "key": "Holding/default/PV",
+                      "key": "Valuation/PV",
                       "op": "Sum",
                       "options": {}
                     },
@@ -42382,7 +42382,7 @@
                       "options": {}
                     },
                     {
-                      "key": "Holding/default/PV",
+                      "key": "Valuation/PV",
                       "op": "Sum",
                       "options": {}
                     }
@@ -42428,7 +42428,7 @@
                       "options": {}
                     },
                     {
-                      "key": "Holding/default/PV",
+                      "key": "Valuation/PV",
                       "op": "Sum",
                       "options": {}
                     }
@@ -42467,7 +42467,7 @@
                     "comparisonType": "AbsoluteDifference",
                     "tolerance": 1.2345,
                     "appliesTo": {
-                      "key": "Holding/default/PV",
+                      "key": "Valuation/PV",
                       "op": "Sum",
                       "options": {}
                     },
@@ -42497,7 +42497,7 @@
                       "options": {}
                     },
                     {
-                      "key": "Holding/default/PV",
+                      "key": "Valuation/PV",
                       "op": "Sum",
                       "options": {}
                     }
@@ -42543,7 +42543,7 @@
                       "options": {}
                     },
                     {
-                      "key": "Holding/default/PV",
+                      "key": "Valuation/PV",
                       "op": "Sum",
                       "options": {}
                     }
@@ -42582,7 +42582,7 @@
                     "comparisonType": "AbsoluteDifference",
                     "tolerance": 1.2345,
                     "appliesTo": {
-                      "key": "Holding/default/PV",
+                      "key": "Valuation/PV",
                       "op": "Sum",
                       "options": {}
                     },
@@ -42907,7 +42907,7 @@
                       "options": {}
                     },
                     {
-                      "key": "Holding/default/PV",
+                      "key": "Valuation/PV",
                       "op": "Value",
                       "options": {}
                     }
@@ -42958,7 +42958,7 @@
                       "options": {}
                     },
                     {
-                      "key": "Holding/default/PV",
+                      "key": "Valuation/PV",
                       "op": "Value",
                       "options": {}
                     }
@@ -43018,7 +43018,7 @@
                       "options": {}
                     },
                     {
-                      "key": "Holding/default/PV",
+                      "key": "Valuation/PV",
                       "op": "Value",
                       "options": {}
                     }
@@ -43069,7 +43069,7 @@
                       "options": {}
                     },
                     {
-                      "key": "Holding/default/PV",
+                      "key": "Valuation/PV",
                       "op": "Value",
                       "options": {}
                     }
@@ -43129,7 +43129,7 @@
                       "options": {}
                     },
                     {
-                      "key": "Holding/default/PV",
+                      "key": "Valuation/PV",
                       "op": "Value",
                       "options": {}
                     }
@@ -43180,7 +43180,7 @@
                       "options": {}
                     },
                     {
-                      "key": "Holding/default/PV",
+                      "key": "Valuation/PV",
                       "op": "Value",
                       "options": {}
                     }
@@ -43240,7 +43240,7 @@
                       "options": {}
                     },
                     {
-                      "key": "Holding/default/PV",
+                      "key": "Valuation/PV",
                       "op": "Value",
                       "options": {}
                     }
@@ -43291,7 +43291,7 @@
                       "options": {}
                     },
                     {
-                      "key": "Holding/default/PV",
+                      "key": "Valuation/PV",
                       "op": "Value",
                       "options": {}
                     }
@@ -44060,7 +44060,7 @@
                       "options": {}
                     },
                     {
-                      "key": "Holding/default/PV",
+                      "key": "Valuation/PV",
                       "op": "Sum",
                       "options": {}
                     }
@@ -44106,7 +44106,7 @@
                       "options": {}
                     },
                     {
-                      "key": "Holding/default/PV",
+                      "key": "Valuation/PV",
                       "op": "Sum",
                       "options": {}
                     }
@@ -44163,7 +44163,7 @@
                       "options": {}
                     },
                     {
-                      "key": "Holding/default/PV",
+                      "key": "Valuation/PV",
                       "op": "Sum",
                       "options": {}
                     }
@@ -44209,7 +44209,7 @@
                       "options": {}
                     },
                     {
-                      "key": "Holding/default/PV",
+                      "key": "Valuation/PV",
                       "op": "Sum",
                       "options": {}
                     }
@@ -44266,7 +44266,7 @@
                       "options": {}
                     },
                     {
-                      "key": "Holding/default/PV",
+                      "key": "Valuation/PV",
                       "op": "Sum",
                       "options": {}
                     }
@@ -44312,7 +44312,7 @@
                       "options": {}
                     },
                     {
-                      "key": "Holding/default/PV",
+                      "key": "Valuation/PV",
                       "op": "Sum",
                       "options": {}
                     }
@@ -44369,7 +44369,7 @@
                       "options": {}
                     },
                     {
-                      "key": "Holding/default/PV",
+                      "key": "Valuation/PV",
                       "op": "Sum",
                       "options": {}
                     }
@@ -44415,7 +44415,7 @@
                       "options": {}
                     },
                     {
-                      "key": "Holding/default/PV",
+                      "key": "Valuation/PV",
                       "op": "Sum",
                       "options": {}
                     }
