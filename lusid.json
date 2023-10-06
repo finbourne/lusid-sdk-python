@@ -9,7 +9,7 @@
       "url": "https://www.finbourne.com",
       "email": "info@finbourne.com"
     },
-    "version": "1.0.580",
+    "version": "1.0.581",
     "x-logo": {
       "url": "https://www.lusid.com/app/assets/logo_white.png",
       "backgroundColor": "#415464"
@@ -21,6 +21,300 @@
     }
   ],
   "paths": {
+    "/api/abor/{scope}/{code}/JELines/$query/$deprecated": {
+      "post": {
+        "tags": [
+          "Abor"
+        ],
+        "summary": "[DEPRECATED] GetJELines: DEPRECATED: please use GetJournalEntryLines instead. Get the JELines for the given Abor.",
+        "description": "DEPRECATED: please use GetJournalEntryLines instead. Gets the JELines for the given Abor\r\n            \r\nThe JE Lines have been generated from transactions and translated via posting rules",
+        "operationId": "GetJELines",
+        "parameters": [
+          {
+            "name": "scope",
+            "in": "path",
+            "description": "The scope of the Abor.",
+            "required": true,
+            "schema": {
+              "maxLength": 64,
+              "minLength": 1,
+              "pattern": "^[a-zA-Z0-9\\-_]+$",
+              "type": "string"
+            }
+          },
+          {
+            "name": "code",
+            "in": "path",
+            "description": "The code of the Abor. Together with the scope is creating the unique identifier for the given Abor.",
+            "required": true,
+            "schema": {
+              "maxLength": 64,
+              "minLength": 1,
+              "pattern": "^[a-zA-Z0-9\\-_]+$",
+              "type": "string"
+            }
+          },
+          {
+            "name": "asAt",
+            "in": "query",
+            "description": "The asAt datetime at which to retrieve JELines. Defaults to returning the latest version\r\n             of each transaction if not specified.",
+            "schema": {
+              "type": "string",
+              "format": "date-time"
+            },
+            "x-nullable": true
+          },
+          {
+            "name": "limit",
+            "in": "query",
+            "description": "When paginating, limit the number of returned results to this many. Defaults to 100 if not specified.",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            },
+            "x-nullable": true
+          },
+          {
+            "name": "page",
+            "in": "query",
+            "description": "The pagination token to use to continue listing JELines from a previous call to GetJELines.",
+            "schema": {
+              "maxLength": 500,
+              "minLength": 1,
+              "pattern": "^[a-zA-Z0-9\\+/]*={0,3}$",
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "description": "The query parameters used in running the generation of the JELines.",
+          "content": {
+            "application/json-patch+json": {
+              "schema": {
+                "$ref": "#/components/schemas/JELinesQueryParameters"
+              },
+              "example": {
+                "startDate": "2018-03-05T00:00:00.0000000+00:00",
+                "endDate": "2018-03-19T00:00:00.0000000+00:00",
+                "propertyKeys": []
+              }
+            },
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/JELinesQueryParameters"
+              },
+              "example": {
+                "startDate": "2018-03-05T00:00:00.0000000+00:00",
+                "endDate": "2018-03-19T00:00:00.0000000+00:00",
+                "propertyKeys": []
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/JELinesQueryParameters"
+              },
+              "example": {
+                "startDate": "2018-03-05T00:00:00.0000000+00:00",
+                "endDate": "2018-03-19T00:00:00.0000000+00:00",
+                "propertyKeys": []
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/JELinesQueryParameters"
+              },
+              "example": {
+                "startDate": "2018-03-05T00:00:00.0000000+00:00",
+                "endDate": "2018-03-19T00:00:00.0000000+00:00",
+                "propertyKeys": []
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "The requested JELines for the specified Abor.",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/VersionedResourceListOfJournalEntryLine"
+                },
+                "example": {
+                  "version": {
+                    "effectiveFrom": "2018-03-05T00:00:00.0000000+00:00",
+                    "asAtDate": "2018-03-04T23:50:00.0000000+00:00"
+                  },
+                  "values": [
+                    {
+                      "accountingDate": "2018-03-04T23:50:00.0000000+00:00",
+                      "activityDate": "2018-03-04T23:50:00.0000000+00:00",
+                      "portfolioId": {
+                        "scope": "Scope1",
+                        "code": "PortfolioId1"
+                      },
+                      "instrumentId": "LUID_00000001",
+                      "instrumentScope": "Default",
+                      "subHoldingKeys": {},
+                      "taxLotId": "TaxLot1",
+                      "generalLedgerAccountCode": "0071",
+                      "local": {
+                        "amount": 110,
+                        "currency": "GBP"
+                      },
+                      "base": {
+                        "amount": 110,
+                        "currency": "GBP"
+                      },
+                      "postingModuleCode": "CodePostingModule",
+                      "postingRule": "Rule1",
+                      "asAtDate": "2022-02-03T00:00:00.0000000+00:00",
+                      "activitiesDescription": "Activites Description",
+                      "sourceType": "LusidTransaction",
+                      "sourceId": "Txn1",
+                      "properties": {},
+                      "movementName": "Open",
+                      "holdingType": "C",
+                      "economicBucket": "NA_Cost"
+                    }
+                  ],
+                  "href": "http://example.com",
+                  "links": []
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/VersionedResourceListOfJournalEntryLine"
+                },
+                "example": {
+                  "version": {
+                    "effectiveFrom": "2018-03-05T00:00:00.0000000+00:00",
+                    "asAtDate": "2018-03-04T23:50:00.0000000+00:00"
+                  },
+                  "values": [
+                    {
+                      "accountingDate": "2018-03-04T23:50:00.0000000+00:00",
+                      "activityDate": "2018-03-04T23:50:00.0000000+00:00",
+                      "portfolioId": {
+                        "scope": "Scope1",
+                        "code": "PortfolioId1"
+                      },
+                      "instrumentId": "LUID_00000001",
+                      "instrumentScope": "Default",
+                      "subHoldingKeys": {},
+                      "taxLotId": "TaxLot1",
+                      "generalLedgerAccountCode": "0071",
+                      "local": {
+                        "amount": 110,
+                        "currency": "GBP"
+                      },
+                      "base": {
+                        "amount": 110,
+                        "currency": "GBP"
+                      },
+                      "postingModuleCode": "CodePostingModule",
+                      "postingRule": "Rule1",
+                      "asAtDate": "2022-02-03T00:00:00.0000000+00:00",
+                      "activitiesDescription": "Activites Description",
+                      "sourceType": "LusidTransaction",
+                      "sourceId": "Txn1",
+                      "properties": {},
+                      "movementName": "Open",
+                      "holdingType": "C",
+                      "economicBucket": "NA_Cost"
+                    }
+                  ],
+                  "href": "http://example.com",
+                  "links": []
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/VersionedResourceListOfJournalEntryLine"
+                },
+                "example": {
+                  "version": {
+                    "effectiveFrom": "2018-03-05T00:00:00.0000000+00:00",
+                    "asAtDate": "2018-03-04T23:50:00.0000000+00:00"
+                  },
+                  "values": [
+                    {
+                      "accountingDate": "2018-03-04T23:50:00.0000000+00:00",
+                      "activityDate": "2018-03-04T23:50:00.0000000+00:00",
+                      "portfolioId": {
+                        "scope": "Scope1",
+                        "code": "PortfolioId1"
+                      },
+                      "instrumentId": "LUID_00000001",
+                      "instrumentScope": "Default",
+                      "subHoldingKeys": {},
+                      "taxLotId": "TaxLot1",
+                      "generalLedgerAccountCode": "0071",
+                      "local": {
+                        "amount": 110,
+                        "currency": "GBP"
+                      },
+                      "base": {
+                        "amount": 110,
+                        "currency": "GBP"
+                      },
+                      "postingModuleCode": "CodePostingModule",
+                      "postingRule": "Rule1",
+                      "asAtDate": "2022-02-03T00:00:00.0000000+00:00",
+                      "activitiesDescription": "Activites Description",
+                      "sourceType": "LusidTransaction",
+                      "sourceId": "Txn1",
+                      "properties": {},
+                      "movementName": "Open",
+                      "holdingType": "C",
+                      "economicBucket": "NA_Cost"
+                    }
+                  ],
+                  "href": "http://example.com",
+                  "links": []
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "The details of the input related failure",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/LusidValidationProblemDetails"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/LusidValidationProblemDetails"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/LusidValidationProblemDetails"
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "Error response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/LusidProblemDetails"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "oauth2": []
+          }
+        ],
+        "x-fbn-apistatus": "Deprecated"
+      }
+    },
     "/api/addresskeydefinitions": {
       "post": {
         "tags": [
@@ -88820,6 +89114,192 @@
         },
         "additionalProperties": false
       },
+      "JELinesQueryParameters": {
+        "type": "object",
+        "properties": {
+          "startDate": {
+            "type": "string",
+            "description": "The start date of the JELines.",
+            "format": "dateorcutlabel",
+            "nullable": true
+          },
+          "endDate": {
+            "type": "string",
+            "description": "The end date of the JELInes",
+            "format": "dateorcutlabel",
+            "nullable": true
+          },
+          "filter": {
+            "maxLength": 16384,
+            "minLength": 0,
+            "pattern": "^[\\s\\S]*$",
+            "type": "string",
+            "description": "Expression to filter the result set.",
+            "nullable": true
+          },
+          "propertyKeys": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "description": "The key that uniquely identifies the property. It has the format {domain}/{scope}/{code}."
+            },
+            "description": "A list of property keys from the 'Instrument', 'Transaction', 'Portfolio', 'Account', 'LegalEntity' or 'CustodianAccount' domain to decorate onto the JELine.",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "JournalEntryLine": {
+        "required": [
+          "accountingDate",
+          "activityDate",
+          "asAtDate",
+          "base",
+          "economicBucket",
+          "generalLedgerAccountCode",
+          "holdingType",
+          "instrumentId",
+          "instrumentScope",
+          "local",
+          "movementName",
+          "portfolioId",
+          "postingRule",
+          "sourceId",
+          "sourceType",
+          "taxLotId"
+        ],
+        "type": "object",
+        "properties": {
+          "accountingDate": {
+            "type": "string",
+            "description": "The Journal Entry Line accounting date.",
+            "format": "date-time"
+          },
+          "activityDate": {
+            "type": "string",
+            "description": "The actual date of the activity. Differs from the accounting date when creating journals that would occur in a closed period.",
+            "format": "date-time"
+          },
+          "portfolioId": {
+            "$ref": "#/components/schemas/ResourceId"
+          },
+          "instrumentId": {
+            "minLength": 1,
+            "type": "string",
+            "description": "To indicate the instrument of the transaction that the Journal Entry Line posted for, if applicable."
+          },
+          "instrumentScope": {
+            "minLength": 1,
+            "type": "string",
+            "description": "The scope in which the Journal Entry Line instrument is in."
+          },
+          "subHoldingKeys": {
+            "type": "object",
+            "additionalProperties": {
+              "$ref": "#/components/schemas/PerpetualProperty"
+            },
+            "description": "The sub-holding properties which are part of the AccountingKey.",
+            "nullable": true
+          },
+          "taxLotId": {
+            "minLength": 1,
+            "type": "string",
+            "description": "The tax lot Id that the Journal Entry Line is impacting."
+          },
+          "generalLedgerAccountCode": {
+            "minLength": 1,
+            "type": "string",
+            "description": "The code of the account in the general ledger the Journal Entry was posted to."
+          },
+          "local": {
+            "$ref": "#/components/schemas/CurrencyAndAmount"
+          },
+          "base": {
+            "$ref": "#/components/schemas/CurrencyAndAmount"
+          },
+          "postingModuleCode": {
+            "type": "string",
+            "description": "The code of the posting module where the posting rules derived the Journal Entry lines.",
+            "nullable": true
+          },
+          "postingRule": {
+            "minLength": 1,
+            "type": "string",
+            "description": "The rule generating the Journal Entry Line."
+          },
+          "asAtDate": {
+            "type": "string",
+            "description": "The corresponding input date and time of the Transaction generating the Journal Entry Line.",
+            "format": "date-time"
+          },
+          "activitiesDescription": {
+            "maxLength": 1024,
+            "minLength": 0,
+            "type": "string",
+            "description": "This would be the description of the business activities this Journal Entry Line is for.",
+            "nullable": true
+          },
+          "sourceType": {
+            "minLength": 1,
+            "type": "string",
+            "description": "So far are 4 types: LusidTxn, LusidValuation, Manual and External."
+          },
+          "sourceId": {
+            "minLength": 1,
+            "type": "string",
+            "description": "For the Lusid Source Type this will be the txn Id. For the rest will be what the user populates."
+          },
+          "properties": {
+            "type": "object",
+            "additionalProperties": {
+              "$ref": "#/components/schemas/Property"
+            },
+            "description": "A set of properties for the Abor.",
+            "nullable": true
+          },
+          "movementName": {
+            "minLength": 1,
+            "type": "string",
+            "description": "The name of the movement."
+          },
+          "holdingType": {
+            "minLength": 1,
+            "type": "string",
+            "description": "Defines the broad category holding within the portfolio."
+          },
+          "economicBucket": {
+            "minLength": 1,
+            "type": "string",
+            "description": "Raw Journal Entry Line details of the economic bucket for the Journal Entry Line."
+          },
+          "levels": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "description": "Resolved data from the general ledger profile where the GeneralLedgerProfileCode is specified in the GetJournalEntryLines request body.",
+            "nullable": true
+          },
+          "sourceLevels": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "description": "Source data from the general ledger profile where the GeneralLedgerProfileCode is specified in the GetJournalEntryLines request body.",
+            "nullable": true
+          },
+          "links": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Link"
+            },
+            "description": "Collection of links.",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false,
+        "description": "A Journal Entry line entity."
+      },
       "LabelValueSet": {
         "required": [
           "values"
@@ -101966,6 +102446,50 @@
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/A2BMovementRecord"
+            },
+            "description": "The resources to list."
+          },
+          "href": {
+            "type": "string",
+            "description": "The URI of the resource list.",
+            "format": "uri",
+            "nullable": true
+          },
+          "nextPage": {
+            "type": "string",
+            "description": "The next page of results.",
+            "nullable": true
+          },
+          "previousPage": {
+            "type": "string",
+            "description": "The previous page of results.",
+            "nullable": true
+          },
+          "links": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Link"
+            },
+            "description": "Collection of links.",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "VersionedResourceListOfJournalEntryLine": {
+        "required": [
+          "values",
+          "version"
+        ],
+        "type": "object",
+        "properties": {
+          "version": {
+            "$ref": "#/components/schemas/Version"
+          },
+          "values": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/JournalEntryLine"
             },
             "description": "The resources to list."
           },
