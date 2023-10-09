@@ -163,7 +163,7 @@ class JournalEntryLine(object):
         :type levels: list[str]
         :param source_levels:  Source data from the general ledger profile where the GeneralLedgerProfileCode is specified in the GetJournalEntryLines request body.
         :type source_levels: list[str]
-        :param links:  Collection of links.
+        :param links: 
         :type links: list[lusid.Link]
 
         """  # noqa: E501
@@ -792,7 +792,6 @@ class JournalEntryLine(object):
     def links(self):
         """Gets the links of this JournalEntryLine.  # noqa: E501
 
-        Collection of links.  # noqa: E501
 
         :return: The links of this JournalEntryLine.  # noqa: E501
         :rtype: list[lusid.Link]
@@ -803,7 +802,6 @@ class JournalEntryLine(object):
     def links(self, links):
         """Sets the links of this JournalEntryLine.
 
-        Collection of links.  # noqa: E501
 
         :param links: The links of this JournalEntryLine.  # noqa: E501
         :type links: list[lusid.Link]
