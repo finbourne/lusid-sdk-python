@@ -9,7 +9,7 @@
       "url": "https://www.finbourne.com",
       "email": "info@finbourne.com"
     },
-    "version": "1.0.588",
+    "version": "1.0.589",
     "x-logo": {
       "url": "https://www.lusid.com/app/assets/logo_white.png",
       "backgroundColor": "#415464"
@@ -9200,6 +9200,511 @@
                           ]
                         }
                       }
+                    }
+                  ]
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "The details of the input related failure",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/LusidValidationProblemDetails"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/LusidValidationProblemDetails"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/LusidValidationProblemDetails"
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "Error response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/LusidProblemDetails"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "oauth2": []
+          }
+        ],
+        "x-fbn-apistatus": "EarlyAccess"
+      }
+    },
+    "/api/compliance/runs/summary/{scope}/{code}/$decorate": {
+      "get": {
+        "tags": [
+          "Compliance"
+        ],
+        "summary": "[EARLY ACCESS] GetDecoratedComplianceRunSummary: Get decorated summary results for a specific compliance run.",
+        "description": "Specify a run scope and code from a previously run compliance check to get an overview of result details.",
+        "operationId": "GetDecoratedComplianceRunSummary",
+        "parameters": [
+          {
+            "name": "scope",
+            "in": "path",
+            "description": "Required: Run Scope.",
+            "required": true,
+            "schema": {
+              "maxLength": 64,
+              "minLength": 1,
+              "pattern": "^[a-zA-Z0-9\\-_]+$",
+              "type": "string"
+            }
+          },
+          {
+            "name": "code",
+            "in": "path",
+            "description": "Required: Run Code.",
+            "required": true,
+            "schema": {
+              "maxLength": 64,
+              "minLength": 1,
+              "pattern": "^[a-zA-Z0-9\\-_]+$",
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The requested compliance run details.",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/DecoratedComplianceRunSummary"
+                },
+                "example": {
+                  "runId": {
+                    "scope": "MyScope",
+                    "code": "MyCode"
+                  },
+                  "details": [
+                    {
+                      "ruleId": {
+                        "scope": "MyRule",
+                        "code": "1"
+                      },
+                      "affectedPortfoliosDetails": [
+                        {
+                          "id": {
+                            "scope": "MyPortfolio",
+                            "code": "1"
+                          },
+                          "name": "Portfolio1 Name"
+                        },
+                        {
+                          "id": {
+                            "scope": "MyPortfolio",
+                            "code": "2"
+                          },
+                          "name": "Portfolio2 Name"
+                        },
+                        {
+                          "id": {
+                            "scope": "MyPortfolio",
+                            "code": "3"
+                          },
+                          "name": "Portfolio3 Name"
+                        }
+                      ],
+                      "affectedOrders": [
+                        {
+                          "scope": "MyOrder",
+                          "code": "1"
+                        },
+                        {
+                          "scope": "MyOrder",
+                          "code": "1"
+                        }
+                      ],
+                      "templateId": {
+                        "scope": "system",
+                        "code": "SomeTemplate"
+                      },
+                      "templateDescription": "The template's description",
+                      "templateVariation": "standard",
+                      "status": "Failed",
+                      "ruleName": "Rule1 Name",
+                      "ruleDescription": "Rule1 Description",
+                      "outcome": "Rule failed: example reason"
+                    },
+                    {
+                      "ruleId": {
+                        "scope": "MyRule",
+                        "code": "2"
+                      },
+                      "affectedPortfoliosDetails": [
+                        {
+                          "id": {
+                            "scope": "MyPortfolio",
+                            "code": "1"
+                          },
+                          "name": "Portfolio1 Name"
+                        },
+                        {
+                          "id": {
+                            "scope": "MyPortfolio",
+                            "code": "2"
+                          },
+                          "name": "Portfolio2 Name"
+                        },
+                        {
+                          "id": {
+                            "scope": "MyPortfolio",
+                            "code": "3"
+                          },
+                          "name": "Portfolio3 Name"
+                        }
+                      ],
+                      "affectedOrders": [],
+                      "templateId": {
+                        "scope": "system",
+                        "code": "SomeTemplate"
+                      },
+                      "templateDescription": "The template's description",
+                      "templateVariation": "standard",
+                      "status": "Passed",
+                      "ruleName": "Rule2 Name",
+                      "ruleDescription": "Rule2 Description",
+                      "outcome": "Rule passed"
+                    },
+                    {
+                      "ruleId": {
+                        "scope": "MyRule",
+                        "code": "3"
+                      },
+                      "affectedPortfoliosDetails": [
+                        {
+                          "id": {
+                            "scope": "MyPortfolio",
+                            "code": "1"
+                          },
+                          "name": "Portfolio1 Name"
+                        },
+                        {
+                          "id": {
+                            "scope": "MyPortfolio",
+                            "code": "2"
+                          },
+                          "name": "Portfolio2 Name"
+                        },
+                        {
+                          "id": {
+                            "scope": "MyPortfolio",
+                            "code": "3"
+                          },
+                          "name": "Portfolio3 Name"
+                        }
+                      ],
+                      "affectedOrders": [],
+                      "templateId": {
+                        "scope": "system",
+                        "code": "SomeTemplate"
+                      },
+                      "templateDescription": "The template's description",
+                      "templateVariation": "standard",
+                      "status": "MissingData",
+                      "ruleName": "Rule3 Name",
+                      "ruleDescription": "Rule3 Description",
+                      "outcome": "Rule had missing data"
+                    }
+                  ]
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/DecoratedComplianceRunSummary"
+                },
+                "example": {
+                  "runId": {
+                    "scope": "MyScope",
+                    "code": "MyCode"
+                  },
+                  "details": [
+                    {
+                      "ruleId": {
+                        "scope": "MyRule",
+                        "code": "1"
+                      },
+                      "affectedPortfoliosDetails": [
+                        {
+                          "id": {
+                            "scope": "MyPortfolio",
+                            "code": "1"
+                          },
+                          "name": "Portfolio1 Name"
+                        },
+                        {
+                          "id": {
+                            "scope": "MyPortfolio",
+                            "code": "2"
+                          },
+                          "name": "Portfolio2 Name"
+                        },
+                        {
+                          "id": {
+                            "scope": "MyPortfolio",
+                            "code": "3"
+                          },
+                          "name": "Portfolio3 Name"
+                        }
+                      ],
+                      "affectedOrders": [
+                        {
+                          "scope": "MyOrder",
+                          "code": "1"
+                        },
+                        {
+                          "scope": "MyOrder",
+                          "code": "1"
+                        }
+                      ],
+                      "templateId": {
+                        "scope": "system",
+                        "code": "SomeTemplate"
+                      },
+                      "templateDescription": "The template's description",
+                      "templateVariation": "standard",
+                      "status": "Failed",
+                      "ruleName": "Rule1 Name",
+                      "ruleDescription": "Rule1 Description",
+                      "outcome": "Rule failed: example reason"
+                    },
+                    {
+                      "ruleId": {
+                        "scope": "MyRule",
+                        "code": "2"
+                      },
+                      "affectedPortfoliosDetails": [
+                        {
+                          "id": {
+                            "scope": "MyPortfolio",
+                            "code": "1"
+                          },
+                          "name": "Portfolio1 Name"
+                        },
+                        {
+                          "id": {
+                            "scope": "MyPortfolio",
+                            "code": "2"
+                          },
+                          "name": "Portfolio2 Name"
+                        },
+                        {
+                          "id": {
+                            "scope": "MyPortfolio",
+                            "code": "3"
+                          },
+                          "name": "Portfolio3 Name"
+                        }
+                      ],
+                      "affectedOrders": [],
+                      "templateId": {
+                        "scope": "system",
+                        "code": "SomeTemplate"
+                      },
+                      "templateDescription": "The template's description",
+                      "templateVariation": "standard",
+                      "status": "Passed",
+                      "ruleName": "Rule2 Name",
+                      "ruleDescription": "Rule2 Description",
+                      "outcome": "Rule passed"
+                    },
+                    {
+                      "ruleId": {
+                        "scope": "MyRule",
+                        "code": "3"
+                      },
+                      "affectedPortfoliosDetails": [
+                        {
+                          "id": {
+                            "scope": "MyPortfolio",
+                            "code": "1"
+                          },
+                          "name": "Portfolio1 Name"
+                        },
+                        {
+                          "id": {
+                            "scope": "MyPortfolio",
+                            "code": "2"
+                          },
+                          "name": "Portfolio2 Name"
+                        },
+                        {
+                          "id": {
+                            "scope": "MyPortfolio",
+                            "code": "3"
+                          },
+                          "name": "Portfolio3 Name"
+                        }
+                      ],
+                      "affectedOrders": [],
+                      "templateId": {
+                        "scope": "system",
+                        "code": "SomeTemplate"
+                      },
+                      "templateDescription": "The template's description",
+                      "templateVariation": "standard",
+                      "status": "MissingData",
+                      "ruleName": "Rule3 Name",
+                      "ruleDescription": "Rule3 Description",
+                      "outcome": "Rule had missing data"
+                    }
+                  ]
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/DecoratedComplianceRunSummary"
+                },
+                "example": {
+                  "runId": {
+                    "scope": "MyScope",
+                    "code": "MyCode"
+                  },
+                  "details": [
+                    {
+                      "ruleId": {
+                        "scope": "MyRule",
+                        "code": "1"
+                      },
+                      "affectedPortfoliosDetails": [
+                        {
+                          "id": {
+                            "scope": "MyPortfolio",
+                            "code": "1"
+                          },
+                          "name": "Portfolio1 Name"
+                        },
+                        {
+                          "id": {
+                            "scope": "MyPortfolio",
+                            "code": "2"
+                          },
+                          "name": "Portfolio2 Name"
+                        },
+                        {
+                          "id": {
+                            "scope": "MyPortfolio",
+                            "code": "3"
+                          },
+                          "name": "Portfolio3 Name"
+                        }
+                      ],
+                      "affectedOrders": [
+                        {
+                          "scope": "MyOrder",
+                          "code": "1"
+                        },
+                        {
+                          "scope": "MyOrder",
+                          "code": "1"
+                        }
+                      ],
+                      "templateId": {
+                        "scope": "system",
+                        "code": "SomeTemplate"
+                      },
+                      "templateDescription": "The template's description",
+                      "templateVariation": "standard",
+                      "status": "Failed",
+                      "ruleName": "Rule1 Name",
+                      "ruleDescription": "Rule1 Description",
+                      "outcome": "Rule failed: example reason"
+                    },
+                    {
+                      "ruleId": {
+                        "scope": "MyRule",
+                        "code": "2"
+                      },
+                      "affectedPortfoliosDetails": [
+                        {
+                          "id": {
+                            "scope": "MyPortfolio",
+                            "code": "1"
+                          },
+                          "name": "Portfolio1 Name"
+                        },
+                        {
+                          "id": {
+                            "scope": "MyPortfolio",
+                            "code": "2"
+                          },
+                          "name": "Portfolio2 Name"
+                        },
+                        {
+                          "id": {
+                            "scope": "MyPortfolio",
+                            "code": "3"
+                          },
+                          "name": "Portfolio3 Name"
+                        }
+                      ],
+                      "affectedOrders": [],
+                      "templateId": {
+                        "scope": "system",
+                        "code": "SomeTemplate"
+                      },
+                      "templateDescription": "The template's description",
+                      "templateVariation": "standard",
+                      "status": "Passed",
+                      "ruleName": "Rule2 Name",
+                      "ruleDescription": "Rule2 Description",
+                      "outcome": "Rule passed"
+                    },
+                    {
+                      "ruleId": {
+                        "scope": "MyRule",
+                        "code": "3"
+                      },
+                      "affectedPortfoliosDetails": [
+                        {
+                          "id": {
+                            "scope": "MyPortfolio",
+                            "code": "1"
+                          },
+                          "name": "Portfolio1 Name"
+                        },
+                        {
+                          "id": {
+                            "scope": "MyPortfolio",
+                            "code": "2"
+                          },
+                          "name": "Portfolio2 Name"
+                        },
+                        {
+                          "id": {
+                            "scope": "MyPortfolio",
+                            "code": "3"
+                          },
+                          "name": "Portfolio3 Name"
+                        }
+                      ],
+                      "affectedOrders": [],
+                      "templateId": {
+                        "scope": "system",
+                        "code": "SomeTemplate"
+                      },
+                      "templateDescription": "The template's description",
+                      "templateVariation": "standard",
+                      "status": "MissingData",
+                      "ruleName": "Rule3 Name",
+                      "ruleDescription": "Rule3 Description",
+                      "outcome": "Rule had missing data"
                     }
                   ]
                 }
@@ -79916,6 +80421,83 @@
         },
         "additionalProperties": false
       },
+      "ComplianceRuleResultDetail": {
+        "required": [
+          "affectedOrders",
+          "affectedPortfoliosDetails",
+          "outcome",
+          "ruleDescription",
+          "ruleId",
+          "ruleName",
+          "status",
+          "templateDescription",
+          "templateId",
+          "templateVariation"
+        ],
+        "type": "object",
+        "properties": {
+          "ruleId": {
+            "$ref": "#/components/schemas/ResourceId"
+          },
+          "affectedPortfoliosDetails": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ComplianceRuleResultPortfolioDetail"
+            }
+          },
+          "affectedOrders": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ResourceId"
+            }
+          },
+          "templateId": {
+            "$ref": "#/components/schemas/ResourceId"
+          },
+          "templateDescription": {
+            "minLength": 1,
+            "type": "string"
+          },
+          "templateVariation": {
+            "minLength": 1,
+            "type": "string"
+          },
+          "status": {
+            "minLength": 1,
+            "type": "string"
+          },
+          "ruleName": {
+            "minLength": 1,
+            "type": "string"
+          },
+          "ruleDescription": {
+            "minLength": 1,
+            "type": "string"
+          },
+          "outcome": {
+            "minLength": 1,
+            "type": "string"
+          }
+        },
+        "additionalProperties": false
+      },
+      "ComplianceRuleResultPortfolioDetail": {
+        "required": [
+          "id",
+          "name"
+        ],
+        "type": "object",
+        "properties": {
+          "id": {
+            "$ref": "#/components/schemas/ResourceId"
+          },
+          "name": {
+            "minLength": 1,
+            "type": "string"
+          }
+        },
+        "additionalProperties": false
+      },
       "ComplianceRunInfoV2": {
         "required": [
           "completedAt",
@@ -83196,6 +83778,25 @@
             }
           }
         ]
+      },
+      "DecoratedComplianceRunSummary": {
+        "required": [
+          "details",
+          "runId"
+        ],
+        "type": "object",
+        "properties": {
+          "runId": {
+            "$ref": "#/components/schemas/ResourceId"
+          },
+          "details": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ComplianceRuleResultDetail"
+            }
+          }
+        },
+        "additionalProperties": false
       },
       "DeletedEntityResponse": {
         "required": [
