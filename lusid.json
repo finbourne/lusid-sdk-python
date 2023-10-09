@@ -9,7 +9,7 @@
       "url": "https://www.finbourne.com",
       "email": "info@finbourne.com"
     },
-    "version": "1.0.583",
+    "version": "1.0.584",
     "x-logo": {
       "url": "https://www.lusid.com/app/assets/logo_white.png",
       "backgroundColor": "#415464"
@@ -90282,10 +90282,11 @@
               "Ratio",
               "Delta",
               "PoolFactor",
-              "InflationAssumption"
+              "InflationAssumption",
+              "DirtyPrice"
             ],
             "type": "string",
-            "description": "The available values are: Price, Spread, Rate, LogNormalVol, NormalVol, ParSpread, IsdaSpread, Upfront, Index, Ratio, Delta, PoolFactor, InflationAssumption"
+            "description": "The available values are: Price, Spread, Rate, LogNormalVol, NormalVol, ParSpread, IsdaSpread, Upfront, Index, Ratio, Delta, PoolFactor, InflationAssumption, DirtyPrice"
           },
           "field": {
             "maxLength": 32,
@@ -90419,10 +90420,11 @@
               "Ratio",
               "Delta",
               "PoolFactor",
-              "InflationAssumption"
+              "InflationAssumption",
+              "DirtyPrice"
             ],
             "type": "string",
-            "description": "The available values are: Price, Spread, Rate, LogNormalVol, NormalVol, ParSpread, IsdaSpread, Upfront, Index, Ratio, Delta, PoolFactor, InflationAssumption"
+            "description": "The available values are: Price, Spread, Rate, LogNormalVol, NormalVol, ParSpread, IsdaSpread, Upfront, Index, Ratio, Delta, PoolFactor, InflationAssumption, DirtyPrice"
           },
           "field": {
             "maxLength": 32,
@@ -90543,10 +90545,11 @@
               "Ratio",
               "Delta",
               "PoolFactor",
-              "InflationAssumption"
+              "InflationAssumption",
+              "DirtyPrice"
             ],
             "type": "string",
-            "description": "The available values are: Price, Spread, Rate, LogNormalVol, NormalVol, ParSpread, IsdaSpread, Upfront, Index, Ratio, Delta, PoolFactor, InflationAssumption"
+            "description": "The available values are: Price, Spread, Rate, LogNormalVol, NormalVol, ParSpread, IsdaSpread, Upfront, Index, Ratio, Delta, PoolFactor, InflationAssumption, DirtyPrice"
           },
           "value": {
             "type": "number",
@@ -95484,10 +95487,11 @@
               "Ratio",
               "Delta",
               "PoolFactor",
-              "InflationAssumption"
+              "InflationAssumption",
+              "DirtyPrice"
             ],
             "type": "string",
-            "description": "The type of the quote. This allows for quotes other than prices e.g. rates or spreads to be used. The available values are: Price, Spread, Rate, LogNormalVol, NormalVol, ParSpread, IsdaSpread, Upfront, Index, Ratio, Delta, PoolFactor, InflationAssumption",
+            "description": "The type of the quote. This allows for quotes other than prices e.g. rates or spreads to be used. The available values are: Price, Spread, Rate, LogNormalVol, NormalVol, ParSpread, IsdaSpread, Upfront, Index, Ratio, Delta, PoolFactor, InflationAssumption, DirtyPrice",
             "nullable": true
           },
           "field": {
