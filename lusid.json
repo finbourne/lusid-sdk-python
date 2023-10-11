@@ -9,7 +9,7 @@
       "url": "https://www.finbourne.com",
       "email": "info@finbourne.com"
     },
-    "version": "1.0.600",
+    "version": "1.0.601",
     "x-logo": {
       "url": "https://www.lusid.com/app/assets/logo_white.png",
       "backgroundColor": "#415464"
@@ -9858,6 +9858,10 @@
                                 "labelValue": "single"
                               }
                             }
+                          },
+                          "acceptedAddressKeys": {
+                            "scope": "system",
+                            "code": "DefaultComplianceAcceptedAddressKeysList"
                           }
                         }
                       ],
@@ -9914,6 +9918,10 @@
                                 "labelValue": "single"
                               }
                             }
+                          },
+                          "acceptedAddressKeys": {
+                            "scope": "system",
+                            "code": "DefaultComplianceAcceptedAddressKeysList"
                           }
                         }
                       ],
@@ -9970,6 +9978,10 @@
                                 "labelValue": "single"
                               }
                             }
+                          },
+                          "acceptedAddressKeys": {
+                            "scope": "system",
+                            "code": "DefaultComplianceAcceptedAddressKeysList"
                           }
                         }
                       ],
@@ -10113,6 +10125,10 @@
                             "labelValue": "single"
                           }
                         }
+                      },
+                      "acceptedAddressKeys": {
+                        "scope": "system",
+                        "code": "DefaultComplianceAcceptedAddressKeysList"
                       }
                     }
                   ],
@@ -10163,6 +10179,10 @@
                             "labelValue": "single"
                           }
                         }
+                      },
+                      "acceptedAddressKeys": {
+                        "scope": "system",
+                        "code": "DefaultComplianceAcceptedAddressKeysList"
                       }
                     }
                   ],
@@ -10213,6 +10233,10 @@
                             "labelValue": "single"
                           }
                         }
+                      },
+                      "acceptedAddressKeys": {
+                        "scope": "system",
+                        "code": "DefaultComplianceAcceptedAddressKeysList"
                       }
                     }
                   ],
@@ -80895,6 +80919,7 @@
       },
       "ComplianceTemplateVariation": {
         "required": [
+          "acceptedAddressKeys",
           "description",
           "label",
           "properties",
@@ -80925,6 +80950,9 @@
               "$ref": "#/components/schemas/PerpetualProperty"
             },
             "description": "Properties associated with the Compliance Template Variation"
+          },
+          "acceptedAddressKeys": {
+            "$ref": "#/components/schemas/ResourceId"
           }
         },
         "additionalProperties": false
