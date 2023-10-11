@@ -22,7 +22,7 @@ Name | Type | Description | Notes
 **property_description** | **str** | A brief description of what a property of this property definition contains. | [optional] 
 **derivation_formula** | **str** | The rule that defines how data is composed for a derived property. | [optional] 
 **properties** | [**dict(str, ModelProperty)**](ModelProperty.md) | Set of unique property definition properties and associated values to store with the property definition. Each property must be from the &#39;PropertyDefinition&#39; domain. | [optional] 
-**links** | [**list[Link]**](Link.md) | Collection of links. | [optional] 
+**links** | [**list[Link]**](Link.md) |  | [optional] 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 
