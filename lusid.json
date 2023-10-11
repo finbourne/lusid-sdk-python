@@ -9,7 +9,7 @@
       "url": "https://www.finbourne.com",
       "email": "info@finbourne.com"
     },
-    "version": "1.0.602",
+    "version": "1.0.603",
     "x-logo": {
       "url": "https://www.lusid.com/app/assets/logo_white.png",
       "backgroundColor": "#415464"
@@ -50632,18 +50632,7 @@
                   "constraintStyle": "Property",
                   "propertyDefinitionType": "ValueProperty",
                   "propertyDescription": "A demonstration property definition",
-                  "derivationFormula": "(Properties[Instrument/default/Price] * Properties[Instrument/default/Cost]) / Properties[Instrument/default/Shares]",
-                  "version": {
-                    "effectiveFrom": "0001-01-01T00:00:00.0000000+00:00",
-                    "asAtDate": "2018-03-05T10:10:10.0000000+00:00",
-                    "asAtCreated": "2018-03-05T10:10:10.0000000+00:00",
-                    "userIdCreated": "OrderUser1",
-                    "requestIdCreated": "OrderRequestId1",
-                    "asAtModified": "2018-03-08T10:10:10.0000000+00:00",
-                    "userIdModified": "OrderUser2",
-                    "requestIdModified": "OrderRequestId2",
-                    "asAtVersionNumber": 2
-                  }
+                  "derivationFormula": "(Properties[Instrument/default/Price] * Properties[Instrument/default/Cost]) / Properties[Instrument/default/Shares]"
                 }
               },
               "application/json": {
@@ -50669,18 +50658,7 @@
                   "constraintStyle": "Property",
                   "propertyDefinitionType": "ValueProperty",
                   "propertyDescription": "A demonstration property definition",
-                  "derivationFormula": "(Properties[Instrument/default/Price] * Properties[Instrument/default/Cost]) / Properties[Instrument/default/Shares]",
-                  "version": {
-                    "effectiveFrom": "0001-01-01T00:00:00.0000000+00:00",
-                    "asAtDate": "2018-03-05T10:10:10.0000000+00:00",
-                    "asAtCreated": "2018-03-05T10:10:10.0000000+00:00",
-                    "userIdCreated": "OrderUser1",
-                    "requestIdCreated": "OrderRequestId1",
-                    "asAtModified": "2018-03-08T10:10:10.0000000+00:00",
-                    "userIdModified": "OrderUser2",
-                    "requestIdModified": "OrderRequestId2",
-                    "asAtVersionNumber": 2
-                  }
+                  "derivationFormula": "(Properties[Instrument/default/Price] * Properties[Instrument/default/Cost]) / Properties[Instrument/default/Shares]"
                 }
               },
               "text/json": {
@@ -50706,18 +50684,7 @@
                   "constraintStyle": "Property",
                   "propertyDefinitionType": "ValueProperty",
                   "propertyDescription": "A demonstration property definition",
-                  "derivationFormula": "(Properties[Instrument/default/Price] * Properties[Instrument/default/Cost]) / Properties[Instrument/default/Shares]",
-                  "version": {
-                    "effectiveFrom": "0001-01-01T00:00:00.0000000+00:00",
-                    "asAtDate": "2018-03-05T10:10:10.0000000+00:00",
-                    "asAtCreated": "2018-03-05T10:10:10.0000000+00:00",
-                    "userIdCreated": "OrderUser1",
-                    "requestIdCreated": "OrderRequestId1",
-                    "asAtModified": "2018-03-08T10:10:10.0000000+00:00",
-                    "userIdModified": "OrderUser2",
-                    "requestIdModified": "OrderRequestId2",
-                    "asAtVersionNumber": 2
-                  }
+                  "derivationFormula": "(Properties[Instrument/default/Price] * Properties[Instrument/default/Cost]) / Properties[Instrument/default/Shares]"
                 }
               }
             }
@@ -50981,18 +50948,7 @@
                   "constraintStyle": "Property",
                   "propertyDefinitionType": "ValueProperty",
                   "propertyDescription": "A demonstration property definition",
-                  "derivationFormula": "(Properties[Instrument/default/Price] * Properties[Instrument/default/Cost]) / Properties[Instrument/default/Shares]",
-                  "version": {
-                    "effectiveFrom": "0001-01-01T00:00:00.0000000+00:00",
-                    "asAtDate": "2018-03-05T10:10:10.0000000+00:00",
-                    "asAtCreated": "2018-03-05T10:10:10.0000000+00:00",
-                    "userIdCreated": "OrderUser1",
-                    "requestIdCreated": "OrderRequestId1",
-                    "asAtModified": "2018-03-08T10:10:10.0000000+00:00",
-                    "userIdModified": "OrderUser2",
-                    "requestIdModified": "OrderRequestId2",
-                    "asAtVersionNumber": 2
-                  }
+                  "derivationFormula": "(Properties[Instrument/default/Price] * Properties[Instrument/default/Cost]) / Properties[Instrument/default/Shares]"
                 }
               },
               "application/json": {
@@ -51018,18 +50974,7 @@
                   "constraintStyle": "Property",
                   "propertyDefinitionType": "ValueProperty",
                   "propertyDescription": "A demonstration property definition",
-                  "derivationFormula": "(Properties[Instrument/default/Price] * Properties[Instrument/default/Cost]) / Properties[Instrument/default/Shares]",
-                  "version": {
-                    "effectiveFrom": "0001-01-01T00:00:00.0000000+00:00",
-                    "asAtDate": "2018-03-05T10:10:10.0000000+00:00",
-                    "asAtCreated": "2018-03-05T10:10:10.0000000+00:00",
-                    "userIdCreated": "OrderUser1",
-                    "requestIdCreated": "OrderRequestId1",
-                    "asAtModified": "2018-03-08T10:10:10.0000000+00:00",
-                    "userIdModified": "OrderUser2",
-                    "requestIdModified": "OrderRequestId2",
-                    "asAtVersionNumber": 2
-                  }
+                  "derivationFormula": "(Properties[Instrument/default/Price] * Properties[Instrument/default/Cost]) / Properties[Instrument/default/Shares]"
                 }
               },
               "text/json": {
@@ -51055,18 +51000,7 @@
                   "constraintStyle": "Property",
                   "propertyDefinitionType": "ValueProperty",
                   "propertyDescription": "A demonstration property definition",
-                  "derivationFormula": "(Properties[Instrument/default/Price] * Properties[Instrument/default/Cost]) / Properties[Instrument/default/Shares]",
-                  "version": {
-                    "effectiveFrom": "0001-01-01T00:00:00.0000000+00:00",
-                    "asAtDate": "2018-03-05T10:10:10.0000000+00:00",
-                    "asAtCreated": "2018-03-05T10:10:10.0000000+00:00",
-                    "userIdCreated": "OrderUser1",
-                    "requestIdCreated": "OrderRequestId1",
-                    "asAtModified": "2018-03-08T10:10:10.0000000+00:00",
-                    "userIdModified": "OrderUser2",
-                    "requestIdModified": "OrderRequestId2",
-                    "asAtVersionNumber": 2
-                  }
+                  "derivationFormula": "(Properties[Instrument/default/Price] * Properties[Instrument/default/Cost]) / Properties[Instrument/default/Shares]"
                 }
               }
             }
@@ -51282,18 +51216,7 @@
                   "constraintStyle": "Property",
                   "propertyDefinitionType": "ValueProperty",
                   "propertyDescription": "A demonstration property definition",
-                  "derivationFormula": "(Properties[Instrument/default/Price] * Properties[Instrument/default/Cost]) / Properties[Instrument/default/Shares]",
-                  "version": {
-                    "effectiveFrom": "0001-01-01T00:00:00.0000000+00:00",
-                    "asAtDate": "2018-03-05T10:10:10.0000000+00:00",
-                    "asAtCreated": "2018-03-05T10:10:10.0000000+00:00",
-                    "userIdCreated": "OrderUser1",
-                    "requestIdCreated": "OrderRequestId1",
-                    "asAtModified": "2018-03-08T10:10:10.0000000+00:00",
-                    "userIdModified": "OrderUser2",
-                    "requestIdModified": "OrderRequestId2",
-                    "asAtVersionNumber": 2
-                  }
+                  "derivationFormula": "(Properties[Instrument/default/Price] * Properties[Instrument/default/Cost]) / Properties[Instrument/default/Shares]"
                 }
               },
               "application/json": {
@@ -51319,18 +51242,7 @@
                   "constraintStyle": "Property",
                   "propertyDefinitionType": "ValueProperty",
                   "propertyDescription": "A demonstration property definition",
-                  "derivationFormula": "(Properties[Instrument/default/Price] * Properties[Instrument/default/Cost]) / Properties[Instrument/default/Shares]",
-                  "version": {
-                    "effectiveFrom": "0001-01-01T00:00:00.0000000+00:00",
-                    "asAtDate": "2018-03-05T10:10:10.0000000+00:00",
-                    "asAtCreated": "2018-03-05T10:10:10.0000000+00:00",
-                    "userIdCreated": "OrderUser1",
-                    "requestIdCreated": "OrderRequestId1",
-                    "asAtModified": "2018-03-08T10:10:10.0000000+00:00",
-                    "userIdModified": "OrderUser2",
-                    "requestIdModified": "OrderRequestId2",
-                    "asAtVersionNumber": 2
-                  }
+                  "derivationFormula": "(Properties[Instrument/default/Price] * Properties[Instrument/default/Cost]) / Properties[Instrument/default/Shares]"
                 }
               },
               "text/json": {
@@ -51356,18 +51268,7 @@
                   "constraintStyle": "Property",
                   "propertyDefinitionType": "ValueProperty",
                   "propertyDescription": "A demonstration property definition",
-                  "derivationFormula": "(Properties[Instrument/default/Price] * Properties[Instrument/default/Cost]) / Properties[Instrument/default/Shares]",
-                  "version": {
-                    "effectiveFrom": "0001-01-01T00:00:00.0000000+00:00",
-                    "asAtDate": "2018-03-05T10:10:10.0000000+00:00",
-                    "asAtCreated": "2018-03-05T10:10:10.0000000+00:00",
-                    "userIdCreated": "OrderUser1",
-                    "requestIdCreated": "OrderRequestId1",
-                    "asAtModified": "2018-03-08T10:10:10.0000000+00:00",
-                    "userIdModified": "OrderUser2",
-                    "requestIdModified": "OrderRequestId2",
-                    "asAtVersionNumber": 2
-                  }
+                  "derivationFormula": "(Properties[Instrument/default/Price] * Properties[Instrument/default/Cost]) / Properties[Instrument/default/Shares]"
                 }
               }
             }
@@ -51563,18 +51464,7 @@
                   "constraintStyle": "Property",
                   "propertyDefinitionType": "ValueProperty",
                   "propertyDescription": "A demonstration property definition",
-                  "derivationFormula": "(Properties[Instrument/default/Price] * Properties[Instrument/default/Cost]) / Properties[Instrument/default/Shares]",
-                  "version": {
-                    "effectiveFrom": "0001-01-01T00:00:00.0000000+00:00",
-                    "asAtDate": "2018-03-05T10:10:10.0000000+00:00",
-                    "asAtCreated": "2018-03-05T10:10:10.0000000+00:00",
-                    "userIdCreated": "OrderUser1",
-                    "requestIdCreated": "OrderRequestId1",
-                    "asAtModified": "2018-03-08T10:10:10.0000000+00:00",
-                    "userIdModified": "OrderUser2",
-                    "requestIdModified": "OrderRequestId2",
-                    "asAtVersionNumber": 2
-                  }
+                  "derivationFormula": "(Properties[Instrument/default/Price] * Properties[Instrument/default/Cost]) / Properties[Instrument/default/Shares]"
                 }
               },
               "application/json": {
@@ -51600,18 +51490,7 @@
                   "constraintStyle": "Property",
                   "propertyDefinitionType": "ValueProperty",
                   "propertyDescription": "A demonstration property definition",
-                  "derivationFormula": "(Properties[Instrument/default/Price] * Properties[Instrument/default/Cost]) / Properties[Instrument/default/Shares]",
-                  "version": {
-                    "effectiveFrom": "0001-01-01T00:00:00.0000000+00:00",
-                    "asAtDate": "2018-03-05T10:10:10.0000000+00:00",
-                    "asAtCreated": "2018-03-05T10:10:10.0000000+00:00",
-                    "userIdCreated": "OrderUser1",
-                    "requestIdCreated": "OrderRequestId1",
-                    "asAtModified": "2018-03-08T10:10:10.0000000+00:00",
-                    "userIdModified": "OrderUser2",
-                    "requestIdModified": "OrderRequestId2",
-                    "asAtVersionNumber": 2
-                  }
+                  "derivationFormula": "(Properties[Instrument/default/Price] * Properties[Instrument/default/Cost]) / Properties[Instrument/default/Shares]"
                 }
               },
               "text/json": {
@@ -51637,18 +51516,7 @@
                   "constraintStyle": "Property",
                   "propertyDefinitionType": "ValueProperty",
                   "propertyDescription": "A demonstration property definition",
-                  "derivationFormula": "(Properties[Instrument/default/Price] * Properties[Instrument/default/Cost]) / Properties[Instrument/default/Shares]",
-                  "version": {
-                    "effectiveFrom": "0001-01-01T00:00:00.0000000+00:00",
-                    "asAtDate": "2018-03-05T10:10:10.0000000+00:00",
-                    "asAtCreated": "2018-03-05T10:10:10.0000000+00:00",
-                    "userIdCreated": "OrderUser1",
-                    "requestIdCreated": "OrderRequestId1",
-                    "asAtModified": "2018-03-08T10:10:10.0000000+00:00",
-                    "userIdModified": "OrderUser2",
-                    "requestIdModified": "OrderRequestId2",
-                    "asAtVersionNumber": 2
-                  }
+                  "derivationFormula": "(Properties[Instrument/default/Price] * Properties[Instrument/default/Cost]) / Properties[Instrument/default/Shares]"
                 }
               }
             }
@@ -51969,18 +51837,7 @@
                   "constraintStyle": "Property",
                   "propertyDefinitionType": "ValueProperty",
                   "propertyDescription": "A demonstration property definition",
-                  "derivationFormula": "(Properties[Instrument/default/Price] * Properties[Instrument/default/Cost]) / Properties[Instrument/default/Shares]",
-                  "version": {
-                    "effectiveFrom": "0001-01-01T00:00:00.0000000+00:00",
-                    "asAtDate": "2018-03-05T10:10:10.0000000+00:00",
-                    "asAtCreated": "2018-03-05T10:10:10.0000000+00:00",
-                    "userIdCreated": "OrderUser1",
-                    "requestIdCreated": "OrderRequestId1",
-                    "asAtModified": "2018-03-08T10:10:10.0000000+00:00",
-                    "userIdModified": "OrderUser2",
-                    "requestIdModified": "OrderRequestId2",
-                    "asAtVersionNumber": 2
-                  }
+                  "derivationFormula": "(Properties[Instrument/default/Price] * Properties[Instrument/default/Cost]) / Properties[Instrument/default/Shares]"
                 }
               },
               "application/json": {
@@ -52006,18 +51863,7 @@
                   "constraintStyle": "Property",
                   "propertyDefinitionType": "ValueProperty",
                   "propertyDescription": "A demonstration property definition",
-                  "derivationFormula": "(Properties[Instrument/default/Price] * Properties[Instrument/default/Cost]) / Properties[Instrument/default/Shares]",
-                  "version": {
-                    "effectiveFrom": "0001-01-01T00:00:00.0000000+00:00",
-                    "asAtDate": "2018-03-05T10:10:10.0000000+00:00",
-                    "asAtCreated": "2018-03-05T10:10:10.0000000+00:00",
-                    "userIdCreated": "OrderUser1",
-                    "requestIdCreated": "OrderRequestId1",
-                    "asAtModified": "2018-03-08T10:10:10.0000000+00:00",
-                    "userIdModified": "OrderUser2",
-                    "requestIdModified": "OrderRequestId2",
-                    "asAtVersionNumber": 2
-                  }
+                  "derivationFormula": "(Properties[Instrument/default/Price] * Properties[Instrument/default/Cost]) / Properties[Instrument/default/Shares]"
                 }
               },
               "text/json": {
@@ -52043,18 +51889,7 @@
                   "constraintStyle": "Property",
                   "propertyDefinitionType": "ValueProperty",
                   "propertyDescription": "A demonstration property definition",
-                  "derivationFormula": "(Properties[Instrument/default/Price] * Properties[Instrument/default/Cost]) / Properties[Instrument/default/Shares]",
-                  "version": {
-                    "effectiveFrom": "0001-01-01T00:00:00.0000000+00:00",
-                    "asAtDate": "2018-03-05T10:10:10.0000000+00:00",
-                    "asAtCreated": "2018-03-05T10:10:10.0000000+00:00",
-                    "userIdCreated": "OrderUser1",
-                    "requestIdCreated": "OrderRequestId1",
-                    "asAtModified": "2018-03-08T10:10:10.0000000+00:00",
-                    "userIdModified": "OrderUser2",
-                    "requestIdModified": "OrderRequestId2",
-                    "asAtVersionNumber": 2
-                  }
+                  "derivationFormula": "(Properties[Instrument/default/Price] * Properties[Instrument/default/Cost]) / Properties[Instrument/default/Shares]"
                 }
               }
             }
@@ -95567,9 +95402,6 @@
             },
             "description": "Set of unique property definition properties and associated values to store with the property definition. Each property must be from the 'PropertyDefinition' domain.",
             "nullable": true
-          },
-          "version": {
-            "$ref": "#/components/schemas/Version"
           },
           "links": {
             "type": "array",
