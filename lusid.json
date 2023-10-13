@@ -9,7 +9,7 @@
       "url": "https://www.finbourne.com",
       "email": "info@finbourne.com"
     },
-    "version": "1.0.611",
+    "version": "1.0.612",
     "x-logo": {
       "url": "https://www.lusid.com/app/assets/logo_white.png",
       "backgroundColor": "#415464"
@@ -76968,6 +76968,38 @@
         "additionalProperties": false,
         "description": "The date that is the requested number of business days after the given start date"
       },
+      "AdditionalPayment": {
+        "required": [
+          "amount",
+          "currency",
+          "payDate",
+          "payReceive"
+        ],
+        "type": "object",
+        "properties": {
+          "amount": {
+            "type": "number",
+            "description": "The upfront amount.",
+            "format": "double"
+          },
+          "currency": {
+            "type": "string",
+            "description": "The upfront currency."
+          },
+          "payDate": {
+            "type": "string",
+            "description": "Date when the upfront is paid.",
+            "format": "date-time"
+          },
+          "payReceive": {
+            "minLength": 1,
+            "type": "string",
+            "description": "Is it pay or receive.\r\n\r\nSupported string (enumeration) values are: [Pay, Receive]."
+          }
+        },
+        "additionalProperties": false,
+        "description": "Record describing additional payment entity."
+      },
       "AddressDefinition": {
         "type": "object",
         "properties": {
@@ -89584,6 +89616,14 @@
               "settlementCcy": {
                 "type": "string",
                 "description": "Settlement currency if IRS is non-deliverable.",
+                "nullable": true
+              },
+              "additionalPayments": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/components/schemas/AdditionalPayment"
+                },
+                "description": "Optional additional payments at a given date e.g. to level off an uneven fixed-floating swap.\r\nThe dates must be distinct and either all payments are Pay or all payments are receive",
                 "nullable": true
               },
               "instrumentType": {
