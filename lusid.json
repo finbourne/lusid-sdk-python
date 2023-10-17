@@ -9,7 +9,7 @@
       "url": "https://www.finbourne.com",
       "email": "info@finbourne.com"
     },
-    "version": "1.0.616",
+    "version": "1.0.617",
     "x-logo": {
       "url": "https://www.lusid.com/app/assets/logo_white.png",
       "backgroundColor": "#415464"
@@ -6565,7 +6565,7 @@
                     "active": true,
                     "templateId": {
                       "scope": "system",
-                      "code": "PortfolioLuidMetricCheck"
+                      "code": "PercentCheck"
                     },
                     "variation": "standard",
                     "portfolioGroupId": {
@@ -6678,7 +6678,7 @@
                     }
                   }
                 },
-                "PortfolioLuidMetricCheck example": {
+                "PercentCheck example": {
                   "value": {
                     "id": {
                       "scope": "live",
@@ -6689,7 +6689,7 @@
                     "active": true,
                     "templateId": {
                       "scope": "system",
-                      "code": "PortfolioLuidMetricCheck"
+                      "code": "PercentCheck"
                     },
                     "variation": "standard",
                     "portfolioGroupId": {
@@ -6716,6 +6716,32 @@
                       "Metric": {
                         "value": "Valuation/PvInReportCcy",
                         "complianceParameterType": "AddressKeyComplianceParameter"
+                      },
+                      "FirstFilterPropertyKey": {
+                        "value": "Portfolio/default/Name",
+                        "complianceParameterType": "PropertyKeyComplianceParameter"
+                      },
+                      "SecondFilterPropertyKey": {
+                        "value": "Portfolio/default/Name",
+                        "complianceParameterType": "PropertyKeyComplianceParameter"
+                      },
+                      "FirstFilterPermittedValuesList": {
+                        "value": {
+                          "scope": "testscope",
+                          "code": "testcode"
+                        },
+                        "complianceParameterType": "StringListComplianceParameter"
+                      },
+                      "SecondFilterPermittedValuesList": {
+                        "value": {
+                          "scope": "testscope",
+                          "code": "testcode"
+                        },
+                        "complianceParameterType": "StringListComplianceParameter"
+                      },
+                      "GroupingPropertyKey": {
+                        "value": "Portfolio/default/Name",
+                        "complianceParameterType": "PropertyKeyComplianceParameter"
                       },
                       "Excludes": {
                         "value": {
@@ -6753,7 +6779,7 @@
                     "active": true,
                     "templateId": {
                       "scope": "system",
-                      "code": "PortfolioLuidMetricCheck"
+                      "code": "PercentCheck"
                     },
                     "variation": "standard",
                     "portfolioGroupId": {
@@ -6866,7 +6892,7 @@
                     }
                   }
                 },
-                "PortfolioLuidMetricCheck example": {
+                "PercentCheck example": {
                   "value": {
                     "id": {
                       "scope": "live",
@@ -6877,7 +6903,7 @@
                     "active": true,
                     "templateId": {
                       "scope": "system",
-                      "code": "PortfolioLuidMetricCheck"
+                      "code": "PercentCheck"
                     },
                     "variation": "standard",
                     "portfolioGroupId": {
@@ -6904,6 +6930,32 @@
                       "Metric": {
                         "value": "Valuation/PvInReportCcy",
                         "complianceParameterType": "AddressKeyComplianceParameter"
+                      },
+                      "FirstFilterPropertyKey": {
+                        "value": "Portfolio/default/Name",
+                        "complianceParameterType": "PropertyKeyComplianceParameter"
+                      },
+                      "SecondFilterPropertyKey": {
+                        "value": "Portfolio/default/Name",
+                        "complianceParameterType": "PropertyKeyComplianceParameter"
+                      },
+                      "FirstFilterPermittedValuesList": {
+                        "value": {
+                          "scope": "testscope",
+                          "code": "testcode"
+                        },
+                        "complianceParameterType": "StringListComplianceParameter"
+                      },
+                      "SecondFilterPermittedValuesList": {
+                        "value": {
+                          "scope": "testscope",
+                          "code": "testcode"
+                        },
+                        "complianceParameterType": "StringListComplianceParameter"
+                      },
+                      "GroupingPropertyKey": {
+                        "value": "Portfolio/default/Name",
+                        "complianceParameterType": "PropertyKeyComplianceParameter"
                       },
                       "Excludes": {
                         "value": {
@@ -6941,7 +6993,7 @@
                     "active": true,
                     "templateId": {
                       "scope": "system",
-                      "code": "PortfolioLuidMetricCheck"
+                      "code": "PercentCheck"
                     },
                     "variation": "standard",
                     "portfolioGroupId": {
@@ -7054,7 +7106,7 @@
                     }
                   }
                 },
-                "PortfolioLuidMetricCheck example": {
+                "PercentCheck example": {
                   "value": {
                     "id": {
                       "scope": "live",
@@ -7065,7 +7117,7 @@
                     "active": true,
                     "templateId": {
                       "scope": "system",
-                      "code": "PortfolioLuidMetricCheck"
+                      "code": "PercentCheck"
                     },
                     "variation": "standard",
                     "portfolioGroupId": {
@@ -7092,6 +7144,32 @@
                       "Metric": {
                         "value": "Valuation/PvInReportCcy",
                         "complianceParameterType": "AddressKeyComplianceParameter"
+                      },
+                      "FirstFilterPropertyKey": {
+                        "value": "Portfolio/default/Name",
+                        "complianceParameterType": "PropertyKeyComplianceParameter"
+                      },
+                      "SecondFilterPropertyKey": {
+                        "value": "Portfolio/default/Name",
+                        "complianceParameterType": "PropertyKeyComplianceParameter"
+                      },
+                      "FirstFilterPermittedValuesList": {
+                        "value": {
+                          "scope": "testscope",
+                          "code": "testcode"
+                        },
+                        "complianceParameterType": "StringListComplianceParameter"
+                      },
+                      "SecondFilterPermittedValuesList": {
+                        "value": {
+                          "scope": "testscope",
+                          "code": "testcode"
+                        },
+                        "complianceParameterType": "StringListComplianceParameter"
+                      },
+                      "GroupingPropertyKey": {
+                        "value": "Portfolio/default/Name",
+                        "complianceParameterType": "PropertyKeyComplianceParameter"
                       },
                       "Excludes": {
                         "value": {
@@ -7129,7 +7207,7 @@
                     "active": true,
                     "templateId": {
                       "scope": "system",
-                      "code": "PortfolioLuidMetricCheck"
+                      "code": "PercentCheck"
                     },
                     "variation": "standard",
                     "portfolioGroupId": {
@@ -7242,7 +7320,7 @@
                     }
                   }
                 },
-                "PortfolioLuidMetricCheck example": {
+                "PercentCheck example": {
                   "value": {
                     "id": {
                       "scope": "live",
@@ -7253,7 +7331,7 @@
                     "active": true,
                     "templateId": {
                       "scope": "system",
-                      "code": "PortfolioLuidMetricCheck"
+                      "code": "PercentCheck"
                     },
                     "variation": "standard",
                     "portfolioGroupId": {
@@ -7280,6 +7358,32 @@
                       "Metric": {
                         "value": "Valuation/PvInReportCcy",
                         "complianceParameterType": "AddressKeyComplianceParameter"
+                      },
+                      "FirstFilterPropertyKey": {
+                        "value": "Portfolio/default/Name",
+                        "complianceParameterType": "PropertyKeyComplianceParameter"
+                      },
+                      "SecondFilterPropertyKey": {
+                        "value": "Portfolio/default/Name",
+                        "complianceParameterType": "PropertyKeyComplianceParameter"
+                      },
+                      "FirstFilterPermittedValuesList": {
+                        "value": {
+                          "scope": "testscope",
+                          "code": "testcode"
+                        },
+                        "complianceParameterType": "StringListComplianceParameter"
+                      },
+                      "SecondFilterPermittedValuesList": {
+                        "value": {
+                          "scope": "testscope",
+                          "code": "testcode"
+                        },
+                        "complianceParameterType": "StringListComplianceParameter"
+                      },
+                      "GroupingPropertyKey": {
+                        "value": "Portfolio/default/Name",
+                        "complianceParameterType": "PropertyKeyComplianceParameter"
                       },
                       "Excludes": {
                         "value": {
