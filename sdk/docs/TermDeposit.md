@@ -13,6 +13,23 @@ Name | Type | Description | Notes
 **dom_ccy** | **str** | The domestic currency of the instrument. This should be the same as the Currency set on the FlowConventions.  You do not need to populate this field for Term Deposits in LUSID as all functionality is driven by the Currency set on the FlowConventions.  LUSID will not store values saved on this field. | [optional] 
 **instrument_type** | **str** | The available values are: QuotedSecurity, InterestRateSwap, FxForward, Future, ExoticInstrument, FxOption, CreditDefaultSwap, InterestRateSwaption, Bond, EquityOption, FixedLeg, FloatingLeg, BespokeCashFlowsLeg, Unknown, TermDeposit, ContractForDifference, EquitySwap, CashPerpetual, CapFloor, CashSettled, CdsIndex, Basket, FundingLeg, FxSwap, ForwardRateAgreement, SimpleInstrument, Repo, Equity, ExchangeTradedOption, ReferenceInstrument, ComplexBond, InflationLinkedBond, InflationSwap, SimpleCashFlowLoan, TotalReturnSwap, InflationLeg | 
 
+## Example
+
+```python
+from lusid.models.term_deposit import TermDeposit
+
+# TODO update the JSON string below
+json = "{}"
+# create an instance of TermDeposit from a JSON string
+term_deposit_instance = TermDeposit.from_json(json)
+# print the JSON string representation of the object
+print TermDeposit.to_json()
+
+# convert the object into a dict
+term_deposit_dict = term_deposit_instance.to_dict()
+# create an instance of TermDeposit from a dict
+term_deposit_form_dict = term_deposit.from_dict(term_deposit_dict)
+```
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 
 

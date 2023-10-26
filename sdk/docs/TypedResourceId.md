@@ -9,6 +9,23 @@ Name | Type | Description | Notes
 **id_type_code** | **str** | The code of identifier&#39;s (property) definition. This describes what the identifier represents.  For a Person this might be a username, nationalInsuranceNumber or similar.  For a Legal Entity, this might be a registeredCompanyNumber or LEI. | 
 **code** | **str** | The value of the user-defined identifier in respect of the entity. | 
 
+## Example
+
+```python
+from lusid.models.typed_resource_id import TypedResourceId
+
+# TODO update the JSON string below
+json = "{}"
+# create an instance of TypedResourceId from a JSON string
+typed_resource_id_instance = TypedResourceId.from_json(json)
+# print the JSON string representation of the object
+print TypedResourceId.to_json()
+
+# convert the object into a dict
+typed_resource_id_dict = typed_resource_id_instance.to_dict()
+# create an instance of TypedResourceId from a dict
+typed_resource_id_form_dict = typed_resource_id.from_dict(typed_resource_id_dict)
+```
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 
 

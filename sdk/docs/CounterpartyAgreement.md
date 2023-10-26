@@ -12,6 +12,23 @@ Name | Type | Description | Notes
 **credit_support_annex_id** | [**ResourceId**](ResourceId.md) |  | 
 **id** | [**ResourceId**](ResourceId.md) |  | 
 
+## Example
+
+```python
+from lusid.models.counterparty_agreement import CounterpartyAgreement
+
+# TODO update the JSON string below
+json = "{}"
+# create an instance of CounterpartyAgreement from a JSON string
+counterparty_agreement_instance = CounterpartyAgreement.from_json(json)
+# print the JSON string representation of the object
+print CounterpartyAgreement.to_json()
+
+# convert the object into a dict
+counterparty_agreement_dict = counterparty_agreement_instance.to_dict()
+# create an instance of CounterpartyAgreement from a dict
+counterparty_agreement_form_dict = counterparty_agreement.from_dict(counterparty_agreement_dict)
+```
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 
 

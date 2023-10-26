@@ -14,6 +14,23 @@ Name | Type | Description | Notes
 **constraint_style** | **str** | Describes the uniqueness and cardinality of the property for entity objects under the property domain specified in Key. Defaults to \&quot;Property\&quot; if not specified. Valid values for this field are: Property, Collection or Identifier. | [optional] 
 **property_description** | **str** | Describes the property | [optional] 
 
+## Example
+
+```python
+from lusid.models.create_property_definition_request import CreatePropertyDefinitionRequest
+
+# TODO update the JSON string below
+json = "{}"
+# create an instance of CreatePropertyDefinitionRequest from a JSON string
+create_property_definition_request_instance = CreatePropertyDefinitionRequest.from_json(json)
+# print the JSON string representation of the object
+print CreatePropertyDefinitionRequest.to_json()
+
+# convert the object into a dict
+create_property_definition_request_dict = create_property_definition_request_instance.to_dict()
+# create an instance of CreatePropertyDefinitionRequest from a dict
+create_property_definition_request_form_dict = create_property_definition_request.from_dict(create_property_definition_request_dict)
+```
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 
 

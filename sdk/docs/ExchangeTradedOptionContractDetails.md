@@ -19,6 +19,23 @@ Name | Type | Description | Notes
 **underlying** | [**LusidInstrument**](LusidInstrument.md) |  | 
 **underlying_code** | **str** | Code of the underlying, for an option on futures this should be the futures code. | 
 
+## Example
+
+```python
+from lusid.models.exchange_traded_option_contract_details import ExchangeTradedOptionContractDetails
+
+# TODO update the JSON string below
+json = "{}"
+# create an instance of ExchangeTradedOptionContractDetails from a JSON string
+exchange_traded_option_contract_details_instance = ExchangeTradedOptionContractDetails.from_json(json)
+# print the JSON string representation of the object
+print ExchangeTradedOptionContractDetails.to_json()
+
+# convert the object into a dict
+exchange_traded_option_contract_details_dict = exchange_traded_option_contract_details_instance.to_dict()
+# create an instance of ExchangeTradedOptionContractDetails from a dict
+exchange_traded_option_contract_details_form_dict = exchange_traded_option_contract_details.from_dict(exchange_traded_option_contract_details_dict)
+```
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 
 

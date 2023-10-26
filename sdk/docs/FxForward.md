@@ -17,6 +17,23 @@ Name | Type | Description | Notes
 **settlement_ccy** | **str** | The settlement currency.  If provided, present value will be calculated in settlement currency, otherwise the domestic currency. Applies only to non-deliverable FX Forwards. | [optional] 
 **instrument_type** | **str** | The available values are: QuotedSecurity, InterestRateSwap, FxForward, Future, ExoticInstrument, FxOption, CreditDefaultSwap, InterestRateSwaption, Bond, EquityOption, FixedLeg, FloatingLeg, BespokeCashFlowsLeg, Unknown, TermDeposit, ContractForDifference, EquitySwap, CashPerpetual, CapFloor, CashSettled, CdsIndex, Basket, FundingLeg, FxSwap, ForwardRateAgreement, SimpleInstrument, Repo, Equity, ExchangeTradedOption, ReferenceInstrument, ComplexBond, InflationLinkedBond, InflationSwap, SimpleCashFlowLoan, TotalReturnSwap, InflationLeg | 
 
+## Example
+
+```python
+from lusid.models.fx_forward import FxForward
+
+# TODO update the JSON string below
+json = "{}"
+# create an instance of FxForward from a JSON string
+fx_forward_instance = FxForward.from_json(json)
+# print the JSON string representation of the object
+print FxForward.to_json()
+
+# convert the object into a dict
+fx_forward_dict = fx_forward_instance.to_dict()
+# create an instance of FxForward from a dict
+fx_forward_form_dict = fx_forward.from_dict(fx_forward_dict)
+```
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 
 

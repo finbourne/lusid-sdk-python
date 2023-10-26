@@ -1,6 +1,6 @@
 # lusid.SequencesApi
 
-All URIs are relative to *https://fbn-prd.lusid.com/api*
+All URIs are relative to *https://www.lusid.com/api*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
@@ -23,40 +23,64 @@ Create a new sequence
 ```python
 from __future__ import print_function
 import time
+import os
 import lusid
 from lusid.rest import ApiException
+from lusid.models.create_sequence_request import CreateSequenceRequest
+from lusid.models.sequence_definition import SequenceDefinition
 from pprint import pprint
-# Defining the host is optional and defaults to https://fbn-prd.lusid.com/api
-# See configuration.py for a list of all supported configuration parameters.
-configuration = lusid.Configuration(
-    host = "https://fbn-prd.lusid.com/api"
+
+from lusid import (
+	  ApiClientFactory,
+	  ApplicationMetadataApi,
+	  EnvironmentVariablesConfigurationLoader,
+	  SecretsFileConfigurationLoader,
+	  ArgsConfigurationLoader
 )
+
+# Use the lusid ApiClientFactory to build Api instances with a configured api client
+# By default this will read config from environment variables
+# Then from a secrets.json file found in the current working directory
+api_client_factory = ApiClientFactory()
+
+# The ApiClientFactory can be passed an iterable of configuration loaders to read configuration from
+
+api_url = "https://www.lusid.com/api"
+# Path to a secrets.json file containing authentication credentials
+# See https://support.lusid.com/knowledgebase/article/KA-01667/en-us
+# for a detailed guide to setting up the SDK make authenticated calls to LUSID APIs
+secrets_path = os.getenv("FBN_SECRETS_PATH")
+app_name="LusidJupyterNotebook"
+
+config_loaders = [
+	EnvironmentVariablesConfigurationLoader(),
+	SecretsFileConfigurationLoader(api_secrets_file=secrets_path),
+	ArgsConfigurationLoader(api_url=api_url, app_name=app_name)
+]
+api_client_factory = ApiClientFactory(config_loaders=config_loaders)
+
 
 # The client must configure the authentication and authorization parameters
 # in accordance with the API server security policy.
-# Examples for each auth method are provided below, use the example that
-# satisfies your auth use case.
 
-# Configure OAuth2 access token for authorization: oauth2
-configuration = lusid.Configuration(
-    host = "https://fbn-prd.lusid.com/api"
-)
-configuration.access_token = 'YOUR_ACCESS_TOKEN'
 
-# Enter a context with an instance of the API client
-with lusid.ApiClient(configuration) as api_client:
+
+# Enter a context with an instance of the ApiClientFactory to ensure the connection pool is closed after use
+async with api_client_factory:
     # Create an instance of the API class
-    api_instance = lusid.SequencesApi(api_client)
+    api_instance = api_client_factory.build(lusid.SequencesApi)
     scope = 'scope_example' # str | Scope of the sequence.
-create_sequence_request = {"code":"TestCode","increment":1,"minValue":0,"maxValue":10,"start":0,"cycle":false,"pattern":"TXN-{{seqValue}}"} # CreateSequenceRequest | Request to create sequence
+    create_sequence_request = {"code":"TestCode","increment":1,"minValue":0,"maxValue":10,"start":0,"cycle":false,"pattern":"TXN-{{seqValue}}"} # CreateSequenceRequest | Request to create sequence
 
     try:
         # [EARLY ACCESS] CreateSequence: Create a new sequence
-        api_response = api_instance.create_sequence(scope, create_sequence_request)
+        api_response = await api_instance.create_sequence(scope, create_sequence_request)
+        print("The response of SequencesApi->create_sequence:\n")
         pprint(api_response)
-    except ApiException as e:
+    except Exception as e:
         print("Exception when calling SequencesApi->create_sequence: %s\n" % e)
 ```
+
 
 ### Parameters
 
@@ -100,40 +124,63 @@ Return the details of a specified sequence
 ```python
 from __future__ import print_function
 import time
+import os
 import lusid
 from lusid.rest import ApiException
+from lusid.models.sequence_definition import SequenceDefinition
 from pprint import pprint
-# Defining the host is optional and defaults to https://fbn-prd.lusid.com/api
-# See configuration.py for a list of all supported configuration parameters.
-configuration = lusid.Configuration(
-    host = "https://fbn-prd.lusid.com/api"
+
+from lusid import (
+	  ApiClientFactory,
+	  ApplicationMetadataApi,
+	  EnvironmentVariablesConfigurationLoader,
+	  SecretsFileConfigurationLoader,
+	  ArgsConfigurationLoader
 )
+
+# Use the lusid ApiClientFactory to build Api instances with a configured api client
+# By default this will read config from environment variables
+# Then from a secrets.json file found in the current working directory
+api_client_factory = ApiClientFactory()
+
+# The ApiClientFactory can be passed an iterable of configuration loaders to read configuration from
+
+api_url = "https://www.lusid.com/api"
+# Path to a secrets.json file containing authentication credentials
+# See https://support.lusid.com/knowledgebase/article/KA-01667/en-us
+# for a detailed guide to setting up the SDK make authenticated calls to LUSID APIs
+secrets_path = os.getenv("FBN_SECRETS_PATH")
+app_name="LusidJupyterNotebook"
+
+config_loaders = [
+	EnvironmentVariablesConfigurationLoader(),
+	SecretsFileConfigurationLoader(api_secrets_file=secrets_path),
+	ArgsConfigurationLoader(api_url=api_url, app_name=app_name)
+]
+api_client_factory = ApiClientFactory(config_loaders=config_loaders)
+
 
 # The client must configure the authentication and authorization parameters
 # in accordance with the API server security policy.
-# Examples for each auth method are provided below, use the example that
-# satisfies your auth use case.
 
-# Configure OAuth2 access token for authorization: oauth2
-configuration = lusid.Configuration(
-    host = "https://fbn-prd.lusid.com/api"
-)
-configuration.access_token = 'YOUR_ACCESS_TOKEN'
 
-# Enter a context with an instance of the API client
-with lusid.ApiClient(configuration) as api_client:
+
+# Enter a context with an instance of the ApiClientFactory to ensure the connection pool is closed after use
+async with api_client_factory:
     # Create an instance of the API class
-    api_instance = lusid.SequencesApi(api_client)
+    api_instance = api_client_factory.build(lusid.SequencesApi)
     scope = 'scope_example' # str | Scope of the sequence.
-code = 'code_example' # str | Code of the sequence. This together with stated scope uniquely              identifies the sequence.
+    code = 'code_example' # str | Code of the sequence. This together with stated scope uniquely              identifies the sequence.
 
     try:
         # [EARLY ACCESS] GetSequence: Get a specified sequence
-        api_response = api_instance.get_sequence(scope, code)
+        api_response = await api_instance.get_sequence(scope, code)
+        print("The response of SequencesApi->get_sequence:\n")
         pprint(api_response)
-    except ApiException as e:
+    except Exception as e:
         print("Exception when calling SequencesApi->get_sequence: %s\n" % e)
 ```
+
 
 ### Parameters
 
@@ -177,41 +224,64 @@ List sequences which satisfies filtering criteria.
 ```python
 from __future__ import print_function
 import time
+import os
 import lusid
 from lusid.rest import ApiException
+from lusid.models.paged_resource_list_of_sequence_definition import PagedResourceListOfSequenceDefinition
 from pprint import pprint
-# Defining the host is optional and defaults to https://fbn-prd.lusid.com/api
-# See configuration.py for a list of all supported configuration parameters.
-configuration = lusid.Configuration(
-    host = "https://fbn-prd.lusid.com/api"
+
+from lusid import (
+	  ApiClientFactory,
+	  ApplicationMetadataApi,
+	  EnvironmentVariablesConfigurationLoader,
+	  SecretsFileConfigurationLoader,
+	  ArgsConfigurationLoader
 )
+
+# Use the lusid ApiClientFactory to build Api instances with a configured api client
+# By default this will read config from environment variables
+# Then from a secrets.json file found in the current working directory
+api_client_factory = ApiClientFactory()
+
+# The ApiClientFactory can be passed an iterable of configuration loaders to read configuration from
+
+api_url = "https://www.lusid.com/api"
+# Path to a secrets.json file containing authentication credentials
+# See https://support.lusid.com/knowledgebase/article/KA-01667/en-us
+# for a detailed guide to setting up the SDK make authenticated calls to LUSID APIs
+secrets_path = os.getenv("FBN_SECRETS_PATH")
+app_name="LusidJupyterNotebook"
+
+config_loaders = [
+	EnvironmentVariablesConfigurationLoader(),
+	SecretsFileConfigurationLoader(api_secrets_file=secrets_path),
+	ArgsConfigurationLoader(api_url=api_url, app_name=app_name)
+]
+api_client_factory = ApiClientFactory(config_loaders=config_loaders)
+
 
 # The client must configure the authentication and authorization parameters
 # in accordance with the API server security policy.
-# Examples for each auth method are provided below, use the example that
-# satisfies your auth use case.
 
-# Configure OAuth2 access token for authorization: oauth2
-configuration = lusid.Configuration(
-    host = "https://fbn-prd.lusid.com/api"
-)
-configuration.access_token = 'YOUR_ACCESS_TOKEN'
 
-# Enter a context with an instance of the API client
-with lusid.ApiClient(configuration) as api_client:
+
+# Enter a context with an instance of the ApiClientFactory to ensure the connection pool is closed after use
+async with api_client_factory:
     # Create an instance of the API class
-    api_instance = lusid.SequencesApi(api_client)
+    api_instance = api_client_factory.build(lusid.SequencesApi)
     page = 'page_example' # str | The pagination token to use to continue listing sequences from a previous call to list sequences. This  value is returned from the previous call. (optional)
-limit = 56 # int | When paginating, limit the number of returned results to this many. Defaults to 500 if not specified. (optional)
-filter = 'filter_example' # str | Expression to filter the result set.               Read more about filtering results from LUSID here https://support.lusid.com/filtering-results-from-lusid. (optional)
+    limit = 56 # int | When paginating, limit the number of returned results to this many. Defaults to 500 if not specified. (optional)
+    filter = 'filter_example' # str | Expression to filter the result set.               Read more about filtering results from LUSID here https://support.lusid.com/filtering-results-from-lusid. (optional)
 
     try:
         # [EARLY ACCESS] ListSequences: List Sequences
-        api_response = api_instance.list_sequences(page=page, limit=limit, filter=filter)
+        api_response = await api_instance.list_sequences(page=page, limit=limit, filter=filter)
+        print("The response of SequencesApi->list_sequences:\n")
         pprint(api_response)
-    except ApiException as e:
+    except Exception as e:
         print("Exception when calling SequencesApi->list_sequences: %s\n" % e)
 ```
+
 
 ### Parameters
 
@@ -256,41 +326,64 @@ Get the next set of values from a specified sequence
 ```python
 from __future__ import print_function
 import time
+import os
 import lusid
 from lusid.rest import ApiException
+from lusid.models.next_value_in_sequence_response import NextValueInSequenceResponse
 from pprint import pprint
-# Defining the host is optional and defaults to https://fbn-prd.lusid.com/api
-# See configuration.py for a list of all supported configuration parameters.
-configuration = lusid.Configuration(
-    host = "https://fbn-prd.lusid.com/api"
+
+from lusid import (
+	  ApiClientFactory,
+	  ApplicationMetadataApi,
+	  EnvironmentVariablesConfigurationLoader,
+	  SecretsFileConfigurationLoader,
+	  ArgsConfigurationLoader
 )
+
+# Use the lusid ApiClientFactory to build Api instances with a configured api client
+# By default this will read config from environment variables
+# Then from a secrets.json file found in the current working directory
+api_client_factory = ApiClientFactory()
+
+# The ApiClientFactory can be passed an iterable of configuration loaders to read configuration from
+
+api_url = "https://www.lusid.com/api"
+# Path to a secrets.json file containing authentication credentials
+# See https://support.lusid.com/knowledgebase/article/KA-01667/en-us
+# for a detailed guide to setting up the SDK make authenticated calls to LUSID APIs
+secrets_path = os.getenv("FBN_SECRETS_PATH")
+app_name="LusidJupyterNotebook"
+
+config_loaders = [
+	EnvironmentVariablesConfigurationLoader(),
+	SecretsFileConfigurationLoader(api_secrets_file=secrets_path),
+	ArgsConfigurationLoader(api_url=api_url, app_name=app_name)
+]
+api_client_factory = ApiClientFactory(config_loaders=config_loaders)
+
 
 # The client must configure the authentication and authorization parameters
 # in accordance with the API server security policy.
-# Examples for each auth method are provided below, use the example that
-# satisfies your auth use case.
 
-# Configure OAuth2 access token for authorization: oauth2
-configuration = lusid.Configuration(
-    host = "https://fbn-prd.lusid.com/api"
-)
-configuration.access_token = 'YOUR_ACCESS_TOKEN'
 
-# Enter a context with an instance of the API client
-with lusid.ApiClient(configuration) as api_client:
+
+# Enter a context with an instance of the ApiClientFactory to ensure the connection pool is closed after use
+async with api_client_factory:
     # Create an instance of the API class
-    api_instance = lusid.SequencesApi(api_client)
+    api_instance = api_client_factory.build(lusid.SequencesApi)
     scope = 'scope_example' # str | Scope of the sequence.
-code = 'code_example' # str | Code of the sequence. This together with stated scope uniquely              identifies the sequence.
-batch = 56 # int | Number of sequences items to return for the specified sequence. Default to 1 if not specified. (optional)
+    code = 'code_example' # str | Code of the sequence. This together with stated scope uniquely              identifies the sequence.
+    batch = 56 # int | Number of sequences items to return for the specified sequence. Default to 1 if not specified. (optional)
 
     try:
         # [EARLY ACCESS] Next: Get next values from sequence
-        api_response = api_instance.next(scope, code, batch=batch)
+        api_response = await api_instance.next(scope, code, batch=batch)
+        print("The response of SequencesApi->next:\n")
         pprint(api_response)
-    except ApiException as e:
+    except Exception as e:
         print("Exception when calling SequencesApi->next: %s\n" % e)
 ```
+
 
 ### Parameters
 

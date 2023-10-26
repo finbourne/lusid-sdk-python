@@ -20,6 +20,23 @@ Name | Type | Description | Notes
 **exercise_type** | **str** | Type of optionality that is present; European, American.    Supported string (enumeration) values are: [European, American]. | [optional] 
 **instrument_type** | **str** | The available values are: QuotedSecurity, InterestRateSwap, FxForward, Future, ExoticInstrument, FxOption, CreditDefaultSwap, InterestRateSwaption, Bond, EquityOption, FixedLeg, FloatingLeg, BespokeCashFlowsLeg, Unknown, TermDeposit, ContractForDifference, EquitySwap, CashPerpetual, CapFloor, CashSettled, CdsIndex, Basket, FundingLeg, FxSwap, ForwardRateAgreement, SimpleInstrument, Repo, Equity, ExchangeTradedOption, ReferenceInstrument, ComplexBond, InflationLinkedBond, InflationSwap, SimpleCashFlowLoan, TotalReturnSwap, InflationLeg | 
 
+## Example
+
+```python
+from lusid.models.equity_option import EquityOption
+
+# TODO update the JSON string below
+json = "{}"
+# create an instance of EquityOption from a JSON string
+equity_option_instance = EquityOption.from_json(json)
+# print the JSON string representation of the object
+print EquityOption.to_json()
+
+# convert the object into a dict
+equity_option_dict = equity_option_instance.to_dict()
+# create an instance of EquityOption from a dict
+equity_option_form_dict = equity_option.from_dict(equity_option_dict)
+```
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 
 

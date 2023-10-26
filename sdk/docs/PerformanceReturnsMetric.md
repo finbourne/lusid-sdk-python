@@ -13,6 +13,23 @@ Name | Type | Description | Notes
 **seed_amount** | **str** | The given seed amount for the calculation of the indicative amount metrics. | [optional] 
 **alias** | **str** | The alias for the metric. | [optional] 
 
+## Example
+
+```python
+from lusid.models.performance_returns_metric import PerformanceReturnsMetric
+
+# TODO update the JSON string below
+json = "{}"
+# create an instance of PerformanceReturnsMetric from a JSON string
+performance_returns_metric_instance = PerformanceReturnsMetric.from_json(json)
+# print the JSON string representation of the object
+print PerformanceReturnsMetric.to_json()
+
+# convert the object into a dict
+performance_returns_metric_dict = performance_returns_metric_instance.to_dict()
+# create an instance of PerformanceReturnsMetric from a dict
+performance_returns_metric_form_dict = performance_returns_metric.from_dict(performance_returns_metric_dict)
+```
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 
 

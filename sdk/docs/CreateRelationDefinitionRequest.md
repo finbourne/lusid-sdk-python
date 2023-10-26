@@ -1,5 +1,6 @@
 # CreateRelationDefinitionRequest
 
+
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
@@ -13,6 +14,23 @@ Name | Type | Description | Notes
 **life_time** | **str** | Describes how the relations can change over time, allowed values are \&quot;Perpetual\&quot; and \&quot;TimeVariant\&quot; | [optional] 
 **constraint_style** | **str** | Describes the uniqueness and cardinality for relations with a specific source entity object and relations under this definition. Allowed values are \&quot;Property\&quot; and \&quot;Collection\&quot;, defaults to \&quot;Collection\&quot; if not specified. | [optional] 
 
+## Example
+
+```python
+from lusid.models.create_relation_definition_request import CreateRelationDefinitionRequest
+
+# TODO update the JSON string below
+json = "{}"
+# create an instance of CreateRelationDefinitionRequest from a JSON string
+create_relation_definition_request_instance = CreateRelationDefinitionRequest.from_json(json)
+# print the JSON string representation of the object
+print CreateRelationDefinitionRequest.to_json()
+
+# convert the object into a dict
+create_relation_definition_request_dict = create_relation_definition_request_instance.to_dict()
+# create an instance of CreateRelationDefinitionRequest from a dict
+create_relation_definition_request_form_dict = create_relation_definition_request.from_dict(create_relation_definition_request_dict)
+```
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 
 

@@ -13,8 +13,25 @@ Name | Type | Description | Notes
 **description** | **str** |  | 
 **type** | **str** |  | 
 **attributes** | [**DateAttributes**](DateAttributes.md) |  | [optional] 
-**source_data** | **dict(str, str)** |  | [optional] 
+**source_data** | **Dict[str, str]** |  | [optional] 
 
+## Example
+
+```python
+from lusid.models.calendar_date import CalendarDate
+
+# TODO update the JSON string below
+json = "{}"
+# create an instance of CalendarDate from a JSON string
+calendar_date_instance = CalendarDate.from_json(json)
+# print the JSON string representation of the object
+print CalendarDate.to_json()
+
+# convert the object into a dict
+calendar_date_dict = calendar_date_instance.to_dict()
+# create an instance of CalendarDate from a dict
+calendar_date_form_dict = calendar_date.from_dict(calendar_date_dict)
+```
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 
 

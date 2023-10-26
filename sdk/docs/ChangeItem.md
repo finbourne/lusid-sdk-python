@@ -11,6 +11,23 @@ Name | Type | Description | Notes
 **effective_from** | **datetime** | The market data time, i.e. the time to run the change from. | [optional] 
 **effective_until** | **datetime** | The market data time, i.e. the time to run the change until. | [optional] 
 
+## Example
+
+```python
+from lusid.models.change_item import ChangeItem
+
+# TODO update the JSON string below
+json = "{}"
+# create an instance of ChangeItem from a JSON string
+change_item_instance = ChangeItem.from_json(json)
+# print the JSON string representation of the object
+print ChangeItem.to_json()
+
+# convert the object into a dict
+change_item_dict = change_item_instance.to_dict()
+# create an instance of ChangeItem from a dict
+change_item_form_dict = change_item.from_dict(change_item_dict)
+```
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 
 

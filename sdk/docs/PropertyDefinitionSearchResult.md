@@ -21,8 +21,25 @@ Name | Type | Description | Notes
 **property_definition_type** | **str** | The definition type (DerivedDefinition or Definition). The available values are: ValueProperty, DerivedDefinition | [optional] 
 **property_description** | **str** | A brief description of what a property of this property definition contains. | [optional] 
 **derivation_formula** | **str** | The rule that defines how data is composed for a derived property. | [optional] 
-**links** | [**list[Link]**](Link.md) |  | [optional] 
+**links** | [**List[Link]**](Link.md) |  | [optional] 
 
+## Example
+
+```python
+from lusid.models.property_definition_search_result import PropertyDefinitionSearchResult
+
+# TODO update the JSON string below
+json = "{}"
+# create an instance of PropertyDefinitionSearchResult from a JSON string
+property_definition_search_result_instance = PropertyDefinitionSearchResult.from_json(json)
+# print the JSON string representation of the object
+print PropertyDefinitionSearchResult.to_json()
+
+# convert the object into a dict
+property_definition_search_result_dict = property_definition_search_result_instance.to_dict()
+# create an instance of PropertyDefinitionSearchResult from a dict
+property_definition_search_result_form_dict = property_definition_search_result.from_dict(property_definition_search_result_dict)
+```
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 
 

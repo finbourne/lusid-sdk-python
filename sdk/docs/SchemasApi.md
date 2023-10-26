@@ -1,6 +1,6 @@
 # lusid.SchemasApi
 
-All URIs are relative to *https://fbn-prd.lusid.com/api*
+All URIs are relative to *https://www.lusid.com/api*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
@@ -11,7 +11,7 @@ Method | HTTP request | Description
 
 
 # **get_entity_schema**
-> Schema get_entity_schema(entity)
+> ModelSchema get_entity_schema(entity)
 
 [EARLY ACCESS] GetEntitySchema: Get schema
 
@@ -23,39 +23,62 @@ Gets the schema and meta-data for a given entity
 ```python
 from __future__ import print_function
 import time
+import os
 import lusid
 from lusid.rest import ApiException
+from lusid.models.model_schema import ModelSchema
 from pprint import pprint
-# Defining the host is optional and defaults to https://fbn-prd.lusid.com/api
-# See configuration.py for a list of all supported configuration parameters.
-configuration = lusid.Configuration(
-    host = "https://fbn-prd.lusid.com/api"
+
+from lusid import (
+	  ApiClientFactory,
+	  ApplicationMetadataApi,
+	  EnvironmentVariablesConfigurationLoader,
+	  SecretsFileConfigurationLoader,
+	  ArgsConfigurationLoader
 )
+
+# Use the lusid ApiClientFactory to build Api instances with a configured api client
+# By default this will read config from environment variables
+# Then from a secrets.json file found in the current working directory
+api_client_factory = ApiClientFactory()
+
+# The ApiClientFactory can be passed an iterable of configuration loaders to read configuration from
+
+api_url = "https://www.lusid.com/api"
+# Path to a secrets.json file containing authentication credentials
+# See https://support.lusid.com/knowledgebase/article/KA-01667/en-us
+# for a detailed guide to setting up the SDK make authenticated calls to LUSID APIs
+secrets_path = os.getenv("FBN_SECRETS_PATH")
+app_name="LusidJupyterNotebook"
+
+config_loaders = [
+	EnvironmentVariablesConfigurationLoader(),
+	SecretsFileConfigurationLoader(api_secrets_file=secrets_path),
+	ArgsConfigurationLoader(api_url=api_url, app_name=app_name)
+]
+api_client_factory = ApiClientFactory(config_loaders=config_loaders)
+
 
 # The client must configure the authentication and authorization parameters
 # in accordance with the API server security policy.
-# Examples for each auth method are provided below, use the example that
-# satisfies your auth use case.
 
-# Configure OAuth2 access token for authorization: oauth2
-configuration = lusid.Configuration(
-    host = "https://fbn-prd.lusid.com/api"
-)
-configuration.access_token = 'YOUR_ACCESS_TOKEN'
 
-# Enter a context with an instance of the API client
-with lusid.ApiClient(configuration) as api_client:
+
+# Enter a context with an instance of the ApiClientFactory to ensure the connection pool is closed after use
+async with api_client_factory:
     # Create an instance of the API class
-    api_instance = lusid.SchemasApi(api_client)
+    api_instance = api_client_factory.build(lusid.SchemasApi)
     entity = 'entity_example' # str | The name of a valid entity
 
     try:
         # [EARLY ACCESS] GetEntitySchema: Get schema
-        api_response = api_instance.get_entity_schema(entity)
+        api_response = await api_instance.get_entity_schema(entity)
+        print("The response of SchemasApi->get_entity_schema:\n")
         pprint(api_response)
-    except ApiException as e:
+    except Exception as e:
         print("Exception when calling SchemasApi->get_entity_schema: %s\n" % e)
 ```
+
 
 ### Parameters
 
@@ -65,7 +88,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**Schema**](Schema.md)
+[**ModelSchema**](ModelSchema.md)
 
 ### Authorization
 
@@ -98,46 +121,69 @@ Get the schemas for the provided list of property keys.
 ```python
 from __future__ import print_function
 import time
+import os
 import lusid
 from lusid.rest import ApiException
+from lusid.models.property_schema import PropertySchema
 from pprint import pprint
-# Defining the host is optional and defaults to https://fbn-prd.lusid.com/api
-# See configuration.py for a list of all supported configuration parameters.
-configuration = lusid.Configuration(
-    host = "https://fbn-prd.lusid.com/api"
+
+from lusid import (
+	  ApiClientFactory,
+	  ApplicationMetadataApi,
+	  EnvironmentVariablesConfigurationLoader,
+	  SecretsFileConfigurationLoader,
+	  ArgsConfigurationLoader
 )
+
+# Use the lusid ApiClientFactory to build Api instances with a configured api client
+# By default this will read config from environment variables
+# Then from a secrets.json file found in the current working directory
+api_client_factory = ApiClientFactory()
+
+# The ApiClientFactory can be passed an iterable of configuration loaders to read configuration from
+
+api_url = "https://www.lusid.com/api"
+# Path to a secrets.json file containing authentication credentials
+# See https://support.lusid.com/knowledgebase/article/KA-01667/en-us
+# for a detailed guide to setting up the SDK make authenticated calls to LUSID APIs
+secrets_path = os.getenv("FBN_SECRETS_PATH")
+app_name="LusidJupyterNotebook"
+
+config_loaders = [
+	EnvironmentVariablesConfigurationLoader(),
+	SecretsFileConfigurationLoader(api_secrets_file=secrets_path),
+	ArgsConfigurationLoader(api_url=api_url, app_name=app_name)
+]
+api_client_factory = ApiClientFactory(config_loaders=config_loaders)
+
 
 # The client must configure the authentication and authorization parameters
 # in accordance with the API server security policy.
-# Examples for each auth method are provided below, use the example that
-# satisfies your auth use case.
 
-# Configure OAuth2 access token for authorization: oauth2
-configuration = lusid.Configuration(
-    host = "https://fbn-prd.lusid.com/api"
-)
-configuration.access_token = 'YOUR_ACCESS_TOKEN'
 
-# Enter a context with an instance of the API client
-with lusid.ApiClient(configuration) as api_client:
+
+# Enter a context with an instance of the ApiClientFactory to ensure the connection pool is closed after use
+async with api_client_factory:
     # Create an instance of the API class
-    api_instance = lusid.SchemasApi(api_client)
-    property_keys = ['property_keys_example'] # list[str] | One or more property keys for which the schema is requested (optional)
-as_at = '2013-10-20T19:20:30+01:00' # datetime | Optional. The AsAt date of the data (optional)
+    api_instance = api_client_factory.build(lusid.SchemasApi)
+    property_keys = ['property_keys_example'] # List[str] | One or more property keys for which the schema is requested (optional)
+    as_at = '2013-10-20T19:20:30+01:00' # datetime | Optional. The AsAt date of the data (optional)
 
     try:
         # [EARLY ACCESS] GetPropertySchema: Get property schema
-        api_response = api_instance.get_property_schema(property_keys=property_keys, as_at=as_at)
+        api_response = await api_instance.get_property_schema(property_keys=property_keys, as_at=as_at)
+        print("The response of SchemasApi->get_property_schema:\n")
         pprint(api_response)
-    except ApiException as e:
+    except Exception as e:
         print("Exception when calling SchemasApi->get_property_schema: %s\n" % e)
 ```
+
 
 ### Parameters
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **property_keys** | [**list[str]**](str.md)| One or more property keys for which the schema is requested | [optional] 
+ **property_keys** | [**List[str]**](str.md)| One or more property keys for which the schema is requested | [optional] 
  **as_at** | **datetime**| Optional. The AsAt date of the data | [optional] 
 
 ### Return type
@@ -175,47 +221,70 @@ Gets the available value types for which a schema is available.
 ```python
 from __future__ import print_function
 import time
+import os
 import lusid
 from lusid.rest import ApiException
+from lusid.models.resource_list_of_value_type import ResourceListOfValueType
 from pprint import pprint
-# Defining the host is optional and defaults to https://fbn-prd.lusid.com/api
-# See configuration.py for a list of all supported configuration parameters.
-configuration = lusid.Configuration(
-    host = "https://fbn-prd.lusid.com/api"
+
+from lusid import (
+	  ApiClientFactory,
+	  ApplicationMetadataApi,
+	  EnvironmentVariablesConfigurationLoader,
+	  SecretsFileConfigurationLoader,
+	  ArgsConfigurationLoader
 )
+
+# Use the lusid ApiClientFactory to build Api instances with a configured api client
+# By default this will read config from environment variables
+# Then from a secrets.json file found in the current working directory
+api_client_factory = ApiClientFactory()
+
+# The ApiClientFactory can be passed an iterable of configuration loaders to read configuration from
+
+api_url = "https://www.lusid.com/api"
+# Path to a secrets.json file containing authentication credentials
+# See https://support.lusid.com/knowledgebase/article/KA-01667/en-us
+# for a detailed guide to setting up the SDK make authenticated calls to LUSID APIs
+secrets_path = os.getenv("FBN_SECRETS_PATH")
+app_name="LusidJupyterNotebook"
+
+config_loaders = [
+	EnvironmentVariablesConfigurationLoader(),
+	SecretsFileConfigurationLoader(api_secrets_file=secrets_path),
+	ArgsConfigurationLoader(api_url=api_url, app_name=app_name)
+]
+api_client_factory = ApiClientFactory(config_loaders=config_loaders)
+
 
 # The client must configure the authentication and authorization parameters
 # in accordance with the API server security policy.
-# Examples for each auth method are provided below, use the example that
-# satisfies your auth use case.
 
-# Configure OAuth2 access token for authorization: oauth2
-configuration = lusid.Configuration(
-    host = "https://fbn-prd.lusid.com/api"
-)
-configuration.access_token = 'YOUR_ACCESS_TOKEN'
 
-# Enter a context with an instance of the API client
-with lusid.ApiClient(configuration) as api_client:
+
+# Enter a context with an instance of the ApiClientFactory to ensure the connection pool is closed after use
+async with api_client_factory:
     # Create an instance of the API class
-    api_instance = lusid.SchemasApi(api_client)
-    sort_by = ['sort_by_example'] # list[str] | Optional. Order the results by these fields. Use use the '-' sign to denote descending order e.g. -MyFieldName (optional)
-start = 56 # int | Optional. When paginating, skip this number of results (optional)
-limit = 56 # int | Optional. When paginating, limit the number of returned results to this many. (optional)
+    api_instance = api_client_factory.build(lusid.SchemasApi)
+    sort_by = ['sort_by_example'] # List[str] | Optional. Order the results by these fields. Use use the '-' sign to denote descending order e.g. -MyFieldName (optional)
+    start = 56 # int | Optional. When paginating, skip this number of results (optional)
+    limit = 56 # int | Optional. When paginating, limit the number of returned results to this many. (optional)
 
     try:
         # [EARLY ACCESS] GetValueTypes: Get value types
-        api_response = api_instance.get_value_types(sort_by=sort_by, start=start, limit=limit)
+        api_response = await api_instance.get_value_types(sort_by=sort_by, start=start, limit=limit)
+        print("The response of SchemasApi->get_value_types:\n")
         pprint(api_response)
-    except ApiException as e:
+    except Exception as e:
         print("Exception when calling SchemasApi->get_value_types: %s\n" % e)
 ```
+
 
 ### Parameters
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **sort_by** | [**list[str]**](str.md)| Optional. Order the results by these fields. Use use the &#39;-&#39; sign to denote descending order e.g. -MyFieldName | [optional] 
+ **sort_by** | [**List[str]**](str.md)| Optional. Order the results by these fields. Use use the &#39;-&#39; sign to denote descending order e.g. -MyFieldName | [optional] 
  **start** | **int**| Optional. When paginating, skip this number of results | [optional] 
  **limit** | **int**| Optional. When paginating, limit the number of returned results to this many. | [optional] 
 
@@ -254,38 +323,61 @@ List all available entities for which schema information is available.
 ```python
 from __future__ import print_function
 import time
+import os
 import lusid
 from lusid.rest import ApiException
+from lusid.models.resource_list_of_string import ResourceListOfString
 from pprint import pprint
-# Defining the host is optional and defaults to https://fbn-prd.lusid.com/api
-# See configuration.py for a list of all supported configuration parameters.
-configuration = lusid.Configuration(
-    host = "https://fbn-prd.lusid.com/api"
+
+from lusid import (
+	  ApiClientFactory,
+	  ApplicationMetadataApi,
+	  EnvironmentVariablesConfigurationLoader,
+	  SecretsFileConfigurationLoader,
+	  ArgsConfigurationLoader
 )
+
+# Use the lusid ApiClientFactory to build Api instances with a configured api client
+# By default this will read config from environment variables
+# Then from a secrets.json file found in the current working directory
+api_client_factory = ApiClientFactory()
+
+# The ApiClientFactory can be passed an iterable of configuration loaders to read configuration from
+
+api_url = "https://www.lusid.com/api"
+# Path to a secrets.json file containing authentication credentials
+# See https://support.lusid.com/knowledgebase/article/KA-01667/en-us
+# for a detailed guide to setting up the SDK make authenticated calls to LUSID APIs
+secrets_path = os.getenv("FBN_SECRETS_PATH")
+app_name="LusidJupyterNotebook"
+
+config_loaders = [
+	EnvironmentVariablesConfigurationLoader(),
+	SecretsFileConfigurationLoader(api_secrets_file=secrets_path),
+	ArgsConfigurationLoader(api_url=api_url, app_name=app_name)
+]
+api_client_factory = ApiClientFactory(config_loaders=config_loaders)
+
 
 # The client must configure the authentication and authorization parameters
 # in accordance with the API server security policy.
-# Examples for each auth method are provided below, use the example that
-# satisfies your auth use case.
 
-# Configure OAuth2 access token for authorization: oauth2
-configuration = lusid.Configuration(
-    host = "https://fbn-prd.lusid.com/api"
-)
-configuration.access_token = 'YOUR_ACCESS_TOKEN'
 
-# Enter a context with an instance of the API client
-with lusid.ApiClient(configuration) as api_client:
+
+# Enter a context with an instance of the ApiClientFactory to ensure the connection pool is closed after use
+async with api_client_factory:
     # Create an instance of the API class
-    api_instance = lusid.SchemasApi(api_client)
-    
+    api_instance = api_client_factory.build(lusid.SchemasApi)
+
     try:
         # [EARLY ACCESS] ListEntities: List entities
-        api_response = api_instance.list_entities()
+        api_response = await api_instance.list_entities()
+        print("The response of SchemasApi->list_entities:\n")
         pprint(api_response)
-    except ApiException as e:
+    except Exception as e:
         print("Exception when calling SchemasApi->list_entities: %s\n" % e)
 ```
+
 
 ### Parameters
 This endpoint does not need any parameter.

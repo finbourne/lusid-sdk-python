@@ -11,6 +11,23 @@ Name | Type | Description | Notes
 **effective_at** | **str** | The effectiveAt or cut label that this item of complex market data is/was updated/inserted with. | [optional] 
 **market_asset** | **str** | The name of the market entity that the document represents | 
 
+## Example
+
+```python
+from lusid.models.complex_market_data_id import ComplexMarketDataId
+
+# TODO update the JSON string below
+json = "{}"
+# create an instance of ComplexMarketDataId from a JSON string
+complex_market_data_id_instance = ComplexMarketDataId.from_json(json)
+# print the JSON string representation of the object
+print ComplexMarketDataId.to_json()
+
+# convert the object into a dict
+complex_market_data_id_dict = complex_market_data_id_instance.to_dict()
+# create an instance of ComplexMarketDataId from a dict
+complex_market_data_id_form_dict = complex_market_data_id.from_dict(complex_market_data_id_dict)
+```
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 
 

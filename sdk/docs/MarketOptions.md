@@ -12,6 +12,23 @@ Name | Type | Description | Notes
 **calendar_scope** | **str** | The scope in which holiday calendars stored | [optional] 
 **convention_scope** | **str** | The scope in which conventions stored | [optional] 
 
+## Example
+
+```python
+from lusid.models.market_options import MarketOptions
+
+# TODO update the JSON string below
+json = "{}"
+# create an instance of MarketOptions from a JSON string
+market_options_instance = MarketOptions.from_json(json)
+# print the JSON string representation of the object
+print MarketOptions.to_json()
+
+# convert the object into a dict
+market_options_dict = market_options_instance.to_dict()
+# create an instance of MarketOptions from a dict
+market_options_form_dict = market_options.from_dict(market_options_dict)
+```
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 
 

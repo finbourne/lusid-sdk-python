@@ -13,8 +13,25 @@ Name | Type | Description | Notes
 **inward_description** | **str** | The description to relate target entity object and source entity object | 
 **life_time** | **str** | Describes how the relationships can change over time. | 
 **relationship_cardinality** | **str** | Describes the cardinality of the relationship between source entity and target entity. | 
-**links** | [**list[Link]**](Link.md) |  | [optional] 
+**links** | [**List[Link]**](Link.md) |  | [optional] 
 
+## Example
+
+```python
+from lusid.models.relationship_definition import RelationshipDefinition
+
+# TODO update the JSON string below
+json = "{}"
+# create an instance of RelationshipDefinition from a JSON string
+relationship_definition_instance = RelationshipDefinition.from_json(json)
+# print the JSON string representation of the object
+print RelationshipDefinition.to_json()
+
+# convert the object into a dict
+relationship_definition_dict = relationship_definition_instance.to_dict()
+# create an instance of RelationshipDefinition from a dict
+relationship_definition_form_dict = relationship_definition.from_dict(relationship_definition_dict)
+```
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 
 

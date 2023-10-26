@@ -8,6 +8,23 @@ Name | Type | Description | Notes
 **name** | **str** | A user-defined name or label for the counterparty signatory.  There is no requirement for this to match the \&quot;displayName\&quot; of the legal entity. | 
 **legal_entity_identifier** | [**TypedResourceId**](TypedResourceId.md) |  | 
 
+## Example
+
+```python
+from lusid.models.counterparty_signatory import CounterpartySignatory
+
+# TODO update the JSON string below
+json = "{}"
+# create an instance of CounterpartySignatory from a JSON string
+counterparty_signatory_instance = CounterpartySignatory.from_json(json)
+# print the JSON string representation of the object
+print CounterpartySignatory.to_json()
+
+# convert the object into a dict
+counterparty_signatory_dict = counterparty_signatory_instance.to_dict()
+# create an instance of CounterpartySignatory from a dict
+counterparty_signatory_form_dict = counterparty_signatory.from_dict(counterparty_signatory_dict)
+```
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 
 

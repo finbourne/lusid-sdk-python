@@ -12,6 +12,23 @@ Name | Type | Description | Notes
 **serialisation_format** | **str** | The serialisation format of a document in this dialect. e.g. JSON, XML. | 
 **entity_type** | **str** | The type of entity this dialect describes e.g. Instrument. | 
 
+## Example
+
+```python
+from lusid.models.dialect_id import DialectId
+
+# TODO update the JSON string below
+json = "{}"
+# create an instance of DialectId from a JSON string
+dialect_id_instance = DialectId.from_json(json)
+# print the JSON string representation of the object
+print DialectId.to_json()
+
+# convert the object into a dict
+dialect_id_dict = dialect_id_instance.to_dict()
+# create an instance of DialectId from a dict
+dialect_id_form_dict = dialect_id.from_dict(dialect_id_dict)
+```
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 
 

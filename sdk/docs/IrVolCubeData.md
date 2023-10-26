@@ -6,11 +6,28 @@ Market Data required to build a volatility cube for swaption pricing,  represent
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **base_date** | **datetime** | Base date of the cube - this is the start date of the swaptions on the cube. | 
-**instruments** | [**list[LusidInstrument]**](LusidInstrument.md) | Retrieve the set of instruments that define the cube. | 
-**quotes** | [**list[MarketQuote]**](MarketQuote.md) | Access the set of quotes that define the cube. | 
+**instruments** | [**List[LusidInstrument]**](LusidInstrument.md) | Retrieve the set of instruments that define the cube. | 
+**quotes** | [**List[MarketQuote]**](MarketQuote.md) | Access the set of quotes that define the cube. | 
 **lineage** | **str** | Description of the complex market data&#39;s lineage e.g. &#39;FundAccountant_GreenQuality&#39;. | [optional] 
 **market_data_type** | **str** | The available values are: DiscountFactorCurveData, EquityVolSurfaceData, FxVolSurfaceData, IrVolCubeData, OpaqueMarketData, YieldCurveData, FxForwardCurveData, FxForwardPipsCurveData, FxForwardTenorCurveData, FxForwardTenorPipsCurveData, FxForwardCurveByQuoteReference, CreditSpreadCurveData, EquityCurveByPricesData | 
 
+## Example
+
+```python
+from lusid.models.ir_vol_cube_data import IrVolCubeData
+
+# TODO update the JSON string below
+json = "{}"
+# create an instance of IrVolCubeData from a JSON string
+ir_vol_cube_data_instance = IrVolCubeData.from_json(json)
+# print the JSON string representation of the object
+print IrVolCubeData.to_json()
+
+# convert the object into a dict
+ir_vol_cube_data_dict = ir_vol_cube_data_instance.to_dict()
+# create an instance of IrVolCubeData from a dict
+ir_vol_cube_data_form_dict = ir_vol_cube_data.from_dict(ir_vol_cube_data_dict)
+```
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 
 

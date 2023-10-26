@@ -7,6 +7,23 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **options** | [**AggregationOptions**](AggregationOptions.md) |  | [optional] 
 
+## Example
+
+```python
+from lusid.models.aggregation_context import AggregationContext
+
+# TODO update the JSON string below
+json = "{}"
+# create an instance of AggregationContext from a JSON string
+aggregation_context_instance = AggregationContext.from_json(json)
+# print the JSON string representation of the object
+print AggregationContext.to_json()
+
+# convert the object into a dict
+aggregation_context_dict = aggregation_context_instance.to_dict()
+# create an instance of AggregationContext from a dict
+aggregation_context_form_dict = aggregation_context.from_dict(aggregation_context_dict)
+```
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 
 

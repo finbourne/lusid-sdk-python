@@ -11,6 +11,23 @@ Name | Type | Description | Notes
 **underlying_leg** | [**UnderlyingLeg**](UnderlyingLeg.md) |  | 
 **instrument_type** | **str** | The available values are: QuotedSecurity, InterestRateSwap, FxForward, Future, ExoticInstrument, FxOption, CreditDefaultSwap, InterestRateSwaption, Bond, EquityOption, FixedLeg, FloatingLeg, BespokeCashFlowsLeg, Unknown, TermDeposit, ContractForDifference, EquitySwap, CashPerpetual, CapFloor, CashSettled, CdsIndex, Basket, FundingLeg, FxSwap, ForwardRateAgreement, SimpleInstrument, Repo, Equity, ExchangeTradedOption, ReferenceInstrument, ComplexBond, InflationLinkedBond, InflationSwap, SimpleCashFlowLoan, TotalReturnSwap, InflationLeg | 
 
+## Example
+
+```python
+from lusid.models.total_return_swap import TotalReturnSwap
+
+# TODO update the JSON string below
+json = "{}"
+# create an instance of TotalReturnSwap from a JSON string
+total_return_swap_instance = TotalReturnSwap.from_json(json)
+# print the JSON string representation of the object
+print TotalReturnSwap.to_json()
+
+# convert the object into a dict
+total_return_swap_dict = total_return_swap_instance.to_dict()
+# create an instance of TotalReturnSwap from a dict
+total_return_swap_form_dict = total_return_swap.from_dict(total_return_swap_dict)
+```
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 
 

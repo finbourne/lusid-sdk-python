@@ -6,8 +6,25 @@ The language/format of a translatable entity. Entities can be LUSID native or ex
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **id** | [**DialectId**](DialectId.md) |  | 
-**schema** | [**DialectSchema**](DialectSchema.md) |  | 
+**var_schema** | [**DialectSchema**](DialectSchema.md) |  | 
 
+## Example
+
+```python
+from lusid.models.dialect import Dialect
+
+# TODO update the JSON string below
+json = "{}"
+# create an instance of Dialect from a JSON string
+dialect_instance = Dialect.from_json(json)
+# print the JSON string representation of the object
+print Dialect.to_json()
+
+# convert the object into a dict
+dialect_dict = dialect_instance.to_dict()
+# create an instance of Dialect from a dict
+dialect_form_dict = dialect.from_dict(dialect_dict)
+```
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 
 

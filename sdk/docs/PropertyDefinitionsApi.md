@@ -1,6 +1,6 @@
 # lusid.PropertyDefinitionsApi
 
-All URIs are relative to *https://fbn-prd.lusid.com/api*
+All URIs are relative to *https://www.lusid.com/api*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
@@ -29,39 +29,63 @@ Define a new derived property.
 ```python
 from __future__ import print_function
 import time
+import os
 import lusid
 from lusid.rest import ApiException
+from lusid.models.create_derived_property_definition_request import CreateDerivedPropertyDefinitionRequest
+from lusid.models.property_definition import PropertyDefinition
 from pprint import pprint
-# Defining the host is optional and defaults to https://fbn-prd.lusid.com/api
-# See configuration.py for a list of all supported configuration parameters.
-configuration = lusid.Configuration(
-    host = "https://fbn-prd.lusid.com/api"
+
+from lusid import (
+	  ApiClientFactory,
+	  ApplicationMetadataApi,
+	  EnvironmentVariablesConfigurationLoader,
+	  SecretsFileConfigurationLoader,
+	  ArgsConfigurationLoader
 )
+
+# Use the lusid ApiClientFactory to build Api instances with a configured api client
+# By default this will read config from environment variables
+# Then from a secrets.json file found in the current working directory
+api_client_factory = ApiClientFactory()
+
+# The ApiClientFactory can be passed an iterable of configuration loaders to read configuration from
+
+api_url = "https://www.lusid.com/api"
+# Path to a secrets.json file containing authentication credentials
+# See https://support.lusid.com/knowledgebase/article/KA-01667/en-us
+# for a detailed guide to setting up the SDK make authenticated calls to LUSID APIs
+secrets_path = os.getenv("FBN_SECRETS_PATH")
+app_name="LusidJupyterNotebook"
+
+config_loaders = [
+	EnvironmentVariablesConfigurationLoader(),
+	SecretsFileConfigurationLoader(api_secrets_file=secrets_path),
+	ArgsConfigurationLoader(api_url=api_url, app_name=app_name)
+]
+api_client_factory = ApiClientFactory(config_loaders=config_loaders)
+
 
 # The client must configure the authentication and authorization parameters
 # in accordance with the API server security policy.
-# Examples for each auth method are provided below, use the example that
-# satisfies your auth use case.
 
-# Configure OAuth2 access token for authorization: oauth2
-configuration = lusid.Configuration(
-    host = "https://fbn-prd.lusid.com/api"
-)
-configuration.access_token = 'YOUR_ACCESS_TOKEN'
 
-# Enter a context with an instance of the API client
-with lusid.ApiClient(configuration) as api_client:
+
+# Enter a context with an instance of the ApiClientFactory to ensure the connection pool is closed after use
+async with api_client_factory:
     # Create an instance of the API class
-    api_instance = lusid.PropertyDefinitionsApi(api_client)
+    api_instance = api_client_factory.build(lusid.PropertyDefinitionsApi)
     create_derived_property_definition_request = {"domain":"Instrument","scope":"MyScope","code":"MyDerivedPropertyName","displayName":"My Property Display Name","dataTypeId":{"scope":"system","code":"number"},"propertyDescription":"My Property Description","derivationFormula":"(Properties[Instrument/default/Price] * Properties[Instrument/default/Cost]) / Properties[Instrument/default/Shares]"} # CreateDerivedPropertyDefinitionRequest | The definition of the new derived property.
 
     try:
         # [EARLY ACCESS] CreateDerivedPropertyDefinition: Create derived property definition
-        api_response = api_instance.create_derived_property_definition(create_derived_property_definition_request)
+        api_response = await api_instance.create_derived_property_definition(create_derived_property_definition_request)
+        print("The response of PropertyDefinitionsApi->create_derived_property_definition:\n")
         pprint(api_response)
-    except ApiException as e:
+    except Exception as e:
         print("Exception when calling PropertyDefinitionsApi->create_derived_property_definition: %s\n" % e)
 ```
+
 
 ### Parameters
 
@@ -104,39 +128,63 @@ Define a new property.
 ```python
 from __future__ import print_function
 import time
+import os
 import lusid
 from lusid.rest import ApiException
+from lusid.models.create_property_definition_request import CreatePropertyDefinitionRequest
+from lusid.models.property_definition import PropertyDefinition
 from pprint import pprint
-# Defining the host is optional and defaults to https://fbn-prd.lusid.com/api
-# See configuration.py for a list of all supported configuration parameters.
-configuration = lusid.Configuration(
-    host = "https://fbn-prd.lusid.com/api"
+
+from lusid import (
+	  ApiClientFactory,
+	  ApplicationMetadataApi,
+	  EnvironmentVariablesConfigurationLoader,
+	  SecretsFileConfigurationLoader,
+	  ArgsConfigurationLoader
 )
+
+# Use the lusid ApiClientFactory to build Api instances with a configured api client
+# By default this will read config from environment variables
+# Then from a secrets.json file found in the current working directory
+api_client_factory = ApiClientFactory()
+
+# The ApiClientFactory can be passed an iterable of configuration loaders to read configuration from
+
+api_url = "https://www.lusid.com/api"
+# Path to a secrets.json file containing authentication credentials
+# See https://support.lusid.com/knowledgebase/article/KA-01667/en-us
+# for a detailed guide to setting up the SDK make authenticated calls to LUSID APIs
+secrets_path = os.getenv("FBN_SECRETS_PATH")
+app_name="LusidJupyterNotebook"
+
+config_loaders = [
+	EnvironmentVariablesConfigurationLoader(),
+	SecretsFileConfigurationLoader(api_secrets_file=secrets_path),
+	ArgsConfigurationLoader(api_url=api_url, app_name=app_name)
+]
+api_client_factory = ApiClientFactory(config_loaders=config_loaders)
+
 
 # The client must configure the authentication and authorization parameters
 # in accordance with the API server security policy.
-# Examples for each auth method are provided below, use the example that
-# satisfies your auth use case.
 
-# Configure OAuth2 access token for authorization: oauth2
-configuration = lusid.Configuration(
-    host = "https://fbn-prd.lusid.com/api"
-)
-configuration.access_token = 'YOUR_ACCESS_TOKEN'
 
-# Enter a context with an instance of the API client
-with lusid.ApiClient(configuration) as api_client:
+
+# Enter a context with an instance of the ApiClientFactory to ensure the connection pool is closed after use
+async with api_client_factory:
     # Create an instance of the API class
-    api_instance = lusid.PropertyDefinitionsApi(api_client)
+    api_instance = api_client_factory.build(lusid.PropertyDefinitionsApi)
     create_property_definition_request = {"domain":"Portfolio","scope":"MyScope","code":"MyPropertyName","valueRequired":false,"displayName":"My Property Display Name","dataTypeId":{"scope":"system","code":"string"},"lifeTime":"Perpetual","constraintStyle":"Property","propertyDescription":"Optional property description"} # CreatePropertyDefinitionRequest | The definition of the new property.
 
     try:
         # CreatePropertyDefinition: Create property definition
-        api_response = api_instance.create_property_definition(create_property_definition_request)
+        api_response = await api_instance.create_property_definition(create_property_definition_request)
+        print("The response of PropertyDefinitionsApi->create_property_definition:\n")
         pprint(api_response)
-    except ApiException as e:
+    except Exception as e:
         print("Exception when calling PropertyDefinitionsApi->create_property_definition: %s\n" % e)
 ```
+
 
 ### Parameters
 
@@ -179,41 +227,64 @@ Delete the definition of the specified property.
 ```python
 from __future__ import print_function
 import time
+import os
 import lusid
 from lusid.rest import ApiException
+from lusid.models.deleted_entity_response import DeletedEntityResponse
 from pprint import pprint
-# Defining the host is optional and defaults to https://fbn-prd.lusid.com/api
-# See configuration.py for a list of all supported configuration parameters.
-configuration = lusid.Configuration(
-    host = "https://fbn-prd.lusid.com/api"
+
+from lusid import (
+	  ApiClientFactory,
+	  ApplicationMetadataApi,
+	  EnvironmentVariablesConfigurationLoader,
+	  SecretsFileConfigurationLoader,
+	  ArgsConfigurationLoader
 )
+
+# Use the lusid ApiClientFactory to build Api instances with a configured api client
+# By default this will read config from environment variables
+# Then from a secrets.json file found in the current working directory
+api_client_factory = ApiClientFactory()
+
+# The ApiClientFactory can be passed an iterable of configuration loaders to read configuration from
+
+api_url = "https://www.lusid.com/api"
+# Path to a secrets.json file containing authentication credentials
+# See https://support.lusid.com/knowledgebase/article/KA-01667/en-us
+# for a detailed guide to setting up the SDK make authenticated calls to LUSID APIs
+secrets_path = os.getenv("FBN_SECRETS_PATH")
+app_name="LusidJupyterNotebook"
+
+config_loaders = [
+	EnvironmentVariablesConfigurationLoader(),
+	SecretsFileConfigurationLoader(api_secrets_file=secrets_path),
+	ArgsConfigurationLoader(api_url=api_url, app_name=app_name)
+]
+api_client_factory = ApiClientFactory(config_loaders=config_loaders)
+
 
 # The client must configure the authentication and authorization parameters
 # in accordance with the API server security policy.
-# Examples for each auth method are provided below, use the example that
-# satisfies your auth use case.
 
-# Configure OAuth2 access token for authorization: oauth2
-configuration = lusid.Configuration(
-    host = "https://fbn-prd.lusid.com/api"
-)
-configuration.access_token = 'YOUR_ACCESS_TOKEN'
 
-# Enter a context with an instance of the API client
-with lusid.ApiClient(configuration) as api_client:
+
+# Enter a context with an instance of the ApiClientFactory to ensure the connection pool is closed after use
+async with api_client_factory:
     # Create an instance of the API class
-    api_instance = lusid.PropertyDefinitionsApi(api_client)
+    api_instance = api_client_factory.build(lusid.PropertyDefinitionsApi)
     domain = 'domain_example' # str | The domain of the property to be deleted.
-scope = 'scope_example' # str | The scope of the property to be deleted.
-code = 'code_example' # str | The code of the property to be deleted. Together with the domain and scope this uniquely              identifies the property.
+    scope = 'scope_example' # str | The scope of the property to be deleted.
+    code = 'code_example' # str | The code of the property to be deleted. Together with the domain and scope this uniquely              identifies the property.
 
     try:
         # DeletePropertyDefinition: Delete property definition
-        api_response = api_instance.delete_property_definition(domain, scope, code)
+        api_response = await api_instance.delete_property_definition(domain, scope, code)
+        print("The response of PropertyDefinitionsApi->delete_property_definition:\n")
         pprint(api_response)
-    except ApiException as e:
+    except Exception as e:
         print("Exception when calling PropertyDefinitionsApi->delete_property_definition: %s\n" % e)
 ```
+
 
 ### Parameters
 
@@ -258,43 +329,66 @@ Delete one or more properties from a single property definition. If the properti
 ```python
 from __future__ import print_function
 import time
+import os
 import lusid
 from lusid.rest import ApiException
+from lusid.models.deleted_entity_response import DeletedEntityResponse
 from pprint import pprint
-# Defining the host is optional and defaults to https://fbn-prd.lusid.com/api
-# See configuration.py for a list of all supported configuration parameters.
-configuration = lusid.Configuration(
-    host = "https://fbn-prd.lusid.com/api"
+
+from lusid import (
+	  ApiClientFactory,
+	  ApplicationMetadataApi,
+	  EnvironmentVariablesConfigurationLoader,
+	  SecretsFileConfigurationLoader,
+	  ArgsConfigurationLoader
 )
+
+# Use the lusid ApiClientFactory to build Api instances with a configured api client
+# By default this will read config from environment variables
+# Then from a secrets.json file found in the current working directory
+api_client_factory = ApiClientFactory()
+
+# The ApiClientFactory can be passed an iterable of configuration loaders to read configuration from
+
+api_url = "https://www.lusid.com/api"
+# Path to a secrets.json file containing authentication credentials
+# See https://support.lusid.com/knowledgebase/article/KA-01667/en-us
+# for a detailed guide to setting up the SDK make authenticated calls to LUSID APIs
+secrets_path = os.getenv("FBN_SECRETS_PATH")
+app_name="LusidJupyterNotebook"
+
+config_loaders = [
+	EnvironmentVariablesConfigurationLoader(),
+	SecretsFileConfigurationLoader(api_secrets_file=secrets_path),
+	ArgsConfigurationLoader(api_url=api_url, app_name=app_name)
+]
+api_client_factory = ApiClientFactory(config_loaders=config_loaders)
+
 
 # The client must configure the authentication and authorization parameters
 # in accordance with the API server security policy.
-# Examples for each auth method are provided below, use the example that
-# satisfies your auth use case.
 
-# Configure OAuth2 access token for authorization: oauth2
-configuration = lusid.Configuration(
-    host = "https://fbn-prd.lusid.com/api"
-)
-configuration.access_token = 'YOUR_ACCESS_TOKEN'
 
-# Enter a context with an instance of the API client
-with lusid.ApiClient(configuration) as api_client:
+
+# Enter a context with an instance of the ApiClientFactory to ensure the connection pool is closed after use
+async with api_client_factory:
     # Create an instance of the API class
-    api_instance = lusid.PropertyDefinitionsApi(api_client)
+    api_instance = api_client_factory.build(lusid.PropertyDefinitionsApi)
     domain = 'domain_example' # str | The domain of the property definition to delete properties from.
-scope = 'scope_example' # str | The scope of the property definition to delete properties from.
-code = 'code_example' # str | The code of the property definition to delete properties from.
-request_body = ["PropertyDefinition/MyScope/MyPropertyName","PropertyDefinition/MyScope/MyPropertyName2"] # list[str] | The property keys of the properties to delete. These must take the format              {domain}/{scope}/{code} e.g \"PropertyDefinition/myScope/someAttributeKey\". Each property must be from the \"PropertyDefinition\" domain.
-effective_at = 'effective_at_example' # str | The effective datetime or cut label at which to delete time-variant properties from.              The property must exist at the specified 'effectiveAt' datetime. If the 'effectiveAt' is not provided or is before              the time-variant property exists then a failure is returned. Do not specify this parameter if an of the properties to delete are perpetual. (optional)
+    scope = 'scope_example' # str | The scope of the property definition to delete properties from.
+    code = 'code_example' # str | The code of the property definition to delete properties from.
+    request_body = ["PropertyDefinition/MyScope/MyPropertyName","PropertyDefinition/MyScope/MyPropertyName2"] # List[str] | The property keys of the properties to delete. These must take the format              {domain}/{scope}/{code} e.g \"PropertyDefinition/myScope/someAttributeKey\". Each property must be from the \"PropertyDefinition\" domain.
+    effective_at = 'effective_at_example' # str | The effective datetime or cut label at which to delete time-variant properties from.              The property must exist at the specified 'effectiveAt' datetime. If the 'effectiveAt' is not provided or is before              the time-variant property exists then a failure is returned. Do not specify this parameter if an of the properties to delete are perpetual. (optional)
 
     try:
         # [EARLY ACCESS] DeletePropertyDefinitionProperties: Delete property definition properties
-        api_response = api_instance.delete_property_definition_properties(domain, scope, code, request_body, effective_at=effective_at)
+        api_response = await api_instance.delete_property_definition_properties(domain, scope, code, request_body, effective_at=effective_at)
+        print("The response of PropertyDefinitionsApi->delete_property_definition_properties:\n")
         pprint(api_response)
-    except ApiException as e:
+    except Exception as e:
         print("Exception when calling PropertyDefinitionsApi->delete_property_definition_properties: %s\n" % e)
 ```
+
 
 ### Parameters
 
@@ -303,7 +397,7 @@ Name | Type | Description  | Notes
  **domain** | **str**| The domain of the property definition to delete properties from. | 
  **scope** | **str**| The scope of the property definition to delete properties from. | 
  **code** | **str**| The code of the property definition to delete properties from. | 
- **request_body** | [**list[str]**](str.md)| The property keys of the properties to delete. These must take the format              {domain}/{scope}/{code} e.g \&quot;PropertyDefinition/myScope/someAttributeKey\&quot;. Each property must be from the \&quot;PropertyDefinition\&quot; domain. | 
+ **request_body** | [**List[str]**](str.md)| The property keys of the properties to delete. These must take the format              {domain}/{scope}/{code} e.g \&quot;PropertyDefinition/myScope/someAttributeKey\&quot;. Each property must be from the \&quot;PropertyDefinition\&quot; domain. | 
  **effective_at** | **str**| The effective datetime or cut label at which to delete time-variant properties from.              The property must exist at the specified &#39;effectiveAt&#39; datetime. If the &#39;effectiveAt&#39; is not provided or is before              the time-variant property exists then a failure is returned. Do not specify this parameter if an of the properties to delete are perpetual. | [optional] 
 
 ### Return type
@@ -341,48 +435,71 @@ Retrieve the definition of one or more specified properties.
 ```python
 from __future__ import print_function
 import time
+import os
 import lusid
 from lusid.rest import ApiException
+from lusid.models.resource_list_of_property_definition import ResourceListOfPropertyDefinition
 from pprint import pprint
-# Defining the host is optional and defaults to https://fbn-prd.lusid.com/api
-# See configuration.py for a list of all supported configuration parameters.
-configuration = lusid.Configuration(
-    host = "https://fbn-prd.lusid.com/api"
+
+from lusid import (
+	  ApiClientFactory,
+	  ApplicationMetadataApi,
+	  EnvironmentVariablesConfigurationLoader,
+	  SecretsFileConfigurationLoader,
+	  ArgsConfigurationLoader
 )
+
+# Use the lusid ApiClientFactory to build Api instances with a configured api client
+# By default this will read config from environment variables
+# Then from a secrets.json file found in the current working directory
+api_client_factory = ApiClientFactory()
+
+# The ApiClientFactory can be passed an iterable of configuration loaders to read configuration from
+
+api_url = "https://www.lusid.com/api"
+# Path to a secrets.json file containing authentication credentials
+# See https://support.lusid.com/knowledgebase/article/KA-01667/en-us
+# for a detailed guide to setting up the SDK make authenticated calls to LUSID APIs
+secrets_path = os.getenv("FBN_SECRETS_PATH")
+app_name="LusidJupyterNotebook"
+
+config_loaders = [
+	EnvironmentVariablesConfigurationLoader(),
+	SecretsFileConfigurationLoader(api_secrets_file=secrets_path),
+	ArgsConfigurationLoader(api_url=api_url, app_name=app_name)
+]
+api_client_factory = ApiClientFactory(config_loaders=config_loaders)
+
 
 # The client must configure the authentication and authorization parameters
 # in accordance with the API server security policy.
-# Examples for each auth method are provided below, use the example that
-# satisfies your auth use case.
 
-# Configure OAuth2 access token for authorization: oauth2
-configuration = lusid.Configuration(
-    host = "https://fbn-prd.lusid.com/api"
-)
-configuration.access_token = 'YOUR_ACCESS_TOKEN'
 
-# Enter a context with an instance of the API client
-with lusid.ApiClient(configuration) as api_client:
+
+# Enter a context with an instance of the ApiClientFactory to ensure the connection pool is closed after use
+async with api_client_factory:
     # Create an instance of the API class
-    api_instance = lusid.PropertyDefinitionsApi(api_client)
-    property_keys = ['property_keys_example'] # list[str] | One or more property keys which identify each property that a definition should              be retrieved for. The format for each property key is {domain}/{scope}/{code}, e.g. 'Portfolio/Manager/Id'.
-as_at = '2013-10-20T19:20:30+01:00' # datetime | The asAt datetime at which to retrieve the property definitions. Defaults to return              the latest version of each definition if not specified. (optional)
-filter = 'filter_example' # str | Expression to filter the result set.               For example, to filter on the Lifetime, use \"lifeTime eq 'Perpetual'\"              Read more about filtering results from LUSID here https://support.lusid.com/filtering-results-from-lusid. (optional)
-effective_at = 'effective_at_example' # str | The effective datetime or cut label at which to list properties attached to the Property Definition.              Defaults to the current LUSID system datetime if not specified. (optional)
+    api_instance = api_client_factory.build(lusid.PropertyDefinitionsApi)
+    property_keys = ['property_keys_example'] # List[str] | One or more property keys which identify each property that a definition should              be retrieved for. The format for each property key is {domain}/{scope}/{code}, e.g. 'Portfolio/Manager/Id'.
+    as_at = '2013-10-20T19:20:30+01:00' # datetime | The asAt datetime at which to retrieve the property definitions. Defaults to return              the latest version of each definition if not specified. (optional)
+    filter = 'filter_example' # str | Expression to filter the result set.               For example, to filter on the Lifetime, use \"lifeTime eq 'Perpetual'\"              Read more about filtering results from LUSID here https://support.lusid.com/filtering-results-from-lusid. (optional)
+    effective_at = 'effective_at_example' # str | The effective datetime or cut label at which to list properties attached to the Property Definition.              Defaults to the current LUSID system datetime if not specified. (optional)
 
     try:
         # GetMultiplePropertyDefinitions: Get multiple property definitions
-        api_response = api_instance.get_multiple_property_definitions(property_keys, as_at=as_at, filter=filter, effective_at=effective_at)
+        api_response = await api_instance.get_multiple_property_definitions(property_keys, as_at=as_at, filter=filter, effective_at=effective_at)
+        print("The response of PropertyDefinitionsApi->get_multiple_property_definitions:\n")
         pprint(api_response)
-    except ApiException as e:
+    except Exception as e:
         print("Exception when calling PropertyDefinitionsApi->get_multiple_property_definitions: %s\n" % e)
 ```
+
 
 ### Parameters
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **property_keys** | [**list[str]**](str.md)| One or more property keys which identify each property that a definition should              be retrieved for. The format for each property key is {domain}/{scope}/{code}, e.g. &#39;Portfolio/Manager/Id&#39;. | 
+ **property_keys** | [**List[str]**](str.md)| One or more property keys which identify each property that a definition should              be retrieved for. The format for each property key is {domain}/{scope}/{code}, e.g. &#39;Portfolio/Manager/Id&#39;. | 
  **as_at** | **datetime**| The asAt datetime at which to retrieve the property definitions. Defaults to return              the latest version of each definition if not specified. | [optional] 
  **filter** | **str**| Expression to filter the result set.               For example, to filter on the Lifetime, use \&quot;lifeTime eq &#39;Perpetual&#39;\&quot;              Read more about filtering results from LUSID here https://support.lusid.com/filtering-results-from-lusid. | [optional] 
  **effective_at** | **str**| The effective datetime or cut label at which to list properties attached to the Property Definition.              Defaults to the current LUSID system datetime if not specified. | [optional] 
@@ -422,43 +539,66 @@ Retrieve the definition of a specified property.
 ```python
 from __future__ import print_function
 import time
+import os
 import lusid
 from lusid.rest import ApiException
+from lusid.models.property_definition import PropertyDefinition
 from pprint import pprint
-# Defining the host is optional and defaults to https://fbn-prd.lusid.com/api
-# See configuration.py for a list of all supported configuration parameters.
-configuration = lusid.Configuration(
-    host = "https://fbn-prd.lusid.com/api"
+
+from lusid import (
+	  ApiClientFactory,
+	  ApplicationMetadataApi,
+	  EnvironmentVariablesConfigurationLoader,
+	  SecretsFileConfigurationLoader,
+	  ArgsConfigurationLoader
 )
+
+# Use the lusid ApiClientFactory to build Api instances with a configured api client
+# By default this will read config from environment variables
+# Then from a secrets.json file found in the current working directory
+api_client_factory = ApiClientFactory()
+
+# The ApiClientFactory can be passed an iterable of configuration loaders to read configuration from
+
+api_url = "https://www.lusid.com/api"
+# Path to a secrets.json file containing authentication credentials
+# See https://support.lusid.com/knowledgebase/article/KA-01667/en-us
+# for a detailed guide to setting up the SDK make authenticated calls to LUSID APIs
+secrets_path = os.getenv("FBN_SECRETS_PATH")
+app_name="LusidJupyterNotebook"
+
+config_loaders = [
+	EnvironmentVariablesConfigurationLoader(),
+	SecretsFileConfigurationLoader(api_secrets_file=secrets_path),
+	ArgsConfigurationLoader(api_url=api_url, app_name=app_name)
+]
+api_client_factory = ApiClientFactory(config_loaders=config_loaders)
+
 
 # The client must configure the authentication and authorization parameters
 # in accordance with the API server security policy.
-# Examples for each auth method are provided below, use the example that
-# satisfies your auth use case.
 
-# Configure OAuth2 access token for authorization: oauth2
-configuration = lusid.Configuration(
-    host = "https://fbn-prd.lusid.com/api"
-)
-configuration.access_token = 'YOUR_ACCESS_TOKEN'
 
-# Enter a context with an instance of the API client
-with lusid.ApiClient(configuration) as api_client:
+
+# Enter a context with an instance of the ApiClientFactory to ensure the connection pool is closed after use
+async with api_client_factory:
     # Create an instance of the API class
-    api_instance = lusid.PropertyDefinitionsApi(api_client)
+    api_instance = api_client_factory.build(lusid.PropertyDefinitionsApi)
     domain = 'domain_example' # str | The domain of the specified property.
-scope = 'scope_example' # str | The scope of the specified property.
-code = 'code_example' # str | The code of the specified property. Together with the domain and scope this uniquely              identifies the property.
-as_at = '2013-10-20T19:20:30+01:00' # datetime | The asAt datetime at which to retrieve the property definition. Defaults to return              the latest version of the definition if not specified. (optional)
-effective_at = 'effective_at_example' # str | The effective datetime or cut label at which to list properties attached to the Property Definition.              Defaults to the current LUSID system datetime if not specified. (optional)
+    scope = 'scope_example' # str | The scope of the specified property.
+    code = 'code_example' # str | The code of the specified property. Together with the domain and scope this uniquely              identifies the property.
+    as_at = '2013-10-20T19:20:30+01:00' # datetime | The asAt datetime at which to retrieve the property definition. Defaults to return              the latest version of the definition if not specified. (optional)
+    effective_at = 'effective_at_example' # str | The effective datetime or cut label at which to list properties attached to the Property Definition.              Defaults to the current LUSID system datetime if not specified. (optional)
 
     try:
         # GetPropertyDefinition: Get property definition
-        api_response = api_instance.get_property_definition(domain, scope, code, as_at=as_at, effective_at=effective_at)
+        api_response = await api_instance.get_property_definition(domain, scope, code, as_at=as_at, effective_at=effective_at)
+        print("The response of PropertyDefinitionsApi->get_property_definition:\n")
         pprint(api_response)
-    except ApiException as e:
+    except Exception as e:
         print("Exception when calling PropertyDefinitionsApi->get_property_definition: %s\n" % e)
 ```
+
 
 ### Parameters
 
@@ -505,46 +645,69 @@ List the complete time series of a property definition property.
 ```python
 from __future__ import print_function
 import time
+import os
 import lusid
 from lusid.rest import ApiException
+from lusid.models.resource_list_of_property_interval import ResourceListOfPropertyInterval
 from pprint import pprint
-# Defining the host is optional and defaults to https://fbn-prd.lusid.com/api
-# See configuration.py for a list of all supported configuration parameters.
-configuration = lusid.Configuration(
-    host = "https://fbn-prd.lusid.com/api"
+
+from lusid import (
+	  ApiClientFactory,
+	  ApplicationMetadataApi,
+	  EnvironmentVariablesConfigurationLoader,
+	  SecretsFileConfigurationLoader,
+	  ArgsConfigurationLoader
 )
+
+# Use the lusid ApiClientFactory to build Api instances with a configured api client
+# By default this will read config from environment variables
+# Then from a secrets.json file found in the current working directory
+api_client_factory = ApiClientFactory()
+
+# The ApiClientFactory can be passed an iterable of configuration loaders to read configuration from
+
+api_url = "https://www.lusid.com/api"
+# Path to a secrets.json file containing authentication credentials
+# See https://support.lusid.com/knowledgebase/article/KA-01667/en-us
+# for a detailed guide to setting up the SDK make authenticated calls to LUSID APIs
+secrets_path = os.getenv("FBN_SECRETS_PATH")
+app_name="LusidJupyterNotebook"
+
+config_loaders = [
+	EnvironmentVariablesConfigurationLoader(),
+	SecretsFileConfigurationLoader(api_secrets_file=secrets_path),
+	ArgsConfigurationLoader(api_url=api_url, app_name=app_name)
+]
+api_client_factory = ApiClientFactory(config_loaders=config_loaders)
+
 
 # The client must configure the authentication and authorization parameters
 # in accordance with the API server security policy.
-# Examples for each auth method are provided below, use the example that
-# satisfies your auth use case.
 
-# Configure OAuth2 access token for authorization: oauth2
-configuration = lusid.Configuration(
-    host = "https://fbn-prd.lusid.com/api"
-)
-configuration.access_token = 'YOUR_ACCESS_TOKEN'
 
-# Enter a context with an instance of the API client
-with lusid.ApiClient(configuration) as api_client:
+
+# Enter a context with an instance of the ApiClientFactory to ensure the connection pool is closed after use
+async with api_client_factory:
     # Create an instance of the API class
-    api_instance = lusid.PropertyDefinitionsApi(api_client)
+    api_instance = api_client_factory.build(lusid.PropertyDefinitionsApi)
     domain = 'domain_example' # str | The domain of the property definition to which the property is attached
-scope = 'scope_example' # str | The scope of the property definition to which the property is attached
-code = 'code_example' # str | The code of the property definition to which the property is attached
-property_key = 'property_key_example' # str | The property key of the property whose history to show. This must be from the \"Property Definition\" domain and in the format              {domain}/{scope}/{code}, for example \"PropertyDefinition/myScope/someAttributeKey\".
-as_at = '2013-10-20T19:20:30+01:00' # datetime | The asAt datetime at which to show the history. Defaults to the current datetime if not specified. (optional)
-filter = 'filter_example' # str | Expression to filter the results. Read more about filtering results from LUSID here https://support.lusid.com/filtering-results-from-lusid. (optional)
-page = 'page_example' # str | The pagination token to use to continue listing properties from a previous call to get property time series.              This value is returned from the previous call. If a pagination token is provided the filter and asAt fields              must not have changed since the original request. (optional)
-limit = 56 # int | When paginating, limit the number of returned results to this many. (optional)
+    scope = 'scope_example' # str | The scope of the property definition to which the property is attached
+    code = 'code_example' # str | The code of the property definition to which the property is attached
+    property_key = 'property_key_example' # str | The property key of the property whose history to show. This must be from the \"Property Definition\" domain and in the format              {domain}/{scope}/{code}, for example \"PropertyDefinition/myScope/someAttributeKey\".
+    as_at = '2013-10-20T19:20:30+01:00' # datetime | The asAt datetime at which to show the history. Defaults to the current datetime if not specified. (optional)
+    filter = 'filter_example' # str | Expression to filter the results. Read more about filtering results from LUSID here https://support.lusid.com/filtering-results-from-lusid. (optional)
+    page = 'page_example' # str | The pagination token to use to continue listing properties from a previous call to get property time series.              This value is returned from the previous call. If a pagination token is provided the filter and asAt fields              must not have changed since the original request. (optional)
+    limit = 56 # int | When paginating, limit the number of returned results to this many. (optional)
 
     try:
         # [EARLY ACCESS] GetPropertyDefinitionPropertyTimeSeries: Get Property Definition Property Time Series
-        api_response = api_instance.get_property_definition_property_time_series(domain, scope, code, property_key, as_at=as_at, filter=filter, page=page, limit=limit)
+        api_response = await api_instance.get_property_definition_property_time_series(domain, scope, code, property_key, as_at=as_at, filter=filter, page=page, limit=limit)
+        print("The response of PropertyDefinitionsApi->get_property_definition_property_time_series:\n")
         pprint(api_response)
-    except ApiException as e:
+    except Exception as e:
         print("Exception when calling PropertyDefinitionsApi->get_property_definition_property_time_series: %s\n" % e)
 ```
+
 
 ### Parameters
 
@@ -594,42 +757,66 @@ This will fail if the property definition does not exist
 ```python
 from __future__ import print_function
 import time
+import os
 import lusid
 from lusid.rest import ApiException
+from lusid.models.property_definition import PropertyDefinition
+from lusid.models.update_derived_property_definition_request import UpdateDerivedPropertyDefinitionRequest
 from pprint import pprint
-# Defining the host is optional and defaults to https://fbn-prd.lusid.com/api
-# See configuration.py for a list of all supported configuration parameters.
-configuration = lusid.Configuration(
-    host = "https://fbn-prd.lusid.com/api"
+
+from lusid import (
+	  ApiClientFactory,
+	  ApplicationMetadataApi,
+	  EnvironmentVariablesConfigurationLoader,
+	  SecretsFileConfigurationLoader,
+	  ArgsConfigurationLoader
 )
+
+# Use the lusid ApiClientFactory to build Api instances with a configured api client
+# By default this will read config from environment variables
+# Then from a secrets.json file found in the current working directory
+api_client_factory = ApiClientFactory()
+
+# The ApiClientFactory can be passed an iterable of configuration loaders to read configuration from
+
+api_url = "https://www.lusid.com/api"
+# Path to a secrets.json file containing authentication credentials
+# See https://support.lusid.com/knowledgebase/article/KA-01667/en-us
+# for a detailed guide to setting up the SDK make authenticated calls to LUSID APIs
+secrets_path = os.getenv("FBN_SECRETS_PATH")
+app_name="LusidJupyterNotebook"
+
+config_loaders = [
+	EnvironmentVariablesConfigurationLoader(),
+	SecretsFileConfigurationLoader(api_secrets_file=secrets_path),
+	ArgsConfigurationLoader(api_url=api_url, app_name=app_name)
+]
+api_client_factory = ApiClientFactory(config_loaders=config_loaders)
+
 
 # The client must configure the authentication and authorization parameters
 # in accordance with the API server security policy.
-# Examples for each auth method are provided below, use the example that
-# satisfies your auth use case.
 
-# Configure OAuth2 access token for authorization: oauth2
-configuration = lusid.Configuration(
-    host = "https://fbn-prd.lusid.com/api"
-)
-configuration.access_token = 'YOUR_ACCESS_TOKEN'
 
-# Enter a context with an instance of the API client
-with lusid.ApiClient(configuration) as api_client:
+
+# Enter a context with an instance of the ApiClientFactory to ensure the connection pool is closed after use
+async with api_client_factory:
     # Create an instance of the API class
-    api_instance = lusid.PropertyDefinitionsApi(api_client)
+    api_instance = api_client_factory.build(lusid.PropertyDefinitionsApi)
     domain = 'domain_example' # str | Domain of the property definition
-scope = 'scope_example' # str | Scope of the property definition
-code = 'code_example' # str | Code of the property definition
-update_derived_property_definition_request = {"displayName":"My Property Display Name","dataTypeId":{"scope":"system","code":"number"},"propertyDescription":"My Property Description","derivationFormula":"(Properties[Instrument/default/Price] * Properties[Instrument/default/Cost]) / Properties[Instrument/default/Shares]"} # UpdateDerivedPropertyDefinitionRequest | Information about the derived property definition being updated
+    scope = 'scope_example' # str | Scope of the property definition
+    code = 'code_example' # str | Code of the property definition
+    update_derived_property_definition_request = {"displayName":"My Property Display Name","dataTypeId":{"scope":"system","code":"number"},"propertyDescription":"My Property Description","derivationFormula":"(Properties[Instrument/default/Price] * Properties[Instrument/default/Cost]) / Properties[Instrument/default/Shares]"} # UpdateDerivedPropertyDefinitionRequest | Information about the derived property definition being updated
 
     try:
         # [EARLY ACCESS] UpdateDerivedPropertyDefinition: Update a pre-existing derived property definition
-        api_response = api_instance.update_derived_property_definition(domain, scope, code, update_derived_property_definition_request)
+        api_response = await api_instance.update_derived_property_definition(domain, scope, code, update_derived_property_definition_request)
+        print("The response of PropertyDefinitionsApi->update_derived_property_definition:\n")
         pprint(api_response)
-    except ApiException as e:
+    except Exception as e:
         print("Exception when calling PropertyDefinitionsApi->update_derived_property_definition: %s\n" % e)
 ```
+
 
 ### Parameters
 
@@ -675,42 +862,66 @@ Update the definition of a specified existing property. Not all elements within 
 ```python
 from __future__ import print_function
 import time
+import os
 import lusid
 from lusid.rest import ApiException
+from lusid.models.property_definition import PropertyDefinition
+from lusid.models.update_property_definition_request import UpdatePropertyDefinitionRequest
 from pprint import pprint
-# Defining the host is optional and defaults to https://fbn-prd.lusid.com/api
-# See configuration.py for a list of all supported configuration parameters.
-configuration = lusid.Configuration(
-    host = "https://fbn-prd.lusid.com/api"
+
+from lusid import (
+	  ApiClientFactory,
+	  ApplicationMetadataApi,
+	  EnvironmentVariablesConfigurationLoader,
+	  SecretsFileConfigurationLoader,
+	  ArgsConfigurationLoader
 )
+
+# Use the lusid ApiClientFactory to build Api instances with a configured api client
+# By default this will read config from environment variables
+# Then from a secrets.json file found in the current working directory
+api_client_factory = ApiClientFactory()
+
+# The ApiClientFactory can be passed an iterable of configuration loaders to read configuration from
+
+api_url = "https://www.lusid.com/api"
+# Path to a secrets.json file containing authentication credentials
+# See https://support.lusid.com/knowledgebase/article/KA-01667/en-us
+# for a detailed guide to setting up the SDK make authenticated calls to LUSID APIs
+secrets_path = os.getenv("FBN_SECRETS_PATH")
+app_name="LusidJupyterNotebook"
+
+config_loaders = [
+	EnvironmentVariablesConfigurationLoader(),
+	SecretsFileConfigurationLoader(api_secrets_file=secrets_path),
+	ArgsConfigurationLoader(api_url=api_url, app_name=app_name)
+]
+api_client_factory = ApiClientFactory(config_loaders=config_loaders)
+
 
 # The client must configure the authentication and authorization parameters
 # in accordance with the API server security policy.
-# Examples for each auth method are provided below, use the example that
-# satisfies your auth use case.
 
-# Configure OAuth2 access token for authorization: oauth2
-configuration = lusid.Configuration(
-    host = "https://fbn-prd.lusid.com/api"
-)
-configuration.access_token = 'YOUR_ACCESS_TOKEN'
 
-# Enter a context with an instance of the API client
-with lusid.ApiClient(configuration) as api_client:
+
+# Enter a context with an instance of the ApiClientFactory to ensure the connection pool is closed after use
+async with api_client_factory:
     # Create an instance of the API class
-    api_instance = lusid.PropertyDefinitionsApi(api_client)
+    api_instance = api_client_factory.build(lusid.PropertyDefinitionsApi)
     domain = 'domain_example' # str | The domain of the property being updated.
-scope = 'scope_example' # str | The scope of the property being updated.
-code = 'code_example' # str | The code of the property being updated. Together with the domain and scope this uniquely              identifies the property.
-update_property_definition_request = {"displayName":"MyPropertyName","propertyDescription":"Option Property description"} # UpdatePropertyDefinitionRequest | The updated definition of the property.
+    scope = 'scope_example' # str | The scope of the property being updated.
+    code = 'code_example' # str | The code of the property being updated. Together with the domain and scope this uniquely              identifies the property.
+    update_property_definition_request = {"displayName":"MyPropertyName","propertyDescription":"Option Property description"} # UpdatePropertyDefinitionRequest | The updated definition of the property.
 
     try:
         # UpdatePropertyDefinition: Update property definition
-        api_response = api_instance.update_property_definition(domain, scope, code, update_property_definition_request)
+        api_response = await api_instance.update_property_definition(domain, scope, code, update_property_definition_request)
+        print("The response of PropertyDefinitionsApi->update_property_definition:\n")
         pprint(api_response)
-    except ApiException as e:
+    except Exception as e:
         print("Exception when calling PropertyDefinitionsApi->update_property_definition: %s\n" % e)
 ```
+
 
 ### Parameters
 
@@ -756,43 +967,67 @@ Create or update properties for a particular property definition
 ```python
 from __future__ import print_function
 import time
+import os
 import lusid
 from lusid.rest import ApiException
+from lusid.models.batch_upsert_property_definition_properties_response import BatchUpsertPropertyDefinitionPropertiesResponse
+from lusid.models.model_property import ModelProperty
 from pprint import pprint
-# Defining the host is optional and defaults to https://fbn-prd.lusid.com/api
-# See configuration.py for a list of all supported configuration parameters.
-configuration = lusid.Configuration(
-    host = "https://fbn-prd.lusid.com/api"
+
+from lusid import (
+	  ApiClientFactory,
+	  ApplicationMetadataApi,
+	  EnvironmentVariablesConfigurationLoader,
+	  SecretsFileConfigurationLoader,
+	  ArgsConfigurationLoader
 )
+
+# Use the lusid ApiClientFactory to build Api instances with a configured api client
+# By default this will read config from environment variables
+# Then from a secrets.json file found in the current working directory
+api_client_factory = ApiClientFactory()
+
+# The ApiClientFactory can be passed an iterable of configuration loaders to read configuration from
+
+api_url = "https://www.lusid.com/api"
+# Path to a secrets.json file containing authentication credentials
+# See https://support.lusid.com/knowledgebase/article/KA-01667/en-us
+# for a detailed guide to setting up the SDK make authenticated calls to LUSID APIs
+secrets_path = os.getenv("FBN_SECRETS_PATH")
+app_name="LusidJupyterNotebook"
+
+config_loaders = [
+	EnvironmentVariablesConfigurationLoader(),
+	SecretsFileConfigurationLoader(api_secrets_file=secrets_path),
+	ArgsConfigurationLoader(api_url=api_url, app_name=app_name)
+]
+api_client_factory = ApiClientFactory(config_loaders=config_loaders)
+
 
 # The client must configure the authentication and authorization parameters
 # in accordance with the API server security policy.
-# Examples for each auth method are provided below, use the example that
-# satisfies your auth use case.
 
-# Configure OAuth2 access token for authorization: oauth2
-configuration = lusid.Configuration(
-    host = "https://fbn-prd.lusid.com/api"
-)
-configuration.access_token = 'YOUR_ACCESS_TOKEN'
 
-# Enter a context with an instance of the API client
-with lusid.ApiClient(configuration) as api_client:
+
+# Enter a context with an instance of the ApiClientFactory to ensure the connection pool is closed after use
+async with api_client_factory:
     # Create an instance of the API class
-    api_instance = lusid.PropertyDefinitionsApi(api_client)
+    api_instance = api_client_factory.build(lusid.PropertyDefinitionsApi)
     domain = 'domain_example' # str | The domain of the specified property.
-scope = 'scope_example' # str | The scope of the specified property.
-code = 'code_example' # str | The code of the specified property. Together with the domain and scope this uniquely
-request_body = {"PropertyDefinition/MyScope/FundManagerName":{"key":"PropertyDefinition/MyScope/FundManagerName","value":{"labelValue":"Smith"},"effectiveFrom":"2018-03-05T00:00:00.0000000+00:00"},"PropertyDefinition/MyScope/SomeProperty":{"key":"PropertyDefinition/MyScope/SomeProperty","value":{"labelValue":"SomeValue"},"effectiveFrom":"2016-01-01T00:00:00.0000000+00:00"},"PropertyDefinition/MyScope/AnotherProperty":{"key":"PropertyDefinition/MyScope/AnotherProperty","value":{"labelValue":"AnotherValue"},"effectiveFrom":"2018-03-05T00:00:00.0000000+00:00","effectiveUntil":"2020-01-01T00:00:00.0000000+00:00"},"PropertyDefinition/MyScope/ReBalanceInterval":{"key":"PropertyDefinition/MyScope/ReBalanceInterval","value":{"metricValue":{"value":30,"unit":"Days"}}}} # dict(str, ModelProperty) | The properties to be created or updated. Each property in              the request must be keyed by its unique property key. This has the format {domain}/{scope}/{code}, for example              'PropertyDefinition/Manager/Id'.
-success_mode = 'Partial' # str | Whether the batch request should fail Atomically or in a Partial fashion - Allowed Values: Atomic, Partial. (optional) (default to 'Partial')
+    scope = 'scope_example' # str | The scope of the specified property.
+    code = 'code_example' # str | The code of the specified property. Together with the domain and scope this uniquely
+    request_body = {"PropertyDefinition/MyScope/FundManagerName":{"key":"PropertyDefinition/MyScope/FundManagerName","value":{"labelValue":"Smith"},"effectiveFrom":"2018-03-05T00:00:00.0000000+00:00"},"PropertyDefinition/MyScope/SomeProperty":{"key":"PropertyDefinition/MyScope/SomeProperty","value":{"labelValue":"SomeValue"},"effectiveFrom":"2016-01-01T00:00:00.0000000+00:00"},"PropertyDefinition/MyScope/AnotherProperty":{"key":"PropertyDefinition/MyScope/AnotherProperty","value":{"labelValue":"AnotherValue"},"effectiveFrom":"2018-03-05T00:00:00.0000000+00:00","effectiveUntil":"2020-01-01T00:00:00.0000000+00:00"},"PropertyDefinition/MyScope/ReBalanceInterval":{"key":"PropertyDefinition/MyScope/ReBalanceInterval","value":{"metricValue":{"value":30,"unit":"Days"}}}} # Dict[str, ModelProperty] | The properties to be created or updated. Each property in              the request must be keyed by its unique property key. This has the format {domain}/{scope}/{code}, for example              'PropertyDefinition/Manager/Id'.
+    success_mode = 'Partial' # str | Whether the batch request should fail Atomically or in a Partial fashion - Allowed Values: Atomic, Partial. (optional) (default to 'Partial')
 
     try:
         # [EARLY ACCESS] UpsertPropertyDefinitionProperties: Upsert properties to a property definition
-        api_response = api_instance.upsert_property_definition_properties(domain, scope, code, request_body, success_mode=success_mode)
+        api_response = await api_instance.upsert_property_definition_properties(domain, scope, code, request_body, success_mode=success_mode)
+        print("The response of PropertyDefinitionsApi->upsert_property_definition_properties:\n")
         pprint(api_response)
-    except ApiException as e:
+    except Exception as e:
         print("Exception when calling PropertyDefinitionsApi->upsert_property_definition_properties: %s\n" % e)
 ```
+
 
 ### Parameters
 
@@ -801,7 +1036,7 @@ Name | Type | Description  | Notes
  **domain** | **str**| The domain of the specified property. | 
  **scope** | **str**| The scope of the specified property. | 
  **code** | **str**| The code of the specified property. Together with the domain and scope this uniquely | 
- **request_body** | [**dict(str, ModelProperty)**](ModelProperty.md)| The properties to be created or updated. Each property in              the request must be keyed by its unique property key. This has the format {domain}/{scope}/{code}, for example              &#39;PropertyDefinition/Manager/Id&#39;. | 
+ **request_body** | [**Dict[str, ModelProperty]**](ModelProperty.md)| The properties to be created or updated. Each property in              the request must be keyed by its unique property key. This has the format {domain}/{scope}/{code}, for example              &#39;PropertyDefinition/Manager/Id&#39;. | 
  **success_mode** | **str**| Whether the batch request should fail Atomically or in a Partial fashion - Allowed Values: Atomic, Partial. | [optional] [default to &#39;Partial&#39;]
 
 ### Return type

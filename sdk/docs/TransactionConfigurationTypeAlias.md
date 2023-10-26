@@ -12,6 +12,23 @@ Name | Type | Description | Notes
 **transaction_roles** | **str** | . The available values are: None, LongLonger, LongShorter, ShortShorter, Shorter, ShortLonger, Longer, AllRoles | 
 **is_default** | **bool** | IsDefault is a flag that denotes the default alias for a source. There can only be, at most, one per source. | [optional] 
 
+## Example
+
+```python
+from lusid.models.transaction_configuration_type_alias import TransactionConfigurationTypeAlias
+
+# TODO update the JSON string below
+json = "{}"
+# create an instance of TransactionConfigurationTypeAlias from a JSON string
+transaction_configuration_type_alias_instance = TransactionConfigurationTypeAlias.from_json(json)
+# print the JSON string representation of the object
+print TransactionConfigurationTypeAlias.to_json()
+
+# convert the object into a dict
+transaction_configuration_type_alias_dict = transaction_configuration_type_alias_instance.to_dict()
+# create an instance of TransactionConfigurationTypeAlias from a dict
+transaction_configuration_type_alias_form_dict = transaction_configuration_type_alias.from_dict(transaction_configuration_type_alias_dict)
+```
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 
 

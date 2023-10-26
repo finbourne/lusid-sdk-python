@@ -14,6 +14,23 @@ Name | Type | Description | Notes
 **scope** | **str** | The scope used when updating or inserting the convention. | [optional] 
 **code** | **str** | The code of the convention. | [optional] 
 
+## Example
+
+```python
+from lusid.models.index_convention import IndexConvention
+
+# TODO update the JSON string below
+json = "{}"
+# create an instance of IndexConvention from a JSON string
+index_convention_instance = IndexConvention.from_json(json)
+# print the JSON string representation of the object
+print IndexConvention.to_json()
+
+# convert the object into a dict
+index_convention_dict = index_convention_instance.to_dict()
+# create an instance of IndexConvention from a dict
+index_convention_form_dict = index_convention.from_dict(index_convention_dict)
+```
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 
 

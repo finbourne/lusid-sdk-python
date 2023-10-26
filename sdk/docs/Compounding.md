@@ -12,6 +12,23 @@ Name | Type | Description | Notes
 **shift** | **int** | Defines the number of days to lockout or shift observation period by - should be a non-negative integer | [optional] 
 **spread_compounding_method** | **str** | Defines how the computed leg spread is applied to compounded rate.  It applies only when CompoundingMethod &#x3D; ‘Compounded‘.    Supported string (enumeration) values are: [Straight, IsdaCompounding, NoCompounding, SpreadExclusive, IsdaFlatCompounding, Flat, None]. | [optional] 
 
+## Example
+
+```python
+from lusid.models.compounding import Compounding
+
+# TODO update the JSON string below
+json = "{}"
+# create an instance of Compounding from a JSON string
+compounding_instance = Compounding.from_json(json)
+# print the JSON string representation of the object
+print Compounding.to_json()
+
+# convert the object into a dict
+compounding_dict = compounding_instance.to_dict()
+# create an instance of Compounding from a dict
+compounding_form_dict = compounding.from_dict(compounding_dict)
+```
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 
 

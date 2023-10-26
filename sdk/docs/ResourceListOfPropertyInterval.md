@@ -4,12 +4,29 @@
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**values** | [**list[PropertyInterval]**](PropertyInterval.md) |  | 
+**values** | [**List[PropertyInterval]**](PropertyInterval.md) |  | 
 **href** | **str** |  | [optional] 
-**links** | [**list[Link]**](Link.md) |  | [optional] 
+**links** | [**List[Link]**](Link.md) |  | [optional] 
 **next_page** | **str** |  | [optional] 
 **previous_page** | **str** |  | [optional] 
 
+## Example
+
+```python
+from lusid.models.resource_list_of_property_interval import ResourceListOfPropertyInterval
+
+# TODO update the JSON string below
+json = "{}"
+# create an instance of ResourceListOfPropertyInterval from a JSON string
+resource_list_of_property_interval_instance = ResourceListOfPropertyInterval.from_json(json)
+# print the JSON string representation of the object
+print ResourceListOfPropertyInterval.to_json()
+
+# convert the object into a dict
+resource_list_of_property_interval_dict = resource_list_of_property_interval_instance.to_dict()
+# create an instance of ResourceListOfPropertyInterval from a dict
+resource_list_of_property_interval_form_dict = resource_list_of_property_interval.from_dict(resource_list_of_property_interval_dict)
+```
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 
 

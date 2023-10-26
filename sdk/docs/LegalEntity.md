@@ -9,13 +9,30 @@ Name | Type | Description | Notes
 **description** | **str** | The description of the Legal Entity | [optional] 
 **href** | **str** | The specific Uniform Resource Identifier (URI) for this resource at the requested effective and asAt datetime. | [optional] 
 **lusid_legal_entity_id** | **str** | The unique LUSID Legal Entity Identifier of the Legal Entity. | [optional] 
-**identifiers** | [**dict(str, ModelProperty)**](ModelProperty.md) | Unique client-defined identifiers of the Legal Entity. | [optional] 
-**properties** | [**dict(str, ModelProperty)**](ModelProperty.md) | A set of properties associated to the Legal Entity. | [optional] 
-**relationships** | [**list[Relationship]**](Relationship.md) | A set of relationships associated to the Legal Entity. | [optional] 
+**identifiers** | [**Dict[str, ModelProperty]**](ModelProperty.md) | Unique client-defined identifiers of the Legal Entity. | [optional] 
+**properties** | [**Dict[str, ModelProperty]**](ModelProperty.md) | A set of properties associated to the Legal Entity. | [optional] 
+**relationships** | [**List[Relationship]**](Relationship.md) | A set of relationships associated to the Legal Entity. | [optional] 
 **counterparty_risk_information** | [**CounterpartyRiskInformation**](CounterpartyRiskInformation.md) |  | [optional] 
 **version** | [**Version**](Version.md) |  | [optional] 
-**links** | [**list[Link]**](Link.md) |  | [optional] 
+**links** | [**List[Link]**](Link.md) |  | [optional] 
 
+## Example
+
+```python
+from lusid.models.legal_entity import LegalEntity
+
+# TODO update the JSON string below
+json = "{}"
+# create an instance of LegalEntity from a JSON string
+legal_entity_instance = LegalEntity.from_json(json)
+# print the JSON string representation of the object
+print LegalEntity.to_json()
+
+# convert the object into a dict
+legal_entity_dict = legal_entity_instance.to_dict()
+# create an instance of LegalEntity from a dict
+legal_entity_form_dict = legal_entity.from_dict(legal_entity_dict)
+```
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 
 

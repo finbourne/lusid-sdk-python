@@ -10,6 +10,23 @@ Name | Type | Description | Notes
 **effective_at** | **datetime** | The effective date of the evaulation | 
 **instrument_event_type** | **str** | The Type of Event. The available values are: TransitionEvent, InformationalEvent, OpenEvent, CloseEvent, StockSplitEvent, BondDefaultEvent, CashDividendEvent, AmortisationEvent, CashFlowEvent, ExerciseEvent, ResetEvent, TriggerEvent, RawVendorEvent, InformationalErrorEvent | 
 
+## Example
+
+```python
+from lusid.models.informational_error_event import InformationalErrorEvent
+
+# TODO update the JSON string below
+json = "{}"
+# create an instance of InformationalErrorEvent from a JSON string
+informational_error_event_instance = InformationalErrorEvent.from_json(json)
+# print the JSON string representation of the object
+print InformationalErrorEvent.to_json()
+
+# convert the object into a dict
+informational_error_event_dict = informational_error_event_instance.to_dict()
+# create an instance of InformationalErrorEvent from a dict
+informational_error_event_form_dict = informational_error_event.from_dict(informational_error_event_dict)
+```
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 
 

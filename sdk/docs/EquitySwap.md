@@ -18,6 +18,23 @@ Name | Type | Description | Notes
 **equity_swap_dividend_payment_timing** | **str** | Determines how the payment of dividends is handled for the equity swap.  Defaults to paying at the next Equity coupon date.                Supported string (enumeration) values are: [PayAtNextEquityCouponDate, PayAtMaturityOfSwap, PayAtNextFundingLegCouponDate, PayAtPaymentDateOfDividendEvent]. | [optional] 
 **instrument_type** | **str** | The available values are: QuotedSecurity, InterestRateSwap, FxForward, Future, ExoticInstrument, FxOption, CreditDefaultSwap, InterestRateSwaption, Bond, EquityOption, FixedLeg, FloatingLeg, BespokeCashFlowsLeg, Unknown, TermDeposit, ContractForDifference, EquitySwap, CashPerpetual, CapFloor, CashSettled, CdsIndex, Basket, FundingLeg, FxSwap, ForwardRateAgreement, SimpleInstrument, Repo, Equity, ExchangeTradedOption, ReferenceInstrument, ComplexBond, InflationLinkedBond, InflationSwap, SimpleCashFlowLoan, TotalReturnSwap, InflationLeg | 
 
+## Example
+
+```python
+from lusid.models.equity_swap import EquitySwap
+
+# TODO update the JSON string below
+json = "{}"
+# create an instance of EquitySwap from a JSON string
+equity_swap_instance = EquitySwap.from_json(json)
+# print the JSON string representation of the object
+print EquitySwap.to_json()
+
+# convert the object into a dict
+equity_swap_dict = equity_swap_instance.to_dict()
+# create an instance of EquitySwap from a dict
+equity_swap_form_dict = equity_swap.from_dict(equity_swap_dict)
+```
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 
 

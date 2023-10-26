@@ -9,6 +9,23 @@ Name | Type | Description | Notes
 **end_date** | **datetime** | The last date on which the instrument could close | [optional] 
 **instrument_event_type** | **str** | The Type of Event. The available values are: TransitionEvent, InformationalEvent, OpenEvent, CloseEvent, StockSplitEvent, BondDefaultEvent, CashDividendEvent, AmortisationEvent, CashFlowEvent, ExerciseEvent, ResetEvent, TriggerEvent, RawVendorEvent, InformationalErrorEvent | 
 
+## Example
+
+```python
+from lusid.models.close_event import CloseEvent
+
+# TODO update the JSON string below
+json = "{}"
+# create an instance of CloseEvent from a JSON string
+close_event_instance = CloseEvent.from_json(json)
+# print the JSON string representation of the object
+print CloseEvent.to_json()
+
+# convert the object into a dict
+close_event_dict = close_event_instance.to_dict()
+# create an instance of CloseEvent from a dict
+close_event_form_dict = close_event.from_dict(close_event_dict)
+```
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 
 

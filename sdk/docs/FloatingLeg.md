@@ -14,6 +14,23 @@ Name | Type | Description | Notes
 **floor_rate** | **float** | The minimum floating rate which a cashflow can accrue. | [optional] 
 **instrument_type** | **str** | The available values are: QuotedSecurity, InterestRateSwap, FxForward, Future, ExoticInstrument, FxOption, CreditDefaultSwap, InterestRateSwaption, Bond, EquityOption, FixedLeg, FloatingLeg, BespokeCashFlowsLeg, Unknown, TermDeposit, ContractForDifference, EquitySwap, CashPerpetual, CapFloor, CashSettled, CdsIndex, Basket, FundingLeg, FxSwap, ForwardRateAgreement, SimpleInstrument, Repo, Equity, ExchangeTradedOption, ReferenceInstrument, ComplexBond, InflationLinkedBond, InflationSwap, SimpleCashFlowLoan, TotalReturnSwap, InflationLeg | 
 
+## Example
+
+```python
+from lusid.models.floating_leg import FloatingLeg
+
+# TODO update the JSON string below
+json = "{}"
+# create an instance of FloatingLeg from a JSON string
+floating_leg_instance = FloatingLeg.from_json(json)
+# print the JSON string representation of the object
+print FloatingLeg.to_json()
+
+# convert the object into a dict
+floating_leg_dict = floating_leg_instance.to_dict()
+# create an instance of FloatingLeg from a dict
+floating_leg_form_dict = floating_leg.from_dict(floating_leg_dict)
+```
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 
 

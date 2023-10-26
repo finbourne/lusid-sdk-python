@@ -9,6 +9,23 @@ Name | Type | Description | Notes
 **applies_to** | [**AggregateSpec**](AggregateSpec.md) |  | 
 **rule_type** | **str** | The available values are: ReconcileNumericRule, ReconcileDateTimeRule, ReconcileStringRule, ReconcileExact | 
 
+## Example
+
+```python
+from lusid.models.reconcile_numeric_rule import ReconcileNumericRule
+
+# TODO update the JSON string below
+json = "{}"
+# create an instance of ReconcileNumericRule from a JSON string
+reconcile_numeric_rule_instance = ReconcileNumericRule.from_json(json)
+# print the JSON string representation of the object
+print ReconcileNumericRule.to_json()
+
+# convert the object into a dict
+reconcile_numeric_rule_dict = reconcile_numeric_rule_instance.to_dict()
+# create an instance of ReconcileNumericRule from a dict
+reconcile_numeric_rule_form_dict = reconcile_numeric_rule.from_dict(reconcile_numeric_rule_dict)
+```
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 
 

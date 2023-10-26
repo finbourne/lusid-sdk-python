@@ -6,9 +6,9 @@ A block of orders for the same instrument, intended to record for example a trad
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **id** | [**ResourceId**](ResourceId.md) |  | 
-**order_ids** | [**list[ResourceId]**](ResourceId.md) | The related order ids. | 
-**properties** | [**dict(str, PerpetualProperty)**](PerpetualProperty.md) | Client-defined properties associated with this block. | [optional] 
-**instrument_identifiers** | **dict(str, str)** | The instrument ordered. | 
+**order_ids** | [**List[ResourceId]**](ResourceId.md) | The related order ids. | 
+**properties** | [**Dict[str, PerpetualProperty]**](PerpetualProperty.md) | Client-defined properties associated with this block. | [optional] 
+**instrument_identifiers** | **Dict[str, str]** | The instrument ordered. | 
 **lusid_instrument_id** | **str** | The LUSID instrument id for the instrument ordered. | 
 **quantity** | **float** | The total quantity of given instrument ordered. | 
 **side** | **str** | The client&#39;s representation of the block&#39;s side (buy, sell, short, etc) | 
@@ -18,8 +18,25 @@ Name | Type | Description | Notes
 **limit_price** | [**CurrencyAndAmount**](CurrencyAndAmount.md) |  | [optional] 
 **stop_price** | [**CurrencyAndAmount**](CurrencyAndAmount.md) |  | [optional] 
 **version** | [**Version**](Version.md) |  | [optional] 
-**links** | [**list[Link]**](Link.md) |  | [optional] 
+**links** | [**List[Link]**](Link.md) |  | [optional] 
 
+## Example
+
+```python
+from lusid.models.block import Block
+
+# TODO update the JSON string below
+json = "{}"
+# create an instance of Block from a JSON string
+block_instance = Block.from_json(json)
+# print the JSON string representation of the object
+print Block.to_json()
+
+# convert the object into a dict
+block_dict = block_instance.to_dict()
+# create an instance of Block from a dict
+block_form_dict = block.from_dict(block_dict)
+```
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 
 

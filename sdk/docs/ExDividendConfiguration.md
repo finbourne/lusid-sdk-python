@@ -10,6 +10,23 @@ Name | Type | Description | Notes
 **return_negative_accrued** | **bool** | Does the accrued interest go negative in the ex-dividend period, or does it go to zero.  Defaults to true if not set. | [optional] 
 **apply_thirty360_pay_delay** | **bool** | Set this flag to true if the ex-dividend days represent a pay delay from the accrual end date in calendar  days under the 30/360 day count convention. The typical use case for this flag are Mortgage Backed Securities  with pay delay between 1 and 60 days, such as FreddieMac and FannieMae. If this flag is set, the useBusinessDays  setting will be ignored.  Defaults to false if not provided. | [optional] 
 
+## Example
+
+```python
+from lusid.models.ex_dividend_configuration import ExDividendConfiguration
+
+# TODO update the JSON string below
+json = "{}"
+# create an instance of ExDividendConfiguration from a JSON string
+ex_dividend_configuration_instance = ExDividendConfiguration.from_json(json)
+# print the JSON string representation of the object
+print ExDividendConfiguration.to_json()
+
+# convert the object into a dict
+ex_dividend_configuration_dict = ex_dividend_configuration_instance.to_dict()
+# create an instance of ExDividendConfiguration from a dict
+ex_dividend_configuration_form_dict = ex_dividend_configuration.from_dict(ex_dividend_configuration_dict)
+```
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 
 

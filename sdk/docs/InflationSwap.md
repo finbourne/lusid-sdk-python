@@ -20,6 +20,23 @@ Name | Type | Description | Notes
 **pay_receive** | **str** | PayReceive flag for the inflation leg.  This field is optional and defaults to Pay.  If set to Pay, this swap pays inflation and receives fixed.    Supported string (enumeration) values are: [Pay, Receive]. | [optional] 
 **instrument_type** | **str** | The available values are: QuotedSecurity, InterestRateSwap, FxForward, Future, ExoticInstrument, FxOption, CreditDefaultSwap, InterestRateSwaption, Bond, EquityOption, FixedLeg, FloatingLeg, BespokeCashFlowsLeg, Unknown, TermDeposit, ContractForDifference, EquitySwap, CashPerpetual, CapFloor, CashSettled, CdsIndex, Basket, FundingLeg, FxSwap, ForwardRateAgreement, SimpleInstrument, Repo, Equity, ExchangeTradedOption, ReferenceInstrument, ComplexBond, InflationLinkedBond, InflationSwap, SimpleCashFlowLoan, TotalReturnSwap, InflationLeg | 
 
+## Example
+
+```python
+from lusid.models.inflation_swap import InflationSwap
+
+# TODO update the JSON string below
+json = "{}"
+# create an instance of InflationSwap from a JSON string
+inflation_swap_instance = InflationSwap.from_json(json)
+# print the JSON string representation of the object
+print InflationSwap.to_json()
+
+# convert the object into a dict
+inflation_swap_dict = inflation_swap_instance.to_dict()
+# create an instance of InflationSwap from a dict
+inflation_swap_form_dict = inflation_swap.from_dict(inflation_swap_dict)
+```
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 
 

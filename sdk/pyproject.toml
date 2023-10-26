@@ -1,0 +1,36 @@
+[tool.poetry]
+name = "lusid-sdk"
+version = "2.0.16-beta"
+description = "LUSID API"
+authors = ["FINBOURNE Technology <info@finbourne.com>"]
+license = "MIT"
+readme = "README.md"
+repository = "https://github.com/finbourne/lusid-sdk-python"
+keywords = ["OpenAPI", "OpenAPI-Generator", "LUSID API", "lusid-sdk"]
+packages = [
+    {include = "lusid"}
+]
+include = ["lusid/**/*"]
+
+[tool.poetry.dependencies]
+python = "^3.8"
+
+urllib3 = "^1.25.3"
+python-dateutil = "^2.8.2"
+requests = "^2"
+aiohttp = "^3.8.4"
+pydantic = "^1.10.5"
+aenum = "^3.1.11"
+
+[tool.poetry.dev-dependencies]
+pytest = "^7.2.1"
+pytest-asyncio = "^0"
+flake8 = "^4.0.0"
+black = "^23.9.1"
+
+[build-system]
+requires = ["setuptools"]
+build-backend = "setuptools.build_meta"
+
+[tool.pylint.'MESSAGES CONTROL']
+extension-pkg-whitelist = "pydantic"

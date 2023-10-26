@@ -8,6 +8,23 @@ Name | Type | Description | Notes
 **start** | **datetime** |  | [optional] 
 **end** | **datetime** |  | [optional] 
 
+## Example
+
+```python
+from lusid.models.event_date_range import EventDateRange
+
+# TODO update the JSON string below
+json = "{}"
+# create an instance of EventDateRange from a JSON string
+event_date_range_instance = EventDateRange.from_json(json)
+# print the JSON string representation of the object
+print EventDateRange.to_json()
+
+# convert the object into a dict
+event_date_range_dict = event_date_range_instance.to_dict()
+# create an instance of EventDateRange from a dict
+event_date_range_form_dict = event_date_range.from_dict(event_date_range_dict)
+```
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 
 

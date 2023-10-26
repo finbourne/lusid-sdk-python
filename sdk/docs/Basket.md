@@ -10,6 +10,23 @@ Name | Type | Description | Notes
 **weighted_instruments** | [**WeightedInstruments**](WeightedInstruments.md) |  | 
 **instrument_type** | **str** | The available values are: QuotedSecurity, InterestRateSwap, FxForward, Future, ExoticInstrument, FxOption, CreditDefaultSwap, InterestRateSwaption, Bond, EquityOption, FixedLeg, FloatingLeg, BespokeCashFlowsLeg, Unknown, TermDeposit, ContractForDifference, EquitySwap, CashPerpetual, CapFloor, CashSettled, CdsIndex, Basket, FundingLeg, FxSwap, ForwardRateAgreement, SimpleInstrument, Repo, Equity, ExchangeTradedOption, ReferenceInstrument, ComplexBond, InflationLinkedBond, InflationSwap, SimpleCashFlowLoan, TotalReturnSwap, InflationLeg | 
 
+## Example
+
+```python
+from lusid.models.basket import Basket
+
+# TODO update the JSON string below
+json = "{}"
+# create an instance of Basket from a JSON string
+basket_instance = Basket.from_json(json)
+# print the JSON string representation of the object
+print Basket.to_json()
+
+# convert the object into a dict
+basket_dict = basket_instance.to_dict()
+# create an instance of Basket from a dict
+basket_form_dict = basket.from_dict(basket_dict)
+```
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 
 

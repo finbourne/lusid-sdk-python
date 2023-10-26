@@ -11,6 +11,23 @@ Name | Type | Description | Notes
 **required** | **bool** | Whether the field is required or not. | 
 **description** | **str** | An optional description for the field. | [optional] 
 
+## Example
+
+```python
+from lusid.models.custom_entity_field_definition import CustomEntityFieldDefinition
+
+# TODO update the JSON string below
+json = "{}"
+# create an instance of CustomEntityFieldDefinition from a JSON string
+custom_entity_field_definition_instance = CustomEntityFieldDefinition.from_json(json)
+# print the JSON string representation of the object
+print CustomEntityFieldDefinition.to_json()
+
+# convert the object into a dict
+custom_entity_field_definition_dict = custom_entity_field_definition_instance.to_dict()
+# create an instance of CustomEntityFieldDefinition from a dict
+custom_entity_field_definition_form_dict = custom_entity_field_definition.from_dict(custom_entity_field_definition_dict)
+```
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 
 

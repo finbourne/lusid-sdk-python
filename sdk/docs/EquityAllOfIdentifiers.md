@@ -17,6 +17,23 @@ Name | Type | Description | Notes
 **bbgid** | **str** |  | [optional] 
 **ice_code** | **str** |  | [optional] 
 
+## Example
+
+```python
+from lusid.models.equity_all_of_identifiers import EquityAllOfIdentifiers
+
+# TODO update the JSON string below
+json = "{}"
+# create an instance of EquityAllOfIdentifiers from a JSON string
+equity_all_of_identifiers_instance = EquityAllOfIdentifiers.from_json(json)
+# print the JSON string representation of the object
+print EquityAllOfIdentifiers.to_json()
+
+# convert the object into a dict
+equity_all_of_identifiers_dict = equity_all_of_identifiers_instance.to_dict()
+# create an instance of EquityAllOfIdentifiers from a dict
+equity_all_of_identifiers_form_dict = equity_all_of_identifiers.from_dict(equity_all_of_identifiers_dict)
+```
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 
 

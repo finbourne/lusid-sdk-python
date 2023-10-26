@@ -1,17 +1,17 @@
 # lusid.RelationsApi
 
-All URIs are relative to *http://local-unit-test-server.lusid.com:58694*
+All URIs are relative to *https://www.lusid.com/api*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
-[**create_relation**](RelationsApi.md#create_relation) | **POST** /api/relations/{scope}/{code} | [DEPRECATED] Create Relation
-[**delete_relation**](RelationsApi.md#delete_relation) | **POST** /api/relations/{scope}/{code}/$delete | [DEPRECATED] Delete a relation
+[**create_relation**](RelationsApi.md#create_relation) | **POST** /api/relations/{scope}/{code} | [EXPERIMENTAL] CreateRelation: Create Relation
+[**delete_relation**](RelationsApi.md#delete_relation) | **POST** /api/relations/{scope}/{code}/$delete | [EXPERIMENTAL] DeleteRelation: Delete a relation
 
 
 # **create_relation**
 > CompleteRelation create_relation(scope, code, create_relation_request, effective_at=effective_at)
 
-[DEPRECATED] Create Relation
+[EXPERIMENTAL] CreateRelation: Create Relation
 
 Create a relation between two entity objects by their identifiers
 
@@ -21,29 +21,66 @@ Create a relation between two entity objects by their identifiers
 ```python
 from __future__ import print_function
 import time
+import os
 import lusid
 from lusid.rest import ApiException
+from lusid.models.complete_relation import CompleteRelation
+from lusid.models.create_relation_request import CreateRelationRequest
 from pprint import pprint
-configuration = lusid.Configuration()
-# Configure OAuth2 access token for authorization: oauth2
-configuration.access_token = 'YOUR_ACCESS_TOKEN'
 
-# Defining host is optional and default to http://local-unit-test-server.lusid.com:58694
-configuration.host = "http://local-unit-test-server.lusid.com:58694"
-# Create an instance of the API class
-api_instance = lusid.RelationsApi(lusid.ApiClient(configuration))
-scope = 'scope_example' # str | The scope of the relation definition
-code = 'code_example' # str | The code of the relation definition
-create_relation_request = {"sourceEntityId":{"idTypeScope":"HrSystem1","idTypeCode":"InternalId","code":"XY10001111"},"targetEntityId":{"idTypeScope":"HrSystem1","idTypeCode":"InternalId","code":"XY10001111"}} # CreateRelationRequest | The details of the relation to create.
-effective_at = 'effective_at_example' # str | The effective datetime or cut label at which the relation should be effective from. Defaults to the current LUSID system datetime if not specified. (optional)
+from lusid import (
+	  ApiClientFactory,
+	  ApplicationMetadataApi,
+	  EnvironmentVariablesConfigurationLoader,
+	  SecretsFileConfigurationLoader,
+	  ArgsConfigurationLoader
+)
 
-try:
-    # [DEPRECATED] Create Relation
-    api_response = api_instance.create_relation(scope, code, create_relation_request, effective_at=effective_at)
-    pprint(api_response)
-except ApiException as e:
-    print("Exception when calling RelationsApi->create_relation: %s\n" % e)
+# Use the lusid ApiClientFactory to build Api instances with a configured api client
+# By default this will read config from environment variables
+# Then from a secrets.json file found in the current working directory
+api_client_factory = ApiClientFactory()
+
+# The ApiClientFactory can be passed an iterable of configuration loaders to read configuration from
+
+api_url = "https://www.lusid.com/api"
+# Path to a secrets.json file containing authentication credentials
+# See https://support.lusid.com/knowledgebase/article/KA-01667/en-us
+# for a detailed guide to setting up the SDK make authenticated calls to LUSID APIs
+secrets_path = os.getenv("FBN_SECRETS_PATH")
+app_name="LusidJupyterNotebook"
+
+config_loaders = [
+	EnvironmentVariablesConfigurationLoader(),
+	SecretsFileConfigurationLoader(api_secrets_file=secrets_path),
+	ArgsConfigurationLoader(api_url=api_url, app_name=app_name)
+]
+api_client_factory = ApiClientFactory(config_loaders=config_loaders)
+
+
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+
+
+
+# Enter a context with an instance of the ApiClientFactory to ensure the connection pool is closed after use
+async with api_client_factory:
+    # Create an instance of the API class
+    api_instance = api_client_factory.build(lusid.RelationsApi)
+    scope = 'scope_example' # str | The scope of the relation definition
+    code = 'code_example' # str | The code of the relation definition
+    create_relation_request = {"sourceEntityId":{"IdTypeScope":"HrSystem1","IdTypeCode":"InternalId","Code":"XY10001111"},"targetEntityId":{"IdTypeScope":"HrSystem1","IdTypeCode":"InternalId","Code":"XY10001111"}} # CreateRelationRequest | The details of the relation to create.
+    effective_at = 'effective_at_example' # str | The effective datetime or cut label at which the relation should be effective from. Defaults to the current LUSID system datetime if not specified. (optional)
+
+    try:
+        # [EXPERIMENTAL] CreateRelation: Create Relation
+        api_response = await api_instance.create_relation(scope, code, create_relation_request, effective_at=effective_at)
+        print("The response of RelationsApi->create_relation:\n")
+        pprint(api_response)
+    except Exception as e:
+        print("Exception when calling RelationsApi->create_relation: %s\n" % e)
 ```
+
 
 ### Parameters
 
@@ -79,7 +116,7 @@ Name | Type | Description  | Notes
 # **delete_relation**
 > DeletedEntityResponse delete_relation(scope, code, delete_relation_request, effective_at=effective_at)
 
-[DEPRECATED] Delete a relation
+[EXPERIMENTAL] DeleteRelation: Delete a relation
 
 Delete a relation between two entity objects represented by their identifiers
 
@@ -89,29 +126,66 @@ Delete a relation between two entity objects represented by their identifiers
 ```python
 from __future__ import print_function
 import time
+import os
 import lusid
 from lusid.rest import ApiException
+from lusid.models.delete_relation_request import DeleteRelationRequest
+from lusid.models.deleted_entity_response import DeletedEntityResponse
 from pprint import pprint
-configuration = lusid.Configuration()
-# Configure OAuth2 access token for authorization: oauth2
-configuration.access_token = 'YOUR_ACCESS_TOKEN'
 
-# Defining host is optional and default to http://local-unit-test-server.lusid.com:58694
-configuration.host = "http://local-unit-test-server.lusid.com:58694"
-# Create an instance of the API class
-api_instance = lusid.RelationsApi(lusid.ApiClient(configuration))
-scope = 'scope_example' # str | The scope of the relation definition
-code = 'code_example' # str | The code of the relation definition
-delete_relation_request = {"sourceEntityId":{"entityType":"PortfolioGroup","scope":"UkPortfolio","code":"PortfolioId-148176"},"targetEntityId":{"entityType":"Person","idTypeScope":"HrSystem1","idTypeCode":"InternalId","code":"XY10001111"}} # DeleteRelationRequest | The details of the relation to delete.
-effective_at = 'effective_at_example' # str | The effective datetime or cut label at which the relation should the deletion be effective from. Defaults to the current LUSID system datetime if not specified. (optional)
+from lusid import (
+	  ApiClientFactory,
+	  ApplicationMetadataApi,
+	  EnvironmentVariablesConfigurationLoader,
+	  SecretsFileConfigurationLoader,
+	  ArgsConfigurationLoader
+)
 
-try:
-    # [DEPRECATED] Delete a relation
-    api_response = api_instance.delete_relation(scope, code, delete_relation_request, effective_at=effective_at)
-    pprint(api_response)
-except ApiException as e:
-    print("Exception when calling RelationsApi->delete_relation: %s\n" % e)
+# Use the lusid ApiClientFactory to build Api instances with a configured api client
+# By default this will read config from environment variables
+# Then from a secrets.json file found in the current working directory
+api_client_factory = ApiClientFactory()
+
+# The ApiClientFactory can be passed an iterable of configuration loaders to read configuration from
+
+api_url = "https://www.lusid.com/api"
+# Path to a secrets.json file containing authentication credentials
+# See https://support.lusid.com/knowledgebase/article/KA-01667/en-us
+# for a detailed guide to setting up the SDK make authenticated calls to LUSID APIs
+secrets_path = os.getenv("FBN_SECRETS_PATH")
+app_name="LusidJupyterNotebook"
+
+config_loaders = [
+	EnvironmentVariablesConfigurationLoader(),
+	SecretsFileConfigurationLoader(api_secrets_file=secrets_path),
+	ArgsConfigurationLoader(api_url=api_url, app_name=app_name)
+]
+api_client_factory = ApiClientFactory(config_loaders=config_loaders)
+
+
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+
+
+
+# Enter a context with an instance of the ApiClientFactory to ensure the connection pool is closed after use
+async with api_client_factory:
+    # Create an instance of the API class
+    api_instance = api_client_factory.build(lusid.RelationsApi)
+    scope = 'scope_example' # str | The scope of the relation definition
+    code = 'code_example' # str | The code of the relation definition
+    delete_relation_request = {"sourceEntityId":{"EntityType":"PortfolioGroup","Scope":"UkPortfolio","Code":"PortfolioId-148176"},"targetEntityId":{"EntityType":"Person","IdTypeScope":"HrSystem1","IdTypeCode":"InternalId","Code":"XY10001111"}} # DeleteRelationRequest | The details of the relation to delete.
+    effective_at = 'effective_at_example' # str | The effective datetime or cut label at which the relation should the deletion be effective from. Defaults to the current LUSID system datetime if not specified. (optional)
+
+    try:
+        # [EXPERIMENTAL] DeleteRelation: Delete a relation
+        api_response = await api_instance.delete_relation(scope, code, delete_relation_request, effective_at=effective_at)
+        print("The response of RelationsApi->delete_relation:\n")
+        pprint(api_response)
+    except Exception as e:
+        print("Exception when calling RelationsApi->delete_relation: %s\n" % e)
 ```
+
 
 ### Parameters
 

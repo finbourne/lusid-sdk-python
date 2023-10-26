@@ -6,10 +6,27 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **next_page** | **str** |  | [optional] 
 **previous_page** | **str** |  | [optional] 
-**values** | [**list[DataTypeSummary]**](DataTypeSummary.md) |  | 
+**values** | [**List[DataTypeSummary]**](DataTypeSummary.md) |  | 
 **href** | **str** |  | [optional] 
-**links** | [**list[Link]**](Link.md) |  | [optional] 
+**links** | [**List[Link]**](Link.md) |  | [optional] 
 
+## Example
+
+```python
+from lusid.models.paged_resource_list_of_data_type_summary import PagedResourceListOfDataTypeSummary
+
+# TODO update the JSON string below
+json = "{}"
+# create an instance of PagedResourceListOfDataTypeSummary from a JSON string
+paged_resource_list_of_data_type_summary_instance = PagedResourceListOfDataTypeSummary.from_json(json)
+# print the JSON string representation of the object
+print PagedResourceListOfDataTypeSummary.to_json()
+
+# convert the object into a dict
+paged_resource_list_of_data_type_summary_dict = paged_resource_list_of_data_type_summary_instance.to_dict()
+# create an instance of PagedResourceListOfDataTypeSummary from a dict
+paged_resource_list_of_data_type_summary_form_dict = paged_resource_list_of_data_type_summary.from_dict(paged_resource_list_of_data_type_summary_dict)
+```
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 
 

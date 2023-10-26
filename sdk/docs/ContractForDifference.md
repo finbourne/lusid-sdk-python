@@ -16,6 +16,23 @@ Name | Type | Description | Notes
 **underlying_identifier** | **str** | External market codes and identifiers for the CFD, e.g. RIC.    Supported string (enumeration) values are: [LusidInstrumentId, Isin, Sedol, Cusip, ClientInternal, Figi, RIC, QuotePermId, REDCode, BBGId, ICECode]. | 
 **instrument_type** | **str** | The available values are: QuotedSecurity, InterestRateSwap, FxForward, Future, ExoticInstrument, FxOption, CreditDefaultSwap, InterestRateSwaption, Bond, EquityOption, FixedLeg, FloatingLeg, BespokeCashFlowsLeg, Unknown, TermDeposit, ContractForDifference, EquitySwap, CashPerpetual, CapFloor, CashSettled, CdsIndex, Basket, FundingLeg, FxSwap, ForwardRateAgreement, SimpleInstrument, Repo, Equity, ExchangeTradedOption, ReferenceInstrument, ComplexBond, InflationLinkedBond, InflationSwap, SimpleCashFlowLoan, TotalReturnSwap, InflationLeg | 
 
+## Example
+
+```python
+from lusid.models.contract_for_difference import ContractForDifference
+
+# TODO update the JSON string below
+json = "{}"
+# create an instance of ContractForDifference from a JSON string
+contract_for_difference_instance = ContractForDifference.from_json(json)
+# print the JSON string representation of the object
+print ContractForDifference.to_json()
+
+# convert the object into a dict
+contract_for_difference_dict = contract_for_difference_instance.to_dict()
+# create an instance of ContractForDifference from a dict
+contract_for_difference_form_dict = contract_for_difference.from_dict(contract_for_difference_dict)
+```
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 
 
