@@ -34,7 +34,8 @@ class AborConfigurationRequest(BaseModel):
     chart_of_accounts_id: ResourceId = Field(..., alias="chartOfAccountsId")
     posting_module_codes: Optional[conlist(StrictStr)] = Field(None, alias="postingModuleCodes", description="The Posting Module Codes from which the rules to be applied are retrieved.")
     properties: Optional[Dict[str, ModelProperty]] = Field(None, description="A set of properties for the Abor Configuration.")
-    __properties = ["code", "displayName", "description", "recipeId", "chartOfAccountsId", "postingModuleCodes", "properties"]
+    cleardown_module_codes: Optional[conlist(StrictStr)] = Field(None, alias="cleardownModuleCodes", description="The Cleardown Module Codes from which the rules to be applied are retrieved.")
+    __properties = ["code", "displayName", "description", "recipeId", "chartOfAccountsId", "postingModuleCodes", "properties", "cleardownModuleCodes"]
 
     @validator('code')
     def code_validate_regular_expression(cls, value):
@@ -110,6 +111,11 @@ class AborConfigurationRequest(BaseModel):
         if self.properties is None and "properties" in self.__fields_set__:
             _dict['properties'] = None
 
+        # set to None if cleardown_module_codes (nullable) is None
+        # and __fields_set__ contains the field
+        if self.cleardown_module_codes is None and "cleardown_module_codes" in self.__fields_set__:
+            _dict['cleardownModuleCodes'] = None
+
         return _dict
 
     @classmethod
@@ -133,6 +139,7 @@ class AborConfigurationRequest(BaseModel):
                 for _k, _v in obj.get("properties").items()
             )
             if obj.get("properties") is not None
-            else None
+            else None,
+            "cleardown_module_codes": obj.get("cleardownModuleCodes")
         })
         return _obj

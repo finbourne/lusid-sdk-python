@@ -38,8 +38,9 @@ class AborConfiguration(BaseModel):
     posting_module_codes: Optional[conlist(StrictStr)] = Field(None, alias="postingModuleCodes", description="The Posting Module Codes from which the rules to be applied are retrieved.")
     properties: Optional[Dict[str, ModelProperty]] = Field(None, description="A set of properties for the Abor Configuration.")
     version: Optional[Version] = None
+    cleardown_module_codes: Optional[conlist(StrictStr)] = Field(None, alias="cleardownModuleCodes", description="The Cleardown Module Codes from which the rules to be applied are retrieved.")
     links: Optional[conlist(Link)] = None
-    __properties = ["href", "id", "displayName", "description", "recipeId", "chartOfAccountsId", "postingModuleCodes", "properties", "version", "links"]
+    __properties = ["href", "id", "displayName", "description", "recipeId", "chartOfAccountsId", "postingModuleCodes", "properties", "version", "cleardownModuleCodes", "links"]
 
     class Config:
         """Pydantic configuration"""
@@ -116,6 +117,11 @@ class AborConfiguration(BaseModel):
         if self.properties is None and "properties" in self.__fields_set__:
             _dict['properties'] = None
 
+        # set to None if cleardown_module_codes (nullable) is None
+        # and __fields_set__ contains the field
+        if self.cleardown_module_codes is None and "cleardown_module_codes" in self.__fields_set__:
+            _dict['cleardownModuleCodes'] = None
+
         # set to None if links (nullable) is None
         # and __fields_set__ contains the field
         if self.links is None and "links" in self.__fields_set__:
@@ -147,6 +153,7 @@ class AborConfiguration(BaseModel):
             if obj.get("properties") is not None
             else None,
             "version": Version.from_dict(obj.get("version")) if obj.get("version") is not None else None,
+            "cleardown_module_codes": obj.get("cleardownModuleCodes"),
             "links": [Link.from_dict(_item) for _item in obj.get("links")] if obj.get("links") is not None else None
         })
         return _obj

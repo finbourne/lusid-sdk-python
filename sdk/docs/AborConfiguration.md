@@ -14,6 +14,7 @@ Name | Type | Description | Notes
 **posting_module_codes** | **List[str]** | The Posting Module Codes from which the rules to be applied are retrieved. | [optional] 
 **properties** | [**Dict[str, ModelProperty]**](ModelProperty.md) | A set of properties for the Abor Configuration. | [optional] 
 **version** | [**Version**](Version.md) |  | [optional] 
+**cleardown_module_codes** | **List[str]** | The Cleardown Module Codes from which the rules to be applied are retrieved. | [optional] 
 **links** | [**List[Link]**](Link.md) |  | [optional] 
 
 ## Example
