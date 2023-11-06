@@ -19,7 +19,7 @@ import json
 
 from datetime import datetime
 from typing import Any, Dict, List, Optional
-from pydantic import BaseModel, Field, StrictBool, StrictStr, conlist, constr
+from pydantic import BaseModel, Field, StrictBool, StrictStr, conlist, constr, validator
 from lusid.models.bucketing_schedule import BucketingSchedule
 from lusid.models.portfolio_entity_id import PortfolioEntityId
 from lusid.models.resource_id import ResourceId
@@ -44,7 +44,18 @@ class QueryBucketedCashFlowsRequest(BaseModel):
     exclude_unsettled_trades: Optional[StrictBool] = Field(None, alias="excludeUnsettledTrades", description="Flag directing the Valuation call to exclude cashflows from unsettled trades.  If absent or set to false, cashflows will returned based on trade date - more specifically, cashflows from any unsettled trades will be included in the results. If set to true, unsettled trades will be excluded from the result set.")
     cash_flow_type: Optional[StrictStr] = Field(None, alias="cashFlowType", description="Indicate the requested cash flow representation InstrumentCashFlows or PortfolioCashFlows (GetCashLadder uses this)  Options: [InstrumentCashFlow, PortfolioCashFlow]")
     bucketing_schedule: Optional[BucketingSchedule] = Field(None, alias="bucketingSchedule")
-    __properties = ["asAt", "windowStart", "windowEnd", "portfolioEntityIds", "effectiveAt", "recipeId", "roundingMethod", "bucketingDates", "bucketingTenors", "reportCurrency", "groupBy", "addresses", "equipWithSubtotals", "excludeUnsettledTrades", "cashFlowType", "bucketingSchedule"]
+    filter: Optional[constr(strict=True, max_length=16384, min_length=0)] = None
+    __properties = ["asAt", "windowStart", "windowEnd", "portfolioEntityIds", "effectiveAt", "recipeId", "roundingMethod", "bucketingDates", "bucketingTenors", "reportCurrency", "groupBy", "addresses", "equipWithSubtotals", "excludeUnsettledTrades", "cashFlowType", "bucketingSchedule", "filter"]
+
+    @validator('filter')
+    def filter_validate_regular_expression(cls, value):
+        """Validates the regular expression"""
+        if value is None:
+            return value
+
+        if not re.match(r"^[\s\S]*$", value):
+            raise ValueError(r"must validate the regular expression /^[\s\S]*$/")
+        return value
 
     class Config:
         """Pydantic configuration"""
@@ -113,6 +124,11 @@ class QueryBucketedCashFlowsRequest(BaseModel):
         if self.cash_flow_type is None and "cash_flow_type" in self.__fields_set__:
             _dict['cashFlowType'] = None
 
+        # set to None if filter (nullable) is None
+        # and __fields_set__ contains the field
+        if self.filter is None and "filter" in self.__fields_set__:
+            _dict['filter'] = None
+
         return _dict
 
     @classmethod
@@ -140,6 +156,7 @@ class QueryBucketedCashFlowsRequest(BaseModel):
             "equip_with_subtotals": obj.get("equipWithSubtotals"),
             "exclude_unsettled_trades": obj.get("excludeUnsettledTrades"),
             "cash_flow_type": obj.get("cashFlowType"),
-            "bucketing_schedule": BucketingSchedule.from_dict(obj.get("bucketingSchedule")) if obj.get("bucketingSchedule") is not None else None
+            "bucketing_schedule": BucketingSchedule.from_dict(obj.get("bucketingSchedule")) if obj.get("bucketingSchedule") is not None else None,
+            "filter": obj.get("filter")
         })
         return _obj

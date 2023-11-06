@@ -21,6 +21,7 @@ Name | Type | Description | Notes
 **exclude_unsettled_trades** | **bool** | Flag directing the Valuation call to exclude cashflows from unsettled trades.  If absent or set to false, cashflows will returned based on trade date - more specifically, cashflows from any unsettled trades will be included in the results. If set to true, unsettled trades will be excluded from the result set. | [optional] 
 **cash_flow_type** | **str** | Indicate the requested cash flow representation InstrumentCashFlows or PortfolioCashFlows (GetCashLadder uses this)  Options: [InstrumentCashFlow, PortfolioCashFlow] | [optional] 
 **bucketing_schedule** | [**BucketingSchedule**](BucketingSchedule.md) |  | [optional] 
+**filter** | **str** |  | [optional] 
 
 ## Example
 

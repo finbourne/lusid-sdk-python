@@ -62,6 +62,7 @@ from lusid.models.upsert_portfolio_transactions_response import UpsertPortfolioT
 from lusid.models.upsert_transaction_properties_response import UpsertTransactionPropertiesResponse
 from lusid.models.versioned_resource_list_of_a2_b_data_record import VersionedResourceListOfA2BDataRecord
 from lusid.models.versioned_resource_list_of_a2_b_movement_record import VersionedResourceListOfA2BMovementRecord
+from lusid.models.versioned_resource_list_of_holding_contributor import VersionedResourceListOfHoldingContributor
 from lusid.models.versioned_resource_list_of_output_transaction import VersionedResourceListOfOutputTransaction
 from lusid.models.versioned_resource_list_of_portfolio_holding import VersionedResourceListOfPortfolioHolding
 from lusid.models.versioned_resource_list_of_transaction import VersionedResourceListOfTransaction
@@ -2880,6 +2881,249 @@ class TransactionPortfoliosApi:
 
         return self.api_client.call_api(
             '/api/transactionportfolios/{scope}/{code}/details', 'GET',
+            _path_params,
+            _query_params,
+            _header_params,
+            body=_body_params,
+            post_params=_form_params,
+            files=_files,
+            response_types_map=_response_types_map,
+            auth_settings=_auth_settings,
+            async_req=_params.get('async_req'),
+            _return_http_data_only=_params.get('_return_http_data_only'),  # noqa: E501
+            _preload_content=_params.get('_preload_content', True),
+            _request_timeout=_params.get('_request_timeout'),
+            collection_formats=_collection_formats,
+            _request_auth=_params.get('_request_auth'))
+
+    @overload
+    async def get_holding_contributors(self, scope : Annotated[constr(strict=True, max_length=64, min_length=1), Field(..., description="The scope of the transaction portfolio.")], code : Annotated[constr(strict=True, max_length=64, min_length=1), Field(..., description="The code of the transaction portfolio. Together with the scope this uniquely identifies              the transaction portfolio.")], holding_id : Annotated[conint(strict=True, ge=0), Field(..., description="The unique holding identifier")], effective_date : Annotated[Optional[datetime], Field(description="Effective date")] = None, from_trade_date : Annotated[Optional[datetime], Field(description="The from trade date, defaults to first time this holding is opened, lower bound for transactions")] = None, to_trade_date : Annotated[Optional[datetime], Field(description="The to trade date upper bound date, defaults to effectiveDate. upper bound for transactions")] = None, include_historic : Annotated[Optional[StrictBool], Field(description="If true, transactions from previously closed holdings are returned.              If false, only transactions from last time position is opened.")] = None, tax_lot_id : Annotated[Optional[constr(strict=True, max_length=6000, min_length=0)], Field(description="Constrains the Holding Contributors to those which contributed to the specified tax lot.")] = None, limit : Annotated[Optional[StrictInt], Field(description="When paginating, limit the number of returned results to this many. Defaults to 100 if not specified.")] = None, as_at : Annotated[Optional[datetime], Field(description="The asAt datetime at which to build the transactions. Defaults to return the latest              version of each transaction if not specified.")] = None, page : Annotated[Optional[constr(strict=True, max_length=500, min_length=1)], Field(description="The pagination token to use to continue listing transactions from a previous call to GetHoldingContributors.")] = None, **kwargs) -> VersionedResourceListOfHoldingContributor:  # noqa: E501
+        ...
+
+    @overload
+    def get_holding_contributors(self, scope : Annotated[constr(strict=True, max_length=64, min_length=1), Field(..., description="The scope of the transaction portfolio.")], code : Annotated[constr(strict=True, max_length=64, min_length=1), Field(..., description="The code of the transaction portfolio. Together with the scope this uniquely identifies              the transaction portfolio.")], holding_id : Annotated[conint(strict=True, ge=0), Field(..., description="The unique holding identifier")], effective_date : Annotated[Optional[datetime], Field(description="Effective date")] = None, from_trade_date : Annotated[Optional[datetime], Field(description="The from trade date, defaults to first time this holding is opened, lower bound for transactions")] = None, to_trade_date : Annotated[Optional[datetime], Field(description="The to trade date upper bound date, defaults to effectiveDate. upper bound for transactions")] = None, include_historic : Annotated[Optional[StrictBool], Field(description="If true, transactions from previously closed holdings are returned.              If false, only transactions from last time position is opened.")] = None, tax_lot_id : Annotated[Optional[constr(strict=True, max_length=6000, min_length=0)], Field(description="Constrains the Holding Contributors to those which contributed to the specified tax lot.")] = None, limit : Annotated[Optional[StrictInt], Field(description="When paginating, limit the number of returned results to this many. Defaults to 100 if not specified.")] = None, as_at : Annotated[Optional[datetime], Field(description="The asAt datetime at which to build the transactions. Defaults to return the latest              version of each transaction if not specified.")] = None, page : Annotated[Optional[constr(strict=True, max_length=500, min_length=1)], Field(description="The pagination token to use to continue listing transactions from a previous call to GetHoldingContributors.")] = None, async_req: Optional[bool]=True, **kwargs) -> VersionedResourceListOfHoldingContributor:  # noqa: E501
+        ...
+
+    @validate_arguments
+    def get_holding_contributors(self, scope : Annotated[constr(strict=True, max_length=64, min_length=1), Field(..., description="The scope of the transaction portfolio.")], code : Annotated[constr(strict=True, max_length=64, min_length=1), Field(..., description="The code of the transaction portfolio. Together with the scope this uniquely identifies              the transaction portfolio.")], holding_id : Annotated[conint(strict=True, ge=0), Field(..., description="The unique holding identifier")], effective_date : Annotated[Optional[datetime], Field(description="Effective date")] = None, from_trade_date : Annotated[Optional[datetime], Field(description="The from trade date, defaults to first time this holding is opened, lower bound for transactions")] = None, to_trade_date : Annotated[Optional[datetime], Field(description="The to trade date upper bound date, defaults to effectiveDate. upper bound for transactions")] = None, include_historic : Annotated[Optional[StrictBool], Field(description="If true, transactions from previously closed holdings are returned.              If false, only transactions from last time position is opened.")] = None, tax_lot_id : Annotated[Optional[constr(strict=True, max_length=6000, min_length=0)], Field(description="Constrains the Holding Contributors to those which contributed to the specified tax lot.")] = None, limit : Annotated[Optional[StrictInt], Field(description="When paginating, limit the number of returned results to this many. Defaults to 100 if not specified.")] = None, as_at : Annotated[Optional[datetime], Field(description="The asAt datetime at which to build the transactions. Defaults to return the latest              version of each transaction if not specified.")] = None, page : Annotated[Optional[constr(strict=True, max_length=500, min_length=1)], Field(description="The pagination token to use to continue listing transactions from a previous call to GetHoldingContributors.")] = None, async_req: Optional[bool]=None, **kwargs) -> Union[VersionedResourceListOfHoldingContributor, Awaitable[VersionedResourceListOfHoldingContributor]]:  # noqa: E501
+        """[EXPERIMENTAL] GetHoldingContributors: Get Holdings Contributors  # noqa: E501
+
+        Lists all transactions that affect the holdings of a portfolio over a given effective interval. This includes  transactions automatically generated by LUSID such as holding adjustments.  # noqa: E501
+        This method makes a synchronous HTTP request by default. To make an
+        asynchronous HTTP request, please pass async_req=True
+
+        >>> thread = api.get_holding_contributors(scope, code, holding_id, effective_date, from_trade_date, to_trade_date, include_historic, tax_lot_id, limit, as_at, page, async_req=True)
+        >>> result = thread.get()
+
+        :param scope: The scope of the transaction portfolio. (required)
+        :type scope: str
+        :param code: The code of the transaction portfolio. Together with the scope this uniquely identifies              the transaction portfolio. (required)
+        :type code: str
+        :param holding_id: The unique holding identifier (required)
+        :type holding_id: int
+        :param effective_date: Effective date
+        :type effective_date: datetime
+        :param from_trade_date: The from trade date, defaults to first time this holding is opened, lower bound for transactions
+        :type from_trade_date: datetime
+        :param to_trade_date: The to trade date upper bound date, defaults to effectiveDate. upper bound for transactions
+        :type to_trade_date: datetime
+        :param include_historic: If true, transactions from previously closed holdings are returned.              If false, only transactions from last time position is opened.
+        :type include_historic: bool
+        :param tax_lot_id: Constrains the Holding Contributors to those which contributed to the specified tax lot.
+        :type tax_lot_id: str
+        :param limit: When paginating, limit the number of returned results to this many. Defaults to 100 if not specified.
+        :type limit: int
+        :param as_at: The asAt datetime at which to build the transactions. Defaults to return the latest              version of each transaction if not specified.
+        :type as_at: datetime
+        :param page: The pagination token to use to continue listing transactions from a previous call to GetHoldingContributors.
+        :type page: str
+        :param async_req: Whether to execute the request asynchronously.
+        :type async_req: bool, optional
+        :param _request_timeout: timeout setting for this request.
+               If one number provided, it will be total request
+               timeout. It can also be a pair (tuple) of
+               (connection, read) timeouts.
+        :return: Returns the result object.
+                 If the method is called asynchronously,
+                 returns the request thread.
+        :rtype: VersionedResourceListOfHoldingContributor
+        """
+        kwargs['_return_http_data_only'] = True
+        if '_preload_content' in kwargs:
+            message = "Error! Please call the get_holding_contributors_with_http_info method with `_preload_content` instead and obtain raw data from ApiResponse.raw_data"  # noqa: E501
+            raise ValueError(message)
+        if async_req is not None:
+            kwargs['async_req'] = async_req
+        return self.get_holding_contributors_with_http_info(scope, code, holding_id, effective_date, from_trade_date, to_trade_date, include_historic, tax_lot_id, limit, as_at, page, **kwargs)  # noqa: E501
+
+    @validate_arguments
+    def get_holding_contributors_with_http_info(self, scope : Annotated[constr(strict=True, max_length=64, min_length=1), Field(..., description="The scope of the transaction portfolio.")], code : Annotated[constr(strict=True, max_length=64, min_length=1), Field(..., description="The code of the transaction portfolio. Together with the scope this uniquely identifies              the transaction portfolio.")], holding_id : Annotated[conint(strict=True, ge=0), Field(..., description="The unique holding identifier")], effective_date : Annotated[Optional[datetime], Field(description="Effective date")] = None, from_trade_date : Annotated[Optional[datetime], Field(description="The from trade date, defaults to first time this holding is opened, lower bound for transactions")] = None, to_trade_date : Annotated[Optional[datetime], Field(description="The to trade date upper bound date, defaults to effectiveDate. upper bound for transactions")] = None, include_historic : Annotated[Optional[StrictBool], Field(description="If true, transactions from previously closed holdings are returned.              If false, only transactions from last time position is opened.")] = None, tax_lot_id : Annotated[Optional[constr(strict=True, max_length=6000, min_length=0)], Field(description="Constrains the Holding Contributors to those which contributed to the specified tax lot.")] = None, limit : Annotated[Optional[StrictInt], Field(description="When paginating, limit the number of returned results to this many. Defaults to 100 if not specified.")] = None, as_at : Annotated[Optional[datetime], Field(description="The asAt datetime at which to build the transactions. Defaults to return the latest              version of each transaction if not specified.")] = None, page : Annotated[Optional[constr(strict=True, max_length=500, min_length=1)], Field(description="The pagination token to use to continue listing transactions from a previous call to GetHoldingContributors.")] = None, **kwargs) -> ApiResponse:  # noqa: E501
+        """[EXPERIMENTAL] GetHoldingContributors: Get Holdings Contributors  # noqa: E501
+
+        Lists all transactions that affect the holdings of a portfolio over a given effective interval. This includes  transactions automatically generated by LUSID such as holding adjustments.  # noqa: E501
+        This method makes a synchronous HTTP request by default. To make an
+        asynchronous HTTP request, please pass async_req=True
+
+        >>> thread = api.get_holding_contributors_with_http_info(scope, code, holding_id, effective_date, from_trade_date, to_trade_date, include_historic, tax_lot_id, limit, as_at, page, async_req=True)
+        >>> result = thread.get()
+
+        :param scope: The scope of the transaction portfolio. (required)
+        :type scope: str
+        :param code: The code of the transaction portfolio. Together with the scope this uniquely identifies              the transaction portfolio. (required)
+        :type code: str
+        :param holding_id: The unique holding identifier (required)
+        :type holding_id: int
+        :param effective_date: Effective date
+        :type effective_date: datetime
+        :param from_trade_date: The from trade date, defaults to first time this holding is opened, lower bound for transactions
+        :type from_trade_date: datetime
+        :param to_trade_date: The to trade date upper bound date, defaults to effectiveDate. upper bound for transactions
+        :type to_trade_date: datetime
+        :param include_historic: If true, transactions from previously closed holdings are returned.              If false, only transactions from last time position is opened.
+        :type include_historic: bool
+        :param tax_lot_id: Constrains the Holding Contributors to those which contributed to the specified tax lot.
+        :type tax_lot_id: str
+        :param limit: When paginating, limit the number of returned results to this many. Defaults to 100 if not specified.
+        :type limit: int
+        :param as_at: The asAt datetime at which to build the transactions. Defaults to return the latest              version of each transaction if not specified.
+        :type as_at: datetime
+        :param page: The pagination token to use to continue listing transactions from a previous call to GetHoldingContributors.
+        :type page: str
+        :param async_req: Whether to execute the request asynchronously.
+        :type async_req: bool, optional
+        :param _preload_content: if False, the ApiResponse.data will
+                                 be set to none and raw_data will store the
+                                 HTTP response body without reading/decoding.
+                                 Default is True.
+        :type _preload_content: bool, optional
+        :param _return_http_data_only: response data instead of ApiResponse
+                                       object with status code, headers, etc
+        :type _return_http_data_only: bool, optional
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :param _request_auth: set to override the auth_settings for an a single
+                              request; this effectively ignores the authentication
+                              in the spec for a single request.
+        :type _request_auth: dict, optional
+        :type _content_type: string, optional: force content-type for the request
+        :return: Returns the result object.
+                 If the method is called asynchronously,
+                 returns the request thread.
+        :rtype: tuple(VersionedResourceListOfHoldingContributor, status_code(int), headers(HTTPHeaderDict))
+        """
+
+        _params = locals()
+
+        _all_params = [
+            'scope',
+            'code',
+            'holding_id',
+            'effective_date',
+            'from_trade_date',
+            'to_trade_date',
+            'include_historic',
+            'tax_lot_id',
+            'limit',
+            'as_at',
+            'page'
+        ]
+        _all_params.extend(
+            [
+                'async_req',
+                '_return_http_data_only',
+                '_preload_content',
+                '_request_timeout',
+                '_request_auth',
+                '_content_type',
+                '_headers'
+            ]
+        )
+
+        # validate the arguments
+        for _key, _val in _params['kwargs'].items():
+            if _key not in _all_params:
+                raise ApiTypeError(
+                    "Got an unexpected keyword argument '%s'"
+                    " to method get_holding_contributors" % _key
+                )
+            _params[_key] = _val
+        del _params['kwargs']
+
+        _collection_formats = {}
+
+        # process the path parameters
+        _path_params = {}
+        if _params['scope']:
+            _path_params['scope'] = _params['scope']
+
+        if _params['code']:
+            _path_params['code'] = _params['code']
+
+        if _params['holding_id']:
+            _path_params['holdingId'] = _params['holding_id']
+
+
+        # process the query parameters
+        _query_params = []
+        if _params.get('effective_date') is not None:  # noqa: E501
+            if isinstance(_params['effective_date'], datetime):
+                _query_params.append(('effectiveDate', _params['effective_date'].strftime(self.api_client.configuration.datetime_format)))
+            else:
+                _query_params.append(('effectiveDate', _params['effective_date']))
+
+        if _params.get('from_trade_date') is not None:  # noqa: E501
+            if isinstance(_params['from_trade_date'], datetime):
+                _query_params.append(('fromTradeDate', _params['from_trade_date'].strftime(self.api_client.configuration.datetime_format)))
+            else:
+                _query_params.append(('fromTradeDate', _params['from_trade_date']))
+
+        if _params.get('to_trade_date') is not None:  # noqa: E501
+            if isinstance(_params['to_trade_date'], datetime):
+                _query_params.append(('toTradeDate', _params['to_trade_date'].strftime(self.api_client.configuration.datetime_format)))
+            else:
+                _query_params.append(('toTradeDate', _params['to_trade_date']))
+
+        if _params.get('include_historic') is not None:  # noqa: E501
+            _query_params.append(('includeHistoric', _params['include_historic']))
+
+        if _params.get('tax_lot_id') is not None:  # noqa: E501
+            _query_params.append(('taxLotId', _params['tax_lot_id']))
+
+        if _params.get('limit') is not None:  # noqa: E501
+            _query_params.append(('limit', _params['limit']))
+
+        if _params.get('as_at') is not None:  # noqa: E501
+            if isinstance(_params['as_at'], datetime):
+                _query_params.append(('asAt', _params['as_at'].strftime(self.api_client.configuration.datetime_format)))
+            else:
+                _query_params.append(('asAt', _params['as_at']))
+
+        if _params.get('page') is not None:  # noqa: E501
+            _query_params.append(('page', _params['page']))
+
+        # process the header parameters
+        _header_params = dict(_params.get('_headers', {}))
+        # process the form parameters
+        _form_params = []
+        _files = {}
+        # process the body parameter
+        _body_params = None
+        # set the HTTP header `Accept`
+        _header_params['Accept'] = self.api_client.select_header_accept(
+            ['text/plain', 'application/json', 'text/json'])  # noqa: E501
+
+        # authentication setting
+        _auth_settings = ['oauth2']  # noqa: E501
+
+        _response_types_map = {
+            '200': "VersionedResourceListOfHoldingContributor",
+            '400': "LusidValidationProblemDetails",
+        }
+
+        return self.api_client.call_api(
+            '/api/transactionportfolios/{scope}/{code}/holdings/{holdingId}/contributors', 'GET',
             _path_params,
             _query_params,
             _header_params,
