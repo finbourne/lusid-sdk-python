@@ -22,6 +22,7 @@ from typing import Any, Dict, List, Optional
 from pydantic import BaseModel, Field, StrictStr, conlist, constr
 from lusid.models.model_property import ModelProperty
 from lusid.models.resource_id import ResourceId
+from lusid.models.version import Version
 from lusid.models.weekend_mask import WeekendMask
 
 class Calendar(BaseModel):
@@ -34,7 +35,8 @@ class Calendar(BaseModel):
     weekend_mask: WeekendMask = Field(..., alias="weekendMask")
     source_provider: constr(strict=True, min_length=1) = Field(..., alias="sourceProvider")
     properties: conlist(ModelProperty) = Field(...)
-    __properties = ["href", "id", "type", "weekendMask", "sourceProvider", "properties"]
+    version: Optional[Version] = None
+    __properties = ["href", "id", "type", "weekendMask", "sourceProvider", "properties", "version"]
 
     class Config:
         """Pydantic configuration"""
@@ -73,6 +75,9 @@ class Calendar(BaseModel):
                 if _item:
                     _items.append(_item.to_dict())
             _dict['properties'] = _items
+        # override the default output from pydantic by calling `to_dict()` of version
+        if self.version:
+            _dict['version'] = self.version.to_dict()
         # set to None if href (nullable) is None
         # and __fields_set__ contains the field
         if self.href is None and "href" in self.__fields_set__:
@@ -95,6 +100,7 @@ class Calendar(BaseModel):
             "type": obj.get("type"),
             "weekend_mask": WeekendMask.from_dict(obj.get("weekendMask")) if obj.get("weekendMask") is not None else None,
             "source_provider": obj.get("sourceProvider"),
-            "properties": [ModelProperty.from_dict(_item) for _item in obj.get("properties")] if obj.get("properties") is not None else None
+            "properties": [ModelProperty.from_dict(_item) for _item in obj.get("properties")] if obj.get("properties") is not None else None,
+            "version": Version.from_dict(obj.get("version")) if obj.get("version") is not None else None
         })
         return _obj

@@ -10,6 +10,7 @@ Name | Type | Description | Notes
 **weekend_mask** | [**WeekendMask**](WeekendMask.md) |  | 
 **source_provider** | **str** |  | 
 **properties** | [**List[ModelProperty]**](ModelProperty.md) |  | 
+**version** | [**Version**](Version.md) |  | [optional] 
 
 ## Example
 
