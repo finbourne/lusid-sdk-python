@@ -36,6 +36,7 @@ extensions = [
     'sphinx.ext.napoleon', # Allow for Google/Numpy-style docstring formats
   #  'nbsphinx',  # Integrate Jupyter Notebooks and Sphinx
   #  'IPython.sphinxext.ipython_console_highlighting'
+    'sphinx_rtd_theme', # Readthedocs stylesheet
 ]
 
 # Mappings for sphinx.ext.intersphinx. Projects have to have Sphinx-generated doc! (.inv file)
@@ -85,13 +86,7 @@ templates_path = ['_templates']
 # -- Options for HTML output -------------------------------------------------
 
 # Readthedocs theme
-# on_rtd is whether on readthedocs.org, this line of code grabbed from docs.readthedocs.org...
-on_rtd = os.environ.get("READTHEDOCS", None) == "True"
-if not on_rtd:  # only import and set the theme if we're building docs locally
-    import sphinx_rtd_theme
-    html_theme = "sphinx_rtd_theme"
-    html_theme_path = [sphinx_rtd_theme.get_html_theme_path()]
-    #html_logo = "_static/logo.png"
+html_theme = "sphinx_rtd_theme"
 html_css_files = ["readthedocs-custom.css"] # Override some CSS settings
 
 # Pydata theme
