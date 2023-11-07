@@ -18,9 +18,10 @@ import re  # noqa: F401
 import json
 
 from datetime import datetime
-from typing import Any, Dict, Optional, Union
-from pydantic import Field, StrictFloat, StrictInt, StrictStr, constr, validator
-from lusid.models.flow_conventions import FlowConventions
+from typing import Any, Dict
+from pydantic import Field, StrictStr, validator
+from lusid.models.fixed_leg import FixedLeg
+from lusid.models.inflation_leg import InflationLeg
 from lusid.models.lusid_instrument import LusidInstrument
 
 class InflationSwap(LusidInstrument):
@@ -29,20 +30,11 @@ class InflationSwap(LusidInstrument):
     """
     start_date: datetime = Field(..., alias="startDate", description="The start date of the instrument. This is normally synonymous with the trade-date.")
     maturity_date: datetime = Field(..., alias="maturityDate", description="The final maturity date of the instrument. This means the last date on which the instruments makes a payment of any amount.  For the avoidance of doubt, that is not necessarily prior to its last sensitivity date for the purposes of risk; e.g. instruments such as  Constant Maturity Swaps (CMS) often have sensitivities to rates that may well be observed or set prior to the maturity date, but refer to a termination date beyond it.")
-    flow_conventions: FlowConventions = Field(..., alias="flowConventions")
-    fixed_rate: Union[StrictFloat, StrictInt] = Field(..., alias="fixedRate", description="Fixed Rate")
-    inflation_cap: Optional[Union[StrictFloat, StrictInt]] = Field(None, alias="inflationCap", description="Optional cap, needed for LPI swaps. Should not be set for ZCIIS.")
-    inflation_floor: Optional[Union[StrictFloat, StrictInt]] = Field(None, alias="inflationFloor", description="Optional floor, needed for LPI swaps. Should not be set for ZCIIS.")
-    inflation_frequency: Optional[StrictStr] = Field(None, alias="inflationFrequency", description="Frequency of inflation updated. Optional and defaults to Monthly which is the most common.  However both Australian and New Zealand inflation is published Quarterly. Only tenors of 1M or 3M are supported.")
-    inflation_index_name: constr(strict=True, min_length=1) = Field(..., alias="inflationIndexName", description="Name of the Inflation Index")
-    inflation_interpolation: Optional[StrictStr] = Field(None, alias="inflationInterpolation", description="Inflation Interpolation flag, defaults to Linear but some older swaps require Flat.    Supported string (enumeration) values are: [Linear, Flat].")
-    inflation_roll_day: Optional[StrictInt] = Field(None, alias="inflationRollDay", description="Day of the month that inflation rolls from one month to the next. This is optional and defaults to 1, which is  the typically value for the majority of inflation bonds (exceptions include Japan which rolls on the 10th  and some LatAm bonds which roll on the 15th).")
-    notional: Union[StrictFloat, StrictInt] = Field(..., description="The notional")
-    observation_lag: constr(strict=True, min_length=1) = Field(..., alias="observationLag", description="Observation Lag, must be a number of Months, typically 3 or 4 but sometimes 8.")
-    pay_receive: Optional[StrictStr] = Field(None, alias="payReceive", description="PayReceive flag for the inflation leg.  This field is optional and defaults to Pay.  If set to Pay, this swap pays inflation and receives fixed.    Supported string (enumeration) values are: [Pay, Receive].")
+    inflation_leg: InflationLeg = Field(..., alias="inflationLeg")
+    fixed_leg: FixedLeg = Field(..., alias="fixedLeg")
     instrument_type: StrictStr = Field(..., alias="instrumentType", description="The available values are: QuotedSecurity, InterestRateSwap, FxForward, Future, ExoticInstrument, FxOption, CreditDefaultSwap, InterestRateSwaption, Bond, EquityOption, FixedLeg, FloatingLeg, BespokeCashFlowsLeg, Unknown, TermDeposit, ContractForDifference, EquitySwap, CashPerpetual, CapFloor, CashSettled, CdsIndex, Basket, FundingLeg, FxSwap, ForwardRateAgreement, SimpleInstrument, Repo, Equity, ExchangeTradedOption, ReferenceInstrument, ComplexBond, InflationLinkedBond, InflationSwap, SimpleCashFlowLoan, TotalReturnSwap, InflationLeg")
     additional_properties: Dict[str, Any] = {}
-    __properties = ["instrumentType", "startDate", "maturityDate", "flowConventions", "fixedRate", "inflationCap", "inflationFloor", "inflationFrequency", "inflationIndexName", "inflationInterpolation", "inflationRollDay", "notional", "observationLag", "payReceive"]
+    __properties = ["instrumentType", "startDate", "maturityDate", "inflationLeg", "fixedLeg"]
 
     @validator('instrument_type')
     def instrument_type_validate_enum(cls, value):
@@ -76,38 +68,16 @@ class InflationSwap(LusidInstrument):
                             "additional_properties"
                           },
                           exclude_none=True)
-        # override the default output from pydantic by calling `to_dict()` of flow_conventions
-        if self.flow_conventions:
-            _dict['flowConventions'] = self.flow_conventions.to_dict()
+        # override the default output from pydantic by calling `to_dict()` of inflation_leg
+        if self.inflation_leg:
+            _dict['inflationLeg'] = self.inflation_leg.to_dict()
+        # override the default output from pydantic by calling `to_dict()` of fixed_leg
+        if self.fixed_leg:
+            _dict['fixedLeg'] = self.fixed_leg.to_dict()
         # puts key-value pairs in additional_properties in the top level
         if self.additional_properties is not None:
             for _key, _value in self.additional_properties.items():
                 _dict[_key] = _value
-
-        # set to None if inflation_cap (nullable) is None
-        # and __fields_set__ contains the field
-        if self.inflation_cap is None and "inflation_cap" in self.__fields_set__:
-            _dict['inflationCap'] = None
-
-        # set to None if inflation_floor (nullable) is None
-        # and __fields_set__ contains the field
-        if self.inflation_floor is None and "inflation_floor" in self.__fields_set__:
-            _dict['inflationFloor'] = None
-
-        # set to None if inflation_frequency (nullable) is None
-        # and __fields_set__ contains the field
-        if self.inflation_frequency is None and "inflation_frequency" in self.__fields_set__:
-            _dict['inflationFrequency'] = None
-
-        # set to None if inflation_interpolation (nullable) is None
-        # and __fields_set__ contains the field
-        if self.inflation_interpolation is None and "inflation_interpolation" in self.__fields_set__:
-            _dict['inflationInterpolation'] = None
-
-        # set to None if pay_receive (nullable) is None
-        # and __fields_set__ contains the field
-        if self.pay_receive is None and "pay_receive" in self.__fields_set__:
-            _dict['payReceive'] = None
 
         return _dict
 
@@ -124,17 +94,8 @@ class InflationSwap(LusidInstrument):
             "instrument_type": obj.get("instrumentType"),
             "start_date": obj.get("startDate"),
             "maturity_date": obj.get("maturityDate"),
-            "flow_conventions": FlowConventions.from_dict(obj.get("flowConventions")) if obj.get("flowConventions") is not None else None,
-            "fixed_rate": obj.get("fixedRate"),
-            "inflation_cap": obj.get("inflationCap"),
-            "inflation_floor": obj.get("inflationFloor"),
-            "inflation_frequency": obj.get("inflationFrequency"),
-            "inflation_index_name": obj.get("inflationIndexName"),
-            "inflation_interpolation": obj.get("inflationInterpolation"),
-            "inflation_roll_day": obj.get("inflationRollDay"),
-            "notional": obj.get("notional"),
-            "observation_lag": obj.get("observationLag"),
-            "pay_receive": obj.get("payReceive")
+            "inflation_leg": InflationLeg.from_dict(obj.get("inflationLeg")) if obj.get("inflationLeg") is not None else None,
+            "fixed_leg": FixedLeg.from_dict(obj.get("fixedLeg")) if obj.get("fixedLeg") is not None else None
         })
         # store additional fields in additional_properties
         for _key in obj.keys():
