@@ -40,6 +40,7 @@ from lusid.api.data_types_api import DataTypesApi
 from lusid.api.derived_transaction_portfolios_api import DerivedTransactionPortfoliosApi
 from lusid.api.entities_api import EntitiesApi
 from lusid.api.executions_api import ExecutionsApi
+from lusid.api.instrument_event_types_api import InstrumentEventTypesApi
 from lusid.api.instrument_events_api import InstrumentEventsApi
 from lusid.api.instruments_api import InstrumentsApi
 from lusid.api.legacy_compliance_api import LegacyComplianceApi
@@ -150,6 +151,7 @@ from lusid.models.block import Block
 from lusid.models.block_request import BlockRequest
 from lusid.models.block_set_request import BlockSetRequest
 from lusid.models.bond import Bond
+from lusid.models.bond_coupon_event import BondCouponEvent
 from lusid.models.bond_default_event import BondDefaultEvent
 from lusid.models.book_transactions_response import BookTransactionsResponse
 from lusid.models.bool_compliance_parameter import BoolComplianceParameter
@@ -313,6 +315,7 @@ from lusid.models.economic_dependency import EconomicDependency
 from lusid.models.economic_dependency_type import EconomicDependencyType
 from lusid.models.economic_dependency_with_complex_market_data import EconomicDependencyWithComplexMarketData
 from lusid.models.economic_dependency_with_quote import EconomicDependencyWithQuote
+from lusid.models.election_specification import ElectionSpecification
 from lusid.models.empty_model_options import EmptyModelOptions
 from lusid.models.entity_identifier import EntityIdentifier
 from lusid.models.equity import Equity
@@ -790,6 +793,7 @@ from lusid.models.target_tax_lot import TargetTaxLot
 from lusid.models.target_tax_lot_request import TargetTaxLotRequest
 from lusid.models.tax_rule import TaxRule
 from lusid.models.tax_rule_set import TaxRuleSet
+from lusid.models.template_field import TemplateField
 from lusid.models.term_deposit import TermDeposit
 from lusid.models.total_return_swap import TotalReturnSwap
 from lusid.models.touch import Touch
@@ -814,6 +818,7 @@ from lusid.models.transaction_roles import TransactionRoles
 from lusid.models.transaction_set_configuration_data import TransactionSetConfigurationData
 from lusid.models.transaction_set_configuration_data_request import TransactionSetConfigurationDataRequest
 from lusid.models.transaction_status import TransactionStatus
+from lusid.models.transaction_template_specification import TransactionTemplateSpecification
 from lusid.models.transaction_type import TransactionType
 from lusid.models.transaction_type_alias import TransactionTypeAlias
 from lusid.models.transaction_type_calculation import TransactionTypeCalculation

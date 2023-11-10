@@ -18,23 +18,19 @@ import re  # noqa: F401
 import json
 
 
-from typing import Any, Dict
-from pydantic import BaseModel, Field, constr, validator
+from typing import Any, Dict, List
+from pydantic import BaseModel, Field, StrictStr, conlist, constr
 
-class TransactionTypeCalculation(BaseModel):
+class TemplateField(BaseModel):
     """
-    TransactionTypeCalculation
+    TemplateField
     """
-    type: constr(strict=True, min_length=1) = Field(..., description="The type of calculation to perform")
-    side: constr(strict=True, max_length=64, min_length=1) = Field(..., description="The side to which the calculation is applied")
-    __properties = ["type", "side"]
-
-    @validator('side')
-    def side_validate_regular_expression(cls, value):
-        """Validates the regular expression"""
-        if not re.match(r"^[a-zA-Z0-9\-_]+$", value):
-            raise ValueError(r"must validate the regular expression /^[a-zA-Z0-9\-_]+$/")
-        return value
+    field_name: constr(strict=True, min_length=1) = Field(..., alias="fieldName")
+    specificity: constr(strict=True, min_length=1) = Field(...)
+    description: constr(strict=True, min_length=1) = Field(...)
+    type: constr(strict=True, min_length=1) = Field(...)
+    usage: conlist(StrictStr) = Field(...)
+    __properties = ["fieldName", "specificity", "description", "type", "usage"]
 
     class Config:
         """Pydantic configuration"""
@@ -50,8 +46,8 @@ class TransactionTypeCalculation(BaseModel):
         return json.dumps(self.to_dict())
 
     @classmethod
-    def from_json(cls, json_str: str) -> TransactionTypeCalculation:
-        """Create an instance of TransactionTypeCalculation from a JSON string"""
+    def from_json(cls, json_str: str) -> TemplateField:
+        """Create an instance of TemplateField from a JSON string"""
         return cls.from_dict(json.loads(json_str))
 
     def to_dict(self):
@@ -63,16 +59,19 @@ class TransactionTypeCalculation(BaseModel):
         return _dict
 
     @classmethod
-    def from_dict(cls, obj: dict) -> TransactionTypeCalculation:
-        """Create an instance of TransactionTypeCalculation from a dict"""
+    def from_dict(cls, obj: dict) -> TemplateField:
+        """Create an instance of TemplateField from a dict"""
         if obj is None:
             return None
 
         if not isinstance(obj, dict):
-            return TransactionTypeCalculation.parse_obj(obj)
+            return TemplateField.parse_obj(obj)
 
-        _obj = TransactionTypeCalculation.parse_obj({
+        _obj = TemplateField.parse_obj({
+            "field_name": obj.get("fieldName"),
+            "specificity": obj.get("specificity"),
+            "description": obj.get("description"),
             "type": obj.get("type"),
-            "side": obj.get("side")
+            "usage": obj.get("usage")
         })
         return _obj

@@ -43,6 +43,7 @@ class InstrumentEventType(str, Enum):
     TRIGGEREVENT = 'TriggerEvent'
     RAWVENDOREVENT = 'RawVendorEvent'
     INFORMATIONALERROREVENT = 'InformationalErrorEvent'
+    BONDCOUPONEVENT = 'BondCouponEvent'
 
     @classmethod
     def from_json(cls, json_str: str) -> InstrumentEventType:

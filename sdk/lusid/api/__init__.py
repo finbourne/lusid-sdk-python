@@ -24,6 +24,7 @@ from lusid.api.data_types_api import DataTypesApi
 from lusid.api.derived_transaction_portfolios_api import DerivedTransactionPortfoliosApi
 from lusid.api.entities_api import EntitiesApi
 from lusid.api.executions_api import ExecutionsApi
+from lusid.api.instrument_event_types_api import InstrumentEventTypesApi
 from lusid.api.instrument_events_api import InstrumentEventsApi
 from lusid.api.instruments_api import InstrumentsApi
 from lusid.api.legacy_compliance_api import LegacyComplianceApi

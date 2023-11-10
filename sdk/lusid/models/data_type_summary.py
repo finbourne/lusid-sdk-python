@@ -22,6 +22,7 @@ from typing import Any, Dict, List, Optional
 from pydantic import BaseModel, Field, StrictStr, conlist, constr, validator
 from lusid.models.i_unit_definition_dto import IUnitDefinitionDto
 from lusid.models.resource_id import ResourceId
+from lusid.models.version import Version
 
 class DataTypeSummary(BaseModel):
     """
@@ -35,7 +36,8 @@ class DataTypeSummary(BaseModel):
     acceptable_values: Optional[conlist(StrictStr)] = Field(None, alias="acceptableValues", description="The acceptable set of values for this data type. Only applies to 'open' value type range.")
     unit_schema: Optional[StrictStr] = Field(None, alias="unitSchema", description="The schema of the data type's units. The available values are: NoUnits, Basic, Iso4217Currency")
     acceptable_units: Optional[conlist(IUnitDefinitionDto)] = Field(None, alias="acceptableUnits", description="The definitions of the acceptable units.")
-    __properties = ["typeValueRange", "id", "displayName", "description", "valueType", "acceptableValues", "unitSchema", "acceptableUnits"]
+    version: Optional[Version] = None
+    __properties = ["typeValueRange", "id", "displayName", "description", "valueType", "acceptableValues", "unitSchema", "acceptableUnits", "version"]
 
     @validator('type_value_range')
     def type_value_range_validate_enum(cls, value):
@@ -95,6 +97,9 @@ class DataTypeSummary(BaseModel):
                 if _item:
                     _items.append(_item.to_dict())
             _dict['acceptableUnits'] = _items
+        # override the default output from pydantic by calling `to_dict()` of version
+        if self.version:
+            _dict['version'] = self.version.to_dict()
         # set to None if acceptable_values (nullable) is None
         # and __fields_set__ contains the field
         if self.acceptable_values is None and "acceptable_values" in self.__fields_set__:
@@ -124,6 +129,7 @@ class DataTypeSummary(BaseModel):
             "value_type": obj.get("valueType"),
             "acceptable_values": obj.get("acceptableValues"),
             "unit_schema": obj.get("unitSchema"),
-            "acceptable_units": [IUnitDefinitionDto.from_dict(_item) for _item in obj.get("acceptableUnits")] if obj.get("acceptableUnits") is not None else None
+            "acceptable_units": [IUnitDefinitionDto.from_dict(_item) for _item in obj.get("acceptableUnits")] if obj.get("acceptableUnits") is not None else None,
+            "version": Version.from_dict(obj.get("version")) if obj.get("version") is not None else None
         })
         return _obj

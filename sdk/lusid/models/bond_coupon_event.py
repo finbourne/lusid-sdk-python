@@ -22,16 +22,17 @@ from typing import Any, Dict, Union
 from pydantic import Field, StrictFloat, StrictInt, StrictStr, validator
 from lusid.models.instrument_event import InstrumentEvent
 
-class StockSplitEvent(InstrumentEvent):
+class BondCouponEvent(InstrumentEvent):
     """
-    A split in the company's shares. Shareholders are given additional company shares based on the terms of the stock split.  # noqa: E501
+    Definition of a Bond Coupon Event  This is an event that describes the occurence of a cashflow due to a fixed rate bond coupon payment.  # noqa: E501
     """
-    equity_split_ratio: Union[StrictFloat, StrictInt] = Field(..., alias="equitySplitRatio", description="This number describes the rate at which the company will be dividing their current shares outstanding. It is displayed as new shares per old.")
-    payment_date: datetime = Field(..., alias="paymentDate", description="Date on which the stock-split takes effect.")
-    record_date: datetime = Field(..., alias="recordDate", description="Date you have to be the holder of record in order to participate in the tender.")
+    ex_date: datetime = Field(..., alias="exDate", description="Ex-Dividend date of the coupon payment")
+    payment_date: datetime = Field(..., alias="paymentDate", description="Payment date of the coupon payment")
+    currency: StrictStr = Field(..., description="Currency of the coupon payment")
+    coupon_per_unit: Union[StrictFloat, StrictInt] = Field(..., alias="couponPerUnit", description="CouponRate*Principal")
     instrument_event_type: StrictStr = Field(..., alias="instrumentEventType", description="The Type of Event. The available values are: TransitionEvent, InformationalEvent, OpenEvent, CloseEvent, StockSplitEvent, BondDefaultEvent, CashDividendEvent, AmortisationEvent, CashFlowEvent, ExerciseEvent, ResetEvent, TriggerEvent, RawVendorEvent, InformationalErrorEvent, BondCouponEvent")
     additional_properties: Dict[str, Any] = {}
-    __properties = ["instrumentEventType", "equitySplitRatio", "paymentDate", "recordDate"]
+    __properties = ["instrumentEventType", "exDate", "paymentDate", "currency", "couponPerUnit"]
 
     @validator('instrument_event_type')
     def instrument_event_type_validate_enum(cls, value):
@@ -54,8 +55,8 @@ class StockSplitEvent(InstrumentEvent):
         return json.dumps(self.to_dict())
 
     @classmethod
-    def from_json(cls, json_str: str) -> StockSplitEvent:
-        """Create an instance of StockSplitEvent from a JSON string"""
+    def from_json(cls, json_str: str) -> BondCouponEvent:
+        """Create an instance of BondCouponEvent from a JSON string"""
         return cls.from_dict(json.loads(json_str))
 
     def to_dict(self):
@@ -73,19 +74,20 @@ class StockSplitEvent(InstrumentEvent):
         return _dict
 
     @classmethod
-    def from_dict(cls, obj: dict) -> StockSplitEvent:
-        """Create an instance of StockSplitEvent from a dict"""
+    def from_dict(cls, obj: dict) -> BondCouponEvent:
+        """Create an instance of BondCouponEvent from a dict"""
         if obj is None:
             return None
 
         if not isinstance(obj, dict):
-            return StockSplitEvent.parse_obj(obj)
+            return BondCouponEvent.parse_obj(obj)
 
-        _obj = StockSplitEvent.parse_obj({
+        _obj = BondCouponEvent.parse_obj({
             "instrument_event_type": obj.get("instrumentEventType"),
-            "equity_split_ratio": obj.get("equitySplitRatio"),
+            "ex_date": obj.get("exDate"),
             "payment_date": obj.get("paymentDate"),
-            "record_date": obj.get("recordDate")
+            "currency": obj.get("currency"),
+            "coupon_per_unit": obj.get("couponPerUnit")
         })
         # store additional fields in additional_properties
         for _key in obj.keys():

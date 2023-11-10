@@ -14,6 +14,7 @@ Name | Type | Description | Notes
 **unit_schema** | **str** | The available values are: NoUnits, Basic, Iso4217Currency | [optional] 
 **acceptable_units** | [**List[IUnitDefinitionDto]**](IUnitDefinitionDto.md) |  | [optional] 
 **reference_data** | [**ReferenceData**](ReferenceData.md) |  | [optional] 
+**version** | [**Version**](Version.md) |  | [optional] 
 **links** | [**List[Link]**](Link.md) |  | [optional] 
 
 ## Example

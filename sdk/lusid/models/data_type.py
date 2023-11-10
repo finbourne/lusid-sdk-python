@@ -24,6 +24,7 @@ from lusid.models.i_unit_definition_dto import IUnitDefinitionDto
 from lusid.models.link import Link
 from lusid.models.reference_data import ReferenceData
 from lusid.models.resource_id import ResourceId
+from lusid.models.version import Version
 
 class DataType(BaseModel):
     """
@@ -39,8 +40,9 @@ class DataType(BaseModel):
     unit_schema: Optional[StrictStr] = Field(None, alias="unitSchema", description="The available values are: NoUnits, Basic, Iso4217Currency")
     acceptable_units: Optional[conlist(IUnitDefinitionDto)] = Field(None, alias="acceptableUnits")
     reference_data: Optional[ReferenceData] = Field(None, alias="referenceData")
+    version: Optional[Version] = None
     links: Optional[conlist(Link)] = None
-    __properties = ["href", "typeValueRange", "id", "displayName", "description", "valueType", "acceptableValues", "unitSchema", "acceptableUnits", "referenceData", "links"]
+    __properties = ["href", "typeValueRange", "id", "displayName", "description", "valueType", "acceptableValues", "unitSchema", "acceptableUnits", "referenceData", "version", "links"]
 
     @validator('type_value_range')
     def type_value_range_validate_enum(cls, value):
@@ -103,6 +105,9 @@ class DataType(BaseModel):
         # override the default output from pydantic by calling `to_dict()` of reference_data
         if self.reference_data:
             _dict['referenceData'] = self.reference_data.to_dict()
+        # override the default output from pydantic by calling `to_dict()` of version
+        if self.version:
+            _dict['version'] = self.version.to_dict()
         # override the default output from pydantic by calling `to_dict()` of each item in links (list)
         _items = []
         if self.links:
@@ -152,6 +157,7 @@ class DataType(BaseModel):
             "unit_schema": obj.get("unitSchema"),
             "acceptable_units": [IUnitDefinitionDto.from_dict(_item) for _item in obj.get("acceptableUnits")] if obj.get("acceptableUnits") is not None else None,
             "reference_data": ReferenceData.from_dict(obj.get("referenceData")) if obj.get("referenceData") is not None else None,
+            "version": Version.from_dict(obj.get("version")) if obj.get("version") is not None else None,
             "links": [Link.from_dict(_item) for _item in obj.get("links")] if obj.get("links") is not None else None
         })
         return _obj
