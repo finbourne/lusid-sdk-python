@@ -32,6 +32,7 @@ class TransactionPriceType(str, Enum):
     PRICE = 'Price'
     YIELD = 'Yield'
     SPREAD = 'Spread'
+    CASHFLOWPERUNIT = 'CashFlowPerUnit'
 
     @classmethod
     def from_json(cls, json_str: str) -> TransactionPriceType:

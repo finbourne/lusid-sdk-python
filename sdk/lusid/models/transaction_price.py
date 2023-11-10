@@ -26,7 +26,7 @@ class TransactionPrice(BaseModel):
     TransactionPrice
     """
     price: Optional[Union[StrictFloat, StrictInt]] = None
-    type: Optional[StrictStr] = Field(None, description="The available values are: Price, Yield, Spread")
+    type: Optional[StrictStr] = Field(None, description="The available values are: Price, Yield, Spread, CashFlowPerUnit")
     __properties = ["price", "type"]
 
     @validator('type')
@@ -35,8 +35,8 @@ class TransactionPrice(BaseModel):
         if value is None:
             return value
 
-        if value not in ('Price', 'Yield', 'Spread'):
-            raise ValueError("must be one of enum values ('Price', 'Yield', 'Spread')")
+        if value not in ('Price', 'Yield', 'Spread', 'CashFlowPerUnit'):
+            raise ValueError("must be one of enum values ('Price', 'Yield', 'Spread', 'CashFlowPerUnit')")
         return value
 
     class Config:
