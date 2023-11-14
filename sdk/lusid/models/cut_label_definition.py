@@ -22,6 +22,7 @@ from typing import Any, Dict, List, Optional
 from pydantic import BaseModel, Field, StrictStr, conlist
 from lusid.models.cut_local_time import CutLocalTime
 from lusid.models.link import Link
+from lusid.models.version import Version
 
 class CutLabelDefinition(BaseModel):
     """
@@ -33,8 +34,9 @@ class CutLabelDefinition(BaseModel):
     cut_local_time: Optional[CutLocalTime] = Field(None, alias="cutLocalTime")
     time_zone: Optional[StrictStr] = Field(None, alias="timeZone")
     href: Optional[StrictStr] = None
+    version: Optional[Version] = None
     links: Optional[conlist(Link)] = None
-    __properties = ["code", "displayName", "description", "cutLocalTime", "timeZone", "href", "links"]
+    __properties = ["code", "displayName", "description", "cutLocalTime", "timeZone", "href", "version", "links"]
 
     class Config:
         """Pydantic configuration"""
@@ -63,6 +65,9 @@ class CutLabelDefinition(BaseModel):
         # override the default output from pydantic by calling `to_dict()` of cut_local_time
         if self.cut_local_time:
             _dict['cutLocalTime'] = self.cut_local_time.to_dict()
+        # override the default output from pydantic by calling `to_dict()` of version
+        if self.version:
+            _dict['version'] = self.version.to_dict()
         # override the default output from pydantic by calling `to_dict()` of each item in links (list)
         _items = []
         if self.links:
@@ -118,6 +123,7 @@ class CutLabelDefinition(BaseModel):
             "cut_local_time": CutLocalTime.from_dict(obj.get("cutLocalTime")) if obj.get("cutLocalTime") is not None else None,
             "time_zone": obj.get("timeZone"),
             "href": obj.get("href"),
+            "version": Version.from_dict(obj.get("version")) if obj.get("version") is not None else None,
             "links": [Link.from_dict(_item) for _item in obj.get("links")] if obj.get("links") is not None else None
         })
         return _obj

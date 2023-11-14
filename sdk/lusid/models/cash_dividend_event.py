@@ -18,20 +18,23 @@ import re  # noqa: F401
 import json
 
 from datetime import datetime
-from typing import Any, Dict, Union
-from pydantic import Field, StrictFloat, StrictInt, StrictStr, validator
+from typing import Any, Dict, List, Optional
+from pydantic import Field, StrictStr, conlist, validator
+from lusid.models.cash_election import CashElection
 from lusid.models.instrument_event import InstrumentEvent
 
 class CashDividendEvent(InstrumentEvent):
     """
     A cash distribution paid out to shareholders.  # noqa: E501
     """
-    gross_amount: Union[StrictFloat, StrictInt] = Field(..., alias="grossAmount", description="The before tax amount for each share held being paid out to shareholders.")
-    payment_date: datetime = Field(..., alias="paymentDate", description="The date the company pays out dividends to shareholders.")
-    record_date: datetime = Field(..., alias="recordDate", description="Date you have to be the holder of record in order to participate in the tender.")
+    payment_date: datetime = Field(..., alias="paymentDate", description="The date the company begins distributing the dividend.")
+    ex_date: datetime = Field(..., alias="exDate", description="The first business day on which the dividend is not owed to the buying party.")
+    cash_elections: conlist(CashElection) = Field(..., alias="cashElections", description="Possible elections for this event, each keyed with a unique identifier.")
+    announcement_date: Optional[datetime] = Field(None, alias="announcementDate", description="Date on which the dividend is announced by the company.")
+    record_date: Optional[datetime] = Field(None, alias="recordDate", description="Date you have to be the holder of record in order to participate in the tender.")
     instrument_event_type: StrictStr = Field(..., alias="instrumentEventType", description="The Type of Event. The available values are: TransitionEvent, InformationalEvent, OpenEvent, CloseEvent, StockSplitEvent, BondDefaultEvent, CashDividendEvent, AmortisationEvent, CashFlowEvent, ExerciseEvent, ResetEvent, TriggerEvent, RawVendorEvent, InformationalErrorEvent, BondCouponEvent")
     additional_properties: Dict[str, Any] = {}
-    __properties = ["instrumentEventType", "grossAmount", "paymentDate", "recordDate"]
+    __properties = ["instrumentEventType", "paymentDate", "exDate", "cashElections", "announcementDate", "recordDate"]
 
     @validator('instrument_event_type')
     def instrument_event_type_validate_enum(cls, value):
@@ -65,10 +68,27 @@ class CashDividendEvent(InstrumentEvent):
                             "additional_properties"
                           },
                           exclude_none=True)
+        # override the default output from pydantic by calling `to_dict()` of each item in cash_elections (list)
+        _items = []
+        if self.cash_elections:
+            for _item in self.cash_elections:
+                if _item:
+                    _items.append(_item.to_dict())
+            _dict['cashElections'] = _items
         # puts key-value pairs in additional_properties in the top level
         if self.additional_properties is not None:
             for _key, _value in self.additional_properties.items():
                 _dict[_key] = _value
+
+        # set to None if announcement_date (nullable) is None
+        # and __fields_set__ contains the field
+        if self.announcement_date is None and "announcement_date" in self.__fields_set__:
+            _dict['announcementDate'] = None
+
+        # set to None if record_date (nullable) is None
+        # and __fields_set__ contains the field
+        if self.record_date is None and "record_date" in self.__fields_set__:
+            _dict['recordDate'] = None
 
         return _dict
 
@@ -83,8 +103,10 @@ class CashDividendEvent(InstrumentEvent):
 
         _obj = CashDividendEvent.parse_obj({
             "instrument_event_type": obj.get("instrumentEventType"),
-            "gross_amount": obj.get("grossAmount"),
             "payment_date": obj.get("paymentDate"),
+            "ex_date": obj.get("exDate"),
+            "cash_elections": [CashElection.from_dict(_item) for _item in obj.get("cashElections")] if obj.get("cashElections") is not None else None,
+            "announcement_date": obj.get("announcementDate"),
             "record_date": obj.get("recordDate")
         })
         # store additional fields in additional_properties

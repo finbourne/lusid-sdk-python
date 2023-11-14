@@ -22,6 +22,7 @@ Name | Type | Description | Notes
 **property_description** | **str** | A brief description of what a property of this property definition contains. | [optional] 
 **derivation_formula** | **str** | The rule that defines how data is composed for a derived property. | [optional] 
 **properties** | [**Dict[str, ModelProperty]**](ModelProperty.md) | Set of unique property definition properties and associated values to store with the property definition. Each property must be from the &#39;PropertyDefinition&#39; domain. | [optional] 
+**version** | [**Version**](Version.md) |  | [optional] 
 **links** | [**List[Link]**](Link.md) |  | [optional] 
 
 ## Example

@@ -94,6 +94,7 @@ from lusid.models.calendar_dependency import CalendarDependency
 from lusid.models.cap_floor import CapFloor
 from lusid.models.cash_dependency import CashDependency
 from lusid.models.cash_dividend_event import CashDividendEvent
+from lusid.models.cash_election import CashElection
 from lusid.models.cash_flow_event import CashFlowEvent
 from lusid.models.cash_flow_lineage import CashFlowLineage
 from lusid.models.cash_flow_value import CashFlowValue

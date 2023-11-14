@@ -23,6 +23,7 @@ from pydantic import BaseModel, Field, StrictBool, StrictStr, conlist, validator
 from lusid.models.link import Link
 from lusid.models.model_property import ModelProperty
 from lusid.models.resource_id import ResourceId
+from lusid.models.version import Version
 
 class PropertyDefinition(BaseModel):
     """
@@ -45,8 +46,9 @@ class PropertyDefinition(BaseModel):
     property_description: Optional[StrictStr] = Field(None, alias="propertyDescription", description="A brief description of what a property of this property definition contains.")
     derivation_formula: Optional[StrictStr] = Field(None, alias="derivationFormula", description="The rule that defines how data is composed for a derived property.")
     properties: Optional[Dict[str, ModelProperty]] = Field(None, description="Set of unique property definition properties and associated values to store with the property definition. Each property must be from the 'PropertyDefinition' domain.")
+    version: Optional[Version] = None
     links: Optional[conlist(Link)] = None
-    __properties = ["href", "key", "valueType", "displayName", "dataTypeId", "type", "unitSchema", "domain", "scope", "code", "valueRequired", "lifeTime", "constraintStyle", "propertyDefinitionType", "propertyDescription", "derivationFormula", "properties", "links"]
+    __properties = ["href", "key", "valueType", "displayName", "dataTypeId", "type", "unitSchema", "domain", "scope", "code", "valueRequired", "lifeTime", "constraintStyle", "propertyDefinitionType", "propertyDescription", "derivationFormula", "properties", "version", "links"]
 
     @validator('value_type')
     def value_type_validate_enum(cls, value):
@@ -144,6 +146,9 @@ class PropertyDefinition(BaseModel):
                 if self.properties[_key]:
                     _field_dict[_key] = self.properties[_key].to_dict()
             _dict['properties'] = _field_dict
+        # override the default output from pydantic by calling `to_dict()` of version
+        if self.version:
+            _dict['version'] = self.version.to_dict()
         # override the default output from pydantic by calling `to_dict()` of each item in links (list)
         _items = []
         if self.links:
@@ -235,6 +240,7 @@ class PropertyDefinition(BaseModel):
             )
             if obj.get("properties") is not None
             else None,
+            "version": Version.from_dict(obj.get("version")) if obj.get("version") is not None else None,
             "links": [Link.from_dict(_item) for _item in obj.get("links")] if obj.get("links") is not None else None
         })
         return _obj

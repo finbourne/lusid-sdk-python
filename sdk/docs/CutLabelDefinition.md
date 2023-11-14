@@ -10,6 +10,7 @@ Name | Type | Description | Notes
 **cut_local_time** | [**CutLocalTime**](CutLocalTime.md) |  | [optional] 
 **time_zone** | **str** |  | [optional] 
 **href** | **str** |  | [optional] 
+**version** | [**Version**](Version.md) |  | [optional] 
 **links** | [**List[Link]**](Link.md) |  | [optional] 
 
 ## Example
