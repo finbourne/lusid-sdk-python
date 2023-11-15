@@ -5,7 +5,7 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **election_type** | **str** |  | 
-**cardinality** | **List[str]** |  | 
+**cardinality** | **Dict[str, str]** |  | 
 **referenced_as** | **List[str]** |  | 
 
 ## Example

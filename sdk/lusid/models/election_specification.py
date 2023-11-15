@@ -26,7 +26,7 @@ class ElectionSpecification(BaseModel):
     ElectionSpecification
     """
     election_type: constr(strict=True, min_length=1) = Field(..., alias="electionType")
-    cardinality: conlist(StrictStr) = Field(...)
+    cardinality: Dict[str, StrictStr] = Field(...)
     referenced_as: conlist(StrictStr) = Field(..., alias="referencedAs")
     __properties = ["electionType", "cardinality", "referencedAs"]
 
