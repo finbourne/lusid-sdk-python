@@ -21,15 +21,13 @@ import json
 from typing import Any, Dict, Optional
 from pydantic import BaseModel, Field
 from lusid.models.configuration_recipe import ConfigurationRecipe
-from lusid.models.configuration_recipe_snippet import ConfigurationRecipeSnippet
 
 class UpsertRecipeRequest(BaseModel):
     """
     A recipe or recipe snippet that is to be stored in the recipe structured data store.  Only one of these must be present.  # noqa: E501
     """
     configuration_recipe: Optional[ConfigurationRecipe] = Field(None, alias="configurationRecipe")
-    configuration_recipe_snippet: Optional[ConfigurationRecipeSnippet] = Field(None, alias="configurationRecipeSnippet")
-    __properties = ["configurationRecipe", "configurationRecipeSnippet"]
+    __properties = ["configurationRecipe"]
 
     class Config:
         """Pydantic configuration"""
@@ -58,9 +56,6 @@ class UpsertRecipeRequest(BaseModel):
         # override the default output from pydantic by calling `to_dict()` of configuration_recipe
         if self.configuration_recipe:
             _dict['configurationRecipe'] = self.configuration_recipe.to_dict()
-        # override the default output from pydantic by calling `to_dict()` of configuration_recipe_snippet
-        if self.configuration_recipe_snippet:
-            _dict['configurationRecipeSnippet'] = self.configuration_recipe_snippet.to_dict()
         return _dict
 
     @classmethod
@@ -73,7 +68,6 @@ class UpsertRecipeRequest(BaseModel):
             return UpsertRecipeRequest.parse_obj(obj)
 
         _obj = UpsertRecipeRequest.parse_obj({
-            "configuration_recipe": ConfigurationRecipe.from_dict(obj.get("configurationRecipe")) if obj.get("configurationRecipe") is not None else None,
-            "configuration_recipe_snippet": ConfigurationRecipeSnippet.from_dict(obj.get("configurationRecipeSnippet")) if obj.get("configurationRecipeSnippet") is not None else None
+            "configuration_recipe": ConfigurationRecipe.from_dict(obj.get("configurationRecipe")) if obj.get("configurationRecipe") is not None else None
         })
         return _obj

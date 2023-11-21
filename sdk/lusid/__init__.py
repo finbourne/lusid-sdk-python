@@ -140,6 +140,7 @@ from lusid.models.annul_quotes_response import AnnulQuotesResponse
 from lusid.models.annul_single_structured_data_response import AnnulSingleStructuredDataResponse
 from lusid.models.annul_structured_data_response import AnnulStructuredDataResponse
 from lusid.models.asset_class import AssetClass
+from lusid.models.asset_leg import AssetLeg
 from lusid.models.barrier import Barrier
 from lusid.models.basket import Basket
 from lusid.models.basket_identifier import BasketIdentifier
@@ -218,7 +219,6 @@ from lusid.models.composite_dispersion import CompositeDispersion
 from lusid.models.composite_dispersion_response import CompositeDispersionResponse
 from lusid.models.compounding import Compounding
 from lusid.models.configuration_recipe import ConfigurationRecipe
-from lusid.models.configuration_recipe_snippet import ConfigurationRecipeSnippet
 from lusid.models.constituents_adjustment_header import ConstituentsAdjustmentHeader
 from lusid.models.contract_for_difference import ContractForDifference
 from lusid.models.corporate_action import CorporateAction
@@ -346,6 +346,7 @@ from lusid.models.field_definition import FieldDefinition
 from lusid.models.field_schema import FieldSchema
 from lusid.models.field_value import FieldValue
 from lusid.models.file_response import FileResponse
+from lusid.models.filter_predicate_compliance_parameter import FilterPredicateComplianceParameter
 from lusid.models.fixed_leg import FixedLeg
 from lusid.models.fixed_leg_all_of_overrides import FixedLegAllOfOverrides
 from lusid.models.fixed_schedule import FixedSchedule
@@ -843,7 +844,6 @@ from lusid.models.trial_balance import TrialBalance
 from lusid.models.trial_balance_query_parameters import TrialBalanceQueryParameters
 from lusid.models.trigger_event import TriggerEvent
 from lusid.models.typed_resource_id import TypedResourceId
-from lusid.models.underlying_leg import UnderlyingLeg
 from lusid.models.unit_schema import UnitSchema
 from lusid.models.unmatched_holding_method import UnmatchedHoldingMethod
 from lusid.models.update_calendar_request import UpdateCalendarRequest

@@ -22,13 +22,13 @@ from typing import Any, Dict
 from pydantic import BaseModel, Field, constr
 from lusid.models.lusid_instrument import LusidInstrument
 
-class UnderlyingLeg(BaseModel):
+class AssetLeg(BaseModel):
     """
     The underlying instrument representing one side of the TRS and its pay-receive direction.  # noqa: E501
     """
-    pay_receive: constr(strict=True, min_length=1) = Field(..., alias="payReceive", description="Either Pay or Receive stating direction of the underlying in the swap.    Supported string (enumeration) values are: [Pay, Receive].")
-    underlying: LusidInstrument = Field(...)
-    __properties = ["payReceive", "underlying"]
+    asset: LusidInstrument = Field(...)
+    pay_receive: constr(strict=True, min_length=1) = Field(..., alias="payReceive", description="Either Pay or Receive stating direction of the asset in the swap.    Supported string (enumeration) values are: [Pay, Receive].")
+    __properties = ["asset", "payReceive"]
 
     class Config:
         """Pydantic configuration"""
@@ -44,8 +44,8 @@ class UnderlyingLeg(BaseModel):
         return json.dumps(self.to_dict())
 
     @classmethod
-    def from_json(cls, json_str: str) -> UnderlyingLeg:
-        """Create an instance of UnderlyingLeg from a JSON string"""
+    def from_json(cls, json_str: str) -> AssetLeg:
+        """Create an instance of AssetLeg from a JSON string"""
         return cls.from_dict(json.loads(json_str))
 
     def to_dict(self):
@@ -54,22 +54,22 @@ class UnderlyingLeg(BaseModel):
                           exclude={
                           },
                           exclude_none=True)
-        # override the default output from pydantic by calling `to_dict()` of underlying
-        if self.underlying:
-            _dict['underlying'] = self.underlying.to_dict()
+        # override the default output from pydantic by calling `to_dict()` of asset
+        if self.asset:
+            _dict['asset'] = self.asset.to_dict()
         return _dict
 
     @classmethod
-    def from_dict(cls, obj: dict) -> UnderlyingLeg:
-        """Create an instance of UnderlyingLeg from a dict"""
+    def from_dict(cls, obj: dict) -> AssetLeg:
+        """Create an instance of AssetLeg from a dict"""
         if obj is None:
             return None
 
         if not isinstance(obj, dict):
-            return UnderlyingLeg.parse_obj(obj)
+            return AssetLeg.parse_obj(obj)
 
-        _obj = UnderlyingLeg.parse_obj({
-            "pay_receive": obj.get("payReceive"),
-            "underlying": LusidInstrument.from_dict(obj.get("underlying")) if obj.get("underlying") is not None else None
+        _obj = AssetLeg.parse_obj({
+            "asset": LusidInstrument.from_dict(obj.get("asset")) if obj.get("asset") is not None else None,
+            "pay_receive": obj.get("payReceive")
         })
         return _obj

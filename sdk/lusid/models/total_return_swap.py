@@ -20,9 +20,9 @@ import json
 from datetime import datetime
 from typing import Any, Dict
 from pydantic import Field, StrictStr, validator
+from lusid.models.asset_leg import AssetLeg
 from lusid.models.instrument_leg import InstrumentLeg
 from lusid.models.lusid_instrument import LusidInstrument
-from lusid.models.underlying_leg import UnderlyingLeg
 
 class TotalReturnSwap(LusidInstrument):
     """
@@ -30,11 +30,11 @@ class TotalReturnSwap(LusidInstrument):
     """
     start_date: datetime = Field(..., alias="startDate", description="The start date of the instrument. This is normally synonymous with the trade-date.")
     maturity_date: datetime = Field(..., alias="maturityDate", description="The final maturity date of the instrument. This means the last date on which the instruments makes a payment of any amount.  For the avoidance of doubt, that is not necessarily prior to its last sensitivity date for the purposes of risk; e.g. instruments such as  Constant Maturity Swaps (CMS) often have sensitivities to rates that may well be observed or set prior to the maturity date, but refer to a termination date beyond it.")
-    payment_leg: InstrumentLeg = Field(..., alias="paymentLeg")
-    underlying_leg: UnderlyingLeg = Field(..., alias="underlyingLeg")
+    asset_leg: AssetLeg = Field(..., alias="assetLeg")
+    funding_leg: InstrumentLeg = Field(..., alias="fundingLeg")
     instrument_type: StrictStr = Field(..., alias="instrumentType", description="The available values are: QuotedSecurity, InterestRateSwap, FxForward, Future, ExoticInstrument, FxOption, CreditDefaultSwap, InterestRateSwaption, Bond, EquityOption, FixedLeg, FloatingLeg, BespokeCashFlowsLeg, Unknown, TermDeposit, ContractForDifference, EquitySwap, CashPerpetual, CapFloor, CashSettled, CdsIndex, Basket, FundingLeg, FxSwap, ForwardRateAgreement, SimpleInstrument, Repo, Equity, ExchangeTradedOption, ReferenceInstrument, ComplexBond, InflationLinkedBond, InflationSwap, SimpleCashFlowLoan, TotalReturnSwap, InflationLeg")
     additional_properties: Dict[str, Any] = {}
-    __properties = ["instrumentType", "startDate", "maturityDate", "paymentLeg", "underlyingLeg"]
+    __properties = ["instrumentType", "startDate", "maturityDate", "assetLeg", "fundingLeg"]
 
     @validator('instrument_type')
     def instrument_type_validate_enum(cls, value):
@@ -68,12 +68,12 @@ class TotalReturnSwap(LusidInstrument):
                             "additional_properties"
                           },
                           exclude_none=True)
-        # override the default output from pydantic by calling `to_dict()` of payment_leg
-        if self.payment_leg:
-            _dict['paymentLeg'] = self.payment_leg.to_dict()
-        # override the default output from pydantic by calling `to_dict()` of underlying_leg
-        if self.underlying_leg:
-            _dict['underlyingLeg'] = self.underlying_leg.to_dict()
+        # override the default output from pydantic by calling `to_dict()` of asset_leg
+        if self.asset_leg:
+            _dict['assetLeg'] = self.asset_leg.to_dict()
+        # override the default output from pydantic by calling `to_dict()` of funding_leg
+        if self.funding_leg:
+            _dict['fundingLeg'] = self.funding_leg.to_dict()
         # puts key-value pairs in additional_properties in the top level
         if self.additional_properties is not None:
             for _key, _value in self.additional_properties.items():
@@ -94,8 +94,8 @@ class TotalReturnSwap(LusidInstrument):
             "instrument_type": obj.get("instrumentType"),
             "start_date": obj.get("startDate"),
             "maturity_date": obj.get("maturityDate"),
-            "payment_leg": InstrumentLeg.from_dict(obj.get("paymentLeg")) if obj.get("paymentLeg") is not None else None,
-            "underlying_leg": UnderlyingLeg.from_dict(obj.get("underlyingLeg")) if obj.get("underlyingLeg") is not None else None
+            "asset_leg": AssetLeg.from_dict(obj.get("assetLeg")) if obj.get("assetLeg") is not None else None,
+            "funding_leg": InstrumentLeg.from_dict(obj.get("fundingLeg")) if obj.get("fundingLeg") is not None else None
         })
         # store additional fields in additional_properties
         for _key in obj.keys():

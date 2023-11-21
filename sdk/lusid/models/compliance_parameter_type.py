@@ -46,6 +46,7 @@ class ComplianceParameterType(str, Enum):
     PORTFOLIOIDLISTCOMPLIANCEPARAMETER = 'PortfolioIdListComplianceParameter'
     PORTFOLIOGROUPIDLISTCOMPLIANCEPARAMETER = 'PortfolioGroupIdListComplianceParameter'
     INSTRUMENTLISTCOMPLIANCEPARAMETER = 'InstrumentListComplianceParameter'
+    FILTERPREDICATECOMPLIANCEPARAMETER = 'FilterPredicateComplianceParameter'
 
     @classmethod
     def from_json(cls, json_str: str) -> ComplianceParameterType:
