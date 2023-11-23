@@ -18,22 +18,25 @@ import re  # noqa: F401
 import json
 
 from datetime import datetime
-from typing import Any, Dict, Optional, Union
-from pydantic import Field, StrictFloat, StrictInt, StrictStr, constr, validator
+from typing import Any, Dict, List, Optional
+from pydantic import Field, StrictStr, conlist, validator
+from lusid.models.cash_election import CashElection
 from lusid.models.instrument_event import InstrumentEvent
+from lusid.models.security_election import SecurityElection
 
-class ResetEvent(InstrumentEvent):
+class DividendReinvestmentEvent(InstrumentEvent):
     """
-    Definition of a reset event.  This is an event that describes a reset or fixing for an instrument such as the floating payment on  a swap cash flow.  # noqa: E501
+    Event for dividend reinvestments.  Elections for cash or the associated security.  # noqa: E501
     """
-    value: Optional[Union[StrictFloat, StrictInt]] = Field(None, description="The quantity associated with the reset. This will only be populated if the information is known.")
-    reset_type: constr(strict=True, min_length=1) = Field(..., alias="resetType", description="The type of the reset; e.g. RIC, Currency-pair")
-    fixing_source: Optional[StrictStr] = Field(None, alias="fixingSource", description="Fixing identification source, if available.")
-    event_status: constr(strict=True, min_length=1) = Field(..., alias="eventStatus", description="What is the event status, is it a known (ie historic) or unknown (ie projected) event?")
-    fixing_date: datetime = Field(..., alias="fixingDate", description="The date the reset fixes, or is observed upon.")
+    announcement_date: Optional[datetime] = Field(None, alias="announcementDate", description="Date on which the dividend was announced / declared.")
+    cash_elections: conlist(CashElection) = Field(..., alias="cashElections", description="CashElection for this DividendReinvestmentEvent")
+    ex_date: datetime = Field(..., alias="exDate", description="The first business day on which the dividend is not owed to the buying party.  Typically this is T-1 from the RecordDate.")
+    payment_date: datetime = Field(..., alias="paymentDate", description="The date the company pays out dividends to shareholders.")
+    record_date: datetime = Field(..., alias="recordDate", description="Date you have to be the holder of record in order to participate in the tender.")
+    security_elections: conlist(SecurityElection) = Field(..., alias="securityElections", description="SecurityElection for this DividendReinvestmentEvent")
     instrument_event_type: StrictStr = Field(..., alias="instrumentEventType", description="The Type of Event. The available values are: TransitionEvent, InformationalEvent, OpenEvent, CloseEvent, StockSplitEvent, BondDefaultEvent, CashDividendEvent, AmortisationEvent, CashFlowEvent, ExerciseEvent, ResetEvent, TriggerEvent, RawVendorEvent, InformationalErrorEvent, BondCouponEvent, DividendReinvestmentEvent")
     additional_properties: Dict[str, Any] = {}
-    __properties = ["instrumentEventType", "value", "resetType", "fixingSource", "eventStatus", "fixingDate"]
+    __properties = ["instrumentEventType", "announcementDate", "cashElections", "exDate", "paymentDate", "recordDate", "securityElections"]
 
     @validator('instrument_event_type')
     def instrument_event_type_validate_enum(cls, value):
@@ -56,8 +59,8 @@ class ResetEvent(InstrumentEvent):
         return json.dumps(self.to_dict())
 
     @classmethod
-    def from_json(cls, json_str: str) -> ResetEvent:
-        """Create an instance of ResetEvent from a JSON string"""
+    def from_json(cls, json_str: str) -> DividendReinvestmentEvent:
+        """Create an instance of DividendReinvestmentEvent from a JSON string"""
         return cls.from_dict(json.loads(json_str))
 
     def to_dict(self):
@@ -67,39 +70,49 @@ class ResetEvent(InstrumentEvent):
                             "additional_properties"
                           },
                           exclude_none=True)
+        # override the default output from pydantic by calling `to_dict()` of each item in cash_elections (list)
+        _items = []
+        if self.cash_elections:
+            for _item in self.cash_elections:
+                if _item:
+                    _items.append(_item.to_dict())
+            _dict['cashElections'] = _items
+        # override the default output from pydantic by calling `to_dict()` of each item in security_elections (list)
+        _items = []
+        if self.security_elections:
+            for _item in self.security_elections:
+                if _item:
+                    _items.append(_item.to_dict())
+            _dict['securityElections'] = _items
         # puts key-value pairs in additional_properties in the top level
         if self.additional_properties is not None:
             for _key, _value in self.additional_properties.items():
                 _dict[_key] = _value
 
-        # set to None if value (nullable) is None
+        # set to None if announcement_date (nullable) is None
         # and __fields_set__ contains the field
-        if self.value is None and "value" in self.__fields_set__:
-            _dict['value'] = None
-
-        # set to None if fixing_source (nullable) is None
-        # and __fields_set__ contains the field
-        if self.fixing_source is None and "fixing_source" in self.__fields_set__:
-            _dict['fixingSource'] = None
+        if self.announcement_date is None and "announcement_date" in self.__fields_set__:
+            _dict['announcementDate'] = None
 
         return _dict
 
     @classmethod
-    def from_dict(cls, obj: dict) -> ResetEvent:
-        """Create an instance of ResetEvent from a dict"""
+    def from_dict(cls, obj: dict) -> DividendReinvestmentEvent:
+        """Create an instance of DividendReinvestmentEvent from a dict"""
         if obj is None:
             return None
 
         if not isinstance(obj, dict):
-            return ResetEvent.parse_obj(obj)
+            return DividendReinvestmentEvent.parse_obj(obj)
 
-        _obj = ResetEvent.parse_obj({
+        _obj = DividendReinvestmentEvent.parse_obj({
             "instrument_event_type": obj.get("instrumentEventType"),
-            "value": obj.get("value"),
-            "reset_type": obj.get("resetType"),
-            "fixing_source": obj.get("fixingSource"),
-            "event_status": obj.get("eventStatus"),
-            "fixing_date": obj.get("fixingDate")
+            "announcement_date": obj.get("announcementDate"),
+            "cash_elections": [CashElection.from_dict(_item) for _item in obj.get("cashElections")] if obj.get("cashElections") is not None else None,
+            "ex_date": obj.get("exDate"),
+            "payment_date": obj.get("paymentDate"),
+            "record_date": obj.get("recordDate"),
+            "security_elections": [SecurityElection.from_dict(_item) for _item in obj.get("securityElections")] if obj.get("securityElections") is not None else None
         })
         # store additional fields in additional_properties
         for _key in obj.keys():
