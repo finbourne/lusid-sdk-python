@@ -28,9 +28,10 @@ class OrderGraphBlockOrderDetail(BaseModel):
     """
     id: ResourceId = Field(...)
     compliance_state: constr(strict=True, min_length=1) = Field(..., alias="complianceState", description="The compliance state of this order. Possible values are 'Pending', 'Failed', 'Manually approved' and 'Passed'.")
+    approval_state: constr(strict=True, min_length=1) = Field(..., alias="approvalState", description="The approval state of this order. Possible values are 'Pending', 'Rejected' and 'Approved'.")
     portfolio_id: Optional[ResourceId] = Field(None, alias="portfolioId")
     portfolio_name: Optional[StrictStr] = Field(None, alias="portfolioName", description="The name of the order's referenced Portfolio.")
-    __properties = ["id", "complianceState", "portfolioId", "portfolioName"]
+    __properties = ["id", "complianceState", "approvalState", "portfolioId", "portfolioName"]
 
     class Config:
         """Pydantic configuration"""
@@ -81,6 +82,7 @@ class OrderGraphBlockOrderDetail(BaseModel):
         _obj = OrderGraphBlockOrderDetail.parse_obj({
             "id": ResourceId.from_dict(obj.get("id")) if obj.get("id") is not None else None,
             "compliance_state": obj.get("complianceState"),
+            "approval_state": obj.get("approvalState"),
             "portfolio_id": ResourceId.from_dict(obj.get("portfolioId")) if obj.get("portfolioId") is not None else None,
             "portfolio_name": obj.get("portfolioName")
         })

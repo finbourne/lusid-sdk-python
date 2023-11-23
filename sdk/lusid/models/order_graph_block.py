@@ -37,7 +37,8 @@ class OrderGraphBlock(BaseModel):
     allocated: OrderGraphBlockAllocationSynopsis = Field(...)
     derived_state: constr(strict=True, min_length=1) = Field(..., alias="derivedState", description="A simple description of the overall state of a block.")
     derived_compliance_state: constr(strict=True, min_length=1) = Field(..., alias="derivedComplianceState", description="The overall compliance state of a block, derived from the block's orders. Possible values are 'Pending', 'Failed', 'Manually approved' and 'Passed'.")
-    __properties = ["block", "ordered", "placed", "executed", "allocated", "derivedState", "derivedComplianceState"]
+    derived_approval_state: constr(strict=True, min_length=1) = Field(..., alias="derivedApprovalState", description="The overall approval state of a block, derived from approval of the block's orders. Possible values are 'Pending', 'Approved' and 'Rejected'.")
+    __properties = ["block", "ordered", "placed", "executed", "allocated", "derivedState", "derivedComplianceState", "derivedApprovalState"]
 
     class Config:
         """Pydantic configuration"""
@@ -96,6 +97,7 @@ class OrderGraphBlock(BaseModel):
             "executed": OrderGraphBlockExecutionSynopsis.from_dict(obj.get("executed")) if obj.get("executed") is not None else None,
             "allocated": OrderGraphBlockAllocationSynopsis.from_dict(obj.get("allocated")) if obj.get("allocated") is not None else None,
             "derived_state": obj.get("derivedState"),
-            "derived_compliance_state": obj.get("derivedComplianceState")
+            "derived_compliance_state": obj.get("derivedComplianceState"),
+            "derived_approval_state": obj.get("derivedApprovalState")
         })
         return _obj

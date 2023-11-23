@@ -19,7 +19,8 @@ import json
 
 from datetime import datetime
 from typing import Any, Dict, Optional, Union
-from pydantic import Field, StrictFloat, StrictInt, StrictStr, validator
+from pydantic import Field, StrictFloat, StrictInt, StrictStr, constr, validator
+from lusid.models.compounding import Compounding
 from lusid.models.ex_dividend_configuration import ExDividendConfiguration
 from lusid.models.flow_convention_name import FlowConventionName
 from lusid.models.flow_conventions import FlowConventions
@@ -42,9 +43,11 @@ class FloatSchedule(Schedule):
     spread: Optional[Union[StrictFloat, StrictInt]] = Field(None, description="Spread over floating rate given as a fraction.")
     stub_type: Optional[StrictStr] = Field(None, alias="stubType", description="StubType required of the schedule    Supported string (enumeration) values are: [ShortFront, ShortBack, LongBack, LongFront, Both].")
     ex_dividend_configuration: Optional[ExDividendConfiguration] = Field(None, alias="exDividendConfiguration")
+    compounding: Optional[Compounding] = None
+    reset_convention: Optional[constr(strict=True, max_length=16, min_length=0)] = Field(None, alias="resetConvention", description="Control how resets are generated relative to payment convention(s).    Supported string (enumeration) values are: [InAdvance, InArrears].")
     schedule_type: StrictStr = Field(..., alias="scheduleType", description="The available values are: FixedSchedule, FloatSchedule, OptionalitySchedule, StepSchedule, Exercise, FxRateSchedule, Invalid")
     additional_properties: Dict[str, Any] = {}
-    __properties = ["scheduleType", "startDate", "maturityDate", "flowConventions", "conventionName", "exDividendDays", "indexConventionName", "indexConventions", "notional", "paymentCurrency", "spread", "stubType", "exDividendConfiguration"]
+    __properties = ["scheduleType", "startDate", "maturityDate", "flowConventions", "conventionName", "exDividendDays", "indexConventionName", "indexConventions", "notional", "paymentCurrency", "spread", "stubType", "exDividendConfiguration", "compounding", "resetConvention"]
 
     @validator('schedule_type')
     def schedule_type_validate_enum(cls, value):
@@ -93,6 +96,9 @@ class FloatSchedule(Schedule):
         # override the default output from pydantic by calling `to_dict()` of ex_dividend_configuration
         if self.ex_dividend_configuration:
             _dict['exDividendConfiguration'] = self.ex_dividend_configuration.to_dict()
+        # override the default output from pydantic by calling `to_dict()` of compounding
+        if self.compounding:
+            _dict['compounding'] = self.compounding.to_dict()
         # puts key-value pairs in additional_properties in the top level
         if self.additional_properties is not None:
             for _key, _value in self.additional_properties.items():
@@ -112,6 +118,11 @@ class FloatSchedule(Schedule):
         # and __fields_set__ contains the field
         if self.stub_type is None and "stub_type" in self.__fields_set__:
             _dict['stubType'] = None
+
+        # set to None if reset_convention (nullable) is None
+        # and __fields_set__ contains the field
+        if self.reset_convention is None and "reset_convention" in self.__fields_set__:
+            _dict['resetConvention'] = None
 
         return _dict
 
@@ -137,7 +148,9 @@ class FloatSchedule(Schedule):
             "payment_currency": obj.get("paymentCurrency"),
             "spread": obj.get("spread"),
             "stub_type": obj.get("stubType"),
-            "ex_dividend_configuration": ExDividendConfiguration.from_dict(obj.get("exDividendConfiguration")) if obj.get("exDividendConfiguration") is not None else None
+            "ex_dividend_configuration": ExDividendConfiguration.from_dict(obj.get("exDividendConfiguration")) if obj.get("exDividendConfiguration") is not None else None,
+            "compounding": Compounding.from_dict(obj.get("compounding")) if obj.get("compounding") is not None else None,
+            "reset_convention": obj.get("resetConvention")
         })
         # store additional fields in additional_properties
         for _key in obj.keys():

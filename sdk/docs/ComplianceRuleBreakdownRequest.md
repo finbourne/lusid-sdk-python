@@ -7,7 +7,6 @@ Name | Type | Description | Notes
 **group_status** | **str** |  | 
 **results_used** | **Dict[str, float]** |  | 
 **properties_used** | **Dict[str, List[ModelProperty]]** |  | 
-**parameters_used** | **Dict[str, str]** |  | 
 **missing_data_information** | **List[str]** |  | 
 
 ## Example

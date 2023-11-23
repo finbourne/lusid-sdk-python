@@ -29,9 +29,8 @@ class ComplianceRuleBreakdownRequest(BaseModel):
     group_status: constr(strict=True, max_length=6000, min_length=0) = Field(..., alias="groupStatus")
     results_used: Dict[str, Union[StrictFloat, StrictInt]] = Field(..., alias="resultsUsed")
     properties_used: Dict[str, conlist(ModelProperty)] = Field(..., alias="propertiesUsed")
-    parameters_used: Dict[str, StrictStr] = Field(..., alias="parametersUsed")
     missing_data_information: conlist(StrictStr) = Field(..., alias="missingDataInformation")
-    __properties = ["groupStatus", "resultsUsed", "propertiesUsed", "parametersUsed", "missingDataInformation"]
+    __properties = ["groupStatus", "resultsUsed", "propertiesUsed", "missingDataInformation"]
 
     class Config:
         """Pydantic configuration"""
@@ -88,7 +87,6 @@ class ComplianceRuleBreakdownRequest(BaseModel):
                 )
                 for _k, _v in obj.get("propertiesUsed").items()
             ),
-            "parameters_used": obj.get("parametersUsed"),
             "missing_data_information": obj.get("missingDataInformation")
         })
         return _obj

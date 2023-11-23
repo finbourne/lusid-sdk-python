@@ -19,7 +19,7 @@ import json
 
 
 from typing import Any, Dict, List
-from pydantic import BaseModel, Field, conlist, constr
+from pydantic import BaseModel, Field, StrictStr, conlist, constr
 from lusid.models.compliance_rule_breakdown import ComplianceRuleBreakdown
 from lusid.models.resource_id import ResourceId
 
@@ -33,8 +33,9 @@ class ComplianceSummaryRuleResult(BaseModel):
     rule_status: constr(strict=True, min_length=1) = Field(..., alias="ruleStatus")
     affected_portfolios: conlist(ResourceId) = Field(..., alias="affectedPortfolios")
     affected_orders: conlist(ResourceId) = Field(..., alias="affectedOrders")
+    parameters_used: Dict[str, StrictStr] = Field(..., alias="parametersUsed")
     rule_breakdown: Dict[str, ComplianceRuleBreakdown] = Field(..., alias="ruleBreakdown")
-    __properties = ["ruleId", "templateId", "variation", "ruleStatus", "affectedPortfolios", "affectedOrders", "ruleBreakdown"]
+    __properties = ["ruleId", "templateId", "variation", "ruleStatus", "affectedPortfolios", "affectedOrders", "parametersUsed", "ruleBreakdown"]
 
     class Config:
         """Pydantic configuration"""
@@ -105,6 +106,7 @@ class ComplianceSummaryRuleResult(BaseModel):
             "rule_status": obj.get("ruleStatus"),
             "affected_portfolios": [ResourceId.from_dict(_item) for _item in obj.get("affectedPortfolios")] if obj.get("affectedPortfolios") is not None else None,
             "affected_orders": [ResourceId.from_dict(_item) for _item in obj.get("affectedOrders")] if obj.get("affectedOrders") is not None else None,
+            "parameters_used": obj.get("parametersUsed"),
             "rule_breakdown": dict(
                 (_k, ComplianceRuleBreakdown.from_dict(_v))
                 for _k, _v in obj.get("ruleBreakdown").items()
