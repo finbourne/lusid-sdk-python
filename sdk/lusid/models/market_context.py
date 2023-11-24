@@ -20,6 +20,7 @@ import json
 
 from typing import Any, Dict, List, Optional
 from pydantic import BaseModel, Field, conlist
+from lusid.models.group_of_market_data_key_rules import GroupOfMarketDataKeyRules
 from lusid.models.market_context_suppliers import MarketContextSuppliers
 from lusid.models.market_data_key_rule import MarketDataKeyRule
 from lusid.models.market_data_specific_rule import MarketDataSpecificRule
@@ -33,7 +34,8 @@ class MarketContext(BaseModel):
     suppliers: Optional[MarketContextSuppliers] = None
     options: Optional[MarketOptions] = None
     specific_rules: Optional[conlist(MarketDataSpecificRule)] = Field(None, alias="specificRules", description="Extends market data key rules to be able to catch dependencies depending on where the dependency comes from, as opposed to what the dependency is asking for.  Using two specific rules, one could instruct rates curves requested by bonds to be retrieved from a different scope than rates curves requested by swaps.  WARNING: The use of specific rules impacts performance. Where possible, one should use MarketDataKeyRules only.")
-    __properties = ["marketRules", "suppliers", "options", "specificRules"]
+    grouped_market_rules: Optional[conlist(GroupOfMarketDataKeyRules)] = Field(None, alias="groupedMarketRules", description="The list of groups of rules that will be used in market data resolution.  Rules given within a group will, if the group is being used to resolve data,  all be applied with the results of those individual resolution attempts combined into a single result.  The method for combining results is determined by the operation detailed in the GroupOfMarketDataKeyRules.                Notes:  - When resolving MarketData, MarketRules will be applied first followed by GroupedMarketRules  if data could not be found using only the MarketRules provided.  - GroupedMarketRules can only be used for resolving data from the QuoteStore.                Caution: As every rule in a given group will be applied in resolution if the group is applied,  groups are computationally expensive for market data resolution.  Therefore, heuristically, rule groups should be kept as small as possible.")
+    __properties = ["marketRules", "suppliers", "options", "specificRules", "groupedMarketRules"]
 
     class Config:
         """Pydantic configuration"""
@@ -79,6 +81,13 @@ class MarketContext(BaseModel):
                 if _item:
                     _items.append(_item.to_dict())
             _dict['specificRules'] = _items
+        # override the default output from pydantic by calling `to_dict()` of each item in grouped_market_rules (list)
+        _items = []
+        if self.grouped_market_rules:
+            for _item in self.grouped_market_rules:
+                if _item:
+                    _items.append(_item.to_dict())
+            _dict['groupedMarketRules'] = _items
         # set to None if market_rules (nullable) is None
         # and __fields_set__ contains the field
         if self.market_rules is None and "market_rules" in self.__fields_set__:
@@ -93,6 +102,11 @@ class MarketContext(BaseModel):
         # and __fields_set__ contains the field
         if self.specific_rules is None and "specific_rules" in self.__fields_set__:
             _dict['specificRules'] = None
+
+        # set to None if grouped_market_rules (nullable) is None
+        # and __fields_set__ contains the field
+        if self.grouped_market_rules is None and "grouped_market_rules" in self.__fields_set__:
+            _dict['groupedMarketRules'] = None
 
         return _dict
 
@@ -109,6 +123,7 @@ class MarketContext(BaseModel):
             "market_rules": [MarketDataKeyRule.from_dict(_item) for _item in obj.get("marketRules")] if obj.get("marketRules") is not None else None,
             "suppliers": MarketContextSuppliers.from_dict(obj.get("suppliers")) if obj.get("suppliers") is not None else None,
             "options": MarketOptions.from_dict(obj.get("options")) if obj.get("options") is not None else None,
-            "specific_rules": [MarketDataSpecificRule.from_dict(_item) for _item in obj.get("specificRules")] if obj.get("specificRules") is not None else None
+            "specific_rules": [MarketDataSpecificRule.from_dict(_item) for _item in obj.get("specificRules")] if obj.get("specificRules") is not None else None,
+            "grouped_market_rules": [GroupOfMarketDataKeyRules.from_dict(_item) for _item in obj.get("groupedMarketRules")] if obj.get("groupedMarketRules") is not None else None
         })
         return _obj
