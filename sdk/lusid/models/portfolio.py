@@ -46,8 +46,9 @@ class Portfolio(BaseModel):
     accounting_method: Optional[StrictStr] = Field(None, alias="accountingMethod", description=". The available values are: Default, AverageCost, FirstInFirstOut, LastInFirstOut, HighestCostFirst, LowestCostFirst")
     amortisation_method: Optional[StrictStr] = Field(None, alias="amortisationMethod", description="The amortisation method the portfolio is using in the calculation. This can be 'NoAmortisation', 'StraightLine' or 'EffectiveYield'.")
     transaction_type_scope: Optional[StrictStr] = Field(None, alias="transactionTypeScope", description="The scope of the transaction types.")
+    cash_gain_loss_calculation_date: Optional[StrictStr] = Field(None, alias="cashGainLossCalculationDate", description="The scope of the transaction types.")
     links: Optional[conlist(Link)] = None
-    __properties = ["href", "id", "type", "displayName", "description", "created", "parentPortfolioId", "version", "isDerived", "baseCurrency", "properties", "relationships", "instrumentScopes", "accountingMethod", "amortisationMethod", "transactionTypeScope", "links"]
+    __properties = ["href", "id", "type", "displayName", "description", "created", "parentPortfolioId", "version", "isDerived", "baseCurrency", "properties", "relationships", "instrumentScopes", "accountingMethod", "amortisationMethod", "transactionTypeScope", "cashGainLossCalculationDate", "links"]
 
     @validator('type')
     def type_validate_enum(cls, value):
@@ -160,6 +161,11 @@ class Portfolio(BaseModel):
         if self.transaction_type_scope is None and "transaction_type_scope" in self.__fields_set__:
             _dict['transactionTypeScope'] = None
 
+        # set to None if cash_gain_loss_calculation_date (nullable) is None
+        # and __fields_set__ contains the field
+        if self.cash_gain_loss_calculation_date is None and "cash_gain_loss_calculation_date" in self.__fields_set__:
+            _dict['cashGainLossCalculationDate'] = None
+
         # set to None if links (nullable) is None
         # and __fields_set__ contains the field
         if self.links is None and "links" in self.__fields_set__:
@@ -198,6 +204,7 @@ class Portfolio(BaseModel):
             "accounting_method": obj.get("accountingMethod"),
             "amortisation_method": obj.get("amortisationMethod"),
             "transaction_type_scope": obj.get("transactionTypeScope"),
+            "cash_gain_loss_calculation_date": obj.get("cashGainLossCalculationDate"),
             "links": [Link.from_dict(_item) for _item in obj.get("links")] if obj.get("links") is not None else None
         })
         return _obj

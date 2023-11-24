@@ -39,7 +39,8 @@ class CreateTransactionPortfolioRequest(BaseModel):
     instrument_scopes: Optional[conlist(StrictStr, max_items=1)] = Field(None, alias="instrumentScopes", description="The resolution strategy used to resolve instruments of transactions/holdings upserted to this portfolio.")
     amortisation_method: Optional[StrictStr] = Field(None, alias="amortisationMethod", description="The amortisation method the portfolio is using in the calculation. This can be 'NoAmortisation', 'StraightLine' or 'EffectiveYield'.")
     transaction_type_scope: Optional[constr(strict=True, max_length=64, min_length=1)] = Field(None, alias="transactionTypeScope", description="The scope of the transaction types.")
-    __properties = ["displayName", "description", "code", "created", "baseCurrency", "corporateActionSourceId", "accountingMethod", "subHoldingKeys", "properties", "instrumentScopes", "amortisationMethod", "transactionTypeScope"]
+    cash_gain_loss_calculation_date: Optional[StrictStr] = Field(None, alias="cashGainLossCalculationDate", description="The option when the Cash Gain Loss to be calulated, TransactionDate/SettlementDate. Defaults to SettlementDate.")
+    __properties = ["displayName", "description", "code", "created", "baseCurrency", "corporateActionSourceId", "accountingMethod", "subHoldingKeys", "properties", "instrumentScopes", "amortisationMethod", "transactionTypeScope", "cashGainLossCalculationDate"]
 
     @validator('accounting_method')
     def accounting_method_validate_enum(cls, value):
@@ -130,6 +131,11 @@ class CreateTransactionPortfolioRequest(BaseModel):
         if self.transaction_type_scope is None and "transaction_type_scope" in self.__fields_set__:
             _dict['transactionTypeScope'] = None
 
+        # set to None if cash_gain_loss_calculation_date (nullable) is None
+        # and __fields_set__ contains the field
+        if self.cash_gain_loss_calculation_date is None and "cash_gain_loss_calculation_date" in self.__fields_set__:
+            _dict['cashGainLossCalculationDate'] = None
+
         return _dict
 
     @classmethod
@@ -158,6 +164,7 @@ class CreateTransactionPortfolioRequest(BaseModel):
             else None,
             "instrument_scopes": obj.get("instrumentScopes"),
             "amortisation_method": obj.get("amortisationMethod"),
-            "transaction_type_scope": obj.get("transactionTypeScope")
+            "transaction_type_scope": obj.get("transactionTypeScope"),
+            "cash_gain_loss_calculation_date": obj.get("cashGainLossCalculationDate")
         })
         return _obj
