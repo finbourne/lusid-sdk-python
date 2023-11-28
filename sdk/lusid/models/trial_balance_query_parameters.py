@@ -18,8 +18,8 @@ import re  # noqa: F401
 import json
 
 
-from typing import Any, Dict, Optional
-from pydantic import BaseModel, Field, StrictStr, constr, validator
+from typing import Any, Dict, List, Optional
+from pydantic import BaseModel, Field, StrictStr, conlist, constr, validator
 from lusid.models.date_or_diary_entry import DateOrDiaryEntry
 
 class TrialBalanceQueryParameters(BaseModel):
@@ -30,7 +30,8 @@ class TrialBalanceQueryParameters(BaseModel):
     end: Optional[DateOrDiaryEntry] = None
     date_mode: Optional[StrictStr] = Field(None, alias="dateMode", description="The mode of calculation of the journal entry lines. The available values are: ActivityDate.")
     general_ledger_profile_code: Optional[constr(strict=True, max_length=64, min_length=1)] = Field(None, alias="generalLedgerProfileCode", description="The optional code of a general ledger profile used to decorate journal entry lines with levels.")
-    __properties = ["start", "end", "dateMode", "generalLedgerProfileCode"]
+    property_keys: Optional[conlist(StrictStr)] = Field(None, alias="propertyKeys", description="A list of property keys from the 'Instrument', 'Transaction', 'Portfolio', 'Account', 'LegalEntity' or 'CustodianAccount' domain to decorate onto the journal entry lines.")
+    __properties = ["start", "end", "dateMode", "generalLedgerProfileCode", "propertyKeys"]
 
     @validator('general_ledger_profile_code')
     def general_ledger_profile_code_validate_regular_expression(cls, value):
@@ -82,6 +83,11 @@ class TrialBalanceQueryParameters(BaseModel):
         if self.general_ledger_profile_code is None and "general_ledger_profile_code" in self.__fields_set__:
             _dict['generalLedgerProfileCode'] = None
 
+        # set to None if property_keys (nullable) is None
+        # and __fields_set__ contains the field
+        if self.property_keys is None and "property_keys" in self.__fields_set__:
+            _dict['propertyKeys'] = None
+
         return _dict
 
     @classmethod
@@ -97,6 +103,7 @@ class TrialBalanceQueryParameters(BaseModel):
             "start": DateOrDiaryEntry.from_dict(obj.get("start")) if obj.get("start") is not None else None,
             "end": DateOrDiaryEntry.from_dict(obj.get("end")) if obj.get("end") is not None else None,
             "date_mode": obj.get("dateMode"),
-            "general_ledger_profile_code": obj.get("generalLedgerProfileCode")
+            "general_ledger_profile_code": obj.get("generalLedgerProfileCode"),
+            "property_keys": obj.get("propertyKeys")
         })
         return _obj

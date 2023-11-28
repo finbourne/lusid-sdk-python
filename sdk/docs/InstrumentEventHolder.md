@@ -14,6 +14,7 @@ Name | Type | Description | Notes
 **event_date_range** | [**EventDateRange**](EventDateRange.md) |  | 
 **instrument_event** | [**InstrumentEvent**](InstrumentEvent.md) |  | 
 **properties** | [**List[PerpetualProperty]**](PerpetualProperty.md) | The properties attached to this instrument event. | [optional] 
+**sequence_number** | **int** | The order of the instrument event relative others on the same date (0 being processed first). Must be non negative. | [optional] 
 
 ## Example
 

@@ -709,7 +709,7 @@ async with api_client_factory:
     api_instance = api_client_factory.build(lusid.AborApi)
     scope = 'scope_example' # str | The scope of the Abor.
     code = 'code_example' # str | The code of the Abor. Together with the scope is the unique identifier for the given Abor.
-    trial_balance_query_parameters = {"start":{"date":"2018-03-05T00:00:00.0000000+00:00"},"end":{"diaryEntry":"2023_01"},"dateMode":"ActivityDate","generalLedgerProfileCode":"STEMProfile1"} # TrialBalanceQueryParameters | The query parameters used in running the generation of the Trial Balance.
+    trial_balance_query_parameters = {"start":{"date":"2018-03-05T00:00:00.0000000+00:00"},"end":{"diaryEntry":"2023_01"},"dateMode":"ActivityDate","generalLedgerProfileCode":"STEMProfile1","propertyKeys":[]} # TrialBalanceQueryParameters | The query parameters used in running the generation of the Trial Balance.
     as_at = '2013-10-20T19:20:30+01:00' # datetime | The asAt datetime at which to retrieve trial balance. Defaults to returning the latest version              of each transaction if not specified. (optional)
     filter = 'filter_example' # str | \"Expression to filter the result set.\" (optional)
     limit = 56 # int | When paginating, limit the number of returned results to this many. Defaults to 100 if not specified. (optional)

@@ -21,6 +21,7 @@ import json
 from typing import Any, Dict, List, Optional, Union
 from pydantic import BaseModel, Field, StrictFloat, StrictInt, StrictStr, conlist, constr
 from lusid.models.link import Link
+from lusid.models.model_property import ModelProperty
 
 class TrialBalance(BaseModel):
     """
@@ -34,8 +35,9 @@ class TrialBalance(BaseModel):
     closing: Union[StrictFloat, StrictInt] = Field(..., description="The closing balance at the end of the period")
     debit: Union[StrictFloat, StrictInt] = Field(..., description="All debits that occured in the period")
     credit: Union[StrictFloat, StrictInt] = Field(..., description="All credits that occured in the period")
+    properties: Optional[Dict[str, ModelProperty]] = Field(None, description="Properties found on the mapped 'Account', as specified in request")
     links: Optional[conlist(Link)] = None
-    __properties = ["generalLedgerAccountCode", "description", "levels", "accountType", "opening", "closing", "debit", "credit", "links"]
+    __properties = ["generalLedgerAccountCode", "description", "levels", "accountType", "opening", "closing", "debit", "credit", "properties", "links"]
 
     class Config:
         """Pydantic configuration"""
@@ -61,6 +63,13 @@ class TrialBalance(BaseModel):
                           exclude={
                           },
                           exclude_none=True)
+        # override the default output from pydantic by calling `to_dict()` of each value in properties (dict)
+        _field_dict = {}
+        if self.properties:
+            for _key in self.properties:
+                if self.properties[_key]:
+                    _field_dict[_key] = self.properties[_key].to_dict()
+            _dict['properties'] = _field_dict
         # override the default output from pydantic by calling `to_dict()` of each item in links (list)
         _items = []
         if self.links:
@@ -72,6 +81,11 @@ class TrialBalance(BaseModel):
         # and __fields_set__ contains the field
         if self.description is None and "description" in self.__fields_set__:
             _dict['description'] = None
+
+        # set to None if properties (nullable) is None
+        # and __fields_set__ contains the field
+        if self.properties is None and "properties" in self.__fields_set__:
+            _dict['properties'] = None
 
         # set to None if links (nullable) is None
         # and __fields_set__ contains the field
@@ -98,6 +112,12 @@ class TrialBalance(BaseModel):
             "closing": obj.get("closing"),
             "debit": obj.get("debit"),
             "credit": obj.get("credit"),
+            "properties": dict(
+                (_k, ModelProperty.from_dict(_v))
+                for _k, _v in obj.get("properties").items()
+            )
+            if obj.get("properties") is not None
+            else None,
             "links": [Link.from_dict(_item) for _item in obj.get("links")] if obj.get("links") is not None else None
         })
         return _obj

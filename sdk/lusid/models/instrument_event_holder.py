@@ -19,7 +19,7 @@ import json
 
 
 from typing import Any, Dict, List, Optional
-from pydantic import BaseModel, Field, StrictStr, conlist, constr, validator
+from pydantic import BaseModel, Field, StrictInt, StrictStr, conlist, constr, validator
 from lusid.models.event_date_range import EventDateRange
 from lusid.models.instrument_event import InstrumentEvent
 from lusid.models.perpetual_property import PerpetualProperty
@@ -38,7 +38,8 @@ class InstrumentEventHolder(BaseModel):
     event_date_range: EventDateRange = Field(..., alias="eventDateRange")
     instrument_event: InstrumentEvent = Field(..., alias="instrumentEvent")
     properties: Optional[conlist(PerpetualProperty)] = Field(None, description="The properties attached to this instrument event.")
-    __properties = ["instrumentEventId", "corporateActionSourceId", "instrumentIdentifiers", "lusidInstrumentId", "instrumentScope", "description", "eventDateRange", "instrumentEvent", "properties"]
+    sequence_number: Optional[StrictInt] = Field(None, alias="sequenceNumber", description="The order of the instrument event relative others on the same date (0 being processed first). Must be non negative.")
+    __properties = ["instrumentEventId", "corporateActionSourceId", "instrumentIdentifiers", "lusidInstrumentId", "instrumentScope", "description", "eventDateRange", "instrumentEvent", "properties", "sequenceNumber"]
 
     @validator('instrument_event_id')
     def instrument_event_id_validate_regular_expression(cls, value):
@@ -119,6 +120,7 @@ class InstrumentEventHolder(BaseModel):
             "description": obj.get("description"),
             "event_date_range": EventDateRange.from_dict(obj.get("eventDateRange")) if obj.get("eventDateRange") is not None else None,
             "instrument_event": InstrumentEvent.from_dict(obj.get("instrumentEvent")) if obj.get("instrumentEvent") is not None else None,
-            "properties": [PerpetualProperty.from_dict(_item) for _item in obj.get("properties")] if obj.get("properties") is not None else None
+            "properties": [PerpetualProperty.from_dict(_item) for _item in obj.get("properties")] if obj.get("properties") is not None else None,
+            "sequence_number": obj.get("sequenceNumber")
         })
         return _obj
