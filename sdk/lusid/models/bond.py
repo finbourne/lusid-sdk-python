@@ -42,9 +42,10 @@ class Bond(LusidInstrument):
     calculation_type: Optional[StrictStr] = Field(None, alias="calculationType", description="The calculation type applied to the bond coupon amount. This is required for bonds that have a particular type of computing the period coupon, such as simple compounding,  irregular coupons etc.  The default CalculationType is `Standard`, which returns a coupon amount equal to Principal * Coupon Rate / Coupon Frequency. Coupon Frequency is 12M / Payment Frequency.  Payment Frequency can be 1M, 3M, 6M, 12M etc. So Coupon Frequency can be 12, 4, 2, 1 respectively.    Supported string (enumeration) values are: [Standard, DayCountCoupon, NoCalculationFloater, BrazilFixedCoupon].")
     rounding_conventions: Optional[conlist(RoundingConvention)] = Field(None, alias="roundingConventions", description="Rounding conventions for analytics, if any.")
     ex_dividend_configuration: Optional[ExDividendConfiguration] = Field(None, alias="exDividendConfiguration")
+    original_issue_price: Optional[Union[StrictFloat, StrictInt]] = Field(None, alias="originalIssuePrice", description="The price the bond was issued at. This is to be entered as a percentage of par, for example a value of 98.5 would represent 98.5%.")
     instrument_type: StrictStr = Field(..., alias="instrumentType", description="The available values are: QuotedSecurity, InterestRateSwap, FxForward, Future, ExoticInstrument, FxOption, CreditDefaultSwap, InterestRateSwaption, Bond, EquityOption, FixedLeg, FloatingLeg, BespokeCashFlowsLeg, Unknown, TermDeposit, ContractForDifference, EquitySwap, CashPerpetual, CapFloor, CashSettled, CdsIndex, Basket, FundingLeg, FxSwap, ForwardRateAgreement, SimpleInstrument, Repo, Equity, ExchangeTradedOption, ReferenceInstrument, ComplexBond, InflationLinkedBond, InflationSwap, SimpleCashFlowLoan, TotalReturnSwap, InflationLeg")
     additional_properties: Dict[str, Any] = {}
-    __properties = ["instrumentType", "startDate", "maturityDate", "domCcy", "flowConventions", "principal", "couponRate", "identifiers", "exDividendDays", "initialCouponDate", "firstCouponPayDate", "calculationType", "roundingConventions", "exDividendConfiguration"]
+    __properties = ["instrumentType", "startDate", "maturityDate", "domCcy", "flowConventions", "principal", "couponRate", "identifiers", "exDividendDays", "initialCouponDate", "firstCouponPayDate", "calculationType", "roundingConventions", "exDividendConfiguration", "originalIssuePrice"]
 
     @validator('instrument_type')
     def instrument_type_validate_enum(cls, value):
@@ -126,6 +127,11 @@ class Bond(LusidInstrument):
         if self.rounding_conventions is None and "rounding_conventions" in self.__fields_set__:
             _dict['roundingConventions'] = None
 
+        # set to None if original_issue_price (nullable) is None
+        # and __fields_set__ contains the field
+        if self.original_issue_price is None and "original_issue_price" in self.__fields_set__:
+            _dict['originalIssuePrice'] = None
+
         return _dict
 
     @classmethod
@@ -151,7 +157,8 @@ class Bond(LusidInstrument):
             "first_coupon_pay_date": obj.get("firstCouponPayDate"),
             "calculation_type": obj.get("calculationType"),
             "rounding_conventions": [RoundingConvention.from_dict(_item) for _item in obj.get("roundingConventions")] if obj.get("roundingConventions") is not None else None,
-            "ex_dividend_configuration": ExDividendConfiguration.from_dict(obj.get("exDividendConfiguration")) if obj.get("exDividendConfiguration") is not None else None
+            "ex_dividend_configuration": ExDividendConfiguration.from_dict(obj.get("exDividendConfiguration")) if obj.get("exDividendConfiguration") is not None else None,
+            "original_issue_price": obj.get("originalIssuePrice")
         })
         # store additional fields in additional_properties
         for _key in obj.keys():

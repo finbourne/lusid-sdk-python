@@ -32,6 +32,11 @@ from lusid.models.accounts_upsert_response import AccountsUpsertResponse
 from lusid.models.chart_of_accounts import ChartOfAccounts
 from lusid.models.chart_of_accounts_properties import ChartOfAccountsProperties
 from lusid.models.chart_of_accounts_request import ChartOfAccountsRequest
+from lusid.models.cleardown_module_details import CleardownModuleDetails
+from lusid.models.cleardown_module_request import CleardownModuleRequest
+from lusid.models.cleardown_module_response import CleardownModuleResponse
+from lusid.models.cleardown_module_rule import CleardownModuleRule
+from lusid.models.cleardown_module_rules_updated_response import CleardownModuleRulesUpdatedResponse
 from lusid.models.delete_accounts_response import DeleteAccountsResponse
 from lusid.models.deleted_entity_response import DeletedEntityResponse
 from lusid.models.general_ledger_profile_mapping import GeneralLedgerProfileMapping
@@ -40,6 +45,8 @@ from lusid.models.general_ledger_profile_response import GeneralLedgerProfileRes
 from lusid.models.model_property import ModelProperty
 from lusid.models.paged_resource_list_of_account import PagedResourceListOfAccount
 from lusid.models.paged_resource_list_of_chart_of_accounts import PagedResourceListOfChartOfAccounts
+from lusid.models.paged_resource_list_of_cleardown_module_response import PagedResourceListOfCleardownModuleResponse
+from lusid.models.paged_resource_list_of_cleardown_module_rule import PagedResourceListOfCleardownModuleRule
 from lusid.models.paged_resource_list_of_general_ledger_profile_response import PagedResourceListOfGeneralLedgerProfileResponse
 from lusid.models.paged_resource_list_of_posting_module_response import PagedResourceListOfPostingModuleResponse
 from lusid.models.paged_resource_list_of_posting_module_rule import PagedResourceListOfPostingModuleRule
@@ -220,6 +227,180 @@ class ChartOfAccountsApi:
 
         return self.api_client.call_api(
             '/api/chartofaccounts/{scope}', 'POST',
+            _path_params,
+            _query_params,
+            _header_params,
+            body=_body_params,
+            post_params=_form_params,
+            files=_files,
+            response_types_map=_response_types_map,
+            auth_settings=_auth_settings,
+            async_req=_params.get('async_req'),
+            _return_http_data_only=_params.get('_return_http_data_only'),  # noqa: E501
+            _preload_content=_params.get('_preload_content', True),
+            _request_timeout=_params.get('_request_timeout'),
+            collection_formats=_collection_formats,
+            _request_auth=_params.get('_request_auth'))
+
+    @overload
+    async def create_cleardown_module(self, scope : Annotated[constr(strict=True, max_length=64, min_length=1), Field(..., description="The scope of the Chart of Accounts.")], code : Annotated[constr(strict=True, max_length=64, min_length=1), Field(..., description="The code of the Chart of Accounts. Together with the scope this uniquely identifies the Chart of Accounts.")], cleardown_module_request : Annotated[CleardownModuleRequest, Field(..., description="The definition of the Cleardown Module.")], **kwargs) -> CleardownModuleResponse:  # noqa: E501
+        ...
+
+    @overload
+    def create_cleardown_module(self, scope : Annotated[constr(strict=True, max_length=64, min_length=1), Field(..., description="The scope of the Chart of Accounts.")], code : Annotated[constr(strict=True, max_length=64, min_length=1), Field(..., description="The code of the Chart of Accounts. Together with the scope this uniquely identifies the Chart of Accounts.")], cleardown_module_request : Annotated[CleardownModuleRequest, Field(..., description="The definition of the Cleardown Module.")], async_req: Optional[bool]=True, **kwargs) -> CleardownModuleResponse:  # noqa: E501
+        ...
+
+    @validate_arguments
+    def create_cleardown_module(self, scope : Annotated[constr(strict=True, max_length=64, min_length=1), Field(..., description="The scope of the Chart of Accounts.")], code : Annotated[constr(strict=True, max_length=64, min_length=1), Field(..., description="The code of the Chart of Accounts. Together with the scope this uniquely identifies the Chart of Accounts.")], cleardown_module_request : Annotated[CleardownModuleRequest, Field(..., description="The definition of the Cleardown Module.")], async_req: Optional[bool]=None, **kwargs) -> Union[CleardownModuleResponse, Awaitable[CleardownModuleResponse]]:  # noqa: E501
+        """[EXPERIMENTAL] CreateCleardownModule: Create a Cleardown Module  # noqa: E501
+
+        Create the given Cleardown Module.  # noqa: E501
+        This method makes a synchronous HTTP request by default. To make an
+        asynchronous HTTP request, please pass async_req=True
+
+        >>> thread = api.create_cleardown_module(scope, code, cleardown_module_request, async_req=True)
+        >>> result = thread.get()
+
+        :param scope: The scope of the Chart of Accounts. (required)
+        :type scope: str
+        :param code: The code of the Chart of Accounts. Together with the scope this uniquely identifies the Chart of Accounts. (required)
+        :type code: str
+        :param cleardown_module_request: The definition of the Cleardown Module. (required)
+        :type cleardown_module_request: CleardownModuleRequest
+        :param async_req: Whether to execute the request asynchronously.
+        :type async_req: bool, optional
+        :param _request_timeout: timeout setting for this request.
+               If one number provided, it will be total request
+               timeout. It can also be a pair (tuple) of
+               (connection, read) timeouts.
+        :return: Returns the result object.
+                 If the method is called asynchronously,
+                 returns the request thread.
+        :rtype: CleardownModuleResponse
+        """
+        kwargs['_return_http_data_only'] = True
+        if '_preload_content' in kwargs:
+            message = "Error! Please call the create_cleardown_module_with_http_info method with `_preload_content` instead and obtain raw data from ApiResponse.raw_data"  # noqa: E501
+            raise ValueError(message)
+        if async_req is not None:
+            kwargs['async_req'] = async_req
+        return self.create_cleardown_module_with_http_info(scope, code, cleardown_module_request, **kwargs)  # noqa: E501
+
+    @validate_arguments
+    def create_cleardown_module_with_http_info(self, scope : Annotated[constr(strict=True, max_length=64, min_length=1), Field(..., description="The scope of the Chart of Accounts.")], code : Annotated[constr(strict=True, max_length=64, min_length=1), Field(..., description="The code of the Chart of Accounts. Together with the scope this uniquely identifies the Chart of Accounts.")], cleardown_module_request : Annotated[CleardownModuleRequest, Field(..., description="The definition of the Cleardown Module.")], **kwargs) -> ApiResponse:  # noqa: E501
+        """[EXPERIMENTAL] CreateCleardownModule: Create a Cleardown Module  # noqa: E501
+
+        Create the given Cleardown Module.  # noqa: E501
+        This method makes a synchronous HTTP request by default. To make an
+        asynchronous HTTP request, please pass async_req=True
+
+        >>> thread = api.create_cleardown_module_with_http_info(scope, code, cleardown_module_request, async_req=True)
+        >>> result = thread.get()
+
+        :param scope: The scope of the Chart of Accounts. (required)
+        :type scope: str
+        :param code: The code of the Chart of Accounts. Together with the scope this uniquely identifies the Chart of Accounts. (required)
+        :type code: str
+        :param cleardown_module_request: The definition of the Cleardown Module. (required)
+        :type cleardown_module_request: CleardownModuleRequest
+        :param async_req: Whether to execute the request asynchronously.
+        :type async_req: bool, optional
+        :param _preload_content: if False, the ApiResponse.data will
+                                 be set to none and raw_data will store the
+                                 HTTP response body without reading/decoding.
+                                 Default is True.
+        :type _preload_content: bool, optional
+        :param _return_http_data_only: response data instead of ApiResponse
+                                       object with status code, headers, etc
+        :type _return_http_data_only: bool, optional
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :param _request_auth: set to override the auth_settings for an a single
+                              request; this effectively ignores the authentication
+                              in the spec for a single request.
+        :type _request_auth: dict, optional
+        :type _content_type: string, optional: force content-type for the request
+        :return: Returns the result object.
+                 If the method is called asynchronously,
+                 returns the request thread.
+        :rtype: tuple(CleardownModuleResponse, status_code(int), headers(HTTPHeaderDict))
+        """
+
+        _params = locals()
+
+        _all_params = [
+            'scope',
+            'code',
+            'cleardown_module_request'
+        ]
+        _all_params.extend(
+            [
+                'async_req',
+                '_return_http_data_only',
+                '_preload_content',
+                '_request_timeout',
+                '_request_auth',
+                '_content_type',
+                '_headers'
+            ]
+        )
+
+        # validate the arguments
+        for _key, _val in _params['kwargs'].items():
+            if _key not in _all_params:
+                raise ApiTypeError(
+                    "Got an unexpected keyword argument '%s'"
+                    " to method create_cleardown_module" % _key
+                )
+            _params[_key] = _val
+        del _params['kwargs']
+
+        _collection_formats = {}
+
+        # process the path parameters
+        _path_params = {}
+        if _params['scope']:
+            _path_params['scope'] = _params['scope']
+
+        if _params['code']:
+            _path_params['code'] = _params['code']
+
+
+        # process the query parameters
+        _query_params = []
+        # process the header parameters
+        _header_params = dict(_params.get('_headers', {}))
+        # process the form parameters
+        _form_params = []
+        _files = {}
+        # process the body parameter
+        _body_params = None
+        if _params['cleardown_module_request'] is not None:
+            _body_params = _params['cleardown_module_request']
+
+        # set the HTTP header `Accept`
+        _header_params['Accept'] = self.api_client.select_header_accept(
+            ['text/plain', 'application/json', 'text/json'])  # noqa: E501
+
+        # set the HTTP header `Content-Type`
+        _content_types_list = _params.get('_content_type',
+            self.api_client.select_header_content_type(
+                ['application/json-patch+json', 'application/json', 'text/json', 'application/*+json']))
+        if _content_types_list:
+                _header_params['Content-Type'] = _content_types_list
+
+        # authentication setting
+        _auth_settings = ['oauth2']  # noqa: E501
+
+        _response_types_map = {
+            '201': "CleardownModuleResponse",
+            '400': "LusidValidationProblemDetails",
+        }
+
+        return self.api_client.call_api(
+            '/api/chartofaccounts/{scope}/{code}/cleardownmodules', 'POST',
             _path_params,
             _query_params,
             _header_params,
@@ -909,6 +1090,173 @@ class ChartOfAccountsApi:
 
         return self.api_client.call_api(
             '/api/chartofaccounts/{scope}/{code}', 'DELETE',
+            _path_params,
+            _query_params,
+            _header_params,
+            body=_body_params,
+            post_params=_form_params,
+            files=_files,
+            response_types_map=_response_types_map,
+            auth_settings=_auth_settings,
+            async_req=_params.get('async_req'),
+            _return_http_data_only=_params.get('_return_http_data_only'),  # noqa: E501
+            _preload_content=_params.get('_preload_content', True),
+            _request_timeout=_params.get('_request_timeout'),
+            collection_formats=_collection_formats,
+            _request_auth=_params.get('_request_auth'))
+
+    @overload
+    async def delete_cleardown_module(self, scope : Annotated[constr(strict=True, max_length=64, min_length=1), Field(..., description="The scope of the Chart of Accounts.")], code : Annotated[constr(strict=True, max_length=64, min_length=1), Field(..., description="The code of the Chart of Accounts. Together with the scope this uniquely identifies the Chart of Accounts.")], cleardown_module_code : Annotated[constr(strict=True, max_length=64, min_length=1), Field(..., description="The code of the Cleardown Module to be deleted.")], **kwargs) -> DeletedEntityResponse:  # noqa: E501
+        ...
+
+    @overload
+    def delete_cleardown_module(self, scope : Annotated[constr(strict=True, max_length=64, min_length=1), Field(..., description="The scope of the Chart of Accounts.")], code : Annotated[constr(strict=True, max_length=64, min_length=1), Field(..., description="The code of the Chart of Accounts. Together with the scope this uniquely identifies the Chart of Accounts.")], cleardown_module_code : Annotated[constr(strict=True, max_length=64, min_length=1), Field(..., description="The code of the Cleardown Module to be deleted.")], async_req: Optional[bool]=True, **kwargs) -> DeletedEntityResponse:  # noqa: E501
+        ...
+
+    @validate_arguments
+    def delete_cleardown_module(self, scope : Annotated[constr(strict=True, max_length=64, min_length=1), Field(..., description="The scope of the Chart of Accounts.")], code : Annotated[constr(strict=True, max_length=64, min_length=1), Field(..., description="The code of the Chart of Accounts. Together with the scope this uniquely identifies the Chart of Accounts.")], cleardown_module_code : Annotated[constr(strict=True, max_length=64, min_length=1), Field(..., description="The code of the Cleardown Module to be deleted.")], async_req: Optional[bool]=None, **kwargs) -> Union[DeletedEntityResponse, Awaitable[DeletedEntityResponse]]:  # noqa: E501
+        """[EXPERIMENTAL] DeleteCleardownModule: Delete a Cleardown Module.  # noqa: E501
+
+        Delete the given Cleardown Module.  # noqa: E501
+        This method makes a synchronous HTTP request by default. To make an
+        asynchronous HTTP request, please pass async_req=True
+
+        >>> thread = api.delete_cleardown_module(scope, code, cleardown_module_code, async_req=True)
+        >>> result = thread.get()
+
+        :param scope: The scope of the Chart of Accounts. (required)
+        :type scope: str
+        :param code: The code of the Chart of Accounts. Together with the scope this uniquely identifies the Chart of Accounts. (required)
+        :type code: str
+        :param cleardown_module_code: The code of the Cleardown Module to be deleted. (required)
+        :type cleardown_module_code: str
+        :param async_req: Whether to execute the request asynchronously.
+        :type async_req: bool, optional
+        :param _request_timeout: timeout setting for this request.
+               If one number provided, it will be total request
+               timeout. It can also be a pair (tuple) of
+               (connection, read) timeouts.
+        :return: Returns the result object.
+                 If the method is called asynchronously,
+                 returns the request thread.
+        :rtype: DeletedEntityResponse
+        """
+        kwargs['_return_http_data_only'] = True
+        if '_preload_content' in kwargs:
+            message = "Error! Please call the delete_cleardown_module_with_http_info method with `_preload_content` instead and obtain raw data from ApiResponse.raw_data"  # noqa: E501
+            raise ValueError(message)
+        if async_req is not None:
+            kwargs['async_req'] = async_req
+        return self.delete_cleardown_module_with_http_info(scope, code, cleardown_module_code, **kwargs)  # noqa: E501
+
+    @validate_arguments
+    def delete_cleardown_module_with_http_info(self, scope : Annotated[constr(strict=True, max_length=64, min_length=1), Field(..., description="The scope of the Chart of Accounts.")], code : Annotated[constr(strict=True, max_length=64, min_length=1), Field(..., description="The code of the Chart of Accounts. Together with the scope this uniquely identifies the Chart of Accounts.")], cleardown_module_code : Annotated[constr(strict=True, max_length=64, min_length=1), Field(..., description="The code of the Cleardown Module to be deleted.")], **kwargs) -> ApiResponse:  # noqa: E501
+        """[EXPERIMENTAL] DeleteCleardownModule: Delete a Cleardown Module.  # noqa: E501
+
+        Delete the given Cleardown Module.  # noqa: E501
+        This method makes a synchronous HTTP request by default. To make an
+        asynchronous HTTP request, please pass async_req=True
+
+        >>> thread = api.delete_cleardown_module_with_http_info(scope, code, cleardown_module_code, async_req=True)
+        >>> result = thread.get()
+
+        :param scope: The scope of the Chart of Accounts. (required)
+        :type scope: str
+        :param code: The code of the Chart of Accounts. Together with the scope this uniquely identifies the Chart of Accounts. (required)
+        :type code: str
+        :param cleardown_module_code: The code of the Cleardown Module to be deleted. (required)
+        :type cleardown_module_code: str
+        :param async_req: Whether to execute the request asynchronously.
+        :type async_req: bool, optional
+        :param _preload_content: if False, the ApiResponse.data will
+                                 be set to none and raw_data will store the
+                                 HTTP response body without reading/decoding.
+                                 Default is True.
+        :type _preload_content: bool, optional
+        :param _return_http_data_only: response data instead of ApiResponse
+                                       object with status code, headers, etc
+        :type _return_http_data_only: bool, optional
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :param _request_auth: set to override the auth_settings for an a single
+                              request; this effectively ignores the authentication
+                              in the spec for a single request.
+        :type _request_auth: dict, optional
+        :type _content_type: string, optional: force content-type for the request
+        :return: Returns the result object.
+                 If the method is called asynchronously,
+                 returns the request thread.
+        :rtype: tuple(DeletedEntityResponse, status_code(int), headers(HTTPHeaderDict))
+        """
+
+        _params = locals()
+
+        _all_params = [
+            'scope',
+            'code',
+            'cleardown_module_code'
+        ]
+        _all_params.extend(
+            [
+                'async_req',
+                '_return_http_data_only',
+                '_preload_content',
+                '_request_timeout',
+                '_request_auth',
+                '_content_type',
+                '_headers'
+            ]
+        )
+
+        # validate the arguments
+        for _key, _val in _params['kwargs'].items():
+            if _key not in _all_params:
+                raise ApiTypeError(
+                    "Got an unexpected keyword argument '%s'"
+                    " to method delete_cleardown_module" % _key
+                )
+            _params[_key] = _val
+        del _params['kwargs']
+
+        _collection_formats = {}
+
+        # process the path parameters
+        _path_params = {}
+        if _params['scope']:
+            _path_params['scope'] = _params['scope']
+
+        if _params['code']:
+            _path_params['code'] = _params['code']
+
+        if _params['cleardown_module_code']:
+            _path_params['cleardownModuleCode'] = _params['cleardown_module_code']
+
+
+        # process the query parameters
+        _query_params = []
+        # process the header parameters
+        _header_params = dict(_params.get('_headers', {}))
+        # process the form parameters
+        _form_params = []
+        _files = {}
+        # process the body parameter
+        _body_params = None
+        # set the HTTP header `Accept`
+        _header_params['Accept'] = self.api_client.select_header_accept(
+            ['text/plain', 'application/json', 'text/json'])  # noqa: E501
+
+        # authentication setting
+        _auth_settings = ['oauth2']  # noqa: E501
+
+        _response_types_map = {
+            '200': "DeletedEntityResponse",
+            '400': "LusidValidationProblemDetails",
+        }
+
+        return self.api_client.call_api(
+            '/api/chartofaccounts/{scope}/{code}/cleardownmodules/{cleardownModuleCode}', 'DELETE',
             _path_params,
             _query_params,
             _header_params,
@@ -1625,6 +1973,173 @@ class ChartOfAccountsApi:
 
         return self.api_client.call_api(
             '/api/chartofaccounts/{scope}/{code}', 'GET',
+            _path_params,
+            _query_params,
+            _header_params,
+            body=_body_params,
+            post_params=_form_params,
+            files=_files,
+            response_types_map=_response_types_map,
+            auth_settings=_auth_settings,
+            async_req=_params.get('async_req'),
+            _return_http_data_only=_params.get('_return_http_data_only'),  # noqa: E501
+            _preload_content=_params.get('_preload_content', True),
+            _request_timeout=_params.get('_request_timeout'),
+            collection_formats=_collection_formats,
+            _request_auth=_params.get('_request_auth'))
+
+    @overload
+    async def get_cleardown_module(self, scope : Annotated[constr(strict=True, max_length=64, min_length=1), Field(..., description="The scope of the Chart of Accounts.")], code : Annotated[constr(strict=True, max_length=64, min_length=1), Field(..., description="The code of the Chart of Accounts. Together with the scope this uniquely identifies the Chart of Accounts.")], cleardown_module_code : Annotated[constr(strict=True, max_length=64, min_length=1), Field(..., description="The code of the Cleardown Module.")], **kwargs) -> CleardownModuleResponse:  # noqa: E501
+        ...
+
+    @overload
+    def get_cleardown_module(self, scope : Annotated[constr(strict=True, max_length=64, min_length=1), Field(..., description="The scope of the Chart of Accounts.")], code : Annotated[constr(strict=True, max_length=64, min_length=1), Field(..., description="The code of the Chart of Accounts. Together with the scope this uniquely identifies the Chart of Accounts.")], cleardown_module_code : Annotated[constr(strict=True, max_length=64, min_length=1), Field(..., description="The code of the Cleardown Module.")], async_req: Optional[bool]=True, **kwargs) -> CleardownModuleResponse:  # noqa: E501
+        ...
+
+    @validate_arguments
+    def get_cleardown_module(self, scope : Annotated[constr(strict=True, max_length=64, min_length=1), Field(..., description="The scope of the Chart of Accounts.")], code : Annotated[constr(strict=True, max_length=64, min_length=1), Field(..., description="The code of the Chart of Accounts. Together with the scope this uniquely identifies the Chart of Accounts.")], cleardown_module_code : Annotated[constr(strict=True, max_length=64, min_length=1), Field(..., description="The code of the Cleardown Module.")], async_req: Optional[bool]=None, **kwargs) -> Union[CleardownModuleResponse, Awaitable[CleardownModuleResponse]]:  # noqa: E501
+        """[EXPERIMENTAL] GetCleardownModule: Get a Cleardown Module  # noqa: E501
+
+        Retrieve the definition of a Cleardown Module complete with its rules.  # noqa: E501
+        This method makes a synchronous HTTP request by default. To make an
+        asynchronous HTTP request, please pass async_req=True
+
+        >>> thread = api.get_cleardown_module(scope, code, cleardown_module_code, async_req=True)
+        >>> result = thread.get()
+
+        :param scope: The scope of the Chart of Accounts. (required)
+        :type scope: str
+        :param code: The code of the Chart of Accounts. Together with the scope this uniquely identifies the Chart of Accounts. (required)
+        :type code: str
+        :param cleardown_module_code: The code of the Cleardown Module. (required)
+        :type cleardown_module_code: str
+        :param async_req: Whether to execute the request asynchronously.
+        :type async_req: bool, optional
+        :param _request_timeout: timeout setting for this request.
+               If one number provided, it will be total request
+               timeout. It can also be a pair (tuple) of
+               (connection, read) timeouts.
+        :return: Returns the result object.
+                 If the method is called asynchronously,
+                 returns the request thread.
+        :rtype: CleardownModuleResponse
+        """
+        kwargs['_return_http_data_only'] = True
+        if '_preload_content' in kwargs:
+            message = "Error! Please call the get_cleardown_module_with_http_info method with `_preload_content` instead and obtain raw data from ApiResponse.raw_data"  # noqa: E501
+            raise ValueError(message)
+        if async_req is not None:
+            kwargs['async_req'] = async_req
+        return self.get_cleardown_module_with_http_info(scope, code, cleardown_module_code, **kwargs)  # noqa: E501
+
+    @validate_arguments
+    def get_cleardown_module_with_http_info(self, scope : Annotated[constr(strict=True, max_length=64, min_length=1), Field(..., description="The scope of the Chart of Accounts.")], code : Annotated[constr(strict=True, max_length=64, min_length=1), Field(..., description="The code of the Chart of Accounts. Together with the scope this uniquely identifies the Chart of Accounts.")], cleardown_module_code : Annotated[constr(strict=True, max_length=64, min_length=1), Field(..., description="The code of the Cleardown Module.")], **kwargs) -> ApiResponse:  # noqa: E501
+        """[EXPERIMENTAL] GetCleardownModule: Get a Cleardown Module  # noqa: E501
+
+        Retrieve the definition of a Cleardown Module complete with its rules.  # noqa: E501
+        This method makes a synchronous HTTP request by default. To make an
+        asynchronous HTTP request, please pass async_req=True
+
+        >>> thread = api.get_cleardown_module_with_http_info(scope, code, cleardown_module_code, async_req=True)
+        >>> result = thread.get()
+
+        :param scope: The scope of the Chart of Accounts. (required)
+        :type scope: str
+        :param code: The code of the Chart of Accounts. Together with the scope this uniquely identifies the Chart of Accounts. (required)
+        :type code: str
+        :param cleardown_module_code: The code of the Cleardown Module. (required)
+        :type cleardown_module_code: str
+        :param async_req: Whether to execute the request asynchronously.
+        :type async_req: bool, optional
+        :param _preload_content: if False, the ApiResponse.data will
+                                 be set to none and raw_data will store the
+                                 HTTP response body without reading/decoding.
+                                 Default is True.
+        :type _preload_content: bool, optional
+        :param _return_http_data_only: response data instead of ApiResponse
+                                       object with status code, headers, etc
+        :type _return_http_data_only: bool, optional
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :param _request_auth: set to override the auth_settings for an a single
+                              request; this effectively ignores the authentication
+                              in the spec for a single request.
+        :type _request_auth: dict, optional
+        :type _content_type: string, optional: force content-type for the request
+        :return: Returns the result object.
+                 If the method is called asynchronously,
+                 returns the request thread.
+        :rtype: tuple(CleardownModuleResponse, status_code(int), headers(HTTPHeaderDict))
+        """
+
+        _params = locals()
+
+        _all_params = [
+            'scope',
+            'code',
+            'cleardown_module_code'
+        ]
+        _all_params.extend(
+            [
+                'async_req',
+                '_return_http_data_only',
+                '_preload_content',
+                '_request_timeout',
+                '_request_auth',
+                '_content_type',
+                '_headers'
+            ]
+        )
+
+        # validate the arguments
+        for _key, _val in _params['kwargs'].items():
+            if _key not in _all_params:
+                raise ApiTypeError(
+                    "Got an unexpected keyword argument '%s'"
+                    " to method get_cleardown_module" % _key
+                )
+            _params[_key] = _val
+        del _params['kwargs']
+
+        _collection_formats = {}
+
+        # process the path parameters
+        _path_params = {}
+        if _params['scope']:
+            _path_params['scope'] = _params['scope']
+
+        if _params['code']:
+            _path_params['code'] = _params['code']
+
+        if _params['cleardown_module_code']:
+            _path_params['cleardownModuleCode'] = _params['cleardown_module_code']
+
+
+        # process the query parameters
+        _query_params = []
+        # process the header parameters
+        _header_params = dict(_params.get('_headers', {}))
+        # process the form parameters
+        _form_params = []
+        _files = {}
+        # process the body parameter
+        _body_params = None
+        # set the HTTP header `Accept`
+        _header_params['Accept'] = self.api_client.select_header_accept(
+            ['text/plain', 'application/json', 'text/json'])  # noqa: E501
+
+        # authentication setting
+        _auth_settings = ['oauth2']  # noqa: E501
+
+        _response_types_map = {
+            '200': "CleardownModuleResponse",
+            '400': "LusidValidationProblemDetails",
+        }
+
+        return self.api_client.call_api(
+            '/api/chartofaccounts/{scope}/{code}/cleardownmodules/{cleardownModuleCode}', 'GET',
             _path_params,
             _query_params,
             _header_params,
@@ -2397,6 +2912,418 @@ class ChartOfAccountsApi:
             _request_auth=_params.get('_request_auth'))
 
     @overload
+    async def list_cleardown_module_rules(self, scope : Annotated[constr(strict=True, max_length=64, min_length=1), Field(..., description="The scope of the Chart of Accounts.")], code : Annotated[constr(strict=True, max_length=64, min_length=1), Field(..., description="The code of the Chart of Accounts. Together with the scope this uniquely identifies the Chart of Accounts.")], cleardown_module_code : Annotated[constr(strict=True, max_length=64, min_length=1), Field(..., description="The code of the cleardown module.")], as_at : Annotated[Optional[datetime], Field(description="The asAt datetime at which to retrieve the instrument. Defaults to              returning the latest version if not specified.")] = None, page : Annotated[Optional[constr(strict=True, max_length=500, min_length=1)], Field(description="The pagination token to use to continue listing cleardown module rules; this              value is returned from the previous call. If a pagination token is provided, the filter              and asAt fields must not have changed since the original request. Also, if set, a start value cannot be provided.")] = None, start : Annotated[Optional[StrictInt], Field(description="When paginating, skip this number of results.")] = None, limit : Annotated[Optional[conint(strict=True, le=5000, ge=1)], Field(description="When paginating, limit the results to this number. Defaults to 100 if not specified.")] = None, filter : Annotated[Optional[constr(strict=True, max_length=16384, min_length=0)], Field(description="Expression to filter the results.              For example, to filter on the rule id, specify \"ruleId eq 'rule 1'\". For more information about filtering              results, see https://support.lusid.com/knowledgebase/article/KA-01914.")] = None, **kwargs) -> PagedResourceListOfCleardownModuleRule:  # noqa: E501
+        ...
+
+    @overload
+    def list_cleardown_module_rules(self, scope : Annotated[constr(strict=True, max_length=64, min_length=1), Field(..., description="The scope of the Chart of Accounts.")], code : Annotated[constr(strict=True, max_length=64, min_length=1), Field(..., description="The code of the Chart of Accounts. Together with the scope this uniquely identifies the Chart of Accounts.")], cleardown_module_code : Annotated[constr(strict=True, max_length=64, min_length=1), Field(..., description="The code of the cleardown module.")], as_at : Annotated[Optional[datetime], Field(description="The asAt datetime at which to retrieve the instrument. Defaults to              returning the latest version if not specified.")] = None, page : Annotated[Optional[constr(strict=True, max_length=500, min_length=1)], Field(description="The pagination token to use to continue listing cleardown module rules; this              value is returned from the previous call. If a pagination token is provided, the filter              and asAt fields must not have changed since the original request. Also, if set, a start value cannot be provided.")] = None, start : Annotated[Optional[StrictInt], Field(description="When paginating, skip this number of results.")] = None, limit : Annotated[Optional[conint(strict=True, le=5000, ge=1)], Field(description="When paginating, limit the results to this number. Defaults to 100 if not specified.")] = None, filter : Annotated[Optional[constr(strict=True, max_length=16384, min_length=0)], Field(description="Expression to filter the results.              For example, to filter on the rule id, specify \"ruleId eq 'rule 1'\". For more information about filtering              results, see https://support.lusid.com/knowledgebase/article/KA-01914.")] = None, async_req: Optional[bool]=True, **kwargs) -> PagedResourceListOfCleardownModuleRule:  # noqa: E501
+        ...
+
+    @validate_arguments
+    def list_cleardown_module_rules(self, scope : Annotated[constr(strict=True, max_length=64, min_length=1), Field(..., description="The scope of the Chart of Accounts.")], code : Annotated[constr(strict=True, max_length=64, min_length=1), Field(..., description="The code of the Chart of Accounts. Together with the scope this uniquely identifies the Chart of Accounts.")], cleardown_module_code : Annotated[constr(strict=True, max_length=64, min_length=1), Field(..., description="The code of the cleardown module.")], as_at : Annotated[Optional[datetime], Field(description="The asAt datetime at which to retrieve the instrument. Defaults to              returning the latest version if not specified.")] = None, page : Annotated[Optional[constr(strict=True, max_length=500, min_length=1)], Field(description="The pagination token to use to continue listing cleardown module rules; this              value is returned from the previous call. If a pagination token is provided, the filter              and asAt fields must not have changed since the original request. Also, if set, a start value cannot be provided.")] = None, start : Annotated[Optional[StrictInt], Field(description="When paginating, skip this number of results.")] = None, limit : Annotated[Optional[conint(strict=True, le=5000, ge=1)], Field(description="When paginating, limit the results to this number. Defaults to 100 if not specified.")] = None, filter : Annotated[Optional[constr(strict=True, max_length=16384, min_length=0)], Field(description="Expression to filter the results.              For example, to filter on the rule id, specify \"ruleId eq 'rule 1'\". For more information about filtering              results, see https://support.lusid.com/knowledgebase/article/KA-01914.")] = None, async_req: Optional[bool]=None, **kwargs) -> Union[PagedResourceListOfCleardownModuleRule, Awaitable[PagedResourceListOfCleardownModuleRule]]:  # noqa: E501
+        """[EXPERIMENTAL] ListCleardownModuleRules: List Cleardown Module Rules  # noqa: E501
+
+        List the Rules in a Cleardown Module  # noqa: E501
+        This method makes a synchronous HTTP request by default. To make an
+        asynchronous HTTP request, please pass async_req=True
+
+        >>> thread = api.list_cleardown_module_rules(scope, code, cleardown_module_code, as_at, page, start, limit, filter, async_req=True)
+        >>> result = thread.get()
+
+        :param scope: The scope of the Chart of Accounts. (required)
+        :type scope: str
+        :param code: The code of the Chart of Accounts. Together with the scope this uniquely identifies the Chart of Accounts. (required)
+        :type code: str
+        :param cleardown_module_code: The code of the cleardown module. (required)
+        :type cleardown_module_code: str
+        :param as_at: The asAt datetime at which to retrieve the instrument. Defaults to              returning the latest version if not specified.
+        :type as_at: datetime
+        :param page: The pagination token to use to continue listing cleardown module rules; this              value is returned from the previous call. If a pagination token is provided, the filter              and asAt fields must not have changed since the original request. Also, if set, a start value cannot be provided.
+        :type page: str
+        :param start: When paginating, skip this number of results.
+        :type start: int
+        :param limit: When paginating, limit the results to this number. Defaults to 100 if not specified.
+        :type limit: int
+        :param filter: Expression to filter the results.              For example, to filter on the rule id, specify \"ruleId eq 'rule 1'\". For more information about filtering              results, see https://support.lusid.com/knowledgebase/article/KA-01914.
+        :type filter: str
+        :param async_req: Whether to execute the request asynchronously.
+        :type async_req: bool, optional
+        :param _request_timeout: timeout setting for this request.
+               If one number provided, it will be total request
+               timeout. It can also be a pair (tuple) of
+               (connection, read) timeouts.
+        :return: Returns the result object.
+                 If the method is called asynchronously,
+                 returns the request thread.
+        :rtype: PagedResourceListOfCleardownModuleRule
+        """
+        kwargs['_return_http_data_only'] = True
+        if '_preload_content' in kwargs:
+            message = "Error! Please call the list_cleardown_module_rules_with_http_info method with `_preload_content` instead and obtain raw data from ApiResponse.raw_data"  # noqa: E501
+            raise ValueError(message)
+        if async_req is not None:
+            kwargs['async_req'] = async_req
+        return self.list_cleardown_module_rules_with_http_info(scope, code, cleardown_module_code, as_at, page, start, limit, filter, **kwargs)  # noqa: E501
+
+    @validate_arguments
+    def list_cleardown_module_rules_with_http_info(self, scope : Annotated[constr(strict=True, max_length=64, min_length=1), Field(..., description="The scope of the Chart of Accounts.")], code : Annotated[constr(strict=True, max_length=64, min_length=1), Field(..., description="The code of the Chart of Accounts. Together with the scope this uniquely identifies the Chart of Accounts.")], cleardown_module_code : Annotated[constr(strict=True, max_length=64, min_length=1), Field(..., description="The code of the cleardown module.")], as_at : Annotated[Optional[datetime], Field(description="The asAt datetime at which to retrieve the instrument. Defaults to              returning the latest version if not specified.")] = None, page : Annotated[Optional[constr(strict=True, max_length=500, min_length=1)], Field(description="The pagination token to use to continue listing cleardown module rules; this              value is returned from the previous call. If a pagination token is provided, the filter              and asAt fields must not have changed since the original request. Also, if set, a start value cannot be provided.")] = None, start : Annotated[Optional[StrictInt], Field(description="When paginating, skip this number of results.")] = None, limit : Annotated[Optional[conint(strict=True, le=5000, ge=1)], Field(description="When paginating, limit the results to this number. Defaults to 100 if not specified.")] = None, filter : Annotated[Optional[constr(strict=True, max_length=16384, min_length=0)], Field(description="Expression to filter the results.              For example, to filter on the rule id, specify \"ruleId eq 'rule 1'\". For more information about filtering              results, see https://support.lusid.com/knowledgebase/article/KA-01914.")] = None, **kwargs) -> ApiResponse:  # noqa: E501
+        """[EXPERIMENTAL] ListCleardownModuleRules: List Cleardown Module Rules  # noqa: E501
+
+        List the Rules in a Cleardown Module  # noqa: E501
+        This method makes a synchronous HTTP request by default. To make an
+        asynchronous HTTP request, please pass async_req=True
+
+        >>> thread = api.list_cleardown_module_rules_with_http_info(scope, code, cleardown_module_code, as_at, page, start, limit, filter, async_req=True)
+        >>> result = thread.get()
+
+        :param scope: The scope of the Chart of Accounts. (required)
+        :type scope: str
+        :param code: The code of the Chart of Accounts. Together with the scope this uniquely identifies the Chart of Accounts. (required)
+        :type code: str
+        :param cleardown_module_code: The code of the cleardown module. (required)
+        :type cleardown_module_code: str
+        :param as_at: The asAt datetime at which to retrieve the instrument. Defaults to              returning the latest version if not specified.
+        :type as_at: datetime
+        :param page: The pagination token to use to continue listing cleardown module rules; this              value is returned from the previous call. If a pagination token is provided, the filter              and asAt fields must not have changed since the original request. Also, if set, a start value cannot be provided.
+        :type page: str
+        :param start: When paginating, skip this number of results.
+        :type start: int
+        :param limit: When paginating, limit the results to this number. Defaults to 100 if not specified.
+        :type limit: int
+        :param filter: Expression to filter the results.              For example, to filter on the rule id, specify \"ruleId eq 'rule 1'\". For more information about filtering              results, see https://support.lusid.com/knowledgebase/article/KA-01914.
+        :type filter: str
+        :param async_req: Whether to execute the request asynchronously.
+        :type async_req: bool, optional
+        :param _preload_content: if False, the ApiResponse.data will
+                                 be set to none and raw_data will store the
+                                 HTTP response body without reading/decoding.
+                                 Default is True.
+        :type _preload_content: bool, optional
+        :param _return_http_data_only: response data instead of ApiResponse
+                                       object with status code, headers, etc
+        :type _return_http_data_only: bool, optional
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :param _request_auth: set to override the auth_settings for an a single
+                              request; this effectively ignores the authentication
+                              in the spec for a single request.
+        :type _request_auth: dict, optional
+        :type _content_type: string, optional: force content-type for the request
+        :return: Returns the result object.
+                 If the method is called asynchronously,
+                 returns the request thread.
+        :rtype: tuple(PagedResourceListOfCleardownModuleRule, status_code(int), headers(HTTPHeaderDict))
+        """
+
+        _params = locals()
+
+        _all_params = [
+            'scope',
+            'code',
+            'cleardown_module_code',
+            'as_at',
+            'page',
+            'start',
+            'limit',
+            'filter'
+        ]
+        _all_params.extend(
+            [
+                'async_req',
+                '_return_http_data_only',
+                '_preload_content',
+                '_request_timeout',
+                '_request_auth',
+                '_content_type',
+                '_headers'
+            ]
+        )
+
+        # validate the arguments
+        for _key, _val in _params['kwargs'].items():
+            if _key not in _all_params:
+                raise ApiTypeError(
+                    "Got an unexpected keyword argument '%s'"
+                    " to method list_cleardown_module_rules" % _key
+                )
+            _params[_key] = _val
+        del _params['kwargs']
+
+        _collection_formats = {}
+
+        # process the path parameters
+        _path_params = {}
+        if _params['scope']:
+            _path_params['scope'] = _params['scope']
+
+        if _params['code']:
+            _path_params['code'] = _params['code']
+
+        if _params['cleardown_module_code']:
+            _path_params['cleardownModuleCode'] = _params['cleardown_module_code']
+
+
+        # process the query parameters
+        _query_params = []
+        if _params.get('as_at') is not None:  # noqa: E501
+            if isinstance(_params['as_at'], datetime):
+                _query_params.append(('asAt', _params['as_at'].strftime(self.api_client.configuration.datetime_format)))
+            else:
+                _query_params.append(('asAt', _params['as_at']))
+
+        if _params.get('page') is not None:  # noqa: E501
+            _query_params.append(('page', _params['page']))
+
+        if _params.get('start') is not None:  # noqa: E501
+            _query_params.append(('start', _params['start']))
+
+        if _params.get('limit') is not None:  # noqa: E501
+            _query_params.append(('limit', _params['limit']))
+
+        if _params.get('filter') is not None:  # noqa: E501
+            _query_params.append(('filter', _params['filter']))
+
+        # process the header parameters
+        _header_params = dict(_params.get('_headers', {}))
+        # process the form parameters
+        _form_params = []
+        _files = {}
+        # process the body parameter
+        _body_params = None
+        # set the HTTP header `Accept`
+        _header_params['Accept'] = self.api_client.select_header_accept(
+            ['text/plain', 'application/json', 'text/json'])  # noqa: E501
+
+        # authentication setting
+        _auth_settings = ['oauth2']  # noqa: E501
+
+        _response_types_map = {
+            '200': "PagedResourceListOfCleardownModuleRule",
+            '400': "LusidValidationProblemDetails",
+        }
+
+        return self.api_client.call_api(
+            '/api/chartofaccounts/{scope}/{code}/cleardownmodules/{cleardownModuleCode}/cleardownrules', 'GET',
+            _path_params,
+            _query_params,
+            _header_params,
+            body=_body_params,
+            post_params=_form_params,
+            files=_files,
+            response_types_map=_response_types_map,
+            auth_settings=_auth_settings,
+            async_req=_params.get('async_req'),
+            _return_http_data_only=_params.get('_return_http_data_only'),  # noqa: E501
+            _preload_content=_params.get('_preload_content', True),
+            _request_timeout=_params.get('_request_timeout'),
+            collection_formats=_collection_formats,
+            _request_auth=_params.get('_request_auth'))
+
+    @overload
+    async def list_cleardown_modules(self, scope : Annotated[constr(strict=True, max_length=64, min_length=1), Field(..., description="The scope of the Chart of Accounts.")], code : Annotated[constr(strict=True, max_length=64, min_length=1), Field(..., description="The code of the Chart of Accounts. Together with the scope this uniquely identifies the Chart of Accounts.")], as_at : Annotated[Optional[datetime], Field(description="The asAt datetime at which to list the Cleardown Module. Defaults to returning the latest version              of each Cleardown Module if not specified.")] = None, page : Annotated[Optional[constr(strict=True, max_length=500, min_length=1)], Field(description="The pagination token to use to continue listing Cleardown Modules; this              value is returned from the previous call. If a pagination token is provided, the filter, effectiveAt              and asAt fields must not have changed since the original request. Also, if set, a start value cannot be provided.")] = None, start : Annotated[Optional[StrictInt], Field(description="When paginating, skip this number of results.")] = None, limit : Annotated[Optional[conint(strict=True, le=5000, ge=1)], Field(description="When paginating, limit the results to this number. Defaults to 100 if not specified.")] = None, filter : Annotated[Optional[constr(strict=True, max_length=16384, min_length=0)], Field(description="Expression to filter the results.              For example, to filter on the Cleardown Module status, specify \"status eq 'Active'\". For more information about filtering              results, see https://support.lusid.com/knowledgebase/article/KA-01914.")] = None, **kwargs) -> PagedResourceListOfCleardownModuleResponse:  # noqa: E501
+        ...
+
+    @overload
+    def list_cleardown_modules(self, scope : Annotated[constr(strict=True, max_length=64, min_length=1), Field(..., description="The scope of the Chart of Accounts.")], code : Annotated[constr(strict=True, max_length=64, min_length=1), Field(..., description="The code of the Chart of Accounts. Together with the scope this uniquely identifies the Chart of Accounts.")], as_at : Annotated[Optional[datetime], Field(description="The asAt datetime at which to list the Cleardown Module. Defaults to returning the latest version              of each Cleardown Module if not specified.")] = None, page : Annotated[Optional[constr(strict=True, max_length=500, min_length=1)], Field(description="The pagination token to use to continue listing Cleardown Modules; this              value is returned from the previous call. If a pagination token is provided, the filter, effectiveAt              and asAt fields must not have changed since the original request. Also, if set, a start value cannot be provided.")] = None, start : Annotated[Optional[StrictInt], Field(description="When paginating, skip this number of results.")] = None, limit : Annotated[Optional[conint(strict=True, le=5000, ge=1)], Field(description="When paginating, limit the results to this number. Defaults to 100 if not specified.")] = None, filter : Annotated[Optional[constr(strict=True, max_length=16384, min_length=0)], Field(description="Expression to filter the results.              For example, to filter on the Cleardown Module status, specify \"status eq 'Active'\". For more information about filtering              results, see https://support.lusid.com/knowledgebase/article/KA-01914.")] = None, async_req: Optional[bool]=True, **kwargs) -> PagedResourceListOfCleardownModuleResponse:  # noqa: E501
+        ...
+
+    @validate_arguments
+    def list_cleardown_modules(self, scope : Annotated[constr(strict=True, max_length=64, min_length=1), Field(..., description="The scope of the Chart of Accounts.")], code : Annotated[constr(strict=True, max_length=64, min_length=1), Field(..., description="The code of the Chart of Accounts. Together with the scope this uniquely identifies the Chart of Accounts.")], as_at : Annotated[Optional[datetime], Field(description="The asAt datetime at which to list the Cleardown Module. Defaults to returning the latest version              of each Cleardown Module if not specified.")] = None, page : Annotated[Optional[constr(strict=True, max_length=500, min_length=1)], Field(description="The pagination token to use to continue listing Cleardown Modules; this              value is returned from the previous call. If a pagination token is provided, the filter, effectiveAt              and asAt fields must not have changed since the original request. Also, if set, a start value cannot be provided.")] = None, start : Annotated[Optional[StrictInt], Field(description="When paginating, skip this number of results.")] = None, limit : Annotated[Optional[conint(strict=True, le=5000, ge=1)], Field(description="When paginating, limit the results to this number. Defaults to 100 if not specified.")] = None, filter : Annotated[Optional[constr(strict=True, max_length=16384, min_length=0)], Field(description="Expression to filter the results.              For example, to filter on the Cleardown Module status, specify \"status eq 'Active'\". For more information about filtering              results, see https://support.lusid.com/knowledgebase/article/KA-01914.")] = None, async_req: Optional[bool]=None, **kwargs) -> Union[PagedResourceListOfCleardownModuleResponse, Awaitable[PagedResourceListOfCleardownModuleResponse]]:  # noqa: E501
+        """[EXPERIMENTAL] ListCleardownModules: List Cleardown Modules  # noqa: E501
+
+        List all the Cleardown Modules matching particular criteria.  # noqa: E501
+        This method makes a synchronous HTTP request by default. To make an
+        asynchronous HTTP request, please pass async_req=True
+
+        >>> thread = api.list_cleardown_modules(scope, code, as_at, page, start, limit, filter, async_req=True)
+        >>> result = thread.get()
+
+        :param scope: The scope of the Chart of Accounts. (required)
+        :type scope: str
+        :param code: The code of the Chart of Accounts. Together with the scope this uniquely identifies the Chart of Accounts. (required)
+        :type code: str
+        :param as_at: The asAt datetime at which to list the Cleardown Module. Defaults to returning the latest version              of each Cleardown Module if not specified.
+        :type as_at: datetime
+        :param page: The pagination token to use to continue listing Cleardown Modules; this              value is returned from the previous call. If a pagination token is provided, the filter, effectiveAt              and asAt fields must not have changed since the original request. Also, if set, a start value cannot be provided.
+        :type page: str
+        :param start: When paginating, skip this number of results.
+        :type start: int
+        :param limit: When paginating, limit the results to this number. Defaults to 100 if not specified.
+        :type limit: int
+        :param filter: Expression to filter the results.              For example, to filter on the Cleardown Module status, specify \"status eq 'Active'\". For more information about filtering              results, see https://support.lusid.com/knowledgebase/article/KA-01914.
+        :type filter: str
+        :param async_req: Whether to execute the request asynchronously.
+        :type async_req: bool, optional
+        :param _request_timeout: timeout setting for this request.
+               If one number provided, it will be total request
+               timeout. It can also be a pair (tuple) of
+               (connection, read) timeouts.
+        :return: Returns the result object.
+                 If the method is called asynchronously,
+                 returns the request thread.
+        :rtype: PagedResourceListOfCleardownModuleResponse
+        """
+        kwargs['_return_http_data_only'] = True
+        if '_preload_content' in kwargs:
+            message = "Error! Please call the list_cleardown_modules_with_http_info method with `_preload_content` instead and obtain raw data from ApiResponse.raw_data"  # noqa: E501
+            raise ValueError(message)
+        if async_req is not None:
+            kwargs['async_req'] = async_req
+        return self.list_cleardown_modules_with_http_info(scope, code, as_at, page, start, limit, filter, **kwargs)  # noqa: E501
+
+    @validate_arguments
+    def list_cleardown_modules_with_http_info(self, scope : Annotated[constr(strict=True, max_length=64, min_length=1), Field(..., description="The scope of the Chart of Accounts.")], code : Annotated[constr(strict=True, max_length=64, min_length=1), Field(..., description="The code of the Chart of Accounts. Together with the scope this uniquely identifies the Chart of Accounts.")], as_at : Annotated[Optional[datetime], Field(description="The asAt datetime at which to list the Cleardown Module. Defaults to returning the latest version              of each Cleardown Module if not specified.")] = None, page : Annotated[Optional[constr(strict=True, max_length=500, min_length=1)], Field(description="The pagination token to use to continue listing Cleardown Modules; this              value is returned from the previous call. If a pagination token is provided, the filter, effectiveAt              and asAt fields must not have changed since the original request. Also, if set, a start value cannot be provided.")] = None, start : Annotated[Optional[StrictInt], Field(description="When paginating, skip this number of results.")] = None, limit : Annotated[Optional[conint(strict=True, le=5000, ge=1)], Field(description="When paginating, limit the results to this number. Defaults to 100 if not specified.")] = None, filter : Annotated[Optional[constr(strict=True, max_length=16384, min_length=0)], Field(description="Expression to filter the results.              For example, to filter on the Cleardown Module status, specify \"status eq 'Active'\". For more information about filtering              results, see https://support.lusid.com/knowledgebase/article/KA-01914.")] = None, **kwargs) -> ApiResponse:  # noqa: E501
+        """[EXPERIMENTAL] ListCleardownModules: List Cleardown Modules  # noqa: E501
+
+        List all the Cleardown Modules matching particular criteria.  # noqa: E501
+        This method makes a synchronous HTTP request by default. To make an
+        asynchronous HTTP request, please pass async_req=True
+
+        >>> thread = api.list_cleardown_modules_with_http_info(scope, code, as_at, page, start, limit, filter, async_req=True)
+        >>> result = thread.get()
+
+        :param scope: The scope of the Chart of Accounts. (required)
+        :type scope: str
+        :param code: The code of the Chart of Accounts. Together with the scope this uniquely identifies the Chart of Accounts. (required)
+        :type code: str
+        :param as_at: The asAt datetime at which to list the Cleardown Module. Defaults to returning the latest version              of each Cleardown Module if not specified.
+        :type as_at: datetime
+        :param page: The pagination token to use to continue listing Cleardown Modules; this              value is returned from the previous call. If a pagination token is provided, the filter, effectiveAt              and asAt fields must not have changed since the original request. Also, if set, a start value cannot be provided.
+        :type page: str
+        :param start: When paginating, skip this number of results.
+        :type start: int
+        :param limit: When paginating, limit the results to this number. Defaults to 100 if not specified.
+        :type limit: int
+        :param filter: Expression to filter the results.              For example, to filter on the Cleardown Module status, specify \"status eq 'Active'\". For more information about filtering              results, see https://support.lusid.com/knowledgebase/article/KA-01914.
+        :type filter: str
+        :param async_req: Whether to execute the request asynchronously.
+        :type async_req: bool, optional
+        :param _preload_content: if False, the ApiResponse.data will
+                                 be set to none and raw_data will store the
+                                 HTTP response body without reading/decoding.
+                                 Default is True.
+        :type _preload_content: bool, optional
+        :param _return_http_data_only: response data instead of ApiResponse
+                                       object with status code, headers, etc
+        :type _return_http_data_only: bool, optional
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :param _request_auth: set to override the auth_settings for an a single
+                              request; this effectively ignores the authentication
+                              in the spec for a single request.
+        :type _request_auth: dict, optional
+        :type _content_type: string, optional: force content-type for the request
+        :return: Returns the result object.
+                 If the method is called asynchronously,
+                 returns the request thread.
+        :rtype: tuple(PagedResourceListOfCleardownModuleResponse, status_code(int), headers(HTTPHeaderDict))
+        """
+
+        _params = locals()
+
+        _all_params = [
+            'scope',
+            'code',
+            'as_at',
+            'page',
+            'start',
+            'limit',
+            'filter'
+        ]
+        _all_params.extend(
+            [
+                'async_req',
+                '_return_http_data_only',
+                '_preload_content',
+                '_request_timeout',
+                '_request_auth',
+                '_content_type',
+                '_headers'
+            ]
+        )
+
+        # validate the arguments
+        for _key, _val in _params['kwargs'].items():
+            if _key not in _all_params:
+                raise ApiTypeError(
+                    "Got an unexpected keyword argument '%s'"
+                    " to method list_cleardown_modules" % _key
+                )
+            _params[_key] = _val
+        del _params['kwargs']
+
+        _collection_formats = {}
+
+        # process the path parameters
+        _path_params = {}
+        if _params['scope']:
+            _path_params['scope'] = _params['scope']
+
+        if _params['code']:
+            _path_params['code'] = _params['code']
+
+
+        # process the query parameters
+        _query_params = []
+        if _params.get('as_at') is not None:  # noqa: E501
+            if isinstance(_params['as_at'], datetime):
+                _query_params.append(('asAt', _params['as_at'].strftime(self.api_client.configuration.datetime_format)))
+            else:
+                _query_params.append(('asAt', _params['as_at']))
+
+        if _params.get('page') is not None:  # noqa: E501
+            _query_params.append(('page', _params['page']))
+
+        if _params.get('start') is not None:  # noqa: E501
+            _query_params.append(('start', _params['start']))
+
+        if _params.get('limit') is not None:  # noqa: E501
+            _query_params.append(('limit', _params['limit']))
+
+        if _params.get('filter') is not None:  # noqa: E501
+            _query_params.append(('filter', _params['filter']))
+
+        # process the header parameters
+        _header_params = dict(_params.get('_headers', {}))
+        # process the form parameters
+        _form_params = []
+        _files = {}
+        # process the body parameter
+        _body_params = None
+        # set the HTTP header `Accept`
+        _header_params['Accept'] = self.api_client.select_header_accept(
+            ['text/plain', 'application/json', 'text/json'])  # noqa: E501
+
+        # authentication setting
+        _auth_settings = ['oauth2']  # noqa: E501
+
+        _response_types_map = {
+            '200': "PagedResourceListOfCleardownModuleResponse",
+            '400': "LusidValidationProblemDetails",
+        }
+
+        return self.api_client.call_api(
+            '/api/chartofaccounts/{scope}/{code}/cleardownmodules', 'GET',
+            _path_params,
+            _query_params,
+            _header_params,
+            body=_body_params,
+            post_params=_form_params,
+            files=_files,
+            response_types_map=_response_types_map,
+            auth_settings=_auth_settings,
+            async_req=_params.get('async_req'),
+            _return_http_data_only=_params.get('_return_http_data_only'),  # noqa: E501
+            _preload_content=_params.get('_preload_content', True),
+            _request_timeout=_params.get('_request_timeout'),
+            collection_formats=_collection_formats,
+            _request_auth=_params.get('_request_auth'))
+
+    @overload
     async def list_general_ledger_profiles(self, scope : Annotated[constr(strict=True, max_length=64, min_length=1), Field(..., description="The scope of the Chart of Accounts")], code : Annotated[constr(strict=True, max_length=64, min_length=1), Field(..., description="The code of the Chart of Accounts")], as_at : Annotated[Optional[datetime], Field(description="The asAt datetime at which to list the General Ledger Profiles. Defaults to returning the latest version of each General Ledger Profile if not specified.")] = None, start : Annotated[Optional[StrictInt], Field(description="The start of the pager for the list of General Ledger Profiles")] = None, page : Annotated[Optional[constr(strict=True, max_length=500, min_length=1)], Field(description="The pagination token to use to continue listing General Ledger Profiles; this              value is returned from the previous call. If a pagination token is provided, the filter, effectiveAt              and asAt fields must not have changed since the original request. Also, if set, a start value cannot be provided.")] = None, limit : Annotated[Optional[conint(strict=True, le=5000, ge=1)], Field(description="When paginating, limit the results to this number. Defaults to 100 if not specified.")] = None, filter : Annotated[Optional[constr(strict=True, max_length=16384, min_length=0)], Field(description="Expression to filter the results.              For example, to filter on the General Ledger profiles type, specify \"type eq 'PeriodBoundary'\". For more information about filtering              results, see https://support.lusid.com/knowledgebase/article/KA-01914.")] = None, **kwargs) -> PagedResourceListOfGeneralLedgerProfileResponse:  # noqa: E501
         ...
 
@@ -2995,6 +3922,370 @@ class ChartOfAccountsApi:
 
         return self.api_client.call_api(
             '/api/chartofaccounts/{scope}/{code}/postingmodules', 'GET',
+            _path_params,
+            _query_params,
+            _header_params,
+            body=_body_params,
+            post_params=_form_params,
+            files=_files,
+            response_types_map=_response_types_map,
+            auth_settings=_auth_settings,
+            async_req=_params.get('async_req'),
+            _return_http_data_only=_params.get('_return_http_data_only'),  # noqa: E501
+            _preload_content=_params.get('_preload_content', True),
+            _request_timeout=_params.get('_request_timeout'),
+            collection_formats=_collection_formats,
+            _request_auth=_params.get('_request_auth'))
+
+    @overload
+    async def set_cleardown_module_details(self, scope : Annotated[constr(strict=True, max_length=64, min_length=1), Field(..., description="The scope of the Chart of Accounts.")], code : Annotated[constr(strict=True, max_length=64, min_length=1), Field(..., description="The code of the Chart of Accounts. Together with the scope this uniquely identifies the Chart of Accounts.")], cleardown_module_code : Annotated[constr(strict=True, max_length=64, min_length=1), Field(..., description="The code of the Cleardown Module to be updated.")], cleardown_module_details : Annotated[CleardownModuleDetails, Field(..., description="The new details for the Cleardown Module.")], **kwargs) -> CleardownModuleResponse:  # noqa: E501
+        ...
+
+    @overload
+    def set_cleardown_module_details(self, scope : Annotated[constr(strict=True, max_length=64, min_length=1), Field(..., description="The scope of the Chart of Accounts.")], code : Annotated[constr(strict=True, max_length=64, min_length=1), Field(..., description="The code of the Chart of Accounts. Together with the scope this uniquely identifies the Chart of Accounts.")], cleardown_module_code : Annotated[constr(strict=True, max_length=64, min_length=1), Field(..., description="The code of the Cleardown Module to be updated.")], cleardown_module_details : Annotated[CleardownModuleDetails, Field(..., description="The new details for the Cleardown Module.")], async_req: Optional[bool]=True, **kwargs) -> CleardownModuleResponse:  # noqa: E501
+        ...
+
+    @validate_arguments
+    def set_cleardown_module_details(self, scope : Annotated[constr(strict=True, max_length=64, min_length=1), Field(..., description="The scope of the Chart of Accounts.")], code : Annotated[constr(strict=True, max_length=64, min_length=1), Field(..., description="The code of the Chart of Accounts. Together with the scope this uniquely identifies the Chart of Accounts.")], cleardown_module_code : Annotated[constr(strict=True, max_length=64, min_length=1), Field(..., description="The code of the Cleardown Module to be updated.")], cleardown_module_details : Annotated[CleardownModuleDetails, Field(..., description="The new details for the Cleardown Module.")], async_req: Optional[bool]=None, **kwargs) -> Union[CleardownModuleResponse, Awaitable[CleardownModuleResponse]]:  # noqa: E501
+        """[EXPERIMENTAL] SetCleardownModuleDetails: Set the details of a Cleardown Module  # noqa: E501
+
+        Update the given Cleardown Module details.  # noqa: E501
+        This method makes a synchronous HTTP request by default. To make an
+        asynchronous HTTP request, please pass async_req=True
+
+        >>> thread = api.set_cleardown_module_details(scope, code, cleardown_module_code, cleardown_module_details, async_req=True)
+        >>> result = thread.get()
+
+        :param scope: The scope of the Chart of Accounts. (required)
+        :type scope: str
+        :param code: The code of the Chart of Accounts. Together with the scope this uniquely identifies the Chart of Accounts. (required)
+        :type code: str
+        :param cleardown_module_code: The code of the Cleardown Module to be updated. (required)
+        :type cleardown_module_code: str
+        :param cleardown_module_details: The new details for the Cleardown Module. (required)
+        :type cleardown_module_details: CleardownModuleDetails
+        :param async_req: Whether to execute the request asynchronously.
+        :type async_req: bool, optional
+        :param _request_timeout: timeout setting for this request.
+               If one number provided, it will be total request
+               timeout. It can also be a pair (tuple) of
+               (connection, read) timeouts.
+        :return: Returns the result object.
+                 If the method is called asynchronously,
+                 returns the request thread.
+        :rtype: CleardownModuleResponse
+        """
+        kwargs['_return_http_data_only'] = True
+        if '_preload_content' in kwargs:
+            message = "Error! Please call the set_cleardown_module_details_with_http_info method with `_preload_content` instead and obtain raw data from ApiResponse.raw_data"  # noqa: E501
+            raise ValueError(message)
+        if async_req is not None:
+            kwargs['async_req'] = async_req
+        return self.set_cleardown_module_details_with_http_info(scope, code, cleardown_module_code, cleardown_module_details, **kwargs)  # noqa: E501
+
+    @validate_arguments
+    def set_cleardown_module_details_with_http_info(self, scope : Annotated[constr(strict=True, max_length=64, min_length=1), Field(..., description="The scope of the Chart of Accounts.")], code : Annotated[constr(strict=True, max_length=64, min_length=1), Field(..., description="The code of the Chart of Accounts. Together with the scope this uniquely identifies the Chart of Accounts.")], cleardown_module_code : Annotated[constr(strict=True, max_length=64, min_length=1), Field(..., description="The code of the Cleardown Module to be updated.")], cleardown_module_details : Annotated[CleardownModuleDetails, Field(..., description="The new details for the Cleardown Module.")], **kwargs) -> ApiResponse:  # noqa: E501
+        """[EXPERIMENTAL] SetCleardownModuleDetails: Set the details of a Cleardown Module  # noqa: E501
+
+        Update the given Cleardown Module details.  # noqa: E501
+        This method makes a synchronous HTTP request by default. To make an
+        asynchronous HTTP request, please pass async_req=True
+
+        >>> thread = api.set_cleardown_module_details_with_http_info(scope, code, cleardown_module_code, cleardown_module_details, async_req=True)
+        >>> result = thread.get()
+
+        :param scope: The scope of the Chart of Accounts. (required)
+        :type scope: str
+        :param code: The code of the Chart of Accounts. Together with the scope this uniquely identifies the Chart of Accounts. (required)
+        :type code: str
+        :param cleardown_module_code: The code of the Cleardown Module to be updated. (required)
+        :type cleardown_module_code: str
+        :param cleardown_module_details: The new details for the Cleardown Module. (required)
+        :type cleardown_module_details: CleardownModuleDetails
+        :param async_req: Whether to execute the request asynchronously.
+        :type async_req: bool, optional
+        :param _preload_content: if False, the ApiResponse.data will
+                                 be set to none and raw_data will store the
+                                 HTTP response body without reading/decoding.
+                                 Default is True.
+        :type _preload_content: bool, optional
+        :param _return_http_data_only: response data instead of ApiResponse
+                                       object with status code, headers, etc
+        :type _return_http_data_only: bool, optional
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :param _request_auth: set to override the auth_settings for an a single
+                              request; this effectively ignores the authentication
+                              in the spec for a single request.
+        :type _request_auth: dict, optional
+        :type _content_type: string, optional: force content-type for the request
+        :return: Returns the result object.
+                 If the method is called asynchronously,
+                 returns the request thread.
+        :rtype: tuple(CleardownModuleResponse, status_code(int), headers(HTTPHeaderDict))
+        """
+
+        _params = locals()
+
+        _all_params = [
+            'scope',
+            'code',
+            'cleardown_module_code',
+            'cleardown_module_details'
+        ]
+        _all_params.extend(
+            [
+                'async_req',
+                '_return_http_data_only',
+                '_preload_content',
+                '_request_timeout',
+                '_request_auth',
+                '_content_type',
+                '_headers'
+            ]
+        )
+
+        # validate the arguments
+        for _key, _val in _params['kwargs'].items():
+            if _key not in _all_params:
+                raise ApiTypeError(
+                    "Got an unexpected keyword argument '%s'"
+                    " to method set_cleardown_module_details" % _key
+                )
+            _params[_key] = _val
+        del _params['kwargs']
+
+        _collection_formats = {}
+
+        # process the path parameters
+        _path_params = {}
+        if _params['scope']:
+            _path_params['scope'] = _params['scope']
+
+        if _params['code']:
+            _path_params['code'] = _params['code']
+
+        if _params['cleardown_module_code']:
+            _path_params['cleardownModuleCode'] = _params['cleardown_module_code']
+
+
+        # process the query parameters
+        _query_params = []
+        # process the header parameters
+        _header_params = dict(_params.get('_headers', {}))
+        # process the form parameters
+        _form_params = []
+        _files = {}
+        # process the body parameter
+        _body_params = None
+        if _params['cleardown_module_details'] is not None:
+            _body_params = _params['cleardown_module_details']
+
+        # set the HTTP header `Accept`
+        _header_params['Accept'] = self.api_client.select_header_accept(
+            ['text/plain', 'application/json', 'text/json'])  # noqa: E501
+
+        # set the HTTP header `Content-Type`
+        _content_types_list = _params.get('_content_type',
+            self.api_client.select_header_content_type(
+                ['application/json-patch+json', 'application/json', 'text/json', 'application/*+json']))
+        if _content_types_list:
+                _header_params['Content-Type'] = _content_types_list
+
+        # authentication setting
+        _auth_settings = ['oauth2']  # noqa: E501
+
+        _response_types_map = {
+            '200': "CleardownModuleResponse",
+            '400': "LusidValidationProblemDetails",
+        }
+
+        return self.api_client.call_api(
+            '/api/chartofaccounts/{scope}/{code}/cleardownmodules/{cleardownModuleCode}', 'PUT',
+            _path_params,
+            _query_params,
+            _header_params,
+            body=_body_params,
+            post_params=_form_params,
+            files=_files,
+            response_types_map=_response_types_map,
+            auth_settings=_auth_settings,
+            async_req=_params.get('async_req'),
+            _return_http_data_only=_params.get('_return_http_data_only'),  # noqa: E501
+            _preload_content=_params.get('_preload_content', True),
+            _request_timeout=_params.get('_request_timeout'),
+            collection_formats=_collection_formats,
+            _request_auth=_params.get('_request_auth'))
+
+    @overload
+    async def set_cleardown_module_rules(self, scope : Annotated[constr(strict=True, max_length=64, min_length=1), Field(..., description="The scope of the Chart of Accounts.")], code : Annotated[constr(strict=True, max_length=64, min_length=1), Field(..., description="The code of the Chart of Accounts. Together with the scope this uniquely identifies the Chart of Accounts.")], cleardown_module_code : Annotated[constr(strict=True, max_length=64, min_length=1), Field(..., description="The code of the Cleardown Module to be updated.")], cleardown_module_rule : Annotated[conlist(CleardownModuleRule), Field(..., description="The new rule set for the Cleardown Module.")], **kwargs) -> CleardownModuleRulesUpdatedResponse:  # noqa: E501
+        ...
+
+    @overload
+    def set_cleardown_module_rules(self, scope : Annotated[constr(strict=True, max_length=64, min_length=1), Field(..., description="The scope of the Chart of Accounts.")], code : Annotated[constr(strict=True, max_length=64, min_length=1), Field(..., description="The code of the Chart of Accounts. Together with the scope this uniquely identifies the Chart of Accounts.")], cleardown_module_code : Annotated[constr(strict=True, max_length=64, min_length=1), Field(..., description="The code of the Cleardown Module to be updated.")], cleardown_module_rule : Annotated[conlist(CleardownModuleRule), Field(..., description="The new rule set for the Cleardown Module.")], async_req: Optional[bool]=True, **kwargs) -> CleardownModuleRulesUpdatedResponse:  # noqa: E501
+        ...
+
+    @validate_arguments
+    def set_cleardown_module_rules(self, scope : Annotated[constr(strict=True, max_length=64, min_length=1), Field(..., description="The scope of the Chart of Accounts.")], code : Annotated[constr(strict=True, max_length=64, min_length=1), Field(..., description="The code of the Chart of Accounts. Together with the scope this uniquely identifies the Chart of Accounts.")], cleardown_module_code : Annotated[constr(strict=True, max_length=64, min_length=1), Field(..., description="The code of the Cleardown Module to be updated.")], cleardown_module_rule : Annotated[conlist(CleardownModuleRule), Field(..., description="The new rule set for the Cleardown Module.")], async_req: Optional[bool]=None, **kwargs) -> Union[CleardownModuleRulesUpdatedResponse, Awaitable[CleardownModuleRulesUpdatedResponse]]:  # noqa: E501
+        """[EXPERIMENTAL] SetCleardownModuleRules: Set the rules of a Cleardown Module  # noqa: E501
+
+        Set the given Cleardown Modules rules, this will replace the existing set of rules for the cleardown module.  # noqa: E501
+        This method makes a synchronous HTTP request by default. To make an
+        asynchronous HTTP request, please pass async_req=True
+
+        >>> thread = api.set_cleardown_module_rules(scope, code, cleardown_module_code, cleardown_module_rule, async_req=True)
+        >>> result = thread.get()
+
+        :param scope: The scope of the Chart of Accounts. (required)
+        :type scope: str
+        :param code: The code of the Chart of Accounts. Together with the scope this uniquely identifies the Chart of Accounts. (required)
+        :type code: str
+        :param cleardown_module_code: The code of the Cleardown Module to be updated. (required)
+        :type cleardown_module_code: str
+        :param cleardown_module_rule: The new rule set for the Cleardown Module. (required)
+        :type cleardown_module_rule: List[CleardownModuleRule]
+        :param async_req: Whether to execute the request asynchronously.
+        :type async_req: bool, optional
+        :param _request_timeout: timeout setting for this request.
+               If one number provided, it will be total request
+               timeout. It can also be a pair (tuple) of
+               (connection, read) timeouts.
+        :return: Returns the result object.
+                 If the method is called asynchronously,
+                 returns the request thread.
+        :rtype: CleardownModuleRulesUpdatedResponse
+        """
+        kwargs['_return_http_data_only'] = True
+        if '_preload_content' in kwargs:
+            message = "Error! Please call the set_cleardown_module_rules_with_http_info method with `_preload_content` instead and obtain raw data from ApiResponse.raw_data"  # noqa: E501
+            raise ValueError(message)
+        if async_req is not None:
+            kwargs['async_req'] = async_req
+        return self.set_cleardown_module_rules_with_http_info(scope, code, cleardown_module_code, cleardown_module_rule, **kwargs)  # noqa: E501
+
+    @validate_arguments
+    def set_cleardown_module_rules_with_http_info(self, scope : Annotated[constr(strict=True, max_length=64, min_length=1), Field(..., description="The scope of the Chart of Accounts.")], code : Annotated[constr(strict=True, max_length=64, min_length=1), Field(..., description="The code of the Chart of Accounts. Together with the scope this uniquely identifies the Chart of Accounts.")], cleardown_module_code : Annotated[constr(strict=True, max_length=64, min_length=1), Field(..., description="The code of the Cleardown Module to be updated.")], cleardown_module_rule : Annotated[conlist(CleardownModuleRule), Field(..., description="The new rule set for the Cleardown Module.")], **kwargs) -> ApiResponse:  # noqa: E501
+        """[EXPERIMENTAL] SetCleardownModuleRules: Set the rules of a Cleardown Module  # noqa: E501
+
+        Set the given Cleardown Modules rules, this will replace the existing set of rules for the cleardown module.  # noqa: E501
+        This method makes a synchronous HTTP request by default. To make an
+        asynchronous HTTP request, please pass async_req=True
+
+        >>> thread = api.set_cleardown_module_rules_with_http_info(scope, code, cleardown_module_code, cleardown_module_rule, async_req=True)
+        >>> result = thread.get()
+
+        :param scope: The scope of the Chart of Accounts. (required)
+        :type scope: str
+        :param code: The code of the Chart of Accounts. Together with the scope this uniquely identifies the Chart of Accounts. (required)
+        :type code: str
+        :param cleardown_module_code: The code of the Cleardown Module to be updated. (required)
+        :type cleardown_module_code: str
+        :param cleardown_module_rule: The new rule set for the Cleardown Module. (required)
+        :type cleardown_module_rule: List[CleardownModuleRule]
+        :param async_req: Whether to execute the request asynchronously.
+        :type async_req: bool, optional
+        :param _preload_content: if False, the ApiResponse.data will
+                                 be set to none and raw_data will store the
+                                 HTTP response body without reading/decoding.
+                                 Default is True.
+        :type _preload_content: bool, optional
+        :param _return_http_data_only: response data instead of ApiResponse
+                                       object with status code, headers, etc
+        :type _return_http_data_only: bool, optional
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :param _request_auth: set to override the auth_settings for an a single
+                              request; this effectively ignores the authentication
+                              in the spec for a single request.
+        :type _request_auth: dict, optional
+        :type _content_type: string, optional: force content-type for the request
+        :return: Returns the result object.
+                 If the method is called asynchronously,
+                 returns the request thread.
+        :rtype: tuple(CleardownModuleRulesUpdatedResponse, status_code(int), headers(HTTPHeaderDict))
+        """
+
+        _params = locals()
+
+        _all_params = [
+            'scope',
+            'code',
+            'cleardown_module_code',
+            'cleardown_module_rule'
+        ]
+        _all_params.extend(
+            [
+                'async_req',
+                '_return_http_data_only',
+                '_preload_content',
+                '_request_timeout',
+                '_request_auth',
+                '_content_type',
+                '_headers'
+            ]
+        )
+
+        # validate the arguments
+        for _key, _val in _params['kwargs'].items():
+            if _key not in _all_params:
+                raise ApiTypeError(
+                    "Got an unexpected keyword argument '%s'"
+                    " to method set_cleardown_module_rules" % _key
+                )
+            _params[_key] = _val
+        del _params['kwargs']
+
+        _collection_formats = {}
+
+        # process the path parameters
+        _path_params = {}
+        if _params['scope']:
+            _path_params['scope'] = _params['scope']
+
+        if _params['code']:
+            _path_params['code'] = _params['code']
+
+        if _params['cleardown_module_code']:
+            _path_params['cleardownModuleCode'] = _params['cleardown_module_code']
+
+
+        # process the query parameters
+        _query_params = []
+        # process the header parameters
+        _header_params = dict(_params.get('_headers', {}))
+        # process the form parameters
+        _form_params = []
+        _files = {}
+        # process the body parameter
+        _body_params = None
+        if _params['cleardown_module_rule'] is not None:
+            _body_params = _params['cleardown_module_rule']
+
+        # set the HTTP header `Accept`
+        _header_params['Accept'] = self.api_client.select_header_accept(
+            ['text/plain', 'application/json', 'text/json'])  # noqa: E501
+
+        # set the HTTP header `Content-Type`
+        _content_types_list = _params.get('_content_type',
+            self.api_client.select_header_content_type(
+                ['application/json-patch+json', 'application/json', 'text/json', 'application/*+json']))
+        if _content_types_list:
+                _header_params['Content-Type'] = _content_types_list
+
+        # authentication setting
+        _auth_settings = ['oauth2']  # noqa: E501
+
+        _response_types_map = {
+            '200': "CleardownModuleRulesUpdatedResponse",
+            '400': "LusidValidationProblemDetails",
+        }
+
+        return self.api_client.call_api(
+            '/api/chartofaccounts/{scope}/{code}/cleardownmodules/{cleardownModuleCode}/cleardownrules', 'PUT',
             _path_params,
             _query_params,
             _header_params,
