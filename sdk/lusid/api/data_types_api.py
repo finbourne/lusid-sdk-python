@@ -570,30 +570,28 @@ class DataTypesApi:
             _request_auth=_params.get('_request_auth'))
 
     @overload
-    async def list_data_type_summaries(self, as_at : Annotated[Optional[datetime], Field(description="The asAt datetime at which to list the data type summaries. Defaults to returning the latest version               of each summary if not specified.")] = None, page : Annotated[Optional[constr(strict=True, max_length=500, min_length=1)], Field(description="The pagination token to use to continue listing data type summaries. This  value is returned from the previous call. If a pagination token is provided, the filter, sortBy  and asAt fields must not have changed since the original request. Also, if set, a start value cannot be provided.")] = None, start : Annotated[Optional[StrictInt], Field(description="When paginating, skip this number of results.")] = None, limit : Annotated[Optional[conint(strict=True, le=5000, ge=1)], Field(description="When paginating, limit the results to this number. Defaults to 100 if not specified.")] = None, filter : Annotated[Optional[constr(strict=True, max_length=16384, min_length=0)], Field(description="Optional. Expression to filter the result set.                For example, to filter on the Scope, use \"id.scope eq 'myscope'\", to filter on Schema, use \"schema eq 'string'\",               to filter on AcceptableValues use \"acceptableValues any (~ eq 'value')\"               Read more about filtering results from LUSID here https://support.lusid.com/filtering-results-from-lusid.")] = None, sort_by : Annotated[Optional[conlist(StrictStr)], Field(description="A list of field names to sort by, each suffixed by \" ASC\" or \" DESC\"")] = None, **kwargs) -> PagedResourceListOfDataTypeSummary:  # noqa: E501
+    async def list_data_type_summaries(self, as_at : Annotated[Optional[datetime], Field(description="The asAt datetime at which to list the data type summaries. Defaults to returning the latest version               of each summary if not specified.")] = None, page : Annotated[Optional[constr(strict=True, max_length=500, min_length=1)], Field(description="The pagination token to use to continue listing data type summaries. This  value is returned from the previous call. If a pagination token is provided, the filter, sortBy  and asAt fields must not have changed since the original request.")] = None, limit : Annotated[Optional[conint(strict=True, le=5000, ge=1)], Field(description="When paginating, limit the results to this number. Defaults to 100 if not specified.")] = None, filter : Annotated[Optional[constr(strict=True, max_length=16384, min_length=0)], Field(description="Optional. Expression to filter the result set.                For example, to filter on the Scope, use \"id.scope eq 'myscope'\", to filter on Schema, use \"schema eq 'string'\",               to filter on AcceptableValues use \"acceptableValues any (~ eq 'value')\"               Read more about filtering results from LUSID here https://support.lusid.com/filtering-results-from-lusid.")] = None, sort_by : Annotated[Optional[conlist(StrictStr)], Field(description="A list of field names to sort by, each suffixed by \" ASC\" or \" DESC\"")] = None, **kwargs) -> PagedResourceListOfDataTypeSummary:  # noqa: E501
         ...
 
     @overload
-    def list_data_type_summaries(self, as_at : Annotated[Optional[datetime], Field(description="The asAt datetime at which to list the data type summaries. Defaults to returning the latest version               of each summary if not specified.")] = None, page : Annotated[Optional[constr(strict=True, max_length=500, min_length=1)], Field(description="The pagination token to use to continue listing data type summaries. This  value is returned from the previous call. If a pagination token is provided, the filter, sortBy  and asAt fields must not have changed since the original request. Also, if set, a start value cannot be provided.")] = None, start : Annotated[Optional[StrictInt], Field(description="When paginating, skip this number of results.")] = None, limit : Annotated[Optional[conint(strict=True, le=5000, ge=1)], Field(description="When paginating, limit the results to this number. Defaults to 100 if not specified.")] = None, filter : Annotated[Optional[constr(strict=True, max_length=16384, min_length=0)], Field(description="Optional. Expression to filter the result set.                For example, to filter on the Scope, use \"id.scope eq 'myscope'\", to filter on Schema, use \"schema eq 'string'\",               to filter on AcceptableValues use \"acceptableValues any (~ eq 'value')\"               Read more about filtering results from LUSID here https://support.lusid.com/filtering-results-from-lusid.")] = None, sort_by : Annotated[Optional[conlist(StrictStr)], Field(description="A list of field names to sort by, each suffixed by \" ASC\" or \" DESC\"")] = None, async_req: Optional[bool]=True, **kwargs) -> PagedResourceListOfDataTypeSummary:  # noqa: E501
+    def list_data_type_summaries(self, as_at : Annotated[Optional[datetime], Field(description="The asAt datetime at which to list the data type summaries. Defaults to returning the latest version               of each summary if not specified.")] = None, page : Annotated[Optional[constr(strict=True, max_length=500, min_length=1)], Field(description="The pagination token to use to continue listing data type summaries. This  value is returned from the previous call. If a pagination token is provided, the filter, sortBy  and asAt fields must not have changed since the original request.")] = None, limit : Annotated[Optional[conint(strict=True, le=5000, ge=1)], Field(description="When paginating, limit the results to this number. Defaults to 100 if not specified.")] = None, filter : Annotated[Optional[constr(strict=True, max_length=16384, min_length=0)], Field(description="Optional. Expression to filter the result set.                For example, to filter on the Scope, use \"id.scope eq 'myscope'\", to filter on Schema, use \"schema eq 'string'\",               to filter on AcceptableValues use \"acceptableValues any (~ eq 'value')\"               Read more about filtering results from LUSID here https://support.lusid.com/filtering-results-from-lusid.")] = None, sort_by : Annotated[Optional[conlist(StrictStr)], Field(description="A list of field names to sort by, each suffixed by \" ASC\" or \" DESC\"")] = None, async_req: Optional[bool]=True, **kwargs) -> PagedResourceListOfDataTypeSummary:  # noqa: E501
         ...
 
     @validate_arguments
-    def list_data_type_summaries(self, as_at : Annotated[Optional[datetime], Field(description="The asAt datetime at which to list the data type summaries. Defaults to returning the latest version               of each summary if not specified.")] = None, page : Annotated[Optional[constr(strict=True, max_length=500, min_length=1)], Field(description="The pagination token to use to continue listing data type summaries. This  value is returned from the previous call. If a pagination token is provided, the filter, sortBy  and asAt fields must not have changed since the original request. Also, if set, a start value cannot be provided.")] = None, start : Annotated[Optional[StrictInt], Field(description="When paginating, skip this number of results.")] = None, limit : Annotated[Optional[conint(strict=True, le=5000, ge=1)], Field(description="When paginating, limit the results to this number. Defaults to 100 if not specified.")] = None, filter : Annotated[Optional[constr(strict=True, max_length=16384, min_length=0)], Field(description="Optional. Expression to filter the result set.                For example, to filter on the Scope, use \"id.scope eq 'myscope'\", to filter on Schema, use \"schema eq 'string'\",               to filter on AcceptableValues use \"acceptableValues any (~ eq 'value')\"               Read more about filtering results from LUSID here https://support.lusid.com/filtering-results-from-lusid.")] = None, sort_by : Annotated[Optional[conlist(StrictStr)], Field(description="A list of field names to sort by, each suffixed by \" ASC\" or \" DESC\"")] = None, async_req: Optional[bool]=None, **kwargs) -> Union[PagedResourceListOfDataTypeSummary, Awaitable[PagedResourceListOfDataTypeSummary]]:  # noqa: E501
+    def list_data_type_summaries(self, as_at : Annotated[Optional[datetime], Field(description="The asAt datetime at which to list the data type summaries. Defaults to returning the latest version               of each summary if not specified.")] = None, page : Annotated[Optional[constr(strict=True, max_length=500, min_length=1)], Field(description="The pagination token to use to continue listing data type summaries. This  value is returned from the previous call. If a pagination token is provided, the filter, sortBy  and asAt fields must not have changed since the original request.")] = None, limit : Annotated[Optional[conint(strict=True, le=5000, ge=1)], Field(description="When paginating, limit the results to this number. Defaults to 100 if not specified.")] = None, filter : Annotated[Optional[constr(strict=True, max_length=16384, min_length=0)], Field(description="Optional. Expression to filter the result set.                For example, to filter on the Scope, use \"id.scope eq 'myscope'\", to filter on Schema, use \"schema eq 'string'\",               to filter on AcceptableValues use \"acceptableValues any (~ eq 'value')\"               Read more about filtering results from LUSID here https://support.lusid.com/filtering-results-from-lusid.")] = None, sort_by : Annotated[Optional[conlist(StrictStr)], Field(description="A list of field names to sort by, each suffixed by \" ASC\" or \" DESC\"")] = None, async_req: Optional[bool]=None, **kwargs) -> Union[PagedResourceListOfDataTypeSummary, Awaitable[PagedResourceListOfDataTypeSummary]]:  # noqa: E501
         """[EARLY ACCESS] ListDataTypeSummaries: List all data type summaries, without the reference data  # noqa: E501
 
         List all data type summaries  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
 
-        >>> thread = api.list_data_type_summaries(as_at, page, start, limit, filter, sort_by, async_req=True)
+        >>> thread = api.list_data_type_summaries(as_at, page, limit, filter, sort_by, async_req=True)
         >>> result = thread.get()
 
         :param as_at: The asAt datetime at which to list the data type summaries. Defaults to returning the latest version               of each summary if not specified.
         :type as_at: datetime
-        :param page: The pagination token to use to continue listing data type summaries. This  value is returned from the previous call. If a pagination token is provided, the filter, sortBy  and asAt fields must not have changed since the original request. Also, if set, a start value cannot be provided.
+        :param page: The pagination token to use to continue listing data type summaries. This  value is returned from the previous call. If a pagination token is provided, the filter, sortBy  and asAt fields must not have changed since the original request.
         :type page: str
-        :param start: When paginating, skip this number of results.
-        :type start: int
         :param limit: When paginating, limit the results to this number. Defaults to 100 if not specified.
         :type limit: int
         :param filter: Optional. Expression to filter the result set.                For example, to filter on the Scope, use \"id.scope eq 'myscope'\", to filter on Schema, use \"schema eq 'string'\",               to filter on AcceptableValues use \"acceptableValues any (~ eq 'value')\"               Read more about filtering results from LUSID here https://support.lusid.com/filtering-results-from-lusid.
@@ -617,25 +615,23 @@ class DataTypesApi:
             raise ValueError(message)
         if async_req is not None:
             kwargs['async_req'] = async_req
-        return self.list_data_type_summaries_with_http_info(as_at, page, start, limit, filter, sort_by, **kwargs)  # noqa: E501
+        return self.list_data_type_summaries_with_http_info(as_at, page, limit, filter, sort_by, **kwargs)  # noqa: E501
 
     @validate_arguments
-    def list_data_type_summaries_with_http_info(self, as_at : Annotated[Optional[datetime], Field(description="The asAt datetime at which to list the data type summaries. Defaults to returning the latest version               of each summary if not specified.")] = None, page : Annotated[Optional[constr(strict=True, max_length=500, min_length=1)], Field(description="The pagination token to use to continue listing data type summaries. This  value is returned from the previous call. If a pagination token is provided, the filter, sortBy  and asAt fields must not have changed since the original request. Also, if set, a start value cannot be provided.")] = None, start : Annotated[Optional[StrictInt], Field(description="When paginating, skip this number of results.")] = None, limit : Annotated[Optional[conint(strict=True, le=5000, ge=1)], Field(description="When paginating, limit the results to this number. Defaults to 100 if not specified.")] = None, filter : Annotated[Optional[constr(strict=True, max_length=16384, min_length=0)], Field(description="Optional. Expression to filter the result set.                For example, to filter on the Scope, use \"id.scope eq 'myscope'\", to filter on Schema, use \"schema eq 'string'\",               to filter on AcceptableValues use \"acceptableValues any (~ eq 'value')\"               Read more about filtering results from LUSID here https://support.lusid.com/filtering-results-from-lusid.")] = None, sort_by : Annotated[Optional[conlist(StrictStr)], Field(description="A list of field names to sort by, each suffixed by \" ASC\" or \" DESC\"")] = None, **kwargs) -> ApiResponse:  # noqa: E501
+    def list_data_type_summaries_with_http_info(self, as_at : Annotated[Optional[datetime], Field(description="The asAt datetime at which to list the data type summaries. Defaults to returning the latest version               of each summary if not specified.")] = None, page : Annotated[Optional[constr(strict=True, max_length=500, min_length=1)], Field(description="The pagination token to use to continue listing data type summaries. This  value is returned from the previous call. If a pagination token is provided, the filter, sortBy  and asAt fields must not have changed since the original request.")] = None, limit : Annotated[Optional[conint(strict=True, le=5000, ge=1)], Field(description="When paginating, limit the results to this number. Defaults to 100 if not specified.")] = None, filter : Annotated[Optional[constr(strict=True, max_length=16384, min_length=0)], Field(description="Optional. Expression to filter the result set.                For example, to filter on the Scope, use \"id.scope eq 'myscope'\", to filter on Schema, use \"schema eq 'string'\",               to filter on AcceptableValues use \"acceptableValues any (~ eq 'value')\"               Read more about filtering results from LUSID here https://support.lusid.com/filtering-results-from-lusid.")] = None, sort_by : Annotated[Optional[conlist(StrictStr)], Field(description="A list of field names to sort by, each suffixed by \" ASC\" or \" DESC\"")] = None, **kwargs) -> ApiResponse:  # noqa: E501
         """[EARLY ACCESS] ListDataTypeSummaries: List all data type summaries, without the reference data  # noqa: E501
 
         List all data type summaries  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
 
-        >>> thread = api.list_data_type_summaries_with_http_info(as_at, page, start, limit, filter, sort_by, async_req=True)
+        >>> thread = api.list_data_type_summaries_with_http_info(as_at, page, limit, filter, sort_by, async_req=True)
         >>> result = thread.get()
 
         :param as_at: The asAt datetime at which to list the data type summaries. Defaults to returning the latest version               of each summary if not specified.
         :type as_at: datetime
-        :param page: The pagination token to use to continue listing data type summaries. This  value is returned from the previous call. If a pagination token is provided, the filter, sortBy  and asAt fields must not have changed since the original request. Also, if set, a start value cannot be provided.
+        :param page: The pagination token to use to continue listing data type summaries. This  value is returned from the previous call. If a pagination token is provided, the filter, sortBy  and asAt fields must not have changed since the original request.
         :type page: str
-        :param start: When paginating, skip this number of results.
-        :type start: int
         :param limit: When paginating, limit the results to this number. Defaults to 100 if not specified.
         :type limit: int
         :param filter: Optional. Expression to filter the result set.                For example, to filter on the Scope, use \"id.scope eq 'myscope'\", to filter on Schema, use \"schema eq 'string'\",               to filter on AcceptableValues use \"acceptableValues any (~ eq 'value')\"               Read more about filtering results from LUSID here https://support.lusid.com/filtering-results-from-lusid.
@@ -672,7 +668,6 @@ class DataTypesApi:
         _all_params = [
             'as_at',
             'page',
-            'start',
             'limit',
             'filter',
             'sort_by'
@@ -714,9 +709,6 @@ class DataTypesApi:
 
         if _params.get('page') is not None:  # noqa: E501
             _query_params.append(('page', _params['page']))
-
-        if _params.get('start') is not None:  # noqa: E501
-            _query_params.append(('start', _params['start']))
 
         if _params.get('limit') is not None:  # noqa: E501
             _query_params.append(('limit', _params['limit']))
@@ -765,22 +757,22 @@ class DataTypesApi:
             _request_auth=_params.get('_request_auth'))
 
     @overload
-    async def list_data_types(self, scope : Annotated[constr(strict=True, max_length=64, min_length=1), Field(..., description="The requested scope of the data types")], as_at : Annotated[Optional[datetime], Field(description="The as at of the requested data types")] = None, include_system : Annotated[Optional[StrictBool], Field(description="Whether to additionally include those data types in the \"system\" scope")] = None, sort_by : Annotated[Optional[conlist(StrictStr)], Field(description="Optional. Order the results by these fields. Use use the '-' sign to denote descending order e.g. -MyFieldName")] = None, start : Annotated[Optional[StrictInt], Field(description="Optional. When paginating, skip this number of results")] = None, limit : Annotated[Optional[StrictInt], Field(description="Optional. When paginating, limit the number of returned results to this many.")] = None, filter : Annotated[Optional[constr(strict=True, max_length=16384, min_length=0)], Field(description="Optional. Expression to filter the result set.              For example, to filter on the Display Name, use \"displayName eq 'string'\"              Read more about filtering results from LUSID here https://support.lusid.com/filtering-results-from-lusid.")] = None, **kwargs) -> ResourceListOfDataType:  # noqa: E501
+    async def list_data_types(self, scope : Annotated[constr(strict=True, max_length=64, min_length=1), Field(..., description="The requested scope of the data types")], as_at : Annotated[Optional[datetime], Field(description="The as at of the requested data types")] = None, include_system : Annotated[Optional[StrictBool], Field(description="Whether to additionally include those data types in the \"system\" scope")] = None, sort_by : Annotated[Optional[conlist(StrictStr)], Field(description="Optional. Order the results by these fields. Use use the '-' sign to denote descending order e.g. -MyFieldName")] = None, limit : Annotated[Optional[StrictInt], Field(description="Optional. When paginating, limit the number of returned results to this many.")] = None, filter : Annotated[Optional[constr(strict=True, max_length=16384, min_length=0)], Field(description="Optional. Expression to filter the result set.              For example, to filter on the Display Name, use \"displayName eq 'string'\"              Read more about filtering results from LUSID here https://support.lusid.com/filtering-results-from-lusid.")] = None, **kwargs) -> ResourceListOfDataType:  # noqa: E501
         ...
 
     @overload
-    def list_data_types(self, scope : Annotated[constr(strict=True, max_length=64, min_length=1), Field(..., description="The requested scope of the data types")], as_at : Annotated[Optional[datetime], Field(description="The as at of the requested data types")] = None, include_system : Annotated[Optional[StrictBool], Field(description="Whether to additionally include those data types in the \"system\" scope")] = None, sort_by : Annotated[Optional[conlist(StrictStr)], Field(description="Optional. Order the results by these fields. Use use the '-' sign to denote descending order e.g. -MyFieldName")] = None, start : Annotated[Optional[StrictInt], Field(description="Optional. When paginating, skip this number of results")] = None, limit : Annotated[Optional[StrictInt], Field(description="Optional. When paginating, limit the number of returned results to this many.")] = None, filter : Annotated[Optional[constr(strict=True, max_length=16384, min_length=0)], Field(description="Optional. Expression to filter the result set.              For example, to filter on the Display Name, use \"displayName eq 'string'\"              Read more about filtering results from LUSID here https://support.lusid.com/filtering-results-from-lusid.")] = None, async_req: Optional[bool]=True, **kwargs) -> ResourceListOfDataType:  # noqa: E501
+    def list_data_types(self, scope : Annotated[constr(strict=True, max_length=64, min_length=1), Field(..., description="The requested scope of the data types")], as_at : Annotated[Optional[datetime], Field(description="The as at of the requested data types")] = None, include_system : Annotated[Optional[StrictBool], Field(description="Whether to additionally include those data types in the \"system\" scope")] = None, sort_by : Annotated[Optional[conlist(StrictStr)], Field(description="Optional. Order the results by these fields. Use use the '-' sign to denote descending order e.g. -MyFieldName")] = None, limit : Annotated[Optional[StrictInt], Field(description="Optional. When paginating, limit the number of returned results to this many.")] = None, filter : Annotated[Optional[constr(strict=True, max_length=16384, min_length=0)], Field(description="Optional. Expression to filter the result set.              For example, to filter on the Display Name, use \"displayName eq 'string'\"              Read more about filtering results from LUSID here https://support.lusid.com/filtering-results-from-lusid.")] = None, async_req: Optional[bool]=True, **kwargs) -> ResourceListOfDataType:  # noqa: E501
         ...
 
     @validate_arguments
-    def list_data_types(self, scope : Annotated[constr(strict=True, max_length=64, min_length=1), Field(..., description="The requested scope of the data types")], as_at : Annotated[Optional[datetime], Field(description="The as at of the requested data types")] = None, include_system : Annotated[Optional[StrictBool], Field(description="Whether to additionally include those data types in the \"system\" scope")] = None, sort_by : Annotated[Optional[conlist(StrictStr)], Field(description="Optional. Order the results by these fields. Use use the '-' sign to denote descending order e.g. -MyFieldName")] = None, start : Annotated[Optional[StrictInt], Field(description="Optional. When paginating, skip this number of results")] = None, limit : Annotated[Optional[StrictInt], Field(description="Optional. When paginating, limit the number of returned results to this many.")] = None, filter : Annotated[Optional[constr(strict=True, max_length=16384, min_length=0)], Field(description="Optional. Expression to filter the result set.              For example, to filter on the Display Name, use \"displayName eq 'string'\"              Read more about filtering results from LUSID here https://support.lusid.com/filtering-results-from-lusid.")] = None, async_req: Optional[bool]=None, **kwargs) -> Union[ResourceListOfDataType, Awaitable[ResourceListOfDataType]]:  # noqa: E501
+    def list_data_types(self, scope : Annotated[constr(strict=True, max_length=64, min_length=1), Field(..., description="The requested scope of the data types")], as_at : Annotated[Optional[datetime], Field(description="The as at of the requested data types")] = None, include_system : Annotated[Optional[StrictBool], Field(description="Whether to additionally include those data types in the \"system\" scope")] = None, sort_by : Annotated[Optional[conlist(StrictStr)], Field(description="Optional. Order the results by these fields. Use use the '-' sign to denote descending order e.g. -MyFieldName")] = None, limit : Annotated[Optional[StrictInt], Field(description="Optional. When paginating, limit the number of returned results to this many.")] = None, filter : Annotated[Optional[constr(strict=True, max_length=16384, min_length=0)], Field(description="Optional. Expression to filter the result set.              For example, to filter on the Display Name, use \"displayName eq 'string'\"              Read more about filtering results from LUSID here https://support.lusid.com/filtering-results-from-lusid.")] = None, async_req: Optional[bool]=None, **kwargs) -> Union[ResourceListOfDataType, Awaitable[ResourceListOfDataType]]:  # noqa: E501
         """ListDataTypes: List data types  # noqa: E501
 
         List all data types in a specified scope  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
 
-        >>> thread = api.list_data_types(scope, as_at, include_system, sort_by, start, limit, filter, async_req=True)
+        >>> thread = api.list_data_types(scope, as_at, include_system, sort_by, limit, filter, async_req=True)
         >>> result = thread.get()
 
         :param scope: The requested scope of the data types (required)
@@ -791,8 +783,6 @@ class DataTypesApi:
         :type include_system: bool
         :param sort_by: Optional. Order the results by these fields. Use use the '-' sign to denote descending order e.g. -MyFieldName
         :type sort_by: List[str]
-        :param start: Optional. When paginating, skip this number of results
-        :type start: int
         :param limit: Optional. When paginating, limit the number of returned results to this many.
         :type limit: int
         :param filter: Optional. Expression to filter the result set.              For example, to filter on the Display Name, use \"displayName eq 'string'\"              Read more about filtering results from LUSID here https://support.lusid.com/filtering-results-from-lusid.
@@ -814,17 +804,17 @@ class DataTypesApi:
             raise ValueError(message)
         if async_req is not None:
             kwargs['async_req'] = async_req
-        return self.list_data_types_with_http_info(scope, as_at, include_system, sort_by, start, limit, filter, **kwargs)  # noqa: E501
+        return self.list_data_types_with_http_info(scope, as_at, include_system, sort_by, limit, filter, **kwargs)  # noqa: E501
 
     @validate_arguments
-    def list_data_types_with_http_info(self, scope : Annotated[constr(strict=True, max_length=64, min_length=1), Field(..., description="The requested scope of the data types")], as_at : Annotated[Optional[datetime], Field(description="The as at of the requested data types")] = None, include_system : Annotated[Optional[StrictBool], Field(description="Whether to additionally include those data types in the \"system\" scope")] = None, sort_by : Annotated[Optional[conlist(StrictStr)], Field(description="Optional. Order the results by these fields. Use use the '-' sign to denote descending order e.g. -MyFieldName")] = None, start : Annotated[Optional[StrictInt], Field(description="Optional. When paginating, skip this number of results")] = None, limit : Annotated[Optional[StrictInt], Field(description="Optional. When paginating, limit the number of returned results to this many.")] = None, filter : Annotated[Optional[constr(strict=True, max_length=16384, min_length=0)], Field(description="Optional. Expression to filter the result set.              For example, to filter on the Display Name, use \"displayName eq 'string'\"              Read more about filtering results from LUSID here https://support.lusid.com/filtering-results-from-lusid.")] = None, **kwargs) -> ApiResponse:  # noqa: E501
+    def list_data_types_with_http_info(self, scope : Annotated[constr(strict=True, max_length=64, min_length=1), Field(..., description="The requested scope of the data types")], as_at : Annotated[Optional[datetime], Field(description="The as at of the requested data types")] = None, include_system : Annotated[Optional[StrictBool], Field(description="Whether to additionally include those data types in the \"system\" scope")] = None, sort_by : Annotated[Optional[conlist(StrictStr)], Field(description="Optional. Order the results by these fields. Use use the '-' sign to denote descending order e.g. -MyFieldName")] = None, limit : Annotated[Optional[StrictInt], Field(description="Optional. When paginating, limit the number of returned results to this many.")] = None, filter : Annotated[Optional[constr(strict=True, max_length=16384, min_length=0)], Field(description="Optional. Expression to filter the result set.              For example, to filter on the Display Name, use \"displayName eq 'string'\"              Read more about filtering results from LUSID here https://support.lusid.com/filtering-results-from-lusid.")] = None, **kwargs) -> ApiResponse:  # noqa: E501
         """ListDataTypes: List data types  # noqa: E501
 
         List all data types in a specified scope  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
 
-        >>> thread = api.list_data_types_with_http_info(scope, as_at, include_system, sort_by, start, limit, filter, async_req=True)
+        >>> thread = api.list_data_types_with_http_info(scope, as_at, include_system, sort_by, limit, filter, async_req=True)
         >>> result = thread.get()
 
         :param scope: The requested scope of the data types (required)
@@ -835,8 +825,6 @@ class DataTypesApi:
         :type include_system: bool
         :param sort_by: Optional. Order the results by these fields. Use use the '-' sign to denote descending order e.g. -MyFieldName
         :type sort_by: List[str]
-        :param start: Optional. When paginating, skip this number of results
-        :type start: int
         :param limit: Optional. When paginating, limit the number of returned results to this many.
         :type limit: int
         :param filter: Optional. Expression to filter the result set.              For example, to filter on the Display Name, use \"displayName eq 'string'\"              Read more about filtering results from LUSID here https://support.lusid.com/filtering-results-from-lusid.
@@ -873,7 +861,6 @@ class DataTypesApi:
             'as_at',
             'include_system',
             'sort_by',
-            'start',
             'limit',
             'filter'
         ]
@@ -921,9 +908,6 @@ class DataTypesApi:
         if _params.get('sort_by') is not None:  # noqa: E501
             _query_params.append(('sortBy', _params['sort_by']))
             _collection_formats['sortBy'] = 'multi'
-
-        if _params.get('start') is not None:  # noqa: E501
-            _query_params.append(('start', _params['start']))
 
         if _params.get('limit') is not None:  # noqa: E501
             _query_params.append(('limit', _params['limit']))

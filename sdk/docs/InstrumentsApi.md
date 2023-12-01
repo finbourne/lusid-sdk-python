@@ -1620,7 +1620,7 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **list_instruments**
-> PagedResourceListOfInstrument list_instruments(as_at=as_at, effective_at=effective_at, page=page, sort_by=sort_by, start=start, limit=limit, filter=filter, instrument_property_keys=instrument_property_keys, scope=scope, relationship_definition_ids=relationship_definition_ids)
+> PagedResourceListOfInstrument list_instruments(as_at=as_at, effective_at=effective_at, page=page, sort_by=sort_by, limit=limit, filter=filter, instrument_property_keys=instrument_property_keys, scope=scope, relationship_definition_ids=relationship_definition_ids)
 
 ListInstruments: List instruments
 
@@ -1679,9 +1679,8 @@ async with api_client_factory:
     api_instance = api_client_factory.build(lusid.InstrumentsApi)
     as_at = '2013-10-20T19:20:30+01:00' # datetime | The asAt datetime at which to list instruments. Defaults to returning the latest               version of each instrument if not specified. (optional)
     effective_at = 'effective_at_example' # str | The effective datetime or cut label at which to list instruments.               Defaults to the current LUSID system datetime if not specified. (optional)
-    page = 'page_example' # str | The pagination token to use to continue listing instruments; this value is returned from               the previous call. If a pagination token is provided, the <i>sortBy</i>, <i>filter</i>, <i>effectiveAt</i> and               <i>asAt</i> fields must not have changed since the original request. Also, a <i>start</i> value cannot be               provided. For more information, see https://support.lusid.com/knowledgebase/article/KA-01915. (optional)
+    page = 'page_example' # str | The pagination token to use to continue listing instruments; this value is returned from               the previous call. If a pagination token is provided, the <i>sortBy</i>, <i>filter</i>, <i>effectiveAt</i> and               <i>asAt</i> fields must not have changed since the original request.               For more information, see https://support.lusid.com/knowledgebase/article/KA-01915. (optional)
     sort_by = ['sort_by_example'] # List[str] | A list of field names or properties to sort by, each suffixed by \" ASC\" or \" DESC\" (optional)
-    start = 56 # int | When paginating, skip this number of results. (optional)
     limit = 56 # int | When paginating, limit the results to this number. (optional)
     filter = 'State eq 'Active'' # str | Expression to filter the result set. Defaults to filtering out inactive instruments               (that is, those that have been deleted). For more information about filtering results,               see https://support.lusid.com/knowledgebase/article/KA-01914. (optional) (default to 'State eq 'Active'')
     instrument_property_keys = ['instrument_property_keys_example'] # List[str] | A list of property keys from the 'Instrument' domain to decorate onto               instruments, or from any domain that supports relationships to decorate onto related entities.               These must have the format {domain}/{scope}/{code}, for example 'Instrument/system/Name'. (optional)
@@ -1690,7 +1689,7 @@ async with api_client_factory:
 
     try:
         # ListInstruments: List instruments
-        api_response = await api_instance.list_instruments(as_at=as_at, effective_at=effective_at, page=page, sort_by=sort_by, start=start, limit=limit, filter=filter, instrument_property_keys=instrument_property_keys, scope=scope, relationship_definition_ids=relationship_definition_ids)
+        api_response = await api_instance.list_instruments(as_at=as_at, effective_at=effective_at, page=page, sort_by=sort_by, limit=limit, filter=filter, instrument_property_keys=instrument_property_keys, scope=scope, relationship_definition_ids=relationship_definition_ids)
         print("The response of InstrumentsApi->list_instruments:\n")
         pprint(api_response)
     except Exception as e:
@@ -1704,9 +1703,8 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **as_at** | **datetime**| The asAt datetime at which to list instruments. Defaults to returning the latest               version of each instrument if not specified. | [optional] 
  **effective_at** | **str**| The effective datetime or cut label at which to list instruments.               Defaults to the current LUSID system datetime if not specified. | [optional] 
- **page** | **str**| The pagination token to use to continue listing instruments; this value is returned from               the previous call. If a pagination token is provided, the &lt;i&gt;sortBy&lt;/i&gt;, &lt;i&gt;filter&lt;/i&gt;, &lt;i&gt;effectiveAt&lt;/i&gt; and               &lt;i&gt;asAt&lt;/i&gt; fields must not have changed since the original request. Also, a &lt;i&gt;start&lt;/i&gt; value cannot be               provided. For more information, see https://support.lusid.com/knowledgebase/article/KA-01915. | [optional] 
+ **page** | **str**| The pagination token to use to continue listing instruments; this value is returned from               the previous call. If a pagination token is provided, the &lt;i&gt;sortBy&lt;/i&gt;, &lt;i&gt;filter&lt;/i&gt;, &lt;i&gt;effectiveAt&lt;/i&gt; and               &lt;i&gt;asAt&lt;/i&gt; fields must not have changed since the original request.               For more information, see https://support.lusid.com/knowledgebase/article/KA-01915. | [optional] 
  **sort_by** | [**List[str]**](str.md)| A list of field names or properties to sort by, each suffixed by \&quot; ASC\&quot; or \&quot; DESC\&quot; | [optional] 
- **start** | **int**| When paginating, skip this number of results. | [optional] 
  **limit** | **int**| When paginating, limit the results to this number. | [optional] 
  **filter** | **str**| Expression to filter the result set. Defaults to filtering out inactive instruments               (that is, those that have been deleted). For more information about filtering results,               see https://support.lusid.com/knowledgebase/article/KA-01914. | [optional] [default to &#39;State eq &#39;Active&#39;&#39;]
  **instrument_property_keys** | [**List[str]**](str.md)| A list of property keys from the &#39;Instrument&#39; domain to decorate onto               instruments, or from any domain that supports relationships to decorate onto related entities.               These must have the format {domain}/{scope}/{code}, for example &#39;Instrument/system/Name&#39;. | [optional] 

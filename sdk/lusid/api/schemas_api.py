@@ -366,28 +366,26 @@ class SchemasApi:
             _request_auth=_params.get('_request_auth'))
 
     @overload
-    async def get_value_types(self, sort_by : Annotated[Optional[conlist(StrictStr)], Field(description="Optional. Order the results by these fields. Use use the '-' sign to denote descending order e.g. -MyFieldName")] = None, start : Annotated[Optional[StrictInt], Field(description="Optional. When paginating, skip this number of results")] = None, limit : Annotated[Optional[StrictInt], Field(description="Optional. When paginating, limit the number of returned results to this many.")] = None, **kwargs) -> ResourceListOfValueType:  # noqa: E501
+    async def get_value_types(self, sort_by : Annotated[Optional[conlist(StrictStr)], Field(description="Optional. Order the results by these fields. Use use the '-' sign to denote descending order e.g. -MyFieldName")] = None, limit : Annotated[Optional[StrictInt], Field(description="Optional. When paginating, limit the number of returned results to this many.")] = None, **kwargs) -> ResourceListOfValueType:  # noqa: E501
         ...
 
     @overload
-    def get_value_types(self, sort_by : Annotated[Optional[conlist(StrictStr)], Field(description="Optional. Order the results by these fields. Use use the '-' sign to denote descending order e.g. -MyFieldName")] = None, start : Annotated[Optional[StrictInt], Field(description="Optional. When paginating, skip this number of results")] = None, limit : Annotated[Optional[StrictInt], Field(description="Optional. When paginating, limit the number of returned results to this many.")] = None, async_req: Optional[bool]=True, **kwargs) -> ResourceListOfValueType:  # noqa: E501
+    def get_value_types(self, sort_by : Annotated[Optional[conlist(StrictStr)], Field(description="Optional. Order the results by these fields. Use use the '-' sign to denote descending order e.g. -MyFieldName")] = None, limit : Annotated[Optional[StrictInt], Field(description="Optional. When paginating, limit the number of returned results to this many.")] = None, async_req: Optional[bool]=True, **kwargs) -> ResourceListOfValueType:  # noqa: E501
         ...
 
     @validate_arguments
-    def get_value_types(self, sort_by : Annotated[Optional[conlist(StrictStr)], Field(description="Optional. Order the results by these fields. Use use the '-' sign to denote descending order e.g. -MyFieldName")] = None, start : Annotated[Optional[StrictInt], Field(description="Optional. When paginating, skip this number of results")] = None, limit : Annotated[Optional[StrictInt], Field(description="Optional. When paginating, limit the number of returned results to this many.")] = None, async_req: Optional[bool]=None, **kwargs) -> Union[ResourceListOfValueType, Awaitable[ResourceListOfValueType]]:  # noqa: E501
+    def get_value_types(self, sort_by : Annotated[Optional[conlist(StrictStr)], Field(description="Optional. Order the results by these fields. Use use the '-' sign to denote descending order e.g. -MyFieldName")] = None, limit : Annotated[Optional[StrictInt], Field(description="Optional. When paginating, limit the number of returned results to this many.")] = None, async_req: Optional[bool]=None, **kwargs) -> Union[ResourceListOfValueType, Awaitable[ResourceListOfValueType]]:  # noqa: E501
         """[EARLY ACCESS] GetValueTypes: Get value types  # noqa: E501
 
         Gets the available value types for which a schema is available.  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
 
-        >>> thread = api.get_value_types(sort_by, start, limit, async_req=True)
+        >>> thread = api.get_value_types(sort_by, limit, async_req=True)
         >>> result = thread.get()
 
         :param sort_by: Optional. Order the results by these fields. Use use the '-' sign to denote descending order e.g. -MyFieldName
         :type sort_by: List[str]
-        :param start: Optional. When paginating, skip this number of results
-        :type start: int
         :param limit: Optional. When paginating, limit the number of returned results to this many.
         :type limit: int
         :param async_req: Whether to execute the request asynchronously.
@@ -407,23 +405,21 @@ class SchemasApi:
             raise ValueError(message)
         if async_req is not None:
             kwargs['async_req'] = async_req
-        return self.get_value_types_with_http_info(sort_by, start, limit, **kwargs)  # noqa: E501
+        return self.get_value_types_with_http_info(sort_by, limit, **kwargs)  # noqa: E501
 
     @validate_arguments
-    def get_value_types_with_http_info(self, sort_by : Annotated[Optional[conlist(StrictStr)], Field(description="Optional. Order the results by these fields. Use use the '-' sign to denote descending order e.g. -MyFieldName")] = None, start : Annotated[Optional[StrictInt], Field(description="Optional. When paginating, skip this number of results")] = None, limit : Annotated[Optional[StrictInt], Field(description="Optional. When paginating, limit the number of returned results to this many.")] = None, **kwargs) -> ApiResponse:  # noqa: E501
+    def get_value_types_with_http_info(self, sort_by : Annotated[Optional[conlist(StrictStr)], Field(description="Optional. Order the results by these fields. Use use the '-' sign to denote descending order e.g. -MyFieldName")] = None, limit : Annotated[Optional[StrictInt], Field(description="Optional. When paginating, limit the number of returned results to this many.")] = None, **kwargs) -> ApiResponse:  # noqa: E501
         """[EARLY ACCESS] GetValueTypes: Get value types  # noqa: E501
 
         Gets the available value types for which a schema is available.  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
 
-        >>> thread = api.get_value_types_with_http_info(sort_by, start, limit, async_req=True)
+        >>> thread = api.get_value_types_with_http_info(sort_by, limit, async_req=True)
         >>> result = thread.get()
 
         :param sort_by: Optional. Order the results by these fields. Use use the '-' sign to denote descending order e.g. -MyFieldName
         :type sort_by: List[str]
-        :param start: Optional. When paginating, skip this number of results
-        :type start: int
         :param limit: Optional. When paginating, limit the number of returned results to this many.
         :type limit: int
         :param async_req: Whether to execute the request asynchronously.
@@ -455,7 +451,6 @@ class SchemasApi:
 
         _all_params = [
             'sort_by',
-            'start',
             'limit'
         ]
         _all_params.extend(
@@ -490,9 +485,6 @@ class SchemasApi:
         if _params.get('sort_by') is not None:  # noqa: E501
             _query_params.append(('sortBy', _params['sort_by']))
             _collection_formats['sortBy'] = 'multi'
-
-        if _params.get('start') is not None:  # noqa: E501
-            _query_params.append(('start', _params['start']))
 
         if _params.get('limit') is not None:  # noqa: E501
             _query_params.append(('limit', _params['limit']))

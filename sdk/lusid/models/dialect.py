@@ -18,10 +18,11 @@ import re  # noqa: F401
 import json
 
 
-from typing import Any, Dict
+from typing import Any, Dict, Optional
 from pydantic import BaseModel, Field
 from lusid.models.dialect_id import DialectId
 from lusid.models.dialect_schema import DialectSchema
+from lusid.models.version import Version
 
 class Dialect(BaseModel):
     """
@@ -29,7 +30,8 @@ class Dialect(BaseModel):
     """
     id: DialectId = Field(...)
     var_schema: DialectSchema = Field(..., alias="schema")
-    __properties = ["id", "schema"]
+    version: Optional[Version] = None
+    __properties = ["id", "schema", "version"]
 
     class Config:
         """Pydantic configuration"""
@@ -61,6 +63,9 @@ class Dialect(BaseModel):
         # override the default output from pydantic by calling `to_dict()` of var_schema
         if self.var_schema:
             _dict['schema'] = self.var_schema.to_dict()
+        # override the default output from pydantic by calling `to_dict()` of version
+        if self.version:
+            _dict['version'] = self.version.to_dict()
         return _dict
 
     @classmethod
@@ -74,6 +79,7 @@ class Dialect(BaseModel):
 
         _obj = Dialect.parse_obj({
             "id": DialectId.from_dict(obj.get("id")) if obj.get("id") is not None else None,
-            "var_schema": DialectSchema.from_dict(obj.get("schema")) if obj.get("schema") is not None else None
+            "var_schema": DialectSchema.from_dict(obj.get("schema")) if obj.get("schema") is not None else None,
+            "version": Version.from_dict(obj.get("version")) if obj.get("version") is not None else None
         })
         return _obj

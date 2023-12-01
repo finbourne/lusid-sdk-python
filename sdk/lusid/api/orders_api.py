@@ -22,7 +22,7 @@ from typing import overload, Optional, Union, Awaitable
 from typing_extensions import Annotated
 from datetime import datetime
 
-from pydantic import Field, StrictInt, StrictStr, conint, conlist, constr, validator
+from pydantic import Field, StrictStr, conint, conlist, constr, validator
 
 from typing import Optional
 
@@ -391,32 +391,30 @@ class OrdersApi:
             _request_auth=_params.get('_request_auth'))
 
     @overload
-    async def list_orders(self, as_at : Annotated[Optional[datetime], Field(description="The asAt datetime at which to retrieve the order. Defaults to return the latest version of the order if not specified.")] = None, page : Annotated[Optional[constr(strict=True, max_length=500, min_length=1)], Field(description="The pagination token to use to continue listing orders from a previous call to list orders.              This value is returned from the previous call. If a pagination token is provided the sortBy, filter, effectiveAt, and asAt fields              must not have changed since the original request. Also, if set, a start value cannot be provided.")] = None, sort_by : Annotated[Optional[conlist(StrictStr)], Field(description="A list of field names or properties to sort by, each suffixed by \" ASC\" or \" DESC\"")] = None, start : Annotated[Optional[StrictInt], Field(description="When paginating, skip this number of results.")] = None, limit : Annotated[Optional[conint(strict=True, le=5000, ge=1)], Field(description="When paginating, limit the number of returned results to this many.")] = None, filter : Annotated[Optional[constr(strict=True, max_length=16384, min_length=0)], Field(description="Expression to filter the result set. Read more about filtering results from LUSID here:              https://support.lusid.com/filtering-results-from-lusid.")] = None, property_keys : Annotated[Optional[conlist(StrictStr)], Field(description="A list of property keys from the \"Orders\" domain to decorate onto each order.                  These take the format {domain}/{scope}/{code} e.g. \"Orders/system/Name\".")] = None, **kwargs) -> PagedResourceListOfOrder:  # noqa: E501
+    async def list_orders(self, as_at : Annotated[Optional[datetime], Field(description="The asAt datetime at which to retrieve the order. Defaults to return the latest version of the order if not specified.")] = None, page : Annotated[Optional[constr(strict=True, max_length=500, min_length=1)], Field(description="The pagination token to use to continue listing orders from a previous call to list orders.              This value is returned from the previous call. If a pagination token is provided the sortBy, filter, effectiveAt, and asAt fields              must not have changed since the original request.")] = None, sort_by : Annotated[Optional[conlist(StrictStr)], Field(description="A list of field names or properties to sort by, each suffixed by \" ASC\" or \" DESC\"")] = None, limit : Annotated[Optional[conint(strict=True, le=5000, ge=1)], Field(description="When paginating, limit the number of returned results to this many.")] = None, filter : Annotated[Optional[constr(strict=True, max_length=16384, min_length=0)], Field(description="Expression to filter the result set. Read more about filtering results from LUSID here:              https://support.lusid.com/filtering-results-from-lusid.")] = None, property_keys : Annotated[Optional[conlist(StrictStr)], Field(description="A list of property keys from the \"Orders\" domain to decorate onto each order.                  These take the format {domain}/{scope}/{code} e.g. \"Orders/system/Name\".")] = None, **kwargs) -> PagedResourceListOfOrder:  # noqa: E501
         ...
 
     @overload
-    def list_orders(self, as_at : Annotated[Optional[datetime], Field(description="The asAt datetime at which to retrieve the order. Defaults to return the latest version of the order if not specified.")] = None, page : Annotated[Optional[constr(strict=True, max_length=500, min_length=1)], Field(description="The pagination token to use to continue listing orders from a previous call to list orders.              This value is returned from the previous call. If a pagination token is provided the sortBy, filter, effectiveAt, and asAt fields              must not have changed since the original request. Also, if set, a start value cannot be provided.")] = None, sort_by : Annotated[Optional[conlist(StrictStr)], Field(description="A list of field names or properties to sort by, each suffixed by \" ASC\" or \" DESC\"")] = None, start : Annotated[Optional[StrictInt], Field(description="When paginating, skip this number of results.")] = None, limit : Annotated[Optional[conint(strict=True, le=5000, ge=1)], Field(description="When paginating, limit the number of returned results to this many.")] = None, filter : Annotated[Optional[constr(strict=True, max_length=16384, min_length=0)], Field(description="Expression to filter the result set. Read more about filtering results from LUSID here:              https://support.lusid.com/filtering-results-from-lusid.")] = None, property_keys : Annotated[Optional[conlist(StrictStr)], Field(description="A list of property keys from the \"Orders\" domain to decorate onto each order.                  These take the format {domain}/{scope}/{code} e.g. \"Orders/system/Name\".")] = None, async_req: Optional[bool]=True, **kwargs) -> PagedResourceListOfOrder:  # noqa: E501
+    def list_orders(self, as_at : Annotated[Optional[datetime], Field(description="The asAt datetime at which to retrieve the order. Defaults to return the latest version of the order if not specified.")] = None, page : Annotated[Optional[constr(strict=True, max_length=500, min_length=1)], Field(description="The pagination token to use to continue listing orders from a previous call to list orders.              This value is returned from the previous call. If a pagination token is provided the sortBy, filter, effectiveAt, and asAt fields              must not have changed since the original request.")] = None, sort_by : Annotated[Optional[conlist(StrictStr)], Field(description="A list of field names or properties to sort by, each suffixed by \" ASC\" or \" DESC\"")] = None, limit : Annotated[Optional[conint(strict=True, le=5000, ge=1)], Field(description="When paginating, limit the number of returned results to this many.")] = None, filter : Annotated[Optional[constr(strict=True, max_length=16384, min_length=0)], Field(description="Expression to filter the result set. Read more about filtering results from LUSID here:              https://support.lusid.com/filtering-results-from-lusid.")] = None, property_keys : Annotated[Optional[conlist(StrictStr)], Field(description="A list of property keys from the \"Orders\" domain to decorate onto each order.                  These take the format {domain}/{scope}/{code} e.g. \"Orders/system/Name\".")] = None, async_req: Optional[bool]=True, **kwargs) -> PagedResourceListOfOrder:  # noqa: E501
         ...
 
     @validate_arguments
-    def list_orders(self, as_at : Annotated[Optional[datetime], Field(description="The asAt datetime at which to retrieve the order. Defaults to return the latest version of the order if not specified.")] = None, page : Annotated[Optional[constr(strict=True, max_length=500, min_length=1)], Field(description="The pagination token to use to continue listing orders from a previous call to list orders.              This value is returned from the previous call. If a pagination token is provided the sortBy, filter, effectiveAt, and asAt fields              must not have changed since the original request. Also, if set, a start value cannot be provided.")] = None, sort_by : Annotated[Optional[conlist(StrictStr)], Field(description="A list of field names or properties to sort by, each suffixed by \" ASC\" or \" DESC\"")] = None, start : Annotated[Optional[StrictInt], Field(description="When paginating, skip this number of results.")] = None, limit : Annotated[Optional[conint(strict=True, le=5000, ge=1)], Field(description="When paginating, limit the number of returned results to this many.")] = None, filter : Annotated[Optional[constr(strict=True, max_length=16384, min_length=0)], Field(description="Expression to filter the result set. Read more about filtering results from LUSID here:              https://support.lusid.com/filtering-results-from-lusid.")] = None, property_keys : Annotated[Optional[conlist(StrictStr)], Field(description="A list of property keys from the \"Orders\" domain to decorate onto each order.                  These take the format {domain}/{scope}/{code} e.g. \"Orders/system/Name\".")] = None, async_req: Optional[bool]=None, **kwargs) -> Union[PagedResourceListOfOrder, Awaitable[PagedResourceListOfOrder]]:  # noqa: E501
+    def list_orders(self, as_at : Annotated[Optional[datetime], Field(description="The asAt datetime at which to retrieve the order. Defaults to return the latest version of the order if not specified.")] = None, page : Annotated[Optional[constr(strict=True, max_length=500, min_length=1)], Field(description="The pagination token to use to continue listing orders from a previous call to list orders.              This value is returned from the previous call. If a pagination token is provided the sortBy, filter, effectiveAt, and asAt fields              must not have changed since the original request.")] = None, sort_by : Annotated[Optional[conlist(StrictStr)], Field(description="A list of field names or properties to sort by, each suffixed by \" ASC\" or \" DESC\"")] = None, limit : Annotated[Optional[conint(strict=True, le=5000, ge=1)], Field(description="When paginating, limit the number of returned results to this many.")] = None, filter : Annotated[Optional[constr(strict=True, max_length=16384, min_length=0)], Field(description="Expression to filter the result set. Read more about filtering results from LUSID here:              https://support.lusid.com/filtering-results-from-lusid.")] = None, property_keys : Annotated[Optional[conlist(StrictStr)], Field(description="A list of property keys from the \"Orders\" domain to decorate onto each order.                  These take the format {domain}/{scope}/{code} e.g. \"Orders/system/Name\".")] = None, async_req: Optional[bool]=None, **kwargs) -> Union[PagedResourceListOfOrder, Awaitable[PagedResourceListOfOrder]]:  # noqa: E501
         """[EARLY ACCESS] ListOrders: List Orders  # noqa: E501
 
         Fetch the last pre-AsAt date version of each order with optional filtering (does not fetch the entire history).  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
 
-        >>> thread = api.list_orders(as_at, page, sort_by, start, limit, filter, property_keys, async_req=True)
+        >>> thread = api.list_orders(as_at, page, sort_by, limit, filter, property_keys, async_req=True)
         >>> result = thread.get()
 
         :param as_at: The asAt datetime at which to retrieve the order. Defaults to return the latest version of the order if not specified.
         :type as_at: datetime
-        :param page: The pagination token to use to continue listing orders from a previous call to list orders.              This value is returned from the previous call. If a pagination token is provided the sortBy, filter, effectiveAt, and asAt fields              must not have changed since the original request. Also, if set, a start value cannot be provided.
+        :param page: The pagination token to use to continue listing orders from a previous call to list orders.              This value is returned from the previous call. If a pagination token is provided the sortBy, filter, effectiveAt, and asAt fields              must not have changed since the original request.
         :type page: str
         :param sort_by: A list of field names or properties to sort by, each suffixed by \" ASC\" or \" DESC\"
         :type sort_by: List[str]
-        :param start: When paginating, skip this number of results.
-        :type start: int
         :param limit: When paginating, limit the number of returned results to this many.
         :type limit: int
         :param filter: Expression to filter the result set. Read more about filtering results from LUSID here:              https://support.lusid.com/filtering-results-from-lusid.
@@ -440,27 +438,25 @@ class OrdersApi:
             raise ValueError(message)
         if async_req is not None:
             kwargs['async_req'] = async_req
-        return self.list_orders_with_http_info(as_at, page, sort_by, start, limit, filter, property_keys, **kwargs)  # noqa: E501
+        return self.list_orders_with_http_info(as_at, page, sort_by, limit, filter, property_keys, **kwargs)  # noqa: E501
 
     @validate_arguments
-    def list_orders_with_http_info(self, as_at : Annotated[Optional[datetime], Field(description="The asAt datetime at which to retrieve the order. Defaults to return the latest version of the order if not specified.")] = None, page : Annotated[Optional[constr(strict=True, max_length=500, min_length=1)], Field(description="The pagination token to use to continue listing orders from a previous call to list orders.              This value is returned from the previous call. If a pagination token is provided the sortBy, filter, effectiveAt, and asAt fields              must not have changed since the original request. Also, if set, a start value cannot be provided.")] = None, sort_by : Annotated[Optional[conlist(StrictStr)], Field(description="A list of field names or properties to sort by, each suffixed by \" ASC\" or \" DESC\"")] = None, start : Annotated[Optional[StrictInt], Field(description="When paginating, skip this number of results.")] = None, limit : Annotated[Optional[conint(strict=True, le=5000, ge=1)], Field(description="When paginating, limit the number of returned results to this many.")] = None, filter : Annotated[Optional[constr(strict=True, max_length=16384, min_length=0)], Field(description="Expression to filter the result set. Read more about filtering results from LUSID here:              https://support.lusid.com/filtering-results-from-lusid.")] = None, property_keys : Annotated[Optional[conlist(StrictStr)], Field(description="A list of property keys from the \"Orders\" domain to decorate onto each order.                  These take the format {domain}/{scope}/{code} e.g. \"Orders/system/Name\".")] = None, **kwargs) -> ApiResponse:  # noqa: E501
+    def list_orders_with_http_info(self, as_at : Annotated[Optional[datetime], Field(description="The asAt datetime at which to retrieve the order. Defaults to return the latest version of the order if not specified.")] = None, page : Annotated[Optional[constr(strict=True, max_length=500, min_length=1)], Field(description="The pagination token to use to continue listing orders from a previous call to list orders.              This value is returned from the previous call. If a pagination token is provided the sortBy, filter, effectiveAt, and asAt fields              must not have changed since the original request.")] = None, sort_by : Annotated[Optional[conlist(StrictStr)], Field(description="A list of field names or properties to sort by, each suffixed by \" ASC\" or \" DESC\"")] = None, limit : Annotated[Optional[conint(strict=True, le=5000, ge=1)], Field(description="When paginating, limit the number of returned results to this many.")] = None, filter : Annotated[Optional[constr(strict=True, max_length=16384, min_length=0)], Field(description="Expression to filter the result set. Read more about filtering results from LUSID here:              https://support.lusid.com/filtering-results-from-lusid.")] = None, property_keys : Annotated[Optional[conlist(StrictStr)], Field(description="A list of property keys from the \"Orders\" domain to decorate onto each order.                  These take the format {domain}/{scope}/{code} e.g. \"Orders/system/Name\".")] = None, **kwargs) -> ApiResponse:  # noqa: E501
         """[EARLY ACCESS] ListOrders: List Orders  # noqa: E501
 
         Fetch the last pre-AsAt date version of each order with optional filtering (does not fetch the entire history).  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
 
-        >>> thread = api.list_orders_with_http_info(as_at, page, sort_by, start, limit, filter, property_keys, async_req=True)
+        >>> thread = api.list_orders_with_http_info(as_at, page, sort_by, limit, filter, property_keys, async_req=True)
         >>> result = thread.get()
 
         :param as_at: The asAt datetime at which to retrieve the order. Defaults to return the latest version of the order if not specified.
         :type as_at: datetime
-        :param page: The pagination token to use to continue listing orders from a previous call to list orders.              This value is returned from the previous call. If a pagination token is provided the sortBy, filter, effectiveAt, and asAt fields              must not have changed since the original request. Also, if set, a start value cannot be provided.
+        :param page: The pagination token to use to continue listing orders from a previous call to list orders.              This value is returned from the previous call. If a pagination token is provided the sortBy, filter, effectiveAt, and asAt fields              must not have changed since the original request.
         :type page: str
         :param sort_by: A list of field names or properties to sort by, each suffixed by \" ASC\" or \" DESC\"
         :type sort_by: List[str]
-        :param start: When paginating, skip this number of results.
-        :type start: int
         :param limit: When paginating, limit the number of returned results to this many.
         :type limit: int
         :param filter: Expression to filter the result set. Read more about filtering results from LUSID here:              https://support.lusid.com/filtering-results-from-lusid.
@@ -498,7 +494,6 @@ class OrdersApi:
             'as_at',
             'page',
             'sort_by',
-            'start',
             'limit',
             'filter',
             'property_keys'
@@ -544,9 +539,6 @@ class OrdersApi:
         if _params.get('sort_by') is not None:  # noqa: E501
             _query_params.append(('sortBy', _params['sort_by']))
             _collection_formats['sortBy'] = 'multi'
-
-        if _params.get('start') is not None:  # noqa: E501
-            _query_params.append(('start', _params['start']))
 
         if _params.get('limit') is not None:  # noqa: E501
             _query_params.append(('limit', _params['limit']))

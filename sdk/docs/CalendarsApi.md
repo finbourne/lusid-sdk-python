@@ -1000,7 +1000,7 @@ async with api_client_factory:
     # Create an instance of the API class
     api_instance = api_client_factory.build(lusid.CalendarsApi)
     as_at = '2013-10-20T19:20:30+01:00' # datetime | The AsAt datetime at which to retrieve the calendars (optional)
-    page = 'page_example' # str | The pagination token to use to continue listing calendars from a previous call to list calendars.              This value is returned from the previous call. If a pagination token is provided the sortBy, filter, and asAt fields              must not have changed since the original request. Also, if set, a start value cannot be provided. (optional)
+    page = 'page_example' # str | The pagination token to use to continue listing calendars from a previous call to list calendars.              This value is returned from the previous call. If a pagination token is provided the sortBy, filter, and asAt fields              must not have changed since the original request. (optional)
     limit = 56 # int | When paginating, limit the number of returned results to this many. (optional)
     property_keys = ['property_keys_example'] # List[str] | A list of property keys from the \"Calendar\" domain to decorate onto the calendar,               These take the format {domain}/{scope}/{code} e.g. \"Calendar/System/Name\". (optional)
     filter = 'filter_example' # str | Expression to filter the result set. Read more about filtering results from LUSID here https://support.lusid.com/filtering-results-from-lusid. (optional)
@@ -1020,7 +1020,7 @@ async with api_client_factory:
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **as_at** | **datetime**| The AsAt datetime at which to retrieve the calendars | [optional] 
- **page** | **str**| The pagination token to use to continue listing calendars from a previous call to list calendars.              This value is returned from the previous call. If a pagination token is provided the sortBy, filter, and asAt fields              must not have changed since the original request. Also, if set, a start value cannot be provided. | [optional] 
+ **page** | **str**| The pagination token to use to continue listing calendars from a previous call to list calendars.              This value is returned from the previous call. If a pagination token is provided the sortBy, filter, and asAt fields              must not have changed since the original request. | [optional] 
  **limit** | **int**| When paginating, limit the number of returned results to this many. | [optional] 
  **property_keys** | [**List[str]**](str.md)| A list of property keys from the \&quot;Calendar\&quot; domain to decorate onto the calendar,               These take the format {domain}/{scope}/{code} e.g. \&quot;Calendar/System/Name\&quot;. | [optional] 
  **filter** | **str**| Expression to filter the result set. Read more about filtering results from LUSID here https://support.lusid.com/filtering-results-from-lusid. | [optional] 
@@ -1048,7 +1048,7 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **list_calendars_in_scope**
-> PagedResourceListOfCalendar list_calendars_in_scope(scope, as_at=as_at, page=page, start=start, limit=limit, property_keys=property_keys, filter=filter)
+> PagedResourceListOfCalendar list_calendars_in_scope(scope, as_at=as_at, page=page, limit=limit, property_keys=property_keys, filter=filter)
 
 [EARLY ACCESS] ListCalendarsInScope: List all calenders in a specified scope
 
@@ -1107,15 +1107,14 @@ async with api_client_factory:
     api_instance = api_client_factory.build(lusid.CalendarsApi)
     scope = 'scope_example' # str | Scope of the calendars
     as_at = '2013-10-20T19:20:30+01:00' # datetime | The AsAt datetime at which to retrieve the calendars (optional)
-    page = 'page_example' # str | The pagination token to use to continue listing calendars from a previous call to list calendars.              This value is returned from the previous call. If a pagination token is provided the sortBy, filter, and asAt fields              must not have changed since the original request. Also, if set, a start value cannot be provided. (optional)
-    start = 56 # int | When paginating, skip this number of results. (optional)
+    page = 'page_example' # str | The pagination token to use to continue listing calendars from a previous call to list calendars.              This value is returned from the previous call. If a pagination token is provided the sortBy, filter, and asAt fields              must not have changed since the original request. (optional)
     limit = 56 # int | When paginating, limit the number of returned results to this many. (optional)
     property_keys = ['property_keys_example'] # List[str] | A list of property keys from the \"Calendar\" domain to decorate onto the calendar,               These take the format {domain}/{scope}/{code} e.g. \"Calendar/System/Name\". (optional)
     filter = 'filter_example' # str | Expression to filter the result set. Read more about filtering results from LUSID here https://support.lusid.com/filtering-results-from-lusid. (optional)
 
     try:
         # [EARLY ACCESS] ListCalendarsInScope: List all calenders in a specified scope
-        api_response = await api_instance.list_calendars_in_scope(scope, as_at=as_at, page=page, start=start, limit=limit, property_keys=property_keys, filter=filter)
+        api_response = await api_instance.list_calendars_in_scope(scope, as_at=as_at, page=page, limit=limit, property_keys=property_keys, filter=filter)
         print("The response of CalendarsApi->list_calendars_in_scope:\n")
         pprint(api_response)
     except Exception as e:
@@ -1129,8 +1128,7 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **scope** | **str**| Scope of the calendars | 
  **as_at** | **datetime**| The AsAt datetime at which to retrieve the calendars | [optional] 
- **page** | **str**| The pagination token to use to continue listing calendars from a previous call to list calendars.              This value is returned from the previous call. If a pagination token is provided the sortBy, filter, and asAt fields              must not have changed since the original request. Also, if set, a start value cannot be provided. | [optional] 
- **start** | **int**| When paginating, skip this number of results. | [optional] 
+ **page** | **str**| The pagination token to use to continue listing calendars from a previous call to list calendars.              This value is returned from the previous call. If a pagination token is provided the sortBy, filter, and asAt fields              must not have changed since the original request. | [optional] 
  **limit** | **int**| When paginating, limit the number of returned results to this many. | [optional] 
  **property_keys** | [**List[str]**](str.md)| A list of property keys from the \&quot;Calendar\&quot; domain to decorate onto the calendar,               These take the format {domain}/{scope}/{code} e.g. \&quot;Calendar/System/Name\&quot;. | [optional] 
  **filter** | **str**| Expression to filter the result set. Read more about filtering results from LUSID here https://support.lusid.com/filtering-results-from-lusid. | [optional] 

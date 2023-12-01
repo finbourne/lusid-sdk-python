@@ -523,35 +523,33 @@ class CutLabelDefinitionsApi:
             _request_auth=_params.get('_request_auth'))
 
     @overload
-    async def list_cut_label_definitions(self, as_at : Annotated[Optional[datetime], Field(description="Optional. The As At time at which listed Cut Labels are valid")] = None, sort_by : Annotated[Optional[conlist(StrictStr)], Field(description="Optional. Order the results by these fields. Use use the '-' sign to denote descending order e.g. -MyFieldName")] = None, start : Annotated[Optional[StrictInt], Field(description="Optional. When paginating, skip this number of results")] = None, limit : Annotated[Optional[StrictInt], Field(description="Optional. When paginating, limit the number of returned results to this many.")] = None, filter : Annotated[Optional[constr(strict=True, max_length=16384, min_length=0)], Field(description="Optional. Expression to filter the result set.              For example, to filter on code, use \"code eq 'string'\"              Read more about filtering results from LUSID here https://support.lusid.com/filtering-results-from-lusid.")] = None, page : Annotated[Optional[constr(strict=True, max_length=500, min_length=1)], Field(description="The pagination token to use to continue listing cut labels from a previous call This value is returned from the previous call.  If a pagination token is provided the sortBy, filter, and asAt fields  must not have changed since the original request. Also, if set, a start value cannot be provided.")] = None, **kwargs) -> PagedResourceListOfCutLabelDefinition:  # noqa: E501
+    async def list_cut_label_definitions(self, as_at : Annotated[Optional[datetime], Field(description="Optional. The As At time at which listed Cut Labels are valid")] = None, sort_by : Annotated[Optional[conlist(StrictStr)], Field(description="Optional. Order the results by these fields. Use use the '-' sign to denote descending order e.g. -MyFieldName")] = None, limit : Annotated[Optional[StrictInt], Field(description="Optional. When paginating, limit the number of returned results to this many.")] = None, filter : Annotated[Optional[constr(strict=True, max_length=16384, min_length=0)], Field(description="Optional. Expression to filter the result set.              For example, to filter on code, use \"code eq 'string'\"              Read more about filtering results from LUSID here https://support.lusid.com/filtering-results-from-lusid.")] = None, page : Annotated[Optional[constr(strict=True, max_length=500, min_length=1)], Field(description="The pagination token to use to continue listing cut labels from a previous call This value is returned from the previous call.  If a pagination token is provided the sortBy, filter, and asAt fields  must not have changed since the original request.")] = None, **kwargs) -> PagedResourceListOfCutLabelDefinition:  # noqa: E501
         ...
 
     @overload
-    def list_cut_label_definitions(self, as_at : Annotated[Optional[datetime], Field(description="Optional. The As At time at which listed Cut Labels are valid")] = None, sort_by : Annotated[Optional[conlist(StrictStr)], Field(description="Optional. Order the results by these fields. Use use the '-' sign to denote descending order e.g. -MyFieldName")] = None, start : Annotated[Optional[StrictInt], Field(description="Optional. When paginating, skip this number of results")] = None, limit : Annotated[Optional[StrictInt], Field(description="Optional. When paginating, limit the number of returned results to this many.")] = None, filter : Annotated[Optional[constr(strict=True, max_length=16384, min_length=0)], Field(description="Optional. Expression to filter the result set.              For example, to filter on code, use \"code eq 'string'\"              Read more about filtering results from LUSID here https://support.lusid.com/filtering-results-from-lusid.")] = None, page : Annotated[Optional[constr(strict=True, max_length=500, min_length=1)], Field(description="The pagination token to use to continue listing cut labels from a previous call This value is returned from the previous call.  If a pagination token is provided the sortBy, filter, and asAt fields  must not have changed since the original request. Also, if set, a start value cannot be provided.")] = None, async_req: Optional[bool]=True, **kwargs) -> PagedResourceListOfCutLabelDefinition:  # noqa: E501
+    def list_cut_label_definitions(self, as_at : Annotated[Optional[datetime], Field(description="Optional. The As At time at which listed Cut Labels are valid")] = None, sort_by : Annotated[Optional[conlist(StrictStr)], Field(description="Optional. Order the results by these fields. Use use the '-' sign to denote descending order e.g. -MyFieldName")] = None, limit : Annotated[Optional[StrictInt], Field(description="Optional. When paginating, limit the number of returned results to this many.")] = None, filter : Annotated[Optional[constr(strict=True, max_length=16384, min_length=0)], Field(description="Optional. Expression to filter the result set.              For example, to filter on code, use \"code eq 'string'\"              Read more about filtering results from LUSID here https://support.lusid.com/filtering-results-from-lusid.")] = None, page : Annotated[Optional[constr(strict=True, max_length=500, min_length=1)], Field(description="The pagination token to use to continue listing cut labels from a previous call This value is returned from the previous call.  If a pagination token is provided the sortBy, filter, and asAt fields  must not have changed since the original request.")] = None, async_req: Optional[bool]=True, **kwargs) -> PagedResourceListOfCutLabelDefinition:  # noqa: E501
         ...
 
     @validate_arguments
-    def list_cut_label_definitions(self, as_at : Annotated[Optional[datetime], Field(description="Optional. The As At time at which listed Cut Labels are valid")] = None, sort_by : Annotated[Optional[conlist(StrictStr)], Field(description="Optional. Order the results by these fields. Use use the '-' sign to denote descending order e.g. -MyFieldName")] = None, start : Annotated[Optional[StrictInt], Field(description="Optional. When paginating, skip this number of results")] = None, limit : Annotated[Optional[StrictInt], Field(description="Optional. When paginating, limit the number of returned results to this many.")] = None, filter : Annotated[Optional[constr(strict=True, max_length=16384, min_length=0)], Field(description="Optional. Expression to filter the result set.              For example, to filter on code, use \"code eq 'string'\"              Read more about filtering results from LUSID here https://support.lusid.com/filtering-results-from-lusid.")] = None, page : Annotated[Optional[constr(strict=True, max_length=500, min_length=1)], Field(description="The pagination token to use to continue listing cut labels from a previous call This value is returned from the previous call.  If a pagination token is provided the sortBy, filter, and asAt fields  must not have changed since the original request. Also, if set, a start value cannot be provided.")] = None, async_req: Optional[bool]=None, **kwargs) -> Union[PagedResourceListOfCutLabelDefinition, Awaitable[PagedResourceListOfCutLabelDefinition]]:  # noqa: E501
+    def list_cut_label_definitions(self, as_at : Annotated[Optional[datetime], Field(description="Optional. The As At time at which listed Cut Labels are valid")] = None, sort_by : Annotated[Optional[conlist(StrictStr)], Field(description="Optional. Order the results by these fields. Use use the '-' sign to denote descending order e.g. -MyFieldName")] = None, limit : Annotated[Optional[StrictInt], Field(description="Optional. When paginating, limit the number of returned results to this many.")] = None, filter : Annotated[Optional[constr(strict=True, max_length=16384, min_length=0)], Field(description="Optional. Expression to filter the result set.              For example, to filter on code, use \"code eq 'string'\"              Read more about filtering results from LUSID here https://support.lusid.com/filtering-results-from-lusid.")] = None, page : Annotated[Optional[constr(strict=True, max_length=500, min_length=1)], Field(description="The pagination token to use to continue listing cut labels from a previous call This value is returned from the previous call.  If a pagination token is provided the sortBy, filter, and asAt fields  must not have changed since the original request.")] = None, async_req: Optional[bool]=None, **kwargs) -> Union[PagedResourceListOfCutLabelDefinition, Awaitable[PagedResourceListOfCutLabelDefinition]]:  # noqa: E501
         """ListCutLabelDefinitions: List Existing Cut Labels  # noqa: E501
 
         List all the Cut Label Definitions that are valid at the given AsAt time  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
 
-        >>> thread = api.list_cut_label_definitions(as_at, sort_by, start, limit, filter, page, async_req=True)
+        >>> thread = api.list_cut_label_definitions(as_at, sort_by, limit, filter, page, async_req=True)
         >>> result = thread.get()
 
         :param as_at: Optional. The As At time at which listed Cut Labels are valid
         :type as_at: datetime
         :param sort_by: Optional. Order the results by these fields. Use use the '-' sign to denote descending order e.g. -MyFieldName
         :type sort_by: List[str]
-        :param start: Optional. When paginating, skip this number of results
-        :type start: int
         :param limit: Optional. When paginating, limit the number of returned results to this many.
         :type limit: int
         :param filter: Optional. Expression to filter the result set.              For example, to filter on code, use \"code eq 'string'\"              Read more about filtering results from LUSID here https://support.lusid.com/filtering-results-from-lusid.
         :type filter: str
-        :param page: The pagination token to use to continue listing cut labels from a previous call This value is returned from the previous call.  If a pagination token is provided the sortBy, filter, and asAt fields  must not have changed since the original request. Also, if set, a start value cannot be provided.
+        :param page: The pagination token to use to continue listing cut labels from a previous call This value is returned from the previous call.  If a pagination token is provided the sortBy, filter, and asAt fields  must not have changed since the original request.
         :type page: str
         :param async_req: Whether to execute the request asynchronously.
         :type async_req: bool, optional
@@ -570,30 +568,28 @@ class CutLabelDefinitionsApi:
             raise ValueError(message)
         if async_req is not None:
             kwargs['async_req'] = async_req
-        return self.list_cut_label_definitions_with_http_info(as_at, sort_by, start, limit, filter, page, **kwargs)  # noqa: E501
+        return self.list_cut_label_definitions_with_http_info(as_at, sort_by, limit, filter, page, **kwargs)  # noqa: E501
 
     @validate_arguments
-    def list_cut_label_definitions_with_http_info(self, as_at : Annotated[Optional[datetime], Field(description="Optional. The As At time at which listed Cut Labels are valid")] = None, sort_by : Annotated[Optional[conlist(StrictStr)], Field(description="Optional. Order the results by these fields. Use use the '-' sign to denote descending order e.g. -MyFieldName")] = None, start : Annotated[Optional[StrictInt], Field(description="Optional. When paginating, skip this number of results")] = None, limit : Annotated[Optional[StrictInt], Field(description="Optional. When paginating, limit the number of returned results to this many.")] = None, filter : Annotated[Optional[constr(strict=True, max_length=16384, min_length=0)], Field(description="Optional. Expression to filter the result set.              For example, to filter on code, use \"code eq 'string'\"              Read more about filtering results from LUSID here https://support.lusid.com/filtering-results-from-lusid.")] = None, page : Annotated[Optional[constr(strict=True, max_length=500, min_length=1)], Field(description="The pagination token to use to continue listing cut labels from a previous call This value is returned from the previous call.  If a pagination token is provided the sortBy, filter, and asAt fields  must not have changed since the original request. Also, if set, a start value cannot be provided.")] = None, **kwargs) -> ApiResponse:  # noqa: E501
+    def list_cut_label_definitions_with_http_info(self, as_at : Annotated[Optional[datetime], Field(description="Optional. The As At time at which listed Cut Labels are valid")] = None, sort_by : Annotated[Optional[conlist(StrictStr)], Field(description="Optional. Order the results by these fields. Use use the '-' sign to denote descending order e.g. -MyFieldName")] = None, limit : Annotated[Optional[StrictInt], Field(description="Optional. When paginating, limit the number of returned results to this many.")] = None, filter : Annotated[Optional[constr(strict=True, max_length=16384, min_length=0)], Field(description="Optional. Expression to filter the result set.              For example, to filter on code, use \"code eq 'string'\"              Read more about filtering results from LUSID here https://support.lusid.com/filtering-results-from-lusid.")] = None, page : Annotated[Optional[constr(strict=True, max_length=500, min_length=1)], Field(description="The pagination token to use to continue listing cut labels from a previous call This value is returned from the previous call.  If a pagination token is provided the sortBy, filter, and asAt fields  must not have changed since the original request.")] = None, **kwargs) -> ApiResponse:  # noqa: E501
         """ListCutLabelDefinitions: List Existing Cut Labels  # noqa: E501
 
         List all the Cut Label Definitions that are valid at the given AsAt time  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
 
-        >>> thread = api.list_cut_label_definitions_with_http_info(as_at, sort_by, start, limit, filter, page, async_req=True)
+        >>> thread = api.list_cut_label_definitions_with_http_info(as_at, sort_by, limit, filter, page, async_req=True)
         >>> result = thread.get()
 
         :param as_at: Optional. The As At time at which listed Cut Labels are valid
         :type as_at: datetime
         :param sort_by: Optional. Order the results by these fields. Use use the '-' sign to denote descending order e.g. -MyFieldName
         :type sort_by: List[str]
-        :param start: Optional. When paginating, skip this number of results
-        :type start: int
         :param limit: Optional. When paginating, limit the number of returned results to this many.
         :type limit: int
         :param filter: Optional. Expression to filter the result set.              For example, to filter on code, use \"code eq 'string'\"              Read more about filtering results from LUSID here https://support.lusid.com/filtering-results-from-lusid.
         :type filter: str
-        :param page: The pagination token to use to continue listing cut labels from a previous call This value is returned from the previous call.  If a pagination token is provided the sortBy, filter, and asAt fields  must not have changed since the original request. Also, if set, a start value cannot be provided.
+        :param page: The pagination token to use to continue listing cut labels from a previous call This value is returned from the previous call.  If a pagination token is provided the sortBy, filter, and asAt fields  must not have changed since the original request.
         :type page: str
         :param async_req: Whether to execute the request asynchronously.
         :type async_req: bool, optional
@@ -625,7 +621,6 @@ class CutLabelDefinitionsApi:
         _all_params = [
             'as_at',
             'sort_by',
-            'start',
             'limit',
             'filter',
             'page'
@@ -668,9 +663,6 @@ class CutLabelDefinitionsApi:
         if _params.get('sort_by') is not None:  # noqa: E501
             _query_params.append(('sortBy', _params['sort_by']))
             _collection_formats['sortBy'] = 'multi'
-
-        if _params.get('start') is not None:  # noqa: E501
-            _query_params.append(('start', _params['start']))
 
         if _params.get('limit') is not None:  # noqa: E501
             _query_params.append(('limit', _params['limit']))

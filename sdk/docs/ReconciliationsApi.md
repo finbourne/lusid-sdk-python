@@ -962,7 +962,7 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **list_reconciliation_breaks**
-> PagedResourceListOfReconciliationRunBreak list_reconciliation_breaks(scope, code, run_date, version, effective_at=effective_at, as_at=as_at, page=page, start=start, limit=limit, filter=filter)
+> PagedResourceListOfReconciliationRunBreak list_reconciliation_breaks(scope, code, run_date, version, effective_at=effective_at, as_at=as_at, page=page, limit=limit, filter=filter)
 
 [EXPERIMENTAL] ListReconciliationBreaks: List reconciliation breaks
 
@@ -1025,14 +1025,13 @@ async with api_client_factory:
     version = 56 # int | The version number of the run associated with the break
     effective_at = 'effective_at_example' # str | The effective datetime or cut label at which to list the reconciliation runs. Defaults to the current LUSID              system datetime if not specified. (optional)
     as_at = '2013-10-20T19:20:30+01:00' # datetime | The asAt datetime at which to list the reconciliation runs. Defaults to returning the latest version              of each run if not specified. (optional)
-    page = 'page_example' # str | The pagination token to use to continue listing reconciliation runs; this              value is returned from the previous call. If a pagination token is provided, the filter, effectiveAt              and asAt fields must not have changed since the original request. Also, if set, a start value cannot be provided. (optional)
-    start = 56 # int | When paginating, skip this number of results. (optional)
+    page = 'page_example' # str | The pagination token to use to continue listing reconciliation runs; this              value is returned from the previous call. If a pagination token is provided, the filter, effectiveAt              and asAt fields must not have changed since the original request. (optional)
     limit = 56 # int | When paginating, limit the results to this number. Defaults to 100 if not specified. (optional)
     filter = 'filter_example' # str | Expression to filter the results. (optional)
 
     try:
         # [EXPERIMENTAL] ListReconciliationBreaks: List reconciliation breaks
-        api_response = await api_instance.list_reconciliation_breaks(scope, code, run_date, version, effective_at=effective_at, as_at=as_at, page=page, start=start, limit=limit, filter=filter)
+        api_response = await api_instance.list_reconciliation_breaks(scope, code, run_date, version, effective_at=effective_at, as_at=as_at, page=page, limit=limit, filter=filter)
         print("The response of ReconciliationsApi->list_reconciliation_breaks:\n")
         pprint(api_response)
     except Exception as e:
@@ -1050,8 +1049,7 @@ Name | Type | Description  | Notes
  **version** | **int**| The version number of the run associated with the break | 
  **effective_at** | **str**| The effective datetime or cut label at which to list the reconciliation runs. Defaults to the current LUSID              system datetime if not specified. | [optional] 
  **as_at** | **datetime**| The asAt datetime at which to list the reconciliation runs. Defaults to returning the latest version              of each run if not specified. | [optional] 
- **page** | **str**| The pagination token to use to continue listing reconciliation runs; this              value is returned from the previous call. If a pagination token is provided, the filter, effectiveAt              and asAt fields must not have changed since the original request. Also, if set, a start value cannot be provided. | [optional] 
- **start** | **int**| When paginating, skip this number of results. | [optional] 
+ **page** | **str**| The pagination token to use to continue listing reconciliation runs; this              value is returned from the previous call. If a pagination token is provided, the filter, effectiveAt              and asAt fields must not have changed since the original request. | [optional] 
  **limit** | **int**| When paginating, limit the results to this number. Defaults to 100 if not specified. | [optional] 
  **filter** | **str**| Expression to filter the results. | [optional] 
 
@@ -1176,7 +1174,7 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **list_reconciliation_runs**
-> PagedResourceListOfReconciliationRun list_reconciliation_runs(scope, code, effective_at=effective_at, as_at=as_at, page=page, start=start, limit=limit, filter=filter)
+> PagedResourceListOfReconciliationRun list_reconciliation_runs(scope, code, effective_at=effective_at, as_at=as_at, page=page, limit=limit, filter=filter)
 
 [EXPERIMENTAL] ListReconciliationRuns: List Reconciliation runs
 
@@ -1237,14 +1235,13 @@ async with api_client_factory:
     code = 'code_example' # str | The code of the reconciliation
     effective_at = 'effective_at_example' # str | The effective datetime or cut label at which to list the reconciliation runs. Defaults to the current LUSID              system datetime if not specified. (optional)
     as_at = '2013-10-20T19:20:30+01:00' # datetime | The asAt datetime at which to list the reconciliation runs. Defaults to returning the latest version              of each run if not specified. (optional)
-    page = 'page_example' # str | The pagination token to use to continue listing reconciliation runs; this              value is returned from the previous call. If a pagination token is provided, the filter, effectiveAt              and asAt fields must not have changed since the original request. Also, if set, a start value cannot be provided. (optional)
-    start = 56 # int | When paginating, skip this number of results. (optional)
+    page = 'page_example' # str | The pagination token to use to continue listing reconciliation runs; this              value is returned from the previous call. If a pagination token is provided, the filter, effectiveAt              and asAt fields must not have changed since the original request. (optional)
     limit = 56 # int | When paginating, limit the results to this number. Defaults to 100 if not specified. (optional)
     filter = 'filter_example' # str | Expression to filter the results.              For example, to filter on the run date, specify \"Date eq 10/03/2018\". For more information about filtering              results, see https://support.lusid.com/knowledgebase/article/KA-01914. (optional)
 
     try:
         # [EXPERIMENTAL] ListReconciliationRuns: List Reconciliation runs
-        api_response = await api_instance.list_reconciliation_runs(scope, code, effective_at=effective_at, as_at=as_at, page=page, start=start, limit=limit, filter=filter)
+        api_response = await api_instance.list_reconciliation_runs(scope, code, effective_at=effective_at, as_at=as_at, page=page, limit=limit, filter=filter)
         print("The response of ReconciliationsApi->list_reconciliation_runs:\n")
         pprint(api_response)
     except Exception as e:
@@ -1260,8 +1257,7 @@ Name | Type | Description  | Notes
  **code** | **str**| The code of the reconciliation | 
  **effective_at** | **str**| The effective datetime or cut label at which to list the reconciliation runs. Defaults to the current LUSID              system datetime if not specified. | [optional] 
  **as_at** | **datetime**| The asAt datetime at which to list the reconciliation runs. Defaults to returning the latest version              of each run if not specified. | [optional] 
- **page** | **str**| The pagination token to use to continue listing reconciliation runs; this              value is returned from the previous call. If a pagination token is provided, the filter, effectiveAt              and asAt fields must not have changed since the original request. Also, if set, a start value cannot be provided. | [optional] 
- **start** | **int**| When paginating, skip this number of results. | [optional] 
+ **page** | **str**| The pagination token to use to continue listing reconciliation runs; this              value is returned from the previous call. If a pagination token is provided, the filter, effectiveAt              and asAt fields must not have changed since the original request. | [optional] 
  **limit** | **int**| When paginating, limit the results to this number. Defaults to 100 if not specified. | [optional] 
  **filter** | **str**| Expression to filter the results.              For example, to filter on the run date, specify \&quot;Date eq 10/03/2018\&quot;. For more information about filtering              results, see https://support.lusid.com/knowledgebase/article/KA-01914. | [optional] 
 
@@ -1288,7 +1284,7 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **list_reconciliations**
-> PagedResourceListOfReconciliation list_reconciliations(effective_at=effective_at, as_at=as_at, page=page, start=start, limit=limit, filter=filter, property_keys=property_keys)
+> PagedResourceListOfReconciliation list_reconciliations(effective_at=effective_at, as_at=as_at, page=page, limit=limit, filter=filter, property_keys=property_keys)
 
 [EXPERIMENTAL] ListReconciliations: List scheduled reconciliations
 
@@ -1347,15 +1343,14 @@ async with api_client_factory:
     api_instance = api_client_factory.build(lusid.ReconciliationsApi)
     effective_at = 'effective_at_example' # str | The effective datetime or cut label at which to list the TimeVariant properties for the reconciliation. Defaults to the current LUSID              system datetime if not specified. (optional)
     as_at = '2013-10-20T19:20:30+01:00' # datetime | The asAt datetime at which to list the reconciliation. Defaults to returning the latest version              of each reconciliation if not specified. (optional)
-    page = 'page_example' # str | The pagination token to use to continue listing reconciliations; this              value is returned from the previous call. If a pagination token is provided, the filter, effectiveAt              and asAt fields must not have changed since the original request. Also, if set, a start value cannot be provided. (optional)
-    start = 56 # int | When paginating, skip this number of results. (optional)
+    page = 'page_example' # str | The pagination token to use to continue listing reconciliations; this              value is returned from the previous call. If a pagination token is provided, the filter, effectiveAt              and asAt fields must not have changed since the original request. (optional)
     limit = 56 # int | When paginating, limit the results to this number. Defaults to 100 if not specified. (optional)
     filter = 'filter_example' # str | Expression to filter the results.              For example, to filter on the reconciliation type, specify \"id.Code eq '001'\". For more information about filtering              results, see https://support.lusid.com/knowledgebase/article/KA-01914. (optional)
     property_keys = ['property_keys_example'] # List[str] | A list of property keys from the 'Reconciliation' domain to decorate onto each reconciliation.              These must take the format {domain}/{scope}/{code}, for example 'Reconciliation/Broker/Id'. (optional)
 
     try:
         # [EXPERIMENTAL] ListReconciliations: List scheduled reconciliations
-        api_response = await api_instance.list_reconciliations(effective_at=effective_at, as_at=as_at, page=page, start=start, limit=limit, filter=filter, property_keys=property_keys)
+        api_response = await api_instance.list_reconciliations(effective_at=effective_at, as_at=as_at, page=page, limit=limit, filter=filter, property_keys=property_keys)
         print("The response of ReconciliationsApi->list_reconciliations:\n")
         pprint(api_response)
     except Exception as e:
@@ -1369,8 +1364,7 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **effective_at** | **str**| The effective datetime or cut label at which to list the TimeVariant properties for the reconciliation. Defaults to the current LUSID              system datetime if not specified. | [optional] 
  **as_at** | **datetime**| The asAt datetime at which to list the reconciliation. Defaults to returning the latest version              of each reconciliation if not specified. | [optional] 
- **page** | **str**| The pagination token to use to continue listing reconciliations; this              value is returned from the previous call. If a pagination token is provided, the filter, effectiveAt              and asAt fields must not have changed since the original request. Also, if set, a start value cannot be provided. | [optional] 
- **start** | **int**| When paginating, skip this number of results. | [optional] 
+ **page** | **str**| The pagination token to use to continue listing reconciliations; this              value is returned from the previous call. If a pagination token is provided, the filter, effectiveAt              and asAt fields must not have changed since the original request. | [optional] 
  **limit** | **int**| When paginating, limit the results to this number. Defaults to 100 if not specified. | [optional] 
  **filter** | **str**| Expression to filter the results.              For example, to filter on the reconciliation type, specify \&quot;id.Code eq &#39;001&#39;\&quot;. For more information about filtering              results, see https://support.lusid.com/knowledgebase/article/KA-01914. | [optional] 
  **property_keys** | [**List[str]**](str.md)| A list of property keys from the &#39;Reconciliation&#39; domain to decorate onto each reconciliation.              These must take the format {domain}/{scope}/{code}, for example &#39;Reconciliation/Broker/Id&#39;. | [optional] 
@@ -1497,7 +1491,7 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **reconcile_holdings**
-> ResourceListOfReconciliationBreak reconcile_holdings(sort_by=sort_by, start=start, limit=limit, filter=filter, portfolios_reconciliation_request=portfolios_reconciliation_request)
+> ResourceListOfReconciliationBreak reconcile_holdings(sort_by=sort_by, limit=limit, filter=filter, portfolios_reconciliation_request=portfolios_reconciliation_request)
 
 [EARLY ACCESS] ReconcileHoldings: Reconcile portfolio holdings
 
@@ -1556,14 +1550,13 @@ async with api_client_factory:
     # Create an instance of the API class
     api_instance = api_client_factory.build(lusid.ReconciliationsApi)
     sort_by = ['sort_by_example'] # List[str] | Optional. Order the results by these fields. Use use the '-' sign to denote descending order e.g. -MyFieldName (optional)
-    start = 56 # int | Optional. When paginating, skip this number of results (optional)
     limit = 56 # int | Optional. When paginating, limit the number of returned results to this many. (optional)
     filter = 'filter_example' # str | Optional. Expression to filter the result set.              For example, to filter on the left portfolio Code, use \"left.portfolioId.code eq 'string'\"              Read more about filtering results from LUSID here https://support.lusid.com/filtering-results-from-lusid. (optional)
     portfolios_reconciliation_request = {"left":{"portfolioId":{"scope":"MySourceScope","code":"MySourcePortfolioCode"},"effectiveAt":"2018-03-05T00:00:00.0000000+00:00","asAt":"2018-03-05T00:00:00.0000000+00:00"},"right":{"portfolioId":{"scope":"MyTargetScope","code":"MyTargetPortfolioCode"},"effectiveAt":"2018-03-05T00:00:00.0000000+00:00","asAt":"2018-03-05T00:00:00.0000000+00:00"},"instrumentPropertyKeys":["Instrument/default/Name"]} # PortfoliosReconciliationRequest | The specifications of the inputs to the reconciliation (optional)
 
     try:
         # [EARLY ACCESS] ReconcileHoldings: Reconcile portfolio holdings
-        api_response = await api_instance.reconcile_holdings(sort_by=sort_by, start=start, limit=limit, filter=filter, portfolios_reconciliation_request=portfolios_reconciliation_request)
+        api_response = await api_instance.reconcile_holdings(sort_by=sort_by, limit=limit, filter=filter, portfolios_reconciliation_request=portfolios_reconciliation_request)
         print("The response of ReconciliationsApi->reconcile_holdings:\n")
         pprint(api_response)
     except Exception as e:
@@ -1576,7 +1569,6 @@ async with api_client_factory:
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **sort_by** | [**List[str]**](str.md)| Optional. Order the results by these fields. Use use the &#39;-&#39; sign to denote descending order e.g. -MyFieldName | [optional] 
- **start** | **int**| Optional. When paginating, skip this number of results | [optional] 
  **limit** | **int**| Optional. When paginating, limit the number of returned results to this many. | [optional] 
  **filter** | **str**| Optional. Expression to filter the result set.              For example, to filter on the left portfolio Code, use \&quot;left.portfolioId.code eq &#39;string&#39;\&quot;              Read more about filtering results from LUSID here https://support.lusid.com/filtering-results-from-lusid. | [optional] 
  **portfolios_reconciliation_request** | [**PortfoliosReconciliationRequest**](PortfoliosReconciliationRequest.md)| The specifications of the inputs to the reconciliation | [optional] 

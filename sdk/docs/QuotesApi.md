@@ -450,11 +450,11 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **list_quotes**
-> ResourceListOfQuote list_quotes(scope, as_at=as_at, page=page, start=start, limit=limit, filter=filter)
+> ResourceListOfQuote list_quotes(scope, as_at=as_at, page=page, limit=limit, filter=filter)
 
 [DEPRECATED] ListQuotes: List quotes
 
-List all the quotes from a single scope at the specified date/time  Please use M:Finbourne.WebApi.Controllers.QuotesController.ListQuotesForScope(System.String,System.Nullable{System.DateTimeOffset},System.String,System.Nullable{System.Int32},System.Nullable{System.Int32},System.String) - the signature and behaviour of this endpoint will be changing to omit scope
+List all the quotes from a single scope at the specified date/time  Please use M:Finbourne.WebApi.Controllers.QuotesController.ListQuotesForScope(System.String,System.Nullable{System.DateTimeOffset},System.String,System.Nullable{System.Int32},System.String) - the signature and behaviour of this endpoint will be changing to omit scope
 
 ### Example
 
@@ -509,14 +509,13 @@ async with api_client_factory:
     api_instance = api_client_factory.build(lusid.QuotesApi)
     scope = 'scope_example' # str | The scope of the quotes to list.
     as_at = '2013-10-20T19:20:30+01:00' # datetime | The asAt datetime at which to list the quotes. Defaults to latest if not specified. (optional)
-    page = 'page_example' # str | The pagination token to use to continue listing quotes from a previous call to list quotes.              This value is returned from the previous call. If a pagination token is provided the sortBy, filter, effectiveAt, and asAt fields              must not have changed since the original request. Also, if set, a start value cannot be provided. (optional)
-    start = 56 # int | When paginating, skip this number of results. (optional)
+    page = 'page_example' # str | The pagination token to use to continue listing quotes from a previous call to list quotes.              This value is returned from the previous call. If a pagination token is provided the sortBy, filter, effectiveAt, and asAt fields              must not have changed since the original request. (optional)
     limit = 56 # int | When paginating, limit the number of returned results to this many. (optional)
     filter = 'filter_example' # str | Expression to filter the result set.              Read more about filtering results from LUSID here https://support.lusid.com/filtering-results-from-lusid. (optional)
 
     try:
         # [DEPRECATED] ListQuotes: List quotes
-        api_response = await api_instance.list_quotes(scope, as_at=as_at, page=page, start=start, limit=limit, filter=filter)
+        api_response = await api_instance.list_quotes(scope, as_at=as_at, page=page, limit=limit, filter=filter)
         print("The response of QuotesApi->list_quotes:\n")
         pprint(api_response)
     except Exception as e:
@@ -530,8 +529,7 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **scope** | **str**| The scope of the quotes to list. | 
  **as_at** | **datetime**| The asAt datetime at which to list the quotes. Defaults to latest if not specified. | [optional] 
- **page** | **str**| The pagination token to use to continue listing quotes from a previous call to list quotes.              This value is returned from the previous call. If a pagination token is provided the sortBy, filter, effectiveAt, and asAt fields              must not have changed since the original request. Also, if set, a start value cannot be provided. | [optional] 
- **start** | **int**| When paginating, skip this number of results. | [optional] 
+ **page** | **str**| The pagination token to use to continue listing quotes from a previous call to list quotes.              This value is returned from the previous call. If a pagination token is provided the sortBy, filter, effectiveAt, and asAt fields              must not have changed since the original request. | [optional] 
  **limit** | **int**| When paginating, limit the number of returned results to this many. | [optional] 
  **filter** | **str**| Expression to filter the result set.              Read more about filtering results from LUSID here https://support.lusid.com/filtering-results-from-lusid. | [optional] 
 
@@ -658,7 +656,7 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **list_quotes_for_scope**
-> ResourceListOfQuote list_quotes_for_scope(scope, as_at=as_at, page=page, start=start, limit=limit, filter=filter)
+> ResourceListOfQuote list_quotes_for_scope(scope, as_at=as_at, page=page, limit=limit, filter=filter)
 
 ListQuotesForScope: List quotes for scope
 
@@ -717,14 +715,13 @@ async with api_client_factory:
     api_instance = api_client_factory.build(lusid.QuotesApi)
     scope = 'scope_example' # str | The scope of the quotes to list.
     as_at = '2013-10-20T19:20:30+01:00' # datetime | The asAt datetime at which to list the quotes. Defaults to latest if not specified. (optional)
-    page = 'page_example' # str | The pagination token to use to continue listing quotes from a previous call to list quotes.              This value is returned from the previous call. If a pagination token is provided the sortBy, filter, effectiveAt, and asAt fields              must not have changed since the original request. Also, if set, a start value cannot be provided. (optional)
-    start = 56 # int | When paginating, skip this number of results. (optional)
+    page = 'page_example' # str | The pagination token to use to continue listing quotes from a previous call to list quotes.              This value is returned from the previous call. If a pagination token is provided the sortBy, filter, effectiveAt, and asAt fields              must not have changed since the original request. (optional)
     limit = 56 # int | When paginating, limit the number of returned results to this many. (optional)
     filter = 'filter_example' # str | Expression to filter the result set.              Read more about filtering results from LUSID here https://support.lusid.com/filtering-results-from-lusid. (optional)
 
     try:
         # ListQuotesForScope: List quotes for scope
-        api_response = await api_instance.list_quotes_for_scope(scope, as_at=as_at, page=page, start=start, limit=limit, filter=filter)
+        api_response = await api_instance.list_quotes_for_scope(scope, as_at=as_at, page=page, limit=limit, filter=filter)
         print("The response of QuotesApi->list_quotes_for_scope:\n")
         pprint(api_response)
     except Exception as e:
@@ -738,8 +735,7 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **scope** | **str**| The scope of the quotes to list. | 
  **as_at** | **datetime**| The asAt datetime at which to list the quotes. Defaults to latest if not specified. | [optional] 
- **page** | **str**| The pagination token to use to continue listing quotes from a previous call to list quotes.              This value is returned from the previous call. If a pagination token is provided the sortBy, filter, effectiveAt, and asAt fields              must not have changed since the original request. Also, if set, a start value cannot be provided. | [optional] 
- **start** | **int**| When paginating, skip this number of results. | [optional] 
+ **page** | **str**| The pagination token to use to continue listing quotes from a previous call to list quotes.              This value is returned from the previous call. If a pagination token is provided the sortBy, filter, effectiveAt, and asAt fields              must not have changed since the original request. | [optional] 
  **limit** | **int**| When paginating, limit the number of returned results to this many. | [optional] 
  **filter** | **str**| Expression to filter the result set.              Read more about filtering results from LUSID here https://support.lusid.com/filtering-results-from-lusid. | [optional] 
 

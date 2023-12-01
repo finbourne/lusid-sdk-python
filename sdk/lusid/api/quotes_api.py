@@ -842,32 +842,30 @@ class QuotesApi:
             _request_auth=_params.get('_request_auth'))
 
     @overload
-    async def list_quotes(self, scope : Annotated[constr(strict=True, max_length=64, min_length=1), Field(..., description="The scope of the quotes to list.")], as_at : Annotated[Optional[datetime], Field(description="The asAt datetime at which to list the quotes. Defaults to latest if not specified.")] = None, page : Annotated[Optional[constr(strict=True, max_length=500, min_length=1)], Field(description="The pagination token to use to continue listing quotes from a previous call to list quotes.              This value is returned from the previous call. If a pagination token is provided the sortBy, filter, effectiveAt, and asAt fields              must not have changed since the original request. Also, if set, a start value cannot be provided.")] = None, start : Annotated[Optional[StrictInt], Field(description="When paginating, skip this number of results.")] = None, limit : Annotated[Optional[StrictInt], Field(description="When paginating, limit the number of returned results to this many.")] = None, filter : Annotated[Optional[constr(strict=True, max_length=16384, min_length=0)], Field(description="Expression to filter the result set.              Read more about filtering results from LUSID here https://support.lusid.com/filtering-results-from-lusid.")] = None, **kwargs) -> ResourceListOfQuote:  # noqa: E501
+    async def list_quotes(self, scope : Annotated[constr(strict=True, max_length=64, min_length=1), Field(..., description="The scope of the quotes to list.")], as_at : Annotated[Optional[datetime], Field(description="The asAt datetime at which to list the quotes. Defaults to latest if not specified.")] = None, page : Annotated[Optional[constr(strict=True, max_length=500, min_length=1)], Field(description="The pagination token to use to continue listing quotes from a previous call to list quotes.              This value is returned from the previous call. If a pagination token is provided the sortBy, filter, effectiveAt, and asAt fields              must not have changed since the original request.")] = None, limit : Annotated[Optional[StrictInt], Field(description="When paginating, limit the number of returned results to this many.")] = None, filter : Annotated[Optional[constr(strict=True, max_length=16384, min_length=0)], Field(description="Expression to filter the result set.              Read more about filtering results from LUSID here https://support.lusid.com/filtering-results-from-lusid.")] = None, **kwargs) -> ResourceListOfQuote:  # noqa: E501
         ...
 
     @overload
-    def list_quotes(self, scope : Annotated[constr(strict=True, max_length=64, min_length=1), Field(..., description="The scope of the quotes to list.")], as_at : Annotated[Optional[datetime], Field(description="The asAt datetime at which to list the quotes. Defaults to latest if not specified.")] = None, page : Annotated[Optional[constr(strict=True, max_length=500, min_length=1)], Field(description="The pagination token to use to continue listing quotes from a previous call to list quotes.              This value is returned from the previous call. If a pagination token is provided the sortBy, filter, effectiveAt, and asAt fields              must not have changed since the original request. Also, if set, a start value cannot be provided.")] = None, start : Annotated[Optional[StrictInt], Field(description="When paginating, skip this number of results.")] = None, limit : Annotated[Optional[StrictInt], Field(description="When paginating, limit the number of returned results to this many.")] = None, filter : Annotated[Optional[constr(strict=True, max_length=16384, min_length=0)], Field(description="Expression to filter the result set.              Read more about filtering results from LUSID here https://support.lusid.com/filtering-results-from-lusid.")] = None, async_req: Optional[bool]=True, **kwargs) -> ResourceListOfQuote:  # noqa: E501
+    def list_quotes(self, scope : Annotated[constr(strict=True, max_length=64, min_length=1), Field(..., description="The scope of the quotes to list.")], as_at : Annotated[Optional[datetime], Field(description="The asAt datetime at which to list the quotes. Defaults to latest if not specified.")] = None, page : Annotated[Optional[constr(strict=True, max_length=500, min_length=1)], Field(description="The pagination token to use to continue listing quotes from a previous call to list quotes.              This value is returned from the previous call. If a pagination token is provided the sortBy, filter, effectiveAt, and asAt fields              must not have changed since the original request.")] = None, limit : Annotated[Optional[StrictInt], Field(description="When paginating, limit the number of returned results to this many.")] = None, filter : Annotated[Optional[constr(strict=True, max_length=16384, min_length=0)], Field(description="Expression to filter the result set.              Read more about filtering results from LUSID here https://support.lusid.com/filtering-results-from-lusid.")] = None, async_req: Optional[bool]=True, **kwargs) -> ResourceListOfQuote:  # noqa: E501
         ...
 
     @validate_arguments
-    def list_quotes(self, scope : Annotated[constr(strict=True, max_length=64, min_length=1), Field(..., description="The scope of the quotes to list.")], as_at : Annotated[Optional[datetime], Field(description="The asAt datetime at which to list the quotes. Defaults to latest if not specified.")] = None, page : Annotated[Optional[constr(strict=True, max_length=500, min_length=1)], Field(description="The pagination token to use to continue listing quotes from a previous call to list quotes.              This value is returned from the previous call. If a pagination token is provided the sortBy, filter, effectiveAt, and asAt fields              must not have changed since the original request. Also, if set, a start value cannot be provided.")] = None, start : Annotated[Optional[StrictInt], Field(description="When paginating, skip this number of results.")] = None, limit : Annotated[Optional[StrictInt], Field(description="When paginating, limit the number of returned results to this many.")] = None, filter : Annotated[Optional[constr(strict=True, max_length=16384, min_length=0)], Field(description="Expression to filter the result set.              Read more about filtering results from LUSID here https://support.lusid.com/filtering-results-from-lusid.")] = None, async_req: Optional[bool]=None, **kwargs) -> Union[ResourceListOfQuote, Awaitable[ResourceListOfQuote]]:  # noqa: E501
+    def list_quotes(self, scope : Annotated[constr(strict=True, max_length=64, min_length=1), Field(..., description="The scope of the quotes to list.")], as_at : Annotated[Optional[datetime], Field(description="The asAt datetime at which to list the quotes. Defaults to latest if not specified.")] = None, page : Annotated[Optional[constr(strict=True, max_length=500, min_length=1)], Field(description="The pagination token to use to continue listing quotes from a previous call to list quotes.              This value is returned from the previous call. If a pagination token is provided the sortBy, filter, effectiveAt, and asAt fields              must not have changed since the original request.")] = None, limit : Annotated[Optional[StrictInt], Field(description="When paginating, limit the number of returned results to this many.")] = None, filter : Annotated[Optional[constr(strict=True, max_length=16384, min_length=0)], Field(description="Expression to filter the result set.              Read more about filtering results from LUSID here https://support.lusid.com/filtering-results-from-lusid.")] = None, async_req: Optional[bool]=None, **kwargs) -> Union[ResourceListOfQuote, Awaitable[ResourceListOfQuote]]:  # noqa: E501
         """[DEPRECATED] ListQuotes: List quotes  # noqa: E501
 
-        List all the quotes from a single scope at the specified date/time  Please use M:Finbourne.WebApi.Controllers.QuotesController.ListQuotesForScope(System.String,System.Nullable{System.DateTimeOffset},System.String,System.Nullable{System.Int32},System.Nullable{System.Int32},System.String) - the signature and behaviour of this endpoint will be changing to omit scope  # noqa: E501
+        List all the quotes from a single scope at the specified date/time  Please use M:Finbourne.WebApi.Controllers.QuotesController.ListQuotesForScope(System.String,System.Nullable{System.DateTimeOffset},System.String,System.Nullable{System.Int32},System.String) - the signature and behaviour of this endpoint will be changing to omit scope  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
 
-        >>> thread = api.list_quotes(scope, as_at, page, start, limit, filter, async_req=True)
+        >>> thread = api.list_quotes(scope, as_at, page, limit, filter, async_req=True)
         >>> result = thread.get()
 
         :param scope: The scope of the quotes to list. (required)
         :type scope: str
         :param as_at: The asAt datetime at which to list the quotes. Defaults to latest if not specified.
         :type as_at: datetime
-        :param page: The pagination token to use to continue listing quotes from a previous call to list quotes.              This value is returned from the previous call. If a pagination token is provided the sortBy, filter, effectiveAt, and asAt fields              must not have changed since the original request. Also, if set, a start value cannot be provided.
+        :param page: The pagination token to use to continue listing quotes from a previous call to list quotes.              This value is returned from the previous call. If a pagination token is provided the sortBy, filter, effectiveAt, and asAt fields              must not have changed since the original request.
         :type page: str
-        :param start: When paginating, skip this number of results.
-        :type start: int
         :param limit: When paginating, limit the number of returned results to this many.
         :type limit: int
         :param filter: Expression to filter the result set.              Read more about filtering results from LUSID here https://support.lusid.com/filtering-results-from-lusid.
@@ -889,27 +887,25 @@ class QuotesApi:
             raise ValueError(message)
         if async_req is not None:
             kwargs['async_req'] = async_req
-        return self.list_quotes_with_http_info(scope, as_at, page, start, limit, filter, **kwargs)  # noqa: E501
+        return self.list_quotes_with_http_info(scope, as_at, page, limit, filter, **kwargs)  # noqa: E501
 
     @validate_arguments
-    def list_quotes_with_http_info(self, scope : Annotated[constr(strict=True, max_length=64, min_length=1), Field(..., description="The scope of the quotes to list.")], as_at : Annotated[Optional[datetime], Field(description="The asAt datetime at which to list the quotes. Defaults to latest if not specified.")] = None, page : Annotated[Optional[constr(strict=True, max_length=500, min_length=1)], Field(description="The pagination token to use to continue listing quotes from a previous call to list quotes.              This value is returned from the previous call. If a pagination token is provided the sortBy, filter, effectiveAt, and asAt fields              must not have changed since the original request. Also, if set, a start value cannot be provided.")] = None, start : Annotated[Optional[StrictInt], Field(description="When paginating, skip this number of results.")] = None, limit : Annotated[Optional[StrictInt], Field(description="When paginating, limit the number of returned results to this many.")] = None, filter : Annotated[Optional[constr(strict=True, max_length=16384, min_length=0)], Field(description="Expression to filter the result set.              Read more about filtering results from LUSID here https://support.lusid.com/filtering-results-from-lusid.")] = None, **kwargs) -> ApiResponse:  # noqa: E501
+    def list_quotes_with_http_info(self, scope : Annotated[constr(strict=True, max_length=64, min_length=1), Field(..., description="The scope of the quotes to list.")], as_at : Annotated[Optional[datetime], Field(description="The asAt datetime at which to list the quotes. Defaults to latest if not specified.")] = None, page : Annotated[Optional[constr(strict=True, max_length=500, min_length=1)], Field(description="The pagination token to use to continue listing quotes from a previous call to list quotes.              This value is returned from the previous call. If a pagination token is provided the sortBy, filter, effectiveAt, and asAt fields              must not have changed since the original request.")] = None, limit : Annotated[Optional[StrictInt], Field(description="When paginating, limit the number of returned results to this many.")] = None, filter : Annotated[Optional[constr(strict=True, max_length=16384, min_length=0)], Field(description="Expression to filter the result set.              Read more about filtering results from LUSID here https://support.lusid.com/filtering-results-from-lusid.")] = None, **kwargs) -> ApiResponse:  # noqa: E501
         """[DEPRECATED] ListQuotes: List quotes  # noqa: E501
 
-        List all the quotes from a single scope at the specified date/time  Please use M:Finbourne.WebApi.Controllers.QuotesController.ListQuotesForScope(System.String,System.Nullable{System.DateTimeOffset},System.String,System.Nullable{System.Int32},System.Nullable{System.Int32},System.String) - the signature and behaviour of this endpoint will be changing to omit scope  # noqa: E501
+        List all the quotes from a single scope at the specified date/time  Please use M:Finbourne.WebApi.Controllers.QuotesController.ListQuotesForScope(System.String,System.Nullable{System.DateTimeOffset},System.String,System.Nullable{System.Int32},System.String) - the signature and behaviour of this endpoint will be changing to omit scope  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
 
-        >>> thread = api.list_quotes_with_http_info(scope, as_at, page, start, limit, filter, async_req=True)
+        >>> thread = api.list_quotes_with_http_info(scope, as_at, page, limit, filter, async_req=True)
         >>> result = thread.get()
 
         :param scope: The scope of the quotes to list. (required)
         :type scope: str
         :param as_at: The asAt datetime at which to list the quotes. Defaults to latest if not specified.
         :type as_at: datetime
-        :param page: The pagination token to use to continue listing quotes from a previous call to list quotes.              This value is returned from the previous call. If a pagination token is provided the sortBy, filter, effectiveAt, and asAt fields              must not have changed since the original request. Also, if set, a start value cannot be provided.
+        :param page: The pagination token to use to continue listing quotes from a previous call to list quotes.              This value is returned from the previous call. If a pagination token is provided the sortBy, filter, effectiveAt, and asAt fields              must not have changed since the original request.
         :type page: str
-        :param start: When paginating, skip this number of results.
-        :type start: int
         :param limit: When paginating, limit the number of returned results to this many.
         :type limit: int
         :param filter: Expression to filter the result set.              Read more about filtering results from LUSID here https://support.lusid.com/filtering-results-from-lusid.
@@ -945,7 +941,6 @@ class QuotesApi:
             'scope',
             'as_at',
             'page',
-            'start',
             'limit',
             'filter'
         ]
@@ -989,9 +984,6 @@ class QuotesApi:
 
         if _params.get('page') is not None:  # noqa: E501
             _query_params.append(('page', _params['page']))
-
-        if _params.get('start') is not None:  # noqa: E501
-            _query_params.append(('start', _params['start']))
 
         if _params.get('limit') is not None:  # noqa: E501
             _query_params.append(('limit', _params['limit']))
@@ -1198,32 +1190,30 @@ class QuotesApi:
             _request_auth=_params.get('_request_auth'))
 
     @overload
-    async def list_quotes_for_scope(self, scope : Annotated[constr(strict=True, max_length=64, min_length=1), Field(..., description="The scope of the quotes to list.")], as_at : Annotated[Optional[datetime], Field(description="The asAt datetime at which to list the quotes. Defaults to latest if not specified.")] = None, page : Annotated[Optional[constr(strict=True, max_length=500, min_length=1)], Field(description="The pagination token to use to continue listing quotes from a previous call to list quotes.              This value is returned from the previous call. If a pagination token is provided the sortBy, filter, effectiveAt, and asAt fields              must not have changed since the original request. Also, if set, a start value cannot be provided.")] = None, start : Annotated[Optional[StrictInt], Field(description="When paginating, skip this number of results.")] = None, limit : Annotated[Optional[StrictInt], Field(description="When paginating, limit the number of returned results to this many.")] = None, filter : Annotated[Optional[constr(strict=True, max_length=16384, min_length=0)], Field(description="Expression to filter the result set.              Read more about filtering results from LUSID here https://support.lusid.com/filtering-results-from-lusid.")] = None, **kwargs) -> ResourceListOfQuote:  # noqa: E501
+    async def list_quotes_for_scope(self, scope : Annotated[constr(strict=True, max_length=64, min_length=1), Field(..., description="The scope of the quotes to list.")], as_at : Annotated[Optional[datetime], Field(description="The asAt datetime at which to list the quotes. Defaults to latest if not specified.")] = None, page : Annotated[Optional[constr(strict=True, max_length=500, min_length=1)], Field(description="The pagination token to use to continue listing quotes from a previous call to list quotes.              This value is returned from the previous call. If a pagination token is provided the sortBy, filter, effectiveAt, and asAt fields              must not have changed since the original request.")] = None, limit : Annotated[Optional[StrictInt], Field(description="When paginating, limit the number of returned results to this many.")] = None, filter : Annotated[Optional[constr(strict=True, max_length=16384, min_length=0)], Field(description="Expression to filter the result set.              Read more about filtering results from LUSID here https://support.lusid.com/filtering-results-from-lusid.")] = None, **kwargs) -> ResourceListOfQuote:  # noqa: E501
         ...
 
     @overload
-    def list_quotes_for_scope(self, scope : Annotated[constr(strict=True, max_length=64, min_length=1), Field(..., description="The scope of the quotes to list.")], as_at : Annotated[Optional[datetime], Field(description="The asAt datetime at which to list the quotes. Defaults to latest if not specified.")] = None, page : Annotated[Optional[constr(strict=True, max_length=500, min_length=1)], Field(description="The pagination token to use to continue listing quotes from a previous call to list quotes.              This value is returned from the previous call. If a pagination token is provided the sortBy, filter, effectiveAt, and asAt fields              must not have changed since the original request. Also, if set, a start value cannot be provided.")] = None, start : Annotated[Optional[StrictInt], Field(description="When paginating, skip this number of results.")] = None, limit : Annotated[Optional[StrictInt], Field(description="When paginating, limit the number of returned results to this many.")] = None, filter : Annotated[Optional[constr(strict=True, max_length=16384, min_length=0)], Field(description="Expression to filter the result set.              Read more about filtering results from LUSID here https://support.lusid.com/filtering-results-from-lusid.")] = None, async_req: Optional[bool]=True, **kwargs) -> ResourceListOfQuote:  # noqa: E501
+    def list_quotes_for_scope(self, scope : Annotated[constr(strict=True, max_length=64, min_length=1), Field(..., description="The scope of the quotes to list.")], as_at : Annotated[Optional[datetime], Field(description="The asAt datetime at which to list the quotes. Defaults to latest if not specified.")] = None, page : Annotated[Optional[constr(strict=True, max_length=500, min_length=1)], Field(description="The pagination token to use to continue listing quotes from a previous call to list quotes.              This value is returned from the previous call. If a pagination token is provided the sortBy, filter, effectiveAt, and asAt fields              must not have changed since the original request.")] = None, limit : Annotated[Optional[StrictInt], Field(description="When paginating, limit the number of returned results to this many.")] = None, filter : Annotated[Optional[constr(strict=True, max_length=16384, min_length=0)], Field(description="Expression to filter the result set.              Read more about filtering results from LUSID here https://support.lusid.com/filtering-results-from-lusid.")] = None, async_req: Optional[bool]=True, **kwargs) -> ResourceListOfQuote:  # noqa: E501
         ...
 
     @validate_arguments
-    def list_quotes_for_scope(self, scope : Annotated[constr(strict=True, max_length=64, min_length=1), Field(..., description="The scope of the quotes to list.")], as_at : Annotated[Optional[datetime], Field(description="The asAt datetime at which to list the quotes. Defaults to latest if not specified.")] = None, page : Annotated[Optional[constr(strict=True, max_length=500, min_length=1)], Field(description="The pagination token to use to continue listing quotes from a previous call to list quotes.              This value is returned from the previous call. If a pagination token is provided the sortBy, filter, effectiveAt, and asAt fields              must not have changed since the original request. Also, if set, a start value cannot be provided.")] = None, start : Annotated[Optional[StrictInt], Field(description="When paginating, skip this number of results.")] = None, limit : Annotated[Optional[StrictInt], Field(description="When paginating, limit the number of returned results to this many.")] = None, filter : Annotated[Optional[constr(strict=True, max_length=16384, min_length=0)], Field(description="Expression to filter the result set.              Read more about filtering results from LUSID here https://support.lusid.com/filtering-results-from-lusid.")] = None, async_req: Optional[bool]=None, **kwargs) -> Union[ResourceListOfQuote, Awaitable[ResourceListOfQuote]]:  # noqa: E501
+    def list_quotes_for_scope(self, scope : Annotated[constr(strict=True, max_length=64, min_length=1), Field(..., description="The scope of the quotes to list.")], as_at : Annotated[Optional[datetime], Field(description="The asAt datetime at which to list the quotes. Defaults to latest if not specified.")] = None, page : Annotated[Optional[constr(strict=True, max_length=500, min_length=1)], Field(description="The pagination token to use to continue listing quotes from a previous call to list quotes.              This value is returned from the previous call. If a pagination token is provided the sortBy, filter, effectiveAt, and asAt fields              must not have changed since the original request.")] = None, limit : Annotated[Optional[StrictInt], Field(description="When paginating, limit the number of returned results to this many.")] = None, filter : Annotated[Optional[constr(strict=True, max_length=16384, min_length=0)], Field(description="Expression to filter the result set.              Read more about filtering results from LUSID here https://support.lusid.com/filtering-results-from-lusid.")] = None, async_req: Optional[bool]=None, **kwargs) -> Union[ResourceListOfQuote, Awaitable[ResourceListOfQuote]]:  # noqa: E501
         """ListQuotesForScope: List quotes for scope  # noqa: E501
 
         List all the quotes from a single scope at the specified date/time  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
 
-        >>> thread = api.list_quotes_for_scope(scope, as_at, page, start, limit, filter, async_req=True)
+        >>> thread = api.list_quotes_for_scope(scope, as_at, page, limit, filter, async_req=True)
         >>> result = thread.get()
 
         :param scope: The scope of the quotes to list. (required)
         :type scope: str
         :param as_at: The asAt datetime at which to list the quotes. Defaults to latest if not specified.
         :type as_at: datetime
-        :param page: The pagination token to use to continue listing quotes from a previous call to list quotes.              This value is returned from the previous call. If a pagination token is provided the sortBy, filter, effectiveAt, and asAt fields              must not have changed since the original request. Also, if set, a start value cannot be provided.
+        :param page: The pagination token to use to continue listing quotes from a previous call to list quotes.              This value is returned from the previous call. If a pagination token is provided the sortBy, filter, effectiveAt, and asAt fields              must not have changed since the original request.
         :type page: str
-        :param start: When paginating, skip this number of results.
-        :type start: int
         :param limit: When paginating, limit the number of returned results to this many.
         :type limit: int
         :param filter: Expression to filter the result set.              Read more about filtering results from LUSID here https://support.lusid.com/filtering-results-from-lusid.
@@ -1245,27 +1235,25 @@ class QuotesApi:
             raise ValueError(message)
         if async_req is not None:
             kwargs['async_req'] = async_req
-        return self.list_quotes_for_scope_with_http_info(scope, as_at, page, start, limit, filter, **kwargs)  # noqa: E501
+        return self.list_quotes_for_scope_with_http_info(scope, as_at, page, limit, filter, **kwargs)  # noqa: E501
 
     @validate_arguments
-    def list_quotes_for_scope_with_http_info(self, scope : Annotated[constr(strict=True, max_length=64, min_length=1), Field(..., description="The scope of the quotes to list.")], as_at : Annotated[Optional[datetime], Field(description="The asAt datetime at which to list the quotes. Defaults to latest if not specified.")] = None, page : Annotated[Optional[constr(strict=True, max_length=500, min_length=1)], Field(description="The pagination token to use to continue listing quotes from a previous call to list quotes.              This value is returned from the previous call. If a pagination token is provided the sortBy, filter, effectiveAt, and asAt fields              must not have changed since the original request. Also, if set, a start value cannot be provided.")] = None, start : Annotated[Optional[StrictInt], Field(description="When paginating, skip this number of results.")] = None, limit : Annotated[Optional[StrictInt], Field(description="When paginating, limit the number of returned results to this many.")] = None, filter : Annotated[Optional[constr(strict=True, max_length=16384, min_length=0)], Field(description="Expression to filter the result set.              Read more about filtering results from LUSID here https://support.lusid.com/filtering-results-from-lusid.")] = None, **kwargs) -> ApiResponse:  # noqa: E501
+    def list_quotes_for_scope_with_http_info(self, scope : Annotated[constr(strict=True, max_length=64, min_length=1), Field(..., description="The scope of the quotes to list.")], as_at : Annotated[Optional[datetime], Field(description="The asAt datetime at which to list the quotes. Defaults to latest if not specified.")] = None, page : Annotated[Optional[constr(strict=True, max_length=500, min_length=1)], Field(description="The pagination token to use to continue listing quotes from a previous call to list quotes.              This value is returned from the previous call. If a pagination token is provided the sortBy, filter, effectiveAt, and asAt fields              must not have changed since the original request.")] = None, limit : Annotated[Optional[StrictInt], Field(description="When paginating, limit the number of returned results to this many.")] = None, filter : Annotated[Optional[constr(strict=True, max_length=16384, min_length=0)], Field(description="Expression to filter the result set.              Read more about filtering results from LUSID here https://support.lusid.com/filtering-results-from-lusid.")] = None, **kwargs) -> ApiResponse:  # noqa: E501
         """ListQuotesForScope: List quotes for scope  # noqa: E501
 
         List all the quotes from a single scope at the specified date/time  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
 
-        >>> thread = api.list_quotes_for_scope_with_http_info(scope, as_at, page, start, limit, filter, async_req=True)
+        >>> thread = api.list_quotes_for_scope_with_http_info(scope, as_at, page, limit, filter, async_req=True)
         >>> result = thread.get()
 
         :param scope: The scope of the quotes to list. (required)
         :type scope: str
         :param as_at: The asAt datetime at which to list the quotes. Defaults to latest if not specified.
         :type as_at: datetime
-        :param page: The pagination token to use to continue listing quotes from a previous call to list quotes.              This value is returned from the previous call. If a pagination token is provided the sortBy, filter, effectiveAt, and asAt fields              must not have changed since the original request. Also, if set, a start value cannot be provided.
+        :param page: The pagination token to use to continue listing quotes from a previous call to list quotes.              This value is returned from the previous call. If a pagination token is provided the sortBy, filter, effectiveAt, and asAt fields              must not have changed since the original request.
         :type page: str
-        :param start: When paginating, skip this number of results.
-        :type start: int
         :param limit: When paginating, limit the number of returned results to this many.
         :type limit: int
         :param filter: Expression to filter the result set.              Read more about filtering results from LUSID here https://support.lusid.com/filtering-results-from-lusid.
@@ -1301,7 +1289,6 @@ class QuotesApi:
             'scope',
             'as_at',
             'page',
-            'start',
             'limit',
             'filter'
         ]
@@ -1345,9 +1332,6 @@ class QuotesApi:
 
         if _params.get('page') is not None:  # noqa: E501
             _query_params.append(('page', _params['page']))
-
-        if _params.get('start') is not None:  # noqa: E501
-            _query_params.append(('start', _params['start']))
 
         if _params.get('limit') is not None:  # noqa: E501
             _query_params.append(('limit', _params['limit']))

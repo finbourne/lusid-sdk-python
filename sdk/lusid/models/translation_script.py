@@ -18,9 +18,10 @@ import re  # noqa: F401
 import json
 
 
-from typing import Any, Dict
+from typing import Any, Dict, Optional
 from pydantic import BaseModel, Field, constr
 from lusid.models.translation_script_id import TranslationScriptId
+from lusid.models.version import Version
 
 class TranslationScript(BaseModel):
     """
@@ -28,7 +29,8 @@ class TranslationScript(BaseModel):
     """
     id: TranslationScriptId = Field(...)
     body: constr(strict=True, max_length=500000, min_length=0) = Field(..., description="Body of the translation script, i.e. the actual translation code.")
-    __properties = ["id", "body"]
+    version: Optional[Version] = None
+    __properties = ["id", "body", "version"]
 
     class Config:
         """Pydantic configuration"""
@@ -57,6 +59,9 @@ class TranslationScript(BaseModel):
         # override the default output from pydantic by calling `to_dict()` of id
         if self.id:
             _dict['id'] = self.id.to_dict()
+        # override the default output from pydantic by calling `to_dict()` of version
+        if self.version:
+            _dict['version'] = self.version.to_dict()
         return _dict
 
     @classmethod
@@ -70,6 +75,7 @@ class TranslationScript(BaseModel):
 
         _obj = TranslationScript.parse_obj({
             "id": TranslationScriptId.from_dict(obj.get("id")) if obj.get("id") is not None else None,
-            "body": obj.get("body")
+            "body": obj.get("body"),
+            "version": Version.from_dict(obj.get("version")) if obj.get("version") is not None else None
         })
         return _obj

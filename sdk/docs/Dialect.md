@@ -7,6 +7,7 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **id** | [**DialectId**](DialectId.md) |  | 
 **var_schema** | [**DialectSchema**](DialectSchema.md) |  | 
+**version** | [**Version**](Version.md) |  | [optional] 
 
 ## Example
 

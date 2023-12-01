@@ -6,6 +6,7 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **id** | [**TranslationScriptId**](TranslationScriptId.md) |  | 
 **body** | **str** | Body of the translation script, i.e. the actual translation code. | 
+**version** | [**Version**](Version.md) |  | [optional] 
 
 ## Example
 

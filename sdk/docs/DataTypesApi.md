@@ -321,7 +321,7 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **list_data_type_summaries**
-> PagedResourceListOfDataTypeSummary list_data_type_summaries(as_at=as_at, page=page, start=start, limit=limit, filter=filter, sort_by=sort_by)
+> PagedResourceListOfDataTypeSummary list_data_type_summaries(as_at=as_at, page=page, limit=limit, filter=filter, sort_by=sort_by)
 
 [EARLY ACCESS] ListDataTypeSummaries: List all data type summaries, without the reference data
 
@@ -379,15 +379,14 @@ async with api_client_factory:
     # Create an instance of the API class
     api_instance = api_client_factory.build(lusid.DataTypesApi)
     as_at = '2013-10-20T19:20:30+01:00' # datetime | The asAt datetime at which to list the data type summaries. Defaults to returning the latest version               of each summary if not specified. (optional)
-    page = 'page_example' # str | The pagination token to use to continue listing data type summaries. This  value is returned from the previous call. If a pagination token is provided, the filter, sortBy  and asAt fields must not have changed since the original request. Also, if set, a start value cannot be provided. (optional)
-    start = 56 # int | When paginating, skip this number of results. (optional)
+    page = 'page_example' # str | The pagination token to use to continue listing data type summaries. This  value is returned from the previous call. If a pagination token is provided, the filter, sortBy  and asAt fields must not have changed since the original request. (optional)
     limit = 56 # int | When paginating, limit the results to this number. Defaults to 100 if not specified. (optional)
     filter = 'filter_example' # str | Optional. Expression to filter the result set.                For example, to filter on the Scope, use \"id.scope eq 'myscope'\", to filter on Schema, use \"schema eq 'string'\",               to filter on AcceptableValues use \"acceptableValues any (~ eq 'value')\"               Read more about filtering results from LUSID here https://support.lusid.com/filtering-results-from-lusid. (optional)
     sort_by = ['sort_by_example'] # List[str] | A list of field names to sort by, each suffixed by \" ASC\" or \" DESC\" (optional)
 
     try:
         # [EARLY ACCESS] ListDataTypeSummaries: List all data type summaries, without the reference data
-        api_response = await api_instance.list_data_type_summaries(as_at=as_at, page=page, start=start, limit=limit, filter=filter, sort_by=sort_by)
+        api_response = await api_instance.list_data_type_summaries(as_at=as_at, page=page, limit=limit, filter=filter, sort_by=sort_by)
         print("The response of DataTypesApi->list_data_type_summaries:\n")
         pprint(api_response)
     except Exception as e:
@@ -400,8 +399,7 @@ async with api_client_factory:
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **as_at** | **datetime**| The asAt datetime at which to list the data type summaries. Defaults to returning the latest version               of each summary if not specified. | [optional] 
- **page** | **str**| The pagination token to use to continue listing data type summaries. This  value is returned from the previous call. If a pagination token is provided, the filter, sortBy  and asAt fields must not have changed since the original request. Also, if set, a start value cannot be provided. | [optional] 
- **start** | **int**| When paginating, skip this number of results. | [optional] 
+ **page** | **str**| The pagination token to use to continue listing data type summaries. This  value is returned from the previous call. If a pagination token is provided, the filter, sortBy  and asAt fields must not have changed since the original request. | [optional] 
  **limit** | **int**| When paginating, limit the results to this number. Defaults to 100 if not specified. | [optional] 
  **filter** | **str**| Optional. Expression to filter the result set.                For example, to filter on the Scope, use \&quot;id.scope eq &#39;myscope&#39;\&quot;, to filter on Schema, use \&quot;schema eq &#39;string&#39;\&quot;,               to filter on AcceptableValues use \&quot;acceptableValues any (~ eq &#39;value&#39;)\&quot;               Read more about filtering results from LUSID here https://support.lusid.com/filtering-results-from-lusid. | [optional] 
  **sort_by** | [**List[str]**](str.md)| A list of field names to sort by, each suffixed by \&quot; ASC\&quot; or \&quot; DESC\&quot; | [optional] 
@@ -429,7 +427,7 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **list_data_types**
-> ResourceListOfDataType list_data_types(scope, as_at=as_at, include_system=include_system, sort_by=sort_by, start=start, limit=limit, filter=filter)
+> ResourceListOfDataType list_data_types(scope, as_at=as_at, include_system=include_system, sort_by=sort_by, limit=limit, filter=filter)
 
 ListDataTypes: List data types
 
@@ -490,13 +488,12 @@ async with api_client_factory:
     as_at = '2013-10-20T19:20:30+01:00' # datetime | The as at of the requested data types (optional)
     include_system = True # bool | Whether to additionally include those data types in the \"system\" scope (optional)
     sort_by = ['sort_by_example'] # List[str] | Optional. Order the results by these fields. Use use the '-' sign to denote descending order e.g. -MyFieldName (optional)
-    start = 56 # int | Optional. When paginating, skip this number of results (optional)
     limit = 56 # int | Optional. When paginating, limit the number of returned results to this many. (optional)
     filter = 'filter_example' # str | Optional. Expression to filter the result set.              For example, to filter on the Display Name, use \"displayName eq 'string'\"              Read more about filtering results from LUSID here https://support.lusid.com/filtering-results-from-lusid. (optional)
 
     try:
         # ListDataTypes: List data types
-        api_response = await api_instance.list_data_types(scope, as_at=as_at, include_system=include_system, sort_by=sort_by, start=start, limit=limit, filter=filter)
+        api_response = await api_instance.list_data_types(scope, as_at=as_at, include_system=include_system, sort_by=sort_by, limit=limit, filter=filter)
         print("The response of DataTypesApi->list_data_types:\n")
         pprint(api_response)
     except Exception as e:
@@ -512,7 +509,6 @@ Name | Type | Description  | Notes
  **as_at** | **datetime**| The as at of the requested data types | [optional] 
  **include_system** | **bool**| Whether to additionally include those data types in the \&quot;system\&quot; scope | [optional] 
  **sort_by** | [**List[str]**](str.md)| Optional. Order the results by these fields. Use use the &#39;-&#39; sign to denote descending order e.g. -MyFieldName | [optional] 
- **start** | **int**| Optional. When paginating, skip this number of results | [optional] 
  **limit** | **int**| Optional. When paginating, limit the number of returned results to this many. | [optional] 
  **filter** | **str**| Optional. Expression to filter the result set.              For example, to filter on the Display Name, use \&quot;displayName eq &#39;string&#39;\&quot;              Read more about filtering results from LUSID here https://support.lusid.com/filtering-results-from-lusid. | [optional] 
 
