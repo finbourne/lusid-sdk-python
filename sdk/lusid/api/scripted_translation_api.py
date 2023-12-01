@@ -33,6 +33,8 @@ from lusid.models.translate_entities_inlined_request import TranslateEntitiesInl
 from lusid.models.translate_entities_request import TranslateEntitiesRequest
 from lusid.models.translate_entities_response import TranslateEntitiesResponse
 from lusid.models.translation_script import TranslationScript
+from lusid.models.upsert_dialect_request import UpsertDialectRequest
+from lusid.models.upsert_translation_script_request import UpsertTranslationScriptRequest
 
 from lusid.api_client import ApiClient
 from lusid.api_response import ApiResponse
@@ -1107,26 +1109,26 @@ class ScriptedTranslationApi:
             _request_auth=_params.get('_request_auth'))
 
     @overload
-    async def upsert_translation_dialect(self, dialect : Annotated[Dialect, Field(..., description="The dialect to upsert.")], **kwargs) -> Dialect:  # noqa: E501
+    async def upsert_translation_dialect(self, upsert_dialect_request : Annotated[UpsertDialectRequest, Field(..., description="The dialect to upsert.")], **kwargs) -> Dialect:  # noqa: E501
         ...
 
     @overload
-    def upsert_translation_dialect(self, dialect : Annotated[Dialect, Field(..., description="The dialect to upsert.")], async_req: Optional[bool]=True, **kwargs) -> Dialect:  # noqa: E501
+    def upsert_translation_dialect(self, upsert_dialect_request : Annotated[UpsertDialectRequest, Field(..., description="The dialect to upsert.")], async_req: Optional[bool]=True, **kwargs) -> Dialect:  # noqa: E501
         ...
 
     @validate_arguments
-    def upsert_translation_dialect(self, dialect : Annotated[Dialect, Field(..., description="The dialect to upsert.")], async_req: Optional[bool]=None, **kwargs) -> Union[Dialect, Awaitable[Dialect]]:  # noqa: E501
+    def upsert_translation_dialect(self, upsert_dialect_request : Annotated[UpsertDialectRequest, Field(..., description="The dialect to upsert.")], async_req: Optional[bool]=None, **kwargs) -> Union[Dialect, Awaitable[Dialect]]:  # noqa: E501
         """[EARLY ACCESS] UpsertTranslationDialect: Upsert a Dialect.  # noqa: E501
 
         Upsert the given dialect.  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
 
-        >>> thread = api.upsert_translation_dialect(dialect, async_req=True)
+        >>> thread = api.upsert_translation_dialect(upsert_dialect_request, async_req=True)
         >>> result = thread.get()
 
-        :param dialect: The dialect to upsert. (required)
-        :type dialect: Dialect
+        :param upsert_dialect_request: The dialect to upsert. (required)
+        :type upsert_dialect_request: UpsertDialectRequest
         :param async_req: Whether to execute the request asynchronously.
         :type async_req: bool, optional
         :param _request_timeout: timeout setting for this request.
@@ -1144,21 +1146,21 @@ class ScriptedTranslationApi:
             raise ValueError(message)
         if async_req is not None:
             kwargs['async_req'] = async_req
-        return self.upsert_translation_dialect_with_http_info(dialect, **kwargs)  # noqa: E501
+        return self.upsert_translation_dialect_with_http_info(upsert_dialect_request, **kwargs)  # noqa: E501
 
     @validate_arguments
-    def upsert_translation_dialect_with_http_info(self, dialect : Annotated[Dialect, Field(..., description="The dialect to upsert.")], **kwargs) -> ApiResponse:  # noqa: E501
+    def upsert_translation_dialect_with_http_info(self, upsert_dialect_request : Annotated[UpsertDialectRequest, Field(..., description="The dialect to upsert.")], **kwargs) -> ApiResponse:  # noqa: E501
         """[EARLY ACCESS] UpsertTranslationDialect: Upsert a Dialect.  # noqa: E501
 
         Upsert the given dialect.  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
 
-        >>> thread = api.upsert_translation_dialect_with_http_info(dialect, async_req=True)
+        >>> thread = api.upsert_translation_dialect_with_http_info(upsert_dialect_request, async_req=True)
         >>> result = thread.get()
 
-        :param dialect: The dialect to upsert. (required)
-        :type dialect: Dialect
+        :param upsert_dialect_request: The dialect to upsert. (required)
+        :type upsert_dialect_request: UpsertDialectRequest
         :param async_req: Whether to execute the request asynchronously.
         :type async_req: bool, optional
         :param _preload_content: if False, the ApiResponse.data will
@@ -1187,7 +1189,7 @@ class ScriptedTranslationApi:
         _params = locals()
 
         _all_params = [
-            'dialect'
+            'upsert_dialect_request'
         ]
         _all_params.extend(
             [
@@ -1225,8 +1227,8 @@ class ScriptedTranslationApi:
         _files = {}
         # process the body parameter
         _body_params = None
-        if _params['dialect'] is not None:
-            _body_params = _params['dialect']
+        if _params['upsert_dialect_request'] is not None:
+            _body_params = _params['upsert_dialect_request']
 
         # set the HTTP header `Accept`
         _header_params['Accept'] = self.api_client.select_header_accept(
@@ -1265,26 +1267,26 @@ class ScriptedTranslationApi:
             _request_auth=_params.get('_request_auth'))
 
     @overload
-    async def upsert_translation_script(self, translation_script : Annotated[TranslationScript, Field(..., description="The translation script to be upserted.")], **kwargs) -> TranslationScript:  # noqa: E501
+    async def upsert_translation_script(self, upsert_translation_script_request : Annotated[UpsertTranslationScriptRequest, Field(..., description="The translation script to be upserted.")], **kwargs) -> TranslationScript:  # noqa: E501
         ...
 
     @overload
-    def upsert_translation_script(self, translation_script : Annotated[TranslationScript, Field(..., description="The translation script to be upserted.")], async_req: Optional[bool]=True, **kwargs) -> TranslationScript:  # noqa: E501
+    def upsert_translation_script(self, upsert_translation_script_request : Annotated[UpsertTranslationScriptRequest, Field(..., description="The translation script to be upserted.")], async_req: Optional[bool]=True, **kwargs) -> TranslationScript:  # noqa: E501
         ...
 
     @validate_arguments
-    def upsert_translation_script(self, translation_script : Annotated[TranslationScript, Field(..., description="The translation script to be upserted.")], async_req: Optional[bool]=None, **kwargs) -> Union[TranslationScript, Awaitable[TranslationScript]]:  # noqa: E501
+    def upsert_translation_script(self, upsert_translation_script_request : Annotated[UpsertTranslationScriptRequest, Field(..., description="The translation script to be upserted.")], async_req: Optional[bool]=None, **kwargs) -> Union[TranslationScript, Awaitable[TranslationScript]]:  # noqa: E501
         """[EARLY ACCESS] UpsertTranslationScript: Upsert a translation script.  # noqa: E501
 
         Upserts a translation script to be used for translating financial entities.  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
 
-        >>> thread = api.upsert_translation_script(translation_script, async_req=True)
+        >>> thread = api.upsert_translation_script(upsert_translation_script_request, async_req=True)
         >>> result = thread.get()
 
-        :param translation_script: The translation script to be upserted. (required)
-        :type translation_script: TranslationScript
+        :param upsert_translation_script_request: The translation script to be upserted. (required)
+        :type upsert_translation_script_request: UpsertTranslationScriptRequest
         :param async_req: Whether to execute the request asynchronously.
         :type async_req: bool, optional
         :param _request_timeout: timeout setting for this request.
@@ -1302,21 +1304,21 @@ class ScriptedTranslationApi:
             raise ValueError(message)
         if async_req is not None:
             kwargs['async_req'] = async_req
-        return self.upsert_translation_script_with_http_info(translation_script, **kwargs)  # noqa: E501
+        return self.upsert_translation_script_with_http_info(upsert_translation_script_request, **kwargs)  # noqa: E501
 
     @validate_arguments
-    def upsert_translation_script_with_http_info(self, translation_script : Annotated[TranslationScript, Field(..., description="The translation script to be upserted.")], **kwargs) -> ApiResponse:  # noqa: E501
+    def upsert_translation_script_with_http_info(self, upsert_translation_script_request : Annotated[UpsertTranslationScriptRequest, Field(..., description="The translation script to be upserted.")], **kwargs) -> ApiResponse:  # noqa: E501
         """[EARLY ACCESS] UpsertTranslationScript: Upsert a translation script.  # noqa: E501
 
         Upserts a translation script to be used for translating financial entities.  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
 
-        >>> thread = api.upsert_translation_script_with_http_info(translation_script, async_req=True)
+        >>> thread = api.upsert_translation_script_with_http_info(upsert_translation_script_request, async_req=True)
         >>> result = thread.get()
 
-        :param translation_script: The translation script to be upserted. (required)
-        :type translation_script: TranslationScript
+        :param upsert_translation_script_request: The translation script to be upserted. (required)
+        :type upsert_translation_script_request: UpsertTranslationScriptRequest
         :param async_req: Whether to execute the request asynchronously.
         :type async_req: bool, optional
         :param _preload_content: if False, the ApiResponse.data will
@@ -1345,7 +1347,7 @@ class ScriptedTranslationApi:
         _params = locals()
 
         _all_params = [
-            'translation_script'
+            'upsert_translation_script_request'
         ]
         _all_params.extend(
             [
@@ -1383,8 +1385,8 @@ class ScriptedTranslationApi:
         _files = {}
         # process the body parameter
         _body_params = None
-        if _params['translation_script'] is not None:
-            _body_params = _params['translation_script']
+        if _params['upsert_translation_script_request'] is not None:
+            _body_params = _params['upsert_translation_script_request']
 
         # set the HTTP header `Accept`
         _header_params['Accept'] = self.api_client.select_header_accept(

@@ -223,7 +223,7 @@ class OrdersApi:
     def get_order(self, scope : Annotated[constr(strict=True, max_length=64, min_length=1), Field(..., description="The scope to which the order belongs.")], code : Annotated[constr(strict=True, max_length=64, min_length=1), Field(..., description="The order's unique identifier.")], as_at : Annotated[Optional[datetime], Field(description="The asAt datetime at which to retrieve the order. Defaults to return the latest version of the order if not specified.")] = None, property_keys : Annotated[Optional[conlist(StrictStr)], Field(description="A list of property keys from the \"Orders\" domain to decorate onto the order.              These take the format {domain}/{scope}/{code} e.g. \"Orders/system/Name\".")] = None, async_req: Optional[bool]=None, **kwargs) -> Union[Order, Awaitable[Order]]:  # noqa: E501
         """[EARLY ACCESS] GetOrder: Get Order  # noqa: E501
 
-        Fetch an Order that matches the specified identifier  # noqa: E501
+        Fetch an Order that matches the specified identifier.  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
 
@@ -261,7 +261,7 @@ class OrdersApi:
     def get_order_with_http_info(self, scope : Annotated[constr(strict=True, max_length=64, min_length=1), Field(..., description="The scope to which the order belongs.")], code : Annotated[constr(strict=True, max_length=64, min_length=1), Field(..., description="The order's unique identifier.")], as_at : Annotated[Optional[datetime], Field(description="The asAt datetime at which to retrieve the order. Defaults to return the latest version of the order if not specified.")] = None, property_keys : Annotated[Optional[conlist(StrictStr)], Field(description="A list of property keys from the \"Orders\" domain to decorate onto the order.              These take the format {domain}/{scope}/{code} e.g. \"Orders/system/Name\".")] = None, **kwargs) -> ApiResponse:  # noqa: E501
         """[EARLY ACCESS] GetOrder: Get Order  # noqa: E501
 
-        Fetch an Order that matches the specified identifier  # noqa: E501
+        Fetch an Order that matches the specified identifier.  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
 
@@ -402,7 +402,7 @@ class OrdersApi:
     def list_orders(self, as_at : Annotated[Optional[datetime], Field(description="The asAt datetime at which to retrieve the order. Defaults to return the latest version of the order if not specified.")] = None, page : Annotated[Optional[constr(strict=True, max_length=500, min_length=1)], Field(description="The pagination token to use to continue listing orders from a previous call to list orders.              This value is returned from the previous call. If a pagination token is provided the sortBy, filter, effectiveAt, and asAt fields              must not have changed since the original request. Also, if set, a start value cannot be provided.")] = None, sort_by : Annotated[Optional[conlist(StrictStr)], Field(description="A list of field names or properties to sort by, each suffixed by \" ASC\" or \" DESC\"")] = None, start : Annotated[Optional[StrictInt], Field(description="When paginating, skip this number of results.")] = None, limit : Annotated[Optional[conint(strict=True, le=5000, ge=1)], Field(description="When paginating, limit the number of returned results to this many.")] = None, filter : Annotated[Optional[constr(strict=True, max_length=16384, min_length=0)], Field(description="Expression to filter the result set. Read more about filtering results from LUSID here:              https://support.lusid.com/filtering-results-from-lusid.")] = None, property_keys : Annotated[Optional[conlist(StrictStr)], Field(description="A list of property keys from the \"Orders\" domain to decorate onto each order.                  These take the format {domain}/{scope}/{code} e.g. \"Orders/system/Name\".")] = None, async_req: Optional[bool]=None, **kwargs) -> Union[PagedResourceListOfOrder, Awaitable[PagedResourceListOfOrder]]:  # noqa: E501
         """[EARLY ACCESS] ListOrders: List Orders  # noqa: E501
 
-        Fetch the last pre-AsAt date version of each order in scope (does not fetch the entire history).  # noqa: E501
+        Fetch the last pre-AsAt date version of each order with optional filtering (does not fetch the entire history).  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
 
@@ -446,7 +446,7 @@ class OrdersApi:
     def list_orders_with_http_info(self, as_at : Annotated[Optional[datetime], Field(description="The asAt datetime at which to retrieve the order. Defaults to return the latest version of the order if not specified.")] = None, page : Annotated[Optional[constr(strict=True, max_length=500, min_length=1)], Field(description="The pagination token to use to continue listing orders from a previous call to list orders.              This value is returned from the previous call. If a pagination token is provided the sortBy, filter, effectiveAt, and asAt fields              must not have changed since the original request. Also, if set, a start value cannot be provided.")] = None, sort_by : Annotated[Optional[conlist(StrictStr)], Field(description="A list of field names or properties to sort by, each suffixed by \" ASC\" or \" DESC\"")] = None, start : Annotated[Optional[StrictInt], Field(description="When paginating, skip this number of results.")] = None, limit : Annotated[Optional[conint(strict=True, le=5000, ge=1)], Field(description="When paginating, limit the number of returned results to this many.")] = None, filter : Annotated[Optional[constr(strict=True, max_length=16384, min_length=0)], Field(description="Expression to filter the result set. Read more about filtering results from LUSID here:              https://support.lusid.com/filtering-results-from-lusid.")] = None, property_keys : Annotated[Optional[conlist(StrictStr)], Field(description="A list of property keys from the \"Orders\" domain to decorate onto each order.                  These take the format {domain}/{scope}/{code} e.g. \"Orders/system/Name\".")] = None, **kwargs) -> ApiResponse:  # noqa: E501
         """[EARLY ACCESS] ListOrders: List Orders  # noqa: E501
 
-        Fetch the last pre-AsAt date version of each order in scope (does not fetch the entire history).  # noqa: E501
+        Fetch the last pre-AsAt date version of each order with optional filtering (does not fetch the entire history).  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
 

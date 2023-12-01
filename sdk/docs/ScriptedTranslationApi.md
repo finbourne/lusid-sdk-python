@@ -635,7 +635,7 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **upsert_translation_dialect**
-> Dialect upsert_translation_dialect(dialect)
+> Dialect upsert_translation_dialect(upsert_dialect_request)
 
 [EARLY ACCESS] UpsertTranslationDialect: Upsert a Dialect.
 
@@ -651,6 +651,7 @@ import os
 import lusid
 from lusid.rest import ApiException
 from lusid.models.dialect import Dialect
+from lusid.models.upsert_dialect_request import UpsertDialectRequest
 from pprint import pprint
 
 from lusid import (
@@ -692,11 +693,11 @@ api_client_factory = ApiClientFactory(config_loaders=config_loaders)
 async with api_client_factory:
     # Create an instance of the API class
     api_instance = api_client_factory.build(lusid.ScriptedTranslationApi)
-    dialect = {"id":{"scope":"scope-A","vendor":"BigBankCorporation","sourceSystem":"InstrumentMaster","version":"2.1.4","serialisationFormat":"Json","entityType":"Instrument"},"schema":{"type":"JsonSchema","body":"{\n  \"type\": \"object\",\n  \"properties\": {\n    \"Identifier\": {\n      \"type\": \"string\",\n      \"pattern\": \"/^[a-f\\\\d]{4}(?:[a-f\\\\d]{4}-){4}[a-f\\\\d]{12}$/i\"\n    },\n    \"AssetClass\": {\n      \"type\": \"string\",\n      \"enum\": [\n        \"Rates\",\n        \"Fx\",\n        \"Equity\",\n        \"Credit\"\n      ]\n    },\n    \"StartDate\": {\n      \"type\": \"string\",\n      \"format\": \"date-time\"\n    },\n    \"MaturityDate\": {\n      \"type\": \"string\",\n      \"format\": \"date-time\"\n    },\n    \"Notional\": {\n      \"type\": \"number\"\n    }\n  },\n  \"required\": [\n    \"Identifier\",\n    \"AssetClass\",\n    \"StartDate\",\n    \"MaturityDate\",\n    \"Notional\"\n  ]\n}"}} # Dialect | The dialect to upsert.
+    upsert_dialect_request = {"id":{"scope":"scope-A","vendor":"BigBankCorporation","sourceSystem":"InstrumentMaster","version":"2.1.4","serialisationFormat":"Json","entityType":"Instrument"},"schema":{"type":"JsonSchema","body":"{\n  \"type\": \"object\",\n  \"properties\": {\n    \"Identifier\": {\n      \"type\": \"string\",\n      \"pattern\": \"/^[a-f\\\\d]{4}(?:[a-f\\\\d]{4}-){4}[a-f\\\\d]{12}$/i\"\n    },\n    \"AssetClass\": {\n      \"type\": \"string\",\n      \"enum\": [\n        \"Rates\",\n        \"Fx\",\n        \"Equity\",\n        \"Credit\"\n      ]\n    },\n    \"StartDate\": {\n      \"type\": \"string\",\n      \"format\": \"date-time\"\n    },\n    \"MaturityDate\": {\n      \"type\": \"string\",\n      \"format\": \"date-time\"\n    },\n    \"Notional\": {\n      \"type\": \"number\"\n    }\n  },\n  \"required\": [\n    \"Identifier\",\n    \"AssetClass\",\n    \"StartDate\",\n    \"MaturityDate\",\n    \"Notional\"\n  ]\n}"}} # UpsertDialectRequest | The dialect to upsert.
 
     try:
         # [EARLY ACCESS] UpsertTranslationDialect: Upsert a Dialect.
-        api_response = await api_instance.upsert_translation_dialect(dialect)
+        api_response = await api_instance.upsert_translation_dialect(upsert_dialect_request)
         print("The response of ScriptedTranslationApi->upsert_translation_dialect:\n")
         pprint(api_response)
     except Exception as e:
@@ -708,7 +709,7 @@ async with api_client_factory:
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **dialect** | [**Dialect**](Dialect.md)| The dialect to upsert. | 
+ **upsert_dialect_request** | [**UpsertDialectRequest**](UpsertDialectRequest.md)| The dialect to upsert. | 
 
 ### Return type
 
@@ -733,7 +734,7 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **upsert_translation_script**
-> TranslationScript upsert_translation_script(translation_script)
+> TranslationScript upsert_translation_script(upsert_translation_script_request)
 
 [EARLY ACCESS] UpsertTranslationScript: Upsert a translation script.
 
@@ -749,6 +750,7 @@ import os
 import lusid
 from lusid.rest import ApiException
 from lusid.models.translation_script import TranslationScript
+from lusid.models.upsert_translation_script_request import UpsertTranslationScriptRequest
 from pprint import pprint
 
 from lusid import (
@@ -790,11 +792,11 @@ api_client_factory = ApiClientFactory(config_loaders=config_loaders)
 async with api_client_factory:
     # Create an instance of the API class
     api_instance = api_client_factory.build(lusid.ScriptedTranslationApi)
-    translation_script = {"id":{"scope":"example-scope","code":"example-code","version":"0.0.1"},"body":"export function entryPoint() { return { scriptInterfaceVersion: 1, translate: Translate }; } function Translate(input){ const fxfwd = JSON.parse(input);  fxfwd[\"endDate\"] = fxfwd[\"maturityDate\"];  delete fxfwd[\"maturityDate\"];  return JSON.stringify(fxfwd); }"} # TranslationScript | The translation script to be upserted.
+    upsert_translation_script_request = {"id":{"scope":"example-scope","code":"example-code","version":"0.0.1"},"body":"export function entryPoint() { return { scriptInterfaceVersion: 1, translate: Translate }; } function Translate(input){ const fxfwd = JSON.parse(input);  fxfwd[\"endDate\"] = fxfwd[\"maturityDate\"];  delete fxfwd[\"maturityDate\"];  return JSON.stringify(fxfwd); }"} # UpsertTranslationScriptRequest | The translation script to be upserted.
 
     try:
         # [EARLY ACCESS] UpsertTranslationScript: Upsert a translation script.
-        api_response = await api_instance.upsert_translation_script(translation_script)
+        api_response = await api_instance.upsert_translation_script(upsert_translation_script_request)
         print("The response of ScriptedTranslationApi->upsert_translation_script:\n")
         pprint(api_response)
     except Exception as e:
@@ -806,7 +808,7 @@ async with api_client_factory:
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **translation_script** | [**TranslationScript**](TranslationScript.md)| The translation script to be upserted. | 
+ **upsert_translation_script_request** | [**UpsertTranslationScriptRequest**](UpsertTranslationScriptRequest.md)| The translation script to be upserted. | 
 
 ### Return type
 

@@ -4,10 +4,10 @@
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**group_status** | **str** |  | 
-**results_used** | **Dict[str, float]** |  | 
-**properties_used** | **Dict[str, List[ModelProperty]]** |  | 
-**missing_data_information** | **List[str]** |  | 
+**group_status** | **str** | The status of this subset of results. | 
+**results_used** | **Dict[str, float]** | Dictionary of AddressKey (as string) and their corresponding decimal values, that were used in this rule. | 
+**properties_used** | **Dict[str, List[ModelProperty]]** | Dictionary of PropertyKey (as string) and their corresponding Properties, that were used in this rule | 
+**missing_data_information** | **List[str]** | List of string information detailing data that was missing from contributions processed in this rule | 
 
 ## Example
 

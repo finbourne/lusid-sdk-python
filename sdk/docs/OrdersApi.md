@@ -115,7 +115,7 @@ Name | Type | Description  | Notes
 
 [EARLY ACCESS] GetOrder: Get Order
 
-Fetch an Order that matches the specified identifier
+Fetch an Order that matches the specified identifier.
 
 ### Example
 
@@ -219,7 +219,7 @@ Name | Type | Description  | Notes
 
 [EARLY ACCESS] ListOrders: List Orders
 
-Fetch the last pre-AsAt date version of each order in scope (does not fetch the entire history).
+Fetch the last pre-AsAt date version of each order with optional filtering (does not fetch the entire history).
 
 ### Example
 
@@ -318,7 +318,7 @@ Name | Type | Description  | Notes
 ### HTTP response details
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-**200** | Orders in scope. |  -  |
+**200** | Orders. |  -  |
 **400** | The details of the input related failure |  -  |
 **0** | Error response |  -  |
 

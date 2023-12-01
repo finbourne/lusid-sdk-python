@@ -1,7 +1,29 @@
-from ssl import SSLContext
 import aiohttp
-import asyncio
-from typing import List, Tuple, Any, Union, Optional
+from typing import List, Tuple, Any, Union
+import socket
+from urllib3 import HTTPSConnectionPool, HTTPConnectionPool
+from lusid.extensions.socket_keep_alive import TCP_KEEPALIVE_INTERVAL, TCP_KEEP_IDLE
+
+
+def adjust_connection_socket(conn):
+    """
+    Adjusts the socket settings so that the client sends a TCP keep alive probe over the connection. This is only
+    applied where possible, if the ability to set the socket options is not available, for example using Anaconda,
+    then the settings will be left as is.
+
+    :param conn: The connection to update the socket settings for
+    :param str protocol: The protocol of the connection
+
+    :return: None
+    """
+    try:
+        # set TCP keep alive interval on windows connections
+        conn.ioctl(
+            socket.SIO_KEEPALIVE_VALS,
+            (1, TCP_KEEP_IDLE * 1000, TCP_KEEPALIVE_INTERVAL * 1000),
+        )
+    except AttributeError:
+        pass
 
 
 class TcpKeepAliveConnector(aiohttp.TCPConnector):
@@ -11,56 +33,81 @@ class TcpKeepAliveConnector(aiohttp.TCPConnector):
     """
     def __init__(
         self,
-        *,
-        verify_ssl: bool = True,
-        fingerprint: Optional[bytes] = None,
-        use_dns_cache: bool = True,
-        ttl_dns_cache: Optional[int] = 10,
-        family: int = 0,
-        ssl_context: Optional[SSLContext] = None,
-        ssl: Union[None, bool, aiohttp.Fingerprint, SSLContext] = None,
-        local_addr: Optional[Tuple[str, int]] = None,
-        resolver: Optional[aiohttp.abc.AbstractResolver] = None,
-        keepalive_timeout: Union[None, float, object] = aiohttp.helpers.sentinel,
-        force_close: bool = False,
-        limit: int = 100,
-        limit_per_host: int = 0,
-        enable_cleanup_closed: bool = False,
-        loop: Optional[asyncio.AbstractEventLoop] = None,
+        connector: aiohttp.TCPConnector,
         socket_options: Union[Tuple[Any, Any, Any], Tuple[Any, Any, None, int]]
     ) -> None:
-        super().__init__(
-            verify_ssl=verify_ssl,
-            fingerprint=fingerprint,
-            use_dns_cache=use_dns_cache,
-            ttl_dns_cache=ttl_dns_cache,
-            family=family,
-            ssl_context=ssl_context,
-            ssl=ssl,
-            local_addr=local_addr,
-            resolver=resolver,
-            keepalive_timeout=keepalive_timeout,
-            force_close=force_close,
-            limit=limit,
-            limit_per_host=limit_per_host,
-            enable_cleanup_closed=enable_cleanup_closed,
-            loop=loop,
-        )
+        self.__connector = connector
         self.socket_options = socket_options or []
 
-    async def _create_connection(
+    @property
+    def _timeout_ceil_threshold(self):
+        return self.__connector._timeout_ceil_threshold
+
+    @property
+    def _loop(self):
+        return self.__connector._loop
+
+    @property
+    def closed(self):
+        return self.__connector.closed
+
+    async def close(self) -> None:
+        await self.__connector.close()
+
+    async def connect(
         self,
         req: aiohttp.ClientRequest,
         traces: List[aiohttp.tracing.Trace],
         timeout: aiohttp.ClientTimeout,
-    ) -> aiohttp.client_proto.ResponseHandler:
-        if req.proxy:
-            transport, proto = await self._create_proxy_connection(req, traces, timeout)
-        else:
-            transport, proto = await self._create_direct_connection(
-                req, traces, timeout
-            )
-        sock = transport.get_extra_info("socket")
+    ) -> aiohttp.connector.Connection:
+        """Wraps TCP connector, each new connection will have socket options
+        and windows ioctl for keep alives applied
+
+        Parameters
+        ----------
+        req : aiohttp.ClientRequest
+        traces : List[aiohttp.tracing.Trace]
+        timeout : aiohttp.ClientTimeout
+        """
+        connection = await self.__connector.connect(req, traces, timeout)
+        sock = connection.protocol.transport.get_extra_info("socket")
         for option in self.socket_options:
             sock.setsockopt(*option)
-        return proto
+        adjust_connection_socket(sock)
+        return connection
+
+
+class TCPKeepAliveHTTPSConnectionPool(HTTPSConnectionPool):
+    """
+    This class overrides the _validate_conn method in the HTTPSConnectionPool class. This is the entry point to use
+    for modifying the socket as it is called after the socket is created and before the request is made.
+    """
+
+    def _validate_conn(self, conn):
+        """
+        Called right before a request is made, after the socket is created.
+        """
+        # Call the method on the base class
+        super()._validate_conn(conn)
+
+        # Set up TCP Keep Alive probes, this is the only line added to this function
+        adjust_connection_socket(conn)
+
+
+class TCPKeepAliveHTTPConnectionPool(HTTPConnectionPool):
+    """
+    This class overrides the _validate_conn method in the HTTPSConnectionPool class. This is the entry point to use
+    for modifying the socket as it is called after the socket is created and before the request is made.
+
+    In the base class this method is passed completely.
+    """
+
+    def _validate_conn(self, conn):
+        """
+        Called right before a request is made, after the socket is created.
+        """
+        # Call the method on the base class
+        super()._validate_conn(conn)
+
+        # Set up TCP Keep Alive probes, this is the only line added to this function
+        adjust_connection_socket(conn)

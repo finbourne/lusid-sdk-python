@@ -24,7 +24,7 @@ ENVIRONMENT_CONFIG_KEYS = {
 
 SECRETS_FILE_CONFIG_KEYS = {
     "token_url": "tokenUrl",
-    "api_url": "apiUrl",
+    "api_url": "lusidUrl",
     "username": "username",
     "password": "password",
     "client_id": "clientId",
