@@ -18,22 +18,21 @@ import re  # noqa: F401
 import json
 
 from datetime import datetime
-from typing import Any, Dict
-from pydantic import Field, StrictStr, constr, validator
+from typing import Any, Dict, Union
+from pydantic import Field, StrictFloat, StrictInt, StrictStr, validator
 from lusid.models.instrument_event import InstrumentEvent
-from lusid.models.life_cycle_event_value import LifeCycleEventValue
 
-class RawVendorEvent(InstrumentEvent):
+class BondPrincipalEvent(InstrumentEvent):
     """
-    A generic event derived from the economic definition of an instrument. This should be considered purely  informational; any data provided by this event is not guaranteed to be processable by LUSID.  # noqa: E501
+    Definition of a Bond Principal Event  This is an event that describes the occurence of a cashflow due to the principal payment.  # noqa: E501
     """
-    effective_at: datetime = Field(..., alias="effectiveAt", description="The effective date of the event")
-    event_value: LifeCycleEventValue = Field(..., alias="eventValue")
-    event_type: constr(strict=True, min_length=1) = Field(..., alias="eventType", description="What type of internal event does this represent; reset, exercise, amortisation etc.")
-    event_status: constr(strict=True, min_length=1) = Field(..., alias="eventStatus", description="What is the event status, is it a known (ie historic) or unknown (ie projected) event?")
+    currency: StrictStr = Field(..., description="Currency of the principal payment")
+    ex_date: datetime = Field(..., alias="exDate", description="Ex-Dividend date of the principal payment")
+    payment_date: datetime = Field(..., alias="paymentDate", description="Payment date of the principal payment")
+    principal_per_unit: Union[StrictFloat, StrictInt] = Field(..., alias="principalPerUnit", description="Principal per unit")
     instrument_event_type: StrictStr = Field(..., alias="instrumentEventType", description="The Type of Event. The available values are: TransitionEvent, InformationalEvent, OpenEvent, CloseEvent, StockSplitEvent, BondDefaultEvent, CashDividendEvent, AmortisationEvent, CashFlowEvent, ExerciseEvent, ResetEvent, TriggerEvent, RawVendorEvent, InformationalErrorEvent, BondCouponEvent, DividendReinvestmentEvent, AccumulationEvent, BondPrincipalEvent")
     additional_properties: Dict[str, Any] = {}
-    __properties = ["instrumentEventType", "effectiveAt", "eventValue", "eventType", "eventStatus"]
+    __properties = ["instrumentEventType", "currency", "exDate", "paymentDate", "principalPerUnit"]
 
     @validator('instrument_event_type')
     def instrument_event_type_validate_enum(cls, value):
@@ -56,8 +55,8 @@ class RawVendorEvent(InstrumentEvent):
         return json.dumps(self.to_dict())
 
     @classmethod
-    def from_json(cls, json_str: str) -> RawVendorEvent:
-        """Create an instance of RawVendorEvent from a JSON string"""
+    def from_json(cls, json_str: str) -> BondPrincipalEvent:
+        """Create an instance of BondPrincipalEvent from a JSON string"""
         return cls.from_dict(json.loads(json_str))
 
     def to_dict(self):
@@ -67,9 +66,6 @@ class RawVendorEvent(InstrumentEvent):
                             "additional_properties"
                           },
                           exclude_none=True)
-        # override the default output from pydantic by calling `to_dict()` of event_value
-        if self.event_value:
-            _dict['eventValue'] = self.event_value.to_dict()
         # puts key-value pairs in additional_properties in the top level
         if self.additional_properties is not None:
             for _key, _value in self.additional_properties.items():
@@ -78,20 +74,20 @@ class RawVendorEvent(InstrumentEvent):
         return _dict
 
     @classmethod
-    def from_dict(cls, obj: dict) -> RawVendorEvent:
-        """Create an instance of RawVendorEvent from a dict"""
+    def from_dict(cls, obj: dict) -> BondPrincipalEvent:
+        """Create an instance of BondPrincipalEvent from a dict"""
         if obj is None:
             return None
 
         if not isinstance(obj, dict):
-            return RawVendorEvent.parse_obj(obj)
+            return BondPrincipalEvent.parse_obj(obj)
 
-        _obj = RawVendorEvent.parse_obj({
+        _obj = BondPrincipalEvent.parse_obj({
             "instrument_event_type": obj.get("instrumentEventType"),
-            "effective_at": obj.get("effectiveAt"),
-            "event_value": LifeCycleEventValue.from_dict(obj.get("eventValue")) if obj.get("eventValue") is not None else None,
-            "event_type": obj.get("eventType"),
-            "event_status": obj.get("eventStatus")
+            "currency": obj.get("currency"),
+            "ex_date": obj.get("exDate"),
+            "payment_date": obj.get("paymentDate"),
+            "principal_per_unit": obj.get("principalPerUnit")
         })
         # store additional fields in additional_properties
         for _key in obj.keys():

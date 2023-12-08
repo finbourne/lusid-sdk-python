@@ -397,28 +397,32 @@ class ComplianceApi:
             _request_auth=_params.get('_request_auth'))
 
     @overload
-    async def get_compliance_run_summary(self, scope : Annotated[constr(strict=True, max_length=64, min_length=1), Field(..., description="Required: Run Scope.")], code : Annotated[constr(strict=True, max_length=64, min_length=1), Field(..., description="Required: Run Code.")], **kwargs) -> ComplianceRunSummary:  # noqa: E501
+    async def get_compliance_rule_result_details(self, run_scope : Annotated[constr(strict=True, max_length=64, min_length=1), Field(..., description="Required: Run Scope.")], run_code : Annotated[constr(strict=True, max_length=64, min_length=1), Field(..., description="Required: Run Code.")], rule_scope : Annotated[constr(strict=True, max_length=64, min_length=1), Field(..., description="Required: Rule Scope.")], rule_code : Annotated[constr(strict=True, max_length=64, min_length=1), Field(..., description="Required: Rule Code.")], **kwargs) -> ComplianceRunSummary:  # noqa: E501
         ...
 
     @overload
-    def get_compliance_run_summary(self, scope : Annotated[constr(strict=True, max_length=64, min_length=1), Field(..., description="Required: Run Scope.")], code : Annotated[constr(strict=True, max_length=64, min_length=1), Field(..., description="Required: Run Code.")], async_req: Optional[bool]=True, **kwargs) -> ComplianceRunSummary:  # noqa: E501
+    def get_compliance_rule_result_details(self, run_scope : Annotated[constr(strict=True, max_length=64, min_length=1), Field(..., description="Required: Run Scope.")], run_code : Annotated[constr(strict=True, max_length=64, min_length=1), Field(..., description="Required: Run Code.")], rule_scope : Annotated[constr(strict=True, max_length=64, min_length=1), Field(..., description="Required: Rule Scope.")], rule_code : Annotated[constr(strict=True, max_length=64, min_length=1), Field(..., description="Required: Rule Code.")], async_req: Optional[bool]=True, **kwargs) -> ComplianceRunSummary:  # noqa: E501
         ...
 
     @validate_arguments
-    def get_compliance_run_summary(self, scope : Annotated[constr(strict=True, max_length=64, min_length=1), Field(..., description="Required: Run Scope.")], code : Annotated[constr(strict=True, max_length=64, min_length=1), Field(..., description="Required: Run Code.")], async_req: Optional[bool]=None, **kwargs) -> Union[ComplianceRunSummary, Awaitable[ComplianceRunSummary]]:  # noqa: E501
-        """[EARLY ACCESS] GetComplianceRunSummary: Get summary results for a specific compliance run.  # noqa: E501
+    def get_compliance_rule_result_details(self, run_scope : Annotated[constr(strict=True, max_length=64, min_length=1), Field(..., description="Required: Run Scope.")], run_code : Annotated[constr(strict=True, max_length=64, min_length=1), Field(..., description="Required: Run Code.")], rule_scope : Annotated[constr(strict=True, max_length=64, min_length=1), Field(..., description="Required: Rule Scope.")], rule_code : Annotated[constr(strict=True, max_length=64, min_length=1), Field(..., description="Required: Rule Code.")], async_req: Optional[bool]=None, **kwargs) -> Union[ComplianceRunSummary, Awaitable[ComplianceRunSummary]]:  # noqa: E501
+        """[EARLY ACCESS] GetComplianceRuleResultDetails: Get summary results for a specific rule within a compliance run.  # noqa: E501
 
-        Specify a run scope and code from a previously run compliance check to get summarised results.  # noqa: E501
+        Specify a run scope and code from a previously run compliance check, and the scope and code of a rule within that run, to get detailed results for that rule.  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
 
-        >>> thread = api.get_compliance_run_summary(scope, code, async_req=True)
+        >>> thread = api.get_compliance_rule_result_details(run_scope, run_code, rule_scope, rule_code, async_req=True)
         >>> result = thread.get()
 
-        :param scope: Required: Run Scope. (required)
-        :type scope: str
-        :param code: Required: Run Code. (required)
-        :type code: str
+        :param run_scope: Required: Run Scope. (required)
+        :type run_scope: str
+        :param run_code: Required: Run Code. (required)
+        :type run_code: str
+        :param rule_scope: Required: Rule Scope. (required)
+        :type rule_scope: str
+        :param rule_code: Required: Rule Code. (required)
+        :type rule_code: str
         :param async_req: Whether to execute the request asynchronously.
         :type async_req: bool, optional
         :param _request_timeout: timeout setting for this request.
@@ -432,27 +436,31 @@ class ComplianceApi:
         """
         kwargs['_return_http_data_only'] = True
         if '_preload_content' in kwargs:
-            message = "Error! Please call the get_compliance_run_summary_with_http_info method with `_preload_content` instead and obtain raw data from ApiResponse.raw_data"  # noqa: E501
+            message = "Error! Please call the get_compliance_rule_result_details_with_http_info method with `_preload_content` instead and obtain raw data from ApiResponse.raw_data"  # noqa: E501
             raise ValueError(message)
         if async_req is not None:
             kwargs['async_req'] = async_req
-        return self.get_compliance_run_summary_with_http_info(scope, code, **kwargs)  # noqa: E501
+        return self.get_compliance_rule_result_details_with_http_info(run_scope, run_code, rule_scope, rule_code, **kwargs)  # noqa: E501
 
     @validate_arguments
-    def get_compliance_run_summary_with_http_info(self, scope : Annotated[constr(strict=True, max_length=64, min_length=1), Field(..., description="Required: Run Scope.")], code : Annotated[constr(strict=True, max_length=64, min_length=1), Field(..., description="Required: Run Code.")], **kwargs) -> ApiResponse:  # noqa: E501
-        """[EARLY ACCESS] GetComplianceRunSummary: Get summary results for a specific compliance run.  # noqa: E501
+    def get_compliance_rule_result_details_with_http_info(self, run_scope : Annotated[constr(strict=True, max_length=64, min_length=1), Field(..., description="Required: Run Scope.")], run_code : Annotated[constr(strict=True, max_length=64, min_length=1), Field(..., description="Required: Run Code.")], rule_scope : Annotated[constr(strict=True, max_length=64, min_length=1), Field(..., description="Required: Rule Scope.")], rule_code : Annotated[constr(strict=True, max_length=64, min_length=1), Field(..., description="Required: Rule Code.")], **kwargs) -> ApiResponse:  # noqa: E501
+        """[EARLY ACCESS] GetComplianceRuleResultDetails: Get summary results for a specific rule within a compliance run.  # noqa: E501
 
-        Specify a run scope and code from a previously run compliance check to get summarised results.  # noqa: E501
+        Specify a run scope and code from a previously run compliance check, and the scope and code of a rule within that run, to get detailed results for that rule.  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
 
-        >>> thread = api.get_compliance_run_summary_with_http_info(scope, code, async_req=True)
+        >>> thread = api.get_compliance_rule_result_details_with_http_info(run_scope, run_code, rule_scope, rule_code, async_req=True)
         >>> result = thread.get()
 
-        :param scope: Required: Run Scope. (required)
-        :type scope: str
-        :param code: Required: Run Code. (required)
-        :type code: str
+        :param run_scope: Required: Run Scope. (required)
+        :type run_scope: str
+        :param run_code: Required: Run Code. (required)
+        :type run_code: str
+        :param rule_scope: Required: Rule Scope. (required)
+        :type rule_scope: str
+        :param rule_code: Required: Rule Code. (required)
+        :type rule_code: str
         :param async_req: Whether to execute the request asynchronously.
         :type async_req: bool, optional
         :param _preload_content: if False, the ApiResponse.data will
@@ -481,8 +489,175 @@ class ComplianceApi:
         _params = locals()
 
         _all_params = [
-            'scope',
-            'code'
+            'run_scope',
+            'run_code',
+            'rule_scope',
+            'rule_code'
+        ]
+        _all_params.extend(
+            [
+                'async_req',
+                '_return_http_data_only',
+                '_preload_content',
+                '_request_timeout',
+                '_request_auth',
+                '_content_type',
+                '_headers'
+            ]
+        )
+
+        # validate the arguments
+        for _key, _val in _params['kwargs'].items():
+            if _key not in _all_params:
+                raise ApiTypeError(
+                    "Got an unexpected keyword argument '%s'"
+                    " to method get_compliance_rule_result_details" % _key
+                )
+            _params[_key] = _val
+        del _params['kwargs']
+
+        _collection_formats = {}
+
+        # process the path parameters
+        _path_params = {}
+        if _params['run_scope']:
+            _path_params['runScope'] = _params['run_scope']
+
+        if _params['run_code']:
+            _path_params['runCode'] = _params['run_code']
+
+        if _params['rule_scope']:
+            _path_params['ruleScope'] = _params['rule_scope']
+
+        if _params['rule_code']:
+            _path_params['ruleCode'] = _params['rule_code']
+
+
+        # process the query parameters
+        _query_params = []
+        # process the header parameters
+        _header_params = dict(_params.get('_headers', {}))
+        # process the form parameters
+        _form_params = []
+        _files = {}
+        # process the body parameter
+        _body_params = None
+        # set the HTTP header `Accept`
+        _header_params['Accept'] = self.api_client.select_header_accept(
+            ['text/plain', 'application/json', 'text/json'])  # noqa: E501
+
+        # authentication setting
+        _auth_settings = ['oauth2']  # noqa: E501
+
+        _response_types_map = {
+            '200': "ComplianceRunSummary",
+            '400': "LusidValidationProblemDetails",
+        }
+
+        return self.api_client.call_api(
+            '/api/compliance/runs/summary/{runScope}/{runCode}/{ruleScope}/{ruleCode}', 'GET',
+            _path_params,
+            _query_params,
+            _header_params,
+            body=_body_params,
+            post_params=_form_params,
+            files=_files,
+            response_types_map=_response_types_map,
+            auth_settings=_auth_settings,
+            async_req=_params.get('async_req'),
+            _return_http_data_only=_params.get('_return_http_data_only'),  # noqa: E501
+            _preload_content=_params.get('_preload_content', True),
+            _request_timeout=_params.get('_request_timeout'),
+            collection_formats=_collection_formats,
+            _request_auth=_params.get('_request_auth'))
+
+    @overload
+    async def get_compliance_run_summary(self, run_scope : Annotated[constr(strict=True, max_length=64, min_length=1), Field(..., description="Required: Run Scope.")], run_code : Annotated[constr(strict=True, max_length=64, min_length=1), Field(..., description="Required: Run Code.")], **kwargs) -> ComplianceRunSummary:  # noqa: E501
+        ...
+
+    @overload
+    def get_compliance_run_summary(self, run_scope : Annotated[constr(strict=True, max_length=64, min_length=1), Field(..., description="Required: Run Scope.")], run_code : Annotated[constr(strict=True, max_length=64, min_length=1), Field(..., description="Required: Run Code.")], async_req: Optional[bool]=True, **kwargs) -> ComplianceRunSummary:  # noqa: E501
+        ...
+
+    @validate_arguments
+    def get_compliance_run_summary(self, run_scope : Annotated[constr(strict=True, max_length=64, min_length=1), Field(..., description="Required: Run Scope.")], run_code : Annotated[constr(strict=True, max_length=64, min_length=1), Field(..., description="Required: Run Code.")], async_req: Optional[bool]=None, **kwargs) -> Union[ComplianceRunSummary, Awaitable[ComplianceRunSummary]]:  # noqa: E501
+        """[EARLY ACCESS] GetComplianceRunSummary: Get summary results for a specific compliance run.  # noqa: E501
+
+        Specify a run scope and code from a previously run compliance check to get summarised results.  # noqa: E501
+        This method makes a synchronous HTTP request by default. To make an
+        asynchronous HTTP request, please pass async_req=True
+
+        >>> thread = api.get_compliance_run_summary(run_scope, run_code, async_req=True)
+        >>> result = thread.get()
+
+        :param run_scope: Required: Run Scope. (required)
+        :type run_scope: str
+        :param run_code: Required: Run Code. (required)
+        :type run_code: str
+        :param async_req: Whether to execute the request asynchronously.
+        :type async_req: bool, optional
+        :param _request_timeout: timeout setting for this request.
+               If one number provided, it will be total request
+               timeout. It can also be a pair (tuple) of
+               (connection, read) timeouts.
+        :return: Returns the result object.
+                 If the method is called asynchronously,
+                 returns the request thread.
+        :rtype: ComplianceRunSummary
+        """
+        kwargs['_return_http_data_only'] = True
+        if '_preload_content' in kwargs:
+            message = "Error! Please call the get_compliance_run_summary_with_http_info method with `_preload_content` instead and obtain raw data from ApiResponse.raw_data"  # noqa: E501
+            raise ValueError(message)
+        if async_req is not None:
+            kwargs['async_req'] = async_req
+        return self.get_compliance_run_summary_with_http_info(run_scope, run_code, **kwargs)  # noqa: E501
+
+    @validate_arguments
+    def get_compliance_run_summary_with_http_info(self, run_scope : Annotated[constr(strict=True, max_length=64, min_length=1), Field(..., description="Required: Run Scope.")], run_code : Annotated[constr(strict=True, max_length=64, min_length=1), Field(..., description="Required: Run Code.")], **kwargs) -> ApiResponse:  # noqa: E501
+        """[EARLY ACCESS] GetComplianceRunSummary: Get summary results for a specific compliance run.  # noqa: E501
+
+        Specify a run scope and code from a previously run compliance check to get summarised results.  # noqa: E501
+        This method makes a synchronous HTTP request by default. To make an
+        asynchronous HTTP request, please pass async_req=True
+
+        >>> thread = api.get_compliance_run_summary_with_http_info(run_scope, run_code, async_req=True)
+        >>> result = thread.get()
+
+        :param run_scope: Required: Run Scope. (required)
+        :type run_scope: str
+        :param run_code: Required: Run Code. (required)
+        :type run_code: str
+        :param async_req: Whether to execute the request asynchronously.
+        :type async_req: bool, optional
+        :param _preload_content: if False, the ApiResponse.data will
+                                 be set to none and raw_data will store the
+                                 HTTP response body without reading/decoding.
+                                 Default is True.
+        :type _preload_content: bool, optional
+        :param _return_http_data_only: response data instead of ApiResponse
+                                       object with status code, headers, etc
+        :type _return_http_data_only: bool, optional
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :param _request_auth: set to override the auth_settings for an a single
+                              request; this effectively ignores the authentication
+                              in the spec for a single request.
+        :type _request_auth: dict, optional
+        :type _content_type: string, optional: force content-type for the request
+        :return: Returns the result object.
+                 If the method is called asynchronously,
+                 returns the request thread.
+        :rtype: tuple(ComplianceRunSummary, status_code(int), headers(HTTPHeaderDict))
+        """
+
+        _params = locals()
+
+        _all_params = [
+            'run_scope',
+            'run_code'
         ]
         _all_params.extend(
             [
@@ -510,11 +685,11 @@ class ComplianceApi:
 
         # process the path parameters
         _path_params = {}
-        if _params['scope']:
-            _path_params['scope'] = _params['scope']
+        if _params['run_scope']:
+            _path_params['runScope'] = _params['run_scope']
 
-        if _params['code']:
-            _path_params['code'] = _params['code']
+        if _params['run_code']:
+            _path_params['runCode'] = _params['run_code']
 
 
         # process the query parameters
@@ -539,7 +714,7 @@ class ComplianceApi:
         }
 
         return self.api_client.call_api(
-            '/api/compliance/runs/summary/{scope}/{code}', 'GET',
+            '/api/compliance/runs/summary/{runScope}/{runCode}', 'GET',
             _path_params,
             _query_params,
             _header_params,

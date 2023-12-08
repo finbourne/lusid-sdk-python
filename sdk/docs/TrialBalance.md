@@ -9,10 +9,11 @@ Name | Type | Description | Notes
 **description** | **str** | The description of the record | [optional] 
 **levels** | **List[str]** | The levels that have been derived from the specified General Ledger Profile | 
 **account_type** | **str** | The account type attributed to the record | 
-**opening** | **float** | The opening balance at the start of the period | 
-**closing** | **float** | The closing balance at the end of the period | 
-**debit** | **float** | All debits that occured in the period | 
-**credit** | **float** | All credits that occured in the period | 
+**local_currency** | **str** | The account type attributed to the record | 
+**opening** | [**MultiCurrencyAmounts**](MultiCurrencyAmounts.md) |  | 
+**closing** | [**MultiCurrencyAmounts**](MultiCurrencyAmounts.md) |  | 
+**debit** | [**MultiCurrencyAmounts**](MultiCurrencyAmounts.md) |  | 
+**credit** | [**MultiCurrencyAmounts**](MultiCurrencyAmounts.md) |  | 
 **properties** | [**Dict[str, ModelProperty]**](ModelProperty.md) | Properties found on the mapped &#39;Account&#39;, as specified in request | [optional] 
 **links** | [**List[Link]**](Link.md) |  | [optional] 
 

@@ -18,10 +18,11 @@ import re  # noqa: F401
 import json
 
 
-from typing import Any, Dict, List, Optional, Union
-from pydantic import BaseModel, Field, StrictFloat, StrictInt, StrictStr, conlist, constr
+from typing import Any, Dict, List, Optional
+from pydantic import BaseModel, Field, StrictStr, conlist, constr
 from lusid.models.link import Link
 from lusid.models.model_property import ModelProperty
+from lusid.models.multi_currency_amounts import MultiCurrencyAmounts
 
 class TrialBalance(BaseModel):
     """
@@ -31,13 +32,14 @@ class TrialBalance(BaseModel):
     description: Optional[StrictStr] = Field(None, description="The description of the record")
     levels: conlist(StrictStr) = Field(..., description="The levels that have been derived from the specified General Ledger Profile")
     account_type: constr(strict=True, min_length=1) = Field(..., alias="accountType", description="The account type attributed to the record")
-    opening: Union[StrictFloat, StrictInt] = Field(..., description="The opening balance at the start of the period")
-    closing: Union[StrictFloat, StrictInt] = Field(..., description="The closing balance at the end of the period")
-    debit: Union[StrictFloat, StrictInt] = Field(..., description="All debits that occured in the period")
-    credit: Union[StrictFloat, StrictInt] = Field(..., description="All credits that occured in the period")
+    local_currency: constr(strict=True, min_length=1) = Field(..., alias="localCurrency", description="The account type attributed to the record")
+    opening: MultiCurrencyAmounts = Field(...)
+    closing: MultiCurrencyAmounts = Field(...)
+    debit: MultiCurrencyAmounts = Field(...)
+    credit: MultiCurrencyAmounts = Field(...)
     properties: Optional[Dict[str, ModelProperty]] = Field(None, description="Properties found on the mapped 'Account', as specified in request")
     links: Optional[conlist(Link)] = None
-    __properties = ["generalLedgerAccountCode", "description", "levels", "accountType", "opening", "closing", "debit", "credit", "properties", "links"]
+    __properties = ["generalLedgerAccountCode", "description", "levels", "accountType", "localCurrency", "opening", "closing", "debit", "credit", "properties", "links"]
 
     class Config:
         """Pydantic configuration"""
@@ -63,6 +65,18 @@ class TrialBalance(BaseModel):
                           exclude={
                           },
                           exclude_none=True)
+        # override the default output from pydantic by calling `to_dict()` of opening
+        if self.opening:
+            _dict['opening'] = self.opening.to_dict()
+        # override the default output from pydantic by calling `to_dict()` of closing
+        if self.closing:
+            _dict['closing'] = self.closing.to_dict()
+        # override the default output from pydantic by calling `to_dict()` of debit
+        if self.debit:
+            _dict['debit'] = self.debit.to_dict()
+        # override the default output from pydantic by calling `to_dict()` of credit
+        if self.credit:
+            _dict['credit'] = self.credit.to_dict()
         # override the default output from pydantic by calling `to_dict()` of each value in properties (dict)
         _field_dict = {}
         if self.properties:
@@ -108,10 +122,11 @@ class TrialBalance(BaseModel):
             "description": obj.get("description"),
             "levels": obj.get("levels"),
             "account_type": obj.get("accountType"),
-            "opening": obj.get("opening"),
-            "closing": obj.get("closing"),
-            "debit": obj.get("debit"),
-            "credit": obj.get("credit"),
+            "local_currency": obj.get("localCurrency"),
+            "opening": MultiCurrencyAmounts.from_dict(obj.get("opening")) if obj.get("opening") is not None else None,
+            "closing": MultiCurrencyAmounts.from_dict(obj.get("closing")) if obj.get("closing") is not None else None,
+            "debit": MultiCurrencyAmounts.from_dict(obj.get("debit")) if obj.get("debit") is not None else None,
+            "credit": MultiCurrencyAmounts.from_dict(obj.get("credit")) if obj.get("credit") is not None else None,
             "properties": dict(
                 (_k, ModelProperty.from_dict(_v))
                 for _k, _v in obj.get("properties").items()

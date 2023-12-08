@@ -6,7 +6,8 @@ Method | HTTP request | Description
 ------------- | ------------- | -------------
 [**delete_compliance_rule**](ComplianceApi.md#delete_compliance_rule) | **DELETE** /api/compliance/rules/{scope}/{code} | [EARLY ACCESS] DeleteComplianceRule: Delete compliance rule.
 [**get_compliance_rule**](ComplianceApi.md#get_compliance_rule) | **GET** /api/compliance/rules/{scope}/{code} | [EARLY ACCESS] GetComplianceRule: Get compliance rule.
-[**get_compliance_run_summary**](ComplianceApi.md#get_compliance_run_summary) | **GET** /api/compliance/runs/summary/{scope}/{code} | [EARLY ACCESS] GetComplianceRunSummary: Get summary results for a specific compliance run.
+[**get_compliance_rule_result_details**](ComplianceApi.md#get_compliance_rule_result_details) | **GET** /api/compliance/runs/summary/{runScope}/{runCode}/{ruleScope}/{ruleCode} | [EARLY ACCESS] GetComplianceRuleResultDetails: Get summary results for a specific rule within a compliance run.
+[**get_compliance_run_summary**](ComplianceApi.md#get_compliance_run_summary) | **GET** /api/compliance/runs/summary/{runScope}/{runCode} | [EARLY ACCESS] GetComplianceRunSummary: Get summary results for a specific compliance run.
 [**get_compliance_template**](ComplianceApi.md#get_compliance_template) | **GET** /api/compliance/templates/{scope}/{code} | [EARLY ACCESS] GetComplianceTemplate: Get the requested compliance template.
 [**get_decorated_compliance_run_summary**](ComplianceApi.md#get_decorated_compliance_run_summary) | **GET** /api/compliance/runs/summary/{scope}/{code}/$decorate | [EARLY ACCESS] GetDecoratedComplianceRunSummary: Get decorated summary results for a specific compliance run.
 [**list_compliance_rules**](ComplianceApi.md#list_compliance_rules) | **GET** /api/compliance/rules | [EARLY ACCESS] ListComplianceRules: List compliance rules.
@@ -221,8 +222,112 @@ Name | Type | Description  | Notes
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
+# **get_compliance_rule_result_details**
+> ComplianceRunSummary get_compliance_rule_result_details(run_scope, run_code, rule_scope, rule_code)
+
+[EARLY ACCESS] GetComplianceRuleResultDetails: Get summary results for a specific rule within a compliance run.
+
+Specify a run scope and code from a previously run compliance check, and the scope and code of a rule within that run, to get detailed results for that rule.
+
+### Example
+
+* OAuth Authentication (oauth2):
+```python
+from __future__ import print_function
+import time
+import os
+import lusid
+from lusid.rest import ApiException
+from lusid.models.compliance_run_summary import ComplianceRunSummary
+from pprint import pprint
+
+from lusid import (
+	  ApiClientFactory,
+	  ApplicationMetadataApi,
+	  EnvironmentVariablesConfigurationLoader,
+	  SecretsFileConfigurationLoader,
+	  ArgsConfigurationLoader
+)
+
+# Use the lusid ApiClientFactory to build Api instances with a configured api client
+# By default this will read config from environment variables
+# Then from a secrets.json file found in the current working directory
+api_client_factory = ApiClientFactory()
+
+# The ApiClientFactory can be passed an iterable of configuration loaders to read configuration from
+
+api_url = "https://www.lusid.com/api"
+# Path to a secrets.json file containing authentication credentials
+# See https://support.lusid.com/knowledgebase/article/KA-01667/en-us
+# for a detailed guide to setting up the SDK make authenticated calls to LUSID APIs
+secrets_path = os.getenv("FBN_SECRETS_PATH")
+app_name="LusidJupyterNotebook"
+
+config_loaders = [
+	EnvironmentVariablesConfigurationLoader(),
+	SecretsFileConfigurationLoader(api_secrets_file=secrets_path),
+	ArgsConfigurationLoader(api_url=api_url, app_name=app_name)
+]
+api_client_factory = ApiClientFactory(config_loaders=config_loaders)
+
+
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+
+
+
+# Enter a context with an instance of the ApiClientFactory to ensure the connection pool is closed after use
+async with api_client_factory:
+    # Create an instance of the API class
+    api_instance = api_client_factory.build(lusid.ComplianceApi)
+    run_scope = 'run_scope_example' # str | Required: Run Scope.
+    run_code = 'run_code_example' # str | Required: Run Code.
+    rule_scope = 'rule_scope_example' # str | Required: Rule Scope.
+    rule_code = 'rule_code_example' # str | Required: Rule Code.
+
+    try:
+        # [EARLY ACCESS] GetComplianceRuleResultDetails: Get summary results for a specific rule within a compliance run.
+        api_response = await api_instance.get_compliance_rule_result_details(run_scope, run_code, rule_scope, rule_code)
+        print("The response of ComplianceApi->get_compliance_rule_result_details:\n")
+        pprint(api_response)
+    except Exception as e:
+        print("Exception when calling ComplianceApi->get_compliance_rule_result_details: %s\n" % e)
+```
+
+
+### Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **run_scope** | **str**| Required: Run Scope. | 
+ **run_code** | **str**| Required: Run Code. | 
+ **rule_scope** | **str**| Required: Rule Scope. | 
+ **rule_code** | **str**| Required: Rule Code. | 
+
+### Return type
+
+[**ComplianceRunSummary**](ComplianceRunSummary.md)
+
+### Authorization
+
+[oauth2](../README.md#oauth2)
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: text/plain, application/json, text/json
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | The requested compliance run summary details for a specific rule. |  -  |
+**400** | The details of the input related failure |  -  |
+**0** | Error response |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
 # **get_compliance_run_summary**
-> ComplianceRunSummary get_compliance_run_summary(scope, code)
+> ComplianceRunSummary get_compliance_run_summary(run_scope, run_code)
 
 [EARLY ACCESS] GetComplianceRunSummary: Get summary results for a specific compliance run.
 
@@ -279,12 +384,12 @@ api_client_factory = ApiClientFactory(config_loaders=config_loaders)
 async with api_client_factory:
     # Create an instance of the API class
     api_instance = api_client_factory.build(lusid.ComplianceApi)
-    scope = 'scope_example' # str | Required: Run Scope.
-    code = 'code_example' # str | Required: Run Code.
+    run_scope = 'run_scope_example' # str | Required: Run Scope.
+    run_code = 'run_code_example' # str | Required: Run Code.
 
     try:
         # [EARLY ACCESS] GetComplianceRunSummary: Get summary results for a specific compliance run.
-        api_response = await api_instance.get_compliance_run_summary(scope, code)
+        api_response = await api_instance.get_compliance_run_summary(run_scope, run_code)
         print("The response of ComplianceApi->get_compliance_run_summary:\n")
         pprint(api_response)
     except Exception as e:
@@ -296,8 +401,8 @@ async with api_client_factory:
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **scope** | **str**| Required: Run Scope. | 
- **code** | **str**| Required: Run Code. | 
+ **run_scope** | **str**| Required: Run Scope. | 
+ **run_code** | **str**| Required: Run Code. | 
 
 ### Return type
 

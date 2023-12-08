@@ -83,6 +83,7 @@ from lusid.models.block_set_request import BlockSetRequest
 from lusid.models.bond import Bond
 from lusid.models.bond_coupon_event import BondCouponEvent
 from lusid.models.bond_default_event import BondDefaultEvent
+from lusid.models.bond_principal_event import BondPrincipalEvent
 from lusid.models.book_transactions_response import BookTransactionsResponse
 from lusid.models.bool_compliance_parameter import BoolComplianceParameter
 from lusid.models.bool_list_compliance_parameter import BoolListComplianceParameter
@@ -146,6 +147,7 @@ from lusid.models.compliance_summary_rule_result_request import ComplianceSummar
 from lusid.models.compliance_template import ComplianceTemplate
 from lusid.models.compliance_template_parameter import ComplianceTemplateParameter
 from lusid.models.compliance_template_variation import ComplianceTemplateVariation
+from lusid.models.component_transaction import ComponentTransaction
 from lusid.models.composite_breakdown import CompositeBreakdown
 from lusid.models.composite_breakdown_request import CompositeBreakdownRequest
 from lusid.models.composite_breakdown_response import CompositeBreakdownResponse
@@ -419,6 +421,7 @@ from lusid.models.model_property import ModelProperty
 from lusid.models.model_schema import ModelSchema
 from lusid.models.model_selection import ModelSelection
 from lusid.models.movement_type import MovementType
+from lusid.models.multi_currency_amounts import MultiCurrencyAmounts
 from lusid.models.next_value_in_sequence_response import NextValueInSequenceResponse
 from lusid.models.numeric_comparison_type import NumericComparisonType
 from lusid.models.opaque_dependency import OpaqueDependency
@@ -740,7 +743,10 @@ from lusid.models.transaction_configuration_data_request import TransactionConfi
 from lusid.models.transaction_configuration_movement_data import TransactionConfigurationMovementData
 from lusid.models.transaction_configuration_movement_data_request import TransactionConfigurationMovementDataRequest
 from lusid.models.transaction_configuration_type_alias import TransactionConfigurationTypeAlias
+from lusid.models.transaction_currency_and_amount import TransactionCurrencyAndAmount
+from lusid.models.transaction_field_map import TransactionFieldMap
 from lusid.models.transaction_price import TransactionPrice
+from lusid.models.transaction_price_and_type import TransactionPriceAndType
 from lusid.models.transaction_price_type import TransactionPriceType
 from lusid.models.transaction_property_mapping import TransactionPropertyMapping
 from lusid.models.transaction_property_mapping_request import TransactionPropertyMappingRequest
@@ -753,6 +759,8 @@ from lusid.models.transaction_roles import TransactionRoles
 from lusid.models.transaction_set_configuration_data import TransactionSetConfigurationData
 from lusid.models.transaction_set_configuration_data_request import TransactionSetConfigurationDataRequest
 from lusid.models.transaction_status import TransactionStatus
+from lusid.models.transaction_template_request import TransactionTemplateRequest
+from lusid.models.transaction_template_response import TransactionTemplateResponse
 from lusid.models.transaction_template_specification import TransactionTemplateSpecification
 from lusid.models.transaction_type import TransactionType
 from lusid.models.transaction_type_alias import TransactionTypeAlias
