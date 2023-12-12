@@ -27,7 +27,7 @@ from lusid.models.lusid_instrument import LusidInstrument
 
 class CreditDefaultSwap(LusidInstrument):
     """
-    LUSID representation of a Credit Default Swap (CDS).  # noqa: E501
+    LUSID representation of a Credit Default Swap (CDS).                This instrument has multiple legs, to see how legs are used in LUSID see https://support.lusid.com/knowledgebase/article/KA-02252.                | Leg Index | Leg Identifier | Description |  | --------- | -------------- | ----------- |  | 1 | ProtectionLeg | Cash flows occurring in the case of default. |  | 2 | PremiumLeg | The premium payments made by the protection buyer. |  # noqa: E501
     """
     ticker: constr(strict=True, min_length=1) = Field(..., description="A ticker to uniquely specify then entity against which the cds is written.")
     start_date: datetime = Field(..., alias="startDate", description="The start date of the instrument. This is normally synonymous with the trade-date.")

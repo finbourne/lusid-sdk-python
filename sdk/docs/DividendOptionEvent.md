@@ -1,33 +1,35 @@
-# AccumulationEvent
+# DividendOptionEvent
 
-Accumulation dividend
+DVOP
 
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **announcement_date** | **datetime** | Date on which the dividend was announced / declared. | [optional] 
-**dividend_currency** | **str** | Payment currency | 
-**dividend_rate** | **float** | Dividend rate or payment rate as a percentage.  i.e. 5% is written as 0.05 | 
+**cash_elections** | [**List[CashElection]**](CashElection.md) | CashElection for this DividendReinvestmentEvent | 
 **ex_date** | **datetime** | The first business day on which the dividend is not owed to the buying party.  Typically this is T-1 from the RecordDate. | 
 **payment_date** | **datetime** | The date the company pays out dividends to shareholders. | 
+**record_date** | **datetime** | Date you have to be the holder of record in order to participate in the tender. | [optional] 
+**security_elections** | [**List[SecurityElection]**](SecurityElection.md) | SecurityElection for this DividendReinvestmentEvent | 
+**security_settlement_date** | **datetime** | Date on which the dividend was the security settles.  Equal to the PaymentDate if not provided. | [optional] 
 **instrument_event_type** | **str** | The Type of Event. The available values are: TransitionEvent, InformationalEvent, OpenEvent, CloseEvent, StockSplitEvent, BondDefaultEvent, CashDividendEvent, AmortisationEvent, CashFlowEvent, ExerciseEvent, ResetEvent, TriggerEvent, RawVendorEvent, InformationalErrorEvent, BondCouponEvent, DividendReinvestmentEvent, AccumulationEvent, BondPrincipalEvent, DividendOptionEvent | 
 
 ## Example
 
 ```python
-from lusid.models.accumulation_event import AccumulationEvent
+from lusid.models.dividend_option_event import DividendOptionEvent
 
 # TODO update the JSON string below
 json = "{}"
-# create an instance of AccumulationEvent from a JSON string
-accumulation_event_instance = AccumulationEvent.from_json(json)
+# create an instance of DividendOptionEvent from a JSON string
+dividend_option_event_instance = DividendOptionEvent.from_json(json)
 # print the JSON string representation of the object
-print AccumulationEvent.to_json()
+print DividendOptionEvent.to_json()
 
 # convert the object into a dict
-accumulation_event_dict = accumulation_event_instance.to_dict()
-# create an instance of AccumulationEvent from a dict
-accumulation_event_form_dict = accumulation_event.from_dict(accumulation_event_dict)
+dividend_option_event_dict = dividend_option_event_instance.to_dict()
+# create an instance of DividendOptionEvent from a dict
+dividend_option_event_form_dict = dividend_option_event.from_dict(dividend_option_event_dict)
 ```
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

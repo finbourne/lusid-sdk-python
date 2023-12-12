@@ -20,6 +20,7 @@ import json
 
 from typing import Any, Dict, Optional, Union
 from pydantic import BaseModel, Field, StrictBool, StrictFloat, StrictInt, constr
+from lusid.models.units_ratio import UnitsRatio
 
 class SecurityElection(BaseModel):
     """
@@ -28,8 +29,9 @@ class SecurityElection(BaseModel):
     election_key: constr(strict=True, min_length=1) = Field(..., alias="electionKey", description="Unique key associated to this election.")
     is_chosen: Optional[StrictBool] = Field(None, alias="isChosen", description="Is this the election that has been explicitly chosen from multiple options.")
     is_default: Optional[StrictBool] = Field(None, alias="isDefault", description="Is this election automatically applied in the absence of an election having been made.  May only be true for one election if multiple are provided.")
-    price: Union[StrictFloat, StrictInt] = Field(..., description="Price per unit of the security.")
-    __properties = ["electionKey", "isChosen", "isDefault", "price"]
+    price: Union[StrictFloat, StrictInt] = Field(..., description="Price per unit of the security. At least one of UnitsRatio or Price must be provided.")
+    units_ratio: Optional[UnitsRatio] = Field(None, alias="unitsRatio")
+    __properties = ["electionKey", "isChosen", "isDefault", "price", "unitsRatio"]
 
     class Config:
         """Pydantic configuration"""
@@ -55,6 +57,9 @@ class SecurityElection(BaseModel):
                           exclude={
                           },
                           exclude_none=True)
+        # override the default output from pydantic by calling `to_dict()` of units_ratio
+        if self.units_ratio:
+            _dict['unitsRatio'] = self.units_ratio.to_dict()
         return _dict
 
     @classmethod
@@ -70,6 +75,7 @@ class SecurityElection(BaseModel):
             "election_key": obj.get("electionKey"),
             "is_chosen": obj.get("isChosen"),
             "is_default": obj.get("isDefault"),
-            "price": obj.get("price")
+            "price": obj.get("price"),
+            "units_ratio": UnitsRatio.from_dict(obj.get("unitsRatio")) if obj.get("unitsRatio") is not None else None
         })
         return _obj

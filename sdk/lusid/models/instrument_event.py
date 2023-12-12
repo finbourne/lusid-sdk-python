@@ -26,14 +26,14 @@ class InstrumentEvent(BaseModel):
     """
     Base class for representing instrument events in LUSID, such as dividends, stock splits, and option exercises.  This base class should not be directly instantiated; each supported InstrumentEventType has a corresponding inherited class.  # noqa: E501
     """
-    instrument_event_type: StrictStr = Field(..., alias="instrumentEventType", description="The Type of Event. The available values are: TransitionEvent, InformationalEvent, OpenEvent, CloseEvent, StockSplitEvent, BondDefaultEvent, CashDividendEvent, AmortisationEvent, CashFlowEvent, ExerciseEvent, ResetEvent, TriggerEvent, RawVendorEvent, InformationalErrorEvent, BondCouponEvent, DividendReinvestmentEvent, AccumulationEvent, BondPrincipalEvent")
+    instrument_event_type: StrictStr = Field(..., alias="instrumentEventType", description="The Type of Event. The available values are: TransitionEvent, InformationalEvent, OpenEvent, CloseEvent, StockSplitEvent, BondDefaultEvent, CashDividendEvent, AmortisationEvent, CashFlowEvent, ExerciseEvent, ResetEvent, TriggerEvent, RawVendorEvent, InformationalErrorEvent, BondCouponEvent, DividendReinvestmentEvent, AccumulationEvent, BondPrincipalEvent, DividendOptionEvent")
     __properties = ["instrumentEventType"]
 
     @validator('instrument_event_type')
     def instrument_event_type_validate_enum(cls, value):
         """Validates the enum"""
-        if value not in ('TransitionEvent', 'InformationalEvent', 'OpenEvent', 'CloseEvent', 'StockSplitEvent', 'BondDefaultEvent', 'CashDividendEvent', 'AmortisationEvent', 'CashFlowEvent', 'ExerciseEvent', 'ResetEvent', 'TriggerEvent', 'RawVendorEvent', 'InformationalErrorEvent', 'BondCouponEvent', 'DividendReinvestmentEvent', 'AccumulationEvent', 'BondPrincipalEvent'):
-            raise ValueError("must be one of enum values ('TransitionEvent', 'InformationalEvent', 'OpenEvent', 'CloseEvent', 'StockSplitEvent', 'BondDefaultEvent', 'CashDividendEvent', 'AmortisationEvent', 'CashFlowEvent', 'ExerciseEvent', 'ResetEvent', 'TriggerEvent', 'RawVendorEvent', 'InformationalErrorEvent', 'BondCouponEvent', 'DividendReinvestmentEvent', 'AccumulationEvent', 'BondPrincipalEvent')")
+        if value not in ('TransitionEvent', 'InformationalEvent', 'OpenEvent', 'CloseEvent', 'StockSplitEvent', 'BondDefaultEvent', 'CashDividendEvent', 'AmortisationEvent', 'CashFlowEvent', 'ExerciseEvent', 'ResetEvent', 'TriggerEvent', 'RawVendorEvent', 'InformationalErrorEvent', 'BondCouponEvent', 'DividendReinvestmentEvent', 'AccumulationEvent', 'BondPrincipalEvent', 'DividendOptionEvent'):
+            raise ValueError("must be one of enum values ('TransitionEvent', 'InformationalEvent', 'OpenEvent', 'CloseEvent', 'StockSplitEvent', 'BondDefaultEvent', 'CashDividendEvent', 'AmortisationEvent', 'CashFlowEvent', 'ExerciseEvent', 'ResetEvent', 'TriggerEvent', 'RawVendorEvent', 'InformationalErrorEvent', 'BondCouponEvent', 'DividendReinvestmentEvent', 'AccumulationEvent', 'BondPrincipalEvent', 'DividendOptionEvent')")
         return value
 
     class Config:
@@ -54,6 +54,7 @@ class InstrumentEvent(BaseModel):
         'CashDividendEvent': 'CashDividendEvent',
         'CashFlowEvent': 'CashFlowEvent',
         'CloseEvent': 'CloseEvent',
+        'DividendOptionEvent': 'DividendOptionEvent',
         'DividendReinvestmentEvent': 'DividendReinvestmentEvent',
         'ExerciseEvent': 'ExerciseEvent',
         'InformationalErrorEvent': 'InformationalErrorEvent',
@@ -84,7 +85,7 @@ class InstrumentEvent(BaseModel):
         return json.dumps(self.to_dict())
 
     @classmethod
-    def from_json(cls, json_str: str) -> Union(AccumulationEvent, AmortisationEvent, BondCouponEvent, BondDefaultEvent, BondPrincipalEvent, CashDividendEvent, CashFlowEvent, CloseEvent, DividendReinvestmentEvent, ExerciseEvent, InformationalErrorEvent, InformationalEvent, OpenEvent, RawVendorEvent, ResetEvent, StockSplitEvent, TransitionEvent, TriggerEvent):
+    def from_json(cls, json_str: str) -> Union(AccumulationEvent, AmortisationEvent, BondCouponEvent, BondDefaultEvent, BondPrincipalEvent, CashDividendEvent, CashFlowEvent, CloseEvent, DividendOptionEvent, DividendReinvestmentEvent, ExerciseEvent, InformationalErrorEvent, InformationalEvent, OpenEvent, RawVendorEvent, ResetEvent, StockSplitEvent, TransitionEvent, TriggerEvent):
         """Create an instance of InstrumentEvent from a JSON string"""
         return cls.from_dict(json.loads(json_str))
 
@@ -97,7 +98,7 @@ class InstrumentEvent(BaseModel):
         return _dict
 
     @classmethod
-    def from_dict(cls, obj: dict) -> Union(AccumulationEvent, AmortisationEvent, BondCouponEvent, BondDefaultEvent, BondPrincipalEvent, CashDividendEvent, CashFlowEvent, CloseEvent, DividendReinvestmentEvent, ExerciseEvent, InformationalErrorEvent, InformationalEvent, OpenEvent, RawVendorEvent, ResetEvent, StockSplitEvent, TransitionEvent, TriggerEvent):
+    def from_dict(cls, obj: dict) -> Union(AccumulationEvent, AmortisationEvent, BondCouponEvent, BondDefaultEvent, BondPrincipalEvent, CashDividendEvent, CashFlowEvent, CloseEvent, DividendOptionEvent, DividendReinvestmentEvent, ExerciseEvent, InformationalErrorEvent, InformationalEvent, OpenEvent, RawVendorEvent, ResetEvent, StockSplitEvent, TransitionEvent, TriggerEvent):
         """Create an instance of InstrumentEvent from a dict"""
         # look up the object type based on discriminator mapping
         object_type = cls.get_discriminator_value(obj)

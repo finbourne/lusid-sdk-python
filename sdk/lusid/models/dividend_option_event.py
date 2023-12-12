@@ -24,19 +24,20 @@ from lusid.models.cash_election import CashElection
 from lusid.models.instrument_event import InstrumentEvent
 from lusid.models.security_election import SecurityElection
 
-class DividendReinvestmentEvent(InstrumentEvent):
+class DividendOptionEvent(InstrumentEvent):
     """
-    Event for dividend reinvestments.  Elections for cash or the associated security.  # noqa: E501
+    DVOP  # noqa: E501
     """
     announcement_date: Optional[datetime] = Field(None, alias="announcementDate", description="Date on which the dividend was announced / declared.")
     cash_elections: conlist(CashElection) = Field(..., alias="cashElections", description="CashElection for this DividendReinvestmentEvent")
     ex_date: datetime = Field(..., alias="exDate", description="The first business day on which the dividend is not owed to the buying party.  Typically this is T-1 from the RecordDate.")
     payment_date: datetime = Field(..., alias="paymentDate", description="The date the company pays out dividends to shareholders.")
-    record_date: datetime = Field(..., alias="recordDate", description="Date you have to be the holder of record in order to participate in the tender.")
+    record_date: Optional[datetime] = Field(None, alias="recordDate", description="Date you have to be the holder of record in order to participate in the tender.")
     security_elections: conlist(SecurityElection) = Field(..., alias="securityElections", description="SecurityElection for this DividendReinvestmentEvent")
+    security_settlement_date: Optional[datetime] = Field(None, alias="securitySettlementDate", description="Date on which the dividend was the security settles.  Equal to the PaymentDate if not provided.")
     instrument_event_type: StrictStr = Field(..., alias="instrumentEventType", description="The Type of Event. The available values are: TransitionEvent, InformationalEvent, OpenEvent, CloseEvent, StockSplitEvent, BondDefaultEvent, CashDividendEvent, AmortisationEvent, CashFlowEvent, ExerciseEvent, ResetEvent, TriggerEvent, RawVendorEvent, InformationalErrorEvent, BondCouponEvent, DividendReinvestmentEvent, AccumulationEvent, BondPrincipalEvent, DividendOptionEvent")
     additional_properties: Dict[str, Any] = {}
-    __properties = ["instrumentEventType", "announcementDate", "cashElections", "exDate", "paymentDate", "recordDate", "securityElections"]
+    __properties = ["instrumentEventType", "announcementDate", "cashElections", "exDate", "paymentDate", "recordDate", "securityElections", "securitySettlementDate"]
 
     @validator('instrument_event_type')
     def instrument_event_type_validate_enum(cls, value):
@@ -59,8 +60,8 @@ class DividendReinvestmentEvent(InstrumentEvent):
         return json.dumps(self.to_dict())
 
     @classmethod
-    def from_json(cls, json_str: str) -> DividendReinvestmentEvent:
-        """Create an instance of DividendReinvestmentEvent from a JSON string"""
+    def from_json(cls, json_str: str) -> DividendOptionEvent:
+        """Create an instance of DividendOptionEvent from a JSON string"""
         return cls.from_dict(json.loads(json_str))
 
     def to_dict(self):
@@ -94,25 +95,31 @@ class DividendReinvestmentEvent(InstrumentEvent):
         if self.announcement_date is None and "announcement_date" in self.__fields_set__:
             _dict['announcementDate'] = None
 
+        # set to None if record_date (nullable) is None
+        # and __fields_set__ contains the field
+        if self.record_date is None and "record_date" in self.__fields_set__:
+            _dict['recordDate'] = None
+
         return _dict
 
     @classmethod
-    def from_dict(cls, obj: dict) -> DividendReinvestmentEvent:
-        """Create an instance of DividendReinvestmentEvent from a dict"""
+    def from_dict(cls, obj: dict) -> DividendOptionEvent:
+        """Create an instance of DividendOptionEvent from a dict"""
         if obj is None:
             return None
 
         if not isinstance(obj, dict):
-            return DividendReinvestmentEvent.parse_obj(obj)
+            return DividendOptionEvent.parse_obj(obj)
 
-        _obj = DividendReinvestmentEvent.parse_obj({
+        _obj = DividendOptionEvent.parse_obj({
             "instrument_event_type": obj.get("instrumentEventType"),
             "announcement_date": obj.get("announcementDate"),
             "cash_elections": [CashElection.from_dict(_item) for _item in obj.get("cashElections")] if obj.get("cashElections") is not None else None,
             "ex_date": obj.get("exDate"),
             "payment_date": obj.get("paymentDate"),
             "record_date": obj.get("recordDate"),
-            "security_elections": [SecurityElection.from_dict(_item) for _item in obj.get("securityElections")] if obj.get("securityElections") is not None else None
+            "security_elections": [SecurityElection.from_dict(_item) for _item in obj.get("securityElections")] if obj.get("securityElections") is not None else None,
+            "security_settlement_date": obj.get("securitySettlementDate")
         })
         # store additional fields in additional_properties
         for _key in obj.keys():

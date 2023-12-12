@@ -248,6 +248,7 @@ from lusid.models.diary_entry_request import DiaryEntryRequest
 from lusid.models.discount_factor_curve_data import DiscountFactorCurveData
 from lusid.models.discounting_dependency import DiscountingDependency
 from lusid.models.discounting_method import DiscountingMethod
+from lusid.models.dividend_option_event import DividendOptionEvent
 from lusid.models.dividend_reinvestment_event import DividendReinvestmentEvent
 from lusid.models.economic_dependency import EconomicDependency
 from lusid.models.economic_dependency_type import EconomicDependencyType
@@ -786,6 +787,7 @@ from lusid.models.trial_balance_query_parameters import TrialBalanceQueryParamet
 from lusid.models.trigger_event import TriggerEvent
 from lusid.models.typed_resource_id import TypedResourceId
 from lusid.models.unit_schema import UnitSchema
+from lusid.models.units_ratio import UnitsRatio
 from lusid.models.unmatched_holding_method import UnmatchedHoldingMethod
 from lusid.models.update_calendar_request import UpdateCalendarRequest
 from lusid.models.update_custom_entity_definition_request import UpdateCustomEntityDefinitionRequest
