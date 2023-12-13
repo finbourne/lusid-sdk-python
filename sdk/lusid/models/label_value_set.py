@@ -25,7 +25,7 @@ class LabelValueSet(BaseModel):
     """
     The set of string labels in a multi-value property.  # noqa: E501
     """
-    values: conlist(StrictStr, min_items=1, unique_items=True) = Field(...)
+    values: conlist(StrictStr, min_items=1) = Field(...)
     __properties = ["values"]
 
     class Config:

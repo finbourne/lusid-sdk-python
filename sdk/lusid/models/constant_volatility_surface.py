@@ -18,27 +18,21 @@ import re  # noqa: F401
 import json
 
 from datetime import datetime
-from typing import Any, Dict, List, Optional, Union
-from pydantic import Field, StrictFloat, StrictInt, StrictStr, conlist, constr, validator
+from typing import Any, Dict, Optional, Union
+from pydantic import Field, StrictFloat, StrictInt, StrictStr, constr, validator
 from lusid.models.complex_market_data import ComplexMarketData
-from lusid.models.market_data_options import MarketDataOptions
 
-class CreditSpreadCurveData(ComplexMarketData):
+class ConstantVolatilitySurface(ComplexMarketData):
     """
-    A credit spread curve matching tenors against par spread quotes  # noqa: E501
+    Market Data required to build a volatility surface for pricing.  Single constant volatility point.  # noqa: E501
     """
-    base_date: datetime = Field(..., alias="baseDate", description="EffectiveAt date of the quoted rates")
-    dom_ccy: StrictStr = Field(..., alias="domCcy", description="Domestic currency of the curve")
-    tenors: conlist(StrictStr) = Field(..., description="The tenors for which the rates apply")
-    spreads: conlist(Union[StrictFloat, StrictInt]) = Field(..., description="Par spread quotes corresponding to the tenors.")
-    recovery_rate: Union[StrictFloat, StrictInt] = Field(..., alias="recoveryRate", description="The recovery rate in default.")
-    reference_date: Optional[datetime] = Field(None, alias="referenceDate", description="If tenors are provided, this is the date against which the tenors will be resolved.  This is of importance to CDX spread quotes, which are usually quoted in tenors relative to the CDX start date.  In this case, the ReferenceDate would be equal to the CDX start date, and the BaseDate would be the date for which the spreads are valid.  If not provided, this defaults to the BaseDate of the curve.")
-    maturities: Optional[conlist(datetime)] = Field(None, description="The maturity dates for which the rates apply.  Either tenors or maturities should be provided, not both.")
-    lineage: Optional[constr(strict=True, max_length=1024, min_length=0)] = Field(None, description="Description of the complex market data's lineage e.g. 'FundAccountant_GreenQuality'.")
-    market_data_options: Optional[MarketDataOptions] = Field(None, alias="marketDataOptions")
+    base_date: datetime = Field(..., alias="baseDate", description="Base date of the engine - this is the reference date for resolution of tenors.")
+    asset_type: constr(strict=True, min_length=1) = Field(..., alias="assetType", description="What is the asset that the engine is for.  Supported string (enumeration) values are: [Cash, Commodity, Credit, Equity, Fx, Rates, FxVol, IrVol, EquityVol, HolidayCalendar, IndexConvention, FlowConvention, CdsFlowConvention, CorporateActions, FxForwards, Quote, Inflation, EquityCurve, All, VendorOpaque].")
+    lineage: Optional[constr(strict=True, max_length=1024, min_length=0)] = None
+    volatility: Union[StrictFloat, StrictInt] = Field(..., description="Volatility value.")
     market_data_type: StrictStr = Field(..., alias="marketDataType", description="The available values are: DiscountFactorCurveData, EquityVolSurfaceData, FxVolSurfaceData, IrVolCubeData, OpaqueMarketData, YieldCurveData, FxForwardCurveData, FxForwardPipsCurveData, FxForwardTenorCurveData, FxForwardTenorPipsCurveData, FxForwardCurveByQuoteReference, CreditSpreadCurveData, EquityCurveByPricesData, ConstantVolatilitySurface")
     additional_properties: Dict[str, Any] = {}
-    __properties = ["marketDataType", "baseDate", "domCcy", "tenors", "spreads", "recoveryRate", "referenceDate", "maturities", "lineage", "marketDataOptions"]
+    __properties = ["marketDataType", "baseDate", "assetType", "lineage", "volatility"]
 
     @validator('market_data_type')
     def market_data_type_validate_enum(cls, value):
@@ -61,8 +55,8 @@ class CreditSpreadCurveData(ComplexMarketData):
         return json.dumps(self.to_dict())
 
     @classmethod
-    def from_json(cls, json_str: str) -> CreditSpreadCurveData:
-        """Create an instance of CreditSpreadCurveData from a JSON string"""
+    def from_json(cls, json_str: str) -> ConstantVolatilitySurface:
+        """Create an instance of ConstantVolatilitySurface from a JSON string"""
         return cls.from_dict(json.loads(json_str))
 
     def to_dict(self):
@@ -72,23 +66,10 @@ class CreditSpreadCurveData(ComplexMarketData):
                             "additional_properties"
                           },
                           exclude_none=True)
-        # override the default output from pydantic by calling `to_dict()` of market_data_options
-        if self.market_data_options:
-            _dict['marketDataOptions'] = self.market_data_options.to_dict()
         # puts key-value pairs in additional_properties in the top level
         if self.additional_properties is not None:
             for _key, _value in self.additional_properties.items():
                 _dict[_key] = _value
-
-        # set to None if reference_date (nullable) is None
-        # and __fields_set__ contains the field
-        if self.reference_date is None and "reference_date" in self.__fields_set__:
-            _dict['referenceDate'] = None
-
-        # set to None if maturities (nullable) is None
-        # and __fields_set__ contains the field
-        if self.maturities is None and "maturities" in self.__fields_set__:
-            _dict['maturities'] = None
 
         # set to None if lineage (nullable) is None
         # and __fields_set__ contains the field
@@ -98,25 +79,20 @@ class CreditSpreadCurveData(ComplexMarketData):
         return _dict
 
     @classmethod
-    def from_dict(cls, obj: dict) -> CreditSpreadCurveData:
-        """Create an instance of CreditSpreadCurveData from a dict"""
+    def from_dict(cls, obj: dict) -> ConstantVolatilitySurface:
+        """Create an instance of ConstantVolatilitySurface from a dict"""
         if obj is None:
             return None
 
         if not isinstance(obj, dict):
-            return CreditSpreadCurveData.parse_obj(obj)
+            return ConstantVolatilitySurface.parse_obj(obj)
 
-        _obj = CreditSpreadCurveData.parse_obj({
+        _obj = ConstantVolatilitySurface.parse_obj({
             "market_data_type": obj.get("marketDataType"),
             "base_date": obj.get("baseDate"),
-            "dom_ccy": obj.get("domCcy"),
-            "tenors": obj.get("tenors"),
-            "spreads": obj.get("spreads"),
-            "recovery_rate": obj.get("recoveryRate"),
-            "reference_date": obj.get("referenceDate"),
-            "maturities": obj.get("maturities"),
+            "asset_type": obj.get("assetType"),
             "lineage": obj.get("lineage"),
-            "market_data_options": MarketDataOptions.from_dict(obj.get("marketDataOptions")) if obj.get("marketDataOptions") is not None else None
+            "volatility": obj.get("volatility")
         })
         # store additional fields in additional_properties
         for _key in obj.keys():

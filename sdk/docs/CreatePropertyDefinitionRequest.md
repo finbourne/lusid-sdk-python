@@ -13,6 +13,7 @@ Name | Type | Description | Notes
 **life_time** | **str** | Describes how the property&#39;s values can change over time. The available values are: Perpetual, TimeVariant | [optional] 
 **constraint_style** | **str** | Describes the uniqueness and cardinality of the property for entity objects under the property domain specified in Key. Defaults to \&quot;Property\&quot; if not specified. Valid values for this field are: Property, Collection or Identifier. | [optional] 
 **property_description** | **str** | Describes the property | [optional] 
+**collection_type** | **str** | Describes whether a collection property should behave as a set or as an array. | [optional] 
 
 ## Example
 

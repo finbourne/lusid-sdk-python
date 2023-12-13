@@ -42,6 +42,7 @@ class MarketDataType(str, Enum):
     FXFORWARDCURVEBYQUOTEREFERENCE = 'FxForwardCurveByQuoteReference'
     CREDITSPREADCURVEDATA = 'CreditSpreadCurveData'
     EQUITYCURVEBYPRICESDATA = 'EquityCurveByPricesData'
+    CONSTANTVOLATILITYSURFACE = 'ConstantVolatilitySurface'
 
     @classmethod
     def from_json(cls, json_str: str) -> MarketDataType:

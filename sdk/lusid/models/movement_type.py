@@ -47,6 +47,8 @@ class MovementType(str, Enum):
     CARRY = 'Carry'
     CARRYASPNL = 'CarryAsPnl'
     VARIATIONMARGIN = 'VariationMargin'
+    CAPITAL = 'Capital'
+    FEE = 'Fee'
 
     @classmethod
     def from_json(cls, json_str: str) -> MovementType:

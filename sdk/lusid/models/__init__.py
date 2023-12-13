@@ -155,6 +155,7 @@ from lusid.models.composite_dispersion import CompositeDispersion
 from lusid.models.composite_dispersion_response import CompositeDispersionResponse
 from lusid.models.compounding import Compounding
 from lusid.models.configuration_recipe import ConfigurationRecipe
+from lusid.models.constant_volatility_surface import ConstantVolatilitySurface
 from lusid.models.constituents_adjustment_header import ConstituentsAdjustmentHeader
 from lusid.models.contract_for_difference import ContractForDifference
 from lusid.models.corporate_action import CorporateAction
@@ -867,5 +868,6 @@ from lusid.models.virtual_row import VirtualRow
 from lusid.models.warning import Warning
 from lusid.models.weekend_mask import WeekendMask
 from lusid.models.weighted_instrument import WeightedInstrument
+from lusid.models.weighted_instrument_in_line_lookup_identifiers import WeightedInstrumentInLineLookupIdentifiers
 from lusid.models.weighted_instruments import WeightedInstruments
 from lusid.models.yield_curve_data import YieldCurveData

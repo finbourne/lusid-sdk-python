@@ -35,7 +35,8 @@ class CreatePropertyDefinitionRequest(BaseModel):
     life_time: Optional[StrictStr] = Field(None, alias="lifeTime", description="Describes how the property's values can change over time. The available values are: Perpetual, TimeVariant")
     constraint_style: Optional[StrictStr] = Field(None, alias="constraintStyle", description="Describes the uniqueness and cardinality of the property for entity objects under the property domain specified in Key. Defaults to \"Property\" if not specified. Valid values for this field are: Property, Collection or Identifier.")
     property_description: Optional[constr(strict=True, max_length=512)] = Field(None, alias="propertyDescription", description="Describes the property")
-    __properties = ["domain", "scope", "code", "valueRequired", "displayName", "dataTypeId", "lifeTime", "constraintStyle", "propertyDescription"]
+    collection_type: Optional[StrictStr] = Field(None, alias="collectionType", description="Describes whether a collection property should behave as a set or as an array.")
+    __properties = ["domain", "scope", "code", "valueRequired", "displayName", "dataTypeId", "lifeTime", "constraintStyle", "propertyDescription", "collectionType"]
 
     @validator('domain')
     def domain_validate_enum(cls, value):
@@ -91,6 +92,11 @@ class CreatePropertyDefinitionRequest(BaseModel):
         if self.property_description is None and "property_description" in self.__fields_set__:
             _dict['propertyDescription'] = None
 
+        # set to None if collection_type (nullable) is None
+        # and __fields_set__ contains the field
+        if self.collection_type is None and "collection_type" in self.__fields_set__:
+            _dict['collectionType'] = None
+
         return _dict
 
     @classmethod
@@ -111,6 +117,7 @@ class CreatePropertyDefinitionRequest(BaseModel):
             "data_type_id": ResourceId.from_dict(obj.get("dataTypeId")) if obj.get("dataTypeId") is not None else None,
             "life_time": obj.get("lifeTime"),
             "constraint_style": obj.get("constraintStyle"),
-            "property_description": obj.get("propertyDescription")
+            "property_description": obj.get("propertyDescription"),
+            "collection_type": obj.get("collectionType")
         })
         return _obj

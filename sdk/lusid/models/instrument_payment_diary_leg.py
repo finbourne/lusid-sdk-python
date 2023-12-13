@@ -19,16 +19,17 @@ import json
 
 
 from typing import Any, Dict, List, Optional
-from pydantic import BaseModel, Field, StrictStr, conlist
+from pydantic import BaseModel, Field, StrictInt, StrictStr, conlist
 from lusid.models.instrument_payment_diary_row import InstrumentPaymentDiaryRow
 
 class InstrumentPaymentDiaryLeg(BaseModel):
     """
     A leg containing a set of cashflows.  # noqa: E501
     """
-    leg_id: Optional[StrictStr] = Field(None, alias="legId", description="Identifier for the leg of a payment diary.")
+    leg_index: Optional[StrictInt] = Field(None, alias="legIndex", description="Index (integer) for the leg of a payment diary.")
+    leg_id: Optional[StrictStr] = Field(None, alias="legId", description="Identifier string for the leg of a payment diary.")
     rows: Optional[conlist(InstrumentPaymentDiaryRow)] = Field(None, description="List of individual cashflows within the payment diary.")
-    __properties = ["legId", "rows"]
+    __properties = ["legIndex", "legId", "rows"]
 
     class Config:
         """Pydantic configuration"""
@@ -83,6 +84,7 @@ class InstrumentPaymentDiaryLeg(BaseModel):
             return InstrumentPaymentDiaryLeg.parse_obj(obj)
 
         _obj = InstrumentPaymentDiaryLeg.parse_obj({
+            "leg_index": obj.get("legIndex"),
             "leg_id": obj.get("legId"),
             "rows": [InstrumentPaymentDiaryRow.from_dict(_item) for _item in obj.get("rows")] if obj.get("rows") is not None else None
         })

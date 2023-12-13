@@ -152,7 +152,8 @@ class ApiClientFactory:
         ] = keep_alive_socket_options(),
         correlation_id: Optional[str] = None,
         app_name: Optional[str] = None,
-        client_session: Optional[ClientSession] = None
+        client_session: Optional[ClientSession] = None,
+        trace_configs: Optional[List[TraceConfig]] = None
     ):
         """Create an ApiClientFactory which can build api 
         objects with a configured ApiClient object
@@ -161,7 +162,7 @@ class ApiClientFactory:
         ----------
         config_loaders : Iterable[ConfigurationLoader], optional
         An Iterable of ConfigurationLoaders we can load configuration from.
-        Config settings are updated by each loader (last write wins), ]
+        Config settings are updated by each loader (last write wins), 
         by default default_config_loaders
         id_provider_response_handler : Callable[[Response], None], optional
         A function that is called when a response is received from the token_url,
@@ -179,6 +180,9 @@ class ApiClientFactory:
         An aiohttp.ClientSession, pass this to re-use 
         connections across different ApiFactories,
         by default None
+        trace_configs: Optional[List[TraceConfig]], optional
+        A list of aiohttp TraceConfigs, used to set up request tracing.
+        by default None
         """
         api_config = get_api_configuration(config_loaders=config_loaders)
         api_client_config = api_config.build_api_client_config(
@@ -193,13 +197,17 @@ class ApiClientFactory:
         try:
             if client_session is not None:
                 connector = client_session.connector
+                # by default take explicitly passed trace_config param
+                # otherwise copy from session.
+                trace_configs = trace_configs or client_session.trace_configs
             else:
                 connector = rc.pool_manager.connector
             if tcp_keep_alive:
                 connector = TcpKeepAliveConnector(connector=connector, socket_options=socket_options)
             rc.pool_manager = ClientSession(
                 connector=connector,
-                trust_env=True
+                trust_env=True,
+                trace_configs=trace_configs
             )
         except AttributeError:
             logger.exception("client_session must be an aiohttp.ClientSession"

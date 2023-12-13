@@ -21,6 +21,7 @@ import json
 from typing import Any, Dict, Optional, Union
 from pydantic import BaseModel, Field, StrictFloat, StrictInt, constr
 from lusid.models.lusid_instrument import LusidInstrument
+from lusid.models.weighted_instrument_in_line_lookup_identifiers import WeightedInstrumentInLineLookupIdentifiers
 
 class WeightedInstrument(BaseModel):
     """
@@ -29,7 +30,8 @@ class WeightedInstrument(BaseModel):
     quantity: Optional[Union[StrictFloat, StrictInt]] = Field(None, description="The quantity of the instrument that is owned.")
     holding_identifier: Optional[constr(strict=True, max_length=256, min_length=0)] = Field(None, alias="holdingIdentifier", description="Identifier for the instrument.  For a single, unique trade or transaction this can be thought of as equivalent to the transaction identifier, or  a composite of the sub-holding keys for a regular sub-holding. When there are multiple transactions sharing the same underlying instrument  such as purchase of shares on multiple dates where tax implications are different this would not be the case.    In an inlined aggregation request if this is wanted to identify a line item, it can be specified in the set of aggregation keys given on the aggregation  request that accompanies the set of weighted instruments.")
     instrument: Optional[LusidInstrument] = None
-    __properties = ["quantity", "holdingIdentifier", "instrument"]
+    in_line_lookup_identifiers: Optional[WeightedInstrumentInLineLookupIdentifiers] = Field(None, alias="inLineLookupIdentifiers")
+    __properties = ["quantity", "holdingIdentifier", "instrument", "inLineLookupIdentifiers"]
 
     class Config:
         """Pydantic configuration"""
@@ -58,10 +60,18 @@ class WeightedInstrument(BaseModel):
         # override the default output from pydantic by calling `to_dict()` of instrument
         if self.instrument:
             _dict['instrument'] = self.instrument.to_dict()
+        # override the default output from pydantic by calling `to_dict()` of in_line_lookup_identifiers
+        if self.in_line_lookup_identifiers:
+            _dict['inLineLookupIdentifiers'] = self.in_line_lookup_identifiers.to_dict()
         # set to None if holding_identifier (nullable) is None
         # and __fields_set__ contains the field
         if self.holding_identifier is None and "holding_identifier" in self.__fields_set__:
             _dict['holdingIdentifier'] = None
+
+        # set to None if in_line_lookup_identifiers (nullable) is None
+        # and __fields_set__ contains the field
+        if self.in_line_lookup_identifiers is None and "in_line_lookup_identifiers" in self.__fields_set__:
+            _dict['inLineLookupIdentifiers'] = None
 
         return _dict
 
@@ -77,6 +87,7 @@ class WeightedInstrument(BaseModel):
         _obj = WeightedInstrument.parse_obj({
             "quantity": obj.get("quantity"),
             "holding_identifier": obj.get("holdingIdentifier"),
-            "instrument": LusidInstrument.from_dict(obj.get("instrument")) if obj.get("instrument") is not None else None
+            "instrument": LusidInstrument.from_dict(obj.get("instrument")) if obj.get("instrument") is not None else None,
+            "in_line_lookup_identifiers": WeightedInstrumentInLineLookupIdentifiers.from_dict(obj.get("inLineLookupIdentifiers")) if obj.get("inLineLookupIdentifiers") is not None else None
         })
         return _obj
