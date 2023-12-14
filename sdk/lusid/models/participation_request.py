@@ -18,10 +18,9 @@ import re  # noqa: F401
 import json
 
 
-from typing import Any, Dict, Optional
+from typing import Any, Dict
 from pydantic import BaseModel, Field
 from lusid.models.resource_id import ResourceId
-from lusid.models.version import Version
 
 class ParticipationRequest(BaseModel):
     """
@@ -30,8 +29,7 @@ class ParticipationRequest(BaseModel):
     id: ResourceId = Field(...)
     placement_id: ResourceId = Field(..., alias="placementId")
     order_id: ResourceId = Field(..., alias="orderId")
-    version: Optional[Version] = None
-    __properties = ["id", "placementId", "orderId", "version"]
+    __properties = ["id", "placementId", "orderId"]
 
     class Config:
         """Pydantic configuration"""
@@ -66,9 +64,6 @@ class ParticipationRequest(BaseModel):
         # override the default output from pydantic by calling `to_dict()` of order_id
         if self.order_id:
             _dict['orderId'] = self.order_id.to_dict()
-        # override the default output from pydantic by calling `to_dict()` of version
-        if self.version:
-            _dict['version'] = self.version.to_dict()
         return _dict
 
     @classmethod
@@ -83,7 +78,6 @@ class ParticipationRequest(BaseModel):
         _obj = ParticipationRequest.parse_obj({
             "id": ResourceId.from_dict(obj.get("id")) if obj.get("id") is not None else None,
             "placement_id": ResourceId.from_dict(obj.get("placementId")) if obj.get("placementId") is not None else None,
-            "order_id": ResourceId.from_dict(obj.get("orderId")) if obj.get("orderId") is not None else None,
-            "version": Version.from_dict(obj.get("version")) if obj.get("version") is not None else None
+            "order_id": ResourceId.from_dict(obj.get("orderId")) if obj.get("orderId") is not None else None
         })
         return _obj

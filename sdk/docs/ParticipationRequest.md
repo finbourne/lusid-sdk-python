@@ -8,7 +8,6 @@ Name | Type | Description | Notes
 **id** | [**ResourceId**](ResourceId.md) |  | 
 **placement_id** | [**ResourceId**](ResourceId.md) |  | 
 **order_id** | [**ResourceId**](ResourceId.md) |  | 
-**version** | [**Version**](Version.md) |  | [optional] 
 
 ## Example
 
