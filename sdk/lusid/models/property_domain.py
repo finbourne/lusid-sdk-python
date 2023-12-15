@@ -66,6 +66,7 @@ class PropertyDomain(str, Enum):
     PROPERTYDEFINITION = 'PropertyDefinition'
     COMPLIANCE = 'Compliance'
     DIARYENTRY = 'DiaryEntry'
+    LEG = 'Leg'
 
     @classmethod
     def from_json(cls, json_str: str) -> PropertyDomain:
