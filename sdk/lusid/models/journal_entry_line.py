@@ -50,12 +50,13 @@ class JournalEntryLine(BaseModel):
     movement_name: constr(strict=True, min_length=1) = Field(..., alias="movementName", description="The name of the movement.")
     holding_type: constr(strict=True, min_length=1) = Field(..., alias="holdingType", description="Defines the broad category holding within the portfolio.")
     economic_bucket: constr(strict=True, min_length=1) = Field(..., alias="economicBucket", description="Raw Journal Entry Line details of the economic bucket for the Journal Entry Line.")
+    economic_bucket_component: Optional[StrictStr] = Field(None, alias="economicBucketComponent", description="Sub bucket of the economic bucket.")
     levels: Optional[conlist(StrictStr)] = Field(None, description="Resolved data from the general ledger profile where the GeneralLedgerProfileCode is specified in the GetJournalEntryLines request body.")
     source_levels: Optional[conlist(StrictStr)] = Field(None, alias="sourceLevels", description="Source data from the general ledger profile where the GeneralLedgerProfileCode is specified in the GetJournalEntryLines request body.")
     movement_sign: Optional[StrictStr] = Field(None, alias="movementSign", description="Indicates if the Journal Entry Line corresponds to a Long or Short movement.")
     holding_sign: Optional[StrictStr] = Field(None, alias="holdingSign", description="Indicates if the Journal Entry Line is operating against a Long or Short holding.")
     links: Optional[conlist(Link)] = None
-    __properties = ["accountingDate", "activityDate", "portfolioId", "instrumentId", "instrumentScope", "subHoldingKeys", "taxLotId", "generalLedgerAccountCode", "local", "base", "postingModuleCode", "postingRule", "asAtDate", "activitiesDescription", "sourceType", "sourceId", "properties", "movementName", "holdingType", "economicBucket", "levels", "sourceLevels", "movementSign", "holdingSign", "links"]
+    __properties = ["accountingDate", "activityDate", "portfolioId", "instrumentId", "instrumentScope", "subHoldingKeys", "taxLotId", "generalLedgerAccountCode", "local", "base", "postingModuleCode", "postingRule", "asAtDate", "activitiesDescription", "sourceType", "sourceId", "properties", "movementName", "holdingType", "economicBucket", "economicBucketComponent", "levels", "sourceLevels", "movementSign", "holdingSign", "links"]
 
     class Config:
         """Pydantic configuration"""
@@ -131,6 +132,11 @@ class JournalEntryLine(BaseModel):
         if self.properties is None and "properties" in self.__fields_set__:
             _dict['properties'] = None
 
+        # set to None if economic_bucket_component (nullable) is None
+        # and __fields_set__ contains the field
+        if self.economic_bucket_component is None and "economic_bucket_component" in self.__fields_set__:
+            _dict['economicBucketComponent'] = None
+
         # set to None if levels (nullable) is None
         # and __fields_set__ contains the field
         if self.levels is None and "levels" in self.__fields_set__:
@@ -198,6 +204,7 @@ class JournalEntryLine(BaseModel):
             "movement_name": obj.get("movementName"),
             "holding_type": obj.get("holdingType"),
             "economic_bucket": obj.get("economicBucket"),
+            "economic_bucket_component": obj.get("economicBucketComponent"),
             "levels": obj.get("levels"),
             "source_levels": obj.get("sourceLevels"),
             "movement_sign": obj.get("movementSign"),
