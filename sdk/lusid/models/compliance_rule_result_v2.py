@@ -18,21 +18,21 @@ import re  # noqa: F401
 import json
 
 from datetime import datetime
-from typing import Any, Dict, List
-from pydantic import BaseModel, Field, conlist, constr
+from typing import Any, Dict
+from pydantic import BaseModel, Field, constr
 from lusid.models.compliance_summary_rule_result import ComplianceSummaryRuleResult
 from lusid.models.resource_id import ResourceId
 
-class ComplianceRunSummary(BaseModel):
+class ComplianceRuleResultV2(BaseModel):
     """
-    ComplianceRunSummary
+    ComplianceRuleResultV2
     """
     run_id: ResourceId = Field(..., alias="runId")
     instigated_at: datetime = Field(..., alias="instigatedAt")
     completed_at: datetime = Field(..., alias="completedAt")
     schedule: constr(strict=True, min_length=1) = Field(...)
-    results: conlist(ComplianceSummaryRuleResult) = Field(...)
-    __properties = ["runId", "instigatedAt", "completedAt", "schedule", "results"]
+    rule_result: ComplianceSummaryRuleResult = Field(..., alias="ruleResult")
+    __properties = ["runId", "instigatedAt", "completedAt", "schedule", "ruleResult"]
 
     class Config:
         """Pydantic configuration"""
@@ -48,8 +48,8 @@ class ComplianceRunSummary(BaseModel):
         return json.dumps(self.to_dict())
 
     @classmethod
-    def from_json(cls, json_str: str) -> ComplianceRunSummary:
-        """Create an instance of ComplianceRunSummary from a JSON string"""
+    def from_json(cls, json_str: str) -> ComplianceRuleResultV2:
+        """Create an instance of ComplianceRuleResultV2 from a JSON string"""
         return cls.from_dict(json.loads(json_str))
 
     def to_dict(self):
@@ -61,29 +61,25 @@ class ComplianceRunSummary(BaseModel):
         # override the default output from pydantic by calling `to_dict()` of run_id
         if self.run_id:
             _dict['runId'] = self.run_id.to_dict()
-        # override the default output from pydantic by calling `to_dict()` of each item in results (list)
-        _items = []
-        if self.results:
-            for _item in self.results:
-                if _item:
-                    _items.append(_item.to_dict())
-            _dict['results'] = _items
+        # override the default output from pydantic by calling `to_dict()` of rule_result
+        if self.rule_result:
+            _dict['ruleResult'] = self.rule_result.to_dict()
         return _dict
 
     @classmethod
-    def from_dict(cls, obj: dict) -> ComplianceRunSummary:
-        """Create an instance of ComplianceRunSummary from a dict"""
+    def from_dict(cls, obj: dict) -> ComplianceRuleResultV2:
+        """Create an instance of ComplianceRuleResultV2 from a dict"""
         if obj is None:
             return None
 
         if not isinstance(obj, dict):
-            return ComplianceRunSummary.parse_obj(obj)
+            return ComplianceRuleResultV2.parse_obj(obj)
 
-        _obj = ComplianceRunSummary.parse_obj({
+        _obj = ComplianceRuleResultV2.parse_obj({
             "run_id": ResourceId.from_dict(obj.get("runId")) if obj.get("runId") is not None else None,
             "instigated_at": obj.get("instigatedAt"),
             "completed_at": obj.get("completedAt"),
             "schedule": obj.get("schedule"),
-            "results": [ComplianceSummaryRuleResult.from_dict(_item) for _item in obj.get("results")] if obj.get("results") is not None else None
+            "rule_result": ComplianceSummaryRuleResult.from_dict(obj.get("ruleResult")) if obj.get("ruleResult") is not None else None
         })
         return _obj

@@ -27,11 +27,11 @@ class CompositeDispersion(BaseModel):
     A list of Dispersion calculations for the given years.  # noqa: E501
     """
     effective_at: datetime = Field(..., alias="effectiveAt", description="The date for which dipsersion calculation has been done. This should be 31 Dec for each given year.")
-    dispersion_calculation: Union[StrictFloat, StrictInt] = Field(..., alias="dispersionCalculation", description="The result for the dispersion calculation on the given effectiveAt.")
-    variance: Union[StrictFloat, StrictInt] = Field(..., description="The variance on the given effectiveAt.")
-    first_quartile: Union[StrictFloat, StrictInt] = Field(..., alias="firstQuartile", description="First Quartile (Q1) =  (lower quartile) = the middle of the bottom half of the returns.")
-    third_quartile: Union[StrictFloat, StrictInt] = Field(..., alias="thirdQuartile", description="Third Quartile (Q3) =  (higher quartile) = the middle of the top half of the returns.")
-    range: Union[StrictFloat, StrictInt] = Field(..., description="Highest return - Lowest return.")
+    dispersion_calculation: Optional[Union[StrictFloat, StrictInt]] = Field(None, alias="dispersionCalculation", description="The result for the dispersion calculation on the given effectiveAt.")
+    variance: Optional[Union[StrictFloat, StrictInt]] = Field(None, description="The variance on the given effectiveAt.")
+    first_quartile: Optional[Union[StrictFloat, StrictInt]] = Field(None, alias="firstQuartile", description="First Quartile (Q1) =  (lower quartile) = the middle of the bottom half of the returns.")
+    third_quartile: Optional[Union[StrictFloat, StrictInt]] = Field(None, alias="thirdQuartile", description="Third Quartile (Q3) =  (higher quartile) = the middle of the top half of the returns.")
+    range: Optional[Union[StrictFloat, StrictInt]] = Field(None, description="Highest return - Lowest return.")
     constituents_in_scope: Optional[conlist(ResourceId)] = Field(None, alias="constituentsInScope", description="List containing Composite members which are part of the dispersion calcualtion.")
     constituents_excluded: Optional[conlist(ResourceId)] = Field(None, alias="constituentsExcluded", description="List containing the Composite members which are not part of the dispersion calculation")
     __properties = ["effectiveAt", "dispersionCalculation", "variance", "firstQuartile", "thirdQuartile", "range", "constituentsInScope", "constituentsExcluded"]
@@ -74,6 +74,31 @@ class CompositeDispersion(BaseModel):
                 if _item:
                     _items.append(_item.to_dict())
             _dict['constituentsExcluded'] = _items
+        # set to None if dispersion_calculation (nullable) is None
+        # and __fields_set__ contains the field
+        if self.dispersion_calculation is None and "dispersion_calculation" in self.__fields_set__:
+            _dict['dispersionCalculation'] = None
+
+        # set to None if variance (nullable) is None
+        # and __fields_set__ contains the field
+        if self.variance is None and "variance" in self.__fields_set__:
+            _dict['variance'] = None
+
+        # set to None if first_quartile (nullable) is None
+        # and __fields_set__ contains the field
+        if self.first_quartile is None and "first_quartile" in self.__fields_set__:
+            _dict['firstQuartile'] = None
+
+        # set to None if third_quartile (nullable) is None
+        # and __fields_set__ contains the field
+        if self.third_quartile is None and "third_quartile" in self.__fields_set__:
+            _dict['thirdQuartile'] = None
+
+        # set to None if range (nullable) is None
+        # and __fields_set__ contains the field
+        if self.range is None and "range" in self.__fields_set__:
+            _dict['range'] = None
+
         # set to None if constituents_in_scope (nullable) is None
         # and __fields_set__ contains the field
         if self.constituents_in_scope is None and "constituents_in_scope" in self.__fields_set__:

@@ -1,4 +1,4 @@
-# ComplianceRunSummary
+# UpsertComplianceRunSummaryResult
 
 
 ## Properties
@@ -13,19 +13,19 @@ Name | Type | Description | Notes
 ## Example
 
 ```python
-from lusid.models.compliance_run_summary import ComplianceRunSummary
+from lusid.models.upsert_compliance_run_summary_result import UpsertComplianceRunSummaryResult
 
 # TODO update the JSON string below
 json = "{}"
-# create an instance of ComplianceRunSummary from a JSON string
-compliance_run_summary_instance = ComplianceRunSummary.from_json(json)
+# create an instance of UpsertComplianceRunSummaryResult from a JSON string
+upsert_compliance_run_summary_result_instance = UpsertComplianceRunSummaryResult.from_json(json)
 # print the JSON string representation of the object
-print ComplianceRunSummary.to_json()
+print UpsertComplianceRunSummaryResult.to_json()
 
 # convert the object into a dict
-compliance_run_summary_dict = compliance_run_summary_instance.to_dict()
-# create an instance of ComplianceRunSummary from a dict
-compliance_run_summary_form_dict = compliance_run_summary.from_dict(compliance_run_summary_dict)
+upsert_compliance_run_summary_result_dict = upsert_compliance_run_summary_result_instance.to_dict()
+# create an instance of UpsertComplianceRunSummaryResult from a dict
+upsert_compliance_run_summary_result_form_dict = upsert_compliance_run_summary_result.from_dict(upsert_compliance_run_summary_result_dict)
 ```
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 
