@@ -21,6 +21,7 @@ import json
 from typing import Any, Dict, List, Optional
 from pydantic import BaseModel, Field, StrictStr, conlist, constr
 from lusid.models.custom_entity_field_definition import CustomEntityFieldDefinition
+from lusid.models.version import Version
 
 class CustomEntityType(BaseModel):
     """
@@ -32,7 +33,8 @@ class CustomEntityType(BaseModel):
     description: Optional[StrictStr] = Field(None, description="A description for the custom entity type.")
     entity_type: constr(strict=True, min_length=1) = Field(..., alias="entityType", description="The identifier for the custom entity type, derived from the “entityTypeName” provided on creation.")
     field_schema: conlist(CustomEntityFieldDefinition) = Field(..., alias="fieldSchema", description="The description of the fields on the custom entity type.")
-    __properties = ["href", "entityTypeName", "displayName", "description", "entityType", "fieldSchema"]
+    version: Version = Field(...)
+    __properties = ["href", "entityTypeName", "displayName", "description", "entityType", "fieldSchema", "version"]
 
     class Config:
         """Pydantic configuration"""
@@ -65,6 +67,9 @@ class CustomEntityType(BaseModel):
                 if _item:
                     _items.append(_item.to_dict())
             _dict['fieldSchema'] = _items
+        # override the default output from pydantic by calling `to_dict()` of version
+        if self.version:
+            _dict['version'] = self.version.to_dict()
         # set to None if href (nullable) is None
         # and __fields_set__ contains the field
         if self.href is None and "href" in self.__fields_set__:
@@ -92,6 +97,7 @@ class CustomEntityType(BaseModel):
             "display_name": obj.get("displayName"),
             "description": obj.get("description"),
             "entity_type": obj.get("entityType"),
-            "field_schema": [CustomEntityFieldDefinition.from_dict(_item) for _item in obj.get("fieldSchema")] if obj.get("fieldSchema") is not None else None
+            "field_schema": [CustomEntityFieldDefinition.from_dict(_item) for _item in obj.get("fieldSchema")] if obj.get("fieldSchema") is not None else None,
+            "version": Version.from_dict(obj.get("version")) if obj.get("version") is not None else None
         })
         return _obj

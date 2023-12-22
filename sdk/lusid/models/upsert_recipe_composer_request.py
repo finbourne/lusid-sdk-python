@@ -20,14 +20,14 @@ import json
 
 from typing import Any, Dict, Optional
 from pydantic import BaseModel, Field
-from lusid.models.configuration_recipe import ConfigurationRecipe
+from lusid.models.recipe_composer import RecipeComposer
 
-class UpsertRecipeRequest(BaseModel):
+class UpsertRecipeComposerRequest(BaseModel):
     """
-    A recipe that is to be stored in the recipe structured data store.  Only one of these must be present.  # noqa: E501
+    A recipe composer that is to be stored in the recipe composer data store or used for inline resolving.  # noqa: E501
     """
-    configuration_recipe: Optional[ConfigurationRecipe] = Field(None, alias="configurationRecipe")
-    __properties = ["configurationRecipe"]
+    recipe_composer: Optional[RecipeComposer] = Field(None, alias="recipeComposer")
+    __properties = ["recipeComposer"]
 
     class Config:
         """Pydantic configuration"""
@@ -43,8 +43,8 @@ class UpsertRecipeRequest(BaseModel):
         return json.dumps(self.to_dict())
 
     @classmethod
-    def from_json(cls, json_str: str) -> UpsertRecipeRequest:
-        """Create an instance of UpsertRecipeRequest from a JSON string"""
+    def from_json(cls, json_str: str) -> UpsertRecipeComposerRequest:
+        """Create an instance of UpsertRecipeComposerRequest from a JSON string"""
         return cls.from_dict(json.loads(json_str))
 
     def to_dict(self):
@@ -53,21 +53,21 @@ class UpsertRecipeRequest(BaseModel):
                           exclude={
                           },
                           exclude_none=True)
-        # override the default output from pydantic by calling `to_dict()` of configuration_recipe
-        if self.configuration_recipe:
-            _dict['configurationRecipe'] = self.configuration_recipe.to_dict()
+        # override the default output from pydantic by calling `to_dict()` of recipe_composer
+        if self.recipe_composer:
+            _dict['recipeComposer'] = self.recipe_composer.to_dict()
         return _dict
 
     @classmethod
-    def from_dict(cls, obj: dict) -> UpsertRecipeRequest:
-        """Create an instance of UpsertRecipeRequest from a dict"""
+    def from_dict(cls, obj: dict) -> UpsertRecipeComposerRequest:
+        """Create an instance of UpsertRecipeComposerRequest from a dict"""
         if obj is None:
             return None
 
         if not isinstance(obj, dict):
-            return UpsertRecipeRequest.parse_obj(obj)
+            return UpsertRecipeComposerRequest.parse_obj(obj)
 
-        _obj = UpsertRecipeRequest.parse_obj({
-            "configuration_recipe": ConfigurationRecipe.from_dict(obj.get("configurationRecipe")) if obj.get("configurationRecipe") is not None else None
+        _obj = UpsertRecipeComposerRequest.parse_obj({
+            "recipe_composer": RecipeComposer.from_dict(obj.get("recipeComposer")) if obj.get("recipeComposer") is not None else None
         })
         return _obj

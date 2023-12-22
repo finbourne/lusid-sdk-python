@@ -57,6 +57,7 @@ from lusid.api.portfolio_groups_api import PortfolioGroupsApi
 from lusid.api.portfolios_api import PortfoliosApi
 from lusid.api.property_definitions_api import PropertyDefinitionsApi
 from lusid.api.quotes_api import QuotesApi
+from lusid.api.recipe_composer_api import RecipeComposerApi
 from lusid.api.reconciliations_api import ReconciliationsApi
 from lusid.api.reference_lists_api import ReferenceListsApi
 from lusid.api.reference_portfolio_api import ReferencePortfolioApi
@@ -366,6 +367,7 @@ from lusid.models.floating_leg import FloatingLeg
 from lusid.models.flow_convention_name import FlowConventionName
 from lusid.models.flow_conventions import FlowConventions
 from lusid.models.forward_rate_agreement import ForwardRateAgreement
+from lusid.models.from_recipe import FromRecipe
 from lusid.models.funding_leg import FundingLeg
 from lusid.models.funding_leg_options import FundingLegOptions
 from lusid.models.future import Future
@@ -660,6 +662,9 @@ from lusid.models.quote_series_id import QuoteSeriesId
 from lusid.models.quote_type import QuoteType
 from lusid.models.raw_vendor_event import RawVendorEvent
 from lusid.models.realised_gain_loss import RealisedGainLoss
+from lusid.models.recipe_block import RecipeBlock
+from lusid.models.recipe_composer import RecipeComposer
+from lusid.models.recipe_value import RecipeValue
 from lusid.models.reconcile_date_time_rule import ReconcileDateTimeRule
 from lusid.models.reconcile_numeric_rule import ReconcileNumericRule
 from lusid.models.reconcile_string_rule import ReconcileStringRule
@@ -906,6 +911,7 @@ from lusid.models.upsert_portfolio_transactions_response import UpsertPortfolioT
 from lusid.models.upsert_quote_access_metadata_rule_request import UpsertQuoteAccessMetadataRuleRequest
 from lusid.models.upsert_quote_request import UpsertQuoteRequest
 from lusid.models.upsert_quotes_response import UpsertQuotesResponse
+from lusid.models.upsert_recipe_composer_request import UpsertRecipeComposerRequest
 from lusid.models.upsert_recipe_request import UpsertRecipeRequest
 from lusid.models.upsert_reference_portfolio_constituents_request import UpsertReferencePortfolioConstituentsRequest
 from lusid.models.upsert_reference_portfolio_constituents_response import UpsertReferencePortfolioConstituentsResponse

@@ -19,15 +19,15 @@ import json
 
 
 from typing import Any, Dict, Optional
-from pydantic import BaseModel, Field
-from lusid.models.configuration_recipe import ConfigurationRecipe
+from pydantic import BaseModel, StrictStr
 
-class UpsertRecipeRequest(BaseModel):
+class FromRecipe(BaseModel):
     """
-    A recipe that is to be stored in the recipe structured data store.  Only one of these must be present.  # noqa: E501
+    FromRecipe
     """
-    configuration_recipe: Optional[ConfigurationRecipe] = Field(None, alias="configurationRecipe")
-    __properties = ["configurationRecipe"]
+    scope: Optional[StrictStr] = None
+    code: Optional[StrictStr] = None
+    __properties = ["scope", "code"]
 
     class Config:
         """Pydantic configuration"""
@@ -43,8 +43,8 @@ class UpsertRecipeRequest(BaseModel):
         return json.dumps(self.to_dict())
 
     @classmethod
-    def from_json(cls, json_str: str) -> UpsertRecipeRequest:
-        """Create an instance of UpsertRecipeRequest from a JSON string"""
+    def from_json(cls, json_str: str) -> FromRecipe:
+        """Create an instance of FromRecipe from a JSON string"""
         return cls.from_dict(json.loads(json_str))
 
     def to_dict(self):
@@ -53,21 +53,29 @@ class UpsertRecipeRequest(BaseModel):
                           exclude={
                           },
                           exclude_none=True)
-        # override the default output from pydantic by calling `to_dict()` of configuration_recipe
-        if self.configuration_recipe:
-            _dict['configurationRecipe'] = self.configuration_recipe.to_dict()
+        # set to None if scope (nullable) is None
+        # and __fields_set__ contains the field
+        if self.scope is None and "scope" in self.__fields_set__:
+            _dict['scope'] = None
+
+        # set to None if code (nullable) is None
+        # and __fields_set__ contains the field
+        if self.code is None and "code" in self.__fields_set__:
+            _dict['code'] = None
+
         return _dict
 
     @classmethod
-    def from_dict(cls, obj: dict) -> UpsertRecipeRequest:
-        """Create an instance of UpsertRecipeRequest from a dict"""
+    def from_dict(cls, obj: dict) -> FromRecipe:
+        """Create an instance of FromRecipe from a dict"""
         if obj is None:
             return None
 
         if not isinstance(obj, dict):
-            return UpsertRecipeRequest.parse_obj(obj)
+            return FromRecipe.parse_obj(obj)
 
-        _obj = UpsertRecipeRequest.parse_obj({
-            "configuration_recipe": ConfigurationRecipe.from_dict(obj.get("configurationRecipe")) if obj.get("configurationRecipe") is not None else None
+        _obj = FromRecipe.parse_obj({
+            "scope": obj.get("scope"),
+            "code": obj.get("code")
         })
         return _obj
