@@ -34,8 +34,6 @@ extensions = [
     'sphinx.ext.viewcode',  # Add a link to the Python source code for classes, functions etc.
     'sphinx_autodoc_typehints', # Automatically document param types (less noise in class signature)
     'sphinx.ext.napoleon', # Allow for Google/Numpy-style docstring formats
-  #  'nbsphinx',  # Integrate Jupyter Notebooks and Sphinx
-  #  'IPython.sphinxext.ipython_console_highlighting'
     'sphinx_rtd_theme', # Readthedocs stylesheet
 ]
 
@@ -51,37 +49,10 @@ html_show_sourcelink = False  # Remove 'view source code' from top of page (for 
 autodoc_inherit_docstrings = True  # If no docstring, inherit from base class
 set_type_checking_flag = True  # Enable 'expensive' imports for sphinx_autodoc_typehints
 nbsphinx_allow_errors = True  # Continue through Jupyter errors
-#autodoc_typehints = "description" # Sphinx-native method. Not as good as sphinx_autodoc_typehints
 add_module_names = False # Remove namespaces from class/method signatures
 
 # Add any paths that contain templates here, relative to this directory.
 templates_path = ['_templates']
-
-# Exclusions
-# To exclude a module, use autodoc_mock_imports. Note this may increase build time, a lot.
-#autodoc_mock_imports = [
-#    'sdk.lusid.rest',
-#]
-# To exclude a class, function, method or attribute, use autodoc-skip-member. (Note this can also
-# be used in reverse, ie. to re-include a particular member that has been excluded.)
-# 'Private' and 'special' members (_ and __) are excluded using the Jinja2 templates; from the main
-# doc by the absence of specific autoclass directives (ie. :private-members:), and from summary
-# tables by explicit 'if-not' statements. Re-inclusion is effective for the main doc though not for
-# the summary tables.
-# def autodoc_skip_member_callback(app, what, name, obj, skip, options):
-#     # This would exclude the Matern12 class and to_default_float function:
-#     exclusions = ('Matern12', 'to_default_float')
-#     # This would re-include __call__ methods in main doc, previously excluded by templates:
-#     inclusions = ('__call__')
-#     if name in exclusions:
-#         return True
-#     elif name in inclusions:
-#         return False
-#     else:
-#         return skip
-# def setup(app):
-#     # Entry point to autodoc-skip-member
-#     app.connect("autodoc-skip-member", autodoc_skip_member_callback)
 
 # -- Options for HTML output -------------------------------------------------
 
