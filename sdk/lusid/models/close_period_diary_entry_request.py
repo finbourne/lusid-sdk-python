@@ -22,16 +22,27 @@ from typing import Any, Dict, Optional
 from pydantic import BaseModel, Field, StrictStr, constr, validator
 from lusid.models.model_property import ModelProperty
 
-class DiaryEntryRequest(BaseModel):
+class ClosePeriodDiaryEntryRequest(BaseModel):
     """
-    The request to add a diary entry  # noqa: E501
+    A definition for the period you wish to close  # noqa: E501
     """
-    name: Optional[constr(strict=True, max_length=512, min_length=1)] = Field(None, description="The name of the diary entry.")
-    status: Optional[StrictStr] = Field(None, description="The status of the diary entry. Defaults to 'Undefined' for valuation points and 'Estimate' for closing periods.")
-    effective_at: datetime = Field(..., alias="effectiveAt", description="The effective time of the diary entry.")
+    diary_entry_code: Optional[constr(strict=True, max_length=64, min_length=1)] = Field(None, alias="diaryEntryCode", description="Unique code assigned to a period. When left blank a code will be created by the system in the format 'yyyyMMDD'.")
+    name: Optional[constr(strict=True, max_length=512, min_length=1)] = Field(None, description="Identifiable Name assigned to the period. Where left blank, the system will generate a name in the format 'yyyyMMDD'.")
+    effective_at: Optional[datetime] = Field(None, alias="effectiveAt", description="The effective time of the diary entry.")
     query_as_at: Optional[datetime] = Field(None, alias="queryAsAt", description="The query time of the diary entry. Defaults to latest.")
+    status: Optional[StrictStr] = Field(None, description="The status of the diary entry. Defaults to 'Undefined' for valuation points and 'Estimate' for closing periods.")
     properties: Optional[Dict[str, ModelProperty]] = Field(None, description="A set of properties for the diary entry.")
-    __properties = ["name", "status", "effectiveAt", "queryAsAt", "properties"]
+    __properties = ["diaryEntryCode", "name", "effectiveAt", "queryAsAt", "status", "properties"]
+
+    @validator('diary_entry_code')
+    def diary_entry_code_validate_regular_expression(cls, value):
+        """Validates the regular expression"""
+        if value is None:
+            return value
+
+        if not re.match(r"^[a-zA-Z0-9\-_]+$", value):
+            raise ValueError(r"must validate the regular expression /^[a-zA-Z0-9\-_]+$/")
+        return value
 
     @validator('name')
     def name_validate_regular_expression(cls, value):
@@ -57,8 +68,8 @@ class DiaryEntryRequest(BaseModel):
         return json.dumps(self.to_dict())
 
     @classmethod
-    def from_json(cls, json_str: str) -> DiaryEntryRequest:
-        """Create an instance of DiaryEntryRequest from a JSON string"""
+    def from_json(cls, json_str: str) -> ClosePeriodDiaryEntryRequest:
+        """Create an instance of ClosePeriodDiaryEntryRequest from a JSON string"""
         return cls.from_dict(json.loads(json_str))
 
     def to_dict(self):
@@ -74,20 +85,30 @@ class DiaryEntryRequest(BaseModel):
                 if self.properties[_key]:
                     _field_dict[_key] = self.properties[_key].to_dict()
             _dict['properties'] = _field_dict
+        # set to None if diary_entry_code (nullable) is None
+        # and __fields_set__ contains the field
+        if self.diary_entry_code is None and "diary_entry_code" in self.__fields_set__:
+            _dict['diaryEntryCode'] = None
+
         # set to None if name (nullable) is None
         # and __fields_set__ contains the field
         if self.name is None and "name" in self.__fields_set__:
             _dict['name'] = None
 
-        # set to None if status (nullable) is None
+        # set to None if effective_at (nullable) is None
         # and __fields_set__ contains the field
-        if self.status is None and "status" in self.__fields_set__:
-            _dict['status'] = None
+        if self.effective_at is None and "effective_at" in self.__fields_set__:
+            _dict['effectiveAt'] = None
 
         # set to None if query_as_at (nullable) is None
         # and __fields_set__ contains the field
         if self.query_as_at is None and "query_as_at" in self.__fields_set__:
             _dict['queryAsAt'] = None
+
+        # set to None if status (nullable) is None
+        # and __fields_set__ contains the field
+        if self.status is None and "status" in self.__fields_set__:
+            _dict['status'] = None
 
         # set to None if properties (nullable) is None
         # and __fields_set__ contains the field
@@ -97,19 +118,20 @@ class DiaryEntryRequest(BaseModel):
         return _dict
 
     @classmethod
-    def from_dict(cls, obj: dict) -> DiaryEntryRequest:
-        """Create an instance of DiaryEntryRequest from a dict"""
+    def from_dict(cls, obj: dict) -> ClosePeriodDiaryEntryRequest:
+        """Create an instance of ClosePeriodDiaryEntryRequest from a dict"""
         if obj is None:
             return None
 
         if not isinstance(obj, dict):
-            return DiaryEntryRequest.parse_obj(obj)
+            return ClosePeriodDiaryEntryRequest.parse_obj(obj)
 
-        _obj = DiaryEntryRequest.parse_obj({
+        _obj = ClosePeriodDiaryEntryRequest.parse_obj({
+            "diary_entry_code": obj.get("diaryEntryCode"),
             "name": obj.get("name"),
-            "status": obj.get("status"),
             "effective_at": obj.get("effectiveAt"),
             "query_as_at": obj.get("queryAsAt"),
+            "status": obj.get("status"),
             "properties": dict(
                 (_k, ModelProperty.from_dict(_v))
                 for _k, _v in obj.get("properties").items()

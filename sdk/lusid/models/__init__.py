@@ -121,6 +121,7 @@ from lusid.models.cleardown_module_rule import CleardownModuleRule
 from lusid.models.cleardown_module_rules_updated_response import CleardownModuleRulesUpdatedResponse
 from lusid.models.client import Client
 from lusid.models.close_event import CloseEvent
+from lusid.models.close_period_diary_entry_request import ClosePeriodDiaryEntryRequest
 from lusid.models.complete_portfolio import CompletePortfolio
 from lusid.models.complete_relation import CompleteRelation
 from lusid.models.complete_relationship import CompleteRelationship
@@ -396,6 +397,7 @@ from lusid.models.list_aggregation_reconciliation import ListAggregationReconcil
 from lusid.models.list_aggregation_response import ListAggregationResponse
 from lusid.models.list_complex_market_data_with_meta_data_response import ListComplexMarketDataWithMetaDataResponse
 from lusid.models.loan_period import LoanPeriod
+from lusid.models.lock_period_diary_entry_request import LockPeriodDiaryEntryRequest
 from lusid.models.look_up_pricing_model_options import LookUpPricingModelOptions
 from lusid.models.lusid_instrument import LusidInstrument
 from lusid.models.lusid_problem_details import LusidProblemDetails
@@ -521,6 +523,7 @@ from lusid.models.participation_request import ParticipationRequest
 from lusid.models.participation_set_request import ParticipationSetRequest
 from lusid.models.performance_return import PerformanceReturn
 from lusid.models.performance_returns_metric import PerformanceReturnsMetric
+from lusid.models.period_diary_entries_reopened_response import PeriodDiaryEntriesReopenedResponse
 from lusid.models.period_type import PeriodType
 from lusid.models.perpetual_entity_state import PerpetualEntityState
 from lusid.models.perpetual_property import PerpetualProperty
@@ -588,6 +591,7 @@ from lusid.models.quote_instrument_id_type import QuoteInstrumentIdType
 from lusid.models.quote_series_id import QuoteSeriesId
 from lusid.models.quote_type import QuoteType
 from lusid.models.raw_vendor_event import RawVendorEvent
+from lusid.models.re_open_period_diary_entry_request import ReOpenPeriodDiaryEntryRequest
 from lusid.models.realised_gain_loss import RealisedGainLoss
 from lusid.models.recipe_block import RecipeBlock
 from lusid.models.recipe_composer import RecipeComposer

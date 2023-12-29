@@ -34,7 +34,7 @@ class DiaryEntry(BaseModel):
     diary_entry_code: Optional[StrictStr] = Field(None, alias="diaryEntryCode", description="The code of the diary entry.")
     type: constr(strict=True, min_length=1) = Field(..., description="The type of the diary entry.")
     name: Optional[constr(strict=True, max_length=256, min_length=1)] = Field(None, description="The name of the diary entry.")
-    status: constr(strict=True, min_length=1) = Field(..., description="The status of the diary entry. Defaults to 'Undefined'.")
+    status: constr(strict=True, min_length=1) = Field(..., description="The status of the diary entry. Defaults to 'Undefined' for valuation points and 'Estimate' for closing periods.")
     effective_at: datetime = Field(..., alias="effectiveAt", description="The effective time of the diary entry.")
     query_as_at: Optional[datetime] = Field(None, alias="queryAsAt", description="The query time of the diary entry. Defaults to latest.")
     previous_entry_time: Optional[datetime] = Field(None, alias="previousEntryTime", description="The entry time of the previous diary entry.")

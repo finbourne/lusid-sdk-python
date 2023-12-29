@@ -5,6 +5,7 @@ All URIs are relative to *https://www.lusid.com/api*
 Method | HTTP request | Description
 ------------- | ------------- | -------------
 [**add_diary_entry**](AborApi.md#add_diary_entry) | **POST** /api/abor/{scope}/{code}/accountingdiary/{diaryEntryCode} | [EXPERIMENTAL] AddDiaryEntry: Add a diary entry to the specified Abor.
+[**close_period**](AborApi.md#close_period) | **POST** /api/abor/{scope}/{code}/accountingdiary/$closeperiod | [EXPERIMENTAL] ClosePeriod: Closes or locks the current period for the given Abor.
 [**create_abor**](AborApi.md#create_abor) | **POST** /api/abor/{scope} | [EXPERIMENTAL] CreateAbor: Create an Abor.
 [**delete_abor**](AborApi.md#delete_abor) | **DELETE** /api/abor/{scope}/{code} | [EXPERIMENTAL] DeleteAbor: Delete an Abor.
 [**get_abor**](AborApi.md#get_abor) | **GET** /api/abor/{scope}/{code} | [EXPERIMENTAL] GetAbor: Get Abor.
@@ -13,6 +14,8 @@ Method | HTTP request | Description
 [**get_trial_balance**](AborApi.md#get_trial_balance) | **POST** /api/abor/{scope}/{code}/trialbalance/$query | [EXPERIMENTAL] GetTrialBalance: Get the Trial balance for the given Abor.
 [**list_abors**](AborApi.md#list_abors) | **GET** /api/abor | [EXPERIMENTAL] ListAbors: List Abors.
 [**list_diary_entries**](AborApi.md#list_diary_entries) | **GET** /api/abor/{scope}/{code}/accountingdiary | [EXPERIMENTAL] ListDiaryEntries: List diary entries.
+[**lock_period**](AborApi.md#lock_period) | **POST** /api/abor/{scope}/{code}/accountingdiary/$lockperiod | [EXPERIMENTAL] LockPeriod: Locks the last Closed or given Closed Period.
+[**re_open_periods**](AborApi.md#re_open_periods) | **POST** /api/abor/{scope}/{code}/accountingdiary/$reopenperiods | [EXPERIMENTAL] ReOpenPeriods: Reopen periods from a seed Diary Entry Code or when not specified, the last Closed Period for the given Abor.
 [**upsert_abor_properties**](AborApi.md#upsert_abor_properties) | **POST** /api/abor/{scope}/{code}/properties/$upsert | [EXPERIMENTAL] UpsertAborProperties: Upsert Abor properties
 
 
@@ -116,6 +119,109 @@ Name | Type | Description  | Notes
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 **201** | The newly added diary entry. |  -  |
+**400** | The details of the input related failure |  -  |
+**0** | Error response |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **close_period**
+> DiaryEntry close_period(scope, code, close_period_diary_entry_request)
+
+[EXPERIMENTAL] ClosePeriod: Closes or locks the current period for the given Abor.
+
+Closes or Locks the current open period for the given Abor.
+
+### Example
+
+* OAuth Authentication (oauth2):
+```python
+from __future__ import print_function
+import time
+import os
+import lusid
+from lusid.rest import ApiException
+from lusid.models.close_period_diary_entry_request import ClosePeriodDiaryEntryRequest
+from lusid.models.diary_entry import DiaryEntry
+from pprint import pprint
+
+from lusid import (
+	  ApiClientFactory,
+	  ApplicationMetadataApi,
+	  EnvironmentVariablesConfigurationLoader,
+	  SecretsFileConfigurationLoader,
+	  ArgsConfigurationLoader
+)
+
+# Use the lusid ApiClientFactory to build Api instances with a configured api client
+# By default this will read config from environment variables
+# Then from a secrets.json file found in the current working directory
+api_client_factory = ApiClientFactory()
+
+# The ApiClientFactory can be passed an iterable of configuration loaders to read configuration from
+
+api_url = "https://www.lusid.com/api"
+# Path to a secrets.json file containing authentication credentials
+# See https://support.lusid.com/knowledgebase/article/KA-01667/en-us
+# for a detailed guide to setting up the SDK make authenticated calls to LUSID APIs
+secrets_path = os.getenv("FBN_SECRETS_PATH")
+app_name="LusidJupyterNotebook"
+
+config_loaders = [
+	EnvironmentVariablesConfigurationLoader(),
+	SecretsFileConfigurationLoader(api_secrets_file=secrets_path),
+	ArgsConfigurationLoader(api_url=api_url, app_name=app_name)
+]
+api_client_factory = ApiClientFactory(config_loaders=config_loaders)
+
+
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+
+
+
+# Enter a context with an instance of the ApiClientFactory to ensure the connection pool is closed after use
+async with api_client_factory:
+    # Create an instance of the API class
+    api_instance = api_client_factory.build(lusid.AborApi)
+    scope = 'scope_example' # str | The scope of the Abor.
+    code = 'code_example' # str | The code of the Abor.
+    close_period_diary_entry_request = {"diaryEntryCode":"2023","name":"2023","effectiveAt":"2023-04-02T15:10:10.0000000+00:00","queryAsAt":"2023-04-15T15:10:10.0000000+00:00","status":"Estimate","properties":{"DiaryEntry/AccountingDiary/Reports":{"key":"DiaryEntry/AccountingDiary/Reports","value":{"labelValue":"Some comments"}}}} # ClosePeriodDiaryEntryRequest | The request body, containing details to apply to the closing/locking period.
+
+    try:
+        # [EXPERIMENTAL] ClosePeriod: Closes or locks the current period for the given Abor.
+        api_response = await api_instance.close_period(scope, code, close_period_diary_entry_request)
+        print("The response of AborApi->close_period:\n")
+        pprint(api_response)
+    except Exception as e:
+        print("Exception when calling AborApi->close_period: %s\n" % e)
+```
+
+
+### Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **scope** | **str**| The scope of the Abor. | 
+ **code** | **str**| The code of the Abor. | 
+ **close_period_diary_entry_request** | [**ClosePeriodDiaryEntryRequest**](ClosePeriodDiaryEntryRequest.md)| The request body, containing details to apply to the closing/locking period. | 
+
+### Return type
+
+[**DiaryEntry**](DiaryEntry.md)
+
+### Authorization
+
+[oauth2](../README.md#oauth2)
+
+### HTTP request headers
+
+ - **Content-Type**: application/json-patch+json, application/json, text/json, application/*+json
+ - **Accept**: text/plain, application/json, text/json
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**201** | The DiaryEntry created as a result of the closing of the Period. |  -  |
 **400** | The details of the input related failure |  -  |
 **0** | Error response |  -  |
 
@@ -974,6 +1080,212 @@ Name | Type | Description  | Notes
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 **200** | The requested diary entries. |  -  |
+**400** | The details of the input related failure |  -  |
+**0** | Error response |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **lock_period**
+> DiaryEntry lock_period(scope, code, lock_period_diary_entry_request=lock_period_diary_entry_request)
+
+[EXPERIMENTAL] LockPeriod: Locks the last Closed or given Closed Period.
+
+Locks the specified or last locked period for the given Abor.
+
+### Example
+
+* OAuth Authentication (oauth2):
+```python
+from __future__ import print_function
+import time
+import os
+import lusid
+from lusid.rest import ApiException
+from lusid.models.diary_entry import DiaryEntry
+from lusid.models.lock_period_diary_entry_request import LockPeriodDiaryEntryRequest
+from pprint import pprint
+
+from lusid import (
+	  ApiClientFactory,
+	  ApplicationMetadataApi,
+	  EnvironmentVariablesConfigurationLoader,
+	  SecretsFileConfigurationLoader,
+	  ArgsConfigurationLoader
+)
+
+# Use the lusid ApiClientFactory to build Api instances with a configured api client
+# By default this will read config from environment variables
+# Then from a secrets.json file found in the current working directory
+api_client_factory = ApiClientFactory()
+
+# The ApiClientFactory can be passed an iterable of configuration loaders to read configuration from
+
+api_url = "https://www.lusid.com/api"
+# Path to a secrets.json file containing authentication credentials
+# See https://support.lusid.com/knowledgebase/article/KA-01667/en-us
+# for a detailed guide to setting up the SDK make authenticated calls to LUSID APIs
+secrets_path = os.getenv("FBN_SECRETS_PATH")
+app_name="LusidJupyterNotebook"
+
+config_loaders = [
+	EnvironmentVariablesConfigurationLoader(),
+	SecretsFileConfigurationLoader(api_secrets_file=secrets_path),
+	ArgsConfigurationLoader(api_url=api_url, app_name=app_name)
+]
+api_client_factory = ApiClientFactory(config_loaders=config_loaders)
+
+
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+
+
+
+# Enter a context with an instance of the ApiClientFactory to ensure the connection pool is closed after use
+async with api_client_factory:
+    # Create an instance of the API class
+    api_instance = api_client_factory.build(lusid.AborApi)
+    scope = 'scope_example' # str | The scope of the Abor.
+    code = 'code_example' # str | The code of the Abor.
+    lock_period_diary_entry_request = {"diaryEntryCode":"YearEnd2023"} # LockPeriodDiaryEntryRequest | The request body, detailing lock details (optional)
+
+    try:
+        # [EXPERIMENTAL] LockPeriod: Locks the last Closed or given Closed Period.
+        api_response = await api_instance.lock_period(scope, code, lock_period_diary_entry_request=lock_period_diary_entry_request)
+        print("The response of AborApi->lock_period:\n")
+        pprint(api_response)
+    except Exception as e:
+        print("Exception when calling AborApi->lock_period: %s\n" % e)
+```
+
+
+### Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **scope** | **str**| The scope of the Abor. | 
+ **code** | **str**| The code of the Abor. | 
+ **lock_period_diary_entry_request** | [**LockPeriodDiaryEntryRequest**](LockPeriodDiaryEntryRequest.md)| The request body, detailing lock details | [optional] 
+
+### Return type
+
+[**DiaryEntry**](DiaryEntry.md)
+
+### Authorization
+
+[oauth2](../README.md#oauth2)
+
+### HTTP request headers
+
+ - **Content-Type**: application/json-patch+json, application/json, text/json, application/*+json
+ - **Accept**: text/plain, application/json, text/json
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | The updated DiaryEntry as a result of the locking of the Period. |  -  |
+**400** | The details of the input related failure |  -  |
+**0** | Error response |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **re_open_periods**
+> PeriodDiaryEntriesReopenedResponse re_open_periods(scope, code, re_open_period_diary_entry_request=re_open_period_diary_entry_request)
+
+[EXPERIMENTAL] ReOpenPeriods: Reopen periods from a seed Diary Entry Code or when not specified, the last Closed Period for the given Abor.
+
+Reopens one or more periods.
+
+### Example
+
+* OAuth Authentication (oauth2):
+```python
+from __future__ import print_function
+import time
+import os
+import lusid
+from lusid.rest import ApiException
+from lusid.models.period_diary_entries_reopened_response import PeriodDiaryEntriesReopenedResponse
+from lusid.models.re_open_period_diary_entry_request import ReOpenPeriodDiaryEntryRequest
+from pprint import pprint
+
+from lusid import (
+	  ApiClientFactory,
+	  ApplicationMetadataApi,
+	  EnvironmentVariablesConfigurationLoader,
+	  SecretsFileConfigurationLoader,
+	  ArgsConfigurationLoader
+)
+
+# Use the lusid ApiClientFactory to build Api instances with a configured api client
+# By default this will read config from environment variables
+# Then from a secrets.json file found in the current working directory
+api_client_factory = ApiClientFactory()
+
+# The ApiClientFactory can be passed an iterable of configuration loaders to read configuration from
+
+api_url = "https://www.lusid.com/api"
+# Path to a secrets.json file containing authentication credentials
+# See https://support.lusid.com/knowledgebase/article/KA-01667/en-us
+# for a detailed guide to setting up the SDK make authenticated calls to LUSID APIs
+secrets_path = os.getenv("FBN_SECRETS_PATH")
+app_name="LusidJupyterNotebook"
+
+config_loaders = [
+	EnvironmentVariablesConfigurationLoader(),
+	SecretsFileConfigurationLoader(api_secrets_file=secrets_path),
+	ArgsConfigurationLoader(api_url=api_url, app_name=app_name)
+]
+api_client_factory = ApiClientFactory(config_loaders=config_loaders)
+
+
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+
+
+
+# Enter a context with an instance of the ApiClientFactory to ensure the connection pool is closed after use
+async with api_client_factory:
+    # Create an instance of the API class
+    api_instance = api_client_factory.build(lusid.AborApi)
+    scope = 'scope_example' # str | The scope of the Abor to be deleted.
+    code = 'code_example' # str | The code of the Abor to be deleted. Together with the scope this uniquely identifies the Abor.
+    re_open_period_diary_entry_request = {"diaryEntryCode":"YearEnd2023"} # ReOpenPeriodDiaryEntryRequest | The request body, detailing re open details (optional)
+
+    try:
+        # [EXPERIMENTAL] ReOpenPeriods: Reopen periods from a seed Diary Entry Code or when not specified, the last Closed Period for the given Abor.
+        api_response = await api_instance.re_open_periods(scope, code, re_open_period_diary_entry_request=re_open_period_diary_entry_request)
+        print("The response of AborApi->re_open_periods:\n")
+        pprint(api_response)
+    except Exception as e:
+        print("Exception when calling AborApi->re_open_periods: %s\n" % e)
+```
+
+
+### Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **scope** | **str**| The scope of the Abor to be deleted. | 
+ **code** | **str**| The code of the Abor to be deleted. Together with the scope this uniquely identifies the Abor. | 
+ **re_open_period_diary_entry_request** | [**ReOpenPeriodDiaryEntryRequest**](ReOpenPeriodDiaryEntryRequest.md)| The request body, detailing re open details | [optional] 
+
+### Return type
+
+[**PeriodDiaryEntriesReopenedResponse**](PeriodDiaryEntriesReopenedResponse.md)
+
+### Authorization
+
+[oauth2](../README.md#oauth2)
+
+### HTTP request headers
+
+ - **Content-Type**: application/json-patch+json, application/json, text/json, application/*+json
+ - **Accept**: text/plain, application/json, text/json
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | The datetime that the DiaryEntryCodes were deleted |  -  |
 **400** | The details of the input related failure |  -  |
 **0** | Error response |  -  |
 

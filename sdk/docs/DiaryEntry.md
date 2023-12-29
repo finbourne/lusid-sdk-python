@@ -9,7 +9,7 @@ Name | Type | Description | Notes
 **diary_entry_code** | **str** | The code of the diary entry. | [optional] 
 **type** | **str** | The type of the diary entry. | 
 **name** | **str** | The name of the diary entry. | [optional] 
-**status** | **str** | The status of the diary entry. Defaults to &#39;Undefined&#39;. | 
+**status** | **str** | The status of the diary entry. Defaults to &#39;Undefined&#39; for valuation points and &#39;Estimate&#39; for closing periods. | 
 **effective_at** | **datetime** | The effective time of the diary entry. | 
 **query_as_at** | **datetime** | The query time of the diary entry. Defaults to latest. | [optional] 
 **previous_entry_time** | **datetime** | The entry time of the previous diary entry. | [optional] 
