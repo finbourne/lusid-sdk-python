@@ -19,7 +19,7 @@ import json
 
 
 from typing import Any, Dict
-from pydantic import BaseModel, Field, constr, validator
+from pydantic import BaseModel, Field, constr
 from lusid.models.side_definition_request import SideDefinitionRequest
 
 class SidesDefinitionRequest(BaseModel):
@@ -29,13 +29,6 @@ class SidesDefinitionRequest(BaseModel):
     side: constr(strict=True, max_length=64, min_length=1) = Field(..., description="A unique label identifying the side definition.")
     side_request: SideDefinitionRequest = Field(..., alias="sideRequest")
     __properties = ["side", "sideRequest"]
-
-    @validator('side')
-    def side_validate_regular_expression(cls, value):
-        """Validates the regular expression"""
-        if not re.match(r"^[a-zA-Z0-9\-_]+$", value):
-            raise ValueError(r"must validate the regular expression /^[a-zA-Z0-9\-_]+$/")
-        return value
 
     class Config:
         """Pydantic configuration"""

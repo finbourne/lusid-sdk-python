@@ -19,7 +19,7 @@ import json
 
 
 from typing import Any, Dict, List, Optional
-from pydantic import BaseModel, Field, conlist, constr, validator
+from pydantic import BaseModel, Field, conlist, constr
 from lusid.models.link import Link
 
 class SideDefinition(BaseModel):
@@ -35,13 +35,6 @@ class SideDefinition(BaseModel):
     notional_amount: Optional[constr(strict=True, max_length=64, min_length=1)] = Field(None, alias="notionalAmount", description="The value, field or property key defining the side's notional amount")
     links: Optional[conlist(Link)] = None
     __properties = ["side", "security", "currency", "rate", "units", "amount", "notionalAmount", "links"]
-
-    @validator('side')
-    def side_validate_regular_expression(cls, value):
-        """Validates the regular expression"""
-        if not re.match(r"^[a-zA-Z0-9\-_]+$", value):
-            raise ValueError(r"must validate the regular expression /^[a-zA-Z0-9\-_]+$/")
-        return value
 
     class Config:
         """Pydantic configuration"""

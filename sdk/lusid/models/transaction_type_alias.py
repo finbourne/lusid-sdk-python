@@ -32,13 +32,6 @@ class TransactionTypeAlias(BaseModel):
     is_default: Optional[StrictBool] = Field(None, alias="isDefault", description="IsDefault is a flag that denotes the default alias for a source. There can only be, at most, one per source.")
     __properties = ["type", "description", "transactionClass", "transactionRoles", "isDefault"]
 
-    @validator('type')
-    def type_validate_regular_expression(cls, value):
-        """Validates the regular expression"""
-        if not re.match(r"^[a-zA-Z0-9\-_]+$", value):
-            raise ValueError(r"must validate the regular expression /^[a-zA-Z0-9\-_]+$/")
-        return value
-
     @validator('description')
     def description_validate_regular_expression(cls, value):
         """Validates the regular expression"""
