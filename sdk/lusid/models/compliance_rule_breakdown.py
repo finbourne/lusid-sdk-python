@@ -20,6 +20,7 @@ import json
 
 from typing import Any, Dict, List, Union
 from pydantic import BaseModel, Field, StrictFloat, StrictInt, StrictStr, conlist, constr
+from lusid.models.lineage_member import LineageMember
 from lusid.models.model_property import ModelProperty
 
 class ComplianceRuleBreakdown(BaseModel):
@@ -30,7 +31,8 @@ class ComplianceRuleBreakdown(BaseModel):
     results_used: Dict[str, Union[StrictFloat, StrictInt]] = Field(..., alias="resultsUsed", description="Dictionary of AddressKey (as string) and their corresponding decimal values, that were used in this rule.")
     properties_used: Dict[str, conlist(ModelProperty)] = Field(..., alias="propertiesUsed", description="Dictionary of PropertyKey (as string) and their corresponding Properties, that were used in this rule")
     missing_data_information: conlist(StrictStr) = Field(..., alias="missingDataInformation", description="List of string information detailing data that was missing from contributions processed in this rule")
-    __properties = ["groupStatus", "resultsUsed", "propertiesUsed", "missingDataInformation"]
+    lineage: conlist(LineageMember) = Field(...)
+    __properties = ["groupStatus", "resultsUsed", "propertiesUsed", "missingDataInformation", "lineage"]
 
     class Config:
         """Pydantic configuration"""
@@ -65,6 +67,13 @@ class ComplianceRuleBreakdown(BaseModel):
                         _item.to_dict() for _item in self.properties_used[_key]
                     ]
             _dict['propertiesUsed'] = _field_dict_of_array
+        # override the default output from pydantic by calling `to_dict()` of each item in lineage (list)
+        _items = []
+        if self.lineage:
+            for _item in self.lineage:
+                if _item:
+                    _items.append(_item.to_dict())
+            _dict['lineage'] = _items
         return _dict
 
     @classmethod
@@ -87,6 +96,7 @@ class ComplianceRuleBreakdown(BaseModel):
                 )
                 for _k, _v in obj.get("propertiesUsed").items()
             ),
-            "missing_data_information": obj.get("missingDataInformation")
+            "missing_data_information": obj.get("missingDataInformation"),
+            "lineage": [LineageMember.from_dict(_item) for _item in obj.get("lineage")] if obj.get("lineage") is not None else None
         })
         return _obj

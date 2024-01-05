@@ -363,6 +363,7 @@ from lusid.models.instrument_definition import InstrumentDefinition
 from lusid.models.instrument_definition_format import InstrumentDefinitionFormat
 from lusid.models.instrument_delete_modes import InstrumentDeleteModes
 from lusid.models.instrument_event import InstrumentEvent
+from lusid.models.instrument_event_configuration import InstrumentEventConfiguration
 from lusid.models.instrument_event_holder import InstrumentEventHolder
 from lusid.models.instrument_event_type import InstrumentEventType
 from lusid.models.instrument_id_type_descriptor import InstrumentIdTypeDescriptor
@@ -392,6 +393,7 @@ from lusid.models.legal_entity import LegalEntity
 from lusid.models.level_step import LevelStep
 from lusid.models.life_cycle_event_lineage import LifeCycleEventLineage
 from lusid.models.life_cycle_event_value import LifeCycleEventValue
+from lusid.models.lineage_member import LineageMember
 from lusid.models.link import Link
 from lusid.models.list_aggregation_reconciliation import ListAggregationReconciliation
 from lusid.models.list_aggregation_response import ListAggregationResponse
@@ -769,8 +771,8 @@ from lusid.models.transaction_roles import TransactionRoles
 from lusid.models.transaction_set_configuration_data import TransactionSetConfigurationData
 from lusid.models.transaction_set_configuration_data_request import TransactionSetConfigurationDataRequest
 from lusid.models.transaction_status import TransactionStatus
+from lusid.models.transaction_template import TransactionTemplate
 from lusid.models.transaction_template_request import TransactionTemplateRequest
-from lusid.models.transaction_template_response import TransactionTemplateResponse
 from lusid.models.transaction_template_specification import TransactionTemplateSpecification
 from lusid.models.transaction_type import TransactionType
 from lusid.models.transaction_type_alias import TransactionTypeAlias

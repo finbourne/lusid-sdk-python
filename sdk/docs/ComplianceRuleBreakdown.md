@@ -8,6 +8,7 @@ Name | Type | Description | Notes
 **results_used** | **Dict[str, float]** | Dictionary of AddressKey (as string) and their corresponding decimal values, that were used in this rule. | 
 **properties_used** | **Dict[str, List[ModelProperty]]** | Dictionary of PropertyKey (as string) and their corresponding Properties, that were used in this rule | 
 **missing_data_information** | **List[str]** | List of string information detailing data that was missing from contributions processed in this rule | 
+**lineage** | [**List[LineageMember]**](LineageMember.md) |  | 
 
 ## Example
 

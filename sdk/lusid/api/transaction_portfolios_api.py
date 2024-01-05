@@ -471,22 +471,22 @@ class TransactionPortfoliosApi:
             _request_auth=_params.get('_request_auth'))
 
     @overload
-    async def batch_upsert_transactions(self, scope : Annotated[constr(strict=True, max_length=64, min_length=1), Field(..., description="The scope of the transaction portfolio.")], code : Annotated[constr(strict=True, max_length=64, min_length=1), Field(..., description="The code of the transaction portfolio. Together with the scope this uniquely identifies              the transaction portfolio.")], success_mode : Annotated[constr(strict=True, max_length=64, min_length=1), Field(..., description="Whether the batch request should fail Atomically or in a Partial fashion - Allowed Values: Atomic, Partial.")], request_body : Annotated[Dict[str, TransactionRequest], Field(..., description="The payload describing the transactions to be created or updated.")], **kwargs) -> BatchUpsertPortfolioTransactionsResponse:  # noqa: E501
+    async def batch_upsert_transactions(self, scope : Annotated[constr(strict=True, max_length=64, min_length=1), Field(..., description="The scope of the transaction portfolio.")], code : Annotated[constr(strict=True, max_length=64, min_length=1), Field(..., description="The code of the transaction portfolio. Together with the scope this uniquely identifies              the transaction portfolio.")], success_mode : Annotated[constr(strict=True, max_length=64, min_length=1), Field(..., description="Whether the batch request should fail Atomically or in a Partial fashion - Allowed Values: Atomic, Partial.")], request_body : Annotated[Dict[str, TransactionRequest], Field(..., description="The payload describing the transactions to be created or updated.")], preserve_properties : Annotated[Optional[StrictBool], Field(description="If set to true, only the properties provided will be updated, if not specified or set to false, the entire property set will be overwritten by the provided properties.")] = None, **kwargs) -> BatchUpsertPortfolioTransactionsResponse:  # noqa: E501
         ...
 
     @overload
-    def batch_upsert_transactions(self, scope : Annotated[constr(strict=True, max_length=64, min_length=1), Field(..., description="The scope of the transaction portfolio.")], code : Annotated[constr(strict=True, max_length=64, min_length=1), Field(..., description="The code of the transaction portfolio. Together with the scope this uniquely identifies              the transaction portfolio.")], success_mode : Annotated[constr(strict=True, max_length=64, min_length=1), Field(..., description="Whether the batch request should fail Atomically or in a Partial fashion - Allowed Values: Atomic, Partial.")], request_body : Annotated[Dict[str, TransactionRequest], Field(..., description="The payload describing the transactions to be created or updated.")], async_req: Optional[bool]=True, **kwargs) -> BatchUpsertPortfolioTransactionsResponse:  # noqa: E501
+    def batch_upsert_transactions(self, scope : Annotated[constr(strict=True, max_length=64, min_length=1), Field(..., description="The scope of the transaction portfolio.")], code : Annotated[constr(strict=True, max_length=64, min_length=1), Field(..., description="The code of the transaction portfolio. Together with the scope this uniquely identifies              the transaction portfolio.")], success_mode : Annotated[constr(strict=True, max_length=64, min_length=1), Field(..., description="Whether the batch request should fail Atomically or in a Partial fashion - Allowed Values: Atomic, Partial.")], request_body : Annotated[Dict[str, TransactionRequest], Field(..., description="The payload describing the transactions to be created or updated.")], preserve_properties : Annotated[Optional[StrictBool], Field(description="If set to true, only the properties provided will be updated, if not specified or set to false, the entire property set will be overwritten by the provided properties.")] = None, async_req: Optional[bool]=True, **kwargs) -> BatchUpsertPortfolioTransactionsResponse:  # noqa: E501
         ...
 
     @validate_arguments
-    def batch_upsert_transactions(self, scope : Annotated[constr(strict=True, max_length=64, min_length=1), Field(..., description="The scope of the transaction portfolio.")], code : Annotated[constr(strict=True, max_length=64, min_length=1), Field(..., description="The code of the transaction portfolio. Together with the scope this uniquely identifies              the transaction portfolio.")], success_mode : Annotated[constr(strict=True, max_length=64, min_length=1), Field(..., description="Whether the batch request should fail Atomically or in a Partial fashion - Allowed Values: Atomic, Partial.")], request_body : Annotated[Dict[str, TransactionRequest], Field(..., description="The payload describing the transactions to be created or updated.")], async_req: Optional[bool]=None, **kwargs) -> Union[BatchUpsertPortfolioTransactionsResponse, Awaitable[BatchUpsertPortfolioTransactionsResponse]]:  # noqa: E501
+    def batch_upsert_transactions(self, scope : Annotated[constr(strict=True, max_length=64, min_length=1), Field(..., description="The scope of the transaction portfolio.")], code : Annotated[constr(strict=True, max_length=64, min_length=1), Field(..., description="The code of the transaction portfolio. Together with the scope this uniquely identifies              the transaction portfolio.")], success_mode : Annotated[constr(strict=True, max_length=64, min_length=1), Field(..., description="Whether the batch request should fail Atomically or in a Partial fashion - Allowed Values: Atomic, Partial.")], request_body : Annotated[Dict[str, TransactionRequest], Field(..., description="The payload describing the transactions to be created or updated.")], preserve_properties : Annotated[Optional[StrictBool], Field(description="If set to true, only the properties provided will be updated, if not specified or set to false, the entire property set will be overwritten by the provided properties.")] = None, async_req: Optional[bool]=None, **kwargs) -> Union[BatchUpsertPortfolioTransactionsResponse, Awaitable[BatchUpsertPortfolioTransactionsResponse]]:  # noqa: E501
         """[EARLY ACCESS] BatchUpsertTransactions: Batch upsert transactions  # noqa: E501
 
         Create or update transactions in the transaction portfolio. A transaction will be updated  if it already exists and created if it does not.    Each request must be keyed by a unique correlation id. This id is ephemeral and is not stored by LUSID.  It serves only as a way to easily identify each transaction in the response.    Note: If using partial failure modes, then it is important to check the response body for failures as any failures will still return a 200 status code  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
 
-        >>> thread = api.batch_upsert_transactions(scope, code, success_mode, request_body, async_req=True)
+        >>> thread = api.batch_upsert_transactions(scope, code, success_mode, request_body, preserve_properties, async_req=True)
         >>> result = thread.get()
 
         :param scope: The scope of the transaction portfolio. (required)
@@ -497,6 +497,8 @@ class TransactionPortfoliosApi:
         :type success_mode: str
         :param request_body: The payload describing the transactions to be created or updated. (required)
         :type request_body: Dict[str, TransactionRequest]
+        :param preserve_properties: If set to true, only the properties provided will be updated, if not specified or set to false, the entire property set will be overwritten by the provided properties.
+        :type preserve_properties: bool
         :param async_req: Whether to execute the request asynchronously.
         :type async_req: bool, optional
         :param _request_timeout: timeout setting for this request.
@@ -514,17 +516,17 @@ class TransactionPortfoliosApi:
             raise ValueError(message)
         if async_req is not None:
             kwargs['async_req'] = async_req
-        return self.batch_upsert_transactions_with_http_info(scope, code, success_mode, request_body, **kwargs)  # noqa: E501
+        return self.batch_upsert_transactions_with_http_info(scope, code, success_mode, request_body, preserve_properties, **kwargs)  # noqa: E501
 
     @validate_arguments
-    def batch_upsert_transactions_with_http_info(self, scope : Annotated[constr(strict=True, max_length=64, min_length=1), Field(..., description="The scope of the transaction portfolio.")], code : Annotated[constr(strict=True, max_length=64, min_length=1), Field(..., description="The code of the transaction portfolio. Together with the scope this uniquely identifies              the transaction portfolio.")], success_mode : Annotated[constr(strict=True, max_length=64, min_length=1), Field(..., description="Whether the batch request should fail Atomically or in a Partial fashion - Allowed Values: Atomic, Partial.")], request_body : Annotated[Dict[str, TransactionRequest], Field(..., description="The payload describing the transactions to be created or updated.")], **kwargs) -> ApiResponse:  # noqa: E501
+    def batch_upsert_transactions_with_http_info(self, scope : Annotated[constr(strict=True, max_length=64, min_length=1), Field(..., description="The scope of the transaction portfolio.")], code : Annotated[constr(strict=True, max_length=64, min_length=1), Field(..., description="The code of the transaction portfolio. Together with the scope this uniquely identifies              the transaction portfolio.")], success_mode : Annotated[constr(strict=True, max_length=64, min_length=1), Field(..., description="Whether the batch request should fail Atomically or in a Partial fashion - Allowed Values: Atomic, Partial.")], request_body : Annotated[Dict[str, TransactionRequest], Field(..., description="The payload describing the transactions to be created or updated.")], preserve_properties : Annotated[Optional[StrictBool], Field(description="If set to true, only the properties provided will be updated, if not specified or set to false, the entire property set will be overwritten by the provided properties.")] = None, **kwargs) -> ApiResponse:  # noqa: E501
         """[EARLY ACCESS] BatchUpsertTransactions: Batch upsert transactions  # noqa: E501
 
         Create or update transactions in the transaction portfolio. A transaction will be updated  if it already exists and created if it does not.    Each request must be keyed by a unique correlation id. This id is ephemeral and is not stored by LUSID.  It serves only as a way to easily identify each transaction in the response.    Note: If using partial failure modes, then it is important to check the response body for failures as any failures will still return a 200 status code  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
 
-        >>> thread = api.batch_upsert_transactions_with_http_info(scope, code, success_mode, request_body, async_req=True)
+        >>> thread = api.batch_upsert_transactions_with_http_info(scope, code, success_mode, request_body, preserve_properties, async_req=True)
         >>> result = thread.get()
 
         :param scope: The scope of the transaction portfolio. (required)
@@ -535,6 +537,8 @@ class TransactionPortfoliosApi:
         :type success_mode: str
         :param request_body: The payload describing the transactions to be created or updated. (required)
         :type request_body: Dict[str, TransactionRequest]
+        :param preserve_properties: If set to true, only the properties provided will be updated, if not specified or set to false, the entire property set will be overwritten by the provided properties.
+        :type preserve_properties: bool
         :param async_req: Whether to execute the request asynchronously.
         :type async_req: bool, optional
         :param _preload_content: if False, the ApiResponse.data will
@@ -566,7 +570,8 @@ class TransactionPortfoliosApi:
             'scope',
             'code',
             'success_mode',
-            'request_body'
+            'request_body',
+            'preserve_properties'
         ]
         _all_params.extend(
             [
@@ -605,6 +610,9 @@ class TransactionPortfoliosApi:
         _query_params = []
         if _params.get('success_mode') is not None:  # noqa: E501
             _query_params.append(('successMode', _params['success_mode']))
+
+        if _params.get('preserve_properties') is not None:  # noqa: E501
+            _query_params.append(('preserveProperties', _params['preserve_properties']))
 
         # process the header parameters
         _header_params = dict(_params.get('_headers', {}))
@@ -7233,22 +7241,22 @@ class TransactionPortfoliosApi:
             _request_auth=_params.get('_request_auth'))
 
     @overload
-    async def upsert_transactions(self, scope : Annotated[constr(strict=True, max_length=64, min_length=1), Field(..., description="The scope of the transaction portfolio.")], code : Annotated[constr(strict=True, max_length=64, min_length=1), Field(..., description="The code of the transaction portfolio. Together with the scope this uniquely identifies              the transaction portfolio.")], transaction_request : Annotated[conlist(TransactionRequest), Field(..., description="A list of transactions to be created or updated.")], **kwargs) -> UpsertPortfolioTransactionsResponse:  # noqa: E501
+    async def upsert_transactions(self, scope : Annotated[constr(strict=True, max_length=64, min_length=1), Field(..., description="The scope of the transaction portfolio.")], code : Annotated[constr(strict=True, max_length=64, min_length=1), Field(..., description="The code of the transaction portfolio. Together with the scope this uniquely identifies              the transaction portfolio.")], transaction_request : Annotated[conlist(TransactionRequest), Field(..., description="A list of transactions to be created or updated.")], preserve_properties : Annotated[Optional[StrictBool], Field(description="If set to true, only the properties provided will be updated, if not specified or set to false, the entire property set will be overwritten by the provided properties.")] = None, **kwargs) -> UpsertPortfolioTransactionsResponse:  # noqa: E501
         ...
 
     @overload
-    def upsert_transactions(self, scope : Annotated[constr(strict=True, max_length=64, min_length=1), Field(..., description="The scope of the transaction portfolio.")], code : Annotated[constr(strict=True, max_length=64, min_length=1), Field(..., description="The code of the transaction portfolio. Together with the scope this uniquely identifies              the transaction portfolio.")], transaction_request : Annotated[conlist(TransactionRequest), Field(..., description="A list of transactions to be created or updated.")], async_req: Optional[bool]=True, **kwargs) -> UpsertPortfolioTransactionsResponse:  # noqa: E501
+    def upsert_transactions(self, scope : Annotated[constr(strict=True, max_length=64, min_length=1), Field(..., description="The scope of the transaction portfolio.")], code : Annotated[constr(strict=True, max_length=64, min_length=1), Field(..., description="The code of the transaction portfolio. Together with the scope this uniquely identifies              the transaction portfolio.")], transaction_request : Annotated[conlist(TransactionRequest), Field(..., description="A list of transactions to be created or updated.")], preserve_properties : Annotated[Optional[StrictBool], Field(description="If set to true, only the properties provided will be updated, if not specified or set to false, the entire property set will be overwritten by the provided properties.")] = None, async_req: Optional[bool]=True, **kwargs) -> UpsertPortfolioTransactionsResponse:  # noqa: E501
         ...
 
     @validate_arguments
-    def upsert_transactions(self, scope : Annotated[constr(strict=True, max_length=64, min_length=1), Field(..., description="The scope of the transaction portfolio.")], code : Annotated[constr(strict=True, max_length=64, min_length=1), Field(..., description="The code of the transaction portfolio. Together with the scope this uniquely identifies              the transaction portfolio.")], transaction_request : Annotated[conlist(TransactionRequest), Field(..., description="A list of transactions to be created or updated.")], async_req: Optional[bool]=None, **kwargs) -> Union[UpsertPortfolioTransactionsResponse, Awaitable[UpsertPortfolioTransactionsResponse]]:  # noqa: E501
+    def upsert_transactions(self, scope : Annotated[constr(strict=True, max_length=64, min_length=1), Field(..., description="The scope of the transaction portfolio.")], code : Annotated[constr(strict=True, max_length=64, min_length=1), Field(..., description="The code of the transaction portfolio. Together with the scope this uniquely identifies              the transaction portfolio.")], transaction_request : Annotated[conlist(TransactionRequest), Field(..., description="A list of transactions to be created or updated.")], preserve_properties : Annotated[Optional[StrictBool], Field(description="If set to true, only the properties provided will be updated, if not specified or set to false, the entire property set will be overwritten by the provided properties.")] = None, async_req: Optional[bool]=None, **kwargs) -> Union[UpsertPortfolioTransactionsResponse, Awaitable[UpsertPortfolioTransactionsResponse]]:  # noqa: E501
         """UpsertTransactions: Upsert transactions  # noqa: E501
 
         Create or update transactions in the transaction portfolio. A transaction will be updated  if it already exists and created if it does not.  The maximum number of transactions that this method can upsert per request is 10,000.  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
 
-        >>> thread = api.upsert_transactions(scope, code, transaction_request, async_req=True)
+        >>> thread = api.upsert_transactions(scope, code, transaction_request, preserve_properties, async_req=True)
         >>> result = thread.get()
 
         :param scope: The scope of the transaction portfolio. (required)
@@ -7257,6 +7265,8 @@ class TransactionPortfoliosApi:
         :type code: str
         :param transaction_request: A list of transactions to be created or updated. (required)
         :type transaction_request: List[TransactionRequest]
+        :param preserve_properties: If set to true, only the properties provided will be updated, if not specified or set to false, the entire property set will be overwritten by the provided properties.
+        :type preserve_properties: bool
         :param async_req: Whether to execute the request asynchronously.
         :type async_req: bool, optional
         :param _request_timeout: timeout setting for this request.
@@ -7274,17 +7284,17 @@ class TransactionPortfoliosApi:
             raise ValueError(message)
         if async_req is not None:
             kwargs['async_req'] = async_req
-        return self.upsert_transactions_with_http_info(scope, code, transaction_request, **kwargs)  # noqa: E501
+        return self.upsert_transactions_with_http_info(scope, code, transaction_request, preserve_properties, **kwargs)  # noqa: E501
 
     @validate_arguments
-    def upsert_transactions_with_http_info(self, scope : Annotated[constr(strict=True, max_length=64, min_length=1), Field(..., description="The scope of the transaction portfolio.")], code : Annotated[constr(strict=True, max_length=64, min_length=1), Field(..., description="The code of the transaction portfolio. Together with the scope this uniquely identifies              the transaction portfolio.")], transaction_request : Annotated[conlist(TransactionRequest), Field(..., description="A list of transactions to be created or updated.")], **kwargs) -> ApiResponse:  # noqa: E501
+    def upsert_transactions_with_http_info(self, scope : Annotated[constr(strict=True, max_length=64, min_length=1), Field(..., description="The scope of the transaction portfolio.")], code : Annotated[constr(strict=True, max_length=64, min_length=1), Field(..., description="The code of the transaction portfolio. Together with the scope this uniquely identifies              the transaction portfolio.")], transaction_request : Annotated[conlist(TransactionRequest), Field(..., description="A list of transactions to be created or updated.")], preserve_properties : Annotated[Optional[StrictBool], Field(description="If set to true, only the properties provided will be updated, if not specified or set to false, the entire property set will be overwritten by the provided properties.")] = None, **kwargs) -> ApiResponse:  # noqa: E501
         """UpsertTransactions: Upsert transactions  # noqa: E501
 
         Create or update transactions in the transaction portfolio. A transaction will be updated  if it already exists and created if it does not.  The maximum number of transactions that this method can upsert per request is 10,000.  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
 
-        >>> thread = api.upsert_transactions_with_http_info(scope, code, transaction_request, async_req=True)
+        >>> thread = api.upsert_transactions_with_http_info(scope, code, transaction_request, preserve_properties, async_req=True)
         >>> result = thread.get()
 
         :param scope: The scope of the transaction portfolio. (required)
@@ -7293,6 +7303,8 @@ class TransactionPortfoliosApi:
         :type code: str
         :param transaction_request: A list of transactions to be created or updated. (required)
         :type transaction_request: List[TransactionRequest]
+        :param preserve_properties: If set to true, only the properties provided will be updated, if not specified or set to false, the entire property set will be overwritten by the provided properties.
+        :type preserve_properties: bool
         :param async_req: Whether to execute the request asynchronously.
         :type async_req: bool, optional
         :param _preload_content: if False, the ApiResponse.data will
@@ -7323,7 +7335,8 @@ class TransactionPortfoliosApi:
         _all_params = [
             'scope',
             'code',
-            'transaction_request'
+            'transaction_request',
+            'preserve_properties'
         ]
         _all_params.extend(
             [
@@ -7360,6 +7373,9 @@ class TransactionPortfoliosApi:
 
         # process the query parameters
         _query_params = []
+        if _params.get('preserve_properties') is not None:  # noqa: E501
+            _query_params.append(('preserveProperties', _params['preserve_properties']))
+
         # process the header parameters
         _header_params = dict(_params.get('_headers', {}))
         # process the form parameters

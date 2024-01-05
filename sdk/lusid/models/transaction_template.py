@@ -23,9 +23,9 @@ from pydantic import BaseModel, Field, conlist, constr
 from lusid.models.component_transaction import ComponentTransaction
 from lusid.models.link import Link
 
-class TransactionTemplateResponse(BaseModel):
+class TransactionTemplate(BaseModel):
     """
-    TransactionTemplateResponse
+    TransactionTemplate
     """
     instrument_event_type: constr(strict=True, min_length=1) = Field(..., alias="instrumentEventType", description="A value that represents the instrument event type.")
     description: constr(strict=True, min_length=1) = Field(..., description="The description of the transaction template.")
@@ -48,8 +48,8 @@ class TransactionTemplateResponse(BaseModel):
         return json.dumps(self.to_dict())
 
     @classmethod
-    def from_json(cls, json_str: str) -> TransactionTemplateResponse:
-        """Create an instance of TransactionTemplateResponse from a JSON string"""
+    def from_json(cls, json_str: str) -> TransactionTemplate:
+        """Create an instance of TransactionTemplate from a JSON string"""
         return cls.from_dict(json.loads(json_str))
 
     def to_dict(self):
@@ -80,15 +80,15 @@ class TransactionTemplateResponse(BaseModel):
         return _dict
 
     @classmethod
-    def from_dict(cls, obj: dict) -> TransactionTemplateResponse:
-        """Create an instance of TransactionTemplateResponse from a dict"""
+    def from_dict(cls, obj: dict) -> TransactionTemplate:
+        """Create an instance of TransactionTemplate from a dict"""
         if obj is None:
             return None
 
         if not isinstance(obj, dict):
-            return TransactionTemplateResponse.parse_obj(obj)
+            return TransactionTemplate.parse_obj(obj)
 
-        _obj = TransactionTemplateResponse.parse_obj({
+        _obj = TransactionTemplate.parse_obj({
             "instrument_event_type": obj.get("instrumentEventType"),
             "description": obj.get("description"),
             "scope": obj.get("scope"),

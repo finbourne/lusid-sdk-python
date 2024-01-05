@@ -20,6 +20,7 @@ import json
 from datetime import datetime
 from typing import Any, Dict, List, Optional
 from pydantic import BaseModel, Field, StrictStr, conlist, constr, validator
+from lusid.models.instrument_event_configuration import InstrumentEventConfiguration
 from lusid.models.model_property import ModelProperty
 from lusid.models.resource_id import ResourceId
 
@@ -40,7 +41,8 @@ class CreateTransactionPortfolioRequest(BaseModel):
     amortisation_method: Optional[StrictStr] = Field(None, alias="amortisationMethod", description="The amortisation method used by the portfolio for the calculation. The available values are: NoAmortisation, StraightLine, EffectiveYield, StraightLineSettlementDate, EffectiveYieldSettlementDate")
     transaction_type_scope: Optional[constr(strict=True, max_length=64, min_length=1)] = Field(None, alias="transactionTypeScope", description="The scope of the transaction types.")
     cash_gain_loss_calculation_date: Optional[StrictStr] = Field(None, alias="cashGainLossCalculationDate", description="The option when the Cash Gain Loss to be calulated, TransactionDate/SettlementDate. Defaults to SettlementDate.")
-    __properties = ["displayName", "description", "code", "created", "baseCurrency", "corporateActionSourceId", "accountingMethod", "subHoldingKeys", "properties", "instrumentScopes", "amortisationMethod", "transactionTypeScope", "cashGainLossCalculationDate"]
+    instrument_event_configuration: Optional[InstrumentEventConfiguration] = Field(None, alias="instrumentEventConfiguration")
+    __properties = ["displayName", "description", "code", "created", "baseCurrency", "corporateActionSourceId", "accountingMethod", "subHoldingKeys", "properties", "instrumentScopes", "amortisationMethod", "transactionTypeScope", "cashGainLossCalculationDate", "instrumentEventConfiguration"]
 
     @validator('accounting_method')
     def accounting_method_validate_enum(cls, value):
@@ -96,6 +98,9 @@ class CreateTransactionPortfolioRequest(BaseModel):
                 if self.properties[_key]:
                     _field_dict[_key] = self.properties[_key].to_dict()
             _dict['properties'] = _field_dict
+        # override the default output from pydantic by calling `to_dict()` of instrument_event_configuration
+        if self.instrument_event_configuration:
+            _dict['instrumentEventConfiguration'] = self.instrument_event_configuration.to_dict()
         # set to None if description (nullable) is None
         # and __fields_set__ contains the field
         if self.description is None and "description" in self.__fields_set__:
@@ -165,6 +170,7 @@ class CreateTransactionPortfolioRequest(BaseModel):
             "instrument_scopes": obj.get("instrumentScopes"),
             "amortisation_method": obj.get("amortisationMethod"),
             "transaction_type_scope": obj.get("transactionTypeScope"),
-            "cash_gain_loss_calculation_date": obj.get("cashGainLossCalculationDate")
+            "cash_gain_loss_calculation_date": obj.get("cashGainLossCalculationDate"),
+            "instrument_event_configuration": InstrumentEventConfiguration.from_dict(obj.get("instrumentEventConfiguration")) if obj.get("instrumentEventConfiguration") is not None else None
         })
         return _obj

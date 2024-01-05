@@ -40,8 +40,9 @@ class CompletePortfolio(BaseModel):
     version: Version = Field(...)
     properties: Optional[conlist(ModelProperty)] = Field(None, description="The requested portfolio properties. These will be from the 'Portfolio' domain.")
     base_currency: Optional[StrictStr] = Field(None, alias="baseCurrency", description="If the portfolio is a transaction portfolio or derived transaction portfolio, this is the base currency of the portfolio.")
+    sub_holding_keys: Optional[conlist(StrictStr)] = Field(None, alias="subHoldingKeys", description="The sub holding key properties configured for the portfolio")
     links: Optional[conlist(Link)] = None
-    __properties = ["id", "href", "description", "displayName", "created", "parentPortfolioId", "isDerived", "type", "version", "properties", "baseCurrency", "links"]
+    __properties = ["id", "href", "description", "displayName", "created", "parentPortfolioId", "isDerived", "type", "version", "properties", "baseCurrency", "subHoldingKeys", "links"]
 
     @validator('type')
     def type_validate_enum(cls, value):
@@ -126,6 +127,11 @@ class CompletePortfolio(BaseModel):
         if self.base_currency is None and "base_currency" in self.__fields_set__:
             _dict['baseCurrency'] = None
 
+        # set to None if sub_holding_keys (nullable) is None
+        # and __fields_set__ contains the field
+        if self.sub_holding_keys is None and "sub_holding_keys" in self.__fields_set__:
+            _dict['subHoldingKeys'] = None
+
         # set to None if links (nullable) is None
         # and __fields_set__ contains the field
         if self.links is None and "links" in self.__fields_set__:
@@ -154,6 +160,7 @@ class CompletePortfolio(BaseModel):
             "version": Version.from_dict(obj.get("version")) if obj.get("version") is not None else None,
             "properties": [ModelProperty.from_dict(_item) for _item in obj.get("properties")] if obj.get("properties") is not None else None,
             "base_currency": obj.get("baseCurrency"),
+            "sub_holding_keys": obj.get("subHoldingKeys"),
             "links": [Link.from_dict(_item) for _item in obj.get("links")] if obj.get("links") is not None else None
         })
         return _obj

@@ -214,6 +214,8 @@ class ApiClient:
             url += "?" + url_query
 
         try:
+            # if returning http_data_only then we need to deserialise response.
+            _preload_content = True if _return_http_data_only else _preload_content
             # perform request and return response
             response_data = await self.request(
                 method, url,
@@ -260,8 +262,8 @@ class ApiClient:
         else:
             return ApiResponse(status_code = response_data.status,
                            data = return_data,
-                           headers = response_data.getheaders(),
-                           raw_data = response_data.data)
+                           headers = response_data.getheaders() if _preload_content else response_data.headers,
+                           raw_data = response_data.data if _preload_content else response_data)
 
     def sanitize_for_serialization(self, obj):
         """Builds a JSON POST object.

@@ -8,6 +8,7 @@ Name | Type | Description | Notes
 **results_used** | **Dict[str, float]** |  | 
 **properties_used** | **Dict[str, List[ModelProperty]]** |  | 
 **missing_data_information** | **List[str]** |  | 
+**lineage** | [**List[LineageMember]**](LineageMember.md) |  | 
 
 ## Example
 

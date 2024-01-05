@@ -1,4 +1,4 @@
-# TransactionTemplateResponse
+# TransactionTemplate
 
 
 ## Properties
@@ -13,19 +13,19 @@ Name | Type | Description | Notes
 ## Example
 
 ```python
-from lusid.models.transaction_template_response import TransactionTemplateResponse
+from lusid.models.transaction_template import TransactionTemplate
 
 # TODO update the JSON string below
 json = "{}"
-# create an instance of TransactionTemplateResponse from a JSON string
-transaction_template_response_instance = TransactionTemplateResponse.from_json(json)
+# create an instance of TransactionTemplate from a JSON string
+transaction_template_instance = TransactionTemplate.from_json(json)
 # print the JSON string representation of the object
-print TransactionTemplateResponse.to_json()
+print TransactionTemplate.to_json()
 
 # convert the object into a dict
-transaction_template_response_dict = transaction_template_response_instance.to_dict()
-# create an instance of TransactionTemplateResponse from a dict
-transaction_template_response_form_dict = transaction_template_response.from_dict(transaction_template_response_dict)
+transaction_template_dict = transaction_template_instance.to_dict()
+# create an instance of TransactionTemplate from a dict
+transaction_template_form_dict = transaction_template.from_dict(transaction_template_dict)
 ```
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

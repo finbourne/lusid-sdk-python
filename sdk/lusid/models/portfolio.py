@@ -20,6 +20,7 @@ import json
 from datetime import datetime
 from typing import Any, Dict, List, Optional
 from pydantic import BaseModel, Field, StrictBool, StrictStr, conlist, constr, validator
+from lusid.models.instrument_event_configuration import InstrumentEventConfiguration
 from lusid.models.link import Link
 from lusid.models.model_property import ModelProperty
 from lusid.models.relationship import Relationship
@@ -47,8 +48,9 @@ class Portfolio(BaseModel):
     amortisation_method: Optional[StrictStr] = Field(None, alias="amortisationMethod", description="The amortisation method used by the portfolio for the calculation. The available values are: NoAmortisation, StraightLine, EffectiveYield, StraightLineSettlementDate, EffectiveYieldSettlementDate")
     transaction_type_scope: Optional[StrictStr] = Field(None, alias="transactionTypeScope", description="The scope of the transaction types.")
     cash_gain_loss_calculation_date: Optional[StrictStr] = Field(None, alias="cashGainLossCalculationDate", description="The scope of the transaction types.")
+    instrument_event_configuration: Optional[InstrumentEventConfiguration] = Field(None, alias="instrumentEventConfiguration")
     links: Optional[conlist(Link)] = None
-    __properties = ["href", "id", "type", "displayName", "description", "created", "parentPortfolioId", "version", "isDerived", "baseCurrency", "properties", "relationships", "instrumentScopes", "accountingMethod", "amortisationMethod", "transactionTypeScope", "cashGainLossCalculationDate", "links"]
+    __properties = ["href", "id", "type", "displayName", "description", "created", "parentPortfolioId", "version", "isDerived", "baseCurrency", "properties", "relationships", "instrumentScopes", "accountingMethod", "amortisationMethod", "transactionTypeScope", "cashGainLossCalculationDate", "instrumentEventConfiguration", "links"]
 
     @validator('type')
     def type_validate_enum(cls, value):
@@ -114,6 +116,9 @@ class Portfolio(BaseModel):
                 if _item:
                     _items.append(_item.to_dict())
             _dict['relationships'] = _items
+        # override the default output from pydantic by calling `to_dict()` of instrument_event_configuration
+        if self.instrument_event_configuration:
+            _dict['instrumentEventConfiguration'] = self.instrument_event_configuration.to_dict()
         # override the default output from pydantic by calling `to_dict()` of each item in links (list)
         _items = []
         if self.links:
@@ -205,6 +210,7 @@ class Portfolio(BaseModel):
             "amortisation_method": obj.get("amortisationMethod"),
             "transaction_type_scope": obj.get("transactionTypeScope"),
             "cash_gain_loss_calculation_date": obj.get("cashGainLossCalculationDate"),
+            "instrument_event_configuration": InstrumentEventConfiguration.from_dict(obj.get("instrumentEventConfiguration")) if obj.get("instrumentEventConfiguration") is not None else None,
             "links": [Link.from_dict(_item) for _item in obj.get("links")] if obj.get("links") is not None else None
         })
         return _obj

@@ -11,7 +11,7 @@ Name | Type | Description | Notes
 **affected_portfolios** | [**List[ResourceId]**](ResourceId.md) |  | 
 **affected_orders** | [**List[ResourceId]**](ResourceId.md) |  | 
 **parameters_used** | **Dict[str, str]** |  | 
-**rule_breakdown** | [**Dict[str, ComplianceRuleBreakdown]**](ComplianceRuleBreakdown.md) |  | 
+**rule_breakdown** | [**List[ComplianceRuleBreakdown]**](ComplianceRuleBreakdown.md) |  | 
 
 ## Example
 

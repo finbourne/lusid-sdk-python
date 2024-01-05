@@ -34,7 +34,7 @@ class ComplianceSummaryRuleResult(BaseModel):
     affected_portfolios: conlist(ResourceId) = Field(..., alias="affectedPortfolios")
     affected_orders: conlist(ResourceId) = Field(..., alias="affectedOrders")
     parameters_used: Dict[str, StrictStr] = Field(..., alias="parametersUsed")
-    rule_breakdown: Dict[str, ComplianceRuleBreakdown] = Field(..., alias="ruleBreakdown")
+    rule_breakdown: conlist(ComplianceRuleBreakdown) = Field(..., alias="ruleBreakdown")
     __properties = ["ruleId", "templateId", "variation", "ruleStatus", "affectedPortfolios", "affectedOrders", "parametersUsed", "ruleBreakdown"]
 
     class Config:
@@ -81,13 +81,13 @@ class ComplianceSummaryRuleResult(BaseModel):
                 if _item:
                     _items.append(_item.to_dict())
             _dict['affectedOrders'] = _items
-        # override the default output from pydantic by calling `to_dict()` of each value in rule_breakdown (dict)
-        _field_dict = {}
+        # override the default output from pydantic by calling `to_dict()` of each item in rule_breakdown (list)
+        _items = []
         if self.rule_breakdown:
-            for _key in self.rule_breakdown:
-                if self.rule_breakdown[_key]:
-                    _field_dict[_key] = self.rule_breakdown[_key].to_dict()
-            _dict['ruleBreakdown'] = _field_dict
+            for _item in self.rule_breakdown:
+                if _item:
+                    _items.append(_item.to_dict())
+            _dict['ruleBreakdown'] = _items
         return _dict
 
     @classmethod
@@ -107,11 +107,6 @@ class ComplianceSummaryRuleResult(BaseModel):
             "affected_portfolios": [ResourceId.from_dict(_item) for _item in obj.get("affectedPortfolios")] if obj.get("affectedPortfolios") is not None else None,
             "affected_orders": [ResourceId.from_dict(_item) for _item in obj.get("affectedOrders")] if obj.get("affectedOrders") is not None else None,
             "parameters_used": obj.get("parametersUsed"),
-            "rule_breakdown": dict(
-                (_k, ComplianceRuleBreakdown.from_dict(_v))
-                for _k, _v in obj.get("ruleBreakdown").items()
-            )
-            if obj.get("ruleBreakdown") is not None
-            else None
+            "rule_breakdown": [ComplianceRuleBreakdown.from_dict(_item) for _item in obj.get("ruleBreakdown")] if obj.get("ruleBreakdown") is not None else None
         })
         return _obj

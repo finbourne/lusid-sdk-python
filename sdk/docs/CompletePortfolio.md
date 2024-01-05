@@ -15,6 +15,7 @@ Name | Type | Description | Notes
 **version** | [**Version**](Version.md) |  | 
 **properties** | [**List[ModelProperty]**](ModelProperty.md) | The requested portfolio properties. These will be from the &#39;Portfolio&#39; domain. | [optional] 
 **base_currency** | **str** | If the portfolio is a transaction portfolio or derived transaction portfolio, this is the base currency of the portfolio. | [optional] 
+**sub_holding_keys** | **List[str]** | The sub holding key properties configured for the portfolio | [optional] 
 **links** | [**List[Link]**](Link.md) |  | [optional] 
 
 ## Example

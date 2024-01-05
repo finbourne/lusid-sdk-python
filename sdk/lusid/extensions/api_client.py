@@ -213,6 +213,8 @@ class SyncApiClient:
             url += "?" + url_query
 
         try:
+            # if returning http_data_only then we need to deserialise response.
+            _preload_content = True if _return_http_data_only else _preload_content
             # perform request and return response
             response_data = self.request(
                 method, url,
