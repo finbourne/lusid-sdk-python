@@ -18,8 +18,8 @@ import re  # noqa: F401
 import json
 
 from datetime import datetime
-from typing import Any, Dict, Optional
-from pydantic import BaseModel, Field, StrictStr, constr, validator
+from typing import Any, Dict, List, Optional
+from pydantic import BaseModel, Field, StrictStr, conlist, constr, validator
 from lusid.models.model_property import ModelProperty
 
 class ClosePeriodDiaryEntryRequest(BaseModel):
@@ -32,7 +32,8 @@ class ClosePeriodDiaryEntryRequest(BaseModel):
     query_as_at: Optional[datetime] = Field(None, alias="queryAsAt", description="The query time of the diary entry. Defaults to latest.")
     status: Optional[StrictStr] = Field(None, description="The status of the diary entry. Defaults to 'Undefined' for valuation points and 'Estimate' for closing periods.")
     properties: Optional[Dict[str, ModelProperty]] = Field(None, description="A set of properties for the diary entry.")
-    __properties = ["diaryEntryCode", "name", "effectiveAt", "queryAsAt", "status", "properties"]
+    closing_options: Optional[conlist(StrictStr)] = Field(None, alias="closingOptions", description="The options which will be executed once a period is closed or locked.")
+    __properties = ["diaryEntryCode", "name", "effectiveAt", "queryAsAt", "status", "properties", "closingOptions"]
 
     @validator('diary_entry_code')
     def diary_entry_code_validate_regular_expression(cls, value):
@@ -115,6 +116,11 @@ class ClosePeriodDiaryEntryRequest(BaseModel):
         if self.properties is None and "properties" in self.__fields_set__:
             _dict['properties'] = None
 
+        # set to None if closing_options (nullable) is None
+        # and __fields_set__ contains the field
+        if self.closing_options is None and "closing_options" in self.__fields_set__:
+            _dict['closingOptions'] = None
+
         return _dict
 
     @classmethod
@@ -137,6 +143,7 @@ class ClosePeriodDiaryEntryRequest(BaseModel):
                 for _k, _v in obj.get("properties").items()
             )
             if obj.get("properties") is not None
-            else None
+            else None,
+            "closing_options": obj.get("closingOptions")
         })
         return _obj

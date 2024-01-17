@@ -18,15 +18,16 @@ import re  # noqa: F401
 import json
 
 
-from typing import Any, Dict, Optional
-from pydantic import BaseModel, Field, constr, validator
+from typing import Any, Dict, List, Optional
+from pydantic import BaseModel, Field, StrictStr, conlist, constr, validator
 
 class LockPeriodDiaryEntryRequest(BaseModel):
     """
     A definition for the period you wish to lock  # noqa: E501
     """
     diary_entry_code: Optional[constr(strict=True, max_length=64, min_length=1)] = Field(None, alias="diaryEntryCode", description="Unique code assigned to a period. When left blank last closed period will be located.")
-    __properties = ["diaryEntryCode"]
+    closing_options: Optional[conlist(StrictStr)] = Field(None, alias="closingOptions", description="The options which will be executed once a period is closed or locked.")
+    __properties = ["diaryEntryCode", "closingOptions"]
 
     @validator('diary_entry_code')
     def diary_entry_code_validate_regular_expression(cls, value):
@@ -67,6 +68,11 @@ class LockPeriodDiaryEntryRequest(BaseModel):
         if self.diary_entry_code is None and "diary_entry_code" in self.__fields_set__:
             _dict['diaryEntryCode'] = None
 
+        # set to None if closing_options (nullable) is None
+        # and __fields_set__ contains the field
+        if self.closing_options is None and "closing_options" in self.__fields_set__:
+            _dict['closingOptions'] = None
+
         return _dict
 
     @classmethod
@@ -79,6 +85,7 @@ class LockPeriodDiaryEntryRequest(BaseModel):
             return LockPeriodDiaryEntryRequest.parse_obj(obj)
 
         _obj = LockPeriodDiaryEntryRequest.parse_obj({
-            "diary_entry_code": obj.get("diaryEntryCode")
+            "diary_entry_code": obj.get("diaryEntryCode"),
+            "closing_options": obj.get("closingOptions")
         })
         return _obj

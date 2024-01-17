@@ -18,22 +18,18 @@ import re  # noqa: F401
 import json
 
 from datetime import datetime
-from typing import Any, Dict, Union
-from pydantic import Field, StrictFloat, StrictInt, StrictStr, constr, validator
+from typing import Any, Dict
+from pydantic import Field, StrictStr, validator
 from lusid.models.instrument_event import InstrumentEvent
 
-class AmortisationEvent(InstrumentEvent):
+class MaturityEvent(InstrumentEvent):
     """
-    Definition of an Amortisation event.  This is an event that describes the occurence of amortisation.  # noqa: E501
+    Definition of a Maturity Event  This is an event that describes the maturity of the instrument.  # noqa: E501
     """
-    amount_reduced: Union[StrictFloat, StrictInt] = Field(..., alias="amountReduced", description="The amount reduced in this amortisation event.  That is, the difference between the previous notional amount and the current notional amount as set in this event.")
-    dom_ccy: StrictStr = Field(..., alias="domCcy", description="Domestic currency of the originating instrument")
-    pay_receive: constr(strict=True, min_length=1) = Field(..., alias="payReceive", description="Is this event in relation to the Pay or Receive leg")
-    event_status: constr(strict=True, min_length=1) = Field(..., alias="eventStatus", description="What is the event status, is it a known (ie historic) or unknown (ie projected) event?")
-    payment_date: datetime = Field(..., alias="paymentDate", description="The date the principal payment is to be made.")
+    maturity_date: datetime = Field(..., alias="maturityDate", description="Maturity date of the instrument")
     instrument_event_type: StrictStr = Field(..., alias="instrumentEventType", description="The Type of Event. The available values are: TransitionEvent, InformationalEvent, OpenEvent, CloseEvent, StockSplitEvent, BondDefaultEvent, CashDividendEvent, AmortisationEvent, CashFlowEvent, ExerciseEvent, ResetEvent, TriggerEvent, RawVendorEvent, InformationalErrorEvent, BondCouponEvent, DividendReinvestmentEvent, AccumulationEvent, BondPrincipalEvent, DividendOptionEvent, MaturityEvent")
     additional_properties: Dict[str, Any] = {}
-    __properties = ["instrumentEventType", "amountReduced", "domCcy", "payReceive", "eventStatus", "paymentDate"]
+    __properties = ["instrumentEventType", "maturityDate"]
 
     @validator('instrument_event_type')
     def instrument_event_type_validate_enum(cls, value):
@@ -56,8 +52,8 @@ class AmortisationEvent(InstrumentEvent):
         return json.dumps(self.to_dict())
 
     @classmethod
-    def from_json(cls, json_str: str) -> AmortisationEvent:
-        """Create an instance of AmortisationEvent from a JSON string"""
+    def from_json(cls, json_str: str) -> MaturityEvent:
+        """Create an instance of MaturityEvent from a JSON string"""
         return cls.from_dict(json.loads(json_str))
 
     def to_dict(self):
@@ -75,21 +71,17 @@ class AmortisationEvent(InstrumentEvent):
         return _dict
 
     @classmethod
-    def from_dict(cls, obj: dict) -> AmortisationEvent:
-        """Create an instance of AmortisationEvent from a dict"""
+    def from_dict(cls, obj: dict) -> MaturityEvent:
+        """Create an instance of MaturityEvent from a dict"""
         if obj is None:
             return None
 
         if not isinstance(obj, dict):
-            return AmortisationEvent.parse_obj(obj)
+            return MaturityEvent.parse_obj(obj)
 
-        _obj = AmortisationEvent.parse_obj({
+        _obj = MaturityEvent.parse_obj({
             "instrument_event_type": obj.get("instrumentEventType"),
-            "amount_reduced": obj.get("amountReduced"),
-            "dom_ccy": obj.get("domCcy"),
-            "pay_receive": obj.get("payReceive"),
-            "event_status": obj.get("eventStatus"),
-            "payment_date": obj.get("paymentDate")
+            "maturity_date": obj.get("maturityDate")
         })
         # store additional fields in additional_properties
         for _key in obj.keys():

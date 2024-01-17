@@ -11,6 +11,7 @@ Name | Type | Description | Notes
 **query_as_at** | **datetime** | The query time of the diary entry. Defaults to latest. | [optional] 
 **status** | **str** | The status of the diary entry. Defaults to &#39;Undefined&#39; for valuation points and &#39;Estimate&#39; for closing periods. | [optional] 
 **properties** | [**Dict[str, ModelProperty]**](ModelProperty.md) | A set of properties for the diary entry. | [optional] 
+**closing_options** | **List[str]** | The options which will be executed once a period is closed or locked. | [optional] 
 
 ## Example
 

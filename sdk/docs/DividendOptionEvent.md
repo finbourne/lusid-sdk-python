@@ -12,7 +12,7 @@ Name | Type | Description | Notes
 **record_date** | **datetime** | Date you have to be the holder of record in order to participate in the tender. | [optional] 
 **security_elections** | [**List[SecurityElection]**](SecurityElection.md) | SecurityElection for this DividendReinvestmentEvent | 
 **security_settlement_date** | **datetime** | Date on which the dividend was the security settles.  Equal to the PaymentDate if not provided. | [optional] 
-**instrument_event_type** | **str** | The Type of Event. The available values are: TransitionEvent, InformationalEvent, OpenEvent, CloseEvent, StockSplitEvent, BondDefaultEvent, CashDividendEvent, AmortisationEvent, CashFlowEvent, ExerciseEvent, ResetEvent, TriggerEvent, RawVendorEvent, InformationalErrorEvent, BondCouponEvent, DividendReinvestmentEvent, AccumulationEvent, BondPrincipalEvent, DividendOptionEvent | 
+**instrument_event_type** | **str** | The Type of Event. The available values are: TransitionEvent, InformationalEvent, OpenEvent, CloseEvent, StockSplitEvent, BondDefaultEvent, CashDividendEvent, AmortisationEvent, CashFlowEvent, ExerciseEvent, ResetEvent, TriggerEvent, RawVendorEvent, InformationalErrorEvent, BondCouponEvent, DividendReinvestmentEvent, AccumulationEvent, BondPrincipalEvent, DividendOptionEvent, MaturityEvent | 
 
 ## Example
 

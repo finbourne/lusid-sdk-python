@@ -10,6 +10,7 @@ Name | Type | Description | Notes
 **portfolio_id** | [**ResourceId**](ResourceId.md) |  | [optional] 
 **portfolio_name** | **str** | The name of the order&#39;s referenced Portfolio. | [optional] 
 **order_approval_task_id** | **str** | The task id associated with the approval state of the order. | [optional] 
+**order_approval_task_definition_id** | [**ResourceId**](ResourceId.md) |  | [optional] 
 
 ## Example
 

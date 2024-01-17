@@ -48,6 +48,7 @@ class InstrumentEventType(str, Enum):
     ACCUMULATIONEVENT = 'AccumulationEvent'
     BONDPRINCIPALEVENT = 'BondPrincipalEvent'
     DIVIDENDOPTIONEVENT = 'DividendOptionEvent'
+    MATURITYEVENT = 'MaturityEvent'
 
     @classmethod
     def from_json(cls, json_str: str) -> InstrumentEventType:

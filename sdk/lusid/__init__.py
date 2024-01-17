@@ -494,6 +494,7 @@ from lusid.models.market_observable_type import MarketObservableType
 from lusid.models.market_options import MarketOptions
 from lusid.models.market_quote import MarketQuote
 from lusid.models.match_criterion import MatchCriterion
+from lusid.models.maturity_event import MaturityEvent
 from lusid.models.metric_value import MetricValue
 from lusid.models.model_options import ModelOptions
 from lusid.models.model_options_type import ModelOptionsType
@@ -603,6 +604,7 @@ from lusid.models.period_type import PeriodType
 from lusid.models.perpetual_entity_state import PerpetualEntityState
 from lusid.models.perpetual_property import PerpetualProperty
 from lusid.models.person import Person
+from lusid.models.place_blocks_request import PlaceBlocksRequest
 from lusid.models.placement import Placement
 from lusid.models.placement_request import PlacementRequest
 from lusid.models.placement_set_request import PlacementSetRequest

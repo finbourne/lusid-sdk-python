@@ -6,6 +6,7 @@ A definition for the period you wish to lock
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **diary_entry_code** | **str** | Unique code assigned to a period. When left blank last closed period will be located. | [optional] 
+**closing_options** | **List[str]** | The options which will be executed once a period is closed or locked. | [optional] 
 
 ## Example
 

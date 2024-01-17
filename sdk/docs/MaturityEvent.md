@@ -1,31 +1,29 @@
-# CashFlowEvent
+# MaturityEvent
 
-Definition of a CashFlow event.  This is an event that describes the occurence of a cashflow and associated information.
+Definition of a Maturity Event  This is an event that describes the maturity of the instrument.
 
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**cash_flow_value** | [**CashFlowValue**](CashFlowValue.md) |  | 
-**event_type** | **str** | What type of internal event does this represent; coupon, principal, premium etc. | [readonly] 
-**event_status** | **str** | What is the event status, is it a known (ie historic) or unknown (ie projected) event? | 
+**maturity_date** | **datetime** | Maturity date of the instrument | 
 **instrument_event_type** | **str** | The Type of Event. The available values are: TransitionEvent, InformationalEvent, OpenEvent, CloseEvent, StockSplitEvent, BondDefaultEvent, CashDividendEvent, AmortisationEvent, CashFlowEvent, ExerciseEvent, ResetEvent, TriggerEvent, RawVendorEvent, InformationalErrorEvent, BondCouponEvent, DividendReinvestmentEvent, AccumulationEvent, BondPrincipalEvent, DividendOptionEvent, MaturityEvent | 
 
 ## Example
 
 ```python
-from lusid.models.cash_flow_event import CashFlowEvent
+from lusid.models.maturity_event import MaturityEvent
 
 # TODO update the JSON string below
 json = "{}"
-# create an instance of CashFlowEvent from a JSON string
-cash_flow_event_instance = CashFlowEvent.from_json(json)
+# create an instance of MaturityEvent from a JSON string
+maturity_event_instance = MaturityEvent.from_json(json)
 # print the JSON string representation of the object
-print CashFlowEvent.to_json()
+print MaturityEvent.to_json()
 
 # convert the object into a dict
-cash_flow_event_dict = cash_flow_event_instance.to_dict()
-# create an instance of CashFlowEvent from a dict
-cash_flow_event_form_dict = cash_flow_event.from_dict(cash_flow_event_dict)
+maturity_event_dict = maturity_event_instance.to_dict()
+# create an instance of MaturityEvent from a dict
+maturity_event_form_dict = maturity_event.from_dict(maturity_event_dict)
 ```
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

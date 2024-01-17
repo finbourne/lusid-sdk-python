@@ -32,7 +32,8 @@ class OrderGraphBlockOrderDetail(BaseModel):
     portfolio_id: Optional[ResourceId] = Field(None, alias="portfolioId")
     portfolio_name: Optional[StrictStr] = Field(None, alias="portfolioName", description="The name of the order's referenced Portfolio.")
     order_approval_task_id: Optional[StrictStr] = Field(None, alias="orderApprovalTaskId", description="The task id associated with the approval state of the order.")
-    __properties = ["id", "complianceState", "approvalState", "portfolioId", "portfolioName", "orderApprovalTaskId"]
+    order_approval_task_definition_id: Optional[ResourceId] = Field(None, alias="orderApprovalTaskDefinitionId")
+    __properties = ["id", "complianceState", "approvalState", "portfolioId", "portfolioName", "orderApprovalTaskId", "orderApprovalTaskDefinitionId"]
 
     class Config:
         """Pydantic configuration"""
@@ -64,6 +65,9 @@ class OrderGraphBlockOrderDetail(BaseModel):
         # override the default output from pydantic by calling `to_dict()` of portfolio_id
         if self.portfolio_id:
             _dict['portfolioId'] = self.portfolio_id.to_dict()
+        # override the default output from pydantic by calling `to_dict()` of order_approval_task_definition_id
+        if self.order_approval_task_definition_id:
+            _dict['orderApprovalTaskDefinitionId'] = self.order_approval_task_definition_id.to_dict()
         # set to None if portfolio_name (nullable) is None
         # and __fields_set__ contains the field
         if self.portfolio_name is None and "portfolio_name" in self.__fields_set__:
@@ -91,6 +95,7 @@ class OrderGraphBlockOrderDetail(BaseModel):
             "approval_state": obj.get("approvalState"),
             "portfolio_id": ResourceId.from_dict(obj.get("portfolioId")) if obj.get("portfolioId") is not None else None,
             "portfolio_name": obj.get("portfolioName"),
-            "order_approval_task_id": obj.get("orderApprovalTaskId")
+            "order_approval_task_id": obj.get("orderApprovalTaskId"),
+            "order_approval_task_definition_id": ResourceId.from_dict(obj.get("orderApprovalTaskDefinitionId")) if obj.get("orderApprovalTaskDefinitionId") is not None else None
         })
         return _obj
