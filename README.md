@@ -44,7 +44,7 @@ config_loaders = [
 api_client_factory = ApiClientFactory(config_loaders=config_loaders)
 ```
 
-> You will need to create a secrets file containing your LUSID credentials. For instructions on how to construct this file, see [Getting started with the LUSID API and SDKs](https://support.lusid.com/knowledgebase/article/KA-01916/)
+>  Accessing the LUSID API endpoints requires an authenticated request. An authentication token can be obtained following the instructions [Getting started with the LUSID API and SDKs](https://support.lusid.com/knowledgebase/article/KA-01916/)
 
 Now that the API client is ready, you are ready to use the various API endpoints.
 You can list all the API endpoints by running the following: 
