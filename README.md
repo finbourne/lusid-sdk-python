@@ -11,15 +11,9 @@ The PyPi package for the LUSID SDK can installed using the following:
 pip install lusid-sdk
 ```
 
-We publish two versions of the Python SDK:
-
-* **lusid-sdk-python (this one) - supports `Production` and `Early Access` API endpoints**
-* [lusid-sdk-python-preview](https://github.com/finbourne/lusid-sdk-python-preview) - supports `Production`, `Early Access`, `Beta` and `Experimental` API endpoints.
-
 For more details on API endpoint categories, see [What is the LUSID feature release lifecycle?](https://support.lusid.com/knowledgebase/article/KA-01786/en-us).
 To find out which category an API endpoint falls into, see [LUSID API Documentation](https://www.lusid.com/api/swagger/index.html).
 
-> If you install both `lusid-sdk-python` and `lusid-sdk-python-preview`, `import lusid` will refer to `lusid-sdk-python`. 
 
 ## Usage
 
@@ -31,18 +25,23 @@ First, import the following LUSID modules:
 ```python
 import lusid
 import lusid.models as models
-from lusid.utilities import ApiConfigurationLoader
+from lusid import (
+    ApiClientFactory,
+    EnvironmentVariablesConfigurationLoader,
+    SecretsFileConfigurationLoader,
+    ArgsConfigurationLoader
+)
 ```
 
 And construct the API factory:
 
 ```python
 secrets_file_path = "/path/to/secrets.json"
-config = ApiConfigurationLoader.load(secrets_file_path)
-api_factory = lusid.utilities.ApiClientFactory(
-    token=lusid.utilities.RefreshingToken(config),
-    api_secrets_filename=secrets_file_path
-)
+config_loaders = [
+	EnvironmentVariablesConfigurationLoader(),
+	SecretsFileConfigurationLoader(api_secrets_file=secrets_path)
+]
+api_client_factory = ApiClientFactory(config_loaders=config_loaders)
 ```
 
 > You will need to create a secrets file containing your LUSID credentials. For instructions on how to construct this file, see [Getting started with the LUSID API and SDKs](https://support.lusid.com/knowledgebase/article/KA-01916/)
@@ -68,7 +67,6 @@ import pytz
 
 The examples below should be run in order, as they assume that the preceding code has been executed.
 
-> Sets of working examples for using this SDK are available in the [Python examples repo](https://github.com/finbourne/lusid-sdk-examples-python).
 
 #### Create portfolio
 
@@ -82,10 +80,9 @@ portfolio_request = models.CreateTransactionPortfolioRequest(
     display_name=f"Portfolio-{guid}",
     code=f"Id-{guid}",
     base_currency="GBP",
-    created=datetime.datetime(2021, 3, 20, tzinfo=pytz.utc)
+    created=datetime.datetime(2021, 3, 20, tzinfo=pytz.utc).isoformat()
 )
-
-portfolio = tx_portfolios_api.create_portfolio(scope, create_transaction_portfolio_request=portfolio_request)
+portfolio = await tx_portfolios_api.create_portfolio(scope, create_transaction_portfolio_request=portfolio_request)
 portfolio_code = portfolio.id.code
 print("Porfolio Code:", portfolio_code)
 ```
@@ -102,13 +99,14 @@ figis_to_create = {
     )
 }
 
-instruments_api.upsert_instruments(request_body=figis_to_create)
+await instruments_api.upsert_instruments(request_body=figis_to_create)
+    
 ```
 
 #### Get instruments
 
 ```python
-instruments_response = instruments_api.get_instruments(
+instruments_response = await instruments_api.get_instruments(
     identifier_type="Figi", request_body=list(figis_to_create.keys()))
 name_to_luid = {
     value.name: value.lusid_instrument_id
@@ -134,7 +132,7 @@ tx1 = models.TransactionRequest(
     source="Broker"
 )
 
-tx_portfolios_api.upsert_transactions(scope=scope, code=portfolio_code, transaction_request=[tx1])
+await tx_portfolios_api.upsert_transactions(scope=scope, code=portfolio_code, transaction_request=[tx1])
 ```
 
 #### Get holdings
@@ -142,7 +140,7 @@ tx_portfolios_api.upsert_transactions(scope=scope, code=portfolio_code, transact
 ```python
 tx_portfolios_api = api_factory.build(lusid.api.TransactionPortfoliosApi)
 
-holdings_response = tx_portfolios_api.get_holdings(
+holdings_response = await tx_portfolios_api.get_holdings(
     scope=scope, code=portfolio_code, property_keys=["Instrument/default/Name"]).values
 
 print("Holdings:")
@@ -150,14 +148,12 @@ for holding in holdings_response:
     print(luid_to_name[holding.instrument_uid], holding.units, holding.cost.amount)
 ```
 
-For more fully fledged examples showing how to use the SDK, see [sdk/tests/tutorials](sdk/tests/tutorials)
-
 ## Manually building the SDK
 
 A pre-generated version of the latest SDK is included in the `sdk` folder. 
 This is based on the [OpenAPI specification](https://github.com/OAI/OpenAPI-Specification) specification named `lusid.json` in the root folder. The most up to date version of the OpenAPI specification can be downloaded from [api.lusid.com/swagger/v0/swagger.json](https://api.lusid.com/swagger/v0/swagger.json).
 
-If you want to generate the Python SDK locally from the FINBOURNE OpenAPI specification, see [github.com/finbourne/lusid-sdk-generators](https://github.com/finbourne/lusid-sdk-generators).
+If you want to generate the Python SDK locally from the FINBOURNE OpenAPI specification, see [github.com/finbourne/lusid-sdk-generator-python](https://github.com/finbourne/lusid-sdk-generator-python).
 
 ## Build status 
 
