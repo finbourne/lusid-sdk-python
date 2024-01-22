@@ -33,7 +33,8 @@ class UpsertInstrumentEventRequest(BaseModel):
     instrument_event: InstrumentEvent = Field(..., alias="instrumentEvent")
     properties: Optional[conlist(PerpetualProperty)] = Field(None, description="The properties attached to this instrument event.")
     sequence_number: Optional[StrictInt] = Field(None, alias="sequenceNumber", description="The order of the instrument event relative others on the same date (0 being processed first). Must be non negative.")
-    __properties = ["instrumentEventId", "instrumentIdentifiers", "description", "instrumentEvent", "properties", "sequenceNumber"]
+    participation_type: Optional[StrictStr] = Field('Mandatory', alias="participationType", description="Is participation in this event Mandatory, MandatoryWithChoices, or Voluntary.")
+    __properties = ["instrumentEventId", "instrumentIdentifiers", "description", "instrumentEvent", "properties", "sequenceNumber", "participationType"]
 
     @validator('instrument_event_id')
     def instrument_event_id_validate_regular_expression(cls, value):
@@ -96,6 +97,11 @@ class UpsertInstrumentEventRequest(BaseModel):
         if self.properties is None and "properties" in self.__fields_set__:
             _dict['properties'] = None
 
+        # set to None if participation_type (nullable) is None
+        # and __fields_set__ contains the field
+        if self.participation_type is None and "participation_type" in self.__fields_set__:
+            _dict['participationType'] = None
+
         return _dict
 
     @classmethod
@@ -113,6 +119,7 @@ class UpsertInstrumentEventRequest(BaseModel):
             "description": obj.get("description"),
             "instrument_event": InstrumentEvent.from_dict(obj.get("instrumentEvent")) if obj.get("instrumentEvent") is not None else None,
             "properties": [PerpetualProperty.from_dict(_item) for _item in obj.get("properties")] if obj.get("properties") is not None else None,
-            "sequence_number": obj.get("sequenceNumber")
+            "sequence_number": obj.get("sequenceNumber"),
+            "participation_type": obj.get("participationType") if obj.get("participationType") is not None else 'Mandatory'
         })
         return _obj

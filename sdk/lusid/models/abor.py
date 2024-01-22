@@ -34,12 +34,13 @@ class Abor(BaseModel):
     id: ResourceId = Field(...)
     display_name: Optional[StrictStr] = Field(None, alias="displayName", description="The name of the Abor.")
     description: Optional[StrictStr] = Field(None, description="The description for the Abor.")
-    portfolio_ids: conlist(PortfolioEntityId) = Field(..., alias="portfolioIds", description="The list with the portfolio ids which are part of the Abor.")
+    portfolio_ids: conlist(PortfolioEntityId) = Field(..., alias="portfolioIds", description="The list with the portfolio ids which are part of the Abor. Note: These must all have the same base currency.")
     abor_configuration_id: Optional[ResourceId] = Field(None, alias="aborConfigurationId")
     properties: Optional[Dict[str, ModelProperty]] = Field(None, description="A set of properties for the Abor.")
     version: Optional[Version] = None
+    base_currency: Optional[StrictStr] = Field(None, alias="baseCurrency", description="The base currency of the abor based on contained portfolio base currencies.")
     links: Optional[conlist(Link)] = None
-    __properties = ["href", "id", "displayName", "description", "portfolioIds", "aborConfigurationId", "properties", "version", "links"]
+    __properties = ["href", "id", "displayName", "description", "portfolioIds", "aborConfigurationId", "properties", "version", "baseCurrency", "links"]
 
     class Config:
         """Pydantic configuration"""
@@ -115,6 +116,11 @@ class Abor(BaseModel):
         if self.properties is None and "properties" in self.__fields_set__:
             _dict['properties'] = None
 
+        # set to None if base_currency (nullable) is None
+        # and __fields_set__ contains the field
+        if self.base_currency is None and "base_currency" in self.__fields_set__:
+            _dict['baseCurrency'] = None
+
         # set to None if links (nullable) is None
         # and __fields_set__ contains the field
         if self.links is None and "links" in self.__fields_set__:
@@ -145,6 +151,7 @@ class Abor(BaseModel):
             if obj.get("properties") is not None
             else None,
             "version": Version.from_dict(obj.get("version")) if obj.get("version") is not None else None,
+            "base_currency": obj.get("baseCurrency"),
             "links": [Link.from_dict(_item) for _item in obj.get("links")] if obj.get("links") is not None else None
         })
         return _obj

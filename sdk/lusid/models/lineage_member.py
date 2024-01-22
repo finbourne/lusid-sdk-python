@@ -18,7 +18,7 @@ import re  # noqa: F401
 import json
 
 
-from typing import Any, Dict
+from typing import Any, Dict, Optional
 from pydantic import BaseModel, Field, StrictInt, constr
 
 class LineageMember(BaseModel):
@@ -28,7 +28,9 @@ class LineageMember(BaseModel):
     index: StrictInt = Field(..., description="Index to demonstrate position of lineage member in overall lineage")
     label: constr(strict=True, max_length=6000, min_length=0) = Field(..., description="Label of the step corresponding to this lineage member")
     sub_label: constr(strict=True, max_length=6000, min_length=0) = Field(..., alias="subLabel", description="SubLabel of the step corresponding to this lineage member")
-    __properties = ["index", "label", "subLabel"]
+    info_type: Optional[constr(strict=True, max_length=6000, min_length=0)] = Field(None, alias="infoType", description="Optional. Type of Information")
+    information: Optional[constr(strict=True, max_length=6000, min_length=0)] = Field(None, description="Optional. Information for the step corresponding to this lineage member, of type InfoType")
+    __properties = ["index", "label", "subLabel", "infoType", "information"]
 
     class Config:
         """Pydantic configuration"""
@@ -54,6 +56,16 @@ class LineageMember(BaseModel):
                           exclude={
                           },
                           exclude_none=True)
+        # set to None if info_type (nullable) is None
+        # and __fields_set__ contains the field
+        if self.info_type is None and "info_type" in self.__fields_set__:
+            _dict['infoType'] = None
+
+        # set to None if information (nullable) is None
+        # and __fields_set__ contains the field
+        if self.information is None and "information" in self.__fields_set__:
+            _dict['information'] = None
+
         return _dict
 
     @classmethod
@@ -68,6 +80,8 @@ class LineageMember(BaseModel):
         _obj = LineageMember.parse_obj({
             "index": obj.get("index"),
             "label": obj.get("label"),
-            "sub_label": obj.get("subLabel")
+            "sub_label": obj.get("subLabel"),
+            "info_type": obj.get("infoType"),
+            "information": obj.get("information")
         })
         return _obj

@@ -4,6 +4,7 @@
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
+**instrument_type** | **str** |  | 
 **instrument_event_type** | **str** |  | 
 **supported_participation_types** | **List[str]** |  | 
 **supported_election_types** | [**List[ElectionSpecification]**](ElectionSpecification.md) |  | 

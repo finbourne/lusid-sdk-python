@@ -51,15 +51,15 @@ class InstrumentEventTypesApi:
         self.api_client = api_client
 
     @overload
-    async def create_transaction_template(self, instrument_event_type : Annotated[StrictStr, Field(..., description="The type of instrument events that the template is applied to.")], instrument_type : Annotated[StrictStr, Field(..., description="The template is applied to events which originate from instruments of this type")], scope : Annotated[constr(strict=True, max_length=64, min_length=1), Field(..., description="The scope in which the template lies.")], transaction_template_request : Annotated[TransactionTemplateRequest, Field(..., description="A request defining a new transaction template to be created.")], **kwargs) -> TransactionTemplate:  # noqa: E501
+    async def create_transaction_template(self, instrument_event_type : Annotated[StrictStr, Field(..., description="The type of instrument events that the template is applied to.")], instrument_type : Annotated[StrictStr, Field(..., description="The instrument type of the transaction template. The combination of the instrument              event type, instrument type and scope uniquely identifies a transaction template")], scope : Annotated[constr(strict=True, max_length=64, min_length=1), Field(..., description="The scope in which the template lies.")], transaction_template_request : Annotated[TransactionTemplateRequest, Field(..., description="A request defining a new transaction template to be created.")], **kwargs) -> TransactionTemplate:  # noqa: E501
         ...
 
     @overload
-    def create_transaction_template(self, instrument_event_type : Annotated[StrictStr, Field(..., description="The type of instrument events that the template is applied to.")], instrument_type : Annotated[StrictStr, Field(..., description="The template is applied to events which originate from instruments of this type")], scope : Annotated[constr(strict=True, max_length=64, min_length=1), Field(..., description="The scope in which the template lies.")], transaction_template_request : Annotated[TransactionTemplateRequest, Field(..., description="A request defining a new transaction template to be created.")], async_req: Optional[bool]=True, **kwargs) -> TransactionTemplate:  # noqa: E501
+    def create_transaction_template(self, instrument_event_type : Annotated[StrictStr, Field(..., description="The type of instrument events that the template is applied to.")], instrument_type : Annotated[StrictStr, Field(..., description="The instrument type of the transaction template. The combination of the instrument              event type, instrument type and scope uniquely identifies a transaction template")], scope : Annotated[constr(strict=True, max_length=64, min_length=1), Field(..., description="The scope in which the template lies.")], transaction_template_request : Annotated[TransactionTemplateRequest, Field(..., description="A request defining a new transaction template to be created.")], async_req: Optional[bool]=True, **kwargs) -> TransactionTemplate:  # noqa: E501
         ...
 
     @validate_arguments
-    def create_transaction_template(self, instrument_event_type : Annotated[StrictStr, Field(..., description="The type of instrument events that the template is applied to.")], instrument_type : Annotated[StrictStr, Field(..., description="The template is applied to events which originate from instruments of this type")], scope : Annotated[constr(strict=True, max_length=64, min_length=1), Field(..., description="The scope in which the template lies.")], transaction_template_request : Annotated[TransactionTemplateRequest, Field(..., description="A request defining a new transaction template to be created.")], async_req: Optional[bool]=None, **kwargs) -> Union[TransactionTemplate, Awaitable[TransactionTemplate]]:  # noqa: E501
+    def create_transaction_template(self, instrument_event_type : Annotated[StrictStr, Field(..., description="The type of instrument events that the template is applied to.")], instrument_type : Annotated[StrictStr, Field(..., description="The instrument type of the transaction template. The combination of the instrument              event type, instrument type and scope uniquely identifies a transaction template")], scope : Annotated[constr(strict=True, max_length=64, min_length=1), Field(..., description="The scope in which the template lies.")], transaction_template_request : Annotated[TransactionTemplateRequest, Field(..., description="A request defining a new transaction template to be created.")], async_req: Optional[bool]=None, **kwargs) -> Union[TransactionTemplate, Awaitable[TransactionTemplate]]:  # noqa: E501
         """[EXPERIMENTAL] CreateTransactionTemplate: Create Transaction Template  # noqa: E501
 
         Create a transaction template for a particular instrument event type in a scope.  # noqa: E501
@@ -71,7 +71,7 @@ class InstrumentEventTypesApi:
 
         :param instrument_event_type: The type of instrument events that the template is applied to. (required)
         :type instrument_event_type: str
-        :param instrument_type: The template is applied to events which originate from instruments of this type (required)
+        :param instrument_type: The instrument type of the transaction template. The combination of the instrument              event type, instrument type and scope uniquely identifies a transaction template (required)
         :type instrument_type: str
         :param scope: The scope in which the template lies. (required)
         :type scope: str
@@ -97,7 +97,7 @@ class InstrumentEventTypesApi:
         return self.create_transaction_template_with_http_info(instrument_event_type, instrument_type, scope, transaction_template_request, **kwargs)  # noqa: E501
 
     @validate_arguments
-    def create_transaction_template_with_http_info(self, instrument_event_type : Annotated[StrictStr, Field(..., description="The type of instrument events that the template is applied to.")], instrument_type : Annotated[StrictStr, Field(..., description="The template is applied to events which originate from instruments of this type")], scope : Annotated[constr(strict=True, max_length=64, min_length=1), Field(..., description="The scope in which the template lies.")], transaction_template_request : Annotated[TransactionTemplateRequest, Field(..., description="A request defining a new transaction template to be created.")], **kwargs) -> ApiResponse:  # noqa: E501
+    def create_transaction_template_with_http_info(self, instrument_event_type : Annotated[StrictStr, Field(..., description="The type of instrument events that the template is applied to.")], instrument_type : Annotated[StrictStr, Field(..., description="The instrument type of the transaction template. The combination of the instrument              event type, instrument type and scope uniquely identifies a transaction template")], scope : Annotated[constr(strict=True, max_length=64, min_length=1), Field(..., description="The scope in which the template lies.")], transaction_template_request : Annotated[TransactionTemplateRequest, Field(..., description="A request defining a new transaction template to be created.")], **kwargs) -> ApiResponse:  # noqa: E501
         """[EXPERIMENTAL] CreateTransactionTemplate: Create Transaction Template  # noqa: E501
 
         Create a transaction template for a particular instrument event type in a scope.  # noqa: E501
@@ -109,7 +109,7 @@ class InstrumentEventTypesApi:
 
         :param instrument_event_type: The type of instrument events that the template is applied to. (required)
         :type instrument_event_type: str
-        :param instrument_type: The template is applied to events which originate from instruments of this type (required)
+        :param instrument_type: The instrument type of the transaction template. The combination of the instrument              event type, instrument type and scope uniquely identifies a transaction template (required)
         :type instrument_type: str
         :param scope: The scope in which the template lies. (required)
         :type scope: str
@@ -233,27 +233,29 @@ class InstrumentEventTypesApi:
             _request_auth=_params.get('_request_auth'))
 
     @overload
-    async def get_transaction_template(self, instrument_event_type : Annotated[StrictStr, Field(..., description="The instrument event type of the transaction template")], scope : Annotated[Optional[StrictStr], Field(description="The scope in which the template lies. When not supplied the scope is 'default'.")] = None, as_at : Annotated[Optional[datetime], Field(description="The AsAt time of the requested Transaction Template")] = None, **kwargs) -> TransactionTemplate:  # noqa: E501
+    async def get_transaction_template(self, instrument_event_type : Annotated[StrictStr, Field(..., description="The instrument event type of the transaction template")], instrument_type : Annotated[StrictStr, Field(..., description="The instrument type of the transaction template. The combination of the instrument              event type, instrument type and scope uniquely identifies a transaction template")], scope : Annotated[constr(strict=True, max_length=64, min_length=1), Field(..., description="The scope in which the template lies. When not supplied the scope is 'default'.")], as_at : Annotated[Optional[datetime], Field(description="The AsAt time of the requested Transaction Template")] = None, **kwargs) -> TransactionTemplate:  # noqa: E501
         ...
 
     @overload
-    def get_transaction_template(self, instrument_event_type : Annotated[StrictStr, Field(..., description="The instrument event type of the transaction template")], scope : Annotated[Optional[StrictStr], Field(description="The scope in which the template lies. When not supplied the scope is 'default'.")] = None, as_at : Annotated[Optional[datetime], Field(description="The AsAt time of the requested Transaction Template")] = None, async_req: Optional[bool]=True, **kwargs) -> TransactionTemplate:  # noqa: E501
+    def get_transaction_template(self, instrument_event_type : Annotated[StrictStr, Field(..., description="The instrument event type of the transaction template")], instrument_type : Annotated[StrictStr, Field(..., description="The instrument type of the transaction template. The combination of the instrument              event type, instrument type and scope uniquely identifies a transaction template")], scope : Annotated[constr(strict=True, max_length=64, min_length=1), Field(..., description="The scope in which the template lies. When not supplied the scope is 'default'.")], as_at : Annotated[Optional[datetime], Field(description="The AsAt time of the requested Transaction Template")] = None, async_req: Optional[bool]=True, **kwargs) -> TransactionTemplate:  # noqa: E501
         ...
 
     @validate_arguments
-    def get_transaction_template(self, instrument_event_type : Annotated[StrictStr, Field(..., description="The instrument event type of the transaction template")], scope : Annotated[Optional[StrictStr], Field(description="The scope in which the template lies. When not supplied the scope is 'default'.")] = None, as_at : Annotated[Optional[datetime], Field(description="The AsAt time of the requested Transaction Template")] = None, async_req: Optional[bool]=None, **kwargs) -> Union[TransactionTemplate, Awaitable[TransactionTemplate]]:  # noqa: E501
+    def get_transaction_template(self, instrument_event_type : Annotated[StrictStr, Field(..., description="The instrument event type of the transaction template")], instrument_type : Annotated[StrictStr, Field(..., description="The instrument type of the transaction template. The combination of the instrument              event type, instrument type and scope uniquely identifies a transaction template")], scope : Annotated[constr(strict=True, max_length=64, min_length=1), Field(..., description="The scope in which the template lies. When not supplied the scope is 'default'.")], as_at : Annotated[Optional[datetime], Field(description="The AsAt time of the requested Transaction Template")] = None, async_req: Optional[bool]=None, **kwargs) -> Union[TransactionTemplate, Awaitable[TransactionTemplate]]:  # noqa: E501
         """[EXPERIMENTAL] GetTransactionTemplate: Get Transaction Template  # noqa: E501
 
         Gets the Transaction Template that for the instrument event type within the scope specified.  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
 
-        >>> thread = api.get_transaction_template(instrument_event_type, scope, as_at, async_req=True)
+        >>> thread = api.get_transaction_template(instrument_event_type, instrument_type, scope, as_at, async_req=True)
         >>> result = thread.get()
 
         :param instrument_event_type: The instrument event type of the transaction template (required)
         :type instrument_event_type: str
-        :param scope: The scope in which the template lies. When not supplied the scope is 'default'.
+        :param instrument_type: The instrument type of the transaction template. The combination of the instrument              event type, instrument type and scope uniquely identifies a transaction template (required)
+        :type instrument_type: str
+        :param scope: The scope in which the template lies. When not supplied the scope is 'default'. (required)
         :type scope: str
         :param as_at: The AsAt time of the requested Transaction Template
         :type as_at: datetime
@@ -274,22 +276,24 @@ class InstrumentEventTypesApi:
             raise ValueError(message)
         if async_req is not None:
             kwargs['async_req'] = async_req
-        return self.get_transaction_template_with_http_info(instrument_event_type, scope, as_at, **kwargs)  # noqa: E501
+        return self.get_transaction_template_with_http_info(instrument_event_type, instrument_type, scope, as_at, **kwargs)  # noqa: E501
 
     @validate_arguments
-    def get_transaction_template_with_http_info(self, instrument_event_type : Annotated[StrictStr, Field(..., description="The instrument event type of the transaction template")], scope : Annotated[Optional[StrictStr], Field(description="The scope in which the template lies. When not supplied the scope is 'default'.")] = None, as_at : Annotated[Optional[datetime], Field(description="The AsAt time of the requested Transaction Template")] = None, **kwargs) -> ApiResponse:  # noqa: E501
+    def get_transaction_template_with_http_info(self, instrument_event_type : Annotated[StrictStr, Field(..., description="The instrument event type of the transaction template")], instrument_type : Annotated[StrictStr, Field(..., description="The instrument type of the transaction template. The combination of the instrument              event type, instrument type and scope uniquely identifies a transaction template")], scope : Annotated[constr(strict=True, max_length=64, min_length=1), Field(..., description="The scope in which the template lies. When not supplied the scope is 'default'.")], as_at : Annotated[Optional[datetime], Field(description="The AsAt time of the requested Transaction Template")] = None, **kwargs) -> ApiResponse:  # noqa: E501
         """[EXPERIMENTAL] GetTransactionTemplate: Get Transaction Template  # noqa: E501
 
         Gets the Transaction Template that for the instrument event type within the scope specified.  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
 
-        >>> thread = api.get_transaction_template_with_http_info(instrument_event_type, scope, as_at, async_req=True)
+        >>> thread = api.get_transaction_template_with_http_info(instrument_event_type, instrument_type, scope, as_at, async_req=True)
         >>> result = thread.get()
 
         :param instrument_event_type: The instrument event type of the transaction template (required)
         :type instrument_event_type: str
-        :param scope: The scope in which the template lies. When not supplied the scope is 'default'.
+        :param instrument_type: The instrument type of the transaction template. The combination of the instrument              event type, instrument type and scope uniquely identifies a transaction template (required)
+        :type instrument_type: str
+        :param scope: The scope in which the template lies. When not supplied the scope is 'default'. (required)
         :type scope: str
         :param as_at: The AsAt time of the requested Transaction Template
         :type as_at: datetime
@@ -322,6 +326,7 @@ class InstrumentEventTypesApi:
 
         _all_params = [
             'instrument_event_type',
+            'instrument_type',
             'scope',
             'as_at'
         ]
@@ -354,12 +359,15 @@ class InstrumentEventTypesApi:
         if _params['instrument_event_type']:
             _path_params['instrumentEventType'] = _params['instrument_event_type']
 
+        if _params['instrument_type']:
+            _path_params['instrumentType'] = _params['instrument_type']
+
+        if _params['scope']:
+            _path_params['scope'] = _params['scope']
+
 
         # process the query parameters
         _query_params = []
-        if _params.get('scope') is not None:  # noqa: E501
-            _query_params.append(('scope', _params['scope']))
-
         if _params.get('as_at') is not None:  # noqa: E501
             if isinstance(_params['as_at'], datetime):
                 _query_params.append(('asAt', _params['as_at'].strftime(self.api_client.configuration.datetime_format)))
@@ -386,7 +394,7 @@ class InstrumentEventTypesApi:
         }
 
         return self.api_client.call_api(
-            '/api/instrumenteventtypes/{instrumentEventType}/transactiontemplates', 'GET',
+            '/api/instrumenteventtypes/{instrumentEventType}/transactiontemplates/{instrumentType}/{scope}', 'GET',
             _path_params,
             _query_params,
             _header_params,
@@ -403,24 +411,26 @@ class InstrumentEventTypesApi:
             _request_auth=_params.get('_request_auth'))
 
     @overload
-    async def get_transaction_template_specification(self, instrument_event_type : Annotated[StrictStr, Field(..., description="The requested instrument event type.")], **kwargs) -> TransactionTemplateSpecification:  # noqa: E501
+    async def get_transaction_template_specification(self, instrument_type : Annotated[StrictStr, Field(..., description="The requested instrument type.")], instrument_event_type : Annotated[StrictStr, Field(..., description="The requested instrument event type.")], **kwargs) -> TransactionTemplateSpecification:  # noqa: E501
         ...
 
     @overload
-    def get_transaction_template_specification(self, instrument_event_type : Annotated[StrictStr, Field(..., description="The requested instrument event type.")], async_req: Optional[bool]=True, **kwargs) -> TransactionTemplateSpecification:  # noqa: E501
+    def get_transaction_template_specification(self, instrument_type : Annotated[StrictStr, Field(..., description="The requested instrument type.")], instrument_event_type : Annotated[StrictStr, Field(..., description="The requested instrument event type.")], async_req: Optional[bool]=True, **kwargs) -> TransactionTemplateSpecification:  # noqa: E501
         ...
 
     @validate_arguments
-    def get_transaction_template_specification(self, instrument_event_type : Annotated[StrictStr, Field(..., description="The requested instrument event type.")], async_req: Optional[bool]=None, **kwargs) -> Union[TransactionTemplateSpecification, Awaitable[TransactionTemplateSpecification]]:  # noqa: E501
+    def get_transaction_template_specification(self, instrument_type : Annotated[StrictStr, Field(..., description="The requested instrument type.")], instrument_event_type : Annotated[StrictStr, Field(..., description="The requested instrument event type.")], async_req: Optional[bool]=None, **kwargs) -> Union[TransactionTemplateSpecification, Awaitable[TransactionTemplateSpecification]]:  # noqa: E501
         """[EXPERIMENTAL] GetTransactionTemplateSpecification: Get Transaction Template Specification.  # noqa: E501
 
         Retrieve the transaction template specification for a particular event type.  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
 
-        >>> thread = api.get_transaction_template_specification(instrument_event_type, async_req=True)
+        >>> thread = api.get_transaction_template_specification(instrument_type, instrument_event_type, async_req=True)
         >>> result = thread.get()
 
+        :param instrument_type: The requested instrument type. (required)
+        :type instrument_type: str
         :param instrument_event_type: The requested instrument event type. (required)
         :type instrument_event_type: str
         :param async_req: Whether to execute the request asynchronously.
@@ -440,19 +450,21 @@ class InstrumentEventTypesApi:
             raise ValueError(message)
         if async_req is not None:
             kwargs['async_req'] = async_req
-        return self.get_transaction_template_specification_with_http_info(instrument_event_type, **kwargs)  # noqa: E501
+        return self.get_transaction_template_specification_with_http_info(instrument_type, instrument_event_type, **kwargs)  # noqa: E501
 
     @validate_arguments
-    def get_transaction_template_specification_with_http_info(self, instrument_event_type : Annotated[StrictStr, Field(..., description="The requested instrument event type.")], **kwargs) -> ApiResponse:  # noqa: E501
+    def get_transaction_template_specification_with_http_info(self, instrument_type : Annotated[StrictStr, Field(..., description="The requested instrument type.")], instrument_event_type : Annotated[StrictStr, Field(..., description="The requested instrument event type.")], **kwargs) -> ApiResponse:  # noqa: E501
         """[EXPERIMENTAL] GetTransactionTemplateSpecification: Get Transaction Template Specification.  # noqa: E501
 
         Retrieve the transaction template specification for a particular event type.  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
 
-        >>> thread = api.get_transaction_template_specification_with_http_info(instrument_event_type, async_req=True)
+        >>> thread = api.get_transaction_template_specification_with_http_info(instrument_type, instrument_event_type, async_req=True)
         >>> result = thread.get()
 
+        :param instrument_type: The requested instrument type. (required)
+        :type instrument_type: str
         :param instrument_event_type: The requested instrument event type. (required)
         :type instrument_event_type: str
         :param async_req: Whether to execute the request asynchronously.
@@ -483,6 +495,7 @@ class InstrumentEventTypesApi:
         _params = locals()
 
         _all_params = [
+            'instrument_type',
             'instrument_event_type'
         ]
         _all_params.extend(
@@ -511,6 +524,9 @@ class InstrumentEventTypesApi:
 
         # process the path parameters
         _path_params = {}
+        if _params['instrument_type']:
+            _path_params['instrumentType'] = _params['instrument_type']
+
         if _params['instrument_event_type']:
             _path_params['instrumentEventType'] = _params['instrument_event_type']
 
@@ -537,7 +553,7 @@ class InstrumentEventTypesApi:
         }
 
         return self.api_client.call_api(
-            '/api/instrumenteventtypes/{instrumentEventType}/transactiontemplatespecification', 'GET',
+            '/api/instrumenteventtypes/{instrumentEventType}/transactiontemplatespecification/{instrumentType}', 'GET',
             _path_params,
             _query_params,
             _header_params,

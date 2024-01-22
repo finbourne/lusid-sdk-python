@@ -27,12 +27,13 @@ class TransactionTemplate(BaseModel):
     """
     TransactionTemplate
     """
+    instrument_type: constr(strict=True, min_length=1) = Field(..., alias="instrumentType", description="A value that represents the instrument type.")
     instrument_event_type: constr(strict=True, min_length=1) = Field(..., alias="instrumentEventType", description="A value that represents the instrument event type.")
     description: constr(strict=True, min_length=1) = Field(..., description="The description of the transaction template.")
     scope: constr(strict=True, min_length=1) = Field(..., description="The scope in which the transaction template resides.")
     component_transactions: conlist(ComponentTransaction) = Field(..., alias="componentTransactions", description="A set of component transactions that relate to the template to be created.")
     links: Optional[conlist(Link)] = None
-    __properties = ["instrumentEventType", "description", "scope", "componentTransactions", "links"]
+    __properties = ["instrumentType", "instrumentEventType", "description", "scope", "componentTransactions", "links"]
 
     class Config:
         """Pydantic configuration"""
@@ -89,6 +90,7 @@ class TransactionTemplate(BaseModel):
             return TransactionTemplate.parse_obj(obj)
 
         _obj = TransactionTemplate.parse_obj({
+            "instrument_type": obj.get("instrumentType"),
             "instrument_event_type": obj.get("instrumentEventType"),
             "description": obj.get("description"),
             "scope": obj.get("scope"),

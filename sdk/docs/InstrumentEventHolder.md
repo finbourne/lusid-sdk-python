@@ -15,6 +15,7 @@ Name | Type | Description | Notes
 **instrument_event** | [**InstrumentEvent**](InstrumentEvent.md) |  | 
 **properties** | [**List[PerpetualProperty]**](PerpetualProperty.md) | The properties attached to this instrument event. | [optional] 
 **sequence_number** | **int** | The order of the instrument event relative others on the same date (0 being processed first). Must be non negative. | [optional] 
+**participation_type** | **str** | Is participation in this event Mandatory, MandatoryWithChoices, or Voluntary. | [optional] [default to 'Mandatory']
 
 ## Example
 

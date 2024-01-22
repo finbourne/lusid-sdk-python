@@ -27,7 +27,7 @@ class CashElection(BaseModel):
     """
     election_key: constr(strict=True, min_length=1) = Field(..., alias="electionKey", description="Unique key used to identify this election.")
     exchange_rate: Optional[Union[StrictFloat, StrictInt]] = Field(None, alias="exchangeRate", description="The exchange rate if this is not the declared CashElection.  Defaults to 1 if Election is Declared.")
-    dividend_rate: Union[StrictFloat, StrictInt] = Field(..., alias="dividendRate", description="The payment rate for this CashElection.")
+    dividend_rate: Optional[Union[StrictFloat, StrictInt]] = Field(None, alias="dividendRate", description="The payment rate for this CashElection.")
     is_chosen: Optional[StrictBool] = Field(None, alias="isChosen", description="Has this election been chosen.  Only one Election may be Chosen per Event.")
     is_declared: Optional[StrictBool] = Field(None, alias="isDeclared", description="Is this the declared CashElection.  Only one Election may be Declared per Event.")
     is_default: Optional[StrictBool] = Field(None, alias="isDefault", description="Is this election the default.  Only one Election may be Default per Event")
@@ -58,6 +58,11 @@ class CashElection(BaseModel):
                           exclude={
                           },
                           exclude_none=True)
+        # set to None if dividend_rate (nullable) is None
+        # and __fields_set__ contains the field
+        if self.dividend_rate is None and "dividend_rate" in self.__fields_set__:
+            _dict['dividendRate'] = None
+
         return _dict
 
     @classmethod

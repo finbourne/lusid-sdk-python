@@ -8,7 +8,7 @@ Name | Type | Description | Notes
 **code** | **str** | The code given for the Abor. | 
 **display_name** | **str** | The name of the Abor. | 
 **description** | **str** | The description for the Abor. | [optional] 
-**portfolio_ids** | [**List[PortfolioEntityId]**](PortfolioEntityId.md) | The list with the portfolio ids which are part of the Abor. | 
+**portfolio_ids** | [**List[PortfolioEntityId]**](PortfolioEntityId.md) | The list with the portfolio ids which are part of the Abor. Note: These must all have the same base currency. | 
 **abor_configuration_id** | [**ResourceId**](ResourceId.md) |  | 
 **properties** | [**Dict[str, ModelProperty]**](ModelProperty.md) | A set of properties for the Abor. | [optional] 
 

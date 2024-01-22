@@ -4,6 +4,7 @@
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
+**instrument_type** | **str** | A value that represents the instrument type. | 
 **instrument_event_type** | **str** | A value that represents the instrument event type. | 
 **description** | **str** | The description of the transaction template. | 
 **scope** | **str** | The scope in which the transaction template resides. | 

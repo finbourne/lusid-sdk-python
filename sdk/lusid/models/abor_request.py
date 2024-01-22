@@ -31,7 +31,7 @@ class AborRequest(BaseModel):
     code: constr(strict=True, max_length=64, min_length=1) = Field(..., description="The code given for the Abor.")
     display_name: constr(strict=True, max_length=256, min_length=1) = Field(..., alias="displayName", description="The name of the Abor.")
     description: Optional[constr(strict=True, max_length=1024, min_length=0)] = Field(None, description="The description for the Abor.")
-    portfolio_ids: conlist(PortfolioEntityId) = Field(..., alias="portfolioIds", description="The list with the portfolio ids which are part of the Abor.")
+    portfolio_ids: conlist(PortfolioEntityId) = Field(..., alias="portfolioIds", description="The list with the portfolio ids which are part of the Abor. Note: These must all have the same base currency.")
     abor_configuration_id: ResourceId = Field(..., alias="aborConfigurationId")
     properties: Optional[Dict[str, ModelProperty]] = Field(None, description="A set of properties for the Abor.")
     __properties = ["code", "displayName", "description", "portfolioIds", "aborConfigurationId", "properties"]
