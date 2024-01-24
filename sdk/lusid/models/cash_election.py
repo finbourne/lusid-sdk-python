@@ -58,6 +58,11 @@ class CashElection(BaseModel):
                           exclude={
                           },
                           exclude_none=True)
+        # set to None if exchange_rate (nullable) is None
+        # and __fields_set__ contains the field
+        if self.exchange_rate is None and "exchange_rate" in self.__fields_set__:
+            _dict['exchangeRate'] = None
+
         # set to None if dividend_rate (nullable) is None
         # and __fields_set__ contains the field
         if self.dividend_rate is None and "dividend_rate" in self.__fields_set__:

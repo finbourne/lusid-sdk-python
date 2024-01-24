@@ -19,15 +19,14 @@ import json
 
 
 from typing import Any, Dict
-from pydantic import Field, StrictStr, validator
+from pydantic import Field, StrictStr, constr, validator
 from lusid.models.compliance_parameter import ComplianceParameter
-from lusid.models.resource_id import ResourceId
 
-class PropertyKeyListComplianceParameter(ComplianceParameter):
+class GroupFilterPredicateComplianceParameter(ComplianceParameter):
     """
-    PropertyKeyListComplianceParameter
+    GroupFilterPredicateComplianceParameter
     """
-    value: ResourceId = Field(...)
+    value: constr(strict=True, min_length=1) = Field(...)
     compliance_parameter_type: StrictStr = Field(..., alias="complianceParameterType", description="The parameter type. The available values are: BoolComplianceParameter, StringComplianceParameter, DecimalComplianceParameter, DateTimeComplianceParameter, PropertyKeyComplianceParameter, AddressKeyComplianceParameter, PortfolioIdComplianceParameter, PortfolioGroupIdComplianceParameter, StringListComplianceParameter, BoolListComplianceParameter, DateTimeListComplianceParameter, DecimalListComplianceParameter, PropertyKeyListComplianceParameter, AddressKeyListComplianceParameter, PortfolioIdListComplianceParameter, PortfolioGroupIdListComplianceParameter, InstrumentListComplianceParameter, FilterPredicateComplianceParameter, GroupFilterPredicateComplianceParameter")
     additional_properties: Dict[str, Any] = {}
     __properties = ["complianceParameterType", "value"]
@@ -53,8 +52,8 @@ class PropertyKeyListComplianceParameter(ComplianceParameter):
         return json.dumps(self.to_dict())
 
     @classmethod
-    def from_json(cls, json_str: str) -> PropertyKeyListComplianceParameter:
-        """Create an instance of PropertyKeyListComplianceParameter from a JSON string"""
+    def from_json(cls, json_str: str) -> GroupFilterPredicateComplianceParameter:
+        """Create an instance of GroupFilterPredicateComplianceParameter from a JSON string"""
         return cls.from_dict(json.loads(json_str))
 
     def to_dict(self):
@@ -64,9 +63,6 @@ class PropertyKeyListComplianceParameter(ComplianceParameter):
                             "additional_properties"
                           },
                           exclude_none=True)
-        # override the default output from pydantic by calling `to_dict()` of value
-        if self.value:
-            _dict['value'] = self.value.to_dict()
         # puts key-value pairs in additional_properties in the top level
         if self.additional_properties is not None:
             for _key, _value in self.additional_properties.items():
@@ -75,17 +71,17 @@ class PropertyKeyListComplianceParameter(ComplianceParameter):
         return _dict
 
     @classmethod
-    def from_dict(cls, obj: dict) -> PropertyKeyListComplianceParameter:
-        """Create an instance of PropertyKeyListComplianceParameter from a dict"""
+    def from_dict(cls, obj: dict) -> GroupFilterPredicateComplianceParameter:
+        """Create an instance of GroupFilterPredicateComplianceParameter from a dict"""
         if obj is None:
             return None
 
         if not isinstance(obj, dict):
-            return PropertyKeyListComplianceParameter.parse_obj(obj)
+            return GroupFilterPredicateComplianceParameter.parse_obj(obj)
 
-        _obj = PropertyKeyListComplianceParameter.parse_obj({
+        _obj = GroupFilterPredicateComplianceParameter.parse_obj({
             "compliance_parameter_type": obj.get("complianceParameterType"),
-            "value": ResourceId.from_dict(obj.get("value")) if obj.get("value") is not None else None
+            "value": obj.get("value")
         })
         # store additional fields in additional_properties
         for _key in obj.keys():

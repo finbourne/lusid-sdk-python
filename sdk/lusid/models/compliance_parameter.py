@@ -26,14 +26,14 @@ class ComplianceParameter(BaseModel):
     """
     ComplianceParameter
     """
-    compliance_parameter_type: StrictStr = Field(..., alias="complianceParameterType", description="The parameter type. The available values are: BoolComplianceParameter, StringComplianceParameter, DecimalComplianceParameter, DateTimeComplianceParameter, PropertyKeyComplianceParameter, AddressKeyComplianceParameter, PortfolioIdComplianceParameter, PortfolioGroupIdComplianceParameter, StringListComplianceParameter, BoolListComplianceParameter, DateTimeListComplianceParameter, DecimalListComplianceParameter, PropertyKeyListComplianceParameter, AddressKeyListComplianceParameter, PortfolioIdListComplianceParameter, PortfolioGroupIdListComplianceParameter, InstrumentListComplianceParameter, FilterPredicateComplianceParameter")
+    compliance_parameter_type: StrictStr = Field(..., alias="complianceParameterType", description="The parameter type. The available values are: BoolComplianceParameter, StringComplianceParameter, DecimalComplianceParameter, DateTimeComplianceParameter, PropertyKeyComplianceParameter, AddressKeyComplianceParameter, PortfolioIdComplianceParameter, PortfolioGroupIdComplianceParameter, StringListComplianceParameter, BoolListComplianceParameter, DateTimeListComplianceParameter, DecimalListComplianceParameter, PropertyKeyListComplianceParameter, AddressKeyListComplianceParameter, PortfolioIdListComplianceParameter, PortfolioGroupIdListComplianceParameter, InstrumentListComplianceParameter, FilterPredicateComplianceParameter, GroupFilterPredicateComplianceParameter")
     __properties = ["complianceParameterType"]
 
     @validator('compliance_parameter_type')
     def compliance_parameter_type_validate_enum(cls, value):
         """Validates the enum"""
-        if value not in ('BoolComplianceParameter', 'StringComplianceParameter', 'DecimalComplianceParameter', 'DateTimeComplianceParameter', 'PropertyKeyComplianceParameter', 'AddressKeyComplianceParameter', 'PortfolioIdComplianceParameter', 'PortfolioGroupIdComplianceParameter', 'StringListComplianceParameter', 'BoolListComplianceParameter', 'DateTimeListComplianceParameter', 'DecimalListComplianceParameter', 'PropertyKeyListComplianceParameter', 'AddressKeyListComplianceParameter', 'PortfolioIdListComplianceParameter', 'PortfolioGroupIdListComplianceParameter', 'InstrumentListComplianceParameter', 'FilterPredicateComplianceParameter'):
-            raise ValueError("must be one of enum values ('BoolComplianceParameter', 'StringComplianceParameter', 'DecimalComplianceParameter', 'DateTimeComplianceParameter', 'PropertyKeyComplianceParameter', 'AddressKeyComplianceParameter', 'PortfolioIdComplianceParameter', 'PortfolioGroupIdComplianceParameter', 'StringListComplianceParameter', 'BoolListComplianceParameter', 'DateTimeListComplianceParameter', 'DecimalListComplianceParameter', 'PropertyKeyListComplianceParameter', 'AddressKeyListComplianceParameter', 'PortfolioIdListComplianceParameter', 'PortfolioGroupIdListComplianceParameter', 'InstrumentListComplianceParameter', 'FilterPredicateComplianceParameter')")
+        if value not in ('BoolComplianceParameter', 'StringComplianceParameter', 'DecimalComplianceParameter', 'DateTimeComplianceParameter', 'PropertyKeyComplianceParameter', 'AddressKeyComplianceParameter', 'PortfolioIdComplianceParameter', 'PortfolioGroupIdComplianceParameter', 'StringListComplianceParameter', 'BoolListComplianceParameter', 'DateTimeListComplianceParameter', 'DecimalListComplianceParameter', 'PropertyKeyListComplianceParameter', 'AddressKeyListComplianceParameter', 'PortfolioIdListComplianceParameter', 'PortfolioGroupIdListComplianceParameter', 'InstrumentListComplianceParameter', 'FilterPredicateComplianceParameter', 'GroupFilterPredicateComplianceParameter'):
+            raise ValueError("must be one of enum values ('BoolComplianceParameter', 'StringComplianceParameter', 'DecimalComplianceParameter', 'DateTimeComplianceParameter', 'PropertyKeyComplianceParameter', 'AddressKeyComplianceParameter', 'PortfolioIdComplianceParameter', 'PortfolioGroupIdComplianceParameter', 'StringListComplianceParameter', 'BoolListComplianceParameter', 'DateTimeListComplianceParameter', 'DecimalListComplianceParameter', 'PropertyKeyListComplianceParameter', 'AddressKeyListComplianceParameter', 'PortfolioIdListComplianceParameter', 'PortfolioGroupIdListComplianceParameter', 'InstrumentListComplianceParameter', 'FilterPredicateComplianceParameter', 'GroupFilterPredicateComplianceParameter')")
         return value
 
     class Config:
@@ -55,6 +55,7 @@ class ComplianceParameter(BaseModel):
         'DecimalComplianceParameter': 'DecimalComplianceParameter',
         'DecimalListComplianceParameter': 'DecimalListComplianceParameter',
         'FilterPredicateComplianceParameter': 'FilterPredicateComplianceParameter',
+        'GroupFilterPredicateComplianceParameter': 'GroupFilterPredicateComplianceParameter',
         'InstrumentListComplianceParameter': 'InstrumentListComplianceParameter',
         'PortfolioGroupIdComplianceParameter': 'PortfolioGroupIdComplianceParameter',
         'PortfolioGroupIdListComplianceParameter': 'PortfolioGroupIdListComplianceParameter',
@@ -84,7 +85,7 @@ class ComplianceParameter(BaseModel):
         return json.dumps(self.to_dict())
 
     @classmethod
-    def from_json(cls, json_str: str) -> Union(AddressKeyComplianceParameter, AddressKeyListComplianceParameter, BoolComplianceParameter, BoolListComplianceParameter, DateTimeComplianceParameter, DateTimeListComplianceParameter, DecimalComplianceParameter, DecimalListComplianceParameter, FilterPredicateComplianceParameter, InstrumentListComplianceParameter, PortfolioGroupIdComplianceParameter, PortfolioGroupIdListComplianceParameter, PortfolioIdComplianceParameter, PortfolioIdListComplianceParameter, PropertyKeyComplianceParameter, PropertyKeyListComplianceParameter, StringComplianceParameter, StringListComplianceParameter):
+    def from_json(cls, json_str: str) -> Union(AddressKeyComplianceParameter, AddressKeyListComplianceParameter, BoolComplianceParameter, BoolListComplianceParameter, DateTimeComplianceParameter, DateTimeListComplianceParameter, DecimalComplianceParameter, DecimalListComplianceParameter, FilterPredicateComplianceParameter, GroupFilterPredicateComplianceParameter, InstrumentListComplianceParameter, PortfolioGroupIdComplianceParameter, PortfolioGroupIdListComplianceParameter, PortfolioIdComplianceParameter, PortfolioIdListComplianceParameter, PropertyKeyComplianceParameter, PropertyKeyListComplianceParameter, StringComplianceParameter, StringListComplianceParameter):
         """Create an instance of ComplianceParameter from a JSON string"""
         return cls.from_dict(json.loads(json_str))
 
@@ -97,7 +98,7 @@ class ComplianceParameter(BaseModel):
         return _dict
 
     @classmethod
-    def from_dict(cls, obj: dict) -> Union(AddressKeyComplianceParameter, AddressKeyListComplianceParameter, BoolComplianceParameter, BoolListComplianceParameter, DateTimeComplianceParameter, DateTimeListComplianceParameter, DecimalComplianceParameter, DecimalListComplianceParameter, FilterPredicateComplianceParameter, InstrumentListComplianceParameter, PortfolioGroupIdComplianceParameter, PortfolioGroupIdListComplianceParameter, PortfolioIdComplianceParameter, PortfolioIdListComplianceParameter, PropertyKeyComplianceParameter, PropertyKeyListComplianceParameter, StringComplianceParameter, StringListComplianceParameter):
+    def from_dict(cls, obj: dict) -> Union(AddressKeyComplianceParameter, AddressKeyListComplianceParameter, BoolComplianceParameter, BoolListComplianceParameter, DateTimeComplianceParameter, DateTimeListComplianceParameter, DecimalComplianceParameter, DecimalListComplianceParameter, FilterPredicateComplianceParameter, GroupFilterPredicateComplianceParameter, InstrumentListComplianceParameter, PortfolioGroupIdComplianceParameter, PortfolioGroupIdListComplianceParameter, PortfolioIdComplianceParameter, PortfolioIdListComplianceParameter, PropertyKeyComplianceParameter, PropertyKeyListComplianceParameter, StringComplianceParameter, StringListComplianceParameter):
         """Create an instance of ComplianceParameter from a dict"""
         # look up the object type based on discriminator mapping
         object_type = cls.get_discriminator_value(obj)
