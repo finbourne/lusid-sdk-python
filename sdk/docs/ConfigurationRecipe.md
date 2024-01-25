@@ -13,6 +13,7 @@ Name | Type | Description | Notes
 **inherited_recipes** | [**List[ResourceId]**](ResourceId.md) | A list of parent recipes (scope,code) that can be used to share functionality between recipes. For instance one might use common recipes to set up  pricing for individual asset classes, e.g. rates or credit, and then combine them into a single recipe to be used by an exotics desk in conjunction with  some overrides that it requires for models or other pricing options. | [optional] 
 **description** | **str** | User can assign a description to understand more humanly the recipe. | [optional] 
 **holding** | [**HoldingContext**](HoldingContext.md) |  | [optional] 
+**translation** | [**TranslationContext**](TranslationContext.md) |  | [optional] 
 
 ## Example
 

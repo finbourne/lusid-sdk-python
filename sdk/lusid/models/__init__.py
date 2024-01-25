@@ -716,6 +716,7 @@ from lusid.models.scaling_methodology import ScalingMethodology
 from lusid.models.schedule import Schedule
 from lusid.models.schedule_type import ScheduleType
 from lusid.models.scope_definition import ScopeDefinition
+from lusid.models.script_map_reference import ScriptMapReference
 from lusid.models.security_election import SecurityElection
 from lusid.models.sequence_definition import SequenceDefinition
 from lusid.models.set_legal_entity_identifiers_request import SetLegalEntityIdentifiersRequest
@@ -792,6 +793,7 @@ from lusid.models.translate_instrument_definitions_request import TranslateInstr
 from lusid.models.translate_instrument_definitions_response import TranslateInstrumentDefinitionsResponse
 from lusid.models.translate_trade_ticket_request import TranslateTradeTicketRequest
 from lusid.models.translate_trade_tickets_response import TranslateTradeTicketsResponse
+from lusid.models.translation_context import TranslationContext
 from lusid.models.translation_input import TranslationInput
 from lusid.models.translation_result import TranslationResult
 from lusid.models.translation_script import TranslationScript
