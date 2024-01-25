@@ -19,24 +19,17 @@ import json
 
 
 from typing import Any, Dict
-from pydantic import Field, StrictStr, constr, validator
+from pydantic import Field, StrictStr, validator
 from lusid.models.compliance_parameter import ComplianceParameter
 
 class AddressKeyComplianceParameter(ComplianceParameter):
     """
     AddressKeyComplianceParameter
     """
-    value: constr(strict=True) = Field(..., description="The key that uniquely identifies a queryable address in Lusid.")
+    value: StrictStr = Field(..., description="The key that uniquely identifies a queryable address in Lusid.")
     compliance_parameter_type: StrictStr = Field(..., alias="complianceParameterType", description="The parameter type. The available values are: BoolComplianceParameter, StringComplianceParameter, DecimalComplianceParameter, DateTimeComplianceParameter, PropertyKeyComplianceParameter, AddressKeyComplianceParameter, PortfolioIdComplianceParameter, PortfolioGroupIdComplianceParameter, StringListComplianceParameter, BoolListComplianceParameter, DateTimeListComplianceParameter, DecimalListComplianceParameter, PropertyKeyListComplianceParameter, AddressKeyListComplianceParameter, PortfolioIdListComplianceParameter, PortfolioGroupIdListComplianceParameter, InstrumentListComplianceParameter, FilterPredicateComplianceParameter, GroupFilterPredicateComplianceParameter")
     additional_properties: Dict[str, Any] = {}
     __properties = ["complianceParameterType", "value"]
-
-    @validator('value')
-    def value_validate_regular_expression(cls, value):
-        """Validates the regular expression"""
-        if not re.match(r"^[a-zA-Z0-9\-_]+$", value):
-            raise ValueError(r"must validate the regular expression /^[a-zA-Z0-9\-_]+$/")
-        return value
 
     @validator('compliance_parameter_type')
     def compliance_parameter_type_validate_enum(cls, value):
