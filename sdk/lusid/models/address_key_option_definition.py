@@ -27,10 +27,11 @@ class AddressKeyOptionDefinition(BaseModel):
     """
     name: constr(strict=True, min_length=1) = Field(..., description="The name of the option")
     type: constr(strict=True, min_length=1) = Field(..., description="The type of the option")
+    description: constr(strict=True, min_length=1) = Field(..., description="The description of the option")
     optional: StrictBool = Field(..., description="Is this option required or optional?")
     allowed_value_set: Optional[conlist(StrictStr)] = Field(None, alias="allowedValueSet", description="If the option is a string or enum, the allowed set of values it can take.")
     default_value: Optional[StrictStr] = Field(None, alias="defaultValue", description="If the option is not required, what is the default value?")
-    __properties = ["name", "type", "optional", "allowedValueSet", "defaultValue"]
+    __properties = ["name", "type", "description", "optional", "allowedValueSet", "defaultValue"]
 
     class Config:
         """Pydantic configuration"""
@@ -80,6 +81,7 @@ class AddressKeyOptionDefinition(BaseModel):
         _obj = AddressKeyOptionDefinition.parse_obj({
             "name": obj.get("name"),
             "type": obj.get("type"),
+            "description": obj.get("description"),
             "optional": obj.get("optional"),
             "allowed_value_set": obj.get("allowedValueSet"),
             "default_value": obj.get("defaultValue")

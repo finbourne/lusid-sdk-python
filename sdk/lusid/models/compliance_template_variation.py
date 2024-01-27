@@ -20,6 +20,7 @@ import json
 
 from typing import Any, Dict, List
 from pydantic import BaseModel, Field, conlist, constr
+from lusid.models.compliance_step import ComplianceStep
 from lusid.models.compliance_template_parameter import ComplianceTemplateParameter
 from lusid.models.perpetual_property import PerpetualProperty
 from lusid.models.resource_id import ResourceId
@@ -33,7 +34,8 @@ class ComplianceTemplateVariation(BaseModel):
     required_parameters: conlist(ComplianceTemplateParameter) = Field(..., alias="requiredParameters", description="A parameter required by a Compliance Template Variation")
     properties: Dict[str, PerpetualProperty] = Field(..., description="Properties associated with the Compliance Template Variation")
     accepted_address_keys: ResourceId = Field(..., alias="acceptedAddressKeys")
-    __properties = ["label", "description", "requiredParameters", "properties", "acceptedAddressKeys"]
+    steps: conlist(ComplianceStep) = Field(..., description="The steps expressed in this template, with their required parameters")
+    __properties = ["label", "description", "requiredParameters", "properties", "acceptedAddressKeys", "steps"]
 
     class Config:
         """Pydantic configuration"""
@@ -76,6 +78,13 @@ class ComplianceTemplateVariation(BaseModel):
         # override the default output from pydantic by calling `to_dict()` of accepted_address_keys
         if self.accepted_address_keys:
             _dict['acceptedAddressKeys'] = self.accepted_address_keys.to_dict()
+        # override the default output from pydantic by calling `to_dict()` of each item in steps (list)
+        _items = []
+        if self.steps:
+            for _item in self.steps:
+                if _item:
+                    _items.append(_item.to_dict())
+            _dict['steps'] = _items
         return _dict
 
     @classmethod
@@ -97,6 +106,7 @@ class ComplianceTemplateVariation(BaseModel):
             )
             if obj.get("properties") is not None
             else None,
-            "accepted_address_keys": ResourceId.from_dict(obj.get("acceptedAddressKeys")) if obj.get("acceptedAddressKeys") is not None else None
+            "accepted_address_keys": ResourceId.from_dict(obj.get("acceptedAddressKeys")) if obj.get("acceptedAddressKeys") is not None else None,
+            "steps": [ComplianceStep.from_dict(_item) for _item in obj.get("steps")] if obj.get("steps") is not None else None
         })
         return _obj

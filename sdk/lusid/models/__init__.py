@@ -87,6 +87,7 @@ from lusid.models.bond_principal_event import BondPrincipalEvent
 from lusid.models.book_transactions_response import BookTransactionsResponse
 from lusid.models.bool_compliance_parameter import BoolComplianceParameter
 from lusid.models.bool_list_compliance_parameter import BoolListComplianceParameter
+from lusid.models.branch_step import BranchStep
 from lusid.models.bucketed_cash_flow_request import BucketedCashFlowRequest
 from lusid.models.bucketed_cash_flow_response import BucketedCashFlowResponse
 from lusid.models.bucketing_schedule import BucketingSchedule
@@ -143,6 +144,8 @@ from lusid.models.compliance_rule_upsert_request import ComplianceRuleUpsertRequ
 from lusid.models.compliance_rule_upsert_response import ComplianceRuleUpsertResponse
 from lusid.models.compliance_run_info import ComplianceRunInfo
 from lusid.models.compliance_run_info_v2 import ComplianceRunInfoV2
+from lusid.models.compliance_step import ComplianceStep
+from lusid.models.compliance_step_type import ComplianceStepType
 from lusid.models.compliance_summary_rule_result import ComplianceSummaryRuleResult
 from lusid.models.compliance_summary_rule_result_request import ComplianceSummaryRuleResultRequest
 from lusid.models.compliance_template import ComplianceTemplate
@@ -287,6 +290,7 @@ from lusid.models.field_schema import FieldSchema
 from lusid.models.field_value import FieldValue
 from lusid.models.file_response import FileResponse
 from lusid.models.filter_predicate_compliance_parameter import FilterPredicateComplianceParameter
+from lusid.models.filter_step import FilterStep
 from lusid.models.fixed_leg import FixedLeg
 from lusid.models.fixed_leg_all_of_overrides import FixedLegAllOfOverrides
 from lusid.models.fixed_schedule import FixedSchedule
@@ -331,7 +335,9 @@ from lusid.models.get_recipe_response import GetRecipeResponse
 from lusid.models.get_reference_portfolio_constituents_response import GetReferencePortfolioConstituentsResponse
 from lusid.models.get_structured_result_data_response import GetStructuredResultDataResponse
 from lusid.models.get_virtual_document_response import GetVirtualDocumentResponse
+from lusid.models.group_by_step import GroupByStep
 from lusid.models.group_filter_predicate_compliance_parameter import GroupFilterPredicateComplianceParameter
+from lusid.models.group_filter_step import GroupFilterStep
 from lusid.models.group_of_market_data_key_rules import GroupOfMarketDataKeyRules
 from lusid.models.grouped_result_of_address_key import GroupedResultOfAddressKey
 from lusid.models.holding_adjustment import HoldingAdjustment
@@ -382,6 +388,7 @@ from lusid.models.instrument_search_property import InstrumentSearchProperty
 from lusid.models.instrument_type import InstrumentType
 from lusid.models.interest_rate_swap import InterestRateSwap
 from lusid.models.interest_rate_swaption import InterestRateSwaption
+from lusid.models.intermediate_compliance_step import IntermediateComplianceStep
 from lusid.models.ir_vol_cube_data import IrVolCubeData
 from lusid.models.ir_vol_dependency import IrVolDependency
 from lusid.models.is_business_day_response import IsBusinessDayResponse
@@ -601,6 +608,7 @@ from lusid.models.realised_gain_loss import RealisedGainLoss
 from lusid.models.recipe_block import RecipeBlock
 from lusid.models.recipe_composer import RecipeComposer
 from lusid.models.recipe_value import RecipeValue
+from lusid.models.recombine_step import RecombineStep
 from lusid.models.reconcile_date_time_rule import ReconcileDateTimeRule
 from lusid.models.reconcile_numeric_rule import ReconcileNumericRule
 from lusid.models.reconcile_string_rule import ReconcileStringRule

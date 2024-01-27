@@ -9,6 +9,7 @@ Name | Type | Description | Notes
 **required_parameters** | [**List[ComplianceTemplateParameter]**](ComplianceTemplateParameter.md) | A parameter required by a Compliance Template Variation | 
 **properties** | [**Dict[str, PerpetualProperty]**](PerpetualProperty.md) | Properties associated with the Compliance Template Variation | 
 **accepted_address_keys** | [**ResourceId**](ResourceId.md) |  | 
+**steps** | [**List[ComplianceStep]**](ComplianceStep.md) | The steps expressed in this template, with their required parameters | 
 
 ## Example
 

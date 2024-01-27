@@ -1989,22 +1989,22 @@ class ChartOfAccountsApi:
             _request_auth=_params.get('_request_auth'))
 
     @overload
-    async def get_cleardown_module(self, scope : Annotated[constr(strict=True, max_length=64, min_length=1), Field(..., description="The scope of the Chart of Accounts.")], code : Annotated[constr(strict=True, max_length=64, min_length=1), Field(..., description="The code of the Chart of Accounts. Together with the scope this uniquely identifies the Chart of Accounts.")], cleardown_module_code : Annotated[constr(strict=True, max_length=64, min_length=1), Field(..., description="The code of the Cleardown Module.")], **kwargs) -> CleardownModuleResponse:  # noqa: E501
+    async def get_cleardown_module(self, scope : Annotated[constr(strict=True, max_length=64, min_length=1), Field(..., description="The scope of the Chart of Accounts.")], code : Annotated[constr(strict=True, max_length=64, min_length=1), Field(..., description="The code of the Chart of Accounts. Together with the scope this uniquely identifies the Chart of Accounts.")], cleardown_module_code : Annotated[constr(strict=True, max_length=64, min_length=1), Field(..., description="The code of the Cleardown Module.")], as_at : Annotated[Optional[datetime], Field(description="The asAt datetime at which to retrieve the Cleardown Module. Defaults to return the latest version of the Cleardown Module if not specified.")] = None, **kwargs) -> CleardownModuleResponse:  # noqa: E501
         ...
 
     @overload
-    def get_cleardown_module(self, scope : Annotated[constr(strict=True, max_length=64, min_length=1), Field(..., description="The scope of the Chart of Accounts.")], code : Annotated[constr(strict=True, max_length=64, min_length=1), Field(..., description="The code of the Chart of Accounts. Together with the scope this uniquely identifies the Chart of Accounts.")], cleardown_module_code : Annotated[constr(strict=True, max_length=64, min_length=1), Field(..., description="The code of the Cleardown Module.")], async_req: Optional[bool]=True, **kwargs) -> CleardownModuleResponse:  # noqa: E501
+    def get_cleardown_module(self, scope : Annotated[constr(strict=True, max_length=64, min_length=1), Field(..., description="The scope of the Chart of Accounts.")], code : Annotated[constr(strict=True, max_length=64, min_length=1), Field(..., description="The code of the Chart of Accounts. Together with the scope this uniquely identifies the Chart of Accounts.")], cleardown_module_code : Annotated[constr(strict=True, max_length=64, min_length=1), Field(..., description="The code of the Cleardown Module.")], as_at : Annotated[Optional[datetime], Field(description="The asAt datetime at which to retrieve the Cleardown Module. Defaults to return the latest version of the Cleardown Module if not specified.")] = None, async_req: Optional[bool]=True, **kwargs) -> CleardownModuleResponse:  # noqa: E501
         ...
 
     @validate_arguments
-    def get_cleardown_module(self, scope : Annotated[constr(strict=True, max_length=64, min_length=1), Field(..., description="The scope of the Chart of Accounts.")], code : Annotated[constr(strict=True, max_length=64, min_length=1), Field(..., description="The code of the Chart of Accounts. Together with the scope this uniquely identifies the Chart of Accounts.")], cleardown_module_code : Annotated[constr(strict=True, max_length=64, min_length=1), Field(..., description="The code of the Cleardown Module.")], async_req: Optional[bool]=None, **kwargs) -> Union[CleardownModuleResponse, Awaitable[CleardownModuleResponse]]:  # noqa: E501
+    def get_cleardown_module(self, scope : Annotated[constr(strict=True, max_length=64, min_length=1), Field(..., description="The scope of the Chart of Accounts.")], code : Annotated[constr(strict=True, max_length=64, min_length=1), Field(..., description="The code of the Chart of Accounts. Together with the scope this uniquely identifies the Chart of Accounts.")], cleardown_module_code : Annotated[constr(strict=True, max_length=64, min_length=1), Field(..., description="The code of the Cleardown Module.")], as_at : Annotated[Optional[datetime], Field(description="The asAt datetime at which to retrieve the Cleardown Module. Defaults to return the latest version of the Cleardown Module if not specified.")] = None, async_req: Optional[bool]=None, **kwargs) -> Union[CleardownModuleResponse, Awaitable[CleardownModuleResponse]]:  # noqa: E501
         """[EXPERIMENTAL] GetCleardownModule: Get a Cleardown Module  # noqa: E501
 
         Retrieve the definition of a Cleardown Module complete with its rules.  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
 
-        >>> thread = api.get_cleardown_module(scope, code, cleardown_module_code, async_req=True)
+        >>> thread = api.get_cleardown_module(scope, code, cleardown_module_code, as_at, async_req=True)
         >>> result = thread.get()
 
         :param scope: The scope of the Chart of Accounts. (required)
@@ -2013,6 +2013,8 @@ class ChartOfAccountsApi:
         :type code: str
         :param cleardown_module_code: The code of the Cleardown Module. (required)
         :type cleardown_module_code: str
+        :param as_at: The asAt datetime at which to retrieve the Cleardown Module. Defaults to return the latest version of the Cleardown Module if not specified.
+        :type as_at: datetime
         :param async_req: Whether to execute the request asynchronously.
         :type async_req: bool, optional
         :param _request_timeout: timeout setting for this request.
@@ -2030,17 +2032,17 @@ class ChartOfAccountsApi:
             raise ValueError(message)
         if async_req is not None:
             kwargs['async_req'] = async_req
-        return self.get_cleardown_module_with_http_info(scope, code, cleardown_module_code, **kwargs)  # noqa: E501
+        return self.get_cleardown_module_with_http_info(scope, code, cleardown_module_code, as_at, **kwargs)  # noqa: E501
 
     @validate_arguments
-    def get_cleardown_module_with_http_info(self, scope : Annotated[constr(strict=True, max_length=64, min_length=1), Field(..., description="The scope of the Chart of Accounts.")], code : Annotated[constr(strict=True, max_length=64, min_length=1), Field(..., description="The code of the Chart of Accounts. Together with the scope this uniquely identifies the Chart of Accounts.")], cleardown_module_code : Annotated[constr(strict=True, max_length=64, min_length=1), Field(..., description="The code of the Cleardown Module.")], **kwargs) -> ApiResponse:  # noqa: E501
+    def get_cleardown_module_with_http_info(self, scope : Annotated[constr(strict=True, max_length=64, min_length=1), Field(..., description="The scope of the Chart of Accounts.")], code : Annotated[constr(strict=True, max_length=64, min_length=1), Field(..., description="The code of the Chart of Accounts. Together with the scope this uniquely identifies the Chart of Accounts.")], cleardown_module_code : Annotated[constr(strict=True, max_length=64, min_length=1), Field(..., description="The code of the Cleardown Module.")], as_at : Annotated[Optional[datetime], Field(description="The asAt datetime at which to retrieve the Cleardown Module. Defaults to return the latest version of the Cleardown Module if not specified.")] = None, **kwargs) -> ApiResponse:  # noqa: E501
         """[EXPERIMENTAL] GetCleardownModule: Get a Cleardown Module  # noqa: E501
 
         Retrieve the definition of a Cleardown Module complete with its rules.  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
 
-        >>> thread = api.get_cleardown_module_with_http_info(scope, code, cleardown_module_code, async_req=True)
+        >>> thread = api.get_cleardown_module_with_http_info(scope, code, cleardown_module_code, as_at, async_req=True)
         >>> result = thread.get()
 
         :param scope: The scope of the Chart of Accounts. (required)
@@ -2049,6 +2051,8 @@ class ChartOfAccountsApi:
         :type code: str
         :param cleardown_module_code: The code of the Cleardown Module. (required)
         :type cleardown_module_code: str
+        :param as_at: The asAt datetime at which to retrieve the Cleardown Module. Defaults to return the latest version of the Cleardown Module if not specified.
+        :type as_at: datetime
         :param async_req: Whether to execute the request asynchronously.
         :type async_req: bool, optional
         :param _preload_content: if False, the ApiResponse.data will
@@ -2079,7 +2083,8 @@ class ChartOfAccountsApi:
         _all_params = [
             'scope',
             'code',
-            'cleardown_module_code'
+            'cleardown_module_code',
+            'as_at'
         ]
         _all_params.extend(
             [
@@ -2119,6 +2124,12 @@ class ChartOfAccountsApi:
 
         # process the query parameters
         _query_params = []
+        if _params.get('as_at') is not None:  # noqa: E501
+            if isinstance(_params['as_at'], datetime):
+                _query_params.append(('asAt', _params['as_at'].strftime(self.api_client.configuration.datetime_format)))
+            else:
+                _query_params.append(('asAt', _params['as_at']))
+
         # process the header parameters
         _header_params = dict(_params.get('_headers', {}))
         # process the form parameters
@@ -2156,22 +2167,22 @@ class ChartOfAccountsApi:
             _request_auth=_params.get('_request_auth'))
 
     @overload
-    async def get_general_ledger_profile(self, scope : Annotated[constr(strict=True, max_length=64, min_length=1), Field(..., description="The scope of the Chart of Accounts for the General Ledger Profile.")], code : Annotated[constr(strict=True, max_length=64, min_length=1), Field(..., description="The code of the Chart of Accounts for the General Ledger Profile.")], general_ledger_profile_code : Annotated[constr(strict=True, max_length=64, min_length=1), Field(..., description="The General Ledger Profile Code of the General Ledger Profile.")], **kwargs) -> GeneralLedgerProfileResponse:  # noqa: E501
+    async def get_general_ledger_profile(self, scope : Annotated[constr(strict=True, max_length=64, min_length=1), Field(..., description="The scope of the Chart of Accounts for the General Ledger Profile.")], code : Annotated[constr(strict=True, max_length=64, min_length=1), Field(..., description="The code of the Chart of Accounts for the General Ledger Profile.")], general_ledger_profile_code : Annotated[constr(strict=True, max_length=64, min_length=1), Field(..., description="The General Ledger Profile Code of the General Ledger Profile.")], as_at : Annotated[Optional[datetime], Field(description="The asAt datetime at which to retrieve the General Ledger Profile. Defaults to return the latest version of the General Ledger Profile if not specified.")] = None, **kwargs) -> GeneralLedgerProfileResponse:  # noqa: E501
         ...
 
     @overload
-    def get_general_ledger_profile(self, scope : Annotated[constr(strict=True, max_length=64, min_length=1), Field(..., description="The scope of the Chart of Accounts for the General Ledger Profile.")], code : Annotated[constr(strict=True, max_length=64, min_length=1), Field(..., description="The code of the Chart of Accounts for the General Ledger Profile.")], general_ledger_profile_code : Annotated[constr(strict=True, max_length=64, min_length=1), Field(..., description="The General Ledger Profile Code of the General Ledger Profile.")], async_req: Optional[bool]=True, **kwargs) -> GeneralLedgerProfileResponse:  # noqa: E501
+    def get_general_ledger_profile(self, scope : Annotated[constr(strict=True, max_length=64, min_length=1), Field(..., description="The scope of the Chart of Accounts for the General Ledger Profile.")], code : Annotated[constr(strict=True, max_length=64, min_length=1), Field(..., description="The code of the Chart of Accounts for the General Ledger Profile.")], general_ledger_profile_code : Annotated[constr(strict=True, max_length=64, min_length=1), Field(..., description="The General Ledger Profile Code of the General Ledger Profile.")], as_at : Annotated[Optional[datetime], Field(description="The asAt datetime at which to retrieve the General Ledger Profile. Defaults to return the latest version of the General Ledger Profile if not specified.")] = None, async_req: Optional[bool]=True, **kwargs) -> GeneralLedgerProfileResponse:  # noqa: E501
         ...
 
     @validate_arguments
-    def get_general_ledger_profile(self, scope : Annotated[constr(strict=True, max_length=64, min_length=1), Field(..., description="The scope of the Chart of Accounts for the General Ledger Profile.")], code : Annotated[constr(strict=True, max_length=64, min_length=1), Field(..., description="The code of the Chart of Accounts for the General Ledger Profile.")], general_ledger_profile_code : Annotated[constr(strict=True, max_length=64, min_length=1), Field(..., description="The General Ledger Profile Code of the General Ledger Profile.")], async_req: Optional[bool]=None, **kwargs) -> Union[GeneralLedgerProfileResponse, Awaitable[GeneralLedgerProfileResponse]]:  # noqa: E501
+    def get_general_ledger_profile(self, scope : Annotated[constr(strict=True, max_length=64, min_length=1), Field(..., description="The scope of the Chart of Accounts for the General Ledger Profile.")], code : Annotated[constr(strict=True, max_length=64, min_length=1), Field(..., description="The code of the Chart of Accounts for the General Ledger Profile.")], general_ledger_profile_code : Annotated[constr(strict=True, max_length=64, min_length=1), Field(..., description="The General Ledger Profile Code of the General Ledger Profile.")], as_at : Annotated[Optional[datetime], Field(description="The asAt datetime at which to retrieve the General Ledger Profile. Defaults to return the latest version of the General Ledger Profile if not specified.")] = None, async_req: Optional[bool]=None, **kwargs) -> Union[GeneralLedgerProfileResponse, Awaitable[GeneralLedgerProfileResponse]]:  # noqa: E501
         """[EXPERIMENTAL] GetGeneralLedgerProfile: Get a General Ledger Profile.  # noqa: E501
 
         Get the given General Ledger Profile.  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
 
-        >>> thread = api.get_general_ledger_profile(scope, code, general_ledger_profile_code, async_req=True)
+        >>> thread = api.get_general_ledger_profile(scope, code, general_ledger_profile_code, as_at, async_req=True)
         >>> result = thread.get()
 
         :param scope: The scope of the Chart of Accounts for the General Ledger Profile. (required)
@@ -2180,6 +2191,8 @@ class ChartOfAccountsApi:
         :type code: str
         :param general_ledger_profile_code: The General Ledger Profile Code of the General Ledger Profile. (required)
         :type general_ledger_profile_code: str
+        :param as_at: The asAt datetime at which to retrieve the General Ledger Profile. Defaults to return the latest version of the General Ledger Profile if not specified.
+        :type as_at: datetime
         :param async_req: Whether to execute the request asynchronously.
         :type async_req: bool, optional
         :param _request_timeout: timeout setting for this request.
@@ -2197,17 +2210,17 @@ class ChartOfAccountsApi:
             raise ValueError(message)
         if async_req is not None:
             kwargs['async_req'] = async_req
-        return self.get_general_ledger_profile_with_http_info(scope, code, general_ledger_profile_code, **kwargs)  # noqa: E501
+        return self.get_general_ledger_profile_with_http_info(scope, code, general_ledger_profile_code, as_at, **kwargs)  # noqa: E501
 
     @validate_arguments
-    def get_general_ledger_profile_with_http_info(self, scope : Annotated[constr(strict=True, max_length=64, min_length=1), Field(..., description="The scope of the Chart of Accounts for the General Ledger Profile.")], code : Annotated[constr(strict=True, max_length=64, min_length=1), Field(..., description="The code of the Chart of Accounts for the General Ledger Profile.")], general_ledger_profile_code : Annotated[constr(strict=True, max_length=64, min_length=1), Field(..., description="The General Ledger Profile Code of the General Ledger Profile.")], **kwargs) -> ApiResponse:  # noqa: E501
+    def get_general_ledger_profile_with_http_info(self, scope : Annotated[constr(strict=True, max_length=64, min_length=1), Field(..., description="The scope of the Chart of Accounts for the General Ledger Profile.")], code : Annotated[constr(strict=True, max_length=64, min_length=1), Field(..., description="The code of the Chart of Accounts for the General Ledger Profile.")], general_ledger_profile_code : Annotated[constr(strict=True, max_length=64, min_length=1), Field(..., description="The General Ledger Profile Code of the General Ledger Profile.")], as_at : Annotated[Optional[datetime], Field(description="The asAt datetime at which to retrieve the General Ledger Profile. Defaults to return the latest version of the General Ledger Profile if not specified.")] = None, **kwargs) -> ApiResponse:  # noqa: E501
         """[EXPERIMENTAL] GetGeneralLedgerProfile: Get a General Ledger Profile.  # noqa: E501
 
         Get the given General Ledger Profile.  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
 
-        >>> thread = api.get_general_ledger_profile_with_http_info(scope, code, general_ledger_profile_code, async_req=True)
+        >>> thread = api.get_general_ledger_profile_with_http_info(scope, code, general_ledger_profile_code, as_at, async_req=True)
         >>> result = thread.get()
 
         :param scope: The scope of the Chart of Accounts for the General Ledger Profile. (required)
@@ -2216,6 +2229,8 @@ class ChartOfAccountsApi:
         :type code: str
         :param general_ledger_profile_code: The General Ledger Profile Code of the General Ledger Profile. (required)
         :type general_ledger_profile_code: str
+        :param as_at: The asAt datetime at which to retrieve the General Ledger Profile. Defaults to return the latest version of the General Ledger Profile if not specified.
+        :type as_at: datetime
         :param async_req: Whether to execute the request asynchronously.
         :type async_req: bool, optional
         :param _preload_content: if False, the ApiResponse.data will
@@ -2246,7 +2261,8 @@ class ChartOfAccountsApi:
         _all_params = [
             'scope',
             'code',
-            'general_ledger_profile_code'
+            'general_ledger_profile_code',
+            'as_at'
         ]
         _all_params.extend(
             [
@@ -2286,6 +2302,12 @@ class ChartOfAccountsApi:
 
         # process the query parameters
         _query_params = []
+        if _params.get('as_at') is not None:  # noqa: E501
+            if isinstance(_params['as_at'], datetime):
+                _query_params.append(('asAt', _params['as_at'].strftime(self.api_client.configuration.datetime_format)))
+            else:
+                _query_params.append(('asAt', _params['as_at']))
+
         # process the header parameters
         _header_params = dict(_params.get('_headers', {}))
         # process the form parameters
@@ -2323,22 +2345,22 @@ class ChartOfAccountsApi:
             _request_auth=_params.get('_request_auth'))
 
     @overload
-    async def get_posting_module(self, scope : Annotated[constr(strict=True, max_length=64, min_length=1), Field(..., description="The scope of the Chart of Accounts.")], code : Annotated[constr(strict=True, max_length=64, min_length=1), Field(..., description="The code of the Chart of Accounts. Together with the scope this uniquely identifies the Chart of Accounts.")], posting_module_code : Annotated[constr(strict=True, max_length=64, min_length=1), Field(..., description="The code of the Posting Module.")], **kwargs) -> PostingModuleResponse:  # noqa: E501
+    async def get_posting_module(self, scope : Annotated[constr(strict=True, max_length=64, min_length=1), Field(..., description="The scope of the Chart of Accounts.")], code : Annotated[constr(strict=True, max_length=64, min_length=1), Field(..., description="The code of the Chart of Accounts. Together with the scope this uniquely identifies the Chart of Accounts.")], posting_module_code : Annotated[constr(strict=True, max_length=64, min_length=1), Field(..., description="The code of the Posting Module.")], as_at : Annotated[Optional[datetime], Field(description="The asAt datetime at which to retrieve the Posting Module. Defaults to return the latest version of the Posting Module if not specified.")] = None, **kwargs) -> PostingModuleResponse:  # noqa: E501
         ...
 
     @overload
-    def get_posting_module(self, scope : Annotated[constr(strict=True, max_length=64, min_length=1), Field(..., description="The scope of the Chart of Accounts.")], code : Annotated[constr(strict=True, max_length=64, min_length=1), Field(..., description="The code of the Chart of Accounts. Together with the scope this uniquely identifies the Chart of Accounts.")], posting_module_code : Annotated[constr(strict=True, max_length=64, min_length=1), Field(..., description="The code of the Posting Module.")], async_req: Optional[bool]=True, **kwargs) -> PostingModuleResponse:  # noqa: E501
+    def get_posting_module(self, scope : Annotated[constr(strict=True, max_length=64, min_length=1), Field(..., description="The scope of the Chart of Accounts.")], code : Annotated[constr(strict=True, max_length=64, min_length=1), Field(..., description="The code of the Chart of Accounts. Together with the scope this uniquely identifies the Chart of Accounts.")], posting_module_code : Annotated[constr(strict=True, max_length=64, min_length=1), Field(..., description="The code of the Posting Module.")], as_at : Annotated[Optional[datetime], Field(description="The asAt datetime at which to retrieve the Posting Module. Defaults to return the latest version of the Posting Module if not specified.")] = None, async_req: Optional[bool]=True, **kwargs) -> PostingModuleResponse:  # noqa: E501
         ...
 
     @validate_arguments
-    def get_posting_module(self, scope : Annotated[constr(strict=True, max_length=64, min_length=1), Field(..., description="The scope of the Chart of Accounts.")], code : Annotated[constr(strict=True, max_length=64, min_length=1), Field(..., description="The code of the Chart of Accounts. Together with the scope this uniquely identifies the Chart of Accounts.")], posting_module_code : Annotated[constr(strict=True, max_length=64, min_length=1), Field(..., description="The code of the Posting Module.")], async_req: Optional[bool]=None, **kwargs) -> Union[PostingModuleResponse, Awaitable[PostingModuleResponse]]:  # noqa: E501
+    def get_posting_module(self, scope : Annotated[constr(strict=True, max_length=64, min_length=1), Field(..., description="The scope of the Chart of Accounts.")], code : Annotated[constr(strict=True, max_length=64, min_length=1), Field(..., description="The code of the Chart of Accounts. Together with the scope this uniquely identifies the Chart of Accounts.")], posting_module_code : Annotated[constr(strict=True, max_length=64, min_length=1), Field(..., description="The code of the Posting Module.")], as_at : Annotated[Optional[datetime], Field(description="The asAt datetime at which to retrieve the Posting Module. Defaults to return the latest version of the Posting Module if not specified.")] = None, async_req: Optional[bool]=None, **kwargs) -> Union[PostingModuleResponse, Awaitable[PostingModuleResponse]]:  # noqa: E501
         """[EXPERIMENTAL] GetPostingModule: Get a Posting Module  # noqa: E501
 
         Retrieve the definition of a Posting Module complete with its rules.  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
 
-        >>> thread = api.get_posting_module(scope, code, posting_module_code, async_req=True)
+        >>> thread = api.get_posting_module(scope, code, posting_module_code, as_at, async_req=True)
         >>> result = thread.get()
 
         :param scope: The scope of the Chart of Accounts. (required)
@@ -2347,6 +2369,8 @@ class ChartOfAccountsApi:
         :type code: str
         :param posting_module_code: The code of the Posting Module. (required)
         :type posting_module_code: str
+        :param as_at: The asAt datetime at which to retrieve the Posting Module. Defaults to return the latest version of the Posting Module if not specified.
+        :type as_at: datetime
         :param async_req: Whether to execute the request asynchronously.
         :type async_req: bool, optional
         :param _request_timeout: timeout setting for this request.
@@ -2364,17 +2388,17 @@ class ChartOfAccountsApi:
             raise ValueError(message)
         if async_req is not None:
             kwargs['async_req'] = async_req
-        return self.get_posting_module_with_http_info(scope, code, posting_module_code, **kwargs)  # noqa: E501
+        return self.get_posting_module_with_http_info(scope, code, posting_module_code, as_at, **kwargs)  # noqa: E501
 
     @validate_arguments
-    def get_posting_module_with_http_info(self, scope : Annotated[constr(strict=True, max_length=64, min_length=1), Field(..., description="The scope of the Chart of Accounts.")], code : Annotated[constr(strict=True, max_length=64, min_length=1), Field(..., description="The code of the Chart of Accounts. Together with the scope this uniquely identifies the Chart of Accounts.")], posting_module_code : Annotated[constr(strict=True, max_length=64, min_length=1), Field(..., description="The code of the Posting Module.")], **kwargs) -> ApiResponse:  # noqa: E501
+    def get_posting_module_with_http_info(self, scope : Annotated[constr(strict=True, max_length=64, min_length=1), Field(..., description="The scope of the Chart of Accounts.")], code : Annotated[constr(strict=True, max_length=64, min_length=1), Field(..., description="The code of the Chart of Accounts. Together with the scope this uniquely identifies the Chart of Accounts.")], posting_module_code : Annotated[constr(strict=True, max_length=64, min_length=1), Field(..., description="The code of the Posting Module.")], as_at : Annotated[Optional[datetime], Field(description="The asAt datetime at which to retrieve the Posting Module. Defaults to return the latest version of the Posting Module if not specified.")] = None, **kwargs) -> ApiResponse:  # noqa: E501
         """[EXPERIMENTAL] GetPostingModule: Get a Posting Module  # noqa: E501
 
         Retrieve the definition of a Posting Module complete with its rules.  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
 
-        >>> thread = api.get_posting_module_with_http_info(scope, code, posting_module_code, async_req=True)
+        >>> thread = api.get_posting_module_with_http_info(scope, code, posting_module_code, as_at, async_req=True)
         >>> result = thread.get()
 
         :param scope: The scope of the Chart of Accounts. (required)
@@ -2383,6 +2407,8 @@ class ChartOfAccountsApi:
         :type code: str
         :param posting_module_code: The code of the Posting Module. (required)
         :type posting_module_code: str
+        :param as_at: The asAt datetime at which to retrieve the Posting Module. Defaults to return the latest version of the Posting Module if not specified.
+        :type as_at: datetime
         :param async_req: Whether to execute the request asynchronously.
         :type async_req: bool, optional
         :param _preload_content: if False, the ApiResponse.data will
@@ -2413,7 +2439,8 @@ class ChartOfAccountsApi:
         _all_params = [
             'scope',
             'code',
-            'posting_module_code'
+            'posting_module_code',
+            'as_at'
         ]
         _all_params.extend(
             [
@@ -2453,6 +2480,12 @@ class ChartOfAccountsApi:
 
         # process the query parameters
         _query_params = []
+        if _params.get('as_at') is not None:  # noqa: E501
+            if isinstance(_params['as_at'], datetime):
+                _query_params.append(('asAt', _params['as_at'].strftime(self.api_client.configuration.datetime_format)))
+            else:
+                _query_params.append(('asAt', _params['as_at']))
+
         # process the header parameters
         _header_params = dict(_params.get('_headers', {}))
         # process the form parameters
