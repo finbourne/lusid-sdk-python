@@ -39,15 +39,15 @@ class FixedSchedule(Schedule):
     payment_currency: Optional[StrictStr] = Field(None, alias="paymentCurrency", description="Payment currency. This does not have to be the same as the nominal bond or observation/reset currency.")
     stub_type: Optional[StrictStr] = Field(None, alias="stubType", description="StubType required of the schedule    Supported string (enumeration) values are: [ShortFront, ShortBack, LongBack, LongFront, Both].")
     ex_dividend_configuration: Optional[ExDividendConfiguration] = Field(None, alias="exDividendConfiguration")
-    schedule_type: StrictStr = Field(..., alias="scheduleType", description="The available values are: FixedSchedule, FloatSchedule, OptionalitySchedule, StepSchedule, Exercise, FxRateSchedule, Invalid")
+    schedule_type: StrictStr = Field(..., alias="scheduleType", description="The available values are: FixedSchedule, FloatSchedule, OptionalitySchedule, StepSchedule, Exercise, FxRateSchedule, FxLinkedNotionalSchedule, Invalid")
     additional_properties: Dict[str, Any] = {}
     __properties = ["scheduleType", "startDate", "maturityDate", "flowConventions", "couponRate", "conventionName", "exDividendDays", "notional", "paymentCurrency", "stubType", "exDividendConfiguration"]
 
     @validator('schedule_type')
     def schedule_type_validate_enum(cls, value):
         """Validates the enum"""
-        if value not in ('FixedSchedule', 'FloatSchedule', 'OptionalitySchedule', 'StepSchedule', 'Exercise', 'FxRateSchedule', 'Invalid'):
-            raise ValueError("must be one of enum values ('FixedSchedule', 'FloatSchedule', 'OptionalitySchedule', 'StepSchedule', 'Exercise', 'FxRateSchedule', 'Invalid')")
+        if value not in ('FixedSchedule', 'FloatSchedule', 'OptionalitySchedule', 'StepSchedule', 'Exercise', 'FxRateSchedule', 'FxLinkedNotionalSchedule', 'Invalid'):
+            raise ValueError("must be one of enum values ('FixedSchedule', 'FloatSchedule', 'OptionalitySchedule', 'StepSchedule', 'Exercise', 'FxRateSchedule', 'FxLinkedNotionalSchedule', 'Invalid')")
         return value
 
     class Config:

@@ -19,10 +19,11 @@ import json
 
 from datetime import datetime
 from typing import Any, Dict, Optional, Union
-from pydantic import BaseModel, Field, StrictFloat, StrictInt, StrictStr, constr
+from pydantic import BaseModel, Field, StrictBool, StrictFloat, StrictInt, StrictStr, constr
 from lusid.models.compounding import Compounding
 from lusid.models.flow_convention_name import FlowConventionName
 from lusid.models.flow_conventions import FlowConventions
+from lusid.models.fx_linked_notional_schedule import FxLinkedNotionalSchedule
 from lusid.models.index_convention import IndexConvention
 from lusid.models.step_schedule import StepSchedule
 
@@ -45,7 +46,9 @@ class LegDefinition(BaseModel):
     first_coupon_type: Optional[StrictStr] = Field(None, alias="firstCouponType", description="Optional coupon type setting for the first coupon, can be used with Stub coupons.  If set to \"ProRata\" (the default), the coupon year fraction is calculated as normal,  however if set to \"Full\" the year fraction is overwritten with the standard year fraction  for a regular ful\" coupon. Note this does not use the day count convention but rather is defined  directly from the tenor (i.e. a quarterly leg will be set to 0.25).    Supported string (enumeration) values are: [ProRata, Full].")
     last_regular_payment_date: Optional[datetime] = Field(None, alias="lastRegularPaymentDate", description="Optional payment date of the last regular coupon.  Must be less than the Maturity date.  If set, the regular coupon schedule will be built up to this date and the final  coupon will be a stub between this date and the Maturity date.")
     last_coupon_type: Optional[StrictStr] = Field(None, alias="lastCouponType", description="Optional coupon type setting for the last coupon, can be used with Stub coupons.  If set to \"ProRata\" (the default), the coupon year fraction is calculated as normal,  however if set to \"Full\" the year fraction is overwritten with the standard year fraction  for a regular ful\" coupon. Note this does not use the day count convention but rather is defined  directly from the tenor (i.e. a quarterly leg will be set to 0.25).    Supported string (enumeration) values are: [ProRata, Full].")
-    __properties = ["conventionName", "conventions", "indexConvention", "indexConventionName", "notionalExchangeType", "payReceive", "rateOrSpread", "resetConvention", "stubType", "compounding", "amortisation", "firstRegularPaymentDate", "firstCouponType", "lastRegularPaymentDate", "lastCouponType"]
+    fx_linked_notional_schedule: Optional[FxLinkedNotionalSchedule] = Field(None, alias="fxLinkedNotionalSchedule")
+    intermediate_notional_exchange: Optional[StrictBool] = Field(None, alias="intermediateNotionalExchange", description="Indicates whether there are intermediate notional exchanges.")
+    __properties = ["conventionName", "conventions", "indexConvention", "indexConventionName", "notionalExchangeType", "payReceive", "rateOrSpread", "resetConvention", "stubType", "compounding", "amortisation", "firstRegularPaymentDate", "firstCouponType", "lastRegularPaymentDate", "lastCouponType", "fxLinkedNotionalSchedule", "intermediateNotionalExchange"]
 
     class Config:
         """Pydantic configuration"""
@@ -89,6 +92,9 @@ class LegDefinition(BaseModel):
         # override the default output from pydantic by calling `to_dict()` of amortisation
         if self.amortisation:
             _dict['amortisation'] = self.amortisation.to_dict()
+        # override the default output from pydantic by calling `to_dict()` of fx_linked_notional_schedule
+        if self.fx_linked_notional_schedule:
+            _dict['fxLinkedNotionalSchedule'] = self.fx_linked_notional_schedule.to_dict()
         # set to None if reset_convention (nullable) is None
         # and __fields_set__ contains the field
         if self.reset_convention is None and "reset_convention" in self.__fields_set__:
@@ -113,6 +119,11 @@ class LegDefinition(BaseModel):
         # and __fields_set__ contains the field
         if self.last_coupon_type is None and "last_coupon_type" in self.__fields_set__:
             _dict['lastCouponType'] = None
+
+        # set to None if intermediate_notional_exchange (nullable) is None
+        # and __fields_set__ contains the field
+        if self.intermediate_notional_exchange is None and "intermediate_notional_exchange" in self.__fields_set__:
+            _dict['intermediateNotionalExchange'] = None
 
         return _dict
 
@@ -140,6 +151,8 @@ class LegDefinition(BaseModel):
             "first_regular_payment_date": obj.get("firstRegularPaymentDate"),
             "first_coupon_type": obj.get("firstCouponType"),
             "last_regular_payment_date": obj.get("lastRegularPaymentDate"),
-            "last_coupon_type": obj.get("lastCouponType")
+            "last_coupon_type": obj.get("lastCouponType"),
+            "fx_linked_notional_schedule": FxLinkedNotionalSchedule.from_dict(obj.get("fxLinkedNotionalSchedule")) if obj.get("fxLinkedNotionalSchedule") is not None else None,
+            "intermediate_notional_exchange": obj.get("intermediateNotionalExchange")
         })
         return _obj

@@ -304,6 +304,7 @@ from lusid.models.funding_leg import FundingLeg
 from lusid.models.funding_leg_options import FundingLegOptions
 from lusid.models.future import Future
 from lusid.models.futures_contract_details import FuturesContractDetails
+from lusid.models.fx_conventions import FxConventions
 from lusid.models.fx_dependency import FxDependency
 from lusid.models.fx_forward import FxForward
 from lusid.models.fx_forward_curve_by_quote_reference import FxForwardCurveByQuoteReference
@@ -313,6 +314,7 @@ from lusid.models.fx_forward_pips_curve_data import FxForwardPipsCurveData
 from lusid.models.fx_forward_tenor_curve_data import FxForwardTenorCurveData
 from lusid.models.fx_forward_tenor_pips_curve_data import FxForwardTenorPipsCurveData
 from lusid.models.fx_forwards_dependency import FxForwardsDependency
+from lusid.models.fx_linked_notional_schedule import FxLinkedNotionalSchedule
 from lusid.models.fx_option import FxOption
 from lusid.models.fx_rate_schedule import FxRateSchedule
 from lusid.models.fx_swap import FxSwap
@@ -638,6 +640,7 @@ from lusid.models.relation import Relation
 from lusid.models.relation_definition import RelationDefinition
 from lusid.models.relationship import Relationship
 from lusid.models.relationship_definition import RelationshipDefinition
+from lusid.models.relative_date_offset import RelativeDateOffset
 from lusid.models.repo import Repo
 from lusid.models.reset_event import ResetEvent
 from lusid.models.resource_id import ResourceId

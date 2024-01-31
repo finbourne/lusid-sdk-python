@@ -31,15 +31,15 @@ class FxRateSchedule(Schedule):
     fx_conversion_types: Optional[conlist(StrictStr)] = Field(None, alias="fxConversionTypes", description="List of flags to indicate if coupon payments, principal payments or both are converted")
     rate: Optional[Union[StrictFloat, StrictInt]] = Field(None, description="FxRate used to convert payments. Assumed to be in units of the ToCurrency so conversion is paymentAmount x fxRate")
     to_currency: Optional[StrictStr] = Field(None, alias="toCurrency", description="Currency that payments are converted to")
-    schedule_type: StrictStr = Field(..., alias="scheduleType", description="The available values are: FixedSchedule, FloatSchedule, OptionalitySchedule, StepSchedule, Exercise, FxRateSchedule, Invalid")
+    schedule_type: StrictStr = Field(..., alias="scheduleType", description="The available values are: FixedSchedule, FloatSchedule, OptionalitySchedule, StepSchedule, Exercise, FxRateSchedule, FxLinkedNotionalSchedule, Invalid")
     additional_properties: Dict[str, Any] = {}
     __properties = ["scheduleType", "flowConventions", "fxConversionTypes", "rate", "toCurrency"]
 
     @validator('schedule_type')
     def schedule_type_validate_enum(cls, value):
         """Validates the enum"""
-        if value not in ('FixedSchedule', 'FloatSchedule', 'OptionalitySchedule', 'StepSchedule', 'Exercise', 'FxRateSchedule', 'Invalid'):
-            raise ValueError("must be one of enum values ('FixedSchedule', 'FloatSchedule', 'OptionalitySchedule', 'StepSchedule', 'Exercise', 'FxRateSchedule', 'Invalid')")
+        if value not in ('FixedSchedule', 'FloatSchedule', 'OptionalitySchedule', 'StepSchedule', 'Exercise', 'FxRateSchedule', 'FxLinkedNotionalSchedule', 'Invalid'):
+            raise ValueError("must be one of enum values ('FixedSchedule', 'FloatSchedule', 'OptionalitySchedule', 'StepSchedule', 'Exercise', 'FxRateSchedule', 'FxLinkedNotionalSchedule', 'Invalid')")
         return value
 
     class Config:
