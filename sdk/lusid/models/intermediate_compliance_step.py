@@ -28,7 +28,7 @@ class IntermediateComplianceStep(ComplianceStep):
     IntermediateComplianceStep
     """
     label: constr(strict=True, min_length=1) = Field(..., description="The label of the compliance step")
-    grouped_parameters: Dict[str, conlist(ComplianceTemplateParameter)] = Field(..., alias="groupedParameters", description="Parameters required for the step. Some step types group parameters to differentiate between, for example, hard limit and warning threshold parameters")
+    grouped_parameters: Dict[str, conlist(ComplianceTemplateParameter)] = Field(..., alias="groupedParameters", description="Parameters required for the step")
     compliance_step_type: StrictStr = Field(..., alias="complianceStepType", description=". The available values are: FilterStep, GroupByStep, GroupFilterStep, BranchStep, RecombineStep")
     additional_properties: Dict[str, Any] = {}
     __properties = ["complianceStepType", "label", "groupedParameters"]

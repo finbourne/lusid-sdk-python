@@ -5,7 +5,8 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **label** | **str** | The label of the compliance step | 
-**grouped_parameters** | **Dict[str, List[ComplianceTemplateParameter]]** | Parameters required for the step. Some step types group parameters to differentiate between, for example, hard limit and warning threshold parameters | 
+**limit_check_parameters** | [**List[ComplianceTemplateParameter]**](ComplianceTemplateParameter.md) | Parameters required for an absolute limit check | 
+**warning_check_parameters** | [**List[ComplianceTemplateParameter]**](ComplianceTemplateParameter.md) | Parameters required for a warning limit check | 
 **compliance_step_type** | **str** | . The available values are: FilterStep, GroupByStep, GroupFilterStep, BranchStep, RecombineStep | 
 
 ## Example

@@ -19,17 +19,20 @@ import json
 
 
 from typing import Any, Dict, List
-from pydantic import BaseModel, Field, StrictStr, conlist, constr, validator
+from pydantic import Field, StrictStr, conlist, constr, validator
+from lusid.models.compliance_step import ComplianceStep
 from lusid.models.compliance_template_parameter import ComplianceTemplateParameter
 
-class GroupFilterStep(BaseModel):
+class GroupFilterStep(ComplianceStep):
     """
     GroupFilterStep
     """
     label: constr(strict=True, min_length=1) = Field(..., description="The label of the compliance step")
-    grouped_parameters: Dict[str, conlist(ComplianceTemplateParameter)] = Field(..., alias="groupedParameters", description="Parameters required for the step. Some step types group parameters to differentiate between, for example, hard limit and warning threshold parameters")
+    limit_check_parameters: conlist(ComplianceTemplateParameter) = Field(..., alias="limitCheckParameters", description="Parameters required for an absolute limit check")
+    warning_check_parameters: conlist(ComplianceTemplateParameter) = Field(..., alias="warningCheckParameters", description="Parameters required for a warning limit check")
     compliance_step_type: StrictStr = Field(..., alias="complianceStepType", description=". The available values are: FilterStep, GroupByStep, GroupFilterStep, BranchStep, RecombineStep")
-    __properties = ["label", "groupedParameters", "complianceStepType"]
+    additional_properties: Dict[str, Any] = {}
+    __properties = ["complianceStepType", "label", "limitCheckParameters", "warningCheckParameters"]
 
     @validator('compliance_step_type')
     def compliance_step_type_validate_enum(cls, value):
@@ -60,17 +63,28 @@ class GroupFilterStep(BaseModel):
         """Returns the dictionary representation of the model using alias"""
         _dict = self.dict(by_alias=True,
                           exclude={
+                            "additional_properties"
                           },
                           exclude_none=True)
-        # override the default output from pydantic by calling `to_dict()` of each value in grouped_parameters (dict of array)
-        _field_dict_of_array = {}
-        if self.grouped_parameters:
-            for _key in self.grouped_parameters:
-                if self.grouped_parameters[_key]:
-                    _field_dict_of_array[_key] = [
-                        _item.to_dict() for _item in self.grouped_parameters[_key]
-                    ]
-            _dict['groupedParameters'] = _field_dict_of_array
+        # override the default output from pydantic by calling `to_dict()` of each item in limit_check_parameters (list)
+        _items = []
+        if self.limit_check_parameters:
+            for _item in self.limit_check_parameters:
+                if _item:
+                    _items.append(_item.to_dict())
+            _dict['limitCheckParameters'] = _items
+        # override the default output from pydantic by calling `to_dict()` of each item in warning_check_parameters (list)
+        _items = []
+        if self.warning_check_parameters:
+            for _item in self.warning_check_parameters:
+                if _item:
+                    _items.append(_item.to_dict())
+            _dict['warningCheckParameters'] = _items
+        # puts key-value pairs in additional_properties in the top level
+        if self.additional_properties is not None:
+            for _key, _value in self.additional_properties.items():
+                _dict[_key] = _value
+
         return _dict
 
     @classmethod
@@ -83,15 +97,14 @@ class GroupFilterStep(BaseModel):
             return GroupFilterStep.parse_obj(obj)
 
         _obj = GroupFilterStep.parse_obj({
+            "compliance_step_type": obj.get("complianceStepType"),
             "label": obj.get("label"),
-            "grouped_parameters": dict(
-                (_k,
-                        [ComplianceTemplateParameter.from_dict(_item) for _item in _v]
-                        if _v is not None
-                        else None
-                )
-                for _k, _v in obj.get("groupedParameters").items()
-            ),
-            "compliance_step_type": obj.get("complianceStepType")
+            "limit_check_parameters": [ComplianceTemplateParameter.from_dict(_item) for _item in obj.get("limitCheckParameters")] if obj.get("limitCheckParameters") is not None else None,
+            "warning_check_parameters": [ComplianceTemplateParameter.from_dict(_item) for _item in obj.get("warningCheckParameters")] if obj.get("warningCheckParameters") is not None else None
         })
+        # store additional fields in additional_properties
+        for _key in obj.keys():
+            if _key not in cls.__properties:
+                _obj.additional_properties[_key] = obj.get(_key)
+
         return _obj

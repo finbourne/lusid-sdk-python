@@ -465,7 +465,6 @@ from lusid.models.intermediate_compliance_step import IntermediateComplianceStep
 from lusid.models.ir_vol_cube_data import IrVolCubeData
 from lusid.models.ir_vol_dependency import IrVolDependency
 from lusid.models.is_business_day_response import IsBusinessDayResponse
-from lusid.models.je_lines_query_parameters import JELinesQueryParameters
 from lusid.models.journal_entry_line import JournalEntryLine
 from lusid.models.journal_entry_lines_query_parameters import JournalEntryLinesQueryParameters
 from lusid.models.label_value_set import LabelValueSet

@@ -46,7 +46,12 @@ class ComplianceStep(BaseModel):
 
     # discriminator mappings
     __discriminator_value_class_map = {
-        'IntermediateComplianceStep': 'IntermediateComplianceStep'
+        'BranchStep': 'BranchStep',
+        'FilterStep': 'FilterStep',
+        'GroupByStep': 'GroupByStep',
+        'GroupFilterStep': 'GroupFilterStep',
+        'IntermediateComplianceStep': 'IntermediateComplianceStep',
+        'RecombineStep': 'RecombineStep'
     }
 
     @classmethod
@@ -67,7 +72,7 @@ class ComplianceStep(BaseModel):
         return json.dumps(self.to_dict())
 
     @classmethod
-    def from_json(cls, json_str: str) -> Union(IntermediateComplianceStep):
+    def from_json(cls, json_str: str) -> Union(BranchStep, FilterStep, GroupByStep, GroupFilterStep, IntermediateComplianceStep, RecombineStep):
         """Create an instance of ComplianceStep from a JSON string"""
         return cls.from_dict(json.loads(json_str))
 
@@ -80,7 +85,7 @@ class ComplianceStep(BaseModel):
         return _dict
 
     @classmethod
-    def from_dict(cls, obj: dict) -> Union(IntermediateComplianceStep):
+    def from_dict(cls, obj: dict) -> Union(BranchStep, FilterStep, GroupByStep, GroupFilterStep, IntermediateComplianceStep, RecombineStep):
         """Create an instance of ComplianceStep from a dict"""
         # look up the object type based on discriminator mapping
         object_type = cls.get_discriminator_value(obj)
