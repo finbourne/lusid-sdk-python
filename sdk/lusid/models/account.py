@@ -30,7 +30,7 @@ class Account(BaseModel):
     description: Optional[constr(strict=True, max_length=1024, min_length=0)] = Field(None, description="A description for the Account.")
     type: constr(strict=True, min_length=1) = Field(..., description="The Account type. Can have the values: Asset/Liabilities/Income/Expense/Capital/Revenue.")
     status: StrictStr = Field(..., description="The Account status. Can be Active, Inactive or Deleted. Defaults to Active. The available values are: Active, Inactive, Deleted")
-    control: constr(strict=True, min_length=1) = Field(..., description="This allows users to specify whether this a protected Account that prevents direct manual journal adjustment. Can have the values: System/ManualIt will default to “Manual”.")
+    control: Optional[StrictStr] = Field(None, description="This allows users to specify whether this a protected Account that prevents direct manual journal adjustment. Can have the values: System/ManualIt will default to “Manual”.")
     properties: Optional[Dict[str, ModelProperty]] = Field(None, description="A set of properties for the Account.")
     __properties = ["code", "description", "type", "status", "control", "properties"]
 
@@ -93,6 +93,11 @@ class Account(BaseModel):
         # and __fields_set__ contains the field
         if self.description is None and "description" in self.__fields_set__:
             _dict['description'] = None
+
+        # set to None if control (nullable) is None
+        # and __fields_set__ contains the field
+        if self.control is None and "control" in self.__fields_set__:
+            _dict['control'] = None
 
         # set to None if properties (nullable) is None
         # and __fields_set__ contains the field
