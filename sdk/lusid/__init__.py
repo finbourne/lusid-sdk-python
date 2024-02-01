@@ -151,6 +151,9 @@ from lusid.models.batch_upsert_instrument_properties_response import BatchUpsert
 from lusid.models.batch_upsert_portfolio_transactions_response import BatchUpsertPortfolioTransactionsResponse
 from lusid.models.batch_upsert_property_definition_properties_response import BatchUpsertPropertyDefinitionPropertiesResponse
 from lusid.models.block import Block
+from lusid.models.block_and_order import BlockAndOrder
+from lusid.models.block_and_order_create_request import BlockAndOrderCreateRequest
+from lusid.models.block_and_order_request import BlockAndOrderRequest
 from lusid.models.block_request import BlockRequest
 from lusid.models.block_set_request import BlockSetRequest
 from lusid.models.bond import Bond
@@ -724,6 +727,7 @@ from lusid.models.resource_list_of_aggregated_return import ResourceListOfAggreg
 from lusid.models.resource_list_of_aggregation_query import ResourceListOfAggregationQuery
 from lusid.models.resource_list_of_allocation import ResourceListOfAllocation
 from lusid.models.resource_list_of_block import ResourceListOfBlock
+from lusid.models.resource_list_of_block_and_order import ResourceListOfBlockAndOrder
 from lusid.models.resource_list_of_calendar_date import ResourceListOfCalendarDate
 from lusid.models.resource_list_of_change import ResourceListOfChange
 from lusid.models.resource_list_of_change_history import ResourceListOfChangeHistory
