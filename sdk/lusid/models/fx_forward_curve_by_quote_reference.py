@@ -30,7 +30,7 @@ class FxForwardCurveByQuoteReference(ComplexMarketData):
     """
     dom_ccy: StrictStr = Field(..., alias="domCcy", description="Domestic currency of the fx forward")
     fgn_ccy: StrictStr = Field(..., alias="fgnCcy", description="Foreign currency of the fx forward")
-    tenors: conlist(StrictStr) = Field(..., description="Tenors for which the forward rates apply")
+    tenors: conlist(StrictStr) = Field(..., description="Tenors for which the forward rates apply.  For more information on tenors, see [knowledge base article KA-02097](https://support.lusid.com/knowledgebase/article/KA-02097)")
     quote_references: conlist(Dict[str, StrictStr]) = Field(..., alias="quoteReferences", description="For each tenor, a collection of identifiers. These will be looked up in the LUSID Quote Store to resolve the actual rates.  Accepts an array of Dictionary<string, string>. The keys of each dictionary must be chosen from the following enumeration:  [LusidInstrumentId, Isin, Sedol, Cusip, ClientInternal, Figi, RIC, QuotePermId, REDCode, BBGId, ICECode].  For example: <br />  \"quoteReferences\": [{\"ClientInternal\": \"SomeIdentifierForFirstTenor\"},{\"ClientInternal\": \"SomeIdentifierForSecondTenor\"}")
     lineage: Optional[constr(strict=True, max_length=1024, min_length=0)] = Field(None, description="Description of the complex market data's lineage e.g. 'FundAccountant_GreenQuality'.")
     market_data_options: Optional[MarketDataOptions] = Field(None, alias="marketDataOptions")
