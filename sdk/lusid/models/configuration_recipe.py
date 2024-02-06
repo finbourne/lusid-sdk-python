@@ -18,13 +18,12 @@ import re  # noqa: F401
 import json
 
 
-from typing import Any, Dict, List, Optional
-from pydantic import BaseModel, Field, conlist, constr, validator
+from typing import Any, Dict, Optional
+from pydantic import BaseModel, Field, constr, validator
 from lusid.models.aggregation_context import AggregationContext
 from lusid.models.holding_context import HoldingContext
 from lusid.models.market_context import MarketContext
 from lusid.models.pricing_context import PricingContext
-from lusid.models.resource_id import ResourceId
 from lusid.models.translation_context import TranslationContext
 
 class ConfigurationRecipe(BaseModel):
@@ -36,11 +35,10 @@ class ConfigurationRecipe(BaseModel):
     market: Optional[MarketContext] = None
     pricing: Optional[PricingContext] = None
     aggregation: Optional[AggregationContext] = None
-    inherited_recipes: Optional[conlist(ResourceId)] = Field(None, alias="inheritedRecipes", description="A list of parent recipes (scope,code) that can be used to share functionality between recipes. For instance one might use common recipes to set up  pricing for individual asset classes, e.g. rates or credit, and then combine them into a single recipe to be used by an exotics desk in conjunction with  some overrides that it requires for models or other pricing options.")
     description: Optional[constr(strict=True, max_length=1024, min_length=0)] = Field(None, description="User can assign a description to understand more humanly the recipe.")
     holding: Optional[HoldingContext] = None
     translation: Optional[TranslationContext] = None
-    __properties = ["scope", "code", "market", "pricing", "aggregation", "inheritedRecipes", "description", "holding", "translation"]
+    __properties = ["scope", "code", "market", "pricing", "aggregation", "description", "holding", "translation"]
 
     @validator('scope')
     def scope_validate_regular_expression(cls, value):
@@ -99,24 +97,12 @@ class ConfigurationRecipe(BaseModel):
         # override the default output from pydantic by calling `to_dict()` of aggregation
         if self.aggregation:
             _dict['aggregation'] = self.aggregation.to_dict()
-        # override the default output from pydantic by calling `to_dict()` of each item in inherited_recipes (list)
-        _items = []
-        if self.inherited_recipes:
-            for _item in self.inherited_recipes:
-                if _item:
-                    _items.append(_item.to_dict())
-            _dict['inheritedRecipes'] = _items
         # override the default output from pydantic by calling `to_dict()` of holding
         if self.holding:
             _dict['holding'] = self.holding.to_dict()
         # override the default output from pydantic by calling `to_dict()` of translation
         if self.translation:
             _dict['translation'] = self.translation.to_dict()
-        # set to None if inherited_recipes (nullable) is None
-        # and __fields_set__ contains the field
-        if self.inherited_recipes is None and "inherited_recipes" in self.__fields_set__:
-            _dict['inheritedRecipes'] = None
-
         # set to None if description (nullable) is None
         # and __fields_set__ contains the field
         if self.description is None and "description" in self.__fields_set__:
@@ -139,7 +125,6 @@ class ConfigurationRecipe(BaseModel):
             "market": MarketContext.from_dict(obj.get("market")) if obj.get("market") is not None else None,
             "pricing": PricingContext.from_dict(obj.get("pricing")) if obj.get("pricing") is not None else None,
             "aggregation": AggregationContext.from_dict(obj.get("aggregation")) if obj.get("aggregation") is not None else None,
-            "inherited_recipes": [ResourceId.from_dict(_item) for _item in obj.get("inheritedRecipes")] if obj.get("inheritedRecipes") is not None else None,
             "description": obj.get("description"),
             "holding": HoldingContext.from_dict(obj.get("holding")) if obj.get("holding") is not None else None,
             "translation": TranslationContext.from_dict(obj.get("translation")) if obj.get("translation") is not None else None

@@ -28,10 +28,11 @@ class ValuationSchedule(BaseModel):
     effective_from: Optional[StrictStr] = Field(None, alias="effectiveFrom", description="If present, the EffectiveFrom and EffectiveAt dates are interpreted as a range of dates for which to perform a valuation.  In this case, valuation is calculated for the portfolio(s) for each business day in the given range.")
     effective_at: constr(strict=True, min_length=1) = Field(..., alias="effectiveAt", description="The market data time, i.e. the time to run the valuation request effective of.")
     tenor: Optional[constr(strict=True, max_length=16, min_length=0)] = Field(None, description="Tenor, e.g \"1D\", \"1M\" to be used in generating the date schedule when effectiveFrom and effectiveAt are both given and are not the same.")
-    roll_convention: Optional[constr(strict=True, max_length=50, min_length=0)] = Field(None, alias="rollConvention", description="When Tenor is given and is not equal to \"1D\", there may be cases where \"date + tenor\" land on non-business days around month end.  In that case, the RollConvention, e.g. modified following \"MF\" would be applied to determine the next GBD.")
+    roll_convention: Optional[constr(strict=True, max_length=50, min_length=0)] = Field(None, alias="rollConvention", description="When Tenor is given and is \"1M\" or longer, this specifies the rule which should be used to generate the date schedule.    For example, \"EndOfMonth\" to generate end of month dates, or \"1\" to specify the first day of the applicable month.")
     holiday_calendars: Optional[conlist(StrictStr)] = Field(None, alias="holidayCalendars", description="The holiday calendar(s) that should be used in determining the date schedule.  Holiday calendar(s) are supplied by their names, for example, \"CoppClark\".   Note that when the calendars are not available (e.g. when the user has insufficient permissions),   a recipe setting will be used to determine whether the whole batch should then fail or whether the calendar not being available should simply be ignored.")
     valuation_date_times: Optional[conlist(StrictStr)] = Field(None, alias="valuationDateTimes", description="If given, this is the exact set of dates on which to perform a valuation. This will replace/override all other specified values if given.")
-    __properties = ["effectiveFrom", "effectiveAt", "tenor", "rollConvention", "holidayCalendars", "valuationDateTimes"]
+    business_day_convention: Optional[constr(strict=True, max_length=50, min_length=0)] = Field(None, alias="businessDayConvention", description="When Tenor is given and is not equal to \"1D\", there may be cases where \"date + tenor\" land on non-business days around month end.  In that case, the BusinessDayConvention, e.g. modified following \"MF\" would be applied to determine the next GBD.")
+    __properties = ["effectiveFrom", "effectiveAt", "tenor", "rollConvention", "holidayCalendars", "valuationDateTimes", "businessDayConvention"]
 
     class Config:
         """Pydantic configuration"""
@@ -82,6 +83,11 @@ class ValuationSchedule(BaseModel):
         if self.valuation_date_times is None and "valuation_date_times" in self.__fields_set__:
             _dict['valuationDateTimes'] = None
 
+        # set to None if business_day_convention (nullable) is None
+        # and __fields_set__ contains the field
+        if self.business_day_convention is None and "business_day_convention" in self.__fields_set__:
+            _dict['businessDayConvention'] = None
+
         return _dict
 
     @classmethod
@@ -99,6 +105,7 @@ class ValuationSchedule(BaseModel):
             "tenor": obj.get("tenor"),
             "roll_convention": obj.get("rollConvention"),
             "holiday_calendars": obj.get("holidayCalendars"),
-            "valuation_date_times": obj.get("valuationDateTimes")
+            "valuation_date_times": obj.get("valuationDateTimes"),
+            "business_day_convention": obj.get("businessDayConvention")
         })
         return _obj

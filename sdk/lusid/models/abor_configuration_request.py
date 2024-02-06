@@ -33,9 +33,9 @@ class AborConfigurationRequest(BaseModel):
     recipe_id: ResourceId = Field(..., alias="recipeId")
     chart_of_accounts_id: ResourceId = Field(..., alias="chartOfAccountsId")
     posting_module_codes: Optional[conlist(StrictStr)] = Field(None, alias="postingModuleCodes", description="The Posting Module Codes from which the rules to be applied are retrieved.")
-    properties: Optional[Dict[str, ModelProperty]] = Field(None, description="A set of properties for the Abor Configuration.")
     cleardown_module_codes: Optional[conlist(StrictStr)] = Field(None, alias="cleardownModuleCodes", description="The Cleardown Module Codes from which the rules to be applied are retrieved.")
-    __properties = ["code", "displayName", "description", "recipeId", "chartOfAccountsId", "postingModuleCodes", "properties", "cleardownModuleCodes"]
+    properties: Optional[Dict[str, ModelProperty]] = Field(None, description="A set of properties for the Abor Configuration.")
+    __properties = ["code", "displayName", "description", "recipeId", "chartOfAccountsId", "postingModuleCodes", "cleardownModuleCodes", "properties"]
 
     @validator('code')
     def code_validate_regular_expression(cls, value):
@@ -106,15 +106,15 @@ class AborConfigurationRequest(BaseModel):
         if self.posting_module_codes is None and "posting_module_codes" in self.__fields_set__:
             _dict['postingModuleCodes'] = None
 
-        # set to None if properties (nullable) is None
-        # and __fields_set__ contains the field
-        if self.properties is None and "properties" in self.__fields_set__:
-            _dict['properties'] = None
-
         # set to None if cleardown_module_codes (nullable) is None
         # and __fields_set__ contains the field
         if self.cleardown_module_codes is None and "cleardown_module_codes" in self.__fields_set__:
             _dict['cleardownModuleCodes'] = None
+
+        # set to None if properties (nullable) is None
+        # and __fields_set__ contains the field
+        if self.properties is None and "properties" in self.__fields_set__:
+            _dict['properties'] = None
 
         return _dict
 
@@ -134,12 +134,12 @@ class AborConfigurationRequest(BaseModel):
             "recipe_id": ResourceId.from_dict(obj.get("recipeId")) if obj.get("recipeId") is not None else None,
             "chart_of_accounts_id": ResourceId.from_dict(obj.get("chartOfAccountsId")) if obj.get("chartOfAccountsId") is not None else None,
             "posting_module_codes": obj.get("postingModuleCodes"),
+            "cleardown_module_codes": obj.get("cleardownModuleCodes"),
             "properties": dict(
                 (_k, ModelProperty.from_dict(_v))
                 for _k, _v in obj.get("properties").items()
             )
             if obj.get("properties") is not None
-            else None,
-            "cleardown_module_codes": obj.get("cleardownModuleCodes")
+            else None
         })
         return _obj

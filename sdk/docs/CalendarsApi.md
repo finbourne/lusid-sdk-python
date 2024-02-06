@@ -582,7 +582,7 @@ async with api_client_factory:
     # Create an instance of the API class
     api_instance = api_client_factory.build(lusid.CalendarsApi)
     scope = 'scope_example' # str | Scope of the calendars to use
-    valuation_schedule = {"effectiveFrom":"2020-01-01","effectiveAt":"2021-01-01","tenor":"1M","rollConvention":"F","holidayCalendars":["GBP","USD"],"valuationDateTimes":[]} # ValuationSchedule | The ValuationSchedule to generate schedule dates from
+    valuation_schedule = {"effectiveFrom":"2020-01-01","effectiveAt":"2021-01-01","tenor":"1M","rollConvention":"None","holidayCalendars":["GBP","USD"],"valuationDateTimes":[],"businessDayConvention":"F"} # ValuationSchedule | The ValuationSchedule to generate schedule dates from
     as_at = '2013-10-20T19:20:30+01:00' # datetime | Optional AsAt for searching the calendar store. Defaults to Latest. (optional)
 
     try:
