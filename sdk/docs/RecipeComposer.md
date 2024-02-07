@@ -5,8 +5,8 @@ Recipe composer is an object used to dynamically compose Configuration Recipe fr
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**code** | **str** | User given string name (code) to identify the recipe. | 
 **scope** | **str** | The scope used when updating or inserting the Recipe Composer. | 
+**code** | **str** | User given string name (code) to identify the recipe. | 
 **operations** | [**List[RecipeBlock]**](RecipeBlock.md) | Atomic operations used to compose a Configuration Recipe. | [optional] 
 
 ## Example

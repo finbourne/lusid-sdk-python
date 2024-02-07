@@ -5,7 +5,7 @@ All URIs are relative to *https://www.lusid.com/api*
 Method | HTTP request | Description
 ------------- | ------------- | -------------
 [**book_transactions**](OrderManagementApi.md#book_transactions) | **POST** /api/ordermanagement/booktransactions | [EXPERIMENTAL] BookTransactions: Books transactions using specific allocations as a source.
-[**create_orders**](OrderManagementApi.md#create_orders) | **POST** /api/ordermanagement/createorders | [EARLY ACCESS] CreateOrders: Create Block and Order pairs
+[**create_orders**](OrderManagementApi.md#create_orders) | **POST** /api/ordermanagement/createorders | [EARLY ACCESS] CreateOrders: Upsert a Block and associated orders
 [**place_blocks**](OrderManagementApi.md#place_blocks) | **POST** /api/ordermanagement/placeblocks | [EARLY ACCESS] PlaceBlocks: Places blocks for a given list of placement requests.
 [**run_allocation_service**](OrderManagementApi.md#run_allocation_service) | **POST** /api/ordermanagement/allocate | [EXPERIMENTAL] RunAllocationService: Runs the Allocation Service
 
@@ -112,11 +112,11 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **create_orders**
-> ResourceListOfBlockAndOrder create_orders(block_and_order_create_request)
+> ResourceListOfBlockAndOrders create_orders(block_and_orders_create_request)
 
-[EARLY ACCESS] CreateOrders: Create Block and Order pairs
+[EARLY ACCESS] CreateOrders: Upsert a Block and associated orders
 
-Create new block and order pairs.
+Upsert a Block and create associated orders.  This will fail if the block exists and already references orders with differing fields to the upsert request.
 
 ### Example
 
@@ -127,8 +127,8 @@ import time
 import os
 import lusid
 from lusid.rest import ApiException
-from lusid.models.block_and_order_create_request import BlockAndOrderCreateRequest
-from lusid.models.resource_list_of_block_and_order import ResourceListOfBlockAndOrder
+from lusid.models.block_and_orders_create_request import BlockAndOrdersCreateRequest
+from lusid.models.resource_list_of_block_and_orders import ResourceListOfBlockAndOrders
 from pprint import pprint
 
 from lusid import (
@@ -170,11 +170,11 @@ api_client_factory = ApiClientFactory(config_loaders=config_loaders)
 async with api_client_factory:
     # Create an instance of the API class
     api_instance = api_client_factory.build(lusid.OrderManagementApi)
-    block_and_order_create_request = {"requests":[{"blockId":{"scope":"MyScope","code":"BLOCK00000123"},"orderId":{"scope":"MyScope","code":"ORDER00000123"},"orderProperties":{"Order/MyScope/SomeOrderProperty":{"key":"Order/MyScope/SomeOrderProperty","value":{"labelValue":"XYZ000034567"}}},"blockProperties":{"Block/MyScope/SomeOrderProperty":{"key":"Block/MyScope/SomeOrderProperty","value":{"labelValue":"XYZ000034567"}}},"instrumentIdentifiers":{"Instrument/default/Currency":"GBP"},"quantity":100,"side":"Buy","state":"New","type":"Limit","timeInForce":"GoodTilCancel","date":"1999-06-05T00:00:00.0000000+00:00","limitPrice":{"amount":534,"currency":"USD"}}]} # BlockAndOrderCreateRequest | The collection of block and order requests.
+    block_and_orders_create_request = {"requests":[{"blockId":{"scope":"MyScope","code":"BLOCK00000123"},"orders":[{"properties":{"Order/MyScope/SomeOrderProperty":{"key":"Order/MyScope/SomeOrderProperty","value":{"labelValue":"XYZ000034567"}}},"quantity":100,"id":{"scope":"MyScope","code":"ORDER00000123"},"state":"New","date":"0001-01-01T00:00:00.0000000+00:00"},{"properties":{"Order/MyScope/SomeOrderProperty":{"key":"Order/MyScope/SomeOrderProperty","value":{"labelValue":"XYZ000034567"}}},"quantity":150,"id":{"scope":"MyScope","code":"ORDER00000124"},"state":"New","date":"0001-01-01T00:00:00.0000000+00:00"}],"blockProperties":{"Block/MyScope/SomeOrderProperty":{"key":"Block/MyScope/SomeOrderProperty","value":{"labelValue":"XYZ000034567"}}},"instrumentIdentifiers":{"Instrument/default/Currency":"GBP"},"side":"Buy","type":"Limit","timeInForce":"GoodTilCancel","date":"1999-06-05T00:00:00.0000000+00:00","limitPrice":{"amount":534,"currency":"USD"}}]} # BlockAndOrdersCreateRequest | The collection of block and orders requests.
 
     try:
-        # [EARLY ACCESS] CreateOrders: Create Block and Order pairs
-        api_response = await api_instance.create_orders(block_and_order_create_request)
+        # [EARLY ACCESS] CreateOrders: Upsert a Block and associated orders
+        api_response = await api_instance.create_orders(block_and_orders_create_request)
         print("The response of OrderManagementApi->create_orders:\n")
         pprint(api_response)
     except Exception as e:
@@ -186,11 +186,11 @@ async with api_client_factory:
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **block_and_order_create_request** | [**BlockAndOrderCreateRequest**](BlockAndOrderCreateRequest.md)| The collection of block and order requests. | 
+ **block_and_orders_create_request** | [**BlockAndOrdersCreateRequest**](BlockAndOrdersCreateRequest.md)| The collection of block and orders requests. | 
 
 ### Return type
 
-[**ResourceListOfBlockAndOrder**](ResourceListOfBlockAndOrder.md)
+[**ResourceListOfBlockAndOrders**](ResourceListOfBlockAndOrders.md)
 
 ### Authorization
 
@@ -204,7 +204,7 @@ Name | Type | Description  | Notes
 ### HTTP response details
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-**201** | A collection of block and order pairs. |  -  |
+**201** | A collection of block and associated orders. |  -  |
 **400** | The details of the input related failure |  -  |
 **0** | Error response |  -  |
 

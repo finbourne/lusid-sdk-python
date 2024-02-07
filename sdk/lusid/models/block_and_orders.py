@@ -20,14 +20,16 @@ import json
 
 from typing import Any, Dict, List
 from pydantic import BaseModel, Field, conlist
-from lusid.models.block_and_order_request import BlockAndOrderRequest
+from lusid.models.block import Block
+from lusid.models.order import Order
 
-class BlockAndOrderCreateRequest(BaseModel):
+class BlockAndOrders(BaseModel):
     """
-    BlockAndOrderCreateRequest
+    BlockAndOrders
     """
-    requests: conlist(BlockAndOrderRequest, max_items=100, min_items=1) = Field(..., description="A collection of BlockAndOrderRequest.")
-    __properties = ["requests"]
+    block: Block = Field(...)
+    orders: conlist(Order) = Field(...)
+    __properties = ["block", "orders"]
 
     class Config:
         """Pydantic configuration"""
@@ -43,8 +45,8 @@ class BlockAndOrderCreateRequest(BaseModel):
         return json.dumps(self.to_dict())
 
     @classmethod
-    def from_json(cls, json_str: str) -> BlockAndOrderCreateRequest:
-        """Create an instance of BlockAndOrderCreateRequest from a JSON string"""
+    def from_json(cls, json_str: str) -> BlockAndOrders:
+        """Create an instance of BlockAndOrders from a JSON string"""
         return cls.from_dict(json.loads(json_str))
 
     def to_dict(self):
@@ -53,25 +55,29 @@ class BlockAndOrderCreateRequest(BaseModel):
                           exclude={
                           },
                           exclude_none=True)
-        # override the default output from pydantic by calling `to_dict()` of each item in requests (list)
+        # override the default output from pydantic by calling `to_dict()` of block
+        if self.block:
+            _dict['block'] = self.block.to_dict()
+        # override the default output from pydantic by calling `to_dict()` of each item in orders (list)
         _items = []
-        if self.requests:
-            for _item in self.requests:
+        if self.orders:
+            for _item in self.orders:
                 if _item:
                     _items.append(_item.to_dict())
-            _dict['requests'] = _items
+            _dict['orders'] = _items
         return _dict
 
     @classmethod
-    def from_dict(cls, obj: dict) -> BlockAndOrderCreateRequest:
-        """Create an instance of BlockAndOrderCreateRequest from a dict"""
+    def from_dict(cls, obj: dict) -> BlockAndOrders:
+        """Create an instance of BlockAndOrders from a dict"""
         if obj is None:
             return None
 
         if not isinstance(obj, dict):
-            return BlockAndOrderCreateRequest.parse_obj(obj)
+            return BlockAndOrders.parse_obj(obj)
 
-        _obj = BlockAndOrderCreateRequest.parse_obj({
-            "requests": [BlockAndOrderRequest.from_dict(_item) for _item in obj.get("requests")] if obj.get("requests") is not None else None
+        _obj = BlockAndOrders.parse_obj({
+            "block": Block.from_dict(obj.get("block")) if obj.get("block") is not None else None,
+            "orders": [Order.from_dict(_item) for _item in obj.get("orders")] if obj.get("orders") is not None else None
         })
         return _obj

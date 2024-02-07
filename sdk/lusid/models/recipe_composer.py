@@ -26,20 +26,20 @@ class RecipeComposer(BaseModel):
     """
     Recipe composer is an object used to dynamically compose Configuration Recipe from atomic operations.  # noqa: E501
     """
-    code: constr(strict=True, max_length=64, min_length=1) = Field(..., description="User given string name (code) to identify the recipe.")
     scope: constr(strict=True, max_length=64, min_length=1) = Field(..., description="The scope used when updating or inserting the Recipe Composer.")
+    code: constr(strict=True, max_length=64, min_length=1) = Field(..., description="User given string name (code) to identify the recipe.")
     operations: Optional[conlist(RecipeBlock)] = Field(None, description="Atomic operations used to compose a Configuration Recipe.")
-    __properties = ["code", "scope", "operations"]
+    __properties = ["scope", "code", "operations"]
 
-    @validator('code')
-    def code_validate_regular_expression(cls, value):
+    @validator('scope')
+    def scope_validate_regular_expression(cls, value):
         """Validates the regular expression"""
         if not re.match(r"^[a-zA-Z0-9\-_]+$", value):
             raise ValueError(r"must validate the regular expression /^[a-zA-Z0-9\-_]+$/")
         return value
 
-    @validator('scope')
-    def scope_validate_regular_expression(cls, value):
+    @validator('code')
+    def code_validate_regular_expression(cls, value):
         """Validates the regular expression"""
         if not re.match(r"^[a-zA-Z0-9\-_]+$", value):
             raise ValueError(r"must validate the regular expression /^[a-zA-Z0-9\-_]+$/")
@@ -93,8 +93,8 @@ class RecipeComposer(BaseModel):
             return RecipeComposer.parse_obj(obj)
 
         _obj = RecipeComposer.parse_obj({
-            "code": obj.get("code"),
             "scope": obj.get("scope"),
+            "code": obj.get("code"),
             "operations": [RecipeBlock.from_dict(_item) for _item in obj.get("operations")] if obj.get("operations") is not None else None
         })
         return _obj

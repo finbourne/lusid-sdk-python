@@ -20,19 +20,17 @@ import json
 
 from typing import Any, Dict, List, Optional
 from pydantic import BaseModel, Field, StrictStr, conlist
-from lusid.models.block_and_order import BlockAndOrder
 from lusid.models.link import Link
+from lusid.models.recipe_composer import RecipeComposer
 
-class ResourceListOfBlockAndOrder(BaseModel):
+class GetRecipeComposerResponse(BaseModel):
     """
-    ResourceListOfBlockAndOrder
+    GetRecipeComposerResponse
     """
-    values: conlist(BlockAndOrder) = Field(...)
-    href: Optional[StrictStr] = None
+    href: Optional[StrictStr] = Field(None, description="The specific Uniform Resource Identifier (URI) for this resource at the requested effective and asAt datetime.")
+    value: Optional[RecipeComposer] = None
     links: Optional[conlist(Link)] = None
-    next_page: Optional[StrictStr] = Field(None, alias="nextPage")
-    previous_page: Optional[StrictStr] = Field(None, alias="previousPage")
-    __properties = ["values", "href", "links", "nextPage", "previousPage"]
+    __properties = ["href", "value", "links"]
 
     class Config:
         """Pydantic configuration"""
@@ -48,8 +46,8 @@ class ResourceListOfBlockAndOrder(BaseModel):
         return json.dumps(self.to_dict())
 
     @classmethod
-    def from_json(cls, json_str: str) -> ResourceListOfBlockAndOrder:
-        """Create an instance of ResourceListOfBlockAndOrder from a JSON string"""
+    def from_json(cls, json_str: str) -> GetRecipeComposerResponse:
+        """Create an instance of GetRecipeComposerResponse from a JSON string"""
         return cls.from_dict(json.loads(json_str))
 
     def to_dict(self):
@@ -58,13 +56,9 @@ class ResourceListOfBlockAndOrder(BaseModel):
                           exclude={
                           },
                           exclude_none=True)
-        # override the default output from pydantic by calling `to_dict()` of each item in values (list)
-        _items = []
-        if self.values:
-            for _item in self.values:
-                if _item:
-                    _items.append(_item.to_dict())
-            _dict['values'] = _items
+        # override the default output from pydantic by calling `to_dict()` of value
+        if self.value:
+            _dict['value'] = self.value.to_dict()
         # override the default output from pydantic by calling `to_dict()` of each item in links (list)
         _items = []
         if self.links:
@@ -82,32 +76,20 @@ class ResourceListOfBlockAndOrder(BaseModel):
         if self.links is None and "links" in self.__fields_set__:
             _dict['links'] = None
 
-        # set to None if next_page (nullable) is None
-        # and __fields_set__ contains the field
-        if self.next_page is None and "next_page" in self.__fields_set__:
-            _dict['nextPage'] = None
-
-        # set to None if previous_page (nullable) is None
-        # and __fields_set__ contains the field
-        if self.previous_page is None and "previous_page" in self.__fields_set__:
-            _dict['previousPage'] = None
-
         return _dict
 
     @classmethod
-    def from_dict(cls, obj: dict) -> ResourceListOfBlockAndOrder:
-        """Create an instance of ResourceListOfBlockAndOrder from a dict"""
+    def from_dict(cls, obj: dict) -> GetRecipeComposerResponse:
+        """Create an instance of GetRecipeComposerResponse from a dict"""
         if obj is None:
             return None
 
         if not isinstance(obj, dict):
-            return ResourceListOfBlockAndOrder.parse_obj(obj)
+            return GetRecipeComposerResponse.parse_obj(obj)
 
-        _obj = ResourceListOfBlockAndOrder.parse_obj({
-            "values": [BlockAndOrder.from_dict(_item) for _item in obj.get("values")] if obj.get("values") is not None else None,
+        _obj = GetRecipeComposerResponse.parse_obj({
             "href": obj.get("href"),
-            "links": [Link.from_dict(_item) for _item in obj.get("links")] if obj.get("links") is not None else None,
-            "next_page": obj.get("nextPage"),
-            "previous_page": obj.get("previousPage")
+            "value": RecipeComposer.from_dict(obj.get("value")) if obj.get("value") is not None else None,
+            "links": [Link.from_dict(_item) for _item in obj.get("links")] if obj.get("links") is not None else None
         })
         return _obj
