@@ -19,7 +19,7 @@ import json
 
 
 from typing import Any, Dict, Optional
-from pydantic import Field, StrictStr, validator
+from pydantic import Field, StrictInt, StrictStr, validator
 from lusid.models.equity_all_of_identifiers import EquityAllOfIdentifiers
 from lusid.models.lusid_instrument import LusidInstrument
 
@@ -29,9 +29,10 @@ class Equity(LusidInstrument):
     """
     identifiers: Optional[EquityAllOfIdentifiers] = None
     dom_ccy: StrictStr = Field(..., alias="domCcy", description="The domestic currency of the instrument.")
+    lot_size: Optional[StrictInt] = Field(None, alias="lotSize", description="Equity LotSize, the minimum number of shares that can be bought at once.  Optional, if set must be non-negative, if not set defaults to 1.    Note this property does not impact valuation. From a LUSID analytics perspective, it is purely informational.")
     instrument_type: StrictStr = Field(..., alias="instrumentType", description="The available values are: QuotedSecurity, InterestRateSwap, FxForward, Future, ExoticInstrument, FxOption, CreditDefaultSwap, InterestRateSwaption, Bond, EquityOption, FixedLeg, FloatingLeg, BespokeCashFlowsLeg, Unknown, TermDeposit, ContractForDifference, EquitySwap, CashPerpetual, CapFloor, CashSettled, CdsIndex, Basket, FundingLeg, FxSwap, ForwardRateAgreement, SimpleInstrument, Repo, Equity, ExchangeTradedOption, ReferenceInstrument, ComplexBond, InflationLinkedBond, InflationSwap, SimpleCashFlowLoan, TotalReturnSwap, InflationLeg")
     additional_properties: Dict[str, Any] = {}
-    __properties = ["instrumentType", "identifiers", "domCcy"]
+    __properties = ["instrumentType", "identifiers", "domCcy", "lotSize"]
 
     @validator('instrument_type')
     def instrument_type_validate_enum(cls, value):
@@ -92,7 +93,8 @@ class Equity(LusidInstrument):
         _obj = Equity.parse_obj({
             "instrument_type": obj.get("instrumentType"),
             "identifiers": EquityAllOfIdentifiers.from_dict(obj.get("identifiers")) if obj.get("identifiers") is not None else None,
-            "dom_ccy": obj.get("domCcy")
+            "dom_ccy": obj.get("domCcy"),
+            "lot_size": obj.get("lotSize")
         })
         # store additional fields in additional_properties
         for _key in obj.keys():
