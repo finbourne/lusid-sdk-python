@@ -27,7 +27,7 @@ class PerformanceReturnsMetric(BaseModel):
     """
     type: Optional[StrictStr] = Field(None, description="The type of the metric. Default to Return")
     window: Optional[StrictStr] = Field(None, description="The given metric for the calculation i.e. 1Y, 1D.")
-    allow_partial: Optional[StrictBool] = Field(None, alias="allowPartial", description="Bool if the metric is allowed partial results. Deafult to false.")
+    allow_partial: Optional[StrictBool] = Field(None, alias="allowPartial", description="Bool if the metric is allowed partial results. Default to false.")
     annualised: Optional[StrictBool] = Field(None, description="Bool if the metric is annualized. Default to false.")
     with_fee: Optional[StrictBool] = Field(None, alias="withFee", description="Bool if the metric should consider the fees when is calculated. Default to false.")
     seed_amount: Optional[StrictStr] = Field(None, alias="seedAmount", description="The given seed amount for the calculation of the indicative amount metrics.")

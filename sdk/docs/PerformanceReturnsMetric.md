@@ -7,7 +7,7 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **type** | **str** | The type of the metric. Default to Return | [optional] 
 **window** | **str** | The given metric for the calculation i.e. 1Y, 1D. | [optional] 
-**allow_partial** | **bool** | Bool if the metric is allowed partial results. Deafult to false. | [optional] 
+**allow_partial** | **bool** | Bool if the metric is allowed partial results. Default to false. | [optional] 
 **annualised** | **bool** | Bool if the metric is annualized. Default to false. | [optional] 
 **with_fee** | **bool** | Bool if the metric should consider the fees when is calculated. Default to false. | [optional] 
 **seed_amount** | **str** | The given seed amount for the calculation of the indicative amount metrics. | [optional] 

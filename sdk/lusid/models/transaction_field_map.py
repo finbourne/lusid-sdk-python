@@ -30,17 +30,15 @@ class TransactionFieldMap(BaseModel):
     transaction_id: constr(strict=True, max_length=1024, min_length=0) = Field(..., alias="transactionId")
     type: constr(strict=True, max_length=1024, min_length=0) = Field(...)
     source: constr(strict=True, max_length=1024, min_length=0) = Field(...)
-    lusid_instrument_id: constr(strict=True, max_length=1024, min_length=0) = Field(..., alias="lusidInstrumentId")
-    instrument_scope: constr(strict=True, max_length=1024, min_length=0) = Field(..., alias="instrumentScope")
-    trade_date: constr(strict=True, max_length=1024, min_length=0) = Field(..., alias="tradeDate")
+    instrument: constr(strict=True, max_length=1024, min_length=0) = Field(...)
+    transaction_date: constr(strict=True, max_length=1024, min_length=0) = Field(..., alias="transactionDate")
     settlement_date: constr(strict=True, max_length=1024, min_length=0) = Field(..., alias="settlementDate")
     units: constr(strict=True, max_length=1024, min_length=0) = Field(...)
     transaction_price: TransactionPriceAndType = Field(..., alias="transactionPrice")
     transaction_currency: constr(strict=True, max_length=1024, min_length=0) = Field(..., alias="transactionCurrency")
     exchange_rate: constr(strict=True, max_length=1024, min_length=0) = Field(..., alias="exchangeRate")
     total_consideration: TransactionCurrencyAndAmount = Field(..., alias="totalConsideration")
-    settlement_currency: constr(strict=True, max_length=1024, min_length=0) = Field(..., alias="settlementCurrency")
-    __properties = ["transactionId", "type", "source", "lusidInstrumentId", "instrumentScope", "tradeDate", "settlementDate", "units", "transactionPrice", "transactionCurrency", "exchangeRate", "totalConsideration", "settlementCurrency"]
+    __properties = ["transactionId", "type", "source", "instrument", "transactionDate", "settlementDate", "units", "transactionPrice", "transactionCurrency", "exchangeRate", "totalConsideration"]
 
     class Config:
         """Pydantic configuration"""
@@ -87,15 +85,13 @@ class TransactionFieldMap(BaseModel):
             "transaction_id": obj.get("transactionId"),
             "type": obj.get("type"),
             "source": obj.get("source"),
-            "lusid_instrument_id": obj.get("lusidInstrumentId"),
-            "instrument_scope": obj.get("instrumentScope"),
-            "trade_date": obj.get("tradeDate"),
+            "instrument": obj.get("instrument"),
+            "transaction_date": obj.get("transactionDate"),
             "settlement_date": obj.get("settlementDate"),
             "units": obj.get("units"),
             "transaction_price": TransactionPriceAndType.from_dict(obj.get("transactionPrice")) if obj.get("transactionPrice") is not None else None,
             "transaction_currency": obj.get("transactionCurrency"),
             "exchange_rate": obj.get("exchangeRate"),
-            "total_consideration": TransactionCurrencyAndAmount.from_dict(obj.get("totalConsideration")) if obj.get("totalConsideration") is not None else None,
-            "settlement_currency": obj.get("settlementCurrency")
+            "total_consideration": TransactionCurrencyAndAmount.from_dict(obj.get("totalConsideration")) if obj.get("totalConsideration") is not None else None
         })
         return _obj

@@ -6,7 +6,7 @@ Method | HTTP request | Description
 ------------- | ------------- | -------------
 [**create_transaction_template**](InstrumentEventTypesApi.md#create_transaction_template) | **POST** /api/instrumenteventtypes/{instrumentEventType}/transactiontemplates/{instrumentType}/{scope} | [EXPERIMENTAL] CreateTransactionTemplate: Create Transaction Template
 [**get_transaction_template**](InstrumentEventTypesApi.md#get_transaction_template) | **GET** /api/instrumenteventtypes/{instrumentEventType}/transactiontemplates/{instrumentType}/{scope} | [EXPERIMENTAL] GetTransactionTemplate: Get Transaction Template
-[**get_transaction_template_specification**](InstrumentEventTypesApi.md#get_transaction_template_specification) | **GET** /api/instrumenteventtypes/{instrumentEventType}/transactiontemplatespecification/{instrumentType} | [EXPERIMENTAL] GetTransactionTemplateSpecification: Get Transaction Template Specification.
+[**get_transaction_template_specification**](InstrumentEventTypesApi.md#get_transaction_template_specification) | **GET** /api/instrumenteventtypes/{instrumentEventType}/transactiontemplatespecification | [EXPERIMENTAL] GetTransactionTemplateSpecification: Get Transaction Template Specification.
 
 
 # **create_transaction_template**
@@ -71,7 +71,7 @@ async with api_client_factory:
     instrument_event_type = 'instrument_event_type_example' # str | The type of instrument events that the template is applied to.
     instrument_type = 'instrument_type_example' # str | The instrument type of the transaction template. The combination of the instrument              event type, instrument type and scope uniquely identifies a transaction template
     scope = 'scope_example' # str | The scope in which the template lies.
-    transaction_template_request = {"description":"User-created template for overriding the default bond coupon template.","componentTransactions":[{"displayName":"Bond Income Override","transactionFieldMap":{"transactionId":"{{instrumentEventId}}-{{holdingId}}","type":"BondCoupon","source":"MyTransactionTypeScope","lusidInstrumentId":"{{lusidInstrumentId}}","instrumentScope":"{{instrumentScope}}","tradeDate":"{{BondCouponEvent.exDate}}","settlementDate":"{{BondCouponEvent.paymentDate}}","units":"{{eligibleBalance}}","transactionPrice":{"price":"{{BondCouponEvent.couponPerUnit}}","type":"CashFlowPerUnit"},"transactionCurrency":"{{BondCouponEvent.currency}}","exchangeRate":"1","totalConsideration":{"currency":"{{BondCouponEvent.couponAmount}}","amount":"{{BondCouponEvent.currency}}"},"settlementCurrency":"{{BondCouponEvent.couponAmount}}"}}]} # TransactionTemplateRequest | A request defining a new transaction template to be created.
+    transaction_template_request = {"description":"User-created template for overriding the default bond coupon template.","componentTransactions":[{"displayName":"Bond Income Override","transactionFieldMap":{"transactionId":"{{instrumentEventId}}-{{holdingId}}","type":"BondCoupon","source":"MyTransactionTypeScope","instrument":"{{lusidInstrumentId}}","transactionDate":"{{BondCouponEvent.exDate}}","settlementDate":"{{BondCouponEvent.paymentDate}}","units":"{{eligibleBalance}}","transactionPrice":{"price":"{{BondCouponEvent.couponPerUnit}}","type":"CashFlowPerUnit"},"transactionCurrency":"{{BondCouponEvent.currency}}","exchangeRate":"1","totalConsideration":{"currency":"{{BondCouponEvent.couponAmount}}","amount":"{{BondCouponEvent.currency}}"}}}]} # TransactionTemplateRequest | A request defining a new transaction template to be created.
 
     try:
         # [EXPERIMENTAL] CreateTransactionTemplate: Create Transaction Template
@@ -219,7 +219,7 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **get_transaction_template_specification**
-> TransactionTemplateSpecification get_transaction_template_specification(instrument_type, instrument_event_type)
+> TransactionTemplateSpecification get_transaction_template_specification(instrument_event_type)
 
 [EXPERIMENTAL] GetTransactionTemplateSpecification: Get Transaction Template Specification.
 
@@ -276,12 +276,11 @@ api_client_factory = ApiClientFactory(config_loaders=config_loaders)
 async with api_client_factory:
     # Create an instance of the API class
     api_instance = api_client_factory.build(lusid.InstrumentEventTypesApi)
-    instrument_type = 'instrument_type_example' # str | The requested instrument type.
     instrument_event_type = 'instrument_event_type_example' # str | The requested instrument event type.
 
     try:
         # [EXPERIMENTAL] GetTransactionTemplateSpecification: Get Transaction Template Specification.
-        api_response = await api_instance.get_transaction_template_specification(instrument_type, instrument_event_type)
+        api_response = await api_instance.get_transaction_template_specification(instrument_event_type)
         print("The response of InstrumentEventTypesApi->get_transaction_template_specification:\n")
         pprint(api_response)
     except Exception as e:
@@ -293,7 +292,6 @@ async with api_client_factory:
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **instrument_type** | **str**| The requested instrument type. | 
  **instrument_event_type** | **str**| The requested instrument event type. | 
 
 ### Return type

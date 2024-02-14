@@ -411,26 +411,24 @@ class InstrumentEventTypesApi:
             _request_auth=_params.get('_request_auth'))
 
     @overload
-    async def get_transaction_template_specification(self, instrument_type : Annotated[StrictStr, Field(..., description="The requested instrument type.")], instrument_event_type : Annotated[StrictStr, Field(..., description="The requested instrument event type.")], **kwargs) -> TransactionTemplateSpecification:  # noqa: E501
+    async def get_transaction_template_specification(self, instrument_event_type : Annotated[StrictStr, Field(..., description="The requested instrument event type.")], **kwargs) -> TransactionTemplateSpecification:  # noqa: E501
         ...
 
     @overload
-    def get_transaction_template_specification(self, instrument_type : Annotated[StrictStr, Field(..., description="The requested instrument type.")], instrument_event_type : Annotated[StrictStr, Field(..., description="The requested instrument event type.")], async_req: Optional[bool]=True, **kwargs) -> TransactionTemplateSpecification:  # noqa: E501
+    def get_transaction_template_specification(self, instrument_event_type : Annotated[StrictStr, Field(..., description="The requested instrument event type.")], async_req: Optional[bool]=True, **kwargs) -> TransactionTemplateSpecification:  # noqa: E501
         ...
 
     @validate_arguments
-    def get_transaction_template_specification(self, instrument_type : Annotated[StrictStr, Field(..., description="The requested instrument type.")], instrument_event_type : Annotated[StrictStr, Field(..., description="The requested instrument event type.")], async_req: Optional[bool]=None, **kwargs) -> Union[TransactionTemplateSpecification, Awaitable[TransactionTemplateSpecification]]:  # noqa: E501
+    def get_transaction_template_specification(self, instrument_event_type : Annotated[StrictStr, Field(..., description="The requested instrument event type.")], async_req: Optional[bool]=None, **kwargs) -> Union[TransactionTemplateSpecification, Awaitable[TransactionTemplateSpecification]]:  # noqa: E501
         """[EXPERIMENTAL] GetTransactionTemplateSpecification: Get Transaction Template Specification.  # noqa: E501
 
         Retrieve the transaction template specification for a particular event type.  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
 
-        >>> thread = api.get_transaction_template_specification(instrument_type, instrument_event_type, async_req=True)
+        >>> thread = api.get_transaction_template_specification(instrument_event_type, async_req=True)
         >>> result = thread.get()
 
-        :param instrument_type: The requested instrument type. (required)
-        :type instrument_type: str
         :param instrument_event_type: The requested instrument event type. (required)
         :type instrument_event_type: str
         :param async_req: Whether to execute the request asynchronously.
@@ -450,21 +448,19 @@ class InstrumentEventTypesApi:
             raise ValueError(message)
         if async_req is not None:
             kwargs['async_req'] = async_req
-        return self.get_transaction_template_specification_with_http_info(instrument_type, instrument_event_type, **kwargs)  # noqa: E501
+        return self.get_transaction_template_specification_with_http_info(instrument_event_type, **kwargs)  # noqa: E501
 
     @validate_arguments
-    def get_transaction_template_specification_with_http_info(self, instrument_type : Annotated[StrictStr, Field(..., description="The requested instrument type.")], instrument_event_type : Annotated[StrictStr, Field(..., description="The requested instrument event type.")], **kwargs) -> ApiResponse:  # noqa: E501
+    def get_transaction_template_specification_with_http_info(self, instrument_event_type : Annotated[StrictStr, Field(..., description="The requested instrument event type.")], **kwargs) -> ApiResponse:  # noqa: E501
         """[EXPERIMENTAL] GetTransactionTemplateSpecification: Get Transaction Template Specification.  # noqa: E501
 
         Retrieve the transaction template specification for a particular event type.  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
 
-        >>> thread = api.get_transaction_template_specification_with_http_info(instrument_type, instrument_event_type, async_req=True)
+        >>> thread = api.get_transaction_template_specification_with_http_info(instrument_event_type, async_req=True)
         >>> result = thread.get()
 
-        :param instrument_type: The requested instrument type. (required)
-        :type instrument_type: str
         :param instrument_event_type: The requested instrument event type. (required)
         :type instrument_event_type: str
         :param async_req: Whether to execute the request asynchronously.
@@ -495,7 +491,6 @@ class InstrumentEventTypesApi:
         _params = locals()
 
         _all_params = [
-            'instrument_type',
             'instrument_event_type'
         ]
         _all_params.extend(
@@ -524,9 +519,6 @@ class InstrumentEventTypesApi:
 
         # process the path parameters
         _path_params = {}
-        if _params['instrument_type']:
-            _path_params['instrumentType'] = _params['instrument_type']
-
         if _params['instrument_event_type']:
             _path_params['instrumentEventType'] = _params['instrument_event_type']
 
@@ -553,7 +545,7 @@ class InstrumentEventTypesApi:
         }
 
         return self.api_client.call_api(
-            '/api/instrumenteventtypes/{instrumentEventType}/transactiontemplatespecification/{instrumentType}', 'GET',
+            '/api/instrumenteventtypes/{instrumentEventType}/transactiontemplatespecification', 'GET',
             _path_params,
             _query_params,
             _header_params,
