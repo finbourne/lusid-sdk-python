@@ -17,16 +17,16 @@ import pprint
 import re  # noqa: F401
 import json
 
-from datetime import datetime
+
 from typing import Any, Dict
-from pydantic import Field, StrictStr, validator
+from pydantic import Field, StrictStr, constr, validator
 from lusid.models.compliance_parameter import ComplianceParameter
 
-class DateTimeComplianceParameter(ComplianceParameter):
+class GroupBySelectorComplianceParameter(ComplianceParameter):
     """
-    DateTimeComplianceParameter
+    GroupBySelectorComplianceParameter
     """
-    value: datetime = Field(...)
+    value: constr(strict=True, min_length=1) = Field(...)
     compliance_parameter_type: StrictStr = Field(..., alias="complianceParameterType", description="The parameter type. The available values are: BoolComplianceParameter, StringComplianceParameter, DecimalComplianceParameter, DateTimeComplianceParameter, PropertyKeyComplianceParameter, AddressKeyComplianceParameter, PortfolioIdComplianceParameter, PortfolioGroupIdComplianceParameter, StringListComplianceParameter, BoolListComplianceParameter, DateTimeListComplianceParameter, DecimalListComplianceParameter, PropertyKeyListComplianceParameter, AddressKeyListComplianceParameter, PortfolioIdListComplianceParameter, PortfolioGroupIdListComplianceParameter, InstrumentListComplianceParameter, FilterPredicateComplianceParameter, GroupFilterPredicateComplianceParameter, GroupBySelectorComplianceParameter")
     additional_properties: Dict[str, Any] = {}
     __properties = ["complianceParameterType", "value"]
@@ -52,8 +52,8 @@ class DateTimeComplianceParameter(ComplianceParameter):
         return json.dumps(self.to_dict())
 
     @classmethod
-    def from_json(cls, json_str: str) -> DateTimeComplianceParameter:
-        """Create an instance of DateTimeComplianceParameter from a JSON string"""
+    def from_json(cls, json_str: str) -> GroupBySelectorComplianceParameter:
+        """Create an instance of GroupBySelectorComplianceParameter from a JSON string"""
         return cls.from_dict(json.loads(json_str))
 
     def to_dict(self):
@@ -71,15 +71,15 @@ class DateTimeComplianceParameter(ComplianceParameter):
         return _dict
 
     @classmethod
-    def from_dict(cls, obj: dict) -> DateTimeComplianceParameter:
-        """Create an instance of DateTimeComplianceParameter from a dict"""
+    def from_dict(cls, obj: dict) -> GroupBySelectorComplianceParameter:
+        """Create an instance of GroupBySelectorComplianceParameter from a dict"""
         if obj is None:
             return None
 
         if not isinstance(obj, dict):
-            return DateTimeComplianceParameter.parse_obj(obj)
+            return GroupBySelectorComplianceParameter.parse_obj(obj)
 
-        _obj = DateTimeComplianceParameter.parse_obj({
+        _obj = GroupBySelectorComplianceParameter.parse_obj({
             "compliance_parameter_type": obj.get("complianceParameterType"),
             "value": obj.get("value")
         })
