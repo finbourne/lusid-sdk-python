@@ -18,23 +18,22 @@ import re  # noqa: F401
 import json
 
 
-from typing import Any, Dict, Union
-from pydantic import Field, StrictBool, StrictFloat, StrictInt, StrictStr, constr, validator
-from lusid.models.floating_leg import FloatingLeg
+from typing import Any, Dict
+from pydantic import Field, StrictStr, constr, validator
 from lusid.models.lusid_instrument import LusidInstrument
 
-class CapFloor(LusidInstrument):
+class FundShareClass(LusidInstrument):
     """
-    LUSID representation of Cap, Floor, or Collar.  # noqa: E501
+    LUSID representation of a FundShareClass.  A ShareClass represents a pool of shares, held by investors, within a fund. A ShareClass can represent a differing investment approach by either Fees, Income, Currency Risk and Investor type.  # noqa: E501
     """
-    cap_floor_type: constr(strict=True, min_length=1) = Field(..., alias="capFloorType", description="Determine if it's CAP, FLOOR, or COLLAR.    Supported string (enumeration) values are: [Cap, Floor, Collar].")
-    cap_strike: Union[StrictFloat, StrictInt] = Field(..., alias="capStrike", description="Strike rate of the Cap.")
-    floor_strike: Union[StrictFloat, StrictInt] = Field(..., alias="floorStrike", description="Strike rate of the Floor.")
-    include_first_caplet: StrictBool = Field(..., alias="includeFirstCaplet", description="Include first caplet flag.")
-    underlying_floating_leg: FloatingLeg = Field(..., alias="underlyingFloatingLeg")
+    short_code: constr(strict=True, min_length=1) = Field(..., alias="shortCode", description="A short identifier, unique across a single fund, usually made up of the ShareClass components. Eg \"A Accumulation Euro Hedged Class\" could become \"A Acc H EUR\".")
+    fund_share_class_type: constr(strict=True, min_length=1) = Field(..., alias="fundShareClassType", description="The type of distribution that the ShareClass will calculate. Can be either 'Income' or 'Accumulation' - Income classes will pay out and Accumulation classes will retain their ShareClass attributable income.    Supported string (enumeration) values are: [Income, Accumulation].")
+    distribution_payment_type: constr(strict=True, min_length=1) = Field(..., alias="distributionPaymentType", description="The tax treatment applied to any distributions calculated within the ShareClass. Can be either 'Net' (Distribution Calculated net of tax) or 'Gross' (Distribution calculated gross of tax).    Supported string (enumeration) values are: [Gross, Net].")
+    hedging: constr(strict=True, min_length=1) = Field(..., description="A flag to indicate the ShareClass is operating currency hedging as a means to limit currency risk as part of it's investment strategy.    Supported string (enumeration) values are: [Invalid, None, ApplyHedging].")
+    dom_ccy: StrictStr = Field(..., alias="domCcy", description="The domestic currency of the instrument.")
     instrument_type: StrictStr = Field(..., alias="instrumentType", description="The available values are: QuotedSecurity, InterestRateSwap, FxForward, Future, ExoticInstrument, FxOption, CreditDefaultSwap, InterestRateSwaption, Bond, EquityOption, FixedLeg, FloatingLeg, BespokeCashFlowsLeg, Unknown, TermDeposit, ContractForDifference, EquitySwap, CashPerpetual, CapFloor, CashSettled, CdsIndex, Basket, FundingLeg, FxSwap, ForwardRateAgreement, SimpleInstrument, Repo, Equity, ExchangeTradedOption, ReferenceInstrument, ComplexBond, InflationLinkedBond, InflationSwap, SimpleCashFlowLoan, TotalReturnSwap, InflationLeg, FundShareClass")
     additional_properties: Dict[str, Any] = {}
-    __properties = ["instrumentType", "capFloorType", "capStrike", "floorStrike", "includeFirstCaplet", "underlyingFloatingLeg"]
+    __properties = ["instrumentType", "shortCode", "fundShareClassType", "distributionPaymentType", "hedging", "domCcy"]
 
     @validator('instrument_type')
     def instrument_type_validate_enum(cls, value):
@@ -57,8 +56,8 @@ class CapFloor(LusidInstrument):
         return json.dumps(self.to_dict())
 
     @classmethod
-    def from_json(cls, json_str: str) -> CapFloor:
-        """Create an instance of CapFloor from a JSON string"""
+    def from_json(cls, json_str: str) -> FundShareClass:
+        """Create an instance of FundShareClass from a JSON string"""
         return cls.from_dict(json.loads(json_str))
 
     def to_dict(self):
@@ -68,9 +67,6 @@ class CapFloor(LusidInstrument):
                             "additional_properties"
                           },
                           exclude_none=True)
-        # override the default output from pydantic by calling `to_dict()` of underlying_floating_leg
-        if self.underlying_floating_leg:
-            _dict['underlyingFloatingLeg'] = self.underlying_floating_leg.to_dict()
         # puts key-value pairs in additional_properties in the top level
         if self.additional_properties is not None:
             for _key, _value in self.additional_properties.items():
@@ -79,21 +75,21 @@ class CapFloor(LusidInstrument):
         return _dict
 
     @classmethod
-    def from_dict(cls, obj: dict) -> CapFloor:
-        """Create an instance of CapFloor from a dict"""
+    def from_dict(cls, obj: dict) -> FundShareClass:
+        """Create an instance of FundShareClass from a dict"""
         if obj is None:
             return None
 
         if not isinstance(obj, dict):
-            return CapFloor.parse_obj(obj)
+            return FundShareClass.parse_obj(obj)
 
-        _obj = CapFloor.parse_obj({
+        _obj = FundShareClass.parse_obj({
             "instrument_type": obj.get("instrumentType"),
-            "cap_floor_type": obj.get("capFloorType"),
-            "cap_strike": obj.get("capStrike"),
-            "floor_strike": obj.get("floorStrike"),
-            "include_first_caplet": obj.get("includeFirstCaplet"),
-            "underlying_floating_leg": FloatingLeg.from_dict(obj.get("underlyingFloatingLeg")) if obj.get("underlyingFloatingLeg") is not None else None
+            "short_code": obj.get("shortCode"),
+            "fund_share_class_type": obj.get("fundShareClassType"),
+            "distribution_payment_type": obj.get("distributionPaymentType"),
+            "hedging": obj.get("hedging"),
+            "dom_ccy": obj.get("domCcy")
         })
         # store additional fields in additional_properties
         for _key in obj.keys():

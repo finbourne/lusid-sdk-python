@@ -377,6 +377,7 @@ from lusid.models.flow_convention_name import FlowConventionName
 from lusid.models.flow_conventions import FlowConventions
 from lusid.models.forward_rate_agreement import ForwardRateAgreement
 from lusid.models.from_recipe import FromRecipe
+from lusid.models.fund_share_class import FundShareClass
 from lusid.models.funding_leg import FundingLeg
 from lusid.models.funding_leg_options import FundingLegOptions
 from lusid.models.future import Future

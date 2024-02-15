@@ -26,7 +26,7 @@ class ModelSelection(BaseModel):
     The combination of a library to use and a model in that library that defines which pricing code will evaluate instruments  having a particular type/class. This allows us to control the model type and library for a given instrument.  # noqa: E501
     """
     library: StrictStr = Field(..., description="The available values are: Lusid, RefinitivQps, RefinitivTracsWeb, VolMaster, IsdaCds, YieldBook, LusidCalc")
-    model: StrictStr = Field(..., description="The available values are: SimpleStatic, Discounting, VendorDefault, BlackScholes, ConstantTimeValueOfMoney, Bachelier, ForwardWithPoints, ForwardWithPointsUndiscounted, ForwardSpecifiedRate, ForwardSpecifiedRateUndiscounted, IndexNav, IndexPrice, InlinedIndex, ForwardFromCurve, ForwardFromCurveUndiscounted, BlackScholesDigital, BjerksundStensland1993, LookUpPricing")
+    model: StrictStr = Field(..., description="The available values are: SimpleStatic, Discounting, VendorDefault, BlackScholes, ConstantTimeValueOfMoney, Bachelier, ForwardWithPoints, ForwardWithPointsUndiscounted, ForwardSpecifiedRate, ForwardSpecifiedRateUndiscounted, IndexNav, IndexPrice, InlinedIndex, ForwardFromCurve, ForwardFromCurveUndiscounted, BlackScholesDigital, BjerksundStensland1993, LookUpPricing, BondLookupPricer")
     __properties = ["library", "model"]
 
     @validator('library')
@@ -39,8 +39,8 @@ class ModelSelection(BaseModel):
     @validator('model')
     def model_validate_enum(cls, value):
         """Validates the enum"""
-        if value not in ('SimpleStatic', 'Discounting', 'VendorDefault', 'BlackScholes', 'ConstantTimeValueOfMoney', 'Bachelier', 'ForwardWithPoints', 'ForwardWithPointsUndiscounted', 'ForwardSpecifiedRate', 'ForwardSpecifiedRateUndiscounted', 'IndexNav', 'IndexPrice', 'InlinedIndex', 'ForwardFromCurve', 'ForwardFromCurveUndiscounted', 'BlackScholesDigital', 'BjerksundStensland1993', 'LookUpPricing'):
-            raise ValueError("must be one of enum values ('SimpleStatic', 'Discounting', 'VendorDefault', 'BlackScholes', 'ConstantTimeValueOfMoney', 'Bachelier', 'ForwardWithPoints', 'ForwardWithPointsUndiscounted', 'ForwardSpecifiedRate', 'ForwardSpecifiedRateUndiscounted', 'IndexNav', 'IndexPrice', 'InlinedIndex', 'ForwardFromCurve', 'ForwardFromCurveUndiscounted', 'BlackScholesDigital', 'BjerksundStensland1993', 'LookUpPricing')")
+        if value not in ('SimpleStatic', 'Discounting', 'VendorDefault', 'BlackScholes', 'ConstantTimeValueOfMoney', 'Bachelier', 'ForwardWithPoints', 'ForwardWithPointsUndiscounted', 'ForwardSpecifiedRate', 'ForwardSpecifiedRateUndiscounted', 'IndexNav', 'IndexPrice', 'InlinedIndex', 'ForwardFromCurve', 'ForwardFromCurveUndiscounted', 'BlackScholesDigital', 'BjerksundStensland1993', 'LookUpPricing', 'BondLookupPricer'):
+            raise ValueError("must be one of enum values ('SimpleStatic', 'Discounting', 'VendorDefault', 'BlackScholes', 'ConstantTimeValueOfMoney', 'Bachelier', 'ForwardWithPoints', 'ForwardWithPointsUndiscounted', 'ForwardSpecifiedRate', 'ForwardSpecifiedRateUndiscounted', 'IndexNav', 'IndexPrice', 'InlinedIndex', 'ForwardFromCurve', 'ForwardFromCurveUndiscounted', 'BlackScholesDigital', 'BjerksundStensland1993', 'LookUpPricing', 'BondLookupPricer')")
         return value
 
     class Config:
