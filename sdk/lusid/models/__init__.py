@@ -316,6 +316,7 @@ from lusid.models.fx_forward_curve_by_quote_reference import FxForwardCurveByQuo
 from lusid.models.fx_forward_curve_data import FxForwardCurveData
 from lusid.models.fx_forward_model_options import FxForwardModelOptions
 from lusid.models.fx_forward_pips_curve_data import FxForwardPipsCurveData
+from lusid.models.fx_forward_settlement_event import FxForwardSettlementEvent
 from lusid.models.fx_forward_tenor_curve_data import FxForwardTenorCurveData
 from lusid.models.fx_forward_tenor_pips_curve_data import FxForwardTenorPipsCurveData
 from lusid.models.fx_forwards_dependency import FxForwardsDependency

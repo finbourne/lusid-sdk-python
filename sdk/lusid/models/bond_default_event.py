@@ -18,29 +18,24 @@ import re  # noqa: F401
 import json
 
 from datetime import datetime
-from typing import Any, Dict, Union
-from pydantic import Field, StrictFloat, StrictInt, StrictStr, constr, validator
+from typing import Any, Dict
+from pydantic import Field, StrictStr, validator
 from lusid.models.instrument_event import InstrumentEvent
 
 class BondDefaultEvent(InstrumentEvent):
     """
     Indicates when an issuer has defaulted on an obligation due to technical default, missed payments, or bankruptcy filing.  # noqa: E501
     """
-    amount: Union[StrictFloat, StrictInt] = Field(..., description="Percentage or amount of each share held to be given to shareholders.")
-    coupon_paid_date: datetime = Field(..., alias="couponPaidDate", description="Date that the missed coupon is paid if payment is made within grace period.")
-    default_status: constr(strict=True, min_length=1) = Field(..., alias="defaultStatus", description="The status of the bond default (i.e., technical or default)    Supported string (enumeration) values are: [Technical, Default].")
-    default_type: constr(strict=True, min_length=1) = Field(..., alias="defaultType", description="The type of the default. (coupon payment, principal payment, covenant ...)    Supported string (enumeration) values are: [CouponPayment, CouponAndPrincipalPayment, PrincipalPayment, Covenant, Bankruptcy, BuyBackOption].")
-    grace_end_date: datetime = Field(..., alias="graceEndDate", description="Date the grace period for making coupon payment ends.")
-    payment_date: datetime = Field(..., alias="paymentDate", description="The date the coupon payment was missed.")
-    instrument_event_type: StrictStr = Field(..., alias="instrumentEventType", description="The Type of Event. The available values are: TransitionEvent, InformationalEvent, OpenEvent, CloseEvent, StockSplitEvent, BondDefaultEvent, CashDividendEvent, AmortisationEvent, CashFlowEvent, ExerciseEvent, ResetEvent, TriggerEvent, RawVendorEvent, InformationalErrorEvent, BondCouponEvent, DividendReinvestmentEvent, AccumulationEvent, BondPrincipalEvent, DividendOptionEvent, MaturityEvent")
+    effective_date: datetime = Field(..., alias="effectiveDate", description="The date the bond default occurred.")
+    instrument_event_type: StrictStr = Field(..., alias="instrumentEventType", description="The Type of Event. The available values are: TransitionEvent, InformationalEvent, OpenEvent, CloseEvent, StockSplitEvent, BondDefaultEvent, CashDividendEvent, AmortisationEvent, CashFlowEvent, ExerciseEvent, ResetEvent, TriggerEvent, RawVendorEvent, InformationalErrorEvent, BondCouponEvent, DividendReinvestmentEvent, AccumulationEvent, BondPrincipalEvent, DividendOptionEvent, MaturityEvent, FxForwardSettlementEvent")
     additional_properties: Dict[str, Any] = {}
-    __properties = ["instrumentEventType", "amount", "couponPaidDate", "defaultStatus", "defaultType", "graceEndDate", "paymentDate"]
+    __properties = ["instrumentEventType", "effectiveDate"]
 
     @validator('instrument_event_type')
     def instrument_event_type_validate_enum(cls, value):
         """Validates the enum"""
-        if value not in ('TransitionEvent', 'InformationalEvent', 'OpenEvent', 'CloseEvent', 'StockSplitEvent', 'BondDefaultEvent', 'CashDividendEvent', 'AmortisationEvent', 'CashFlowEvent', 'ExerciseEvent', 'ResetEvent', 'TriggerEvent', 'RawVendorEvent', 'InformationalErrorEvent', 'BondCouponEvent', 'DividendReinvestmentEvent', 'AccumulationEvent', 'BondPrincipalEvent', 'DividendOptionEvent', 'MaturityEvent'):
-            raise ValueError("must be one of enum values ('TransitionEvent', 'InformationalEvent', 'OpenEvent', 'CloseEvent', 'StockSplitEvent', 'BondDefaultEvent', 'CashDividendEvent', 'AmortisationEvent', 'CashFlowEvent', 'ExerciseEvent', 'ResetEvent', 'TriggerEvent', 'RawVendorEvent', 'InformationalErrorEvent', 'BondCouponEvent', 'DividendReinvestmentEvent', 'AccumulationEvent', 'BondPrincipalEvent', 'DividendOptionEvent', 'MaturityEvent')")
+        if value not in ('TransitionEvent', 'InformationalEvent', 'OpenEvent', 'CloseEvent', 'StockSplitEvent', 'BondDefaultEvent', 'CashDividendEvent', 'AmortisationEvent', 'CashFlowEvent', 'ExerciseEvent', 'ResetEvent', 'TriggerEvent', 'RawVendorEvent', 'InformationalErrorEvent', 'BondCouponEvent', 'DividendReinvestmentEvent', 'AccumulationEvent', 'BondPrincipalEvent', 'DividendOptionEvent', 'MaturityEvent', 'FxForwardSettlementEvent'):
+            raise ValueError("must be one of enum values ('TransitionEvent', 'InformationalEvent', 'OpenEvent', 'CloseEvent', 'StockSplitEvent', 'BondDefaultEvent', 'CashDividendEvent', 'AmortisationEvent', 'CashFlowEvent', 'ExerciseEvent', 'ResetEvent', 'TriggerEvent', 'RawVendorEvent', 'InformationalErrorEvent', 'BondCouponEvent', 'DividendReinvestmentEvent', 'AccumulationEvent', 'BondPrincipalEvent', 'DividendOptionEvent', 'MaturityEvent', 'FxForwardSettlementEvent')")
         return value
 
     class Config:
@@ -86,12 +81,7 @@ class BondDefaultEvent(InstrumentEvent):
 
         _obj = BondDefaultEvent.parse_obj({
             "instrument_event_type": obj.get("instrumentEventType"),
-            "amount": obj.get("amount"),
-            "coupon_paid_date": obj.get("couponPaidDate"),
-            "default_status": obj.get("defaultStatus"),
-            "default_type": obj.get("defaultType"),
-            "grace_end_date": obj.get("graceEndDate"),
-            "payment_date": obj.get("paymentDate")
+            "effective_date": obj.get("effectiveDate")
         })
         # store additional fields in additional_properties
         for _key in obj.keys():
