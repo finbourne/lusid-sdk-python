@@ -30,18 +30,18 @@ Use this endpoint to delete a compliance rule. The rule will be recoverable for 
 ```python
 from __future__ import print_function
 import time
-import os
 import lusid
 from lusid.rest import ApiException
 from lusid.models.deleted_entity_response import DeletedEntityResponse
 from pprint import pprint
 
+import os
 from lusid import (
-	  ApiClientFactory,
-	  ApplicationMetadataApi,
-	  EnvironmentVariablesConfigurationLoader,
-	  SecretsFileConfigurationLoader,
-	  ArgsConfigurationLoader
+    ApiClientFactory,
+    ComplianceApi,
+    EnvironmentVariablesConfigurationLoader,
+    SecretsFileConfigurationLoader,
+    ArgsConfigurationLoader
 )
 
 # Use the lusid ApiClientFactory to build Api instances with a configured api client
@@ -130,18 +130,18 @@ Use this endpoint to retrieve a single compliance rule.
 ```python
 from __future__ import print_function
 import time
-import os
 import lusid
 from lusid.rest import ApiException
 from lusid.models.compliance_rule_response import ComplianceRuleResponse
 from pprint import pprint
 
+import os
 from lusid import (
-	  ApiClientFactory,
-	  ApplicationMetadataApi,
-	  EnvironmentVariablesConfigurationLoader,
-	  SecretsFileConfigurationLoader,
-	  ArgsConfigurationLoader
+    ApiClientFactory,
+    ComplianceApi,
+    EnvironmentVariablesConfigurationLoader,
+    SecretsFileConfigurationLoader,
+    ArgsConfigurationLoader
 )
 
 # Use the lusid ApiClientFactory to build Api instances with a configured api client
@@ -234,18 +234,18 @@ Specify a run scope and code from a previously run compliance check, and the sco
 ```python
 from __future__ import print_function
 import time
-import os
 import lusid
 from lusid.rest import ApiException
 from lusid.models.compliance_rule_result_v2 import ComplianceRuleResultV2
 from pprint import pprint
 
+import os
 from lusid import (
-	  ApiClientFactory,
-	  ApplicationMetadataApi,
-	  EnvironmentVariablesConfigurationLoader,
-	  SecretsFileConfigurationLoader,
-	  ArgsConfigurationLoader
+    ApiClientFactory,
+    ComplianceApi,
+    EnvironmentVariablesConfigurationLoader,
+    SecretsFileConfigurationLoader,
+    ArgsConfigurationLoader
 )
 
 # Use the lusid ApiClientFactory to build Api instances with a configured api client
@@ -338,18 +338,18 @@ Use this endpoint to fetch a specific compliance template.
 ```python
 from __future__ import print_function
 import time
-import os
 import lusid
 from lusid.rest import ApiException
 from lusid.models.compliance_template import ComplianceTemplate
 from pprint import pprint
 
+import os
 from lusid import (
-	  ApiClientFactory,
-	  ApplicationMetadataApi,
-	  EnvironmentVariablesConfigurationLoader,
-	  SecretsFileConfigurationLoader,
-	  ArgsConfigurationLoader
+    ApiClientFactory,
+    ComplianceApi,
+    EnvironmentVariablesConfigurationLoader,
+    SecretsFileConfigurationLoader,
+    ArgsConfigurationLoader
 )
 
 # Use the lusid ApiClientFactory to build Api instances with a configured api client
@@ -440,18 +440,18 @@ Specify a run scope and code from a previously run compliance check to get an ov
 ```python
 from __future__ import print_function
 import time
-import os
 import lusid
 from lusid.rest import ApiException
 from lusid.models.decorated_compliance_run_summary import DecoratedComplianceRunSummary
 from pprint import pprint
 
+import os
 from lusid import (
-	  ApiClientFactory,
-	  ApplicationMetadataApi,
-	  EnvironmentVariablesConfigurationLoader,
-	  SecretsFileConfigurationLoader,
-	  ArgsConfigurationLoader
+    ApiClientFactory,
+    ComplianceApi,
+    EnvironmentVariablesConfigurationLoader,
+    SecretsFileConfigurationLoader,
+    ArgsConfigurationLoader
 )
 
 # Use the lusid ApiClientFactory to build Api instances with a configured api client
@@ -540,18 +540,18 @@ Use this endpoint to retrieve all compliance rules, or a subset defined by an op
 ```python
 from __future__ import print_function
 import time
-import os
 import lusid
 from lusid.rest import ApiException
 from lusid.models.paged_resource_list_of_compliance_rule_response import PagedResourceListOfComplianceRuleResponse
 from pprint import pprint
 
+import os
 from lusid import (
-	  ApiClientFactory,
-	  ApplicationMetadataApi,
-	  EnvironmentVariablesConfigurationLoader,
-	  SecretsFileConfigurationLoader,
-	  ArgsConfigurationLoader
+    ApiClientFactory,
+    ComplianceApi,
+    EnvironmentVariablesConfigurationLoader,
+    SecretsFileConfigurationLoader,
+    ArgsConfigurationLoader
 )
 
 # Use the lusid ApiClientFactory to build Api instances with a configured api client
@@ -646,18 +646,18 @@ Lists RunIds of prior compliance runs, or a subset with a filter.
 ```python
 from __future__ import print_function
 import time
-import os
 import lusid
 from lusid.rest import ApiException
 from lusid.models.paged_resource_list_of_compliance_run_info_v2 import PagedResourceListOfComplianceRunInfoV2
 from pprint import pprint
 
+import os
 from lusid import (
-	  ApiClientFactory,
-	  ApplicationMetadataApi,
-	  EnvironmentVariablesConfigurationLoader,
-	  SecretsFileConfigurationLoader,
-	  ArgsConfigurationLoader
+    ApiClientFactory,
+    ComplianceApi,
+    EnvironmentVariablesConfigurationLoader,
+    SecretsFileConfigurationLoader,
+    ArgsConfigurationLoader
 )
 
 # Use the lusid ApiClientFactory to build Api instances with a configured api client
@@ -752,18 +752,18 @@ Use this endpoint to fetch a list of all available compliance template ids, or a
 ```python
 from __future__ import print_function
 import time
-import os
 import lusid
 from lusid.rest import ApiException
 from lusid.models.paged_resource_list_of_compliance_template import PagedResourceListOfComplianceTemplate
 from pprint import pprint
 
+import os
 from lusid import (
-	  ApiClientFactory,
-	  ApplicationMetadataApi,
-	  EnvironmentVariablesConfigurationLoader,
-	  SecretsFileConfigurationLoader,
-	  ArgsConfigurationLoader
+    ApiClientFactory,
+    ComplianceApi,
+    EnvironmentVariablesConfigurationLoader,
+    SecretsFileConfigurationLoader,
+    ArgsConfigurationLoader
 )
 
 # Use the lusid ApiClientFactory to build Api instances with a configured api client
@@ -856,18 +856,18 @@ Use this endpoint to run a compliance check using rules from a specific scope.
 ```python
 from __future__ import print_function
 import time
-import os
 import lusid
 from lusid.rest import ApiException
 from lusid.models.compliance_run_info_v2 import ComplianceRunInfoV2
 from pprint import pprint
 
+import os
 from lusid import (
-	  ApiClientFactory,
-	  ApplicationMetadataApi,
-	  EnvironmentVariablesConfigurationLoader,
-	  SecretsFileConfigurationLoader,
-	  ArgsConfigurationLoader
+    ApiClientFactory,
+    ComplianceApi,
+    EnvironmentVariablesConfigurationLoader,
+    SecretsFileConfigurationLoader,
+    ArgsConfigurationLoader
 )
 
 # Use the lusid ApiClientFactory to build Api instances with a configured api client
@@ -962,19 +962,19 @@ Use this endpoint to upsert a single compliance rule. The template and variation
 ```python
 from __future__ import print_function
 import time
-import os
 import lusid
 from lusid.rest import ApiException
 from lusid.models.compliance_rule_response import ComplianceRuleResponse
 from lusid.models.upsert_compliance_rule_request import UpsertComplianceRuleRequest
 from pprint import pprint
 
+import os
 from lusid import (
-	  ApiClientFactory,
-	  ApplicationMetadataApi,
-	  EnvironmentVariablesConfigurationLoader,
-	  SecretsFileConfigurationLoader,
-	  ArgsConfigurationLoader
+    ApiClientFactory,
+    ComplianceApi,
+    EnvironmentVariablesConfigurationLoader,
+    SecretsFileConfigurationLoader,
+    ArgsConfigurationLoader
 )
 
 # Use the lusid ApiClientFactory to build Api instances with a configured api client
@@ -1061,19 +1061,19 @@ Use this endpoint to upsert a compliance run result summary.
 ```python
 from __future__ import print_function
 import time
-import os
 import lusid
 from lusid.rest import ApiException
 from lusid.models.upsert_compliance_run_summary_request import UpsertComplianceRunSummaryRequest
 from lusid.models.upsert_compliance_run_summary_result import UpsertComplianceRunSummaryResult
 from pprint import pprint
 
+import os
 from lusid import (
-	  ApiClientFactory,
-	  ApplicationMetadataApi,
-	  EnvironmentVariablesConfigurationLoader,
-	  SecretsFileConfigurationLoader,
-	  ArgsConfigurationLoader
+    ApiClientFactory,
+    ComplianceApi,
+    EnvironmentVariablesConfigurationLoader,
+    SecretsFileConfigurationLoader,
+    ArgsConfigurationLoader
 )
 
 # Use the lusid ApiClientFactory to build Api instances with a configured api client

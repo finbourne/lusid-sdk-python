@@ -31,18 +31,18 @@ Delete the specified CDS Flow Conventions from a single scope.  The response wil
 ```python
 from __future__ import print_function
 import time
-import os
 import lusid
 from lusid.rest import ApiException
 from lusid.models.annul_single_structured_data_response import AnnulSingleStructuredDataResponse
 from pprint import pprint
 
+import os
 from lusid import (
-	  ApiClientFactory,
-	  ApplicationMetadataApi,
-	  EnvironmentVariablesConfigurationLoader,
-	  SecretsFileConfigurationLoader,
-	  ArgsConfigurationLoader
+    ApiClientFactory,
+    ConventionsApi,
+    EnvironmentVariablesConfigurationLoader,
+    SecretsFileConfigurationLoader,
+    ArgsConfigurationLoader
 )
 
 # Use the lusid ApiClientFactory to build Api instances with a configured api client
@@ -131,18 +131,18 @@ Delete the specified conventions from a single scope.  The response will return 
 ```python
 from __future__ import print_function
 import time
-import os
 import lusid
 from lusid.rest import ApiException
 from lusid.models.annul_single_structured_data_response import AnnulSingleStructuredDataResponse
 from pprint import pprint
 
+import os
 from lusid import (
-	  ApiClientFactory,
-	  ApplicationMetadataApi,
-	  EnvironmentVariablesConfigurationLoader,
-	  SecretsFileConfigurationLoader,
-	  ArgsConfigurationLoader
+    ApiClientFactory,
+    ConventionsApi,
+    EnvironmentVariablesConfigurationLoader,
+    SecretsFileConfigurationLoader,
+    ArgsConfigurationLoader
 )
 
 # Use the lusid ApiClientFactory to build Api instances with a configured api client
@@ -231,18 +231,18 @@ Delete the specified Index Convention from a single scope.  The response will re
 ```python
 from __future__ import print_function
 import time
-import os
 import lusid
 from lusid.rest import ApiException
 from lusid.models.annul_single_structured_data_response import AnnulSingleStructuredDataResponse
 from pprint import pprint
 
+import os
 from lusid import (
-	  ApiClientFactory,
-	  ApplicationMetadataApi,
-	  EnvironmentVariablesConfigurationLoader,
-	  SecretsFileConfigurationLoader,
-	  ArgsConfigurationLoader
+    ApiClientFactory,
+    ConventionsApi,
+    EnvironmentVariablesConfigurationLoader,
+    SecretsFileConfigurationLoader,
+    ArgsConfigurationLoader
 )
 
 # Use the lusid ApiClientFactory to build Api instances with a configured api client
@@ -331,18 +331,18 @@ Get a CDS Flow Conventions from a single scope.  The response will return either
 ```python
 from __future__ import print_function
 import time
-import os
 import lusid
 from lusid.rest import ApiException
 from lusid.models.get_cds_flow_conventions_response import GetCdsFlowConventionsResponse
 from pprint import pprint
 
+import os
 from lusid import (
-	  ApiClientFactory,
-	  ApplicationMetadataApi,
-	  EnvironmentVariablesConfigurationLoader,
-	  SecretsFileConfigurationLoader,
-	  ArgsConfigurationLoader
+    ApiClientFactory,
+    ConventionsApi,
+    EnvironmentVariablesConfigurationLoader,
+    SecretsFileConfigurationLoader,
+    ArgsConfigurationLoader
 )
 
 # Use the lusid ApiClientFactory to build Api instances with a configured api client
@@ -433,18 +433,18 @@ Get a Flow Conventions from a single scope.  The response will return either the
 ```python
 from __future__ import print_function
 import time
-import os
 import lusid
 from lusid.rest import ApiException
 from lusid.models.get_flow_conventions_response import GetFlowConventionsResponse
 from pprint import pprint
 
+import os
 from lusid import (
-	  ApiClientFactory,
-	  ApplicationMetadataApi,
-	  EnvironmentVariablesConfigurationLoader,
-	  SecretsFileConfigurationLoader,
-	  ArgsConfigurationLoader
+    ApiClientFactory,
+    ConventionsApi,
+    EnvironmentVariablesConfigurationLoader,
+    SecretsFileConfigurationLoader,
+    ArgsConfigurationLoader
 )
 
 # Use the lusid ApiClientFactory to build Api instances with a configured api client
@@ -535,18 +535,18 @@ Get a Index Convention from a single scope.  The response will return either the
 ```python
 from __future__ import print_function
 import time
-import os
 import lusid
 from lusid.rest import ApiException
 from lusid.models.get_index_convention_response import GetIndexConventionResponse
 from pprint import pprint
 
+import os
 from lusid import (
-	  ApiClientFactory,
-	  ApplicationMetadataApi,
-	  EnvironmentVariablesConfigurationLoader,
-	  SecretsFileConfigurationLoader,
-	  ArgsConfigurationLoader
+    ApiClientFactory,
+    ConventionsApi,
+    EnvironmentVariablesConfigurationLoader,
+    SecretsFileConfigurationLoader,
+    ArgsConfigurationLoader
 )
 
 # Use the lusid ApiClientFactory to build Api instances with a configured api client
@@ -637,18 +637,18 @@ List the set of CDS Flow Conventions at the specified date/time
 ```python
 from __future__ import print_function
 import time
-import os
 import lusid
 from lusid.rest import ApiException
 from lusid.models.resource_list_of_get_cds_flow_conventions_response import ResourceListOfGetCdsFlowConventionsResponse
 from pprint import pprint
 
+import os
 from lusid import (
-	  ApiClientFactory,
-	  ApplicationMetadataApi,
-	  EnvironmentVariablesConfigurationLoader,
-	  SecretsFileConfigurationLoader,
-	  ArgsConfigurationLoader
+    ApiClientFactory,
+    ConventionsApi,
+    EnvironmentVariablesConfigurationLoader,
+    SecretsFileConfigurationLoader,
+    ArgsConfigurationLoader
 )
 
 # Use the lusid ApiClientFactory to build Api instances with a configured api client
@@ -735,18 +735,18 @@ List the set of Flow Conventions at the specified date/time
 ```python
 from __future__ import print_function
 import time
-import os
 import lusid
 from lusid.rest import ApiException
 from lusid.models.resource_list_of_get_flow_conventions_response import ResourceListOfGetFlowConventionsResponse
 from pprint import pprint
 
+import os
 from lusid import (
-	  ApiClientFactory,
-	  ApplicationMetadataApi,
-	  EnvironmentVariablesConfigurationLoader,
-	  SecretsFileConfigurationLoader,
-	  ArgsConfigurationLoader
+    ApiClientFactory,
+    ConventionsApi,
+    EnvironmentVariablesConfigurationLoader,
+    SecretsFileConfigurationLoader,
+    ArgsConfigurationLoader
 )
 
 # Use the lusid ApiClientFactory to build Api instances with a configured api client
@@ -833,18 +833,18 @@ List the set of Index Conventions at the specified date/time
 ```python
 from __future__ import print_function
 import time
-import os
 import lusid
 from lusid.rest import ApiException
 from lusid.models.resource_list_of_get_index_convention_response import ResourceListOfGetIndexConventionResponse
 from pprint import pprint
 
+import os
 from lusid import (
-	  ApiClientFactory,
-	  ApplicationMetadataApi,
-	  EnvironmentVariablesConfigurationLoader,
-	  SecretsFileConfigurationLoader,
-	  ArgsConfigurationLoader
+    ApiClientFactory,
+    ConventionsApi,
+    EnvironmentVariablesConfigurationLoader,
+    SecretsFileConfigurationLoader,
+    ArgsConfigurationLoader
 )
 
 # Use the lusid ApiClientFactory to build Api instances with a configured api client
@@ -931,19 +931,19 @@ Update or insert CDS Flow Conventions in a single scope. An item will be updated
 ```python
 from __future__ import print_function
 import time
-import os
 import lusid
 from lusid.rest import ApiException
 from lusid.models.upsert_cds_flow_conventions_request import UpsertCdsFlowConventionsRequest
 from lusid.models.upsert_single_structured_data_response import UpsertSingleStructuredDataResponse
 from pprint import pprint
 
+import os
 from lusid import (
-	  ApiClientFactory,
-	  ApplicationMetadataApi,
-	  EnvironmentVariablesConfigurationLoader,
-	  SecretsFileConfigurationLoader,
-	  ArgsConfigurationLoader
+    ApiClientFactory,
+    ConventionsApi,
+    EnvironmentVariablesConfigurationLoader,
+    SecretsFileConfigurationLoader,
+    ArgsConfigurationLoader
 )
 
 # Use the lusid ApiClientFactory to build Api instances with a configured api client
@@ -1030,19 +1030,19 @@ Update or insert Flow Conventions in a single scope. An item will be updated if 
 ```python
 from __future__ import print_function
 import time
-import os
 import lusid
 from lusid.rest import ApiException
 from lusid.models.upsert_flow_conventions_request import UpsertFlowConventionsRequest
 from lusid.models.upsert_single_structured_data_response import UpsertSingleStructuredDataResponse
 from pprint import pprint
 
+import os
 from lusid import (
-	  ApiClientFactory,
-	  ApplicationMetadataApi,
-	  EnvironmentVariablesConfigurationLoader,
-	  SecretsFileConfigurationLoader,
-	  ArgsConfigurationLoader
+    ApiClientFactory,
+    ConventionsApi,
+    EnvironmentVariablesConfigurationLoader,
+    SecretsFileConfigurationLoader,
+    ArgsConfigurationLoader
 )
 
 # Use the lusid ApiClientFactory to build Api instances with a configured api client
@@ -1129,19 +1129,19 @@ Update or insert Index Convention in a single scope. An item will be updated if 
 ```python
 from __future__ import print_function
 import time
-import os
 import lusid
 from lusid.rest import ApiException
 from lusid.models.upsert_index_convention_request import UpsertIndexConventionRequest
 from lusid.models.upsert_single_structured_data_response import UpsertSingleStructuredDataResponse
 from pprint import pprint
 
+import os
 from lusid import (
-	  ApiClientFactory,
-	  ApplicationMetadataApi,
-	  EnvironmentVariablesConfigurationLoader,
-	  SecretsFileConfigurationLoader,
-	  ArgsConfigurationLoader
+    ApiClientFactory,
+    ConventionsApi,
+    EnvironmentVariablesConfigurationLoader,
+    SecretsFileConfigurationLoader,
+    ArgsConfigurationLoader
 )
 
 # Use the lusid ApiClientFactory to build Api instances with a configured api client

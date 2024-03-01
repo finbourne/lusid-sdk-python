@@ -29,11 +29,10 @@ class AmortisationEvent(InstrumentEvent):
     amount_reduced: Union[StrictFloat, StrictInt] = Field(..., alias="amountReduced", description="The amount reduced in this amortisation event.  That is, the difference between the previous notional amount and the current notional amount as set in this event.")
     dom_ccy: StrictStr = Field(..., alias="domCcy", description="Domestic currency of the originating instrument")
     pay_receive: constr(strict=True, min_length=1) = Field(..., alias="payReceive", description="Is this event in relation to the Pay or Receive leg")
-    event_status: constr(strict=True, min_length=1) = Field(..., alias="eventStatus", description="What is the event status, is it a known (ie historic) or unknown (ie projected) event?")
     payment_date: datetime = Field(..., alias="paymentDate", description="The date the principal payment is to be made.")
     instrument_event_type: StrictStr = Field(..., alias="instrumentEventType", description="The Type of Event. The available values are: TransitionEvent, InformationalEvent, OpenEvent, CloseEvent, StockSplitEvent, BondDefaultEvent, CashDividendEvent, AmortisationEvent, CashFlowEvent, ExerciseEvent, ResetEvent, TriggerEvent, RawVendorEvent, InformationalErrorEvent, BondCouponEvent, DividendReinvestmentEvent, AccumulationEvent, BondPrincipalEvent, DividendOptionEvent, MaturityEvent, FxForwardSettlementEvent")
     additional_properties: Dict[str, Any] = {}
-    __properties = ["instrumentEventType", "amountReduced", "domCcy", "payReceive", "eventStatus", "paymentDate"]
+    __properties = ["instrumentEventType", "amountReduced", "domCcy", "payReceive", "paymentDate"]
 
     @validator('instrument_event_type')
     def instrument_event_type_validate_enum(cls, value):
@@ -88,7 +87,6 @@ class AmortisationEvent(InstrumentEvent):
             "amount_reduced": obj.get("amountReduced"),
             "dom_ccy": obj.get("domCcy"),
             "pay_receive": obj.get("payReceive"),
-            "event_status": obj.get("eventStatus"),
             "payment_date": obj.get("paymentDate")
         })
         # store additional fields in additional_properties

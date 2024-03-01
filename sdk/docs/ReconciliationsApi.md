@@ -34,19 +34,19 @@ Create a scheduled reconciliation for the given request
 ```python
 from __future__ import print_function
 import time
-import os
 import lusid
 from lusid.rest import ApiException
 from lusid.models.create_reconciliation_request import CreateReconciliationRequest
 from lusid.models.reconciliation import Reconciliation
 from pprint import pprint
 
+import os
 from lusid import (
-	  ApiClientFactory,
-	  ApplicationMetadataApi,
-	  EnvironmentVariablesConfigurationLoader,
-	  SecretsFileConfigurationLoader,
-	  ArgsConfigurationLoader
+    ApiClientFactory,
+    ReconciliationsApi,
+    EnvironmentVariablesConfigurationLoader,
+    SecretsFileConfigurationLoader,
+    ArgsConfigurationLoader
 )
 
 # Use the lusid ApiClientFactory to build Api instances with a configured api client
@@ -135,18 +135,18 @@ Delete the given scheduled reconciliation
 ```python
 from __future__ import print_function
 import time
-import os
 import lusid
 from lusid.rest import ApiException
 from lusid.models.deleted_entity_response import DeletedEntityResponse
 from pprint import pprint
 
+import os
 from lusid import (
-	  ApiClientFactory,
-	  ApplicationMetadataApi,
-	  EnvironmentVariablesConfigurationLoader,
-	  SecretsFileConfigurationLoader,
-	  ArgsConfigurationLoader
+    ApiClientFactory,
+    ReconciliationsApi,
+    EnvironmentVariablesConfigurationLoader,
+    SecretsFileConfigurationLoader,
+    ArgsConfigurationLoader
 )
 
 # Use the lusid ApiClientFactory to build Api instances with a configured api client
@@ -235,17 +235,17 @@ Deletes the mapping identified by the scope and code
 ```python
 from __future__ import print_function
 import time
-import os
 import lusid
 from lusid.rest import ApiException
 from pprint import pprint
 
+import os
 from lusid import (
-	  ApiClientFactory,
-	  ApplicationMetadataApi,
-	  EnvironmentVariablesConfigurationLoader,
-	  SecretsFileConfigurationLoader,
-	  ArgsConfigurationLoader
+    ApiClientFactory,
+    ReconciliationsApi,
+    EnvironmentVariablesConfigurationLoader,
+    SecretsFileConfigurationLoader,
+    ArgsConfigurationLoader
 )
 
 # Use the lusid ApiClientFactory to build Api instances with a configured api client
@@ -334,18 +334,18 @@ Get the requested scheduled reconciliation
 ```python
 from __future__ import print_function
 import time
-import os
 import lusid
 from lusid.rest import ApiException
 from lusid.models.reconciliation import Reconciliation
 from pprint import pprint
 
+import os
 from lusid import (
-	  ApiClientFactory,
-	  ApplicationMetadataApi,
-	  EnvironmentVariablesConfigurationLoader,
-	  SecretsFileConfigurationLoader,
-	  ArgsConfigurationLoader
+    ApiClientFactory,
+    ReconciliationsApi,
+    EnvironmentVariablesConfigurationLoader,
+    SecretsFileConfigurationLoader,
+    ArgsConfigurationLoader
 )
 
 # Use the lusid ApiClientFactory to build Api instances with a configured api client
@@ -440,18 +440,18 @@ Gets a mapping identified by the given scope and code
 ```python
 from __future__ import print_function
 import time
-import os
 import lusid
 from lusid.rest import ApiException
 from lusid.models.mapping import Mapping
 from pprint import pprint
 
+import os
 from lusid import (
-	  ApiClientFactory,
-	  ApplicationMetadataApi,
-	  EnvironmentVariablesConfigurationLoader,
-	  SecretsFileConfigurationLoader,
-	  ArgsConfigurationLoader
+    ApiClientFactory,
+    ReconciliationsApi,
+    EnvironmentVariablesConfigurationLoader,
+    SecretsFileConfigurationLoader,
+    ArgsConfigurationLoader
 )
 
 # Use the lusid ApiClientFactory to build Api instances with a configured api client
@@ -540,18 +540,18 @@ Lists all mappings this user is entitled to see
 ```python
 from __future__ import print_function
 import time
-import os
 import lusid
 from lusid.rest import ApiException
 from lusid.models.resource_list_of_mapping import ResourceListOfMapping
 from pprint import pprint
 
+import os
 from lusid import (
-	  ApiClientFactory,
-	  ApplicationMetadataApi,
-	  EnvironmentVariablesConfigurationLoader,
-	  SecretsFileConfigurationLoader,
-	  ArgsConfigurationLoader
+    ApiClientFactory,
+    ReconciliationsApi,
+    EnvironmentVariablesConfigurationLoader,
+    SecretsFileConfigurationLoader,
+    ArgsConfigurationLoader
 )
 
 # Use the lusid ApiClientFactory to build Api instances with a configured api client
@@ -638,18 +638,18 @@ List all the scheduled reconciliations matching particular criteria
 ```python
 from __future__ import print_function
 import time
-import os
 import lusid
 from lusid.rest import ApiException
 from lusid.models.paged_resource_list_of_reconciliation import PagedResourceListOfReconciliation
 from pprint import pprint
 
+import os
 from lusid import (
-	  ApiClientFactory,
-	  ApplicationMetadataApi,
-	  EnvironmentVariablesConfigurationLoader,
-	  SecretsFileConfigurationLoader,
-	  ArgsConfigurationLoader
+    ApiClientFactory,
+    ReconciliationsApi,
+    EnvironmentVariablesConfigurationLoader,
+    SecretsFileConfigurationLoader,
+    ArgsConfigurationLoader
 )
 
 # Use the lusid ApiClientFactory to build Api instances with a configured api client
@@ -746,19 +746,19 @@ Perform evaluation of one or two set of holdings (a portfolio of instruments) us
 ```python
 from __future__ import print_function
 import time
-import os
 import lusid
 from lusid.rest import ApiException
 from lusid.models.reconciliation_request import ReconciliationRequest
 from lusid.models.reconciliation_response import ReconciliationResponse
 from pprint import pprint
 
+import os
 from lusid import (
-	  ApiClientFactory,
-	  ApplicationMetadataApi,
-	  EnvironmentVariablesConfigurationLoader,
-	  SecretsFileConfigurationLoader,
-	  ArgsConfigurationLoader
+    ApiClientFactory,
+    ReconciliationsApi,
+    EnvironmentVariablesConfigurationLoader,
+    SecretsFileConfigurationLoader,
+    ArgsConfigurationLoader
 )
 
 # Use the lusid ApiClientFactory to build Api instances with a configured api client
@@ -845,19 +845,19 @@ Reconcile the holdings of two portfolios.
 ```python
 from __future__ import print_function
 import time
-import os
 import lusid
 from lusid.rest import ApiException
 from lusid.models.portfolios_reconciliation_request import PortfoliosReconciliationRequest
 from lusid.models.resource_list_of_reconciliation_break import ResourceListOfReconciliationBreak
 from pprint import pprint
 
+import os
 from lusid import (
-	  ApiClientFactory,
-	  ApplicationMetadataApi,
-	  EnvironmentVariablesConfigurationLoader,
-	  SecretsFileConfigurationLoader,
-	  ArgsConfigurationLoader
+    ApiClientFactory,
+    ReconciliationsApi,
+    EnvironmentVariablesConfigurationLoader,
+    SecretsFileConfigurationLoader,
+    ArgsConfigurationLoader
 )
 
 # Use the lusid ApiClientFactory to build Api instances with a configured api client
@@ -950,19 +950,19 @@ Perform valuation of one or two set of inline instruments using different one or
 ```python
 from __future__ import print_function
 import time
-import os
 import lusid
 from lusid.rest import ApiException
 from lusid.models.inline_valuations_reconciliation_request import InlineValuationsReconciliationRequest
 from lusid.models.list_aggregation_reconciliation import ListAggregationReconciliation
 from pprint import pprint
 
+import os
 from lusid import (
-	  ApiClientFactory,
-	  ApplicationMetadataApi,
-	  EnvironmentVariablesConfigurationLoader,
-	  SecretsFileConfigurationLoader,
-	  ArgsConfigurationLoader
+    ApiClientFactory,
+    ReconciliationsApi,
+    EnvironmentVariablesConfigurationLoader,
+    SecretsFileConfigurationLoader,
+    ArgsConfigurationLoader
 )
 
 # Use the lusid ApiClientFactory to build Api instances with a configured api client
@@ -1049,19 +1049,19 @@ Evaluates two sets of transactions to determine which transactions from each set
 ```python
 from __future__ import print_function
 import time
-import os
 import lusid
 from lusid.rest import ApiException
 from lusid.models.transaction_reconciliation_request import TransactionReconciliationRequest
 from lusid.models.transactions_reconciliations_response import TransactionsReconciliationsResponse
 from pprint import pprint
 
+import os
 from lusid import (
-	  ApiClientFactory,
-	  ApplicationMetadataApi,
-	  EnvironmentVariablesConfigurationLoader,
-	  SecretsFileConfigurationLoader,
-	  ArgsConfigurationLoader
+    ApiClientFactory,
+    ReconciliationsApi,
+    EnvironmentVariablesConfigurationLoader,
+    SecretsFileConfigurationLoader,
+    ArgsConfigurationLoader
 )
 
 # Use the lusid ApiClientFactory to build Api instances with a configured api client
@@ -1148,19 +1148,19 @@ Evaluates two sets of transactions to determine which transactions from each set
 ```python
 from __future__ import print_function
 import time
-import os
 import lusid
 from lusid.rest import ApiException
 from lusid.models.reconciliation_response import ReconciliationResponse
 from lusid.models.transaction_reconciliation_request_v2 import TransactionReconciliationRequestV2
 from pprint import pprint
 
+import os
 from lusid import (
-	  ApiClientFactory,
-	  ApplicationMetadataApi,
-	  EnvironmentVariablesConfigurationLoader,
-	  SecretsFileConfigurationLoader,
-	  ArgsConfigurationLoader
+    ApiClientFactory,
+    ReconciliationsApi,
+    EnvironmentVariablesConfigurationLoader,
+    SecretsFileConfigurationLoader,
+    ArgsConfigurationLoader
 )
 
 # Use the lusid ApiClientFactory to build Api instances with a configured api client
@@ -1247,19 +1247,19 @@ Perform valuation of one or two set of holdings using different one or two confi
 ```python
 from __future__ import print_function
 import time
-import os
 import lusid
 from lusid.rest import ApiException
 from lusid.models.list_aggregation_reconciliation import ListAggregationReconciliation
 from lusid.models.valuations_reconciliation_request import ValuationsReconciliationRequest
 from pprint import pprint
 
+import os
 from lusid import (
-	  ApiClientFactory,
-	  ApplicationMetadataApi,
-	  EnvironmentVariablesConfigurationLoader,
-	  SecretsFileConfigurationLoader,
-	  ArgsConfigurationLoader
+    ApiClientFactory,
+    ReconciliationsApi,
+    EnvironmentVariablesConfigurationLoader,
+    SecretsFileConfigurationLoader,
+    ArgsConfigurationLoader
 )
 
 # Use the lusid ApiClientFactory to build Api instances with a configured api client
@@ -1346,19 +1346,19 @@ Update a given scheduled reconciliation
 ```python
 from __future__ import print_function
 import time
-import os
 import lusid
 from lusid.rest import ApiException
 from lusid.models.reconciliation import Reconciliation
 from lusid.models.update_reconciliation_request import UpdateReconciliationRequest
 from pprint import pprint
 
+import os
 from lusid import (
-	  ApiClientFactory,
-	  ApplicationMetadataApi,
-	  EnvironmentVariablesConfigurationLoader,
-	  SecretsFileConfigurationLoader,
-	  ArgsConfigurationLoader
+    ApiClientFactory,
+    ReconciliationsApi,
+    EnvironmentVariablesConfigurationLoader,
+    SecretsFileConfigurationLoader,
+    ArgsConfigurationLoader
 )
 
 # Use the lusid ApiClientFactory to build Api instances with a configured api client
@@ -1449,18 +1449,18 @@ If no mapping exists with the specified scope and code will create a new one.  E
 ```python
 from __future__ import print_function
 import time
-import os
 import lusid
 from lusid.rest import ApiException
 from lusid.models.mapping import Mapping
 from pprint import pprint
 
+import os
 from lusid import (
-	  ApiClientFactory,
-	  ApplicationMetadataApi,
-	  EnvironmentVariablesConfigurationLoader,
-	  SecretsFileConfigurationLoader,
-	  ArgsConfigurationLoader
+    ApiClientFactory,
+    ReconciliationsApi,
+    EnvironmentVariablesConfigurationLoader,
+    SecretsFileConfigurationLoader,
+    ArgsConfigurationLoader
 )
 
 # Use the lusid ApiClientFactory to build Api instances with a configured api client

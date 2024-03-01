@@ -31,19 +31,19 @@ Adds a new diary entry to the specified Abor
 ```python
 from __future__ import print_function
 import time
-import os
 import lusid
 from lusid.rest import ApiException
 from lusid.models.diary_entry import DiaryEntry
 from lusid.models.diary_entry_request import DiaryEntryRequest
 from pprint import pprint
 
+import os
 from lusid import (
-	  ApiClientFactory,
-	  ApplicationMetadataApi,
-	  EnvironmentVariablesConfigurationLoader,
-	  SecretsFileConfigurationLoader,
-	  ArgsConfigurationLoader
+    ApiClientFactory,
+    AborApi,
+    EnvironmentVariablesConfigurationLoader,
+    SecretsFileConfigurationLoader,
+    ArgsConfigurationLoader
 )
 
 # Use the lusid ApiClientFactory to build Api instances with a configured api client
@@ -136,19 +136,19 @@ Closes or Locks the current open period for the given Abor.
 ```python
 from __future__ import print_function
 import time
-import os
 import lusid
 from lusid.rest import ApiException
 from lusid.models.close_period_diary_entry_request import ClosePeriodDiaryEntryRequest
 from lusid.models.diary_entry import DiaryEntry
 from pprint import pprint
 
+import os
 from lusid import (
-	  ApiClientFactory,
-	  ApplicationMetadataApi,
-	  EnvironmentVariablesConfigurationLoader,
-	  SecretsFileConfigurationLoader,
-	  ArgsConfigurationLoader
+    ApiClientFactory,
+    AborApi,
+    EnvironmentVariablesConfigurationLoader,
+    SecretsFileConfigurationLoader,
+    ArgsConfigurationLoader
 )
 
 # Use the lusid ApiClientFactory to build Api instances with a configured api client
@@ -239,19 +239,19 @@ Create the given Abor.
 ```python
 from __future__ import print_function
 import time
-import os
 import lusid
 from lusid.rest import ApiException
 from lusid.models.abor import Abor
 from lusid.models.abor_request import AborRequest
 from pprint import pprint
 
+import os
 from lusid import (
-	  ApiClientFactory,
-	  ApplicationMetadataApi,
-	  EnvironmentVariablesConfigurationLoader,
-	  SecretsFileConfigurationLoader,
-	  ArgsConfigurationLoader
+    ApiClientFactory,
+    AborApi,
+    EnvironmentVariablesConfigurationLoader,
+    SecretsFileConfigurationLoader,
+    ArgsConfigurationLoader
 )
 
 # Use the lusid ApiClientFactory to build Api instances with a configured api client
@@ -340,18 +340,18 @@ Delete the given Abor.
 ```python
 from __future__ import print_function
 import time
-import os
 import lusid
 from lusid.rest import ApiException
 from lusid.models.deleted_entity_response import DeletedEntityResponse
 from pprint import pprint
 
+import os
 from lusid import (
-	  ApiClientFactory,
-	  ApplicationMetadataApi,
-	  EnvironmentVariablesConfigurationLoader,
-	  SecretsFileConfigurationLoader,
-	  ArgsConfigurationLoader
+    ApiClientFactory,
+    AborApi,
+    EnvironmentVariablesConfigurationLoader,
+    SecretsFileConfigurationLoader,
+    ArgsConfigurationLoader
 )
 
 # Use the lusid ApiClientFactory to build Api instances with a configured api client
@@ -440,18 +440,18 @@ Retrieve the definition of a particular Abor.
 ```python
 from __future__ import print_function
 import time
-import os
 import lusid
 from lusid.rest import ApiException
 from lusid.models.abor import Abor
 from pprint import pprint
 
+import os
 from lusid import (
-	  ApiClientFactory,
-	  ApplicationMetadataApi,
-	  EnvironmentVariablesConfigurationLoader,
-	  SecretsFileConfigurationLoader,
-	  ArgsConfigurationLoader
+    ApiClientFactory,
+    AborApi,
+    EnvironmentVariablesConfigurationLoader,
+    SecretsFileConfigurationLoader,
+    ArgsConfigurationLoader
 )
 
 # Use the lusid ApiClientFactory to build Api instances with a configured api client
@@ -546,19 +546,19 @@ Gets the Journal Entry lines for the given Abor                The Journal Entry
 ```python
 from __future__ import print_function
 import time
-import os
 import lusid
 from lusid.rest import ApiException
 from lusid.models.journal_entry_lines_query_parameters import JournalEntryLinesQueryParameters
 from lusid.models.versioned_resource_list_of_journal_entry_line import VersionedResourceListOfJournalEntryLine
 from pprint import pprint
 
+import os
 from lusid import (
-	  ApiClientFactory,
-	  ApplicationMetadataApi,
-	  EnvironmentVariablesConfigurationLoader,
-	  SecretsFileConfigurationLoader,
-	  ArgsConfigurationLoader
+    ApiClientFactory,
+    AborApi,
+    EnvironmentVariablesConfigurationLoader,
+    SecretsFileConfigurationLoader,
+    ArgsConfigurationLoader
 )
 
 # Use the lusid ApiClientFactory to build Api instances with a configured api client
@@ -657,19 +657,19 @@ Gets the Trial balance for the given Abor    The Trial balance has been generate
 ```python
 from __future__ import print_function
 import time
-import os
 import lusid
 from lusid.rest import ApiException
 from lusid.models.trial_balance_query_parameters import TrialBalanceQueryParameters
 from lusid.models.versioned_resource_list_of_trial_balance import VersionedResourceListOfTrialBalance
 from pprint import pprint
 
+import os
 from lusid import (
-	  ApiClientFactory,
-	  ApplicationMetadataApi,
-	  EnvironmentVariablesConfigurationLoader,
-	  SecretsFileConfigurationLoader,
-	  ArgsConfigurationLoader
+    ApiClientFactory,
+    AborApi,
+    EnvironmentVariablesConfigurationLoader,
+    SecretsFileConfigurationLoader,
+    ArgsConfigurationLoader
 )
 
 # Use the lusid ApiClientFactory to build Api instances with a configured api client
@@ -768,18 +768,18 @@ List all the Abors matching particular criteria.
 ```python
 from __future__ import print_function
 import time
-import os
 import lusid
 from lusid.rest import ApiException
 from lusid.models.paged_resource_list_of_abor import PagedResourceListOfAbor
 from pprint import pprint
 
+import os
 from lusid import (
-	  ApiClientFactory,
-	  ApplicationMetadataApi,
-	  EnvironmentVariablesConfigurationLoader,
-	  SecretsFileConfigurationLoader,
-	  ArgsConfigurationLoader
+    ApiClientFactory,
+    AborApi,
+    EnvironmentVariablesConfigurationLoader,
+    SecretsFileConfigurationLoader,
+    ArgsConfigurationLoader
 )
 
 # Use the lusid ApiClientFactory to build Api instances with a configured api client
@@ -878,18 +878,18 @@ List all the diary entries matching particular criteria.
 ```python
 from __future__ import print_function
 import time
-import os
 import lusid
 from lusid.rest import ApiException
 from lusid.models.paged_resource_list_of_diary_entry import PagedResourceListOfDiaryEntry
 from pprint import pprint
 
+import os
 from lusid import (
-	  ApiClientFactory,
-	  ApplicationMetadataApi,
-	  EnvironmentVariablesConfigurationLoader,
-	  SecretsFileConfigurationLoader,
-	  ArgsConfigurationLoader
+    ApiClientFactory,
+    AborApi,
+    EnvironmentVariablesConfigurationLoader,
+    SecretsFileConfigurationLoader,
+    ArgsConfigurationLoader
 )
 
 # Use the lusid ApiClientFactory to build Api instances with a configured api client
@@ -992,19 +992,19 @@ Locks the specified or last locked period for the given Abor.
 ```python
 from __future__ import print_function
 import time
-import os
 import lusid
 from lusid.rest import ApiException
 from lusid.models.diary_entry import DiaryEntry
 from lusid.models.lock_period_diary_entry_request import LockPeriodDiaryEntryRequest
 from pprint import pprint
 
+import os
 from lusid import (
-	  ApiClientFactory,
-	  ApplicationMetadataApi,
-	  EnvironmentVariablesConfigurationLoader,
-	  SecretsFileConfigurationLoader,
-	  ArgsConfigurationLoader
+    ApiClientFactory,
+    AborApi,
+    EnvironmentVariablesConfigurationLoader,
+    SecretsFileConfigurationLoader,
+    ArgsConfigurationLoader
 )
 
 # Use the lusid ApiClientFactory to build Api instances with a configured api client
@@ -1095,19 +1095,19 @@ Reopens one or more periods.
 ```python
 from __future__ import print_function
 import time
-import os
 import lusid
 from lusid.rest import ApiException
 from lusid.models.period_diary_entries_reopened_response import PeriodDiaryEntriesReopenedResponse
 from lusid.models.re_open_period_diary_entry_request import ReOpenPeriodDiaryEntryRequest
 from pprint import pprint
 
+import os
 from lusid import (
-	  ApiClientFactory,
-	  ApplicationMetadataApi,
-	  EnvironmentVariablesConfigurationLoader,
-	  SecretsFileConfigurationLoader,
-	  ArgsConfigurationLoader
+    ApiClientFactory,
+    AborApi,
+    EnvironmentVariablesConfigurationLoader,
+    SecretsFileConfigurationLoader,
+    ArgsConfigurationLoader
 )
 
 # Use the lusid ApiClientFactory to build Api instances with a configured api client
@@ -1198,19 +1198,19 @@ Update or insert one or more properties onto a single Abor. A property will be u
 ```python
 from __future__ import print_function
 import time
-import os
 import lusid
 from lusid.rest import ApiException
 from lusid.models.abor_properties import AborProperties
 from lusid.models.model_property import ModelProperty
 from pprint import pprint
 
+import os
 from lusid import (
-	  ApiClientFactory,
-	  ApplicationMetadataApi,
-	  EnvironmentVariablesConfigurationLoader,
-	  SecretsFileConfigurationLoader,
-	  ArgsConfigurationLoader
+    ApiClientFactory,
+    AborApi,
+    EnvironmentVariablesConfigurationLoader,
+    SecretsFileConfigurationLoader,
+    ArgsConfigurationLoader
 )
 
 # Use the lusid ApiClientFactory to build Api instances with a configured api client

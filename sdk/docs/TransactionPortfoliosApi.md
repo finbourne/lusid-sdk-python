@@ -6,12 +6,13 @@ Method | HTTP request | Description
 ------------- | ------------- | -------------
 [**adjust_holdings**](TransactionPortfoliosApi.md#adjust_holdings) | **POST** /api/transactionportfolios/{scope}/{code}/holdings | AdjustHoldings: Adjust holdings
 [**batch_adjust_holdings**](TransactionPortfoliosApi.md#batch_adjust_holdings) | **POST** /api/transactionportfolios/{scope}/{code}/holdings/$batchAdjust | [EARLY ACCESS] BatchAdjustHoldings: Batch adjust holdings
+[**batch_create_trade_tickets**](TransactionPortfoliosApi.md#batch_create_trade_tickets) | **POST** /api/transactionportfolios/{scope}/{code}/$batchtradetickets | [EARLY ACCESS] BatchCreateTradeTickets: Batch Create Trade Tickets
 [**batch_upsert_transactions**](TransactionPortfoliosApi.md#batch_upsert_transactions) | **POST** /api/transactionportfolios/{scope}/{code}/transactions/$batchUpsert | [EARLY ACCESS] BatchUpsertTransactions: Batch upsert transactions
 [**build_transactions**](TransactionPortfoliosApi.md#build_transactions) | **POST** /api/transactionportfolios/{scope}/{code}/transactions/$build | BuildTransactions: Build transactions
 [**cancel_adjust_holdings**](TransactionPortfoliosApi.md#cancel_adjust_holdings) | **DELETE** /api/transactionportfolios/{scope}/{code}/holdings | CancelAdjustHoldings: Cancel adjust holdings
 [**cancel_transactions**](TransactionPortfoliosApi.md#cancel_transactions) | **DELETE** /api/transactionportfolios/{scope}/{code}/transactions | CancelTransactions: Cancel transactions
 [**create_portfolio**](TransactionPortfoliosApi.md#create_portfolio) | **POST** /api/transactionportfolios/{scope} | CreatePortfolio: Create portfolio
-[**create_trade_ticket**](TransactionPortfoliosApi.md#create_trade_ticket) | **POST** /api/transactionportfolios/{scope}/{code}/$tradeticket | [EXPERIMENTAL] CreateTradeTicket: Create Trade Ticket
+[**create_trade_ticket**](TransactionPortfoliosApi.md#create_trade_ticket) | **POST** /api/transactionportfolios/{scope}/{code}/$tradeticket | [EARLY ACCESS] CreateTradeTicket: Create Trade Ticket
 [**delete_custodian_accounts**](TransactionPortfoliosApi.md#delete_custodian_accounts) | **POST** /api/transactionportfolios/{scope}/{code}/custodianaccounts/$delete | [EXPERIMENTAL] DeleteCustodianAccounts: Soft or hard delete multiple custodian accounts
 [**delete_properties_from_transaction**](TransactionPortfoliosApi.md#delete_properties_from_transaction) | **DELETE** /api/transactionportfolios/{scope}/{code}/transactions/{transactionId}/properties | DeletePropertiesFromTransaction: Delete properties from transaction
 [**get_a2_b_data**](TransactionPortfoliosApi.md#get_a2_b_data) | **GET** /api/transactionportfolios/{scope}/{code}/a2b | GetA2BData: Get A2B data
@@ -54,19 +55,19 @@ Adjust one or more holdings of the specified transaction portfolio to the provid
 ```python
 from __future__ import print_function
 import time
-import os
 import lusid
 from lusid.rest import ApiException
 from lusid.models.adjust_holding import AdjustHolding
 from lusid.models.adjust_holding_request import AdjustHoldingRequest
 from pprint import pprint
 
+import os
 from lusid import (
-	  ApiClientFactory,
-	  ApplicationMetadataApi,
-	  EnvironmentVariablesConfigurationLoader,
-	  SecretsFileConfigurationLoader,
-	  ArgsConfigurationLoader
+    ApiClientFactory,
+    TransactionPortfoliosApi,
+    EnvironmentVariablesConfigurationLoader,
+    SecretsFileConfigurationLoader,
+    ArgsConfigurationLoader
 )
 
 # Use the lusid ApiClientFactory to build Api instances with a configured api client
@@ -161,19 +162,19 @@ Adjust one or more holdings of the specified transaction portfolio to the provid
 ```python
 from __future__ import print_function
 import time
-import os
 import lusid
 from lusid.rest import ApiException
 from lusid.models.adjust_holding_for_date_request import AdjustHoldingForDateRequest
 from lusid.models.batch_adjust_holdings_response import BatchAdjustHoldingsResponse
 from pprint import pprint
 
+import os
 from lusid import (
-	  ApiClientFactory,
-	  ApplicationMetadataApi,
-	  EnvironmentVariablesConfigurationLoader,
-	  SecretsFileConfigurationLoader,
-	  ArgsConfigurationLoader
+    ApiClientFactory,
+    TransactionPortfoliosApi,
+    EnvironmentVariablesConfigurationLoader,
+    SecretsFileConfigurationLoader,
+    ArgsConfigurationLoader
 )
 
 # Use the lusid ApiClientFactory to build Api instances with a configured api client
@@ -255,6 +256,109 @@ Name | Type | Description  | Notes
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
+# **batch_create_trade_tickets**
+> CreateTradeTicketsResponse batch_create_trade_tickets(scope, code, lusid_trade_ticket)
+
+[EARLY ACCESS] BatchCreateTradeTickets: Batch Create Trade Tickets
+
+Batch create trade tickets. Each ticket is broadly equivalent to a singular call to upsert an instrument, then a counterparty and finally  a transaction that makes use of the two.
+
+### Example
+
+* OAuth Authentication (oauth2):
+```python
+from __future__ import print_function
+import time
+import lusid
+from lusid.rest import ApiException
+from lusid.models.create_trade_tickets_response import CreateTradeTicketsResponse
+from lusid.models.lusid_trade_ticket import LusidTradeTicket
+from pprint import pprint
+
+import os
+from lusid import (
+    ApiClientFactory,
+    TransactionPortfoliosApi,
+    EnvironmentVariablesConfigurationLoader,
+    SecretsFileConfigurationLoader,
+    ArgsConfigurationLoader
+)
+
+# Use the lusid ApiClientFactory to build Api instances with a configured api client
+# By default this will read config from environment variables
+# Then from a secrets.json file found in the current working directory
+api_client_factory = ApiClientFactory()
+
+# The ApiClientFactory can be passed an iterable of configuration loaders to read configuration from
+
+api_url = "https://www.lusid.com/api"
+# Path to a secrets.json file containing authentication credentials
+# See https://support.lusid.com/knowledgebase/article/KA-01667/en-us
+# for a detailed guide to setting up the SDK make authenticated calls to LUSID APIs
+secrets_path = os.getenv("FBN_SECRETS_PATH")
+app_name="LusidJupyterNotebook"
+
+config_loaders = [
+	EnvironmentVariablesConfigurationLoader(),
+	SecretsFileConfigurationLoader(api_secrets_file=secrets_path),
+	ArgsConfigurationLoader(api_url=api_url, app_name=app_name)
+]
+api_client_factory = ApiClientFactory(config_loaders=config_loaders)
+
+
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+
+
+
+# Enter a context with an instance of the ApiClientFactory to ensure the connection pool is closed after use
+async with api_client_factory:
+    # Create an instance of the API class
+    api_instance = api_client_factory.build(lusid.TransactionPortfoliosApi)
+    scope = 'scope_example' # str | The scope of the transaction portfolio.
+    code = 'code_example' # str | The code of the transaction portfolio. Together with the scope this uniquely identifies              the transaction portfolio.
+    lusid_trade_ticket = [{"transactionId":"TradeTicket-1111111","transactionType":"OpenTradeTicket","source":"default","transactionDate":"2020-01-01T09:00:00.00Z","settlementDate":"2020-01-01T09:00:00.00Z","totalConsideration":{"amount":1020000,"currency":"GBP"},"units":1000000,"instrumentIdentifiers":{"Instrument/default/ClientInternal":"my-bond"},"instrumentScope":"myScope","instrumentName":"my_bond","instrumentDefinition":{"startDate":"2018-01-01T00:00:00.0000000+00:00","maturityDate":"2019-01-01T00:00:00.0000000+00:00","domAmount":1,"domCcy":"GBP","fgnAmount":-1.5,"fgnCcy":"USD","refSpotRate":1.5,"isNdf":false,"fixingDate":"0001-01-01T00:00:00.0000000+00:00","bookedAsSpot":false,"instrumentType":"FxForward"},"counterpartyAgreementId":{"scope":"demoScope","code":"myCounterparty"},"tradeTicketType":"LusidTradeTicket"}] # List[LusidTradeTicket] | the trade tickets to create
+
+    try:
+        # [EARLY ACCESS] BatchCreateTradeTickets: Batch Create Trade Tickets
+        api_response = await api_instance.batch_create_trade_tickets(scope, code, lusid_trade_ticket)
+        print("The response of TransactionPortfoliosApi->batch_create_trade_tickets:\n")
+        pprint(api_response)
+    except Exception as e:
+        print("Exception when calling TransactionPortfoliosApi->batch_create_trade_tickets: %s\n" % e)
+```
+
+
+### Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **scope** | **str**| The scope of the transaction portfolio. | 
+ **code** | **str**| The code of the transaction portfolio. Together with the scope this uniquely identifies              the transaction portfolio. | 
+ **lusid_trade_ticket** | [**List[LusidTradeTicket]**](LusidTradeTicket.md)| the trade tickets to create | 
+
+### Return type
+
+[**CreateTradeTicketsResponse**](CreateTradeTicketsResponse.md)
+
+### Authorization
+
+[oauth2](../README.md#oauth2)
+
+### HTTP request headers
+
+ - **Content-Type**: application/json-patch+json, application/json, text/json, application/*+json
+ - **Accept**: text/plain, application/json, text/json
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | The successfully created trade ticket requests along with any failures |  -  |
+**400** | The details of the input related failure |  -  |
+**0** | Error response |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
 # **batch_upsert_transactions**
 > BatchUpsertPortfolioTransactionsResponse batch_upsert_transactions(scope, code, success_mode, request_body, preserve_properties=preserve_properties)
 
@@ -268,19 +372,19 @@ Create or update transactions in the transaction portfolio. A transaction will b
 ```python
 from __future__ import print_function
 import time
-import os
 import lusid
 from lusid.rest import ApiException
 from lusid.models.batch_upsert_portfolio_transactions_response import BatchUpsertPortfolioTransactionsResponse
 from lusid.models.transaction_request import TransactionRequest
 from pprint import pprint
 
+import os
 from lusid import (
-	  ApiClientFactory,
-	  ApplicationMetadataApi,
-	  EnvironmentVariablesConfigurationLoader,
-	  SecretsFileConfigurationLoader,
-	  ArgsConfigurationLoader
+    ApiClientFactory,
+    TransactionPortfoliosApi,
+    EnvironmentVariablesConfigurationLoader,
+    SecretsFileConfigurationLoader,
+    ArgsConfigurationLoader
 )
 
 # Use the lusid ApiClientFactory to build Api instances with a configured api client
@@ -375,19 +479,19 @@ Builds and returns all transactions that affect the holdings of a portfolio over
 ```python
 from __future__ import print_function
 import time
-import os
 import lusid
 from lusid.rest import ApiException
 from lusid.models.transaction_query_parameters import TransactionQueryParameters
 from lusid.models.versioned_resource_list_of_output_transaction import VersionedResourceListOfOutputTransaction
 from pprint import pprint
 
+import os
 from lusid import (
-	  ApiClientFactory,
-	  ApplicationMetadataApi,
-	  EnvironmentVariablesConfigurationLoader,
-	  SecretsFileConfigurationLoader,
-	  ArgsConfigurationLoader
+    ApiClientFactory,
+    TransactionPortfoliosApi,
+    EnvironmentVariablesConfigurationLoader,
+    SecretsFileConfigurationLoader,
+    ArgsConfigurationLoader
 )
 
 # Use the lusid ApiClientFactory to build Api instances with a configured api client
@@ -488,18 +592,18 @@ Cancel all previous holding adjustments made on the specified transaction portfo
 ```python
 from __future__ import print_function
 import time
-import os
 import lusid
 from lusid.rest import ApiException
 from lusid.models.deleted_entity_response import DeletedEntityResponse
 from pprint import pprint
 
+import os
 from lusid import (
-	  ApiClientFactory,
-	  ApplicationMetadataApi,
-	  EnvironmentVariablesConfigurationLoader,
-	  SecretsFileConfigurationLoader,
-	  ArgsConfigurationLoader
+    ApiClientFactory,
+    TransactionPortfoliosApi,
+    EnvironmentVariablesConfigurationLoader,
+    SecretsFileConfigurationLoader,
+    ArgsConfigurationLoader
 )
 
 # Use the lusid ApiClientFactory to build Api instances with a configured api client
@@ -590,18 +694,18 @@ Cancel one or more transactions from the transaction portfolio.
 ```python
 from __future__ import print_function
 import time
-import os
 import lusid
 from lusid.rest import ApiException
 from lusid.models.deleted_entity_response import DeletedEntityResponse
 from pprint import pprint
 
+import os
 from lusid import (
-	  ApiClientFactory,
-	  ApplicationMetadataApi,
-	  EnvironmentVariablesConfigurationLoader,
-	  SecretsFileConfigurationLoader,
-	  ArgsConfigurationLoader
+    ApiClientFactory,
+    TransactionPortfoliosApi,
+    EnvironmentVariablesConfigurationLoader,
+    SecretsFileConfigurationLoader,
+    ArgsConfigurationLoader
 )
 
 # Use the lusid ApiClientFactory to build Api instances with a configured api client
@@ -692,19 +796,19 @@ Create a transaction portfolio in a particular scope.
 ```python
 from __future__ import print_function
 import time
-import os
 import lusid
 from lusid.rest import ApiException
 from lusid.models.create_transaction_portfolio_request import CreateTransactionPortfolioRequest
 from lusid.models.portfolio import Portfolio
 from pprint import pprint
 
+import os
 from lusid import (
-	  ApiClientFactory,
-	  ApplicationMetadataApi,
-	  EnvironmentVariablesConfigurationLoader,
-	  SecretsFileConfigurationLoader,
-	  ArgsConfigurationLoader
+    ApiClientFactory,
+    TransactionPortfoliosApi,
+    EnvironmentVariablesConfigurationLoader,
+    SecretsFileConfigurationLoader,
+    ArgsConfigurationLoader
 )
 
 # Use the lusid ApiClientFactory to build Api instances with a configured api client
@@ -783,7 +887,7 @@ Name | Type | Description  | Notes
 # **create_trade_ticket**
 > LusidTradeTicket create_trade_ticket(scope, code, lusid_trade_ticket=lusid_trade_ticket)
 
-[EXPERIMENTAL] CreateTradeTicket: Create Trade Ticket
+[EARLY ACCESS] CreateTradeTicket: Create Trade Ticket
 
 Upsert a trade ticket. This is broadly equivalent to a singular call to upsert an instrument, then a counterparty and finally  a transaction that makes use of the two. It can be viewed as a utility function or part of a workflow more familiar to users  with OTC systems than flow and equity trading ones.
 
@@ -793,18 +897,18 @@ Upsert a trade ticket. This is broadly equivalent to a singular call to upsert a
 ```python
 from __future__ import print_function
 import time
-import os
 import lusid
 from lusid.rest import ApiException
 from lusid.models.lusid_trade_ticket import LusidTradeTicket
 from pprint import pprint
 
+import os
 from lusid import (
-	  ApiClientFactory,
-	  ApplicationMetadataApi,
-	  EnvironmentVariablesConfigurationLoader,
-	  SecretsFileConfigurationLoader,
-	  ArgsConfigurationLoader
+    ApiClientFactory,
+    TransactionPortfoliosApi,
+    EnvironmentVariablesConfigurationLoader,
+    SecretsFileConfigurationLoader,
+    ArgsConfigurationLoader
 )
 
 # Use the lusid ApiClientFactory to build Api instances with a configured api client
@@ -843,7 +947,7 @@ async with api_client_factory:
     lusid_trade_ticket = {"transactionId":"TradeTicket-1111111","transactionType":"OpenTradeTicket","source":"default","transactionDate":"2020-01-01T09:00:00.00Z","settlementDate":"2020-01-01T09:00:00.00Z","totalConsideration":{"amount":1020000,"currency":"GBP"},"units":1000000,"instrumentIdentifiers":{"Instrument/default/ClientInternal":"my-bond"},"instrumentScope":"myScope","instrumentName":"my_bond","instrumentDefinition":{"startDate":"2018-01-01T00:00:00.0000000+00:00","maturityDate":"2019-01-01T00:00:00.0000000+00:00","domAmount":1,"domCcy":"GBP","fgnAmount":-1.5,"fgnCcy":"USD","refSpotRate":1.5,"isNdf":false,"fixingDate":"0001-01-01T00:00:00.0000000+00:00","bookedAsSpot":false,"instrumentType":"FxForward"},"counterpartyAgreementId":{"scope":"demoScope","code":"myCounterparty"},"tradeTicketType":"LusidTradeTicket"} # LusidTradeTicket | the trade ticket to upsert (optional)
 
     try:
-        # [EXPERIMENTAL] CreateTradeTicket: Create Trade Ticket
+        # [EARLY ACCESS] CreateTradeTicket: Create Trade Ticket
         api_response = await api_instance.create_trade_ticket(scope, code, lusid_trade_ticket=lusid_trade_ticket)
         print("The response of TransactionPortfoliosApi->create_trade_ticket:\n")
         pprint(api_response)
@@ -895,19 +999,19 @@ Delete one or more custodian accounts from the Transaction Portfolios. Soft dele
 ```python
 from __future__ import print_function
 import time
-import os
 import lusid
 from lusid.rest import ApiException
 from lusid.models.delete_custodian_accounts_response import DeleteCustodianAccountsResponse
 from lusid.models.resource_id import ResourceId
 from pprint import pprint
 
+import os
 from lusid import (
-	  ApiClientFactory,
-	  ApplicationMetadataApi,
-	  EnvironmentVariablesConfigurationLoader,
-	  SecretsFileConfigurationLoader,
-	  ArgsConfigurationLoader
+    ApiClientFactory,
+    TransactionPortfoliosApi,
+    EnvironmentVariablesConfigurationLoader,
+    SecretsFileConfigurationLoader,
+    ArgsConfigurationLoader
 )
 
 # Use the lusid ApiClientFactory to build Api instances with a configured api client
@@ -1000,18 +1104,18 @@ Delete one or more properties from a single transaction in a transaction portfol
 ```python
 from __future__ import print_function
 import time
-import os
 import lusid
 from lusid.rest import ApiException
 from lusid.models.deleted_entity_response import DeletedEntityResponse
 from pprint import pprint
 
+import os
 from lusid import (
-	  ApiClientFactory,
-	  ApplicationMetadataApi,
-	  EnvironmentVariablesConfigurationLoader,
-	  SecretsFileConfigurationLoader,
-	  ArgsConfigurationLoader
+    ApiClientFactory,
+    TransactionPortfoliosApi,
+    EnvironmentVariablesConfigurationLoader,
+    SecretsFileConfigurationLoader,
+    ArgsConfigurationLoader
 )
 
 # Use the lusid ApiClientFactory to build Api instances with a configured api client
@@ -1104,18 +1208,18 @@ Get an A2B report for the given portfolio.
 ```python
 from __future__ import print_function
 import time
-import os
 import lusid
 from lusid.rest import ApiException
 from lusid.models.versioned_resource_list_of_a2_b_data_record import VersionedResourceListOfA2BDataRecord
 from pprint import pprint
 
+import os
 from lusid import (
-	  ApiClientFactory,
-	  ApplicationMetadataApi,
-	  EnvironmentVariablesConfigurationLoader,
-	  SecretsFileConfigurationLoader,
-	  ArgsConfigurationLoader
+    ApiClientFactory,
+    TransactionPortfoliosApi,
+    EnvironmentVariablesConfigurationLoader,
+    SecretsFileConfigurationLoader,
+    ArgsConfigurationLoader
 )
 
 # Use the lusid ApiClientFactory to build Api instances with a configured api client
@@ -1218,18 +1322,18 @@ Get an A2B report at the movement level for the given portfolio.
 ```python
 from __future__ import print_function
 import time
-import os
 import lusid
 from lusid.rest import ApiException
 from lusid.models.versioned_resource_list_of_a2_b_movement_record import VersionedResourceListOfA2BMovementRecord
 from pprint import pprint
 
+import os
 from lusid import (
-	  ApiClientFactory,
-	  ApplicationMetadataApi,
-	  EnvironmentVariablesConfigurationLoader,
-	  SecretsFileConfigurationLoader,
-	  ArgsConfigurationLoader
+    ApiClientFactory,
+    TransactionPortfoliosApi,
+    EnvironmentVariablesConfigurationLoader,
+    SecretsFileConfigurationLoader,
+    ArgsConfigurationLoader
 )
 
 # Use the lusid ApiClientFactory to build Api instances with a configured api client
@@ -1332,19 +1436,19 @@ We bucket/aggregate a transaction portfolio's instruments by date or tenor speci
 ```python
 from __future__ import print_function
 import time
-import os
 import lusid
 from lusid.rest import ApiException
 from lusid.models.bucketed_cash_flow_request import BucketedCashFlowRequest
 from lusid.models.bucketed_cash_flow_response import BucketedCashFlowResponse
 from pprint import pprint
 
+import os
 from lusid import (
-	  ApiClientFactory,
-	  ApplicationMetadataApi,
-	  EnvironmentVariablesConfigurationLoader,
-	  SecretsFileConfigurationLoader,
-	  ArgsConfigurationLoader
+    ApiClientFactory,
+    TransactionPortfoliosApi,
+    EnvironmentVariablesConfigurationLoader,
+    SecretsFileConfigurationLoader,
+    ArgsConfigurationLoader
 )
 
 # Use the lusid ApiClientFactory to build Api instances with a configured api client
@@ -1435,18 +1539,18 @@ Retrieve the definition of a particular Custodian Account which is part of a Tra
 ```python
 from __future__ import print_function
 import time
-import os
 import lusid
 from lusid.rest import ApiException
 from lusid.models.custodian_account import CustodianAccount
 from pprint import pprint
 
+import os
 from lusid import (
-	  ApiClientFactory,
-	  ApplicationMetadataApi,
-	  EnvironmentVariablesConfigurationLoader,
-	  SecretsFileConfigurationLoader,
-	  ArgsConfigurationLoader
+    ApiClientFactory,
+    TransactionPortfoliosApi,
+    EnvironmentVariablesConfigurationLoader,
+    SecretsFileConfigurationLoader,
+    ArgsConfigurationLoader
 )
 
 # Use the lusid ApiClientFactory to build Api instances with a configured api client
@@ -1545,18 +1649,18 @@ Get certain details associated with a transaction portfolio.
 ```python
 from __future__ import print_function
 import time
-import os
 import lusid
 from lusid.rest import ApiException
 from lusid.models.portfolio_details import PortfolioDetails
 from pprint import pprint
 
+import os
 from lusid import (
-	  ApiClientFactory,
-	  ApplicationMetadataApi,
-	  EnvironmentVariablesConfigurationLoader,
-	  SecretsFileConfigurationLoader,
-	  ArgsConfigurationLoader
+    ApiClientFactory,
+    TransactionPortfoliosApi,
+    EnvironmentVariablesConfigurationLoader,
+    SecretsFileConfigurationLoader,
+    ArgsConfigurationLoader
 )
 
 # Use the lusid ApiClientFactory to build Api instances with a configured api client
@@ -1649,18 +1753,18 @@ Lists all transactions that affect the holdings of a portfolio over a given effe
 ```python
 from __future__ import print_function
 import time
-import os
 import lusid
 from lusid.rest import ApiException
 from lusid.models.versioned_resource_list_of_holding_contributor import VersionedResourceListOfHoldingContributor
 from pprint import pprint
 
+import os
 from lusid import (
-	  ApiClientFactory,
-	  ApplicationMetadataApi,
-	  EnvironmentVariablesConfigurationLoader,
-	  SecretsFileConfigurationLoader,
-	  ArgsConfigurationLoader
+    ApiClientFactory,
+    TransactionPortfoliosApi,
+    EnvironmentVariablesConfigurationLoader,
+    SecretsFileConfigurationLoader,
+    ArgsConfigurationLoader
 )
 
 # Use the lusid ApiClientFactory to build Api instances with a configured api client
@@ -1767,18 +1871,18 @@ Calculate holdings for a transaction portfolio.
 ```python
 from __future__ import print_function
 import time
-import os
 import lusid
 from lusid.rest import ApiException
 from lusid.models.versioned_resource_list_of_portfolio_holding import VersionedResourceListOfPortfolioHolding
 from pprint import pprint
 
+import os
 from lusid import (
-	  ApiClientFactory,
-	  ApplicationMetadataApi,
-	  EnvironmentVariablesConfigurationLoader,
-	  SecretsFileConfigurationLoader,
-	  ArgsConfigurationLoader
+    ApiClientFactory,
+    TransactionPortfoliosApi,
+    EnvironmentVariablesConfigurationLoader,
+    SecretsFileConfigurationLoader,
+    ArgsConfigurationLoader
 )
 
 # Use the lusid ApiClientFactory to build Api instances with a configured api client
@@ -1877,18 +1981,18 @@ Get a holdings adjustment made to a transaction portfolio at a specific effectiv
 ```python
 from __future__ import print_function
 import time
-import os
 import lusid
 from lusid.rest import ApiException
 from lusid.models.holdings_adjustment import HoldingsAdjustment
 from pprint import pprint
 
+import os
 from lusid import (
-	  ApiClientFactory,
-	  ApplicationMetadataApi,
-	  EnvironmentVariablesConfigurationLoader,
-	  SecretsFileConfigurationLoader,
-	  ArgsConfigurationLoader
+    ApiClientFactory,
+    TransactionPortfoliosApi,
+    EnvironmentVariablesConfigurationLoader,
+    SecretsFileConfigurationLoader,
+    ArgsConfigurationLoader
 )
 
 # Use the lusid ApiClientFactory to build Api instances with a configured api client
@@ -1983,18 +2087,18 @@ Get the holdings of a transaction portfolio. Create virtual holdings for any out
 ```python
 from __future__ import print_function
 import time
-import os
 import lusid
 from lusid.rest import ApiException
 from lusid.models.versioned_resource_list_with_warnings_of_portfolio_holding import VersionedResourceListWithWarningsOfPortfolioHolding
 from pprint import pprint
 
+import os
 from lusid import (
-	  ApiClientFactory,
-	  ApplicationMetadataApi,
-	  EnvironmentVariablesConfigurationLoader,
-	  SecretsFileConfigurationLoader,
-	  ArgsConfigurationLoader
+    ApiClientFactory,
+    TransactionPortfoliosApi,
+    EnvironmentVariablesConfigurationLoader,
+    SecretsFileConfigurationLoader,
+    ArgsConfigurationLoader
 )
 
 # Use the lusid ApiClientFactory to build Api instances with a configured api client
@@ -2097,18 +2201,18 @@ Get the set of cash flows that occur in a window for the transaction portfolio's
 ```python
 from __future__ import print_function
 import time
-import os
 import lusid
 from lusid.rest import ApiException
 from lusid.models.resource_list_of_instrument_cash_flow import ResourceListOfInstrumentCashFlow
 from pprint import pprint
 
+import os
 from lusid import (
-	  ApiClientFactory,
-	  ApplicationMetadataApi,
-	  EnvironmentVariablesConfigurationLoader,
-	  SecretsFileConfigurationLoader,
-	  ArgsConfigurationLoader
+    ApiClientFactory,
+    TransactionPortfoliosApi,
+    EnvironmentVariablesConfigurationLoader,
+    SecretsFileConfigurationLoader,
+    ArgsConfigurationLoader
 )
 
 # Use the lusid ApiClientFactory to build Api instances with a configured api client
@@ -2213,18 +2317,18 @@ Get a cash ladder for a transaction portfolio.
 ```python
 from __future__ import print_function
 import time
-import os
 import lusid
 from lusid.rest import ApiException
 from lusid.models.resource_list_of_portfolio_cash_ladder import ResourceListOfPortfolioCashLadder
 from pprint import pprint
 
+import os
 from lusid import (
-	  ApiClientFactory,
-	  ApplicationMetadataApi,
-	  EnvironmentVariablesConfigurationLoader,
-	  SecretsFileConfigurationLoader,
-	  ArgsConfigurationLoader
+    ApiClientFactory,
+    TransactionPortfoliosApi,
+    EnvironmentVariablesConfigurationLoader,
+    SecretsFileConfigurationLoader,
+    ArgsConfigurationLoader
 )
 
 # Use the lusid ApiClientFactory to build Api instances with a configured api client
@@ -2329,18 +2433,18 @@ Get a cash statement for a transaction portfolio.
 ```python
 from __future__ import print_function
 import time
-import os
 import lusid
 from lusid.rest import ApiException
 from lusid.models.resource_list_of_portfolio_cash_flow import ResourceListOfPortfolioCashFlow
 from pprint import pprint
 
+import os
 from lusid import (
-	  ApiClientFactory,
-	  ApplicationMetadataApi,
-	  EnvironmentVariablesConfigurationLoader,
-	  SecretsFileConfigurationLoader,
-	  ArgsConfigurationLoader
+    ApiClientFactory,
+    TransactionPortfoliosApi,
+    EnvironmentVariablesConfigurationLoader,
+    SecretsFileConfigurationLoader,
+    ArgsConfigurationLoader
 )
 
 # Use the lusid ApiClientFactory to build Api instances with a configured api client
@@ -2441,18 +2545,18 @@ Get all of the changes that have happened to a transaction.
 ```python
 from __future__ import print_function
 import time
-import os
 import lusid
 from lusid.rest import ApiException
 from lusid.models.resource_list_of_change_history import ResourceListOfChangeHistory
 from pprint import pprint
 
+import os
 from lusid import (
-	  ApiClientFactory,
-	  ApplicationMetadataApi,
-	  EnvironmentVariablesConfigurationLoader,
-	  SecretsFileConfigurationLoader,
-	  ArgsConfigurationLoader
+    ApiClientFactory,
+    TransactionPortfoliosApi,
+    EnvironmentVariablesConfigurationLoader,
+    SecretsFileConfigurationLoader,
+    ArgsConfigurationLoader
 )
 
 # Use the lusid ApiClientFactory to build Api instances with a configured api client
@@ -2545,18 +2649,18 @@ Retrieve all the transactions that occurred during a particular time interval.  
 ```python
 from __future__ import print_function
 import time
-import os
 import lusid
 from lusid.rest import ApiException
 from lusid.models.versioned_resource_list_of_transaction import VersionedResourceListOfTransaction
 from pprint import pprint
 
+import os
 from lusid import (
-	  ApiClientFactory,
-	  ApplicationMetadataApi,
-	  EnvironmentVariablesConfigurationLoader,
-	  SecretsFileConfigurationLoader,
-	  ArgsConfigurationLoader
+    ApiClientFactory,
+    TransactionPortfoliosApi,
+    EnvironmentVariablesConfigurationLoader,
+    SecretsFileConfigurationLoader,
+    ArgsConfigurationLoader
 )
 
 # Use the lusid ApiClientFactory to build Api instances with a configured api client
@@ -2663,18 +2767,18 @@ Get the set of cash flows that occur in a window for the given portfolio instrum
 ```python
 from __future__ import print_function
 import time
-import os
 import lusid
 from lusid.rest import ApiException
 from lusid.models.resource_list_of_transaction import ResourceListOfTransaction
 from pprint import pprint
 
+import os
 from lusid import (
-	  ApiClientFactory,
-	  ApplicationMetadataApi,
-	  EnvironmentVariablesConfigurationLoader,
-	  SecretsFileConfigurationLoader,
-	  ArgsConfigurationLoader
+    ApiClientFactory,
+    TransactionPortfoliosApi,
+    EnvironmentVariablesConfigurationLoader,
+    SecretsFileConfigurationLoader,
+    ArgsConfigurationLoader
 )
 
 # Use the lusid ApiClientFactory to build Api instances with a configured api client
@@ -2779,18 +2883,18 @@ List the custodian accounts in a Transaction Portfolios
 ```python
 from __future__ import print_function
 import time
-import os
 import lusid
 from lusid.rest import ApiException
 from lusid.models.paged_resource_list_of_custodian_account import PagedResourceListOfCustodianAccount
 from pprint import pprint
 
+import os
 from lusid import (
-	  ApiClientFactory,
-	  ApplicationMetadataApi,
-	  EnvironmentVariablesConfigurationLoader,
-	  SecretsFileConfigurationLoader,
-	  ArgsConfigurationLoader
+    ApiClientFactory,
+    TransactionPortfoliosApi,
+    EnvironmentVariablesConfigurationLoader,
+    SecretsFileConfigurationLoader,
+    ArgsConfigurationLoader
 )
 
 # Use the lusid ApiClientFactory to build Api instances with a configured api client
@@ -2891,18 +2995,18 @@ List the holdings adjustments made to the specified transaction portfolio over a
 ```python
 from __future__ import print_function
 import time
-import os
 import lusid
 from lusid.rest import ApiException
 from lusid.models.resource_list_of_holdings_adjustment_header import ResourceListOfHoldingsAdjustmentHeader
 from pprint import pprint
 
+import os
 from lusid import (
-	  ApiClientFactory,
-	  ApplicationMetadataApi,
-	  EnvironmentVariablesConfigurationLoader,
-	  SecretsFileConfigurationLoader,
-	  ArgsConfigurationLoader
+    ApiClientFactory,
+    TransactionPortfoliosApi,
+    EnvironmentVariablesConfigurationLoader,
+    SecretsFileConfigurationLoader,
+    ArgsConfigurationLoader
 )
 
 # Use the lusid ApiClientFactory to build Api instances with a configured api client
@@ -2997,19 +3101,19 @@ Create or update certain details for a particular transaction portfolio.  The be
 ```python
 from __future__ import print_function
 import time
-import os
 import lusid
 from lusid.rest import ApiException
 from lusid.models.operation import Operation
 from lusid.models.portfolio_details import PortfolioDetails
 from pprint import pprint
 
+import os
 from lusid import (
-	  ApiClientFactory,
-	  ApplicationMetadataApi,
-	  EnvironmentVariablesConfigurationLoader,
-	  SecretsFileConfigurationLoader,
-	  ArgsConfigurationLoader
+    ApiClientFactory,
+    TransactionPortfoliosApi,
+    EnvironmentVariablesConfigurationLoader,
+    SecretsFileConfigurationLoader,
+    ArgsConfigurationLoader
 )
 
 # Use the lusid ApiClientFactory to build Api instances with a configured api client
@@ -3045,7 +3149,7 @@ async with api_client_factory:
     api_instance = api_client_factory.build(lusid.TransactionPortfoliosApi)
     scope = 'scope_example' # str | The scope of the transaction portfolio.
     code = 'code_example' # str | The code of the transaction portfolio. Together with the               scope this uniquely identifies the transaction portfolio.
-    operation = [{"value":["Transaction/Client/AccountType"],"path":"/subHoldingKeys","op":"add"},{"value":"GBP","path":"/baseCurrency","op":"add"},{"value":"newscope","path":"/transactiontypescope","op":"add"},{"value":"TransactionDate","path":"/cashGainLossCalculationDate","op":"add"},{"value":"NewTransactionTemplateScope","path":"/instrumentEventConfiguration/transactionTemplateScopes","op":"add"}] # List[Operation] | The patch document.
+    operation = [{"value":["Transaction/Client/AccountType"],"path":"/subHoldingKeys","op":"add"},{"value":"GBP","path":"/baseCurrency","op":"add"},{"value":"newscope","path":"/transactiontypescope","op":"add"},{"value":"TransactionDate","path":"/cashGainLossCalculationDate","op":"add"},{"value":["NewTransactionTemplateScope"],"path":"/instrumentEventConfiguration/transactionTemplateScopes","op":"add"}] # List[Operation] | The patch document.
     effective_at = 'effective_at_example' # str | The effective datetime or cut label at which the updated or inserted details should become valid.               Defaults to the current LUSID system datetime if not specified.               Note that this will affect all bitemporal entities in the request, but will not be used for any perpetual entities. (optional)
 
     try:
@@ -3102,18 +3206,18 @@ Try to resolve the instrument for transaction and holdings for a given instrumen
 ```python
 from __future__ import print_function
 import time
-import os
 import lusid
 from lusid.rest import ApiException
 from lusid.models.upsert_portfolio_transactions_response import UpsertPortfolioTransactionsResponse
 from pprint import pprint
 
+import os
 from lusid import (
-	  ApiClientFactory,
-	  ApplicationMetadataApi,
-	  EnvironmentVariablesConfigurationLoader,
-	  SecretsFileConfigurationLoader,
-	  ArgsConfigurationLoader
+    ApiClientFactory,
+    TransactionPortfoliosApi,
+    EnvironmentVariablesConfigurationLoader,
+    SecretsFileConfigurationLoader,
+    ArgsConfigurationLoader
 )
 
 # Use the lusid ApiClientFactory to build Api instances with a configured api client
@@ -3212,19 +3316,19 @@ Set the holdings of the specified transaction portfolio to the provided targets.
 ```python
 from __future__ import print_function
 import time
-import os
 import lusid
 from lusid.rest import ApiException
 from lusid.models.adjust_holding import AdjustHolding
 from lusid.models.adjust_holding_request import AdjustHoldingRequest
 from pprint import pprint
 
+import os
 from lusid import (
-	  ApiClientFactory,
-	  ApplicationMetadataApi,
-	  EnvironmentVariablesConfigurationLoader,
-	  SecretsFileConfigurationLoader,
-	  ArgsConfigurationLoader
+    ApiClientFactory,
+    TransactionPortfoliosApi,
+    EnvironmentVariablesConfigurationLoader,
+    SecretsFileConfigurationLoader,
+    ArgsConfigurationLoader
 )
 
 # Use the lusid ApiClientFactory to build Api instances with a configured api client
@@ -3319,19 +3423,19 @@ Create or update Custodian Accounts in the Transaction Portfolios. A Custodian A
 ```python
 from __future__ import print_function
 import time
-import os
 import lusid
 from lusid.rest import ApiException
 from lusid.models.custodian_account_request import CustodianAccountRequest
 from lusid.models.custodian_accounts_upsert_response import CustodianAccountsUpsertResponse
 from pprint import pprint
 
+import os
 from lusid import (
-	  ApiClientFactory,
-	  ApplicationMetadataApi,
-	  EnvironmentVariablesConfigurationLoader,
-	  SecretsFileConfigurationLoader,
-	  ArgsConfigurationLoader
+    ApiClientFactory,
+    TransactionPortfoliosApi,
+    EnvironmentVariablesConfigurationLoader,
+    SecretsFileConfigurationLoader,
+    ArgsConfigurationLoader
 )
 
 # Use the lusid ApiClientFactory to build Api instances with a configured api client
@@ -3422,19 +3526,19 @@ Update or insert one or more properties onto a single custodian account. A prope
 ```python
 from __future__ import print_function
 import time
-import os
 import lusid
 from lusid.rest import ApiException
 from lusid.models.custodian_account_properties import CustodianAccountProperties
 from lusid.models.model_property import ModelProperty
 from pprint import pprint
 
+import os
 from lusid import (
-	  ApiClientFactory,
-	  ApplicationMetadataApi,
-	  EnvironmentVariablesConfigurationLoader,
-	  SecretsFileConfigurationLoader,
-	  ArgsConfigurationLoader
+    ApiClientFactory,
+    TransactionPortfoliosApi,
+    EnvironmentVariablesConfigurationLoader,
+    SecretsFileConfigurationLoader,
+    ArgsConfigurationLoader
 )
 
 # Use the lusid ApiClientFactory to build Api instances with a configured api client
@@ -3529,19 +3633,19 @@ Create or update certain details for a particular transaction portfolio. The det
 ```python
 from __future__ import print_function
 import time
-import os
 import lusid
 from lusid.rest import ApiException
 from lusid.models.create_portfolio_details import CreatePortfolioDetails
 from lusid.models.portfolio_details import PortfolioDetails
 from pprint import pprint
 
+import os
 from lusid import (
-	  ApiClientFactory,
-	  ApplicationMetadataApi,
-	  EnvironmentVariablesConfigurationLoader,
-	  SecretsFileConfigurationLoader,
-	  ArgsConfigurationLoader
+    ApiClientFactory,
+    TransactionPortfoliosApi,
+    EnvironmentVariablesConfigurationLoader,
+    SecretsFileConfigurationLoader,
+    ArgsConfigurationLoader
 )
 
 # Use the lusid ApiClientFactory to build Api instances with a configured api client
@@ -3634,19 +3738,19 @@ Create or update one or more transaction properties for a single transaction in 
 ```python
 from __future__ import print_function
 import time
-import os
 import lusid
 from lusid.rest import ApiException
 from lusid.models.perpetual_property import PerpetualProperty
 from lusid.models.upsert_transaction_properties_response import UpsertTransactionPropertiesResponse
 from pprint import pprint
 
+import os
 from lusid import (
-	  ApiClientFactory,
-	  ApplicationMetadataApi,
-	  EnvironmentVariablesConfigurationLoader,
-	  SecretsFileConfigurationLoader,
-	  ArgsConfigurationLoader
+    ApiClientFactory,
+    TransactionPortfoliosApi,
+    EnvironmentVariablesConfigurationLoader,
+    SecretsFileConfigurationLoader,
+    ArgsConfigurationLoader
 )
 
 # Use the lusid ApiClientFactory to build Api instances with a configured api client
@@ -3739,19 +3843,19 @@ Create or update transactions in the transaction portfolio. A transaction will b
 ```python
 from __future__ import print_function
 import time
-import os
 import lusid
 from lusid.rest import ApiException
 from lusid.models.transaction_request import TransactionRequest
 from lusid.models.upsert_portfolio_transactions_response import UpsertPortfolioTransactionsResponse
 from pprint import pprint
 
+import os
 from lusid import (
-	  ApiClientFactory,
-	  ApplicationMetadataApi,
-	  EnvironmentVariablesConfigurationLoader,
-	  SecretsFileConfigurationLoader,
-	  ArgsConfigurationLoader
+    ApiClientFactory,
+    TransactionPortfoliosApi,
+    EnvironmentVariablesConfigurationLoader,
+    SecretsFileConfigurationLoader,
+    ArgsConfigurationLoader
 )
 
 # Use the lusid ApiClientFactory to build Api instances with a configured api client

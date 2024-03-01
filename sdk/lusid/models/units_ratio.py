@@ -23,7 +23,7 @@ from pydantic import BaseModel, Field, StrictFloat, StrictInt
 
 class UnitsRatio(BaseModel):
     """
-    todo: what even is this  # noqa: E501
+    The number of units you have after the event (output) for a given number of units you have prior to the event (input).  # noqa: E501
     """
     input: Union[StrictFloat, StrictInt] = Field(..., description="Input amount.  Denominator of the Ratio")
     output: Union[StrictFloat, StrictInt] = Field(..., description="Output amount. Numerator of the Ratio")

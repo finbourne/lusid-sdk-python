@@ -28,13 +28,12 @@ class InformationalEvent(InstrumentEvent):
     A generic event derived from the economic definition of an instrument. This should be considered purely  informational; any data provided by this event is not guaranteed to be processable by LUSID.  # noqa: E501
     """
     event_type: constr(strict=True, min_length=1) = Field(..., alias="eventType", description="What type of internal event does this represent; reset, exercise, amortisation etc.")
-    event_status: constr(strict=True, min_length=1) = Field(..., alias="eventStatus", description="What is the event status, is it a known (ie historic) or unknown (ie projected) event?")
     anchor_date: datetime = Field(..., alias="anchorDate", description="In the case of a point event, the single date on which the event occurs. In the case of an event which is  spread over a window, e.g. a barrier or American option, the start of that window.")
     event_window_end: Optional[datetime] = Field(None, alias="eventWindowEnd", description="In the case of a point event this is identical to the anchor date. In the case of an event that is spread over a window,  this is the end of that window.")
     diagnostics: Optional[ResultValueDictionary] = None
     instrument_event_type: StrictStr = Field(..., alias="instrumentEventType", description="The Type of Event. The available values are: TransitionEvent, InformationalEvent, OpenEvent, CloseEvent, StockSplitEvent, BondDefaultEvent, CashDividendEvent, AmortisationEvent, CashFlowEvent, ExerciseEvent, ResetEvent, TriggerEvent, RawVendorEvent, InformationalErrorEvent, BondCouponEvent, DividendReinvestmentEvent, AccumulationEvent, BondPrincipalEvent, DividendOptionEvent, MaturityEvent, FxForwardSettlementEvent")
     additional_properties: Dict[str, Any] = {}
-    __properties = ["instrumentEventType", "eventType", "eventStatus", "anchorDate", "eventWindowEnd", "diagnostics"]
+    __properties = ["instrumentEventType", "eventType", "anchorDate", "eventWindowEnd", "diagnostics"]
 
     @validator('instrument_event_type')
     def instrument_event_type_validate_enum(cls, value):
@@ -92,7 +91,6 @@ class InformationalEvent(InstrumentEvent):
         _obj = InformationalEvent.parse_obj({
             "instrument_event_type": obj.get("instrumentEventType"),
             "event_type": obj.get("eventType"),
-            "event_status": obj.get("eventStatus"),
             "anchor_date": obj.get("anchorDate"),
             "event_window_end": obj.get("eventWindowEnd"),
             "diagnostics": ResultValueDictionary.from_dict(obj.get("diagnostics")) if obj.get("diagnostics") is not None else None

@@ -30,10 +30,9 @@ class RawVendorEvent(InstrumentEvent):
     effective_at: datetime = Field(..., alias="effectiveAt", description="The effective date of the event")
     event_value: LifeCycleEventValue = Field(..., alias="eventValue")
     event_type: constr(strict=True, min_length=1) = Field(..., alias="eventType", description="What type of internal event does this represent; reset, exercise, amortisation etc.")
-    event_status: constr(strict=True, min_length=1) = Field(..., alias="eventStatus", description="What is the event status, is it a known (ie historic) or unknown (ie projected) event?")
     instrument_event_type: StrictStr = Field(..., alias="instrumentEventType", description="The Type of Event. The available values are: TransitionEvent, InformationalEvent, OpenEvent, CloseEvent, StockSplitEvent, BondDefaultEvent, CashDividendEvent, AmortisationEvent, CashFlowEvent, ExerciseEvent, ResetEvent, TriggerEvent, RawVendorEvent, InformationalErrorEvent, BondCouponEvent, DividendReinvestmentEvent, AccumulationEvent, BondPrincipalEvent, DividendOptionEvent, MaturityEvent, FxForwardSettlementEvent")
     additional_properties: Dict[str, Any] = {}
-    __properties = ["instrumentEventType", "effectiveAt", "eventValue", "eventType", "eventStatus"]
+    __properties = ["instrumentEventType", "effectiveAt", "eventValue", "eventType"]
 
     @validator('instrument_event_type')
     def instrument_event_type_validate_enum(cls, value):
@@ -90,8 +89,7 @@ class RawVendorEvent(InstrumentEvent):
             "instrument_event_type": obj.get("instrumentEventType"),
             "effective_at": obj.get("effectiveAt"),
             "event_value": LifeCycleEventValue.from_dict(obj.get("eventValue")) if obj.get("eventValue") is not None else None,
-            "event_type": obj.get("eventType"),
-            "event_status": obj.get("eventStatus")
+            "event_type": obj.get("eventType")
         })
         # store additional fields in additional_properties
         for _key in obj.keys():

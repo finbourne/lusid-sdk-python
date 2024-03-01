@@ -65,7 +65,7 @@ class TransactionConfigurationApi:
 
     @validate_arguments
     def delete_side_definition(self, side : Annotated[constr(strict=True, max_length=64, min_length=1), Field(..., description="The label to uniquely identify the side.")], scope : Annotated[Optional[constr(strict=True, max_length=64, min_length=1)], Field(description="The scope in which the side exists. When not supplied the scope is 'default'.")] = None, async_req: Optional[bool]=None, **kwargs) -> Union[DeletedEntityResponse, Awaitable[DeletedEntityResponse]]:  # noqa: E501
-        """[EXPERIMENTAL] DeleteSideDefinition: Delete the given side definition  # noqa: E501
+        """DeleteSideDefinition: Delete the given side definition  # noqa: E501
 
         Delete the side which user specify in the request.  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
@@ -99,7 +99,7 @@ class TransactionConfigurationApi:
 
     @validate_arguments
     def delete_side_definition_with_http_info(self, side : Annotated[constr(strict=True, max_length=64, min_length=1), Field(..., description="The label to uniquely identify the side.")], scope : Annotated[Optional[constr(strict=True, max_length=64, min_length=1)], Field(description="The scope in which the side exists. When not supplied the scope is 'default'.")] = None, **kwargs) -> ApiResponse:  # noqa: E501
-        """[EXPERIMENTAL] DeleteSideDefinition: Delete the given side definition  # noqa: E501
+        """DeleteSideDefinition: Delete the given side definition  # noqa: E501
 
         Delete the side which user specify in the request.  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
@@ -224,7 +224,7 @@ class TransactionConfigurationApi:
 
     @validate_arguments
     def delete_transaction_type(self, source : Annotated[constr(strict=True, max_length=64, min_length=1), Field(..., description="The source that the type is in")], type : Annotated[constr(strict=True, max_length=64, min_length=1), Field(..., description="One of the type's aliases")], scope : Annotated[Optional[constr(strict=True, max_length=64, min_length=1)], Field(description="The scope in which the transaction types exists. When not supplied the scope is 'default'.")] = None, async_req: Optional[bool]=None, **kwargs) -> Union[DeletedEntityResponse, Awaitable[DeletedEntityResponse]]:  # noqa: E501
-        """[EXPERIMENTAL] DeleteTransactionType: Delete a transaction type  # noqa: E501
+        """DeleteTransactionType: Delete a transaction type  # noqa: E501
 
         /// WARNING! Changing existing transaction types has a material impact on how data, new and old,  is processed and aggregated by LUSID, and will affect your whole organisation. Only call this API if you are fully aware of the implications of the change.  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
@@ -260,7 +260,7 @@ class TransactionConfigurationApi:
 
     @validate_arguments
     def delete_transaction_type_with_http_info(self, source : Annotated[constr(strict=True, max_length=64, min_length=1), Field(..., description="The source that the type is in")], type : Annotated[constr(strict=True, max_length=64, min_length=1), Field(..., description="One of the type's aliases")], scope : Annotated[Optional[constr(strict=True, max_length=64, min_length=1)], Field(description="The scope in which the transaction types exists. When not supplied the scope is 'default'.")] = None, **kwargs) -> ApiResponse:  # noqa: E501
-        """[EXPERIMENTAL] DeleteTransactionType: Delete a transaction type  # noqa: E501
+        """DeleteTransactionType: Delete a transaction type  # noqa: E501
 
         /// WARNING! Changing existing transaction types has a material impact on how data, new and old,  is processed and aggregated by LUSID, and will affect your whole organisation. Only call this API if you are fully aware of the implications of the change.  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
@@ -391,7 +391,7 @@ class TransactionConfigurationApi:
 
     @validate_arguments
     def delete_transaction_type_source(self, source : Annotated[constr(strict=True, max_length=64, min_length=1), Field(..., description="The source to set the transaction types for.")], scope : Annotated[Optional[constr(strict=True, max_length=64, min_length=1)], Field(description="The scope in which the transaction types exists. When not supplied the scope is 'default'.")] = None, async_req: Optional[bool]=None, **kwargs) -> Union[DeletedEntityResponse, Awaitable[DeletedEntityResponse]]:  # noqa: E501
-        """[EXPERIMENTAL] DeleteTransactionTypeSource: Delete all transaction types for the given source and scope  # noqa: E501
+        """DeleteTransactionTypeSource: Delete all transaction types for the given source and scope  # noqa: E501
 
         Delete all the types for the given source and scope.  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
@@ -425,7 +425,7 @@ class TransactionConfigurationApi:
 
     @validate_arguments
     def delete_transaction_type_source_with_http_info(self, source : Annotated[constr(strict=True, max_length=64, min_length=1), Field(..., description="The source to set the transaction types for.")], scope : Annotated[Optional[constr(strict=True, max_length=64, min_length=1)], Field(description="The scope in which the transaction types exists. When not supplied the scope is 'default'.")] = None, **kwargs) -> ApiResponse:  # noqa: E501
-        """[EXPERIMENTAL] DeleteTransactionTypeSource: Delete all transaction types for the given source and scope  # noqa: E501
+        """DeleteTransactionTypeSource: Delete all transaction types for the given source and scope  # noqa: E501
 
         Delete all the types for the given source and scope.  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
@@ -550,7 +550,7 @@ class TransactionConfigurationApi:
 
     @validate_arguments
     def get_side_definition(self, side : Annotated[constr(strict=True, max_length=64, min_length=1), Field(..., description="The label to uniquely identify the side.")], scope : Annotated[Optional[constr(strict=True, max_length=64, min_length=1)], Field(description="The scope in which the side exists. When not supplied the scope is 'default'.")] = None, as_at : Annotated[Optional[datetime], Field(description="The asAt datetime at which to retrieve the transaction types. Defaults to returning the latest versions if not specified.")] = None, async_req: Optional[bool]=None, **kwargs) -> Union[SideDefinition, Awaitable[SideDefinition]]:  # noqa: E501
-        """[EXPERIMENTAL] GetSideDefinition: Get the side definition for a given side name( or label)  # noqa: E501
+        """GetSideDefinition: Get the side definition for a given side name( or label)  # noqa: E501
 
         Get the side definition user requested.  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
@@ -586,7 +586,7 @@ class TransactionConfigurationApi:
 
     @validate_arguments
     def get_side_definition_with_http_info(self, side : Annotated[constr(strict=True, max_length=64, min_length=1), Field(..., description="The label to uniquely identify the side.")], scope : Annotated[Optional[constr(strict=True, max_length=64, min_length=1)], Field(description="The scope in which the side exists. When not supplied the scope is 'default'.")] = None, as_at : Annotated[Optional[datetime], Field(description="The asAt datetime at which to retrieve the transaction types. Defaults to returning the latest versions if not specified.")] = None, **kwargs) -> ApiResponse:  # noqa: E501
-        """[EXPERIMENTAL] GetSideDefinition: Get the side definition for a given side name( or label)  # noqa: E501
+        """GetSideDefinition: Get the side definition for a given side name( or label)  # noqa: E501
 
         Get the side definition user requested.  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
@@ -720,7 +720,7 @@ class TransactionConfigurationApi:
 
     @validate_arguments
     def get_transaction_type(self, source : Annotated[constr(strict=True, max_length=64, min_length=1), Field(..., description="The source that the type is in")], type : Annotated[constr(strict=True, max_length=64, min_length=1), Field(..., description="One of the type's aliases")], as_at : Annotated[Optional[datetime], Field(description="The asAt datetime at which to retrieve the transaction configuration.              Defaults to returning the latest version of the transaction configuration type if not specified")] = None, scope : Annotated[Optional[constr(strict=True, max_length=64, min_length=1)], Field(description="The scope in which the transaction types exists. When not supplied the scope is 'default'.")] = None, async_req: Optional[bool]=None, **kwargs) -> Union[TransactionType, Awaitable[TransactionType]]:  # noqa: E501
-        """[EXPERIMENTAL] GetTransactionType: Get a single transaction configuration type  # noqa: E501
+        """GetTransactionType: Get a single transaction configuration type  # noqa: E501
 
         Get a single transaction type. Returns failure if not found  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
@@ -758,7 +758,7 @@ class TransactionConfigurationApi:
 
     @validate_arguments
     def get_transaction_type_with_http_info(self, source : Annotated[constr(strict=True, max_length=64, min_length=1), Field(..., description="The source that the type is in")], type : Annotated[constr(strict=True, max_length=64, min_length=1), Field(..., description="One of the type's aliases")], as_at : Annotated[Optional[datetime], Field(description="The asAt datetime at which to retrieve the transaction configuration.              Defaults to returning the latest version of the transaction configuration type if not specified")] = None, scope : Annotated[Optional[constr(strict=True, max_length=64, min_length=1)], Field(description="The scope in which the transaction types exists. When not supplied the scope is 'default'.")] = None, **kwargs) -> ApiResponse:  # noqa: E501
-        """[EXPERIMENTAL] GetTransactionType: Get a single transaction configuration type  # noqa: E501
+        """GetTransactionType: Get a single transaction configuration type  # noqa: E501
 
         Get a single transaction type. Returns failure if not found  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
@@ -898,7 +898,7 @@ class TransactionConfigurationApi:
 
     @validate_arguments
     def list_side_definitions(self, as_at : Annotated[Optional[datetime], Field(description="The asAt datetime at which to retrieve the transaction types. Defaults to returning the latest versions if not specified.")] = None, scope : Annotated[Optional[constr(strict=True, max_length=64, min_length=1)], Field(description="The scope in which the side exists. When not supplied the scope is 'default'.")] = None, async_req: Optional[bool]=None, **kwargs) -> Union[ResourceListOfSideDefinition, Awaitable[ResourceListOfSideDefinition]]:  # noqa: E501
-        """[EXPERIMENTAL] ListSideDefinitions: List the side definitions  # noqa: E501
+        """ListSideDefinitions: List the side definitions  # noqa: E501
 
         List all the side definitions in the given scope  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
@@ -932,7 +932,7 @@ class TransactionConfigurationApi:
 
     @validate_arguments
     def list_side_definitions_with_http_info(self, as_at : Annotated[Optional[datetime], Field(description="The asAt datetime at which to retrieve the transaction types. Defaults to returning the latest versions if not specified.")] = None, scope : Annotated[Optional[constr(strict=True, max_length=64, min_length=1)], Field(description="The scope in which the side exists. When not supplied the scope is 'default'.")] = None, **kwargs) -> ApiResponse:  # noqa: E501
-        """[EXPERIMENTAL] ListSideDefinitions: List the side definitions  # noqa: E501
+        """ListSideDefinitions: List the side definitions  # noqa: E501
 
         List all the side definitions in the given scope  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
@@ -1060,7 +1060,7 @@ class TransactionConfigurationApi:
 
     @validate_arguments
     def list_transaction_types(self, as_at : Annotated[Optional[datetime], Field(description="The asAt datetime at which to retrieve the transaction types. Defaults              to returning the latest versions if not specified.")] = None, scope : Annotated[Optional[constr(strict=True, max_length=64, min_length=1)], Field(description="The scope in which the side exists. When not supplied the scope is 'default'.")] = None, async_req: Optional[bool]=None, **kwargs) -> Union[Dict[str, List[TransactionType]], Awaitable[Dict[str, List[TransactionType]]]]:  # noqa: E501
-        """[EXPERIMENTAL] ListTransactionTypes: List transaction types  # noqa: E501
+        """ListTransactionTypes: List transaction types  # noqa: E501
 
         Get the list of current transaction types. For information on the default transaction types provided with  LUSID, see https://support.lusid.com/knowledgebase/article/KA-01873/.  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
@@ -1094,7 +1094,7 @@ class TransactionConfigurationApi:
 
     @validate_arguments
     def list_transaction_types_with_http_info(self, as_at : Annotated[Optional[datetime], Field(description="The asAt datetime at which to retrieve the transaction types. Defaults              to returning the latest versions if not specified.")] = None, scope : Annotated[Optional[constr(strict=True, max_length=64, min_length=1)], Field(description="The scope in which the side exists. When not supplied the scope is 'default'.")] = None, **kwargs) -> ApiResponse:  # noqa: E501
-        """[EXPERIMENTAL] ListTransactionTypes: List transaction types  # noqa: E501
+        """ListTransactionTypes: List transaction types  # noqa: E501
 
         Get the list of current transaction types. For information on the default transaction types provided with  LUSID, see https://support.lusid.com/knowledgebase/article/KA-01873/.  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
@@ -1222,7 +1222,7 @@ class TransactionConfigurationApi:
 
     @validate_arguments
     def set_side_definition(self, side : Annotated[constr(strict=True, max_length=64, min_length=1), Field(..., description="The label to uniquely identify the side.")], side_definition_request : Annotated[SideDefinitionRequest, Field(..., description="The side definition to create or replace.")], scope : Annotated[Optional[constr(strict=True, max_length=64, min_length=1)], Field(description="The scope in which the side exists. When not supplied the scope is 'default'.")] = None, async_req: Optional[bool]=None, **kwargs) -> Union[SideDefinition, Awaitable[SideDefinition]]:  # noqa: E501
-        """[EXPERIMENTAL] SetSideDefinition: Set a side definition  # noqa: E501
+        """SetSideDefinition: Set a side definition  # noqa: E501
 
         Set a new side definition for use in a transaction type. For more information, see https://support.lusid.com/knowledgebase/article/KA-01875.  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
@@ -1258,7 +1258,7 @@ class TransactionConfigurationApi:
 
     @validate_arguments
     def set_side_definition_with_http_info(self, side : Annotated[constr(strict=True, max_length=64, min_length=1), Field(..., description="The label to uniquely identify the side.")], side_definition_request : Annotated[SideDefinitionRequest, Field(..., description="The side definition to create or replace.")], scope : Annotated[Optional[constr(strict=True, max_length=64, min_length=1)], Field(description="The scope in which the side exists. When not supplied the scope is 'default'.")] = None, **kwargs) -> ApiResponse:  # noqa: E501
-        """[EXPERIMENTAL] SetSideDefinition: Set a side definition  # noqa: E501
+        """SetSideDefinition: Set a side definition  # noqa: E501
 
         Set a new side definition for use in a transaction type. For more information, see https://support.lusid.com/knowledgebase/article/KA-01875.  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
@@ -1396,7 +1396,7 @@ class TransactionConfigurationApi:
 
     @validate_arguments
     def set_side_definitions(self, sides_definition_request : Annotated[conlist(SidesDefinitionRequest), Field(..., description="The list of side definitions to create, or replace.")], scope : Annotated[Optional[constr(strict=True, max_length=64, min_length=1)], Field(description="The scope in which the side exists. When not supplied the scope is 'default'.")] = None, async_req: Optional[bool]=None, **kwargs) -> Union[ResourceListOfSideDefinition, Awaitable[ResourceListOfSideDefinition]]:  # noqa: E501
-        """[EXPERIMENTAL] SetSideDefinitions: Set the given side definitions  # noqa: E501
+        """SetSideDefinitions: Set the given side definitions  # noqa: E501
 
         Set a new side definition for use in a transaction type. For more information, see https://support.lusid.com/knowledgebase/article/KA-01875.  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
@@ -1430,7 +1430,7 @@ class TransactionConfigurationApi:
 
     @validate_arguments
     def set_side_definitions_with_http_info(self, sides_definition_request : Annotated[conlist(SidesDefinitionRequest), Field(..., description="The list of side definitions to create, or replace.")], scope : Annotated[Optional[constr(strict=True, max_length=64, min_length=1)], Field(description="The scope in which the side exists. When not supplied the scope is 'default'.")] = None, **kwargs) -> ApiResponse:  # noqa: E501
-        """[EXPERIMENTAL] SetSideDefinitions: Set the given side definitions  # noqa: E501
+        """SetSideDefinitions: Set the given side definitions  # noqa: E501
 
         Set a new side definition for use in a transaction type. For more information, see https://support.lusid.com/knowledgebase/article/KA-01875.  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
@@ -1562,7 +1562,7 @@ class TransactionConfigurationApi:
 
     @validate_arguments
     def set_transaction_type(self, source : Annotated[constr(strict=True, max_length=64, min_length=1), Field(..., description="The source to set the transaction configuration for")], type : Annotated[constr(strict=True, max_length=64, min_length=1), Field(..., description="One of the transaction configuration alias types to uniquely identify the configuration. If this type does not exist, then a new transaction type is created using the body of the request in the given source, without including this type")], transaction_type_request : Annotated[TransactionTypeRequest, Field(..., description="The transaction configuration to set")], scope : Annotated[Optional[constr(strict=True, max_length=64, min_length=1)], Field(description="The scope in which the transaction types exists. When not supplied the scope is 'default'.")] = None, async_req: Optional[bool]=None, **kwargs) -> Union[TransactionType, Awaitable[TransactionType]]:  # noqa: E501
-        """[EXPERIMENTAL] SetTransactionType: Set a specific transaction type  # noqa: E501
+        """SetTransactionType: Set a specific transaction type  # noqa: E501
 
         Set a transaction type for the given source and type. If the requested transaction type does not exist, it will be created    WARNING! Changing existing transaction types has a material impact on how data, new and old, is processed and aggregated by LUSID, and will affect your whole organisation. Only call this API if you are fully aware of the implications of the change.  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
@@ -1600,7 +1600,7 @@ class TransactionConfigurationApi:
 
     @validate_arguments
     def set_transaction_type_with_http_info(self, source : Annotated[constr(strict=True, max_length=64, min_length=1), Field(..., description="The source to set the transaction configuration for")], type : Annotated[constr(strict=True, max_length=64, min_length=1), Field(..., description="One of the transaction configuration alias types to uniquely identify the configuration. If this type does not exist, then a new transaction type is created using the body of the request in the given source, without including this type")], transaction_type_request : Annotated[TransactionTypeRequest, Field(..., description="The transaction configuration to set")], scope : Annotated[Optional[constr(strict=True, max_length=64, min_length=1)], Field(description="The scope in which the transaction types exists. When not supplied the scope is 'default'.")] = None, **kwargs) -> ApiResponse:  # noqa: E501
-        """[EXPERIMENTAL] SetTransactionType: Set a specific transaction type  # noqa: E501
+        """SetTransactionType: Set a specific transaction type  # noqa: E501
 
         Set a transaction type for the given source and type. If the requested transaction type does not exist, it will be created    WARNING! Changing existing transaction types has a material impact on how data, new and old, is processed and aggregated by LUSID, and will affect your whole organisation. Only call this API if you are fully aware of the implications of the change.  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
@@ -1744,7 +1744,7 @@ class TransactionConfigurationApi:
 
     @validate_arguments
     def set_transaction_type_source(self, source : Annotated[constr(strict=True, max_length=64, min_length=1), Field(..., description="The source to set the transaction types for.")], transaction_type_request : Annotated[conlist(TransactionTypeRequest), Field(..., description="The set of transaction types.")], scope : Annotated[Optional[constr(strict=True, max_length=64, min_length=1)], Field(description="The scope in which the transaction types exists. When not supplied the scope is 'default'.")] = None, async_req: Optional[bool]=None, **kwargs) -> Union[ResourceListOfTransactionType, Awaitable[ResourceListOfTransactionType]]:  # noqa: E501
-        """[EXPERIMENTAL] SetTransactionTypeSource: Set the transaction types for the given source and scope  # noqa: E501
+        """SetTransactionTypeSource: Set the transaction types for the given source and scope  # noqa: E501
 
         The complete set of transaction types for the source.  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
@@ -1780,7 +1780,7 @@ class TransactionConfigurationApi:
 
     @validate_arguments
     def set_transaction_type_source_with_http_info(self, source : Annotated[constr(strict=True, max_length=64, min_length=1), Field(..., description="The source to set the transaction types for.")], transaction_type_request : Annotated[conlist(TransactionTypeRequest), Field(..., description="The set of transaction types.")], scope : Annotated[Optional[constr(strict=True, max_length=64, min_length=1)], Field(description="The scope in which the transaction types exists. When not supplied the scope is 'default'.")] = None, **kwargs) -> ApiResponse:  # noqa: E501
-        """[EXPERIMENTAL] SetTransactionTypeSource: Set the transaction types for the given source and scope  # noqa: E501
+        """SetTransactionTypeSource: Set the transaction types for the given source and scope  # noqa: E501
 
         The complete set of transaction types for the source.  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an

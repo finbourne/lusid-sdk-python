@@ -29,10 +29,9 @@ class CashFlowEvent(InstrumentEvent):
     """
     cash_flow_value: CashFlowValue = Field(..., alias="cashFlowValue")
     event_type: constr(strict=True, min_length=1) = Field(..., alias="eventType", description="What type of internal event does this represent; coupon, principal, premium etc.")
-    event_status: constr(strict=True, min_length=1) = Field(..., alias="eventStatus", description="What is the event status, is it a known (ie historic) or unknown (ie projected) event?")
     instrument_event_type: StrictStr = Field(..., alias="instrumentEventType", description="The Type of Event. The available values are: TransitionEvent, InformationalEvent, OpenEvent, CloseEvent, StockSplitEvent, BondDefaultEvent, CashDividendEvent, AmortisationEvent, CashFlowEvent, ExerciseEvent, ResetEvent, TriggerEvent, RawVendorEvent, InformationalErrorEvent, BondCouponEvent, DividendReinvestmentEvent, AccumulationEvent, BondPrincipalEvent, DividendOptionEvent, MaturityEvent, FxForwardSettlementEvent")
     additional_properties: Dict[str, Any] = {}
-    __properties = ["instrumentEventType", "cashFlowValue", "eventType", "eventStatus"]
+    __properties = ["instrumentEventType", "cashFlowValue", "eventType"]
 
     @validator('instrument_event_type')
     def instrument_event_type_validate_enum(cls, value):
@@ -89,8 +88,7 @@ class CashFlowEvent(InstrumentEvent):
         _obj = CashFlowEvent.parse_obj({
             "instrument_event_type": obj.get("instrumentEventType"),
             "cash_flow_value": CashFlowValue.from_dict(obj.get("cashFlowValue")) if obj.get("cashFlowValue") is not None else None,
-            "event_type": obj.get("eventType"),
-            "event_status": obj.get("eventStatus")
+            "event_type": obj.get("eventType")
         })
         # store additional fields in additional_properties
         for _key in obj.keys():

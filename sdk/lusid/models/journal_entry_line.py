@@ -36,7 +36,7 @@ class JournalEntryLine(BaseModel):
     instrument_id: constr(strict=True, min_length=1) = Field(..., alias="instrumentId", description="To indicate the instrument of the transaction that the Journal Entry Line posted for, if applicable.")
     instrument_scope: constr(strict=True, min_length=1) = Field(..., alias="instrumentScope", description="The scope in which the Journal Entry Line instrument is in.")
     sub_holding_keys: Optional[Dict[str, PerpetualProperty]] = Field(None, alias="subHoldingKeys", description="The sub-holding properties which are part of the AccountingKey.")
-    tax_lot_id: constr(strict=True, min_length=1) = Field(..., alias="taxLotId", description="The tax lot Id that the Journal Entry Line is impacting.")
+    tax_lot_id: Optional[StrictStr] = Field(None, alias="taxLotId", description="The tax lot Id that the Journal Entry Line is impacting.")
     general_ledger_account_code: constr(strict=True, min_length=1) = Field(..., alias="generalLedgerAccountCode", description="The code of the account in the general ledger the Journal Entry was posted to.")
     local: CurrencyAndAmount = Field(...)
     base: CurrencyAndAmount = Field(...)
@@ -47,7 +47,7 @@ class JournalEntryLine(BaseModel):
     source_type: constr(strict=True, min_length=1) = Field(..., alias="sourceType", description="So far are 4 types: LusidTxn, LusidValuation, Manual and External.")
     source_id: constr(strict=True, min_length=1) = Field(..., alias="sourceId", description="For the Lusid Source Type this will be the txn Id. For the rest will be what the user populates.")
     properties: Optional[Dict[str, ModelProperty]] = Field(None, description="A set of properties for the Abor.")
-    movement_name: constr(strict=True, min_length=1) = Field(..., alias="movementName", description="The name of the movement.")
+    movement_name: Optional[StrictStr] = Field(None, alias="movementName", description="The name of the movement.")
     holding_type: constr(strict=True, min_length=1) = Field(..., alias="holdingType", description="Defines the broad category holding within the portfolio.")
     economic_bucket: constr(strict=True, min_length=1) = Field(..., alias="economicBucket", description="Raw Journal Entry Line details of the economic bucket for the Journal Entry Line.")
     economic_bucket_component: Optional[StrictStr] = Field(None, alias="economicBucketComponent", description="Sub bucket of the economic bucket.")
@@ -117,6 +117,11 @@ class JournalEntryLine(BaseModel):
         if self.sub_holding_keys is None and "sub_holding_keys" in self.__fields_set__:
             _dict['subHoldingKeys'] = None
 
+        # set to None if tax_lot_id (nullable) is None
+        # and __fields_set__ contains the field
+        if self.tax_lot_id is None and "tax_lot_id" in self.__fields_set__:
+            _dict['taxLotId'] = None
+
         # set to None if posting_module_code (nullable) is None
         # and __fields_set__ contains the field
         if self.posting_module_code is None and "posting_module_code" in self.__fields_set__:
@@ -131,6 +136,11 @@ class JournalEntryLine(BaseModel):
         # and __fields_set__ contains the field
         if self.properties is None and "properties" in self.__fields_set__:
             _dict['properties'] = None
+
+        # set to None if movement_name (nullable) is None
+        # and __fields_set__ contains the field
+        if self.movement_name is None and "movement_name" in self.__fields_set__:
+            _dict['movementName'] = None
 
         # set to None if economic_bucket_component (nullable) is None
         # and __fields_set__ contains the field

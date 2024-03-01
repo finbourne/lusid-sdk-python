@@ -29,7 +29,7 @@ class SecurityElection(BaseModel):
     election_key: constr(strict=True, min_length=1) = Field(..., alias="electionKey", description="Unique key associated to this election.")
     is_chosen: Optional[StrictBool] = Field(None, alias="isChosen", description="Is this the election that has been explicitly chosen from multiple options.")
     is_default: Optional[StrictBool] = Field(None, alias="isDefault", description="Is this election automatically applied in the absence of an election having been made.  May only be true for one election if multiple are provided.")
-    price: Union[StrictFloat, StrictInt] = Field(..., description="Price per unit of the security. At least one of UnitsRatio or Price must be provided.")
+    price: Optional[Union[StrictFloat, StrictInt]] = Field(None, description="Price per unit of the security. At least one of UnitsRatio or Price must be provided.  Price must non-zero.")
     units_ratio: Optional[UnitsRatio] = Field(None, alias="unitsRatio")
     __properties = ["electionKey", "isChosen", "isDefault", "price", "unitsRatio"]
 
@@ -60,6 +60,11 @@ class SecurityElection(BaseModel):
         # override the default output from pydantic by calling `to_dict()` of units_ratio
         if self.units_ratio:
             _dict['unitsRatio'] = self.units_ratio.to_dict()
+        # set to None if price (nullable) is None
+        # and __fields_set__ contains the field
+        if self.price is None and "price" in self.__fields_set__:
+            _dict['price'] = None
+
         return _dict
 
     @classmethod

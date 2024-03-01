@@ -4,6 +4,7 @@ from typing import Optional, Union, Tuple, Any, Callable
 from lusid.configuration import Configuration
 from lusid.extensions.refreshing_token import RefreshingToken
 from lusid.extensions.socket_keep_alive import keep_alive_socket_options
+from lusid.extensions.proxy_config import ProxyConfig
 from requests import Response
 logger = logging.getLogger(__name__)
 
@@ -19,7 +20,7 @@ class ApiConfiguration:
         client_secret=None,
         app_name=None,
         certificate_filename=None,
-        proxy_config=None,
+        proxy_config:Optional[ProxyConfig]=None,
         access_token=None,
     ):
         """

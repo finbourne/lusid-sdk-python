@@ -34,6 +34,7 @@ class ComplianceStepType(str, Enum):
     GROUPFILTERSTEP = 'GroupFilterStep'
     BRANCHSTEP = 'BranchStep'
     RECOMBINESTEP = 'RecombineStep'
+    CHECKSTEP = 'CheckStep'
 
     @classmethod
     def from_json(cls, json_str: str) -> ComplianceStepType:

@@ -6,12 +6,13 @@ Method | HTTP request | Description
 ------------- | ------------- | -------------
 [**book_transactions**](OrderManagementApi.md#book_transactions) | **POST** /api/ordermanagement/booktransactions | [EXPERIMENTAL] BookTransactions: Books transactions using specific allocations as a source.
 [**create_orders**](OrderManagementApi.md#create_orders) | **POST** /api/ordermanagement/createorders | [EARLY ACCESS] CreateOrders: Upsert a Block and associated orders
+[**move_orders**](OrderManagementApi.md#move_orders) | **POST** /api/ordermanagement/moveorders | [EARLY ACCESS] MoveOrders: Move orders to new or existing block
 [**place_blocks**](OrderManagementApi.md#place_blocks) | **POST** /api/ordermanagement/placeblocks | [EARLY ACCESS] PlaceBlocks: Places blocks for a given list of placement requests.
 [**run_allocation_service**](OrderManagementApi.md#run_allocation_service) | **POST** /api/ordermanagement/allocate | [EXPERIMENTAL] RunAllocationService: Runs the Allocation Service
 
 
 # **book_transactions**
-> BookTransactionsResponse book_transactions(resource_id, apply_fees_and_commission=apply_fees_and_commission)
+> BookTransactionsResponse book_transactions(book_transactions_request, apply_fees_and_commission=apply_fees_and_commission)
 
 [EXPERIMENTAL] BookTransactions: Books transactions using specific allocations as a source.
 
@@ -23,19 +24,19 @@ Takes a collection of allocation IDs, and maps fields from those allocations and
 ```python
 from __future__ import print_function
 import time
-import os
 import lusid
 from lusid.rest import ApiException
+from lusid.models.book_transactions_request import BookTransactionsRequest
 from lusid.models.book_transactions_response import BookTransactionsResponse
-from lusid.models.resource_id import ResourceId
 from pprint import pprint
 
+import os
 from lusid import (
-	  ApiClientFactory,
-	  ApplicationMetadataApi,
-	  EnvironmentVariablesConfigurationLoader,
-	  SecretsFileConfigurationLoader,
-	  ArgsConfigurationLoader
+    ApiClientFactory,
+    OrderManagementApi,
+    EnvironmentVariablesConfigurationLoader,
+    SecretsFileConfigurationLoader,
+    ArgsConfigurationLoader
 )
 
 # Use the lusid ApiClientFactory to build Api instances with a configured api client
@@ -69,12 +70,12 @@ api_client_factory = ApiClientFactory(config_loaders=config_loaders)
 async with api_client_factory:
     # Create an instance of the API class
     api_instance = api_client_factory.build(lusid.OrderManagementApi)
-    resource_id = [{"scope":"MyScope","code":"ALLOC00000123"},{"scope":"MyScope","code":"ALLOC00000456"}] # List[ResourceId] | The allocations to create transactions for
+    book_transactions_request = {"allocationIds":[{"scope":"MyScope","code":"ALLOC00000123"},{"scope":"MyScope","code":"ALLOC00000456"}],"transactionProperties":{}} # BookTransactionsRequest | The allocations to create transactions for
     apply_fees_and_commission = True # bool | Whether to apply fees and commissions to transactions (default: true) (optional) (default to True)
 
     try:
         # [EXPERIMENTAL] BookTransactions: Books transactions using specific allocations as a source.
-        api_response = await api_instance.book_transactions(resource_id, apply_fees_and_commission=apply_fees_and_commission)
+        api_response = await api_instance.book_transactions(book_transactions_request, apply_fees_and_commission=apply_fees_and_commission)
         print("The response of OrderManagementApi->book_transactions:\n")
         pprint(api_response)
     except Exception as e:
@@ -86,7 +87,7 @@ async with api_client_factory:
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **resource_id** | [**List[ResourceId]**](ResourceId.md)| The allocations to create transactions for | 
+ **book_transactions_request** | [**BookTransactionsRequest**](BookTransactionsRequest.md)| The allocations to create transactions for | 
  **apply_fees_and_commission** | **bool**| Whether to apply fees and commissions to transactions (default: true) | [optional] [default to True]
 
 ### Return type
@@ -124,19 +125,19 @@ Upsert a Block and create associated orders.  This will fail if the block exists
 ```python
 from __future__ import print_function
 import time
-import os
 import lusid
 from lusid.rest import ApiException
 from lusid.models.block_and_orders_create_request import BlockAndOrdersCreateRequest
 from lusid.models.resource_list_of_block_and_orders import ResourceListOfBlockAndOrders
 from pprint import pprint
 
+import os
 from lusid import (
-	  ApiClientFactory,
-	  ApplicationMetadataApi,
-	  EnvironmentVariablesConfigurationLoader,
-	  SecretsFileConfigurationLoader,
-	  ArgsConfigurationLoader
+    ApiClientFactory,
+    OrderManagementApi,
+    EnvironmentVariablesConfigurationLoader,
+    SecretsFileConfigurationLoader,
+    ArgsConfigurationLoader
 )
 
 # Use the lusid ApiClientFactory to build Api instances with a configured api client
@@ -210,6 +211,105 @@ Name | Type | Description  | Notes
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
+# **move_orders**
+> ResourceListOfMovedOrderToDifferentBlockResponse move_orders(move_orders_to_different_blocks_request)
+
+[EARLY ACCESS] MoveOrders: Move orders to new or existing block
+
+Move an order to a block, creating the block if it does not already exist.   This will fail if the block exists and already references orders with differing fields to the upsert request.
+
+### Example
+
+* OAuth Authentication (oauth2):
+```python
+from __future__ import print_function
+import time
+import lusid
+from lusid.rest import ApiException
+from lusid.models.move_orders_to_different_blocks_request import MoveOrdersToDifferentBlocksRequest
+from lusid.models.resource_list_of_moved_order_to_different_block_response import ResourceListOfMovedOrderToDifferentBlockResponse
+from pprint import pprint
+
+import os
+from lusid import (
+    ApiClientFactory,
+    OrderManagementApi,
+    EnvironmentVariablesConfigurationLoader,
+    SecretsFileConfigurationLoader,
+    ArgsConfigurationLoader
+)
+
+# Use the lusid ApiClientFactory to build Api instances with a configured api client
+# By default this will read config from environment variables
+# Then from a secrets.json file found in the current working directory
+api_client_factory = ApiClientFactory()
+
+# The ApiClientFactory can be passed an iterable of configuration loaders to read configuration from
+
+api_url = "https://www.lusid.com/api"
+# Path to a secrets.json file containing authentication credentials
+# See https://support.lusid.com/knowledgebase/article/KA-01667/en-us
+# for a detailed guide to setting up the SDK make authenticated calls to LUSID APIs
+secrets_path = os.getenv("FBN_SECRETS_PATH")
+app_name="LusidJupyterNotebook"
+
+config_loaders = [
+	EnvironmentVariablesConfigurationLoader(),
+	SecretsFileConfigurationLoader(api_secrets_file=secrets_path),
+	ArgsConfigurationLoader(api_url=api_url, app_name=app_name)
+]
+api_client_factory = ApiClientFactory(config_loaders=config_loaders)
+
+
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+
+
+
+# Enter a context with an instance of the ApiClientFactory to ensure the connection pool is closed after use
+async with api_client_factory:
+    # Create an instance of the API class
+    api_instance = api_client_factory.build(lusid.OrderManagementApi)
+    move_orders_to_different_blocks_request = {"requests":[{"destinationBlockId":{"scope":"MyScope","code":"BLOCK00000123"},"orderId":{"scope":"MyScope","code":"ORDER00000123"}}]} # MoveOrdersToDifferentBlocksRequest | The collection of order and destination block ids.
+
+    try:
+        # [EARLY ACCESS] MoveOrders: Move orders to new or existing block
+        api_response = await api_instance.move_orders(move_orders_to_different_blocks_request)
+        print("The response of OrderManagementApi->move_orders:\n")
+        pprint(api_response)
+    except Exception as e:
+        print("Exception when calling OrderManagementApi->move_orders: %s\n" % e)
+```
+
+
+### Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **move_orders_to_different_blocks_request** | [**MoveOrdersToDifferentBlocksRequest**](MoveOrdersToDifferentBlocksRequest.md)| The collection of order and destination block ids. | 
+
+### Return type
+
+[**ResourceListOfMovedOrderToDifferentBlockResponse**](ResourceListOfMovedOrderToDifferentBlockResponse.md)
+
+### Authorization
+
+[oauth2](../README.md#oauth2)
+
+### HTTP request headers
+
+ - **Content-Type**: application/json-patch+json, application/json, text/json, application/*+json
+ - **Accept**: text/plain, application/json, text/json
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | A collection of block and order pairs for each order moved into a block, and the Id of the order&#39;s previous block (if any). |  -  |
+**400** | The details of the input related failure |  -  |
+**0** | Error response |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
 # **place_blocks**
 > ResourceListOfPlacement place_blocks(place_blocks_request=place_blocks_request)
 
@@ -223,19 +323,19 @@ The referenced block's existence will be verified.
 ```python
 from __future__ import print_function
 import time
-import os
 import lusid
 from lusid.rest import ApiException
 from lusid.models.place_blocks_request import PlaceBlocksRequest
 from lusid.models.resource_list_of_placement import ResourceListOfPlacement
 from pprint import pprint
 
+import os
 from lusid import (
-	  ApiClientFactory,
-	  ApplicationMetadataApi,
-	  EnvironmentVariablesConfigurationLoader,
-	  SecretsFileConfigurationLoader,
-	  ArgsConfigurationLoader
+    ApiClientFactory,
+    OrderManagementApi,
+    EnvironmentVariablesConfigurationLoader,
+    SecretsFileConfigurationLoader,
+    ArgsConfigurationLoader
 )
 
 # Use the lusid ApiClientFactory to build Api instances with a configured api client
@@ -322,19 +422,19 @@ This will allocate executions for a given list of placements back to their origi
 ```python
 from __future__ import print_function
 import time
-import os
 import lusid
 from lusid.rest import ApiException
 from lusid.models.allocation_service_run_response import AllocationServiceRunResponse
 from lusid.models.resource_id import ResourceId
 from pprint import pprint
 
+import os
 from lusid import (
-	  ApiClientFactory,
-	  ApplicationMetadataApi,
-	  EnvironmentVariablesConfigurationLoader,
-	  SecretsFileConfigurationLoader,
-	  ArgsConfigurationLoader
+    ApiClientFactory,
+    OrderManagementApi,
+    EnvironmentVariablesConfigurationLoader,
+    SecretsFileConfigurationLoader,
+    ArgsConfigurationLoader
 )
 
 # Use the lusid ApiClientFactory to build Api instances with a configured api client

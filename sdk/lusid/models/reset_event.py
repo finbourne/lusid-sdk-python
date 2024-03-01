@@ -29,11 +29,10 @@ class ResetEvent(InstrumentEvent):
     value: Optional[Union[StrictFloat, StrictInt]] = Field(None, description="The quantity associated with the reset. This will only be populated if the information is known.")
     reset_type: constr(strict=True, min_length=1) = Field(..., alias="resetType", description="The type of the reset; e.g. RIC, Currency-pair")
     fixing_source: Optional[StrictStr] = Field(None, alias="fixingSource", description="Fixing identification source, if available.")
-    event_status: constr(strict=True, min_length=1) = Field(..., alias="eventStatus", description="What is the event status, is it a known (ie historic) or unknown (ie projected) event?")
     fixing_date: datetime = Field(..., alias="fixingDate", description="The date the reset fixes, or is observed upon.")
     instrument_event_type: StrictStr = Field(..., alias="instrumentEventType", description="The Type of Event. The available values are: TransitionEvent, InformationalEvent, OpenEvent, CloseEvent, StockSplitEvent, BondDefaultEvent, CashDividendEvent, AmortisationEvent, CashFlowEvent, ExerciseEvent, ResetEvent, TriggerEvent, RawVendorEvent, InformationalErrorEvent, BondCouponEvent, DividendReinvestmentEvent, AccumulationEvent, BondPrincipalEvent, DividendOptionEvent, MaturityEvent, FxForwardSettlementEvent")
     additional_properties: Dict[str, Any] = {}
-    __properties = ["instrumentEventType", "value", "resetType", "fixingSource", "eventStatus", "fixingDate"]
+    __properties = ["instrumentEventType", "value", "resetType", "fixingSource", "fixingDate"]
 
     @validator('instrument_event_type')
     def instrument_event_type_validate_enum(cls, value):
@@ -98,7 +97,6 @@ class ResetEvent(InstrumentEvent):
             "value": obj.get("value"),
             "reset_type": obj.get("resetType"),
             "fixing_source": obj.get("fixingSource"),
-            "event_status": obj.get("eventStatus"),
             "fixing_date": obj.get("fixingDate")
         })
         # store additional fields in additional_properties

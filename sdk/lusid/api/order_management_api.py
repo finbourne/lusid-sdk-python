@@ -26,10 +26,13 @@ from typing import Optional
 
 from lusid.models.allocation_service_run_response import AllocationServiceRunResponse
 from lusid.models.block_and_orders_create_request import BlockAndOrdersCreateRequest
+from lusid.models.book_transactions_request import BookTransactionsRequest
 from lusid.models.book_transactions_response import BookTransactionsResponse
+from lusid.models.move_orders_to_different_blocks_request import MoveOrdersToDifferentBlocksRequest
 from lusid.models.place_blocks_request import PlaceBlocksRequest
 from lusid.models.resource_id import ResourceId
 from lusid.models.resource_list_of_block_and_orders import ResourceListOfBlockAndOrders
+from lusid.models.resource_list_of_moved_order_to_different_block_response import ResourceListOfMovedOrderToDifferentBlockResponse
 from lusid.models.resource_list_of_placement import ResourceListOfPlacement
 
 from lusid.api_client import ApiClient
@@ -53,26 +56,26 @@ class OrderManagementApi:
         self.api_client = api_client
 
     @overload
-    async def book_transactions(self, resource_id : Annotated[conlist(ResourceId, max_items=5000), Field(..., description="The allocations to create transactions for")], apply_fees_and_commission : Annotated[Optional[StrictBool], Field(description="Whether to apply fees and commissions to transactions (default: true)")] = None, **kwargs) -> BookTransactionsResponse:  # noqa: E501
+    async def book_transactions(self, book_transactions_request : Annotated[BookTransactionsRequest, Field(..., description="The allocations to create transactions for")], apply_fees_and_commission : Annotated[Optional[StrictBool], Field(description="Whether to apply fees and commissions to transactions (default: true)")] = None, **kwargs) -> BookTransactionsResponse:  # noqa: E501
         ...
 
     @overload
-    def book_transactions(self, resource_id : Annotated[conlist(ResourceId, max_items=5000), Field(..., description="The allocations to create transactions for")], apply_fees_and_commission : Annotated[Optional[StrictBool], Field(description="Whether to apply fees and commissions to transactions (default: true)")] = None, async_req: Optional[bool]=True, **kwargs) -> BookTransactionsResponse:  # noqa: E501
+    def book_transactions(self, book_transactions_request : Annotated[BookTransactionsRequest, Field(..., description="The allocations to create transactions for")], apply_fees_and_commission : Annotated[Optional[StrictBool], Field(description="Whether to apply fees and commissions to transactions (default: true)")] = None, async_req: Optional[bool]=True, **kwargs) -> BookTransactionsResponse:  # noqa: E501
         ...
 
     @validate_arguments
-    def book_transactions(self, resource_id : Annotated[conlist(ResourceId, max_items=5000), Field(..., description="The allocations to create transactions for")], apply_fees_and_commission : Annotated[Optional[StrictBool], Field(description="Whether to apply fees and commissions to transactions (default: true)")] = None, async_req: Optional[bool]=None, **kwargs) -> Union[BookTransactionsResponse, Awaitable[BookTransactionsResponse]]:  # noqa: E501
+    def book_transactions(self, book_transactions_request : Annotated[BookTransactionsRequest, Field(..., description="The allocations to create transactions for")], apply_fees_and_commission : Annotated[Optional[StrictBool], Field(description="Whether to apply fees and commissions to transactions (default: true)")] = None, async_req: Optional[bool]=None, **kwargs) -> Union[BookTransactionsResponse, Awaitable[BookTransactionsResponse]]:  # noqa: E501
         """[EXPERIMENTAL] BookTransactions: Books transactions using specific allocations as a source.  # noqa: E501
 
         Takes a collection of allocation IDs, and maps fields from those allocations and related orders onto new transactions.  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
 
-        >>> thread = api.book_transactions(resource_id, apply_fees_and_commission, async_req=True)
+        >>> thread = api.book_transactions(book_transactions_request, apply_fees_and_commission, async_req=True)
         >>> result = thread.get()
 
-        :param resource_id: The allocations to create transactions for (required)
-        :type resource_id: List[ResourceId]
+        :param book_transactions_request: The allocations to create transactions for (required)
+        :type book_transactions_request: BookTransactionsRequest
         :param apply_fees_and_commission: Whether to apply fees and commissions to transactions (default: true)
         :type apply_fees_and_commission: bool
         :param async_req: Whether to execute the request asynchronously.
@@ -92,21 +95,21 @@ class OrderManagementApi:
             raise ValueError(message)
         if async_req is not None:
             kwargs['async_req'] = async_req
-        return self.book_transactions_with_http_info(resource_id, apply_fees_and_commission, **kwargs)  # noqa: E501
+        return self.book_transactions_with_http_info(book_transactions_request, apply_fees_and_commission, **kwargs)  # noqa: E501
 
     @validate_arguments
-    def book_transactions_with_http_info(self, resource_id : Annotated[conlist(ResourceId, max_items=5000), Field(..., description="The allocations to create transactions for")], apply_fees_and_commission : Annotated[Optional[StrictBool], Field(description="Whether to apply fees and commissions to transactions (default: true)")] = None, **kwargs) -> ApiResponse:  # noqa: E501
+    def book_transactions_with_http_info(self, book_transactions_request : Annotated[BookTransactionsRequest, Field(..., description="The allocations to create transactions for")], apply_fees_and_commission : Annotated[Optional[StrictBool], Field(description="Whether to apply fees and commissions to transactions (default: true)")] = None, **kwargs) -> ApiResponse:  # noqa: E501
         """[EXPERIMENTAL] BookTransactions: Books transactions using specific allocations as a source.  # noqa: E501
 
         Takes a collection of allocation IDs, and maps fields from those allocations and related orders onto new transactions.  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
 
-        >>> thread = api.book_transactions_with_http_info(resource_id, apply_fees_and_commission, async_req=True)
+        >>> thread = api.book_transactions_with_http_info(book_transactions_request, apply_fees_and_commission, async_req=True)
         >>> result = thread.get()
 
-        :param resource_id: The allocations to create transactions for (required)
-        :type resource_id: List[ResourceId]
+        :param book_transactions_request: The allocations to create transactions for (required)
+        :type book_transactions_request: BookTransactionsRequest
         :param apply_fees_and_commission: Whether to apply fees and commissions to transactions (default: true)
         :type apply_fees_and_commission: bool
         :param async_req: Whether to execute the request asynchronously.
@@ -137,7 +140,7 @@ class OrderManagementApi:
         _params = locals()
 
         _all_params = [
-            'resource_id',
+            'book_transactions_request',
             'apply_fees_and_commission'
         ]
         _all_params.extend(
@@ -179,8 +182,8 @@ class OrderManagementApi:
         _files = {}
         # process the body parameter
         _body_params = None
-        if _params['resource_id'] is not None:
-            _body_params = _params['resource_id']
+        if _params['book_transactions_request'] is not None:
+            _body_params = _params['book_transactions_request']
 
         # set the HTTP header `Accept`
         _header_params['Accept'] = self.api_client.select_header_accept(
@@ -361,6 +364,164 @@ class OrderManagementApi:
 
         return self.api_client.call_api(
             '/api/ordermanagement/createorders', 'POST',
+            _path_params,
+            _query_params,
+            _header_params,
+            body=_body_params,
+            post_params=_form_params,
+            files=_files,
+            response_types_map=_response_types_map,
+            auth_settings=_auth_settings,
+            async_req=_params.get('async_req'),
+            _return_http_data_only=_params.get('_return_http_data_only'),  # noqa: E501
+            _preload_content=_params.get('_preload_content', True),
+            _request_timeout=_params.get('_request_timeout'),
+            collection_formats=_collection_formats,
+            _request_auth=_params.get('_request_auth'))
+
+    @overload
+    async def move_orders(self, move_orders_to_different_blocks_request : Annotated[MoveOrdersToDifferentBlocksRequest, Field(..., description="The collection of order and destination block ids.")], **kwargs) -> ResourceListOfMovedOrderToDifferentBlockResponse:  # noqa: E501
+        ...
+
+    @overload
+    def move_orders(self, move_orders_to_different_blocks_request : Annotated[MoveOrdersToDifferentBlocksRequest, Field(..., description="The collection of order and destination block ids.")], async_req: Optional[bool]=True, **kwargs) -> ResourceListOfMovedOrderToDifferentBlockResponse:  # noqa: E501
+        ...
+
+    @validate_arguments
+    def move_orders(self, move_orders_to_different_blocks_request : Annotated[MoveOrdersToDifferentBlocksRequest, Field(..., description="The collection of order and destination block ids.")], async_req: Optional[bool]=None, **kwargs) -> Union[ResourceListOfMovedOrderToDifferentBlockResponse, Awaitable[ResourceListOfMovedOrderToDifferentBlockResponse]]:  # noqa: E501
+        """[EARLY ACCESS] MoveOrders: Move orders to new or existing block  # noqa: E501
+
+        Move an order to a block, creating the block if it does not already exist.   This will fail if the block exists and already references orders with differing fields to the upsert request.  # noqa: E501
+        This method makes a synchronous HTTP request by default. To make an
+        asynchronous HTTP request, please pass async_req=True
+
+        >>> thread = api.move_orders(move_orders_to_different_blocks_request, async_req=True)
+        >>> result = thread.get()
+
+        :param move_orders_to_different_blocks_request: The collection of order and destination block ids. (required)
+        :type move_orders_to_different_blocks_request: MoveOrdersToDifferentBlocksRequest
+        :param async_req: Whether to execute the request asynchronously.
+        :type async_req: bool, optional
+        :param _request_timeout: timeout setting for this request.
+               If one number provided, it will be total request
+               timeout. It can also be a pair (tuple) of
+               (connection, read) timeouts.
+        :return: Returns the result object.
+                 If the method is called asynchronously,
+                 returns the request thread.
+        :rtype: ResourceListOfMovedOrderToDifferentBlockResponse
+        """
+        kwargs['_return_http_data_only'] = True
+        if '_preload_content' in kwargs:
+            message = "Error! Please call the move_orders_with_http_info method with `_preload_content` instead and obtain raw data from ApiResponse.raw_data"  # noqa: E501
+            raise ValueError(message)
+        if async_req is not None:
+            kwargs['async_req'] = async_req
+        return self.move_orders_with_http_info(move_orders_to_different_blocks_request, **kwargs)  # noqa: E501
+
+    @validate_arguments
+    def move_orders_with_http_info(self, move_orders_to_different_blocks_request : Annotated[MoveOrdersToDifferentBlocksRequest, Field(..., description="The collection of order and destination block ids.")], **kwargs) -> ApiResponse:  # noqa: E501
+        """[EARLY ACCESS] MoveOrders: Move orders to new or existing block  # noqa: E501
+
+        Move an order to a block, creating the block if it does not already exist.   This will fail if the block exists and already references orders with differing fields to the upsert request.  # noqa: E501
+        This method makes a synchronous HTTP request by default. To make an
+        asynchronous HTTP request, please pass async_req=True
+
+        >>> thread = api.move_orders_with_http_info(move_orders_to_different_blocks_request, async_req=True)
+        >>> result = thread.get()
+
+        :param move_orders_to_different_blocks_request: The collection of order and destination block ids. (required)
+        :type move_orders_to_different_blocks_request: MoveOrdersToDifferentBlocksRequest
+        :param async_req: Whether to execute the request asynchronously.
+        :type async_req: bool, optional
+        :param _preload_content: if False, the ApiResponse.data will
+                                 be set to none and raw_data will store the
+                                 HTTP response body without reading/decoding.
+                                 Default is True.
+        :type _preload_content: bool, optional
+        :param _return_http_data_only: response data instead of ApiResponse
+                                       object with status code, headers, etc
+        :type _return_http_data_only: bool, optional
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :param _request_auth: set to override the auth_settings for an a single
+                              request; this effectively ignores the authentication
+                              in the spec for a single request.
+        :type _request_auth: dict, optional
+        :type _content_type: string, optional: force content-type for the request
+        :return: Returns the result object.
+                 If the method is called asynchronously,
+                 returns the request thread.
+        :rtype: tuple(ResourceListOfMovedOrderToDifferentBlockResponse, status_code(int), headers(HTTPHeaderDict))
+        """
+
+        _params = locals()
+
+        _all_params = [
+            'move_orders_to_different_blocks_request'
+        ]
+        _all_params.extend(
+            [
+                'async_req',
+                '_return_http_data_only',
+                '_preload_content',
+                '_request_timeout',
+                '_request_auth',
+                '_content_type',
+                '_headers'
+            ]
+        )
+
+        # validate the arguments
+        for _key, _val in _params['kwargs'].items():
+            if _key not in _all_params:
+                raise ApiTypeError(
+                    "Got an unexpected keyword argument '%s'"
+                    " to method move_orders" % _key
+                )
+            _params[_key] = _val
+        del _params['kwargs']
+
+        _collection_formats = {}
+
+        # process the path parameters
+        _path_params = {}
+
+        # process the query parameters
+        _query_params = []
+        # process the header parameters
+        _header_params = dict(_params.get('_headers', {}))
+        # process the form parameters
+        _form_params = []
+        _files = {}
+        # process the body parameter
+        _body_params = None
+        if _params['move_orders_to_different_blocks_request'] is not None:
+            _body_params = _params['move_orders_to_different_blocks_request']
+
+        # set the HTTP header `Accept`
+        _header_params['Accept'] = self.api_client.select_header_accept(
+            ['text/plain', 'application/json', 'text/json'])  # noqa: E501
+
+        # set the HTTP header `Content-Type`
+        _content_types_list = _params.get('_content_type',
+            self.api_client.select_header_content_type(
+                ['application/json-patch+json', 'application/json', 'text/json', 'application/*+json']))
+        if _content_types_list:
+                _header_params['Content-Type'] = _content_types_list
+
+        # authentication setting
+        _auth_settings = ['oauth2']  # noqa: E501
+
+        _response_types_map = {
+            '200': "ResourceListOfMovedOrderToDifferentBlockResponse",
+            '400': "LusidValidationProblemDetails",
+        }
+
+        return self.api_client.call_api(
+            '/api/ordermanagement/moveorders', 'POST',
             _path_params,
             _query_params,
             _header_params,

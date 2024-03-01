@@ -78,6 +78,7 @@ from lusid.models.batch_upsert_instrument_properties_response import BatchUpsert
 from lusid.models.batch_upsert_portfolio_transactions_response import BatchUpsertPortfolioTransactionsResponse
 from lusid.models.batch_upsert_property_definition_properties_response import BatchUpsertPropertyDefinitionPropertiesResponse
 from lusid.models.block import Block
+from lusid.models.block_and_order_id_request import BlockAndOrderIdRequest
 from lusid.models.block_and_orders import BlockAndOrders
 from lusid.models.block_and_orders_create_request import BlockAndOrdersCreateRequest
 from lusid.models.block_and_orders_request import BlockAndOrdersRequest
@@ -88,6 +89,7 @@ from lusid.models.bond import Bond
 from lusid.models.bond_coupon_event import BondCouponEvent
 from lusid.models.bond_default_event import BondDefaultEvent
 from lusid.models.bond_principal_event import BondPrincipalEvent
+from lusid.models.book_transactions_request import BookTransactionsRequest
 from lusid.models.book_transactions_response import BookTransactionsResponse
 from lusid.models.bool_compliance_parameter import BoolComplianceParameter
 from lusid.models.bool_list_compliance_parameter import BoolListComplianceParameter
@@ -119,6 +121,7 @@ from lusid.models.change_item import ChangeItem
 from lusid.models.chart_of_accounts import ChartOfAccounts
 from lusid.models.chart_of_accounts_properties import ChartOfAccountsProperties
 from lusid.models.chart_of_accounts_request import ChartOfAccountsRequest
+from lusid.models.check_step import CheckStep
 from lusid.models.cleardown_module_details import CleardownModuleDetails
 from lusid.models.cleardown_module_request import CleardownModuleRequest
 from lusid.models.cleardown_module_response import CleardownModuleResponse
@@ -197,6 +200,7 @@ from lusid.models.create_relationship_definition_request import CreateRelationsh
 from lusid.models.create_relationship_request import CreateRelationshipRequest
 from lusid.models.create_sequence_request import CreateSequenceRequest
 from lusid.models.create_tax_rule_set_request import CreateTaxRuleSetRequest
+from lusid.models.create_trade_tickets_response import CreateTradeTicketsResponse
 from lusid.models.create_transaction_portfolio_request import CreateTransactionPortfolioRequest
 from lusid.models.create_unit_definition import CreateUnitDefinition
 from lusid.models.credit_default_swap import CreditDefaultSwap
@@ -445,6 +449,8 @@ from lusid.models.model_options_type import ModelOptionsType
 from lusid.models.model_property import ModelProperty
 from lusid.models.model_schema import ModelSchema
 from lusid.models.model_selection import ModelSelection
+from lusid.models.move_orders_to_different_blocks_request import MoveOrdersToDifferentBlocksRequest
+from lusid.models.moved_order_to_different_block_response import MovedOrderToDifferentBlockResponse
 from lusid.models.movement_type import MovementType
 from lusid.models.multi_currency_amounts import MultiCurrencyAmounts
 from lusid.models.next_value_in_sequence_response import NextValueInSequenceResponse
@@ -687,6 +693,7 @@ from lusid.models.resource_list_of_instrument_id_type_descriptor import Resource
 from lusid.models.resource_list_of_legal_entity import ResourceListOfLegalEntity
 from lusid.models.resource_list_of_list_complex_market_data_with_meta_data_response import ResourceListOfListComplexMarketDataWithMetaDataResponse
 from lusid.models.resource_list_of_mapping import ResourceListOfMapping
+from lusid.models.resource_list_of_moved_order_to_different_block_response import ResourceListOfMovedOrderToDifferentBlockResponse
 from lusid.models.resource_list_of_order import ResourceListOfOrder
 from lusid.models.resource_list_of_order_instruction import ResourceListOfOrderInstruction
 from lusid.models.resource_list_of_package import ResourceListOfPackage
@@ -784,6 +791,7 @@ from lusid.models.transaction_field_map import TransactionFieldMap
 from lusid.models.transaction_price import TransactionPrice
 from lusid.models.transaction_price_and_type import TransactionPriceAndType
 from lusid.models.transaction_price_type import TransactionPriceType
+from lusid.models.transaction_property_map import TransactionPropertyMap
 from lusid.models.transaction_property_mapping import TransactionPropertyMapping
 from lusid.models.transaction_property_mapping_request import TransactionPropertyMappingRequest
 from lusid.models.transaction_query_mode import TransactionQueryMode

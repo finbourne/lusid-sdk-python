@@ -29,15 +29,15 @@ class IntermediateComplianceStep(ComplianceStep):
     """
     label: constr(strict=True, min_length=1) = Field(..., description="The label of the compliance step")
     grouped_parameters: Dict[str, conlist(ComplianceTemplateParameter)] = Field(..., alias="groupedParameters", description="Parameters required for the step")
-    compliance_step_type: StrictStr = Field(..., alias="complianceStepType", description=". The available values are: FilterStep, GroupByStep, GroupFilterStep, BranchStep, RecombineStep")
+    compliance_step_type: StrictStr = Field(..., alias="complianceStepType", description=". The available values are: FilterStep, GroupByStep, GroupFilterStep, BranchStep, RecombineStep, CheckStep")
     additional_properties: Dict[str, Any] = {}
     __properties = ["complianceStepType", "label", "groupedParameters"]
 
     @validator('compliance_step_type')
     def compliance_step_type_validate_enum(cls, value):
         """Validates the enum"""
-        if value not in ('FilterStep', 'GroupByStep', 'GroupFilterStep', 'BranchStep', 'RecombineStep'):
-            raise ValueError("must be one of enum values ('FilterStep', 'GroupByStep', 'GroupFilterStep', 'BranchStep', 'RecombineStep')")
+        if value not in ('FilterStep', 'GroupByStep', 'GroupFilterStep', 'BranchStep', 'RecombineStep', 'CheckStep'):
+            raise ValueError("must be one of enum values ('FilterStep', 'GroupByStep', 'GroupFilterStep', 'BranchStep', 'RecombineStep', 'CheckStep')")
         return value
 
     class Config:

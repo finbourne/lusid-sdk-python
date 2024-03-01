@@ -27,8 +27,11 @@ from pydantic import Field, constr, validator
 from typing import Optional
 
 from lusid.models.annul_single_structured_data_response import AnnulSingleStructuredDataResponse
+from lusid.models.get_recipe_composer_response import GetRecipeComposerResponse
 from lusid.models.get_recipe_response import GetRecipeResponse
+from lusid.models.resource_list_of_get_recipe_composer_response import ResourceListOfGetRecipeComposerResponse
 from lusid.models.resource_list_of_get_recipe_response import ResourceListOfGetRecipeResponse
+from lusid.models.upsert_recipe_composer_request import UpsertRecipeComposerRequest
 from lusid.models.upsert_recipe_request import UpsertRecipeRequest
 from lusid.models.upsert_single_structured_data_response import UpsertSingleStructuredDataResponse
 
@@ -196,6 +199,165 @@ class ConfigurationRecipeApi:
 
         return self.api_client.call_api(
             '/api/recipes/{scope}/{code}', 'DELETE',
+            _path_params,
+            _query_params,
+            _header_params,
+            body=_body_params,
+            post_params=_form_params,
+            files=_files,
+            response_types_map=_response_types_map,
+            auth_settings=_auth_settings,
+            async_req=_params.get('async_req'),
+            _return_http_data_only=_params.get('_return_http_data_only'),  # noqa: E501
+            _preload_content=_params.get('_preload_content', True),
+            _request_timeout=_params.get('_request_timeout'),
+            collection_formats=_collection_formats,
+            _request_auth=_params.get('_request_auth'))
+
+    @overload
+    async def delete_recipe_composer(self, scope : Annotated[constr(strict=True, max_length=64, min_length=1), Field(..., description="The scope of the Recipe Composer to delete.")], code : Annotated[constr(strict=True, max_length=64, min_length=1), Field(..., description="The Recipe Composer to delete.")], **kwargs) -> AnnulSingleStructuredDataResponse:  # noqa: E501
+        ...
+
+    @overload
+    def delete_recipe_composer(self, scope : Annotated[constr(strict=True, max_length=64, min_length=1), Field(..., description="The scope of the Recipe Composer to delete.")], code : Annotated[constr(strict=True, max_length=64, min_length=1), Field(..., description="The Recipe Composer to delete.")], async_req: Optional[bool]=True, **kwargs) -> AnnulSingleStructuredDataResponse:  # noqa: E501
+        ...
+
+    @validate_arguments
+    def delete_recipe_composer(self, scope : Annotated[constr(strict=True, max_length=64, min_length=1), Field(..., description="The scope of the Recipe Composer to delete.")], code : Annotated[constr(strict=True, max_length=64, min_length=1), Field(..., description="The Recipe Composer to delete.")], async_req: Optional[bool]=None, **kwargs) -> Union[AnnulSingleStructuredDataResponse, Awaitable[AnnulSingleStructuredDataResponse]]:  # noqa: E501
+        """[EXPERIMENTAL] DeleteRecipeComposer: Delete a Recipe Composer, assuming that it is present.  # noqa: E501
+
+        Delete the specified Recipe Composer from a single scope.                The response will return either detail of the deleted item, or an explanation (failure) as to why this did not succeed.                It is important to always check for any unsuccessful response.  # noqa: E501
+        This method makes a synchronous HTTP request by default. To make an
+        asynchronous HTTP request, please pass async_req=True
+
+        >>> thread = api.delete_recipe_composer(scope, code, async_req=True)
+        >>> result = thread.get()
+
+        :param scope: The scope of the Recipe Composer to delete. (required)
+        :type scope: str
+        :param code: The Recipe Composer to delete. (required)
+        :type code: str
+        :param async_req: Whether to execute the request asynchronously.
+        :type async_req: bool, optional
+        :param _request_timeout: timeout setting for this request.
+               If one number provided, it will be total request
+               timeout. It can also be a pair (tuple) of
+               (connection, read) timeouts.
+        :return: Returns the result object.
+                 If the method is called asynchronously,
+                 returns the request thread.
+        :rtype: AnnulSingleStructuredDataResponse
+        """
+        kwargs['_return_http_data_only'] = True
+        if '_preload_content' in kwargs:
+            message = "Error! Please call the delete_recipe_composer_with_http_info method with `_preload_content` instead and obtain raw data from ApiResponse.raw_data"  # noqa: E501
+            raise ValueError(message)
+        if async_req is not None:
+            kwargs['async_req'] = async_req
+        return self.delete_recipe_composer_with_http_info(scope, code, **kwargs)  # noqa: E501
+
+    @validate_arguments
+    def delete_recipe_composer_with_http_info(self, scope : Annotated[constr(strict=True, max_length=64, min_length=1), Field(..., description="The scope of the Recipe Composer to delete.")], code : Annotated[constr(strict=True, max_length=64, min_length=1), Field(..., description="The Recipe Composer to delete.")], **kwargs) -> ApiResponse:  # noqa: E501
+        """[EXPERIMENTAL] DeleteRecipeComposer: Delete a Recipe Composer, assuming that it is present.  # noqa: E501
+
+        Delete the specified Recipe Composer from a single scope.                The response will return either detail of the deleted item, or an explanation (failure) as to why this did not succeed.                It is important to always check for any unsuccessful response.  # noqa: E501
+        This method makes a synchronous HTTP request by default. To make an
+        asynchronous HTTP request, please pass async_req=True
+
+        >>> thread = api.delete_recipe_composer_with_http_info(scope, code, async_req=True)
+        >>> result = thread.get()
+
+        :param scope: The scope of the Recipe Composer to delete. (required)
+        :type scope: str
+        :param code: The Recipe Composer to delete. (required)
+        :type code: str
+        :param async_req: Whether to execute the request asynchronously.
+        :type async_req: bool, optional
+        :param _preload_content: if False, the ApiResponse.data will
+                                 be set to none and raw_data will store the
+                                 HTTP response body without reading/decoding.
+                                 Default is True.
+        :type _preload_content: bool, optional
+        :param _return_http_data_only: response data instead of ApiResponse
+                                       object with status code, headers, etc
+        :type _return_http_data_only: bool, optional
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :param _request_auth: set to override the auth_settings for an a single
+                              request; this effectively ignores the authentication
+                              in the spec for a single request.
+        :type _request_auth: dict, optional
+        :type _content_type: string, optional: force content-type for the request
+        :return: Returns the result object.
+                 If the method is called asynchronously,
+                 returns the request thread.
+        :rtype: tuple(AnnulSingleStructuredDataResponse, status_code(int), headers(HTTPHeaderDict))
+        """
+
+        _params = locals()
+
+        _all_params = [
+            'scope',
+            'code'
+        ]
+        _all_params.extend(
+            [
+                'async_req',
+                '_return_http_data_only',
+                '_preload_content',
+                '_request_timeout',
+                '_request_auth',
+                '_content_type',
+                '_headers'
+            ]
+        )
+
+        # validate the arguments
+        for _key, _val in _params['kwargs'].items():
+            if _key not in _all_params:
+                raise ApiTypeError(
+                    "Got an unexpected keyword argument '%s'"
+                    " to method delete_recipe_composer" % _key
+                )
+            _params[_key] = _val
+        del _params['kwargs']
+
+        _collection_formats = {}
+
+        # process the path parameters
+        _path_params = {}
+        if _params['scope']:
+            _path_params['scope'] = _params['scope']
+
+        if _params['code']:
+            _path_params['code'] = _params['code']
+
+
+        # process the query parameters
+        _query_params = []
+        # process the header parameters
+        _header_params = dict(_params.get('_headers', {}))
+        # process the form parameters
+        _form_params = []
+        _files = {}
+        # process the body parameter
+        _body_params = None
+        # set the HTTP header `Accept`
+        _header_params['Accept'] = self.api_client.select_header_accept(
+            ['text/plain', 'application/json', 'text/json'])  # noqa: E501
+
+        # authentication setting
+        _auth_settings = ['oauth2']  # noqa: E501
+
+        _response_types_map = {
+            '200': "AnnulSingleStructuredDataResponse",
+            '400': "LusidValidationProblemDetails",
+        }
+
+        return self.api_client.call_api(
+            '/api/recipes/composer/{scope}/{code}', 'DELETE',
             _path_params,
             _query_params,
             _header_params,
@@ -382,6 +544,504 @@ class ConfigurationRecipeApi:
             _request_auth=_params.get('_request_auth'))
 
     @overload
+    async def get_derived_recipe(self, scope : Annotated[constr(strict=True, max_length=64, min_length=1), Field(..., description="The scope of the Configuration Recipe or Recipe Composer to return.")], code : Annotated[constr(strict=True, max_length=64, min_length=1), Field(..., description="The code of the Configuration Recipe or Recipe Composer to return.")], as_at : Annotated[Optional[datetime], Field(description="The asAt datetime at which to retrieve the Configuration Recipe. Defaults to return the latest version if not specified.")] = None, **kwargs) -> GetRecipeResponse:  # noqa: E501
+        ...
+
+    @overload
+    def get_derived_recipe(self, scope : Annotated[constr(strict=True, max_length=64, min_length=1), Field(..., description="The scope of the Configuration Recipe or Recipe Composer to return.")], code : Annotated[constr(strict=True, max_length=64, min_length=1), Field(..., description="The code of the Configuration Recipe or Recipe Composer to return.")], as_at : Annotated[Optional[datetime], Field(description="The asAt datetime at which to retrieve the Configuration Recipe. Defaults to return the latest version if not specified.")] = None, async_req: Optional[bool]=True, **kwargs) -> GetRecipeResponse:  # noqa: E501
+        ...
+
+    @validate_arguments
+    def get_derived_recipe(self, scope : Annotated[constr(strict=True, max_length=64, min_length=1), Field(..., description="The scope of the Configuration Recipe or Recipe Composer to return.")], code : Annotated[constr(strict=True, max_length=64, min_length=1), Field(..., description="The code of the Configuration Recipe or Recipe Composer to return.")], as_at : Annotated[Optional[datetime], Field(description="The asAt datetime at which to retrieve the Configuration Recipe. Defaults to return the latest version if not specified.")] = None, async_req: Optional[bool]=None, **kwargs) -> Union[GetRecipeResponse, Awaitable[GetRecipeResponse]]:  # noqa: E501
+        """[EXPERIMENTAL] GetDerivedRecipe: Get Configuration Recipe either from the store or expanded from a Recipe Composer.  # noqa: E501
+
+        If scope-code is referring to a Configuration Recipe it is returned, if it refers to Recipe Composer, it is expanded into a Configuration Recipe and returned.  # noqa: E501
+        This method makes a synchronous HTTP request by default. To make an
+        asynchronous HTTP request, please pass async_req=True
+
+        >>> thread = api.get_derived_recipe(scope, code, as_at, async_req=True)
+        >>> result = thread.get()
+
+        :param scope: The scope of the Configuration Recipe or Recipe Composer to return. (required)
+        :type scope: str
+        :param code: The code of the Configuration Recipe or Recipe Composer to return. (required)
+        :type code: str
+        :param as_at: The asAt datetime at which to retrieve the Configuration Recipe. Defaults to return the latest version if not specified.
+        :type as_at: datetime
+        :param async_req: Whether to execute the request asynchronously.
+        :type async_req: bool, optional
+        :param _request_timeout: timeout setting for this request.
+               If one number provided, it will be total request
+               timeout. It can also be a pair (tuple) of
+               (connection, read) timeouts.
+        :return: Returns the result object.
+                 If the method is called asynchronously,
+                 returns the request thread.
+        :rtype: GetRecipeResponse
+        """
+        kwargs['_return_http_data_only'] = True
+        if '_preload_content' in kwargs:
+            message = "Error! Please call the get_derived_recipe_with_http_info method with `_preload_content` instead and obtain raw data from ApiResponse.raw_data"  # noqa: E501
+            raise ValueError(message)
+        if async_req is not None:
+            kwargs['async_req'] = async_req
+        return self.get_derived_recipe_with_http_info(scope, code, as_at, **kwargs)  # noqa: E501
+
+    @validate_arguments
+    def get_derived_recipe_with_http_info(self, scope : Annotated[constr(strict=True, max_length=64, min_length=1), Field(..., description="The scope of the Configuration Recipe or Recipe Composer to return.")], code : Annotated[constr(strict=True, max_length=64, min_length=1), Field(..., description="The code of the Configuration Recipe or Recipe Composer to return.")], as_at : Annotated[Optional[datetime], Field(description="The asAt datetime at which to retrieve the Configuration Recipe. Defaults to return the latest version if not specified.")] = None, **kwargs) -> ApiResponse:  # noqa: E501
+        """[EXPERIMENTAL] GetDerivedRecipe: Get Configuration Recipe either from the store or expanded from a Recipe Composer.  # noqa: E501
+
+        If scope-code is referring to a Configuration Recipe it is returned, if it refers to Recipe Composer, it is expanded into a Configuration Recipe and returned.  # noqa: E501
+        This method makes a synchronous HTTP request by default. To make an
+        asynchronous HTTP request, please pass async_req=True
+
+        >>> thread = api.get_derived_recipe_with_http_info(scope, code, as_at, async_req=True)
+        >>> result = thread.get()
+
+        :param scope: The scope of the Configuration Recipe or Recipe Composer to return. (required)
+        :type scope: str
+        :param code: The code of the Configuration Recipe or Recipe Composer to return. (required)
+        :type code: str
+        :param as_at: The asAt datetime at which to retrieve the Configuration Recipe. Defaults to return the latest version if not specified.
+        :type as_at: datetime
+        :param async_req: Whether to execute the request asynchronously.
+        :type async_req: bool, optional
+        :param _preload_content: if False, the ApiResponse.data will
+                                 be set to none and raw_data will store the
+                                 HTTP response body without reading/decoding.
+                                 Default is True.
+        :type _preload_content: bool, optional
+        :param _return_http_data_only: response data instead of ApiResponse
+                                       object with status code, headers, etc
+        :type _return_http_data_only: bool, optional
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :param _request_auth: set to override the auth_settings for an a single
+                              request; this effectively ignores the authentication
+                              in the spec for a single request.
+        :type _request_auth: dict, optional
+        :type _content_type: string, optional: force content-type for the request
+        :return: Returns the result object.
+                 If the method is called asynchronously,
+                 returns the request thread.
+        :rtype: tuple(GetRecipeResponse, status_code(int), headers(HTTPHeaderDict))
+        """
+
+        _params = locals()
+
+        _all_params = [
+            'scope',
+            'code',
+            'as_at'
+        ]
+        _all_params.extend(
+            [
+                'async_req',
+                '_return_http_data_only',
+                '_preload_content',
+                '_request_timeout',
+                '_request_auth',
+                '_content_type',
+                '_headers'
+            ]
+        )
+
+        # validate the arguments
+        for _key, _val in _params['kwargs'].items():
+            if _key not in _all_params:
+                raise ApiTypeError(
+                    "Got an unexpected keyword argument '%s'"
+                    " to method get_derived_recipe" % _key
+                )
+            _params[_key] = _val
+        del _params['kwargs']
+
+        _collection_formats = {}
+
+        # process the path parameters
+        _path_params = {}
+        if _params['scope']:
+            _path_params['scope'] = _params['scope']
+
+        if _params['code']:
+            _path_params['code'] = _params['code']
+
+
+        # process the query parameters
+        _query_params = []
+        if _params.get('as_at') is not None:  # noqa: E501
+            if isinstance(_params['as_at'], datetime):
+                _query_params.append(('asAt', _params['as_at'].strftime(self.api_client.configuration.datetime_format)))
+            else:
+                _query_params.append(('asAt', _params['as_at']))
+
+        # process the header parameters
+        _header_params = dict(_params.get('_headers', {}))
+        # process the form parameters
+        _form_params = []
+        _files = {}
+        # process the body parameter
+        _body_params = None
+        # set the HTTP header `Accept`
+        _header_params['Accept'] = self.api_client.select_header_accept(
+            ['text/plain', 'application/json', 'text/json'])  # noqa: E501
+
+        # authentication setting
+        _auth_settings = ['oauth2']  # noqa: E501
+
+        _response_types_map = {
+            '200': "GetRecipeResponse",
+            '400': "LusidValidationProblemDetails",
+        }
+
+        return self.api_client.call_api(
+            '/api/recipes/derived/{scope}/{code}', 'GET',
+            _path_params,
+            _query_params,
+            _header_params,
+            body=_body_params,
+            post_params=_form_params,
+            files=_files,
+            response_types_map=_response_types_map,
+            auth_settings=_auth_settings,
+            async_req=_params.get('async_req'),
+            _return_http_data_only=_params.get('_return_http_data_only'),  # noqa: E501
+            _preload_content=_params.get('_preload_content', True),
+            _request_timeout=_params.get('_request_timeout'),
+            collection_formats=_collection_formats,
+            _request_auth=_params.get('_request_auth'))
+
+    @overload
+    async def get_recipe_composer(self, scope : Annotated[constr(strict=True, max_length=64, min_length=1), Field(..., description="The scope of the Recipe Composer to retrieve.")], code : Annotated[constr(strict=True, max_length=64, min_length=1), Field(..., description="The name of the Recipe Composer to retrieve the data for.")], as_at : Annotated[Optional[datetime], Field(description="The asAt datetime at which to retrieve the Recipe Composer. Defaults to return the latest version if not specified.")] = None, **kwargs) -> GetRecipeComposerResponse:  # noqa: E501
+        ...
+
+    @overload
+    def get_recipe_composer(self, scope : Annotated[constr(strict=True, max_length=64, min_length=1), Field(..., description="The scope of the Recipe Composer to retrieve.")], code : Annotated[constr(strict=True, max_length=64, min_length=1), Field(..., description="The name of the Recipe Composer to retrieve the data for.")], as_at : Annotated[Optional[datetime], Field(description="The asAt datetime at which to retrieve the Recipe Composer. Defaults to return the latest version if not specified.")] = None, async_req: Optional[bool]=True, **kwargs) -> GetRecipeComposerResponse:  # noqa: E501
+        ...
+
+    @validate_arguments
+    def get_recipe_composer(self, scope : Annotated[constr(strict=True, max_length=64, min_length=1), Field(..., description="The scope of the Recipe Composer to retrieve.")], code : Annotated[constr(strict=True, max_length=64, min_length=1), Field(..., description="The name of the Recipe Composer to retrieve the data for.")], as_at : Annotated[Optional[datetime], Field(description="The asAt datetime at which to retrieve the Recipe Composer. Defaults to return the latest version if not specified.")] = None, async_req: Optional[bool]=None, **kwargs) -> Union[GetRecipeComposerResponse, Awaitable[GetRecipeComposerResponse]]:  # noqa: E501
+        """[EXPERIMENTAL] GetRecipeComposer: Get Recipe Composer  # noqa: E501
+
+        Get a Recipe Composer from a single scope.                The response will return either the recipe composer that has been stored, or a failure explaining why the request was unsuccessful.                It is important to always check for any unsuccessful requests (failures).  # noqa: E501
+        This method makes a synchronous HTTP request by default. To make an
+        asynchronous HTTP request, please pass async_req=True
+
+        >>> thread = api.get_recipe_composer(scope, code, as_at, async_req=True)
+        >>> result = thread.get()
+
+        :param scope: The scope of the Recipe Composer to retrieve. (required)
+        :type scope: str
+        :param code: The name of the Recipe Composer to retrieve the data for. (required)
+        :type code: str
+        :param as_at: The asAt datetime at which to retrieve the Recipe Composer. Defaults to return the latest version if not specified.
+        :type as_at: datetime
+        :param async_req: Whether to execute the request asynchronously.
+        :type async_req: bool, optional
+        :param _request_timeout: timeout setting for this request.
+               If one number provided, it will be total request
+               timeout. It can also be a pair (tuple) of
+               (connection, read) timeouts.
+        :return: Returns the result object.
+                 If the method is called asynchronously,
+                 returns the request thread.
+        :rtype: GetRecipeComposerResponse
+        """
+        kwargs['_return_http_data_only'] = True
+        if '_preload_content' in kwargs:
+            message = "Error! Please call the get_recipe_composer_with_http_info method with `_preload_content` instead and obtain raw data from ApiResponse.raw_data"  # noqa: E501
+            raise ValueError(message)
+        if async_req is not None:
+            kwargs['async_req'] = async_req
+        return self.get_recipe_composer_with_http_info(scope, code, as_at, **kwargs)  # noqa: E501
+
+    @validate_arguments
+    def get_recipe_composer_with_http_info(self, scope : Annotated[constr(strict=True, max_length=64, min_length=1), Field(..., description="The scope of the Recipe Composer to retrieve.")], code : Annotated[constr(strict=True, max_length=64, min_length=1), Field(..., description="The name of the Recipe Composer to retrieve the data for.")], as_at : Annotated[Optional[datetime], Field(description="The asAt datetime at which to retrieve the Recipe Composer. Defaults to return the latest version if not specified.")] = None, **kwargs) -> ApiResponse:  # noqa: E501
+        """[EXPERIMENTAL] GetRecipeComposer: Get Recipe Composer  # noqa: E501
+
+        Get a Recipe Composer from a single scope.                The response will return either the recipe composer that has been stored, or a failure explaining why the request was unsuccessful.                It is important to always check for any unsuccessful requests (failures).  # noqa: E501
+        This method makes a synchronous HTTP request by default. To make an
+        asynchronous HTTP request, please pass async_req=True
+
+        >>> thread = api.get_recipe_composer_with_http_info(scope, code, as_at, async_req=True)
+        >>> result = thread.get()
+
+        :param scope: The scope of the Recipe Composer to retrieve. (required)
+        :type scope: str
+        :param code: The name of the Recipe Composer to retrieve the data for. (required)
+        :type code: str
+        :param as_at: The asAt datetime at which to retrieve the Recipe Composer. Defaults to return the latest version if not specified.
+        :type as_at: datetime
+        :param async_req: Whether to execute the request asynchronously.
+        :type async_req: bool, optional
+        :param _preload_content: if False, the ApiResponse.data will
+                                 be set to none and raw_data will store the
+                                 HTTP response body without reading/decoding.
+                                 Default is True.
+        :type _preload_content: bool, optional
+        :param _return_http_data_only: response data instead of ApiResponse
+                                       object with status code, headers, etc
+        :type _return_http_data_only: bool, optional
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :param _request_auth: set to override the auth_settings for an a single
+                              request; this effectively ignores the authentication
+                              in the spec for a single request.
+        :type _request_auth: dict, optional
+        :type _content_type: string, optional: force content-type for the request
+        :return: Returns the result object.
+                 If the method is called asynchronously,
+                 returns the request thread.
+        :rtype: tuple(GetRecipeComposerResponse, status_code(int), headers(HTTPHeaderDict))
+        """
+
+        _params = locals()
+
+        _all_params = [
+            'scope',
+            'code',
+            'as_at'
+        ]
+        _all_params.extend(
+            [
+                'async_req',
+                '_return_http_data_only',
+                '_preload_content',
+                '_request_timeout',
+                '_request_auth',
+                '_content_type',
+                '_headers'
+            ]
+        )
+
+        # validate the arguments
+        for _key, _val in _params['kwargs'].items():
+            if _key not in _all_params:
+                raise ApiTypeError(
+                    "Got an unexpected keyword argument '%s'"
+                    " to method get_recipe_composer" % _key
+                )
+            _params[_key] = _val
+        del _params['kwargs']
+
+        _collection_formats = {}
+
+        # process the path parameters
+        _path_params = {}
+        if _params['scope']:
+            _path_params['scope'] = _params['scope']
+
+        if _params['code']:
+            _path_params['code'] = _params['code']
+
+
+        # process the query parameters
+        _query_params = []
+        if _params.get('as_at') is not None:  # noqa: E501
+            if isinstance(_params['as_at'], datetime):
+                _query_params.append(('asAt', _params['as_at'].strftime(self.api_client.configuration.datetime_format)))
+            else:
+                _query_params.append(('asAt', _params['as_at']))
+
+        # process the header parameters
+        _header_params = dict(_params.get('_headers', {}))
+        # process the form parameters
+        _form_params = []
+        _files = {}
+        # process the body parameter
+        _body_params = None
+        # set the HTTP header `Accept`
+        _header_params['Accept'] = self.api_client.select_header_accept(
+            ['text/plain', 'application/json', 'text/json'])  # noqa: E501
+
+        # authentication setting
+        _auth_settings = ['oauth2']  # noqa: E501
+
+        _response_types_map = {
+            '200': "GetRecipeComposerResponse",
+            '400': "LusidValidationProblemDetails",
+        }
+
+        return self.api_client.call_api(
+            '/api/recipes/composer/{scope}/{code}', 'GET',
+            _path_params,
+            _query_params,
+            _header_params,
+            body=_body_params,
+            post_params=_form_params,
+            files=_files,
+            response_types_map=_response_types_map,
+            auth_settings=_auth_settings,
+            async_req=_params.get('async_req'),
+            _return_http_data_only=_params.get('_return_http_data_only'),  # noqa: E501
+            _preload_content=_params.get('_preload_content', True),
+            _request_timeout=_params.get('_request_timeout'),
+            collection_formats=_collection_formats,
+            _request_auth=_params.get('_request_auth'))
+
+    @overload
+    async def get_recipe_composer_resolved_inline(self, upsert_recipe_composer_request : Annotated[UpsertRecipeComposerRequest, Field(..., description="Recipe composer used to expand into the Configuration Recipe.")], **kwargs) -> GetRecipeResponse:  # noqa: E501
+        ...
+
+    @overload
+    def get_recipe_composer_resolved_inline(self, upsert_recipe_composer_request : Annotated[UpsertRecipeComposerRequest, Field(..., description="Recipe composer used to expand into the Configuration Recipe.")], async_req: Optional[bool]=True, **kwargs) -> GetRecipeResponse:  # noqa: E501
+        ...
+
+    @validate_arguments
+    def get_recipe_composer_resolved_inline(self, upsert_recipe_composer_request : Annotated[UpsertRecipeComposerRequest, Field(..., description="Recipe composer used to expand into the Configuration Recipe.")], async_req: Optional[bool]=None, **kwargs) -> Union[GetRecipeResponse, Awaitable[GetRecipeResponse]]:  # noqa: E501
+        """[EXPERIMENTAL] GetRecipeComposerResolvedInline: Given a Recipe Composer, this endpoint expands into a Configuration Recipe without persistence. Primarily used for testing purposes.  # noqa: E501
+
+        Resolves an inline recipe composer into a ConfigurationRecipe.  # noqa: E501
+        This method makes a synchronous HTTP request by default. To make an
+        asynchronous HTTP request, please pass async_req=True
+
+        >>> thread = api.get_recipe_composer_resolved_inline(upsert_recipe_composer_request, async_req=True)
+        >>> result = thread.get()
+
+        :param upsert_recipe_composer_request: Recipe composer used to expand into the Configuration Recipe. (required)
+        :type upsert_recipe_composer_request: UpsertRecipeComposerRequest
+        :param async_req: Whether to execute the request asynchronously.
+        :type async_req: bool, optional
+        :param _request_timeout: timeout setting for this request.
+               If one number provided, it will be total request
+               timeout. It can also be a pair (tuple) of
+               (connection, read) timeouts.
+        :return: Returns the result object.
+                 If the method is called asynchronously,
+                 returns the request thread.
+        :rtype: GetRecipeResponse
+        """
+        kwargs['_return_http_data_only'] = True
+        if '_preload_content' in kwargs:
+            message = "Error! Please call the get_recipe_composer_resolved_inline_with_http_info method with `_preload_content` instead and obtain raw data from ApiResponse.raw_data"  # noqa: E501
+            raise ValueError(message)
+        if async_req is not None:
+            kwargs['async_req'] = async_req
+        return self.get_recipe_composer_resolved_inline_with_http_info(upsert_recipe_composer_request, **kwargs)  # noqa: E501
+
+    @validate_arguments
+    def get_recipe_composer_resolved_inline_with_http_info(self, upsert_recipe_composer_request : Annotated[UpsertRecipeComposerRequest, Field(..., description="Recipe composer used to expand into the Configuration Recipe.")], **kwargs) -> ApiResponse:  # noqa: E501
+        """[EXPERIMENTAL] GetRecipeComposerResolvedInline: Given a Recipe Composer, this endpoint expands into a Configuration Recipe without persistence. Primarily used for testing purposes.  # noqa: E501
+
+        Resolves an inline recipe composer into a ConfigurationRecipe.  # noqa: E501
+        This method makes a synchronous HTTP request by default. To make an
+        asynchronous HTTP request, please pass async_req=True
+
+        >>> thread = api.get_recipe_composer_resolved_inline_with_http_info(upsert_recipe_composer_request, async_req=True)
+        >>> result = thread.get()
+
+        :param upsert_recipe_composer_request: Recipe composer used to expand into the Configuration Recipe. (required)
+        :type upsert_recipe_composer_request: UpsertRecipeComposerRequest
+        :param async_req: Whether to execute the request asynchronously.
+        :type async_req: bool, optional
+        :param _preload_content: if False, the ApiResponse.data will
+                                 be set to none and raw_data will store the
+                                 HTTP response body without reading/decoding.
+                                 Default is True.
+        :type _preload_content: bool, optional
+        :param _return_http_data_only: response data instead of ApiResponse
+                                       object with status code, headers, etc
+        :type _return_http_data_only: bool, optional
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :param _request_auth: set to override the auth_settings for an a single
+                              request; this effectively ignores the authentication
+                              in the spec for a single request.
+        :type _request_auth: dict, optional
+        :type _content_type: string, optional: force content-type for the request
+        :return: Returns the result object.
+                 If the method is called asynchronously,
+                 returns the request thread.
+        :rtype: tuple(GetRecipeResponse, status_code(int), headers(HTTPHeaderDict))
+        """
+
+        _params = locals()
+
+        _all_params = [
+            'upsert_recipe_composer_request'
+        ]
+        _all_params.extend(
+            [
+                'async_req',
+                '_return_http_data_only',
+                '_preload_content',
+                '_request_timeout',
+                '_request_auth',
+                '_content_type',
+                '_headers'
+            ]
+        )
+
+        # validate the arguments
+        for _key, _val in _params['kwargs'].items():
+            if _key not in _all_params:
+                raise ApiTypeError(
+                    "Got an unexpected keyword argument '%s'"
+                    " to method get_recipe_composer_resolved_inline" % _key
+                )
+            _params[_key] = _val
+        del _params['kwargs']
+
+        _collection_formats = {}
+
+        # process the path parameters
+        _path_params = {}
+
+        # process the query parameters
+        _query_params = []
+        # process the header parameters
+        _header_params = dict(_params.get('_headers', {}))
+        # process the form parameters
+        _form_params = []
+        _files = {}
+        # process the body parameter
+        _body_params = None
+        if _params['upsert_recipe_composer_request'] is not None:
+            _body_params = _params['upsert_recipe_composer_request']
+
+        # set the HTTP header `Accept`
+        _header_params['Accept'] = self.api_client.select_header_accept(
+            ['text/plain', 'application/json', 'text/json'])  # noqa: E501
+
+        # set the HTTP header `Content-Type`
+        _content_types_list = _params.get('_content_type',
+            self.api_client.select_header_content_type(
+                ['application/json-patch+json', 'application/json', 'text/json', 'application/*+json']))
+        if _content_types_list:
+                _header_params['Content-Type'] = _content_types_list
+
+        # authentication setting
+        _auth_settings = ['oauth2']  # noqa: E501
+
+        _response_types_map = {
+            '200': "GetRecipeResponse",
+            '400': "LusidValidationProblemDetails",
+        }
+
+        return self.api_client.call_api(
+            '/api/recipes/composer/resolvedinline$', 'POST',
+            _path_params,
+            _query_params,
+            _header_params,
+            body=_body_params,
+            post_params=_form_params,
+            files=_files,
+            response_types_map=_response_types_map,
+            auth_settings=_auth_settings,
+            async_req=_params.get('async_req'),
+            _return_http_data_only=_params.get('_return_http_data_only'),  # noqa: E501
+            _preload_content=_params.get('_preload_content', True),
+            _request_timeout=_params.get('_request_timeout'),
+            collection_formats=_collection_formats,
+            _request_auth=_params.get('_request_auth'))
+
+    @overload
     async def list_configuration_recipes(self, as_at : Annotated[Optional[datetime], Field(description="The asAt datetime at which to list the Configuration Recipes. Defaults to latest if not specified.")] = None, filter : Annotated[Optional[constr(strict=True, max_length=16384, min_length=0)], Field(description="Expression to filter the result set. Read more about filtering results from LUSID here:              https://support.lusid.com/filtering-results-from-lusid.")] = None, **kwargs) -> ResourceListOfGetRecipeResponse:  # noqa: E501
         ...
 
@@ -393,7 +1053,7 @@ class ConfigurationRecipeApi:
     def list_configuration_recipes(self, as_at : Annotated[Optional[datetime], Field(description="The asAt datetime at which to list the Configuration Recipes. Defaults to latest if not specified.")] = None, filter : Annotated[Optional[constr(strict=True, max_length=16384, min_length=0)], Field(description="Expression to filter the result set. Read more about filtering results from LUSID here:              https://support.lusid.com/filtering-results-from-lusid.")] = None, async_req: Optional[bool]=None, **kwargs) -> Union[ResourceListOfGetRecipeResponse, Awaitable[ResourceListOfGetRecipeResponse]]:  # noqa: E501
         """ListConfigurationRecipes: List the set of Configuration Recipes  # noqa: E501
 
-        List the set of configuration recipes at the specified date/time and scope  # noqa: E501
+        List the set of configuration recipes at the specified date/time and scope. Note this only returns recipes stored directly and does not include any recipes expanded from recipe composers.  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
 
@@ -427,7 +1087,7 @@ class ConfigurationRecipeApi:
     def list_configuration_recipes_with_http_info(self, as_at : Annotated[Optional[datetime], Field(description="The asAt datetime at which to list the Configuration Recipes. Defaults to latest if not specified.")] = None, filter : Annotated[Optional[constr(strict=True, max_length=16384, min_length=0)], Field(description="Expression to filter the result set. Read more about filtering results from LUSID here:              https://support.lusid.com/filtering-results-from-lusid.")] = None, **kwargs) -> ApiResponse:  # noqa: E501
         """ListConfigurationRecipes: List the set of Configuration Recipes  # noqa: E501
 
-        List the set of configuration recipes at the specified date/time and scope  # noqa: E501
+        List the set of configuration recipes at the specified date/time and scope. Note this only returns recipes stored directly and does not include any recipes expanded from recipe composers.  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
 
@@ -528,6 +1188,330 @@ class ConfigurationRecipeApi:
 
         return self.api_client.call_api(
             '/api/recipes', 'GET',
+            _path_params,
+            _query_params,
+            _header_params,
+            body=_body_params,
+            post_params=_form_params,
+            files=_files,
+            response_types_map=_response_types_map,
+            auth_settings=_auth_settings,
+            async_req=_params.get('async_req'),
+            _return_http_data_only=_params.get('_return_http_data_only'),  # noqa: E501
+            _preload_content=_params.get('_preload_content', True),
+            _request_timeout=_params.get('_request_timeout'),
+            collection_formats=_collection_formats,
+            _request_auth=_params.get('_request_auth'))
+
+    @overload
+    async def list_derived_recipes(self, as_at : Annotated[Optional[datetime], Field(description="The asAt datetime at which to list the Configuration Recipes. Defaults to latest if not specified.")] = None, filter : Annotated[Optional[constr(strict=True, max_length=16384, min_length=0)], Field(description="Expression to filter the result set, note this functionality is not yet enabled for this endpoint.")] = None, **kwargs) -> ResourceListOfGetRecipeResponse:  # noqa: E501
+        ...
+
+    @overload
+    def list_derived_recipes(self, as_at : Annotated[Optional[datetime], Field(description="The asAt datetime at which to list the Configuration Recipes. Defaults to latest if not specified.")] = None, filter : Annotated[Optional[constr(strict=True, max_length=16384, min_length=0)], Field(description="Expression to filter the result set, note this functionality is not yet enabled for this endpoint.")] = None, async_req: Optional[bool]=True, **kwargs) -> ResourceListOfGetRecipeResponse:  # noqa: E501
+        ...
+
+    @validate_arguments
+    def list_derived_recipes(self, as_at : Annotated[Optional[datetime], Field(description="The asAt datetime at which to list the Configuration Recipes. Defaults to latest if not specified.")] = None, filter : Annotated[Optional[constr(strict=True, max_length=16384, min_length=0)], Field(description="Expression to filter the result set, note this functionality is not yet enabled for this endpoint.")] = None, async_req: Optional[bool]=None, **kwargs) -> Union[ResourceListOfGetRecipeResponse, Awaitable[ResourceListOfGetRecipeResponse]]:  # noqa: E501
+        """[EXPERIMENTAL] ListDerivedRecipes: List the complete set of all Configuration Recipes, both from the configuration recipe store and also from expanded recipe composers.  # noqa: E501
+
+        This endpoints returns a union of the output of ListConfigurationRecipes and the resolved Recipe Composers from the ListRecipeComposers endpoints.  # noqa: E501
+        This method makes a synchronous HTTP request by default. To make an
+        asynchronous HTTP request, please pass async_req=True
+
+        >>> thread = api.list_derived_recipes(as_at, filter, async_req=True)
+        >>> result = thread.get()
+
+        :param as_at: The asAt datetime at which to list the Configuration Recipes. Defaults to latest if not specified.
+        :type as_at: datetime
+        :param filter: Expression to filter the result set, note this functionality is not yet enabled for this endpoint.
+        :type filter: str
+        :param async_req: Whether to execute the request asynchronously.
+        :type async_req: bool, optional
+        :param _request_timeout: timeout setting for this request.
+               If one number provided, it will be total request
+               timeout. It can also be a pair (tuple) of
+               (connection, read) timeouts.
+        :return: Returns the result object.
+                 If the method is called asynchronously,
+                 returns the request thread.
+        :rtype: ResourceListOfGetRecipeResponse
+        """
+        kwargs['_return_http_data_only'] = True
+        if '_preload_content' in kwargs:
+            message = "Error! Please call the list_derived_recipes_with_http_info method with `_preload_content` instead and obtain raw data from ApiResponse.raw_data"  # noqa: E501
+            raise ValueError(message)
+        if async_req is not None:
+            kwargs['async_req'] = async_req
+        return self.list_derived_recipes_with_http_info(as_at, filter, **kwargs)  # noqa: E501
+
+    @validate_arguments
+    def list_derived_recipes_with_http_info(self, as_at : Annotated[Optional[datetime], Field(description="The asAt datetime at which to list the Configuration Recipes. Defaults to latest if not specified.")] = None, filter : Annotated[Optional[constr(strict=True, max_length=16384, min_length=0)], Field(description="Expression to filter the result set, note this functionality is not yet enabled for this endpoint.")] = None, **kwargs) -> ApiResponse:  # noqa: E501
+        """[EXPERIMENTAL] ListDerivedRecipes: List the complete set of all Configuration Recipes, both from the configuration recipe store and also from expanded recipe composers.  # noqa: E501
+
+        This endpoints returns a union of the output of ListConfigurationRecipes and the resolved Recipe Composers from the ListRecipeComposers endpoints.  # noqa: E501
+        This method makes a synchronous HTTP request by default. To make an
+        asynchronous HTTP request, please pass async_req=True
+
+        >>> thread = api.list_derived_recipes_with_http_info(as_at, filter, async_req=True)
+        >>> result = thread.get()
+
+        :param as_at: The asAt datetime at which to list the Configuration Recipes. Defaults to latest if not specified.
+        :type as_at: datetime
+        :param filter: Expression to filter the result set, note this functionality is not yet enabled for this endpoint.
+        :type filter: str
+        :param async_req: Whether to execute the request asynchronously.
+        :type async_req: bool, optional
+        :param _preload_content: if False, the ApiResponse.data will
+                                 be set to none and raw_data will store the
+                                 HTTP response body without reading/decoding.
+                                 Default is True.
+        :type _preload_content: bool, optional
+        :param _return_http_data_only: response data instead of ApiResponse
+                                       object with status code, headers, etc
+        :type _return_http_data_only: bool, optional
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :param _request_auth: set to override the auth_settings for an a single
+                              request; this effectively ignores the authentication
+                              in the spec for a single request.
+        :type _request_auth: dict, optional
+        :type _content_type: string, optional: force content-type for the request
+        :return: Returns the result object.
+                 If the method is called asynchronously,
+                 returns the request thread.
+        :rtype: tuple(ResourceListOfGetRecipeResponse, status_code(int), headers(HTTPHeaderDict))
+        """
+
+        _params = locals()
+
+        _all_params = [
+            'as_at',
+            'filter'
+        ]
+        _all_params.extend(
+            [
+                'async_req',
+                '_return_http_data_only',
+                '_preload_content',
+                '_request_timeout',
+                '_request_auth',
+                '_content_type',
+                '_headers'
+            ]
+        )
+
+        # validate the arguments
+        for _key, _val in _params['kwargs'].items():
+            if _key not in _all_params:
+                raise ApiTypeError(
+                    "Got an unexpected keyword argument '%s'"
+                    " to method list_derived_recipes" % _key
+                )
+            _params[_key] = _val
+        del _params['kwargs']
+
+        _collection_formats = {}
+
+        # process the path parameters
+        _path_params = {}
+
+        # process the query parameters
+        _query_params = []
+        if _params.get('as_at') is not None:  # noqa: E501
+            if isinstance(_params['as_at'], datetime):
+                _query_params.append(('asAt', _params['as_at'].strftime(self.api_client.configuration.datetime_format)))
+            else:
+                _query_params.append(('asAt', _params['as_at']))
+
+        if _params.get('filter') is not None:  # noqa: E501
+            _query_params.append(('filter', _params['filter']))
+
+        # process the header parameters
+        _header_params = dict(_params.get('_headers', {}))
+        # process the form parameters
+        _form_params = []
+        _files = {}
+        # process the body parameter
+        _body_params = None
+        # set the HTTP header `Accept`
+        _header_params['Accept'] = self.api_client.select_header_accept(
+            ['text/plain', 'application/json', 'text/json'])  # noqa: E501
+
+        # authentication setting
+        _auth_settings = ['oauth2']  # noqa: E501
+
+        _response_types_map = {
+            '200': "ResourceListOfGetRecipeResponse",
+            '400': "LusidValidationProblemDetails",
+        }
+
+        return self.api_client.call_api(
+            '/api/recipes/derived', 'GET',
+            _path_params,
+            _query_params,
+            _header_params,
+            body=_body_params,
+            post_params=_form_params,
+            files=_files,
+            response_types_map=_response_types_map,
+            auth_settings=_auth_settings,
+            async_req=_params.get('async_req'),
+            _return_http_data_only=_params.get('_return_http_data_only'),  # noqa: E501
+            _preload_content=_params.get('_preload_content', True),
+            _request_timeout=_params.get('_request_timeout'),
+            collection_formats=_collection_formats,
+            _request_auth=_params.get('_request_auth'))
+
+    @overload
+    async def list_recipe_composers(self, as_at : Annotated[Optional[datetime], Field(description="The asAt datetime at which to list the Recipes Composers. Defaults to latest if not specified.")] = None, filter : Annotated[Optional[constr(strict=True, max_length=16384, min_length=0)], Field(description="Expression to filter the result set, note this functionality is not yet enabled for this endpoint.")] = None, **kwargs) -> ResourceListOfGetRecipeComposerResponse:  # noqa: E501
+        ...
+
+    @overload
+    def list_recipe_composers(self, as_at : Annotated[Optional[datetime], Field(description="The asAt datetime at which to list the Recipes Composers. Defaults to latest if not specified.")] = None, filter : Annotated[Optional[constr(strict=True, max_length=16384, min_length=0)], Field(description="Expression to filter the result set, note this functionality is not yet enabled for this endpoint.")] = None, async_req: Optional[bool]=True, **kwargs) -> ResourceListOfGetRecipeComposerResponse:  # noqa: E501
+        ...
+
+    @validate_arguments
+    def list_recipe_composers(self, as_at : Annotated[Optional[datetime], Field(description="The asAt datetime at which to list the Recipes Composers. Defaults to latest if not specified.")] = None, filter : Annotated[Optional[constr(strict=True, max_length=16384, min_length=0)], Field(description="Expression to filter the result set, note this functionality is not yet enabled for this endpoint.")] = None, async_req: Optional[bool]=None, **kwargs) -> Union[ResourceListOfGetRecipeComposerResponse, Awaitable[ResourceListOfGetRecipeComposerResponse]]:  # noqa: E501
+        """[EXPERIMENTAL] ListRecipeComposers: List the set of Recipe Composers  # noqa: E501
+
+        List the set of Recipe Composers at the specified date/time and scope  # noqa: E501
+        This method makes a synchronous HTTP request by default. To make an
+        asynchronous HTTP request, please pass async_req=True
+
+        >>> thread = api.list_recipe_composers(as_at, filter, async_req=True)
+        >>> result = thread.get()
+
+        :param as_at: The asAt datetime at which to list the Recipes Composers. Defaults to latest if not specified.
+        :type as_at: datetime
+        :param filter: Expression to filter the result set, note this functionality is not yet enabled for this endpoint.
+        :type filter: str
+        :param async_req: Whether to execute the request asynchronously.
+        :type async_req: bool, optional
+        :param _request_timeout: timeout setting for this request.
+               If one number provided, it will be total request
+               timeout. It can also be a pair (tuple) of
+               (connection, read) timeouts.
+        :return: Returns the result object.
+                 If the method is called asynchronously,
+                 returns the request thread.
+        :rtype: ResourceListOfGetRecipeComposerResponse
+        """
+        kwargs['_return_http_data_only'] = True
+        if '_preload_content' in kwargs:
+            message = "Error! Please call the list_recipe_composers_with_http_info method with `_preload_content` instead and obtain raw data from ApiResponse.raw_data"  # noqa: E501
+            raise ValueError(message)
+        if async_req is not None:
+            kwargs['async_req'] = async_req
+        return self.list_recipe_composers_with_http_info(as_at, filter, **kwargs)  # noqa: E501
+
+    @validate_arguments
+    def list_recipe_composers_with_http_info(self, as_at : Annotated[Optional[datetime], Field(description="The asAt datetime at which to list the Recipes Composers. Defaults to latest if not specified.")] = None, filter : Annotated[Optional[constr(strict=True, max_length=16384, min_length=0)], Field(description="Expression to filter the result set, note this functionality is not yet enabled for this endpoint.")] = None, **kwargs) -> ApiResponse:  # noqa: E501
+        """[EXPERIMENTAL] ListRecipeComposers: List the set of Recipe Composers  # noqa: E501
+
+        List the set of Recipe Composers at the specified date/time and scope  # noqa: E501
+        This method makes a synchronous HTTP request by default. To make an
+        asynchronous HTTP request, please pass async_req=True
+
+        >>> thread = api.list_recipe_composers_with_http_info(as_at, filter, async_req=True)
+        >>> result = thread.get()
+
+        :param as_at: The asAt datetime at which to list the Recipes Composers. Defaults to latest if not specified.
+        :type as_at: datetime
+        :param filter: Expression to filter the result set, note this functionality is not yet enabled for this endpoint.
+        :type filter: str
+        :param async_req: Whether to execute the request asynchronously.
+        :type async_req: bool, optional
+        :param _preload_content: if False, the ApiResponse.data will
+                                 be set to none and raw_data will store the
+                                 HTTP response body without reading/decoding.
+                                 Default is True.
+        :type _preload_content: bool, optional
+        :param _return_http_data_only: response data instead of ApiResponse
+                                       object with status code, headers, etc
+        :type _return_http_data_only: bool, optional
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :param _request_auth: set to override the auth_settings for an a single
+                              request; this effectively ignores the authentication
+                              in the spec for a single request.
+        :type _request_auth: dict, optional
+        :type _content_type: string, optional: force content-type for the request
+        :return: Returns the result object.
+                 If the method is called asynchronously,
+                 returns the request thread.
+        :rtype: tuple(ResourceListOfGetRecipeComposerResponse, status_code(int), headers(HTTPHeaderDict))
+        """
+
+        _params = locals()
+
+        _all_params = [
+            'as_at',
+            'filter'
+        ]
+        _all_params.extend(
+            [
+                'async_req',
+                '_return_http_data_only',
+                '_preload_content',
+                '_request_timeout',
+                '_request_auth',
+                '_content_type',
+                '_headers'
+            ]
+        )
+
+        # validate the arguments
+        for _key, _val in _params['kwargs'].items():
+            if _key not in _all_params:
+                raise ApiTypeError(
+                    "Got an unexpected keyword argument '%s'"
+                    " to method list_recipe_composers" % _key
+                )
+            _params[_key] = _val
+        del _params['kwargs']
+
+        _collection_formats = {}
+
+        # process the path parameters
+        _path_params = {}
+
+        # process the query parameters
+        _query_params = []
+        if _params.get('as_at') is not None:  # noqa: E501
+            if isinstance(_params['as_at'], datetime):
+                _query_params.append(('asAt', _params['as_at'].strftime(self.api_client.configuration.datetime_format)))
+            else:
+                _query_params.append(('asAt', _params['as_at']))
+
+        if _params.get('filter') is not None:  # noqa: E501
+            _query_params.append(('filter', _params['filter']))
+
+        # process the header parameters
+        _header_params = dict(_params.get('_headers', {}))
+        # process the form parameters
+        _form_params = []
+        _files = {}
+        # process the body parameter
+        _body_params = None
+        # set the HTTP header `Accept`
+        _header_params['Accept'] = self.api_client.select_header_accept(
+            ['text/plain', 'application/json', 'text/json'])  # noqa: E501
+
+        # authentication setting
+        _auth_settings = ['oauth2']  # noqa: E501
+
+        _response_types_map = {
+            '200': "ResourceListOfGetRecipeComposerResponse",
+            '400': "LusidValidationProblemDetails",
+        }
+
+        return self.api_client.call_api(
+            '/api/recipes/composer', 'GET',
             _path_params,
             _query_params,
             _header_params,
@@ -686,6 +1670,164 @@ class ConfigurationRecipeApi:
 
         return self.api_client.call_api(
             '/api/recipes', 'POST',
+            _path_params,
+            _query_params,
+            _header_params,
+            body=_body_params,
+            post_params=_form_params,
+            files=_files,
+            response_types_map=_response_types_map,
+            auth_settings=_auth_settings,
+            async_req=_params.get('async_req'),
+            _return_http_data_only=_params.get('_return_http_data_only'),  # noqa: E501
+            _preload_content=_params.get('_preload_content', True),
+            _request_timeout=_params.get('_request_timeout'),
+            collection_formats=_collection_formats,
+            _request_auth=_params.get('_request_auth'))
+
+    @overload
+    async def upsert_recipe_composer(self, upsert_recipe_composer_request : Annotated[UpsertRecipeComposerRequest, Field(..., description="The Recipe Composer to update or insert")], **kwargs) -> UpsertSingleStructuredDataResponse:  # noqa: E501
+        ...
+
+    @overload
+    def upsert_recipe_composer(self, upsert_recipe_composer_request : Annotated[UpsertRecipeComposerRequest, Field(..., description="The Recipe Composer to update or insert")], async_req: Optional[bool]=True, **kwargs) -> UpsertSingleStructuredDataResponse:  # noqa: E501
+        ...
+
+    @validate_arguments
+    def upsert_recipe_composer(self, upsert_recipe_composer_request : Annotated[UpsertRecipeComposerRequest, Field(..., description="The Recipe Composer to update or insert")], async_req: Optional[bool]=None, **kwargs) -> Union[UpsertSingleStructuredDataResponse, Awaitable[UpsertSingleStructuredDataResponse]]:  # noqa: E501
+        """[EXPERIMENTAL] UpsertRecipeComposer: Upsert a Recipe Composer. This creates or updates the data in Lusid.  # noqa: E501
+
+        Update or insert one Recipe Composer in a single scope. An item will be updated if it already exists  and inserted if it does not.                The response will return the successfully updated or inserted Recipe Composer or failure message if unsuccessful                It is important to always check to verify success (or failure).  # noqa: E501
+        This method makes a synchronous HTTP request by default. To make an
+        asynchronous HTTP request, please pass async_req=True
+
+        >>> thread = api.upsert_recipe_composer(upsert_recipe_composer_request, async_req=True)
+        >>> result = thread.get()
+
+        :param upsert_recipe_composer_request: The Recipe Composer to update or insert (required)
+        :type upsert_recipe_composer_request: UpsertRecipeComposerRequest
+        :param async_req: Whether to execute the request asynchronously.
+        :type async_req: bool, optional
+        :param _request_timeout: timeout setting for this request.
+               If one number provided, it will be total request
+               timeout. It can also be a pair (tuple) of
+               (connection, read) timeouts.
+        :return: Returns the result object.
+                 If the method is called asynchronously,
+                 returns the request thread.
+        :rtype: UpsertSingleStructuredDataResponse
+        """
+        kwargs['_return_http_data_only'] = True
+        if '_preload_content' in kwargs:
+            message = "Error! Please call the upsert_recipe_composer_with_http_info method with `_preload_content` instead and obtain raw data from ApiResponse.raw_data"  # noqa: E501
+            raise ValueError(message)
+        if async_req is not None:
+            kwargs['async_req'] = async_req
+        return self.upsert_recipe_composer_with_http_info(upsert_recipe_composer_request, **kwargs)  # noqa: E501
+
+    @validate_arguments
+    def upsert_recipe_composer_with_http_info(self, upsert_recipe_composer_request : Annotated[UpsertRecipeComposerRequest, Field(..., description="The Recipe Composer to update or insert")], **kwargs) -> ApiResponse:  # noqa: E501
+        """[EXPERIMENTAL] UpsertRecipeComposer: Upsert a Recipe Composer. This creates or updates the data in Lusid.  # noqa: E501
+
+        Update or insert one Recipe Composer in a single scope. An item will be updated if it already exists  and inserted if it does not.                The response will return the successfully updated or inserted Recipe Composer or failure message if unsuccessful                It is important to always check to verify success (or failure).  # noqa: E501
+        This method makes a synchronous HTTP request by default. To make an
+        asynchronous HTTP request, please pass async_req=True
+
+        >>> thread = api.upsert_recipe_composer_with_http_info(upsert_recipe_composer_request, async_req=True)
+        >>> result = thread.get()
+
+        :param upsert_recipe_composer_request: The Recipe Composer to update or insert (required)
+        :type upsert_recipe_composer_request: UpsertRecipeComposerRequest
+        :param async_req: Whether to execute the request asynchronously.
+        :type async_req: bool, optional
+        :param _preload_content: if False, the ApiResponse.data will
+                                 be set to none and raw_data will store the
+                                 HTTP response body without reading/decoding.
+                                 Default is True.
+        :type _preload_content: bool, optional
+        :param _return_http_data_only: response data instead of ApiResponse
+                                       object with status code, headers, etc
+        :type _return_http_data_only: bool, optional
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :param _request_auth: set to override the auth_settings for an a single
+                              request; this effectively ignores the authentication
+                              in the spec for a single request.
+        :type _request_auth: dict, optional
+        :type _content_type: string, optional: force content-type for the request
+        :return: Returns the result object.
+                 If the method is called asynchronously,
+                 returns the request thread.
+        :rtype: tuple(UpsertSingleStructuredDataResponse, status_code(int), headers(HTTPHeaderDict))
+        """
+
+        _params = locals()
+
+        _all_params = [
+            'upsert_recipe_composer_request'
+        ]
+        _all_params.extend(
+            [
+                'async_req',
+                '_return_http_data_only',
+                '_preload_content',
+                '_request_timeout',
+                '_request_auth',
+                '_content_type',
+                '_headers'
+            ]
+        )
+
+        # validate the arguments
+        for _key, _val in _params['kwargs'].items():
+            if _key not in _all_params:
+                raise ApiTypeError(
+                    "Got an unexpected keyword argument '%s'"
+                    " to method upsert_recipe_composer" % _key
+                )
+            _params[_key] = _val
+        del _params['kwargs']
+
+        _collection_formats = {}
+
+        # process the path parameters
+        _path_params = {}
+
+        # process the query parameters
+        _query_params = []
+        # process the header parameters
+        _header_params = dict(_params.get('_headers', {}))
+        # process the form parameters
+        _form_params = []
+        _files = {}
+        # process the body parameter
+        _body_params = None
+        if _params['upsert_recipe_composer_request'] is not None:
+            _body_params = _params['upsert_recipe_composer_request']
+
+        # set the HTTP header `Accept`
+        _header_params['Accept'] = self.api_client.select_header_accept(
+            ['text/plain', 'application/json', 'text/json'])  # noqa: E501
+
+        # set the HTTP header `Content-Type`
+        _content_types_list = _params.get('_content_type',
+            self.api_client.select_header_content_type(
+                ['application/json-patch+json', 'application/json', 'text/json', 'application/*+json']))
+        if _content_types_list:
+                _header_params['Content-Type'] = _content_types_list
+
+        # authentication setting
+        _auth_settings = ['oauth2']  # noqa: E501
+
+        _response_types_map = {
+            '200': "UpsertSingleStructuredDataResponse",
+            '400': "LusidValidationProblemDetails",
+        }
+
+        return self.api_client.call_api(
+            '/api/recipes/composer', 'POST',
             _path_params,
             _query_params,
             _header_params,

@@ -18,9 +18,10 @@ import re  # noqa: F401
 import json
 
 
-from typing import Any, Dict, Optional
-from pydantic import BaseModel, Field, constr
+from typing import Any, Dict, List, Optional
+from pydantic import BaseModel, Field, conlist, constr
 from lusid.models.transaction_field_map import TransactionFieldMap
+from lusid.models.transaction_property_map import TransactionPropertyMap
 
 class ComponentTransaction(BaseModel):
     """
@@ -29,7 +30,8 @@ class ComponentTransaction(BaseModel):
     display_name: constr(strict=True, max_length=100, min_length=0) = Field(..., alias="displayName")
     condition: Optional[constr(strict=True, max_length=1024, min_length=0)] = None
     transaction_field_map: TransactionFieldMap = Field(..., alias="transactionFieldMap")
-    __properties = ["displayName", "condition", "transactionFieldMap"]
+    transaction_property_map: conlist(TransactionPropertyMap) = Field(..., alias="transactionPropertyMap")
+    __properties = ["displayName", "condition", "transactionFieldMap", "transactionPropertyMap"]
 
     class Config:
         """Pydantic configuration"""
@@ -58,6 +60,13 @@ class ComponentTransaction(BaseModel):
         # override the default output from pydantic by calling `to_dict()` of transaction_field_map
         if self.transaction_field_map:
             _dict['transactionFieldMap'] = self.transaction_field_map.to_dict()
+        # override the default output from pydantic by calling `to_dict()` of each item in transaction_property_map (list)
+        _items = []
+        if self.transaction_property_map:
+            for _item in self.transaction_property_map:
+                if _item:
+                    _items.append(_item.to_dict())
+            _dict['transactionPropertyMap'] = _items
         # set to None if condition (nullable) is None
         # and __fields_set__ contains the field
         if self.condition is None and "condition" in self.__fields_set__:
@@ -77,6 +86,7 @@ class ComponentTransaction(BaseModel):
         _obj = ComponentTransaction.parse_obj({
             "display_name": obj.get("displayName"),
             "condition": obj.get("condition"),
-            "transaction_field_map": TransactionFieldMap.from_dict(obj.get("transactionFieldMap")) if obj.get("transactionFieldMap") is not None else None
+            "transaction_field_map": TransactionFieldMap.from_dict(obj.get("transactionFieldMap")) if obj.get("transactionFieldMap") is not None else None,
+            "transaction_property_map": [TransactionPropertyMap.from_dict(_item) for _item in obj.get("transactionPropertyMap")] if obj.get("transactionPropertyMap") is not None else None
         })
         return _obj

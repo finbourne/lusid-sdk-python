@@ -19,7 +19,7 @@ import json
 
 from datetime import datetime
 from typing import Any, Dict, Optional
-from pydantic import Field, StrictStr, constr, validator
+from pydantic import Field, StrictStr, validator
 from lusid.models.instrument_event import InstrumentEvent
 from lusid.models.lusid_instrument import LusidInstrument
 
@@ -28,12 +28,11 @@ class ExerciseEvent(InstrumentEvent):
     Definition of an exercise event.  This is an event that occurs on transformation of an instrument owing to exercise. e.g. an option of  some type into its underlying.  # noqa: E501
     """
     instrument: LusidInstrument = Field(...)
-    event_status: constr(strict=True, min_length=1) = Field(..., alias="eventStatus", description="What is the event status, is it a known (ie historic) or unknown (ie projected) event?")
     anchor_date: datetime = Field(..., alias="anchorDate", description="The date the exercise window starts, or point it takes effect on.")
     event_window_end: Optional[datetime] = Field(None, alias="eventWindowEnd", description="The date the exercise window ends, or point it takes effect on.")
     instrument_event_type: StrictStr = Field(..., alias="instrumentEventType", description="The Type of Event. The available values are: TransitionEvent, InformationalEvent, OpenEvent, CloseEvent, StockSplitEvent, BondDefaultEvent, CashDividendEvent, AmortisationEvent, CashFlowEvent, ExerciseEvent, ResetEvent, TriggerEvent, RawVendorEvent, InformationalErrorEvent, BondCouponEvent, DividendReinvestmentEvent, AccumulationEvent, BondPrincipalEvent, DividendOptionEvent, MaturityEvent, FxForwardSettlementEvent")
     additional_properties: Dict[str, Any] = {}
-    __properties = ["instrumentEventType", "instrument", "eventStatus", "anchorDate", "eventWindowEnd"]
+    __properties = ["instrumentEventType", "instrument", "anchorDate", "eventWindowEnd"]
 
     @validator('instrument_event_type')
     def instrument_event_type_validate_enum(cls, value):
@@ -90,7 +89,6 @@ class ExerciseEvent(InstrumentEvent):
         _obj = ExerciseEvent.parse_obj({
             "instrument_event_type": obj.get("instrumentEventType"),
             "instrument": LusidInstrument.from_dict(obj.get("instrument")) if obj.get("instrument") is not None else None,
-            "event_status": obj.get("eventStatus"),
             "anchor_date": obj.get("anchorDate"),
             "event_window_end": obj.get("eventWindowEnd")
         })

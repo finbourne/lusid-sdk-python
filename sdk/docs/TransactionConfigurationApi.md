@@ -4,23 +4,23 @@ All URIs are relative to *https://www.lusid.com/api*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
-[**delete_side_definition**](TransactionConfigurationApi.md#delete_side_definition) | **DELETE** /api/transactionconfiguration/sides/{side}/$delete | [EXPERIMENTAL] DeleteSideDefinition: Delete the given side definition
-[**delete_transaction_type**](TransactionConfigurationApi.md#delete_transaction_type) | **DELETE** /api/transactionconfiguration/types/{source}/{type} | [EXPERIMENTAL] DeleteTransactionType: Delete a transaction type
-[**delete_transaction_type_source**](TransactionConfigurationApi.md#delete_transaction_type_source) | **DELETE** /api/transactionconfiguration/types/{source}/$delete | [EXPERIMENTAL] DeleteTransactionTypeSource: Delete all transaction types for the given source and scope
-[**get_side_definition**](TransactionConfigurationApi.md#get_side_definition) | **GET** /api/transactionconfiguration/sides/{side} | [EXPERIMENTAL] GetSideDefinition: Get the side definition for a given side name( or label)
-[**get_transaction_type**](TransactionConfigurationApi.md#get_transaction_type) | **GET** /api/transactionconfiguration/types/{source}/{type} | [EXPERIMENTAL] GetTransactionType: Get a single transaction configuration type
-[**list_side_definitions**](TransactionConfigurationApi.md#list_side_definitions) | **GET** /api/transactionconfiguration/sides | [EXPERIMENTAL] ListSideDefinitions: List the side definitions
-[**list_transaction_types**](TransactionConfigurationApi.md#list_transaction_types) | **GET** /api/transactionconfiguration/types | [EXPERIMENTAL] ListTransactionTypes: List transaction types
-[**set_side_definition**](TransactionConfigurationApi.md#set_side_definition) | **PUT** /api/transactionconfiguration/sides/{side} | [EXPERIMENTAL] SetSideDefinition: Set a side definition
-[**set_side_definitions**](TransactionConfigurationApi.md#set_side_definitions) | **PUT** /api/transactionconfiguration/sides | [EXPERIMENTAL] SetSideDefinitions: Set the given side definitions
-[**set_transaction_type**](TransactionConfigurationApi.md#set_transaction_type) | **PUT** /api/transactionconfiguration/types/{source}/{type} | [EXPERIMENTAL] SetTransactionType: Set a specific transaction type
-[**set_transaction_type_source**](TransactionConfigurationApi.md#set_transaction_type_source) | **PUT** /api/transactionconfiguration/types/{source} | [EXPERIMENTAL] SetTransactionTypeSource: Set the transaction types for the given source and scope
+[**delete_side_definition**](TransactionConfigurationApi.md#delete_side_definition) | **DELETE** /api/transactionconfiguration/sides/{side}/$delete | DeleteSideDefinition: Delete the given side definition
+[**delete_transaction_type**](TransactionConfigurationApi.md#delete_transaction_type) | **DELETE** /api/transactionconfiguration/types/{source}/{type} | DeleteTransactionType: Delete a transaction type
+[**delete_transaction_type_source**](TransactionConfigurationApi.md#delete_transaction_type_source) | **DELETE** /api/transactionconfiguration/types/{source}/$delete | DeleteTransactionTypeSource: Delete all transaction types for the given source and scope
+[**get_side_definition**](TransactionConfigurationApi.md#get_side_definition) | **GET** /api/transactionconfiguration/sides/{side} | GetSideDefinition: Get the side definition for a given side name( or label)
+[**get_transaction_type**](TransactionConfigurationApi.md#get_transaction_type) | **GET** /api/transactionconfiguration/types/{source}/{type} | GetTransactionType: Get a single transaction configuration type
+[**list_side_definitions**](TransactionConfigurationApi.md#list_side_definitions) | **GET** /api/transactionconfiguration/sides | ListSideDefinitions: List the side definitions
+[**list_transaction_types**](TransactionConfigurationApi.md#list_transaction_types) | **GET** /api/transactionconfiguration/types | ListTransactionTypes: List transaction types
+[**set_side_definition**](TransactionConfigurationApi.md#set_side_definition) | **PUT** /api/transactionconfiguration/sides/{side} | SetSideDefinition: Set a side definition
+[**set_side_definitions**](TransactionConfigurationApi.md#set_side_definitions) | **PUT** /api/transactionconfiguration/sides | SetSideDefinitions: Set the given side definitions
+[**set_transaction_type**](TransactionConfigurationApi.md#set_transaction_type) | **PUT** /api/transactionconfiguration/types/{source}/{type} | SetTransactionType: Set a specific transaction type
+[**set_transaction_type_source**](TransactionConfigurationApi.md#set_transaction_type_source) | **PUT** /api/transactionconfiguration/types/{source} | SetTransactionTypeSource: Set the transaction types for the given source and scope
 
 
 # **delete_side_definition**
 > DeletedEntityResponse delete_side_definition(side, scope=scope)
 
-[EXPERIMENTAL] DeleteSideDefinition: Delete the given side definition
+DeleteSideDefinition: Delete the given side definition
 
 Delete the side which user specify in the request.
 
@@ -30,18 +30,18 @@ Delete the side which user specify in the request.
 ```python
 from __future__ import print_function
 import time
-import os
 import lusid
 from lusid.rest import ApiException
 from lusid.models.deleted_entity_response import DeletedEntityResponse
 from pprint import pprint
 
+import os
 from lusid import (
-	  ApiClientFactory,
-	  ApplicationMetadataApi,
-	  EnvironmentVariablesConfigurationLoader,
-	  SecretsFileConfigurationLoader,
-	  ArgsConfigurationLoader
+    ApiClientFactory,
+    TransactionConfigurationApi,
+    EnvironmentVariablesConfigurationLoader,
+    SecretsFileConfigurationLoader,
+    ArgsConfigurationLoader
 )
 
 # Use the lusid ApiClientFactory to build Api instances with a configured api client
@@ -79,7 +79,7 @@ async with api_client_factory:
     scope = 'default' # str | The scope in which the side exists. When not supplied the scope is 'default'. (optional) (default to 'default')
 
     try:
-        # [EXPERIMENTAL] DeleteSideDefinition: Delete the given side definition
+        # DeleteSideDefinition: Delete the given side definition
         api_response = await api_instance.delete_side_definition(side, scope=scope)
         print("The response of TransactionConfigurationApi->delete_side_definition:\n")
         pprint(api_response)
@@ -120,7 +120,7 @@ Name | Type | Description  | Notes
 # **delete_transaction_type**
 > DeletedEntityResponse delete_transaction_type(source, type, scope=scope)
 
-[EXPERIMENTAL] DeleteTransactionType: Delete a transaction type
+DeleteTransactionType: Delete a transaction type
 
 /// WARNING! Changing existing transaction types has a material impact on how data, new and old,  is processed and aggregated by LUSID, and will affect your whole organisation. Only call this API if you are fully aware of the implications of the change.
 
@@ -130,18 +130,18 @@ Name | Type | Description  | Notes
 ```python
 from __future__ import print_function
 import time
-import os
 import lusid
 from lusid.rest import ApiException
 from lusid.models.deleted_entity_response import DeletedEntityResponse
 from pprint import pprint
 
+import os
 from lusid import (
-	  ApiClientFactory,
-	  ApplicationMetadataApi,
-	  EnvironmentVariablesConfigurationLoader,
-	  SecretsFileConfigurationLoader,
-	  ArgsConfigurationLoader
+    ApiClientFactory,
+    TransactionConfigurationApi,
+    EnvironmentVariablesConfigurationLoader,
+    SecretsFileConfigurationLoader,
+    ArgsConfigurationLoader
 )
 
 # Use the lusid ApiClientFactory to build Api instances with a configured api client
@@ -180,7 +180,7 @@ async with api_client_factory:
     scope = 'default' # str | The scope in which the transaction types exists. When not supplied the scope is 'default'. (optional) (default to 'default')
 
     try:
-        # [EXPERIMENTAL] DeleteTransactionType: Delete a transaction type
+        # DeleteTransactionType: Delete a transaction type
         api_response = await api_instance.delete_transaction_type(source, type, scope=scope)
         print("The response of TransactionConfigurationApi->delete_transaction_type:\n")
         pprint(api_response)
@@ -222,7 +222,7 @@ Name | Type | Description  | Notes
 # **delete_transaction_type_source**
 > DeletedEntityResponse delete_transaction_type_source(source, scope=scope)
 
-[EXPERIMENTAL] DeleteTransactionTypeSource: Delete all transaction types for the given source and scope
+DeleteTransactionTypeSource: Delete all transaction types for the given source and scope
 
 Delete all the types for the given source and scope.
 
@@ -232,18 +232,18 @@ Delete all the types for the given source and scope.
 ```python
 from __future__ import print_function
 import time
-import os
 import lusid
 from lusid.rest import ApiException
 from lusid.models.deleted_entity_response import DeletedEntityResponse
 from pprint import pprint
 
+import os
 from lusid import (
-	  ApiClientFactory,
-	  ApplicationMetadataApi,
-	  EnvironmentVariablesConfigurationLoader,
-	  SecretsFileConfigurationLoader,
-	  ArgsConfigurationLoader
+    ApiClientFactory,
+    TransactionConfigurationApi,
+    EnvironmentVariablesConfigurationLoader,
+    SecretsFileConfigurationLoader,
+    ArgsConfigurationLoader
 )
 
 # Use the lusid ApiClientFactory to build Api instances with a configured api client
@@ -281,7 +281,7 @@ async with api_client_factory:
     scope = 'default' # str | The scope in which the transaction types exists. When not supplied the scope is 'default'. (optional) (default to 'default')
 
     try:
-        # [EXPERIMENTAL] DeleteTransactionTypeSource: Delete all transaction types for the given source and scope
+        # DeleteTransactionTypeSource: Delete all transaction types for the given source and scope
         api_response = await api_instance.delete_transaction_type_source(source, scope=scope)
         print("The response of TransactionConfigurationApi->delete_transaction_type_source:\n")
         pprint(api_response)
@@ -322,7 +322,7 @@ Name | Type | Description  | Notes
 # **get_side_definition**
 > SideDefinition get_side_definition(side, scope=scope, as_at=as_at)
 
-[EXPERIMENTAL] GetSideDefinition: Get the side definition for a given side name( or label)
+GetSideDefinition: Get the side definition for a given side name( or label)
 
 Get the side definition user requested.
 
@@ -332,18 +332,18 @@ Get the side definition user requested.
 ```python
 from __future__ import print_function
 import time
-import os
 import lusid
 from lusid.rest import ApiException
 from lusid.models.side_definition import SideDefinition
 from pprint import pprint
 
+import os
 from lusid import (
-	  ApiClientFactory,
-	  ApplicationMetadataApi,
-	  EnvironmentVariablesConfigurationLoader,
-	  SecretsFileConfigurationLoader,
-	  ArgsConfigurationLoader
+    ApiClientFactory,
+    TransactionConfigurationApi,
+    EnvironmentVariablesConfigurationLoader,
+    SecretsFileConfigurationLoader,
+    ArgsConfigurationLoader
 )
 
 # Use the lusid ApiClientFactory to build Api instances with a configured api client
@@ -382,7 +382,7 @@ async with api_client_factory:
     as_at = '2013-10-20T19:20:30+01:00' # datetime | The asAt datetime at which to retrieve the transaction types. Defaults to returning the latest versions if not specified. (optional)
 
     try:
-        # [EXPERIMENTAL] GetSideDefinition: Get the side definition for a given side name( or label)
+        # GetSideDefinition: Get the side definition for a given side name( or label)
         api_response = await api_instance.get_side_definition(side, scope=scope, as_at=as_at)
         print("The response of TransactionConfigurationApi->get_side_definition:\n")
         pprint(api_response)
@@ -424,7 +424,7 @@ Name | Type | Description  | Notes
 # **get_transaction_type**
 > TransactionType get_transaction_type(source, type, as_at=as_at, scope=scope)
 
-[EXPERIMENTAL] GetTransactionType: Get a single transaction configuration type
+GetTransactionType: Get a single transaction configuration type
 
 Get a single transaction type. Returns failure if not found
 
@@ -434,18 +434,18 @@ Get a single transaction type. Returns failure if not found
 ```python
 from __future__ import print_function
 import time
-import os
 import lusid
 from lusid.rest import ApiException
 from lusid.models.transaction_type import TransactionType
 from pprint import pprint
 
+import os
 from lusid import (
-	  ApiClientFactory,
-	  ApplicationMetadataApi,
-	  EnvironmentVariablesConfigurationLoader,
-	  SecretsFileConfigurationLoader,
-	  ArgsConfigurationLoader
+    ApiClientFactory,
+    TransactionConfigurationApi,
+    EnvironmentVariablesConfigurationLoader,
+    SecretsFileConfigurationLoader,
+    ArgsConfigurationLoader
 )
 
 # Use the lusid ApiClientFactory to build Api instances with a configured api client
@@ -485,7 +485,7 @@ async with api_client_factory:
     scope = 'default' # str | The scope in which the transaction types exists. When not supplied the scope is 'default'. (optional) (default to 'default')
 
     try:
-        # [EXPERIMENTAL] GetTransactionType: Get a single transaction configuration type
+        # GetTransactionType: Get a single transaction configuration type
         api_response = await api_instance.get_transaction_type(source, type, as_at=as_at, scope=scope)
         print("The response of TransactionConfigurationApi->get_transaction_type:\n")
         pprint(api_response)
@@ -528,7 +528,7 @@ Name | Type | Description  | Notes
 # **list_side_definitions**
 > ResourceListOfSideDefinition list_side_definitions(as_at=as_at, scope=scope)
 
-[EXPERIMENTAL] ListSideDefinitions: List the side definitions
+ListSideDefinitions: List the side definitions
 
 List all the side definitions in the given scope
 
@@ -538,18 +538,18 @@ List all the side definitions in the given scope
 ```python
 from __future__ import print_function
 import time
-import os
 import lusid
 from lusid.rest import ApiException
 from lusid.models.resource_list_of_side_definition import ResourceListOfSideDefinition
 from pprint import pprint
 
+import os
 from lusid import (
-	  ApiClientFactory,
-	  ApplicationMetadataApi,
-	  EnvironmentVariablesConfigurationLoader,
-	  SecretsFileConfigurationLoader,
-	  ArgsConfigurationLoader
+    ApiClientFactory,
+    TransactionConfigurationApi,
+    EnvironmentVariablesConfigurationLoader,
+    SecretsFileConfigurationLoader,
+    ArgsConfigurationLoader
 )
 
 # Use the lusid ApiClientFactory to build Api instances with a configured api client
@@ -587,7 +587,7 @@ async with api_client_factory:
     scope = 'default' # str | The scope in which the side exists. When not supplied the scope is 'default'. (optional) (default to 'default')
 
     try:
-        # [EXPERIMENTAL] ListSideDefinitions: List the side definitions
+        # ListSideDefinitions: List the side definitions
         api_response = await api_instance.list_side_definitions(as_at=as_at, scope=scope)
         print("The response of TransactionConfigurationApi->list_side_definitions:\n")
         pprint(api_response)
@@ -628,7 +628,7 @@ Name | Type | Description  | Notes
 # **list_transaction_types**
 > Dict[str, List[TransactionType]] list_transaction_types(as_at=as_at, scope=scope)
 
-[EXPERIMENTAL] ListTransactionTypes: List transaction types
+ListTransactionTypes: List transaction types
 
 Get the list of current transaction types. For information on the default transaction types provided with  LUSID, see https://support.lusid.com/knowledgebase/article/KA-01873/.
 
@@ -638,18 +638,18 @@ Get the list of current transaction types. For information on the default transa
 ```python
 from __future__ import print_function
 import time
-import os
 import lusid
 from lusid.rest import ApiException
 from lusid.models.transaction_type import TransactionType
 from pprint import pprint
 
+import os
 from lusid import (
-	  ApiClientFactory,
-	  ApplicationMetadataApi,
-	  EnvironmentVariablesConfigurationLoader,
-	  SecretsFileConfigurationLoader,
-	  ArgsConfigurationLoader
+    ApiClientFactory,
+    TransactionConfigurationApi,
+    EnvironmentVariablesConfigurationLoader,
+    SecretsFileConfigurationLoader,
+    ArgsConfigurationLoader
 )
 
 # Use the lusid ApiClientFactory to build Api instances with a configured api client
@@ -687,7 +687,7 @@ async with api_client_factory:
     scope = 'default' # str | The scope in which the side exists. When not supplied the scope is 'default'. (optional) (default to 'default')
 
     try:
-        # [EXPERIMENTAL] ListTransactionTypes: List transaction types
+        # ListTransactionTypes: List transaction types
         api_response = await api_instance.list_transaction_types(as_at=as_at, scope=scope)
         print("The response of TransactionConfigurationApi->list_transaction_types:\n")
         pprint(api_response)
@@ -728,7 +728,7 @@ Name | Type | Description  | Notes
 # **set_side_definition**
 > SideDefinition set_side_definition(side, side_definition_request, scope=scope)
 
-[EXPERIMENTAL] SetSideDefinition: Set a side definition
+SetSideDefinition: Set a side definition
 
 Set a new side definition for use in a transaction type. For more information, see https://support.lusid.com/knowledgebase/article/KA-01875.
 
@@ -738,19 +738,19 @@ Set a new side definition for use in a transaction type. For more information, s
 ```python
 from __future__ import print_function
 import time
-import os
 import lusid
 from lusid.rest import ApiException
 from lusid.models.side_definition import SideDefinition
 from lusid.models.side_definition_request import SideDefinitionRequest
 from pprint import pprint
 
+import os
 from lusid import (
-	  ApiClientFactory,
-	  ApplicationMetadataApi,
-	  EnvironmentVariablesConfigurationLoader,
-	  SecretsFileConfigurationLoader,
-	  ArgsConfigurationLoader
+    ApiClientFactory,
+    TransactionConfigurationApi,
+    EnvironmentVariablesConfigurationLoader,
+    SecretsFileConfigurationLoader,
+    ArgsConfigurationLoader
 )
 
 # Use the lusid ApiClientFactory to build Api instances with a configured api client
@@ -789,7 +789,7 @@ async with api_client_factory:
     scope = 'default' # str | The scope in which the side exists. When not supplied the scope is 'default'. (optional) (default to 'default')
 
     try:
-        # [EXPERIMENTAL] SetSideDefinition: Set a side definition
+        # SetSideDefinition: Set a side definition
         api_response = await api_instance.set_side_definition(side, side_definition_request, scope=scope)
         print("The response of TransactionConfigurationApi->set_side_definition:\n")
         pprint(api_response)
@@ -831,7 +831,7 @@ Name | Type | Description  | Notes
 # **set_side_definitions**
 > ResourceListOfSideDefinition set_side_definitions(sides_definition_request, scope=scope)
 
-[EXPERIMENTAL] SetSideDefinitions: Set the given side definitions
+SetSideDefinitions: Set the given side definitions
 
 Set a new side definition for use in a transaction type. For more information, see https://support.lusid.com/knowledgebase/article/KA-01875.
 
@@ -841,19 +841,19 @@ Set a new side definition for use in a transaction type. For more information, s
 ```python
 from __future__ import print_function
 import time
-import os
 import lusid
 from lusid.rest import ApiException
 from lusid.models.resource_list_of_side_definition import ResourceListOfSideDefinition
 from lusid.models.sides_definition_request import SidesDefinitionRequest
 from pprint import pprint
 
+import os
 from lusid import (
-	  ApiClientFactory,
-	  ApplicationMetadataApi,
-	  EnvironmentVariablesConfigurationLoader,
-	  SecretsFileConfigurationLoader,
-	  ArgsConfigurationLoader
+    ApiClientFactory,
+    TransactionConfigurationApi,
+    EnvironmentVariablesConfigurationLoader,
+    SecretsFileConfigurationLoader,
+    ArgsConfigurationLoader
 )
 
 # Use the lusid ApiClientFactory to build Api instances with a configured api client
@@ -891,7 +891,7 @@ async with api_client_factory:
     scope = 'default' # str | The scope in which the side exists. When not supplied the scope is 'default'. (optional) (default to 'default')
 
     try:
-        # [EXPERIMENTAL] SetSideDefinitions: Set the given side definitions
+        # SetSideDefinitions: Set the given side definitions
         api_response = await api_instance.set_side_definitions(sides_definition_request, scope=scope)
         print("The response of TransactionConfigurationApi->set_side_definitions:\n")
         pprint(api_response)
@@ -932,7 +932,7 @@ Name | Type | Description  | Notes
 # **set_transaction_type**
 > TransactionType set_transaction_type(source, type, transaction_type_request, scope=scope)
 
-[EXPERIMENTAL] SetTransactionType: Set a specific transaction type
+SetTransactionType: Set a specific transaction type
 
 Set a transaction type for the given source and type. If the requested transaction type does not exist, it will be created    WARNING! Changing existing transaction types has a material impact on how data, new and old, is processed and aggregated by LUSID, and will affect your whole organisation. Only call this API if you are fully aware of the implications of the change.
 
@@ -942,19 +942,19 @@ Set a transaction type for the given source and type. If the requested transacti
 ```python
 from __future__ import print_function
 import time
-import os
 import lusid
 from lusid.rest import ApiException
 from lusid.models.transaction_type import TransactionType
 from lusid.models.transaction_type_request import TransactionTypeRequest
 from pprint import pprint
 
+import os
 from lusid import (
-	  ApiClientFactory,
-	  ApplicationMetadataApi,
-	  EnvironmentVariablesConfigurationLoader,
-	  SecretsFileConfigurationLoader,
-	  ArgsConfigurationLoader
+    ApiClientFactory,
+    TransactionConfigurationApi,
+    EnvironmentVariablesConfigurationLoader,
+    SecretsFileConfigurationLoader,
+    ArgsConfigurationLoader
 )
 
 # Use the lusid ApiClientFactory to build Api instances with a configured api client
@@ -994,7 +994,7 @@ async with api_client_factory:
     scope = 'default' # str | The scope in which the transaction types exists. When not supplied the scope is 'default'. (optional) (default to 'default')
 
     try:
-        # [EXPERIMENTAL] SetTransactionType: Set a specific transaction type
+        # SetTransactionType: Set a specific transaction type
         api_response = await api_instance.set_transaction_type(source, type, transaction_type_request, scope=scope)
         print("The response of TransactionConfigurationApi->set_transaction_type:\n")
         pprint(api_response)
@@ -1037,7 +1037,7 @@ Name | Type | Description  | Notes
 # **set_transaction_type_source**
 > ResourceListOfTransactionType set_transaction_type_source(source, transaction_type_request, scope=scope)
 
-[EXPERIMENTAL] SetTransactionTypeSource: Set the transaction types for the given source and scope
+SetTransactionTypeSource: Set the transaction types for the given source and scope
 
 The complete set of transaction types for the source.
 
@@ -1047,19 +1047,19 @@ The complete set of transaction types for the source.
 ```python
 from __future__ import print_function
 import time
-import os
 import lusid
 from lusid.rest import ApiException
 from lusid.models.resource_list_of_transaction_type import ResourceListOfTransactionType
 from lusid.models.transaction_type_request import TransactionTypeRequest
 from pprint import pprint
 
+import os
 from lusid import (
-	  ApiClientFactory,
-	  ApplicationMetadataApi,
-	  EnvironmentVariablesConfigurationLoader,
-	  SecretsFileConfigurationLoader,
-	  ArgsConfigurationLoader
+    ApiClientFactory,
+    TransactionConfigurationApi,
+    EnvironmentVariablesConfigurationLoader,
+    SecretsFileConfigurationLoader,
+    ArgsConfigurationLoader
 )
 
 # Use the lusid ApiClientFactory to build Api instances with a configured api client
@@ -1098,7 +1098,7 @@ async with api_client_factory:
     scope = 'default' # str | The scope in which the transaction types exists. When not supplied the scope is 'default'. (optional) (default to 'default')
 
     try:
-        # [EXPERIMENTAL] SetTransactionTypeSource: Set the transaction types for the given source and scope
+        # SetTransactionTypeSource: Set the transaction types for the given source and scope
         api_response = await api_instance.set_transaction_type_source(source, transaction_type_request, scope=scope)
         print("The response of TransactionConfigurationApi->set_transaction_type_source:\n")
         pprint(api_response)

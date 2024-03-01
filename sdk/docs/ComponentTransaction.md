@@ -7,6 +7,7 @@ Name | Type | Description | Notes
 **display_name** | **str** |  | 
 **condition** | **str** |  | [optional] 
 **transaction_field_map** | [**TransactionFieldMap**](TransactionFieldMap.md) |  | 
+**transaction_property_map** | [**List[TransactionPropertyMap]**](TransactionPropertyMap.md) |  | 
 
 ## Example
 
