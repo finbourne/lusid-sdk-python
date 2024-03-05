@@ -19,7 +19,7 @@ import json
 
 
 from typing import Any, Dict, List, Optional
-from pydantic import BaseModel, Field, StrictStr, conlist, constr, validator
+from pydantic import BaseModel, Field, StrictBool, StrictStr, conlist, constr, validator
 from lusid.models.date_or_diary_entry import DateOrDiaryEntry
 
 class TrialBalanceQueryParameters(BaseModel):
@@ -28,10 +28,11 @@ class TrialBalanceQueryParameters(BaseModel):
     """
     start: Optional[DateOrDiaryEntry] = None
     end: Optional[DateOrDiaryEntry] = None
-    date_mode: Optional[StrictStr] = Field(None, alias="dateMode", description="The mode of calculation of the journal entry lines. The available values are: ActivityDate.")
-    general_ledger_profile_code: Optional[constr(strict=True, max_length=64, min_length=1)] = Field(None, alias="generalLedgerProfileCode", description="The optional code of a general ledger profile used to decorate journal entry lines with levels.")
-    property_keys: Optional[conlist(StrictStr)] = Field(None, alias="propertyKeys", description="A list of property keys from the 'Instrument', 'Transaction', 'Portfolio', 'Account', 'LegalEntity' or 'CustodianAccount' domain to decorate onto the journal entry lines.")
-    __properties = ["start", "end", "dateMode", "generalLedgerProfileCode", "propertyKeys"]
+    date_mode: Optional[StrictStr] = Field(None, alias="dateMode", description="The mode of calculation of the trial balance. The available values are: ActivityDate.")
+    general_ledger_profile_code: Optional[constr(strict=True, max_length=64, min_length=1)] = Field(None, alias="generalLedgerProfileCode", description="The optional code of a general ledger profile used to decorate trial balance with levels.")
+    property_keys: Optional[conlist(StrictStr)] = Field(None, alias="propertyKeys", description="A list of property keys from the 'Instrument', 'Transaction', 'Portfolio', 'Account', 'LegalEntity' or 'CustodianAccount' domain to decorate onto the trial balance.")
+    exclude_cleardown_module: Optional[StrictBool] = Field(None, alias="excludeCleardownModule", description="By deafult this flag is set to false, if this is set to true, no cleardown module will be applied to the trial balance.")
+    __properties = ["start", "end", "dateMode", "generalLedgerProfileCode", "propertyKeys", "excludeCleardownModule"]
 
     @validator('general_ledger_profile_code')
     def general_ledger_profile_code_validate_regular_expression(cls, value):
@@ -104,6 +105,7 @@ class TrialBalanceQueryParameters(BaseModel):
             "end": DateOrDiaryEntry.from_dict(obj.get("end")) if obj.get("end") is not None else None,
             "date_mode": obj.get("dateMode"),
             "general_ledger_profile_code": obj.get("generalLedgerProfileCode"),
-            "property_keys": obj.get("propertyKeys")
+            "property_keys": obj.get("propertyKeys"),
+            "exclude_cleardown_module": obj.get("excludeCleardownModule")
         })
         return _obj
