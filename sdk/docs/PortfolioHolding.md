@@ -18,6 +18,9 @@ Name | Type | Description | Notes
 **currency** | **str** | The holding currency. | [optional] 
 **holding_type_name** | **str** | The decoded type of the holding e.g. Position, Balance, CashCommitment, Receivable, ForwardFX etc. | [optional] 
 **holding_id** | **int** | A single identifier for the holding within the portfolio. The holdingId is constructed from the LusidInstrumentId, sub-holding keys and currrency and is unique within the portfolio. | [optional] 
+**notional_cost** | [**CurrencyAndAmount**](CurrencyAndAmount.md) |  | [optional] 
+**amortised_cost** | [**CurrencyAndAmount**](CurrencyAndAmount.md) |  | [optional] 
+**amortised_cost_portfolio_ccy** | [**CurrencyAndAmount**](CurrencyAndAmount.md) |  | [optional] 
 
 ## Example
 

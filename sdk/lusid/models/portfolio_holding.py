@@ -42,7 +42,10 @@ class PortfolioHolding(BaseModel):
     currency: Optional[StrictStr] = Field(None, description="The holding currency.")
     holding_type_name: Optional[StrictStr] = Field(None, alias="holdingTypeName", description="The decoded type of the holding e.g. Position, Balance, CashCommitment, Receivable, ForwardFX etc.")
     holding_id: Optional[StrictInt] = Field(None, alias="holdingId", description="A single identifier for the holding within the portfolio. The holdingId is constructed from the LusidInstrumentId, sub-holding keys and currrency and is unique within the portfolio.")
-    __properties = ["instrumentScope", "instrumentUid", "subHoldingKeys", "properties", "holdingType", "units", "settledUnits", "cost", "costPortfolioCcy", "transaction", "currency", "holdingTypeName", "holdingId"]
+    notional_cost: Optional[CurrencyAndAmount] = Field(None, alias="notionalCost")
+    amortised_cost: Optional[CurrencyAndAmount] = Field(None, alias="amortisedCost")
+    amortised_cost_portfolio_ccy: Optional[CurrencyAndAmount] = Field(None, alias="amortisedCostPortfolioCcy")
+    __properties = ["instrumentScope", "instrumentUid", "subHoldingKeys", "properties", "holdingType", "units", "settledUnits", "cost", "costPortfolioCcy", "transaction", "currency", "holdingTypeName", "holdingId", "notionalCost", "amortisedCost", "amortisedCostPortfolioCcy"]
 
     class Config:
         """Pydantic configuration"""
@@ -91,6 +94,15 @@ class PortfolioHolding(BaseModel):
         # override the default output from pydantic by calling `to_dict()` of transaction
         if self.transaction:
             _dict['transaction'] = self.transaction.to_dict()
+        # override the default output from pydantic by calling `to_dict()` of notional_cost
+        if self.notional_cost:
+            _dict['notionalCost'] = self.notional_cost.to_dict()
+        # override the default output from pydantic by calling `to_dict()` of amortised_cost
+        if self.amortised_cost:
+            _dict['amortisedCost'] = self.amortised_cost.to_dict()
+        # override the default output from pydantic by calling `to_dict()` of amortised_cost_portfolio_ccy
+        if self.amortised_cost_portfolio_ccy:
+            _dict['amortisedCostPortfolioCcy'] = self.amortised_cost_portfolio_ccy.to_dict()
         # set to None if instrument_scope (nullable) is None
         # and __fields_set__ contains the field
         if self.instrument_scope is None and "instrument_scope" in self.__fields_set__:
@@ -155,6 +167,9 @@ class PortfolioHolding(BaseModel):
             "transaction": Transaction.from_dict(obj.get("transaction")) if obj.get("transaction") is not None else None,
             "currency": obj.get("currency"),
             "holding_type_name": obj.get("holdingTypeName"),
-            "holding_id": obj.get("holdingId")
+            "holding_id": obj.get("holdingId"),
+            "notional_cost": CurrencyAndAmount.from_dict(obj.get("notionalCost")) if obj.get("notionalCost") is not None else None,
+            "amortised_cost": CurrencyAndAmount.from_dict(obj.get("amortisedCost")) if obj.get("amortisedCost") is not None else None,
+            "amortised_cost_portfolio_ccy": CurrencyAndAmount.from_dict(obj.get("amortisedCostPortfolioCcy")) if obj.get("amortisedCostPortfolioCcy") is not None else None
         })
         return _obj
