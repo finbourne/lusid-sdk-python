@@ -8,6 +8,7 @@ Method | HTTP request | Description
 [**delete_transaction_template**](InstrumentEventTypesApi.md#delete_transaction_template) | **DELETE** /api/instrumenteventtypes/{instrumentEventType}/transactiontemplates/{instrumentType}/{scope} | [EXPERIMENTAL] DeleteTransactionTemplate: Delete Transaction Template
 [**get_transaction_template**](InstrumentEventTypesApi.md#get_transaction_template) | **GET** /api/instrumenteventtypes/{instrumentEventType}/transactiontemplates/{instrumentType}/{scope} | [EXPERIMENTAL] GetTransactionTemplate: Get Transaction Template
 [**get_transaction_template_specification**](InstrumentEventTypesApi.md#get_transaction_template_specification) | **GET** /api/instrumenteventtypes/{instrumentEventType}/transactiontemplatespecification | [EXPERIMENTAL] GetTransactionTemplateSpecification: Get Transaction Template Specification.
+[**list_transaction_template_specifications**](InstrumentEventTypesApi.md#list_transaction_template_specifications) | **GET** /api/instrumenteventtypes/transactiontemplatespecifications | [EXPERIMENTAL] ListTransactionTemplateSpecifications: List Transaction Template Specifications.
 [**list_transaction_templates**](InstrumentEventTypesApi.md#list_transaction_templates) | **GET** /api/instrumenteventtypes/transactiontemplates | [EXPERIMENTAL] ListTransactionTemplates: List Transaction Templates
 [**update_transaction_template**](InstrumentEventTypesApi.md#update_transaction_template) | **PUT** /api/instrumenteventtypes/{instrumentEventType}/transactiontemplates/{instrumentType}/{scope} | [EXPERIMENTAL] UpdateTransactionTemplate: Update Transaction Template
 
@@ -415,6 +416,112 @@ Name | Type | Description  | Notes
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 **200** | The requested Transaction Template Specification. |  -  |
+**400** | The details of the input related failure |  -  |
+**0** | Error response |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **list_transaction_template_specifications**
+> PagedResourceListOfTransactionTemplateSpecification list_transaction_template_specifications(as_at=as_at, page=page, limit=limit, filter=filter, sort_by=sort_by)
+
+[EXPERIMENTAL] ListTransactionTemplateSpecifications: List Transaction Template Specifications.
+
+Retrieves all transaction template specifications.
+
+### Example
+
+* OAuth Authentication (oauth2):
+```python
+from __future__ import print_function
+import time
+import lusid
+from lusid.rest import ApiException
+from lusid.models.paged_resource_list_of_transaction_template_specification import PagedResourceListOfTransactionTemplateSpecification
+from pprint import pprint
+
+import os
+from lusid import (
+    ApiClientFactory,
+    InstrumentEventTypesApi,
+    EnvironmentVariablesConfigurationLoader,
+    SecretsFileConfigurationLoader,
+    ArgsConfigurationLoader
+)
+
+# Use the lusid ApiClientFactory to build Api instances with a configured api client
+# By default this will read config from environment variables
+# Then from a secrets.json file found in the current working directory
+api_client_factory = ApiClientFactory()
+
+# The ApiClientFactory can be passed an iterable of configuration loaders to read configuration from
+
+api_url = "https://www.lusid.com/api"
+# Path to a secrets.json file containing authentication credentials
+# See https://support.lusid.com/knowledgebase/article/KA-01667/en-us
+# for a detailed guide to setting up the SDK make authenticated calls to LUSID APIs
+secrets_path = os.getenv("FBN_SECRETS_PATH")
+app_name="LusidJupyterNotebook"
+
+config_loaders = [
+	EnvironmentVariablesConfigurationLoader(),
+	SecretsFileConfigurationLoader(api_secrets_file=secrets_path),
+	ArgsConfigurationLoader(api_url=api_url, app_name=app_name)
+]
+api_client_factory = ApiClientFactory(config_loaders=config_loaders)
+
+
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+
+
+
+# Enter a context with an instance of the ApiClientFactory to ensure the connection pool is closed after use
+async with api_client_factory:
+    # Create an instance of the API class
+    api_instance = api_client_factory.build(lusid.InstrumentEventTypesApi)
+    as_at = '2013-10-20T19:20:30+01:00' # datetime | AsAt of the request (optional)
+    page = 'page_example' # str | The pagination token to use to continue listing Transaction Template Specifications from              a previous call to list Transaction Template Specifications.              This value is returned from the previous call. If a pagination token is provided the sortBy, filter, and asAt              fields must not have changed since the original request. (optional)
+    limit = 56 # int | When paginating, limit the number of returned results to this many. (optional)
+    filter = 'filter_example' # str | Expression to filter the result set. Read more about filtering results from LUSID here:              https://support.lusid.com/filtering-results-from-lusid. (optional)
+    sort_by = ['sort_by_example'] # List[str] | A list of field names to sort by, each suffixed by \" ASC\" or \" DESC\". (optional)
+
+    try:
+        # [EXPERIMENTAL] ListTransactionTemplateSpecifications: List Transaction Template Specifications.
+        api_response = await api_instance.list_transaction_template_specifications(as_at=as_at, page=page, limit=limit, filter=filter, sort_by=sort_by)
+        print("The response of InstrumentEventTypesApi->list_transaction_template_specifications:\n")
+        pprint(api_response)
+    except Exception as e:
+        print("Exception when calling InstrumentEventTypesApi->list_transaction_template_specifications: %s\n" % e)
+```
+
+
+### Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **as_at** | **datetime**| AsAt of the request | [optional] 
+ **page** | **str**| The pagination token to use to continue listing Transaction Template Specifications from              a previous call to list Transaction Template Specifications.              This value is returned from the previous call. If a pagination token is provided the sortBy, filter, and asAt              fields must not have changed since the original request. | [optional] 
+ **limit** | **int**| When paginating, limit the number of returned results to this many. | [optional] 
+ **filter** | **str**| Expression to filter the result set. Read more about filtering results from LUSID here:              https://support.lusid.com/filtering-results-from-lusid. | [optional] 
+ **sort_by** | [**List[str]**](str.md)| A list of field names to sort by, each suffixed by \&quot; ASC\&quot; or \&quot; DESC\&quot;. | [optional] 
+
+### Return type
+
+[**PagedResourceListOfTransactionTemplateSpecification**](PagedResourceListOfTransactionTemplateSpecification.md)
+
+### Authorization
+
+[oauth2](../README.md#oauth2)
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: text/plain, application/json, text/json
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | The Transaction Template Specifications. |  -  |
 **400** | The details of the input related failure |  -  |
 **0** | Error response |  -  |
 
