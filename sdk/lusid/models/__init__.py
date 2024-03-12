@@ -237,6 +237,7 @@ from lusid.models.date_range import DateRange
 from lusid.models.date_time_comparison_type import DateTimeComparisonType
 from lusid.models.date_time_compliance_parameter import DateTimeComplianceParameter
 from lusid.models.date_time_list_compliance_parameter import DateTimeListComplianceParameter
+from lusid.models.day_month import DayMonth
 from lusid.models.day_of_week import DayOfWeek
 from lusid.models.decimal_compliance_parameter import DecimalComplianceParameter
 from lusid.models.decimal_list import DecimalList
@@ -309,6 +310,9 @@ from lusid.models.flow_convention_name import FlowConventionName
 from lusid.models.flow_conventions import FlowConventions
 from lusid.models.forward_rate_agreement import ForwardRateAgreement
 from lusid.models.from_recipe import FromRecipe
+from lusid.models.fund import Fund
+from lusid.models.fund_properties import FundProperties
+from lusid.models.fund_request import FundRequest
 from lusid.models.fund_share_class import FundShareClass
 from lusid.models.funding_leg import FundingLeg
 from lusid.models.funding_leg_options import FundingLegOptions
@@ -399,6 +403,7 @@ from lusid.models.instrument_payment_diary import InstrumentPaymentDiary
 from lusid.models.instrument_payment_diary_leg import InstrumentPaymentDiaryLeg
 from lusid.models.instrument_payment_diary_row import InstrumentPaymentDiaryRow
 from lusid.models.instrument_properties import InstrumentProperties
+from lusid.models.instrument_resolution_detail import InstrumentResolutionDetail
 from lusid.models.instrument_search_property import InstrumentSearchProperty
 from lusid.models.instrument_type import InstrumentType
 from lusid.models.interest_rate_swap import InterestRateSwap
@@ -521,6 +526,7 @@ from lusid.models.paged_resource_list_of_data_type_summary import PagedResourceL
 from lusid.models.paged_resource_list_of_dialect_id import PagedResourceListOfDialectId
 from lusid.models.paged_resource_list_of_diary_entry import PagedResourceListOfDiaryEntry
 from lusid.models.paged_resource_list_of_execution import PagedResourceListOfExecution
+from lusid.models.paged_resource_list_of_fund import PagedResourceListOfFund
 from lusid.models.paged_resource_list_of_general_ledger_profile_response import PagedResourceListOfGeneralLedgerProfileResponse
 from lusid.models.paged_resource_list_of_instrument import PagedResourceListOfInstrument
 from lusid.models.paged_resource_list_of_instrument_event_holder import PagedResourceListOfInstrumentEventHolder
@@ -538,6 +544,7 @@ from lusid.models.paged_resource_list_of_portfolio_group_search_result import Pa
 from lusid.models.paged_resource_list_of_portfolio_search_result import PagedResourceListOfPortfolioSearchResult
 from lusid.models.paged_resource_list_of_posting_module_response import PagedResourceListOfPostingModuleResponse
 from lusid.models.paged_resource_list_of_posting_module_rule import PagedResourceListOfPostingModuleRule
+from lusid.models.paged_resource_list_of_property_definition import PagedResourceListOfPropertyDefinition
 from lusid.models.paged_resource_list_of_property_definition_search_result import PagedResourceListOfPropertyDefinitionSearchResult
 from lusid.models.paged_resource_list_of_reconciliation import PagedResourceListOfReconciliation
 from lusid.models.paged_resource_list_of_reference_list_response import PagedResourceListOfReferenceListResponse

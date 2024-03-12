@@ -62,6 +62,7 @@ class PropertyDomain(str, Enum):
     CUSTODIANACCOUNT = 'CustodianAccount'
     ABOR = 'Abor'
     ABORCONFIGURATION = 'AborConfiguration'
+    FUND = 'Fund'
     RECONCILIATION = 'Reconciliation'
     PROPERTYDEFINITION = 'PropertyDefinition'
     COMPLIANCE = 'Compliance'
