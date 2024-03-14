@@ -6,7 +6,7 @@ Batch trade ticket creation response
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **values** | [**List[LusidTradeTicket]**](LusidTradeTicket.md) |  | 
-**failures** | **List[str]** |  | 
+**failures** | [**List[ErrorDetail]**](ErrorDetail.md) |  | 
 
 ## Example
 

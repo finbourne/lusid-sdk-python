@@ -46,7 +46,6 @@ class PricingModel(str, Enum):
     FORWARDFROMCURVEUNDISCOUNTED = 'ForwardFromCurveUndiscounted'
     BLACKSCHOLESDIGITAL = 'BlackScholesDigital'
     BJERKSUNDSTENSLAND1993 = 'BjerksundStensland1993'
-    LOOKUPPRICING = 'LookUpPricing'
     BONDLOOKUPPRICER = 'BondLookupPricer'
     FLEXIBLELOANPRICER = 'FlexibleLoanPricer'
 

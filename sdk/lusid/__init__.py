@@ -500,7 +500,6 @@ from lusid.models.list_aggregation_response import ListAggregationResponse
 from lusid.models.list_complex_market_data_with_meta_data_response import ListComplexMarketDataWithMetaDataResponse
 from lusid.models.loan_period import LoanPeriod
 from lusid.models.lock_period_diary_entry_request import LockPeriodDiaryEntryRequest
-from lusid.models.look_up_pricing_model_options import LookUpPricingModelOptions
 from lusid.models.lusid_instrument import LusidInstrument
 from lusid.models.lusid_problem_details import LusidProblemDetails
 from lusid.models.lusid_trade_ticket import LusidTradeTicket

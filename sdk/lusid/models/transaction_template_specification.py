@@ -28,10 +28,11 @@ class TransactionTemplateSpecification(BaseModel):
     TransactionTemplateSpecification
     """
     instrument_event_type: constr(strict=True, min_length=1) = Field(..., alias="instrumentEventType")
+    supported_instrument_types: conlist(StrictStr) = Field(..., alias="supportedInstrumentTypes")
     supported_participation_types: conlist(StrictStr) = Field(..., alias="supportedParticipationTypes")
     supported_election_types: conlist(ElectionSpecification) = Field(..., alias="supportedElectionTypes")
     supported_template_fields: conlist(TemplateField) = Field(..., alias="supportedTemplateFields")
-    __properties = ["instrumentEventType", "supportedParticipationTypes", "supportedElectionTypes", "supportedTemplateFields"]
+    __properties = ["instrumentEventType", "supportedInstrumentTypes", "supportedParticipationTypes", "supportedElectionTypes", "supportedTemplateFields"]
 
     class Config:
         """Pydantic configuration"""
@@ -84,6 +85,7 @@ class TransactionTemplateSpecification(BaseModel):
 
         _obj = TransactionTemplateSpecification.parse_obj({
             "instrument_event_type": obj.get("instrumentEventType"),
+            "supported_instrument_types": obj.get("supportedInstrumentTypes"),
             "supported_participation_types": obj.get("supportedParticipationTypes"),
             "supported_election_types": [ElectionSpecification.from_dict(_item) for _item in obj.get("supportedElectionTypes")] if obj.get("supportedElectionTypes") is not None else None,
             "supported_template_fields": [TemplateField.from_dict(_item) for _item in obj.get("supportedTemplateFields")] if obj.get("supportedTemplateFields") is not None else None

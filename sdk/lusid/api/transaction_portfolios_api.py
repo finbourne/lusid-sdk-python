@@ -1566,7 +1566,7 @@ class TransactionPortfoliosApi:
     def create_trade_ticket(self, scope : Annotated[constr(strict=True, max_length=64, min_length=1), Field(..., description="The scope of the transaction portfolio.")], code : Annotated[constr(strict=True, max_length=64, min_length=1), Field(..., description="The code of the transaction portfolio. Together with the scope this uniquely identifies              the transaction portfolio.")], lusid_trade_ticket : Annotated[Optional[LusidTradeTicket], Field(description="the trade ticket to upsert")] = None, async_req: Optional[bool]=None, **kwargs) -> Union[LusidTradeTicket, Awaitable[LusidTradeTicket]]:  # noqa: E501
         """[EARLY ACCESS] CreateTradeTicket: Create Trade Ticket  # noqa: E501
 
-        Upsert a trade ticket. This is broadly equivalent to a singular call to upsert an instrument, then a counterparty and finally  a transaction that makes use of the two. It can be viewed as a utility function or part of a workflow more familiar to users  with OTC systems than flow and equity trading ones.  # noqa: E501
+        Upsert a trade ticket. Broadly equivalent to a singular call to upsert an instrument, then a counterparty and finally  a transaction that makes use of the two. It can be viewed as a utility function or part of a workflow more familiar to users  with OTC systems than flow and equity trading ones.  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
 
@@ -1602,7 +1602,7 @@ class TransactionPortfoliosApi:
     def create_trade_ticket_with_http_info(self, scope : Annotated[constr(strict=True, max_length=64, min_length=1), Field(..., description="The scope of the transaction portfolio.")], code : Annotated[constr(strict=True, max_length=64, min_length=1), Field(..., description="The code of the transaction portfolio. Together with the scope this uniquely identifies              the transaction portfolio.")], lusid_trade_ticket : Annotated[Optional[LusidTradeTicket], Field(description="the trade ticket to upsert")] = None, **kwargs) -> ApiResponse:  # noqa: E501
         """[EARLY ACCESS] CreateTradeTicket: Create Trade Ticket  # noqa: E501
 
-        Upsert a trade ticket. This is broadly equivalent to a singular call to upsert an instrument, then a counterparty and finally  a transaction that makes use of the two. It can be viewed as a utility function or part of a workflow more familiar to users  with OTC systems than flow and equity trading ones.  # noqa: E501
+        Upsert a trade ticket. Broadly equivalent to a singular call to upsert an instrument, then a counterparty and finally  a transaction that makes use of the two. It can be viewed as a utility function or part of a workflow more familiar to users  with OTC systems than flow and equity trading ones.  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
 

@@ -41,10 +41,11 @@ class LusidTradeTicket(BaseModel):
     instrument_name: Optional[constr(strict=True, max_length=256, min_length=0)] = Field(None, alias="instrumentName", description="Name of instrument")
     instrument_definition: Optional[LusidInstrument] = Field(None, alias="instrumentDefinition")
     counterparty_agreement_id: Optional[ResourceId] = Field(None, alias="counterpartyAgreementId")
+    counterparty: Optional[constr(strict=True, max_length=256, min_length=0)] = Field(None, description="Counterparty")
     instrument_properties: Optional[conlist(ModelProperty)] = Field(None, alias="instrumentProperties", description="Set of instrument properties (as defined by client/user).")
     transaction_properties: Optional[conlist(ModelProperty)] = Field(None, alias="transactionProperties", description="Set of transaction properties (as defined by client/user).")
     trade_ticket_type: StrictStr = Field(..., alias="tradeTicketType", description="The available values are: LusidTradeTicket, ExternalTradeTicket")
-    __properties = ["transactionId", "transactionType", "source", "transactionDate", "settlementDate", "totalConsideration", "units", "instrumentIdentifiers", "instrumentScope", "instrumentName", "instrumentDefinition", "counterpartyAgreementId", "instrumentProperties", "transactionProperties", "tradeTicketType"]
+    __properties = ["transactionId", "transactionType", "source", "transactionDate", "settlementDate", "totalConsideration", "units", "instrumentIdentifiers", "instrumentScope", "instrumentName", "instrumentDefinition", "counterpartyAgreementId", "counterparty", "instrumentProperties", "transactionProperties", "tradeTicketType"]
 
     @validator('instrument_scope')
     def instrument_scope_validate_regular_expression(cls, value):
@@ -125,6 +126,11 @@ class LusidTradeTicket(BaseModel):
         if self.instrument_name is None and "instrument_name" in self.__fields_set__:
             _dict['instrumentName'] = None
 
+        # set to None if counterparty (nullable) is None
+        # and __fields_set__ contains the field
+        if self.counterparty is None and "counterparty" in self.__fields_set__:
+            _dict['counterparty'] = None
+
         # set to None if instrument_properties (nullable) is None
         # and __fields_set__ contains the field
         if self.instrument_properties is None and "instrument_properties" in self.__fields_set__:
@@ -159,6 +165,7 @@ class LusidTradeTicket(BaseModel):
             "instrument_name": obj.get("instrumentName"),
             "instrument_definition": LusidInstrument.from_dict(obj.get("instrumentDefinition")) if obj.get("instrumentDefinition") is not None else None,
             "counterparty_agreement_id": ResourceId.from_dict(obj.get("counterpartyAgreementId")) if obj.get("counterpartyAgreementId") is not None else None,
+            "counterparty": obj.get("counterparty"),
             "instrument_properties": [ModelProperty.from_dict(_item) for _item in obj.get("instrumentProperties")] if obj.get("instrumentProperties") is not None else None,
             "transaction_properties": [ModelProperty.from_dict(_item) for _item in obj.get("transactionProperties")] if obj.get("transactionProperties") is not None else None,
             "trade_ticket_type": obj.get("tradeTicketType")

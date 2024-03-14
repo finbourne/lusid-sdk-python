@@ -19,7 +19,8 @@ import json
 
 
 from typing import Any, Dict, List
-from pydantic import BaseModel, Field, StrictStr, conlist
+from pydantic import BaseModel, Field, conlist
+from lusid.models.error_detail import ErrorDetail
 from lusid.models.lusid_trade_ticket import LusidTradeTicket
 
 class CreateTradeTicketsResponse(BaseModel):
@@ -27,7 +28,7 @@ class CreateTradeTicketsResponse(BaseModel):
     Batch trade ticket creation response  # noqa: E501
     """
     values: conlist(LusidTradeTicket) = Field(...)
-    failures: conlist(StrictStr) = Field(...)
+    failures: conlist(ErrorDetail) = Field(...)
     __properties = ["values", "failures"]
 
     class Config:
@@ -61,6 +62,13 @@ class CreateTradeTicketsResponse(BaseModel):
                 if _item:
                     _items.append(_item.to_dict())
             _dict['values'] = _items
+        # override the default output from pydantic by calling `to_dict()` of each item in failures (list)
+        _items = []
+        if self.failures:
+            for _item in self.failures:
+                if _item:
+                    _items.append(_item.to_dict())
+            _dict['failures'] = _items
         return _dict
 
     @classmethod
@@ -74,6 +82,6 @@ class CreateTradeTicketsResponse(BaseModel):
 
         _obj = CreateTradeTicketsResponse.parse_obj({
             "values": [LusidTradeTicket.from_dict(_item) for _item in obj.get("values")] if obj.get("values") is not None else None,
-            "failures": obj.get("failures")
+            "failures": [ErrorDetail.from_dict(_item) for _item in obj.get("failures")] if obj.get("failures") is not None else None
         })
         return _obj

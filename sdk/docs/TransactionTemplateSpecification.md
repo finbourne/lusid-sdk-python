@@ -5,6 +5,7 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **instrument_event_type** | **str** |  | 
+**supported_instrument_types** | **List[str]** |  | 
 **supported_participation_types** | **List[str]** |  | 
 **supported_election_types** | [**List[ElectionSpecification]**](ElectionSpecification.md) |  | 
 **supported_template_fields** | [**List[TemplateField]**](TemplateField.md) |  | 
