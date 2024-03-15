@@ -21,6 +21,7 @@ import json
 from typing import Any, Dict, List
 from pydantic import BaseModel, Field, StrictStr, conlist, constr
 from lusid.models.election_specification import ElectionSpecification
+from lusid.models.eligibility_calculation import EligibilityCalculation
 from lusid.models.template_field import TemplateField
 
 class TransactionTemplateSpecification(BaseModel):
@@ -32,7 +33,8 @@ class TransactionTemplateSpecification(BaseModel):
     supported_participation_types: conlist(StrictStr) = Field(..., alias="supportedParticipationTypes")
     supported_election_types: conlist(ElectionSpecification) = Field(..., alias="supportedElectionTypes")
     supported_template_fields: conlist(TemplateField) = Field(..., alias="supportedTemplateFields")
-    __properties = ["instrumentEventType", "supportedInstrumentTypes", "supportedParticipationTypes", "supportedElectionTypes", "supportedTemplateFields"]
+    eligibility_calculation: EligibilityCalculation = Field(..., alias="eligibilityCalculation")
+    __properties = ["instrumentEventType", "supportedInstrumentTypes", "supportedParticipationTypes", "supportedElectionTypes", "supportedTemplateFields", "eligibilityCalculation"]
 
     class Config:
         """Pydantic configuration"""
@@ -72,6 +74,9 @@ class TransactionTemplateSpecification(BaseModel):
                 if _item:
                     _items.append(_item.to_dict())
             _dict['supportedTemplateFields'] = _items
+        # override the default output from pydantic by calling `to_dict()` of eligibility_calculation
+        if self.eligibility_calculation:
+            _dict['eligibilityCalculation'] = self.eligibility_calculation.to_dict()
         return _dict
 
     @classmethod
@@ -88,6 +93,7 @@ class TransactionTemplateSpecification(BaseModel):
             "supported_instrument_types": obj.get("supportedInstrumentTypes"),
             "supported_participation_types": obj.get("supportedParticipationTypes"),
             "supported_election_types": [ElectionSpecification.from_dict(_item) for _item in obj.get("supportedElectionTypes")] if obj.get("supportedElectionTypes") is not None else None,
-            "supported_template_fields": [TemplateField.from_dict(_item) for _item in obj.get("supportedTemplateFields")] if obj.get("supportedTemplateFields") is not None else None
+            "supported_template_fields": [TemplateField.from_dict(_item) for _item in obj.get("supportedTemplateFields")] if obj.get("supportedTemplateFields") is not None else None,
+            "eligibility_calculation": EligibilityCalculation.from_dict(obj.get("eligibilityCalculation")) if obj.get("eligibilityCalculation") is not None else None
         })
         return _obj

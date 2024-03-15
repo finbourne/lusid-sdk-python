@@ -9,6 +9,7 @@ Name | Type | Description | Notes
 **supported_participation_types** | **List[str]** |  | 
 **supported_election_types** | [**List[ElectionSpecification]**](ElectionSpecification.md) |  | 
 **supported_template_fields** | [**List[TemplateField]**](TemplateField.md) |  | 
+**eligibility_calculation** | [**EligibilityCalculation**](EligibilityCalculation.md) |  | 
 
 ## Example
 

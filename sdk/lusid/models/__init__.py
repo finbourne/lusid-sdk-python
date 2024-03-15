@@ -269,6 +269,7 @@ from lusid.models.economic_dependency_type import EconomicDependencyType
 from lusid.models.economic_dependency_with_complex_market_data import EconomicDependencyWithComplexMarketData
 from lusid.models.economic_dependency_with_quote import EconomicDependencyWithQuote
 from lusid.models.election_specification import ElectionSpecification
+from lusid.models.eligibility_calculation import EligibilityCalculation
 from lusid.models.empty_model_options import EmptyModelOptions
 from lusid.models.entity_identifier import EntityIdentifier
 from lusid.models.equity import Equity
