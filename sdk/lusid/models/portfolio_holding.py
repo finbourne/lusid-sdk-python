@@ -45,7 +45,9 @@ class PortfolioHolding(BaseModel):
     notional_cost: Optional[CurrencyAndAmount] = Field(None, alias="notionalCost")
     amortised_cost: Optional[CurrencyAndAmount] = Field(None, alias="amortisedCost")
     amortised_cost_portfolio_ccy: Optional[CurrencyAndAmount] = Field(None, alias="amortisedCostPortfolioCcy")
-    __properties = ["instrumentScope", "instrumentUid", "subHoldingKeys", "properties", "holdingType", "units", "settledUnits", "cost", "costPortfolioCcy", "transaction", "currency", "holdingTypeName", "holdingId", "notionalCost", "amortisedCost", "amortisedCostPortfolioCcy"]
+    variation_margin: Optional[CurrencyAndAmount] = Field(None, alias="variationMargin")
+    variation_margin_portfolio_ccy: Optional[CurrencyAndAmount] = Field(None, alias="variationMarginPortfolioCcy")
+    __properties = ["instrumentScope", "instrumentUid", "subHoldingKeys", "properties", "holdingType", "units", "settledUnits", "cost", "costPortfolioCcy", "transaction", "currency", "holdingTypeName", "holdingId", "notionalCost", "amortisedCost", "amortisedCostPortfolioCcy", "variationMargin", "variationMarginPortfolioCcy"]
 
     class Config:
         """Pydantic configuration"""
@@ -103,6 +105,12 @@ class PortfolioHolding(BaseModel):
         # override the default output from pydantic by calling `to_dict()` of amortised_cost_portfolio_ccy
         if self.amortised_cost_portfolio_ccy:
             _dict['amortisedCostPortfolioCcy'] = self.amortised_cost_portfolio_ccy.to_dict()
+        # override the default output from pydantic by calling `to_dict()` of variation_margin
+        if self.variation_margin:
+            _dict['variationMargin'] = self.variation_margin.to_dict()
+        # override the default output from pydantic by calling `to_dict()` of variation_margin_portfolio_ccy
+        if self.variation_margin_portfolio_ccy:
+            _dict['variationMarginPortfolioCcy'] = self.variation_margin_portfolio_ccy.to_dict()
         # set to None if instrument_scope (nullable) is None
         # and __fields_set__ contains the field
         if self.instrument_scope is None and "instrument_scope" in self.__fields_set__:
@@ -170,6 +178,8 @@ class PortfolioHolding(BaseModel):
             "holding_id": obj.get("holdingId"),
             "notional_cost": CurrencyAndAmount.from_dict(obj.get("notionalCost")) if obj.get("notionalCost") is not None else None,
             "amortised_cost": CurrencyAndAmount.from_dict(obj.get("amortisedCost")) if obj.get("amortisedCost") is not None else None,
-            "amortised_cost_portfolio_ccy": CurrencyAndAmount.from_dict(obj.get("amortisedCostPortfolioCcy")) if obj.get("amortisedCostPortfolioCcy") is not None else None
+            "amortised_cost_portfolio_ccy": CurrencyAndAmount.from_dict(obj.get("amortisedCostPortfolioCcy")) if obj.get("amortisedCostPortfolioCcy") is not None else None,
+            "variation_margin": CurrencyAndAmount.from_dict(obj.get("variationMargin")) if obj.get("variationMargin") is not None else None,
+            "variation_margin_portfolio_ccy": CurrencyAndAmount.from_dict(obj.get("variationMarginPortfolioCcy")) if obj.get("variationMarginPortfolioCcy") is not None else None
         })
         return _obj

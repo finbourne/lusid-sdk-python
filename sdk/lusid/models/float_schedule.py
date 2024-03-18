@@ -39,7 +39,7 @@ class FloatSchedule(Schedule):
     index_convention_name: Optional[FlowConventionName] = Field(None, alias="indexConventionName")
     index_conventions: Optional[IndexConvention] = Field(None, alias="indexConventions")
     notional: Optional[Union[StrictFloat, StrictInt]] = Field(None, description="Scaling factor, the quantity outstanding on which the rate will be paid.")
-    payment_currency: Optional[StrictStr] = Field(None, alias="paymentCurrency", description="Payment currency. This does not have to be the same as the nominal bond or observation/reset currency.")
+    payment_currency: StrictStr = Field(..., alias="paymentCurrency", description="Payment currency. This does not have to be the same as the nominal bond or observation/reset currency.")
     spread: Optional[Union[StrictFloat, StrictInt]] = Field(None, description="Spread over floating rate given as a fraction.")
     stub_type: Optional[StrictStr] = Field(None, alias="stubType", description="StubType required of the schedule    Supported string (enumeration) values are: [ShortFront, ShortBack, LongBack, LongFront, Both].")
     ex_dividend_configuration: Optional[ExDividendConfiguration] = Field(None, alias="exDividendConfiguration")
@@ -108,11 +108,6 @@ class FloatSchedule(Schedule):
         # and __fields_set__ contains the field
         if self.ex_dividend_days is None and "ex_dividend_days" in self.__fields_set__:
             _dict['exDividendDays'] = None
-
-        # set to None if payment_currency (nullable) is None
-        # and __fields_set__ contains the field
-        if self.payment_currency is None and "payment_currency" in self.__fields_set__:
-            _dict['paymentCurrency'] = None
 
         # set to None if stub_type (nullable) is None
         # and __fields_set__ contains the field

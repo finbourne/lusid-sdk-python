@@ -21,6 +21,8 @@ Name | Type | Description | Notes
 **notional_cost** | [**CurrencyAndAmount**](CurrencyAndAmount.md) |  | [optional] 
 **amortised_cost** | [**CurrencyAndAmount**](CurrencyAndAmount.md) |  | [optional] 
 **amortised_cost_portfolio_ccy** | [**CurrencyAndAmount**](CurrencyAndAmount.md) |  | [optional] 
+**variation_margin** | [**CurrencyAndAmount**](CurrencyAndAmount.md) |  | [optional] 
+**variation_margin_portfolio_ccy** | [**CurrencyAndAmount**](CurrencyAndAmount.md) |  | [optional] 
 
 ## Example
 

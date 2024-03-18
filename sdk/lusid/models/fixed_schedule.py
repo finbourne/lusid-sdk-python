@@ -36,7 +36,7 @@ class FixedSchedule(Schedule):
     convention_name: Optional[FlowConventionName] = Field(None, alias="conventionName")
     ex_dividend_days: Optional[StrictInt] = Field(None, alias="exDividendDays", description="Optional. Number of calendar days in the ex-dividend period.  If the settlement date falls in the ex-dividend period then the coupon paid is zero and the accrued interest is negative.  If set, this must be a non-negative number.  If not set, or set to 0, then there is no ex-dividend period.                NOTE: This field is deprecated.  If you wish to set the ExDividendDays on a bond, please use the ExDividendConfiguration.")
     notional: Optional[Union[StrictFloat, StrictInt]] = Field(None, description="Scaling factor, the quantity outstanding on which the rate will be paid.")
-    payment_currency: Optional[StrictStr] = Field(None, alias="paymentCurrency", description="Payment currency. This does not have to be the same as the nominal bond or observation/reset currency.")
+    payment_currency: StrictStr = Field(..., alias="paymentCurrency", description="Payment currency. This does not have to be the same as the nominal bond or observation/reset currency.")
     stub_type: Optional[StrictStr] = Field(None, alias="stubType", description="StubType required of the schedule    Supported string (enumeration) values are: [ShortFront, ShortBack, LongBack, LongFront, Both].")
     ex_dividend_configuration: Optional[ExDividendConfiguration] = Field(None, alias="exDividendConfiguration")
     schedule_type: StrictStr = Field(..., alias="scheduleType", description="The available values are: FixedSchedule, FloatSchedule, OptionalitySchedule, StepSchedule, Exercise, FxRateSchedule, FxLinkedNotionalSchedule, Invalid")
@@ -93,11 +93,6 @@ class FixedSchedule(Schedule):
         # and __fields_set__ contains the field
         if self.ex_dividend_days is None and "ex_dividend_days" in self.__fields_set__:
             _dict['exDividendDays'] = None
-
-        # set to None if payment_currency (nullable) is None
-        # and __fields_set__ contains the field
-        if self.payment_currency is None and "payment_currency" in self.__fields_set__:
-            _dict['paymentCurrency'] = None
 
         # set to None if stub_type (nullable) is None
         # and __fields_set__ contains the field
