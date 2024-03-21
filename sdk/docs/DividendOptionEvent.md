@@ -11,7 +11,7 @@ Name | Type | Description | Notes
 **payment_date** | **datetime** | The date the company pays out dividends to shareholders. | 
 **record_date** | **datetime** | Date you have to be the holder of record in order to participate in the tender. | [optional] 
 **security_elections** | [**List[SecurityElection]**](SecurityElection.md) | SecurityElection for this DividendReinvestmentEvent | 
-**security_settlement_date** | **datetime** | Date on which the dividend was the security settles.  Equal to the PaymentDate if not provided. | [optional] 
+**security_settlement_date** | **datetime** | The settlement date of the additional units.  Equal to the PaymentDate if not provided. | [optional] 
 **instrument_event_type** | **str** | The Type of Event. The available values are: TransitionEvent, InformationalEvent, OpenEvent, CloseEvent, StockSplitEvent, BondDefaultEvent, CashDividendEvent, AmortisationEvent, CashFlowEvent, ExerciseEvent, ResetEvent, TriggerEvent, RawVendorEvent, InformationalErrorEvent, BondCouponEvent, DividendReinvestmentEvent, AccumulationEvent, BondPrincipalEvent, DividendOptionEvent, MaturityEvent, FxForwardSettlementEvent | 
 
 ## Example

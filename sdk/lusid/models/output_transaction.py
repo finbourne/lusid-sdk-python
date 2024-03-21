@@ -52,7 +52,8 @@ class OutputTransaction(BaseModel):
     cancel_date_time: Optional[datetime] = Field(None, alias="cancelDateTime", description="If the transaction has been cancelled, the asAt datetime that the transaction was cancelled.")
     realised_gain_loss: Optional[conlist(RealisedGainLoss)] = Field(None, alias="realisedGainLoss", description="The collection of realised gains or losses resulting from relevant transactions e.g. a sale transaction. The cost used in calculating the realised gain or loss is determined by the accounting method defined when the transaction portfolio is created.")
     holding_ids: Optional[conlist(StrictInt)] = Field(None, alias="holdingIds", description="The collection of single identifiers for the holding within the portfolio. The holdingId is constructed from the LusidInstrumentId, sub-holding keys and currrency and is unique within the portfolio.")
-    __properties = ["transactionId", "type", "description", "instrumentIdentifiers", "instrumentScope", "instrumentUid", "transactionDate", "settlementDate", "units", "transactionAmount", "transactionPrice", "totalConsideration", "exchangeRate", "transactionToPortfolioRate", "transactionCurrency", "properties", "counterpartyId", "source", "transactionStatus", "entryDateTime", "cancelDateTime", "realisedGainLoss", "holdingIds"]
+    source_type: Optional[StrictStr] = Field(None, alias="sourceType", description="The type of source that the transaction originated from, eg: InputTransaction, InstrumentEvent, HoldingAdjustment")
+    __properties = ["transactionId", "type", "description", "instrumentIdentifiers", "instrumentScope", "instrumentUid", "transactionDate", "settlementDate", "units", "transactionAmount", "transactionPrice", "totalConsideration", "exchangeRate", "transactionToPortfolioRate", "transactionCurrency", "properties", "counterpartyId", "source", "transactionStatus", "entryDateTime", "cancelDateTime", "realisedGainLoss", "holdingIds", "sourceType"]
 
     @validator('transaction_status')
     def transaction_status_validate_enum(cls, value):
@@ -163,6 +164,11 @@ class OutputTransaction(BaseModel):
         if self.holding_ids is None and "holding_ids" in self.__fields_set__:
             _dict['holdingIds'] = None
 
+        # set to None if source_type (nullable) is None
+        # and __fields_set__ contains the field
+        if self.source_type is None and "source_type" in self.__fields_set__:
+            _dict['sourceType'] = None
+
         return _dict
 
     @classmethod
@@ -202,6 +208,7 @@ class OutputTransaction(BaseModel):
             "entry_date_time": obj.get("entryDateTime"),
             "cancel_date_time": obj.get("cancelDateTime"),
             "realised_gain_loss": [RealisedGainLoss.from_dict(_item) for _item in obj.get("realisedGainLoss")] if obj.get("realisedGainLoss") is not None else None,
-            "holding_ids": obj.get("holdingIds")
+            "holding_ids": obj.get("holdingIds"),
+            "source_type": obj.get("sourceType")
         })
         return _obj

@@ -34,9 +34,10 @@ class DividendReinvestmentEvent(InstrumentEvent):
     payment_date: datetime = Field(..., alias="paymentDate", description="The date the company pays out dividends to shareholders.")
     record_date: datetime = Field(..., alias="recordDate", description="Date you have to be the holder of record in order to participate in the tender.")
     security_elections: conlist(SecurityElection) = Field(..., alias="securityElections", description="SecurityElection for this DividendReinvestmentEvent")
+    security_settlement_date: Optional[datetime] = Field(None, alias="securitySettlementDate", description="The settlement date of the additional units.  Equal to the PaymentDate if not provided.")
     instrument_event_type: StrictStr = Field(..., alias="instrumentEventType", description="The Type of Event. The available values are: TransitionEvent, InformationalEvent, OpenEvent, CloseEvent, StockSplitEvent, BondDefaultEvent, CashDividendEvent, AmortisationEvent, CashFlowEvent, ExerciseEvent, ResetEvent, TriggerEvent, RawVendorEvent, InformationalErrorEvent, BondCouponEvent, DividendReinvestmentEvent, AccumulationEvent, BondPrincipalEvent, DividendOptionEvent, MaturityEvent, FxForwardSettlementEvent")
     additional_properties: Dict[str, Any] = {}
-    __properties = ["instrumentEventType", "announcementDate", "cashElections", "exDate", "paymentDate", "recordDate", "securityElections"]
+    __properties = ["instrumentEventType", "announcementDate", "cashElections", "exDate", "paymentDate", "recordDate", "securityElections", "securitySettlementDate"]
 
     @validator('instrument_event_type')
     def instrument_event_type_validate_enum(cls, value):
@@ -112,7 +113,8 @@ class DividendReinvestmentEvent(InstrumentEvent):
             "ex_date": obj.get("exDate"),
             "payment_date": obj.get("paymentDate"),
             "record_date": obj.get("recordDate"),
-            "security_elections": [SecurityElection.from_dict(_item) for _item in obj.get("securityElections")] if obj.get("securityElections") is not None else None
+            "security_elections": [SecurityElection.from_dict(_item) for _item in obj.get("securityElections")] if obj.get("securityElections") is not None else None,
+            "security_settlement_date": obj.get("securitySettlementDate")
         })
         # store additional fields in additional_properties
         for _key in obj.keys():
