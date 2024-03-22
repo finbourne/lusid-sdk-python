@@ -57,6 +57,7 @@ from lusid.api.placements_api import PlacementsApi
 from lusid.api.portfolio_groups_api import PortfolioGroupsApi
 from lusid.api.portfolios_api import PortfoliosApi
 from lusid.api.property_definitions_api import PropertyDefinitionsApi
+from lusid.api.queryable_keys_api import QueryableKeysApi
 from lusid.api.quotes_api import QuotesApi
 from lusid.api.reconciliations_api import ReconciliationsApi
 from lusid.api.reference_lists_api import ReferenceListsApi
@@ -692,6 +693,7 @@ from lusid.models.query_bucketed_cash_flows_request import QueryBucketedCashFlow
 from lusid.models.query_cash_flows_request import QueryCashFlowsRequest
 from lusid.models.query_instrument_events_request import QueryInstrumentEventsRequest
 from lusid.models.query_trade_tickets_request import QueryTradeTicketsRequest
+from lusid.models.queryable_key import QueryableKey
 from lusid.models.quote import Quote
 from lusid.models.quote_access_metadata_rule import QuoteAccessMetadataRule
 from lusid.models.quote_access_metadata_rule_id import QuoteAccessMetadataRuleId
@@ -792,6 +794,7 @@ from lusid.models.resource_list_of_processed_command import ResourceListOfProces
 from lusid.models.resource_list_of_property import ResourceListOfProperty
 from lusid.models.resource_list_of_property_definition import ResourceListOfPropertyDefinition
 from lusid.models.resource_list_of_property_interval import ResourceListOfPropertyInterval
+from lusid.models.resource_list_of_queryable_key import ResourceListOfQueryableKey
 from lusid.models.resource_list_of_quote import ResourceListOfQuote
 from lusid.models.resource_list_of_quote_access_metadata_rule import ResourceListOfQuoteAccessMetadataRule
 from lusid.models.resource_list_of_reconciliation_break import ResourceListOfReconciliationBreak
@@ -1053,6 +1056,7 @@ __all__ = [
     "PortfolioGroupsApi",
     "PortfoliosApi",
     "PropertyDefinitionsApi",
+    "QueryableKeysApi",
     "QuotesApi",
     "ReconciliationsApi",
     "ReferenceListsApi",
@@ -1678,6 +1682,7 @@ __all__ = [
     "QueryCashFlowsRequest",
     "QueryInstrumentEventsRequest",
     "QueryTradeTicketsRequest",
+    "QueryableKey",
     "Quote",
     "QuoteAccessMetadataRule",
     "QuoteAccessMetadataRuleId",
@@ -1778,6 +1783,7 @@ __all__ = [
     "ResourceListOfProperty",
     "ResourceListOfPropertyDefinition",
     "ResourceListOfPropertyInterval",
+    "ResourceListOfQueryableKey",
     "ResourceListOfQuote",
     "ResourceListOfQuoteAccessMetadataRule",
     "ResourceListOfReconciliationBreak",

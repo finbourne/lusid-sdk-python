@@ -41,6 +41,7 @@ from lusid.api.placements_api import PlacementsApi
 from lusid.api.portfolio_groups_api import PortfolioGroupsApi
 from lusid.api.portfolios_api import PortfoliosApi
 from lusid.api.property_definitions_api import PropertyDefinitionsApi
+from lusid.api.queryable_keys_api import QueryableKeysApi
 from lusid.api.quotes_api import QuotesApi
 from lusid.api.reconciliations_api import ReconciliationsApi
 from lusid.api.reference_lists_api import ReferenceListsApi
@@ -104,6 +105,7 @@ __all__ = [
     "PortfolioGroupsApi",
     "PortfoliosApi",
     "PropertyDefinitionsApi",
+    "QueryableKeysApi",
     "QuotesApi",
     "ReconciliationsApi",
     "ReferenceListsApi",
