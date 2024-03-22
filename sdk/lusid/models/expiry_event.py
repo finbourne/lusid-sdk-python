@@ -19,20 +19,17 @@ import json
 
 from datetime import datetime
 from typing import Any, Dict
-from pydantic import Field, StrictStr, constr, validator
+from pydantic import Field, StrictStr, validator
 from lusid.models.instrument_event import InstrumentEvent
-from lusid.models.life_cycle_event_value import LifeCycleEventValue
 
-class RawVendorEvent(InstrumentEvent):
+class ExpiryEvent(InstrumentEvent):
     """
-    A generic event derived from the economic definition of an instrument. This should be considered purely  informational; any data provided by this event is not guaranteed to be processable by LUSID.  # noqa: E501
+    Definition of an Expiry Event  This is an event that describes the expiry of the instrument.  # noqa: E501
     """
-    effective_at: datetime = Field(..., alias="effectiveAt", description="The effective date of the event")
-    event_value: LifeCycleEventValue = Field(..., alias="eventValue")
-    event_type: constr(strict=True, min_length=1) = Field(..., alias="eventType", description="What type of internal event does this represent; reset, exercise, amortisation etc.")
+    expiry_date: datetime = Field(..., alias="expiryDate", description="Expiry date of the instrument")
     instrument_event_type: StrictStr = Field(..., alias="instrumentEventType", description="The Type of Event. The available values are: TransitionEvent, InformationalEvent, OpenEvent, CloseEvent, StockSplitEvent, BondDefaultEvent, CashDividendEvent, AmortisationEvent, CashFlowEvent, ExerciseEvent, ResetEvent, TriggerEvent, RawVendorEvent, InformationalErrorEvent, BondCouponEvent, DividendReinvestmentEvent, AccumulationEvent, BondPrincipalEvent, DividendOptionEvent, MaturityEvent, FxForwardSettlementEvent, ExpiryEvent")
     additional_properties: Dict[str, Any] = {}
-    __properties = ["instrumentEventType", "effectiveAt", "eventValue", "eventType"]
+    __properties = ["instrumentEventType", "expiryDate"]
 
     @validator('instrument_event_type')
     def instrument_event_type_validate_enum(cls, value):
@@ -55,8 +52,8 @@ class RawVendorEvent(InstrumentEvent):
         return json.dumps(self.to_dict())
 
     @classmethod
-    def from_json(cls, json_str: str) -> RawVendorEvent:
-        """Create an instance of RawVendorEvent from a JSON string"""
+    def from_json(cls, json_str: str) -> ExpiryEvent:
+        """Create an instance of ExpiryEvent from a JSON string"""
         return cls.from_dict(json.loads(json_str))
 
     def to_dict(self):
@@ -66,9 +63,6 @@ class RawVendorEvent(InstrumentEvent):
                             "additional_properties"
                           },
                           exclude_none=True)
-        # override the default output from pydantic by calling `to_dict()` of event_value
-        if self.event_value:
-            _dict['eventValue'] = self.event_value.to_dict()
         # puts key-value pairs in additional_properties in the top level
         if self.additional_properties is not None:
             for _key, _value in self.additional_properties.items():
@@ -77,19 +71,17 @@ class RawVendorEvent(InstrumentEvent):
         return _dict
 
     @classmethod
-    def from_dict(cls, obj: dict) -> RawVendorEvent:
-        """Create an instance of RawVendorEvent from a dict"""
+    def from_dict(cls, obj: dict) -> ExpiryEvent:
+        """Create an instance of ExpiryEvent from a dict"""
         if obj is None:
             return None
 
         if not isinstance(obj, dict):
-            return RawVendorEvent.parse_obj(obj)
+            return ExpiryEvent.parse_obj(obj)
 
-        _obj = RawVendorEvent.parse_obj({
+        _obj = ExpiryEvent.parse_obj({
             "instrument_event_type": obj.get("instrumentEventType"),
-            "effective_at": obj.get("effectiveAt"),
-            "event_value": LifeCycleEventValue.from_dict(obj.get("eventValue")) if obj.get("eventValue") is not None else None,
-            "event_type": obj.get("eventType")
+            "expiry_date": obj.get("expiryDate")
         })
         # store additional fields in additional_properties
         for _key in obj.keys():

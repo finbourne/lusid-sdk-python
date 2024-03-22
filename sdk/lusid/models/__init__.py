@@ -292,6 +292,7 @@ from lusid.models.execution_set_request import ExecutionSetRequest
 from lusid.models.exercise_event import ExerciseEvent
 from lusid.models.exotic_instrument import ExoticInstrument
 from lusid.models.expanded_group import ExpandedGroup
+from lusid.models.expiry_event import ExpiryEvent
 from lusid.models.fee_rule import FeeRule
 from lusid.models.fee_rule_upsert_request import FeeRuleUpsertRequest
 from lusid.models.fee_rule_upsert_response import FeeRuleUpsertResponse
@@ -1209,6 +1210,7 @@ __all__ = [
     "ExerciseEvent",
     "ExoticInstrument",
     "ExpandedGroup",
+    "ExpiryEvent",
     "FeeRule",
     "FeeRuleUpsertRequest",
     "FeeRuleUpsertResponse",
