@@ -71,6 +71,7 @@ from lusid.api.scopes_api import ScopesApi
 from lusid.api.scripted_translation_api import ScriptedTranslationApi
 from lusid.api.search_api import SearchApi
 from lusid.api.sequences_api import SequencesApi
+from lusid.api.staging_rule_set_api import StagingRuleSetApi
 from lusid.api.structured_result_data_api import StructuredResultDataApi
 from lusid.api.system_configuration_api import SystemConfigurationApi
 from lusid.api.tax_rule_sets_api import TaxRuleSetsApi
@@ -273,6 +274,7 @@ from lusid.models.create_relation_request import CreateRelationRequest
 from lusid.models.create_relationship_definition_request import CreateRelationshipDefinitionRequest
 from lusid.models.create_relationship_request import CreateRelationshipRequest
 from lusid.models.create_sequence_request import CreateSequenceRequest
+from lusid.models.create_staging_rule_set_request import CreateStagingRuleSetRequest
 from lusid.models.create_tax_rule_set_request import CreateTaxRuleSetRequest
 from lusid.models.create_trade_tickets_response import CreateTradeTicketsResponse
 from lusid.models.create_transaction_portfolio_request import CreateTransactionPortfolioRequest
@@ -625,6 +627,7 @@ from lusid.models.paged_resource_list_of_reconciliation import PagedResourceList
 from lusid.models.paged_resource_list_of_reference_list_response import PagedResourceListOfReferenceListResponse
 from lusid.models.paged_resource_list_of_relationship_definition import PagedResourceListOfRelationshipDefinition
 from lusid.models.paged_resource_list_of_sequence_definition import PagedResourceListOfSequenceDefinition
+from lusid.models.paged_resource_list_of_staging_rule_set import PagedResourceListOfStagingRuleSet
 from lusid.models.paged_resource_list_of_transaction_template import PagedResourceListOfTransactionTemplate
 from lusid.models.paged_resource_list_of_transaction_template_specification import PagedResourceListOfTransactionTemplateSpecification
 from lusid.models.paged_resource_list_of_translation_script_id import PagedResourceListOfTranslationScriptId
@@ -837,6 +840,7 @@ from lusid.models.set_legal_entity_identifiers_request import SetLegalEntityIden
 from lusid.models.set_legal_entity_properties_request import SetLegalEntityPropertiesRequest
 from lusid.models.set_person_identifiers_request import SetPersonIdentifiersRequest
 from lusid.models.set_person_properties_request import SetPersonPropertiesRequest
+from lusid.models.set_share_class_instruments_request import SetShareClassInstrumentsRequest
 from lusid.models.set_transaction_configuration_alias import SetTransactionConfigurationAlias
 from lusid.models.set_transaction_configuration_source_request import SetTransactionConfigurationSourceRequest
 from lusid.models.side_configuration_data import SideConfigurationData
@@ -847,6 +851,10 @@ from lusid.models.sides_definition_request import SidesDefinitionRequest
 from lusid.models.simple_cash_flow_loan import SimpleCashFlowLoan
 from lusid.models.simple_instrument import SimpleInstrument
 from lusid.models.sort_order import SortOrder
+from lusid.models.staging_rule import StagingRule
+from lusid.models.staging_rule_approval_criteria import StagingRuleApprovalCriteria
+from lusid.models.staging_rule_match_criteria import StagingRuleMatchCriteria
+from lusid.models.staging_rule_set import StagingRuleSet
 from lusid.models.step_schedule import StepSchedule
 from lusid.models.stock_split_event import StockSplitEvent
 from lusid.models.stream import Stream
@@ -932,6 +940,7 @@ from lusid.models.update_portfolio_request import UpdatePortfolioRequest
 from lusid.models.update_property_definition_request import UpdatePropertyDefinitionRequest
 from lusid.models.update_reconciliation_request import UpdateReconciliationRequest
 from lusid.models.update_relationship_definition_request import UpdateRelationshipDefinitionRequest
+from lusid.models.update_staging_rule_set_request import UpdateStagingRuleSetRequest
 from lusid.models.update_tax_rule_set_request import UpdateTaxRuleSetRequest
 from lusid.models.update_unit_request import UpdateUnitRequest
 from lusid.models.upsert_cds_flow_conventions_request import UpsertCdsFlowConventionsRequest
@@ -1071,6 +1080,7 @@ __all__ = [
     "ScriptedTranslationApi",
     "SearchApi",
     "SequencesApi",
+    "StagingRuleSetApi",
     "StructuredResultDataApi",
     "SystemConfigurationApi",
     "TaxRuleSetsApi",
@@ -1263,6 +1273,7 @@ __all__ = [
     "CreateRelationshipDefinitionRequest",
     "CreateRelationshipRequest",
     "CreateSequenceRequest",
+    "CreateStagingRuleSetRequest",
     "CreateTaxRuleSetRequest",
     "CreateTradeTicketsResponse",
     "CreateTransactionPortfolioRequest",
@@ -1615,6 +1626,7 @@ __all__ = [
     "PagedResourceListOfReferenceListResponse",
     "PagedResourceListOfRelationshipDefinition",
     "PagedResourceListOfSequenceDefinition",
+    "PagedResourceListOfStagingRuleSet",
     "PagedResourceListOfTransactionTemplate",
     "PagedResourceListOfTransactionTemplateSpecification",
     "PagedResourceListOfTranslationScriptId",
@@ -1827,6 +1839,7 @@ __all__ = [
     "SetLegalEntityPropertiesRequest",
     "SetPersonIdentifiersRequest",
     "SetPersonPropertiesRequest",
+    "SetShareClassInstrumentsRequest",
     "SetTransactionConfigurationAlias",
     "SetTransactionConfigurationSourceRequest",
     "SideConfigurationData",
@@ -1837,6 +1850,10 @@ __all__ = [
     "SimpleCashFlowLoan",
     "SimpleInstrument",
     "SortOrder",
+    "StagingRule",
+    "StagingRuleApprovalCriteria",
+    "StagingRuleMatchCriteria",
+    "StagingRuleSet",
     "StepSchedule",
     "StockSplitEvent",
     "Stream",
@@ -1922,6 +1939,7 @@ __all__ = [
     "UpdatePropertyDefinitionRequest",
     "UpdateReconciliationRequest",
     "UpdateRelationshipDefinitionRequest",
+    "UpdateStagingRuleSetRequest",
     "UpdateTaxRuleSetRequest",
     "UpdateUnitRequest",
     "UpsertCdsFlowConventionsRequest",

@@ -9,7 +9,7 @@ Name | Type | Description | Notes
 **display_name** | **str** | The name of the Fund. | [optional] 
 **description** | **str** | A description for the Fund. | [optional] 
 **abor_id** | [**ResourceId**](ResourceId.md) |  | 
-**share_class_instrument_scopes** | **List[str]** | The scopes in which the instruments lie. | [optional] 
+**share_class_instrument_scopes** | **List[str]** | The scopes in which the instruments lie, currently limited to one. | [optional] 
 **share_class_instruments** | [**List[InstrumentResolutionDetail]**](InstrumentResolutionDetail.md) | Details the user-provided instrument identifiers and the instrument resolved from them. | [optional] 
 **type** | **str** | The type of fund; &#39;Standalone&#39;, &#39;Master&#39; or &#39;Feeder&#39; | 
 **inception_date** | **datetime** | Inception date of the Fund | 

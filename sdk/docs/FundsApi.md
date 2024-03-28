@@ -8,6 +8,7 @@ Method | HTTP request | Description
 [**delete_fund**](FundsApi.md#delete_fund) | **DELETE** /api/funds/{scope}/{code} | [EXPERIMENTAL] DeleteFund: Delete a Fund.
 [**get_fund**](FundsApi.md#get_fund) | **GET** /api/funds/{scope}/{code} | [EXPERIMENTAL] GetFund: Get a Fund.
 [**list_funds**](FundsApi.md#list_funds) | **GET** /api/funds | [EXPERIMENTAL] ListFunds: List Funds.
+[**set_share_class_instruments**](FundsApi.md#set_share_class_instruments) | **POST** /api/funds/{scope}/{code}/shareclasses | [EXPERIMENTAL] SetShareClassInstruments: Set the ShareClass Instruments on a fund.
 [**upsert_fund_properties**](FundsApi.md#upsert_fund_properties) | **POST** /api/funds/{scope}/{code}/properties/$upsert | [EXPERIMENTAL] UpsertFundProperties: Upsert Fund properties
 
 
@@ -423,6 +424,109 @@ Name | Type | Description  | Notes
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 **200** | The requested Funds. |  -  |
+**400** | The details of the input related failure |  -  |
+**0** | Error response |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **set_share_class_instruments**
+> Fund set_share_class_instruments(scope, code, set_share_class_instruments_request)
+
+[EXPERIMENTAL] SetShareClassInstruments: Set the ShareClass Instruments on a fund.
+
+Update the ShareClass Instruments on an existing fund with the set of instruments provided.
+
+### Example
+
+* OAuth Authentication (oauth2):
+```python
+from __future__ import print_function
+import time
+import lusid
+from lusid.rest import ApiException
+from lusid.models.fund import Fund
+from lusid.models.set_share_class_instruments_request import SetShareClassInstrumentsRequest
+from pprint import pprint
+
+import os
+from lusid import (
+    ApiClientFactory,
+    FundsApi,
+    EnvironmentVariablesConfigurationLoader,
+    SecretsFileConfigurationLoader,
+    ArgsConfigurationLoader
+)
+
+# Use the lusid ApiClientFactory to build Api instances with a configured api client
+# By default this will read config from environment variables
+# Then from a secrets.json file found in the current working directory
+api_client_factory = ApiClientFactory()
+
+# The ApiClientFactory can be passed an iterable of configuration loaders to read configuration from
+
+api_url = "https://www.lusid.com/api"
+# Path to a secrets.json file containing authentication credentials
+# See https://support.lusid.com/knowledgebase/article/KA-01667/en-us
+# for a detailed guide to setting up the SDK make authenticated calls to LUSID APIs
+secrets_path = os.getenv("FBN_SECRETS_PATH")
+app_name="LusidJupyterNotebook"
+
+config_loaders = [
+	EnvironmentVariablesConfigurationLoader(),
+	SecretsFileConfigurationLoader(api_secrets_file=secrets_path),
+	ArgsConfigurationLoader(api_url=api_url, app_name=app_name)
+]
+api_client_factory = ApiClientFactory(config_loaders=config_loaders)
+
+
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+
+
+
+# Enter a context with an instance of the ApiClientFactory to ensure the connection pool is closed after use
+async with api_client_factory:
+    # Create an instance of the API class
+    api_instance = api_client_factory.build(lusid.FundsApi)
+    scope = 'scope_example' # str | The scope of the Fund.
+    code = 'code_example' # str | The code of the Fund.
+    set_share_class_instruments_request = {"shareClassInstrumentScopes":["UKInstrumentScope"],"shareClassInstruments":[{"instrumentIdentifiers":{"Instrument/default/ClientInternal":"UK_12345"}}]} # SetShareClassInstrumentsRequest | The scopes and instrument identifiers for the instruments to be set.
+
+    try:
+        # [EXPERIMENTAL] SetShareClassInstruments: Set the ShareClass Instruments on a fund.
+        api_response = await api_instance.set_share_class_instruments(scope, code, set_share_class_instruments_request)
+        print("The response of FundsApi->set_share_class_instruments:\n")
+        pprint(api_response)
+    except Exception as e:
+        print("Exception when calling FundsApi->set_share_class_instruments: %s\n" % e)
+```
+
+
+### Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **scope** | **str**| The scope of the Fund. | 
+ **code** | **str**| The code of the Fund. | 
+ **set_share_class_instruments_request** | [**SetShareClassInstrumentsRequest**](SetShareClassInstrumentsRequest.md)| The scopes and instrument identifiers for the instruments to be set. | 
+
+### Return type
+
+[**Fund**](Fund.md)
+
+### Authorization
+
+[oauth2](../README.md#oauth2)
+
+### HTTP request headers
+
+ - **Content-Type**: application/json-patch+json, application/json, text/json, application/*+json
+ - **Accept**: text/plain, application/json, text/json
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**201** | The updated fund. |  -  |
 **400** | The details of the input related failure |  -  |
 **0** | Error response |  -  |
 

@@ -33,7 +33,7 @@ class FundRequest(BaseModel):
     display_name: Optional[constr(strict=True, max_length=256, min_length=1)] = Field(None, alias="displayName", description="The name of the Fund.")
     description: Optional[constr(strict=True, max_length=1024, min_length=0)] = Field(None, description="A description for the Fund.")
     abor_id: ResourceId = Field(..., alias="aborId")
-    share_class_instrument_scopes: Optional[conlist(StrictStr, max_items=1)] = Field(None, alias="shareClassInstrumentScopes", description="The scopes in which the instruments lie.")
+    share_class_instrument_scopes: Optional[conlist(StrictStr, max_items=1)] = Field(None, alias="shareClassInstrumentScopes", description="The scopes in which the instruments lie, currently limited to one.")
     share_class_instruments: Optional[conlist(InstrumentResolutionDetail)] = Field(None, alias="shareClassInstruments", description="Details the user-provided instrument identifiers and the instrument resolved from them.")
     type: constr(strict=True, min_length=1) = Field(..., description="The type of fund; 'Standalone', 'Master' or 'Feeder'")
     inception_date: datetime = Field(..., alias="inceptionDate", description="Inception date of the Fund")

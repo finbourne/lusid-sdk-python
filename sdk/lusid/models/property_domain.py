@@ -68,6 +68,7 @@ class PropertyDomain(str, Enum):
     COMPLIANCE = 'Compliance'
     DIARYENTRY = 'DiaryEntry'
     LEG = 'Leg'
+    DERIVEDVALUATION = 'DerivedValuation'
 
     @classmethod
     def from_json(cls, json_str: str) -> PropertyDomain:
