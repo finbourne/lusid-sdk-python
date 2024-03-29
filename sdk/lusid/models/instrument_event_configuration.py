@@ -20,13 +20,15 @@ import json
 
 from typing import Any, Dict, List, Optional
 from pydantic import BaseModel, Field, StrictStr, conlist
+from lusid.models.resource_id import ResourceId
 
 class InstrumentEventConfiguration(BaseModel):
     """
     InstrumentEventConfiguration
     """
     transaction_template_scopes: Optional[conlist(StrictStr)] = Field(None, alias="transactionTemplateScopes")
-    __properties = ["transactionTemplateScopes"]
+    recipe_id: Optional[ResourceId] = Field(None, alias="recipeId")
+    __properties = ["transactionTemplateScopes", "recipeId"]
 
     class Config:
         """Pydantic configuration"""
@@ -52,6 +54,9 @@ class InstrumentEventConfiguration(BaseModel):
                           exclude={
                           },
                           exclude_none=True)
+        # override the default output from pydantic by calling `to_dict()` of recipe_id
+        if self.recipe_id:
+            _dict['recipeId'] = self.recipe_id.to_dict()
         # set to None if transaction_template_scopes (nullable) is None
         # and __fields_set__ contains the field
         if self.transaction_template_scopes is None and "transaction_template_scopes" in self.__fields_set__:
@@ -69,6 +74,7 @@ class InstrumentEventConfiguration(BaseModel):
             return InstrumentEventConfiguration.parse_obj(obj)
 
         _obj = InstrumentEventConfiguration.parse_obj({
-            "transaction_template_scopes": obj.get("transactionTemplateScopes")
+            "transaction_template_scopes": obj.get("transactionTemplateScopes"),
+            "recipe_id": ResourceId.from_dict(obj.get("recipeId")) if obj.get("recipeId") is not None else None
         })
         return _obj

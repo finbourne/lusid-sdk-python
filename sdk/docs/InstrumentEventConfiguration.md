@@ -5,6 +5,7 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **transaction_template_scopes** | **List[str]** |  | [optional] 
+**recipe_id** | [**ResourceId**](ResourceId.md) |  | [optional] 
 
 ## Example
 
