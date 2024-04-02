@@ -5,7 +5,7 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **property_key** | **str** | The key that uniquely identifies the property. It has the format {domain}/{scope}/{code}. | [optional] 
-**property_value** | [**PropertyValue**](PropertyValue.md) |  | [optional] 
+**value** | **str** |  | [optional] 
 
 ## Example
 

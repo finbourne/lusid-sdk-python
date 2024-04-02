@@ -19,16 +19,15 @@ import json
 
 
 from typing import Any, Dict, Optional
-from pydantic import BaseModel, Field, StrictStr
-from lusid.models.property_value import PropertyValue
+from pydantic import BaseModel, Field, StrictStr, constr
 
 class TransactionPropertyMap(BaseModel):
     """
     TransactionPropertyMap
     """
     property_key: Optional[StrictStr] = Field(None, alias="propertyKey", description="The key that uniquely identifies the property. It has the format {domain}/{scope}/{code}.")
-    property_value: Optional[PropertyValue] = Field(None, alias="propertyValue")
-    __properties = ["propertyKey", "propertyValue"]
+    value: Optional[constr(strict=True, max_length=1024, min_length=0)] = None
+    __properties = ["propertyKey", "value"]
 
     class Config:
         """Pydantic configuration"""
@@ -54,13 +53,15 @@ class TransactionPropertyMap(BaseModel):
                           exclude={
                           },
                           exclude_none=True)
-        # override the default output from pydantic by calling `to_dict()` of property_value
-        if self.property_value:
-            _dict['propertyValue'] = self.property_value.to_dict()
         # set to None if property_key (nullable) is None
         # and __fields_set__ contains the field
         if self.property_key is None and "property_key" in self.__fields_set__:
             _dict['propertyKey'] = None
+
+        # set to None if value (nullable) is None
+        # and __fields_set__ contains the field
+        if self.value is None and "value" in self.__fields_set__:
+            _dict['value'] = None
 
         return _dict
 
@@ -75,6 +76,6 @@ class TransactionPropertyMap(BaseModel):
 
         _obj = TransactionPropertyMap.parse_obj({
             "property_key": obj.get("propertyKey"),
-            "property_value": PropertyValue.from_dict(obj.get("propertyValue")) if obj.get("propertyValue") is not None else None
+            "value": obj.get("value")
         })
         return _obj
