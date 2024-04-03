@@ -5,6 +5,7 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **quantity** | **float** | Total number of units ordered. | 
+**quantity_by_state** | **Dict[str, float]** | Total number of units placed. | [optional] 
 **details** | [**List[OrderGraphBlockOrderDetail]**](OrderGraphBlockOrderDetail.md) | Identifiers and other info for each order in this block. | 
 
 ## Example

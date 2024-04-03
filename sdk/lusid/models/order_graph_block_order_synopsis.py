@@ -18,7 +18,7 @@ import re  # noqa: F401
 import json
 
 
-from typing import Any, Dict, List, Union
+from typing import Any, Dict, List, Optional, Union
 from pydantic import BaseModel, Field, StrictFloat, StrictInt, conlist
 from lusid.models.order_graph_block_order_detail import OrderGraphBlockOrderDetail
 
@@ -27,8 +27,9 @@ class OrderGraphBlockOrderSynopsis(BaseModel):
     OrderGraphBlockOrderSynopsis
     """
     quantity: Union[StrictFloat, StrictInt] = Field(..., description="Total number of units ordered.")
+    quantity_by_state: Optional[Dict[str, Union[StrictFloat, StrictInt]]] = Field(None, alias="quantityByState", description="Total number of units placed.")
     details: conlist(OrderGraphBlockOrderDetail) = Field(..., description="Identifiers and other info for each order in this block.")
-    __properties = ["quantity", "details"]
+    __properties = ["quantity", "quantityByState", "details"]
 
     class Config:
         """Pydantic configuration"""
@@ -61,6 +62,11 @@ class OrderGraphBlockOrderSynopsis(BaseModel):
                 if _item:
                     _items.append(_item.to_dict())
             _dict['details'] = _items
+        # set to None if quantity_by_state (nullable) is None
+        # and __fields_set__ contains the field
+        if self.quantity_by_state is None and "quantity_by_state" in self.__fields_set__:
+            _dict['quantityByState'] = None
+
         return _dict
 
     @classmethod
@@ -74,6 +80,7 @@ class OrderGraphBlockOrderSynopsis(BaseModel):
 
         _obj = OrderGraphBlockOrderSynopsis.parse_obj({
             "quantity": obj.get("quantity"),
+            "quantity_by_state": obj.get("quantityByState"),
             "details": [OrderGraphBlockOrderDetail.from_dict(_item) for _item in obj.get("details")] if obj.get("details") is not None else None
         })
         return _obj

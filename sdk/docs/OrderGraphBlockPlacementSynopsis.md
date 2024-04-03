@@ -5,6 +5,7 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **quantity** | **float** | Total number of units placed. | 
+**quantity_by_state** | **Dict[str, float]** | Total number of units placed. | [optional] 
 **details** | [**List[OrderGraphBlockPlacementDetail]**](OrderGraphBlockPlacementDetail.md) | Identifiers for each placement in this block. | 
 
 ## Example
