@@ -909,7 +909,11 @@ from lusid.models.upsert_structured_data_response import UpsertStructuredDataRes
 from lusid.models.upsert_structured_result_data_request import UpsertStructuredResultDataRequest
 from lusid.models.upsert_transaction_properties_response import UpsertTransactionPropertiesResponse
 from lusid.models.upsert_translation_script_request import UpsertTranslationScriptRequest
+from lusid.models.upsert_valuation_point_request import UpsertValuationPointRequest
 from lusid.models.user import User
+from lusid.models.valuation_point_data_query_parameters import ValuationPointDataQueryParameters
+from lusid.models.valuation_point_data_request import ValuationPointDataRequest
+from lusid.models.valuation_point_data_response import ValuationPointDataResponse
 from lusid.models.valuation_request import ValuationRequest
 from lusid.models.valuation_schedule import ValuationSchedule
 from lusid.models.valuations_reconciliation_request import ValuationsReconciliationRequest
@@ -1835,7 +1839,11 @@ __all__ = [
     "UpsertStructuredResultDataRequest",
     "UpsertTransactionPropertiesResponse",
     "UpsertTranslationScriptRequest",
+    "UpsertValuationPointRequest",
     "User",
+    "ValuationPointDataQueryParameters",
+    "ValuationPointDataRequest",
+    "ValuationPointDataResponse",
     "ValuationRequest",
     "ValuationSchedule",
     "ValuationsReconciliationRequest",
