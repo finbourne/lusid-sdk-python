@@ -19,7 +19,7 @@ import json
 
 from datetime import datetime
 from typing import Any, Dict, List, Optional, Union
-from pydantic import BaseModel, Field, StrictFloat, StrictInt, StrictStr, conlist
+from pydantic.v1 import BaseModel, Field, StrictFloat, StrictInt, StrictStr, conlist
 from lusid.models.resource_id import ResourceId
 
 class AggregatedReturn(BaseModel):

@@ -19,7 +19,7 @@ import json
 
 
 from typing import Any, Dict, Optional
-from pydantic import Field, StrictStr, validator
+from pydantic.v1 import Field, StrictStr, validator
 from lusid.models.fx_conventions import FxConventions
 from lusid.models.relative_date_offset import RelativeDateOffset
 from lusid.models.schedule import Schedule

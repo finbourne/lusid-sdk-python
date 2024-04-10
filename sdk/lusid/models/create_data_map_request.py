@@ -19,7 +19,7 @@ import json
 
 
 from typing import Any, Dict, Optional
-from pydantic import BaseModel, Field
+from pydantic.v1 import BaseModel, Field
 from lusid.models.data_map_key import DataMapKey
 from lusid.models.data_mapping import DataMapping
 

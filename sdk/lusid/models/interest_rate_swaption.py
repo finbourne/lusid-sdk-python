@@ -19,7 +19,7 @@ import json
 
 from datetime import datetime
 from typing import Any, Dict, Optional
-from pydantic import Field, StrictStr, constr, validator
+from pydantic.v1 import Field, StrictStr, constr, validator
 from lusid.models.interest_rate_swap import InterestRateSwap
 from lusid.models.lusid_instrument import LusidInstrument
 from lusid.models.premium import Premium

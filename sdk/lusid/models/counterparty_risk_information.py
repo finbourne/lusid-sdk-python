@@ -19,7 +19,7 @@ import json
 
 
 from typing import Any, Dict, List
-from pydantic import BaseModel, Field, conlist, constr, validator
+from pydantic.v1 import BaseModel, Field, conlist, constr, validator
 from lusid.models.credit_rating import CreditRating
 from lusid.models.industry_classifier import IndustryClassifier
 

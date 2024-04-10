@@ -19,7 +19,7 @@ import json
 
 
 from typing import Any, Dict, Optional
-from pydantic import BaseModel, Field
+from pydantic.v1 import BaseModel, Field
 from lusid.models.reconciliation_side_configuration import ReconciliationSideConfiguration
 from lusid.models.resource_id import ResourceId
 

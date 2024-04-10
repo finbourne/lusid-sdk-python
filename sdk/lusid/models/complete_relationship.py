@@ -19,7 +19,7 @@ import json
 
 from datetime import datetime
 from typing import Any, Dict, Optional
-from pydantic import BaseModel, Field, StrictStr, constr
+from pydantic.v1 import BaseModel, Field, StrictStr, constr
 from lusid.models.related_entity import RelatedEntity
 from lusid.models.resource_id import ResourceId
 from lusid.models.version import Version

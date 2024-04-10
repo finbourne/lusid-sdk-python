@@ -19,7 +19,7 @@ import json
 
 
 from typing import Any, Dict, List, Optional
-from pydantic import BaseModel, Field, StrictInt, StrictStr, conlist, constr, validator
+from pydantic.v1 import BaseModel, Field, StrictInt, StrictStr, conlist, constr, validator
 from lusid.models.reference_portfolio_constituent_request import ReferencePortfolioConstituentRequest
 
 class UpsertReferencePortfolioConstituentsRequest(BaseModel):

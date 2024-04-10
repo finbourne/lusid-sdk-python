@@ -19,7 +19,7 @@ import json
 
 
 from typing import Any, Dict, Optional
-from pydantic import BaseModel, Field, StrictStr
+from pydantic.v1 import BaseModel, Field, StrictStr
 from lusid.models.label_value_set import LabelValueSet
 from lusid.models.metric_value import MetricValue
 

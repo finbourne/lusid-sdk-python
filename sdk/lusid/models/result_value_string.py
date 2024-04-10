@@ -19,7 +19,7 @@ import json
 
 
 from typing import Any, Dict, Optional
-from pydantic import Field, StrictStr, validator
+from pydantic.v1 import Field, StrictStr, validator
 from lusid.models.result_value import ResultValue
 
 class ResultValueString(ResultValue):

@@ -19,7 +19,7 @@ import json
 
 
 from typing import Any, Dict
-from pydantic import BaseModel, Field, constr, validator
+from pydantic.v1 import BaseModel, Field, constr, validator
 from lusid.models.trade_ticket import TradeTicket
 
 class TranslateTradeTicketRequest(BaseModel):

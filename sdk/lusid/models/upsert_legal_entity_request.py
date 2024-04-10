@@ -19,7 +19,7 @@ import json
 
 
 from typing import Any, Dict, Optional
-from pydantic import BaseModel, Field, constr, validator
+from pydantic.v1 import BaseModel, Field, constr, validator
 from lusid.models.counterparty_risk_information import CounterpartyRiskInformation
 from lusid.models.model_property import ModelProperty
 

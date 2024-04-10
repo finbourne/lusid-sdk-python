@@ -19,7 +19,7 @@ import json
 
 
 from typing import Any, Dict, Optional
-from pydantic import BaseModel, Field, constr, validator
+from pydantic.v1 import BaseModel, Field, constr, validator
 from lusid.models.aggregation_context import AggregationContext
 from lusid.models.holding_context import HoldingContext
 from lusid.models.market_context import MarketContext

@@ -19,7 +19,7 @@ import json
 
 
 from typing import Any, Dict, List, Optional
-from pydantic import BaseModel, Field, conlist, constr
+from pydantic.v1 import BaseModel, Field, conlist, constr
 from lusid.models.model_property import ModelProperty
 
 class UpsertInstrumentPropertyRequest(BaseModel):

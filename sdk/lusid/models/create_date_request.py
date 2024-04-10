@@ -19,7 +19,7 @@ import json
 
 from datetime import datetime
 from typing import Any, Dict, Optional
-from pydantic import BaseModel, Field, StrictStr, constr, validator
+from pydantic.v1 import BaseModel, Field, StrictStr, constr, validator
 from lusid.models.date_attributes import DateAttributes
 
 class CreateDateRequest(BaseModel):

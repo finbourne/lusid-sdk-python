@@ -19,7 +19,7 @@ import json
 
 
 from typing import Any, Dict
-from pydantic import BaseModel, Field
+from pydantic.v1 import BaseModel, Field
 from lusid.models.compliance_rule import ComplianceRule
 
 class ComplianceRuleUpsertResponse(BaseModel):

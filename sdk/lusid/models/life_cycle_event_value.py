@@ -19,7 +19,7 @@ import json
 
 from datetime import datetime
 from typing import Any, Dict, Optional
-from pydantic import Field, StrictStr, validator
+from pydantic.v1 import Field, StrictStr, validator
 from lusid.models.life_cycle_event_lineage import LifeCycleEventLineage
 from lusid.models.result_value import ResultValue
 from lusid.models.result_value_dictionary import ResultValueDictionary

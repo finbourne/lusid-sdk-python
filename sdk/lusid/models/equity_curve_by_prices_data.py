@@ -19,7 +19,7 @@ import json
 
 from datetime import datetime
 from typing import Any, Dict, List, Optional, Union
-from pydantic import Field, StrictFloat, StrictInt, StrictStr, conlist, constr, validator
+from pydantic.v1 import Field, StrictFloat, StrictInt, StrictStr, conlist, constr, validator
 from lusid.models.complex_market_data import ComplexMarketData
 from lusid.models.market_data_options import MarketDataOptions
 

@@ -19,7 +19,7 @@ import json
 
 
 from typing import Any, Dict
-from pydantic import Field, StrictStr, constr, validator
+from pydantic.v1 import Field, StrictStr, constr, validator
 from lusid.models.basket_identifier import BasketIdentifier
 from lusid.models.lusid_instrument import LusidInstrument
 from lusid.models.weighted_instruments import WeightedInstruments

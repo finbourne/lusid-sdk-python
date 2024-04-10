@@ -19,7 +19,7 @@ import json
 
 
 from typing import Any, Dict, Optional
-from pydantic import BaseModel, Field
+from pydantic.v1 import BaseModel, Field
 from lusid.models.a2_b_breakdown import A2BBreakdown
 
 class A2BCategory(BaseModel):

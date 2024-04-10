@@ -19,7 +19,7 @@ import json
 
 
 from typing import Any, Dict, Optional
-from pydantic import BaseModel, Field, StrictBool, constr
+from pydantic.v1 import BaseModel, Field, StrictBool, constr
 from lusid.models.compliance_parameter import ComplianceParameter
 from lusid.models.perpetual_property import PerpetualProperty
 from lusid.models.resource_id import ResourceId

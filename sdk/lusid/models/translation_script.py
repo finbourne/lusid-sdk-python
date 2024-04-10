@@ -19,7 +19,7 @@ import json
 
 
 from typing import Any, Dict, Optional
-from pydantic import BaseModel, Field, constr
+from pydantic.v1 import BaseModel, Field, constr
 from lusid.models.translation_script_id import TranslationScriptId
 from lusid.models.version import Version
 

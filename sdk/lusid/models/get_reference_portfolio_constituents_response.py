@@ -19,7 +19,7 @@ import json
 
 from datetime import datetime
 from typing import Any, Dict, List, Optional
-from pydantic import BaseModel, Field, StrictInt, StrictStr, conlist, validator
+from pydantic.v1 import BaseModel, Field, StrictInt, StrictStr, conlist, validator
 from lusid.models.link import Link
 from lusid.models.reference_portfolio_constituent import ReferencePortfolioConstituent
 

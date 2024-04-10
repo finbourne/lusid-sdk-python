@@ -19,7 +19,7 @@ import json
 
 from datetime import datetime
 from typing import Any, Dict, Optional, Union
-from pydantic import Field, StrictFloat, StrictInt, StrictStr, validator
+from pydantic.v1 import Field, StrictFloat, StrictInt, StrictStr, validator
 from lusid.models.basket import Basket
 from lusid.models.cds_flow_conventions import CdsFlowConventions
 from lusid.models.flow_convention_name import FlowConventionName

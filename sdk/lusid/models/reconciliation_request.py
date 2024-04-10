@@ -19,7 +19,7 @@ import json
 
 
 from typing import Any, Dict, List, Optional
-from pydantic import BaseModel, Field, StrictStr, conlist
+from pydantic.v1 import BaseModel, Field, StrictStr, conlist
 from lusid.models.reconciliation_left_right_address_key_pair import ReconciliationLeftRightAddressKeyPair
 from lusid.models.reconciliation_rule import ReconciliationRule
 from lusid.models.valuation_request import ValuationRequest

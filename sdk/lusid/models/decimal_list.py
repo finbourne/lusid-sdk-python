@@ -19,7 +19,7 @@ import json
 
 
 from typing import Any, Dict, List, Union
-from pydantic import Field, StrictFloat, StrictInt, StrictStr, conlist, validator
+from pydantic.v1 import Field, StrictFloat, StrictInt, StrictStr, conlist, validator
 from lusid.models.reference_list import ReferenceList
 
 class DecimalList(ReferenceList):

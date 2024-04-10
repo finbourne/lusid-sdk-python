@@ -19,7 +19,7 @@ import json
 
 from datetime import datetime
 from typing import Any, Dict, List, Optional
-from pydantic import Field, StrictStr, conlist, validator
+from pydantic.v1 import Field, StrictStr, conlist, validator
 from lusid.models.input_transition import InputTransition
 from lusid.models.instrument_event import InstrumentEvent
 from lusid.models.output_transition import OutputTransition

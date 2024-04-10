@@ -19,7 +19,7 @@ import json
 
 
 from typing import Any, Dict, List
-from pydantic import BaseModel, Field, conlist, constr
+from pydantic.v1 import BaseModel, Field, conlist, constr
 from lusid.models.compliance_rule_result_portfolio_detail import ComplianceRuleResultPortfolioDetail
 from lusid.models.resource_id import ResourceId
 

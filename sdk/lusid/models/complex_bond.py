@@ -19,7 +19,7 @@ import json
 
 
 from typing import Any, Dict, List, Optional
-from pydantic import Field, StrictBool, StrictStr, conlist, constr, validator
+from pydantic.v1 import Field, StrictBool, StrictStr, conlist, constr, validator
 from lusid.models.lusid_instrument import LusidInstrument
 from lusid.models.rounding_convention import RoundingConvention
 from lusid.models.schedule import Schedule

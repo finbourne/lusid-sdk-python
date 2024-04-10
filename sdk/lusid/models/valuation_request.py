@@ -19,7 +19,7 @@ import json
 
 from datetime import datetime
 from typing import Any, Dict, List, Optional
-from pydantic import BaseModel, Field, StrictBool, StrictStr, conlist, constr
+from pydantic.v1 import BaseModel, Field, StrictBool, StrictStr, conlist, constr
 from lusid.models.aggregate_spec import AggregateSpec
 from lusid.models.market_data_overrides import MarketDataOverrides
 from lusid.models.order_by_spec import OrderBySpec

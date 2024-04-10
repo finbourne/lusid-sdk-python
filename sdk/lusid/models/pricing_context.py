@@ -19,7 +19,7 @@ import json
 
 
 from typing import Any, Dict, List, Optional
-from pydantic import BaseModel, Field, conlist
+from pydantic.v1 import BaseModel, Field, conlist
 from lusid.models.model_selection import ModelSelection
 from lusid.models.pricing_options import PricingOptions
 from lusid.models.result_key_rule import ResultKeyRule

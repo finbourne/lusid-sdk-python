@@ -19,7 +19,7 @@ import json
 
 
 from typing import Any, Dict, Optional
-from pydantic import BaseModel, Field, StrictBool, constr
+from pydantic.v1 import BaseModel, Field, StrictBool, constr
 from lusid.models.model_property import ModelProperty
 from lusid.models.reconciliation_configuration import ReconciliationConfiguration
 from lusid.models.reconciliation_transactions import ReconciliationTransactions

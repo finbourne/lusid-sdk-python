@@ -19,7 +19,7 @@ import json
 
 
 from typing import Any, Dict, Optional
-from pydantic import BaseModel, Field, StrictStr
+from pydantic.v1 import BaseModel, Field, StrictStr
 from lusid.models.complex_market_data import ComplexMarketData
 from lusid.models.complex_market_data_id import ComplexMarketDataId
 

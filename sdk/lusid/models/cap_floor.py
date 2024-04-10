@@ -19,7 +19,7 @@ import json
 
 
 from typing import Any, Dict, Union
-from pydantic import Field, StrictBool, StrictFloat, StrictInt, StrictStr, constr, validator
+from pydantic.v1 import Field, StrictBool, StrictFloat, StrictInt, StrictStr, constr, validator
 from lusid.models.floating_leg import FloatingLeg
 from lusid.models.lusid_instrument import LusidInstrument
 

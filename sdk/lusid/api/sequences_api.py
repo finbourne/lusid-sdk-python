@@ -16,11 +16,11 @@ import re  # noqa: F401
 import io
 import warnings
 
-from pydantic import validate_arguments, ValidationError
+from pydantic.v1 import validate_arguments, ValidationError
 from typing import overload, Optional, Union, Awaitable
 
 from typing_extensions import Annotated
-from pydantic import Field, conint, constr, validator
+from pydantic.v1 import Field, conint, constr, validator
 
 from typing import Optional
 

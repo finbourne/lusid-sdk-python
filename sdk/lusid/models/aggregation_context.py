@@ -19,7 +19,7 @@ import json
 
 
 from typing import Any, Dict, Optional
-from pydantic import BaseModel
+from pydantic.v1 import BaseModel
 from lusid.models.aggregation_options import AggregationOptions
 
 class AggregationContext(BaseModel):

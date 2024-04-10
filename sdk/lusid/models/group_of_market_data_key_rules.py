@@ -19,7 +19,7 @@ import json
 
 
 from typing import Any, Dict, List
-from pydantic import BaseModel, Field, conlist, constr
+from pydantic.v1 import BaseModel, Field, conlist, constr
 from lusid.models.market_data_key_rule import MarketDataKeyRule
 
 class GroupOfMarketDataKeyRules(BaseModel):

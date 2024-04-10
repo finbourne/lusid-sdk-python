@@ -19,7 +19,7 @@ import json
 
 from datetime import datetime
 from typing import Any, Dict
-from pydantic import Field, StrictStr, validator
+from pydantic.v1 import Field, StrictStr, validator
 from lusid.models.economic_dependency import EconomicDependency
 
 class FxDependency(EconomicDependency):

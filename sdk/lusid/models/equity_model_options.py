@@ -19,7 +19,7 @@ import json
 
 
 from typing import Any, Dict
-from pydantic import Field, StrictStr, constr, validator
+from pydantic.v1 import Field, StrictStr, constr, validator
 from lusid.models.model_options import ModelOptions
 
 class EquityModelOptions(ModelOptions):

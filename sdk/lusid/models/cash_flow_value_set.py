@@ -19,7 +19,7 @@ import json
 
 
 from typing import Any, Dict, List, Optional
-from pydantic import Field, StrictStr, conlist, validator
+from pydantic.v1 import Field, StrictStr, conlist, validator
 from lusid.models.cash_flow_value import CashFlowValue
 from lusid.models.result_value import ResultValue
 

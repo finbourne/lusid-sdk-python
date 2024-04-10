@@ -19,7 +19,7 @@ import json
 
 
 from typing import Any, Dict, Optional
-from pydantic import BaseModel, StrictStr
+from pydantic.v1 import BaseModel, StrictStr
 from lusid.models.data_scope import DataScope
 
 class ReconciliationId(BaseModel):

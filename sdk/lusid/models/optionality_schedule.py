@@ -19,7 +19,7 @@ import json
 
 
 from typing import Any, Dict, List, Optional
-from pydantic import Field, StrictStr, conlist, validator
+from pydantic.v1 import Field, StrictStr, conlist, validator
 from lusid.models.option_entry import OptionEntry
 from lusid.models.schedule import Schedule
 

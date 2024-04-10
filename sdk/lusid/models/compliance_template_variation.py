@@ -19,7 +19,7 @@ import json
 
 
 from typing import Any, Dict, List
-from pydantic import BaseModel, Field, conlist, constr
+from pydantic.v1 import BaseModel, Field, conlist, constr
 from lusid.models.compliance_step import ComplianceStep
 from lusid.models.compliance_template_parameter import ComplianceTemplateParameter
 from lusid.models.perpetual_property import PerpetualProperty

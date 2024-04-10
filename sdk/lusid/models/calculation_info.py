@@ -19,7 +19,7 @@ import json
 
 
 from typing import Any, Dict, Union
-from pydantic import BaseModel, Field, StrictFloat, StrictInt, constr
+from pydantic.v1 import BaseModel, Field, StrictFloat, StrictInt, constr
 
 class CalculationInfo(BaseModel):
     """

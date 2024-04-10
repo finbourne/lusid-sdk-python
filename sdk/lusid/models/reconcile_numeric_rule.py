@@ -19,7 +19,7 @@ import json
 
 
 from typing import Any, Dict, Optional, Union
-from pydantic import Field, StrictFloat, StrictInt, StrictStr, validator
+from pydantic.v1 import Field, StrictFloat, StrictInt, StrictStr, validator
 from lusid.models.aggregate_spec import AggregateSpec
 from lusid.models.reconciliation_rule import ReconciliationRule
 

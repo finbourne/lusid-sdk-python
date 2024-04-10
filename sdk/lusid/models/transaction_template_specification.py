@@ -19,7 +19,7 @@ import json
 
 
 from typing import Any, Dict, List
-from pydantic import BaseModel, Field, StrictStr, conlist, constr
+from pydantic.v1 import BaseModel, Field, StrictStr, conlist, constr
 from lusid.models.election_specification import ElectionSpecification
 from lusid.models.eligibility_calculation import EligibilityCalculation
 from lusid.models.template_field import TemplateField

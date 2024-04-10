@@ -19,7 +19,7 @@ import json
 
 from datetime import datetime
 from typing import Any, Dict, List, Optional
-from pydantic import BaseModel, Field, StrictStr, conlist
+from pydantic.v1 import BaseModel, Field, StrictStr, conlist
 from lusid.models.aggregation_measure_failure_detail import AggregationMeasureFailureDetail
 from lusid.models.link import Link
 from lusid.models.result_data_schema import ResultDataSchema

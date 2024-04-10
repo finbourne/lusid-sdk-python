@@ -19,7 +19,7 @@ import json
 
 
 from typing import Any, Dict, List, Optional, Union
-from pydantic import BaseModel, Field, StrictFloat, StrictInt, conlist
+from pydantic.v1 import BaseModel, Field, StrictFloat, StrictInt, conlist
 from lusid.models.order_graph_block_order_detail import OrderGraphBlockOrderDetail
 
 class OrderGraphBlockOrderSynopsis(BaseModel):

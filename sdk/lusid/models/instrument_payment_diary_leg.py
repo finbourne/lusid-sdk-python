@@ -19,7 +19,7 @@ import json
 
 
 from typing import Any, Dict, List, Optional
-from pydantic import BaseModel, Field, StrictInt, StrictStr, conlist
+from pydantic.v1 import BaseModel, Field, StrictInt, StrictStr, conlist
 from lusid.models.instrument_payment_diary_row import InstrumentPaymentDiaryRow
 
 class InstrumentPaymentDiaryLeg(BaseModel):

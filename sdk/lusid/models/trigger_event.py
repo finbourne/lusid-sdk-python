@@ -19,7 +19,7 @@ import json
 
 from datetime import datetime
 from typing import Any, Dict, Union
-from pydantic import Field, StrictFloat, StrictInt, StrictStr, constr, validator
+from pydantic.v1 import Field, StrictFloat, StrictInt, StrictStr, constr, validator
 from lusid.models.instrument_event import InstrumentEvent
 
 class TriggerEvent(InstrumentEvent):

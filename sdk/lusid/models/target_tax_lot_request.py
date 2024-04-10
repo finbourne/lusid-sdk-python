@@ -19,7 +19,7 @@ import json
 
 from datetime import datetime
 from typing import Any, Dict, Optional, Union
-from pydantic import BaseModel, Field, StrictFloat, StrictInt
+from pydantic.v1 import BaseModel, Field, StrictFloat, StrictInt
 from lusid.models.currency_and_amount import CurrencyAndAmount
 
 class TargetTaxLotRequest(BaseModel):

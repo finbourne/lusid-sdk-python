@@ -19,7 +19,7 @@ import json
 
 
 from typing import Any, Dict, List
-from pydantic import Field, StrictStr, conlist, constr, validator
+from pydantic.v1 import Field, StrictStr, conlist, constr, validator
 from lusid.models.level_step import LevelStep
 from lusid.models.schedule import Schedule
 

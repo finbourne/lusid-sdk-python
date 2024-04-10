@@ -19,7 +19,7 @@ import json
 
 
 from typing import Any, Dict, Optional
-from pydantic import BaseModel, Field, StrictInt, StrictStr, validator
+from pydantic.v1 import BaseModel, Field, StrictInt, StrictStr, validator
 from lusid.models.resource_id import ResourceId
 
 class FieldSchema(BaseModel):

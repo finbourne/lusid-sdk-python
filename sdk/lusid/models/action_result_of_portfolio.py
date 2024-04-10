@@ -19,7 +19,7 @@ import json
 
 
 from typing import Any, Dict, Optional
-from pydantic import BaseModel
+from pydantic.v1 import BaseModel
 from lusid.models.portfolio import Portfolio
 
 class ActionResultOfPortfolio(BaseModel):

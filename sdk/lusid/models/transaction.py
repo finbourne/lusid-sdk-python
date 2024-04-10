@@ -19,7 +19,7 @@ import json
 
 from datetime import datetime
 from typing import Any, Dict, Optional, Union
-from pydantic import BaseModel, Field, StrictFloat, StrictInt, StrictStr, constr, validator
+from pydantic.v1 import BaseModel, Field, StrictFloat, StrictInt, StrictStr, constr, validator
 from lusid.models.currency_and_amount import CurrencyAndAmount
 from lusid.models.custodian_account import CustodianAccount
 from lusid.models.otc_confirmation import OtcConfirmation

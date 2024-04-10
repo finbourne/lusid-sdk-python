@@ -19,7 +19,7 @@ import json
 
 
 from typing import Any, Dict, Optional, Union
-from pydantic import BaseModel, Field, StrictFloat, StrictInt, constr
+from pydantic.v1 import BaseModel, Field, StrictFloat, StrictInt, constr
 from lusid.models.lusid_instrument import LusidInstrument
 from lusid.models.weighted_instrument_in_line_lookup_identifiers import WeightedInstrumentInLineLookupIdentifiers
 

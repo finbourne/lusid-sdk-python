@@ -19,7 +19,7 @@ import json
 
 
 from typing import Any, Dict, Union
-from pydantic import Field, StrictFloat, StrictInt, StrictStr, validator
+from pydantic.v1 import Field, StrictFloat, StrictInt, StrictStr, validator
 from lusid.models.compliance_parameter import ComplianceParameter
 
 class DecimalComplianceParameter(ComplianceParameter):

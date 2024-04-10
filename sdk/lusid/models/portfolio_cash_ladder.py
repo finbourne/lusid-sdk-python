@@ -19,7 +19,7 @@ import json
 
 
 from typing import Any, Dict, List, Optional
-from pydantic import BaseModel, Field, StrictStr, conlist
+from pydantic.v1 import BaseModel, Field, StrictStr, conlist
 from lusid.models.cash_ladder_record import CashLadderRecord
 from lusid.models.error_detail import ErrorDetail
 from lusid.models.link import Link

@@ -19,7 +19,7 @@ import json
 
 
 from typing import Any, Dict, List, Optional
-from pydantic import BaseModel, Field, StrictStr, conlist
+from pydantic.v1 import BaseModel, Field, StrictStr, conlist
 from lusid.models.perpetual_property import PerpetualProperty
 from lusid.models.target_tax_lot_request import TargetTaxLotRequest
 

@@ -19,7 +19,7 @@ import json
 
 from datetime import datetime
 from typing import Any, Dict
-from pydantic import Field, StrictStr, validator
+from pydantic.v1 import Field, StrictStr, validator
 from lusid.models.fixed_leg import FixedLeg
 from lusid.models.inflation_leg import InflationLeg
 from lusid.models.lusid_instrument import LusidInstrument

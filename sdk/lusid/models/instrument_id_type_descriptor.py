@@ -19,7 +19,7 @@ import json
 
 
 from typing import Any, Dict
-from pydantic import BaseModel, Field, StrictBool, StrictStr, constr
+from pydantic.v1 import BaseModel, Field, StrictBool, StrictStr, constr
 
 class InstrumentIdTypeDescriptor(BaseModel):
     """

@@ -19,7 +19,7 @@ import json
 
 
 from typing import Any, Dict
-from pydantic import BaseModel, Field, constr
+from pydantic.v1 import BaseModel, Field, constr
 from lusid.models.transaction_currency_and_amount import TransactionCurrencyAndAmount
 from lusid.models.transaction_price_and_type import TransactionPriceAndType
 

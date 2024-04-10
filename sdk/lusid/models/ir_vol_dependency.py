@@ -19,7 +19,7 @@ import json
 
 from datetime import datetime
 from typing import Any, Dict
-from pydantic import Field, StrictStr, constr, validator
+from pydantic.v1 import Field, StrictStr, constr, validator
 from lusid.models.economic_dependency import EconomicDependency
 
 class IrVolDependency(EconomicDependency):

@@ -19,7 +19,7 @@ import json
 
 
 from typing import Any, Dict, List, Optional
-from pydantic import BaseModel, StrictStr, conlist
+from pydantic.v1 import BaseModel, StrictStr, conlist
 from lusid.models.link import Link
 from lusid.models.version import Version
 

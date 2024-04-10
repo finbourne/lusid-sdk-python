@@ -19,7 +19,7 @@ import json
 
 
 from typing import Any, Dict, List, Optional
-from pydantic import BaseModel, Field, StrictStr, conlist
+from pydantic.v1 import BaseModel, Field, StrictStr, conlist
 from lusid.models.a2_b_category import A2BCategory
 from lusid.models.model_property import ModelProperty
 from lusid.models.perpetual_property import PerpetualProperty

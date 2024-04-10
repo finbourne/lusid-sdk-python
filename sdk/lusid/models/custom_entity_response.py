@@ -19,7 +19,7 @@ import json
 
 
 from typing import Any, Dict, List, Optional
-from pydantic import BaseModel, Field, StrictStr, conlist, constr
+from pydantic.v1 import BaseModel, Field, StrictStr, conlist, constr
 from lusid.models.custom_entity_field import CustomEntityField
 from lusid.models.custom_entity_id import CustomEntityId
 from lusid.models.link import Link

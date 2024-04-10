@@ -19,7 +19,7 @@ import json
 
 from datetime import datetime
 from typing import Any, Dict, Union
-from pydantic import Field, StrictFloat, StrictInt, StrictStr, validator
+from pydantic.v1 import Field, StrictFloat, StrictInt, StrictStr, validator
 from lusid.models.exchange_traded_option_contract_details import ExchangeTradedOptionContractDetails
 from lusid.models.lusid_instrument import LusidInstrument
 

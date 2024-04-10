@@ -19,7 +19,7 @@ import json
 
 
 from typing import Any, Dict, List
-from pydantic import BaseModel, Field, conlist, constr, validator
+from pydantic.v1 import BaseModel, Field, conlist, constr, validator
 from lusid.models.custom_entity_field_definition import CustomEntityFieldDefinition
 
 class UpdateCustomEntityDefinitionRequest(BaseModel):

@@ -19,7 +19,7 @@ import json
 
 
 from typing import Any, Dict, Optional
-from pydantic import BaseModel, Field, StrictStr, constr, validator
+from pydantic.v1 import BaseModel, Field, StrictStr, constr, validator
 from lusid.models.resource_id import ResourceId
 
 class CreateDerivedPropertyDefinitionRequest(BaseModel):

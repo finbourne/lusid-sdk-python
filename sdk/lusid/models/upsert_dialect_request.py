@@ -19,7 +19,7 @@ import json
 
 
 from typing import Any, Dict
-from pydantic import BaseModel, Field
+from pydantic.v1 import BaseModel, Field
 from lusid.models.dialect_id import DialectId
 from lusid.models.dialect_schema import DialectSchema
 

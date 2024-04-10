@@ -19,7 +19,7 @@ import json
 
 
 from typing import Any, Dict
-from pydantic import Field, StrictBool, StrictStr, validator
+from pydantic.v1 import Field, StrictBool, StrictStr, validator
 from lusid.models.compliance_parameter import ComplianceParameter
 
 class BoolComplianceParameter(ComplianceParameter):

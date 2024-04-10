@@ -19,7 +19,7 @@ import json
 
 
 from typing import Any, Dict, Optional, Union
-from pydantic import BaseModel, StrictFloat, StrictInt, StrictStr
+from pydantic.v1 import BaseModel, StrictFloat, StrictInt, StrictStr
 
 class CurrencyAndAmount(BaseModel):
     """

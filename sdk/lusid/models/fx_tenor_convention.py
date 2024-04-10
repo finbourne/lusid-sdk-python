@@ -19,7 +19,7 @@ import json
 
 
 from typing import Any, Dict
-from pydantic import BaseModel, Field, StrictInt, constr
+from pydantic.v1 import BaseModel, Field, StrictInt, constr
 
 class FxTenorConvention(BaseModel):
     """

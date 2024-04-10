@@ -19,7 +19,7 @@ import json
 
 
 from typing import Any, Dict, List
-from pydantic import Field, StrictStr, conlist, validator
+from pydantic.v1 import Field, StrictStr, conlist, validator
 from lusid.models.economic_dependency import EconomicDependency
 
 class CalendarDependency(EconomicDependency):

@@ -19,7 +19,7 @@ import json
 
 
 from typing import Any, Dict, List, Optional
-from pydantic import BaseModel, Field, conlist
+from pydantic.v1 import BaseModel, Field, conlist
 from lusid.models.link import Link
 from lusid.models.side_configuration_data import SideConfigurationData
 from lusid.models.transaction_configuration_data import TransactionConfigurationData

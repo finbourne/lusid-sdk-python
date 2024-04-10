@@ -19,7 +19,7 @@ import json
 
 from datetime import datetime
 from typing import Any, Dict, List, Optional
-from pydantic import BaseModel, Field, StrictStr, conint, conlist, constr, validator
+from pydantic.v1 import BaseModel, Field, StrictStr, conint, conlist, constr, validator
 from lusid.models.day_month import DayMonth
 from lusid.models.instrument_resolution_detail import InstrumentResolutionDetail
 from lusid.models.link import Link

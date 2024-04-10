@@ -19,7 +19,7 @@ import json
 
 
 from typing import Any, Dict, Optional
-from pydantic import BaseModel, Field, constr
+from pydantic.v1 import BaseModel, Field, constr
 from lusid.models.model_property import ModelProperty
 
 class UpsertPersonRequest(BaseModel):

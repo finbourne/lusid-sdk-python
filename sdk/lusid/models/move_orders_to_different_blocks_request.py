@@ -19,7 +19,7 @@ import json
 
 
 from typing import Any, Dict, List
-from pydantic import BaseModel, Field, conlist
+from pydantic.v1 import BaseModel, Field, conlist
 from lusid.models.block_and_order_id_request import BlockAndOrderIdRequest
 
 class MoveOrdersToDifferentBlocksRequest(BaseModel):

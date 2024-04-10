@@ -19,7 +19,7 @@ import json
 
 from datetime import datetime
 from typing import Any, Dict
-from pydantic import Field, StrictStr, validator
+from pydantic.v1 import Field, StrictStr, validator
 from lusid.models.asset_leg import AssetLeg
 from lusid.models.instrument_leg import InstrumentLeg
 from lusid.models.lusid_instrument import LusidInstrument

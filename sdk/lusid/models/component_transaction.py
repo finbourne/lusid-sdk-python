@@ -19,7 +19,7 @@ import json
 
 
 from typing import Any, Dict, List, Optional
-from pydantic import BaseModel, Field, conlist, constr
+from pydantic.v1 import BaseModel, Field, conlist, constr
 from lusid.models.transaction_field_map import TransactionFieldMap
 from lusid.models.transaction_property_map import TransactionPropertyMap
 

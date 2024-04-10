@@ -19,7 +19,7 @@ import json
 
 
 from typing import Any, Dict, List, Optional
-from pydantic import BaseModel, Field, StrictStr, conlist, validator
+from pydantic.v1 import BaseModel, Field, StrictStr, conlist, validator
 from lusid.models.instrument_event_configuration import InstrumentEventConfiguration
 from lusid.models.link import Link
 from lusid.models.resource_id import ResourceId

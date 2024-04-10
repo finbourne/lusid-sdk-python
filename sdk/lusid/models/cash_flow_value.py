@@ -19,7 +19,7 @@ import json
 
 from datetime import datetime
 from typing import Any, Dict, Optional, Union
-from pydantic import Field, StrictFloat, StrictInt, StrictStr, validator
+from pydantic.v1 import Field, StrictFloat, StrictInt, StrictStr, validator
 from lusid.models.cash_flow_lineage import CashFlowLineage
 from lusid.models.result_value import ResultValue
 from lusid.models.result_value_dictionary import ResultValueDictionary

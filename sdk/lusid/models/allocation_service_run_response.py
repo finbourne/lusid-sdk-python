@@ -19,7 +19,7 @@ import json
 
 
 from typing import Any, Dict, List, Optional
-from pydantic import BaseModel, conlist
+from pydantic.v1 import BaseModel, conlist
 from lusid.models.error_detail import ErrorDetail
 from lusid.models.resource_id import ResourceId
 

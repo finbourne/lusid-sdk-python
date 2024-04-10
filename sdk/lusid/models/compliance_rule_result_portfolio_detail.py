@@ -19,7 +19,7 @@ import json
 
 
 from typing import Any, Dict
-from pydantic import BaseModel, Field, constr
+from pydantic.v1 import BaseModel, Field, constr
 from lusid.models.resource_id import ResourceId
 
 class ComplianceRuleResultPortfolioDetail(BaseModel):

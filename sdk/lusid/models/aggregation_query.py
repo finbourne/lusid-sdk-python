@@ -19,7 +19,7 @@ import json
 
 from datetime import datetime
 from typing import Any, Dict, Optional
-from pydantic import BaseModel, Field, StrictBool, StrictStr, constr, validator
+from pydantic.v1 import BaseModel, Field, StrictBool, StrictStr, constr, validator
 from lusid.models.address_key_option_definition import AddressKeyOptionDefinition
 
 class AggregationQuery(BaseModel):

@@ -19,7 +19,7 @@ import json
 
 
 from typing import Any, Dict, List, Optional
-from pydantic import BaseModel, Field, conlist
+from pydantic.v1 import BaseModel, Field, conlist
 from lusid.models.perpetual_property import PerpetualProperty
 from lusid.models.transaction_configuration_movement_data import TransactionConfigurationMovementData
 from lusid.models.transaction_configuration_type_alias import TransactionConfigurationTypeAlias

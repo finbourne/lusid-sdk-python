@@ -19,7 +19,7 @@ import json
 
 
 from typing import Any, Dict, List, Optional
-from pydantic import Field, StrictStr, conlist, constr, validator
+from pydantic.v1 import Field, StrictStr, conlist, constr, validator
 from lusid.models.complex_market_data import ComplexMarketData
 from lusid.models.fx_tenor_convention import FxTenorConvention
 from lusid.models.market_data_options import MarketDataOptions

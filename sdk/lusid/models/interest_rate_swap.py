@@ -19,7 +19,7 @@ import json
 
 from datetime import datetime
 from typing import Any, Dict, List, Optional
-from pydantic import Field, StrictBool, StrictStr, conlist, validator
+from pydantic.v1 import Field, StrictBool, StrictStr, conlist, validator
 from lusid.models.additional_payment import AdditionalPayment
 from lusid.models.instrument_leg import InstrumentLeg
 from lusid.models.lusid_instrument import LusidInstrument

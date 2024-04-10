@@ -19,7 +19,7 @@ import json
 
 
 from typing import Any, Dict, Optional
-from pydantic import Field, StrictStr, constr, validator
+from pydantic.v1 import Field, StrictStr, constr, validator
 from lusid.models.complex_market_data import ComplexMarketData
 
 class OpaqueMarketData(ComplexMarketData):

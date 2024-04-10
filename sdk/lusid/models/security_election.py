@@ -19,7 +19,7 @@ import json
 
 
 from typing import Any, Dict, Optional, Union
-from pydantic import BaseModel, Field, StrictBool, StrictFloat, StrictInt, constr
+from pydantic.v1 import BaseModel, Field, StrictBool, StrictFloat, StrictInt, constr
 from lusid.models.units_ratio import UnitsRatio
 
 class SecurityElection(BaseModel):

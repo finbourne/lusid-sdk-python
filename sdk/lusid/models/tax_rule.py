@@ -19,7 +19,7 @@ import json
 
 
 from typing import Any, Dict, List, Union
-from pydantic import BaseModel, Field, StrictFloat, StrictInt, conlist, constr, validator
+from pydantic.v1 import BaseModel, Field, StrictFloat, StrictInt, conlist, constr, validator
 from lusid.models.match_criterion import MatchCriterion
 
 class TaxRule(BaseModel):

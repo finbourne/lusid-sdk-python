@@ -19,7 +19,7 @@ import json
 
 
 from typing import Any, Dict
-from pydantic import BaseModel, Field, constr
+from pydantic.v1 import BaseModel, Field, constr
 from lusid.models.block import Block
 from lusid.models.order_graph_block_allocation_synopsis import OrderGraphBlockAllocationSynopsis
 from lusid.models.order_graph_block_execution_synopsis import OrderGraphBlockExecutionSynopsis

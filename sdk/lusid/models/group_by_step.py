@@ -19,7 +19,7 @@ import json
 
 
 from typing import Any, Dict, List
-from pydantic import Field, StrictStr, conlist, constr, validator
+from pydantic.v1 import Field, StrictStr, conlist, constr, validator
 from lusid.models.compliance_step import ComplianceStep
 from lusid.models.compliance_template_parameter import ComplianceTemplateParameter
 

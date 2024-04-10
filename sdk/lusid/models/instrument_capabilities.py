@@ -19,7 +19,7 @@ import json
 
 
 from typing import Any, Dict, List, Optional
-from pydantic import BaseModel, Field, StrictStr, conlist
+from pydantic.v1 import BaseModel, Field, StrictStr, conlist
 from lusid.models.described_address_key import DescribedAddressKey
 from lusid.models.economic_dependency import EconomicDependency
 from lusid.models.link import Link

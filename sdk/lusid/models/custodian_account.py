@@ -19,7 +19,7 @@ import json
 
 
 from typing import Any, Dict, Optional
-from pydantic import BaseModel, Field, StrictStr, constr
+from pydantic.v1 import BaseModel, Field, StrictStr, constr
 from lusid.models.legal_entity import LegalEntity
 from lusid.models.model_property import ModelProperty
 from lusid.models.resource_id import ResourceId

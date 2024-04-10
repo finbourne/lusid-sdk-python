@@ -19,7 +19,7 @@ import json
 
 
 from typing import Any, Dict, Optional
-from pydantic import BaseModel, Field
+from pydantic.v1 import BaseModel, Field
 from lusid.models.recipe_composer import RecipeComposer
 
 class UpsertRecipeComposerRequest(BaseModel):

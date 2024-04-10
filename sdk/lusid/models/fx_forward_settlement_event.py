@@ -19,7 +19,7 @@ import json
 
 from datetime import datetime
 from typing import Any, Dict, Optional, Union
-from pydantic import Field, StrictBool, StrictFloat, StrictInt, StrictStr, validator
+from pydantic.v1 import Field, StrictBool, StrictFloat, StrictInt, StrictStr, validator
 from lusid.models.instrument_event import InstrumentEvent
 
 class FxForwardSettlementEvent(InstrumentEvent):

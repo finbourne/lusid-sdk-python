@@ -19,7 +19,7 @@ import json
 
 
 from typing import Any, Dict, List, Optional, Union
-from pydantic import BaseModel, Field, StrictFloat, StrictInt, StrictStr, conlist, constr, validator
+from pydantic.v1 import BaseModel, Field, StrictFloat, StrictInt, StrictStr, conlist, constr, validator
 from lusid.models.currency_and_amount import CurrencyAndAmount
 from lusid.models.lusid_instrument import LusidInstrument
 from lusid.models.model_property import ModelProperty

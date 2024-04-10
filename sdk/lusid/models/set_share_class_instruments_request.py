@@ -19,7 +19,7 @@ import json
 
 
 from typing import Any, Dict, List
-from pydantic import BaseModel, Field, StrictStr, conlist
+from pydantic.v1 import BaseModel, Field, StrictStr, conlist
 from lusid.models.instrument_resolution_detail import InstrumentResolutionDetail
 
 class SetShareClassInstrumentsRequest(BaseModel):

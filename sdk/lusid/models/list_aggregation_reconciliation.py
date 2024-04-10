@@ -19,7 +19,7 @@ import json
 
 
 from typing import Any, Dict, List, Optional
-from pydantic import BaseModel, Field, conlist
+from pydantic.v1 import BaseModel, Field, conlist
 from lusid.models.list_aggregation_response import ListAggregationResponse
 from lusid.models.result_data_schema import ResultDataSchema
 
