@@ -65,6 +65,8 @@ from lusid.models.allocation_request import AllocationRequest
 from lusid.models.allocation_service_run_response import AllocationServiceRunResponse
 from lusid.models.allocation_set_request import AllocationSetRequest
 from lusid.models.amortisation_event import AmortisationEvent
+from lusid.models.amortisation_rule import AmortisationRule
+from lusid.models.amortisation_rule_set import AmortisationRuleSet
 from lusid.models.annul_quotes_response import AnnulQuotesResponse
 from lusid.models.annul_single_structured_data_response import AnnulSingleStructuredDataResponse
 from lusid.models.annul_structured_data_response import AnnulStructuredDataResponse
@@ -179,6 +181,7 @@ from lusid.models.counterparty_agreement import CounterpartyAgreement
 from lusid.models.counterparty_risk_information import CounterpartyRiskInformation
 from lusid.models.counterparty_signatory import CounterpartySignatory
 from lusid.models.create_address_key_definition_request import CreateAddressKeyDefinitionRequest
+from lusid.models.create_amortisation_rule_set_request import CreateAmortisationRuleSetRequest
 from lusid.models.create_calendar_request import CreateCalendarRequest
 from lusid.models.create_corporate_action_source_request import CreateCorporateActionSourceRequest
 from lusid.models.create_custom_entity_type_request import CreateCustomEntityTypeRequest
@@ -510,6 +513,7 @@ from lusid.models.paged_resource_list_of_abor_configuration import PagedResource
 from lusid.models.paged_resource_list_of_account import PagedResourceListOfAccount
 from lusid.models.paged_resource_list_of_address_key_definition import PagedResourceListOfAddressKeyDefinition
 from lusid.models.paged_resource_list_of_allocation import PagedResourceListOfAllocation
+from lusid.models.paged_resource_list_of_amortisation_rule_set import PagedResourceListOfAmortisationRuleSet
 from lusid.models.paged_resource_list_of_block import PagedResourceListOfBlock
 from lusid.models.paged_resource_list_of_calendar import PagedResourceListOfCalendar
 from lusid.models.paged_resource_list_of_chart_of_accounts import PagedResourceListOfChartOfAccounts
@@ -853,6 +857,7 @@ from lusid.models.typed_resource_id import TypedResourceId
 from lusid.models.unit_schema import UnitSchema
 from lusid.models.units_ratio import UnitsRatio
 from lusid.models.unmatched_holding_method import UnmatchedHoldingMethod
+from lusid.models.update_amortisation_rule_set_details_request import UpdateAmortisationRuleSetDetailsRequest
 from lusid.models.update_calendar_request import UpdateCalendarRequest
 from lusid.models.update_custom_entity_definition_request import UpdateCustomEntityDefinitionRequest
 from lusid.models.update_custom_entity_type_request import UpdateCustomEntityTypeRequest
@@ -995,6 +1000,8 @@ __all__ = [
     "AllocationServiceRunResponse",
     "AllocationSetRequest",
     "AmortisationEvent",
+    "AmortisationRule",
+    "AmortisationRuleSet",
     "AnnulQuotesResponse",
     "AnnulSingleStructuredDataResponse",
     "AnnulStructuredDataResponse",
@@ -1109,6 +1116,7 @@ __all__ = [
     "CounterpartyRiskInformation",
     "CounterpartySignatory",
     "CreateAddressKeyDefinitionRequest",
+    "CreateAmortisationRuleSetRequest",
     "CreateCalendarRequest",
     "CreateCorporateActionSourceRequest",
     "CreateCustomEntityTypeRequest",
@@ -1440,6 +1448,7 @@ __all__ = [
     "PagedResourceListOfAccount",
     "PagedResourceListOfAddressKeyDefinition",
     "PagedResourceListOfAllocation",
+    "PagedResourceListOfAmortisationRuleSet",
     "PagedResourceListOfBlock",
     "PagedResourceListOfCalendar",
     "PagedResourceListOfChartOfAccounts",
@@ -1783,6 +1792,7 @@ __all__ = [
     "UnitSchema",
     "UnitsRatio",
     "UnmatchedHoldingMethod",
+    "UpdateAmortisationRuleSetDetailsRequest",
     "UpdateCalendarRequest",
     "UpdateCustomEntityDefinitionRequest",
     "UpdateCustomEntityTypeRequest",

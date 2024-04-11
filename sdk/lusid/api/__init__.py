@@ -6,6 +6,7 @@ from lusid.api.abor_configuration_api import AborConfigurationApi
 from lusid.api.address_key_definition_api import AddressKeyDefinitionApi
 from lusid.api.aggregation_api import AggregationApi
 from lusid.api.allocations_api import AllocationsApi
+from lusid.api.amortisation_rule_sets_api import AmortisationRuleSetsApi
 from lusid.api.application_metadata_api import ApplicationMetadataApi
 from lusid.api.blocks_api import BlocksApi
 from lusid.api.calendars_api import CalendarsApi
@@ -71,6 +72,7 @@ __all__ = [
     "AddressKeyDefinitionApi",
     "AggregationApi",
     "AllocationsApi",
+    "AmortisationRuleSetsApi",
     "ApplicationMetadataApi",
     "BlocksApi",
     "CalendarsApi",
