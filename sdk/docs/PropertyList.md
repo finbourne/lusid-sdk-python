@@ -1,27 +1,28 @@
-# ReferenceList
+# PropertyList
 
 
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
+**values** | [**List[ModelProperty]**](ModelProperty.md) |  | 
 **reference_list_type** | **str** | The reference list values. The available values are: PortfolioGroupIdList, PortfolioIdList, AddressKeyList, StringList, InstrumentList, DecimalList, PropertyList | 
 
 ## Example
 
 ```python
-from lusid.models.reference_list import ReferenceList
+from lusid.models.property_list import PropertyList
 
 # TODO update the JSON string below
 json = "{}"
-# create an instance of ReferenceList from a JSON string
-reference_list_instance = ReferenceList.from_json(json)
+# create an instance of PropertyList from a JSON string
+property_list_instance = PropertyList.from_json(json)
 # print the JSON string representation of the object
-print ReferenceList.to_json()
+print PropertyList.to_json()
 
 # convert the object into a dict
-reference_list_dict = reference_list_instance.to_dict()
-# create an instance of ReferenceList from a dict
-reference_list_form_dict = reference_list.from_dict(reference_list_dict)
+property_list_dict = property_list_instance.to_dict()
+# create an instance of PropertyList from a dict
+property_list_form_dict = property_list.from_dict(property_list_dict)
 ```
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

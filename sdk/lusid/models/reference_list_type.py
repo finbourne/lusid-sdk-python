@@ -35,6 +35,7 @@ class ReferenceListType(str, Enum):
     STRINGLIST = 'StringList'
     INSTRUMENTLIST = 'InstrumentList'
     DECIMALLIST = 'DecimalList'
+    PROPERTYLIST = 'PropertyList'
 
     @classmethod
     def from_json(cls, json_str: str) -> ReferenceListType:

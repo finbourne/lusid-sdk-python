@@ -20,13 +20,14 @@ import json
 
 from typing import Any, Dict, List
 from pydantic.v1 import Field, StrictStr, conlist, validator
+from lusid.models.model_property import ModelProperty
 from lusid.models.reference_list import ReferenceList
 
-class StringList(ReferenceList):
+class PropertyList(ReferenceList):
     """
-    StringList
+    PropertyList
     """
-    values: conlist(StrictStr, max_items=100, min_items=0) = Field(...)
+    values: conlist(ModelProperty, max_items=100, min_items=0) = Field(...)
     reference_list_type: StrictStr = Field(..., alias="referenceListType", description="The reference list values. The available values are: PortfolioGroupIdList, PortfolioIdList, AddressKeyList, StringList, InstrumentList, DecimalList, PropertyList")
     additional_properties: Dict[str, Any] = {}
     __properties = ["referenceListType", "values"]
@@ -52,8 +53,8 @@ class StringList(ReferenceList):
         return json.dumps(self.to_dict())
 
     @classmethod
-    def from_json(cls, json_str: str) -> StringList:
-        """Create an instance of StringList from a JSON string"""
+    def from_json(cls, json_str: str) -> PropertyList:
+        """Create an instance of PropertyList from a JSON string"""
         return cls.from_dict(json.loads(json_str))
 
     def to_dict(self):
@@ -63,6 +64,13 @@ class StringList(ReferenceList):
                             "additional_properties"
                           },
                           exclude_none=True)
+        # override the default output from pydantic by calling `to_dict()` of each item in values (list)
+        _items = []
+        if self.values:
+            for _item in self.values:
+                if _item:
+                    _items.append(_item.to_dict())
+            _dict['values'] = _items
         # puts key-value pairs in additional_properties in the top level
         if self.additional_properties is not None:
             for _key, _value in self.additional_properties.items():
@@ -71,17 +79,17 @@ class StringList(ReferenceList):
         return _dict
 
     @classmethod
-    def from_dict(cls, obj: dict) -> StringList:
-        """Create an instance of StringList from a dict"""
+    def from_dict(cls, obj: dict) -> PropertyList:
+        """Create an instance of PropertyList from a dict"""
         if obj is None:
             return None
 
         if not isinstance(obj, dict):
-            return StringList.parse_obj(obj)
+            return PropertyList.parse_obj(obj)
 
-        _obj = StringList.parse_obj({
+        _obj = PropertyList.parse_obj({
             "reference_list_type": obj.get("referenceListType"),
-            "values": obj.get("values")
+            "values": [ModelProperty.from_dict(_item) for _item in obj.get("values")] if obj.get("values") is not None else None
         })
         # store additional fields in additional_properties
         for _key in obj.keys():

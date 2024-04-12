@@ -617,6 +617,7 @@ from lusid.models.property_interval import PropertyInterval
 from lusid.models.property_key_compliance_parameter import PropertyKeyComplianceParameter
 from lusid.models.property_key_list_compliance_parameter import PropertyKeyListComplianceParameter
 from lusid.models.property_life_time import PropertyLifeTime
+from lusid.models.property_list import PropertyList
 from lusid.models.property_schema import PropertySchema
 from lusid.models.property_type import PropertyType
 from lusid.models.property_value import PropertyValue
@@ -1552,6 +1553,7 @@ __all__ = [
     "PropertyKeyComplianceParameter",
     "PropertyKeyListComplianceParameter",
     "PropertyLifeTime",
+    "PropertyList",
     "PropertySchema",
     "PropertyType",
     "PropertyValue",

@@ -28,15 +28,15 @@ class PortfolioIdList(ReferenceList):
     PortfolioIdList
     """
     values: conlist(ResourceId, max_items=100) = Field(...)
-    reference_list_type: StrictStr = Field(..., alias="referenceListType", description="The reference list values. The available values are: PortfolioGroupIdList, PortfolioIdList, AddressKeyList, StringList, InstrumentList, DecimalList")
+    reference_list_type: StrictStr = Field(..., alias="referenceListType", description="The reference list values. The available values are: PortfolioGroupIdList, PortfolioIdList, AddressKeyList, StringList, InstrumentList, DecimalList, PropertyList")
     additional_properties: Dict[str, Any] = {}
     __properties = ["referenceListType", "values"]
 
     @validator('reference_list_type')
     def reference_list_type_validate_enum(cls, value):
         """Validates the enum"""
-        if value not in ('PortfolioGroupIdList', 'PortfolioIdList', 'AddressKeyList', 'StringList', 'InstrumentList', 'DecimalList'):
-            raise ValueError("must be one of enum values ('PortfolioGroupIdList', 'PortfolioIdList', 'AddressKeyList', 'StringList', 'InstrumentList', 'DecimalList')")
+        if value not in ('PortfolioGroupIdList', 'PortfolioIdList', 'AddressKeyList', 'StringList', 'InstrumentList', 'DecimalList', 'PropertyList'):
+            raise ValueError("must be one of enum values ('PortfolioGroupIdList', 'PortfolioIdList', 'AddressKeyList', 'StringList', 'InstrumentList', 'DecimalList', 'PropertyList')")
         return value
 
     class Config:

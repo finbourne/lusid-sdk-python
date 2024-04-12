@@ -26,14 +26,14 @@ class ReferenceList(BaseModel):
     """
     ReferenceList
     """
-    reference_list_type: StrictStr = Field(..., alias="referenceListType", description="The reference list values. The available values are: PortfolioGroupIdList, PortfolioIdList, AddressKeyList, StringList, InstrumentList, DecimalList")
+    reference_list_type: StrictStr = Field(..., alias="referenceListType", description="The reference list values. The available values are: PortfolioGroupIdList, PortfolioIdList, AddressKeyList, StringList, InstrumentList, DecimalList, PropertyList")
     __properties = ["referenceListType"]
 
     @validator('reference_list_type')
     def reference_list_type_validate_enum(cls, value):
         """Validates the enum"""
-        if value not in ('PortfolioGroupIdList', 'PortfolioIdList', 'AddressKeyList', 'StringList', 'InstrumentList', 'DecimalList'):
-            raise ValueError("must be one of enum values ('PortfolioGroupIdList', 'PortfolioIdList', 'AddressKeyList', 'StringList', 'InstrumentList', 'DecimalList')")
+        if value not in ('PortfolioGroupIdList', 'PortfolioIdList', 'AddressKeyList', 'StringList', 'InstrumentList', 'DecimalList', 'PropertyList'):
+            raise ValueError("must be one of enum values ('PortfolioGroupIdList', 'PortfolioIdList', 'AddressKeyList', 'StringList', 'InstrumentList', 'DecimalList', 'PropertyList')")
         return value
 
     class Config:
@@ -51,6 +51,7 @@ class ReferenceList(BaseModel):
         'InstrumentList': 'InstrumentList',
         'PortfolioGroupIdList': 'PortfolioGroupIdList',
         'PortfolioIdList': 'PortfolioIdList',
+        'PropertyList': 'PropertyList',
         'StringList': 'StringList'
     }
 
@@ -72,7 +73,7 @@ class ReferenceList(BaseModel):
         return json.dumps(self.to_dict())
 
     @classmethod
-    def from_json(cls, json_str: str) -> Union(AddressKeyList, DecimalList, InstrumentList, PortfolioGroupIdList, PortfolioIdList, StringList):
+    def from_json(cls, json_str: str) -> Union(AddressKeyList, DecimalList, InstrumentList, PortfolioGroupIdList, PortfolioIdList, PropertyList, StringList):
         """Create an instance of ReferenceList from a JSON string"""
         return cls.from_dict(json.loads(json_str))
 
@@ -85,7 +86,7 @@ class ReferenceList(BaseModel):
         return _dict
 
     @classmethod
-    def from_dict(cls, obj: dict) -> Union(AddressKeyList, DecimalList, InstrumentList, PortfolioGroupIdList, PortfolioIdList, StringList):
+    def from_dict(cls, obj: dict) -> Union(AddressKeyList, DecimalList, InstrumentList, PortfolioGroupIdList, PortfolioIdList, PropertyList, StringList):
         """Create an instance of ReferenceList from a dict"""
         # look up the object type based on discriminator mapping
         object_type = cls.get_discriminator_value(obj)
