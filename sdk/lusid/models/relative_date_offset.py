@@ -18,16 +18,17 @@ import re  # noqa: F401
 import json
 
 
-from typing import Any, Dict
-from pydantic.v1 import BaseModel, Field, StrictInt, constr
+from typing import Any, Dict, Optional
+from pydantic.v1 import BaseModel, Field, StrictInt, StrictStr, constr
 
 class RelativeDateOffset(BaseModel):
     """
     Defines a date offset which is relative to some anchor date.  # noqa: E501
     """
-    days: StrictInt = Field(..., description="The number of business days to add to the anchor date.")
+    days: StrictInt = Field(..., description="The number of days to add to the anchor date.")
     business_day_convention: constr(strict=True, min_length=1) = Field(..., alias="businessDayConvention", description="The adjustment type to apply to dates that fall upon a non-business day, e.g. modified following or following.    Supported string (enumeration) values are: [NoAdjustment, Previous, P, Following, F, ModifiedPrevious, MP, ModifiedFollowing, MF, HalfMonthModifiedFollowing, Nearest].")
-    __properties = ["days", "businessDayConvention"]
+    day_type: Optional[StrictStr] = Field(None, alias="dayType", description="Indicates if consideration is given to whether a day is a good business day or not when calculating the offset date.    Supported string (enumeration) values are: [Business, Calendar].")
+    __properties = ["days", "businessDayConvention", "dayType"]
 
     class Config:
         """Pydantic configuration"""
@@ -53,6 +54,11 @@ class RelativeDateOffset(BaseModel):
                           exclude={
                           },
                           exclude_none=True)
+        # set to None if day_type (nullable) is None
+        # and __fields_set__ contains the field
+        if self.day_type is None and "day_type" in self.__fields_set__:
+            _dict['dayType'] = None
+
         return _dict
 
     @classmethod
@@ -66,6 +72,7 @@ class RelativeDateOffset(BaseModel):
 
         _obj = RelativeDateOffset.parse_obj({
             "days": obj.get("days"),
-            "business_day_convention": obj.get("businessDayConvention")
+            "business_day_convention": obj.get("businessDayConvention"),
+            "day_type": obj.get("dayType")
         })
         return _obj

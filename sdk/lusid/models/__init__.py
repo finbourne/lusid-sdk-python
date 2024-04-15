@@ -763,6 +763,7 @@ from lusid.models.scaling_methodology import ScalingMethodology
 from lusid.models.schedule import Schedule
 from lusid.models.schedule_type import ScheduleType
 from lusid.models.scope_definition import ScopeDefinition
+from lusid.models.scrip_dividend_event import ScripDividendEvent
 from lusid.models.script_map_reference import ScriptMapReference
 from lusid.models.security_election import SecurityElection
 from lusid.models.sequence_definition import SequenceDefinition
@@ -1699,6 +1700,7 @@ __all__ = [
     "Schedule",
     "ScheduleType",
     "ScopeDefinition",
+    "ScripDividendEvent",
     "ScriptMapReference",
     "SecurityElection",
     "SequenceDefinition",

@@ -375,15 +375,15 @@ class PropertyDefinitionsApi:
             _request_auth=_params.get('_request_auth'))
 
     @overload
-    async def delete_property_definition(self, domain : Annotated[StrictStr, Field(..., description="The domain of the property to be deleted.")], scope : Annotated[constr(strict=True, max_length=64, min_length=1), Field(..., description="The scope of the property to be deleted.")], code : Annotated[constr(strict=True, max_length=64, min_length=1), Field(..., description="The code of the property to be deleted. Together with the domain and scope this uniquely              identifies the property.")], **kwargs) -> DeletedEntityResponse:  # noqa: E501
+    async def delete_property_definition(self, domain : Annotated[StrictStr, Field(..., description="The domain of the property to be deleted.")], scope : Annotated[constr(strict=True, max_length=64, min_length=1), Field(..., description="The scope of the property to be deleted.")], code : Annotated[constr(strict=True, max_length=1024, min_length=0), Field(..., description="The code of the property to be deleted. Together with the domain and scope this uniquely              identifies the property.")], **kwargs) -> DeletedEntityResponse:  # noqa: E501
         ...
 
     @overload
-    def delete_property_definition(self, domain : Annotated[StrictStr, Field(..., description="The domain of the property to be deleted.")], scope : Annotated[constr(strict=True, max_length=64, min_length=1), Field(..., description="The scope of the property to be deleted.")], code : Annotated[constr(strict=True, max_length=64, min_length=1), Field(..., description="The code of the property to be deleted. Together with the domain and scope this uniquely              identifies the property.")], async_req: Optional[bool]=True, **kwargs) -> DeletedEntityResponse:  # noqa: E501
+    def delete_property_definition(self, domain : Annotated[StrictStr, Field(..., description="The domain of the property to be deleted.")], scope : Annotated[constr(strict=True, max_length=64, min_length=1), Field(..., description="The scope of the property to be deleted.")], code : Annotated[constr(strict=True, max_length=1024, min_length=0), Field(..., description="The code of the property to be deleted. Together with the domain and scope this uniquely              identifies the property.")], async_req: Optional[bool]=True, **kwargs) -> DeletedEntityResponse:  # noqa: E501
         ...
 
     @validate_arguments
-    def delete_property_definition(self, domain : Annotated[StrictStr, Field(..., description="The domain of the property to be deleted.")], scope : Annotated[constr(strict=True, max_length=64, min_length=1), Field(..., description="The scope of the property to be deleted.")], code : Annotated[constr(strict=True, max_length=64, min_length=1), Field(..., description="The code of the property to be deleted. Together with the domain and scope this uniquely              identifies the property.")], async_req: Optional[bool]=None, **kwargs) -> Union[DeletedEntityResponse, Awaitable[DeletedEntityResponse]]:  # noqa: E501
+    def delete_property_definition(self, domain : Annotated[StrictStr, Field(..., description="The domain of the property to be deleted.")], scope : Annotated[constr(strict=True, max_length=64, min_length=1), Field(..., description="The scope of the property to be deleted.")], code : Annotated[constr(strict=True, max_length=1024, min_length=0), Field(..., description="The code of the property to be deleted. Together with the domain and scope this uniquely              identifies the property.")], async_req: Optional[bool]=None, **kwargs) -> Union[DeletedEntityResponse, Awaitable[DeletedEntityResponse]]:  # noqa: E501
         """DeletePropertyDefinition: Delete property definition  # noqa: E501
 
         Delete the definition of the specified property.  # noqa: E501
@@ -419,7 +419,7 @@ class PropertyDefinitionsApi:
         return self.delete_property_definition_with_http_info(domain, scope, code, **kwargs)  # noqa: E501
 
     @validate_arguments
-    def delete_property_definition_with_http_info(self, domain : Annotated[StrictStr, Field(..., description="The domain of the property to be deleted.")], scope : Annotated[constr(strict=True, max_length=64, min_length=1), Field(..., description="The scope of the property to be deleted.")], code : Annotated[constr(strict=True, max_length=64, min_length=1), Field(..., description="The code of the property to be deleted. Together with the domain and scope this uniquely              identifies the property.")], **kwargs) -> ApiResponse:  # noqa: E501
+    def delete_property_definition_with_http_info(self, domain : Annotated[StrictStr, Field(..., description="The domain of the property to be deleted.")], scope : Annotated[constr(strict=True, max_length=64, min_length=1), Field(..., description="The scope of the property to be deleted.")], code : Annotated[constr(strict=True, max_length=1024, min_length=0), Field(..., description="The code of the property to be deleted. Together with the domain and scope this uniquely              identifies the property.")], **kwargs) -> ApiResponse:  # noqa: E501
         """DeletePropertyDefinition: Delete property definition  # noqa: E501
 
         Delete the definition of the specified property.  # noqa: E501

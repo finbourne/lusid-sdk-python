@@ -18,21 +18,23 @@ import re  # noqa: F401
 import json
 
 from datetime import datetime
-from typing import Any, Dict
-from pydantic.v1 import Field, StrictStr, constr, validator
+from typing import Any, Dict, Optional
+from pydantic.v1 import Field, StrictStr, validator
 from lusid.models.instrument_event import InstrumentEvent
-from lusid.models.life_cycle_event_value import LifeCycleEventValue
+from lusid.models.units_ratio import UnitsRatio
 
-class RawVendorEvent(InstrumentEvent):
+class ScripDividendEvent(InstrumentEvent):
     """
-    A generic event derived from the economic definition of an instrument. This should be considered purely  informational; any data provided by this event is not guaranteed to be processable by LUSID.  # noqa: E501
+    A scrip dividend issued to shareholders.  # noqa: E501
     """
-    effective_at: datetime = Field(..., alias="effectiveAt", description="The effective date of the event")
-    event_value: LifeCycleEventValue = Field(..., alias="eventValue")
-    event_type: constr(strict=True, min_length=1) = Field(..., alias="eventType", description="What type of internal event does this represent; reset, exercise, amortisation etc.")
+    announcement_date: Optional[datetime] = Field(None, alias="announcementDate", description="Date on which the dividend was announced / declared.")
+    ex_date: datetime = Field(..., alias="exDate", description="The first business day on which the dividend is not owed to the buying party.  Typically this is T-1 from the RecordDate.")
+    record_date: Optional[datetime] = Field(None, alias="recordDate", description="Date you have to be the holder of record in order to participate in the tender.")
+    payment_date: datetime = Field(..., alias="paymentDate", description="The date the company pays out dividends to shareholders.")
+    units_ratio: UnitsRatio = Field(..., alias="unitsRatio")
     instrument_event_type: StrictStr = Field(..., alias="instrumentEventType", description="The Type of Event. The available values are: TransitionEvent, InformationalEvent, OpenEvent, CloseEvent, StockSplitEvent, BondDefaultEvent, CashDividendEvent, AmortisationEvent, CashFlowEvent, ExerciseEvent, ResetEvent, TriggerEvent, RawVendorEvent, InformationalErrorEvent, BondCouponEvent, DividendReinvestmentEvent, AccumulationEvent, BondPrincipalEvent, DividendOptionEvent, MaturityEvent, FxForwardSettlementEvent, ExpiryEvent, ScripDividendEvent")
     additional_properties: Dict[str, Any] = {}
-    __properties = ["instrumentEventType", "effectiveAt", "eventValue", "eventType"]
+    __properties = ["instrumentEventType", "announcementDate", "exDate", "recordDate", "paymentDate", "unitsRatio"]
 
     @validator('instrument_event_type')
     def instrument_event_type_validate_enum(cls, value):
@@ -55,8 +57,8 @@ class RawVendorEvent(InstrumentEvent):
         return json.dumps(self.to_dict())
 
     @classmethod
-    def from_json(cls, json_str: str) -> RawVendorEvent:
-        """Create an instance of RawVendorEvent from a JSON string"""
+    def from_json(cls, json_str: str) -> ScripDividendEvent:
+        """Create an instance of ScripDividendEvent from a JSON string"""
         return cls.from_dict(json.loads(json_str))
 
     def to_dict(self):
@@ -66,30 +68,42 @@ class RawVendorEvent(InstrumentEvent):
                             "additional_properties"
                           },
                           exclude_none=True)
-        # override the default output from pydantic by calling `to_dict()` of event_value
-        if self.event_value:
-            _dict['eventValue'] = self.event_value.to_dict()
+        # override the default output from pydantic by calling `to_dict()` of units_ratio
+        if self.units_ratio:
+            _dict['unitsRatio'] = self.units_ratio.to_dict()
         # puts key-value pairs in additional_properties in the top level
         if self.additional_properties is not None:
             for _key, _value in self.additional_properties.items():
                 _dict[_key] = _value
 
+        # set to None if announcement_date (nullable) is None
+        # and __fields_set__ contains the field
+        if self.announcement_date is None and "announcement_date" in self.__fields_set__:
+            _dict['announcementDate'] = None
+
+        # set to None if record_date (nullable) is None
+        # and __fields_set__ contains the field
+        if self.record_date is None and "record_date" in self.__fields_set__:
+            _dict['recordDate'] = None
+
         return _dict
 
     @classmethod
-    def from_dict(cls, obj: dict) -> RawVendorEvent:
-        """Create an instance of RawVendorEvent from a dict"""
+    def from_dict(cls, obj: dict) -> ScripDividendEvent:
+        """Create an instance of ScripDividendEvent from a dict"""
         if obj is None:
             return None
 
         if not isinstance(obj, dict):
-            return RawVendorEvent.parse_obj(obj)
+            return ScripDividendEvent.parse_obj(obj)
 
-        _obj = RawVendorEvent.parse_obj({
+        _obj = ScripDividendEvent.parse_obj({
             "instrument_event_type": obj.get("instrumentEventType"),
-            "effective_at": obj.get("effectiveAt"),
-            "event_value": LifeCycleEventValue.from_dict(obj.get("eventValue")) if obj.get("eventValue") is not None else None,
-            "event_type": obj.get("eventType")
+            "announcement_date": obj.get("announcementDate"),
+            "ex_date": obj.get("exDate"),
+            "record_date": obj.get("recordDate"),
+            "payment_date": obj.get("paymentDate"),
+            "units_ratio": UnitsRatio.from_dict(obj.get("unitsRatio")) if obj.get("unitsRatio") is not None else None
         })
         # store additional fields in additional_properties
         for _key in obj.keys():
