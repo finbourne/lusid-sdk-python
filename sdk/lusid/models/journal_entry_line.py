@@ -55,8 +55,10 @@ class JournalEntryLine(BaseModel):
     source_levels: Optional[conlist(StrictStr)] = Field(None, alias="sourceLevels", description="Source data from the general ledger profile where the GeneralLedgerProfileCode is specified in the GetJournalEntryLines request body.")
     movement_sign: Optional[StrictStr] = Field(None, alias="movementSign", description="Indicates if the Journal Entry Line corresponds to a Long or Short movement.")
     holding_sign: Optional[StrictStr] = Field(None, alias="holdingSign", description="Indicates if the Journal Entry Line is operating against a Long or Short holding.")
+    ledger_column: Optional[StrictStr] = Field(None, alias="ledgerColumn", description="Indicates if the Journal Entry Line is credit or debit.")
+    journal_entry_line_type: Optional[StrictStr] = Field(None, alias="journalEntryLineType", description="Indicates the Journal Entry Line type")
     links: Optional[conlist(Link)] = None
-    __properties = ["accountingDate", "activityDate", "portfolioId", "instrumentId", "instrumentScope", "subHoldingKeys", "taxLotId", "generalLedgerAccountCode", "local", "base", "postingModuleCode", "postingRule", "asAtDate", "activitiesDescription", "sourceType", "sourceId", "properties", "movementName", "holdingType", "economicBucket", "economicBucketComponent", "levels", "sourceLevels", "movementSign", "holdingSign", "links"]
+    __properties = ["accountingDate", "activityDate", "portfolioId", "instrumentId", "instrumentScope", "subHoldingKeys", "taxLotId", "generalLedgerAccountCode", "local", "base", "postingModuleCode", "postingRule", "asAtDate", "activitiesDescription", "sourceType", "sourceId", "properties", "movementName", "holdingType", "economicBucket", "economicBucketComponent", "levels", "sourceLevels", "movementSign", "holdingSign", "ledgerColumn", "journalEntryLineType", "links"]
 
     class Config:
         """Pydantic configuration"""
@@ -167,6 +169,16 @@ class JournalEntryLine(BaseModel):
         if self.holding_sign is None and "holding_sign" in self.__fields_set__:
             _dict['holdingSign'] = None
 
+        # set to None if ledger_column (nullable) is None
+        # and __fields_set__ contains the field
+        if self.ledger_column is None and "ledger_column" in self.__fields_set__:
+            _dict['ledgerColumn'] = None
+
+        # set to None if journal_entry_line_type (nullable) is None
+        # and __fields_set__ contains the field
+        if self.journal_entry_line_type is None and "journal_entry_line_type" in self.__fields_set__:
+            _dict['journalEntryLineType'] = None
+
         # set to None if links (nullable) is None
         # and __fields_set__ contains the field
         if self.links is None and "links" in self.__fields_set__:
@@ -219,6 +231,8 @@ class JournalEntryLine(BaseModel):
             "source_levels": obj.get("sourceLevels"),
             "movement_sign": obj.get("movementSign"),
             "holding_sign": obj.get("holdingSign"),
+            "ledger_column": obj.get("ledgerColumn"),
+            "journal_entry_line_type": obj.get("journalEntryLineType"),
             "links": [Link.from_dict(_item) for _item in obj.get("links")] if obj.get("links") is not None else None
         })
         return _obj
