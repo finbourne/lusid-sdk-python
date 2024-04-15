@@ -14,6 +14,7 @@ Name | Type | Description | Notes
 **user_id_modified** | **str** | The unique id of the user who last updated the entity (including its properties) in LUSID. | [optional] [readonly] 
 **request_id_modified** | **str** | The unique request id of the command that last updated the entity (including its properties) in LUSID. | [optional] [readonly] 
 **as_at_version_number** | **int** | The integer version number for the entity (the entity was created at version 1) | [optional] [readonly] 
+**entity_unique_id** | **str** | The unique id of the entity | [optional] [readonly] 
 
 ## Example
 

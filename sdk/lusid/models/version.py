@@ -34,7 +34,8 @@ class Version(BaseModel):
     user_id_modified: Optional[StrictStr] = Field(None, alias="userIdModified", description="The unique id of the user who last updated the entity (including its properties) in LUSID.")
     request_id_modified: Optional[StrictStr] = Field(None, alias="requestIdModified", description="The unique request id of the command that last updated the entity (including its properties) in LUSID.")
     as_at_version_number: Optional[StrictInt] = Field(None, alias="asAtVersionNumber", description="The integer version number for the entity (the entity was created at version 1)")
-    __properties = ["effectiveFrom", "asAtDate", "asAtCreated", "userIdCreated", "requestIdCreated", "asAtModified", "userIdModified", "requestIdModified", "asAtVersionNumber"]
+    entity_unique_id: Optional[StrictStr] = Field(None, alias="entityUniqueId", description="The unique id of the entity")
+    __properties = ["effectiveFrom", "asAtDate", "asAtCreated", "userIdCreated", "requestIdCreated", "asAtModified", "userIdModified", "requestIdModified", "asAtVersionNumber", "entityUniqueId"]
 
     class Config:
         """Pydantic configuration"""
@@ -65,6 +66,7 @@ class Version(BaseModel):
                             "user_id_modified",
                             "request_id_modified",
                             "as_at_version_number",
+                            "entity_unique_id",
                           },
                           exclude_none=True)
         # set to None if as_at_created (nullable) is None
@@ -102,6 +104,11 @@ class Version(BaseModel):
         if self.as_at_version_number is None and "as_at_version_number" in self.__fields_set__:
             _dict['asAtVersionNumber'] = None
 
+        # set to None if entity_unique_id (nullable) is None
+        # and __fields_set__ contains the field
+        if self.entity_unique_id is None and "entity_unique_id" in self.__fields_set__:
+            _dict['entityUniqueId'] = None
+
         return _dict
 
     @classmethod
@@ -122,6 +129,7 @@ class Version(BaseModel):
             "as_at_modified": obj.get("asAtModified"),
             "user_id_modified": obj.get("userIdModified"),
             "request_id_modified": obj.get("requestIdModified"),
-            "as_at_version_number": obj.get("asAtVersionNumber")
+            "as_at_version_number": obj.get("asAtVersionNumber"),
+            "entity_unique_id": obj.get("entityUniqueId")
         })
         return _obj

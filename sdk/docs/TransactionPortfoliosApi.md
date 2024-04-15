@@ -1801,9 +1801,9 @@ async with api_client_factory:
     scope = 'scope_example' # str | The scope of the transaction portfolio.
     code = 'code_example' # str | The code of the transaction portfolio. Together with the scope this uniquely identifies              the transaction portfolio.
     holding_id = 56 # int | The unique holding identifier
-    effective_date = '2013-10-20T19:20:30+01:00' # datetime | Effective date (optional)
-    from_trade_date = '2013-10-20T19:20:30+01:00' # datetime | The from trade date, defaults to first time this holding is opened, lower bound for transactions (optional)
-    to_trade_date = '2013-10-20T19:20:30+01:00' # datetime | The to trade date upper bound date, defaults to effectiveDate. upper bound for transactions (optional)
+    effective_date = 'effective_date_example' # str | Effective date (optional)
+    from_trade_date = 'from_trade_date_example' # str | The from trade date, defaults to first time this holding is opened, lower bound for transactions (optional)
+    to_trade_date = 'to_trade_date_example' # str | The to trade date upper bound date, defaults to effectiveDate. upper bound for transactions (optional)
     include_historic = False # bool | If true, transactions from previously closed holdings are returned.              If false, only transactions from last time position is opened. (optional) (default to False)
     tax_lot_id = 'tax_lot_id_example' # str | Constrains the Holding Contributors to those which contributed to the specified tax lot. (optional)
     limit = 56 # int | When paginating, limit the number of returned results to this many. Defaults to 100 if not specified. (optional)
@@ -1827,9 +1827,9 @@ Name | Type | Description  | Notes
  **scope** | **str**| The scope of the transaction portfolio. | 
  **code** | **str**| The code of the transaction portfolio. Together with the scope this uniquely identifies              the transaction portfolio. | 
  **holding_id** | **int**| The unique holding identifier | 
- **effective_date** | **datetime**| Effective date | [optional] 
- **from_trade_date** | **datetime**| The from trade date, defaults to first time this holding is opened, lower bound for transactions | [optional] 
- **to_trade_date** | **datetime**| The to trade date upper bound date, defaults to effectiveDate. upper bound for transactions | [optional] 
+ **effective_date** | **str**| Effective date | [optional] 
+ **from_trade_date** | **str**| The from trade date, defaults to first time this holding is opened, lower bound for transactions | [optional] 
+ **to_trade_date** | **str**| The to trade date upper bound date, defaults to effectiveDate. upper bound for transactions | [optional] 
  **include_historic** | **bool**| If true, transactions from previously closed holdings are returned.              If false, only transactions from last time position is opened. | [optional] [default to False]
  **tax_lot_id** | **str**| Constrains the Holding Contributors to those which contributed to the specified tax lot. | [optional] 
  **limit** | **int**| When paginating, limit the number of returned results to this many. Defaults to 100 if not specified. | [optional] 
