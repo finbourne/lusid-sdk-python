@@ -52,6 +52,7 @@ class InstrumentEventType(str, Enum):
     FXFORWARDSETTLEMENTEVENT = 'FxForwardSettlementEvent'
     EXPIRYEVENT = 'ExpiryEvent'
     SCRIPDIVIDENDEVENT = 'ScripDividendEvent'
+    STOCKDIVIDENDEVENT = 'StockDividendEvent'
 
     @classmethod
     def from_json(cls, json_str: str) -> InstrumentEventType:

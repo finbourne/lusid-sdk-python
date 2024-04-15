@@ -863,6 +863,7 @@ from lusid.models.staging_rule_approval_criteria import StagingRuleApprovalCrite
 from lusid.models.staging_rule_match_criteria import StagingRuleMatchCriteria
 from lusid.models.staging_rule_set import StagingRuleSet
 from lusid.models.step_schedule import StepSchedule
+from lusid.models.stock_dividend_event import StockDividendEvent
 from lusid.models.stock_split_event import StockSplitEvent
 from lusid.models.stream import Stream
 from lusid.models.string_comparison_type import StringComparisonType
@@ -1874,6 +1875,7 @@ __all__ = [
     "StagingRuleMatchCriteria",
     "StagingRuleSet",
     "StepSchedule",
+    "StockDividendEvent",
     "StockSplitEvent",
     "Stream",
     "StringComparisonType",
