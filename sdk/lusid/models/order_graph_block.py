@@ -25,6 +25,7 @@ from lusid.models.order_graph_block_allocation_synopsis import OrderGraphBlockAl
 from lusid.models.order_graph_block_execution_synopsis import OrderGraphBlockExecutionSynopsis
 from lusid.models.order_graph_block_order_synopsis import OrderGraphBlockOrderSynopsis
 from lusid.models.order_graph_block_placement_synopsis import OrderGraphBlockPlacementSynopsis
+from lusid.models.order_graph_block_transaction_synopsis import OrderGraphBlockTransactionSynopsis
 
 class OrderGraphBlock(BaseModel):
     """
@@ -35,10 +36,11 @@ class OrderGraphBlock(BaseModel):
     placed: OrderGraphBlockPlacementSynopsis = Field(...)
     executed: OrderGraphBlockExecutionSynopsis = Field(...)
     allocated: OrderGraphBlockAllocationSynopsis = Field(...)
+    booked: OrderGraphBlockTransactionSynopsis = Field(...)
     derived_state: constr(strict=True, min_length=1) = Field(..., alias="derivedState", description="A simple description of the overall state of a block.")
     derived_compliance_state: constr(strict=True, min_length=1) = Field(..., alias="derivedComplianceState", description="The overall compliance state of a block, derived from the block's orders. Possible values are 'Pending', 'Failed', 'Manually approved' and 'Passed'.")
     derived_approval_state: constr(strict=True, min_length=1) = Field(..., alias="derivedApprovalState", description="The overall approval state of a block, derived from approval of the block's orders. Possible values are 'Pending', 'Approved' and 'Rejected'.")
-    __properties = ["block", "ordered", "placed", "executed", "allocated", "derivedState", "derivedComplianceState", "derivedApprovalState"]
+    __properties = ["block", "ordered", "placed", "executed", "allocated", "booked", "derivedState", "derivedComplianceState", "derivedApprovalState"]
 
     class Config:
         """Pydantic configuration"""
@@ -79,6 +81,9 @@ class OrderGraphBlock(BaseModel):
         # override the default output from pydantic by calling `to_dict()` of allocated
         if self.allocated:
             _dict['allocated'] = self.allocated.to_dict()
+        # override the default output from pydantic by calling `to_dict()` of booked
+        if self.booked:
+            _dict['booked'] = self.booked.to_dict()
         return _dict
 
     @classmethod
@@ -96,6 +101,7 @@ class OrderGraphBlock(BaseModel):
             "placed": OrderGraphBlockPlacementSynopsis.from_dict(obj.get("placed")) if obj.get("placed") is not None else None,
             "executed": OrderGraphBlockExecutionSynopsis.from_dict(obj.get("executed")) if obj.get("executed") is not None else None,
             "allocated": OrderGraphBlockAllocationSynopsis.from_dict(obj.get("allocated")) if obj.get("allocated") is not None else None,
+            "booked": OrderGraphBlockTransactionSynopsis.from_dict(obj.get("booked")) if obj.get("booked") is not None else None,
             "derived_state": obj.get("derivedState"),
             "derived_compliance_state": obj.get("derivedComplianceState"),
             "derived_approval_state": obj.get("derivedApprovalState")

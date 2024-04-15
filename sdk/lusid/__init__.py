@@ -564,6 +564,8 @@ from lusid.models.order_graph_block_order_detail import OrderGraphBlockOrderDeta
 from lusid.models.order_graph_block_order_synopsis import OrderGraphBlockOrderSynopsis
 from lusid.models.order_graph_block_placement_detail import OrderGraphBlockPlacementDetail
 from lusid.models.order_graph_block_placement_synopsis import OrderGraphBlockPlacementSynopsis
+from lusid.models.order_graph_block_transaction_detail import OrderGraphBlockTransactionDetail
+from lusid.models.order_graph_block_transaction_synopsis import OrderGraphBlockTransactionSynopsis
 from lusid.models.order_graph_placement import OrderGraphPlacement
 from lusid.models.order_graph_placement_allocation_detail import OrderGraphPlacementAllocationDetail
 from lusid.models.order_graph_placement_allocation_synopsis import OrderGraphPlacementAllocationSynopsis
@@ -1576,6 +1578,8 @@ __all__ = [
     "OrderGraphBlockOrderSynopsis",
     "OrderGraphBlockPlacementDetail",
     "OrderGraphBlockPlacementSynopsis",
+    "OrderGraphBlockTransactionDetail",
+    "OrderGraphBlockTransactionSynopsis",
     "OrderGraphPlacement",
     "OrderGraphPlacementAllocationDetail",
     "OrderGraphPlacementAllocationSynopsis",
