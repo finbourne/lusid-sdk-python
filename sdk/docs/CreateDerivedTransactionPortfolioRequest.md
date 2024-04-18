@@ -16,6 +16,7 @@ Name | Type | Description | Notes
 **amortisation_method** | **str** | The amortisation method used by the portfolio for the calculation. The available values are: NoAmortisation, StraightLine, EffectiveYield, StraightLineSettlementDate, EffectiveYieldSettlementDate | [optional] 
 **transaction_type_scope** | **str** | The scope of the transaction types. | [optional] 
 **cash_gain_loss_calculation_date** | **str** | The option when the Cash Gain Loss to be calulated, TransactionDate/SettlementDate. Defaults to SettlementDate. | [optional] 
+**amortisation_rule_set_id** | [**ResourceId**](ResourceId.md) |  | [optional] 
 
 ## Example
 

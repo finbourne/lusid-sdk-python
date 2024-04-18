@@ -2208,7 +2208,7 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **patch_portfolio**
-> ActionResultOfPortfolio patch_portfolio(scope, code, operation)
+> Portfolio patch_portfolio(scope, code, operation)
 
 [EARLY ACCESS] PatchPortfolio: Patch portfolio.
 
@@ -2222,8 +2222,8 @@ from __future__ import print_function
 import time
 import lusid
 from lusid.rest import ApiException
-from lusid.models.action_result_of_portfolio import ActionResultOfPortfolio
 from lusid.models.operation import Operation
+from lusid.models.portfolio import Portfolio
 from pprint import pprint
 
 import os
@@ -2290,7 +2290,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**ActionResultOfPortfolio**](ActionResultOfPortfolio.md)
+[**Portfolio**](Portfolio.md)
 
 ### Authorization
 

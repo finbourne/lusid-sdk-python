@@ -1633,7 +1633,7 @@ class FundsApi:
         }
 
         return self.api_client.call_api(
-            '/api/funds/{scope}/{code}/shareclasses', 'POST',
+            '/api/funds/{scope}/{code}/shareclasses', 'PUT',
             _path_params,
             _query_params,
             _header_params,

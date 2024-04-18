@@ -38,7 +38,8 @@ class CreateDerivedTransactionPortfolioRequest(BaseModel):
     amortisation_method: Optional[StrictStr] = Field(None, alias="amortisationMethod", description="The amortisation method used by the portfolio for the calculation. The available values are: NoAmortisation, StraightLine, EffectiveYield, StraightLineSettlementDate, EffectiveYieldSettlementDate")
     transaction_type_scope: Optional[constr(strict=True, max_length=64, min_length=1)] = Field(None, alias="transactionTypeScope", description="The scope of the transaction types.")
     cash_gain_loss_calculation_date: Optional[StrictStr] = Field(None, alias="cashGainLossCalculationDate", description="The option when the Cash Gain Loss to be calulated, TransactionDate/SettlementDate. Defaults to SettlementDate.")
-    __properties = ["displayName", "description", "code", "parentPortfolioId", "created", "corporateActionSourceId", "accountingMethod", "subHoldingKeys", "instrumentScopes", "amortisationMethod", "transactionTypeScope", "cashGainLossCalculationDate"]
+    amortisation_rule_set_id: Optional[ResourceId] = Field(None, alias="amortisationRuleSetId")
+    __properties = ["displayName", "description", "code", "parentPortfolioId", "created", "corporateActionSourceId", "accountingMethod", "subHoldingKeys", "instrumentScopes", "amortisationMethod", "transactionTypeScope", "cashGainLossCalculationDate", "amortisationRuleSetId"]
 
     @validator('display_name')
     def display_name_validate_regular_expression(cls, value):
@@ -114,6 +115,9 @@ class CreateDerivedTransactionPortfolioRequest(BaseModel):
         # override the default output from pydantic by calling `to_dict()` of corporate_action_source_id
         if self.corporate_action_source_id:
             _dict['corporateActionSourceId'] = self.corporate_action_source_id.to_dict()
+        # override the default output from pydantic by calling `to_dict()` of amortisation_rule_set_id
+        if self.amortisation_rule_set_id:
+            _dict['amortisationRuleSetId'] = self.amortisation_rule_set_id.to_dict()
         # set to None if description (nullable) is None
         # and __fields_set__ contains the field
         if self.description is None and "description" in self.__fields_set__:
@@ -172,6 +176,7 @@ class CreateDerivedTransactionPortfolioRequest(BaseModel):
             "instrument_scopes": obj.get("instrumentScopes"),
             "amortisation_method": obj.get("amortisationMethod"),
             "transaction_type_scope": obj.get("transactionTypeScope"),
-            "cash_gain_loss_calculation_date": obj.get("cashGainLossCalculationDate")
+            "cash_gain_loss_calculation_date": obj.get("cashGainLossCalculationDate"),
+            "amortisation_rule_set_id": ResourceId.from_dict(obj.get("amortisationRuleSetId")) if obj.get("amortisationRuleSetId") is not None else None
         })
         return _obj

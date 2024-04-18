@@ -28,7 +28,6 @@ from typing import Dict, List, Optional
 
 from lusid.models.access_metadata_operation import AccessMetadataOperation
 from lusid.models.access_metadata_value import AccessMetadataValue
-from lusid.models.action_result_of_portfolio import ActionResultOfPortfolio
 from lusid.models.aggregated_returns_dispersion_request import AggregatedReturnsDispersionRequest
 from lusid.models.aggregated_returns_request import AggregatedReturnsRequest
 from lusid.models.aggregated_returns_response import AggregatedReturnsResponse
@@ -4030,15 +4029,15 @@ class PortfoliosApi:
             _request_auth=_params.get('_request_auth'))
 
     @overload
-    async def patch_portfolio(self, scope : Annotated[constr(strict=True, max_length=64, min_length=1), Field(..., description="The scope of the portfolio.")], code : Annotated[constr(strict=True, max_length=64, min_length=1), Field(..., description="The code of the portfolio. Together with the               scope this uniquely identifies the portfolio.")], operation : Annotated[conlist(Operation), Field(..., description="The json patch document. For more check: https://datatracker.ietf.org/doc/html/rfc6902.")], **kwargs) -> ActionResultOfPortfolio:  # noqa: E501
+    async def patch_portfolio(self, scope : Annotated[constr(strict=True, max_length=64, min_length=1), Field(..., description="The scope of the portfolio.")], code : Annotated[constr(strict=True, max_length=64, min_length=1), Field(..., description="The code of the portfolio. Together with the               scope this uniquely identifies the portfolio.")], operation : Annotated[conlist(Operation), Field(..., description="The json patch document. For more check: https://datatracker.ietf.org/doc/html/rfc6902.")], **kwargs) -> Portfolio:  # noqa: E501
         ...
 
     @overload
-    def patch_portfolio(self, scope : Annotated[constr(strict=True, max_length=64, min_length=1), Field(..., description="The scope of the portfolio.")], code : Annotated[constr(strict=True, max_length=64, min_length=1), Field(..., description="The code of the portfolio. Together with the               scope this uniquely identifies the portfolio.")], operation : Annotated[conlist(Operation), Field(..., description="The json patch document. For more check: https://datatracker.ietf.org/doc/html/rfc6902.")], async_req: Optional[bool]=True, **kwargs) -> ActionResultOfPortfolio:  # noqa: E501
+    def patch_portfolio(self, scope : Annotated[constr(strict=True, max_length=64, min_length=1), Field(..., description="The scope of the portfolio.")], code : Annotated[constr(strict=True, max_length=64, min_length=1), Field(..., description="The code of the portfolio. Together with the               scope this uniquely identifies the portfolio.")], operation : Annotated[conlist(Operation), Field(..., description="The json patch document. For more check: https://datatracker.ietf.org/doc/html/rfc6902.")], async_req: Optional[bool]=True, **kwargs) -> Portfolio:  # noqa: E501
         ...
 
     @validate_arguments
-    def patch_portfolio(self, scope : Annotated[constr(strict=True, max_length=64, min_length=1), Field(..., description="The scope of the portfolio.")], code : Annotated[constr(strict=True, max_length=64, min_length=1), Field(..., description="The code of the portfolio. Together with the               scope this uniquely identifies the portfolio.")], operation : Annotated[conlist(Operation), Field(..., description="The json patch document. For more check: https://datatracker.ietf.org/doc/html/rfc6902.")], async_req: Optional[bool]=None, **kwargs) -> Union[ActionResultOfPortfolio, Awaitable[ActionResultOfPortfolio]]:  # noqa: E501
+    def patch_portfolio(self, scope : Annotated[constr(strict=True, max_length=64, min_length=1), Field(..., description="The scope of the portfolio.")], code : Annotated[constr(strict=True, max_length=64, min_length=1), Field(..., description="The code of the portfolio. Together with the               scope this uniquely identifies the portfolio.")], operation : Annotated[conlist(Operation), Field(..., description="The json patch document. For more check: https://datatracker.ietf.org/doc/html/rfc6902.")], async_req: Optional[bool]=None, **kwargs) -> Union[Portfolio, Awaitable[Portfolio]]:  # noqa: E501
         """[EARLY ACCESS] PatchPortfolio: Patch portfolio.  # noqa: E501
 
         Create or update certain fields for a particular  portfolio.  The behaviour is defined by the JSON Patch specification.                Currently supported are: CreationDate, InstrumentScopes.  # noqa: E501
@@ -4063,7 +4062,7 @@ class PortfoliosApi:
         :return: Returns the result object.
                  If the method is called asynchronously,
                  returns the request thread.
-        :rtype: ActionResultOfPortfolio
+        :rtype: Portfolio
         """
         kwargs['_return_http_data_only'] = True
         if '_preload_content' in kwargs:
@@ -4112,7 +4111,7 @@ class PortfoliosApi:
         :return: Returns the result object.
                  If the method is called asynchronously,
                  returns the request thread.
-        :rtype: tuple(ActionResultOfPortfolio, status_code(int), headers(HTTPHeaderDict))
+        :rtype: tuple(Portfolio, status_code(int), headers(HTTPHeaderDict))
         """
 
         _params = locals()
@@ -4182,7 +4181,7 @@ class PortfoliosApi:
         _auth_settings = ['oauth2']  # noqa: E501
 
         _response_types_map = {
-            '200': "ActionResultOfPortfolio",
+            '200': "Portfolio",
             '400': "LusidValidationProblemDetails",
         }
 

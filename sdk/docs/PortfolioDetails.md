@@ -16,6 +16,7 @@ Name | Type | Description | Notes
 **transaction_type_scope** | **str** | The scope of the transaction types. | [optional] 
 **cash_gain_loss_calculation_date** | **str** | The option when the Cash Gain Loss to be calulated, TransactionDate/SettlementDate. Defaults to SettlementDate. | [optional] 
 **instrument_event_configuration** | [**InstrumentEventConfiguration**](InstrumentEventConfiguration.md) |  | [optional] 
+**amortisation_rule_set_id** | [**ResourceId**](ResourceId.md) |  | [optional] 
 **links** | [**List[Link]**](Link.md) |  | [optional] 
 
 ## Example

@@ -41,8 +41,9 @@ class PortfolioDetails(BaseModel):
     transaction_type_scope: Optional[StrictStr] = Field(None, alias="transactionTypeScope", description="The scope of the transaction types.")
     cash_gain_loss_calculation_date: Optional[StrictStr] = Field(None, alias="cashGainLossCalculationDate", description="The option when the Cash Gain Loss to be calulated, TransactionDate/SettlementDate. Defaults to SettlementDate.")
     instrument_event_configuration: Optional[InstrumentEventConfiguration] = Field(None, alias="instrumentEventConfiguration")
+    amortisation_rule_set_id: Optional[ResourceId] = Field(None, alias="amortisationRuleSetId")
     links: Optional[conlist(Link)] = None
-    __properties = ["href", "originPortfolioId", "version", "baseCurrency", "corporateActionSourceId", "subHoldingKeys", "instrumentScopes", "accountingMethod", "amortisationMethod", "transactionTypeScope", "cashGainLossCalculationDate", "instrumentEventConfiguration", "links"]
+    __properties = ["href", "originPortfolioId", "version", "baseCurrency", "corporateActionSourceId", "subHoldingKeys", "instrumentScopes", "accountingMethod", "amortisationMethod", "transactionTypeScope", "cashGainLossCalculationDate", "instrumentEventConfiguration", "amortisationRuleSetId", "links"]
 
     @validator('accounting_method')
     def accounting_method_validate_enum(cls, value):
@@ -90,6 +91,9 @@ class PortfolioDetails(BaseModel):
         # override the default output from pydantic by calling `to_dict()` of instrument_event_configuration
         if self.instrument_event_configuration:
             _dict['instrumentEventConfiguration'] = self.instrument_event_configuration.to_dict()
+        # override the default output from pydantic by calling `to_dict()` of amortisation_rule_set_id
+        if self.amortisation_rule_set_id:
+            _dict['amortisationRuleSetId'] = self.amortisation_rule_set_id.to_dict()
         # override the default output from pydantic by calling `to_dict()` of each item in links (list)
         _items = []
         if self.links:
@@ -156,6 +160,7 @@ class PortfolioDetails(BaseModel):
             "transaction_type_scope": obj.get("transactionTypeScope"),
             "cash_gain_loss_calculation_date": obj.get("cashGainLossCalculationDate"),
             "instrument_event_configuration": InstrumentEventConfiguration.from_dict(obj.get("instrumentEventConfiguration")) if obj.get("instrumentEventConfiguration") is not None else None,
+            "amortisation_rule_set_id": ResourceId.from_dict(obj.get("amortisationRuleSetId")) if obj.get("amortisationRuleSetId") is not None else None,
             "links": [Link.from_dict(_item) for _item in obj.get("links")] if obj.get("links") is not None else None
         })
         return _obj

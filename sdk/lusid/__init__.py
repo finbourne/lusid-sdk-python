@@ -110,7 +110,6 @@ from lusid.models.accounting_method import AccountingMethod
 from lusid.models.accounts_upsert_response import AccountsUpsertResponse
 from lusid.models.accumulation_event import AccumulationEvent
 from lusid.models.action_id import ActionId
-from lusid.models.action_result_of_portfolio import ActionResultOfPortfolio
 from lusid.models.add_business_days_to_date_request import AddBusinessDaysToDateRequest
 from lusid.models.add_business_days_to_date_response import AddBusinessDaysToDateResponse
 from lusid.models.additional_payment import AdditionalPayment
@@ -1124,7 +1123,6 @@ __all__ = [
     "AccountsUpsertResponse",
     "AccumulationEvent",
     "ActionId",
-    "ActionResultOfPortfolio",
     "AddBusinessDaysToDateRequest",
     "AddBusinessDaysToDateResponse",
     "AdditionalPayment",
