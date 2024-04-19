@@ -49,6 +49,7 @@ class ComplianceParameterType(str, Enum):
     FILTERPREDICATECOMPLIANCEPARAMETER = 'FilterPredicateComplianceParameter'
     GROUPFILTERPREDICATECOMPLIANCEPARAMETER = 'GroupFilterPredicateComplianceParameter'
     GROUPBYSELECTORCOMPLIANCEPARAMETER = 'GroupBySelectorComplianceParameter'
+    PROPERTYLISTCOMPLIANCEPARAMETER = 'PropertyListComplianceParameter'
 
     @classmethod
     def from_json(cls, json_str: str) -> ComplianceParameterType:

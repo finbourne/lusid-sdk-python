@@ -23,9 +23,9 @@ from pydantic.v1 import Field, StrictStr, validator
 from lusid.models.compliance_parameter import ComplianceParameter
 from lusid.models.resource_id import ResourceId
 
-class InstrumentListComplianceParameter(ComplianceParameter):
+class PropertyListComplianceParameter(ComplianceParameter):
     """
-    InstrumentListComplianceParameter
+    PropertyListComplianceParameter
     """
     value: ResourceId = Field(...)
     compliance_parameter_type: StrictStr = Field(..., alias="complianceParameterType", description="The parameter type. The available values are: BoolComplianceParameter, StringComplianceParameter, DecimalComplianceParameter, DateTimeComplianceParameter, PropertyKeyComplianceParameter, AddressKeyComplianceParameter, PortfolioIdComplianceParameter, PortfolioGroupIdComplianceParameter, StringListComplianceParameter, BoolListComplianceParameter, DateTimeListComplianceParameter, DecimalListComplianceParameter, PropertyKeyListComplianceParameter, AddressKeyListComplianceParameter, PortfolioIdListComplianceParameter, PortfolioGroupIdListComplianceParameter, InstrumentListComplianceParameter, FilterPredicateComplianceParameter, GroupFilterPredicateComplianceParameter, GroupBySelectorComplianceParameter, PropertyListComplianceParameter")
@@ -53,8 +53,8 @@ class InstrumentListComplianceParameter(ComplianceParameter):
         return json.dumps(self.to_dict())
 
     @classmethod
-    def from_json(cls, json_str: str) -> InstrumentListComplianceParameter:
-        """Create an instance of InstrumentListComplianceParameter from a JSON string"""
+    def from_json(cls, json_str: str) -> PropertyListComplianceParameter:
+        """Create an instance of PropertyListComplianceParameter from a JSON string"""
         return cls.from_dict(json.loads(json_str))
 
     def to_dict(self):
@@ -75,15 +75,15 @@ class InstrumentListComplianceParameter(ComplianceParameter):
         return _dict
 
     @classmethod
-    def from_dict(cls, obj: dict) -> InstrumentListComplianceParameter:
-        """Create an instance of InstrumentListComplianceParameter from a dict"""
+    def from_dict(cls, obj: dict) -> PropertyListComplianceParameter:
+        """Create an instance of PropertyListComplianceParameter from a dict"""
         if obj is None:
             return None
 
         if not isinstance(obj, dict):
-            return InstrumentListComplianceParameter.parse_obj(obj)
+            return PropertyListComplianceParameter.parse_obj(obj)
 
-        _obj = InstrumentListComplianceParameter.parse_obj({
+        _obj = PropertyListComplianceParameter.parse_obj({
             "compliance_parameter_type": obj.get("complianceParameterType"),
             "value": ResourceId.from_dict(obj.get("value")) if obj.get("value") is not None else None
         })
