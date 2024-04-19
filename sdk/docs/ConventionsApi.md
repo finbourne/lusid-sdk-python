@@ -1076,7 +1076,7 @@ api_client_factory = ApiClientFactory(config_loaders=config_loaders)
 async with api_client_factory:
     # Create an instance of the API class
     api_instance = api_client_factory.build(lusid.ConventionsApi)
-    upsert_flow_conventions_request = {"flowConventions":{"currency":"GBP","paymentFrequency":"1Y","dayCountConvention":"Act360","rollConvention":"None","paymentCalendars":["LON"],"resetCalendars":["LON"],"settleDays":2,"resetDays":2,"leapDaysIncluded":true,"accrualDateAdjustment":"Adjusted","businessDayConvention":"Following","scope":"someScope","code":"exampleFlowConventionsName"}} # UpsertFlowConventionsRequest | The Flow Conventions to update or insert
+    upsert_flow_conventions_request = {"flowConventions":{"currency":"GBP","paymentFrequency":"1Y","dayCountConvention":"Act360","rollConvention":"None","paymentCalendars":["LON"],"resetCalendars":["LON"],"settleDays":2,"resetDays":2,"leapDaysIncluded":true,"accrualDateAdjustment":"Adjusted","businessDayConvention":"Following","accrualDayCountConvention":"Act360","scope":"someScope","code":"exampleFlowConventionsName"}} # UpsertFlowConventionsRequest | The Flow Conventions to update or insert
 
     try:
         # [BETA] UpsertFlowConventions: Upsert Flow Conventions. This creates or updates the data in Lusid.

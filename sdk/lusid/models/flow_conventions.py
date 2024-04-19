@@ -36,9 +36,10 @@ class FlowConventions(BaseModel):
     leap_days_included: Optional[StrictBool] = Field(None, alias="leapDaysIncluded", description="If this flag is set to true, the 29th of February is included in the date schedule when the business roll convention is applied.  If this flag is set to false, the business roll convention ignores February 29 for date schedules, cash flow payments etc.  This flag defaults to true if not specified, i.e., leap days are included in a date schedule generation.")
     accrual_date_adjustment: Optional[constr(strict=True, max_length=50, min_length=0)] = Field(None, alias="accrualDateAdjustment", description="Indicates if the accrual dates are adjusted to the payment dates. The default value is 'Adjusted'.    Supported string (enumeration) values are: [Adjusted, Unadjusted].")
     business_day_convention: Optional[StrictStr] = Field(None, alias="businessDayConvention", description="When generating a set of dates, what convention should be used for adjusting dates that coincide with a non-business day.    Supported string (enumeration) values are: [NoAdjustment, None, Previous, P, Following, F, ModifiedPrevious, MP, ModifiedFollowing, MF, HalfMonthModifiedFollowing, Nearest].")
+    accrual_day_count_convention: Optional[constr(strict=True, max_length=50, min_length=0)] = Field(None, alias="accrualDayCountConvention", description="Optional, if not set the main DayCountConvention is used for all accrual calculations.  This only needs to be set when accrual uses a different day count to the coupon calculation.")
     scope: Optional[constr(strict=True, max_length=256, min_length=1)] = Field(None, description="The scope used when updating or inserting the convention.")
     code: Optional[constr(strict=True, max_length=256, min_length=1)] = Field(None, description="The code of the convention.")
-    __properties = ["currency", "paymentFrequency", "dayCountConvention", "rollConvention", "paymentCalendars", "resetCalendars", "settleDays", "resetDays", "leapDaysIncluded", "accrualDateAdjustment", "businessDayConvention", "scope", "code"]
+    __properties = ["currency", "paymentFrequency", "dayCountConvention", "rollConvention", "paymentCalendars", "resetCalendars", "settleDays", "resetDays", "leapDaysIncluded", "accrualDateAdjustment", "businessDayConvention", "accrualDayCountConvention", "scope", "code"]
 
     @validator('scope')
     def scope_validate_regular_expression(cls, value):
@@ -99,6 +100,11 @@ class FlowConventions(BaseModel):
         if self.business_day_convention is None and "business_day_convention" in self.__fields_set__:
             _dict['businessDayConvention'] = None
 
+        # set to None if accrual_day_count_convention (nullable) is None
+        # and __fields_set__ contains the field
+        if self.accrual_day_count_convention is None and "accrual_day_count_convention" in self.__fields_set__:
+            _dict['accrualDayCountConvention'] = None
+
         # set to None if scope (nullable) is None
         # and __fields_set__ contains the field
         if self.scope is None and "scope" in self.__fields_set__:
@@ -132,6 +138,7 @@ class FlowConventions(BaseModel):
             "leap_days_included": obj.get("leapDaysIncluded"),
             "accrual_date_adjustment": obj.get("accrualDateAdjustment"),
             "business_day_convention": obj.get("businessDayConvention"),
+            "accrual_day_count_convention": obj.get("accrualDayCountConvention"),
             "scope": obj.get("scope"),
             "code": obj.get("code")
         })

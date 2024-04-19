@@ -16,6 +16,7 @@ Name | Type | Description | Notes
 **leap_days_included** | **bool** | If this flag is set to true, the 29th of February is included in the date schedule when the business roll convention is applied.  If this flag is set to false, the business roll convention ignores February 29 for date schedules, cash flow payments etc.  This flag defaults to true if not specified, i.e., leap days are included in a date schedule generation. | [optional] 
 **accrual_date_adjustment** | **str** | Indicates if the accrual dates are adjusted to the payment dates. The default value is &#39;Adjusted&#39;.    Supported string (enumeration) values are: [Adjusted, Unadjusted]. | [optional] 
 **business_day_convention** | **str** | When generating a set of dates, what convention should be used for adjusting dates that coincide with a non-business day.    Supported string (enumeration) values are: [NoAdjustment, None, Previous, P, Following, F, ModifiedPrevious, MP, ModifiedFollowing, MF, HalfMonthModifiedFollowing, Nearest]. | [optional] 
+**accrual_day_count_convention** | **str** | Optional, if not set the main DayCountConvention is used for all accrual calculations.  This only needs to be set when accrual uses a different day count to the coupon calculation. | [optional] 
 **scope** | **str** | The scope used when updating or inserting the convention. | [optional] 
 **code** | **str** | The code of the convention. | [optional] 
 
