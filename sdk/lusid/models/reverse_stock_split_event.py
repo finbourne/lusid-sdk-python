@@ -21,18 +21,20 @@ from datetime import datetime
 from typing import Any, Dict, Optional
 from pydantic.v1 import Field, StrictStr, validator
 from lusid.models.instrument_event import InstrumentEvent
-from lusid.models.lusid_instrument import LusidInstrument
+from lusid.models.units_ratio import UnitsRatio
 
-class ExerciseEvent(InstrumentEvent):
+class ReverseStockSplitEvent(InstrumentEvent):
     """
-    Definition of an exercise event.  This is an event that occurs on transformation of an instrument owing to exercise. e.g. an option of  some type into its underlying.  # noqa: E501
+    A reverse split in the company's shares. Shareholders have their number of shares reduced based on the terms of the stock split.  # noqa: E501
     """
-    instrument: LusidInstrument = Field(...)
-    anchor_date: datetime = Field(..., alias="anchorDate", description="The date the exercise window starts, or point it takes effect on.")
-    event_window_end: Optional[datetime] = Field(None, alias="eventWindowEnd", description="The date the exercise window ends, or point it takes effect on.")
+    payment_date: datetime = Field(..., alias="paymentDate", description="Date on which the stock split takes effect.")
+    ex_date: datetime = Field(..., alias="exDate", description="The first date on which the shares will trade at the post-split price.")
+    units_ratio: UnitsRatio = Field(..., alias="unitsRatio")
+    record_date: Optional[datetime] = Field(None, alias="recordDate", description="Date you have to be the holder of record in order to have their shares merged.")
+    announcement_date: Optional[datetime] = Field(None, alias="announcementDate", description="Date the reverse stock split was announced.")
     instrument_event_type: StrictStr = Field(..., alias="instrumentEventType", description="The Type of Event. The available values are: TransitionEvent, InformationalEvent, OpenEvent, CloseEvent, StockSplitEvent, BondDefaultEvent, CashDividendEvent, AmortisationEvent, CashFlowEvent, ExerciseEvent, ResetEvent, TriggerEvent, RawVendorEvent, InformationalErrorEvent, BondCouponEvent, DividendReinvestmentEvent, AccumulationEvent, BondPrincipalEvent, DividendOptionEvent, MaturityEvent, FxForwardSettlementEvent, ExpiryEvent, ScripDividendEvent, StockDividendEvent, ReverseStockSplitEvent")
     additional_properties: Dict[str, Any] = {}
-    __properties = ["instrumentEventType", "instrument", "anchorDate", "eventWindowEnd"]
+    __properties = ["instrumentEventType", "paymentDate", "exDate", "unitsRatio", "recordDate", "announcementDate"]
 
     @validator('instrument_event_type')
     def instrument_event_type_validate_enum(cls, value):
@@ -55,42 +57,53 @@ class ExerciseEvent(InstrumentEvent):
         return json.dumps(self.to_dict())
 
     @classmethod
-    def from_json(cls, json_str: str) -> ExerciseEvent:
-        """Create an instance of ExerciseEvent from a JSON string"""
+    def from_json(cls, json_str: str) -> ReverseStockSplitEvent:
+        """Create an instance of ReverseStockSplitEvent from a JSON string"""
         return cls.from_dict(json.loads(json_str))
 
     def to_dict(self):
         """Returns the dictionary representation of the model using alias"""
         _dict = self.dict(by_alias=True,
                           exclude={
-                            "event_window_end",
                             "additional_properties"
                           },
                           exclude_none=True)
-        # override the default output from pydantic by calling `to_dict()` of instrument
-        if self.instrument:
-            _dict['instrument'] = self.instrument.to_dict()
+        # override the default output from pydantic by calling `to_dict()` of units_ratio
+        if self.units_ratio:
+            _dict['unitsRatio'] = self.units_ratio.to_dict()
         # puts key-value pairs in additional_properties in the top level
         if self.additional_properties is not None:
             for _key, _value in self.additional_properties.items():
                 _dict[_key] = _value
 
+        # set to None if record_date (nullable) is None
+        # and __fields_set__ contains the field
+        if self.record_date is None and "record_date" in self.__fields_set__:
+            _dict['recordDate'] = None
+
+        # set to None if announcement_date (nullable) is None
+        # and __fields_set__ contains the field
+        if self.announcement_date is None and "announcement_date" in self.__fields_set__:
+            _dict['announcementDate'] = None
+
         return _dict
 
     @classmethod
-    def from_dict(cls, obj: dict) -> ExerciseEvent:
-        """Create an instance of ExerciseEvent from a dict"""
+    def from_dict(cls, obj: dict) -> ReverseStockSplitEvent:
+        """Create an instance of ReverseStockSplitEvent from a dict"""
         if obj is None:
             return None
 
         if not isinstance(obj, dict):
-            return ExerciseEvent.parse_obj(obj)
+            return ReverseStockSplitEvent.parse_obj(obj)
 
-        _obj = ExerciseEvent.parse_obj({
+        _obj = ReverseStockSplitEvent.parse_obj({
             "instrument_event_type": obj.get("instrumentEventType"),
-            "instrument": LusidInstrument.from_dict(obj.get("instrument")) if obj.get("instrument") is not None else None,
-            "anchor_date": obj.get("anchorDate"),
-            "event_window_end": obj.get("eventWindowEnd")
+            "payment_date": obj.get("paymentDate"),
+            "ex_date": obj.get("exDate"),
+            "units_ratio": UnitsRatio.from_dict(obj.get("unitsRatio")) if obj.get("unitsRatio") is not None else None,
+            "record_date": obj.get("recordDate"),
+            "announcement_date": obj.get("announcementDate")
         })
         # store additional fields in additional_properties
         for _key in obj.keys():
