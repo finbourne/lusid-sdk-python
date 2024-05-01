@@ -656,6 +656,7 @@ from lusid.models.portfolio import Portfolio
 from lusid.models.portfolio_cash_flow import PortfolioCashFlow
 from lusid.models.portfolio_cash_ladder import PortfolioCashLadder
 from lusid.models.portfolio_details import PortfolioDetails
+from lusid.models.portfolio_entity import PortfolioEntity
 from lusid.models.portfolio_entity_id import PortfolioEntityId
 from lusid.models.portfolio_group import PortfolioGroup
 from lusid.models.portfolio_group_id_compliance_parameter import PortfolioGroupIdComplianceParameter
@@ -674,6 +675,7 @@ from lusid.models.portfolio_return_breakdown import PortfolioReturnBreakdown
 from lusid.models.portfolio_search_result import PortfolioSearchResult
 from lusid.models.portfolio_trade_ticket import PortfolioTradeTicket
 from lusid.models.portfolio_type import PortfolioType
+from lusid.models.portfolio_without_href import PortfolioWithoutHref
 from lusid.models.portfolios_reconciliation_request import PortfoliosReconciliationRequest
 from lusid.models.posting_module_details import PostingModuleDetails
 from lusid.models.posting_module_request import PostingModuleRequest
@@ -1671,6 +1673,7 @@ __all__ = [
     "PortfolioCashFlow",
     "PortfolioCashLadder",
     "PortfolioDetails",
+    "PortfolioEntity",
     "PortfolioEntityId",
     "PortfolioGroup",
     "PortfolioGroupIdComplianceParameter",
@@ -1689,6 +1692,7 @@ __all__ = [
     "PortfolioSearchResult",
     "PortfolioTradeTicket",
     "PortfolioType",
+    "PortfolioWithoutHref",
     "PortfoliosReconciliationRequest",
     "PostingModuleDetails",
     "PostingModuleRequest",
