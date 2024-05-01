@@ -6,8 +6,8 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **scope** | **str** | The scope that the relationship definition exists in. | 
 **code** | **str** | The code of the relationship definition. Together with the scope this uniquely defines the relationship definition. | 
-**source_entity_type** | **str** | The entity type of the source entity object. Allowed values are &#39;Portfolio&#39;, &#39;PortfolioGroup&#39;, &#39;Person&#39;, &#39;LegalEntity&#39; or a custom entity type prefixed with &#39;~&#39;. | 
-**target_entity_type** | **str** | The entity type of the target entity object. Allowed values are &#39;Portfolio&#39;, &#39;PortfolioGroup&#39;, &#39;Person&#39;, &#39;LegalEntity&#39; or a custom entity type prefixed with &#39;~&#39;. | 
+**source_entity_type** | **str** | The entity type of the source entity object. Allowed values are &#39;Portfolio&#39;, &#39;PortfolioGroup&#39;, &#39;Person&#39;, &#39;LegalEntity&#39;, &#39;Instrument&#39; or a custom entity type prefixed with &#39;~&#39;. | 
+**target_entity_type** | **str** | The entity type of the target entity object. Allowed values are &#39;Portfolio&#39;, &#39;PortfolioGroup&#39;, &#39;Person&#39;, &#39;LegalEntity&#39;, &#39;Instrument&#39; or a custom entity type prefixed with &#39;~&#39;. | 
 **display_name** | **str** | The display name of the relationship definition. | 
 **outward_description** | **str** | The description to relate source entity object and target entity object. | 
 **inward_description** | **str** | The description to relate target entity object and source entity object. | 

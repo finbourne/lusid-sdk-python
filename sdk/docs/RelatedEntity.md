@@ -6,7 +6,7 @@ Information about the other related entity in the relationship
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **entity_type** | **str** | The type of the entity. | 
-**entity_id** | **Dict[str, str]** | The identifier of the other related entity in the relationship. It contains &#39;scope&#39; and &#39;code&#39; as keys for identifiers of a Portfolio or Portfolio Group, or &#39;idTypeScope&#39;, &#39;idTypeCode&#39;, &#39;code&#39; as keys for identifiers of a Person or Legal Entity. | 
+**entity_id** | **Dict[str, str]** | The identifier of the other related entity in the relationship. It contains &#39;scope&#39; and &#39;code&#39; as keys for identifiers of a Portfolio or Portfolio Group, or &#39;idTypeScope&#39;, &#39;idTypeCode&#39;, &#39;code&#39; as keys for identifiers of a Person or Legal entity, or &#39;scope&#39;, &#39;identifierType&#39;, &#39;identifierValue&#39; as keys for identifiers of an Instrument | 
 **display_name** | **str** | The display name of the entity. | 
 **properties** | [**Dict[str, ModelProperty]**](ModelProperty.md) | The properties of the entity. This field is empty until further notice. | [optional] 
 **scope** | **str** | The scope of the identifier | [optional] 

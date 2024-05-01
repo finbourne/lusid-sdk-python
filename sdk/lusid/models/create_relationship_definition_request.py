@@ -27,8 +27,8 @@ class CreateRelationshipDefinitionRequest(BaseModel):
     """
     scope: constr(strict=True, max_length=64, min_length=1) = Field(..., description="The scope that the relationship definition exists in.")
     code: constr(strict=True, max_length=64, min_length=1) = Field(..., description="The code of the relationship definition. Together with the scope this uniquely defines the relationship definition.")
-    source_entity_type: constr(strict=True, max_length=64, min_length=1) = Field(..., alias="sourceEntityType", description="The entity type of the source entity object. Allowed values are 'Portfolio', 'PortfolioGroup', 'Person', 'LegalEntity' or a custom entity type prefixed with '~'.")
-    target_entity_type: constr(strict=True, max_length=64, min_length=1) = Field(..., alias="targetEntityType", description="The entity type of the target entity object. Allowed values are 'Portfolio', 'PortfolioGroup', 'Person', 'LegalEntity' or a custom entity type prefixed with '~'.")
+    source_entity_type: constr(strict=True, max_length=64, min_length=1) = Field(..., alias="sourceEntityType", description="The entity type of the source entity object. Allowed values are 'Portfolio', 'PortfolioGroup', 'Person', 'LegalEntity', 'Instrument' or a custom entity type prefixed with '~'.")
+    target_entity_type: constr(strict=True, max_length=64, min_length=1) = Field(..., alias="targetEntityType", description="The entity type of the target entity object. Allowed values are 'Portfolio', 'PortfolioGroup', 'Person', 'LegalEntity', 'Instrument' or a custom entity type prefixed with '~'.")
     display_name: constr(strict=True, max_length=512, min_length=1) = Field(..., alias="displayName", description="The display name of the relationship definition.")
     outward_description: constr(strict=True, max_length=512, min_length=1) = Field(..., alias="outwardDescription", description="The description to relate source entity object and target entity object.")
     inward_description: constr(strict=True, max_length=512, min_length=1) = Field(..., alias="inwardDescription", description="The description to relate target entity object and source entity object.")

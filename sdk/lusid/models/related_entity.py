@@ -29,7 +29,7 @@ class RelatedEntity(BaseModel):
     Information about the other related entity in the relationship  # noqa: E501
     """
     entity_type: constr(strict=True, min_length=1) = Field(..., alias="entityType", description="The type of the entity.")
-    entity_id: Dict[str, StrictStr] = Field(..., alias="entityId", description="The identifier of the other related entity in the relationship. It contains 'scope' and 'code' as keys for identifiers of a Portfolio or Portfolio Group, or 'idTypeScope', 'idTypeCode', 'code' as keys for identifiers of a Person or Legal Entity.")
+    entity_id: Dict[str, StrictStr] = Field(..., alias="entityId", description="The identifier of the other related entity in the relationship. It contains 'scope' and 'code' as keys for identifiers of a Portfolio or Portfolio Group, or 'idTypeScope', 'idTypeCode', 'code' as keys for identifiers of a Person or Legal entity, or 'scope', 'identifierType', 'identifierValue' as keys for identifiers of an Instrument")
     display_name: constr(strict=True, min_length=1) = Field(..., alias="displayName", description="The display name of the entity.")
     properties: Optional[Dict[str, ModelProperty]] = Field(None, description="The properties of the entity. This field is empty until further notice.")
     scope: Optional[StrictStr] = Field(None, description="The scope of the identifier")
