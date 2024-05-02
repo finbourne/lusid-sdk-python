@@ -29,6 +29,7 @@ Name | Type | Description | Notes
 **realised_gain_loss** | [**List[RealisedGainLoss]**](RealisedGainLoss.md) | The collection of realised gains or losses resulting from relevant transactions e.g. a sale transaction. The cost used in calculating the realised gain or loss is determined by the accounting method defined when the transaction portfolio is created. | [optional] 
 **holding_ids** | **List[int]** | The collection of single identifiers for the holding within the portfolio. The holdingId is constructed from the LusidInstrumentId, sub-holding keys and currrency and is unique within the portfolio. | [optional] 
 **source_type** | **str** | The type of source that the transaction originated from, eg: InputTransaction, InstrumentEvent, HoldingAdjustment | [optional] 
+**source_instrument_event_id** | **str** | The unique ID of the instrument event that the transaction is related to. | [optional] 
 
 ## Example
 

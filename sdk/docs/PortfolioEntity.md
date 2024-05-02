@@ -8,6 +8,7 @@ Name | Type | Description | Notes
 **href** | **str** | The specific Uniform Resource Identifier (URI) for this resource at the requested effective and asAt datetime. | 
 **entity_unique_id** | **str** | The unique id of the entity | 
 **status** | **str** | The status of the entity at the current time | 
+**effective_at_created** | **datetime** | The EffectiveAt this Entity is created, if entity does not currently exist in EffectiveAt | [optional] 
 **prevailing_portfolio** | [**PortfolioWithoutHref**](PortfolioWithoutHref.md) |  | [optional] 
 **deleted_portfolio** | [**PortfolioWithoutHref**](PortfolioWithoutHref.md) |  | [optional] 
 **links** | [**List[Link]**](Link.md) |  | [optional] 

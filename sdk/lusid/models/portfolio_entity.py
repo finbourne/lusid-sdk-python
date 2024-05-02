@@ -17,7 +17,7 @@ import pprint
 import re  # noqa: F401
 import json
 
-
+from datetime import datetime
 from typing import Any, Dict, List, Optional
 from pydantic.v1 import BaseModel, Field, StrictStr, conlist, constr
 from lusid.models.link import Link
@@ -30,10 +30,11 @@ class PortfolioEntity(BaseModel):
     href: StrictStr = Field(..., description="The specific Uniform Resource Identifier (URI) for this resource at the requested effective and asAt datetime.")
     entity_unique_id: constr(strict=True, min_length=1) = Field(..., alias="entityUniqueId", description="The unique id of the entity")
     status: constr(strict=True, min_length=1) = Field(..., description="The status of the entity at the current time")
+    effective_at_created: Optional[datetime] = Field(None, alias="effectiveAtCreated", description="The EffectiveAt this Entity is created, if entity does not currently exist in EffectiveAt")
     prevailing_portfolio: Optional[PortfolioWithoutHref] = Field(None, alias="prevailingPortfolio")
     deleted_portfolio: Optional[PortfolioWithoutHref] = Field(None, alias="deletedPortfolio")
     links: Optional[conlist(Link)] = None
-    __properties = ["href", "entityUniqueId", "status", "prevailingPortfolio", "deletedPortfolio", "links"]
+    __properties = ["href", "entityUniqueId", "status", "effectiveAtCreated", "prevailingPortfolio", "deletedPortfolio", "links"]
 
     class Config:
         """Pydantic configuration"""
@@ -72,6 +73,11 @@ class PortfolioEntity(BaseModel):
                 if _item:
                     _items.append(_item.to_dict())
             _dict['links'] = _items
+        # set to None if effective_at_created (nullable) is None
+        # and __fields_set__ contains the field
+        if self.effective_at_created is None and "effective_at_created" in self.__fields_set__:
+            _dict['effectiveAtCreated'] = None
+
         # set to None if links (nullable) is None
         # and __fields_set__ contains the field
         if self.links is None and "links" in self.__fields_set__:
@@ -92,6 +98,7 @@ class PortfolioEntity(BaseModel):
             "href": obj.get("href"),
             "entity_unique_id": obj.get("entityUniqueId"),
             "status": obj.get("status"),
+            "effective_at_created": obj.get("effectiveAtCreated"),
             "prevailing_portfolio": PortfolioWithoutHref.from_dict(obj.get("prevailingPortfolio")) if obj.get("prevailingPortfolio") is not None else None,
             "deleted_portfolio": PortfolioWithoutHref.from_dict(obj.get("deletedPortfolio")) if obj.get("deletedPortfolio") is not None else None,
             "links": [Link.from_dict(_item) for _item in obj.get("links")] if obj.get("links") is not None else None

@@ -59,14 +59,6 @@ class Version(BaseModel):
         """Returns the dictionary representation of the model using alias"""
         _dict = self.dict(by_alias=True,
                           exclude={
-                            "as_at_created",
-                            "user_id_created",
-                            "request_id_created",
-                            "as_at_modified",
-                            "user_id_modified",
-                            "request_id_modified",
-                            "as_at_version_number",
-                            "entity_unique_id",
                           },
                           exclude_none=True)
         # set to None if as_at_created (nullable) is None
