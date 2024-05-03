@@ -15,6 +15,7 @@ Name | Type | Description | Notes
 **request_id_modified** | **str** | The unique request id of the command that last updated the entity (including its properties) in LUSID. | [optional] 
 **as_at_version_number** | **int** | The integer version number for the entity (the entity was created at version 1) | [optional] 
 **entity_unique_id** | **str** | The unique id of the entity | [optional] 
+**staged_modification_id_modified** | **str** | The ID of the staged change that resulted in the most recent modification. | [optional] [readonly] 
 
 ## Example
 

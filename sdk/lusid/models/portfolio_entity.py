@@ -19,7 +19,7 @@ import json
 
 from datetime import datetime
 from typing import Any, Dict, List, Optional
-from pydantic.v1 import BaseModel, Field, StrictStr, conlist, constr
+from pydantic.v1 import BaseModel, Field, StrictInt, StrictStr, conlist, constr
 from lusid.models.link import Link
 from lusid.models.portfolio_without_href import PortfolioWithoutHref
 
@@ -28,13 +28,17 @@ class PortfolioEntity(BaseModel):
     A list of portfolios.  # noqa: E501
     """
     href: StrictStr = Field(..., description="The specific Uniform Resource Identifier (URI) for this resource at the requested effective and asAt datetime.")
-    entity_unique_id: constr(strict=True, min_length=1) = Field(..., alias="entityUniqueId", description="The unique id of the entity")
-    status: constr(strict=True, min_length=1) = Field(..., description="The status of the entity at the current time")
-    effective_at_created: Optional[datetime] = Field(None, alias="effectiveAtCreated", description="The EffectiveAt this Entity is created, if entity does not currently exist in EffectiveAt")
+    entity_unique_id: constr(strict=True, min_length=1) = Field(..., alias="entityUniqueId", description="The unique id of the entity.")
+    as_at_version_number: Optional[StrictInt] = Field(None, alias="asAtVersionNumber", description="The integer version number for the entity (the entity was created at version 1)")
+    status: constr(strict=True, min_length=1) = Field(..., description="The status of the entity at the current time.")
+    as_at_deleted: Optional[datetime] = Field(None, alias="asAtDeleted", description="The asAt datetime at which the entity was deleted.")
+    user_id_deleted: Optional[StrictStr] = Field(None, alias="userIdDeleted", description="The unique id of the user who deleted the entity.")
+    request_id_deleted: Optional[StrictStr] = Field(None, alias="requestIdDeleted", description="The unique request id of the command that deleted the entity.")
+    effective_at_created: Optional[datetime] = Field(None, alias="effectiveAtCreated", description="The EffectiveAt this Entity is created, if entity does not currently exist in EffectiveAt.")
     prevailing_portfolio: Optional[PortfolioWithoutHref] = Field(None, alias="prevailingPortfolio")
     deleted_portfolio: Optional[PortfolioWithoutHref] = Field(None, alias="deletedPortfolio")
     links: Optional[conlist(Link)] = None
-    __properties = ["href", "entityUniqueId", "status", "effectiveAtCreated", "prevailingPortfolio", "deletedPortfolio", "links"]
+    __properties = ["href", "entityUniqueId", "asAtVersionNumber", "status", "asAtDeleted", "userIdDeleted", "requestIdDeleted", "effectiveAtCreated", "prevailingPortfolio", "deletedPortfolio", "links"]
 
     class Config:
         """Pydantic configuration"""
@@ -73,6 +77,26 @@ class PortfolioEntity(BaseModel):
                 if _item:
                     _items.append(_item.to_dict())
             _dict['links'] = _items
+        # set to None if as_at_version_number (nullable) is None
+        # and __fields_set__ contains the field
+        if self.as_at_version_number is None and "as_at_version_number" in self.__fields_set__:
+            _dict['asAtVersionNumber'] = None
+
+        # set to None if as_at_deleted (nullable) is None
+        # and __fields_set__ contains the field
+        if self.as_at_deleted is None and "as_at_deleted" in self.__fields_set__:
+            _dict['asAtDeleted'] = None
+
+        # set to None if user_id_deleted (nullable) is None
+        # and __fields_set__ contains the field
+        if self.user_id_deleted is None and "user_id_deleted" in self.__fields_set__:
+            _dict['userIdDeleted'] = None
+
+        # set to None if request_id_deleted (nullable) is None
+        # and __fields_set__ contains the field
+        if self.request_id_deleted is None and "request_id_deleted" in self.__fields_set__:
+            _dict['requestIdDeleted'] = None
+
         # set to None if effective_at_created (nullable) is None
         # and __fields_set__ contains the field
         if self.effective_at_created is None and "effective_at_created" in self.__fields_set__:
@@ -97,7 +121,11 @@ class PortfolioEntity(BaseModel):
         _obj = PortfolioEntity.parse_obj({
             "href": obj.get("href"),
             "entity_unique_id": obj.get("entityUniqueId"),
+            "as_at_version_number": obj.get("asAtVersionNumber"),
             "status": obj.get("status"),
+            "as_at_deleted": obj.get("asAtDeleted"),
+            "user_id_deleted": obj.get("userIdDeleted"),
+            "request_id_deleted": obj.get("requestIdDeleted"),
             "effective_at_created": obj.get("effectiveAtCreated"),
             "prevailing_portfolio": PortfolioWithoutHref.from_dict(obj.get("prevailingPortfolio")) if obj.get("prevailingPortfolio") is not None else None,
             "deleted_portfolio": PortfolioWithoutHref.from_dict(obj.get("deletedPortfolio")) if obj.get("deletedPortfolio") is not None else None,

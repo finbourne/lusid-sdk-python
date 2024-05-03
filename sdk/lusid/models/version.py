@@ -35,7 +35,8 @@ class Version(BaseModel):
     request_id_modified: Optional[StrictStr] = Field(None, alias="requestIdModified", description="The unique request id of the command that last updated the entity (including its properties) in LUSID.")
     as_at_version_number: Optional[StrictInt] = Field(None, alias="asAtVersionNumber", description="The integer version number for the entity (the entity was created at version 1)")
     entity_unique_id: Optional[StrictStr] = Field(None, alias="entityUniqueId", description="The unique id of the entity")
-    __properties = ["effectiveFrom", "asAtDate", "asAtCreated", "userIdCreated", "requestIdCreated", "asAtModified", "userIdModified", "requestIdModified", "asAtVersionNumber", "entityUniqueId"]
+    staged_modification_id_modified: Optional[StrictStr] = Field(None, alias="stagedModificationIdModified", description="The ID of the staged change that resulted in the most recent modification.")
+    __properties = ["effectiveFrom", "asAtDate", "asAtCreated", "userIdCreated", "requestIdCreated", "asAtModified", "userIdModified", "requestIdModified", "asAtVersionNumber", "entityUniqueId", "stagedModificationIdModified"]
 
     class Config:
         """Pydantic configuration"""
@@ -59,6 +60,7 @@ class Version(BaseModel):
         """Returns the dictionary representation of the model using alias"""
         _dict = self.dict(by_alias=True,
                           exclude={
+                            "staged_modification_id_modified",
                           },
                           exclude_none=True)
         # set to None if as_at_created (nullable) is None
@@ -101,6 +103,11 @@ class Version(BaseModel):
         if self.entity_unique_id is None and "entity_unique_id" in self.__fields_set__:
             _dict['entityUniqueId'] = None
 
+        # set to None if staged_modification_id_modified (nullable) is None
+        # and __fields_set__ contains the field
+        if self.staged_modification_id_modified is None and "staged_modification_id_modified" in self.__fields_set__:
+            _dict['stagedModificationIdModified'] = None
+
         return _dict
 
     @classmethod
@@ -122,6 +129,7 @@ class Version(BaseModel):
             "user_id_modified": obj.get("userIdModified"),
             "request_id_modified": obj.get("requestIdModified"),
             "as_at_version_number": obj.get("asAtVersionNumber"),
-            "entity_unique_id": obj.get("entityUniqueId")
+            "entity_unique_id": obj.get("entityUniqueId"),
+            "staged_modification_id_modified": obj.get("stagedModificationIdModified")
         })
         return _obj
