@@ -72,6 +72,7 @@ from lusid.api.scopes_api import ScopesApi
 from lusid.api.scripted_translation_api import ScriptedTranslationApi
 from lusid.api.search_api import SearchApi
 from lusid.api.sequences_api import SequencesApi
+from lusid.api.staged_modifications_api import StagedModificationsApi
 from lusid.api.staging_rule_set_api import StagingRuleSetApi
 from lusid.api.structured_result_data_api import StructuredResultDataApi
 from lusid.api.system_configuration_api import SystemConfigurationApi
@@ -633,6 +634,8 @@ from lusid.models.paged_resource_list_of_reconciliation import PagedResourceList
 from lusid.models.paged_resource_list_of_reference_list_response import PagedResourceListOfReferenceListResponse
 from lusid.models.paged_resource_list_of_relationship_definition import PagedResourceListOfRelationshipDefinition
 from lusid.models.paged_resource_list_of_sequence_definition import PagedResourceListOfSequenceDefinition
+from lusid.models.paged_resource_list_of_staged_modification import PagedResourceListOfStagedModification
+from lusid.models.paged_resource_list_of_staged_modifications_requested_change_interval import PagedResourceListOfStagedModificationsRequestedChangeInterval
 from lusid.models.paged_resource_list_of_staging_rule_set import PagedResourceListOfStagingRuleSet
 from lusid.models.paged_resource_list_of_transaction_template import PagedResourceListOfTransactionTemplate
 from lusid.models.paged_resource_list_of_transaction_template_specification import PagedResourceListOfTransactionTemplateSpecification
@@ -755,6 +758,7 @@ from lusid.models.relationship import Relationship
 from lusid.models.relationship_definition import RelationshipDefinition
 from lusid.models.relative_date_offset import RelativeDateOffset
 from lusid.models.repo import Repo
+from lusid.models.requested_changes import RequestedChanges
 from lusid.models.reset_event import ResetEvent
 from lusid.models.resource_id import ResourceId
 from lusid.models.resource_list_of_access_controlled_resource import ResourceListOfAccessControlledResource
@@ -863,7 +867,14 @@ from lusid.models.sides_definition_request import SidesDefinitionRequest
 from lusid.models.simple_cash_flow_loan import SimpleCashFlowLoan
 from lusid.models.simple_instrument import SimpleInstrument
 from lusid.models.sort_order import SortOrder
+from lusid.models.staged_modification import StagedModification
+from lusid.models.staged_modification_decision import StagedModificationDecision
+from lusid.models.staged_modification_decision_request import StagedModificationDecisionRequest
+from lusid.models.staged_modification_effective_range import StagedModificationEffectiveRange
+from lusid.models.staged_modification_staging_rule import StagedModificationStagingRule
+from lusid.models.staged_modifications_entity_hrefs import StagedModificationsEntityHrefs
 from lusid.models.staged_modifications_info import StagedModificationsInfo
+from lusid.models.staged_modifications_requested_change_interval import StagedModificationsRequestedChangeInterval
 from lusid.models.staging_rule import StagingRule
 from lusid.models.staging_rule_approval_criteria import StagingRuleApprovalCriteria
 from lusid.models.staging_rule_match_criteria import StagingRuleMatchCriteria
@@ -1100,6 +1111,7 @@ __all__ = [
     "ScriptedTranslationApi",
     "SearchApi",
     "SequencesApi",
+    "StagedModificationsApi",
     "StagingRuleSetApi",
     "StructuredResultDataApi",
     "SystemConfigurationApi",
@@ -1651,6 +1663,8 @@ __all__ = [
     "PagedResourceListOfReferenceListResponse",
     "PagedResourceListOfRelationshipDefinition",
     "PagedResourceListOfSequenceDefinition",
+    "PagedResourceListOfStagedModification",
+    "PagedResourceListOfStagedModificationsRequestedChangeInterval",
     "PagedResourceListOfStagingRuleSet",
     "PagedResourceListOfTransactionTemplate",
     "PagedResourceListOfTransactionTemplateSpecification",
@@ -1773,6 +1787,7 @@ __all__ = [
     "RelationshipDefinition",
     "RelativeDateOffset",
     "Repo",
+    "RequestedChanges",
     "ResetEvent",
     "ResourceId",
     "ResourceListOfAccessControlledResource",
@@ -1881,7 +1896,14 @@ __all__ = [
     "SimpleCashFlowLoan",
     "SimpleInstrument",
     "SortOrder",
+    "StagedModification",
+    "StagedModificationDecision",
+    "StagedModificationDecisionRequest",
+    "StagedModificationEffectiveRange",
+    "StagedModificationStagingRule",
+    "StagedModificationsEntityHrefs",
     "StagedModificationsInfo",
+    "StagedModificationsRequestedChangeInterval",
     "StagingRule",
     "StagingRuleApprovalCriteria",
     "StagingRuleMatchCriteria",

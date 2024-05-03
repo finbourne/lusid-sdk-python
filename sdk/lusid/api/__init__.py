@@ -56,6 +56,7 @@ from lusid.api.scopes_api import ScopesApi
 from lusid.api.scripted_translation_api import ScriptedTranslationApi
 from lusid.api.search_api import SearchApi
 from lusid.api.sequences_api import SequencesApi
+from lusid.api.staged_modifications_api import StagedModificationsApi
 from lusid.api.staging_rule_set_api import StagingRuleSetApi
 from lusid.api.structured_result_data_api import StructuredResultDataApi
 from lusid.api.system_configuration_api import SystemConfigurationApi
@@ -122,6 +123,7 @@ __all__ = [
     "ScriptedTranslationApi",
     "SearchApi",
     "SequencesApi",
+    "StagedModificationsApi",
     "StagingRuleSetApi",
     "StructuredResultDataApi",
     "SystemConfigurationApi",
