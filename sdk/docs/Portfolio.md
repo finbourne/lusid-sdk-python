@@ -13,6 +13,7 @@ Name | Type | Description | Notes
 **created** | **datetime** | The effective datetime at which the portfolio was created. No transactions or constituents can be added to the portfolio before this date. | 
 **parent_portfolio_id** | [**ResourceId**](ResourceId.md) |  | [optional] 
 **version** | [**Version**](Version.md) |  | [optional] 
+**staged_modifications** | [**StagedModificationsInfo**](StagedModificationsInfo.md) |  | [optional] 
 **is_derived** | **bool** | Whether or not this is a derived portfolio. | [optional] 
 **base_currency** | **str** | The base currency of the portfolio. | [optional] 
 **properties** | [**Dict[str, ModelProperty]**](ModelProperty.md) | The requested portfolio properties. These will be from the &#39;Portfolio&#39; domain. | [optional] 

@@ -25,6 +25,7 @@ from lusid.models.link import Link
 from lusid.models.model_property import ModelProperty
 from lusid.models.relationship import Relationship
 from lusid.models.resource_id import ResourceId
+from lusid.models.staged_modifications_info import StagedModificationsInfo
 from lusid.models.version import Version
 
 class Portfolio(BaseModel):
@@ -39,6 +40,7 @@ class Portfolio(BaseModel):
     created: datetime = Field(..., description="The effective datetime at which the portfolio was created. No transactions or constituents can be added to the portfolio before this date.")
     parent_portfolio_id: Optional[ResourceId] = Field(None, alias="parentPortfolioId")
     version: Optional[Version] = None
+    staged_modifications: Optional[StagedModificationsInfo] = Field(None, alias="stagedModifications")
     is_derived: Optional[StrictBool] = Field(None, alias="isDerived", description="Whether or not this is a derived portfolio.")
     base_currency: Optional[StrictStr] = Field(None, alias="baseCurrency", description="The base currency of the portfolio.")
     properties: Optional[Dict[str, ModelProperty]] = Field(None, description="The requested portfolio properties. These will be from the 'Portfolio' domain.")
@@ -51,7 +53,7 @@ class Portfolio(BaseModel):
     instrument_event_configuration: Optional[InstrumentEventConfiguration] = Field(None, alias="instrumentEventConfiguration")
     amortisation_rule_set_id: Optional[ResourceId] = Field(None, alias="amortisationRuleSetId")
     links: Optional[conlist(Link)] = None
-    __properties = ["href", "id", "type", "displayName", "description", "created", "parentPortfolioId", "version", "isDerived", "baseCurrency", "properties", "relationships", "instrumentScopes", "accountingMethod", "amortisationMethod", "transactionTypeScope", "cashGainLossCalculationDate", "instrumentEventConfiguration", "amortisationRuleSetId", "links"]
+    __properties = ["href", "id", "type", "displayName", "description", "created", "parentPortfolioId", "version", "stagedModifications", "isDerived", "baseCurrency", "properties", "relationships", "instrumentScopes", "accountingMethod", "amortisationMethod", "transactionTypeScope", "cashGainLossCalculationDate", "instrumentEventConfiguration", "amortisationRuleSetId", "links"]
 
     @validator('type')
     def type_validate_enum(cls, value):
@@ -103,6 +105,9 @@ class Portfolio(BaseModel):
         # override the default output from pydantic by calling `to_dict()` of version
         if self.version:
             _dict['version'] = self.version.to_dict()
+        # override the default output from pydantic by calling `to_dict()` of staged_modifications
+        if self.staged_modifications:
+            _dict['stagedModifications'] = self.staged_modifications.to_dict()
         # override the default output from pydantic by calling `to_dict()` of each value in properties (dict)
         _field_dict = {}
         if self.properties:
@@ -200,6 +205,7 @@ class Portfolio(BaseModel):
             "created": obj.get("created"),
             "parent_portfolio_id": ResourceId.from_dict(obj.get("parentPortfolioId")) if obj.get("parentPortfolioId") is not None else None,
             "version": Version.from_dict(obj.get("version")) if obj.get("version") is not None else None,
+            "staged_modifications": StagedModificationsInfo.from_dict(obj.get("stagedModifications")) if obj.get("stagedModifications") is not None else None,
             "is_derived": obj.get("isDerived"),
             "base_currency": obj.get("baseCurrency"),
             "properties": dict(

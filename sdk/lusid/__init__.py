@@ -863,6 +863,7 @@ from lusid.models.sides_definition_request import SidesDefinitionRequest
 from lusid.models.simple_cash_flow_loan import SimpleCashFlowLoan
 from lusid.models.simple_instrument import SimpleInstrument
 from lusid.models.sort_order import SortOrder
+from lusid.models.staged_modifications_info import StagedModificationsInfo
 from lusid.models.staging_rule import StagingRule
 from lusid.models.staging_rule_approval_criteria import StagingRuleApprovalCriteria
 from lusid.models.staging_rule_match_criteria import StagingRuleMatchCriteria
@@ -1880,6 +1881,7 @@ __all__ = [
     "SimpleCashFlowLoan",
     "SimpleInstrument",
     "SortOrder",
+    "StagedModificationsInfo",
     "StagingRule",
     "StagingRuleApprovalCriteria",
     "StagingRuleMatchCriteria",
