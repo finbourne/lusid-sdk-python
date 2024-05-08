@@ -396,6 +396,9 @@ from lusid.models.instrument_delete_modes import InstrumentDeleteModes
 from lusid.models.instrument_event import InstrumentEvent
 from lusid.models.instrument_event_configuration import InstrumentEventConfiguration
 from lusid.models.instrument_event_holder import InstrumentEventHolder
+from lusid.models.instrument_event_instruction import InstrumentEventInstruction
+from lusid.models.instrument_event_instruction_request import InstrumentEventInstructionRequest
+from lusid.models.instrument_event_instructions_response import InstrumentEventInstructionsResponse
 from lusid.models.instrument_event_type import InstrumentEventType
 from lusid.models.instrument_id_type_descriptor import InstrumentIdTypeDescriptor
 from lusid.models.instrument_id_value import InstrumentIdValue
@@ -1350,6 +1353,9 @@ __all__ = [
     "InstrumentEvent",
     "InstrumentEventConfiguration",
     "InstrumentEventHolder",
+    "InstrumentEventInstruction",
+    "InstrumentEventInstructionRequest",
+    "InstrumentEventInstructionsResponse",
     "InstrumentEventType",
     "InstrumentIdTypeDescriptor",
     "InstrumentIdValue",

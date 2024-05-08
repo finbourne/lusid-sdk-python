@@ -35,6 +35,9 @@ from lusid.models.composite_breakdown_request import CompositeBreakdownRequest
 from lusid.models.composite_breakdown_response import CompositeBreakdownResponse
 from lusid.models.composite_dispersion_response import CompositeDispersionResponse
 from lusid.models.deleted_entity_response import DeletedEntityResponse
+from lusid.models.instrument_event_instruction import InstrumentEventInstruction
+from lusid.models.instrument_event_instruction_request import InstrumentEventInstructionRequest
+from lusid.models.instrument_event_instructions_response import InstrumentEventInstructionsResponse
 from lusid.models.model_property import ModelProperty
 from lusid.models.operation import Operation
 from lusid.models.performance_return import PerformanceReturn
@@ -72,6 +75,181 @@ class PortfoliosApi:
         if api_client is None:
             api_client = ApiClient.get_default()
         self.api_client = api_client
+
+    @overload
+    async def delete_instrument_event_instruction(self, scope : Annotated[constr(strict=True, max_length=64, min_length=1), Field(..., description="The scope of the portfolio.")], code : Annotated[constr(strict=True, max_length=64, min_length=1), Field(..., description="The code of the portfolio. Together with the scope this uniquely identifies the portfolio.")], instrument_event_instruction_id : Annotated[StrictStr, Field(..., description="The id of the instruction to be deleted.")], portfolio_effective_at : Annotated[Optional[constr(strict=True, max_length=6000, min_length=0)], Field(description="The effective date at which the portfolio will be resolved. Defaults to current time if not specified.")] = None, **kwargs) -> DeletedEntityResponse:  # noqa: E501
+        ...
+
+    @overload
+    def delete_instrument_event_instruction(self, scope : Annotated[constr(strict=True, max_length=64, min_length=1), Field(..., description="The scope of the portfolio.")], code : Annotated[constr(strict=True, max_length=64, min_length=1), Field(..., description="The code of the portfolio. Together with the scope this uniquely identifies the portfolio.")], instrument_event_instruction_id : Annotated[StrictStr, Field(..., description="The id of the instruction to be deleted.")], portfolio_effective_at : Annotated[Optional[constr(strict=True, max_length=6000, min_length=0)], Field(description="The effective date at which the portfolio will be resolved. Defaults to current time if not specified.")] = None, async_req: Optional[bool]=True, **kwargs) -> DeletedEntityResponse:  # noqa: E501
+        ...
+
+    @validate_arguments
+    def delete_instrument_event_instruction(self, scope : Annotated[constr(strict=True, max_length=64, min_length=1), Field(..., description="The scope of the portfolio.")], code : Annotated[constr(strict=True, max_length=64, min_length=1), Field(..., description="The code of the portfolio. Together with the scope this uniquely identifies the portfolio.")], instrument_event_instruction_id : Annotated[StrictStr, Field(..., description="The id of the instruction to be deleted.")], portfolio_effective_at : Annotated[Optional[constr(strict=True, max_length=6000, min_length=0)], Field(description="The effective date at which the portfolio will be resolved. Defaults to current time if not specified.")] = None, async_req: Optional[bool]=None, **kwargs) -> Union[DeletedEntityResponse, Awaitable[DeletedEntityResponse]]:  # noqa: E501
+        """[EARLY ACCESS] DeleteInstrumentEventInstruction: Delete Instrument Event Instruction  # noqa: E501
+
+        Delete a particular instruction for a particular portfolio  # noqa: E501
+        This method makes a synchronous HTTP request by default. To make an
+        asynchronous HTTP request, please pass async_req=True
+
+        >>> thread = api.delete_instrument_event_instruction(scope, code, instrument_event_instruction_id, portfolio_effective_at, async_req=True)
+        >>> result = thread.get()
+
+        :param scope: The scope of the portfolio. (required)
+        :type scope: str
+        :param code: The code of the portfolio. Together with the scope this uniquely identifies the portfolio. (required)
+        :type code: str
+        :param instrument_event_instruction_id: The id of the instruction to be deleted. (required)
+        :type instrument_event_instruction_id: str
+        :param portfolio_effective_at: The effective date at which the portfolio will be resolved. Defaults to current time if not specified.
+        :type portfolio_effective_at: str
+        :param async_req: Whether to execute the request asynchronously.
+        :type async_req: bool, optional
+        :param _request_timeout: timeout setting for this request.
+               If one number provided, it will be total request
+               timeout. It can also be a pair (tuple) of
+               (connection, read) timeouts.
+        :return: Returns the result object.
+                 If the method is called asynchronously,
+                 returns the request thread.
+        :rtype: DeletedEntityResponse
+        """
+        kwargs['_return_http_data_only'] = True
+        if '_preload_content' in kwargs:
+            message = "Error! Please call the delete_instrument_event_instruction_with_http_info method with `_preload_content` instead and obtain raw data from ApiResponse.raw_data"  # noqa: E501
+            raise ValueError(message)
+        if async_req is not None:
+            kwargs['async_req'] = async_req
+        return self.delete_instrument_event_instruction_with_http_info(scope, code, instrument_event_instruction_id, portfolio_effective_at, **kwargs)  # noqa: E501
+
+    @validate_arguments
+    def delete_instrument_event_instruction_with_http_info(self, scope : Annotated[constr(strict=True, max_length=64, min_length=1), Field(..., description="The scope of the portfolio.")], code : Annotated[constr(strict=True, max_length=64, min_length=1), Field(..., description="The code of the portfolio. Together with the scope this uniquely identifies the portfolio.")], instrument_event_instruction_id : Annotated[StrictStr, Field(..., description="The id of the instruction to be deleted.")], portfolio_effective_at : Annotated[Optional[constr(strict=True, max_length=6000, min_length=0)], Field(description="The effective date at which the portfolio will be resolved. Defaults to current time if not specified.")] = None, **kwargs) -> ApiResponse:  # noqa: E501
+        """[EARLY ACCESS] DeleteInstrumentEventInstruction: Delete Instrument Event Instruction  # noqa: E501
+
+        Delete a particular instruction for a particular portfolio  # noqa: E501
+        This method makes a synchronous HTTP request by default. To make an
+        asynchronous HTTP request, please pass async_req=True
+
+        >>> thread = api.delete_instrument_event_instruction_with_http_info(scope, code, instrument_event_instruction_id, portfolio_effective_at, async_req=True)
+        >>> result = thread.get()
+
+        :param scope: The scope of the portfolio. (required)
+        :type scope: str
+        :param code: The code of the portfolio. Together with the scope this uniquely identifies the portfolio. (required)
+        :type code: str
+        :param instrument_event_instruction_id: The id of the instruction to be deleted. (required)
+        :type instrument_event_instruction_id: str
+        :param portfolio_effective_at: The effective date at which the portfolio will be resolved. Defaults to current time if not specified.
+        :type portfolio_effective_at: str
+        :param async_req: Whether to execute the request asynchronously.
+        :type async_req: bool, optional
+        :param _preload_content: if False, the ApiResponse.data will
+                                 be set to none and raw_data will store the
+                                 HTTP response body without reading/decoding.
+                                 Default is True.
+        :type _preload_content: bool, optional
+        :param _return_http_data_only: response data instead of ApiResponse
+                                       object with status code, headers, etc
+        :type _return_http_data_only: bool, optional
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :param _request_auth: set to override the auth_settings for an a single
+                              request; this effectively ignores the authentication
+                              in the spec for a single request.
+        :type _request_auth: dict, optional
+        :type _content_type: string, optional: force content-type for the request
+        :return: Returns the result object.
+                 If the method is called asynchronously,
+                 returns the request thread.
+        :rtype: tuple(DeletedEntityResponse, status_code(int), headers(HTTPHeaderDict))
+        """
+
+        _params = locals()
+
+        _all_params = [
+            'scope',
+            'code',
+            'instrument_event_instruction_id',
+            'portfolio_effective_at'
+        ]
+        _all_params.extend(
+            [
+                'async_req',
+                '_return_http_data_only',
+                '_preload_content',
+                '_request_timeout',
+                '_request_auth',
+                '_content_type',
+                '_headers'
+            ]
+        )
+
+        # validate the arguments
+        for _key, _val in _params['kwargs'].items():
+            if _key not in _all_params:
+                raise ApiTypeError(
+                    "Got an unexpected keyword argument '%s'"
+                    " to method delete_instrument_event_instruction" % _key
+                )
+            _params[_key] = _val
+        del _params['kwargs']
+
+        _collection_formats = {}
+
+        # process the path parameters
+        _path_params = {}
+        if _params['scope']:
+            _path_params['scope'] = _params['scope']
+
+        if _params['code']:
+            _path_params['code'] = _params['code']
+
+        if _params['instrument_event_instruction_id']:
+            _path_params['instrumentEventInstructionId'] = _params['instrument_event_instruction_id']
+
+
+        # process the query parameters
+        _query_params = []
+        if _params.get('portfolio_effective_at') is not None:  # noqa: E501
+            _query_params.append(('portfolioEffectiveAt', _params['portfolio_effective_at']))
+
+        # process the header parameters
+        _header_params = dict(_params.get('_headers', {}))
+        # process the form parameters
+        _form_params = []
+        _files = {}
+        # process the body parameter
+        _body_params = None
+        # set the HTTP header `Accept`
+        _header_params['Accept'] = self.api_client.select_header_accept(
+            ['text/plain', 'application/json', 'text/json'])  # noqa: E501
+
+        # authentication setting
+        _auth_settings = ['oauth2']  # noqa: E501
+
+        _response_types_map = {
+            '200': "DeletedEntityResponse",
+            '400': "LusidValidationProblemDetails",
+        }
+
+        return self.api_client.call_api(
+            '/api/portfolios/{scope}/{code}/instrumenteventinstructions/{instrumentEventInstructionId}', 'DELETE',
+            _path_params,
+            _query_params,
+            _header_params,
+            body=_body_params,
+            post_params=_form_params,
+            files=_files,
+            response_types_map=_response_types_map,
+            auth_settings=_auth_settings,
+            async_req=_params.get('async_req'),
+            _return_http_data_only=_params.get('_return_http_data_only'),  # noqa: E501
+            _preload_content=_params.get('_preload_content', True),
+            _request_timeout=_params.get('_request_timeout'),
+            collection_formats=_collection_formats,
+            _request_auth=_params.get('_request_auth'))
 
     @overload
     async def delete_key_from_portfolio_access_metadata(self, scope : Annotated[constr(strict=True, max_length=64, min_length=1), Field(..., description="The scope of the Quote Access Metadata Rule to retrieve.")], code : Annotated[constr(strict=True, max_length=64, min_length=1), Field(..., description="Portfolio code")], metadata_key : Annotated[constr(strict=True, max_length=256, min_length=1), Field(..., description="The metadataKey identifying the access metadata entry to delete")], effective_at : Annotated[Optional[StrictStr], Field(description="The effective date to delete at, if this is not supplied, it will delete all data found")] = None, effective_until : Annotated[Optional[datetime], Field(description="The effective date until which the delete is valid. If not supplied this will be valid indefinitely, or until the next 'effectiveAt' date of the Access Metadata")] = None, **kwargs) -> DeletedEntityResponse:  # noqa: E501
@@ -1164,6 +1342,192 @@ class PortfoliosApi:
 
         return self.api_client.call_api(
             '/api/portfolios/{scope}/{code}/returns/breakdown', 'POST',
+            _path_params,
+            _query_params,
+            _header_params,
+            body=_body_params,
+            post_params=_form_params,
+            files=_files,
+            response_types_map=_response_types_map,
+            auth_settings=_auth_settings,
+            async_req=_params.get('async_req'),
+            _return_http_data_only=_params.get('_return_http_data_only'),  # noqa: E501
+            _preload_content=_params.get('_preload_content', True),
+            _request_timeout=_params.get('_request_timeout'),
+            collection_formats=_collection_formats,
+            _request_auth=_params.get('_request_auth'))
+
+    @overload
+    async def get_instrument_event_instruction(self, scope : Annotated[constr(strict=True, max_length=64, min_length=1), Field(..., description="The scope of the portfolio.")], code : Annotated[constr(strict=True, max_length=64, min_length=1), Field(..., description="The code of the portfolio. Together with the scope this uniquely identifies the portfolio.")], instrument_event_instruction_id : Annotated[StrictStr, Field(..., description="The id of the instruction to be retrieved.")], portfolio_effective_at : Annotated[Optional[constr(strict=True, max_length=6000, min_length=0)], Field(description="The effective date at which the portfolio will be resolved. Defaults to current time if not specified.")] = None, as_at : Annotated[Optional[datetime], Field(description="The asAt datetime at which to retrieve the instruction. Defaults to return the latest version of the instruction if not specified.")] = None, **kwargs) -> InstrumentEventInstruction:  # noqa: E501
+        ...
+
+    @overload
+    def get_instrument_event_instruction(self, scope : Annotated[constr(strict=True, max_length=64, min_length=1), Field(..., description="The scope of the portfolio.")], code : Annotated[constr(strict=True, max_length=64, min_length=1), Field(..., description="The code of the portfolio. Together with the scope this uniquely identifies the portfolio.")], instrument_event_instruction_id : Annotated[StrictStr, Field(..., description="The id of the instruction to be retrieved.")], portfolio_effective_at : Annotated[Optional[constr(strict=True, max_length=6000, min_length=0)], Field(description="The effective date at which the portfolio will be resolved. Defaults to current time if not specified.")] = None, as_at : Annotated[Optional[datetime], Field(description="The asAt datetime at which to retrieve the instruction. Defaults to return the latest version of the instruction if not specified.")] = None, async_req: Optional[bool]=True, **kwargs) -> InstrumentEventInstruction:  # noqa: E501
+        ...
+
+    @validate_arguments
+    def get_instrument_event_instruction(self, scope : Annotated[constr(strict=True, max_length=64, min_length=1), Field(..., description="The scope of the portfolio.")], code : Annotated[constr(strict=True, max_length=64, min_length=1), Field(..., description="The code of the portfolio. Together with the scope this uniquely identifies the portfolio.")], instrument_event_instruction_id : Annotated[StrictStr, Field(..., description="The id of the instruction to be retrieved.")], portfolio_effective_at : Annotated[Optional[constr(strict=True, max_length=6000, min_length=0)], Field(description="The effective date at which the portfolio will be resolved. Defaults to current time if not specified.")] = None, as_at : Annotated[Optional[datetime], Field(description="The asAt datetime at which to retrieve the instruction. Defaults to return the latest version of the instruction if not specified.")] = None, async_req: Optional[bool]=None, **kwargs) -> Union[InstrumentEventInstruction, Awaitable[InstrumentEventInstruction]]:  # noqa: E501
+        """[EARLY ACCESS] GetInstrumentEventInstruction: Get Instrument Event Instruction  # noqa: E501
+
+        Get a particular instruction for a particular portfolio  # noqa: E501
+        This method makes a synchronous HTTP request by default. To make an
+        asynchronous HTTP request, please pass async_req=True
+
+        >>> thread = api.get_instrument_event_instruction(scope, code, instrument_event_instruction_id, portfolio_effective_at, as_at, async_req=True)
+        >>> result = thread.get()
+
+        :param scope: The scope of the portfolio. (required)
+        :type scope: str
+        :param code: The code of the portfolio. Together with the scope this uniquely identifies the portfolio. (required)
+        :type code: str
+        :param instrument_event_instruction_id: The id of the instruction to be retrieved. (required)
+        :type instrument_event_instruction_id: str
+        :param portfolio_effective_at: The effective date at which the portfolio will be resolved. Defaults to current time if not specified.
+        :type portfolio_effective_at: str
+        :param as_at: The asAt datetime at which to retrieve the instruction. Defaults to return the latest version of the instruction if not specified.
+        :type as_at: datetime
+        :param async_req: Whether to execute the request asynchronously.
+        :type async_req: bool, optional
+        :param _request_timeout: timeout setting for this request.
+               If one number provided, it will be total request
+               timeout. It can also be a pair (tuple) of
+               (connection, read) timeouts.
+        :return: Returns the result object.
+                 If the method is called asynchronously,
+                 returns the request thread.
+        :rtype: InstrumentEventInstruction
+        """
+        kwargs['_return_http_data_only'] = True
+        if '_preload_content' in kwargs:
+            message = "Error! Please call the get_instrument_event_instruction_with_http_info method with `_preload_content` instead and obtain raw data from ApiResponse.raw_data"  # noqa: E501
+            raise ValueError(message)
+        if async_req is not None:
+            kwargs['async_req'] = async_req
+        return self.get_instrument_event_instruction_with_http_info(scope, code, instrument_event_instruction_id, portfolio_effective_at, as_at, **kwargs)  # noqa: E501
+
+    @validate_arguments
+    def get_instrument_event_instruction_with_http_info(self, scope : Annotated[constr(strict=True, max_length=64, min_length=1), Field(..., description="The scope of the portfolio.")], code : Annotated[constr(strict=True, max_length=64, min_length=1), Field(..., description="The code of the portfolio. Together with the scope this uniquely identifies the portfolio.")], instrument_event_instruction_id : Annotated[StrictStr, Field(..., description="The id of the instruction to be retrieved.")], portfolio_effective_at : Annotated[Optional[constr(strict=True, max_length=6000, min_length=0)], Field(description="The effective date at which the portfolio will be resolved. Defaults to current time if not specified.")] = None, as_at : Annotated[Optional[datetime], Field(description="The asAt datetime at which to retrieve the instruction. Defaults to return the latest version of the instruction if not specified.")] = None, **kwargs) -> ApiResponse:  # noqa: E501
+        """[EARLY ACCESS] GetInstrumentEventInstruction: Get Instrument Event Instruction  # noqa: E501
+
+        Get a particular instruction for a particular portfolio  # noqa: E501
+        This method makes a synchronous HTTP request by default. To make an
+        asynchronous HTTP request, please pass async_req=True
+
+        >>> thread = api.get_instrument_event_instruction_with_http_info(scope, code, instrument_event_instruction_id, portfolio_effective_at, as_at, async_req=True)
+        >>> result = thread.get()
+
+        :param scope: The scope of the portfolio. (required)
+        :type scope: str
+        :param code: The code of the portfolio. Together with the scope this uniquely identifies the portfolio. (required)
+        :type code: str
+        :param instrument_event_instruction_id: The id of the instruction to be retrieved. (required)
+        :type instrument_event_instruction_id: str
+        :param portfolio_effective_at: The effective date at which the portfolio will be resolved. Defaults to current time if not specified.
+        :type portfolio_effective_at: str
+        :param as_at: The asAt datetime at which to retrieve the instruction. Defaults to return the latest version of the instruction if not specified.
+        :type as_at: datetime
+        :param async_req: Whether to execute the request asynchronously.
+        :type async_req: bool, optional
+        :param _preload_content: if False, the ApiResponse.data will
+                                 be set to none and raw_data will store the
+                                 HTTP response body without reading/decoding.
+                                 Default is True.
+        :type _preload_content: bool, optional
+        :param _return_http_data_only: response data instead of ApiResponse
+                                       object with status code, headers, etc
+        :type _return_http_data_only: bool, optional
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :param _request_auth: set to override the auth_settings for an a single
+                              request; this effectively ignores the authentication
+                              in the spec for a single request.
+        :type _request_auth: dict, optional
+        :type _content_type: string, optional: force content-type for the request
+        :return: Returns the result object.
+                 If the method is called asynchronously,
+                 returns the request thread.
+        :rtype: tuple(InstrumentEventInstruction, status_code(int), headers(HTTPHeaderDict))
+        """
+
+        _params = locals()
+
+        _all_params = [
+            'scope',
+            'code',
+            'instrument_event_instruction_id',
+            'portfolio_effective_at',
+            'as_at'
+        ]
+        _all_params.extend(
+            [
+                'async_req',
+                '_return_http_data_only',
+                '_preload_content',
+                '_request_timeout',
+                '_request_auth',
+                '_content_type',
+                '_headers'
+            ]
+        )
+
+        # validate the arguments
+        for _key, _val in _params['kwargs'].items():
+            if _key not in _all_params:
+                raise ApiTypeError(
+                    "Got an unexpected keyword argument '%s'"
+                    " to method get_instrument_event_instruction" % _key
+                )
+            _params[_key] = _val
+        del _params['kwargs']
+
+        _collection_formats = {}
+
+        # process the path parameters
+        _path_params = {}
+        if _params['scope']:
+            _path_params['scope'] = _params['scope']
+
+        if _params['code']:
+            _path_params['code'] = _params['code']
+
+        if _params['instrument_event_instruction_id']:
+            _path_params['instrumentEventInstructionId'] = _params['instrument_event_instruction_id']
+
+
+        # process the query parameters
+        _query_params = []
+        if _params.get('portfolio_effective_at') is not None:  # noqa: E501
+            _query_params.append(('portfolioEffectiveAt', _params['portfolio_effective_at']))
+
+        if _params.get('as_at') is not None:  # noqa: E501
+            if isinstance(_params['as_at'], datetime):
+                _query_params.append(('asAt', _params['as_at'].strftime(self.api_client.configuration.datetime_format)))
+            else:
+                _query_params.append(('asAt', _params['as_at']))
+
+        # process the header parameters
+        _header_params = dict(_params.get('_headers', {}))
+        # process the form parameters
+        _form_params = []
+        _files = {}
+        # process the body parameter
+        _body_params = None
+        # set the HTTP header `Accept`
+        _header_params['Accept'] = self.api_client.select_header_accept(
+            ['text/plain', 'application/json', 'text/json'])  # noqa: E501
+
+        # authentication setting
+        _auth_settings = ['oauth2']  # noqa: E501
+
+        _response_types_map = {
+            '200': "InstrumentEventInstruction",
+            '400': "LusidValidationProblemDetails",
+        }
+
+        return self.api_client.call_api(
+            '/api/portfolios/{scope}/{code}/instrumenteventinstructions/{instrumentEventInstructionId}', 'GET',
             _path_params,
             _query_params,
             _header_params,
@@ -4562,6 +4926,196 @@ class PortfoliosApi:
 
         return self.api_client.call_api(
             '/api/portfolios/{scope}/{code}', 'PUT',
+            _path_params,
+            _query_params,
+            _header_params,
+            body=_body_params,
+            post_params=_form_params,
+            files=_files,
+            response_types_map=_response_types_map,
+            auth_settings=_auth_settings,
+            async_req=_params.get('async_req'),
+            _return_http_data_only=_params.get('_return_http_data_only'),  # noqa: E501
+            _preload_content=_params.get('_preload_content', True),
+            _request_timeout=_params.get('_request_timeout'),
+            collection_formats=_collection_formats,
+            _request_auth=_params.get('_request_auth'))
+
+    @overload
+    async def upsert_instrument_event_instructions(self, scope : Annotated[constr(strict=True, max_length=64, min_length=1), Field(..., description="The scope of the portfolio.")], code : Annotated[constr(strict=True, max_length=64, min_length=1), Field(..., description="The code of the portfolio. Together with the scope this uniquely identifies the portfolio.")], success_mode : Annotated[constr(strict=True, max_length=64, min_length=1), Field(..., description="Whether the batch request should fail atomically or in a partial fashion - allowed values: Atomic, Partial (default)")], request_body : Annotated[Dict[str, InstrumentEventInstructionRequest], Field(..., description="The instructions to be upserted to the portfolio.")], portfolio_effective_at : Annotated[Optional[constr(strict=True, max_length=6000, min_length=0)], Field(description="The effective date at which the portfolio will be resolved. Defaults to current time if not specified.")] = None, **kwargs) -> InstrumentEventInstructionsResponse:  # noqa: E501
+        ...
+
+    @overload
+    def upsert_instrument_event_instructions(self, scope : Annotated[constr(strict=True, max_length=64, min_length=1), Field(..., description="The scope of the portfolio.")], code : Annotated[constr(strict=True, max_length=64, min_length=1), Field(..., description="The code of the portfolio. Together with the scope this uniquely identifies the portfolio.")], success_mode : Annotated[constr(strict=True, max_length=64, min_length=1), Field(..., description="Whether the batch request should fail atomically or in a partial fashion - allowed values: Atomic, Partial (default)")], request_body : Annotated[Dict[str, InstrumentEventInstructionRequest], Field(..., description="The instructions to be upserted to the portfolio.")], portfolio_effective_at : Annotated[Optional[constr(strict=True, max_length=6000, min_length=0)], Field(description="The effective date at which the portfolio will be resolved. Defaults to current time if not specified.")] = None, async_req: Optional[bool]=True, **kwargs) -> InstrumentEventInstructionsResponse:  # noqa: E501
+        ...
+
+    @validate_arguments
+    def upsert_instrument_event_instructions(self, scope : Annotated[constr(strict=True, max_length=64, min_length=1), Field(..., description="The scope of the portfolio.")], code : Annotated[constr(strict=True, max_length=64, min_length=1), Field(..., description="The code of the portfolio. Together with the scope this uniquely identifies the portfolio.")], success_mode : Annotated[constr(strict=True, max_length=64, min_length=1), Field(..., description="Whether the batch request should fail atomically or in a partial fashion - allowed values: Atomic, Partial (default)")], request_body : Annotated[Dict[str, InstrumentEventInstructionRequest], Field(..., description="The instructions to be upserted to the portfolio.")], portfolio_effective_at : Annotated[Optional[constr(strict=True, max_length=6000, min_length=0)], Field(description="The effective date at which the portfolio will be resolved. Defaults to current time if not specified.")] = None, async_req: Optional[bool]=None, **kwargs) -> Union[InstrumentEventInstructionsResponse, Awaitable[InstrumentEventInstructionsResponse]]:  # noqa: E501
+        """[EARLY ACCESS] UpsertInstrumentEventInstructions: Upsert Instrument Event Instructions  # noqa: E501
+
+        Batch upsert for instrument event instructions, for the portfolio or individual holdings  # noqa: E501
+        This method makes a synchronous HTTP request by default. To make an
+        asynchronous HTTP request, please pass async_req=True
+
+        >>> thread = api.upsert_instrument_event_instructions(scope, code, success_mode, request_body, portfolio_effective_at, async_req=True)
+        >>> result = thread.get()
+
+        :param scope: The scope of the portfolio. (required)
+        :type scope: str
+        :param code: The code of the portfolio. Together with the scope this uniquely identifies the portfolio. (required)
+        :type code: str
+        :param success_mode: Whether the batch request should fail atomically or in a partial fashion - allowed values: Atomic, Partial (default) (required)
+        :type success_mode: str
+        :param request_body: The instructions to be upserted to the portfolio. (required)
+        :type request_body: Dict[str, InstrumentEventInstructionRequest]
+        :param portfolio_effective_at: The effective date at which the portfolio will be resolved. Defaults to current time if not specified.
+        :type portfolio_effective_at: str
+        :param async_req: Whether to execute the request asynchronously.
+        :type async_req: bool, optional
+        :param _request_timeout: timeout setting for this request.
+               If one number provided, it will be total request
+               timeout. It can also be a pair (tuple) of
+               (connection, read) timeouts.
+        :return: Returns the result object.
+                 If the method is called asynchronously,
+                 returns the request thread.
+        :rtype: InstrumentEventInstructionsResponse
+        """
+        kwargs['_return_http_data_only'] = True
+        if '_preload_content' in kwargs:
+            message = "Error! Please call the upsert_instrument_event_instructions_with_http_info method with `_preload_content` instead and obtain raw data from ApiResponse.raw_data"  # noqa: E501
+            raise ValueError(message)
+        if async_req is not None:
+            kwargs['async_req'] = async_req
+        return self.upsert_instrument_event_instructions_with_http_info(scope, code, success_mode, request_body, portfolio_effective_at, **kwargs)  # noqa: E501
+
+    @validate_arguments
+    def upsert_instrument_event_instructions_with_http_info(self, scope : Annotated[constr(strict=True, max_length=64, min_length=1), Field(..., description="The scope of the portfolio.")], code : Annotated[constr(strict=True, max_length=64, min_length=1), Field(..., description="The code of the portfolio. Together with the scope this uniquely identifies the portfolio.")], success_mode : Annotated[constr(strict=True, max_length=64, min_length=1), Field(..., description="Whether the batch request should fail atomically or in a partial fashion - allowed values: Atomic, Partial (default)")], request_body : Annotated[Dict[str, InstrumentEventInstructionRequest], Field(..., description="The instructions to be upserted to the portfolio.")], portfolio_effective_at : Annotated[Optional[constr(strict=True, max_length=6000, min_length=0)], Field(description="The effective date at which the portfolio will be resolved. Defaults to current time if not specified.")] = None, **kwargs) -> ApiResponse:  # noqa: E501
+        """[EARLY ACCESS] UpsertInstrumentEventInstructions: Upsert Instrument Event Instructions  # noqa: E501
+
+        Batch upsert for instrument event instructions, for the portfolio or individual holdings  # noqa: E501
+        This method makes a synchronous HTTP request by default. To make an
+        asynchronous HTTP request, please pass async_req=True
+
+        >>> thread = api.upsert_instrument_event_instructions_with_http_info(scope, code, success_mode, request_body, portfolio_effective_at, async_req=True)
+        >>> result = thread.get()
+
+        :param scope: The scope of the portfolio. (required)
+        :type scope: str
+        :param code: The code of the portfolio. Together with the scope this uniquely identifies the portfolio. (required)
+        :type code: str
+        :param success_mode: Whether the batch request should fail atomically or in a partial fashion - allowed values: Atomic, Partial (default) (required)
+        :type success_mode: str
+        :param request_body: The instructions to be upserted to the portfolio. (required)
+        :type request_body: Dict[str, InstrumentEventInstructionRequest]
+        :param portfolio_effective_at: The effective date at which the portfolio will be resolved. Defaults to current time if not specified.
+        :type portfolio_effective_at: str
+        :param async_req: Whether to execute the request asynchronously.
+        :type async_req: bool, optional
+        :param _preload_content: if False, the ApiResponse.data will
+                                 be set to none and raw_data will store the
+                                 HTTP response body without reading/decoding.
+                                 Default is True.
+        :type _preload_content: bool, optional
+        :param _return_http_data_only: response data instead of ApiResponse
+                                       object with status code, headers, etc
+        :type _return_http_data_only: bool, optional
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :param _request_auth: set to override the auth_settings for an a single
+                              request; this effectively ignores the authentication
+                              in the spec for a single request.
+        :type _request_auth: dict, optional
+        :type _content_type: string, optional: force content-type for the request
+        :return: Returns the result object.
+                 If the method is called asynchronously,
+                 returns the request thread.
+        :rtype: tuple(InstrumentEventInstructionsResponse, status_code(int), headers(HTTPHeaderDict))
+        """
+
+        _params = locals()
+
+        _all_params = [
+            'scope',
+            'code',
+            'success_mode',
+            'request_body',
+            'portfolio_effective_at'
+        ]
+        _all_params.extend(
+            [
+                'async_req',
+                '_return_http_data_only',
+                '_preload_content',
+                '_request_timeout',
+                '_request_auth',
+                '_content_type',
+                '_headers'
+            ]
+        )
+
+        # validate the arguments
+        for _key, _val in _params['kwargs'].items():
+            if _key not in _all_params:
+                raise ApiTypeError(
+                    "Got an unexpected keyword argument '%s'"
+                    " to method upsert_instrument_event_instructions" % _key
+                )
+            _params[_key] = _val
+        del _params['kwargs']
+
+        _collection_formats = {}
+
+        # process the path parameters
+        _path_params = {}
+        if _params['scope']:
+            _path_params['scope'] = _params['scope']
+
+        if _params['code']:
+            _path_params['code'] = _params['code']
+
+
+        # process the query parameters
+        _query_params = []
+        if _params.get('portfolio_effective_at') is not None:  # noqa: E501
+            _query_params.append(('portfolioEffectiveAt', _params['portfolio_effective_at']))
+
+        if _params.get('success_mode') is not None:  # noqa: E501
+            _query_params.append(('successMode', _params['success_mode']))
+
+        # process the header parameters
+        _header_params = dict(_params.get('_headers', {}))
+        # process the form parameters
+        _form_params = []
+        _files = {}
+        # process the body parameter
+        _body_params = None
+        if _params['request_body'] is not None:
+            _body_params = _params['request_body']
+
+        # set the HTTP header `Accept`
+        _header_params['Accept'] = self.api_client.select_header_accept(
+            ['text/plain', 'application/json', 'text/json'])  # noqa: E501
+
+        # set the HTTP header `Content-Type`
+        _content_types_list = _params.get('_content_type',
+            self.api_client.select_header_content_type(
+                ['application/json-patch+json', 'application/json', 'text/json', 'application/*+json']))
+        if _content_types_list:
+                _header_params['Content-Type'] = _content_types_list
+
+        # authentication setting
+        _auth_settings = ['oauth2']  # noqa: E501
+
+        _response_types_map = {
+            '200': "InstrumentEventInstructionsResponse",
+            '400': "LusidValidationProblemDetails",
+        }
+
+        return self.api_client.call_api(
+            '/api/portfolios/{scope}/{code}/instrumenteventinstructions', 'POST',
             _path_params,
             _query_params,
             _header_params,

@@ -4,12 +4,14 @@ All URIs are relative to *https://www.lusid.com/api*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
+[**delete_instrument_event_instruction**](PortfoliosApi.md#delete_instrument_event_instruction) | **DELETE** /api/portfolios/{scope}/{code}/instrumenteventinstructions/{instrumentEventInstructionId} | [EARLY ACCESS] DeleteInstrumentEventInstruction: Delete Instrument Event Instruction
 [**delete_key_from_portfolio_access_metadata**](PortfoliosApi.md#delete_key_from_portfolio_access_metadata) | **DELETE** /api/portfolios/{scope}/{code}/metadata/{metadataKey} | [EARLY ACCESS] DeleteKeyFromPortfolioAccessMetadata: Delete a Portfolio Access Metadata Rule
 [**delete_portfolio**](PortfoliosApi.md#delete_portfolio) | **DELETE** /api/portfolios/{scope}/{code} | DeletePortfolio: Delete portfolio
 [**delete_portfolio_properties**](PortfoliosApi.md#delete_portfolio_properties) | **DELETE** /api/portfolios/{scope}/{code}/properties | DeletePortfolioProperties: Delete portfolio properties
 [**delete_portfolio_returns**](PortfoliosApi.md#delete_portfolio_returns) | **DELETE** /api/portfolios/{scope}/{code}/returns/{returnScope}/{returnCode}/$delete | [EARLY ACCESS] DeletePortfolioReturns: Delete Returns
 [**get_aggregated_returns_dispersion_metrics**](PortfoliosApi.md#get_aggregated_returns_dispersion_metrics) | **POST** /api/portfolios/{scope}/{code}/returns/dispersion/$aggregated | [EARLY ACCESS] GetAggregatedReturnsDispersionMetrics: Get the Aggregated Returns Dispersion metric
 [**get_composite_breakdown**](PortfoliosApi.md#get_composite_breakdown) | **POST** /api/portfolios/{scope}/{code}/returns/breakdown | [EARLY ACCESS] GetCompositeBreakdown: Get the Composite Breakdown on how the composite Returns are calculated
+[**get_instrument_event_instruction**](PortfoliosApi.md#get_instrument_event_instruction) | **GET** /api/portfolios/{scope}/{code}/instrumenteventinstructions/{instrumentEventInstructionId} | [EARLY ACCESS] GetInstrumentEventInstruction: Get Instrument Event Instruction
 [**get_portfolio**](PortfoliosApi.md#get_portfolio) | **GET** /api/portfolios/{scope}/{code} | GetPortfolio: Get portfolio
 [**get_portfolio_aggregate_returns**](PortfoliosApi.md#get_portfolio_aggregate_returns) | **GET** /api/portfolios/{scope}/{code}/returns/{returnScope}/{returnCode}/aggregated | [DEPRECATED] GetPortfolioAggregateReturns: Aggregate Returns (This is a deprecated endpoint).
 [**get_portfolio_aggregated_returns**](PortfoliosApi.md#get_portfolio_aggregated_returns) | **POST** /api/portfolios/{scope}/{code}/returns/$aggregated | [EARLY ACCESS] GetPortfolioAggregatedReturns: Aggregated Returns
@@ -27,10 +29,115 @@ Method | HTTP request | Description
 [**patch_portfolio**](PortfoliosApi.md#patch_portfolio) | **PATCH** /api/portfolios/{scope}/{code} | [EARLY ACCESS] PatchPortfolio: Patch portfolio.
 [**patch_portfolio_access_metadata**](PortfoliosApi.md#patch_portfolio_access_metadata) | **PATCH** /api/portfolios/{scope}/{code}/metadata | [EARLY ACCESS] PatchPortfolioAccessMetadata: Patch Access Metadata rules for a Portfolio.
 [**update_portfolio**](PortfoliosApi.md#update_portfolio) | **PUT** /api/portfolios/{scope}/{code} | UpdatePortfolio: Update portfolio
+[**upsert_instrument_event_instructions**](PortfoliosApi.md#upsert_instrument_event_instructions) | **POST** /api/portfolios/{scope}/{code}/instrumenteventinstructions | [EARLY ACCESS] UpsertInstrumentEventInstructions: Upsert Instrument Event Instructions
 [**upsert_portfolio_access_metadata**](PortfoliosApi.md#upsert_portfolio_access_metadata) | **PUT** /api/portfolios/{scope}/{code}/metadata/{metadataKey} | [EARLY ACCESS] UpsertPortfolioAccessMetadata: Upsert a Portfolio Access Metadata Rule associated with specific metadataKey. This creates or updates the data in LUSID.
 [**upsert_portfolio_properties**](PortfoliosApi.md#upsert_portfolio_properties) | **POST** /api/portfolios/{scope}/{code}/properties | UpsertPortfolioProperties: Upsert portfolio properties
 [**upsert_portfolio_returns**](PortfoliosApi.md#upsert_portfolio_returns) | **POST** /api/portfolios/{scope}/{code}/returns/{returnScope}/{returnCode} | [EARLY ACCESS] UpsertPortfolioReturns: Upsert Returns
 
+
+# **delete_instrument_event_instruction**
+> DeletedEntityResponse delete_instrument_event_instruction(scope, code, instrument_event_instruction_id, portfolio_effective_at=portfolio_effective_at)
+
+[EARLY ACCESS] DeleteInstrumentEventInstruction: Delete Instrument Event Instruction
+
+Delete a particular instruction for a particular portfolio
+
+### Example
+
+* OAuth Authentication (oauth2):
+```python
+from __future__ import print_function
+import time
+import lusid
+from lusid.rest import ApiException
+from lusid.models.deleted_entity_response import DeletedEntityResponse
+from pprint import pprint
+
+import os
+from lusid import (
+    ApiClientFactory,
+    PortfoliosApi,
+    EnvironmentVariablesConfigurationLoader,
+    SecretsFileConfigurationLoader,
+    ArgsConfigurationLoader
+)
+
+# Use the lusid ApiClientFactory to build Api instances with a configured api client
+# By default this will read config from environment variables
+# Then from a secrets.json file found in the current working directory
+api_client_factory = ApiClientFactory()
+
+# The ApiClientFactory can be passed an iterable of configuration loaders to read configuration from
+
+api_url = "https://www.lusid.com/api"
+# Path to a secrets.json file containing authentication credentials
+# See https://support.lusid.com/knowledgebase/article/KA-01667/en-us
+# for a detailed guide to setting up the SDK make authenticated calls to LUSID APIs
+secrets_path = os.getenv("FBN_SECRETS_PATH")
+app_name="LusidJupyterNotebook"
+
+config_loaders = [
+	EnvironmentVariablesConfigurationLoader(),
+	SecretsFileConfigurationLoader(api_secrets_file=secrets_path),
+	ArgsConfigurationLoader(api_url=api_url, app_name=app_name)
+]
+api_client_factory = ApiClientFactory(config_loaders=config_loaders)
+
+
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+
+
+
+# Enter a context with an instance of the ApiClientFactory to ensure the connection pool is closed after use
+async with api_client_factory:
+    # Create an instance of the API class
+    api_instance = api_client_factory.build(lusid.PortfoliosApi)
+    scope = 'scope_example' # str | The scope of the portfolio.
+    code = 'code_example' # str | The code of the portfolio. Together with the scope this uniquely identifies the portfolio.
+    instrument_event_instruction_id = 'instrument_event_instruction_id_example' # str | The id of the instruction to be deleted.
+    portfolio_effective_at = 'portfolio_effective_at_example' # str | The effective date at which the portfolio will be resolved. Defaults to current time if not specified. (optional)
+
+    try:
+        # [EARLY ACCESS] DeleteInstrumentEventInstruction: Delete Instrument Event Instruction
+        api_response = await api_instance.delete_instrument_event_instruction(scope, code, instrument_event_instruction_id, portfolio_effective_at=portfolio_effective_at)
+        print("The response of PortfoliosApi->delete_instrument_event_instruction:\n")
+        pprint(api_response)
+    except Exception as e:
+        print("Exception when calling PortfoliosApi->delete_instrument_event_instruction: %s\n" % e)
+```
+
+
+### Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **scope** | **str**| The scope of the portfolio. | 
+ **code** | **str**| The code of the portfolio. Together with the scope this uniquely identifies the portfolio. | 
+ **instrument_event_instruction_id** | **str**| The id of the instruction to be deleted. | 
+ **portfolio_effective_at** | **str**| The effective date at which the portfolio will be resolved. Defaults to current time if not specified. | [optional] 
+
+### Return type
+
+[**DeletedEntityResponse**](DeletedEntityResponse.md)
+
+### Authorization
+
+[oauth2](../README.md#oauth2)
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: text/plain, application/json, text/json
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | The datetime that the instruction was deleted |  -  |
+**400** | The details of the input related failure |  -  |
+**0** | Error response |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **delete_key_from_portfolio_access_metadata**
 > DeletedEntityResponse delete_key_from_portfolio_access_metadata(scope, code, metadata_key, effective_at=effective_at, effective_until=effective_until)
@@ -661,6 +768,112 @@ Name | Type | Description  | Notes
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 **200** | The aggregated returns grouped by return stream. |  -  |
+**400** | The details of the input related failure |  -  |
+**0** | Error response |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **get_instrument_event_instruction**
+> InstrumentEventInstruction get_instrument_event_instruction(scope, code, instrument_event_instruction_id, portfolio_effective_at=portfolio_effective_at, as_at=as_at)
+
+[EARLY ACCESS] GetInstrumentEventInstruction: Get Instrument Event Instruction
+
+Get a particular instruction for a particular portfolio
+
+### Example
+
+* OAuth Authentication (oauth2):
+```python
+from __future__ import print_function
+import time
+import lusid
+from lusid.rest import ApiException
+from lusid.models.instrument_event_instruction import InstrumentEventInstruction
+from pprint import pprint
+
+import os
+from lusid import (
+    ApiClientFactory,
+    PortfoliosApi,
+    EnvironmentVariablesConfigurationLoader,
+    SecretsFileConfigurationLoader,
+    ArgsConfigurationLoader
+)
+
+# Use the lusid ApiClientFactory to build Api instances with a configured api client
+# By default this will read config from environment variables
+# Then from a secrets.json file found in the current working directory
+api_client_factory = ApiClientFactory()
+
+# The ApiClientFactory can be passed an iterable of configuration loaders to read configuration from
+
+api_url = "https://www.lusid.com/api"
+# Path to a secrets.json file containing authentication credentials
+# See https://support.lusid.com/knowledgebase/article/KA-01667/en-us
+# for a detailed guide to setting up the SDK make authenticated calls to LUSID APIs
+secrets_path = os.getenv("FBN_SECRETS_PATH")
+app_name="LusidJupyterNotebook"
+
+config_loaders = [
+	EnvironmentVariablesConfigurationLoader(),
+	SecretsFileConfigurationLoader(api_secrets_file=secrets_path),
+	ArgsConfigurationLoader(api_url=api_url, app_name=app_name)
+]
+api_client_factory = ApiClientFactory(config_loaders=config_loaders)
+
+
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+
+
+
+# Enter a context with an instance of the ApiClientFactory to ensure the connection pool is closed after use
+async with api_client_factory:
+    # Create an instance of the API class
+    api_instance = api_client_factory.build(lusid.PortfoliosApi)
+    scope = 'scope_example' # str | The scope of the portfolio.
+    code = 'code_example' # str | The code of the portfolio. Together with the scope this uniquely identifies the portfolio.
+    instrument_event_instruction_id = 'instrument_event_instruction_id_example' # str | The id of the instruction to be retrieved.
+    portfolio_effective_at = 'portfolio_effective_at_example' # str | The effective date at which the portfolio will be resolved. Defaults to current time if not specified. (optional)
+    as_at = '2013-10-20T19:20:30+01:00' # datetime | The asAt datetime at which to retrieve the instruction. Defaults to return the latest version of the instruction if not specified. (optional)
+
+    try:
+        # [EARLY ACCESS] GetInstrumentEventInstruction: Get Instrument Event Instruction
+        api_response = await api_instance.get_instrument_event_instruction(scope, code, instrument_event_instruction_id, portfolio_effective_at=portfolio_effective_at, as_at=as_at)
+        print("The response of PortfoliosApi->get_instrument_event_instruction:\n")
+        pprint(api_response)
+    except Exception as e:
+        print("Exception when calling PortfoliosApi->get_instrument_event_instruction: %s\n" % e)
+```
+
+
+### Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **scope** | **str**| The scope of the portfolio. | 
+ **code** | **str**| The code of the portfolio. Together with the scope this uniquely identifies the portfolio. | 
+ **instrument_event_instruction_id** | **str**| The id of the instruction to be retrieved. | 
+ **portfolio_effective_at** | **str**| The effective date at which the portfolio will be resolved. Defaults to current time if not specified. | [optional] 
+ **as_at** | **datetime**| The asAt datetime at which to retrieve the instruction. Defaults to return the latest version of the instruction if not specified. | [optional] 
+
+### Return type
+
+[**InstrumentEventInstruction**](InstrumentEventInstruction.md)
+
+### Authorization
+
+[oauth2](../README.md#oauth2)
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: text/plain, application/json, text/json
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | The requested instrument event instruction |  -  |
 **400** | The details of the input related failure |  -  |
 **0** | Error response |  -  |
 
@@ -2517,6 +2730,113 @@ Name | Type | Description  | Notes
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 **200** | The updated definition of the portfolio |  -  |
+**400** | The details of the input related failure |  -  |
+**0** | Error response |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **upsert_instrument_event_instructions**
+> InstrumentEventInstructionsResponse upsert_instrument_event_instructions(scope, code, success_mode, request_body, portfolio_effective_at=portfolio_effective_at)
+
+[EARLY ACCESS] UpsertInstrumentEventInstructions: Upsert Instrument Event Instructions
+
+Batch upsert for instrument event instructions, for the portfolio or individual holdings
+
+### Example
+
+* OAuth Authentication (oauth2):
+```python
+from __future__ import print_function
+import time
+import lusid
+from lusid.rest import ApiException
+from lusid.models.instrument_event_instruction_request import InstrumentEventInstructionRequest
+from lusid.models.instrument_event_instructions_response import InstrumentEventInstructionsResponse
+from pprint import pprint
+
+import os
+from lusid import (
+    ApiClientFactory,
+    PortfoliosApi,
+    EnvironmentVariablesConfigurationLoader,
+    SecretsFileConfigurationLoader,
+    ArgsConfigurationLoader
+)
+
+# Use the lusid ApiClientFactory to build Api instances with a configured api client
+# By default this will read config from environment variables
+# Then from a secrets.json file found in the current working directory
+api_client_factory = ApiClientFactory()
+
+# The ApiClientFactory can be passed an iterable of configuration loaders to read configuration from
+
+api_url = "https://www.lusid.com/api"
+# Path to a secrets.json file containing authentication credentials
+# See https://support.lusid.com/knowledgebase/article/KA-01667/en-us
+# for a detailed guide to setting up the SDK make authenticated calls to LUSID APIs
+secrets_path = os.getenv("FBN_SECRETS_PATH")
+app_name="LusidJupyterNotebook"
+
+config_loaders = [
+	EnvironmentVariablesConfigurationLoader(),
+	SecretsFileConfigurationLoader(api_secrets_file=secrets_path),
+	ArgsConfigurationLoader(api_url=api_url, app_name=app_name)
+]
+api_client_factory = ApiClientFactory(config_loaders=config_loaders)
+
+
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+
+
+
+# Enter a context with an instance of the ApiClientFactory to ensure the connection pool is closed after use
+async with api_client_factory:
+    # Create an instance of the API class
+    api_instance = api_client_factory.build(lusid.PortfoliosApi)
+    scope = 'scope_example' # str | The scope of the portfolio.
+    code = 'code_example' # str | The code of the portfolio. Together with the scope this uniquely identifies the portfolio.
+    success_mode = 'Partial' # str | Whether the batch request should fail atomically or in a partial fashion - allowed values: Atomic, Partial (default) (default to 'Partial')
+    request_body = {"request":{"instrumentEventInstructionId":"ExampleInstructionId","instrumentEventId":"ExampleInstrumentEventId","instructionType":"ElectForHolding","electionKey":"GBP","holdingId":123456789}} # Dict[str, InstrumentEventInstructionRequest] | The instructions to be upserted to the portfolio.
+    portfolio_effective_at = 'portfolio_effective_at_example' # str | The effective date at which the portfolio will be resolved. Defaults to current time if not specified. (optional)
+
+    try:
+        # [EARLY ACCESS] UpsertInstrumentEventInstructions: Upsert Instrument Event Instructions
+        api_response = await api_instance.upsert_instrument_event_instructions(scope, code, success_mode, request_body, portfolio_effective_at=portfolio_effective_at)
+        print("The response of PortfoliosApi->upsert_instrument_event_instructions:\n")
+        pprint(api_response)
+    except Exception as e:
+        print("Exception when calling PortfoliosApi->upsert_instrument_event_instructions: %s\n" % e)
+```
+
+
+### Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **scope** | **str**| The scope of the portfolio. | 
+ **code** | **str**| The code of the portfolio. Together with the scope this uniquely identifies the portfolio. | 
+ **success_mode** | **str**| Whether the batch request should fail atomically or in a partial fashion - allowed values: Atomic, Partial (default) | [default to &#39;Partial&#39;]
+ **request_body** | [**Dict[str, InstrumentEventInstructionRequest]**](InstrumentEventInstructionRequest.md)| The instructions to be upserted to the portfolio. | 
+ **portfolio_effective_at** | **str**| The effective date at which the portfolio will be resolved. Defaults to current time if not specified. | [optional] 
+
+### Return type
+
+[**InstrumentEventInstructionsResponse**](InstrumentEventInstructionsResponse.md)
+
+### Authorization
+
+[oauth2](../README.md#oauth2)
+
+### HTTP request headers
+
+ - **Content-Type**: application/json-patch+json, application/json, text/json, application/*+json
+ - **Accept**: text/plain, application/json, text/json
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | The newly inserted or updated instrument event instructions |  -  |
 **400** | The details of the input related failure |  -  |
 **0** | Error response |  -  |
 

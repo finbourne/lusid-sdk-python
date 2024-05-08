@@ -60,7 +60,6 @@ class Version(BaseModel):
         """Returns the dictionary representation of the model using alias"""
         _dict = self.dict(by_alias=True,
                           exclude={
-                            "staged_modification_id_modified",
                           },
                           exclude_none=True)
         # set to None if as_at_created (nullable) is None
