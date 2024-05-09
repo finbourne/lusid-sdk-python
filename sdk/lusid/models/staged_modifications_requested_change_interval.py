@@ -18,8 +18,9 @@ import re  # noqa: F401
 import json
 
 
-from typing import Any, Dict, Optional
-from pydantic.v1 import BaseModel, Field, StrictStr
+from typing import Any, Dict, List, Optional
+from pydantic.v1 import BaseModel, Field, StrictStr, conlist
+from lusid.models.link import Link
 from lusid.models.staged_modification_effective_range import StagedModificationEffectiveRange
 
 class StagedModificationsRequestedChangeInterval(BaseModel):
@@ -31,7 +32,8 @@ class StagedModificationsRequestedChangeInterval(BaseModel):
     previous_value: Optional[Any] = Field(None, alias="previousValue", description="The previous value of the attribute before the requested change is applied.")
     new_value: Optional[Any] = Field(None, alias="newValue", description="The value of the attribute once the requested change is applied.")
     as_at_basis: Optional[StrictStr] = Field(None, alias="asAtBasis", description="Whether the change represents the modification when the request was made or the modification as it would be at the latest time.")
-    __properties = ["attributeName", "effectiveRange", "previousValue", "newValue", "asAtBasis"]
+    links: Optional[conlist(Link)] = None
+    __properties = ["attributeName", "effectiveRange", "previousValue", "newValue", "asAtBasis", "links"]
 
     class Config:
         """Pydantic configuration"""
@@ -60,6 +62,13 @@ class StagedModificationsRequestedChangeInterval(BaseModel):
         # override the default output from pydantic by calling `to_dict()` of effective_range
         if self.effective_range:
             _dict['effectiveRange'] = self.effective_range.to_dict()
+        # override the default output from pydantic by calling `to_dict()` of each item in links (list)
+        _items = []
+        if self.links:
+            for _item in self.links:
+                if _item:
+                    _items.append(_item.to_dict())
+            _dict['links'] = _items
         # set to None if attribute_name (nullable) is None
         # and __fields_set__ contains the field
         if self.attribute_name is None and "attribute_name" in self.__fields_set__:
@@ -80,6 +89,11 @@ class StagedModificationsRequestedChangeInterval(BaseModel):
         if self.as_at_basis is None and "as_at_basis" in self.__fields_set__:
             _dict['asAtBasis'] = None
 
+        # set to None if links (nullable) is None
+        # and __fields_set__ contains the field
+        if self.links is None and "links" in self.__fields_set__:
+            _dict['links'] = None
+
         return _dict
 
     @classmethod
@@ -96,6 +110,7 @@ class StagedModificationsRequestedChangeInterval(BaseModel):
             "effective_range": StagedModificationEffectiveRange.from_dict(obj.get("effectiveRange")) if obj.get("effectiveRange") is not None else None,
             "previous_value": obj.get("previousValue"),
             "new_value": obj.get("newValue"),
-            "as_at_basis": obj.get("asAtBasis")
+            "as_at_basis": obj.get("asAtBasis"),
+            "links": [Link.from_dict(_item) for _item in obj.get("links")] if obj.get("links") is not None else None
         })
         return _obj

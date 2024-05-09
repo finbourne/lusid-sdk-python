@@ -20,6 +20,7 @@ import json
 from datetime import datetime
 from typing import Any, Dict, List, Optional
 from pydantic.v1 import BaseModel, Field, StrictInt, StrictStr, conlist
+from lusid.models.link import Link
 from lusid.models.requested_changes import RequestedChanges
 from lusid.models.staged_modification_decision import StagedModificationDecision
 from lusid.models.staged_modification_staging_rule import StagedModificationStagingRule
@@ -43,7 +44,8 @@ class StagedModification(BaseModel):
     entity_unique_id: Optional[StrictStr] = Field(None, alias="entityUniqueId", description="The unique Id of the entity the staged modification applies to.")
     requested_changes: Optional[RequestedChanges] = Field(None, alias="requestedChanges")
     entity_hrefs: Optional[StagedModificationsEntityHrefs] = Field(None, alias="entityHrefs")
-    __properties = ["id", "asAtStaged", "userIdStaged", "requestedIdStaged", "action", "stagingRule", "decisions", "decisionsCount", "status", "entityType", "scope", "entityUniqueId", "requestedChanges", "entityHrefs"]
+    links: Optional[conlist(Link)] = None
+    __properties = ["id", "asAtStaged", "userIdStaged", "requestedIdStaged", "action", "stagingRule", "decisions", "decisionsCount", "status", "entityType", "scope", "entityUniqueId", "requestedChanges", "entityHrefs", "links"]
 
     class Config:
         """Pydantic configuration"""
@@ -85,6 +87,13 @@ class StagedModification(BaseModel):
         # override the default output from pydantic by calling `to_dict()` of entity_hrefs
         if self.entity_hrefs:
             _dict['entityHrefs'] = self.entity_hrefs.to_dict()
+        # override the default output from pydantic by calling `to_dict()` of each item in links (list)
+        _items = []
+        if self.links:
+            for _item in self.links:
+                if _item:
+                    _items.append(_item.to_dict())
+            _dict['links'] = _items
         # set to None if id (nullable) is None
         # and __fields_set__ contains the field
         if self.id is None and "id" in self.__fields_set__:
@@ -130,6 +139,11 @@ class StagedModification(BaseModel):
         if self.entity_unique_id is None and "entity_unique_id" in self.__fields_set__:
             _dict['entityUniqueId'] = None
 
+        # set to None if links (nullable) is None
+        # and __fields_set__ contains the field
+        if self.links is None and "links" in self.__fields_set__:
+            _dict['links'] = None
+
         return _dict
 
     @classmethod
@@ -155,6 +169,7 @@ class StagedModification(BaseModel):
             "scope": obj.get("scope"),
             "entity_unique_id": obj.get("entityUniqueId"),
             "requested_changes": RequestedChanges.from_dict(obj.get("requestedChanges")) if obj.get("requestedChanges") is not None else None,
-            "entity_hrefs": StagedModificationsEntityHrefs.from_dict(obj.get("entityHrefs")) if obj.get("entityHrefs") is not None else None
+            "entity_hrefs": StagedModificationsEntityHrefs.from_dict(obj.get("entityHrefs")) if obj.get("entityHrefs") is not None else None,
+            "links": [Link.from_dict(_item) for _item in obj.get("links")] if obj.get("links") is not None else None
         })
         return _obj

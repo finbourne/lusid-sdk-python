@@ -20,6 +20,7 @@ import json
 
 from typing import Any, Dict, List, Optional
 from pydantic.v1 import BaseModel, Field, StrictStr, conlist, constr
+from lusid.models.link import Link
 from lusid.models.staging_rule import StagingRule
 from lusid.models.version import Version
 
@@ -34,7 +35,8 @@ class StagingRuleSet(BaseModel):
     rules: conlist(StagingRule) = Field(..., description="The list of staging rules that apply to a specific entity type.")
     href: Optional[StrictStr] = Field(None, description="The specific Uniform Resource Identifier (URI) for this resource at the requested effective and asAt datetime.")
     version: Optional[Version] = None
-    __properties = ["entityType", "stagingRuleSetId", "displayName", "description", "rules", "href", "version"]
+    links: Optional[conlist(Link)] = None
+    __properties = ["entityType", "stagingRuleSetId", "displayName", "description", "rules", "href", "version", "links"]
 
     class Config:
         """Pydantic configuration"""
@@ -70,6 +72,13 @@ class StagingRuleSet(BaseModel):
         # override the default output from pydantic by calling `to_dict()` of version
         if self.version:
             _dict['version'] = self.version.to_dict()
+        # override the default output from pydantic by calling `to_dict()` of each item in links (list)
+        _items = []
+        if self.links:
+            for _item in self.links:
+                if _item:
+                    _items.append(_item.to_dict())
+            _dict['links'] = _items
         # set to None if description (nullable) is None
         # and __fields_set__ contains the field
         if self.description is None and "description" in self.__fields_set__:
@@ -79,6 +88,11 @@ class StagingRuleSet(BaseModel):
         # and __fields_set__ contains the field
         if self.href is None and "href" in self.__fields_set__:
             _dict['href'] = None
+
+        # set to None if links (nullable) is None
+        # and __fields_set__ contains the field
+        if self.links is None and "links" in self.__fields_set__:
+            _dict['links'] = None
 
         return _dict
 
@@ -98,6 +112,7 @@ class StagingRuleSet(BaseModel):
             "description": obj.get("description"),
             "rules": [StagingRule.from_dict(_item) for _item in obj.get("rules")] if obj.get("rules") is not None else None,
             "href": obj.get("href"),
-            "version": Version.from_dict(obj.get("version")) if obj.get("version") is not None else None
+            "version": Version.from_dict(obj.get("version")) if obj.get("version") is not None else None,
+            "links": [Link.from_dict(_item) for _item in obj.get("links")] if obj.get("links") is not None else None
         })
         return _obj

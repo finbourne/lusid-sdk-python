@@ -18,8 +18,9 @@ import re  # noqa: F401
 import json
 
 
-from typing import Any, Dict, Optional
-from pydantic.v1 import BaseModel, Field, StrictStr
+from typing import Any, Dict, List, Optional
+from pydantic.v1 import BaseModel, Field, StrictStr, conlist
+from lusid.models.link import Link
 
 class StagedModificationsEntityHrefs(BaseModel):
     """
@@ -28,7 +29,8 @@ class StagedModificationsEntityHrefs(BaseModel):
     when_staged: Optional[StrictStr] = Field(None, alias="whenStaged", description="The specific Uniform Resource Identifier (URI) for the staged modification change at the time when the change was requested.")
     preview: Optional[StrictStr] = Field(None, description="The specific Uniform Resource Identifier (URI) for the preview of staged modification change once applied.")
     latest: Optional[StrictStr] = Field(None, description="The specific Uniform Resource Identifier (URI) for the staged modification at latest time.")
-    __properties = ["whenStaged", "preview", "latest"]
+    links: Optional[conlist(Link)] = None
+    __properties = ["whenStaged", "preview", "latest", "links"]
 
     class Config:
         """Pydantic configuration"""
@@ -54,6 +56,13 @@ class StagedModificationsEntityHrefs(BaseModel):
                           exclude={
                           },
                           exclude_none=True)
+        # override the default output from pydantic by calling `to_dict()` of each item in links (list)
+        _items = []
+        if self.links:
+            for _item in self.links:
+                if _item:
+                    _items.append(_item.to_dict())
+            _dict['links'] = _items
         # set to None if when_staged (nullable) is None
         # and __fields_set__ contains the field
         if self.when_staged is None and "when_staged" in self.__fields_set__:
@@ -69,6 +78,11 @@ class StagedModificationsEntityHrefs(BaseModel):
         if self.latest is None and "latest" in self.__fields_set__:
             _dict['latest'] = None
 
+        # set to None if links (nullable) is None
+        # and __fields_set__ contains the field
+        if self.links is None and "links" in self.__fields_set__:
+            _dict['links'] = None
+
         return _dict
 
     @classmethod
@@ -83,6 +97,7 @@ class StagedModificationsEntityHrefs(BaseModel):
         _obj = StagedModificationsEntityHrefs.parse_obj({
             "when_staged": obj.get("whenStaged"),
             "preview": obj.get("preview"),
-            "latest": obj.get("latest")
+            "latest": obj.get("latest"),
+            "links": [Link.from_dict(_item) for _item in obj.get("links")] if obj.get("links") is not None else None
         })
         return _obj
