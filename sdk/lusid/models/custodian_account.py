@@ -29,7 +29,7 @@ class CustodianAccount(BaseModel):
     CustodianAccount
     """
     custodian_account_id: ResourceId = Field(..., alias="custodianAccountId")
-    status: constr(strict=True, min_length=1) = Field(..., description="The Account status. Can be Active, Inactive or Deleted. Defaults to Active.")
+    status: constr(strict=True, min_length=1) = Field(..., description="The Account status. Can be Active, Inactive or Deleted.")
     account_number: constr(strict=True, max_length=64, min_length=1) = Field(..., alias="accountNumber", description="The Custodian Account Number")
     account_name: constr(strict=True, min_length=1) = Field(..., alias="accountName", description="The identifiable name given to the Custodian Account")
     accounting_method: constr(strict=True, min_length=1) = Field(..., alias="accountingMethod", description="The Accounting method to be used")

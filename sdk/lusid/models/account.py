@@ -29,7 +29,7 @@ class Account(BaseModel):
     code: constr(strict=True, max_length=64, min_length=1) = Field(..., description="The code given for the Account.")
     description: Optional[constr(strict=True, max_length=1024, min_length=0)] = Field(None, description="A description for the Account.")
     type: constr(strict=True, min_length=1) = Field(..., description="The Account type. Can have the values: Asset/Liabilities/Income/Expense/Capital/Revenue.")
-    status: StrictStr = Field(..., description="The Account status. Can be Active, Inactive or Deleted. Defaults to Active. The available values are: Active, Inactive, Deleted")
+    status: StrictStr = Field(..., description="The Account status. Can be Active, Inactive or Deleted. The available values are: Active, Inactive, Deleted")
     control: Optional[StrictStr] = Field(None, description="This allows users to specify whether this a protected Account that prevents direct manual journal adjustment. Can have the values: System/ManualIt will default to “Manual”.")
     properties: Optional[Dict[str, ModelProperty]] = Field(None, description="A set of properties for the Account.")
     __properties = ["code", "description", "type", "status", "control", "properties"]
