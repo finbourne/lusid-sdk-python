@@ -103,6 +103,7 @@ from lusid.models.calendar import Calendar
 from lusid.models.calendar_date import CalendarDate
 from lusid.models.calendar_dependency import CalendarDependency
 from lusid.models.cap_floor import CapFloor
+from lusid.models.capital_distribution_event import CapitalDistributionEvent
 from lusid.models.cash_dependency import CashDependency
 from lusid.models.cash_dividend_event import CashDividendEvent
 from lusid.models.cash_election import CashElection
@@ -1060,6 +1061,7 @@ __all__ = [
     "CalendarDate",
     "CalendarDependency",
     "CapFloor",
+    "CapitalDistributionEvent",
     "CashDependency",
     "CashDividendEvent",
     "CashElection",
