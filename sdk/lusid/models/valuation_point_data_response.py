@@ -20,6 +20,7 @@ import json
 
 from typing import Any, Dict, List, Optional, Union
 from pydantic.v1 import BaseModel, Field, StrictFloat, StrictInt, StrictStr, conlist, constr
+from lusid.models.fee_accrual import FeeAccrual
 from lusid.models.link import Link
 
 class ValuationPointDataResponse(BaseModel):
@@ -33,7 +34,7 @@ class ValuationPointDataResponse(BaseModel):
     dealing: Dict[str, Union[StrictFloat, StrictInt]] = Field(..., description="Bucket of detail for any 'Dealing' that has occured inside the queried period.")
     pn_l: Dict[str, Union[StrictFloat, StrictInt]] = Field(..., alias="pnL", description="Bucket of detail for 'PnL' that has occured inside the queried period.")
     gav: Union[StrictFloat, StrictInt] = Field(..., description="The Gross Asset Value of the Fund at the Period end. This is effectively a summation of all Trial balance entries linked to accounts of types 'Asset' and 'Liabilities'.")
-    fees: Dict[str, Union[StrictFloat, StrictInt]] = Field(..., description="Bucket of detail for any 'Fees' that have been charged in the selected period.")
+    fees: Dict[str, FeeAccrual] = Field(..., description="Bucket of detail for any 'Fees' that have been charged in the selected period.")
     nav: Union[StrictFloat, StrictInt] = Field(..., description="The Net Asset Value of the Fund at the Period end. This represents the GAV with any fees applied in the period.")
     previous_nav: Union[StrictFloat, StrictInt] = Field(..., alias="previousNav", description="The Net Asset Value of the Fund at the End of the last Period.")
     links: Optional[conlist(Link)] = None
@@ -63,6 +64,13 @@ class ValuationPointDataResponse(BaseModel):
                           exclude={
                           },
                           exclude_none=True)
+        # override the default output from pydantic by calling `to_dict()` of each value in fees (dict)
+        _field_dict = {}
+        if self.fees:
+            for _key in self.fees:
+                if self.fees[_key]:
+                    _field_dict[_key] = self.fees[_key].to_dict()
+            _dict['fees'] = _field_dict
         # override the default output from pydantic by calling `to_dict()` of each item in links (list)
         _items = []
         if self.links:
@@ -99,7 +107,12 @@ class ValuationPointDataResponse(BaseModel):
             "dealing": obj.get("dealing"),
             "pn_l": obj.get("pnL"),
             "gav": obj.get("gav"),
-            "fees": obj.get("fees"),
+            "fees": dict(
+                (_k, FeeAccrual.from_dict(_v))
+                for _k, _v in obj.get("fees").items()
+            )
+            if obj.get("fees") is not None
+            else None,
             "nav": obj.get("nav"),
             "previous_nav": obj.get("previousNav"),
             "links": [Link.from_dict(_item) for _item in obj.get("links")] if obj.get("links") is not None else None

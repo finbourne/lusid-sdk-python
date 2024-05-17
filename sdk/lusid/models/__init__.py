@@ -69,6 +69,7 @@ from lusid.models.amortisation_rule_set import AmortisationRuleSet
 from lusid.models.annul_quotes_response import AnnulQuotesResponse
 from lusid.models.annul_single_structured_data_response import AnnulSingleStructuredDataResponse
 from lusid.models.annul_structured_data_response import AnnulStructuredDataResponse
+from lusid.models.applicable_instrument_event import ApplicableInstrumentEvent
 from lusid.models.asset_class import AssetClass
 from lusid.models.asset_leg import AssetLeg
 from lusid.models.barrier import Barrier
@@ -297,6 +298,7 @@ from lusid.models.exercise_event import ExerciseEvent
 from lusid.models.exotic_instrument import ExoticInstrument
 from lusid.models.expanded_group import ExpandedGroup
 from lusid.models.expiry_event import ExpiryEvent
+from lusid.models.fee_accrual import FeeAccrual
 from lusid.models.fee_rule import FeeRule
 from lusid.models.fee_rule_upsert_request import FeeRuleUpsertRequest
 from lusid.models.fee_rule_upsert_response import FeeRuleUpsertResponse
@@ -541,6 +543,7 @@ from lusid.models.paged_resource_list_of_fund import PagedResourceListOfFund
 from lusid.models.paged_resource_list_of_general_ledger_profile_response import PagedResourceListOfGeneralLedgerProfileResponse
 from lusid.models.paged_resource_list_of_instrument import PagedResourceListOfInstrument
 from lusid.models.paged_resource_list_of_instrument_event_holder import PagedResourceListOfInstrumentEventHolder
+from lusid.models.paged_resource_list_of_instrument_event_instruction import PagedResourceListOfInstrumentEventInstruction
 from lusid.models.paged_resource_list_of_legal_entity import PagedResourceListOfLegalEntity
 from lusid.models.paged_resource_list_of_order import PagedResourceListOfOrder
 from lusid.models.paged_resource_list_of_order_graph_block import PagedResourceListOfOrderGraphBlock
@@ -633,6 +636,7 @@ from lusid.models.property_type import PropertyType
 from lusid.models.property_value import PropertyValue
 from lusid.models.property_value_equals import PropertyValueEquals
 from lusid.models.property_value_in import PropertyValueIn
+from lusid.models.query_applicable_instrument_events_request import QueryApplicableInstrumentEventsRequest
 from lusid.models.query_bucketed_cash_flows_request import QueryBucketedCashFlowsRequest
 from lusid.models.query_cash_flows_request import QueryCashFlowsRequest
 from lusid.models.query_instrument_events_request import QueryInstrumentEventsRequest
@@ -694,6 +698,7 @@ from lusid.models.resource_list_of_address_key_definition import ResourceListOfA
 from lusid.models.resource_list_of_aggregated_return import ResourceListOfAggregatedReturn
 from lusid.models.resource_list_of_aggregation_query import ResourceListOfAggregationQuery
 from lusid.models.resource_list_of_allocation import ResourceListOfAllocation
+from lusid.models.resource_list_of_applicable_instrument_event import ResourceListOfApplicableInstrumentEvent
 from lusid.models.resource_list_of_block import ResourceListOfBlock
 from lusid.models.resource_list_of_block_and_orders import ResourceListOfBlockAndOrders
 from lusid.models.resource_list_of_calendar_date import ResourceListOfCalendarDate
@@ -1027,6 +1032,7 @@ __all__ = [
     "AnnulQuotesResponse",
     "AnnulSingleStructuredDataResponse",
     "AnnulStructuredDataResponse",
+    "ApplicableInstrumentEvent",
     "AssetClass",
     "AssetLeg",
     "Barrier",
@@ -1255,6 +1261,7 @@ __all__ = [
     "ExoticInstrument",
     "ExpandedGroup",
     "ExpiryEvent",
+    "FeeAccrual",
     "FeeRule",
     "FeeRuleUpsertRequest",
     "FeeRuleUpsertResponse",
@@ -1499,6 +1506,7 @@ __all__ = [
     "PagedResourceListOfGeneralLedgerProfileResponse",
     "PagedResourceListOfInstrument",
     "PagedResourceListOfInstrumentEventHolder",
+    "PagedResourceListOfInstrumentEventInstruction",
     "PagedResourceListOfLegalEntity",
     "PagedResourceListOfOrder",
     "PagedResourceListOfOrderGraphBlock",
@@ -1591,6 +1599,7 @@ __all__ = [
     "PropertyValue",
     "PropertyValueEquals",
     "PropertyValueIn",
+    "QueryApplicableInstrumentEventsRequest",
     "QueryBucketedCashFlowsRequest",
     "QueryCashFlowsRequest",
     "QueryInstrumentEventsRequest",
@@ -1652,6 +1661,7 @@ __all__ = [
     "ResourceListOfAggregatedReturn",
     "ResourceListOfAggregationQuery",
     "ResourceListOfAllocation",
+    "ResourceListOfApplicableInstrumentEvent",
     "ResourceListOfBlock",
     "ResourceListOfBlockAndOrders",
     "ResourceListOfCalendarDate",
