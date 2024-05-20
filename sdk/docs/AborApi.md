@@ -81,7 +81,7 @@ async with api_client_factory:
     scope = 'scope_example' # str | The scope of the Abor.
     code = 'code_example' # str | The code of the Abor.
     diary_entry_code = 'diary_entry_code_example' # str | Diary entry code
-    diary_entry_request = {"name":"2023_Q1","status":"Final","effectiveAt":"2023-04-02T15:10:10.0000000+00:00","queryAsAt":"2023-04-15T15:10:10.0000000+00:00","properties":{"DiaryEntry/AccountingDiary/Reports":{"key":"DiaryEntry/AccountingDiary/Reports","value":{"labelValue":"Some comments"}}}} # DiaryEntryRequest | The diary entry to add.
+    diary_entry_request = {"name":"2023_Q1","status":"Estimate","effectiveAt":"2023-04-02T15:10:10.0000000+00:00","queryAsAt":"2023-04-15T15:10:10.0000000+00:00","properties":{"DiaryEntry/AccountingDiary/Reports":{"key":"DiaryEntry/AccountingDiary/Reports","value":{"labelValue":"Some comments"}}}} # DiaryEntryRequest | The diary entry to add.
 
     try:
         # [EXPERIMENTAL] AddDiaryEntry: Add a diary entry to the specified Abor.

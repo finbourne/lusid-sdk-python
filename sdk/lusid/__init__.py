@@ -227,17 +227,22 @@ from lusid.models.compliance_rule_result import ComplianceRuleResult
 from lusid.models.compliance_rule_result_detail import ComplianceRuleResultDetail
 from lusid.models.compliance_rule_result_portfolio_detail import ComplianceRuleResultPortfolioDetail
 from lusid.models.compliance_rule_result_v2 import ComplianceRuleResultV2
+from lusid.models.compliance_rule_template import ComplianceRuleTemplate
 from lusid.models.compliance_rule_upsert_request import ComplianceRuleUpsertRequest
 from lusid.models.compliance_rule_upsert_response import ComplianceRuleUpsertResponse
 from lusid.models.compliance_run_info import ComplianceRunInfo
 from lusid.models.compliance_run_info_v2 import ComplianceRunInfoV2
 from lusid.models.compliance_step import ComplianceStep
+from lusid.models.compliance_step_request import ComplianceStepRequest
 from lusid.models.compliance_step_type import ComplianceStepType
+from lusid.models.compliance_step_type_request import ComplianceStepTypeRequest
 from lusid.models.compliance_summary_rule_result import ComplianceSummaryRuleResult
 from lusid.models.compliance_summary_rule_result_request import ComplianceSummaryRuleResultRequest
 from lusid.models.compliance_template import ComplianceTemplate
 from lusid.models.compliance_template_parameter import ComplianceTemplateParameter
 from lusid.models.compliance_template_variation import ComplianceTemplateVariation
+from lusid.models.compliance_template_variation_dto import ComplianceTemplateVariationDto
+from lusid.models.compliance_template_variation_request import ComplianceTemplateVariationRequest
 from lusid.models.component_transaction import ComponentTransaction
 from lusid.models.composite_breakdown import CompositeBreakdown
 from lusid.models.composite_breakdown_request import CompositeBreakdownRequest
@@ -261,6 +266,7 @@ from lusid.models.counterparty_signatory import CounterpartySignatory
 from lusid.models.create_address_key_definition_request import CreateAddressKeyDefinitionRequest
 from lusid.models.create_amortisation_rule_set_request import CreateAmortisationRuleSetRequest
 from lusid.models.create_calendar_request import CreateCalendarRequest
+from lusid.models.create_compliance_template_request import CreateComplianceTemplateRequest
 from lusid.models.create_corporate_action_source_request import CreateCorporateActionSourceRequest
 from lusid.models.create_custom_entity_type_request import CreateCustomEntityTypeRequest
 from lusid.models.create_cut_label_definition_request import CreateCutLabelDefinitionRequest
@@ -964,6 +970,7 @@ from lusid.models.units_ratio import UnitsRatio
 from lusid.models.unmatched_holding_method import UnmatchedHoldingMethod
 from lusid.models.update_amortisation_rule_set_details_request import UpdateAmortisationRuleSetDetailsRequest
 from lusid.models.update_calendar_request import UpdateCalendarRequest
+from lusid.models.update_compliance_template_request import UpdateComplianceTemplateRequest
 from lusid.models.update_custom_entity_definition_request import UpdateCustomEntityDefinitionRequest
 from lusid.models.update_custom_entity_type_request import UpdateCustomEntityTypeRequest
 from lusid.models.update_cut_label_definition_request import UpdateCutLabelDefinitionRequest
@@ -1265,17 +1272,22 @@ __all__ = [
     "ComplianceRuleResultDetail",
     "ComplianceRuleResultPortfolioDetail",
     "ComplianceRuleResultV2",
+    "ComplianceRuleTemplate",
     "ComplianceRuleUpsertRequest",
     "ComplianceRuleUpsertResponse",
     "ComplianceRunInfo",
     "ComplianceRunInfoV2",
     "ComplianceStep",
+    "ComplianceStepRequest",
     "ComplianceStepType",
+    "ComplianceStepTypeRequest",
     "ComplianceSummaryRuleResult",
     "ComplianceSummaryRuleResultRequest",
     "ComplianceTemplate",
     "ComplianceTemplateParameter",
     "ComplianceTemplateVariation",
+    "ComplianceTemplateVariationDto",
+    "ComplianceTemplateVariationRequest",
     "ComponentTransaction",
     "CompositeBreakdown",
     "CompositeBreakdownRequest",
@@ -1299,6 +1311,7 @@ __all__ = [
     "CreateAddressKeyDefinitionRequest",
     "CreateAmortisationRuleSetRequest",
     "CreateCalendarRequest",
+    "CreateComplianceTemplateRequest",
     "CreateCorporateActionSourceRequest",
     "CreateCustomEntityTypeRequest",
     "CreateCutLabelDefinitionRequest",
@@ -2002,6 +2015,7 @@ __all__ = [
     "UnmatchedHoldingMethod",
     "UpdateAmortisationRuleSetDetailsRequest",
     "UpdateCalendarRequest",
+    "UpdateComplianceTemplateRequest",
     "UpdateCustomEntityDefinitionRequest",
     "UpdateCustomEntityTypeRequest",
     "UpdateCutLabelDefinitionRequest",

@@ -28,13 +28,16 @@ from typing import Optional
 
 from lusid.models.compliance_rule_response import ComplianceRuleResponse
 from lusid.models.compliance_rule_result_v2 import ComplianceRuleResultV2
+from lusid.models.compliance_rule_template import ComplianceRuleTemplate
 from lusid.models.compliance_run_info_v2 import ComplianceRunInfoV2
 from lusid.models.compliance_template import ComplianceTemplate
+from lusid.models.create_compliance_template_request import CreateComplianceTemplateRequest
 from lusid.models.decorated_compliance_run_summary import DecoratedComplianceRunSummary
 from lusid.models.deleted_entity_response import DeletedEntityResponse
 from lusid.models.paged_resource_list_of_compliance_rule_response import PagedResourceListOfComplianceRuleResponse
 from lusid.models.paged_resource_list_of_compliance_run_info_v2 import PagedResourceListOfComplianceRunInfoV2
 from lusid.models.paged_resource_list_of_compliance_template import PagedResourceListOfComplianceTemplate
+from lusid.models.update_compliance_template_request import UpdateComplianceTemplateRequest
 from lusid.models.upsert_compliance_rule_request import UpsertComplianceRuleRequest
 from lusid.models.upsert_compliance_run_summary_request import UpsertComplianceRunSummaryRequest
 from lusid.models.upsert_compliance_run_summary_result import UpsertComplianceRunSummaryResult
@@ -58,6 +61,172 @@ class ComplianceApi:
         if api_client is None:
             api_client = ApiClient.get_default()
         self.api_client = api_client
+
+    @overload
+    async def create_compliance_template(self, scope : Annotated[constr(strict=True, max_length=64, min_length=1), Field(..., description="The scope of the Compliance Rule Template.")], create_compliance_template_request : Annotated[CreateComplianceTemplateRequest, Field(..., description="Request to create a compliance rule template.")], **kwargs) -> ComplianceRuleTemplate:  # noqa: E501
+        ...
+
+    @overload
+    def create_compliance_template(self, scope : Annotated[constr(strict=True, max_length=64, min_length=1), Field(..., description="The scope of the Compliance Rule Template.")], create_compliance_template_request : Annotated[CreateComplianceTemplateRequest, Field(..., description="Request to create a compliance rule template.")], async_req: Optional[bool]=True, **kwargs) -> ComplianceRuleTemplate:  # noqa: E501
+        ...
+
+    @validate_arguments
+    def create_compliance_template(self, scope : Annotated[constr(strict=True, max_length=64, min_length=1), Field(..., description="The scope of the Compliance Rule Template.")], create_compliance_template_request : Annotated[CreateComplianceTemplateRequest, Field(..., description="Request to create a compliance rule template.")], async_req: Optional[bool]=None, **kwargs) -> Union[ComplianceRuleTemplate, Awaitable[ComplianceRuleTemplate]]:  # noqa: E501
+        """[EARLY ACCESS] CreateComplianceTemplate: Create a Compliance Rule Template  # noqa: E501
+
+        Use this endpoint to create a compliance template.  # noqa: E501
+        This method makes a synchronous HTTP request by default. To make an
+        asynchronous HTTP request, please pass async_req=True
+
+        >>> thread = api.create_compliance_template(scope, create_compliance_template_request, async_req=True)
+        >>> result = thread.get()
+
+        :param scope: The scope of the Compliance Rule Template. (required)
+        :type scope: str
+        :param create_compliance_template_request: Request to create a compliance rule template. (required)
+        :type create_compliance_template_request: CreateComplianceTemplateRequest
+        :param async_req: Whether to execute the request asynchronously.
+        :type async_req: bool, optional
+        :param _request_timeout: timeout setting for this request.
+               If one number provided, it will be total request
+               timeout. It can also be a pair (tuple) of
+               (connection, read) timeouts.
+        :return: Returns the result object.
+                 If the method is called asynchronously,
+                 returns the request thread.
+        :rtype: ComplianceRuleTemplate
+        """
+        kwargs['_return_http_data_only'] = True
+        if '_preload_content' in kwargs:
+            message = "Error! Please call the create_compliance_template_with_http_info method with `_preload_content` instead and obtain raw data from ApiResponse.raw_data"  # noqa: E501
+            raise ValueError(message)
+        if async_req is not None:
+            kwargs['async_req'] = async_req
+        return self.create_compliance_template_with_http_info(scope, create_compliance_template_request, **kwargs)  # noqa: E501
+
+    @validate_arguments
+    def create_compliance_template_with_http_info(self, scope : Annotated[constr(strict=True, max_length=64, min_length=1), Field(..., description="The scope of the Compliance Rule Template.")], create_compliance_template_request : Annotated[CreateComplianceTemplateRequest, Field(..., description="Request to create a compliance rule template.")], **kwargs) -> ApiResponse:  # noqa: E501
+        """[EARLY ACCESS] CreateComplianceTemplate: Create a Compliance Rule Template  # noqa: E501
+
+        Use this endpoint to create a compliance template.  # noqa: E501
+        This method makes a synchronous HTTP request by default. To make an
+        asynchronous HTTP request, please pass async_req=True
+
+        >>> thread = api.create_compliance_template_with_http_info(scope, create_compliance_template_request, async_req=True)
+        >>> result = thread.get()
+
+        :param scope: The scope of the Compliance Rule Template. (required)
+        :type scope: str
+        :param create_compliance_template_request: Request to create a compliance rule template. (required)
+        :type create_compliance_template_request: CreateComplianceTemplateRequest
+        :param async_req: Whether to execute the request asynchronously.
+        :type async_req: bool, optional
+        :param _preload_content: if False, the ApiResponse.data will
+                                 be set to none and raw_data will store the
+                                 HTTP response body without reading/decoding.
+                                 Default is True.
+        :type _preload_content: bool, optional
+        :param _return_http_data_only: response data instead of ApiResponse
+                                       object with status code, headers, etc
+        :type _return_http_data_only: bool, optional
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :param _request_auth: set to override the auth_settings for an a single
+                              request; this effectively ignores the authentication
+                              in the spec for a single request.
+        :type _request_auth: dict, optional
+        :type _content_type: string, optional: force content-type for the request
+        :return: Returns the result object.
+                 If the method is called asynchronously,
+                 returns the request thread.
+        :rtype: tuple(ComplianceRuleTemplate, status_code(int), headers(HTTPHeaderDict))
+        """
+
+        _params = locals()
+
+        _all_params = [
+            'scope',
+            'create_compliance_template_request'
+        ]
+        _all_params.extend(
+            [
+                'async_req',
+                '_return_http_data_only',
+                '_preload_content',
+                '_request_timeout',
+                '_request_auth',
+                '_content_type',
+                '_headers'
+            ]
+        )
+
+        # validate the arguments
+        for _key, _val in _params['kwargs'].items():
+            if _key not in _all_params:
+                raise ApiTypeError(
+                    "Got an unexpected keyword argument '%s'"
+                    " to method create_compliance_template" % _key
+                )
+            _params[_key] = _val
+        del _params['kwargs']
+
+        _collection_formats = {}
+
+        # process the path parameters
+        _path_params = {}
+        if _params['scope']:
+            _path_params['scope'] = _params['scope']
+
+
+        # process the query parameters
+        _query_params = []
+        # process the header parameters
+        _header_params = dict(_params.get('_headers', {}))
+        # process the form parameters
+        _form_params = []
+        _files = {}
+        # process the body parameter
+        _body_params = None
+        if _params['create_compliance_template_request'] is not None:
+            _body_params = _params['create_compliance_template_request']
+
+        # set the HTTP header `Accept`
+        _header_params['Accept'] = self.api_client.select_header_accept(
+            ['text/plain', 'application/json', 'text/json'])  # noqa: E501
+
+        # set the HTTP header `Content-Type`
+        _content_types_list = _params.get('_content_type',
+            self.api_client.select_header_content_type(
+                ['application/json-patch+json', 'application/json', 'text/json', 'application/*+json']))
+        if _content_types_list:
+                _header_params['Content-Type'] = _content_types_list
+
+        # authentication setting
+        _auth_settings = ['oauth2']  # noqa: E501
+
+        _response_types_map = {
+            '201': "ComplianceRuleTemplate",
+            '400': "LusidValidationProblemDetails",
+        }
+
+        return self.api_client.call_api(
+            '/api/compliance/templates/{scope}', 'POST',
+            _path_params,
+            _query_params,
+            _header_params,
+            body=_body_params,
+            post_params=_form_params,
+            files=_files,
+            response_types_map=_response_types_map,
+            auth_settings=_auth_settings,
+            async_req=_params.get('async_req'),
+            _return_http_data_only=_params.get('_return_http_data_only'),  # noqa: E501
+            _preload_content=_params.get('_preload_content', True),
+            _request_timeout=_params.get('_request_timeout'),
+            collection_formats=_collection_formats,
+            _request_auth=_params.get('_request_auth'))
 
     @overload
     async def delete_compliance_rule(self, scope : Annotated[constr(strict=True, max_length=64, min_length=1), Field(..., description="The compliance rule's scope.")], code : Annotated[constr(strict=True, max_length=64, min_length=1), Field(..., description="The compliance rule's code.")], **kwargs) -> DeletedEntityResponse:  # noqa: E501
@@ -203,6 +372,165 @@ class ComplianceApi:
 
         return self.api_client.call_api(
             '/api/compliance/rules/{scope}/{code}', 'DELETE',
+            _path_params,
+            _query_params,
+            _header_params,
+            body=_body_params,
+            post_params=_form_params,
+            files=_files,
+            response_types_map=_response_types_map,
+            auth_settings=_auth_settings,
+            async_req=_params.get('async_req'),
+            _return_http_data_only=_params.get('_return_http_data_only'),  # noqa: E501
+            _preload_content=_params.get('_preload_content', True),
+            _request_timeout=_params.get('_request_timeout'),
+            collection_formats=_collection_formats,
+            _request_auth=_params.get('_request_auth'))
+
+    @overload
+    async def delete_compliance_template(self, scope : Annotated[constr(strict=True, max_length=64, min_length=1), Field(..., description="The scope of the template to be deleted.")], code : Annotated[constr(strict=True, max_length=64, min_length=1), Field(..., description="The code of the template to be deleted.")], **kwargs) -> DeletedEntityResponse:  # noqa: E501
+        ...
+
+    @overload
+    def delete_compliance_template(self, scope : Annotated[constr(strict=True, max_length=64, min_length=1), Field(..., description="The scope of the template to be deleted.")], code : Annotated[constr(strict=True, max_length=64, min_length=1), Field(..., description="The code of the template to be deleted.")], async_req: Optional[bool]=True, **kwargs) -> DeletedEntityResponse:  # noqa: E501
+        ...
+
+    @validate_arguments
+    def delete_compliance_template(self, scope : Annotated[constr(strict=True, max_length=64, min_length=1), Field(..., description="The scope of the template to be deleted.")], code : Annotated[constr(strict=True, max_length=64, min_length=1), Field(..., description="The code of the template to be deleted.")], async_req: Optional[bool]=None, **kwargs) -> Union[DeletedEntityResponse, Awaitable[DeletedEntityResponse]]:  # noqa: E501
+        """[EARLY ACCESS] DeleteComplianceTemplate: Delete a ComplianceRuleTemplate  # noqa: E501
+
+        Delete the compliance rule template uniquely defined by the scope and code.  # noqa: E501
+        This method makes a synchronous HTTP request by default. To make an
+        asynchronous HTTP request, please pass async_req=True
+
+        >>> thread = api.delete_compliance_template(scope, code, async_req=True)
+        >>> result = thread.get()
+
+        :param scope: The scope of the template to be deleted. (required)
+        :type scope: str
+        :param code: The code of the template to be deleted. (required)
+        :type code: str
+        :param async_req: Whether to execute the request asynchronously.
+        :type async_req: bool, optional
+        :param _request_timeout: timeout setting for this request.
+               If one number provided, it will be total request
+               timeout. It can also be a pair (tuple) of
+               (connection, read) timeouts.
+        :return: Returns the result object.
+                 If the method is called asynchronously,
+                 returns the request thread.
+        :rtype: DeletedEntityResponse
+        """
+        kwargs['_return_http_data_only'] = True
+        if '_preload_content' in kwargs:
+            message = "Error! Please call the delete_compliance_template_with_http_info method with `_preload_content` instead and obtain raw data from ApiResponse.raw_data"  # noqa: E501
+            raise ValueError(message)
+        if async_req is not None:
+            kwargs['async_req'] = async_req
+        return self.delete_compliance_template_with_http_info(scope, code, **kwargs)  # noqa: E501
+
+    @validate_arguments
+    def delete_compliance_template_with_http_info(self, scope : Annotated[constr(strict=True, max_length=64, min_length=1), Field(..., description="The scope of the template to be deleted.")], code : Annotated[constr(strict=True, max_length=64, min_length=1), Field(..., description="The code of the template to be deleted.")], **kwargs) -> ApiResponse:  # noqa: E501
+        """[EARLY ACCESS] DeleteComplianceTemplate: Delete a ComplianceRuleTemplate  # noqa: E501
+
+        Delete the compliance rule template uniquely defined by the scope and code.  # noqa: E501
+        This method makes a synchronous HTTP request by default. To make an
+        asynchronous HTTP request, please pass async_req=True
+
+        >>> thread = api.delete_compliance_template_with_http_info(scope, code, async_req=True)
+        >>> result = thread.get()
+
+        :param scope: The scope of the template to be deleted. (required)
+        :type scope: str
+        :param code: The code of the template to be deleted. (required)
+        :type code: str
+        :param async_req: Whether to execute the request asynchronously.
+        :type async_req: bool, optional
+        :param _preload_content: if False, the ApiResponse.data will
+                                 be set to none and raw_data will store the
+                                 HTTP response body without reading/decoding.
+                                 Default is True.
+        :type _preload_content: bool, optional
+        :param _return_http_data_only: response data instead of ApiResponse
+                                       object with status code, headers, etc
+        :type _return_http_data_only: bool, optional
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :param _request_auth: set to override the auth_settings for an a single
+                              request; this effectively ignores the authentication
+                              in the spec for a single request.
+        :type _request_auth: dict, optional
+        :type _content_type: string, optional: force content-type for the request
+        :return: Returns the result object.
+                 If the method is called asynchronously,
+                 returns the request thread.
+        :rtype: tuple(DeletedEntityResponse, status_code(int), headers(HTTPHeaderDict))
+        """
+
+        _params = locals()
+
+        _all_params = [
+            'scope',
+            'code'
+        ]
+        _all_params.extend(
+            [
+                'async_req',
+                '_return_http_data_only',
+                '_preload_content',
+                '_request_timeout',
+                '_request_auth',
+                '_content_type',
+                '_headers'
+            ]
+        )
+
+        # validate the arguments
+        for _key, _val in _params['kwargs'].items():
+            if _key not in _all_params:
+                raise ApiTypeError(
+                    "Got an unexpected keyword argument '%s'"
+                    " to method delete_compliance_template" % _key
+                )
+            _params[_key] = _val
+        del _params['kwargs']
+
+        _collection_formats = {}
+
+        # process the path parameters
+        _path_params = {}
+        if _params['scope']:
+            _path_params['scope'] = _params['scope']
+
+        if _params['code']:
+            _path_params['code'] = _params['code']
+
+
+        # process the query parameters
+        _query_params = []
+        # process the header parameters
+        _header_params = dict(_params.get('_headers', {}))
+        # process the form parameters
+        _form_params = []
+        _files = {}
+        # process the body parameter
+        _body_params = None
+        # set the HTTP header `Accept`
+        _header_params['Accept'] = self.api_client.select_header_accept(
+            ['text/plain', 'application/json', 'text/json'])  # noqa: E501
+
+        # authentication setting
+        _auth_settings = ['oauth2']  # noqa: E501
+
+        _response_types_map = {
+            '200': "DeletedEntityResponse",
+            '400': "LusidValidationProblemDetails",
+        }
+
+        return self.api_client.call_api(
+            '/api/compliance/templates/{scope}/{code}', 'DELETE',
             _path_params,
             _query_params,
             _header_params,
@@ -1621,6 +1949,180 @@ class ComplianceApi:
 
         return self.api_client.call_api(
             '/api/compliance/runs', 'POST',
+            _path_params,
+            _query_params,
+            _header_params,
+            body=_body_params,
+            post_params=_form_params,
+            files=_files,
+            response_types_map=_response_types_map,
+            auth_settings=_auth_settings,
+            async_req=_params.get('async_req'),
+            _return_http_data_only=_params.get('_return_http_data_only'),  # noqa: E501
+            _preload_content=_params.get('_preload_content', True),
+            _request_timeout=_params.get('_request_timeout'),
+            collection_formats=_collection_formats,
+            _request_auth=_params.get('_request_auth'))
+
+    @overload
+    async def update_compliance_template(self, scope : Annotated[constr(strict=True, max_length=64, min_length=1), Field(..., description="The scope of the Compliance Rule Template.")], code : Annotated[constr(strict=True, max_length=64, min_length=1), Field(..., description="The code of the Compliance Rule Template.")], update_compliance_template_request : Annotated[UpdateComplianceTemplateRequest, Field(..., description="Request to update a compliance rule template.")], **kwargs) -> ComplianceRuleTemplate:  # noqa: E501
+        ...
+
+    @overload
+    def update_compliance_template(self, scope : Annotated[constr(strict=True, max_length=64, min_length=1), Field(..., description="The scope of the Compliance Rule Template.")], code : Annotated[constr(strict=True, max_length=64, min_length=1), Field(..., description="The code of the Compliance Rule Template.")], update_compliance_template_request : Annotated[UpdateComplianceTemplateRequest, Field(..., description="Request to update a compliance rule template.")], async_req: Optional[bool]=True, **kwargs) -> ComplianceRuleTemplate:  # noqa: E501
+        ...
+
+    @validate_arguments
+    def update_compliance_template(self, scope : Annotated[constr(strict=True, max_length=64, min_length=1), Field(..., description="The scope of the Compliance Rule Template.")], code : Annotated[constr(strict=True, max_length=64, min_length=1), Field(..., description="The code of the Compliance Rule Template.")], update_compliance_template_request : Annotated[UpdateComplianceTemplateRequest, Field(..., description="Request to update a compliance rule template.")], async_req: Optional[bool]=None, **kwargs) -> Union[ComplianceRuleTemplate, Awaitable[ComplianceRuleTemplate]]:  # noqa: E501
+        """[EARLY ACCESS] UpdateComplianceTemplate: Update a ComplianceRuleTemplate  # noqa: E501
+
+        Use this endpoint to update a specified compliance template.  # noqa: E501
+        This method makes a synchronous HTTP request by default. To make an
+        asynchronous HTTP request, please pass async_req=True
+
+        >>> thread = api.update_compliance_template(scope, code, update_compliance_template_request, async_req=True)
+        >>> result = thread.get()
+
+        :param scope: The scope of the Compliance Rule Template. (required)
+        :type scope: str
+        :param code: The code of the Compliance Rule Template. (required)
+        :type code: str
+        :param update_compliance_template_request: Request to update a compliance rule template. (required)
+        :type update_compliance_template_request: UpdateComplianceTemplateRequest
+        :param async_req: Whether to execute the request asynchronously.
+        :type async_req: bool, optional
+        :param _request_timeout: timeout setting for this request.
+               If one number provided, it will be total request
+               timeout. It can also be a pair (tuple) of
+               (connection, read) timeouts.
+        :return: Returns the result object.
+                 If the method is called asynchronously,
+                 returns the request thread.
+        :rtype: ComplianceRuleTemplate
+        """
+        kwargs['_return_http_data_only'] = True
+        if '_preload_content' in kwargs:
+            message = "Error! Please call the update_compliance_template_with_http_info method with `_preload_content` instead and obtain raw data from ApiResponse.raw_data"  # noqa: E501
+            raise ValueError(message)
+        if async_req is not None:
+            kwargs['async_req'] = async_req
+        return self.update_compliance_template_with_http_info(scope, code, update_compliance_template_request, **kwargs)  # noqa: E501
+
+    @validate_arguments
+    def update_compliance_template_with_http_info(self, scope : Annotated[constr(strict=True, max_length=64, min_length=1), Field(..., description="The scope of the Compliance Rule Template.")], code : Annotated[constr(strict=True, max_length=64, min_length=1), Field(..., description="The code of the Compliance Rule Template.")], update_compliance_template_request : Annotated[UpdateComplianceTemplateRequest, Field(..., description="Request to update a compliance rule template.")], **kwargs) -> ApiResponse:  # noqa: E501
+        """[EARLY ACCESS] UpdateComplianceTemplate: Update a ComplianceRuleTemplate  # noqa: E501
+
+        Use this endpoint to update a specified compliance template.  # noqa: E501
+        This method makes a synchronous HTTP request by default. To make an
+        asynchronous HTTP request, please pass async_req=True
+
+        >>> thread = api.update_compliance_template_with_http_info(scope, code, update_compliance_template_request, async_req=True)
+        >>> result = thread.get()
+
+        :param scope: The scope of the Compliance Rule Template. (required)
+        :type scope: str
+        :param code: The code of the Compliance Rule Template. (required)
+        :type code: str
+        :param update_compliance_template_request: Request to update a compliance rule template. (required)
+        :type update_compliance_template_request: UpdateComplianceTemplateRequest
+        :param async_req: Whether to execute the request asynchronously.
+        :type async_req: bool, optional
+        :param _preload_content: if False, the ApiResponse.data will
+                                 be set to none and raw_data will store the
+                                 HTTP response body without reading/decoding.
+                                 Default is True.
+        :type _preload_content: bool, optional
+        :param _return_http_data_only: response data instead of ApiResponse
+                                       object with status code, headers, etc
+        :type _return_http_data_only: bool, optional
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :param _request_auth: set to override the auth_settings for an a single
+                              request; this effectively ignores the authentication
+                              in the spec for a single request.
+        :type _request_auth: dict, optional
+        :type _content_type: string, optional: force content-type for the request
+        :return: Returns the result object.
+                 If the method is called asynchronously,
+                 returns the request thread.
+        :rtype: tuple(ComplianceRuleTemplate, status_code(int), headers(HTTPHeaderDict))
+        """
+
+        _params = locals()
+
+        _all_params = [
+            'scope',
+            'code',
+            'update_compliance_template_request'
+        ]
+        _all_params.extend(
+            [
+                'async_req',
+                '_return_http_data_only',
+                '_preload_content',
+                '_request_timeout',
+                '_request_auth',
+                '_content_type',
+                '_headers'
+            ]
+        )
+
+        # validate the arguments
+        for _key, _val in _params['kwargs'].items():
+            if _key not in _all_params:
+                raise ApiTypeError(
+                    "Got an unexpected keyword argument '%s'"
+                    " to method update_compliance_template" % _key
+                )
+            _params[_key] = _val
+        del _params['kwargs']
+
+        _collection_formats = {}
+
+        # process the path parameters
+        _path_params = {}
+        if _params['scope']:
+            _path_params['scope'] = _params['scope']
+
+        if _params['code']:
+            _path_params['code'] = _params['code']
+
+
+        # process the query parameters
+        _query_params = []
+        # process the header parameters
+        _header_params = dict(_params.get('_headers', {}))
+        # process the form parameters
+        _form_params = []
+        _files = {}
+        # process the body parameter
+        _body_params = None
+        if _params['update_compliance_template_request'] is not None:
+            _body_params = _params['update_compliance_template_request']
+
+        # set the HTTP header `Accept`
+        _header_params['Accept'] = self.api_client.select_header_accept(
+            ['text/plain', 'application/json', 'text/json'])  # noqa: E501
+
+        # set the HTTP header `Content-Type`
+        _content_types_list = _params.get('_content_type',
+            self.api_client.select_header_content_type(
+                ['application/json-patch+json', 'application/json', 'text/json', 'application/*+json']))
+        if _content_types_list:
+                _header_params['Content-Type'] = _content_types_list
+
+        # authentication setting
+        _auth_settings = ['oauth2']  # noqa: E501
+
+        _response_types_map = {
+            '200': "ComplianceRuleTemplate",
+            '400': "LusidValidationProblemDetails",
+        }
+
+        return self.api_client.call_api(
+            '/api/compliance/templates/{scope}/{code}', 'PUT',
             _path_params,
             _query_params,
             _header_params,

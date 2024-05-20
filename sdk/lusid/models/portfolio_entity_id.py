@@ -25,17 +25,14 @@ class PortfolioEntityId(BaseModel):
     """
     Specification of a portfolio or portfolio group id, its scope and which it is.  # noqa: E501
     """
-    scope: Optional[constr(strict=True, max_length=256, min_length=1)] = Field(None, description="The scope within which the portfolio or portfolio group lives.")
-    code: Optional[constr(strict=True, max_length=256, min_length=1)] = Field(None, description="Portfolio name or code.")
+    scope: constr(strict=True, max_length=256, min_length=1) = Field(..., description="The scope within which the portfolio or portfolio group lives.")
+    code: constr(strict=True, max_length=256, min_length=1) = Field(..., description="Portfolio name or code.")
     portfolio_entity_type: Optional[constr(strict=True, max_length=128, min_length=0)] = Field(None, alias="portfolioEntityType", description="String identifier for portfolio e.g. \"SinglePortfolio\" and \"GroupPortfolio\". If not specified, it is assumed to be a single portfolio.")
     __properties = ["scope", "code", "portfolioEntityType"]
 
     @validator('scope')
     def scope_validate_regular_expression(cls, value):
         """Validates the regular expression"""
-        if value is None:
-            return value
-
         if not re.match(r"^[a-zA-Z0-9\-_]+$", value):
             raise ValueError(r"must validate the regular expression /^[a-zA-Z0-9\-_]+$/")
         return value
@@ -43,9 +40,6 @@ class PortfolioEntityId(BaseModel):
     @validator('code')
     def code_validate_regular_expression(cls, value):
         """Validates the regular expression"""
-        if value is None:
-            return value
-
         if not re.match(r"^[a-zA-Z0-9\-_]+$", value):
             raise ValueError(r"must validate the regular expression /^[a-zA-Z0-9\-_]+$/")
         return value
@@ -74,16 +68,6 @@ class PortfolioEntityId(BaseModel):
                           exclude={
                           },
                           exclude_none=True)
-        # set to None if scope (nullable) is None
-        # and __fields_set__ contains the field
-        if self.scope is None and "scope" in self.__fields_set__:
-            _dict['scope'] = None
-
-        # set to None if code (nullable) is None
-        # and __fields_set__ contains the field
-        if self.code is None and "code" in self.__fields_set__:
-            _dict['code'] = None
-
         # set to None if portfolio_entity_type (nullable) is None
         # and __fields_set__ contains the field
         if self.portfolio_entity_type is None and "portfolio_entity_type" in self.__fields_set__:

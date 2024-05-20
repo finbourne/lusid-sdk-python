@@ -19,14 +19,14 @@ import json
 
 
 from typing import Any, Dict, Optional
-from pydantic.v1 import BaseModel, Field, constr
+from pydantic.v1 import BaseModel, Field, StrictStr, constr
 
 class Operation(BaseModel):
     """
     Operation
     """
     value: Optional[Any] = None
-    path: constr(strict=True, max_length=6000, min_length=0) = Field(...)
+    path: StrictStr = Field(...)
     op: constr(strict=True, min_length=1) = Field(...)
     var_from: Optional[constr(strict=True, max_length=6000, min_length=0)] = Field(None, alias="from")
     __properties = ["value", "path", "op", "from"]
