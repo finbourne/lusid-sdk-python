@@ -802,6 +802,7 @@ from lusid.models.set_person_properties_request import SetPersonPropertiesReques
 from lusid.models.set_share_class_instruments_request import SetShareClassInstrumentsRequest
 from lusid.models.set_transaction_configuration_alias import SetTransactionConfigurationAlias
 from lusid.models.set_transaction_configuration_source_request import SetTransactionConfigurationSourceRequest
+from lusid.models.settlement_schedule import SettlementSchedule
 from lusid.models.side_configuration_data import SideConfigurationData
 from lusid.models.side_configuration_data_request import SideConfigurationDataRequest
 from lusid.models.side_definition import SideDefinition
@@ -1778,6 +1779,7 @@ __all__ = [
     "SetShareClassInstrumentsRequest",
     "SetTransactionConfigurationAlias",
     "SetTransactionConfigurationSourceRequest",
+    "SettlementSchedule",
     "SideConfigurationData",
     "SideConfigurationDataRequest",
     "SideDefinition",

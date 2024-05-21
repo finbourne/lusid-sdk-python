@@ -18,11 +18,12 @@ import re  # noqa: F401
 import json
 
 
-from typing import Any, Dict, Optional, Union
-from pydantic.v1 import BaseModel, Field, StrictFloat, StrictInt, StrictStr, constr
+from typing import Any, Dict, List, Optional, Union
+from pydantic.v1 import BaseModel, Field, StrictFloat, StrictInt, StrictStr, conlist, constr
 from lusid.models.currency_and_amount import CurrencyAndAmount
 from lusid.models.model_property import ModelProperty
 from lusid.models.perpetual_property import PerpetualProperty
+from lusid.models.settlement_schedule import SettlementSchedule
 from lusid.models.transaction import Transaction
 
 class PortfolioHolding(BaseModel):
@@ -47,7 +48,8 @@ class PortfolioHolding(BaseModel):
     amortised_cost_portfolio_ccy: Optional[CurrencyAndAmount] = Field(None, alias="amortisedCostPortfolioCcy")
     variation_margin: Optional[CurrencyAndAmount] = Field(None, alias="variationMargin")
     variation_margin_portfolio_ccy: Optional[CurrencyAndAmount] = Field(None, alias="variationMarginPortfolioCcy")
-    __properties = ["instrumentScope", "instrumentUid", "subHoldingKeys", "properties", "holdingType", "units", "settledUnits", "cost", "costPortfolioCcy", "transaction", "currency", "holdingTypeName", "holdingId", "notionalCost", "amortisedCost", "amortisedCostPortfolioCcy", "variationMargin", "variationMarginPortfolioCcy"]
+    settlement_schedule: Optional[conlist(SettlementSchedule)] = Field(None, alias="settlementSchedule", description="Where no. of days ahead has been specified, future dated settlements will be captured here.")
+    __properties = ["instrumentScope", "instrumentUid", "subHoldingKeys", "properties", "holdingType", "units", "settledUnits", "cost", "costPortfolioCcy", "transaction", "currency", "holdingTypeName", "holdingId", "notionalCost", "amortisedCost", "amortisedCostPortfolioCcy", "variationMargin", "variationMarginPortfolioCcy", "settlementSchedule"]
 
     class Config:
         """Pydantic configuration"""
@@ -111,6 +113,13 @@ class PortfolioHolding(BaseModel):
         # override the default output from pydantic by calling `to_dict()` of variation_margin_portfolio_ccy
         if self.variation_margin_portfolio_ccy:
             _dict['variationMarginPortfolioCcy'] = self.variation_margin_portfolio_ccy.to_dict()
+        # override the default output from pydantic by calling `to_dict()` of each item in settlement_schedule (list)
+        _items = []
+        if self.settlement_schedule:
+            for _item in self.settlement_schedule:
+                if _item:
+                    _items.append(_item.to_dict())
+            _dict['settlementSchedule'] = _items
         # set to None if instrument_scope (nullable) is None
         # and __fields_set__ contains the field
         if self.instrument_scope is None and "instrument_scope" in self.__fields_set__:
@@ -140,6 +149,11 @@ class PortfolioHolding(BaseModel):
         # and __fields_set__ contains the field
         if self.holding_id is None and "holding_id" in self.__fields_set__:
             _dict['holdingId'] = None
+
+        # set to None if settlement_schedule (nullable) is None
+        # and __fields_set__ contains the field
+        if self.settlement_schedule is None and "settlement_schedule" in self.__fields_set__:
+            _dict['settlementSchedule'] = None
 
         return _dict
 
@@ -180,6 +194,7 @@ class PortfolioHolding(BaseModel):
             "amortised_cost": CurrencyAndAmount.from_dict(obj.get("amortisedCost")) if obj.get("amortisedCost") is not None else None,
             "amortised_cost_portfolio_ccy": CurrencyAndAmount.from_dict(obj.get("amortisedCostPortfolioCcy")) if obj.get("amortisedCostPortfolioCcy") is not None else None,
             "variation_margin": CurrencyAndAmount.from_dict(obj.get("variationMargin")) if obj.get("variationMargin") is not None else None,
-            "variation_margin_portfolio_ccy": CurrencyAndAmount.from_dict(obj.get("variationMarginPortfolioCcy")) if obj.get("variationMarginPortfolioCcy") is not None else None
+            "variation_margin_portfolio_ccy": CurrencyAndAmount.from_dict(obj.get("variationMarginPortfolioCcy")) if obj.get("variationMarginPortfolioCcy") is not None else None,
+            "settlement_schedule": [SettlementSchedule.from_dict(_item) for _item in obj.get("settlementSchedule")] if obj.get("settlementSchedule") is not None else None
         })
         return _obj
