@@ -308,6 +308,8 @@ from lusid.models.fee_accrual import FeeAccrual
 from lusid.models.fee_rule import FeeRule
 from lusid.models.fee_rule_upsert_request import FeeRuleUpsertRequest
 from lusid.models.fee_rule_upsert_response import FeeRuleUpsertResponse
+from lusid.models.fee_type import FeeType
+from lusid.models.fee_type_request import FeeTypeRequest
 from lusid.models.field_definition import FieldDefinition
 from lusid.models.field_schema import FieldSchema
 from lusid.models.field_value import FieldValue
@@ -545,6 +547,7 @@ from lusid.models.paged_resource_list_of_data_type_summary import PagedResourceL
 from lusid.models.paged_resource_list_of_dialect_id import PagedResourceListOfDialectId
 from lusid.models.paged_resource_list_of_diary_entry import PagedResourceListOfDiaryEntry
 from lusid.models.paged_resource_list_of_execution import PagedResourceListOfExecution
+from lusid.models.paged_resource_list_of_fee_type import PagedResourceListOfFeeType
 from lusid.models.paged_resource_list_of_fund import PagedResourceListOfFund
 from lusid.models.paged_resource_list_of_general_ledger_profile_response import PagedResourceListOfGeneralLedgerProfileResponse
 from lusid.models.paged_resource_list_of_instrument import PagedResourceListOfInstrument
@@ -782,6 +785,7 @@ from lusid.models.reverse_stock_split_event import ReverseStockSplitEvent
 from lusid.models.rounding_configuration import RoundingConfiguration
 from lusid.models.rounding_configuration_component import RoundingConfigurationComponent
 from lusid.models.rounding_convention import RoundingConvention
+from lusid.models.rules_interval import RulesInterval
 from lusid.models.scaling_methodology import ScalingMethodology
 from lusid.models.schedule import Schedule
 from lusid.models.schedule_type import ScheduleType
@@ -790,6 +794,7 @@ from lusid.models.scrip_dividend_event import ScripDividendEvent
 from lusid.models.script_map_reference import ScriptMapReference
 from lusid.models.security_election import SecurityElection
 from lusid.models.sequence_definition import SequenceDefinition
+from lusid.models.set_amortisation_rules_request import SetAmortisationRulesRequest
 from lusid.models.set_legal_entity_identifiers_request import SetLegalEntityIdentifiersRequest
 from lusid.models.set_legal_entity_properties_request import SetLegalEntityPropertiesRequest
 from lusid.models.set_person_identifiers_request import SetPersonIdentifiersRequest
@@ -899,6 +904,7 @@ from lusid.models.update_custom_entity_type_request import UpdateCustomEntityTyp
 from lusid.models.update_cut_label_definition_request import UpdateCutLabelDefinitionRequest
 from lusid.models.update_data_type_request import UpdateDataTypeRequest
 from lusid.models.update_derived_property_definition_request import UpdateDerivedPropertyDefinitionRequest
+from lusid.models.update_fee_type_request import UpdateFeeTypeRequest
 from lusid.models.update_instrument_identifier_request import UpdateInstrumentIdentifierRequest
 from lusid.models.update_portfolio_group_request import UpdatePortfolioGroupRequest
 from lusid.models.update_portfolio_request import UpdatePortfolioRequest
@@ -1278,6 +1284,8 @@ __all__ = [
     "FeeRule",
     "FeeRuleUpsertRequest",
     "FeeRuleUpsertResponse",
+    "FeeType",
+    "FeeTypeRequest",
     "FieldDefinition",
     "FieldSchema",
     "FieldValue",
@@ -1515,6 +1523,7 @@ __all__ = [
     "PagedResourceListOfDialectId",
     "PagedResourceListOfDiaryEntry",
     "PagedResourceListOfExecution",
+    "PagedResourceListOfFeeType",
     "PagedResourceListOfFund",
     "PagedResourceListOfGeneralLedgerProfileResponse",
     "PagedResourceListOfInstrument",
@@ -1752,6 +1761,7 @@ __all__ = [
     "RoundingConfiguration",
     "RoundingConfigurationComponent",
     "RoundingConvention",
+    "RulesInterval",
     "ScalingMethodology",
     "Schedule",
     "ScheduleType",
@@ -1760,6 +1770,7 @@ __all__ = [
     "ScriptMapReference",
     "SecurityElection",
     "SequenceDefinition",
+    "SetAmortisationRulesRequest",
     "SetLegalEntityIdentifiersRequest",
     "SetLegalEntityPropertiesRequest",
     "SetPersonIdentifiersRequest",
@@ -1869,6 +1880,7 @@ __all__ = [
     "UpdateCutLabelDefinitionRequest",
     "UpdateDataTypeRequest",
     "UpdateDerivedPropertyDefinitionRequest",
+    "UpdateFeeTypeRequest",
     "UpdateInstrumentIdentifierRequest",
     "UpdatePortfolioGroupRequest",
     "UpdatePortfolioRequest",

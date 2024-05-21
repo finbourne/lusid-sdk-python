@@ -19,41 +19,24 @@ import json
 
 
 from typing import Any, Dict, List, Optional
-from pydantic.v1 import BaseModel, Field, StrictStr, conlist, constr, validator
+from pydantic.v1 import BaseModel, Field, StrictStr, conlist, constr
+from lusid.models.component_transaction import ComponentTransaction
 from lusid.models.link import Link
 from lusid.models.resource_id import ResourceId
-from lusid.models.rules_interval import RulesInterval
 from lusid.models.version import Version
 
-class AmortisationRuleSet(BaseModel):
+class FeeType(BaseModel):
     """
-    AmortisationRuleSet
+    FeeType
     """
     href: Optional[StrictStr] = Field(None, description="The specific Uniform Resource Identifier (URI) for this resource at the requested effective and asAt datetime.")
     id: ResourceId = Field(...)
-    display_name: constr(strict=True, max_length=256, min_length=1) = Field(..., alias="displayName", description="A user-friendly name.")
-    description: Optional[constr(strict=True, max_length=1024, min_length=0)] = Field(None, description="A description of what this rule set is for.")
-    rules_interval: RulesInterval = Field(..., alias="rulesInterval")
+    name: constr(strict=True, min_length=1) = Field(..., description="The name of the fee type.")
+    description: constr(strict=True, min_length=1) = Field(..., description="The description of the fee type.")
+    component_transactions: conlist(ComponentTransaction) = Field(..., alias="componentTransactions", description="A set of component transactions that relate to the fee type.")
     version: Optional[Version] = None
     links: Optional[conlist(Link)] = None
-    __properties = ["href", "id", "displayName", "description", "rulesInterval", "version", "links"]
-
-    @validator('display_name')
-    def display_name_validate_regular_expression(cls, value):
-        """Validates the regular expression"""
-        if not re.match(r"^[^\\<>&\"]+$", value):
-            raise ValueError(r"must validate the regular expression /^[^\\<>&\"]+$/")
-        return value
-
-    @validator('description')
-    def description_validate_regular_expression(cls, value):
-        """Validates the regular expression"""
-        if value is None:
-            return value
-
-        if not re.match(r"^[\s\S]*$", value):
-            raise ValueError(r"must validate the regular expression /^[\s\S]*$/")
-        return value
+    __properties = ["href", "id", "name", "description", "componentTransactions", "version", "links"]
 
     class Config:
         """Pydantic configuration"""
@@ -69,8 +52,8 @@ class AmortisationRuleSet(BaseModel):
         return json.dumps(self.to_dict())
 
     @classmethod
-    def from_json(cls, json_str: str) -> AmortisationRuleSet:
-        """Create an instance of AmortisationRuleSet from a JSON string"""
+    def from_json(cls, json_str: str) -> FeeType:
+        """Create an instance of FeeType from a JSON string"""
         return cls.from_dict(json.loads(json_str))
 
     def to_dict(self):
@@ -82,9 +65,13 @@ class AmortisationRuleSet(BaseModel):
         # override the default output from pydantic by calling `to_dict()` of id
         if self.id:
             _dict['id'] = self.id.to_dict()
-        # override the default output from pydantic by calling `to_dict()` of rules_interval
-        if self.rules_interval:
-            _dict['rulesInterval'] = self.rules_interval.to_dict()
+        # override the default output from pydantic by calling `to_dict()` of each item in component_transactions (list)
+        _items = []
+        if self.component_transactions:
+            for _item in self.component_transactions:
+                if _item:
+                    _items.append(_item.to_dict())
+            _dict['componentTransactions'] = _items
         # override the default output from pydantic by calling `to_dict()` of version
         if self.version:
             _dict['version'] = self.version.to_dict()
@@ -100,11 +87,6 @@ class AmortisationRuleSet(BaseModel):
         if self.href is None and "href" in self.__fields_set__:
             _dict['href'] = None
 
-        # set to None if description (nullable) is None
-        # and __fields_set__ contains the field
-        if self.description is None and "description" in self.__fields_set__:
-            _dict['description'] = None
-
         # set to None if links (nullable) is None
         # and __fields_set__ contains the field
         if self.links is None and "links" in self.__fields_set__:
@@ -113,20 +95,20 @@ class AmortisationRuleSet(BaseModel):
         return _dict
 
     @classmethod
-    def from_dict(cls, obj: dict) -> AmortisationRuleSet:
-        """Create an instance of AmortisationRuleSet from a dict"""
+    def from_dict(cls, obj: dict) -> FeeType:
+        """Create an instance of FeeType from a dict"""
         if obj is None:
             return None
 
         if not isinstance(obj, dict):
-            return AmortisationRuleSet.parse_obj(obj)
+            return FeeType.parse_obj(obj)
 
-        _obj = AmortisationRuleSet.parse_obj({
+        _obj = FeeType.parse_obj({
             "href": obj.get("href"),
             "id": ResourceId.from_dict(obj.get("id")) if obj.get("id") is not None else None,
-            "display_name": obj.get("displayName"),
+            "name": obj.get("name"),
             "description": obj.get("description"),
-            "rules_interval": RulesInterval.from_dict(obj.get("rulesInterval")) if obj.get("rulesInterval") is not None else None,
+            "component_transactions": [ComponentTransaction.from_dict(_item) for _item in obj.get("componentTransactions")] if obj.get("componentTransactions") is not None else None,
             "version": Version.from_dict(obj.get("version")) if obj.get("version") is not None else None,
             "links": [Link.from_dict(_item) for _item in obj.get("links")] if obj.get("links") is not None else None
         })

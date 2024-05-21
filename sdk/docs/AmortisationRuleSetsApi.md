@@ -8,6 +8,7 @@ Method | HTTP request | Description
 [**delete_amortisation_ruleset**](AmortisationRuleSetsApi.md#delete_amortisation_ruleset) | **DELETE** /api/amortisation/rulesets/{scope}/{code} | [EXPERIMENTAL] DeleteAmortisationRuleset: Delete an amortisation rule set.
 [**get_amortisation_rule_set**](AmortisationRuleSetsApi.md#get_amortisation_rule_set) | **GET** /api/amortisation/rulesets/{scope}/{code} | [EXPERIMENTAL] GetAmortisationRuleSet: Retrieve the definition of a single amortisation rule set
 [**list_amortisation_rule_sets**](AmortisationRuleSetsApi.md#list_amortisation_rule_sets) | **GET** /api/amortisation/rulesets | [EXPERIMENTAL] ListAmortisationRuleSets: List amortisation rule sets.
+[**set_amortisation_rules**](AmortisationRuleSetsApi.md#set_amortisation_rules) | **PUT** /api/amortisation/rulesets/{scope}/{code}/rules | [EXPERIMENTAL] SetAmortisationRules: Set Amortisation Rules on an existing Amortisation Rule Set.
 [**update_amortisation_rule_set_details**](AmortisationRuleSetsApi.md#update_amortisation_rule_set_details) | **PUT** /api/amortisation/rulesets/{scope}/{code}/details | [EXPERIMENTAL] UpdateAmortisationRuleSetDetails: Update an amortisation rule set.
 
 
@@ -419,6 +420,109 @@ Name | Type | Description  | Notes
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 **200** | A list of rule sets available. |  -  |
+**400** | The details of the input related failure |  -  |
+**0** | Error response |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **set_amortisation_rules**
+> AmortisationRuleSet set_amortisation_rules(scope, code, set_amortisation_rules_request)
+
+[EXPERIMENTAL] SetAmortisationRules: Set Amortisation Rules on an existing Amortisation Rule Set.
+
+Sets the rules on the Amortisation Rule Set, replacing the existing rules with the set provided.
+
+### Example
+
+* OAuth Authentication (oauth2):
+```python
+from __future__ import print_function
+import time
+import lusid
+from lusid.rest import ApiException
+from lusid.models.amortisation_rule_set import AmortisationRuleSet
+from lusid.models.set_amortisation_rules_request import SetAmortisationRulesRequest
+from pprint import pprint
+
+import os
+from lusid import (
+    ApiClientFactory,
+    AmortisationRuleSetsApi,
+    EnvironmentVariablesConfigurationLoader,
+    SecretsFileConfigurationLoader,
+    ArgsConfigurationLoader
+)
+
+# Use the lusid ApiClientFactory to build Api instances with a configured api client
+# By default this will read config from environment variables
+# Then from a secrets.json file found in the current working directory
+api_client_factory = ApiClientFactory()
+
+# The ApiClientFactory can be passed an iterable of configuration loaders to read configuration from
+
+api_url = "https://www.lusid.com/api"
+# Path to a secrets.json file containing authentication credentials
+# See https://support.lusid.com/knowledgebase/article/KA-01667/en-us
+# for a detailed guide to setting up the SDK make authenticated calls to LUSID APIs
+secrets_path = os.getenv("FBN_SECRETS_PATH")
+app_name="LusidJupyterNotebook"
+
+config_loaders = [
+	EnvironmentVariablesConfigurationLoader(),
+	SecretsFileConfigurationLoader(api_secrets_file=secrets_path),
+	ArgsConfigurationLoader(api_url=api_url, app_name=app_name)
+]
+api_client_factory = ApiClientFactory(config_loaders=config_loaders)
+
+
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+
+
+
+# Enter a context with an instance of the ApiClientFactory to ensure the connection pool is closed after use
+async with api_client_factory:
+    # Create an instance of the API class
+    api_instance = api_client_factory.build(lusid.AmortisationRuleSetsApi)
+    scope = 'scope_example' # str | The rule set scope.
+    code = 'code_example' # str | The rule set code.
+    set_amortisation_rules_request = {"rulesInterval":{"effectiveRange":{"fromDate":"2024-01-01T00:00:00.0000000+00:00"},"rules":[{"name":"AmortisationRule1","description":"Rule 1 Description","filter":"True eq True","amortisationMethod":"EffectiveYield"}]}} # SetAmortisationRulesRequest | The contents of the rules.
+
+    try:
+        # [EXPERIMENTAL] SetAmortisationRules: Set Amortisation Rules on an existing Amortisation Rule Set.
+        api_response = await api_instance.set_amortisation_rules(scope, code, set_amortisation_rules_request)
+        print("The response of AmortisationRuleSetsApi->set_amortisation_rules:\n")
+        pprint(api_response)
+    except Exception as e:
+        print("Exception when calling AmortisationRuleSetsApi->set_amortisation_rules: %s\n" % e)
+```
+
+
+### Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **scope** | **str**| The rule set scope. | 
+ **code** | **str**| The rule set code. | 
+ **set_amortisation_rules_request** | [**SetAmortisationRulesRequest**](SetAmortisationRulesRequest.md)| The contents of the rules. | 
+
+### Return type
+
+[**AmortisationRuleSet**](AmortisationRuleSet.md)
+
+### Authorization
+
+[oauth2](../README.md#oauth2)
+
+### HTTP request headers
+
+ - **Content-Type**: application/json-patch+json, application/json, text/json, application/*+json
+ - **Accept**: text/plain, application/json, text/json
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | Update the rules for an amortisation rule set. |  -  |
 **400** | The details of the input related failure |  -  |
 **0** | Error response |  -  |
 

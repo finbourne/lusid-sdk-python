@@ -1,4 +1,4 @@
-# AmortisationRuleSet
+# FeeType
 
 
 ## Properties
@@ -6,28 +6,28 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **href** | **str** | The specific Uniform Resource Identifier (URI) for this resource at the requested effective and asAt datetime. | [optional] 
 **id** | [**ResourceId**](ResourceId.md) |  | 
-**display_name** | **str** | A user-friendly name. | 
-**description** | **str** | A description of what this rule set is for. | [optional] 
-**rules_interval** | [**RulesInterval**](RulesInterval.md) |  | 
+**name** | **str** | The name of the fee type. | 
+**description** | **str** | The description of the fee type. | 
+**component_transactions** | [**List[ComponentTransaction]**](ComponentTransaction.md) | A set of component transactions that relate to the fee type. | 
 **version** | [**Version**](Version.md) |  | [optional] 
 **links** | [**List[Link]**](Link.md) |  | [optional] 
 
 ## Example
 
 ```python
-from lusid.models.amortisation_rule_set import AmortisationRuleSet
+from lusid.models.fee_type import FeeType
 
 # TODO update the JSON string below
 json = "{}"
-# create an instance of AmortisationRuleSet from a JSON string
-amortisation_rule_set_instance = AmortisationRuleSet.from_json(json)
+# create an instance of FeeType from a JSON string
+fee_type_instance = FeeType.from_json(json)
 # print the JSON string representation of the object
-print AmortisationRuleSet.to_json()
+print FeeType.to_json()
 
 # convert the object into a dict
-amortisation_rule_set_dict = amortisation_rule_set_instance.to_dict()
-# create an instance of AmortisationRuleSet from a dict
-amortisation_rule_set_form_dict = amortisation_rule_set.from_dict(amortisation_rule_set_dict)
+fee_type_dict = fee_type_instance.to_dict()
+# create an instance of FeeType from a dict
+fee_type_form_dict = fee_type.from_dict(fee_type_dict)
 ```
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 
