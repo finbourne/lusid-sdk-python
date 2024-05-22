@@ -80,7 +80,7 @@ async with api_client_factory:
     # Create an instance of the API class
     api_instance = api_client_factory.build(lusid.ComplianceApi)
     scope = 'scope_example' # str | The scope of the Compliance Rule Template.
-    create_compliance_template_request = {"code":"MyCode","description":"Some compliance rule template description","variations":[{"label":"Some variation label","description":"Some variation description","outcomeDescription":"Some outcome description","referencedGroupLabel":"Some referenced group label","steps":[{"label":"ExcludingCash","complianceStepType":"FilterStepRequest"},{"label":"GroupByProperty","complianceStepType":"GroupByStepRequest"},{"label":"BranchByProperty","complianceStepType":"BranchStepRequest"},{"label":"Compare","complianceStepType":"GroupFilterStepRequest"}]}]} # CreateComplianceTemplateRequest | Request to create a compliance rule template.
+    create_compliance_template_request = {"code":"MyCode","description":"Some compliance rule template description","variations":[{"label":"Some variation label","description":"Some variation description","outcomeDescription":"Some outcome description","referencedGroupLabel":"Some referenced group label","steps":[{"label":"ExcludingCash","complianceStepTypeRequest":"FilterStepRequest"},{"label":"GroupByProperty","complianceStepTypeRequest":"GroupByStepRequest"},{"label":"BranchByProperty","complianceStepTypeRequest":"BranchStepRequest"},{"label":"Compare","complianceStepTypeRequest":"GroupFilterStepRequest"}]}]} # CreateComplianceTemplateRequest | Request to create a compliance rule template.
 
     try:
         # [EARLY ACCESS] CreateComplianceTemplate: Create a Compliance Rule Template
@@ -1214,7 +1214,7 @@ async with api_client_factory:
     api_instance = api_client_factory.build(lusid.ComplianceApi)
     scope = 'scope_example' # str | The scope of the Compliance Rule Template.
     code = 'code_example' # str | The code of the Compliance Rule Template.
-    update_compliance_template_request = {"code":"MyCode","description":"Some compliance rule template description","variations":[{"label":"Some variation label","description":"Some variation description","outcomeDescription":"Some outcome description","referencedGroupLabel":"Some referenced group label","steps":[{"label":"ExcludingCash","complianceStepType":"FilterStepRequest"},{"label":"GroupByProperty","complianceStepType":"GroupByStepRequest"},{"label":"BranchByProperty","complianceStepType":"BranchStepRequest"},{"label":"Compare","complianceStepType":"GroupFilterStepRequest"}]}]} # UpdateComplianceTemplateRequest | Request to update a compliance rule template.
+    update_compliance_template_request = {"code":"MyCode","description":"Some compliance rule template description","variations":[{"label":"Some variation label","description":"Some variation description","outcomeDescription":"Some outcome description","referencedGroupLabel":"Some referenced group label","steps":[{"label":"ExcludingCash","complianceStepTypeRequest":"FilterStepRequest"},{"label":"GroupByProperty","complianceStepTypeRequest":"GroupByStepRequest"},{"label":"BranchByProperty","complianceStepTypeRequest":"BranchStepRequest"},{"label":"Compare","complianceStepTypeRequest":"GroupFilterStepRequest"}]}]} # UpdateComplianceTemplateRequest | Request to update a compliance rule template.
 
     try:
         # [EARLY ACCESS] UpdateComplianceTemplate: Update a ComplianceRuleTemplate

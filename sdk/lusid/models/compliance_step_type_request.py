@@ -33,7 +33,6 @@ class ComplianceStepTypeRequest(str, Enum):
     GROUPBYSTEPREQUEST = 'GroupByStepRequest'
     GROUPFILTERSTEPREQUEST = 'GroupFilterStepRequest'
     BRANCHSTEPREQUEST = 'BranchStepRequest'
-    RECOMBINESTEPREQUEST = 'RecombineStepRequest'
     CHECKSTEPREQUEST = 'CheckStepRequest'
 
     @classmethod

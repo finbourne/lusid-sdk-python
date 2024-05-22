@@ -174,6 +174,7 @@ from lusid.models.book_transactions_response import BookTransactionsResponse
 from lusid.models.bool_compliance_parameter import BoolComplianceParameter
 from lusid.models.bool_list_compliance_parameter import BoolListComplianceParameter
 from lusid.models.branch_step import BranchStep
+from lusid.models.branch_step_request import BranchStepRequest
 from lusid.models.bucketed_cash_flow_request import BucketedCashFlowRequest
 from lusid.models.bucketed_cash_flow_response import BucketedCashFlowResponse
 from lusid.models.bucketing_schedule import BucketingSchedule
@@ -203,6 +204,7 @@ from lusid.models.chart_of_accounts import ChartOfAccounts
 from lusid.models.chart_of_accounts_properties import ChartOfAccountsProperties
 from lusid.models.chart_of_accounts_request import ChartOfAccountsRequest
 from lusid.models.check_step import CheckStep
+from lusid.models.check_step_request import CheckStepRequest
 from lusid.models.cleardown_module_details import CleardownModuleDetails
 from lusid.models.cleardown_module_request import CleardownModuleRequest
 from lusid.models.cleardown_module_response import CleardownModuleResponse
@@ -394,6 +396,7 @@ from lusid.models.field_value import FieldValue
 from lusid.models.file_response import FileResponse
 from lusid.models.filter_predicate_compliance_parameter import FilterPredicateComplianceParameter
 from lusid.models.filter_step import FilterStep
+from lusid.models.filter_step_request import FilterStepRequest
 from lusid.models.fixed_leg import FixedLeg
 from lusid.models.fixed_leg_all_of_overrides import FixedLegAllOfOverrides
 from lusid.models.fixed_schedule import FixedSchedule
@@ -449,8 +452,10 @@ from lusid.models.get_structured_result_data_response import GetStructuredResult
 from lusid.models.get_virtual_document_response import GetVirtualDocumentResponse
 from lusid.models.group_by_selector_compliance_parameter import GroupBySelectorComplianceParameter
 from lusid.models.group_by_step import GroupByStep
+from lusid.models.group_by_step_request import GroupByStepRequest
 from lusid.models.group_filter_predicate_compliance_parameter import GroupFilterPredicateComplianceParameter
 from lusid.models.group_filter_step import GroupFilterStep
+from lusid.models.group_filter_step_request import GroupFilterStepRequest
 from lusid.models.group_of_market_data_key_rules import GroupOfMarketDataKeyRules
 from lusid.models.grouped_result_of_address_key import GroupedResultOfAddressKey
 from lusid.models.holding_adjustment import HoldingAdjustment
@@ -506,6 +511,7 @@ from lusid.models.instrument_type import InstrumentType
 from lusid.models.interest_rate_swap import InterestRateSwap
 from lusid.models.interest_rate_swaption import InterestRateSwaption
 from lusid.models.intermediate_compliance_step import IntermediateComplianceStep
+from lusid.models.intermediate_compliance_step_request import IntermediateComplianceStepRequest
 from lusid.models.ir_vol_cube_data import IrVolCubeData
 from lusid.models.ir_vol_dependency import IrVolDependency
 from lusid.models.is_business_day_response import IsBusinessDayResponse
@@ -1227,6 +1233,7 @@ __all__ = [
     "BoolComplianceParameter",
     "BoolListComplianceParameter",
     "BranchStep",
+    "BranchStepRequest",
     "BucketedCashFlowRequest",
     "BucketedCashFlowResponse",
     "BucketingSchedule",
@@ -1256,6 +1263,7 @@ __all__ = [
     "ChartOfAccountsProperties",
     "ChartOfAccountsRequest",
     "CheckStep",
+    "CheckStepRequest",
     "CleardownModuleDetails",
     "CleardownModuleRequest",
     "CleardownModuleResponse",
@@ -1447,6 +1455,7 @@ __all__ = [
     "FileResponse",
     "FilterPredicateComplianceParameter",
     "FilterStep",
+    "FilterStepRequest",
     "FixedLeg",
     "FixedLegAllOfOverrides",
     "FixedSchedule",
@@ -1502,8 +1511,10 @@ __all__ = [
     "GetVirtualDocumentResponse",
     "GroupBySelectorComplianceParameter",
     "GroupByStep",
+    "GroupByStepRequest",
     "GroupFilterPredicateComplianceParameter",
     "GroupFilterStep",
+    "GroupFilterStepRequest",
     "GroupOfMarketDataKeyRules",
     "GroupedResultOfAddressKey",
     "HoldingAdjustment",
@@ -1559,6 +1570,7 @@ __all__ = [
     "InterestRateSwap",
     "InterestRateSwaption",
     "IntermediateComplianceStep",
+    "IntermediateComplianceStepRequest",
     "IrVolCubeData",
     "IrVolDependency",
     "IsBusinessDayResponse",
