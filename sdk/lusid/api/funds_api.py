@@ -28,10 +28,14 @@ from typing import Dict, Optional
 
 from lusid.models.deleted_entity_response import DeletedEntityResponse
 from lusid.models.diary_entry import DiaryEntry
+from lusid.models.fee import Fee
+from lusid.models.fee_request import FeeRequest
 from lusid.models.fund import Fund
 from lusid.models.fund_properties import FundProperties
 from lusid.models.fund_request import FundRequest
 from lusid.models.model_property import ModelProperty
+from lusid.models.operation import Operation
+from lusid.models.paged_resource_list_of_fee import PagedResourceListOfFee
 from lusid.models.paged_resource_list_of_fund import PagedResourceListOfFund
 from lusid.models.set_share_class_instruments_request import SetShareClassInstrumentsRequest
 from lusid.models.upsert_valuation_point_request import UpsertValuationPointRequest
@@ -234,6 +238,188 @@ class FundsApi:
             _request_auth=_params.get('_request_auth'))
 
     @overload
+    async def create_fee(self, scope : Annotated[constr(strict=True, max_length=64, min_length=1), Field(..., description="The scope of the Fund.")], code : Annotated[constr(strict=True, max_length=64, min_length=1), Field(..., description="The code of the Fund. Together with the scope this uniquely identifies the Fund.")], fee_code : Annotated[constr(strict=True, max_length=64, min_length=1), Field(..., description="The code of the Fee.")], fee_request : Annotated[FeeRequest, Field(..., description="The Fee to create.")], **kwargs) -> Fee:  # noqa: E501
+        ...
+
+    @overload
+    def create_fee(self, scope : Annotated[constr(strict=True, max_length=64, min_length=1), Field(..., description="The scope of the Fund.")], code : Annotated[constr(strict=True, max_length=64, min_length=1), Field(..., description="The code of the Fund. Together with the scope this uniquely identifies the Fund.")], fee_code : Annotated[constr(strict=True, max_length=64, min_length=1), Field(..., description="The code of the Fee.")], fee_request : Annotated[FeeRequest, Field(..., description="The Fee to create.")], async_req: Optional[bool]=True, **kwargs) -> Fee:  # noqa: E501
+        ...
+
+    @validate_arguments
+    def create_fee(self, scope : Annotated[constr(strict=True, max_length=64, min_length=1), Field(..., description="The scope of the Fund.")], code : Annotated[constr(strict=True, max_length=64, min_length=1), Field(..., description="The code of the Fund. Together with the scope this uniquely identifies the Fund.")], fee_code : Annotated[constr(strict=True, max_length=64, min_length=1), Field(..., description="The code of the Fee.")], fee_request : Annotated[FeeRequest, Field(..., description="The Fee to create.")], async_req: Optional[bool]=None, **kwargs) -> Union[Fee, Awaitable[Fee]]:  # noqa: E501
+        """[EXPERIMENTAL] CreateFee: Create a Fee.  # noqa: E501
+
+        Create the given Fee.  # noqa: E501
+        This method makes a synchronous HTTP request by default. To make an
+        asynchronous HTTP request, please pass async_req=True
+
+        >>> thread = api.create_fee(scope, code, fee_code, fee_request, async_req=True)
+        >>> result = thread.get()
+
+        :param scope: The scope of the Fund. (required)
+        :type scope: str
+        :param code: The code of the Fund. Together with the scope this uniquely identifies the Fund. (required)
+        :type code: str
+        :param fee_code: The code of the Fee. (required)
+        :type fee_code: str
+        :param fee_request: The Fee to create. (required)
+        :type fee_request: FeeRequest
+        :param async_req: Whether to execute the request asynchronously.
+        :type async_req: bool, optional
+        :param _request_timeout: timeout setting for this request.
+               If one number provided, it will be total request
+               timeout. It can also be a pair (tuple) of
+               (connection, read) timeouts.
+        :return: Returns the result object.
+                 If the method is called asynchronously,
+                 returns the request thread.
+        :rtype: Fee
+        """
+        kwargs['_return_http_data_only'] = True
+        if '_preload_content' in kwargs:
+            message = "Error! Please call the create_fee_with_http_info method with `_preload_content` instead and obtain raw data from ApiResponse.raw_data"  # noqa: E501
+            raise ValueError(message)
+        if async_req is not None:
+            kwargs['async_req'] = async_req
+        return self.create_fee_with_http_info(scope, code, fee_code, fee_request, **kwargs)  # noqa: E501
+
+    @validate_arguments
+    def create_fee_with_http_info(self, scope : Annotated[constr(strict=True, max_length=64, min_length=1), Field(..., description="The scope of the Fund.")], code : Annotated[constr(strict=True, max_length=64, min_length=1), Field(..., description="The code of the Fund. Together with the scope this uniquely identifies the Fund.")], fee_code : Annotated[constr(strict=True, max_length=64, min_length=1), Field(..., description="The code of the Fee.")], fee_request : Annotated[FeeRequest, Field(..., description="The Fee to create.")], **kwargs) -> ApiResponse:  # noqa: E501
+        """[EXPERIMENTAL] CreateFee: Create a Fee.  # noqa: E501
+
+        Create the given Fee.  # noqa: E501
+        This method makes a synchronous HTTP request by default. To make an
+        asynchronous HTTP request, please pass async_req=True
+
+        >>> thread = api.create_fee_with_http_info(scope, code, fee_code, fee_request, async_req=True)
+        >>> result = thread.get()
+
+        :param scope: The scope of the Fund. (required)
+        :type scope: str
+        :param code: The code of the Fund. Together with the scope this uniquely identifies the Fund. (required)
+        :type code: str
+        :param fee_code: The code of the Fee. (required)
+        :type fee_code: str
+        :param fee_request: The Fee to create. (required)
+        :type fee_request: FeeRequest
+        :param async_req: Whether to execute the request asynchronously.
+        :type async_req: bool, optional
+        :param _preload_content: if False, the ApiResponse.data will
+                                 be set to none and raw_data will store the
+                                 HTTP response body without reading/decoding.
+                                 Default is True.
+        :type _preload_content: bool, optional
+        :param _return_http_data_only: response data instead of ApiResponse
+                                       object with status code, headers, etc
+        :type _return_http_data_only: bool, optional
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :param _request_auth: set to override the auth_settings for an a single
+                              request; this effectively ignores the authentication
+                              in the spec for a single request.
+        :type _request_auth: dict, optional
+        :type _content_type: string, optional: force content-type for the request
+        :return: Returns the result object.
+                 If the method is called asynchronously,
+                 returns the request thread.
+        :rtype: tuple(Fee, status_code(int), headers(HTTPHeaderDict))
+        """
+
+        _params = locals()
+
+        _all_params = [
+            'scope',
+            'code',
+            'fee_code',
+            'fee_request'
+        ]
+        _all_params.extend(
+            [
+                'async_req',
+                '_return_http_data_only',
+                '_preload_content',
+                '_request_timeout',
+                '_request_auth',
+                '_content_type',
+                '_headers'
+            ]
+        )
+
+        # validate the arguments
+        for _key, _val in _params['kwargs'].items():
+            if _key not in _all_params:
+                raise ApiTypeError(
+                    "Got an unexpected keyword argument '%s'"
+                    " to method create_fee" % _key
+                )
+            _params[_key] = _val
+        del _params['kwargs']
+
+        _collection_formats = {}
+
+        # process the path parameters
+        _path_params = {}
+        if _params['scope']:
+            _path_params['scope'] = _params['scope']
+
+        if _params['code']:
+            _path_params['code'] = _params['code']
+
+        if _params['fee_code']:
+            _path_params['feeCode'] = _params['fee_code']
+
+
+        # process the query parameters
+        _query_params = []
+        # process the header parameters
+        _header_params = dict(_params.get('_headers', {}))
+        # process the form parameters
+        _form_params = []
+        _files = {}
+        # process the body parameter
+        _body_params = None
+        if _params['fee_request'] is not None:
+            _body_params = _params['fee_request']
+
+        # set the HTTP header `Accept`
+        _header_params['Accept'] = self.api_client.select_header_accept(
+            ['text/plain', 'application/json', 'text/json'])  # noqa: E501
+
+        # set the HTTP header `Content-Type`
+        _content_types_list = _params.get('_content_type',
+            self.api_client.select_header_content_type(
+                ['application/json-patch+json', 'application/json', 'text/json', 'application/*+json']))
+        if _content_types_list:
+                _header_params['Content-Type'] = _content_types_list
+
+        # authentication setting
+        _auth_settings = ['oauth2']  # noqa: E501
+
+        _response_types_map = {
+            '201': "Fee",
+            '400': "LusidValidationProblemDetails",
+        }
+
+        return self.api_client.call_api(
+            '/api/funds/{scope}/{code}/fee/{feeCode}', 'POST',
+            _path_params,
+            _query_params,
+            _header_params,
+            body=_body_params,
+            post_params=_form_params,
+            files=_files,
+            response_types_map=_response_types_map,
+            auth_settings=_auth_settings,
+            async_req=_params.get('async_req'),
+            _return_http_data_only=_params.get('_return_http_data_only'),  # noqa: E501
+            _preload_content=_params.get('_preload_content', True),
+            _request_timeout=_params.get('_request_timeout'),
+            collection_formats=_collection_formats,
+            _request_auth=_params.get('_request_auth'))
+
+    @overload
     async def create_fund(self, scope : Annotated[constr(strict=True, max_length=64, min_length=1), Field(..., description="The scope of the Fund.")], fund_request : Annotated[FundRequest, Field(..., description="The definition of the Fund.")], **kwargs) -> Fund:  # noqa: E501
         ...
 
@@ -384,6 +570,173 @@ class FundsApi:
 
         return self.api_client.call_api(
             '/api/funds/{scope}', 'POST',
+            _path_params,
+            _query_params,
+            _header_params,
+            body=_body_params,
+            post_params=_form_params,
+            files=_files,
+            response_types_map=_response_types_map,
+            auth_settings=_auth_settings,
+            async_req=_params.get('async_req'),
+            _return_http_data_only=_params.get('_return_http_data_only'),  # noqa: E501
+            _preload_content=_params.get('_preload_content', True),
+            _request_timeout=_params.get('_request_timeout'),
+            collection_formats=_collection_formats,
+            _request_auth=_params.get('_request_auth'))
+
+    @overload
+    async def delete_fee(self, scope : Annotated[constr(strict=True, max_length=64, min_length=1), Field(..., description="The scope of the Fund")], code : Annotated[constr(strict=True, max_length=64, min_length=1), Field(..., description="The code of the Fund. Together with the scope this uniquely identifies the Fund.")], fee_code : Annotated[constr(strict=True, max_length=64, min_length=1), Field(..., description="The code of the Fee to be deleted.")], **kwargs) -> DeletedEntityResponse:  # noqa: E501
+        ...
+
+    @overload
+    def delete_fee(self, scope : Annotated[constr(strict=True, max_length=64, min_length=1), Field(..., description="The scope of the Fund")], code : Annotated[constr(strict=True, max_length=64, min_length=1), Field(..., description="The code of the Fund. Together with the scope this uniquely identifies the Fund.")], fee_code : Annotated[constr(strict=True, max_length=64, min_length=1), Field(..., description="The code of the Fee to be deleted.")], async_req: Optional[bool]=True, **kwargs) -> DeletedEntityResponse:  # noqa: E501
+        ...
+
+    @validate_arguments
+    def delete_fee(self, scope : Annotated[constr(strict=True, max_length=64, min_length=1), Field(..., description="The scope of the Fund")], code : Annotated[constr(strict=True, max_length=64, min_length=1), Field(..., description="The code of the Fund. Together with the scope this uniquely identifies the Fund.")], fee_code : Annotated[constr(strict=True, max_length=64, min_length=1), Field(..., description="The code of the Fee to be deleted.")], async_req: Optional[bool]=None, **kwargs) -> Union[DeletedEntityResponse, Awaitable[DeletedEntityResponse]]:  # noqa: E501
+        """[EXPERIMENTAL] DeleteFee: Delete a Fee.  # noqa: E501
+
+        Delete the given Fee.  # noqa: E501
+        This method makes a synchronous HTTP request by default. To make an
+        asynchronous HTTP request, please pass async_req=True
+
+        >>> thread = api.delete_fee(scope, code, fee_code, async_req=True)
+        >>> result = thread.get()
+
+        :param scope: The scope of the Fund (required)
+        :type scope: str
+        :param code: The code of the Fund. Together with the scope this uniquely identifies the Fund. (required)
+        :type code: str
+        :param fee_code: The code of the Fee to be deleted. (required)
+        :type fee_code: str
+        :param async_req: Whether to execute the request asynchronously.
+        :type async_req: bool, optional
+        :param _request_timeout: timeout setting for this request.
+               If one number provided, it will be total request
+               timeout. It can also be a pair (tuple) of
+               (connection, read) timeouts.
+        :return: Returns the result object.
+                 If the method is called asynchronously,
+                 returns the request thread.
+        :rtype: DeletedEntityResponse
+        """
+        kwargs['_return_http_data_only'] = True
+        if '_preload_content' in kwargs:
+            message = "Error! Please call the delete_fee_with_http_info method with `_preload_content` instead and obtain raw data from ApiResponse.raw_data"  # noqa: E501
+            raise ValueError(message)
+        if async_req is not None:
+            kwargs['async_req'] = async_req
+        return self.delete_fee_with_http_info(scope, code, fee_code, **kwargs)  # noqa: E501
+
+    @validate_arguments
+    def delete_fee_with_http_info(self, scope : Annotated[constr(strict=True, max_length=64, min_length=1), Field(..., description="The scope of the Fund")], code : Annotated[constr(strict=True, max_length=64, min_length=1), Field(..., description="The code of the Fund. Together with the scope this uniquely identifies the Fund.")], fee_code : Annotated[constr(strict=True, max_length=64, min_length=1), Field(..., description="The code of the Fee to be deleted.")], **kwargs) -> ApiResponse:  # noqa: E501
+        """[EXPERIMENTAL] DeleteFee: Delete a Fee.  # noqa: E501
+
+        Delete the given Fee.  # noqa: E501
+        This method makes a synchronous HTTP request by default. To make an
+        asynchronous HTTP request, please pass async_req=True
+
+        >>> thread = api.delete_fee_with_http_info(scope, code, fee_code, async_req=True)
+        >>> result = thread.get()
+
+        :param scope: The scope of the Fund (required)
+        :type scope: str
+        :param code: The code of the Fund. Together with the scope this uniquely identifies the Fund. (required)
+        :type code: str
+        :param fee_code: The code of the Fee to be deleted. (required)
+        :type fee_code: str
+        :param async_req: Whether to execute the request asynchronously.
+        :type async_req: bool, optional
+        :param _preload_content: if False, the ApiResponse.data will
+                                 be set to none and raw_data will store the
+                                 HTTP response body without reading/decoding.
+                                 Default is True.
+        :type _preload_content: bool, optional
+        :param _return_http_data_only: response data instead of ApiResponse
+                                       object with status code, headers, etc
+        :type _return_http_data_only: bool, optional
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :param _request_auth: set to override the auth_settings for an a single
+                              request; this effectively ignores the authentication
+                              in the spec for a single request.
+        :type _request_auth: dict, optional
+        :type _content_type: string, optional: force content-type for the request
+        :return: Returns the result object.
+                 If the method is called asynchronously,
+                 returns the request thread.
+        :rtype: tuple(DeletedEntityResponse, status_code(int), headers(HTTPHeaderDict))
+        """
+
+        _params = locals()
+
+        _all_params = [
+            'scope',
+            'code',
+            'fee_code'
+        ]
+        _all_params.extend(
+            [
+                'async_req',
+                '_return_http_data_only',
+                '_preload_content',
+                '_request_timeout',
+                '_request_auth',
+                '_content_type',
+                '_headers'
+            ]
+        )
+
+        # validate the arguments
+        for _key, _val in _params['kwargs'].items():
+            if _key not in _all_params:
+                raise ApiTypeError(
+                    "Got an unexpected keyword argument '%s'"
+                    " to method delete_fee" % _key
+                )
+            _params[_key] = _val
+        del _params['kwargs']
+
+        _collection_formats = {}
+
+        # process the path parameters
+        _path_params = {}
+        if _params['scope']:
+            _path_params['scope'] = _params['scope']
+
+        if _params['code']:
+            _path_params['code'] = _params['code']
+
+        if _params['fee_code']:
+            _path_params['feeCode'] = _params['fee_code']
+
+
+        # process the query parameters
+        _query_params = []
+        # process the header parameters
+        _header_params = dict(_params.get('_headers', {}))
+        # process the form parameters
+        _form_params = []
+        _files = {}
+        # process the body parameter
+        _body_params = None
+        # set the HTTP header `Accept`
+        _header_params['Accept'] = self.api_client.select_header_accept(
+            ['text/plain', 'application/json', 'text/json'])  # noqa: E501
+
+        # authentication setting
+        _auth_settings = ['oauth2']  # noqa: E501
+
+        _response_types_map = {
+            '200': "DeletedEntityResponse",
+            '400': "LusidValidationProblemDetails",
+        }
+
+        return self.api_client.call_api(
+            '/api/funds/{scope}/{code}/fee/{feeCode}', 'DELETE',
             _path_params,
             _query_params,
             _header_params,
@@ -900,6 +1253,201 @@ class FundsApi:
             _request_auth=_params.get('_request_auth'))
 
     @overload
+    async def get_fee(self, scope : Annotated[constr(strict=True, max_length=64, min_length=1), Field(..., description="The scope of the Fund.")], code : Annotated[constr(strict=True, max_length=64, min_length=1), Field(..., description="The code of the Fund. Together with the scope this uniquely identifies the Fund.")], fee_code : Annotated[constr(strict=True, max_length=64, min_length=1), Field(..., description="The code of the Fee.")], effective_at : Annotated[Optional[StrictStr], Field(description="The effective datetime or cut label at which to retrieve the Fee properties. Defaults to the current LUSID system datetime if not specified.")] = None, as_at : Annotated[Optional[datetime], Field(description="The asAt datetime at which to retrieve the Fee. Defaults to returning the latest version of the Fee if not specified.")] = None, property_keys : Annotated[Optional[conlist(StrictStr)], Field(description="A list of property keys from the 'Fee' domain to decorate onto the Fee.              These must take the format {domain}/{scope}/{code}, for example 'Fee/Account/Id'. If no properties are specified, then no properties will be returned.")] = None, **kwargs) -> Fee:  # noqa: E501
+        ...
+
+    @overload
+    def get_fee(self, scope : Annotated[constr(strict=True, max_length=64, min_length=1), Field(..., description="The scope of the Fund.")], code : Annotated[constr(strict=True, max_length=64, min_length=1), Field(..., description="The code of the Fund. Together with the scope this uniquely identifies the Fund.")], fee_code : Annotated[constr(strict=True, max_length=64, min_length=1), Field(..., description="The code of the Fee.")], effective_at : Annotated[Optional[StrictStr], Field(description="The effective datetime or cut label at which to retrieve the Fee properties. Defaults to the current LUSID system datetime if not specified.")] = None, as_at : Annotated[Optional[datetime], Field(description="The asAt datetime at which to retrieve the Fee. Defaults to returning the latest version of the Fee if not specified.")] = None, property_keys : Annotated[Optional[conlist(StrictStr)], Field(description="A list of property keys from the 'Fee' domain to decorate onto the Fee.              These must take the format {domain}/{scope}/{code}, for example 'Fee/Account/Id'. If no properties are specified, then no properties will be returned.")] = None, async_req: Optional[bool]=True, **kwargs) -> Fee:  # noqa: E501
+        ...
+
+    @validate_arguments
+    def get_fee(self, scope : Annotated[constr(strict=True, max_length=64, min_length=1), Field(..., description="The scope of the Fund.")], code : Annotated[constr(strict=True, max_length=64, min_length=1), Field(..., description="The code of the Fund. Together with the scope this uniquely identifies the Fund.")], fee_code : Annotated[constr(strict=True, max_length=64, min_length=1), Field(..., description="The code of the Fee.")], effective_at : Annotated[Optional[StrictStr], Field(description="The effective datetime or cut label at which to retrieve the Fee properties. Defaults to the current LUSID system datetime if not specified.")] = None, as_at : Annotated[Optional[datetime], Field(description="The asAt datetime at which to retrieve the Fee. Defaults to returning the latest version of the Fee if not specified.")] = None, property_keys : Annotated[Optional[conlist(StrictStr)], Field(description="A list of property keys from the 'Fee' domain to decorate onto the Fee.              These must take the format {domain}/{scope}/{code}, for example 'Fee/Account/Id'. If no properties are specified, then no properties will be returned.")] = None, async_req: Optional[bool]=None, **kwargs) -> Union[Fee, Awaitable[Fee]]:  # noqa: E501
+        """[EXPERIMENTAL] GetFee: Get a Fee for a specified Fund.  # noqa: E501
+
+        Retrieve a fee for a specified Fund  # noqa: E501
+        This method makes a synchronous HTTP request by default. To make an
+        asynchronous HTTP request, please pass async_req=True
+
+        >>> thread = api.get_fee(scope, code, fee_code, effective_at, as_at, property_keys, async_req=True)
+        >>> result = thread.get()
+
+        :param scope: The scope of the Fund. (required)
+        :type scope: str
+        :param code: The code of the Fund. Together with the scope this uniquely identifies the Fund. (required)
+        :type code: str
+        :param fee_code: The code of the Fee. (required)
+        :type fee_code: str
+        :param effective_at: The effective datetime or cut label at which to retrieve the Fee properties. Defaults to the current LUSID system datetime if not specified.
+        :type effective_at: str
+        :param as_at: The asAt datetime at which to retrieve the Fee. Defaults to returning the latest version of the Fee if not specified.
+        :type as_at: datetime
+        :param property_keys: A list of property keys from the 'Fee' domain to decorate onto the Fee.              These must take the format {domain}/{scope}/{code}, for example 'Fee/Account/Id'. If no properties are specified, then no properties will be returned.
+        :type property_keys: List[str]
+        :param async_req: Whether to execute the request asynchronously.
+        :type async_req: bool, optional
+        :param _request_timeout: timeout setting for this request.
+               If one number provided, it will be total request
+               timeout. It can also be a pair (tuple) of
+               (connection, read) timeouts.
+        :return: Returns the result object.
+                 If the method is called asynchronously,
+                 returns the request thread.
+        :rtype: Fee
+        """
+        kwargs['_return_http_data_only'] = True
+        if '_preload_content' in kwargs:
+            message = "Error! Please call the get_fee_with_http_info method with `_preload_content` instead and obtain raw data from ApiResponse.raw_data"  # noqa: E501
+            raise ValueError(message)
+        if async_req is not None:
+            kwargs['async_req'] = async_req
+        return self.get_fee_with_http_info(scope, code, fee_code, effective_at, as_at, property_keys, **kwargs)  # noqa: E501
+
+    @validate_arguments
+    def get_fee_with_http_info(self, scope : Annotated[constr(strict=True, max_length=64, min_length=1), Field(..., description="The scope of the Fund.")], code : Annotated[constr(strict=True, max_length=64, min_length=1), Field(..., description="The code of the Fund. Together with the scope this uniquely identifies the Fund.")], fee_code : Annotated[constr(strict=True, max_length=64, min_length=1), Field(..., description="The code of the Fee.")], effective_at : Annotated[Optional[StrictStr], Field(description="The effective datetime or cut label at which to retrieve the Fee properties. Defaults to the current LUSID system datetime if not specified.")] = None, as_at : Annotated[Optional[datetime], Field(description="The asAt datetime at which to retrieve the Fee. Defaults to returning the latest version of the Fee if not specified.")] = None, property_keys : Annotated[Optional[conlist(StrictStr)], Field(description="A list of property keys from the 'Fee' domain to decorate onto the Fee.              These must take the format {domain}/{scope}/{code}, for example 'Fee/Account/Id'. If no properties are specified, then no properties will be returned.")] = None, **kwargs) -> ApiResponse:  # noqa: E501
+        """[EXPERIMENTAL] GetFee: Get a Fee for a specified Fund.  # noqa: E501
+
+        Retrieve a fee for a specified Fund  # noqa: E501
+        This method makes a synchronous HTTP request by default. To make an
+        asynchronous HTTP request, please pass async_req=True
+
+        >>> thread = api.get_fee_with_http_info(scope, code, fee_code, effective_at, as_at, property_keys, async_req=True)
+        >>> result = thread.get()
+
+        :param scope: The scope of the Fund. (required)
+        :type scope: str
+        :param code: The code of the Fund. Together with the scope this uniquely identifies the Fund. (required)
+        :type code: str
+        :param fee_code: The code of the Fee. (required)
+        :type fee_code: str
+        :param effective_at: The effective datetime or cut label at which to retrieve the Fee properties. Defaults to the current LUSID system datetime if not specified.
+        :type effective_at: str
+        :param as_at: The asAt datetime at which to retrieve the Fee. Defaults to returning the latest version of the Fee if not specified.
+        :type as_at: datetime
+        :param property_keys: A list of property keys from the 'Fee' domain to decorate onto the Fee.              These must take the format {domain}/{scope}/{code}, for example 'Fee/Account/Id'. If no properties are specified, then no properties will be returned.
+        :type property_keys: List[str]
+        :param async_req: Whether to execute the request asynchronously.
+        :type async_req: bool, optional
+        :param _preload_content: if False, the ApiResponse.data will
+                                 be set to none and raw_data will store the
+                                 HTTP response body without reading/decoding.
+                                 Default is True.
+        :type _preload_content: bool, optional
+        :param _return_http_data_only: response data instead of ApiResponse
+                                       object with status code, headers, etc
+        :type _return_http_data_only: bool, optional
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :param _request_auth: set to override the auth_settings for an a single
+                              request; this effectively ignores the authentication
+                              in the spec for a single request.
+        :type _request_auth: dict, optional
+        :type _content_type: string, optional: force content-type for the request
+        :return: Returns the result object.
+                 If the method is called asynchronously,
+                 returns the request thread.
+        :rtype: tuple(Fee, status_code(int), headers(HTTPHeaderDict))
+        """
+
+        _params = locals()
+
+        _all_params = [
+            'scope',
+            'code',
+            'fee_code',
+            'effective_at',
+            'as_at',
+            'property_keys'
+        ]
+        _all_params.extend(
+            [
+                'async_req',
+                '_return_http_data_only',
+                '_preload_content',
+                '_request_timeout',
+                '_request_auth',
+                '_content_type',
+                '_headers'
+            ]
+        )
+
+        # validate the arguments
+        for _key, _val in _params['kwargs'].items():
+            if _key not in _all_params:
+                raise ApiTypeError(
+                    "Got an unexpected keyword argument '%s'"
+                    " to method get_fee" % _key
+                )
+            _params[_key] = _val
+        del _params['kwargs']
+
+        _collection_formats = {}
+
+        # process the path parameters
+        _path_params = {}
+        if _params['scope']:
+            _path_params['scope'] = _params['scope']
+
+        if _params['code']:
+            _path_params['code'] = _params['code']
+
+        if _params['fee_code']:
+            _path_params['feeCode'] = _params['fee_code']
+
+
+        # process the query parameters
+        _query_params = []
+        if _params.get('effective_at') is not None:  # noqa: E501
+            _query_params.append(('effectiveAt', _params['effective_at']))
+
+        if _params.get('as_at') is not None:  # noqa: E501
+            if isinstance(_params['as_at'], datetime):
+                _query_params.append(('asAt', _params['as_at'].strftime(self.api_client.configuration.datetime_format)))
+            else:
+                _query_params.append(('asAt', _params['as_at']))
+
+        if _params.get('property_keys') is not None:  # noqa: E501
+            _query_params.append(('propertyKeys', _params['property_keys']))
+            _collection_formats['propertyKeys'] = 'multi'
+
+        # process the header parameters
+        _header_params = dict(_params.get('_headers', {}))
+        # process the form parameters
+        _form_params = []
+        _files = {}
+        # process the body parameter
+        _body_params = None
+        # set the HTTP header `Accept`
+        _header_params['Accept'] = self.api_client.select_header_accept(
+            ['text/plain', 'application/json', 'text/json'])  # noqa: E501
+
+        # authentication setting
+        _auth_settings = ['oauth2']  # noqa: E501
+
+        _response_types_map = {
+            '200': "Fee",
+            '400': "LusidValidationProblemDetails",
+        }
+
+        return self.api_client.call_api(
+            '/api/funds/{scope}/{code}/fee/{feeCode}', 'GET',
+            _path_params,
+            _query_params,
+            _header_params,
+            body=_body_params,
+            post_params=_form_params,
+            files=_files,
+            response_types_map=_response_types_map,
+            auth_settings=_auth_settings,
+            async_req=_params.get('async_req'),
+            _return_http_data_only=_params.get('_return_http_data_only'),  # noqa: E501
+            _preload_content=_params.get('_preload_content', True),
+            _request_timeout=_params.get('_request_timeout'),
+            collection_formats=_collection_formats,
+            _request_auth=_params.get('_request_auth'))
+
+    @overload
     async def get_fund(self, scope : Annotated[constr(strict=True, max_length=64, min_length=1), Field(..., description="The scope of the Fund.")], code : Annotated[constr(strict=True, max_length=64, min_length=1), Field(..., description="The code of the Fund. Together with the scope this uniquely identifies the Fund.")], effective_at : Annotated[Optional[StrictStr], Field(description="The effective datetime or cut label at which to retrieve the Fund properties. Defaults to the current LUSID system datetime if not specified.")] = None, as_at : Annotated[Optional[datetime], Field(description="The asAt datetime at which to retrieve the Fund definition. Defaults to returning the latest version of the Fund definition if not specified.")] = None, property_keys : Annotated[Optional[conlist(StrictStr)], Field(description="A list of property keys from the 'Fund' domain to decorate onto the Fund.              These must take the format {domain}/{scope}/{code}, for example 'Fund/Manager/Id'. If no properties are specified, then no properties will be returned.")] = None, **kwargs) -> Fund:  # noqa: E501
         ...
 
@@ -1272,6 +1820,226 @@ class FundsApi:
             _request_auth=_params.get('_request_auth'))
 
     @overload
+    async def list_fees(self, scope : Annotated[constr(strict=True, max_length=64, min_length=1), Field(..., description="The scope of the Fund.")], code : Annotated[constr(strict=True, max_length=64, min_length=1), Field(..., description="The code of the Fund.")], effective_at : Annotated[Optional[StrictStr], Field(description="The effective datetime or cut label at which to list the TimeVariant properties for the Fees. Defaults to the current LUSID              system datetime if not specified.")] = None, as_at : Annotated[Optional[datetime], Field(description="The asAt datetime at which to list the Fees. Defaults to returning the latest version of each Fee if not specified.")] = None, page : Annotated[Optional[constr(strict=True, max_length=500, min_length=1)], Field(description="The pagination token to use to continue listing fees; this              value is returned from the previous call. If a pagination token is provided, the filter, effectiveAt              and asAt fields must not have changed since the original request.")] = None, limit : Annotated[Optional[conint(strict=True, le=5000, ge=1)], Field(description="When paginating, limit the results to this number. Defaults to 100 if not specified.")] = None, filter : Annotated[Optional[constr(strict=True, max_length=16384, min_length=0)], Field(description="Expression to filter the results.              For example, to filter on the treatment, specify \"treatment eq 'Monthly'\". For more information about filtering              results, see https://support.lusid.com/knowledgebase/article/KA-01914.")] = None, sort_by : Annotated[Optional[conlist(StrictStr)], Field(description="A list of field names or properties to sort by, each suffixed by \" ASC\" or \" DESC\"")] = None, property_keys : Annotated[Optional[conlist(StrictStr)], Field(description="A list of property keys from the 'Fee' domain to decorate onto each Fee.              These must take the format {domain}/{scope}/{code}, for example 'Fee/Account/Id'.")] = None, **kwargs) -> PagedResourceListOfFee:  # noqa: E501
+        ...
+
+    @overload
+    def list_fees(self, scope : Annotated[constr(strict=True, max_length=64, min_length=1), Field(..., description="The scope of the Fund.")], code : Annotated[constr(strict=True, max_length=64, min_length=1), Field(..., description="The code of the Fund.")], effective_at : Annotated[Optional[StrictStr], Field(description="The effective datetime or cut label at which to list the TimeVariant properties for the Fees. Defaults to the current LUSID              system datetime if not specified.")] = None, as_at : Annotated[Optional[datetime], Field(description="The asAt datetime at which to list the Fees. Defaults to returning the latest version of each Fee if not specified.")] = None, page : Annotated[Optional[constr(strict=True, max_length=500, min_length=1)], Field(description="The pagination token to use to continue listing fees; this              value is returned from the previous call. If a pagination token is provided, the filter, effectiveAt              and asAt fields must not have changed since the original request.")] = None, limit : Annotated[Optional[conint(strict=True, le=5000, ge=1)], Field(description="When paginating, limit the results to this number. Defaults to 100 if not specified.")] = None, filter : Annotated[Optional[constr(strict=True, max_length=16384, min_length=0)], Field(description="Expression to filter the results.              For example, to filter on the treatment, specify \"treatment eq 'Monthly'\". For more information about filtering              results, see https://support.lusid.com/knowledgebase/article/KA-01914.")] = None, sort_by : Annotated[Optional[conlist(StrictStr)], Field(description="A list of field names or properties to sort by, each suffixed by \" ASC\" or \" DESC\"")] = None, property_keys : Annotated[Optional[conlist(StrictStr)], Field(description="A list of property keys from the 'Fee' domain to decorate onto each Fee.              These must take the format {domain}/{scope}/{code}, for example 'Fee/Account/Id'.")] = None, async_req: Optional[bool]=True, **kwargs) -> PagedResourceListOfFee:  # noqa: E501
+        ...
+
+    @validate_arguments
+    def list_fees(self, scope : Annotated[constr(strict=True, max_length=64, min_length=1), Field(..., description="The scope of the Fund.")], code : Annotated[constr(strict=True, max_length=64, min_length=1), Field(..., description="The code of the Fund.")], effective_at : Annotated[Optional[StrictStr], Field(description="The effective datetime or cut label at which to list the TimeVariant properties for the Fees. Defaults to the current LUSID              system datetime if not specified.")] = None, as_at : Annotated[Optional[datetime], Field(description="The asAt datetime at which to list the Fees. Defaults to returning the latest version of each Fee if not specified.")] = None, page : Annotated[Optional[constr(strict=True, max_length=500, min_length=1)], Field(description="The pagination token to use to continue listing fees; this              value is returned from the previous call. If a pagination token is provided, the filter, effectiveAt              and asAt fields must not have changed since the original request.")] = None, limit : Annotated[Optional[conint(strict=True, le=5000, ge=1)], Field(description="When paginating, limit the results to this number. Defaults to 100 if not specified.")] = None, filter : Annotated[Optional[constr(strict=True, max_length=16384, min_length=0)], Field(description="Expression to filter the results.              For example, to filter on the treatment, specify \"treatment eq 'Monthly'\". For more information about filtering              results, see https://support.lusid.com/knowledgebase/article/KA-01914.")] = None, sort_by : Annotated[Optional[conlist(StrictStr)], Field(description="A list of field names or properties to sort by, each suffixed by \" ASC\" or \" DESC\"")] = None, property_keys : Annotated[Optional[conlist(StrictStr)], Field(description="A list of property keys from the 'Fee' domain to decorate onto each Fee.              These must take the format {domain}/{scope}/{code}, for example 'Fee/Account/Id'.")] = None, async_req: Optional[bool]=None, **kwargs) -> Union[PagedResourceListOfFee, Awaitable[PagedResourceListOfFee]]:  # noqa: E501
+        """[EXPERIMENTAL] ListFees: List Fees for a specified Fund.  # noqa: E501
+
+        List all the Fees matching a particular criteria.  # noqa: E501
+        This method makes a synchronous HTTP request by default. To make an
+        asynchronous HTTP request, please pass async_req=True
+
+        >>> thread = api.list_fees(scope, code, effective_at, as_at, page, limit, filter, sort_by, property_keys, async_req=True)
+        >>> result = thread.get()
+
+        :param scope: The scope of the Fund. (required)
+        :type scope: str
+        :param code: The code of the Fund. (required)
+        :type code: str
+        :param effective_at: The effective datetime or cut label at which to list the TimeVariant properties for the Fees. Defaults to the current LUSID              system datetime if not specified.
+        :type effective_at: str
+        :param as_at: The asAt datetime at which to list the Fees. Defaults to returning the latest version of each Fee if not specified.
+        :type as_at: datetime
+        :param page: The pagination token to use to continue listing fees; this              value is returned from the previous call. If a pagination token is provided, the filter, effectiveAt              and asAt fields must not have changed since the original request.
+        :type page: str
+        :param limit: When paginating, limit the results to this number. Defaults to 100 if not specified.
+        :type limit: int
+        :param filter: Expression to filter the results.              For example, to filter on the treatment, specify \"treatment eq 'Monthly'\". For more information about filtering              results, see https://support.lusid.com/knowledgebase/article/KA-01914.
+        :type filter: str
+        :param sort_by: A list of field names or properties to sort by, each suffixed by \" ASC\" or \" DESC\"
+        :type sort_by: List[str]
+        :param property_keys: A list of property keys from the 'Fee' domain to decorate onto each Fee.              These must take the format {domain}/{scope}/{code}, for example 'Fee/Account/Id'.
+        :type property_keys: List[str]
+        :param async_req: Whether to execute the request asynchronously.
+        :type async_req: bool, optional
+        :param _request_timeout: timeout setting for this request.
+               If one number provided, it will be total request
+               timeout. It can also be a pair (tuple) of
+               (connection, read) timeouts.
+        :return: Returns the result object.
+                 If the method is called asynchronously,
+                 returns the request thread.
+        :rtype: PagedResourceListOfFee
+        """
+        kwargs['_return_http_data_only'] = True
+        if '_preload_content' in kwargs:
+            message = "Error! Please call the list_fees_with_http_info method with `_preload_content` instead and obtain raw data from ApiResponse.raw_data"  # noqa: E501
+            raise ValueError(message)
+        if async_req is not None:
+            kwargs['async_req'] = async_req
+        return self.list_fees_with_http_info(scope, code, effective_at, as_at, page, limit, filter, sort_by, property_keys, **kwargs)  # noqa: E501
+
+    @validate_arguments
+    def list_fees_with_http_info(self, scope : Annotated[constr(strict=True, max_length=64, min_length=1), Field(..., description="The scope of the Fund.")], code : Annotated[constr(strict=True, max_length=64, min_length=1), Field(..., description="The code of the Fund.")], effective_at : Annotated[Optional[StrictStr], Field(description="The effective datetime or cut label at which to list the TimeVariant properties for the Fees. Defaults to the current LUSID              system datetime if not specified.")] = None, as_at : Annotated[Optional[datetime], Field(description="The asAt datetime at which to list the Fees. Defaults to returning the latest version of each Fee if not specified.")] = None, page : Annotated[Optional[constr(strict=True, max_length=500, min_length=1)], Field(description="The pagination token to use to continue listing fees; this              value is returned from the previous call. If a pagination token is provided, the filter, effectiveAt              and asAt fields must not have changed since the original request.")] = None, limit : Annotated[Optional[conint(strict=True, le=5000, ge=1)], Field(description="When paginating, limit the results to this number. Defaults to 100 if not specified.")] = None, filter : Annotated[Optional[constr(strict=True, max_length=16384, min_length=0)], Field(description="Expression to filter the results.              For example, to filter on the treatment, specify \"treatment eq 'Monthly'\". For more information about filtering              results, see https://support.lusid.com/knowledgebase/article/KA-01914.")] = None, sort_by : Annotated[Optional[conlist(StrictStr)], Field(description="A list of field names or properties to sort by, each suffixed by \" ASC\" or \" DESC\"")] = None, property_keys : Annotated[Optional[conlist(StrictStr)], Field(description="A list of property keys from the 'Fee' domain to decorate onto each Fee.              These must take the format {domain}/{scope}/{code}, for example 'Fee/Account/Id'.")] = None, **kwargs) -> ApiResponse:  # noqa: E501
+        """[EXPERIMENTAL] ListFees: List Fees for a specified Fund.  # noqa: E501
+
+        List all the Fees matching a particular criteria.  # noqa: E501
+        This method makes a synchronous HTTP request by default. To make an
+        asynchronous HTTP request, please pass async_req=True
+
+        >>> thread = api.list_fees_with_http_info(scope, code, effective_at, as_at, page, limit, filter, sort_by, property_keys, async_req=True)
+        >>> result = thread.get()
+
+        :param scope: The scope of the Fund. (required)
+        :type scope: str
+        :param code: The code of the Fund. (required)
+        :type code: str
+        :param effective_at: The effective datetime or cut label at which to list the TimeVariant properties for the Fees. Defaults to the current LUSID              system datetime if not specified.
+        :type effective_at: str
+        :param as_at: The asAt datetime at which to list the Fees. Defaults to returning the latest version of each Fee if not specified.
+        :type as_at: datetime
+        :param page: The pagination token to use to continue listing fees; this              value is returned from the previous call. If a pagination token is provided, the filter, effectiveAt              and asAt fields must not have changed since the original request.
+        :type page: str
+        :param limit: When paginating, limit the results to this number. Defaults to 100 if not specified.
+        :type limit: int
+        :param filter: Expression to filter the results.              For example, to filter on the treatment, specify \"treatment eq 'Monthly'\". For more information about filtering              results, see https://support.lusid.com/knowledgebase/article/KA-01914.
+        :type filter: str
+        :param sort_by: A list of field names or properties to sort by, each suffixed by \" ASC\" or \" DESC\"
+        :type sort_by: List[str]
+        :param property_keys: A list of property keys from the 'Fee' domain to decorate onto each Fee.              These must take the format {domain}/{scope}/{code}, for example 'Fee/Account/Id'.
+        :type property_keys: List[str]
+        :param async_req: Whether to execute the request asynchronously.
+        :type async_req: bool, optional
+        :param _preload_content: if False, the ApiResponse.data will
+                                 be set to none and raw_data will store the
+                                 HTTP response body without reading/decoding.
+                                 Default is True.
+        :type _preload_content: bool, optional
+        :param _return_http_data_only: response data instead of ApiResponse
+                                       object with status code, headers, etc
+        :type _return_http_data_only: bool, optional
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :param _request_auth: set to override the auth_settings for an a single
+                              request; this effectively ignores the authentication
+                              in the spec for a single request.
+        :type _request_auth: dict, optional
+        :type _content_type: string, optional: force content-type for the request
+        :return: Returns the result object.
+                 If the method is called asynchronously,
+                 returns the request thread.
+        :rtype: tuple(PagedResourceListOfFee, status_code(int), headers(HTTPHeaderDict))
+        """
+
+        _params = locals()
+
+        _all_params = [
+            'scope',
+            'code',
+            'effective_at',
+            'as_at',
+            'page',
+            'limit',
+            'filter',
+            'sort_by',
+            'property_keys'
+        ]
+        _all_params.extend(
+            [
+                'async_req',
+                '_return_http_data_only',
+                '_preload_content',
+                '_request_timeout',
+                '_request_auth',
+                '_content_type',
+                '_headers'
+            ]
+        )
+
+        # validate the arguments
+        for _key, _val in _params['kwargs'].items():
+            if _key not in _all_params:
+                raise ApiTypeError(
+                    "Got an unexpected keyword argument '%s'"
+                    " to method list_fees" % _key
+                )
+            _params[_key] = _val
+        del _params['kwargs']
+
+        _collection_formats = {}
+
+        # process the path parameters
+        _path_params = {}
+        if _params['scope']:
+            _path_params['scope'] = _params['scope']
+
+        if _params['code']:
+            _path_params['code'] = _params['code']
+
+
+        # process the query parameters
+        _query_params = []
+        if _params.get('effective_at') is not None:  # noqa: E501
+            _query_params.append(('effectiveAt', _params['effective_at']))
+
+        if _params.get('as_at') is not None:  # noqa: E501
+            if isinstance(_params['as_at'], datetime):
+                _query_params.append(('asAt', _params['as_at'].strftime(self.api_client.configuration.datetime_format)))
+            else:
+                _query_params.append(('asAt', _params['as_at']))
+
+        if _params.get('page') is not None:  # noqa: E501
+            _query_params.append(('page', _params['page']))
+
+        if _params.get('limit') is not None:  # noqa: E501
+            _query_params.append(('limit', _params['limit']))
+
+        if _params.get('filter') is not None:  # noqa: E501
+            _query_params.append(('filter', _params['filter']))
+
+        if _params.get('sort_by') is not None:  # noqa: E501
+            _query_params.append(('sortBy', _params['sort_by']))
+            _collection_formats['sortBy'] = 'multi'
+
+        if _params.get('property_keys') is not None:  # noqa: E501
+            _query_params.append(('propertyKeys', _params['property_keys']))
+            _collection_formats['propertyKeys'] = 'multi'
+
+        # process the header parameters
+        _header_params = dict(_params.get('_headers', {}))
+        # process the form parameters
+        _form_params = []
+        _files = {}
+        # process the body parameter
+        _body_params = None
+        # set the HTTP header `Accept`
+        _header_params['Accept'] = self.api_client.select_header_accept(
+            ['text/plain', 'application/json', 'text/json'])  # noqa: E501
+
+        # authentication setting
+        _auth_settings = ['oauth2']  # noqa: E501
+
+        _response_types_map = {
+            '200': "PagedResourceListOfFee",
+            '400': "LusidValidationProblemDetails",
+        }
+
+        return self.api_client.call_api(
+            '/api/funds/{scope}/{code}/fee', 'GET',
+            _path_params,
+            _query_params,
+            _header_params,
+            body=_body_params,
+            post_params=_form_params,
+            files=_files,
+            response_types_map=_response_types_map,
+            auth_settings=_auth_settings,
+            async_req=_params.get('async_req'),
+            _return_http_data_only=_params.get('_return_http_data_only'),  # noqa: E501
+            _preload_content=_params.get('_preload_content', True),
+            _request_timeout=_params.get('_request_timeout'),
+            collection_formats=_collection_formats,
+            _request_auth=_params.get('_request_auth'))
+
+    @overload
     async def list_funds(self, effective_at : Annotated[Optional[StrictStr], Field(description="The effective datetime or cut label at which to list the TimeVariant properties for the Funds. Defaults to the current LUSID              system datetime if not specified.")] = None, as_at : Annotated[Optional[datetime], Field(description="The asAt datetime at which to list the Funds. Defaults to returning the latest version of each Fund if not specified.")] = None, page : Annotated[Optional[constr(strict=True, max_length=500, min_length=1)], Field(description="The pagination token to use to continue listing Funds; this              value is returned from the previous call. If a pagination token is provided, the filter, effectiveAt              and asAt fields must not have changed since the original request.")] = None, limit : Annotated[Optional[conint(strict=True, le=5000, ge=1)], Field(description="When paginating, limit the results to this number. Defaults to 100 if not specified.")] = None, filter : Annotated[Optional[constr(strict=True, max_length=16384, min_length=0)], Field(description="Expression to filter the results.              For example, to filter on the Fund type, specify \"id.Code eq 'Fund1'\". For more information about filtering              results, see https://support.lusid.com/knowledgebase/article/KA-01914.")] = None, sort_by : Annotated[Optional[conlist(StrictStr)], Field(description="A list of field names or properties to sort by, each suffixed by \" ASC\" or \" DESC\"")] = None, property_keys : Annotated[Optional[conlist(StrictStr)], Field(description="A list of property keys from the 'Fund' domain to decorate onto each Fund.              These must take the format {domain}/{scope}/{code}, for example 'Fund/Manager/Id'.")] = None, **kwargs) -> PagedResourceListOfFund:  # noqa: E501
         ...
 
@@ -1460,6 +2228,188 @@ class FundsApi:
 
         return self.api_client.call_api(
             '/api/funds', 'GET',
+            _path_params,
+            _query_params,
+            _header_params,
+            body=_body_params,
+            post_params=_form_params,
+            files=_files,
+            response_types_map=_response_types_map,
+            auth_settings=_auth_settings,
+            async_req=_params.get('async_req'),
+            _return_http_data_only=_params.get('_return_http_data_only'),  # noqa: E501
+            _preload_content=_params.get('_preload_content', True),
+            _request_timeout=_params.get('_request_timeout'),
+            collection_formats=_collection_formats,
+            _request_auth=_params.get('_request_auth'))
+
+    @overload
+    async def patch_fee(self, scope : Annotated[constr(strict=True, max_length=64, min_length=1), Field(..., description="The scope of the Fund.")], code : Annotated[constr(strict=True, max_length=64, min_length=1), Field(..., description="The code of the Fund. Together with the scope this uniquely identifies the Fund.")], fee_code : Annotated[constr(strict=True, max_length=64, min_length=1), Field(..., description="The code of the Fee.")], operation : Annotated[conlist(Operation), Field(..., description="The json patch document. For more information see: https://datatracker.ietf.org/doc/html/rfc6902.")], **kwargs) -> Fee:  # noqa: E501
+        ...
+
+    @overload
+    def patch_fee(self, scope : Annotated[constr(strict=True, max_length=64, min_length=1), Field(..., description="The scope of the Fund.")], code : Annotated[constr(strict=True, max_length=64, min_length=1), Field(..., description="The code of the Fund. Together with the scope this uniquely identifies the Fund.")], fee_code : Annotated[constr(strict=True, max_length=64, min_length=1), Field(..., description="The code of the Fee.")], operation : Annotated[conlist(Operation), Field(..., description="The json patch document. For more information see: https://datatracker.ietf.org/doc/html/rfc6902.")], async_req: Optional[bool]=True, **kwargs) -> Fee:  # noqa: E501
+        ...
+
+    @validate_arguments
+    def patch_fee(self, scope : Annotated[constr(strict=True, max_length=64, min_length=1), Field(..., description="The scope of the Fund.")], code : Annotated[constr(strict=True, max_length=64, min_length=1), Field(..., description="The code of the Fund. Together with the scope this uniquely identifies the Fund.")], fee_code : Annotated[constr(strict=True, max_length=64, min_length=1), Field(..., description="The code of the Fee.")], operation : Annotated[conlist(Operation), Field(..., description="The json patch document. For more information see: https://datatracker.ietf.org/doc/html/rfc6902.")], async_req: Optional[bool]=None, **kwargs) -> Union[Fee, Awaitable[Fee]]:  # noqa: E501
+        """[EXPERIMENTAL] PatchFee: Patch Fee.  # noqa: E501
+
+        Create or update certain fields for a particular Fee.  The behaviour is defined by the JSON Patch specification.                Currently supported fields are: EndDate.  # noqa: E501
+        This method makes a synchronous HTTP request by default. To make an
+        asynchronous HTTP request, please pass async_req=True
+
+        >>> thread = api.patch_fee(scope, code, fee_code, operation, async_req=True)
+        >>> result = thread.get()
+
+        :param scope: The scope of the Fund. (required)
+        :type scope: str
+        :param code: The code of the Fund. Together with the scope this uniquely identifies the Fund. (required)
+        :type code: str
+        :param fee_code: The code of the Fee. (required)
+        :type fee_code: str
+        :param operation: The json patch document. For more information see: https://datatracker.ietf.org/doc/html/rfc6902. (required)
+        :type operation: List[Operation]
+        :param async_req: Whether to execute the request asynchronously.
+        :type async_req: bool, optional
+        :param _request_timeout: timeout setting for this request.
+               If one number provided, it will be total request
+               timeout. It can also be a pair (tuple) of
+               (connection, read) timeouts.
+        :return: Returns the result object.
+                 If the method is called asynchronously,
+                 returns the request thread.
+        :rtype: Fee
+        """
+        kwargs['_return_http_data_only'] = True
+        if '_preload_content' in kwargs:
+            message = "Error! Please call the patch_fee_with_http_info method with `_preload_content` instead and obtain raw data from ApiResponse.raw_data"  # noqa: E501
+            raise ValueError(message)
+        if async_req is not None:
+            kwargs['async_req'] = async_req
+        return self.patch_fee_with_http_info(scope, code, fee_code, operation, **kwargs)  # noqa: E501
+
+    @validate_arguments
+    def patch_fee_with_http_info(self, scope : Annotated[constr(strict=True, max_length=64, min_length=1), Field(..., description="The scope of the Fund.")], code : Annotated[constr(strict=True, max_length=64, min_length=1), Field(..., description="The code of the Fund. Together with the scope this uniquely identifies the Fund.")], fee_code : Annotated[constr(strict=True, max_length=64, min_length=1), Field(..., description="The code of the Fee.")], operation : Annotated[conlist(Operation), Field(..., description="The json patch document. For more information see: https://datatracker.ietf.org/doc/html/rfc6902.")], **kwargs) -> ApiResponse:  # noqa: E501
+        """[EXPERIMENTAL] PatchFee: Patch Fee.  # noqa: E501
+
+        Create or update certain fields for a particular Fee.  The behaviour is defined by the JSON Patch specification.                Currently supported fields are: EndDate.  # noqa: E501
+        This method makes a synchronous HTTP request by default. To make an
+        asynchronous HTTP request, please pass async_req=True
+
+        >>> thread = api.patch_fee_with_http_info(scope, code, fee_code, operation, async_req=True)
+        >>> result = thread.get()
+
+        :param scope: The scope of the Fund. (required)
+        :type scope: str
+        :param code: The code of the Fund. Together with the scope this uniquely identifies the Fund. (required)
+        :type code: str
+        :param fee_code: The code of the Fee. (required)
+        :type fee_code: str
+        :param operation: The json patch document. For more information see: https://datatracker.ietf.org/doc/html/rfc6902. (required)
+        :type operation: List[Operation]
+        :param async_req: Whether to execute the request asynchronously.
+        :type async_req: bool, optional
+        :param _preload_content: if False, the ApiResponse.data will
+                                 be set to none and raw_data will store the
+                                 HTTP response body without reading/decoding.
+                                 Default is True.
+        :type _preload_content: bool, optional
+        :param _return_http_data_only: response data instead of ApiResponse
+                                       object with status code, headers, etc
+        :type _return_http_data_only: bool, optional
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :param _request_auth: set to override the auth_settings for an a single
+                              request; this effectively ignores the authentication
+                              in the spec for a single request.
+        :type _request_auth: dict, optional
+        :type _content_type: string, optional: force content-type for the request
+        :return: Returns the result object.
+                 If the method is called asynchronously,
+                 returns the request thread.
+        :rtype: tuple(Fee, status_code(int), headers(HTTPHeaderDict))
+        """
+
+        _params = locals()
+
+        _all_params = [
+            'scope',
+            'code',
+            'fee_code',
+            'operation'
+        ]
+        _all_params.extend(
+            [
+                'async_req',
+                '_return_http_data_only',
+                '_preload_content',
+                '_request_timeout',
+                '_request_auth',
+                '_content_type',
+                '_headers'
+            ]
+        )
+
+        # validate the arguments
+        for _key, _val in _params['kwargs'].items():
+            if _key not in _all_params:
+                raise ApiTypeError(
+                    "Got an unexpected keyword argument '%s'"
+                    " to method patch_fee" % _key
+                )
+            _params[_key] = _val
+        del _params['kwargs']
+
+        _collection_formats = {}
+
+        # process the path parameters
+        _path_params = {}
+        if _params['scope']:
+            _path_params['scope'] = _params['scope']
+
+        if _params['code']:
+            _path_params['code'] = _params['code']
+
+        if _params['fee_code']:
+            _path_params['feeCode'] = _params['fee_code']
+
+
+        # process the query parameters
+        _query_params = []
+        # process the header parameters
+        _header_params = dict(_params.get('_headers', {}))
+        # process the form parameters
+        _form_params = []
+        _files = {}
+        # process the body parameter
+        _body_params = None
+        if _params['operation'] is not None:
+            _body_params = _params['operation']
+
+        # set the HTTP header `Accept`
+        _header_params['Accept'] = self.api_client.select_header_accept(
+            ['text/plain', 'application/json', 'text/json'])  # noqa: E501
+
+        # set the HTTP header `Content-Type`
+        _content_types_list = _params.get('_content_type',
+            self.api_client.select_header_content_type(
+                ['application/json-patch+json', 'application/json', 'text/json', 'application/*+json']))
+        if _content_types_list:
+                _header_params['Content-Type'] = _content_types_list
+
+        # authentication setting
+        _auth_settings = ['oauth2']  # noqa: E501
+
+        _response_types_map = {
+            '200': "Fee",
+            '400': "LusidValidationProblemDetails",
+        }
+
+        return self.api_client.call_api(
+            '/api/funds/{scope}/{code}/fee/{feeCode}', 'PATCH',
             _path_params,
             _query_params,
             _header_params,

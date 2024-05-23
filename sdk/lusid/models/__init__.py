@@ -306,7 +306,9 @@ from lusid.models.exercise_event import ExerciseEvent
 from lusid.models.exotic_instrument import ExoticInstrument
 from lusid.models.expanded_group import ExpandedGroup
 from lusid.models.expiry_event import ExpiryEvent
+from lusid.models.fee import Fee
 from lusid.models.fee_accrual import FeeAccrual
+from lusid.models.fee_request import FeeRequest
 from lusid.models.fee_rule import FeeRule
 from lusid.models.fee_rule_upsert_request import FeeRuleUpsertRequest
 from lusid.models.fee_rule_upsert_response import FeeRuleUpsertResponse
@@ -553,6 +555,7 @@ from lusid.models.paged_resource_list_of_data_type_summary import PagedResourceL
 from lusid.models.paged_resource_list_of_dialect_id import PagedResourceListOfDialectId
 from lusid.models.paged_resource_list_of_diary_entry import PagedResourceListOfDiaryEntry
 from lusid.models.paged_resource_list_of_execution import PagedResourceListOfExecution
+from lusid.models.paged_resource_list_of_fee import PagedResourceListOfFee
 from lusid.models.paged_resource_list_of_fee_type import PagedResourceListOfFeeType
 from lusid.models.paged_resource_list_of_fund import PagedResourceListOfFund
 from lusid.models.paged_resource_list_of_general_ledger_profile_response import PagedResourceListOfGeneralLedgerProfileResponse
@@ -1289,7 +1292,9 @@ __all__ = [
     "ExoticInstrument",
     "ExpandedGroup",
     "ExpiryEvent",
+    "Fee",
     "FeeAccrual",
+    "FeeRequest",
     "FeeRule",
     "FeeRuleUpsertRequest",
     "FeeRuleUpsertResponse",
@@ -1536,6 +1541,7 @@ __all__ = [
     "PagedResourceListOfDialectId",
     "PagedResourceListOfDiaryEntry",
     "PagedResourceListOfExecution",
+    "PagedResourceListOfFee",
     "PagedResourceListOfFeeType",
     "PagedResourceListOfFund",
     "PagedResourceListOfGeneralLedgerProfileResponse",
