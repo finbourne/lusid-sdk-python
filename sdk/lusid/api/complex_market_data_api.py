@@ -576,7 +576,7 @@ class ComplexMarketDataApi:
 
     @validate_arguments
     def upsert_complex_market_data(self, scope : Annotated[constr(strict=True, max_length=64, min_length=1), Field(..., description="The scope to use when updating or inserting the complex market data.")], request_body : Annotated[Dict[str, UpsertComplexMarketDataRequest], Field(..., description="The set of complex market data items to update or insert keyed by a unique correlation id.")], async_req: Optional[bool]=None, **kwargs) -> Union[UpsertStructuredDataResponse, Awaitable[UpsertStructuredDataResponse]]:  # noqa: E501
-        """[EARLY ACCESS] UpsertComplexMarketData: Upsert a set of complex market data items. This creates or updates the data in Lusid.  # noqa: E501
+        """UpsertComplexMarketData: Upsert a set of complex market data items. This creates or updates the data in Lusid.  # noqa: E501
 
         Update or insert one or more complex market data items in a single scope. An item will be updated if it already exists  and inserted if it does not.                In the request each complex market data item must be keyed by a unique correlation id. This id is ephemeral and is not stored by LUSID.  It serves only as a way to easily identify each complex market data in the response.                The response will return both the collection of successfully updated or inserted complex market data, as well as those that failed.  For the failures a reason will be provided explaining why the item could not be updated or inserted.                It is important to always check the failed set for any unsuccessful results.  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
@@ -610,7 +610,7 @@ class ComplexMarketDataApi:
 
     @validate_arguments
     def upsert_complex_market_data_with_http_info(self, scope : Annotated[constr(strict=True, max_length=64, min_length=1), Field(..., description="The scope to use when updating or inserting the complex market data.")], request_body : Annotated[Dict[str, UpsertComplexMarketDataRequest], Field(..., description="The set of complex market data items to update or insert keyed by a unique correlation id.")], **kwargs) -> ApiResponse:  # noqa: E501
-        """[EARLY ACCESS] UpsertComplexMarketData: Upsert a set of complex market data items. This creates or updates the data in Lusid.  # noqa: E501
+        """UpsertComplexMarketData: Upsert a set of complex market data items. This creates or updates the data in Lusid.  # noqa: E501
 
         Update or insert one or more complex market data items in a single scope. An item will be updated if it already exists  and inserted if it does not.                In the request each complex market data item must be keyed by a unique correlation id. This id is ephemeral and is not stored by LUSID.  It serves only as a way to easily identify each complex market data in the response.                The response will return both the collection of successfully updated or inserted complex market data, as well as those that failed.  For the failures a reason will be provided explaining why the item could not be updated or inserted.                It is important to always check the failed set for any unsuccessful results.  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an

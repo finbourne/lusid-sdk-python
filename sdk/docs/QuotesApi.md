@@ -6,7 +6,7 @@ Method | HTTP request | Description
 ------------- | ------------- | -------------
 [**delete_quote_access_metadata_rule**](QuotesApi.md#delete_quote_access_metadata_rule) | **DELETE** /api/metadata/quotes/rules/{scope} | [EXPERIMENTAL] DeleteQuoteAccessMetadataRule: Delete a Quote Access Metadata Rule
 [**delete_quotes**](QuotesApi.md#delete_quotes) | **POST** /api/quotes/{scope}/$delete | DeleteQuotes: Delete quotes
-[**get_quotes**](QuotesApi.md#get_quotes) | **POST** /api/quotes/{scope}/$get | [EARLY ACCESS] GetQuotes: Get quotes
+[**get_quotes**](QuotesApi.md#get_quotes) | **POST** /api/quotes/{scope}/$get | GetQuotes: Get quotes
 [**get_quotes_access_metadata_rule**](QuotesApi.md#get_quotes_access_metadata_rule) | **GET** /api/metadata/quotes/rules | [EXPERIMENTAL] GetQuotesAccessMetadataRule: Get a quote access metadata rule
 [**list_quotes**](QuotesApi.md#list_quotes) | **GET** /api/quotes/{scope}/$deprecated | [DEPRECATED] ListQuotes: List quotes
 [**list_quotes_access_metadata_rules**](QuotesApi.md#list_quotes_access_metadata_rules) | **GET** /api/metadata/quotes/rules/{scope} | [EXPERIMENTAL] ListQuotesAccessMetadataRules: List all quote access metadata rules in a scope
@@ -231,7 +231,7 @@ Name | Type | Description  | Notes
 # **get_quotes**
 > GetQuotesResponse get_quotes(scope, effective_at=effective_at, as_at=as_at, max_age=max_age, request_body=request_body)
 
-[EARLY ACCESS] GetQuotes: Get quotes
+GetQuotes: Get quotes
 
 Get one or more quotes from a single scope.                Each quote can be identified by its time invariant quote series id.                For each quote series id LUSID will return the most recent quote with respect to the provided (or default) effective datetime.                 An optional maximum age range window can be specified which defines how far back to look back for a quote from the specified effective datetime.  LUSID will return the most recent quote within this window.                In the request each quote series id must be keyed by a unique correlation id. This id is ephemeral and is not stored by LUSID.  It serves only as a way to easily identify each quote in the response.                The response will return three collections. One, the successfully retrieved quotes. Two, those that had a  valid quote series id but could not be found. Three, those that failed because LUSID could not construct a valid quote series id from the request.    For the quotes that failed or could not be found a reason will be provided explaining why the quote could not be retrieved.                It is important to always check the failed and not found sets for any unsuccessful results.  The maximum number of quotes that this method can get per request is 2,000.
 
@@ -294,7 +294,7 @@ async with api_client_factory:
     request_body = {"DS-VOD-PRICE-MID":{"provider":"DataScope","priceSource":"","instrumentId":"GB00BH4HKS39","instrumentIdType":"Isin","quoteType":"Price","field":"mid"}} # Dict[str, QuoteSeriesId] | The time invariant quote series ids of the quotes to retrieve. These need to be               keyed by a unique correlation id allowing the retrieved quote to be identified in the response. (optional)
 
     try:
-        # [EARLY ACCESS] GetQuotes: Get quotes
+        # GetQuotes: Get quotes
         api_response = await api_instance.get_quotes(scope, effective_at=effective_at, as_at=as_at, max_age=max_age, request_body=request_body)
         print("The response of QuotesApi->get_quotes:\n")
         pprint(api_response)

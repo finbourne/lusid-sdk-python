@@ -5,7 +5,7 @@ All URIs are relative to *https://www.lusid.com/api*
 Method | HTTP request | Description
 ------------- | ------------- | -------------
 [**get_portfolio_by_entity_unique_id**](EntitiesApi.md#get_portfolio_by_entity_unique_id) | **GET** /api/entities/portfolios/{entityUniqueId} | [EXPERIMENTAL] GetPortfolioByEntityUniqueId: Get portfolio by EntityUniqueId
-[**get_portfolio_changes**](EntitiesApi.md#get_portfolio_changes) | **GET** /api/entities/changes/portfolios | [EARLY ACCESS] GetPortfolioChanges: Get the next change to each portfolio in a scope.
+[**get_portfolio_changes**](EntitiesApi.md#get_portfolio_changes) | **GET** /api/entities/changes/portfolios | GetPortfolioChanges: Get the next change to each portfolio in a scope.
 
 
 # **get_portfolio_by_entity_unique_id**
@@ -113,7 +113,7 @@ Name | Type | Description  | Notes
 # **get_portfolio_changes**
 > ResourceListOfChange get_portfolio_changes(scope, effective_at, as_at=as_at)
 
-[EARLY ACCESS] GetPortfolioChanges: Get the next change to each portfolio in a scope.
+GetPortfolioChanges: Get the next change to each portfolio in a scope.
 
 Gets the time of the next (earliest effective at) modification (correction and/or amendment) to each portfolio in a scope relative to a point in bitemporal time.  Includes changes from parent portfolios in different scopes.  Excludes changes from subscriptions (e.g corporate actions).
 
@@ -173,7 +173,7 @@ async with api_client_factory:
     as_at = '2013-10-20T19:20:30+01:00' # datetime | The as-at date of the origin. (optional)
 
     try:
-        # [EARLY ACCESS] GetPortfolioChanges: Get the next change to each portfolio in a scope.
+        # GetPortfolioChanges: Get the next change to each portfolio in a scope.
         api_response = await api_instance.get_portfolio_changes(scope, effective_at, as_at=as_at)
         print("The response of EntitiesApi->get_portfolio_changes:\n")
         pprint(api_response)

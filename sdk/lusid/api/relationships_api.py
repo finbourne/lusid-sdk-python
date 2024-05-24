@@ -57,7 +57,7 @@ class RelationshipsApi:
 
     @validate_arguments
     def create_relationship(self, scope : Annotated[constr(strict=True, max_length=64, min_length=1), Field(..., description="The scope of the relationship")], code : Annotated[constr(strict=True, max_length=64, min_length=1), Field(..., description="The code of the relationship")], create_relationship_request : Annotated[CreateRelationshipRequest, Field(..., description="The details of the relationship to create.")], async_req: Optional[bool]=None, **kwargs) -> Union[CompleteRelationship, Awaitable[CompleteRelationship]]:  # noqa: E501
-        """[EARLY ACCESS] CreateRelationship: Create Relationship  # noqa: E501
+        """CreateRelationship: Create Relationship  # noqa: E501
 
         Create a relationship between two entity objects by their identifiers  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
@@ -93,7 +93,7 @@ class RelationshipsApi:
 
     @validate_arguments
     def create_relationship_with_http_info(self, scope : Annotated[constr(strict=True, max_length=64, min_length=1), Field(..., description="The scope of the relationship")], code : Annotated[constr(strict=True, max_length=64, min_length=1), Field(..., description="The code of the relationship")], create_relationship_request : Annotated[CreateRelationshipRequest, Field(..., description="The details of the relationship to create.")], **kwargs) -> ApiResponse:  # noqa: E501
-        """[EARLY ACCESS] CreateRelationship: Create Relationship  # noqa: E501
+        """CreateRelationship: Create Relationship  # noqa: E501
 
         Create a relationship between two entity objects by their identifiers  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an

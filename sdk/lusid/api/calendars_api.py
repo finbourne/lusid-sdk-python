@@ -234,7 +234,7 @@ class CalendarsApi:
 
     @validate_arguments
     def add_date_to_calendar(self, scope : Annotated[constr(strict=True, max_length=64, min_length=1), Field(..., description="Scope of the calendar")], code : Annotated[constr(strict=True, max_length=64, min_length=1), Field(..., description="Code of the calendar")], create_date_request : Annotated[CreateDateRequest, Field(..., description="Add date to calendar request")], async_req: Optional[bool]=None, **kwargs) -> Union[CalendarDate, Awaitable[CalendarDate]]:  # noqa: E501
-        """[EARLY ACCESS] AddDateToCalendar: Add a date to a calendar  # noqa: E501
+        """AddDateToCalendar: Add a date to a calendar  # noqa: E501
 
         Add an event to the calendar. These Events can be a maximum of 24 hours and must be specified in UTC.  A local date will be calculated by the system and applied to the calendar before processing.  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
@@ -270,7 +270,7 @@ class CalendarsApi:
 
     @validate_arguments
     def add_date_to_calendar_with_http_info(self, scope : Annotated[constr(strict=True, max_length=64, min_length=1), Field(..., description="Scope of the calendar")], code : Annotated[constr(strict=True, max_length=64, min_length=1), Field(..., description="Code of the calendar")], create_date_request : Annotated[CreateDateRequest, Field(..., description="Add date to calendar request")], **kwargs) -> ApiResponse:  # noqa: E501
-        """[EARLY ACCESS] AddDateToCalendar: Add a date to a calendar  # noqa: E501
+        """AddDateToCalendar: Add a date to a calendar  # noqa: E501
 
         Add an event to the calendar. These Events can be a maximum of 24 hours and must be specified in UTC.  A local date will be calculated by the system and applied to the calendar before processing.  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
@@ -1069,7 +1069,7 @@ class CalendarsApi:
 
     @validate_arguments
     def get_calendar(self, scope : Annotated[constr(strict=True, max_length=64, min_length=1), Field(..., description="Scope of the calendar identifier")], code : Annotated[constr(strict=True, max_length=64, min_length=1), Field(..., description="Code of the calendar identifier")], property_keys : Annotated[Optional[conlist(StrictStr)], Field(description="A list of property keys from the \"Calendar\" domain to decorate onto the calendar,               These take the format {domain}/{scope}/{code} e.g. \"Calendar/System/Name\".")] = None, as_at : Annotated[Optional[datetime], Field(description="The AsAt datetime at which to retrieve the calendar")] = None, async_req: Optional[bool]=None, **kwargs) -> Union[Calendar, Awaitable[Calendar]]:  # noqa: E501
-        """[EARLY ACCESS] GetCalendar: Get a calendar in its generic form  # noqa: E501
+        """GetCalendar: Get a calendar in its generic form  # noqa: E501
 
         Retrieve a generic calendar by a specific ID at a point in AsAt time  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
@@ -1107,7 +1107,7 @@ class CalendarsApi:
 
     @validate_arguments
     def get_calendar_with_http_info(self, scope : Annotated[constr(strict=True, max_length=64, min_length=1), Field(..., description="Scope of the calendar identifier")], code : Annotated[constr(strict=True, max_length=64, min_length=1), Field(..., description="Code of the calendar identifier")], property_keys : Annotated[Optional[conlist(StrictStr)], Field(description="A list of property keys from the \"Calendar\" domain to decorate onto the calendar,               These take the format {domain}/{scope}/{code} e.g. \"Calendar/System/Name\".")] = None, as_at : Annotated[Optional[datetime], Field(description="The AsAt datetime at which to retrieve the calendar")] = None, **kwargs) -> ApiResponse:  # noqa: E501
-        """[EARLY ACCESS] GetCalendar: Get a calendar in its generic form  # noqa: E501
+        """GetCalendar: Get a calendar in its generic form  # noqa: E501
 
         Retrieve a generic calendar by a specific ID at a point in AsAt time  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
@@ -1811,7 +1811,7 @@ class CalendarsApi:
 
     @validate_arguments
     def list_calendars_in_scope(self, scope : Annotated[constr(strict=True, max_length=64, min_length=1), Field(..., description="Scope of the calendars")], as_at : Annotated[Optional[datetime], Field(description="The AsAt datetime at which to retrieve the calendars")] = None, page : Annotated[Optional[constr(strict=True, max_length=500, min_length=1)], Field(description="The pagination token to use to continue listing calendars from a previous call to list calendars.              This value is returned from the previous call. If a pagination token is provided the sortBy, filter, and asAt fields              must not have changed since the original request.")] = None, limit : Annotated[Optional[conint(strict=True, le=5000, ge=1)], Field(description="When paginating, limit the number of returned results to this many.")] = None, property_keys : Annotated[Optional[conlist(StrictStr)], Field(description="A list of property keys from the \"Calendar\" domain to decorate onto the calendar,               These take the format {domain}/{scope}/{code} e.g. \"Calendar/System/Name\".")] = None, filter : Annotated[Optional[constr(strict=True, max_length=16384, min_length=0)], Field(description="Expression to filter the result set. Read more about filtering results from LUSID here https://support.lusid.com/filtering-results-from-lusid.")] = None, async_req: Optional[bool]=None, **kwargs) -> Union[PagedResourceListOfCalendar, Awaitable[PagedResourceListOfCalendar]]:  # noqa: E501
-        """[EARLY ACCESS] ListCalendarsInScope: List all calenders in a specified scope  # noqa: E501
+        """ListCalendarsInScope: List all calenders in a specified scope  # noqa: E501
 
         List calendars in a Scope at a point in AsAt time.  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
@@ -1853,7 +1853,7 @@ class CalendarsApi:
 
     @validate_arguments
     def list_calendars_in_scope_with_http_info(self, scope : Annotated[constr(strict=True, max_length=64, min_length=1), Field(..., description="Scope of the calendars")], as_at : Annotated[Optional[datetime], Field(description="The AsAt datetime at which to retrieve the calendars")] = None, page : Annotated[Optional[constr(strict=True, max_length=500, min_length=1)], Field(description="The pagination token to use to continue listing calendars from a previous call to list calendars.              This value is returned from the previous call. If a pagination token is provided the sortBy, filter, and asAt fields              must not have changed since the original request.")] = None, limit : Annotated[Optional[conint(strict=True, le=5000, ge=1)], Field(description="When paginating, limit the number of returned results to this many.")] = None, property_keys : Annotated[Optional[conlist(StrictStr)], Field(description="A list of property keys from the \"Calendar\" domain to decorate onto the calendar,               These take the format {domain}/{scope}/{code} e.g. \"Calendar/System/Name\".")] = None, filter : Annotated[Optional[constr(strict=True, max_length=16384, min_length=0)], Field(description="Expression to filter the result set. Read more about filtering results from LUSID here https://support.lusid.com/filtering-results-from-lusid.")] = None, **kwargs) -> ApiResponse:  # noqa: E501
-        """[EARLY ACCESS] ListCalendarsInScope: List all calenders in a specified scope  # noqa: E501
+        """ListCalendarsInScope: List all calenders in a specified scope  # noqa: E501
 
         List calendars in a Scope at a point in AsAt time.  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an

@@ -252,7 +252,7 @@ class InstrumentEventsApi:
 
     @validate_arguments
     def query_bucketed_cash_flows(self, query_bucketed_cash_flows_request : Annotated[Optional[QueryBucketedCashFlowsRequest], Field(description="The Query Information.")] = None, async_req: Optional[bool]=None, **kwargs) -> Union[BucketedCashFlowResponse, Awaitable[BucketedCashFlowResponse]]:  # noqa: E501
-        """[EXPERIMENTAL] QueryBucketedCashFlows: Returns bucketed cashflows based on the holdings of the portfolios and date range specified in the query.  # noqa: E501
+        """QueryBucketedCashFlows: Returns bucketed cashflows based on the holdings of the portfolios and date range specified in the query.  # noqa: E501
 
         Returns bucketed cashflows based on the holdings of the portfolios and date range specified in the query.  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
@@ -284,7 +284,7 @@ class InstrumentEventsApi:
 
     @validate_arguments
     def query_bucketed_cash_flows_with_http_info(self, query_bucketed_cash_flows_request : Annotated[Optional[QueryBucketedCashFlowsRequest], Field(description="The Query Information.")] = None, **kwargs) -> ApiResponse:  # noqa: E501
-        """[EXPERIMENTAL] QueryBucketedCashFlows: Returns bucketed cashflows based on the holdings of the portfolios and date range specified in the query.  # noqa: E501
+        """QueryBucketedCashFlows: Returns bucketed cashflows based on the holdings of the portfolios and date range specified in the query.  # noqa: E501
 
         Returns bucketed cashflows based on the holdings of the portfolios and date range specified in the query.  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an

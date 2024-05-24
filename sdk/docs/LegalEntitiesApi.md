@@ -4,30 +4,30 @@ All URIs are relative to *https://www.lusid.com/api*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
-[**delete_legal_entity**](LegalEntitiesApi.md#delete_legal_entity) | **DELETE** /api/legalentities/{idTypeScope}/{idTypeCode}/{code} | [EARLY ACCESS] DeleteLegalEntity: Delete Legal Entity
+[**delete_legal_entity**](LegalEntitiesApi.md#delete_legal_entity) | **DELETE** /api/legalentities/{idTypeScope}/{idTypeCode}/{code} | DeleteLegalEntity: Delete Legal Entity
 [**delete_legal_entity_access_metadata**](LegalEntitiesApi.md#delete_legal_entity_access_metadata) | **DELETE** /api/legalentities/{idTypeScope}/{idTypeCode}/{code}/metadata/{metadataKey} | [EARLY ACCESS] DeleteLegalEntityAccessMetadata: Delete a Legal Entity Access Metadata entry
 [**delete_legal_entity_identifiers**](LegalEntitiesApi.md#delete_legal_entity_identifiers) | **DELETE** /api/legalentities/{idTypeScope}/{idTypeCode}/{code}/identifiers | [EARLY ACCESS] DeleteLegalEntityIdentifiers: Delete Legal Entity Identifiers
 [**delete_legal_entity_properties**](LegalEntitiesApi.md#delete_legal_entity_properties) | **DELETE** /api/legalentities/{idTypeScope}/{idTypeCode}/{code}/properties | [EARLY ACCESS] DeleteLegalEntityProperties: Delete Legal Entity Properties
-[**get_all_legal_entity_access_metadata**](LegalEntitiesApi.md#get_all_legal_entity_access_metadata) | **GET** /api/legalentities/{idTypeScope}/{idTypeCode}/{code}/metadata | [EARLY ACCESS] GetAllLegalEntityAccessMetadata: Get Access Metadata rules for a Legal Entity
-[**get_legal_entity**](LegalEntitiesApi.md#get_legal_entity) | **GET** /api/legalentities/{idTypeScope}/{idTypeCode}/{code} | [EARLY ACCESS] GetLegalEntity: Get Legal Entity
+[**get_all_legal_entity_access_metadata**](LegalEntitiesApi.md#get_all_legal_entity_access_metadata) | **GET** /api/legalentities/{idTypeScope}/{idTypeCode}/{code}/metadata | GetAllLegalEntityAccessMetadata: Get Access Metadata rules for a Legal Entity
+[**get_legal_entity**](LegalEntitiesApi.md#get_legal_entity) | **GET** /api/legalentities/{idTypeScope}/{idTypeCode}/{code} | GetLegalEntity: Get Legal Entity
 [**get_legal_entity_access_metadata_by_key**](LegalEntitiesApi.md#get_legal_entity_access_metadata_by_key) | **GET** /api/legalentities/{idTypeScope}/{idTypeCode}/{code}/metadata/{metadataKey} | [EARLY ACCESS] GetLegalEntityAccessMetadataByKey: Get an entry identified by a metadataKey in the Access Metadata of a Legal Entity
-[**get_legal_entity_property_time_series**](LegalEntitiesApi.md#get_legal_entity_property_time_series) | **GET** /api/legalentities/{idTypeScope}/{idTypeCode}/{code}/properties/time-series | [EARLY ACCESS] GetLegalEntityPropertyTimeSeries: Get Legal Entity Property Time Series
-[**get_legal_entity_relations**](LegalEntitiesApi.md#get_legal_entity_relations) | **GET** /api/legalentities/{idTypeScope}/{idTypeCode}/{code}/relations | [EXPERIMENTAL] GetLegalEntityRelations: Get Relations for Legal Entity
-[**get_legal_entity_relationships**](LegalEntitiesApi.md#get_legal_entity_relationships) | **GET** /api/legalentities/{idTypeScope}/{idTypeCode}/{code}/relationships | [EARLY ACCESS] GetLegalEntityRelationships: Get Relationships for Legal Entity
-[**list_all_legal_entities**](LegalEntitiesApi.md#list_all_legal_entities) | **GET** /api/legalentities | [EARLY ACCESS] ListAllLegalEntities: List Legal Entities
-[**list_legal_entities**](LegalEntitiesApi.md#list_legal_entities) | **GET** /api/legalentities/{idTypeScope}/{idTypeCode} | [EARLY ACCESS] ListLegalEntities: List Legal Entities
+[**get_legal_entity_property_time_series**](LegalEntitiesApi.md#get_legal_entity_property_time_series) | **GET** /api/legalentities/{idTypeScope}/{idTypeCode}/{code}/properties/time-series | GetLegalEntityPropertyTimeSeries: Get Legal Entity Property Time Series
+[**get_legal_entity_relations**](LegalEntitiesApi.md#get_legal_entity_relations) | **GET** /api/legalentities/{idTypeScope}/{idTypeCode}/{code}/relations | GetLegalEntityRelations: Get Relations for Legal Entity
+[**get_legal_entity_relationships**](LegalEntitiesApi.md#get_legal_entity_relationships) | **GET** /api/legalentities/{idTypeScope}/{idTypeCode}/{code}/relationships | GetLegalEntityRelationships: Get Relationships for Legal Entity
+[**list_all_legal_entities**](LegalEntitiesApi.md#list_all_legal_entities) | **GET** /api/legalentities | ListAllLegalEntities: List Legal Entities
+[**list_legal_entities**](LegalEntitiesApi.md#list_legal_entities) | **GET** /api/legalentities/{idTypeScope}/{idTypeCode} | ListLegalEntities: List Legal Entities
 [**patch_legal_entity_access_metadata**](LegalEntitiesApi.md#patch_legal_entity_access_metadata) | **PATCH** /api/legalentities/{idTypeScope}/{idTypeCode}/{code}/metadata | [EARLY ACCESS] PatchLegalEntityAccessMetadata: Patch Access Metadata rules for a Legal Entity.
 [**set_legal_entity_identifiers**](LegalEntitiesApi.md#set_legal_entity_identifiers) | **POST** /api/legalentities/{idTypeScope}/{idTypeCode}/{code}/identifiers | [EARLY ACCESS] SetLegalEntityIdentifiers: Set Legal Entity Identifiers
-[**set_legal_entity_properties**](LegalEntitiesApi.md#set_legal_entity_properties) | **POST** /api/legalentities/{idTypeScope}/{idTypeCode}/{code}/properties | [EARLY ACCESS] SetLegalEntityProperties: Set Legal Entity Properties
+[**set_legal_entity_properties**](LegalEntitiesApi.md#set_legal_entity_properties) | **POST** /api/legalentities/{idTypeScope}/{idTypeCode}/{code}/properties | SetLegalEntityProperties: Set Legal Entity Properties
 [**upsert_legal_entities**](LegalEntitiesApi.md#upsert_legal_entities) | **POST** /api/legalentities/$batchUpsert | [EARLY ACCESS] UpsertLegalEntities: Pluralised upsert of Legal Entities
-[**upsert_legal_entity**](LegalEntitiesApi.md#upsert_legal_entity) | **POST** /api/legalentities | [EARLY ACCESS] UpsertLegalEntity: Upsert Legal Entity
+[**upsert_legal_entity**](LegalEntitiesApi.md#upsert_legal_entity) | **POST** /api/legalentities | UpsertLegalEntity: Upsert Legal Entity
 [**upsert_legal_entity_access_metadata**](LegalEntitiesApi.md#upsert_legal_entity_access_metadata) | **PUT** /api/legalentities/{idTypeScope}/{idTypeCode}/{code}/metadata/{metadataKey} | [EARLY ACCESS] UpsertLegalEntityAccessMetadata: Upsert a Legal Entity Access Metadata entry associated with a specific metadataKey. This creates or updates the data in LUSID.
 
 
 # **delete_legal_entity**
 > DeletedEntityResponse delete_legal_entity(id_type_scope, id_type_code, code)
 
-[EARLY ACCESS] DeleteLegalEntity: Delete Legal Entity
+DeleteLegalEntity: Delete Legal Entity
 
 Delete a legal entity. Deletion will be valid from the legal entity's creation datetime.  This means that the legal entity will no longer exist at any effective datetime from the asAt datetime of deletion.
 
@@ -87,7 +87,7 @@ async with api_client_factory:
     code = 'code_example' # str | Code of the legal entity under specified identifier type's scope and code. This together with defined              identifier type uniquely identifies the legal entity to delete.
 
     try:
-        # [EARLY ACCESS] DeleteLegalEntity: Delete Legal Entity
+        # DeleteLegalEntity: Delete Legal Entity
         api_response = await api_instance.delete_legal_entity(id_type_scope, id_type_code, code)
         print("The response of LegalEntitiesApi->delete_legal_entity:\n")
         pprint(api_response)
@@ -449,7 +449,7 @@ Name | Type | Description  | Notes
 # **get_all_legal_entity_access_metadata**
 > Dict[str, List[AccessMetadataValue]] get_all_legal_entity_access_metadata(id_type_scope, id_type_code, code, effective_at=effective_at, as_at=as_at)
 
-[EARLY ACCESS] GetAllLegalEntityAccessMetadata: Get Access Metadata rules for a Legal Entity
+GetAllLegalEntityAccessMetadata: Get Access Metadata rules for a Legal Entity
 
 Pass the Scope and Code of the Legal Entity identifier along with the Legal Entity code parameter to retrieve the associated Access Metadata
 
@@ -511,7 +511,7 @@ async with api_client_factory:
     as_at = '2013-10-20T19:20:30+01:00' # datetime | The asAt datetime at which to retrieve the Access Metadata (optional)
 
     try:
-        # [EARLY ACCESS] GetAllLegalEntityAccessMetadata: Get Access Metadata rules for a Legal Entity
+        # GetAllLegalEntityAccessMetadata: Get Access Metadata rules for a Legal Entity
         api_response = await api_instance.get_all_legal_entity_access_metadata(id_type_scope, id_type_code, code, effective_at=effective_at, as_at=as_at)
         print("The response of LegalEntitiesApi->get_all_legal_entity_access_metadata:\n")
         pprint(api_response)
@@ -555,7 +555,7 @@ Name | Type | Description  | Notes
 # **get_legal_entity**
 > LegalEntity get_legal_entity(id_type_scope, id_type_code, code, property_keys=property_keys, effective_at=effective_at, as_at=as_at, relationship_definition_ids=relationship_definition_ids)
 
-[EARLY ACCESS] GetLegalEntity: Get Legal Entity
+GetLegalEntity: Get Legal Entity
 
 Retrieve the definition of a legal entity.
 
@@ -619,7 +619,7 @@ async with api_client_factory:
     relationship_definition_ids = ['relationship_definition_ids_example'] # List[str] | A list of relationship definitions that are used to decorate related entities              onto the legal entity in the response. These must take the form {relationshipDefinitionScope}/{relationshipDefinitionCode}. (optional)
 
     try:
-        # [EARLY ACCESS] GetLegalEntity: Get Legal Entity
+        # GetLegalEntity: Get Legal Entity
         api_response = await api_instance.get_legal_entity(id_type_scope, id_type_code, code, property_keys=property_keys, effective_at=effective_at, as_at=as_at, relationship_definition_ids=relationship_definition_ids)
         print("The response of LegalEntitiesApi->get_legal_entity:\n")
         pprint(api_response)
@@ -773,7 +773,7 @@ Name | Type | Description  | Notes
 # **get_legal_entity_property_time_series**
 > ResourceListOfPropertyInterval get_legal_entity_property_time_series(id_type_scope, id_type_code, code, property_key, as_at=as_at, filter=filter, page=page, limit=limit)
 
-[EARLY ACCESS] GetLegalEntityPropertyTimeSeries: Get Legal Entity Property Time Series
+GetLegalEntityPropertyTimeSeries: Get Legal Entity Property Time Series
 
 List the complete time series of a legal entity property.
 
@@ -838,7 +838,7 @@ async with api_client_factory:
     limit = 56 # int | When paginating, limit the number of returned results to this many. (optional)
 
     try:
-        # [EARLY ACCESS] GetLegalEntityPropertyTimeSeries: Get Legal Entity Property Time Series
+        # GetLegalEntityPropertyTimeSeries: Get Legal Entity Property Time Series
         api_response = await api_instance.get_legal_entity_property_time_series(id_type_scope, id_type_code, code, property_key, as_at=as_at, filter=filter, page=page, limit=limit)
         print("The response of LegalEntitiesApi->get_legal_entity_property_time_series:\n")
         pprint(api_response)
@@ -885,7 +885,7 @@ Name | Type | Description  | Notes
 # **get_legal_entity_relations**
 > ResourceListOfRelation get_legal_entity_relations(id_type_scope, id_type_code, code, effective_at=effective_at, as_at=as_at, filter=filter, identifier_types=identifier_types)
 
-[EXPERIMENTAL] GetLegalEntityRelations: Get Relations for Legal Entity
+GetLegalEntityRelations: Get Relations for Legal Entity
 
 Get relations for the specified Legal Entity
 
@@ -949,7 +949,7 @@ async with api_client_factory:
     identifier_types = ['identifier_types_example'] # List[str] | Identifiers types (as property keys) used for referencing Persons or Legal Entities. These take the format              {domain}/{scope}/{code} e.g. \"Person/CompanyDetails/Role\". They must be from the \"Person\" or \"LegalEntity\" domain.              Only identifier types stated will be used to look up relevant entities in relations. If not applicable, provide an empty array. (optional)
 
     try:
-        # [EXPERIMENTAL] GetLegalEntityRelations: Get Relations for Legal Entity
+        # GetLegalEntityRelations: Get Relations for Legal Entity
         api_response = await api_instance.get_legal_entity_relations(id_type_scope, id_type_code, code, effective_at=effective_at, as_at=as_at, filter=filter, identifier_types=identifier_types)
         print("The response of LegalEntitiesApi->get_legal_entity_relations:\n")
         pprint(api_response)
@@ -995,7 +995,7 @@ Name | Type | Description  | Notes
 # **get_legal_entity_relationships**
 > ResourceListOfRelationship get_legal_entity_relationships(id_type_scope, id_type_code, code, effective_at=effective_at, as_at=as_at, filter=filter, identifier_types=identifier_types)
 
-[EARLY ACCESS] GetLegalEntityRelationships: Get Relationships for Legal Entity
+GetLegalEntityRelationships: Get Relationships for Legal Entity
 
 Get Relationships for the specified Legal Entity
 
@@ -1059,7 +1059,7 @@ async with api_client_factory:
     identifier_types = ['identifier_types_example'] # List[str] | Identifier types (as property keys) used for referencing Persons or Legal Entities.              These can be specified from the 'Person' or 'LegalEntity' domains and have the format {domain}/{scope}/{code}, for example              'Person/CompanyDetails/Role'. An Empty array may be used to return all related Entities. (optional)
 
     try:
-        # [EARLY ACCESS] GetLegalEntityRelationships: Get Relationships for Legal Entity
+        # GetLegalEntityRelationships: Get Relationships for Legal Entity
         api_response = await api_instance.get_legal_entity_relationships(id_type_scope, id_type_code, code, effective_at=effective_at, as_at=as_at, filter=filter, identifier_types=identifier_types)
         print("The response of LegalEntitiesApi->get_legal_entity_relationships:\n")
         pprint(api_response)
@@ -1105,7 +1105,7 @@ Name | Type | Description  | Notes
 # **list_all_legal_entities**
 > ResourceListOfLegalEntity list_all_legal_entities(effective_at=effective_at, as_at=as_at, page=page, limit=limit, filter=filter, sort_by=sort_by, property_keys=property_keys, relationship_definition_ids=relationship_definition_ids)
 
-[EARLY ACCESS] ListAllLegalEntities: List Legal Entities
+ListAllLegalEntities: List Legal Entities
 
 List all legal entities which the user is entitled to see.
 
@@ -1170,7 +1170,7 @@ async with api_client_factory:
     relationship_definition_ids = ['relationship_definition_ids_example'] # List[str] | A list of relationship definitions that are used to decorate related entities              onto each portfolio in the response. These must take the form {relationshipDefinitionScope}/{relationshipDefinitionCode}. (optional)
 
     try:
-        # [EARLY ACCESS] ListAllLegalEntities: List Legal Entities
+        # ListAllLegalEntities: List Legal Entities
         api_response = await api_instance.list_all_legal_entities(effective_at=effective_at, as_at=as_at, page=page, limit=limit, filter=filter, sort_by=sort_by, property_keys=property_keys, relationship_definition_ids=relationship_definition_ids)
         print("The response of LegalEntitiesApi->list_all_legal_entities:\n")
         pprint(api_response)
@@ -1217,7 +1217,7 @@ Name | Type | Description  | Notes
 # **list_legal_entities**
 > PagedResourceListOfLegalEntity list_legal_entities(id_type_scope, id_type_code, effective_at=effective_at, as_at=as_at, page=page, limit=limit, filter=filter, sort_by=sort_by, property_keys=property_keys, relationship_definition_ids=relationship_definition_ids)
 
-[EARLY ACCESS] ListLegalEntities: List Legal Entities
+ListLegalEntities: List Legal Entities
 
 List legal entities which has identifier of specific identifier type's scope and code, and satisfies filter criteria.
 
@@ -1284,7 +1284,7 @@ async with api_client_factory:
     relationship_definition_ids = ['relationship_definition_ids_example'] # List[str] | A list of relationship definitions that are used to decorate related entities              onto each portfolio in the response. These must take the form {relationshipDefinitionScope}/{relationshipDefinitionCode}. (optional)
 
     try:
-        # [EARLY ACCESS] ListLegalEntities: List Legal Entities
+        # ListLegalEntities: List Legal Entities
         api_response = await api_instance.list_legal_entities(id_type_scope, id_type_code, effective_at=effective_at, as_at=as_at, page=page, limit=limit, filter=filter, sort_by=sort_by, property_keys=property_keys, relationship_definition_ids=relationship_definition_ids)
         print("The response of LegalEntitiesApi->list_legal_entities:\n")
         pprint(api_response)
@@ -1547,7 +1547,7 @@ Name | Type | Description  | Notes
 # **set_legal_entity_properties**
 > LegalEntity set_legal_entity_properties(id_type_scope, id_type_code, code, set_legal_entity_properties_request)
 
-[EARLY ACCESS] SetLegalEntityProperties: Set Legal Entity Properties
+SetLegalEntityProperties: Set Legal Entity Properties
 
 Set properties of the legal entity.
 
@@ -1609,7 +1609,7 @@ async with api_client_factory:
     set_legal_entity_properties_request = {"properties":{"LegalEntity/Details/Name":{"key":"LegalEntity/Details/Name","value":{"labelValue":"John Smith"},"effectiveFrom":"2016-07-01T00:00:00.0000000+00:00"},"LegalEntity/Details/Country":{"key":"LegalEntity/Details/Country","value":{"labelValue":"United Kingdom"},"effectiveFrom":"2016-07-01T00:00:00.0000000+00:00"}}} # SetLegalEntityPropertiesRequest | Request containing properties to set for the legal entity. Properties not specified in request will not be changed.
 
     try:
-        # [EARLY ACCESS] SetLegalEntityProperties: Set Legal Entity Properties
+        # SetLegalEntityProperties: Set Legal Entity Properties
         api_response = await api_instance.set_legal_entity_properties(id_type_scope, id_type_code, code, set_legal_entity_properties_request)
         print("The response of LegalEntitiesApi->set_legal_entity_properties:\n")
         pprint(api_response)
@@ -1753,7 +1753,7 @@ Name | Type | Description  | Notes
 # **upsert_legal_entity**
 > LegalEntity upsert_legal_entity(upsert_legal_entity_request)
 
-[EARLY ACCESS] UpsertLegalEntity: Upsert Legal Entity
+UpsertLegalEntity: Upsert Legal Entity
 
 Create or update a legal entity
 
@@ -1812,7 +1812,7 @@ async with api_client_factory:
     upsert_legal_entity_request = {"identifiers":{"LegalEntity/ExternalIdentifier/LEI":{"key":"LegalEntity/ExternalIdentifier/LEI","value":{"labelValue":"LEI_12345678"}},"LegalEntity/InternalIdentifier/InternalLeiId":{"key":"LegalEntity/InternalIdentifier/InternalLeiId","value":{"labelValue":"Internal_XHSP2038"}}},"properties":{"LegalEntity/Details/Name":{"key":"LegalEntity/Details/Name","value":{"labelValue":"Legal Entity Inc."}},"LegalEntity/Details/Country":{"key":"LegalEntity/Details/Country","value":{"labelValue":"United Kingdom"},"effectiveFrom":"2016-01-01T00:00:00.0000000+00:00"},"LegalEntity/Status/Active":{"key":"LegalEntity/Status/Active","value":{"labelValue":"Active"},"effectiveFrom":"2016-07-01T00:00:00.0000000+00:00"}},"displayName":"LegalEntity1DisplayName","description":"LegalEntity1Description","counterpartyRiskInformation":{"countryOfRisk":"UnitedKingdom","creditRatings":[{"ratingSource":"StandardAndPoors","rating":"AA+"}],"industryClassifiers":[{"classificationSystemName":"GICS2018","classificationCode":"10101010"}]}} # UpsertLegalEntityRequest | Request to create or update a legal entity.
 
     try:
-        # [EARLY ACCESS] UpsertLegalEntity: Upsert Legal Entity
+        # UpsertLegalEntity: Upsert Legal Entity
         api_response = await api_instance.upsert_legal_entity(upsert_legal_entity_request)
         print("The response of LegalEntitiesApi->upsert_legal_entity:\n")
         pprint(api_response)

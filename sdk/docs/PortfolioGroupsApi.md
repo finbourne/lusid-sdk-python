@@ -25,11 +25,11 @@ Method | HTTP request | Description
 [**get_portfolio_group_relations**](PortfolioGroupsApi.md#get_portfolio_group_relations) | **GET** /api/portfoliogroups/{scope}/{code}/relations | [EXPERIMENTAL] GetPortfolioGroupRelations: Get Relations for Portfolio Group
 [**get_portfolio_group_relationships**](PortfolioGroupsApi.md#get_portfolio_group_relationships) | **GET** /api/portfoliogroups/{scope}/{code}/relationships | [EARLY ACCESS] GetPortfolioGroupRelationships: Get Relationships for Portfolio Group
 [**get_transactions_for_portfolio_group**](PortfolioGroupsApi.md#get_transactions_for_portfolio_group) | **GET** /api/portfoliogroups/{scope}/{code}/transactions | GetTransactionsForPortfolioGroup: Get transactions for transaction portfolios in a portfolio group
-[**list_portfolio_groups**](PortfolioGroupsApi.md#list_portfolio_groups) | **GET** /api/portfoliogroups/{scope} | [EARLY ACCESS] ListPortfolioGroups: List portfolio groups
+[**list_portfolio_groups**](PortfolioGroupsApi.md#list_portfolio_groups) | **GET** /api/portfoliogroups/{scope} | ListPortfolioGroups: List portfolio groups
 [**patch_portfolio_group_access_metadata**](PortfolioGroupsApi.md#patch_portfolio_group_access_metadata) | **PATCH** /api/portfoliogroups/{scope}/{code}/metadata | [EARLY ACCESS] PatchPortfolioGroupAccessMetadata: Patch Access Metadata rules for a Portfolio Group.
 [**update_portfolio_group**](PortfolioGroupsApi.md#update_portfolio_group) | **PUT** /api/portfoliogroups/{scope}/{code} | [EARLY ACCESS] UpdatePortfolioGroup: Update portfolio group
 [**upsert_group_properties**](PortfolioGroupsApi.md#upsert_group_properties) | **POST** /api/portfoliogroups/{scope}/{code}/properties/$upsert | [EARLY ACCESS] UpsertGroupProperties: Upsert group properties
-[**upsert_portfolio_group_access_metadata**](PortfolioGroupsApi.md#upsert_portfolio_group_access_metadata) | **PUT** /api/portfoliogroups/{scope}/{code}/metadata/{metadataKey} | [EARLY ACCESS] UpsertPortfolioGroupAccessMetadata: Upsert a Portfolio Group Access Metadata entry associated with a specific metadataKey. This creates or updates the data in LUSID.
+[**upsert_portfolio_group_access_metadata**](PortfolioGroupsApi.md#upsert_portfolio_group_access_metadata) | **PUT** /api/portfoliogroups/{scope}/{code}/metadata/{metadataKey} | UpsertPortfolioGroupAccessMetadata: Upsert a Portfolio Group Access Metadata entry associated with a specific metadataKey. This creates or updates the data in LUSID.
 
 
 # **add_portfolio_to_group**
@@ -2287,7 +2287,7 @@ Name | Type | Description  | Notes
 # **list_portfolio_groups**
 > PagedResourceListOfPortfolioGroup list_portfolio_groups(scope, effective_at=effective_at, as_at=as_at, page=page, limit=limit, filter=filter, sort_by=sort_by, related_entity_property_keys=related_entity_property_keys, relationship_definition_ids=relationship_definition_ids)
 
-[EARLY ACCESS] ListPortfolioGroups: List portfolio groups
+ListPortfolioGroups: List portfolio groups
 
 List all the portfolio groups in a single scope.
 
@@ -2353,7 +2353,7 @@ async with api_client_factory:
     relationship_definition_ids = ['relationship_definition_ids_example'] # List[str] | A list of relationship definitions that are used to decorate related entities              onto the portfolio groups in the response. These must take the form {relationshipDefinitionScope}/{relationshipDefinitionCode}. (optional)
 
     try:
-        # [EARLY ACCESS] ListPortfolioGroups: List portfolio groups
+        # ListPortfolioGroups: List portfolio groups
         api_response = await api_instance.list_portfolio_groups(scope, effective_at=effective_at, as_at=as_at, page=page, limit=limit, filter=filter, sort_by=sort_by, related_entity_property_keys=related_entity_property_keys, relationship_definition_ids=relationship_definition_ids)
         print("The response of PortfolioGroupsApi->list_portfolio_groups:\n")
         pprint(api_response)
@@ -2716,7 +2716,7 @@ Name | Type | Description  | Notes
 # **upsert_portfolio_group_access_metadata**
 > ResourceListOfAccessMetadataValueOf upsert_portfolio_group_access_metadata(scope, code, metadata_key, upsert_portfolio_group_access_metadata_request, effective_at=effective_at, effective_until=effective_until)
 
-[EARLY ACCESS] UpsertPortfolioGroupAccessMetadata: Upsert a Portfolio Group Access Metadata entry associated with a specific metadataKey. This creates or updates the data in LUSID.
+UpsertPortfolioGroupAccessMetadata: Upsert a Portfolio Group Access Metadata entry associated with a specific metadataKey. This creates or updates the data in LUSID.
 
 Update or insert one Portfolio Group Access Metadata Entry in a single scope. An item will be updated if it already exists  and inserted if it does not.                The response will return the successfully updated or inserted Portfolio Group Access Metadata rule or failure message if unsuccessful.                It is important to always check to verify success (or failure).                Multiple rules for a metadataKey can exist with different effective at dates, when resources are accessed the rule that is active for the current time will be fetched.
 
@@ -2780,7 +2780,7 @@ async with api_client_factory:
     effective_until = '2013-10-20T19:20:30+01:00' # datetime | The effective date until which the Access Metadata is valid. If not supplied this will be valid indefinitely, or until the next 'effectiveAt' date of the Access Metadata (optional)
 
     try:
-        # [EARLY ACCESS] UpsertPortfolioGroupAccessMetadata: Upsert a Portfolio Group Access Metadata entry associated with a specific metadataKey. This creates or updates the data in LUSID.
+        # UpsertPortfolioGroupAccessMetadata: Upsert a Portfolio Group Access Metadata entry associated with a specific metadataKey. This creates or updates the data in LUSID.
         api_response = await api_instance.upsert_portfolio_group_access_metadata(scope, code, metadata_key, upsert_portfolio_group_access_metadata_request, effective_at=effective_at, effective_until=effective_until)
         print("The response of PortfolioGroupsApi->upsert_portfolio_group_access_metadata:\n")
         pprint(api_response)

@@ -1884,7 +1884,7 @@ class PropertyDefinitionsApi:
 
     @validate_arguments
     def upsert_property_definition_properties(self, domain : Annotated[StrictStr, Field(..., description="The domain of the specified property.")], scope : Annotated[constr(strict=True, max_length=64, min_length=1), Field(..., description="The scope of the specified property.")], code : Annotated[constr(strict=True, max_length=64, min_length=1), Field(..., description="The code of the specified property. Together with the domain and scope this uniquely")], request_body : Annotated[Dict[str, ModelProperty], Field(..., description="The properties to be created or updated. Each property in              the request must be keyed by its unique property key. This has the format {domain}/{scope}/{code}, for example              'PropertyDefinition/Manager/Id'.")], success_mode : Annotated[Optional[constr(strict=True, max_length=64, min_length=1)], Field(description="Whether the batch request should fail Atomically or in a Partial fashion - Allowed Values: Atomic, Partial.")] = None, async_req: Optional[bool]=None, **kwargs) -> Union[BatchUpsertPropertyDefinitionPropertiesResponse, Awaitable[BatchUpsertPropertyDefinitionPropertiesResponse]]:  # noqa: E501
-        """[EARLY ACCESS] UpsertPropertyDefinitionProperties: Upsert properties to a property definition  # noqa: E501
+        """UpsertPropertyDefinitionProperties: Upsert properties to a property definition  # noqa: E501
 
         Create or update properties for a particular property definition  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
@@ -1924,7 +1924,7 @@ class PropertyDefinitionsApi:
 
     @validate_arguments
     def upsert_property_definition_properties_with_http_info(self, domain : Annotated[StrictStr, Field(..., description="The domain of the specified property.")], scope : Annotated[constr(strict=True, max_length=64, min_length=1), Field(..., description="The scope of the specified property.")], code : Annotated[constr(strict=True, max_length=64, min_length=1), Field(..., description="The code of the specified property. Together with the domain and scope this uniquely")], request_body : Annotated[Dict[str, ModelProperty], Field(..., description="The properties to be created or updated. Each property in              the request must be keyed by its unique property key. This has the format {domain}/{scope}/{code}, for example              'PropertyDefinition/Manager/Id'.")], success_mode : Annotated[Optional[constr(strict=True, max_length=64, min_length=1)], Field(description="Whether the batch request should fail Atomically or in a Partial fashion - Allowed Values: Atomic, Partial.")] = None, **kwargs) -> ApiResponse:  # noqa: E501
-        """[EARLY ACCESS] UpsertPropertyDefinitionProperties: Upsert properties to a property definition  # noqa: E501
+        """UpsertPropertyDefinitionProperties: Upsert properties to a property definition  # noqa: E501
 
         Create or update properties for a particular property definition  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an

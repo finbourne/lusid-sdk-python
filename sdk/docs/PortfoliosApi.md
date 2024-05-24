@@ -5,7 +5,7 @@ All URIs are relative to *https://www.lusid.com/api*
 Method | HTTP request | Description
 ------------- | ------------- | -------------
 [**delete_instrument_event_instruction**](PortfoliosApi.md#delete_instrument_event_instruction) | **DELETE** /api/portfolios/{scope}/{code}/instrumenteventinstructions/{instrumentEventInstructionId} | [EARLY ACCESS] DeleteInstrumentEventInstruction: Delete Instrument Event Instruction
-[**delete_key_from_portfolio_access_metadata**](PortfoliosApi.md#delete_key_from_portfolio_access_metadata) | **DELETE** /api/portfolios/{scope}/{code}/metadata/{metadataKey} | [EARLY ACCESS] DeleteKeyFromPortfolioAccessMetadata: Delete a Portfolio Access Metadata Rule
+[**delete_key_from_portfolio_access_metadata**](PortfoliosApi.md#delete_key_from_portfolio_access_metadata) | **DELETE** /api/portfolios/{scope}/{code}/metadata/{metadataKey} | DeleteKeyFromPortfolioAccessMetadata: Delete a Portfolio Access Metadata Rule
 [**delete_portfolio**](PortfoliosApi.md#delete_portfolio) | **DELETE** /api/portfolios/{scope}/{code} | DeletePortfolio: Delete portfolio
 [**delete_portfolio_properties**](PortfoliosApi.md#delete_portfolio_properties) | **DELETE** /api/portfolios/{scope}/{code}/properties | DeletePortfolioProperties: Delete portfolio properties
 [**delete_portfolio_returns**](PortfoliosApi.md#delete_portfolio_returns) | **DELETE** /api/portfolios/{scope}/{code}/returns/{returnScope}/{returnCode}/$delete | [EARLY ACCESS] DeletePortfolioReturns: Delete Returns
@@ -14,26 +14,26 @@ Method | HTTP request | Description
 [**get_instrument_event_instruction**](PortfoliosApi.md#get_instrument_event_instruction) | **GET** /api/portfolios/{scope}/{code}/instrumenteventinstructions/{instrumentEventInstructionId} | [EARLY ACCESS] GetInstrumentEventInstruction: Get Instrument Event Instruction
 [**get_portfolio**](PortfoliosApi.md#get_portfolio) | **GET** /api/portfolios/{scope}/{code} | GetPortfolio: Get portfolio
 [**get_portfolio_aggregate_returns**](PortfoliosApi.md#get_portfolio_aggregate_returns) | **GET** /api/portfolios/{scope}/{code}/returns/{returnScope}/{returnCode}/aggregated | [DEPRECATED] GetPortfolioAggregateReturns: Aggregate Returns (This is a deprecated endpoint).
-[**get_portfolio_aggregated_returns**](PortfoliosApi.md#get_portfolio_aggregated_returns) | **POST** /api/portfolios/{scope}/{code}/returns/$aggregated | [EARLY ACCESS] GetPortfolioAggregatedReturns: Aggregated Returns
+[**get_portfolio_aggregated_returns**](PortfoliosApi.md#get_portfolio_aggregated_returns) | **POST** /api/portfolios/{scope}/{code}/returns/$aggregated | GetPortfolioAggregatedReturns: Aggregated Returns
 [**get_portfolio_commands**](PortfoliosApi.md#get_portfolio_commands) | **GET** /api/portfolios/{scope}/{code}/commands | GetPortfolioCommands: Get portfolio commands
-[**get_portfolio_metadata**](PortfoliosApi.md#get_portfolio_metadata) | **GET** /api/portfolios/{scope}/{code}/metadata | [EARLY ACCESS] GetPortfolioMetadata: Get access metadata rules for a portfolio
+[**get_portfolio_metadata**](PortfoliosApi.md#get_portfolio_metadata) | **GET** /api/portfolios/{scope}/{code}/metadata | GetPortfolioMetadata: Get access metadata rules for a portfolio
 [**get_portfolio_properties**](PortfoliosApi.md#get_portfolio_properties) | **GET** /api/portfolios/{scope}/{code}/properties | GetPortfolioProperties: Get portfolio properties
-[**get_portfolio_property_time_series**](PortfoliosApi.md#get_portfolio_property_time_series) | **GET** /api/portfolios/{scope}/{code}/properties/time-series | [EARLY ACCESS] GetPortfolioPropertyTimeSeries: Get portfolio property time series
+[**get_portfolio_property_time_series**](PortfoliosApi.md#get_portfolio_property_time_series) | **GET** /api/portfolios/{scope}/{code}/properties/time-series | GetPortfolioPropertyTimeSeries: Get portfolio property time series
 [**get_portfolio_relations**](PortfoliosApi.md#get_portfolio_relations) | **GET** /api/portfolios/{scope}/{code}/relations | [EXPERIMENTAL] GetPortfolioRelations: Get portfolio relations
-[**get_portfolio_relationships**](PortfoliosApi.md#get_portfolio_relationships) | **GET** /api/portfolios/{scope}/{code}/relationships | [EARLY ACCESS] GetPortfolioRelationships: Get portfolio relationships
-[**get_portfolio_returns**](PortfoliosApi.md#get_portfolio_returns) | **GET** /api/portfolios/{scope}/{code}/returns/{returnScope}/{returnCode} | [EARLY ACCESS] GetPortfolioReturns: Get Returns
+[**get_portfolio_relationships**](PortfoliosApi.md#get_portfolio_relationships) | **GET** /api/portfolios/{scope}/{code}/relationships | GetPortfolioRelationships: Get portfolio relationships
+[**get_portfolio_returns**](PortfoliosApi.md#get_portfolio_returns) | **GET** /api/portfolios/{scope}/{code}/returns/{returnScope}/{returnCode} | GetPortfolioReturns: Get Returns
 [**get_portfolios_access_metadata_by_key**](PortfoliosApi.md#get_portfolios_access_metadata_by_key) | **GET** /api/portfolios/{scope}/{code}/metadata/{metadataKey} | [EARLY ACCESS] GetPortfoliosAccessMetadataByKey: Get an entry identified by a metadataKey in the access metadata object
 [**list_instrument_event_instructions**](PortfoliosApi.md#list_instrument_event_instructions) | **GET** /api/portfolios/{scope}/{code}/instrumenteventinstructions | [EARLY ACCESS] ListInstrumentEventInstructions: List Instrument Event Instructions
 [**list_portfolio_properties**](PortfoliosApi.md#list_portfolio_properties) | **GET** /api/portfolios/{scope}/{code}/properties/list | [EARLY ACCESS] ListPortfolioProperties: Get portfolio properties
 [**list_portfolios**](PortfoliosApi.md#list_portfolios) | **GET** /api/portfolios | ListPortfolios: List portfolios
 [**list_portfolios_for_scope**](PortfoliosApi.md#list_portfolios_for_scope) | **GET** /api/portfolios/{scope} | ListPortfoliosForScope: List portfolios for scope
-[**patch_portfolio**](PortfoliosApi.md#patch_portfolio) | **PATCH** /api/portfolios/{scope}/{code} | [EARLY ACCESS] PatchPortfolio: Patch portfolio.
+[**patch_portfolio**](PortfoliosApi.md#patch_portfolio) | **PATCH** /api/portfolios/{scope}/{code} | PatchPortfolio: Patch portfolio.
 [**patch_portfolio_access_metadata**](PortfoliosApi.md#patch_portfolio_access_metadata) | **PATCH** /api/portfolios/{scope}/{code}/metadata | [EARLY ACCESS] PatchPortfolioAccessMetadata: Patch Access Metadata rules for a Portfolio.
 [**update_portfolio**](PortfoliosApi.md#update_portfolio) | **PUT** /api/portfolios/{scope}/{code} | UpdatePortfolio: Update portfolio
 [**upsert_instrument_event_instructions**](PortfoliosApi.md#upsert_instrument_event_instructions) | **POST** /api/portfolios/{scope}/{code}/instrumenteventinstructions | [EARLY ACCESS] UpsertInstrumentEventInstructions: Upsert Instrument Event Instructions
 [**upsert_portfolio_access_metadata**](PortfoliosApi.md#upsert_portfolio_access_metadata) | **PUT** /api/portfolios/{scope}/{code}/metadata/{metadataKey} | [EARLY ACCESS] UpsertPortfolioAccessMetadata: Upsert a Portfolio Access Metadata Rule associated with specific metadataKey. This creates or updates the data in LUSID.
 [**upsert_portfolio_properties**](PortfoliosApi.md#upsert_portfolio_properties) | **POST** /api/portfolios/{scope}/{code}/properties | UpsertPortfolioProperties: Upsert portfolio properties
-[**upsert_portfolio_returns**](PortfoliosApi.md#upsert_portfolio_returns) | **POST** /api/portfolios/{scope}/{code}/returns/{returnScope}/{returnCode} | [EARLY ACCESS] UpsertPortfolioReturns: Upsert Returns
+[**upsert_portfolio_returns**](PortfoliosApi.md#upsert_portfolio_returns) | **POST** /api/portfolios/{scope}/{code}/returns/{returnScope}/{returnCode} | UpsertPortfolioReturns: Upsert Returns
 
 
 # **delete_instrument_event_instruction**
@@ -143,7 +143,7 @@ Name | Type | Description  | Notes
 # **delete_key_from_portfolio_access_metadata**
 > DeletedEntityResponse delete_key_from_portfolio_access_metadata(scope, code, metadata_key, effective_at=effective_at, effective_until=effective_until)
 
-[EARLY ACCESS] DeleteKeyFromPortfolioAccessMetadata: Delete a Portfolio Access Metadata Rule
+DeleteKeyFromPortfolioAccessMetadata: Delete a Portfolio Access Metadata Rule
 
 Delete the Portfolio Access Metadata Rule that exactly matches the provided identifier parts
 
@@ -205,7 +205,7 @@ async with api_client_factory:
     effective_until = '2013-10-20T19:20:30+01:00' # datetime | The effective date until which the delete is valid. If not supplied this will be valid indefinitely, or until the next 'effectiveAt' date of the Access Metadata (optional)
 
     try:
-        # [EARLY ACCESS] DeleteKeyFromPortfolioAccessMetadata: Delete a Portfolio Access Metadata Rule
+        # DeleteKeyFromPortfolioAccessMetadata: Delete a Portfolio Access Metadata Rule
         api_response = await api_instance.delete_key_from_portfolio_access_metadata(scope, code, metadata_key, effective_at=effective_at, effective_until=effective_until)
         print("The response of PortfoliosApi->delete_key_from_portfolio_access_metadata:\n")
         pprint(api_response)
@@ -1115,7 +1115,7 @@ Name | Type | Description  | Notes
 # **get_portfolio_aggregated_returns**
 > AggregatedReturnsResponse get_portfolio_aggregated_returns(scope, code, aggregated_returns_request, from_effective_at=from_effective_at, to_effective_at=to_effective_at, as_at=as_at)
 
-[EARLY ACCESS] GetPortfolioAggregatedReturns: Aggregated Returns
+GetPortfolioAggregatedReturns: Aggregated Returns
 
 Aggregate Returns which are on the specified portfolio.
 
@@ -1179,7 +1179,7 @@ async with api_client_factory:
     as_at = '2013-10-20T19:20:30+01:00' # datetime | The asAt datetime at which to retrieve the Returns. Defaults to the latest. (optional)
 
     try:
-        # [EARLY ACCESS] GetPortfolioAggregatedReturns: Aggregated Returns
+        # GetPortfolioAggregatedReturns: Aggregated Returns
         api_response = await api_instance.get_portfolio_aggregated_returns(scope, code, aggregated_returns_request, from_effective_at=from_effective_at, to_effective_at=to_effective_at, as_at=as_at)
         print("The response of PortfoliosApi->get_portfolio_aggregated_returns:\n")
         pprint(api_response)
@@ -1334,7 +1334,7 @@ Name | Type | Description  | Notes
 # **get_portfolio_metadata**
 > Dict[str, List[AccessMetadataValue]] get_portfolio_metadata(scope, code, effective_at=effective_at, as_at=as_at)
 
-[EARLY ACCESS] GetPortfolioMetadata: Get access metadata rules for a portfolio
+GetPortfolioMetadata: Get access metadata rules for a portfolio
 
 Pass the scope and portfolio code parameters to retrieve the AccessMetadata associated with a portfolio
 
@@ -1395,7 +1395,7 @@ async with api_client_factory:
     as_at = '2013-10-20T19:20:30+01:00' # datetime | The asAt datetime at which to retrieve the portfolio access metadata. (optional)
 
     try:
-        # [EARLY ACCESS] GetPortfolioMetadata: Get access metadata rules for a portfolio
+        # GetPortfolioMetadata: Get access metadata rules for a portfolio
         api_response = await api_instance.get_portfolio_metadata(scope, code, effective_at=effective_at, as_at=as_at)
         print("The response of PortfoliosApi->get_portfolio_metadata:\n")
         pprint(api_response)
@@ -1542,7 +1542,7 @@ Name | Type | Description  | Notes
 # **get_portfolio_property_time_series**
 > ResourceListOfPropertyInterval get_portfolio_property_time_series(scope, code, property_key, portfolio_effective_at=portfolio_effective_at, as_at=as_at, filter=filter, page=page, limit=limit)
 
-[EARLY ACCESS] GetPortfolioPropertyTimeSeries: Get portfolio property time series
+GetPortfolioPropertyTimeSeries: Get portfolio property time series
 
 Show the complete time series (history) for a particular portfolio property.
 
@@ -1607,7 +1607,7 @@ async with api_client_factory:
     limit = 56 # int | When paginating, limit the results to this number. (optional)
 
     try:
-        # [EARLY ACCESS] GetPortfolioPropertyTimeSeries: Get portfolio property time series
+        # GetPortfolioPropertyTimeSeries: Get portfolio property time series
         api_response = await api_instance.get_portfolio_property_time_series(scope, code, property_key, portfolio_effective_at=portfolio_effective_at, as_at=as_at, filter=filter, page=page, limit=limit)
         print("The response of PortfoliosApi->get_portfolio_property_time_series:\n")
         pprint(api_response)
@@ -1762,7 +1762,7 @@ Name | Type | Description  | Notes
 # **get_portfolio_relationships**
 > ResourceListOfRelationship get_portfolio_relationships(scope, code, effective_at=effective_at, as_at=as_at, filter=filter, identifier_types=identifier_types)
 
-[EARLY ACCESS] GetPortfolioRelationships: Get portfolio relationships
+GetPortfolioRelationships: Get portfolio relationships
 
 Get relationships for a particular portfolio.
 
@@ -1825,7 +1825,7 @@ async with api_client_factory:
     identifier_types = ['identifier_types_example'] # List[str] | Identifier types (as property keys) used for referencing Persons or Legal Entities.              These can be specified from the 'Person' or 'LegalEntity' domains and have the format {domain}/{scope}/{code}, for example              'Person/CompanyDetails/Role'. An Empty array may be used to return all related Entities. (optional)
 
     try:
-        # [EARLY ACCESS] GetPortfolioRelationships: Get portfolio relationships
+        # GetPortfolioRelationships: Get portfolio relationships
         api_response = await api_instance.get_portfolio_relationships(scope, code, effective_at=effective_at, as_at=as_at, filter=filter, identifier_types=identifier_types)
         print("The response of PortfoliosApi->get_portfolio_relationships:\n")
         pprint(api_response)
@@ -1870,7 +1870,7 @@ Name | Type | Description  | Notes
 # **get_portfolio_returns**
 > ResourceListOfPerformanceReturn get_portfolio_returns(scope, code, return_scope, return_code, from_effective_at=from_effective_at, to_effective_at=to_effective_at, period=period, as_at=as_at)
 
-[EARLY ACCESS] GetPortfolioReturns: Get Returns
+GetPortfolioReturns: Get Returns
 
 Get Returns which are on the specified portfolio.
 
@@ -1935,7 +1935,7 @@ async with api_client_factory:
     as_at = '2013-10-20T19:20:30+01:00' # datetime | The asAt datetime at which to retrieve the Returns. Defaults to the latest. (optional)
 
     try:
-        # [EARLY ACCESS] GetPortfolioReturns: Get Returns
+        # GetPortfolioReturns: Get Returns
         api_response = await api_instance.get_portfolio_returns(scope, code, return_scope, return_code, from_effective_at=from_effective_at, to_effective_at=to_effective_at, period=period, as_at=as_at)
         print("The response of PortfoliosApi->get_portfolio_returns:\n")
         pprint(api_response)
@@ -2536,7 +2536,7 @@ Name | Type | Description  | Notes
 # **patch_portfolio**
 > Portfolio patch_portfolio(scope, code, operation)
 
-[EARLY ACCESS] PatchPortfolio: Patch portfolio.
+PatchPortfolio: Patch portfolio.
 
 Create or update certain fields for a particular  portfolio.  The behaviour is defined by the JSON Patch specification.                Currently supported are: CreationDate, InstrumentScopes.
 
@@ -2597,7 +2597,7 @@ async with api_client_factory:
     operation = [{"value":"2020-01-01","path":"/creationDate","op":"add"}] # List[Operation] | The json patch document. For more check: https://datatracker.ietf.org/doc/html/rfc6902.
 
     try:
-        # [EARLY ACCESS] PatchPortfolio: Patch portfolio.
+        # PatchPortfolio: Patch portfolio.
         api_response = await api_instance.patch_portfolio(scope, code, operation)
         print("The response of PortfoliosApi->patch_portfolio:\n")
         pprint(api_response)
@@ -3170,7 +3170,7 @@ Name | Type | Description  | Notes
 # **upsert_portfolio_returns**
 > UpsertReturnsResponse upsert_portfolio_returns(scope, code, return_scope, return_code, performance_return)
 
-[EARLY ACCESS] UpsertPortfolioReturns: Upsert Returns
+UpsertPortfolioReturns: Upsert Returns
 
 Update or insert returns into the specified portfolio.
 
@@ -3233,7 +3233,7 @@ async with api_client_factory:
     performance_return = [{"effectiveAt":"2019-11-28T00:00:00.0000000+00:00","rateOfReturn":0.1,"openingMarketValue":500,"closingMarketValue":550,"period":"Daily"},{"effectiveAt":"2019-11-29T00:00:00.0000000+00:00","rateOfReturn":-0.2,"openingMarketValue":550,"closingMarketValue":440,"period":"Daily"}] # List[PerformanceReturn] | This contains the Returns which need to be upsert.
 
     try:
-        # [EARLY ACCESS] UpsertPortfolioReturns: Upsert Returns
+        # UpsertPortfolioReturns: Upsert Returns
         api_response = await api_instance.upsert_portfolio_returns(scope, code, return_scope, return_code, performance_return)
         print("The response of PortfoliosApi->upsert_portfolio_returns:\n")
         pprint(api_response)

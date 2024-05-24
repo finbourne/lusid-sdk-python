@@ -6,8 +6,8 @@ Method | HTTP request | Description
 ------------- | ------------- | -------------
 [**delete_execution**](ExecutionsApi.md#delete_execution) | **DELETE** /api/executions/{scope}/{code} | [EARLY ACCESS] DeleteExecution: Delete execution
 [**get_execution**](ExecutionsApi.md#get_execution) | **GET** /api/executions/{scope}/{code} | [EARLY ACCESS] GetExecution: Get Execution
-[**list_executions**](ExecutionsApi.md#list_executions) | **GET** /api/executions | [EARLY ACCESS] ListExecutions: List Executions
-[**upsert_executions**](ExecutionsApi.md#upsert_executions) | **POST** /api/executions | [EARLY ACCESS] UpsertExecutions: Upsert Execution
+[**list_executions**](ExecutionsApi.md#list_executions) | **GET** /api/executions | ListExecutions: List Executions
+[**upsert_executions**](ExecutionsApi.md#upsert_executions) | **POST** /api/executions | UpsertExecutions: Upsert Execution
 
 
 # **delete_execution**
@@ -217,7 +217,7 @@ Name | Type | Description  | Notes
 # **list_executions**
 > PagedResourceListOfExecution list_executions(as_at=as_at, page=page, sort_by=sort_by, limit=limit, filter=filter, property_keys=property_keys)
 
-[EARLY ACCESS] ListExecutions: List Executions
+ListExecutions: List Executions
 
 Fetch the last pre-AsAt date version of each execution in scope (does not fetch the entire history).
 
@@ -280,7 +280,7 @@ async with api_client_factory:
     property_keys = ['property_keys_example'] # List[str] | A list of property keys from the \"Execution\" domain to decorate onto each execution.                  These take the format {domain}/{scope}/{code} e.g. \"Execution/system/Name\". (optional)
 
     try:
-        # [EARLY ACCESS] ListExecutions: List Executions
+        # ListExecutions: List Executions
         api_response = await api_instance.list_executions(as_at=as_at, page=page, sort_by=sort_by, limit=limit, filter=filter, property_keys=property_keys)
         print("The response of ExecutionsApi->list_executions:\n")
         pprint(api_response)
@@ -325,7 +325,7 @@ Name | Type | Description  | Notes
 # **upsert_executions**
 > ResourceListOfExecution upsert_executions(execution_set_request=execution_set_request)
 
-[EARLY ACCESS] UpsertExecutions: Upsert Execution
+UpsertExecutions: Upsert Execution
 
 Upsert; update existing executions with given ids, or create new executions otherwise.
 
@@ -384,7 +384,7 @@ async with api_client_factory:
     execution_set_request = {"requests":[{"id":{"scope":"MyScope","code":"EXEC00000123"},"placementId":{"scope":"MyScope","code":"PLAC00000123"},"properties":{"Execution/MyScope/SomeExecutionProperty":{"key":"Execution/MyScope/SomeExecutionProperty","value":{"labelValue":"XYZ000034567"}}},"instrumentIdentifiers":{"Instrument/default/Currency":"GBP"},"quantity":100,"state":"New","side":"Buy","type":"Limit","createdDate":"2006-04-11T00:00:00.0000000+00:00","settlementDate":"2006-04-13T00:00:00.0000000+00:00","price":{"amount":12413.33,"currency":"USD"},"settlementCurrency":"GBP","settlementCurrencyFxRate":0.67,"counterparty":"SomeCounterparty","averagePrice":12419.2}]} # ExecutionSetRequest | The collection of execution requests. (optional)
 
     try:
-        # [EARLY ACCESS] UpsertExecutions: Upsert Execution
+        # UpsertExecutions: Upsert Execution
         api_response = await api_instance.upsert_executions(execution_set_request=execution_set_request)
         print("The response of ExecutionsApi->upsert_executions:\n")
         pprint(api_response)

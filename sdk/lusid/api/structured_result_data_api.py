@@ -69,7 +69,7 @@ class StructuredResultDataApi:
 
     @validate_arguments
     def create_data_map(self, scope : Annotated[constr(strict=True, max_length=64, min_length=1), Field(..., description="The scope in which to create or update data maps.")], request_body : Annotated[Dict[str, CreateDataMapRequest], Field(..., description="Individual data map creation requests.")], async_req: Optional[bool]=None, **kwargs) -> Union[UpsertStructuredDataResponse, Awaitable[UpsertStructuredDataResponse]]:  # noqa: E501
-        """[EXPERIMENTAL] CreateDataMap: Create data map  # noqa: E501
+        """CreateDataMap: Create data map  # noqa: E501
 
         Create or update one or more structured result store address definition data maps in a particular scope. Note these are immutable and cannot be changed once created.                In the request, each data map must be keyed by a unique correlation ID. This ID is ephemeral and not stored by LUSID.  It serves only to easily identify each data map object in the response.                The response returns both the collection of successfully created or updated data maps, as well as those that failed.  For each failure, a reason is provided.                It is important to check the failed set for any unsuccessful results.  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
@@ -103,7 +103,7 @@ class StructuredResultDataApi:
 
     @validate_arguments
     def create_data_map_with_http_info(self, scope : Annotated[constr(strict=True, max_length=64, min_length=1), Field(..., description="The scope in which to create or update data maps.")], request_body : Annotated[Dict[str, CreateDataMapRequest], Field(..., description="Individual data map creation requests.")], **kwargs) -> ApiResponse:  # noqa: E501
-        """[EXPERIMENTAL] CreateDataMap: Create data map  # noqa: E501
+        """CreateDataMap: Create data map  # noqa: E501
 
         Create or update one or more structured result store address definition data maps in a particular scope. Note these are immutable and cannot be changed once created.                In the request, each data map must be keyed by a unique correlation ID. This ID is ephemeral and not stored by LUSID.  It serves only to easily identify each data map object in the response.                The response returns both the collection of successfully created or updated data maps, as well as those that failed.  For each failure, a reason is provided.                It is important to check the failed set for any unsuccessful results.  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
@@ -761,7 +761,7 @@ class StructuredResultDataApi:
 
     @validate_arguments
     def get_structured_result_data(self, scope : Annotated[constr(strict=True, max_length=64, min_length=1), Field(..., description="The scope from which to retrieve data items.")], request_body : Annotated[Dict[str, StructuredResultDataId], Field(..., description="The time invariant set of structured data identifiers to retrieve, keyed by a unique, ephemeral correlation ID.")], as_at : Annotated[Optional[datetime], Field(description="The asAt datetime at which to retrieve the structured result data. Defaults to returning the latest version if not specified.")] = None, max_age : Annotated[Optional[StrictStr], Field(description="The duration of the look-back window in ISO8601 time interval format, for example 'P1Y2M3DT4H30M' (1 year, 2 months, 3 days, 4 hours and 30 minutes).               This is subtracted from the provided effectiveAt datetime to generate a effective datetime window inside which a data item must exist to be retrieved.")] = None, async_req: Optional[bool]=None, **kwargs) -> Union[GetStructuredResultDataResponse, Awaitable[GetStructuredResultDataResponse]]:  # noqa: E501
-        """[EXPERIMENTAL] GetStructuredResultData: Get structured result data  # noqa: E501
+        """GetStructuredResultData: Get structured result data  # noqa: E501
 
         Retrieve one or more structured result data items from a particular scope.                Each item can be identified by its time invariant structured result data identifier. For each ID, LUSID  returns the most recently matched item with respect to the provided (or default) effective datetime.                 An optional maximum age range window can be specified to control how far back to look from the specified  effective datetime. LUSID returns the most recent item within this window.                In the request, each data item must be keyed by a unique correlation ID. This ID is ephemeral and not stored by LUSID.  It serves only to easily identify each data item in the response.    The response returns three collections. The first contains successfully retrieved data items. The second contains those with a  valid identifier but that could not be found. The third contains those that failed because LUSID could not construct a valid identifier from the request.    For the IDs that failed to resolve or could not be found, a reason is provided.                It is important to check the failed sets for any unsuccessful results.  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
@@ -799,7 +799,7 @@ class StructuredResultDataApi:
 
     @validate_arguments
     def get_structured_result_data_with_http_info(self, scope : Annotated[constr(strict=True, max_length=64, min_length=1), Field(..., description="The scope from which to retrieve data items.")], request_body : Annotated[Dict[str, StructuredResultDataId], Field(..., description="The time invariant set of structured data identifiers to retrieve, keyed by a unique, ephemeral correlation ID.")], as_at : Annotated[Optional[datetime], Field(description="The asAt datetime at which to retrieve the structured result data. Defaults to returning the latest version if not specified.")] = None, max_age : Annotated[Optional[StrictStr], Field(description="The duration of the look-back window in ISO8601 time interval format, for example 'P1Y2M3DT4H30M' (1 year, 2 months, 3 days, 4 hours and 30 minutes).               This is subtracted from the provided effectiveAt datetime to generate a effective datetime window inside which a data item must exist to be retrieved.")] = None, **kwargs) -> ApiResponse:  # noqa: E501
-        """[EXPERIMENTAL] GetStructuredResultData: Get structured result data  # noqa: E501
+        """GetStructuredResultData: Get structured result data  # noqa: E501
 
         Retrieve one or more structured result data items from a particular scope.                Each item can be identified by its time invariant structured result data identifier. For each ID, LUSID  returns the most recently matched item with respect to the provided (or default) effective datetime.                 An optional maximum age range window can be specified to control how far back to look from the specified  effective datetime. LUSID returns the most recent item within this window.                In the request, each data item must be keyed by a unique correlation ID. This ID is ephemeral and not stored by LUSID.  It serves only to easily identify each data item in the response.    The response returns three collections. The first contains successfully retrieved data items. The second contains those with a  valid identifier but that could not be found. The third contains those that failed because LUSID could not construct a valid identifier from the request.    For the IDs that failed to resolve or could not be found, a reason is provided.                It is important to check the failed sets for any unsuccessful results.  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
@@ -1507,7 +1507,7 @@ class StructuredResultDataApi:
 
     @validate_arguments
     def upsert_structured_result_data(self, scope : Annotated[constr(strict=True, max_length=64, min_length=1), Field(..., description="The scope in which to create or update data items.")], request_body : Annotated[Dict[str, UpsertStructuredResultDataRequest], Field(..., description="The set of data items to create or update, keyed by a unique, ephemeral correlation ID.")], async_req: Optional[bool]=None, **kwargs) -> Union[UpsertStructuredDataResponse, Awaitable[UpsertStructuredDataResponse]]:  # noqa: E501
-        """[BETA] UpsertStructuredResultData: Upsert structured result data  # noqa: E501
+        """UpsertStructuredResultData: Upsert structured result data  # noqa: E501
 
         Create or update one or more structured result data items in a particular scope. An item is updated if it already exists  and created if it does not.                In the request, each data item must be keyed by a unique correlation ID. This ID is ephemeral and not stored by LUSID.  It serves only to easily identify each data item in the response.                The response returns both the collection of successfully created or updated data items, as well as those that failed.  For each failure, a reason is provided.                It is important to check the failed set for any unsuccessful results.  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
@@ -1541,7 +1541,7 @@ class StructuredResultDataApi:
 
     @validate_arguments
     def upsert_structured_result_data_with_http_info(self, scope : Annotated[constr(strict=True, max_length=64, min_length=1), Field(..., description="The scope in which to create or update data items.")], request_body : Annotated[Dict[str, UpsertStructuredResultDataRequest], Field(..., description="The set of data items to create or update, keyed by a unique, ephemeral correlation ID.")], **kwargs) -> ApiResponse:  # noqa: E501
-        """[BETA] UpsertStructuredResultData: Upsert structured result data  # noqa: E501
+        """UpsertStructuredResultData: Upsert structured result data  # noqa: E501
 
         Create or update one or more structured result data items in a particular scope. An item is updated if it already exists  and created if it does not.                In the request, each data item must be keyed by a unique correlation ID. This ID is ephemeral and not stored by LUSID.  It serves only to easily identify each data item in the response.                The response returns both the collection of successfully created or updated data items, as well as those that failed.  For each failure, a reason is provided.                It is important to check the failed set for any unsuccessful results.  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an

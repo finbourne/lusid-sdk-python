@@ -235,7 +235,7 @@ class AggregationApi:
 
     @validate_arguments
     def get_queryable_keys(self, page : Annotated[Optional[constr(strict=True, max_length=500, min_length=1)], Field(description="The pagination token to use to continue listing queryable keys from a previous call to list queryable keys.              This value is returned from the previous call.")] = None, limit : Annotated[Optional[StrictInt], Field(description="When paginating, limit the number of returned results to this many.")] = None, filter : Annotated[Optional[constr(strict=True, max_length=16384, min_length=0)], Field(description="Expression to filter the result set.              Read more about filtering results from LUSID here https://support.lusid.com/filtering-results-from-lusid.")] = None, async_req: Optional[bool]=None, **kwargs) -> Union[ResourceListOfAggregationQuery, Awaitable[ResourceListOfAggregationQuery]]:  # noqa: E501
-        """[EARLY ACCESS] GetQueryableKeys: Query the set of supported \"addresses\" that can be queried from the aggregation endpoint.  # noqa: E501
+        """GetQueryableKeys: Query the set of supported \"addresses\" that can be queried from the aggregation endpoint.  # noqa: E501
 
         When a request is made for aggregation, the user needs to know what keys can be passed to it for queryable data. This endpoint allows to queries to provide the set of keys,  what they are and what they return.  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
@@ -271,7 +271,7 @@ class AggregationApi:
 
     @validate_arguments
     def get_queryable_keys_with_http_info(self, page : Annotated[Optional[constr(strict=True, max_length=500, min_length=1)], Field(description="The pagination token to use to continue listing queryable keys from a previous call to list queryable keys.              This value is returned from the previous call.")] = None, limit : Annotated[Optional[StrictInt], Field(description="When paginating, limit the number of returned results to this many.")] = None, filter : Annotated[Optional[constr(strict=True, max_length=16384, min_length=0)], Field(description="Expression to filter the result set.              Read more about filtering results from LUSID here https://support.lusid.com/filtering-results-from-lusid.")] = None, **kwargs) -> ApiResponse:  # noqa: E501
-        """[EARLY ACCESS] GetQueryableKeys: Query the set of supported \"addresses\" that can be queried from the aggregation endpoint.  # noqa: E501
+        """GetQueryableKeys: Query the set of supported \"addresses\" that can be queried from the aggregation endpoint.  # noqa: E501
 
         When a request is made for aggregation, the user needs to know what keys can be passed to it for queryable data. This endpoint allows to queries to provide the set of keys,  what they are and what they return.  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an

@@ -4,21 +4,21 @@ All URIs are relative to *https://www.lusid.com/api*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
-[**create_data_map**](StructuredResultDataApi.md#create_data_map) | **POST** /api/unitresults/datamap/{scope} | [EXPERIMENTAL] CreateDataMap: Create data map
+[**create_data_map**](StructuredResultDataApi.md#create_data_map) | **POST** /api/unitresults/datamap/{scope} | CreateDataMap: Create data map
 [**delete_structured_result_data**](StructuredResultDataApi.md#delete_structured_result_data) | **POST** /api/unitresults/{scope}/$delete | [EXPERIMENTAL] DeleteStructuredResultData: Delete structured result data
 [**get_address_key_definitions_for_document**](StructuredResultDataApi.md#get_address_key_definitions_for_document) | **GET** /api/unitresults/virtualdocument/{scope}/{code}/{source}/{resultType}/addresskeydefinitions | [EARLY ACCESS] GetAddressKeyDefinitionsForDocument: Get AddressKeyDefinitions for a virtual document.
 [**get_data_map**](StructuredResultDataApi.md#get_data_map) | **POST** /api/unitresults/datamap/{scope}/$get | [EXPERIMENTAL] GetDataMap: Get data map
-[**get_structured_result_data**](StructuredResultDataApi.md#get_structured_result_data) | **POST** /api/unitresults/{scope}/$get | [EXPERIMENTAL] GetStructuredResultData: Get structured result data
+[**get_structured_result_data**](StructuredResultDataApi.md#get_structured_result_data) | **POST** /api/unitresults/{scope}/$get | GetStructuredResultData: Get structured result data
 [**get_virtual_document**](StructuredResultDataApi.md#get_virtual_document) | **POST** /api/unitresults/virtualdocument/{scope}/$get | [EXPERIMENTAL] GetVirtualDocument: Get Virtual Documents
 [**get_virtual_document_rows**](StructuredResultDataApi.md#get_virtual_document_rows) | **GET** /api/unitresults/virtualdocument/{scope}/{code}/{source}/{resultType} | [EARLY ACCESS] GetVirtualDocumentRows: Get Virtual Document Rows
 [**upsert_result_value**](StructuredResultDataApi.md#upsert_result_value) | **POST** /api/unitresults/resultvalue/{scope} | [EXPERIMENTAL] UpsertResultValue: Upsert result value
-[**upsert_structured_result_data**](StructuredResultDataApi.md#upsert_structured_result_data) | **POST** /api/unitresults/{scope} | [BETA] UpsertStructuredResultData: Upsert structured result data
+[**upsert_structured_result_data**](StructuredResultDataApi.md#upsert_structured_result_data) | **POST** /api/unitresults/{scope} | UpsertStructuredResultData: Upsert structured result data
 
 
 # **create_data_map**
 > UpsertStructuredDataResponse create_data_map(scope, request_body)
 
-[EXPERIMENTAL] CreateDataMap: Create data map
+CreateDataMap: Create data map
 
 Create or update one or more structured result store address definition data maps in a particular scope. Note these are immutable and cannot be changed once created.                In the request, each data map must be keyed by a unique correlation ID. This ID is ephemeral and not stored by LUSID.  It serves only to easily identify each data map object in the response.                The response returns both the collection of successfully created or updated data maps, as well as those that failed.  For each failure, a reason is provided.                It is important to check the failed set for any unsuccessful results.
 
@@ -78,7 +78,7 @@ async with api_client_factory:
     request_body = {"id1":{"id":{"version":"1.0.0","code":"dataMapCode"},"data":{"dataDefinitions":[{"address":"Instrument/default/LusidInstrumentId","name":"luid","dataType":"String","keyType":"Unique","allowNull":false,"allowMissing":false},{"address":"Valuation/PV","dataType":"Result0D","keyType":"Leaf","allowNull":false,"allowMissing":false},{"address":"Valuation/PV/Amount","name":"pv","dataType":"Decimal","keyType":"Leaf","allowNull":false,"allowMissing":false},{"address":"Valuation/PV/Ccy","name":"pv-ccy","dataType":"String","keyType":"Leaf","allowNull":false,"allowMissing":false},{"address":"Instrument/default/Name","name":"instrument-name","dataType":"String","keyType":"Leaf","allowNull":false,"allowMissing":false}]}}} # Dict[str, CreateDataMapRequest] | Individual data map creation requests.
 
     try:
-        # [EXPERIMENTAL] CreateDataMap: Create data map
+        # CreateDataMap: Create data map
         api_response = await api_instance.create_data_map(scope, request_body)
         print("The response of StructuredResultDataApi->create_data_map:\n")
         pprint(api_response)
@@ -429,7 +429,7 @@ Name | Type | Description  | Notes
 # **get_structured_result_data**
 > GetStructuredResultDataResponse get_structured_result_data(scope, request_body, as_at=as_at, max_age=max_age)
 
-[EXPERIMENTAL] GetStructuredResultData: Get structured result data
+GetStructuredResultData: Get structured result data
 
 Retrieve one or more structured result data items from a particular scope.                Each item can be identified by its time invariant structured result data identifier. For each ID, LUSID  returns the most recently matched item with respect to the provided (or default) effective datetime.                 An optional maximum age range window can be specified to control how far back to look from the specified  effective datetime. LUSID returns the most recent item within this window.                In the request, each data item must be keyed by a unique correlation ID. This ID is ephemeral and not stored by LUSID.  It serves only to easily identify each data item in the response.    The response returns three collections. The first contains successfully retrieved data items. The second contains those with a  valid identifier but that could not be found. The third contains those that failed because LUSID could not construct a valid identifier from the request.    For the IDs that failed to resolve or could not be found, a reason is provided.                It is important to check the failed sets for any unsuccessful results.
 
@@ -491,7 +491,7 @@ async with api_client_factory:
     max_age = 'max_age_example' # str | The duration of the look-back window in ISO8601 time interval format, for example 'P1Y2M3DT4H30M' (1 year, 2 months, 3 days, 4 hours and 30 minutes).               This is subtracted from the provided effectiveAt datetime to generate a effective datetime window inside which a data item must exist to be retrieved. (optional)
 
     try:
-        # [EXPERIMENTAL] GetStructuredResultData: Get structured result data
+        # GetStructuredResultData: Get structured result data
         api_response = await api_instance.get_structured_result_data(scope, request_body, as_at=as_at, max_age=max_age)
         print("The response of StructuredResultDataApi->get_structured_result_data:\n")
         pprint(api_response)
@@ -852,7 +852,7 @@ Name | Type | Description  | Notes
 # **upsert_structured_result_data**
 > UpsertStructuredDataResponse upsert_structured_result_data(scope, request_body)
 
-[BETA] UpsertStructuredResultData: Upsert structured result data
+UpsertStructuredResultData: Upsert structured result data
 
 Create or update one or more structured result data items in a particular scope. An item is updated if it already exists  and created if it does not.                In the request, each data item must be keyed by a unique correlation ID. This ID is ephemeral and not stored by LUSID.  It serves only to easily identify each data item in the response.                The response returns both the collection of successfully created or updated data items, as well as those that failed.  For each failure, a reason is provided.                It is important to check the failed set for any unsuccessful results.
 
@@ -912,7 +912,7 @@ async with api_client_factory:
     request_body = {"first-item":{"id":{"source":"Client","code":"MyCustomDocument","effectiveAt":"2020-01-01T00:00:00.0000000+00:00","resultType":"UnitResult/Custom"},"data":{"documentFormat":"Csv","version":"1.0.0","name":"my document identifier","document":"luid,pv,pv-ccy,instrument-name\nLUID_11111111,1,GBP,instr1\nLUID_22222222,2,USD,instr2","dataMapKey":{"version":"1.0.0","code":"dataMapCode"}}},"second-item":{"id":{"source":"Client","code":"MyUploadedRiskResults-1","effectiveAt":"2018-03-05T00:00:00.0000000+00:00","resultType":"Risk"},"data":{"documentFormat":"Xml","version":"1.0.0","name":"free text identifier of document 1","document":"<xml>data</xml>"}},"third-item":{"id":{"source":"Client","code":"MyUploadedRiskResults-2","effectiveAt":"2018-03-05T00:00:00.0000000+00:00","resultType":"Risk"},"data":{"documentFormat":"Json","version":"1.0.0","name":"free text identifier of document 2","document":"{ \"some\":\"valid json\"}"}}} # Dict[str, UpsertStructuredResultDataRequest] | The set of data items to create or update, keyed by a unique, ephemeral correlation ID.
 
     try:
-        # [BETA] UpsertStructuredResultData: Upsert structured result data
+        # UpsertStructuredResultData: Upsert structured result data
         api_response = await api_instance.upsert_structured_result_data(scope, request_body)
         print("The response of StructuredResultDataApi->upsert_structured_result_data:\n")
         pprint(api_response)

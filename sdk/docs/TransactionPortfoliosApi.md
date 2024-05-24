@@ -24,15 +24,15 @@ Method | HTTP request | Description
 [**get_holdings**](TransactionPortfoliosApi.md#get_holdings) | **GET** /api/transactionportfolios/{scope}/{code}/holdings | GetHoldings: Get holdings
 [**get_holdings_adjustment**](TransactionPortfoliosApi.md#get_holdings_adjustment) | **GET** /api/transactionportfolios/{scope}/{code}/holdingsadjustments/{effectiveAt} | GetHoldingsAdjustment: Get holdings adjustment
 [**get_holdings_with_orders**](TransactionPortfoliosApi.md#get_holdings_with_orders) | **GET** /api/transactionportfolios/{scope}/{code}/holdingsWithOrders | [EXPERIMENTAL] GetHoldingsWithOrders: Get holdings with orders
-[**get_portfolio_cash_flows**](TransactionPortfoliosApi.md#get_portfolio_cash_flows) | **GET** /api/transactionportfolios/{scope}/{code}/cashflows | [BETA] GetPortfolioCashFlows: Get portfolio cash flows
+[**get_portfolio_cash_flows**](TransactionPortfoliosApi.md#get_portfolio_cash_flows) | **GET** /api/transactionportfolios/{scope}/{code}/cashflows | GetPortfolioCashFlows: Get portfolio cash flows
 [**get_portfolio_cash_ladder**](TransactionPortfoliosApi.md#get_portfolio_cash_ladder) | **GET** /api/transactionportfolios/{scope}/{code}/cashladder | GetPortfolioCashLadder: Get portfolio cash ladder
 [**get_portfolio_cash_statement**](TransactionPortfoliosApi.md#get_portfolio_cash_statement) | **GET** /api/transactionportfolios/{scope}/{code}/cashstatement | GetPortfolioCashStatement: Get portfolio cash statement
 [**get_transaction_history**](TransactionPortfoliosApi.md#get_transaction_history) | **GET** /api/transactionportfolios/{scope}/{code}/transactions/{transactionId}/history | [EARLY ACCESS] GetTransactionHistory: Get the history of a transaction
 [**get_transactions**](TransactionPortfoliosApi.md#get_transactions) | **GET** /api/transactionportfolios/{scope}/{code}/transactions | GetTransactions: Get transactions
-[**get_upsertable_portfolio_cash_flows**](TransactionPortfoliosApi.md#get_upsertable_portfolio_cash_flows) | **GET** /api/transactionportfolios/{scope}/{code}/upsertablecashflows | [BETA] GetUpsertablePortfolioCashFlows: Get upsertable portfolio cash flows.
+[**get_upsertable_portfolio_cash_flows**](TransactionPortfoliosApi.md#get_upsertable_portfolio_cash_flows) | **GET** /api/transactionportfolios/{scope}/{code}/upsertablecashflows | GetUpsertablePortfolioCashFlows: Get upsertable portfolio cash flows.
 [**list_custodian_accounts**](TransactionPortfoliosApi.md#list_custodian_accounts) | **GET** /api/transactionportfolios/{scope}/{code}/custodianaccounts | [EXPERIMENTAL] ListCustodianAccounts: List Custodian Accounts
 [**list_holdings_adjustments**](TransactionPortfoliosApi.md#list_holdings_adjustments) | **GET** /api/transactionportfolios/{scope}/{code}/holdingsadjustments | ListHoldingsAdjustments: List holdings adjustments
-[**patch_portfolio_details**](TransactionPortfoliosApi.md#patch_portfolio_details) | **PATCH** /api/transactionportfolios/{scope}/{code}/details | [EARLY ACCESS] PatchPortfolioDetails: Patch portfolio details
+[**patch_portfolio_details**](TransactionPortfoliosApi.md#patch_portfolio_details) | **PATCH** /api/transactionportfolios/{scope}/{code}/details | PatchPortfolioDetails: Patch portfolio details
 [**resolve_instrument**](TransactionPortfoliosApi.md#resolve_instrument) | **POST** /api/transactionportfolios/{scope}/{code}/$resolve | [EARLY ACCESS] ResolveInstrument: Resolve instrument
 [**set_holdings**](TransactionPortfoliosApi.md#set_holdings) | **PUT** /api/transactionportfolios/{scope}/{code}/holdings | SetHoldings: Set holdings
 [**upsert_custodian_accounts**](TransactionPortfoliosApi.md#upsert_custodian_accounts) | **POST** /api/transactionportfolios/{scope}/{code}/custodianaccounts | [EXPERIMENTAL] UpsertCustodianAccounts: Upsert Custodian Accounts
@@ -2195,7 +2195,7 @@ Name | Type | Description  | Notes
 # **get_portfolio_cash_flows**
 > ResourceListOfInstrumentCashFlow get_portfolio_cash_flows(scope, code, effective_at=effective_at, window_start=window_start, window_end=window_end, as_at=as_at, filter=filter, recipe_id_scope=recipe_id_scope, recipe_id_code=recipe_id_code, exclude_unsettled_trades=exclude_unsettled_trades)
 
-[BETA] GetPortfolioCashFlows: Get portfolio cash flows
+GetPortfolioCashFlows: Get portfolio cash flows
 
 Get the set of cash flows that occur in a window for the transaction portfolio's instruments.                Note that grouping can affect the quantity of information returned; where a holding is an amalgamation of one or more (e.g. cash) instruments, a unique  transaction identifier will not be available. The same may go for diagnostic information (e.g. multiple sources of an aggregate cash amount on a date that is  not split out. Grouping at the transaction and instrument level is recommended for those seeking to attribute individual flows.
 
@@ -2262,7 +2262,7 @@ async with api_client_factory:
     exclude_unsettled_trades = False # bool | If absent or set to false, cashflows will returned based on trade date - more specifically, cashflows from any unsettled trades will be included in the results. If set to true, unsettled trades will be excluded from the result set. (optional) (default to False)
 
     try:
-        # [BETA] GetPortfolioCashFlows: Get portfolio cash flows
+        # GetPortfolioCashFlows: Get portfolio cash flows
         api_response = await api_instance.get_portfolio_cash_flows(scope, code, effective_at=effective_at, window_start=window_start, window_end=window_end, as_at=as_at, filter=filter, recipe_id_scope=recipe_id_scope, recipe_id_code=recipe_id_code, exclude_unsettled_trades=exclude_unsettled_trades)
         print("The response of TransactionPortfoliosApi->get_portfolio_cash_flows:\n")
         pprint(api_response)
@@ -2761,7 +2761,7 @@ Name | Type | Description  | Notes
 # **get_upsertable_portfolio_cash_flows**
 > ResourceListOfTransaction get_upsertable_portfolio_cash_flows(scope, code, effective_at=effective_at, window_start=window_start, window_end=window_end, as_at=as_at, filter=filter, recipe_id_scope=recipe_id_scope, recipe_id_code=recipe_id_code, exclude_unsettled_trades=exclude_unsettled_trades)
 
-[BETA] GetUpsertablePortfolioCashFlows: Get upsertable portfolio cash flows.
+GetUpsertablePortfolioCashFlows: Get upsertable portfolio cash flows.
 
 Get the set of cash flows that occur in a window for the given portfolio instruments as a set of upsertable transactions (DTOs).                Note that grouping can affect the quantity of information returned; where a holding is an amalgamation of one or more (e.g. cash) instruments, a unique  transaction identifier will not be available. The same may go for diagnostic information (e.g. multiple sources of an aggregate cash amount on a date that is  not split out. Grouping at the transaction and instrument level is recommended for those seeking to attribute individual flows.                In essence this is identical to the 'GetCashFlows' endpoint but returns the cash flows as a set of transactions suitable for directly putting back into LUSID.  There are a couple of important points:  (1) Internally it can not be fully known where the user wishes to insert these transactions, e.g. portfolio and movement type.      These are therefore defaulted to a sensible option; the user will likely need to change these.  (2) Similarly, knowledge of any properties the user might wish to add to a transaction are unknown and consequently left empty.  (3) The transaction id that is added is simply a concatenation of the original transaction id, instrument id and payment date and direction. The user can happily override this.
 
@@ -2828,7 +2828,7 @@ async with api_client_factory:
     exclude_unsettled_trades = True # bool | If absent or set to true, unsettled trades will be excluded from the result set. If set to false, cashflows will returned based on trade date - more specifically, cashflows from any unsettled trades will be included in the results. (optional) (default to True)
 
     try:
-        # [BETA] GetUpsertablePortfolioCashFlows: Get upsertable portfolio cash flows.
+        # GetUpsertablePortfolioCashFlows: Get upsertable portfolio cash flows.
         api_response = await api_instance.get_upsertable_portfolio_cash_flows(scope, code, effective_at=effective_at, window_start=window_start, window_end=window_end, as_at=as_at, filter=filter, recipe_id_scope=recipe_id_scope, recipe_id_code=recipe_id_code, exclude_unsettled_trades=exclude_unsettled_trades)
         print("The response of TransactionPortfoliosApi->get_upsertable_portfolio_cash_flows:\n")
         pprint(api_response)
@@ -3095,7 +3095,7 @@ Name | Type | Description  | Notes
 # **patch_portfolio_details**
 > PortfolioDetails patch_portfolio_details(scope, code, operation, effective_at=effective_at)
 
-[EARLY ACCESS] PatchPortfolioDetails: Patch portfolio details
+PatchPortfolioDetails: Patch portfolio details
 
 Create or update certain details for a particular transaction portfolio.  The behaviour is defined by the JSON Patch specification.                Note that not all elements of a transaction portfolio definition are  modifiable once it has been created due to the potential implications for data already stored.  Currently supported properties are: SubHoldingKeys, BaseCurrency, AmortisationMethod
 
@@ -3157,7 +3157,7 @@ async with api_client_factory:
     effective_at = 'effective_at_example' # str | The effective datetime or cut label at which the updated or inserted details should become valid.               Defaults to the current LUSID system datetime if not specified.               Note that this will affect all bitemporal entities in the request, but will not be used for any perpetual entities. (optional)
 
     try:
-        # [EARLY ACCESS] PatchPortfolioDetails: Patch portfolio details
+        # PatchPortfolioDetails: Patch portfolio details
         api_response = await api_instance.patch_portfolio_details(scope, code, operation, effective_at=effective_at)
         print("The response of TransactionPortfoliosApi->patch_portfolio_details:\n")
         pprint(api_response)

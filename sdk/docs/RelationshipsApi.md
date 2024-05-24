@@ -4,14 +4,14 @@ All URIs are relative to *https://www.lusid.com/api*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
-[**create_relationship**](RelationshipsApi.md#create_relationship) | **POST** /api/relationshipdefinitions/{scope}/{code}/relationships | [EARLY ACCESS] CreateRelationship: Create Relationship
+[**create_relationship**](RelationshipsApi.md#create_relationship) | **POST** /api/relationshipdefinitions/{scope}/{code}/relationships | CreateRelationship: Create Relationship
 [**delete_relationship**](RelationshipsApi.md#delete_relationship) | **POST** /api/relationshipdefinitions/{scope}/{code}/relationships/$delete | [EARLY ACCESS] DeleteRelationship: Delete Relationship
 
 
 # **create_relationship**
 > CompleteRelationship create_relationship(scope, code, create_relationship_request)
 
-[EARLY ACCESS] CreateRelationship: Create Relationship
+CreateRelationship: Create Relationship
 
 Create a relationship between two entity objects by their identifiers
 
@@ -72,7 +72,7 @@ async with api_client_factory:
     create_relationship_request = {"sourceEntityId":{"scope":"UkPortfolio","code":"PortfolioId-148176"},"targetEntityId":{"idTypeScope":"HrSystem1","idTypeCode":"InternalId","code":"XY10001111"},"effectiveFrom":"2019-01-01T12:00:00.0000000+00:00","effectiveUntil":"2022-01-01T12:00:00.0000000+00:00"} # CreateRelationshipRequest | The details of the relationship to create.
 
     try:
-        # [EARLY ACCESS] CreateRelationship: Create Relationship
+        # CreateRelationship: Create Relationship
         api_response = await api_instance.create_relationship(scope, code, create_relationship_request)
         print("The response of RelationshipsApi->create_relationship:\n")
         pprint(api_response)

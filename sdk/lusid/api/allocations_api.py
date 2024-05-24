@@ -596,7 +596,7 @@ class AllocationsApi:
 
     @validate_arguments
     def upsert_allocations(self, allocation_set_request : Annotated[Optional[AllocationSetRequest], Field(description="The collection of allocation requests.")] = None, async_req: Optional[bool]=None, **kwargs) -> Union[ResourceListOfAllocation, Awaitable[ResourceListOfAllocation]]:  # noqa: E501
-        """[EARLY ACCESS] UpsertAllocations: Upsert Allocations  # noqa: E501
+        """UpsertAllocations: Upsert Allocations  # noqa: E501
 
         Upsert; update existing allocations with given ids, or create new allocations otherwise.  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
@@ -628,7 +628,7 @@ class AllocationsApi:
 
     @validate_arguments
     def upsert_allocations_with_http_info(self, allocation_set_request : Annotated[Optional[AllocationSetRequest], Field(description="The collection of allocation requests.")] = None, **kwargs) -> ApiResponse:  # noqa: E501
-        """[EARLY ACCESS] UpsertAllocations: Upsert Allocations  # noqa: E501
+        """UpsertAllocations: Upsert Allocations  # noqa: E501
 
         Upsert; update existing allocations with given ids, or create new allocations otherwise.  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an

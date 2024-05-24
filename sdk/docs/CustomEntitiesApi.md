@@ -7,13 +7,13 @@ Method | HTTP request | Description
 [**delete_custom_entity**](CustomEntitiesApi.md#delete_custom_entity) | **DELETE** /api/customentities/{entityType}/{identifierType}/{identifierValue} | [EARLY ACCESS] DeleteCustomEntity: Delete a Custom Entity instance.
 [**delete_custom_entity_access_metadata**](CustomEntitiesApi.md#delete_custom_entity_access_metadata) | **DELETE** /api/customentities/{entityType}/{identifierType}/{identifierValue}/metadata/{metadataKey} | [EARLY ACCESS] DeleteCustomEntityAccessMetadata: Delete a Custom Entity Access Metadata entry
 [**get_all_custom_entity_access_metadata**](CustomEntitiesApi.md#get_all_custom_entity_access_metadata) | **GET** /api/customentities/{entityType}/{identifierType}/{identifierValue}/metadata | [EARLY ACCESS] GetAllCustomEntityAccessMetadata: Get all the Access Metadata rules for a Custom Entity
-[**get_custom_entity**](CustomEntitiesApi.md#get_custom_entity) | **GET** /api/customentities/{entityType}/{identifierType}/{identifierValue} | [EARLY ACCESS] GetCustomEntity: Get a Custom Entity instance.
+[**get_custom_entity**](CustomEntitiesApi.md#get_custom_entity) | **GET** /api/customentities/{entityType}/{identifierType}/{identifierValue} | GetCustomEntity: Get a Custom Entity instance.
 [**get_custom_entity_access_metadata_by_key**](CustomEntitiesApi.md#get_custom_entity_access_metadata_by_key) | **GET** /api/customentities/{entityType}/{identifierType}/{identifierValue}/metadata/{metadataKey} | [EARLY ACCESS] GetCustomEntityAccessMetadataByKey: Get an entry identified by a metadataKey in the Access Metadata of a Custom Entity
 [**get_custom_entity_relationships**](CustomEntitiesApi.md#get_custom_entity_relationships) | **GET** /api/customentities/{entityType}/{identifierType}/{identifierValue}/relationships | [EARLY ACCESS] GetCustomEntityRelationships: Get Relationships for Custom Entity
-[**list_custom_entities**](CustomEntitiesApi.md#list_custom_entities) | **GET** /api/customentities/{entityType} | [EARLY ACCESS] ListCustomEntities: List Custom Entities of the specified entityType.
+[**list_custom_entities**](CustomEntitiesApi.md#list_custom_entities) | **GET** /api/customentities/{entityType} | ListCustomEntities: List Custom Entities of the specified entityType.
 [**patch_custom_entity_access_metadata**](CustomEntitiesApi.md#patch_custom_entity_access_metadata) | **PATCH** /api/customentities/{entityType}/{identifierType}/{identifierValue}/metadata | [EARLY ACCESS] PatchCustomEntityAccessMetadata: Patch Access Metadata rules for a Custom Entity.
 [**upsert_custom_entities**](CustomEntitiesApi.md#upsert_custom_entities) | **POST** /api/customentities/{entityType}/$batchUpsert | [EARLY ACCESS] UpsertCustomEntities: Batch upsert instances of Custom Entities
-[**upsert_custom_entity**](CustomEntitiesApi.md#upsert_custom_entity) | **POST** /api/customentities/{entityType} | [EARLY ACCESS] UpsertCustomEntity: Upsert a Custom Entity instance
+[**upsert_custom_entity**](CustomEntitiesApi.md#upsert_custom_entity) | **POST** /api/customentities/{entityType} | UpsertCustomEntity: Upsert a Custom Entity instance
 [**upsert_custom_entity_access_metadata**](CustomEntitiesApi.md#upsert_custom_entity_access_metadata) | **PUT** /api/customentities/{entityType}/{identifierType}/{identifierValue}/metadata/{metadataKey} | [EARLY ACCESS] UpsertCustomEntityAccessMetadata: Upsert a Custom Entity Access Metadata entry associated with a specific metadataKey. This creates or updates the data in LUSID.
 
 
@@ -342,7 +342,7 @@ Name | Type | Description  | Notes
 # **get_custom_entity**
 > CustomEntityResponse get_custom_entity(entity_type, identifier_type, identifier_value, identifier_scope, as_at=as_at, effective_at=effective_at, related_entity_property_keys=related_entity_property_keys, relationship_definition_ids=relationship_definition_ids)
 
-[EARLY ACCESS] GetCustomEntity: Get a Custom Entity instance.
+GetCustomEntity: Get a Custom Entity instance.
 
 Retrieve a Custom Entity instance by a specific entity type at a point in AsAt time.
 
@@ -407,7 +407,7 @@ async with api_client_factory:
     relationship_definition_ids = ['relationship_definition_ids_example'] # List[str] | A list of relationship definitions that are used to decorate related entities              onto the entity in the response. These must take the form {relationshipDefinitionScope}/{relationshipDefinitionCode}. (optional)
 
     try:
-        # [EARLY ACCESS] GetCustomEntity: Get a Custom Entity instance.
+        # GetCustomEntity: Get a Custom Entity instance.
         api_response = await api_instance.get_custom_entity(entity_type, identifier_type, identifier_value, identifier_scope, as_at=as_at, effective_at=effective_at, related_entity_property_keys=related_entity_property_keys, relationship_definition_ids=relationship_definition_ids)
         print("The response of CustomEntitiesApi->get_custom_entity:\n")
         pprint(api_response)
@@ -676,7 +676,7 @@ Name | Type | Description  | Notes
 # **list_custom_entities**
 > PagedResourceListOfCustomEntityResponse list_custom_entities(entity_type, effective_at=effective_at, as_at=as_at, limit=limit, filter=filter, sort_by=sort_by, page=page, related_entity_property_keys=related_entity_property_keys, relationship_definition_ids=relationship_definition_ids)
 
-[EARLY ACCESS] ListCustomEntities: List Custom Entities of the specified entityType.
+ListCustomEntities: List Custom Entities of the specified entityType.
 
 List all the Custom Entities matching particular criteria.
 
@@ -742,7 +742,7 @@ async with api_client_factory:
     relationship_definition_ids = ['relationship_definition_ids_example'] # List[str] | A list of relationship definitions that are used to decorate related entities              onto the entities in the response. These must take the form {relationshipDefinitionScope}/{relationshipDefinitionCode}. (optional)
 
     try:
-        # [EARLY ACCESS] ListCustomEntities: List Custom Entities of the specified entityType.
+        # ListCustomEntities: List Custom Entities of the specified entityType.
         api_response = await api_instance.list_custom_entities(entity_type, effective_at=effective_at, as_at=as_at, limit=limit, filter=filter, sort_by=sort_by, page=page, related_entity_property_keys=related_entity_property_keys, relationship_definition_ids=relationship_definition_ids)
         print("The response of CustomEntitiesApi->list_custom_entities:\n")
         pprint(api_response)
@@ -1004,7 +1004,7 @@ Name | Type | Description  | Notes
 # **upsert_custom_entity**
 > CustomEntityResponse upsert_custom_entity(entity_type, custom_entity_request)
 
-[EARLY ACCESS] UpsertCustomEntity: Upsert a Custom Entity instance
+UpsertCustomEntity: Upsert a Custom Entity instance
 
 Insert the Custom Entity if it does not exist or update the Custom Entity with the supplied state if it does exist.
 
@@ -1064,7 +1064,7 @@ async with api_client_factory:
     custom_entity_request = {"displayName":"Portfolio Access Denied","description":"User cannot access the portfolio","identifiers":[{"identifierScope":"someScope","identifierType":"supportTicketId","identifierValue":"xyz123pqr"}],"fields":[{"name":"clientId","value":"AcmeLtd"},{"name":"issueDescription","value":"I can't access this portfolio","effectiveFrom":"2023-03-03T09:00:00.0000000+00:00"}]} # CustomEntityRequest | The payload describing the Custom Entity instance.
 
     try:
-        # [EARLY ACCESS] UpsertCustomEntity: Upsert a Custom Entity instance
+        # UpsertCustomEntity: Upsert a Custom Entity instance
         api_response = await api_instance.upsert_custom_entity(entity_type, custom_entity_request)
         print("The response of CustomEntitiesApi->upsert_custom_entity:\n")
         pprint(api_response)

@@ -14,7 +14,7 @@ Method | HTTP request | Description
 [**list_property_definitions**](PropertyDefinitionsApi.md#list_property_definitions) | **GET** /api/propertydefinitions/$list | ListPropertyDefinitions: List property definitions
 [**update_derived_property_definition**](PropertyDefinitionsApi.md#update_derived_property_definition) | **PUT** /api/propertydefinitions/derived/{domain}/{scope}/{code} | [EARLY ACCESS] UpdateDerivedPropertyDefinition: Update a pre-existing derived property definition
 [**update_property_definition**](PropertyDefinitionsApi.md#update_property_definition) | **PUT** /api/propertydefinitions/{domain}/{scope}/{code} | UpdatePropertyDefinition: Update property definition
-[**upsert_property_definition_properties**](PropertyDefinitionsApi.md#upsert_property_definition_properties) | **POST** /api/propertydefinitions/{domain}/{scope}/{code}/properties | [EARLY ACCESS] UpsertPropertyDefinitionProperties: Upsert properties to a property definition
+[**upsert_property_definition_properties**](PropertyDefinitionsApi.md#upsert_property_definition_properties) | **POST** /api/propertydefinitions/{domain}/{scope}/{code}/properties | UpsertPropertyDefinitionProperties: Upsert properties to a property definition
 
 
 # **create_derived_property_definition**
@@ -1068,7 +1068,7 @@ Name | Type | Description  | Notes
 # **upsert_property_definition_properties**
 > BatchUpsertPropertyDefinitionPropertiesResponse upsert_property_definition_properties(domain, scope, code, request_body, success_mode=success_mode)
 
-[EARLY ACCESS] UpsertPropertyDefinitionProperties: Upsert properties to a property definition
+UpsertPropertyDefinitionProperties: Upsert properties to a property definition
 
 Create or update properties for a particular property definition
 
@@ -1131,7 +1131,7 @@ async with api_client_factory:
     success_mode = 'Partial' # str | Whether the batch request should fail Atomically or in a Partial fashion - Allowed Values: Atomic, Partial. (optional) (default to 'Partial')
 
     try:
-        # [EARLY ACCESS] UpsertPropertyDefinitionProperties: Upsert properties to a property definition
+        # UpsertPropertyDefinitionProperties: Upsert properties to a property definition
         api_response = await api_instance.upsert_property_definition_properties(domain, scope, code, request_body, success_mode=success_mode)
         print("The response of PropertyDefinitionsApi->upsert_property_definition_properties:\n")
         pprint(api_response)

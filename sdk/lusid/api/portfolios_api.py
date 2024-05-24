@@ -262,7 +262,7 @@ class PortfoliosApi:
 
     @validate_arguments
     def delete_key_from_portfolio_access_metadata(self, scope : Annotated[constr(strict=True, max_length=64, min_length=1), Field(..., description="The scope of the Quote Access Metadata Rule to retrieve.")], code : Annotated[constr(strict=True, max_length=64, min_length=1), Field(..., description="Portfolio code")], metadata_key : Annotated[constr(strict=True, max_length=256, min_length=1), Field(..., description="The metadataKey identifying the access metadata entry to delete")], effective_at : Annotated[Optional[StrictStr], Field(description="The effective date to delete at, if this is not supplied, it will delete all data found")] = None, effective_until : Annotated[Optional[datetime], Field(description="The effective date until which the delete is valid. If not supplied this will be valid indefinitely, or until the next 'effectiveAt' date of the Access Metadata")] = None, async_req: Optional[bool]=None, **kwargs) -> Union[DeletedEntityResponse, Awaitable[DeletedEntityResponse]]:  # noqa: E501
-        """[EARLY ACCESS] DeleteKeyFromPortfolioAccessMetadata: Delete a Portfolio Access Metadata Rule  # noqa: E501
+        """DeleteKeyFromPortfolioAccessMetadata: Delete a Portfolio Access Metadata Rule  # noqa: E501
 
         Delete the Portfolio Access Metadata Rule that exactly matches the provided identifier parts  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
@@ -302,7 +302,7 @@ class PortfoliosApi:
 
     @validate_arguments
     def delete_key_from_portfolio_access_metadata_with_http_info(self, scope : Annotated[constr(strict=True, max_length=64, min_length=1), Field(..., description="The scope of the Quote Access Metadata Rule to retrieve.")], code : Annotated[constr(strict=True, max_length=64, min_length=1), Field(..., description="Portfolio code")], metadata_key : Annotated[constr(strict=True, max_length=256, min_length=1), Field(..., description="The metadataKey identifying the access metadata entry to delete")], effective_at : Annotated[Optional[StrictStr], Field(description="The effective date to delete at, if this is not supplied, it will delete all data found")] = None, effective_until : Annotated[Optional[datetime], Field(description="The effective date until which the delete is valid. If not supplied this will be valid indefinitely, or until the next 'effectiveAt' date of the Access Metadata")] = None, **kwargs) -> ApiResponse:  # noqa: E501
-        """[EARLY ACCESS] DeleteKeyFromPortfolioAccessMetadata: Delete a Portfolio Access Metadata Rule  # noqa: E501
+        """DeleteKeyFromPortfolioAccessMetadata: Delete a Portfolio Access Metadata Rule  # noqa: E501
 
         Delete the Portfolio Access Metadata Rule that exactly matches the provided identifier parts  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
@@ -2009,7 +2009,7 @@ class PortfoliosApi:
 
     @validate_arguments
     def get_portfolio_aggregated_returns(self, scope : Annotated[constr(strict=True, max_length=64, min_length=1), Field(..., description="The scope of the Portfolio.")], code : Annotated[constr(strict=True, max_length=64, min_length=1), Field(..., description="The code of the  Portfolio.")], aggregated_returns_request : Annotated[AggregatedReturnsRequest, Field(..., description="The request used in the AggregatedReturns.")], from_effective_at : Annotated[Optional[StrictStr], Field(description="The start date from which to calculate the Returns.")] = None, to_effective_at : Annotated[Optional[StrictStr], Field(description="The end date for which to calculate the Returns.")] = None, as_at : Annotated[Optional[datetime], Field(description="The asAt datetime at which to retrieve the Returns. Defaults to the latest.")] = None, async_req: Optional[bool]=None, **kwargs) -> Union[AggregatedReturnsResponse, Awaitable[AggregatedReturnsResponse]]:  # noqa: E501
-        """[EARLY ACCESS] GetPortfolioAggregatedReturns: Aggregated Returns  # noqa: E501
+        """GetPortfolioAggregatedReturns: Aggregated Returns  # noqa: E501
 
         Aggregate Returns which are on the specified portfolio.  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
@@ -2051,7 +2051,7 @@ class PortfoliosApi:
 
     @validate_arguments
     def get_portfolio_aggregated_returns_with_http_info(self, scope : Annotated[constr(strict=True, max_length=64, min_length=1), Field(..., description="The scope of the Portfolio.")], code : Annotated[constr(strict=True, max_length=64, min_length=1), Field(..., description="The code of the  Portfolio.")], aggregated_returns_request : Annotated[AggregatedReturnsRequest, Field(..., description="The request used in the AggregatedReturns.")], from_effective_at : Annotated[Optional[StrictStr], Field(description="The start date from which to calculate the Returns.")] = None, to_effective_at : Annotated[Optional[StrictStr], Field(description="The end date for which to calculate the Returns.")] = None, as_at : Annotated[Optional[datetime], Field(description="The asAt datetime at which to retrieve the Returns. Defaults to the latest.")] = None, **kwargs) -> ApiResponse:  # noqa: E501
-        """[EARLY ACCESS] GetPortfolioAggregatedReturns: Aggregated Returns  # noqa: E501
+        """GetPortfolioAggregatedReturns: Aggregated Returns  # noqa: E501
 
         Aggregate Returns which are on the specified portfolio.  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
@@ -2415,7 +2415,7 @@ class PortfoliosApi:
 
     @validate_arguments
     def get_portfolio_metadata(self, scope : Annotated[constr(strict=True, max_length=64, min_length=1), Field(..., description="The scope of the Portfolio Access Metadata Rule to retrieve.")], code : Annotated[constr(strict=True, max_length=64, min_length=1), Field(..., description="Portfolio code")], effective_at : Annotated[Optional[StrictStr], Field(description="The effectiveAt datetime at which to retrieve the access metadata rule.")] = None, as_at : Annotated[Optional[datetime], Field(description="The asAt datetime at which to retrieve the portfolio access metadata.")] = None, async_req: Optional[bool]=None, **kwargs) -> Union[Dict[str, List[AccessMetadataValue]], Awaitable[Dict[str, List[AccessMetadataValue]]]]:  # noqa: E501
-        """[EARLY ACCESS] GetPortfolioMetadata: Get access metadata rules for a portfolio  # noqa: E501
+        """GetPortfolioMetadata: Get access metadata rules for a portfolio  # noqa: E501
 
         Pass the scope and portfolio code parameters to retrieve the AccessMetadata associated with a portfolio  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
@@ -2453,7 +2453,7 @@ class PortfoliosApi:
 
     @validate_arguments
     def get_portfolio_metadata_with_http_info(self, scope : Annotated[constr(strict=True, max_length=64, min_length=1), Field(..., description="The scope of the Portfolio Access Metadata Rule to retrieve.")], code : Annotated[constr(strict=True, max_length=64, min_length=1), Field(..., description="Portfolio code")], effective_at : Annotated[Optional[StrictStr], Field(description="The effectiveAt datetime at which to retrieve the access metadata rule.")] = None, as_at : Annotated[Optional[datetime], Field(description="The asAt datetime at which to retrieve the portfolio access metadata.")] = None, **kwargs) -> ApiResponse:  # noqa: E501
-        """[EARLY ACCESS] GetPortfolioMetadata: Get access metadata rules for a portfolio  # noqa: E501
+        """GetPortfolioMetadata: Get access metadata rules for a portfolio  # noqa: E501
 
         Pass the scope and portfolio code parameters to retrieve the AccessMetadata associated with a portfolio  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
@@ -2771,7 +2771,7 @@ class PortfoliosApi:
 
     @validate_arguments
     def get_portfolio_property_time_series(self, scope : Annotated[constr(strict=True, max_length=64, min_length=1), Field(..., description="The scope of the portfolio.")], code : Annotated[constr(strict=True, max_length=64, min_length=1), Field(..., description="The code of the portfolio. Together with the scope this uniquely identifies the portfolio.")], property_key : Annotated[StrictStr, Field(..., description="The property key of the property whose history to show.              This must be from the 'Portfolio' domain and in the format {domain}/{scope}/{code}, for example 'Portfolio/Manager/Id'.")], portfolio_effective_at : Annotated[Optional[StrictStr], Field(description="The effective datetime used to resolve the portfolio. Defaults to the current LUSID system datetime if not specified.")] = None, as_at : Annotated[Optional[datetime], Field(description="The asAt datetime at which to show the history. Defaults to returning the current datetime if not supplied.")] = None, filter : Annotated[Optional[constr(strict=True, max_length=16384, min_length=0)], Field(description="Expression to filter the results. For more information about filtering,              see https://support.lusid.com/knowledgebase/article/KA-01914.")] = None, page : Annotated[Optional[constr(strict=True, max_length=500, min_length=1)], Field(description="The pagination token to use to continue listing properties; this value is returned from              the previous call. If a pagination token is provided, the filter, portfolioEffectiveAt, and asAt fields              must not have changed since the original request.")] = None, limit : Annotated[Optional[conint(strict=True, le=5000, ge=1)], Field(description="When paginating, limit the results to this number.")] = None, async_req: Optional[bool]=None, **kwargs) -> Union[ResourceListOfPropertyInterval, Awaitable[ResourceListOfPropertyInterval]]:  # noqa: E501
-        """[EARLY ACCESS] GetPortfolioPropertyTimeSeries: Get portfolio property time series  # noqa: E501
+        """GetPortfolioPropertyTimeSeries: Get portfolio property time series  # noqa: E501
 
         Show the complete time series (history) for a particular portfolio property.  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
@@ -2817,7 +2817,7 @@ class PortfoliosApi:
 
     @validate_arguments
     def get_portfolio_property_time_series_with_http_info(self, scope : Annotated[constr(strict=True, max_length=64, min_length=1), Field(..., description="The scope of the portfolio.")], code : Annotated[constr(strict=True, max_length=64, min_length=1), Field(..., description="The code of the portfolio. Together with the scope this uniquely identifies the portfolio.")], property_key : Annotated[StrictStr, Field(..., description="The property key of the property whose history to show.              This must be from the 'Portfolio' domain and in the format {domain}/{scope}/{code}, for example 'Portfolio/Manager/Id'.")], portfolio_effective_at : Annotated[Optional[StrictStr], Field(description="The effective datetime used to resolve the portfolio. Defaults to the current LUSID system datetime if not specified.")] = None, as_at : Annotated[Optional[datetime], Field(description="The asAt datetime at which to show the history. Defaults to returning the current datetime if not supplied.")] = None, filter : Annotated[Optional[constr(strict=True, max_length=16384, min_length=0)], Field(description="Expression to filter the results. For more information about filtering,              see https://support.lusid.com/knowledgebase/article/KA-01914.")] = None, page : Annotated[Optional[constr(strict=True, max_length=500, min_length=1)], Field(description="The pagination token to use to continue listing properties; this value is returned from              the previous call. If a pagination token is provided, the filter, portfolioEffectiveAt, and asAt fields              must not have changed since the original request.")] = None, limit : Annotated[Optional[conint(strict=True, le=5000, ge=1)], Field(description="When paginating, limit the results to this number.")] = None, **kwargs) -> ApiResponse:  # noqa: E501
-        """[EARLY ACCESS] GetPortfolioPropertyTimeSeries: Get portfolio property time series  # noqa: E501
+        """GetPortfolioPropertyTimeSeries: Get portfolio property time series  # noqa: E501
 
         Show the complete time series (history) for a particular portfolio property.  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
@@ -3176,7 +3176,7 @@ class PortfoliosApi:
 
     @validate_arguments
     def get_portfolio_relationships(self, scope : Annotated[constr(strict=True, max_length=64, min_length=1), Field(..., description="The scope of the portfolio.")], code : Annotated[constr(strict=True, max_length=64, min_length=1), Field(..., description="The code of the portfolio. Together with the scope this uniquely identifies the portfolio.")], effective_at : Annotated[Optional[constr(strict=True, max_length=256, min_length=0)], Field(description="The effective datetime or cut label at which to retrieve relationships. Defaults to the current LUSID system datetime if not specified.")] = None, as_at : Annotated[Optional[datetime], Field(description="The asAt datetime at which to retrieve relationships. Defaults to returning the latest LUSID AsAt time if not specified.")] = None, filter : Annotated[Optional[constr(strict=True, max_length=16384, min_length=0)], Field(description="Expression to filter the relationships. Provide a null or empty string for this field until further notice.")] = None, identifier_types : Annotated[Optional[conlist(StrictStr)], Field(description="Identifier types (as property keys) used for referencing Persons or Legal Entities.              These can be specified from the 'Person' or 'LegalEntity' domains and have the format {domain}/{scope}/{code}, for example              'Person/CompanyDetails/Role'. An Empty array may be used to return all related Entities.")] = None, async_req: Optional[bool]=None, **kwargs) -> Union[ResourceListOfRelationship, Awaitable[ResourceListOfRelationship]]:  # noqa: E501
-        """[EARLY ACCESS] GetPortfolioRelationships: Get portfolio relationships  # noqa: E501
+        """GetPortfolioRelationships: Get portfolio relationships  # noqa: E501
 
         Get relationships for a particular portfolio.  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
@@ -3218,7 +3218,7 @@ class PortfoliosApi:
 
     @validate_arguments
     def get_portfolio_relationships_with_http_info(self, scope : Annotated[constr(strict=True, max_length=64, min_length=1), Field(..., description="The scope of the portfolio.")], code : Annotated[constr(strict=True, max_length=64, min_length=1), Field(..., description="The code of the portfolio. Together with the scope this uniquely identifies the portfolio.")], effective_at : Annotated[Optional[constr(strict=True, max_length=256, min_length=0)], Field(description="The effective datetime or cut label at which to retrieve relationships. Defaults to the current LUSID system datetime if not specified.")] = None, as_at : Annotated[Optional[datetime], Field(description="The asAt datetime at which to retrieve relationships. Defaults to returning the latest LUSID AsAt time if not specified.")] = None, filter : Annotated[Optional[constr(strict=True, max_length=16384, min_length=0)], Field(description="Expression to filter the relationships. Provide a null or empty string for this field until further notice.")] = None, identifier_types : Annotated[Optional[conlist(StrictStr)], Field(description="Identifier types (as property keys) used for referencing Persons or Legal Entities.              These can be specified from the 'Person' or 'LegalEntity' domains and have the format {domain}/{scope}/{code}, for example              'Person/CompanyDetails/Role'. An Empty array may be used to return all related Entities.")] = None, **kwargs) -> ApiResponse:  # noqa: E501
-        """[EARLY ACCESS] GetPortfolioRelationships: Get portfolio relationships  # noqa: E501
+        """GetPortfolioRelationships: Get portfolio relationships  # noqa: E501
 
         Get relationships for a particular portfolio.  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
@@ -3371,7 +3371,7 @@ class PortfoliosApi:
 
     @validate_arguments
     def get_portfolio_returns(self, scope : Annotated[constr(strict=True, max_length=64, min_length=1), Field(..., description="The scope of the Portfolio.")], code : Annotated[constr(strict=True, max_length=64, min_length=1), Field(..., description="The code of the  Portfolio.")], return_scope : Annotated[constr(strict=True, max_length=64, min_length=1), Field(..., description="The scope of the Returns.")], return_code : Annotated[constr(strict=True, max_length=64, min_length=1), Field(..., description="The code of the Returns.")], from_effective_at : Annotated[Optional[StrictStr], Field(description="The start date from which to get the Returns.")] = None, to_effective_at : Annotated[Optional[StrictStr], Field(description="The end date from which to get the Returns.")] = None, period : Annotated[Optional[StrictStr], Field(description="Show the Returns on a Daily or Monthly period. Defaults to Daily.")] = None, as_at : Annotated[Optional[datetime], Field(description="The asAt datetime at which to retrieve the Returns. Defaults to the latest.")] = None, async_req: Optional[bool]=None, **kwargs) -> Union[ResourceListOfPerformanceReturn, Awaitable[ResourceListOfPerformanceReturn]]:  # noqa: E501
-        """[EARLY ACCESS] GetPortfolioReturns: Get Returns  # noqa: E501
+        """GetPortfolioReturns: Get Returns  # noqa: E501
 
         Get Returns which are on the specified portfolio.  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
@@ -3417,7 +3417,7 @@ class PortfoliosApi:
 
     @validate_arguments
     def get_portfolio_returns_with_http_info(self, scope : Annotated[constr(strict=True, max_length=64, min_length=1), Field(..., description="The scope of the Portfolio.")], code : Annotated[constr(strict=True, max_length=64, min_length=1), Field(..., description="The code of the  Portfolio.")], return_scope : Annotated[constr(strict=True, max_length=64, min_length=1), Field(..., description="The scope of the Returns.")], return_code : Annotated[constr(strict=True, max_length=64, min_length=1), Field(..., description="The code of the Returns.")], from_effective_at : Annotated[Optional[StrictStr], Field(description="The start date from which to get the Returns.")] = None, to_effective_at : Annotated[Optional[StrictStr], Field(description="The end date from which to get the Returns.")] = None, period : Annotated[Optional[StrictStr], Field(description="Show the Returns on a Daily or Monthly period. Defaults to Daily.")] = None, as_at : Annotated[Optional[datetime], Field(description="The asAt datetime at which to retrieve the Returns. Defaults to the latest.")] = None, **kwargs) -> ApiResponse:  # noqa: E501
-        """[EARLY ACCESS] GetPortfolioReturns: Get Returns  # noqa: E501
+        """GetPortfolioReturns: Get Returns  # noqa: E501
 
         Get Returns which are on the specified portfolio.  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
@@ -4614,7 +4614,7 @@ class PortfoliosApi:
 
     @validate_arguments
     def patch_portfolio(self, scope : Annotated[constr(strict=True, max_length=64, min_length=1), Field(..., description="The scope of the portfolio.")], code : Annotated[constr(strict=True, max_length=64, min_length=1), Field(..., description="The code of the portfolio. Together with the               scope this uniquely identifies the portfolio.")], operation : Annotated[conlist(Operation), Field(..., description="The json patch document. For more check: https://datatracker.ietf.org/doc/html/rfc6902.")], async_req: Optional[bool]=None, **kwargs) -> Union[Portfolio, Awaitable[Portfolio]]:  # noqa: E501
-        """[EARLY ACCESS] PatchPortfolio: Patch portfolio.  # noqa: E501
+        """PatchPortfolio: Patch portfolio.  # noqa: E501
 
         Create or update certain fields for a particular  portfolio.  The behaviour is defined by the JSON Patch specification.                Currently supported are: CreationDate, InstrumentScopes.  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
@@ -4650,7 +4650,7 @@ class PortfoliosApi:
 
     @validate_arguments
     def patch_portfolio_with_http_info(self, scope : Annotated[constr(strict=True, max_length=64, min_length=1), Field(..., description="The scope of the portfolio.")], code : Annotated[constr(strict=True, max_length=64, min_length=1), Field(..., description="The code of the portfolio. Together with the               scope this uniquely identifies the portfolio.")], operation : Annotated[conlist(Operation), Field(..., description="The json patch document. For more check: https://datatracker.ietf.org/doc/html/rfc6902.")], **kwargs) -> ApiResponse:  # noqa: E501
-        """[EARLY ACCESS] PatchPortfolio: Patch portfolio.  # noqa: E501
+        """PatchPortfolio: Patch portfolio.  # noqa: E501
 
         Create or update certain fields for a particular  portfolio.  The behaviour is defined by the JSON Patch specification.                Currently supported are: CreationDate, InstrumentScopes.  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
@@ -5728,7 +5728,7 @@ class PortfoliosApi:
 
     @validate_arguments
     def upsert_portfolio_returns(self, scope : Annotated[constr(strict=True, max_length=64, min_length=1), Field(..., description="The scope of the Portfolio.")], code : Annotated[constr(strict=True, max_length=64, min_length=1), Field(..., description="The code of the  Portfolio.")], return_scope : Annotated[constr(strict=True, max_length=64, min_length=1), Field(..., description="The scope of the Returns.")], return_code : Annotated[constr(strict=True, max_length=64, min_length=1), Field(..., description="The code of the Returns.")], performance_return : Annotated[conlist(PerformanceReturn), Field(..., description="This contains the Returns which need to be upsert.")], async_req: Optional[bool]=None, **kwargs) -> Union[UpsertReturnsResponse, Awaitable[UpsertReturnsResponse]]:  # noqa: E501
-        """[EARLY ACCESS] UpsertPortfolioReturns: Upsert Returns  # noqa: E501
+        """UpsertPortfolioReturns: Upsert Returns  # noqa: E501
 
         Update or insert returns into the specified portfolio.  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
@@ -5768,7 +5768,7 @@ class PortfoliosApi:
 
     @validate_arguments
     def upsert_portfolio_returns_with_http_info(self, scope : Annotated[constr(strict=True, max_length=64, min_length=1), Field(..., description="The scope of the Portfolio.")], code : Annotated[constr(strict=True, max_length=64, min_length=1), Field(..., description="The code of the  Portfolio.")], return_scope : Annotated[constr(strict=True, max_length=64, min_length=1), Field(..., description="The scope of the Returns.")], return_code : Annotated[constr(strict=True, max_length=64, min_length=1), Field(..., description="The code of the Returns.")], performance_return : Annotated[conlist(PerformanceReturn), Field(..., description="This contains the Returns which need to be upsert.")], **kwargs) -> ApiResponse:  # noqa: E501
-        """[EARLY ACCESS] UpsertPortfolioReturns: Upsert Returns  # noqa: E501
+        """UpsertPortfolioReturns: Upsert Returns  # noqa: E501
 
         Update or insert returns into the specified portfolio.  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an

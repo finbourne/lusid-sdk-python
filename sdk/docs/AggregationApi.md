@@ -5,7 +5,7 @@ All URIs are relative to *https://www.lusid.com/api*
 Method | HTTP request | Description
 ------------- | ------------- | -------------
 [**generate_configuration_recipe**](AggregationApi.md#generate_configuration_recipe) | **POST** /api/aggregation/{scope}/{code}/$generateconfigurationrecipe | [EXPERIMENTAL] GenerateConfigurationRecipe: Generates a recipe sufficient to perform valuations for the given portfolio.
-[**get_queryable_keys**](AggregationApi.md#get_queryable_keys) | **GET** /api/results/queryable/keys | [EARLY ACCESS] GetQueryableKeys: Query the set of supported \&quot;addresses\&quot; that can be queried from the aggregation endpoint.
+[**get_queryable_keys**](AggregationApi.md#get_queryable_keys) | **GET** /api/results/queryable/keys | GetQueryableKeys: Query the set of supported \&quot;addresses\&quot; that can be queried from the aggregation endpoint.
 [**get_valuation**](AggregationApi.md#get_valuation) | **POST** /api/aggregation/$valuation | GetValuation: Perform valuation for a list of portfolios and/or portfolio groups
 [**get_valuation_of_weighted_instruments**](AggregationApi.md#get_valuation_of_weighted_instruments) | **POST** /api/aggregation/$valuationinlined | GetValuationOfWeightedInstruments: Perform valuation for an inlined portfolio
 
@@ -116,7 +116,7 @@ Name | Type | Description  | Notes
 # **get_queryable_keys**
 > ResourceListOfAggregationQuery get_queryable_keys(page=page, limit=limit, filter=filter)
 
-[EARLY ACCESS] GetQueryableKeys: Query the set of supported \"addresses\" that can be queried from the aggregation endpoint.
+GetQueryableKeys: Query the set of supported \"addresses\" that can be queried from the aggregation endpoint.
 
 When a request is made for aggregation, the user needs to know what keys can be passed to it for queryable data. This endpoint allows to queries to provide the set of keys,  what they are and what they return.
 
@@ -176,7 +176,7 @@ async with api_client_factory:
     filter = 'filter_example' # str | Expression to filter the result set.              Read more about filtering results from LUSID here https://support.lusid.com/filtering-results-from-lusid. (optional)
 
     try:
-        # [EARLY ACCESS] GetQueryableKeys: Query the set of supported \"addresses\" that can be queried from the aggregation endpoint.
+        # GetQueryableKeys: Query the set of supported \"addresses\" that can be queried from the aggregation endpoint.
         api_response = await api_instance.get_queryable_keys(page=page, limit=limit, filter=filter)
         print("The response of AggregationApi->get_queryable_keys:\n")
         pprint(api_response)

@@ -7,7 +7,7 @@ Method | HTTP request | Description
 [**delete_complex_market_data**](ComplexMarketDataApi.md#delete_complex_market_data) | **POST** /api/complexmarketdata/{scope}/$delete | [EARLY ACCESS] DeleteComplexMarketData: Delete one or more items of complex market data, assuming they are present.
 [**get_complex_market_data**](ComplexMarketDataApi.md#get_complex_market_data) | **POST** /api/complexmarketdata/{scope}/$get | [EARLY ACCESS] GetComplexMarketData: Get complex market data
 [**list_complex_market_data**](ComplexMarketDataApi.md#list_complex_market_data) | **GET** /api/complexmarketdata | [EXPERIMENTAL] ListComplexMarketData: List the set of ComplexMarketData
-[**upsert_complex_market_data**](ComplexMarketDataApi.md#upsert_complex_market_data) | **POST** /api/complexmarketdata/{scope} | [EARLY ACCESS] UpsertComplexMarketData: Upsert a set of complex market data items. This creates or updates the data in Lusid.
+[**upsert_complex_market_data**](ComplexMarketDataApi.md#upsert_complex_market_data) | **POST** /api/complexmarketdata/{scope} | UpsertComplexMarketData: Upsert a set of complex market data items. This creates or updates the data in Lusid.
 
 
 # **delete_complex_market_data**
@@ -319,7 +319,7 @@ Name | Type | Description  | Notes
 # **upsert_complex_market_data**
 > UpsertStructuredDataResponse upsert_complex_market_data(scope, request_body)
 
-[EARLY ACCESS] UpsertComplexMarketData: Upsert a set of complex market data items. This creates or updates the data in Lusid.
+UpsertComplexMarketData: Upsert a set of complex market data items. This creates or updates the data in Lusid.
 
 Update or insert one or more complex market data items in a single scope. An item will be updated if it already exists  and inserted if it does not.                In the request each complex market data item must be keyed by a unique correlation id. This id is ephemeral and is not stored by LUSID.  It serves only as a way to easily identify each complex market data in the response.                The response will return both the collection of successfully updated or inserted complex market data, as well as those that failed.  For the failures a reason will be provided explaining why the item could not be updated or inserted.                It is important to always check the failed set for any unsuccessful results.
 
@@ -379,7 +379,7 @@ async with api_client_factory:
     request_body = {"first-item":{"marketDataId":{"provider":"DataScope","priceSource":"Some Bank Plc","effectiveAt":"2018-03-05T00:00:00.0000000+00:00","marketAsset":"USD/USDOIS"},"marketData":{"baseDate":"1970-01-01T00:00:00.0000000+00:00","dates":["1970-01-01T00:00:00.0000000+00:00"],"discountFactors":[1],"lineage":"SomeLineage","marketDataOptions":{"dayCountConvention":"Actual365","frontExtrapolationType":"Linear","backExtrapolationType":"None","marketDataOptionsType":"CurveOptions"},"marketDataType":"DiscountFactorCurveData"}},"second-item":{"marketDataId":{"provider":"Lusid","effectiveAt":"2021-01-20T00:00:00.0000000+00:00","marketAsset":"EUR/USD/FxFwdCurve"},"marketData":{"baseDate":"2021-01-20T00:00:00.0000000+00:00","domCcy":"EUR","fgnCcy":"USD","tenors":["1D","1W","2W","3W","1M","2M","3M","4M","5M","6M","9M","1Y","15M","18M","2Y","3Y"],"pipRates":[0.6375,1.4975,3.0275,4.5625,6.7525,19.5125,27.3225,34.0625,41.5175,49.2025,74.8125,104.9125,141.1925,176.8375,260.1475,453.2625],"lineage":"","marketDataOptions":{"dayCountConvention":"Actual365","frontExtrapolationType":"Flat","backExtrapolationType":"Flat","marketDataOptionsType":"CurveOptions"},"calendars":[],"spotDaysCalculationType":"SingleCalendar","marketDataType":"FxForwardTenorPipsCurveData"}},"third-item":{"marketDataId":{"provider":"Lusid","effectiveAt":"2021-01-20T00:00:00.0000000+00:00","marketAsset":"USD/JPY/FxVol/Ln"},"marketData":{"baseDate":"2021-01-20T00:00:00.0000000+00:00","assetType":"FxVol","lineage":"Some-market-data-provider-or-other","volatility":0.15,"marketDataType":"ConstantVolatilitySurface"}}} # Dict[str, UpsertComplexMarketDataRequest] | The set of complex market data items to update or insert keyed by a unique correlation id.
 
     try:
-        # [EARLY ACCESS] UpsertComplexMarketData: Upsert a set of complex market data items. This creates or updates the data in Lusid.
+        # UpsertComplexMarketData: Upsert a set of complex market data items. This creates or updates the data in Lusid.
         api_response = await api_instance.upsert_complex_market_data(scope, request_body)
         print("The response of ComplexMarketDataApi->upsert_complex_market_data:\n")
         pprint(api_response)

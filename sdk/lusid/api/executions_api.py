@@ -400,7 +400,7 @@ class ExecutionsApi:
 
     @validate_arguments
     def list_executions(self, as_at : Annotated[Optional[datetime], Field(description="The asAt datetime at which to retrieve the execution. Defaults to return the latest version of the execution if not specified.")] = None, page : Annotated[Optional[constr(strict=True, max_length=500, min_length=1)], Field(description="The pagination token to use to continue listing execution from a previous call to list executions.              This value is returned from the previous call. If a pagination token is provided the sortBy, filter, effectiveAt, and asAt fields              must not have changed since the original request.")] = None, sort_by : Annotated[Optional[conlist(StrictStr)], Field(description="A list of field names or properties to sort by, each suffixed by \" ASC\" or \" DESC\".")] = None, limit : Annotated[Optional[conint(strict=True, le=5000, ge=1)], Field(description="When paginating, limit the number of returned results to this many.")] = None, filter : Annotated[Optional[constr(strict=True, max_length=16384, min_length=0)], Field(description="Expression to filter the result set. Read more about filtering results from LUSID here:              https://support.lusid.com/filtering-results-from-lusid.")] = None, property_keys : Annotated[Optional[conlist(StrictStr)], Field(description="A list of property keys from the \"Execution\" domain to decorate onto each execution.                  These take the format {domain}/{scope}/{code} e.g. \"Execution/system/Name\".")] = None, async_req: Optional[bool]=None, **kwargs) -> Union[PagedResourceListOfExecution, Awaitable[PagedResourceListOfExecution]]:  # noqa: E501
-        """[EARLY ACCESS] ListExecutions: List Executions  # noqa: E501
+        """ListExecutions: List Executions  # noqa: E501
 
         Fetch the last pre-AsAt date version of each execution in scope (does not fetch the entire history).  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
@@ -442,7 +442,7 @@ class ExecutionsApi:
 
     @validate_arguments
     def list_executions_with_http_info(self, as_at : Annotated[Optional[datetime], Field(description="The asAt datetime at which to retrieve the execution. Defaults to return the latest version of the execution if not specified.")] = None, page : Annotated[Optional[constr(strict=True, max_length=500, min_length=1)], Field(description="The pagination token to use to continue listing execution from a previous call to list executions.              This value is returned from the previous call. If a pagination token is provided the sortBy, filter, effectiveAt, and asAt fields              must not have changed since the original request.")] = None, sort_by : Annotated[Optional[conlist(StrictStr)], Field(description="A list of field names or properties to sort by, each suffixed by \" ASC\" or \" DESC\".")] = None, limit : Annotated[Optional[conint(strict=True, le=5000, ge=1)], Field(description="When paginating, limit the number of returned results to this many.")] = None, filter : Annotated[Optional[constr(strict=True, max_length=16384, min_length=0)], Field(description="Expression to filter the result set. Read more about filtering results from LUSID here:              https://support.lusid.com/filtering-results-from-lusid.")] = None, property_keys : Annotated[Optional[conlist(StrictStr)], Field(description="A list of property keys from the \"Execution\" domain to decorate onto each execution.                  These take the format {domain}/{scope}/{code} e.g. \"Execution/system/Name\".")] = None, **kwargs) -> ApiResponse:  # noqa: E501
-        """[EARLY ACCESS] ListExecutions: List Executions  # noqa: E501
+        """ListExecutions: List Executions  # noqa: E501
 
         Fetch the last pre-AsAt date version of each execution in scope (does not fetch the entire history).  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
@@ -596,7 +596,7 @@ class ExecutionsApi:
 
     @validate_arguments
     def upsert_executions(self, execution_set_request : Annotated[Optional[ExecutionSetRequest], Field(description="The collection of execution requests.")] = None, async_req: Optional[bool]=None, **kwargs) -> Union[ResourceListOfExecution, Awaitable[ResourceListOfExecution]]:  # noqa: E501
-        """[EARLY ACCESS] UpsertExecutions: Upsert Execution  # noqa: E501
+        """UpsertExecutions: Upsert Execution  # noqa: E501
 
         Upsert; update existing executions with given ids, or create new executions otherwise.  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
@@ -628,7 +628,7 @@ class ExecutionsApi:
 
     @validate_arguments
     def upsert_executions_with_http_info(self, execution_set_request : Annotated[Optional[ExecutionSetRequest], Field(description="The collection of execution requests.")] = None, **kwargs) -> ApiResponse:  # noqa: E501
-        """[EARLY ACCESS] UpsertExecutions: Upsert Execution  # noqa: E501
+        """UpsertExecutions: Upsert Execution  # noqa: E501
 
         Upsert; update existing executions with given ids, or create new executions otherwise.  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an

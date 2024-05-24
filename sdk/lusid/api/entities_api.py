@@ -229,7 +229,7 @@ class EntitiesApi:
 
     @validate_arguments
     def get_portfolio_changes(self, scope : Annotated[constr(strict=True, max_length=64, min_length=1), Field(..., description="The scope")], effective_at : Annotated[constr(strict=True, max_length=256, min_length=0), Field(..., description="The effective date of the origin.")], as_at : Annotated[Optional[datetime], Field(description="The as-at date of the origin.")] = None, async_req: Optional[bool]=None, **kwargs) -> Union[ResourceListOfChange, Awaitable[ResourceListOfChange]]:  # noqa: E501
-        """[EARLY ACCESS] GetPortfolioChanges: Get the next change to each portfolio in a scope.  # noqa: E501
+        """GetPortfolioChanges: Get the next change to each portfolio in a scope.  # noqa: E501
 
         Gets the time of the next (earliest effective at) modification (correction and/or amendment) to each portfolio in a scope relative to a point in bitemporal time.  Includes changes from parent portfolios in different scopes.  Excludes changes from subscriptions (e.g corporate actions).  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
@@ -265,7 +265,7 @@ class EntitiesApi:
 
     @validate_arguments
     def get_portfolio_changes_with_http_info(self, scope : Annotated[constr(strict=True, max_length=64, min_length=1), Field(..., description="The scope")], effective_at : Annotated[constr(strict=True, max_length=256, min_length=0), Field(..., description="The effective date of the origin.")], as_at : Annotated[Optional[datetime], Field(description="The as-at date of the origin.")] = None, **kwargs) -> ApiResponse:  # noqa: E501
-        """[EARLY ACCESS] GetPortfolioChanges: Get the next change to each portfolio in a scope.  # noqa: E501
+        """GetPortfolioChanges: Get the next change to each portfolio in a scope.  # noqa: E501
 
         Gets the time of the next (earliest effective at) modification (correction and/or amendment) to each portfolio in a scope relative to a point in bitemporal time.  Includes changes from parent portfolios in different scopes.  Excludes changes from subscriptions (e.g corporate actions).  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an

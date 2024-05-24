@@ -260,7 +260,7 @@ class InstrumentsApi:
 
     @validate_arguments
     def delete_instrument(self, identifier_type : Annotated[StrictStr, Field(..., description="The unique identifier type to search, for example 'Figi'.")], identifier : Annotated[StrictStr, Field(..., description="An <i>identifierType</i> value to use to identify the instrument, for example 'BBG000BLNNV0'.")], scope : Annotated[Optional[constr(strict=True, max_length=64, min_length=1)], Field(description="The scope in which the instrument lies. When not supplied the scope is 'default'.")] = None, async_req: Optional[bool]=None, **kwargs) -> Union[DeleteInstrumentResponse, Awaitable[DeleteInstrumentResponse]]:  # noqa: E501
-        """[EARLY ACCESS] DeleteInstrument: Soft delete a single instrument  # noqa: E501
+        """DeleteInstrument: Soft delete a single instrument  # noqa: E501
 
         Soft delete a particular instrument, as identified by a particular instrument identifier.                Once deleted, an instrument is marked as inactive and can no longer be referenced when creating or updating  transactions or holdings. You can still query existing transactions and holdings related to the  deleted instrument.  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
@@ -296,7 +296,7 @@ class InstrumentsApi:
 
     @validate_arguments
     def delete_instrument_with_http_info(self, identifier_type : Annotated[StrictStr, Field(..., description="The unique identifier type to search, for example 'Figi'.")], identifier : Annotated[StrictStr, Field(..., description="An <i>identifierType</i> value to use to identify the instrument, for example 'BBG000BLNNV0'.")], scope : Annotated[Optional[constr(strict=True, max_length=64, min_length=1)], Field(description="The scope in which the instrument lies. When not supplied the scope is 'default'.")] = None, **kwargs) -> ApiResponse:  # noqa: E501
-        """[EARLY ACCESS] DeleteInstrument: Soft delete a single instrument  # noqa: E501
+        """DeleteInstrument: Soft delete a single instrument  # noqa: E501
 
         Soft delete a particular instrument, as identified by a particular instrument identifier.                Once deleted, an instrument is marked as inactive and can no longer be referenced when creating or updating  transactions or holdings. You can still query existing transactions and holdings related to the  deleted instrument.  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
@@ -617,7 +617,7 @@ class InstrumentsApi:
 
     @validate_arguments
     def delete_instruments(self, request_body : Annotated[conlist(StrictStr), Field(..., description="The list of lusidInstrumentId's to delete.")], delete_mode : Annotated[Optional[StrictStr], Field(description="The delete mode to use (defaults to 'Soft').")] = None, scope : Annotated[Optional[constr(strict=True, max_length=64, min_length=1)], Field(description="The scope in which the instruments lie. When not supplied the scope is 'default'.")] = None, async_req: Optional[bool]=None, **kwargs) -> Union[DeleteInstrumentsResponse, Awaitable[DeleteInstrumentsResponse]]:  # noqa: E501
-        """[EARLY ACCESS] DeleteInstruments: Soft or hard delete multiple instruments  # noqa: E501
+        """DeleteInstruments: Soft or hard delete multiple instruments  # noqa: E501
 
         Deletes a number of instruments identified by LusidInstrumentId.                Soft deletion marks the instrument as inactive so it can no longer be referenced when creating or updating transactions or holdings. You can still query existing transactions and holdings related to the inactive instrument.                In addition to the above behaviour, hard deletion: (i) completely removes all external identifiers from the instrument; (ii) marks the instrument as 'Deleted'; (iii) prepends the instrument's name with 'DELETED '; (iv) prevents the instrument from being returned in list instruments queries.                Following hard deletion, an instrument may only be retrieved by making a direct get instrument request for the LusidInstrumentId. Instrument deletion cannot be undone. Please note that currency instruments cannot currently be deleted.  The maximum number of instruments that this method can delete per request is 2,000.  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
@@ -653,7 +653,7 @@ class InstrumentsApi:
 
     @validate_arguments
     def delete_instruments_with_http_info(self, request_body : Annotated[conlist(StrictStr), Field(..., description="The list of lusidInstrumentId's to delete.")], delete_mode : Annotated[Optional[StrictStr], Field(description="The delete mode to use (defaults to 'Soft').")] = None, scope : Annotated[Optional[constr(strict=True, max_length=64, min_length=1)], Field(description="The scope in which the instruments lie. When not supplied the scope is 'default'.")] = None, **kwargs) -> ApiResponse:  # noqa: E501
-        """[EARLY ACCESS] DeleteInstruments: Soft or hard delete multiple instruments  # noqa: E501
+        """DeleteInstruments: Soft or hard delete multiple instruments  # noqa: E501
 
         Deletes a number of instruments identified by LusidInstrumentId.                Soft deletion marks the instrument as inactive so it can no longer be referenced when creating or updating transactions or holdings. You can still query existing transactions and holdings related to the inactive instrument.                In addition to the above behaviour, hard deletion: (i) completely removes all external identifiers from the instrument; (ii) marks the instrument as 'Deleted'; (iii) prepends the instrument's name with 'DELETED '; (iv) prevents the instrument from being returned in list instruments queries.                Following hard deletion, an instrument may only be retrieved by making a direct get instrument request for the LusidInstrumentId. Instrument deletion cannot be undone. Please note that currency instruments cannot currently be deleted.  The maximum number of instruments that this method can delete per request is 2,000.  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an

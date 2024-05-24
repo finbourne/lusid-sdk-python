@@ -5,16 +5,16 @@ All URIs are relative to *https://www.lusid.com/api*
 Method | HTTP request | Description
 ------------- | ------------- | -------------
 [**add_business_days_to_date**](CalendarsApi.md#add_business_days_to_date) | **POST** /api/calendars/businessday/{scope}/add | [EARLY ACCESS] AddBusinessDaysToDate: Adds the requested number of Business Days to the provided date.
-[**add_date_to_calendar**](CalendarsApi.md#add_date_to_calendar) | **PUT** /api/calendars/generic/{scope}/{code}/dates | [EARLY ACCESS] AddDateToCalendar: Add a date to a calendar
+[**add_date_to_calendar**](CalendarsApi.md#add_date_to_calendar) | **PUT** /api/calendars/generic/{scope}/{code}/dates | AddDateToCalendar: Add a date to a calendar
 [**create_calendar**](CalendarsApi.md#create_calendar) | **POST** /api/calendars/generic | [EARLY ACCESS] CreateCalendar: Create a calendar in its generic form
 [**delete_calendar**](CalendarsApi.md#delete_calendar) | **DELETE** /api/calendars/generic/{scope}/{code} | [EARLY ACCESS] DeleteCalendar: Delete a calendar
 [**delete_date_from_calendar**](CalendarsApi.md#delete_date_from_calendar) | **DELETE** /api/calendars/generic/{scope}/{code}/dates/{dateId} | [EARLY ACCESS] DeleteDateFromCalendar: Remove a date from a calendar
 [**generate_schedule**](CalendarsApi.md#generate_schedule) | **POST** /api/calendars/schedule/{scope} | [EARLY ACCESS] GenerateSchedule: Generate an ordered schedule of dates.
-[**get_calendar**](CalendarsApi.md#get_calendar) | **GET** /api/calendars/generic/{scope}/{code} | [EARLY ACCESS] GetCalendar: Get a calendar in its generic form
+[**get_calendar**](CalendarsApi.md#get_calendar) | **GET** /api/calendars/generic/{scope}/{code} | GetCalendar: Get a calendar in its generic form
 [**get_dates**](CalendarsApi.md#get_dates) | **GET** /api/calendars/generic/{scope}/{code}/dates | [EARLY ACCESS] GetDates: Get dates for a specific calendar
 [**is_business_date_time**](CalendarsApi.md#is_business_date_time) | **GET** /api/calendars/businessday/{scope}/{code} | [EARLY ACCESS] IsBusinessDateTime: Check whether a DateTime is a \&quot;Business DateTime\&quot;
 [**list_calendars**](CalendarsApi.md#list_calendars) | **GET** /api/calendars/generic | [EARLY ACCESS] ListCalendars: List Calendars
-[**list_calendars_in_scope**](CalendarsApi.md#list_calendars_in_scope) | **GET** /api/calendars/generic/{scope} | [EARLY ACCESS] ListCalendarsInScope: List all calenders in a specified scope
+[**list_calendars_in_scope**](CalendarsApi.md#list_calendars_in_scope) | **GET** /api/calendars/generic/{scope} | ListCalendarsInScope: List all calenders in a specified scope
 [**update_calendar**](CalendarsApi.md#update_calendar) | **POST** /api/calendars/generic/{scope}/{code} | [EARLY ACCESS] UpdateCalendar: Update a calendar
 
 
@@ -122,7 +122,7 @@ Name | Type | Description  | Notes
 # **add_date_to_calendar**
 > CalendarDate add_date_to_calendar(scope, code, create_date_request)
 
-[EARLY ACCESS] AddDateToCalendar: Add a date to a calendar
+AddDateToCalendar: Add a date to a calendar
 
 Add an event to the calendar. These Events can be a maximum of 24 hours and must be specified in UTC.  A local date will be calculated by the system and applied to the calendar before processing.
 
@@ -183,7 +183,7 @@ async with api_client_factory:
     create_date_request = {"dateId":"TestDate","fromUtc":"2020-02-12T12:00:00.0000000+00:00","toUtc":"2020-02-13T12:00:00.0000000+00:00","timeZone":"CET","description":"Chinese New year","type":"Holiday","sourceData":{}} # CreateDateRequest | Add date to calendar request
 
     try:
-        # [EARLY ACCESS] AddDateToCalendar: Add a date to a calendar
+        # AddDateToCalendar: Add a date to a calendar
         api_response = await api_instance.add_date_to_calendar(scope, code, create_date_request)
         print("The response of CalendarsApi->add_date_to_calendar:\n")
         pprint(api_response)
@@ -628,7 +628,7 @@ Name | Type | Description  | Notes
 # **get_calendar**
 > Calendar get_calendar(scope, code, property_keys=property_keys, as_at=as_at)
 
-[EARLY ACCESS] GetCalendar: Get a calendar in its generic form
+GetCalendar: Get a calendar in its generic form
 
 Retrieve a generic calendar by a specific ID at a point in AsAt time
 
@@ -689,7 +689,7 @@ async with api_client_factory:
     as_at = '2013-10-20T19:20:30+01:00' # datetime | The AsAt datetime at which to retrieve the calendar (optional)
 
     try:
-        # [EARLY ACCESS] GetCalendar: Get a calendar in its generic form
+        # GetCalendar: Get a calendar in its generic form
         api_response = await api_instance.get_calendar(scope, code, property_keys=property_keys, as_at=as_at)
         print("The response of CalendarsApi->get_calendar:\n")
         pprint(api_response)
@@ -1050,7 +1050,7 @@ Name | Type | Description  | Notes
 # **list_calendars_in_scope**
 > PagedResourceListOfCalendar list_calendars_in_scope(scope, as_at=as_at, page=page, limit=limit, property_keys=property_keys, filter=filter)
 
-[EARLY ACCESS] ListCalendarsInScope: List all calenders in a specified scope
+ListCalendarsInScope: List all calenders in a specified scope
 
 List calendars in a Scope at a point in AsAt time.
 
@@ -1113,7 +1113,7 @@ async with api_client_factory:
     filter = 'filter_example' # str | Expression to filter the result set. Read more about filtering results from LUSID here https://support.lusid.com/filtering-results-from-lusid. (optional)
 
     try:
-        # [EARLY ACCESS] ListCalendarsInScope: List all calenders in a specified scope
+        # ListCalendarsInScope: List all calenders in a specified scope
         api_response = await api_instance.list_calendars_in_scope(scope, as_at=as_at, page=page, limit=limit, property_keys=property_keys, filter=filter)
         print("The response of CalendarsApi->list_calendars_in_scope:\n")
         pprint(api_response)
