@@ -37,8 +37,9 @@ class ApplicableInstrumentEvent(BaseModel):
     instrument_event_id: constr(strict=True, min_length=1) = Field(..., alias="instrumentEventId")
     generated_event: InstrumentEventHolder = Field(..., alias="generatedEvent")
     loaded_event: InstrumentEventHolder = Field(..., alias="loadedEvent")
+    applied_instrument_event_instruction_id: constr(strict=True, min_length=1) = Field(..., alias="appliedInstrumentEventInstructionId")
     transactions: conlist(Transaction) = Field(...)
-    __properties = ["portfolioId", "holdingId", "lusidInstrumentId", "instrumentScope", "instrumentType", "instrumentEventType", "instrumentEventId", "generatedEvent", "loadedEvent", "transactions"]
+    __properties = ["portfolioId", "holdingId", "lusidInstrumentId", "instrumentScope", "instrumentType", "instrumentEventType", "instrumentEventId", "generatedEvent", "loadedEvent", "appliedInstrumentEventInstructionId", "transactions"]
 
     class Config:
         """Pydantic configuration"""
@@ -101,6 +102,7 @@ class ApplicableInstrumentEvent(BaseModel):
             "instrument_event_id": obj.get("instrumentEventId"),
             "generated_event": InstrumentEventHolder.from_dict(obj.get("generatedEvent")) if obj.get("generatedEvent") is not None else None,
             "loaded_event": InstrumentEventHolder.from_dict(obj.get("loadedEvent")) if obj.get("loadedEvent") is not None else None,
+            "applied_instrument_event_instruction_id": obj.get("appliedInstrumentEventInstructionId"),
             "transactions": [Transaction.from_dict(_item) for _item in obj.get("transactions")] if obj.get("transactions") is not None else None
         })
         return _obj

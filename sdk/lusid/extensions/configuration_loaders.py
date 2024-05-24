@@ -1,9 +1,10 @@
 import json
 import os
-from typing import Dict, TextIO, Protocol, Union, Iterable
+from typing import Dict, TextIO, Protocol, Union, Iterable, Optional
 import logging
 from lusid.extensions.proxy_config import ProxyConfig
 from lusid.extensions.api_configuration import ApiConfiguration
+from lusid.extensions.file_access_token import FileAccessToken
 
 logger = logging.getLogger(__name__)
 
@@ -141,10 +142,34 @@ class EnvironmentVariablesConfigurationLoader:
 class ArgsConfigurationLoader:
     """ConfigurationLoader which loads in config from kwargs in constructor
     """
-    def __init__(self, **kwargs):
+    def __init__(self,
+        token_url:Optional[str]=None,
+        api_url:Optional[str]=None,
+        username:Optional[str]=None,
+        password:Optional[str]=None,
+        client_id:Optional[str]=None,
+        client_secret:Optional[str]=None,
+        app_name:Optional[str]=None,
+        certificate_filename:Optional[str]=None,
+        proxy_address:Optional[str]=None,
+        proxy_username:Optional[str]=None,
+        proxy_password:Optional[str]=None,
+        access_token:Optional[str]=None
+        ):
         """kwargs passed to this constructor used to build ApiConfiguration
         """
-        self._kwargs = kwargs
+        self.__token_url = token_url
+        self.__api_url = api_url
+        self.__username = username
+        self.__password = password
+        self.__client_id = client_id
+        self.__client_secret = client_secret
+        self.__app_name = app_name
+        self.__certificate_filename = certificate_filename
+        self.__proxy_address = proxy_address
+        self.__proxy_username = proxy_username
+        self.__proxy_password = proxy_password
+        self.__access_token = access_token
 
     def load_config(self) -> Dict[str, str]:
         """load configuration from kwargs passed to constructor
@@ -155,13 +180,51 @@ class ArgsConfigurationLoader:
             dictionary that can be loaded into an ApiConfiguration object
         """
         logger.debug("loading config from arguments passed to ArgsConfigurationLoader")
-        keys = ENVIRONMENT_CONFIG_KEYS.keys()
-        return {key: self._kwargs.get(key) for key in keys}
+        return {
+            "token_url" : self.__token_url, 
+            "api_url" : self.__api_url, 
+            "username" : self.__username, 
+            "password" : self.__password, 
+            "client_id" : self.__client_id, 
+            "client_secret" : self.__client_secret, 
+            "app_name" : self.__app_name, 
+            "certificate_filename" : self.__certificate_filename, 
+            "proxy_address" : self.__proxy_address, 
+            "proxy_username" : self.__proxy_username, 
+            "proxy_password" : self.__proxy_password, 
+            "access_token" : self.__access_token
+        }
+
+
+class FileTokenConfigurationLoader:
+    """ConfigurationLoader which loads in access token from file
+        if FBN_ACCESS_TOKEN_FILE is set,
+        or if an access_token_location is passed to the initialiser
+    """
+
+    def __init__(
+        self, access_token_location: str = os.getenv("FBN_ACCESS_TOKEN_FILE", "")
+    ):
+        self.access_token = None
+        # if neither are provided we won't want to override config from other loaders
+        if access_token_location is not None and access_token_location != "":
+            self.access_token = FileAccessToken(access_token_location)
+
+    def load_config(self) -> Dict[str, FileAccessToken | None]:
+        """load access token from file
+
+        Returns
+        -------
+        Dict[str, str]
+            dictionary that can be loaded into an ApiConfiguration object
+        """
+        return {"access_token": self.access_token}
 
 
 default_config_loaders = (
     EnvironmentVariablesConfigurationLoader(),
     SecretsFileConfigurationLoader(api_secrets_file="secrets.json"),
+    FileTokenConfigurationLoader()
 )
 
 def get_api_configuration(config_loaders: Iterable[ConfigurationLoader]) -> ApiConfiguration:

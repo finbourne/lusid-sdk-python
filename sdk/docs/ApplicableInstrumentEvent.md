@@ -14,6 +14,7 @@ Name | Type | Description | Notes
 **instrument_event_id** | **str** |  | 
 **generated_event** | [**InstrumentEventHolder**](InstrumentEventHolder.md) |  | 
 **loaded_event** | [**InstrumentEventHolder**](InstrumentEventHolder.md) |  | 
+**applied_instrument_event_instruction_id** | **str** |  | 
 **transactions** | [**List[Transaction]**](Transaction.md) |  | 
 
 ## Example

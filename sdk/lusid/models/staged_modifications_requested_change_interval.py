@@ -21,6 +21,7 @@ import json
 from typing import Any, Dict, List, Optional
 from pydantic.v1 import BaseModel, Field, StrictStr, conlist
 from lusid.models.link import Link
+from lusid.models.property_value import PropertyValue
 from lusid.models.staged_modification_effective_range import StagedModificationEffectiveRange
 
 class StagedModificationsRequestedChangeInterval(BaseModel):
@@ -29,8 +30,8 @@ class StagedModificationsRequestedChangeInterval(BaseModel):
     """
     attribute_name: Optional[StrictStr] = Field(None, alias="attributeName", description="Name of the property the change applies to.")
     effective_range: Optional[StagedModificationEffectiveRange] = Field(None, alias="effectiveRange")
-    previous_value: Optional[Any] = Field(None, alias="previousValue", description="The previous value of the attribute before the requested change is applied.")
-    new_value: Optional[Any] = Field(None, alias="newValue", description="The value of the attribute once the requested change is applied.")
+    previous_value: Optional[PropertyValue] = Field(None, alias="previousValue")
+    new_value: Optional[PropertyValue] = Field(None, alias="newValue")
     as_at_basis: Optional[StrictStr] = Field(None, alias="asAtBasis", description="Whether the change represents the modification when the request was made or the modification as it would be at the latest time.")
     links: Optional[conlist(Link)] = None
     __properties = ["attributeName", "effectiveRange", "previousValue", "newValue", "asAtBasis", "links"]
@@ -62,6 +63,12 @@ class StagedModificationsRequestedChangeInterval(BaseModel):
         # override the default output from pydantic by calling `to_dict()` of effective_range
         if self.effective_range:
             _dict['effectiveRange'] = self.effective_range.to_dict()
+        # override the default output from pydantic by calling `to_dict()` of previous_value
+        if self.previous_value:
+            _dict['previousValue'] = self.previous_value.to_dict()
+        # override the default output from pydantic by calling `to_dict()` of new_value
+        if self.new_value:
+            _dict['newValue'] = self.new_value.to_dict()
         # override the default output from pydantic by calling `to_dict()` of each item in links (list)
         _items = []
         if self.links:
@@ -73,16 +80,6 @@ class StagedModificationsRequestedChangeInterval(BaseModel):
         # and __fields_set__ contains the field
         if self.attribute_name is None and "attribute_name" in self.__fields_set__:
             _dict['attributeName'] = None
-
-        # set to None if previous_value (nullable) is None
-        # and __fields_set__ contains the field
-        if self.previous_value is None and "previous_value" in self.__fields_set__:
-            _dict['previousValue'] = None
-
-        # set to None if new_value (nullable) is None
-        # and __fields_set__ contains the field
-        if self.new_value is None and "new_value" in self.__fields_set__:
-            _dict['newValue'] = None
 
         # set to None if as_at_basis (nullable) is None
         # and __fields_set__ contains the field
@@ -108,8 +105,8 @@ class StagedModificationsRequestedChangeInterval(BaseModel):
         _obj = StagedModificationsRequestedChangeInterval.parse_obj({
             "attribute_name": obj.get("attributeName"),
             "effective_range": StagedModificationEffectiveRange.from_dict(obj.get("effectiveRange")) if obj.get("effectiveRange") is not None else None,
-            "previous_value": obj.get("previousValue"),
-            "new_value": obj.get("newValue"),
+            "previous_value": PropertyValue.from_dict(obj.get("previousValue")) if obj.get("previousValue") is not None else None,
+            "new_value": PropertyValue.from_dict(obj.get("newValue")) if obj.get("newValue") is not None else None,
             "as_at_basis": obj.get("asAtBasis"),
             "links": [Link.from_dict(_item) for _item in obj.get("links")] if obj.get("links") is not None else None
         })
