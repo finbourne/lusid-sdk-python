@@ -29,8 +29,10 @@ class DeletedEntityResponse(BaseModel):
     href: Optional[StrictStr] = Field(None, description="The specific Uniform Resource Identifier (URI) for this resource at the requested effective and asAt datetime.")
     effective_from: Optional[datetime] = Field(None, alias="effectiveFrom", description="The effective datetime at which the deletion became valid. May be null in the case where multiple date times are applicable.")
     as_at: datetime = Field(..., alias="asAt", description="The asAt datetime at which the deletion was committed to LUSID.")
+    entity_type: Optional[StrictStr] = Field(None, alias="entityType", description="The type of the entity that the deleted response applies to.")
+    entity_unique_id: Optional[StrictStr] = Field(None, alias="entityUniqueId", description="The unique Id of the entity that the deleted response applies to.")
     links: Optional[conlist(Link)] = None
-    __properties = ["href", "effectiveFrom", "asAt", "links"]
+    __properties = ["href", "effectiveFrom", "asAt", "entityType", "entityUniqueId", "links"]
 
     class Config:
         """Pydantic configuration"""
@@ -73,6 +75,16 @@ class DeletedEntityResponse(BaseModel):
         if self.effective_from is None and "effective_from" in self.__fields_set__:
             _dict['effectiveFrom'] = None
 
+        # set to None if entity_type (nullable) is None
+        # and __fields_set__ contains the field
+        if self.entity_type is None and "entity_type" in self.__fields_set__:
+            _dict['entityType'] = None
+
+        # set to None if entity_unique_id (nullable) is None
+        # and __fields_set__ contains the field
+        if self.entity_unique_id is None and "entity_unique_id" in self.__fields_set__:
+            _dict['entityUniqueId'] = None
+
         # set to None if links (nullable) is None
         # and __fields_set__ contains the field
         if self.links is None and "links" in self.__fields_set__:
@@ -93,6 +105,8 @@ class DeletedEntityResponse(BaseModel):
             "href": obj.get("href"),
             "effective_from": obj.get("effectiveFrom"),
             "as_at": obj.get("asAt"),
+            "entity_type": obj.get("entityType"),
+            "entity_unique_id": obj.get("entityUniqueId"),
             "links": [Link.from_dict(_item) for _item in obj.get("links")] if obj.get("links") is not None else None
         })
         return _obj

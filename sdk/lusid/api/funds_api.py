@@ -403,7 +403,7 @@ class FundsApi:
         }
 
         return self.api_client.call_api(
-            '/api/funds/{scope}/{code}/fee/{feeCode}', 'POST',
+            '/api/funds/{scope}/{code}/fees/{feeCode}', 'POST',
             _path_params,
             _query_params,
             _header_params,
@@ -736,7 +736,7 @@ class FundsApi:
         }
 
         return self.api_client.call_api(
-            '/api/funds/{scope}/{code}/fee/{feeCode}', 'DELETE',
+            '/api/funds/{scope}/{code}/fees/{feeCode}', 'DELETE',
             _path_params,
             _query_params,
             _header_params,
@@ -1431,7 +1431,7 @@ class FundsApi:
         }
 
         return self.api_client.call_api(
-            '/api/funds/{scope}/{code}/fee/{feeCode}', 'GET',
+            '/api/funds/{scope}/{code}/fees/{feeCode}', 'GET',
             _path_params,
             _query_params,
             _header_params,
@@ -2023,7 +2023,7 @@ class FundsApi:
         }
 
         return self.api_client.call_api(
-            '/api/funds/{scope}/{code}/fee', 'GET',
+            '/api/funds/{scope}/{code}/fees', 'GET',
             _path_params,
             _query_params,
             _header_params,
@@ -2409,7 +2409,7 @@ class FundsApi:
         }
 
         return self.api_client.call_api(
-            '/api/funds/{scope}/{code}/fee/{feeCode}', 'PATCH',
+            '/api/funds/{scope}/{code}/fees/{feeCode}', 'PATCH',
             _path_params,
             _query_params,
             _header_params,

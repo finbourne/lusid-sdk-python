@@ -7,6 +7,8 @@ Name | Type | Description | Notes
 **href** | **str** | The specific Uniform Resource Identifier (URI) for this resource at the requested effective and asAt datetime. | [optional] 
 **effective_from** | **datetime** | The effective datetime at which the deletion became valid. May be null in the case where multiple date times are applicable. | [optional] 
 **as_at** | **datetime** | The asAt datetime at which the deletion was committed to LUSID. | 
+**entity_type** | **str** | The type of the entity that the deleted response applies to. | [optional] 
+**entity_unique_id** | **str** | The unique Id of the entity that the deleted response applies to. | [optional] 
 **links** | [**List[Link]**](Link.md) |  | [optional] 
 
 ## Example

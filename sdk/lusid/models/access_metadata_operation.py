@@ -28,7 +28,7 @@ class AccessMetadataOperation(BaseModel):
     """
     value: conlist(AccessMetadataValue, min_items=1) = Field(...)
     path: constr(strict=True, max_length=1025, min_length=1) = Field(...)
-    op: StrictStr = Field(..., description="The available values are: add")
+    op: StrictStr = Field(..., description="The available values are: add, remove")
     var_from: Optional[StrictStr] = Field(None, alias="from")
     __properties = ["value", "path", "op", "from"]
 
@@ -42,8 +42,8 @@ class AccessMetadataOperation(BaseModel):
     @validator('op')
     def op_validate_enum(cls, value):
         """Validates the enum"""
-        if value not in ('add'):
-            raise ValueError("must be one of enum values ('add')")
+        if value not in ('add', 'remove'):
+            raise ValueError("must be one of enum values ('add', 'remove')")
         return value
 
     class Config:

@@ -6,7 +6,7 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **value** | [**List[AccessMetadataValue]**](AccessMetadataValue.md) |  | 
 **path** | **str** |  | 
-**op** | **str** | The available values are: add | 
+**op** | **str** | The available values are: add, remove | 
 **var_from** | **str** |  | [optional] 
 
 ## Example

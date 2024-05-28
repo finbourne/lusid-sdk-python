@@ -30,6 +30,7 @@ class OperationType(str, Enum):
     allowed enum values
     """
     ADD = 'add'
+    REMOVE = 'remove'
 
     @classmethod
     def from_json(cls, json_str: str) -> OperationType:
