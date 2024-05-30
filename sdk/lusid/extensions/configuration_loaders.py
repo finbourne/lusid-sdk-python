@@ -210,7 +210,7 @@ class FileTokenConfigurationLoader:
         if access_token_location is not None and access_token_location != "":
             self.access_token = FileAccessToken(access_token_location)
 
-    def load_config(self) -> Dict[str, FileAccessToken | None]:
+    def load_config(self) -> Dict[str, Union[FileAccessToken, None]]:
         """load access token from file
 
         Returns
@@ -247,7 +247,7 @@ def get_api_configuration(config_loaders: Iterable[ConfigurationLoader]) -> ApiC
         loaded_config = {
             key: value
             for key, value in config_loader.load_config().items()
-            if value is not None
+            if value is not None and value != None
         }
         config.update(loaded_config)
     proxy_address = config.pop("proxy_address", None)

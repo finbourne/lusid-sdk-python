@@ -21,19 +21,25 @@ from datetime import datetime
 from typing import Any, Dict, Optional, Union
 from pydantic.v1 import Field, StrictFloat, StrictInt, StrictStr, validator
 from lusid.models.instrument_event import InstrumentEvent
+from lusid.models.new_instrument import NewInstrument
+from lusid.models.units_ratio import UnitsRatio
 
-class AccumulationEvent(InstrumentEvent):
+class SpinOffEvent(InstrumentEvent):
     """
-    Accumulation dividend  # noqa: E501
+    Spin-off event (SOFF), representing the distribution of securities issued by another company.  # noqa: E501
     """
-    announcement_date: Optional[datetime] = Field(None, alias="announcementDate", description="Date on which the dividend was announced / declared.")
-    dividend_currency: StrictStr = Field(..., alias="dividendCurrency", description="Payment currency")
-    dividend_rate: Union[StrictFloat, StrictInt] = Field(..., alias="dividendRate", description="Dividend rate or payment rate as a percentage.  i.e. 5% is written as 0.05")
-    ex_date: datetime = Field(..., alias="exDate", description="The first business day on which the dividend is not owed to the buying party.  Typically this is T-1 from the RecordDate.")
-    payment_date: datetime = Field(..., alias="paymentDate", description="The date the company pays out dividends to shareholders.")
+    announcement_date: Optional[datetime] = Field(None, alias="announcementDate", description="Optional.  The date the spin-off is announced.")
+    ex_date: datetime = Field(..., alias="exDate", description="The first date on which the holder of record has entitled ownership of the new shares.")
+    record_date: Optional[datetime] = Field(None, alias="recordDate", description="Optional.  Date you have to be the holder of record in order to receive the additional shares.")
+    payment_date: datetime = Field(..., alias="paymentDate", description="Date on which the distribution of shares takes place.")
+    new_instrument: NewInstrument = Field(..., alias="newInstrument")
+    units_ratio: UnitsRatio = Field(..., alias="unitsRatio")
+    cost_factor: Optional[Union[StrictFloat, StrictInt]] = Field(None, alias="costFactor", description="Optional. The fraction of cost that is transferred from the existing shares to the new shares.")
+    fractional_units_cash_price: Optional[Union[StrictFloat, StrictInt]] = Field(None, alias="fractionalUnitsCashPrice", description="Optional. Used in calculating cash-in-lieu of fractional shares.")
+    fractional_units_cash_currency: Optional[StrictStr] = Field(None, alias="fractionalUnitsCashCurrency", description="Optional. Used in calculating cash-in-lieu of fractional shares.")
     instrument_event_type: StrictStr = Field(..., alias="instrumentEventType", description="The Type of Event. The available values are: TransitionEvent, InformationalEvent, OpenEvent, CloseEvent, StockSplitEvent, BondDefaultEvent, CashDividendEvent, AmortisationEvent, CashFlowEvent, ExerciseEvent, ResetEvent, TriggerEvent, RawVendorEvent, InformationalErrorEvent, BondCouponEvent, DividendReinvestmentEvent, AccumulationEvent, BondPrincipalEvent, DividendOptionEvent, MaturityEvent, FxForwardSettlementEvent, ExpiryEvent, ScripDividendEvent, StockDividendEvent, ReverseStockSplitEvent, CapitalDistributionEvent, SpinOffEvent")
     additional_properties: Dict[str, Any] = {}
-    __properties = ["instrumentEventType", "announcementDate", "dividendCurrency", "dividendRate", "exDate", "paymentDate"]
+    __properties = ["instrumentEventType", "announcementDate", "exDate", "recordDate", "paymentDate", "newInstrument", "unitsRatio", "costFactor", "fractionalUnitsCashPrice", "fractionalUnitsCashCurrency"]
 
     @validator('instrument_event_type')
     def instrument_event_type_validate_enum(cls, value):
@@ -56,8 +62,8 @@ class AccumulationEvent(InstrumentEvent):
         return json.dumps(self.to_dict())
 
     @classmethod
-    def from_json(cls, json_str: str) -> AccumulationEvent:
-        """Create an instance of AccumulationEvent from a JSON string"""
+    def from_json(cls, json_str: str) -> SpinOffEvent:
+        """Create an instance of SpinOffEvent from a JSON string"""
         return cls.from_dict(json.loads(json_str))
 
     def to_dict(self):
@@ -67,6 +73,12 @@ class AccumulationEvent(InstrumentEvent):
                             "additional_properties"
                           },
                           exclude_none=True)
+        # override the default output from pydantic by calling `to_dict()` of new_instrument
+        if self.new_instrument:
+            _dict['newInstrument'] = self.new_instrument.to_dict()
+        # override the default output from pydantic by calling `to_dict()` of units_ratio
+        if self.units_ratio:
+            _dict['unitsRatio'] = self.units_ratio.to_dict()
         # puts key-value pairs in additional_properties in the top level
         if self.additional_properties is not None:
             for _key, _value in self.additional_properties.items():
@@ -77,24 +89,48 @@ class AccumulationEvent(InstrumentEvent):
         if self.announcement_date is None and "announcement_date" in self.__fields_set__:
             _dict['announcementDate'] = None
 
+        # set to None if record_date (nullable) is None
+        # and __fields_set__ contains the field
+        if self.record_date is None and "record_date" in self.__fields_set__:
+            _dict['recordDate'] = None
+
+        # set to None if cost_factor (nullable) is None
+        # and __fields_set__ contains the field
+        if self.cost_factor is None and "cost_factor" in self.__fields_set__:
+            _dict['costFactor'] = None
+
+        # set to None if fractional_units_cash_price (nullable) is None
+        # and __fields_set__ contains the field
+        if self.fractional_units_cash_price is None and "fractional_units_cash_price" in self.__fields_set__:
+            _dict['fractionalUnitsCashPrice'] = None
+
+        # set to None if fractional_units_cash_currency (nullable) is None
+        # and __fields_set__ contains the field
+        if self.fractional_units_cash_currency is None and "fractional_units_cash_currency" in self.__fields_set__:
+            _dict['fractionalUnitsCashCurrency'] = None
+
         return _dict
 
     @classmethod
-    def from_dict(cls, obj: dict) -> AccumulationEvent:
-        """Create an instance of AccumulationEvent from a dict"""
+    def from_dict(cls, obj: dict) -> SpinOffEvent:
+        """Create an instance of SpinOffEvent from a dict"""
         if obj is None:
             return None
 
         if not isinstance(obj, dict):
-            return AccumulationEvent.parse_obj(obj)
+            return SpinOffEvent.parse_obj(obj)
 
-        _obj = AccumulationEvent.parse_obj({
+        _obj = SpinOffEvent.parse_obj({
             "instrument_event_type": obj.get("instrumentEventType"),
             "announcement_date": obj.get("announcementDate"),
-            "dividend_currency": obj.get("dividendCurrency"),
-            "dividend_rate": obj.get("dividendRate"),
             "ex_date": obj.get("exDate"),
-            "payment_date": obj.get("paymentDate")
+            "record_date": obj.get("recordDate"),
+            "payment_date": obj.get("paymentDate"),
+            "new_instrument": NewInstrument.from_dict(obj.get("newInstrument")) if obj.get("newInstrument") is not None else None,
+            "units_ratio": UnitsRatio.from_dict(obj.get("unitsRatio")) if obj.get("unitsRatio") is not None else None,
+            "cost_factor": obj.get("costFactor"),
+            "fractional_units_cash_price": obj.get("fractionalUnitsCashPrice"),
+            "fractional_units_cash_currency": obj.get("fractionalUnitsCashCurrency")
         })
         # store additional fields in additional_properties
         for _key in obj.keys():

@@ -563,6 +563,7 @@ from lusid.models.move_orders_to_different_blocks_request import MoveOrdersToDif
 from lusid.models.moved_order_to_different_block_response import MovedOrderToDifferentBlockResponse
 from lusid.models.movement_type import MovementType
 from lusid.models.multi_currency_amounts import MultiCurrencyAmounts
+from lusid.models.new_instrument import NewInstrument
 from lusid.models.next_value_in_sequence_response import NextValueInSequenceResponse
 from lusid.models.numeric_comparison_type import NumericComparisonType
 from lusid.models.opaque_dependency import OpaqueDependency
@@ -898,6 +899,7 @@ from lusid.models.sides_definition_request import SidesDefinitionRequest
 from lusid.models.simple_cash_flow_loan import SimpleCashFlowLoan
 from lusid.models.simple_instrument import SimpleInstrument
 from lusid.models.sort_order import SortOrder
+from lusid.models.spin_off_event import SpinOffEvent
 from lusid.models.staged_modification import StagedModification
 from lusid.models.staged_modification_decision import StagedModificationDecision
 from lusid.models.staged_modification_decision_request import StagedModificationDecisionRequest
@@ -1626,6 +1628,7 @@ __all__ = [
     "MovedOrderToDifferentBlockResponse",
     "MovementType",
     "MultiCurrencyAmounts",
+    "NewInstrument",
     "NextValueInSequenceResponse",
     "NumericComparisonType",
     "OpaqueDependency",
@@ -1961,6 +1964,7 @@ __all__ = [
     "SimpleCashFlowLoan",
     "SimpleInstrument",
     "SortOrder",
+    "SpinOffEvent",
     "StagedModification",
     "StagedModificationDecision",
     "StagedModificationDecisionRequest",
