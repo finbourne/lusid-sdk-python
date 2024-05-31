@@ -50,8 +50,9 @@ class Fee(BaseModel):
     anchor_date: Optional[DayMonth] = Field(None, alias="anchorDate")
     properties: Optional[Dict[str, ModelProperty]] = Field(None, description="The Fee properties. These will be from the 'Fee' domain.")
     version: Optional[Version] = None
+    portfolio_id: Optional[ResourceId] = Field(None, alias="portfolioId")
     links: Optional[conlist(Link)] = None
-    __properties = ["href", "feeCode", "feeType", "name", "description", "origin", "calculationBase", "accrualCurrency", "treatment", "totalAnnualAccrualAmount", "feeRatePercentage", "monthlyAccrual", "dailyAccrual", "payableFrequency", "businessDayConvention", "startDate", "endDate", "anchorDate", "properties", "version", "links"]
+    __properties = ["href", "feeCode", "feeType", "name", "description", "origin", "calculationBase", "accrualCurrency", "treatment", "totalAnnualAccrualAmount", "feeRatePercentage", "monthlyAccrual", "dailyAccrual", "payableFrequency", "businessDayConvention", "startDate", "endDate", "anchorDate", "properties", "version", "portfolioId", "links"]
 
     @validator('fee_code')
     def fee_code_validate_regular_expression(cls, value):
@@ -113,6 +114,9 @@ class Fee(BaseModel):
         # override the default output from pydantic by calling `to_dict()` of version
         if self.version:
             _dict['version'] = self.version.to_dict()
+        # override the default output from pydantic by calling `to_dict()` of portfolio_id
+        if self.portfolio_id:
+            _dict['portfolioId'] = self.portfolio_id.to_dict()
         # override the default output from pydantic by calling `to_dict()` of each item in links (list)
         _items = []
         if self.links:
@@ -212,6 +216,7 @@ class Fee(BaseModel):
             if obj.get("properties") is not None
             else None,
             "version": Version.from_dict(obj.get("version")) if obj.get("version") is not None else None,
+            "portfolio_id": ResourceId.from_dict(obj.get("portfolioId")) if obj.get("portfolioId") is not None else None,
             "links": [Link.from_dict(_item) for _item in obj.get("links")] if obj.get("links") is not None else None
         })
         return _obj

@@ -19,6 +19,7 @@ Name | Type | Description | Notes
 **end_date** | **datetime** | The end date of the Fee. | [optional] 
 **anchor_date** | [**DayMonth**](DayMonth.md) |  | [optional] 
 **properties** | [**Dict[str, ModelProperty]**](ModelProperty.md) | The Fee properties. These will be from the &#39;Fee&#39; domain. | [optional] 
+**portfolio_id** | [**ResourceId**](ResourceId.md) |  | [optional] 
 
 ## Example
 

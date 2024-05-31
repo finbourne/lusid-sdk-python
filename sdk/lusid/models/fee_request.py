@@ -43,7 +43,8 @@ class FeeRequest(BaseModel):
     end_date: Optional[datetime] = Field(None, alias="endDate", description="The end date of the Fee.")
     anchor_date: Optional[DayMonth] = Field(None, alias="anchorDate")
     properties: Optional[Dict[str, ModelProperty]] = Field(None, description="The Fee properties. These will be from the 'Fee' domain.")
-    __properties = ["feeType", "name", "description", "origin", "calculationBase", "accrualCurrency", "treatment", "totalAnnualAccrualAmount", "feeRatePercentage", "payableFrequency", "businessDayConvention", "startDate", "endDate", "anchorDate", "properties"]
+    portfolio_id: Optional[ResourceId] = Field(None, alias="portfolioId")
+    __properties = ["feeType", "name", "description", "origin", "calculationBase", "accrualCurrency", "treatment", "totalAnnualAccrualAmount", "feeRatePercentage", "payableFrequency", "businessDayConvention", "startDate", "endDate", "anchorDate", "properties", "portfolioId"]
 
     @validator('description')
     def description_validate_regular_expression(cls, value):
@@ -92,6 +93,9 @@ class FeeRequest(BaseModel):
                 if self.properties[_key]:
                     _field_dict[_key] = self.properties[_key].to_dict()
             _dict['properties'] = _field_dict
+        # override the default output from pydantic by calling `to_dict()` of portfolio_id
+        if self.portfolio_id:
+            _dict['portfolioId'] = self.portfolio_id.to_dict()
         # set to None if description (nullable) is None
         # and __fields_set__ contains the field
         if self.description is None and "description" in self.__fields_set__:
@@ -158,6 +162,7 @@ class FeeRequest(BaseModel):
                 for _k, _v in obj.get("properties").items()
             )
             if obj.get("properties") is not None
-            else None
+            else None,
+            "portfolio_id": ResourceId.from_dict(obj.get("portfolioId")) if obj.get("portfolioId") is not None else None
         })
         return _obj

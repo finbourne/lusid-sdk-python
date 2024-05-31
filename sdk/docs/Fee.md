@@ -24,6 +24,7 @@ Name | Type | Description | Notes
 **anchor_date** | [**DayMonth**](DayMonth.md) |  | [optional] 
 **properties** | [**Dict[str, ModelProperty]**](ModelProperty.md) | The Fee properties. These will be from the &#39;Fee&#39; domain. | [optional] 
 **version** | [**Version**](Version.md) |  | [optional] 
+**portfolio_id** | [**ResourceId**](ResourceId.md) |  | [optional] 
 **links** | [**List[Link]**](Link.md) |  | [optional] 
 
 ## Example
