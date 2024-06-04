@@ -32,15 +32,15 @@ class FxLinkedNotionalSchedule(Schedule):
     varying_notional_currency: StrictStr = Field(..., alias="varyingNotionalCurrency", description="The currency of the varying notional amount.")
     varying_notional_fixing_dates: RelativeDateOffset = Field(..., alias="varyingNotionalFixingDates")
     varying_notional_interim_exchange_payment_dates: Optional[RelativeDateOffset] = Field(None, alias="varyingNotionalInterimExchangePaymentDates")
-    schedule_type: StrictStr = Field(..., alias="scheduleType", description="The available values are: FixedSchedule, FloatSchedule, OptionalitySchedule, StepSchedule, Exercise, FxRateSchedule, FxLinkedNotionalSchedule, Invalid")
+    schedule_type: StrictStr = Field(..., alias="scheduleType", description="The available values are: FixedSchedule, FloatSchedule, OptionalitySchedule, StepSchedule, Exercise, FxRateSchedule, FxLinkedNotionalSchedule, BondConversionSchedule, Invalid")
     additional_properties: Dict[str, Any] = {}
     __properties = ["scheduleType", "fxConventions", "varyingNotionalCurrency", "varyingNotionalFixingDates", "varyingNotionalInterimExchangePaymentDates"]
 
     @validator('schedule_type')
     def schedule_type_validate_enum(cls, value):
         """Validates the enum"""
-        if value not in ('FixedSchedule', 'FloatSchedule', 'OptionalitySchedule', 'StepSchedule', 'Exercise', 'FxRateSchedule', 'FxLinkedNotionalSchedule', 'Invalid'):
-            raise ValueError("must be one of enum values ('FixedSchedule', 'FloatSchedule', 'OptionalitySchedule', 'StepSchedule', 'Exercise', 'FxRateSchedule', 'FxLinkedNotionalSchedule', 'Invalid')")
+        if value not in ('FixedSchedule', 'FloatSchedule', 'OptionalitySchedule', 'StepSchedule', 'Exercise', 'FxRateSchedule', 'FxLinkedNotionalSchedule', 'BondConversionSchedule', 'Invalid'):
+            raise ValueError("must be one of enum values ('FixedSchedule', 'FloatSchedule', 'OptionalitySchedule', 'StepSchedule', 'Exercise', 'FxRateSchedule', 'FxLinkedNotionalSchedule', 'BondConversionSchedule', 'Invalid')")
         return value
 
     class Config:

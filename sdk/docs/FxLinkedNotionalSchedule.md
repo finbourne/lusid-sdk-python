@@ -9,7 +9,7 @@ Name | Type | Description | Notes
 **varying_notional_currency** | **str** | The currency of the varying notional amount. | 
 **varying_notional_fixing_dates** | [**RelativeDateOffset**](RelativeDateOffset.md) |  | 
 **varying_notional_interim_exchange_payment_dates** | [**RelativeDateOffset**](RelativeDateOffset.md) |  | [optional] 
-**schedule_type** | **str** | The available values are: FixedSchedule, FloatSchedule, OptionalitySchedule, StepSchedule, Exercise, FxRateSchedule, FxLinkedNotionalSchedule, Invalid | 
+**schedule_type** | **str** | The available values are: FixedSchedule, FloatSchedule, OptionalitySchedule, StepSchedule, Exercise, FxRateSchedule, FxLinkedNotionalSchedule, BondConversionSchedule, Invalid | 
 
 ## Example
 

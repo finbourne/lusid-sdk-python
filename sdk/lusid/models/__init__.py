@@ -88,6 +88,8 @@ from lusid.models.block_request import BlockRequest
 from lusid.models.block_set_request import BlockSetRequest
 from lusid.models.blocked_order_request import BlockedOrderRequest
 from lusid.models.bond import Bond
+from lusid.models.bond_conversion_entry import BondConversionEntry
+from lusid.models.bond_conversion_schedule import BondConversionSchedule
 from lusid.models.bond_coupon_event import BondCouponEvent
 from lusid.models.bond_default_event import BondDefaultEvent
 from lusid.models.bond_principal_event import BondPrincipalEvent
@@ -1076,6 +1078,8 @@ __all__ = [
     "BlockSetRequest",
     "BlockedOrderRequest",
     "Bond",
+    "BondConversionEntry",
+    "BondConversionSchedule",
     "BondCouponEvent",
     "BondDefaultEvent",
     "BondPrincipalEvent",
