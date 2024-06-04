@@ -186,6 +186,7 @@ from lusid.models.calendar_date import CalendarDate
 from lusid.models.calendar_dependency import CalendarDependency
 from lusid.models.cap_floor import CapFloor
 from lusid.models.capital_distribution_event import CapitalDistributionEvent
+from lusid.models.cash_and_security_offer_election import CashAndSecurityOfferElection
 from lusid.models.cash_dependency import CashDependency
 from lusid.models.cash_dividend_event import CashDividendEvent
 from lusid.models.cash_election import CashElection
@@ -194,6 +195,7 @@ from lusid.models.cash_flow_lineage import CashFlowLineage
 from lusid.models.cash_flow_value import CashFlowValue
 from lusid.models.cash_flow_value_set import CashFlowValueSet
 from lusid.models.cash_ladder_record import CashLadderRecord
+from lusid.models.cash_offer_election import CashOfferElection
 from lusid.models.cash_perpetual import CashPerpetual
 from lusid.models.cds_flow_conventions import CdsFlowConventions
 from lusid.models.cds_index import CdsIndex
@@ -555,6 +557,7 @@ from lusid.models.market_options import MarketOptions
 from lusid.models.market_quote import MarketQuote
 from lusid.models.match_criterion import MatchCriterion
 from lusid.models.maturity_event import MaturityEvent
+from lusid.models.merger_event import MergerEvent
 from lusid.models.metric_value import MetricValue
 from lusid.models.model_options import ModelOptions
 from lusid.models.model_options_type import ModelOptionsType
@@ -883,6 +886,7 @@ from lusid.models.scope_definition import ScopeDefinition
 from lusid.models.scrip_dividend_event import ScripDividendEvent
 from lusid.models.script_map_reference import ScriptMapReference
 from lusid.models.security_election import SecurityElection
+from lusid.models.security_offer_election import SecurityOfferElection
 from lusid.models.sequence_definition import SequenceDefinition
 from lusid.models.set_amortisation_rules_request import SetAmortisationRulesRequest
 from lusid.models.set_legal_entity_identifiers_request import SetLegalEntityIdentifiersRequest
@@ -1253,6 +1257,7 @@ __all__ = [
     "CalendarDependency",
     "CapFloor",
     "CapitalDistributionEvent",
+    "CashAndSecurityOfferElection",
     "CashDependency",
     "CashDividendEvent",
     "CashElection",
@@ -1261,6 +1266,7 @@ __all__ = [
     "CashFlowValue",
     "CashFlowValueSet",
     "CashLadderRecord",
+    "CashOfferElection",
     "CashPerpetual",
     "CdsFlowConventions",
     "CdsIndex",
@@ -1622,6 +1628,7 @@ __all__ = [
     "MarketQuote",
     "MatchCriterion",
     "MaturityEvent",
+    "MergerEvent",
     "MetricValue",
     "ModelOptions",
     "ModelOptionsType",
@@ -1950,6 +1957,7 @@ __all__ = [
     "ScripDividendEvent",
     "ScriptMapReference",
     "SecurityElection",
+    "SecurityOfferElection",
     "SequenceDefinition",
     "SetAmortisationRulesRequest",
     "SetLegalEntityIdentifiersRequest",
