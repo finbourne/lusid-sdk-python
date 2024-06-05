@@ -19,7 +19,7 @@ import json
 
 from datetime import datetime
 from typing import Any, Dict, Optional, Union
-from pydantic.v1 import Field, StrictFloat, StrictInt, StrictStr, constr, validator
+from pydantic.v1 import Field, StrictBool, StrictFloat, StrictInt, StrictStr, constr, validator
 from lusid.models.compounding import Compounding
 from lusid.models.ex_dividend_configuration import ExDividendConfiguration
 from lusid.models.flow_convention_name import FlowConventionName
@@ -45,9 +45,10 @@ class FloatSchedule(Schedule):
     ex_dividend_configuration: Optional[ExDividendConfiguration] = Field(None, alias="exDividendConfiguration")
     compounding: Optional[Compounding] = None
     reset_convention: Optional[constr(strict=True, max_length=16, min_length=0)] = Field(None, alias="resetConvention", description="Control how resets are generated relative to payment convention(s).    Supported string (enumeration) values are: [InAdvance, InArrears].")
+    use_annualised_direct_rates: Optional[StrictBool] = Field(None, alias="useAnnualisedDirectRates", description="Flag indicating whether to use daily updated annualised interest  rates for calculating the accrued interest. Defaults to false.")
     schedule_type: StrictStr = Field(..., alias="scheduleType", description="The available values are: FixedSchedule, FloatSchedule, OptionalitySchedule, StepSchedule, Exercise, FxRateSchedule, FxLinkedNotionalSchedule, BondConversionSchedule, Invalid")
     additional_properties: Dict[str, Any] = {}
-    __properties = ["scheduleType", "startDate", "maturityDate", "flowConventions", "conventionName", "exDividendDays", "indexConventionName", "indexConventions", "notional", "paymentCurrency", "spread", "stubType", "exDividendConfiguration", "compounding", "resetConvention"]
+    __properties = ["scheduleType", "startDate", "maturityDate", "flowConventions", "conventionName", "exDividendDays", "indexConventionName", "indexConventions", "notional", "paymentCurrency", "spread", "stubType", "exDividendConfiguration", "compounding", "resetConvention", "useAnnualisedDirectRates"]
 
     @validator('schedule_type')
     def schedule_type_validate_enum(cls, value):
@@ -145,7 +146,8 @@ class FloatSchedule(Schedule):
             "stub_type": obj.get("stubType"),
             "ex_dividend_configuration": ExDividendConfiguration.from_dict(obj.get("exDividendConfiguration")) if obj.get("exDividendConfiguration") is not None else None,
             "compounding": Compounding.from_dict(obj.get("compounding")) if obj.get("compounding") is not None else None,
-            "reset_convention": obj.get("resetConvention")
+            "reset_convention": obj.get("resetConvention"),
+            "use_annualised_direct_rates": obj.get("useAnnualisedDirectRates")
         })
         # store additional fields in additional_properties
         for _key in obj.keys():

@@ -12,10 +12,10 @@ Name | Type | Description | Notes
 **instrument_type** | **str** |  | 
 **instrument_event_type** | **str** |  | 
 **instrument_event_id** | **str** |  | 
-**generated_event** | [**InstrumentEventHolder**](InstrumentEventHolder.md) |  | 
-**loaded_event** | [**InstrumentEventHolder**](InstrumentEventHolder.md) |  | 
+**generated_event** | [**InstrumentEventHolder**](InstrumentEventHolder.md) |  | [optional] 
+**loaded_event** | [**InstrumentEventHolder**](InstrumentEventHolder.md) |  | [optional] 
 **applied_instrument_event_instruction_id** | **str** |  | 
-**transactions** | [**List[Transaction]**](Transaction.md) |  | 
+**transactions** | [**List[Transaction]**](Transaction.md) |  | [optional] 
 
 ## Example
 

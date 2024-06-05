@@ -18,7 +18,7 @@ import re  # noqa: F401
 import json
 
 
-from typing import Any, Dict, List
+from typing import Any, Dict, List, Optional
 from pydantic.v1 import BaseModel, Field, StrictInt, conlist, constr
 from lusid.models.instrument_event_holder import InstrumentEventHolder
 from lusid.models.resource_id import ResourceId
@@ -35,10 +35,10 @@ class ApplicableInstrumentEvent(BaseModel):
     instrument_type: constr(strict=True, min_length=1) = Field(..., alias="instrumentType")
     instrument_event_type: constr(strict=True, min_length=1) = Field(..., alias="instrumentEventType")
     instrument_event_id: constr(strict=True, min_length=1) = Field(..., alias="instrumentEventId")
-    generated_event: InstrumentEventHolder = Field(..., alias="generatedEvent")
-    loaded_event: InstrumentEventHolder = Field(..., alias="loadedEvent")
+    generated_event: Optional[InstrumentEventHolder] = Field(None, alias="generatedEvent")
+    loaded_event: Optional[InstrumentEventHolder] = Field(None, alias="loadedEvent")
     applied_instrument_event_instruction_id: constr(strict=True, min_length=1) = Field(..., alias="appliedInstrumentEventInstructionId")
-    transactions: conlist(Transaction) = Field(...)
+    transactions: Optional[conlist(Transaction)] = None
     __properties = ["portfolioId", "holdingId", "lusidInstrumentId", "instrumentScope", "instrumentType", "instrumentEventType", "instrumentEventId", "generatedEvent", "loadedEvent", "appliedInstrumentEventInstructionId", "transactions"]
 
     class Config:
@@ -81,6 +81,11 @@ class ApplicableInstrumentEvent(BaseModel):
                 if _item:
                     _items.append(_item.to_dict())
             _dict['transactions'] = _items
+        # set to None if transactions (nullable) is None
+        # and __fields_set__ contains the field
+        if self.transactions is None and "transactions" in self.__fields_set__:
+            _dict['transactions'] = None
+
         return _dict
 
     @classmethod
