@@ -64,15 +64,15 @@ class FundsApi:
         self.api_client = api_client
 
     @overload
-    async def accept_estimate_point(self, scope : Annotated[constr(strict=True, max_length=64, min_length=1), Field(..., description="The scope of the Fund.")], code : Annotated[constr(strict=True, max_length=64, min_length=1), Field(..., description="The code of the Fund. Together with the scope this uniquely identifies the Fund.")], valuation_point_data_request : Annotated[ValuationPointDataRequest, Field(..., description="The valuationPointDataRequest which contains the Diary Entry code for the Estimate Valuation Point to move to Final state.")], **kwargs) -> ValuationPointDataResponse:  # noqa: E501
+    async def accept_estimate_point(self, scope : Annotated[constr(strict=True, max_length=64, min_length=1), Field(..., description="The scope of the Fund.")], code : Annotated[constr(strict=True, max_length=64, min_length=1), Field(..., description="The code of the Fund. Together with the scope this uniquely identifies the Fund.")], valuation_point_data_request : Annotated[ValuationPointDataRequest, Field(..., description="The valuationPointDataRequest which contains the Diary Entry code for the Estimate Valuation Point to move to Candidate or Final state.")], **kwargs) -> ValuationPointDataResponse:  # noqa: E501
         ...
 
     @overload
-    def accept_estimate_point(self, scope : Annotated[constr(strict=True, max_length=64, min_length=1), Field(..., description="The scope of the Fund.")], code : Annotated[constr(strict=True, max_length=64, min_length=1), Field(..., description="The code of the Fund. Together with the scope this uniquely identifies the Fund.")], valuation_point_data_request : Annotated[ValuationPointDataRequest, Field(..., description="The valuationPointDataRequest which contains the Diary Entry code for the Estimate Valuation Point to move to Final state.")], async_req: Optional[bool]=True, **kwargs) -> ValuationPointDataResponse:  # noqa: E501
+    def accept_estimate_point(self, scope : Annotated[constr(strict=True, max_length=64, min_length=1), Field(..., description="The scope of the Fund.")], code : Annotated[constr(strict=True, max_length=64, min_length=1), Field(..., description="The code of the Fund. Together with the scope this uniquely identifies the Fund.")], valuation_point_data_request : Annotated[ValuationPointDataRequest, Field(..., description="The valuationPointDataRequest which contains the Diary Entry code for the Estimate Valuation Point to move to Candidate or Final state.")], async_req: Optional[bool]=True, **kwargs) -> ValuationPointDataResponse:  # noqa: E501
         ...
 
     @validate_arguments
-    def accept_estimate_point(self, scope : Annotated[constr(strict=True, max_length=64, min_length=1), Field(..., description="The scope of the Fund.")], code : Annotated[constr(strict=True, max_length=64, min_length=1), Field(..., description="The code of the Fund. Together with the scope this uniquely identifies the Fund.")], valuation_point_data_request : Annotated[ValuationPointDataRequest, Field(..., description="The valuationPointDataRequest which contains the Diary Entry code for the Estimate Valuation Point to move to Final state.")], async_req: Optional[bool]=None, **kwargs) -> Union[ValuationPointDataResponse, Awaitable[ValuationPointDataResponse]]:  # noqa: E501
+    def accept_estimate_point(self, scope : Annotated[constr(strict=True, max_length=64, min_length=1), Field(..., description="The scope of the Fund.")], code : Annotated[constr(strict=True, max_length=64, min_length=1), Field(..., description="The code of the Fund. Together with the scope this uniquely identifies the Fund.")], valuation_point_data_request : Annotated[ValuationPointDataRequest, Field(..., description="The valuationPointDataRequest which contains the Diary Entry code for the Estimate Valuation Point to move to Candidate or Final state.")], async_req: Optional[bool]=None, **kwargs) -> Union[ValuationPointDataResponse, Awaitable[ValuationPointDataResponse]]:  # noqa: E501
         """[EXPERIMENTAL] AcceptEstimatePoint: Accepts an Estimate Valuation Point.  # noqa: E501
 
         Accepts the specified estimate Valuation Point. Should the Valuation Point differ since the valuation Point was last run, status will be marked as 'Candidate', otherwise it will be marked as 'Final'  # noqa: E501
@@ -86,7 +86,7 @@ class FundsApi:
         :type scope: str
         :param code: The code of the Fund. Together with the scope this uniquely identifies the Fund. (required)
         :type code: str
-        :param valuation_point_data_request: The valuationPointDataRequest which contains the Diary Entry code for the Estimate Valuation Point to move to Final state. (required)
+        :param valuation_point_data_request: The valuationPointDataRequest which contains the Diary Entry code for the Estimate Valuation Point to move to Candidate or Final state. (required)
         :type valuation_point_data_request: ValuationPointDataRequest
         :param async_req: Whether to execute the request asynchronously.
         :type async_req: bool, optional
@@ -108,7 +108,7 @@ class FundsApi:
         return self.accept_estimate_point_with_http_info(scope, code, valuation_point_data_request, **kwargs)  # noqa: E501
 
     @validate_arguments
-    def accept_estimate_point_with_http_info(self, scope : Annotated[constr(strict=True, max_length=64, min_length=1), Field(..., description="The scope of the Fund.")], code : Annotated[constr(strict=True, max_length=64, min_length=1), Field(..., description="The code of the Fund. Together with the scope this uniquely identifies the Fund.")], valuation_point_data_request : Annotated[ValuationPointDataRequest, Field(..., description="The valuationPointDataRequest which contains the Diary Entry code for the Estimate Valuation Point to move to Final state.")], **kwargs) -> ApiResponse:  # noqa: E501
+    def accept_estimate_point_with_http_info(self, scope : Annotated[constr(strict=True, max_length=64, min_length=1), Field(..., description="The scope of the Fund.")], code : Annotated[constr(strict=True, max_length=64, min_length=1), Field(..., description="The code of the Fund. Together with the scope this uniquely identifies the Fund.")], valuation_point_data_request : Annotated[ValuationPointDataRequest, Field(..., description="The valuationPointDataRequest which contains the Diary Entry code for the Estimate Valuation Point to move to Candidate or Final state.")], **kwargs) -> ApiResponse:  # noqa: E501
         """[EXPERIMENTAL] AcceptEstimatePoint: Accepts an Estimate Valuation Point.  # noqa: E501
 
         Accepts the specified estimate Valuation Point. Should the Valuation Point differ since the valuation Point was last run, status will be marked as 'Candidate', otherwise it will be marked as 'Final'  # noqa: E501
@@ -122,7 +122,7 @@ class FundsApi:
         :type scope: str
         :param code: The code of the Fund. Together with the scope this uniquely identifies the Fund. (required)
         :type code: str
-        :param valuation_point_data_request: The valuationPointDataRequest which contains the Diary Entry code for the Estimate Valuation Point to move to Final state. (required)
+        :param valuation_point_data_request: The valuationPointDataRequest which contains the Diary Entry code for the Estimate Valuation Point to move to Candidate or Final state. (required)
         :type valuation_point_data_request: ValuationPointDataRequest
         :param async_req: Whether to execute the request asynchronously.
         :type async_req: bool, optional
