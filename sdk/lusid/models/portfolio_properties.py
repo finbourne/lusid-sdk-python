@@ -22,6 +22,7 @@ from typing import Any, Dict, List, Optional
 from pydantic.v1 import BaseModel, Field, StrictStr, conlist
 from lusid.models.link import Link
 from lusid.models.model_property import ModelProperty
+from lusid.models.staged_modifications_info import StagedModificationsInfo
 from lusid.models.version import Version
 
 class PortfolioProperties(BaseModel):
@@ -31,8 +32,9 @@ class PortfolioProperties(BaseModel):
     href: Optional[StrictStr] = Field(None, description="The specific Uniform Resource Identifier (URI) for this resource at the requested effective and asAt datetime.")
     properties: Optional[Dict[str, ModelProperty]] = Field(None, description="The portfolio properties. These will be from the 'Portfolio' domain.")
     version: Optional[Version] = None
+    staged_modifications: Optional[StagedModificationsInfo] = Field(None, alias="stagedModifications")
     links: Optional[conlist(Link)] = None
-    __properties = ["href", "properties", "version", "links"]
+    __properties = ["href", "properties", "version", "stagedModifications", "links"]
 
     class Config:
         """Pydantic configuration"""
@@ -68,6 +70,9 @@ class PortfolioProperties(BaseModel):
         # override the default output from pydantic by calling `to_dict()` of version
         if self.version:
             _dict['version'] = self.version.to_dict()
+        # override the default output from pydantic by calling `to_dict()` of staged_modifications
+        if self.staged_modifications:
+            _dict['stagedModifications'] = self.staged_modifications.to_dict()
         # override the default output from pydantic by calling `to_dict()` of each item in links (list)
         _items = []
         if self.links:
@@ -110,6 +115,7 @@ class PortfolioProperties(BaseModel):
             if obj.get("properties") is not None
             else None,
             "version": Version.from_dict(obj.get("version")) if obj.get("version") is not None else None,
+            "staged_modifications": StagedModificationsInfo.from_dict(obj.get("stagedModifications")) if obj.get("stagedModifications") is not None else None,
             "links": [Link.from_dict(_item) for _item in obj.get("links")] if obj.get("links") is not None else None
         })
         return _obj

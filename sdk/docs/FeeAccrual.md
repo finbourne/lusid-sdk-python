@@ -4,6 +4,7 @@
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
+**effective_at** | **datetime** |  | [optional] 
 **name** | **str** |  | [optional] 
 **calculation_base** | **float** |  | [optional] 
 **amount** | **float** |  | [optional] 

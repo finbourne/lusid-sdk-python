@@ -17,7 +17,7 @@ import pprint
 import re  # noqa: F401
 import json
 
-
+from datetime import datetime
 from typing import Any, Dict, Optional, Union
 from pydantic.v1 import BaseModel, Field, StrictFloat, StrictInt, StrictStr
 
@@ -25,12 +25,13 @@ class FeeAccrual(BaseModel):
     """
     FeeAccrual
     """
+    effective_at: Optional[datetime] = Field(None, alias="effectiveAt")
     name: Optional[StrictStr] = None
     calculation_base: Optional[Union[StrictFloat, StrictInt]] = Field(None, alias="calculationBase")
     amount: Optional[Union[StrictFloat, StrictInt]] = None
     previous_accrual: Optional[Union[StrictFloat, StrictInt]] = Field(None, alias="previousAccrual")
     total_accrual: Optional[Union[StrictFloat, StrictInt]] = Field(None, alias="totalAccrual")
-    __properties = ["name", "calculationBase", "amount", "previousAccrual", "totalAccrual"]
+    __properties = ["effectiveAt", "name", "calculationBase", "amount", "previousAccrual", "totalAccrual"]
 
     class Config:
         """Pydantic configuration"""
@@ -74,6 +75,7 @@ class FeeAccrual(BaseModel):
             return FeeAccrual.parse_obj(obj)
 
         _obj = FeeAccrual.parse_obj({
+            "effective_at": obj.get("effectiveAt"),
             "name": obj.get("name"),
             "calculation_base": obj.get("calculationBase"),
             "amount": obj.get("amount"),
