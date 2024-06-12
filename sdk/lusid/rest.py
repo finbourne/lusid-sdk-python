@@ -133,7 +133,7 @@ class RESTClientObject(object):
 
     def request(self, method, url, query_params=None, headers=None,
                 body=None, post_params=None, _preload_content=True,
-                _request_timeout=None):
+                _request_timeout=None, retries=3):
         """Perform requests.
 
         :param method: http request method
@@ -151,7 +151,11 @@ class RESTClientObject(object):
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
                                  (connection, read) timeouts.
+        :param retries: times to reattempt the request if transient errors are
+                        encountered (HTTP Error 502)
         """
+        argument_cache = locals()
+        
         method = method.upper()
         assert method in ['GET', 'HEAD', 'DELETE', 'POST', 'PUT',
                           'PATCH', 'OPTIONS']
@@ -246,6 +250,12 @@ class RESTClientObject(object):
             # log response body
             logger.debug("response body: %s", r.data)
 
+        if retries and (r.status in {502}):
+            logger.debug("Temporary HTTP Error %s encountered, trying again", r.status)
+            argument_cache["retries"] -= 1
+            del argument_cache["self"]
+            return self.request(**argument_cache)
+        
         if not 200 <= r.status <= 299:
             raise ApiException(http_resp=r)
 
