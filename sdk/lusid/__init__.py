@@ -390,6 +390,7 @@ from lusid.models.expanded_group import ExpandedGroup
 from lusid.models.expiry_event import ExpiryEvent
 from lusid.models.fee import Fee
 from lusid.models.fee_accrual import FeeAccrual
+from lusid.models.fee_properties import FeeProperties
 from lusid.models.fee_request import FeeRequest
 from lusid.models.fee_rule import FeeRule
 from lusid.models.fee_rule_upsert_request import FeeRuleUpsertRequest
@@ -1461,6 +1462,7 @@ __all__ = [
     "ExpiryEvent",
     "Fee",
     "FeeAccrual",
+    "FeeProperties",
     "FeeRequest",
     "FeeRule",
     "FeeRuleUpsertRequest",

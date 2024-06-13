@@ -26,9 +26,9 @@ class UpsertValuationPointRequest(BaseModel):
     """
     A definition for the period you wish to close  # noqa: E501
     """
-    diary_entry_code: Optional[constr(strict=True, max_length=64, min_length=1)] = Field(None, alias="diaryEntryCode", description="Unique code for the Valuation Point.")
+    diary_entry_code: constr(strict=True, max_length=64, min_length=1) = Field(..., alias="diaryEntryCode", description="Unique code for the Valuation Point.")
     name: Optional[constr(strict=True, max_length=512, min_length=1)] = Field(None, description="Identifiable Name assigned to the Valuation Point.")
-    effective_at: Optional[datetime] = Field(None, alias="effectiveAt", description="The effective time of the diary entry.")
+    effective_at: datetime = Field(..., alias="effectiveAt", description="The effective time of the diary entry.")
     query_as_at: Optional[datetime] = Field(None, alias="queryAsAt", description="The query time of the diary entry. Defaults to latest.")
     properties: Optional[Dict[str, ModelProperty]] = Field(None, description="A set of properties for the diary entry.")
     __properties = ["diaryEntryCode", "name", "effectiveAt", "queryAsAt", "properties"]
@@ -36,9 +36,6 @@ class UpsertValuationPointRequest(BaseModel):
     @validator('diary_entry_code')
     def diary_entry_code_validate_regular_expression(cls, value):
         """Validates the regular expression"""
-        if value is None:
-            return value
-
         if not re.match(r"^[a-zA-Z0-9\-_]+$", value):
             raise ValueError(r"must validate the regular expression /^[a-zA-Z0-9\-_]+$/")
         return value
@@ -84,20 +81,10 @@ class UpsertValuationPointRequest(BaseModel):
                 if self.properties[_key]:
                     _field_dict[_key] = self.properties[_key].to_dict()
             _dict['properties'] = _field_dict
-        # set to None if diary_entry_code (nullable) is None
-        # and __fields_set__ contains the field
-        if self.diary_entry_code is None and "diary_entry_code" in self.__fields_set__:
-            _dict['diaryEntryCode'] = None
-
         # set to None if name (nullable) is None
         # and __fields_set__ contains the field
         if self.name is None and "name" in self.__fields_set__:
             _dict['name'] = None
-
-        # set to None if effective_at (nullable) is None
-        # and __fields_set__ contains the field
-        if self.effective_at is None and "effective_at" in self.__fields_set__:
-            _dict['effectiveAt'] = None
 
         # set to None if query_as_at (nullable) is None
         # and __fields_set__ contains the field
