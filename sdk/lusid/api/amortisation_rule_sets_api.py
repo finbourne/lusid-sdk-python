@@ -198,7 +198,7 @@ class AmortisationRuleSetsApi:
         _auth_settings = ['oauth2']  # noqa: E501
 
         _response_types_map = {
-            '200': "AmortisationRuleSet",
+            '201': "AmortisationRuleSet",
             '400': "LusidValidationProblemDetails",
         }
 

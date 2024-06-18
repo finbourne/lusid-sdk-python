@@ -37,8 +37,10 @@ class PortfolioEntity(BaseModel):
     effective_at_created: Optional[datetime] = Field(None, alias="effectiveAtCreated", description="The EffectiveAt this Entity is created, if entity does not currently exist in EffectiveAt.")
     prevailing_portfolio: Optional[PortfolioWithoutHref] = Field(None, alias="prevailingPortfolio")
     deleted_portfolio: Optional[PortfolioWithoutHref] = Field(None, alias="deletedPortfolio")
+    previewed_status: Optional[StrictStr] = Field(None, alias="previewedStatus", description="The status of the previewed entity.")
+    previewed_portfolio: Optional[PortfolioWithoutHref] = Field(None, alias="previewedPortfolio")
     links: Optional[conlist(Link)] = None
-    __properties = ["href", "entityUniqueId", "asAtVersionNumber", "status", "asAtDeleted", "userIdDeleted", "requestIdDeleted", "effectiveAtCreated", "prevailingPortfolio", "deletedPortfolio", "links"]
+    __properties = ["href", "entityUniqueId", "asAtVersionNumber", "status", "asAtDeleted", "userIdDeleted", "requestIdDeleted", "effectiveAtCreated", "prevailingPortfolio", "deletedPortfolio", "previewedStatus", "previewedPortfolio", "links"]
 
     class Config:
         """Pydantic configuration"""
@@ -70,6 +72,9 @@ class PortfolioEntity(BaseModel):
         # override the default output from pydantic by calling `to_dict()` of deleted_portfolio
         if self.deleted_portfolio:
             _dict['deletedPortfolio'] = self.deleted_portfolio.to_dict()
+        # override the default output from pydantic by calling `to_dict()` of previewed_portfolio
+        if self.previewed_portfolio:
+            _dict['previewedPortfolio'] = self.previewed_portfolio.to_dict()
         # override the default output from pydantic by calling `to_dict()` of each item in links (list)
         _items = []
         if self.links:
@@ -102,6 +107,11 @@ class PortfolioEntity(BaseModel):
         if self.effective_at_created is None and "effective_at_created" in self.__fields_set__:
             _dict['effectiveAtCreated'] = None
 
+        # set to None if previewed_status (nullable) is None
+        # and __fields_set__ contains the field
+        if self.previewed_status is None and "previewed_status" in self.__fields_set__:
+            _dict['previewedStatus'] = None
+
         # set to None if links (nullable) is None
         # and __fields_set__ contains the field
         if self.links is None and "links" in self.__fields_set__:
@@ -129,6 +139,8 @@ class PortfolioEntity(BaseModel):
             "effective_at_created": obj.get("effectiveAtCreated"),
             "prevailing_portfolio": PortfolioWithoutHref.from_dict(obj.get("prevailingPortfolio")) if obj.get("prevailingPortfolio") is not None else None,
             "deleted_portfolio": PortfolioWithoutHref.from_dict(obj.get("deletedPortfolio")) if obj.get("deletedPortfolio") is not None else None,
+            "previewed_status": obj.get("previewedStatus"),
+            "previewed_portfolio": PortfolioWithoutHref.from_dict(obj.get("previewedPortfolio")) if obj.get("previewedPortfolio") is not None else None,
             "links": [Link.from_dict(_item) for _item in obj.get("links")] if obj.get("links") is not None else None
         })
         return _obj

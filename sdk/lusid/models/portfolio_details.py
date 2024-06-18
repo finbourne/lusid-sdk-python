@@ -23,6 +23,7 @@ from pydantic.v1 import BaseModel, Field, StrictStr, conlist, validator
 from lusid.models.instrument_event_configuration import InstrumentEventConfiguration
 from lusid.models.link import Link
 from lusid.models.resource_id import ResourceId
+from lusid.models.staged_modifications_info import StagedModificationsInfo
 from lusid.models.version import Version
 
 class PortfolioDetails(BaseModel):
@@ -42,8 +43,9 @@ class PortfolioDetails(BaseModel):
     cash_gain_loss_calculation_date: Optional[StrictStr] = Field(None, alias="cashGainLossCalculationDate", description="The option when the Cash Gain Loss to be calulated, TransactionDate/SettlementDate. Defaults to SettlementDate.")
     instrument_event_configuration: Optional[InstrumentEventConfiguration] = Field(None, alias="instrumentEventConfiguration")
     amortisation_rule_set_id: Optional[ResourceId] = Field(None, alias="amortisationRuleSetId")
+    staged_modifications: Optional[StagedModificationsInfo] = Field(None, alias="stagedModifications")
     links: Optional[conlist(Link)] = None
-    __properties = ["href", "originPortfolioId", "version", "baseCurrency", "corporateActionSourceId", "subHoldingKeys", "instrumentScopes", "accountingMethod", "amortisationMethod", "transactionTypeScope", "cashGainLossCalculationDate", "instrumentEventConfiguration", "amortisationRuleSetId", "links"]
+    __properties = ["href", "originPortfolioId", "version", "baseCurrency", "corporateActionSourceId", "subHoldingKeys", "instrumentScopes", "accountingMethod", "amortisationMethod", "transactionTypeScope", "cashGainLossCalculationDate", "instrumentEventConfiguration", "amortisationRuleSetId", "stagedModifications", "links"]
 
     @validator('accounting_method')
     def accounting_method_validate_enum(cls, value):
@@ -94,6 +96,9 @@ class PortfolioDetails(BaseModel):
         # override the default output from pydantic by calling `to_dict()` of amortisation_rule_set_id
         if self.amortisation_rule_set_id:
             _dict['amortisationRuleSetId'] = self.amortisation_rule_set_id.to_dict()
+        # override the default output from pydantic by calling `to_dict()` of staged_modifications
+        if self.staged_modifications:
+            _dict['stagedModifications'] = self.staged_modifications.to_dict()
         # override the default output from pydantic by calling `to_dict()` of each item in links (list)
         _items = []
         if self.links:
@@ -161,6 +166,7 @@ class PortfolioDetails(BaseModel):
             "cash_gain_loss_calculation_date": obj.get("cashGainLossCalculationDate"),
             "instrument_event_configuration": InstrumentEventConfiguration.from_dict(obj.get("instrumentEventConfiguration")) if obj.get("instrumentEventConfiguration") is not None else None,
             "amortisation_rule_set_id": ResourceId.from_dict(obj.get("amortisationRuleSetId")) if obj.get("amortisationRuleSetId") is not None else None,
+            "staged_modifications": StagedModificationsInfo.from_dict(obj.get("stagedModifications")) if obj.get("stagedModifications") is not None else None,
             "links": [Link.from_dict(_item) for _item in obj.get("links")] if obj.get("links") is not None else None
         })
         return _obj

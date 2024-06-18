@@ -22,7 +22,7 @@ from typing import overload, Optional, Union, Awaitable
 from typing_extensions import Annotated
 from datetime import datetime
 
-from pydantic.v1 import Field, StrictStr, constr, validator
+from pydantic.v1 import Field, StrictStr, conlist, constr, validator
 
 from typing import Optional
 
@@ -50,22 +50,22 @@ class EntitiesApi:
         self.api_client = api_client
 
     @overload
-    async def get_portfolio_by_entity_unique_id(self, entity_unique_id : Annotated[constr(strict=True, max_length=40, min_length=30), Field(..., description="The universally unique identifier of the portfolio definition.")], effective_at : Annotated[Optional[StrictStr], Field(description="The effective datetime or cut label at which to retrieve the portfolio definition. Defaults to the current LUSID system datetime if not specified.")] = None, as_at : Annotated[Optional[datetime], Field(description="The asAt datetime at which to retrieve the portfolio definition. Defaults to returning the latest version of the portfolio definition if not specified.")] = None, **kwargs) -> PortfolioEntity:  # noqa: E501
+    async def get_portfolio_by_entity_unique_id(self, entity_unique_id : Annotated[constr(strict=True, max_length=40, min_length=30), Field(..., description="The universally unique identifier of the portfolio definition.")], effective_at : Annotated[Optional[StrictStr], Field(description="The effective datetime or cut label at which to retrieve the portfolio definition. Defaults to the current LUSID system datetime if not specified.")] = None, as_at : Annotated[Optional[datetime], Field(description="The asAt datetime at which to retrieve the portfolio definition. Defaults to returning the latest version of the portfolio definition if not specified.")] = None, previews : Annotated[Optional[conlist(StrictStr)], Field(description="The ids of the staged modifications to be previewed in the response.")] = None, **kwargs) -> PortfolioEntity:  # noqa: E501
         ...
 
     @overload
-    def get_portfolio_by_entity_unique_id(self, entity_unique_id : Annotated[constr(strict=True, max_length=40, min_length=30), Field(..., description="The universally unique identifier of the portfolio definition.")], effective_at : Annotated[Optional[StrictStr], Field(description="The effective datetime or cut label at which to retrieve the portfolio definition. Defaults to the current LUSID system datetime if not specified.")] = None, as_at : Annotated[Optional[datetime], Field(description="The asAt datetime at which to retrieve the portfolio definition. Defaults to returning the latest version of the portfolio definition if not specified.")] = None, async_req: Optional[bool]=True, **kwargs) -> PortfolioEntity:  # noqa: E501
+    def get_portfolio_by_entity_unique_id(self, entity_unique_id : Annotated[constr(strict=True, max_length=40, min_length=30), Field(..., description="The universally unique identifier of the portfolio definition.")], effective_at : Annotated[Optional[StrictStr], Field(description="The effective datetime or cut label at which to retrieve the portfolio definition. Defaults to the current LUSID system datetime if not specified.")] = None, as_at : Annotated[Optional[datetime], Field(description="The asAt datetime at which to retrieve the portfolio definition. Defaults to returning the latest version of the portfolio definition if not specified.")] = None, previews : Annotated[Optional[conlist(StrictStr)], Field(description="The ids of the staged modifications to be previewed in the response.")] = None, async_req: Optional[bool]=True, **kwargs) -> PortfolioEntity:  # noqa: E501
         ...
 
     @validate_arguments
-    def get_portfolio_by_entity_unique_id(self, entity_unique_id : Annotated[constr(strict=True, max_length=40, min_length=30), Field(..., description="The universally unique identifier of the portfolio definition.")], effective_at : Annotated[Optional[StrictStr], Field(description="The effective datetime or cut label at which to retrieve the portfolio definition. Defaults to the current LUSID system datetime if not specified.")] = None, as_at : Annotated[Optional[datetime], Field(description="The asAt datetime at which to retrieve the portfolio definition. Defaults to returning the latest version of the portfolio definition if not specified.")] = None, async_req: Optional[bool]=None, **kwargs) -> Union[PortfolioEntity, Awaitable[PortfolioEntity]]:  # noqa: E501
+    def get_portfolio_by_entity_unique_id(self, entity_unique_id : Annotated[constr(strict=True, max_length=40, min_length=30), Field(..., description="The universally unique identifier of the portfolio definition.")], effective_at : Annotated[Optional[StrictStr], Field(description="The effective datetime or cut label at which to retrieve the portfolio definition. Defaults to the current LUSID system datetime if not specified.")] = None, as_at : Annotated[Optional[datetime], Field(description="The asAt datetime at which to retrieve the portfolio definition. Defaults to returning the latest version of the portfolio definition if not specified.")] = None, previews : Annotated[Optional[conlist(StrictStr)], Field(description="The ids of the staged modifications to be previewed in the response.")] = None, async_req: Optional[bool]=None, **kwargs) -> Union[PortfolioEntity, Awaitable[PortfolioEntity]]:  # noqa: E501
         """[EXPERIMENTAL] GetPortfolioByEntityUniqueId: Get portfolio by EntityUniqueId  # noqa: E501
 
         Retrieve the definition of a particular portfolio.  If the portfolio is deleted, this will return the state of the portfolio immediately prior to deletion.  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
 
-        >>> thread = api.get_portfolio_by_entity_unique_id(entity_unique_id, effective_at, as_at, async_req=True)
+        >>> thread = api.get_portfolio_by_entity_unique_id(entity_unique_id, effective_at, as_at, previews, async_req=True)
         >>> result = thread.get()
 
         :param entity_unique_id: The universally unique identifier of the portfolio definition. (required)
@@ -74,6 +74,8 @@ class EntitiesApi:
         :type effective_at: str
         :param as_at: The asAt datetime at which to retrieve the portfolio definition. Defaults to returning the latest version of the portfolio definition if not specified.
         :type as_at: datetime
+        :param previews: The ids of the staged modifications to be previewed in the response.
+        :type previews: List[str]
         :param async_req: Whether to execute the request asynchronously.
         :type async_req: bool, optional
         :param _request_timeout: timeout setting for this request.
@@ -91,17 +93,17 @@ class EntitiesApi:
             raise ValueError(message)
         if async_req is not None:
             kwargs['async_req'] = async_req
-        return self.get_portfolio_by_entity_unique_id_with_http_info(entity_unique_id, effective_at, as_at, **kwargs)  # noqa: E501
+        return self.get_portfolio_by_entity_unique_id_with_http_info(entity_unique_id, effective_at, as_at, previews, **kwargs)  # noqa: E501
 
     @validate_arguments
-    def get_portfolio_by_entity_unique_id_with_http_info(self, entity_unique_id : Annotated[constr(strict=True, max_length=40, min_length=30), Field(..., description="The universally unique identifier of the portfolio definition.")], effective_at : Annotated[Optional[StrictStr], Field(description="The effective datetime or cut label at which to retrieve the portfolio definition. Defaults to the current LUSID system datetime if not specified.")] = None, as_at : Annotated[Optional[datetime], Field(description="The asAt datetime at which to retrieve the portfolio definition. Defaults to returning the latest version of the portfolio definition if not specified.")] = None, **kwargs) -> ApiResponse:  # noqa: E501
+    def get_portfolio_by_entity_unique_id_with_http_info(self, entity_unique_id : Annotated[constr(strict=True, max_length=40, min_length=30), Field(..., description="The universally unique identifier of the portfolio definition.")], effective_at : Annotated[Optional[StrictStr], Field(description="The effective datetime or cut label at which to retrieve the portfolio definition. Defaults to the current LUSID system datetime if not specified.")] = None, as_at : Annotated[Optional[datetime], Field(description="The asAt datetime at which to retrieve the portfolio definition. Defaults to returning the latest version of the portfolio definition if not specified.")] = None, previews : Annotated[Optional[conlist(StrictStr)], Field(description="The ids of the staged modifications to be previewed in the response.")] = None, **kwargs) -> ApiResponse:  # noqa: E501
         """[EXPERIMENTAL] GetPortfolioByEntityUniqueId: Get portfolio by EntityUniqueId  # noqa: E501
 
         Retrieve the definition of a particular portfolio.  If the portfolio is deleted, this will return the state of the portfolio immediately prior to deletion.  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
 
-        >>> thread = api.get_portfolio_by_entity_unique_id_with_http_info(entity_unique_id, effective_at, as_at, async_req=True)
+        >>> thread = api.get_portfolio_by_entity_unique_id_with_http_info(entity_unique_id, effective_at, as_at, previews, async_req=True)
         >>> result = thread.get()
 
         :param entity_unique_id: The universally unique identifier of the portfolio definition. (required)
@@ -110,6 +112,8 @@ class EntitiesApi:
         :type effective_at: str
         :param as_at: The asAt datetime at which to retrieve the portfolio definition. Defaults to returning the latest version of the portfolio definition if not specified.
         :type as_at: datetime
+        :param previews: The ids of the staged modifications to be previewed in the response.
+        :type previews: List[str]
         :param async_req: Whether to execute the request asynchronously.
         :type async_req: bool, optional
         :param _preload_content: if False, the ApiResponse.data will
@@ -140,7 +144,8 @@ class EntitiesApi:
         _all_params = [
             'entity_unique_id',
             'effective_at',
-            'as_at'
+            'as_at',
+            'previews'
         ]
         _all_params.extend(
             [
@@ -182,6 +187,10 @@ class EntitiesApi:
                 _query_params.append(('asAt', _params['as_at'].strftime(self.api_client.configuration.datetime_format)))
             else:
                 _query_params.append(('asAt', _params['as_at']))
+
+        if _params.get('previews') is not None:  # noqa: E501
+            _query_params.append(('previews', _params['previews']))
+            _collection_formats['previews'] = 'multi'
 
         # process the header parameters
         _header_params = dict(_params.get('_headers', {}))

@@ -5,7 +5,7 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **type** | **str** | The type of calculation to perform | 
-**side** | **str** | The side to which the calculation is applied | 
+**side** | **str** | The side to which the calculation is applied | [optional] 
 
 ## Example
 

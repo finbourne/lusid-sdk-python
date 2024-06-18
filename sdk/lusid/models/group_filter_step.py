@@ -29,10 +29,9 @@ class GroupFilterStep(ComplianceStep):
     """
     label: constr(strict=True, min_length=1) = Field(..., description="The label of the compliance step")
     limit_check_parameters: conlist(ComplianceTemplateParameter) = Field(..., alias="limitCheckParameters", description="Parameters required for an absolute limit check")
-    warning_check_parameters: conlist(ComplianceTemplateParameter) = Field(..., alias="warningCheckParameters", description="Parameters required for a warning limit check")
     compliance_step_type: StrictStr = Field(..., alias="complianceStepType", description=". The available values are: FilterStep, GroupByStep, GroupFilterStep, BranchStep, RecombineStep, CheckStep")
     additional_properties: Dict[str, Any] = {}
-    __properties = ["complianceStepType", "label", "limitCheckParameters", "warningCheckParameters"]
+    __properties = ["complianceStepType", "label", "limitCheckParameters"]
 
     @validator('compliance_step_type')
     def compliance_step_type_validate_enum(cls, value):
@@ -73,13 +72,6 @@ class GroupFilterStep(ComplianceStep):
                 if _item:
                     _items.append(_item.to_dict())
             _dict['limitCheckParameters'] = _items
-        # override the default output from pydantic by calling `to_dict()` of each item in warning_check_parameters (list)
-        _items = []
-        if self.warning_check_parameters:
-            for _item in self.warning_check_parameters:
-                if _item:
-                    _items.append(_item.to_dict())
-            _dict['warningCheckParameters'] = _items
         # puts key-value pairs in additional_properties in the top level
         if self.additional_properties is not None:
             for _key, _value in self.additional_properties.items():
@@ -99,8 +91,7 @@ class GroupFilterStep(ComplianceStep):
         _obj = GroupFilterStep.parse_obj({
             "compliance_step_type": obj.get("complianceStepType"),
             "label": obj.get("label"),
-            "limit_check_parameters": [ComplianceTemplateParameter.from_dict(_item) for _item in obj.get("limitCheckParameters")] if obj.get("limitCheckParameters") is not None else None,
-            "warning_check_parameters": [ComplianceTemplateParameter.from_dict(_item) for _item in obj.get("warningCheckParameters")] if obj.get("warningCheckParameters") is not None else None
+            "limit_check_parameters": [ComplianceTemplateParameter.from_dict(_item) for _item in obj.get("limitCheckParameters")] if obj.get("limitCheckParameters") is not None else None
         })
         # store additional fields in additional_properties
         for _key in obj.keys():

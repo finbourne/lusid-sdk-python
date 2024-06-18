@@ -43,6 +43,7 @@ from lusid.models.general_ledger_profile_mapping import GeneralLedgerProfileMapp
 from lusid.models.general_ledger_profile_request import GeneralLedgerProfileRequest
 from lusid.models.general_ledger_profile_response import GeneralLedgerProfileResponse
 from lusid.models.model_property import ModelProperty
+from lusid.models.operation import Operation
 from lusid.models.paged_resource_list_of_account import PagedResourceListOfAccount
 from lusid.models.paged_resource_list_of_chart_of_accounts import PagedResourceListOfChartOfAccounts
 from lusid.models.paged_resource_list_of_cleardown_module_response import PagedResourceListOfCleardownModuleResponse
@@ -3935,6 +3936,370 @@ class ChartOfAccountsApi:
 
         return self.api_client.call_api(
             '/api/chartofaccounts/{scope}/{code}/postingmodules', 'GET',
+            _path_params,
+            _query_params,
+            _header_params,
+            body=_body_params,
+            post_params=_form_params,
+            files=_files,
+            response_types_map=_response_types_map,
+            auth_settings=_auth_settings,
+            async_req=_params.get('async_req'),
+            _return_http_data_only=_params.get('_return_http_data_only'),  # noqa: E501
+            _preload_content=_params.get('_preload_content', True),
+            _request_timeout=_params.get('_request_timeout'),
+            collection_formats=_collection_formats,
+            _request_auth=_params.get('_request_auth'))
+
+    @overload
+    async def patch_cleardown_module(self, scope : Annotated[constr(strict=True, max_length=64, min_length=1), Field(..., description="The scope of the Chart of Accounts.")], code : Annotated[constr(strict=True, max_length=64, min_length=1), Field(..., description="The code of the Chart of Accounts. Together with the scope this uniquely identifies the Chart of Accounts.")], cleardown_module_code : Annotated[constr(strict=True, max_length=64, min_length=1), Field(..., description="The code of the Cleardown Module to be updated.")], operation : Annotated[conlist(Operation), Field(..., description="The json patch document. For more information see: https://datatracker.ietf.org/doc/html/rfc6902.")], **kwargs) -> CleardownModuleResponse:  # noqa: E501
+        ...
+
+    @overload
+    def patch_cleardown_module(self, scope : Annotated[constr(strict=True, max_length=64, min_length=1), Field(..., description="The scope of the Chart of Accounts.")], code : Annotated[constr(strict=True, max_length=64, min_length=1), Field(..., description="The code of the Chart of Accounts. Together with the scope this uniquely identifies the Chart of Accounts.")], cleardown_module_code : Annotated[constr(strict=True, max_length=64, min_length=1), Field(..., description="The code of the Cleardown Module to be updated.")], operation : Annotated[conlist(Operation), Field(..., description="The json patch document. For more information see: https://datatracker.ietf.org/doc/html/rfc6902.")], async_req: Optional[bool]=True, **kwargs) -> CleardownModuleResponse:  # noqa: E501
+        ...
+
+    @validate_arguments
+    def patch_cleardown_module(self, scope : Annotated[constr(strict=True, max_length=64, min_length=1), Field(..., description="The scope of the Chart of Accounts.")], code : Annotated[constr(strict=True, max_length=64, min_length=1), Field(..., description="The code of the Chart of Accounts. Together with the scope this uniquely identifies the Chart of Accounts.")], cleardown_module_code : Annotated[constr(strict=True, max_length=64, min_length=1), Field(..., description="The code of the Cleardown Module to be updated.")], operation : Annotated[conlist(Operation), Field(..., description="The json patch document. For more information see: https://datatracker.ietf.org/doc/html/rfc6902.")], async_req: Optional[bool]=None, **kwargs) -> Union[CleardownModuleResponse, Awaitable[CleardownModuleResponse]]:  # noqa: E501
+        """[EXPERIMENTAL] PatchCleardownModule: Patch a Cleardown Module  # noqa: E501
+
+        Update fields on a Cleardown Module. The behaviour is defined by the JSON Patch specification.                Currently supported fields are: DisplayName, Description, Rules.  # noqa: E501
+        This method makes a synchronous HTTP request by default. To make an
+        asynchronous HTTP request, please pass async_req=True
+
+        >>> thread = api.patch_cleardown_module(scope, code, cleardown_module_code, operation, async_req=True)
+        >>> result = thread.get()
+
+        :param scope: The scope of the Chart of Accounts. (required)
+        :type scope: str
+        :param code: The code of the Chart of Accounts. Together with the scope this uniquely identifies the Chart of Accounts. (required)
+        :type code: str
+        :param cleardown_module_code: The code of the Cleardown Module to be updated. (required)
+        :type cleardown_module_code: str
+        :param operation: The json patch document. For more information see: https://datatracker.ietf.org/doc/html/rfc6902. (required)
+        :type operation: List[Operation]
+        :param async_req: Whether to execute the request asynchronously.
+        :type async_req: bool, optional
+        :param _request_timeout: timeout setting for this request.
+               If one number provided, it will be total request
+               timeout. It can also be a pair (tuple) of
+               (connection, read) timeouts.
+        :return: Returns the result object.
+                 If the method is called asynchronously,
+                 returns the request thread.
+        :rtype: CleardownModuleResponse
+        """
+        kwargs['_return_http_data_only'] = True
+        if '_preload_content' in kwargs:
+            message = "Error! Please call the patch_cleardown_module_with_http_info method with `_preload_content` instead and obtain raw data from ApiResponse.raw_data"  # noqa: E501
+            raise ValueError(message)
+        if async_req is not None:
+            kwargs['async_req'] = async_req
+        return self.patch_cleardown_module_with_http_info(scope, code, cleardown_module_code, operation, **kwargs)  # noqa: E501
+
+    @validate_arguments
+    def patch_cleardown_module_with_http_info(self, scope : Annotated[constr(strict=True, max_length=64, min_length=1), Field(..., description="The scope of the Chart of Accounts.")], code : Annotated[constr(strict=True, max_length=64, min_length=1), Field(..., description="The code of the Chart of Accounts. Together with the scope this uniquely identifies the Chart of Accounts.")], cleardown_module_code : Annotated[constr(strict=True, max_length=64, min_length=1), Field(..., description="The code of the Cleardown Module to be updated.")], operation : Annotated[conlist(Operation), Field(..., description="The json patch document. For more information see: https://datatracker.ietf.org/doc/html/rfc6902.")], **kwargs) -> ApiResponse:  # noqa: E501
+        """[EXPERIMENTAL] PatchCleardownModule: Patch a Cleardown Module  # noqa: E501
+
+        Update fields on a Cleardown Module. The behaviour is defined by the JSON Patch specification.                Currently supported fields are: DisplayName, Description, Rules.  # noqa: E501
+        This method makes a synchronous HTTP request by default. To make an
+        asynchronous HTTP request, please pass async_req=True
+
+        >>> thread = api.patch_cleardown_module_with_http_info(scope, code, cleardown_module_code, operation, async_req=True)
+        >>> result = thread.get()
+
+        :param scope: The scope of the Chart of Accounts. (required)
+        :type scope: str
+        :param code: The code of the Chart of Accounts. Together with the scope this uniquely identifies the Chart of Accounts. (required)
+        :type code: str
+        :param cleardown_module_code: The code of the Cleardown Module to be updated. (required)
+        :type cleardown_module_code: str
+        :param operation: The json patch document. For more information see: https://datatracker.ietf.org/doc/html/rfc6902. (required)
+        :type operation: List[Operation]
+        :param async_req: Whether to execute the request asynchronously.
+        :type async_req: bool, optional
+        :param _preload_content: if False, the ApiResponse.data will
+                                 be set to none and raw_data will store the
+                                 HTTP response body without reading/decoding.
+                                 Default is True.
+        :type _preload_content: bool, optional
+        :param _return_http_data_only: response data instead of ApiResponse
+                                       object with status code, headers, etc
+        :type _return_http_data_only: bool, optional
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :param _request_auth: set to override the auth_settings for an a single
+                              request; this effectively ignores the authentication
+                              in the spec for a single request.
+        :type _request_auth: dict, optional
+        :type _content_type: string, optional: force content-type for the request
+        :return: Returns the result object.
+                 If the method is called asynchronously,
+                 returns the request thread.
+        :rtype: tuple(CleardownModuleResponse, status_code(int), headers(HTTPHeaderDict))
+        """
+
+        _params = locals()
+
+        _all_params = [
+            'scope',
+            'code',
+            'cleardown_module_code',
+            'operation'
+        ]
+        _all_params.extend(
+            [
+                'async_req',
+                '_return_http_data_only',
+                '_preload_content',
+                '_request_timeout',
+                '_request_auth',
+                '_content_type',
+                '_headers'
+            ]
+        )
+
+        # validate the arguments
+        for _key, _val in _params['kwargs'].items():
+            if _key not in _all_params:
+                raise ApiTypeError(
+                    "Got an unexpected keyword argument '%s'"
+                    " to method patch_cleardown_module" % _key
+                )
+            _params[_key] = _val
+        del _params['kwargs']
+
+        _collection_formats = {}
+
+        # process the path parameters
+        _path_params = {}
+        if _params['scope']:
+            _path_params['scope'] = _params['scope']
+
+        if _params['code']:
+            _path_params['code'] = _params['code']
+
+        if _params['cleardown_module_code']:
+            _path_params['cleardownModuleCode'] = _params['cleardown_module_code']
+
+
+        # process the query parameters
+        _query_params = []
+        # process the header parameters
+        _header_params = dict(_params.get('_headers', {}))
+        # process the form parameters
+        _form_params = []
+        _files = {}
+        # process the body parameter
+        _body_params = None
+        if _params['operation'] is not None:
+            _body_params = _params['operation']
+
+        # set the HTTP header `Accept`
+        _header_params['Accept'] = self.api_client.select_header_accept(
+            ['text/plain', 'application/json', 'text/json'])  # noqa: E501
+
+        # set the HTTP header `Content-Type`
+        _content_types_list = _params.get('_content_type',
+            self.api_client.select_header_content_type(
+                ['application/json-patch+json', 'application/json', 'text/json', 'application/*+json']))
+        if _content_types_list:
+                _header_params['Content-Type'] = _content_types_list
+
+        # authentication setting
+        _auth_settings = ['oauth2']  # noqa: E501
+
+        _response_types_map = {
+            '200': "CleardownModuleResponse",
+            '400': "LusidValidationProblemDetails",
+        }
+
+        return self.api_client.call_api(
+            '/api/chartofaccounts/{scope}/{code}/cleardownmodules/{cleardownModuleCode}', 'PATCH',
+            _path_params,
+            _query_params,
+            _header_params,
+            body=_body_params,
+            post_params=_form_params,
+            files=_files,
+            response_types_map=_response_types_map,
+            auth_settings=_auth_settings,
+            async_req=_params.get('async_req'),
+            _return_http_data_only=_params.get('_return_http_data_only'),  # noqa: E501
+            _preload_content=_params.get('_preload_content', True),
+            _request_timeout=_params.get('_request_timeout'),
+            collection_formats=_collection_formats,
+            _request_auth=_params.get('_request_auth'))
+
+    @overload
+    async def patch_posting_module(self, scope : Annotated[constr(strict=True, max_length=64, min_length=1), Field(..., description="The scope of the Chart of Accounts.")], code : Annotated[constr(strict=True, max_length=64, min_length=1), Field(..., description="The code of the Chart of Accounts. Together with the scope this uniquely identifies the Chart of Accounts.")], posting_module_code : Annotated[constr(strict=True, max_length=64, min_length=1), Field(..., description="The code of the Posting Module to be updated.")], operation : Annotated[conlist(Operation), Field(..., description="The json patch document. For more information see: https://datatracker.ietf.org/doc/html/rfc6902.")], **kwargs) -> PostingModuleResponse:  # noqa: E501
+        ...
+
+    @overload
+    def patch_posting_module(self, scope : Annotated[constr(strict=True, max_length=64, min_length=1), Field(..., description="The scope of the Chart of Accounts.")], code : Annotated[constr(strict=True, max_length=64, min_length=1), Field(..., description="The code of the Chart of Accounts. Together with the scope this uniquely identifies the Chart of Accounts.")], posting_module_code : Annotated[constr(strict=True, max_length=64, min_length=1), Field(..., description="The code of the Posting Module to be updated.")], operation : Annotated[conlist(Operation), Field(..., description="The json patch document. For more information see: https://datatracker.ietf.org/doc/html/rfc6902.")], async_req: Optional[bool]=True, **kwargs) -> PostingModuleResponse:  # noqa: E501
+        ...
+
+    @validate_arguments
+    def patch_posting_module(self, scope : Annotated[constr(strict=True, max_length=64, min_length=1), Field(..., description="The scope of the Chart of Accounts.")], code : Annotated[constr(strict=True, max_length=64, min_length=1), Field(..., description="The code of the Chart of Accounts. Together with the scope this uniquely identifies the Chart of Accounts.")], posting_module_code : Annotated[constr(strict=True, max_length=64, min_length=1), Field(..., description="The code of the Posting Module to be updated.")], operation : Annotated[conlist(Operation), Field(..., description="The json patch document. For more information see: https://datatracker.ietf.org/doc/html/rfc6902.")], async_req: Optional[bool]=None, **kwargs) -> Union[PostingModuleResponse, Awaitable[PostingModuleResponse]]:  # noqa: E501
+        """[EXPERIMENTAL] PatchPostingModule: Patch a Posting Module  # noqa: E501
+
+        Update fields on a Posting Module. The behaviour is defined by the JSON Patch specification.                Currently supported fields are: DisplayName, Description, Rules.  # noqa: E501
+        This method makes a synchronous HTTP request by default. To make an
+        asynchronous HTTP request, please pass async_req=True
+
+        >>> thread = api.patch_posting_module(scope, code, posting_module_code, operation, async_req=True)
+        >>> result = thread.get()
+
+        :param scope: The scope of the Chart of Accounts. (required)
+        :type scope: str
+        :param code: The code of the Chart of Accounts. Together with the scope this uniquely identifies the Chart of Accounts. (required)
+        :type code: str
+        :param posting_module_code: The code of the Posting Module to be updated. (required)
+        :type posting_module_code: str
+        :param operation: The json patch document. For more information see: https://datatracker.ietf.org/doc/html/rfc6902. (required)
+        :type operation: List[Operation]
+        :param async_req: Whether to execute the request asynchronously.
+        :type async_req: bool, optional
+        :param _request_timeout: timeout setting for this request.
+               If one number provided, it will be total request
+               timeout. It can also be a pair (tuple) of
+               (connection, read) timeouts.
+        :return: Returns the result object.
+                 If the method is called asynchronously,
+                 returns the request thread.
+        :rtype: PostingModuleResponse
+        """
+        kwargs['_return_http_data_only'] = True
+        if '_preload_content' in kwargs:
+            message = "Error! Please call the patch_posting_module_with_http_info method with `_preload_content` instead and obtain raw data from ApiResponse.raw_data"  # noqa: E501
+            raise ValueError(message)
+        if async_req is not None:
+            kwargs['async_req'] = async_req
+        return self.patch_posting_module_with_http_info(scope, code, posting_module_code, operation, **kwargs)  # noqa: E501
+
+    @validate_arguments
+    def patch_posting_module_with_http_info(self, scope : Annotated[constr(strict=True, max_length=64, min_length=1), Field(..., description="The scope of the Chart of Accounts.")], code : Annotated[constr(strict=True, max_length=64, min_length=1), Field(..., description="The code of the Chart of Accounts. Together with the scope this uniquely identifies the Chart of Accounts.")], posting_module_code : Annotated[constr(strict=True, max_length=64, min_length=1), Field(..., description="The code of the Posting Module to be updated.")], operation : Annotated[conlist(Operation), Field(..., description="The json patch document. For more information see: https://datatracker.ietf.org/doc/html/rfc6902.")], **kwargs) -> ApiResponse:  # noqa: E501
+        """[EXPERIMENTAL] PatchPostingModule: Patch a Posting Module  # noqa: E501
+
+        Update fields on a Posting Module. The behaviour is defined by the JSON Patch specification.                Currently supported fields are: DisplayName, Description, Rules.  # noqa: E501
+        This method makes a synchronous HTTP request by default. To make an
+        asynchronous HTTP request, please pass async_req=True
+
+        >>> thread = api.patch_posting_module_with_http_info(scope, code, posting_module_code, operation, async_req=True)
+        >>> result = thread.get()
+
+        :param scope: The scope of the Chart of Accounts. (required)
+        :type scope: str
+        :param code: The code of the Chart of Accounts. Together with the scope this uniquely identifies the Chart of Accounts. (required)
+        :type code: str
+        :param posting_module_code: The code of the Posting Module to be updated. (required)
+        :type posting_module_code: str
+        :param operation: The json patch document. For more information see: https://datatracker.ietf.org/doc/html/rfc6902. (required)
+        :type operation: List[Operation]
+        :param async_req: Whether to execute the request asynchronously.
+        :type async_req: bool, optional
+        :param _preload_content: if False, the ApiResponse.data will
+                                 be set to none and raw_data will store the
+                                 HTTP response body without reading/decoding.
+                                 Default is True.
+        :type _preload_content: bool, optional
+        :param _return_http_data_only: response data instead of ApiResponse
+                                       object with status code, headers, etc
+        :type _return_http_data_only: bool, optional
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :param _request_auth: set to override the auth_settings for an a single
+                              request; this effectively ignores the authentication
+                              in the spec for a single request.
+        :type _request_auth: dict, optional
+        :type _content_type: string, optional: force content-type for the request
+        :return: Returns the result object.
+                 If the method is called asynchronously,
+                 returns the request thread.
+        :rtype: tuple(PostingModuleResponse, status_code(int), headers(HTTPHeaderDict))
+        """
+
+        _params = locals()
+
+        _all_params = [
+            'scope',
+            'code',
+            'posting_module_code',
+            'operation'
+        ]
+        _all_params.extend(
+            [
+                'async_req',
+                '_return_http_data_only',
+                '_preload_content',
+                '_request_timeout',
+                '_request_auth',
+                '_content_type',
+                '_headers'
+            ]
+        )
+
+        # validate the arguments
+        for _key, _val in _params['kwargs'].items():
+            if _key not in _all_params:
+                raise ApiTypeError(
+                    "Got an unexpected keyword argument '%s'"
+                    " to method patch_posting_module" % _key
+                )
+            _params[_key] = _val
+        del _params['kwargs']
+
+        _collection_formats = {}
+
+        # process the path parameters
+        _path_params = {}
+        if _params['scope']:
+            _path_params['scope'] = _params['scope']
+
+        if _params['code']:
+            _path_params['code'] = _params['code']
+
+        if _params['posting_module_code']:
+            _path_params['postingModuleCode'] = _params['posting_module_code']
+
+
+        # process the query parameters
+        _query_params = []
+        # process the header parameters
+        _header_params = dict(_params.get('_headers', {}))
+        # process the form parameters
+        _form_params = []
+        _files = {}
+        # process the body parameter
+        _body_params = None
+        if _params['operation'] is not None:
+            _body_params = _params['operation']
+
+        # set the HTTP header `Accept`
+        _header_params['Accept'] = self.api_client.select_header_accept(
+            ['text/plain', 'application/json', 'text/json'])  # noqa: E501
+
+        # set the HTTP header `Content-Type`
+        _content_types_list = _params.get('_content_type',
+            self.api_client.select_header_content_type(
+                ['application/json-patch+json', 'application/json', 'text/json', 'application/*+json']))
+        if _content_types_list:
+                _header_params['Content-Type'] = _content_types_list
+
+        # authentication setting
+        _auth_settings = ['oauth2']  # noqa: E501
+
+        _response_types_map = {
+            '200': "PostingModuleResponse",
+            '400': "LusidValidationProblemDetails",
+        }
+
+        return self.api_client.call_api(
+            '/api/chartofaccounts/{scope}/{code}/postingmodules/{postingModuleCode}', 'PATCH',
             _path_params,
             _query_params,
             _header_params,

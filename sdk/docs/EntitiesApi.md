@@ -9,7 +9,7 @@ Method | HTTP request | Description
 
 
 # **get_portfolio_by_entity_unique_id**
-> PortfolioEntity get_portfolio_by_entity_unique_id(entity_unique_id, effective_at=effective_at, as_at=as_at)
+> PortfolioEntity get_portfolio_by_entity_unique_id(entity_unique_id, effective_at=effective_at, as_at=as_at, previews=previews)
 
 [EXPERIMENTAL] GetPortfolioByEntityUniqueId: Get portfolio by EntityUniqueId
 
@@ -69,10 +69,11 @@ async with api_client_factory:
     entity_unique_id = 'entity_unique_id_example' # str | The universally unique identifier of the portfolio definition.
     effective_at = 'effective_at_example' # str | The effective datetime or cut label at which to retrieve the portfolio definition. Defaults to the current LUSID system datetime if not specified. (optional)
     as_at = '2013-10-20T19:20:30+01:00' # datetime | The asAt datetime at which to retrieve the portfolio definition. Defaults to returning the latest version of the portfolio definition if not specified. (optional)
+    previews = ['previews_example'] # List[str] | The ids of the staged modifications to be previewed in the response. (optional)
 
     try:
         # [EXPERIMENTAL] GetPortfolioByEntityUniqueId: Get portfolio by EntityUniqueId
-        api_response = await api_instance.get_portfolio_by_entity_unique_id(entity_unique_id, effective_at=effective_at, as_at=as_at)
+        api_response = await api_instance.get_portfolio_by_entity_unique_id(entity_unique_id, effective_at=effective_at, as_at=as_at, previews=previews)
         print("The response of EntitiesApi->get_portfolio_by_entity_unique_id:\n")
         pprint(api_response)
     except Exception as e:
@@ -87,6 +88,7 @@ Name | Type | Description  | Notes
  **entity_unique_id** | **str**| The universally unique identifier of the portfolio definition. | 
  **effective_at** | **str**| The effective datetime or cut label at which to retrieve the portfolio definition. Defaults to the current LUSID system datetime if not specified. | [optional] 
  **as_at** | **datetime**| The asAt datetime at which to retrieve the portfolio definition. Defaults to returning the latest version of the portfolio definition if not specified. | [optional] 
+ **previews** | [**List[str]**](str.md)| The ids of the staged modifications to be previewed in the response. | [optional] 
 
 ### Return type
 

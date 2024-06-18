@@ -210,7 +210,7 @@ class RelationsApi:
         _auth_settings = ['oauth2']  # noqa: E501
 
         _response_types_map = {
-            '200': "CompleteRelation",
+            '201': "CompleteRelation",
             '400': "LusidValidationProblemDetails",
         }
 

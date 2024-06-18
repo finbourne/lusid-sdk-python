@@ -72,7 +72,7 @@ api_client_factory = ApiClientFactory(config_loaders=config_loaders)
 async with api_client_factory:
     # Create an instance of the API class
     api_instance = api_client_factory.build(lusid.DataTypesApi)
-    create_data_type_request = {"scope":"TestScope","code":"MyType","typeValueRange":"Open","displayName":"My data format","description":"Data type description","valueType":"String","unitSchema":"Basic","acceptableUnits":[{"code":"Ap","displayName":"Apples","description":"A quantity of apples"},{"code":"Bn","displayName":"Bananas","description":"A quantity of bananas"},{"code":"Ch","displayName":"Cherry","description":"A quantity of cherries"}],"referenceData":{"fieldDefinitions":[{"key":"english_short_name","isRequired":true,"isUnique":true},{"key":"continent","isRequired":true,"isUnique":false}],"values":[{"value":"FRA","fields":{"english_short_name":"France","continent":"Europe"}},{"value":"DEU","fields":{"english_short_name":"Germany","continent":"Europe"}}]}} # CreateDataTypeRequest | The definition of the new data type (optional)
+    create_data_type_request = {"scope":"TestScope","code":"MyType","typeValueRange":"Open","displayName":"My data format","description":"Data type description","valueType":"Int","unitSchema":"Basic","acceptableUnits":[{"code":"Ap","displayName":"Apples","description":"A quantity of apples"},{"code":"Bn","displayName":"Bananas","description":"A quantity of bananas"},{"code":"Ch","displayName":"Cherry","description":"A quantity of cherries"}]} # CreateDataTypeRequest | The definition of the new data type (optional)
 
     try:
         # [EARLY ACCESS] CreateDataType: Create data type definition
@@ -595,7 +595,7 @@ async with api_client_factory:
     api_instance = api_client_factory.build(lusid.DataTypesApi)
     scope = 'scope_example' # str | The scope of the data type
     code = 'code_example' # str | The code of the data type
-    update_data_type_request = {"displayName":"My data format","description":"Data type description","acceptableValues":["Apples, Bananas, Cherry"]} # UpdateDataTypeRequest | The updated definition of the data type
+    update_data_type_request = {"displayName":"My data format","description":"Data type description","acceptableUnits":[{"code":"Pe","displayName":"Pears","description":"A quantity of Pears"},{"code":"Bn","displayName":"Bananas","description":"A quantity of bananas"},{"code":"Ch","displayName":"Cherry","description":"A quantity of cherries"}]} # UpdateDataTypeRequest | The updated definition of the data type
 
     try:
         # [EARLY ACCESS] UpdateDataType: Update data type definition

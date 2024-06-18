@@ -197,7 +197,7 @@ class FeeTypesApi:
         _auth_settings = ['oauth2']  # noqa: E501
 
         _response_types_map = {
-            '200': "FeeType",
+            '201': "FeeType",
             '400': "LusidValidationProblemDetails",
         }
 

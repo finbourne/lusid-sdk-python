@@ -18,20 +18,23 @@ import re  # noqa: F401
 import json
 
 
-from typing import Any, Dict
+from typing import Any, Dict, Optional
 from pydantic.v1 import BaseModel, Field, constr, validator
 
 class TransactionTypeCalculation(BaseModel):
     """
     TransactionTypeCalculation
     """
-    type: constr(strict=True, min_length=1) = Field(..., description="The type of calculation to perform")
-    side: constr(strict=True, max_length=64, min_length=1) = Field(..., description="The side to which the calculation is applied")
+    type: constr(strict=True, max_length=64, min_length=1) = Field(..., description="The type of calculation to perform")
+    side: Optional[constr(strict=True, max_length=64, min_length=0)] = Field(None, description="The side to which the calculation is applied")
     __properties = ["type", "side"]
 
     @validator('side')
     def side_validate_regular_expression(cls, value):
         """Validates the regular expression"""
+        if value is None:
+            return value
+
         if not re.match(r"^[a-zA-Z0-9\-_]+$", value):
             raise ValueError(r"must validate the regular expression /^[a-zA-Z0-9\-_]+$/")
         return value
@@ -60,6 +63,11 @@ class TransactionTypeCalculation(BaseModel):
                           exclude={
                           },
                           exclude_none=True)
+        # set to None if side (nullable) is None
+        # and __fields_set__ contains the field
+        if self.side is None and "side" in self.__fields_set__:
+            _dict['side'] = None
+
         return _dict
 
     @classmethod
