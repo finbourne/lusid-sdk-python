@@ -6,7 +6,7 @@ An amount of a specific currency, specifying a value and an associated unit
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **amount** | **float** |  | [optional] 
-**currency** | **str** |  | [optional] 
+**currency** | **str** |  | 
 
 ## Example
 
