@@ -15,8 +15,6 @@ Name | Type | Description | Notes
 **treatment** | **str** | The accrual period of the Fee; &#39;Monthly&#39; or &#39;Daily&#39;. | 
 **total_annual_accrual_amount** | **float** | The total annual accrued amount for the Fee. (TotalAnnualAccrualAmount and CalculationBase cannot both be present) | [optional] 
 **fee_rate_percentage** | **float** | The fee rate percentage. (Required when CalculationBase is present and not compatible with TotalAnnualAccrualAmount) | [optional] 
-**monthly_accrual** | **float** | The monthly accrual amount. | [optional] 
-**daily_accrual** | **float** | The daily accrual amount. | [optional] 
 **payable_frequency** | **str** | The payable frequency for the Fee; &#39;Annually&#39;, &#39;Quarterly&#39; or &#39;Monthly&#39;. | 
 **business_day_convention** | **str** | The business day convention to use for Fee calculations on weekends. | 
 **start_date** | **datetime** | The start date of the Fee. | 

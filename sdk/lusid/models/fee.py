@@ -41,8 +41,6 @@ class Fee(BaseModel):
     treatment: constr(strict=True, min_length=1) = Field(..., description="The accrual period of the Fee; 'Monthly' or 'Daily'.")
     total_annual_accrual_amount: Optional[Union[StrictFloat, StrictInt]] = Field(None, alias="totalAnnualAccrualAmount", description="The total annual accrued amount for the Fee. (TotalAnnualAccrualAmount and CalculationBase cannot both be present)")
     fee_rate_percentage: Optional[Union[StrictFloat, StrictInt]] = Field(None, alias="feeRatePercentage", description="The fee rate percentage. (Required when CalculationBase is present and not compatible with TotalAnnualAccrualAmount)")
-    monthly_accrual: Optional[Union[StrictFloat, StrictInt]] = Field(None, alias="monthlyAccrual", description="The monthly accrual amount.")
-    daily_accrual: Optional[Union[StrictFloat, StrictInt]] = Field(None, alias="dailyAccrual", description="The daily accrual amount.")
     payable_frequency: constr(strict=True, min_length=1) = Field(..., alias="payableFrequency", description="The payable frequency for the Fee; 'Annually', 'Quarterly' or 'Monthly'.")
     business_day_convention: constr(strict=True, min_length=1) = Field(..., alias="businessDayConvention", description="The business day convention to use for Fee calculations on weekends.")
     start_date: datetime = Field(..., alias="startDate", description="The start date of the Fee.")
@@ -52,7 +50,7 @@ class Fee(BaseModel):
     version: Optional[Version] = None
     portfolio_id: Optional[ResourceId] = Field(None, alias="portfolioId")
     links: Optional[conlist(Link)] = None
-    __properties = ["href", "feeCode", "feeType", "name", "description", "origin", "calculationBase", "accrualCurrency", "treatment", "totalAnnualAccrualAmount", "feeRatePercentage", "monthlyAccrual", "dailyAccrual", "payableFrequency", "businessDayConvention", "startDate", "endDate", "anchorDate", "properties", "version", "portfolioId", "links"]
+    __properties = ["href", "feeCode", "feeType", "name", "description", "origin", "calculationBase", "accrualCurrency", "treatment", "totalAnnualAccrualAmount", "feeRatePercentage", "payableFrequency", "businessDayConvention", "startDate", "endDate", "anchorDate", "properties", "version", "portfolioId", "links"]
 
     @validator('fee_code')
     def fee_code_validate_regular_expression(cls, value):
@@ -159,16 +157,6 @@ class Fee(BaseModel):
         if self.fee_rate_percentage is None and "fee_rate_percentage" in self.__fields_set__:
             _dict['feeRatePercentage'] = None
 
-        # set to None if monthly_accrual (nullable) is None
-        # and __fields_set__ contains the field
-        if self.monthly_accrual is None and "monthly_accrual" in self.__fields_set__:
-            _dict['monthlyAccrual'] = None
-
-        # set to None if daily_accrual (nullable) is None
-        # and __fields_set__ contains the field
-        if self.daily_accrual is None and "daily_accrual" in self.__fields_set__:
-            _dict['dailyAccrual'] = None
-
         # set to None if properties (nullable) is None
         # and __fields_set__ contains the field
         if self.properties is None and "properties" in self.__fields_set__:
@@ -202,8 +190,6 @@ class Fee(BaseModel):
             "treatment": obj.get("treatment"),
             "total_annual_accrual_amount": obj.get("totalAnnualAccrualAmount"),
             "fee_rate_percentage": obj.get("feeRatePercentage"),
-            "monthly_accrual": obj.get("monthlyAccrual"),
-            "daily_accrual": obj.get("dailyAccrual"),
             "payable_frequency": obj.get("payableFrequency"),
             "business_day_convention": obj.get("businessDayConvention"),
             "start_date": obj.get("startDate"),
