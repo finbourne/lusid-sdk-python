@@ -957,6 +957,7 @@ from lusid.models.upsert_legal_entity_access_metadata_request import UpsertLegal
 from lusid.models.upsert_legal_entity_request import UpsertLegalEntityRequest
 from lusid.models.upsert_person_access_metadata_request import UpsertPersonAccessMetadataRequest
 from lusid.models.upsert_person_request import UpsertPersonRequest
+from lusid.models.upsert_persons_response import UpsertPersonsResponse
 from lusid.models.upsert_portfolio_access_metadata_request import UpsertPortfolioAccessMetadataRequest
 from lusid.models.upsert_portfolio_group_access_metadata_request import UpsertPortfolioGroupAccessMetadataRequest
 from lusid.models.upsert_portfolio_transactions_response import UpsertPortfolioTransactionsResponse
@@ -1952,6 +1953,7 @@ __all__ = [
     "UpsertLegalEntityRequest",
     "UpsertPersonAccessMetadataRequest",
     "UpsertPersonRequest",
+    "UpsertPersonsResponse",
     "UpsertPortfolioAccessMetadataRequest",
     "UpsertPortfolioGroupAccessMetadataRequest",
     "UpsertPortfolioTransactionsResponse",
