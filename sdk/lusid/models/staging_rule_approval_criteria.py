@@ -19,7 +19,7 @@ import json
 
 
 from typing import Any, Dict, Optional
-from pydantic.v1 import BaseModel, Field, StrictInt, constr
+from pydantic.v1 import BaseModel, Field, StrictBool, StrictInt, constr
 
 class StagingRuleApprovalCriteria(BaseModel):
     """
@@ -27,7 +27,8 @@ class StagingRuleApprovalCriteria(BaseModel):
     """
     required_approvals: Optional[StrictInt] = Field(None, alias="requiredApprovals")
     deciding_user: Optional[constr(strict=True, max_length=16384, min_length=0)] = Field(None, alias="decidingUser")
-    __properties = ["requiredApprovals", "decidingUser"]
+    staging_user_can_decide: Optional[StrictBool] = Field(None, alias="stagingUserCanDecide")
+    __properties = ["requiredApprovals", "decidingUser", "stagingUserCanDecide"]
 
     class Config:
         """Pydantic configuration"""
@@ -63,6 +64,11 @@ class StagingRuleApprovalCriteria(BaseModel):
         if self.deciding_user is None and "deciding_user" in self.__fields_set__:
             _dict['decidingUser'] = None
 
+        # set to None if staging_user_can_decide (nullable) is None
+        # and __fields_set__ contains the field
+        if self.staging_user_can_decide is None and "staging_user_can_decide" in self.__fields_set__:
+            _dict['stagingUserCanDecide'] = None
+
         return _dict
 
     @classmethod
@@ -76,6 +82,7 @@ class StagingRuleApprovalCriteria(BaseModel):
 
         _obj = StagingRuleApprovalCriteria.parse_obj({
             "required_approvals": obj.get("requiredApprovals"),
-            "deciding_user": obj.get("decidingUser")
+            "deciding_user": obj.get("decidingUser"),
+            "staging_user_can_decide": obj.get("stagingUserCanDecide")
         })
         return _obj

@@ -6,6 +6,7 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **required_approvals** | **int** |  | [optional] 
 **deciding_user** | **str** |  | [optional] 
+**staging_user_can_decide** | **bool** |  | [optional] 
 
 ## Example
 
