@@ -382,6 +382,7 @@ from lusid.models.get_virtual_document_response import GetVirtualDocumentRespons
 from lusid.models.group_by_selector_compliance_parameter import GroupBySelectorComplianceParameter
 from lusid.models.group_by_step import GroupByStep
 from lusid.models.group_by_step_request import GroupByStepRequest
+from lusid.models.group_calculation_compliance_parameter import GroupCalculationComplianceParameter
 from lusid.models.group_filter_predicate_compliance_parameter import GroupFilterPredicateComplianceParameter
 from lusid.models.group_filter_step import GroupFilterStep
 from lusid.models.group_filter_step_request import GroupFilterStepRequest
@@ -599,6 +600,8 @@ from lusid.models.paged_resource_list_of_virtual_row import PagedResourceListOfV
 from lusid.models.participation import Participation
 from lusid.models.participation_request import ParticipationRequest
 from lusid.models.participation_set_request import ParticipationSetRequest
+from lusid.models.percent_check_step import PercentCheckStep
+from lusid.models.percent_check_step_request import PercentCheckStepRequest
 from lusid.models.performance_return import PerformanceReturn
 from lusid.models.performance_returns_metric import PerformanceReturnsMetric
 from lusid.models.period_diary_entries_reopened_response import PeriodDiaryEntriesReopenedResponse
@@ -1378,6 +1381,7 @@ __all__ = [
     "GroupBySelectorComplianceParameter",
     "GroupByStep",
     "GroupByStepRequest",
+    "GroupCalculationComplianceParameter",
     "GroupFilterPredicateComplianceParameter",
     "GroupFilterStep",
     "GroupFilterStepRequest",
@@ -1595,6 +1599,8 @@ __all__ = [
     "Participation",
     "ParticipationRequest",
     "ParticipationSetRequest",
+    "PercentCheckStep",
+    "PercentCheckStepRequest",
     "PerformanceReturn",
     "PerformanceReturnsMetric",
     "PeriodDiaryEntriesReopenedResponse",

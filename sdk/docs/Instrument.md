@@ -9,6 +9,7 @@ Name | Type | Description | Notes
 **scope** | **str** | The scope in which the instrument lies. | [optional] 
 **lusid_instrument_id** | **str** | The unique LUSID Instrument Identifier (LUID) of the instrument. | 
 **version** | [**Version**](Version.md) |  | 
+**staged_modifications** | [**StagedModificationsInfo**](StagedModificationsInfo.md) |  | [optional] 
 **name** | **str** | The name of the instrument. | 
 **identifiers** | **Dict[str, str]** | The set of identifiers that can be used to identify the instrument. | 
 **properties** | [**List[ModelProperty]**](ModelProperty.md) | The requested instrument properties. These will be from the &#39;Instrument&#39; domain. | [optional] 

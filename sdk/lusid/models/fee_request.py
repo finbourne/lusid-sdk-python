@@ -28,6 +28,7 @@ class FeeRequest(BaseModel):
     """
     FeeRequest
     """
+    code: constr(strict=True, max_length=64, min_length=1) = Field(..., description="The code of the Fee.")
     fee_type: ResourceId = Field(..., alias="feeType")
     name: constr(strict=True, max_length=256, min_length=1) = Field(..., description="The name of the Fee.")
     description: Optional[constr(strict=True, max_length=1024, min_length=0)] = Field(None, description="A description for the Fee.")
@@ -44,7 +45,14 @@ class FeeRequest(BaseModel):
     anchor_date: Optional[DayMonth] = Field(None, alias="anchorDate")
     properties: Optional[Dict[str, ModelProperty]] = Field(None, description="The Fee properties. These will be from the 'Fee' domain.")
     portfolio_id: Optional[ResourceId] = Field(None, alias="portfolioId")
-    __properties = ["feeType", "name", "description", "origin", "calculationBase", "accrualCurrency", "treatment", "totalAnnualAccrualAmount", "feeRatePercentage", "payableFrequency", "businessDayConvention", "startDate", "endDate", "anchorDate", "properties", "portfolioId"]
+    __properties = ["code", "feeType", "name", "description", "origin", "calculationBase", "accrualCurrency", "treatment", "totalAnnualAccrualAmount", "feeRatePercentage", "payableFrequency", "businessDayConvention", "startDate", "endDate", "anchorDate", "properties", "portfolioId"]
+
+    @validator('code')
+    def code_validate_regular_expression(cls, value):
+        """Validates the regular expression"""
+        if not re.match(r"^[a-zA-Z0-9\-_]+$", value):
+            raise ValueError(r"must validate the regular expression /^[a-zA-Z0-9\-_]+$/")
+        return value
 
     @validator('description')
     def description_validate_regular_expression(cls, value):
@@ -143,6 +151,7 @@ class FeeRequest(BaseModel):
             return FeeRequest.parse_obj(obj)
 
         _obj = FeeRequest.parse_obj({
+            "code": obj.get("code"),
             "fee_type": ResourceId.from_dict(obj.get("feeType")) if obj.get("feeType") is not None else None,
             "name": obj.get("name"),
             "description": obj.get("description"),

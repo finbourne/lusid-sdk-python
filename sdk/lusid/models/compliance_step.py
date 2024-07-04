@@ -26,14 +26,14 @@ class ComplianceStep(BaseModel):
     """
     ComplianceStep
     """
-    compliance_step_type: StrictStr = Field(..., alias="complianceStepType", description=". The available values are: FilterStep, GroupByStep, GroupFilterStep, BranchStep, RecombineStep, CheckStep")
+    compliance_step_type: StrictStr = Field(..., alias="complianceStepType", description=". The available values are: FilterStep, GroupByStep, GroupFilterStep, BranchStep, RecombineStep, CheckStep, PercentCheckStep")
     __properties = ["complianceStepType"]
 
     @validator('compliance_step_type')
     def compliance_step_type_validate_enum(cls, value):
         """Validates the enum"""
-        if value not in ('FilterStep', 'GroupByStep', 'GroupFilterStep', 'BranchStep', 'RecombineStep', 'CheckStep'):
-            raise ValueError("must be one of enum values ('FilterStep', 'GroupByStep', 'GroupFilterStep', 'BranchStep', 'RecombineStep', 'CheckStep')")
+        if value not in ('FilterStep', 'GroupByStep', 'GroupFilterStep', 'BranchStep', 'RecombineStep', 'CheckStep', 'PercentCheckStep'):
+            raise ValueError("must be one of enum values ('FilterStep', 'GroupByStep', 'GroupFilterStep', 'BranchStep', 'RecombineStep', 'CheckStep', 'PercentCheckStep')")
         return value
 
     class Config:
@@ -52,6 +52,7 @@ class ComplianceStep(BaseModel):
         'GroupByStep': 'GroupByStep',
         'GroupFilterStep': 'GroupFilterStep',
         'IntermediateComplianceStep': 'IntermediateComplianceStep',
+        'PercentCheckStep': 'PercentCheckStep',
         'RecombineStep': 'RecombineStep'
     }
 
@@ -73,7 +74,7 @@ class ComplianceStep(BaseModel):
         return json.dumps(self.to_dict())
 
     @classmethod
-    def from_json(cls, json_str: str) -> Union(BranchStep, CheckStep, FilterStep, GroupByStep, GroupFilterStep, IntermediateComplianceStep, RecombineStep):
+    def from_json(cls, json_str: str) -> Union(BranchStep, CheckStep, FilterStep, GroupByStep, GroupFilterStep, IntermediateComplianceStep, PercentCheckStep, RecombineStep):
         """Create an instance of ComplianceStep from a JSON string"""
         return cls.from_dict(json.loads(json_str))
 
@@ -86,7 +87,7 @@ class ComplianceStep(BaseModel):
         return _dict
 
     @classmethod
-    def from_dict(cls, obj: dict) -> Union(BranchStep, CheckStep, FilterStep, GroupByStep, GroupFilterStep, IntermediateComplianceStep, RecombineStep):
+    def from_dict(cls, obj: dict) -> Union(BranchStep, CheckStep, FilterStep, GroupByStep, GroupFilterStep, IntermediateComplianceStep, PercentCheckStep, RecombineStep):
         """Create an instance of ComplianceStep from a dict"""
         # look up the object type based on discriminator mapping
         object_type = cls.get_discriminator_value(obj)

@@ -18,20 +18,30 @@ import re  # noqa: F401
 import json
 
 from datetime import datetime
-from typing import Any, Dict, Optional, Union
-from pydantic.v1 import BaseModel, Field, StrictFloat, StrictInt, StrictStr
+from typing import Any, Dict, List, Optional, Union
+from pydantic.v1 import BaseModel, Field, StrictFloat, StrictInt, conlist, constr, validator
+from lusid.models.link import Link
 
 class FeeAccrual(BaseModel):
     """
     FeeAccrual
     """
-    effective_at: Optional[datetime] = Field(None, alias="effectiveAt")
-    name: Optional[StrictStr] = None
-    calculation_base: Optional[Union[StrictFloat, StrictInt]] = Field(None, alias="calculationBase")
-    amount: Optional[Union[StrictFloat, StrictInt]] = None
-    previous_accrual: Optional[Union[StrictFloat, StrictInt]] = Field(None, alias="previousAccrual")
-    total_accrual: Optional[Union[StrictFloat, StrictInt]] = Field(None, alias="totalAccrual")
-    __properties = ["effectiveAt", "name", "calculationBase", "amount", "previousAccrual", "totalAccrual"]
+    effective_at: datetime = Field(..., alias="effectiveAt", description="The effective date for which the fee accrual has been calculated.")
+    code: constr(strict=True, max_length=64, min_length=1) = Field(..., description="The code of the fee for which the accrual has been calculated.")
+    name: constr(strict=True, max_length=50, min_length=0) = Field(..., description="The name of the fee for which the accrual has been calculated.")
+    calculation_base: Optional[Union[StrictFloat, StrictInt]] = Field(None, alias="calculationBase", description="The result of the evaluating the fee's calculation base expression.")
+    amount: Optional[Union[StrictFloat, StrictInt]] = Field(None, description="The result of applying the fee to the calculation base, and scaled down to a day.")
+    previous_accrual: Optional[Union[StrictFloat, StrictInt]] = Field(None, alias="previousAccrual", description="The previous valuation point's total accrual.")
+    total_accrual: Optional[Union[StrictFloat, StrictInt]] = Field(None, alias="totalAccrual", description="The sum of the PreviousAccrual and Amount.")
+    links: Optional[conlist(Link)] = None
+    __properties = ["effectiveAt", "code", "name", "calculationBase", "amount", "previousAccrual", "totalAccrual", "links"]
+
+    @validator('code')
+    def code_validate_regular_expression(cls, value):
+        """Validates the regular expression"""
+        if not re.match(r"^[a-zA-Z0-9\-_]+$", value):
+            raise ValueError(r"must validate the regular expression /^[a-zA-Z0-9\-_]+$/")
+        return value
 
     class Config:
         """Pydantic configuration"""
@@ -55,13 +65,19 @@ class FeeAccrual(BaseModel):
         """Returns the dictionary representation of the model using alias"""
         _dict = self.dict(by_alias=True,
                           exclude={
-                            "total_accrual",
                           },
                           exclude_none=True)
-        # set to None if name (nullable) is None
+        # override the default output from pydantic by calling `to_dict()` of each item in links (list)
+        _items = []
+        if self.links:
+            for _item in self.links:
+                if _item:
+                    _items.append(_item.to_dict())
+            _dict['links'] = _items
+        # set to None if links (nullable) is None
         # and __fields_set__ contains the field
-        if self.name is None and "name" in self.__fields_set__:
-            _dict['name'] = None
+        if self.links is None and "links" in self.__fields_set__:
+            _dict['links'] = None
 
         return _dict
 
@@ -76,10 +92,12 @@ class FeeAccrual(BaseModel):
 
         _obj = FeeAccrual.parse_obj({
             "effective_at": obj.get("effectiveAt"),
+            "code": obj.get("code"),
             "name": obj.get("name"),
             "calculation_base": obj.get("calculationBase"),
             "amount": obj.get("amount"),
             "previous_accrual": obj.get("previousAccrual"),
-            "total_accrual": obj.get("totalAccrual")
+            "total_accrual": obj.get("totalAccrual"),
+            "links": [Link.from_dict(_item) for _item in obj.get("links")] if obj.get("links") is not None else None
         })
         return _obj

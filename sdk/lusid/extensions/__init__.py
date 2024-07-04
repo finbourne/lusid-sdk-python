@@ -14,7 +14,7 @@ __all__ = [
     "ConfigurationLoader",
     "SecretsFileConfigurationLoader",
     "EnvironmentVariablesConfigurationLoader",
-    "FileTokenConfigurationLoader"
+    "FileTokenConfigurationLoader",
     "ArgsConfigurationLoader",
     "SyncApiClient"
 ]

@@ -31,10 +31,11 @@ class UpsertInstrumentsResponse(BaseModel):
     """
     href: Optional[StrictStr] = Field(None, description="The specific Uniform Resource Identifier (URI) for this resource at the requested effective and asAt datetime.")
     values: Optional[Dict[str, Instrument]] = Field(None, description="The instruments which have been successfully updated or created.")
+    staged: Optional[Dict[str, Instrument]] = Field(None, description="The instruments that have been staged for updation or creation.")
     failed: Optional[Dict[str, ErrorDetail]] = Field(None, description="The instruments that could not be updated or created or were left unchanged without error along with a reason for their failure.")
     metadata: Optional[Dict[str, conlist(ResponseMetaData)]] = Field(None, description="Meta data associated with the upsert event.")
     links: Optional[conlist(Link)] = None
-    __properties = ["href", "values", "failed", "metadata", "links"]
+    __properties = ["href", "values", "staged", "failed", "metadata", "links"]
 
     class Config:
         """Pydantic configuration"""
@@ -67,6 +68,13 @@ class UpsertInstrumentsResponse(BaseModel):
                 if self.values[_key]:
                     _field_dict[_key] = self.values[_key].to_dict()
             _dict['values'] = _field_dict
+        # override the default output from pydantic by calling `to_dict()` of each value in staged (dict)
+        _field_dict = {}
+        if self.staged:
+            for _key in self.staged:
+                if self.staged[_key]:
+                    _field_dict[_key] = self.staged[_key].to_dict()
+            _dict['staged'] = _field_dict
         # override the default output from pydantic by calling `to_dict()` of each value in failed (dict)
         _field_dict = {}
         if self.failed:
@@ -99,6 +107,11 @@ class UpsertInstrumentsResponse(BaseModel):
         # and __fields_set__ contains the field
         if self.values is None and "values" in self.__fields_set__:
             _dict['values'] = None
+
+        # set to None if staged (nullable) is None
+        # and __fields_set__ contains the field
+        if self.staged is None and "staged" in self.__fields_set__:
+            _dict['staged'] = None
 
         # set to None if failed (nullable) is None
         # and __fields_set__ contains the field
@@ -133,6 +146,12 @@ class UpsertInstrumentsResponse(BaseModel):
                 for _k, _v in obj.get("values").items()
             )
             if obj.get("values") is not None
+            else None,
+            "staged": dict(
+                (_k, Instrument.from_dict(_v))
+                for _k, _v in obj.get("staged").items()
+            )
+            if obj.get("staged") is not None
             else None,
             "failed": dict(
                 (_k, ErrorDetail.from_dict(_v))

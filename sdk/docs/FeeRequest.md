@@ -4,6 +4,7 @@
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
+**code** | **str** | The code of the Fee. | 
 **fee_type** | [**ResourceId**](ResourceId.md) |  | 
 **name** | **str** | The name of the Fee. | 
 **description** | **str** | A description for the Fee. | [optional] 

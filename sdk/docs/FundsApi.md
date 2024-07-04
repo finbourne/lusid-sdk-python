@@ -5,7 +5,7 @@ All URIs are relative to *https://www.lusid.com/api*
 Method | HTTP request | Description
 ------------- | ------------- | -------------
 [**accept_estimate_valuation_point**](FundsApi.md#accept_estimate_valuation_point) | **POST** /api/funds/{scope}/{code}/valuationpoints/$acceptestimate | [EXPERIMENTAL] AcceptEstimateValuationPoint: Accepts an Estimate Valuation Point.
-[**create_fee**](FundsApi.md#create_fee) | **POST** /api/funds/{scope}/{code}/fees/{feeCode} | [EXPERIMENTAL] CreateFee: Create a Fee.
+[**create_fee**](FundsApi.md#create_fee) | **POST** /api/funds/{scope}/{code}/fees | [EXPERIMENTAL] CreateFee: Create a Fee.
 [**create_fund**](FundsApi.md#create_fund) | **POST** /api/funds/{scope} | [EXPERIMENTAL] CreateFund: Create a Fund.
 [**delete_fee**](FundsApi.md#delete_fee) | **DELETE** /api/funds/{scope}/{code}/fees/{feeCode} | [EXPERIMENTAL] DeleteFee: Delete a Fee.
 [**delete_fund**](FundsApi.md#delete_fund) | **DELETE** /api/funds/{scope}/{code} | [EXPERIMENTAL] DeleteFund: Delete a Fund.
@@ -127,7 +127,7 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **create_fee**
-> Fee create_fee(scope, code, fee_code, fee_request)
+> Fee create_fee(scope, code, fee_request)
 
 [EXPERIMENTAL] CreateFee: Create a Fee.
 
@@ -187,12 +187,11 @@ async with api_client_factory:
     api_instance = api_client_factory.build(lusid.FundsApi)
     scope = 'scope_example' # str | The scope of the Fund.
     code = 'code_example' # str | The code of the Fund. Together with the scope this uniquely identifies the Fund.
-    fee_code = 'fee_code_example' # str | The code of the Fee.
-    fee_request = {"feeType":{"scope":"FeeTypeScope","code":"FeeTypeCode"},"name":"Legal Fees","description":"Legal Fees","origin":"Separate Agreement","accrualCurrency":"GBP","treatment":"Monthly","totalAnnualAccrualAmount":75000,"payableFrequency":"Annually","businessDayConvention":"Previous","startDate":"2020-10-25T00:00:00.0000000+00:00","endDate":"2023-10-25T00:00:00.0000000+00:00","anchorDate":{"day":1,"month":1},"properties":{}} # FeeRequest | The Fee to create.
+    fee_request = {"code":"FeeCode","feeType":{"scope":"FeeTypeScope","code":"FeeTypeCode"},"name":"Legal Fees","description":"Legal Fees","origin":"Separate Agreement","accrualCurrency":"GBP","treatment":"Monthly","totalAnnualAccrualAmount":75000,"payableFrequency":"Annually","businessDayConvention":"Previous","startDate":"2020-10-25T00:00:00.0000000+00:00","endDate":"2023-10-25T00:00:00.0000000+00:00","anchorDate":{"day":1,"month":1},"properties":{}} # FeeRequest | The Fee to create.
 
     try:
         # [EXPERIMENTAL] CreateFee: Create a Fee.
-        api_response = await api_instance.create_fee(scope, code, fee_code, fee_request)
+        api_response = await api_instance.create_fee(scope, code, fee_request)
         print("The response of FundsApi->create_fee:\n")
         pprint(api_response)
     except Exception as e:
@@ -206,7 +205,6 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **scope** | **str**| The scope of the Fund. | 
  **code** | **str**| The code of the Fund. Together with the scope this uniquely identifies the Fund. | 
- **fee_code** | **str**| The code of the Fee. | 
  **fee_request** | [**FeeRequest**](FeeRequest.md)| The Fee to create. | 
 
 ### Return type

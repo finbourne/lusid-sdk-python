@@ -239,30 +239,28 @@ class FundsApi:
             _request_auth=_params.get('_request_auth'))
 
     @overload
-    async def create_fee(self, scope : Annotated[constr(strict=True, max_length=64, min_length=1), Field(..., description="The scope of the Fund.")], code : Annotated[constr(strict=True, max_length=64, min_length=1), Field(..., description="The code of the Fund. Together with the scope this uniquely identifies the Fund.")], fee_code : Annotated[constr(strict=True, max_length=64, min_length=1), Field(..., description="The code of the Fee.")], fee_request : Annotated[FeeRequest, Field(..., description="The Fee to create.")], **kwargs) -> Fee:  # noqa: E501
+    async def create_fee(self, scope : Annotated[constr(strict=True, max_length=64, min_length=1), Field(..., description="The scope of the Fund.")], code : Annotated[constr(strict=True, max_length=64, min_length=1), Field(..., description="The code of the Fund. Together with the scope this uniquely identifies the Fund.")], fee_request : Annotated[FeeRequest, Field(..., description="The Fee to create.")], **kwargs) -> Fee:  # noqa: E501
         ...
 
     @overload
-    def create_fee(self, scope : Annotated[constr(strict=True, max_length=64, min_length=1), Field(..., description="The scope of the Fund.")], code : Annotated[constr(strict=True, max_length=64, min_length=1), Field(..., description="The code of the Fund. Together with the scope this uniquely identifies the Fund.")], fee_code : Annotated[constr(strict=True, max_length=64, min_length=1), Field(..., description="The code of the Fee.")], fee_request : Annotated[FeeRequest, Field(..., description="The Fee to create.")], async_req: Optional[bool]=True, **kwargs) -> Fee:  # noqa: E501
+    def create_fee(self, scope : Annotated[constr(strict=True, max_length=64, min_length=1), Field(..., description="The scope of the Fund.")], code : Annotated[constr(strict=True, max_length=64, min_length=1), Field(..., description="The code of the Fund. Together with the scope this uniquely identifies the Fund.")], fee_request : Annotated[FeeRequest, Field(..., description="The Fee to create.")], async_req: Optional[bool]=True, **kwargs) -> Fee:  # noqa: E501
         ...
 
     @validate_arguments
-    def create_fee(self, scope : Annotated[constr(strict=True, max_length=64, min_length=1), Field(..., description="The scope of the Fund.")], code : Annotated[constr(strict=True, max_length=64, min_length=1), Field(..., description="The code of the Fund. Together with the scope this uniquely identifies the Fund.")], fee_code : Annotated[constr(strict=True, max_length=64, min_length=1), Field(..., description="The code of the Fee.")], fee_request : Annotated[FeeRequest, Field(..., description="The Fee to create.")], async_req: Optional[bool]=None, **kwargs) -> Union[Fee, Awaitable[Fee]]:  # noqa: E501
+    def create_fee(self, scope : Annotated[constr(strict=True, max_length=64, min_length=1), Field(..., description="The scope of the Fund.")], code : Annotated[constr(strict=True, max_length=64, min_length=1), Field(..., description="The code of the Fund. Together with the scope this uniquely identifies the Fund.")], fee_request : Annotated[FeeRequest, Field(..., description="The Fee to create.")], async_req: Optional[bool]=None, **kwargs) -> Union[Fee, Awaitable[Fee]]:  # noqa: E501
         """[EXPERIMENTAL] CreateFee: Create a Fee.  # noqa: E501
 
         Create the given Fee.  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
 
-        >>> thread = api.create_fee(scope, code, fee_code, fee_request, async_req=True)
+        >>> thread = api.create_fee(scope, code, fee_request, async_req=True)
         >>> result = thread.get()
 
         :param scope: The scope of the Fund. (required)
         :type scope: str
         :param code: The code of the Fund. Together with the scope this uniquely identifies the Fund. (required)
         :type code: str
-        :param fee_code: The code of the Fee. (required)
-        :type fee_code: str
         :param fee_request: The Fee to create. (required)
         :type fee_request: FeeRequest
         :param async_req: Whether to execute the request asynchronously.
@@ -282,25 +280,23 @@ class FundsApi:
             raise ValueError(message)
         if async_req is not None:
             kwargs['async_req'] = async_req
-        return self.create_fee_with_http_info(scope, code, fee_code, fee_request, **kwargs)  # noqa: E501
+        return self.create_fee_with_http_info(scope, code, fee_request, **kwargs)  # noqa: E501
 
     @validate_arguments
-    def create_fee_with_http_info(self, scope : Annotated[constr(strict=True, max_length=64, min_length=1), Field(..., description="The scope of the Fund.")], code : Annotated[constr(strict=True, max_length=64, min_length=1), Field(..., description="The code of the Fund. Together with the scope this uniquely identifies the Fund.")], fee_code : Annotated[constr(strict=True, max_length=64, min_length=1), Field(..., description="The code of the Fee.")], fee_request : Annotated[FeeRequest, Field(..., description="The Fee to create.")], **kwargs) -> ApiResponse:  # noqa: E501
+    def create_fee_with_http_info(self, scope : Annotated[constr(strict=True, max_length=64, min_length=1), Field(..., description="The scope of the Fund.")], code : Annotated[constr(strict=True, max_length=64, min_length=1), Field(..., description="The code of the Fund. Together with the scope this uniquely identifies the Fund.")], fee_request : Annotated[FeeRequest, Field(..., description="The Fee to create.")], **kwargs) -> ApiResponse:  # noqa: E501
         """[EXPERIMENTAL] CreateFee: Create a Fee.  # noqa: E501
 
         Create the given Fee.  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
 
-        >>> thread = api.create_fee_with_http_info(scope, code, fee_code, fee_request, async_req=True)
+        >>> thread = api.create_fee_with_http_info(scope, code, fee_request, async_req=True)
         >>> result = thread.get()
 
         :param scope: The scope of the Fund. (required)
         :type scope: str
         :param code: The code of the Fund. Together with the scope this uniquely identifies the Fund. (required)
         :type code: str
-        :param fee_code: The code of the Fee. (required)
-        :type fee_code: str
         :param fee_request: The Fee to create. (required)
         :type fee_request: FeeRequest
         :param async_req: Whether to execute the request asynchronously.
@@ -333,7 +329,6 @@ class FundsApi:
         _all_params = [
             'scope',
             'code',
-            'fee_code',
             'fee_request'
         ]
         _all_params.extend(
@@ -368,9 +363,6 @@ class FundsApi:
         if _params['code']:
             _path_params['code'] = _params['code']
 
-        if _params['fee_code']:
-            _path_params['feeCode'] = _params['fee_code']
-
 
         # process the query parameters
         _query_params = []
@@ -404,7 +396,7 @@ class FundsApi:
         }
 
         return self.api_client.call_api(
-            '/api/funds/{scope}/{code}/fees/{feeCode}', 'POST',
+            '/api/funds/{scope}/{code}/fees', 'POST',
             _path_params,
             _query_params,
             _header_params,

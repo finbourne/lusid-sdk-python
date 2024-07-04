@@ -34,6 +34,7 @@ class ComplianceStepTypeRequest(str, Enum):
     GROUPFILTERSTEPREQUEST = 'GroupFilterStepRequest'
     BRANCHSTEPREQUEST = 'BranchStepRequest'
     CHECKSTEPREQUEST = 'CheckStepRequest'
+    PERCENTCHECKSTEPREQUEST = 'PercentCheckStepRequest'
 
     @classmethod
     def from_json(cls, json_str: str) -> ComplianceStepTypeRequest:

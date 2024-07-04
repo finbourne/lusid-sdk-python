@@ -35,7 +35,8 @@ class TransactionTypeMovement(BaseModel):
     name: Optional[constr(strict=True, max_length=512, min_length=1)] = Field(None, description="The movement name (optional)")
     movement_options: Optional[conlist(StrictStr)] = Field(None, alias="movementOptions", description="Allows extra specifications for the movement. The options currently available are 'DirectAdjustment' and 'IncludesTradedInterest'. A movement type of 'StockMovement' with an option of 'DirectAdjusment' will allow you to adjust the units of a holding without affecting its cost base. You will, therefore, be able to reflect the impact of a stock split by loading a Transaction.")
     settlement_date_override: Optional[StrictStr] = Field(None, alias="settlementDateOverride", description="Optional property key that must be in the Transaction domain when specified. When the movement is processed and the transaction has this property set to a valid date, then the property value will override the SettlementDate of the transaction.")
-    __properties = ["movementTypes", "side", "direction", "properties", "mappings", "name", "movementOptions", "settlementDateOverride"]
+    condition: Optional[constr(strict=True, max_length=16384, min_length=0)] = Field(None, description="The condition that the transaction must satisfy to generate the movement, such as: Portfolio.BaseCurrency eq 'GBP'. The condition can contain fields and properties from transactions and portfolios. If no condition is provided, the movement will apply for all transactions of this type.")
+    __properties = ["movementTypes", "side", "direction", "properties", "mappings", "name", "movementOptions", "settlementDateOverride", "condition"]
 
     @validator('side')
     def side_validate_regular_expression(cls, value):
@@ -46,6 +47,16 @@ class TransactionTypeMovement(BaseModel):
 
     @validator('name')
     def name_validate_regular_expression(cls, value):
+        """Validates the regular expression"""
+        if value is None:
+            return value
+
+        if not re.match(r"^[\s\S]*$", value):
+            raise ValueError(r"must validate the regular expression /^[\s\S]*$/")
+        return value
+
+    @validator('condition')
+    def condition_validate_regular_expression(cls, value):
         """Validates the regular expression"""
         if value is None:
             return value
@@ -117,6 +128,11 @@ class TransactionTypeMovement(BaseModel):
         if self.settlement_date_override is None and "settlement_date_override" in self.__fields_set__:
             _dict['settlementDateOverride'] = None
 
+        # set to None if condition (nullable) is None
+        # and __fields_set__ contains the field
+        if self.condition is None and "condition" in self.__fields_set__:
+            _dict['condition'] = None
+
         return _dict
 
     @classmethod
@@ -141,6 +157,7 @@ class TransactionTypeMovement(BaseModel):
             "mappings": [TransactionTypePropertyMapping.from_dict(_item) for _item in obj.get("mappings")] if obj.get("mappings") is not None else None,
             "name": obj.get("name"),
             "movement_options": obj.get("movementOptions"),
-            "settlement_date_override": obj.get("settlementDateOverride")
+            "settlement_date_override": obj.get("settlementDateOverride"),
+            "condition": obj.get("condition")
         })
         return _obj

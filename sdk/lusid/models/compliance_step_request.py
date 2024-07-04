@@ -26,14 +26,14 @@ class ComplianceStepRequest(BaseModel):
     """
     ComplianceStepRequest
     """
-    compliance_step_type_request: StrictStr = Field(..., alias="complianceStepTypeRequest", description=". The available values are: FilterStepRequest, GroupByStepRequest, GroupFilterStepRequest, BranchStepRequest, CheckStepRequest")
+    compliance_step_type_request: StrictStr = Field(..., alias="complianceStepTypeRequest", description=". The available values are: FilterStepRequest, GroupByStepRequest, GroupFilterStepRequest, BranchStepRequest, CheckStepRequest, PercentCheckStepRequest")
     __properties = ["complianceStepTypeRequest"]
 
     @validator('compliance_step_type_request')
     def compliance_step_type_request_validate_enum(cls, value):
         """Validates the enum"""
-        if value not in ('FilterStepRequest', 'GroupByStepRequest', 'GroupFilterStepRequest', 'BranchStepRequest', 'CheckStepRequest'):
-            raise ValueError("must be one of enum values ('FilterStepRequest', 'GroupByStepRequest', 'GroupFilterStepRequest', 'BranchStepRequest', 'CheckStepRequest')")
+        if value not in ('FilterStepRequest', 'GroupByStepRequest', 'GroupFilterStepRequest', 'BranchStepRequest', 'CheckStepRequest', 'PercentCheckStepRequest'):
+            raise ValueError("must be one of enum values ('FilterStepRequest', 'GroupByStepRequest', 'GroupFilterStepRequest', 'BranchStepRequest', 'CheckStepRequest', 'PercentCheckStepRequest')")
         return value
 
     class Config:
@@ -51,7 +51,8 @@ class ComplianceStepRequest(BaseModel):
         'FilterStepRequest': 'FilterStepRequest',
         'GroupByStepRequest': 'GroupByStepRequest',
         'GroupFilterStepRequest': 'GroupFilterStepRequest',
-        'IntermediateComplianceStepRequest': 'IntermediateComplianceStepRequest'
+        'IntermediateComplianceStepRequest': 'IntermediateComplianceStepRequest',
+        'PercentCheckStepRequest': 'PercentCheckStepRequest'
     }
 
     @classmethod
@@ -72,7 +73,7 @@ class ComplianceStepRequest(BaseModel):
         return json.dumps(self.to_dict())
 
     @classmethod
-    def from_json(cls, json_str: str) -> Union(BranchStepRequest, CheckStepRequest, FilterStepRequest, GroupByStepRequest, GroupFilterStepRequest, IntermediateComplianceStepRequest):
+    def from_json(cls, json_str: str) -> Union(BranchStepRequest, CheckStepRequest, FilterStepRequest, GroupByStepRequest, GroupFilterStepRequest, IntermediateComplianceStepRequest, PercentCheckStepRequest):
         """Create an instance of ComplianceStepRequest from a JSON string"""
         return cls.from_dict(json.loads(json_str))
 
@@ -85,7 +86,7 @@ class ComplianceStepRequest(BaseModel):
         return _dict
 
     @classmethod
-    def from_dict(cls, obj: dict) -> Union(BranchStepRequest, CheckStepRequest, FilterStepRequest, GroupByStepRequest, GroupFilterStepRequest, IntermediateComplianceStepRequest):
+    def from_dict(cls, obj: dict) -> Union(BranchStepRequest, CheckStepRequest, FilterStepRequest, GroupByStepRequest, GroupFilterStepRequest, IntermediateComplianceStepRequest, PercentCheckStepRequest):
         """Create an instance of ComplianceStepRequest from a dict"""
         # look up the object type based on discriminator mapping
         object_type = cls.get_discriminator_value(obj)

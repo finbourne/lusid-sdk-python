@@ -25,6 +25,7 @@ from lusid.models.lusid_instrument import LusidInstrument
 from lusid.models.model_property import ModelProperty
 from lusid.models.relationship import Relationship
 from lusid.models.resource_id import ResourceId
+from lusid.models.staged_modifications_info import StagedModificationsInfo
 from lusid.models.version import Version
 
 class Instrument(BaseModel):
@@ -35,6 +36,7 @@ class Instrument(BaseModel):
     scope: Optional[StrictStr] = Field(None, description="The scope in which the instrument lies.")
     lusid_instrument_id: constr(strict=True, min_length=1) = Field(..., alias="lusidInstrumentId", description="The unique LUSID Instrument Identifier (LUID) of the instrument.")
     version: Version = Field(...)
+    staged_modifications: Optional[StagedModificationsInfo] = Field(None, alias="stagedModifications")
     name: constr(strict=True, min_length=1) = Field(..., description="The name of the instrument.")
     identifiers: Dict[str, StrictStr] = Field(..., description="The set of identifiers that can be used to identify the instrument.")
     properties: Optional[conlist(ModelProperty)] = Field(None, description="The requested instrument properties. These will be from the 'Instrument' domain.")
@@ -45,7 +47,7 @@ class Instrument(BaseModel):
     dom_ccy: Optional[StrictStr] = Field(None, alias="domCcy", description="The domestic currency, meaning the currency in which the instrument would typically be expected to pay cashflows, e.g. a share in AAPL being USD.")
     relationships: Optional[conlist(Relationship)] = Field(None, description="A set of relationships associated to the instrument.")
     links: Optional[conlist(Link)] = None
-    __properties = ["href", "scope", "lusidInstrumentId", "version", "name", "identifiers", "properties", "lookthroughPortfolio", "instrumentDefinition", "state", "assetClass", "domCcy", "relationships", "links"]
+    __properties = ["href", "scope", "lusidInstrumentId", "version", "stagedModifications", "name", "identifiers", "properties", "lookthroughPortfolio", "instrumentDefinition", "state", "assetClass", "domCcy", "relationships", "links"]
 
     @validator('state')
     def state_validate_enum(cls, value):
@@ -91,6 +93,9 @@ class Instrument(BaseModel):
         # override the default output from pydantic by calling `to_dict()` of version
         if self.version:
             _dict['version'] = self.version.to_dict()
+        # override the default output from pydantic by calling `to_dict()` of staged_modifications
+        if self.staged_modifications:
+            _dict['stagedModifications'] = self.staged_modifications.to_dict()
         # override the default output from pydantic by calling `to_dict()` of each item in properties (list)
         _items = []
         if self.properties:
@@ -164,6 +169,7 @@ class Instrument(BaseModel):
             "scope": obj.get("scope"),
             "lusid_instrument_id": obj.get("lusidInstrumentId"),
             "version": Version.from_dict(obj.get("version")) if obj.get("version") is not None else None,
+            "staged_modifications": StagedModificationsInfo.from_dict(obj.get("stagedModifications")) if obj.get("stagedModifications") is not None else None,
             "name": obj.get("name"),
             "identifiers": obj.get("identifiers"),
             "properties": [ModelProperty.from_dict(_item) for _item in obj.get("properties")] if obj.get("properties") is not None else None,

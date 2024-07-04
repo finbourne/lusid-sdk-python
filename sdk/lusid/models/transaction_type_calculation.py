@@ -19,25 +19,16 @@ import json
 
 
 from typing import Any, Dict, Optional
-from pydantic.v1 import BaseModel, Field, constr, validator
+from pydantic.v1 import BaseModel, Field, constr
 
 class TransactionTypeCalculation(BaseModel):
     """
     TransactionTypeCalculation
     """
     type: constr(strict=True, max_length=64, min_length=1) = Field(..., description="The type of calculation to perform")
-    side: Optional[constr(strict=True, max_length=64, min_length=0)] = Field(None, description="The side to which the calculation is applied")
-    __properties = ["type", "side"]
-
-    @validator('side')
-    def side_validate_regular_expression(cls, value):
-        """Validates the regular expression"""
-        if value is None:
-            return value
-
-        if not re.match(r"^[a-zA-Z0-9\-_]+$", value):
-            raise ValueError(r"must validate the regular expression /^[a-zA-Z0-9\-_]+$/")
-        return value
+    side: Optional[constr(strict=True, max_length=64, min_length=1)] = Field(None, description="The side to which the calculation is applied")
+    formula: Optional[constr(strict=True, max_length=1024, min_length=0)] = Field(None, description="The formula used to derive the total consideration amount when it is not provided on the transaction")
+    __properties = ["type", "side", "formula"]
 
     class Config:
         """Pydantic configuration"""
@@ -68,6 +59,11 @@ class TransactionTypeCalculation(BaseModel):
         if self.side is None and "side" in self.__fields_set__:
             _dict['side'] = None
 
+        # set to None if formula (nullable) is None
+        # and __fields_set__ contains the field
+        if self.formula is None and "formula" in self.__fields_set__:
+            _dict['formula'] = None
+
         return _dict
 
     @classmethod
@@ -81,6 +77,7 @@ class TransactionTypeCalculation(BaseModel):
 
         _obj = TransactionTypeCalculation.parse_obj({
             "type": obj.get("type"),
-            "side": obj.get("side")
+            "side": obj.get("side"),
+            "formula": obj.get("formula")
         })
         return _obj

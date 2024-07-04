@@ -35,6 +35,7 @@ class ComplianceStepType(str, Enum):
     BRANCHSTEP = 'BranchStep'
     RECOMBINESTEP = 'RecombineStep'
     CHECKSTEP = 'CheckStep'
+    PERCENTCHECKSTEP = 'PercentCheckStep'
 
     @classmethod
     def from_json(cls, json_str: str) -> ComplianceStepType:
