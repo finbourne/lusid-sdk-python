@@ -691,6 +691,7 @@ from lusid.models.place_blocks_request import PlaceBlocksRequest
 from lusid.models.placement import Placement
 from lusid.models.placement_request import PlacementRequest
 from lusid.models.placement_set_request import PlacementSetRequest
+from lusid.models.placement_update_request import PlacementUpdateRequest
 from lusid.models.portfolio import Portfolio
 from lusid.models.portfolio_cash_flow import PortfolioCashFlow
 from lusid.models.portfolio_cash_ladder import PortfolioCashLadder
@@ -727,6 +728,7 @@ from lusid.models.pricing_model import PricingModel
 from lusid.models.pricing_options import PricingOptions
 from lusid.models.processed_command import ProcessedCommand
 from lusid.models.property_definition import PropertyDefinition
+from lusid.models.property_definition_entity import PropertyDefinitionEntity
 from lusid.models.property_definition_search_result import PropertyDefinitionSearchResult
 from lusid.models.property_definition_type import PropertyDefinitionType
 from lusid.models.property_domain import PropertyDomain
@@ -1006,6 +1008,7 @@ from lusid.models.update_data_type_request import UpdateDataTypeRequest
 from lusid.models.update_derived_property_definition_request import UpdateDerivedPropertyDefinitionRequest
 from lusid.models.update_fee_type_request import UpdateFeeTypeRequest
 from lusid.models.update_instrument_identifier_request import UpdateInstrumentIdentifierRequest
+from lusid.models.update_placements_response import UpdatePlacementsResponse
 from lusid.models.update_portfolio_group_request import UpdatePortfolioGroupRequest
 from lusid.models.update_portfolio_request import UpdatePortfolioRequest
 from lusid.models.update_property_definition_request import UpdatePropertyDefinitionRequest
@@ -1767,6 +1770,7 @@ __all__ = [
     "Placement",
     "PlacementRequest",
     "PlacementSetRequest",
+    "PlacementUpdateRequest",
     "Portfolio",
     "PortfolioCashFlow",
     "PortfolioCashLadder",
@@ -1803,6 +1807,7 @@ __all__ = [
     "PricingOptions",
     "ProcessedCommand",
     "PropertyDefinition",
+    "PropertyDefinitionEntity",
     "PropertyDefinitionSearchResult",
     "PropertyDefinitionType",
     "PropertyDomain",
@@ -2082,6 +2087,7 @@ __all__ = [
     "UpdateDerivedPropertyDefinitionRequest",
     "UpdateFeeTypeRequest",
     "UpdateInstrumentIdentifierRequest",
+    "UpdatePlacementsResponse",
     "UpdatePortfolioGroupRequest",
     "UpdatePortfolioRequest",
     "UpdatePropertyDefinitionRequest",

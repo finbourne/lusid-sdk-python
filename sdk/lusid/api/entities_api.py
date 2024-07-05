@@ -27,6 +27,7 @@ from pydantic.v1 import Field, StrictStr, conlist, constr, validator
 from typing import Optional
 
 from lusid.models.portfolio_entity import PortfolioEntity
+from lusid.models.property_definition_entity import PropertyDefinitionEntity
 from lusid.models.resource_list_of_change import ResourceListOfChange
 
 from lusid.api_client import ApiClient
@@ -383,6 +384,185 @@ class EntitiesApi:
 
         return self.api_client.call_api(
             '/api/entities/changes/portfolios', 'GET',
+            _path_params,
+            _query_params,
+            _header_params,
+            body=_body_params,
+            post_params=_form_params,
+            files=_files,
+            response_types_map=_response_types_map,
+            auth_settings=_auth_settings,
+            async_req=_params.get('async_req'),
+            _return_http_data_only=_params.get('_return_http_data_only'),  # noqa: E501
+            _preload_content=_params.get('_preload_content', True),
+            _request_timeout=_params.get('_request_timeout'),
+            collection_formats=_collection_formats,
+            _request_auth=_params.get('_request_auth'))
+
+    @overload
+    async def get_property_definition_by_entity_unique_id(self, entity_unique_id : Annotated[constr(strict=True, max_length=40, min_length=30), Field(..., description="The universally unique identifier of the property definition.")], effective_at : Annotated[Optional[StrictStr], Field(description="The effective datetime at which to retrieve the property definition. Defaults to the current LUSID system datetime if not specified.")] = None, as_at : Annotated[Optional[datetime], Field(description="The asAt datetime at which to retrieve the property definition. Defaults to returning the latest version of the property definition if not specified.")] = None, previews : Annotated[Optional[conlist(StrictStr)], Field(description="The ids of the staged modifications to be previewed in the response.")] = None, **kwargs) -> PropertyDefinitionEntity:  # noqa: E501
+        ...
+
+    @overload
+    def get_property_definition_by_entity_unique_id(self, entity_unique_id : Annotated[constr(strict=True, max_length=40, min_length=30), Field(..., description="The universally unique identifier of the property definition.")], effective_at : Annotated[Optional[StrictStr], Field(description="The effective datetime at which to retrieve the property definition. Defaults to the current LUSID system datetime if not specified.")] = None, as_at : Annotated[Optional[datetime], Field(description="The asAt datetime at which to retrieve the property definition. Defaults to returning the latest version of the property definition if not specified.")] = None, previews : Annotated[Optional[conlist(StrictStr)], Field(description="The ids of the staged modifications to be previewed in the response.")] = None, async_req: Optional[bool]=True, **kwargs) -> PropertyDefinitionEntity:  # noqa: E501
+        ...
+
+    @validate_arguments
+    def get_property_definition_by_entity_unique_id(self, entity_unique_id : Annotated[constr(strict=True, max_length=40, min_length=30), Field(..., description="The universally unique identifier of the property definition.")], effective_at : Annotated[Optional[StrictStr], Field(description="The effective datetime at which to retrieve the property definition. Defaults to the current LUSID system datetime if not specified.")] = None, as_at : Annotated[Optional[datetime], Field(description="The asAt datetime at which to retrieve the property definition. Defaults to returning the latest version of the property definition if not specified.")] = None, previews : Annotated[Optional[conlist(StrictStr)], Field(description="The ids of the staged modifications to be previewed in the response.")] = None, async_req: Optional[bool]=None, **kwargs) -> Union[PropertyDefinitionEntity, Awaitable[PropertyDefinitionEntity]]:  # noqa: E501
+        """[EXPERIMENTAL] GetPropertyDefinitionByEntityUniqueId: Get property definition by EntityUniqueId  # noqa: E501
+
+        Retrieve a particular property definition.  If the property definition is deleted, this will return the state of the property definition immediately prior to deletion.  # noqa: E501
+        This method makes a synchronous HTTP request by default. To make an
+        asynchronous HTTP request, please pass async_req=True
+
+        >>> thread = api.get_property_definition_by_entity_unique_id(entity_unique_id, effective_at, as_at, previews, async_req=True)
+        >>> result = thread.get()
+
+        :param entity_unique_id: The universally unique identifier of the property definition. (required)
+        :type entity_unique_id: str
+        :param effective_at: The effective datetime at which to retrieve the property definition. Defaults to the current LUSID system datetime if not specified.
+        :type effective_at: str
+        :param as_at: The asAt datetime at which to retrieve the property definition. Defaults to returning the latest version of the property definition if not specified.
+        :type as_at: datetime
+        :param previews: The ids of the staged modifications to be previewed in the response.
+        :type previews: List[str]
+        :param async_req: Whether to execute the request asynchronously.
+        :type async_req: bool, optional
+        :param _request_timeout: timeout setting for this request.
+               If one number provided, it will be total request
+               timeout. It can also be a pair (tuple) of
+               (connection, read) timeouts.
+        :return: Returns the result object.
+                 If the method is called asynchronously,
+                 returns the request thread.
+        :rtype: PropertyDefinitionEntity
+        """
+        kwargs['_return_http_data_only'] = True
+        if '_preload_content' in kwargs:
+            message = "Error! Please call the get_property_definition_by_entity_unique_id_with_http_info method with `_preload_content` instead and obtain raw data from ApiResponse.raw_data"  # noqa: E501
+            raise ValueError(message)
+        if async_req is not None:
+            kwargs['async_req'] = async_req
+        return self.get_property_definition_by_entity_unique_id_with_http_info(entity_unique_id, effective_at, as_at, previews, **kwargs)  # noqa: E501
+
+    @validate_arguments
+    def get_property_definition_by_entity_unique_id_with_http_info(self, entity_unique_id : Annotated[constr(strict=True, max_length=40, min_length=30), Field(..., description="The universally unique identifier of the property definition.")], effective_at : Annotated[Optional[StrictStr], Field(description="The effective datetime at which to retrieve the property definition. Defaults to the current LUSID system datetime if not specified.")] = None, as_at : Annotated[Optional[datetime], Field(description="The asAt datetime at which to retrieve the property definition. Defaults to returning the latest version of the property definition if not specified.")] = None, previews : Annotated[Optional[conlist(StrictStr)], Field(description="The ids of the staged modifications to be previewed in the response.")] = None, **kwargs) -> ApiResponse:  # noqa: E501
+        """[EXPERIMENTAL] GetPropertyDefinitionByEntityUniqueId: Get property definition by EntityUniqueId  # noqa: E501
+
+        Retrieve a particular property definition.  If the property definition is deleted, this will return the state of the property definition immediately prior to deletion.  # noqa: E501
+        This method makes a synchronous HTTP request by default. To make an
+        asynchronous HTTP request, please pass async_req=True
+
+        >>> thread = api.get_property_definition_by_entity_unique_id_with_http_info(entity_unique_id, effective_at, as_at, previews, async_req=True)
+        >>> result = thread.get()
+
+        :param entity_unique_id: The universally unique identifier of the property definition. (required)
+        :type entity_unique_id: str
+        :param effective_at: The effective datetime at which to retrieve the property definition. Defaults to the current LUSID system datetime if not specified.
+        :type effective_at: str
+        :param as_at: The asAt datetime at which to retrieve the property definition. Defaults to returning the latest version of the property definition if not specified.
+        :type as_at: datetime
+        :param previews: The ids of the staged modifications to be previewed in the response.
+        :type previews: List[str]
+        :param async_req: Whether to execute the request asynchronously.
+        :type async_req: bool, optional
+        :param _preload_content: if False, the ApiResponse.data will
+                                 be set to none and raw_data will store the
+                                 HTTP response body without reading/decoding.
+                                 Default is True.
+        :type _preload_content: bool, optional
+        :param _return_http_data_only: response data instead of ApiResponse
+                                       object with status code, headers, etc
+        :type _return_http_data_only: bool, optional
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :param _request_auth: set to override the auth_settings for an a single
+                              request; this effectively ignores the authentication
+                              in the spec for a single request.
+        :type _request_auth: dict, optional
+        :type _content_type: string, optional: force content-type for the request
+        :return: Returns the result object.
+                 If the method is called asynchronously,
+                 returns the request thread.
+        :rtype: tuple(PropertyDefinitionEntity, status_code(int), headers(HTTPHeaderDict))
+        """
+
+        _params = locals()
+
+        _all_params = [
+            'entity_unique_id',
+            'effective_at',
+            'as_at',
+            'previews'
+        ]
+        _all_params.extend(
+            [
+                'async_req',
+                '_return_http_data_only',
+                '_preload_content',
+                '_request_timeout',
+                '_request_auth',
+                '_content_type',
+                '_headers'
+            ]
+        )
+
+        # validate the arguments
+        for _key, _val in _params['kwargs'].items():
+            if _key not in _all_params:
+                raise ApiTypeError(
+                    "Got an unexpected keyword argument '%s'"
+                    " to method get_property_definition_by_entity_unique_id" % _key
+                )
+            _params[_key] = _val
+        del _params['kwargs']
+
+        _collection_formats = {}
+
+        # process the path parameters
+        _path_params = {}
+        if _params['entity_unique_id']:
+            _path_params['entityUniqueId'] = _params['entity_unique_id']
+
+
+        # process the query parameters
+        _query_params = []
+        if _params.get('effective_at') is not None:  # noqa: E501
+            _query_params.append(('effectiveAt', _params['effective_at']))
+
+        if _params.get('as_at') is not None:  # noqa: E501
+            if isinstance(_params['as_at'], datetime):
+                _query_params.append(('asAt', _params['as_at'].strftime(self.api_client.configuration.datetime_format)))
+            else:
+                _query_params.append(('asAt', _params['as_at']))
+
+        if _params.get('previews') is not None:  # noqa: E501
+            _query_params.append(('previews', _params['previews']))
+            _collection_formats['previews'] = 'multi'
+
+        # process the header parameters
+        _header_params = dict(_params.get('_headers', {}))
+        # process the form parameters
+        _form_params = []
+        _files = {}
+        # process the body parameter
+        _body_params = None
+        # set the HTTP header `Accept`
+        _header_params['Accept'] = self.api_client.select_header_accept(
+            ['text/plain', 'application/json', 'text/json'])  # noqa: E501
+
+        # authentication setting
+        _auth_settings = ['oauth2']  # noqa: E501
+
+        _response_types_map = {
+            '200': "PropertyDefinitionEntity",
+            '400': "LusidValidationProblemDetails",
+        }
+
+        return self.api_client.call_api(
+            '/api/entities/propertydefinitions/{entityUniqueId}', 'GET',
             _path_params,
             _query_params,
             _header_params,
