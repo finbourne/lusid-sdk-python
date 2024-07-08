@@ -28,7 +28,8 @@ class DependencySourceFilter(BaseModel):
     instrument_type: Optional[constr(strict=True, max_length=32, min_length=0)] = Field(None, alias="instrumentType", description="Specify that a rule should only apply if the market data is requested by an instrument of a given instrument type.  If null, then no filtering on instrument type is applied.")
     asset_class: Optional[constr(strict=True, max_length=32, min_length=0)] = Field(None, alias="assetClass", description="Specify that a rule should only apply if the market data is requested by an instrument of a given asset class.  If null, then no filtering on asset class is applied.")
     dom_ccy: Optional[StrictStr] = Field(None, alias="domCcy", description="Specify that a rule should only apply if the market data is requested by an instrument with a given domestic currency.  If null, then no filtering on currency is applied.")
-    __properties = ["instrumentType", "assetClass", "domCcy"]
+    long_or_short_indicator: Optional[StrictStr] = Field(None, alias="longOrShortIndicator", description="Specify that a rule should apply if the market data is requested by a model with a given long or short indicator.  If none, then no filtering on LongOrShortIndicator is applied.")
+    __properties = ["instrumentType", "assetClass", "domCcy", "longOrShortIndicator"]
 
     class Config:
         """Pydantic configuration"""
@@ -69,6 +70,11 @@ class DependencySourceFilter(BaseModel):
         if self.dom_ccy is None and "dom_ccy" in self.__fields_set__:
             _dict['domCcy'] = None
 
+        # set to None if long_or_short_indicator (nullable) is None
+        # and __fields_set__ contains the field
+        if self.long_or_short_indicator is None and "long_or_short_indicator" in self.__fields_set__:
+            _dict['longOrShortIndicator'] = None
+
         return _dict
 
     @classmethod
@@ -83,6 +89,7 @@ class DependencySourceFilter(BaseModel):
         _obj = DependencySourceFilter.parse_obj({
             "instrument_type": obj.get("instrumentType"),
             "asset_class": obj.get("assetClass"),
-            "dom_ccy": obj.get("domCcy")
+            "dom_ccy": obj.get("domCcy"),
+            "long_or_short_indicator": obj.get("longOrShortIndicator")
         })
         return _obj

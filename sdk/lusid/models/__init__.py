@@ -417,6 +417,7 @@ from lusid.models.instrument_cash_flow import InstrumentCashFlow
 from lusid.models.instrument_definition import InstrumentDefinition
 from lusid.models.instrument_definition_format import InstrumentDefinitionFormat
 from lusid.models.instrument_delete_modes import InstrumentDeleteModes
+from lusid.models.instrument_entity import InstrumentEntity
 from lusid.models.instrument_event import InstrumentEvent
 from lusid.models.instrument_event_configuration import InstrumentEventConfiguration
 from lusid.models.instrument_event_holder import InstrumentEventHolder
@@ -1419,6 +1420,7 @@ __all__ = [
     "InstrumentDefinition",
     "InstrumentDefinitionFormat",
     "InstrumentDeleteModes",
+    "InstrumentEntity",
     "InstrumentEvent",
     "InstrumentEventConfiguration",
     "InstrumentEventHolder",
