@@ -395,6 +395,7 @@ from lusid.models.fee_request import FeeRequest
 from lusid.models.fee_rule import FeeRule
 from lusid.models.fee_rule_upsert_request import FeeRuleUpsertRequest
 from lusid.models.fee_rule_upsert_response import FeeRuleUpsertResponse
+from lusid.models.fee_transaction_template_specification import FeeTransactionTemplateSpecification
 from lusid.models.fee_type import FeeType
 from lusid.models.fee_type_request import FeeTypeRequest
 from lusid.models.field_definition import FieldDefinition
@@ -1475,6 +1476,7 @@ __all__ = [
     "FeeRule",
     "FeeRuleUpsertRequest",
     "FeeRuleUpsertResponse",
+    "FeeTransactionTemplateSpecification",
     "FeeType",
     "FeeTypeRequest",
     "FieldDefinition",
