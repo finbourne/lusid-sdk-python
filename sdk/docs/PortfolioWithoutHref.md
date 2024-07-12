@@ -18,7 +18,7 @@ Name | Type | Description | Notes
 **properties** | [**Dict[str, ModelProperty]**](ModelProperty.md) | The requested portfolio properties. These will be from the &#39;Portfolio&#39; domain. | [optional] 
 **relationships** | [**List[Relationship]**](Relationship.md) | A set of relationships associated to the portfolio. | [optional] 
 **instrument_scopes** | **List[str]** | The instrument scope resolution strategy of this portfolio. | [optional] 
-**accounting_method** | **str** | . The available values are: Default, AverageCost, FirstInFirstOut, LastInFirstOut, HighestCostFirst, LowestCostFirst | [optional] 
+**accounting_method** | **str** | . The available values are: Default, AverageCost, FirstInFirstOut, LastInFirstOut, HighestCostFirst, LowestCostFirst, ProRateByUnits, ProRateByCost, ProRateByCostPortfolioCurrency | [optional] 
 **amortisation_method** | **str** | The amortisation method used by the portfolio for the calculation. The available values are: NoAmortisation, StraightLine, EffectiveYield, StraightLineSettlementDate, EffectiveYieldSettlementDate | [optional] 
 **transaction_type_scope** | **str** | The scope of the transaction types. | [optional] 
 **cash_gain_loss_calculation_date** | **str** | The scope of the transaction types. | [optional] 

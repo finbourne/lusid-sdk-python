@@ -106,6 +106,8 @@ from lusid.models.calculation_info import CalculationInfo
 from lusid.models.calendar import Calendar
 from lusid.models.calendar_date import CalendarDate
 from lusid.models.calendar_dependency import CalendarDependency
+from lusid.models.cancel_placements_response import CancelPlacementsResponse
+from lusid.models.cancelled_placement_result import CancelledPlacementResult
 from lusid.models.cap_floor import CapFloor
 from lusid.models.capital_distribution_event import CapitalDistributionEvent
 from lusid.models.cash_and_security_offer_election import CashAndSecurityOfferElection
@@ -172,6 +174,7 @@ from lusid.models.compliance_template_parameter import ComplianceTemplateParamet
 from lusid.models.compliance_template_variation import ComplianceTemplateVariation
 from lusid.models.compliance_template_variation_dto import ComplianceTemplateVariationDto
 from lusid.models.compliance_template_variation_request import ComplianceTemplateVariationRequest
+from lusid.models.component_rule import ComponentRule
 from lusid.models.component_transaction import ComponentTransaction
 from lusid.models.composite_breakdown import CompositeBreakdown
 from lusid.models.composite_breakdown_request import CompositeBreakdownRequest
@@ -338,12 +341,16 @@ from lusid.models.flow_conventions import FlowConventions
 from lusid.models.forward_rate_agreement import ForwardRateAgreement
 from lusid.models.from_recipe import FromRecipe
 from lusid.models.fund import Fund
+from lusid.models.fund_configuration import FundConfiguration
+from lusid.models.fund_configuration_properties import FundConfigurationProperties
+from lusid.models.fund_configuration_request import FundConfigurationRequest
 from lusid.models.fund_properties import FundProperties
 from lusid.models.fund_request import FundRequest
 from lusid.models.fund_share_class import FundShareClass
 from lusid.models.funding_leg import FundingLeg
 from lusid.models.funding_leg_options import FundingLegOptions
 from lusid.models.future import Future
+from lusid.models.future_expiry_event import FutureExpiryEvent
 from lusid.models.futures_contract_details import FuturesContractDetails
 from lusid.models.fx_conventions import FxConventions
 from lusid.models.fx_dependency import FxDependency
@@ -568,6 +575,7 @@ from lusid.models.paged_resource_list_of_execution import PagedResourceListOfExe
 from lusid.models.paged_resource_list_of_fee import PagedResourceListOfFee
 from lusid.models.paged_resource_list_of_fee_type import PagedResourceListOfFeeType
 from lusid.models.paged_resource_list_of_fund import PagedResourceListOfFund
+from lusid.models.paged_resource_list_of_fund_configuration import PagedResourceListOfFundConfiguration
 from lusid.models.paged_resource_list_of_general_ledger_profile_response import PagedResourceListOfGeneralLedgerProfileResponse
 from lusid.models.paged_resource_list_of_instrument import PagedResourceListOfInstrument
 from lusid.models.paged_resource_list_of_instrument_event_holder import PagedResourceListOfInstrumentEventHolder
@@ -1110,6 +1118,8 @@ __all__ = [
     "Calendar",
     "CalendarDate",
     "CalendarDependency",
+    "CancelPlacementsResponse",
+    "CancelledPlacementResult",
     "CapFloor",
     "CapitalDistributionEvent",
     "CashAndSecurityOfferElection",
@@ -1176,6 +1186,7 @@ __all__ = [
     "ComplianceTemplateVariation",
     "ComplianceTemplateVariationDto",
     "ComplianceTemplateVariationRequest",
+    "ComponentRule",
     "ComponentTransaction",
     "CompositeBreakdown",
     "CompositeBreakdownRequest",
@@ -1342,12 +1353,16 @@ __all__ = [
     "ForwardRateAgreement",
     "FromRecipe",
     "Fund",
+    "FundConfiguration",
+    "FundConfigurationProperties",
+    "FundConfigurationRequest",
     "FundProperties",
     "FundRequest",
     "FundShareClass",
     "FundingLeg",
     "FundingLegOptions",
     "Future",
+    "FutureExpiryEvent",
     "FuturesContractDetails",
     "FxConventions",
     "FxDependency",
@@ -1572,6 +1587,7 @@ __all__ = [
     "PagedResourceListOfFee",
     "PagedResourceListOfFeeType",
     "PagedResourceListOfFund",
+    "PagedResourceListOfFundConfiguration",
     "PagedResourceListOfGeneralLedgerProfileResponse",
     "PagedResourceListOfInstrument",
     "PagedResourceListOfInstrumentEventHolder",

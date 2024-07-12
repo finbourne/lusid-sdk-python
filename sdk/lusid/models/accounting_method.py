@@ -35,6 +35,9 @@ class AccountingMethod(str, Enum):
     LASTINFIRSTOUT = 'LastInFirstOut'
     HIGHESTCOSTFIRST = 'HighestCostFirst'
     LOWESTCOSTFIRST = 'LowestCostFirst'
+    PRORATEBYUNITS = 'ProRateByUnits'
+    PRORATEBYCOST = 'ProRateByCost'
+    PRORATEBYCOSTPORTFOLIOCURRENCY = 'ProRateByCostPortfolioCurrency'
 
     @classmethod
     def from_json(cls, json_str: str) -> AccountingMethod:
