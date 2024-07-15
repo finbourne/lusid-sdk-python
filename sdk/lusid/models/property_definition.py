@@ -23,6 +23,7 @@ from pydantic.v1 import BaseModel, Field, StrictBool, StrictStr, conlist, valida
 from lusid.models.link import Link
 from lusid.models.model_property import ModelProperty
 from lusid.models.resource_id import ResourceId
+from lusid.models.staged_modifications_info import StagedModificationsInfo
 from lusid.models.version import Version
 
 class PropertyDefinition(BaseModel):
@@ -48,8 +49,9 @@ class PropertyDefinition(BaseModel):
     collection_type: Optional[StrictStr] = Field(None, alias="collectionType", description="Describes whether a collection property should behave as a set or as an array.")
     properties: Optional[Dict[str, ModelProperty]] = Field(None, description="Set of unique property definition properties and associated values to store with the property definition. Each property must be from the 'PropertyDefinition' domain.")
     version: Optional[Version] = None
+    staged_modifications: Optional[StagedModificationsInfo] = Field(None, alias="stagedModifications")
     links: Optional[conlist(Link)] = None
-    __properties = ["href", "key", "valueType", "displayName", "dataTypeId", "type", "unitSchema", "domain", "scope", "code", "valueRequired", "lifeTime", "constraintStyle", "propertyDefinitionType", "propertyDescription", "derivationFormula", "collectionType", "properties", "version", "links"]
+    __properties = ["href", "key", "valueType", "displayName", "dataTypeId", "type", "unitSchema", "domain", "scope", "code", "valueRequired", "lifeTime", "constraintStyle", "propertyDefinitionType", "propertyDescription", "derivationFormula", "collectionType", "properties", "version", "stagedModifications", "links"]
 
     @validator('value_type')
     def value_type_validate_enum(cls, value):
@@ -150,6 +152,9 @@ class PropertyDefinition(BaseModel):
         # override the default output from pydantic by calling `to_dict()` of version
         if self.version:
             _dict['version'] = self.version.to_dict()
+        # override the default output from pydantic by calling `to_dict()` of staged_modifications
+        if self.staged_modifications:
+            _dict['stagedModifications'] = self.staged_modifications.to_dict()
         # override the default output from pydantic by calling `to_dict()` of each item in links (list)
         _items = []
         if self.links:
@@ -248,6 +253,7 @@ class PropertyDefinition(BaseModel):
             if obj.get("properties") is not None
             else None,
             "version": Version.from_dict(obj.get("version")) if obj.get("version") is not None else None,
+            "staged_modifications": StagedModificationsInfo.from_dict(obj.get("stagedModifications")) if obj.get("stagedModifications") is not None else None,
             "links": [Link.from_dict(_item) for _item in obj.get("links")] if obj.get("links") is not None else None
         })
         return _obj

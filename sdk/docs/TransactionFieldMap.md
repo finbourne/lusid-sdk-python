@@ -13,7 +13,7 @@ Name | Type | Description | Notes
 **units** | **str** |  | 
 **transaction_price** | [**TransactionPriceAndType**](TransactionPriceAndType.md) |  | 
 **transaction_currency** | **str** |  | 
-**exchange_rate** | **str** |  | 
+**exchange_rate** | **str** |  | [optional] 
 **total_consideration** | [**TransactionCurrencyAndAmount**](TransactionCurrencyAndAmount.md) |  | 
 
 ## Example

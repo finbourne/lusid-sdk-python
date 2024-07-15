@@ -18,7 +18,7 @@ import re  # noqa: F401
 import json
 
 
-from typing import Any, Dict
+from typing import Any, Dict, Optional
 from pydantic.v1 import BaseModel, Field, constr
 from lusid.models.transaction_currency_and_amount import TransactionCurrencyAndAmount
 from lusid.models.transaction_price_and_type import TransactionPriceAndType
@@ -36,7 +36,7 @@ class TransactionFieldMap(BaseModel):
     units: constr(strict=True, max_length=1024, min_length=0) = Field(...)
     transaction_price: TransactionPriceAndType = Field(..., alias="transactionPrice")
     transaction_currency: constr(strict=True, max_length=1024, min_length=0) = Field(..., alias="transactionCurrency")
-    exchange_rate: constr(strict=True, max_length=1024, min_length=0) = Field(..., alias="exchangeRate")
+    exchange_rate: Optional[constr(strict=True, max_length=1024, min_length=0)] = Field(None, alias="exchangeRate")
     total_consideration: TransactionCurrencyAndAmount = Field(..., alias="totalConsideration")
     __properties = ["transactionId", "type", "source", "instrument", "transactionDate", "settlementDate", "units", "transactionPrice", "transactionCurrency", "exchangeRate", "totalConsideration"]
 
@@ -70,6 +70,11 @@ class TransactionFieldMap(BaseModel):
         # override the default output from pydantic by calling `to_dict()` of total_consideration
         if self.total_consideration:
             _dict['totalConsideration'] = self.total_consideration.to_dict()
+        # set to None if exchange_rate (nullable) is None
+        # and __fields_set__ contains the field
+        if self.exchange_rate is None and "exchange_rate" in self.__fields_set__:
+            _dict['exchangeRate'] = None
+
         return _dict
 
     @classmethod
