@@ -11,7 +11,7 @@ Name | Type | Description | Notes
 **transaction_date** | **str** |  | 
 **settlement_date** | **str** |  | 
 **units** | **str** |  | 
-**transaction_price** | [**TransactionPriceAndType**](TransactionPriceAndType.md) |  | 
+**transaction_price** | [**TransactionPriceAndType**](TransactionPriceAndType.md) |  | [optional] 
 **transaction_currency** | **str** |  | 
 **exchange_rate** | **str** |  | [optional] 
 **total_consideration** | [**TransactionCurrencyAndAmount**](TransactionCurrencyAndAmount.md) |  | 

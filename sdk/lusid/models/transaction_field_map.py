@@ -34,7 +34,7 @@ class TransactionFieldMap(BaseModel):
     transaction_date: constr(strict=True, max_length=1024, min_length=0) = Field(..., alias="transactionDate")
     settlement_date: constr(strict=True, max_length=1024, min_length=0) = Field(..., alias="settlementDate")
     units: constr(strict=True, max_length=1024, min_length=0) = Field(...)
-    transaction_price: TransactionPriceAndType = Field(..., alias="transactionPrice")
+    transaction_price: Optional[TransactionPriceAndType] = Field(None, alias="transactionPrice")
     transaction_currency: constr(strict=True, max_length=1024, min_length=0) = Field(..., alias="transactionCurrency")
     exchange_rate: Optional[constr(strict=True, max_length=1024, min_length=0)] = Field(None, alias="exchangeRate")
     total_consideration: TransactionCurrencyAndAmount = Field(..., alias="totalConsideration")
