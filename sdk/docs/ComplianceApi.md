@@ -15,6 +15,7 @@ Method | HTTP request | Description
 [**list_compliance_runs**](ComplianceApi.md#list_compliance_runs) | **GET** /api/compliance/runs | [EARLY ACCESS] ListComplianceRuns: List historical compliance run identifiers.
 [**list_compliance_templates**](ComplianceApi.md#list_compliance_templates) | **GET** /api/compliance/templates | [EARLY ACCESS] ListComplianceTemplates: List compliance templates.
 [**run_compliance**](ComplianceApi.md#run_compliance) | **POST** /api/compliance/runs | [EARLY ACCESS] RunCompliance: Run a compliance check.
+[**run_compliance_preview**](ComplianceApi.md#run_compliance_preview) | **POST** /api/compliance/preview/runs | [EARLY ACCESS] RunCompliancePreview: Run a compliance check.
 [**update_compliance_template**](ComplianceApi.md#update_compliance_template) | **PUT** /api/compliance/templates/{scope}/{code} | [EARLY ACCESS] UpdateComplianceTemplate: Update a ComplianceRuleTemplate
 [**upsert_compliance_rule**](ComplianceApi.md#upsert_compliance_rule) | **POST** /api/compliance/rules | [EARLY ACCESS] UpsertComplianceRule: Upsert a compliance rule.
 [**upsert_compliance_run_summary**](ComplianceApi.md#upsert_compliance_run_summary) | **POST** /api/compliance/runs/summary | [EARLY ACCESS] UpsertComplianceRunSummary: Upsert a compliance run summary.
@@ -1142,6 +1143,113 @@ Name | Type | Description  | Notes
 ### HTTP request headers
 
  - **Content-Type**: Not defined
+ - **Accept**: text/plain, application/json, text/json
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | The identifying information of a compliance run |  -  |
+**400** | The details of the input related failure |  -  |
+**0** | Error response |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **run_compliance_preview**
+> ComplianceRunInfoV2 run_compliance_preview(run_scope, rule_scope, recipe_id_scope, recipe_id_code, compliance_run_configuration=compliance_run_configuration)
+
+[EARLY ACCESS] RunCompliancePreview: Run a compliance check.
+
+Use this endpoint to run a compliance check using rules from a specific scope.
+
+### Example
+
+* OAuth Authentication (oauth2):
+```python
+from __future__ import print_function
+import time
+import lusid
+from lusid.rest import ApiException
+from lusid.models.compliance_run_configuration import ComplianceRunConfiguration
+from lusid.models.compliance_run_info_v2 import ComplianceRunInfoV2
+from pprint import pprint
+
+import os
+from lusid import (
+    ApiClientFactory,
+    ComplianceApi,
+    EnvironmentVariablesConfigurationLoader,
+    SecretsFileConfigurationLoader,
+    ArgsConfigurationLoader
+)
+
+# Use the lusid ApiClientFactory to build Api instances with a configured api client
+# By default this will read config from environment variables
+# Then from a secrets.json file found in the current working directory
+api_client_factory = ApiClientFactory()
+
+# The ApiClientFactory can be passed an iterable of configuration loaders to read configuration from
+
+api_url = "https://www.lusid.com/api"
+# Path to a secrets.json file containing authentication credentials
+# See https://support.lusid.com/knowledgebase/article/KA-01667/en-us
+# for a detailed guide to setting up the SDK make authenticated calls to LUSID APIs
+secrets_path = os.getenv("FBN_SECRETS_PATH")
+app_name="LusidJupyterNotebook"
+
+config_loaders = [
+	EnvironmentVariablesConfigurationLoader(),
+	SecretsFileConfigurationLoader(api_secrets_file=secrets_path),
+	ArgsConfigurationLoader(api_url=api_url, app_name=app_name)
+]
+api_client_factory = ApiClientFactory(config_loaders=config_loaders)
+
+
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+
+
+
+# Enter a context with an instance of the ApiClientFactory to ensure the connection pool is closed after use
+async with api_client_factory:
+    # Create an instance of the API class
+    api_instance = api_client_factory.build(lusid.ComplianceApi)
+    run_scope = 'run_scope_example' # str | Required: Scope to save the run results in.
+    rule_scope = 'rule_scope_example' # str | Required: Scope from which to select rules to be run.
+    recipe_id_scope = 'recipe_id_scope_example' # str | Required: the scope of the recipe to be used
+    recipe_id_code = 'recipe_id_code_example' # str | Required: The code of the recipe to be used. If left blank, the default recipe will be used.
+    compliance_run_configuration = {"preTradeConfiguration":{"includeEntityTypes":"OrdersAndAllocations"}} # ComplianceRunConfiguration | Configuration options for the compliance run. (optional)
+
+    try:
+        # [EARLY ACCESS] RunCompliancePreview: Run a compliance check.
+        api_response = await api_instance.run_compliance_preview(run_scope, rule_scope, recipe_id_scope, recipe_id_code, compliance_run_configuration=compliance_run_configuration)
+        print("The response of ComplianceApi->run_compliance_preview:\n")
+        pprint(api_response)
+    except Exception as e:
+        print("Exception when calling ComplianceApi->run_compliance_preview: %s\n" % e)
+```
+
+
+### Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **run_scope** | **str**| Required: Scope to save the run results in. | 
+ **rule_scope** | **str**| Required: Scope from which to select rules to be run. | 
+ **recipe_id_scope** | **str**| Required: the scope of the recipe to be used | 
+ **recipe_id_code** | **str**| Required: The code of the recipe to be used. If left blank, the default recipe will be used. | 
+ **compliance_run_configuration** | [**ComplianceRunConfiguration**](ComplianceRunConfiguration.md)| Configuration options for the compliance run. | [optional] 
+
+### Return type
+
+[**ComplianceRunInfoV2**](ComplianceRunInfoV2.md)
+
+### Authorization
+
+[oauth2](../README.md#oauth2)
+
+### HTTP request headers
+
+ - **Content-Type**: application/json-patch+json, application/json, text/json, application/*+json
  - **Accept**: text/plain, application/json, text/json
 
 ### HTTP response details

@@ -189,6 +189,7 @@ from lusid.models.cancel_placements_response import CancelPlacementsResponse
 from lusid.models.cancelled_placement_result import CancelledPlacementResult
 from lusid.models.cap_floor import CapFloor
 from lusid.models.capital_distribution_event import CapitalDistributionEvent
+from lusid.models.cash import Cash
 from lusid.models.cash_and_security_offer_election import CashAndSecurityOfferElection
 from lusid.models.cash_dependency import CashDependency
 from lusid.models.cash_dividend_event import CashDividendEvent
@@ -240,6 +241,7 @@ from lusid.models.compliance_rule_result_v2 import ComplianceRuleResultV2
 from lusid.models.compliance_rule_template import ComplianceRuleTemplate
 from lusid.models.compliance_rule_upsert_request import ComplianceRuleUpsertRequest
 from lusid.models.compliance_rule_upsert_response import ComplianceRuleUpsertResponse
+from lusid.models.compliance_run_configuration import ComplianceRunConfiguration
 from lusid.models.compliance_run_info import ComplianceRunInfo
 from lusid.models.compliance_run_info_v2 import ComplianceRunInfoV2
 from lusid.models.compliance_step import ComplianceStep
@@ -253,6 +255,7 @@ from lusid.models.compliance_template_parameter import ComplianceTemplateParamet
 from lusid.models.compliance_template_variation import ComplianceTemplateVariation
 from lusid.models.compliance_template_variation_dto import ComplianceTemplateVariationDto
 from lusid.models.compliance_template_variation_request import ComplianceTemplateVariationRequest
+from lusid.models.component_filter import ComponentFilter
 from lusid.models.component_rule import ComponentRule
 from lusid.models.component_transaction import ComponentTransaction
 from lusid.models.composite_breakdown import CompositeBreakdown
@@ -420,12 +423,15 @@ from lusid.models.flow_conventions import FlowConventions
 from lusid.models.forward_rate_agreement import ForwardRateAgreement
 from lusid.models.from_recipe import FromRecipe
 from lusid.models.fund import Fund
+from lusid.models.fund_amount import FundAmount
 from lusid.models.fund_configuration import FundConfiguration
 from lusid.models.fund_configuration_properties import FundConfigurationProperties
 from lusid.models.fund_configuration_request import FundConfigurationRequest
+from lusid.models.fund_previous_nav import FundPreviousNAV
 from lusid.models.fund_properties import FundProperties
 from lusid.models.fund_request import FundRequest
 from lusid.models.fund_share_class import FundShareClass
+from lusid.models.fund_valuation_point_data import FundValuationPointData
 from lusid.models.funding_leg import FundingLeg
 from lusid.models.funding_leg_options import FundingLegOptions
 from lusid.models.future import Future
@@ -733,7 +739,11 @@ from lusid.models.posting_module_request import PostingModuleRequest
 from lusid.models.posting_module_response import PostingModuleResponse
 from lusid.models.posting_module_rule import PostingModuleRule
 from lusid.models.posting_module_rules_updated_response import PostingModuleRulesUpdatedResponse
+from lusid.models.pre_trade_configuration import PreTradeConfiguration
 from lusid.models.premium import Premium
+from lusid.models.previous_fund_valuation_point_data import PreviousFundValuationPointData
+from lusid.models.previous_nav import PreviousNAV
+from lusid.models.previous_share_class_breakdown import PreviousShareClassBreakdown
 from lusid.models.pricing_context import PricingContext
 from lusid.models.pricing_model import PricingModel
 from lusid.models.pricing_options import PricingOptions
@@ -914,6 +924,10 @@ from lusid.models.set_share_class_instruments_request import SetShareClassInstru
 from lusid.models.set_transaction_configuration_alias import SetTransactionConfigurationAlias
 from lusid.models.set_transaction_configuration_source_request import SetTransactionConfigurationSourceRequest
 from lusid.models.settlement_schedule import SettlementSchedule
+from lusid.models.share_class_amount import ShareClassAmount
+from lusid.models.share_class_breakdown import ShareClassBreakdown
+from lusid.models.share_class_data import ShareClassData
+from lusid.models.share_class_details import ShareClassDetails
 from lusid.models.side_configuration_data import SideConfigurationData
 from lusid.models.side_configuration_data_request import SideConfigurationDataRequest
 from lusid.models.side_definition import SideDefinition
@@ -1007,6 +1021,7 @@ from lusid.models.trial_balance_query_parameters import TrialBalanceQueryParamet
 from lusid.models.trigger_event import TriggerEvent
 from lusid.models.typed_resource_id import TypedResourceId
 from lusid.models.unit_schema import UnitSchema
+from lusid.models.unitisation_data import UnitisationData
 from lusid.models.units_ratio import UnitsRatio
 from lusid.models.unmatched_holding_method import UnmatchedHoldingMethod
 from lusid.models.update_amortisation_rule_set_details_request import UpdateAmortisationRuleSetDetailsRequest
@@ -1279,6 +1294,7 @@ __all__ = [
     "CancelledPlacementResult",
     "CapFloor",
     "CapitalDistributionEvent",
+    "Cash",
     "CashAndSecurityOfferElection",
     "CashDependency",
     "CashDividendEvent",
@@ -1330,6 +1346,7 @@ __all__ = [
     "ComplianceRuleTemplate",
     "ComplianceRuleUpsertRequest",
     "ComplianceRuleUpsertResponse",
+    "ComplianceRunConfiguration",
     "ComplianceRunInfo",
     "ComplianceRunInfoV2",
     "ComplianceStep",
@@ -1343,6 +1360,7 @@ __all__ = [
     "ComplianceTemplateVariation",
     "ComplianceTemplateVariationDto",
     "ComplianceTemplateVariationRequest",
+    "ComponentFilter",
     "ComponentRule",
     "ComponentTransaction",
     "CompositeBreakdown",
@@ -1510,12 +1528,15 @@ __all__ = [
     "ForwardRateAgreement",
     "FromRecipe",
     "Fund",
+    "FundAmount",
     "FundConfiguration",
     "FundConfigurationProperties",
     "FundConfigurationRequest",
+    "FundPreviousNAV",
     "FundProperties",
     "FundRequest",
     "FundShareClass",
+    "FundValuationPointData",
     "FundingLeg",
     "FundingLegOptions",
     "Future",
@@ -1823,7 +1844,11 @@ __all__ = [
     "PostingModuleResponse",
     "PostingModuleRule",
     "PostingModuleRulesUpdatedResponse",
+    "PreTradeConfiguration",
     "Premium",
+    "PreviousFundValuationPointData",
+    "PreviousNAV",
+    "PreviousShareClassBreakdown",
     "PricingContext",
     "PricingModel",
     "PricingOptions",
@@ -2004,6 +2029,10 @@ __all__ = [
     "SetTransactionConfigurationAlias",
     "SetTransactionConfigurationSourceRequest",
     "SettlementSchedule",
+    "ShareClassAmount",
+    "ShareClassBreakdown",
+    "ShareClassData",
+    "ShareClassDetails",
     "SideConfigurationData",
     "SideConfigurationDataRequest",
     "SideDefinition",
@@ -2097,6 +2126,7 @@ __all__ = [
     "TriggerEvent",
     "TypedResourceId",
     "UnitSchema",
+    "UnitisationData",
     "UnitsRatio",
     "UnmatchedHoldingMethod",
     "UpdateAmortisationRuleSetDetailsRequest",

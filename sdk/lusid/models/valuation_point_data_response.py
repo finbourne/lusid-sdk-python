@@ -21,24 +21,28 @@ import json
 from typing import Any, Dict, List, Optional, Union
 from pydantic.v1 import BaseModel, Field, StrictFloat, StrictInt, StrictStr, conlist, constr
 from lusid.models.fee_accrual import FeeAccrual
+from lusid.models.fund_valuation_point_data import FundValuationPointData
 from lusid.models.link import Link
+from lusid.models.share_class_data import ShareClassData
 
 class ValuationPointDataResponse(BaseModel):
     """
     The Valuation Point Data Response for the Fund and specified date.  # noqa: E501
     """
     href: Optional[StrictStr] = Field(None, description="The specific Uniform Resource Identifier (URI) for this resource at the requested effective and asAt datetime.")
-    type: constr(strict=True, min_length=1) = Field(..., description="The Type of the associated Diary Entry ('PeriodBoundary','ValuationPoint','Other' or 'Adhoc' when a diary Entry wasn't used).")
+    type: constr(strict=True, min_length=1) = Field(..., description="The Type of the associated Diary Entry ('PeriodBoundary','ValuationPoint','Other' or 'Adhoc' when a diary entry wasn't used).")
     status: constr(strict=True, min_length=1) = Field(..., description="The Status of the associated Diary Entry ('Estimate','Final','Candidate' or 'Unofficial').")
-    backout: Dict[str, Union[StrictFloat, StrictInt]] = Field(..., description="Bucket of detail for the Valuation Point, where data points have been 'backed out'.")
-    dealing: Dict[str, Union[StrictFloat, StrictInt]] = Field(..., description="Bucket of detail for any 'Dealing' that has occured inside the queried period.")
-    pn_l: Dict[str, Union[StrictFloat, StrictInt]] = Field(..., alias="pnL", description="Bucket of detail for 'PnL' that has occured inside the queried period.")
-    gav: Union[StrictFloat, StrictInt] = Field(..., description="The Gross Asset Value of the Fund at the Period end. This is effectively a summation of all Trial balance entries linked to accounts of types 'Asset' and 'Liabilities'.")
-    fees: Dict[str, FeeAccrual] = Field(..., description="Bucket of detail for any 'Fees' that have been charged in the selected period.")
-    nav: Union[StrictFloat, StrictInt] = Field(..., description="The Net Asset Value of the Fund at the Period end. This represents the GAV with any fees applied in the period.")
-    previous_nav: Union[StrictFloat, StrictInt] = Field(..., alias="previousNav", description="The Net Asset Value of the Fund at the End of the last Period.")
+    backout: Dict[str, Union[StrictFloat, StrictInt]] = Field(..., description="DEPRECATED. Bucket of detail for the Valuation Point, where data points have been 'backed out'.")
+    dealing: Dict[str, Union[StrictFloat, StrictInt]] = Field(..., description="DEPRECATED. Bucket of detail for any 'Dealing' that has occured inside the queried period.")
+    pn_l: Dict[str, Union[StrictFloat, StrictInt]] = Field(..., alias="pnL", description="DEPRECATED. Bucket of detail for 'PnL' that has occured inside the queried period.")
+    gav: Union[StrictFloat, StrictInt] = Field(..., description="DEPRECATED. The Gross Asset Value of the Fund at the Period end. This is effectively a summation of all Trial balance entries linked to accounts of types 'Asset' and 'Liabilities'.")
+    fees: Dict[str, FeeAccrual] = Field(..., description="DEPRECATED. Bucket of detail for any 'Fees' that have been charged in the selected period.")
+    nav: Union[StrictFloat, StrictInt] = Field(..., description="DEPRECATED. The Net Asset Value of the Fund at the Period end. This represents the GAV with any fees applied in the period.")
+    previous_nav: Union[StrictFloat, StrictInt] = Field(..., alias="previousNav", description="DEPRECATED. The Net Asset Value of the Fund at the End of the last Period.")
+    fund_valuation_point_data: FundValuationPointData = Field(..., alias="fundValuationPointData")
+    share_class_data: Dict[str, ShareClassData] = Field(..., alias="shareClassData", description="The data for all share classes in fund. Share classes are identified by their short codes.")
     links: Optional[conlist(Link)] = None
-    __properties = ["href", "type", "status", "backout", "dealing", "pnL", "gav", "fees", "nav", "previousNav", "links"]
+    __properties = ["href", "type", "status", "backout", "dealing", "pnL", "gav", "fees", "nav", "previousNav", "fundValuationPointData", "shareClassData", "links"]
 
     class Config:
         """Pydantic configuration"""
@@ -71,6 +75,16 @@ class ValuationPointDataResponse(BaseModel):
                 if self.fees[_key]:
                     _field_dict[_key] = self.fees[_key].to_dict()
             _dict['fees'] = _field_dict
+        # override the default output from pydantic by calling `to_dict()` of fund_valuation_point_data
+        if self.fund_valuation_point_data:
+            _dict['fundValuationPointData'] = self.fund_valuation_point_data.to_dict()
+        # override the default output from pydantic by calling `to_dict()` of each value in share_class_data (dict)
+        _field_dict = {}
+        if self.share_class_data:
+            for _key in self.share_class_data:
+                if self.share_class_data[_key]:
+                    _field_dict[_key] = self.share_class_data[_key].to_dict()
+            _dict['shareClassData'] = _field_dict
         # override the default output from pydantic by calling `to_dict()` of each item in links (list)
         _items = []
         if self.links:
@@ -115,6 +129,13 @@ class ValuationPointDataResponse(BaseModel):
             else None,
             "nav": obj.get("nav"),
             "previous_nav": obj.get("previousNav"),
+            "fund_valuation_point_data": FundValuationPointData.from_dict(obj.get("fundValuationPointData")) if obj.get("fundValuationPointData") is not None else None,
+            "share_class_data": dict(
+                (_k, ShareClassData.from_dict(_v))
+                for _k, _v in obj.get("shareClassData").items()
+            )
+            if obj.get("shareClassData") is not None
+            else None,
             "links": [Link.from_dict(_item) for _item in obj.get("links")] if obj.get("links") is not None else None
         })
         return _obj

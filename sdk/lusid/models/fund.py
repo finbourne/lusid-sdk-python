@@ -35,6 +35,7 @@ class Fund(BaseModel):
     id: ResourceId = Field(...)
     display_name: Optional[constr(strict=True, max_length=256, min_length=1)] = Field(None, alias="displayName", description="The name of the Fund.")
     description: Optional[constr(strict=True, max_length=1024, min_length=0)] = Field(None, description="A description for the Fund.")
+    fund_configuration_id: Optional[ResourceId] = Field(None, alias="fundConfigurationId")
     abor_id: ResourceId = Field(..., alias="aborId")
     share_class_instruments: Optional[conlist(InstrumentResolutionDetail)] = Field(None, alias="shareClassInstruments", description="Details the user-provided instrument identifiers and the instrument resolved from them.")
     type: constr(strict=True, min_length=1) = Field(..., description="The type of fund; 'Standalone', 'Master' or 'Feeder'")
@@ -44,7 +45,7 @@ class Fund(BaseModel):
     properties: Optional[Dict[str, ModelProperty]] = Field(None, description="A set of properties for the Fund.")
     version: Optional[Version] = None
     links: Optional[conlist(Link)] = None
-    __properties = ["href", "id", "displayName", "description", "aborId", "shareClassInstruments", "type", "inceptionDate", "decimalPlaces", "yearEndDate", "properties", "version", "links"]
+    __properties = ["href", "id", "displayName", "description", "fundConfigurationId", "aborId", "shareClassInstruments", "type", "inceptionDate", "decimalPlaces", "yearEndDate", "properties", "version", "links"]
 
     @validator('description')
     def description_validate_regular_expression(cls, value):
@@ -83,6 +84,9 @@ class Fund(BaseModel):
         # override the default output from pydantic by calling `to_dict()` of id
         if self.id:
             _dict['id'] = self.id.to_dict()
+        # override the default output from pydantic by calling `to_dict()` of fund_configuration_id
+        if self.fund_configuration_id:
+            _dict['fundConfigurationId'] = self.fund_configuration_id.to_dict()
         # override the default output from pydantic by calling `to_dict()` of abor_id
         if self.abor_id:
             _dict['aborId'] = self.abor_id.to_dict()
@@ -164,6 +168,7 @@ class Fund(BaseModel):
             "id": ResourceId.from_dict(obj.get("id")) if obj.get("id") is not None else None,
             "display_name": obj.get("displayName"),
             "description": obj.get("description"),
+            "fund_configuration_id": ResourceId.from_dict(obj.get("fundConfigurationId")) if obj.get("fundConfigurationId") is not None else None,
             "abor_id": ResourceId.from_dict(obj.get("aborId")) if obj.get("aborId") is not None else None,
             "share_class_instruments": [InstrumentResolutionDetail.from_dict(_item) for _item in obj.get("shareClassInstruments")] if obj.get("shareClassInstruments") is not None else None,
             "type": obj.get("type"),

@@ -4,8 +4,7 @@
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**match_criteria** | **str** |  | 
-**components** | **Dict[str, str]** |  | [optional] 
+**components** | [**List[ComponentFilter]**](ComponentFilter.md) |  | [optional] 
 
 ## Example
 

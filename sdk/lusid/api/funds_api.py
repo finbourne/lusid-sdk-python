@@ -2750,7 +2750,7 @@ class FundsApi:
         }
 
         return self.api_client.call_api(
-            '/api/funds/{scope}/{code}/valuationpoints/$upsert', 'POST',
+            '/api/funds/{scope}/{code}/valuationpoints', 'POST',
             _path_params,
             _query_params,
             _header_params,

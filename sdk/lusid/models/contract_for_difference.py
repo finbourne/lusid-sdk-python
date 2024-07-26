@@ -35,9 +35,10 @@ class ContractForDifference(LusidInstrument):
     type: constr(strict=True, min_length=1) = Field(..., description="The type of CFD.    Supported string (enumeration) values are: [Cash, Futures].")
     underlying_ccy: StrictStr = Field(..., alias="underlyingCcy", description="The currency of the underlying")
     underlying_identifier: constr(strict=True, min_length=1) = Field(..., alias="underlyingIdentifier", description="External market codes and identifiers for the CFD, e.g. RIC.    Supported string (enumeration) values are: [LusidInstrumentId, Isin, Sedol, Cusip, ClientInternal, Figi, RIC, QuotePermId, REDCode, BBGId, ICECode].")
+    lot_size: Optional[StrictInt] = Field(None, alias="lotSize", description="CFD LotSize, the minimum number of shares that can be bought or sold at once.  Optional, if set must be non-negative, if not set defaults to 1.")
     instrument_type: StrictStr = Field(..., alias="instrumentType", description="The available values are: QuotedSecurity, InterestRateSwap, FxForward, Future, ExoticInstrument, FxOption, CreditDefaultSwap, InterestRateSwaption, Bond, EquityOption, FixedLeg, FloatingLeg, BespokeCashFlowsLeg, Unknown, TermDeposit, ContractForDifference, EquitySwap, CashPerpetual, CapFloor, CashSettled, CdsIndex, Basket, FundingLeg, FxSwap, ForwardRateAgreement, SimpleInstrument, Repo, Equity, ExchangeTradedOption, ReferenceInstrument, ComplexBond, InflationLinkedBond, InflationSwap, SimpleCashFlowLoan, TotalReturnSwap, InflationLeg, FundShareClass, FlexibleLoan, UnsettledCash, Cash")
     additional_properties: Dict[str, Any] = {}
-    __properties = ["instrumentType", "startDate", "maturityDate", "code", "contractSize", "payCcy", "referenceRate", "type", "underlyingCcy", "underlyingIdentifier"]
+    __properties = ["instrumentType", "startDate", "maturityDate", "code", "contractSize", "payCcy", "referenceRate", "type", "underlyingCcy", "underlyingIdentifier", "lotSize"]
 
     @validator('instrument_type')
     def instrument_type_validate_enum(cls, value):
@@ -97,7 +98,8 @@ class ContractForDifference(LusidInstrument):
             "reference_rate": obj.get("referenceRate"),
             "type": obj.get("type"),
             "underlying_ccy": obj.get("underlyingCcy"),
-            "underlying_identifier": obj.get("underlyingIdentifier")
+            "underlying_identifier": obj.get("underlyingIdentifier"),
+            "lot_size": obj.get("lotSize")
         })
         # store additional fields in additional_properties
         for _key in obj.keys():

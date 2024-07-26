@@ -29,6 +29,7 @@ from typing import Optional
 from lusid.models.compliance_rule_response import ComplianceRuleResponse
 from lusid.models.compliance_rule_result_v2 import ComplianceRuleResultV2
 from lusid.models.compliance_rule_template import ComplianceRuleTemplate
+from lusid.models.compliance_run_configuration import ComplianceRunConfiguration
 from lusid.models.compliance_run_info_v2 import ComplianceRunInfoV2
 from lusid.models.compliance_template import ComplianceTemplate
 from lusid.models.create_compliance_template_request import CreateComplianceTemplateRequest
@@ -1949,6 +1950,196 @@ class ComplianceApi:
 
         return self.api_client.call_api(
             '/api/compliance/runs', 'POST',
+            _path_params,
+            _query_params,
+            _header_params,
+            body=_body_params,
+            post_params=_form_params,
+            files=_files,
+            response_types_map=_response_types_map,
+            auth_settings=_auth_settings,
+            async_req=_params.get('async_req'),
+            _return_http_data_only=_params.get('_return_http_data_only'),  # noqa: E501
+            _preload_content=_params.get('_preload_content', True),
+            _request_timeout=_params.get('_request_timeout'),
+            collection_formats=_collection_formats,
+            _request_auth=_params.get('_request_auth'))
+
+    @overload
+    async def run_compliance_preview(self, run_scope : Annotated[constr(strict=True, max_length=64, min_length=1), Field(..., description="Required: Scope to save the run results in.")], rule_scope : Annotated[constr(strict=True, max_length=64, min_length=1), Field(..., description="Required: Scope from which to select rules to be run.")], recipe_id_scope : Annotated[constr(strict=True, max_length=64, min_length=1), Field(..., description="Required: the scope of the recipe to be used")], recipe_id_code : Annotated[constr(strict=True, max_length=64, min_length=1), Field(..., description="Required: The code of the recipe to be used. If left blank, the default recipe will be used.")], compliance_run_configuration : Annotated[Optional[ComplianceRunConfiguration], Field(description="Configuration options for the compliance run.")] = None, **kwargs) -> ComplianceRunInfoV2:  # noqa: E501
+        ...
+
+    @overload
+    def run_compliance_preview(self, run_scope : Annotated[constr(strict=True, max_length=64, min_length=1), Field(..., description="Required: Scope to save the run results in.")], rule_scope : Annotated[constr(strict=True, max_length=64, min_length=1), Field(..., description="Required: Scope from which to select rules to be run.")], recipe_id_scope : Annotated[constr(strict=True, max_length=64, min_length=1), Field(..., description="Required: the scope of the recipe to be used")], recipe_id_code : Annotated[constr(strict=True, max_length=64, min_length=1), Field(..., description="Required: The code of the recipe to be used. If left blank, the default recipe will be used.")], compliance_run_configuration : Annotated[Optional[ComplianceRunConfiguration], Field(description="Configuration options for the compliance run.")] = None, async_req: Optional[bool]=True, **kwargs) -> ComplianceRunInfoV2:  # noqa: E501
+        ...
+
+    @validate_arguments
+    def run_compliance_preview(self, run_scope : Annotated[constr(strict=True, max_length=64, min_length=1), Field(..., description="Required: Scope to save the run results in.")], rule_scope : Annotated[constr(strict=True, max_length=64, min_length=1), Field(..., description="Required: Scope from which to select rules to be run.")], recipe_id_scope : Annotated[constr(strict=True, max_length=64, min_length=1), Field(..., description="Required: the scope of the recipe to be used")], recipe_id_code : Annotated[constr(strict=True, max_length=64, min_length=1), Field(..., description="Required: The code of the recipe to be used. If left blank, the default recipe will be used.")], compliance_run_configuration : Annotated[Optional[ComplianceRunConfiguration], Field(description="Configuration options for the compliance run.")] = None, async_req: Optional[bool]=None, **kwargs) -> Union[ComplianceRunInfoV2, Awaitable[ComplianceRunInfoV2]]:  # noqa: E501
+        """[EARLY ACCESS] RunCompliancePreview: Run a compliance check.  # noqa: E501
+
+        Use this endpoint to run a compliance check using rules from a specific scope.  # noqa: E501
+        This method makes a synchronous HTTP request by default. To make an
+        asynchronous HTTP request, please pass async_req=True
+
+        >>> thread = api.run_compliance_preview(run_scope, rule_scope, recipe_id_scope, recipe_id_code, compliance_run_configuration, async_req=True)
+        >>> result = thread.get()
+
+        :param run_scope: Required: Scope to save the run results in. (required)
+        :type run_scope: str
+        :param rule_scope: Required: Scope from which to select rules to be run. (required)
+        :type rule_scope: str
+        :param recipe_id_scope: Required: the scope of the recipe to be used (required)
+        :type recipe_id_scope: str
+        :param recipe_id_code: Required: The code of the recipe to be used. If left blank, the default recipe will be used. (required)
+        :type recipe_id_code: str
+        :param compliance_run_configuration: Configuration options for the compliance run.
+        :type compliance_run_configuration: ComplianceRunConfiguration
+        :param async_req: Whether to execute the request asynchronously.
+        :type async_req: bool, optional
+        :param _request_timeout: timeout setting for this request.
+               If one number provided, it will be total request
+               timeout. It can also be a pair (tuple) of
+               (connection, read) timeouts.
+        :return: Returns the result object.
+                 If the method is called asynchronously,
+                 returns the request thread.
+        :rtype: ComplianceRunInfoV2
+        """
+        kwargs['_return_http_data_only'] = True
+        if '_preload_content' in kwargs:
+            message = "Error! Please call the run_compliance_preview_with_http_info method with `_preload_content` instead and obtain raw data from ApiResponse.raw_data"  # noqa: E501
+            raise ValueError(message)
+        if async_req is not None:
+            kwargs['async_req'] = async_req
+        return self.run_compliance_preview_with_http_info(run_scope, rule_scope, recipe_id_scope, recipe_id_code, compliance_run_configuration, **kwargs)  # noqa: E501
+
+    @validate_arguments
+    def run_compliance_preview_with_http_info(self, run_scope : Annotated[constr(strict=True, max_length=64, min_length=1), Field(..., description="Required: Scope to save the run results in.")], rule_scope : Annotated[constr(strict=True, max_length=64, min_length=1), Field(..., description="Required: Scope from which to select rules to be run.")], recipe_id_scope : Annotated[constr(strict=True, max_length=64, min_length=1), Field(..., description="Required: the scope of the recipe to be used")], recipe_id_code : Annotated[constr(strict=True, max_length=64, min_length=1), Field(..., description="Required: The code of the recipe to be used. If left blank, the default recipe will be used.")], compliance_run_configuration : Annotated[Optional[ComplianceRunConfiguration], Field(description="Configuration options for the compliance run.")] = None, **kwargs) -> ApiResponse:  # noqa: E501
+        """[EARLY ACCESS] RunCompliancePreview: Run a compliance check.  # noqa: E501
+
+        Use this endpoint to run a compliance check using rules from a specific scope.  # noqa: E501
+        This method makes a synchronous HTTP request by default. To make an
+        asynchronous HTTP request, please pass async_req=True
+
+        >>> thread = api.run_compliance_preview_with_http_info(run_scope, rule_scope, recipe_id_scope, recipe_id_code, compliance_run_configuration, async_req=True)
+        >>> result = thread.get()
+
+        :param run_scope: Required: Scope to save the run results in. (required)
+        :type run_scope: str
+        :param rule_scope: Required: Scope from which to select rules to be run. (required)
+        :type rule_scope: str
+        :param recipe_id_scope: Required: the scope of the recipe to be used (required)
+        :type recipe_id_scope: str
+        :param recipe_id_code: Required: The code of the recipe to be used. If left blank, the default recipe will be used. (required)
+        :type recipe_id_code: str
+        :param compliance_run_configuration: Configuration options for the compliance run.
+        :type compliance_run_configuration: ComplianceRunConfiguration
+        :param async_req: Whether to execute the request asynchronously.
+        :type async_req: bool, optional
+        :param _preload_content: if False, the ApiResponse.data will
+                                 be set to none and raw_data will store the
+                                 HTTP response body without reading/decoding.
+                                 Default is True.
+        :type _preload_content: bool, optional
+        :param _return_http_data_only: response data instead of ApiResponse
+                                       object with status code, headers, etc
+        :type _return_http_data_only: bool, optional
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :param _request_auth: set to override the auth_settings for an a single
+                              request; this effectively ignores the authentication
+                              in the spec for a single request.
+        :type _request_auth: dict, optional
+        :type _content_type: string, optional: force content-type for the request
+        :return: Returns the result object.
+                 If the method is called asynchronously,
+                 returns the request thread.
+        :rtype: tuple(ComplianceRunInfoV2, status_code(int), headers(HTTPHeaderDict))
+        """
+
+        _params = locals()
+
+        _all_params = [
+            'run_scope',
+            'rule_scope',
+            'recipe_id_scope',
+            'recipe_id_code',
+            'compliance_run_configuration'
+        ]
+        _all_params.extend(
+            [
+                'async_req',
+                '_return_http_data_only',
+                '_preload_content',
+                '_request_timeout',
+                '_request_auth',
+                '_content_type',
+                '_headers'
+            ]
+        )
+
+        # validate the arguments
+        for _key, _val in _params['kwargs'].items():
+            if _key not in _all_params:
+                raise ApiTypeError(
+                    "Got an unexpected keyword argument '%s'"
+                    " to method run_compliance_preview" % _key
+                )
+            _params[_key] = _val
+        del _params['kwargs']
+
+        _collection_formats = {}
+
+        # process the path parameters
+        _path_params = {}
+
+        # process the query parameters
+        _query_params = []
+        if _params.get('run_scope') is not None:  # noqa: E501
+            _query_params.append(('runScope', _params['run_scope']))
+
+        if _params.get('rule_scope') is not None:  # noqa: E501
+            _query_params.append(('ruleScope', _params['rule_scope']))
+
+        if _params.get('recipe_id_scope') is not None:  # noqa: E501
+            _query_params.append(('recipeIdScope', _params['recipe_id_scope']))
+
+        if _params.get('recipe_id_code') is not None:  # noqa: E501
+            _query_params.append(('recipeIdCode', _params['recipe_id_code']))
+
+        # process the header parameters
+        _header_params = dict(_params.get('_headers', {}))
+        # process the form parameters
+        _form_params = []
+        _files = {}
+        # process the body parameter
+        _body_params = None
+        if _params['compliance_run_configuration'] is not None:
+            _body_params = _params['compliance_run_configuration']
+
+        # set the HTTP header `Accept`
+        _header_params['Accept'] = self.api_client.select_header_accept(
+            ['text/plain', 'application/json', 'text/json'])  # noqa: E501
+
+        # set the HTTP header `Content-Type`
+        _content_types_list = _params.get('_content_type',
+            self.api_client.select_header_content_type(
+                ['application/json-patch+json', 'application/json', 'text/json', 'application/*+json']))
+        if _content_types_list:
+                _header_params['Content-Type'] = _content_types_list
+
+        # authentication setting
+        _auth_settings = ['oauth2']  # noqa: E501
+
+        _response_types_map = {
+            '200': "ComplianceRunInfoV2",
+            '400': "LusidValidationProblemDetails",
+        }
+
+        return self.api_client.call_api(
+            '/api/compliance/preview/runs', 'POST',
             _path_params,
             _query_params,
             _header_params,

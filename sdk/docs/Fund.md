@@ -9,6 +9,7 @@ Name | Type | Description | Notes
 **id** | [**ResourceId**](ResourceId.md) |  | 
 **display_name** | **str** | The name of the Fund. | [optional] 
 **description** | **str** | A description for the Fund. | [optional] 
+**fund_configuration_id** | [**ResourceId**](ResourceId.md) |  | [optional] 
 **abor_id** | [**ResourceId**](ResourceId.md) |  | 
 **share_class_instruments** | [**List[InstrumentResolutionDetail]**](InstrumentResolutionDetail.md) | Details the user-provided instrument identifiers and the instrument resolved from them. | [optional] 
 **type** | **str** | The type of fund; &#39;Standalone&#39;, &#39;Master&#39; or &#39;Feeder&#39; | 

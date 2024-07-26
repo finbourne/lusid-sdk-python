@@ -43,6 +43,9 @@ class QuoteType(str, Enum):
     POOLFACTOR = 'PoolFactor'
     INFLATIONASSUMPTION = 'InflationAssumption'
     DIRTYPRICE = 'DirtyPrice'
+    PRINCIPALWRITEOFF = 'PrincipalWriteOff'
+    INTERESTDEFERRED = 'InterestDeferred'
+    INTERESTSHORTFALL = 'InterestShortfall'
 
     @classmethod
     def from_json(cls, json_str: str) -> QuoteType:

@@ -18,23 +18,16 @@ import re  # noqa: F401
 import json
 
 
-from typing import Any, Dict, Optional
-from pydantic.v1 import BaseModel, Field, StrictStr, constr, validator
+from typing import Any, Dict, List, Optional
+from pydantic.v1 import BaseModel, conlist
+from lusid.models.component_filter import ComponentFilter
 
 class ComponentRule(BaseModel):
     """
     ComponentRule
     """
-    match_criteria: constr(strict=True, max_length=16384, min_length=1) = Field(..., alias="matchCriteria")
-    components: Optional[Dict[str, StrictStr]] = None
-    __properties = ["matchCriteria", "components"]
-
-    @validator('match_criteria')
-    def match_criteria_validate_regular_expression(cls, value):
-        """Validates the regular expression"""
-        if not re.match(r"^[\s\S]*$", value):
-            raise ValueError(r"must validate the regular expression /^[\s\S]*$/")
-        return value
+    components: Optional[conlist(ComponentFilter)] = None
+    __properties = ["components"]
 
     class Config:
         """Pydantic configuration"""
@@ -60,11 +53,13 @@ class ComponentRule(BaseModel):
                           exclude={
                           },
                           exclude_none=True)
-        # set to None if components (nullable) is None
-        # and __fields_set__ contains the field
-        if self.components is None and "components" in self.__fields_set__:
-            _dict['components'] = None
-
+        # override the default output from pydantic by calling `to_dict()` of each item in components (list)
+        _items = []
+        if self.components:
+            for _item in self.components:
+                if _item:
+                    _items.append(_item.to_dict())
+            _dict['components'] = _items
         return _dict
 
     @classmethod
@@ -77,7 +72,6 @@ class ComponentRule(BaseModel):
             return ComponentRule.parse_obj(obj)
 
         _obj = ComponentRule.parse_obj({
-            "match_criteria": obj.get("matchCriteria"),
-            "components": obj.get("components")
+            "components": [ComponentFilter.from_dict(_item) for _item in obj.get("components")] if obj.get("components") is not None else None
         })
         return _obj

@@ -44,8 +44,9 @@ class StagedModification(BaseModel):
     entity_unique_id: Optional[StrictStr] = Field(None, alias="entityUniqueId", description="The unique Id of the entity the staged modification applies to.")
     requested_changes: Optional[RequestedChanges] = Field(None, alias="requestedChanges")
     entity_hrefs: Optional[StagedModificationsEntityHrefs] = Field(None, alias="entityHrefs")
+    display_name: Optional[StrictStr] = Field(None, alias="displayName", description="The display name of the entity the staged modification applies to.")
     links: Optional[conlist(Link)] = None
-    __properties = ["id", "asAtStaged", "userIdStaged", "requestedIdStaged", "action", "stagingRule", "decisions", "decisionsCount", "status", "entityType", "scope", "entityUniqueId", "requestedChanges", "entityHrefs", "links"]
+    __properties = ["id", "asAtStaged", "userIdStaged", "requestedIdStaged", "action", "stagingRule", "decisions", "decisionsCount", "status", "entityType", "scope", "entityUniqueId", "requestedChanges", "entityHrefs", "displayName", "links"]
 
     class Config:
         """Pydantic configuration"""
@@ -139,6 +140,11 @@ class StagedModification(BaseModel):
         if self.entity_unique_id is None and "entity_unique_id" in self.__fields_set__:
             _dict['entityUniqueId'] = None
 
+        # set to None if display_name (nullable) is None
+        # and __fields_set__ contains the field
+        if self.display_name is None and "display_name" in self.__fields_set__:
+            _dict['displayName'] = None
+
         # set to None if links (nullable) is None
         # and __fields_set__ contains the field
         if self.links is None and "links" in self.__fields_set__:
@@ -170,6 +176,7 @@ class StagedModification(BaseModel):
             "entity_unique_id": obj.get("entityUniqueId"),
             "requested_changes": RequestedChanges.from_dict(obj.get("requestedChanges")) if obj.get("requestedChanges") is not None else None,
             "entity_hrefs": StagedModificationsEntityHrefs.from_dict(obj.get("entityHrefs")) if obj.get("entityHrefs") is not None else None,
+            "display_name": obj.get("displayName"),
             "links": [Link.from_dict(_item) for _item in obj.get("links")] if obj.get("links") is not None else None
         })
         return _obj

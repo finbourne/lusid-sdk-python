@@ -34,11 +34,13 @@ class FundConfiguration(BaseModel):
     id: ResourceId = Field(...)
     display_name: Optional[StrictStr] = Field(None, alias="displayName", description="The name of the FundConfiguration.")
     description: Optional[StrictStr] = Field(None, description="A description for the FundConfiguration.")
-    component_rules: Optional[conlist(ComponentRule)] = Field(None, alias="componentRules", description="The first matching rule decides the set of filters used.")
+    dealing_rule: Optional[ComponentRule] = Field(None, alias="dealingRule")
+    fund_pnl_rule: Optional[ComponentRule] = Field(None, alias="fundPnlRule")
+    back_out_rule: Optional[ComponentRule] = Field(None, alias="backOutRule")
     properties: Optional[Dict[str, ModelProperty]] = Field(None, description="A set of properties for the Fund Configuration.")
     version: Optional[Version] = None
     links: Optional[conlist(Link)] = None
-    __properties = ["href", "id", "displayName", "description", "componentRules", "properties", "version", "links"]
+    __properties = ["href", "id", "displayName", "description", "dealingRule", "fundPnlRule", "backOutRule", "properties", "version", "links"]
 
     class Config:
         """Pydantic configuration"""
@@ -67,13 +69,15 @@ class FundConfiguration(BaseModel):
         # override the default output from pydantic by calling `to_dict()` of id
         if self.id:
             _dict['id'] = self.id.to_dict()
-        # override the default output from pydantic by calling `to_dict()` of each item in component_rules (list)
-        _items = []
-        if self.component_rules:
-            for _item in self.component_rules:
-                if _item:
-                    _items.append(_item.to_dict())
-            _dict['componentRules'] = _items
+        # override the default output from pydantic by calling `to_dict()` of dealing_rule
+        if self.dealing_rule:
+            _dict['dealingRule'] = self.dealing_rule.to_dict()
+        # override the default output from pydantic by calling `to_dict()` of fund_pnl_rule
+        if self.fund_pnl_rule:
+            _dict['fundPnlRule'] = self.fund_pnl_rule.to_dict()
+        # override the default output from pydantic by calling `to_dict()` of back_out_rule
+        if self.back_out_rule:
+            _dict['backOutRule'] = self.back_out_rule.to_dict()
         # override the default output from pydantic by calling `to_dict()` of each value in properties (dict)
         _field_dict = {}
         if self.properties:
@@ -106,11 +110,6 @@ class FundConfiguration(BaseModel):
         if self.description is None and "description" in self.__fields_set__:
             _dict['description'] = None
 
-        # set to None if component_rules (nullable) is None
-        # and __fields_set__ contains the field
-        if self.component_rules is None and "component_rules" in self.__fields_set__:
-            _dict['componentRules'] = None
-
         # set to None if properties (nullable) is None
         # and __fields_set__ contains the field
         if self.properties is None and "properties" in self.__fields_set__:
@@ -137,7 +136,9 @@ class FundConfiguration(BaseModel):
             "id": ResourceId.from_dict(obj.get("id")) if obj.get("id") is not None else None,
             "display_name": obj.get("displayName"),
             "description": obj.get("description"),
-            "component_rules": [ComponentRule.from_dict(_item) for _item in obj.get("componentRules")] if obj.get("componentRules") is not None else None,
+            "dealing_rule": ComponentRule.from_dict(obj.get("dealingRule")) if obj.get("dealingRule") is not None else None,
+            "fund_pnl_rule": ComponentRule.from_dict(obj.get("fundPnlRule")) if obj.get("fundPnlRule") is not None else None,
+            "back_out_rule": ComponentRule.from_dict(obj.get("backOutRule")) if obj.get("backOutRule") is not None else None,
             "properties": dict(
                 (_k, ModelProperty.from_dict(_v))
                 for _k, _v in obj.get("properties").items()

@@ -71,7 +71,7 @@ async with api_client_factory:
     # Create an instance of the API class
     api_instance = api_client_factory.build(lusid.FundConfigurationsApi)
     scope = 'scope_example' # str | The scope of the FundConfiguration.
-    fund_configuration_request = {"code":"FundConfigurationCode","displayName":"My Fund Configuration","description":"Standard Fund Configuration","componentRules":[{"matchCriteria":"ShareClassLabel-MatchCriteria","components":{"RED":"account startswith '3002'","SUB":"account startswith '3001'"}}],"properties":{"FundConfiguration/MyScope/FundManagerName":{"key":"FundConfiguration/MyScope/FundManagerName","value":{"labelValue":"Smith"},"effectiveFrom":"2020-03-05T00:00:00.0000000+00:00"}}} # FundConfigurationRequest | The definition of the FundConfiguration.
+    fund_configuration_request = {"code":"FundConfigurationCode","displayName":"My Fund Configuration","description":"Standard Fund Configuration","dealingRule":{"components":[{"filterId":"SUB","filter":"account startswith 3001"},{"filterId":"RED","filter":"account startswith 3002"}]},"fundPnlRule":{"components":[{"filterId":"SUB","filter":"account startswith 3001"},{"filterId":"RED","filter":"account startswith 3002"}]},"backOutRule":{"components":[{"filterId":"SUB","filter":"account startswith 3001"},{"filterId":"RED","filter":"account startswith 3002"}]},"properties":{"FundConfiguration/MyScope/FundManagerName":{"key":"FundConfiguration/MyScope/FundManagerName","value":{"labelValue":"Smith"},"effectiveFrom":"2020-03-05T00:00:00.0000000+00:00"}}} # FundConfigurationRequest | The definition of the FundConfiguration.
 
     try:
         # [EXPERIMENTAL] CreateFundConfiguration: Create a FundConfiguration.

@@ -32,6 +32,7 @@ class FundRequest(BaseModel):
     code: constr(strict=True, max_length=64, min_length=1) = Field(..., description="The code given for the Fund.")
     display_name: Optional[constr(strict=True, max_length=256, min_length=1)] = Field(None, alias="displayName", description="The name of the Fund.")
     description: Optional[constr(strict=True, max_length=1024, min_length=0)] = Field(None, description="A description for the Fund.")
+    fund_configuration_id: Optional[ResourceId] = Field(None, alias="fundConfigurationId")
     abor_id: ResourceId = Field(..., alias="aborId")
     share_class_instrument_scopes: Optional[conlist(StrictStr, max_items=1)] = Field(None, alias="shareClassInstrumentScopes", description="The scopes in which the instruments lie, currently limited to one.")
     share_class_instruments: Optional[conlist(InstrumentResolutionDetail)] = Field(None, alias="shareClassInstruments", description="Details the user-provided instrument identifiers and the instrument resolved from them.")
@@ -40,7 +41,7 @@ class FundRequest(BaseModel):
     decimal_places: Optional[conint(strict=True, le=30, ge=0)] = Field(None, alias="decimalPlaces", description="Number of decimal places for reporting")
     year_end_date: DayMonth = Field(..., alias="yearEndDate")
     properties: Optional[Dict[str, ModelProperty]] = Field(None, description="A set of properties for the Fund.")
-    __properties = ["code", "displayName", "description", "aborId", "shareClassInstrumentScopes", "shareClassInstruments", "type", "inceptionDate", "decimalPlaces", "yearEndDate", "properties"]
+    __properties = ["code", "displayName", "description", "fundConfigurationId", "aborId", "shareClassInstrumentScopes", "shareClassInstruments", "type", "inceptionDate", "decimalPlaces", "yearEndDate", "properties"]
 
     @validator('code')
     def code_validate_regular_expression(cls, value):
@@ -83,6 +84,9 @@ class FundRequest(BaseModel):
                           exclude={
                           },
                           exclude_none=True)
+        # override the default output from pydantic by calling `to_dict()` of fund_configuration_id
+        if self.fund_configuration_id:
+            _dict['fundConfigurationId'] = self.fund_configuration_id.to_dict()
         # override the default output from pydantic by calling `to_dict()` of abor_id
         if self.abor_id:
             _dict['aborId'] = self.abor_id.to_dict()
@@ -148,6 +152,7 @@ class FundRequest(BaseModel):
             "code": obj.get("code"),
             "display_name": obj.get("displayName"),
             "description": obj.get("description"),
+            "fund_configuration_id": ResourceId.from_dict(obj.get("fundConfigurationId")) if obj.get("fundConfigurationId") is not None else None,
             "abor_id": ResourceId.from_dict(obj.get("aborId")) if obj.get("aborId") is not None else None,
             "share_class_instrument_scopes": obj.get("shareClassInstrumentScopes"),
             "share_class_instruments": [InstrumentResolutionDetail.from_dict(_item) for _item in obj.get("shareClassInstruments")] if obj.get("shareClassInstruments") is not None else None,

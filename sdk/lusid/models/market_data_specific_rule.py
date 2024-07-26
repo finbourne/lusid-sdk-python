@@ -29,7 +29,7 @@ class MarketDataSpecificRule(BaseModel):
     key: constr(strict=True, max_length=128, min_length=0) = Field(..., description="The market data key pattern which this is a rule for. A dot separated string (A.B.C.D.*)")
     supplier: constr(strict=True, max_length=32, min_length=0) = Field(..., description="The market data supplier (where the data comes from)")
     data_scope: constr(strict=True, max_length=256, min_length=1) = Field(..., alias="dataScope", description="The scope in which the data should be found when using this rule.")
-    quote_type: StrictStr = Field(..., alias="quoteType", description="The available values are: Price, Spread, Rate, LogNormalVol, NormalVol, ParSpread, IsdaSpread, Upfront, Index, Ratio, Delta, PoolFactor, InflationAssumption, DirtyPrice")
+    quote_type: StrictStr = Field(..., alias="quoteType", description="The available values are: Price, Spread, Rate, LogNormalVol, NormalVol, ParSpread, IsdaSpread, Upfront, Index, Ratio, Delta, PoolFactor, InflationAssumption, DirtyPrice, PrincipalWriteOff, InterestDeferred, InterestShortfall")
     field: constr(strict=True, max_length=32, min_length=0) = Field(..., description="The conceptual qualification for the field, such as bid, mid, or ask.  The field must be one of a defined set for the given supplier, in the same way as it  is for the Finbourne.WebApi.Interface.Dto.Quotes.QuoteSeriesId")
     quote_interval: Optional[constr(strict=True, max_length=16, min_length=0)] = Field(None, alias="quoteInterval", description="Shorthand for the time interval used to select market data. This must be a dot-separated string              nominating a start and end date, for example '5D.0D' to look back 5 days from today (0 days ago). The syntax              is <i>int</i><i>char</i>.<i>int</i><i>char</i>, where <i>char</i> is one of D(ay), W(eek), M(onth) or Y(ear).")
     as_at: Optional[datetime] = Field(None, alias="asAt", description="The AsAt predicate specification.")
@@ -49,8 +49,8 @@ class MarketDataSpecificRule(BaseModel):
     @validator('quote_type')
     def quote_type_validate_enum(cls, value):
         """Validates the enum"""
-        if value not in ('Price', 'Spread', 'Rate', 'LogNormalVol', 'NormalVol', 'ParSpread', 'IsdaSpread', 'Upfront', 'Index', 'Ratio', 'Delta', 'PoolFactor', 'InflationAssumption', 'DirtyPrice'):
-            raise ValueError("must be one of enum values ('Price', 'Spread', 'Rate', 'LogNormalVol', 'NormalVol', 'ParSpread', 'IsdaSpread', 'Upfront', 'Index', 'Ratio', 'Delta', 'PoolFactor', 'InflationAssumption', 'DirtyPrice')")
+        if value not in ('Price', 'Spread', 'Rate', 'LogNormalVol', 'NormalVol', 'ParSpread', 'IsdaSpread', 'Upfront', 'Index', 'Ratio', 'Delta', 'PoolFactor', 'InflationAssumption', 'DirtyPrice', 'PrincipalWriteOff', 'InterestDeferred', 'InterestShortfall'):
+            raise ValueError("must be one of enum values ('Price', 'Spread', 'Rate', 'LogNormalVol', 'NormalVol', 'ParSpread', 'IsdaSpread', 'Upfront', 'Index', 'Ratio', 'Delta', 'PoolFactor', 'InflationAssumption', 'DirtyPrice', 'PrincipalWriteOff', 'InterestDeferred', 'InterestShortfall')")
         return value
 
     class Config:

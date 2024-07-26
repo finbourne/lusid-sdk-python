@@ -28,17 +28,14 @@ class QuoteSeriesId(BaseModel):
     provider: constr(strict=True, min_length=1) = Field(..., description="The platform or vendor that provided the quote. The available values are: Client, DataScope, Lusid, Edi, TraderMade, FactSet, SIX, Bloomberg, Rimes, ICE")
     price_source: Optional[StrictStr] = Field(None, alias="priceSource", description="The source or originator of the quote, e.g. a bank or financial institution.")
     instrument_id: constr(strict=True, min_length=1) = Field(..., alias="instrumentId", description="The value of the instrument identifier that uniquely identifies the instrument that the quote is for, e.g. 'BBG00JX0P539'.")
-    instrument_id_type: Optional[StrictStr] = Field(..., alias="instrumentIdType", description="The type of instrument identifier used to uniquely identify the instrument that the quote is for, e.g. 'Figi'. The available values are: LusidInstrumentId, Figi, RIC, QuotePermId, Isin, CurrencyPair, ClientInternal, Sedol, Cusip")
-    quote_type: Optional[StrictStr] = Field(..., alias="quoteType", description="The type of the quote. This allows for quotes other than prices e.g. rates or spreads to be used. The available values are: Price, Spread, Rate, LogNormalVol, NormalVol, ParSpread, IsdaSpread, Upfront, Index, Ratio, Delta, PoolFactor, InflationAssumption, DirtyPrice")
+    instrument_id_type: StrictStr = Field(..., alias="instrumentIdType", description="The type of instrument identifier used to uniquely identify the instrument that the quote is for, e.g. 'Figi'. The available values are: LusidInstrumentId, Figi, RIC, QuotePermId, Isin, CurrencyPair, ClientInternal, Sedol, Cusip")
+    quote_type: StrictStr = Field(..., alias="quoteType", description="The type of the quote. This allows for quotes other than prices e.g. rates or spreads to be used. The available values are: Price, Spread, Rate, LogNormalVol, NormalVol, ParSpread, IsdaSpread, Upfront, Index, Ratio, Delta, PoolFactor, InflationAssumption, DirtyPrice, PrincipalWriteOff, InterestDeferred, InterestShortfall")
     field: constr(strict=True, min_length=1) = Field(..., description="The field of the quote e.g. bid, mid, ask etc. This should be consistent across a time series of quotes. The allowed values depend on the provider according to the following rules: Client : *Any value is accepted*; DataScope : 'bid', 'mid', 'ask'; Lusid : *Any value is accepted*; Edi : 'bid', 'mid', 'ask', 'open', 'close', 'last'; TraderMade : 'bid', 'mid', 'ask', 'open', 'close', 'high', 'low'; FactSet : 'bid', 'mid', 'ask', 'open', 'close'; SIX : 'bid', 'mid', 'ask', 'open', 'close', 'last', 'referencePrice', 'highPrice', 'lowPrice', 'maxRedemptionPrice', 'maxSubscriptionPrice', 'openPrice', 'bestBidPrice', 'lastBidPrice', 'bestAskPrice', 'lastAskPrice'; Bloomberg : 'bid', 'mid', 'ask', 'open', 'close', 'last'; Rimes : 'bid', 'mid', 'ask', 'open', 'close', 'last'; ICE : 'ask', 'bid'")
     __properties = ["provider", "priceSource", "instrumentId", "instrumentIdType", "quoteType", "field"]
 
     @validator('instrument_id_type')
     def instrument_id_type_validate_enum(cls, value):
         """Validates the enum"""
-        if value is None:
-            return value
-
         if value not in ('LusidInstrumentId', 'Figi', 'RIC', 'QuotePermId', 'Isin', 'CurrencyPair', 'ClientInternal', 'Sedol', 'Cusip'):
             raise ValueError("must be one of enum values ('LusidInstrumentId', 'Figi', 'RIC', 'QuotePermId', 'Isin', 'CurrencyPair', 'ClientInternal', 'Sedol', 'Cusip')")
         return value
@@ -46,11 +43,8 @@ class QuoteSeriesId(BaseModel):
     @validator('quote_type')
     def quote_type_validate_enum(cls, value):
         """Validates the enum"""
-        if value is None:
-            return value
-
-        if value not in ('Price', 'Spread', 'Rate', 'LogNormalVol', 'NormalVol', 'ParSpread', 'IsdaSpread', 'Upfront', 'Index', 'Ratio', 'Delta', 'PoolFactor', 'InflationAssumption', 'DirtyPrice'):
-            raise ValueError("must be one of enum values ('Price', 'Spread', 'Rate', 'LogNormalVol', 'NormalVol', 'ParSpread', 'IsdaSpread', 'Upfront', 'Index', 'Ratio', 'Delta', 'PoolFactor', 'InflationAssumption', 'DirtyPrice')")
+        if value not in ('Price', 'Spread', 'Rate', 'LogNormalVol', 'NormalVol', 'ParSpread', 'IsdaSpread', 'Upfront', 'Index', 'Ratio', 'Delta', 'PoolFactor', 'InflationAssumption', 'DirtyPrice', 'PrincipalWriteOff', 'InterestDeferred', 'InterestShortfall'):
+            raise ValueError("must be one of enum values ('Price', 'Spread', 'Rate', 'LogNormalVol', 'NormalVol', 'ParSpread', 'IsdaSpread', 'Upfront', 'Index', 'Ratio', 'Delta', 'PoolFactor', 'InflationAssumption', 'DirtyPrice', 'PrincipalWriteOff', 'InterestDeferred', 'InterestShortfall')")
         return value
 
     class Config:
@@ -81,16 +75,6 @@ class QuoteSeriesId(BaseModel):
         # and __fields_set__ contains the field
         if self.price_source is None and "price_source" in self.__fields_set__:
             _dict['priceSource'] = None
-
-        # set to None if instrument_id_type (nullable) is None
-        # and __fields_set__ contains the field
-        if self.instrument_id_type is None and "instrument_id_type" in self.__fields_set__:
-            _dict['instrumentIdType'] = None
-
-        # set to None if quote_type (nullable) is None
-        # and __fields_set__ contains the field
-        if self.quote_type is None and "quote_type" in self.__fields_set__:
-            _dict['quoteType'] = None
 
         return _dict
 

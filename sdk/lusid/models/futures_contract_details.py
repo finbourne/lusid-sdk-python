@@ -39,7 +39,8 @@ class FuturesContractDetails(BaseModel):
     ticker_step: Optional[Union[StrictFloat, StrictInt]] = Field(None, alias="tickerStep", description="Minimal step size change in ticker.")
     unit_value: Optional[Union[StrictFloat, StrictInt]] = Field(None, alias="unitValue", description="The value in the currency of a 1 unit change in the contract price.")
     calendars: Optional[conlist(StrictStr)] = Field(None, description="Holiday calendars that apply to yield-to-price conversions (i.e. for BRL futures).")
-    __properties = ["domCcy", "fgnCcy", "assetClass", "contractCode", "contractMonth", "contractSize", "convention", "country", "description", "exchangeCode", "exchangeName", "tickerStep", "unitValue", "calendars"]
+    delivery_type: Optional[StrictStr] = Field(None, alias="deliveryType", description="Delivery type to be used on settling the contract.  Optional: Defaults to DeliveryType.Physical if not provided.    Supported string (enumeration) values are: [Cash, Physical].")
+    __properties = ["domCcy", "fgnCcy", "assetClass", "contractCode", "contractMonth", "contractSize", "convention", "country", "description", "exchangeCode", "exchangeName", "tickerStep", "unitValue", "calendars", "deliveryType"]
 
     class Config:
         """Pydantic configuration"""
@@ -100,6 +101,11 @@ class FuturesContractDetails(BaseModel):
         if self.calendars is None and "calendars" in self.__fields_set__:
             _dict['calendars'] = None
 
+        # set to None if delivery_type (nullable) is None
+        # and __fields_set__ contains the field
+        if self.delivery_type is None and "delivery_type" in self.__fields_set__:
+            _dict['deliveryType'] = None
+
         return _dict
 
     @classmethod
@@ -125,6 +131,7 @@ class FuturesContractDetails(BaseModel):
             "exchange_name": obj.get("exchangeName"),
             "ticker_step": obj.get("tickerStep"),
             "unit_value": obj.get("unitValue"),
-            "calendars": obj.get("calendars")
+            "calendars": obj.get("calendars"),
+            "delivery_type": obj.get("deliveryType")
         })
         return _obj
