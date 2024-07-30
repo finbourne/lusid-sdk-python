@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "lusid-sdk"
-version = "2.1.297"
+version = "2.1.303"
 description = "LUSID API"
 authors = ["FINBOURNE Technology <info@finbourne.com>"]
 license = "MIT"
@@ -27,6 +27,7 @@ pytest = "^7.2.1"
 pytest-asyncio = "^0"
 flake8 = "^4.0.0"
 black = "^23.9.1"
+xeger = "^0.4"
 
 [build-system]
 requires = ["setuptools"]
