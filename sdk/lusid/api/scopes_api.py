@@ -20,7 +20,9 @@ from pydantic.v1 import validate_arguments, ValidationError
 from typing import overload, Optional, Union, Awaitable
 
 from typing_extensions import Annotated
-from pydantic.v1 import Field, constr, validator
+from datetime import datetime
+
+from pydantic.v1 import Field, conint, constr, validator
 
 from typing import Optional
 
@@ -47,26 +49,32 @@ class ScopesApi:
         self.api_client = api_client
 
     @overload
-    async def list_entity_scopes(self, entity_type : Annotated[constr(strict=True, max_length=100, min_length=0), Field(..., description="The entity type to list scopes for.")], **kwargs) -> ResourceListOfScopeDefinition:  # noqa: E501
+    async def list_entity_scopes(self, entity_type : Annotated[constr(strict=True, max_length=100, min_length=0), Field(..., description="The entity type to list scopes for.")], as_at : Annotated[Optional[datetime], Field(description="The asAt datetime at which to retrieve scopes. Defaults to latest datetime if not specified.")] = None, page : Annotated[Optional[constr(strict=True, max_length=500, min_length=1)], Field(description="The pagination token to use to continue listing scopes from a previous call to list scopes.              This value is returned from the previous call. If a pagination token is provided, the limit and asAt fields              must not have changed since the original request.")] = None, limit : Annotated[Optional[conint(strict=True, le=5000, ge=1)], Field(description="When paginating, limit the number of returned results to this number. Defaults to 100 if not specified.")] = None, **kwargs) -> ResourceListOfScopeDefinition:  # noqa: E501
         ...
 
     @overload
-    def list_entity_scopes(self, entity_type : Annotated[constr(strict=True, max_length=100, min_length=0), Field(..., description="The entity type to list scopes for.")], async_req: Optional[bool]=True, **kwargs) -> ResourceListOfScopeDefinition:  # noqa: E501
+    def list_entity_scopes(self, entity_type : Annotated[constr(strict=True, max_length=100, min_length=0), Field(..., description="The entity type to list scopes for.")], as_at : Annotated[Optional[datetime], Field(description="The asAt datetime at which to retrieve scopes. Defaults to latest datetime if not specified.")] = None, page : Annotated[Optional[constr(strict=True, max_length=500, min_length=1)], Field(description="The pagination token to use to continue listing scopes from a previous call to list scopes.              This value is returned from the previous call. If a pagination token is provided, the limit and asAt fields              must not have changed since the original request.")] = None, limit : Annotated[Optional[conint(strict=True, le=5000, ge=1)], Field(description="When paginating, limit the number of returned results to this number. Defaults to 100 if not specified.")] = None, async_req: Optional[bool]=True, **kwargs) -> ResourceListOfScopeDefinition:  # noqa: E501
         ...
 
     @validate_arguments
-    def list_entity_scopes(self, entity_type : Annotated[constr(strict=True, max_length=100, min_length=0), Field(..., description="The entity type to list scopes for.")], async_req: Optional[bool]=None, **kwargs) -> Union[ResourceListOfScopeDefinition, Awaitable[ResourceListOfScopeDefinition]]:  # noqa: E501
+    def list_entity_scopes(self, entity_type : Annotated[constr(strict=True, max_length=100, min_length=0), Field(..., description="The entity type to list scopes for.")], as_at : Annotated[Optional[datetime], Field(description="The asAt datetime at which to retrieve scopes. Defaults to latest datetime if not specified.")] = None, page : Annotated[Optional[constr(strict=True, max_length=500, min_length=1)], Field(description="The pagination token to use to continue listing scopes from a previous call to list scopes.              This value is returned from the previous call. If a pagination token is provided, the limit and asAt fields              must not have changed since the original request.")] = None, limit : Annotated[Optional[conint(strict=True, le=5000, ge=1)], Field(description="When paginating, limit the number of returned results to this number. Defaults to 100 if not specified.")] = None, async_req: Optional[bool]=None, **kwargs) -> Union[ResourceListOfScopeDefinition, Awaitable[ResourceListOfScopeDefinition]]:  # noqa: E501
         """ListEntityScopes: List Entity Scopes  # noqa: E501
 
         List all the scopes for a given entity type that contain data.  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
 
-        >>> thread = api.list_entity_scopes(entity_type, async_req=True)
+        >>> thread = api.list_entity_scopes(entity_type, as_at, page, limit, async_req=True)
         >>> result = thread.get()
 
         :param entity_type: The entity type to list scopes for. (required)
         :type entity_type: str
+        :param as_at: The asAt datetime at which to retrieve scopes. Defaults to latest datetime if not specified.
+        :type as_at: datetime
+        :param page: The pagination token to use to continue listing scopes from a previous call to list scopes.              This value is returned from the previous call. If a pagination token is provided, the limit and asAt fields              must not have changed since the original request.
+        :type page: str
+        :param limit: When paginating, limit the number of returned results to this number. Defaults to 100 if not specified.
+        :type limit: int
         :param async_req: Whether to execute the request asynchronously.
         :type async_req: bool, optional
         :param _request_timeout: timeout setting for this request.
@@ -84,21 +92,27 @@ class ScopesApi:
             raise ValueError(message)
         if async_req is not None:
             kwargs['async_req'] = async_req
-        return self.list_entity_scopes_with_http_info(entity_type, **kwargs)  # noqa: E501
+        return self.list_entity_scopes_with_http_info(entity_type, as_at, page, limit, **kwargs)  # noqa: E501
 
     @validate_arguments
-    def list_entity_scopes_with_http_info(self, entity_type : Annotated[constr(strict=True, max_length=100, min_length=0), Field(..., description="The entity type to list scopes for.")], **kwargs) -> ApiResponse:  # noqa: E501
+    def list_entity_scopes_with_http_info(self, entity_type : Annotated[constr(strict=True, max_length=100, min_length=0), Field(..., description="The entity type to list scopes for.")], as_at : Annotated[Optional[datetime], Field(description="The asAt datetime at which to retrieve scopes. Defaults to latest datetime if not specified.")] = None, page : Annotated[Optional[constr(strict=True, max_length=500, min_length=1)], Field(description="The pagination token to use to continue listing scopes from a previous call to list scopes.              This value is returned from the previous call. If a pagination token is provided, the limit and asAt fields              must not have changed since the original request.")] = None, limit : Annotated[Optional[conint(strict=True, le=5000, ge=1)], Field(description="When paginating, limit the number of returned results to this number. Defaults to 100 if not specified.")] = None, **kwargs) -> ApiResponse:  # noqa: E501
         """ListEntityScopes: List Entity Scopes  # noqa: E501
 
         List all the scopes for a given entity type that contain data.  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
 
-        >>> thread = api.list_entity_scopes_with_http_info(entity_type, async_req=True)
+        >>> thread = api.list_entity_scopes_with_http_info(entity_type, as_at, page, limit, async_req=True)
         >>> result = thread.get()
 
         :param entity_type: The entity type to list scopes for. (required)
         :type entity_type: str
+        :param as_at: The asAt datetime at which to retrieve scopes. Defaults to latest datetime if not specified.
+        :type as_at: datetime
+        :param page: The pagination token to use to continue listing scopes from a previous call to list scopes.              This value is returned from the previous call. If a pagination token is provided, the limit and asAt fields              must not have changed since the original request.
+        :type page: str
+        :param limit: When paginating, limit the number of returned results to this number. Defaults to 100 if not specified.
+        :type limit: int
         :param async_req: Whether to execute the request asynchronously.
         :type async_req: bool, optional
         :param _preload_content: if False, the ApiResponse.data will
@@ -127,7 +141,10 @@ class ScopesApi:
         _params = locals()
 
         _all_params = [
-            'entity_type'
+            'entity_type',
+            'as_at',
+            'page',
+            'limit'
         ]
         _all_params.extend(
             [
@@ -161,6 +178,18 @@ class ScopesApi:
 
         # process the query parameters
         _query_params = []
+        if _params.get('as_at') is not None:  # noqa: E501
+            if isinstance(_params['as_at'], datetime):
+                _query_params.append(('asAt', _params['as_at'].strftime(self.api_client.configuration.datetime_format)))
+            else:
+                _query_params.append(('asAt', _params['as_at']))
+
+        if _params.get('page') is not None:  # noqa: E501
+            _query_params.append(('page', _params['page']))
+
+        if _params.get('limit') is not None:  # noqa: E501
+            _query_params.append(('limit', _params['limit']))
+
         # process the header parameters
         _header_params = dict(_params.get('_headers', {}))
         # process the form parameters
