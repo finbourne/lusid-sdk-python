@@ -26,6 +26,6 @@ get_complex_market_data_response_dict = get_complex_market_data_response_instanc
 # create an instance of GetComplexMarketDataResponse from a dict
 get_complex_market_data_response_form_dict = get_complex_market_data_response.from_dict(get_complex_market_data_response_dict)
 ```
-[[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
+[Back to Model list](../README.md#documentation-for-models) &#8226; [Back to API list](../README.md#documentation-for-api-endpoints) &#8226; [Back to README](../README.md)
 
 

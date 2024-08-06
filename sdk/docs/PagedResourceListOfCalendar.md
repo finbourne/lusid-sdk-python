@@ -27,6 +27,6 @@ paged_resource_list_of_calendar_dict = paged_resource_list_of_calendar_instance.
 # create an instance of PagedResourceListOfCalendar from a dict
 paged_resource_list_of_calendar_form_dict = paged_resource_list_of_calendar.from_dict(paged_resource_list_of_calendar_dict)
 ```
-[[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
+[Back to Model list](../README.md#documentation-for-models) &#8226; [Back to API list](../README.md#documentation-for-api-endpoints) &#8226; [Back to README](../README.md)
 
 

@@ -23,72 +23,58 @@ Get the dialect with the given identifier at the specific asAt time.
 
 ### Example
 
-* OAuth Authentication (oauth2):
 ```python
-from __future__ import print_function
-import time
-import lusid
-from lusid.rest import ApiException
-from lusid.models.dialect import Dialect
+import asyncio
+from lusid.exceptions import ApiException
+from lusid.models import *
 from pprint import pprint
-
-import os
 from lusid import (
     ApiClientFactory,
-    ScriptedTranslationApi,
-    EnvironmentVariablesConfigurationLoader,
-    SecretsFileConfigurationLoader,
-    ArgsConfigurationLoader
+    ScriptedTranslationApi
 )
 
-# Use the lusid ApiClientFactory to build Api instances with a configured api client
-# By default this will read config from environment variables
-# Then from a secrets.json file found in the current working directory
-api_client_factory = ApiClientFactory()
+async def main():
 
-# The ApiClientFactory can be passed an iterable of configuration loaders to read configuration from
+    with open("secrets.json", "w") as file:
+        file.write('''
+{
+    "api":
+    {
+        "tokenUrl":"<your-token-url>",
+        "lusidUrl":"https://<your-domain>.lusid.com/api",
+        "username":"<your-username>",
+        "password":"<your-password>",
+        "clientId":"<your-client-id>",
+        "clientSecret":"<your-client-secret>"
+    }
+}''')
 
-api_url = "https://www.lusid.com/api"
-# Path to a secrets.json file containing authentication credentials
-# See https://support.lusid.com/knowledgebase/article/KA-01667/en-us
-# for a detailed guide to setting up the SDK make authenticated calls to LUSID APIs
-secrets_path = os.getenv("FBN_SECRETS_PATH")
-app_name="LusidJupyterNotebook"
+    # Use the lusid ApiClientFactory to build Api instances with a configured api client
+    # By default this will read config from environment variables
+    # Then from a secrets.json file found in the current working directory
+    api_client_factory = ApiClientFactory()
 
-config_loaders = [
-	EnvironmentVariablesConfigurationLoader(),
-	SecretsFileConfigurationLoader(api_secrets_file=secrets_path),
-	ArgsConfigurationLoader(api_url=api_url, app_name=app_name)
-]
-api_client_factory = ApiClientFactory(config_loaders=config_loaders)
+    # Enter a context with an instance of the ApiClientFactory to ensure the connection pool is closed after use
+    async with api_client_factory:
+        # Create an instance of the API class
+        api_instance = api_client_factory.build(ScriptedTranslationApi)
+        scope = 'scope_example' # str | The scope of the dialect.
+        vendor = 'vendor_example' # str | The vendor of the dialect, the entity that created it. e.g. ISDA, FINBOURNE.
+        source_system = 'source_system_example' # str | The source system of the dialect, the system that understands it. e.g. LUSID, QuantLib.
+        entity_type = 'entity_type_example' # str | The type of entity this dialect describes e.g. Instrument.
+        serialisation_format = 'serialisation_format_example' # str | The serialisation format of a document in this dialect. e.g. JSON, XML.
+        version = 'version_example' # str | The semantic version of the dialect: MAJOR.MINOR.PATCH.
+        as_at = '2013-10-20T19:20:30+01:00' # datetime | The asAt datetime at which to retrieve the dialect. Defaults to return the latest version of the dialect if not specified. (optional)
 
+        try:
+            # [EARLY ACCESS] GetTranslationDialect: Get a dialect.
+            api_response = await api_instance.get_translation_dialect(scope, vendor, source_system, entity_type, serialisation_format, version, as_at=as_at)
+            pprint(api_response)
+        except ApiException as e:
+            print("Exception when calling ScriptedTranslationApi->get_translation_dialect: %s\n" % e)
 
-# The client must configure the authentication and authorization parameters
-# in accordance with the API server security policy.
-
-
-
-# Enter a context with an instance of the ApiClientFactory to ensure the connection pool is closed after use
-async with api_client_factory:
-    # Create an instance of the API class
-    api_instance = api_client_factory.build(lusid.ScriptedTranslationApi)
-    scope = 'scope_example' # str | The scope of the dialect.
-    vendor = 'vendor_example' # str | The vendor of the dialect, the entity that created it. e.g. ISDA, FINBOURNE.
-    source_system = 'source_system_example' # str | The source system of the dialect, the system that understands it. e.g. LUSID, QuantLib.
-    entity_type = 'entity_type_example' # str | The type of entity this dialect describes e.g. Instrument.
-    serialisation_format = 'serialisation_format_example' # str | The serialisation format of a document in this dialect. e.g. JSON, XML.
-    version = 'version_example' # str | The semantic version of the dialect: MAJOR.MINOR.PATCH.
-    as_at = '2013-10-20T19:20:30+01:00' # datetime | The asAt datetime at which to retrieve the dialect. Defaults to return the latest version of the dialect if not specified. (optional)
-
-    try:
-        # [EARLY ACCESS] GetTranslationDialect: Get a dialect.
-        api_response = await api_instance.get_translation_dialect(scope, vendor, source_system, entity_type, serialisation_format, version, as_at=as_at)
-        print("The response of ScriptedTranslationApi->get_translation_dialect:\n")
-        pprint(api_response)
-    except Exception as e:
-        print("Exception when calling ScriptedTranslationApi->get_translation_dialect: %s\n" % e)
+asyncio.run(main())
 ```
-
 
 ### Parameters
 
@@ -106,10 +92,6 @@ Name | Type | Description  | Notes
 
 [**Dialect**](Dialect.md)
 
-### Authorization
-
-[oauth2](../README.md#oauth2)
-
 ### HTTP request headers
 
  - **Content-Type**: Not defined
@@ -122,7 +104,7 @@ Name | Type | Description  | Notes
 **400** | The details of the input related failure |  -  |
 **0** | Error response |  -  |
 
-[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+[Back to top](#) &#8226; [Back to API list](../README.md#documentation-for-api-endpoints) &#8226; [Back to Model list](../README.md#documentation-for-models) &#8226; [Back to README](../README.md)
 
 # **get_translation_script**
 > TranslationScript get_translation_script(scope, code, version, as_at=as_at)
@@ -133,69 +115,55 @@ Retrieves a translation script to be used for translating financial entities.
 
 ### Example
 
-* OAuth Authentication (oauth2):
 ```python
-from __future__ import print_function
-import time
-import lusid
-from lusid.rest import ApiException
-from lusid.models.translation_script import TranslationScript
+import asyncio
+from lusid.exceptions import ApiException
+from lusid.models import *
 from pprint import pprint
-
-import os
 from lusid import (
     ApiClientFactory,
-    ScriptedTranslationApi,
-    EnvironmentVariablesConfigurationLoader,
-    SecretsFileConfigurationLoader,
-    ArgsConfigurationLoader
+    ScriptedTranslationApi
 )
 
-# Use the lusid ApiClientFactory to build Api instances with a configured api client
-# By default this will read config from environment variables
-# Then from a secrets.json file found in the current working directory
-api_client_factory = ApiClientFactory()
+async def main():
 
-# The ApiClientFactory can be passed an iterable of configuration loaders to read configuration from
+    with open("secrets.json", "w") as file:
+        file.write('''
+{
+    "api":
+    {
+        "tokenUrl":"<your-token-url>",
+        "lusidUrl":"https://<your-domain>.lusid.com/api",
+        "username":"<your-username>",
+        "password":"<your-password>",
+        "clientId":"<your-client-id>",
+        "clientSecret":"<your-client-secret>"
+    }
+}''')
 
-api_url = "https://www.lusid.com/api"
-# Path to a secrets.json file containing authentication credentials
-# See https://support.lusid.com/knowledgebase/article/KA-01667/en-us
-# for a detailed guide to setting up the SDK make authenticated calls to LUSID APIs
-secrets_path = os.getenv("FBN_SECRETS_PATH")
-app_name="LusidJupyterNotebook"
+    # Use the lusid ApiClientFactory to build Api instances with a configured api client
+    # By default this will read config from environment variables
+    # Then from a secrets.json file found in the current working directory
+    api_client_factory = ApiClientFactory()
 
-config_loaders = [
-	EnvironmentVariablesConfigurationLoader(),
-	SecretsFileConfigurationLoader(api_secrets_file=secrets_path),
-	ArgsConfigurationLoader(api_url=api_url, app_name=app_name)
-]
-api_client_factory = ApiClientFactory(config_loaders=config_loaders)
+    # Enter a context with an instance of the ApiClientFactory to ensure the connection pool is closed after use
+    async with api_client_factory:
+        # Create an instance of the API class
+        api_instance = api_client_factory.build(ScriptedTranslationApi)
+        scope = 'scope_example' # str | Scope of the translation script.
+        code = 'code_example' # str | Code of the translation script.
+        version = 'version_example' # str | Semantic version of the translation script.
+        as_at = '2013-10-20T19:20:30+01:00' # datetime | The asAt datetime at which to retrieve the translation script. Defaults to latest. (optional)
 
+        try:
+            # [EARLY ACCESS] GetTranslationScript: Retrieve a translation script by its identifier.
+            api_response = await api_instance.get_translation_script(scope, code, version, as_at=as_at)
+            pprint(api_response)
+        except ApiException as e:
+            print("Exception when calling ScriptedTranslationApi->get_translation_script: %s\n" % e)
 
-# The client must configure the authentication and authorization parameters
-# in accordance with the API server security policy.
-
-
-
-# Enter a context with an instance of the ApiClientFactory to ensure the connection pool is closed after use
-async with api_client_factory:
-    # Create an instance of the API class
-    api_instance = api_client_factory.build(lusid.ScriptedTranslationApi)
-    scope = 'scope_example' # str | Scope of the translation script.
-    code = 'code_example' # str | Code of the translation script.
-    version = 'version_example' # str | Semantic version of the translation script.
-    as_at = '2013-10-20T19:20:30+01:00' # datetime | The asAt datetime at which to retrieve the translation script. Defaults to latest. (optional)
-
-    try:
-        # [EARLY ACCESS] GetTranslationScript: Retrieve a translation script by its identifier.
-        api_response = await api_instance.get_translation_script(scope, code, version, as_at=as_at)
-        print("The response of ScriptedTranslationApi->get_translation_script:\n")
-        pprint(api_response)
-    except Exception as e:
-        print("Exception when calling ScriptedTranslationApi->get_translation_script: %s\n" % e)
+asyncio.run(main())
 ```
-
 
 ### Parameters
 
@@ -210,10 +178,6 @@ Name | Type | Description  | Notes
 
 [**TranslationScript**](TranslationScript.md)
 
-### Authorization
-
-[oauth2](../README.md#oauth2)
-
 ### HTTP request headers
 
  - **Content-Type**: Not defined
@@ -226,7 +190,7 @@ Name | Type | Description  | Notes
 **400** | The details of the input related failure |  -  |
 **0** | Error response |  -  |
 
-[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+[Back to top](#) &#8226; [Back to API list](../README.md#documentation-for-api-endpoints) &#8226; [Back to Model list](../README.md#documentation-for-models) &#8226; [Back to README](../README.md)
 
 # **list_dialect_ids**
 > PagedResourceListOfDialectId list_dialect_ids(as_at=as_at, page=page, limit=limit, filter=filter)
@@ -237,69 +201,55 @@ List the stored dialects' identifiers with pagination and filtering at the speci
 
 ### Example
 
-* OAuth Authentication (oauth2):
 ```python
-from __future__ import print_function
-import time
-import lusid
-from lusid.rest import ApiException
-from lusid.models.paged_resource_list_of_dialect_id import PagedResourceListOfDialectId
+import asyncio
+from lusid.exceptions import ApiException
+from lusid.models import *
 from pprint import pprint
-
-import os
 from lusid import (
     ApiClientFactory,
-    ScriptedTranslationApi,
-    EnvironmentVariablesConfigurationLoader,
-    SecretsFileConfigurationLoader,
-    ArgsConfigurationLoader
+    ScriptedTranslationApi
 )
 
-# Use the lusid ApiClientFactory to build Api instances with a configured api client
-# By default this will read config from environment variables
-# Then from a secrets.json file found in the current working directory
-api_client_factory = ApiClientFactory()
+async def main():
 
-# The ApiClientFactory can be passed an iterable of configuration loaders to read configuration from
+    with open("secrets.json", "w") as file:
+        file.write('''
+{
+    "api":
+    {
+        "tokenUrl":"<your-token-url>",
+        "lusidUrl":"https://<your-domain>.lusid.com/api",
+        "username":"<your-username>",
+        "password":"<your-password>",
+        "clientId":"<your-client-id>",
+        "clientSecret":"<your-client-secret>"
+    }
+}''')
 
-api_url = "https://www.lusid.com/api"
-# Path to a secrets.json file containing authentication credentials
-# See https://support.lusid.com/knowledgebase/article/KA-01667/en-us
-# for a detailed guide to setting up the SDK make authenticated calls to LUSID APIs
-secrets_path = os.getenv("FBN_SECRETS_PATH")
-app_name="LusidJupyterNotebook"
+    # Use the lusid ApiClientFactory to build Api instances with a configured api client
+    # By default this will read config from environment variables
+    # Then from a secrets.json file found in the current working directory
+    api_client_factory = ApiClientFactory()
 
-config_loaders = [
-	EnvironmentVariablesConfigurationLoader(),
-	SecretsFileConfigurationLoader(api_secrets_file=secrets_path),
-	ArgsConfigurationLoader(api_url=api_url, app_name=app_name)
-]
-api_client_factory = ApiClientFactory(config_loaders=config_loaders)
+    # Enter a context with an instance of the ApiClientFactory to ensure the connection pool is closed after use
+    async with api_client_factory:
+        # Create an instance of the API class
+        api_instance = api_client_factory.build(ScriptedTranslationApi)
+        as_at = '2013-10-20T19:20:30+01:00' # datetime | The asAt datetime at which to retrieve the dialects.              Defaults to return the latest version of the dialect if not specified. (optional)
+        page = 'page_example' # str | The pagination token to use to continue listing dialect IDs from a previous call to list dialect IDs.              This value is returned from the previous call. If a pagination token is provided the filter and asAt fields              must not have changed since the original request. (optional)
+        limit = 56 # int | When paginating, limit the number of returned results to this many. (optional)
+        filter = 'filter_example' # str | Expression to filter the result set. Read more about filtering results from LUSID here:              https://support.lusid.com/filtering-results-from-lusid. (optional)
 
+        try:
+            # [EARLY ACCESS] ListDialectIds: List dialect identifiers matching an optional filter.
+            api_response = await api_instance.list_dialect_ids(as_at=as_at, page=page, limit=limit, filter=filter)
+            pprint(api_response)
+        except ApiException as e:
+            print("Exception when calling ScriptedTranslationApi->list_dialect_ids: %s\n" % e)
 
-# The client must configure the authentication and authorization parameters
-# in accordance with the API server security policy.
-
-
-
-# Enter a context with an instance of the ApiClientFactory to ensure the connection pool is closed after use
-async with api_client_factory:
-    # Create an instance of the API class
-    api_instance = api_client_factory.build(lusid.ScriptedTranslationApi)
-    as_at = '2013-10-20T19:20:30+01:00' # datetime | The asAt datetime at which to retrieve the dialects.              Defaults to return the latest version of the dialect if not specified. (optional)
-    page = 'page_example' # str | The pagination token to use to continue listing dialect IDs from a previous call to list dialect IDs.              This value is returned from the previous call. If a pagination token is provided the filter and asAt fields              must not have changed since the original request. (optional)
-    limit = 56 # int | When paginating, limit the number of returned results to this many. (optional)
-    filter = 'filter_example' # str | Expression to filter the result set. Read more about filtering results from LUSID here:              https://support.lusid.com/filtering-results-from-lusid. (optional)
-
-    try:
-        # [EARLY ACCESS] ListDialectIds: List dialect identifiers matching an optional filter.
-        api_response = await api_instance.list_dialect_ids(as_at=as_at, page=page, limit=limit, filter=filter)
-        print("The response of ScriptedTranslationApi->list_dialect_ids:\n")
-        pprint(api_response)
-    except Exception as e:
-        print("Exception when calling ScriptedTranslationApi->list_dialect_ids: %s\n" % e)
+asyncio.run(main())
 ```
-
 
 ### Parameters
 
@@ -314,10 +264,6 @@ Name | Type | Description  | Notes
 
 [**PagedResourceListOfDialectId**](PagedResourceListOfDialectId.md)
 
-### Authorization
-
-[oauth2](../README.md#oauth2)
-
 ### HTTP request headers
 
  - **Content-Type**: Not defined
@@ -330,7 +276,7 @@ Name | Type | Description  | Notes
 **400** | The details of the input related failure |  -  |
 **0** | Error response |  -  |
 
-[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+[Back to top](#) &#8226; [Back to API list](../README.md#documentation-for-api-endpoints) &#8226; [Back to Model list](../README.md#documentation-for-models) &#8226; [Back to README](../README.md)
 
 # **list_translation_script_ids**
 > PagedResourceListOfTranslationScriptId list_translation_script_ids(as_at=as_at, limit=limit, filter=filter, page=page)
@@ -341,69 +287,55 @@ List translation script ids.
 
 ### Example
 
-* OAuth Authentication (oauth2):
 ```python
-from __future__ import print_function
-import time
-import lusid
-from lusid.rest import ApiException
-from lusid.models.paged_resource_list_of_translation_script_id import PagedResourceListOfTranslationScriptId
+import asyncio
+from lusid.exceptions import ApiException
+from lusid.models import *
 from pprint import pprint
-
-import os
 from lusid import (
     ApiClientFactory,
-    ScriptedTranslationApi,
-    EnvironmentVariablesConfigurationLoader,
-    SecretsFileConfigurationLoader,
-    ArgsConfigurationLoader
+    ScriptedTranslationApi
 )
 
-# Use the lusid ApiClientFactory to build Api instances with a configured api client
-# By default this will read config from environment variables
-# Then from a secrets.json file found in the current working directory
-api_client_factory = ApiClientFactory()
+async def main():
 
-# The ApiClientFactory can be passed an iterable of configuration loaders to read configuration from
+    with open("secrets.json", "w") as file:
+        file.write('''
+{
+    "api":
+    {
+        "tokenUrl":"<your-token-url>",
+        "lusidUrl":"https://<your-domain>.lusid.com/api",
+        "username":"<your-username>",
+        "password":"<your-password>",
+        "clientId":"<your-client-id>",
+        "clientSecret":"<your-client-secret>"
+    }
+}''')
 
-api_url = "https://www.lusid.com/api"
-# Path to a secrets.json file containing authentication credentials
-# See https://support.lusid.com/knowledgebase/article/KA-01667/en-us
-# for a detailed guide to setting up the SDK make authenticated calls to LUSID APIs
-secrets_path = os.getenv("FBN_SECRETS_PATH")
-app_name="LusidJupyterNotebook"
+    # Use the lusid ApiClientFactory to build Api instances with a configured api client
+    # By default this will read config from environment variables
+    # Then from a secrets.json file found in the current working directory
+    api_client_factory = ApiClientFactory()
 
-config_loaders = [
-	EnvironmentVariablesConfigurationLoader(),
-	SecretsFileConfigurationLoader(api_secrets_file=secrets_path),
-	ArgsConfigurationLoader(api_url=api_url, app_name=app_name)
-]
-api_client_factory = ApiClientFactory(config_loaders=config_loaders)
+    # Enter a context with an instance of the ApiClientFactory to ensure the connection pool is closed after use
+    async with api_client_factory:
+        # Create an instance of the API class
+        api_instance = api_client_factory.build(ScriptedTranslationApi)
+        as_at = '2013-10-20T19:20:30+01:00' # datetime | The asAt datetime at which to retrieve the script identifiers. Defaults to latest. (optional)
+        limit = 56 # int | When paginating, limit the results to this number. Defaults to 100 if not specified. (optional)
+        filter = 'filter_example' # str | Expression to filter the results. For example, Id.Version.Major eq 1 to list IDs with major version 1              or Id.Scope eq 'my-scripts' to list result only for a particular scope. (optional)
+        page = 'page_example' # str | The pagination token to use to continue listing translation script IDs; this              value is returned from the previous call. If a pagination token is provided, the filter field              must not have changed since the original request. (optional)
 
+        try:
+            # [EARLY ACCESS] ListTranslationScriptIds: List translation script identifiers.
+            api_response = await api_instance.list_translation_script_ids(as_at=as_at, limit=limit, filter=filter, page=page)
+            pprint(api_response)
+        except ApiException as e:
+            print("Exception when calling ScriptedTranslationApi->list_translation_script_ids: %s\n" % e)
 
-# The client must configure the authentication and authorization parameters
-# in accordance with the API server security policy.
-
-
-
-# Enter a context with an instance of the ApiClientFactory to ensure the connection pool is closed after use
-async with api_client_factory:
-    # Create an instance of the API class
-    api_instance = api_client_factory.build(lusid.ScriptedTranslationApi)
-    as_at = '2013-10-20T19:20:30+01:00' # datetime | The asAt datetime at which to retrieve the script identifiers. Defaults to latest. (optional)
-    limit = 56 # int | When paginating, limit the results to this number. Defaults to 100 if not specified. (optional)
-    filter = 'filter_example' # str | Expression to filter the results. For example, Id.Version.Major eq 1 to list IDs with major version 1              or Id.Scope eq 'my-scripts' to list result only for a particular scope. (optional)
-    page = 'page_example' # str | The pagination token to use to continue listing translation script IDs; this              value is returned from the previous call. If a pagination token is provided, the filter field              must not have changed since the original request. (optional)
-
-    try:
-        # [EARLY ACCESS] ListTranslationScriptIds: List translation script identifiers.
-        api_response = await api_instance.list_translation_script_ids(as_at=as_at, limit=limit, filter=filter, page=page)
-        print("The response of ScriptedTranslationApi->list_translation_script_ids:\n")
-        pprint(api_response)
-    except Exception as e:
-        print("Exception when calling ScriptedTranslationApi->list_translation_script_ids: %s\n" % e)
+asyncio.run(main())
 ```
-
 
 ### Parameters
 
@@ -418,10 +350,6 @@ Name | Type | Description  | Notes
 
 [**PagedResourceListOfTranslationScriptId**](PagedResourceListOfTranslationScriptId.md)
 
-### Authorization
-
-[oauth2](../README.md#oauth2)
-
 ### HTTP request headers
 
  - **Content-Type**: Not defined
@@ -434,7 +362,7 @@ Name | Type | Description  | Notes
 **400** | The details of the input related failure |  -  |
 **0** | Error response |  -  |
 
-[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+[Back to top](#) &#8226; [Back to API list](../README.md#documentation-for-api-endpoints) &#8226; [Back to Model list](../README.md#documentation-for-models) &#8226; [Back to README](../README.md)
 
 # **translate_entities**
 > TranslateEntitiesResponse translate_entities(translate_entities_request)
@@ -445,67 +373,57 @@ Run the provided translation request. The entities to translate are specified in
 
 ### Example
 
-* OAuth Authentication (oauth2):
 ```python
-from __future__ import print_function
-import time
-import lusid
-from lusid.rest import ApiException
-from lusid.models.translate_entities_request import TranslateEntitiesRequest
-from lusid.models.translate_entities_response import TranslateEntitiesResponse
+import asyncio
+from lusid.exceptions import ApiException
+from lusid.models import *
 from pprint import pprint
-
-import os
 from lusid import (
     ApiClientFactory,
-    ScriptedTranslationApi,
-    EnvironmentVariablesConfigurationLoader,
-    SecretsFileConfigurationLoader,
-    ArgsConfigurationLoader
+    ScriptedTranslationApi
 )
 
-# Use the lusid ApiClientFactory to build Api instances with a configured api client
-# By default this will read config from environment variables
-# Then from a secrets.json file found in the current working directory
-api_client_factory = ApiClientFactory()
+async def main():
 
-# The ApiClientFactory can be passed an iterable of configuration loaders to read configuration from
+    with open("secrets.json", "w") as file:
+        file.write('''
+{
+    "api":
+    {
+        "tokenUrl":"<your-token-url>",
+        "lusidUrl":"https://<your-domain>.lusid.com/api",
+        "username":"<your-username>",
+        "password":"<your-password>",
+        "clientId":"<your-client-id>",
+        "clientSecret":"<your-client-secret>"
+    }
+}''')
 
-api_url = "https://www.lusid.com/api"
-# Path to a secrets.json file containing authentication credentials
-# See https://support.lusid.com/knowledgebase/article/KA-01667/en-us
-# for a detailed guide to setting up the SDK make authenticated calls to LUSID APIs
-secrets_path = os.getenv("FBN_SECRETS_PATH")
-app_name="LusidJupyterNotebook"
+    # Use the lusid ApiClientFactory to build Api instances with a configured api client
+    # By default this will read config from environment variables
+    # Then from a secrets.json file found in the current working directory
+    api_client_factory = ApiClientFactory()
 
-config_loaders = [
-	EnvironmentVariablesConfigurationLoader(),
-	SecretsFileConfigurationLoader(api_secrets_file=secrets_path),
-	ArgsConfigurationLoader(api_url=api_url, app_name=app_name)
-]
-api_client_factory = ApiClientFactory(config_loaders=config_loaders)
+    # Enter a context with an instance of the ApiClientFactory to ensure the connection pool is closed after use
+    async with api_client_factory:
+        # Create an instance of the API class
+        api_instance = api_client_factory.build(ScriptedTranslationApi)
 
+        # Objects can be created either via the class constructor, or using the 'from_dict' or 'from_json' methods
+        # Change the lines below to switch approach
+        # translate_entities_request = TranslateEntitiesRequest()
+        # translate_entities_request = TranslateEntitiesRequest.from_json("")
+        translate_entities_request = TranslateEntitiesRequest.from_dict({"entityPayloads":{"myFxFwd-0":{"entity":"{ \"startDate\": \"2018-01-01T00:00:00.0000000+00:00\", \"maturityDate\": \"2019-01-01T00:00:00.0000000+00:00\", \"domAmount\": 1, \"domCcy\": \"GBP\", \"fgnAmount\": -1.5,  \"fgnCcy\": \"USD\",  \"refSpotRate\": 1.5,  \"isNdf\": false, \"fixingDate\": \"0001-01-01T00:00:00.0000000+00:00\",  \"instrumentType\": \"FxForward\" }"}},"scriptId":{"scope":"example-scope","code":"example-code","version":"0.0.1"},"dialectId":{"scope":"scope-A","vendor":"BigBankCorporation","sourceSystem":"InstrumentMaster","version":"2.1.4","serialisationFormat":"Json","entityType":"Instrument"}}) # TranslateEntitiesRequest | The entities to translate, along with identifiers for the script and (optional) dialect to use.
 
-# The client must configure the authentication and authorization parameters
-# in accordance with the API server security policy.
+        try:
+            # [EARLY ACCESS] TranslateEntities: Translate a collection of entities with a specified translation script.
+            api_response = await api_instance.translate_entities(translate_entities_request)
+            pprint(api_response)
+        except ApiException as e:
+            print("Exception when calling ScriptedTranslationApi->translate_entities: %s\n" % e)
 
-
-
-# Enter a context with an instance of the ApiClientFactory to ensure the connection pool is closed after use
-async with api_client_factory:
-    # Create an instance of the API class
-    api_instance = api_client_factory.build(lusid.ScriptedTranslationApi)
-    translate_entities_request = {"entityPayloads":{"myFxFwd-0":{"entity":"{ \"startDate\": \"2018-01-01T00:00:00.0000000+00:00\", \"maturityDate\": \"2019-01-01T00:00:00.0000000+00:00\", \"domAmount\": 1, \"domCcy\": \"GBP\", \"fgnAmount\": -1.5,  \"fgnCcy\": \"USD\",  \"refSpotRate\": 1.5,  \"isNdf\": false, \"fixingDate\": \"0001-01-01T00:00:00.0000000+00:00\",  \"instrumentType\": \"FxForward\" }"}},"scriptId":{"scope":"example-scope","code":"example-code","version":"0.0.1"},"dialectId":{"scope":"scope-A","vendor":"BigBankCorporation","sourceSystem":"InstrumentMaster","version":"2.1.4","serialisationFormat":"Json","entityType":"Instrument"}} # TranslateEntitiesRequest | The entities to translate, along with identifiers for the script and (optional) dialect to use.
-
-    try:
-        # [EARLY ACCESS] TranslateEntities: Translate a collection of entities with a specified translation script.
-        api_response = await api_instance.translate_entities(translate_entities_request)
-        print("The response of ScriptedTranslationApi->translate_entities:\n")
-        pprint(api_response)
-    except Exception as e:
-        print("Exception when calling ScriptedTranslationApi->translate_entities: %s\n" % e)
+asyncio.run(main())
 ```
-
 
 ### Parameters
 
@@ -517,10 +435,6 @@ Name | Type | Description  | Notes
 
 [**TranslateEntitiesResponse**](TranslateEntitiesResponse.md)
 
-### Authorization
-
-[oauth2](../README.md#oauth2)
-
 ### HTTP request headers
 
  - **Content-Type**: application/json-patch+json, application/json, text/json, application/*+json
@@ -533,7 +447,7 @@ Name | Type | Description  | Notes
 **400** | The details of the input related failure |  -  |
 **0** | Error response |  -  |
 
-[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+[Back to top](#) &#8226; [Back to API list](../README.md#documentation-for-api-endpoints) &#8226; [Back to Model list](../README.md#documentation-for-models) &#8226; [Back to README](../README.md)
 
 # **translate_entities_inlined**
 > TranslateEntitiesResponse translate_entities_inlined(translate_entities_inlined_request)
@@ -544,67 +458,57 @@ Run the provided translation request. The entities to translate, script to use a
 
 ### Example
 
-* OAuth Authentication (oauth2):
 ```python
-from __future__ import print_function
-import time
-import lusid
-from lusid.rest import ApiException
-from lusid.models.translate_entities_inlined_request import TranslateEntitiesInlinedRequest
-from lusid.models.translate_entities_response import TranslateEntitiesResponse
+import asyncio
+from lusid.exceptions import ApiException
+from lusid.models import *
 from pprint import pprint
-
-import os
 from lusid import (
     ApiClientFactory,
-    ScriptedTranslationApi,
-    EnvironmentVariablesConfigurationLoader,
-    SecretsFileConfigurationLoader,
-    ArgsConfigurationLoader
+    ScriptedTranslationApi
 )
 
-# Use the lusid ApiClientFactory to build Api instances with a configured api client
-# By default this will read config from environment variables
-# Then from a secrets.json file found in the current working directory
-api_client_factory = ApiClientFactory()
+async def main():
 
-# The ApiClientFactory can be passed an iterable of configuration loaders to read configuration from
+    with open("secrets.json", "w") as file:
+        file.write('''
+{
+    "api":
+    {
+        "tokenUrl":"<your-token-url>",
+        "lusidUrl":"https://<your-domain>.lusid.com/api",
+        "username":"<your-username>",
+        "password":"<your-password>",
+        "clientId":"<your-client-id>",
+        "clientSecret":"<your-client-secret>"
+    }
+}''')
 
-api_url = "https://www.lusid.com/api"
-# Path to a secrets.json file containing authentication credentials
-# See https://support.lusid.com/knowledgebase/article/KA-01667/en-us
-# for a detailed guide to setting up the SDK make authenticated calls to LUSID APIs
-secrets_path = os.getenv("FBN_SECRETS_PATH")
-app_name="LusidJupyterNotebook"
+    # Use the lusid ApiClientFactory to build Api instances with a configured api client
+    # By default this will read config from environment variables
+    # Then from a secrets.json file found in the current working directory
+    api_client_factory = ApiClientFactory()
 
-config_loaders = [
-	EnvironmentVariablesConfigurationLoader(),
-	SecretsFileConfigurationLoader(api_secrets_file=secrets_path),
-	ArgsConfigurationLoader(api_url=api_url, app_name=app_name)
-]
-api_client_factory = ApiClientFactory(config_loaders=config_loaders)
+    # Enter a context with an instance of the ApiClientFactory to ensure the connection pool is closed after use
+    async with api_client_factory:
+        # Create an instance of the API class
+        api_instance = api_client_factory.build(ScriptedTranslationApi)
 
+        # Objects can be created either via the class constructor, or using the 'from_dict' or 'from_json' methods
+        # Change the lines below to switch approach
+        # translate_entities_inlined_request = TranslateEntitiesInlinedRequest()
+        # translate_entities_inlined_request = TranslateEntitiesInlinedRequest.from_json("")
+        translate_entities_inlined_request = TranslateEntitiesInlinedRequest.from_dict({"entityPayloads":{"myFxFwd-0":{"entity":"{\r\n \"startDate\": \"2018-01-01T00:00:00.0000000+00:00\",\r\n \"maturityDate\": \"2019-01-01T00:00:00.0000000+00:00\",\r\n \"domAmount\": 1,\r\n \"domCcy\": \"GBP\",\r\n \"fgnAmount\": -1.5,\r\n  \"fgnCcy\": \"USD\",\r\n      \"refSpotRate\": 1.5,\r\n \"isNdf\": false,\r\n \"fixingDate\": \"0001-01-01T00:00:00.0000000+00:00\",\r\n \"instrumentType\": \"FxForward\"\r\n}"},"myFxFwd-that-will-fail-translation":{"entity":"some-bad-payload"}},"scriptBody":"export function entryPoint() { return { scriptInterfaceVersion: 1, translate: Translate }; } function Translate(input){ const fxfwd = JSON.parse(input);  fxfwd[\"endDate\"] = fxfwd[\"maturityDate\"];  delete fxfwd[\"maturityDate\"];  return JSON.stringify(fxfwd); }","schema":{"type":"JsonSchema","body":"{\n  \"type\": \"object\",\n  \"properties\": {\n    \"Identifier\": {\n      \"type\": \"string\",\n      \"pattern\": \"/^[a-f\\\\d]{4}(?:[a-f\\\\d]{4}-){4}[a-f\\\\d]{12}$/i\"\n    },\n    \"AssetClass\": {\n      \"type\": \"string\",\n      \"enum\": [\n        \"Rates\",\n        \"Fx\",\n        \"Equity\",\n        \"Credit\"\n      ]\n    },\n    \"StartDate\": {\n      \"type\": \"string\",\n      \"format\": \"date-time\"\n    },\n    \"MaturityDate\": {\n      \"type\": \"string\",\n      \"format\": \"date-time\"\n    },\n    \"Notional\": {\n      \"type\": \"number\"\n    }\n  },\n  \"required\": [\n    \"Identifier\",\n    \"AssetClass\",\n    \"StartDate\",\n    \"MaturityDate\",\n    \"Notional\"\n  ]\n}"}}) # TranslateEntitiesInlinedRequest | The entities to translate, along with the script to use and an optional schema for validation.
 
-# The client must configure the authentication and authorization parameters
-# in accordance with the API server security policy.
+        try:
+            # [EARLY ACCESS] TranslateEntitiesInlined: Translate a collection of entities, inlining the body of the translation script.
+            api_response = await api_instance.translate_entities_inlined(translate_entities_inlined_request)
+            pprint(api_response)
+        except ApiException as e:
+            print("Exception when calling ScriptedTranslationApi->translate_entities_inlined: %s\n" % e)
 
-
-
-# Enter a context with an instance of the ApiClientFactory to ensure the connection pool is closed after use
-async with api_client_factory:
-    # Create an instance of the API class
-    api_instance = api_client_factory.build(lusid.ScriptedTranslationApi)
-    translate_entities_inlined_request = {"entityPayloads":{"myFxFwd-0":{"entity":"{\r\n \"startDate\": \"2018-01-01T00:00:00.0000000+00:00\",\r\n \"maturityDate\": \"2019-01-01T00:00:00.0000000+00:00\",\r\n \"domAmount\": 1,\r\n \"domCcy\": \"GBP\",\r\n \"fgnAmount\": -1.5,\r\n  \"fgnCcy\": \"USD\",\r\n      \"refSpotRate\": 1.5,\r\n \"isNdf\": false,\r\n \"fixingDate\": \"0001-01-01T00:00:00.0000000+00:00\",\r\n \"instrumentType\": \"FxForward\"\r\n}"},"myFxFwd-that-will-fail-translation":{"entity":"some-bad-payload"}},"scriptBody":"export function entryPoint() { return { scriptInterfaceVersion: 1, translate: Translate }; } function Translate(input){ const fxfwd = JSON.parse(input);  fxfwd[\"endDate\"] = fxfwd[\"maturityDate\"];  delete fxfwd[\"maturityDate\"];  return JSON.stringify(fxfwd); }","schema":{"type":"JsonSchema","body":"{\n  \"type\": \"object\",\n  \"properties\": {\n    \"Identifier\": {\n      \"type\": \"string\",\n      \"pattern\": \"/^[a-f\\\\d]{4}(?:[a-f\\\\d]{4}-){4}[a-f\\\\d]{12}$/i\"\n    },\n    \"AssetClass\": {\n      \"type\": \"string\",\n      \"enum\": [\n        \"Rates\",\n        \"Fx\",\n        \"Equity\",\n        \"Credit\"\n      ]\n    },\n    \"StartDate\": {\n      \"type\": \"string\",\n      \"format\": \"date-time\"\n    },\n    \"MaturityDate\": {\n      \"type\": \"string\",\n      \"format\": \"date-time\"\n    },\n    \"Notional\": {\n      \"type\": \"number\"\n    }\n  },\n  \"required\": [\n    \"Identifier\",\n    \"AssetClass\",\n    \"StartDate\",\n    \"MaturityDate\",\n    \"Notional\"\n  ]\n}"}} # TranslateEntitiesInlinedRequest | The entities to translate, along with the script to use and an optional schema for validation.
-
-    try:
-        # [EARLY ACCESS] TranslateEntitiesInlined: Translate a collection of entities, inlining the body of the translation script.
-        api_response = await api_instance.translate_entities_inlined(translate_entities_inlined_request)
-        print("The response of ScriptedTranslationApi->translate_entities_inlined:\n")
-        pprint(api_response)
-    except Exception as e:
-        print("Exception when calling ScriptedTranslationApi->translate_entities_inlined: %s\n" % e)
+asyncio.run(main())
 ```
-
 
 ### Parameters
 
@@ -616,10 +520,6 @@ Name | Type | Description  | Notes
 
 [**TranslateEntitiesResponse**](TranslateEntitiesResponse.md)
 
-### Authorization
-
-[oauth2](../README.md#oauth2)
-
 ### HTTP request headers
 
  - **Content-Type**: application/json-patch+json, application/json, text/json, application/*+json
@@ -632,7 +532,7 @@ Name | Type | Description  | Notes
 **400** | The details of the input related failure |  -  |
 **0** | Error response |  -  |
 
-[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+[Back to top](#) &#8226; [Back to API list](../README.md#documentation-for-api-endpoints) &#8226; [Back to Model list](../README.md#documentation-for-models) &#8226; [Back to README](../README.md)
 
 # **upsert_translation_dialect**
 > Dialect upsert_translation_dialect(upsert_dialect_request)
@@ -643,67 +543,57 @@ Upsert the given dialect.
 
 ### Example
 
-* OAuth Authentication (oauth2):
 ```python
-from __future__ import print_function
-import time
-import lusid
-from lusid.rest import ApiException
-from lusid.models.dialect import Dialect
-from lusid.models.upsert_dialect_request import UpsertDialectRequest
+import asyncio
+from lusid.exceptions import ApiException
+from lusid.models import *
 from pprint import pprint
-
-import os
 from lusid import (
     ApiClientFactory,
-    ScriptedTranslationApi,
-    EnvironmentVariablesConfigurationLoader,
-    SecretsFileConfigurationLoader,
-    ArgsConfigurationLoader
+    ScriptedTranslationApi
 )
 
-# Use the lusid ApiClientFactory to build Api instances with a configured api client
-# By default this will read config from environment variables
-# Then from a secrets.json file found in the current working directory
-api_client_factory = ApiClientFactory()
+async def main():
 
-# The ApiClientFactory can be passed an iterable of configuration loaders to read configuration from
+    with open("secrets.json", "w") as file:
+        file.write('''
+{
+    "api":
+    {
+        "tokenUrl":"<your-token-url>",
+        "lusidUrl":"https://<your-domain>.lusid.com/api",
+        "username":"<your-username>",
+        "password":"<your-password>",
+        "clientId":"<your-client-id>",
+        "clientSecret":"<your-client-secret>"
+    }
+}''')
 
-api_url = "https://www.lusid.com/api"
-# Path to a secrets.json file containing authentication credentials
-# See https://support.lusid.com/knowledgebase/article/KA-01667/en-us
-# for a detailed guide to setting up the SDK make authenticated calls to LUSID APIs
-secrets_path = os.getenv("FBN_SECRETS_PATH")
-app_name="LusidJupyterNotebook"
+    # Use the lusid ApiClientFactory to build Api instances with a configured api client
+    # By default this will read config from environment variables
+    # Then from a secrets.json file found in the current working directory
+    api_client_factory = ApiClientFactory()
 
-config_loaders = [
-	EnvironmentVariablesConfigurationLoader(),
-	SecretsFileConfigurationLoader(api_secrets_file=secrets_path),
-	ArgsConfigurationLoader(api_url=api_url, app_name=app_name)
-]
-api_client_factory = ApiClientFactory(config_loaders=config_loaders)
+    # Enter a context with an instance of the ApiClientFactory to ensure the connection pool is closed after use
+    async with api_client_factory:
+        # Create an instance of the API class
+        api_instance = api_client_factory.build(ScriptedTranslationApi)
 
+        # Objects can be created either via the class constructor, or using the 'from_dict' or 'from_json' methods
+        # Change the lines below to switch approach
+        # upsert_dialect_request = UpsertDialectRequest()
+        # upsert_dialect_request = UpsertDialectRequest.from_json("")
+        upsert_dialect_request = UpsertDialectRequest.from_dict({"id":{"scope":"scope-A","vendor":"BigBankCorporation","sourceSystem":"InstrumentMaster","version":"2.1.4","serialisationFormat":"Json","entityType":"Instrument"},"schema":{"type":"JsonSchema","body":"{\n  \"type\": \"object\",\n  \"properties\": {\n    \"Identifier\": {\n      \"type\": \"string\",\n      \"pattern\": \"/^[a-f\\\\d]{4}(?:[a-f\\\\d]{4}-){4}[a-f\\\\d]{12}$/i\"\n    },\n    \"AssetClass\": {\n      \"type\": \"string\",\n      \"enum\": [\n        \"Rates\",\n        \"Fx\",\n        \"Equity\",\n        \"Credit\"\n      ]\n    },\n    \"StartDate\": {\n      \"type\": \"string\",\n      \"format\": \"date-time\"\n    },\n    \"MaturityDate\": {\n      \"type\": \"string\",\n      \"format\": \"date-time\"\n    },\n    \"Notional\": {\n      \"type\": \"number\"\n    }\n  },\n  \"required\": [\n    \"Identifier\",\n    \"AssetClass\",\n    \"StartDate\",\n    \"MaturityDate\",\n    \"Notional\"\n  ]\n}"}}) # UpsertDialectRequest | The dialect to upsert.
 
-# The client must configure the authentication and authorization parameters
-# in accordance with the API server security policy.
+        try:
+            # [EARLY ACCESS] UpsertTranslationDialect: Upsert a Dialect.
+            api_response = await api_instance.upsert_translation_dialect(upsert_dialect_request)
+            pprint(api_response)
+        except ApiException as e:
+            print("Exception when calling ScriptedTranslationApi->upsert_translation_dialect: %s\n" % e)
 
-
-
-# Enter a context with an instance of the ApiClientFactory to ensure the connection pool is closed after use
-async with api_client_factory:
-    # Create an instance of the API class
-    api_instance = api_client_factory.build(lusid.ScriptedTranslationApi)
-    upsert_dialect_request = {"id":{"scope":"scope-A","vendor":"BigBankCorporation","sourceSystem":"InstrumentMaster","version":"2.1.4","serialisationFormat":"Json","entityType":"Instrument"},"schema":{"type":"JsonSchema","body":"{\n  \"type\": \"object\",\n  \"properties\": {\n    \"Identifier\": {\n      \"type\": \"string\",\n      \"pattern\": \"/^[a-f\\\\d]{4}(?:[a-f\\\\d]{4}-){4}[a-f\\\\d]{12}$/i\"\n    },\n    \"AssetClass\": {\n      \"type\": \"string\",\n      \"enum\": [\n        \"Rates\",\n        \"Fx\",\n        \"Equity\",\n        \"Credit\"\n      ]\n    },\n    \"StartDate\": {\n      \"type\": \"string\",\n      \"format\": \"date-time\"\n    },\n    \"MaturityDate\": {\n      \"type\": \"string\",\n      \"format\": \"date-time\"\n    },\n    \"Notional\": {\n      \"type\": \"number\"\n    }\n  },\n  \"required\": [\n    \"Identifier\",\n    \"AssetClass\",\n    \"StartDate\",\n    \"MaturityDate\",\n    \"Notional\"\n  ]\n}"}} # UpsertDialectRequest | The dialect to upsert.
-
-    try:
-        # [EARLY ACCESS] UpsertTranslationDialect: Upsert a Dialect.
-        api_response = await api_instance.upsert_translation_dialect(upsert_dialect_request)
-        print("The response of ScriptedTranslationApi->upsert_translation_dialect:\n")
-        pprint(api_response)
-    except Exception as e:
-        print("Exception when calling ScriptedTranslationApi->upsert_translation_dialect: %s\n" % e)
+asyncio.run(main())
 ```
-
 
 ### Parameters
 
@@ -714,10 +604,6 @@ Name | Type | Description  | Notes
 ### Return type
 
 [**Dialect**](Dialect.md)
-
-### Authorization
-
-[oauth2](../README.md#oauth2)
 
 ### HTTP request headers
 
@@ -731,7 +617,7 @@ Name | Type | Description  | Notes
 **400** | The details of the input related failure |  -  |
 **0** | Error response |  -  |
 
-[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+[Back to top](#) &#8226; [Back to API list](../README.md#documentation-for-api-endpoints) &#8226; [Back to Model list](../README.md#documentation-for-models) &#8226; [Back to README](../README.md)
 
 # **upsert_translation_script**
 > TranslationScript upsert_translation_script(upsert_translation_script_request)
@@ -742,67 +628,57 @@ Upserts a translation script to be used for translating financial entities.
 
 ### Example
 
-* OAuth Authentication (oauth2):
 ```python
-from __future__ import print_function
-import time
-import lusid
-from lusid.rest import ApiException
-from lusid.models.translation_script import TranslationScript
-from lusid.models.upsert_translation_script_request import UpsertTranslationScriptRequest
+import asyncio
+from lusid.exceptions import ApiException
+from lusid.models import *
 from pprint import pprint
-
-import os
 from lusid import (
     ApiClientFactory,
-    ScriptedTranslationApi,
-    EnvironmentVariablesConfigurationLoader,
-    SecretsFileConfigurationLoader,
-    ArgsConfigurationLoader
+    ScriptedTranslationApi
 )
 
-# Use the lusid ApiClientFactory to build Api instances with a configured api client
-# By default this will read config from environment variables
-# Then from a secrets.json file found in the current working directory
-api_client_factory = ApiClientFactory()
+async def main():
 
-# The ApiClientFactory can be passed an iterable of configuration loaders to read configuration from
+    with open("secrets.json", "w") as file:
+        file.write('''
+{
+    "api":
+    {
+        "tokenUrl":"<your-token-url>",
+        "lusidUrl":"https://<your-domain>.lusid.com/api",
+        "username":"<your-username>",
+        "password":"<your-password>",
+        "clientId":"<your-client-id>",
+        "clientSecret":"<your-client-secret>"
+    }
+}''')
 
-api_url = "https://www.lusid.com/api"
-# Path to a secrets.json file containing authentication credentials
-# See https://support.lusid.com/knowledgebase/article/KA-01667/en-us
-# for a detailed guide to setting up the SDK make authenticated calls to LUSID APIs
-secrets_path = os.getenv("FBN_SECRETS_PATH")
-app_name="LusidJupyterNotebook"
+    # Use the lusid ApiClientFactory to build Api instances with a configured api client
+    # By default this will read config from environment variables
+    # Then from a secrets.json file found in the current working directory
+    api_client_factory = ApiClientFactory()
 
-config_loaders = [
-	EnvironmentVariablesConfigurationLoader(),
-	SecretsFileConfigurationLoader(api_secrets_file=secrets_path),
-	ArgsConfigurationLoader(api_url=api_url, app_name=app_name)
-]
-api_client_factory = ApiClientFactory(config_loaders=config_loaders)
+    # Enter a context with an instance of the ApiClientFactory to ensure the connection pool is closed after use
+    async with api_client_factory:
+        # Create an instance of the API class
+        api_instance = api_client_factory.build(ScriptedTranslationApi)
 
+        # Objects can be created either via the class constructor, or using the 'from_dict' or 'from_json' methods
+        # Change the lines below to switch approach
+        # upsert_translation_script_request = UpsertTranslationScriptRequest()
+        # upsert_translation_script_request = UpsertTranslationScriptRequest.from_json("")
+        upsert_translation_script_request = UpsertTranslationScriptRequest.from_dict({"id":{"scope":"example-scope","code":"example-code","version":"0.0.1"},"body":"export function entryPoint() { return { scriptInterfaceVersion: 1, translate: Translate }; } function Translate(input){ const fxfwd = JSON.parse(input);  fxfwd[\"endDate\"] = fxfwd[\"maturityDate\"];  delete fxfwd[\"maturityDate\"];  return JSON.stringify(fxfwd); }"}) # UpsertTranslationScriptRequest | The translation script to be upserted.
 
-# The client must configure the authentication and authorization parameters
-# in accordance with the API server security policy.
+        try:
+            # [EARLY ACCESS] UpsertTranslationScript: Upsert a translation script.
+            api_response = await api_instance.upsert_translation_script(upsert_translation_script_request)
+            pprint(api_response)
+        except ApiException as e:
+            print("Exception when calling ScriptedTranslationApi->upsert_translation_script: %s\n" % e)
 
-
-
-# Enter a context with an instance of the ApiClientFactory to ensure the connection pool is closed after use
-async with api_client_factory:
-    # Create an instance of the API class
-    api_instance = api_client_factory.build(lusid.ScriptedTranslationApi)
-    upsert_translation_script_request = {"id":{"scope":"example-scope","code":"example-code","version":"0.0.1"},"body":"export function entryPoint() { return { scriptInterfaceVersion: 1, translate: Translate }; } function Translate(input){ const fxfwd = JSON.parse(input);  fxfwd[\"endDate\"] = fxfwd[\"maturityDate\"];  delete fxfwd[\"maturityDate\"];  return JSON.stringify(fxfwd); }"} # UpsertTranslationScriptRequest | The translation script to be upserted.
-
-    try:
-        # [EARLY ACCESS] UpsertTranslationScript: Upsert a translation script.
-        api_response = await api_instance.upsert_translation_script(upsert_translation_script_request)
-        print("The response of ScriptedTranslationApi->upsert_translation_script:\n")
-        pprint(api_response)
-    except Exception as e:
-        print("Exception when calling ScriptedTranslationApi->upsert_translation_script: %s\n" % e)
+asyncio.run(main())
 ```
-
 
 ### Parameters
 
@@ -813,10 +689,6 @@ Name | Type | Description  | Notes
 ### Return type
 
 [**TranslationScript**](TranslationScript.md)
-
-### Authorization
-
-[oauth2](../README.md#oauth2)
 
 ### HTTP request headers
 
@@ -830,5 +702,5 @@ Name | Type | Description  | Notes
 **400** | The details of the input related failure |  -  |
 **0** | Error response |  -  |
 
-[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+[Back to top](#) &#8226; [Back to API list](../README.md#documentation-for-api-endpoints) &#8226; [Back to Model list](../README.md#documentation-for-models) &#8226; [Back to README](../README.md)
 

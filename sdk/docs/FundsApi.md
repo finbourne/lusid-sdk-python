@@ -32,69 +32,59 @@ Accepts the specified estimate Valuation Point. Should the Valuation Point diffe
 
 ### Example
 
-* OAuth Authentication (oauth2):
 ```python
-from __future__ import print_function
-import time
-import lusid
-from lusid.rest import ApiException
-from lusid.models.valuation_point_data_request import ValuationPointDataRequest
-from lusid.models.valuation_point_data_response import ValuationPointDataResponse
+import asyncio
+from lusid.exceptions import ApiException
+from lusid.models import *
 from pprint import pprint
-
-import os
 from lusid import (
     ApiClientFactory,
-    FundsApi,
-    EnvironmentVariablesConfigurationLoader,
-    SecretsFileConfigurationLoader,
-    ArgsConfigurationLoader
+    FundsApi
 )
 
-# Use the lusid ApiClientFactory to build Api instances with a configured api client
-# By default this will read config from environment variables
-# Then from a secrets.json file found in the current working directory
-api_client_factory = ApiClientFactory()
+async def main():
 
-# The ApiClientFactory can be passed an iterable of configuration loaders to read configuration from
+    with open("secrets.json", "w") as file:
+        file.write('''
+{
+    "api":
+    {
+        "tokenUrl":"<your-token-url>",
+        "lusidUrl":"https://<your-domain>.lusid.com/api",
+        "username":"<your-username>",
+        "password":"<your-password>",
+        "clientId":"<your-client-id>",
+        "clientSecret":"<your-client-secret>"
+    }
+}''')
 
-api_url = "https://www.lusid.com/api"
-# Path to a secrets.json file containing authentication credentials
-# See https://support.lusid.com/knowledgebase/article/KA-01667/en-us
-# for a detailed guide to setting up the SDK make authenticated calls to LUSID APIs
-secrets_path = os.getenv("FBN_SECRETS_PATH")
-app_name="LusidJupyterNotebook"
+    # Use the lusid ApiClientFactory to build Api instances with a configured api client
+    # By default this will read config from environment variables
+    # Then from a secrets.json file found in the current working directory
+    api_client_factory = ApiClientFactory()
 
-config_loaders = [
-	EnvironmentVariablesConfigurationLoader(),
-	SecretsFileConfigurationLoader(api_secrets_file=secrets_path),
-	ArgsConfigurationLoader(api_url=api_url, app_name=app_name)
-]
-api_client_factory = ApiClientFactory(config_loaders=config_loaders)
+    # Enter a context with an instance of the ApiClientFactory to ensure the connection pool is closed after use
+    async with api_client_factory:
+        # Create an instance of the API class
+        api_instance = api_client_factory.build(FundsApi)
+        scope = 'scope_example' # str | The scope of the Fund.
+        code = 'code_example' # str | The code of the Fund. Together with the scope this uniquely identifies the Fund.
 
+        # Objects can be created either via the class constructor, or using the 'from_dict' or 'from_json' methods
+        # Change the lines below to switch approach
+        # valuation_point_data_request = ValuationPointDataRequest()
+        # valuation_point_data_request = ValuationPointDataRequest.from_json("")
+        valuation_point_data_request = ValuationPointDataRequest.from_dict({"diaryEntryCode":"DiaryEntryCode"}) # ValuationPointDataRequest | The valuationPointDataRequest which contains the Diary Entry code for the Estimate Valuation Point to move to Candidate or Final state.
 
-# The client must configure the authentication and authorization parameters
-# in accordance with the API server security policy.
+        try:
+            # [EXPERIMENTAL] AcceptEstimateValuationPoint: Accepts an Estimate Valuation Point.
+            api_response = await api_instance.accept_estimate_valuation_point(scope, code, valuation_point_data_request)
+            pprint(api_response)
+        except ApiException as e:
+            print("Exception when calling FundsApi->accept_estimate_valuation_point: %s\n" % e)
 
-
-
-# Enter a context with an instance of the ApiClientFactory to ensure the connection pool is closed after use
-async with api_client_factory:
-    # Create an instance of the API class
-    api_instance = api_client_factory.build(lusid.FundsApi)
-    scope = 'scope_example' # str | The scope of the Fund.
-    code = 'code_example' # str | The code of the Fund. Together with the scope this uniquely identifies the Fund.
-    valuation_point_data_request = {"diaryEntryCode":"DiaryEntryCode"} # ValuationPointDataRequest | The valuationPointDataRequest which contains the Diary Entry code for the Estimate Valuation Point to move to Candidate or Final state.
-
-    try:
-        # [EXPERIMENTAL] AcceptEstimateValuationPoint: Accepts an Estimate Valuation Point.
-        api_response = await api_instance.accept_estimate_valuation_point(scope, code, valuation_point_data_request)
-        print("The response of FundsApi->accept_estimate_valuation_point:\n")
-        pprint(api_response)
-    except Exception as e:
-        print("Exception when calling FundsApi->accept_estimate_valuation_point: %s\n" % e)
+asyncio.run(main())
 ```
-
 
 ### Parameters
 
@@ -108,10 +98,6 @@ Name | Type | Description  | Notes
 
 [**ValuationPointDataResponse**](ValuationPointDataResponse.md)
 
-### Authorization
-
-[oauth2](../README.md#oauth2)
-
 ### HTTP request headers
 
  - **Content-Type**: application/json-patch+json, application/json, text/json, application/*+json
@@ -124,7 +110,7 @@ Name | Type | Description  | Notes
 **400** | The details of the input related failure |  -  |
 **0** | Error response |  -  |
 
-[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+[Back to top](#) &#8226; [Back to API list](../README.md#documentation-for-api-endpoints) &#8226; [Back to Model list](../README.md#documentation-for-models) &#8226; [Back to README](../README.md)
 
 # **create_fee**
 > Fee create_fee(scope, code, fee_request)
@@ -135,69 +121,59 @@ Create the given Fee.
 
 ### Example
 
-* OAuth Authentication (oauth2):
 ```python
-from __future__ import print_function
-import time
-import lusid
-from lusid.rest import ApiException
-from lusid.models.fee import Fee
-from lusid.models.fee_request import FeeRequest
+import asyncio
+from lusid.exceptions import ApiException
+from lusid.models import *
 from pprint import pprint
-
-import os
 from lusid import (
     ApiClientFactory,
-    FundsApi,
-    EnvironmentVariablesConfigurationLoader,
-    SecretsFileConfigurationLoader,
-    ArgsConfigurationLoader
+    FundsApi
 )
 
-# Use the lusid ApiClientFactory to build Api instances with a configured api client
-# By default this will read config from environment variables
-# Then from a secrets.json file found in the current working directory
-api_client_factory = ApiClientFactory()
+async def main():
 
-# The ApiClientFactory can be passed an iterable of configuration loaders to read configuration from
+    with open("secrets.json", "w") as file:
+        file.write('''
+{
+    "api":
+    {
+        "tokenUrl":"<your-token-url>",
+        "lusidUrl":"https://<your-domain>.lusid.com/api",
+        "username":"<your-username>",
+        "password":"<your-password>",
+        "clientId":"<your-client-id>",
+        "clientSecret":"<your-client-secret>"
+    }
+}''')
 
-api_url = "https://www.lusid.com/api"
-# Path to a secrets.json file containing authentication credentials
-# See https://support.lusid.com/knowledgebase/article/KA-01667/en-us
-# for a detailed guide to setting up the SDK make authenticated calls to LUSID APIs
-secrets_path = os.getenv("FBN_SECRETS_PATH")
-app_name="LusidJupyterNotebook"
+    # Use the lusid ApiClientFactory to build Api instances with a configured api client
+    # By default this will read config from environment variables
+    # Then from a secrets.json file found in the current working directory
+    api_client_factory = ApiClientFactory()
 
-config_loaders = [
-	EnvironmentVariablesConfigurationLoader(),
-	SecretsFileConfigurationLoader(api_secrets_file=secrets_path),
-	ArgsConfigurationLoader(api_url=api_url, app_name=app_name)
-]
-api_client_factory = ApiClientFactory(config_loaders=config_loaders)
+    # Enter a context with an instance of the ApiClientFactory to ensure the connection pool is closed after use
+    async with api_client_factory:
+        # Create an instance of the API class
+        api_instance = api_client_factory.build(FundsApi)
+        scope = 'scope_example' # str | The scope of the Fund.
+        code = 'code_example' # str | The code of the Fund. Together with the scope this uniquely identifies the Fund.
 
+        # Objects can be created either via the class constructor, or using the 'from_dict' or 'from_json' methods
+        # Change the lines below to switch approach
+        # fee_request = FeeRequest()
+        # fee_request = FeeRequest.from_json("")
+        fee_request = FeeRequest.from_dict({"code":"FeeCode","feeType":{"scope":"FeeTypeScope","code":"FeeTypeCode"},"name":"Legal Fees","description":"Legal Fees","origin":"Separate Agreement","accrualCurrency":"GBP","treatment":"Monthly","totalAnnualAccrualAmount":75000,"payableFrequency":"Annually","businessDayConvention":"Previous","startDate":"2020-10-25T00:00:00.0000000+00:00","endDate":"2023-10-25T00:00:00.0000000+00:00","anchorDate":{"day":1,"month":1},"properties":{}}) # FeeRequest | The Fee to create.
 
-# The client must configure the authentication and authorization parameters
-# in accordance with the API server security policy.
+        try:
+            # [EXPERIMENTAL] CreateFee: Create a Fee.
+            api_response = await api_instance.create_fee(scope, code, fee_request)
+            pprint(api_response)
+        except ApiException as e:
+            print("Exception when calling FundsApi->create_fee: %s\n" % e)
 
-
-
-# Enter a context with an instance of the ApiClientFactory to ensure the connection pool is closed after use
-async with api_client_factory:
-    # Create an instance of the API class
-    api_instance = api_client_factory.build(lusid.FundsApi)
-    scope = 'scope_example' # str | The scope of the Fund.
-    code = 'code_example' # str | The code of the Fund. Together with the scope this uniquely identifies the Fund.
-    fee_request = {"code":"FeeCode","feeType":{"scope":"FeeTypeScope","code":"FeeTypeCode"},"name":"Legal Fees","description":"Legal Fees","origin":"Separate Agreement","accrualCurrency":"GBP","treatment":"Monthly","totalAnnualAccrualAmount":75000,"payableFrequency":"Annually","businessDayConvention":"Previous","startDate":"2020-10-25T00:00:00.0000000+00:00","endDate":"2023-10-25T00:00:00.0000000+00:00","anchorDate":{"day":1,"month":1},"properties":{}} # FeeRequest | The Fee to create.
-
-    try:
-        # [EXPERIMENTAL] CreateFee: Create a Fee.
-        api_response = await api_instance.create_fee(scope, code, fee_request)
-        print("The response of FundsApi->create_fee:\n")
-        pprint(api_response)
-    except Exception as e:
-        print("Exception when calling FundsApi->create_fee: %s\n" % e)
+asyncio.run(main())
 ```
-
 
 ### Parameters
 
@@ -211,10 +187,6 @@ Name | Type | Description  | Notes
 
 [**Fee**](Fee.md)
 
-### Authorization
-
-[oauth2](../README.md#oauth2)
-
 ### HTTP request headers
 
  - **Content-Type**: application/json-patch+json, application/json, text/json, application/*+json
@@ -227,7 +199,7 @@ Name | Type | Description  | Notes
 **400** | The details of the input related failure |  -  |
 **0** | Error response |  -  |
 
-[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+[Back to top](#) &#8226; [Back to API list](../README.md#documentation-for-api-endpoints) &#8226; [Back to Model list](../README.md#documentation-for-models) &#8226; [Back to README](../README.md)
 
 # **create_fund**
 > Fund create_fund(scope, fund_request)
@@ -238,68 +210,58 @@ Create the given Fund.
 
 ### Example
 
-* OAuth Authentication (oauth2):
 ```python
-from __future__ import print_function
-import time
-import lusid
-from lusid.rest import ApiException
-from lusid.models.fund import Fund
-from lusid.models.fund_request import FundRequest
+import asyncio
+from lusid.exceptions import ApiException
+from lusid.models import *
 from pprint import pprint
-
-import os
 from lusid import (
     ApiClientFactory,
-    FundsApi,
-    EnvironmentVariablesConfigurationLoader,
-    SecretsFileConfigurationLoader,
-    ArgsConfigurationLoader
+    FundsApi
 )
 
-# Use the lusid ApiClientFactory to build Api instances with a configured api client
-# By default this will read config from environment variables
-# Then from a secrets.json file found in the current working directory
-api_client_factory = ApiClientFactory()
+async def main():
 
-# The ApiClientFactory can be passed an iterable of configuration loaders to read configuration from
+    with open("secrets.json", "w") as file:
+        file.write('''
+{
+    "api":
+    {
+        "tokenUrl":"<your-token-url>",
+        "lusidUrl":"https://<your-domain>.lusid.com/api",
+        "username":"<your-username>",
+        "password":"<your-password>",
+        "clientId":"<your-client-id>",
+        "clientSecret":"<your-client-secret>"
+    }
+}''')
 
-api_url = "https://www.lusid.com/api"
-# Path to a secrets.json file containing authentication credentials
-# See https://support.lusid.com/knowledgebase/article/KA-01667/en-us
-# for a detailed guide to setting up the SDK make authenticated calls to LUSID APIs
-secrets_path = os.getenv("FBN_SECRETS_PATH")
-app_name="LusidJupyterNotebook"
+    # Use the lusid ApiClientFactory to build Api instances with a configured api client
+    # By default this will read config from environment variables
+    # Then from a secrets.json file found in the current working directory
+    api_client_factory = ApiClientFactory()
 
-config_loaders = [
-	EnvironmentVariablesConfigurationLoader(),
-	SecretsFileConfigurationLoader(api_secrets_file=secrets_path),
-	ArgsConfigurationLoader(api_url=api_url, app_name=app_name)
-]
-api_client_factory = ApiClientFactory(config_loaders=config_loaders)
+    # Enter a context with an instance of the ApiClientFactory to ensure the connection pool is closed after use
+    async with api_client_factory:
+        # Create an instance of the API class
+        api_instance = api_client_factory.build(FundsApi)
+        scope = 'scope_example' # str | The scope of the Fund.
 
+        # Objects can be created either via the class constructor, or using the 'from_dict' or 'from_json' methods
+        # Change the lines below to switch approach
+        # fund_request = FundRequest()
+        # fund_request = FundRequest.from_json("")
+        fund_request = FundRequest.from_dict({"code":"FundCode","displayName":"Fund Name","description":"Standard Fund","fundConfigurationId":{"scope":"FundConfigurationScope","code":"FundConfigurationCode"},"aborId":{"scope":"AborScope","code":"AborCode"},"shareClassInstrumentScopes":["Scope1","Scope2"],"shareClassInstruments":[{"instrumentIdentifiers":{"Instrument/default/Figi":"GB0007980598"}}],"type":"Master","inceptionDate":"9999-12-31T23:59:59.9999999+00:00","decimalPlaces":6,"yearEndDate":{"day":1,"month":12},"properties":{"Fund/MyScope/FundManagerName":{"key":"Fund/MyScope/FundManagerName","value":{"labelValue":"Smith"},"effectiveFrom":"2020-03-05T00:00:00.0000000+00:00"}}}) # FundRequest | The definition of the Fund.
 
-# The client must configure the authentication and authorization parameters
-# in accordance with the API server security policy.
+        try:
+            # [EXPERIMENTAL] CreateFund: Create a Fund.
+            api_response = await api_instance.create_fund(scope, fund_request)
+            pprint(api_response)
+        except ApiException as e:
+            print("Exception when calling FundsApi->create_fund: %s\n" % e)
 
-
-
-# Enter a context with an instance of the ApiClientFactory to ensure the connection pool is closed after use
-async with api_client_factory:
-    # Create an instance of the API class
-    api_instance = api_client_factory.build(lusid.FundsApi)
-    scope = 'scope_example' # str | The scope of the Fund.
-    fund_request = {"code":"FundCode","displayName":"Fund Name","description":"Standard Fund","fundConfigurationId":{"scope":"FundConfigurationScope","code":"FundConfigurationCode"},"aborId":{"scope":"AborScope","code":"AborCode"},"shareClassInstrumentScopes":["Scope1","Scope2"],"shareClassInstruments":[{"instrumentIdentifiers":{"Instrument/default/Figi":"GB0007980598"}}],"type":"Master","inceptionDate":"9999-12-31T23:59:59.9999999+00:00","decimalPlaces":6,"yearEndDate":{"day":1,"month":12},"properties":{"Fund/MyScope/FundManagerName":{"key":"Fund/MyScope/FundManagerName","value":{"labelValue":"Smith"},"effectiveFrom":"2020-03-05T00:00:00.0000000+00:00"}}} # FundRequest | The definition of the Fund.
-
-    try:
-        # [EXPERIMENTAL] CreateFund: Create a Fund.
-        api_response = await api_instance.create_fund(scope, fund_request)
-        print("The response of FundsApi->create_fund:\n")
-        pprint(api_response)
-    except Exception as e:
-        print("Exception when calling FundsApi->create_fund: %s\n" % e)
+asyncio.run(main())
 ```
-
 
 ### Parameters
 
@@ -311,10 +273,6 @@ Name | Type | Description  | Notes
 ### Return type
 
 [**Fund**](Fund.md)
-
-### Authorization
-
-[oauth2](../README.md#oauth2)
 
 ### HTTP request headers
 
@@ -328,7 +286,7 @@ Name | Type | Description  | Notes
 **400** | The details of the input related failure |  -  |
 **0** | Error response |  -  |
 
-[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+[Back to top](#) &#8226; [Back to API list](../README.md#documentation-for-api-endpoints) &#8226; [Back to Model list](../README.md#documentation-for-models) &#8226; [Back to README](../README.md)
 
 # **delete_fee**
 > DeletedEntityResponse delete_fee(scope, code, fee_code)
@@ -339,68 +297,54 @@ Delete the given Fee.
 
 ### Example
 
-* OAuth Authentication (oauth2):
 ```python
-from __future__ import print_function
-import time
-import lusid
-from lusid.rest import ApiException
-from lusid.models.deleted_entity_response import DeletedEntityResponse
+import asyncio
+from lusid.exceptions import ApiException
+from lusid.models import *
 from pprint import pprint
-
-import os
 from lusid import (
     ApiClientFactory,
-    FundsApi,
-    EnvironmentVariablesConfigurationLoader,
-    SecretsFileConfigurationLoader,
-    ArgsConfigurationLoader
+    FundsApi
 )
 
-# Use the lusid ApiClientFactory to build Api instances with a configured api client
-# By default this will read config from environment variables
-# Then from a secrets.json file found in the current working directory
-api_client_factory = ApiClientFactory()
+async def main():
 
-# The ApiClientFactory can be passed an iterable of configuration loaders to read configuration from
+    with open("secrets.json", "w") as file:
+        file.write('''
+{
+    "api":
+    {
+        "tokenUrl":"<your-token-url>",
+        "lusidUrl":"https://<your-domain>.lusid.com/api",
+        "username":"<your-username>",
+        "password":"<your-password>",
+        "clientId":"<your-client-id>",
+        "clientSecret":"<your-client-secret>"
+    }
+}''')
 
-api_url = "https://www.lusid.com/api"
-# Path to a secrets.json file containing authentication credentials
-# See https://support.lusid.com/knowledgebase/article/KA-01667/en-us
-# for a detailed guide to setting up the SDK make authenticated calls to LUSID APIs
-secrets_path = os.getenv("FBN_SECRETS_PATH")
-app_name="LusidJupyterNotebook"
+    # Use the lusid ApiClientFactory to build Api instances with a configured api client
+    # By default this will read config from environment variables
+    # Then from a secrets.json file found in the current working directory
+    api_client_factory = ApiClientFactory()
 
-config_loaders = [
-	EnvironmentVariablesConfigurationLoader(),
-	SecretsFileConfigurationLoader(api_secrets_file=secrets_path),
-	ArgsConfigurationLoader(api_url=api_url, app_name=app_name)
-]
-api_client_factory = ApiClientFactory(config_loaders=config_loaders)
+    # Enter a context with an instance of the ApiClientFactory to ensure the connection pool is closed after use
+    async with api_client_factory:
+        # Create an instance of the API class
+        api_instance = api_client_factory.build(FundsApi)
+        scope = 'scope_example' # str | The scope of the Fund
+        code = 'code_example' # str | The code of the Fund. Together with the scope this uniquely identifies the Fund.
+        fee_code = 'fee_code_example' # str | The code of the Fee to be deleted.
 
+        try:
+            # [EXPERIMENTAL] DeleteFee: Delete a Fee.
+            api_response = await api_instance.delete_fee(scope, code, fee_code)
+            pprint(api_response)
+        except ApiException as e:
+            print("Exception when calling FundsApi->delete_fee: %s\n" % e)
 
-# The client must configure the authentication and authorization parameters
-# in accordance with the API server security policy.
-
-
-
-# Enter a context with an instance of the ApiClientFactory to ensure the connection pool is closed after use
-async with api_client_factory:
-    # Create an instance of the API class
-    api_instance = api_client_factory.build(lusid.FundsApi)
-    scope = 'scope_example' # str | The scope of the Fund
-    code = 'code_example' # str | The code of the Fund. Together with the scope this uniquely identifies the Fund.
-    fee_code = 'fee_code_example' # str | The code of the Fee to be deleted.
-
-    try:
-        # [EXPERIMENTAL] DeleteFee: Delete a Fee.
-        api_response = await api_instance.delete_fee(scope, code, fee_code)
-        print("The response of FundsApi->delete_fee:\n")
-        pprint(api_response)
-    except Exception as e:
-        print("Exception when calling FundsApi->delete_fee: %s\n" % e)
+asyncio.run(main())
 ```
-
 
 ### Parameters
 
@@ -414,10 +358,6 @@ Name | Type | Description  | Notes
 
 [**DeletedEntityResponse**](DeletedEntityResponse.md)
 
-### Authorization
-
-[oauth2](../README.md#oauth2)
-
 ### HTTP request headers
 
  - **Content-Type**: Not defined
@@ -430,7 +370,7 @@ Name | Type | Description  | Notes
 **400** | The details of the input related failure |  -  |
 **0** | Error response |  -  |
 
-[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+[Back to top](#) &#8226; [Back to API list](../README.md#documentation-for-api-endpoints) &#8226; [Back to Model list](../README.md#documentation-for-models) &#8226; [Back to README](../README.md)
 
 # **delete_fund**
 > DeletedEntityResponse delete_fund(scope, code)
@@ -441,67 +381,53 @@ Delete the given Fund.
 
 ### Example
 
-* OAuth Authentication (oauth2):
 ```python
-from __future__ import print_function
-import time
-import lusid
-from lusid.rest import ApiException
-from lusid.models.deleted_entity_response import DeletedEntityResponse
+import asyncio
+from lusid.exceptions import ApiException
+from lusid.models import *
 from pprint import pprint
-
-import os
 from lusid import (
     ApiClientFactory,
-    FundsApi,
-    EnvironmentVariablesConfigurationLoader,
-    SecretsFileConfigurationLoader,
-    ArgsConfigurationLoader
+    FundsApi
 )
 
-# Use the lusid ApiClientFactory to build Api instances with a configured api client
-# By default this will read config from environment variables
-# Then from a secrets.json file found in the current working directory
-api_client_factory = ApiClientFactory()
+async def main():
 
-# The ApiClientFactory can be passed an iterable of configuration loaders to read configuration from
+    with open("secrets.json", "w") as file:
+        file.write('''
+{
+    "api":
+    {
+        "tokenUrl":"<your-token-url>",
+        "lusidUrl":"https://<your-domain>.lusid.com/api",
+        "username":"<your-username>",
+        "password":"<your-password>",
+        "clientId":"<your-client-id>",
+        "clientSecret":"<your-client-secret>"
+    }
+}''')
 
-api_url = "https://www.lusid.com/api"
-# Path to a secrets.json file containing authentication credentials
-# See https://support.lusid.com/knowledgebase/article/KA-01667/en-us
-# for a detailed guide to setting up the SDK make authenticated calls to LUSID APIs
-secrets_path = os.getenv("FBN_SECRETS_PATH")
-app_name="LusidJupyterNotebook"
+    # Use the lusid ApiClientFactory to build Api instances with a configured api client
+    # By default this will read config from environment variables
+    # Then from a secrets.json file found in the current working directory
+    api_client_factory = ApiClientFactory()
 
-config_loaders = [
-	EnvironmentVariablesConfigurationLoader(),
-	SecretsFileConfigurationLoader(api_secrets_file=secrets_path),
-	ArgsConfigurationLoader(api_url=api_url, app_name=app_name)
-]
-api_client_factory = ApiClientFactory(config_loaders=config_loaders)
+    # Enter a context with an instance of the ApiClientFactory to ensure the connection pool is closed after use
+    async with api_client_factory:
+        # Create an instance of the API class
+        api_instance = api_client_factory.build(FundsApi)
+        scope = 'scope_example' # str | The scope of the Fund to be deleted.
+        code = 'code_example' # str | The code of the Fund to be deleted. Together with the scope this uniquely identifies the Fund.
 
+        try:
+            # [EXPERIMENTAL] DeleteFund: Delete a Fund.
+            api_response = await api_instance.delete_fund(scope, code)
+            pprint(api_response)
+        except ApiException as e:
+            print("Exception when calling FundsApi->delete_fund: %s\n" % e)
 
-# The client must configure the authentication and authorization parameters
-# in accordance with the API server security policy.
-
-
-
-# Enter a context with an instance of the ApiClientFactory to ensure the connection pool is closed after use
-async with api_client_factory:
-    # Create an instance of the API class
-    api_instance = api_client_factory.build(lusid.FundsApi)
-    scope = 'scope_example' # str | The scope of the Fund to be deleted.
-    code = 'code_example' # str | The code of the Fund to be deleted. Together with the scope this uniquely identifies the Fund.
-
-    try:
-        # [EXPERIMENTAL] DeleteFund: Delete a Fund.
-        api_response = await api_instance.delete_fund(scope, code)
-        print("The response of FundsApi->delete_fund:\n")
-        pprint(api_response)
-    except Exception as e:
-        print("Exception when calling FundsApi->delete_fund: %s\n" % e)
+asyncio.run(main())
 ```
-
 
 ### Parameters
 
@@ -513,10 +439,6 @@ Name | Type | Description  | Notes
 ### Return type
 
 [**DeletedEntityResponse**](DeletedEntityResponse.md)
-
-### Authorization
-
-[oauth2](../README.md#oauth2)
 
 ### HTTP request headers
 
@@ -530,7 +452,7 @@ Name | Type | Description  | Notes
 **400** | The details of the input related failure |  -  |
 **0** | Error response |  -  |
 
-[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+[Back to top](#) &#8226; [Back to API list](../README.md#documentation-for-api-endpoints) &#8226; [Back to Model list](../README.md#documentation-for-models) &#8226; [Back to README](../README.md)
 
 # **delete_valuation_point**
 > DeletedEntityResponse delete_valuation_point(scope, code, diary_entry_code)
@@ -541,68 +463,54 @@ Deletes the given Valuation Point.
 
 ### Example
 
-* OAuth Authentication (oauth2):
 ```python
-from __future__ import print_function
-import time
-import lusid
-from lusid.rest import ApiException
-from lusid.models.deleted_entity_response import DeletedEntityResponse
+import asyncio
+from lusid.exceptions import ApiException
+from lusid.models import *
 from pprint import pprint
-
-import os
 from lusid import (
     ApiClientFactory,
-    FundsApi,
-    EnvironmentVariablesConfigurationLoader,
-    SecretsFileConfigurationLoader,
-    ArgsConfigurationLoader
+    FundsApi
 )
 
-# Use the lusid ApiClientFactory to build Api instances with a configured api client
-# By default this will read config from environment variables
-# Then from a secrets.json file found in the current working directory
-api_client_factory = ApiClientFactory()
+async def main():
 
-# The ApiClientFactory can be passed an iterable of configuration loaders to read configuration from
+    with open("secrets.json", "w") as file:
+        file.write('''
+{
+    "api":
+    {
+        "tokenUrl":"<your-token-url>",
+        "lusidUrl":"https://<your-domain>.lusid.com/api",
+        "username":"<your-username>",
+        "password":"<your-password>",
+        "clientId":"<your-client-id>",
+        "clientSecret":"<your-client-secret>"
+    }
+}''')
 
-api_url = "https://www.lusid.com/api"
-# Path to a secrets.json file containing authentication credentials
-# See https://support.lusid.com/knowledgebase/article/KA-01667/en-us
-# for a detailed guide to setting up the SDK make authenticated calls to LUSID APIs
-secrets_path = os.getenv("FBN_SECRETS_PATH")
-app_name="LusidJupyterNotebook"
+    # Use the lusid ApiClientFactory to build Api instances with a configured api client
+    # By default this will read config from environment variables
+    # Then from a secrets.json file found in the current working directory
+    api_client_factory = ApiClientFactory()
 
-config_loaders = [
-	EnvironmentVariablesConfigurationLoader(),
-	SecretsFileConfigurationLoader(api_secrets_file=secrets_path),
-	ArgsConfigurationLoader(api_url=api_url, app_name=app_name)
-]
-api_client_factory = ApiClientFactory(config_loaders=config_loaders)
+    # Enter a context with an instance of the ApiClientFactory to ensure the connection pool is closed after use
+    async with api_client_factory:
+        # Create an instance of the API class
+        api_instance = api_client_factory.build(FundsApi)
+        scope = 'scope_example' # str | The scope of the Fund for the valuation point to be deleted.
+        code = 'code_example' # str | The code of the Fund containing the Valuation Point to be deleted. Together with the scope this uniquely identifies the Fund.
+        diary_entry_code = 'diary_entry_code_example' # str | The diary entry code for the valuation Point to be deleted.
 
+        try:
+            # [EXPERIMENTAL] DeleteValuationPoint: Delete a Valuation Point.
+            api_response = await api_instance.delete_valuation_point(scope, code, diary_entry_code)
+            pprint(api_response)
+        except ApiException as e:
+            print("Exception when calling FundsApi->delete_valuation_point: %s\n" % e)
 
-# The client must configure the authentication and authorization parameters
-# in accordance with the API server security policy.
-
-
-
-# Enter a context with an instance of the ApiClientFactory to ensure the connection pool is closed after use
-async with api_client_factory:
-    # Create an instance of the API class
-    api_instance = api_client_factory.build(lusid.FundsApi)
-    scope = 'scope_example' # str | The scope of the Fund for the valuation point to be deleted.
-    code = 'code_example' # str | The code of the Fund containing the Valuation Point to be deleted. Together with the scope this uniquely identifies the Fund.
-    diary_entry_code = 'diary_entry_code_example' # str | The diary entry code for the valuation Point to be deleted.
-
-    try:
-        # [EXPERIMENTAL] DeleteValuationPoint: Delete a Valuation Point.
-        api_response = await api_instance.delete_valuation_point(scope, code, diary_entry_code)
-        print("The response of FundsApi->delete_valuation_point:\n")
-        pprint(api_response)
-    except Exception as e:
-        print("Exception when calling FundsApi->delete_valuation_point: %s\n" % e)
+asyncio.run(main())
 ```
-
 
 ### Parameters
 
@@ -616,10 +524,6 @@ Name | Type | Description  | Notes
 
 [**DeletedEntityResponse**](DeletedEntityResponse.md)
 
-### Authorization
-
-[oauth2](../README.md#oauth2)
-
 ### HTTP request headers
 
  - **Content-Type**: Not defined
@@ -632,7 +536,7 @@ Name | Type | Description  | Notes
 **400** | The details of the input related failure |  -  |
 **0** | Error response |  -  |
 
-[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+[Back to top](#) &#8226; [Back to API list](../README.md#documentation-for-api-endpoints) &#8226; [Back to Model list](../README.md#documentation-for-models) &#8226; [Back to README](../README.md)
 
 # **finalise_candidate_valuation_point**
 > ValuationPointDataResponse finalise_candidate_valuation_point(scope, code, valuation_point_data_request)
@@ -643,69 +547,59 @@ Moves a 'Candidate' status Valuation Point to status 'Final'.
 
 ### Example
 
-* OAuth Authentication (oauth2):
 ```python
-from __future__ import print_function
-import time
-import lusid
-from lusid.rest import ApiException
-from lusid.models.valuation_point_data_request import ValuationPointDataRequest
-from lusid.models.valuation_point_data_response import ValuationPointDataResponse
+import asyncio
+from lusid.exceptions import ApiException
+from lusid.models import *
 from pprint import pprint
-
-import os
 from lusid import (
     ApiClientFactory,
-    FundsApi,
-    EnvironmentVariablesConfigurationLoader,
-    SecretsFileConfigurationLoader,
-    ArgsConfigurationLoader
+    FundsApi
 )
 
-# Use the lusid ApiClientFactory to build Api instances with a configured api client
-# By default this will read config from environment variables
-# Then from a secrets.json file found in the current working directory
-api_client_factory = ApiClientFactory()
+async def main():
 
-# The ApiClientFactory can be passed an iterable of configuration loaders to read configuration from
+    with open("secrets.json", "w") as file:
+        file.write('''
+{
+    "api":
+    {
+        "tokenUrl":"<your-token-url>",
+        "lusidUrl":"https://<your-domain>.lusid.com/api",
+        "username":"<your-username>",
+        "password":"<your-password>",
+        "clientId":"<your-client-id>",
+        "clientSecret":"<your-client-secret>"
+    }
+}''')
 
-api_url = "https://www.lusid.com/api"
-# Path to a secrets.json file containing authentication credentials
-# See https://support.lusid.com/knowledgebase/article/KA-01667/en-us
-# for a detailed guide to setting up the SDK make authenticated calls to LUSID APIs
-secrets_path = os.getenv("FBN_SECRETS_PATH")
-app_name="LusidJupyterNotebook"
+    # Use the lusid ApiClientFactory to build Api instances with a configured api client
+    # By default this will read config from environment variables
+    # Then from a secrets.json file found in the current working directory
+    api_client_factory = ApiClientFactory()
 
-config_loaders = [
-	EnvironmentVariablesConfigurationLoader(),
-	SecretsFileConfigurationLoader(api_secrets_file=secrets_path),
-	ArgsConfigurationLoader(api_url=api_url, app_name=app_name)
-]
-api_client_factory = ApiClientFactory(config_loaders=config_loaders)
+    # Enter a context with an instance of the ApiClientFactory to ensure the connection pool is closed after use
+    async with api_client_factory:
+        # Create an instance of the API class
+        api_instance = api_client_factory.build(FundsApi)
+        scope = 'scope_example' # str | The scope of the Fund.
+        code = 'code_example' # str | The code of the Fund. Together with the scope this uniquely identifies the Fund.
 
+        # Objects can be created either via the class constructor, or using the 'from_dict' or 'from_json' methods
+        # Change the lines below to switch approach
+        # valuation_point_data_request = ValuationPointDataRequest()
+        # valuation_point_data_request = ValuationPointDataRequest.from_json("")
+        valuation_point_data_request = ValuationPointDataRequest.from_dict({"diaryEntryCode":"DiaryEntryCode"}) # ValuationPointDataRequest | The valuationPointDataRequest which contains the diary entry code to mark as final.
 
-# The client must configure the authentication and authorization parameters
-# in accordance with the API server security policy.
+        try:
+            # [EXPERIMENTAL] FinaliseCandidateValuationPoint: Finalise Candidate.
+            api_response = await api_instance.finalise_candidate_valuation_point(scope, code, valuation_point_data_request)
+            pprint(api_response)
+        except ApiException as e:
+            print("Exception when calling FundsApi->finalise_candidate_valuation_point: %s\n" % e)
 
-
-
-# Enter a context with an instance of the ApiClientFactory to ensure the connection pool is closed after use
-async with api_client_factory:
-    # Create an instance of the API class
-    api_instance = api_client_factory.build(lusid.FundsApi)
-    scope = 'scope_example' # str | The scope of the Fund.
-    code = 'code_example' # str | The code of the Fund. Together with the scope this uniquely identifies the Fund.
-    valuation_point_data_request = {"diaryEntryCode":"DiaryEntryCode"} # ValuationPointDataRequest | The valuationPointDataRequest which contains the diary entry code to mark as final.
-
-    try:
-        # [EXPERIMENTAL] FinaliseCandidateValuationPoint: Finalise Candidate.
-        api_response = await api_instance.finalise_candidate_valuation_point(scope, code, valuation_point_data_request)
-        print("The response of FundsApi->finalise_candidate_valuation_point:\n")
-        pprint(api_response)
-    except Exception as e:
-        print("Exception when calling FundsApi->finalise_candidate_valuation_point: %s\n" % e)
+asyncio.run(main())
 ```
-
 
 ### Parameters
 
@@ -719,10 +613,6 @@ Name | Type | Description  | Notes
 
 [**ValuationPointDataResponse**](ValuationPointDataResponse.md)
 
-### Authorization
-
-[oauth2](../README.md#oauth2)
-
 ### HTTP request headers
 
  - **Content-Type**: application/json-patch+json, application/json, text/json, application/*+json
@@ -735,7 +625,7 @@ Name | Type | Description  | Notes
 **400** | The details of the input related failure |  -  |
 **0** | Error response |  -  |
 
-[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+[Back to top](#) &#8226; [Back to API list](../README.md#documentation-for-api-endpoints) &#8226; [Back to Model list](../README.md#documentation-for-models) &#8226; [Back to README](../README.md)
 
 # **get_fee**
 > Fee get_fee(scope, code, fee_code, effective_at=effective_at, as_at=as_at, property_keys=property_keys)
@@ -746,71 +636,57 @@ Retrieve a fee for a specified Fund
 
 ### Example
 
-* OAuth Authentication (oauth2):
 ```python
-from __future__ import print_function
-import time
-import lusid
-from lusid.rest import ApiException
-from lusid.models.fee import Fee
+import asyncio
+from lusid.exceptions import ApiException
+from lusid.models import *
 from pprint import pprint
-
-import os
 from lusid import (
     ApiClientFactory,
-    FundsApi,
-    EnvironmentVariablesConfigurationLoader,
-    SecretsFileConfigurationLoader,
-    ArgsConfigurationLoader
+    FundsApi
 )
 
-# Use the lusid ApiClientFactory to build Api instances with a configured api client
-# By default this will read config from environment variables
-# Then from a secrets.json file found in the current working directory
-api_client_factory = ApiClientFactory()
+async def main():
 
-# The ApiClientFactory can be passed an iterable of configuration loaders to read configuration from
+    with open("secrets.json", "w") as file:
+        file.write('''
+{
+    "api":
+    {
+        "tokenUrl":"<your-token-url>",
+        "lusidUrl":"https://<your-domain>.lusid.com/api",
+        "username":"<your-username>",
+        "password":"<your-password>",
+        "clientId":"<your-client-id>",
+        "clientSecret":"<your-client-secret>"
+    }
+}''')
 
-api_url = "https://www.lusid.com/api"
-# Path to a secrets.json file containing authentication credentials
-# See https://support.lusid.com/knowledgebase/article/KA-01667/en-us
-# for a detailed guide to setting up the SDK make authenticated calls to LUSID APIs
-secrets_path = os.getenv("FBN_SECRETS_PATH")
-app_name="LusidJupyterNotebook"
+    # Use the lusid ApiClientFactory to build Api instances with a configured api client
+    # By default this will read config from environment variables
+    # Then from a secrets.json file found in the current working directory
+    api_client_factory = ApiClientFactory()
 
-config_loaders = [
-	EnvironmentVariablesConfigurationLoader(),
-	SecretsFileConfigurationLoader(api_secrets_file=secrets_path),
-	ArgsConfigurationLoader(api_url=api_url, app_name=app_name)
-]
-api_client_factory = ApiClientFactory(config_loaders=config_loaders)
+    # Enter a context with an instance of the ApiClientFactory to ensure the connection pool is closed after use
+    async with api_client_factory:
+        # Create an instance of the API class
+        api_instance = api_client_factory.build(FundsApi)
+        scope = 'scope_example' # str | The scope of the Fund.
+        code = 'code_example' # str | The code of the Fund. Together with the scope this uniquely identifies the Fund.
+        fee_code = 'fee_code_example' # str | The code of the Fee.
+        effective_at = 'effective_at_example' # str | The effective datetime or cut label at which to retrieve the Fee properties. Defaults to the current LUSID system datetime if not specified. (optional)
+        as_at = '2013-10-20T19:20:30+01:00' # datetime | The asAt datetime at which to retrieve the Fee. Defaults to returning the latest version of the Fee if not specified. (optional)
+        property_keys = ['property_keys_example'] # List[str] | A list of property keys from the 'Fee' domain to decorate onto the Fee.              These must take the format {domain}/{scope}/{code}, for example 'Fee/Account/Id'. If no properties are specified, then no properties will be returned. (optional)
 
+        try:
+            # [EXPERIMENTAL] GetFee: Get a Fee for a specified Fund.
+            api_response = await api_instance.get_fee(scope, code, fee_code, effective_at=effective_at, as_at=as_at, property_keys=property_keys)
+            pprint(api_response)
+        except ApiException as e:
+            print("Exception when calling FundsApi->get_fee: %s\n" % e)
 
-# The client must configure the authentication and authorization parameters
-# in accordance with the API server security policy.
-
-
-
-# Enter a context with an instance of the ApiClientFactory to ensure the connection pool is closed after use
-async with api_client_factory:
-    # Create an instance of the API class
-    api_instance = api_client_factory.build(lusid.FundsApi)
-    scope = 'scope_example' # str | The scope of the Fund.
-    code = 'code_example' # str | The code of the Fund. Together with the scope this uniquely identifies the Fund.
-    fee_code = 'fee_code_example' # str | The code of the Fee.
-    effective_at = 'effective_at_example' # str | The effective datetime or cut label at which to retrieve the Fee properties. Defaults to the current LUSID system datetime if not specified. (optional)
-    as_at = '2013-10-20T19:20:30+01:00' # datetime | The asAt datetime at which to retrieve the Fee. Defaults to returning the latest version of the Fee if not specified. (optional)
-    property_keys = ['property_keys_example'] # List[str] | A list of property keys from the 'Fee' domain to decorate onto the Fee.              These must take the format {domain}/{scope}/{code}, for example 'Fee/Account/Id'. If no properties are specified, then no properties will be returned. (optional)
-
-    try:
-        # [EXPERIMENTAL] GetFee: Get a Fee for a specified Fund.
-        api_response = await api_instance.get_fee(scope, code, fee_code, effective_at=effective_at, as_at=as_at, property_keys=property_keys)
-        print("The response of FundsApi->get_fee:\n")
-        pprint(api_response)
-    except Exception as e:
-        print("Exception when calling FundsApi->get_fee: %s\n" % e)
+asyncio.run(main())
 ```
-
 
 ### Parameters
 
@@ -827,10 +703,6 @@ Name | Type | Description  | Notes
 
 [**Fee**](Fee.md)
 
-### Authorization
-
-[oauth2](../README.md#oauth2)
-
 ### HTTP request headers
 
  - **Content-Type**: Not defined
@@ -843,7 +715,7 @@ Name | Type | Description  | Notes
 **400** | The details of the input related failure |  -  |
 **0** | Error response |  -  |
 
-[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+[Back to top](#) &#8226; [Back to API list](../README.md#documentation-for-api-endpoints) &#8226; [Back to Model list](../README.md#documentation-for-models) &#8226; [Back to README](../README.md)
 
 # **get_fund**
 > Fund get_fund(scope, code, effective_at=effective_at, as_at=as_at, property_keys=property_keys)
@@ -854,70 +726,56 @@ Retrieve the definition of a particular Fund.
 
 ### Example
 
-* OAuth Authentication (oauth2):
 ```python
-from __future__ import print_function
-import time
-import lusid
-from lusid.rest import ApiException
-from lusid.models.fund import Fund
+import asyncio
+from lusid.exceptions import ApiException
+from lusid.models import *
 from pprint import pprint
-
-import os
 from lusid import (
     ApiClientFactory,
-    FundsApi,
-    EnvironmentVariablesConfigurationLoader,
-    SecretsFileConfigurationLoader,
-    ArgsConfigurationLoader
+    FundsApi
 )
 
-# Use the lusid ApiClientFactory to build Api instances with a configured api client
-# By default this will read config from environment variables
-# Then from a secrets.json file found in the current working directory
-api_client_factory = ApiClientFactory()
+async def main():
 
-# The ApiClientFactory can be passed an iterable of configuration loaders to read configuration from
+    with open("secrets.json", "w") as file:
+        file.write('''
+{
+    "api":
+    {
+        "tokenUrl":"<your-token-url>",
+        "lusidUrl":"https://<your-domain>.lusid.com/api",
+        "username":"<your-username>",
+        "password":"<your-password>",
+        "clientId":"<your-client-id>",
+        "clientSecret":"<your-client-secret>"
+    }
+}''')
 
-api_url = "https://www.lusid.com/api"
-# Path to a secrets.json file containing authentication credentials
-# See https://support.lusid.com/knowledgebase/article/KA-01667/en-us
-# for a detailed guide to setting up the SDK make authenticated calls to LUSID APIs
-secrets_path = os.getenv("FBN_SECRETS_PATH")
-app_name="LusidJupyterNotebook"
+    # Use the lusid ApiClientFactory to build Api instances with a configured api client
+    # By default this will read config from environment variables
+    # Then from a secrets.json file found in the current working directory
+    api_client_factory = ApiClientFactory()
 
-config_loaders = [
-	EnvironmentVariablesConfigurationLoader(),
-	SecretsFileConfigurationLoader(api_secrets_file=secrets_path),
-	ArgsConfigurationLoader(api_url=api_url, app_name=app_name)
-]
-api_client_factory = ApiClientFactory(config_loaders=config_loaders)
+    # Enter a context with an instance of the ApiClientFactory to ensure the connection pool is closed after use
+    async with api_client_factory:
+        # Create an instance of the API class
+        api_instance = api_client_factory.build(FundsApi)
+        scope = 'scope_example' # str | The scope of the Fund.
+        code = 'code_example' # str | The code of the Fund. Together with the scope this uniquely identifies the Fund.
+        effective_at = 'effective_at_example' # str | The effective datetime or cut label at which to retrieve the Fund properties. Defaults to the current LUSID system datetime if not specified. (optional)
+        as_at = '2013-10-20T19:20:30+01:00' # datetime | The asAt datetime at which to retrieve the Fund definition. Defaults to returning the latest version of the Fund definition if not specified. (optional)
+        property_keys = ['property_keys_example'] # List[str] | A list of property keys from the 'Fund' domain to decorate onto the Fund.              These must take the format {domain}/{scope}/{code}, for example 'Fund/Manager/Id'. If no properties are specified, then no properties will be returned. (optional)
 
+        try:
+            # [EXPERIMENTAL] GetFund: Get a Fund.
+            api_response = await api_instance.get_fund(scope, code, effective_at=effective_at, as_at=as_at, property_keys=property_keys)
+            pprint(api_response)
+        except ApiException as e:
+            print("Exception when calling FundsApi->get_fund: %s\n" % e)
 
-# The client must configure the authentication and authorization parameters
-# in accordance with the API server security policy.
-
-
-
-# Enter a context with an instance of the ApiClientFactory to ensure the connection pool is closed after use
-async with api_client_factory:
-    # Create an instance of the API class
-    api_instance = api_client_factory.build(lusid.FundsApi)
-    scope = 'scope_example' # str | The scope of the Fund.
-    code = 'code_example' # str | The code of the Fund. Together with the scope this uniquely identifies the Fund.
-    effective_at = 'effective_at_example' # str | The effective datetime or cut label at which to retrieve the Fund properties. Defaults to the current LUSID system datetime if not specified. (optional)
-    as_at = '2013-10-20T19:20:30+01:00' # datetime | The asAt datetime at which to retrieve the Fund definition. Defaults to returning the latest version of the Fund definition if not specified. (optional)
-    property_keys = ['property_keys_example'] # List[str] | A list of property keys from the 'Fund' domain to decorate onto the Fund.              These must take the format {domain}/{scope}/{code}, for example 'Fund/Manager/Id'. If no properties are specified, then no properties will be returned. (optional)
-
-    try:
-        # [EXPERIMENTAL] GetFund: Get a Fund.
-        api_response = await api_instance.get_fund(scope, code, effective_at=effective_at, as_at=as_at, property_keys=property_keys)
-        print("The response of FundsApi->get_fund:\n")
-        pprint(api_response)
-    except Exception as e:
-        print("Exception when calling FundsApi->get_fund: %s\n" % e)
+asyncio.run(main())
 ```
-
 
 ### Parameters
 
@@ -933,10 +791,6 @@ Name | Type | Description  | Notes
 
 [**Fund**](Fund.md)
 
-### Authorization
-
-[oauth2](../README.md#oauth2)
-
 ### HTTP request headers
 
  - **Content-Type**: Not defined
@@ -949,7 +803,7 @@ Name | Type | Description  | Notes
 **400** | The details of the input related failure |  -  |
 **0** | Error response |  -  |
 
-[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+[Back to top](#) &#8226; [Back to API list](../README.md#documentation-for-api-endpoints) &#8226; [Back to Model list](../README.md#documentation-for-models) &#8226; [Back to README](../README.md)
 
 # **get_valuation_point_data**
 > ValuationPointDataResponse get_valuation_point_data(scope, code, valuation_point_data_query_parameters, as_at=as_at)
@@ -960,70 +814,60 @@ Retrieves the Valuation Point data for a date or specified Diary Entry Id.  The 
 
 ### Example
 
-* OAuth Authentication (oauth2):
 ```python
-from __future__ import print_function
-import time
-import lusid
-from lusid.rest import ApiException
-from lusid.models.valuation_point_data_query_parameters import ValuationPointDataQueryParameters
-from lusid.models.valuation_point_data_response import ValuationPointDataResponse
+import asyncio
+from lusid.exceptions import ApiException
+from lusid.models import *
 from pprint import pprint
-
-import os
 from lusid import (
     ApiClientFactory,
-    FundsApi,
-    EnvironmentVariablesConfigurationLoader,
-    SecretsFileConfigurationLoader,
-    ArgsConfigurationLoader
+    FundsApi
 )
 
-# Use the lusid ApiClientFactory to build Api instances with a configured api client
-# By default this will read config from environment variables
-# Then from a secrets.json file found in the current working directory
-api_client_factory = ApiClientFactory()
+async def main():
 
-# The ApiClientFactory can be passed an iterable of configuration loaders to read configuration from
+    with open("secrets.json", "w") as file:
+        file.write('''
+{
+    "api":
+    {
+        "tokenUrl":"<your-token-url>",
+        "lusidUrl":"https://<your-domain>.lusid.com/api",
+        "username":"<your-username>",
+        "password":"<your-password>",
+        "clientId":"<your-client-id>",
+        "clientSecret":"<your-client-secret>"
+    }
+}''')
 
-api_url = "https://www.lusid.com/api"
-# Path to a secrets.json file containing authentication credentials
-# See https://support.lusid.com/knowledgebase/article/KA-01667/en-us
-# for a detailed guide to setting up the SDK make authenticated calls to LUSID APIs
-secrets_path = os.getenv("FBN_SECRETS_PATH")
-app_name="LusidJupyterNotebook"
+    # Use the lusid ApiClientFactory to build Api instances with a configured api client
+    # By default this will read config from environment variables
+    # Then from a secrets.json file found in the current working directory
+    api_client_factory = ApiClientFactory()
 
-config_loaders = [
-	EnvironmentVariablesConfigurationLoader(),
-	SecretsFileConfigurationLoader(api_secrets_file=secrets_path),
-	ArgsConfigurationLoader(api_url=api_url, app_name=app_name)
-]
-api_client_factory = ApiClientFactory(config_loaders=config_loaders)
+    # Enter a context with an instance of the ApiClientFactory to ensure the connection pool is closed after use
+    async with api_client_factory:
+        # Create an instance of the API class
+        api_instance = api_client_factory.build(FundsApi)
+        scope = 'scope_example' # str | The scope of the Fund.
+        code = 'code_example' # str | The code of the Fund. Together with the scope this uniquely identifies the Fund.
 
+        # Objects can be created either via the class constructor, or using the 'from_dict' or 'from_json' methods
+        # Change the lines below to switch approach
+        # valuation_point_data_query_parameters = ValuationPointDataQueryParameters()
+        # valuation_point_data_query_parameters = ValuationPointDataQueryParameters.from_json("")
+        valuation_point_data_query_parameters = ValuationPointDataQueryParameters.from_dict({"end":{"diaryEntry":"DiaryEntryCode"}}) # ValuationPointDataQueryParameters | The arguments to use for querying the Valuation Point data
+        as_at = '2013-10-20T19:20:30+01:00' # datetime | The asAt datetime at which to retrieve the Fund definition. Defaults to returning the latest version of the Fund definition if not specified. (optional)
 
-# The client must configure the authentication and authorization parameters
-# in accordance with the API server security policy.
+        try:
+            # [EXPERIMENTAL] GetValuationPointData: Get Valuation Point Data for a Fund.
+            api_response = await api_instance.get_valuation_point_data(scope, code, valuation_point_data_query_parameters, as_at=as_at)
+            pprint(api_response)
+        except ApiException as e:
+            print("Exception when calling FundsApi->get_valuation_point_data: %s\n" % e)
 
-
-
-# Enter a context with an instance of the ApiClientFactory to ensure the connection pool is closed after use
-async with api_client_factory:
-    # Create an instance of the API class
-    api_instance = api_client_factory.build(lusid.FundsApi)
-    scope = 'scope_example' # str | The scope of the Fund.
-    code = 'code_example' # str | The code of the Fund. Together with the scope this uniquely identifies the Fund.
-    valuation_point_data_query_parameters = {"end":{"diaryEntry":"DiaryEntryCode"}} # ValuationPointDataQueryParameters | The arguments to use for querying the Valuation Point data
-    as_at = '2013-10-20T19:20:30+01:00' # datetime | The asAt datetime at which to retrieve the Fund definition. Defaults to returning the latest version of the Fund definition if not specified. (optional)
-
-    try:
-        # [EXPERIMENTAL] GetValuationPointData: Get Valuation Point Data for a Fund.
-        api_response = await api_instance.get_valuation_point_data(scope, code, valuation_point_data_query_parameters, as_at=as_at)
-        print("The response of FundsApi->get_valuation_point_data:\n")
-        pprint(api_response)
-    except Exception as e:
-        print("Exception when calling FundsApi->get_valuation_point_data: %s\n" % e)
+asyncio.run(main())
 ```
-
 
 ### Parameters
 
@@ -1038,10 +882,6 @@ Name | Type | Description  | Notes
 
 [**ValuationPointDataResponse**](ValuationPointDataResponse.md)
 
-### Authorization
-
-[oauth2](../README.md#oauth2)
-
 ### HTTP request headers
 
  - **Content-Type**: application/json-patch+json, application/json, text/json, application/*+json
@@ -1054,7 +894,7 @@ Name | Type | Description  | Notes
 **400** | The details of the input related failure |  -  |
 **0** | Error response |  -  |
 
-[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+[Back to top](#) &#8226; [Back to API list](../README.md#documentation-for-api-endpoints) &#8226; [Back to Model list](../README.md#documentation-for-models) &#8226; [Back to README](../README.md)
 
 # **list_fees**
 > PagedResourceListOfFee list_fees(scope, code, effective_at=effective_at, as_at=as_at, page=page, limit=limit, filter=filter, sort_by=sort_by, property_keys=property_keys)
@@ -1065,74 +905,60 @@ List all the Fees matching a particular criteria.
 
 ### Example
 
-* OAuth Authentication (oauth2):
 ```python
-from __future__ import print_function
-import time
-import lusid
-from lusid.rest import ApiException
-from lusid.models.paged_resource_list_of_fee import PagedResourceListOfFee
+import asyncio
+from lusid.exceptions import ApiException
+from lusid.models import *
 from pprint import pprint
-
-import os
 from lusid import (
     ApiClientFactory,
-    FundsApi,
-    EnvironmentVariablesConfigurationLoader,
-    SecretsFileConfigurationLoader,
-    ArgsConfigurationLoader
+    FundsApi
 )
 
-# Use the lusid ApiClientFactory to build Api instances with a configured api client
-# By default this will read config from environment variables
-# Then from a secrets.json file found in the current working directory
-api_client_factory = ApiClientFactory()
+async def main():
 
-# The ApiClientFactory can be passed an iterable of configuration loaders to read configuration from
+    with open("secrets.json", "w") as file:
+        file.write('''
+{
+    "api":
+    {
+        "tokenUrl":"<your-token-url>",
+        "lusidUrl":"https://<your-domain>.lusid.com/api",
+        "username":"<your-username>",
+        "password":"<your-password>",
+        "clientId":"<your-client-id>",
+        "clientSecret":"<your-client-secret>"
+    }
+}''')
 
-api_url = "https://www.lusid.com/api"
-# Path to a secrets.json file containing authentication credentials
-# See https://support.lusid.com/knowledgebase/article/KA-01667/en-us
-# for a detailed guide to setting up the SDK make authenticated calls to LUSID APIs
-secrets_path = os.getenv("FBN_SECRETS_PATH")
-app_name="LusidJupyterNotebook"
+    # Use the lusid ApiClientFactory to build Api instances with a configured api client
+    # By default this will read config from environment variables
+    # Then from a secrets.json file found in the current working directory
+    api_client_factory = ApiClientFactory()
 
-config_loaders = [
-	EnvironmentVariablesConfigurationLoader(),
-	SecretsFileConfigurationLoader(api_secrets_file=secrets_path),
-	ArgsConfigurationLoader(api_url=api_url, app_name=app_name)
-]
-api_client_factory = ApiClientFactory(config_loaders=config_loaders)
+    # Enter a context with an instance of the ApiClientFactory to ensure the connection pool is closed after use
+    async with api_client_factory:
+        # Create an instance of the API class
+        api_instance = api_client_factory.build(FundsApi)
+        scope = 'scope_example' # str | The scope of the Fund.
+        code = 'code_example' # str | The code of the Fund.
+        effective_at = 'effective_at_example' # str | The effective datetime or cut label at which to list the TimeVariant properties for the Fees. Defaults to the current LUSID              system datetime if not specified. (optional)
+        as_at = '2013-10-20T19:20:30+01:00' # datetime | The asAt datetime at which to list the Fees. Defaults to returning the latest version of each Fee if not specified. (optional)
+        page = 'page_example' # str | The pagination token to use to continue listing fees; this              value is returned from the previous call. If a pagination token is provided, the filter, effectiveAt              and asAt fields must not have changed since the original request. (optional)
+        limit = 56 # int | When paginating, limit the results to this number. Defaults to 100 if not specified. (optional)
+        filter = 'filter_example' # str | Expression to filter the results.              For example, to filter on the treatment, specify \"treatment eq 'Monthly'\". For more information about filtering              results, see https://support.lusid.com/knowledgebase/article/KA-01914. (optional)
+        sort_by = ['sort_by_example'] # List[str] | A list of field names or properties to sort by, each suffixed by \" ASC\" or \" DESC\" (optional)
+        property_keys = ['property_keys_example'] # List[str] | A list of property keys from the 'Fee' domain to decorate onto each Fee.              These must take the format {domain}/{scope}/{code}, for example 'Fee/Account/Id'. (optional)
 
+        try:
+            # [EXPERIMENTAL] ListFees: List Fees for a specified Fund.
+            api_response = await api_instance.list_fees(scope, code, effective_at=effective_at, as_at=as_at, page=page, limit=limit, filter=filter, sort_by=sort_by, property_keys=property_keys)
+            pprint(api_response)
+        except ApiException as e:
+            print("Exception when calling FundsApi->list_fees: %s\n" % e)
 
-# The client must configure the authentication and authorization parameters
-# in accordance with the API server security policy.
-
-
-
-# Enter a context with an instance of the ApiClientFactory to ensure the connection pool is closed after use
-async with api_client_factory:
-    # Create an instance of the API class
-    api_instance = api_client_factory.build(lusid.FundsApi)
-    scope = 'scope_example' # str | The scope of the Fund.
-    code = 'code_example' # str | The code of the Fund.
-    effective_at = 'effective_at_example' # str | The effective datetime or cut label at which to list the TimeVariant properties for the Fees. Defaults to the current LUSID              system datetime if not specified. (optional)
-    as_at = '2013-10-20T19:20:30+01:00' # datetime | The asAt datetime at which to list the Fees. Defaults to returning the latest version of each Fee if not specified. (optional)
-    page = 'page_example' # str | The pagination token to use to continue listing fees; this              value is returned from the previous call. If a pagination token is provided, the filter, effectiveAt              and asAt fields must not have changed since the original request. (optional)
-    limit = 56 # int | When paginating, limit the results to this number. Defaults to 100 if not specified. (optional)
-    filter = 'filter_example' # str | Expression to filter the results.              For example, to filter on the treatment, specify \"treatment eq 'Monthly'\". For more information about filtering              results, see https://support.lusid.com/knowledgebase/article/KA-01914. (optional)
-    sort_by = ['sort_by_example'] # List[str] | A list of field names or properties to sort by, each suffixed by \" ASC\" or \" DESC\" (optional)
-    property_keys = ['property_keys_example'] # List[str] | A list of property keys from the 'Fee' domain to decorate onto each Fee.              These must take the format {domain}/{scope}/{code}, for example 'Fee/Account/Id'. (optional)
-
-    try:
-        # [EXPERIMENTAL] ListFees: List Fees for a specified Fund.
-        api_response = await api_instance.list_fees(scope, code, effective_at=effective_at, as_at=as_at, page=page, limit=limit, filter=filter, sort_by=sort_by, property_keys=property_keys)
-        print("The response of FundsApi->list_fees:\n")
-        pprint(api_response)
-    except Exception as e:
-        print("Exception when calling FundsApi->list_fees: %s\n" % e)
+asyncio.run(main())
 ```
-
 
 ### Parameters
 
@@ -1152,10 +978,6 @@ Name | Type | Description  | Notes
 
 [**PagedResourceListOfFee**](PagedResourceListOfFee.md)
 
-### Authorization
-
-[oauth2](../README.md#oauth2)
-
 ### HTTP request headers
 
  - **Content-Type**: Not defined
@@ -1168,7 +990,7 @@ Name | Type | Description  | Notes
 **400** | The details of the input related failure |  -  |
 **0** | Error response |  -  |
 
-[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+[Back to top](#) &#8226; [Back to API list](../README.md#documentation-for-api-endpoints) &#8226; [Back to Model list](../README.md#documentation-for-models) &#8226; [Back to README](../README.md)
 
 # **list_funds**
 > PagedResourceListOfFund list_funds(effective_at=effective_at, as_at=as_at, page=page, limit=limit, filter=filter, sort_by=sort_by, property_keys=property_keys)
@@ -1179,72 +1001,58 @@ List all the Funds matching particular criteria.
 
 ### Example
 
-* OAuth Authentication (oauth2):
 ```python
-from __future__ import print_function
-import time
-import lusid
-from lusid.rest import ApiException
-from lusid.models.paged_resource_list_of_fund import PagedResourceListOfFund
+import asyncio
+from lusid.exceptions import ApiException
+from lusid.models import *
 from pprint import pprint
-
-import os
 from lusid import (
     ApiClientFactory,
-    FundsApi,
-    EnvironmentVariablesConfigurationLoader,
-    SecretsFileConfigurationLoader,
-    ArgsConfigurationLoader
+    FundsApi
 )
 
-# Use the lusid ApiClientFactory to build Api instances with a configured api client
-# By default this will read config from environment variables
-# Then from a secrets.json file found in the current working directory
-api_client_factory = ApiClientFactory()
+async def main():
 
-# The ApiClientFactory can be passed an iterable of configuration loaders to read configuration from
+    with open("secrets.json", "w") as file:
+        file.write('''
+{
+    "api":
+    {
+        "tokenUrl":"<your-token-url>",
+        "lusidUrl":"https://<your-domain>.lusid.com/api",
+        "username":"<your-username>",
+        "password":"<your-password>",
+        "clientId":"<your-client-id>",
+        "clientSecret":"<your-client-secret>"
+    }
+}''')
 
-api_url = "https://www.lusid.com/api"
-# Path to a secrets.json file containing authentication credentials
-# See https://support.lusid.com/knowledgebase/article/KA-01667/en-us
-# for a detailed guide to setting up the SDK make authenticated calls to LUSID APIs
-secrets_path = os.getenv("FBN_SECRETS_PATH")
-app_name="LusidJupyterNotebook"
+    # Use the lusid ApiClientFactory to build Api instances with a configured api client
+    # By default this will read config from environment variables
+    # Then from a secrets.json file found in the current working directory
+    api_client_factory = ApiClientFactory()
 
-config_loaders = [
-	EnvironmentVariablesConfigurationLoader(),
-	SecretsFileConfigurationLoader(api_secrets_file=secrets_path),
-	ArgsConfigurationLoader(api_url=api_url, app_name=app_name)
-]
-api_client_factory = ApiClientFactory(config_loaders=config_loaders)
+    # Enter a context with an instance of the ApiClientFactory to ensure the connection pool is closed after use
+    async with api_client_factory:
+        # Create an instance of the API class
+        api_instance = api_client_factory.build(FundsApi)
+        effective_at = 'effective_at_example' # str | The effective datetime or cut label at which to list the TimeVariant properties for the Funds. Defaults to the current LUSID              system datetime if not specified. (optional)
+        as_at = '2013-10-20T19:20:30+01:00' # datetime | The asAt datetime at which to list the Funds. Defaults to returning the latest version of each Fund if not specified. (optional)
+        page = 'page_example' # str | The pagination token to use to continue listing Funds; this              value is returned from the previous call. If a pagination token is provided, the filter, effectiveAt              and asAt fields must not have changed since the original request. (optional)
+        limit = 56 # int | When paginating, limit the results to this number. Defaults to 100 if not specified. (optional)
+        filter = 'filter_example' # str | Expression to filter the results.              For example, to filter on the Fund type, specify \"id.Code eq 'Fund1'\". For more information about filtering              results, see https://support.lusid.com/knowledgebase/article/KA-01914. (optional)
+        sort_by = ['sort_by_example'] # List[str] | A list of field names or properties to sort by, each suffixed by \" ASC\" or \" DESC\" (optional)
+        property_keys = ['property_keys_example'] # List[str] | A list of property keys from the 'Fund' domain to decorate onto each Fund.              These must take the format {domain}/{scope}/{code}, for example 'Fund/Manager/Id'. (optional)
 
+        try:
+            # [EXPERIMENTAL] ListFunds: List Funds.
+            api_response = await api_instance.list_funds(effective_at=effective_at, as_at=as_at, page=page, limit=limit, filter=filter, sort_by=sort_by, property_keys=property_keys)
+            pprint(api_response)
+        except ApiException as e:
+            print("Exception when calling FundsApi->list_funds: %s\n" % e)
 
-# The client must configure the authentication and authorization parameters
-# in accordance with the API server security policy.
-
-
-
-# Enter a context with an instance of the ApiClientFactory to ensure the connection pool is closed after use
-async with api_client_factory:
-    # Create an instance of the API class
-    api_instance = api_client_factory.build(lusid.FundsApi)
-    effective_at = 'effective_at_example' # str | The effective datetime or cut label at which to list the TimeVariant properties for the Funds. Defaults to the current LUSID              system datetime if not specified. (optional)
-    as_at = '2013-10-20T19:20:30+01:00' # datetime | The asAt datetime at which to list the Funds. Defaults to returning the latest version of each Fund if not specified. (optional)
-    page = 'page_example' # str | The pagination token to use to continue listing Funds; this              value is returned from the previous call. If a pagination token is provided, the filter, effectiveAt              and asAt fields must not have changed since the original request. (optional)
-    limit = 56 # int | When paginating, limit the results to this number. Defaults to 100 if not specified. (optional)
-    filter = 'filter_example' # str | Expression to filter the results.              For example, to filter on the Fund type, specify \"id.Code eq 'Fund1'\". For more information about filtering              results, see https://support.lusid.com/knowledgebase/article/KA-01914. (optional)
-    sort_by = ['sort_by_example'] # List[str] | A list of field names or properties to sort by, each suffixed by \" ASC\" or \" DESC\" (optional)
-    property_keys = ['property_keys_example'] # List[str] | A list of property keys from the 'Fund' domain to decorate onto each Fund.              These must take the format {domain}/{scope}/{code}, for example 'Fund/Manager/Id'. (optional)
-
-    try:
-        # [EXPERIMENTAL] ListFunds: List Funds.
-        api_response = await api_instance.list_funds(effective_at=effective_at, as_at=as_at, page=page, limit=limit, filter=filter, sort_by=sort_by, property_keys=property_keys)
-        print("The response of FundsApi->list_funds:\n")
-        pprint(api_response)
-    except Exception as e:
-        print("Exception when calling FundsApi->list_funds: %s\n" % e)
+asyncio.run(main())
 ```
-
 
 ### Parameters
 
@@ -1262,10 +1070,6 @@ Name | Type | Description  | Notes
 
 [**PagedResourceListOfFund**](PagedResourceListOfFund.md)
 
-### Authorization
-
-[oauth2](../README.md#oauth2)
-
 ### HTTP request headers
 
  - **Content-Type**: Not defined
@@ -1278,7 +1082,7 @@ Name | Type | Description  | Notes
 **400** | The details of the input related failure |  -  |
 **0** | Error response |  -  |
 
-[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+[Back to top](#) &#8226; [Back to API list](../README.md#documentation-for-api-endpoints) &#8226; [Back to Model list](../README.md#documentation-for-models) &#8226; [Back to README](../README.md)
 
 # **patch_fee**
 > Fee patch_fee(scope, code, fee_code, operation)
@@ -1289,70 +1093,55 @@ Create or update certain fields for a particular Fee.  The behaviour is defined 
 
 ### Example
 
-* OAuth Authentication (oauth2):
 ```python
-from __future__ import print_function
-import time
-import lusid
-from lusid.rest import ApiException
-from lusid.models.fee import Fee
-from lusid.models.operation import Operation
+import asyncio
+from lusid.exceptions import ApiException
+from lusid.models import *
 from pprint import pprint
-
-import os
 from lusid import (
     ApiClientFactory,
-    FundsApi,
-    EnvironmentVariablesConfigurationLoader,
-    SecretsFileConfigurationLoader,
-    ArgsConfigurationLoader
+    FundsApi
 )
 
-# Use the lusid ApiClientFactory to build Api instances with a configured api client
-# By default this will read config from environment variables
-# Then from a secrets.json file found in the current working directory
-api_client_factory = ApiClientFactory()
+async def main():
 
-# The ApiClientFactory can be passed an iterable of configuration loaders to read configuration from
+    with open("secrets.json", "w") as file:
+        file.write('''
+{
+    "api":
+    {
+        "tokenUrl":"<your-token-url>",
+        "lusidUrl":"https://<your-domain>.lusid.com/api",
+        "username":"<your-username>",
+        "password":"<your-password>",
+        "clientId":"<your-client-id>",
+        "clientSecret":"<your-client-secret>"
+    }
+}''')
 
-api_url = "https://www.lusid.com/api"
-# Path to a secrets.json file containing authentication credentials
-# See https://support.lusid.com/knowledgebase/article/KA-01667/en-us
-# for a detailed guide to setting up the SDK make authenticated calls to LUSID APIs
-secrets_path = os.getenv("FBN_SECRETS_PATH")
-app_name="LusidJupyterNotebook"
+    # Use the lusid ApiClientFactory to build Api instances with a configured api client
+    # By default this will read config from environment variables
+    # Then from a secrets.json file found in the current working directory
+    api_client_factory = ApiClientFactory()
 
-config_loaders = [
-	EnvironmentVariablesConfigurationLoader(),
-	SecretsFileConfigurationLoader(api_secrets_file=secrets_path),
-	ArgsConfigurationLoader(api_url=api_url, app_name=app_name)
-]
-api_client_factory = ApiClientFactory(config_loaders=config_loaders)
+    # Enter a context with an instance of the ApiClientFactory to ensure the connection pool is closed after use
+    async with api_client_factory:
+        # Create an instance of the API class
+        api_instance = api_client_factory.build(FundsApi)
+        scope = 'scope_example' # str | The scope of the Fund.
+        code = 'code_example' # str | The code of the Fund. Together with the scope this uniquely identifies the Fund.
+        fee_code = 'fee_code_example' # str | The code of the Fee.
+        operation = [{"value":"2027-12-31T00:00:00.0000000+00:00","path":"/endDate","op":"add"}] # List[Operation] | The json patch document. For more information see: https://datatracker.ietf.org/doc/html/rfc6902.
 
+        try:
+            # [EXPERIMENTAL] PatchFee: Patch Fee.
+            api_response = await api_instance.patch_fee(scope, code, fee_code, operation)
+            pprint(api_response)
+        except ApiException as e:
+            print("Exception when calling FundsApi->patch_fee: %s\n" % e)
 
-# The client must configure the authentication and authorization parameters
-# in accordance with the API server security policy.
-
-
-
-# Enter a context with an instance of the ApiClientFactory to ensure the connection pool is closed after use
-async with api_client_factory:
-    # Create an instance of the API class
-    api_instance = api_client_factory.build(lusid.FundsApi)
-    scope = 'scope_example' # str | The scope of the Fund.
-    code = 'code_example' # str | The code of the Fund. Together with the scope this uniquely identifies the Fund.
-    fee_code = 'fee_code_example' # str | The code of the Fee.
-    operation = [{"value":"2027-12-31T00:00:00.0000000+00:00","path":"/endDate","op":"add"}] # List[Operation] | The json patch document. For more information see: https://datatracker.ietf.org/doc/html/rfc6902.
-
-    try:
-        # [EXPERIMENTAL] PatchFee: Patch Fee.
-        api_response = await api_instance.patch_fee(scope, code, fee_code, operation)
-        print("The response of FundsApi->patch_fee:\n")
-        pprint(api_response)
-    except Exception as e:
-        print("Exception when calling FundsApi->patch_fee: %s\n" % e)
+asyncio.run(main())
 ```
-
 
 ### Parameters
 
@@ -1367,10 +1156,6 @@ Name | Type | Description  | Notes
 
 [**Fee**](Fee.md)
 
-### Authorization
-
-[oauth2](../README.md#oauth2)
-
 ### HTTP request headers
 
  - **Content-Type**: application/json-patch+json, application/json, text/json, application/*+json
@@ -1383,7 +1168,7 @@ Name | Type | Description  | Notes
 **400** | The details of the input related failure |  -  |
 **0** | Error response |  -  |
 
-[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+[Back to top](#) &#8226; [Back to API list](../README.md#documentation-for-api-endpoints) &#8226; [Back to Model list](../README.md#documentation-for-models) &#8226; [Back to README](../README.md)
 
 # **set_share_class_instruments**
 > Fund set_share_class_instruments(scope, code, set_share_class_instruments_request)
@@ -1394,69 +1179,59 @@ Update the ShareClass Instruments on an existing fund with the set of instrument
 
 ### Example
 
-* OAuth Authentication (oauth2):
 ```python
-from __future__ import print_function
-import time
-import lusid
-from lusid.rest import ApiException
-from lusid.models.fund import Fund
-from lusid.models.set_share_class_instruments_request import SetShareClassInstrumentsRequest
+import asyncio
+from lusid.exceptions import ApiException
+from lusid.models import *
 from pprint import pprint
-
-import os
 from lusid import (
     ApiClientFactory,
-    FundsApi,
-    EnvironmentVariablesConfigurationLoader,
-    SecretsFileConfigurationLoader,
-    ArgsConfigurationLoader
+    FundsApi
 )
 
-# Use the lusid ApiClientFactory to build Api instances with a configured api client
-# By default this will read config from environment variables
-# Then from a secrets.json file found in the current working directory
-api_client_factory = ApiClientFactory()
+async def main():
 
-# The ApiClientFactory can be passed an iterable of configuration loaders to read configuration from
+    with open("secrets.json", "w") as file:
+        file.write('''
+{
+    "api":
+    {
+        "tokenUrl":"<your-token-url>",
+        "lusidUrl":"https://<your-domain>.lusid.com/api",
+        "username":"<your-username>",
+        "password":"<your-password>",
+        "clientId":"<your-client-id>",
+        "clientSecret":"<your-client-secret>"
+    }
+}''')
 
-api_url = "https://www.lusid.com/api"
-# Path to a secrets.json file containing authentication credentials
-# See https://support.lusid.com/knowledgebase/article/KA-01667/en-us
-# for a detailed guide to setting up the SDK make authenticated calls to LUSID APIs
-secrets_path = os.getenv("FBN_SECRETS_PATH")
-app_name="LusidJupyterNotebook"
+    # Use the lusid ApiClientFactory to build Api instances with a configured api client
+    # By default this will read config from environment variables
+    # Then from a secrets.json file found in the current working directory
+    api_client_factory = ApiClientFactory()
 
-config_loaders = [
-	EnvironmentVariablesConfigurationLoader(),
-	SecretsFileConfigurationLoader(api_secrets_file=secrets_path),
-	ArgsConfigurationLoader(api_url=api_url, app_name=app_name)
-]
-api_client_factory = ApiClientFactory(config_loaders=config_loaders)
+    # Enter a context with an instance of the ApiClientFactory to ensure the connection pool is closed after use
+    async with api_client_factory:
+        # Create an instance of the API class
+        api_instance = api_client_factory.build(FundsApi)
+        scope = 'scope_example' # str | The scope of the Fund.
+        code = 'code_example' # str | The code of the Fund.
 
+        # Objects can be created either via the class constructor, or using the 'from_dict' or 'from_json' methods
+        # Change the lines below to switch approach
+        # set_share_class_instruments_request = SetShareClassInstrumentsRequest()
+        # set_share_class_instruments_request = SetShareClassInstrumentsRequest.from_json("")
+        set_share_class_instruments_request = SetShareClassInstrumentsRequest.from_dict({"shareClassInstrumentScopes":["UKInstrumentScope"],"shareClassInstruments":[{"instrumentIdentifiers":{"Instrument/default/ClientInternal":"UK_12345"}}]}) # SetShareClassInstrumentsRequest | The scopes and instrument identifiers for the instruments to be set.
 
-# The client must configure the authentication and authorization parameters
-# in accordance with the API server security policy.
+        try:
+            # [EXPERIMENTAL] SetShareClassInstruments: Set the ShareClass Instruments on a fund.
+            api_response = await api_instance.set_share_class_instruments(scope, code, set_share_class_instruments_request)
+            pprint(api_response)
+        except ApiException as e:
+            print("Exception when calling FundsApi->set_share_class_instruments: %s\n" % e)
 
-
-
-# Enter a context with an instance of the ApiClientFactory to ensure the connection pool is closed after use
-async with api_client_factory:
-    # Create an instance of the API class
-    api_instance = api_client_factory.build(lusid.FundsApi)
-    scope = 'scope_example' # str | The scope of the Fund.
-    code = 'code_example' # str | The code of the Fund.
-    set_share_class_instruments_request = {"shareClassInstrumentScopes":["UKInstrumentScope"],"shareClassInstruments":[{"instrumentIdentifiers":{"Instrument/default/ClientInternal":"UK_12345"}}]} # SetShareClassInstrumentsRequest | The scopes and instrument identifiers for the instruments to be set.
-
-    try:
-        # [EXPERIMENTAL] SetShareClassInstruments: Set the ShareClass Instruments on a fund.
-        api_response = await api_instance.set_share_class_instruments(scope, code, set_share_class_instruments_request)
-        print("The response of FundsApi->set_share_class_instruments:\n")
-        pprint(api_response)
-    except Exception as e:
-        print("Exception when calling FundsApi->set_share_class_instruments: %s\n" % e)
+asyncio.run(main())
 ```
-
 
 ### Parameters
 
@@ -1470,10 +1245,6 @@ Name | Type | Description  | Notes
 
 [**Fund**](Fund.md)
 
-### Authorization
-
-[oauth2](../README.md#oauth2)
-
 ### HTTP request headers
 
  - **Content-Type**: application/json-patch+json, application/json, text/json, application/*+json
@@ -1486,7 +1257,7 @@ Name | Type | Description  | Notes
 **400** | The details of the input related failure |  -  |
 **0** | Error response |  -  |
 
-[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+[Back to top](#) &#8226; [Back to API list](../README.md#documentation-for-api-endpoints) &#8226; [Back to Model list](../README.md#documentation-for-models) &#8226; [Back to README](../README.md)
 
 # **upsert_diary_entry_type_valuation_point**
 > DiaryEntry upsert_diary_entry_type_valuation_point(scope, code, upsert_valuation_point_request)
@@ -1497,69 +1268,59 @@ Update or insert the estimate Valuation Point.                If the Valuation P
 
 ### Example
 
-* OAuth Authentication (oauth2):
 ```python
-from __future__ import print_function
-import time
-import lusid
-from lusid.rest import ApiException
-from lusid.models.diary_entry import DiaryEntry
-from lusid.models.upsert_valuation_point_request import UpsertValuationPointRequest
+import asyncio
+from lusid.exceptions import ApiException
+from lusid.models import *
 from pprint import pprint
-
-import os
 from lusid import (
     ApiClientFactory,
-    FundsApi,
-    EnvironmentVariablesConfigurationLoader,
-    SecretsFileConfigurationLoader,
-    ArgsConfigurationLoader
+    FundsApi
 )
 
-# Use the lusid ApiClientFactory to build Api instances with a configured api client
-# By default this will read config from environment variables
-# Then from a secrets.json file found in the current working directory
-api_client_factory = ApiClientFactory()
+async def main():
 
-# The ApiClientFactory can be passed an iterable of configuration loaders to read configuration from
+    with open("secrets.json", "w") as file:
+        file.write('''
+{
+    "api":
+    {
+        "tokenUrl":"<your-token-url>",
+        "lusidUrl":"https://<your-domain>.lusid.com/api",
+        "username":"<your-username>",
+        "password":"<your-password>",
+        "clientId":"<your-client-id>",
+        "clientSecret":"<your-client-secret>"
+    }
+}''')
 
-api_url = "https://www.lusid.com/api"
-# Path to a secrets.json file containing authentication credentials
-# See https://support.lusid.com/knowledgebase/article/KA-01667/en-us
-# for a detailed guide to setting up the SDK make authenticated calls to LUSID APIs
-secrets_path = os.getenv("FBN_SECRETS_PATH")
-app_name="LusidJupyterNotebook"
+    # Use the lusid ApiClientFactory to build Api instances with a configured api client
+    # By default this will read config from environment variables
+    # Then from a secrets.json file found in the current working directory
+    api_client_factory = ApiClientFactory()
 
-config_loaders = [
-	EnvironmentVariablesConfigurationLoader(),
-	SecretsFileConfigurationLoader(api_secrets_file=secrets_path),
-	ArgsConfigurationLoader(api_url=api_url, app_name=app_name)
-]
-api_client_factory = ApiClientFactory(config_loaders=config_loaders)
+    # Enter a context with an instance of the ApiClientFactory to ensure the connection pool is closed after use
+    async with api_client_factory:
+        # Create an instance of the API class
+        api_instance = api_client_factory.build(FundsApi)
+        scope = 'scope_example' # str | The scope of the Fund.
+        code = 'code_example' # str | The code of the Fund. Together with the scope this uniquely identifies the Fund.
 
+        # Objects can be created either via the class constructor, or using the 'from_dict' or 'from_json' methods
+        # Change the lines below to switch approach
+        # upsert_valuation_point_request = UpsertValuationPointRequest()
+        # upsert_valuation_point_request = UpsertValuationPointRequest.from_json("")
+        upsert_valuation_point_request = UpsertValuationPointRequest.from_dict({"diaryEntryCode":"ValuationJan2024","name":"ValuationJan2024","effectiveAt":"2024-01-31T23:59:59.0000000+00:00","queryAsAt":"2024-01-31T23:59:59.0000000+00:00","properties":{}}) # UpsertValuationPointRequest | The Valuation Point Estimate definition to Upsert
 
-# The client must configure the authentication and authorization parameters
-# in accordance with the API server security policy.
+        try:
+            # [EXPERIMENTAL] UpsertDiaryEntryTypeValuationPoint: Upsert Valuation Point.
+            api_response = await api_instance.upsert_diary_entry_type_valuation_point(scope, code, upsert_valuation_point_request)
+            pprint(api_response)
+        except ApiException as e:
+            print("Exception when calling FundsApi->upsert_diary_entry_type_valuation_point: %s\n" % e)
 
-
-
-# Enter a context with an instance of the ApiClientFactory to ensure the connection pool is closed after use
-async with api_client_factory:
-    # Create an instance of the API class
-    api_instance = api_client_factory.build(lusid.FundsApi)
-    scope = 'scope_example' # str | The scope of the Fund.
-    code = 'code_example' # str | The code of the Fund. Together with the scope this uniquely identifies the Fund.
-    upsert_valuation_point_request = {"diaryEntryCode":"ValuationJan2024","name":"ValuationJan2024","effectiveAt":"2024-01-31T23:59:59.0000000+00:00","queryAsAt":"2024-01-31T23:59:59.0000000+00:00","properties":{}} # UpsertValuationPointRequest | The Valuation Point Estimate definition to Upsert
-
-    try:
-        # [EXPERIMENTAL] UpsertDiaryEntryTypeValuationPoint: Upsert Valuation Point.
-        api_response = await api_instance.upsert_diary_entry_type_valuation_point(scope, code, upsert_valuation_point_request)
-        print("The response of FundsApi->upsert_diary_entry_type_valuation_point:\n")
-        pprint(api_response)
-    except Exception as e:
-        print("Exception when calling FundsApi->upsert_diary_entry_type_valuation_point: %s\n" % e)
+asyncio.run(main())
 ```
-
 
 ### Parameters
 
@@ -1573,10 +1334,6 @@ Name | Type | Description  | Notes
 
 [**DiaryEntry**](DiaryEntry.md)
 
-### Authorization
-
-[oauth2](../README.md#oauth2)
-
 ### HTTP request headers
 
  - **Content-Type**: application/json-patch+json, application/json, text/json, application/*+json
@@ -1589,7 +1346,7 @@ Name | Type | Description  | Notes
 **400** | The details of the input related failure |  -  |
 **0** | Error response |  -  |
 
-[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+[Back to top](#) &#8226; [Back to API list](../README.md#documentation-for-api-endpoints) &#8226; [Back to Model list](../README.md#documentation-for-models) &#8226; [Back to README](../README.md)
 
 # **upsert_fee_properties**
 > FeeProperties upsert_fee_properties(scope, code, fee_code, request_body=request_body)
@@ -1600,70 +1357,55 @@ Update or insert one or more properties onto a single Fee. A property will be up
 
 ### Example
 
-* OAuth Authentication (oauth2):
 ```python
-from __future__ import print_function
-import time
-import lusid
-from lusid.rest import ApiException
-from lusid.models.fee_properties import FeeProperties
-from lusid.models.model_property import ModelProperty
+import asyncio
+from lusid.exceptions import ApiException
+from lusid.models import *
 from pprint import pprint
-
-import os
 from lusid import (
     ApiClientFactory,
-    FundsApi,
-    EnvironmentVariablesConfigurationLoader,
-    SecretsFileConfigurationLoader,
-    ArgsConfigurationLoader
+    FundsApi
 )
 
-# Use the lusid ApiClientFactory to build Api instances with a configured api client
-# By default this will read config from environment variables
-# Then from a secrets.json file found in the current working directory
-api_client_factory = ApiClientFactory()
+async def main():
 
-# The ApiClientFactory can be passed an iterable of configuration loaders to read configuration from
+    with open("secrets.json", "w") as file:
+        file.write('''
+{
+    "api":
+    {
+        "tokenUrl":"<your-token-url>",
+        "lusidUrl":"https://<your-domain>.lusid.com/api",
+        "username":"<your-username>",
+        "password":"<your-password>",
+        "clientId":"<your-client-id>",
+        "clientSecret":"<your-client-secret>"
+    }
+}''')
 
-api_url = "https://www.lusid.com/api"
-# Path to a secrets.json file containing authentication credentials
-# See https://support.lusid.com/knowledgebase/article/KA-01667/en-us
-# for a detailed guide to setting up the SDK make authenticated calls to LUSID APIs
-secrets_path = os.getenv("FBN_SECRETS_PATH")
-app_name="LusidJupyterNotebook"
+    # Use the lusid ApiClientFactory to build Api instances with a configured api client
+    # By default this will read config from environment variables
+    # Then from a secrets.json file found in the current working directory
+    api_client_factory = ApiClientFactory()
 
-config_loaders = [
-	EnvironmentVariablesConfigurationLoader(),
-	SecretsFileConfigurationLoader(api_secrets_file=secrets_path),
-	ArgsConfigurationLoader(api_url=api_url, app_name=app_name)
-]
-api_client_factory = ApiClientFactory(config_loaders=config_loaders)
+    # Enter a context with an instance of the ApiClientFactory to ensure the connection pool is closed after use
+    async with api_client_factory:
+        # Create an instance of the API class
+        api_instance = api_client_factory.build(FundsApi)
+        scope = 'scope_example' # str | The scope of the Fund.
+        code = 'code_example' # str | The code of the Fund. Together with the scope this uniquely identifies the Fund.
+        fee_code = 'fee_code_example' # str | The code of the Fee to update or insert the properties onto.
+        request_body = {"Fee/MyScope/FundManagerName":{"key":"Fee/MyScope/FundManagerName","value":{"labelValue":"Smith"},"effectiveFrom":"2018-03-05T00:00:00.0000000+00:00"},"Fee/MyScope/SomeProperty":{"key":"Fee/MyScope/SomeProperty","value":{"labelValue":"SomeValue"},"effectiveFrom":"2016-01-01T00:00:00.0000000+00:00"},"Fee/MyScope/AnotherProperty":{"key":"Fee/MyScope/AnotherProperty","value":{"labelValue":"AnotherValue"},"effectiveFrom":"2018-03-05T00:00:00.0000000+00:00","effectiveUntil":"2020-01-01T00:00:00.0000000+00:00"},"Fee/MyScope/ReBalanceInterval":{"key":"Fee/MyScope/ReBalanceInterval","value":{"metricValue":{"value":30,"unit":"Days"}}}} # Dict[str, ModelProperty] | The properties to be updated or inserted onto the Fee. Each property in               the request must be keyed by its unique property key. This has the format {domain}/{scope}/{code} e.g. \"Fee/Manager/Id\". (optional)
 
+        try:
+            # [EXPERIMENTAL] UpsertFeeProperties: Upsert Fee properties.
+            api_response = await api_instance.upsert_fee_properties(scope, code, fee_code, request_body=request_body)
+            pprint(api_response)
+        except ApiException as e:
+            print("Exception when calling FundsApi->upsert_fee_properties: %s\n" % e)
 
-# The client must configure the authentication and authorization parameters
-# in accordance with the API server security policy.
-
-
-
-# Enter a context with an instance of the ApiClientFactory to ensure the connection pool is closed after use
-async with api_client_factory:
-    # Create an instance of the API class
-    api_instance = api_client_factory.build(lusid.FundsApi)
-    scope = 'scope_example' # str | The scope of the Fund.
-    code = 'code_example' # str | The code of the Fund. Together with the scope this uniquely identifies the Fund.
-    fee_code = 'fee_code_example' # str | The code of the Fee to update or insert the properties onto.
-    request_body = {"Fee/MyScope/FundManagerName":{"key":"Fee/MyScope/FundManagerName","value":{"labelValue":"Smith"},"effectiveFrom":"2018-03-05T00:00:00.0000000+00:00"},"Fee/MyScope/SomeProperty":{"key":"Fee/MyScope/SomeProperty","value":{"labelValue":"SomeValue"},"effectiveFrom":"2016-01-01T00:00:00.0000000+00:00"},"Fee/MyScope/AnotherProperty":{"key":"Fee/MyScope/AnotherProperty","value":{"labelValue":"AnotherValue"},"effectiveFrom":"2018-03-05T00:00:00.0000000+00:00","effectiveUntil":"2020-01-01T00:00:00.0000000+00:00"},"Fee/MyScope/ReBalanceInterval":{"key":"Fee/MyScope/ReBalanceInterval","value":{"metricValue":{"value":30,"unit":"Days"}}}} # Dict[str, ModelProperty] | The properties to be updated or inserted onto the Fee. Each property in               the request must be keyed by its unique property key. This has the format {domain}/{scope}/{code} e.g. \"Fee/Manager/Id\". (optional)
-
-    try:
-        # [EXPERIMENTAL] UpsertFeeProperties: Upsert Fee properties.
-        api_response = await api_instance.upsert_fee_properties(scope, code, fee_code, request_body=request_body)
-        print("The response of FundsApi->upsert_fee_properties:\n")
-        pprint(api_response)
-    except Exception as e:
-        print("Exception when calling FundsApi->upsert_fee_properties: %s\n" % e)
+asyncio.run(main())
 ```
-
 
 ### Parameters
 
@@ -1678,10 +1420,6 @@ Name | Type | Description  | Notes
 
 [**FeeProperties**](FeeProperties.md)
 
-### Authorization
-
-[oauth2](../README.md#oauth2)
-
 ### HTTP request headers
 
  - **Content-Type**: application/json-patch+json, application/json, text/json, application/*+json
@@ -1694,7 +1432,7 @@ Name | Type | Description  | Notes
 **400** | The details of the input related failure |  -  |
 **0** | Error response |  -  |
 
-[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+[Back to top](#) &#8226; [Back to API list](../README.md#documentation-for-api-endpoints) &#8226; [Back to Model list](../README.md#documentation-for-models) &#8226; [Back to README](../README.md)
 
 # **upsert_fund_properties**
 > FundProperties upsert_fund_properties(scope, code, request_body=request_body)
@@ -1705,69 +1443,54 @@ Update or insert one or more properties onto a single Fund. A property will be u
 
 ### Example
 
-* OAuth Authentication (oauth2):
 ```python
-from __future__ import print_function
-import time
-import lusid
-from lusid.rest import ApiException
-from lusid.models.fund_properties import FundProperties
-from lusid.models.model_property import ModelProperty
+import asyncio
+from lusid.exceptions import ApiException
+from lusid.models import *
 from pprint import pprint
-
-import os
 from lusid import (
     ApiClientFactory,
-    FundsApi,
-    EnvironmentVariablesConfigurationLoader,
-    SecretsFileConfigurationLoader,
-    ArgsConfigurationLoader
+    FundsApi
 )
 
-# Use the lusid ApiClientFactory to build Api instances with a configured api client
-# By default this will read config from environment variables
-# Then from a secrets.json file found in the current working directory
-api_client_factory = ApiClientFactory()
+async def main():
 
-# The ApiClientFactory can be passed an iterable of configuration loaders to read configuration from
+    with open("secrets.json", "w") as file:
+        file.write('''
+{
+    "api":
+    {
+        "tokenUrl":"<your-token-url>",
+        "lusidUrl":"https://<your-domain>.lusid.com/api",
+        "username":"<your-username>",
+        "password":"<your-password>",
+        "clientId":"<your-client-id>",
+        "clientSecret":"<your-client-secret>"
+    }
+}''')
 
-api_url = "https://www.lusid.com/api"
-# Path to a secrets.json file containing authentication credentials
-# See https://support.lusid.com/knowledgebase/article/KA-01667/en-us
-# for a detailed guide to setting up the SDK make authenticated calls to LUSID APIs
-secrets_path = os.getenv("FBN_SECRETS_PATH")
-app_name="LusidJupyterNotebook"
+    # Use the lusid ApiClientFactory to build Api instances with a configured api client
+    # By default this will read config from environment variables
+    # Then from a secrets.json file found in the current working directory
+    api_client_factory = ApiClientFactory()
 
-config_loaders = [
-	EnvironmentVariablesConfigurationLoader(),
-	SecretsFileConfigurationLoader(api_secrets_file=secrets_path),
-	ArgsConfigurationLoader(api_url=api_url, app_name=app_name)
-]
-api_client_factory = ApiClientFactory(config_loaders=config_loaders)
+    # Enter a context with an instance of the ApiClientFactory to ensure the connection pool is closed after use
+    async with api_client_factory:
+        # Create an instance of the API class
+        api_instance = api_client_factory.build(FundsApi)
+        scope = 'scope_example' # str | The scope of the Fund to update or insert the properties onto.
+        code = 'code_example' # str | The code of the Fund to update or insert the properties onto. Together with the scope this uniquely identifies the Fund.
+        request_body = {"Fund/MyScope/FundManagerName":{"key":"Fund/MyScope/FundManagerName","value":{"labelValue":"Smith"},"effectiveFrom":"2018-03-05T00:00:00.0000000+00:00"},"Fund/MyScope/SomeProperty":{"key":"Fund/MyScope/SomeProperty","value":{"labelValue":"SomeValue"},"effectiveFrom":"2016-01-01T00:00:00.0000000+00:00"},"Fund/MyScope/AnotherProperty":{"key":"Fund/MyScope/AnotherProperty","value":{"labelValue":"AnotherValue"},"effectiveFrom":"2018-03-05T00:00:00.0000000+00:00","effectiveUntil":"2020-01-01T00:00:00.0000000+00:00"},"Fund/MyScope/ReBalanceInterval":{"key":"Fund/MyScope/ReBalanceInterval","value":{"metricValue":{"value":30,"unit":"Days"}}}} # Dict[str, ModelProperty] | The properties to be updated or inserted onto the Fund. Each property in               the request must be keyed by its unique property key. This has the format {domain}/{scope}/{code} e.g. \"Fund/Manager/Id\". (optional)
 
+        try:
+            # [EXPERIMENTAL] UpsertFundProperties: Upsert Fund properties.
+            api_response = await api_instance.upsert_fund_properties(scope, code, request_body=request_body)
+            pprint(api_response)
+        except ApiException as e:
+            print("Exception when calling FundsApi->upsert_fund_properties: %s\n" % e)
 
-# The client must configure the authentication and authorization parameters
-# in accordance with the API server security policy.
-
-
-
-# Enter a context with an instance of the ApiClientFactory to ensure the connection pool is closed after use
-async with api_client_factory:
-    # Create an instance of the API class
-    api_instance = api_client_factory.build(lusid.FundsApi)
-    scope = 'scope_example' # str | The scope of the Fund to update or insert the properties onto.
-    code = 'code_example' # str | The code of the Fund to update or insert the properties onto. Together with the scope this uniquely identifies the Fund.
-    request_body = {"Fund/MyScope/FundManagerName":{"key":"Fund/MyScope/FundManagerName","value":{"labelValue":"Smith"},"effectiveFrom":"2018-03-05T00:00:00.0000000+00:00"},"Fund/MyScope/SomeProperty":{"key":"Fund/MyScope/SomeProperty","value":{"labelValue":"SomeValue"},"effectiveFrom":"2016-01-01T00:00:00.0000000+00:00"},"Fund/MyScope/AnotherProperty":{"key":"Fund/MyScope/AnotherProperty","value":{"labelValue":"AnotherValue"},"effectiveFrom":"2018-03-05T00:00:00.0000000+00:00","effectiveUntil":"2020-01-01T00:00:00.0000000+00:00"},"Fund/MyScope/ReBalanceInterval":{"key":"Fund/MyScope/ReBalanceInterval","value":{"metricValue":{"value":30,"unit":"Days"}}}} # Dict[str, ModelProperty] | The properties to be updated or inserted onto the Fund. Each property in               the request must be keyed by its unique property key. This has the format {domain}/{scope}/{code} e.g. \"Fund/Manager/Id\". (optional)
-
-    try:
-        # [EXPERIMENTAL] UpsertFundProperties: Upsert Fund properties.
-        api_response = await api_instance.upsert_fund_properties(scope, code, request_body=request_body)
-        print("The response of FundsApi->upsert_fund_properties:\n")
-        pprint(api_response)
-    except Exception as e:
-        print("Exception when calling FundsApi->upsert_fund_properties: %s\n" % e)
+asyncio.run(main())
 ```
-
 
 ### Parameters
 
@@ -1781,10 +1504,6 @@ Name | Type | Description  | Notes
 
 [**FundProperties**](FundProperties.md)
 
-### Authorization
-
-[oauth2](../README.md#oauth2)
-
 ### HTTP request headers
 
  - **Content-Type**: application/json-patch+json, application/json, text/json, application/*+json
@@ -1797,5 +1516,5 @@ Name | Type | Description  | Notes
 **400** | The details of the input related failure |  -  |
 **0** | Error response |  -  |
 
-[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+[Back to top](#) &#8226; [Back to API list](../README.md#documentation-for-api-endpoints) &#8226; [Back to Model list](../README.md#documentation-for-models) &#8226; [Back to README](../README.md)
 

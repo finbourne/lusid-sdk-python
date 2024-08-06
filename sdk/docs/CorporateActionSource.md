@@ -30,6 +30,6 @@ corporate_action_source_dict = corporate_action_source_instance.to_dict()
 # create an instance of CorporateActionSource from a dict
 corporate_action_source_form_dict = corporate_action_source.from_dict(corporate_action_source_dict)
 ```
-[[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
+[Back to Model list](../README.md#documentation-for-models) &#8226; [Back to API list](../README.md#documentation-for-api-endpoints) &#8226; [Back to README](../README.md)
 
 

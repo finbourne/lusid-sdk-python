@@ -24,6 +24,6 @@ compliance_run_configuration_dict = compliance_run_configuration_instance.to_dic
 # create an instance of ComplianceRunConfiguration from a dict
 compliance_run_configuration_form_dict = compliance_run_configuration.from_dict(compliance_run_configuration_dict)
 ```
-[[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
+[Back to Model list](../README.md#documentation-for-models) &#8226; [Back to API list](../README.md#documentation-for-api-endpoints) &#8226; [Back to README](../README.md)
 
 

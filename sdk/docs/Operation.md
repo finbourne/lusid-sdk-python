@@ -26,6 +26,6 @@ operation_dict = operation_instance.to_dict()
 # create an instance of Operation from a dict
 operation_form_dict = operation.from_dict(operation_dict)
 ```
-[[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
+[Back to Model list](../README.md#documentation-for-models) &#8226; [Back to API list](../README.md#documentation-for-api-endpoints) &#8226; [Back to README](../README.md)
 
 

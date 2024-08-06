@@ -24,6 +24,6 @@ add_business_days_to_date_response_dict = add_business_days_to_date_response_ins
 # create an instance of AddBusinessDaysToDateResponse from a dict
 add_business_days_to_date_response_form_dict = add_business_days_to_date_response.from_dict(add_business_days_to_date_response_dict)
 ```
-[[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
+[Back to Model list](../README.md#documentation-for-models) &#8226; [Back to API list](../README.md#documentation-for-api-endpoints) &#8226; [Back to README](../README.md)
 
 

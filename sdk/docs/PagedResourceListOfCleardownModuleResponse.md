@@ -27,6 +27,6 @@ paged_resource_list_of_cleardown_module_response_dict = paged_resource_list_of_c
 # create an instance of PagedResourceListOfCleardownModuleResponse from a dict
 paged_resource_list_of_cleardown_module_response_form_dict = paged_resource_list_of_cleardown_module_response.from_dict(paged_resource_list_of_cleardown_module_response_dict)
 ```
-[[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
+[Back to Model list](../README.md#documentation-for-models) &#8226; [Back to API list](../README.md#documentation-for-api-endpoints) &#8226; [Back to README](../README.md)
 
 

@@ -37,6 +37,6 @@ portfolio_details_dict = portfolio_details_instance.to_dict()
 # create an instance of PortfolioDetails from a dict
 portfolio_details_form_dict = portfolio_details.from_dict(portfolio_details_dict)
 ```
-[[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
+[Back to Model list](../README.md#documentation-for-models) &#8226; [Back to API list](../README.md#documentation-for-api-endpoints) &#8226; [Back to README](../README.md)
 
 

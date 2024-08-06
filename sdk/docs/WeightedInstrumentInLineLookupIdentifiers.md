@@ -34,6 +34,6 @@ weighted_instrument_in_line_lookup_identifiers_dict = weighted_instrument_in_lin
 # create an instance of WeightedInstrumentInLineLookupIdentifiers from a dict
 weighted_instrument_in_line_lookup_identifiers_form_dict = weighted_instrument_in_line_lookup_identifiers.from_dict(weighted_instrument_in_line_lookup_identifiers_dict)
 ```
-[[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
+[Back to Model list](../README.md#documentation-for-models) &#8226; [Back to API list](../README.md#documentation-for-api-endpoints) &#8226; [Back to README](../README.md)
 
 

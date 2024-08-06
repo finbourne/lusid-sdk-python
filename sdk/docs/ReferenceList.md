@@ -23,6 +23,6 @@ reference_list_dict = reference_list_instance.to_dict()
 # create an instance of ReferenceList from a dict
 reference_list_form_dict = reference_list.from_dict(reference_list_dict)
 ```
-[[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
+[Back to Model list](../README.md#documentation-for-models) &#8226; [Back to API list](../README.md#documentation-for-api-endpoints) &#8226; [Back to README](../README.md)
 
 

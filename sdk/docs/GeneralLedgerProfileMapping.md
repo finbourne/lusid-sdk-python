@@ -24,6 +24,6 @@ general_ledger_profile_mapping_dict = general_ledger_profile_mapping_instance.to
 # create an instance of GeneralLedgerProfileMapping from a dict
 general_ledger_profile_mapping_form_dict = general_ledger_profile_mapping.from_dict(general_ledger_profile_mapping_dict)
 ```
-[[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
+[Back to Model list](../README.md#documentation-for-models) &#8226; [Back to API list](../README.md#documentation-for-api-endpoints) &#8226; [Back to README](../README.md)
 
 

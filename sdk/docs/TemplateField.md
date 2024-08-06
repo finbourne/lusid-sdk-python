@@ -8,6 +8,7 @@ Name | Type | Description | Notes
 **specificity** | **str** |  | 
 **description** | **str** |  | 
 **type** | **str** |  | 
+**availability** | **str** |  | 
 **usage** | **List[str]** |  | 
 
 ## Example
@@ -27,6 +28,6 @@ template_field_dict = template_field_instance.to_dict()
 # create an instance of TemplateField from a dict
 template_field_form_dict = template_field.from_dict(template_field_dict)
 ```
-[[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
+[Back to Model list](../README.md#documentation-for-models) &#8226; [Back to API list](../README.md#documentation-for-api-endpoints) &#8226; [Back to README](../README.md)
 
 

@@ -24,6 +24,6 @@ address_key_list_compliance_parameter_dict = address_key_list_compliance_paramet
 # create an instance of AddressKeyListComplianceParameter from a dict
 address_key_list_compliance_parameter_form_dict = address_key_list_compliance_parameter.from_dict(address_key_list_compliance_parameter_dict)
 ```
-[[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
+[Back to Model list](../README.md#documentation-for-models) &#8226; [Back to API list](../README.md#documentation-for-api-endpoints) &#8226; [Back to README](../README.md)
 
 

@@ -27,6 +27,6 @@ resource_list_of_block_and_orders_dict = resource_list_of_block_and_orders_insta
 # create an instance of ResourceListOfBlockAndOrders from a dict
 resource_list_of_block_and_orders_form_dict = resource_list_of_block_and_orders.from_dict(resource_list_of_block_and_orders_dict)
 ```
-[[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
+[Back to Model list](../README.md#documentation-for-models) &#8226; [Back to API list](../README.md#documentation-for-api-endpoints) &#8226; [Back to README](../README.md)
 
 

@@ -26,6 +26,6 @@ batch_adjust_holdings_response_dict = batch_adjust_holdings_response_instance.to
 # create an instance of BatchAdjustHoldingsResponse from a dict
 batch_adjust_holdings_response_form_dict = batch_adjust_holdings_response.from_dict(batch_adjust_holdings_response_dict)
 ```
-[[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
+[Back to Model list](../README.md#documentation-for-models) &#8226; [Back to API list](../README.md#documentation-for-api-endpoints) &#8226; [Back to README](../README.md)
 
 

@@ -24,6 +24,6 @@ trade_ticket_dict = trade_ticket_instance.to_dict()
 # create an instance of TradeTicket from a dict
 trade_ticket_form_dict = trade_ticket.from_dict(trade_ticket_dict)
 ```
-[[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
+[Back to Model list](../README.md#documentation-for-models) &#8226; [Back to API list](../README.md#documentation-for-api-endpoints) &#8226; [Back to README](../README.md)
 
 

@@ -34,6 +34,6 @@ data_type_dict = data_type_instance.to_dict()
 # create an instance of DataType from a dict
 data_type_form_dict = data_type.from_dict(data_type_dict)
 ```
-[[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
+[Back to Model list](../README.md#documentation-for-models) &#8226; [Back to API list](../README.md#documentation-for-api-endpoints) &#8226; [Back to README](../README.md)
 
 

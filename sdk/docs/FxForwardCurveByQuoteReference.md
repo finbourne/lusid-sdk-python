@@ -32,6 +32,6 @@ fx_forward_curve_by_quote_reference_dict = fx_forward_curve_by_quote_reference_i
 # create an instance of FxForwardCurveByQuoteReference from a dict
 fx_forward_curve_by_quote_reference_form_dict = fx_forward_curve_by_quote_reference.from_dict(fx_forward_curve_by_quote_reference_dict)
 ```
-[[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
+[Back to Model list](../README.md#documentation-for-models) &#8226; [Back to API list](../README.md#documentation-for-api-endpoints) &#8226; [Back to README](../README.md)
 
 

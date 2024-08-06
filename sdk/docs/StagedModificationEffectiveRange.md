@@ -24,6 +24,6 @@ staged_modification_effective_range_dict = staged_modification_effective_range_i
 # create an instance of StagedModificationEffectiveRange from a dict
 staged_modification_effective_range_form_dict = staged_modification_effective_range.from_dict(staged_modification_effective_range_dict)
 ```
-[[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
+[Back to Model list](../README.md#documentation-for-models) &#8226; [Back to API list](../README.md#documentation-for-api-endpoints) &#8226; [Back to README](../README.md)
 
 

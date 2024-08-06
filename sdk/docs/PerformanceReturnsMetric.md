@@ -30,6 +30,6 @@ performance_returns_metric_dict = performance_returns_metric_instance.to_dict()
 # create an instance of PerformanceReturnsMetric from a dict
 performance_returns_metric_form_dict = performance_returns_metric.from_dict(performance_returns_metric_dict)
 ```
-[[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
+[Back to Model list](../README.md#documentation-for-models) &#8226; [Back to API list](../README.md#documentation-for-api-endpoints) &#8226; [Back to README](../README.md)
 
 

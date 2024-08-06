@@ -25,6 +25,6 @@ transaction_property_mapping_dict = transaction_property_mapping_instance.to_dic
 # create an instance of TransactionPropertyMapping from a dict
 transaction_property_mapping_form_dict = transaction_property_mapping.from_dict(transaction_property_mapping_dict)
 ```
-[[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
+[Back to Model list](../README.md#documentation-for-models) &#8226; [Back to API list](../README.md#documentation-for-api-endpoints) &#8226; [Back to README](../README.md)
 
 

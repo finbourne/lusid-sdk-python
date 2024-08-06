@@ -25,6 +25,6 @@ fx_tenor_convention_dict = fx_tenor_convention_instance.to_dict()
 # create an instance of FxTenorConvention from a dict
 fx_tenor_convention_form_dict = fx_tenor_convention.from_dict(fx_tenor_convention_dict)
 ```
-[[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
+[Back to Model list](../README.md#documentation-for-models) &#8226; [Back to API list](../README.md#documentation-for-api-endpoints) &#8226; [Back to README](../README.md)
 
 

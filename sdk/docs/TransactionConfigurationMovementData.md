@@ -29,6 +29,6 @@ transaction_configuration_movement_data_dict = transaction_configuration_movemen
 # create an instance of TransactionConfigurationMovementData from a dict
 transaction_configuration_movement_data_form_dict = transaction_configuration_movement_data.from_dict(transaction_configuration_movement_data_dict)
 ```
-[[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
+[Back to Model list](../README.md#documentation-for-models) &#8226; [Back to API list](../README.md#documentation-for-api-endpoints) &#8226; [Back to README](../README.md)
 
 

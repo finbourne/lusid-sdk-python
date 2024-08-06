@@ -26,6 +26,6 @@ sub_holding_key_value_equals_dict = sub_holding_key_value_equals_instance.to_dic
 # create an instance of SubHoldingKeyValueEquals from a dict
 sub_holding_key_value_equals_form_dict = sub_holding_key_value_equals.from_dict(sub_holding_key_value_equals_dict)
 ```
-[[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
+[Back to Model list](../README.md#documentation-for-models) &#8226; [Back to API list](../README.md#documentation-for-api-endpoints) &#8226; [Back to README](../README.md)
 
 

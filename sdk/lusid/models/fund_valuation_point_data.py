@@ -22,6 +22,7 @@ from typing import Any, Dict, Optional, Union
 from pydantic.v1 import BaseModel, Field, StrictFloat, StrictInt
 from lusid.models.fee_accrual import FeeAccrual
 from lusid.models.fund_amount import FundAmount
+from lusid.models.fund_pnl_breakdown import FundPnlBreakdown
 from lusid.models.previous_fund_valuation_point_data import PreviousFundValuationPointData
 from lusid.models.unitisation_data import UnitisationData
 
@@ -31,7 +32,7 @@ class FundValuationPointData(BaseModel):
     """
     back_out: Dict[str, FundAmount] = Field(..., alias="backOut", description="Bucket of detail for the Valuation Point where data points have been 'backed out'.")
     dealing: Dict[str, FundAmount] = Field(..., description="Bucket of detail for any 'Dealing' that has occured inside the queried period.")
-    pn_l: Dict[str, FundAmount] = Field(..., alias="pnL", description="Bucket of detail for 'PnL' that has occured inside the queried period.")
+    pn_l: FundPnlBreakdown = Field(..., alias="pnL")
     gav: Union[StrictFloat, StrictInt] = Field(..., description="The Gross Asset Value of the Fund or Share Class at the Valuation Point. This is effectively a summation of all Trial balance entries linked to accounts of types 'Asset' and 'Liabilities'.")
     fees: Dict[str, FeeAccrual] = Field(..., description="Bucket of detail for any 'Fees' that have been charged in the selected period.")
     nav: Union[StrictFloat, StrictInt] = Field(..., description="The Net Asset Value of the Fund or Share Class at the Valuation Point. This represents the GAV with any fees applied in the period.")
@@ -78,13 +79,9 @@ class FundValuationPointData(BaseModel):
                 if self.dealing[_key]:
                     _field_dict[_key] = self.dealing[_key].to_dict()
             _dict['dealing'] = _field_dict
-        # override the default output from pydantic by calling `to_dict()` of each value in pn_l (dict)
-        _field_dict = {}
+        # override the default output from pydantic by calling `to_dict()` of pn_l
         if self.pn_l:
-            for _key in self.pn_l:
-                if self.pn_l[_key]:
-                    _field_dict[_key] = self.pn_l[_key].to_dict()
-            _dict['pnL'] = _field_dict
+            _dict['pnL'] = self.pn_l.to_dict()
         # override the default output from pydantic by calling `to_dict()` of each value in fees (dict)
         _field_dict = {}
         if self.fees:
@@ -134,12 +131,7 @@ class FundValuationPointData(BaseModel):
             )
             if obj.get("dealing") is not None
             else None,
-            "pn_l": dict(
-                (_k, FundAmount.from_dict(_v))
-                for _k, _v in obj.get("pnL").items()
-            )
-            if obj.get("pnL") is not None
-            else None,
+            "pn_l": FundPnlBreakdown.from_dict(obj.get("pnL")) if obj.get("pnL") is not None else None,
             "gav": obj.get("gav"),
             "fees": dict(
                 (_k, FeeAccrual.from_dict(_v))

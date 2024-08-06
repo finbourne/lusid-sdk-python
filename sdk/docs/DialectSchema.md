@@ -25,6 +25,6 @@ dialect_schema_dict = dialect_schema_instance.to_dict()
 # create an instance of DialectSchema from a dict
 dialect_schema_form_dict = dialect_schema.from_dict(dialect_schema_dict)
 ```
-[[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
+[Back to Model list](../README.md#documentation-for-models) &#8226; [Back to API list](../README.md#documentation-for-api-endpoints) &#8226; [Back to README](../README.md)
 
 

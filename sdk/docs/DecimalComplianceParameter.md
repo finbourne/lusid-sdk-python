@@ -24,6 +24,6 @@ decimal_compliance_parameter_dict = decimal_compliance_parameter_instance.to_dic
 # create an instance of DecimalComplianceParameter from a dict
 decimal_compliance_parameter_form_dict = decimal_compliance_parameter.from_dict(decimal_compliance_parameter_dict)
 ```
-[[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
+[Back to Model list](../README.md#documentation-for-models) &#8226; [Back to API list](../README.md#documentation-for-api-endpoints) &#8226; [Back to README](../README.md)
 
 

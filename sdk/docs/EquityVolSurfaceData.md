@@ -28,6 +28,6 @@ equity_vol_surface_data_dict = equity_vol_surface_data_instance.to_dict()
 # create an instance of EquityVolSurfaceData from a dict
 equity_vol_surface_data_form_dict = equity_vol_surface_data.from_dict(equity_vol_surface_data_dict)
 ```
-[[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
+[Back to Model list](../README.md#documentation-for-models) &#8226; [Back to API list](../README.md#documentation-for-api-endpoints) &#8226; [Back to README](../README.md)
 
 

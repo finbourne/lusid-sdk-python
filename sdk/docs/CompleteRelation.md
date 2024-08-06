@@ -31,6 +31,6 @@ complete_relation_dict = complete_relation_instance.to_dict()
 # create an instance of CompleteRelation from a dict
 complete_relation_form_dict = complete_relation.from_dict(complete_relation_dict)
 ```
-[[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
+[Back to Model list](../README.md#documentation-for-models) &#8226; [Back to API list](../README.md#documentation-for-api-endpoints) &#8226; [Back to README](../README.md)
 
 

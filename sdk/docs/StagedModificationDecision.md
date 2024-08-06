@@ -27,6 +27,6 @@ staged_modification_decision_dict = staged_modification_decision_instance.to_dic
 # create an instance of StagedModificationDecision from a dict
 staged_modification_decision_form_dict = staged_modification_decision.from_dict(staged_modification_decision_dict)
 ```
-[[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
+[Back to Model list](../README.md#documentation-for-models) &#8226; [Back to API list](../README.md#documentation-for-api-endpoints) &#8226; [Back to README](../README.md)
 
 

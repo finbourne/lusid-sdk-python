@@ -27,6 +27,6 @@ paged_resource_list_of_translation_script_id_dict = paged_resource_list_of_trans
 # create an instance of PagedResourceListOfTranslationScriptId from a dict
 paged_resource_list_of_translation_script_id_form_dict = paged_resource_list_of_translation_script_id.from_dict(paged_resource_list_of_translation_script_id_dict)
 ```
-[[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
+[Back to Model list](../README.md#documentation-for-models) &#8226; [Back to API list](../README.md#documentation-for-api-endpoints) &#8226; [Back to README](../README.md)
 
 

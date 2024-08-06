@@ -26,6 +26,6 @@ get_cds_flow_conventions_response_dict = get_cds_flow_conventions_response_insta
 # create an instance of GetCdsFlowConventionsResponse from a dict
 get_cds_flow_conventions_response_form_dict = get_cds_flow_conventions_response.from_dict(get_cds_flow_conventions_response_dict)
 ```
-[[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
+[Back to Model list](../README.md#documentation-for-models) &#8226; [Back to API list](../README.md#documentation-for-api-endpoints) &#8226; [Back to README](../README.md)
 
 

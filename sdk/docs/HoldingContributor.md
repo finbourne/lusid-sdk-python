@@ -24,6 +24,6 @@ holding_contributor_dict = holding_contributor_instance.to_dict()
 # create an instance of HoldingContributor from a dict
 holding_contributor_form_dict = holding_contributor.from_dict(holding_contributor_dict)
 ```
-[[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
+[Back to Model list](../README.md#documentation-for-models) &#8226; [Back to API list](../README.md#documentation-for-api-endpoints) &#8226; [Back to README](../README.md)
 
 

@@ -28,6 +28,6 @@ versioned_resource_list_of_output_transaction_dict = versioned_resource_list_of_
 # create an instance of VersionedResourceListOfOutputTransaction from a dict
 versioned_resource_list_of_output_transaction_form_dict = versioned_resource_list_of_output_transaction.from_dict(versioned_resource_list_of_output_transaction_dict)
 ```
-[[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
+[Back to Model list](../README.md#documentation-for-models) &#8226; [Back to API list](../README.md#documentation-for-api-endpoints) &#8226; [Back to README](../README.md)
 
 

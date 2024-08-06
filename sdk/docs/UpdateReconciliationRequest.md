@@ -31,6 +31,6 @@ update_reconciliation_request_dict = update_reconciliation_request_instance.to_d
 # create an instance of UpdateReconciliationRequest from a dict
 update_reconciliation_request_form_dict = update_reconciliation_request.from_dict(update_reconciliation_request_dict)
 ```
-[[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
+[Back to Model list](../README.md#documentation-for-models) &#8226; [Back to API list](../README.md#documentation-for-api-endpoints) &#8226; [Back to README](../README.md)
 
 

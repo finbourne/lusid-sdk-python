@@ -25,6 +25,6 @@ translation_result_dict = translation_result_instance.to_dict()
 # create an instance of TranslationResult from a dict
 translation_result_form_dict = translation_result.from_dict(translation_result_dict)
 ```
-[[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
+[Back to Model list](../README.md#documentation-for-models) &#8226; [Back to API list](../README.md#documentation-for-api-endpoints) &#8226; [Back to README](../README.md)
 
 

@@ -29,6 +29,6 @@ quote_access_metadata_rule_id_dict = quote_access_metadata_rule_id_instance.to_d
 # create an instance of QuoteAccessMetadataRuleId from a dict
 quote_access_metadata_rule_id_form_dict = quote_access_metadata_rule_id.from_dict(quote_access_metadata_rule_id_dict)
 ```
-[[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
+[Back to Model list](../README.md#documentation-for-models) &#8226; [Back to API list](../README.md#documentation-for-api-endpoints) &#8226; [Back to README](../README.md)
 
 

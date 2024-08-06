@@ -25,6 +25,6 @@ access_metadata_value_dict = access_metadata_value_instance.to_dict()
 # create an instance of AccessMetadataValue from a dict
 access_metadata_value_form_dict = access_metadata_value.from_dict(access_metadata_value_dict)
 ```
-[[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
+[Back to Model list](../README.md#documentation-for-models) &#8226; [Back to API list](../README.md#documentation-for-api-endpoints) &#8226; [Back to README](../README.md)
 
 

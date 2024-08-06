@@ -25,6 +25,6 @@ staging_rule_approval_criteria_dict = staging_rule_approval_criteria_instance.to
 # create an instance of StagingRuleApprovalCriteria from a dict
 staging_rule_approval_criteria_form_dict = staging_rule_approval_criteria.from_dict(staging_rule_approval_criteria_dict)
 ```
-[[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
+[Back to Model list](../README.md#documentation-for-models) &#8226; [Back to API list](../README.md#documentation-for-api-endpoints) &#8226; [Back to README](../README.md)
 
 

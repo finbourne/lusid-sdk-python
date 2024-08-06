@@ -30,6 +30,6 @@ instrument_payment_diary_dict = instrument_payment_diary_instance.to_dict()
 # create an instance of InstrumentPaymentDiary from a dict
 instrument_payment_diary_form_dict = instrument_payment_diary.from_dict(instrument_payment_diary_dict)
 ```
-[[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
+[Back to Model list](../README.md#documentation-for-models) &#8226; [Back to API list](../README.md#documentation-for-api-endpoints) &#8226; [Back to README](../README.md)
 
 

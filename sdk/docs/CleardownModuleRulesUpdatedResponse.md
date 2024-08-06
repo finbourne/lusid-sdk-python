@@ -27,6 +27,6 @@ cleardown_module_rules_updated_response_dict = cleardown_module_rules_updated_re
 # create an instance of CleardownModuleRulesUpdatedResponse from a dict
 cleardown_module_rules_updated_response_form_dict = cleardown_module_rules_updated_response.from_dict(cleardown_module_rules_updated_response_dict)
 ```
-[[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
+[Back to Model list](../README.md#documentation-for-models) &#8226; [Back to API list](../README.md#documentation-for-api-endpoints) &#8226; [Back to README](../README.md)
 
 

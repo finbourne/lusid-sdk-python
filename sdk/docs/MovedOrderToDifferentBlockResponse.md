@@ -25,6 +25,6 @@ moved_order_to_different_block_response_dict = moved_order_to_different_block_re
 # create an instance of MovedOrderToDifferentBlockResponse from a dict
 moved_order_to_different_block_response_form_dict = moved_order_to_different_block_response.from_dict(moved_order_to_different_block_response_dict)
 ```
-[[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
+[Back to Model list](../README.md#documentation-for-models) &#8226; [Back to API list](../README.md#documentation-for-api-endpoints) &#8226; [Back to README](../README.md)
 
 

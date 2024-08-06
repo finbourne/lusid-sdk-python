@@ -24,6 +24,6 @@ funding_leg_options_dict = funding_leg_options_instance.to_dict()
 # create an instance of FundingLegOptions from a dict
 funding_leg_options_form_dict = funding_leg_options.from_dict(funding_leg_options_dict)
 ```
-[[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
+[Back to Model list](../README.md#documentation-for-models) &#8226; [Back to API list](../README.md#documentation-for-api-endpoints) &#8226; [Back to README](../README.md)
 
 

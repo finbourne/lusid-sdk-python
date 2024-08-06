@@ -27,6 +27,6 @@ reconcile_date_time_rule_dict = reconcile_date_time_rule_instance.to_dict()
 # create an instance of ReconcileDateTimeRule from a dict
 reconcile_date_time_rule_form_dict = reconcile_date_time_rule.from_dict(reconcile_date_time_rule_dict)
 ```
-[[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
+[Back to Model list](../README.md#documentation-for-models) &#8226; [Back to API list](../README.md#documentation-for-api-endpoints) &#8226; [Back to README](../README.md)
 
 

@@ -26,6 +26,6 @@ relative_date_offset_dict = relative_date_offset_instance.to_dict()
 # create an instance of RelativeDateOffset from a dict
 relative_date_offset_form_dict = relative_date_offset.from_dict(relative_date_offset_dict)
 ```
-[[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
+[Back to Model list](../README.md#documentation-for-models) &#8226; [Back to API list](../README.md#documentation-for-api-endpoints) &#8226; [Back to README](../README.md)
 
 

@@ -23,6 +23,6 @@ order_graph_placement_order_synopsis_dict = order_graph_placement_order_synopsis
 # create an instance of OrderGraphPlacementOrderSynopsis from a dict
 order_graph_placement_order_synopsis_form_dict = order_graph_placement_order_synopsis.from_dict(order_graph_placement_order_synopsis_dict)
 ```
-[[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
+[Back to Model list](../README.md#documentation-for-models) &#8226; [Back to API list](../README.md#documentation-for-api-endpoints) &#8226; [Back to README](../README.md)
 
 

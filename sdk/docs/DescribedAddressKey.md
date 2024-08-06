@@ -25,6 +25,6 @@ described_address_key_dict = described_address_key_instance.to_dict()
 # create an instance of DescribedAddressKey from a dict
 described_address_key_form_dict = described_address_key.from_dict(described_address_key_dict)
 ```
-[[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
+[Back to Model list](../README.md#documentation-for-models) &#8226; [Back to API list](../README.md#documentation-for-api-endpoints) &#8226; [Back to README](../README.md)
 
 

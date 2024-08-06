@@ -25,6 +25,6 @@ reconciliation_transactions_dict = reconciliation_transactions_instance.to_dict(
 # create an instance of ReconciliationTransactions from a dict
 reconciliation_transactions_form_dict = reconciliation_transactions.from_dict(reconciliation_transactions_dict)
 ```
-[[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
+[Back to Model list](../README.md#documentation-for-models) &#8226; [Back to API list](../README.md#documentation-for-api-endpoints) &#8226; [Back to README](../README.md)
 
 

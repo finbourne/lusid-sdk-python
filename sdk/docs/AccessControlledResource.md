@@ -28,6 +28,6 @@ access_controlled_resource_dict = access_controlled_resource_instance.to_dict()
 # create an instance of AccessControlledResource from a dict
 access_controlled_resource_form_dict = access_controlled_resource.from_dict(access_controlled_resource_dict)
 ```
-[[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
+[Back to Model list](../README.md#documentation-for-models) &#8226; [Back to API list](../README.md#documentation-for-api-endpoints) &#8226; [Back to README](../README.md)
 
 

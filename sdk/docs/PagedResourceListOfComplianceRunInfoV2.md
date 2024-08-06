@@ -27,6 +27,6 @@ paged_resource_list_of_compliance_run_info_v2_dict = paged_resource_list_of_comp
 # create an instance of PagedResourceListOfComplianceRunInfoV2 from a dict
 paged_resource_list_of_compliance_run_info_v2_form_dict = paged_resource_list_of_compliance_run_info_v2.from_dict(paged_resource_list_of_compliance_run_info_v2_dict)
 ```
-[[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
+[Back to Model list](../README.md#documentation-for-models) &#8226; [Back to API list](../README.md#documentation-for-api-endpoints) &#8226; [Back to README](../README.md)
 
 

@@ -25,6 +25,6 @@ transaction_set_configuration_data_request_dict = transaction_set_configuration_
 # create an instance of TransactionSetConfigurationDataRequest from a dict
 transaction_set_configuration_data_request_form_dict = transaction_set_configuration_data_request.from_dict(transaction_set_configuration_data_request_dict)
 ```
-[[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
+[Back to Model list](../README.md#documentation-for-models) &#8226; [Back to API list](../README.md#documentation-for-api-endpoints) &#8226; [Back to README](../README.md)
 
 

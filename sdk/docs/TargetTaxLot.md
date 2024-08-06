@@ -29,6 +29,6 @@ target_tax_lot_dict = target_tax_lot_instance.to_dict()
 # create an instance of TargetTaxLot from a dict
 target_tax_lot_form_dict = target_tax_lot.from_dict(target_tax_lot_dict)
 ```
-[[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
+[Back to Model list](../README.md#documentation-for-models) &#8226; [Back to API list](../README.md#documentation-for-api-endpoints) &#8226; [Back to README](../README.md)
 
 

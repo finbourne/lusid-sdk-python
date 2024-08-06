@@ -24,6 +24,6 @@ upsert_counterparty_agreement_request_dict = upsert_counterparty_agreement_reque
 # create an instance of UpsertCounterpartyAgreementRequest from a dict
 upsert_counterparty_agreement_request_form_dict = upsert_counterparty_agreement_request.from_dict(upsert_counterparty_agreement_request_dict)
 ```
-[[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
+[Back to Model list](../README.md#documentation-for-models) &#8226; [Back to API list](../README.md#documentation-for-api-endpoints) &#8226; [Back to README](../README.md)
 
 

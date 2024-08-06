@@ -30,6 +30,6 @@ expanded_group_dict = expanded_group_instance.to_dict()
 # create an instance of ExpandedGroup from a dict
 expanded_group_form_dict = expanded_group.from_dict(expanded_group_dict)
 ```
-[[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
+[Back to Model list](../README.md#documentation-for-models) &#8226; [Back to API list](../README.md#documentation-for-api-endpoints) &#8226; [Back to README](../README.md)
 
 

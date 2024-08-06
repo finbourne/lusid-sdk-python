@@ -27,6 +27,6 @@ resource_list_of_i_unit_definition_dto_dict = resource_list_of_i_unit_definition
 # create an instance of ResourceListOfIUnitDefinitionDto from a dict
 resource_list_of_i_unit_definition_dto_form_dict = resource_list_of_i_unit_definition_dto.from_dict(resource_list_of_i_unit_definition_dto_dict)
 ```
-[[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
+[Back to Model list](../README.md#documentation-for-models) &#8226; [Back to API list](../README.md#documentation-for-api-endpoints) &#8226; [Back to README](../README.md)
 
 

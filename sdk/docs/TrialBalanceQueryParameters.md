@@ -28,6 +28,6 @@ trial_balance_query_parameters_dict = trial_balance_query_parameters_instance.to
 # create an instance of TrialBalanceQueryParameters from a dict
 trial_balance_query_parameters_form_dict = trial_balance_query_parameters.from_dict(trial_balance_query_parameters_dict)
 ```
-[[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
+[Back to Model list](../README.md#documentation-for-models) &#8226; [Back to API list](../README.md#documentation-for-api-endpoints) &#8226; [Back to README](../README.md)
 
 

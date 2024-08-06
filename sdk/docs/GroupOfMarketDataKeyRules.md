@@ -25,6 +25,6 @@ group_of_market_data_key_rules_dict = group_of_market_data_key_rules_instance.to
 # create an instance of GroupOfMarketDataKeyRules from a dict
 group_of_market_data_key_rules_form_dict = group_of_market_data_key_rules.from_dict(group_of_market_data_key_rules_dict)
 ```
-[[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
+[Back to Model list](../README.md#documentation-for-models) &#8226; [Back to API list](../README.md#documentation-for-api-endpoints) &#8226; [Back to README](../README.md)
 
 

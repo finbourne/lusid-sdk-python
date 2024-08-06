@@ -26,6 +26,6 @@ delete_custodian_accounts_response_dict = delete_custodian_accounts_response_ins
 # create an instance of DeleteCustodianAccountsResponse from a dict
 delete_custodian_accounts_response_form_dict = delete_custodian_accounts_response.from_dict(delete_custodian_accounts_response_dict)
 ```
-[[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
+[Back to Model list](../README.md#documentation-for-models) &#8226; [Back to API list](../README.md#documentation-for-api-endpoints) &#8226; [Back to README](../README.md)
 
 

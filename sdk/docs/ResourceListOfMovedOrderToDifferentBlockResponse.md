@@ -27,6 +27,6 @@ resource_list_of_moved_order_to_different_block_response_dict = resource_list_of
 # create an instance of ResourceListOfMovedOrderToDifferentBlockResponse from a dict
 resource_list_of_moved_order_to_different_block_response_form_dict = resource_list_of_moved_order_to_different_block_response.from_dict(resource_list_of_moved_order_to_different_block_response_dict)
 ```
-[[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
+[Back to Model list](../README.md#documentation-for-models) &#8226; [Back to API list](../README.md#documentation-for-api-endpoints) &#8226; [Back to README](../README.md)
 
 

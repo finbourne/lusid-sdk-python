@@ -27,6 +27,6 @@ paged_resource_list_of_staged_modification_dict = paged_resource_list_of_staged_
 # create an instance of PagedResourceListOfStagedModification from a dict
 paged_resource_list_of_staged_modification_form_dict = paged_resource_list_of_staged_modification.from_dict(paged_resource_list_of_staged_modification_dict)
 ```
-[[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
+[Back to Model list](../README.md#documentation-for-models) &#8226; [Back to API list](../README.md#documentation-for-api-endpoints) &#8226; [Back to README](../README.md)
 
 

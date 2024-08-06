@@ -24,6 +24,6 @@ data_map_key_dict = data_map_key_instance.to_dict()
 # create an instance of DataMapKey from a dict
 data_map_key_form_dict = data_map_key.from_dict(data_map_key_dict)
 ```
-[[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
+[Back to Model list](../README.md#documentation-for-models) &#8226; [Back to API list](../README.md#documentation-for-api-endpoints) &#8226; [Back to README](../README.md)
 
 

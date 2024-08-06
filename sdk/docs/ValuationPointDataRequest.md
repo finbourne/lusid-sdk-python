@@ -24,6 +24,6 @@ valuation_point_data_request_dict = valuation_point_data_request_instance.to_dic
 # create an instance of ValuationPointDataRequest from a dict
 valuation_point_data_request_form_dict = valuation_point_data_request.from_dict(valuation_point_data_request_dict)
 ```
-[[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
+[Back to Model list](../README.md#documentation-for-models) &#8226; [Back to API list](../README.md#documentation-for-api-endpoints) &#8226; [Back to README](../README.md)
 
 

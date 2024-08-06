@@ -24,6 +24,6 @@ requested_changes_dict = requested_changes_instance.to_dict()
 # create an instance of RequestedChanges from a dict
 requested_changes_form_dict = requested_changes.from_dict(requested_changes_dict)
 ```
-[[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
+[Back to Model list](../README.md#documentation-for-models) &#8226; [Back to API list](../README.md#documentation-for-api-endpoints) &#8226; [Back to README](../README.md)
 
 

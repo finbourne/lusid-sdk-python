@@ -28,6 +28,6 @@ versioned_resource_list_of_trial_balance_dict = versioned_resource_list_of_trial
 # create an instance of VersionedResourceListOfTrialBalance from a dict
 versioned_resource_list_of_trial_balance_form_dict = versioned_resource_list_of_trial_balance.from_dict(versioned_resource_list_of_trial_balance_dict)
 ```
-[[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
+[Back to Model list](../README.md#documentation-for-models) &#8226; [Back to API list](../README.md#documentation-for-api-endpoints) &#8226; [Back to README](../README.md)
 
 

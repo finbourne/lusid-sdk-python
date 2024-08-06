@@ -32,6 +32,6 @@ blocked_order_request_dict = blocked_order_request_instance.to_dict()
 # create an instance of BlockedOrderRequest from a dict
 blocked_order_request_form_dict = blocked_order_request.from_dict(blocked_order_request_dict)
 ```
-[[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
+[Back to Model list](../README.md#documentation-for-models) &#8226; [Back to API list](../README.md#documentation-for-api-endpoints) &#8226; [Back to README](../README.md)
 
 

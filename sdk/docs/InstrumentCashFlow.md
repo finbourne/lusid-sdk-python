@@ -32,6 +32,6 @@ instrument_cash_flow_dict = instrument_cash_flow_instance.to_dict()
 # create an instance of InstrumentCashFlow from a dict
 instrument_cash_flow_form_dict = instrument_cash_flow.from_dict(instrument_cash_flow_dict)
 ```
-[[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
+[Back to Model list](../README.md#documentation-for-models) &#8226; [Back to API list](../README.md#documentation-for-api-endpoints) &#8226; [Back to README](../README.md)
 
 

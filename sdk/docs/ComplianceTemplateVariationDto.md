@@ -27,6 +27,6 @@ compliance_template_variation_dto_dict = compliance_template_variation_dto_insta
 # create an instance of ComplianceTemplateVariationDto from a dict
 compliance_template_variation_dto_form_dict = compliance_template_variation_dto.from_dict(compliance_template_variation_dto_dict)
 ```
-[[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
+[Back to Model list](../README.md#documentation-for-models) &#8226; [Back to API list](../README.md#documentation-for-api-endpoints) &#8226; [Back to README](../README.md)
 
 

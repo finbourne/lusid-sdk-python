@@ -24,6 +24,6 @@ block_and_order_id_request_dict = block_and_order_id_request_instance.to_dict()
 # create an instance of BlockAndOrderIdRequest from a dict
 block_and_order_id_request_form_dict = block_and_order_id_request.from_dict(block_and_order_id_request_dict)
 ```
-[[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
+[Back to Model list](../README.md#documentation-for-models) &#8226; [Back to API list](../README.md#documentation-for-api-endpoints) &#8226; [Back to README](../README.md)
 
 

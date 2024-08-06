@@ -27,6 +27,6 @@ resource_list_of_package_dict = resource_list_of_package_instance.to_dict()
 # create an instance of ResourceListOfPackage from a dict
 resource_list_of_package_form_dict = resource_list_of_package.from_dict(resource_list_of_package_dict)
 ```
-[[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
+[Back to Model list](../README.md#documentation-for-models) &#8226; [Back to API list](../README.md#documentation-for-api-endpoints) &#8226; [Back to README](../README.md)
 
 

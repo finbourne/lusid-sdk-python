@@ -27,6 +27,6 @@ custodian_accounts_upsert_response_dict = custodian_accounts_upsert_response_ins
 # create an instance of CustodianAccountsUpsertResponse from a dict
 custodian_accounts_upsert_response_form_dict = custodian_accounts_upsert_response.from_dict(custodian_accounts_upsert_response_dict)
 ```
-[[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
+[Back to Model list](../README.md#documentation-for-models) &#8226; [Back to API list](../README.md#documentation-for-api-endpoints) &#8226; [Back to README](../README.md)
 
 

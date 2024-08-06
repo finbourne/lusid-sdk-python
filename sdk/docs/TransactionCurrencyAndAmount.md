@@ -24,6 +24,6 @@ transaction_currency_and_amount_dict = transaction_currency_and_amount_instance.
 # create an instance of TransactionCurrencyAndAmount from a dict
 transaction_currency_and_amount_form_dict = transaction_currency_and_amount.from_dict(transaction_currency_and_amount_dict)
 ```
-[[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
+[Back to Model list](../README.md#documentation-for-models) &#8226; [Back to API list](../README.md#documentation-for-api-endpoints) &#8226; [Back to README](../README.md)
 
 

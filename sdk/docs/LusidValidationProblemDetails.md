@@ -31,6 +31,6 @@ lusid_validation_problem_details_dict = lusid_validation_problem_details_instanc
 # create an instance of LusidValidationProblemDetails from a dict
 lusid_validation_problem_details_form_dict = lusid_validation_problem_details.from_dict(lusid_validation_problem_details_dict)
 ```
-[[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
+[Back to Model list](../README.md#documentation-for-models) &#8226; [Back to API list](../README.md#documentation-for-api-endpoints) &#8226; [Back to README](../README.md)
 
 

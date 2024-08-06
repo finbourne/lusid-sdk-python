@@ -34,6 +34,6 @@ contract_for_difference_dict = contract_for_difference_instance.to_dict()
 # create an instance of ContractForDifference from a dict
 contract_for_difference_form_dict = contract_for_difference.from_dict(contract_for_difference_dict)
 ```
-[[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
+[Back to Model list](../README.md#documentation-for-models) &#8226; [Back to API list](../README.md#documentation-for-api-endpoints) &#8226; [Back to README](../README.md)
 
 

@@ -30,6 +30,6 @@ term_deposit_dict = term_deposit_instance.to_dict()
 # create an instance of TermDeposit from a dict
 term_deposit_form_dict = term_deposit.from_dict(term_deposit_dict)
 ```
-[[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
+[Back to Model list](../README.md#documentation-for-models) &#8226; [Back to API list](../README.md#documentation-for-api-endpoints) &#8226; [Back to README](../README.md)
 
 

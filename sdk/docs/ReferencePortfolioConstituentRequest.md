@@ -26,6 +26,6 @@ reference_portfolio_constituent_request_dict = reference_portfolio_constituent_r
 # create an instance of ReferencePortfolioConstituentRequest from a dict
 reference_portfolio_constituent_request_form_dict = reference_portfolio_constituent_request.from_dict(reference_portfolio_constituent_request_dict)
 ```
-[[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
+[Back to Model list](../README.md#documentation-for-models) &#8226; [Back to API list](../README.md#documentation-for-api-endpoints) &#8226; [Back to README](../README.md)
 
 

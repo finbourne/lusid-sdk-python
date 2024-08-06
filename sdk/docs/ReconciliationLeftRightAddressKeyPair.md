@@ -24,6 +24,6 @@ reconciliation_left_right_address_key_pair_dict = reconciliation_left_right_addr
 # create an instance of ReconciliationLeftRightAddressKeyPair from a dict
 reconciliation_left_right_address_key_pair_form_dict = reconciliation_left_right_address_key_pair.from_dict(reconciliation_left_right_address_key_pair_dict)
 ```
-[[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
+[Back to Model list](../README.md#documentation-for-models) &#8226; [Back to API list](../README.md#documentation-for-api-endpoints) &#8226; [Back to README](../README.md)
 
 

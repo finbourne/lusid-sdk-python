@@ -24,6 +24,6 @@ cut_local_time_dict = cut_local_time_instance.to_dict()
 # create an instance of CutLocalTime from a dict
 cut_local_time_form_dict = cut_local_time.from_dict(cut_local_time_dict)
 ```
-[[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
+[Back to Model list](../README.md#documentation-for-models) &#8226; [Back to API list](../README.md#documentation-for-api-endpoints) &#8226; [Back to README](../README.md)
 
 

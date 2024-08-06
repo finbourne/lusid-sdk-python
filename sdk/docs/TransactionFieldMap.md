@@ -33,6 +33,6 @@ transaction_field_map_dict = transaction_field_map_instance.to_dict()
 # create an instance of TransactionFieldMap from a dict
 transaction_field_map_form_dict = transaction_field_map.from_dict(transaction_field_map_dict)
 ```
-[[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
+[Back to Model list](../README.md#documentation-for-models) &#8226; [Back to API list](../README.md#documentation-for-api-endpoints) &#8226; [Back to README](../README.md)
 
 

@@ -25,6 +25,6 @@ upsert_complex_market_data_request_dict = upsert_complex_market_data_request_ins
 # create an instance of UpsertComplexMarketDataRequest from a dict
 upsert_complex_market_data_request_form_dict = upsert_complex_market_data_request.from_dict(upsert_complex_market_data_request_dict)
 ```
-[[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
+[Back to Model list](../README.md#documentation-for-models) &#8226; [Back to API list](../README.md#documentation-for-api-endpoints) &#8226; [Back to README](../README.md)
 
 

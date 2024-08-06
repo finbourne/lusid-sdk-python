@@ -37,6 +37,6 @@ flow_conventions_dict = flow_conventions_instance.to_dict()
 # create an instance of FlowConventions from a dict
 flow_conventions_form_dict = flow_conventions.from_dict(flow_conventions_dict)
 ```
-[[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
+[Back to Model list](../README.md#documentation-for-models) &#8226; [Back to API list](../README.md#documentation-for-api-endpoints) &#8226; [Back to README](../README.md)
 
 

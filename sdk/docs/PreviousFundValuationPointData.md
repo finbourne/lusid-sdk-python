@@ -25,6 +25,6 @@ previous_fund_valuation_point_data_dict = previous_fund_valuation_point_data_ins
 # create an instance of PreviousFundValuationPointData from a dict
 previous_fund_valuation_point_data_form_dict = previous_fund_valuation_point_data.from_dict(previous_fund_valuation_point_data_dict)
 ```
-[[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
+[Back to Model list](../README.md#documentation-for-models) &#8226; [Back to API list](../README.md#documentation-for-api-endpoints) &#8226; [Back to README](../README.md)
 
 

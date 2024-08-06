@@ -27,6 +27,6 @@ resource_list_of_execution_dict = resource_list_of_execution_instance.to_dict()
 # create an instance of ResourceListOfExecution from a dict
 resource_list_of_execution_form_dict = resource_list_of_execution.from_dict(resource_list_of_execution_dict)
 ```
-[[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
+[Back to Model list](../README.md#documentation-for-models) &#8226; [Back to API list](../README.md#documentation-for-api-endpoints) &#8226; [Back to README](../README.md)
 
 

@@ -24,6 +24,6 @@ decorated_compliance_run_summary_dict = decorated_compliance_run_summary_instanc
 # create an instance of DecoratedComplianceRunSummary from a dict
 decorated_compliance_run_summary_form_dict = decorated_compliance_run_summary.from_dict(decorated_compliance_run_summary_dict)
 ```
-[[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
+[Back to Model list](../README.md#documentation-for-models) &#8226; [Back to API list](../README.md#documentation-for-api-endpoints) &#8226; [Back to README](../README.md)
 
 

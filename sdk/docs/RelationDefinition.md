@@ -32,6 +32,6 @@ relation_definition_dict = relation_definition_instance.to_dict()
 # create an instance of RelationDefinition from a dict
 relation_definition_form_dict = relation_definition.from_dict(relation_definition_dict)
 ```
-[[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
+[Back to Model list](../README.md#documentation-for-models) &#8226; [Back to API list](../README.md#documentation-for-api-endpoints) &#8226; [Back to README](../README.md)
 
 

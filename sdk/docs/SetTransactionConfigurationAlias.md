@@ -27,6 +27,6 @@ set_transaction_configuration_alias_dict = set_transaction_configuration_alias_i
 # create an instance of SetTransactionConfigurationAlias from a dict
 set_transaction_configuration_alias_form_dict = set_transaction_configuration_alias.from_dict(set_transaction_configuration_alias_dict)
 ```
-[[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
+[Back to Model list](../README.md#documentation-for-models) &#8226; [Back to API list](../README.md#documentation-for-api-endpoints) &#8226; [Back to README](../README.md)
 
 

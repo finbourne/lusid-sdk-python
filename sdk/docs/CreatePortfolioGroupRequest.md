@@ -29,6 +29,6 @@ create_portfolio_group_request_dict = create_portfolio_group_request_instance.to
 # create an instance of CreatePortfolioGroupRequest from a dict
 create_portfolio_group_request_form_dict = create_portfolio_group_request.from_dict(create_portfolio_group_request_dict)
 ```
-[[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
+[Back to Model list](../README.md#documentation-for-models) &#8226; [Back to API list](../README.md#documentation-for-api-endpoints) &#8226; [Back to README](../README.md)
 
 

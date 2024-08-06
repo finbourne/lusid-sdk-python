@@ -25,6 +25,6 @@ units_ratio_dict = units_ratio_instance.to_dict()
 # create an instance of UnitsRatio from a dict
 units_ratio_form_dict = units_ratio.from_dict(units_ratio_dict)
 ```
-[[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
+[Back to Model list](../README.md#documentation-for-models) &#8226; [Back to API list](../README.md#documentation-for-api-endpoints) &#8226; [Back to README](../README.md)
 
 

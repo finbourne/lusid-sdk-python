@@ -27,6 +27,6 @@ weighted_instrument_dict = weighted_instrument_instance.to_dict()
 # create an instance of WeightedInstrument from a dict
 weighted_instrument_form_dict = weighted_instrument.from_dict(weighted_instrument_dict)
 ```
-[[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
+[Back to Model list](../README.md#documentation-for-models) &#8226; [Back to API list](../README.md#documentation-for-api-endpoints) &#8226; [Back to README](../README.md)
 
 

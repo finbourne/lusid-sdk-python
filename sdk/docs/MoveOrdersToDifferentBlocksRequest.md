@@ -23,6 +23,6 @@ move_orders_to_different_blocks_request_dict = move_orders_to_different_blocks_r
 # create an instance of MoveOrdersToDifferentBlocksRequest from a dict
 move_orders_to_different_blocks_request_form_dict = move_orders_to_different_blocks_request.from_dict(move_orders_to_different_blocks_request_dict)
 ```
-[[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
+[Back to Model list](../README.md#documentation-for-models) &#8226; [Back to API list](../README.md#documentation-for-api-endpoints) &#8226; [Back to README](../README.md)
 
 

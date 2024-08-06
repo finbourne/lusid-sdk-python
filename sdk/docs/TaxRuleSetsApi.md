@@ -20,68 +20,58 @@ Creates a tax rule set definition at the given effective time.  The user must be
 
 ### Example
 
-* OAuth Authentication (oauth2):
 ```python
-from __future__ import print_function
-import time
-import lusid
-from lusid.rest import ApiException
-from lusid.models.create_tax_rule_set_request import CreateTaxRuleSetRequest
-from lusid.models.tax_rule_set import TaxRuleSet
+import asyncio
+from lusid.exceptions import ApiException
+from lusid.models import *
 from pprint import pprint
-
-import os
 from lusid import (
     ApiClientFactory,
-    TaxRuleSetsApi,
-    EnvironmentVariablesConfigurationLoader,
-    SecretsFileConfigurationLoader,
-    ArgsConfigurationLoader
+    TaxRuleSetsApi
 )
 
-# Use the lusid ApiClientFactory to build Api instances with a configured api client
-# By default this will read config from environment variables
-# Then from a secrets.json file found in the current working directory
-api_client_factory = ApiClientFactory()
+async def main():
 
-# The ApiClientFactory can be passed an iterable of configuration loaders to read configuration from
+    with open("secrets.json", "w") as file:
+        file.write('''
+{
+    "api":
+    {
+        "tokenUrl":"<your-token-url>",
+        "lusidUrl":"https://<your-domain>.lusid.com/api",
+        "username":"<your-username>",
+        "password":"<your-password>",
+        "clientId":"<your-client-id>",
+        "clientSecret":"<your-client-secret>"
+    }
+}''')
 
-api_url = "https://www.lusid.com/api"
-# Path to a secrets.json file containing authentication credentials
-# See https://support.lusid.com/knowledgebase/article/KA-01667/en-us
-# for a detailed guide to setting up the SDK make authenticated calls to LUSID APIs
-secrets_path = os.getenv("FBN_SECRETS_PATH")
-app_name="LusidJupyterNotebook"
+    # Use the lusid ApiClientFactory to build Api instances with a configured api client
+    # By default this will read config from environment variables
+    # Then from a secrets.json file found in the current working directory
+    api_client_factory = ApiClientFactory()
 
-config_loaders = [
-	EnvironmentVariablesConfigurationLoader(),
-	SecretsFileConfigurationLoader(api_secrets_file=secrets_path),
-	ArgsConfigurationLoader(api_url=api_url, app_name=app_name)
-]
-api_client_factory = ApiClientFactory(config_loaders=config_loaders)
+    # Enter a context with an instance of the ApiClientFactory to ensure the connection pool is closed after use
+    async with api_client_factory:
+        # Create an instance of the API class
+        api_instance = api_client_factory.build(TaxRuleSetsApi)
 
+        # Objects can be created either via the class constructor, or using the 'from_dict' or 'from_json' methods
+        # Change the lines below to switch approach
+        # create_tax_rule_set_request = CreateTaxRuleSetRequest()
+        # create_tax_rule_set_request = CreateTaxRuleSetRequest.from_json("")
+        create_tax_rule_set_request = CreateTaxRuleSetRequest.from_dict({"id":{"scope":"RuleSetScope","code":"RuleSetName"},"displayName":"Rule set display name","description":"Rule set description","outputPropertyKey":"Transaction/default/TaxAmount","rules":[{"name":"UKTaxRule","description":"Rule for the UK tax rate","rate":0.25,"matchCriteria":[{"propertyKey":"Instrument/myScope/market","value":"GB","criterionType":"PropertyValueEquals"},{"propertyKey":"Portfolio/myScope/taxDomicile","value":"GB","criterionType":"PropertyValueEquals"}]}]}) # CreateTaxRuleSetRequest | The contents of the rule set.
+        effective_at = 'effective_at_example' # str | The effective datetime or cut label at which the rule set will take effect.  Defaults to the current LUSID system datetime if not specified. (optional)
 
-# The client must configure the authentication and authorization parameters
-# in accordance with the API server security policy.
+        try:
+            # [EXPERIMENTAL] CreateTaxRuleSet: Create a tax rule set.
+            api_response = await api_instance.create_tax_rule_set(create_tax_rule_set_request, effective_at=effective_at)
+            pprint(api_response)
+        except ApiException as e:
+            print("Exception when calling TaxRuleSetsApi->create_tax_rule_set: %s\n" % e)
 
-
-
-# Enter a context with an instance of the ApiClientFactory to ensure the connection pool is closed after use
-async with api_client_factory:
-    # Create an instance of the API class
-    api_instance = api_client_factory.build(lusid.TaxRuleSetsApi)
-    create_tax_rule_set_request = {"id":{"scope":"RuleSetScope","code":"RuleSetName"},"displayName":"Rule set display name","description":"Rule set description","outputPropertyKey":"Transaction/default/TaxAmount","rules":[{"name":"UKTaxRule","description":"Rule for the UK tax rate","rate":0.25,"matchCriteria":[{"propertyKey":"Instrument/myScope/market","value":"GB","criterionType":"PropertyValueEquals"},{"propertyKey":"Portfolio/myScope/taxDomicile","value":"GB","criterionType":"PropertyValueEquals"}]}]} # CreateTaxRuleSetRequest | The contents of the rule set.
-    effective_at = 'effective_at_example' # str | The effective datetime or cut label at which the rule set will take effect.  Defaults to the current LUSID system datetime if not specified. (optional)
-
-    try:
-        # [EXPERIMENTAL] CreateTaxRuleSet: Create a tax rule set.
-        api_response = await api_instance.create_tax_rule_set(create_tax_rule_set_request, effective_at=effective_at)
-        print("The response of TaxRuleSetsApi->create_tax_rule_set:\n")
-        pprint(api_response)
-    except Exception as e:
-        print("Exception when calling TaxRuleSetsApi->create_tax_rule_set: %s\n" % e)
+asyncio.run(main())
 ```
-
 
 ### Parameters
 
@@ -93,10 +83,6 @@ Name | Type | Description  | Notes
 ### Return type
 
 [**TaxRuleSet**](TaxRuleSet.md)
-
-### Authorization
-
-[oauth2](../README.md#oauth2)
 
 ### HTTP request headers
 
@@ -110,7 +96,7 @@ Name | Type | Description  | Notes
 **400** | The details of the input related failure |  -  |
 **0** | Error response |  -  |
 
-[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+[Back to top](#) &#8226; [Back to API list](../README.md#documentation-for-api-endpoints) &#8226; [Back to Model list](../README.md#documentation-for-models) &#8226; [Back to README](../README.md)
 
 # **delete_tax_rule_set**
 > DeletedEntityResponse delete_tax_rule_set(scope, code)
@@ -121,67 +107,53 @@ Name | Type | Description  | Notes
 
 ### Example
 
-* OAuth Authentication (oauth2):
 ```python
-from __future__ import print_function
-import time
-import lusid
-from lusid.rest import ApiException
-from lusid.models.deleted_entity_response import DeletedEntityResponse
+import asyncio
+from lusid.exceptions import ApiException
+from lusid.models import *
 from pprint import pprint
-
-import os
 from lusid import (
     ApiClientFactory,
-    TaxRuleSetsApi,
-    EnvironmentVariablesConfigurationLoader,
-    SecretsFileConfigurationLoader,
-    ArgsConfigurationLoader
+    TaxRuleSetsApi
 )
 
-# Use the lusid ApiClientFactory to build Api instances with a configured api client
-# By default this will read config from environment variables
-# Then from a secrets.json file found in the current working directory
-api_client_factory = ApiClientFactory()
+async def main():
 
-# The ApiClientFactory can be passed an iterable of configuration loaders to read configuration from
+    with open("secrets.json", "w") as file:
+        file.write('''
+{
+    "api":
+    {
+        "tokenUrl":"<your-token-url>",
+        "lusidUrl":"https://<your-domain>.lusid.com/api",
+        "username":"<your-username>",
+        "password":"<your-password>",
+        "clientId":"<your-client-id>",
+        "clientSecret":"<your-client-secret>"
+    }
+}''')
 
-api_url = "https://www.lusid.com/api"
-# Path to a secrets.json file containing authentication credentials
-# See https://support.lusid.com/knowledgebase/article/KA-01667/en-us
-# for a detailed guide to setting up the SDK make authenticated calls to LUSID APIs
-secrets_path = os.getenv("FBN_SECRETS_PATH")
-app_name="LusidJupyterNotebook"
+    # Use the lusid ApiClientFactory to build Api instances with a configured api client
+    # By default this will read config from environment variables
+    # Then from a secrets.json file found in the current working directory
+    api_client_factory = ApiClientFactory()
 
-config_loaders = [
-	EnvironmentVariablesConfigurationLoader(),
-	SecretsFileConfigurationLoader(api_secrets_file=secrets_path),
-	ArgsConfigurationLoader(api_url=api_url, app_name=app_name)
-]
-api_client_factory = ApiClientFactory(config_loaders=config_loaders)
+    # Enter a context with an instance of the ApiClientFactory to ensure the connection pool is closed after use
+    async with api_client_factory:
+        # Create an instance of the API class
+        api_instance = api_client_factory.build(TaxRuleSetsApi)
+        scope = 'scope_example' # str | The rule set scope.
+        code = 'code_example' # str | The rule set code.
 
+        try:
+            # [EXPERIMENTAL] DeleteTaxRuleSet: Delete a tax rule set.
+            api_response = await api_instance.delete_tax_rule_set(scope, code)
+            pprint(api_response)
+        except ApiException as e:
+            print("Exception when calling TaxRuleSetsApi->delete_tax_rule_set: %s\n" % e)
 
-# The client must configure the authentication and authorization parameters
-# in accordance with the API server security policy.
-
-
-
-# Enter a context with an instance of the ApiClientFactory to ensure the connection pool is closed after use
-async with api_client_factory:
-    # Create an instance of the API class
-    api_instance = api_client_factory.build(lusid.TaxRuleSetsApi)
-    scope = 'scope_example' # str | The rule set scope.
-    code = 'code_example' # str | The rule set code.
-
-    try:
-        # [EXPERIMENTAL] DeleteTaxRuleSet: Delete a tax rule set.
-        api_response = await api_instance.delete_tax_rule_set(scope, code)
-        print("The response of TaxRuleSetsApi->delete_tax_rule_set:\n")
-        pprint(api_response)
-    except Exception as e:
-        print("Exception when calling TaxRuleSetsApi->delete_tax_rule_set: %s\n" % e)
+asyncio.run(main())
 ```
-
 
 ### Parameters
 
@@ -193,10 +165,6 @@ Name | Type | Description  | Notes
 ### Return type
 
 [**DeletedEntityResponse**](DeletedEntityResponse.md)
-
-### Authorization
-
-[oauth2](../README.md#oauth2)
 
 ### HTTP request headers
 
@@ -210,7 +178,7 @@ Name | Type | Description  | Notes
 **400** | The details of the input related failure |  -  |
 **0** | Error response |  -  |
 
-[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+[Back to top](#) &#8226; [Back to API list](../README.md#documentation-for-api-endpoints) &#8226; [Back to Model list](../README.md#documentation-for-models) &#8226; [Back to README](../README.md)
 
 # **get_tax_rule_set**
 > TaxRuleSet get_tax_rule_set(scope, code, effective_at=effective_at, as_at=as_at)
@@ -221,69 +189,55 @@ Retrieves the tax rule set definition at the given effective and as at times.
 
 ### Example
 
-* OAuth Authentication (oauth2):
 ```python
-from __future__ import print_function
-import time
-import lusid
-from lusid.rest import ApiException
-from lusid.models.tax_rule_set import TaxRuleSet
+import asyncio
+from lusid.exceptions import ApiException
+from lusid.models import *
 from pprint import pprint
-
-import os
 from lusid import (
     ApiClientFactory,
-    TaxRuleSetsApi,
-    EnvironmentVariablesConfigurationLoader,
-    SecretsFileConfigurationLoader,
-    ArgsConfigurationLoader
+    TaxRuleSetsApi
 )
 
-# Use the lusid ApiClientFactory to build Api instances with a configured api client
-# By default this will read config from environment variables
-# Then from a secrets.json file found in the current working directory
-api_client_factory = ApiClientFactory()
+async def main():
 
-# The ApiClientFactory can be passed an iterable of configuration loaders to read configuration from
+    with open("secrets.json", "w") as file:
+        file.write('''
+{
+    "api":
+    {
+        "tokenUrl":"<your-token-url>",
+        "lusidUrl":"https://<your-domain>.lusid.com/api",
+        "username":"<your-username>",
+        "password":"<your-password>",
+        "clientId":"<your-client-id>",
+        "clientSecret":"<your-client-secret>"
+    }
+}''')
 
-api_url = "https://www.lusid.com/api"
-# Path to a secrets.json file containing authentication credentials
-# See https://support.lusid.com/knowledgebase/article/KA-01667/en-us
-# for a detailed guide to setting up the SDK make authenticated calls to LUSID APIs
-secrets_path = os.getenv("FBN_SECRETS_PATH")
-app_name="LusidJupyterNotebook"
+    # Use the lusid ApiClientFactory to build Api instances with a configured api client
+    # By default this will read config from environment variables
+    # Then from a secrets.json file found in the current working directory
+    api_client_factory = ApiClientFactory()
 
-config_loaders = [
-	EnvironmentVariablesConfigurationLoader(),
-	SecretsFileConfigurationLoader(api_secrets_file=secrets_path),
-	ArgsConfigurationLoader(api_url=api_url, app_name=app_name)
-]
-api_client_factory = ApiClientFactory(config_loaders=config_loaders)
+    # Enter a context with an instance of the ApiClientFactory to ensure the connection pool is closed after use
+    async with api_client_factory:
+        # Create an instance of the API class
+        api_instance = api_client_factory.build(TaxRuleSetsApi)
+        scope = 'scope_example' # str | The rule set scope.
+        code = 'code_example' # str | The rule set code.
+        effective_at = 'effective_at_example' # str | The effective datetime or cut label at which to retrieve the rule definition.  Defaults to the current LUSID system datetime if not specified. (optional)
+        as_at = '2013-10-20T19:20:30+01:00' # datetime | The asAt datetime at which to retrieve the rule definition. Defaults to returning the latest version if not  specified. (optional)
 
+        try:
+            # [EXPERIMENTAL] GetTaxRuleSet: Retrieve the definition of single tax rule set.
+            api_response = await api_instance.get_tax_rule_set(scope, code, effective_at=effective_at, as_at=as_at)
+            pprint(api_response)
+        except ApiException as e:
+            print("Exception when calling TaxRuleSetsApi->get_tax_rule_set: %s\n" % e)
 
-# The client must configure the authentication and authorization parameters
-# in accordance with the API server security policy.
-
-
-
-# Enter a context with an instance of the ApiClientFactory to ensure the connection pool is closed after use
-async with api_client_factory:
-    # Create an instance of the API class
-    api_instance = api_client_factory.build(lusid.TaxRuleSetsApi)
-    scope = 'scope_example' # str | The rule set scope.
-    code = 'code_example' # str | The rule set code.
-    effective_at = 'effective_at_example' # str | The effective datetime or cut label at which to retrieve the rule definition.  Defaults to the current LUSID system datetime if not specified. (optional)
-    as_at = '2013-10-20T19:20:30+01:00' # datetime | The asAt datetime at which to retrieve the rule definition. Defaults to returning the latest version if not  specified. (optional)
-
-    try:
-        # [EXPERIMENTAL] GetTaxRuleSet: Retrieve the definition of single tax rule set.
-        api_response = await api_instance.get_tax_rule_set(scope, code, effective_at=effective_at, as_at=as_at)
-        print("The response of TaxRuleSetsApi->get_tax_rule_set:\n")
-        pprint(api_response)
-    except Exception as e:
-        print("Exception when calling TaxRuleSetsApi->get_tax_rule_set: %s\n" % e)
+asyncio.run(main())
 ```
-
 
 ### Parameters
 
@@ -298,10 +252,6 @@ Name | Type | Description  | Notes
 
 [**TaxRuleSet**](TaxRuleSet.md)
 
-### Authorization
-
-[oauth2](../README.md#oauth2)
-
 ### HTTP request headers
 
  - **Content-Type**: Not defined
@@ -314,7 +264,7 @@ Name | Type | Description  | Notes
 **400** | The details of the input related failure |  -  |
 **0** | Error response |  -  |
 
-[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+[Back to top](#) &#8226; [Back to API list](../README.md#documentation-for-api-endpoints) &#8226; [Back to Model list](../README.md#documentation-for-models) &#8226; [Back to README](../README.md)
 
 # **list_tax_rule_sets**
 > ResourceListOfTaxRuleSet list_tax_rule_sets(effective_at=effective_at, as_at=as_at)
@@ -325,67 +275,53 @@ Retrieves all tax rule set definitions at the given effective and as at times
 
 ### Example
 
-* OAuth Authentication (oauth2):
 ```python
-from __future__ import print_function
-import time
-import lusid
-from lusid.rest import ApiException
-from lusid.models.resource_list_of_tax_rule_set import ResourceListOfTaxRuleSet
+import asyncio
+from lusid.exceptions import ApiException
+from lusid.models import *
 from pprint import pprint
-
-import os
 from lusid import (
     ApiClientFactory,
-    TaxRuleSetsApi,
-    EnvironmentVariablesConfigurationLoader,
-    SecretsFileConfigurationLoader,
-    ArgsConfigurationLoader
+    TaxRuleSetsApi
 )
 
-# Use the lusid ApiClientFactory to build Api instances with a configured api client
-# By default this will read config from environment variables
-# Then from a secrets.json file found in the current working directory
-api_client_factory = ApiClientFactory()
+async def main():
 
-# The ApiClientFactory can be passed an iterable of configuration loaders to read configuration from
+    with open("secrets.json", "w") as file:
+        file.write('''
+{
+    "api":
+    {
+        "tokenUrl":"<your-token-url>",
+        "lusidUrl":"https://<your-domain>.lusid.com/api",
+        "username":"<your-username>",
+        "password":"<your-password>",
+        "clientId":"<your-client-id>",
+        "clientSecret":"<your-client-secret>"
+    }
+}''')
 
-api_url = "https://www.lusid.com/api"
-# Path to a secrets.json file containing authentication credentials
-# See https://support.lusid.com/knowledgebase/article/KA-01667/en-us
-# for a detailed guide to setting up the SDK make authenticated calls to LUSID APIs
-secrets_path = os.getenv("FBN_SECRETS_PATH")
-app_name="LusidJupyterNotebook"
+    # Use the lusid ApiClientFactory to build Api instances with a configured api client
+    # By default this will read config from environment variables
+    # Then from a secrets.json file found in the current working directory
+    api_client_factory = ApiClientFactory()
 
-config_loaders = [
-	EnvironmentVariablesConfigurationLoader(),
-	SecretsFileConfigurationLoader(api_secrets_file=secrets_path),
-	ArgsConfigurationLoader(api_url=api_url, app_name=app_name)
-]
-api_client_factory = ApiClientFactory(config_loaders=config_loaders)
+    # Enter a context with an instance of the ApiClientFactory to ensure the connection pool is closed after use
+    async with api_client_factory:
+        # Create an instance of the API class
+        api_instance = api_client_factory.build(TaxRuleSetsApi)
+        effective_at = 'effective_at_example' # str | The effective datetime or cut label at which to retrieve the rule definitions.  Defaults to the current LUSID system datetime if not specified. (optional)
+        as_at = '2013-10-20T19:20:30+01:00' # datetime | The asAt datetime at which to retrieve the rule definitions. Defaults to returning the latest version if not  specified. (optional)
 
+        try:
+            # [EXPERIMENTAL] ListTaxRuleSets: List tax rule sets.
+            api_response = await api_instance.list_tax_rule_sets(effective_at=effective_at, as_at=as_at)
+            pprint(api_response)
+        except ApiException as e:
+            print("Exception when calling TaxRuleSetsApi->list_tax_rule_sets: %s\n" % e)
 
-# The client must configure the authentication and authorization parameters
-# in accordance with the API server security policy.
-
-
-
-# Enter a context with an instance of the ApiClientFactory to ensure the connection pool is closed after use
-async with api_client_factory:
-    # Create an instance of the API class
-    api_instance = api_client_factory.build(lusid.TaxRuleSetsApi)
-    effective_at = 'effective_at_example' # str | The effective datetime or cut label at which to retrieve the rule definitions.  Defaults to the current LUSID system datetime if not specified. (optional)
-    as_at = '2013-10-20T19:20:30+01:00' # datetime | The asAt datetime at which to retrieve the rule definitions. Defaults to returning the latest version if not  specified. (optional)
-
-    try:
-        # [EXPERIMENTAL] ListTaxRuleSets: List tax rule sets.
-        api_response = await api_instance.list_tax_rule_sets(effective_at=effective_at, as_at=as_at)
-        print("The response of TaxRuleSetsApi->list_tax_rule_sets:\n")
-        pprint(api_response)
-    except Exception as e:
-        print("Exception when calling TaxRuleSetsApi->list_tax_rule_sets: %s\n" % e)
+asyncio.run(main())
 ```
-
 
 ### Parameters
 
@@ -397,10 +333,6 @@ Name | Type | Description  | Notes
 ### Return type
 
 [**ResourceListOfTaxRuleSet**](ResourceListOfTaxRuleSet.md)
-
-### Authorization
-
-[oauth2](../README.md#oauth2)
 
 ### HTTP request headers
 
@@ -414,7 +346,7 @@ Name | Type | Description  | Notes
 **400** | The details of the input related failure |  -  |
 **0** | Error response |  -  |
 
-[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+[Back to top](#) &#8226; [Back to API list](../README.md#documentation-for-api-endpoints) &#8226; [Back to Model list](../README.md#documentation-for-models) &#8226; [Back to README](../README.md)
 
 # **update_tax_rule_set**
 > TaxRuleSet update_tax_rule_set(scope, code, update_tax_rule_set_request, effective_at=effective_at)
@@ -425,70 +357,60 @@ Updates the tax rule set definition at the given effective time.  The changes wi
 
 ### Example
 
-* OAuth Authentication (oauth2):
 ```python
-from __future__ import print_function
-import time
-import lusid
-from lusid.rest import ApiException
-from lusid.models.tax_rule_set import TaxRuleSet
-from lusid.models.update_tax_rule_set_request import UpdateTaxRuleSetRequest
+import asyncio
+from lusid.exceptions import ApiException
+from lusid.models import *
 from pprint import pprint
-
-import os
 from lusid import (
     ApiClientFactory,
-    TaxRuleSetsApi,
-    EnvironmentVariablesConfigurationLoader,
-    SecretsFileConfigurationLoader,
-    ArgsConfigurationLoader
+    TaxRuleSetsApi
 )
 
-# Use the lusid ApiClientFactory to build Api instances with a configured api client
-# By default this will read config from environment variables
-# Then from a secrets.json file found in the current working directory
-api_client_factory = ApiClientFactory()
+async def main():
 
-# The ApiClientFactory can be passed an iterable of configuration loaders to read configuration from
+    with open("secrets.json", "w") as file:
+        file.write('''
+{
+    "api":
+    {
+        "tokenUrl":"<your-token-url>",
+        "lusidUrl":"https://<your-domain>.lusid.com/api",
+        "username":"<your-username>",
+        "password":"<your-password>",
+        "clientId":"<your-client-id>",
+        "clientSecret":"<your-client-secret>"
+    }
+}''')
 
-api_url = "https://www.lusid.com/api"
-# Path to a secrets.json file containing authentication credentials
-# See https://support.lusid.com/knowledgebase/article/KA-01667/en-us
-# for a detailed guide to setting up the SDK make authenticated calls to LUSID APIs
-secrets_path = os.getenv("FBN_SECRETS_PATH")
-app_name="LusidJupyterNotebook"
+    # Use the lusid ApiClientFactory to build Api instances with a configured api client
+    # By default this will read config from environment variables
+    # Then from a secrets.json file found in the current working directory
+    api_client_factory = ApiClientFactory()
 
-config_loaders = [
-	EnvironmentVariablesConfigurationLoader(),
-	SecretsFileConfigurationLoader(api_secrets_file=secrets_path),
-	ArgsConfigurationLoader(api_url=api_url, app_name=app_name)
-]
-api_client_factory = ApiClientFactory(config_loaders=config_loaders)
+    # Enter a context with an instance of the ApiClientFactory to ensure the connection pool is closed after use
+    async with api_client_factory:
+        # Create an instance of the API class
+        api_instance = api_client_factory.build(TaxRuleSetsApi)
+        scope = 'scope_example' # str | The rule set scope.
+        code = 'code_example' # str | The rule set code.
 
+        # Objects can be created either via the class constructor, or using the 'from_dict' or 'from_json' methods
+        # Change the lines below to switch approach
+        # update_tax_rule_set_request = UpdateTaxRuleSetRequest()
+        # update_tax_rule_set_request = UpdateTaxRuleSetRequest.from_json("")
+        update_tax_rule_set_request = UpdateTaxRuleSetRequest.from_dict({"displayName":"Rule set display name","description":"Rule set description","rules":[{"name":"UKTaxRule","description":"Rule for the UK tax rate","rate":0.25,"matchCriteria":[{"propertyKey":"Instrument/myScope/market","value":"GB","criterionType":"PropertyValueEquals"},{"propertyKey":"Portfolio/myScope/taxDomicile","value":"GB","criterionType":"PropertyValueEquals"}]}]}) # UpdateTaxRuleSetRequest | The contents of the rule set.
+        effective_at = 'effective_at_example' # str | The effective datetime or cut label at which the rule set will take effect.  Defaults to the current LUSID system datetime if not specified. (optional)
 
-# The client must configure the authentication and authorization parameters
-# in accordance with the API server security policy.
+        try:
+            # [EXPERIMENTAL] UpdateTaxRuleSet: Update a tax rule set.
+            api_response = await api_instance.update_tax_rule_set(scope, code, update_tax_rule_set_request, effective_at=effective_at)
+            pprint(api_response)
+        except ApiException as e:
+            print("Exception when calling TaxRuleSetsApi->update_tax_rule_set: %s\n" % e)
 
-
-
-# Enter a context with an instance of the ApiClientFactory to ensure the connection pool is closed after use
-async with api_client_factory:
-    # Create an instance of the API class
-    api_instance = api_client_factory.build(lusid.TaxRuleSetsApi)
-    scope = 'scope_example' # str | The rule set scope.
-    code = 'code_example' # str | The rule set code.
-    update_tax_rule_set_request = {"displayName":"Rule set display name","description":"Rule set description","rules":[{"name":"UKTaxRule","description":"Rule for the UK tax rate","rate":0.25,"matchCriteria":[{"propertyKey":"Instrument/myScope/market","value":"GB","criterionType":"PropertyValueEquals"},{"propertyKey":"Portfolio/myScope/taxDomicile","value":"GB","criterionType":"PropertyValueEquals"}]}]} # UpdateTaxRuleSetRequest | The contents of the rule set.
-    effective_at = 'effective_at_example' # str | The effective datetime or cut label at which the rule set will take effect.  Defaults to the current LUSID system datetime if not specified. (optional)
-
-    try:
-        # [EXPERIMENTAL] UpdateTaxRuleSet: Update a tax rule set.
-        api_response = await api_instance.update_tax_rule_set(scope, code, update_tax_rule_set_request, effective_at=effective_at)
-        print("The response of TaxRuleSetsApi->update_tax_rule_set:\n")
-        pprint(api_response)
-    except Exception as e:
-        print("Exception when calling TaxRuleSetsApi->update_tax_rule_set: %s\n" % e)
+asyncio.run(main())
 ```
-
 
 ### Parameters
 
@@ -503,10 +425,6 @@ Name | Type | Description  | Notes
 
 [**TaxRuleSet**](TaxRuleSet.md)
 
-### Authorization
-
-[oauth2](../README.md#oauth2)
-
 ### HTTP request headers
 
  - **Content-Type**: application/json-patch+json, application/json, text/json, application/*+json
@@ -519,5 +437,5 @@ Name | Type | Description  | Notes
 **400** | The details of the input related failure |  -  |
 **0** | Error response |  -  |
 
-[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+[Back to top](#) &#8226; [Back to API list](../README.md#documentation-for-api-endpoints) &#8226; [Back to Model list](../README.md#documentation-for-models) &#8226; [Back to README](../README.md)
 

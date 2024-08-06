@@ -41,6 +41,6 @@ a2_b_movement_record_dict = a2_b_movement_record_instance.to_dict()
 # create an instance of A2BMovementRecord from a dict
 a2_b_movement_record_form_dict = a2_b_movement_record.from_dict(a2_b_movement_record_dict)
 ```
-[[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
+[Back to Model list](../README.md#documentation-for-models) &#8226; [Back to API list](../README.md#documentation-for-api-endpoints) &#8226; [Back to README](../README.md)
 
 

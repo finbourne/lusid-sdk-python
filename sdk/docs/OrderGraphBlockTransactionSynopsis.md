@@ -24,6 +24,6 @@ order_graph_block_transaction_synopsis_dict = order_graph_block_transaction_syno
 # create an instance of OrderGraphBlockTransactionSynopsis from a dict
 order_graph_block_transaction_synopsis_form_dict = order_graph_block_transaction_synopsis.from_dict(order_graph_block_transaction_synopsis_dict)
 ```
-[[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
+[Back to Model list](../README.md#documentation-for-models) &#8226; [Back to API list](../README.md#documentation-for-api-endpoints) &#8226; [Back to README](../README.md)
 
 

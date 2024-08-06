@@ -25,6 +25,6 @@ virtual_document_dict = virtual_document_instance.to_dict()
 # create an instance of VirtualDocument from a dict
 virtual_document_form_dict = virtual_document.from_dict(virtual_document_dict)
 ```
-[[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
+[Back to Model list](../README.md#documentation-for-models) &#8226; [Back to API list](../README.md#documentation-for-api-endpoints) &#8226; [Back to README](../README.md)
 
 

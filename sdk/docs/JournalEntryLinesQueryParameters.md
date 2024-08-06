@@ -27,6 +27,6 @@ journal_entry_lines_query_parameters_dict = journal_entry_lines_query_parameters
 # create an instance of JournalEntryLinesQueryParameters from a dict
 journal_entry_lines_query_parameters_form_dict = journal_entry_lines_query_parameters.from_dict(journal_entry_lines_query_parameters_dict)
 ```
-[[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
+[Back to Model list](../README.md#documentation-for-models) &#8226; [Back to API list](../README.md#documentation-for-api-endpoints) &#8226; [Back to README](../README.md)
 
 

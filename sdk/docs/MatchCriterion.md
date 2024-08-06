@@ -24,6 +24,6 @@ match_criterion_dict = match_criterion_instance.to_dict()
 # create an instance of MatchCriterion from a dict
 match_criterion_form_dict = match_criterion.from_dict(match_criterion_dict)
 ```
-[[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
+[Back to Model list](../README.md#documentation-for-models) &#8226; [Back to API list](../README.md#documentation-for-api-endpoints) &#8226; [Back to README](../README.md)
 
 

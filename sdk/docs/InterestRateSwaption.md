@@ -29,6 +29,6 @@ interest_rate_swaption_dict = interest_rate_swaption_instance.to_dict()
 # create an instance of InterestRateSwaption from a dict
 interest_rate_swaption_form_dict = interest_rate_swaption.from_dict(interest_rate_swaption_dict)
 ```
-[[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
+[Back to Model list](../README.md#documentation-for-models) &#8226; [Back to API list](../README.md#documentation-for-api-endpoints) &#8226; [Back to README](../README.md)
 
 

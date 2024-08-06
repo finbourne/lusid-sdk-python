@@ -26,6 +26,6 @@ transaction_query_parameters_dict = transaction_query_parameters_instance.to_dic
 # create an instance of TransactionQueryParameters from a dict
 transaction_query_parameters_form_dict = transaction_query_parameters.from_dict(transaction_query_parameters_dict)
 ```
-[[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
+[Back to Model list](../README.md#documentation-for-models) &#8226; [Back to API list](../README.md#documentation-for-api-endpoints) &#8226; [Back to README](../README.md)
 
 

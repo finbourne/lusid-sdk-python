@@ -27,6 +27,6 @@ aggregation_measure_failure_detail_dict = aggregation_measure_failure_detail_ins
 # create an instance of AggregationMeasureFailureDetail from a dict
 aggregation_measure_failure_detail_form_dict = aggregation_measure_failure_detail.from_dict(aggregation_measure_failure_detail_dict)
 ```
-[[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
+[Back to Model list](../README.md#documentation-for-models) &#8226; [Back to API list](../README.md#documentation-for-api-endpoints) &#8226; [Back to README](../README.md)
 
 

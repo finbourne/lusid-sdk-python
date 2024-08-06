@@ -25,6 +25,6 @@ virtual_document_row_dict = virtual_document_row_instance.to_dict()
 # create an instance of VirtualDocumentRow from a dict
 virtual_document_row_form_dict = virtual_document_row.from_dict(virtual_document_row_dict)
 ```
-[[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
+[Back to Model list](../README.md#documentation-for-models) &#8226; [Back to API list](../README.md#documentation-for-api-endpoints) &#8226; [Back to README](../README.md)
 
 

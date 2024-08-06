@@ -26,6 +26,6 @@ list_aggregation_reconciliation_dict = list_aggregation_reconciliation_instance.
 # create an instance of ListAggregationReconciliation from a dict
 list_aggregation_reconciliation_form_dict = list_aggregation_reconciliation.from_dict(list_aggregation_reconciliation_dict)
 ```
-[[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
+[Back to Model list](../README.md#documentation-for-models) &#8226; [Back to API list](../README.md#documentation-for-api-endpoints) &#8226; [Back to README](../README.md)
 
 

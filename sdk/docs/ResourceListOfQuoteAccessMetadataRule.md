@@ -27,6 +27,6 @@ resource_list_of_quote_access_metadata_rule_dict = resource_list_of_quote_access
 # create an instance of ResourceListOfQuoteAccessMetadataRule from a dict
 resource_list_of_quote_access_metadata_rule_form_dict = resource_list_of_quote_access_metadata_rule.from_dict(resource_list_of_quote_access_metadata_rule_dict)
 ```
-[[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
+[Back to Model list](../README.md#documentation-for-models) &#8226; [Back to API list](../README.md#documentation-for-api-endpoints) &#8226; [Back to README](../README.md)
 
 

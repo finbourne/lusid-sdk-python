@@ -28,6 +28,6 @@ transaction_template_specification_dict = transaction_template_specification_ins
 # create an instance of TransactionTemplateSpecification from a dict
 transaction_template_specification_form_dict = transaction_template_specification.from_dict(transaction_template_specification_dict)
 ```
-[[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
+[Back to Model list](../README.md#documentation-for-models) &#8226; [Back to API list](../README.md#documentation-for-api-endpoints) &#8226; [Back to README](../README.md)
 
 

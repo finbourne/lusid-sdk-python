@@ -28,6 +28,6 @@ transaction_reconciliation_request_v2_dict = transaction_reconciliation_request_
 # create an instance of TransactionReconciliationRequestV2 from a dict
 transaction_reconciliation_request_v2_form_dict = transaction_reconciliation_request_v2.from_dict(transaction_reconciliation_request_v2_dict)
 ```
-[[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
+[Back to Model list](../README.md#documentation-for-models) &#8226; [Back to API list](../README.md#documentation-for-api-endpoints) &#8226; [Back to README](../README.md)
 
 

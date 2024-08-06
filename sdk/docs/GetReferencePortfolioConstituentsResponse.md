@@ -29,6 +29,6 @@ get_reference_portfolio_constituents_response_dict = get_reference_portfolio_con
 # create an instance of GetReferencePortfolioConstituentsResponse from a dict
 get_reference_portfolio_constituents_response_form_dict = get_reference_portfolio_constituents_response.from_dict(get_reference_portfolio_constituents_response_dict)
 ```
-[[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
+[Back to Model list](../README.md#documentation-for-models) &#8226; [Back to API list](../README.md#documentation-for-api-endpoints) &#8226; [Back to README](../README.md)
 
 

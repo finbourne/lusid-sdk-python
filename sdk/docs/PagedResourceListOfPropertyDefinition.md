@@ -27,6 +27,6 @@ paged_resource_list_of_property_definition_dict = paged_resource_list_of_propert
 # create an instance of PagedResourceListOfPropertyDefinition from a dict
 paged_resource_list_of_property_definition_form_dict = paged_resource_list_of_property_definition.from_dict(paged_resource_list_of_property_definition_dict)
 ```
-[[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
+[Back to Model list](../README.md#documentation-for-models) &#8226; [Back to API list](../README.md#documentation-for-api-endpoints) &#8226; [Back to README](../README.md)
 
 

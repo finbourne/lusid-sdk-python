@@ -24,6 +24,6 @@ translation_input_dict = translation_input_instance.to_dict()
 # create an instance of TranslationInput from a dict
 translation_input_form_dict = translation_input.from_dict(translation_input_dict)
 ```
-[[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
+[Back to Model list](../README.md#documentation-for-models) &#8226; [Back to API list](../README.md#documentation-for-api-endpoints) &#8226; [Back to README](../README.md)
 
 

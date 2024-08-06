@@ -26,6 +26,6 @@ recipe_value_dict = recipe_value_instance.to_dict()
 # create an instance of RecipeValue from a dict
 recipe_value_form_dict = recipe_value.from_dict(recipe_value_dict)
 ```
-[[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
+[Back to Model list](../README.md#documentation-for-models) &#8226; [Back to API list](../README.md#documentation-for-api-endpoints) &#8226; [Back to README](../README.md)
 
 

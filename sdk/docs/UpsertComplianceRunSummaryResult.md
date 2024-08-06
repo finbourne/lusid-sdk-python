@@ -27,6 +27,6 @@ upsert_compliance_run_summary_result_dict = upsert_compliance_run_summary_result
 # create an instance of UpsertComplianceRunSummaryResult from a dict
 upsert_compliance_run_summary_result_form_dict = upsert_compliance_run_summary_result.from_dict(upsert_compliance_run_summary_result_dict)
 ```
-[[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
+[Back to Model list](../README.md#documentation-for-models) &#8226; [Back to API list](../README.md#documentation-for-api-endpoints) &#8226; [Back to README](../README.md)
 
 

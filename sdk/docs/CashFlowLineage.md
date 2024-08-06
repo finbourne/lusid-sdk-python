@@ -29,6 +29,6 @@ cash_flow_lineage_dict = cash_flow_lineage_instance.to_dict()
 # create an instance of CashFlowLineage from a dict
 cash_flow_lineage_form_dict = cash_flow_lineage.from_dict(cash_flow_lineage_dict)
 ```
-[[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
+[Back to Model list](../README.md#documentation-for-models) &#8226; [Back to API list](../README.md#documentation-for-api-endpoints) &#8226; [Back to README](../README.md)
 
 

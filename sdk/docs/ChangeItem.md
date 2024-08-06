@@ -28,6 +28,6 @@ change_item_dict = change_item_instance.to_dict()
 # create an instance of ChangeItem from a dict
 change_item_form_dict = change_item.from_dict(change_item_dict)
 ```
-[[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
+[Back to Model list](../README.md#documentation-for-models) &#8226; [Back to API list](../README.md#documentation-for-api-endpoints) &#8226; [Back to README](../README.md)
 
 

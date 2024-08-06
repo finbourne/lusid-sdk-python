@@ -26,6 +26,6 @@ component_transaction_dict = component_transaction_instance.to_dict()
 # create an instance of ComponentTransaction from a dict
 component_transaction_form_dict = component_transaction.from_dict(component_transaction_dict)
 ```
-[[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
+[Back to Model list](../README.md#documentation-for-models) &#8226; [Back to API list](../README.md#documentation-for-api-endpoints) &#8226; [Back to README](../README.md)
 
 

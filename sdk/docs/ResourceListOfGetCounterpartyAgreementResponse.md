@@ -27,6 +27,6 @@ resource_list_of_get_counterparty_agreement_response_dict = resource_list_of_get
 # create an instance of ResourceListOfGetCounterpartyAgreementResponse from a dict
 resource_list_of_get_counterparty_agreement_response_form_dict = resource_list_of_get_counterparty_agreement_response.from_dict(resource_list_of_get_counterparty_agreement_response_dict)
 ```
-[[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
+[Back to Model list](../README.md#documentation-for-models) &#8226; [Back to API list](../README.md#documentation-for-api-endpoints) &#8226; [Back to README](../README.md)
 
 

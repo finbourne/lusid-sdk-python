@@ -36,6 +36,6 @@ valuation_point_data_response_dict = valuation_point_data_response_instance.to_d
 # create an instance of ValuationPointDataResponse from a dict
 valuation_point_data_response_form_dict = valuation_point_data_response.from_dict(valuation_point_data_response_dict)
 ```
-[[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
+[Back to Model list](../README.md#documentation-for-models) &#8226; [Back to API list](../README.md#documentation-for-api-endpoints) &#8226; [Back to README](../README.md)
 
 

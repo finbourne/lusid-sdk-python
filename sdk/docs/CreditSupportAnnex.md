@@ -33,6 +33,6 @@ credit_support_annex_dict = credit_support_annex_instance.to_dict()
 # create an instance of CreditSupportAnnex from a dict
 credit_support_annex_form_dict = credit_support_annex.from_dict(credit_support_annex_dict)
 ```
-[[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
+[Back to Model list](../README.md#documentation-for-models) &#8226; [Back to API list](../README.md#documentation-for-api-endpoints) &#8226; [Back to README](../README.md)
 
 

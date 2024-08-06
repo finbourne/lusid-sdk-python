@@ -10,7 +10,8 @@ logger = logging.getLogger(__name__)
 
 ENVIRONMENT_CONFIG_KEYS = {
     "token_url": "FBN_TOKEN_URL",
-    "api_url": "FBN_LUSID_API_URL",
+    "api_url": "FBN_LUSID_URL",
+    "previous_api_url": "FBN_LUSID_API_URL",
     "username": "FBN_USERNAME",
     "password": "FBN_PASSWORD",
     "client_id": "FBN_CLIENT_ID",
@@ -26,6 +27,7 @@ ENVIRONMENT_CONFIG_KEYS = {
 SECRETS_FILE_CONFIG_KEYS = {
     "token_url": "tokenUrl",
     "api_url": "lusidUrl",
+    "previous_api_url": "lusidUrl",
     "username": "username",
     "password": "password",
     "client_id": "clientId",
@@ -96,6 +98,9 @@ class SecretsFileConfigurationLoader:
             for key, value in SECRETS_FILE_CONFIG_KEYS.items()
             if "proxy" not in key
         }
+        if not populated_api_config_values["api_url"]:
+            populated_api_config_values["api_url"] = populated_api_config_values["previous_api_url"]
+        del(populated_api_config_values["previous_api_url"])
         proxy_config_section = config.get(proxy_config_key, {})
         populated_proxy_values = {
             key: proxy_config_section.get(value)
@@ -127,6 +132,9 @@ class EnvironmentVariablesConfigurationLoader:
             for key, value in ENVIRONMENT_CONFIG_KEYS.items()
             if "proxy" not in key
         }
+        if not populated_api_config_values["api_url"]:
+            populated_api_config_values["api_url"] = populated_api_config_values["previous_api_url"]
+        del(populated_api_config_values["previous_api_url"])
         populated_proxy_values = {
             key: os.environ.get(value)
             for key, value in ENVIRONMENT_CONFIG_KEYS.items()

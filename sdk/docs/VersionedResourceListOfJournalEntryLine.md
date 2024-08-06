@@ -28,6 +28,6 @@ versioned_resource_list_of_journal_entry_line_dict = versioned_resource_list_of_
 # create an instance of VersionedResourceListOfJournalEntryLine from a dict
 versioned_resource_list_of_journal_entry_line_form_dict = versioned_resource_list_of_journal_entry_line.from_dict(versioned_resource_list_of_journal_entry_line_dict)
 ```
-[[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
+[Back to Model list](../README.md#documentation-for-models) &#8226; [Back to API list](../README.md#documentation-for-api-endpoints) &#8226; [Back to README](../README.md)
 
 

@@ -26,6 +26,6 @@ economic_dependency_with_quote_dict = economic_dependency_with_quote_instance.to
 # create an instance of EconomicDependencyWithQuote from a dict
 economic_dependency_with_quote_form_dict = economic_dependency_with_quote.from_dict(economic_dependency_with_quote_dict)
 ```
-[[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
+[Back to Model list](../README.md#documentation-for-models) &#8226; [Back to API list](../README.md#documentation-for-api-endpoints) &#8226; [Back to README](../README.md)
 
 

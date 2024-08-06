@@ -27,6 +27,6 @@ resource_list_of_legal_entity_dict = resource_list_of_legal_entity_instance.to_d
 # create an instance of ResourceListOfLegalEntity from a dict
 resource_list_of_legal_entity_form_dict = resource_list_of_legal_entity.from_dict(resource_list_of_legal_entity_dict)
 ```
-[[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
+[Back to Model list](../README.md#documentation-for-models) &#8226; [Back to API list](../README.md#documentation-for-api-endpoints) &#8226; [Back to README](../README.md)
 
 

@@ -26,6 +26,6 @@ chart_of_accounts_properties_dict = chart_of_accounts_properties_instance.to_dic
 # create an instance of ChartOfAccountsProperties from a dict
 chart_of_accounts_properties_form_dict = chart_of_accounts_properties.from_dict(chart_of_accounts_properties_dict)
 ```
-[[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
+[Back to Model list](../README.md#documentation-for-models) &#8226; [Back to API list](../README.md#documentation-for-api-endpoints) &#8226; [Back to README](../README.md)
 
 

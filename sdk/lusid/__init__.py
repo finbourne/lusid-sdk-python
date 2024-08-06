@@ -427,6 +427,7 @@ from lusid.models.fund_amount import FundAmount
 from lusid.models.fund_configuration import FundConfiguration
 from lusid.models.fund_configuration_properties import FundConfigurationProperties
 from lusid.models.fund_configuration_request import FundConfigurationRequest
+from lusid.models.fund_pnl_breakdown import FundPnlBreakdown
 from lusid.models.fund_previous_nav import FundPreviousNAV
 from lusid.models.fund_properties import FundProperties
 from lusid.models.fund_request import FundRequest
@@ -928,6 +929,7 @@ from lusid.models.share_class_amount import ShareClassAmount
 from lusid.models.share_class_breakdown import ShareClassBreakdown
 from lusid.models.share_class_data import ShareClassData
 from lusid.models.share_class_details import ShareClassDetails
+from lusid.models.share_class_pnl_breakdown import ShareClassPnlBreakdown
 from lusid.models.side_configuration_data import SideConfigurationData
 from lusid.models.side_configuration_data_request import SideConfigurationDataRequest
 from lusid.models.side_definition import SideDefinition
@@ -1532,6 +1534,7 @@ __all__ = [
     "FundConfiguration",
     "FundConfigurationProperties",
     "FundConfigurationRequest",
+    "FundPnlBreakdown",
     "FundPreviousNAV",
     "FundProperties",
     "FundRequest",
@@ -2033,6 +2036,7 @@ __all__ = [
     "ShareClassBreakdown",
     "ShareClassData",
     "ShareClassDetails",
+    "ShareClassPnlBreakdown",
     "SideConfigurationData",
     "SideConfigurationDataRequest",
     "SideDefinition",

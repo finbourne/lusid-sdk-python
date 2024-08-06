@@ -29,6 +29,6 @@ inflation_index_conventions_dict = inflation_index_conventions_instance.to_dict(
 # create an instance of InflationIndexConventions from a dict
 inflation_index_conventions_form_dict = inflation_index_conventions.from_dict(inflation_index_conventions_dict)
 ```
-[[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
+[Back to Model list](../README.md#documentation-for-models) &#8226; [Back to API list](../README.md#documentation-for-api-endpoints) &#8226; [Back to README](../README.md)
 
 

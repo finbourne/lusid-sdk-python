@@ -7,7 +7,7 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **back_out** | [**Dict[str, ShareClassAmount]**](ShareClassAmount.md) | Bucket of detail for the Valuation Point where data points have been &#39;backed out&#39;. | 
 **dealing** | [**Dict[str, ShareClassAmount]**](ShareClassAmount.md) | Bucket of detail for any &#39;Dealing&#39; that has occured inside the queried period. | 
-**pn_l** | [**Dict[str, ShareClassAmount]**](ShareClassAmount.md) | Bucket of detail for &#39;PnL&#39; that has occured inside the queried period. | 
+**pn_l** | [**ShareClassPnlBreakdown**](ShareClassPnlBreakdown.md) |  | 
 **gav** | [**MultiCurrencyAmounts**](MultiCurrencyAmounts.md) |  | 
 **fees** | [**Dict[str, FeeAccrual]**](FeeAccrual.md) | Bucket of detail for any &#39;Fees&#39; that have been charged in the selected period. | 
 **nav** | [**MultiCurrencyAmounts**](MultiCurrencyAmounts.md) |  | 
@@ -34,6 +34,6 @@ share_class_breakdown_dict = share_class_breakdown_instance.to_dict()
 # create an instance of ShareClassBreakdown from a dict
 share_class_breakdown_form_dict = share_class_breakdown.from_dict(share_class_breakdown_dict)
 ```
-[[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
+[Back to Model list](../README.md#documentation-for-models) &#8226; [Back to API list](../README.md#documentation-for-api-endpoints) &#8226; [Back to README](../README.md)
 
 

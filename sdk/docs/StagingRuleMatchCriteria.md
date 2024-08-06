@@ -26,6 +26,6 @@ staging_rule_match_criteria_dict = staging_rule_match_criteria_instance.to_dict(
 # create an instance of StagingRuleMatchCriteria from a dict
 staging_rule_match_criteria_form_dict = staging_rule_match_criteria.from_dict(staging_rule_match_criteria_dict)
 ```
-[[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
+[Back to Model list](../README.md#documentation-for-models) &#8226; [Back to API list](../README.md#documentation-for-api-endpoints) &#8226; [Back to README](../README.md)
 
 

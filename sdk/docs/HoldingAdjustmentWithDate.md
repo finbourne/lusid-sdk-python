@@ -30,6 +30,6 @@ holding_adjustment_with_date_dict = holding_adjustment_with_date_instance.to_dic
 # create an instance of HoldingAdjustmentWithDate from a dict
 holding_adjustment_with_date_form_dict = holding_adjustment_with_date.from_dict(holding_adjustment_with_date_dict)
 ```
-[[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
+[Back to Model list](../README.md#documentation-for-models) &#8226; [Back to API list](../README.md#documentation-for-api-endpoints) &#8226; [Back to README](../README.md)
 
 

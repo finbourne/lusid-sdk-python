@@ -25,6 +25,6 @@ election_specification_dict = election_specification_instance.to_dict()
 # create an instance of ElectionSpecification from a dict
 election_specification_form_dict = election_specification.from_dict(election_specification_dict)
 ```
-[[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
+[Back to Model list](../README.md#documentation-for-models) &#8226; [Back to API list](../README.md#documentation-for-api-endpoints) &#8226; [Back to README](../README.md)
 
 

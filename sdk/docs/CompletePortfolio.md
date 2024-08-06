@@ -35,6 +35,6 @@ complete_portfolio_dict = complete_portfolio_instance.to_dict()
 # create an instance of CompletePortfolio from a dict
 complete_portfolio_form_dict = complete_portfolio.from_dict(complete_portfolio_dict)
 ```
-[[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
+[Back to Model list](../README.md#documentation-for-models) &#8226; [Back to API list](../README.md#documentation-for-api-endpoints) &#8226; [Back to README](../README.md)
 
 

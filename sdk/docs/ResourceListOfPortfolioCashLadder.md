@@ -27,6 +27,6 @@ resource_list_of_portfolio_cash_ladder_dict = resource_list_of_portfolio_cash_la
 # create an instance of ResourceListOfPortfolioCashLadder from a dict
 resource_list_of_portfolio_cash_ladder_form_dict = resource_list_of_portfolio_cash_ladder.from_dict(resource_list_of_portfolio_cash_ladder_dict)
 ```
-[[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
+[Back to Model list](../README.md#documentation-for-models) &#8226; [Back to API list](../README.md#documentation-for-api-endpoints) &#8226; [Back to README](../README.md)
 
 

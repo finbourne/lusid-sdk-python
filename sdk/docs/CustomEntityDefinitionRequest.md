@@ -26,6 +26,6 @@ custom_entity_definition_request_dict = custom_entity_definition_request_instanc
 # create an instance of CustomEntityDefinitionRequest from a dict
 custom_entity_definition_request_form_dict = custom_entity_definition_request.from_dict(custom_entity_definition_request_dict)
 ```
-[[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
+[Back to Model list](../README.md#documentation-for-models) &#8226; [Back to API list](../README.md#documentation-for-api-endpoints) &#8226; [Back to README](../README.md)
 
 

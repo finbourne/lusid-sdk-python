@@ -25,6 +25,6 @@ corporate_action_transition_request_dict = corporate_action_transition_request_i
 # create an instance of CorporateActionTransitionRequest from a dict
 corporate_action_transition_request_form_dict = corporate_action_transition_request.from_dict(corporate_action_transition_request_dict)
 ```
-[[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
+[Back to Model list](../README.md#documentation-for-models) &#8226; [Back to API list](../README.md#documentation-for-api-endpoints) &#8226; [Back to README](../README.md)
 
 

@@ -30,6 +30,6 @@ holding_adjustment_dict = holding_adjustment_instance.to_dict()
 # create an instance of HoldingAdjustment from a dict
 holding_adjustment_form_dict = holding_adjustment.from_dict(holding_adjustment_dict)
 ```
-[[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
+[Back to Model list](../README.md#documentation-for-models) &#8226; [Back to API list](../README.md#documentation-for-api-endpoints) &#8226; [Back to README](../README.md)
 
 

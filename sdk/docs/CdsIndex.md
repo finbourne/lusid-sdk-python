@@ -32,6 +32,6 @@ cds_index_dict = cds_index_instance.to_dict()
 # create an instance of CdsIndex from a dict
 cds_index_form_dict = cds_index.from_dict(cds_index_dict)
 ```
-[[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
+[Back to Model list](../README.md#documentation-for-models) &#8226; [Back to API list](../README.md#documentation-for-api-endpoints) &#8226; [Back to README](../README.md)
 
 

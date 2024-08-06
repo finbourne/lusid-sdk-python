@@ -28,6 +28,6 @@ versioned_resource_list_of_holding_contributor_dict = versioned_resource_list_of
 # create an instance of VersionedResourceListOfHoldingContributor from a dict
 versioned_resource_list_of_holding_contributor_form_dict = versioned_resource_list_of_holding_contributor.from_dict(versioned_resource_list_of_holding_contributor_dict)
 ```
-[[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
+[Back to Model list](../README.md#documentation-for-models) &#8226; [Back to API list](../README.md#documentation-for-api-endpoints) &#8226; [Back to README](../README.md)
 
 

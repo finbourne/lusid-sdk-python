@@ -26,6 +26,6 @@ exotic_instrument_dict = exotic_instrument_instance.to_dict()
 # create an instance of ExoticInstrument from a dict
 exotic_instrument_form_dict = exotic_instrument.from_dict(exotic_instrument_dict)
 ```
-[[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
+[Back to Model list](../README.md#documentation-for-models) &#8226; [Back to API list](../README.md#documentation-for-api-endpoints) &#8226; [Back to README](../README.md)
 
 

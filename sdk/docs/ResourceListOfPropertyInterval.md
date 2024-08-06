@@ -27,6 +27,6 @@ resource_list_of_property_interval_dict = resource_list_of_property_interval_ins
 # create an instance of ResourceListOfPropertyInterval from a dict
 resource_list_of_property_interval_form_dict = resource_list_of_property_interval.from_dict(resource_list_of_property_interval_dict)
 ```
-[[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
+[Back to Model list](../README.md#documentation-for-models) &#8226; [Back to API list](../README.md#documentation-for-api-endpoints) &#8226; [Back to README](../README.md)
 
 

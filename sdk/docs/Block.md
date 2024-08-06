@@ -37,6 +37,6 @@ block_dict = block_instance.to_dict()
 # create an instance of Block from a dict
 block_form_dict = block.from_dict(block_dict)
 ```
-[[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
+[Back to Model list](../README.md#documentation-for-models) &#8226; [Back to API list](../README.md#documentation-for-api-endpoints) &#8226; [Back to README](../README.md)
 
 

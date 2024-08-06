@@ -31,6 +31,6 @@ configuration_recipe_dict = configuration_recipe_instance.to_dict()
 # create an instance of ConfigurationRecipe from a dict
 configuration_recipe_form_dict = configuration_recipe.from_dict(configuration_recipe_dict)
 ```
-[[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
+[Back to Model list](../README.md#documentation-for-models) &#8226; [Back to API list](../README.md#documentation-for-api-endpoints) &#8226; [Back to README](../README.md)
 
 

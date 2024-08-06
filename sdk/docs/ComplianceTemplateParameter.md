@@ -25,6 +25,6 @@ compliance_template_parameter_dict = compliance_template_parameter_instance.to_d
 # create an instance of ComplianceTemplateParameter from a dict
 compliance_template_parameter_form_dict = compliance_template_parameter.from_dict(compliance_template_parameter_dict)
 ```
-[[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
+[Back to Model list](../README.md#documentation-for-models) &#8226; [Back to API list](../README.md#documentation-for-api-endpoints) &#8226; [Back to README](../README.md)
 
 

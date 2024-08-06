@@ -27,6 +27,6 @@ exercise_event_dict = exercise_event_instance.to_dict()
 # create an instance of ExerciseEvent from a dict
 exercise_event_form_dict = exercise_event.from_dict(exercise_event_dict)
 ```
-[[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
+[Back to Model list](../README.md#documentation-for-models) &#8226; [Back to API list](../README.md#documentation-for-api-endpoints) &#8226; [Back to README](../README.md)
 
 

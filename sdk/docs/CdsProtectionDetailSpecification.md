@@ -27,6 +27,6 @@ cds_protection_detail_specification_dict = cds_protection_detail_specification_i
 # create an instance of CdsProtectionDetailSpecification from a dict
 cds_protection_detail_specification_form_dict = cds_protection_detail_specification.from_dict(cds_protection_detail_specification_dict)
 ```
-[[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
+[Back to Model list](../README.md#documentation-for-models) &#8226; [Back to API list](../README.md#documentation-for-api-endpoints) &#8226; [Back to README](../README.md)
 
 

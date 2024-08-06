@@ -31,6 +31,6 @@ portfolio_group_search_result_dict = portfolio_group_search_result_instance.to_d
 # create an instance of PortfolioGroupSearchResult from a dict
 portfolio_group_search_result_form_dict = portfolio_group_search_result.from_dict(portfolio_group_search_result_dict)
 ```
-[[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
+[Back to Model list](../README.md#documentation-for-models) &#8226; [Back to API list](../README.md#documentation-for-api-endpoints) &#8226; [Back to README](../README.md)
 
 

@@ -29,8 +29,9 @@ class TemplateField(BaseModel):
     specificity: constr(strict=True, min_length=1) = Field(...)
     description: constr(strict=True, min_length=1) = Field(...)
     type: constr(strict=True, min_length=1) = Field(...)
+    availability: constr(strict=True, min_length=1) = Field(...)
     usage: conlist(StrictStr) = Field(...)
-    __properties = ["fieldName", "specificity", "description", "type", "usage"]
+    __properties = ["fieldName", "specificity", "description", "type", "availability", "usage"]
 
     class Config:
         """Pydantic configuration"""
@@ -72,6 +73,7 @@ class TemplateField(BaseModel):
             "specificity": obj.get("specificity"),
             "description": obj.get("description"),
             "type": obj.get("type"),
+            "availability": obj.get("availability"),
             "usage": obj.get("usage")
         })
         return _obj

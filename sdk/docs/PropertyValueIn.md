@@ -26,6 +26,6 @@ property_value_in_dict = property_value_in_instance.to_dict()
 # create an instance of PropertyValueIn from a dict
 property_value_in_form_dict = property_value_in.from_dict(property_value_in_dict)
 ```
-[[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
+[Back to Model list](../README.md#documentation-for-models) &#8226; [Back to API list](../README.md#documentation-for-api-endpoints) &#8226; [Back to README](../README.md)
 
 

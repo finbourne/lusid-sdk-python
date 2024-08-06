@@ -25,6 +25,6 @@ translate_trade_ticket_request_dict = translate_trade_ticket_request_instance.to
 # create an instance of TranslateTradeTicketRequest from a dict
 translate_trade_ticket_request_form_dict = translate_trade_ticket_request.from_dict(translate_trade_ticket_request_dict)
 ```
-[[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
+[Back to Model list](../README.md#documentation-for-models) &#8226; [Back to API list](../README.md#documentation-for-api-endpoints) &#8226; [Back to README](../README.md)
 
 

@@ -24,6 +24,6 @@ reference_data_dict = reference_data_instance.to_dict()
 # create an instance of ReferenceData from a dict
 reference_data_form_dict = reference_data.from_dict(reference_data_dict)
 ```
-[[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
+[Back to Model list](../README.md#documentation-for-models) &#8226; [Back to API list](../README.md#documentation-for-api-endpoints) &#8226; [Back to README](../README.md)
 
 

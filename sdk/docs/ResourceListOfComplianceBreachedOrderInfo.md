@@ -27,6 +27,6 @@ resource_list_of_compliance_breached_order_info_dict = resource_list_of_complian
 # create an instance of ResourceListOfComplianceBreachedOrderInfo from a dict
 resource_list_of_compliance_breached_order_info_form_dict = resource_list_of_compliance_breached_order_info.from_dict(resource_list_of_compliance_breached_order_info_dict)
 ```
-[[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
+[Back to Model list](../README.md#documentation-for-models) &#8226; [Back to API list](../README.md#documentation-for-api-endpoints) &#8226; [Back to README](../README.md)
 
 

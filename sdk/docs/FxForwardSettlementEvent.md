@@ -35,6 +35,6 @@ fx_forward_settlement_event_dict = fx_forward_settlement_event_instance.to_dict(
 # create an instance of FxForwardSettlementEvent from a dict
 fx_forward_settlement_event_form_dict = fx_forward_settlement_event.from_dict(fx_forward_settlement_event_dict)
 ```
-[[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
+[Back to Model list](../README.md#documentation-for-models) &#8226; [Back to API list](../README.md#documentation-for-api-endpoints) &#8226; [Back to README](../README.md)
 
 

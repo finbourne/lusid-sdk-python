@@ -26,6 +26,6 @@ link_dict = link_instance.to_dict()
 # create an instance of Link from a dict
 link_form_dict = link.from_dict(link_dict)
 ```
-[[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
+[Back to Model list](../README.md#documentation-for-models) &#8226; [Back to API list](../README.md#documentation-for-api-endpoints) &#8226; [Back to README](../README.md)
 
 

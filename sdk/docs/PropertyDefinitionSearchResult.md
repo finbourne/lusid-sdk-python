@@ -40,6 +40,6 @@ property_definition_search_result_dict = property_definition_search_result_insta
 # create an instance of PropertyDefinitionSearchResult from a dict
 property_definition_search_result_form_dict = property_definition_search_result.from_dict(property_definition_search_result_dict)
 ```
-[[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
+[Back to Model list](../README.md#documentation-for-models) &#8226; [Back to API list](../README.md#documentation-for-api-endpoints) &#8226; [Back to README](../README.md)
 
 

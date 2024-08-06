@@ -27,6 +27,6 @@ staging_rule_dict = staging_rule_instance.to_dict()
 # create an instance of StagingRule from a dict
 staging_rule_form_dict = staging_rule.from_dict(staging_rule_dict)
 ```
-[[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
+[Back to Model list](../README.md#documentation-for-models) &#8226; [Back to API list](../README.md#documentation-for-api-endpoints) &#8226; [Back to README](../README.md)
 
 

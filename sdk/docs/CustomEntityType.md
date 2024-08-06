@@ -30,6 +30,6 @@ custom_entity_type_dict = custom_entity_type_instance.to_dict()
 # create an instance of CustomEntityType from a dict
 custom_entity_type_form_dict = custom_entity_type.from_dict(custom_entity_type_dict)
 ```
-[[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
+[Back to Model list](../README.md#documentation-for-models) &#8226; [Back to API list](../README.md#documentation-for-api-endpoints) &#8226; [Back to README](../README.md)
 
 
