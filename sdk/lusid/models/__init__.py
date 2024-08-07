@@ -106,7 +106,9 @@ from lusid.models.calculation_info import CalculationInfo
 from lusid.models.calendar import Calendar
 from lusid.models.calendar_date import CalendarDate
 from lusid.models.calendar_dependency import CalendarDependency
+from lusid.models.cancel_orders_response import CancelOrdersResponse
 from lusid.models.cancel_placements_response import CancelPlacementsResponse
+from lusid.models.cancelled_order_result import CancelledOrderResult
 from lusid.models.cancelled_placement_result import CancelledPlacementResult
 from lusid.models.cap_floor import CapFloor
 from lusid.models.capital_distribution_event import CapitalDistributionEvent
@@ -1135,7 +1137,9 @@ __all__ = [
     "Calendar",
     "CalendarDate",
     "CalendarDependency",
+    "CancelOrdersResponse",
     "CancelPlacementsResponse",
+    "CancelledOrderResult",
     "CancelledPlacementResult",
     "CapFloor",
     "CapitalDistributionEvent",
