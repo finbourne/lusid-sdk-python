@@ -353,7 +353,7 @@ async def main():
         # Change the lines below to switch approach
         # posting_module_request = PostingModuleRequest()
         # posting_module_request = PostingModuleRequest.from_json("")
-        posting_module_request = PostingModuleRequest.from_dict({"code":"PostingModuleCode","displayName":"PostingModuleName","description":"PostingModuleDescription","rules":[{"ruleId":"rule1Id","account":"account1","ruleFilter":"Transaction.TransactionId eq 'Transaction_1'","generalLedgerAccountCode":"account1"}]}) # PostingModuleRequest | The definition of the Posting Module.
+        posting_module_request = PostingModuleRequest.from_dict({"code":"PostingModuleCode","displayName":"PostingModuleName","description":"PostingModuleDescription","rules":[{"ruleId":"rule1Id","generalLedgerAccountCode":"account1","ruleFilter":"Transaction.TransactionId eq 'Transaction_1'"}]}) # PostingModuleRequest | The definition of the Posting Module.
 
         try:
             # [EXPERIMENTAL] CreatePostingModule: Create a Posting Module
@@ -2026,7 +2026,7 @@ async def main():
         scope = 'scope_example' # str | The scope of the Chart of Accounts.
         code = 'code_example' # str | The code of the Chart of Accounts. Together with the scope this uniquely identifies the Chart of Accounts.
         posting_module_code = 'posting_module_code_example' # str | The code of the Posting Module to be updated.
-        operation = [{"value":{"ruleId":"rule3","account":"100002354","ruleFilter":"EconomicBucket eq 'PL_Other'","generalLedgerAccountCode":"100002354"},"path":"/rules/-","op":"add"},{"value":"PostingModuleDescriptionUpdated","path":"/description","op":"add"}] # List[Operation] | The json patch document. For more information see: https://datatracker.ietf.org/doc/html/rfc6902.
+        operation = [{"value":{"ruleId":"rule3","generalLedgerAccountCode":"100002354","ruleFilter":"EconomicBucket eq 'PL_Other'"},"path":"/rules/-","op":"add"},{"value":"PostingModuleDescriptionUpdated","path":"/description","op":"add"}] # List[Operation] | The json patch document. For more information see: https://datatracker.ietf.org/doc/html/rfc6902.
 
         try:
             # [EXPERIMENTAL] PatchPostingModule: Patch a Posting Module
@@ -2466,7 +2466,7 @@ async def main():
         scope = 'scope_example' # str | The scope of the Chart of Accounts.
         code = 'code_example' # str | The code of the Chart of Accounts. Together with the scope this uniquely identifies the Chart of Accounts.
         posting_module_code = 'posting_module_code_example' # str | The code of the Posting Module to be updated.
-        posting_module_rule = [{"ruleId":"rule 1","account":"100002354","ruleFilter":"1 eq 1","generalLedgerAccountCode":"100002354"},{"ruleId":"rule 2","account":"123456789","ruleFilter":"true eq true","generalLedgerAccountCode":"123456789"}] # List[PostingModuleRule] | The new rule set for the Posting Module.
+        posting_module_rule = [{"ruleId":"rule 1","generalLedgerAccountCode":"100002354","ruleFilter":"1 eq 1"},{"ruleId":"rule 2","generalLedgerAccountCode":"123456789","ruleFilter":"true eq true"}] # List[PostingModuleRule] | The new rule set for the Posting Module.
 
         try:
             # [EXPERIMENTAL] SetPostingModuleRules: Set the rules of a Posting Module

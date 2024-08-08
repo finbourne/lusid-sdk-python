@@ -18,7 +18,7 @@ import re  # noqa: F401
 import json
 
 
-from typing import Any, Dict, Optional
+from typing import Any, Dict
 from pydantic.v1 import BaseModel, Field, constr, validator
 
 class PostingModuleRule(BaseModel):
@@ -26,10 +26,9 @@ class PostingModuleRule(BaseModel):
     A Posting rule  # noqa: E501
     """
     rule_id: constr(strict=True, max_length=64, min_length=1) = Field(..., alias="ruleId", description="The identifier for the Posting Rule.")
-    account: Optional[constr(strict=True, max_length=512, min_length=1)] = Field(None, description="The general ledger account to post the Activity credit or debit to.")
+    general_ledger_account_code: constr(strict=True, max_length=512, min_length=1) = Field(..., alias="generalLedgerAccountCode", description="The general ledger account to post the Activity credit or debit to.")
     rule_filter: constr(strict=True, max_length=16384, min_length=1) = Field(..., alias="ruleFilter", description="The filter syntax for the Posting Rule. See https://support.lusid.com/knowledgebase/article/KA-02140 for more information on filter syntax.")
-    general_ledger_account_code: Optional[constr(strict=True, max_length=512, min_length=1)] = Field(None, alias="generalLedgerAccountCode", description="The general ledger account to post the Activity credit or debit to.")
-    __properties = ["ruleId", "account", "ruleFilter", "generalLedgerAccountCode"]
+    __properties = ["ruleId", "generalLedgerAccountCode", "ruleFilter"]
 
     @validator('rule_id')
     def rule_id_validate_regular_expression(cls, value):
@@ -38,12 +37,9 @@ class PostingModuleRule(BaseModel):
             raise ValueError(r"must validate the regular expression /^[a-zA-Z0-9\-_]+$/")
         return value
 
-    @validator('account')
-    def account_validate_regular_expression(cls, value):
+    @validator('general_ledger_account_code')
+    def general_ledger_account_code_validate_regular_expression(cls, value):
         """Validates the regular expression"""
-        if value is None:
-            return value
-
         if not re.match(r"^[\s\S]*$", value):
             raise ValueError(r"must validate the regular expression /^[\s\S]*$/")
         return value
@@ -51,16 +47,6 @@ class PostingModuleRule(BaseModel):
     @validator('rule_filter')
     def rule_filter_validate_regular_expression(cls, value):
         """Validates the regular expression"""
-        if not re.match(r"^[\s\S]*$", value):
-            raise ValueError(r"must validate the regular expression /^[\s\S]*$/")
-        return value
-
-    @validator('general_ledger_account_code')
-    def general_ledger_account_code_validate_regular_expression(cls, value):
-        """Validates the regular expression"""
-        if value is None:
-            return value
-
         if not re.match(r"^[\s\S]*$", value):
             raise ValueError(r"must validate the regular expression /^[\s\S]*$/")
         return value
@@ -89,16 +75,6 @@ class PostingModuleRule(BaseModel):
                           exclude={
                           },
                           exclude_none=True)
-        # set to None if account (nullable) is None
-        # and __fields_set__ contains the field
-        if self.account is None and "account" in self.__fields_set__:
-            _dict['account'] = None
-
-        # set to None if general_ledger_account_code (nullable) is None
-        # and __fields_set__ contains the field
-        if self.general_ledger_account_code is None and "general_ledger_account_code" in self.__fields_set__:
-            _dict['generalLedgerAccountCode'] = None
-
         return _dict
 
     @classmethod
@@ -112,8 +88,7 @@ class PostingModuleRule(BaseModel):
 
         _obj = PostingModuleRule.parse_obj({
             "rule_id": obj.get("ruleId"),
-            "account": obj.get("account"),
-            "rule_filter": obj.get("ruleFilter"),
-            "general_ledger_account_code": obj.get("generalLedgerAccountCode")
+            "general_ledger_account_code": obj.get("generalLedgerAccountCode"),
+            "rule_filter": obj.get("ruleFilter")
         })
         return _obj

@@ -6,9 +6,8 @@ A Posting rule
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **rule_id** | **str** | The identifier for the Posting Rule. | 
-**account** | **str** | The general ledger account to post the Activity credit or debit to. | [optional] 
+**general_ledger_account_code** | **str** | The general ledger account to post the Activity credit or debit to. | 
 **rule_filter** | **str** | The filter syntax for the Posting Rule. See https://support.lusid.com/knowledgebase/article/KA-02140 for more information on filter syntax. | 
-**general_ledger_account_code** | **str** | The general ledger account to post the Activity credit or debit to. | [optional] 
 
 ## Example
 
