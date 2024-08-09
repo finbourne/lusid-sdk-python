@@ -35,12 +35,12 @@ class FundConfiguration(BaseModel):
     display_name: Optional[StrictStr] = Field(None, alias="displayName", description="The name of the FundConfiguration.")
     description: Optional[StrictStr] = Field(None, description="A description for the FundConfiguration.")
     dealing_rule: Optional[ComponentRule] = Field(None, alias="dealingRule")
-    fund_pnl_rule: Optional[ComponentRule] = Field(None, alias="fundPnlRule")
+    pnl_rule: Optional[ComponentRule] = Field(None, alias="pnlRule")
     back_out_rule: Optional[ComponentRule] = Field(None, alias="backOutRule")
     properties: Optional[Dict[str, ModelProperty]] = Field(None, description="A set of properties for the Fund Configuration.")
     version: Optional[Version] = None
     links: Optional[conlist(Link)] = None
-    __properties = ["href", "id", "displayName", "description", "dealingRule", "fundPnlRule", "backOutRule", "properties", "version", "links"]
+    __properties = ["href", "id", "displayName", "description", "dealingRule", "pnlRule", "backOutRule", "properties", "version", "links"]
 
     class Config:
         """Pydantic configuration"""
@@ -72,9 +72,9 @@ class FundConfiguration(BaseModel):
         # override the default output from pydantic by calling `to_dict()` of dealing_rule
         if self.dealing_rule:
             _dict['dealingRule'] = self.dealing_rule.to_dict()
-        # override the default output from pydantic by calling `to_dict()` of fund_pnl_rule
-        if self.fund_pnl_rule:
-            _dict['fundPnlRule'] = self.fund_pnl_rule.to_dict()
+        # override the default output from pydantic by calling `to_dict()` of pnl_rule
+        if self.pnl_rule:
+            _dict['pnlRule'] = self.pnl_rule.to_dict()
         # override the default output from pydantic by calling `to_dict()` of back_out_rule
         if self.back_out_rule:
             _dict['backOutRule'] = self.back_out_rule.to_dict()
@@ -137,7 +137,7 @@ class FundConfiguration(BaseModel):
             "display_name": obj.get("displayName"),
             "description": obj.get("description"),
             "dealing_rule": ComponentRule.from_dict(obj.get("dealingRule")) if obj.get("dealingRule") is not None else None,
-            "fund_pnl_rule": ComponentRule.from_dict(obj.get("fundPnlRule")) if obj.get("fundPnlRule") is not None else None,
+            "pnl_rule": ComponentRule.from_dict(obj.get("pnlRule")) if obj.get("pnlRule") is not None else None,
             "back_out_rule": ComponentRule.from_dict(obj.get("backOutRule")) if obj.get("backOutRule") is not None else None,
             "properties": dict(
                 (_k, ModelProperty.from_dict(_v))

@@ -694,6 +694,7 @@ from lusid.models.paged_resource_list_of_staging_rule_set import PagedResourceLi
 from lusid.models.paged_resource_list_of_transaction_template import PagedResourceListOfTransactionTemplate
 from lusid.models.paged_resource_list_of_transaction_template_specification import PagedResourceListOfTransactionTemplateSpecification
 from lusid.models.paged_resource_list_of_translation_script_id import PagedResourceListOfTranslationScriptId
+from lusid.models.paged_resource_list_of_valuation_point_overview import PagedResourceListOfValuationPointOverview
 from lusid.models.paged_resource_list_of_virtual_row import PagedResourceListOfVirtualRow
 from lusid.models.participation import Participation
 from lusid.models.participation_request import ParticipationRequest
@@ -1094,6 +1095,7 @@ from lusid.models.user import User
 from lusid.models.valuation_point_data_query_parameters import ValuationPointDataQueryParameters
 from lusid.models.valuation_point_data_request import ValuationPointDataRequest
 from lusid.models.valuation_point_data_response import ValuationPointDataResponse
+from lusid.models.valuation_point_overview import ValuationPointOverview
 from lusid.models.valuation_request import ValuationRequest
 from lusid.models.valuation_schedule import ValuationSchedule
 from lusid.models.valuations_reconciliation_request import ValuationsReconciliationRequest
@@ -1803,6 +1805,7 @@ __all__ = [
     "PagedResourceListOfTransactionTemplate",
     "PagedResourceListOfTransactionTemplateSpecification",
     "PagedResourceListOfTranslationScriptId",
+    "PagedResourceListOfValuationPointOverview",
     "PagedResourceListOfVirtualRow",
     "Participation",
     "ParticipationRequest",
@@ -2203,6 +2206,7 @@ __all__ = [
     "ValuationPointDataQueryParameters",
     "ValuationPointDataRequest",
     "ValuationPointDataResponse",
+    "ValuationPointOverview",
     "ValuationRequest",
     "ValuationSchedule",
     "ValuationsReconciliationRequest",
