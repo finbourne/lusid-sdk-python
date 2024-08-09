@@ -254,6 +254,7 @@ from lusid.models.data_map_key import DataMapKey
 from lusid.models.data_mapping import DataMapping
 from lusid.models.data_scope import DataScope
 from lusid.models.data_type import DataType
+from lusid.models.data_type_entity import DataTypeEntity
 from lusid.models.data_type_summary import DataTypeSummary
 from lusid.models.data_type_value_range import DataTypeValueRange
 from lusid.models.date_attributes import DateAttributes
@@ -1287,6 +1288,7 @@ __all__ = [
     "DataMapping",
     "DataScope",
     "DataType",
+    "DataTypeEntity",
     "DataTypeSummary",
     "DataTypeValueRange",
     "DateAttributes",

@@ -15,6 +15,7 @@ Name | Type | Description | Notes
 **general_ledger_account_code** | **str** | The code of the account in the general ledger the Journal Entry was posted to. | 
 **local** | [**CurrencyAndAmount**](CurrencyAndAmount.md) |  | 
 **base** | [**CurrencyAndAmount**](CurrencyAndAmount.md) |  | 
+**units** | **float** | Units held for the Journal Entry Line. | 
 **posting_module_code** | **str** | The code of the posting module where the posting rules derived the Journal Entry lines. | [optional] 
 **posting_rule** | **str** | The rule generating the Journal Entry Line. | 
 **as_at_date** | **datetime** | The corresponding input date and time of the Transaction generating the Journal Entry Line. | 

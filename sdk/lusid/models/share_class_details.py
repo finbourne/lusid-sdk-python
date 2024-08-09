@@ -19,7 +19,7 @@ import json
 
 
 from typing import Any, Dict, Optional
-from pydantic.v1 import BaseModel, Field, StrictStr, constr, validator
+from pydantic.v1 import BaseModel, Field, StrictBool, StrictStr, constr, validator
 
 class ShareClassDetails(BaseModel):
     """
@@ -28,7 +28,8 @@ class ShareClassDetails(BaseModel):
     lusid_instrument_id: Optional[constr(strict=True, max_length=64, min_length=1)] = Field(None, alias="lusidInstrumentId", description="LUSID's internal unique instrument identifier, resolved from the share class' instrument identifiers")
     instrument_scope: Optional[constr(strict=True, max_length=64, min_length=1)] = Field(None, alias="instrumentScope", description="The scope in which the share class instrument lies.")
     dom_currency: Optional[StrictStr] = Field(None, alias="domCurrency", description="The domestic currency of the share class instrument")
-    __properties = ["lusidInstrumentId", "instrumentScope", "domCurrency"]
+    instrument_active: Optional[StrictBool] = Field(None, alias="instrumentActive", description="If the instrument of the share class is active.")
+    __properties = ["lusidInstrumentId", "instrumentScope", "domCurrency", "instrumentActive"]
 
     @validator('lusid_instrument_id')
     def lusid_instrument_id_validate_regular_expression(cls, value):
@@ -103,6 +104,7 @@ class ShareClassDetails(BaseModel):
         _obj = ShareClassDetails.parse_obj({
             "lusid_instrument_id": obj.get("lusidInstrumentId"),
             "instrument_scope": obj.get("instrumentScope"),
-            "dom_currency": obj.get("domCurrency")
+            "dom_currency": obj.get("domCurrency"),
+            "instrument_active": obj.get("instrumentActive")
         })
         return _obj

@@ -30,7 +30,6 @@ class DataType(BaseModel):
     """
     DataType
     """
-    href: Optional[StrictStr] = None
     type_value_range: StrictStr = Field(..., alias="typeValueRange", description="The available values are: Open, Closed")
     id: ResourceId = Field(...)
     display_name: constr(strict=True, min_length=1) = Field(..., alias="displayName")
@@ -41,8 +40,9 @@ class DataType(BaseModel):
     acceptable_units: Optional[conlist(IUnitDefinitionDto)] = Field(None, alias="acceptableUnits")
     reference_data: Optional[ReferenceData] = Field(None, alias="referenceData")
     version: Optional[Version] = None
+    href: Optional[StrictStr] = Field(None, description="The specific Uniform Resource Identifier (URI) for this resource at the requested effective and asAt datetime.")
     links: Optional[conlist(Link)] = None
-    __properties = ["href", "typeValueRange", "id", "displayName", "description", "valueType", "acceptableValues", "unitSchema", "acceptableUnits", "referenceData", "version", "links"]
+    __properties = ["typeValueRange", "id", "displayName", "description", "valueType", "acceptableValues", "unitSchema", "acceptableUnits", "referenceData", "version", "href", "links"]
 
     @validator('type_value_range')
     def type_value_range_validate_enum(cls, value):
@@ -115,11 +115,6 @@ class DataType(BaseModel):
                 if _item:
                     _items.append(_item.to_dict())
             _dict['links'] = _items
-        # set to None if href (nullable) is None
-        # and __fields_set__ contains the field
-        if self.href is None and "href" in self.__fields_set__:
-            _dict['href'] = None
-
         # set to None if acceptable_values (nullable) is None
         # and __fields_set__ contains the field
         if self.acceptable_values is None and "acceptable_values" in self.__fields_set__:
@@ -129,6 +124,11 @@ class DataType(BaseModel):
         # and __fields_set__ contains the field
         if self.acceptable_units is None and "acceptable_units" in self.__fields_set__:
             _dict['acceptableUnits'] = None
+
+        # set to None if href (nullable) is None
+        # and __fields_set__ contains the field
+        if self.href is None and "href" in self.__fields_set__:
+            _dict['href'] = None
 
         # set to None if links (nullable) is None
         # and __fields_set__ contains the field
@@ -147,7 +147,6 @@ class DataType(BaseModel):
             return DataType.parse_obj(obj)
 
         _obj = DataType.parse_obj({
-            "href": obj.get("href"),
             "type_value_range": obj.get("typeValueRange"),
             "id": ResourceId.from_dict(obj.get("id")) if obj.get("id") is not None else None,
             "display_name": obj.get("displayName"),
@@ -158,6 +157,7 @@ class DataType(BaseModel):
             "acceptable_units": [IUnitDefinitionDto.from_dict(_item) for _item in obj.get("acceptableUnits")] if obj.get("acceptableUnits") is not None else None,
             "reference_data": ReferenceData.from_dict(obj.get("referenceData")) if obj.get("referenceData") is not None else None,
             "version": Version.from_dict(obj.get("version")) if obj.get("version") is not None else None,
+            "href": obj.get("href"),
             "links": [Link.from_dict(_item) for _item in obj.get("links")] if obj.get("links") is not None else None
         })
         return _obj

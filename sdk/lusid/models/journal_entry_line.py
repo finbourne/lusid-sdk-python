@@ -18,8 +18,8 @@ import re  # noqa: F401
 import json
 
 from datetime import datetime
-from typing import Any, Dict, List, Optional
-from pydantic.v1 import BaseModel, Field, StrictStr, conlist, constr
+from typing import Any, Dict, List, Optional, Union
+from pydantic.v1 import BaseModel, Field, StrictFloat, StrictInt, StrictStr, conlist, constr
 from lusid.models.currency_and_amount import CurrencyAndAmount
 from lusid.models.link import Link
 from lusid.models.model_property import ModelProperty
@@ -40,6 +40,7 @@ class JournalEntryLine(BaseModel):
     general_ledger_account_code: constr(strict=True, min_length=1) = Field(..., alias="generalLedgerAccountCode", description="The code of the account in the general ledger the Journal Entry was posted to.")
     local: CurrencyAndAmount = Field(...)
     base: CurrencyAndAmount = Field(...)
+    units: Union[StrictFloat, StrictInt] = Field(..., description="Units held for the Journal Entry Line.")
     posting_module_code: Optional[StrictStr] = Field(None, alias="postingModuleCode", description="The code of the posting module where the posting rules derived the Journal Entry lines.")
     posting_rule: constr(strict=True, min_length=1) = Field(..., alias="postingRule", description="The rule generating the Journal Entry Line.")
     as_at_date: datetime = Field(..., alias="asAtDate", description="The corresponding input date and time of the Transaction generating the Journal Entry Line.")
@@ -58,7 +59,7 @@ class JournalEntryLine(BaseModel):
     ledger_column: Optional[StrictStr] = Field(None, alias="ledgerColumn", description="Indicates if the Journal Entry Line is credit or debit.")
     journal_entry_line_type: Optional[StrictStr] = Field(None, alias="journalEntryLineType", description="Indicates the Journal Entry Line type")
     links: Optional[conlist(Link)] = None
-    __properties = ["accountingDate", "activityDate", "portfolioId", "instrumentId", "instrumentScope", "subHoldingKeys", "taxLotId", "generalLedgerAccountCode", "local", "base", "postingModuleCode", "postingRule", "asAtDate", "activitiesDescription", "sourceType", "sourceId", "properties", "movementName", "holdingType", "economicBucket", "economicBucketComponent", "levels", "sourceLevels", "movementSign", "holdingSign", "ledgerColumn", "journalEntryLineType", "links"]
+    __properties = ["accountingDate", "activityDate", "portfolioId", "instrumentId", "instrumentScope", "subHoldingKeys", "taxLotId", "generalLedgerAccountCode", "local", "base", "units", "postingModuleCode", "postingRule", "asAtDate", "activitiesDescription", "sourceType", "sourceId", "properties", "movementName", "holdingType", "economicBucket", "economicBucketComponent", "levels", "sourceLevels", "movementSign", "holdingSign", "ledgerColumn", "journalEntryLineType", "links"]
 
     class Config:
         """Pydantic configuration"""
@@ -211,6 +212,7 @@ class JournalEntryLine(BaseModel):
             "general_ledger_account_code": obj.get("generalLedgerAccountCode"),
             "local": CurrencyAndAmount.from_dict(obj.get("local")) if obj.get("local") is not None else None,
             "base": CurrencyAndAmount.from_dict(obj.get("base")) if obj.get("base") is not None else None,
+            "units": obj.get("units"),
             "posting_module_code": obj.get("postingModuleCode"),
             "posting_rule": obj.get("postingRule"),
             "as_at_date": obj.get("asAtDate"),

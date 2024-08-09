@@ -4,7 +4,6 @@
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**href** | **str** |  | [optional] 
 **type_value_range** | **str** | The available values are: Open, Closed | 
 **id** | [**ResourceId**](ResourceId.md) |  | 
 **display_name** | **str** |  | 
@@ -15,6 +14,7 @@ Name | Type | Description | Notes
 **acceptable_units** | [**List[IUnitDefinitionDto]**](IUnitDefinitionDto.md) |  | [optional] 
 **reference_data** | [**ReferenceData**](ReferenceData.md) |  | [optional] 
 **version** | [**Version**](Version.md) |  | [optional] 
+**href** | **str** | The specific Uniform Resource Identifier (URI) for this resource at the requested effective and asAt datetime. | [optional] 
 **links** | [**List[Link]**](Link.md) |  | [optional] 
 
 ## Example
