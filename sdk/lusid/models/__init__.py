@@ -552,6 +552,7 @@ from lusid.models.order_instruction_request import OrderInstructionRequest
 from lusid.models.order_instruction_set_request import OrderInstructionSetRequest
 from lusid.models.order_request import OrderRequest
 from lusid.models.order_set_request import OrderSetRequest
+from lusid.models.order_update_request import OrderUpdateRequest
 from lusid.models.otc_confirmation import OtcConfirmation
 from lusid.models.output_transaction import OutputTransaction
 from lusid.models.output_transition import OutputTransition
@@ -961,6 +962,7 @@ from lusid.models.update_data_type_request import UpdateDataTypeRequest
 from lusid.models.update_derived_property_definition_request import UpdateDerivedPropertyDefinitionRequest
 from lusid.models.update_fee_type_request import UpdateFeeTypeRequest
 from lusid.models.update_instrument_identifier_request import UpdateInstrumentIdentifierRequest
+from lusid.models.update_orders_response import UpdateOrdersResponse
 from lusid.models.update_placements_response import UpdatePlacementsResponse
 from lusid.models.update_portfolio_group_request import UpdatePortfolioGroupRequest
 from lusid.models.update_portfolio_request import UpdatePortfolioRequest
@@ -1586,6 +1588,7 @@ __all__ = [
     "OrderInstructionSetRequest",
     "OrderRequest",
     "OrderSetRequest",
+    "OrderUpdateRequest",
     "OtcConfirmation",
     "OutputTransaction",
     "OutputTransition",
@@ -1995,6 +1998,7 @@ __all__ = [
     "UpdateDerivedPropertyDefinitionRequest",
     "UpdateFeeTypeRequest",
     "UpdateInstrumentIdentifierRequest",
+    "UpdateOrdersResponse",
     "UpdatePlacementsResponse",
     "UpdatePortfolioGroupRequest",
     "UpdatePortfolioRequest",
