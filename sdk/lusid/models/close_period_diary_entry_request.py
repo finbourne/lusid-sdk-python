@@ -30,7 +30,7 @@ class ClosePeriodDiaryEntryRequest(BaseModel):
     name: Optional[constr(strict=True, max_length=512, min_length=1)] = Field(None, description="Identifiable Name assigned to the period. Where left blank, the system will generate a name in the format 'yyyyMMDD'.")
     effective_at: Optional[datetime] = Field(None, alias="effectiveAt", description="The effective time of the diary entry.")
     query_as_at: Optional[datetime] = Field(None, alias="queryAsAt", description="The query time of the diary entry. Defaults to latest.")
-    status: Optional[StrictStr] = Field(None, description="The status of the diary entry. Defaults to 'Undefined' for valuation points and 'Estimate' for closing periods.")
+    status: Optional[StrictStr] = Field(None, description="The status of a Diary Entry of Type 'PeriodBoundary'. Defaults to 'Estimate' when closing a period, and supports 'Estimate' and 'Final' for closing periods and 'Final' for locking periods.")
     properties: Optional[Dict[str, ModelProperty]] = Field(None, description="A set of properties for the diary entry.")
     closing_options: Optional[conlist(StrictStr)] = Field(None, alias="closingOptions", description="The options which will be executed once a period is closed or locked.")
     __properties = ["diaryEntryCode", "name", "effectiveAt", "queryAsAt", "status", "properties", "closingOptions"]

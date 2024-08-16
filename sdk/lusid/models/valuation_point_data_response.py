@@ -31,7 +31,7 @@ class ValuationPointDataResponse(BaseModel):
     """
     href: Optional[StrictStr] = Field(None, description="The specific Uniform Resource Identifier (URI) for this resource at the requested effective and asAt datetime.")
     type: constr(strict=True, min_length=1) = Field(..., description="The Type of the associated Diary Entry ('PeriodBoundary','ValuationPoint','Other' or 'Adhoc' when a diary entry wasn't used).")
-    status: constr(strict=True, min_length=1) = Field(..., description="The Status of the associated Diary Entry ('Estimate','Final','Candidate' or 'Unofficial').")
+    status: constr(strict=True, min_length=1) = Field(..., description="The status of a Diary Entry of Type 'ValuationPoint'. Defaults to 'Estimate' when upserting a diary entry, moves to 'Candidate' or 'Final' when a ValuationPoint is accepted, and 'Final' when it is finalised. The status of a Diary Entry becomes 'Unofficial' when a diary entry wasn't used.")
     backout: Dict[str, Union[StrictFloat, StrictInt]] = Field(..., description="DEPRECATED. Bucket of detail for the Valuation Point, where data points have been 'backed out'.")
     dealing: Dict[str, Union[StrictFloat, StrictInt]] = Field(..., description="DEPRECATED. Bucket of detail for any 'Dealing' that has occured inside the queried period.")
     pn_l: Dict[str, Union[StrictFloat, StrictInt]] = Field(..., alias="pnL", description="DEPRECATED. Bucket of detail for 'PnL' that has occured inside the queried period.")

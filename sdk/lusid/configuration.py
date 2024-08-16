@@ -356,12 +356,21 @@ class Configuration:
         """
         auth = {}
         if self.access_token is not None:
-            auth['oauth2'] = {
-                'type': 'oauth2',
-                'in': 'header',
-                'key': 'Authorization',
-                'value': 'Bearer ' + self.access_token
-            }
+
+            if isinstance(self.access_token, str):
+                auth['oauth2'] = {
+                    'type': 'bearer',
+                    'in': 'header',
+                    'key': 'Authorization',
+                    'value': 'Bearer ' + self.access_token
+                }
+            else:
+                auth['oauth2'] = {
+                    'type': 'bearer',
+                    'in': 'header',
+                    'key': 'Authorization',
+                    'value': 'Bearer ' + self.access_token.data
+                }
         return auth
 
     def to_debug_report(self):
@@ -373,7 +382,7 @@ class Configuration:
         return "Python SDK Debug Report:\n"\
                "OS: {env}\n"\
                "Python Version: {pyversion}\n"\
-               "Version of the API: 0.11.6771\n"\
+               "Version of the API: 0.11.6782\n"\
                "SDK Package Version: {package_version}".\
                format(env=sys.platform, pyversion=sys.version, package_version=package_version)
 

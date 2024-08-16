@@ -619,6 +619,8 @@ from lusid.models.paged_resource_list_of_transaction_template_specification impo
 from lusid.models.paged_resource_list_of_translation_script_id import PagedResourceListOfTranslationScriptId
 from lusid.models.paged_resource_list_of_valuation_point_overview import PagedResourceListOfValuationPointOverview
 from lusid.models.paged_resource_list_of_virtual_row import PagedResourceListOfVirtualRow
+from lusid.models.paged_resource_list_of_workspace import PagedResourceListOfWorkspace
+from lusid.models.paged_resource_list_of_workspace_item import PagedResourceListOfWorkspaceItem
 from lusid.models.participation import Participation
 from lusid.models.participation_request import ParticipationRequest
 from lusid.models.participation_set_request import ParticipationSetRequest
@@ -854,6 +856,7 @@ from lusid.models.settlement_schedule import SettlementSchedule
 from lusid.models.share_class_amount import ShareClassAmount
 from lusid.models.share_class_breakdown import ShareClassBreakdown
 from lusid.models.share_class_data import ShareClassData
+from lusid.models.share_class_dealing_breakdown import ShareClassDealingBreakdown
 from lusid.models.share_class_details import ShareClassDetails
 from lusid.models.share_class_pnl_breakdown import ShareClassPnlBreakdown
 from lusid.models.side_configuration_data import SideConfigurationData
@@ -1046,6 +1049,12 @@ from lusid.models.weekend_mask import WeekendMask
 from lusid.models.weighted_instrument import WeightedInstrument
 from lusid.models.weighted_instrument_in_line_lookup_identifiers import WeightedInstrumentInLineLookupIdentifiers
 from lusid.models.weighted_instruments import WeightedInstruments
+from lusid.models.workspace import Workspace
+from lusid.models.workspace_creation_request import WorkspaceCreationRequest
+from lusid.models.workspace_item import WorkspaceItem
+from lusid.models.workspace_item_creation_request import WorkspaceItemCreationRequest
+from lusid.models.workspace_item_update_request import WorkspaceItemUpdateRequest
+from lusid.models.workspace_update_request import WorkspaceUpdateRequest
 from lusid.models.yield_curve_data import YieldCurveData
 
 
@@ -1655,6 +1664,8 @@ __all__ = [
     "PagedResourceListOfTranslationScriptId",
     "PagedResourceListOfValuationPointOverview",
     "PagedResourceListOfVirtualRow",
+    "PagedResourceListOfWorkspace",
+    "PagedResourceListOfWorkspaceItem",
     "Participation",
     "ParticipationRequest",
     "ParticipationSetRequest",
@@ -1890,6 +1901,7 @@ __all__ = [
     "ShareClassAmount",
     "ShareClassBreakdown",
     "ShareClassData",
+    "ShareClassDealingBreakdown",
     "ShareClassDetails",
     "ShareClassPnlBreakdown",
     "SideConfigurationData",
@@ -2082,5 +2094,11 @@ __all__ = [
     "WeightedInstrument",
     "WeightedInstrumentInLineLookupIdentifiers",
     "WeightedInstruments",
+    "Workspace",
+    "WorkspaceCreationRequest",
+    "WorkspaceItem",
+    "WorkspaceItemCreationRequest",
+    "WorkspaceItemUpdateRequest",
+    "WorkspaceUpdateRequest",
     "YieldCurveData"
 ]

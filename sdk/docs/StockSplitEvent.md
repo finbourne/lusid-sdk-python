@@ -10,6 +10,8 @@ Name | Type | Description | Notes
 **units_ratio** | [**UnitsRatio**](UnitsRatio.md) |  | 
 **record_date** | **datetime** | Date you have to be the holder of record in order to receive the additional shares. | [optional] 
 **announcement_date** | **datetime** | Date the stock split was announced. | [optional] 
+**fractional_units_cash_price** | **float** | The cash price per unit paid in lieu when fractional units can not be distributed. | [optional] 
+**fractional_units_cash_currency** | **str** | The currency of the cash paid in lieu of fractional units. | [optional] 
 **instrument_event_type** | **str** | The Type of Event. The available values are: TransitionEvent, InformationalEvent, OpenEvent, CloseEvent, StockSplitEvent, BondDefaultEvent, CashDividendEvent, AmortisationEvent, CashFlowEvent, ExerciseEvent, ResetEvent, TriggerEvent, RawVendorEvent, InformationalErrorEvent, BondCouponEvent, DividendReinvestmentEvent, AccumulationEvent, BondPrincipalEvent, DividendOptionEvent, MaturityEvent, FxForwardSettlementEvent, ExpiryEvent, ScripDividendEvent, StockDividendEvent, ReverseStockSplitEvent, CapitalDistributionEvent, SpinOffEvent, MergerEvent, FutureExpiryEvent | 
 
 ## Example

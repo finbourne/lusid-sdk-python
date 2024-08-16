@@ -1316,7 +1316,7 @@ async def main():
         # Change the lines below to switch approach
         # set_share_class_instruments_request = SetShareClassInstrumentsRequest()
         # set_share_class_instruments_request = SetShareClassInstrumentsRequest.from_json("")
-        set_share_class_instruments_request = SetShareClassInstrumentsRequest.from_dict({"shareClassInstrumentScopes":["UKInstrumentScope"],"shareClassInstruments":[{"instrumentIdentifiers":{"Instrument/default/ClientInternal":"UK_12345"}}]}) # SetShareClassInstrumentsRequest | The scopes and instrument identifiers for the instruments to be set.
+        set_share_class_instruments_request = SetShareClassInstrumentsRequest.from_dict({"shareClassInstrumentScopes":["UKInstrumentScope"],"shareClassInstruments":[{"instrumentIdentifiers":{"Instrument/default/ClientInternal":"UK_12345"},"launchPrice":1}]}) # SetShareClassInstrumentsRequest | The scopes and instrument identifiers for the instruments to be set.
 
         try:
             # [EXPERIMENTAL] SetShareClassInstruments: Set the ShareClass Instruments on a fund.

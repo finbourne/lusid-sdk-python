@@ -27,7 +27,7 @@ class DiaryEntryRequest(BaseModel):
     The request to add a diary entry  # noqa: E501
     """
     name: Optional[constr(strict=True, max_length=512, min_length=1)] = Field(None, description="The name of the diary entry.")
-    status: Optional[StrictStr] = Field(None, description="The status of the diary entry. Defaults to 'Undefined' and the allowed options are: 'Undefined' and 'Estimate'.")
+    status: Optional[StrictStr] = Field(None, description="The status of a Diary Entry of Type 'Other'. Defaults to 'Undefined' and supports 'Undefined', 'Estimate', 'Candidate', and 'Final'.")
     effective_at: datetime = Field(..., alias="effectiveAt", description="The effective time of the diary entry.")
     query_as_at: Optional[datetime] = Field(None, alias="queryAsAt", description="The query time of the diary entry. Defaults to latest.")
     properties: Optional[Dict[str, ModelProperty]] = Field(None, description="A set of properties for the diary entry.")

@@ -17,9 +17,9 @@ import pprint
 import re  # noqa: F401
 import json
 
-
-from typing import Any, Dict, Optional
-from pydantic.v1 import BaseModel, Field, StrictStr, constr, validator
+from datetime import datetime
+from typing import Any, Dict, Optional, Union
+from pydantic.v1 import BaseModel, Field, StrictFloat, StrictInt, StrictStr, constr, validator
 
 class InstrumentResolutionDetail(BaseModel):
     """
@@ -28,7 +28,9 @@ class InstrumentResolutionDetail(BaseModel):
     instrument_identifiers: Dict[str, StrictStr] = Field(..., alias="instrumentIdentifiers", description="Unique instrument identifiers")
     lusid_instrument_id: Optional[constr(strict=True, max_length=64, min_length=1)] = Field(None, alias="lusidInstrumentId", description="LUSID's internal unique instrument identifier, resolved from the instrument identifiers")
     instrument_scope: Optional[constr(strict=True, max_length=64, min_length=1)] = Field(None, alias="instrumentScope", description="The scope in which the instrument lies.")
-    __properties = ["instrumentIdentifiers", "lusidInstrumentId", "instrumentScope"]
+    launch_price: Optional[Union[StrictFloat, StrictInt]] = Field(None, alias="launchPrice", description="The launch price set when a shareclass is added to the fund. Defaults to 1.")
+    launch_date: Optional[datetime] = Field(None, alias="launchDate", description="The launch date set when a shareclass is added to the fund. Defaults to Fund Inception Date.")
+    __properties = ["instrumentIdentifiers", "lusidInstrumentId", "instrumentScope", "launchPrice", "launchDate"]
 
     @validator('lusid_instrument_id')
     def lusid_instrument_id_validate_regular_expression(cls, value):
@@ -86,6 +88,16 @@ class InstrumentResolutionDetail(BaseModel):
         if self.instrument_scope is None and "instrument_scope" in self.__fields_set__:
             _dict['instrumentScope'] = None
 
+        # set to None if launch_price (nullable) is None
+        # and __fields_set__ contains the field
+        if self.launch_price is None and "launch_price" in self.__fields_set__:
+            _dict['launchPrice'] = None
+
+        # set to None if launch_date (nullable) is None
+        # and __fields_set__ contains the field
+        if self.launch_date is None and "launch_date" in self.__fields_set__:
+            _dict['launchDate'] = None
+
         return _dict
 
     @classmethod
@@ -100,6 +112,8 @@ class InstrumentResolutionDetail(BaseModel):
         _obj = InstrumentResolutionDetail.parse_obj({
             "instrument_identifiers": obj.get("instrumentIdentifiers"),
             "lusid_instrument_id": obj.get("lusidInstrumentId"),
-            "instrument_scope": obj.get("instrumentScope")
+            "instrument_scope": obj.get("instrumentScope"),
+            "launch_price": obj.get("launchPrice"),
+            "launch_date": obj.get("launchDate")
         })
         return _obj

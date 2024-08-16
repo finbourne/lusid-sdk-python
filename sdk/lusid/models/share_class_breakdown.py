@@ -24,6 +24,7 @@ from lusid.models.fee_accrual import FeeAccrual
 from lusid.models.multi_currency_amounts import MultiCurrencyAmounts
 from lusid.models.previous_share_class_breakdown import PreviousShareClassBreakdown
 from lusid.models.share_class_amount import ShareClassAmount
+from lusid.models.share_class_dealing_breakdown import ShareClassDealingBreakdown
 from lusid.models.share_class_pnl_breakdown import ShareClassPnlBreakdown
 from lusid.models.unitisation_data import UnitisationData
 
@@ -32,7 +33,7 @@ class ShareClassBreakdown(BaseModel):
     The Valuation Point Data for a Share Class on a specified date.  # noqa: E501
     """
     back_out: Dict[str, ShareClassAmount] = Field(..., alias="backOut", description="Bucket of detail for the Valuation Point where data points have been 'backed out'.")
-    dealing: Dict[str, ShareClassAmount] = Field(..., description="Bucket of detail for any 'Dealing' that has occured inside the queried period.")
+    dealing: ShareClassDealingBreakdown = Field(...)
     pn_l: ShareClassPnlBreakdown = Field(..., alias="pnL")
     gav: MultiCurrencyAmounts = Field(...)
     fees: Dict[str, FeeAccrual] = Field(..., description="Bucket of detail for any 'Fees' that have been charged in the selected period.")
@@ -75,13 +76,9 @@ class ShareClassBreakdown(BaseModel):
                 if self.back_out[_key]:
                     _field_dict[_key] = self.back_out[_key].to_dict()
             _dict['backOut'] = _field_dict
-        # override the default output from pydantic by calling `to_dict()` of each value in dealing (dict)
-        _field_dict = {}
+        # override the default output from pydantic by calling `to_dict()` of dealing
         if self.dealing:
-            for _key in self.dealing:
-                if self.dealing[_key]:
-                    _field_dict[_key] = self.dealing[_key].to_dict()
-            _dict['dealing'] = _field_dict
+            _dict['dealing'] = self.dealing.to_dict()
         # override the default output from pydantic by calling `to_dict()` of pn_l
         if self.pn_l:
             _dict['pnL'] = self.pn_l.to_dict()
@@ -134,12 +131,7 @@ class ShareClassBreakdown(BaseModel):
             )
             if obj.get("backOut") is not None
             else None,
-            "dealing": dict(
-                (_k, ShareClassAmount.from_dict(_v))
-                for _k, _v in obj.get("dealing").items()
-            )
-            if obj.get("dealing") is not None
-            else None,
+            "dealing": ShareClassDealingBreakdown.from_dict(obj.get("dealing")) if obj.get("dealing") is not None else None,
             "pn_l": ShareClassPnlBreakdown.from_dict(obj.get("pnL")) if obj.get("pnL") is not None else None,
             "gav": MultiCurrencyAmounts.from_dict(obj.get("gav")) if obj.get("gav") is not None else None,
             "fees": dict(

@@ -6,7 +6,7 @@ The Valuation Point Data for a Share Class on a specified date.
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **back_out** | [**Dict[str, ShareClassAmount]**](ShareClassAmount.md) | Bucket of detail for the Valuation Point where data points have been &#39;backed out&#39;. | 
-**dealing** | [**Dict[str, ShareClassAmount]**](ShareClassAmount.md) | Bucket of detail for any &#39;Dealing&#39; that has occured inside the queried period. | 
+**dealing** | [**ShareClassDealingBreakdown**](ShareClassDealingBreakdown.md) |  | 
 **pn_l** | [**ShareClassPnlBreakdown**](ShareClassPnlBreakdown.md) |  | 
 **gav** | [**MultiCurrencyAmounts**](MultiCurrencyAmounts.md) |  | 
 **fees** | [**Dict[str, FeeAccrual]**](FeeAccrual.md) | Bucket of detail for any &#39;Fees&#39; that have been charged in the selected period. | 

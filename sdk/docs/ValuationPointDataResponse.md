@@ -7,7 +7,7 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **href** | **str** | The specific Uniform Resource Identifier (URI) for this resource at the requested effective and asAt datetime. | [optional] 
 **type** | **str** | The Type of the associated Diary Entry (&#39;PeriodBoundary&#39;,&#39;ValuationPoint&#39;,&#39;Other&#39; or &#39;Adhoc&#39; when a diary entry wasn&#39;t used). | 
-**status** | **str** | The Status of the associated Diary Entry (&#39;Estimate&#39;,&#39;Final&#39;,&#39;Candidate&#39; or &#39;Unofficial&#39;). | 
+**status** | **str** | The status of a Diary Entry of Type &#39;ValuationPoint&#39;. Defaults to &#39;Estimate&#39; when upserting a diary entry, moves to &#39;Candidate&#39; or &#39;Final&#39; when a ValuationPoint is accepted, and &#39;Final&#39; when it is finalised. The status of a Diary Entry becomes &#39;Unofficial&#39; when a diary entry wasn&#39;t used. | 
 **backout** | **Dict[str, float]** | DEPRECATED. Bucket of detail for the Valuation Point, where data points have been &#39;backed out&#39;. | 
 **dealing** | **Dict[str, float]** | DEPRECATED. Bucket of detail for any &#39;Dealing&#39; that has occured inside the queried period. | 
 **pn_l** | **Dict[str, float]** | DEPRECATED. Bucket of detail for &#39;PnL&#39; that has occured inside the queried period. | 
