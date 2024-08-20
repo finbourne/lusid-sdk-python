@@ -83,6 +83,11 @@ class OrderUpdateRequest(BaseModel):
         # override the default output from pydantic by calling `to_dict()` of stop_price
         if self.stop_price:
             _dict['stopPrice'] = self.stop_price.to_dict()
+        # set to None if quantity (nullable) is None
+        # and __fields_set__ contains the field
+        if self.quantity is None and "quantity" in self.__fields_set__:
+            _dict['quantity'] = None
+
         # set to None if properties (nullable) is None
         # and __fields_set__ contains the field
         if self.properties is None and "properties" in self.__fields_set__:
