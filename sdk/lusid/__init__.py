@@ -104,6 +104,7 @@ from lusid.models.abor_configuration_properties import AborConfigurationProperti
 from lusid.models.abor_configuration_request import AborConfigurationRequest
 from lusid.models.abor_properties import AborProperties
 from lusid.models.abor_request import AborRequest
+from lusid.models.accept_estimate_valuation_point_response import AcceptEstimateValuationPointResponse
 from lusid.models.access_controlled_action import AccessControlledAction
 from lusid.models.access_controlled_resource import AccessControlledResource
 from lusid.models.access_metadata_operation import AccessMetadataOperation
@@ -971,6 +972,8 @@ from lusid.models.string_list_compliance_parameter import StringListCompliancePa
 from lusid.models.structured_result_data import StructuredResultData
 from lusid.models.structured_result_data_id import StructuredResultDataId
 from lusid.models.sub_holding_key_value_equals import SubHoldingKeyValueEquals
+from lusid.models.swap_cash_flow_event import SwapCashFlowEvent
+from lusid.models.swap_principal_event import SwapPrincipalEvent
 from lusid.models.target_tax_lot import TargetTaxLot
 from lusid.models.target_tax_lot_request import TargetTaxLotRequest
 from lusid.models.tax_rule import TaxRule
@@ -1228,6 +1231,7 @@ __all__ = [
     "AborConfigurationRequest",
     "AborProperties",
     "AborRequest",
+    "AcceptEstimateValuationPointResponse",
     "AccessControlledAction",
     "AccessControlledResource",
     "AccessMetadataOperation",
@@ -2095,6 +2099,8 @@ __all__ = [
     "StructuredResultData",
     "StructuredResultDataId",
     "SubHoldingKeyValueEquals",
+    "SwapCashFlowEvent",
+    "SwapPrincipalEvent",
     "TargetTaxLot",
     "TargetTaxLotRequest",
     "TaxRule",

@@ -25,11 +25,11 @@ Method | HTTP request | Description
 
 
 # **accept_estimate_valuation_point**
-> ValuationPointDataResponse accept_estimate_valuation_point(scope, code, valuation_point_data_request)
+> AcceptEstimateValuationPointResponse accept_estimate_valuation_point(scope, code, valuation_point_data_request)
 
 [EXPERIMENTAL] AcceptEstimateValuationPoint: Accepts an Estimate Valuation Point.
 
-Accepts the specified estimate Valuation Point. Should the Valuation Point differ since the valuation Point was last run, status will be marked as 'Candidate', otherwise it will be marked as 'Final'
+Accepts the specified estimate Valuation Point.  Should the Valuation Point differ since the Valuation Point was last run, both Valuation Points will be returned and status will be marked as 'Candidate',  otherwise it will be marked as 'Final'.
 
 ### Example
 
@@ -97,7 +97,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**ValuationPointDataResponse**](ValuationPointDataResponse.md)
+[**AcceptEstimateValuationPointResponse**](AcceptEstimateValuationPointResponse.md)
 
 ### HTTP request headers
 
