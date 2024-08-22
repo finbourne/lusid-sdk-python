@@ -11,6 +11,7 @@ Name | Type | Description | Notes
 **source_provider** | **str** |  | 
 **properties** | [**List[ModelProperty]**](ModelProperty.md) |  | 
 **version** | [**Version**](Version.md) |  | [optional] 
+**links** | [**List[Link]**](Link.md) |  | [optional] 
 
 ## Example
 

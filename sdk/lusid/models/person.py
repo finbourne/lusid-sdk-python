@@ -20,6 +20,7 @@ import json
 
 from typing import Any, Dict, List, Optional
 from pydantic.v1 import BaseModel, Field, StrictStr, conlist
+from lusid.models.link import Link
 from lusid.models.model_property import ModelProperty
 from lusid.models.relationship import Relationship
 from lusid.models.version import Version
@@ -36,7 +37,8 @@ class Person(BaseModel):
     properties: Optional[Dict[str, ModelProperty]] = Field(None, description="A set of properties associated to the Person. There can be multiple properties associated with a property key.")
     relationships: Optional[conlist(Relationship)] = Field(None, description="A set of relationships associated to the Person.")
     version: Optional[Version] = None
-    __properties = ["displayName", "description", "href", "lusidPersonId", "identifiers", "properties", "relationships", "version"]
+    links: Optional[conlist(Link)] = None
+    __properties = ["displayName", "description", "href", "lusidPersonId", "identifiers", "properties", "relationships", "version", "links"]
 
     class Config:
         """Pydantic configuration"""
@@ -86,6 +88,13 @@ class Person(BaseModel):
         # override the default output from pydantic by calling `to_dict()` of version
         if self.version:
             _dict['version'] = self.version.to_dict()
+        # override the default output from pydantic by calling `to_dict()` of each item in links (list)
+        _items = []
+        if self.links:
+            for _item in self.links:
+                if _item:
+                    _items.append(_item.to_dict())
+            _dict['links'] = _items
         # set to None if display_name (nullable) is None
         # and __fields_set__ contains the field
         if self.display_name is None and "display_name" in self.__fields_set__:
@@ -121,6 +130,11 @@ class Person(BaseModel):
         if self.relationships is None and "relationships" in self.__fields_set__:
             _dict['relationships'] = None
 
+        # set to None if links (nullable) is None
+        # and __fields_set__ contains the field
+        if self.links is None and "links" in self.__fields_set__:
+            _dict['links'] = None
+
         return _dict
 
     @classmethod
@@ -150,6 +164,7 @@ class Person(BaseModel):
             if obj.get("properties") is not None
             else None,
             "relationships": [Relationship.from_dict(_item) for _item in obj.get("relationships")] if obj.get("relationships") is not None else None,
-            "version": Version.from_dict(obj.get("version")) if obj.get("version") is not None else None
+            "version": Version.from_dict(obj.get("version")) if obj.get("version") is not None else None,
+            "links": [Link.from_dict(_item) for _item in obj.get("links")] if obj.get("links") is not None else None
         })
         return _obj

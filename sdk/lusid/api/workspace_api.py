@@ -66,7 +66,7 @@ class WorkspaceApi:
 
     @validate_arguments
     def create_personal_item(self, workspace_name : Annotated[constr(strict=True, max_length=64, min_length=1), Field(..., description="The item's workspace name.")], workspace_item_creation_request : Annotated[Optional[WorkspaceItemCreationRequest], Field(description="The item to be created.")] = None, async_req: Optional[bool]=None, **kwargs) -> Union[WorkspaceItem, Awaitable[WorkspaceItem]]:  # noqa: E501
-        """[EARLY ACCESS] CreatePersonalItem: Create a new item in a personal workspace.  # noqa: E501
+        """[EXPERIMENTAL] CreatePersonalItem: Create a new item in a personal workspace.  # noqa: E501
 
         Create a new item in a personal workspace.  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
@@ -100,7 +100,7 @@ class WorkspaceApi:
 
     @validate_arguments
     def create_personal_item_with_http_info(self, workspace_name : Annotated[constr(strict=True, max_length=64, min_length=1), Field(..., description="The item's workspace name.")], workspace_item_creation_request : Annotated[Optional[WorkspaceItemCreationRequest], Field(description="The item to be created.")] = None, **kwargs) -> ApiResponse:  # noqa: E501
-        """[EARLY ACCESS] CreatePersonalItem: Create a new item in a personal workspace.  # noqa: E501
+        """[EXPERIMENTAL] CreatePersonalItem: Create a new item in a personal workspace.  # noqa: E501
 
         Create a new item in a personal workspace.  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
@@ -232,7 +232,7 @@ class WorkspaceApi:
 
     @validate_arguments
     def create_personal_workspace(self, workspace_creation_request : Annotated[Optional[WorkspaceCreationRequest], Field(description="The workspace to be created.")] = None, async_req: Optional[bool]=None, **kwargs) -> Union[Workspace, Awaitable[Workspace]]:  # noqa: E501
-        """[EARLY ACCESS] CreatePersonalWorkspace: Create a new personal workspace.  # noqa: E501
+        """[EXPERIMENTAL] CreatePersonalWorkspace: Create a new personal workspace.  # noqa: E501
 
         Create a new personal workspace.  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
@@ -264,7 +264,7 @@ class WorkspaceApi:
 
     @validate_arguments
     def create_personal_workspace_with_http_info(self, workspace_creation_request : Annotated[Optional[WorkspaceCreationRequest], Field(description="The workspace to be created.")] = None, **kwargs) -> ApiResponse:  # noqa: E501
-        """[EARLY ACCESS] CreatePersonalWorkspace: Create a new personal workspace.  # noqa: E501
+        """[EXPERIMENTAL] CreatePersonalWorkspace: Create a new personal workspace.  # noqa: E501
 
         Create a new personal workspace.  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
@@ -390,7 +390,7 @@ class WorkspaceApi:
 
     @validate_arguments
     def create_shared_item(self, workspace_name : Annotated[constr(strict=True, max_length=64, min_length=1), Field(..., description="The item's workspace name.")], workspace_item_creation_request : Annotated[Optional[WorkspaceItemCreationRequest], Field(description="The item to be created.")] = None, async_req: Optional[bool]=None, **kwargs) -> Union[WorkspaceItem, Awaitable[WorkspaceItem]]:  # noqa: E501
-        """[EARLY ACCESS] CreateSharedItem: Create a new item in a shared workspace.  # noqa: E501
+        """[EXPERIMENTAL] CreateSharedItem: Create a new item in a shared workspace.  # noqa: E501
 
         Create a new item in a shared workspace.  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
@@ -424,7 +424,7 @@ class WorkspaceApi:
 
     @validate_arguments
     def create_shared_item_with_http_info(self, workspace_name : Annotated[constr(strict=True, max_length=64, min_length=1), Field(..., description="The item's workspace name.")], workspace_item_creation_request : Annotated[Optional[WorkspaceItemCreationRequest], Field(description="The item to be created.")] = None, **kwargs) -> ApiResponse:  # noqa: E501
-        """[EARLY ACCESS] CreateSharedItem: Create a new item in a shared workspace.  # noqa: E501
+        """[EXPERIMENTAL] CreateSharedItem: Create a new item in a shared workspace.  # noqa: E501
 
         Create a new item in a shared workspace.  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
@@ -556,7 +556,7 @@ class WorkspaceApi:
 
     @validate_arguments
     def create_shared_workspace(self, workspace_creation_request : Annotated[Optional[WorkspaceCreationRequest], Field(description="The workspace to be created.")] = None, async_req: Optional[bool]=None, **kwargs) -> Union[Workspace, Awaitable[Workspace]]:  # noqa: E501
-        """[EARLY ACCESS] CreateSharedWorkspace: Create a new shared workspace.  # noqa: E501
+        """[EXPERIMENTAL] CreateSharedWorkspace: Create a new shared workspace.  # noqa: E501
 
         Create a new shared workspace.  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
@@ -588,7 +588,7 @@ class WorkspaceApi:
 
     @validate_arguments
     def create_shared_workspace_with_http_info(self, workspace_creation_request : Annotated[Optional[WorkspaceCreationRequest], Field(description="The workspace to be created.")] = None, **kwargs) -> ApiResponse:  # noqa: E501
-        """[EARLY ACCESS] CreateSharedWorkspace: Create a new shared workspace.  # noqa: E501
+        """[EXPERIMENTAL] CreateSharedWorkspace: Create a new shared workspace.  # noqa: E501
 
         Create a new shared workspace.  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
@@ -714,7 +714,7 @@ class WorkspaceApi:
 
     @validate_arguments
     def delete_personal_item(self, workspace_name : Annotated[constr(strict=True, max_length=64, min_length=1), Field(..., description="The name of the personal workspace.")], item_name : Annotated[constr(strict=True, max_length=64, min_length=1), Field(..., description="The name of the item.")], async_req: Optional[bool]=None, **kwargs) -> Union[DeletedEntityResponse, Awaitable[DeletedEntityResponse]]:  # noqa: E501
-        """[EARLY ACCESS] DeletePersonalItem: Delete an item from a personal workspace.  # noqa: E501
+        """[EXPERIMENTAL] DeletePersonalItem: Delete an item from a personal workspace.  # noqa: E501
 
         Delete an item from a personal workspace.  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
@@ -748,7 +748,7 @@ class WorkspaceApi:
 
     @validate_arguments
     def delete_personal_item_with_http_info(self, workspace_name : Annotated[constr(strict=True, max_length=64, min_length=1), Field(..., description="The name of the personal workspace.")], item_name : Annotated[constr(strict=True, max_length=64, min_length=1), Field(..., description="The name of the item.")], **kwargs) -> ApiResponse:  # noqa: E501
-        """[EARLY ACCESS] DeletePersonalItem: Delete an item from a personal workspace.  # noqa: E501
+        """[EXPERIMENTAL] DeletePersonalItem: Delete an item from a personal workspace.  # noqa: E501
 
         Delete an item from a personal workspace.  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
@@ -873,7 +873,7 @@ class WorkspaceApi:
 
     @validate_arguments
     def delete_personal_workspace(self, workspace_name : Annotated[constr(strict=True, max_length=64, min_length=1), Field(..., description="The name of the personal workspace.")], async_req: Optional[bool]=None, **kwargs) -> Union[DeletedEntityResponse, Awaitable[DeletedEntityResponse]]:  # noqa: E501
-        """[EARLY ACCESS] DeletePersonalWorkspace: Delete a personal workspace.  # noqa: E501
+        """[EXPERIMENTAL] DeletePersonalWorkspace: Delete a personal workspace.  # noqa: E501
 
         Delete a personal workspace.  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
@@ -905,7 +905,7 @@ class WorkspaceApi:
 
     @validate_arguments
     def delete_personal_workspace_with_http_info(self, workspace_name : Annotated[constr(strict=True, max_length=64, min_length=1), Field(..., description="The name of the personal workspace.")], **kwargs) -> ApiResponse:  # noqa: E501
-        """[EARLY ACCESS] DeletePersonalWorkspace: Delete a personal workspace.  # noqa: E501
+        """[EXPERIMENTAL] DeletePersonalWorkspace: Delete a personal workspace.  # noqa: E501
 
         Delete a personal workspace.  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
@@ -1024,7 +1024,7 @@ class WorkspaceApi:
 
     @validate_arguments
     def delete_shared_item(self, workspace_name : Annotated[constr(strict=True, max_length=64, min_length=1), Field(..., description="The name of the shared workspace.")], item_name : Annotated[constr(strict=True, max_length=64, min_length=1), Field(..., description="The name of the item.")], async_req: Optional[bool]=None, **kwargs) -> Union[DeletedEntityResponse, Awaitable[DeletedEntityResponse]]:  # noqa: E501
-        """[EARLY ACCESS] DeleteSharedItem: Delete an item from a shared workspace.  # noqa: E501
+        """[EXPERIMENTAL] DeleteSharedItem: Delete an item from a shared workspace.  # noqa: E501
 
         Delete an item from a shared workspace.  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
@@ -1058,7 +1058,7 @@ class WorkspaceApi:
 
     @validate_arguments
     def delete_shared_item_with_http_info(self, workspace_name : Annotated[constr(strict=True, max_length=64, min_length=1), Field(..., description="The name of the shared workspace.")], item_name : Annotated[constr(strict=True, max_length=64, min_length=1), Field(..., description="The name of the item.")], **kwargs) -> ApiResponse:  # noqa: E501
-        """[EARLY ACCESS] DeleteSharedItem: Delete an item from a shared workspace.  # noqa: E501
+        """[EXPERIMENTAL] DeleteSharedItem: Delete an item from a shared workspace.  # noqa: E501
 
         Delete an item from a shared workspace.  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
@@ -1183,7 +1183,7 @@ class WorkspaceApi:
 
     @validate_arguments
     def delete_shared_workspace(self, workspace_name : Annotated[constr(strict=True, max_length=64, min_length=1), Field(..., description="The name of the shared workspace.")], async_req: Optional[bool]=None, **kwargs) -> Union[DeletedEntityResponse, Awaitable[DeletedEntityResponse]]:  # noqa: E501
-        """[EARLY ACCESS] DeleteSharedWorkspace: Delete a shared workspace.  # noqa: E501
+        """[EXPERIMENTAL] DeleteSharedWorkspace: Delete a shared workspace.  # noqa: E501
 
         Delete a shared workspace.  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
@@ -1215,7 +1215,7 @@ class WorkspaceApi:
 
     @validate_arguments
     def delete_shared_workspace_with_http_info(self, workspace_name : Annotated[constr(strict=True, max_length=64, min_length=1), Field(..., description="The name of the shared workspace.")], **kwargs) -> ApiResponse:  # noqa: E501
-        """[EARLY ACCESS] DeleteSharedWorkspace: Delete a shared workspace.  # noqa: E501
+        """[EXPERIMENTAL] DeleteSharedWorkspace: Delete a shared workspace.  # noqa: E501
 
         Delete a shared workspace.  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
@@ -1334,7 +1334,7 @@ class WorkspaceApi:
 
     @validate_arguments
     def get_personal_item(self, workspace_name : Annotated[constr(strict=True, max_length=64, min_length=1), Field(..., description="The name of the personal workspace.")], item_name : Annotated[constr(strict=True, max_length=64, min_length=1), Field(..., description="The name of the item.")], as_at : Annotated[Optional[datetime], Field(description="The datetime at which to request the workspace item. If not provided, defaults to 'latest'.")] = None, async_req: Optional[bool]=None, **kwargs) -> Union[WorkspaceItem, Awaitable[WorkspaceItem]]:  # noqa: E501
-        """[EARLY ACCESS] GetPersonalItem: Get a single personal workspace item.  # noqa: E501
+        """[EXPERIMENTAL] GetPersonalItem: Get a single personal workspace item.  # noqa: E501
 
         Get a single personal workspace item.  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
@@ -1370,7 +1370,7 @@ class WorkspaceApi:
 
     @validate_arguments
     def get_personal_item_with_http_info(self, workspace_name : Annotated[constr(strict=True, max_length=64, min_length=1), Field(..., description="The name of the personal workspace.")], item_name : Annotated[constr(strict=True, max_length=64, min_length=1), Field(..., description="The name of the item.")], as_at : Annotated[Optional[datetime], Field(description="The datetime at which to request the workspace item. If not provided, defaults to 'latest'.")] = None, **kwargs) -> ApiResponse:  # noqa: E501
-        """[EARLY ACCESS] GetPersonalItem: Get a single personal workspace item.  # noqa: E501
+        """[EXPERIMENTAL] GetPersonalItem: Get a single personal workspace item.  # noqa: E501
 
         Get a single personal workspace item.  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
@@ -1504,7 +1504,7 @@ class WorkspaceApi:
 
     @validate_arguments
     def get_personal_workspace(self, workspace_name : Annotated[constr(strict=True, max_length=64, min_length=1), Field(..., description="The personal workspace name.")], as_at : Annotated[Optional[datetime], Field(description="The asAt datetime at which to retrieve workspaces. Defaults to 'latest' if not specified.")] = None, async_req: Optional[bool]=None, **kwargs) -> Union[Workspace, Awaitable[Workspace]]:  # noqa: E501
-        """[EARLY ACCESS] GetPersonalWorkspace: Get a personal workspace.  # noqa: E501
+        """[EXPERIMENTAL] GetPersonalWorkspace: Get a personal workspace.  # noqa: E501
 
         Get a personal workspace.  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
@@ -1538,7 +1538,7 @@ class WorkspaceApi:
 
     @validate_arguments
     def get_personal_workspace_with_http_info(self, workspace_name : Annotated[constr(strict=True, max_length=64, min_length=1), Field(..., description="The personal workspace name.")], as_at : Annotated[Optional[datetime], Field(description="The asAt datetime at which to retrieve workspaces. Defaults to 'latest' if not specified.")] = None, **kwargs) -> ApiResponse:  # noqa: E501
-        """[EARLY ACCESS] GetPersonalWorkspace: Get a personal workspace.  # noqa: E501
+        """[EXPERIMENTAL] GetPersonalWorkspace: Get a personal workspace.  # noqa: E501
 
         Get a personal workspace.  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
@@ -1666,7 +1666,7 @@ class WorkspaceApi:
 
     @validate_arguments
     def get_shared_item(self, workspace_name : Annotated[constr(strict=True, max_length=64, min_length=1), Field(..., description="The name of the shared workspace.")], item_name : Annotated[constr(strict=True, max_length=64, min_length=1), Field(..., description="The name of the item.")], as_at : Annotated[Optional[datetime], Field(description="The datetime at which to request the workspace item. If not provided, defaults to 'latest'.")] = None, async_req: Optional[bool]=None, **kwargs) -> Union[WorkspaceItem, Awaitable[WorkspaceItem]]:  # noqa: E501
-        """[EARLY ACCESS] GetSharedItem: Get a single shared workspace item.  # noqa: E501
+        """[EXPERIMENTAL] GetSharedItem: Get a single shared workspace item.  # noqa: E501
 
         Get a single shared workspace item.  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
@@ -1702,7 +1702,7 @@ class WorkspaceApi:
 
     @validate_arguments
     def get_shared_item_with_http_info(self, workspace_name : Annotated[constr(strict=True, max_length=64, min_length=1), Field(..., description="The name of the shared workspace.")], item_name : Annotated[constr(strict=True, max_length=64, min_length=1), Field(..., description="The name of the item.")], as_at : Annotated[Optional[datetime], Field(description="The datetime at which to request the workspace item. If not provided, defaults to 'latest'.")] = None, **kwargs) -> ApiResponse:  # noqa: E501
-        """[EARLY ACCESS] GetSharedItem: Get a single shared workspace item.  # noqa: E501
+        """[EXPERIMENTAL] GetSharedItem: Get a single shared workspace item.  # noqa: E501
 
         Get a single shared workspace item.  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
@@ -1836,7 +1836,7 @@ class WorkspaceApi:
 
     @validate_arguments
     def get_shared_workspace(self, workspace_name : Annotated[constr(strict=True, max_length=64, min_length=1), Field(..., description="The shared workspace name.")], as_at : Annotated[Optional[datetime], Field(description="The asAt datetime at which to retrieve workspaces. Defaults to 'latest' if not specified.")] = None, async_req: Optional[bool]=None, **kwargs) -> Union[Workspace, Awaitable[Workspace]]:  # noqa: E501
-        """[EARLY ACCESS] GetSharedWorkspace: Get a shared workspace.  # noqa: E501
+        """[EXPERIMENTAL] GetSharedWorkspace: Get a shared workspace.  # noqa: E501
 
         Get a shared workspace.  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
@@ -1870,7 +1870,7 @@ class WorkspaceApi:
 
     @validate_arguments
     def get_shared_workspace_with_http_info(self, workspace_name : Annotated[constr(strict=True, max_length=64, min_length=1), Field(..., description="The shared workspace name.")], as_at : Annotated[Optional[datetime], Field(description="The asAt datetime at which to retrieve workspaces. Defaults to 'latest' if not specified.")] = None, **kwargs) -> ApiResponse:  # noqa: E501
-        """[EARLY ACCESS] GetSharedWorkspace: Get a shared workspace.  # noqa: E501
+        """[EXPERIMENTAL] GetSharedWorkspace: Get a shared workspace.  # noqa: E501
 
         Get a shared workspace.  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
@@ -1998,7 +1998,7 @@ class WorkspaceApi:
 
     @validate_arguments
     def list_personal_items(self, workspace_name : Annotated[constr(strict=True, max_length=64, min_length=1), Field(..., description="The item's workspace name.")], as_at : Annotated[Optional[datetime], Field(description="The asAt datetime at which to retrieve workspace items. Defaults to 'latest' if not specified.")] = None, page : Annotated[Optional[constr(strict=True, max_length=500, min_length=1)], Field(description="The pagination token to use to continue listing workspaces items from a previous call to list workspaces items.              This value is returned from the previous call. If a pagination token is provided the sortBy, filter, effectiveAt, and asAt fields              must not have changed since the original request.")] = None, sort_by : Annotated[Optional[conlist(StrictStr)], Field(description="A list of field names to sort by, each suffixed by \" ASC\" or \" DESC\".")] = None, limit : Annotated[Optional[conint(strict=True, le=5000, ge=1)], Field(description="When paginating, limit the number of returned results to this many.")] = None, filter : Annotated[Optional[constr(strict=True, max_length=16384, min_length=0)], Field(description="Expression to filter the result set. Read more about filtering results from LUSID here:              https://support.lusid.com/filtering-results-from-lusid.")] = None, async_req: Optional[bool]=None, **kwargs) -> Union[PagedResourceListOfWorkspaceItem, Awaitable[PagedResourceListOfWorkspaceItem]]:  # noqa: E501
-        """[EARLY ACCESS] ListPersonalItems: List the items in a personal workspace.  # noqa: E501
+        """[EXPERIMENTAL] ListPersonalItems: List the items in a personal workspace.  # noqa: E501
 
         List the items in a personal workspace.  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
@@ -2040,7 +2040,7 @@ class WorkspaceApi:
 
     @validate_arguments
     def list_personal_items_with_http_info(self, workspace_name : Annotated[constr(strict=True, max_length=64, min_length=1), Field(..., description="The item's workspace name.")], as_at : Annotated[Optional[datetime], Field(description="The asAt datetime at which to retrieve workspace items. Defaults to 'latest' if not specified.")] = None, page : Annotated[Optional[constr(strict=True, max_length=500, min_length=1)], Field(description="The pagination token to use to continue listing workspaces items from a previous call to list workspaces items.              This value is returned from the previous call. If a pagination token is provided the sortBy, filter, effectiveAt, and asAt fields              must not have changed since the original request.")] = None, sort_by : Annotated[Optional[conlist(StrictStr)], Field(description="A list of field names to sort by, each suffixed by \" ASC\" or \" DESC\".")] = None, limit : Annotated[Optional[conint(strict=True, le=5000, ge=1)], Field(description="When paginating, limit the number of returned results to this many.")] = None, filter : Annotated[Optional[constr(strict=True, max_length=16384, min_length=0)], Field(description="Expression to filter the result set. Read more about filtering results from LUSID here:              https://support.lusid.com/filtering-results-from-lusid.")] = None, **kwargs) -> ApiResponse:  # noqa: E501
-        """[EARLY ACCESS] ListPersonalItems: List the items in a personal workspace.  # noqa: E501
+        """[EXPERIMENTAL] ListPersonalItems: List the items in a personal workspace.  # noqa: E501
 
         List the items in a personal workspace.  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
@@ -2193,7 +2193,7 @@ class WorkspaceApi:
 
     @validate_arguments
     def list_personal_workspaces(self, as_at : Annotated[Optional[datetime], Field(description="The asAt datetime at which to retrieve workspaces. Defaults to 'latest' if not specified.")] = None, page : Annotated[Optional[constr(strict=True, max_length=500, min_length=1)], Field(description="The pagination token to use to continue listing workspaces from a previous call to list workspaces.              This value is returned from the previous call. If a pagination token is provided the sortBy, filter, effectiveAt, and asAt fields              must not have changed since the original request.")] = None, sort_by : Annotated[Optional[conlist(StrictStr)], Field(description="A list of field names to sort by, each suffixed by \" ASC\" or \" DESC\".")] = None, limit : Annotated[Optional[conint(strict=True, le=5000, ge=1)], Field(description="When paginating, limit the number of returned results to this many.")] = None, filter : Annotated[Optional[constr(strict=True, max_length=16384, min_length=0)], Field(description="Expression to filter the result set. Read more about filtering results from LUSID here:              https://support.lusid.com/filtering-results-from-lusid.")] = None, async_req: Optional[bool]=None, **kwargs) -> Union[PagedResourceListOfWorkspace, Awaitable[PagedResourceListOfWorkspace]]:  # noqa: E501
-        """[EARLY ACCESS] ListPersonalWorkspaces: List personal workspaces.  # noqa: E501
+        """[EXPERIMENTAL] ListPersonalWorkspaces: List personal workspaces.  # noqa: E501
 
         List personal workspaces.  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
@@ -2233,7 +2233,7 @@ class WorkspaceApi:
 
     @validate_arguments
     def list_personal_workspaces_with_http_info(self, as_at : Annotated[Optional[datetime], Field(description="The asAt datetime at which to retrieve workspaces. Defaults to 'latest' if not specified.")] = None, page : Annotated[Optional[constr(strict=True, max_length=500, min_length=1)], Field(description="The pagination token to use to continue listing workspaces from a previous call to list workspaces.              This value is returned from the previous call. If a pagination token is provided the sortBy, filter, effectiveAt, and asAt fields              must not have changed since the original request.")] = None, sort_by : Annotated[Optional[conlist(StrictStr)], Field(description="A list of field names to sort by, each suffixed by \" ASC\" or \" DESC\".")] = None, limit : Annotated[Optional[conint(strict=True, le=5000, ge=1)], Field(description="When paginating, limit the number of returned results to this many.")] = None, filter : Annotated[Optional[constr(strict=True, max_length=16384, min_length=0)], Field(description="Expression to filter the result set. Read more about filtering results from LUSID here:              https://support.lusid.com/filtering-results-from-lusid.")] = None, **kwargs) -> ApiResponse:  # noqa: E501
-        """[EARLY ACCESS] ListPersonalWorkspaces: List personal workspaces.  # noqa: E501
+        """[EXPERIMENTAL] ListPersonalWorkspaces: List personal workspaces.  # noqa: E501
 
         List personal workspaces.  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
@@ -2380,7 +2380,7 @@ class WorkspaceApi:
 
     @validate_arguments
     def list_shared_items(self, workspace_name : Annotated[constr(strict=True, max_length=64, min_length=1), Field(..., description="The item's workspace name.")], as_at : Annotated[Optional[datetime], Field(description="The asAt datetime at which to retrieve workspace items. Defaults to 'latest' if not specified.")] = None, page : Annotated[Optional[constr(strict=True, max_length=500, min_length=1)], Field(description="The pagination token to use to continue listing workspaces items from a previous call to list workspaces items.              This value is returned from the previous call. If a pagination token is provided the sortBy, filter, effectiveAt, and asAt fields              must not have changed since the original request.")] = None, sort_by : Annotated[Optional[conlist(StrictStr)], Field(description="A list of field names to sort by, each suffixed by \" ASC\" or \" DESC\".")] = None, limit : Annotated[Optional[conint(strict=True, le=5000, ge=1)], Field(description="When paginating, limit the number of returned results to this many.")] = None, filter : Annotated[Optional[constr(strict=True, max_length=16384, min_length=0)], Field(description="Expression to filter the result set. Read more about filtering results from LUSID here:              https://support.lusid.com/filtering-results-from-lusid.")] = None, async_req: Optional[bool]=None, **kwargs) -> Union[PagedResourceListOfWorkspaceItem, Awaitable[PagedResourceListOfWorkspaceItem]]:  # noqa: E501
-        """[EARLY ACCESS] ListSharedItems: List the items in a shared workspace.  # noqa: E501
+        """[EXPERIMENTAL] ListSharedItems: List the items in a shared workspace.  # noqa: E501
 
         List the items in a shared workspace.  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
@@ -2422,7 +2422,7 @@ class WorkspaceApi:
 
     @validate_arguments
     def list_shared_items_with_http_info(self, workspace_name : Annotated[constr(strict=True, max_length=64, min_length=1), Field(..., description="The item's workspace name.")], as_at : Annotated[Optional[datetime], Field(description="The asAt datetime at which to retrieve workspace items. Defaults to 'latest' if not specified.")] = None, page : Annotated[Optional[constr(strict=True, max_length=500, min_length=1)], Field(description="The pagination token to use to continue listing workspaces items from a previous call to list workspaces items.              This value is returned from the previous call. If a pagination token is provided the sortBy, filter, effectiveAt, and asAt fields              must not have changed since the original request.")] = None, sort_by : Annotated[Optional[conlist(StrictStr)], Field(description="A list of field names to sort by, each suffixed by \" ASC\" or \" DESC\".")] = None, limit : Annotated[Optional[conint(strict=True, le=5000, ge=1)], Field(description="When paginating, limit the number of returned results to this many.")] = None, filter : Annotated[Optional[constr(strict=True, max_length=16384, min_length=0)], Field(description="Expression to filter the result set. Read more about filtering results from LUSID here:              https://support.lusid.com/filtering-results-from-lusid.")] = None, **kwargs) -> ApiResponse:  # noqa: E501
-        """[EARLY ACCESS] ListSharedItems: List the items in a shared workspace.  # noqa: E501
+        """[EXPERIMENTAL] ListSharedItems: List the items in a shared workspace.  # noqa: E501
 
         List the items in a shared workspace.  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
@@ -2575,7 +2575,7 @@ class WorkspaceApi:
 
     @validate_arguments
     def list_shared_workspaces(self, as_at : Annotated[Optional[datetime], Field(description="The asAt datetime at which to retrieve workspaces. Defaults to 'latest' if not specified.")] = None, page : Annotated[Optional[constr(strict=True, max_length=500, min_length=1)], Field(description="The pagination token to use to continue listing workspaces from a previous call to list workspaces.              This value is returned from the previous call. If a pagination token is provided the sortBy, filter, effectiveAt, and asAt fields              must not have changed since the original request.")] = None, sort_by : Annotated[Optional[conlist(StrictStr)], Field(description="A list of field names to sort by, each suffixed by \" ASC\" or \" DESC\".")] = None, limit : Annotated[Optional[conint(strict=True, le=5000, ge=1)], Field(description="When paginating, limit the number of returned results to this many.")] = None, filter : Annotated[Optional[constr(strict=True, max_length=16384, min_length=0)], Field(description="Expression to filter the result set. Read more about filtering results from LUSID here:              https://support.lusid.com/filtering-results-from-lusid.")] = None, async_req: Optional[bool]=None, **kwargs) -> Union[PagedResourceListOfWorkspace, Awaitable[PagedResourceListOfWorkspace]]:  # noqa: E501
-        """[EARLY ACCESS] ListSharedWorkspaces: List shared workspaces.  # noqa: E501
+        """[EXPERIMENTAL] ListSharedWorkspaces: List shared workspaces.  # noqa: E501
 
         List shared workspaces.  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
@@ -2615,7 +2615,7 @@ class WorkspaceApi:
 
     @validate_arguments
     def list_shared_workspaces_with_http_info(self, as_at : Annotated[Optional[datetime], Field(description="The asAt datetime at which to retrieve workspaces. Defaults to 'latest' if not specified.")] = None, page : Annotated[Optional[constr(strict=True, max_length=500, min_length=1)], Field(description="The pagination token to use to continue listing workspaces from a previous call to list workspaces.              This value is returned from the previous call. If a pagination token is provided the sortBy, filter, effectiveAt, and asAt fields              must not have changed since the original request.")] = None, sort_by : Annotated[Optional[conlist(StrictStr)], Field(description="A list of field names to sort by, each suffixed by \" ASC\" or \" DESC\".")] = None, limit : Annotated[Optional[conint(strict=True, le=5000, ge=1)], Field(description="When paginating, limit the number of returned results to this many.")] = None, filter : Annotated[Optional[constr(strict=True, max_length=16384, min_length=0)], Field(description="Expression to filter the result set. Read more about filtering results from LUSID here:              https://support.lusid.com/filtering-results-from-lusid.")] = None, **kwargs) -> ApiResponse:  # noqa: E501
-        """[EARLY ACCESS] ListSharedWorkspaces: List shared workspaces.  # noqa: E501
+        """[EXPERIMENTAL] ListSharedWorkspaces: List shared workspaces.  # noqa: E501
 
         List shared workspaces.  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
@@ -2762,7 +2762,7 @@ class WorkspaceApi:
 
     @validate_arguments
     def update_personal_item(self, workspace_name : Annotated[constr(strict=True, max_length=64, min_length=1), Field(..., description="The personal workspace name.")], item_name : Annotated[constr(strict=True, max_length=64, min_length=1), Field(..., description="The item name.")], workspace_item_update_request : Annotated[Optional[WorkspaceItemUpdateRequest], Field(description="The new item details.")] = None, async_req: Optional[bool]=None, **kwargs) -> Union[WorkspaceItem, Awaitable[WorkspaceItem]]:  # noqa: E501
-        """[EARLY ACCESS] UpdatePersonalItem: Update an item in a personal workspace.  # noqa: E501
+        """[EXPERIMENTAL] UpdatePersonalItem: Update an item in a personal workspace.  # noqa: E501
 
         Update an item in a personal workspace.  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
@@ -2798,7 +2798,7 @@ class WorkspaceApi:
 
     @validate_arguments
     def update_personal_item_with_http_info(self, workspace_name : Annotated[constr(strict=True, max_length=64, min_length=1), Field(..., description="The personal workspace name.")], item_name : Annotated[constr(strict=True, max_length=64, min_length=1), Field(..., description="The item name.")], workspace_item_update_request : Annotated[Optional[WorkspaceItemUpdateRequest], Field(description="The new item details.")] = None, **kwargs) -> ApiResponse:  # noqa: E501
-        """[EARLY ACCESS] UpdatePersonalItem: Update an item in a personal workspace.  # noqa: E501
+        """[EXPERIMENTAL] UpdatePersonalItem: Update an item in a personal workspace.  # noqa: E501
 
         Update an item in a personal workspace.  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
@@ -2936,7 +2936,7 @@ class WorkspaceApi:
 
     @validate_arguments
     def update_personal_workspace(self, workspace_name : Annotated[constr(strict=True, max_length=64, min_length=1), Field(..., description="The personal workspace name.")], workspace_update_request : Annotated[Optional[WorkspaceUpdateRequest], Field(description="The new workspace details.")] = None, async_req: Optional[bool]=None, **kwargs) -> Union[Workspace, Awaitable[Workspace]]:  # noqa: E501
-        """[EARLY ACCESS] UpdatePersonalWorkspace: Update a personal workspace.  # noqa: E501
+        """[EXPERIMENTAL] UpdatePersonalWorkspace: Update a personal workspace.  # noqa: E501
 
         Update a personal workspace.  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
@@ -2970,7 +2970,7 @@ class WorkspaceApi:
 
     @validate_arguments
     def update_personal_workspace_with_http_info(self, workspace_name : Annotated[constr(strict=True, max_length=64, min_length=1), Field(..., description="The personal workspace name.")], workspace_update_request : Annotated[Optional[WorkspaceUpdateRequest], Field(description="The new workspace details.")] = None, **kwargs) -> ApiResponse:  # noqa: E501
-        """[EARLY ACCESS] UpdatePersonalWorkspace: Update a personal workspace.  # noqa: E501
+        """[EXPERIMENTAL] UpdatePersonalWorkspace: Update a personal workspace.  # noqa: E501
 
         Update a personal workspace.  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
@@ -3102,7 +3102,7 @@ class WorkspaceApi:
 
     @validate_arguments
     def update_shared_item(self, workspace_name : Annotated[constr(strict=True, max_length=64, min_length=1), Field(..., description="The shared workspace name.")], item_name : Annotated[constr(strict=True, max_length=64, min_length=1), Field(..., description="The item name.")], workspace_item_update_request : Annotated[Optional[WorkspaceItemUpdateRequest], Field(description="The new item details.")] = None, async_req: Optional[bool]=None, **kwargs) -> Union[WorkspaceItem, Awaitable[WorkspaceItem]]:  # noqa: E501
-        """[EARLY ACCESS] UpdateSharedItem: Update an item in a shared workspace.  # noqa: E501
+        """[EXPERIMENTAL] UpdateSharedItem: Update an item in a shared workspace.  # noqa: E501
 
         Update an item in a shared workspace.  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
@@ -3138,7 +3138,7 @@ class WorkspaceApi:
 
     @validate_arguments
     def update_shared_item_with_http_info(self, workspace_name : Annotated[constr(strict=True, max_length=64, min_length=1), Field(..., description="The shared workspace name.")], item_name : Annotated[constr(strict=True, max_length=64, min_length=1), Field(..., description="The item name.")], workspace_item_update_request : Annotated[Optional[WorkspaceItemUpdateRequest], Field(description="The new item details.")] = None, **kwargs) -> ApiResponse:  # noqa: E501
-        """[EARLY ACCESS] UpdateSharedItem: Update an item in a shared workspace.  # noqa: E501
+        """[EXPERIMENTAL] UpdateSharedItem: Update an item in a shared workspace.  # noqa: E501
 
         Update an item in a shared workspace.  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
@@ -3276,7 +3276,7 @@ class WorkspaceApi:
 
     @validate_arguments
     def update_shared_workspace(self, workspace_name : Annotated[constr(strict=True, max_length=64, min_length=1), Field(..., description="The shared workspace name.")], workspace_update_request : Annotated[Optional[WorkspaceUpdateRequest], Field(description="The new workspace details.")] = None, async_req: Optional[bool]=None, **kwargs) -> Union[Workspace, Awaitable[Workspace]]:  # noqa: E501
-        """[EARLY ACCESS] UpdateSharedWorkspace: Update a shared workspace.  # noqa: E501
+        """[EXPERIMENTAL] UpdateSharedWorkspace: Update a shared workspace.  # noqa: E501
 
         Update a shared workspace.  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
@@ -3310,7 +3310,7 @@ class WorkspaceApi:
 
     @validate_arguments
     def update_shared_workspace_with_http_info(self, workspace_name : Annotated[constr(strict=True, max_length=64, min_length=1), Field(..., description="The shared workspace name.")], workspace_update_request : Annotated[Optional[WorkspaceUpdateRequest], Field(description="The new workspace details.")] = None, **kwargs) -> ApiResponse:  # noqa: E501
-        """[EARLY ACCESS] UpdateSharedWorkspace: Update a shared workspace.  # noqa: E501
+        """[EXPERIMENTAL] UpdateSharedWorkspace: Update a shared workspace.  # noqa: E501
 
         Update a shared workspace.  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an

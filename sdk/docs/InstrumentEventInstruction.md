@@ -13,6 +13,7 @@ Name | Type | Description | Notes
 **holding_id** | **int** | For holding instructions, the id of the holding for which the instruction will apply | [optional] 
 **version** | [**Version**](Version.md) |  | [optional] 
 **href** | **str** | The uri for this version of this instruction | [optional] 
+**links** | [**List[Link]**](Link.md) |  | [optional] 
 
 ## Example
 

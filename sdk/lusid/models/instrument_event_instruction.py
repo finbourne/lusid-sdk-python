@@ -18,8 +18,9 @@ import re  # noqa: F401
 import json
 
 
-from typing import Any, Dict, Optional
-from pydantic.v1 import BaseModel, Field, StrictInt, StrictStr
+from typing import Any, Dict, List, Optional
+from pydantic.v1 import BaseModel, Field, StrictInt, StrictStr, conlist
+from lusid.models.link import Link
 from lusid.models.resource_id import ResourceId
 from lusid.models.version import Version
 
@@ -35,7 +36,8 @@ class InstrumentEventInstruction(BaseModel):
     holding_id: Optional[StrictInt] = Field(None, alias="holdingId", description="For holding instructions, the id of the holding for which the instruction will apply")
     version: Optional[Version] = None
     href: Optional[StrictStr] = Field(None, description="The uri for this version of this instruction")
-    __properties = ["instrumentEventInstructionId", "portfolioId", "instrumentEventId", "instructionType", "electionKey", "holdingId", "version", "href"]
+    links: Optional[conlist(Link)] = None
+    __properties = ["instrumentEventInstructionId", "portfolioId", "instrumentEventId", "instructionType", "electionKey", "holdingId", "version", "href", "links"]
 
     class Config:
         """Pydantic configuration"""
@@ -67,6 +69,13 @@ class InstrumentEventInstruction(BaseModel):
         # override the default output from pydantic by calling `to_dict()` of version
         if self.version:
             _dict['version'] = self.version.to_dict()
+        # override the default output from pydantic by calling `to_dict()` of each item in links (list)
+        _items = []
+        if self.links:
+            for _item in self.links:
+                if _item:
+                    _items.append(_item.to_dict())
+            _dict['links'] = _items
         # set to None if instrument_event_instruction_id (nullable) is None
         # and __fields_set__ contains the field
         if self.instrument_event_instruction_id is None and "instrument_event_instruction_id" in self.__fields_set__:
@@ -97,6 +106,11 @@ class InstrumentEventInstruction(BaseModel):
         if self.href is None and "href" in self.__fields_set__:
             _dict['href'] = None
 
+        # set to None if links (nullable) is None
+        # and __fields_set__ contains the field
+        if self.links is None and "links" in self.__fields_set__:
+            _dict['links'] = None
+
         return _dict
 
     @classmethod
@@ -116,6 +130,7 @@ class InstrumentEventInstruction(BaseModel):
             "election_key": obj.get("electionKey"),
             "holding_id": obj.get("holdingId"),
             "version": Version.from_dict(obj.get("version")) if obj.get("version") is not None else None,
-            "href": obj.get("href")
+            "href": obj.get("href"),
+            "links": [Link.from_dict(_item) for _item in obj.get("links")] if obj.get("links") is not None else None
         })
         return _obj

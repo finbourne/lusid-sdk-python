@@ -15,6 +15,7 @@ Name | Type | Description | Notes
 **reference_data** | [**ReferenceData**](ReferenceData.md) |  | [optional] 
 **version** | [**Version**](Version.md) |  | [optional] 
 **href** | **str** | The specific Uniform Resource Identifier (URI) for this resource at the requested effective and asAt datetime. | [optional] 
+**staged_modifications** | [**StagedModificationsInfo**](StagedModificationsInfo.md) |  | [optional] 
 **links** | [**List[Link]**](Link.md) |  | [optional] 
 
 ## Example

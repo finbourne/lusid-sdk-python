@@ -12,6 +12,7 @@ Name | Type | Description | Notes
 **properties** | [**Dict[str, ModelProperty]**](ModelProperty.md) | A set of properties associated to the Person. There can be multiple properties associated with a property key. | [optional] 
 **relationships** | [**List[Relationship]**](Relationship.md) | A set of relationships associated to the Person. | [optional] 
 **version** | [**Version**](Version.md) |  | [optional] 
+**links** | [**List[Link]**](Link.md) |  | [optional] 
 
 ## Example
 

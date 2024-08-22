@@ -41,8 +41,10 @@ class ValuationPointDataResponse(BaseModel):
     previous_nav: Union[StrictFloat, StrictInt] = Field(..., alias="previousNav", description="DEPRECATED. The Net Asset Value of the Fund at the End of the last Period.")
     fund_valuation_point_data: FundValuationPointData = Field(..., alias="fundValuationPointData")
     share_class_data: Dict[str, ShareClassData] = Field(..., alias="shareClassData", description="The data for all share classes in fund. Share classes are identified by their short codes.")
+    valuation_point_code: Optional[StrictStr] = Field(None, alias="valuationPointCode", description="The code of the valuation point.")
+    previous_valuation_point_code: Optional[StrictStr] = Field(None, alias="previousValuationPointCode", description="The code of the previous valuation point.")
     links: Optional[conlist(Link)] = None
-    __properties = ["href", "type", "status", "backout", "dealing", "pnL", "gav", "fees", "nav", "previousNav", "fundValuationPointData", "shareClassData", "links"]
+    __properties = ["href", "type", "status", "backout", "dealing", "pnL", "gav", "fees", "nav", "previousNav", "fundValuationPointData", "shareClassData", "valuationPointCode", "previousValuationPointCode", "links"]
 
     class Config:
         """Pydantic configuration"""
@@ -97,6 +99,16 @@ class ValuationPointDataResponse(BaseModel):
         if self.href is None and "href" in self.__fields_set__:
             _dict['href'] = None
 
+        # set to None if valuation_point_code (nullable) is None
+        # and __fields_set__ contains the field
+        if self.valuation_point_code is None and "valuation_point_code" in self.__fields_set__:
+            _dict['valuationPointCode'] = None
+
+        # set to None if previous_valuation_point_code (nullable) is None
+        # and __fields_set__ contains the field
+        if self.previous_valuation_point_code is None and "previous_valuation_point_code" in self.__fields_set__:
+            _dict['previousValuationPointCode'] = None
+
         # set to None if links (nullable) is None
         # and __fields_set__ contains the field
         if self.links is None and "links" in self.__fields_set__:
@@ -136,6 +148,8 @@ class ValuationPointDataResponse(BaseModel):
             )
             if obj.get("shareClassData") is not None
             else None,
+            "valuation_point_code": obj.get("valuationPointCode"),
+            "previous_valuation_point_code": obj.get("previousValuationPointCode"),
             "links": [Link.from_dict(_item) for _item in obj.get("links")] if obj.get("links") is not None else None
         })
         return _obj

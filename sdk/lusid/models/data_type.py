@@ -24,6 +24,7 @@ from lusid.models.i_unit_definition_dto import IUnitDefinitionDto
 from lusid.models.link import Link
 from lusid.models.reference_data import ReferenceData
 from lusid.models.resource_id import ResourceId
+from lusid.models.staged_modifications_info import StagedModificationsInfo
 from lusid.models.version import Version
 
 class DataType(BaseModel):
@@ -41,8 +42,9 @@ class DataType(BaseModel):
     reference_data: Optional[ReferenceData] = Field(None, alias="referenceData")
     version: Optional[Version] = None
     href: Optional[StrictStr] = Field(None, description="The specific Uniform Resource Identifier (URI) for this resource at the requested effective and asAt datetime.")
+    staged_modifications: Optional[StagedModificationsInfo] = Field(None, alias="stagedModifications")
     links: Optional[conlist(Link)] = None
-    __properties = ["typeValueRange", "id", "displayName", "description", "valueType", "acceptableValues", "unitSchema", "acceptableUnits", "referenceData", "version", "href", "links"]
+    __properties = ["typeValueRange", "id", "displayName", "description", "valueType", "acceptableValues", "unitSchema", "acceptableUnits", "referenceData", "version", "href", "stagedModifications", "links"]
 
     @validator('type_value_range')
     def type_value_range_validate_enum(cls, value):
@@ -108,6 +110,9 @@ class DataType(BaseModel):
         # override the default output from pydantic by calling `to_dict()` of version
         if self.version:
             _dict['version'] = self.version.to_dict()
+        # override the default output from pydantic by calling `to_dict()` of staged_modifications
+        if self.staged_modifications:
+            _dict['stagedModifications'] = self.staged_modifications.to_dict()
         # override the default output from pydantic by calling `to_dict()` of each item in links (list)
         _items = []
         if self.links:
@@ -158,6 +163,7 @@ class DataType(BaseModel):
             "reference_data": ReferenceData.from_dict(obj.get("referenceData")) if obj.get("referenceData") is not None else None,
             "version": Version.from_dict(obj.get("version")) if obj.get("version") is not None else None,
             "href": obj.get("href"),
+            "staged_modifications": StagedModificationsInfo.from_dict(obj.get("stagedModifications")) if obj.get("stagedModifications") is not None else None,
             "links": [Link.from_dict(_item) for _item in obj.get("links")] if obj.get("links") is not None else None
         })
         return _obj

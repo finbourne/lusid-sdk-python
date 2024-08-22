@@ -20,6 +20,7 @@ import json
 
 from typing import Any, Dict, List, Optional
 from pydantic.v1 import BaseModel, Field, StrictStr, conlist, constr
+from lusid.models.link import Link
 from lusid.models.model_property import ModelProperty
 from lusid.models.resource_id import ResourceId
 from lusid.models.version import Version
@@ -36,7 +37,8 @@ class Calendar(BaseModel):
     source_provider: constr(strict=True, min_length=1) = Field(..., alias="sourceProvider")
     properties: conlist(ModelProperty) = Field(...)
     version: Optional[Version] = None
-    __properties = ["href", "id", "type", "weekendMask", "sourceProvider", "properties", "version"]
+    links: Optional[conlist(Link)] = None
+    __properties = ["href", "id", "type", "weekendMask", "sourceProvider", "properties", "version", "links"]
 
     class Config:
         """Pydantic configuration"""
@@ -78,10 +80,22 @@ class Calendar(BaseModel):
         # override the default output from pydantic by calling `to_dict()` of version
         if self.version:
             _dict['version'] = self.version.to_dict()
+        # override the default output from pydantic by calling `to_dict()` of each item in links (list)
+        _items = []
+        if self.links:
+            for _item in self.links:
+                if _item:
+                    _items.append(_item.to_dict())
+            _dict['links'] = _items
         # set to None if href (nullable) is None
         # and __fields_set__ contains the field
         if self.href is None and "href" in self.__fields_set__:
             _dict['href'] = None
+
+        # set to None if links (nullable) is None
+        # and __fields_set__ contains the field
+        if self.links is None and "links" in self.__fields_set__:
+            _dict['links'] = None
 
         return _dict
 
@@ -101,6 +115,7 @@ class Calendar(BaseModel):
             "weekend_mask": WeekendMask.from_dict(obj.get("weekendMask")) if obj.get("weekendMask") is not None else None,
             "source_provider": obj.get("sourceProvider"),
             "properties": [ModelProperty.from_dict(_item) for _item in obj.get("properties")] if obj.get("properties") is not None else None,
-            "version": Version.from_dict(obj.get("version")) if obj.get("version") is not None else None
+            "version": Version.from_dict(obj.get("version")) if obj.get("version") is not None else None,
+            "links": [Link.from_dict(_item) for _item in obj.get("links")] if obj.get("links") is not None else None
         })
         return _obj

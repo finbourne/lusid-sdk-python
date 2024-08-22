@@ -21,6 +21,7 @@ import json
 from typing import Any, Dict, List, Optional
 from pydantic.v1 import BaseModel, Field, StrictStr, conlist, constr
 from lusid.models.custom_entity_field_definition import CustomEntityFieldDefinition
+from lusid.models.link import Link
 from lusid.models.version import Version
 
 class CustomEntityType(BaseModel):
@@ -34,7 +35,8 @@ class CustomEntityType(BaseModel):
     entity_type: constr(strict=True, min_length=1) = Field(..., alias="entityType", description="The identifier for the custom entity type, derived from the “entityTypeName” provided on creation.")
     field_schema: conlist(CustomEntityFieldDefinition) = Field(..., alias="fieldSchema", description="The description of the fields on the custom entity type.")
     version: Version = Field(...)
-    __properties = ["href", "entityTypeName", "displayName", "description", "entityType", "fieldSchema", "version"]
+    links: Optional[conlist(Link)] = None
+    __properties = ["href", "entityTypeName", "displayName", "description", "entityType", "fieldSchema", "version", "links"]
 
     class Config:
         """Pydantic configuration"""
@@ -70,6 +72,13 @@ class CustomEntityType(BaseModel):
         # override the default output from pydantic by calling `to_dict()` of version
         if self.version:
             _dict['version'] = self.version.to_dict()
+        # override the default output from pydantic by calling `to_dict()` of each item in links (list)
+        _items = []
+        if self.links:
+            for _item in self.links:
+                if _item:
+                    _items.append(_item.to_dict())
+            _dict['links'] = _items
         # set to None if href (nullable) is None
         # and __fields_set__ contains the field
         if self.href is None and "href" in self.__fields_set__:
@@ -79,6 +88,11 @@ class CustomEntityType(BaseModel):
         # and __fields_set__ contains the field
         if self.description is None and "description" in self.__fields_set__:
             _dict['description'] = None
+
+        # set to None if links (nullable) is None
+        # and __fields_set__ contains the field
+        if self.links is None and "links" in self.__fields_set__:
+            _dict['links'] = None
 
         return _dict
 
@@ -98,6 +112,7 @@ class CustomEntityType(BaseModel):
             "description": obj.get("description"),
             "entity_type": obj.get("entityType"),
             "field_schema": [CustomEntityFieldDefinition.from_dict(_item) for _item in obj.get("fieldSchema")] if obj.get("fieldSchema") is not None else None,
-            "version": Version.from_dict(obj.get("version")) if obj.get("version") is not None else None
+            "version": Version.from_dict(obj.get("version")) if obj.get("version") is not None else None,
+            "links": [Link.from_dict(_item) for _item in obj.get("links")] if obj.get("links") is not None else None
         })
         return _obj
