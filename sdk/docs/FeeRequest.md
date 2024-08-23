@@ -15,7 +15,7 @@ Name | Type | Description | Notes
 **total_annual_accrual_amount** | **float** | The total annual accrued amount for the Fee. (TotalAnnualAccrualAmount and CalculationBase cannot both be present) | [optional] 
 **fee_rate_percentage** | **float** | The fee rate percentage. (Required when CalculationBase is present and not compatible with TotalAnnualAccrualAmount) | [optional] 
 **payable_frequency** | **str** | The payable frequency for the Fee; &#39;Annually&#39;, &#39;Quarterly&#39; or &#39;Monthly&#39;. | 
-**business_day_convention** | **str** | The business day convention to use for Fee calculations on weekends. | 
+**business_day_convention** | **str** | The business day convention to use for Fee calculations on weekends. Supported string values are: [Previous, P, Following, F]. | 
 **start_date** | **datetime** | The start date of the Fee. | 
 **end_date** | **datetime** | The end date of the Fee. | [optional] 
 **anchor_date** | [**DayMonth**](DayMonth.md) |  | [optional] 

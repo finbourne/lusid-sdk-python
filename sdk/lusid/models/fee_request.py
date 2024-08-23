@@ -39,7 +39,7 @@ class FeeRequest(BaseModel):
     total_annual_accrual_amount: Optional[Union[StrictFloat, StrictInt]] = Field(None, alias="totalAnnualAccrualAmount", description="The total annual accrued amount for the Fee. (TotalAnnualAccrualAmount and CalculationBase cannot both be present)")
     fee_rate_percentage: Optional[Union[StrictFloat, StrictInt]] = Field(None, alias="feeRatePercentage", description="The fee rate percentage. (Required when CalculationBase is present and not compatible with TotalAnnualAccrualAmount)")
     payable_frequency: constr(strict=True, min_length=1) = Field(..., alias="payableFrequency", description="The payable frequency for the Fee; 'Annually', 'Quarterly' or 'Monthly'.")
-    business_day_convention: constr(strict=True, min_length=1) = Field(..., alias="businessDayConvention", description="The business day convention to use for Fee calculations on weekends.")
+    business_day_convention: constr(strict=True, min_length=1) = Field(..., alias="businessDayConvention", description="The business day convention to use for Fee calculations on weekends. Supported string values are: [Previous, P, Following, F].")
     start_date: datetime = Field(..., alias="startDate", description="The start date of the Fee.")
     end_date: Optional[datetime] = Field(None, alias="endDate", description="The end date of the Fee.")
     anchor_date: Optional[DayMonth] = Field(None, alias="anchorDate")

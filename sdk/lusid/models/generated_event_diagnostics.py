@@ -18,17 +18,18 @@ import re  # noqa: F401
 import json
 
 
-from typing import Any, Dict
-from pydantic.v1 import BaseModel, Field, constr
+from typing import Any, Dict, List
+from pydantic.v1 import BaseModel, Field, StrictStr, conlist, constr
 
-class ActionId(BaseModel):
+class GeneratedEventDiagnostics(BaseModel):
     """
-    ActionId
+    Represents a set of diagnostics per generatedEvent, where applicable.  # noqa: E501
     """
-    scope: constr(strict=True, max_length=100, min_length=3) = Field(...)
-    activity: constr(strict=True, max_length=25, min_length=3) = Field(...)
-    entity: constr(strict=True, max_length=40, min_length=3) = Field(...)
-    __properties = ["scope", "activity", "entity"]
+    instrument_event_id: constr(strict=True, min_length=1) = Field(..., alias="instrumentEventId")
+    type: constr(strict=True, min_length=1) = Field(...)
+    detail: constr(strict=True, min_length=1) = Field(...)
+    error_details: conlist(StrictStr) = Field(..., alias="errorDetails")
+    __properties = ["instrumentEventId", "type", "detail", "errorDetails"]
 
     class Config:
         """Pydantic configuration"""
@@ -44,8 +45,8 @@ class ActionId(BaseModel):
         return json.dumps(self.to_dict())
 
     @classmethod
-    def from_json(cls, json_str: str) -> ActionId:
-        """Create an instance of ActionId from a JSON string"""
+    def from_json(cls, json_str: str) -> GeneratedEventDiagnostics:
+        """Create an instance of GeneratedEventDiagnostics from a JSON string"""
         return cls.from_dict(json.loads(json_str))
 
     def to_dict(self):
@@ -57,17 +58,18 @@ class ActionId(BaseModel):
         return _dict
 
     @classmethod
-    def from_dict(cls, obj: dict) -> ActionId:
-        """Create an instance of ActionId from a dict"""
+    def from_dict(cls, obj: dict) -> GeneratedEventDiagnostics:
+        """Create an instance of GeneratedEventDiagnostics from a dict"""
         if obj is None:
             return None
 
         if not isinstance(obj, dict):
-            return ActionId.parse_obj(obj)
+            return GeneratedEventDiagnostics.parse_obj(obj)
 
-        _obj = ActionId.parse_obj({
-            "scope": obj.get("scope"),
-            "activity": obj.get("activity"),
-            "entity": obj.get("entity")
+        _obj = GeneratedEventDiagnostics.parse_obj({
+            "instrument_event_id": obj.get("instrumentEventId"),
+            "type": obj.get("type"),
+            "detail": obj.get("detail"),
+            "error_details": obj.get("errorDetails")
         })
         return _obj

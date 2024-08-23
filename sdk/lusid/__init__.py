@@ -464,6 +464,7 @@ from lusid.models.fx_vol_surface_data import FxVolSurfaceData
 from lusid.models.general_ledger_profile_mapping import GeneralLedgerProfileMapping
 from lusid.models.general_ledger_profile_request import GeneralLedgerProfileRequest
 from lusid.models.general_ledger_profile_response import GeneralLedgerProfileResponse
+from lusid.models.generated_event_diagnostics import GeneratedEventDiagnostics
 from lusid.models.get_cds_flow_conventions_response import GetCdsFlowConventionsResponse
 from lusid.models.get_complex_market_data_response import GetComplexMarketDataResponse
 from lusid.models.get_counterparty_agreement_response import GetCounterpartyAgreementResponse
@@ -991,6 +992,7 @@ from lusid.models.transaction_configuration_movement_data import TransactionConf
 from lusid.models.transaction_configuration_movement_data_request import TransactionConfigurationMovementDataRequest
 from lusid.models.transaction_configuration_type_alias import TransactionConfigurationTypeAlias
 from lusid.models.transaction_currency_and_amount import TransactionCurrencyAndAmount
+from lusid.models.transaction_diagnostics import TransactionDiagnostics
 from lusid.models.transaction_field_map import TransactionFieldMap
 from lusid.models.transaction_price import TransactionPrice
 from lusid.models.transaction_price_and_type import TransactionPriceAndType
@@ -1591,6 +1593,7 @@ __all__ = [
     "GeneralLedgerProfileMapping",
     "GeneralLedgerProfileRequest",
     "GeneralLedgerProfileResponse",
+    "GeneratedEventDiagnostics",
     "GetCdsFlowConventionsResponse",
     "GetComplexMarketDataResponse",
     "GetCounterpartyAgreementResponse",
@@ -2118,6 +2121,7 @@ __all__ = [
     "TransactionConfigurationMovementDataRequest",
     "TransactionConfigurationTypeAlias",
     "TransactionCurrencyAndAmount",
+    "TransactionDiagnostics",
     "TransactionFieldMap",
     "TransactionPrice",
     "TransactionPriceAndType",

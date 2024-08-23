@@ -20,9 +20,11 @@ import json
 
 from typing import Any, Dict, List, Optional
 from pydantic.v1 import BaseModel, Field, StrictInt, conlist, constr
+from lusid.models.generated_event_diagnostics import GeneratedEventDiagnostics
 from lusid.models.instrument_event_holder import InstrumentEventHolder
 from lusid.models.resource_id import ResourceId
 from lusid.models.transaction import Transaction
+from lusid.models.transaction_diagnostics import TransactionDiagnostics
 
 class ApplicableInstrumentEvent(BaseModel):
     """
@@ -36,10 +38,12 @@ class ApplicableInstrumentEvent(BaseModel):
     instrument_event_type: constr(strict=True, min_length=1) = Field(..., alias="instrumentEventType")
     instrument_event_id: constr(strict=True, min_length=1) = Field(..., alias="instrumentEventId")
     generated_event: Optional[InstrumentEventHolder] = Field(None, alias="generatedEvent")
+    generated_event_diagnostics: Optional[GeneratedEventDiagnostics] = Field(None, alias="generatedEventDiagnostics")
     loaded_event: Optional[InstrumentEventHolder] = Field(None, alias="loadedEvent")
     applied_instrument_event_instruction_id: constr(strict=True, min_length=1) = Field(..., alias="appliedInstrumentEventInstructionId")
     transactions: Optional[conlist(Transaction)] = None
-    __properties = ["portfolioId", "holdingId", "lusidInstrumentId", "instrumentScope", "instrumentType", "instrumentEventType", "instrumentEventId", "generatedEvent", "loadedEvent", "appliedInstrumentEventInstructionId", "transactions"]
+    transaction_diagnostics: Optional[TransactionDiagnostics] = Field(None, alias="transactionDiagnostics")
+    __properties = ["portfolioId", "holdingId", "lusidInstrumentId", "instrumentScope", "instrumentType", "instrumentEventType", "instrumentEventId", "generatedEvent", "generatedEventDiagnostics", "loadedEvent", "appliedInstrumentEventInstructionId", "transactions", "transactionDiagnostics"]
 
     class Config:
         """Pydantic configuration"""
@@ -71,6 +75,9 @@ class ApplicableInstrumentEvent(BaseModel):
         # override the default output from pydantic by calling `to_dict()` of generated_event
         if self.generated_event:
             _dict['generatedEvent'] = self.generated_event.to_dict()
+        # override the default output from pydantic by calling `to_dict()` of generated_event_diagnostics
+        if self.generated_event_diagnostics:
+            _dict['generatedEventDiagnostics'] = self.generated_event_diagnostics.to_dict()
         # override the default output from pydantic by calling `to_dict()` of loaded_event
         if self.loaded_event:
             _dict['loadedEvent'] = self.loaded_event.to_dict()
@@ -81,6 +88,9 @@ class ApplicableInstrumentEvent(BaseModel):
                 if _item:
                     _items.append(_item.to_dict())
             _dict['transactions'] = _items
+        # override the default output from pydantic by calling `to_dict()` of transaction_diagnostics
+        if self.transaction_diagnostics:
+            _dict['transactionDiagnostics'] = self.transaction_diagnostics.to_dict()
         # set to None if transactions (nullable) is None
         # and __fields_set__ contains the field
         if self.transactions is None and "transactions" in self.__fields_set__:
@@ -106,8 +116,10 @@ class ApplicableInstrumentEvent(BaseModel):
             "instrument_event_type": obj.get("instrumentEventType"),
             "instrument_event_id": obj.get("instrumentEventId"),
             "generated_event": InstrumentEventHolder.from_dict(obj.get("generatedEvent")) if obj.get("generatedEvent") is not None else None,
+            "generated_event_diagnostics": GeneratedEventDiagnostics.from_dict(obj.get("generatedEventDiagnostics")) if obj.get("generatedEventDiagnostics") is not None else None,
             "loaded_event": InstrumentEventHolder.from_dict(obj.get("loadedEvent")) if obj.get("loadedEvent") is not None else None,
             "applied_instrument_event_instruction_id": obj.get("appliedInstrumentEventInstructionId"),
-            "transactions": [Transaction.from_dict(_item) for _item in obj.get("transactions")] if obj.get("transactions") is not None else None
+            "transactions": [Transaction.from_dict(_item) for _item in obj.get("transactions")] if obj.get("transactions") is not None else None,
+            "transaction_diagnostics": TransactionDiagnostics.from_dict(obj.get("transactionDiagnostics")) if obj.get("transactionDiagnostics") is not None else None
         })
         return _obj
