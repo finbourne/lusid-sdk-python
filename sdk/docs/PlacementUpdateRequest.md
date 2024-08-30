@@ -6,7 +6,7 @@ A request to create or update a Placement.
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **id** | [**ResourceId**](ResourceId.md) |  | 
-**quantity** | **float** | The quantity of given instrument ordered. | 
+**quantity** | **float** | The quantity of given instrument ordered. | [optional] 
 **properties** | [**Dict[str, PerpetualProperty]**](PerpetualProperty.md) | Client-defined properties associated with this placement. | [optional] 
 **counterparty** | **str** | Optionally specifies the market entity this placement is placed with. | [optional] 
 **execution_system** | **str** | Optionally specifies the execution system in use. | [optional] 

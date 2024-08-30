@@ -221,6 +221,8 @@ Class | Method | HTTP request | Description
 *FundsApi* | [**upsert_diary_entry_type_valuation_point**](docs/FundsApi.md#upsert_diary_entry_type_valuation_point) | **POST** /api/funds/{scope}/{code}/valuationpoints | [EXPERIMENTAL] UpsertDiaryEntryTypeValuationPoint: Upsert Valuation Point.
 *FundsApi* | [**upsert_fee_properties**](docs/FundsApi.md#upsert_fee_properties) | **POST** /api/funds/{scope}/{code}/fees/{feeCode}/properties/$upsert | [EXPERIMENTAL] UpsertFeeProperties: Upsert Fee properties.
 *FundsApi* | [**upsert_fund_properties**](docs/FundsApi.md#upsert_fund_properties) | **POST** /api/funds/{scope}/{code}/properties/$upsert | [EXPERIMENTAL] UpsertFundProperties: Upsert Fund properties.
+*GroupReconciliationsApi* | [**create_comparison_ruleset**](docs/GroupReconciliationsApi.md#create_comparison_ruleset) | **POST** /api/reconciliations/comparisonrulesets | [EXPERIMENTAL] CreateComparisonRuleset: Create a Group Reconciliation Comparison Ruleset
+*GroupReconciliationsApi* | [**get_comparison_ruleset**](docs/GroupReconciliationsApi.md#get_comparison_ruleset) | **GET** /api/reconciliations/comparisonrulesets/{scope}/{code} | [EXPERIMENTAL] GetComparisonRuleset: Get a single Group Reconciliation Comparison Ruleset by scope and code
 *InstrumentEventTypesApi* | [**create_transaction_template**](docs/InstrumentEventTypesApi.md#create_transaction_template) | **POST** /api/instrumenteventtypes/{instrumentEventType}/transactiontemplates/{instrumentType}/{scope} | [EXPERIMENTAL] CreateTransactionTemplate: Create Transaction Template
 *InstrumentEventTypesApi* | [**delete_transaction_template**](docs/InstrumentEventTypesApi.md#delete_transaction_template) | **DELETE** /api/instrumenteventtypes/{instrumentEventType}/transactiontemplates/{instrumentType}/{scope} | [EXPERIMENTAL] DeleteTransactionTemplate: Delete Transaction Template
 *InstrumentEventTypesApi* | [**get_transaction_template**](docs/InstrumentEventTypesApi.md#get_transaction_template) | **GET** /api/instrumenteventtypes/{instrumentEventType}/transactiontemplates/{instrumentType}/{scope} | [EXPERIMENTAL] GetTransactionTemplate: Get Transaction Template
@@ -771,6 +773,7 @@ Class | Method | HTTP request | Description
  - [CreateDateRequest](docs/CreateDateRequest.md)
  - [CreateDerivedPropertyDefinitionRequest](docs/CreateDerivedPropertyDefinitionRequest.md)
  - [CreateDerivedTransactionPortfolioRequest](docs/CreateDerivedTransactionPortfolioRequest.md)
+ - [CreateGroupReconciliationComparisonRulesetRequest](docs/CreateGroupReconciliationComparisonRulesetRequest.md)
  - [CreatePortfolioDetails](docs/CreatePortfolioDetails.md)
  - [CreatePortfolioGroupRequest](docs/CreatePortfolioGroupRequest.md)
  - [CreatePropertyDefinitionRequest](docs/CreatePropertyDefinitionRequest.md)
@@ -910,6 +913,7 @@ Class | Method | HTTP request | Description
  - [FundConfiguration](docs/FundConfiguration.md)
  - [FundConfigurationProperties](docs/FundConfigurationProperties.md)
  - [FundConfigurationRequest](docs/FundConfigurationRequest.md)
+ - [FundDetails](docs/FundDetails.md)
  - [FundPnlBreakdown](docs/FundPnlBreakdown.md)
  - [FundPreviousNAV](docs/FundPreviousNAV.md)
  - [FundProperties](docs/FundProperties.md)
@@ -965,6 +969,13 @@ Class | Method | HTTP request | Description
  - [GroupFilterStep](docs/GroupFilterStep.md)
  - [GroupFilterStepRequest](docs/GroupFilterStepRequest.md)
  - [GroupOfMarketDataKeyRules](docs/GroupOfMarketDataKeyRules.md)
+ - [GroupReconciliationAggregateAttributeRule](docs/GroupReconciliationAggregateAttributeRule.md)
+ - [GroupReconciliationAggregateComparisonRuleOperand](docs/GroupReconciliationAggregateComparisonRuleOperand.md)
+ - [GroupReconciliationComparisonRuleStringValueMap](docs/GroupReconciliationComparisonRuleStringValueMap.md)
+ - [GroupReconciliationComparisonRuleTolerance](docs/GroupReconciliationComparisonRuleTolerance.md)
+ - [GroupReconciliationComparisonRuleset](docs/GroupReconciliationComparisonRuleset.md)
+ - [GroupReconciliationCoreAttributeRule](docs/GroupReconciliationCoreAttributeRule.md)
+ - [GroupReconciliationCoreComparisonRuleOperand](docs/GroupReconciliationCoreComparisonRuleOperand.md)
  - [GroupedResultOfAddressKey](docs/GroupedResultOfAddressKey.md)
  - [HoldingAdjustment](docs/HoldingAdjustment.md)
  - [HoldingAdjustmentWithDate](docs/HoldingAdjustmentWithDate.md)

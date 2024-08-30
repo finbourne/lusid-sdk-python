@@ -44,6 +44,7 @@ from lusid.api.executions_api import ExecutionsApi
 from lusid.api.fee_types_api import FeeTypesApi
 from lusid.api.fund_configurations_api import FundConfigurationsApi
 from lusid.api.funds_api import FundsApi
+from lusid.api.group_reconciliations_api import GroupReconciliationsApi
 from lusid.api.instrument_event_types_api import InstrumentEventTypesApi
 from lusid.api.instrument_events_api import InstrumentEventsApi
 from lusid.api.instruments_api import InstrumentsApi
@@ -293,6 +294,7 @@ from lusid.models.create_data_type_request import CreateDataTypeRequest
 from lusid.models.create_date_request import CreateDateRequest
 from lusid.models.create_derived_property_definition_request import CreateDerivedPropertyDefinitionRequest
 from lusid.models.create_derived_transaction_portfolio_request import CreateDerivedTransactionPortfolioRequest
+from lusid.models.create_group_reconciliation_comparison_ruleset_request import CreateGroupReconciliationComparisonRulesetRequest
 from lusid.models.create_portfolio_details import CreatePortfolioDetails
 from lusid.models.create_portfolio_group_request import CreatePortfolioGroupRequest
 from lusid.models.create_property_definition_request import CreatePropertyDefinitionRequest
@@ -432,6 +434,7 @@ from lusid.models.fund_amount import FundAmount
 from lusid.models.fund_configuration import FundConfiguration
 from lusid.models.fund_configuration_properties import FundConfigurationProperties
 from lusid.models.fund_configuration_request import FundConfigurationRequest
+from lusid.models.fund_details import FundDetails
 from lusid.models.fund_pnl_breakdown import FundPnlBreakdown
 from lusid.models.fund_previous_nav import FundPreviousNAV
 from lusid.models.fund_properties import FundProperties
@@ -487,6 +490,13 @@ from lusid.models.group_filter_predicate_compliance_parameter import GroupFilter
 from lusid.models.group_filter_step import GroupFilterStep
 from lusid.models.group_filter_step_request import GroupFilterStepRequest
 from lusid.models.group_of_market_data_key_rules import GroupOfMarketDataKeyRules
+from lusid.models.group_reconciliation_aggregate_attribute_rule import GroupReconciliationAggregateAttributeRule
+from lusid.models.group_reconciliation_aggregate_comparison_rule_operand import GroupReconciliationAggregateComparisonRuleOperand
+from lusid.models.group_reconciliation_comparison_rule_string_value_map import GroupReconciliationComparisonRuleStringValueMap
+from lusid.models.group_reconciliation_comparison_rule_tolerance import GroupReconciliationComparisonRuleTolerance
+from lusid.models.group_reconciliation_comparison_ruleset import GroupReconciliationComparisonRuleset
+from lusid.models.group_reconciliation_core_attribute_rule import GroupReconciliationCoreAttributeRule
+from lusid.models.group_reconciliation_core_comparison_rule_operand import GroupReconciliationCoreComparisonRuleOperand
 from lusid.models.grouped_result_of_address_key import GroupedResultOfAddressKey
 from lusid.models.holding_adjustment import HoldingAdjustment
 from lusid.models.holding_adjustment_with_date import HoldingAdjustmentWithDate
@@ -1183,6 +1193,7 @@ __all__ = [
     "FeeTypesApi",
     "FundConfigurationsApi",
     "FundsApi",
+    "GroupReconciliationsApi",
     "InstrumentEventTypesApi",
     "InstrumentEventsApi",
     "InstrumentsApi",
@@ -1422,6 +1433,7 @@ __all__ = [
     "CreateDateRequest",
     "CreateDerivedPropertyDefinitionRequest",
     "CreateDerivedTransactionPortfolioRequest",
+    "CreateGroupReconciliationComparisonRulesetRequest",
     "CreatePortfolioDetails",
     "CreatePortfolioGroupRequest",
     "CreatePropertyDefinitionRequest",
@@ -1561,6 +1573,7 @@ __all__ = [
     "FundConfiguration",
     "FundConfigurationProperties",
     "FundConfigurationRequest",
+    "FundDetails",
     "FundPnlBreakdown",
     "FundPreviousNAV",
     "FundProperties",
@@ -1616,6 +1629,13 @@ __all__ = [
     "GroupFilterStep",
     "GroupFilterStepRequest",
     "GroupOfMarketDataKeyRules",
+    "GroupReconciliationAggregateAttributeRule",
+    "GroupReconciliationAggregateComparisonRuleOperand",
+    "GroupReconciliationComparisonRuleStringValueMap",
+    "GroupReconciliationComparisonRuleTolerance",
+    "GroupReconciliationComparisonRuleset",
+    "GroupReconciliationCoreAttributeRule",
+    "GroupReconciliationCoreComparisonRuleOperand",
     "GroupedResultOfAddressKey",
     "HoldingAdjustment",
     "HoldingAdjustmentWithDate",

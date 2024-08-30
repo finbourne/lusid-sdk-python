@@ -28,7 +28,7 @@ class PlacementUpdateRequest(BaseModel):
     A request to create or update a Placement.  # noqa: E501
     """
     id: ResourceId = Field(...)
-    quantity: Union[StrictFloat, StrictInt] = Field(..., description="The quantity of given instrument ordered.")
+    quantity: Optional[Union[StrictFloat, StrictInt]] = Field(None, description="The quantity of given instrument ordered.")
     properties: Optional[Dict[str, PerpetualProperty]] = Field(None, description="Client-defined properties associated with this placement.")
     counterparty: Optional[StrictStr] = Field(None, description="Optionally specifies the market entity this placement is placed with.")
     execution_system: Optional[constr(strict=True, max_length=256, min_length=1)] = Field(None, alias="executionSystem", description="Optionally specifies the execution system in use.")
@@ -69,6 +69,11 @@ class PlacementUpdateRequest(BaseModel):
                 if self.properties[_key]:
                     _field_dict[_key] = self.properties[_key].to_dict()
             _dict['properties'] = _field_dict
+        # set to None if quantity (nullable) is None
+        # and __fields_set__ contains the field
+        if self.quantity is None and "quantity" in self.__fields_set__:
+            _dict['quantity'] = None
+
         # set to None if properties (nullable) is None
         # and __fields_set__ contains the field
         if self.properties is None and "properties" in self.__fields_set__:

@@ -21,6 +21,7 @@ import json
 from typing import Any, Dict, List, Optional, Union
 from pydantic.v1 import BaseModel, Field, StrictFloat, StrictInt, StrictStr, conlist, constr
 from lusid.models.fee_accrual import FeeAccrual
+from lusid.models.fund_details import FundDetails
 from lusid.models.fund_valuation_point_data import FundValuationPointData
 from lusid.models.link import Link
 from lusid.models.share_class_data import ShareClassData
@@ -39,12 +40,13 @@ class ValuationPointDataResponse(BaseModel):
     fees: Dict[str, FeeAccrual] = Field(..., description="DEPRECATED. Bucket of detail for any 'Fees' that have been charged in the selected period.")
     nav: Union[StrictFloat, StrictInt] = Field(..., description="DEPRECATED. The Net Asset Value of the Fund at the Period end. This represents the GAV with any fees applied in the period.")
     previous_nav: Union[StrictFloat, StrictInt] = Field(..., alias="previousNav", description="DEPRECATED. The Net Asset Value of the Fund at the End of the last Period.")
+    fund_details: FundDetails = Field(..., alias="fundDetails")
     fund_valuation_point_data: FundValuationPointData = Field(..., alias="fundValuationPointData")
     share_class_data: Dict[str, ShareClassData] = Field(..., alias="shareClassData", description="The data for all share classes in fund. Share classes are identified by their short codes.")
     valuation_point_code: Optional[StrictStr] = Field(None, alias="valuationPointCode", description="The code of the valuation point.")
     previous_valuation_point_code: Optional[StrictStr] = Field(None, alias="previousValuationPointCode", description="The code of the previous valuation point.")
     links: Optional[conlist(Link)] = None
-    __properties = ["href", "type", "status", "backout", "dealing", "pnL", "gav", "fees", "nav", "previousNav", "fundValuationPointData", "shareClassData", "valuationPointCode", "previousValuationPointCode", "links"]
+    __properties = ["href", "type", "status", "backout", "dealing", "pnL", "gav", "fees", "nav", "previousNav", "fundDetails", "fundValuationPointData", "shareClassData", "valuationPointCode", "previousValuationPointCode", "links"]
 
     class Config:
         """Pydantic configuration"""
@@ -77,6 +79,9 @@ class ValuationPointDataResponse(BaseModel):
                 if self.fees[_key]:
                     _field_dict[_key] = self.fees[_key].to_dict()
             _dict['fees'] = _field_dict
+        # override the default output from pydantic by calling `to_dict()` of fund_details
+        if self.fund_details:
+            _dict['fundDetails'] = self.fund_details.to_dict()
         # override the default output from pydantic by calling `to_dict()` of fund_valuation_point_data
         if self.fund_valuation_point_data:
             _dict['fundValuationPointData'] = self.fund_valuation_point_data.to_dict()
@@ -141,6 +146,7 @@ class ValuationPointDataResponse(BaseModel):
             else None,
             "nav": obj.get("nav"),
             "previous_nav": obj.get("previousNav"),
+            "fund_details": FundDetails.from_dict(obj.get("fundDetails")) if obj.get("fundDetails") is not None else None,
             "fund_valuation_point_data": FundValuationPointData.from_dict(obj.get("fundValuationPointData")) if obj.get("fundValuationPointData") is not None else None,
             "share_class_data": dict(
                 (_k, ShareClassData.from_dict(_v))

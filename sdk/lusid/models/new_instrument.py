@@ -28,7 +28,8 @@ class NewInstrument(BaseModel):
     instrument_identifiers: Dict[str, StrictStr] = Field(..., alias="instrumentIdentifiers", description="Unique instrument identifiers.")
     lusid_instrument_id: Optional[StrictStr] = Field(None, alias="lusidInstrumentId", description="LUSID's internal unique instrument identifier, resolved from the instrument identifiers.")
     instrument_scope: Optional[StrictStr] = Field(None, alias="instrumentScope", description="The scope in which the instrument lies, resolved from the instrument identifiers.")
-    __properties = ["instrumentIdentifiers", "lusidInstrumentId", "instrumentScope"]
+    dom_ccy: Optional[StrictStr] = Field(None, alias="domCcy", description="The domestic currency of the instrument, resolved from the instrument identifiers.")
+    __properties = ["instrumentIdentifiers", "lusidInstrumentId", "instrumentScope", "domCcy"]
 
     class Config:
         """Pydantic configuration"""
@@ -54,6 +55,7 @@ class NewInstrument(BaseModel):
                           exclude={
                             "lusid_instrument_id",
                             "instrument_scope",
+                            "dom_ccy",
                           },
                           exclude_none=True)
         # set to None if lusid_instrument_id (nullable) is None
@@ -65,6 +67,11 @@ class NewInstrument(BaseModel):
         # and __fields_set__ contains the field
         if self.instrument_scope is None and "instrument_scope" in self.__fields_set__:
             _dict['instrumentScope'] = None
+
+        # set to None if dom_ccy (nullable) is None
+        # and __fields_set__ contains the field
+        if self.dom_ccy is None and "dom_ccy" in self.__fields_set__:
+            _dict['domCcy'] = None
 
         return _dict
 
@@ -80,6 +87,7 @@ class NewInstrument(BaseModel):
         _obj = NewInstrument.parse_obj({
             "instrument_identifiers": obj.get("instrumentIdentifiers"),
             "lusid_instrument_id": obj.get("lusidInstrumentId"),
-            "instrument_scope": obj.get("instrumentScope")
+            "instrument_scope": obj.get("instrumentScope"),
+            "dom_ccy": obj.get("domCcy")
         })
         return _obj
