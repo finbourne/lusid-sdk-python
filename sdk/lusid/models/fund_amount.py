@@ -25,7 +25,7 @@ class FundAmount(BaseModel):
     """
     FundAmount
     """
-    value: Optional[Union[StrictFloat, StrictInt]] = Field(None, description="The value of the amount.")
+    value: Optional[Union[StrictFloat, StrictInt]] = Field(None, description="The value of the amount in the fund currency.")
     __properties = ["value"]
 
     class Config:

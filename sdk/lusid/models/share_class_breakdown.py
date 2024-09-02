@@ -21,7 +21,6 @@ import json
 from typing import Any, Dict, Optional, Union
 from pydantic.v1 import BaseModel, Field, StrictFloat, StrictInt
 from lusid.models.fee_accrual import FeeAccrual
-from lusid.models.multi_currency_amounts import MultiCurrencyAmounts
 from lusid.models.previous_share_class_breakdown import PreviousShareClassBreakdown
 from lusid.models.share_class_amount import ShareClassAmount
 from lusid.models.share_class_dealing_breakdown import ShareClassDealingBreakdown
@@ -35,9 +34,9 @@ class ShareClassBreakdown(BaseModel):
     back_out: Dict[str, ShareClassAmount] = Field(..., alias="backOut", description="Bucket of detail for the Valuation Point where data points have been 'backed out'.")
     dealing: ShareClassDealingBreakdown = Field(...)
     pn_l: ShareClassPnlBreakdown = Field(..., alias="pnL")
-    gav: MultiCurrencyAmounts = Field(...)
+    gav: ShareClassAmount = Field(...)
     fees: Dict[str, FeeAccrual] = Field(..., description="Bucket of detail for any 'Fees' that have been charged in the selected period.")
-    nav: MultiCurrencyAmounts = Field(...)
+    nav: ShareClassAmount = Field(...)
     unitisation: Optional[UnitisationData] = None
     miscellaneous: Optional[Dict[str, ShareClassAmount]] = Field(None, description="Not used directly by the LUSID engines but serves as a holding area for any custom derived data points that may be useful in, for example, fee calculations).")
     share_class_to_fund_fx_rate: Union[StrictFloat, StrictInt] = Field(..., alias="shareClassToFundFxRate", description="The fx rate from the Share Class currency to the fund currency at this valuation point.")
@@ -133,14 +132,14 @@ class ShareClassBreakdown(BaseModel):
             else None,
             "dealing": ShareClassDealingBreakdown.from_dict(obj.get("dealing")) if obj.get("dealing") is not None else None,
             "pn_l": ShareClassPnlBreakdown.from_dict(obj.get("pnL")) if obj.get("pnL") is not None else None,
-            "gav": MultiCurrencyAmounts.from_dict(obj.get("gav")) if obj.get("gav") is not None else None,
+            "gav": ShareClassAmount.from_dict(obj.get("gav")) if obj.get("gav") is not None else None,
             "fees": dict(
                 (_k, FeeAccrual.from_dict(_v))
                 for _k, _v in obj.get("fees").items()
             )
             if obj.get("fees") is not None
             else None,
-            "nav": MultiCurrencyAmounts.from_dict(obj.get("nav")) if obj.get("nav") is not None else None,
+            "nav": ShareClassAmount.from_dict(obj.get("nav")) if obj.get("nav") is not None else None,
             "unitisation": UnitisationData.from_dict(obj.get("unitisation")) if obj.get("unitisation") is not None else None,
             "miscellaneous": dict(
                 (_k, ShareClassAmount.from_dict(_v))

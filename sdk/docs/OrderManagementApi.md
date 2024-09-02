@@ -8,6 +8,7 @@ Method | HTTP request | Description
 [**cancel_orders**](OrderManagementApi.md#cancel_orders) | **POST** /api/ordermanagement/cancelorders | [EARLY ACCESS] CancelOrders: Cancel existing orders
 [**cancel_placements**](OrderManagementApi.md#cancel_placements) | **POST** /api/ordermanagement/$cancelplacements | [EARLY ACCESS] CancelPlacements: Cancel existing placements
 [**create_orders**](OrderManagementApi.md#create_orders) | **POST** /api/ordermanagement/createorders | [EARLY ACCESS] CreateOrders: Upsert a Block and associated orders
+[**get_order_history**](OrderManagementApi.md#get_order_history) | **GET** /api/ordermanagement/order/{scope}/{code}/$history | [EXPERIMENTAL] GetOrderHistory: Get the history of an order and related entity changes
 [**move_orders**](OrderManagementApi.md#move_orders) | **POST** /api/ordermanagement/moveorders | [EARLY ACCESS] MoveOrders: Move orders to new or existing block
 [**place_blocks**](OrderManagementApi.md#place_blocks) | **POST** /api/ordermanagement/placeblocks | [EARLY ACCESS] PlaceBlocks: Places blocks for a given list of placement requests.
 [**run_allocation_service**](OrderManagementApi.md#run_allocation_service) | **POST** /api/ordermanagement/allocate | [EXPERIMENTAL] RunAllocationService: Runs the Allocation Service
@@ -343,6 +344,89 @@ Name | Type | Description  | Notes
 |-------------|-------------|------------------|
 **201** | A collection of block and associated orders. |  -  |
 **400** | The details of the input related failure |  -  |
+**0** | Error response |  -  |
+
+[Back to top](#) &#8226; [Back to API list](../README.md#documentation-for-api-endpoints) &#8226; [Back to Model list](../README.md#documentation-for-models) &#8226; [Back to README](../README.md)
+
+# **get_order_history**
+> ResourceListOfEntityChangeItem get_order_history(scope, code)
+
+[EXPERIMENTAL] GetOrderHistory: Get the history of an order and related entity changes
+
+Get the changes that have happened to an order and related entities.
+
+### Example
+
+```python
+import asyncio
+from lusid.exceptions import ApiException
+from lusid.models import *
+from pprint import pprint
+from lusid import (
+    ApiClientFactory,
+    OrderManagementApi
+)
+
+async def main():
+
+    with open("secrets.json", "w") as file:
+        file.write('''
+{
+    "api":
+    {
+        "tokenUrl":"<your-token-url>",
+        "lusidUrl":"https://<your-domain>.lusid.com/api",
+        "username":"<your-username>",
+        "password":"<your-password>",
+        "clientId":"<your-client-id>",
+        "clientSecret":"<your-client-secret>"
+    }
+}''')
+
+    # Use the lusid ApiClientFactory to build Api instances with a configured api client
+    # By default this will read config from environment variables
+    # Then from a secrets.json file found in the current working directory
+    api_client_factory = ApiClientFactory()
+
+    # Enter a context with an instance of the ApiClientFactory to ensure the connection pool is closed after use
+    async with api_client_factory:
+        # Create an instance of the API class
+        api_instance = api_client_factory.build(OrderManagementApi)
+        scope = 'scope_example' # str | The scope of the order.
+        code = 'code_example' # str | The code of the order.
+
+        try:
+            # [EXPERIMENTAL] GetOrderHistory: Get the history of an order and related entity changes
+            api_response = await api_instance.get_order_history(scope, code)
+            pprint(api_response)
+        except ApiException as e:
+            print("Exception when calling OrderManagementApi->get_order_history: %s\n" % e)
+
+asyncio.run(main())
+```
+
+### Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **scope** | **str**| The scope of the order. | 
+ **code** | **str**| The code of the order. | 
+
+### Return type
+
+[**ResourceListOfEntityChangeItem**](ResourceListOfEntityChangeItem.md)
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: text/plain, application/json, text/json
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | The history of the specified order and related entities (changes that have been made to it). |  -  |
+**400** | The details of the input related failure |  -  |
+**404** | Order not found. |  -  |
 **0** | Error response |  -  |
 
 [Back to top](#) &#8226; [Back to API list](../README.md#documentation-for-api-endpoints) &#8226; [Back to Model list](../README.md#documentation-for-models) &#8226; [Back to README](../README.md)

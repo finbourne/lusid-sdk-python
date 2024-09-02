@@ -18,16 +18,16 @@ import re  # noqa: F401
 import json
 
 
-from typing import Any, Dict, Optional
-from pydantic.v1 import BaseModel
-from lusid.models.multi_currency_amounts import MultiCurrencyAmounts
+from typing import Any, Dict, Optional, Union
+from pydantic.v1 import BaseModel, Field, StrictFloat, StrictInt
 
 class ShareClassAmount(BaseModel):
     """
     ShareClassAmount
     """
-    value: Optional[MultiCurrencyAmounts] = None
-    __properties = ["value"]
+    fund_currency_amount: Optional[Union[StrictFloat, StrictInt]] = Field(None, alias="fundCurrencyAmount", description="The value of the amount in the fund currency.")
+    share_class_currency_amount: Optional[Union[StrictFloat, StrictInt]] = Field(None, alias="shareClassCurrencyAmount", description="The value of the amount in the share class currency.")
+    __properties = ["fundCurrencyAmount", "shareClassCurrencyAmount"]
 
     class Config:
         """Pydantic configuration"""
@@ -53,9 +53,6 @@ class ShareClassAmount(BaseModel):
                           exclude={
                           },
                           exclude_none=True)
-        # override the default output from pydantic by calling `to_dict()` of value
-        if self.value:
-            _dict['value'] = self.value.to_dict()
         return _dict
 
     @classmethod
@@ -68,6 +65,7 @@ class ShareClassAmount(BaseModel):
             return ShareClassAmount.parse_obj(obj)
 
         _obj = ShareClassAmount.parse_obj({
-            "value": MultiCurrencyAmounts.from_dict(obj.get("value")) if obj.get("value") is not None else None
+            "fund_currency_amount": obj.get("fundCurrencyAmount"),
+            "share_class_currency_amount": obj.get("shareClassCurrencyAmount")
         })
         return _obj

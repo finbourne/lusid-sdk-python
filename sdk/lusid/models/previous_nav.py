@@ -20,13 +20,13 @@ import json
 
 from typing import Any, Dict, Optional
 from pydantic.v1 import BaseModel
-from lusid.models.multi_currency_amounts import MultiCurrencyAmounts
+from lusid.models.share_class_amount import ShareClassAmount
 
 class PreviousNAV(BaseModel):
     """
     PreviousNAV
     """
-    amount: Optional[MultiCurrencyAmounts] = None
+    amount: Optional[ShareClassAmount] = None
     __properties = ["amount"]
 
     class Config:
@@ -68,6 +68,6 @@ class PreviousNAV(BaseModel):
             return PreviousNAV.parse_obj(obj)
 
         _obj = PreviousNAV.parse_obj({
-            "amount": MultiCurrencyAmounts.from_dict(obj.get("amount")) if obj.get("amount") is not None else None
+            "amount": ShareClassAmount.from_dict(obj.get("amount")) if obj.get("amount") is not None else None
         })
         return _obj

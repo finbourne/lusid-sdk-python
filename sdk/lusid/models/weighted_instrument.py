@@ -31,7 +31,8 @@ class WeightedInstrument(BaseModel):
     holding_identifier: Optional[constr(strict=True, max_length=256, min_length=0)] = Field(None, alias="holdingIdentifier", description="Identifier for the instrument.  For a single, unique trade or transaction this can be thought of as equivalent to the transaction identifier, or  a composite of the sub-holding keys for a regular sub-holding. When there are multiple transactions sharing the same underlying instrument  such as purchase of shares on multiple dates where tax implications are different this would not be the case.    In an inlined aggregation request if this is wanted to identify a line item, it can be specified in the set of aggregation keys given on the aggregation  request that accompanies the set of weighted instruments.")
     instrument: Optional[LusidInstrument] = None
     in_line_lookup_identifiers: Optional[WeightedInstrumentInLineLookupIdentifiers] = Field(None, alias="inLineLookupIdentifiers")
-    __properties = ["quantity", "holdingIdentifier", "instrument", "inLineLookupIdentifiers"]
+    instrument_scope: Optional[constr(strict=True, max_length=256, min_length=0)] = Field(None, alias="instrumentScope", description="The scope in which to resolve the instrument, if no inlined definition is provided.  If left empty, the default scope will be used.")
+    __properties = ["quantity", "holdingIdentifier", "instrument", "inLineLookupIdentifiers", "instrumentScope"]
 
     class Config:
         """Pydantic configuration"""
@@ -73,6 +74,11 @@ class WeightedInstrument(BaseModel):
         if self.in_line_lookup_identifiers is None and "in_line_lookup_identifiers" in self.__fields_set__:
             _dict['inLineLookupIdentifiers'] = None
 
+        # set to None if instrument_scope (nullable) is None
+        # and __fields_set__ contains the field
+        if self.instrument_scope is None and "instrument_scope" in self.__fields_set__:
+            _dict['instrumentScope'] = None
+
         return _dict
 
     @classmethod
@@ -88,6 +94,7 @@ class WeightedInstrument(BaseModel):
             "quantity": obj.get("quantity"),
             "holding_identifier": obj.get("holdingIdentifier"),
             "instrument": LusidInstrument.from_dict(obj.get("instrument")) if obj.get("instrument") is not None else None,
-            "in_line_lookup_identifiers": WeightedInstrumentInLineLookupIdentifiers.from_dict(obj.get("inLineLookupIdentifiers")) if obj.get("inLineLookupIdentifiers") is not None else None
+            "in_line_lookup_identifiers": WeightedInstrumentInLineLookupIdentifiers.from_dict(obj.get("inLineLookupIdentifiers")) if obj.get("inLineLookupIdentifiers") is not None else None,
+            "instrument_scope": obj.get("instrumentScope")
         })
         return _obj

@@ -29,7 +29,7 @@ class FuturesContractDetails(BaseModel):
     fgn_ccy: Optional[StrictStr] = Field(None, alias="fgnCcy", description="Currency of the underlying, for use with FX Futures")
     asset_class: Optional[StrictStr] = Field(None, alias="assetClass", description="The asset class of the underlying. Optional and will default to Unknown if not set.    Supported string (enumeration) values are: [InterestRates, FX, Inflation, Equities, Credit, Commodities, Money].")
     contract_code: constr(strict=True, min_length=1) = Field(..., alias="contractCode", description="The contract code used by the exchange, e.g. “CL” for Crude Oil, “ES” for E-mini SP 500, “FGBL” for Bund Futures, etc.")
-    contract_month: constr(strict=True, min_length=1) = Field(..., alias="contractMonth", description="Which month does the contract trade for.    Supported string (enumeration) values are: [F, G, H, J, K, M, N, Q, U, V, X, Z].")
+    contract_month: Optional[StrictStr] = Field(None, alias="contractMonth", description="Which month does the contract trade for.    Supported string (enumeration) values are: [F, G, H, J, K, M, N, Q, U, V, X, Z].")
     contract_size: Union[StrictFloat, StrictInt] = Field(..., alias="contractSize", description="Size of a single contract.")
     convention: Optional[StrictStr] = Field(None, description="If appropriate, the day count convention method used in pricing (rates futures).  For more information on day counts, see [knowledge base article KA-01798](https://support.lusid.com/knowledgebase/article/KA-01798)                Supported string (enumeration) values are: [Actual360, Act360, MoneyMarket, Actual365, Act365, Thirty360, ThirtyU360, Bond, ThirtyE360, EuroBond, ActualActual, ActAct, ActActIsda, ActActIsma, ActActIcma, OneOne, Act364, Act365F, Act365L, Act365_25, Act252, Bus252, NL360, NL365, ActActAFB, Act365Cad, ThirtyActIsda, Thirty365Isda, ThirtyEActIsda, ThirtyE360Isda, ThirtyE365Isda, ThirtyU360EOM].")
     country: Optional[StrictStr] = Field(None, description="Country (code) for the exchange.")
@@ -75,6 +75,11 @@ class FuturesContractDetails(BaseModel):
         # and __fields_set__ contains the field
         if self.asset_class is None and "asset_class" in self.__fields_set__:
             _dict['assetClass'] = None
+
+        # set to None if contract_month (nullable) is None
+        # and __fields_set__ contains the field
+        if self.contract_month is None and "contract_month" in self.__fields_set__:
+            _dict['contractMonth'] = None
 
         # set to None if convention (nullable) is None
         # and __fields_set__ contains the field

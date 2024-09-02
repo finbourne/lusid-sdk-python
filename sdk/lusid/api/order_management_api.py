@@ -36,6 +36,7 @@ from lusid.models.place_blocks_request import PlaceBlocksRequest
 from lusid.models.placement_update_request import PlacementUpdateRequest
 from lusid.models.resource_id import ResourceId
 from lusid.models.resource_list_of_block_and_orders import ResourceListOfBlockAndOrders
+from lusid.models.resource_list_of_entity_change_item import ResourceListOfEntityChangeItem
 from lusid.models.resource_list_of_moved_order_to_different_block_response import ResourceListOfMovedOrderToDifferentBlockResponse
 from lusid.models.resource_list_of_placement import ResourceListOfPlacement
 from lusid.models.update_orders_response import UpdateOrdersResponse
@@ -686,6 +687,166 @@ class OrderManagementApi:
 
         return self.api_client.call_api(
             '/api/ordermanagement/createorders', 'POST',
+            _path_params,
+            _query_params,
+            _header_params,
+            body=_body_params,
+            post_params=_form_params,
+            files=_files,
+            response_types_map=_response_types_map,
+            auth_settings=_auth_settings,
+            async_req=_params.get('async_req'),
+            _return_http_data_only=_params.get('_return_http_data_only'),  # noqa: E501
+            _preload_content=_params.get('_preload_content', True),
+            _request_timeout=_params.get('_request_timeout'),
+            collection_formats=_collection_formats,
+            _request_auth=_params.get('_request_auth'))
+
+    @overload
+    async def get_order_history(self, scope : Annotated[constr(strict=True, max_length=64, min_length=1), Field(..., description="The scope of the order.")], code : Annotated[constr(strict=True, max_length=64, min_length=1), Field(..., description="The code of the order.")], **kwargs) -> ResourceListOfEntityChangeItem:  # noqa: E501
+        ...
+
+    @overload
+    def get_order_history(self, scope : Annotated[constr(strict=True, max_length=64, min_length=1), Field(..., description="The scope of the order.")], code : Annotated[constr(strict=True, max_length=64, min_length=1), Field(..., description="The code of the order.")], async_req: Optional[bool]=True, **kwargs) -> ResourceListOfEntityChangeItem:  # noqa: E501
+        ...
+
+    @validate_arguments
+    def get_order_history(self, scope : Annotated[constr(strict=True, max_length=64, min_length=1), Field(..., description="The scope of the order.")], code : Annotated[constr(strict=True, max_length=64, min_length=1), Field(..., description="The code of the order.")], async_req: Optional[bool]=None, **kwargs) -> Union[ResourceListOfEntityChangeItem, Awaitable[ResourceListOfEntityChangeItem]]:  # noqa: E501
+        """[EXPERIMENTAL] GetOrderHistory: Get the history of an order and related entity changes  # noqa: E501
+
+        Get the changes that have happened to an order and related entities.  # noqa: E501
+        This method makes a synchronous HTTP request by default. To make an
+        asynchronous HTTP request, please pass async_req=True
+
+        >>> thread = api.get_order_history(scope, code, async_req=True)
+        >>> result = thread.get()
+
+        :param scope: The scope of the order. (required)
+        :type scope: str
+        :param code: The code of the order. (required)
+        :type code: str
+        :param async_req: Whether to execute the request asynchronously.
+        :type async_req: bool, optional
+        :param _request_timeout: timeout setting for this request.
+               If one number provided, it will be total request
+               timeout. It can also be a pair (tuple) of
+               (connection, read) timeouts.
+        :return: Returns the result object.
+                 If the method is called asynchronously,
+                 returns the request thread.
+        :rtype: ResourceListOfEntityChangeItem
+        """
+        kwargs['_return_http_data_only'] = True
+        if '_preload_content' in kwargs:
+            message = "Error! Please call the get_order_history_with_http_info method with `_preload_content` instead and obtain raw data from ApiResponse.raw_data"  # noqa: E501
+            raise ValueError(message)
+        if async_req is not None:
+            kwargs['async_req'] = async_req
+        return self.get_order_history_with_http_info(scope, code, **kwargs)  # noqa: E501
+
+    @validate_arguments
+    def get_order_history_with_http_info(self, scope : Annotated[constr(strict=True, max_length=64, min_length=1), Field(..., description="The scope of the order.")], code : Annotated[constr(strict=True, max_length=64, min_length=1), Field(..., description="The code of the order.")], **kwargs) -> ApiResponse:  # noqa: E501
+        """[EXPERIMENTAL] GetOrderHistory: Get the history of an order and related entity changes  # noqa: E501
+
+        Get the changes that have happened to an order and related entities.  # noqa: E501
+        This method makes a synchronous HTTP request by default. To make an
+        asynchronous HTTP request, please pass async_req=True
+
+        >>> thread = api.get_order_history_with_http_info(scope, code, async_req=True)
+        >>> result = thread.get()
+
+        :param scope: The scope of the order. (required)
+        :type scope: str
+        :param code: The code of the order. (required)
+        :type code: str
+        :param async_req: Whether to execute the request asynchronously.
+        :type async_req: bool, optional
+        :param _preload_content: if False, the ApiResponse.data will
+                                 be set to none and raw_data will store the
+                                 HTTP response body without reading/decoding.
+                                 Default is True.
+        :type _preload_content: bool, optional
+        :param _return_http_data_only: response data instead of ApiResponse
+                                       object with status code, headers, etc
+        :type _return_http_data_only: bool, optional
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :param _request_auth: set to override the auth_settings for an a single
+                              request; this effectively ignores the authentication
+                              in the spec for a single request.
+        :type _request_auth: dict, optional
+        :type _content_type: string, optional: force content-type for the request
+        :return: Returns the result object.
+                 If the method is called asynchronously,
+                 returns the request thread.
+        :rtype: tuple(ResourceListOfEntityChangeItem, status_code(int), headers(HTTPHeaderDict))
+        """
+
+        _params = locals()
+
+        _all_params = [
+            'scope',
+            'code'
+        ]
+        _all_params.extend(
+            [
+                'async_req',
+                '_return_http_data_only',
+                '_preload_content',
+                '_request_timeout',
+                '_request_auth',
+                '_content_type',
+                '_headers'
+            ]
+        )
+
+        # validate the arguments
+        for _key, _val in _params['kwargs'].items():
+            if _key not in _all_params:
+                raise ApiTypeError(
+                    "Got an unexpected keyword argument '%s'"
+                    " to method get_order_history" % _key
+                )
+            _params[_key] = _val
+        del _params['kwargs']
+
+        _collection_formats = {}
+
+        # process the path parameters
+        _path_params = {}
+        if _params['scope']:
+            _path_params['scope'] = _params['scope']
+
+        if _params['code']:
+            _path_params['code'] = _params['code']
+
+
+        # process the query parameters
+        _query_params = []
+        # process the header parameters
+        _header_params = dict(_params.get('_headers', {}))
+        # process the form parameters
+        _form_params = []
+        _files = {}
+        # process the body parameter
+        _body_params = None
+        # set the HTTP header `Accept`
+        _header_params['Accept'] = self.api_client.select_header_accept(
+            ['text/plain', 'application/json', 'text/json'])  # noqa: E501
+
+        # authentication setting
+        _auth_settings = ['oauth2']  # noqa: E501
+
+        _response_types_map = {
+            '200': "ResourceListOfEntityChangeItem",
+            '400': "LusidValidationProblemDetails",
+            '404': "str",
+        }
+
+        return self.api_client.call_api(
+            '/api/ordermanagement/order/{scope}/{code}/$history', 'GET',
             _path_params,
             _query_params,
             _header_params,
