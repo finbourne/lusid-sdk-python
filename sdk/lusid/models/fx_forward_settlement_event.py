@@ -37,15 +37,16 @@ class FxForwardSettlementEvent(InstrumentEvent):
     cash_flow_per_unit: Optional[Union[StrictFloat, StrictInt]] = Field(None, alias="cashFlowPerUnit", description="Optional.  Required if the event is an NDF (i.e. if IsNdf = true).  CashFlow per unit.  Paid in the SettlementCcy.")
     domestic_to_foreign_rate: Optional[Union[StrictFloat, StrictInt]] = Field(None, alias="domesticToForeignRate", description="Domestic currency to foreign currency FX rate.  Not required, only used to override quotes.")
     domestic_to_settlement_rate: Optional[Union[StrictFloat, StrictInt]] = Field(None, alias="domesticToSettlementRate", description="Domestic currency to settlement currency FX rate  Not required, only used to override quotes.")
-    instrument_event_type: StrictStr = Field(..., alias="instrumentEventType", description="The Type of Event. The available values are: TransitionEvent, InformationalEvent, OpenEvent, CloseEvent, StockSplitEvent, BondDefaultEvent, CashDividendEvent, AmortisationEvent, CashFlowEvent, ExerciseEvent, ResetEvent, TriggerEvent, RawVendorEvent, InformationalErrorEvent, BondCouponEvent, DividendReinvestmentEvent, AccumulationEvent, BondPrincipalEvent, DividendOptionEvent, MaturityEvent, FxForwardSettlementEvent, ExpiryEvent, ScripDividendEvent, StockDividendEvent, ReverseStockSplitEvent, CapitalDistributionEvent, SpinOffEvent, MergerEvent, FutureExpiryEvent, SwapCashFlowEvent, SwapPrincipalEvent")
+    foreign_to_settlement_rate: Optional[Union[StrictFloat, StrictInt]] = Field(None, alias="foreignToSettlementRate", description="Foreign currency to settlement currency FX rate  Not required, only used to override quotes.")
+    instrument_event_type: StrictStr = Field(..., alias="instrumentEventType", description="The Type of Event. The available values are: TransitionEvent, InformationalEvent, OpenEvent, CloseEvent, StockSplitEvent, BondDefaultEvent, CashDividendEvent, AmortisationEvent, CashFlowEvent, ExerciseEvent, ResetEvent, TriggerEvent, RawVendorEvent, InformationalErrorEvent, BondCouponEvent, DividendReinvestmentEvent, AccumulationEvent, BondPrincipalEvent, DividendOptionEvent, MaturityEvent, FxForwardSettlementEvent, ExpiryEvent, ScripDividendEvent, StockDividendEvent, ReverseStockSplitEvent, CapitalDistributionEvent, SpinOffEvent, MergerEvent, FutureExpiryEvent, SwapCashFlowEvent, SwapPrincipalEvent, CreditPremiumCashFlowEvent, CdsCreditEvent, CdxCreditEvent")
     additional_properties: Dict[str, Any] = {}
-    __properties = ["instrumentEventType", "maturityDate", "domAmountPerUnit", "domCcy", "fgnAmountPerUnit", "fgnCcy", "isNdf", "fixingDate", "settlementCcy", "cashFlowPerUnit", "domesticToForeignRate", "domesticToSettlementRate"]
+    __properties = ["instrumentEventType", "maturityDate", "domAmountPerUnit", "domCcy", "fgnAmountPerUnit", "fgnCcy", "isNdf", "fixingDate", "settlementCcy", "cashFlowPerUnit", "domesticToForeignRate", "domesticToSettlementRate", "foreignToSettlementRate"]
 
     @validator('instrument_event_type')
     def instrument_event_type_validate_enum(cls, value):
         """Validates the enum"""
-        if value not in ('TransitionEvent', 'InformationalEvent', 'OpenEvent', 'CloseEvent', 'StockSplitEvent', 'BondDefaultEvent', 'CashDividendEvent', 'AmortisationEvent', 'CashFlowEvent', 'ExerciseEvent', 'ResetEvent', 'TriggerEvent', 'RawVendorEvent', 'InformationalErrorEvent', 'BondCouponEvent', 'DividendReinvestmentEvent', 'AccumulationEvent', 'BondPrincipalEvent', 'DividendOptionEvent', 'MaturityEvent', 'FxForwardSettlementEvent', 'ExpiryEvent', 'ScripDividendEvent', 'StockDividendEvent', 'ReverseStockSplitEvent', 'CapitalDistributionEvent', 'SpinOffEvent', 'MergerEvent', 'FutureExpiryEvent', 'SwapCashFlowEvent', 'SwapPrincipalEvent'):
-            raise ValueError("must be one of enum values ('TransitionEvent', 'InformationalEvent', 'OpenEvent', 'CloseEvent', 'StockSplitEvent', 'BondDefaultEvent', 'CashDividendEvent', 'AmortisationEvent', 'CashFlowEvent', 'ExerciseEvent', 'ResetEvent', 'TriggerEvent', 'RawVendorEvent', 'InformationalErrorEvent', 'BondCouponEvent', 'DividendReinvestmentEvent', 'AccumulationEvent', 'BondPrincipalEvent', 'DividendOptionEvent', 'MaturityEvent', 'FxForwardSettlementEvent', 'ExpiryEvent', 'ScripDividendEvent', 'StockDividendEvent', 'ReverseStockSplitEvent', 'CapitalDistributionEvent', 'SpinOffEvent', 'MergerEvent', 'FutureExpiryEvent', 'SwapCashFlowEvent', 'SwapPrincipalEvent')")
+        if value not in ('TransitionEvent', 'InformationalEvent', 'OpenEvent', 'CloseEvent', 'StockSplitEvent', 'BondDefaultEvent', 'CashDividendEvent', 'AmortisationEvent', 'CashFlowEvent', 'ExerciseEvent', 'ResetEvent', 'TriggerEvent', 'RawVendorEvent', 'InformationalErrorEvent', 'BondCouponEvent', 'DividendReinvestmentEvent', 'AccumulationEvent', 'BondPrincipalEvent', 'DividendOptionEvent', 'MaturityEvent', 'FxForwardSettlementEvent', 'ExpiryEvent', 'ScripDividendEvent', 'StockDividendEvent', 'ReverseStockSplitEvent', 'CapitalDistributionEvent', 'SpinOffEvent', 'MergerEvent', 'FutureExpiryEvent', 'SwapCashFlowEvent', 'SwapPrincipalEvent', 'CreditPremiumCashFlowEvent', 'CdsCreditEvent', 'CdxCreditEvent'):
+            raise ValueError("must be one of enum values ('TransitionEvent', 'InformationalEvent', 'OpenEvent', 'CloseEvent', 'StockSplitEvent', 'BondDefaultEvent', 'CashDividendEvent', 'AmortisationEvent', 'CashFlowEvent', 'ExerciseEvent', 'ResetEvent', 'TriggerEvent', 'RawVendorEvent', 'InformationalErrorEvent', 'BondCouponEvent', 'DividendReinvestmentEvent', 'AccumulationEvent', 'BondPrincipalEvent', 'DividendOptionEvent', 'MaturityEvent', 'FxForwardSettlementEvent', 'ExpiryEvent', 'ScripDividendEvent', 'StockDividendEvent', 'ReverseStockSplitEvent', 'CapitalDistributionEvent', 'SpinOffEvent', 'MergerEvent', 'FutureExpiryEvent', 'SwapCashFlowEvent', 'SwapPrincipalEvent', 'CreditPremiumCashFlowEvent', 'CdsCreditEvent', 'CdxCreditEvent')")
         return value
 
     class Config:
@@ -70,6 +71,7 @@ class FxForwardSettlementEvent(InstrumentEvent):
         """Returns the dictionary representation of the model using alias"""
         _dict = self.dict(by_alias=True,
                           exclude={
+                            "foreign_to_settlement_rate",
                             "additional_properties"
                           },
                           exclude_none=True)
@@ -103,6 +105,11 @@ class FxForwardSettlementEvent(InstrumentEvent):
         if self.domestic_to_settlement_rate is None and "domestic_to_settlement_rate" in self.__fields_set__:
             _dict['domesticToSettlementRate'] = None
 
+        # set to None if foreign_to_settlement_rate (nullable) is None
+        # and __fields_set__ contains the field
+        if self.foreign_to_settlement_rate is None and "foreign_to_settlement_rate" in self.__fields_set__:
+            _dict['foreignToSettlementRate'] = None
+
         return _dict
 
     @classmethod
@@ -126,7 +133,8 @@ class FxForwardSettlementEvent(InstrumentEvent):
             "settlement_ccy": obj.get("settlementCcy"),
             "cash_flow_per_unit": obj.get("cashFlowPerUnit"),
             "domestic_to_foreign_rate": obj.get("domesticToForeignRate"),
-            "domestic_to_settlement_rate": obj.get("domesticToSettlementRate")
+            "domestic_to_settlement_rate": obj.get("domesticToSettlementRate"),
+            "foreign_to_settlement_rate": obj.get("foreignToSettlementRate")
         })
         # store additional fields in additional_properties
         for _key in obj.keys():

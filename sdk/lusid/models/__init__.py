@@ -125,9 +125,11 @@ from lusid.models.cash_flow_value_set import CashFlowValueSet
 from lusid.models.cash_ladder_record import CashLadderRecord
 from lusid.models.cash_offer_election import CashOfferElection
 from lusid.models.cash_perpetual import CashPerpetual
+from lusid.models.cds_credit_event import CdsCreditEvent
 from lusid.models.cds_flow_conventions import CdsFlowConventions
 from lusid.models.cds_index import CdsIndex
 from lusid.models.cds_protection_detail_specification import CdsProtectionDetailSpecification
+from lusid.models.cdx_credit_event import CdxCreditEvent
 from lusid.models.change import Change
 from lusid.models.change_history import ChangeHistory
 from lusid.models.change_history_action import ChangeHistoryAction
@@ -231,6 +233,7 @@ from lusid.models.create_trade_tickets_response import CreateTradeTicketsRespons
 from lusid.models.create_transaction_portfolio_request import CreateTransactionPortfolioRequest
 from lusid.models.create_unit_definition import CreateUnitDefinition
 from lusid.models.credit_default_swap import CreditDefaultSwap
+from lusid.models.credit_premium_cash_flow_event import CreditPremiumCashFlowEvent
 from lusid.models.credit_rating import CreditRating
 from lusid.models.credit_spread_curve_data import CreditSpreadCurveData
 from lusid.models.credit_support_annex import CreditSupportAnnex
@@ -1186,9 +1189,11 @@ __all__ = [
     "CashLadderRecord",
     "CashOfferElection",
     "CashPerpetual",
+    "CdsCreditEvent",
     "CdsFlowConventions",
     "CdsIndex",
     "CdsProtectionDetailSpecification",
+    "CdxCreditEvent",
     "Change",
     "ChangeHistory",
     "ChangeHistoryAction",
@@ -1292,6 +1297,7 @@ __all__ = [
     "CreateTransactionPortfolioRequest",
     "CreateUnitDefinition",
     "CreditDefaultSwap",
+    "CreditPremiumCashFlowEvent",
     "CreditRating",
     "CreditSpreadCurveData",
     "CreditSupportAnnex",

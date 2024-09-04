@@ -1,30 +1,31 @@
-# CashFlowEvent
+# CdsCreditEvent
 
-Definition of a CashFlow event.  This is an event that describes the occurence of a cashflow and associated information.
+Definition of a credit event for credit default swap (CDS) instruments.
 
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**cash_flow_value** | [**CashFlowValue**](CashFlowValue.md) |  | 
-**event_type** | **str** | What type of internal event does this represent; coupon, principal, premium etc. | [readonly] 
+**default_date** | **datetime** | The date of the credit default - i.e. date on which the debt issuer defaulted on its repayment obligation. | 
+**auction_date** | **datetime** | The date of the credit event auction - i.e. date on which the defaulted debt is sold via auction, and a recovery rate determined. | [optional] 
+**recovery_rate** | **float** | The fraction of the defaulted debt that can be recovered. | [optional] 
 **instrument_event_type** | **str** | The Type of Event. The available values are: TransitionEvent, InformationalEvent, OpenEvent, CloseEvent, StockSplitEvent, BondDefaultEvent, CashDividendEvent, AmortisationEvent, CashFlowEvent, ExerciseEvent, ResetEvent, TriggerEvent, RawVendorEvent, InformationalErrorEvent, BondCouponEvent, DividendReinvestmentEvent, AccumulationEvent, BondPrincipalEvent, DividendOptionEvent, MaturityEvent, FxForwardSettlementEvent, ExpiryEvent, ScripDividendEvent, StockDividendEvent, ReverseStockSplitEvent, CapitalDistributionEvent, SpinOffEvent, MergerEvent, FutureExpiryEvent, SwapCashFlowEvent, SwapPrincipalEvent, CreditPremiumCashFlowEvent, CdsCreditEvent, CdxCreditEvent | 
 
 ## Example
 
 ```python
-from lusid.models.cash_flow_event import CashFlowEvent
+from lusid.models.cds_credit_event import CdsCreditEvent
 
 # TODO update the JSON string below
 json = "{}"
-# create an instance of CashFlowEvent from a JSON string
-cash_flow_event_instance = CashFlowEvent.from_json(json)
+# create an instance of CdsCreditEvent from a JSON string
+cds_credit_event_instance = CdsCreditEvent.from_json(json)
 # print the JSON string representation of the object
-print CashFlowEvent.to_json()
+print CdsCreditEvent.to_json()
 
 # convert the object into a dict
-cash_flow_event_dict = cash_flow_event_instance.to_dict()
-# create an instance of CashFlowEvent from a dict
-cash_flow_event_form_dict = cash_flow_event.from_dict(cash_flow_event_dict)
+cds_credit_event_dict = cds_credit_event_instance.to_dict()
+# create an instance of CdsCreditEvent from a dict
+cds_credit_event_form_dict = cds_credit_event.from_dict(cds_credit_event_dict)
 ```
 [Back to Model list](../README.md#documentation-for-models) &#8226; [Back to API list](../README.md#documentation-for-api-endpoints) &#8226; [Back to README](../README.md)
 
