@@ -20,6 +20,7 @@ import json
 
 from typing import Any, Dict, List, Optional
 from pydantic.v1 import BaseModel, Field, conlist
+from lusid.models.holding_pricing_info import HoldingPricingInfo
 from lusid.models.model_selection import ModelSelection
 from lusid.models.pricing_options import PricingOptions
 from lusid.models.result_key_rule import ResultKeyRule
@@ -33,7 +34,8 @@ class PricingContext(BaseModel):
     model_choice: Optional[Dict[str, ModelSelection]] = Field(None, alias="modelChoice", description="The choice of which model selection (vendor library, pricing model) to use in evaluation of a given instrument type.")
     options: Optional[PricingOptions] = None
     result_data_rules: Optional[conlist(ResultKeyRule)] = Field(None, alias="resultDataRules", description="Set of rules that control querying of unit results either for direct queries into aggregation or for  overriding intermediate calculations. For example, a dirty price is made up from a clean price and the accrued interest.  One might consider overriding the accrued interest calculated by a model (perhaps one wants to match an external value or simply disagrees with the  calculated result) and use that in calculation of the dirty price.")
-    __properties = ["modelRules", "modelChoice", "options", "resultDataRules"]
+    holding_pricing_info: Optional[HoldingPricingInfo] = Field(None, alias="holdingPricingInfo")
+    __properties = ["modelRules", "modelChoice", "options", "resultDataRules", "holdingPricingInfo"]
 
     class Config:
         """Pydantic configuration"""
@@ -83,6 +85,9 @@ class PricingContext(BaseModel):
                 if _item:
                     _items.append(_item.to_dict())
             _dict['resultDataRules'] = _items
+        # override the default output from pydantic by calling `to_dict()` of holding_pricing_info
+        if self.holding_pricing_info:
+            _dict['holdingPricingInfo'] = self.holding_pricing_info.to_dict()
         # set to None if model_rules (nullable) is None
         # and __fields_set__ contains the field
         if self.model_rules is None and "model_rules" in self.__fields_set__:
@@ -118,6 +123,7 @@ class PricingContext(BaseModel):
             if obj.get("modelChoice") is not None
             else None,
             "options": PricingOptions.from_dict(obj.get("options")) if obj.get("options") is not None else None,
-            "result_data_rules": [ResultKeyRule.from_dict(_item) for _item in obj.get("resultDataRules")] if obj.get("resultDataRules") is not None else None
+            "result_data_rules": [ResultKeyRule.from_dict(_item) for _item in obj.get("resultDataRules")] if obj.get("resultDataRules") is not None else None,
+            "holding_pricing_info": HoldingPricingInfo.from_dict(obj.get("holdingPricingInfo")) if obj.get("holdingPricingInfo") is not None else None
         })
         return _obj

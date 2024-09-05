@@ -9,6 +9,7 @@ Name | Type | Description | Notes
 **model_choice** | [**Dict[str, ModelSelection]**](ModelSelection.md) | The choice of which model selection (vendor library, pricing model) to use in evaluation of a given instrument type. | [optional] 
 **options** | [**PricingOptions**](PricingOptions.md) |  | [optional] 
 **result_data_rules** | [**List[ResultKeyRule]**](ResultKeyRule.md) | Set of rules that control querying of unit results either for direct queries into aggregation or for  overriding intermediate calculations. For example, a dirty price is made up from a clean price and the accrued interest.  One might consider overriding the accrued interest calculated by a model (perhaps one wants to match an external value or simply disagrees with the  calculated result) and use that in calculation of the dirty price. | [optional] 
+**holding_pricing_info** | [**HoldingPricingInfo**](HoldingPricingInfo.md) |  | [optional] 
 
 ## Example
 

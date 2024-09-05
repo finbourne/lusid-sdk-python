@@ -508,6 +508,7 @@ from lusid.models.holding_adjustment import HoldingAdjustment
 from lusid.models.holding_adjustment_with_date import HoldingAdjustmentWithDate
 from lusid.models.holding_context import HoldingContext
 from lusid.models.holding_contributor import HoldingContributor
+from lusid.models.holding_pricing_info import HoldingPricingInfo
 from lusid.models.holdings_adjustment import HoldingsAdjustment
 from lusid.models.holdings_adjustment_header import HoldingsAdjustmentHeader
 from lusid.models.i_unit_definition_dto import IUnitDefinitionDto
@@ -968,6 +969,7 @@ from lusid.models.sides_definition_request import SidesDefinitionRequest
 from lusid.models.simple_cash_flow_loan import SimpleCashFlowLoan
 from lusid.models.simple_instrument import SimpleInstrument
 from lusid.models.sort_order import SortOrder
+from lusid.models.specific_holding_pricing_info import SpecificHoldingPricingInfo
 from lusid.models.spin_off_event import SpinOffEvent
 from lusid.models.staged_modification import StagedModification
 from lusid.models.staged_modification_decision import StagedModificationDecision
@@ -1656,6 +1658,7 @@ __all__ = [
     "HoldingAdjustmentWithDate",
     "HoldingContext",
     "HoldingContributor",
+    "HoldingPricingInfo",
     "HoldingsAdjustment",
     "HoldingsAdjustmentHeader",
     "IUnitDefinitionDto",
@@ -2116,6 +2119,7 @@ __all__ = [
     "SimpleCashFlowLoan",
     "SimpleInstrument",
     "SortOrder",
+    "SpecificHoldingPricingInfo",
     "SpinOffEvent",
     "StagedModification",
     "StagedModificationDecision",
