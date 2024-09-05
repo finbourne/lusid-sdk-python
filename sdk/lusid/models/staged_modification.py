@@ -39,6 +39,7 @@ class StagedModification(BaseModel):
     decisions: Optional[conlist(StagedModificationDecision)] = Field(None, description="Object containing information relating to the decision on the staged modification.")
     decisions_count: Optional[StrictInt] = Field(None, alias="decisionsCount", description="Number of decisions made.")
     status: Optional[StrictStr] = Field(None, description="The status of the staged modification.")
+    as_at_closed: Optional[datetime] = Field(None, alias="asAtClosed", description="Time at which the modification was closed by either rejection or approval.")
     entity_type: Optional[StrictStr] = Field(None, alias="entityType", description="The type of the entity that the staged modification applies to.")
     scope: Optional[StrictStr] = Field(None, description="The scope of the entity that this staged modification applies to.")
     entity_unique_id: Optional[StrictStr] = Field(None, alias="entityUniqueId", description="The unique Id of the entity the staged modification applies to.")
@@ -46,7 +47,7 @@ class StagedModification(BaseModel):
     entity_hrefs: Optional[StagedModificationsEntityHrefs] = Field(None, alias="entityHrefs")
     display_name: Optional[StrictStr] = Field(None, alias="displayName", description="The display name of the entity the staged modification applies to.")
     links: Optional[conlist(Link)] = None
-    __properties = ["id", "asAtStaged", "userIdStaged", "requestedIdStaged", "action", "stagingRule", "decisions", "decisionsCount", "status", "entityType", "scope", "entityUniqueId", "requestedChanges", "entityHrefs", "displayName", "links"]
+    __properties = ["id", "asAtStaged", "userIdStaged", "requestedIdStaged", "action", "stagingRule", "decisions", "decisionsCount", "status", "asAtClosed", "entityType", "scope", "entityUniqueId", "requestedChanges", "entityHrefs", "displayName", "links"]
 
     class Config:
         """Pydantic configuration"""
@@ -125,6 +126,11 @@ class StagedModification(BaseModel):
         if self.status is None and "status" in self.__fields_set__:
             _dict['status'] = None
 
+        # set to None if as_at_closed (nullable) is None
+        # and __fields_set__ contains the field
+        if self.as_at_closed is None and "as_at_closed" in self.__fields_set__:
+            _dict['asAtClosed'] = None
+
         # set to None if entity_type (nullable) is None
         # and __fields_set__ contains the field
         if self.entity_type is None and "entity_type" in self.__fields_set__:
@@ -171,6 +177,7 @@ class StagedModification(BaseModel):
             "decisions": [StagedModificationDecision.from_dict(_item) for _item in obj.get("decisions")] if obj.get("decisions") is not None else None,
             "decisions_count": obj.get("decisionsCount"),
             "status": obj.get("status"),
+            "as_at_closed": obj.get("asAtClosed"),
             "entity_type": obj.get("entityType"),
             "scope": obj.get("scope"),
             "entity_unique_id": obj.get("entityUniqueId"),

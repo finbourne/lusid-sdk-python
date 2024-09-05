@@ -31,6 +31,8 @@ from lusid.models.access_metadata_value import AccessMetadataValue
 from lusid.models.aggregated_returns_dispersion_request import AggregatedReturnsDispersionRequest
 from lusid.models.aggregated_returns_request import AggregatedReturnsRequest
 from lusid.models.aggregated_returns_response import AggregatedReturnsResponse
+from lusid.models.batch_upsert_portfolio_access_metadata_request import BatchUpsertPortfolioAccessMetadataRequest
+from lusid.models.batch_upsert_portfolio_access_metadata_response import BatchUpsertPortfolioAccessMetadataResponse
 from lusid.models.composite_breakdown_request import CompositeBreakdownRequest
 from lusid.models.composite_breakdown_response import CompositeBreakdownResponse
 from lusid.models.composite_dispersion_response import CompositeDispersionResponse
@@ -76,6 +78,183 @@ class PortfoliosApi:
         if api_client is None:
             api_client = ApiClient.get_default()
         self.api_client = api_client
+
+    @overload
+    async def batch_upsert_portfolio_access_metadata(self, batch_upsert_portfolio_access_metadata_request : Annotated[BatchUpsertPortfolioAccessMetadataRequest, Field(..., description="The Portfolio Access Metadata Rule to update or insert")], effective_at : Annotated[Optional[StrictStr], Field(description="The date this rule will effective from")] = None, effective_until : Annotated[Optional[datetime], Field(description="The effective date until which the Access Metadata is valid. If not supplied this will be valid indefinitely, or until the next 'effectiveAt' date of the Access Metadata")] = None, **kwargs) -> BatchUpsertPortfolioAccessMetadataResponse:  # noqa: E501
+        ...
+
+    @overload
+    def batch_upsert_portfolio_access_metadata(self, batch_upsert_portfolio_access_metadata_request : Annotated[BatchUpsertPortfolioAccessMetadataRequest, Field(..., description="The Portfolio Access Metadata Rule to update or insert")], effective_at : Annotated[Optional[StrictStr], Field(description="The date this rule will effective from")] = None, effective_until : Annotated[Optional[datetime], Field(description="The effective date until which the Access Metadata is valid. If not supplied this will be valid indefinitely, or until the next 'effectiveAt' date of the Access Metadata")] = None, async_req: Optional[bool]=True, **kwargs) -> BatchUpsertPortfolioAccessMetadataResponse:  # noqa: E501
+        ...
+
+    @validate_arguments
+    def batch_upsert_portfolio_access_metadata(self, batch_upsert_portfolio_access_metadata_request : Annotated[BatchUpsertPortfolioAccessMetadataRequest, Field(..., description="The Portfolio Access Metadata Rule to update or insert")], effective_at : Annotated[Optional[StrictStr], Field(description="The date this rule will effective from")] = None, effective_until : Annotated[Optional[datetime], Field(description="The effective date until which the Access Metadata is valid. If not supplied this will be valid indefinitely, or until the next 'effectiveAt' date of the Access Metadata")] = None, async_req: Optional[bool]=None, **kwargs) -> Union[BatchUpsertPortfolioAccessMetadataResponse, Awaitable[BatchUpsertPortfolioAccessMetadataResponse]]:  # noqa: E501
+        """[EXPERIMENTAL] BatchUpsertPortfolioAccessMetadata: Upsert multiple portfolio access metadata with different keys to multiple portfolios  # noqa: E501
+
+        Update or insert multiple Portfolios Access Metadata Rule in multiple scopes. Items will be updated if it already exists  and inserted if it does not. No other items will be affected    The response will return the successfully updated or inserted Portfolio Access Metadata Rules or failure message if unsuccessful    It is important to always check to verify success (or failure).                Multiple rules for a metadataKey can exist with different effective at dates, when resources are accessed the rule that is active for the current time will be fetched  # noqa: E501
+        This method makes a synchronous HTTP request by default. To make an
+        asynchronous HTTP request, please pass async_req=True
+
+        >>> thread = api.batch_upsert_portfolio_access_metadata(batch_upsert_portfolio_access_metadata_request, effective_at, effective_until, async_req=True)
+        >>> result = thread.get()
+
+        :param batch_upsert_portfolio_access_metadata_request: The Portfolio Access Metadata Rule to update or insert (required)
+        :type batch_upsert_portfolio_access_metadata_request: BatchUpsertPortfolioAccessMetadataRequest
+        :param effective_at: The date this rule will effective from
+        :type effective_at: str
+        :param effective_until: The effective date until which the Access Metadata is valid. If not supplied this will be valid indefinitely, or until the next 'effectiveAt' date of the Access Metadata
+        :type effective_until: datetime
+        :param async_req: Whether to execute the request asynchronously.
+        :type async_req: bool, optional
+        :param _request_timeout: timeout setting for this request.
+               If one number provided, it will be total request
+               timeout. It can also be a pair (tuple) of
+               (connection, read) timeouts.
+        :return: Returns the result object.
+                 If the method is called asynchronously,
+                 returns the request thread.
+        :rtype: BatchUpsertPortfolioAccessMetadataResponse
+        """
+        kwargs['_return_http_data_only'] = True
+        if '_preload_content' in kwargs:
+            message = "Error! Please call the batch_upsert_portfolio_access_metadata_with_http_info method with `_preload_content` instead and obtain raw data from ApiResponse.raw_data"  # noqa: E501
+            raise ValueError(message)
+        if async_req is not None:
+            kwargs['async_req'] = async_req
+        return self.batch_upsert_portfolio_access_metadata_with_http_info(batch_upsert_portfolio_access_metadata_request, effective_at, effective_until, **kwargs)  # noqa: E501
+
+    @validate_arguments
+    def batch_upsert_portfolio_access_metadata_with_http_info(self, batch_upsert_portfolio_access_metadata_request : Annotated[BatchUpsertPortfolioAccessMetadataRequest, Field(..., description="The Portfolio Access Metadata Rule to update or insert")], effective_at : Annotated[Optional[StrictStr], Field(description="The date this rule will effective from")] = None, effective_until : Annotated[Optional[datetime], Field(description="The effective date until which the Access Metadata is valid. If not supplied this will be valid indefinitely, or until the next 'effectiveAt' date of the Access Metadata")] = None, **kwargs) -> ApiResponse:  # noqa: E501
+        """[EXPERIMENTAL] BatchUpsertPortfolioAccessMetadata: Upsert multiple portfolio access metadata with different keys to multiple portfolios  # noqa: E501
+
+        Update or insert multiple Portfolios Access Metadata Rule in multiple scopes. Items will be updated if it already exists  and inserted if it does not. No other items will be affected    The response will return the successfully updated or inserted Portfolio Access Metadata Rules or failure message if unsuccessful    It is important to always check to verify success (or failure).                Multiple rules for a metadataKey can exist with different effective at dates, when resources are accessed the rule that is active for the current time will be fetched  # noqa: E501
+        This method makes a synchronous HTTP request by default. To make an
+        asynchronous HTTP request, please pass async_req=True
+
+        >>> thread = api.batch_upsert_portfolio_access_metadata_with_http_info(batch_upsert_portfolio_access_metadata_request, effective_at, effective_until, async_req=True)
+        >>> result = thread.get()
+
+        :param batch_upsert_portfolio_access_metadata_request: The Portfolio Access Metadata Rule to update or insert (required)
+        :type batch_upsert_portfolio_access_metadata_request: BatchUpsertPortfolioAccessMetadataRequest
+        :param effective_at: The date this rule will effective from
+        :type effective_at: str
+        :param effective_until: The effective date until which the Access Metadata is valid. If not supplied this will be valid indefinitely, or until the next 'effectiveAt' date of the Access Metadata
+        :type effective_until: datetime
+        :param async_req: Whether to execute the request asynchronously.
+        :type async_req: bool, optional
+        :param _preload_content: if False, the ApiResponse.data will
+                                 be set to none and raw_data will store the
+                                 HTTP response body without reading/decoding.
+                                 Default is True.
+        :type _preload_content: bool, optional
+        :param _return_http_data_only: response data instead of ApiResponse
+                                       object with status code, headers, etc
+        :type _return_http_data_only: bool, optional
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :param _request_auth: set to override the auth_settings for an a single
+                              request; this effectively ignores the authentication
+                              in the spec for a single request.
+        :type _request_auth: dict, optional
+        :type _content_type: string, optional: force content-type for the request
+        :return: Returns the result object.
+                 If the method is called asynchronously,
+                 returns the request thread.
+        :rtype: tuple(BatchUpsertPortfolioAccessMetadataResponse, status_code(int), headers(HTTPHeaderDict))
+        """
+
+        _params = locals()
+
+        _all_params = [
+            'batch_upsert_portfolio_access_metadata_request',
+            'effective_at',
+            'effective_until'
+        ]
+        _all_params.extend(
+            [
+                'async_req',
+                '_return_http_data_only',
+                '_preload_content',
+                '_request_timeout',
+                '_request_auth',
+                '_content_type',
+                '_headers'
+            ]
+        )
+
+        # validate the arguments
+        for _key, _val in _params['kwargs'].items():
+            if _key not in _all_params:
+                raise ApiTypeError(
+                    "Got an unexpected keyword argument '%s'"
+                    " to method batch_upsert_portfolio_access_metadata" % _key
+                )
+            _params[_key] = _val
+        del _params['kwargs']
+
+        _collection_formats = {}
+
+        # process the path parameters
+        _path_params = {}
+
+        # process the query parameters
+        _query_params = []
+        if _params.get('effective_at') is not None:  # noqa: E501
+            _query_params.append(('effectiveAt', _params['effective_at']))
+
+        if _params.get('effective_until') is not None:  # noqa: E501
+            if isinstance(_params['effective_until'], datetime):
+                _query_params.append(('effectiveUntil', _params['effective_until'].strftime(self.api_client.configuration.datetime_format)))
+            else:
+                _query_params.append(('effectiveUntil', _params['effective_until']))
+
+        # process the header parameters
+        _header_params = dict(_params.get('_headers', {}))
+        # process the form parameters
+        _form_params = []
+        _files = {}
+        # process the body parameter
+        _body_params = None
+        if _params['batch_upsert_portfolio_access_metadata_request'] is not None:
+            _body_params = _params['batch_upsert_portfolio_access_metadata_request']
+
+        # set the HTTP header `Accept`
+        _header_params['Accept'] = self.api_client.select_header_accept(
+            ['text/plain', 'application/json', 'text/json'])  # noqa: E501
+
+        # set the HTTP header `Content-Type`
+        _content_types_list = _params.get('_content_type',
+            self.api_client.select_header_content_type(
+                ['application/json-patch+json', 'application/json', 'text/json', 'application/*+json']))
+        if _content_types_list:
+                _header_params['Content-Type'] = _content_types_list
+
+        # authentication setting
+        _auth_settings = ['oauth2']  # noqa: E501
+
+        _response_types_map = {
+            '200': "BatchUpsertPortfolioAccessMetadataResponse",
+            '400': "LusidValidationProblemDetails",
+        }
+
+        return self.api_client.call_api(
+            '/api/portfolios/metadata', 'PUT',
+            _path_params,
+            _query_params,
+            _header_params,
+            body=_body_params,
+            post_params=_form_params,
+            files=_files,
+            response_types_map=_response_types_map,
+            auth_settings=_auth_settings,
+            async_req=_params.get('async_req'),
+            _return_http_data_only=_params.get('_return_http_data_only'),  # noqa: E501
+            _preload_content=_params.get('_preload_content', True),
+            _request_timeout=_params.get('_request_timeout'),
+            collection_formats=_collection_formats,
+            _request_auth=_params.get('_request_auth'))
 
     @overload
     async def delete_instrument_event_instruction(self, scope : Annotated[constr(strict=True, max_length=64, min_length=1), Field(..., description="The scope of the portfolio.")], code : Annotated[constr(strict=True, max_length=64, min_length=1), Field(..., description="The code of the portfolio. Together with the scope this uniquely identifies the portfolio.")], instrument_event_instruction_id : Annotated[StrictStr, Field(..., description="The id of the instruction to be deleted.")], portfolio_effective_at : Annotated[Optional[constr(strict=True, max_length=6000, min_length=0)], Field(description="The effective date at which the portfolio will be resolved. Defaults to current time if not specified.")] = None, **kwargs) -> DeletedEntityResponse:  # noqa: E501

@@ -78,6 +78,8 @@ from lusid.models.basket import Basket
 from lusid.models.basket_identifier import BasketIdentifier
 from lusid.models.batch_adjust_holdings_response import BatchAdjustHoldingsResponse
 from lusid.models.batch_upsert_instrument_properties_response import BatchUpsertInstrumentPropertiesResponse
+from lusid.models.batch_upsert_portfolio_access_metadata_request import BatchUpsertPortfolioAccessMetadataRequest
+from lusid.models.batch_upsert_portfolio_access_metadata_response import BatchUpsertPortfolioAccessMetadataResponse
 from lusid.models.batch_upsert_portfolio_transactions_response import BatchUpsertPortfolioTransactionsResponse
 from lusid.models.batch_upsert_property_definition_properties_response import BatchUpsertPropertyDefinitionPropertiesResponse
 from lusid.models.block import Block
@@ -516,6 +518,8 @@ from lusid.models.market_quote import MarketQuote
 from lusid.models.match_criterion import MatchCriterion
 from lusid.models.maturity_event import MaturityEvent
 from lusid.models.merger_event import MergerEvent
+from lusid.models.metadata_key_value import MetadataKeyValue
+from lusid.models.metadata_key_value_response import MetadataKeyValueResponse
 from lusid.models.metric_value import MetricValue
 from lusid.models.model_options import ModelOptions
 from lusid.models.model_options_type import ModelOptionsType
@@ -1142,6 +1146,8 @@ __all__ = [
     "BasketIdentifier",
     "BatchAdjustHoldingsResponse",
     "BatchUpsertInstrumentPropertiesResponse",
+    "BatchUpsertPortfolioAccessMetadataRequest",
+    "BatchUpsertPortfolioAccessMetadataResponse",
     "BatchUpsertPortfolioTransactionsResponse",
     "BatchUpsertPropertyDefinitionPropertiesResponse",
     "Block",
@@ -1580,6 +1586,8 @@ __all__ = [
     "MatchCriterion",
     "MaturityEvent",
     "MergerEvent",
+    "MetadataKeyValue",
+    "MetadataKeyValueResponse",
     "MetricValue",
     "ModelOptions",
     "ModelOptionsType",

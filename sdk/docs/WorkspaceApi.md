@@ -76,7 +76,7 @@ async def main():
         # Change the lines below to switch approach
         # workspace_item_creation_request = WorkspaceItemCreationRequest()
         # workspace_item_creation_request = WorkspaceItemCreationRequest.from_json("")
-        workspace_item_creation_request = WorkspaceItemCreationRequest.from_dict({"format":1,"name":"example-name","description":"example-description","content":"example-content"}) # WorkspaceItemCreationRequest | The item to be created. (optional)
+        workspace_item_creation_request = WorkspaceItemCreationRequest.from_dict({"format":1,"name":"example-name","description":"example-description","content":"example-content","type":"rebalance-config"}) # WorkspaceItemCreationRequest | The item to be created. (optional)
 
         try:
             # [EXPERIMENTAL] CreatePersonalItem: Create a new item in a personal workspace.
@@ -248,7 +248,7 @@ async def main():
         # Change the lines below to switch approach
         # workspace_item_creation_request = WorkspaceItemCreationRequest()
         # workspace_item_creation_request = WorkspaceItemCreationRequest.from_json("")
-        workspace_item_creation_request = WorkspaceItemCreationRequest.from_dict({"format":1,"name":"example-name","description":"example-description","content":"example-content"}) # WorkspaceItemCreationRequest | The item to be created. (optional)
+        workspace_item_creation_request = WorkspaceItemCreationRequest.from_dict({"format":1,"name":"example-name","description":"example-description","content":"example-content","type":"rebalance-config"}) # WorkspaceItemCreationRequest | The item to be created. (optional)
 
         try:
             # [EXPERIMENTAL] CreateSharedItem: Create a new item in a shared workspace.
@@ -1433,7 +1433,7 @@ async def main():
         # Change the lines below to switch approach
         # workspace_item_update_request = WorkspaceItemUpdateRequest()
         # workspace_item_update_request = WorkspaceItemUpdateRequest.from_json("")
-        workspace_item_update_request = WorkspaceItemUpdateRequest.from_dict({"format":2,"description":"updated-example-description","content":"updated-example-content"}) # WorkspaceItemUpdateRequest | The new item details. (optional)
+        workspace_item_update_request = WorkspaceItemUpdateRequest.from_dict({"format":2,"description":"updated-example-description","content":"updated-example-content","type":"rebalance-config"}) # WorkspaceItemUpdateRequest | The new item details. (optional)
 
         try:
             # [EXPERIMENTAL] UpdatePersonalItem: Update an item in a personal workspace.
@@ -1609,7 +1609,7 @@ async def main():
         # Change the lines below to switch approach
         # workspace_item_update_request = WorkspaceItemUpdateRequest()
         # workspace_item_update_request = WorkspaceItemUpdateRequest.from_json("")
-        workspace_item_update_request = WorkspaceItemUpdateRequest.from_dict({"format":2,"description":"updated-example-description","content":"updated-example-content"}) # WorkspaceItemUpdateRequest | The new item details. (optional)
+        workspace_item_update_request = WorkspaceItemUpdateRequest.from_dict({"format":2,"description":"updated-example-description","content":"updated-example-content","type":"rebalance-config"}) # WorkspaceItemUpdateRequest | The new item details. (optional)
 
         try:
             # [EXPERIMENTAL] UpdateSharedItem: Update an item in a shared workspace.

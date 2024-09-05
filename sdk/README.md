@@ -358,6 +358,7 @@ Class | Method | HTTP request | Description
 *PortfolioGroupsApi* | [**update_portfolio_group**](docs/PortfolioGroupsApi.md#update_portfolio_group) | **PUT** /api/portfoliogroups/{scope}/{code} | [EARLY ACCESS] UpdatePortfolioGroup: Update portfolio group
 *PortfolioGroupsApi* | [**upsert_group_properties**](docs/PortfolioGroupsApi.md#upsert_group_properties) | **POST** /api/portfoliogroups/{scope}/{code}/properties/$upsert | [EARLY ACCESS] UpsertGroupProperties: Upsert group properties
 *PortfolioGroupsApi* | [**upsert_portfolio_group_access_metadata**](docs/PortfolioGroupsApi.md#upsert_portfolio_group_access_metadata) | **PUT** /api/portfoliogroups/{scope}/{code}/metadata/{metadataKey} | UpsertPortfolioGroupAccessMetadata: Upsert a Portfolio Group Access Metadata entry associated with a specific metadataKey. This creates or updates the data in LUSID.
+*PortfoliosApi* | [**batch_upsert_portfolio_access_metadata**](docs/PortfoliosApi.md#batch_upsert_portfolio_access_metadata) | **PUT** /api/portfolios/metadata | [EXPERIMENTAL] BatchUpsertPortfolioAccessMetadata: Upsert multiple portfolio access metadata with different keys to multiple portfolios
 *PortfoliosApi* | [**delete_instrument_event_instruction**](docs/PortfoliosApi.md#delete_instrument_event_instruction) | **DELETE** /api/portfolios/{scope}/{code}/instrumenteventinstructions/{instrumentEventInstructionId} | [EARLY ACCESS] DeleteInstrumentEventInstruction: Delete Instrument Event Instruction
 *PortfoliosApi* | [**delete_key_from_portfolio_access_metadata**](docs/PortfoliosApi.md#delete_key_from_portfolio_access_metadata) | **DELETE** /api/portfolios/{scope}/{code}/metadata/{metadataKey} | DeleteKeyFromPortfolioAccessMetadata: Delete a Portfolio Access Metadata Rule
 *PortfoliosApi* | [**delete_portfolio**](docs/PortfoliosApi.md#delete_portfolio) | **DELETE** /api/portfolios/{scope}/{code} | DeletePortfolio: Delete portfolio
@@ -639,6 +640,8 @@ Class | Method | HTTP request | Description
  - [BasketIdentifier](docs/BasketIdentifier.md)
  - [BatchAdjustHoldingsResponse](docs/BatchAdjustHoldingsResponse.md)
  - [BatchUpsertInstrumentPropertiesResponse](docs/BatchUpsertInstrumentPropertiesResponse.md)
+ - [BatchUpsertPortfolioAccessMetadataRequest](docs/BatchUpsertPortfolioAccessMetadataRequest.md)
+ - [BatchUpsertPortfolioAccessMetadataResponse](docs/BatchUpsertPortfolioAccessMetadataResponse.md)
  - [BatchUpsertPortfolioTransactionsResponse](docs/BatchUpsertPortfolioTransactionsResponse.md)
  - [BatchUpsertPropertyDefinitionPropertiesResponse](docs/BatchUpsertPropertyDefinitionPropertiesResponse.md)
  - [Block](docs/Block.md)
@@ -1077,6 +1080,8 @@ Class | Method | HTTP request | Description
  - [MatchCriterion](docs/MatchCriterion.md)
  - [MaturityEvent](docs/MaturityEvent.md)
  - [MergerEvent](docs/MergerEvent.md)
+ - [MetadataKeyValue](docs/MetadataKeyValue.md)
+ - [MetadataKeyValueResponse](docs/MetadataKeyValueResponse.md)
  - [MetricValue](docs/MetricValue.md)
  - [ModelOptions](docs/ModelOptions.md)
  - [ModelOptionsType](docs/ModelOptionsType.md)
