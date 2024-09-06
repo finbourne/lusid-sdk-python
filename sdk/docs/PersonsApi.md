@@ -4,7 +4,7 @@ All URIs are relative to *https://www.lusid.com/api*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
-[**delete_person**](PersonsApi.md#delete_person) | **DELETE** /api/persons/{idTypeScope}/{idTypeCode}/{code} | [EARLY ACCESS] DeletePerson: Delete person
+[**delete_person**](PersonsApi.md#delete_person) | **DELETE** /api/persons/{idTypeScope}/{idTypeCode}/{code} | DeletePerson: Delete person
 [**delete_person_access_metadata**](PersonsApi.md#delete_person_access_metadata) | **DELETE** /api/persons/{idTypeScope}/{idTypeCode}/{code}/metadata/{metadataKey} | [EARLY ACCESS] DeletePersonAccessMetadata: Delete a Person Access Metadata entry
 [**delete_person_identifiers**](PersonsApi.md#delete_person_identifiers) | **DELETE** /api/persons/{idTypeScope}/{idTypeCode}/{code}/identifiers | [EARLY ACCESS] DeletePersonIdentifiers: Delete Person Identifiers
 [**delete_person_properties**](PersonsApi.md#delete_person_properties) | **DELETE** /api/persons/{idTypeScope}/{idTypeCode}/{code}/properties | [EARLY ACCESS] DeletePersonProperties: Delete Person Properties
@@ -19,7 +19,7 @@ Method | HTTP request | Description
 [**patch_person_access_metadata**](PersonsApi.md#patch_person_access_metadata) | **PATCH** /api/persons/{idTypeScope}/{idTypeCode}/{code}/metadata | [EARLY ACCESS] PatchPersonAccessMetadata: Patch Access Metadata rules for a Person.
 [**set_person_identifiers**](PersonsApi.md#set_person_identifiers) | **POST** /api/persons/{idTypeScope}/{idTypeCode}/{code}/identifiers | [EARLY ACCESS] SetPersonIdentifiers: Set Person Identifiers
 [**set_person_properties**](PersonsApi.md#set_person_properties) | **POST** /api/persons/{idTypeScope}/{idTypeCode}/{code}/properties | [EARLY ACCESS] SetPersonProperties: Set Person Properties
-[**upsert_person**](PersonsApi.md#upsert_person) | **POST** /api/persons | [EARLY ACCESS] UpsertPerson: Upsert Person
+[**upsert_person**](PersonsApi.md#upsert_person) | **POST** /api/persons | UpsertPerson: Upsert Person
 [**upsert_person_access_metadata**](PersonsApi.md#upsert_person_access_metadata) | **PUT** /api/persons/{idTypeScope}/{idTypeCode}/{code}/metadata/{metadataKey} | [EARLY ACCESS] UpsertPersonAccessMetadata: Upsert a Person Access Metadata entry associated with a specific metadataKey. This creates or updates the data in LUSID.
 [**upsert_persons**](PersonsApi.md#upsert_persons) | **POST** /api/persons/$batchUpsert | [EARLY ACCESS] UpsertPersons: Pluralised Upsert of Persons
 
@@ -27,7 +27,7 @@ Method | HTTP request | Description
 # **delete_person**
 > DeletedEntityResponse delete_person(id_type_scope, id_type_code, code)
 
-[EARLY ACCESS] DeletePerson: Delete person
+DeletePerson: Delete person
 
 Delete a person. Deletion will be valid from the person's creation datetime.  This means that the person will no longer exist at any effective datetime from the asAt datetime of deletion.
 
@@ -73,7 +73,7 @@ async def main():
         code = 'code_example' # str | Code of the person under specified identifier type scope and code. This together with defined              identifier type uniquely identifies the person to delete.
 
         try:
-            # [EARLY ACCESS] DeletePerson: Delete person
+            # DeletePerson: Delete person
             api_response = await api_instance.delete_person(id_type_scope, id_type_code, code)
             pprint(api_response)
         except ApiException as e:
@@ -1385,7 +1385,7 @@ Name | Type | Description  | Notes
 # **upsert_person**
 > Person upsert_person(upsert_person_request)
 
-[EARLY ACCESS] UpsertPerson: Upsert Person
+UpsertPerson: Upsert Person
 
 Create or update a new person under the specified scope.
 
@@ -1434,7 +1434,7 @@ async def main():
         upsert_person_request = UpsertPersonRequest.from_dict({"identifiers":{"Person/HrSystem1/InternalId":{"key":"Person/HrSystem1/InternalId","value":{"labelValue":"XY10001111"}},"Person/PayrollSystem1/Id":{"key":"Person/PayrollSystem1/Id","value":{"labelValue":"HSI3453456"}},"Person/CompanyIntranet/LoginId":{"key":"Person/CompanyIntranet/LoginId","value":{"labelValue":"johnsmith001"}}},"properties":{"Person/PersonalDetails/Name":{"key":"Person/PersonalDetails/Name","value":{"labelValue":"John Smith"}},"Person/CompanyDetails/Role":{"key":"Person/CompanyDetails/Role","value":{"labelValueSet":{"values":["SalesRepresentative","CustomerServiceRepresentative"]}},"effectiveFrom":"2016-07-01T00:00:00.0000000+00:00"}},"displayName":"Person1DisplayName","description":"Person1Description"}) # UpsertPersonRequest | Request to create or update a person.
 
         try:
-            # [EARLY ACCESS] UpsertPerson: Upsert Person
+            # UpsertPerson: Upsert Person
             api_response = await api_instance.upsert_person(upsert_person_request)
             pprint(api_response)
         except ApiException as e:

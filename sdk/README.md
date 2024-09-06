@@ -310,7 +310,7 @@ Class | Method | HTTP request | Description
 *ParticipationsApi* | [**get_participation**](docs/ParticipationsApi.md#get_participation) | **GET** /api/participations/{scope}/{code} | [EARLY ACCESS] GetParticipation: Get Participation
 *ParticipationsApi* | [**list_participations**](docs/ParticipationsApi.md#list_participations) | **GET** /api/participations | [EARLY ACCESS] ListParticipations: List Participations
 *ParticipationsApi* | [**upsert_participations**](docs/ParticipationsApi.md#upsert_participations) | **POST** /api/participations | [EARLY ACCESS] UpsertParticipations: Upsert Participation
-*PersonsApi* | [**delete_person**](docs/PersonsApi.md#delete_person) | **DELETE** /api/persons/{idTypeScope}/{idTypeCode}/{code} | [EARLY ACCESS] DeletePerson: Delete person
+*PersonsApi* | [**delete_person**](docs/PersonsApi.md#delete_person) | **DELETE** /api/persons/{idTypeScope}/{idTypeCode}/{code} | DeletePerson: Delete person
 *PersonsApi* | [**delete_person_access_metadata**](docs/PersonsApi.md#delete_person_access_metadata) | **DELETE** /api/persons/{idTypeScope}/{idTypeCode}/{code}/metadata/{metadataKey} | [EARLY ACCESS] DeletePersonAccessMetadata: Delete a Person Access Metadata entry
 *PersonsApi* | [**delete_person_identifiers**](docs/PersonsApi.md#delete_person_identifiers) | **DELETE** /api/persons/{idTypeScope}/{idTypeCode}/{code}/identifiers | [EARLY ACCESS] DeletePersonIdentifiers: Delete Person Identifiers
 *PersonsApi* | [**delete_person_properties**](docs/PersonsApi.md#delete_person_properties) | **DELETE** /api/persons/{idTypeScope}/{idTypeCode}/{code}/properties | [EARLY ACCESS] DeletePersonProperties: Delete Person Properties
@@ -325,7 +325,7 @@ Class | Method | HTTP request | Description
 *PersonsApi* | [**patch_person_access_metadata**](docs/PersonsApi.md#patch_person_access_metadata) | **PATCH** /api/persons/{idTypeScope}/{idTypeCode}/{code}/metadata | [EARLY ACCESS] PatchPersonAccessMetadata: Patch Access Metadata rules for a Person.
 *PersonsApi* | [**set_person_identifiers**](docs/PersonsApi.md#set_person_identifiers) | **POST** /api/persons/{idTypeScope}/{idTypeCode}/{code}/identifiers | [EARLY ACCESS] SetPersonIdentifiers: Set Person Identifiers
 *PersonsApi* | [**set_person_properties**](docs/PersonsApi.md#set_person_properties) | **POST** /api/persons/{idTypeScope}/{idTypeCode}/{code}/properties | [EARLY ACCESS] SetPersonProperties: Set Person Properties
-*PersonsApi* | [**upsert_person**](docs/PersonsApi.md#upsert_person) | **POST** /api/persons | [EARLY ACCESS] UpsertPerson: Upsert Person
+*PersonsApi* | [**upsert_person**](docs/PersonsApi.md#upsert_person) | **POST** /api/persons | UpsertPerson: Upsert Person
 *PersonsApi* | [**upsert_person_access_metadata**](docs/PersonsApi.md#upsert_person_access_metadata) | **PUT** /api/persons/{idTypeScope}/{idTypeCode}/{code}/metadata/{metadataKey} | [EARLY ACCESS] UpsertPersonAccessMetadata: Upsert a Person Access Metadata entry associated with a specific metadataKey. This creates or updates the data in LUSID.
 *PersonsApi* | [**upsert_persons**](docs/PersonsApi.md#upsert_persons) | **POST** /api/persons/$batchUpsert | [EARLY ACCESS] UpsertPersons: Pluralised Upsert of Persons
 *PlacementsApi* | [**delete_placement**](docs/PlacementsApi.md#delete_placement) | **DELETE** /api/placements/{scope}/{code} | [EARLY ACCESS] DeletePlacement: Delete placement
@@ -697,6 +697,7 @@ Class | Method | HTTP request | Description
  - [Change](docs/Change.md)
  - [ChangeHistory](docs/ChangeHistory.md)
  - [ChangeHistoryAction](docs/ChangeHistoryAction.md)
+ - [ChangeIntervalWithOrderManagementDetail](docs/ChangeIntervalWithOrderManagementDetail.md)
  - [ChangeItem](docs/ChangeItem.md)
  - [ChartOfAccounts](docs/ChartOfAccounts.md)
  - [ChartOfAccountsProperties](docs/ChartOfAccountsProperties.md)
@@ -866,7 +867,6 @@ Class | Method | HTTP request | Description
  - [ElectionSpecification](docs/ElectionSpecification.md)
  - [EligibilityCalculation](docs/EligibilityCalculation.md)
  - [EmptyModelOptions](docs/EmptyModelOptions.md)
- - [EntityChangeItem](docs/EntityChangeItem.md)
  - [EntityIdentifier](docs/EntityIdentifier.md)
  - [Equity](docs/Equity.md)
  - [EquityAllOfIdentifiers](docs/EquityAllOfIdentifiers.md)
@@ -1344,6 +1344,7 @@ Class | Method | HTTP request | Description
  - [ResourceListOfCalendarDate](docs/ResourceListOfCalendarDate.md)
  - [ResourceListOfChange](docs/ResourceListOfChange.md)
  - [ResourceListOfChangeHistory](docs/ResourceListOfChangeHistory.md)
+ - [ResourceListOfChangeIntervalWithOrderManagementDetail](docs/ResourceListOfChangeIntervalWithOrderManagementDetail.md)
  - [ResourceListOfComplianceBreachedOrderInfo](docs/ResourceListOfComplianceBreachedOrderInfo.md)
  - [ResourceListOfComplianceRule](docs/ResourceListOfComplianceRule.md)
  - [ResourceListOfComplianceRuleResult](docs/ResourceListOfComplianceRuleResult.md)
@@ -1351,7 +1352,6 @@ Class | Method | HTTP request | Description
  - [ResourceListOfConstituentsAdjustmentHeader](docs/ResourceListOfConstituentsAdjustmentHeader.md)
  - [ResourceListOfCorporateAction](docs/ResourceListOfCorporateAction.md)
  - [ResourceListOfDataType](docs/ResourceListOfDataType.md)
- - [ResourceListOfEntityChangeItem](docs/ResourceListOfEntityChangeItem.md)
  - [ResourceListOfExecution](docs/ResourceListOfExecution.md)
  - [ResourceListOfFeeRule](docs/ResourceListOfFeeRule.md)
  - [ResourceListOfGetCdsFlowConventionsResponse](docs/ResourceListOfGetCdsFlowConventionsResponse.md)

@@ -135,6 +135,7 @@ from lusid.models.cdx_credit_event import CdxCreditEvent
 from lusid.models.change import Change
 from lusid.models.change_history import ChangeHistory
 from lusid.models.change_history_action import ChangeHistoryAction
+from lusid.models.change_interval_with_order_management_detail import ChangeIntervalWithOrderManagementDetail
 from lusid.models.change_item import ChangeItem
 from lusid.models.chart_of_accounts import ChartOfAccounts
 from lusid.models.chart_of_accounts_properties import ChartOfAccountsProperties
@@ -304,7 +305,6 @@ from lusid.models.economic_dependency_with_quote import EconomicDependencyWithQu
 from lusid.models.election_specification import ElectionSpecification
 from lusid.models.eligibility_calculation import EligibilityCalculation
 from lusid.models.empty_model_options import EmptyModelOptions
-from lusid.models.entity_change_item import EntityChangeItem
 from lusid.models.entity_identifier import EntityIdentifier
 from lusid.models.equity import Equity
 from lusid.models.equity_all_of_identifiers import EquityAllOfIdentifiers
@@ -782,6 +782,7 @@ from lusid.models.resource_list_of_block_and_orders import ResourceListOfBlockAn
 from lusid.models.resource_list_of_calendar_date import ResourceListOfCalendarDate
 from lusid.models.resource_list_of_change import ResourceListOfChange
 from lusid.models.resource_list_of_change_history import ResourceListOfChangeHistory
+from lusid.models.resource_list_of_change_interval_with_order_management_detail import ResourceListOfChangeIntervalWithOrderManagementDetail
 from lusid.models.resource_list_of_compliance_breached_order_info import ResourceListOfComplianceBreachedOrderInfo
 from lusid.models.resource_list_of_compliance_rule import ResourceListOfComplianceRule
 from lusid.models.resource_list_of_compliance_rule_result import ResourceListOfComplianceRuleResult
@@ -789,7 +790,6 @@ from lusid.models.resource_list_of_compliance_run_info import ResourceListOfComp
 from lusid.models.resource_list_of_constituents_adjustment_header import ResourceListOfConstituentsAdjustmentHeader
 from lusid.models.resource_list_of_corporate_action import ResourceListOfCorporateAction
 from lusid.models.resource_list_of_data_type import ResourceListOfDataType
-from lusid.models.resource_list_of_entity_change_item import ResourceListOfEntityChangeItem
 from lusid.models.resource_list_of_execution import ResourceListOfExecution
 from lusid.models.resource_list_of_fee_rule import ResourceListOfFeeRule
 from lusid.models.resource_list_of_get_cds_flow_conventions_response import ResourceListOfGetCdsFlowConventionsResponse
@@ -1205,6 +1205,7 @@ __all__ = [
     "Change",
     "ChangeHistory",
     "ChangeHistoryAction",
+    "ChangeIntervalWithOrderManagementDetail",
     "ChangeItem",
     "ChartOfAccounts",
     "ChartOfAccountsProperties",
@@ -1374,7 +1375,6 @@ __all__ = [
     "ElectionSpecification",
     "EligibilityCalculation",
     "EmptyModelOptions",
-    "EntityChangeItem",
     "EntityIdentifier",
     "Equity",
     "EquityAllOfIdentifiers",
@@ -1852,6 +1852,7 @@ __all__ = [
     "ResourceListOfCalendarDate",
     "ResourceListOfChange",
     "ResourceListOfChangeHistory",
+    "ResourceListOfChangeIntervalWithOrderManagementDetail",
     "ResourceListOfComplianceBreachedOrderInfo",
     "ResourceListOfComplianceRule",
     "ResourceListOfComplianceRuleResult",
@@ -1859,7 +1860,6 @@ __all__ = [
     "ResourceListOfConstituentsAdjustmentHeader",
     "ResourceListOfCorporateAction",
     "ResourceListOfDataType",
-    "ResourceListOfEntityChangeItem",
     "ResourceListOfExecution",
     "ResourceListOfFeeRule",
     "ResourceListOfGetCdsFlowConventionsResponse",

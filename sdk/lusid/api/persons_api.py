@@ -72,7 +72,7 @@ class PersonsApi:
 
     @validate_arguments
     def delete_person(self, id_type_scope : Annotated[constr(strict=True, max_length=64, min_length=1), Field(..., description="The scope of the person identifier type.")], id_type_code : Annotated[constr(strict=True, max_length=64, min_length=1), Field(..., description="The code of the person identifier type.")], code : Annotated[constr(strict=True, max_length=64, min_length=1), Field(..., description="Code of the person under specified identifier type scope and code. This together with defined              identifier type uniquely identifies the person to delete.")], async_req: Optional[bool]=None, **kwargs) -> Union[DeletedEntityResponse, Awaitable[DeletedEntityResponse]]:  # noqa: E501
-        """[EARLY ACCESS] DeletePerson: Delete person  # noqa: E501
+        """DeletePerson: Delete person  # noqa: E501
 
         Delete a person. Deletion will be valid from the person's creation datetime.  This means that the person will no longer exist at any effective datetime from the asAt datetime of deletion.  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
@@ -108,7 +108,7 @@ class PersonsApi:
 
     @validate_arguments
     def delete_person_with_http_info(self, id_type_scope : Annotated[constr(strict=True, max_length=64, min_length=1), Field(..., description="The scope of the person identifier type.")], id_type_code : Annotated[constr(strict=True, max_length=64, min_length=1), Field(..., description="The code of the person identifier type.")], code : Annotated[constr(strict=True, max_length=64, min_length=1), Field(..., description="Code of the person under specified identifier type scope and code. This together with defined              identifier type uniquely identifies the person to delete.")], **kwargs) -> ApiResponse:  # noqa: E501
-        """[EARLY ACCESS] DeletePerson: Delete person  # noqa: E501
+        """DeletePerson: Delete person  # noqa: E501
 
         Delete a person. Deletion will be valid from the person's creation datetime.  This means that the person will no longer exist at any effective datetime from the asAt datetime of deletion.  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
@@ -2990,7 +2990,7 @@ class PersonsApi:
 
     @validate_arguments
     def upsert_person(self, upsert_person_request : Annotated[UpsertPersonRequest, Field(..., description="Request to create or update a person.")], async_req: Optional[bool]=None, **kwargs) -> Union[Person, Awaitable[Person]]:  # noqa: E501
-        """[EARLY ACCESS] UpsertPerson: Upsert Person  # noqa: E501
+        """UpsertPerson: Upsert Person  # noqa: E501
 
         Create or update a new person under the specified scope.  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
@@ -3022,7 +3022,7 @@ class PersonsApi:
 
     @validate_arguments
     def upsert_person_with_http_info(self, upsert_person_request : Annotated[UpsertPersonRequest, Field(..., description="Request to create or update a person.")], **kwargs) -> ApiResponse:  # noqa: E501
-        """[EARLY ACCESS] UpsertPerson: Upsert Person  # noqa: E501
+        """UpsertPerson: Upsert Person  # noqa: E501
 
         Create or update a new person under the specified scope.  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an

@@ -20,6 +20,8 @@ from pydantic.v1 import validate_arguments, ValidationError
 from typing import overload, Optional, Union, Awaitable
 
 from typing_extensions import Annotated
+from datetime import datetime
+
 from pydantic.v1 import Field, StrictBool, conlist, constr, validator
 
 from typing import Dict, Optional
@@ -36,7 +38,7 @@ from lusid.models.place_blocks_request import PlaceBlocksRequest
 from lusid.models.placement_update_request import PlacementUpdateRequest
 from lusid.models.resource_id import ResourceId
 from lusid.models.resource_list_of_block_and_orders import ResourceListOfBlockAndOrders
-from lusid.models.resource_list_of_entity_change_item import ResourceListOfEntityChangeItem
+from lusid.models.resource_list_of_change_interval_with_order_management_detail import ResourceListOfChangeIntervalWithOrderManagementDetail
 from lusid.models.resource_list_of_moved_order_to_different_block_response import ResourceListOfMovedOrderToDifferentBlockResponse
 from lusid.models.resource_list_of_placement import ResourceListOfPlacement
 from lusid.models.update_orders_response import UpdateOrdersResponse
@@ -703,28 +705,30 @@ class OrderManagementApi:
             _request_auth=_params.get('_request_auth'))
 
     @overload
-    async def get_order_history(self, scope : Annotated[constr(strict=True, max_length=64, min_length=1), Field(..., description="The scope of the order.")], code : Annotated[constr(strict=True, max_length=64, min_length=1), Field(..., description="The code of the order.")], **kwargs) -> ResourceListOfEntityChangeItem:  # noqa: E501
+    async def get_order_history(self, scope : Annotated[constr(strict=True, max_length=64, min_length=1), Field(..., description="The scope of the order.")], code : Annotated[constr(strict=True, max_length=64, min_length=1), Field(..., description="The code of the order.")], as_at : Annotated[Optional[datetime], Field(description="The asAt datetime at which to retrieve the history of the order and related entities. Defaults              to return the latest version if not specified.")] = None, **kwargs) -> ResourceListOfChangeIntervalWithOrderManagementDetail:  # noqa: E501
         ...
 
     @overload
-    def get_order_history(self, scope : Annotated[constr(strict=True, max_length=64, min_length=1), Field(..., description="The scope of the order.")], code : Annotated[constr(strict=True, max_length=64, min_length=1), Field(..., description="The code of the order.")], async_req: Optional[bool]=True, **kwargs) -> ResourceListOfEntityChangeItem:  # noqa: E501
+    def get_order_history(self, scope : Annotated[constr(strict=True, max_length=64, min_length=1), Field(..., description="The scope of the order.")], code : Annotated[constr(strict=True, max_length=64, min_length=1), Field(..., description="The code of the order.")], as_at : Annotated[Optional[datetime], Field(description="The asAt datetime at which to retrieve the history of the order and related entities. Defaults              to return the latest version if not specified.")] = None, async_req: Optional[bool]=True, **kwargs) -> ResourceListOfChangeIntervalWithOrderManagementDetail:  # noqa: E501
         ...
 
     @validate_arguments
-    def get_order_history(self, scope : Annotated[constr(strict=True, max_length=64, min_length=1), Field(..., description="The scope of the order.")], code : Annotated[constr(strict=True, max_length=64, min_length=1), Field(..., description="The code of the order.")], async_req: Optional[bool]=None, **kwargs) -> Union[ResourceListOfEntityChangeItem, Awaitable[ResourceListOfEntityChangeItem]]:  # noqa: E501
+    def get_order_history(self, scope : Annotated[constr(strict=True, max_length=64, min_length=1), Field(..., description="The scope of the order.")], code : Annotated[constr(strict=True, max_length=64, min_length=1), Field(..., description="The code of the order.")], as_at : Annotated[Optional[datetime], Field(description="The asAt datetime at which to retrieve the history of the order and related entities. Defaults              to return the latest version if not specified.")] = None, async_req: Optional[bool]=None, **kwargs) -> Union[ResourceListOfChangeIntervalWithOrderManagementDetail, Awaitable[ResourceListOfChangeIntervalWithOrderManagementDetail]]:  # noqa: E501
         """[EXPERIMENTAL] GetOrderHistory: Get the history of an order and related entity changes  # noqa: E501
 
         Get the changes that have happened to an order and related entities.  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
 
-        >>> thread = api.get_order_history(scope, code, async_req=True)
+        >>> thread = api.get_order_history(scope, code, as_at, async_req=True)
         >>> result = thread.get()
 
         :param scope: The scope of the order. (required)
         :type scope: str
         :param code: The code of the order. (required)
         :type code: str
+        :param as_at: The asAt datetime at which to retrieve the history of the order and related entities. Defaults              to return the latest version if not specified.
+        :type as_at: datetime
         :param async_req: Whether to execute the request asynchronously.
         :type async_req: bool, optional
         :param _request_timeout: timeout setting for this request.
@@ -734,7 +738,7 @@ class OrderManagementApi:
         :return: Returns the result object.
                  If the method is called asynchronously,
                  returns the request thread.
-        :rtype: ResourceListOfEntityChangeItem
+        :rtype: ResourceListOfChangeIntervalWithOrderManagementDetail
         """
         kwargs['_return_http_data_only'] = True
         if '_preload_content' in kwargs:
@@ -742,23 +746,25 @@ class OrderManagementApi:
             raise ValueError(message)
         if async_req is not None:
             kwargs['async_req'] = async_req
-        return self.get_order_history_with_http_info(scope, code, **kwargs)  # noqa: E501
+        return self.get_order_history_with_http_info(scope, code, as_at, **kwargs)  # noqa: E501
 
     @validate_arguments
-    def get_order_history_with_http_info(self, scope : Annotated[constr(strict=True, max_length=64, min_length=1), Field(..., description="The scope of the order.")], code : Annotated[constr(strict=True, max_length=64, min_length=1), Field(..., description="The code of the order.")], **kwargs) -> ApiResponse:  # noqa: E501
+    def get_order_history_with_http_info(self, scope : Annotated[constr(strict=True, max_length=64, min_length=1), Field(..., description="The scope of the order.")], code : Annotated[constr(strict=True, max_length=64, min_length=1), Field(..., description="The code of the order.")], as_at : Annotated[Optional[datetime], Field(description="The asAt datetime at which to retrieve the history of the order and related entities. Defaults              to return the latest version if not specified.")] = None, **kwargs) -> ApiResponse:  # noqa: E501
         """[EXPERIMENTAL] GetOrderHistory: Get the history of an order and related entity changes  # noqa: E501
 
         Get the changes that have happened to an order and related entities.  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
 
-        >>> thread = api.get_order_history_with_http_info(scope, code, async_req=True)
+        >>> thread = api.get_order_history_with_http_info(scope, code, as_at, async_req=True)
         >>> result = thread.get()
 
         :param scope: The scope of the order. (required)
         :type scope: str
         :param code: The code of the order. (required)
         :type code: str
+        :param as_at: The asAt datetime at which to retrieve the history of the order and related entities. Defaults              to return the latest version if not specified.
+        :type as_at: datetime
         :param async_req: Whether to execute the request asynchronously.
         :type async_req: bool, optional
         :param _preload_content: if False, the ApiResponse.data will
@@ -781,14 +787,15 @@ class OrderManagementApi:
         :return: Returns the result object.
                  If the method is called asynchronously,
                  returns the request thread.
-        :rtype: tuple(ResourceListOfEntityChangeItem, status_code(int), headers(HTTPHeaderDict))
+        :rtype: tuple(ResourceListOfChangeIntervalWithOrderManagementDetail, status_code(int), headers(HTTPHeaderDict))
         """
 
         _params = locals()
 
         _all_params = [
             'scope',
-            'code'
+            'code',
+            'as_at'
         ]
         _all_params.extend(
             [
@@ -825,6 +832,12 @@ class OrderManagementApi:
 
         # process the query parameters
         _query_params = []
+        if _params.get('as_at') is not None:  # noqa: E501
+            if isinstance(_params['as_at'], datetime):
+                _query_params.append(('asAt', _params['as_at'].strftime(self.api_client.configuration.datetime_format)))
+            else:
+                _query_params.append(('asAt', _params['as_at']))
+
         # process the header parameters
         _header_params = dict(_params.get('_headers', {}))
         # process the form parameters
@@ -840,7 +853,7 @@ class OrderManagementApi:
         _auth_settings = ['oauth2']  # noqa: E501
 
         _response_types_map = {
-            '200': "ResourceListOfEntityChangeItem",
+            '200': "ResourceListOfChangeIntervalWithOrderManagementDetail",
             '400': "LusidValidationProblemDetails",
             '404': "str",
         }

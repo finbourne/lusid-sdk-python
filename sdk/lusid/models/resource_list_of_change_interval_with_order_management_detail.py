@@ -20,14 +20,14 @@ import json
 
 from typing import Any, Dict, List, Optional
 from pydantic.v1 import BaseModel, Field, StrictStr, conlist
-from lusid.models.entity_change_item import EntityChangeItem
+from lusid.models.change_interval_with_order_management_detail import ChangeIntervalWithOrderManagementDetail
 from lusid.models.link import Link
 
-class ResourceListOfEntityChangeItem(BaseModel):
+class ResourceListOfChangeIntervalWithOrderManagementDetail(BaseModel):
     """
-    ResourceListOfEntityChangeItem
+    ResourceListOfChangeIntervalWithOrderManagementDetail
     """
-    values: conlist(EntityChangeItem) = Field(...)
+    values: conlist(ChangeIntervalWithOrderManagementDetail) = Field(...)
     href: Optional[StrictStr] = None
     links: Optional[conlist(Link)] = None
     next_page: Optional[StrictStr] = Field(None, alias="nextPage")
@@ -48,8 +48,8 @@ class ResourceListOfEntityChangeItem(BaseModel):
         return json.dumps(self.to_dict())
 
     @classmethod
-    def from_json(cls, json_str: str) -> ResourceListOfEntityChangeItem:
-        """Create an instance of ResourceListOfEntityChangeItem from a JSON string"""
+    def from_json(cls, json_str: str) -> ResourceListOfChangeIntervalWithOrderManagementDetail:
+        """Create an instance of ResourceListOfChangeIntervalWithOrderManagementDetail from a JSON string"""
         return cls.from_dict(json.loads(json_str))
 
     def to_dict(self):
@@ -95,16 +95,16 @@ class ResourceListOfEntityChangeItem(BaseModel):
         return _dict
 
     @classmethod
-    def from_dict(cls, obj: dict) -> ResourceListOfEntityChangeItem:
-        """Create an instance of ResourceListOfEntityChangeItem from a dict"""
+    def from_dict(cls, obj: dict) -> ResourceListOfChangeIntervalWithOrderManagementDetail:
+        """Create an instance of ResourceListOfChangeIntervalWithOrderManagementDetail from a dict"""
         if obj is None:
             return None
 
         if not isinstance(obj, dict):
-            return ResourceListOfEntityChangeItem.parse_obj(obj)
+            return ResourceListOfChangeIntervalWithOrderManagementDetail.parse_obj(obj)
 
-        _obj = ResourceListOfEntityChangeItem.parse_obj({
-            "values": [EntityChangeItem.from_dict(_item) for _item in obj.get("values")] if obj.get("values") is not None else None,
+        _obj = ResourceListOfChangeIntervalWithOrderManagementDetail.parse_obj({
+            "values": [ChangeIntervalWithOrderManagementDetail.from_dict(_item) for _item in obj.get("values")] if obj.get("values") is not None else None,
             "href": obj.get("href"),
             "links": [Link.from_dict(_item) for _item in obj.get("links")] if obj.get("links") is not None else None,
             "next_page": obj.get("nextPage"),

@@ -349,7 +349,7 @@ Name | Type | Description  | Notes
 [Back to top](#) &#8226; [Back to API list](../README.md#documentation-for-api-endpoints) &#8226; [Back to Model list](../README.md#documentation-for-models) &#8226; [Back to README](../README.md)
 
 # **get_order_history**
-> ResourceListOfEntityChangeItem get_order_history(scope, code)
+> ResourceListOfChangeIntervalWithOrderManagementDetail get_order_history(scope, code, as_at=as_at)
 
 [EXPERIMENTAL] GetOrderHistory: Get the history of an order and related entity changes
 
@@ -394,10 +394,11 @@ async def main():
         api_instance = api_client_factory.build(OrderManagementApi)
         scope = 'scope_example' # str | The scope of the order.
         code = 'code_example' # str | The code of the order.
+        as_at = '2013-10-20T19:20:30+01:00' # datetime | The asAt datetime at which to retrieve the history of the order and related entities. Defaults              to return the latest version if not specified. (optional)
 
         try:
             # [EXPERIMENTAL] GetOrderHistory: Get the history of an order and related entity changes
-            api_response = await api_instance.get_order_history(scope, code)
+            api_response = await api_instance.get_order_history(scope, code, as_at=as_at)
             pprint(api_response)
         except ApiException as e:
             print("Exception when calling OrderManagementApi->get_order_history: %s\n" % e)
@@ -411,10 +412,11 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **scope** | **str**| The scope of the order. | 
  **code** | **str**| The code of the order. | 
+ **as_at** | **datetime**| The asAt datetime at which to retrieve the history of the order and related entities. Defaults              to return the latest version if not specified. | [optional] 
 
 ### Return type
 
-[**ResourceListOfEntityChangeItem**](ResourceListOfEntityChangeItem.md)
+[**ResourceListOfChangeIntervalWithOrderManagementDetail**](ResourceListOfChangeIntervalWithOrderManagementDetail.md)
 
 ### HTTP request headers
 
