@@ -4,7 +4,8 @@
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**portfolios_with_metadata** | [**Dict[str, MetadataKeyValue]**](MetadataKeyValue.md) | The set of portfolios with the access control metadata | 
+**portfolio_id** | [**ResourceId**](ResourceId.md) |  | 
+**metadata** | **Dict[str, List[AccessMetadataValue]]** |  | 
 
 ## Example
 

@@ -4,7 +4,7 @@ All URIs are relative to *https://www.lusid.com/api*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
-[**add_diary_entry**](AborApi.md#add_diary_entry) | **POST** /api/abor/{scope}/{code}/accountingdiary/{diaryEntryCode} | [EXPERIMENTAL] AddDiaryEntry: Add a diary entry to the specified Abor.
+[**add_diary_entry**](AborApi.md#add_diary_entry) | **POST** /api/abor/{scope}/{code}/accountingdiary | [EXPERIMENTAL] AddDiaryEntry: Add a diary entry to the specified Abor.
 [**close_period**](AborApi.md#close_period) | **POST** /api/abor/{scope}/{code}/accountingdiary/$closeperiod | [EXPERIMENTAL] ClosePeriod: Closes or locks the current period for the given Abor.
 [**create_abor**](AborApi.md#create_abor) | **POST** /api/abor/{scope} | [EXPERIMENTAL] CreateAbor: Create an Abor.
 [**delete_abor**](AborApi.md#delete_abor) | **DELETE** /api/abor/{scope}/{code} | [EXPERIMENTAL] DeleteAbor: Delete an Abor.
@@ -20,7 +20,7 @@ Method | HTTP request | Description
 
 
 # **add_diary_entry**
-> DiaryEntry add_diary_entry(scope, code, diary_entry_code, diary_entry_request)
+> DiaryEntry add_diary_entry(scope, code, diary_entry_request)
 
 [EXPERIMENTAL] AddDiaryEntry: Add a diary entry to the specified Abor.
 
@@ -65,17 +65,16 @@ async def main():
         api_instance = api_client_factory.build(AborApi)
         scope = 'scope_example' # str | The scope of the Abor.
         code = 'code_example' # str | The code of the Abor.
-        diary_entry_code = 'diary_entry_code_example' # str | Diary entry code
 
         # Objects can be created either via the class constructor, or using the 'from_dict' or 'from_json' methods
         # Change the lines below to switch approach
         # diary_entry_request = DiaryEntryRequest()
         # diary_entry_request = DiaryEntryRequest.from_json("")
-        diary_entry_request = DiaryEntryRequest.from_dict({"name":"2023_Q1","status":"Estimate","effectiveAt":"2023-04-02T15:10:10.0000000+00:00","queryAsAt":"2023-04-15T15:10:10.0000000+00:00","properties":{"DiaryEntry/AccountingDiary/Reports":{"key":"DiaryEntry/AccountingDiary/Reports","value":{"labelValue":"Some comments"}}}}) # DiaryEntryRequest | The diary entry to add.
+        diary_entry_request = DiaryEntryRequest.from_dict({"diaryEntryCode":"DiaryEntryCode","name":"2023_Q1","status":"Estimate","effectiveAt":"2023-04-02T15:10:10.0000000+00:00","queryAsAt":"2023-04-15T15:10:10.0000000+00:00","properties":{"DiaryEntry/AccountingDiary/Reports":{"key":"DiaryEntry/AccountingDiary/Reports","value":{"labelValue":"Some comments"}}}}) # DiaryEntryRequest | The diary entry to add.
 
         try:
             # [EXPERIMENTAL] AddDiaryEntry: Add a diary entry to the specified Abor.
-            api_response = await api_instance.add_diary_entry(scope, code, diary_entry_code, diary_entry_request)
+            api_response = await api_instance.add_diary_entry(scope, code, diary_entry_request)
             pprint(api_response)
         except ApiException as e:
             print("Exception when calling AborApi->add_diary_entry: %s\n" % e)
@@ -89,7 +88,6 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **scope** | **str**| The scope of the Abor. | 
  **code** | **str**| The code of the Abor. | 
- **diary_entry_code** | **str**| Diary entry code | 
  **diary_entry_request** | [**DiaryEntryRequest**](DiaryEntryRequest.md)| The diary entry to add. | 
 
 ### Return type

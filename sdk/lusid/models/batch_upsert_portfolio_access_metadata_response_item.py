@@ -21,13 +21,15 @@ import json
 from typing import Any, Dict, List
 from pydantic.v1 import BaseModel, Field, conlist
 from lusid.models.access_metadata_value import AccessMetadataValue
+from lusid.models.resource_id import ResourceId
 
-class MetadataKeyValue(BaseModel):
+class BatchUpsertPortfolioAccessMetadataResponseItem(BaseModel):
     """
-    MetadataKeyValue
+    BatchUpsertPortfolioAccessMetadataResponseItem
     """
+    portfolio_id: ResourceId = Field(..., alias="portfolioId")
     metadata: Dict[str, conlist(AccessMetadataValue)] = Field(...)
-    __properties = ["metadata"]
+    __properties = ["portfolioId", "metadata"]
 
     class Config:
         """Pydantic configuration"""
@@ -43,8 +45,8 @@ class MetadataKeyValue(BaseModel):
         return json.dumps(self.to_dict())
 
     @classmethod
-    def from_json(cls, json_str: str) -> MetadataKeyValue:
-        """Create an instance of MetadataKeyValue from a JSON string"""
+    def from_json(cls, json_str: str) -> BatchUpsertPortfolioAccessMetadataResponseItem:
+        """Create an instance of BatchUpsertPortfolioAccessMetadataResponseItem from a JSON string"""
         return cls.from_dict(json.loads(json_str))
 
     def to_dict(self):
@@ -53,6 +55,9 @@ class MetadataKeyValue(BaseModel):
                           exclude={
                           },
                           exclude_none=True)
+        # override the default output from pydantic by calling `to_dict()` of portfolio_id
+        if self.portfolio_id:
+            _dict['portfolioId'] = self.portfolio_id.to_dict()
         # override the default output from pydantic by calling `to_dict()` of each value in metadata (dict of array)
         _field_dict_of_array = {}
         if self.metadata:
@@ -65,15 +70,16 @@ class MetadataKeyValue(BaseModel):
         return _dict
 
     @classmethod
-    def from_dict(cls, obj: dict) -> MetadataKeyValue:
-        """Create an instance of MetadataKeyValue from a dict"""
+    def from_dict(cls, obj: dict) -> BatchUpsertPortfolioAccessMetadataResponseItem:
+        """Create an instance of BatchUpsertPortfolioAccessMetadataResponseItem from a dict"""
         if obj is None:
             return None
 
         if not isinstance(obj, dict):
-            return MetadataKeyValue.parse_obj(obj)
+            return BatchUpsertPortfolioAccessMetadataResponseItem.parse_obj(obj)
 
-        _obj = MetadataKeyValue.parse_obj({
+        _obj = BatchUpsertPortfolioAccessMetadataResponseItem.parse_obj({
+            "portfolio_id": ResourceId.from_dict(obj.get("portfolioId")) if obj.get("portfolioId") is not None else None,
             "metadata": dict(
                 (_k,
                         [AccessMetadataValue.from_dict(_item) for _item in _v]

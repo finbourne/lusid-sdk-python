@@ -18,16 +18,20 @@ import re  # noqa: F401
 import json
 
 
-from typing import Any, Dict
-from pydantic.v1 import BaseModel, Field
-from lusid.models.metadata_key_value_response import MetadataKeyValueResponse
+from typing import Any, Dict, List, Optional
+from pydantic.v1 import BaseModel, Field, conlist
+from lusid.models.batch_upsert_portfolio_access_metadata_response_item import BatchUpsertPortfolioAccessMetadataResponseItem
+from lusid.models.error_detail import ErrorDetail
+from lusid.models.link import Link
 
 class BatchUpsertPortfolioAccessMetadataResponse(BaseModel):
     """
     BatchUpsertPortfolioAccessMetadataResponse
     """
-    portfolios_with_metadata: Dict[str, MetadataKeyValueResponse] = Field(..., alias="portfoliosWithMetadata", description="The set of portfolios with the access control metadata")
-    __properties = ["portfoliosWithMetadata"]
+    values: Optional[Dict[str, BatchUpsertPortfolioAccessMetadataResponseItem]] = Field(None, description="The items have been successfully updated or created.")
+    failed: Optional[Dict[str, ErrorDetail]] = Field(None, description="The items that could not be updated or created along with a reason for their failure.")
+    links: Optional[conlist(Link)] = None
+    __properties = ["values", "failed", "links"]
 
     class Config:
         """Pydantic configuration"""
@@ -53,13 +57,42 @@ class BatchUpsertPortfolioAccessMetadataResponse(BaseModel):
                           exclude={
                           },
                           exclude_none=True)
-        # override the default output from pydantic by calling `to_dict()` of each value in portfolios_with_metadata (dict)
+        # override the default output from pydantic by calling `to_dict()` of each value in values (dict)
         _field_dict = {}
-        if self.portfolios_with_metadata:
-            for _key in self.portfolios_with_metadata:
-                if self.portfolios_with_metadata[_key]:
-                    _field_dict[_key] = self.portfolios_with_metadata[_key].to_dict()
-            _dict['portfoliosWithMetadata'] = _field_dict
+        if self.values:
+            for _key in self.values:
+                if self.values[_key]:
+                    _field_dict[_key] = self.values[_key].to_dict()
+            _dict['values'] = _field_dict
+        # override the default output from pydantic by calling `to_dict()` of each value in failed (dict)
+        _field_dict = {}
+        if self.failed:
+            for _key in self.failed:
+                if self.failed[_key]:
+                    _field_dict[_key] = self.failed[_key].to_dict()
+            _dict['failed'] = _field_dict
+        # override the default output from pydantic by calling `to_dict()` of each item in links (list)
+        _items = []
+        if self.links:
+            for _item in self.links:
+                if _item:
+                    _items.append(_item.to_dict())
+            _dict['links'] = _items
+        # set to None if values (nullable) is None
+        # and __fields_set__ contains the field
+        if self.values is None and "values" in self.__fields_set__:
+            _dict['values'] = None
+
+        # set to None if failed (nullable) is None
+        # and __fields_set__ contains the field
+        if self.failed is None and "failed" in self.__fields_set__:
+            _dict['failed'] = None
+
+        # set to None if links (nullable) is None
+        # and __fields_set__ contains the field
+        if self.links is None and "links" in self.__fields_set__:
+            _dict['links'] = None
+
         return _dict
 
     @classmethod
@@ -72,11 +105,18 @@ class BatchUpsertPortfolioAccessMetadataResponse(BaseModel):
             return BatchUpsertPortfolioAccessMetadataResponse.parse_obj(obj)
 
         _obj = BatchUpsertPortfolioAccessMetadataResponse.parse_obj({
-            "portfolios_with_metadata": dict(
-                (_k, MetadataKeyValueResponse.from_dict(_v))
-                for _k, _v in obj.get("portfoliosWithMetadata").items()
+            "values": dict(
+                (_k, BatchUpsertPortfolioAccessMetadataResponseItem.from_dict(_v))
+                for _k, _v in obj.get("values").items()
             )
-            if obj.get("portfoliosWithMetadata") is not None
-            else None
+            if obj.get("values") is not None
+            else None,
+            "failed": dict(
+                (_k, ErrorDetail.from_dict(_v))
+                for _k, _v in obj.get("failed").items()
+            )
+            if obj.get("failed") is not None
+            else None,
+            "links": [Link.from_dict(_item) for _item in obj.get("links")] if obj.get("links") is not None else None
         })
         return _obj

@@ -26,12 +26,20 @@ class DiaryEntryRequest(BaseModel):
     """
     The request to add a diary entry  # noqa: E501
     """
+    diary_entry_code: constr(strict=True, max_length=64, min_length=1) = Field(..., alias="diaryEntryCode", description="The code of the diary entry.")
     name: Optional[constr(strict=True, max_length=512, min_length=1)] = Field(None, description="The name of the diary entry.")
     status: Optional[StrictStr] = Field(None, description="The status of a Diary Entry of Type 'Other'. Defaults to 'Undefined' and supports 'Undefined', 'Estimate', 'Candidate', and 'Final'.")
     effective_at: datetime = Field(..., alias="effectiveAt", description="The effective time of the diary entry.")
     query_as_at: Optional[datetime] = Field(None, alias="queryAsAt", description="The query time of the diary entry. Defaults to latest.")
     properties: Optional[Dict[str, ModelProperty]] = Field(None, description="A set of properties for the diary entry.")
-    __properties = ["name", "status", "effectiveAt", "queryAsAt", "properties"]
+    __properties = ["diaryEntryCode", "name", "status", "effectiveAt", "queryAsAt", "properties"]
+
+    @validator('diary_entry_code')
+    def diary_entry_code_validate_regular_expression(cls, value):
+        """Validates the regular expression"""
+        if not re.match(r"^[a-zA-Z0-9\-_]+$", value):
+            raise ValueError(r"must validate the regular expression /^[a-zA-Z0-9\-_]+$/")
+        return value
 
     @validator('name')
     def name_validate_regular_expression(cls, value):
@@ -106,6 +114,7 @@ class DiaryEntryRequest(BaseModel):
             return DiaryEntryRequest.parse_obj(obj)
 
         _obj = DiaryEntryRequest.parse_obj({
+            "diary_entry_code": obj.get("diaryEntryCode"),
             "name": obj.get("name"),
             "status": obj.get("status"),
             "effective_at": obj.get("effectiveAt"),

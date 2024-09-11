@@ -25,7 +25,7 @@ class GroupReconciliationCoreComparisonRuleOperand(BaseModel):
     """
     GroupReconciliationCoreComparisonRuleOperand
     """
-    key: constr(strict=True, max_length=256, min_length=1) = Field(..., description="The key of the value to compare")
+    key: constr(strict=True, max_length=1024, min_length=0) = Field(..., description="The key of the value to compare")
     operation: constr(strict=True, min_length=1) = Field(..., description="What to do with the value pointed to by the key, e.g. Sum. Only \"Value is allowed for core rules\"")
     __properties = ["key", "operation"]
 

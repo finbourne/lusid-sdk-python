@@ -66,30 +66,28 @@ class AborApi:
         self.api_client = api_client
 
     @overload
-    async def add_diary_entry(self, scope : Annotated[constr(strict=True, max_length=64, min_length=1), Field(..., description="The scope of the Abor.")], code : Annotated[constr(strict=True, max_length=64, min_length=1), Field(..., description="The code of the Abor.")], diary_entry_code : Annotated[constr(strict=True, max_length=64, min_length=1), Field(..., description="Diary entry code")], diary_entry_request : Annotated[DiaryEntryRequest, Field(..., description="The diary entry to add.")], **kwargs) -> DiaryEntry:  # noqa: E501
+    async def add_diary_entry(self, scope : Annotated[constr(strict=True, max_length=64, min_length=1), Field(..., description="The scope of the Abor.")], code : Annotated[constr(strict=True, max_length=64, min_length=1), Field(..., description="The code of the Abor.")], diary_entry_request : Annotated[DiaryEntryRequest, Field(..., description="The diary entry to add.")], **kwargs) -> DiaryEntry:  # noqa: E501
         ...
 
     @overload
-    def add_diary_entry(self, scope : Annotated[constr(strict=True, max_length=64, min_length=1), Field(..., description="The scope of the Abor.")], code : Annotated[constr(strict=True, max_length=64, min_length=1), Field(..., description="The code of the Abor.")], diary_entry_code : Annotated[constr(strict=True, max_length=64, min_length=1), Field(..., description="Diary entry code")], diary_entry_request : Annotated[DiaryEntryRequest, Field(..., description="The diary entry to add.")], async_req: Optional[bool]=True, **kwargs) -> DiaryEntry:  # noqa: E501
+    def add_diary_entry(self, scope : Annotated[constr(strict=True, max_length=64, min_length=1), Field(..., description="The scope of the Abor.")], code : Annotated[constr(strict=True, max_length=64, min_length=1), Field(..., description="The code of the Abor.")], diary_entry_request : Annotated[DiaryEntryRequest, Field(..., description="The diary entry to add.")], async_req: Optional[bool]=True, **kwargs) -> DiaryEntry:  # noqa: E501
         ...
 
     @validate_arguments
-    def add_diary_entry(self, scope : Annotated[constr(strict=True, max_length=64, min_length=1), Field(..., description="The scope of the Abor.")], code : Annotated[constr(strict=True, max_length=64, min_length=1), Field(..., description="The code of the Abor.")], diary_entry_code : Annotated[constr(strict=True, max_length=64, min_length=1), Field(..., description="Diary entry code")], diary_entry_request : Annotated[DiaryEntryRequest, Field(..., description="The diary entry to add.")], async_req: Optional[bool]=None, **kwargs) -> Union[DiaryEntry, Awaitable[DiaryEntry]]:  # noqa: E501
+    def add_diary_entry(self, scope : Annotated[constr(strict=True, max_length=64, min_length=1), Field(..., description="The scope of the Abor.")], code : Annotated[constr(strict=True, max_length=64, min_length=1), Field(..., description="The code of the Abor.")], diary_entry_request : Annotated[DiaryEntryRequest, Field(..., description="The diary entry to add.")], async_req: Optional[bool]=None, **kwargs) -> Union[DiaryEntry, Awaitable[DiaryEntry]]:  # noqa: E501
         """[EXPERIMENTAL] AddDiaryEntry: Add a diary entry to the specified Abor.  # noqa: E501
 
         Adds a new diary entry to the specified Abor  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
 
-        >>> thread = api.add_diary_entry(scope, code, diary_entry_code, diary_entry_request, async_req=True)
+        >>> thread = api.add_diary_entry(scope, code, diary_entry_request, async_req=True)
         >>> result = thread.get()
 
         :param scope: The scope of the Abor. (required)
         :type scope: str
         :param code: The code of the Abor. (required)
         :type code: str
-        :param diary_entry_code: Diary entry code (required)
-        :type diary_entry_code: str
         :param diary_entry_request: The diary entry to add. (required)
         :type diary_entry_request: DiaryEntryRequest
         :param async_req: Whether to execute the request asynchronously.
@@ -109,25 +107,23 @@ class AborApi:
             raise ValueError(message)
         if async_req is not None:
             kwargs['async_req'] = async_req
-        return self.add_diary_entry_with_http_info(scope, code, diary_entry_code, diary_entry_request, **kwargs)  # noqa: E501
+        return self.add_diary_entry_with_http_info(scope, code, diary_entry_request, **kwargs)  # noqa: E501
 
     @validate_arguments
-    def add_diary_entry_with_http_info(self, scope : Annotated[constr(strict=True, max_length=64, min_length=1), Field(..., description="The scope of the Abor.")], code : Annotated[constr(strict=True, max_length=64, min_length=1), Field(..., description="The code of the Abor.")], diary_entry_code : Annotated[constr(strict=True, max_length=64, min_length=1), Field(..., description="Diary entry code")], diary_entry_request : Annotated[DiaryEntryRequest, Field(..., description="The diary entry to add.")], **kwargs) -> ApiResponse:  # noqa: E501
+    def add_diary_entry_with_http_info(self, scope : Annotated[constr(strict=True, max_length=64, min_length=1), Field(..., description="The scope of the Abor.")], code : Annotated[constr(strict=True, max_length=64, min_length=1), Field(..., description="The code of the Abor.")], diary_entry_request : Annotated[DiaryEntryRequest, Field(..., description="The diary entry to add.")], **kwargs) -> ApiResponse:  # noqa: E501
         """[EXPERIMENTAL] AddDiaryEntry: Add a diary entry to the specified Abor.  # noqa: E501
 
         Adds a new diary entry to the specified Abor  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
 
-        >>> thread = api.add_diary_entry_with_http_info(scope, code, diary_entry_code, diary_entry_request, async_req=True)
+        >>> thread = api.add_diary_entry_with_http_info(scope, code, diary_entry_request, async_req=True)
         >>> result = thread.get()
 
         :param scope: The scope of the Abor. (required)
         :type scope: str
         :param code: The code of the Abor. (required)
         :type code: str
-        :param diary_entry_code: Diary entry code (required)
-        :type diary_entry_code: str
         :param diary_entry_request: The diary entry to add. (required)
         :type diary_entry_request: DiaryEntryRequest
         :param async_req: Whether to execute the request asynchronously.
@@ -160,7 +156,6 @@ class AborApi:
         _all_params = [
             'scope',
             'code',
-            'diary_entry_code',
             'diary_entry_request'
         ]
         _all_params.extend(
@@ -195,9 +190,6 @@ class AborApi:
         if _params['code']:
             _path_params['code'] = _params['code']
 
-        if _params['diary_entry_code']:
-            _path_params['diaryEntryCode'] = _params['diary_entry_code']
-
 
         # process the query parameters
         _query_params = []
@@ -231,7 +223,7 @@ class AborApi:
         }
 
         return self.api_client.call_api(
-            '/api/abor/{scope}/{code}/accountingdiary/{diaryEntryCode}', 'POST',
+            '/api/abor/{scope}/{code}/accountingdiary', 'POST',
             _path_params,
             _query_params,
             _header_params,

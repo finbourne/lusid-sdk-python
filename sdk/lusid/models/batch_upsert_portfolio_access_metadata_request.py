@@ -18,16 +18,18 @@ import re  # noqa: F401
 import json
 
 
-from typing import Any, Dict
-from pydantic.v1 import BaseModel, Field
-from lusid.models.metadata_key_value import MetadataKeyValue
+from typing import Any, Dict, List
+from pydantic.v1 import BaseModel, Field, conlist
+from lusid.models.access_metadata_value import AccessMetadataValue
+from lusid.models.resource_id import ResourceId
 
 class BatchUpsertPortfolioAccessMetadataRequest(BaseModel):
     """
     BatchUpsertPortfolioAccessMetadataRequest
     """
-    portfolios_with_metadata: Dict[str, MetadataKeyValue] = Field(..., alias="portfoliosWithMetadata", description="The set of portfolios with the access control metadata")
-    __properties = ["portfoliosWithMetadata"]
+    portfolio_id: ResourceId = Field(..., alias="portfolioId")
+    metadata: Dict[str, conlist(AccessMetadataValue)] = Field(...)
+    __properties = ["portfolioId", "metadata"]
 
     class Config:
         """Pydantic configuration"""
@@ -53,13 +55,18 @@ class BatchUpsertPortfolioAccessMetadataRequest(BaseModel):
                           exclude={
                           },
                           exclude_none=True)
-        # override the default output from pydantic by calling `to_dict()` of each value in portfolios_with_metadata (dict)
-        _field_dict = {}
-        if self.portfolios_with_metadata:
-            for _key in self.portfolios_with_metadata:
-                if self.portfolios_with_metadata[_key]:
-                    _field_dict[_key] = self.portfolios_with_metadata[_key].to_dict()
-            _dict['portfoliosWithMetadata'] = _field_dict
+        # override the default output from pydantic by calling `to_dict()` of portfolio_id
+        if self.portfolio_id:
+            _dict['portfolioId'] = self.portfolio_id.to_dict()
+        # override the default output from pydantic by calling `to_dict()` of each value in metadata (dict of array)
+        _field_dict_of_array = {}
+        if self.metadata:
+            for _key in self.metadata:
+                if self.metadata[_key]:
+                    _field_dict_of_array[_key] = [
+                        _item.to_dict() for _item in self.metadata[_key]
+                    ]
+            _dict['metadata'] = _field_dict_of_array
         return _dict
 
     @classmethod
@@ -72,11 +79,14 @@ class BatchUpsertPortfolioAccessMetadataRequest(BaseModel):
             return BatchUpsertPortfolioAccessMetadataRequest.parse_obj(obj)
 
         _obj = BatchUpsertPortfolioAccessMetadataRequest.parse_obj({
-            "portfolios_with_metadata": dict(
-                (_k, MetadataKeyValue.from_dict(_v))
-                for _k, _v in obj.get("portfoliosWithMetadata").items()
+            "portfolio_id": ResourceId.from_dict(obj.get("portfolioId")) if obj.get("portfolioId") is not None else None,
+            "metadata": dict(
+                (_k,
+                        [AccessMetadataValue.from_dict(_item) for _item in _v]
+                        if _v is not None
+                        else None
+                )
+                for _k, _v in obj.get("metadata").items()
             )
-            if obj.get("portfoliosWithMetadata") is not None
-            else None
         })
         return _obj

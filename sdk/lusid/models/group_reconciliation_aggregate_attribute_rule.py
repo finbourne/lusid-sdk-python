@@ -18,7 +18,7 @@ import re  # noqa: F401
 import json
 
 
-from typing import Any, Dict
+from typing import Any, Dict, Optional
 from pydantic.v1 import BaseModel, Field
 from lusid.models.group_reconciliation_aggregate_comparison_rule_operand import GroupReconciliationAggregateComparisonRuleOperand
 from lusid.models.group_reconciliation_comparison_rule_tolerance import GroupReconciliationComparisonRuleTolerance
@@ -29,7 +29,7 @@ class GroupReconciliationAggregateAttributeRule(BaseModel):
     """
     left: GroupReconciliationAggregateComparisonRuleOperand = Field(...)
     right: GroupReconciliationAggregateComparisonRuleOperand = Field(...)
-    tolerance: GroupReconciliationComparisonRuleTolerance = Field(...)
+    tolerance: Optional[GroupReconciliationComparisonRuleTolerance] = None
     __properties = ["left", "right", "tolerance"]
 
     class Config:

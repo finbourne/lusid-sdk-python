@@ -4,7 +4,9 @@
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**portfolios_with_metadata** | [**Dict[str, MetadataKeyValueResponse]**](MetadataKeyValueResponse.md) | The set of portfolios with the access control metadata | 
+**values** | [**Dict[str, BatchUpsertPortfolioAccessMetadataResponseItem]**](BatchUpsertPortfolioAccessMetadataResponseItem.md) | The items have been successfully updated or created. | [optional] 
+**failed** | [**Dict[str, ErrorDetail]**](ErrorDetail.md) | The items that could not be updated or created along with a reason for their failure. | [optional] 
+**links** | [**List[Link]**](Link.md) |  | [optional] 
 
 ## Example
 

@@ -80,30 +80,30 @@ class PortfoliosApi:
         self.api_client = api_client
 
     @overload
-    async def batch_upsert_portfolio_access_metadata(self, batch_upsert_portfolio_access_metadata_request : Annotated[BatchUpsertPortfolioAccessMetadataRequest, Field(..., description="The Portfolio Access Metadata Rule to update or insert")], effective_at : Annotated[Optional[StrictStr], Field(description="The date this rule will effective from")] = None, effective_until : Annotated[Optional[datetime], Field(description="The effective date until which the Access Metadata is valid. If not supplied this will be valid indefinitely, or until the next 'effectiveAt' date of the Access Metadata")] = None, **kwargs) -> BatchUpsertPortfolioAccessMetadataResponse:  # noqa: E501
+    async def batch_upsert_portfolio_access_metadata(self, request_body : Annotated[Dict[str, BatchUpsertPortfolioAccessMetadataRequest], Field(..., description="The Access Metadata Rules to upsert and the Portfolio identifiers to upsert for")], effective_at : Annotated[Optional[StrictStr], Field(description="The date these rules will be effective from")] = None, effective_until : Annotated[Optional[StrictStr], Field(description="The effective date until which the Access Metadata is valid. If not supplied, this will be valid indefinitely, or until the next 'effectiveAt' date of the Access Metadata")] = None, **kwargs) -> BatchUpsertPortfolioAccessMetadataResponse:  # noqa: E501
         ...
 
     @overload
-    def batch_upsert_portfolio_access_metadata(self, batch_upsert_portfolio_access_metadata_request : Annotated[BatchUpsertPortfolioAccessMetadataRequest, Field(..., description="The Portfolio Access Metadata Rule to update or insert")], effective_at : Annotated[Optional[StrictStr], Field(description="The date this rule will effective from")] = None, effective_until : Annotated[Optional[datetime], Field(description="The effective date until which the Access Metadata is valid. If not supplied this will be valid indefinitely, or until the next 'effectiveAt' date of the Access Metadata")] = None, async_req: Optional[bool]=True, **kwargs) -> BatchUpsertPortfolioAccessMetadataResponse:  # noqa: E501
+    def batch_upsert_portfolio_access_metadata(self, request_body : Annotated[Dict[str, BatchUpsertPortfolioAccessMetadataRequest], Field(..., description="The Access Metadata Rules to upsert and the Portfolio identifiers to upsert for")], effective_at : Annotated[Optional[StrictStr], Field(description="The date these rules will be effective from")] = None, effective_until : Annotated[Optional[StrictStr], Field(description="The effective date until which the Access Metadata is valid. If not supplied, this will be valid indefinitely, or until the next 'effectiveAt' date of the Access Metadata")] = None, async_req: Optional[bool]=True, **kwargs) -> BatchUpsertPortfolioAccessMetadataResponse:  # noqa: E501
         ...
 
     @validate_arguments
-    def batch_upsert_portfolio_access_metadata(self, batch_upsert_portfolio_access_metadata_request : Annotated[BatchUpsertPortfolioAccessMetadataRequest, Field(..., description="The Portfolio Access Metadata Rule to update or insert")], effective_at : Annotated[Optional[StrictStr], Field(description="The date this rule will effective from")] = None, effective_until : Annotated[Optional[datetime], Field(description="The effective date until which the Access Metadata is valid. If not supplied this will be valid indefinitely, or until the next 'effectiveAt' date of the Access Metadata")] = None, async_req: Optional[bool]=None, **kwargs) -> Union[BatchUpsertPortfolioAccessMetadataResponse, Awaitable[BatchUpsertPortfolioAccessMetadataResponse]]:  # noqa: E501
-        """[EXPERIMENTAL] BatchUpsertPortfolioAccessMetadata: Upsert multiple portfolio access metadata with different keys to multiple portfolios  # noqa: E501
+    def batch_upsert_portfolio_access_metadata(self, request_body : Annotated[Dict[str, BatchUpsertPortfolioAccessMetadataRequest], Field(..., description="The Access Metadata Rules to upsert and the Portfolio identifiers to upsert for")], effective_at : Annotated[Optional[StrictStr], Field(description="The date these rules will be effective from")] = None, effective_until : Annotated[Optional[StrictStr], Field(description="The effective date until which the Access Metadata is valid. If not supplied, this will be valid indefinitely, or until the next 'effectiveAt' date of the Access Metadata")] = None, async_req: Optional[bool]=None, **kwargs) -> Union[BatchUpsertPortfolioAccessMetadataResponse, Awaitable[BatchUpsertPortfolioAccessMetadataResponse]]:  # noqa: E501
+        """[EARLY ACCESS] BatchUpsertPortfolioAccessMetadata: Upsert multiple Portfolio Access Metadata Rules to multiple Portfolios  # noqa: E501
 
-        Update or insert multiple Portfolios Access Metadata Rule in multiple scopes. Items will be updated if it already exists  and inserted if it does not. No other items will be affected    The response will return the successfully updated or inserted Portfolio Access Metadata Rules or failure message if unsuccessful    It is important to always check to verify success (or failure).                Multiple rules for a metadataKey can exist with different effective at dates, when resources are accessed the rule that is active for the current time will be fetched  # noqa: E501
+        Update or insert multiple Access Metadata rules for multiple Portfolios. Items will be updated if they already exist  and inserted if they do not. No other items will be affected    The response will return the successfully updated or inserted Portfolio Access Metadata Rules or a failure message if unsuccessful                Multiple rules for a metadataKey can exist with different effective at dates, when resources are accessed the rule that is active for the current time will be fetched  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
 
-        >>> thread = api.batch_upsert_portfolio_access_metadata(batch_upsert_portfolio_access_metadata_request, effective_at, effective_until, async_req=True)
+        >>> thread = api.batch_upsert_portfolio_access_metadata(request_body, effective_at, effective_until, async_req=True)
         >>> result = thread.get()
 
-        :param batch_upsert_portfolio_access_metadata_request: The Portfolio Access Metadata Rule to update or insert (required)
-        :type batch_upsert_portfolio_access_metadata_request: BatchUpsertPortfolioAccessMetadataRequest
-        :param effective_at: The date this rule will effective from
+        :param request_body: The Access Metadata Rules to upsert and the Portfolio identifiers to upsert for (required)
+        :type request_body: Dict[str, BatchUpsertPortfolioAccessMetadataRequest]
+        :param effective_at: The date these rules will be effective from
         :type effective_at: str
-        :param effective_until: The effective date until which the Access Metadata is valid. If not supplied this will be valid indefinitely, or until the next 'effectiveAt' date of the Access Metadata
-        :type effective_until: datetime
+        :param effective_until: The effective date until which the Access Metadata is valid. If not supplied, this will be valid indefinitely, or until the next 'effectiveAt' date of the Access Metadata
+        :type effective_until: str
         :param async_req: Whether to execute the request asynchronously.
         :type async_req: bool, optional
         :param _request_timeout: timeout setting for this request.
@@ -121,25 +121,25 @@ class PortfoliosApi:
             raise ValueError(message)
         if async_req is not None:
             kwargs['async_req'] = async_req
-        return self.batch_upsert_portfolio_access_metadata_with_http_info(batch_upsert_portfolio_access_metadata_request, effective_at, effective_until, **kwargs)  # noqa: E501
+        return self.batch_upsert_portfolio_access_metadata_with_http_info(request_body, effective_at, effective_until, **kwargs)  # noqa: E501
 
     @validate_arguments
-    def batch_upsert_portfolio_access_metadata_with_http_info(self, batch_upsert_portfolio_access_metadata_request : Annotated[BatchUpsertPortfolioAccessMetadataRequest, Field(..., description="The Portfolio Access Metadata Rule to update or insert")], effective_at : Annotated[Optional[StrictStr], Field(description="The date this rule will effective from")] = None, effective_until : Annotated[Optional[datetime], Field(description="The effective date until which the Access Metadata is valid. If not supplied this will be valid indefinitely, or until the next 'effectiveAt' date of the Access Metadata")] = None, **kwargs) -> ApiResponse:  # noqa: E501
-        """[EXPERIMENTAL] BatchUpsertPortfolioAccessMetadata: Upsert multiple portfolio access metadata with different keys to multiple portfolios  # noqa: E501
+    def batch_upsert_portfolio_access_metadata_with_http_info(self, request_body : Annotated[Dict[str, BatchUpsertPortfolioAccessMetadataRequest], Field(..., description="The Access Metadata Rules to upsert and the Portfolio identifiers to upsert for")], effective_at : Annotated[Optional[StrictStr], Field(description="The date these rules will be effective from")] = None, effective_until : Annotated[Optional[StrictStr], Field(description="The effective date until which the Access Metadata is valid. If not supplied, this will be valid indefinitely, or until the next 'effectiveAt' date of the Access Metadata")] = None, **kwargs) -> ApiResponse:  # noqa: E501
+        """[EARLY ACCESS] BatchUpsertPortfolioAccessMetadata: Upsert multiple Portfolio Access Metadata Rules to multiple Portfolios  # noqa: E501
 
-        Update or insert multiple Portfolios Access Metadata Rule in multiple scopes. Items will be updated if it already exists  and inserted if it does not. No other items will be affected    The response will return the successfully updated or inserted Portfolio Access Metadata Rules or failure message if unsuccessful    It is important to always check to verify success (or failure).                Multiple rules for a metadataKey can exist with different effective at dates, when resources are accessed the rule that is active for the current time will be fetched  # noqa: E501
+        Update or insert multiple Access Metadata rules for multiple Portfolios. Items will be updated if they already exist  and inserted if they do not. No other items will be affected    The response will return the successfully updated or inserted Portfolio Access Metadata Rules or a failure message if unsuccessful                Multiple rules for a metadataKey can exist with different effective at dates, when resources are accessed the rule that is active for the current time will be fetched  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
 
-        >>> thread = api.batch_upsert_portfolio_access_metadata_with_http_info(batch_upsert_portfolio_access_metadata_request, effective_at, effective_until, async_req=True)
+        >>> thread = api.batch_upsert_portfolio_access_metadata_with_http_info(request_body, effective_at, effective_until, async_req=True)
         >>> result = thread.get()
 
-        :param batch_upsert_portfolio_access_metadata_request: The Portfolio Access Metadata Rule to update or insert (required)
-        :type batch_upsert_portfolio_access_metadata_request: BatchUpsertPortfolioAccessMetadataRequest
-        :param effective_at: The date this rule will effective from
+        :param request_body: The Access Metadata Rules to upsert and the Portfolio identifiers to upsert for (required)
+        :type request_body: Dict[str, BatchUpsertPortfolioAccessMetadataRequest]
+        :param effective_at: The date these rules will be effective from
         :type effective_at: str
-        :param effective_until: The effective date until which the Access Metadata is valid. If not supplied this will be valid indefinitely, or until the next 'effectiveAt' date of the Access Metadata
-        :type effective_until: datetime
+        :param effective_until: The effective date until which the Access Metadata is valid. If not supplied, this will be valid indefinitely, or until the next 'effectiveAt' date of the Access Metadata
+        :type effective_until: str
         :param async_req: Whether to execute the request asynchronously.
         :type async_req: bool, optional
         :param _preload_content: if False, the ApiResponse.data will
@@ -168,7 +168,7 @@ class PortfoliosApi:
         _params = locals()
 
         _all_params = [
-            'batch_upsert_portfolio_access_metadata_request',
+            'request_body',
             'effective_at',
             'effective_until'
         ]
@@ -205,10 +205,7 @@ class PortfoliosApi:
             _query_params.append(('effectiveAt', _params['effective_at']))
 
         if _params.get('effective_until') is not None:  # noqa: E501
-            if isinstance(_params['effective_until'], datetime):
-                _query_params.append(('effectiveUntil', _params['effective_until'].strftime(self.api_client.configuration.datetime_format)))
-            else:
-                _query_params.append(('effectiveUntil', _params['effective_until']))
+            _query_params.append(('effectiveUntil', _params['effective_until']))
 
         # process the header parameters
         _header_params = dict(_params.get('_headers', {}))
@@ -217,8 +214,8 @@ class PortfoliosApi:
         _files = {}
         # process the body parameter
         _body_params = None
-        if _params['batch_upsert_portfolio_access_metadata_request'] is not None:
-            _body_params = _params['batch_upsert_portfolio_access_metadata_request']
+        if _params['request_body'] is not None:
+            _body_params = _params['request_body']
 
         # set the HTTP header `Accept`
         _header_params['Accept'] = self.api_client.select_header_accept(

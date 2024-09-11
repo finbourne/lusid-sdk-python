@@ -20,6 +20,7 @@ import json
 
 from typing import Any, Dict, List, Optional
 from pydantic.v1 import BaseModel, Field, StrictBool, StrictInt, StrictStr, conlist, constr, validator
+from lusid.models.relative_date_offset import RelativeDateOffset
 
 class FlowConventions(BaseModel):
     """
@@ -37,9 +38,10 @@ class FlowConventions(BaseModel):
     accrual_date_adjustment: Optional[constr(strict=True, max_length=50, min_length=0)] = Field(None, alias="accrualDateAdjustment", description="Indicates if the accrual dates are adjusted using the business day convention. The default value is 'Adjusted'.    Supported string (enumeration) values are: [Adjusted, Unadjusted].")
     business_day_convention: Optional[StrictStr] = Field(None, alias="businessDayConvention", description="When generating a set of dates, what convention should be used for adjusting dates that coincide with a non-business day.    Supported string (enumeration) values are: [NoAdjustment, None, Previous, P, Following, F, ModifiedPrevious, MP, ModifiedFollowing, MF, HalfMonthModifiedFollowing, Nearest].")
     accrual_day_count_convention: Optional[constr(strict=True, max_length=50, min_length=0)] = Field(None, alias="accrualDayCountConvention", description="Optional, if not set the main DayCountConvention is used for all accrual calculations.  This only needs to be set when accrual uses a different day count to the coupon calculation.")
+    coupon_payment_lag: Optional[RelativeDateOffset] = Field(None, alias="couponPaymentLag")
     scope: Optional[constr(strict=True, max_length=256, min_length=1)] = Field(None, description="The scope used when updating or inserting the convention.")
     code: Optional[constr(strict=True, max_length=256, min_length=1)] = Field(None, description="The code of the convention.")
-    __properties = ["currency", "paymentFrequency", "dayCountConvention", "rollConvention", "paymentCalendars", "resetCalendars", "settleDays", "resetDays", "leapDaysIncluded", "accrualDateAdjustment", "businessDayConvention", "accrualDayCountConvention", "scope", "code"]
+    __properties = ["currency", "paymentFrequency", "dayCountConvention", "rollConvention", "paymentCalendars", "resetCalendars", "settleDays", "resetDays", "leapDaysIncluded", "accrualDateAdjustment", "businessDayConvention", "accrualDayCountConvention", "couponPaymentLag", "scope", "code"]
 
     @validator('scope')
     def scope_validate_regular_expression(cls, value):
@@ -85,6 +87,9 @@ class FlowConventions(BaseModel):
                           exclude={
                           },
                           exclude_none=True)
+        # override the default output from pydantic by calling `to_dict()` of coupon_payment_lag
+        if self.coupon_payment_lag:
+            _dict['couponPaymentLag'] = self.coupon_payment_lag.to_dict()
         # set to None if leap_days_included (nullable) is None
         # and __fields_set__ contains the field
         if self.leap_days_included is None and "leap_days_included" in self.__fields_set__:
@@ -139,6 +144,7 @@ class FlowConventions(BaseModel):
             "accrual_date_adjustment": obj.get("accrualDateAdjustment"),
             "business_day_convention": obj.get("businessDayConvention"),
             "accrual_day_count_convention": obj.get("accrualDayCountConvention"),
+            "coupon_payment_lag": RelativeDateOffset.from_dict(obj.get("couponPaymentLag")) if obj.get("couponPaymentLag") is not None else None,
             "scope": obj.get("scope"),
             "code": obj.get("code")
         })

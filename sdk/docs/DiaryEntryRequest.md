@@ -5,6 +5,7 @@ The request to add a diary entry
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
+**diary_entry_code** | **str** | The code of the diary entry. | 
 **name** | **str** | The name of the diary entry. | [optional] 
 **status** | **str** | The status of a Diary Entry of Type &#39;Other&#39;. Defaults to &#39;Undefined&#39; and supports &#39;Undefined&#39;, &#39;Estimate&#39;, &#39;Candidate&#39;, and &#39;Final&#39;. | [optional] 
 **effective_at** | **datetime** | The effective time of the diary entry. | 

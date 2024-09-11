@@ -161,6 +161,7 @@ from lusid.models.batch_adjust_holdings_response import BatchAdjustHoldingsRespo
 from lusid.models.batch_upsert_instrument_properties_response import BatchUpsertInstrumentPropertiesResponse
 from lusid.models.batch_upsert_portfolio_access_metadata_request import BatchUpsertPortfolioAccessMetadataRequest
 from lusid.models.batch_upsert_portfolio_access_metadata_response import BatchUpsertPortfolioAccessMetadataResponse
+from lusid.models.batch_upsert_portfolio_access_metadata_response_item import BatchUpsertPortfolioAccessMetadataResponseItem
 from lusid.models.batch_upsert_portfolio_transactions_response import BatchUpsertPortfolioTransactionsResponse
 from lusid.models.batch_upsert_property_definition_properties_response import BatchUpsertPropertyDefinitionPropertiesResponse
 from lusid.models.block import Block
@@ -330,6 +331,7 @@ from lusid.models.custodian_account_request import CustodianAccountRequest
 from lusid.models.custodian_accounts_upsert_response import CustodianAccountsUpsertResponse
 from lusid.models.custom_entity_definition import CustomEntityDefinition
 from lusid.models.custom_entity_definition_request import CustomEntityDefinitionRequest
+from lusid.models.custom_entity_entity import CustomEntityEntity
 from lusid.models.custom_entity_field import CustomEntityField
 from lusid.models.custom_entity_field_definition import CustomEntityFieldDefinition
 from lusid.models.custom_entity_id import CustomEntityId
@@ -600,8 +602,6 @@ from lusid.models.market_quote import MarketQuote
 from lusid.models.match_criterion import MatchCriterion
 from lusid.models.maturity_event import MaturityEvent
 from lusid.models.merger_event import MergerEvent
-from lusid.models.metadata_key_value import MetadataKeyValue
-from lusid.models.metadata_key_value_response import MetadataKeyValueResponse
 from lusid.models.metric_value import MetricValue
 from lusid.models.model_options import ModelOptions
 from lusid.models.model_options_type import ModelOptionsType
@@ -1311,6 +1311,7 @@ __all__ = [
     "BatchUpsertInstrumentPropertiesResponse",
     "BatchUpsertPortfolioAccessMetadataRequest",
     "BatchUpsertPortfolioAccessMetadataResponse",
+    "BatchUpsertPortfolioAccessMetadataResponseItem",
     "BatchUpsertPortfolioTransactionsResponse",
     "BatchUpsertPropertyDefinitionPropertiesResponse",
     "Block",
@@ -1480,6 +1481,7 @@ __all__ = [
     "CustodianAccountsUpsertResponse",
     "CustomEntityDefinition",
     "CustomEntityDefinitionRequest",
+    "CustomEntityEntity",
     "CustomEntityField",
     "CustomEntityFieldDefinition",
     "CustomEntityId",
@@ -1750,8 +1752,6 @@ __all__ = [
     "MatchCriterion",
     "MaturityEvent",
     "MergerEvent",
-    "MetadataKeyValue",
-    "MetadataKeyValueResponse",
     "MetricValue",
     "ModelOptions",
     "ModelOptionsType",
