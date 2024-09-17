@@ -18,16 +18,16 @@ import re  # noqa: F401
 import json
 
 
-from typing import Any, Dict, List, Optional
-from pydantic.v1 import BaseModel, conlist
-from lusid.models.component_filter import ComponentFilter
+from typing import Any, Dict
+from pydantic.v1 import BaseModel, Field
+from lusid.models.resource_id import ResourceId
 
-class ComponentRule(BaseModel):
+class BreakCodeSource(BaseModel):
     """
-    ComponentRule
+    BreakCodeSource
     """
-    components: Optional[conlist(ComponentFilter)] = None
-    __properties = ["components"]
+    data_type_id: ResourceId = Field(..., alias="dataTypeId")
+    __properties = ["dataTypeId"]
 
     class Config:
         """Pydantic configuration"""
@@ -43,8 +43,8 @@ class ComponentRule(BaseModel):
         return json.dumps(self.to_dict())
 
     @classmethod
-    def from_json(cls, json_str: str) -> ComponentRule:
-        """Create an instance of ComponentRule from a JSON string"""
+    def from_json(cls, json_str: str) -> BreakCodeSource:
+        """Create an instance of BreakCodeSource from a JSON string"""
         return cls.from_dict(json.loads(json_str))
 
     def to_dict(self):
@@ -53,25 +53,21 @@ class ComponentRule(BaseModel):
                           exclude={
                           },
                           exclude_none=True)
-        # override the default output from pydantic by calling `to_dict()` of each item in components (list)
-        _items = []
-        if self.components:
-            for _item in self.components:
-                if _item:
-                    _items.append(_item.to_dict())
-            _dict['components'] = _items
+        # override the default output from pydantic by calling `to_dict()` of data_type_id
+        if self.data_type_id:
+            _dict['dataTypeId'] = self.data_type_id.to_dict()
         return _dict
 
     @classmethod
-    def from_dict(cls, obj: dict) -> ComponentRule:
-        """Create an instance of ComponentRule from a dict"""
+    def from_dict(cls, obj: dict) -> BreakCodeSource:
+        """Create an instance of BreakCodeSource from a dict"""
         if obj is None:
             return None
 
         if not isinstance(obj, dict):
-            return ComponentRule.parse_obj(obj)
+            return BreakCodeSource.parse_obj(obj)
 
-        _obj = ComponentRule.parse_obj({
-            "components": [ComponentFilter.from_dict(_item) for _item in obj.get("components")] if obj.get("components") is not None else None
+        _obj = BreakCodeSource.parse_obj({
+            "data_type_id": ResourceId.from_dict(obj.get("dataTypeId")) if obj.get("dataTypeId") is not None else None
         })
         return _obj

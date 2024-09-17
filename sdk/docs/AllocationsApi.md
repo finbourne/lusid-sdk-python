@@ -6,7 +6,7 @@ Method | HTTP request | Description
 ------------- | ------------- | -------------
 [**delete_allocation**](AllocationsApi.md#delete_allocation) | **DELETE** /api/allocations/{scope}/{code} | [EARLY ACCESS] DeleteAllocation: Delete allocation
 [**get_allocation**](AllocationsApi.md#get_allocation) | **GET** /api/allocations/{scope}/{code} | [EARLY ACCESS] GetAllocation: Get Allocation
-[**list_allocations**](AllocationsApi.md#list_allocations) | **GET** /api/allocations | [EARLY ACCESS] ListAllocations: List Allocations
+[**list_allocations**](AllocationsApi.md#list_allocations) | **GET** /api/allocations | ListAllocations: List Allocations
 [**upsert_allocations**](AllocationsApi.md#upsert_allocations) | **POST** /api/allocations | UpsertAllocations: Upsert Allocations
 
 
@@ -181,7 +181,7 @@ Name | Type | Description  | Notes
 # **list_allocations**
 > PagedResourceListOfAllocation list_allocations(as_at=as_at, page=page, sort_by=sort_by, limit=limit, filter=filter, property_keys=property_keys)
 
-[EARLY ACCESS] ListAllocations: List Allocations
+ListAllocations: List Allocations
 
 Fetch the last pre-AsAt date version of each allocation in scope (does not fetch the entire history).
 
@@ -230,7 +230,7 @@ async def main():
         property_keys = ['property_keys_example'] # List[str] | A list of property keys from the \"Allocations\" domain to decorate onto each allocation.                  These take the format {domain}/{scope}/{code} e.g. \"Allocations/system/Name\". (optional)
 
         try:
-            # [EARLY ACCESS] ListAllocations: List Allocations
+            # ListAllocations: List Allocations
             api_response = await api_instance.list_allocations(as_at=as_at, page=page, sort_by=sort_by, limit=limit, filter=filter, property_keys=property_keys)
             pprint(api_response)
         except ApiException as e:

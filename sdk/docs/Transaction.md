@@ -27,6 +27,7 @@ Name | Type | Description | Notes
 **order_id** | [**ResourceId**](ResourceId.md) |  | [optional] 
 **allocation_id** | [**ResourceId**](ResourceId.md) |  | [optional] 
 **custodian_account** | [**CustodianAccount**](CustodianAccount.md) |  | [optional] 
+**transaction_group_id** | **str** | The identifier for grouping economic events across multiple transactions | [optional] 
 
 ## Example
 

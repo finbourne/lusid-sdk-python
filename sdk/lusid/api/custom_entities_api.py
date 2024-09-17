@@ -66,7 +66,7 @@ class CustomEntitiesApi:
 
     @validate_arguments
     def delete_custom_entity(self, entity_type : Annotated[constr(strict=True, max_length=64, min_length=1), Field(..., description="The type of Custom Entity to remove.")], identifier_type : Annotated[constr(strict=True, max_length=65, min_length=1), Field(..., description="An identifier type attached to the Custom Entity instance.")], identifier_value : Annotated[constr(strict=True, max_length=1024, min_length=1), Field(..., description="The identifier value.")], identifier_scope : Annotated[constr(strict=True, max_length=64, min_length=1), Field(..., description="The identifier scope.")], async_req: Optional[bool]=None, **kwargs) -> Union[DeletedEntityResponse, Awaitable[DeletedEntityResponse]]:  # noqa: E501
-        """[EARLY ACCESS] DeleteCustomEntity: Delete a Custom Entity instance.  # noqa: E501
+        """DeleteCustomEntity: Delete a Custom Entity instance.  # noqa: E501
 
         Delete a Custom Entity instance by a specific entity type.  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
@@ -104,7 +104,7 @@ class CustomEntitiesApi:
 
     @validate_arguments
     def delete_custom_entity_with_http_info(self, entity_type : Annotated[constr(strict=True, max_length=64, min_length=1), Field(..., description="The type of Custom Entity to remove.")], identifier_type : Annotated[constr(strict=True, max_length=65, min_length=1), Field(..., description="An identifier type attached to the Custom Entity instance.")], identifier_value : Annotated[constr(strict=True, max_length=1024, min_length=1), Field(..., description="The identifier value.")], identifier_scope : Annotated[constr(strict=True, max_length=64, min_length=1), Field(..., description="The identifier scope.")], **kwargs) -> ApiResponse:  # noqa: E501
-        """[EARLY ACCESS] DeleteCustomEntity: Delete a Custom Entity instance.  # noqa: E501
+        """DeleteCustomEntity: Delete a Custom Entity instance.  # noqa: E501
 
         Delete a Custom Entity instance by a specific entity type.  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an

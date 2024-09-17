@@ -19,6 +19,7 @@ Name | Type | Description | Notes
 **asset_class** | **str** | The nominal asset class of the instrument, e.g. InterestRates, FX, Inflation, Equities, Credit, Commodities, etc. The available values are: InterestRates, FX, Inflation, Equities, Credit, Commodities, Money, Unknown | [optional] 
 **dom_ccy** | **str** | The domestic currency, meaning the currency in which the instrument would typically be expected to pay cashflows, e.g. a share in AAPL being USD. | [optional] 
 **relationships** | [**List[Relationship]**](Relationship.md) | A set of relationships associated to the instrument. | [optional] 
+**settlement_cycle** | [**SettlementCycle**](SettlementCycle.md) |  | [optional] 
 **links** | [**List[Link]**](Link.md) |  | [optional] 
 
 ## Example

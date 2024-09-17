@@ -25,6 +25,7 @@ from lusid.models.lusid_instrument import LusidInstrument
 from lusid.models.model_property import ModelProperty
 from lusid.models.relationship import Relationship
 from lusid.models.resource_id import ResourceId
+from lusid.models.settlement_cycle import SettlementCycle
 from lusid.models.staged_modifications_info import StagedModificationsInfo
 from lusid.models.version import Version
 
@@ -46,8 +47,9 @@ class Instrument(BaseModel):
     asset_class: Optional[StrictStr] = Field(None, alias="assetClass", description="The nominal asset class of the instrument, e.g. InterestRates, FX, Inflation, Equities, Credit, Commodities, etc. The available values are: InterestRates, FX, Inflation, Equities, Credit, Commodities, Money, Unknown")
     dom_ccy: Optional[StrictStr] = Field(None, alias="domCcy", description="The domestic currency, meaning the currency in which the instrument would typically be expected to pay cashflows, e.g. a share in AAPL being USD.")
     relationships: Optional[conlist(Relationship)] = Field(None, description="A set of relationships associated to the instrument.")
+    settlement_cycle: Optional[SettlementCycle] = Field(None, alias="settlementCycle")
     links: Optional[conlist(Link)] = None
-    __properties = ["href", "scope", "lusidInstrumentId", "version", "stagedModifications", "name", "identifiers", "properties", "lookthroughPortfolio", "instrumentDefinition", "state", "assetClass", "domCcy", "relationships", "links"]
+    __properties = ["href", "scope", "lusidInstrumentId", "version", "stagedModifications", "name", "identifiers", "properties", "lookthroughPortfolio", "instrumentDefinition", "state", "assetClass", "domCcy", "relationships", "settlementCycle", "links"]
 
     @validator('state')
     def state_validate_enum(cls, value):
@@ -116,6 +118,9 @@ class Instrument(BaseModel):
                 if _item:
                     _items.append(_item.to_dict())
             _dict['relationships'] = _items
+        # override the default output from pydantic by calling `to_dict()` of settlement_cycle
+        if self.settlement_cycle:
+            _dict['settlementCycle'] = self.settlement_cycle.to_dict()
         # override the default output from pydantic by calling `to_dict()` of each item in links (list)
         _items = []
         if self.links:
@@ -179,6 +184,7 @@ class Instrument(BaseModel):
             "asset_class": obj.get("assetClass"),
             "dom_ccy": obj.get("domCcy"),
             "relationships": [Relationship.from_dict(_item) for _item in obj.get("relationships")] if obj.get("relationships") is not None else None,
+            "settlement_cycle": SettlementCycle.from_dict(obj.get("settlementCycle")) if obj.get("settlementCycle") is not None else None,
             "links": [Link.from_dict(_item) for _item in obj.get("links")] if obj.get("links") is not None else None
         })
         return _obj

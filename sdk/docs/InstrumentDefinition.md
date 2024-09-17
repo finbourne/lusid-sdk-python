@@ -9,6 +9,7 @@ Name | Type | Description | Notes
 **properties** | [**List[ModelProperty]**](ModelProperty.md) | Set of unique instrument properties and associated values to store with the instrument. Each property must be from the &#39;Instrument&#39; domain. | [optional] 
 **look_through_portfolio_id** | [**ResourceId**](ResourceId.md) |  | [optional] 
 **definition** | [**LusidInstrument**](LusidInstrument.md) |  | [optional] 
+**settlement_cycle** | [**SettlementCycle**](SettlementCycle.md) |  | [optional] 
 
 ## Example
 

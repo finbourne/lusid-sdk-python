@@ -24,6 +24,7 @@ from lusid.models.instrument_id_value import InstrumentIdValue
 from lusid.models.lusid_instrument import LusidInstrument
 from lusid.models.model_property import ModelProperty
 from lusid.models.resource_id import ResourceId
+from lusid.models.settlement_cycle import SettlementCycle
 
 class InstrumentDefinition(BaseModel):
     """
@@ -34,7 +35,8 @@ class InstrumentDefinition(BaseModel):
     properties: Optional[conlist(ModelProperty)] = Field(None, description="Set of unique instrument properties and associated values to store with the instrument. Each property must be from the 'Instrument' domain.")
     look_through_portfolio_id: Optional[ResourceId] = Field(None, alias="lookThroughPortfolioId")
     definition: Optional[LusidInstrument] = None
-    __properties = ["name", "identifiers", "properties", "lookThroughPortfolioId", "definition"]
+    settlement_cycle: Optional[SettlementCycle] = Field(None, alias="settlementCycle")
+    __properties = ["name", "identifiers", "properties", "lookThroughPortfolioId", "definition", "settlementCycle"]
 
     class Config:
         """Pydantic configuration"""
@@ -80,6 +82,9 @@ class InstrumentDefinition(BaseModel):
         # override the default output from pydantic by calling `to_dict()` of definition
         if self.definition:
             _dict['definition'] = self.definition.to_dict()
+        # override the default output from pydantic by calling `to_dict()` of settlement_cycle
+        if self.settlement_cycle:
+            _dict['settlementCycle'] = self.settlement_cycle.to_dict()
         # set to None if properties (nullable) is None
         # and __fields_set__ contains the field
         if self.properties is None and "properties" in self.__fields_set__:
@@ -106,6 +111,7 @@ class InstrumentDefinition(BaseModel):
             else None,
             "properties": [ModelProperty.from_dict(_item) for _item in obj.get("properties")] if obj.get("properties") is not None else None,
             "look_through_portfolio_id": ResourceId.from_dict(obj.get("lookThroughPortfolioId")) if obj.get("lookThroughPortfolioId") is not None else None,
-            "definition": LusidInstrument.from_dict(obj.get("definition")) if obj.get("definition") is not None else None
+            "definition": LusidInstrument.from_dict(obj.get("definition")) if obj.get("definition") is not None else None,
+            "settlement_cycle": SettlementCycle.from_dict(obj.get("settlementCycle")) if obj.get("settlementCycle") is not None else None
         })
         return _obj

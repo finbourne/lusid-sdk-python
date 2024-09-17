@@ -18,9 +18,9 @@ import re  # noqa: F401
 import json
 
 
-from typing import Any, Dict, Optional
-from pydantic.v1 import BaseModel, Field, constr, validator
-from lusid.models.component_rule import ComponentRule
+from typing import Any, Dict, List, Optional
+from pydantic.v1 import BaseModel, Field, conlist, constr, validator
+from lusid.models.component_filter import ComponentFilter
 from lusid.models.model_property import ModelProperty
 
 class FundConfigurationRequest(BaseModel):
@@ -30,11 +30,11 @@ class FundConfigurationRequest(BaseModel):
     code: constr(strict=True, max_length=64, min_length=1) = Field(...)
     display_name: Optional[constr(strict=True, max_length=256, min_length=1)] = Field(None, alias="displayName", description="The name of the Fund.")
     description: Optional[constr(strict=True, max_length=1024, min_length=0)] = Field(None, description="A description for the Fund.")
-    dealing_rule: ComponentRule = Field(..., alias="dealingRule")
-    pnl_rule: ComponentRule = Field(..., alias="pnlRule")
-    back_out_rule: ComponentRule = Field(..., alias="backOutRule")
+    dealing_filters: conlist(ComponentFilter) = Field(..., alias="dealingFilters", description="The set of filters used to decide which JE lines are included in the dealing.")
+    pnl_filters: conlist(ComponentFilter) = Field(..., alias="pnlFilters", description="The set of filters used to decide which JE lines are included in the PnL.")
+    back_out_filters: conlist(ComponentFilter) = Field(..., alias="backOutFilters", description="The set of filters used to decide which JE lines are included in the back outs.")
     properties: Optional[Dict[str, ModelProperty]] = Field(None, description="A set of properties for the Fund Configuration.")
-    __properties = ["code", "displayName", "description", "dealingRule", "pnlRule", "backOutRule", "properties"]
+    __properties = ["code", "displayName", "description", "dealingFilters", "pnlFilters", "backOutFilters", "properties"]
 
     @validator('code')
     def code_validate_regular_expression(cls, value):
@@ -77,15 +77,27 @@ class FundConfigurationRequest(BaseModel):
                           exclude={
                           },
                           exclude_none=True)
-        # override the default output from pydantic by calling `to_dict()` of dealing_rule
-        if self.dealing_rule:
-            _dict['dealingRule'] = self.dealing_rule.to_dict()
-        # override the default output from pydantic by calling `to_dict()` of pnl_rule
-        if self.pnl_rule:
-            _dict['pnlRule'] = self.pnl_rule.to_dict()
-        # override the default output from pydantic by calling `to_dict()` of back_out_rule
-        if self.back_out_rule:
-            _dict['backOutRule'] = self.back_out_rule.to_dict()
+        # override the default output from pydantic by calling `to_dict()` of each item in dealing_filters (list)
+        _items = []
+        if self.dealing_filters:
+            for _item in self.dealing_filters:
+                if _item:
+                    _items.append(_item.to_dict())
+            _dict['dealingFilters'] = _items
+        # override the default output from pydantic by calling `to_dict()` of each item in pnl_filters (list)
+        _items = []
+        if self.pnl_filters:
+            for _item in self.pnl_filters:
+                if _item:
+                    _items.append(_item.to_dict())
+            _dict['pnlFilters'] = _items
+        # override the default output from pydantic by calling `to_dict()` of each item in back_out_filters (list)
+        _items = []
+        if self.back_out_filters:
+            for _item in self.back_out_filters:
+                if _item:
+                    _items.append(_item.to_dict())
+            _dict['backOutFilters'] = _items
         # override the default output from pydantic by calling `to_dict()` of each value in properties (dict)
         _field_dict = {}
         if self.properties:
@@ -123,9 +135,9 @@ class FundConfigurationRequest(BaseModel):
             "code": obj.get("code"),
             "display_name": obj.get("displayName"),
             "description": obj.get("description"),
-            "dealing_rule": ComponentRule.from_dict(obj.get("dealingRule")) if obj.get("dealingRule") is not None else None,
-            "pnl_rule": ComponentRule.from_dict(obj.get("pnlRule")) if obj.get("pnlRule") is not None else None,
-            "back_out_rule": ComponentRule.from_dict(obj.get("backOutRule")) if obj.get("backOutRule") is not None else None,
+            "dealing_filters": [ComponentFilter.from_dict(_item) for _item in obj.get("dealingFilters")] if obj.get("dealingFilters") is not None else None,
+            "pnl_filters": [ComponentFilter.from_dict(_item) for _item in obj.get("pnlFilters")] if obj.get("pnlFilters") is not None else None,
+            "back_out_filters": [ComponentFilter.from_dict(_item) for _item in obj.get("backOutFilters")] if obj.get("backOutFilters") is not None else None,
             "properties": dict(
                 (_k, ModelProperty.from_dict(_v))
                 for _k, _v in obj.get("properties").items()

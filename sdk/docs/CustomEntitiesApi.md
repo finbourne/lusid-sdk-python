@@ -4,7 +4,7 @@ All URIs are relative to *https://www.lusid.com/api*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
-[**delete_custom_entity**](CustomEntitiesApi.md#delete_custom_entity) | **DELETE** /api/customentities/{entityType}/{identifierType}/{identifierValue} | [EARLY ACCESS] DeleteCustomEntity: Delete a Custom Entity instance.
+[**delete_custom_entity**](CustomEntitiesApi.md#delete_custom_entity) | **DELETE** /api/customentities/{entityType}/{identifierType}/{identifierValue} | DeleteCustomEntity: Delete a Custom Entity instance.
 [**delete_custom_entity_access_metadata**](CustomEntitiesApi.md#delete_custom_entity_access_metadata) | **DELETE** /api/customentities/{entityType}/{identifierType}/{identifierValue}/metadata/{metadataKey} | [EARLY ACCESS] DeleteCustomEntityAccessMetadata: Delete a Custom Entity Access Metadata entry
 [**get_all_custom_entity_access_metadata**](CustomEntitiesApi.md#get_all_custom_entity_access_metadata) | **GET** /api/customentities/{entityType}/{identifierType}/{identifierValue}/metadata | [EARLY ACCESS] GetAllCustomEntityAccessMetadata: Get all the Access Metadata rules for a Custom Entity
 [**get_custom_entity**](CustomEntitiesApi.md#get_custom_entity) | **GET** /api/customentities/{entityType}/{identifierType}/{identifierValue} | GetCustomEntity: Get a Custom Entity instance.
@@ -20,7 +20,7 @@ Method | HTTP request | Description
 # **delete_custom_entity**
 > DeletedEntityResponse delete_custom_entity(entity_type, identifier_type, identifier_value, identifier_scope)
 
-[EARLY ACCESS] DeleteCustomEntity: Delete a Custom Entity instance.
+DeleteCustomEntity: Delete a Custom Entity instance.
 
 Delete a Custom Entity instance by a specific entity type.
 
@@ -67,7 +67,7 @@ async def main():
         identifier_scope = 'identifier_scope_example' # str | The identifier scope.
 
         try:
-            # [EARLY ACCESS] DeleteCustomEntity: Delete a Custom Entity instance.
+            # DeleteCustomEntity: Delete a Custom Entity instance.
             api_response = await api_instance.delete_custom_entity(entity_type, identifier_type, identifier_value, identifier_scope)
             pprint(api_response)
         except ApiException as e:

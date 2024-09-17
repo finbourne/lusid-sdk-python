@@ -67,6 +67,7 @@ from lusid.models.allocation_set_request import AllocationSetRequest
 from lusid.models.amortisation_event import AmortisationEvent
 from lusid.models.amortisation_rule import AmortisationRule
 from lusid.models.amortisation_rule_set import AmortisationRuleSet
+from lusid.models.amount import Amount
 from lusid.models.annul_quotes_response import AnnulQuotesResponse
 from lusid.models.annul_single_structured_data_response import AnnulSingleStructuredDataResponse
 from lusid.models.annul_structured_data_response import AnnulStructuredDataResponse
@@ -103,6 +104,7 @@ from lusid.models.bool_compliance_parameter import BoolComplianceParameter
 from lusid.models.bool_list_compliance_parameter import BoolListComplianceParameter
 from lusid.models.branch_step import BranchStep
 from lusid.models.branch_step_request import BranchStepRequest
+from lusid.models.break_code_source import BreakCodeSource
 from lusid.models.bucketed_cash_flow_request import BucketedCashFlowRequest
 from lusid.models.bucketed_cash_flow_response import BucketedCashFlowResponse
 from lusid.models.bucketing_schedule import BucketingSchedule
@@ -186,7 +188,6 @@ from lusid.models.compliance_template_variation import ComplianceTemplateVariati
 from lusid.models.compliance_template_variation_dto import ComplianceTemplateVariationDto
 from lusid.models.compliance_template_variation_request import ComplianceTemplateVariationRequest
 from lusid.models.component_filter import ComponentFilter
-from lusid.models.component_rule import ComponentRule
 from lusid.models.component_transaction import ComponentTransaction
 from lusid.models.composite_breakdown import CompositeBreakdown
 from lusid.models.composite_breakdown_request import CompositeBreakdownRequest
@@ -220,6 +221,7 @@ from lusid.models.create_date_request import CreateDateRequest
 from lusid.models.create_derived_property_definition_request import CreateDerivedPropertyDefinitionRequest
 from lusid.models.create_derived_transaction_portfolio_request import CreateDerivedTransactionPortfolioRequest
 from lusid.models.create_group_reconciliation_comparison_ruleset_request import CreateGroupReconciliationComparisonRulesetRequest
+from lusid.models.create_group_reconciliation_definition_request import CreateGroupReconciliationDefinitionRequest
 from lusid.models.create_portfolio_details import CreatePortfolioDetails
 from lusid.models.create_portfolio_group_request import CreatePortfolioGroupRequest
 from lusid.models.create_property_definition_request import CreatePropertyDefinitionRequest
@@ -362,6 +364,7 @@ from lusid.models.fund_configuration import FundConfiguration
 from lusid.models.fund_configuration_properties import FundConfigurationProperties
 from lusid.models.fund_configuration_request import FundConfigurationRequest
 from lusid.models.fund_details import FundDetails
+from lusid.models.fund_id_list import FundIdList
 from lusid.models.fund_pnl_breakdown import FundPnlBreakdown
 from lusid.models.fund_previous_nav import FundPreviousNAV
 from lusid.models.fund_properties import FundProperties
@@ -424,6 +427,11 @@ from lusid.models.group_reconciliation_comparison_rule_tolerance import GroupRec
 from lusid.models.group_reconciliation_comparison_ruleset import GroupReconciliationComparisonRuleset
 from lusid.models.group_reconciliation_core_attribute_rule import GroupReconciliationCoreAttributeRule
 from lusid.models.group_reconciliation_core_comparison_rule_operand import GroupReconciliationCoreComparisonRuleOperand
+from lusid.models.group_reconciliation_definition import GroupReconciliationDefinition
+from lusid.models.group_reconciliation_definition_comparison_ruleset_ids import GroupReconciliationDefinitionComparisonRulesetIds
+from lusid.models.group_reconciliation_definition_currencies import GroupReconciliationDefinitionCurrencies
+from lusid.models.group_reconciliation_definition_portfolio_entity_ids import GroupReconciliationDefinitionPortfolioEntityIds
+from lusid.models.group_reconciliation_definition_recipe_ids import GroupReconciliationDefinitionRecipeIds
 from lusid.models.grouped_result_of_address_key import GroupedResultOfAddressKey
 from lusid.models.holding_adjustment import HoldingAdjustment
 from lusid.models.holding_adjustment_with_date import HoldingAdjustmentWithDate
@@ -608,6 +616,8 @@ from lusid.models.paged_resource_list_of_fee_type import PagedResourceListOfFeeT
 from lusid.models.paged_resource_list_of_fund import PagedResourceListOfFund
 from lusid.models.paged_resource_list_of_fund_configuration import PagedResourceListOfFundConfiguration
 from lusid.models.paged_resource_list_of_general_ledger_profile_response import PagedResourceListOfGeneralLedgerProfileResponse
+from lusid.models.paged_resource_list_of_group_reconciliation_comparison_ruleset import PagedResourceListOfGroupReconciliationComparisonRuleset
+from lusid.models.paged_resource_list_of_group_reconciliation_definition import PagedResourceListOfGroupReconciliationDefinition
 from lusid.models.paged_resource_list_of_instrument import PagedResourceListOfInstrument
 from lusid.models.paged_resource_list_of_instrument_event_holder import PagedResourceListOfInstrumentEventHolder
 from lusid.models.paged_resource_list_of_instrument_event_instruction import PagedResourceListOfInstrumentEventInstruction
@@ -873,6 +883,7 @@ from lusid.models.set_person_properties_request import SetPersonPropertiesReques
 from lusid.models.set_share_class_instruments_request import SetShareClassInstrumentsRequest
 from lusid.models.set_transaction_configuration_alias import SetTransactionConfigurationAlias
 from lusid.models.set_transaction_configuration_source_request import SetTransactionConfigurationSourceRequest
+from lusid.models.settlement_cycle import SettlementCycle
 from lusid.models.settlement_schedule import SettlementSchedule
 from lusid.models.share_class_amount import ShareClassAmount
 from lusid.models.share_class_breakdown import ShareClassBreakdown
@@ -932,6 +943,7 @@ from lusid.models.transaction_configuration_movement_data import TransactionConf
 from lusid.models.transaction_configuration_movement_data_request import TransactionConfigurationMovementDataRequest
 from lusid.models.transaction_configuration_type_alias import TransactionConfigurationTypeAlias
 from lusid.models.transaction_currency_and_amount import TransactionCurrencyAndAmount
+from lusid.models.transaction_date_windows import TransactionDateWindows
 from lusid.models.transaction_diagnostics import TransactionDiagnostics
 from lusid.models.transaction_field_map import TransactionFieldMap
 from lusid.models.transaction_price import TransactionPrice
@@ -989,6 +1001,8 @@ from lusid.models.update_cut_label_definition_request import UpdateCutLabelDefin
 from lusid.models.update_data_type_request import UpdateDataTypeRequest
 from lusid.models.update_derived_property_definition_request import UpdateDerivedPropertyDefinitionRequest
 from lusid.models.update_fee_type_request import UpdateFeeTypeRequest
+from lusid.models.update_group_reconciliation_comparison_ruleset_request import UpdateGroupReconciliationComparisonRulesetRequest
+from lusid.models.update_group_reconciliation_definition_request import UpdateGroupReconciliationDefinitionRequest
 from lusid.models.update_instrument_identifier_request import UpdateInstrumentIdentifierRequest
 from lusid.models.update_orders_response import UpdateOrdersResponse
 from lusid.models.update_placements_response import UpdatePlacementsResponse
@@ -1033,6 +1047,8 @@ from lusid.models.upsert_quote_request import UpsertQuoteRequest
 from lusid.models.upsert_quotes_response import UpsertQuotesResponse
 from lusid.models.upsert_recipe_composer_request import UpsertRecipeComposerRequest
 from lusid.models.upsert_recipe_request import UpsertRecipeRequest
+from lusid.models.upsert_reference_portfolio_constituent_properties_request import UpsertReferencePortfolioConstituentPropertiesRequest
+from lusid.models.upsert_reference_portfolio_constituent_properties_response import UpsertReferencePortfolioConstituentPropertiesResponse
 from lusid.models.upsert_reference_portfolio_constituents_request import UpsertReferencePortfolioConstituentsRequest
 from lusid.models.upsert_reference_portfolio_constituents_response import UpsertReferencePortfolioConstituentsResponse
 from lusid.models.upsert_result_values_data_request import UpsertResultValuesDataRequest
@@ -1137,6 +1153,7 @@ __all__ = [
     "AmortisationEvent",
     "AmortisationRule",
     "AmortisationRuleSet",
+    "Amount",
     "AnnulQuotesResponse",
     "AnnulSingleStructuredDataResponse",
     "AnnulStructuredDataResponse",
@@ -1173,6 +1190,7 @@ __all__ = [
     "BoolListComplianceParameter",
     "BranchStep",
     "BranchStepRequest",
+    "BreakCodeSource",
     "BucketedCashFlowRequest",
     "BucketedCashFlowResponse",
     "BucketingSchedule",
@@ -1256,7 +1274,6 @@ __all__ = [
     "ComplianceTemplateVariationDto",
     "ComplianceTemplateVariationRequest",
     "ComponentFilter",
-    "ComponentRule",
     "ComponentTransaction",
     "CompositeBreakdown",
     "CompositeBreakdownRequest",
@@ -1290,6 +1307,7 @@ __all__ = [
     "CreateDerivedPropertyDefinitionRequest",
     "CreateDerivedTransactionPortfolioRequest",
     "CreateGroupReconciliationComparisonRulesetRequest",
+    "CreateGroupReconciliationDefinitionRequest",
     "CreatePortfolioDetails",
     "CreatePortfolioGroupRequest",
     "CreatePropertyDefinitionRequest",
@@ -1432,6 +1450,7 @@ __all__ = [
     "FundConfigurationProperties",
     "FundConfigurationRequest",
     "FundDetails",
+    "FundIdList",
     "FundPnlBreakdown",
     "FundPreviousNAV",
     "FundProperties",
@@ -1494,6 +1513,11 @@ __all__ = [
     "GroupReconciliationComparisonRuleset",
     "GroupReconciliationCoreAttributeRule",
     "GroupReconciliationCoreComparisonRuleOperand",
+    "GroupReconciliationDefinition",
+    "GroupReconciliationDefinitionComparisonRulesetIds",
+    "GroupReconciliationDefinitionCurrencies",
+    "GroupReconciliationDefinitionPortfolioEntityIds",
+    "GroupReconciliationDefinitionRecipeIds",
     "GroupedResultOfAddressKey",
     "HoldingAdjustment",
     "HoldingAdjustmentWithDate",
@@ -1678,6 +1702,8 @@ __all__ = [
     "PagedResourceListOfFund",
     "PagedResourceListOfFundConfiguration",
     "PagedResourceListOfGeneralLedgerProfileResponse",
+    "PagedResourceListOfGroupReconciliationComparisonRuleset",
+    "PagedResourceListOfGroupReconciliationDefinition",
     "PagedResourceListOfInstrument",
     "PagedResourceListOfInstrumentEventHolder",
     "PagedResourceListOfInstrumentEventInstruction",
@@ -1943,6 +1969,7 @@ __all__ = [
     "SetShareClassInstrumentsRequest",
     "SetTransactionConfigurationAlias",
     "SetTransactionConfigurationSourceRequest",
+    "SettlementCycle",
     "SettlementSchedule",
     "ShareClassAmount",
     "ShareClassBreakdown",
@@ -2002,6 +2029,7 @@ __all__ = [
     "TransactionConfigurationMovementDataRequest",
     "TransactionConfigurationTypeAlias",
     "TransactionCurrencyAndAmount",
+    "TransactionDateWindows",
     "TransactionDiagnostics",
     "TransactionFieldMap",
     "TransactionPrice",
@@ -2059,6 +2087,8 @@ __all__ = [
     "UpdateDataTypeRequest",
     "UpdateDerivedPropertyDefinitionRequest",
     "UpdateFeeTypeRequest",
+    "UpdateGroupReconciliationComparisonRulesetRequest",
+    "UpdateGroupReconciliationDefinitionRequest",
     "UpdateInstrumentIdentifierRequest",
     "UpdateOrdersResponse",
     "UpdatePlacementsResponse",
@@ -2103,6 +2133,8 @@ __all__ = [
     "UpsertQuotesResponse",
     "UpsertRecipeComposerRequest",
     "UpsertRecipeRequest",
+    "UpsertReferencePortfolioConstituentPropertiesRequest",
+    "UpsertReferencePortfolioConstituentPropertiesResponse",
     "UpsertReferencePortfolioConstituentsRequest",
     "UpsertReferencePortfolioConstituentsResponse",
     "UpsertResultValuesDataRequest",

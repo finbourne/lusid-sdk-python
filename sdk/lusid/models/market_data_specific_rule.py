@@ -19,7 +19,7 @@ import json
 
 from datetime import datetime
 from typing import Any, Dict, Optional
-from pydantic.v1 import BaseModel, Field, StrictStr, constr, validator
+from pydantic.v1 import BaseModel, Field, StrictBool, StrictStr, constr, validator
 from lusid.models.dependency_source_filter import DependencySourceFilter
 
 class MarketDataSpecificRule(BaseModel):
@@ -37,7 +37,8 @@ class MarketDataSpecificRule(BaseModel):
     mask: Optional[constr(strict=True, max_length=256, min_length=0)] = Field(None, description="Allows for partial or complete override of the market asset resolved for a dependency  Either a named override or a dot separated string (A.B.C.D.*).  e.g. for Rates curve 'EUR.*' will replace the resolve MarketAsset 'GBP/12M', 'GBP/3M' with the EUR equivalent, if there  are no wildcards in the mask, the mask is taken as the MarketAsset for any dependency matching the rule.")
     dependency_source_filter: DependencySourceFilter = Field(..., alias="dependencySourceFilter")
     source_system: Optional[constr(strict=True, max_length=256, min_length=0)] = Field(None, alias="sourceSystem", description="Determines from where LUSID should attempt to find the data. Optional and, if omitted, will default to \"Lusid\".  This means that data will be retrieved from the Quotes store and the ComplexMarketData store.  These can be populated using the Quotes and ComplexMarketData endpoints.")
-    __properties = ["key", "supplier", "dataScope", "quoteType", "field", "quoteInterval", "asAt", "priceSource", "mask", "dependencySourceFilter", "sourceSystem"]
+    fall_through_on_access_denied: Optional[StrictBool] = Field(None, alias="fallThroughOnAccessDenied", description="When a user attempts to use a rule to access data to which they are not entitled,  the rule will fail to resolve any market data.  By default, such an access denied failure will stop any further attempts to resolve market data.  This is so that differently entitled users always receive the same market data from market data resolution,  if they have sufficient entitlements to retrieve the required data.  If set to true, then an access denied failure will not stop further market data resolution,  and resolution will continue with the next specified MarketDataKeyRule.  Optional, and defaults to false.")
+    __properties = ["key", "supplier", "dataScope", "quoteType", "field", "quoteInterval", "asAt", "priceSource", "mask", "dependencySourceFilter", "sourceSystem", "fallThroughOnAccessDenied"]
 
     @validator('data_scope')
     def data_scope_validate_regular_expression(cls, value):
@@ -127,6 +128,7 @@ class MarketDataSpecificRule(BaseModel):
             "price_source": obj.get("priceSource"),
             "mask": obj.get("mask"),
             "dependency_source_filter": DependencySourceFilter.from_dict(obj.get("dependencySourceFilter")) if obj.get("dependencySourceFilter") is not None else None,
-            "source_system": obj.get("sourceSystem")
+            "source_system": obj.get("sourceSystem"),
+            "fall_through_on_access_denied": obj.get("fallThroughOnAccessDenied")
         })
         return _obj

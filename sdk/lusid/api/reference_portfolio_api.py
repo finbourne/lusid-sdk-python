@@ -30,6 +30,8 @@ from lusid.models.create_reference_portfolio_request import CreateReferencePortf
 from lusid.models.get_reference_portfolio_constituents_response import GetReferencePortfolioConstituentsResponse
 from lusid.models.portfolio import Portfolio
 from lusid.models.resource_list_of_constituents_adjustment_header import ResourceListOfConstituentsAdjustmentHeader
+from lusid.models.upsert_reference_portfolio_constituent_properties_request import UpsertReferencePortfolioConstituentPropertiesRequest
+from lusid.models.upsert_reference_portfolio_constituent_properties_response import UpsertReferencePortfolioConstituentPropertiesResponse
 from lusid.models.upsert_reference_portfolio_constituents_request import UpsertReferencePortfolioConstituentsRequest
 from lusid.models.upsert_reference_portfolio_constituents_response import UpsertReferencePortfolioConstituentsResponse
 
@@ -577,6 +579,180 @@ class ReferencePortfolioApi:
 
         return self.api_client.call_api(
             '/api/referenceportfolios/{scope}/{code}/constituentsadjustments', 'GET',
+            _path_params,
+            _query_params,
+            _header_params,
+            body=_body_params,
+            post_params=_form_params,
+            files=_files,
+            response_types_map=_response_types_map,
+            auth_settings=_auth_settings,
+            async_req=_params.get('async_req'),
+            _return_http_data_only=_params.get('_return_http_data_only'),  # noqa: E501
+            _preload_content=_params.get('_preload_content', True),
+            _request_timeout=_params.get('_request_timeout'),
+            collection_formats=_collection_formats,
+            _request_auth=_params.get('_request_auth'))
+
+    @overload
+    async def upsert_reference_portfolio_constituent_properties(self, scope : Annotated[constr(strict=True, max_length=64, min_length=1), Field(..., description="The scope of the reference portfolio.")], code : Annotated[constr(strict=True, max_length=64, min_length=1), Field(..., description="The code of the reference portfolio. Together with the scope this uniquely identifies              the reference portfolio.")], upsert_reference_portfolio_constituent_properties_request : Annotated[UpsertReferencePortfolioConstituentPropertiesRequest, Field(..., description="The request to modify properties for the constituent.")], **kwargs) -> UpsertReferencePortfolioConstituentPropertiesResponse:  # noqa: E501
+        ...
+
+    @overload
+    def upsert_reference_portfolio_constituent_properties(self, scope : Annotated[constr(strict=True, max_length=64, min_length=1), Field(..., description="The scope of the reference portfolio.")], code : Annotated[constr(strict=True, max_length=64, min_length=1), Field(..., description="The code of the reference portfolio. Together with the scope this uniquely identifies              the reference portfolio.")], upsert_reference_portfolio_constituent_properties_request : Annotated[UpsertReferencePortfolioConstituentPropertiesRequest, Field(..., description="The request to modify properties for the constituent.")], async_req: Optional[bool]=True, **kwargs) -> UpsertReferencePortfolioConstituentPropertiesResponse:  # noqa: E501
+        ...
+
+    @validate_arguments
+    def upsert_reference_portfolio_constituent_properties(self, scope : Annotated[constr(strict=True, max_length=64, min_length=1), Field(..., description="The scope of the reference portfolio.")], code : Annotated[constr(strict=True, max_length=64, min_length=1), Field(..., description="The code of the reference portfolio. Together with the scope this uniquely identifies              the reference portfolio.")], upsert_reference_portfolio_constituent_properties_request : Annotated[UpsertReferencePortfolioConstituentPropertiesRequest, Field(..., description="The request to modify properties for the constituent.")], async_req: Optional[bool]=None, **kwargs) -> Union[UpsertReferencePortfolioConstituentPropertiesResponse, Awaitable[UpsertReferencePortfolioConstituentPropertiesResponse]]:  # noqa: E501
+        """[EARLY ACCESS] UpsertReferencePortfolioConstituentProperties: Upsert constituent properties  # noqa: E501
+
+        Create or update one or more constituent properties for a single constituent in the reference portfolio.  Each property will be updated if it already exists, created if it does not and deleted if value is null.  Both constituent and portfolio must exist at the time when properties are created or updated.  # noqa: E501
+        This method makes a synchronous HTTP request by default. To make an
+        asynchronous HTTP request, please pass async_req=True
+
+        >>> thread = api.upsert_reference_portfolio_constituent_properties(scope, code, upsert_reference_portfolio_constituent_properties_request, async_req=True)
+        >>> result = thread.get()
+
+        :param scope: The scope of the reference portfolio. (required)
+        :type scope: str
+        :param code: The code of the reference portfolio. Together with the scope this uniquely identifies              the reference portfolio. (required)
+        :type code: str
+        :param upsert_reference_portfolio_constituent_properties_request: The request to modify properties for the constituent. (required)
+        :type upsert_reference_portfolio_constituent_properties_request: UpsertReferencePortfolioConstituentPropertiesRequest
+        :param async_req: Whether to execute the request asynchronously.
+        :type async_req: bool, optional
+        :param _request_timeout: timeout setting for this request.
+               If one number provided, it will be total request
+               timeout. It can also be a pair (tuple) of
+               (connection, read) timeouts.
+        :return: Returns the result object.
+                 If the method is called asynchronously,
+                 returns the request thread.
+        :rtype: UpsertReferencePortfolioConstituentPropertiesResponse
+        """
+        kwargs['_return_http_data_only'] = True
+        if '_preload_content' in kwargs:
+            message = "Error! Please call the upsert_reference_portfolio_constituent_properties_with_http_info method with `_preload_content` instead and obtain raw data from ApiResponse.raw_data"  # noqa: E501
+            raise ValueError(message)
+        if async_req is not None:
+            kwargs['async_req'] = async_req
+        return self.upsert_reference_portfolio_constituent_properties_with_http_info(scope, code, upsert_reference_portfolio_constituent_properties_request, **kwargs)  # noqa: E501
+
+    @validate_arguments
+    def upsert_reference_portfolio_constituent_properties_with_http_info(self, scope : Annotated[constr(strict=True, max_length=64, min_length=1), Field(..., description="The scope of the reference portfolio.")], code : Annotated[constr(strict=True, max_length=64, min_length=1), Field(..., description="The code of the reference portfolio. Together with the scope this uniquely identifies              the reference portfolio.")], upsert_reference_portfolio_constituent_properties_request : Annotated[UpsertReferencePortfolioConstituentPropertiesRequest, Field(..., description="The request to modify properties for the constituent.")], **kwargs) -> ApiResponse:  # noqa: E501
+        """[EARLY ACCESS] UpsertReferencePortfolioConstituentProperties: Upsert constituent properties  # noqa: E501
+
+        Create or update one or more constituent properties for a single constituent in the reference portfolio.  Each property will be updated if it already exists, created if it does not and deleted if value is null.  Both constituent and portfolio must exist at the time when properties are created or updated.  # noqa: E501
+        This method makes a synchronous HTTP request by default. To make an
+        asynchronous HTTP request, please pass async_req=True
+
+        >>> thread = api.upsert_reference_portfolio_constituent_properties_with_http_info(scope, code, upsert_reference_portfolio_constituent_properties_request, async_req=True)
+        >>> result = thread.get()
+
+        :param scope: The scope of the reference portfolio. (required)
+        :type scope: str
+        :param code: The code of the reference portfolio. Together with the scope this uniquely identifies              the reference portfolio. (required)
+        :type code: str
+        :param upsert_reference_portfolio_constituent_properties_request: The request to modify properties for the constituent. (required)
+        :type upsert_reference_portfolio_constituent_properties_request: UpsertReferencePortfolioConstituentPropertiesRequest
+        :param async_req: Whether to execute the request asynchronously.
+        :type async_req: bool, optional
+        :param _preload_content: if False, the ApiResponse.data will
+                                 be set to none and raw_data will store the
+                                 HTTP response body without reading/decoding.
+                                 Default is True.
+        :type _preload_content: bool, optional
+        :param _return_http_data_only: response data instead of ApiResponse
+                                       object with status code, headers, etc
+        :type _return_http_data_only: bool, optional
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :param _request_auth: set to override the auth_settings for an a single
+                              request; this effectively ignores the authentication
+                              in the spec for a single request.
+        :type _request_auth: dict, optional
+        :type _content_type: string, optional: force content-type for the request
+        :return: Returns the result object.
+                 If the method is called asynchronously,
+                 returns the request thread.
+        :rtype: tuple(UpsertReferencePortfolioConstituentPropertiesResponse, status_code(int), headers(HTTPHeaderDict))
+        """
+
+        _params = locals()
+
+        _all_params = [
+            'scope',
+            'code',
+            'upsert_reference_portfolio_constituent_properties_request'
+        ]
+        _all_params.extend(
+            [
+                'async_req',
+                '_return_http_data_only',
+                '_preload_content',
+                '_request_timeout',
+                '_request_auth',
+                '_content_type',
+                '_headers'
+            ]
+        )
+
+        # validate the arguments
+        for _key, _val in _params['kwargs'].items():
+            if _key not in _all_params:
+                raise ApiTypeError(
+                    "Got an unexpected keyword argument '%s'"
+                    " to method upsert_reference_portfolio_constituent_properties" % _key
+                )
+            _params[_key] = _val
+        del _params['kwargs']
+
+        _collection_formats = {}
+
+        # process the path parameters
+        _path_params = {}
+        if _params['scope']:
+            _path_params['scope'] = _params['scope']
+
+        if _params['code']:
+            _path_params['code'] = _params['code']
+
+
+        # process the query parameters
+        _query_params = []
+        # process the header parameters
+        _header_params = dict(_params.get('_headers', {}))
+        # process the form parameters
+        _form_params = []
+        _files = {}
+        # process the body parameter
+        _body_params = None
+        if _params['upsert_reference_portfolio_constituent_properties_request'] is not None:
+            _body_params = _params['upsert_reference_portfolio_constituent_properties_request']
+
+        # set the HTTP header `Accept`
+        _header_params['Accept'] = self.api_client.select_header_accept(
+            ['text/plain', 'application/json', 'text/json'])  # noqa: E501
+
+        # set the HTTP header `Content-Type`
+        _content_types_list = _params.get('_content_type',
+            self.api_client.select_header_content_type(
+                ['application/json-patch+json', 'application/json', 'text/json', 'application/*+json']))
+        if _content_types_list:
+                _header_params['Content-Type'] = _content_types_list
+
+        # authentication setting
+        _auth_settings = ['oauth2']  # noqa: E501
+
+        _response_types_map = {
+            '200': "UpsertReferencePortfolioConstituentPropertiesResponse",
+            '400': "LusidValidationProblemDetails",
+        }
+
+        return self.api_client.call_api(
+            '/api/referenceportfolios/{scope}/{code}/constituents/properties', 'POST',
             _path_params,
             _query_params,
             _header_params,

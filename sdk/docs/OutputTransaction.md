@@ -30,6 +30,7 @@ Name | Type | Description | Notes
 **holding_ids** | **List[int]** | The collection of single identifiers for the holding within the portfolio. The holdingId is constructed from the LusidInstrumentId, sub-holding keys and currrency and is unique within the portfolio. | [optional] 
 **source_type** | **str** | The type of source that the transaction originated from, eg: InputTransaction, InstrumentEvent, HoldingAdjustment | [optional] 
 **source_instrument_event_id** | **str** | The unique ID of the instrument event that the transaction is related to. | [optional] 
+**transaction_group_id** | **str** | The identifier for grouping economic events across multiple transactions | [optional] 
 
 ## Example
 

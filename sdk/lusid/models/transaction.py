@@ -53,7 +53,8 @@ class Transaction(BaseModel):
     order_id: Optional[ResourceId] = Field(None, alias="orderId")
     allocation_id: Optional[ResourceId] = Field(None, alias="allocationId")
     custodian_account: Optional[CustodianAccount] = Field(None, alias="custodianAccount")
-    __properties = ["transactionId", "type", "instrumentIdentifiers", "instrumentScope", "instrumentUid", "transactionDate", "settlementDate", "units", "transactionPrice", "totalConsideration", "exchangeRate", "transactionCurrency", "properties", "counterpartyId", "source", "entryDateTime", "otcConfirmation", "transactionStatus", "cancelDateTime", "orderId", "allocationId", "custodianAccount"]
+    transaction_group_id: Optional[StrictStr] = Field(None, alias="transactionGroupId", description="The identifier for grouping economic events across multiple transactions")
+    __properties = ["transactionId", "type", "instrumentIdentifiers", "instrumentScope", "instrumentUid", "transactionDate", "settlementDate", "units", "transactionPrice", "totalConsideration", "exchangeRate", "transactionCurrency", "properties", "counterpartyId", "source", "entryDateTime", "otcConfirmation", "transactionStatus", "cancelDateTime", "orderId", "allocationId", "custodianAccount", "transactionGroupId"]
 
     @validator('transaction_status')
     def transaction_status_validate_enum(cls, value):
@@ -154,6 +155,11 @@ class Transaction(BaseModel):
         if self.cancel_date_time is None and "cancel_date_time" in self.__fields_set__:
             _dict['cancelDateTime'] = None
 
+        # set to None if transaction_group_id (nullable) is None
+        # and __fields_set__ contains the field
+        if self.transaction_group_id is None and "transaction_group_id" in self.__fields_set__:
+            _dict['transactionGroupId'] = None
+
         return _dict
 
     @classmethod
@@ -192,6 +198,7 @@ class Transaction(BaseModel):
             "cancel_date_time": obj.get("cancelDateTime"),
             "order_id": ResourceId.from_dict(obj.get("orderId")) if obj.get("orderId") is not None else None,
             "allocation_id": ResourceId.from_dict(obj.get("allocationId")) if obj.get("allocationId") is not None else None,
-            "custodian_account": CustodianAccount.from_dict(obj.get("custodianAccount")) if obj.get("custodianAccount") is not None else None
+            "custodian_account": CustodianAccount.from_dict(obj.get("custodianAccount")) if obj.get("custodianAccount") is not None else None,
+            "transaction_group_id": obj.get("transactionGroupId")
         })
         return _obj

@@ -20,6 +20,7 @@ import json
 
 from typing import Any, Dict
 from pydantic.v1 import BaseModel, Field
+from lusid.models.amount import Amount
 from lusid.models.share_class_amount import ShareClassAmount
 
 class ShareClassDealingBreakdown(BaseModel):
@@ -27,7 +28,7 @@ class ShareClassDealingBreakdown(BaseModel):
     The breakdown of Dealing for a Share Class.  # noqa: E501
     """
     class_dealing: Dict[str, ShareClassAmount] = Field(..., alias="classDealing", description="Bucket of detail for any 'Dealing' specific to the share class that has occured inside the queried period.")
-    class_dealing_units: Dict[str, ShareClassAmount] = Field(..., alias="classDealingUnits", description="Bucket of detail for any 'Dealing' units specific to the share class that has occured inside the queried period.")
+    class_dealing_units: Dict[str, Amount] = Field(..., alias="classDealingUnits", description="Bucket of detail for any 'Dealing' units specific to the share class that has occured inside the queried period.")
     __properties = ["classDealing", "classDealingUnits"]
 
     class Config:
@@ -87,7 +88,7 @@ class ShareClassDealingBreakdown(BaseModel):
             if obj.get("classDealing") is not None
             else None,
             "class_dealing_units": dict(
-                (_k, ShareClassAmount.from_dict(_v))
+                (_k, Amount.from_dict(_v))
                 for _k, _v in obj.get("classDealingUnits").items()
             )
             if obj.get("classDealingUnits") is not None

@@ -32,17 +32,17 @@ class MergerEvent(InstrumentEvent):
     """
     announcement_date: Optional[datetime] = Field(None, alias="announcementDate", description="The date the merger is announced.")
     cash_and_security_offer_elections: Optional[conlist(CashAndSecurityOfferElection)] = Field(None, alias="cashAndSecurityOfferElections", description="List of possible CashAndSecurityOfferElections for this merger event")
-    cash_elections: Optional[conlist(CashOfferElection)] = Field(None, alias="cashElections", description="List of possible CashOfferElections for this merger event")
+    cash_offer_elections: Optional[conlist(CashOfferElection)] = Field(None, alias="cashOfferElections", description="List of possible CashOfferElections for this merger event")
     ex_date: datetime = Field(..., alias="exDate", description="The first date on which the holder of record of the original shares has entitled ownership of the new shares.")
     fractional_units_cash_currency: Optional[StrictStr] = Field(None, alias="fractionalUnitsCashCurrency", description="Optional. Used in calculating cash-in-lieu of fractional shares.")
     fractional_units_cash_price: Optional[Union[StrictFloat, StrictInt]] = Field(None, alias="fractionalUnitsCashPrice", description="Optional. Used in calculating cash-in-lieu of fractional shares.")
     new_instrument: NewInstrument = Field(..., alias="newInstrument")
     payment_date: datetime = Field(..., alias="paymentDate", description="Date on which the merger takes place.")
     record_date: Optional[datetime] = Field(None, alias="recordDate", description="Optional. Date you have to be the holder of record of the original shares in order to receive the new shares.")
-    security_elections: Optional[conlist(SecurityOfferElection)] = Field(None, alias="securityElections", description="List of possible SecurityOfferElections for this merger event")
+    security_offer_elections: Optional[conlist(SecurityOfferElection)] = Field(None, alias="securityOfferElections", description="List of possible SecurityOfferElections for this merger event")
     instrument_event_type: StrictStr = Field(..., alias="instrumentEventType", description="The Type of Event. The available values are: TransitionEvent, InformationalEvent, OpenEvent, CloseEvent, StockSplitEvent, BondDefaultEvent, CashDividendEvent, AmortisationEvent, CashFlowEvent, ExerciseEvent, ResetEvent, TriggerEvent, RawVendorEvent, InformationalErrorEvent, BondCouponEvent, DividendReinvestmentEvent, AccumulationEvent, BondPrincipalEvent, DividendOptionEvent, MaturityEvent, FxForwardSettlementEvent, ExpiryEvent, ScripDividendEvent, StockDividendEvent, ReverseStockSplitEvent, CapitalDistributionEvent, SpinOffEvent, MergerEvent, FutureExpiryEvent, SwapCashFlowEvent, SwapPrincipalEvent, CreditPremiumCashFlowEvent, CdsCreditEvent, CdxCreditEvent")
     additional_properties: Dict[str, Any] = {}
-    __properties = ["instrumentEventType", "announcementDate", "cashAndSecurityOfferElections", "cashElections", "exDate", "fractionalUnitsCashCurrency", "fractionalUnitsCashPrice", "newInstrument", "paymentDate", "recordDate", "securityElections"]
+    __properties = ["instrumentEventType", "announcementDate", "cashAndSecurityOfferElections", "cashOfferElections", "exDate", "fractionalUnitsCashCurrency", "fractionalUnitsCashPrice", "newInstrument", "paymentDate", "recordDate", "securityOfferElections"]
 
     @validator('instrument_event_type')
     def instrument_event_type_validate_enum(cls, value):
@@ -83,23 +83,23 @@ class MergerEvent(InstrumentEvent):
                 if _item:
                     _items.append(_item.to_dict())
             _dict['cashAndSecurityOfferElections'] = _items
-        # override the default output from pydantic by calling `to_dict()` of each item in cash_elections (list)
+        # override the default output from pydantic by calling `to_dict()` of each item in cash_offer_elections (list)
         _items = []
-        if self.cash_elections:
-            for _item in self.cash_elections:
+        if self.cash_offer_elections:
+            for _item in self.cash_offer_elections:
                 if _item:
                     _items.append(_item.to_dict())
-            _dict['cashElections'] = _items
+            _dict['cashOfferElections'] = _items
         # override the default output from pydantic by calling `to_dict()` of new_instrument
         if self.new_instrument:
             _dict['newInstrument'] = self.new_instrument.to_dict()
-        # override the default output from pydantic by calling `to_dict()` of each item in security_elections (list)
+        # override the default output from pydantic by calling `to_dict()` of each item in security_offer_elections (list)
         _items = []
-        if self.security_elections:
-            for _item in self.security_elections:
+        if self.security_offer_elections:
+            for _item in self.security_offer_elections:
                 if _item:
                     _items.append(_item.to_dict())
-            _dict['securityElections'] = _items
+            _dict['securityOfferElections'] = _items
         # puts key-value pairs in additional_properties in the top level
         if self.additional_properties is not None:
             for _key, _value in self.additional_properties.items():
@@ -115,10 +115,10 @@ class MergerEvent(InstrumentEvent):
         if self.cash_and_security_offer_elections is None and "cash_and_security_offer_elections" in self.__fields_set__:
             _dict['cashAndSecurityOfferElections'] = None
 
-        # set to None if cash_elections (nullable) is None
+        # set to None if cash_offer_elections (nullable) is None
         # and __fields_set__ contains the field
-        if self.cash_elections is None and "cash_elections" in self.__fields_set__:
-            _dict['cashElections'] = None
+        if self.cash_offer_elections is None and "cash_offer_elections" in self.__fields_set__:
+            _dict['cashOfferElections'] = None
 
         # set to None if fractional_units_cash_currency (nullable) is None
         # and __fields_set__ contains the field
@@ -135,10 +135,10 @@ class MergerEvent(InstrumentEvent):
         if self.record_date is None and "record_date" in self.__fields_set__:
             _dict['recordDate'] = None
 
-        # set to None if security_elections (nullable) is None
+        # set to None if security_offer_elections (nullable) is None
         # and __fields_set__ contains the field
-        if self.security_elections is None and "security_elections" in self.__fields_set__:
-            _dict['securityElections'] = None
+        if self.security_offer_elections is None and "security_offer_elections" in self.__fields_set__:
+            _dict['securityOfferElections'] = None
 
         return _dict
 
@@ -155,14 +155,14 @@ class MergerEvent(InstrumentEvent):
             "instrument_event_type": obj.get("instrumentEventType"),
             "announcement_date": obj.get("announcementDate"),
             "cash_and_security_offer_elections": [CashAndSecurityOfferElection.from_dict(_item) for _item in obj.get("cashAndSecurityOfferElections")] if obj.get("cashAndSecurityOfferElections") is not None else None,
-            "cash_elections": [CashOfferElection.from_dict(_item) for _item in obj.get("cashElections")] if obj.get("cashElections") is not None else None,
+            "cash_offer_elections": [CashOfferElection.from_dict(_item) for _item in obj.get("cashOfferElections")] if obj.get("cashOfferElections") is not None else None,
             "ex_date": obj.get("exDate"),
             "fractional_units_cash_currency": obj.get("fractionalUnitsCashCurrency"),
             "fractional_units_cash_price": obj.get("fractionalUnitsCashPrice"),
             "new_instrument": NewInstrument.from_dict(obj.get("newInstrument")) if obj.get("newInstrument") is not None else None,
             "payment_date": obj.get("paymentDate"),
             "record_date": obj.get("recordDate"),
-            "security_elections": [SecurityOfferElection.from_dict(_item) for _item in obj.get("securityElections")] if obj.get("securityElections") is not None else None
+            "security_offer_elections": [SecurityOfferElection.from_dict(_item) for _item in obj.get("securityOfferElections")] if obj.get("securityOfferElections") is not None else None
         })
         # store additional fields in additional_properties
         for _key in obj.keys():

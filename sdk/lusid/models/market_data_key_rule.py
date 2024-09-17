@@ -19,7 +19,7 @@ import json
 
 from datetime import datetime
 from typing import Any, Dict, Optional
-from pydantic.v1 import BaseModel, Field, StrictStr, constr, validator
+from pydantic.v1 import BaseModel, Field, StrictBool, StrictStr, constr, validator
 
 class MarketDataKeyRule(BaseModel):
     """
@@ -35,7 +35,8 @@ class MarketDataKeyRule(BaseModel):
     price_source: Optional[constr(strict=True, max_length=256, min_length=0)] = Field(None, alias="priceSource", description="The source of the quote. For a given provider/supplier of market data there may be an additional qualifier, e.g. the exchange or bank that provided the quote")
     mask: Optional[constr(strict=True, max_length=256, min_length=0)] = Field(None, description="Allows for partial or complete override of the market asset resolved for a dependency  Either a named override or a dot separated string (A.B.C.D.*).  e.g. for Rates curve 'EUR.*' will replace the resolve MarketAsset 'GBP/12M', 'GBP/3M' with the EUR equivalent, if there  are no wildcards in the mask, the mask is taken as the MarketAsset for any dependency matching the rule.")
     source_system: Optional[constr(strict=True, max_length=256, min_length=0)] = Field(None, alias="sourceSystem", description="If set, this parameter will seek an external source of market data.  Optional and, if omitted, will default to \"Lusid\".  This means that data will be retrieved from the LUSID Quote Store and LUSID Complex Market Data Store.                This can be set to \"MarketDataOverrides\" if Supplier is set to \"Client\".")
-    __properties = ["key", "supplier", "dataScope", "quoteType", "field", "quoteInterval", "asAt", "priceSource", "mask", "sourceSystem"]
+    fall_through_on_access_denied: Optional[StrictBool] = Field(None, alias="fallThroughOnAccessDenied", description="When a user attempts to use a rule to access data to which they are not entitled,  the rule will fail to resolve any market data.  By default, such an access denied failure will stop any further attempts to resolve market data.  This is so that differently entitled users always receive the same market data from market data resolution,  if they have sufficient entitlements to retrieve the required data.  If set to true, then an access denied failure will not stop further market data resolution,  and resolution will continue with the next specified MarketDataKeyRule.  Optional, and defaults to false.")
+    __properties = ["key", "supplier", "dataScope", "quoteType", "field", "quoteInterval", "asAt", "priceSource", "mask", "sourceSystem", "fallThroughOnAccessDenied"]
 
     @validator('data_scope')
     def data_scope_validate_regular_expression(cls, value):
@@ -126,6 +127,7 @@ class MarketDataKeyRule(BaseModel):
             "as_at": obj.get("asAt"),
             "price_source": obj.get("priceSource"),
             "mask": obj.get("mask"),
-            "source_system": obj.get("sourceSystem")
+            "source_system": obj.get("sourceSystem"),
+            "fall_through_on_access_denied": obj.get("fallThroughOnAccessDenied")
         })
         return _obj

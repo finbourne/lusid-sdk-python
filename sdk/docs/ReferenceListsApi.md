@@ -5,7 +5,7 @@ All URIs are relative to *https://www.lusid.com/api*
 Method | HTTP request | Description
 ------------- | ------------- | -------------
 [**delete_reference_list**](ReferenceListsApi.md#delete_reference_list) | **DELETE** /api/referencelists/{scope}/{code} | [EARLY ACCESS] DeleteReferenceList: Delete Reference List
-[**get_reference_list**](ReferenceListsApi.md#get_reference_list) | **GET** /api/referencelists/{scope}/{code} | [EARLY ACCESS] GetReferenceList: Get Reference List
+[**get_reference_list**](ReferenceListsApi.md#get_reference_list) | **GET** /api/referencelists/{scope}/{code} | GetReferenceList: Get Reference List
 [**list_reference_lists**](ReferenceListsApi.md#list_reference_lists) | **GET** /api/referencelists | [EARLY ACCESS] ListReferenceLists: List Reference Lists
 [**upsert_reference_list**](ReferenceListsApi.md#upsert_reference_list) | **POST** /api/referencelists | [EARLY ACCESS] UpsertReferenceList: Upsert Reference List
 
@@ -95,7 +95,7 @@ Name | Type | Description  | Notes
 # **get_reference_list**
 > ReferenceListResponse get_reference_list(scope, code, as_at=as_at)
 
-[EARLY ACCESS] GetReferenceList: Get Reference List
+GetReferenceList: Get Reference List
 
 Retrieve a Reference List instance at a point in AsAt time.
 
@@ -141,7 +141,7 @@ async def main():
         as_at = '2013-10-20T19:20:30+01:00' # datetime | The asAt datetime at which to retrieve the Reference List. Defaults to return the latest version of the Reference List if not specified. (optional)
 
         try:
-            # [EARLY ACCESS] GetReferenceList: Get Reference List
+            # GetReferenceList: Get Reference List
             api_response = await api_instance.get_reference_list(scope, code, as_at=as_at)
             pprint(api_response)
         except ApiException as e:

@@ -220,7 +220,7 @@ class ReferenceListsApi:
 
     @validate_arguments
     def get_reference_list(self, scope : Annotated[constr(strict=True, max_length=64, min_length=1), Field(..., description="The scope to which the Reference List belongs.")], code : Annotated[constr(strict=True, max_length=64, min_length=1), Field(..., description="The Reference List's unique identifier.")], as_at : Annotated[Optional[datetime], Field(description="The asAt datetime at which to retrieve the Reference List. Defaults to return the latest version of the Reference List if not specified.")] = None, async_req: Optional[bool]=None, **kwargs) -> Union[ReferenceListResponse, Awaitable[ReferenceListResponse]]:  # noqa: E501
-        """[EARLY ACCESS] GetReferenceList: Get Reference List  # noqa: E501
+        """GetReferenceList: Get Reference List  # noqa: E501
 
         Retrieve a Reference List instance at a point in AsAt time.  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
@@ -256,7 +256,7 @@ class ReferenceListsApi:
 
     @validate_arguments
     def get_reference_list_with_http_info(self, scope : Annotated[constr(strict=True, max_length=64, min_length=1), Field(..., description="The scope to which the Reference List belongs.")], code : Annotated[constr(strict=True, max_length=64, min_length=1), Field(..., description="The Reference List's unique identifier.")], as_at : Annotated[Optional[datetime], Field(description="The asAt datetime at which to retrieve the Reference List. Defaults to return the latest version of the Reference List if not specified.")] = None, **kwargs) -> ApiResponse:  # noqa: E501
-        """[EARLY ACCESS] GetReferenceList: Get Reference List  # noqa: E501
+        """GetReferenceList: Get Reference List  # noqa: E501
 
         Retrieve a Reference List instance at a point in AsAt time.  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an

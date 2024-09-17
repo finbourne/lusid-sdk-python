@@ -47,7 +47,8 @@ class TransactionRequest(BaseModel):
     order_id: Optional[ResourceId] = Field(None, alias="orderId")
     allocation_id: Optional[ResourceId] = Field(None, alias="allocationId")
     custodian_account_id: Optional[ResourceId] = Field(None, alias="custodianAccountId")
-    __properties = ["transactionId", "type", "instrumentIdentifiers", "transactionDate", "settlementDate", "units", "transactionPrice", "totalConsideration", "exchangeRate", "transactionCurrency", "properties", "counterpartyId", "source", "otcConfirmation", "orderId", "allocationId", "custodianAccountId"]
+    transaction_group_id: Optional[constr(strict=True, max_length=64, min_length=1)] = Field(None, alias="transactionGroupId", description="The identifier for grouping economic events across multiple transactions")
+    __properties = ["transactionId", "type", "instrumentIdentifiers", "transactionDate", "settlementDate", "units", "transactionPrice", "totalConsideration", "exchangeRate", "transactionCurrency", "properties", "counterpartyId", "source", "otcConfirmation", "orderId", "allocationId", "custodianAccountId", "transactionGroupId"]
 
     class Config:
         """Pydantic configuration"""
@@ -123,6 +124,11 @@ class TransactionRequest(BaseModel):
         if self.source is None and "source" in self.__fields_set__:
             _dict['source'] = None
 
+        # set to None if transaction_group_id (nullable) is None
+        # and __fields_set__ contains the field
+        if self.transaction_group_id is None and "transaction_group_id" in self.__fields_set__:
+            _dict['transactionGroupId'] = None
+
         return _dict
 
     @classmethod
@@ -156,6 +162,7 @@ class TransactionRequest(BaseModel):
             "otc_confirmation": OtcConfirmation.from_dict(obj.get("otcConfirmation")) if obj.get("otcConfirmation") is not None else None,
             "order_id": ResourceId.from_dict(obj.get("orderId")) if obj.get("orderId") is not None else None,
             "allocation_id": ResourceId.from_dict(obj.get("allocationId")) if obj.get("allocationId") is not None else None,
-            "custodian_account_id": ResourceId.from_dict(obj.get("custodianAccountId")) if obj.get("custodianAccountId") is not None else None
+            "custodian_account_id": ResourceId.from_dict(obj.get("custodianAccountId")) if obj.get("custodianAccountId") is not None else None,
+            "transaction_group_id": obj.get("transactionGroupId")
         })
         return _obj

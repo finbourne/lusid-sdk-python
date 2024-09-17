@@ -18,8 +18,8 @@ import re  # noqa: F401
 import json
 
 from datetime import datetime
-from typing import Any, Dict, Optional
-from pydantic.v1 import Field, StrictStr, validator
+from typing import Any, Dict, Optional, Union
+from pydantic.v1 import Field, StrictFloat, StrictInt, StrictStr, validator
 from lusid.models.instrument_event import InstrumentEvent
 from lusid.models.units_ratio import UnitsRatio
 
@@ -31,10 +31,12 @@ class StockDividendEvent(InstrumentEvent):
     ex_date: datetime = Field(..., alias="exDate", description="The first business day on which the dividend is not owed to the buying party.  Typically this is T-1 from the RecordDate.")
     payment_date: datetime = Field(..., alias="paymentDate", description="The date the company pays out dividends to shareholders.")
     record_date: Optional[datetime] = Field(None, alias="recordDate", description="Date you have to be the holder of record in order to participate in the tender.")
+    fractional_units_cash_price: Optional[Union[StrictFloat, StrictInt]] = Field(None, alias="fractionalUnitsCashPrice", description="The cash price paid in lieu of fractionalUnits.")
+    fractional_units_cash_currency: Optional[StrictStr] = Field(None, alias="fractionalUnitsCashCurrency", description="The currency of the cash paid in lieu of fractionalUnits.")
     units_ratio: UnitsRatio = Field(..., alias="unitsRatio")
     instrument_event_type: StrictStr = Field(..., alias="instrumentEventType", description="The Type of Event. The available values are: TransitionEvent, InformationalEvent, OpenEvent, CloseEvent, StockSplitEvent, BondDefaultEvent, CashDividendEvent, AmortisationEvent, CashFlowEvent, ExerciseEvent, ResetEvent, TriggerEvent, RawVendorEvent, InformationalErrorEvent, BondCouponEvent, DividendReinvestmentEvent, AccumulationEvent, BondPrincipalEvent, DividendOptionEvent, MaturityEvent, FxForwardSettlementEvent, ExpiryEvent, ScripDividendEvent, StockDividendEvent, ReverseStockSplitEvent, CapitalDistributionEvent, SpinOffEvent, MergerEvent, FutureExpiryEvent, SwapCashFlowEvent, SwapPrincipalEvent, CreditPremiumCashFlowEvent, CdsCreditEvent, CdxCreditEvent")
     additional_properties: Dict[str, Any] = {}
-    __properties = ["instrumentEventType", "announcementDate", "exDate", "paymentDate", "recordDate", "unitsRatio"]
+    __properties = ["instrumentEventType", "announcementDate", "exDate", "paymentDate", "recordDate", "fractionalUnitsCashPrice", "fractionalUnitsCashCurrency", "unitsRatio"]
 
     @validator('instrument_event_type')
     def instrument_event_type_validate_enum(cls, value):
@@ -86,6 +88,16 @@ class StockDividendEvent(InstrumentEvent):
         if self.record_date is None and "record_date" in self.__fields_set__:
             _dict['recordDate'] = None
 
+        # set to None if fractional_units_cash_price (nullable) is None
+        # and __fields_set__ contains the field
+        if self.fractional_units_cash_price is None and "fractional_units_cash_price" in self.__fields_set__:
+            _dict['fractionalUnitsCashPrice'] = None
+
+        # set to None if fractional_units_cash_currency (nullable) is None
+        # and __fields_set__ contains the field
+        if self.fractional_units_cash_currency is None and "fractional_units_cash_currency" in self.__fields_set__:
+            _dict['fractionalUnitsCashCurrency'] = None
+
         return _dict
 
     @classmethod
@@ -103,6 +115,8 @@ class StockDividendEvent(InstrumentEvent):
             "ex_date": obj.get("exDate"),
             "payment_date": obj.get("paymentDate"),
             "record_date": obj.get("recordDate"),
+            "fractional_units_cash_price": obj.get("fractionalUnitsCashPrice"),
+            "fractional_units_cash_currency": obj.get("fractionalUnitsCashCurrency"),
             "units_ratio": UnitsRatio.from_dict(obj.get("unitsRatio")) if obj.get("unitsRatio") is not None else None
         })
         # store additional fields in additional_properties

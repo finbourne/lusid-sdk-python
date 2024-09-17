@@ -4610,7 +4610,7 @@ class TransactionPortfoliosApi:
 
     @validate_arguments
     def get_transaction_history(self, scope : Annotated[constr(strict=True, max_length=64, min_length=1), Field(..., description="The scope of the transaction portfolio.")], code : Annotated[constr(strict=True, max_length=64, min_length=1), Field(..., description="The code of the transaction portfolio. Together with the scope this uniquely identifies              the transaction portfolio.")], transaction_id : Annotated[StrictStr, Field(..., description="The unique ID of the transaction to create or update.")], as_at : Annotated[Optional[datetime], Field(description="The asAt datetime at which to retrieve the history of the transaction. Defaults              to return the latest version if not specified.")] = None, async_req: Optional[bool]=None, **kwargs) -> Union[ResourceListOfChangeHistory, Awaitable[ResourceListOfChangeHistory]]:  # noqa: E501
-        """[EARLY ACCESS] GetTransactionHistory: Get the history of a transaction  # noqa: E501
+        """GetTransactionHistory: Get the history of a transaction  # noqa: E501
 
         Get all of the changes that have happened to a transaction.  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
@@ -4648,7 +4648,7 @@ class TransactionPortfoliosApi:
 
     @validate_arguments
     def get_transaction_history_with_http_info(self, scope : Annotated[constr(strict=True, max_length=64, min_length=1), Field(..., description="The scope of the transaction portfolio.")], code : Annotated[constr(strict=True, max_length=64, min_length=1), Field(..., description="The code of the transaction portfolio. Together with the scope this uniquely identifies              the transaction portfolio.")], transaction_id : Annotated[StrictStr, Field(..., description="The unique ID of the transaction to create or update.")], as_at : Annotated[Optional[datetime], Field(description="The asAt datetime at which to retrieve the history of the transaction. Defaults              to return the latest version if not specified.")] = None, **kwargs) -> ApiResponse:  # noqa: E501
-        """[EARLY ACCESS] GetTransactionHistory: Get the history of a transaction  # noqa: E501
+        """GetTransactionHistory: Get the history of a transaction  # noqa: E501
 
         Get all of the changes that have happened to a transaction.  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an

@@ -20,7 +20,7 @@ import json
 
 from typing import Any, Dict, List, Optional
 from pydantic.v1 import BaseModel, Field, StrictStr, conlist
-from lusid.models.component_rule import ComponentRule
+from lusid.models.component_filter import ComponentFilter
 from lusid.models.link import Link
 from lusid.models.model_property import ModelProperty
 from lusid.models.resource_id import ResourceId
@@ -34,13 +34,13 @@ class FundConfiguration(BaseModel):
     id: ResourceId = Field(...)
     display_name: Optional[StrictStr] = Field(None, alias="displayName", description="The name of the FundConfiguration.")
     description: Optional[StrictStr] = Field(None, description="A description for the FundConfiguration.")
-    dealing_rule: Optional[ComponentRule] = Field(None, alias="dealingRule")
-    pnl_rule: Optional[ComponentRule] = Field(None, alias="pnlRule")
-    back_out_rule: Optional[ComponentRule] = Field(None, alias="backOutRule")
+    dealing_filters: Optional[conlist(ComponentFilter)] = Field(None, alias="dealingFilters", description="The set of filters used to decide which JE lines are included in the dealing.")
+    pnl_filters: Optional[conlist(ComponentFilter)] = Field(None, alias="pnlFilters", description="The set of filters used to decide which JE lines are included in the PnL.")
+    back_out_filters: Optional[conlist(ComponentFilter)] = Field(None, alias="backOutFilters", description="The set of filters used to decide which JE lines are included in the back outs.")
     properties: Optional[Dict[str, ModelProperty]] = Field(None, description="A set of properties for the Fund Configuration.")
     version: Optional[Version] = None
     links: Optional[conlist(Link)] = None
-    __properties = ["href", "id", "displayName", "description", "dealingRule", "pnlRule", "backOutRule", "properties", "version", "links"]
+    __properties = ["href", "id", "displayName", "description", "dealingFilters", "pnlFilters", "backOutFilters", "properties", "version", "links"]
 
     class Config:
         """Pydantic configuration"""
@@ -69,15 +69,27 @@ class FundConfiguration(BaseModel):
         # override the default output from pydantic by calling `to_dict()` of id
         if self.id:
             _dict['id'] = self.id.to_dict()
-        # override the default output from pydantic by calling `to_dict()` of dealing_rule
-        if self.dealing_rule:
-            _dict['dealingRule'] = self.dealing_rule.to_dict()
-        # override the default output from pydantic by calling `to_dict()` of pnl_rule
-        if self.pnl_rule:
-            _dict['pnlRule'] = self.pnl_rule.to_dict()
-        # override the default output from pydantic by calling `to_dict()` of back_out_rule
-        if self.back_out_rule:
-            _dict['backOutRule'] = self.back_out_rule.to_dict()
+        # override the default output from pydantic by calling `to_dict()` of each item in dealing_filters (list)
+        _items = []
+        if self.dealing_filters:
+            for _item in self.dealing_filters:
+                if _item:
+                    _items.append(_item.to_dict())
+            _dict['dealingFilters'] = _items
+        # override the default output from pydantic by calling `to_dict()` of each item in pnl_filters (list)
+        _items = []
+        if self.pnl_filters:
+            for _item in self.pnl_filters:
+                if _item:
+                    _items.append(_item.to_dict())
+            _dict['pnlFilters'] = _items
+        # override the default output from pydantic by calling `to_dict()` of each item in back_out_filters (list)
+        _items = []
+        if self.back_out_filters:
+            for _item in self.back_out_filters:
+                if _item:
+                    _items.append(_item.to_dict())
+            _dict['backOutFilters'] = _items
         # override the default output from pydantic by calling `to_dict()` of each value in properties (dict)
         _field_dict = {}
         if self.properties:
@@ -110,6 +122,21 @@ class FundConfiguration(BaseModel):
         if self.description is None and "description" in self.__fields_set__:
             _dict['description'] = None
 
+        # set to None if dealing_filters (nullable) is None
+        # and __fields_set__ contains the field
+        if self.dealing_filters is None and "dealing_filters" in self.__fields_set__:
+            _dict['dealingFilters'] = None
+
+        # set to None if pnl_filters (nullable) is None
+        # and __fields_set__ contains the field
+        if self.pnl_filters is None and "pnl_filters" in self.__fields_set__:
+            _dict['pnlFilters'] = None
+
+        # set to None if back_out_filters (nullable) is None
+        # and __fields_set__ contains the field
+        if self.back_out_filters is None and "back_out_filters" in self.__fields_set__:
+            _dict['backOutFilters'] = None
+
         # set to None if properties (nullable) is None
         # and __fields_set__ contains the field
         if self.properties is None and "properties" in self.__fields_set__:
@@ -136,9 +163,9 @@ class FundConfiguration(BaseModel):
             "id": ResourceId.from_dict(obj.get("id")) if obj.get("id") is not None else None,
             "display_name": obj.get("displayName"),
             "description": obj.get("description"),
-            "dealing_rule": ComponentRule.from_dict(obj.get("dealingRule")) if obj.get("dealingRule") is not None else None,
-            "pnl_rule": ComponentRule.from_dict(obj.get("pnlRule")) if obj.get("pnlRule") is not None else None,
-            "back_out_rule": ComponentRule.from_dict(obj.get("backOutRule")) if obj.get("backOutRule") is not None else None,
+            "dealing_filters": [ComponentFilter.from_dict(_item) for _item in obj.get("dealingFilters")] if obj.get("dealingFilters") is not None else None,
+            "pnl_filters": [ComponentFilter.from_dict(_item) for _item in obj.get("pnlFilters")] if obj.get("pnlFilters") is not None else None,
+            "back_out_filters": [ComponentFilter.from_dict(_item) for _item in obj.get("backOutFilters")] if obj.get("backOutFilters") is not None else None,
             "properties": dict(
                 (_k, ModelProperty.from_dict(_v))
                 for _k, _v in obj.get("properties").items()

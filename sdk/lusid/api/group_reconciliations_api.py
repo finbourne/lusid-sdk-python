@@ -22,13 +22,19 @@ from typing import overload, Optional, Union, Awaitable
 from typing_extensions import Annotated
 from datetime import datetime
 
-from pydantic.v1 import Field, constr, validator
+from pydantic.v1 import Field, StrictStr, conint, conlist, constr, validator
 
 from typing import Optional
 
 from lusid.models.create_group_reconciliation_comparison_ruleset_request import CreateGroupReconciliationComparisonRulesetRequest
+from lusid.models.create_group_reconciliation_definition_request import CreateGroupReconciliationDefinitionRequest
 from lusid.models.deleted_entity_response import DeletedEntityResponse
 from lusid.models.group_reconciliation_comparison_ruleset import GroupReconciliationComparisonRuleset
+from lusid.models.group_reconciliation_definition import GroupReconciliationDefinition
+from lusid.models.paged_resource_list_of_group_reconciliation_comparison_ruleset import PagedResourceListOfGroupReconciliationComparisonRuleset
+from lusid.models.paged_resource_list_of_group_reconciliation_definition import PagedResourceListOfGroupReconciliationDefinition
+from lusid.models.update_group_reconciliation_comparison_ruleset_request import UpdateGroupReconciliationComparisonRulesetRequest
+from lusid.models.update_group_reconciliation_definition_request import UpdateGroupReconciliationDefinitionRequest
 
 from lusid.api_client import ApiClient
 from lusid.api_response import ApiResponse
@@ -209,6 +215,164 @@ class GroupReconciliationsApi:
             _request_auth=_params.get('_request_auth'))
 
     @overload
+    async def create_group_reconciliation_definition(self, create_group_reconciliation_definition_request : Annotated[Optional[CreateGroupReconciliationDefinitionRequest], Field(description="The definition Group Reconciliation Definition details")] = None, **kwargs) -> GroupReconciliationDefinition:  # noqa: E501
+        ...
+
+    @overload
+    def create_group_reconciliation_definition(self, create_group_reconciliation_definition_request : Annotated[Optional[CreateGroupReconciliationDefinitionRequest], Field(description="The definition Group Reconciliation Definition details")] = None, async_req: Optional[bool]=True, **kwargs) -> GroupReconciliationDefinition:  # noqa: E501
+        ...
+
+    @validate_arguments
+    def create_group_reconciliation_definition(self, create_group_reconciliation_definition_request : Annotated[Optional[CreateGroupReconciliationDefinitionRequest], Field(description="The definition Group Reconciliation Definition details")] = None, async_req: Optional[bool]=None, **kwargs) -> Union[GroupReconciliationDefinition, Awaitable[GroupReconciliationDefinition]]:  # noqa: E501
+        """[EXPERIMENTAL] CreateGroupReconciliationDefinition: Create Group Reconciliation Definition  # noqa: E501
+
+        Creates a Group Reconciliation Definition  # noqa: E501
+        This method makes a synchronous HTTP request by default. To make an
+        asynchronous HTTP request, please pass async_req=True
+
+        >>> thread = api.create_group_reconciliation_definition(create_group_reconciliation_definition_request, async_req=True)
+        >>> result = thread.get()
+
+        :param create_group_reconciliation_definition_request: The definition Group Reconciliation Definition details
+        :type create_group_reconciliation_definition_request: CreateGroupReconciliationDefinitionRequest
+        :param async_req: Whether to execute the request asynchronously.
+        :type async_req: bool, optional
+        :param _request_timeout: timeout setting for this request.
+               If one number provided, it will be total request
+               timeout. It can also be a pair (tuple) of
+               (connection, read) timeouts.
+        :return: Returns the result object.
+                 If the method is called asynchronously,
+                 returns the request thread.
+        :rtype: GroupReconciliationDefinition
+        """
+        kwargs['_return_http_data_only'] = True
+        if '_preload_content' in kwargs:
+            message = "Error! Please call the create_group_reconciliation_definition_with_http_info method with `_preload_content` instead and obtain raw data from ApiResponse.raw_data"  # noqa: E501
+            raise ValueError(message)
+        if async_req is not None:
+            kwargs['async_req'] = async_req
+        return self.create_group_reconciliation_definition_with_http_info(create_group_reconciliation_definition_request, **kwargs)  # noqa: E501
+
+    @validate_arguments
+    def create_group_reconciliation_definition_with_http_info(self, create_group_reconciliation_definition_request : Annotated[Optional[CreateGroupReconciliationDefinitionRequest], Field(description="The definition Group Reconciliation Definition details")] = None, **kwargs) -> ApiResponse:  # noqa: E501
+        """[EXPERIMENTAL] CreateGroupReconciliationDefinition: Create Group Reconciliation Definition  # noqa: E501
+
+        Creates a Group Reconciliation Definition  # noqa: E501
+        This method makes a synchronous HTTP request by default. To make an
+        asynchronous HTTP request, please pass async_req=True
+
+        >>> thread = api.create_group_reconciliation_definition_with_http_info(create_group_reconciliation_definition_request, async_req=True)
+        >>> result = thread.get()
+
+        :param create_group_reconciliation_definition_request: The definition Group Reconciliation Definition details
+        :type create_group_reconciliation_definition_request: CreateGroupReconciliationDefinitionRequest
+        :param async_req: Whether to execute the request asynchronously.
+        :type async_req: bool, optional
+        :param _preload_content: if False, the ApiResponse.data will
+                                 be set to none and raw_data will store the
+                                 HTTP response body without reading/decoding.
+                                 Default is True.
+        :type _preload_content: bool, optional
+        :param _return_http_data_only: response data instead of ApiResponse
+                                       object with status code, headers, etc
+        :type _return_http_data_only: bool, optional
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :param _request_auth: set to override the auth_settings for an a single
+                              request; this effectively ignores the authentication
+                              in the spec for a single request.
+        :type _request_auth: dict, optional
+        :type _content_type: string, optional: force content-type for the request
+        :return: Returns the result object.
+                 If the method is called asynchronously,
+                 returns the request thread.
+        :rtype: tuple(GroupReconciliationDefinition, status_code(int), headers(HTTPHeaderDict))
+        """
+
+        _params = locals()
+
+        _all_params = [
+            'create_group_reconciliation_definition_request'
+        ]
+        _all_params.extend(
+            [
+                'async_req',
+                '_return_http_data_only',
+                '_preload_content',
+                '_request_timeout',
+                '_request_auth',
+                '_content_type',
+                '_headers'
+            ]
+        )
+
+        # validate the arguments
+        for _key, _val in _params['kwargs'].items():
+            if _key not in _all_params:
+                raise ApiTypeError(
+                    "Got an unexpected keyword argument '%s'"
+                    " to method create_group_reconciliation_definition" % _key
+                )
+            _params[_key] = _val
+        del _params['kwargs']
+
+        _collection_formats = {}
+
+        # process the path parameters
+        _path_params = {}
+
+        # process the query parameters
+        _query_params = []
+        # process the header parameters
+        _header_params = dict(_params.get('_headers', {}))
+        # process the form parameters
+        _form_params = []
+        _files = {}
+        # process the body parameter
+        _body_params = None
+        if _params['create_group_reconciliation_definition_request'] is not None:
+            _body_params = _params['create_group_reconciliation_definition_request']
+
+        # set the HTTP header `Accept`
+        _header_params['Accept'] = self.api_client.select_header_accept(
+            ['text/plain', 'application/json', 'text/json'])  # noqa: E501
+
+        # set the HTTP header `Content-Type`
+        _content_types_list = _params.get('_content_type',
+            self.api_client.select_header_content_type(
+                ['application/json-patch+json', 'application/json', 'text/json', 'application/*+json']))
+        if _content_types_list:
+                _header_params['Content-Type'] = _content_types_list
+
+        # authentication setting
+        _auth_settings = ['oauth2']  # noqa: E501
+
+        _response_types_map = {
+            '201': "GroupReconciliationDefinition",
+            '400': "LusidValidationProblemDetails",
+        }
+
+        return self.api_client.call_api(
+            '/api/reconciliations/groupreconciliationdefinitions', 'POST',
+            _path_params,
+            _query_params,
+            _header_params,
+            body=_body_params,
+            post_params=_form_params,
+            files=_files,
+            response_types_map=_response_types_map,
+            auth_settings=_auth_settings,
+            async_req=_params.get('async_req'),
+            _return_http_data_only=_params.get('_return_http_data_only'),  # noqa: E501
+            _preload_content=_params.get('_preload_content', True),
+            _request_timeout=_params.get('_request_timeout'),
+            collection_formats=_collection_formats,
+            _request_auth=_params.get('_request_auth'))
+
+    @overload
     async def delete_comparison_ruleset(self, scope : Annotated[constr(strict=True, max_length=64, min_length=1), Field(..., description="The scope of the specified comparison ruleset.")], code : Annotated[constr(strict=True, max_length=64, min_length=1), Field(..., description="The code of the specified comparison ruleset. Together with the domain and scope this uniquely              identifies the reconciliation comparison ruleset.")], **kwargs) -> DeletedEntityResponse:  # noqa: E501
         ...
 
@@ -352,6 +516,165 @@ class GroupReconciliationsApi:
 
         return self.api_client.call_api(
             '/api/reconciliations/comparisonrulesets/{scope}/{code}', 'DELETE',
+            _path_params,
+            _query_params,
+            _header_params,
+            body=_body_params,
+            post_params=_form_params,
+            files=_files,
+            response_types_map=_response_types_map,
+            auth_settings=_auth_settings,
+            async_req=_params.get('async_req'),
+            _return_http_data_only=_params.get('_return_http_data_only'),  # noqa: E501
+            _preload_content=_params.get('_preload_content', True),
+            _request_timeout=_params.get('_request_timeout'),
+            collection_formats=_collection_formats,
+            _request_auth=_params.get('_request_auth'))
+
+    @overload
+    async def delete_group_reconciliation_definition(self, scope : Annotated[constr(strict=True, max_length=64, min_length=1), Field(..., description="The scope of the group reconciliation definition to delete.")], code : Annotated[constr(strict=True, max_length=64, min_length=1), Field(..., description="The code of the group reconciliation definition to delete. Together with the scope this uniquely identifies the group reconciliation definition to delete.")], **kwargs) -> DeletedEntityResponse:  # noqa: E501
+        ...
+
+    @overload
+    def delete_group_reconciliation_definition(self, scope : Annotated[constr(strict=True, max_length=64, min_length=1), Field(..., description="The scope of the group reconciliation definition to delete.")], code : Annotated[constr(strict=True, max_length=64, min_length=1), Field(..., description="The code of the group reconciliation definition to delete. Together with the scope this uniquely identifies the group reconciliation definition to delete.")], async_req: Optional[bool]=True, **kwargs) -> DeletedEntityResponse:  # noqa: E501
+        ...
+
+    @validate_arguments
+    def delete_group_reconciliation_definition(self, scope : Annotated[constr(strict=True, max_length=64, min_length=1), Field(..., description="The scope of the group reconciliation definition to delete.")], code : Annotated[constr(strict=True, max_length=64, min_length=1), Field(..., description="The code of the group reconciliation definition to delete. Together with the scope this uniquely identifies the group reconciliation definition to delete.")], async_req: Optional[bool]=None, **kwargs) -> Union[DeletedEntityResponse, Awaitable[DeletedEntityResponse]]:  # noqa: E501
+        """[EXPERIMENTAL] DeleteGroupReconciliationDefinition: Delete Group Reconciliation Definition  # noqa: E501
+
+        Delete the group reconciliation definition.  # noqa: E501
+        This method makes a synchronous HTTP request by default. To make an
+        asynchronous HTTP request, please pass async_req=True
+
+        >>> thread = api.delete_group_reconciliation_definition(scope, code, async_req=True)
+        >>> result = thread.get()
+
+        :param scope: The scope of the group reconciliation definition to delete. (required)
+        :type scope: str
+        :param code: The code of the group reconciliation definition to delete. Together with the scope this uniquely identifies the group reconciliation definition to delete. (required)
+        :type code: str
+        :param async_req: Whether to execute the request asynchronously.
+        :type async_req: bool, optional
+        :param _request_timeout: timeout setting for this request.
+               If one number provided, it will be total request
+               timeout. It can also be a pair (tuple) of
+               (connection, read) timeouts.
+        :return: Returns the result object.
+                 If the method is called asynchronously,
+                 returns the request thread.
+        :rtype: DeletedEntityResponse
+        """
+        kwargs['_return_http_data_only'] = True
+        if '_preload_content' in kwargs:
+            message = "Error! Please call the delete_group_reconciliation_definition_with_http_info method with `_preload_content` instead and obtain raw data from ApiResponse.raw_data"  # noqa: E501
+            raise ValueError(message)
+        if async_req is not None:
+            kwargs['async_req'] = async_req
+        return self.delete_group_reconciliation_definition_with_http_info(scope, code, **kwargs)  # noqa: E501
+
+    @validate_arguments
+    def delete_group_reconciliation_definition_with_http_info(self, scope : Annotated[constr(strict=True, max_length=64, min_length=1), Field(..., description="The scope of the group reconciliation definition to delete.")], code : Annotated[constr(strict=True, max_length=64, min_length=1), Field(..., description="The code of the group reconciliation definition to delete. Together with the scope this uniquely identifies the group reconciliation definition to delete.")], **kwargs) -> ApiResponse:  # noqa: E501
+        """[EXPERIMENTAL] DeleteGroupReconciliationDefinition: Delete Group Reconciliation Definition  # noqa: E501
+
+        Delete the group reconciliation definition.  # noqa: E501
+        This method makes a synchronous HTTP request by default. To make an
+        asynchronous HTTP request, please pass async_req=True
+
+        >>> thread = api.delete_group_reconciliation_definition_with_http_info(scope, code, async_req=True)
+        >>> result = thread.get()
+
+        :param scope: The scope of the group reconciliation definition to delete. (required)
+        :type scope: str
+        :param code: The code of the group reconciliation definition to delete. Together with the scope this uniquely identifies the group reconciliation definition to delete. (required)
+        :type code: str
+        :param async_req: Whether to execute the request asynchronously.
+        :type async_req: bool, optional
+        :param _preload_content: if False, the ApiResponse.data will
+                                 be set to none and raw_data will store the
+                                 HTTP response body without reading/decoding.
+                                 Default is True.
+        :type _preload_content: bool, optional
+        :param _return_http_data_only: response data instead of ApiResponse
+                                       object with status code, headers, etc
+        :type _return_http_data_only: bool, optional
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :param _request_auth: set to override the auth_settings for an a single
+                              request; this effectively ignores the authentication
+                              in the spec for a single request.
+        :type _request_auth: dict, optional
+        :type _content_type: string, optional: force content-type for the request
+        :return: Returns the result object.
+                 If the method is called asynchronously,
+                 returns the request thread.
+        :rtype: tuple(DeletedEntityResponse, status_code(int), headers(HTTPHeaderDict))
+        """
+
+        _params = locals()
+
+        _all_params = [
+            'scope',
+            'code'
+        ]
+        _all_params.extend(
+            [
+                'async_req',
+                '_return_http_data_only',
+                '_preload_content',
+                '_request_timeout',
+                '_request_auth',
+                '_content_type',
+                '_headers'
+            ]
+        )
+
+        # validate the arguments
+        for _key, _val in _params['kwargs'].items():
+            if _key not in _all_params:
+                raise ApiTypeError(
+                    "Got an unexpected keyword argument '%s'"
+                    " to method delete_group_reconciliation_definition" % _key
+                )
+            _params[_key] = _val
+        del _params['kwargs']
+
+        _collection_formats = {}
+
+        # process the path parameters
+        _path_params = {}
+        if _params['scope']:
+            _path_params['scope'] = _params['scope']
+
+        if _params['code']:
+            _path_params['code'] = _params['code']
+
+
+        # process the query parameters
+        _query_params = []
+        # process the header parameters
+        _header_params = dict(_params.get('_headers', {}))
+        # process the form parameters
+        _form_params = []
+        _files = {}
+        # process the body parameter
+        _body_params = None
+        # set the HTTP header `Accept`
+        _header_params['Accept'] = self.api_client.select_header_accept(
+            ['text/plain', 'application/json', 'text/json'])  # noqa: E501
+
+        # authentication setting
+        _auth_settings = ['oauth2']  # noqa: E501
+
+        _response_types_map = {
+            '200': "DeletedEntityResponse",
+            '400': "LusidValidationProblemDetails",
+        }
+
+        return self.api_client.call_api(
+            '/api/reconciliations/groupreconciliationdefinitions/{scope}/{code}', 'DELETE',
             _path_params,
             _query_params,
             _header_params,
@@ -522,6 +845,914 @@ class GroupReconciliationsApi:
 
         return self.api_client.call_api(
             '/api/reconciliations/comparisonrulesets/{scope}/{code}', 'GET',
+            _path_params,
+            _query_params,
+            _header_params,
+            body=_body_params,
+            post_params=_form_params,
+            files=_files,
+            response_types_map=_response_types_map,
+            auth_settings=_auth_settings,
+            async_req=_params.get('async_req'),
+            _return_http_data_only=_params.get('_return_http_data_only'),  # noqa: E501
+            _preload_content=_params.get('_preload_content', True),
+            _request_timeout=_params.get('_request_timeout'),
+            collection_formats=_collection_formats,
+            _request_auth=_params.get('_request_auth'))
+
+    @overload
+    async def get_group_reconciliation_definition(self, scope : Annotated[constr(strict=True, max_length=64, min_length=1), Field(..., description="The scope of the group reconciliation definition to retrieve.")], code : Annotated[constr(strict=True, max_length=64, min_length=1), Field(..., description="The code of the group reconciliation definition to retrieve. Together with the scope              this uniquely identifies the group reconciliation definition.")], effective_at : Annotated[Optional[constr(strict=True, max_length=256, min_length=0)], Field(description="The effective datetime or cut label at which to retrieve the group reconciliation definition. Defaults to the current LUSID system datetime if not specified.")] = None, as_at : Annotated[Optional[datetime], Field(description="The asAt datetime at which to retrieve the group reconciliation definition. Defaults to return the latest version of the portfolio group definition if not specified.")] = None, **kwargs) -> GroupReconciliationDefinition:  # noqa: E501
+        ...
+
+    @overload
+    def get_group_reconciliation_definition(self, scope : Annotated[constr(strict=True, max_length=64, min_length=1), Field(..., description="The scope of the group reconciliation definition to retrieve.")], code : Annotated[constr(strict=True, max_length=64, min_length=1), Field(..., description="The code of the group reconciliation definition to retrieve. Together with the scope              this uniquely identifies the group reconciliation definition.")], effective_at : Annotated[Optional[constr(strict=True, max_length=256, min_length=0)], Field(description="The effective datetime or cut label at which to retrieve the group reconciliation definition. Defaults to the current LUSID system datetime if not specified.")] = None, as_at : Annotated[Optional[datetime], Field(description="The asAt datetime at which to retrieve the group reconciliation definition. Defaults to return the latest version of the portfolio group definition if not specified.")] = None, async_req: Optional[bool]=True, **kwargs) -> GroupReconciliationDefinition:  # noqa: E501
+        ...
+
+    @validate_arguments
+    def get_group_reconciliation_definition(self, scope : Annotated[constr(strict=True, max_length=64, min_length=1), Field(..., description="The scope of the group reconciliation definition to retrieve.")], code : Annotated[constr(strict=True, max_length=64, min_length=1), Field(..., description="The code of the group reconciliation definition to retrieve. Together with the scope              this uniquely identifies the group reconciliation definition.")], effective_at : Annotated[Optional[constr(strict=True, max_length=256, min_length=0)], Field(description="The effective datetime or cut label at which to retrieve the group reconciliation definition. Defaults to the current LUSID system datetime if not specified.")] = None, as_at : Annotated[Optional[datetime], Field(description="The asAt datetime at which to retrieve the group reconciliation definition. Defaults to return the latest version of the portfolio group definition if not specified.")] = None, async_req: Optional[bool]=None, **kwargs) -> Union[GroupReconciliationDefinition, Awaitable[GroupReconciliationDefinition]]:  # noqa: E501
+        """[EXPERIMENTAL] GetGroupReconciliationDefinition: Get group reconciliation definition  # noqa: E501
+
+        Retrieves a Group Reconciliation Definition by scope and code  # noqa: E501
+        This method makes a synchronous HTTP request by default. To make an
+        asynchronous HTTP request, please pass async_req=True
+
+        >>> thread = api.get_group_reconciliation_definition(scope, code, effective_at, as_at, async_req=True)
+        >>> result = thread.get()
+
+        :param scope: The scope of the group reconciliation definition to retrieve. (required)
+        :type scope: str
+        :param code: The code of the group reconciliation definition to retrieve. Together with the scope              this uniquely identifies the group reconciliation definition. (required)
+        :type code: str
+        :param effective_at: The effective datetime or cut label at which to retrieve the group reconciliation definition. Defaults to the current LUSID system datetime if not specified.
+        :type effective_at: str
+        :param as_at: The asAt datetime at which to retrieve the group reconciliation definition. Defaults to return the latest version of the portfolio group definition if not specified.
+        :type as_at: datetime
+        :param async_req: Whether to execute the request asynchronously.
+        :type async_req: bool, optional
+        :param _request_timeout: timeout setting for this request.
+               If one number provided, it will be total request
+               timeout. It can also be a pair (tuple) of
+               (connection, read) timeouts.
+        :return: Returns the result object.
+                 If the method is called asynchronously,
+                 returns the request thread.
+        :rtype: GroupReconciliationDefinition
+        """
+        kwargs['_return_http_data_only'] = True
+        if '_preload_content' in kwargs:
+            message = "Error! Please call the get_group_reconciliation_definition_with_http_info method with `_preload_content` instead and obtain raw data from ApiResponse.raw_data"  # noqa: E501
+            raise ValueError(message)
+        if async_req is not None:
+            kwargs['async_req'] = async_req
+        return self.get_group_reconciliation_definition_with_http_info(scope, code, effective_at, as_at, **kwargs)  # noqa: E501
+
+    @validate_arguments
+    def get_group_reconciliation_definition_with_http_info(self, scope : Annotated[constr(strict=True, max_length=64, min_length=1), Field(..., description="The scope of the group reconciliation definition to retrieve.")], code : Annotated[constr(strict=True, max_length=64, min_length=1), Field(..., description="The code of the group reconciliation definition to retrieve. Together with the scope              this uniquely identifies the group reconciliation definition.")], effective_at : Annotated[Optional[constr(strict=True, max_length=256, min_length=0)], Field(description="The effective datetime or cut label at which to retrieve the group reconciliation definition. Defaults to the current LUSID system datetime if not specified.")] = None, as_at : Annotated[Optional[datetime], Field(description="The asAt datetime at which to retrieve the group reconciliation definition. Defaults to return the latest version of the portfolio group definition if not specified.")] = None, **kwargs) -> ApiResponse:  # noqa: E501
+        """[EXPERIMENTAL] GetGroupReconciliationDefinition: Get group reconciliation definition  # noqa: E501
+
+        Retrieves a Group Reconciliation Definition by scope and code  # noqa: E501
+        This method makes a synchronous HTTP request by default. To make an
+        asynchronous HTTP request, please pass async_req=True
+
+        >>> thread = api.get_group_reconciliation_definition_with_http_info(scope, code, effective_at, as_at, async_req=True)
+        >>> result = thread.get()
+
+        :param scope: The scope of the group reconciliation definition to retrieve. (required)
+        :type scope: str
+        :param code: The code of the group reconciliation definition to retrieve. Together with the scope              this uniquely identifies the group reconciliation definition. (required)
+        :type code: str
+        :param effective_at: The effective datetime or cut label at which to retrieve the group reconciliation definition. Defaults to the current LUSID system datetime if not specified.
+        :type effective_at: str
+        :param as_at: The asAt datetime at which to retrieve the group reconciliation definition. Defaults to return the latest version of the portfolio group definition if not specified.
+        :type as_at: datetime
+        :param async_req: Whether to execute the request asynchronously.
+        :type async_req: bool, optional
+        :param _preload_content: if False, the ApiResponse.data will
+                                 be set to none and raw_data will store the
+                                 HTTP response body without reading/decoding.
+                                 Default is True.
+        :type _preload_content: bool, optional
+        :param _return_http_data_only: response data instead of ApiResponse
+                                       object with status code, headers, etc
+        :type _return_http_data_only: bool, optional
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :param _request_auth: set to override the auth_settings for an a single
+                              request; this effectively ignores the authentication
+                              in the spec for a single request.
+        :type _request_auth: dict, optional
+        :type _content_type: string, optional: force content-type for the request
+        :return: Returns the result object.
+                 If the method is called asynchronously,
+                 returns the request thread.
+        :rtype: tuple(GroupReconciliationDefinition, status_code(int), headers(HTTPHeaderDict))
+        """
+
+        _params = locals()
+
+        _all_params = [
+            'scope',
+            'code',
+            'effective_at',
+            'as_at'
+        ]
+        _all_params.extend(
+            [
+                'async_req',
+                '_return_http_data_only',
+                '_preload_content',
+                '_request_timeout',
+                '_request_auth',
+                '_content_type',
+                '_headers'
+            ]
+        )
+
+        # validate the arguments
+        for _key, _val in _params['kwargs'].items():
+            if _key not in _all_params:
+                raise ApiTypeError(
+                    "Got an unexpected keyword argument '%s'"
+                    " to method get_group_reconciliation_definition" % _key
+                )
+            _params[_key] = _val
+        del _params['kwargs']
+
+        _collection_formats = {}
+
+        # process the path parameters
+        _path_params = {}
+        if _params['scope']:
+            _path_params['scope'] = _params['scope']
+
+        if _params['code']:
+            _path_params['code'] = _params['code']
+
+
+        # process the query parameters
+        _query_params = []
+        if _params.get('effective_at') is not None:  # noqa: E501
+            _query_params.append(('effectiveAt', _params['effective_at']))
+
+        if _params.get('as_at') is not None:  # noqa: E501
+            if isinstance(_params['as_at'], datetime):
+                _query_params.append(('asAt', _params['as_at'].strftime(self.api_client.configuration.datetime_format)))
+            else:
+                _query_params.append(('asAt', _params['as_at']))
+
+        # process the header parameters
+        _header_params = dict(_params.get('_headers', {}))
+        # process the form parameters
+        _form_params = []
+        _files = {}
+        # process the body parameter
+        _body_params = None
+        # set the HTTP header `Accept`
+        _header_params['Accept'] = self.api_client.select_header_accept(
+            ['text/plain', 'application/json', 'text/json'])  # noqa: E501
+
+        # authentication setting
+        _auth_settings = ['oauth2']  # noqa: E501
+
+        _response_types_map = {
+            '200': "GroupReconciliationDefinition",
+            '400': "LusidValidationProblemDetails",
+        }
+
+        return self.api_client.call_api(
+            '/api/reconciliations/groupreconciliationdefinitions/{scope}/{code}', 'GET',
+            _path_params,
+            _query_params,
+            _header_params,
+            body=_body_params,
+            post_params=_form_params,
+            files=_files,
+            response_types_map=_response_types_map,
+            auth_settings=_auth_settings,
+            async_req=_params.get('async_req'),
+            _return_http_data_only=_params.get('_return_http_data_only'),  # noqa: E501
+            _preload_content=_params.get('_preload_content', True),
+            _request_timeout=_params.get('_request_timeout'),
+            collection_formats=_collection_formats,
+            _request_auth=_params.get('_request_auth'))
+
+    @overload
+    async def list_comparison_rulesets(self, as_at : Annotated[Optional[datetime], Field(description="The asAt datetime at which to retrieve the staging rule sets. Defaults to return the latest              version of the staging rule sets if not specified.")] = None, page : Annotated[Optional[constr(strict=True, max_length=500, min_length=1)], Field(description="The pagination token to use to continue listing comparison rulesets from a previous call to list              comparison rulesets. This value is returned from the previous call. If a pagination token is provided the sortBy,              filter, effectiveAt, and asAt fields must not have changed since the original request.")] = None, sort_by : Annotated[Optional[conlist(StrictStr)], Field(description="A list of field names to sort by, each suffixed by \" ASC\" or \" DESC\"")] = None, limit : Annotated[Optional[conint(strict=True, le=5000, ge=1)], Field(description="When paginating, limit the number of returned results to this many per page.")] = None, filter : Annotated[Optional[constr(strict=True, max_length=16384, min_length=0)], Field(description="Expression to filter the result set. Read more about filtering results from LUSID here:              https://support.lusid.com/filtering-results-from-lusid.")] = None, **kwargs) -> PagedResourceListOfGroupReconciliationComparisonRuleset:  # noqa: E501
+        ...
+
+    @overload
+    def list_comparison_rulesets(self, as_at : Annotated[Optional[datetime], Field(description="The asAt datetime at which to retrieve the staging rule sets. Defaults to return the latest              version of the staging rule sets if not specified.")] = None, page : Annotated[Optional[constr(strict=True, max_length=500, min_length=1)], Field(description="The pagination token to use to continue listing comparison rulesets from a previous call to list              comparison rulesets. This value is returned from the previous call. If a pagination token is provided the sortBy,              filter, effectiveAt, and asAt fields must not have changed since the original request.")] = None, sort_by : Annotated[Optional[conlist(StrictStr)], Field(description="A list of field names to sort by, each suffixed by \" ASC\" or \" DESC\"")] = None, limit : Annotated[Optional[conint(strict=True, le=5000, ge=1)], Field(description="When paginating, limit the number of returned results to this many per page.")] = None, filter : Annotated[Optional[constr(strict=True, max_length=16384, min_length=0)], Field(description="Expression to filter the result set. Read more about filtering results from LUSID here:              https://support.lusid.com/filtering-results-from-lusid.")] = None, async_req: Optional[bool]=True, **kwargs) -> PagedResourceListOfGroupReconciliationComparisonRuleset:  # noqa: E501
+        ...
+
+    @validate_arguments
+    def list_comparison_rulesets(self, as_at : Annotated[Optional[datetime], Field(description="The asAt datetime at which to retrieve the staging rule sets. Defaults to return the latest              version of the staging rule sets if not specified.")] = None, page : Annotated[Optional[constr(strict=True, max_length=500, min_length=1)], Field(description="The pagination token to use to continue listing comparison rulesets from a previous call to list              comparison rulesets. This value is returned from the previous call. If a pagination token is provided the sortBy,              filter, effectiveAt, and asAt fields must not have changed since the original request.")] = None, sort_by : Annotated[Optional[conlist(StrictStr)], Field(description="A list of field names to sort by, each suffixed by \" ASC\" or \" DESC\"")] = None, limit : Annotated[Optional[conint(strict=True, le=5000, ge=1)], Field(description="When paginating, limit the number of returned results to this many per page.")] = None, filter : Annotated[Optional[constr(strict=True, max_length=16384, min_length=0)], Field(description="Expression to filter the result set. Read more about filtering results from LUSID here:              https://support.lusid.com/filtering-results-from-lusid.")] = None, async_req: Optional[bool]=None, **kwargs) -> Union[PagedResourceListOfGroupReconciliationComparisonRuleset, Awaitable[PagedResourceListOfGroupReconciliationComparisonRuleset]]:  # noqa: E501
+        """[EXPERIMENTAL] ListComparisonRulesets: Get a set of Group Reconciliation Comparison Rulesets  # noqa: E501
+
+        Retrieves all Group Reconciliation Comparison Ruleset that fit the filter, in a specific order if sortBy is provided  Supports pagination  # noqa: E501
+        This method makes a synchronous HTTP request by default. To make an
+        asynchronous HTTP request, please pass async_req=True
+
+        >>> thread = api.list_comparison_rulesets(as_at, page, sort_by, limit, filter, async_req=True)
+        >>> result = thread.get()
+
+        :param as_at: The asAt datetime at which to retrieve the staging rule sets. Defaults to return the latest              version of the staging rule sets if not specified.
+        :type as_at: datetime
+        :param page: The pagination token to use to continue listing comparison rulesets from a previous call to list              comparison rulesets. This value is returned from the previous call. If a pagination token is provided the sortBy,              filter, effectiveAt, and asAt fields must not have changed since the original request.
+        :type page: str
+        :param sort_by: A list of field names to sort by, each suffixed by \" ASC\" or \" DESC\"
+        :type sort_by: List[str]
+        :param limit: When paginating, limit the number of returned results to this many per page.
+        :type limit: int
+        :param filter: Expression to filter the result set. Read more about filtering results from LUSID here:              https://support.lusid.com/filtering-results-from-lusid.
+        :type filter: str
+        :param async_req: Whether to execute the request asynchronously.
+        :type async_req: bool, optional
+        :param _request_timeout: timeout setting for this request.
+               If one number provided, it will be total request
+               timeout. It can also be a pair (tuple) of
+               (connection, read) timeouts.
+        :return: Returns the result object.
+                 If the method is called asynchronously,
+                 returns the request thread.
+        :rtype: PagedResourceListOfGroupReconciliationComparisonRuleset
+        """
+        kwargs['_return_http_data_only'] = True
+        if '_preload_content' in kwargs:
+            message = "Error! Please call the list_comparison_rulesets_with_http_info method with `_preload_content` instead and obtain raw data from ApiResponse.raw_data"  # noqa: E501
+            raise ValueError(message)
+        if async_req is not None:
+            kwargs['async_req'] = async_req
+        return self.list_comparison_rulesets_with_http_info(as_at, page, sort_by, limit, filter, **kwargs)  # noqa: E501
+
+    @validate_arguments
+    def list_comparison_rulesets_with_http_info(self, as_at : Annotated[Optional[datetime], Field(description="The asAt datetime at which to retrieve the staging rule sets. Defaults to return the latest              version of the staging rule sets if not specified.")] = None, page : Annotated[Optional[constr(strict=True, max_length=500, min_length=1)], Field(description="The pagination token to use to continue listing comparison rulesets from a previous call to list              comparison rulesets. This value is returned from the previous call. If a pagination token is provided the sortBy,              filter, effectiveAt, and asAt fields must not have changed since the original request.")] = None, sort_by : Annotated[Optional[conlist(StrictStr)], Field(description="A list of field names to sort by, each suffixed by \" ASC\" or \" DESC\"")] = None, limit : Annotated[Optional[conint(strict=True, le=5000, ge=1)], Field(description="When paginating, limit the number of returned results to this many per page.")] = None, filter : Annotated[Optional[constr(strict=True, max_length=16384, min_length=0)], Field(description="Expression to filter the result set. Read more about filtering results from LUSID here:              https://support.lusid.com/filtering-results-from-lusid.")] = None, **kwargs) -> ApiResponse:  # noqa: E501
+        """[EXPERIMENTAL] ListComparisonRulesets: Get a set of Group Reconciliation Comparison Rulesets  # noqa: E501
+
+        Retrieves all Group Reconciliation Comparison Ruleset that fit the filter, in a specific order if sortBy is provided  Supports pagination  # noqa: E501
+        This method makes a synchronous HTTP request by default. To make an
+        asynchronous HTTP request, please pass async_req=True
+
+        >>> thread = api.list_comparison_rulesets_with_http_info(as_at, page, sort_by, limit, filter, async_req=True)
+        >>> result = thread.get()
+
+        :param as_at: The asAt datetime at which to retrieve the staging rule sets. Defaults to return the latest              version of the staging rule sets if not specified.
+        :type as_at: datetime
+        :param page: The pagination token to use to continue listing comparison rulesets from a previous call to list              comparison rulesets. This value is returned from the previous call. If a pagination token is provided the sortBy,              filter, effectiveAt, and asAt fields must not have changed since the original request.
+        :type page: str
+        :param sort_by: A list of field names to sort by, each suffixed by \" ASC\" or \" DESC\"
+        :type sort_by: List[str]
+        :param limit: When paginating, limit the number of returned results to this many per page.
+        :type limit: int
+        :param filter: Expression to filter the result set. Read more about filtering results from LUSID here:              https://support.lusid.com/filtering-results-from-lusid.
+        :type filter: str
+        :param async_req: Whether to execute the request asynchronously.
+        :type async_req: bool, optional
+        :param _preload_content: if False, the ApiResponse.data will
+                                 be set to none and raw_data will store the
+                                 HTTP response body without reading/decoding.
+                                 Default is True.
+        :type _preload_content: bool, optional
+        :param _return_http_data_only: response data instead of ApiResponse
+                                       object with status code, headers, etc
+        :type _return_http_data_only: bool, optional
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :param _request_auth: set to override the auth_settings for an a single
+                              request; this effectively ignores the authentication
+                              in the spec for a single request.
+        :type _request_auth: dict, optional
+        :type _content_type: string, optional: force content-type for the request
+        :return: Returns the result object.
+                 If the method is called asynchronously,
+                 returns the request thread.
+        :rtype: tuple(PagedResourceListOfGroupReconciliationComparisonRuleset, status_code(int), headers(HTTPHeaderDict))
+        """
+
+        _params = locals()
+
+        _all_params = [
+            'as_at',
+            'page',
+            'sort_by',
+            'limit',
+            'filter'
+        ]
+        _all_params.extend(
+            [
+                'async_req',
+                '_return_http_data_only',
+                '_preload_content',
+                '_request_timeout',
+                '_request_auth',
+                '_content_type',
+                '_headers'
+            ]
+        )
+
+        # validate the arguments
+        for _key, _val in _params['kwargs'].items():
+            if _key not in _all_params:
+                raise ApiTypeError(
+                    "Got an unexpected keyword argument '%s'"
+                    " to method list_comparison_rulesets" % _key
+                )
+            _params[_key] = _val
+        del _params['kwargs']
+
+        _collection_formats = {}
+
+        # process the path parameters
+        _path_params = {}
+
+        # process the query parameters
+        _query_params = []
+        if _params.get('as_at') is not None:  # noqa: E501
+            if isinstance(_params['as_at'], datetime):
+                _query_params.append(('asAt', _params['as_at'].strftime(self.api_client.configuration.datetime_format)))
+            else:
+                _query_params.append(('asAt', _params['as_at']))
+
+        if _params.get('page') is not None:  # noqa: E501
+            _query_params.append(('page', _params['page']))
+
+        if _params.get('sort_by') is not None:  # noqa: E501
+            _query_params.append(('sortBy', _params['sort_by']))
+            _collection_formats['sortBy'] = 'multi'
+
+        if _params.get('limit') is not None:  # noqa: E501
+            _query_params.append(('limit', _params['limit']))
+
+        if _params.get('filter') is not None:  # noqa: E501
+            _query_params.append(('filter', _params['filter']))
+
+        # process the header parameters
+        _header_params = dict(_params.get('_headers', {}))
+        # process the form parameters
+        _form_params = []
+        _files = {}
+        # process the body parameter
+        _body_params = None
+        # set the HTTP header `Accept`
+        _header_params['Accept'] = self.api_client.select_header_accept(
+            ['text/plain', 'application/json', 'text/json'])  # noqa: E501
+
+        # authentication setting
+        _auth_settings = ['oauth2']  # noqa: E501
+
+        _response_types_map = {
+            '200': "PagedResourceListOfGroupReconciliationComparisonRuleset",
+            '400': "LusidValidationProblemDetails",
+        }
+
+        return self.api_client.call_api(
+            '/api/reconciliations/comparisonrulesets', 'GET',
+            _path_params,
+            _query_params,
+            _header_params,
+            body=_body_params,
+            post_params=_form_params,
+            files=_files,
+            response_types_map=_response_types_map,
+            auth_settings=_auth_settings,
+            async_req=_params.get('async_req'),
+            _return_http_data_only=_params.get('_return_http_data_only'),  # noqa: E501
+            _preload_content=_params.get('_preload_content', True),
+            _request_timeout=_params.get('_request_timeout'),
+            collection_formats=_collection_formats,
+            _request_auth=_params.get('_request_auth'))
+
+    @overload
+    async def list_group_reconciliation_definitions(self, effective_at : Annotated[Optional[constr(strict=True, max_length=256, min_length=0)], Field(description="The effective datetime or cut label at which to list the group reconciliation definitions. Defaults to the current LUSID system datetime if not specified.")] = None, as_at : Annotated[Optional[datetime], Field(description="The asAt datetime at which to list the group reconciliation definitions. Defaults to return the latest version of each group reconciliation definition if not specified.")] = None, page : Annotated[Optional[constr(strict=True, max_length=500, min_length=1)], Field(description="The pagination token to use to continue listing group reconciliation definitions from a previous call to list group reconciliation definitions. This  value is returned from the previous call. If a pagination token is provided the filter, effectiveAt, sortBy  and asAt fields must not have changed since the original request.")] = None, limit : Annotated[Optional[conint(strict=True, le=5000, ge=1)], Field(description="When paginating, limit the number of returned results to this many. Defaults to no limit if not specified.")] = None, filter : Annotated[Optional[constr(strict=True, max_length=16384, min_length=0)], Field(description="Expression to filter the result set.              For example, to filter on the Display Name, use \"displayName eq 'string'\"              Read more about filtering results from LUSID here https://support.lusid.com/filtering-results-from-lusid.")] = None, sort_by : Annotated[Optional[conlist(StrictStr)], Field(description="A list of field names to sort by, each suffixed by \" ASC\" or \" DESC\"")] = None, **kwargs) -> PagedResourceListOfGroupReconciliationDefinition:  # noqa: E501
+        ...
+
+    @overload
+    def list_group_reconciliation_definitions(self, effective_at : Annotated[Optional[constr(strict=True, max_length=256, min_length=0)], Field(description="The effective datetime or cut label at which to list the group reconciliation definitions. Defaults to the current LUSID system datetime if not specified.")] = None, as_at : Annotated[Optional[datetime], Field(description="The asAt datetime at which to list the group reconciliation definitions. Defaults to return the latest version of each group reconciliation definition if not specified.")] = None, page : Annotated[Optional[constr(strict=True, max_length=500, min_length=1)], Field(description="The pagination token to use to continue listing group reconciliation definitions from a previous call to list group reconciliation definitions. This  value is returned from the previous call. If a pagination token is provided the filter, effectiveAt, sortBy  and asAt fields must not have changed since the original request.")] = None, limit : Annotated[Optional[conint(strict=True, le=5000, ge=1)], Field(description="When paginating, limit the number of returned results to this many. Defaults to no limit if not specified.")] = None, filter : Annotated[Optional[constr(strict=True, max_length=16384, min_length=0)], Field(description="Expression to filter the result set.              For example, to filter on the Display Name, use \"displayName eq 'string'\"              Read more about filtering results from LUSID here https://support.lusid.com/filtering-results-from-lusid.")] = None, sort_by : Annotated[Optional[conlist(StrictStr)], Field(description="A list of field names to sort by, each suffixed by \" ASC\" or \" DESC\"")] = None, async_req: Optional[bool]=True, **kwargs) -> PagedResourceListOfGroupReconciliationDefinition:  # noqa: E501
+        ...
+
+    @validate_arguments
+    def list_group_reconciliation_definitions(self, effective_at : Annotated[Optional[constr(strict=True, max_length=256, min_length=0)], Field(description="The effective datetime or cut label at which to list the group reconciliation definitions. Defaults to the current LUSID system datetime if not specified.")] = None, as_at : Annotated[Optional[datetime], Field(description="The asAt datetime at which to list the group reconciliation definitions. Defaults to return the latest version of each group reconciliation definition if not specified.")] = None, page : Annotated[Optional[constr(strict=True, max_length=500, min_length=1)], Field(description="The pagination token to use to continue listing group reconciliation definitions from a previous call to list group reconciliation definitions. This  value is returned from the previous call. If a pagination token is provided the filter, effectiveAt, sortBy  and asAt fields must not have changed since the original request.")] = None, limit : Annotated[Optional[conint(strict=True, le=5000, ge=1)], Field(description="When paginating, limit the number of returned results to this many. Defaults to no limit if not specified.")] = None, filter : Annotated[Optional[constr(strict=True, max_length=16384, min_length=0)], Field(description="Expression to filter the result set.              For example, to filter on the Display Name, use \"displayName eq 'string'\"              Read more about filtering results from LUSID here https://support.lusid.com/filtering-results-from-lusid.")] = None, sort_by : Annotated[Optional[conlist(StrictStr)], Field(description="A list of field names to sort by, each suffixed by \" ASC\" or \" DESC\"")] = None, async_req: Optional[bool]=None, **kwargs) -> Union[PagedResourceListOfGroupReconciliationDefinition, Awaitable[PagedResourceListOfGroupReconciliationDefinition]]:  # noqa: E501
+        """[EXPERIMENTAL] ListGroupReconciliationDefinitions: List group reconciliation definitions  # noqa: E501
+
+        Lists Group Reconciliation Definitions matching any provided filter, limit and sorting rules  # noqa: E501
+        This method makes a synchronous HTTP request by default. To make an
+        asynchronous HTTP request, please pass async_req=True
+
+        >>> thread = api.list_group_reconciliation_definitions(effective_at, as_at, page, limit, filter, sort_by, async_req=True)
+        >>> result = thread.get()
+
+        :param effective_at: The effective datetime or cut label at which to list the group reconciliation definitions. Defaults to the current LUSID system datetime if not specified.
+        :type effective_at: str
+        :param as_at: The asAt datetime at which to list the group reconciliation definitions. Defaults to return the latest version of each group reconciliation definition if not specified.
+        :type as_at: datetime
+        :param page: The pagination token to use to continue listing group reconciliation definitions from a previous call to list group reconciliation definitions. This  value is returned from the previous call. If a pagination token is provided the filter, effectiveAt, sortBy  and asAt fields must not have changed since the original request.
+        :type page: str
+        :param limit: When paginating, limit the number of returned results to this many. Defaults to no limit if not specified.
+        :type limit: int
+        :param filter: Expression to filter the result set.              For example, to filter on the Display Name, use \"displayName eq 'string'\"              Read more about filtering results from LUSID here https://support.lusid.com/filtering-results-from-lusid.
+        :type filter: str
+        :param sort_by: A list of field names to sort by, each suffixed by \" ASC\" or \" DESC\"
+        :type sort_by: List[str]
+        :param async_req: Whether to execute the request asynchronously.
+        :type async_req: bool, optional
+        :param _request_timeout: timeout setting for this request.
+               If one number provided, it will be total request
+               timeout. It can also be a pair (tuple) of
+               (connection, read) timeouts.
+        :return: Returns the result object.
+                 If the method is called asynchronously,
+                 returns the request thread.
+        :rtype: PagedResourceListOfGroupReconciliationDefinition
+        """
+        kwargs['_return_http_data_only'] = True
+        if '_preload_content' in kwargs:
+            message = "Error! Please call the list_group_reconciliation_definitions_with_http_info method with `_preload_content` instead and obtain raw data from ApiResponse.raw_data"  # noqa: E501
+            raise ValueError(message)
+        if async_req is not None:
+            kwargs['async_req'] = async_req
+        return self.list_group_reconciliation_definitions_with_http_info(effective_at, as_at, page, limit, filter, sort_by, **kwargs)  # noqa: E501
+
+    @validate_arguments
+    def list_group_reconciliation_definitions_with_http_info(self, effective_at : Annotated[Optional[constr(strict=True, max_length=256, min_length=0)], Field(description="The effective datetime or cut label at which to list the group reconciliation definitions. Defaults to the current LUSID system datetime if not specified.")] = None, as_at : Annotated[Optional[datetime], Field(description="The asAt datetime at which to list the group reconciliation definitions. Defaults to return the latest version of each group reconciliation definition if not specified.")] = None, page : Annotated[Optional[constr(strict=True, max_length=500, min_length=1)], Field(description="The pagination token to use to continue listing group reconciliation definitions from a previous call to list group reconciliation definitions. This  value is returned from the previous call. If a pagination token is provided the filter, effectiveAt, sortBy  and asAt fields must not have changed since the original request.")] = None, limit : Annotated[Optional[conint(strict=True, le=5000, ge=1)], Field(description="When paginating, limit the number of returned results to this many. Defaults to no limit if not specified.")] = None, filter : Annotated[Optional[constr(strict=True, max_length=16384, min_length=0)], Field(description="Expression to filter the result set.              For example, to filter on the Display Name, use \"displayName eq 'string'\"              Read more about filtering results from LUSID here https://support.lusid.com/filtering-results-from-lusid.")] = None, sort_by : Annotated[Optional[conlist(StrictStr)], Field(description="A list of field names to sort by, each suffixed by \" ASC\" or \" DESC\"")] = None, **kwargs) -> ApiResponse:  # noqa: E501
+        """[EXPERIMENTAL] ListGroupReconciliationDefinitions: List group reconciliation definitions  # noqa: E501
+
+        Lists Group Reconciliation Definitions matching any provided filter, limit and sorting rules  # noqa: E501
+        This method makes a synchronous HTTP request by default. To make an
+        asynchronous HTTP request, please pass async_req=True
+
+        >>> thread = api.list_group_reconciliation_definitions_with_http_info(effective_at, as_at, page, limit, filter, sort_by, async_req=True)
+        >>> result = thread.get()
+
+        :param effective_at: The effective datetime or cut label at which to list the group reconciliation definitions. Defaults to the current LUSID system datetime if not specified.
+        :type effective_at: str
+        :param as_at: The asAt datetime at which to list the group reconciliation definitions. Defaults to return the latest version of each group reconciliation definition if not specified.
+        :type as_at: datetime
+        :param page: The pagination token to use to continue listing group reconciliation definitions from a previous call to list group reconciliation definitions. This  value is returned from the previous call. If a pagination token is provided the filter, effectiveAt, sortBy  and asAt fields must not have changed since the original request.
+        :type page: str
+        :param limit: When paginating, limit the number of returned results to this many. Defaults to no limit if not specified.
+        :type limit: int
+        :param filter: Expression to filter the result set.              For example, to filter on the Display Name, use \"displayName eq 'string'\"              Read more about filtering results from LUSID here https://support.lusid.com/filtering-results-from-lusid.
+        :type filter: str
+        :param sort_by: A list of field names to sort by, each suffixed by \" ASC\" or \" DESC\"
+        :type sort_by: List[str]
+        :param async_req: Whether to execute the request asynchronously.
+        :type async_req: bool, optional
+        :param _preload_content: if False, the ApiResponse.data will
+                                 be set to none and raw_data will store the
+                                 HTTP response body without reading/decoding.
+                                 Default is True.
+        :type _preload_content: bool, optional
+        :param _return_http_data_only: response data instead of ApiResponse
+                                       object with status code, headers, etc
+        :type _return_http_data_only: bool, optional
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :param _request_auth: set to override the auth_settings for an a single
+                              request; this effectively ignores the authentication
+                              in the spec for a single request.
+        :type _request_auth: dict, optional
+        :type _content_type: string, optional: force content-type for the request
+        :return: Returns the result object.
+                 If the method is called asynchronously,
+                 returns the request thread.
+        :rtype: tuple(PagedResourceListOfGroupReconciliationDefinition, status_code(int), headers(HTTPHeaderDict))
+        """
+
+        _params = locals()
+
+        _all_params = [
+            'effective_at',
+            'as_at',
+            'page',
+            'limit',
+            'filter',
+            'sort_by'
+        ]
+        _all_params.extend(
+            [
+                'async_req',
+                '_return_http_data_only',
+                '_preload_content',
+                '_request_timeout',
+                '_request_auth',
+                '_content_type',
+                '_headers'
+            ]
+        )
+
+        # validate the arguments
+        for _key, _val in _params['kwargs'].items():
+            if _key not in _all_params:
+                raise ApiTypeError(
+                    "Got an unexpected keyword argument '%s'"
+                    " to method list_group_reconciliation_definitions" % _key
+                )
+            _params[_key] = _val
+        del _params['kwargs']
+
+        _collection_formats = {}
+
+        # process the path parameters
+        _path_params = {}
+
+        # process the query parameters
+        _query_params = []
+        if _params.get('effective_at') is not None:  # noqa: E501
+            _query_params.append(('effectiveAt', _params['effective_at']))
+
+        if _params.get('as_at') is not None:  # noqa: E501
+            if isinstance(_params['as_at'], datetime):
+                _query_params.append(('asAt', _params['as_at'].strftime(self.api_client.configuration.datetime_format)))
+            else:
+                _query_params.append(('asAt', _params['as_at']))
+
+        if _params.get('page') is not None:  # noqa: E501
+            _query_params.append(('page', _params['page']))
+
+        if _params.get('limit') is not None:  # noqa: E501
+            _query_params.append(('limit', _params['limit']))
+
+        if _params.get('filter') is not None:  # noqa: E501
+            _query_params.append(('filter', _params['filter']))
+
+        if _params.get('sort_by') is not None:  # noqa: E501
+            _query_params.append(('sortBy', _params['sort_by']))
+            _collection_formats['sortBy'] = 'multi'
+
+        # process the header parameters
+        _header_params = dict(_params.get('_headers', {}))
+        # process the form parameters
+        _form_params = []
+        _files = {}
+        # process the body parameter
+        _body_params = None
+        # set the HTTP header `Accept`
+        _header_params['Accept'] = self.api_client.select_header_accept(
+            ['text/plain', 'application/json', 'text/json'])  # noqa: E501
+
+        # authentication setting
+        _auth_settings = ['oauth2']  # noqa: E501
+
+        _response_types_map = {
+            '200': "PagedResourceListOfGroupReconciliationDefinition",
+            '400': "LusidValidationProblemDetails",
+        }
+
+        return self.api_client.call_api(
+            '/api/reconciliations/groupreconciliationdefinitions', 'GET',
+            _path_params,
+            _query_params,
+            _header_params,
+            body=_body_params,
+            post_params=_form_params,
+            files=_files,
+            response_types_map=_response_types_map,
+            auth_settings=_auth_settings,
+            async_req=_params.get('async_req'),
+            _return_http_data_only=_params.get('_return_http_data_only'),  # noqa: E501
+            _preload_content=_params.get('_preload_content', True),
+            _request_timeout=_params.get('_request_timeout'),
+            collection_formats=_collection_formats,
+            _request_auth=_params.get('_request_auth'))
+
+    @overload
+    async def update_comparison_ruleset(self, scope : Annotated[constr(strict=True, max_length=64, min_length=1), Field(..., description="The scope of the specified comparison ruleset.")], code : Annotated[constr(strict=True, max_length=64, min_length=1), Field(..., description="The code of the specified comparison ruleset. Together with the domain and scope this uniquely                  identifies the reconciliation comparison ruleset.")], update_group_reconciliation_comparison_ruleset_request : Annotated[Optional[UpdateGroupReconciliationComparisonRulesetRequest], Field(description="The request containing the updated details of the ruleset")] = None, **kwargs) -> GroupReconciliationComparisonRuleset:  # noqa: E501
+        ...
+
+    @overload
+    def update_comparison_ruleset(self, scope : Annotated[constr(strict=True, max_length=64, min_length=1), Field(..., description="The scope of the specified comparison ruleset.")], code : Annotated[constr(strict=True, max_length=64, min_length=1), Field(..., description="The code of the specified comparison ruleset. Together with the domain and scope this uniquely                  identifies the reconciliation comparison ruleset.")], update_group_reconciliation_comparison_ruleset_request : Annotated[Optional[UpdateGroupReconciliationComparisonRulesetRequest], Field(description="The request containing the updated details of the ruleset")] = None, async_req: Optional[bool]=True, **kwargs) -> GroupReconciliationComparisonRuleset:  # noqa: E501
+        ...
+
+    @validate_arguments
+    def update_comparison_ruleset(self, scope : Annotated[constr(strict=True, max_length=64, min_length=1), Field(..., description="The scope of the specified comparison ruleset.")], code : Annotated[constr(strict=True, max_length=64, min_length=1), Field(..., description="The code of the specified comparison ruleset. Together with the domain and scope this uniquely                  identifies the reconciliation comparison ruleset.")], update_group_reconciliation_comparison_ruleset_request : Annotated[Optional[UpdateGroupReconciliationComparisonRulesetRequest], Field(description="The request containing the updated details of the ruleset")] = None, async_req: Optional[bool]=None, **kwargs) -> Union[GroupReconciliationComparisonRuleset, Awaitable[GroupReconciliationComparisonRuleset]]:  # noqa: E501
+        """[EXPERIMENTAL] UpdateComparisonRuleset: Update Group Reconciliation Comparison Ruleset defined by scope and code  # noqa: E501
+
+        Overwrites an existing Group Reconciliation Comparison Ruleset  Update request has the same required fields as Create apart from the Id  # noqa: E501
+        This method makes a synchronous HTTP request by default. To make an
+        asynchronous HTTP request, please pass async_req=True
+
+        >>> thread = api.update_comparison_ruleset(scope, code, update_group_reconciliation_comparison_ruleset_request, async_req=True)
+        >>> result = thread.get()
+
+        :param scope: The scope of the specified comparison ruleset. (required)
+        :type scope: str
+        :param code: The code of the specified comparison ruleset. Together with the domain and scope this uniquely                  identifies the reconciliation comparison ruleset. (required)
+        :type code: str
+        :param update_group_reconciliation_comparison_ruleset_request: The request containing the updated details of the ruleset
+        :type update_group_reconciliation_comparison_ruleset_request: UpdateGroupReconciliationComparisonRulesetRequest
+        :param async_req: Whether to execute the request asynchronously.
+        :type async_req: bool, optional
+        :param _request_timeout: timeout setting for this request.
+               If one number provided, it will be total request
+               timeout. It can also be a pair (tuple) of
+               (connection, read) timeouts.
+        :return: Returns the result object.
+                 If the method is called asynchronously,
+                 returns the request thread.
+        :rtype: GroupReconciliationComparisonRuleset
+        """
+        kwargs['_return_http_data_only'] = True
+        if '_preload_content' in kwargs:
+            message = "Error! Please call the update_comparison_ruleset_with_http_info method with `_preload_content` instead and obtain raw data from ApiResponse.raw_data"  # noqa: E501
+            raise ValueError(message)
+        if async_req is not None:
+            kwargs['async_req'] = async_req
+        return self.update_comparison_ruleset_with_http_info(scope, code, update_group_reconciliation_comparison_ruleset_request, **kwargs)  # noqa: E501
+
+    @validate_arguments
+    def update_comparison_ruleset_with_http_info(self, scope : Annotated[constr(strict=True, max_length=64, min_length=1), Field(..., description="The scope of the specified comparison ruleset.")], code : Annotated[constr(strict=True, max_length=64, min_length=1), Field(..., description="The code of the specified comparison ruleset. Together with the domain and scope this uniquely                  identifies the reconciliation comparison ruleset.")], update_group_reconciliation_comparison_ruleset_request : Annotated[Optional[UpdateGroupReconciliationComparisonRulesetRequest], Field(description="The request containing the updated details of the ruleset")] = None, **kwargs) -> ApiResponse:  # noqa: E501
+        """[EXPERIMENTAL] UpdateComparisonRuleset: Update Group Reconciliation Comparison Ruleset defined by scope and code  # noqa: E501
+
+        Overwrites an existing Group Reconciliation Comparison Ruleset  Update request has the same required fields as Create apart from the Id  # noqa: E501
+        This method makes a synchronous HTTP request by default. To make an
+        asynchronous HTTP request, please pass async_req=True
+
+        >>> thread = api.update_comparison_ruleset_with_http_info(scope, code, update_group_reconciliation_comparison_ruleset_request, async_req=True)
+        >>> result = thread.get()
+
+        :param scope: The scope of the specified comparison ruleset. (required)
+        :type scope: str
+        :param code: The code of the specified comparison ruleset. Together with the domain and scope this uniquely                  identifies the reconciliation comparison ruleset. (required)
+        :type code: str
+        :param update_group_reconciliation_comparison_ruleset_request: The request containing the updated details of the ruleset
+        :type update_group_reconciliation_comparison_ruleset_request: UpdateGroupReconciliationComparisonRulesetRequest
+        :param async_req: Whether to execute the request asynchronously.
+        :type async_req: bool, optional
+        :param _preload_content: if False, the ApiResponse.data will
+                                 be set to none and raw_data will store the
+                                 HTTP response body without reading/decoding.
+                                 Default is True.
+        :type _preload_content: bool, optional
+        :param _return_http_data_only: response data instead of ApiResponse
+                                       object with status code, headers, etc
+        :type _return_http_data_only: bool, optional
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :param _request_auth: set to override the auth_settings for an a single
+                              request; this effectively ignores the authentication
+                              in the spec for a single request.
+        :type _request_auth: dict, optional
+        :type _content_type: string, optional: force content-type for the request
+        :return: Returns the result object.
+                 If the method is called asynchronously,
+                 returns the request thread.
+        :rtype: tuple(GroupReconciliationComparisonRuleset, status_code(int), headers(HTTPHeaderDict))
+        """
+
+        _params = locals()
+
+        _all_params = [
+            'scope',
+            'code',
+            'update_group_reconciliation_comparison_ruleset_request'
+        ]
+        _all_params.extend(
+            [
+                'async_req',
+                '_return_http_data_only',
+                '_preload_content',
+                '_request_timeout',
+                '_request_auth',
+                '_content_type',
+                '_headers'
+            ]
+        )
+
+        # validate the arguments
+        for _key, _val in _params['kwargs'].items():
+            if _key not in _all_params:
+                raise ApiTypeError(
+                    "Got an unexpected keyword argument '%s'"
+                    " to method update_comparison_ruleset" % _key
+                )
+            _params[_key] = _val
+        del _params['kwargs']
+
+        _collection_formats = {}
+
+        # process the path parameters
+        _path_params = {}
+        if _params['scope']:
+            _path_params['scope'] = _params['scope']
+
+        if _params['code']:
+            _path_params['code'] = _params['code']
+
+
+        # process the query parameters
+        _query_params = []
+        # process the header parameters
+        _header_params = dict(_params.get('_headers', {}))
+        # process the form parameters
+        _form_params = []
+        _files = {}
+        # process the body parameter
+        _body_params = None
+        if _params['update_group_reconciliation_comparison_ruleset_request'] is not None:
+            _body_params = _params['update_group_reconciliation_comparison_ruleset_request']
+
+        # set the HTTP header `Accept`
+        _header_params['Accept'] = self.api_client.select_header_accept(
+            ['text/plain', 'application/json', 'text/json'])  # noqa: E501
+
+        # set the HTTP header `Content-Type`
+        _content_types_list = _params.get('_content_type',
+            self.api_client.select_header_content_type(
+                ['application/json-patch+json', 'application/json', 'text/json', 'application/*+json']))
+        if _content_types_list:
+                _header_params['Content-Type'] = _content_types_list
+
+        # authentication setting
+        _auth_settings = ['oauth2']  # noqa: E501
+
+        _response_types_map = {
+            '200': "GroupReconciliationComparisonRuleset",
+            '400': "LusidValidationProblemDetails",
+        }
+
+        return self.api_client.call_api(
+            '/api/reconciliations/comparisonrulesets/{scope}/{code}', 'PUT',
+            _path_params,
+            _query_params,
+            _header_params,
+            body=_body_params,
+            post_params=_form_params,
+            files=_files,
+            response_types_map=_response_types_map,
+            auth_settings=_auth_settings,
+            async_req=_params.get('async_req'),
+            _return_http_data_only=_params.get('_return_http_data_only'),  # noqa: E501
+            _preload_content=_params.get('_preload_content', True),
+            _request_timeout=_params.get('_request_timeout'),
+            collection_formats=_collection_formats,
+            _request_auth=_params.get('_request_auth'))
+
+    @overload
+    async def update_group_reconciliation_definition(self, scope : Annotated[constr(strict=True, max_length=64, min_length=1), Field(..., description="The scope of the group reconciliation definition to update the details for.")], code : Annotated[constr(strict=True, max_length=64, min_length=1), Field(..., description="The code of the group reconciliation definition to update the details for. Together with the scope this uniquely identifies the group reconciliation definition.")], update_group_reconciliation_definition_request : Annotated[Optional[UpdateGroupReconciliationDefinitionRequest], Field(description="The updated group reconciliation definition.")] = None, **kwargs) -> GroupReconciliationDefinition:  # noqa: E501
+        ...
+
+    @overload
+    def update_group_reconciliation_definition(self, scope : Annotated[constr(strict=True, max_length=64, min_length=1), Field(..., description="The scope of the group reconciliation definition to update the details for.")], code : Annotated[constr(strict=True, max_length=64, min_length=1), Field(..., description="The code of the group reconciliation definition to update the details for. Together with the scope this uniquely identifies the group reconciliation definition.")], update_group_reconciliation_definition_request : Annotated[Optional[UpdateGroupReconciliationDefinitionRequest], Field(description="The updated group reconciliation definition.")] = None, async_req: Optional[bool]=True, **kwargs) -> GroupReconciliationDefinition:  # noqa: E501
+        ...
+
+    @validate_arguments
+    def update_group_reconciliation_definition(self, scope : Annotated[constr(strict=True, max_length=64, min_length=1), Field(..., description="The scope of the group reconciliation definition to update the details for.")], code : Annotated[constr(strict=True, max_length=64, min_length=1), Field(..., description="The code of the group reconciliation definition to update the details for. Together with the scope this uniquely identifies the group reconciliation definition.")], update_group_reconciliation_definition_request : Annotated[Optional[UpdateGroupReconciliationDefinitionRequest], Field(description="The updated group reconciliation definition.")] = None, async_req: Optional[bool]=None, **kwargs) -> Union[GroupReconciliationDefinition, Awaitable[GroupReconciliationDefinition]]:  # noqa: E501
+        """[EXPERIMENTAL] UpdateGroupReconciliationDefinition: Update group reconciliation definition  # noqa: E501
+
+        Update the group reconciliation definition.  # noqa: E501
+        This method makes a synchronous HTTP request by default. To make an
+        asynchronous HTTP request, please pass async_req=True
+
+        >>> thread = api.update_group_reconciliation_definition(scope, code, update_group_reconciliation_definition_request, async_req=True)
+        >>> result = thread.get()
+
+        :param scope: The scope of the group reconciliation definition to update the details for. (required)
+        :type scope: str
+        :param code: The code of the group reconciliation definition to update the details for. Together with the scope this uniquely identifies the group reconciliation definition. (required)
+        :type code: str
+        :param update_group_reconciliation_definition_request: The updated group reconciliation definition.
+        :type update_group_reconciliation_definition_request: UpdateGroupReconciliationDefinitionRequest
+        :param async_req: Whether to execute the request asynchronously.
+        :type async_req: bool, optional
+        :param _request_timeout: timeout setting for this request.
+               If one number provided, it will be total request
+               timeout. It can also be a pair (tuple) of
+               (connection, read) timeouts.
+        :return: Returns the result object.
+                 If the method is called asynchronously,
+                 returns the request thread.
+        :rtype: GroupReconciliationDefinition
+        """
+        kwargs['_return_http_data_only'] = True
+        if '_preload_content' in kwargs:
+            message = "Error! Please call the update_group_reconciliation_definition_with_http_info method with `_preload_content` instead and obtain raw data from ApiResponse.raw_data"  # noqa: E501
+            raise ValueError(message)
+        if async_req is not None:
+            kwargs['async_req'] = async_req
+        return self.update_group_reconciliation_definition_with_http_info(scope, code, update_group_reconciliation_definition_request, **kwargs)  # noqa: E501
+
+    @validate_arguments
+    def update_group_reconciliation_definition_with_http_info(self, scope : Annotated[constr(strict=True, max_length=64, min_length=1), Field(..., description="The scope of the group reconciliation definition to update the details for.")], code : Annotated[constr(strict=True, max_length=64, min_length=1), Field(..., description="The code of the group reconciliation definition to update the details for. Together with the scope this uniquely identifies the group reconciliation definition.")], update_group_reconciliation_definition_request : Annotated[Optional[UpdateGroupReconciliationDefinitionRequest], Field(description="The updated group reconciliation definition.")] = None, **kwargs) -> ApiResponse:  # noqa: E501
+        """[EXPERIMENTAL] UpdateGroupReconciliationDefinition: Update group reconciliation definition  # noqa: E501
+
+        Update the group reconciliation definition.  # noqa: E501
+        This method makes a synchronous HTTP request by default. To make an
+        asynchronous HTTP request, please pass async_req=True
+
+        >>> thread = api.update_group_reconciliation_definition_with_http_info(scope, code, update_group_reconciliation_definition_request, async_req=True)
+        >>> result = thread.get()
+
+        :param scope: The scope of the group reconciliation definition to update the details for. (required)
+        :type scope: str
+        :param code: The code of the group reconciliation definition to update the details for. Together with the scope this uniquely identifies the group reconciliation definition. (required)
+        :type code: str
+        :param update_group_reconciliation_definition_request: The updated group reconciliation definition.
+        :type update_group_reconciliation_definition_request: UpdateGroupReconciliationDefinitionRequest
+        :param async_req: Whether to execute the request asynchronously.
+        :type async_req: bool, optional
+        :param _preload_content: if False, the ApiResponse.data will
+                                 be set to none and raw_data will store the
+                                 HTTP response body without reading/decoding.
+                                 Default is True.
+        :type _preload_content: bool, optional
+        :param _return_http_data_only: response data instead of ApiResponse
+                                       object with status code, headers, etc
+        :type _return_http_data_only: bool, optional
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :param _request_auth: set to override the auth_settings for an a single
+                              request; this effectively ignores the authentication
+                              in the spec for a single request.
+        :type _request_auth: dict, optional
+        :type _content_type: string, optional: force content-type for the request
+        :return: Returns the result object.
+                 If the method is called asynchronously,
+                 returns the request thread.
+        :rtype: tuple(GroupReconciliationDefinition, status_code(int), headers(HTTPHeaderDict))
+        """
+
+        _params = locals()
+
+        _all_params = [
+            'scope',
+            'code',
+            'update_group_reconciliation_definition_request'
+        ]
+        _all_params.extend(
+            [
+                'async_req',
+                '_return_http_data_only',
+                '_preload_content',
+                '_request_timeout',
+                '_request_auth',
+                '_content_type',
+                '_headers'
+            ]
+        )
+
+        # validate the arguments
+        for _key, _val in _params['kwargs'].items():
+            if _key not in _all_params:
+                raise ApiTypeError(
+                    "Got an unexpected keyword argument '%s'"
+                    " to method update_group_reconciliation_definition" % _key
+                )
+            _params[_key] = _val
+        del _params['kwargs']
+
+        _collection_formats = {}
+
+        # process the path parameters
+        _path_params = {}
+        if _params['scope']:
+            _path_params['scope'] = _params['scope']
+
+        if _params['code']:
+            _path_params['code'] = _params['code']
+
+
+        # process the query parameters
+        _query_params = []
+        # process the header parameters
+        _header_params = dict(_params.get('_headers', {}))
+        # process the form parameters
+        _form_params = []
+        _files = {}
+        # process the body parameter
+        _body_params = None
+        if _params['update_group_reconciliation_definition_request'] is not None:
+            _body_params = _params['update_group_reconciliation_definition_request']
+
+        # set the HTTP header `Accept`
+        _header_params['Accept'] = self.api_client.select_header_accept(
+            ['text/plain', 'application/json', 'text/json'])  # noqa: E501
+
+        # set the HTTP header `Content-Type`
+        _content_types_list = _params.get('_content_type',
+            self.api_client.select_header_content_type(
+                ['application/json-patch+json', 'application/json', 'text/json', 'application/*+json']))
+        if _content_types_list:
+                _header_params['Content-Type'] = _content_types_list
+
+        # authentication setting
+        _auth_settings = ['oauth2']  # noqa: E501
+
+        _response_types_map = {
+            '200': "GroupReconciliationDefinition",
+            '400': "LusidValidationProblemDetails",
+        }
+
+        return self.api_client.call_api(
+            '/api/reconciliations/groupreconciliationdefinitions/{scope}/{code}', 'PUT',
             _path_params,
             _query_params,
             _header_params,

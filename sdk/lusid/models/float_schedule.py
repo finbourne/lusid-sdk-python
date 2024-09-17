@@ -29,10 +29,10 @@ from lusid.models.schedule import Schedule
 
 class FloatSchedule(Schedule):
     """
-    Schedule for fixed coupon payments  # noqa: E501
+    Schedule for floating rate coupon payments.  # noqa: E501
     """
-    start_date: Optional[datetime] = Field(None, alias="startDate", description="Date to start generate from")
-    maturity_date: Optional[datetime] = Field(None, alias="maturityDate", description="Date to generate to")
+    start_date: Optional[datetime] = Field(None, alias="startDate", description="Date from which LUSID starts generating the payment schedule.")
+    maturity_date: Optional[datetime] = Field(None, alias="maturityDate", description="Last date of the payment generation schedule. May not necessarily be the maturity date  of the underlying instrument (e.g. in case the instrument has multiple payment schedules).")
     flow_conventions: Optional[FlowConventions] = Field(None, alias="flowConventions")
     convention_name: Optional[FlowConventionName] = Field(None, alias="conventionName")
     ex_dividend_days: Optional[StrictInt] = Field(None, alias="exDividendDays", description="Optional. Number of calendar days in the ex-dividend period.  If the settlement date falls in the ex-dividend period then the coupon paid is zero and the accrued interest is negative.  If set, this must be a non-negative number.  If not set, or set to 0, then there is no ex-dividend period.                NOTE: This field is deprecated.  If you wish to set the ExDividendDays on a bond, please use the ExDividendConfiguration.")
@@ -41,7 +41,7 @@ class FloatSchedule(Schedule):
     notional: Optional[Union[StrictFloat, StrictInt]] = Field(None, description="Scaling factor, the quantity outstanding on which the rate will be paid.")
     payment_currency: StrictStr = Field(..., alias="paymentCurrency", description="Payment currency. This does not have to be the same as the nominal bond or observation/reset currency.")
     spread: Optional[Union[StrictFloat, StrictInt]] = Field(None, description="Spread over floating rate given as a fraction.")
-    stub_type: Optional[StrictStr] = Field(None, alias="stubType", description="StubType required of the schedule    Supported string (enumeration) values are: [ShortFront, ShortBack, LongBack, LongFront, Both].")
+    stub_type: Optional[StrictStr] = Field(None, alias="stubType", description="When a payment schedule doesn't have regular payment intervals just because of the  first and/or last coupons of the schedule, we call those irregular coupons stubs.  This configuration specifies what type of stub is used when building the schedule  Supported values are:  None = this is a regular payment schedule with no stubs. DO NOT use it with irregular schedules or you will get incorrect and unexpected behaviour.  ShortFront = this is an irregular payment schedule where only the first coupon is irregular, and covers a payment period that is shorter than the regular payment period.  ShortBack = this is an irregular payment schedule where only the last coupon is irregular, and covers a payment period that is shorter than the regular payment period.  LongFront = this is an irregular payment schedule where only the first coupon is irregular, and covers a payment period that is longer than the regular payment period.  LongBack = this is an irregular payment schedule where only the last coupon is irregular, and covers a payment period that is longer than the regular payment period.  Both = this is an irregular payment schedule where both the first and the last coupons are irregular, and the length of these periods is calculated based on the first coupon payment date that should have been explicitly set.")
     ex_dividend_configuration: Optional[ExDividendConfiguration] = Field(None, alias="exDividendConfiguration")
     compounding: Optional[Compounding] = None
     reset_convention: Optional[constr(strict=True, max_length=16, min_length=0)] = Field(None, alias="resetConvention", description="Control how resets are generated relative to payment convention(s).    Supported string (enumeration) values are: [InAdvance, InArrears].")

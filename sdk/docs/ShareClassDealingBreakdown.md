@@ -6,7 +6,7 @@ The breakdown of Dealing for a Share Class.
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **class_dealing** | [**Dict[str, ShareClassAmount]**](ShareClassAmount.md) | Bucket of detail for any &#39;Dealing&#39; specific to the share class that has occured inside the queried period. | 
-**class_dealing_units** | [**Dict[str, ShareClassAmount]**](ShareClassAmount.md) | Bucket of detail for any &#39;Dealing&#39; units specific to the share class that has occured inside the queried period. | 
+**class_dealing_units** | [**Dict[str, Amount]**](Amount.md) | Bucket of detail for any &#39;Dealing&#39; units specific to the share class that has occured inside the queried period. | 
 
 ## Example
 
