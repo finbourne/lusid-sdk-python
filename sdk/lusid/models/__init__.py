@@ -528,6 +528,8 @@ from lusid.models.market_options import MarketOptions
 from lusid.models.market_quote import MarketQuote
 from lusid.models.match_criterion import MatchCriterion
 from lusid.models.maturity_event import MaturityEvent
+from lusid.models.mbs_coupon_event import MbsCouponEvent
+from lusid.models.mbs_principal_event import MbsPrincipalEvent
 from lusid.models.merger_event import MergerEvent
 from lusid.models.metric_value import MetricValue
 from lusid.models.model_options import ModelOptions
@@ -1614,6 +1616,8 @@ __all__ = [
     "MarketQuote",
     "MatchCriterion",
     "MaturityEvent",
+    "MbsCouponEvent",
+    "MbsPrincipalEvent",
     "MergerEvent",
     "MetricValue",
     "ModelOptions",

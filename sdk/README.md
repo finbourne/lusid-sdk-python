@@ -1101,6 +1101,8 @@ Class | Method | HTTP request | Description
  - [MarketQuote](docs/MarketQuote.md)
  - [MatchCriterion](docs/MatchCriterion.md)
  - [MaturityEvent](docs/MaturityEvent.md)
+ - [MbsCouponEvent](docs/MbsCouponEvent.md)
+ - [MbsPrincipalEvent](docs/MbsPrincipalEvent.md)
  - [MergerEvent](docs/MergerEvent.md)
  - [MetricValue](docs/MetricValue.md)
  - [ModelOptions](docs/ModelOptions.md)

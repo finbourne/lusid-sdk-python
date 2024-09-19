@@ -18,18 +18,21 @@ import re  # noqa: F401
 import json
 
 from datetime import datetime
-from typing import Any, Dict, Optional
-from pydantic.v1 import Field, StrictStr, validator
+from typing import Any, Dict, Union
+from pydantic.v1 import Field, StrictFloat, StrictInt, StrictStr, validator
 from lusid.models.instrument_event import InstrumentEvent
 
-class OpenEvent(InstrumentEvent):
+class MbsPrincipalEvent(InstrumentEvent):
     """
-    The opening of an instrument.  # noqa: E501
+    Definition of an MBS Principal Event  This is an event that describes the occurence of a cashflow due to a mortgage-backed security principal payment.  # noqa: E501
     """
-    anchor_date: Optional[datetime] = Field(None, alias="anchorDate", description="The date on the which the instrument was opened.")
+    ex_date: datetime = Field(..., alias="exDate", description="The ex date (entitlement date) of the principal payment, usually several weeks prior to the payment date")
+    payment_date: datetime = Field(..., alias="paymentDate", description="The payment date of the principal")
+    currency: StrictStr = Field(..., description="The currency in which the principal is paid")
+    principal_per_unit: Union[StrictFloat, StrictInt] = Field(..., alias="principalPerUnit", description="The principal amount received for each unit of the instrument held on the ex date")
     instrument_event_type: StrictStr = Field(..., alias="instrumentEventType", description="The Type of Event. The available values are: TransitionEvent, InformationalEvent, OpenEvent, CloseEvent, StockSplitEvent, BondDefaultEvent, CashDividendEvent, AmortisationEvent, CashFlowEvent, ExerciseEvent, ResetEvent, TriggerEvent, RawVendorEvent, InformationalErrorEvent, BondCouponEvent, DividendReinvestmentEvent, AccumulationEvent, BondPrincipalEvent, DividendOptionEvent, MaturityEvent, FxForwardSettlementEvent, ExpiryEvent, ScripDividendEvent, StockDividendEvent, ReverseStockSplitEvent, CapitalDistributionEvent, SpinOffEvent, MergerEvent, FutureExpiryEvent, SwapCashFlowEvent, SwapPrincipalEvent, CreditPremiumCashFlowEvent, CdsCreditEvent, CdxCreditEvent, MbsCouponEvent, MbsPrincipalEvent")
     additional_properties: Dict[str, Any] = {}
-    __properties = ["instrumentEventType", "anchorDate"]
+    __properties = ["instrumentEventType", "exDate", "paymentDate", "currency", "principalPerUnit"]
 
     @validator('instrument_event_type')
     def instrument_event_type_validate_enum(cls, value):
@@ -52,8 +55,8 @@ class OpenEvent(InstrumentEvent):
         return json.dumps(self.to_dict())
 
     @classmethod
-    def from_json(cls, json_str: str) -> OpenEvent:
-        """Create an instance of OpenEvent from a JSON string"""
+    def from_json(cls, json_str: str) -> MbsPrincipalEvent:
+        """Create an instance of MbsPrincipalEvent from a JSON string"""
         return cls.from_dict(json.loads(json_str))
 
     def to_dict(self):
@@ -71,17 +74,20 @@ class OpenEvent(InstrumentEvent):
         return _dict
 
     @classmethod
-    def from_dict(cls, obj: dict) -> OpenEvent:
-        """Create an instance of OpenEvent from a dict"""
+    def from_dict(cls, obj: dict) -> MbsPrincipalEvent:
+        """Create an instance of MbsPrincipalEvent from a dict"""
         if obj is None:
             return None
 
         if not isinstance(obj, dict):
-            return OpenEvent.parse_obj(obj)
+            return MbsPrincipalEvent.parse_obj(obj)
 
-        _obj = OpenEvent.parse_obj({
+        _obj = MbsPrincipalEvent.parse_obj({
             "instrument_event_type": obj.get("instrumentEventType"),
-            "anchor_date": obj.get("anchorDate")
+            "ex_date": obj.get("exDate"),
+            "payment_date": obj.get("paymentDate"),
+            "currency": obj.get("currency"),
+            "principal_per_unit": obj.get("principalPerUnit")
         })
         # store additional fields in additional_properties
         for _key in obj.keys():
