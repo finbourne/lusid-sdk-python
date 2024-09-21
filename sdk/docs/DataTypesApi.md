@@ -11,6 +11,7 @@ Method | HTTP request | Description
 [**list_data_type_summaries**](DataTypesApi.md#list_data_type_summaries) | **GET** /api/datatypes | [EARLY ACCESS] ListDataTypeSummaries: List all data type summaries, without the reference data
 [**list_data_types**](DataTypesApi.md#list_data_types) | **GET** /api/datatypes/{scope} | ListDataTypes: List data types
 [**update_data_type**](DataTypesApi.md#update_data_type) | **PUT** /api/datatypes/{scope}/{code} | [EARLY ACCESS] UpdateDataType: Update data type definition
+[**update_reference_data**](DataTypesApi.md#update_reference_data) | **PUT** /api/datatypes/{scope}/{code}/referencedata | [EARLY ACCESS] UpdateReferenceData: Update all reference data on a data type, includes the reference values, the field definitions, field values
 [**update_reference_values**](DataTypesApi.md#update_reference_values) | **PUT** /api/datatypes/{scope}/{code}/referencedatavalues | [EARLY ACCESS] UpdateReferenceValues: Update reference data on a data type
 
 
@@ -601,6 +602,95 @@ Name | Type | Description  | Notes
  **scope** | **str**| The scope of the data type | 
  **code** | **str**| The code of the data type | 
  **update_data_type_request** | [**UpdateDataTypeRequest**](UpdateDataTypeRequest.md)| The updated definition of the data type | 
+
+### Return type
+
+[**DataType**](DataType.md)
+
+### HTTP request headers
+
+ - **Content-Type**: application/json-patch+json, application/json, text/json, application/*+json
+ - **Accept**: text/plain, application/json, text/json
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | Success |  -  |
+**400** | The details of the input related failure |  -  |
+**0** | Error response |  -  |
+
+[Back to top](#) &#8226; [Back to API list](../README.md#documentation-for-api-endpoints) &#8226; [Back to Model list](../README.md#documentation-for-models) &#8226; [Back to README](../README.md)
+
+# **update_reference_data**
+> DataType update_reference_data(scope, code, update_reference_data_request)
+
+[EARLY ACCESS] UpdateReferenceData: Update all reference data on a data type, includes the reference values, the field definitions, field values
+
+Replaces the whole set of reference data
+
+### Example
+
+```python
+import asyncio
+from lusid.exceptions import ApiException
+from lusid.models import *
+from pprint import pprint
+from lusid import (
+    ApiClientFactory,
+    DataTypesApi
+)
+
+async def main():
+
+    with open("secrets.json", "w") as file:
+        file.write('''
+{
+    "api":
+    {
+        "tokenUrl":"<your-token-url>",
+        "lusidUrl":"https://<your-domain>.lusid.com/api",
+        "username":"<your-username>",
+        "password":"<your-password>",
+        "clientId":"<your-client-id>",
+        "clientSecret":"<your-client-secret>"
+    }
+}''')
+
+    # Use the lusid ApiClientFactory to build Api instances with a configured api client
+    # By default this will read config from environment variables
+    # Then from a secrets.json file found in the current working directory
+    api_client_factory = ApiClientFactory()
+
+    # Enter a context with an instance of the ApiClientFactory to ensure the connection pool is closed after use
+    async with api_client_factory:
+        # Create an instance of the API class
+        api_instance = api_client_factory.build(DataTypesApi)
+        scope = 'scope_example' # str | The scope of the data type
+        code = 'code_example' # str | The code of the data type
+
+        # Objects can be created either via the class constructor, or using the 'from_dict' or 'from_json' methods
+        # Change the lines below to switch approach
+        # update_reference_data_request = UpdateReferenceDataRequest()
+        # update_reference_data_request = UpdateReferenceDataRequest.from_json("")
+        update_reference_data_request = UpdateReferenceDataRequest.from_dict({"requestDefinitions":[{"key":"Field1","isRequired":true,"isUnique":false},{"key":"Field2","isRequired":true,"isUnique":false},{"key":"Field3","isRequired":true,"isUnique":false}],"requestValues":[{"value":"ValueOne","fields":{"Field1":"FieldValue1","Field2":"FieldValue2","Field3":"FieldValue3"}},{"value":"ValueTwo","fields":{"Field1":"FieldValue1","Field2":"FieldValue2","Field3":"FieldValue3"}},{"value":"ValueThree","fields":{"Field1":"FieldValue1","Field2":"FieldValue2","Field3":"FieldValue3"}}]}) # UpdateReferenceDataRequest | The updated reference data
+
+        try:
+            # [EARLY ACCESS] UpdateReferenceData: Update all reference data on a data type, includes the reference values, the field definitions, field values
+            api_response = await api_instance.update_reference_data(scope, code, update_reference_data_request)
+            pprint(api_response)
+        except ApiException as e:
+            print("Exception when calling DataTypesApi->update_reference_data: %s\n" % e)
+
+asyncio.run(main())
+```
+
+### Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **scope** | **str**| The scope of the data type | 
+ **code** | **str**| The code of the data type | 
+ **update_reference_data_request** | [**UpdateReferenceDataRequest**](UpdateReferenceDataRequest.md)| The updated reference data | 
 
 ### Return type
 

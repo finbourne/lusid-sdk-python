@@ -29,8 +29,8 @@ class FeeRequest(BaseModel):
     FeeRequest
     """
     code: constr(strict=True, max_length=64, min_length=1) = Field(..., description="The code of the Fee.")
-    fee_type: ResourceId = Field(..., alias="feeType")
-    name: constr(strict=True, max_length=256, min_length=1) = Field(..., description="The name of the Fee.")
+    fee_type_id: ResourceId = Field(..., alias="feeTypeId")
+    display_name: constr(strict=True, max_length=256, min_length=1) = Field(..., alias="displayName", description="The name of the Fee.")
     description: Optional[constr(strict=True, max_length=1024, min_length=0)] = Field(None, description="A description for the Fee.")
     origin: Optional[constr(strict=True, max_length=512, min_length=1)] = Field(None, description="The origin or source of the Fee accrual.")
     calculation_base: Optional[constr(strict=True, max_length=1024, min_length=0)] = Field(None, alias="calculationBase", description="The calculation base for the Fee that is calculated using a percentage. (TotalAnnualAccrualAmount and CalculationBase cannot both be present)")
@@ -45,7 +45,7 @@ class FeeRequest(BaseModel):
     anchor_date: Optional[DayMonth] = Field(None, alias="anchorDate")
     properties: Optional[Dict[str, ModelProperty]] = Field(None, description="The Fee properties. These will be from the 'Fee' domain.")
     portfolio_id: Optional[ResourceId] = Field(None, alias="portfolioId")
-    __properties = ["code", "feeType", "name", "description", "origin", "calculationBase", "accrualCurrency", "treatment", "totalAnnualAccrualAmount", "feeRatePercentage", "payableFrequency", "businessDayConvention", "startDate", "endDate", "anchorDate", "properties", "portfolioId"]
+    __properties = ["code", "feeTypeId", "displayName", "description", "origin", "calculationBase", "accrualCurrency", "treatment", "totalAnnualAccrualAmount", "feeRatePercentage", "payableFrequency", "businessDayConvention", "startDate", "endDate", "anchorDate", "properties", "portfolioId"]
 
     @validator('code')
     def code_validate_regular_expression(cls, value):
@@ -88,9 +88,9 @@ class FeeRequest(BaseModel):
                           exclude={
                           },
                           exclude_none=True)
-        # override the default output from pydantic by calling `to_dict()` of fee_type
-        if self.fee_type:
-            _dict['feeType'] = self.fee_type.to_dict()
+        # override the default output from pydantic by calling `to_dict()` of fee_type_id
+        if self.fee_type_id:
+            _dict['feeTypeId'] = self.fee_type_id.to_dict()
         # override the default output from pydantic by calling `to_dict()` of anchor_date
         if self.anchor_date:
             _dict['anchorDate'] = self.anchor_date.to_dict()
@@ -152,8 +152,8 @@ class FeeRequest(BaseModel):
 
         _obj = FeeRequest.parse_obj({
             "code": obj.get("code"),
-            "fee_type": ResourceId.from_dict(obj.get("feeType")) if obj.get("feeType") is not None else None,
-            "name": obj.get("name"),
+            "fee_type_id": ResourceId.from_dict(obj.get("feeTypeId")) if obj.get("feeTypeId") is not None else None,
+            "display_name": obj.get("displayName"),
             "description": obj.get("description"),
             "origin": obj.get("origin"),
             "calculation_base": obj.get("calculationBase"),

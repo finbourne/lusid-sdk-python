@@ -5,7 +5,7 @@ Definition of a credit event for credit default swap index (CDX) instruments.
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**default_date** | **datetime** | The date of the credit default - i.e. date on which the debt issuer defaulted on its repayment obligation. | 
+**effective_date** | **datetime** | The date of the credit default - i.e. date on which the debt issuer defaulted on its repayment obligation. | 
 **auction_date** | **datetime** | The date of the credit event auction - i.e. date on which the defaulted debt is sold via auction, and a recovery rate determined. | [optional] 
 **recovery_rate** | **float** | The fraction of the defaulted debt that can be recovered. | [optional] 
 **constituent_weight** | **float** | The relative weight of the CDX constituent. | 

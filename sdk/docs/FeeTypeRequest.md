@@ -5,7 +5,7 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **code** | **str** |  | 
-**name** | **str** | The name of the fee type. | 
+**display_name** | **str** | The name of the fee type. | 
 **description** | **str** | The description of the fee type. | [optional] 
 **component_transactions** | [**List[ComponentTransaction]**](ComponentTransaction.md) | A set of component transactions that relate to the fee type to be created. | 
 

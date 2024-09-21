@@ -24,6 +24,7 @@ from lusid.models.custom_entity_field import CustomEntityField
 from lusid.models.custom_entity_id import CustomEntityId
 from lusid.models.link import Link
 from lusid.models.relationship import Relationship
+from lusid.models.staged_modifications_info import StagedModificationsInfo
 from lusid.models.version import Version
 
 class CustomEntityResponse(BaseModel):
@@ -33,13 +34,14 @@ class CustomEntityResponse(BaseModel):
     href: Optional[StrictStr] = Field(None, description="The specific Uniform Resource Identifier (URI) for this resource at the requested effective and asAt datetime.")
     entity_type: constr(strict=True, min_length=1) = Field(..., alias="entityType", description="The type of custom entity this is.")
     version: Version = Field(...)
+    staged_modifications: Optional[StagedModificationsInfo] = Field(None, alias="stagedModifications")
     display_name: constr(strict=True, min_length=1) = Field(..., alias="displayName", description="A display label for the custom entity.")
     description: Optional[StrictStr] = Field(None, description="A description of the custom entity.")
     identifiers: conlist(CustomEntityId) = Field(..., description="The identifiers the custom entity will be upserted with.")
     fields: conlist(CustomEntityField) = Field(..., description="The fields that decorate the custom entity.")
     relationships: conlist(Relationship) = Field(..., description="A set of relationships associated to the custom entity.")
     links: Optional[conlist(Link)] = None
-    __properties = ["href", "entityType", "version", "displayName", "description", "identifiers", "fields", "relationships", "links"]
+    __properties = ["href", "entityType", "version", "stagedModifications", "displayName", "description", "identifiers", "fields", "relationships", "links"]
 
     class Config:
         """Pydantic configuration"""
@@ -68,6 +70,9 @@ class CustomEntityResponse(BaseModel):
         # override the default output from pydantic by calling `to_dict()` of version
         if self.version:
             _dict['version'] = self.version.to_dict()
+        # override the default output from pydantic by calling `to_dict()` of staged_modifications
+        if self.staged_modifications:
+            _dict['stagedModifications'] = self.staged_modifications.to_dict()
         # override the default output from pydantic by calling `to_dict()` of each item in identifiers (list)
         _items = []
         if self.identifiers:
@@ -126,6 +131,7 @@ class CustomEntityResponse(BaseModel):
             "href": obj.get("href"),
             "entity_type": obj.get("entityType"),
             "version": Version.from_dict(obj.get("version")) if obj.get("version") is not None else None,
+            "staged_modifications": StagedModificationsInfo.from_dict(obj.get("stagedModifications")) if obj.get("stagedModifications") is not None else None,
             "display_name": obj.get("displayName"),
             "description": obj.get("description"),
             "identifiers": [CustomEntityId.from_dict(_item) for _item in obj.get("identifiers")] if obj.get("identifiers") is not None else None,

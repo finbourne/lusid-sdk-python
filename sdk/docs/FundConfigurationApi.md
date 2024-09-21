@@ -1,14 +1,14 @@
-# lusid.FundConfigurationEntitiesApi
+# lusid.FundConfigurationApi
 
 All URIs are relative to *https://www.lusid.com/api*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
-[**create_fund_configuration**](FundConfigurationEntitiesApi.md#create_fund_configuration) | **POST** /api/fundconfigurations/{scope} | [EXPERIMENTAL] CreateFundConfiguration: Create a FundConfiguration.
-[**delete_fund_configuration**](FundConfigurationEntitiesApi.md#delete_fund_configuration) | **DELETE** /api/fundconfigurations/{scope}/{code} | [EXPERIMENTAL] DeleteFundConfiguration: Delete a FundConfiguration.
-[**get_fund_configuration**](FundConfigurationEntitiesApi.md#get_fund_configuration) | **GET** /api/fundconfigurations/{scope}/{code} | [EXPERIMENTAL] GetFundConfiguration: Get FundConfiguration.
-[**list_fund_configurations**](FundConfigurationEntitiesApi.md#list_fund_configurations) | **GET** /api/fundconfigurations | [EXPERIMENTAL] ListFundConfigurations: List FundConfiguration.
-[**upsert_fund_configuration_properties**](FundConfigurationEntitiesApi.md#upsert_fund_configuration_properties) | **POST** /api/fundconfigurations/{scope}/{code}/properties/$upsert | [EXPERIMENTAL] UpsertFundConfigurationProperties: Upsert FundConfiguration properties
+[**create_fund_configuration**](FundConfigurationApi.md#create_fund_configuration) | **POST** /api/fundconfigurations/{scope} | [EXPERIMENTAL] CreateFundConfiguration: Create a FundConfiguration.
+[**delete_fund_configuration**](FundConfigurationApi.md#delete_fund_configuration) | **DELETE** /api/fundconfigurations/{scope}/{code} | [EXPERIMENTAL] DeleteFundConfiguration: Delete a FundConfiguration.
+[**get_fund_configuration**](FundConfigurationApi.md#get_fund_configuration) | **GET** /api/fundconfigurations/{scope}/{code} | [EXPERIMENTAL] GetFundConfiguration: Get FundConfiguration.
+[**list_fund_configurations**](FundConfigurationApi.md#list_fund_configurations) | **GET** /api/fundconfigurations | [EXPERIMENTAL] ListFundConfigurations: List FundConfiguration.
+[**upsert_fund_configuration_properties**](FundConfigurationApi.md#upsert_fund_configuration_properties) | **POST** /api/fundconfigurations/{scope}/{code}/properties/$upsert | [EXPERIMENTAL] UpsertFundConfigurationProperties: Upsert FundConfiguration properties
 
 
 # **create_fund_configuration**
@@ -27,7 +27,7 @@ from lusid.models import *
 from pprint import pprint
 from lusid import (
     ApiClientFactory,
-    FundConfigurationEntitiesApi
+    FundConfigurationApi
 )
 
 async def main():
@@ -54,7 +54,7 @@ async def main():
     # Enter a context with an instance of the ApiClientFactory to ensure the connection pool is closed after use
     async with api_client_factory:
         # Create an instance of the API class
-        api_instance = api_client_factory.build(FundConfigurationEntitiesApi)
+        api_instance = api_client_factory.build(FundConfigurationApi)
         scope = 'scope_example' # str | The scope of the FundConfiguration.
 
         # Objects can be created either via the class constructor, or using the 'from_dict' or 'from_json' methods
@@ -68,7 +68,7 @@ async def main():
             api_response = await api_instance.create_fund_configuration(scope, fund_configuration_request)
             pprint(api_response)
         except ApiException as e:
-            print("Exception when calling FundConfigurationEntitiesApi->create_fund_configuration: %s\n" % e)
+            print("Exception when calling FundConfigurationApi->create_fund_configuration: %s\n" % e)
 
 asyncio.run(main())
 ```
@@ -114,7 +114,7 @@ from lusid.models import *
 from pprint import pprint
 from lusid import (
     ApiClientFactory,
-    FundConfigurationEntitiesApi
+    FundConfigurationApi
 )
 
 async def main():
@@ -141,7 +141,7 @@ async def main():
     # Enter a context with an instance of the ApiClientFactory to ensure the connection pool is closed after use
     async with api_client_factory:
         # Create an instance of the API class
-        api_instance = api_client_factory.build(FundConfigurationEntitiesApi)
+        api_instance = api_client_factory.build(FundConfigurationApi)
         scope = 'scope_example' # str | The scope of the FundConfiguration to be deleted.
         code = 'code_example' # str | The code of the FundConfiguration to be deleted.               Together with the scope this uniquely identifies the FundConfiguration.
 
@@ -150,7 +150,7 @@ async def main():
             api_response = await api_instance.delete_fund_configuration(scope, code)
             pprint(api_response)
         except ApiException as e:
-            print("Exception when calling FundConfigurationEntitiesApi->delete_fund_configuration: %s\n" % e)
+            print("Exception when calling FundConfigurationApi->delete_fund_configuration: %s\n" % e)
 
 asyncio.run(main())
 ```
@@ -196,7 +196,7 @@ from lusid.models import *
 from pprint import pprint
 from lusid import (
     ApiClientFactory,
-    FundConfigurationEntitiesApi
+    FundConfigurationApi
 )
 
 async def main():
@@ -223,7 +223,7 @@ async def main():
     # Enter a context with an instance of the ApiClientFactory to ensure the connection pool is closed after use
     async with api_client_factory:
         # Create an instance of the API class
-        api_instance = api_client_factory.build(FundConfigurationEntitiesApi)
+        api_instance = api_client_factory.build(FundConfigurationApi)
         scope = 'scope_example' # str | The scope of the FundConfiguration.
         code = 'code_example' # str | The code of the FundConfiguration. Together with the scope this uniquely identifies the FundConfiguration.
         effective_at = 'effective_at_example' # str | The effective datetime or cut label at which to retrieve the FundConfiguration properties. Defaults to the current LUSID system datetime if not specified. (optional)
@@ -235,7 +235,7 @@ async def main():
             api_response = await api_instance.get_fund_configuration(scope, code, effective_at=effective_at, as_at=as_at, property_keys=property_keys)
             pprint(api_response)
         except ApiException as e:
-            print("Exception when calling FundConfigurationEntitiesApi->get_fund_configuration: %s\n" % e)
+            print("Exception when calling FundConfigurationApi->get_fund_configuration: %s\n" % e)
 
 asyncio.run(main())
 ```
@@ -284,7 +284,7 @@ from lusid.models import *
 from pprint import pprint
 from lusid import (
     ApiClientFactory,
-    FundConfigurationEntitiesApi
+    FundConfigurationApi
 )
 
 async def main():
@@ -311,7 +311,7 @@ async def main():
     # Enter a context with an instance of the ApiClientFactory to ensure the connection pool is closed after use
     async with api_client_factory:
         # Create an instance of the API class
-        api_instance = api_client_factory.build(FundConfigurationEntitiesApi)
+        api_instance = api_client_factory.build(FundConfigurationApi)
         effective_at = 'effective_at_example' # str | The effective datetime or cut label at which to list the TimeVariant properties for the FundConfiguration.              Defaults to the current LUSID system datetime if not specified. (optional)
         as_at = '2013-10-20T19:20:30+01:00' # datetime | The asAt datetime at which to list the FundConfiguration. Defaults to returning the latest version of each FundConfiguration if not specified. (optional)
         page = 'page_example' # str | The pagination token to use to continue listing FundConfiguration; this              value is returned from the previous call. If a pagination token is provided, the filter, effectiveAt              and asAt fields must not have changed since the original request. (optional)
@@ -325,7 +325,7 @@ async def main():
             api_response = await api_instance.list_fund_configurations(effective_at=effective_at, as_at=as_at, page=page, limit=limit, filter=filter, sort_by=sort_by, property_keys=property_keys)
             pprint(api_response)
         except ApiException as e:
-            print("Exception when calling FundConfigurationEntitiesApi->list_fund_configurations: %s\n" % e)
+            print("Exception when calling FundConfigurationApi->list_fund_configurations: %s\n" % e)
 
 asyncio.run(main())
 ```
@@ -376,7 +376,7 @@ from lusid.models import *
 from pprint import pprint
 from lusid import (
     ApiClientFactory,
-    FundConfigurationEntitiesApi
+    FundConfigurationApi
 )
 
 async def main():
@@ -403,7 +403,7 @@ async def main():
     # Enter a context with an instance of the ApiClientFactory to ensure the connection pool is closed after use
     async with api_client_factory:
         # Create an instance of the API class
-        api_instance = api_client_factory.build(FundConfigurationEntitiesApi)
+        api_instance = api_client_factory.build(FundConfigurationApi)
         scope = 'scope_example' # str | The scope of the FundConfiguration to update or insert the properties onto.
         code = 'code_example' # str | The code of the FundConfiguration to update or insert the properties onto. Together with the scope this uniquely identifies the FundConfiguration.
         request_body = {"FundConfiguration/MyScope/FundManagerName":{"key":"FundConfiguration/MyScope/FundManagerName","value":{"labelValue":"Smith"},"effectiveFrom":"2018-03-05T00:00:00.0000000+00:00"},"FundConfiguration/MyScope/SomeProperty":{"key":"FundConfiguration/MyScope/SomeProperty","value":{"labelValue":"SomeValue"},"effectiveFrom":"2016-01-01T00:00:00.0000000+00:00"},"FundConfiguration/MyScope/AnotherProperty":{"key":"FundConfiguration/MyScope/AnotherProperty","value":{"labelValue":"AnotherValue"},"effectiveFrom":"2018-03-05T00:00:00.0000000+00:00","effectiveUntil":"2020-01-01T00:00:00.0000000+00:00"},"FundConfiguration/MyScope/ReBalanceInterval":{"key":"FundConfiguration/MyScope/ReBalanceInterval","value":{"metricValue":{"value":30,"unit":"Days"}}}} # Dict[str, ModelProperty] | The properties to be updated or inserted onto the Fund Configuration. Each property in               the request must be keyed by its unique property key. This has the format {domain}/{scope}/{code} e.g. \"FundConfiguration/Manager/Id\". (optional)
@@ -413,7 +413,7 @@ async def main():
             api_response = await api_instance.upsert_fund_configuration_properties(scope, code, request_body=request_body)
             pprint(api_response)
         except ApiException as e:
-            print("Exception when calling FundConfigurationEntitiesApi->upsert_fund_configuration_properties: %s\n" % e)
+            print("Exception when calling FundConfigurationApi->upsert_fund_configuration_properties: %s\n" % e)
 
 asyncio.run(main())
 ```

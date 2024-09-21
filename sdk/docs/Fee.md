@@ -6,8 +6,8 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **href** | **str** | The specific Uniform Resource Identifier (URI) for this resource at the requested effective and asAt datetime. | [optional] 
 **fee_code** | **str** | The code of the Fee. | [optional] 
-**fee_type** | [**ResourceId**](ResourceId.md) |  | 
-**name** | **str** | The name of the Fee. | 
+**fee_type_id** | [**ResourceId**](ResourceId.md) |  | 
+**display_name** | **str** | The name of the Fee. | 
 **description** | **str** | A description for the Fee. | [optional] 
 **origin** | **str** | The origin or source of the Fee accrual. | [optional] 
 **calculation_base** | **str** | The calculation base for the Fee that is calculated using a percentage. (TotalAnnualAccrualAmount and CalculationBase cannot both be present) | [optional] 

@@ -6,6 +6,7 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **href** | **str** | The specific Uniform Resource Identifier (URI) for this resource at the requested effective and asAt datetime. | [optional] 
 **values** | [**Dict[str, CustomEntityResponse]**](CustomEntityResponse.md) | The custom-entities which have been successfully updated or created. | [optional] 
+**staged** | [**Dict[str, CustomEntityResponse]**](CustomEntityResponse.md) | The custom-entities that have been staged for update or creation. | [optional] 
 **failed** | [**Dict[str, ErrorDetail]**](ErrorDetail.md) | The custom-entities that could not be updated or created or were left unchanged without error along with a reason for their failure. | [optional] 
 **links** | [**List[Link]**](Link.md) |  | [optional] 
 

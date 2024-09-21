@@ -5,8 +5,8 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **code** | **str** | The code of the Fee. | 
-**fee_type** | [**ResourceId**](ResourceId.md) |  | 
-**name** | **str** | The name of the Fee. | 
+**fee_type_id** | [**ResourceId**](ResourceId.md) |  | 
+**display_name** | **str** | The name of the Fee. | 
 **description** | **str** | A description for the Fee. | [optional] 
 **origin** | **str** | The origin or source of the Fee accrual. | [optional] 
 **calculation_base** | **str** | The calculation base for the Fee that is calculated using a percentage. (TotalAnnualAccrualAmount and CalculationBase cannot both be present) | [optional] 

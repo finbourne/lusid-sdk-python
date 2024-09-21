@@ -26,12 +26,12 @@ class CdsCreditEvent(InstrumentEvent):
     """
     Definition of a credit event for credit default swap (CDS) instruments.  # noqa: E501
     """
-    default_date: datetime = Field(..., alias="defaultDate", description="The date of the credit default - i.e. date on which the debt issuer defaulted on its repayment obligation.")
+    effective_date: datetime = Field(..., alias="effectiveDate", description="The date of the credit default - i.e. date on which the debt issuer defaulted on its repayment obligation.")
     auction_date: Optional[datetime] = Field(None, alias="auctionDate", description="The date of the credit event auction - i.e. date on which the defaulted debt is sold via auction, and a recovery rate determined.")
     recovery_rate: Optional[Union[StrictFloat, StrictInt]] = Field(None, alias="recoveryRate", description="The fraction of the defaulted debt that can be recovered.")
     instrument_event_type: StrictStr = Field(..., alias="instrumentEventType", description="The Type of Event. The available values are: TransitionEvent, InformationalEvent, OpenEvent, CloseEvent, StockSplitEvent, BondDefaultEvent, CashDividendEvent, AmortisationEvent, CashFlowEvent, ExerciseEvent, ResetEvent, TriggerEvent, RawVendorEvent, InformationalErrorEvent, BondCouponEvent, DividendReinvestmentEvent, AccumulationEvent, BondPrincipalEvent, DividendOptionEvent, MaturityEvent, FxForwardSettlementEvent, ExpiryEvent, ScripDividendEvent, StockDividendEvent, ReverseStockSplitEvent, CapitalDistributionEvent, SpinOffEvent, MergerEvent, FutureExpiryEvent, SwapCashFlowEvent, SwapPrincipalEvent, CreditPremiumCashFlowEvent, CdsCreditEvent, CdxCreditEvent, MbsCouponEvent, MbsPrincipalEvent")
     additional_properties: Dict[str, Any] = {}
-    __properties = ["instrumentEventType", "defaultDate", "auctionDate", "recoveryRate"]
+    __properties = ["instrumentEventType", "effectiveDate", "auctionDate", "recoveryRate"]
 
     @validator('instrument_event_type')
     def instrument_event_type_validate_enum(cls, value):
@@ -93,7 +93,7 @@ class CdsCreditEvent(InstrumentEvent):
 
         _obj = CdsCreditEvent.parse_obj({
             "instrument_event_type": obj.get("instrumentEventType"),
-            "default_date": obj.get("defaultDate"),
+            "effective_date": obj.get("effectiveDate"),
             "auction_date": obj.get("auctionDate"),
             "recovery_rate": obj.get("recoveryRate")
         })

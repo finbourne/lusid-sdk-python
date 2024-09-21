@@ -26,10 +26,10 @@ class UpdateFeeTypeRequest(BaseModel):
     """
     UpdateFeeTypeRequest
     """
-    name: constr(strict=True, max_length=256, min_length=1) = Field(..., description="The name of the fee type.")
+    display_name: constr(strict=True, max_length=256, min_length=1) = Field(..., alias="displayName", description="The name of the fee type.")
     description: Optional[constr(strict=True, max_length=1024, min_length=0)] = Field(None, description="The description of the fee type.")
-    component_transactions: conlist(ComponentTransaction, max_items=1000) = Field(..., alias="componentTransactions", description="A set of component transactions that relate to the fee type to be updated.")
-    __properties = ["name", "description", "componentTransactions"]
+    component_transactions: conlist(ComponentTransaction, max_items=1000) = Field(..., alias="componentTransactions", description="A set of component transactions that relate to the fee type to be created.")
+    __properties = ["displayName", "description", "componentTransactions"]
 
     @validator('description')
     def description_validate_regular_expression(cls, value):
@@ -89,7 +89,7 @@ class UpdateFeeTypeRequest(BaseModel):
             return UpdateFeeTypeRequest.parse_obj(obj)
 
         _obj = UpdateFeeTypeRequest.parse_obj({
-            "name": obj.get("name"),
+            "display_name": obj.get("displayName"),
             "description": obj.get("description"),
             "component_transactions": [ComponentTransaction.from_dict(_item) for _item in obj.get("componentTransactions")] if obj.get("componentTransactions") is not None else None
         })

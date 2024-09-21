@@ -19,21 +19,21 @@ import json
 
 
 from typing import Any, Dict, List, Optional
-from pydantic.v1 import BaseModel, Field, StrictStr, conlist
-from lusid.models.custom_entity_response import CustomEntityResponse
+from pydantic.v1 import BaseModel, Field, conlist
+from lusid.models.calendar_date import CalendarDate
 from lusid.models.error_detail import ErrorDetail
 from lusid.models.link import Link
+from lusid.models.response_meta_data import ResponseMetaData
 
-class UpsertCustomEntitiesResponse(BaseModel):
+class BatchUpsertDatesForCalendarResponse(BaseModel):
     """
-    UpsertCustomEntitiesResponse
+    BatchUpsertDatesForCalendarResponse
     """
-    href: Optional[StrictStr] = Field(None, description="The specific Uniform Resource Identifier (URI) for this resource at the requested effective and asAt datetime.")
-    values: Optional[Dict[str, CustomEntityResponse]] = Field(None, description="The custom-entities which have been successfully updated or created.")
-    staged: Optional[Dict[str, CustomEntityResponse]] = Field(None, description="The custom-entities that have been staged for update or creation.")
-    failed: Optional[Dict[str, ErrorDetail]] = Field(None, description="The custom-entities that could not be updated or created or were left unchanged without error along with a reason for their failure.")
+    values: Optional[Dict[str, CalendarDate]] = Field(None, description="The dates which have been successfully upserted.")
+    failed: Optional[Dict[str, ErrorDetail]] = Field(None, description="The dates that could not be upserted along with a reason for their failure.")
+    metadata: Optional[Dict[str, conlist(ResponseMetaData)]] = Field(None, description="Contains warnings related to the upserted dates")
     links: Optional[conlist(Link)] = None
-    __properties = ["href", "values", "staged", "failed", "links"]
+    __properties = ["values", "failed", "metadata", "links"]
 
     class Config:
         """Pydantic configuration"""
@@ -49,8 +49,8 @@ class UpsertCustomEntitiesResponse(BaseModel):
         return json.dumps(self.to_dict())
 
     @classmethod
-    def from_json(cls, json_str: str) -> UpsertCustomEntitiesResponse:
-        """Create an instance of UpsertCustomEntitiesResponse from a JSON string"""
+    def from_json(cls, json_str: str) -> BatchUpsertDatesForCalendarResponse:
+        """Create an instance of BatchUpsertDatesForCalendarResponse from a JSON string"""
         return cls.from_dict(json.loads(json_str))
 
     def to_dict(self):
@@ -66,13 +66,6 @@ class UpsertCustomEntitiesResponse(BaseModel):
                 if self.values[_key]:
                     _field_dict[_key] = self.values[_key].to_dict()
             _dict['values'] = _field_dict
-        # override the default output from pydantic by calling `to_dict()` of each value in staged (dict)
-        _field_dict = {}
-        if self.staged:
-            for _key in self.staged:
-                if self.staged[_key]:
-                    _field_dict[_key] = self.staged[_key].to_dict()
-            _dict['staged'] = _field_dict
         # override the default output from pydantic by calling `to_dict()` of each value in failed (dict)
         _field_dict = {}
         if self.failed:
@@ -80,6 +73,15 @@ class UpsertCustomEntitiesResponse(BaseModel):
                 if self.failed[_key]:
                     _field_dict[_key] = self.failed[_key].to_dict()
             _dict['failed'] = _field_dict
+        # override the default output from pydantic by calling `to_dict()` of each value in metadata (dict of array)
+        _field_dict_of_array = {}
+        if self.metadata:
+            for _key in self.metadata:
+                if self.metadata[_key]:
+                    _field_dict_of_array[_key] = [
+                        _item.to_dict() for _item in self.metadata[_key]
+                    ]
+            _dict['metadata'] = _field_dict_of_array
         # override the default output from pydantic by calling `to_dict()` of each item in links (list)
         _items = []
         if self.links:
@@ -87,25 +89,20 @@ class UpsertCustomEntitiesResponse(BaseModel):
                 if _item:
                     _items.append(_item.to_dict())
             _dict['links'] = _items
-        # set to None if href (nullable) is None
-        # and __fields_set__ contains the field
-        if self.href is None and "href" in self.__fields_set__:
-            _dict['href'] = None
-
         # set to None if values (nullable) is None
         # and __fields_set__ contains the field
         if self.values is None and "values" in self.__fields_set__:
             _dict['values'] = None
 
-        # set to None if staged (nullable) is None
-        # and __fields_set__ contains the field
-        if self.staged is None and "staged" in self.__fields_set__:
-            _dict['staged'] = None
-
         # set to None if failed (nullable) is None
         # and __fields_set__ contains the field
         if self.failed is None and "failed" in self.__fields_set__:
             _dict['failed'] = None
+
+        # set to None if metadata (nullable) is None
+        # and __fields_set__ contains the field
+        if self.metadata is None and "metadata" in self.__fields_set__:
+            _dict['metadata'] = None
 
         # set to None if links (nullable) is None
         # and __fields_set__ contains the field
@@ -115,27 +112,20 @@ class UpsertCustomEntitiesResponse(BaseModel):
         return _dict
 
     @classmethod
-    def from_dict(cls, obj: dict) -> UpsertCustomEntitiesResponse:
-        """Create an instance of UpsertCustomEntitiesResponse from a dict"""
+    def from_dict(cls, obj: dict) -> BatchUpsertDatesForCalendarResponse:
+        """Create an instance of BatchUpsertDatesForCalendarResponse from a dict"""
         if obj is None:
             return None
 
         if not isinstance(obj, dict):
-            return UpsertCustomEntitiesResponse.parse_obj(obj)
+            return BatchUpsertDatesForCalendarResponse.parse_obj(obj)
 
-        _obj = UpsertCustomEntitiesResponse.parse_obj({
-            "href": obj.get("href"),
+        _obj = BatchUpsertDatesForCalendarResponse.parse_obj({
             "values": dict(
-                (_k, CustomEntityResponse.from_dict(_v))
+                (_k, CalendarDate.from_dict(_v))
                 for _k, _v in obj.get("values").items()
             )
             if obj.get("values") is not None
-            else None,
-            "staged": dict(
-                (_k, CustomEntityResponse.from_dict(_v))
-                for _k, _v in obj.get("staged").items()
-            )
-            if obj.get("staged") is not None
             else None,
             "failed": dict(
                 (_k, ErrorDetail.from_dict(_v))
@@ -143,6 +133,14 @@ class UpsertCustomEntitiesResponse(BaseModel):
             )
             if obj.get("failed") is not None
             else None,
+            "metadata": dict(
+                (_k,
+                        [ResponseMetaData.from_dict(_item) for _item in _v]
+                        if _v is not None
+                        else None
+                )
+                for _k, _v in obj.get("metadata").items()
+            ),
             "links": [Link.from_dict(_item) for _item in obj.get("links")] if obj.get("links") is not None else None
         })
         return _obj

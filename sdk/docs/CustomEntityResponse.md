@@ -7,6 +7,7 @@ Name | Type | Description | Notes
 **href** | **str** | The specific Uniform Resource Identifier (URI) for this resource at the requested effective and asAt datetime. | [optional] 
 **entity_type** | **str** | The type of custom entity this is. | 
 **version** | [**Version**](Version.md) |  | 
+**staged_modifications** | [**StagedModificationsInfo**](StagedModificationsInfo.md) |  | [optional] 
 **display_name** | **str** | A display label for the custom entity. | 
 **description** | **str** | A description of the custom entity. | [optional] 
 **identifiers** | [**List[CustomEntityId]**](CustomEntityId.md) | The identifiers the custom entity will be upserted with. | 

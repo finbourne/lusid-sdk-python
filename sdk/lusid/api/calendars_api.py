@@ -24,10 +24,11 @@ from datetime import datetime
 
 from pydantic.v1 import Field, StrictStr, conint, conlist, constr, validator
 
-from typing import List, Optional
+from typing import Dict, List, Optional
 
 from lusid.models.add_business_days_to_date_request import AddBusinessDaysToDateRequest
 from lusid.models.add_business_days_to_date_response import AddBusinessDaysToDateResponse
+from lusid.models.batch_upsert_dates_for_calendar_response import BatchUpsertDatesForCalendarResponse
 from lusid.models.calendar import Calendar
 from lusid.models.calendar_date import CalendarDate
 from lusid.models.create_calendar_request import CreateCalendarRequest
@@ -399,6 +400,188 @@ class CalendarsApi:
             _request_auth=_params.get('_request_auth'))
 
     @overload
+    async def batch_upsert_dates_for_calendar(self, scope : Annotated[constr(strict=True, max_length=64, min_length=1), Field(..., description="Scope of the calendar")], code : Annotated[constr(strict=True, max_length=64, min_length=1), Field(..., description="Code of the calendar")], success_mode : Annotated[constr(strict=True, max_length=64, min_length=1), Field(..., description="Whether the batch request should fail Atomically or in a Partial fashion - Allowed Values: Atomic, Partial.")], request_body : Annotated[Dict[str, CreateDateRequest], Field(..., description="Create Date Requests of dates to upsert")], **kwargs) -> BatchUpsertDatesForCalendarResponse:  # noqa: E501
+        ...
+
+    @overload
+    def batch_upsert_dates_for_calendar(self, scope : Annotated[constr(strict=True, max_length=64, min_length=1), Field(..., description="Scope of the calendar")], code : Annotated[constr(strict=True, max_length=64, min_length=1), Field(..., description="Code of the calendar")], success_mode : Annotated[constr(strict=True, max_length=64, min_length=1), Field(..., description="Whether the batch request should fail Atomically or in a Partial fashion - Allowed Values: Atomic, Partial.")], request_body : Annotated[Dict[str, CreateDateRequest], Field(..., description="Create Date Requests of dates to upsert")], async_req: Optional[bool]=True, **kwargs) -> BatchUpsertDatesForCalendarResponse:  # noqa: E501
+        ...
+
+    @validate_arguments
+    def batch_upsert_dates_for_calendar(self, scope : Annotated[constr(strict=True, max_length=64, min_length=1), Field(..., description="Scope of the calendar")], code : Annotated[constr(strict=True, max_length=64, min_length=1), Field(..., description="Code of the calendar")], success_mode : Annotated[constr(strict=True, max_length=64, min_length=1), Field(..., description="Whether the batch request should fail Atomically or in a Partial fashion - Allowed Values: Atomic, Partial.")], request_body : Annotated[Dict[str, CreateDateRequest], Field(..., description="Create Date Requests of dates to upsert")], async_req: Optional[bool]=None, **kwargs) -> Union[BatchUpsertDatesForCalendarResponse, Awaitable[BatchUpsertDatesForCalendarResponse]]:  # noqa: E501
+        """BatchUpsertDatesForCalendar: Batch upsert dates to a calendar  # noqa: E501
+
+        Create or update events in the calendar. These Events can be a maximum of 24 hours and must be specified in UTC.  A local date will be calculated by the system and applied to the calendar before processing.  # noqa: E501
+        This method makes a synchronous HTTP request by default. To make an
+        asynchronous HTTP request, please pass async_req=True
+
+        >>> thread = api.batch_upsert_dates_for_calendar(scope, code, success_mode, request_body, async_req=True)
+        >>> result = thread.get()
+
+        :param scope: Scope of the calendar (required)
+        :type scope: str
+        :param code: Code of the calendar (required)
+        :type code: str
+        :param success_mode: Whether the batch request should fail Atomically or in a Partial fashion - Allowed Values: Atomic, Partial. (required)
+        :type success_mode: str
+        :param request_body: Create Date Requests of dates to upsert (required)
+        :type request_body: Dict[str, CreateDateRequest]
+        :param async_req: Whether to execute the request asynchronously.
+        :type async_req: bool, optional
+        :param _request_timeout: timeout setting for this request.
+               If one number provided, it will be total request
+               timeout. It can also be a pair (tuple) of
+               (connection, read) timeouts.
+        :return: Returns the result object.
+                 If the method is called asynchronously,
+                 returns the request thread.
+        :rtype: BatchUpsertDatesForCalendarResponse
+        """
+        kwargs['_return_http_data_only'] = True
+        if '_preload_content' in kwargs:
+            message = "Error! Please call the batch_upsert_dates_for_calendar_with_http_info method with `_preload_content` instead and obtain raw data from ApiResponse.raw_data"  # noqa: E501
+            raise ValueError(message)
+        if async_req is not None:
+            kwargs['async_req'] = async_req
+        return self.batch_upsert_dates_for_calendar_with_http_info(scope, code, success_mode, request_body, **kwargs)  # noqa: E501
+
+    @validate_arguments
+    def batch_upsert_dates_for_calendar_with_http_info(self, scope : Annotated[constr(strict=True, max_length=64, min_length=1), Field(..., description="Scope of the calendar")], code : Annotated[constr(strict=True, max_length=64, min_length=1), Field(..., description="Code of the calendar")], success_mode : Annotated[constr(strict=True, max_length=64, min_length=1), Field(..., description="Whether the batch request should fail Atomically or in a Partial fashion - Allowed Values: Atomic, Partial.")], request_body : Annotated[Dict[str, CreateDateRequest], Field(..., description="Create Date Requests of dates to upsert")], **kwargs) -> ApiResponse:  # noqa: E501
+        """BatchUpsertDatesForCalendar: Batch upsert dates to a calendar  # noqa: E501
+
+        Create or update events in the calendar. These Events can be a maximum of 24 hours and must be specified in UTC.  A local date will be calculated by the system and applied to the calendar before processing.  # noqa: E501
+        This method makes a synchronous HTTP request by default. To make an
+        asynchronous HTTP request, please pass async_req=True
+
+        >>> thread = api.batch_upsert_dates_for_calendar_with_http_info(scope, code, success_mode, request_body, async_req=True)
+        >>> result = thread.get()
+
+        :param scope: Scope of the calendar (required)
+        :type scope: str
+        :param code: Code of the calendar (required)
+        :type code: str
+        :param success_mode: Whether the batch request should fail Atomically or in a Partial fashion - Allowed Values: Atomic, Partial. (required)
+        :type success_mode: str
+        :param request_body: Create Date Requests of dates to upsert (required)
+        :type request_body: Dict[str, CreateDateRequest]
+        :param async_req: Whether to execute the request asynchronously.
+        :type async_req: bool, optional
+        :param _preload_content: if False, the ApiResponse.data will
+                                 be set to none and raw_data will store the
+                                 HTTP response body without reading/decoding.
+                                 Default is True.
+        :type _preload_content: bool, optional
+        :param _return_http_data_only: response data instead of ApiResponse
+                                       object with status code, headers, etc
+        :type _return_http_data_only: bool, optional
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :param _request_auth: set to override the auth_settings for an a single
+                              request; this effectively ignores the authentication
+                              in the spec for a single request.
+        :type _request_auth: dict, optional
+        :type _content_type: string, optional: force content-type for the request
+        :return: Returns the result object.
+                 If the method is called asynchronously,
+                 returns the request thread.
+        :rtype: tuple(BatchUpsertDatesForCalendarResponse, status_code(int), headers(HTTPHeaderDict))
+        """
+
+        _params = locals()
+
+        _all_params = [
+            'scope',
+            'code',
+            'success_mode',
+            'request_body'
+        ]
+        _all_params.extend(
+            [
+                'async_req',
+                '_return_http_data_only',
+                '_preload_content',
+                '_request_timeout',
+                '_request_auth',
+                '_content_type',
+                '_headers'
+            ]
+        )
+
+        # validate the arguments
+        for _key, _val in _params['kwargs'].items():
+            if _key not in _all_params:
+                raise ApiTypeError(
+                    "Got an unexpected keyword argument '%s'"
+                    " to method batch_upsert_dates_for_calendar" % _key
+                )
+            _params[_key] = _val
+        del _params['kwargs']
+
+        _collection_formats = {}
+
+        # process the path parameters
+        _path_params = {}
+        if _params['scope']:
+            _path_params['scope'] = _params['scope']
+
+        if _params['code']:
+            _path_params['code'] = _params['code']
+
+
+        # process the query parameters
+        _query_params = []
+        if _params.get('success_mode') is not None:  # noqa: E501
+            _query_params.append(('successMode', _params['success_mode']))
+
+        # process the header parameters
+        _header_params = dict(_params.get('_headers', {}))
+        # process the form parameters
+        _form_params = []
+        _files = {}
+        # process the body parameter
+        _body_params = None
+        if _params['request_body'] is not None:
+            _body_params = _params['request_body']
+
+        # set the HTTP header `Accept`
+        _header_params['Accept'] = self.api_client.select_header_accept(
+            ['text/plain', 'application/json', 'text/json'])  # noqa: E501
+
+        # set the HTTP header `Content-Type`
+        _content_types_list = _params.get('_content_type',
+            self.api_client.select_header_content_type(
+                ['application/json-patch+json', 'application/json', 'text/json', 'application/*+json']))
+        if _content_types_list:
+                _header_params['Content-Type'] = _content_types_list
+
+        # authentication setting
+        _auth_settings = ['oauth2']  # noqa: E501
+
+        _response_types_map = {
+            '200': "BatchUpsertDatesForCalendarResponse",
+            '400': "LusidValidationProblemDetails",
+        }
+
+        return self.api_client.call_api(
+            '/api/calendars/generic/{scope}/{code}/dates/$batchUpsert', 'POST',
+            _path_params,
+            _query_params,
+            _header_params,
+            body=_body_params,
+            post_params=_form_params,
+            files=_files,
+            response_types_map=_response_types_map,
+            auth_settings=_auth_settings,
+            async_req=_params.get('async_req'),
+            _return_http_data_only=_params.get('_return_http_data_only'),  # noqa: E501
+            _preload_content=_params.get('_preload_content', True),
+            _request_timeout=_params.get('_request_timeout'),
+            collection_formats=_collection_formats,
+            _request_auth=_params.get('_request_auth'))
+
+    @overload
     async def create_calendar(self, create_calendar_request : Annotated[CreateCalendarRequest, Field(..., description="A request to create the calendar")], **kwargs) -> Calendar:  # noqa: E501
         ...
 
@@ -725,7 +908,7 @@ class CalendarsApi:
 
     @validate_arguments
     def delete_date_from_calendar(self, scope : Annotated[constr(strict=True, max_length=64, min_length=1), Field(..., description="Scope of the calendar")], code : Annotated[constr(strict=True, max_length=64, min_length=1), Field(..., description="Code of the calendar")], date_id : Annotated[constr(strict=True, max_length=256, min_length=1), Field(..., description="Identifier of the date to be removed")], async_req: Optional[bool]=None, **kwargs) -> Union[CalendarDate, Awaitable[CalendarDate]]:  # noqa: E501
-        """[EARLY ACCESS] DeleteDateFromCalendar: Remove a date from a calendar  # noqa: E501
+        """DeleteDateFromCalendar: Remove a date from a calendar  # noqa: E501
 
         Remove a date from a calendar.  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
@@ -761,7 +944,7 @@ class CalendarsApi:
 
     @validate_arguments
     def delete_date_from_calendar_with_http_info(self, scope : Annotated[constr(strict=True, max_length=64, min_length=1), Field(..., description="Scope of the calendar")], code : Annotated[constr(strict=True, max_length=64, min_length=1), Field(..., description="Code of the calendar")], date_id : Annotated[constr(strict=True, max_length=256, min_length=1), Field(..., description="Identifier of the date to be removed")], **kwargs) -> ApiResponse:  # noqa: E501
-        """[EARLY ACCESS] DeleteDateFromCalendar: Remove a date from a calendar  # noqa: E501
+        """DeleteDateFromCalendar: Remove a date from a calendar  # noqa: E501
 
         Remove a date from a calendar.  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
@@ -867,6 +1050,180 @@ class CalendarsApi:
 
         return self.api_client.call_api(
             '/api/calendars/generic/{scope}/{code}/dates/{dateId}', 'DELETE',
+            _path_params,
+            _query_params,
+            _header_params,
+            body=_body_params,
+            post_params=_form_params,
+            files=_files,
+            response_types_map=_response_types_map,
+            auth_settings=_auth_settings,
+            async_req=_params.get('async_req'),
+            _return_http_data_only=_params.get('_return_http_data_only'),  # noqa: E501
+            _preload_content=_params.get('_preload_content', True),
+            _request_timeout=_params.get('_request_timeout'),
+            collection_formats=_collection_formats,
+            _request_auth=_params.get('_request_auth'))
+
+    @overload
+    async def delete_dates_from_calendar(self, scope : Annotated[constr(strict=True, max_length=64, min_length=1), Field(..., description="Scope of the calendar")], code : Annotated[constr(strict=True, max_length=64, min_length=1), Field(..., description="Code of the calendar")], request_body : Annotated[conlist(StrictStr), Field(..., description="Identifiers of the dates to be removed")], **kwargs) -> Dict[str, CalendarDate]:  # noqa: E501
+        ...
+
+    @overload
+    def delete_dates_from_calendar(self, scope : Annotated[constr(strict=True, max_length=64, min_length=1), Field(..., description="Scope of the calendar")], code : Annotated[constr(strict=True, max_length=64, min_length=1), Field(..., description="Code of the calendar")], request_body : Annotated[conlist(StrictStr), Field(..., description="Identifiers of the dates to be removed")], async_req: Optional[bool]=True, **kwargs) -> Dict[str, CalendarDate]:  # noqa: E501
+        ...
+
+    @validate_arguments
+    def delete_dates_from_calendar(self, scope : Annotated[constr(strict=True, max_length=64, min_length=1), Field(..., description="Scope of the calendar")], code : Annotated[constr(strict=True, max_length=64, min_length=1), Field(..., description="Code of the calendar")], request_body : Annotated[conlist(StrictStr), Field(..., description="Identifiers of the dates to be removed")], async_req: Optional[bool]=None, **kwargs) -> Union[Dict[str, CalendarDate], Awaitable[Dict[str, CalendarDate]]]:  # noqa: E501
+        """DeleteDatesFromCalendar: Delete dates from a calendar  # noqa: E501
+
+        Delete dates from a calendar.  # noqa: E501
+        This method makes a synchronous HTTP request by default. To make an
+        asynchronous HTTP request, please pass async_req=True
+
+        >>> thread = api.delete_dates_from_calendar(scope, code, request_body, async_req=True)
+        >>> result = thread.get()
+
+        :param scope: Scope of the calendar (required)
+        :type scope: str
+        :param code: Code of the calendar (required)
+        :type code: str
+        :param request_body: Identifiers of the dates to be removed (required)
+        :type request_body: List[str]
+        :param async_req: Whether to execute the request asynchronously.
+        :type async_req: bool, optional
+        :param _request_timeout: timeout setting for this request.
+               If one number provided, it will be total request
+               timeout. It can also be a pair (tuple) of
+               (connection, read) timeouts.
+        :return: Returns the result object.
+                 If the method is called asynchronously,
+                 returns the request thread.
+        :rtype: Dict[str, CalendarDate]
+        """
+        kwargs['_return_http_data_only'] = True
+        if '_preload_content' in kwargs:
+            message = "Error! Please call the delete_dates_from_calendar_with_http_info method with `_preload_content` instead and obtain raw data from ApiResponse.raw_data"  # noqa: E501
+            raise ValueError(message)
+        if async_req is not None:
+            kwargs['async_req'] = async_req
+        return self.delete_dates_from_calendar_with_http_info(scope, code, request_body, **kwargs)  # noqa: E501
+
+    @validate_arguments
+    def delete_dates_from_calendar_with_http_info(self, scope : Annotated[constr(strict=True, max_length=64, min_length=1), Field(..., description="Scope of the calendar")], code : Annotated[constr(strict=True, max_length=64, min_length=1), Field(..., description="Code of the calendar")], request_body : Annotated[conlist(StrictStr), Field(..., description="Identifiers of the dates to be removed")], **kwargs) -> ApiResponse:  # noqa: E501
+        """DeleteDatesFromCalendar: Delete dates from a calendar  # noqa: E501
+
+        Delete dates from a calendar.  # noqa: E501
+        This method makes a synchronous HTTP request by default. To make an
+        asynchronous HTTP request, please pass async_req=True
+
+        >>> thread = api.delete_dates_from_calendar_with_http_info(scope, code, request_body, async_req=True)
+        >>> result = thread.get()
+
+        :param scope: Scope of the calendar (required)
+        :type scope: str
+        :param code: Code of the calendar (required)
+        :type code: str
+        :param request_body: Identifiers of the dates to be removed (required)
+        :type request_body: List[str]
+        :param async_req: Whether to execute the request asynchronously.
+        :type async_req: bool, optional
+        :param _preload_content: if False, the ApiResponse.data will
+                                 be set to none and raw_data will store the
+                                 HTTP response body without reading/decoding.
+                                 Default is True.
+        :type _preload_content: bool, optional
+        :param _return_http_data_only: response data instead of ApiResponse
+                                       object with status code, headers, etc
+        :type _return_http_data_only: bool, optional
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :param _request_auth: set to override the auth_settings for an a single
+                              request; this effectively ignores the authentication
+                              in the spec for a single request.
+        :type _request_auth: dict, optional
+        :type _content_type: string, optional: force content-type for the request
+        :return: Returns the result object.
+                 If the method is called asynchronously,
+                 returns the request thread.
+        :rtype: tuple(Dict[str, CalendarDate], status_code(int), headers(HTTPHeaderDict))
+        """
+
+        _params = locals()
+
+        _all_params = [
+            'scope',
+            'code',
+            'request_body'
+        ]
+        _all_params.extend(
+            [
+                'async_req',
+                '_return_http_data_only',
+                '_preload_content',
+                '_request_timeout',
+                '_request_auth',
+                '_content_type',
+                '_headers'
+            ]
+        )
+
+        # validate the arguments
+        for _key, _val in _params['kwargs'].items():
+            if _key not in _all_params:
+                raise ApiTypeError(
+                    "Got an unexpected keyword argument '%s'"
+                    " to method delete_dates_from_calendar" % _key
+                )
+            _params[_key] = _val
+        del _params['kwargs']
+
+        _collection_formats = {}
+
+        # process the path parameters
+        _path_params = {}
+        if _params['scope']:
+            _path_params['scope'] = _params['scope']
+
+        if _params['code']:
+            _path_params['code'] = _params['code']
+
+
+        # process the query parameters
+        _query_params = []
+        # process the header parameters
+        _header_params = dict(_params.get('_headers', {}))
+        # process the form parameters
+        _form_params = []
+        _files = {}
+        # process the body parameter
+        _body_params = None
+        if _params['request_body'] is not None:
+            _body_params = _params['request_body']
+
+        # set the HTTP header `Accept`
+        _header_params['Accept'] = self.api_client.select_header_accept(
+            ['text/plain', 'application/json', 'text/json'])  # noqa: E501
+
+        # set the HTTP header `Content-Type`
+        _content_types_list = _params.get('_content_type',
+            self.api_client.select_header_content_type(
+                ['application/json-patch+json', 'application/json', 'text/json', 'application/*+json']))
+        if _content_types_list:
+                _header_params['Content-Type'] = _content_types_list
+
+        # authentication setting
+        _auth_settings = ['oauth2']  # noqa: E501
+
+        _response_types_map = {
+            '200': "Dict[str, CalendarDate]",
+            '400': "LusidValidationProblemDetails",
+        }
+
+        return self.api_client.call_api(
+            '/api/calendars/generic/{scope}/{code}/dates/$delete', 'POST',
             _path_params,
             _query_params,
             _header_params,

@@ -6,9 +6,11 @@ Method | HTTP request | Description
 ------------- | ------------- | -------------
 [**add_business_days_to_date**](CalendarsApi.md#add_business_days_to_date) | **POST** /api/calendars/businessday/{scope}/add | [EARLY ACCESS] AddBusinessDaysToDate: Adds the requested number of Business Days to the provided date.
 [**add_date_to_calendar**](CalendarsApi.md#add_date_to_calendar) | **PUT** /api/calendars/generic/{scope}/{code}/dates | AddDateToCalendar: Add a date to a calendar
+[**batch_upsert_dates_for_calendar**](CalendarsApi.md#batch_upsert_dates_for_calendar) | **POST** /api/calendars/generic/{scope}/{code}/dates/$batchUpsert | BatchUpsertDatesForCalendar: Batch upsert dates to a calendar
 [**create_calendar**](CalendarsApi.md#create_calendar) | **POST** /api/calendars/generic | [EARLY ACCESS] CreateCalendar: Create a calendar in its generic form
 [**delete_calendar**](CalendarsApi.md#delete_calendar) | **DELETE** /api/calendars/generic/{scope}/{code} | [EARLY ACCESS] DeleteCalendar: Delete a calendar
-[**delete_date_from_calendar**](CalendarsApi.md#delete_date_from_calendar) | **DELETE** /api/calendars/generic/{scope}/{code}/dates/{dateId} | [EARLY ACCESS] DeleteDateFromCalendar: Remove a date from a calendar
+[**delete_date_from_calendar**](CalendarsApi.md#delete_date_from_calendar) | **DELETE** /api/calendars/generic/{scope}/{code}/dates/{dateId} | DeleteDateFromCalendar: Remove a date from a calendar
+[**delete_dates_from_calendar**](CalendarsApi.md#delete_dates_from_calendar) | **POST** /api/calendars/generic/{scope}/{code}/dates/$delete | DeleteDatesFromCalendar: Delete dates from a calendar
 [**generate_schedule**](CalendarsApi.md#generate_schedule) | **POST** /api/calendars/schedule/{scope} | [EARLY ACCESS] GenerateSchedule: Generate an ordered schedule of dates.
 [**get_calendar**](CalendarsApi.md#get_calendar) | **GET** /api/calendars/generic/{scope}/{code} | GetCalendar: Get a calendar in its generic form
 [**get_dates**](CalendarsApi.md#get_dates) | **GET** /api/calendars/generic/{scope}/{code}/dates | [EARLY ACCESS] GetDates: Get dates for a specific calendar
@@ -156,7 +158,7 @@ async def main():
         # Change the lines below to switch approach
         # create_date_request = CreateDateRequest()
         # create_date_request = CreateDateRequest.from_json("")
-        create_date_request = CreateDateRequest.from_dict({"dateId":"TestDate","fromUtc":"2020-02-12T12:00:00.0000000+00:00","toUtc":"2020-02-13T12:00:00.0000000+00:00","timeZone":"CET","description":"Chinese New year","type":"Holiday","sourceData":{}}) # CreateDateRequest | Add date to calendar request
+        create_date_request = CreateDateRequest.from_dict({"dateId":"TestDate","fromUtc":"2020-01-25T00:00:00.0000000+00:00","toUtc":"2020-01-26T00:00:00.0000000+00:00","timeZone":"CET","description":"Chinese New year","type":"Holiday","sourceData":{}}) # CreateDateRequest | Add date to calendar request
 
         try:
             # AddDateToCalendar: Add a date to a calendar
@@ -189,6 +191,92 @@ Name | Type | Description  | Notes
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 **200** | The created date |  -  |
+**400** | The details of the input related failure |  -  |
+**0** | Error response |  -  |
+
+[Back to top](#) &#8226; [Back to API list](../README.md#documentation-for-api-endpoints) &#8226; [Back to Model list](../README.md#documentation-for-models) &#8226; [Back to README](../README.md)
+
+# **batch_upsert_dates_for_calendar**
+> BatchUpsertDatesForCalendarResponse batch_upsert_dates_for_calendar(scope, code, success_mode, request_body)
+
+BatchUpsertDatesForCalendar: Batch upsert dates to a calendar
+
+Create or update events in the calendar. These Events can be a maximum of 24 hours and must be specified in UTC.  A local date will be calculated by the system and applied to the calendar before processing.
+
+### Example
+
+```python
+import asyncio
+from lusid.exceptions import ApiException
+from lusid.models import *
+from pprint import pprint
+from lusid import (
+    ApiClientFactory,
+    CalendarsApi
+)
+
+async def main():
+
+    with open("secrets.json", "w") as file:
+        file.write('''
+{
+    "api":
+    {
+        "tokenUrl":"<your-token-url>",
+        "lusidUrl":"https://<your-domain>.lusid.com/api",
+        "username":"<your-username>",
+        "password":"<your-password>",
+        "clientId":"<your-client-id>",
+        "clientSecret":"<your-client-secret>"
+    }
+}''')
+
+    # Use the lusid ApiClientFactory to build Api instances with a configured api client
+    # By default this will read config from environment variables
+    # Then from a secrets.json file found in the current working directory
+    api_client_factory = ApiClientFactory()
+
+    # Enter a context with an instance of the ApiClientFactory to ensure the connection pool is closed after use
+    async with api_client_factory:
+        # Create an instance of the API class
+        api_instance = api_client_factory.build(CalendarsApi)
+        scope = 'scope_example' # str | Scope of the calendar
+        code = 'code_example' # str | Code of the calendar
+        success_mode = 'Partial' # str | Whether the batch request should fail Atomically or in a Partial fashion - Allowed Values: Atomic, Partial. (default to 'Partial')
+        request_body = {"ChineseNewYear":{"dateId":"TestDate","fromUtc":"2020-01-25T00:00:00.0000000+00:00","toUtc":"2020-01-26T00:00:00.0000000+00:00","timeZone":"CET","description":"Chinese New Year","type":"Holiday","sourceData":{}}} # Dict[str, CreateDateRequest] | Create Date Requests of dates to upsert
+
+        try:
+            # BatchUpsertDatesForCalendar: Batch upsert dates to a calendar
+            api_response = await api_instance.batch_upsert_dates_for_calendar(scope, code, success_mode, request_body)
+            pprint(api_response)
+        except ApiException as e:
+            print("Exception when calling CalendarsApi->batch_upsert_dates_for_calendar: %s\n" % e)
+
+asyncio.run(main())
+```
+
+### Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **scope** | **str**| Scope of the calendar | 
+ **code** | **str**| Code of the calendar | 
+ **success_mode** | **str**| Whether the batch request should fail Atomically or in a Partial fashion - Allowed Values: Atomic, Partial. | [default to &#39;Partial&#39;]
+ **request_body** | [**Dict[str, CreateDateRequest]**](CreateDateRequest.md)| Create Date Requests of dates to upsert | 
+
+### Return type
+
+[**BatchUpsertDatesForCalendarResponse**](BatchUpsertDatesForCalendarResponse.md)
+
+### HTTP request headers
+
+ - **Content-Type**: application/json-patch+json, application/json, text/json, application/*+json
+ - **Accept**: text/plain, application/json, text/json
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | The successfully upserted date requests along with any failures |  -  |
 **400** | The details of the input related failure |  -  |
 **0** | Error response |  -  |
 
@@ -364,7 +452,7 @@ Name | Type | Description  | Notes
 # **delete_date_from_calendar**
 > CalendarDate delete_date_from_calendar(scope, code, date_id)
 
-[EARLY ACCESS] DeleteDateFromCalendar: Remove a date from a calendar
+DeleteDateFromCalendar: Remove a date from a calendar
 
 Remove a date from a calendar.
 
@@ -410,7 +498,7 @@ async def main():
         date_id = 'date_id_example' # str | Identifier of the date to be removed
 
         try:
-            # [EARLY ACCESS] DeleteDateFromCalendar: Remove a date from a calendar
+            # DeleteDateFromCalendar: Remove a date from a calendar
             api_response = await api_instance.delete_date_from_calendar(scope, code, date_id)
             pprint(api_response)
         except ApiException as e:
@@ -440,6 +528,90 @@ Name | Type | Description  | Notes
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 **200** | The deleted date |  -  |
+**400** | The details of the input related failure |  -  |
+**0** | Error response |  -  |
+
+[Back to top](#) &#8226; [Back to API list](../README.md#documentation-for-api-endpoints) &#8226; [Back to Model list](../README.md#documentation-for-models) &#8226; [Back to README](../README.md)
+
+# **delete_dates_from_calendar**
+> Dict[str, CalendarDate] delete_dates_from_calendar(scope, code, request_body)
+
+DeleteDatesFromCalendar: Delete dates from a calendar
+
+Delete dates from a calendar.
+
+### Example
+
+```python
+import asyncio
+from lusid.exceptions import ApiException
+from lusid.models import *
+from pprint import pprint
+from lusid import (
+    ApiClientFactory,
+    CalendarsApi
+)
+
+async def main():
+
+    with open("secrets.json", "w") as file:
+        file.write('''
+{
+    "api":
+    {
+        "tokenUrl":"<your-token-url>",
+        "lusidUrl":"https://<your-domain>.lusid.com/api",
+        "username":"<your-username>",
+        "password":"<your-password>",
+        "clientId":"<your-client-id>",
+        "clientSecret":"<your-client-secret>"
+    }
+}''')
+
+    # Use the lusid ApiClientFactory to build Api instances with a configured api client
+    # By default this will read config from environment variables
+    # Then from a secrets.json file found in the current working directory
+    api_client_factory = ApiClientFactory()
+
+    # Enter a context with an instance of the ApiClientFactory to ensure the connection pool is closed after use
+    async with api_client_factory:
+        # Create an instance of the API class
+        api_instance = api_client_factory.build(CalendarsApi)
+        scope = 'scope_example' # str | Scope of the calendar
+        code = 'code_example' # str | Code of the calendar
+        request_body = ["dateId1","dateId2"] # List[str] | Identifiers of the dates to be removed
+
+        try:
+            # DeleteDatesFromCalendar: Delete dates from a calendar
+            api_response = await api_instance.delete_dates_from_calendar(scope, code, request_body)
+            pprint(api_response)
+        except ApiException as e:
+            print("Exception when calling CalendarsApi->delete_dates_from_calendar: %s\n" % e)
+
+asyncio.run(main())
+```
+
+### Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **scope** | **str**| Scope of the calendar | 
+ **code** | **str**| Code of the calendar | 
+ **request_body** | [**List[str]**](str.md)| Identifiers of the dates to be removed | 
+
+### Return type
+
+[**Dict[str, CalendarDate]**](CalendarDate.md)
+
+### HTTP request headers
+
+ - **Content-Type**: application/json-patch+json, application/json, text/json, application/*+json
+ - **Accept**: text/plain, application/json, text/json
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | The dateIds and details of the dates that were deleted |  -  |
 **400** | The details of the input related failure |  -  |
 **0** | Error response |  -  |
 

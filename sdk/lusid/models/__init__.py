@@ -78,6 +78,7 @@ from lusid.models.barrier import Barrier
 from lusid.models.basket import Basket
 from lusid.models.basket_identifier import BasketIdentifier
 from lusid.models.batch_adjust_holdings_response import BatchAdjustHoldingsResponse
+from lusid.models.batch_upsert_dates_for_calendar_response import BatchUpsertDatesForCalendarResponse
 from lusid.models.batch_upsert_instrument_properties_response import BatchUpsertInstrumentPropertiesResponse
 from lusid.models.batch_upsert_portfolio_access_metadata_request import BatchUpsertPortfolioAccessMetadataRequest
 from lusid.models.batch_upsert_portfolio_access_metadata_response import BatchUpsertPortfolioAccessMetadataResponse
@@ -1012,6 +1013,7 @@ from lusid.models.update_portfolio_group_request import UpdatePortfolioGroupRequ
 from lusid.models.update_portfolio_request import UpdatePortfolioRequest
 from lusid.models.update_property_definition_request import UpdatePropertyDefinitionRequest
 from lusid.models.update_reconciliation_request import UpdateReconciliationRequest
+from lusid.models.update_reference_data_request import UpdateReferenceDataRequest
 from lusid.models.update_relationship_definition_request import UpdateRelationshipDefinitionRequest
 from lusid.models.update_staging_rule_set_request import UpdateStagingRuleSetRequest
 from lusid.models.update_tax_rule_set_request import UpdateTaxRuleSetRequest
@@ -1166,6 +1168,7 @@ __all__ = [
     "Basket",
     "BasketIdentifier",
     "BatchAdjustHoldingsResponse",
+    "BatchUpsertDatesForCalendarResponse",
     "BatchUpsertInstrumentPropertiesResponse",
     "BatchUpsertPortfolioAccessMetadataRequest",
     "BatchUpsertPortfolioAccessMetadataResponse",
@@ -2100,6 +2103,7 @@ __all__ = [
     "UpdatePortfolioRequest",
     "UpdatePropertyDefinitionRequest",
     "UpdateReconciliationRequest",
+    "UpdateReferenceDataRequest",
     "UpdateRelationshipDefinitionRequest",
     "UpdateStagingRuleSetRequest",
     "UpdateTaxRuleSetRequest",
